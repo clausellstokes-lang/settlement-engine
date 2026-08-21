@@ -13585,3 +13585,47 @@ recommended. Implementation, per item:
    re-validate, and run the ONE full terminal post-rebase.
    Two build tracks, one landing slot, no double gate — the
    concurrency law's designed shape, executed.
+
+## §317 · THE QUEUED WEBSITE WORK OPENS AS A THIRD TRACK — THE
+## NOTICES SURFACE DISPATCHES; THE OWNER BATCH'S TRUE SHAPE
+## STATED; ONE EVIDENCE LOSS RECORDED (2026-08-21; chair:
+## FABLE; owner in-chat: "also work on the website changes that
+## are queued")
+
+1. **THE QUEUE'S SHAPE, STATED HONESTLY**: the 18-item §187
+   batch is predominantly OWNER-DECISION material — lens
+   entitlement (paid-surface, carve-out), the consent-default
+   split, retention, cull, naming, community, the support
+   email MUST-confirm, import-vs-restore, the scale-bar unit
+   name (item 19), ci-1c (blocked on the owner's CI log).
+   Those wait on the owner's panel, not on lanes. The
+   unambiguous chair-safe website work chartered and queued is
+   the §295.5c THIRD-PARTY-NOTICES surface. **TE-NOTICES
+   DISPATCHED** (Opus, slot-aware, third in the CAS queue):
+   THIRD-PARTY-NOTICES.md + a dark served static page (no
+   link lit — the link is a later owner-visible act) + a pin
+   so the surface cannot rot; the two dual-license elections
+   RECORDED (MIT elected for jszip and touch-punch — the
+   §295 cure); tinymce reported as it ships, explicitly NOT
+   resolving the §295 docket; every license re-verified at
+   base, none invented.
+2. ⚠ **AN EVIDENCE LOSS, RECORDED**: laneOB-OWNER-BATCH.md —
+   the batch's full sitting document, delivered to the
+   owner's panel on 2026-08-16 — no longer exists in the
+   temporary scratchpad and was never committed; the §295-era
+   preservation sweep predated the discovery. The §187 ledger
+   summary preserves the item list in compressed form and the
+   owner's panel may still hold the delivered copy; if not,
+   the batch document is RECONSTRUCTIBLE from §187 plus the
+   per-item source rows, as a chair act on request. ⭐ The
+   §312.3 preservation lesson generalizes: A DOCUMENT
+   DELIVERED TO THE OWNER IS PROGRAM EVIDENCE AND IS
+   COMMITTED OR PRESERVED THE DAY IT IS DELIVERED — never
+   scratchpad-only.
+3. **PARALLEL STATE AT THIS ROW**: TE-T2B (map port, second
+   member) · TE-WF1C (engine, realm last-seat) · TE-NOTICES
+   (website) · RS-5 (42/162 at last check) — three executors
+   on disjoint paths with serialized CAS order T2B → WF1C →
+   NOTICES as each greens, plus the soak. The owner's three
+   parallel directives (map, simulation, website) are all
+   moving.
