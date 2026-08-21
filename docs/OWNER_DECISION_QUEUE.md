@@ -13776,3 +13776,55 @@ recommended. Implementation, per item:
    row — both §316.2A zero-headroom hazards binding, serial
    after WF-1C). Four lanes: T2B · WF1C · NOTICES · WF1D
    compile, plus RS-5.
+
+## §321 · TC-WF1D COLLECTED — THE JOIN FITS AT NET ZERO AND THE
+## STOP NEVER FIRES; THE DEAD CHRONICLE ROW REFUSED; A FOURTH
+## ZERO-HEADROOM FILE NAMED; WF-1C's GATE STILL GOVERNS ITS OWN
+## CAS (2026-08-21; chair: FABLE; receipt laneTCWF1D-receipt.md)
+
+1. **COLLECTED, THE CENTRAL RISK RETIRED BY MEASUREMENT.** The
+   warTermination dissolution join lands at 818 → 818 EXACT
+   (eslint clean, the four landed war suites 50/50 with the
+   patch applied): the one-reader prose constant collapses
+   into a selector in the already-built extraction home,
+   buying the import outright. pulseKernel.js is UNTOUCHED —
+   the §316.2A STOP never fires; the injected-reader
+   alternative was built, measured, and declined with its
+   costs stated (four logic files over cap, WF-1C's reserved
+   path). §P2.11 discharged: WF-1d is the chartered second
+   caller of fallCauseFor, with the prohibition proven held
+   through 1b and 1c by census.
+2. **RULINGS.** (a) ⭐ THE DEAD CHRONICLE ROW REFUSED — both
+   its producers were re-filed out from under it (§309 took
+   the settlement obituary to WF-8; WF-1C's M4 took the realm
+   beat), and a dead KIND_SECTION row would have landed with
+   every walker green: RATIFIED, with A6's absence pin — and
+   ⭐ the structural gap ORDERED closed: a MINTER-TOTALITY arm
+   (every KIND_SECTION key names a live minter or a written
+   ruling) joins the walker estate at the next
+   census-instrument touch. (b) The three-cap break resolves
+   by the WF-1 refusal shape a third time: the FaithSection
+   line DEFERS to WF-1E, seeded in laneTCWF1D-WF-1E-seed.md,
+   zero shared production paths — ACCEPTED. (c) ⛔
+   applyWorldPulse.js is a FOURTH zero-headroom file
+   (941/941) no family document names — it joins pulseKernel
+   (§316.2A) in ONE batched WF-PREAMBLE edit that rides the
+   WF-1D landing act with every citing packet re-stamped in
+   the same commit (§314.2's law). (d) The falsified
+   prediction at subsystemRowsVirtual.js:1268 is routed to
+   the WF-1D executor's manifest as an explicit priced item
+   WITH the §104.4 comment-only-edit ratchet cost named —
+   taken only if it prices clean, else deferred-with-record.
+   (e) The lit-with-empty-ring byte-identical-to-dark arm is
+   the fixture-vacuity family's FOURTH instance — banked.
+   (f) The estate's first FAITH→WAR coupling row and the
+   patronFall header correction land in-manifest as compiled.
+3. **SEQUENCING**: WF-1C's receipt names tip 253f2028 but its
+   own §9 — which it declares GOVERNING — is still being
+   written: the terminal gate is in flight and NO CAS happens
+   until §9's executed greens arrive (never past an unproven
+   green). Then: CAS to WF-1C's tip → TE-WF1D dispatches on
+   it (re-reading the census tuple at its base per the
+   packet's own step-8 STOP) with the preamble batch riding
+   its landing. TC-WF1D's compile-time base remains valid by
+   its own blob-identity checks.
