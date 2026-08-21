@@ -781,6 +781,7 @@ WF-1d or the WF-8 beat member is chartered to edit, and no row names `warTermina
 | `8b88c14a` | The packet lands at **DRAFT**, with its `PACKET_MANIFEST.json` row spliced as a scoped text APPEND and its `INDEX.md` row inserted after WF-1B |
 | `1791fb93` | **DRAFT → READY**, after re-executing the whole §11 preflight at this tip |
 | `adb5faf3` | **The implementation** — M1 through M8 |
+| *(the tip — its sha is in the lane receipt, which is where every sha in this table is reproduced)* | **The any-cast cure the FULL GATE found** — the derivation's two JSDoc parameters typed instead of `any`; see §16.11 |
 
 ### 16.2 ⭐ THE AUTHORED COPY, VERBATIM — **OWNER-REVIEWABLE** (ODQ §316)
 
@@ -928,7 +929,7 @@ own `Linter`, before and after:
 
 | file | before | after | delta |
 |---|---:|---:|---:|
-| `pantheon.js` | 160 | 177 | +17 |
+| `pantheon.js` | 160 | 179 | +19 (two of them the §16.11 cure) |
 | `realmEvents.js` | 283 | 309 | **+26** |
 | `settlementRumors.js` | 508 | 509 | +1 |
 | `chroniclersLetter.js` | 220 | 220 | +0 |
@@ -955,3 +956,44 @@ returns TRUE_EXIT=0 against the generated per-file `max-lines` override.
 | declared shift | **NOT INCURRED** — §16.4 |
 | chair value signature | **NOT INCURRED** — the member authors no number; the predicate spells none and the salience derives from the twilight's own constants |
 | `docs/**.md` naked-claim debt | **INCURRED, PAID** — the live `CLAIM_RE` returns zero matches over this packet and over the INDEX row |
+| **domain any-cast ratchet** | ⛔ **INCURRED — FOUND BY THE FULL GATE, CURED. Not priced by the compile at all**; §16.11 |
+
+### 16.11 ⛔⛔ THE ANY-CAST RATCHET — THE ONE THE FOCUSED BATTERY COULD NEVER HAVE CAUGHT
+
+⭐ **THIS IS WHY THE WHOLE GATE IS RUN RATHER THAN SAMPLED, AND IT IS THE SECOND WF MEMBER IN A ROW
+TO PAY IT.** The derivation's two JSDoc parameters were written `Record<string, any>` — the spelling
+every neighbouring function in the file already uses — and `pantheon.js` sits at a frozen any-hole
+allowance. Measured at the terminal:
+
+```
+src/domain/worldPulse/pantheon.js: 26 any-holes (allowance 24)
+```
+
+Exactly **+2**: one per parameter. The ratchet's own message forecloses the easy exits in terms —
+widening the ledger is not the cure and neither is a declared-overrun row, because both ledger
+ceilings are monotone-down literals and a new row only moves the red to the ceiling arm.
+
+**CURED BY TYPING, NOT BY WIDENING.** The ledger's entry shape is named once as a module-local
+`@typedef` and both parameters take `Record<string, PantheonLedgerEntry>`; the loop binds the entry
+and guards it, so the tier read narrows to `string` without a cast. The typedef and the two
+annotations are comments and cost **zero** effective lines; the entry binding and its guard cost
+**two**, taking `pantheon.js` 177 → **179**, still far under its 800 layer ceiling.
+
+⛔ **EVERYTHING WAS RE-PROVED AFTER THE CURE RATHER THAN ASSUMED**, because the recorded precedent is
+that an any-cast cure can itself be wrong in a way only the STRICT typechecker sees:
+
+- both typecheckers back at their exact floors — **173 / 173** and **1134 / 1134**;
+- the any-cast ratchet green at **13 passed**, TRUE_EXIT=0;
+- all four dark golden arms **byte-identical to the pre-wiring capture** (`abf823a87b36bcc1` /
+  1,449 B dark, `759003f621df7e69` / 3,115 B lit, pantheon `048e14540e0b135d` in every arm), so the
+  cure moved no behaviour at all;
+- the focused battery green at **7 files / 447 tests**, TRUE_EXIT=0;
+- **all five mutants re-convict with IDENTICAL conviction sets**, and the §14 STOP still does not
+  fire — (a) reds A4 alone, (b) reds A1 alone;
+- ⛔ `pulseKernel.js` re-measured at **1581** — the cure does not touch it and its net zero holds.
+
+⚠ **WORTH THE FAMILY LAW.** `pantheon.js` was not on any zero-headroom list and the compile priced
+no any-cast obligation, because the file's own idiom is the spelling that reds it. **A WF member
+that adds a JSDoc-typed helper to a `src/domain/**` file should price the any-cast allowance
+alongside the size baseline** — the two are different ledgers with different ceilings and only the
+full gate reads the first.

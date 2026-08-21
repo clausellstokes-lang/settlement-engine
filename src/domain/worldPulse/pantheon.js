@@ -115,6 +115,14 @@ function isKnownTier(tier) {
 const codepoint = (a, b) => (String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0);
 
 /**
+ * One deity's ledger entry — the shape `createPantheonEntry` mints and every writer in this
+ * module preserves. Named so a derivation can be typed WITHOUT a JSDoc `any`: this file sits at
+ * its frozen any-hole allowance, the domain any-cast ratchet counts every JSDoc `any` as a hole,
+ * and widening that ledger is not a lawful cure (both its ceilings are monotone-down literals).
+ * @typedef {{ wins: number, losses: number, seats: number, tier: string, tierHeld: number }} PantheonLedgerEntry
+ */
+
+/**
  * A fresh pantheon entry. `tier` defaults to 'cult' (the floor — a deity holding a
  * single seat is a cult until it earns more); tierHeld is the dwell counter.
  * @returns {{ wins: number, losses: number, seats: number, tier: string, tierHeld: number }}
@@ -406,21 +414,29 @@ export function ratchetPantheonTiers(ledger) {
  * takes the no-change branch for any deity whose qualifying tier EQUALS its current one,
  * which is exactly the condition this predicate requires.
  *
- * @param {Record<string, any>} preSeats - the ledger BEFORE this tick's seat re-count.
- * @param {Record<string, any>} postSeats - the same ledger after `applyPantheonSeats`.
+ * ⛔ TYPED RATHER THAN `any`-CAST, AND THAT IS A TERMINAL FINDING RATHER THAN A PREFERENCE: this
+ * file sits at its frozen any-hole allowance, so two JSDoc `Record<string, any>` params here reds
+ * the domain any-cast ratchet — which the focused battery cannot see and the full gate can.
+ *
+ * @param {Record<string, PantheonLedgerEntry>} preSeats - the ledger BEFORE this tick's seat re-count.
+ * @param {Record<string, PantheonLedgerEntry>} postSeats - the same ledger after `applyPantheonSeats`.
  * @returns {Array<{deityId: string, from: string, to: string, lastSeat: boolean}>}
  *   codepoint-sorted by deityId; empty when no creed left the realm this tick.
  */
 function lastSeatLosses(preSeats, postSeats) {
   /** @type {Array<{deityId: string, from: string, to: string, lastSeat: boolean}>} */
   const rows = [];
+  /** @type {Record<string, PantheonLedgerEntry>} */
   const base = preSeats && typeof preSeats === 'object' ? preSeats : {};
+  /** @type {Record<string, PantheonLedgerEntry>} */
   const next = postSeats && typeof postSeats === 'object' ? postSeats : {};
   for (const id of Object.keys(next).sort(codepoint)) {
+    const entry = next[id];
+    if (!entry) continue;
     const prevSeats = Math.max(0, Math.floor(Number(base[id]?.seats) || 0));
-    const seats = Math.max(0, Math.floor(Number(next[id]?.seats) || 0));
+    const seats = Math.max(0, Math.floor(Number(entry.seats) || 0));
     if (!(prevSeats > 0 && seats === 0)) continue;
-    const curTier = isKnownTier(next[id]?.tier) ? next[id].tier : 'cult';
+    const curTier = isKnownTier(entry.tier) ? entry.tier : 'cult';
     if (qualifyingTier(seats, curTier) !== curTier) continue; // the ladder still speaks
     rows.push({ deityId: id, from: curTier, to: curTier, lastSeat: true });
   }
