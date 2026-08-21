@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ~17:40 ET: WF-1D second heads-up — rebased onto 159ec24e, tip 190895a4,
+# eight census blocks enumerated, tuple re-derived (+6 titles only), focused
+# proof 253 tests green. GO SENT; terminal launching bare on a quiet machine.
+# On its green: CAS -> OFL completion (NOTICES agent) -> RS-5 resume.
 # ⭐⭐ ~17:34 ET: NOTICES LANDED — CAS b25907f9 → 159ec24e (§327); WF-1D's
 # watcher unblocks → third rebase → heads-up → GO. OFL body FETCHED by chair
 # (two upstreams identical below the pointer line; elected + SHA'd in
