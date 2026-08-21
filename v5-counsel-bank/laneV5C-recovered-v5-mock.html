@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SettlementForge — Ribbon V5 mockup (rev 2)</title>
+<style>
+  /* ============ V5 MOCKUP rev2 — throwaway; palette + geometry real, texture approximated.
+     Revision closes critic findings F1-F10 (see REVISION-NOTES.md). ============ */
+  :root{
+    --shaft-sheen:#9C5A38; --shaft:#83492C; --shaft-body:#7A422A; --shaft-edge:#5E3220; --shaft-rim:#3F2013;
+    --parch:#F7EFD9; --parch-100:#F1E5C8; --ink:#2B2320; --ink-deep:#1A1512; --body-ink:#4A3F35;
+    --fl-shadow:rgba(42,37,30,0.35);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:Georgia,'Palatino Linotype',serif;background:var(--parch);color:var(--ink)}
+
+  header.shaft{position:sticky;top:0;height:38px;width:100%;z-index:50;background-color:#83492C}
+  header.shaft .hang-layer{position:absolute;inset:0;overflow:visible;pointer-events:none}
+
+  nav.fletch{position:absolute;left:0;top:0;width:100%;height:0;overflow:visible;z-index:10}
+  nav.fletch a{
+    position:absolute;display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:600;letter-spacing:0.02em;color:var(--parch-100);
+    text-decoration:none;font-family:Georgia,serif;transition:transform .24s ease-out;
+    text-shadow:0 1px 2px rgba(20,16,10,.55);
+  }
+  nav.fletch a:focus-visible{outline:2px solid #E6CB6F;outline-offset:2px}
+
+  main{position:relative;z-index:1}
+  .page{max-width:960px;margin:0 auto;padding:0 32px}
+  .hero-pad{height:86px}
+  .hero-pad.flight{height:38px}
+  h1.pageTitle{font-size:34px;color:var(--ink-deep);font-weight:700;letter-spacing:.01em}
+  .rule{height:2px;background:#D4AF45;width:64px;margin:14px 0 18px;opacity:.8}
+  p.lede{font-size:16.5px;line-height:1.65;color:var(--body-ink);max-width:640px}
+  .cardrow{display:flex;gap:18px;margin-top:26px}
+  .card{flex:1;background:#FDF8EA;border:1px solid #C8B89A;border-radius:6px;padding:18px 20px;box-shadow:0 1px 3px rgba(42,35,24,.12)}
+  .card h3{font-size:15px;color:var(--ink-deep);margin-bottom:8px}
+  .card p{font-size:13.5px;line-height:1.55;color:var(--body-ink)}
+
+  .panes{display:flex;gap:28px;padding:36px;align-items:flex-start;flex-wrap:wrap}
+  .pane{background:#FDF8EA;border:1px solid #C8B89A;border-radius:6px;padding:22px}
+  .pane h4{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#7A6A52;margin-bottom:12px}
+  .zoomwrap{overflow:hidden}
+  .zoom2{transform:scale(2);transform-origin:top left}
+  .zoom3{transform:scale(3);transform-origin:top left}
+  .laddercell .cap{font-size:11px;color:#7A6A52;margin-top:6px}
+  .sealrow{display:flex;gap:22px;align-items:flex-end}
+  .sealrow .cell{text-align:center}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+'use strict';
+/* V5 RIBBON MOCKUP rev2 — deterministic; tones are theme.js's; geometry is the spec proposal. */
+
+function unitHash(n){
+  let h=Math.imul(n|0,2654435761)>>>0;
+  h=((h^(h>>>15))>>>0); h=Math.imul(h,2246822519)>>>0; h=((h^(h>>>13))>>>0);
+  return (h%4096)/4095;
+}
+
+const WOOD_TILE={w:320,h:64};
+function woodTile(id,seed,baseFrequency,gain,bias,tone,ceiling){
+  const unit=(h=>{const n=parseInt(h.slice(1,7),16);return[(n>>16)&255,(n>>8)&255,n&255].map(v=>Number((v/255).toFixed(4)));})(tone);
+  const svg=[
+    `<svg xmlns='http://www.w3.org/2000/svg' width='${WOOD_TILE.w}' height='${WOOD_TILE.h}'>`,
+    `<filter id='${id}' filterUnits='userSpaceOnUse' x='0' y='0'`,
+    ` width='${WOOD_TILE.w}' height='${WOOD_TILE.h}' color-interpolation-filters='sRGB'>`,
+    `<feTurbulence type='fractalNoise' baseFrequency='${baseFrequency}' numOctaves='3'`,
+    ` seed='${seed}' stitchTiles='stitch' result='noise'/>`,
+    "<feColorMatrix in='noise' type='matrix' values='",
+    `0 0 0 0 ${unit[0]} 0 0 0 0 ${unit[1]} 0 0 0 0 ${unit[2]} ${gain} ${gain} ${gain} 0 ${bias}'`,
+    ceiling===undefined?'/>':" result='cut'/>",
+    ceiling===undefined?'':`<feColorMatrix in='cut' type='matrix' values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 ${ceiling} 0'/>`,
+    '</filter>',
+    `<rect x='0' y='0' width='${WOOD_TILE.w}' height='${WOOD_TILE.h}' filter='url(#${id})'/>`,
+    '</svg>'].join('');
+  return `url("data:image/svg+xml,${svg.replace(/%/g,'%25').replace(/#/g,'%23').replace(/</g,'%3C').replace(/>/g,'%3E')}")`;
+}
+const T={sheen:'#9C5A38',shaft:'#83492C',body:'#7A422A',edge:'#5E3220',rim:'#3F2013',
+  lead:'#453D31',vane:'#332C22',tip:'#211C15',barb:'#312A20',fsheen:'#4E4537',lift:'#5A5040',
+  rachis:'#5A5040',crest:'#8A7B62',edgeLead:'#8A7B62',edgeTrail:'#776A55',
+  wrap:'#521F12',gloss:'#7E3A24',wedge:'#2E0F08',
+  gilt:'#D4AF45',giltL:'#E6CB6F',key:'#241B0C',bole:'#3A1A10',boleDeep:'#2A1008',
+  wax:'#6E1F1B',waxRim:'#4A1310',waxGlint:'#8E322B',waxLit:'#9C3A30',parch100:'#F1E5C8'};
+const STOPS={lit:0.09,mid:0.38,body:0.95,edge:0.98};
+const CYL=`linear-gradient(180deg, ${T.sheen} 0%, ${T.sheen} ${STOPS.lit*100}%, ${T.shaft} ${STOPS.mid*100}%, ${T.body} ${STOPS.body*100}%, ${T.edge} ${STOPS.edge*100}%, ${T.rim} 100%)`;
+const GRAIN=woodTile('grain',7,'0.008 0.42',0.128,-0.1408,T.edge);
+const GROWTH=woodTile('growth',11,'0.004 0.05',3.0,-4.59,T.rim,0.09);
+const PORE=woodTile('pore',13,'0.08 0.35',4.0,-7.48,T.rim,0.06);
+const SHAFT_LAYERS=[PORE,GROWTH,GRAIN,CYL].join(', ');
+
+const LU={x:-0.7071,y:-0.7071};
+const cast=(d,blur,color)=>`drop-shadow(${(-LU.x*d).toFixed(2)}px ${(-LU.y*d).toFixed(2)}px ${blur}px ${color})`;
+const contact=(blur,color)=>`drop-shadow(0px 0px ${blur}px ${color})`;
+
+const WARP_RATIO=0.0105;
+const FORESHORT=0.94;
+function archPath(id,x0,y,chord,ratio){
+  const s=chord*ratio;
+  return `<path id="${id}" d="M ${x0} ${y} Q ${x0+chord/2} ${y-2*s} ${x0+chord} ${y}" fill="none"/>`;
+}
+
+const TURNS=`repeating-linear-gradient(90deg, ${T.wedge} 0, ${T.wedge} 0.4px, ${T.gloss} 0.4px, ${T.gloss} 1.4px, ${T.wrap} 1.4px, ${T.wrap} 2.6px)`;
+const WRAP_BARREL=`linear-gradient(180deg,#FFFFFF 0%,#FFFFFF ${STOPS.lit*100}%,#E2E2E2 ${STOPS.mid*100}%,#B4B4B4 ${STOPS.body*100}%,#8E8E8E ${STOPS.edge*100}%,#6E6E6E 100%)`;
+
+const BAR=38;
+
+/* Catmull-Rom knots -> cubic bezier path segments (open curve). Single writer for every
+   lower-edge consumer: the silhouette, the lower-cut whisper, AND the fray anchor (F8). */
+function catmullSegs(P){
+  let d='';
+  for(let i=0;i<P.length-1;i++){
+    const p0=P[Math.max(0,i-1)],p1=P[i],p2=P[i+1],p3=P[Math.min(P.length-1,i+2)];
+    const c1=[p1[0]+(p2[0]-p0[0])/6,p1[1]+(p2[1]-p0[1])/6];
+    const c2=[p2[0]-(p3[0]-p1[0])/6,p2[1]-(p3[1]-p1[1])/6];
+    d+=` C ${c1[0].toFixed(1)} ${c1[1].toFixed(1)}, ${c2[0].toFixed(1)} ${c2[1].toFixed(1)}, ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}`;
+  }
+  return d;
+}
+function densify(P,n){
+  const pts=[];
+  for(let i=0;i<P.length-1;i++){
+    const p0=P[Math.max(0,i-1)],p1=P[i],p2=P[i+1],p3=P[Math.min(P.length-1,i+2)];
+    const c1=[p1[0]+(p2[0]-p0[0])/6,p1[1]+(p2[1]-p0[1])/6];
+    const c2=[p2[0]-(p3[0]-p1[0])/6,p2[1]-(p3[1]-p1[1])/6];
+    for(let k=0;k<=n;k++){
+      const t=k/n,u=1-t;
+      pts.push([u*u*u*p1[0]+3*u*u*t*c1[0]+3*u*t*t*c2[0]+t*t*t*p2[0],
+                u*u*u*p1[1]+3*u*u*t*c1[1]+3*u*t*t*c2[1]+t*t*t*p2[1]]);
+    }
+  }
+  return pts;
+}
+
+/* =====================================================================================
+   THE VANES — the quill line is the upper boundary: bound run along the shaft, then the
+   quill SAGS away from the shaft (the droop), then rises to KISS the shaft at the tail
+   binding. The feather's body hangs off that quill. Flight state presses the body flat
+   onto the bar (the V4 seat) — both bindings never move.
+   ===================================================================================== */
+/* THE LAP RULE (F5, reconciled with the table): dropX_i = ax_i + Lb_i is the peel-off;
+   tx_i = ax_i + W_i (±3 jitter) is the kiss — W is measured from the ATTACHMENT ax, so
+   the blade span from peel-off is W − Lb. Each kiss lands INSIDE its successor's sag
+   bay, 30–50% into the successor's span: tx_Create − dropX_Library = 560−496 = 64
+   (33% of Library's 194px span); tx_Library − dropX_Realm = 690−617 = 73 (50% of
+   Realm's 146px span). Realm has no successor; its tail kisses before the trail wrap. */
+const LANES=[
+  {name:'Create', ax:372, Lb:30, W:188, Db:34, Sg:4,   DbF:11, SgF:-27,   seed:101},
+  {name:'Library',ax:470, Lb:26, W:220, Db:46, Sg:5.5, DbF:13, SgF:-26.1, seed:211},
+  {name:'Realm',  ax:585, Lb:32, W:178, Db:38, Sg:4.5, DbF:12, SgF:-26.5, seed:307},
+];
+
+function vaneGeom(l,flight){
+  const j=(k,amp)=>(unitHash(l.seed*13+k)-0.5)*2*amp;
+  const yQ=BAR-2.2;
+  const ax=l.ax, tx=l.ax+l.W+j(2,3), Lb=l.Lb, dropX=ax+Lb;
+  /* rest: quill sags Sg below the shaft; body reaches Db below the bar; belly deepest
+     at ~62% of the blade. flight: quill presses UP onto the bar; per-lane flight
+     depths DbF (11/13/12, all under the 13px cap) stagger the flattened silhouettes
+     so the three blades never fuse into one band (F1). */
+  const Sg=flight?(l.SgF!==undefined?l.SgF:-27):(l.Sg+j(1,1.5));
+  const Db=flight?l.DbF:(l.Db+j(3,2.5));
+  const span=tx-dropX;
+  const midX=dropX+span*0.52+j(4,5);          /* quill's deepest sag */
+  const belX=dropX+span*0.60+j(5,5);          /* belly's deepest point */
+  const sagY=yQ+Sg;
+  const bellyY=yQ+Db+(flight?0:2);
+  /* upper edge: bound run -> gentle sag -> long rise to a FINE tip kissing the shaft */
+  const upper=`M ${ax} ${yQ} L ${dropX} ${yQ}`+
+    ` C ${dropX+span*0.16} ${flight?sagY+5:yQ+Sg*0.6}, ${midX-span*0.14} ${sagY}, ${midX} ${sagY}`+
+    ` C ${midX+span*0.16} ${sagY}, ${tx-span*0.2} ${flight?sagY+3:yQ+Sg*0.55}, ${tx} ${yQ+0.6}`;
+  /* the leading CUT face (the fletcher's knife slope — F1's notch + window geometry):
+     the blade's top-left corner peels at dropX with a small v-notch, and the cut face
+     SLOPES back to the lower edge, opening a window above it where the predecessor's
+     tail blade and collar stay visible. */
+  const cutX=dropX+Math.max(flight?10:13,span*0.11);
+  const cutY=yQ+Db*0.66;
+  /* lower edge: ONE knot list drives silhouette + whisper + fray (single writer, F8);
+     the tail turn is ROUNDED (F7's tapered rounded tip) before the kiss. */
+  const K=[
+    [cutX,cutY],
+    [dropX+span*0.30, yQ+Db*0.96],
+    [belX, bellyY],
+    [belX+span*0.15, bellyY-1.6],
+    [tx-span*0.16, yQ+Db*0.46],
+    [tx-span*0.07, yQ+Db*0.20],
+    [tx-2.0, yQ+2.6]
+  ];
+  const lowerFwd=`M ${cutX.toFixed(1)} ${cutY.toFixed(1)}`+catmullSegs(K);
+  const Krev=K.slice().reverse();
+  const lowerRev=catmullSegs(Krev);
+  const cutFace=`M ${(dropX+1.6).toFixed(1)} ${(yQ+2.3).toFixed(1)} C ${(dropX+5).toFixed(1)} ${(yQ+Db*0.22).toFixed(1)}, ${(cutX-3).toFixed(1)} ${(cutY-4).toFixed(1)}, ${cutX.toFixed(1)} ${cutY.toFixed(1)}`;
+  const d=upper+
+    ` L ${(tx-2.0).toFixed(1)} ${(yQ+2.6).toFixed(1)}`+
+    lowerRev+
+    ` C ${(cutX-3).toFixed(1)} ${(cutY-4).toFixed(1)}, ${(dropX+5).toFixed(1)} ${(yQ+Db*0.22).toFixed(1)}, ${(dropX+1.6).toFixed(1)} ${(yQ+2.3).toFixed(1)}`+
+    ` L ${(dropX+0.9).toFixed(1)} ${(yQ+3.4).toFixed(1)} L ${dropX} ${(yQ+2.3).toFixed(1)}`+
+    ` L ${ax} ${(yQ+2.4).toFixed(1)} Z`;
+  const poly=densify(K,24);
+  const tailPath=`M ${K[3][0].toFixed(1)} ${K[3][1].toFixed(1)}`+catmullSegs(K.slice(3));
+  return {d,upper,lowerFwd,cutFace,tailPath,poly,ax,tx,Lb,Db,Sg,yQ,dropX,midX,belX,sagY,bellyY,cutX,cutY,tipW:span*0.16,span};
+}
+
+/* lower-edge Y at x, sampled from the SAME densified knot spline the silhouette is
+   built from — the fray can no longer float off the cut (F8). */
+function edgeYAt(g,x){
+  const p=g.poly;
+  if(x<=p[0][0])return p[0][1];
+  for(let i=1;i<p.length;i++){
+    if(p[i][0]>=x){
+      const t=(x-p[i-1][0])/Math.max(0.001,p[i][0]-p[i-1][0]);
+      return p[i-1][1]*(1-t)+p[i][1]*t;
+    }
+  }
+  return p[p.length-1][1];
+}
+
+function combPaths(g,l){
+  const out=[[],[],[]];
+  const gap=6.2*(0.9+0.2*unitHash(l.seed*53+7));
+  let x=g.dropX-2;
+  for(let k=0;x<g.tx+4;k++){
+    const b=Math.floor(unitHash(k*7+l.seed*131+3)*3)%3;
+    const drop=g.Db+14;
+    out[b].push(`M ${x.toFixed(1)} ${Math.min(g.sagY,g.yQ).toFixed(1)} q ${-drop*0.28} ${drop*0.62} ${-drop*0.42} ${drop}`);
+    x+=gap*(1-0.21+0.42*unitHash(k+l.seed*911));
+  }
+  return out.map(m=>m.join(' '));
+}
+/* THE BARRING RHYTHM (F7): paired runs — a lit run (SHEEN_LIFT @0.30) leading each
+   dark bar (TIP @0.50) — because on this dark ladder the 0.14-alpha dark bar measures
+   1.03:1 against the field (invisible); the PAIR measures ~1.36:1 band-to-band, which
+   is what the eye reads at arm's length. Bands sweep tailward with the comb lean. */
+function barring(g,l){
+  const dark=[],lit=[];const n=3;
+  const span=g.tx-g.dropX-30;
+  for(let k=0;k<n;k++){
+    const u=unitHash(l.seed*29+k*17+5);
+    const cx=g.dropX+16+span*(k+0.2+u*0.55)/n;
+    const wd=12+u*5, wl=15+u*6, drop=g.Db+16, sw=drop*0.42;
+    lit.push(`M ${(cx-wl).toFixed(1)} ${(g.sagY-6).toFixed(1)} l ${wl} 0 l ${-sw.toFixed(1)} ${drop} l ${-wl} -1.5 Z`);
+    dark.push(`M ${cx.toFixed(1)} ${(g.sagY-6).toFixed(1)} l ${wd} 0 l ${-sw.toFixed(1)} ${drop} l ${-wd} -1.5 Z`);
+  }
+  return {dark,lit};
+}
+function frayPath(g,l){
+  const out=[];let x=g.cutX+9;
+  while(x<g.tx-g.tipW-14){
+    const u=unitHash(Math.round(x)*37+l.seed*613+11);
+    const drop=1.2+u*2.4;
+    const y0=edgeYAt(g,x)-1.1;   /* start INSIDE the fill and cross the cut (F8) */
+    out.push(`M ${x.toFixed(1)} ${y0.toFixed(1)} l ${(-drop*0.42).toFixed(1)} ${(drop+1.1).toFixed(1)}`);
+    x+=6.2*(1.1+u*0.9);
+  }
+  return out.join(' ');
+}
+
+function threadBand(x,w,h){
+  return `<div style="position:absolute;left:${x}px;top:0;width:${w}px;height:${h}px;`+
+    `background-color:${T.wrap};background-image:${WRAP_BARREL.replace(/"/g,'&quot;')}, ${TURNS.replace(/"/g,'&quot;')};`+
+    `background-blend-mode:multiply,normal;z-index:6;box-shadow:2px 2px 3px rgba(20,8,4,.35)"></div>`;
+}
+
+/* spiral crossings pinning each quill's bound run: two per run, crossing the quill line.
+   Painted AFTER the vanes so the thread reads as pinning the quill down. */
+function spiralCrossings(runs,seed){
+  let s='';
+  runs.forEach(([x0,x1],ri)=>{
+    for(let x=x0,k=0;x<x1&&k<2;k++){
+      const jx=(unitHash(seed+ri*97+k*31)-0.5)*3;
+      s+=`<path d="M ${x+jx} ${BAR-9.5} L ${x+jx-4.5} ${BAR+0.8}" stroke="${T.wedge}" stroke-width="2.4" opacity="0.9"/>`+
+         `<path d="M ${x+jx} ${BAR-9.5} L ${x+jx-4.5} ${BAR+0.8}" stroke="${T.gloss}" stroke-width="1.1"/>`;
+      x+=13;
+    }
+  });
+  return s;
+}
+
+/* the tail tie at the kiss: a compact two-turn collar over the tip, not a barrel band.
+   Painted in a pass ABOVE the blades so each collar stays visible inside its
+   successor's sag-bay window (part of the F1 crossing read); it takes the depth
+   table's tail-collar cast (d 1.2, blur 1.5, @0.35). */
+function collar(g){
+  return `
+  <g filter="${cast(1.2,1.5,'rgba(20,8,4,0.35)')}">
+    <rect x="${(g.tx-3.4).toFixed(1)}" y="${(g.yQ-7.5).toFixed(1)}" width="6.2" height="10.5" rx="1.4" fill="${T.wrap}"/>
+    <line x1="${(g.tx-1.9).toFixed(1)}" y1="${(g.yQ-7.5).toFixed(1)}" x2="${(g.tx-1.9).toFixed(1)}" y2="${(g.yQ+3).toFixed(1)}" stroke="${T.gloss}" stroke-width="1"/>
+    <line x1="${(g.tx+0.8).toFixed(1)}" y1="${(g.yQ-7.5).toFixed(1)}" x2="${(g.tx+0.8).toFixed(1)}" y2="${(g.yQ+3).toFixed(1)}" stroke="${T.gloss}" stroke-width="1"/>
+    <line x1="${(g.tx-0.6).toFixed(1)}" y1="${(g.yQ-7.5).toFixed(1)}" x2="${(g.tx-0.6).toFixed(1)}" y2="${(g.yQ+3).toFixed(1)}" stroke="${T.wedge}" stroke-width="0.5"/>
+    <path d="M ${(g.tx-3.2).toFixed(1)} ${(g.yQ+2.4).toFixed(1)} l 5.8 -8.6" stroke="${T.gloss}" stroke-width="1.1" opacity="0.8"/>
+    <path d="M ${(g.tx+2.6).toFixed(1)} ${(g.yQ-6.2).toFixed(1)} l 1.8 -1.6" stroke="${T.gloss}" stroke-width="1" opacity="0.8"/>
+  </g>`;
+}
+
+/* one shared painter for desktop + mobile (detail flag trims phone-scale texture).
+   F1 separation machinery, both states: (a) seam-shadow under the successor's leading
+   cut (the crevice), (b) edge-light along the leading cut (0.50-class) and the tail
+   turn (0.38-class), (c) the v-notch at each peel-off, (d) per-lane fills. */
+function paintVane(l,g,i,idp,active,flight,detail){
+  const fills=[
+    [T.fsheen,T.lead,T.lead,T.vane],   /* active lane */
+    [T.lead,T.vane,T.vane,T.tip],      /* lane 1 */
+    [T.lead,T.barb,T.barb,T.tip]       /* lane 2 (one step apart — F1) */
+  ];
+  const f=active?fills[0]:fills[i===2?2:1];
+  const combs=detail?combPaths(g,l):null;
+  const bars=barring(g,l);
+  let s=`
+    <g>
+      <!-- seam-shadow: the crevice under this blade's leading cut, darkening whatever
+           lies beneath (predecessor tail or parchment) — the F1 crossing seam -->
+      <path d="M ${(g.dropX-1).toFixed(1)} ${(g.yQ+1.6).toFixed(1)} C ${(g.dropX+4).toFixed(1)} ${(g.yQ+g.Db*0.22+1).toFixed(1)}, ${(g.cutX-4).toFixed(1)} ${(g.cutY-3).toFixed(1)}, ${(g.cutX+1).toFixed(1)} ${(g.cutY+1.2).toFixed(1)}"
+            fill="none" stroke="rgba(14,9,5,${flight?0.62:0.5})" stroke-width="${flight?3.4:2.8}"/>
+      <!-- under-shadow along the rising upper edge: the crevice a lapping feather
+           casts on the one beneath it (carries the F1 crossing read in FLIGHT,
+           reads as the quill's own contact shadow at rest) -->
+      <path d="M ${g.dropX} ${g.yQ} C ${(g.dropX+g.span*0.16).toFixed(1)} ${(flight?g.sagY+5:g.yQ+g.Sg*0.6).toFixed(1)}, ${(g.midX-g.span*0.14).toFixed(1)} ${g.sagY.toFixed(1)}, ${g.midX.toFixed(1)} ${g.sagY.toFixed(1)}"
+            transform="translate(0 1.2)" fill="none" stroke="rgba(14,9,5,0.45)" stroke-width="1.6"/>
+    </g>
+    <g filter="${contact(1.1,'var(--fl-shadow)')} ${cast(flight?3.2:4.1,flight?4:5,'var(--fl-shadow)')}">
+      <defs>
+        <linearGradient id="${idp}v${i}" x1="0" y1="0" x2="0.3" y2="1">
+          <stop offset="0" stop-color="${f[0]}"/><stop offset="0.45" stop-color="${f[1]}"/>
+          <stop offset="0.8" stop-color="${f[2]}"/><stop offset="1" stop-color="${f[3]}"/>
+        </linearGradient>
+        <clipPath id="${idp}vc${i}"><path d="${g.d}"/></clipPath>
+        <filter id="${idp}soft${i}" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2.5"/></filter>
+      </defs>
+      <path d="${g.d}" fill="url(#${idp}v${i})"/>
+      <g clip-path="url(#${idp}vc${i})">
+        <g filter="url(#${idp}soft${i})">
+          ${bars.lit.map(b=>`<path d="${b}" fill="${T.lift}" opacity="0.38"/>`).join('')}
+          ${bars.dark.map(b=>`<path d="${b}" fill="${T.tip}" opacity="0.55"/>`).join('')}
+        </g>
+        ${detail?`<g filter="url(#${idp}soft${i})" opacity="0.45">
+          <path d="M ${(g.dropX+22).toFixed(1)} ${(g.sagY-8).toFixed(1)} l 18 0 l -10 ${(g.Db+16).toFixed(1)} l -16 -2 Z" fill="${active?T.lift:T.fsheen}"/>
+          <path d="M ${(g.midX+34).toFixed(1)} ${(g.sagY-8).toFixed(1)} l 14 0 l -8 ${(g.Db+14).toFixed(1)} l -13 -2 Z" fill="${active?T.lift:T.fsheen}" opacity="0.75"/>
+        </g>`:''}
+        ${combs?combs.map((d,b)=>`<path d="${d}" fill="none" stroke="${T.barb}" stroke-width="${[0.32,0.42,0.52][b]}" stroke-opacity="${[0.13,0.2,0.27][b]}"/>`).join(''):''}
+        ${(detail&&!flight)?`<path d="M ${(g.midX-8).toFixed(1)} ${(edgeYAt(g,g.midX-8)-0.5).toFixed(1)} l 2 0 l -3.2 -${(g.Db*0.52).toFixed(1)} l -0.6 0.4 Z" fill="${T.tip}" fill-opacity="0.55"/>`:''}
+      </g>
+      <!-- the quill: rachis along the whole upper edge (bound run -> sag -> kiss),
+           with a pale crest so the feather's spine reads (F7) -->
+      <path d="${g.upper}" fill="none" stroke="${T.rachis}" stroke-width="1.2" stroke-opacity="0.9"/>
+      <g transform="translate(0 -0.4)"><path d="${g.upper}" fill="none" stroke="${T.crest}" stroke-width="0.5" stroke-opacity="0.55"/></g>
+      <!-- leading-cut edge-light (0.50-class) + trailing tail-turn edge-light (0.38-class) -->
+      <path d="${g.cutFace}" fill="none" stroke="${T.edgeLead}" stroke-width="1.05" stroke-opacity="${flight?0.70:0.55}"/>
+      <path d="${g.tailPath}" fill="none" stroke="${T.edgeTrail}" stroke-width="0.8" stroke-opacity="0.40"/>
+      ${detail?`<!-- lower-cut whisper: stroked from the SAME lower-edge spline -->
+      <path d="${g.lowerFwd}" fill="none" stroke="${T.rachis}" stroke-opacity="0.34" stroke-width="0.6"/>
+      <path d="${frayPath(g,l)}" fill="none" stroke="${T.barb}" stroke-opacity="0.34" stroke-width="0.4" stroke-linecap="round"/>`:''}
+    </g>`;
+  return s;
+}
+
+/* the quill-line indicator: the gilt bar along the ACTIVE lane's bound run. Painted
+   LAST (over the spiral crossings) — the app-wide active mark outranks the thread
+   for legibility; the crossings stay visible either side of it. */
+function activeBar(g){
+  return `<path d="M ${g.ax} ${(g.yQ-2.6).toFixed(1)} L ${(g.dropX+6).toFixed(1)} ${(g.yQ-2.6).toFixed(1)} L ${(g.dropX+4.8).toFixed(1)} ${(g.yQ-0.1).toFixed(1)} L ${(g.ax-1.2).toFixed(1)} ${(g.yQ-0.1).toFixed(1)} Z" fill="${T.giltL}"/>`;
+}
+
+/* =====================================================================================
+   THE CARTOUCHE — the image-2 canon (F3): a burned FRAME OUTLINE + per-glyph char
+   letter-beds + gilt fill, all ON THE WOOD FIELD; the wax O solid and red; NO filled
+   plate. The frame is an OPEN path — ends + foot only, the top dies into the viewport
+   cut (F4). Burned marks are IN the surface and cast nothing; only the seal (an object
+   ON the surface) takes contact + cast.
+   ===================================================================================== */
+function cartouche(x,scale,idp){
+  const W=316, H=BAR;
+  const chord=204, tx0=54, baseY=26.5;
+  const sealR=15, sealCX=tx0+132, sealCY=18.2;
+  /* char frame: open path, left end -> foot (with center dip) -> right end. No top run. */
+  const frame=[
+    'M 24 -2',
+    'C 18.5 2.5, 15.5 6.5, 15.2 10.5',
+    'C 15 13, 12 14.2, 9 15',
+    'Q 5 16.1, 4.2 17.3',
+    'Q 5 18.6, 9 19.6',
+    'C 12 20.4, 15 21.6, 15.2 24',
+    'C 15.5 27.5, 18.5 29.8, 23 31.0',
+    'L 149 31.0',
+    'Q 158 33.2, 167 31.0',
+    'L 293 31.0',
+    'C 297.5 29.8, 300.5 27.5, 300.8 24',
+    'C 301 21.6, 304 20.4, 307 19.6',
+    'Q 311 18.6, 311.8 17.3',
+    'Q 311 16.1, 307 15',
+    'C 304 14.2, 301 13, 300.8 10.5',
+    'C 300.5 6.5, 297.5 2.5, 292 -2'
+  ].join(' ');
+  const inner=[
+    'M 26.5 -2',
+    'C 21.5 2.8, 18.6 6.8, 18.4 10.8',
+    'C 18.2 13.6, 15 15, 11.5 16',
+    'Q 8.4 16.9, 7.8 17.3',
+    'Q 8.4 17.9, 11.5 18.7',
+    'C 15 19.7, 18.2 21, 18.4 23.6',
+    'C 18.6 26.8, 21.5 28.6, 25.5 29.4',
+    'L 149.5 29.4',
+    'Q 158 31.4, 166.5 29.4',
+    'L 290.5 29.4',
+    'C 294.5 28.6, 297.4 26.8, 297.6 23.6',
+    'C 297.8 21, 301 19.7, 304.5 18.7',
+    'Q 307.6 17.9, 308.2 17.3',
+    'Q 307.6 16.9, 304.5 16',
+    'C 301 15, 297.8 13.6, 297.6 10.8',
+    'C 297.4 6.8, 294.5 2.8, 289.5 -2'
+  ].join(' ');
+  const word=(cls,extra)=>`
+      <text font-family="Palatino,'Palatino Linotype',Georgia,serif" font-weight="700" font-size="22.5" letter-spacing="0.2" ${cls} ${extra||''}>
+        <textPath href="#${idp}arc" startOffset="0" textLength="118" lengthAdjust="spacingAndGlyphs"><tspan font-size="28.5" font-style="italic">S</tspan>ettlement<tspan font-size="28.5" font-style="italic">F</tspan></textPath>
+      </text>
+      <text font-family="Palatino,'Palatino Linotype',Georgia,serif" font-weight="700" font-size="22.5" letter-spacing="0.2" ${cls} ${extra||''}>
+        <textPath href="#${idp}arc" startOffset="146" textLength="46" lengthAdjust="spacingAndGlyphs">rge</textPath>
+      </text>`;
+  return `
+  <svg aria-hidden="true" style="position:absolute;left:${x}px;top:0;width:${W*scale}px;height:${H*scale}px;overflow:visible;z-index:4;display:block" viewBox="0 0 ${W} ${H}">
+    <defs>
+      <linearGradient id="${idp}leaf" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="${T.giltL}"/><stop offset="1" stop-color="${T.gilt}"/>
+      </linearGradient>
+      <filter id="${idp}rough" x="-20%" y="-40%" width="140%" height="200%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.035 0.22" numOctaves="2" seed="17" result="n"/>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="1.8"/>
+      </filter>
+      <filter id="${idp}singe" x="-20%" y="-60%" width="140%" height="240%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.012 0.16" numOctaves="3" seed="17" result="n"/>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="4"/>
+        <feGaussianBlur stdDeviation="2.6 1.2"/>
+      </filter>
+      ${archPath(idp+'arc',tx0,baseY,chord,WARP_RATIO)}
+    </defs>
+    <!-- burned frame: singe halo, then char stroke (displaced), then gilt inner hairline.
+         All IN the surface: no cast (depth table). Open ends die into the top cut (F4). -->
+    <path d="${frame}" fill="none" stroke="${T.bole}" stroke-width="6" stroke-opacity="0.32" filter="url(#${idp}singe)"/>
+    <path d="${frame}" fill="none" stroke="${T.boleDeep}" stroke-width="2.5" filter="url(#${idp}rough)"/>
+    <path d="${inner}" fill="none" stroke="${T.gilt}" stroke-width="0.85" stroke-opacity="0.8"/>
+    <!-- the lettering: singe halo -> per-glyph char bed -> gilt fill (+PLATE_KEYLINE) -->
+    <g transform="translate(0 ${baseY*(1-FORESHORT)}) scale(1 ${FORESHORT})">
+      ${word(`fill="none" stroke="${T.bole}" stroke-width="7" stroke-opacity="0.42"`,`filter="url(#${idp}singe)"`)}
+      ${word(`fill="${T.boleDeep}" stroke="${T.boleDeep}" stroke-width="3.9"`,`filter="url(#${idp}rough)"`)}
+      ${word(`fill="url(#${idp}leaf)" stroke="${T.key}" stroke-width="0.75" paint-order="stroke fill"`)}
+    </g>
+    <!-- the seal: SOLID wax (canon images 2/6), reading as the O by seat and size;
+         simplified strike = station triangle DEBOSSED (dark toward the light at 225°,
+         lit lip away); the one saturated hue on the bar. Object ON the surface:
+         contact + cast per the depth table. -->
+    <g transform="translate(${sealCX} ${sealCY})">
+      <g filter="${contact(1.2,'rgba(20,8,4,0.6)')} ${cast(1.6,1.8,'rgba(20,8,4,0.5)')}">
+        <path d="M 0 -${sealR} C ${sealR*0.9} -${sealR} ${sealR} -${sealR*0.35} ${sealR} 0
+                 C ${sealR} ${sealR*0.62} ${sealR*0.55} ${sealR} -0.5 ${sealR}
+                 C -${sealR*0.95} ${sealR} -${sealR} ${sealR*0.4} -${sealR} -0.5
+                 C -${sealR*0.98} -${sealR*0.62} -${sealR*0.5} -${sealR} 0 -${sealR} Z" fill="${T.waxRim}"/>
+        <path d="M 0 -${sealR*0.87} C ${sealR*0.79} -${sealR*0.87} ${sealR*0.87} -${sealR*0.3} ${sealR*0.87} 0
+                 C ${sealR*0.87} ${sealR*0.54} ${sealR*0.48} ${sealR*0.87} -0.4 ${sealR*0.87}
+                 C -${sealR*0.83} ${sealR*0.87} -${sealR*0.87} ${sealR*0.34} -${sealR*0.87} -0.4
+                 C -${sealR*0.85} -${sealR*0.54} -${sealR*0.44} -${sealR*0.87} 0 -${sealR*0.87} Z" fill="${T.wax}"/>
+        <ellipse cx="-2.4" cy="-2.6" rx="8.6" ry="7.2" fill="${T.waxGlint}" opacity="0.42" filter="url(#${idp}sblur)"/>
+        <filter id="${idp}sblur"><feGaussianBlur stdDeviation="1.6"/></filter>
+        <g stroke-linejoin="round">
+          <path d="M 0.4 -${sealR*0.56} L ${sealR*0.5} ${sealR*0.22} L -${sealR*0.44} ${sealR*0.22} Z"
+                fill="rgba(26,10,6,0.30)" stroke="none"/>
+          <path d="M 0.4 -${sealR*0.56} L ${sealR*0.5} ${sealR*0.22} L -${sealR*0.44} ${sealR*0.22} Z"
+                fill="none" stroke="${T.waxRim}" stroke-width="1.5" transform="translate(-0.8 -0.8)"/>
+          <path d="M 0.4 -${sealR*0.56} L ${sealR*0.5} ${sealR*0.22} L -${sealR*0.44} ${sealR*0.22} Z"
+                fill="none" stroke="${T.waxLit}" stroke-width="1.05" opacity="0.9" transform="translate(0.8 0.8)"/>
+        </g>
+        <path d="M -${sealR*0.62} -${sealR*0.28} Q -${sealR*0.5} -${sealR*0.72} ${sealR*0.05} -${sealR*0.68}"
+              fill="none" stroke="${T.waxGlint}" stroke-width="2.2" stroke-linecap="round" opacity="0.75"/>
+      </g>
+    </g>
+  </svg>`;
+}
+
+/* standalone seal renders for the ladder pane (F10): dimple / simplified strike / full
+   device, drawn at TRUE CSS size on a wood chip. r = size/2. */
+function sealAt(size,register,idp){
+  const r=size/2;
+  const blob=(rr,fill)=>`<path d="M 0 -${rr} C ${rr*0.9} -${rr} ${rr} -${rr*0.35} ${rr} 0
+    C ${rr} ${rr*0.62} ${rr*0.55} ${rr} -0.5 ${rr}
+    C -${rr*0.95} ${rr} -${rr} ${rr*0.4} -${rr} -0.5
+    C -${rr*0.98} -${rr*0.62} -${rr*0.5} -${rr} 0 -${rr} Z" fill="${fill}"/>`;
+  let device='';
+  if(register==='strike'||register==='full'){
+    device=`<g stroke-linejoin="round">
+      <path d="M 0.3 -${r*0.56} L ${r*0.5} ${r*0.22} L -${r*0.44} ${r*0.22} Z" fill="rgba(26,10,6,0.30)"/>
+      <path d="M 0.3 -${r*0.56} L ${r*0.5} ${r*0.22} L -${r*0.44} ${r*0.22} Z" fill="none" stroke="${T.waxRim}" stroke-width="${(r*0.1).toFixed(2)}" transform="translate(-0.8 -0.8)"/>
+      <path d="M 0.3 -${r*0.56} L ${r*0.5} ${r*0.22} L -${r*0.44} ${r*0.22} Z" fill="none" stroke="${T.waxLit}" stroke-width="${(r*0.07).toFixed(2)}" opacity="0.9" transform="translate(0.8 0.8)"/>
+    </g>`;
+  }
+  if(register==='full'){
+    device+=`<path d="M -${r*0.38} ${r*0.06} L ${r*0.40} ${r*0.06}" stroke="${T.waxRim}" stroke-width="${(r*0.09).toFixed(2)}"/>
+      <circle cx="0.3" cy="-${r*0.24}" r="${(r*0.08).toFixed(2)}" fill="${T.waxRim}"/>`;
+  }
+  return `
+  <svg aria-hidden="true" width="${size+16}" height="${size+16}" viewBox="-${r+8} -${r+8} ${size+16} ${size+16}" style="display:block">
+    <g filter="${contact(1.2,'rgba(20,8,4,0.6)')} ${cast(1.6,1.8,'rgba(20,8,4,0.5)')}">
+      ${blob(r,T.waxRim)}
+      ${blob(r*0.87,T.wax)}
+      <ellipse cx="-${(r*0.16).toFixed(1)}" cy="-${(r*0.17).toFixed(1)}" rx="${(r*0.57).toFixed(1)}" ry="${(r*0.48).toFixed(1)}" fill="${T.waxGlint}" opacity="0.42" filter="url(#${idp}b)"/>
+      <filter id="${idp}b"><feGaussianBlur stdDeviation="${(r*0.1).toFixed(2)}"/></filter>
+      ${device}
+      <path d="M -${r*0.62} -${r*0.28} Q -${r*0.5} -${r*0.72} ${r*0.05} -${r*0.68}"
+            fill="none" stroke="${T.waxGlint}" stroke-width="${(r*0.15).toFixed(2)}" stroke-linecap="round" opacity="0.75"/>
+    </g>
+  </svg>`;
+}
+
+/* =====================================================================================
+   BURNED REFERENCE TABS — branded, then gilded (F2): a real singe halo, a real
+   per-glyph char bed WIDE enough to read at arm's length (~1.6px of char showing
+   around every glyph), then the gilt fill. Burns are IN the surface: no cast.
+   ===================================================================================== */
+function burnedTab(idp,x,label,w,active){
+  const chord=w, baseY=24;
+  const t=(extra,filter)=>`
+      <text font-family="Georgia,serif" font-weight="600" font-size="13.5" letter-spacing="0.4" ${extra} ${filter||''}>
+        <textPath href="#${idp}a">${label}</textPath></text>`;
+  return `
+  <svg aria-hidden="true" style="position:absolute;left:${x}px;top:0;width:${w+16}px;height:${BAR}px;overflow:visible;z-index:3;display:block" viewBox="-8 0 ${w+16} ${BAR}">
+    <defs>${archPath(idp+'a',0,baseY,chord,WARP_RATIO)}
+      <filter id="${idp}h" x="-30%" y="-60%" width="160%" height="220%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.05 0.3" numOctaves="2" seed="17" result="n"/>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="2"/>
+        <feGaussianBlur stdDeviation="1.8 1.1"/>
+      </filter>
+      <filter id="${idp}c" x="-30%" y="-60%" width="160%" height="220%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.05 0.3" numOctaves="2" seed="17" result="n"/>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="1.6"/>
+      </filter>
+    </defs>
+    <g transform="translate(0 ${baseY*(1-FORESHORT)}) scale(1 ${FORESHORT})">
+      ${t(`fill="none" stroke="${T.bole}" stroke-width="6.5" stroke-opacity="0.5"`,`filter="url(#${idp}h)"`)}
+      ${t(`fill="${T.boleDeep}" stroke="${T.boleDeep}" stroke-width="3.6"`,`filter="url(#${idp}c)"`)}
+      ${t(`fill="${active?T.giltL:T.gilt}"`)}
+    </g>
+    ${active?`<path d="M 2 28.5 L ${chord-2} 28.5 L ${chord-2-2.4} 31 L ${2-2.4} 31 Z" fill="${T.giltL}"/>`:''}
+  </svg>`;
+}
+
+/* =====================================================================================
+   BUILD THE HEADER
+   ===================================================================================== */
+function headerHTML(flight,mobile){
+  const idp=flight?'f':'r';
+  const lanes=LANES.map(l=>({l,g:vaneGeom(l,flight)}));
+  const activeLane=0;
+
+  /* thread rides UNDER the blades: at rest each collar + crossing stays visible in
+     its successor's open sag-bay window; in flight the successor's pressed body
+     covers its predecessor's collar, as the lap physically must (F1 layering). */
+  let under='';
+  lanes.forEach(({g})=>{ under+=collar(g); });
+  const spiralRuns=lanes.map(({g})=>[g.ax+6,g.dropX+10]);
+  under+=spiralCrossings(spiralRuns,977);
+  let vanes='';
+  lanes.forEach(({l,g},i)=>{ vanes+=paintVane(l,g,i,idp,i===activeLane,flight,true); });
+  const over=activeBar(lanes[activeLane].g);
+
+  const clusterL=LANES[0].ax-24, clusterR=lanes[2].g.tx+16;
+
+  const labels=lanes.map(({l,g},i)=>{
+    const active=i===activeLane;
+    const coverX=i<2?lanes[i+1].g.dropX:g.tx;   /* the VISIBLE body ends where the successor peels off */
+    const cx=(g.dropX+coverX)/2;
+    const top=flight?11:(g.sagY+7), h=flight?22:20;
+    return `<a href="#" ${active?'aria-current="page"':''} style="left:${cx-52}px;top:${top}px;width:104px;height:${h}px;color:${active?'#F7EFD9':'var(--parch-100)'}">${l.name}</a>`;
+  }).join('');
+
+  const tabs = mobile?'' : `
+    ${burnedTab('t1',992,'Compendium',96,false)}
+    ${burnedTab('t2',1124,'Gallery',60,false)}
+    ${burnedTab('t3',1216,'About',46,true)}
+  `;
+  const signIn = `
+    <div style="position:absolute;right:18px;top:7px;z-index:5;filter:${contact(0.8,'rgba(20,8,4,.5)')} ${cast(1.4,1.6,'rgba(20,8,4,.45)')}">
+      <div style="background:linear-gradient(180deg,${T.giltL},${T.gilt});border:1px solid ${T.key};border-radius:3px;
+        font:600 12.5px Georgia,serif;color:${T.key};padding:3.5px 12px;letter-spacing:.03em">Sign In</div>
+    </div>`;
+
+  return `
+  <header class="shaft" style="background-color:${T.shaft};background-image:${SHAFT_LAYERS.replace(/"/g,'&quot;')}">
+    ${threadBand(clusterL,10,BAR)}
+    ${threadBand(clusterR,10,BAR)}
+    <svg class="hang-layer" style="z-index:2" viewBox="0 0 1440 ${BAR}" width="100%" height="${BAR}" preserveAspectRatio="none" aria-hidden="true" overflow="visible">
+      ${under}
+      ${vanes}
+      ${over}
+    </svg>
+    ${cartouche(22,1,'cb')}
+    ${tabs}
+    ${mobile?'':signIn}
+    <nav class="fletch" aria-label="Primary">${labels}</nav>
+  </header>`;
+}
+
+function contentHTML(flight){
+  return `
+  <main>
+    <div class="page">
+      <div class="hero-pad${flight?' flight':''}"></div>
+      <h1 class="pageTitle">${flight?'Chapter IV — The River Compacts':'The Realm of Veldenmark'}</h1>
+      <div class="rule"></div>
+      <p class="lede">${flight
+        ?'By the third winter the toll-lords of the Middle Reach had signed the river compacts, and the grain barges moved again under the old wharf-law. The Herald records four seats changed hands that season, two by marriage and one by fire.'
+        :'A deterministic world, sealed at its founding. Every settlement below is derived from the seed and its laws — regenerate it in a century and the same rivers will hold the same names.'}</p>
+      <div class="cardrow">
+        <div class="card"><h3>Thornwick</h3><p>Market town on the Middle Reach. Population 1,840. The toll bridge is the county's quarrel and its purse.</p></div>
+        <div class="card"><h3>Alderford</h3><p>Ford-keep and staple port. The wool staple moved here in the Year of Broken Carts.</p></div>
+        <div class="card"><h3>Greyhallow</h3><p>Quarry village under the scarp. Sends stone downriver; keeps its dead in the old way.</p></div>
+      </div>
+    </div>
+  </main>`;
+}
+
+function closeupHTML(){
+  const strip=(idp,ratio,fs)=>`
+    <svg width="360" height="46" viewBox="0 0 360 46" style="display:block;background:${T.shaft};background-image:${SHAFT_LAYERS.replace(/"/g,'&quot;')}">
+      <defs>${archPath(idp+'w',14,30,330,ratio)}
+        <filter id="${idp}sc" x="-30%" y="-60%" width="160%" height="220%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.05 0.3" numOctaves="2" seed="17" result="n"/>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="1.6"/>
+        </filter>
+      </defs>
+      <g transform="translate(0 ${30*(1-fs)}) scale(1 ${fs})">
+        <text font-family="Georgia,serif" font-weight="600" font-size="15" letter-spacing="0.4"
+          fill="none" stroke="${T.bole}" stroke-width="7" stroke-opacity="0.5"><textPath href="#${idp}w">Compendium · Gallery · About</textPath></text>
+        <text font-family="Georgia,serif" font-weight="600" font-size="15" letter-spacing="0.4"
+          fill="${T.boleDeep}" stroke="${T.boleDeep}" stroke-width="3.8" filter="url(#${idp}sc)"><textPath href="#${idp}w">Compendium · Gallery · About</textPath></text>
+        <text font-family="Georgia,serif" font-weight="600" font-size="15" letter-spacing="0.4"
+          fill="${T.gilt}"><textPath href="#${idp}w">Compendium · Gallery · About</textPath></text>
+      </g>
+    </svg>`;
+  const chip=(inner,wpx)=>`<div style="position:relative;display:inline-block;background:${T.shaft};background-image:${SHAFT_LAYERS.replace(/"/g,'&quot;')};padding:6px ${wpx||14}px 10px">${inner}</div>`;
+  return `
+  <main style="background:var(--parch)">
+    <div class="panes">
+      <div class="pane" style="width:820px">
+        <h4>The cartouche at 1x — burned frame + char letter-beds + gilt on the WOOD (image-2 canon); top dies into the viewport cut</h4>
+        <div style="position:relative;height:56px;background:${T.shaft};background-image:${SHAFT_LAYERS.replace(/"/g,'&quot;')};background-size:auto ${BAR}px;background-repeat:repeat-x">
+          <div style="position:relative;height:${BAR}px">${cartouche(20,1,'c1')}</div>
+        </div>
+        <h4 style="margin-top:26px">The same construction at 3x — frame, letter-beds, solid wax O with the debossed strike</h4>
+        <div class="zoomwrap" style="height:${BAR*3+40}px;width:100%">
+          <div class="zoom3" style="position:relative;height:${BAR}px;width:360px;background:${T.shaft};background-image:${SHAFT_LAYERS.replace(/"/g,'&quot;')}">
+            ${cartouche(20,1,'c3')}
+          </div>
+        </div>
+      </div>
+      <div class="pane">
+        <h4>The warp ladder — measured legibility bound (D3)</h4>
+        <div class="laddercell">${strip('l0',0,1)}<div class="cap">flat — ratio 0, scaleY 1.00</div></div>
+        <div class="laddercell" style="margin-top:10px">${strip('l1',0.0105,0.94)}<div class="cap">PINNED — ratio 0.0105, scaleY 0.94</div></div>
+        <div class="laddercell" style="margin-top:10px">${strip('l2',0.021,0.88)}<div class="cap">2x the pin — ratio 0.021, scaleY 0.88 (rejected)</div></div>
+        <h4 style="margin-top:22px">Same ladder at 2x scale</h4>
+        <div class="zoomwrap" style="height:104px;width:740px">
+          <div class="zoom2">${strip('l3',0.0105,0.94)}</div>
+        </div>
+      </div>
+      <div class="pane" style="width:820px">
+        <h4>The seal ladder at TRUE size (open question 2 answered from pixels) — dimple &lt;22px · SIMPLIFIED STRIKE 22–40px · full device ≥40px</h4>
+        <div class="sealrow">
+          <div class="cell">${chip(sealAt(16,'dimple','sd'))}<div class="cap">16px — dimple</div></div>
+          <div class="cell">${chip(sealAt(30,'strike','ss'))}<div class="cap">30px — SIMPLIFIED STRIKE (the header rung) at 1x</div></div>
+          <div class="cell">${chip(sealAt(40,'full','sf'))}<div class="cap">40px — full device</div></div>
+          <div class="cell"><div style="width:160px;height:134px;overflow:hidden;position:relative"><div style="position:absolute;left:0;top:0;transform:scale(2);transform-origin:top left">${chip(sealAt(30,'strike','s2'))}</div></div><div class="cap">the same 30px strike at 2x (retina)</div></div>
+        </div>
+      </div>
+    </div>
+  </main>`;
+}
+
+function mobileHTML(){
+  const lanes=[
+    {name:'Create', ax:22,  Lb:16, W:118, Db:24, Sg:2.5, DbF:8, seed:101},
+    {name:'Library',ax:132, Lb:14, W:128, Db:28, Sg:3.5, DbF:8, seed:211},
+    {name:'Realm',  ax:252, Lb:18, W:118, Db:25, Sg:3,   DbF:8, seed:307},
+  ];
+  const geoms=lanes.map(l=>({l,g:vaneGeom(l,false)}));
+  let under='';
+  geoms.forEach(({g})=>{ under+=collar(g); });
+  under+=spiralCrossings(geoms.map(({g})=>[g.ax+5,g.dropX+8]),977);
+  let vanes='';
+  geoms.forEach(({l,g},i)=>{ vanes+=paintVane(l,g,i,'m',i===0,false,false); });
+  const over=activeBar(geoms[0].g);
+  const labels=geoms.map(({l,g},i)=>{
+    const cx=(g.dropX+g.tx)/2;
+    return `<a href="#" style="left:${cx-46}px;top:${g.sagY+4}px;width:92px;height:17px;font-size:12.5px;color:${i===0?'#F7EFD9':'var(--parch-100)'}">${l.name}</a>`;
+  }).join('');
+  return `
+  <div style="width:390px;position:relative;overflow:visible">
+  <header class="shaft" style="height:76px;background-color:${T.shaft};background-image:${SHAFT_LAYERS.replace(/"/g,'&quot;')};background-size:auto 76px">
+    <div style="position:relative;height:38px">
+      ${cartouche(10,0.82,'mcb')}
+      <div style="position:absolute;right:10px;top:7px;z-index:5">
+        <div style="background:linear-gradient(180deg,${T.giltL},${T.gilt});border:1px solid ${T.key};border-radius:3px;font:600 11.5px Georgia,serif;color:${T.key};padding:3px 10px">Sign In</div>
+      </div>
+    </div>
+    <div style="position:relative;height:38px">
+      ${threadBand(4,7,38)}
+      ${threadBand(376,7,38)}
+      <svg class="hang-layer" viewBox="0 0 390 38" width="100%" height="38" preserveAspectRatio="none" aria-hidden="true" overflow="visible" style="z-index:2">
+        ${under}
+        ${vanes}
+        ${over}
+      </svg>
+      <nav class="fletch" aria-label="Primary">${labels}</nav>
+    </div>
+  </header>
+  <main>
+    <div class="page" style="padding:0 18px">
+      <div style="height:56px"></div>
+      <h1 class="pageTitle" style="font-size:24px">The Realm of Veldenmark</h1>
+      <div class="rule"></div>
+      <p class="lede" style="font-size:14.5px">A deterministic world, sealed at its founding. Every settlement below is derived from the seed and its laws.</p>
+      <div class="card" style="margin-top:18px"><h3>Thornwick</h3><p>Market town on the Middle Reach. Population 1,840.</p></div>
+    </div>
+  </main>
+  </div>`;
+}
+
+const state=new URLSearchParams(location.search).get('state')||'rest';
+const app=document.getElementById('app');
+if(state==='rest')        app.innerHTML=headerHTML(false,false)+contentHTML(false);
+else if(state==='flight') app.innerHTML=headerHTML(true,false)+contentHTML(true);
+else if(state==='closeup')app.innerHTML=closeupHTML();
+else if(state==='mobile') app.innerHTML=mobileHTML();
+</script>
+</body>
+</html>

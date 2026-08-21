@@ -1,0 +1,151 @@
+[
+ {
+  "tool": "mcp__7d59bf63-0c8b-40d6-8a5f-35615f427ad6__generate_image_batch",
+  "input": {
+   "requests": [
+    {
+     "index": 1,
+     "params": {
+      "model": "nano_banana_pro",
+      "resolution": "4k",
+      "aspect_ratio": "21:9",
+      "prompt": "A single straight cylindrical cedar arrow shaft lying perfectly horizontal, spanning the ENTIRE frame edge to edge, both ends cut off by the frame, photographed dead-on from the side at close range so the shaft fills the middle third of the frame's height. Bare polished wood only: no fletching, no feathers, no thread, no lettering, no metal. Fine straight grain running along the shaft's length, subtle growth-line striping, the lit crest along the upper face falling smoothly to a deep shadowed lower edge. Warm parchment behind. Photoreal macro photography, professional product shot, razor sharp, natural fibre and wood-grain detail. The wood is turned aromatic cedar in exactly this ladder: lit face #9C5A38, mid body #7A422A, deepest shadow and char #3F2013. One warm directional sunlight from the UPPER LEFT, soft true shadows falling down-and-right, gentle contact shadows where anything meets the wood. Ground is warm blank parchment, evenly lit, nothing else in frame. The shaft is DEAD STRAIGHT \u2014 no bend, no arc. No text anywhere."
+     }
+    },
+    {
+     "index": 2,
+     "params": {
+      "model": "nano_banana_pro",
+      "resolution": "4k",
+      "aspect_ratio": "3:2",
+      "prompt": "The SAME single greylag-goose flight feather photographed twice on one parchment sheet, arranged one above the other with clear space between, identical barring in both. TOP POSE: the feather pressed flat and streamlined along the underside of a straight horizontal cedar shaft, hugging the wood, tip trailing right. BOTTOM POSE: the same feather with its bare quill lying along the shaft's underside, the soft body sagging gently below in a shallow relaxed curve, and the tapered tip sweeping back UP to touch the wood again \u2014 an aerodynamic vane at rest, NOT a hanging charm. The quill visibly runs along the wood before any droop. No thread, no bindings, no wrapping anywhere. Slender blade proportions, length about five times the depth, rounded tapered tip, a few loose fray fibres at the lower edge. Photoreal macro photography, professional product shot, razor sharp, natural fibre and wood-grain detail. The wood is turned aromatic cedar: lit face #9C5A38, mid body #7A422A, deepest shadow #3F2013. One warm directional sunlight from the UPPER LEFT, soft true shadows falling down-and-right. Feathers are greylag-goose: warm grey-brown with bold darker barring bands. Ground is warm blank parchment, evenly lit, nothing else in frame. The shaft is DEAD STRAIGHT. No text anywhere."
+     }
+    },
+    {
+     "index": 3,
+     "params": {
+      "model": "nano_banana_pro",
+      "resolution": "4k",
+      "aspect_ratio": "3:2",
+      "prompt": "The SAME single greylag-goose flight feather photographed twice on one parchment sheet, arranged one above the other with clear space between, identical barring in both \u2014 this one the largest and palest of a matched set of three: broad pale grey-cream body, the barring soft and wide. TOP POSE: the feather pressed flat and streamlined along the underside of a straight horizontal cedar shaft, hugging the wood, tip trailing right. BOTTOM POSE: the same feather with its bare quill lying along the shaft's underside, the soft body sagging below in the deepest relaxed curve of the set, and the tapered tip sweeping back UP to touch the wood again \u2014 an aerodynamic vane at rest, NOT a hanging charm. The quill visibly runs along the wood before any droop. No thread, no bindings anywhere. Slender blade proportions, length about five times the depth, rounded tapered tip, a few loose fray fibres at the lower edge. Photoreal macro photography, professional product shot, razor sharp. Cedar ladder: lit #9C5A38, mid #7A422A, shadow #3F2013. One warm directional sunlight from the UPPER LEFT, soft true shadows down-and-right. Warm blank parchment ground, nothing else in frame. The shaft is DEAD STRAIGHT. No text anywhere."
+     }
+    },
+    {
+     "index": 4,
+     "params": {
+      "model": "nano_banana_pro",
+      "resolution": "4k",
+      "aspect_ratio": "3:2",
+      "prompt": "The SAME single greylag-goose flight feather photographed twice on one parchment sheet, arranged one above the other with clear space between, identical barring in both \u2014 this one the darkest and warmest of a matched set of three, and the shortest: deep smoky grey-brown, narrow crisp barring. TOP POSE: the feather pressed flat and streamlined along the underside of a straight horizontal cedar shaft, hugging the wood, tip trailing right. BOTTOM POSE: the same feather with its bare quill lying along the shaft's underside, the soft body sagging gently below in a shallow relaxed curve, and the tapered tip sweeping back UP to touch the wood again \u2014 an aerodynamic vane at rest, NOT a hanging charm. The quill visibly runs along the wood before any droop. No thread, no bindings anywhere. Slender blade proportions, length about five times the depth, rounded tapered tip, a few loose fray fibres at the lower edge. Photoreal macro photography, professional product shot, razor sharp. Cedar ladder: lit #9C5A38, mid #7A422A, shadow #3F2013. One warm directional sunlight from the UPPER LEFT, soft true shadows down-and-right. Warm blank parchment ground, nothing else in frame. The shaft is DEAD STRAIGHT. No text anywhere."
+     }
+    },
+    {
+     "index": 5,
+     "params": {
+      "model": "nano_banana_pro",
+      "resolution": "4k",
+      "aspect_ratio": "21:9",
+      "medias": [
+       {
+        "value": "4a6ab6db-74b4-43c0-b31a-224419be225c",
+        "role": "image"
+       }
+      ],
+      "prompt": "A wide elegant cartouche burned into the flat lit face of a cedar shaft, in the exact craft style of the reference image: a thin scorched char frame line with softly cusped bracket ends, drawn as one closed outline with a shallow decorative dip at the center of its bottom rule, a hair-thin gold inlay line tracing just inside the char. Inside, the single word \"SettlementForge\" in engraved antique cartographer's roman capitals-and-lowercase, the S and the F with restrained swash flourishes, every letter a crisp char-edged incision filled with burnished gold leaf, in exactly this gold: #D4AF45. The O of \"Forge\" is NOT a letter: in its place sits an oversized dark-red wax seal, solid oxblood wax in the #5D1C19 family, slightly overlapping the F beside it and the r after it, with a small plain TRIANGLE pressed deep into the wax as its only device, the impression's lip dark toward the light. Faint singe halo feathering into the grain around every burn. The lettering band occupies most of the frame's width. Photoreal macro photography, razor sharp. Cedar ladder: lit #9C5A38, mid #7A422A, char #3F2013. One warm directional sunlight from the UPPER LEFT. The shaft is DEAD STRAIGHT. No other text anywhere; the word spelled exactly \"SettlementForge\" with no second O."
+     }
+    },
+    {
+     "index": 6,
+     "params": {
+      "model": "nano_banana_pro",
+      "resolution": "4k",
+      "aspect_ratio": "21:9",
+      "medias": [
+       {
+        "value": "4a6ab6db-74b4-43c0-b31a-224419be225c",
+        "role": "image"
+       }
+      ],
+      "prompt": "A wide elegant cartouche burned into the flat lit face of a cedar shaft, in the exact craft style of the reference image: a thin scorched char frame line with softly cusped bracket ends, drawn as one closed outline with a shallow decorative dip at the center of its bottom rule, a hair-thin gold inlay line tracing just inside the char. Inside, the single word \"SettlementForge\" in engraved antique cartographer's roman capitals-and-lowercase, the S and the F with restrained swash flourishes, every letter a crisp char-edged incision filled with burnished gold leaf, in exactly this gold: #D4AF45. The O of \"Forge\" is NOT a letter: in its place sits an oversized dark-red wax seal, solid oxblood wax in the #5D1C19 family, slightly overlapping the F beside it and the r after it, with a small plain TRIANGLE pressed deep into the wax as its only device, the impression's lip dark toward the light. Faint singe halo feathering into the grain around every burn. The lettering band occupies most of the frame's width, letters spaced generously. Photoreal macro photography, razor sharp. Cedar ladder: lit #9C5A38, mid #7A422A, char #3F2013. One warm directional sunlight from the UPPER LEFT. The shaft is DEAD STRAIGHT. No other text anywhere; the word spelled exactly \"SettlementForge\" with no second O."
+     }
+    },
+    {
+     "index": 7,
+     "params": {
+      "model": "nano_banana_pro",
+      "resolution": "4k",
+      "aspect_ratio": "21:9",
+      "medias": [
+       {
+        "value": "4a6ab6db-74b4-43c0-b31a-224419be225c",
+        "role": "image"
+       }
+      ],
+      "prompt": "A wide elegant cartouche burned into the flat lit face of a cedar arrow shaft, matching the reference image's burned-frame craft: a thin scorched char frame line with softly cusped bracket ends, one closed outline, a shallow decorative dip centered on the bottom rule, a hair-thin gold inlay line just inside the char. Inside, exactly the word \"SettlementForge\" in engraved antique cartographer's roman, capitals-and-lowercase, restrained swash flourishes on the S and F, each letter a crisp char-edged incision filled with burnished #D4AF45 gold leaf. Where the O of \"Forge\" would be sits an oversized dark-red oxblood wax seal (#5D1C19 family) instead, slightly overlapping its neighboring letters, pressed with one small plain TRIANGLE device, the impression lip dark toward the light. A faint singe halo feathers into the wood grain around every burned line. The band fills most of the frame's width. Photoreal macro photography, razor sharp. Cedar ladder: lit #9C5A38, mid #7A422A, char #3F2013. One warm sunlight from the UPPER LEFT. The shaft is DEAD STRAIGHT. No other text; \"SettlementForge\" spelled exactly, no second O."
+     }
+    },
+    {
+     "index": 8,
+     "params": {
+      "model": "nano_banana_pro",
+      "resolution": "4k",
+      "aspect_ratio": "21:9",
+      "prompt": "Three separate words branded into the lit face of a straight cedar shaft, spaced far apart in one straight line along the grain: \"Compendium\" then \"Gallery\" then \"About\". Each word in small engraved antique roman letterforms, every glyph a crisp branded incision with a charred bed and a faint singe halo feathering into the grain, the incision floor filled with burnished gold leaf in exactly #D4AF45. The char bed shows as a fine dark ring around every gold letter. Nothing else on the wood. Photoreal macro photography, professional product shot, razor sharp, natural wood-grain detail. Cedar ladder: lit face #9C5A38, mid body #7A422A, char #3F2013. One warm directional sunlight from the UPPER LEFT, soft true shadows down-and-right. Warm blank parchment behind. The shaft is DEAD STRAIGHT. The only text is exactly: Compendium, Gallery, About."
+     }
+    },
+    {
+     "index": 9,
+     "params": {
+      "model": "nano_banana_pro",
+      "resolution": "4k",
+      "aspect_ratio": "21:9",
+      "prompt": "Three separate words branded into the lit face of a straight cedar shaft, spaced far apart in one straight line along the grain: \"Compendium\" then \"Gallery\" then \"About\". Each word in small engraved antique roman letterforms, every glyph a crisp branded incision with a charred bed and a faint singe halo feathering into the grain, the incision floor filled with pale bright burnished gold leaf in the #E9CD70 family \u2014 noticeably lighter and brighter gold than standard leaf. The char bed shows as a fine dark ring around every gold letter. Nothing else on the wood. Photoreal macro photography, professional product shot, razor sharp, natural wood-grain detail. Cedar ladder: lit face #9C5A38, mid body #7A422A, char #3F2013. One warm directional sunlight from the UPPER LEFT, soft true shadows down-and-right. Warm blank parchment behind. The shaft is DEAD STRAIGHT. The only text is exactly: Compendium, Gallery, About."
+     }
+    },
+    {
+     "index": 10,
+     "params": {
+      "model": "nano_banana_pro",
+      "resolution": "4k",
+      "aspect_ratio": "21:9",
+      "prompt": "Three short words hand-lettered in opaque cream-white pigment, painted small and crisp on the dark smoky vane of a grey goose feather, one word per feather section, spaced far apart: \"Create\" then \"Library\" then \"Realm\". Antique roman letterforms, slightly raised paint sitting ON the barbs, the barb texture faintly visible through the strokes' edges. The feather ground is deep smoky grey-brown with darker barring. Photoreal macro photography, razor sharp, natural fibre detail. One warm directional sunlight from the UPPER LEFT. Nothing else in frame. The only text is exactly: Create, Library, Realm."
+     }
+    },
+    {
+     "index": 11,
+     "params": {
+      "model": "nano_banana_pro",
+      "resolution": "4k",
+      "aspect_ratio": "21:9",
+      "prompt": "Three short words hand-lettered in warm pale-gold pigment in the #E9CD70 family, painted small and crisp on the dark smoky vane of a grey goose feather, one word per feather section, spaced far apart: \"Create\" then \"Library\" then \"Realm\". Antique roman letterforms, slightly raised paint sitting ON the barbs, the barb texture faintly visible through the strokes' edges. The feather ground is deep smoky grey-brown with darker barring. Photoreal macro photography, razor sharp, natural fibre detail. One warm directional sunlight from the UPPER LEFT. Nothing else in frame. The only text is exactly: Create, Library, Realm."
+     }
+    },
+    {
+     "index": 12,
+     "params": {
+      "model": "nano_banana_pro",
+      "resolution": "4k",
+      "aspect_ratio": "1:1",
+      "prompt": "A small rectangular brass plate fitting with softly cusped corners and two tiny brass mounting pins, lying flat on warm parchment. The face is polished burnished gold-brass, engraved with the words \"Sign In\" in small dark antique roman capitals, the engraving filled with near-black patina. A soft true shadow falls down-and-right from one warm directional sunlight from the UPPER LEFT. Photoreal macro photography, professional product shot, razor sharp. Warm blank parchment ground, evenly lit, nothing else in frame. The only text is exactly: Sign In."
+     }
+    }
+   ]
+  }
+ },
+ {
+  "tool": "mcp__7d59bf63-0c8b-40d6-8a5f-35615f427ad6__generate_image_batch",
+  "input": {
+   "requests": [
+    {
+     "index": 13,
+     "params": {
+      "model": "nano_banana_pro",
+      "resolution": "4k",
+      "aspect_ratio": "1:1",
+      "prompt": "A single dark-red sealing-wax medallion on warm parchment, solid oxblood wax in the #5D1C19 family with a naturally irregular squeezed rim, pressed with a plain bold TRIANGLE as its only device \u2014 a deep clean impression, the lip dark toward the upper-left light, the floor of the impression slightly darker than the surrounding wax. No lettering, no other ornament. Photoreal macro photography, straight on, razor sharp. One warm directional sunlight from the UPPER LEFT, a soft true shadow down-and-right. Warm blank parchment ground, evenly lit, nothing else in frame. No text anywhere."
+     }
+    }
+   ]
+  }
+ }
+]

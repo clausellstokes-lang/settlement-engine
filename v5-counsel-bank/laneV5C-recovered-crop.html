@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>crop viewer</title>
+<style>
+  html, body { margin: 0; padding: 0; background: #1a1a1a; height: 100%; overflow: hidden; }
+  #v { position: fixed; inset: 0; background-repeat: no-repeat; }
+  #tag { position: fixed; left: 4px; bottom: 4px; color: #8f8; font: 11px monospace; background: #000a; padding: 2px 6px; }
+</style>
+</head>
+<body>
+<div id="v"></div>
+<div id="tag"></div>
+<script>
+  // ?u=<encoded image url>&x=&y=&s=   x,y = source-pixel top-left of the crop; s = scale factor
+  const q = new URLSearchParams(location.search);
+  const u = q.get('u');
+  const x = parseFloat(q.get('x') || '0');
+  const y = parseFloat(q.get('y') || '0');
+  const s = parseFloat(q.get('s') || '1');
+  const v = document.getElementById('v');
+  const im = new Image();
+  im.onload = () => {
+    v.style.backgroundImage = 'url("' + u + '")';
+    v.style.backgroundSize = (im.naturalWidth * s) + 'px ' + (im.naturalHeight * s) + 'px';
+    v.style.backgroundPosition = (-x * s) + 'px ' + (-y * s) + 'px';
+    document.getElementById('tag').textContent = im.naturalWidth + 'x' + im.naturalHeight + ' @ (' + x + ',' + y + ') s=' + s;
+  };
+  im.onerror = () => { document.getElementById('tag').textContent = 'LOAD ERROR'; };
+  im.src = u;
+</script>
+</body>
+</html>
