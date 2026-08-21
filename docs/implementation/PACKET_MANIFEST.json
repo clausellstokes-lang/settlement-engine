@@ -17768,6 +17768,230 @@
       ]
     },
     {
+      "id": "MF-T2C",
+      "status": "DRAFT",
+      "packetPath": "docs/implementation/packets/town-cartography/MF-T2C.md",
+      "verifiedBase": "fb80e32f03564e6edcbad4bf37de27694c2fe986",
+      "changeManifest": [
+        {
+          "_note": "THE KERNEL, EXTENDED IN PLACE. BigInt orientation, the pre-sorted traversal cursor, per-component outer faces, DEGENERATE typing, faceIndex and locateFace. The exported signature line survives byte-identical at column zero because MF-T2A's sweep plant 28a anchors on it.",
+          "action": "MODIFY",
+          "path": "src/domain/townMap/fabric/dcelEmbedding.js"
+        },
+        {
+          "_note": "THE SEAL PATH. A BigInt-safe census plus the legacy face-triple projection, which is the whole reason every PLANAR_DCEL digest stays where it is. Mutant M7 removes the projection and reds the exact-key pin, so the guard is proven able to convict.",
+          "action": "MODIFY",
+          "path": "src/domain/townMap/fabric/dcel.js"
+        },
+        {
+          "_note": "A NEW acceptance file. CREATE rather than TEST: the validator asserts a TEST path exists at EVERY status, and existence for a CREATE row is assertable only at LANDED — which is exactly where a fictional creation becomes catchable.",
+          "action": "CREATE",
+          "path": "tests/domain/townMapDcelEmbeddingExtension.test.js"
+        },
+        {
+          "_note": "A NEW acceptance file, the determinism companion. CREATE for the same reason as its sibling.",
+          "action": "CREATE",
+          "path": "tests/property/townMapDcelEmbeddingDeterminism.test.js"
+        },
+        {
+          "_note": "THE ONE SHARED D3a CHANGE PATH this member reserves — the census tuple, re-recorded all five figures together by placeholder-and-convict, with its cause and its authorizing decision named. It deliberately reserves NO path on fabric/index.js: the kernel is directory-internal and the barrel does not export it.",
+          "action": "TEST",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/packets/town-cartography/MF-T2C.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE KERNEL BEING EXTENDED, and the MF-T2A PLANT HOST. This exact line must survive byte-identical at column zero or the sweep's perl plant silently stops applying and check_caught can no longer red the single-declaration walker.",
+          "path": "src/domain/townMap/fabric/dcelEmbedding.js",
+          "symbol": "export function derivePlanarDcelEmbedding"
+        },
+        {
+          "_note": "THE PLANT ITSELF. Its host is dcelEmbedding.js precisely because that file neither declares nor imports CURRENT_MAP_TRADITION_ID, so the planted second declaration PARSES; this member keeps that precondition true.",
+          "path": "scripts/mutation-sweep.sh",
+          "symbol": "check_caught \"town-map/fabric duplicate export declaration\""
+        },
+        {
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export const CURRENT_MAP_TRADITION_ID"
+        },
+        {
+          "_note": "THE FROZEN VERSION STRING. Stamped by eight fabric modules and pinned by 157 literal digest pins across 12 test files; this member does not move it.",
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export const FABRIC_COORDINATE_ABI"
+        },
+        {
+          "_note": "THE SEAL, and the frozen schema/law versions it stamps. The extended contract lives on the in-memory embedding so none of these move.",
+          "path": "src/domain/townMap/fabric/dcel.js",
+          "symbol": "export function compileOrthogonalCrossPlanarDcel"
+        },
+        {
+          "path": "src/domain/townMap/fabric/dcel.js",
+          "symbol": "export const PLANAR_DCEL_SCHEMA_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/dcel.js",
+          "symbol": "export const PLANAR_DCEL_LAW_VERSION"
+        },
+        {
+          "_note": "THE AUTHORITY FOR THE LOCATE CONTRACT. A6 asserts boundaryRule against this record rather than against a comment.",
+          "path": "src/domain/townMap/fabric/coordinateAbi.js",
+          "symbol": "export const COORDINATE_ABI"
+        },
+        {
+          "_note": "THE ABI ENVELOPE the OUTSIDE_ABI refusal is measured against.",
+          "path": "src/domain/townMap/fabric/coordinateAbi.js",
+          "symbol": "export const MAX_WORLD_UNITS"
+        },
+        {
+          "_note": "THE LOCATE SUBSTRATE, landed by MF-T2B and called here with eps = BOUNDARY_EPS_Q. No second port of fabricGeometry.js occurs in this member.",
+          "path": "src/domain/townMap/fabric/exactGeometry.js",
+          "symbol": "export function pointLocateRing"
+        },
+        {
+          "path": "src/domain/townMap/fabric/exactGeometry.js",
+          "symbol": "export function bounds"
+        },
+        {
+          "_note": "THE WIDENED WALL — landed by MF-T2B and untouched here. It is WHY the ABI-scale fixtures reach the kernel at all, which is what makes R-MF-2 reachable end to end.",
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export function requireCanonicalInt"
+        },
+        {
+          "_note": "MF-T2A'S LAW, which binds this member: the arriving export names must collide with nothing. Verified zero hits tree-wide at the base. This describe title is also a census key.",
+          "path": "tests/lint/townMapFabricSingleDeclaration.walker.test.js",
+          "symbol": "fabric single-declaration law (the ODQ 310.3(7) source scan)"
+        },
+        {
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "symbol": "const CENSUS = Object.freeze({"
+        },
+        {
+          "_note": "THE UNTOUCHED-PIN CONTROL'S LARGEST HOLDER — the exact-key face pin and the sealed key list with its SINGULAR outerFaceId. It must stay green with not one literal edited; a moved pin is a STOP, never a re-record.",
+          "path": "tests/domain/townMapPlanarDcel.test.js",
+          "symbol": "describe('MF-T1D canonical reference-only planar DCEL'"
+        },
+        {
+          "_note": "THE SHAPE PRECEDENT this member's two acceptance files copy: a domain matrix plus a determinism companion, one literal describe each, straight-line calls, string-literal titles.",
+          "path": "tests/domain/townMapCoordinateAbi.test.js",
+          "symbol": "MF-T2B versioned integer coordinate ABI"
+        },
+        {
+          "path": "tests/property/townMapCoordinateAbiDeterminism.test.js",
+          "symbol": "MF-T2B coordinate-ABI determinism"
+        },
+        {
+          "_note": "THE ANCHOR HELPER the negative assertions route through by name on the same line. A new test file has ceiling zero in every tree — and the walker convicted this member once before the anchor was written.",
+          "path": "tests/helpers/anchoredNegatives.js",
+          "symbol": "export function expectAbsentWithAnchor"
+        },
+        {
+          "_note": "THE DORMANCY FENCE. It is describe.runIf(distExists), so a fresh worktree reports exit 0 on ZERO executed tests; the real discharge is post-build under VERIFY_DIST=1 and a pre-build skip may not be reported as a pass.",
+          "path": "tests/build/townMapLazy.test.js",
+          "symbol": "describe.runIf(distExists)"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "Main behavior: the extension is INERT on the admitted input. With the positive control asserted first — ten faces, faceIndex aligned one-for-one with faces, every ring at least three points, every bounding box present, and the alignment itself pinned because faces is faceId-sorted while metrics.area2s keeps discovery order — componentCount is 1, outerFaceIds deep-equals [outerFaceId], every innerBoundaryHalfEdgeIds is empty, and degenerateFaces and holeCycles are 0. The sealed artifact keeps the legacy face triple boundaryHalfEdgeId/faceId/faceKind and its key list still carries the SINGULAR outerFaceId, with the two extended keys asserted absent from the seal through the anchor helper."
+        },
+        {
+          "id": "A2",
+          "case": "The named historical regression R-MF-2, with its convicting counterexample and two controls. On the triangle a=[0,0] b=[m-1,m] c=[m,m+1] at m = 1286630001 the unedited kernel threw 'DCEL vertex has an angular tie' on valid ground; the extended kernel embeds it as two faces, one BOUNDED and one EXTERIOR, with Euler V-E+F = 2. The counterforce: the float cross reads 0 while the exact cross is -1n at ABI scale, and both read -1 on the same shape at fixture-era scale, so the divergence is the SCALE. The throw's own positive control: two collinear boundaries sharing one origin still throw the angular-tie message, so the detector is confined to true ties rather than removed."
+        },
+        {
+          "id": "A3",
+          "case": "Divergence 4: a zero-area cycle is typed and reported, never thrown. The two-segment open chain, which threw 'DCEL face must have nonzero signed area' on the unedited kernel, yields one face typed DEGENERATE with degenerateFaces 1, area2s [0n], an empty outerFaceIds and an undefined outerFaceId. Positive control in the same test: closing the chain into a triangle yields zero DEGENERATE, one BOUNDED, one EXTERIOR and one outer."
+        },
+        {
+          "id": "A4",
+          "case": "Divergence 3: one outer face per connected component. Two disjoint axis-aligned squares give componentCount 2 and an outerFaceIds of length 2, each the most-negative cycle of its own component at -200n read through the ALIGNED faceIndex, both typed EXTERIOR, in component order 0 then 1, with outerFaceId equal to outerFaceIds[0]. Positive control: the single-square half of the same fixture alone yields exactly one outer."
+        },
+        {
+          "id": "A5",
+          "case": "Divergence 2's real shape: a nested ring is a SECOND COMPONENT and containment is the locate rule's, not a hole list's. A 100x100 square with a disjoint 20x20 square inside gives componentCount 2 with both negative cycles typed EXTERIOR at areas -20000n and -800n in component order, and holeCycles 0 — asserted with the reason on the line, because the kind is defensive vocabulary whose firing this member does not claim. locateFace at a point inside the inner ring names the INNER BOUNDED face of area 800n while listing all four containing cycles, and at an annulus point names the OUTER BOUNDED face of area 20000n listing two."
+        },
+        {
+          "id": "A6",
+          "case": "Point location under the ABI's own declared boundary rule. COORDINATE_ABI.boundaryRule is asserted CLOSED as the authority; the INSIDE verdict is re-asserted first as the positive control so the refusal arms sit beside a verdict that fires. A point ON the inner ring's edge returns kind BOUNDARY, folded into neither side. A point far outside every ring returns kind OUTER naming outerFaceIds[0] with an empty hit list. A non-integer quantum, a coordinate past MAX_WORLD_UNITS, and a mis-shaped point each return the OUTSIDE_ABI refusal record with faceId null. PLANAR_EMBEDDING_FACE_KINDS is the closed ordered four."
+        },
+        {
+          "id": "A7",
+          "case": "Idempotency, replay and purity. Every fixture the matrix exercises, plus five locateFace verdicts, replays byte-identically under a BigInt-safe serializer; the sealed artifact is compared by its own contentHash across two compiles; and pinned answers sit beside the replay so a kernel that replays a WRONG result cannot pass by being consistently wrong. A source scan of both edited leaves finds no forbidden nondeterminism identifier, with a planted occurrence asserted SEEN first so an empty result is purity rather than a broken scanner."
+        },
+        {
+          "id": "A8",
+          "case": "Correctness at scale on the repaired traversal. A deterministic synthetic grid of 30x30 cells built inside the test yields exactly 1,860 boundaries and closes at V 961, E 1860, F 901; Euler holds as V - E + F === 1 + C with C === componentCount; outerFaceIds length equals componentCount; the cycle lengths sum to twice the edge count and every half-edge carries a face id; and no cycle is DEGENERATE. No wall-clock figure is asserted — the elapsed time is receipt evidence only, per the flake law and the chair's ruling."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/negativeAssertionAnchor.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/townMapDcelEmbeddingExtension.test.js",
+          "tests/property/townMapDcelEmbeddingDeterminism.test.js",
+          "tests/lint/townMapFabricSingleDeclaration.walker.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/townMapPlanarDcel.test.js",
+          "tests/domain/townMapBoundaryArrangement.test.js",
+          "tests/domain/townMapFabricRoot.test.js",
+          "tests/domain/townMapParcelRegistry.test.js",
+          "tests/domain/townMapFantasyConstruction.test.js",
+          "tests/domain/townMapSettlementFabric.test.js",
+          "tests/domain/townMapMassingRoster.test.js",
+          "tests/domain/townMapMassingPersistence.test.js",
+          "tests/domain/townMapStreetGeometry.test.js",
+          "tests/domain/townMapMassingProjection.test.js",
+          "tests/domain/townMapLandform.test.js",
+          "tests/domain/townMapStreetGraph.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/domain/townMap/fabric/dcelEmbedding.js",
+          "src/domain/townMap/fabric/dcel.js",
+          "tests/domain/townMapDcelEmbeddingExtension.test.js",
+          "tests/property/townMapDcelEmbeddingDeterminism.test.js"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "npm",
+          "run",
+          "validate:packets"
+        ],
+        [
+          "npm",
+          "run",
+          "check:tail"
+        ]
+      ]
+    },
+    {
       "id": "WF-1D",
       "status": "LANDED",
       "packetPath": "docs/implementation/packets/fp/WF-1D.md",
