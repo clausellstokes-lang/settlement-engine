@@ -806,8 +806,8 @@ settlement, which is what keeps it distinct from the WF-8 beat.
 
 ### 16.3 PER-ACCEPTANCE-CASE RESULT — seven of seven
 
-`npx vitest run tests/domain/pantheon.test.js` and its four siblings → **5 files passed, 427 tests
-passed**, TRUE_EXIT=**0**.
+`npx vitest run tests/domain/pantheon.test.js` and its six siblings, re-run at the final tip →
+**7 files passed, 447 tests passed**, TRUE_EXIT=**0**.
 
 | case | what it proves | result |
 |---|---|---|
@@ -924,7 +924,7 @@ arithmetic rather than slack: the wizard-news authoring wall requires the FULL s
 that field set alone is **22 lines**; the arm's own guard line, its branch line and the two extracted
 salience consts are the remaining four. The row's estimate was compiled before the code existed and
 the compile receipt labelled it a prediction. **The governed budgets both hold**: the aggregate
-production delta is **44** against §8's `≤49` and `PACKET_STANDARD`'s `400`. Measured with eslint's
+production delta is **46** against §8's `≤49` and `PACKET_STANDARD`'s `400`. Measured with eslint's
 own `Linter`, before and after:
 
 | file | before | after | delta |
