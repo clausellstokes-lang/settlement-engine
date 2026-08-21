@@ -15206,9 +15206,9 @@
         { "id": "A1", "case": "The transitional first-slice root publishes exact metadata and six role-specific source refs with one deterministic root hash." },
         { "id": "A2", "case": "Every root ref resolves exactly once to the supplied source, nested refs agree and the output is recursively frozen." },
         { "id": "A3", "case": "MF-T1P and MF-T1N replay byte-for-byte and each metadata equality is checked only across the exact sources that own that field." },
-        { "id": "A4", "case": "Tampered, mixed or coordinated wrong-ref witnesses, wrong identity and extra input keys refuse before sealing." },
+        { "id": "A4", "case": "One finite 13-row matrix refuses seven tampered hashes, both canonical-horizontal mixed directions, two wrong nested refs, one wrong graph law and one extra input key." },
         { "id": "A5", "case": "Repeat, upstream reorder, one valid horizontal-frontage variant, JSON replay and maximum root ID are byte-safe and leave witnesses unfrozen." },
-        { "id": "A6", "case": "Predecessor hashes and exact keys remain pinned with no FABRIC claim, dummy refs, copied rows or downstream authority." }
+        { "id": "A6", "case": "Predecessor hashes and exact keys remain pinned; artifactKind is not FABRIC; no dummy refs, copied rows or downstream authority exists." }
       ],
       "checks": [
         ["npx", "vitest", "run", "tests/domain/townMapFabricRoot.test.js", "tests/property/townMapFabricRootDeterminism.test.js", "tests/domain/townMapParcelRegistry.test.js", "tests/property/townMapParcelRegistryDeterminism.test.js", "tests/domain/townMapStreetGraph.test.js", "tests/property/townMapStreetGraphDeterminism.test.js"],

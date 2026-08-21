@@ -120,6 +120,8 @@ compileOrthogonalCrossFirstSliceFabricRoot({
 
 Input keys are exactly `artifactId`, `foundation`, `frontageSubdivision`, `streetGeometry`, `streetGraph`, `boundaryArrangement`, `planarDcel`, `parcelRegistry`.
 
+The canonical acceptance fixture uses exactly `FIRST_SLICE_FABRIC_ROOT_ID = 'first-slice-fabric-root:settlement-cross:001'`. A1 pins the root hash produced for that ID and no alternative fixture ID satisfies A1.
+
 ### Replay and join law
 
 1. Recompile the parcel registry using its artifact ID and the five topology witnesses; require stable byte equality. This transitively replays DCEL, arrangement, geometry, frontage and foundation.
@@ -167,11 +169,13 @@ Generated artifacts: `NONE`. No other file may be edited.
 | A1 | Transitional root | exact metadata, six role-specific ID/hash refs, deterministic root hash and recursive freeze | domain |
 | A2 | Resolution closure | every root ref resolves exactly once to the supplied source and nested source refs agree | domain |
 | A3 | Replay join | both sole compilers reproduce byte-equal graph and parcel branches; equality is checked only across the exact metadata fields each source owns | domain |
-| A4 | Closed refusal | each tampered source, valid-but-mixed branch, coordinated wrong nested ref, wrong identity and extra key refuse | domain |
+| A4 | Closed refusal | one finite 13-row matrix refuses seven independently tampered hashes, both canonical/horizontal mixed-chain directions, wrong graph-geometry and parcel-DCEL nested refs, one wrong graph law and one extra input key | domain |
 | A5 | Determinism | repeat, upstream reorder, one valid horizontal-frontage variant, JSON replay and maximum root ID are byte-safe and leave witnesses unfrozen | property |
-| A6 | Barrier/absence | predecessor hashes and exact keys remain pinned; no `FABRIC`, dummy refs, copied rows or downstream authority exists | domain |
+| A6 | Barrier/absence | predecessor hashes and exact keys remain pinned; `artifactKind !== 'FABRIC'`; no dummy refs, copied rows or downstream authority exists | domain |
 
 This table is the entire edge-case budget.
+
+The fixture calls `makeSettlementParcelRegistry` once, compiles the graph directly over that returned geometry, then compiles the root. It must not call `makeSettlementStreetGraph` as a second source chain. A4 stays one literal test with exactly the listed rows; do not add a null/missing/kind/version permutation battery.
 
 ## 10. Verification commands
 
