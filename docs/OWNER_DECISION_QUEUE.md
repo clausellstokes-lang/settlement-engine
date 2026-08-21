@@ -11785,3 +11785,53 @@ ruled with "thin" stated, never defaulted to RATIFIED.
    §293.4, its sha-verification role having been discharged in
    the memo. The owner docket gains items 1-5 above; the
    HANDOFF refresh at sitting close carries them.
+
+## §296 · DISCOVERED AND OPENED FOR REVIEW: THE CODEX FIRST-MAP
+## VERTICAL SLICE — FIVE PACKETS ON THE BUILD TIP THAT NO LEDGER
+## ROW RECORDS (2026-08-21; chair: FABLE; owner prompted "you've
+## noted the work that codex did for the map correct?")
+
+1. **THE CENSUS (chair-executed).** Branch
+   `codex/first-map-vertical-slice` @ eedd4e9c sits DIRECTLY ON
+   the build tip 4eafca31 and lands five packets through the
+   packet lifecycle (ready/seal/promote/land/terminalize),
+   built 2026-08-20 21:18 → 08-21 02:34 — after the §287-§290
+   review, before this sitting: **MF-T1F fabric root → MF-T1M
+   explicit massing roster → MF-T1V massing projection →
+   MF-T1S persistence → MF-T1X fantasy construction.** True
+   footprint vs 4eafca31: **62 files, +14,767 / −1**, creating
+   `src/domain/townMap/fabric/` IN THE APP TREE (19 modules:
+   boundary arrangement, DCEL + embedding, street graph/
+   geometry, frontage, parcel registry, massing roster/
+   projection, operations, content, shapes, building,
+   foundation, projection) plus ~20 test files incl.
+   determinism property tests, plus a +60 edit to the
+   sovereignty-lighting census walker. The packet names map
+   almost one-to-one onto §290.1's release-blocking slice
+   (deterministic identity, explicit massing, persistence/
+   save-reload, one registered fantasy operation) and §287.8's
+   restored foundations (boundary arrangement → DCEL;
+   StreetGraph; parcel registry).
+2. **STATUS: FABLE-UNVALIDATED NON-LEDGER WORK — exactly the
+   class this sitting exists to review.** It entered through
+   the packet system (the only lawful dispatch surface), which
+   is to its credit; but no ODQ row records it, the 08-20
+   handoff's "no dimensional scene is built / four map
+   candidates exist" is now STALE, and the §287.9
+   no-fifth-authority law must be checked against it: is this
+   fabric/ a rival GENERATOR or the structural foundation the
+   repaired sandbox fabric is meant to port into? **CX-1
+   DISPATCHED** (Opus, read-only): packet-discipline receipts,
+   §287-§290 conformance (origin provenance, integer ABI,
+   solid legality, no same-pass feedback, PLANAR_V1,
+   EUROPEAN_FANTASY_BASE), the fifth-authority question,
+   test substance vs the pin-vacuity families, census/ratchet
+   lawfulness (a ceiling raise is owner-gated), gate reality,
+   and collision with the sandbox port plan + packet path
+   reservations. The chair rules on its memo.
+3. **INTERIM CONTAINMENT (chair):** MF-D0 (sandbox) and the
+   codex slice share NO files today (different trees), so the
+   running D0 lane is unaffected; but NO further packet may
+   build on eedd4e9c and the slice is not exposed as a program
+   tip until the CX-1 review is ruled. The handoff refresh at
+   sitting close carries the discovery either way.
