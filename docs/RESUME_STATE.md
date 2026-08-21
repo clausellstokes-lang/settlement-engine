@@ -74,6 +74,17 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐⭐ §313-§314 (~12:45 ET): WF-1B COLLECTED, the inherited red was the CHAIR'S
+# OWN §308 preamble (quoted matcher convicts — cured in person f9bd533f;
+# paraphrase-never-transcribe); ratchet re-run GREEN (11 known/28,646 at ceiling,
+# TRUE_EXIT=0); ⭐ BUILD BRANCH EXPOSED: CAS 9d851fae → f9bd533f (WF-1B live) →
+# f20b9faa (MF-PREAMBLE landed chair-signed, STAMP GRANTED §312.2b, SHA-256
+# 7a39a28e…04de8). ⭐ RS-5 BRING-UP RUNNING (background: rs5/ archive of the
+# exposed tip + npm ci + rs5-gen-config + full grid → rs5-run.log, receipts
+# rs5-receipts/; path-swapped resume-gen + evaluator staged). ⭐ TE-T2A DISPATCHED
+# (first D3a members: Track-0 guard green-at-zero + MF-T2A; staged promotion ONE
+# member at a time; receipt laneTET2A-receipt.md; chair CASes on green).
+# Stale index.lock (Aug 19, 0-byte) REMOVED after holder check.
 # ⭐ §311.7-.9 (~12:15 ET): the owner delegated and the chair refined the FULL
 # undercity doctrine — sewer ladder (six causes, per-quarter), the component law
 # (license/anchor/driver/temperament, four closed temperaments), and the
