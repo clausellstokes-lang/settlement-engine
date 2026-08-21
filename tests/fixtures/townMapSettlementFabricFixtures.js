@@ -1,6 +1,7 @@
 import {
   compileExplicitBuildingMass,
   compileOrthogonalCrossCadastralArrangement,
+  compileOrthogonalCrossFirstSliceFabricRoot,
   compileOrthogonalCrossParcelRegistry,
   compileOrthogonalCrossPlanarDcel,
   compileOrthogonalCrossStreetGeometry,
@@ -24,6 +25,7 @@ export const STREET_GRAPH_ID = 'street-graph:settlement-cross:001';
 export const BOUNDARY_ARRANGEMENT_ID = 'cadastral-arrangement:settlement-cross:001';
 export const PLANAR_DCEL_ID = 'planar-dcel:settlement-cross:001';
 export const PARCEL_REGISTRY_ID = 'parcel-registry:settlement-cross:001';
+export const FIRST_SLICE_FABRIC_ROOT_ID = 'first-slice-fabric-root:settlement-cross:001';
 
 export const SETTLEMENT_CELLS = Object.freeze([
   { cell: 'LOW_X_LOW_Z', blockId: 'block:settlement:low-x-low-z', edgeId: 'edge:settlement:low-x-low-z' },
@@ -114,6 +116,23 @@ export function makeSettlementParcelRegistry(planOverrides = {}) {
     planarDcel: fixture.dcel,
   });
   return { ...fixture, parcelRegistry };
+}
+
+/** @param {Record<string,unknown>} [planOverrides] */
+export function makeSettlementFabricRoot(planOverrides = {}) {
+  const fixture = makeSettlementParcelRegistry(planOverrides);
+  const graph = compileOrthogonalCrossStreetGraph({ artifactId: STREET_GRAPH_ID, streetGeometry: fixture.geometry });
+  const fabricRoot = compileOrthogonalCrossFirstSliceFabricRoot({
+    artifactId: FIRST_SLICE_FABRIC_ROOT_ID,
+    foundation: fixture.foundation,
+    frontageSubdivision: fixture.frontageSubdivision,
+    streetGeometry: fixture.geometry,
+    streetGraph: graph,
+    boundaryArrangement: fixture.arrangement,
+    planarDcel: fixture.dcel,
+    parcelRegistry: fixture.parcelRegistry,
+  });
+  return { ...fixture, graph, fabricRoot };
 }
 
 /** @param {Record<string,unknown>} [planOverrides] */

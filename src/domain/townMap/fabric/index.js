@@ -38,6 +38,10 @@ export {
   compileOrthogonalCrossParcelRegistry,
 } from './parcelRegistry.js';
 export {
+  FIRST_SLICE_FABRIC_ROOT_LAW_VERSION, FIRST_SLICE_FABRIC_ROOT_SCHEMA_VERSION,
+  compileOrthogonalCrossFirstSliceFabricRoot,
+} from './fabricRoot.js';
+export {
   CANONICAL_ORIGIN_KINDS,
   EXPLICIT_BUILDING_GEOMETRY_LAWS,
   EXPLICIT_BUILDING_MASS_LAW_VERSION,

@@ -4824,7 +4824,11 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // 2,477/364/2,113/20,564/5,760 → 2,479/364/2,115/20,570/5,762. The domain
     // matrix contributes five titles and one suite; its deterministic replay companion
     // contributes one title and one suite. Both files are credited; no parser door moved.
-    files: 2479, parked: 364, credited: 2115, titles: 20570, suiteTitles: 5762,
+    // ── RE-RECORDED 2026-08-20 BY MF-T1F, THE FIRST-SLICE FABRIC ROOT ──
+    // 2,479/364/2,115/20,570/5,762 → 2,481/364/2,117/20,576/5,764. The domain
+    // matrix contributes five titles and one suite; its determinism companion contributes
+    // one title and one suite. Both files are credited; no parser door moved.
+    files: 2481, parked: 364, credited: 2117, titles: 20576, suiteTitles: 5764,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
