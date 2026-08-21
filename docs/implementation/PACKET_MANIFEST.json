@@ -16926,6 +16926,206 @@
           "validate:packets"
         ]
       ]
+    },
+    {
+      "id": "WF-1B",
+      "status": "DRAFT",
+      "packetPath": "docs/implementation/packets/fp/WF-1B.md",
+      "verifiedBase": "9d851faeb7cac73217d508f621d1d9ee29f2c145",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/religionState.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/religiousContest.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/domain/patronFall.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/.prose-numerics-baseline.json"
+        },
+        {
+          "_note": "M6 is VERIFY-ONLY unless red. Its six attemptEntry and three advanceShares call sites pass no tick and no opts, so staying green UNEDITED is the executed proof that the threading is additive. The path is reserved so a red may be cured in-packet rather than out of scope.",
+          "action": "TEST",
+          "path": "tests/domain/religionState.test.js"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/packets/fp/WF-1B.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/worldPulse/religionState.js",
+          "symbol": "export function attemptEntry"
+        },
+        {
+          "path": "src/domain/worldPulse/religionState.js",
+          "symbol": "export function resolvePatronContest"
+        },
+        {
+          "path": "src/domain/worldPulse/religionState.js",
+          "symbol": "export function advanceShares"
+        },
+        {
+          "path": "src/domain/worldPulse/religionState.js",
+          "symbol": "export function selectPatron"
+        },
+        {
+          "path": "src/domain/worldPulse/religionState.js",
+          "symbol": "export function applyUnaffiliatedSink"
+        },
+        {
+          "path": "src/domain/worldPulse/religionState.js",
+          "symbol": "export function ensureReligionState"
+        },
+        {
+          "path": "src/domain/worldPulse/religionState.js",
+          "symbol": "export function renormShares"
+        },
+        {
+          "path": "src/domain/worldPulse/religionState.js",
+          "symbol": "export const RELIGION_TUNING"
+        },
+        {
+          "path": "src/domain/worldPulse/religiousContest.js",
+          "symbol": "export function advanceReligionStates"
+        },
+        {
+          "_note": "THE COMPUTED NICHE. A1 is vacuous unless the fixture builds the incumbent niche THROUGH this function — a hand-authored niche string routes the same-niche push-out to open_slot and the pin passes having asserted nothing.",
+          "path": "src/domain/worldPulse/cultImpositionApply.js",
+          "symbol": "export function nicheOf"
+        },
+        {
+          "_note": "THE OUTER GATE that makes a deity-free world byte-identical even LIT. advanceReligionStates returns at its head on deity PRESENCE, not on config.",
+          "path": "src/domain/worldPulse/subsystemActivation.js",
+          "symbol": "export function isSubsystemActive"
+        },
+        {
+          "_note": "THE FLAG THIS MEMBER RIDES, minted by WF-1a and pinned as the quoted key token rather than as any line of ENGINE_GATED_VIRTUAL_RULE_KEYS, whose membership later waves keep changing. This member lights it nowhere and adds no registry row; it adds a SECOND by-name read.",
+          "path": "src/domain/worldPulse/simulationRules.js",
+          "symbol": "'faithUnseatingEnabled'"
+        },
+        {
+          "_note": "DOES NOT MOVE (§6). virtual stays 24, union 81 and union-governed 56; the three SEQUENCED literals in coveringArrayCoverage.test.js are untouched.",
+          "path": "src/domain/worldPulse/simulationRules.js",
+          "symbol": "export const ENGINE_GATED_VIRTUAL_RULE_KEYS"
+        },
+        {
+          "path": "src/domain/certification/subsystemRowsVirtual.js",
+          "symbol": "export const VIRTUAL_SUBSYSTEM_ROWS"
+        },
+        {
+          "path": "src/domain/worldPulse/patronFall.js",
+          "symbol": "export function recordPatronFall"
+        },
+        {
+          "path": "src/domain/worldPulse/patronFall.js",
+          "symbol": "export function classifyPatronFall"
+        },
+        {
+          "path": "src/domain/worldPulse/patronFall.js",
+          "symbol": "export const PATRON_FALL_CAUSES"
+        },
+        {
+          "_note": "PRESERVED, NOT CONSUMED. Preamble §P2.11 forbids giving this reader a second caller ahead of WF-1d, so the symbol must survive and this member must not call it.",
+          "path": "src/domain/worldPulse/patronFall.js",
+          "symbol": "export function fallCauseFor"
+        },
+        {
+          "_note": "THE LEDGER KEY ORDER. religionStates is member 2 of this APPEND-ONLY array whose order IS the serialized key order; A6 pins it unchanged across the landing, so the member adds ZERO new top-level keys.",
+          "path": "src/domain/worldPulse/worldState.js",
+          "symbol": "export const CONDITIONAL_LEDGER_KEYS"
+        },
+        {
+          "_note": "THE VEIL. religionStates is a member of this deny list and is NOT in WORLD_SNAPSHOT_PUBLIC_LEDGER_ALLOWLIST, so the new sub-key sits inside a ledger the deny census already covers and no new deny row is owed.",
+          "path": "src/domain/display/worldSnapshotPublic.js",
+          "symbol": "export const WORLD_SNAPSHOT_HARD_DENY"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "Site :262, the same-niche push-out, stamped. Lit, a same-niche claim clearing PUSH_MARGIN evicts the incumbent and records suppressedAtTick at the fold's tick. The incumbent's niche is built THROUGH nicheOf: a hand-authored niche string routes the entry to open_slot, evicts nothing, and the pin passes vacuously."
+        },
+        {
+          "id": "A2",
+          "case": "Absent vs false vs lit, at the byte level, on a deity-BEARING world. Absent and false serialize religionStates identically over the landed 16-tick driver; the LITERAL faithUnseatingEnabled true drive moves at least one fenced byte. Dark, the serialized state does not contain the field, anchored against the positive that it is populated and spellable."
+        },
+        {
+          "id": "A3",
+          "case": "Site :485, the siege, and the counterforce that does NOT stamp. The two pre-resolution ticks return owned true while suppressing nothing and stamping nothing; the resolving tick, at PATRON_FLIP_TICKS, stamps every suppressed same-niche rival."
+        },
+        {
+          "id": "A4",
+          "case": "The stamp is cleared by RESURGENCE and by nothing else. A creed suppressed at tick T then re-entered through attemptEntry carries no suppressedAtTick, because seed() replaces the record wholesale. Asserted at the byte level in both directions."
+        },
+        {
+          "id": "A5",
+          "case": "The narrative prune key, both forks, non-vacuously. Seeded with FOUR suppressed entries whose stamps and refs disagree in order, lit prunes the longest-dormant and dark prunes the codepoint-last. An unstamped entry beside stamped ones falls back to codepoint."
+        },
+        {
+          "id": "A6",
+          "case": "Lifecycle round trip through ensureWorldState, both arms. Field-absent and field-present worlds round-trip byte-identically; CONDITIONAL_LEDGER_KEYS is unchanged across the landing; the schema-2 religionStates migration preserves the stamp through its rest spread; religionStates is in WORLD_SNAPSHOT_HARD_DENY and not in the public allowlist; and sub-key order inside deities[ref] appends suppressedAtTick last."
+        },
+        {
+          "id": "A7",
+          "case": "The seam the WF-8 beat member lands on. pruneSuppressed and advanceShares return exactly the refs deleted, and return an empty array — never null, never undefined — when nothing was pruned. The fire bar is the existing KEEP read in its own scope; a literal 4 appears nowhere in this member."
+        },
+        {
+          "id": "A8",
+          "case": "The write-site census, both directions. The comment-stripped source scan of religionState.js finds exactly three suppression writes and exactly three suppressDeity call sites, and the two counts are asserted EQUAL. A fourth raw write reds; a suppressDeity call that is not a suppression write reds."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/patronFall.test.js",
+          "tests/domain/religionState.test.js",
+          "tests/domain/patronContest.test.js",
+          "tests/domain/religionTier2.test.js",
+          "tests/domain/religiousContest.test.js",
+          "tests/domain/advanceReligionStates.test.js",
+          "tests/domain/religionDormancy.byteIdentity.test.js",
+          "tests/domain/pietyDynamics.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/couplingInclusion.walker.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/proseNumerics.test.js",
+          "tests/docs/enforcement-claims.test.js",
+          "tests/property/worldpulseDeityGolden.test.js"
+        ],
+        [
+          "node",
+          "scripts/audit/religion-balance.mjs"
+        ],
+        [
+          "npm",
+          "run",
+          "validate:packets"
+        ],
+        [
+          "npm",
+          "run",
+          "check:tail"
+        ]
+      ]
     }
   ]
 }
