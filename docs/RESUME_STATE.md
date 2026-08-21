@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ~18:52 ET: NOTICES agent's transcript GONE (resume refused) — OFL completion
+# re-briefed to a FRESH lane TE-OFL (self-contained: tenotices-tree, checkout
+# 190895a4, SHA-verify the elected body, complete OFL.txt + both notices rows
+# per the existing two-directional pin, one commit, full terminal, report tip).
 # ⭐⭐ ~18:45 ET: WF-1D LANDED — CAS 159ec24e → 190895a4 (§329); the day's
 # FIFTH landing, last full gate GREEN. Zero-headroom table ratified four-file.
 # NOTICES agent messaged: OFL completion on 190895a4. Then T2C dispatch +
