@@ -14063,3 +14063,32 @@ recommended. Implementation, per item:
 - **§328.6 Dispatch sequencing:** TE-T2C dispatches AFTER the OFL completion lands
   (the next wave's first executor, on the final tip — no rebase tax), carrying the
   same 3-minute terminal heads-up protocol so it coexists with the resumed RS-5.
+
+## §329 — COLLECTION + CAS: WF-1D LANDED — THE CASCADE'S LAST FULL GATE IS GREEN (2026-08-21 ~18:45)
+
+- **TE-WF1D collected.** Tip 190895a4 — six commits fast-forward on 159ec24e (the §324.3
+  preamble batch with its SHA re-stamp; DRAFT; READY; implementation; LANDED; the census
+  re-record), terminal green bare with the exit captured in-shell (22:27:30Z→22:42:23Z);
+  the tip and the branch were re-read unchanged across the whole run, so the gate bound
+  exactly the landed bytes. CAS EXECUTED: claude/composite-r4 159ec24e → 190895a4 (read
+  back). The estate's first FAITH→WAR coupling row is live; warTermination held 818/818
+  effective and 1045/1045 physical on both instruments both sides; pulseKernel and
+  applyWorldPulse untouched at 1581/941; census +6 titles extracted by
+  placeholder-and-convict at all three rebase slots, never by addition.
+- **§329.1 The four-file zero-headroom table is RATIFIED as landed** (peaceTerms 797 +
+  warTermination 818 beyond the two ordered files): the lane's widening discharges
+  WF-1C's RAISED-A completely, and the family law now names every file the WF wave
+  edits at zero headroom. §324.3's two-file order is amended to the landed four-row
+  form.
+- **§329.2 Lane findings recorded:** the surviving chartered mutant (A4's honesty came
+  from an absent anchor, not the guard; cured by measuring what the guard protects —
+  a grievance war would otherwise wear a patron-fall token) · the draft's M3 home was
+  wrong and the validator's own gap-checker independently agreed (leaf + head + pin) ·
+  the compile's census arithmetic would have double-counted WF-1C's titles (the
+  step-8 STOP caught it). RAISED-4's two falsified sentences were already batched onto
+  WF-1E at §326.4. RAISED-3 (the FaithSection member's name) rides the WF-1E compile.
+- **§329.3 The closing sequence proceeds:** the OFL completion commit (NOTICES agent,
+  on 190895a4, with the chair-fetched elected body) → its CAS → TE-T2C dispatches on
+  that final tip (§328.6, heads-up protocol) → RS-5 resumes for its last 90 cells →
+  the cascade's closing collection → the §290 mandatory review stop, where the owner
+  may fire the ultra review.
