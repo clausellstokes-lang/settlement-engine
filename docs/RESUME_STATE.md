@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~15:18 ET: TE-NOTICES COMPLETE — green at base, but COMMITTED NOTHING;
+# files sit in tenotices-tree working tree. Lands LAST via agent message at slot
+# (§323.1) with the OFL.txt rider (§323.2). dompurify+rgbcolor+png-js DOCKETED
+# for owner/counsel (§323.3). Only WF-1C still runs; RS-5 stays paused until
+# its terminal clears.
 # ⭐ ~15:12 ET: TE-T2B TERMINAL @ 28565244 — CAS HELD behind WF-1C (§322.1);
 # on WF-1C's CAS message the T2B agent to rebase+re-gate (§322.2); MF-PREAMBLE
 # amendment deferred to ride T2B's landing with re-stamps (§322.3); estate

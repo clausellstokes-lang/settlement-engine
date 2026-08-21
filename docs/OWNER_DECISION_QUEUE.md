@@ -13862,3 +13862,38 @@ recommended. Implementation, per item:
   findings (the reporter trap; the guard-the-guard import-key cure) in memory.
 - **§322.5 MF-T2C:** its shared change paths release only when T2B's commits LAND on the
   branch — promotion queues behind §322.2, not before.
+
+## §323 — COLLECTION: TE-NOTICES COMPLETE, GREEN, UNCOMMITTED BY DESIGN; SLOT UNCHANGED (LAST) (2026-08-21 ~15:18)
+
+- **Receipt:** laneTENOTICES-receipt.md (session scratchpad). The §295.5c/§317.1
+  THIRD-PARTY-NOTICES surface is BUILT and DARK: THIRD-PARTY-NOTICES.md at repo root
+  (map fork + 20 libraries + TinyMCE + fonts + the 107-package production tree),
+  public/third-party-notices.html (status.html idiom, noindex, no link lit — proven
+  shipping in dist at 41,404 bytes), a 21-pin agreement test, and the estate file-census
+  re-record with §317.1 named as authorizing decision. The two chartered elections are
+  recorded (MIT for jszip 3.6.0; MIT for jquery-ui-touch-punch 0.2.3); TinyMCE is
+  reported-as-shipped under a settles-nothing sentence. Terminal green at base 2cdb87fa
+  (ratchet at ceiling 11/28,651; strict dist 52 files/430 tests; boot 524/524). ⚠ The
+  lane STAGED AND COMMITTED NOTHING — the files sit as working-tree changes in
+  tenotices-tree at the dispatch base. The landing commit is owed at its CAS slot.
+- **§323.1 Slot unchanged:** NOTICES lands LAST (after WF-1C's CAS and T2B's rebased
+  landing). At slot time: message the TE-NOTICES agent (context intact) to check out the
+  then-current tip in its worktree (the new files are untracked and carry; the census
+  edit re-applies), verify the census figures against the moved tip, commit, re-run the
+  terminal, and report the tip for CAS.
+- **§323.2 JUDGMENT (chair): OFL.txt rides the NOTICES landing.** Eight Lora + Nunito
+  faces are served from the app origin with no licence file beside them; the OFL's own
+  terms require the licence text to accompany the fonts. Shipping public/fonts/OFL.txt +
+  a notices row is compliance repair of an already-made choice, not a licence election —
+  ordered as a rider in the §323.1 message. Veto removes the rider.
+- **§323.3 OWNER DOCKET EXTENSION (§295 family):** dompurify 3.4.12 (MPL-2.0 OR
+  Apache-2.0; a direct dependency that certainly ships) and rgbcolor 1.0.1 (MIT OR its
+  own alternative) are dual-licensed with NO election recorded. Electing is §254.5.5
+  owner posture and the charter named exactly two — these two are DOCKETED for the
+  owner/counsel sitting alongside the TinyMCE question. Also noted for counsel:
+  png-js 2.0.0 declares no licence in its manifest while shipping MIT text (a
+  manifest-only scanner reads it as unlicensed).
+- **§323.4** The lane's other receipts: the doc-agreement pin vacuity class (a
+  whole-document name check passed after the row was deleted — cured to section-scoped
+  ordered name@version lists, twelve negative controls now red) is banked in memory; the
+  simulationRulesDialog red was proven contention flake three ways and never banked.
