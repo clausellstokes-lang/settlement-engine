@@ -15,7 +15,7 @@
 > SHA-256**. An edit here re-stamps every citing packet, so drift between the family's members and
 > their shared law is structural rather than merely discouraged.
 
-- **Status:** `DRAFT` — awaiting chair signature. **No packet may cite it by SHA-256 until it lands.**
+- **Status:** **LANDED, chair-signed**, at `f20b9faa` (ODQ §314; STAMP GRANTED at ODQ §312.2b). Cited by the SHA-256 of this file as landed; a later edit re-hashes it and the editing act owns every citing packet's re-stamp in the same landing (ODQ §314.2).
 - **Volume:** `map-corpus/docs/GENERATION-SPEC.md` — THE GENERATION SPECIFICATION, the map
   program's spine and build sheet (§246.3), as corrected by ⟦FOLD §287⟧ **§10**, which *"wins on a
   direct conflict with §§6–§9"*.

@@ -28,7 +28,7 @@
   (SINGLE MEMBER; the `-I` suffix the compile carried presumed a sibling that §309 re-filed).
 - **Verified base:** `claude/composite-r4` at `9d851faeb7cac73217d508f621d1d9ee29f2c145`
 - **Preamble:** `docs/implementation/preambles/WF-PREAMBLE.md`, cited **BY SHA-256
-  `cd067ba1ce41232a99dee9a7247f4c82d47fbe2b4fd9bb8599784d4a33136211`** (re-executed at this base:
+  `ca02c8a165ddbc18ab3f254bebce8cca5dd945e71e074b526227164e9b0cabfd` (re-stamped at ODQ §315 — the §313 paraphrase cure re-hashed the preamble; original citation `cd067ba1…3211`** (re-executed at this base:
   `git show 9d851fae:docs/implementation/preambles/WF-PREAMBLE.md | shasum -a 256`). Every
   refutation, disposition, register, STOP and census law in that file binds this packet and is not
   restated here.
