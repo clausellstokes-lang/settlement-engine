@@ -74,6 +74,16 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐⭐ SITTING COMPLETE (~07:15 ET): §297+§298 rule the last 14 rows — ALL 30
+# RULED; queue file EMPTY; laws L1-L6 banked; HANDOFF_CURRENT refreshed (new
+# 08-21 override block is authoritative). §295 IPV-1 exposure on the owner
+# docket; §296 codex slice under CX-1 review (containment: nothing builds on
+# eedd4e9c until ruled). LANES IN FLIGHT: RS-4 final segment (36 cells; on exit
+# run rs4-evaluate.mjs ONCE) · MF-D0 offset kernel · CX-1 codex review · CF-1
+# corrections fold (spec+atlas+hf389 rename; receipt laneCF1-receipt.md).
+# NEXT: collect CF-1 (verify corpus_integrity closed 313/313 after the rename),
+# CX-1 (rule the slice), MF-D0 (rule + then D1 foundations brief per the
+# handoff's NEXT SAFE ORDER item 5). Wakeup loop active per §291.2c.
 # ⭐⭐ PROGRESS 2 (~06:45 ET): ALL FOUR memos landed. §294 COMMITTED — §267-§274
 # RULED (build gate discharged), law L3 (receipted-instrument) banked. RS-4's final
 # 36-cell w0-soak-c segment RUNNING (chair-resumed; run rs4-evaluate.mjs ONCE after

@@ -11835,3 +11835,397 @@ ruled with "thin" stated, never defaulted to RATIFIED.
    build on eedd4e9c and the slice is not exposed as a program
    tip until the CX-1 review is ruled. The handoff refresh at
    sitting close carries the discovery either way.
+
+## §297 · THE SITTING RULES THE MAP-ARCHITECTURE CLUSTER —
+## SEVEN ROWS; TWO CLAIMS REVERSED, TWO LAWS BANKED; THE CHAIR'S
+## OWN EYES ON BOTH QUEUED ZOOMS (2026-08-21; chair: FABLE;
+## evidence retro-E1-memo.md, 67 numbered doubts, re-derived)
+
+1. **§238 RATIFIED with precision amendments.** The predicate-
+   class contract (one artifact, one accessor, one proven
+   predicate; counterfactual independence) stands on the b7
+   cross-tree control and the located four predicate copies.
+   Corrections: §238.1's "byte-identical both ways" is
+   restated — the identity is census-claimLine ≡
+   reconstruction-from-drawn under the declared 1.132 offset
+   (byte-identity only on shift-0 rings); the finding stands.
+   **The chair re-viewed the b8b BEFORE/AFTER crops in person
+   (§292.5): ink-over-body overlaps in BEFORE are clear ground
+   in AFTER on an identical circuit path, and the gatehouse
+   reconnection is unambiguous — the Opus zoom verdict is
+   RATIFIED at ink level.** Scope corrected: a zoom verifies
+   INK; the 0/0/0-over-23,116 band claim carries on the
+   measured census (the receipt itself said so); "the
+   intervallum is open" means unbuilt clear ground — no
+   wall-side street exists yet; the town was the corpus's
+   least-affected leaf (2 of 190 convictions) and the heavy
+   leaves' zooms ride MF-D0's re-render obligation. The spent
+   thorp control and the two-wave sizing optimism (mandate
+   items 5-7 still unbuilt → D1's spatial-index work) are
+   recorded.
+2. **§239 AMENDED.** (a) The genesis objection is CONFIRMED
+   (no construction in the tree lets a circuit precede
+   fabric); the temporal-primacy amendment is ratified AS THE
+   FRAMING THAT MOTIVATED THE DECISIVE EXPERIMENT, not as an
+   implemented mechanism — the shipped derivation uses the
+   year only as a presence gate, the cycles were cut by the
+   version/epoch INDEX, and the §239 year-test returned
+   NON-DISCRIMINATING. (b) Block termination: RATIFIED for
+   wall/street (post-hoc trimming's fragility is measured);
+   HELD for water/cliff until the water-edge definition lands
+   (G-34's bankside-vs-transit machinery) — the §239/§255
+   coupling is now recorded. (c) The wall-side street's
+   geometric-consequence claim is CONDITIONAL on §239.1
+   landing FIRST — the slotting is corrected from peers to an
+   ordered pair; the lean-to exception's "measured space
+   pressure" input has no derivation home yet and is named as
+   work. (d) Holding for wave nine: RATIFIED.
+3. **§240 — THE LAW STANDS; TWO OF ITS CLAIMS ARE REVERSED.**
+   (a) The owner's epoch law is design truth; the claim that
+   the BUILD closes the genesis exception is AMENDED: closed
+   in the acyclic sense, but epochs today are a RETROSPECTIVE
+   PARTITION of finished fabric (a shrinkAbout homothety of
+   today's outline about ONE shared centroid) — the generative
+   sequence is not implemented, which is why containment
+   needed four failed attempts and a six-round sweep. The
+   generative half is the S-manifest/fresh-W3 program's work;
+   W2's typed runs broke concentric READING, and the
+   migrating-centre capability (hf385/CX-13) must be verified
+   at W3 — ORDERED. (b) ⛔ **THE TIER-CEILING TABLE IS
+   REVERSED as binding numbers**: the build diverges (village
+   1 not 0; metropolis capped 2 then drawn 3 in W2;
+   thorp/hamlet silently 1), the corpus's ONLY two
+   three-circuit plates (hf347, hf385) are both TOWNS, PLAN's
+   "corroboration" was the Q-2 fabric/circuit conflation,
+   village-0 is contradicted by two sub-town enclosures, and
+   the ~10% calibration is n=3 with a double count. §240.2's
+   FIRST sentence — ring count DERIVED from the settlement's
+   own facts — IS the law; the per-tier caps are RE-DERIVED
+   against the corpus (hf347/hf385 included, the walled-thorp
+   question decided) in the epoch-calibration work.
+   OUTGROWN_SHARE=0.86 is UNSOAKED and rides the tuning
+   signature — restated at ledger level. (c) ⛔ **THE
+   FREE-DIVIDENDS CLAIM IS REVERSED**: the vintage triad,
+   density gradient and §161g demotion are NOT delivered —
+   the epoch token appears in zero content modules; §266.2a's
+   magnitude is corrected (for the TRIAD it is sixteen of
+   sixteen leaves, not six); W2's G-42 delivered epoch COUNTS
+   only. The dividends are REAL WORK, slotted explicitly
+   (triad = W4-class; demotion = W3's first item). (d) The
+   inertia-seam closure: RATIFIED with its declared cost; the
+   pin's coverage re-runs as the epoch surface grows.
+4. **§241 RATIFIED with amendments.** (a) The version-axis
+   supersession is the best-evidenced judgment in the sitting
+   (executed by §252: eight cycles → 0, solver deleted, digest
+   byte-identical, "nine const declarations"); "splitting in
+   SPACE cannot dissolve it" is NOT banked as law (one
+   refinement of one graph). (b) J-ARCH-6 RATIFIED on the
+   measured aliasing; its coverage is ~1/5 of the measured
+   raw-handle exposure — **the publication-guard sweep over
+   water (58 reads), parcels (46) and streets (19) is ORDERED
+   into the D1 foundations**; "supersedes the scan" is
+   restated as "narrowed it to a complementary arm" (the
+   walker survives). (c) AMENDED: one of the five dropped
+   salts is ⛔ ACTIVE (the coast fallback) — unexercised by
+   the corpus, not latent; the ledger compressed that away.
+   The deferral stands as reasoned, and its measured cost
+   (the +47 mis-attributable meander move; one full
+   characterization lane) qualifies the class rule: a
+   key-spelling cure is ALWAYS a same-seed shift, so
+   defer-then-cure buys freeze-cleanliness at the price of
+   attribution — future freezes weigh that explicitly.
+   substrate.js's second salt spelling (4 sites) joins the
+   D1/W3 brief. (d) RATIFIED. Plus: §241's 444→251-vs-258
+   internal discrepancy (and the 72% computed against the
+   other figure) — a one-shot reconciliation is ORDERED into
+   MF-D0's baseline re-census.
+5. **§252 RATIFIED with the census restated.** (a) The
+   third-circuit cap-hold: RATIFIED on ground STRONGER than
+   stated — the corpus's own cure-plate pair (hf347's
+   concentric defect cured by hf385) plus the architectural
+   fact that concentricity was already shipping via the
+   shared-centroid homothety; W2 then discharged the cap WITH
+   the run-chain at negative primitive cost, exactly as ruled.
+   The stale 78-vs-83 code comment is noted. (b)
+   Characterize-before-landing: RATIFIED — the
+   highest-yield process ruling in the record (it refuted the
+   wave's own attribution and found the module-boundary
+   defect); zoneOffBand's second wrong-way move is noted as
+   re-measured. (c) **The chair re-viewed the arch2 crop in
+   person: the verdict is RATIFIED as a LEGIBILITY verdict
+   with its scope stated** — frontage rows, continuous
+   streets and the precinct are corroborated; "no violations
+   visible" coexists with 13 measured water violations
+   (sub-pixel at this scale); the mechanical-bars note was
+   UNDERSTATED (a majority of blocks in frame — the mush
+   surface G-37/G-39 exist for); the countryside is weakest
+   and is now governed by the §287.17 rural boundary. (d) The
+   containment-resolution law: RATIFIED. ⛔ The "6.8% → 0"
+   headline is AMENDED under new **LAW L4 (the
+   redefined-census law): a census that changes its
+   denominator, predicate, or membership rule is a NEW census
+   — its zero may never be quoted as the old census's zero;
+   publish both or the comparison is void.** The §252 zero
+   stacked three relaxations (suburb-excluded denominator;
+   held-by-own-OR-LATER-ring with a measured
+   counter-instance; centroid point-test — the program's own
+   point-vs-area class) and the §240.1 pin's independence arm
+   is VACUOUS on half-rings (6 of 10 walled leaves). ORDERED
+   into MF-D0's baseline: a strict-form recount (original
+   denominator class, facet-resolution area predicate,
+   held-by-OWN-ring reported separately), the pin's half-ring
+   arm re-authored non-vacuously, and boundEpoch's
+   docstring corrected (the name-describes-belief class).
+6. **§255 AMENDED — the arithmetic is corrected in place.**
+   (a) The verdict "not a regression" is RATIFIED as
+   NOT-DISPROVED; the ledger's decomposition is CORRECTED:
+   the valid orderings are (+64, −13) and (+4, +47) with
+   interaction −17 — the row's (+47, −13) pair sums to +34
+   and was arithmetically impossible; the sd sentence
+   conflated three quantities (the corpus draws are −0.45 sd
+   → +0.83 sd); "changed NOTHING" is restated as "consistent
+   with noise at n=6 — a real shift up to ~+38 was
+   undetectable." (b) The attribution-requires-isolation law:
+   RATIFIED on the year-018 zero-circuit control — and
+   §255.2's own "−7 from the wall work" sentence committed
+   the banned narrative attribution (cf1 is everything-else;
+   the wall's isolated contribution on the town family is 0);
+   corrected here, and the law is the stronger for having
+   convicted its own row. (c) Restraint: RATIFIED; the
+   unpriced cost is recorded — waterViolations-165 is NOT a
+   grading surface until G-34 lands. (d) The exemplar caveat:
+   RATIFIED AND WIDENED — the 7/2 seed collision is now
+   CONFIRMED at the fixture; the caveat reaches §241.3's 6.8%
+   (64% from one seed counted six times) and §252.1's zero;
+   magnitudes are discounted, convictions kept; the 16-leaf
+   fixture corpus and the 313-plate corpus are disambiguated
+   wherever "corpus" appears. G-34's cause enumeration
+   (72+20+35 ≠ 92) is corrected at the spec fold; MF-D0/W3
+   re-derives the decomposition when G-34 is built.
+7. **§257 RATIFIED with amendments.** (a) Q-2 (fabric epochs):
+   RATIFIED — genuineness now CONFIRMED (the settling grep
+   was run: no fabric-epoch derivation exists anywhere in
+   §150–§253); the magnitude is corrected (the triad blocks
+   sixteen of sixteen); the derived-not-a-knob condition is
+   NOT yet satisfied — the fabric-epoch derivation home is
+   named W4-class work, and §240.2's stranded ceilings get
+   the re-derivation ordered at §297.3b. (b) Q-1: RATIFIED;
+   the "(counts hedges as buildings)" mechanism IS sourced —
+   §244.5's hf90 (12 roofs, reads 99.6); a guard that REDS if
+   a grading verdict cites a withdrawn rung is ordered into
+   W0's instrument work. (c) Q-3: RATIFIED with the tolerance
+   DECIDED: the derived-vs-drawn census lands as a RATCHET —
+   the measured gap may only shrink — never a pass/fail
+   tolerance (which would either red on a known defect or be
+   built vacuous); C-2 and Q-3 land together. (d) The
+   ruling-after-fold class: RATIFIED (recurrent, twice
+   measured). The atlas fix is AMENDED — the cure was applied
+   one level too high; the operative rows still print the
+   superseded number, including the row the atlas calls "what
+   a renderer actually reads." The correction rides the CF-1
+   corrections fold with the §298.4 estimator ruling.
+   §257.2's "four conflicts ruled by the lane" is corrected:
+   THREE ruled, one deliberately escalated (C-3 → Q-1), which
+   was the lane's best judgment call and is restored to the
+   record. ⭐ **LAW L5 BANKED (the zoom-scope law): a zoom
+   verifies INK; a band, census, or legality claim needs its
+   instrument — a visual verdict is a legibility verdict
+   unless the defect is ink-scale.**
+
+## §298 · THE SITTING RULES THE CORPUS/MEASUREMENT CLUSTER —
+## SEVEN ROWS; THE QUEUE IS EMPTY; LAW L6; THE CORRECTIONS FOLD
+## DISPATCHED (2026-08-21; chair: FABLE; evidence
+## retro-E2-memo.md, re-derived; measurement quality high, the
+## failures concentrated in receipt→ledger transit)
+
+1. **§242 RULED.** (a) AMENDED: the ratified star self-report
+   was FALSE — the true rate is 55 of 78 (70.5%), 25× the
+   predecessor on the identical instrument (independently
+   re-parsed); §244 caught it one row later and the demotion
+   (§298.2d) is the cure; several of the 55 carry
+   disqualifying flags in their own titles, recorded. (b) The
+   reasoning (provenance was not the objection) is RATIFIED;
+   the ruling is MOOT under §287.10 — eligibility rulings
+   over a fully-viewed roster have no forward force. (c) The
+   scrub disposition (geometry yes, naming never) is
+   RATIFIED; the ledger's "8-ITEM" wording is corrected to
+   **34 PLATES in eight categories** (§287.11's corrected
+   list governs). (d) VOID under §287.10 — no size makes a
+   viewed set a holdout; the era-unrepresentativeness lesson
+   and the zero trade / zero institution / zero series
+   coverage carry forward as DESIGN REQUIREMENTS for the new
+   sealed external set.
+2. **§244 RATIFIED — the program's most consequential
+   aesthetic ruling survives its audit — with one symmetric
+   extension.** (a) The band-pinning amendment reproduces
+   EXACTLY (cohort n=71; the sign-flip real on all three
+   axes; the median re-derivation ~25% low; the
+   within-subject de-confounding holds). ⭐ EXTENSION ADOPTED:
+   an axis that is a COMPONENT of the selection index also
+   pins to HF-1 alone — the tone-IQR raise (18→22) was
+   selection on itself and RE-PINS to 17.9≈18; grain (2.05)
+   and wash (3.29) stand on independent evidence. (b) The
+   T-01 strike: RATIFIED (hf90/hf10 verified; the finding
+   became machinery in MFS3a); the metropolis re-pin's two
+   flagged rows are recorded — the 80–120 band SURVIVES their
+   removal, so the number stands while the asymmetry is
+   noted; whether the band is a floor or a distribution is
+   named for the §216 comparison round. (c) Ink L replaces
+   the value range: RATIFIED (the self-contradiction is
+   exact: hf50 = hf57 = 78); the tension that the gate flags
+   the declared north star is recorded for the aesthetic
+   pass. (d) Star demotion: RATIFIED — and the lane's
+   offered cure the rows never took is ADOPTED: the mark
+   SPLITS into a TEACHING mark and a measured REGISTER mark
+   (derivable from the CSV today); rides CF-1. (e) All three
+   reversals RATIFIED (recomputed to the digit); the hf389
+   RENAME is ordered (the file still teaches "grain-max" for
+   the coarsest plate of nine) with index sync and an
+   integrity-gate re-run, riding CF-1.
+3. **§245/§246 RATIFIED.** The chair-added dimensions
+   produced the program's single highest-value finding
+   (circuitDemotion). The register-and-kind calibration is
+   RATIFIED as the program's definition of done, with its
+   tension resolved: a measured corpus statistic is a
+   REGISTER/VALIDATION target, never a generator input and
+   never a pixel goal — §298.5a applies this to the junction
+   law. The two-lane split's real cost (opposite holdout
+   discipline in adjacent rows, same day) is recorded and
+   cured by L6.
+4. **§249 RULED.** (a) AMENDED on the estimator: the
+   warmth figures mixed a median (37) against a centroid
+   (34); computed consistently, the HF-1 daylight CENTROID —
+   the estimator the atlas itself says a renderer reads — is
+   **36 (#F8E9D4)**. THE BINDING PIN MOVES TO 36 with the
+   estimator named; the ruling's direction (HF-1 alone beats
+   the union on unscored axes) is RATIFIED on every
+   estimator, and the symmetric extension of §298.2a applies.
+   The operative atlas rows (including the role table) get
+   the consistent figure via CF-1 — curing §257(d)'s
+   one-level-too-high fix at the right level. (b) The
+   band-overlap retirement: RATIFIED in substance (town/city
+   ranges overlap over most of both); the governance
+   precedent (declining IQR bands to protect standing
+   verdicts) is recorded as deliberate and revisited at the
+   §216 comparison round. (c) RATIFIED — the ⛔ WITHDRAWN
+   verdict is a genuine structural win; the roof-count
+   instrument is STILL unbuilt and joins G-40's W0 set
+   explicitly (it restores two rungs and the population
+   fit). (d) The superlative law: RATIFIED; §249.3's own
+   scope slip ("six false even of the 12-plate sample" —
+   several were never in the 12) is corrected: the law
+   applied to its own row.
+5. **§250 RULED.** (a) AMENDED: junction mix is ADOPTED as a
+   register-matching target with the instrument caveat
+   recorded — the 0.024 reproduces exactly (180 X / 6,618 T)
+   and the hf239 castra control (0.088, 6× median) proves
+   RELATIVE discrimination; but the extractor's X-recovery is
+   unmeasured and large, so the ABSOLUTE band may never gate
+   generated vector output directly — a SAME-INSTRUMENT
+   census (rasterize the generated map through the same
+   skeletonizer, or first measure X-recovery on a synthetic
+   grid) is the lawful form. The "real accretion produces T"
+   rationale is STRUCK (unsourced; §261-barred). Slips
+   corrected: 27 not 22 zero-star windows; 41.5 not 43.
+   (b) GAP-B: RATIFIED on §250's own reasoning; the D11
+   Watabou leg is STRUCK as void under §261 (verified: no
+   downstream document leans on it). (c) The four
+   tier-invariants: the RULE is ratified as engineering law
+   (scaling those dials changes kind, not size); the WARRANT
+   is amended — a negative result at n=2/2/3 is not
+   "measured" at the low tiers. (d) circuitDemotion's
+   promotion: RATIFIED (independently duplicated necessity);
+   the five-row vocabulary table is n=1 on a shape-flagged
+   plate — a SECOND WITNESS is required before the table
+   locks into implementation (W3 demotion work). (e) ⛔ **THE
+   EPOCH CALIBRATION FIGURES ARE REVERSED**: every published
+   ratio decomposes exactly as pitch × window-width; the
+   window-independent coarsening is **1.33–1.44×** (hf239
+   0.99× — the founding-mode inversion), NOT 1.8–2.9×; a
+   generator tuned to the published range overshoots the
+   corpus by 35–100%. This was §244.5's own instrument
+   defect, adopted one row later — the finding did not
+   travel. Founding-mode ordering is RATIFIED as filed (the
+   strongest part; 9.4× not 9.5×). "Max 4 epochs anywhere in
+   313 plates" is re-scoped honestly: max 4 across 36
+   directly-viewed plates of a 222-plate studiable frame.
+   G-42/W4 calibration inherits the corrected numbers via
+   CF-1.
+6. **§251 RULED.** (a) RATIFIED (the b6 single-scalar premise
+   noted as unexecuted); the blocked-arm CLASS is
+   generalized: a sweep for other arms blocked on missing
+   substrate fields rides the D1 manifest build. (b)
+   RATIFIED — and its concentric-without-run-typing claim is
+   now ARCHITECTURE-CONFIRMED (the shared-centroid homothety
+   made concentricity structural at the pre-W2 tip), with
+   circuitDemotion's convergence as the second leg. (c)
+   RATIFIED (the 0/7-on-every-run universal is robust at
+   n=7; eye-read, not instrumented — recorded). (d) AMENDED:
+   the four-fields headline is re-scoped — true for the TOWN
+   map; the campaign map already draws chain geometry; and
+   the four fields are not all guaranteed (supplyChains is an
+   optional legacy fallback, resources lives under
+   resourceAnalysis, neighbours carry no bearing) — the fix
+   is "establish the guarantees, THEN read for geometry,"
+   which §287.9 already folded; the ruling now matches it.
+   (e) ⭐ **LAW L6 BANKED (the whole-channel holdout law):
+   holdout exclusion covers EVERY channel — image,
+   measurement, and index/prose description; a study takes
+   the loss in prose too.** The two lanes' opposite
+   discipline (PLAN cited 0 of 91; CONTEXT cited 49 excluded
+   ids, 33 live members, index-prose only, honestly
+   footnoted) is recorded; §287.10 already drew the roster
+   consequence.
+7. **§261 RULED.** (a) RATIFIED with the twelve divergences
+   classified: five survive as mechanism candidates (each
+   needing the third leg), three attribution-struck, two
+   never ours, one product note, and D12 was §261 one row
+   early. §261.2b's word "FACTS" is DOWNGRADED to "PLAUSIBLE
+   static readings" — L1 applied to the correcting row
+   itself. Precision kept: the plates were requested as
+   nano_banana_pro@4k and served by the nano_banana_2
+   backend on every wave (mechanically proven: 313 unique
+   Higgsfield job-id chunks, all 5056×3392). (b) RATIFIED —
+   G-39 is holding correctly: the large-scale arm is
+   supported by the corpus's own numbers; the deciding
+   small-scale arm is unmeasurable until G-40(iii), which
+   §294.9 made chair-ratified W0 work. (c) The third-leg
+   requirement: RATIFIED with E2's strengthening ADOPTED —
+   leg (b) requires the corpus metric named AND its known
+   instrument caveats declared (three of the four eligible
+   artifact files carry confounded figures). (d) The
+   contamination sweep's answer is adopted: ⛔ §256.2 — an
+   OWNER-LAW row — still carries the retracted premise
+   verbatim. RULED HERE: §256.2's premise sentence ("painterly
+   imitation of that style") is RETRACTED per §261; its
+   conclusion — never chase the original's look; the corpus
+   measures richer and is the target in its own right —
+   STANDS AND STRENGTHENS under independence. §254.1's
+   imitation sentence carries the same annotation. Downstream
+   documents verified clean.
+8. **THE QUEUE IS EMPTY.** All 30 entries are ruled
+   (§293/§294/§297/§298); docs/FABLE_RETROVALIDATION_QUEUE.md
+   is reset to its empty protocol form. Net verdicts: the
+   Opus chair's judgment record is strong — the majority
+   RATIFIED outright, many with executed vindication; the
+   REVERSED items are §240's ceiling table and free-dividends
+   claim, §250's epoch calibration numbers, and §242's
+   holdout rulings (mooted/voided by §287.10); the AMENDED
+   items are precision, scope, estimator and arithmetic
+   corrections now in the record. The recurring failure shape
+   across all thirty rows: RECEIPT→LEDGER TRANSIT (grades
+   promoted, scopes widened, estimators mixed, interaction
+   terms dropped) — laws L1–L6 exist to close exactly that.
+9. **CF-1 (the corrections fold) IS DISPATCHED** (Opus, per
+   the seat model) to execute the sitting's document
+   corrections as ONE batch: the GENERATION-SPEC fold (epoch
+   figures 1.33–1.44×; G-34's sum; junction-law scoping;
+   max-4 scope; G-42/W4 triad sizing; the substitution
+   register's SUB row signatures; the W8 demo wording per
+   §293.1; G-39 cross-notes) and the corpus-docs act (atlas
+   warmth rows → 36/#F8E9D4 with estimator named, :937
+   reworded; the TEACHING/REGISTER star split; the hf389
+   rename with index sync and an integrity re-run). This
+   discharges the §61-style annex re-verification for every
+   AMENDED/REVERSED item: each correction is threaded to the
+   documents that quote it, in one auditable edit set.
