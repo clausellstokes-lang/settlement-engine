@@ -17134,7 +17134,7 @@
     },
     {
       "id": "MF-T2A",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T2A.md",
       "verifiedBase": "f20b9faa828469fed6f3fccae19f7c08508a5213",
       "changeManifest": [
@@ -17210,6 +17210,25 @@
           "_note": "THE ARM THAT BINDS THE PLANT TO ITS GUARD ROW in both directions.",
           "path": "tests/lint/mutationCoverageManifest.test.js",
           "symbol": "DIRTY-GUARD TOTALITY"
+        },
+        {
+          "_note": "THE DELIVERABLE. Added at the flip to LANDED, never at READY: the validator resolves every row against the LIVE tree at EVERY status, so a symbol the deliverable CREATES cannot be named before it exists. This describe title is also the census key — renaming it moves `suiteTitles` and is never the cure for a red.",
+          "path": "tests/lint/townMapFabricSingleDeclaration.walker.test.js",
+          "symbol": "fabric single-declaration law (the ODQ 310.3(7) source scan)"
+        },
+        {
+          "_note": "THE PLANT that proves the walker removable. The label is the join key between the sweep and the coverage manifest; keep it stable.",
+          "path": "scripts/mutation-sweep.sh",
+          "symbol": "check_caught \"town-map/fabric duplicate export declaration\""
+        },
+        {
+          "_note": "THE DIRTY-GUARD ROW the plant obliges. Without it a manual sweep run would `git checkout --` a file the refusal list does not name.",
+          "path": "scripts/mutation-sweep.sh",
+          "symbol": "  src/domain/townMap/fabric/dcelEmbedding.js"
+        },
+        {
+          "path": "scripts/mutation-coverage-manifest.json",
+          "symbol": "\"town-map/fabric duplicate export declaration\""
         }
       ],
       "acceptanceCases": [
