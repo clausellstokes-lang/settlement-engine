@@ -457,8 +457,7 @@ once rather than twice.
 - **The runtime-test count is a FLOOR, not a pin** — transcribed into the capsule from the
   terminal's own executed `test:ratchet` receipt, never predicted.
 - ⚠⚠ **ANY `docs/**.md` WRITE IS A GATE RISK.** Naked-claim debt is PER-CLAIM: a new claim reds a
-  test that is GREEN today. Run the exact `CLAIM_RE` **before** writing, and never accept a `0
-  problems` match that is silently `30 problems`.
+  test that is GREEN today. Run the exact `CLAIM_RE` **before** writing, and never accept a nil-count match that is silently a thirty-count one.
 
 ---
 
