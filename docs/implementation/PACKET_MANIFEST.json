@@ -17809,7 +17809,7 @@
           "path": "tests/domain/couplingRegistry.test.js"
         },
         {
-          "_note": "M6. The WHOLE five-figure lighting tuple re-derived by execution in this commit, never patched figure by figure: 2485/364/2121/20618/5768 -> 2485/364/2121/20624/5768. The STARTING figure was RE-READ from this walker own live constant at cdfe5a96 rather than inherited from the compile, which had predicted it by adding WF-1C +7 across another member landing; the live constant already carried that +7, so inheriting the arithmetic would have landed 20625. Authorizing decision ODQ 321.",
+          "_note": "M6. The WHOLE five-figure lighting tuple re-derived by execution in this commit, never patched figure by figure: 2488/364/2124/20649/5776 -> 2488/364/2124/20655/5776 as landed. The tuple moved THREE times and was measured every time: 20618 -> 20624 at the build base cdfe5a96, then MF-T2B landed +2 files and +7 titles, then TE-NOTICES landed +1 file and +24 titles. At each CAS slot the figure line was set to a deliberate placeholder so the SEQUENCED walker had to convict on every figure in turn, and each value was taken from its own assertion message rather than from arithmetic. The STARTING figure was RE-READ from this walker own live constant at cdfe5a96 rather than inherited from the compile, which had predicted it by adding WF-1C +7 across another member landing; the live constant already carried that +7, so inheriting the arithmetic would have landed 20625. Authorizing decision ODQ 321.",
           "action": "MODIFY",
           "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
         },

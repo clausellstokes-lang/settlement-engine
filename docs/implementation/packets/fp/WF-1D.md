@@ -288,7 +288,7 @@ proved populated — so the refusal is structural rather than a sentence in pros
 |---|---|
 | **§49/§50/§148 — the flag mint** | ⛔ **NOT INCURRED — THIS MEMBER MINTS NO FLAG.** It rides `faithUnseatingEnabled` (LANDED, WF-1a) and `warTerminationEnabled` (LANDED). No registry row moves. ⚠ The by-name read census over `src` moves ONE: this member adds a read in `warTermination.js`, strict `=== true`, not reached through a frozen-list `.every()` |
 | **§104.4 — edge-shared bundle closures** | **NOT INCURRED.** No path this packet names appears in any committed bundle meta's `inputs` — derived at compile and re-checked here precisely because M4 is a COMMENT-ONLY edit, the trigger shape §104.4 fires on |
-| **test census (the lighting contract)** | **INCURRED, TITLES ONLY. EXECUTED: `2485/364/2121/20618/5768` → `2485/364/2121/20624/5768` (+6 titles, nothing else).** ⛔ The starting figure was RE-READ from the walker's own live constant at `cdfe5a96`, NOT inherited: the compile predicted it by adding WF-1C's +7 across another member's landing, and the live constant already contained that +7 — applying it twice would have landed 20,625. ⭐ This member mints NO test file: six straight-line `it()` calls join an EXISTING describe. Authorizing decision **ODQ §321** |
+| **test census (the lighting contract)** | **INCURRED, TITLES ONLY. AS LANDED: `2488/364/2124/20649/5776` → `2488/364/2124/20655/5776` (+6 titles, nothing else).** ⛔⛔ **THE FIGURE MOVED THREE TIMES AND WAS MEASURED EVERY TIME, NEVER ADDED.** (1) At the build base `cdfe5a96` it read `2485/364/2121/20618/5768` → `2485/364/2121/20624/5768`; the STARTING figure there was RE-READ from the walker's own live constant, NOT inherited, because the compile had predicted it by adding WF-1C's +7 across another member's landing and the live constant already contained that +7 — applying it twice would have landed 20,625. (2) At the first CAS slot MF-T2B landed +2 files, +2 credited, +7 titles and +2 suite titles. (3) At the second CAS slot TE-NOTICES landed +1 file, +1 credited, +24 titles and +6 suite titles. ⛔ At each slot the tuple line was set to a deliberate PLACEHOLDER so the SEQUENCED walker had to convict on every figure in turn, and each value was taken from its own assertion message — arithmetic would have produced the same tuple and would not have been evidence. ⭐ This member mints NO test file: six straight-line `it()` calls join an EXISTING describe. Authorizing decision **ODQ §321** |
 | **§102.2 / §P3b — mutation coverage** | **NOT INCURRED.** No file is added under `tests/lint/` |
 | **§85.4 — seeded chooser / pool registry** | **NOT INCURRED.** The lookup and the selector are total functions of already-computed values and draw nothing. **Zero new PRNG streams, dark AND lit** |
 | **size baseline / hot files** | ⛔⛔ **INCURRED, AND IT IS THIS MEMBER'S SHARPEST CONSTRAINT.** `warTermination.js` held at **818/818** across the edit on BOTH instruments (§2.1). No `PACKET_STANDARD` hot-file is named |
@@ -419,7 +419,7 @@ fifteen-casus control block — which is the byte control on M2's selector refac
 | P-4 | `COUPLING_REGISTRY` carries ZERO `FAITH→WAR` rows | EXECUTED — 49 rows enumerated | a row appears first ⇒ M3 becomes an amendment |
 | P-5 | no exact-count pin bounds `COUPLING_REGISTRY.length` | EXECUTED — **but a deep-equal ROSTER pin does**, and it reddened. Correction **C-3** | a further pin lands ⇒ re-read the live arms |
 | P-6 | no path this packet names is in any edge-shared closure | EXECUTED over the committed metas' `inputs` | a bundle's inputs grow ⇒ §104.4 becomes INCURRED |
-| P-7 | the lighting tuple starts at `2485/364/2121/20618/5768` | EXECUTED — read from the walker's live constant | ⛔ **re-read at the implementing tip; inheriting either packet's number is the recorded failure** |
+| P-7 | the lighting tuple starts at `2485/364/2121/20618/5768` at the BUILD base, at `2487/364/2123/20625/5770` after MF-T2B, and at `2488/364/2124/20649/5776` after TE-NOTICES | EXECUTED at all three — read from the walker's live constant, then re-derived figure by figure after each rebase | ⛔ **re-read at the implementing tip; inheriting either packet's number is the recorded failure** |
 | P-8 | `PACKET_MANIFEST.json` has ZERO non-terminal rows | EXECUTED — 132 rows, 131 LANDED + 1 SUPERSEDED | a sibling DRAFT opens ⇒ re-run the collision check |
 | P-9 | `.prose-numerics-baseline.json` keys none of this packet's files | EXECUTED — 413 rows, zero matches | a landing adds one ⇒ re-address it, NEVER delete it |
 | P-10 | `KIND_SECTION` has no arm requiring a key to have a minter | EXECUTED | such an arm lands ⇒ §4 gains a second, machine reason |
@@ -710,7 +710,7 @@ No ref was moved by this lane; the chair CASes.
 | `warTermination.js` physical (`wc -l`) | **1045** | **1045** |
 | `pulseKernel.js` / `applyWorldPulse.js` | 1581 / 941 | **1581 / 941** — untouched |
 | `COUPLING_REGISTRY` rows | 49 | **50** (one `FAITH→WAR`, the estate's first) |
-| lighting census | `2485/364/2121/20618/5768` | **`2485/364/2121/20624/5768`** |
+| lighting census (at the REBASED tip) | `2488/364/2124/20649/5776` | **`2488/364/2124/20655/5776`** |
 | `typecheck:ratchet` | 173 / ceiling 173 | **173 / 173** |
 | `typecheck:domain:strict` | 1134 / ceiling 1134 | **1134 / 1134** |
 | any-cast ledger | `warTermination.js` allowance **0** | **0 holes added** |
@@ -738,3 +738,40 @@ own-footprint fence and which this lane never wrote.
    before the same-line idiom was adopted.
 
 ⭐ **Every one of the four was found by running something, not by reading something.**
+
+### 16.5 TWO CAS-SLOT REBASES, AND THE FIGURES THEY MOVED
+
+⛔ **THE SLOT-AWARE LAW FIRED TWICE.** This member was built and focus-proved at `cdfe5a96`, and the
+branch moved under it twice before the terminal:
+
+| slot | tip | what landed | what it moved under this member |
+|---|---|---|---|
+| 1 | `b25907f9` | TE-T2B's five commits + an MF-PREAMBLE re-stamp | +2 files, +2 credited, +7 titles, +2 suite titles |
+| 2 | `159ec24e` | TE-NOTICES' third-party-notices surface + the OFL rider | +1 file, +1 credited, +24 titles, +6 suite titles |
+
+The six commits were rebased at each slot and the terminal was run on the second, so the gate covers
+the exact bytes handed to the chair rather than a base nobody will ever hold.
+
+⚠⚠ **BOTH REBASES MOVED CENSUS FIGURES, WHICH IS THE WHOLE REASON THE LAW EXISTS.** Three conflicts
+were resolved across the two, and none was resolved by choosing a side:
+
+1. **`PACKET_MANIFEST.json`** (slot 1) — both lanes appended a packet row at the array's end, and
+   git interleaved them. Resolved by taking the new base's file whole and re-running this lane's own
+   deterministic, double-insert-guarded splice, which reproduces the WF-1D row byte-identically
+   while leaving MF-T2B's untouched. Verified after: **134 rows, MF-T2A / MF-T2B / WF-1C / WF-1D all
+   present.** ⭐ TE-NOTICES touches no packet registry, so slot 2 did not repeat it.
+2. **`sovereigntyLightingContract.walker.test.js`** (both slots) — every landing re-records the
+   census here. ⛔ **THE MERGE-DESTROYS-CURES HAZARD IS LIVE ON EXACTLY THIS SHAPE**: taking either
+   side would have deleted another lane's landed record while every equivalence pin still passed.
+   **ALL EIGHT re-record blocks are kept in landing order** — MF-T1S, MF-T1X, WF-1B, MF-T2A, WF-1C,
+   MF-T2B, TE-NOTICES, WF-1D — verified by enumeration after each resolution, not assumed.
+
+⭐⭐ **NO CENSUS FIGURE IN THIS MEMBER WAS EVER OBTAINED BY ADDING.** At each slot the tuple line was
+set to a deliberate PLACEHOLDER so the SEQUENCED walker had to convict on every figure in turn, and
+each value was taken from its own assertion message. The final walk read `files 2488`, `parked 364`,
+`credited 2124`, `titles 20655`, `suiteTitles 5776`, green on the sixth run. Arithmetic would have
+produced the same tuple; it would not have been evidence — and the three times this member's
+arithmetic WAS checked against a measurement, it was wrong once.
+
+⚠ **Every `cdfe5a96` reference elsewhere in this packet is historically accurate** — that is where
+the work was built, measured and refuted — and is deliberately not rewritten to the rebased tip.
