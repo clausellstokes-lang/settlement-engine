@@ -13270,6 +13270,51 @@ recommended. Implementation, per item:
    dossier-surface audit so every license has a live home
    before the stratum compiles.
 
+### §311.9 · THE CONNECTIVITY LAWS BETWEEN COMPONENTS (chair
+### refinement at the owner's extended delegation)
+
+1. **THREE CONNECTION CLASSES + THE REFUSAL CLASS**: NATIVE
+   (intra-component, free by construction); ADJACENCY BREACH
+   (physical neighbours broken through — licensed by measured
+   proximity plus an actor with a motive); FUNDED LINK
+   (non-adjacent tunnels — a payer, a route motive, and a
+   DATE: a dug act in the event stream). REFUSED: vaults and
+   dungeons connect to nothing by default — a breach into one
+   is a HEIST EVENT, never a map default; keepers resist
+   sewer↔crypt joins.
+2. **THE SEVEN LAWS**: (i) the MOTIVE LAW — every
+   inter-component link carries license + motive + date;
+   motiveless joins are not dug, which keeps the network
+   sparse and believable; (ii) ROUTE VALUE derives from the
+   endpoints' SURFACE causes (gate-bypass worth the tolls and
+   enforcement; waterfront-to-market worth the contraband
+   flow) — remove the wall and the tunnel loses its motive;
+   (iii) the SECURITY GRADIENT — access postures OPEN
+   (sewers, caverns) / GUARDED (cellars, crypts) / SEALED
+   (vaults); a cross-posture link takes the stricter side's
+   TYPED JOINT (grate, stair, sealed door, sluice, breach) —
+   the portal vocabulary extended underground; (iv) SEWERS
+   ARE THE SPINE where they exist — a town without them gets
+   an ARCHIPELAGO undercity, so undercity character follows
+   the §311.7 sanitation ladder by composition; (v)
+   CONNECTIVITY IS STATE — flooding/sealing sever edges
+   without deleting them, pumping/unsealing are dated acts
+   that restore them; live and severed passages draw
+   distinctly (fossils on edges); (vi) LINKS PERSIST — the
+   underground high-water law on edges; epochs add, never
+   silently remove; (vii) the HONESTY CONTRACT — every
+   connected piece is a true graph on the D1 portal
+   machinery: routes plottable, travel costs derivable, and
+   ISOLATION VISIBLE on the sheet (that the counting-house
+   cellar does NOT meet the sewers is itself the game).
+3. **THE ONE-WAY SEAL RESTATED FOR ROUTES**: the underground
+   never causes the surface; routes feed crime/espionage
+   outcomes ONLY through the §287.4 receipt seam, never
+   same-pass. Routing per L2: the same §13/§168 spec fold;
+   §290.4 position unchanged; the typed-joint vocabulary
+   joins the D3a-era portal work so the joints exist before
+   the stratum compiles.
+
 ## §312 · TC-D3A COLLECTED — THE PORT PLAN IS PRICED (16
 ## MEMBERS), THREE RULINGS MADE, AND THE SANDBOX EVIDENCE IS
 ## PRESERVED OUT OF /tmp (2026-08-21; chair: FABLE; receipt
