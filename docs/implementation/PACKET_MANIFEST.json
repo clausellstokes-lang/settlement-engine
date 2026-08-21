@@ -17527,6 +17527,201 @@
           "check:tail"
         ]
       ]
+    },
+    {
+      "id": "MF-T2B",
+      "status": "DRAFT",
+      "packetPath": "docs/implementation/packets/town-cartography/MF-T2B.md",
+      "verifiedBase": "2cdb87fac566b3d6803a0dce9d59df13f07c1c9e",
+      "changeManifest": [
+        {
+          "_note": "THE ABI. Ported from the sealed W3 tip by path plus SHA-256 (the sandbox is not a git repository), re-pointed at this tree's own exactGeometry closure.",
+          "action": "CREATE",
+          "path": "src/domain/townMap/fabric/coordinateAbi.js"
+        },
+        {
+          "_note": "THE CLOSURE, NOT THE MODULE. 19 declarations of the sandbox fabricGeometry.js's 57 — the measured transitive closure the ABI needs. A barrel hop drags the whole family, so a port member ports the closure.",
+          "action": "CREATE",
+          "path": "src/domain/townMap/fabric/exactGeometry.js"
+        },
+        {
+          "_note": "DEFAULT PARAMETERS ONLY. The 0..1000 wall is a default parameter rather than a constant, so re-parameterising onto the ABI is argument threading; every explicit-range caller is untouched and the body does not move.",
+          "action": "MODIFY",
+          "path": "src/domain/townMap/fabric/foundation.js"
+        },
+        {
+          "_note": "A SHARED D3a CHANGE PATH. Reserved by this member alone while it is non-terminal (plan section 9.3 staged promotion).",
+          "action": "REGISTER",
+          "path": "src/domain/townMap/fabric/index.js"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/domain/townMapCoordinateAbi.test.js",
+          "_note": "A NEW acceptance file. CREATE rather than TEST: the validator asserts a TEST path exists at EVERY status, and existence for a CREATE row is assertable only at LANDED — which is exactly where a fictional creation becomes catchable."
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/property/townMapCoordinateAbiDeterminism.test.js",
+          "_note": "A NEW acceptance file. CREATE rather than TEST: the validator asserts a TEST path exists at EVERY status, and existence for a CREATE row is assertable only at LANDED — which is exactly where a fictional creation becomes catchable."
+        },
+        {
+          "_note": "THE OTHER SHARED D3a CHANGE PATH — the census tuple, re-recorded all five figures together with its cause and its authorizing decision named.",
+          "action": "TEST",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/packets/town-cartography/MF-T2B.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE WALL BEING WIDENED. Its defaults are the only thing this member touches in the file.",
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export function requireCanonicalInt"
+        },
+        {
+          "_note": "THE FROZEN VERSION STRING. Stamped by eight fabric modules and pinned by 157 literal digest pins across 12 test files; moving it fits in no packet, so this member widens a range and leaves it exactly where it is.",
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export const FABRIC_COORDINATE_ABI"
+        },
+        {
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export const CURRENT_MAP_TRADITION_ID"
+        },
+        {
+          "_note": "THE BARREL'S ESTABLISHED SHAPE: one named block per module, terminated by a from-clause. The two arriving blocks copy it; a star export is forbidden by the family preamble.",
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "} from './foundation.js';"
+        },
+        {
+          "_note": "THE HEAD RE-EXPORT. src/domain/townMap/index.js already stars the fabric barrel, so the two new leaves reach the head surface with no edit owed there. It is the only star export in that file, so no name is made ambiguous.",
+          "path": "src/domain/townMap/index.js",
+          "symbol": "export * from './fabric/index.js';"
+        },
+        {
+          "_note": "MF-T2A'S LAW, WHICH BINDS THIS MEMBER: the arriving clipper takes a distinct name because the bare name carries no convention. This describe title is also a census key.",
+          "path": "tests/lint/townMapFabricSingleDeclaration.walker.test.js",
+          "symbol": "fabric single-declaration law (the ODQ 310.3(7) source scan)"
+        },
+        {
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "symbol": "const CENSUS = Object.freeze({"
+        },
+        {
+          "_note": "THE SHAPE PRECEDENT this member's two acceptance files copy: a domain matrix plus a determinism companion, one literal describe each, straight-line calls, string-literal titles.",
+          "path": "tests/domain/townMapParcelRegistry.test.js",
+          "symbol": "describe('MF-T1P canonical reference-only parcel registry'"
+        },
+        {
+          "path": "tests/property/townMapParcelRegistryDeterminism.test.js",
+          "symbol": "describe('MF-T1P parcel-registry determinism'"
+        },
+        {
+          "_note": "THE ANCHOR HELPER the negative assertions route through by name on the same line. A new test file has ceiling zero in every tree.",
+          "path": "tests/helpers/anchoredNegatives.js",
+          "symbol": "export function expectAbsentWithAnchor"
+        },
+        {
+          "_note": "THE UNTOUCHED-PIN CONTROL'S LARGEST HOLDER — 69 of the 157 literal digest pins. It must stay green with not one literal edited.",
+          "path": "tests/domain/townMapPlanarDcel.test.js",
+          "symbol": "describe('MF-T1D canonical reference-only planar DCEL'"
+        },
+        {
+          "_note": "THE DORMANCY FENCE. It is describe.runIf(distExists), so a fresh worktree reports exit 0 on ZERO executed tests; the real discharge is post-build under VERIFY_DIST=1 and a pre-build skip may not be reported as a pass.",
+          "path": "tests/build/townMapLazy.test.js",
+          "symbol": "describe.runIf(distExists)"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "Main behavior. The widened envelope accepts an ABI-scale quantum in both signs — requireCanonicalInt(1286630000) and requireCanonicalInt(-1286630000) return their value where the fixture-era default threw — and it still refuses past the envelope: requireCanonicalInt(MAX_WORLD_UNITS + 1) throws, naming the new range. The widening is a re-parameterisation, not the removal of a wall."
+        },
+        {
+          "id": "A2",
+          "case": "Dormancy. A source scan of src/ finds zero importers of either new leaf outside src/domain/townMap/fabric, and the entry-closure fence tests/build/townMapLazy.test.js is green POST-BUILD under VERIFY_DIST=1. A pre-build run of that file SKIPS and is not a discharge."
+        },
+        {
+          "id": "A3",
+          "case": "Counterforce with a positive control. On v = -1/128, an exactly representable double whose sixth decimal is an exact tie, worldQ returns -7813 (read out of q6's own text -0.007813) while Math.round(v * 1e6) returns -7812 — they DISAGREE. On the positive twin +1/128 both return 7813 — they AGREE. The divergence is therefore the SIGN rule and not an arbitrary disagreement, and ROUNDING_RULE.tieBreak names HALF_AWAY_FROM_ZERO as canonical."
+        },
+        {
+          "id": "A4",
+          "case": "Boundary and refusal. worldQ(Infinity) and worldQ(NaN) are null rather than NaN; withinAbiBounds(MAX_WORLD_UNITS + 1) is false; heightQ() throws, naming the plan-era status override; pointQ(null) is null; ringQ of an empty ring is an empty array and ringText of it is the empty string; and COORDINATE_ABI's contentHash, provenanceRef and unitRegistryRef are null — named ABSENT rather than carrying a placeholder."
+        },
+        {
+          "id": "A5",
+          "case": "Idempotency and replay. Every published function called twice on the same input returns byte-identical output, and a source scan of both leaves finds no Date, Math.random, Intl, toLocale, performance or crypto reachable, with a positive control proving the scan can see a planted occurrence."
+        },
+        {
+          "id": "A6",
+          "case": "Real integration: the reconciliation is an identity and its one exception is COUNTED. Over a fixed 17-row table spanning negatives, zeros, ties, both signs of round-to-zero and both envelope edges, reconcilesToTopologyText is true for all 17; topologyTextOf(worldQ(v)) equals q6(v) on exactly 15, and the exactly 2 rows where it does not are exactly the rows isNegativeZeroText names — the ABI has one zero and the six-decimal legacy text has two. ANGLE_TABLE_SIZE equals 1024, the sandbox's TRIG_N."
+        },
+        {
+          "id": "A7",
+          "case": "The named historical regression: widening moves no byte. FABRIC_COORDINATE_ABI is still plan-q1-0-1000-v1, and the twelve digest-pin suites holding all 157 literal digest pins pass unmodified in the section 10 control, with the same file and test counts as the capture taken before the first edit."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/negativeAssertionAnchor.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/townMapCoordinateAbi.test.js",
+          "tests/property/townMapCoordinateAbiDeterminism.test.js",
+          "tests/lint/townMapFabricSingleDeclaration.walker.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/townMapPlanarDcel.test.js",
+          "tests/domain/townMapBoundaryArrangement.test.js",
+          "tests/domain/townMapFabricRoot.test.js",
+          "tests/domain/townMapParcelRegistry.test.js",
+          "tests/domain/townMapFantasyConstruction.test.js",
+          "tests/domain/townMapSettlementFabric.test.js",
+          "tests/domain/townMapMassingRoster.test.js",
+          "tests/domain/townMapMassingPersistence.test.js",
+          "tests/domain/townMapStreetGeometry.test.js",
+          "tests/domain/townMapMassingProjection.test.js",
+          "tests/domain/townMapLandform.test.js",
+          "tests/domain/townMapStreetGraph.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/domain/townMap/fabric/coordinateAbi.js",
+          "src/domain/townMap/fabric/exactGeometry.js",
+          "src/domain/townMap/fabric/foundation.js",
+          "src/domain/townMap/fabric/index.js",
+          "tests/domain/townMapCoordinateAbi.test.js",
+          "tests/property/townMapCoordinateAbiDeterminism.test.js"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "npm",
+          "run",
+          "validate:packets"
+        ],
+        [
+          "npm",
+          "run",
+          "check:tail"
+        ]
+      ]
     }
   ]
 }
