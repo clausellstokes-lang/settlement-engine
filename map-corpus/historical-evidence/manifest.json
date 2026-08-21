@@ -1,0 +1,421 @@
+{
+  "registryVersion": 1,
+  "policyVersion": 1,
+  "capturedAt": "2026-08-20",
+  "researchWave": {
+    "waveId": "historical-urbanism-wave-1",
+    "status": "EXPLORATORY_CASE_REGISTRY",
+    "samplingFrameId": null,
+    "holdoutRosterId": null,
+    "prevalenceEligible": false,
+    "expansionProtocol": "../docs/HISTORICAL-EVIDENCE-EXPANSION-PROTOCOL.md"
+  },
+  "schemaFile": "historical-evidence.schema.json",
+  "recordsFile": "records.json",
+  "programs": [
+    {
+      "programId": "ehta-international",
+      "name": "International Commission for the History of Towns Atlas Working Group",
+      "countryOrScope": "Europe",
+      "officialUrl": "https://www.historiaurbium.org/activities/historic-towns-atlases/atlas-working-group/",
+      "surveyDepth": "METHOD_DEEP"
+    },
+    {
+      "programId": "germany-dhsta",
+      "name": "Deutscher Historischer Städteatlas",
+      "countryOrScope": "Germany",
+      "officialUrl": "https://www.uni-muenster.de/Staedtegeschichte/atlanten/deutscher_historischer_staedteatlas/index.shtml",
+      "surveyDepth": "MAP_LEGEND_DEEP"
+    },
+    {
+      "programId": "germany-westphalia",
+      "name": "Historischer Atlas westfälischer Städte",
+      "countryOrScope": "Westphalia, Germany",
+      "officialUrl": "https://www.uni-muenster.de/Staedtegeschichte/atlanten/historischer_atlas_westfaelischer_staedte/index.html",
+      "surveyDepth": "METHOD_DEEP"
+    },
+    {
+      "programId": "germany-rhineland",
+      "name": "Rheinischer Städteatlas",
+      "countryOrScope": "Rhineland, Germany",
+      "officialUrl": "https://rheinische-landeskunde.lvr.de/de/geschichte/geschichte_rheinischer_staedteatlas/atlasstruktur_rheinischer_staedteatlas/aufbau_kartenteil_atlasstruktur/aufbau_kartenteil_rsta_info.html",
+      "surveyDepth": "METHOD_DEEP"
+    },
+    {
+      "programId": "germany-hesse",
+      "name": "Hessischer Städteatlas",
+      "countryOrScope": "Hesse, Germany",
+      "officialUrl": "https://www.lagis-hessen.de/de/orte/hessischer-staedteatlas",
+      "surveyDepth": "PROGRAM_INVENTORY"
+    },
+    {
+      "programId": "ireland-ihta",
+      "name": "Irish Historic Towns Atlas",
+      "countryOrScope": "Ireland",
+      "officialUrl": "https://www.ria.ie/research-programmes/irish-historic-towns-atlas/",
+      "surveyDepth": "MAP_LEGEND_DEEP"
+    },
+    {
+      "programId": "britain-htt",
+      "name": "British Historic Towns Atlas and Historic Towns Trust",
+      "countryOrScope": "Great Britain",
+      "officialUrl": "https://www.historictownstrust.uk/atlas",
+      "surveyDepth": "MAP_LEGEND_DEEP"
+    },
+    {
+      "programId": "hungary-hhta",
+      "name": "Hungarian Historical Towns Atlas",
+      "countryOrScope": "Hungary",
+      "officialUrl": "https://www.varosatlasz.hu/en/atlases",
+      "surveyDepth": "MAP_LEGEND_DEEP"
+    },
+    {
+      "programId": "poland-ahmp",
+      "name": "Atlas Historyczny Miast Polskich",
+      "countryOrScope": "Poland",
+      "officialUrl": "https://atlasmiast.umk.pl/",
+      "surveyDepth": "MAP_LEGEND_DEEP"
+    },
+    {
+      "programId": "france-ahvf",
+      "name": "Atlas historique des villes de France",
+      "countryOrScope": "France",
+      "officialUrl": "https://www.historiaurbium.org/activities/historic-towns-atlases/atlas-working-group/atlas-historique-des-villes-de-france/",
+      "surveyDepth": "METHOD_DEEP"
+    },
+    {
+      "programId": "denmark-medieval-towns",
+      "name": "Medieval Towns Plans in Denmark",
+      "countryOrScope": "Denmark",
+      "officialUrl": "https://byhistorie.dk/en/committee/publications/medieval-towns-plans-in-denmark",
+      "surveyDepth": "MAP_LEGEND_DEEP"
+    },
+    {
+      "programId": "czech-hatc",
+      "name": "Historical Atlas of Czech Towns",
+      "countryOrScope": "Czechia",
+      "officialUrl": "https://towns.hiu.cas.cz/",
+      "surveyDepth": "METHOD_DEEP"
+    },
+    {
+      "programId": "austria-oehta",
+      "name": "Österreichischer Städteatlas",
+      "countryOrScope": "Austria",
+      "officialUrl": "https://www.historiaurbium.org/activities/historic-towns-atlases/atlas-working-group/austrian-historic-towns-atlas/",
+      "surveyDepth": "METHOD_DEEP"
+    },
+    {
+      "programId": "italy-asci",
+      "name": "Atlante storico delle città italiane",
+      "countryOrScope": "Italy",
+      "officialUrl": "https://eum.unimc.it/it/catalogo/atlante-storico-delle-citt-italiane-marche-cingoli/1022",
+      "surveyDepth": "METHOD_DEEP"
+    },
+    {
+      "programId": "finland-ehta",
+      "name": "Finnish historic towns atlas program",
+      "countryOrScope": "Finland",
+      "officialUrl": "https://www.historiaurbium.org/activities/historic-towns-atlases/atlas-working-group/",
+      "surveyDepth": "PROGRAM_INVENTORY"
+    },
+    {
+      "programId": "netherlands-ehta",
+      "name": "Dutch historic towns atlas program",
+      "countryOrScope": "Netherlands",
+      "officialUrl": "https://www.historiaurbium.org/activities/historic-towns-atlases/atlas-working-group/",
+      "surveyDepth": "PROGRAM_INVENTORY"
+    },
+    {
+      "programId": "sweden-ehta",
+      "name": "Swedish historic towns atlas program",
+      "countryOrScope": "Sweden",
+      "officialUrl": "https://www.historiaurbium.org/activities/historic-towns-atlases/atlas-working-group/",
+      "surveyDepth": "PROGRAM_INVENTORY"
+    },
+    {
+      "programId": "iceland-ehta",
+      "name": "Icelandic historic towns atlas program",
+      "countryOrScope": "Iceland",
+      "officialUrl": "https://www.historiaurbium.org/activities/historic-towns-atlases/atlas-working-group/",
+      "surveyDepth": "PROGRAM_INVENTORY"
+    },
+    {
+      "programId": "belgium-ehta",
+      "name": "Belgian historic towns atlas program",
+      "countryOrScope": "Belgium",
+      "officialUrl": "https://www.historiaurbium.org/activities/historic-towns-atlases/atlas-working-group/",
+      "surveyDepth": "PROGRAM_INVENTORY"
+    },
+    {
+      "programId": "switzerland-ehta",
+      "name": "Swiss historic towns atlas program",
+      "countryOrScope": "Switzerland",
+      "officialUrl": "https://www.historiaurbium.org/activities/historic-towns-atlases/atlas-working-group/",
+      "surveyDepth": "PROGRAM_INVENTORY"
+    },
+    {
+      "programId": "romania-ehta",
+      "name": "Romanian historic towns atlas program",
+      "countryOrScope": "Romania",
+      "officialUrl": "https://www.historiaurbium.org/activities/historic-towns-atlases/atlas-working-group/",
+      "surveyDepth": "PROGRAM_INVENTORY"
+    },
+    {
+      "programId": "croatia-ehta",
+      "name": "Croatian historic towns atlas program",
+      "countryOrScope": "Croatia",
+      "officialUrl": "https://www.historiaurbium.org/activities/historic-towns-atlases/atlas-working-group/",
+      "surveyDepth": "PROGRAM_INVENTORY"
+    },
+    {
+      "programId": "ukraine-ehta",
+      "name": "Ukrainian Historic Towns Atlas",
+      "countryOrScope": "Ukraine",
+      "officialUrl": "https://www.historiaurbium.org/activities/historic-towns-atlases/atlas-working-group/ukrainian-historic-towns-atlas/",
+      "surveyDepth": "METHOD_DEEP"
+    }
+  ],
+  "cohorts": [],
+  "mechanisms": [
+    {
+      "mechanismId": "component.multi-nuclear-accretion",
+      "label": "Several independently caused settlement components accrete into one town",
+      "status": "RESEARCH_ONLY",
+      "possibilityEvidenceIds": ["HE-DE-BRAUNSCHWEIG-COMPONENTS", "HE-DE-MAGDEBURG-GROUP-CITY", "HE-IE-TRIM-CROSSING", "HE-IE-KILKENNY-COMPONENTS", "HE-IE-DUBLIN-PHASES"],
+      "counterexampleEvidenceIds": ["HE-DE-HERRNHUT-PLANNED"],
+      "prerequisiteClasses": ["dated-foundations", "institutional-anchors", "route-or-crossing-access"],
+      "temporalOperation": "UNASSIGNED_RESEARCH_ONLY",
+      "realizationStage": "UNASSIGNED_RESEARCH_ONLY",
+      "geographicTemporalScope": "case-witnessed European medieval and early-modern towns; no prevalence claim",
+      "activationWeightSource": null
+    },
+    {
+      "mechanismId": "component.merger-persistent-seams",
+      "label": "Merged components retain morphological and jurisdictional seams",
+      "status": "RESEARCH_ONLY",
+      "possibilityEvidenceIds": ["HE-DE-BRAUNSCHWEIG-COMPONENTS", "HE-DE-MAGDEBURG-GROUP-CITY", "HE-IE-KILKENNY-COMPONENTS"],
+      "counterexampleEvidenceIds": [],
+      "prerequisiteClasses": ["multiple-components", "dated-merger"],
+      "temporalOperation": "UNASSIGNED_RESEARCH_ONLY",
+      "realizationStage": "UNASSIGNED_RESEARCH_ONLY",
+      "geographicTemporalScope": "case-witnessed European composite towns; no prevalence claim",
+      "activationWeightSource": null
+    },
+    {
+      "mechanismId": "precinct.institutional-immunity",
+      "label": "Institutional precinct remains morphologically distinct from civic fabric",
+      "status": "RESEARCH_ONLY",
+      "possibilityEvidenceIds": ["HE-DE-QUEDLINBURG-PRECINCTS", "HE-IE-TRIM-CROSSING", "HE-IE-KILKENNY-COMPONENTS"],
+      "counterexampleEvidenceIds": [],
+      "prerequisiteClasses": ["institutional-anchor", "jurisdiction-or-immunity"],
+      "temporalOperation": "UNASSIGNED_RESEARCH_ONLY",
+      "realizationStage": "UNASSIGNED_RESEARCH_ONLY",
+      "geographicTemporalScope": "case-witnessed ecclesiastical, elite, and castle precincts",
+      "activationWeightSource": null
+    },
+    {
+      "mechanismId": "substrate.hydraulic-spine",
+      "label": "Watercourse, channel, dam, or floodplain organizes access and fabric",
+      "status": "RESEARCH_ONLY",
+      "possibilityEvidenceIds": ["HE-DE-BRAUNSCHWEIG-HYDROLOGY", "HE-HU-KOSZEG-HYDRAULICS", "HE-DK-RIBE-HYDRAULIC-STREET"],
+      "counterexampleEvidenceIds": [],
+      "prerequisiteClasses": ["target-period-hydrology"],
+      "temporalOperation": "UNASSIGNED_RESEARCH_ONLY",
+      "realizationStage": "UNASSIGNED_RESEARCH_ONLY",
+      "geographicTemporalScope": "case-witnessed river, channel, and floodplain settlements",
+      "activationWeightSource": null
+    },
+    {
+      "mechanismId": "substrate.wetland-reclamation",
+      "label": "Drainage, infill, or shoreline engineering creates later buildable land",
+      "status": "RESEARCH_ONLY",
+      "possibilityEvidenceIds": ["HE-HU-KOSZEG-WETLAND-EXPANSION", "HE-IE-GALWAY-RECLAMATION"],
+      "counterexampleEvidenceIds": [],
+      "prerequisiteClasses": ["wetland-or-shore", "dated-engineering-capacity"],
+      "temporalOperation": "UNASSIGNED_RESEARCH_ONLY",
+      "realizationStage": "UNASSIGNED_RESEARCH_ONLY",
+      "geographicTemporalScope": "case-witnessed European wetland and port expansion",
+      "activationWeightSource": null
+    },
+    {
+      "mechanismId": "access.crossing-hinge",
+      "label": "Bridge, ford, ferry, or dam crossing joins or separates components",
+      "status": "RESEARCH_ONLY",
+      "possibilityEvidenceIds": ["HE-IE-TRIM-CROSSING", "HE-IE-KILKENNY-COMPONENTS", "HE-DK-RIBE-HYDRAULIC-STREET"],
+      "counterexampleEvidenceIds": [],
+      "prerequisiteClasses": ["water-barrier", "crossing"],
+      "temporalOperation": "UNASSIGNED_RESEARCH_ONLY",
+      "realizationStage": "UNASSIGNED_RESEARCH_ONLY",
+      "geographicTemporalScope": "case-witnessed river towns",
+      "activationWeightSource": null
+    },
+    {
+      "mechanismId": "access.route-gate-suburb",
+      "label": "Extra-mural suburb organizes along gate routes and local institutions or crafts",
+      "status": "RESEARCH_ONLY",
+      "possibilityEvidenceIds": ["HE-DE-MUEHLHAUSEN-GATE-SUBURB", "HE-IE-FETHARD-WALL-ROUTES"],
+      "counterexampleEvidenceIds": [],
+      "prerequisiteClasses": ["dated-gate", "outbound-route", "suburb-anchor"],
+      "temporalOperation": "UNASSIGNED_RESEARCH_ONLY",
+      "realizationStage": "UNASSIGNED_RESEARCH_ONLY",
+      "geographicTemporalScope": "case-witnessed walled towns with extra-mural growth",
+      "activationWeightSource": null
+    },
+    {
+      "mechanismId": "fortification.dated-circuit-project",
+      "label": "Fortification is a dated project fitted to existing substrate and access",
+      "status": "RESEARCH_ONLY",
+      "possibilityEvidenceIds": ["HE-IE-FETHARD-WALL-ROUTES", "HE-PL-BIECZ-FORTIFICATION-UNCERTAINTY"],
+      "counterexampleEvidenceIds": ["HE-GB-YORK-EXTRAMURAL"],
+      "prerequisiteClasses": ["defence-cause", "route-intersections", "substrate"],
+      "temporalOperation": "UNASSIGNED_RESEARCH_ONLY",
+      "realizationStage": "UNASSIGNED_RESEARCH_ONLY",
+      "geographicTemporalScope": "case-witnessed fortified towns; not a universal wall rule",
+      "activationWeightSource": null
+    },
+    {
+      "mechanismId": "fortification.successive-enclosure",
+      "label": "Several wall generations enclose different components or extents",
+      "status": "RESEARCH_ONLY",
+      "possibilityEvidenceIds": ["HE-DE-MUEHLHAUSEN-WALL-GENERATIONS", "HE-FR-AGEN-SUCCESSIVE-ENCLOSURES", "HE-HU-KOSZEG-WETLAND-EXPANSION"],
+      "counterexampleEvidenceIds": [],
+      "prerequisiteClasses": ["dated-fortification-events", "growth-or-political-consolidation"],
+      "temporalOperation": "UNASSIGNED_RESEARCH_ONLY",
+      "realizationStage": "UNASSIGNED_RESEARCH_ONLY",
+      "geographicTemporalScope": "case-witnessed European fortified towns",
+      "activationWeightSource": null
+    },
+    {
+      "mechanismId": "parcel.frontage-backland",
+      "label": "Dense street frontage coexists with deep productive or open rear plots",
+      "status": "RESEARCH_ONLY",
+      "possibilityEvidenceIds": ["HE-IE-FETHARD-FRONTAGE-BACKLAND", "HE-PL-STARY-SACZ-PLAN-REALIZATION", "HE-GB-YORK-SYMBOLIC-FRONTAGE"],
+      "counterexampleEvidenceIds": [],
+      "prerequisiteClasses": ["street-frontage", "tenure-or-parcelization"],
+      "temporalOperation": "UNASSIGNED_RESEARCH_ONLY",
+      "realizationStage": "UNASSIGNED_RESEARCH_ONLY",
+      "geographicTemporalScope": "case-witnessed market and borough fabrics",
+      "activationWeightSource": null
+    },
+    {
+      "mechanismId": "planning.intent-realization-deformation",
+      "label": "Planned module is deformed by inherited routes, terrain, water, and rights",
+      "status": "RESEARCH_ONLY",
+      "possibilityEvidenceIds": ["HE-PL-STARY-SACZ-PLAN-REALIZATION", "HE-DE-HERRNHUT-PLANNED"],
+      "counterexampleEvidenceIds": ["HE-PL-BIECZ-FORTIFICATION-UNCERTAINTY"],
+      "prerequisiteClasses": ["foundation-or-extension-intent", "preexisting-constraints"],
+      "temporalOperation": "UNASSIGNED_RESEARCH_ONLY",
+      "realizationStage": "UNASSIGNED_RESEARCH_ONLY",
+      "geographicTemporalScope": "case-witnessed planned foundations and extensions",
+      "activationWeightSource": null
+    },
+    {
+      "mechanismId": "market.multiple-foci",
+      "label": "Different quarters or functions sustain more than one market focus",
+      "status": "RESEARCH_ONLY",
+      "possibilityEvidenceIds": ["HE-HU-BUDA-MULTIPLE-MARKETS", "HE-IE-KILKENNY-COMPONENTS"],
+      "counterexampleEvidenceIds": [],
+      "prerequisiteClasses": ["multiple-quarters-or-functions", "market-rights"],
+      "temporalOperation": "UNASSIGNED_RESEARCH_ONLY",
+      "realizationStage": "UNASSIGNED_RESEARCH_ONLY",
+      "geographicTemporalScope": "case-witnessed composite towns",
+      "activationWeightSource": null
+    },
+    {
+      "mechanismId": "rupture.discontinuous-rebuild",
+      "label": "Fire, siege, or destruction rewrites selected morphology discontinuously",
+      "status": "RESEARCH_ONLY",
+      "possibilityEvidenceIds": ["HE-DE-MAGDEBURG-RUPTURE", "HE-DE-MUEHLHAUSEN-WALL-GENERATIONS"],
+      "counterexampleEvidenceIds": [],
+      "prerequisiteClasses": ["dated-destructive-event", "rebuild-capacity"],
+      "temporalOperation": "UNASSIGNED_RESEARCH_ONLY",
+      "realizationStage": "UNASSIGNED_RESEARCH_ONLY",
+      "geographicTemporalScope": "case-witnessed fire and war rebuilding",
+      "activationWeightSource": null
+    },
+    {
+      "mechanismId": "shore.port-reclamation",
+      "label": "Quay, dock, or reclamation changes shoreline and buildable land",
+      "status": "RESEARCH_ONLY",
+      "possibilityEvidenceIds": ["HE-IE-GALWAY-RECLAMATION"],
+      "counterexampleEvidenceIds": [],
+      "prerequisiteClasses": ["port-or-landing", "dated-shore-engineering"],
+      "temporalOperation": "UNASSIGNED_RESEARCH_ONLY",
+      "realizationStage": "UNASSIGNED_RESEARCH_ONLY",
+      "geographicTemporalScope": "case-witnessed port towns",
+      "activationWeightSource": null
+    },
+    {
+      "mechanismId": "settlement.inherited-sacred-enclosure",
+      "label": "Later town reuses an earlier sacred or monastic enclosure",
+      "status": "RESEARCH_ONLY",
+      "possibilityEvidenceIds": ["HE-IE-KELLS-INHERITED-ENCLOSURE"],
+      "counterexampleEvidenceIds": ["HE-IE-DOWNPATRICK-NONCIRCULAR"],
+      "prerequisiteClasses": ["predecessor-sacred-enclosure", "later-settlement"],
+      "temporalOperation": "UNASSIGNED_RESEARCH_ONLY",
+      "realizationStage": "UNASSIGNED_RESEARCH_ONLY",
+      "geographicTemporalScope": "case-witnessed Irish monastic-origin towns; no circular-form default",
+      "activationWeightSource": null
+    },
+    {
+      "mechanismId": "economy.hydraulic-production-chain",
+      "label": "Mills and related functions attach to channels and flow geometry",
+      "status": "RESEARCH_ONLY",
+      "possibilityEvidenceIds": ["HE-HU-KOSZEG-HYDRAULICS", "HE-DK-RIBE-HYDRAULIC-STREET"],
+      "counterexampleEvidenceIds": [],
+      "prerequisiteClasses": ["usable-flow", "production-demand"],
+      "temporalOperation": "UNASSIGNED_RESEARCH_ONLY",
+      "realizationStage": "UNASSIGNED_RESEARCH_ONLY",
+      "geographicTemporalScope": "case-witnessed mill towns and channel systems",
+      "activationWeightSource": null
+    },
+    {
+      "mechanismId": "substrate.topographic-ribbon",
+      "label": "Steep slope, ridge, or shore shelf collapses growth into a linear corridor",
+      "status": "RESEARCH_ONLY",
+      "possibilityEvidenceIds": ["HE-IE-CARLINGFORD-RIBBON", "HE-PL-BIECZ-FORTIFICATION-UNCERTAINTY"],
+      "counterexampleEvidenceIds": [],
+      "prerequisiteClasses": ["constrained-buildable-corridor", "through-route-or-shore"],
+      "temporalOperation": "UNASSIGNED_RESEARCH_ONLY",
+      "realizationStage": "UNASSIGNED_RESEARCH_ONLY",
+      "geographicTemporalScope": "case-witnessed ridge, slope, and shore settlements",
+      "activationWeightSource": null
+    },
+    {
+      "mechanismId": "evidence.coverage-aware-absence",
+      "label": "Blank or negative evidence is interpreted through source coverage",
+      "status": "RESEARCH_ONLY",
+      "possibilityEvidenceIds": ["HE-DE-DORTMUND-ARCHAEOLOGY-COVERAGE", "HE-DE-SCHWERIN-CENSORED-BLANKS"],
+      "counterexampleEvidenceIds": [],
+      "prerequisiteClasses": ["source-coverage-metadata"],
+      "temporalOperation": "UNASSIGNED_RESEARCH_ONLY",
+      "realizationStage": "RESEARCH_EVIDENCE_ONLY",
+      "geographicTemporalScope": "all source interpretation; not a runtime morphology prior",
+      "activationWeightSource": null
+    },
+    {
+      "mechanismId": "cartography.source-interpretation-separation",
+      "label": "Surveyed source, scholarly historical state, and generated realization remain distinct",
+      "status": "RESEARCH_ONLY",
+      "possibilityEvidenceIds": ["HE-DE-MAGDEBURG-SOURCE-INTERPRETATION", "HE-IT-CINGOLI-GEOREFERENCE", "HE-GB-YORK-SOURCE-LIMITS"],
+      "counterexampleEvidenceIds": [],
+      "prerequisiteClasses": ["source-role-metadata", "legend", "represented-period"],
+      "temporalOperation": "UNASSIGNED_RESEARCH_ONLY",
+      "realizationStage": "RESEARCH_EVIDENCE_ONLY",
+      "geographicTemporalScope": "all historical evidence handling",
+      "activationWeightSource": null
+    },
+    {
+      "mechanismId": "fortification.wall-precedes-parcelization",
+      "label": "A defensive circuit can precede and constrain later plot division",
+      "status": "RESEARCH_ONLY",
+      "possibilityEvidenceIds": ["HE-HU-BUDA-WALL-BEFORE-PLOTS"],
+      "counterexampleEvidenceIds": ["HE-IE-FETHARD-WALL-ROUTES"],
+      "prerequisiteClasses": ["early-circuit", "later-parcelization"],
+      "temporalOperation": "UNASSIGNED_RESEARCH_ONLY",
+      "realizationStage": "UNASSIGNED_RESEARCH_ONLY",
+      "geographicTemporalScope": "case witness only; walls may also follow established fabric",
+      "activationWeightSource": null
+    }
+  ]
+}

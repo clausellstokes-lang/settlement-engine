@@ -2,6 +2,23 @@
 
 **Lane MF-X2 · ODQ §254 · reconstruction form per ODQ §246 · 2026-08-17**
 
+> ⛔⛔ **ANNOTATION — ODQ §261 (owner correction, 2026-08-17; annotation executed at the
+> §293 Fable retrovalidation sitting, 2026-08-21).** This document was written under a
+> chair framing error that the owner has RETRACTED: the 313-plate corpus is **not** an
+> imitation of this generator's output — it is an independent aesthetic artifact drawn by
+> an image model (nano-banana-pro) from its own training, and it is the target in its own
+> right. Read every "imitator"/"imitation" phrase in this document under that correction.
+> Consequences, binding here: (1) §10.2's framing "where our reverse-engineering was
+> WRONG" is **withdrawn as attributed** — a divergence between this 2017 source and a
+> number we measured in the plates is two independent sources differing, not our error;
+> the twelve divergence rows stand as PLAUSIBLE facts about Watabou's source only.
+> (2) The A/B/C tag scheme of §0b presupposes a lineage that does not exist and is VOID
+> (already applied by PRIOR-ART-FTG.md §1.2b). (3) Every mechanism finding survives as
+> ENGINEERING and must earn a third leg — an argument it moves us TOWARD the corpus's
+> measured values — before any ADOPT verdict binds (ODQ §261.4). (4) §0d's style-capture
+> guard's CONCLUSION (do not chase Watabou's rendered look) survives and strengthens
+> under independence; its justifying "imitation" sentence is corrected by this notice.
+
 Subject: `watabou/TownGeneratorOS` — the published source of the Medieval Fantasy City Generator, in Haxe/OpenFL,
 roughly 4,400 lines across 60 files, last substantive commit 2017 with a 2019 toolchain bump.
 Studied by reading only. **Never built, never executed, never run in a browser.** No Haxe toolchain was installed.
@@ -913,9 +930,13 @@ compendiums.**
 | C9 | **The urban edge frays rather than stopping** | Explicit outskirts thinning pass keyed to road proximity and enclosure (§5.4) | **Total** |
 | C10 | **Plaza ornament is off-centre** | Ornament is deliberately displaced toward the longest edge in most cases | **Confirmed** — a small detail we read correctly |
 
-## 10.2 DIVERGENCE — where our reverse-engineering was WRONG
+## 10.2 DIVERGENCE — ⛔ header withdrawn by ODQ §261: these are NOT "our errors"
 
-**These are the expensive findings. Each is tagged A / B / C per §0b.**
+**⛔ §261 ANNOTATION (see the notice at the top of this document): the original header
+"where our reverse-engineering was WRONG" and the A / B / C tags below are WITHDRAWN AS
+ATTRIBUTED. The rows stand as PLAUSIBLE facts about Watabou's 2017 source; they are not
+evidence about the corpus, and each mechanism needs ODQ §261.4's third leg before
+adoption.** Original text follows unmodified.
 
 | # | What we inferred | What the mechanism actually is | Tag | What it costs us |
 |---|---|---|---|---|

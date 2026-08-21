@@ -66,6 +66,16 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 #   E3 retro-E3-memo.md — prior-art/meta §247/§248/§253/§254/§258/§259/§263/§265/§266
 #   E4 retro-E4-memo.md — engine/soak/waves §267-§274 + RS-4 resume recon
 # The chair has READ all 25 rows + §275-§290 from the primary record already.
+# ⭐ PROGRESS (~06:20 ET): E1+E2+E3 memos LANDED (read them in the scratchpad);
+# §293 COMMITTED — E3's cluster ruled (9 rows: §247/248/253/254/258/259/263/265/266),
+# laws L1 grade-drift + L2 routed-orders + substitution-countersignature banked;
+# repairs executed (PRIOR-ART-WATABOU §261 annotation; six map-corpus/docs files +
+# 13-file historical-evidence registry committed). ⛔ NEW EXPOSURE ITEM: vendored FMG
+# public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
+# IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
+# is a chair row after it lands; owner-side legal posture per §254.5.5.
+# AWAITING: E4 (engine/waves §267-§274 — gates map D0 dispatch per §292.1).
+# E1/E2 clusters ruled after E4's tranche (cross-lane figures judged on the union).
 # ⭐ §292 (owner: "implement those") NOW GOVERNS THE SITTING'S METHOD:
 # dependency-ordered rulings (§267-§274 FIRST, map D0 dispatches when they clear);
 # RS-4 monitor resumes DURING the sitting once E4's recon lands; 4 lanes =

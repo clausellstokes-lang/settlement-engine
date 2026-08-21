@@ -11321,3 +11321,194 @@ Plus the §265.2b mitigation restated for this sitting: every
 ruling re-derives from PRIMARY receipts (the queue entry is an
 index, never the evidence); a row whose evidence is thin is
 ruled with "thin" stated, never defaulted to RATIFIED.
+
+## §293 · THE SITTING RULES THE PRIOR-ART/META CLUSTER — NINE
+## ROWS, THREE NEW LAWS, TWO REPAIRS EXECUTED, ONE EXPOSURE
+## OPENED (2026-08-21; chair: FABLE; evidence lane E3's memo
+## retro-E3-memo.md, re-derived by the chair from its quoted
+## receipts)
+
+1. **§247 RATIFIED WITH ONE AMENDMENT.** (a) performance gate
+   launch-blocking: RATIFIED — independently corroborated
+   (FMG study's cost ranking) and treated as live downstream;
+   the gate's numeric discharge criteria bind to §287.8's
+   memory/p95 gate work so "launch-blocking" has a number.
+   (b) free-path map access: RATIFIED as correctly
+   raised-not-settled; still owner-open. (d) honest caveat:
+   RATIFIED. ⭐ (c) AMENDED — the FTG lane's escalation the
+   collecting row dropped is hereby collected: FTG also sells
+   "the same town across time" on an HOURS-AND-DAYS simulation
+   axis, so §247.3c's "the artifact no competitor can produce,"
+   unqualified, is WITHDRAWN. The corrected differentiator, and
+   the marketing wording that must be used: the same town
+   ACROSS GENERATIONS — decades to centuries of dossier-caused,
+   immutable lived history — plus the second dropped
+   escalation, collected as its supporting fact: FTG cannot
+   hand a user a durable static artifact (its integrations
+   embed a live iframe); we hand a document. The differentiator
+   SURVIVES in that form and is stronger for being honest.
+2. **§248 RATIFIED; THE DISCIPLINE'S BLIND SPOT IS OPENED AS AN
+   EXPOSURE ITEM.** (a) the IP discipline was sufficient for
+   the studies and WAS NEVER RUN ON OUR OWN TREE: the ledger
+   HEAD tracks a vendored FMG at public/map/ (636 files, MIT
+   top-level) containing public/map/libs/tinymce/ — 123 files,
+   4.4 MB, GPLv2-or-later — reaching dist/ and sitting behind
+   vercel.json's own /map/(.*) header block, added at f386f48d
+   before the map program. §253.2 + §254.6 applied to our own
+   repo land exactly here. **IPV-1 DISPATCHED** (read-only
+   census: refs, consumers, the vendored libs' licenses, the
+   openwidget phone-home, dist reality, deploy source);
+   disposition is a following row; the item joins the standing
+   IP-EXPOSURE cluster and the owner-side list — the legal
+   posture itself stays owner-gated (§254.5.5). Mitigating fact
+   on the record: the vendored copy's own notes editor loads
+   TinyMCE from the upstream CDN, so the local 123 files are
+   plausibly dead weight. (b) studies worth doing: RATIFIED —
+   with §265.1's "vindicated three times over" reduced to
+   twice-and-one-hypothesis (the mush inversion was §261-demoted
+   four rows later). (c) yield ranking: RATIFIED.
+3. **§253 RATIFIED WITH TWO AMENDMENTS AND ONE REPAIR.**
+   (a) AMENDED in wording, not ranking: "nobody ships the join"
+   is CONFIRMED for the named leaders (FMG by 248-file
+   exhaustion; Watabou and FTG by corroborated study) and
+   UNSUPPORTED as a market universal — future rows say "neither
+   leader ships the join." The strategic weight stands.
+   (b) adopt-zero-code: RATIFIED, with the explicit annotation
+   that it is a FORWARD-LOOKING rule and audited nothing already
+   vendored — §293.2 is the proof that distinction matters.
+   (c) three adoptions: RATIFIED at approach grade; ⛔ the
+   per-stage stream-derivation audit ORDERED at §253.3b HAS NO
+   RECEIPT — RE-ORDERED, routed per §293.11's law into the D1
+   manifest/random-namespace foundation brief as an acceptance
+   criterion (the manifest owns random namespaces; the audit is
+   its natural acceptance proof). (d) gitignore correction:
+   RATIFIED — and its cure had ALREADY DECAYED: four
+   governance-bearing evidence documents (the historical/rural/
+   massing registries and the expansion protocol, survey-dated
+   2026-08-20) plus two integrity scripts sat in map-corpus/
+   docs/ in NO COMMIT ON ANY REF. **REPAIRED: all six are
+   committed with this row.**
+4. **§254 (+.5/.6) RATIFIED WHOLE.** The severity tiers, the
+   no-licence default, the pre-committed copyleft refusal, the
+   zero-quotation tightening, the clean-room handoff protocol,
+   and §254.6's conveying analysis (the most careful reasoning
+   in the cluster) all stand. Hygiene asymmetry cured by order:
+   the 78 MB xref-fmg clone (GPL tinymce + phone-home widget
+   aboard) is DELETED once IPV-1 collects — §248 never ordered
+   deletion, so this is consistency, not breach.
+5. **§258 RATIFIED WITH ONE AMENDMENT AND ONE GUARD.** (a) the
+   intent-over-execution doctrine and its recorded-signature
+   safeguard: RATIFIED — the substitution register exists and
+   has already blocked SUB-3 for want of a metric. THE GUARD,
+   now law: a substitution row's named signature must be a
+   metric that EXISTS in the measured register, and every
+   substitution is COUNTERSIGNED BY THE CHAIR at collection —
+   lane self-certification alone is insufficient (closes the
+   named-but-wrong-signature hole E3 identified; the
+   wrong-signature case remains judgment, which is why it is
+   the chair's). (b) AMENDED in wording: the "three cases" are
+   one substitution (setbacks, correctly formed), one refusal
+   (districts), one composition (alleys) — substance stands.
+   (c) district-organism stands: RATIFIED as a decision to
+   decline a change (the benign direction); its positive
+   "differentiator" claim is strategy, not measurement, and is
+   so marked.
+6. **§259 RULED AS §261 AMENDED IT, WITH THE PROMISED REPAIR
+   EXECUTED AND ONE §261 ERROR CORRECTED.** (a) the mush
+   finding is a PLAUSIBLE hypothesis; G-39 correctly gates it;
+   the "large rework" framing is retired. (b) banned prior #7's
+   re-read (place by structure, never by spacing): RATIFIED as
+   candidate mechanism — ⭐ and §261.3 is CORRECTED on one
+   point: tower spacing is NOT "corpus-measured first" (§259.5
+   itself proved no tower metric exists); it is G-40(i)-gated,
+   not protected. T-dominance alone holds the corpus-measured-
+   first status. (c) the twelve divergences: PLAUSIBLE facts
+   about 2017 Watabou source, never "our errors" — ⭐⭐ **THE
+   §261-ORDERED ANNOTATION OF PRIOR-ART-WATABOU.md WAS NEVER
+   PERFORMED (15 live occurrences of the retracted framing);
+   EXECUTED WITH THIS ROW** — a top-level §261 notice plus the
+   §10.2 header correction, annotation not rewrite, exactly as
+   §261.4 specified. (d) live-export follow-up: closed, not
+   pending. ⭐ **LAW L1 BANKED (the grade-drift guard): a
+   collecting row may never state a HIGHER evidence grade than
+   the lane's own deliverable states — a ⭐⭐ header word like
+   "DIAGNOSED" is a grade claim.** ("likely" → "DIAGNOSED" →
+   "will drive a large rework" drifted three hops in one
+   direction with no guard; L1 is the guard.)
+7. **§263 RATIFIED WITH THE THREE DROPPED ESCALATIONS
+   COLLECTED.** (a) epoch-ladder convergence correction:
+   RATIFIED (honest, against interest); the surviving
+   differentiator is restated at its true grade — theirs
+   INFERRED-FROM-DOCS free parameters, ours a MEASURED ≤4
+   ceiling with derivation homes; the measured half carries the
+   claim. (b) dependency graph rank #1 among prior-art
+   adoptions: RATIFIED, provisional on the one unverifiable
+   property (no-free-scalar, documentation-sourced) — the rank
+   falls if implementation finds a hidden scalar.
+   (c) triangular-remnant substitution: RATIFIED; its numeric
+   signature (the §4.1c legs) must be stated IN the §3.6
+   register row at the next spec touch. (d) the two instruments:
+   RATIFIED as ordered and correctly routed (G-40 i/ii). The
+   escalations: the two §247-bearing ones are collected at
+   §293.1; ⛔ the third — DOES ANY REGENERATION PATH RE-DERIVE
+   THE STREET WEB PARTIALLY, AND WHAT HAPPENS TO EVERY FACT
+   KEYED ON IT — is exactly this program's most-bitten lifecycle
+   class and was raised and dropped: COLLECTED, entered as a
+   named acceptance question of fresh-W3/frontage (no partial
+   re-derivation path may exist without a stated law for every
+   dependent fact), and folded to the spec's gap ledger at the
+   next spec touch.
+8. **§265 RATIFIED, WITH THE CONCERN'S UNCOVERED FAILURE MODE
+   NAMED AND CURED.** (a) spike insertion: RATIFIED — its
+   premise ("nothing has touched the product") verified
+   literally true at the filesystem. (b) no-more-meta-documents:
+   RATIFIED; determination: the four 08-20 documents are
+   EVIDENCE REGISTRIES (data the historical program requires),
+   not meta-documents — the ruling stands un-violated; the real
+   failure was non-commitment, cured at §293.3. (c) the
+   queue-false-safety concern is WELL-FOUNDED and the specific
+   gap is now law: ⭐ **LAW L2 BANKED (the routed-order law): an
+   order issued in a collecting row must be routed SAME-TURN
+   onto an executable surface — a wave brief, the spec's gap
+   ledger, the queue file, or the resume note's next-acts —
+   never ledger prose alone. A prose-only order is presumed
+   dropped** (two were: the §261 annotation, the §253.3b
+   audit). The queue count correction (30 entries, not ~25) is
+   recorded.
+9. **§266 RATIFIED.** (a) rank ruling: RATIFIED — the ambiguity
+   traced to one unscoped phrase; the lane's own scoping
+   restored; ⚠ §266.1's "relative order MECHANICALLY ASSERTED
+   UNCHANGED" names no receipt — downgraded to PLAUSIBLE, and
+   the assertion re-runs WITH receipt at the next spec fold.
+   (b) spike pull-forward: RATIFIED (non-collision verified).
+   (c) G-39: falsifiable on one branch with a stated
+   consequence — RATIFIED as the gate for whether we may SAY
+   WHY, never a blocker on G-37's independently-legged
+   mechanism; its three weaknesses (escape-hatch branch,
+   deciding arm unrunnable, narrow decision value) are
+   recorded; ⭐ G-40(iii), the footprint-rectangularity
+   instrument, is PROMOTED from vetoable lane addition to
+   CHAIR-RATIFIED W0 work — the deciding arm of the program's
+   #1 aesthetic hypothesis may not rest on an instrument nobody
+   owns. (d) immersion-already-built: RATIFIED with the two
+   omitted qualifications now in the record: built IN THE
+   SANDBOX, not the product (the product's townMap surface is
+   five legacy files), and PARTIAL (chromeRung and the
+   annotation contract unbuilt; two carried defects). The owner
+   should read §266.4 with those qualifications.
+10. **CROSS-LANE NOTICE.** Evidence lane E1 (map-architecture
+    cluster) has reported with findings that materially bear on
+    §240/§252/§255 (a ledger arithmetic error in §255.1's
+    decomposition; tier-ceiling mismatches; a redefined-census
+    concern on §252's "6.8%→0"; triad-delivery doubt) — those
+    rows are ruled in the NEXT sitting tranche together with
+    E4's engine/wave evidence, per §292.1's dependency order,
+    so the interlocking figures are judged once, on the union
+    of evidence.
+11. **ROUTING EXECUTED FOR THIS ROW'S ORDERS (per L2):** the
+    stream-derivation audit and the street-web lifecycle
+    question ride the D1/W3 brief obligations recorded in the
+    resume note's next-acts; the spec folds (register
+    signature, gap entries, W8 demo wording) ride the next
+    spec touch as ONE edit; IPV-1 is dispatched; the six
+    documents and the annotation are in this commit.
