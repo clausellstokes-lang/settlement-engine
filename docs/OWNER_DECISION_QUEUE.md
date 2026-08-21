@@ -12966,3 +12966,53 @@ recommended. Implementation, per item:
    preamble-by-SHA at 9d851fae, carrying this row's rulings.
    Its landing, when it comes, is the next ENGINE-BEHAVIOUR
    exposure — RS-5 fires there (§305.4).
+
+## §309 · TC-WF1B COLLECTED — THE ONE-MEMBER CHARTER REFUSED BY
+## ARITHMETIC, THE SPLIT AMENDED, AND THE BEAT RE-FILED TO WF-8;
+## WF-1B EXECUTES AS A SINGLE MEMBER (2026-08-21; chair: FABLE;
+## receipt laneTCWF1B-receipt.md)
+
+1. **COLLECTED.** Two draft packets (738 + 491 lines) and the
+   receipt landed in the session scratchpad; the lane made no
+   git write. The chartered one-member WF-1b is REFUSED BY
+   ARITHMETIC (16 of 12 handwritten files; ≥11 of 8 acceptance
+   cases) — the same refusal-in-part shape chartered WF-1 took
+   at WF-1A. Three dominant findings, each CONFIRMED by
+   execution at 9d851fae: (a) the tick threading is CHEAPER
+   than family law states — the two functions carry defaulted
+   parameter bags, so ZERO of the fifteen recorded call sites
+   need edits; (b) the FAITH family has NO kind registry (two
+   of the beat's five "registration homes" are files that do
+   not exist; a one-row registry mints the estate's second
+   small family, a state a landed walker forces into review);
+   (c) a NEW vacuity hazard, run-the-fixture-first paying out
+   again: an incumbent with a hand-authored `niche` string
+   routes attemptEntry to open_slot and a site-anchored
+   suppression pin passes green having asserted nothing — now
+   in the family law's hazard corpus and the memory file.
+2. **THE SPLIT BOUNDARY IS AMENDED AS THE LANE PRICED IT**:
+   the flag-forked prune key moves into member i — the default
+   §308.3 boundary would have landed suppressedAtTick with
+   ZERO readers, verbatim the orphan-persisted-key class
+   WF-1A refused; the prune is the field's only consumer.
+   RATIFIED with its numbers.
+3. ⭐⭐ **RAISED-B IS TAKEN: THE OBITUARY BEAT RE-FILES TO
+   WF-8.** The compile's own §7 economics decide it: at WF-8
+   the FAITH kind registry is built ONCE beside its ~20
+   chartered kinds, the five registration homes and the new
+   walker are paid by a member already paying them, and the
+   second-small-family review never has to happen. WF-1B
+   therefore promotes as a SINGLE MEMBER with ZERO budget
+   overrides anywhere (RAISED-C dissolves);
+   draft-WF-1B-II.md is PRESERVED as the WF-8 beat member's
+   compile seed. The chair patched the packet's eight sibling
+   references to the ruled form (each site surgically, per the
+   §298.4 no-banner-cure law) and re-titled it WF-1B.
+4. **TE-WF1B (executor) DISPATCHES NOW**: detached worktree
+   from 9d851fae, the packet lifecycle with never-re-serialize
+   manifest appends, implementation per the packet's own
+   manifest, the full bare gate per-step with TRUE_EXIT, the
+   KEEP-derivation and spectacle-aware and
+   run-the-fixture-first laws binding, the known
+   npcAuthoringScope flake never banked. The chair CASes the
+   green terminal tip; RS-5 fires at that exposure.

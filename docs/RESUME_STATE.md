@@ -74,6 +74,15 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ §309 (~10:55 ET): TC-WF1B COLLECTED — one-member charter REFUSED by
+# arithmetic; split boundary amended (prune key joins member i — orphan-key law);
+# ⭐ RAISED-B TAKEN: the obituary beat RE-FILES TO WF-8 (registry built once
+# beside ~20 kinds; draft-WF-1B-II.md preserved as the WF-8 seed); WF-1B is a
+# SINGLE member, zero overrides; packet patched (8 sites) + re-titled by chair.
+# New vacuity hazard banked (hand-authored niche routes to open_slot → vacuous
+# site pin). TE-WF1B EXECUTOR DISPATCHED: worktree wf1b-tree from 9d851fae,
+# packet lifecycle + full bare gate; chair CASes the green tip; RS-5 fires at
+# that exposure. Lanes out: W3F · TE-WF1B.
 # ⭐⭐⭐ §308 (~10:35 ET): WF FAMILY LAW SIGNED AND LANDED — BUILD BRANCH MOVES
 # f8d978df → 9d851fae (WF-PREAMBLE 758 + WF-SUBSTRATE 424 + the volume RE-FOLD
 # closing the two-copy divergence — nine §78 cure hunks; CLASS NOTE: a ledger-
