@@ -74,6 +74,13 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ §300 (~07:50 ET): CF-1 COLLECTED GREEN AND COMMITTED @ 886932f0 — sitting
+# corrections live in spec (44 markers)+atlas (19)+registers; hf389 renamed,
+# corpus gate 313/313 TRUE_EXIT=0; raised items ruled (index-poisoning note:
+# NEVER attribute via `git diff HEAD` in this tree — use `git show HEAD:p|cmp`);
+# grain2 stem fixed; attributed 08-20 edits (PLAN/HF4/register/grain2 §287.11
+# repairs + the spec's fold growth) committed for durability. STILL IN FLIGHT:
+# RS-4 segment · MF-D0 · CG-1 gate proof. Next collections → §301+.
 # ⭐ §299 (~07:30 ET): CX-1 COLLECTED AND RULED — the codex slice is NOT a fifth
 # authority (dormant compiler stack, no input producer, zero consumers): ACCEPTED
 # IN PRINCIPLE as the §287.9 port target conditional on D1 reconciliation; census
