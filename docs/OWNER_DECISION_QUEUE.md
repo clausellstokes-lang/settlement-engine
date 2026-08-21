@@ -13377,3 +13377,58 @@ recommended. Implementation, per item:
    generator of record and its evidence now survive a
    reboot. Preservation refs ride the eventual push as
    branch backup per the standing §71.5 pattern.
+
+## §313 · TE-WF1B COLLECTED — WF-1B IS BUILT AND PROVEN; THE
+## ONE DETERMINISTIC RED WAS THE CHAIR'S OWN PREAMBLE, CURED IN
+## PERSON; THE EXPOSURE WAITS ON THE RE-RUN GATE STEP
+## (2026-08-21; chair: FABLE; receipt laneTEWF1B-receipt.md;
+## tip 4f25da23 + the chair's cure commit f9bd533f)
+
+1. **COLLECTED, THE BUILD CONFIRMED.** Five lifecycle commits
+   on the detached worktree (DRAFT → READY → implementation →
+   LANDED → the any-cast cure the FULL gate found); all eight
+   acceptance cases pass; the focused battery 85/85; DARK IS
+   BYTE-IDENTICAL against a pre-wiring golden (all four dark
+   arms hash exactly as base; only the lit eviction arm
+   moves); religionState.test.js green UNEDITED — the
+   executed proof the tick threading is additive; census
+   closes +0/+0/+0/+8/+0; five mutants convict including the
+   lane-added fifth that makes the redundant-guard warning
+   falsifiable in both directions; both §13 STOPs checked,
+   neither fires. Gate 16/17 bare-with-TRUE_EXIT + smoke:boot
+   PASS (524/524 chunks); typecheck ratchets exactly at floor
+   (173/173, 1,134/1,134).
+2. ⭐⭐ **THE DETERMINISTIC RED WAS INHERITED AND IT WAS MINE**:
+   the §308-signed WF-PREAMBLE's naked-claim warning
+   TRANSCRIBED the banned vocabulary while warning against it
+   — the estate's recorded quoting-the-matcher-convicts class,
+   tripped by the chair's own signed file; 9d851fae was
+   already gate-red before the member existed. The lane
+   correctly did not repair a chair-signed file outside its
+   manifest and wrote the cure out instead. **THE CHAIR
+   EXECUTED THE CURE IN PERSON** (paraphrase, never
+   transcribe — f9bd533f) and re-ran the enforcement-claims
+   file: 20/21 with the per-claim conviction GONE and the one
+   remaining red the BANKED arm at its banked identity,
+   exactly as the receipt predicted. **NO CAS PAST RED
+   (§271.5): the full test:ratchet step is re-running at the
+   cured tip under a self-named log; the exposure executes on
+   its green** — then RS-5 fires at that exposure, the
+   MF-PREAMBLE lands (with §312.2b's stamp line), and the
+   first D3a packets dispatch through the freed landing slot.
+3. **THE LANE'S FOUR NOTES, DISPOSED**: the any-cast baseline
+   catch (a real regression the focused battery could not
+   see, cured by TYPING not widening) is the full-gate
+   discipline paying for itself — recorded; the WF-1B packet
+   §2.4 prose defect (M2 governs; walker keys on presence not
+   count) is a named prose defect in a LANDED packet — its
+   correction rides the next WF docs act per L2; J-TEWF1B-4
+   (A8's impossible arithmetic → the pin built to PURPOSE
+   with the inside-the-writer arm) is RATIFIED — the stronger
+   pin; the stale zero-byte index.lock (Aug 19) in the shared
+   main worktree is REMOVED by the chair after verifying age
+   and emptiness — it blocked nothing of ours (the
+   private-index method never touches the default index) but
+   would block any future default-index operation. The
+   harness-exit-0-vs-TRUE_EXIT=1 observation re-confirms L3's
+   reason a third time today.
