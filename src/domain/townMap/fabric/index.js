@@ -34,6 +34,10 @@ export {
   PLANAR_DCEL_LAW_VERSION, PLANAR_DCEL_SCHEMA_VERSION, compileOrthogonalCrossPlanarDcel,
 } from './dcel.js';
 export {
+  PARCEL_REGISTRY_LAW_VERSION, PARCEL_REGISTRY_SCHEMA_VERSION,
+  compileOrthogonalCrossParcelRegistry,
+} from './parcelRegistry.js';
+export {
   CANONICAL_ORIGIN_KINDS,
   EXPLICIT_BUILDING_GEOMETRY_LAWS,
   EXPLICIT_BUILDING_MASS_LAW_VERSION,
