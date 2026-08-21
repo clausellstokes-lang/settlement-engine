@@ -13531,3 +13531,57 @@ recommended. Implementation, per item:
    promotion law. The parallel state: TE-T2B (map port) +
    TC-WF1C (engine compile) building, RS-5 gridding at the
    WF-1B exposure.
+
+## §316 · TC-WF1C COLLECTED — ONE MEMBER, ZERO OVERRIDES, THE
+## REGISTRY STOP MEASURED NOT TO FIRE, AND THE TIDY DESIGN
+## INVERTED BY ARITHMETIC; TE-WF1C DISPATCHES WITH SLOT-AWARE
+## TIMING (2026-08-21; chair: FABLE; receipt
+## laneTCWF1C-receipt.md)
+
+1. **COLLECTED.** WF-1c fits ONE member with zero budget
+   overrides. The §314.3 STOP was MEASURED not to fire: the
+   herald's `pantheon_` prefix rule routes the realm beat to
+   the faith desk with NO registry, no EXACT_SECTION row, all
+   six kindPoolFloors figures standing still — the whole
+   registration bill is two rows plus one optional third; the
+   §309 once-built economics do not reach this member. ⭐ THE
+   INVERSION RATIFIED: taking the "tidy" EXACT_SECTION row —
+   what both sibling kinds have — is a HARD STOP by
+   arithmetic (unvoiced 274→275 against shrink-only, no
+   lawful growth cure); A5 and mutant (d) make the refusal
+   STRUCTURAL. The lane's three beyond-charter findings are
+   accepted as compiled: the cult-tier blindness premise
+   proven by execution (convicting a false claim at
+   realmEvents.js:218-219 — its correction rides the member);
+   the double-obituary hazard cured by DERIVATION
+   (lostLastSeat && !ladderSpeaks — no literal, RAISED-4-safe
+   by construction); the deityNameForRef truncation raised
+   rather than silently inherited. Process credit: the lane
+   caught the mid-compile branch move (f20b9faa → 2cdb87fa),
+   proved the src window empty, re-verified all five targets
+   blob-identical, and re-based the packet — the moving-tree
+   discipline working unprompted.
+2. **THE RAISED ITEMS, RULED.** (A) ⛔ pulseKernel.js is a
+   THIRD zero-headroom-class file (1581/1581, pinned both
+   directions), named in neither the preamble nor the
+   hot-file list — RECORDED HERE as binding on WF-1d's
+   compile (which must read this row); the WF-PREAMBLE gains
+   the row at its NEXT edit, batched with that edit's
+   re-stamps per §314.2's law — never a lone-line edit that
+   re-hashes the family law. (B) the deityNameForRef
+   truncation (`custom:` refs always truncate; an extinct
+   creed always takes the fallback): the EXECUTOR measures
+   the caller blast radius and applies the chair's decision
+   rule — dormant-only ⇒ cure in-member with arms;
+   live-shared ⇒ pin current behaviour with a defect
+   annotation and write the micro-item out; never silent in
+   either direction. (C) the beat's headline copy is OWNER
+   SURFACE — ships as drafted, marked owner-reviewable at
+   the walk; joins the owner docket's copy items.
+3. **TE-WF1C DISPATCHES with slot-aware timing**: build and
+   focused-prove now from 2cdb87fa; before the full terminal,
+   re-check the branch — if TE-T2B landed, cherry-pick onto
+   the new tip (paths disjoint by compile measurement),
+   re-validate, and run the ONE full terminal post-rebase.
+   Two build tracks, one landing slot, no double gate — the
+   concurrency law's designed shape, executed.
