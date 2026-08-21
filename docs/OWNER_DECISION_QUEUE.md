@@ -13982,3 +13982,17 @@ recommended. Implementation, per item:
 - **§326.3 Lane census at this write:** TE-NOTICES (landing+terminal) · TE-WF1D (build)
   · TC-T2C (compile) · chair (collections + this row) = four seats occupied, one gate
   active, consistent with §291.2c.
+
+## §326.4 — RAISED-4 DISPOSITION: TWO FALSIFIED LANDED SENTENCES BATCHED ONTO WF-1E (2026-08-21 ~17:25)
+
+- TE-WF1D correctly left two out-of-manifest sentences alone and raised them: the
+  subsystemRowsVirtual.js:1268 prediction that the obituary beat lands in WF-1b (§309
+  re-filed it to WF-8) and the couplingInclusion.walker.test.js:157 justification that
+  patronFall.js has a single importer (this wave adds a second; the row's ratio is
+  unaffected). Both are prose falsified by the wave, not behavior. **Ruling: batched
+  onto the WF-1E seed** with RAISED-B — comment-only edits fire instruments here, so
+  they ride a manifested lane with focused proofs, never a free chair edit. Seed
+  updated; veto unbatches them.
+- Lane state at the hold: tip 91c50357 parked clean, focused proof green, 134 packets,
+  net-zero re-confirmed on all three governed files; a watcher polls the branch ref for
+  NOTICES' CAS, then the third rebase begins unprompted.

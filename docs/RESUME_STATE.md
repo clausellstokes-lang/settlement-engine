@@ -74,6 +74,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ~17:25 ET: WF-1D hold ACK'd, parked clean w/ ref-watcher (self-resumes on
+# NOTICES' CAS). RAISED-4's two falsified sentences batched onto the WF-1E
+# seed with RAISED-B (§326.4) — three micro-items now ride WF-1E.
 # ⭐ ~17:18 ET: WF-1D HELD AT THE TERMINAL DOOR — its heads-up arrived (rebased
 # tip 91c50357 on b25907f9, focused proof green) but NOTICES' terminal is LIVE
 # (ratchet workers, load ~40) and NOTICES CASes first (§325.5), so WF-1D
