@@ -74,6 +74,12 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ §305 (~09:30 ET): RS-4 COMPLETE AND COLLECTED @ b179879d — 162/162, ZERO
+# below the collapse floor, RS-3's failing cell cured at 0.3091 (5,466 to the
+# person), tail survives 39/162; evaluator credited ONCE (sentinel at scratchpad
+# ROOT, runs=4); THE P4 ARC CLOSES. RS-5 waits for the next engine-behaviour
+# exposure (f8d978df is dormant-map-only, no soak owed). Chair's next in-person
+# act: the WF-1b family preamble (engine queue §27). Lanes out: W3F · I1 · CB1.
 # ⭐⭐ §304 (~09:05 ET): OWNER ORDERED THE FIVE FORWARD CHANGES — IMPLEMENTED:
 # MF-I1 DISPATCHED (deciding instruments: G-40 trio + roof-count + Q-1 guard;
 # runs G-39's four-outcome rule AS WRITTEN → laneMFI1-receipt.md) · MF-CB1
