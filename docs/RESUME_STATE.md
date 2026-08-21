@@ -74,6 +74,12 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~15:02 ET: ULTRACODE PROBED — Agent remote-isolation MATERIALIZES LOCALLY
+# (probe ran on this Mac in .claude/worktrees/agent-*, base d024286e): cloud
+# LANES unavailable from this session; the local box is the compute envelope.
+# The cloud lever that DOES work: /code-review ultra (bundles the local branch,
+# no push needed) — owner-triggered, recommended at the §290 review stop after
+# the cascade lands. Do not re-probe.
 # ⭐ ~14:58 ET: RS-5 PAUSED BY CHAIR at 73/163 (§302.3 — load avg 202 with three
 # terminal gates running; workers SIGTERMed PID-exact from pids.json, runner
 # ended, pause logged in rs5-run.log). RESUME after the gates clear: node
