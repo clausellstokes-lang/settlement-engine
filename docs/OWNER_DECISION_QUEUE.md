@@ -13668,3 +13668,57 @@ recommended. Implementation, per item:
    the HANDOFF as its binding spec and the BRAND-landing
    conventions loaded. It lands dark-until-deploy like every
    product surface; the deploy stays the owner's gate.
+
+## §319 · V5-R COLLECTED — THE COUNSEL BANK RECOVERED
+## BYTE-EXACT AND PRESERVED; §121's RECORD CORRECTED ON THREE
+## POINTS; THE FREED SLOT GOES TO THE LANDING PAGE (2026-08-21;
+## chair: FABLE; receipt laneV5R-receipt.md)
+
+1. **COLLECTED, CONFIRMED BYTE-EXACT** — the decisive proof
+   being the original lane's own recorded size check (18702 /
+   13381 / 10485 bytes, NULs=0) reproduced exactly by the
+   re-materialized files: an independent process, different
+   time, same bytes. The whole transcript corpus (2,707
+   files) holds exactly 15 laneV5C file operations; the three
+   deliverables were single Writes with zero edits.
+   **J-V5R-1 RATIFIED**: the ten-file annex the spec
+   incorporates BY REFERENCE was recovered with it — banking
+   a spec whose governing base dangles would have repeated
+   the §121 error in miniature. **PRESERVED:
+   refs/preserve/v5-counsel-bank (d58f1ff5)** — the three
+   deliverables, the ten annex files, the recovery receipt,
+   and the owner's binding references doc (complementary by
+   UUID census: a different batch, upstream of the spec, the
+   depth canon and pendant law tracing to its verdicts).
+2. **§121's RECORD, CORRECTED ON THREE POINTS**: (a) its own
+   recovery was INCOMPLETE — the recorded script's path
+   filter ('/scratchpad/v5/') missed '/v5-photo/', so three
+   asset-plan documents were never recovered while §121 banks
+   the recovery as complete; now recovered (3 writes, 0
+   failures), with the annex-vs-manifest DIFF OWED at the
+   post-tune V5 sitting before either governs. (b) the 13
+   generations are dated **2026-08-04**, not 08-05 (three
+   receipts: call timestamps 20:51Z, hf_20260804_* result
+   files, self-titled planning docs) — the ledger corrects;
+   the recovered artifact stays byte-faithful and uncorrected
+   by design. (c) the drawn-mockup HTML sources SURVIVE and
+   are re-renderable (narrowly: not yet verified as the
+   mourned PNGs' sources). Bonus: the model pin
+   nano_banana_pro@4k is now independently confirmed for all
+   13, and the old cull-lane misread has its explanation (the
+   8 reference images genuinely are nano_banana_2 — a lane
+   reading the library picked up the neighbouring batch's
+   label). §121.2's "8 writes + 59/59 edits" is
+   re-scoped: it describes V5-C's INNER replay of its
+   upstream evidence, reproduced exactly, not the three
+   deliverables.
+3. **THE FREED SLOT DISPATCHES §318.3's LANDING PAGE**:
+   TE-LANDING (Opus, slot-aware, CAS queue last) implements
+   the HANDOFF spec exactly — the salt-road scroll page,
+   tokens-only, the verb/type/color law, every control
+   working, A11y and reduced-motion, resized landing assets —
+   with the packet-scope question verified rather than
+   assumed, and per-section conformance checked against the
+   approved screenshots by the lane's own rendered eyes.
+   Four lanes at ceiling again: T2B · WF1C · NOTICES ·
+   LANDING, plus RS-5.

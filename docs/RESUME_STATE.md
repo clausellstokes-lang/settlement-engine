@@ -74,6 +74,18 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ §316-§319 (~14:00 ET): WF-1C compile collected (one member, registry STOP
+# off, EXACT_SECTION = hard arithmetic STOP; TE-WF1C dispatched slot-aware) ·
+# §317 website track opened (TE-NOTICES dark; owner-batch = mostly owner
+# decisions, list surfaced; laneOB doc lost — reconstructible; delivered-doc
+# preservation law banked) · §318 the arrow/ribbon answered (build waits by §119;
+# V5 bank purged AGAIN → V5-R replay recovery) · §319 V5-R collected BYTE-EXACT →
+# refs/preserve/v5-counsel-bank d58f1ff5 (3 deliverables + 10-file annex the
+# §121 recovery MISSED + references doc); §121 corrected (path-filter miss;
+# true date 08-04; mockup sources survive); annex-vs-manifest diff owed at the
+# post-tune V5 sitting. ⭐ TE-LANDING DISPATCHED (the salt-road landing page per
+# the owner's HANDOFF spec; slot-aware, CAS last). FOUR lanes at ceiling:
+# T2B · WF1C · NOTICES · LANDING + RS-5 grid. CAS order as each greens.
 # ⭐⭐ §315 (~13:15 ET): TE-T2A COLLECTED FULLY GREEN (first no-inherited-red
 # terminal; census exact; CAS f20b9faa→7567a2c7) → chair re-stamp landing
 # 2cdb87fa (MF-PREAMBLE Status fixed LANDED; WF-1B→ca02c8a1…; MF-T2A→6670a046…;
