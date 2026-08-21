@@ -74,6 +74,17 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐⭐ §310 (~11:30 ET): MF-W3F COLLECTED — FRESH W3 SEALS at laneMFW3F-tip
+# (demotion-before-packer; SW-1 5/5; inter-ring 0/18 cured by the INERTIA PIN
+# direction; 11th world Baigou; suite 296; all censuses 0/18; arm-Z 34/34;
+# chair viewed EVERY moved site). S9 frontage NOT BUILT — carried to D3a-era.
+# Rulings: epoch-nesting ground shift + strict-containment cure → W4 generative
+# work; garden floor unfitted RATIFIED; town-ceiling raise recorded; next mint =
+# 2nd THROUGH world; clipHalfPlane rename + same-name-contract scan = next map
+# wave first act; quantum ladder → tuning docket. TC-D3A COMPILE DISPATCHED
+# (the PORT WAVE plan + first packets; drafts draft-D3A-PLAN.md / draft-MF-T2*;
+# receipt laneTCD3A-receipt.md; may compile a map-family preamble WC-shape).
+# Lanes out: TE-WF1B (engine executor) · TC-D3A (port compile).
 # ⭐⭐ §309 (~10:55 ET): TC-WF1B COLLECTED — one-member charter REFUSED by
 # arithmetic; split boundary amended (prune key joins member i — orphan-key law);
 # ⭐ RAISED-B TAKEN: the obituary beat RE-FILES TO WF-8 (registry built once

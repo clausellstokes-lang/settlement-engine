@@ -13016,3 +13016,90 @@ recommended. Implementation, per item:
    run-the-fixture-first laws binding, the known
    npcAuthoringScope flake never banked. The chair CASes the
    green terminal tip; RS-5 fires at that exposure.
+
+## §310 · MF-W3F COLLECTED — FRESH W3 SEALS: THE FOSSILS ENTER
+## THE DERIVATION, ALL FIVE SW-1 CRITERIA PASS, THE ELEVENTH
+## WORLD LANDS; THE CHAIR'S EYES ON EVERY MOVED SITE
+## (2026-08-21; chair: FABLE; receipt laneMFW3F-receipt.md, 781
+## lines; ten raised items ruled)
+
+1. **COLLECTED AGAINST ITS §303.9 CHARTER — MET, with the
+   spec-W3 remainder named.** Demotion-before-packer landed
+   (tower rounds 3→15, ditch gardens 10→18, every remaining
+   refusal attributed to a NAMED senior claim); SW-1's five
+   exit criteria ALL PASS (shared mutable geometry 68→0;
+   wrong published grades 11/17→0/18; gate keys 12→0; stale
+   radii 22→0; the SW-1b source walker); the inter-ring
+   census lands at 0/18 with its cure DECIDED BY THE INERTIA
+   PIN (innermost-first, the later ring yields — a town does
+   not move its old wall; pulling the old ring in red §240.4
+   and the fixture-vs-corpus arm exercised L7 on schedule);
+   the ELEVENTH distinct world (Baigou) lands. Proof floor:
+   suite 296 TRUE_EXIT=0; determinism 10/10; drawn 0/0/0/0
+   area-true over 25,016; self-crossing/ALL-RING/inter-ring/
+   containment all 0/18; 108/108 renders, no ceiling raised;
+   arm-Z 34/34 no-op control. S9 frontage/parcel-DCEL
+   equivalence is NOT BUILT and is stated in the spec row —
+   CARRIED to the D3a-era work, not silently. Two
+   receipt-culture moments banked: the lane convicted its own
+   diag-tree drift and re-derived; the ditch gardens had been
+   drawn inside the ring street's carriageway 110/110 since
+   §250.5 with NO census able to see it (a garden is open
+   ground, outside drawnBodies) — cured by the composition
+   move, and the class (a reader of the same wrong band the
+   censuses cannot reach) joins the vacuity corpus.
+2. ⭐ **THE CHAIR'S EYES (§304.5), DISCHARGED IN PERSON**: the
+   moved distinct sites viewed at 3000px — city, metropolis,
+   highwater's fossil crop, Baigou, Mahabagh(crossing), the
+   town site (covering its famine/plague/siege/year-100
+   replicas), Strathgarth(polycentric), Mingguan(village),
+   migration. Verdicts: every circuit clean of the
+   self-crossing class; gatehouses on roads and barred water
+   gates at crossings; the fossil vocabulary legible (tower
+   rounds as round dwellings, the demoted trace, ring-street
+   carriageways); the polycentric lobes read as the organism
+   intent; the village-tier countryside is VISIBLY WORKED
+   (field boundaries, outlying farmsteads, commons) — no
+   longer the weakest surface at that tier; Baigou is
+   genuinely a new place, not a replica, with the §306.2
+   terrainOverride trap avoided (terrain applied through the
+   real field — "fjord (reconciled)" renders).
+3. **THE TEN RAISED ITEMS, RULED.** (1) The epoch bodies do
+   not nest (112 upstream crossings; the ring censuses are a
+   guard over it): the sound cure — each epoch's mask
+   intersected with its successor's — is a corpus-wide GROUND
+   shift and is ORDERED into W4's generative-epoch work
+   (§297.3a's family; same root as the §306 wall-year
+   finding). (2) The strict containment reading (4→33 via the
+   terrain re-aim on one site) is PUBLISHED beside the landed
+   pin per L4, NOT pinned; the re-shaping cure is REFUSED now
+   (it re-opens §240's coupling) and rides the same W4 work.
+   (3) The garden floor stays UNFITTED (one law, one floor —
+   ratified); a ribbon-specific floor waits for corpus
+   evidence. (4) The town ceiling's measured overrun (4,609
+   vs 4,600 on the larger candidate) is recorded; the raise
+   rides the next wave that needs the bigger world, under
+   §217's measured-minimal-repinned law. (5) The bank arm
+   needs a CONTROL: the NEXT wave's standing world-mint is
+   DIRECTED to a second through-river world. (6) year-018's
+   1.38× closes as CHARACTERIZED-PLAUSIBLE (never-comparable
+   subjects; the wall hypothesis refuted); no speculative
+   perf lane. (7) ⛔ two same-named `clipHalfPlane` exports
+   with OPPOSITE conventions: the rename micro-item is
+   ORDERED into the next map wave's first act, plus a source
+   scan refusing same-name/different-contract exports (the
+   D1 walker family's next arm). (8) The MINT ratchet's 30
+   frozen keys: visibility-first RATIFIED; cures ride waves
+   that own shifts. (9) The arrangement-quantum ladder's
+   three rungs join the TUNING-SIGNATURE docket (owner).
+   (10) The staged-deletion index alarm is the thrice-tripped
+   known condition — §300.2a stands; the warning is now
+   standing lane-brief language.
+4. **W3 SEALS at laneMFW3F-tip. THE PORT WAVE (D3a) COMPILE
+   DISPATCHES** per §304.4's charter: the sandbox fabric's
+   algorithms re-expressed into the app-side foundation on
+   D1's ABI (§303.5's adopt/replace split), §299.3's three
+   obligations, §306.4a's dossier-surface batch, §287.16's
+   dormant-explicit-input massing scope, §290.1's core-first
+   slice — compile first, chair lands, executors build on the
+   packet system.
