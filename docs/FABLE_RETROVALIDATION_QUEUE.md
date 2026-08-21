@@ -5,6 +5,21 @@ exhausted, the chair and all lanes switch to Opus 5 and work CONTINUES —
 but every act performed under an Opus chair is MARKED, and this queue
 accumulates what the next Fable session must retroactively validate.
 
+## ⭐ SITTING IN PROGRESS (2026-08-21, Fable chair; ODQ §291-§294)
+
+**RULED AND REMOVED (16 of 30):** §247 §248 §253 §254 §258 §259 §263
+§265 §266 → **ODQ §293** · §267 §268 §269 §270 §271 §273 §274 →
+**ODQ §294**. Every removed entry's ruling (RATIFIED/AMENDED per item),
+its evidence, and its ordered repairs live in those rows; the evidence
+memos are retro-E1..E4-memo.md in the session scratchpad (E3+E4 consumed;
+E1+E2 pending below).
+
+**REMAINING (14):** the map-architecture cluster (§238 §239 §240 §241
+§252 §255 §257 — evidence memo retro-E1-memo.md, LANDED) and the
+corpus/measurement cluster (§242 §244 §245/§246 §249 §250 §251 §261 —
+evidence memo retro-E2-memo.md, LANDED). Ruled next, on the union of
+E1+E2+E4 evidence (the figures interlock).
+
 ## Marking convention (binding on every Opus-chaired session)
 - Every ledger row authored by an Opus chair carries "(chair: Opus 5 —
   Fable-unvalidated)" in its header line.
@@ -22,7 +37,7 @@ accumulates what the next Fable session must retroactively validate.
   and empties the queue. An AMENDED/REVERSED row's downstream
   consequences get the §61-style annex re-verification treatment.
 
-## Queue (empty at creation — the chair is Fable as of this writing)
+## Queue
 
 ### §238 — MF-B8b collection (Opus chair)
 Fable should re-derive: (a) the ruling that the predicate class supersedes the
@@ -90,19 +105,6 @@ pixel-identity (this defines what "reproduce the corpus" means and therefore
 what the program is trying to do); (c) the two-lane split and the decision to
 synthesize into a single generation specification afterwards.
 
-### §247 — the map-as-acquisition strategy and its consequences (Opus chair)
-Fable should re-derive: (a) promoting the performance gate to launch-blocking
-for the map surface; (b) the recommendation that the free path produce a good
-map with minimal friction (raised as owner-gated, not settled); (c) the
-judgment that the same-town-across-time artifact — not aesthetic superiority —
-is the differentiator to lead with, and its slotting into wave nine's demo.
-
-### §248 — the FMG prior-art study and its IP discipline (Opus chair)
-Fable should re-derive: (a) whether the clean-room discipline as written is
-sufficient given whatever license the lane reports; (b) the judgment that
-source study of a competitor is worth doing at all at this stage; (c) the
-expected-yield ranking (world→settlement derivation first).
-
 ### §249 — the atlas fold's rulings (Opus chair)
 Fable should re-derive: (a) the cohort amendment — union in general, HF-1 alone
 for axes outside the register index (paper warmth at 37, not 34); (b) retiring
@@ -141,22 +143,6 @@ verdict on the arch2 town (aesthetic judgment under an Opus chair — the
 mechanical-bars observation especially); (d) the containment-resolution law as
 a general principle.
 
-### §253 — the FMG study (Opus chair)
-Fable should re-derive: (a) the "nobody ships the join" conclusion and its
-strategic weight — it is drawn from exhaustion over one repo and deserves an
-independent sanity check; (b) adopt-zero-code as the standing verdict given
-MIT plus the vendored-provenance findings; (c) the three architectural
-adoptions, especially taking their road reuse-discount as the street layer's
-approach; (d) the gitignore correction's scope (docs tracked, binaries not).
-
-### §254 — the Watabou prior-art study (Opus chair)
-Fable should re-derive: (a) the license discipline's severity tiers and whether
-the no-licence default reading is right; (b) the guard against style capture —
-taking mechanism while keeping derivation homes; (c) whichever
-convergence/divergence findings the lane reports, especially any place where
-our image-based reverse-engineering turns out to have been WRONG, since those
-propagated into the atlas and the compendiums.
-
 ### §255 — the water characterization (Opus chair)
 Fable should re-derive: (a) the not-a-regression verdict and its 2×2
 decomposition; (b) the refutation of MF-ARCH-2's own stated cause, and the law
@@ -174,22 +160,6 @@ derived-vs-drawn grain census; (d) the chair's same-turn atlas fix carrying
 §249.4a's warmth ruling back into the graded document, and the general class
 that a ruling made after a fold does not reach the folded document.
 
-### §258 — the intent-over-execution doctrine (Opus chair)
-Fable should re-derive: (a) the doctrine itself and especially its safeguard
-(the recorded-signature requirement) — it grants lanes latitude to replace
-stated mechanisms, which is powerful and could drift; (b) the three worked
-cases, particularly the setback synthesis for wide streets; (c) the ruling that
-our district-organism model stands unchanged against weaker prior art.
-
-### §259 — the Watabou study (Opus chair)
-Fable should re-derive: (a) the chaos-at-large-scale finding and the decision
-to treat it as the mush diagnosis — it will drive a large rework;
-(b) the re-reading of banned prior #7 (place by structure, never by spacing);
-(c) accepting twelve refutations of our own image-derived inferences on
-PLAUSIBLE (unexecuted, 2017-source) evidence — how much should the plan change
-on evidence of that grade?; (d) the conditions attached to the live-export
-follow-up if the owner grants it.
-
 ### §261 — the corpus-provenance correction (Opus chair)
 ⚠ SUPERSEDES part of the §259 entry: do not ask Fable to re-derive "twelve
 refutations of our own inferences" as framed — that attribution is withdrawn
@@ -200,81 +170,3 @@ against the corpus's own measured block elongation and plot variance;
 (c) the third-leg requirement for ADOPT verdicts; (d) whether the chair's
 propagated framing error contaminated anything in §254-§260 beyond the rows
 retracted here.
-
-### §263 — the FTG study (Opus chair)
-Fable should re-derive: (a) the correction that §240's epoch ladder is
-convergent rather than unique, and whether "dossier-derived vs free parameters"
-is a strong enough remaining differentiator; (b) adopting the dependency graph
-as rank-#1 approach; (c) the triangular-remnant substitution (subdivide for the
-plot, fit for the footprint) under §258.2; (d) ordering the two missing
-instruments built before their mechanisms are adopted.
-
-### §265 — the chair's self-critique and the integration spike (Opus chair)
-Fable should re-derive: (a) whether inserting an integration spike after W0
-(rather than after the full wave plan) is the right call given it costs a lane
-and lands nothing; (b) the no-more-meta-documents ruling; (c) whether the
-retrovalidation queue's own existence is creating a false sense of safety —
-this entry is part of the queue it questions, which Fable should weigh.
-
-### §266 — the reconciliation fold (Opus chair)
-Fable should re-derive: (a) the rank ruling — dependency governs rank, not
-excellence (the dependency graph stays #1 among prior-art adoptions while the
-terrain substrate keeps ledger rank 1); (b) pulling the integration spike
-forward against my own §265 scheduling; (c) whether G-39's four-outcome
-decision rule is genuinely falsifiable as written; (d) the finding that §12's
-immersion suite is already built and only its subject is deferred.
-
-### §267 — the integration spike (Opus chair)
-Fable should re-derive: (a) re-sequencing the performance pass ahead of W1 and
-holding the substrate for it; (b) the addressable-draw-list ruling, which is
-the largest architecture decision since the version axis; (c) whether the
-neighbour-bearing question is genuinely refusable under THE PROMISE or merely
-needs a terrain-derived answer; (d) the decision to raise townMapOpBudget only
-after optimisation rather than now.
-
-### §268 — RS-3 (Opus chair)
-Fable should re-derive: (a) treating the replication as sufficient to close the
-diagnostic phase and dispatch the repair; (b) the §255 site framing (one world
-of three) and whether it should temper the repair's priority; (c) holding RS-4
-for the next exposure rather than re-running at the same tip.
-
-### §269 — the performance pass (Opus chair)
-Fable should re-derive: (a) ratifying the refusal of the chartered integer-key
-target on a ≤0.03% measurement; (b) folding the §202 ladder fix into W1 to
-share one declared shift rather than isolating it; (c) declining to charter a
-further performance lane on speculation now that the concentrated wins are
-spent; (d) whether the 2.05× metropolis result changes the §220 gate verdict
-(it does not on its own — the gap to the shipping map is still large).
-
-### §270 — W1 partial (Opus chair)
-Fable should re-derive: (a) the never-run-machinery law (a mechanism must pin
-that it FIRES on a real leaf) — it implies an audit of every existing mechanism
-for the same condition, which is a large consequence; (b) raising the hamlet op
-ceiling under §217 rather than pressing the remaining levers; (c) refusing to
-collect W1 as done and splitting a completion lane instead; (d) whether the
-hash-vs-rank rationing law generalizes beyond terrain marks.
-
-### §271 — the P4 repair and its re-record (Opus chair)
-Fable should re-derive: (a) authorizing a 13-row golden re-record on
-chair authority — the sharpest authority call of the session; (b) the
-derived-to-preserve argument that these three constants are a faithful port
-rather than a tuning act (if that reasoning is wrong, the whole repair needs
-the owner's signature BEFORE landing, not at the tuning pass); (c) the
-anti-floor proof's sufficiency; (d) holding the CAS until the terminal is
-green rather than exposing a tip with an authorized-but-unexecuted explanation.
-
-### §273 — W1 complete (Opus chair)
-Fable should re-derive: (a) the normalized-units law and how wide the audit
-should be; (b) amending exit 6 rather than waiving it, and treating zero
-through-river exemplars as a coverage gap to fill in W2; (c) the point-vs-area
-class now at four instances — is a systematic sweep warranted rather than
-case-by-case cures?; (d) the absolute slope threshold chosen by shape (flat 0%,
-hills 11%, mountain 27.8%) rather than by a fitted number.
-
-### §274 — W2 the wall (Opus chair)
-Fable should re-derive: (a) ratcheting rather than curing the self-crossing
-walls, and whether a defect that five of ten walled leaves SHIP should wait a
-wave; (b) bundling the multiplicity-region cure with the faubourg-id decision
-as one owner call; (c) the demotion-before-packer ordering as W3's first item;
-(d) accepting the flank-grammar partial as a fixture measurement rather than a
-generator defect.

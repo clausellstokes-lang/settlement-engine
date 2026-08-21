@@ -74,8 +74,24 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
-# AWAITING: E4 (engine/waves §267-§274 — gates map D0 dispatch per §292.1).
-# E1/E2 clusters ruled after E4's tranche (cross-lane figures judged on the union).
+# ⭐⭐ PROGRESS 2 (~06:45 ET): ALL FOUR memos landed. §294 COMMITTED — §267-§274
+# RULED (build gate discharged), law L3 (receipted-instrument) banked. RS-4's final
+# 36-cell w0-soak-c segment RUNNING (chair-resumed; run rs4-evaluate.mjs ONCE after
+# it exits 0 — sentinel guard present, marker absent). MF-D0 OFFSET-KERNEL LANE
+# DISPATCHED (Opus): works in old-scratchpad laneMFD0-tip copied from sealed
+# laneMFW2-tip; receipt → laneMFD0-receipt.md; acceptance incl. self-crossing
+# census→0 with survivors explained, byte-preservation per §287.12, L3 logs.
+# Queue file updated: 16/30 ruled+removed (→§293/§294); 14 remain (E1+E2 clusters).
+# NEXT: rule E1 cluster (§238/239/240/241/252/255/257) + E2 cluster
+# (§242/244/245-6/249/250/251/261) from retro-E1/E2 memos (LANDED, partially read;
+# E1's five sharp findings + E2's five are in the memos' tails) → then annex
+# re-verification for AMENDED items → empty queue → refresh HANDOFF_CURRENT →
+# W3-brief obligations: year-018 1.38x characterization (§294.3), §202 ladder
+# behaviour (§294.3b), demotion-before-packer first (§274.5a), self-intersection
+# census standing, through-river n=1, street-web partial-rederivation lifecycle
+# question (§293.7), stream-derivation audit → D1 manifest brief (§293.3c).
+# Collect when landed: IPV-1 (vendored-FMG census → retro-IPV1-memo.md; disposition
+# is a chair row; owner-side legal visibility per §254.5.5) · MF-D0.
 # ⭐ §292 (owner: "implement those") NOW GOVERNS THE SITTING'S METHOD:
 # dependency-ordered rulings (§267-§274 FIRST, map D0 dispatches when they clear);
 # RS-4 monitor resumes DURING the sitting once E4's recon lands; 4 lanes =

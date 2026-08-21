@@ -11512,3 +11512,200 @@ ruled with "thin" stated, never defaulted to RATIFIED.
     signature, gap entries, W8 demo wording) ride the next
     spec touch as ONE edit; IPV-1 is dispatched; the six
     documents and the annotation are in this commit.
+
+## §294 · THE SITTING RULES THE ENGINE/SOAK/WAVE CLUSTER —
+## SEVEN ROWS, THE BUILD-GATING TRANCHE, LAW L3, AND RS-4
+## RESUMED MID-SITTING (2026-08-21; chair: FABLE; evidence lane
+## E4's memo retro-E4-memo.md, its key proofs INDEPENDENTLY
+## RE-EXECUTED by the lane and re-derived by the chair; the
+## chair's own eyes on the W2 base metropolis plate per §292.5)
+
+0. **RS-4 IS RESUMED (§292.2 executed).** E4's recon corrected
+   the ledger's interruption figure — the true state was
+   **126 of 162** complete (not ~110/163; the 163 counted
+   pids.json), all 126 receipts sound, zero corrupt, nothing
+   running. `rs4-resume-gen.mjs` re-run by the chair returned
+   exactly the predicted `{162,126,0,[w0-soak-c:36]}`; the
+   final 36-cell w0-soak-c segment is RUNNING at tip 4eafca31
+   under the original driver, appending to rs4-run.log. ⭐ The
+   partial grid already answers §272.5: ZERO cells below the
+   0.05 floor over 126; the RS-3 failing cell reads 0.3091;
+   all three worlds reproduce TE36's cured figures TO THE
+   PERSON (5,466 / 12,988 / 12,352); and a tail survives
+   (39/126 under 0.5) — the cure did not flatten into a floor.
+   One clean `rs4-evaluate.mjs` runs after the segment
+   completes (the sentinel guard is confirmed present and the
+   marker absent). Caveat carried: ca-015 is not in RS-4's
+   array; the class claim rests on the full grid, not a re-run
+   of RS-1's cell.
+1. **§267 RATIFIED WITH CORRECTIONS AND ONE LIVE QUESTION
+   REOPENED.** (a) perf-before-W1: RATIFIED — both load-bearing
+   facts are executed measurements; vindicated by §269.
+   Ledger corrections recorded: q6's merged-by-name share is
+   12.9% (the ODQ's 14.1% is the unmerged reading); the
+   shipping map's measured band is **2.9–10.3 ms**, not
+   "5–21 ms"; the townMapFixtures blast radius at the tip is
+   **60 files**, not 66 (the receipt's grep counted its own
+   overlay). (b) the addressable-draw-list ruling: RATIFIED —
+   the seam is CONFIRMED-measured, the projection shape is
+   design (PLAUSIBLE) and is now canonical via §287.9's
+   DrawList; the 8,999-vs-2,200 overshoot is a prediction
+   about an unwritten projection and §267.5d's
+   measure-after-optimisation already covers it. (c) ⭐ the
+   neighbour-bearing question is REOPENED, not settled:
+   MF-W1b's own minted-vs-READ distinction (a bearing lawful
+   when it is a reading of ground that already exists) means
+   the correct question — does the route the fabric already
+   draws toward a neighbour supply a READ bearing? — has been
+   answered by NO lane. Entered as a named D1/W3-adjacent
+   recon question; owner-gated only if a mint turns out to be
+   required. (d) op-budget raise after optimisation: RATIFIED;
+   the raise measures against the LANDING tip's primitive
+   count, which has moved four times since 8,999.
+2. **§268 RATIFIED WHOLE.** The one-flag localization is exact
+   (79 keys, one difference), the severity figures reproduce
+   to three decimals, the one-world-of-three framing is
+   arithmetically exact, and holding RS-4 for the next
+   exposure is vindicated by outcome (§294.0). Recorded: the
+   replication shares RS-1's world seed and start population —
+   independent in tip/census/array/row-id, not in world; and
+   RS-3's F2 tail figures (three of four) are NOT derivable
+   from its named artifacts — F2 drove no ruling, and its
+   figures must be RE-DERIVED FROM RECEIPTS before the tuning
+   pass consumes any provisional curve near them.
+3. **§269 RATIFIED WITH THE CONTROL-SET CORRECTION.** (a) the
+   integer-key refusal: RATIFIED — the arithmetic reproduces,
+   and the tie-rule argument (changing the rounding rule
+   inside the decision that defines geometric identity) would
+   justify refusal at ten times the saving; the true bound is
+   ≤0.034% (year-100), and "at most 41%" is 41.1/41.8/46.2 by
+   the lane's own rows. (b) folding the §202 figure-fix into
+   W1: RATIFIED; ⚠ the LADDER BEHAVIOUR is still uncured after
+   three waves (sealed-set bodies shrunk three times then
+   dropped; priced 1.13–1.21×) — carried as a NAMED W3+ item,
+   never silently inherited. (c) no speculative perf lane:
+   RATIFIED. (d) 2.05× does not clear §220: RATIFIED
+   (≈1,190 ms vs a 2.9–10.3 ms legacy path). ⛔ AMENDED: the
+   credibility control was OFF BY ONE — the corpus carries SIX
+   circuit-less leaves, and the omitted one (year-018) moved
+   1.38× while its nearest §202 twin (fjord, subject 1,488 vs
+   1,576) moved 1.02×, refuting the benign explanation. The
+   2.05× and the 32/32 byte-identity stand (independently
+   re-executed); the control claim is restated as "five of six
+   unwalled leaves did not move; the sixth is UNEXPLAINED" —
+   and **characterizing year-018's 1.38× is ordered into the
+   map lane's next wave** (§252.3b's uncharacterized-wrong-way
+   law, applied to time).
+4. **§270 RATIFIED WHOLE.** The never-run-machinery law's
+   vocabulary arm is log-verbatim (1 of 9 bridge keys real;
+   13 of 14 reachable archetypes rowless) and the law is now
+   STRUCTURALLY ENFORCED by walker pins with non-vacuity arms
+   — stronger than any census. The hamlet §217 raise is the
+   cleanest ruling in the cluster (efficiency measured first;
+   re-pinned at the fixed point). Refusing to collect W1 done
+   is proved by identical suite counts (178=PERF1's). The
+   hash-vs-rank law generalized twice on evidence. ⭐ The
+   walker pattern (totality over the engine's OWN vocabulary,
+   with the walker that convicted its own author twice) is
+   adopted as the standing shape for every future never-run
+   audit; the engine queue's family sittings inherit it.
+5. **§271 RATIFIED — THE SHARPEST AUTHORITY CALL SURVIVES ITS
+   RE-DERIVATION — WITH ONE CLOSURE ORDERED.** (a) the 13-row
+   re-record: the key-by-key diff was RE-EXECUTED
+   INDEPENDENTLY (64 keys in/out, zero added/removed, exactly
+   four changed, all four .hash) and EXTENDED to both large
+   baselines (63/63 identities; 26/26 rules with exactly
+   `\bmay fall\b` crossing active→inert); scope was exactly
+   the declared ten files; the authorization sits inside the
+   delegation's released UPDATE_GOLDEN class with exemplary
+   conditions — RATIFIED. (b) derived-to-preserve:
+   SUBSTANTIALLY CONFIRMED — the crisis weights re-derive
+   four-for-four from the legacy lane's own monthly penalties,
+   and the deficit threshold is a closed form over authored
+   tables; ⚠ `DEATH_CRISIS_GAIN = 3.0`'s −13.4%/yr fit is the
+   ONE UNRECEIPTED LINK (source comment + prose only).
+   ORDERED: a pin asserting the −13.4%/yr composite at the
+   bound under full crisis, in the anti-floor arms' own shape,
+   riding the next engine train (its census-title cost
+   declared as part of that train's scope). The constants
+   remain flagged for the tuning signature with the redo
+   obligation. (c) the anti-floor proof: RATIFIED — five arms
+   with a positive control and a three-way discrimination, NOW
+   CORROBORATED AT GRID SCALE by RS-4 (§294.0). One base-cell
+   outlier recorded (TE36's w0-soak/maximal-lawful 5,387 vs
+   the receipt's 3,537; five of six exact including every
+   quoted row) — explained or corrected at the tuning pass.
+   (d) CAS-held-until-green: RATIFIED (sequence verified in
+   the commit graph; the soaked tip is the post-re-record
+   one). Also recorded: "Brimhold 8,601" is seed p5b-b only.
+6. **§273 RATIFIED WHOLE, WITH THE DEFERRALS SAID LOUDLY.**
+   (a) normalized-units law: RATIFIED (thresholds reproduce
+   from published divisors; six spellings cured at one home) —
+   ⚠ AND THE AUDIT IS NOT COMPLETE: `RELIEF_BANDS` and the
+   marks are STILL per-leaf-normalized (W7-deferred), so the
+   law and the picture disagree on slope on every leaf until
+   then — now recorded at ledger level, not only in the
+   receipt. (b) exit-6 amendment: RATIFIED (log-verbatim;
+   the W2 through-river exemplar landed; n=1 caveat carried).
+   (c) point-vs-area: the chair's question is answered
+   empirically — **SWEEP**: six instances inside one wave of
+   the ordering, the sixth inside the instrument that prints
+   "AREA-TRUE"; the W2 instrument cure and re-measured-clean
+   base are accepted; the structural guard (one predicate,
+   one home, red-on-respell — G-34a's shape) binds the D1
+   foundations. (d) the slope threshold: RATIFIED as a shape
+   argument; the ledger conflated the crag-only table
+   (27.7/11.0, city 0.1%) with the crag+wet census
+   (27.8/11.1) — corrected; ⚠ the threshold is UNSOAKED and
+   RIDES THE TUNING SIGNATURE — the receipt's flag survives
+   into the ledger here.
+7. **§274 RATIFIED — WITH THE EXPOSURE RECORD CORRECTED AND
+   THE CURE'S HOME NAMED.** (a) ratchet-not-cure: RATIFIED as
+   wave discipline (the defect predates W2; curing there
+   doubles the declared shift; the ratchet only-shrinks with a
+   delete-on-cure arm). ⛔ THE EXPOSURE RECORD IS CORRECTED:
+   the TIP ships **12 self-crossing segments over 17 leaves
+   (10 of 11 distinct sites)** — the ODQ's 11/16 was the BASE,
+   right for attribution and wrong for exposure. **THE CHAIR
+   HAS NOW VIEWED THE BASE METROPOLIS PLATE IN PERSON
+   (§292.5): the east/southeast circuits show a clean
+   X-crossing, a closed loop enclosing empty ground, long
+   chords crossing the block grid, and spurs dying in open
+   country — the visual severity materially exceeds the
+   census's phrasing, on the flagship tier.** RULING: the cure
+   is not deferred wave-work; its proper home is the
+   **D0 OFFSET KERNEL that is the very next dispatch** — D0's
+   acceptance now includes: the two measured causes (the 5×
+   bisector multiplier vs margin; the fragmented-component
+   resample) addressed at the kernel, the self-intersection
+   census going to zero on cured leaves with every survivor
+   explained, and the metropolis circuits reading as closed
+   non-self-crossing rings under the chair's own zoom.
+   (b) multiplicity-region + faubourg bundled as one owner
+   call: RATIFIED (the characterization's natural experiment
+   is genuinely strong; n=1 and the dry-leaf movement recorded
+   as open). (c) demotion-before-packer as W3's first item:
+   RATIFIED (90.6%/81.0% reproduce; "turns the partial into a
+   pass" is a PLAUSIBLE prediction, so labelled).
+   (d) flank-grammar as fixture measurement: RATIFIED; exit
+   3's arm is ungradeable until exemplar diversification — a
+   carried debt beside the through-river n=1.
+8. ⭐ **LAW L3 BANKED (the receipted-instrument law):** a
+   figure that grounds a ruling must trace to a CAPTURED,
+   SELF-NAMED log or artifact; a number that exists only in
+   receipt prose is PLAUSIBLE by definition, whatever the
+   receipt's confidence. (E4 found the pattern concentrated
+   exactly on ruling-bearing numbers: the q6cost timings, the
+   §202 sealed-set arrays, the never-run per-leaf counts, the
+   W2 self-crossing census run, and a cited log that does not
+   exist.) Extends the standing trust-no-uncaptured-exit law
+   from gates to instruments. Sandbox note carried: the W2
+   lane tip's node_modules are pruned — the D0 lane links its
+   OWN modules and re-executes the census under a captured
+   log as its first act.
+9. **THE BUILD GATE OF §292.1 IS DISCHARGED.** With §267–§274
+   ruled, the map D0 offset-kernel lane dispatches NOW (Opus,
+   per §291.5), from sealed W2, with §294.7a's acceptance
+   folded in. Remaining sitting tranches: the E1
+   (map-architecture) and E2 (corpus/measurement) clusters,
+   ruled next on the union of their memos' evidence.
