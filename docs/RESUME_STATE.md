@@ -74,6 +74,15 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~14:58 ET: RS-5 PAUSED BY CHAIR at 73/163 (§302.3 — load avg 202 with three
+# terminal gates running; workers SIGTERMed PID-exact from pids.json, runner
+# ended, pause logged in rs5-run.log). RESUME after the gates clear: node
+# rs5-resume-gen.mjs (regenerates configs from durable receipts) then relaunch
+# run.mjs per segment; evaluator ONCE at completion. WF-1C tip 253f2028 named
+# but its §9 GATE SECTION GOVERNS and is still being written — NO CAS until its
+# executed greens land (§321.3). WF-1D compiled (§321): net-zero join, WF-1E
+# seeded, preamble batch (pulseKernel+applyWorldPulse rows) rides the WF-1D
+# landing with re-stamps.
 # ⭐⭐ §316-§319 (~14:00 ET): WF-1C compile collected (one member, registry STOP
 # off, EXACT_SECTION = hard arithmetic STOP; TE-WF1C dispatched slot-aware) ·
 # §317 website track opened (TE-NOTICES dark; owner-batch = mostly owner
