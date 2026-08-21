@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~19:58 ET: T2C held its terminal on five sweep reds — chair VERIFIED all
+# five BANKED (baseline + TE-OFL's green at the same commit); GO sent; soak
+# PAUSED PID-exactly (receipts 73→91 before pause). §331: clamp debt grew
+# 73→75 invisibly under the banked red (chartered); compile erratum accepted;
+# INDEX.md reservation gap recorded. Awaiting T2C's terminal verdict.
 # ⭐⭐ ~19:15 ET: CASCADE CLOSED (§330) — OFL completion LANDED, CAS
 # 190895a4 → fb80e32f (five CASes today). RS-5 RESUMED (segments b=36 then
 # c=54 chained, 1 worker, receipts durable; pause via rs5-receipts/pids.json).

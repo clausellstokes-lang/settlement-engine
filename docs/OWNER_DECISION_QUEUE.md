@@ -14128,3 +14128,36 @@ recommended. Implementation, per item:
   fb80e32f: WF-1C · MF-T2B(+fence amendment) · the notices surface · WF-1D(+the
   four-file zero-headroom law) · the OFL completion. What remains before the §290
   review stop: TE-T2C's landing and RS-5's closing collection.
+
+## §331 — T2C'S TERMINAL HOLD REFUTED BY TWO INSTRUMENTS; GO ISSUED; STANDING FINDINGS (2026-08-21 ~19:58)
+
+- **The lane held its terminal on a correct protocol and a wrong premise.** Its pre-gate
+  sweep found five reds at base fb80e32f (three files: the warCost/warRuling annex
+  walkers + the clamp baseline) and predicted the full gate must red. The chair refuted
+  the premise with two independent instruments: (1) all five titles are BANKED entries
+  in scripts/.test-ratchet-baseline.json at that commit — class debt, attribution
+  unbisectable, inside the frozen 11 every terminal reported all day; (2) TE-OFL's full
+  terminal ran GREEN with the captured exit at the SAME commit an hour earlier. The
+  lane's WF-1D attribution guess is disproven by WF-1D's own ceiling-held terminal.
+  Option 3 (cure in passing) REFUSED — banked debt is cured only by a chartered lane
+  with separate passing pins. GO issued after the soak was paused PID-exactly
+  (TaskStop + pids.json survivor check; 18 fresh cells banked in the resumed window,
+  receipts 73 → 91).
+- **§331.1 CHARTERED MICRO-ITEM — invisible debt growth under a banked red:** the clamp
+  entry's cause prose says 73 local clamp definitions; the lane measured 75. A red
+  ratchet grows invisibly (the standing hazard, now with a fresh instance). Queued for
+  a future debt-cure lane; NOT cured in passing.
+- **§331.2 The compile erratum is ACCEPTED pending ratification at collection:** the
+  compile probe zipped a faceId-sorted list against a discovery-ordered one, so the
+  nested-fixture defect is LIVE, not latent — worse than compiled. The lane's cure
+  (A1 asserts the faceIndex/faces alignment; one permutation drives both published
+  arrays) closes the same trap inside the kernel.
+- **§331.3 Lane judgment ratified in advance:** setting aside three of six
+  forensic-zoom tokens as VACUOUS (absent from the whole bundle because the surface
+  has no consumer — an absence over a denominator that does not contain the surface)
+  and resting the dormancy proof on the three tokens that DO ship, each in exactly one
+  lazy chunk with scanner controls asserted present. This is the §-law applied while
+  writing, not after.
+- **§331.4 RECORDED, NOT REPAIRED:** docs/implementation/INDEX.md is edited by every
+  packet landing but reserved in only four historical terminal changeManifests — a
+  packet-standard inconsistency for a future PACKET_STANDARD amendment, not a lane fix.
