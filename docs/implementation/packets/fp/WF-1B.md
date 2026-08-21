@@ -28,9 +28,16 @@
   (SINGLE MEMBER; the `-I` suffix the compile carried presumed a sibling that §309 re-filed).
 - **Verified base:** `claude/composite-r4` at `9d851faeb7cac73217d508f621d1d9ee29f2c145`
 - **Preamble:** `docs/implementation/preambles/WF-PREAMBLE.md`, cited **BY SHA-256
-  `ca02c8a165ddbc18ab3f254bebce8cca5dd945e71e074b526227164e9b0cabfd` (re-stamped at ODQ §315 — the §313 paraphrase cure re-hashed the preamble; original citation `cd067ba1…3211`** (re-executed at this base:
-  `git show 9d851fae:docs/implementation/preambles/WF-PREAMBLE.md | shasum -a 256`). Every
-  refutation, disposition, register, STOP and census law in that file binds this packet and is not
+  `f4cd39fee756c3a192710ab9aa3fc208e18ef1f08ea9e9073bcdc8bfb55d871c`** (780 lines, 58,883 bytes).
+  ⚠ **THE CITATION CHAIN, RECORDED RATHER THAN OVERWRITTEN** — the family law has been re-hashed
+  twice since this packet landed, and a landed packet citing a dead hash is a false record:
+  1. `cd067ba1…3211` — this compile's original citation, at base `9d851fae`.
+  2. `ca02c8a1…cabfd` — re-stamped at **ODQ §315**, the §313 paraphrase cure (`f9bd533f`).
+  3. `f4cd39fe…d871c` — re-stamped by **WF-1D's landing** (ODQ §324.3 / §314.2), which amended
+     §P1 R-WF-7 and §P7 stop-condition 8 to enumerate the ZERO-HEADROOM class at four members.
+  ⛔ **Nothing this packet relied on moved**: the amendment ADDS `pulseKernel.js` and
+  `applyWorldPulse.js` to a class this packet names neither member of, and re-words no refutation,
+  disposition, register or census law. Every one of those in that file binds this packet and is not
   restated here.
 - **Substrate annex:** `docs/implementation/preverification/WF-SUBSTRATE.md`. ⛔ **No absolute is
   inherited.** Every row this packet depends on was re-executed at `9d851fae` and the figures below

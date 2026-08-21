@@ -235,10 +235,30 @@ and no rename sweep anywhere."*
   erase the fact the tripwire exists to preserve"* — and an exact-length pin reds it. **The lawful
   move is the NAMED GROWN SET**, which is itself an exact-set `toEqual` that has already grown twice
   and reds on a family the set does not name.
-- ⛔ **`peaceTerms.js` IS A ZERO-HEADROOM-CLASS FILE**, alongside `warTermination.js`, which sits at
-  its frozen `scripts/.size-baseline.json` literal with **zero** headroom, shrink-only. For both:
-  net-zero seam lines only, re-measured at the compile's own base with eslint's own `Linter`; **any
-  growth is a STOP plus an extraction recipe, never a squeeze.**
+- ⛔⛔ **THE ZERO-HEADROOM CLASS HAS FOUR MEMBERS, AND ALL FOUR ARE NAMED HERE SO THAT NO LATER WAVE
+  DISCOVERS ONE AT A TERMINAL.** Amended 2026-08-21 by WF-1D's landing, which carries WF-1C's
+  RAISED-A and its own RAISED-2 as one edit (ODQ §324.3 / §314.2):
+
+  | file | effective | ceiling it sits at | how it is held |
+  |---|---:|---|---|
+  | `src/domain/worldPulse/peaceTerms.js` | **797** | the 800 LAYER ceiling, three under | no `scripts/.size-baseline.json` entry — the layer rule alone guards it |
+  | `src/domain/worldPulse/warTermination.js` | **818** | a frozen `.size-baseline.json` literal of **818** | exact in BOTH directions |
+  | `src/domain/worldPulse/pulseKernel.js` | **1581** | a frozen literal of **1581** (R-BLD-10, banked permanently) | exact in BOTH directions |
+  | `src/domain/worldPulse/applyWorldPulse.js` | **941** | a frozen literal of **941** | exact in BOTH directions |
+
+  ⛔ **EVERY EDIT TO ANY OF THE FOUR MUST BE NET ZERO IN EFFECTIVE LINES, AND THE NET-ZERO CLAIM IS
+  DISCHARGED BY MEASUREMENT RATHER THAN BY ASSERTION.** The wave reads the file with `wc -l` AND
+  with eslint's own `Linter` (`max-lines {skipBlankLines, skipComments}`) BEFORE the edit and again
+  AFTER it, and quotes both readings together with the `diff` in its receipt. A reading taken only
+  after the edit proves nothing, and an inherited figure proves less. The three baselined files are
+  additionally pinned exact in both directions by `tests/lint/sizeBaseline.test.js` and re-enforced
+  by a generated per-file `max-lines` override, so growth reds twice and a SHRINK reds too — a
+  genuine shrink owes the literal lowered in the same commit. ⛔ **Growth is a STOP plus an
+  extraction recipe, never a squeeze**, and the extraction home must be a leaf with real headroom
+  (`warTerminationCauseTables.js` is the WR family's, cut for exactly this pressure).
+  ⚠ For `pulseKernel.js` the number is not the only constraint: the kernel's PRNG call order IS the
+  stream identity THE PROMISE protects, so a kernel edit also states affirmatively that no draw was
+  added, moved or removed and that the fork order is untouched.
 - ⚠ Volume **Q3 is not an open question** — the tree already answered it, and §78.3 records it
   CLOSED in the tree's direction.
 
@@ -506,8 +526,11 @@ A WF wave STOPS — and reports rather than repairs — on any of:
 6. An errand-minting module without its `ERRAND_CONSUMERS` `built: true` flip in the same commit, or
    a purpose-class spelling that departs from the reserved rows (§P1 R-WF-4).
 7. A scope budget exceeding any `PACKET_STANDARD` cap (§P1 R-WF-8).
-8. **Any movement of `peaceTerms.js` or `warTermination.js` effective lines.** Both are
-   ZERO-HEADROOM-CLASS; the lawful answer is an extraction recipe, never a squeeze.
+8. **Any movement in the effective lines of a ZERO-HEADROOM-CLASS file** — `peaceTerms.js`,
+   `warTermination.js`, `pulseKernel.js` or `applyWorldPulse.js`, all four enumerated with their
+   figures at §P1 R-WF-7. Net zero is REQUIRED of every edit and is proved by a before/after
+   reading on both instruments; the lawful answer to growth is an extraction recipe, never a
+   squeeze.
 9. **A tuning constant of any kind that has not cleared §78 F-5** — its derivation home table and
    its chair signature under §42/§43 (§P2.5). ⛔ **A curve is a constant, and constants are
    owner-signature surface under THE PROMISE.**

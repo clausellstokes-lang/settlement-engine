@@ -8,13 +8,15 @@
   (J-TEWF1B-1, paid once already).
 - **Verified base:** `claude/composite-r4` at `2cdb87fac566b3d6803a0dce9d59df13f07c1c9e`
 - **Preamble:** `docs/implementation/preambles/WF-PREAMBLE.md`, cited **BY SHA-256
-  `ca02c8a165ddbc18ab3f254bebce8cca5dd945e71e074b526227164e9b0cabfd`** (re-executed at this base:
-  `git show 2cdb87fa:docs/implementation/preambles/WF-PREAMBLE.md | shasum -a 256`; 757 lines,
-  56,878 bytes). ⭐ **This is the LIVE hash and the family is now consistent on it**: the §313
-  paraphrase cure (`f9bd533f`) re-hashed the family law and left the landed `WF-1B` citing the
-  pre-cure `cd067ba1…`; **ODQ §315 executed the re-stamp** in the `2cdb87fa` landing, so WF-1B and
-  this packet cite the same hash and §314.2's open item is CLOSED. Every refutation, disposition,
-  register, STOP and census law in the preamble binds here and is not restated.
+  `f4cd39fee756c3a192710ab9aa3fc208e18ef1f08ea9e9073bcdc8bfb55d871c`** (780 lines, 58,883 bytes).
+  This packet compiled against `ca02c8a1…cabfd` (757 lines, 56,878 bytes, re-executed at its own
+  base `2cdb87fa`), which was itself ODQ §315's re-stamp of the pre-§313 `cd067ba1…`.
+  ⭐ **RE-STAMPED BY WF-1D's LANDING** (ODQ §324.3 / §314.2): that landing amended §P1 R-WF-7 and
+  §P7 stop-condition 8 to enumerate the ZERO-HEADROOM class at four members, which is where **this
+  packet's own RAISED-A is discharged** — `pulseKernel.js` at 1581/1581 is now recorded in the
+  family law rather than only in this packet's raised list. The whole family cites one hash again.
+  ⛔ **No refutation, disposition, register or census law this packet relied on moved**; the
+  amendment is additive. Every one of them binds here and is not restated.
 - ⚠ **RE-BASED MID-COMPILE, AND THE WINDOW IS DISCHARGED BY EXECUTION.** This lane compiled against
   `f20b9faa` and the branch advanced to `2cdb87fa` (the TE-T2A landing plus the §315 re-stamp)
   while it worked — the shared-tree hazard, caught by re-reading the ref rather than trusting a
@@ -658,6 +660,12 @@ npx vitest run tests/domain/pantheon.test.js \
   list omits it for the same reason it omitted `warTermination.js`. **Every later WF wave that
   reaches the kernel needs this recorded**, and amending a chair-signed preamble is a chair act.
   Offered with its measurement rather than made.
+  ⭐ **DISCHARGED 2026-08-21 BY WF-1D's LANDING** (ODQ §324.3), which the chair pre-cleared as a
+  preamble batch: §P1 R-WF-7 now carries a four-row table naming `peaceTerms.js` 797,
+  `warTermination.js` 818/818, **`pulseKernel.js` 1581/1581** and `applyWorldPulse.js` 941/941
+  (WF-1D's own RAISED-2), and §P7 stop-condition 8 names all four. The 1581 figure was RE-MEASURED
+  at `cdfe5a96` by the WF-1D lane with eslint's own `Linter` and reproduced EXACTLY, so the raise
+  is closed on a fresh measurement rather than on this packet's inherited one.
 - ⚠⚠ **RAISED-B — `deityNameForRef` TRUNCATES EVERY `custom:` DEITY REF, AND THIS BEAT MAKES IT
   SYSTEMATIC. ⛔ RULED BY MEASUREMENT AT ODQ §316 AND MEASURED HERE: NOT CURED IN THIS MEMBER, AND
   IT REMAINS A CHAIR MICRO-ITEM.** Executed: `custom:lu_vael` → `"Vael"`,
