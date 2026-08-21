@@ -74,6 +74,14 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ §302 (~08:25 ET): CG-1 COLLECTED — gate GREEN at eedd4e9c (TRUE_EXIT=0 +
+# smoke:boot; run-1 red = classified flake, NOT banked, threshold recorded);
+# §299.5 STRIKE EXECUTED and ⭐ BUILD BRANCH LANDED: claude/composite-r4 CAS
+# 4eafca31 → f8d978df (strike commit atop the codex tip; one program tip again).
+# Containment lifted; §296 arc closed. Orchestration amendment: heavy non-vitest
+# jobs COUNT as gate consumers. Node-24 figures noted; engines-field micro-item
+# → engine queue. STILL OUT: RS-4 segment · MF-D1 foundations (its DCEL
+# reconciliation now lands as commits on the NEW tip f8d978df).
 # ⭐⭐ §301 (~08:10 ET): MF-D0 COLLECTED — kernel ADOPTED (12→0 ordered census;
 # TRUE surface 38 crossings/24 of 90 rings, now 0 in EVERY family; arm-Z no-op
 # control 34/34; §278 five-leaf figure RE-STATED to 11 circuit-publishing leaves,

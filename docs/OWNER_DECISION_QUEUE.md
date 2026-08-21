@@ -12475,3 +12475,68 @@ ruled with "thin" stated, never defaulted to RATIFIED.
    publication-guard sweep, §297.4c's substrate salt,
    §298.6a's blocked-arm sweep, and the §278 figure
    correction. Fresh W3 follows D1, per the standing order.
+
+## §302 · CG-1 COLLECTED — THE CODEX TIP IS GATE-PROVEN GREEN;
+## THE §299.5 STRIKE AND THE LANDING CAS ARE EXECUTED; THE BUILD
+## BRANCH MOVES 4eafca31 → f8d978df (2026-08-21; chair: FABLE;
+## receipt laneCG1-receipt.md)
+
+1. **THE PROOF.** Full 17-step gate GREEN at eedd4e9c,
+   TRUE_EXIT=0, PLUS smoke:boot green (run separately — it is
+   outside the gate chain and guards the un-bootable-dist
+   class). PACKET_MANIFEST: never-re-serialize HOLDS (two
+   hunks in a ~17k-line file; one READY→LANDED flip + eight
+   appended requiredSymbols rows, ALL export identifiers,
+   never figures). All six reproducible published figures
+   match exactly (28,638 tests / 11 at ceiling; 173/173;
+   1,134/1,134; 314 routes; 51/409 strict-dist; 0 errors /
+   29 warnings). validate:packets: 129 packets, 0 READY — no
+   change paths reserved. **Honestly carried: run 1 was RED**
+   — one test outside the frozen census — classified
+   MACHINE/FLAKE on four executed legs (the terminalization
+   diff is docs-only with zero src/tests files; the file
+   passes 16/16 in isolation at the same sha; its history is
+   a documented stabilization; it did not reproduce in two
+   further whole-tree runs). ⛔ The flake is NOT banked into
+   the census (banking an intermittent masks a future real
+   regression); named on the record — npcAuthoringScope's
+   public-dossier-stale-capability title — with a threshold:
+   a second non-reproducing red in a future gate makes it a
+   repair packet.
+2. **THE LANDING, EXECUTED (vetoable).** With the gate green,
+   MF-D0 collected, and the slice fully dormant (zero
+   consumers), the chair executed §299.6's exposure: the
+   §299.5 strike landed as f8d978df (one file, +11/−8 — the
+   lane-authored "handoff law" replaced by a chair-authored
+   continuation-authority bullet citing §291.5/§299.5; the
+   minifold record's standing ruled, not relabelled) and
+   **claude/composite-r4 CAS'd 4eafca31 → f8d978df** with the
+   old-value asserted. One program tip again; the engine
+   queue's next train builds on it; any contract rework
+   MF-D1's reconciliation orders lands as ordinary commits on
+   top. ⚠ The strike commit itself is docs-only on a green
+   tip; the next gate run measures it — its text was written
+   citation-shaped to stay outside the claim ratchet's
+   habitat, and if the ratchet nevertheless fires, the cure
+   is a ratchet row, never a widening.
+3. **RAISED ITEMS DISPOSED.** (R0) ⭐ the machine was 9–18×
+   oversubscribed during the run (two other lanes' soak and
+   instrument jobs at ~90% CPU each) and the vitest mutex
+   cannot see non-vitest hogs — ORCHESTRATION PRACTICE
+   AMENDED: heavy non-vitest jobs COUNT as gate consumers;
+   whole-tree gates are scheduled when soak segments idle, or
+   their reds are flake-triaged exactly as CG-1 did. (R1) the
+   estate runs node v24 against a deleted-.nvmrc/22 history —
+   every figure above is a node-24 figure; an engines-field
+   decision joins the engine queue's next train as a
+   micro-item. (R4) check:edge-behavior is unmeasured at this
+   tip — recorded, not assumed. Two practice notes adopted:
+   the harness's exit-0 can be a trailing echo's (only
+   in-shell TRUE_EXIT is truthful — L3's reason, observed
+   again); and a verification lane runs gate steps
+   semicolon-separated with per-step exits, never &&-chained
+   (an && chain leaves later steps UNMEASURED, not green).
+4. The proof worktree was removed cleanly (verified empty; no
+   prunable stub). §296.3's containment is LIFTED; the §296
+   arc closes: discovered → reviewed → ruled → gate-proven →
+   struck → landed.
