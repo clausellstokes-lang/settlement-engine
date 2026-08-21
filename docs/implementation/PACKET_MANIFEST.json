@@ -14954,7 +14954,7 @@
     },
     {
       "id": "MF-T1D",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T1D.md",
       "verifiedBase": "063e470e3bc5358781ab5b89a242b74de0d55493",
       "changeManifest": [
@@ -15007,7 +15007,16 @@
         { "path": "src/domain/townMap/fabric/boundaryArrangement.js", "symbol": "export const CADASTRAL_BOUNDARY_ARRANGEMENT_LAW_VERSION" },
         { "path": "src/domain/townMap/fabric/boundaryArrangement.js", "symbol": "export function compileOrthogonalCrossCadastralArrangement" },
         { "path": "tests/domain/townMapBoundaryArrangement.test.js", "symbol": "MF-T1A canonical post-W3 cadastral boundary arrangement" },
-        { "path": "tests/property/townMapBoundaryArrangementDeterminism.test.js", "symbol": "MF-T1A cadastral boundary arrangement determinism" }
+        { "path": "tests/property/townMapBoundaryArrangementDeterminism.test.js", "symbol": "MF-T1A cadastral boundary arrangement determinism" },
+        { "path": "src/domain/townMap/fabric/dcelEmbedding.js", "symbol": "export function derivePlanarDcelEmbedding" },
+        { "path": "src/domain/townMap/fabric/dcel.js", "symbol": "export const PLANAR_DCEL_SCHEMA_VERSION" },
+        { "path": "src/domain/townMap/fabric/dcel.js", "symbol": "export const PLANAR_DCEL_LAW_VERSION" },
+        { "path": "src/domain/townMap/fabric/dcel.js", "symbol": "export function compileOrthogonalCrossPlanarDcel" },
+        { "path": "src/domain/townMap/fabric/index.js", "symbol": "compileOrthogonalCrossPlanarDcel," },
+        { "path": "tests/fixtures/townMapSettlementFabricFixtures.js", "symbol": "export const PLANAR_DCEL_ID" },
+        { "path": "tests/fixtures/townMapSettlementFabricFixtures.js", "symbol": "export function makeSettlementPlanarDcel" },
+        { "path": "tests/domain/townMapPlanarDcel.test.js", "symbol": "MF-T1D canonical reference-only planar DCEL" },
+        { "path": "tests/property/townMapPlanarDcelDeterminism.test.js", "symbol": "MF-T1D planar DCEL determinism" }
       ],
       "acceptanceCases": [
         { "id": "A1", "case": "Exact fixture V24 E32 H64 F10, degree, cycle and area census, unique ordered IDs and Euler closure." },

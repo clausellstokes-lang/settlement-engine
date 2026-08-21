@@ -1,13 +1,16 @@
 # Fabric Topology / MF-T1D — canonical reference-only planar DCEL
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed commit:** `b020f74352b0bf9b07eeba80bc41b4b5d53796ca`
 - **Packet version:** `1`
 - **Verified base:** `codex/first-map-vertical-slice` at `063e470e3bc5358781ab5b89a242b74de0d55493`
-- **Last revalidated:** `2026-08-20` at `063e470e3bc5358781ab5b89a242b74de0d55493`
+- **Last revalidated:** `2026-08-20` at `b020f74352b0bf9b07eeba80bc41b4b5d53796ca`
 - **Depends on:** MF-T1A at `edf5268d1dcad84f1f69f59191ea14aa02a6cb88`
 - **Collision group:** `town-map-canonical-fabric-topology`
-- **Commit authority:** agent may stage and commit the exact manifest after all packet checks pass; no push, merge, cleanup, or adjacent repair
+- **Commit authority:** LANDED; do not redispatch
 - **Baseline posture:** MF-T1A wave-end gate passed with 28,598 tests and the inherited 11-known-failure ceiling; lint held 29 warnings and zero errors; build and 314-route prerender passed; strict dist passed 409/409; terminal governance validates 122 packets with zero READY before this promotion
+
+> This packet landed at the commit above. It is terminal and must not be redispatched.
 
 ## 1. Reconciled authority
 
@@ -223,18 +226,18 @@ Stop on source replay mismatch; any need to copy/add/split/repair geometry; topo
 
 ## 12. Completion receipt
 
-- Base SHA:
-- Dispatch bundle and seal identity:
-- Final commit or working-tree state:
-- Exact changed files and effective-line deltas:
-- A1-A6 results:
-- Focused commands, exits, and counts:
-- Sealed packet/resume status:
-- Both typecheck configurations:
-- Wave-end gate stages:
-- Base-versus-wave failure identity diff:
-- MF-T1A and DCEL byte pins:
+- Base SHA: `063e470e3bc5358781ab5b89a242b74de0d55493`
+- Dispatch bundle and seal identity: MF-T1D sealed session digest `0c068bda3ea2e1d7a40cb8f19e9c44f09f223b5d0fbf91b6d4315651a06047b4`; capsule digest `5ba6a89228148e7169f86f7c9ba3273e712d8b51df3a228cab3a79947c83a785`
+- Final commit or working-tree state: `b020f74352b0bf9b07eeba80bc41b4b5d53796ca`; implementation tree clean before terminal governance
+- Exact changed files and effective-line deltas: exact seven-path manifest; positive effective production delta `261/399` (`dcelEmbedding.js` `169/230`, `dcel.js` `89/165`, `index.js` `+3/4`); fixture `+15/18`; census effective delta `0/12`
+- A1-A6 results: six new acceptance cases pass; focused MF-T1D plus MF-T1A suite `12/12`; independent production and packet audits ended `0 P0 / 0 P1`
+- Focused commands, exits, and counts: sealed packet suite `12/12`; sovereignty/negative walkers `42/42`; scoped ESLint and `git diff --check` clean; all exit `0`
+- Sealed packet/resume status: `check:packet` and `implementation:resume` passed on the final pre-commit bytes; the exact session fingerprint completed all eight steps
+- Both typecheck configurations: full ratchet `173/173`, no regression; domain-strict `1134/1134`, no regression
+- Wave-end gate stages: final `npm run check:tail` exit `0`; test ratchet `28,604` tests with the inherited `11` known failures and no new failure; lint `29` warnings/`0` errors; build passed in `30.14s`; prerender wrote `314` routes; strict dist `409/409`. The first tail attempt hit one load-sensitive IA-2 timeout; that test passed alone `1/1`, its full file passed `10/10`, and the untouched whole-tail retry passed.
+- Base-versus-wave failure identity diff: `NONE`
+- MF-T1A and DCEL byte pins: boundary arrangement `scene-v1-a1cfadea8ca1bba796bfed3e0a1cb671`; canonical DCEL `scene-v1-9e5a1400770196ff6da8be9417138d0d`
 - Generated artifacts: `NONE`
-- Deviations: `NONE | STOP`
-- Out-of-scope observations:
-- Judgment calls: `NONE`
+- Deviations: `NONE`
+- Out-of-scope observations: the reference-only Fabric root, parcel semantics, buildings, persistence, projection and UI remain later bounded packets
+- Judgment calls: numeric doubled-area values remain a canonical-fixture pin only; production admits replay-valid W3 geometry variants through the relational one-exterior/nine-bounded conservation law. The unrelated IA-2 timeout was not changed or baselined.
