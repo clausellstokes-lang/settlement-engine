@@ -10696,7 +10696,8 @@ down is not a critique.
    resumed per the owner's instruction. The W2 tip and all
    receipts are durable; W3 restarts fresh from its brief.
 2. ⭐⭐ **THE ONE MAJOR ADOPTION — THE COUNTERFACTUAL CAUSAL
-   BENCHMARK (document 2's Causal Responsiveness Score)**: hold
+   BENCHMARK (originally document 2's Causal Responsiveness Score;
+   scoring superseded by §287/SPEC §10.14's four-metric directional contract)**: hold
    the seed, alter ONE dossier fact (move the mine, remove the
    ford, add the monastery in year N, shift the wall date, cut
    population 40%%), and verify the map changes in the
@@ -10787,8 +10788,9 @@ down is not a critique.
    resource site; remove the crossing; flip founding.kind; shift
    the wall year; cut population 40%%; add a monument at year N;
    swap the water mode), every direction REGISTERED BEFORE the
-   run, scored as CAUSAL RESPONSIVENESS with wrong directions
-   treated as findings; G-44 the renderer-halo ablation (the
+   run; its then-single CAUSAL RESPONSIVENESS score is retained here as
+   historical wording but superseded by §287's directional responsiveness,
+   precision, collateral and direction-violation reports; G-44 the renderer-halo ablation (the
    structural verdict is taken from the BARE condition where the
    two disagree); G-45 the real-historical structural cohort
    (open dataset only — the licensing law bars the restricted
@@ -10812,3 +10814,453 @@ down is not a critique.
    owner's instruction; the weekly limit stands until Aug 22.
    The Fable retrovalidation sitting over §238-§274 remains OWED
    as the chair's next act when the owner releases work.
+
+## §287 · THE DIMENSIONAL MAP / AUTHORSHIP REDISCOVERY IS COLLECTED,
+## RECONCILED AND MADE BUILDABLE (2026-08-20; whole-system review;
+## architecture + corpus machinery only — no generator wave dispatched)
+
+1. **SCOPE ACTUALLY READ, not inferred:** the complete current
+   `map-corpus/docs/GENERATION-SPEC.md`; all **50** pre-review corpus
+   documentation/instrument/data artifacts; the 313/313 plate/preview
+   inventory, the previously reviewed 260 images outside the then-designated
+   53-roster and a fresh visual audit of all 49 Atlas-study plates (including
+   overlaps with the later roster, so no blindness claim survives);
+   the live application map, scene, export, PDF, edit, event, operation,
+   outbox, spatial-canon and entitlement seams; W0–W3 receipts and
+   surviving sandbox trees; the older map constitutions/vision; and all
+   **238 pages** of the four historical massing/workplan/prosperity/
+   reconciliation reports; the EHTA/RIA and German program methods; and
+   actual plans, legends, phase diagrams and essays for the registered
+   Irish, German, British and continental case sample. This is an exhaustive
+   architecture/program/corpus survey and a declared deep case sample, not a
+   claim to have inspected every one of roughly five hundred European town
+   fascicles. The historical reports are evidence/mechanism studies, not
+   controlling architecture.
+
+2. **GOVERNANCE COLLECTED:** `GENERATION-SPEC` fold labels §§277–§286 are accepted as DESIGN-ONLY
+   amendments — one strict-plan map, one leaf at a time, canonical
+   composite massing, temporal register, floating-land lifecycle,
+   typed authorship, AI arrival gate and format-based entitlement —
+   **subject to the corrections in SPEC §10**. They were never built and
+   may not be reported as built. §10 is ⟦FOLD §287⟧ and wins on a direct
+   conflict with §§6–§9. The stale closing line that called §264 the end
+   of the file is corrected. These are SPEC fold labels, not missing ODQ ledger
+   entries: this ODQ intentionally jumps from decision §276 to collecting decision §287.
+
+3. **THE CENTER SURVIVES THE HOSTILE REVIEW:** dossier/world facts cause
+   geometry; streets → blocks → frontage → plots → footprints remains
+   the ordering; stable identity is not address; randomness is keyed;
+   analytic roofs precede a selective skeleton; massing is composite;
+   zero-tilt plan remains. §288 supersedes the old fixed-hard-light ban:
+   heavyweight ray-traced GI/volumetrics and an oblique second map remain out,
+   while a deterministic directional sun/moon and restrained analytic ambient,
+   contact, reflection, softness, environmental and genuine-source glow cues are retained.
+   The historical kernel is retired from the settlement-map critical
+   path, not destroyed; it may inform a separately authorised future
+   building inspector.
+
+4. **THE BINDING CAUSAL/ARTIFACT REPAIR:**
+   `state_t → canonicalSpatial_t → spatialReceipt_t → state_t+1`.
+   Same-pass map→economy→map feedback is forbidden. Durable SPATIAL,
+   time-indexed OBSERVATION, semantic PROJECTION and RASTER have separate
+   digests. `ShadeExposure` reads a causal `WorldSolarProfile`; the fixed
+   cartographic light never grows crops. S0 emits only identities and a
+   fact-licensed `StrataExistencePlan`; the final `LeafRoster` and
+   projection-light profiles resolve as exact request inputs after bodies exist and before S22;
+   S22 derives illumination from them rather than producing them.
+
+5. **THE BINDING GEOMETRY REPAIR:** published canonical coordinates and
+   heights live on a versioned integer ABI; terrain-mounted parts name a
+   support surface; exact solid intersection, not XY/Z interval overlap,
+   owns volume legality; vegetation gains a durable selectable trunk/canopy
+   mass plus a separate deterministic nonpersistent instance field; portals
+   have two endpoints and leave the shared-XY connection type. Global `zMax`
+   painter sorting is insufficient: a settlement-level all-active-leaf
+   solid/light-query index supplies cross-leaf casters, while a one-leaf
+   `ViewOcclusionScene` splits visible crossing surfaces. Shadows stay out of
+   dimensional truth. Render/hit-test/PDF/SVG consume the same visible
+   semantic primitives. Per-light output keeps geometric visibility `V_i`
+   separate from transmission `T_i`, naming blockers and attenuators; the
+   normal viewing retains one deterministic global directional source; §288 adds explicit
+   probe/pinned/world-time modes and keeps local point/area sources independent.
+
+6. **THE BINDING AUTHORSHIP REPAIR:** provenance stores immutable origin
+   plus ordered interventions and current causal/law status; one lossy
+   rung is UI only. Coverage is count + visible area + named-semantic,
+   never one unexplained percentage. `documentHash` pins exact
+   `{baseWorldRef, baseDossierRef, surveyedAt, law/ABI}` rather than the
+   moving live world. Representation is a reduced
+   `householdsPerAnonymousBody` ratio excluding named bodies. Old maps
+   render through `PLANAR_V1`; `parts:[]` may never blank them.
+   The sandbox schema has **nine** top-level `mapEdits` keys, the live app
+   three; `layoutVariant` is B/generative, `layoutLawVersion` META, and
+   legacy pins/scene overrides stay presentation-only.
+
+7. **THE DOMAIN DOOR IS NON-NEGOTIABLE:** accepted events and canonical
+   Class C/E changes use the existing operation registry, authority,
+   `ActionResult`, durable outbox/idempotency and domain receipts.
+   `MapDocument` may propose an event; it cannot remove accepted lived
+   history with document undo. AI proposes canonical operations and may
+   execute only declared low-risk document verbs. Canonical locks become
+   engine-owned `SpatialConstraint`s; the engine never imports
+   authorship. Current prosperity may change registered maintenance and
+   material **condition** state through its own domain law; it does not
+   directly change material identity, component assembly, occupation or
+   inherited geometry. Those change only through typed dated canonical
+   operations (including any later AMP-promoted operation) with provenance;
+   historical rebase and dated future events are the only morphology-changing
+   routes.
+
+8. **THE MISSING FOUNDATIONS ARE RESTORED:** an executable S0–S23
+   manifest owns stage inputs/outputs/imports/random namespaces/ABI/law/
+   censuses/invalidation and CI refuses prose/source drift. Counterfactual
+   tokens register exact entity/component paths, direction predicates,
+   tolerances and forbidden sets; the harness reports directional
+   responsiveness, causal precision, collateral and direction violations,
+   with `E∩F=∅` before and `A∩F=∅` after execution. `StreetGraph`
+   stays semantic route truth; a support-aware cadastral boundary arrangement
+   supplies ROW/wall/water/cliff faces to the DCEL. D1 proves face/adjacency/
+   point-location only; frontage/parcel equivalence waits for fresh W3.
+   Stable lineage, memory and p95 gates precede any accessor cutover.
+
+9. **THE LIVE INSERTION, after source audit:** there are currently four
+   map authorities — shipped legacy `TownMapModel`, hidden incomplete
+   `townCartography`, unlanded sandbox `fabric/**`, and dormant `arch/**`.
+   The target is not a fifth. Port repaired `fabric/**` as the sole
+   headless geometry authority inside TownScene's privacy/digest/budget
+   envelope; first compile exact canonical accessors through bounded,
+   hash-addressed `SettlementMapSpatialCompileInput`, then project the completed
+   spatial artifact through separate `SettlementMapProjectionInput` with exact
+   observation/leaf/view/light/audience refs; return one addressable semantic scene/
+   DrawList; make React, PNG, PDF, SVG, thumbnail, token and hit-testing
+   consume it. `townCartography` does not grow into a parallel generator.
+   Live-source corrections folded: resources live under
+   `resourceAnalysis`, neighbour facts are split and lack guaranteed
+   bearings, canonical generated `supplyChains` is not guaranteed, and
+   the dossier PDF already renders a legacy map.
+
+10. **THE 53-ROSTER IS RELABELLED HONESTLY:** exact file/register closure
+    is 313/313/313, but all images were previously viewed/measured,
+    aggregate figures use all 313, CONTEXT used descriptions of excluded
+    ids, and the compiled spec cites ids later selected into the roster.
+    It is a **closed legacy pixel-evaluation subset**, useful for a fresh
+    evaluator who withholds its image files, not an untouched calibration
+    holdout. Removing citations cannot restore blindness. A true claim
+    requires a new sealed external set. It also has zero trade and zero
+    institution coverage. Evidence partition stays: corpus → register;
+    open/licensed history → structure; dossier → cause; prior art →
+    candidate mechanism.
+
+11. **CORPUS AND EVIDENCE MACHINERY REPAIRED:** new read-only
+    `corpus_integrity.py` closes 313 plates, 313 previews, 313×47 CSV/JSON
+    with zero semantic mismatch, 264 calibration rows + 49 Atlas sections,
+    the exact 53 final and 91 conservative rosters, corrected **34**-plate
+    scrub (the old regex falsely captured cured `hf373`), 49 ordered S3a
+    plan/void rows with zero errors, and 232×52 context rows under the
+    exact 81-id exclusion. The full 626-asset root is
+    `a2e649b4cb475fef44e00798a830420eb4ba4284d1a506e36464be5223f3bfc7`.
+    Canonical corpus paths replace vanished
+    `map-refs`; the hyphenated S3a module now loads; its threshold prose
+    matches the adaptive implementation; roster/register writers are
+    dry-run by default and preserve/synchronise authoritative data.
+    Archived drivers missing their historical intermediates are named
+    unavailable, never green. The historical side now has a separate
+    claim-sized registry/schema/validator and is called by the aggregate
+    corpus gate. It keeps base cadastre, primary map/view, archaeology,
+    gazetteer, interpretation and thematic analysis in separate records;
+    requires represented period, scale/legend or explicit N/A, component
+    certainty, coverage and rights; and refuses frequency tuning because no
+    prevalence cohort is registered. Runtime does not read research records.
+
+12. **BUILD ORDER:** preserve the killed W3 tip only as evidence. D0 starts
+    from sealed W2 and preserves legacy simple-offset bytes when valid;
+    a robust repair is exception-only or a declared new law. Then land the
+    manifest/ABI/solid/receipt/DCEL face-foundations; restart W3 fresh and
+    only then prove frontage/parcel equivalence; D2 instruments (including
+    the registered historical structural cases); D3a dormant explicit-input
+    massing/material/vegetation foundations; `AMP-1`-gated D3b empirical
+    activation; D4 occlusion/light/
+    temporal dress; D5/D6 strata/sky; A0–A5 only through the operation
+    seam and after canonical identities/frontage exist. The owed Fable
+    retrovalidation and the standalone offset-kernel micro-wave still
+    precede W3. The killed partial W3 files were not edited or promoted.
+
+13. **WHAT WAS CHANGED BY THIS REVIEW:** architecture, governance pointers,
+    corpus documentation and corpus instrumentation only. No live generator,
+    UI, persistence, entitlement or payment code was changed; no map wave
+    was dispatched; no git index or branch ref was moved. The dirty shared
+    ledger tree was preserved. The legacy 53 remains a usable closed pixel
+    roster for a fresh evaluator who withholds it, but is never again called
+    historically independent or untouched.
+
+14. **THE ATLAS-DERIVED STRUCTURAL LAW:** source geometry, scholarly
+    reconstruction and generated realization are different artifacts.
+    Historical mechanisms are dated, path-dependent operations over terrain/
+    hydrology, inherited routes/crossings, independent nuclei/jurisdictions,
+    markets, defenses, parcels and later occupation—not culture-name style
+    presets. Plan intent and realized geometry are separate manifest artifacts;
+    walls, markets, grids, monastic forms, shorelines and growth are contingent,
+    not defaults. A case witnesses possibility or counterexample only. It never
+    supplies prevalence, copied geometry or a universal medieval grammar.
+
+15. **RESEARCH STATUS / NEXT GATE:** the initial registry is explicitly
+    **Historical Urbanism Wave 1**: 32 claim records, 23 places, 20
+    research-only mechanisms, eight programs with claim records, and zero
+    prevalence cohorts/statistics. It is sufficient to bind evidence types and
+    expose architectural corrections; it is not sufficient for probabilities,
+    cultural frequencies or universal ranges. The owner requires the expansion
+    protocol now recorded in SPEC §10.21: 80–120 balanced towns, 30–40 complete
+    package audits, mechanism-specific eligible cohorts, a metadata-selected
+    sealed 15–20% holdout, separate rural/landscape and architectural-massing
+    evidence, explicit `EUROPEAN_FANTASY_BASE` scope, independent witnesses and
+    counterexamples, two-batch mechanism saturation, range stability and held-out
+    structural transfer. Stable evidence/identity/substrate/frontage/parcel/
+    receipt foundations may proceed alongside research; probability and
+    culture-conditioned constants may not. Owner clarification: non-European
+    settlement-morphology research is not a completion gate. The live `arabic`,
+    `east_asian`, `mesoamerican`, `south_asian` and `steppe` culture options remain
+    narrative/naming inputs and activate no map grammar; a future non-European map
+    tradition is a separately authorised program, never inferred from European evidence.
+
+16. **ARCHITECTURAL MASSING IS SPLIT INTO FOUNDATION AND EVIDENCE ACTIVATION:**
+    the 30-case / 13-country `AMP-1` Wave-1 survey confirms composite supported
+    parts, analytic-first roofs, component-local material and independent
+    roof/floor/facade/use campaigns as the correct stable contract. It does not
+    calibrate conditional height/storey/pitch/material engineering ranges or
+    social associations, and it cannot identify roof/material/storey occurrence
+    distributions. `GENERATION-SPEC` fold §279's prosperity/material inverted-U, richest/poorest
+    uniformity and annex-match claims are demoted to dormant research hypotheses.
+    D3a may land explicit-input support-relative solids, typed functional volumes,
+    component slots, architectural-history operations and deterministic fixtures
+    while leaving live seeds byte-identical. D3b alone may activate scoped,
+    deterministic cause-conditioned European mechanisms/ranges after `AMP-1`
+    reliability, clustered range and separate 18% sealed site/source-package
+    holdout gates. Occurrence distributions, frequencies, prevalence and
+    activation weights remain `NOT_IDENTIFIED`/`NONE` without a separate
+    probability-sampling protocol. Plan pixels grade projection, never world
+    dimensions or materials.
+
+17. **THE COUNTRYSIDE IS NO LONGER AN URBAN REMAINDER:** the 30-case European
+    `RSLP-1` Wave-1 survey demotes universal open fields, binary nucleation,
+    two-/three-field counts, food shares, acreage/reach/rate/cap constants,
+    common-radius tables and automatic keepers/barns. The stable boundary is a
+    time-indexed `RuralLandscapePhase` that keeps settlement nodes, holdings,
+    work complexes, land units, rights, routes, hydraulics, production,
+    seasonality and change separate. The current code-of-record sandbox was
+    inspected beyond the three headline modules: `buildFabric` finishes the urban
+    umbrella before Stage 6b fields and Stage 6d habitation; `compile` defaults
+    missing economies to tillage; `substrate` gives wool/livestock a contradictory
+    pasture contract; route fallbacks mint seeded causal corridors; institution
+    regex/rings can mint outlying residents; and `commons` paints an irregular
+    polygon while collision reserves a circle. Shared-vertex topology, area-true
+    ground refusal, deterministic budgets and drawing primitives may survive as
+    engineering. They may not feed supply/world truth until a metadata-frozen
+    `RSLP-1` child cohort and separate 18% clustered holdout pass. Missing canon is
+    `UNKNOWN`/`STRUCTURAL_ONLY` or `RURAL_CANON_INCOMPLETE`, never fallback tillage.
+    RSLP may promote scoped conditional relationships/ranges; occurrence rates,
+    count distributions, regime/tenure prevalence, keeper/barn/common frequencies
+    and activation weights remain `NOT_IDENTIFIED`/`NONE` absent a separate
+    probability protocol. An explicit canonical cause may activate this settlement,
+    but it does not identify any population probability field.
+
+## §288 · GLOBAL SUN/MOON LIGHT PROBE AND DETERMINISTIC PERCEPTUAL 2.5D
+## (2026-08-20 owner decision; architecture/governance only — no implementation dispatched)
+
+1. **THE METHOD/EFFECT DISTINCTION IS BINDING.** This decision supersedes §287 and
+   GENERATION-SPEC §§6–7 only where they categorically refused every soft, ambient,
+   reflected, material or glow result. It does not revive an oblique camera, visible
+   facades, a second scene authority, photorealism, path/ray-traced global illumination,
+   volumetric marching, participating media, screen-space AO, cinematic whole-frame
+   bloom, CSS/SVG blur/drop-shadow or GPU-authoritative geometry. Zero-tilt strict plan,
+   quantized canonical solids, deterministic projection and cross-format parity remain.
+
+2. **ONE GLOBAL CELESTIAL SOURCE.** Every published dimensional light profile contains
+   exactly one `GLOBAL_CELESTIAL` directional source. It is effectively infinitely distant:
+   its rays are parallel, it has no distance falloff or pointer fanning, and every object on
+   every active leaf uses the same registered azimuth/elevation pair. The source is Sun or
+   Moon under a typed convention/observation. Local point/area fixtures retain their exact
+   fixture/state/approximation law and never rotate with the global source.
+
+3. **SHADOWS ARE MEASUREMENT, NOT PAINT.** A global cast derives from the real light-space
+   silhouette and receiver intersection. On a planar receiver its displacement is the
+   opposite horizontal light direction multiplied by receiver-relative vertical separation
+   and `cot(elevation)`; floating altitude therefore matters. The record carries direction,
+   elevation, receiver separation, unclamped/applied lengths, mapping/clamp law and caster/
+   receiver provenance. Finite softness changes only a registered edge/tone band; it never
+   changes the authoritative umbra, silhouette or displacement.
+
+4. **FOUR USER-FACING AUTHORITIES, ONE EXPORT RESOLUTION:**
+   - `FIXED_SURVEY` is the normal deterministic registered convention;
+   - `LIGHT_PROBE_PREVIEW` is explicit ephemeral projection UI and never ordinary hover;
+   - `PINNED_DOCUMENT` persists an immutable finalized profile in MapDocument settings;
+   - `WORLD_TIME_OBSERVATION` requires a canonical clock plus licensed solar/lunar or
+     registered fantasy-celestial law and exact observation state.
+   `CANONICAL_EXPORT` resolves day to the versioned high-noon convention and night to the
+   high-moon convention unless the export request explicitly selects pinned, world-time or
+   finalized-current light. Temporary probe movement can never silently become an export.
+
+5. **THE PERMITTED PERCEPTUAL COMPOSITE IS FINITE AND SEMANTIC.** Per receiver it may
+   combine per-source direct visibility/transmission with analytic sky ambient, bounded
+   ground/nearby reflected colour, topology-derived contact occlusion, closed-registry
+   material response, factual environmental modulation, finite registered shadow softness
+   and restrained glow from an exact active source. A shadow suppresses only that source's
+   direct contribution; it does not erase ambient or independent local sources. UNKNOWN
+   material stays neutral. Effects are renderer-neutral geometry/tone bands, nonaddressable,
+   excluded/masked from labels and critical roads, and exact across screen/PNG/SVG/PDF/print.
+   Historic-town atlases do not supply optical coefficients; any nonzero calibration beyond a
+   registered neutral/fixed baseline needs a separate preregistered perceptual-light study or
+   explicit canonical observation.
+
+6. **PROJECTION NEVER BECOMES SAME-PASS WORLD CAUSE.** Fixed/probe/pinned light changes no
+   WORLD or OBSERVATION bytes. World-time consumes an observation; agricultural or economic
+   shade uses the existing `state_t → spatial_t → ShadeExposureReceipt → state_t+1` seam and a
+   licensed `WorldSolarProfile`, never the cartographic lamp. Missing time/celestial facts yield
+   dormancy/refusal or an explicitly warned fixed-survey fallback, never inference.
+
+7. **INTERACTION, CACHE AND ACCESSIBILITY ARE CONTRACTS.** Probe mode is explicit so normal
+   pointer pan/hover/inspection remains unchanged. It has a versioned fixed-point cursor-dome
+   mapping, center dead zone, bearing/elevation LUT, low-angle clamp, touch dial, keyboard
+   azimuth/elevation, Home reset, Enter pin, Escape exit and reduced-motion commit/step behavior.
+   Spatial artifacts, solids, silhouettes, receivers and occlusion indices are cached; probe
+   movement recomputes only profile-dependent casts, illumination, composite and draw styling.
+   GPU/worker preview may be progressive and visibly nonauthoritative; pin, release and export
+   finalize through the deterministic fixed-point path. Hit identities/geometry do not change
+   when only light changes, and PUBLIC output contains no DM primitive or shadow leak.
+
+8. **IMPLEMENTATION IS DORMANT.** The live radial `TownMapModel`, hand-rendered React SVG,
+   legacy `mapEdits` and dossier PDF have no canonical heights/roofs/receivers/shared scene and
+   are forbidden landing targets. Dormant oblique TownScene code is technique evidence only.
+   Safe order remains: Fable retrovalidation → D0 offset → manifest/ABI/solid/receipt/DCEL →
+   fresh W3/frontage → D3a explicit canonical massing → D4 light-independent occlusion and
+   semantic/effect/export truth → fixed survey → probe → pinned persistence → licensed world
+   time. `PLANAR_V1` exposes no probe rather than fabricating height.
+
+## §289 · BUILT-IN/CUSTOM SPATIAL PARITY AND EVIDENCE BOUNDARY
+## (2026-08-20 owner decision; architecture/governance only — no implementation dispatched)
+
+1. **ORIGIN IS TOTAL PROVENANCE, NOT A PRIVILEGE.** Every canonical spatial entity/artifact
+   resolves exactly one origin: `BUILT_IN`, `CUSTOM`, `IMPORTED` or `AUTHORED`. The geometry
+   compiler is origin-neutral. All four pass the same finite-semantic placement, support/solid,
+   identity, persistence, privacy, projection, hit, rendering and export laws.
+
+2. **CUSTOM REGISTRIES ARE CANONICAL INPUTS.** A custom institution/building/work/vegetation/
+   floating structure enters through a versioned validated spatial-role/massing recipe and typed
+   operation. The exact registry ID, version, recipe, dependencies and immutable snapshot are in
+   deterministic hashes. Built-in and custom instances of the same semantic type run the same
+   conformance suite; expected hashes may differ because provenance differs, but behavioral and
+   geometric invariants may not.
+
+3. **REMOVAL CANNOT ERASE A SAVED WORLD.** Saves retain every registry snapshot needed to read
+   published canon. Package removal or upgrade never silently deletes, reinterprets or corrupts an
+   existing settlement. If bytes cannot be resolved, the last canonical spatial representation is
+   preserved and the entity is visibly `UNRESOLVED_CUSTOM_CONTENT`; recompilation/mutation refuses
+   until migration or restoration. Silent omission is forbidden.
+
+4. **FANTASY CANON DOES NOT NEED FABRICATED HISTORY.** A floating necromantic citadel or other
+   novel fantasy mechanism needs explicit SettlementForge canon, a registered operation/recipe,
+   authority, lifecycle, provenance and receipts. It does not need a medieval atlas citation and
+   may execute through `CANONICAL_OPERATION`/`EXPLICIT_FANTASY_CANON` without claiming incidence.
+   Historical evidence gates apply only when a feature claims cultural/historical authenticity or
+   a culture/period-conditioned default. Population prevalence/activation weights require a separate
+   probability-sampling protocol; one explicit world cause never identifies population frequency.
+
+5. **THE MAP-TRADITION BOUNDARY IS HONEST.** Automatic morphology remains explicitly
+   `EUROPEAN_FANTASY_BASE`, appropriate to the D&D-centered product scope and current evidence.
+   Non-European names and explicit custom canon remain valid, but the engine does not claim that
+   European street/parcel rules authentically reproduce Arabic, East Asian, Mesoamerican, South
+   Asian or steppe traditions. Any such automatic morphology requires its own owner-authorized,
+   researched, versioned map-tradition pack.
+
+6. **IMPLEMENTATION WAITS ON THE SHARED FOUNDATIONS.** No custom-only compiler branch, parallel
+   scene or legacy-map adapter is authorized. The parity contract lands with provenance/content
+   registries, canonical operation doors, unresolved-state persistence and the shared D3a/D4 scene;
+   only then may built-in/custom parity fixtures gate implementation.
+
+## §290 · CORE-FIRST IMPLEMENTATION AND EDGE-CASE STOP LAW
+## (2026-08-20 owner decision; binding scope control)
+
+1. **THE CORE WORKS FIRST.** The first tranche proves one complete built-in/custom vertical slice:
+   exact save/reload, deterministic identity, one custom building, one explicit-fantasy operation,
+   missing-package read-only recovery, PUBLIC/DM privacy and screen/export parity under
+   `EUROPEAN_FANTASY_BASE`.
+
+2. **ONLY CORE FAILURES BLOCK THAT TRANCHE.** A new finding is release-blocking now only when it can
+   corrupt or silently delete saved canon, create a second geometry authority, break deterministic
+   replay, leak DM content, invent a missing fact, or falsely claim historical/cultural authority
+   on a supported path.
+
+3. **LONG-TAIL COMPLETENESS IS RECORDED, NOT CHASED.** Exotic portal/support combinations,
+   multi-package dependency graphs, every history-operation variant, world-time/probe combinations,
+   future evidence calibration and non-European morphology packs remain later work unless a
+   reproducible supported-path failure, security/privacy/data-loss risk or new owner decision
+   promotes them.
+
+4. **MANDATORY REVIEW STOP.** Build order remains foundation/D1 → fresh W3/frontage → D3a → D4 →
+   the parity vertical slice. Stop there for measured product/architecture review before expanding
+   the schema or implementation surface. The existence of a conceivable edge case is not by itself
+   authority to enlarge the first tranche.
+
+## §291 · THE FABLE CHAIR RETURNS — THE RETROVALIDATION SITTING
+## OPENS, AND THREE OWNER DIRECTIVES LAND (2026-08-21; chair:
+## FABLE, in person)
+
+1. **THE SITTING OPENS.** Per §236's protocol and §275/§276's
+   deferral, the returning Fable chair's first act is the
+   retrovalidation sitting over the 25 Opus-chaired rows
+   §238–§274. Method: the chair has read every row in full from
+   the primary record; FOUR read-only evidence lanes are
+   dispatched in parallel (map-architecture §238/§239/§240/§241/
+   §252/§255/§257 · corpus-measurement §242/§244/§245-§246/§249/
+   §250/§251/§261 · prior-art-and-meta §247/§248/§253/§254/§258/
+   §259/§263/§265/§266 · engine-soak-waves §267–§274) to verify
+   receipts and hunt disconfirming evidence; the chair re-derives
+   every queued judgment personally — never a rubber stamp —
+   and rules RATIFIED / AMENDED / REVERSED per row in the rows
+   that follow. AMENDED/REVERSED rows get the §61-style annex
+   re-verification of downstream consequences. The queue file
+   empties on completion.
+2. **OWNER DIRECTIVES, in-chat 2026-08-21, recorded so they
+   bind successors.** (a) **THE GRANT REFRESHED**: "i give all
+   current and pending and emergent permissions and leave all
+   decisions to your best judgement." Read per the standing
+   §170/§217 interpretation: every pending and future owner-gated
+   queue item is released to chair judgment at its position; the
+   BY-NATURE carve-outs stand and cannot be released by blanket
+   wording — legal, the tuning signature, each push/deploy, the
+   V5 cull, anything the owner parks. (b) ⭐⭐ **THE
+   REVIEW-IMPROVE DOCTRINE**: in review, do not just fix — where
+   the chair sees a way to improve, push for it "even at the
+   cost of risk," and "diminishing returns … are still returns";
+   BINDING CONDITION stated by the owner in the same breath:
+   every improvement must be COHERENT with everything relevant
+   across all systems of the codebase. The chair reads this as
+   licensing improvement work discovered during review — sized
+   to the class, threaded through every consumer, never a local
+   patch that forks a second truth — with gated classes still
+   gated. It strengthens, and is consistent with, the recorded
+   fix-philosophy and risk-appetite directives. (c) **THE
+   CADENCE ORDER**: a standing ~30-minute wakeup confirming
+   nothing is stalled, and up to FOUR parallel lanes utilized
+   "where available and appropriate." The chair reads (c) as
+   amending the §-recorded two-lane ceiling FOR THIS PHASE with
+   its safety shape intact: at most four lanes where their
+   surfaces are disjoint, but still ONE landing slot, ONE gate
+   slot, ONE full-suite consumer at a time; read-only evidence
+   lanes and sandbox lanes do not contend for the repo gate.
+   Vetoable as always.
+3. **THIS COMMIT ALSO LANDS §287–§290** — collected 2026-08-20
+   as working-tree-only edits and durable only in one checkout
+   until now. Committing them with this row is a durability act;
+   their content is unchanged. No other 08-20 review edit is
+   committed here; the handoff refresh rides the sitting's
+   collection.
+4. **SEQUENCE AFTER THE SITTING** (unchanged, restated so the
+   wakeup loop has its dispatch sheet): map lane — standalone D0
+   offset kernel from sealed W2, then manifest/coordinate-ABI/
+   solid-legality/spatial-receipt/DCEL foundations, then fresh
+   W3 (§274.5a's demotion-before-packer first, the
+   self-intersection census, the through-river arm); engine
+   lane — resume RS-4's monitor at 4eafca31 (receipts durable,
+   ~110/163; the grid is NOT restarted), then the §27 queue's
+   WF-1b with its chair-authored preamble debt. The §290
+   core-first stop law governs scope throughout.
