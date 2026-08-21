@@ -1,6 +1,6 @@
 # WF / WF-1D — the war-dissolution join that names the fall (stage 4 of the `wf-1` split promotion)
 
-- **Status:** DRAFT
+- **Status:** READY
 - **Compile note:** compiled by lane TC-WF1D under ODQ §291.5/§320; BUILT AND VERIFIED by lane
   TE-WF1D under ODQ §321. ⚠ The status value above stands ALONE on its line because
   `parsePacketHeader` (`scripts/implementation-packets.mjs`) anchors the status row at
