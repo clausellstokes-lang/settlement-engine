@@ -11264,3 +11264,17 @@ down is not a critique.
    ~110/163; the grid is NOT restarted), then the §27 queue's
    WF-1b with its chair-authored preamble debt. The §290
    core-first stop law governs scope throughout.
+
+### §291.5 · OWNER CLARIFICATION — THE SEAT MODEL (2026-08-21,
+### in-chat, same sitting)
+
+**"Fable architects, manages, surveys, recon, judgement, etc,
+with opus being verifier and implementer."** This sharpens the
+§236-era takeover law into a standing staffing rule: the FABLE
+chair personally holds architecture, program management, survey/
+recon of the primary record, and every judgment; OPUS lanes hold
+verification and implementation. The current sitting already
+complies (the chair read all 25 rows from the primary record;
+the four verification lanes run on Opus), and every build lane
+dispatched under §291.4 will be an Opus lane working to a
+Fable-authored brief, collected and ruled by the Fable chair.

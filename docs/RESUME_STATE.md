@@ -3,23 +3,23 @@
 > ⚠ **GIT WINS OVER EVERY FIGURE IN THIS FILE.** It is a snapshot, not a source of truth.
 > Regenerate before trusting it: `sh scripts/resume-state.sh`
 
-**Generated:** 2026-08-14 01:45:06 EDT
+**Generated:** 2026-08-21 06:04:39 CDT
 
 ## Where the trees are
 
 | tree | branch | HEAD | dirty |
 |---|---|---|---|
-| build (`.claude/worktrees/minifold`) | `claude/composite-r4` | `2dd09360` | **0** |
-| ledger (main) | `review-fixes-2026-07-08` | `bc774bc1` | **4605** |
+| build (`.claude/worktrees/minifold`) | `` | `` | **0** |
+| ledger (main) | `review-fixes-2026-07-08` | `bd98a314` | **4687** |
 
-**Gate slot:** gate-mutex: FREE — no held lock or Vitest runner outside this process's ancestry.
-**Disk:** 29Gi free (86% used)
+**Gate slot:** (gate-mutex.sh not found)
+**Disk:** 36Gi free (83% used)
 
 ## ⭐ In-flight work is ALREADY BACKED UP
 
-Snapshot `20260814T014417` — build 0 file(s), ledger 2181 file(s), each with a full patch and its HEAD sha:
+Snapshot `20260821T060351` — build 0 file(s), ledger 2263 file(s), each with a full patch and its HEAD sha:
 ```
-/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260814T014417
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/resume-snapshots/20260821T060351
 ```
 Newest 3 snapshots kept. **Recovery procedure: `docs/START_HERE.md` §3k** — back up (done), re-verify
 INDEPENDENTLY, earn any "pre-existing" claim in an archive, stage by explicit pathspec, check the
@@ -28,32 +28,20 @@ staged set BY NAME AND COUNT.
 ## Last 12 build commits
 
 ```
-2dd09360 2026-08-14 docs: finish A-22 succession exemplar cure
-c39d2413 2026-08-14 docs: correct succession dossier pool
-4a1a3707 2026-08-14 docs: record GR-4b-iii-a landing
-7e7d5205 2026-08-13 feat: voice opened succession questions
-4bc44f8e 2026-08-13 docs: complete GR-4B-IIIA v2 authority
-b40dbd09 2026-08-13 docs: correct GR-4b-iii-a order proof
-9be50ffe 2026-08-13 docs: promote GR-4b-iii-a packet
-955acd7a 2026-08-13 docs: correct GR-4b opening corpus
-7a589733 2026-08-13 docs: record GR-4d v2 landing
-a17d0a02 2026-08-13 feat: implement GR-4d lit succession decision
-fcf1efbd 2026-08-13 docs: amend GR-4d authority topology
-6f1cac10 2026-08-13 docs: promote GR-4d implementation packet
 ```
 ## Last 6 ledger commits
 
 ```
-bc774bc1 2026-08-13 docs: refresh ledger after GR-4e
-5b0cc5fa 2026-08-13 docs: refresh ledger after AO-6
-1fec79aa 2026-08-13 Record AO-5 prose-family contract landing
-e30401aa 2026-08-13 Record AO-4 headline totality landing
-2e826756 2026-08-13 Record AO-2+3 atomic contract-cure landing
-e7d66cce 2026-08-13 Rule AO-2 to AO-3 atomic contract-cure train
+bd98a314 2026-08-21 The Fable chair returns: the retrovalidation sitting opens; three owner directives land (§291; also lands §287-§290)
+3e3366b9 2026-08-17 Architect the §275 adoptions into the build sheet (§276)
+85536035 2026-08-17 Assess the two research documents: adopt the counterfactual benchmark (§275)
+d00bb6ed 2026-08-17 W2: the wall landed whole; the zoom found self-crossing circuits (§274)
+74c3c672 2026-08-17 W1 complete: six of six, the normalized-units defect, twelve mechanisms now firing (§273)
+a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (§272)
 ```
 ## Fable-survey debt (derived, not transcribed)
 
-- Build commits still marked `FABLE SURVEY OWED`: **33**
+- Build commits still marked `FABLE SURVEY OWED`: **0**
 
 ---
 
@@ -63,7 +51,32 @@ e7d66cce 2026-08-13 Rule AO-2 to AO-3 atomic contract-cure train
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
-# ⭐⭐ CURRENT (2026-08-15, true date — see the §62/§63 boundary erratum:
+# ⭐⭐⭐ CURRENT (2026-08-21 ~06:05 ET) — THE FABLE RETROVALIDATION SITTING IS OPEN
+# (ODQ §291 @ ledger bd98a314; §291.5 seat model + this note ride the next commit).
+# Successor bootstrap: docs/HANDOFF_CURRENT.md → ODQ tail (§287-§291.5) →
+# docs/FABLE_RETROVALIDATION_QUEUE.md (25 rows §238-§274, ALL still un-ruled).
+# OWNER DIRECTIVES TODAY (all in §291): grant re-refreshed incl. EMERGENT;
+# REVIEW-IMPROVE doctrine (improvements in-scope even at risk, coherence binding);
+# 30-min ScheduleWakeup cadence + up to FOUR lanes (ONE landing/ONE gate stand);
+# §291.5: Fable = architect/manager/survey/judgment, Opus = verifier/implementer.
+# IN FLIGHT (dispatched ~05:45 ET, four Opus read-only verification lanes; memos to
+# /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/6298872d-53af-4c8a-99e5-139bfc5bfc1f/scratchpad/):
+#   E1 retro-E1-memo.md — map-arch §238/§239/§240/§241/§252/§255/§257
+#   E2 retro-E2-memo.md — corpus/measurement §242/§244/§245-6/§249/§250/§251/§261
+#   E3 retro-E3-memo.md — prior-art/meta §247/§248/§253/§254/§258/§259/§263/§265/§266
+#   E4 retro-E4-memo.md — engine/soak/waves §267-§274 + RS-4 resume recon
+# The chair has READ all 25 rows + §275-§290 from the primary record already.
+# NEXT ACTS (in order): collect E1-E4 → rule 25 rows RATIFIED/AMENDED/REVERSED in
+# ODQ rows (§292+) → empty the queue file → §61-style annex re-verify any A/R →
+# refresh HANDOFF_CURRENT + this note → THEN dispatch per §291.4: map lane D0
+# offset kernel from sealed W2 (sandbox mf-proto/build-out; W3 partial tip is
+# ABANDONED EVIDENCE, do not build on it) + engine lane RS-4 monitor resume at
+# 4eafca31 (rs4-receipts/ durable, ~127 files; resume machinery rs4-resume-gen.mjs;
+# NEVER restart the grid) + WF-1b (chair preamble debt first). §290 core-first law
+# governs scope. A successor mid-sitting: re-dispatch any lane whose memo file is
+# absent; NEVER reuse a dead lane's pre-death measurements (re-run them).
+
+# ⭐⭐ PREVIOUS (2026-08-15, true date — see the §62/§63 boundary erratum:
 # earlier "08-16" stamps were clock skew) — ⭐⭐ §71 PUSH PROGRAM RULED
 # (owner): AUDIT-ZERO GATE → FIRST PUSH VIA PR → then one PR per FAMILY
 # completion. NO push before all §51 audits complete AND every finding
