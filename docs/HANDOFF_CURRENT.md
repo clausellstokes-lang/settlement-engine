@@ -26,13 +26,22 @@ where they conflict; its map-architecture content §287–§290 remains binding)
    window-independent range 1.33–1.44×); §242's holdout rulings (moot/void
    per §287.10). The recurring defect class across all 30 rows was
    RECEIPT→LEDGER TRANSIT — quote receipts, never summarize grades up.
-2. **IN FLIGHT AT THIS WRITING:** RS-4's final 36-cell w0-soak-c segment
-   (resumed §294.0; on SEGMENT_EXIT=0 run rs4-evaluate.mjs ONCE — the
-   sentinel guard exists, the marker does not yet); **MF-D0** the offset
-   kernel (Opus lane; brief §294.7a/§294.9; works in old-scratchpad
-   laneMFD0-tip copied from sealed laneMFW2-tip; receipt laneMFD0-receipt.md);
-   **CX-1** reviewing the codex slice (below); **CF-1** the corrections fold
-   (ODQ §298.9 charter: spec + atlas + hf389 rename).
+2. **PROGRESS SINCE (same day, ledger §299-§303):** MF-D0 SEALED (the offset
+   kernel: 38 self-crossings → 0 in every ring family; §278 re-stated; W2's
+   causes reversed — mitre + terrain pull) · MF-D1 SEALED (all five §287.8
+   foundations at ZERO bytes: S0-S23 executable manifest + walker; stream
+   audit discharged by 1.3M-draw counterfactual; integer ABI v1 reconciled
+   over 4.4M numbers; exact solid legality; spatial receipts; DCEL dual-run
+   with Euler oracle) · CF-1 SEALED (§300: all sitting corrections in
+   spec/atlas; hf389 renamed, corpus gate 313/313) · CG-1 SEALED (§302: the
+   codex tip gate-proven GREEN; §299.5 strike executed; ⭐ BUILD BRANCH
+   LANDED claude/composite-r4 @ f8d978df) · the §296 codex arc CLOSED
+   (§299/§302: port-target, not a fifth authority; port plan precise at
+   §303.5 — record shapes + embedder in, arrangement/census/registry out,
+   ABI wins). Laws L1-L7 banked. IN FLIGHT NOW: RS-4's final segment
+   (~22 cells; on SEGMENT_EXIT=0 run rs4-evaluate.mjs ONCE) and **MF-W3F,
+   fresh W3** (charter ODQ §303.9; base laneMFD1-tip; receipt
+   laneMFW3F-receipt.md).
 3. ⛔ **THE CODEX FIRST-MAP VERTICAL SLICE (§296):** branch
    `codex/first-map-vertical-slice` @ eedd4e9c on 4eafca31 — five packets
    (MF-T1F/M/V/S/X), 62 files, +14,767, creating src/domain/townMap/fabric/

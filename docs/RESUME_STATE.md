@@ -74,6 +74,16 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐⭐ §303 (~08:45 ET): MF-D1 COLLECTED (ZERO bytes proven, five foundations,
+# stream audit discharged, stage-graph SCC found) — ten raised items RULED:
+# §297.4c conversion PARKED (ground blast radius; byte-neutral lift ratified);
+# port plan precise (codex record shapes + embedder IN; compiler/census/registry
+# OUT; D1 ABI wins); SW-1 five criteria = fresh-W3 exit criteria; validator
+# design adopted W/ §303.7 as its own authorization. D1 SEALED at laneMFD1-tip.
+# ⭐ MF-W3F (FRESH W3) DISPATCHED on the sealed tip — charter §303.9 (demotion-
+# before-packer first; SW-1 cures; inter-ring; strict recount; terrain re-aim;
+# new distinct-world exemplar; one declared shift) → laneMFW3F-receipt.md.
+# HANDOFF refreshed (progress block). Still out: RS-4 tail · MF-W3F.
 # ⭐⭐ §302 (~08:25 ET): CG-1 COLLECTED — gate GREEN at eedd4e9c (TRUE_EXIT=0 +
 # smoke:boot; run-1 red = classified flake, NOT banked, threshold recorded);
 # §299.5 STRIKE EXECUTED and ⭐ BUILD BRANCH LANDED: claude/composite-r4 CAS

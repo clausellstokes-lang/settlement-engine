@@ -12540,3 +12540,115 @@ ruled with "thin" stated, never defaulted to RATIFIED.
    prunable stub). §296.3's containment is LIFTED; the §296
    arc closes: discovered → reviewed → ruled → gate-proven →
    struck → landed.
+
+## §303 · MF-D1 COLLECTED — ALL FIVE FOUNDATIONS BUILT AT ZERO
+## BYTES; THE TEN RAISED ITEMS RULED; FRESH W3 DISPATCHES
+## (2026-08-21; chair: FABLE; receipt laneMFD1-receipt.md, 837
+## lines, every figure log-traced)
+
+1. **COLLECTED, ALL CONFIRMED.** Zero bytes moved — 0 of 170
+   plate keys over 17 leaves, determinism digest IDENTICAL to
+   sealed D0 (83c25846…), suite 248 → 286 TRUE_EXIT=0 (+38 in
+   two NEW files, no existing test edited, no ratchet moved),
+   D0's pins inherited (self-crossing and ALL-RING 0/17),
+   drawn censuses 0/0/0/0 over 23,557, 102/102 under unraised
+   ceilings. Landed: the executable S0–S23 manifest with a
+   12-arm source-derived walker (which fired on its own
+   author — the correct first conviction); the §293.3c
+   stream-derivation audit DISCHARGED by executed
+   counterfactual (1,337,825 cross-stage draws injected, 0 of
+   34 plates moved; same-stage control 24 of 34 moved) — the
+   §253.3b order finally has its receipt; the versioned
+   integer ABI (the integer read out of q6's own text — the
+   re-round diverges on executed examples; 0 reconciliation
+   failures over 4,423,599 numbers); exact solid legality in
+   the one predicate home with both rejected predicates
+   convicted by counterexample; the spatial-receipt seam with
+   same-pass feedback unrepresentable by construction; the
+   DCEL dual-run on all 17 leaves with Euler's identity as an
+   independent noder oracle (holds on exactly the 11
+   zero-residual leaves). ⭐ Manifest headline: the module
+   graph is acyclic, the STAGE graph carries one SCC
+   (S2·S3·S4·S6·S13, closed by two named imports) — the §241
+   pattern predicts a missing version axis at stage
+   granularity; W3/W4 recon confirms or refutes.
+2. **RAISED-1 RULED**: §297.4c's literal conversion is PARKED
+   — it re-rolls the GROUND on every leaf, the largest blast
+   radius in the program, and the mis-attribution hazard the
+   order aimed at is CURED by the lane's byte-neutral
+   one-home lift (a §258.2 substitution executed exactly
+   right, signature = zero bytes, pinned against accidental
+   conversion). If a future wave needs the namespace unified,
+   it rides its own declared-shift micro-wave, D0-pattern.
+3. **RAISED-2 RULED**: sweep-to-measurement RATIFIED (the
+   §269.3 principle); the order's figures stand corrected
+   (true fabric reads 11/14/3); water and parcels guarded;
+   streets' cure is a DIFFERENT mechanism (the synthetic
+   accessFabric is unreachable by publication guard) — named
+   as a small W3 question, not silently dropped.
+4. **RAISED-3 RULED**: §293.7's three live defects (a
+   connectivity grade about the wrong channel set on 10 of 17
+   leaves; 22/22 stale square radii; 12 colliding gate keys)
+   are W3 FIRST-ITEM MATERIAL beside demotion-before-packer,
+   and ⭐ the SW-1 law with its five machine-checkable
+   criteria is ADOPTED as fresh-W3 EXIT CRITERIA (four of
+   five fail today — that is the wave's yardstick).
+5. ⭐⭐ **RAISED-4 RULED — THE PORT PLAN IS NOW PRECISE**: adopt
+   the codex slice's RECORD SHAPES and its embedder's
+   algorithm; do NOT adopt its arrangement compiler, census,
+   or parcel registry (a single-fixture jig that throws on 8
+   of 17 real leaves). On the integer wall: **D1's versioned
+   ABI wins** — §299.2 said D1 rules on disagreement, and the
+   codex 0..1000 wall is a fixture-era constraint; the ported
+   record shapes re-parameterize onto the ABI. This binds the
+   D3a-era port packets.
+6. **RAISED-5/6/7/8/9 ROUTED**: the eight namespace
+   collisions stay frozen at eight, investigated by W3/W4
+   (collision bites only if entity ids collide); the MINT
+   ratchet's regex is widened BY W3 with its conviction count
+   measured and declared, never silently; the noding residual
+   (a fixed point, not a budget) is decided at W3 with the
+   chair's stated prior — snap-rounding to a declared
+   arrangement quantum coheres with the ABI's quantization
+   philosophy, exact rationals fight it (vetoable, decided on
+   W3's measurements); the two blocked-arm live defects
+   (workableShare's constant siting input; substrateKey's
+   immovable hash column) ride W3's declared shift with
+   per-mechanism attribution; the y-axis flip stays owed by
+   the first wave that publishes a world-framed artifact —
+   the ABI records it honestly.
+7. **RAISED-10 RULED**: the packet-validator refusal design is
+   ADOPTED as the design of record (censusAuthorization block;
+   refusal naming the instruments; resolvable §-ref;
+   terminal-status exemption), routed to the engine queue's
+   next train — **and this row IS the authorizing decision for
+   the schema move itself**, closing the bootstrap trap the
+   design names.
+8. **PROCESS**: the lane's two self-caught defects are banked
+   as practice — an instrument may not report a zero without
+   its denominator (the vacuous stream run now refuses; the
+   pin-vacuity family's instrument-side member), and an
+   isolation claim is an empirical claim (the diag tree was
+   rebuilt and re-run when "differs by one file" proved
+   false). Exactly the receipts-over-claims culture working
+   inside a lane.
+9. **D1 IS SEALED at laneMFD1-tip. FRESH W3 (lane MF-W3F)
+   DISPATCHES NOW** on the sealed tip, carrying the
+   consolidated W3 sheet: demotion-before-packer FIRST
+   (§274.5a — also the cure for D0's accepted ditch-garden
+   cost); the §293.7 street-web cures under SW-1's five exit
+   criteria; the inter-ring nesting census and its cure
+   (§301.5); the strict-form containment recount, the §240.1
+   half-ring pin re-authoring and the boundEpoch docstring
+   (§297.5d); the §241 census reconciliation (§297.4);
+   year-018's 1.38× characterization (§294.3); the
+   terrain-pull re-aim (§301.6); circuitDemotion's second
+   witness before its table locks (§298.5d); the
+   through-river arm on the n=1 leaf; frontage/parcel
+   equivalence against the DCEL faces with S8
+   blocks-as-faces built for wall/street (water/cliff held
+   per §297.2b); ⭐ and ONE additional distinct-world walled
+   riverside exemplar (new seed), so the town family stops
+   being six replicas of one site — the cheapest multiplier
+   in the corpus, additive only. One declared shift,
+   attributed per mechanism, D0-pattern.
