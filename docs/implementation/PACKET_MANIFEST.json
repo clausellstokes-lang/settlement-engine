@@ -17134,7 +17134,7 @@
     },
     {
       "id": "MF-T2A",
-      "status": "DRAFT",
+      "status": "READY",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T2A.md",
       "verifiedBase": "f20b9faa828469fed6f3fccae19f7c08508a5213",
       "changeManifest": [

@@ -1,6 +1,6 @@
 # Town cartography / MF-T2A — the fabric single-declaration law (D3a's first act)
 
-- **Status:** DRAFT
+- **Status:** READY
 - **Packet version:** 1
 - **Verified base:** `claude/composite-r4` at `f20b9faa828469fed6f3fccae19f7c08508a5213`
 - **Last revalidated:** 2026-08-21 at `f20b9faa` by lane TE-T2A, every row re-executed at this tip
