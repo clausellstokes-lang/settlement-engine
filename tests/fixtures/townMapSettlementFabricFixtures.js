@@ -1,6 +1,7 @@
 import {
   compileExplicitBuildingMass,
   compileOrthogonalCrossCadastralArrangement,
+  compileOrthogonalCrossPlanarDcel,
   compileOrthogonalCrossStreetGeometry,
   compileOrthogonalCrossStreetGraph,
   createCanonicalOrigin,
@@ -20,6 +21,7 @@ export const SETTLEMENT_ID = 'settlement:cross:001';
 export const STREET_GEOMETRY_ID = 'street-geometry:settlement-cross:001';
 export const STREET_GRAPH_ID = 'street-graph:settlement-cross:001';
 export const BOUNDARY_ARRANGEMENT_ID = 'cadastral-arrangement:settlement-cross:001';
+export const PLANAR_DCEL_ID = 'planar-dcel:settlement-cross:001';
 
 export const SETTLEMENT_CELLS = Object.freeze([
   { cell: 'LOW_X_LOW_Z', blockId: 'block:settlement:low-x-low-z', edgeId: 'edge:settlement:low-x-low-z' },
@@ -83,6 +85,19 @@ export function makeSettlementBoundaryArrangement(planOverrides = {}) {
     streetGeometry: fixture.geometry,
   });
   return { ...fixture, frontageSubdivision, arrangement };
+}
+
+/** @param {Record<string,unknown>} [planOverrides] */
+export function makeSettlementPlanarDcel(planOverrides = {}) {
+  const fixture = makeSettlementBoundaryArrangement(planOverrides);
+  const dcel = compileOrthogonalCrossPlanarDcel({
+    artifactId: PLANAR_DCEL_ID,
+    foundation: fixture.foundation,
+    frontageSubdivision: fixture.frontageSubdivision,
+    streetGeometry: fixture.geometry,
+    boundaryArrangement: fixture.arrangement,
+  });
+  return { ...fixture, dcel };
 }
 
 /** @param {Record<string,unknown>} [planOverrides] */

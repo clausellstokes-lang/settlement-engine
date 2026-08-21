@@ -4816,7 +4816,11 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // 2,473/364/2,109/20,552/5,756 → 2,475/364/2,111/20,558/5,758. The domain
     // matrix contributes five titles and one suite; the determinism companion adds one
     // title and one suite. Both files are credited; no parser door changes classification.
-    files: 2475, parked: 364, credited: 2111, titles: 20558, suiteTitles: 5758,
+    // ── RE-RECORDED 2026-08-20 BY MF-T1D, THE REFERENCE-ONLY PLANAR DCEL ────
+    // 2,475/364/2,111/20,558/5,758 → 2,477/364/2,113/20,564/5,760. The domain
+    // matrix contributes five titles and one suite; its deterministic replay companion
+    // contributes one title and one suite. Both files are credited; no parser door moved.
+    files: 2477, parked: 364, credited: 2113, titles: 20564, suiteTitles: 5760,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
