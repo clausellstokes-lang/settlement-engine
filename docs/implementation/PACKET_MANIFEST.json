@@ -15123,7 +15123,7 @@
     },
     {
       "id": "MF-T1F",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T1F.md",
       "verifiedBase": "d6b4b3d5285fdba01508366fa6bdced8be1b44fa",
       "changeManifest": [
@@ -15200,7 +15200,15 @@
         { "path": "tests/domain/townMapPlanarDcel.test.js", "symbol": "MF-T1D canonical reference-only planar DCEL" },
         { "path": "tests/property/townMapPlanarDcelDeterminism.test.js", "symbol": "MF-T1D planar DCEL determinism" },
         { "path": "tests/domain/townMapParcelRegistry.test.js", "symbol": "MF-T1P canonical reference-only parcel registry" },
-        { "path": "tests/property/townMapParcelRegistryDeterminism.test.js", "symbol": "MF-T1P parcel-registry determinism" }
+        { "path": "tests/property/townMapParcelRegistryDeterminism.test.js", "symbol": "MF-T1P parcel-registry determinism" },
+        { "path": "src/domain/townMap/fabric/fabricRoot.js", "symbol": "export const FIRST_SLICE_FABRIC_ROOT_SCHEMA_VERSION" },
+        { "path": "src/domain/townMap/fabric/fabricRoot.js", "symbol": "export const FIRST_SLICE_FABRIC_ROOT_LAW_VERSION" },
+        { "path": "src/domain/townMap/fabric/fabricRoot.js", "symbol": "export function compileOrthogonalCrossFirstSliceFabricRoot" },
+        { "path": "src/domain/townMap/fabric/index.js", "symbol": "compileOrthogonalCrossFirstSliceFabricRoot," },
+        { "path": "tests/fixtures/townMapSettlementFabricFixtures.js", "symbol": "export const FIRST_SLICE_FABRIC_ROOT_ID" },
+        { "path": "tests/fixtures/townMapSettlementFabricFixtures.js", "symbol": "export function makeSettlementFabricRoot" },
+        { "path": "tests/domain/townMapFabricRoot.test.js", "symbol": "MF-T1F transitional first-slice Fabric reference root" },
+        { "path": "tests/property/townMapFabricRootDeterminism.test.js", "symbol": "MF-T1F first-slice Fabric-root determinism" }
       ],
       "acceptanceCases": [
         { "id": "A1", "case": "The transitional first-slice root publishes exact metadata and six role-specific source refs with one deterministic root hash." },

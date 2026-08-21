@@ -1,13 +1,16 @@
 # Fabric Topology / MF-T1F — first-slice Fabric reference root
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed commit:** `325e16aaebb63cb3304443c3a92da27860c655af`
 - **Packet version:** `1`
 - **Verified base:** `codex/first-map-vertical-slice` at `d6b4b3d5285fdba01508366fa6bdced8be1b44fa`
-- **Last revalidated:** `2026-08-20` at `d6b4b3d5285fdba01508366fa6bdced8be1b44fa`
+- **Last revalidated:** `2026-08-20` at `325e16aaebb63cb3304443c3a92da27860c655af`
 - **Depends on:** MF-T1P at `7fd8ad3f077a0dbd6765e8bdd906c281a3716659`; MF-T1N at `40b29038d40ce50096e6b3450748ee6318bff285`
 - **Collision group:** `town-map-canonical-fabric-topology`
-- **Commit authority:** agent may stage and commit the exact manifest after all packet checks pass; no push, merge, cleanup, or adjacent repair
+- **Commit authority:** LANDED; do not redispatch
 - **Baseline posture:** MF-T1P wave-end gate passed with 28,610 tests and the inherited 11-known-failure ceiling; lint held 29 warnings and zero errors; build and 314-route prerender passed; strict dist passed 409/409; terminal governance validates 124 packets with zero READY before this promotion
+
+> This packet landed at the commit above. It is terminal and must not be redispatched.
 
 ## 1. Reconciled authority
 
@@ -209,17 +212,17 @@ Stop on source replay mismatch; any need for `artifactKind: 'FABRIC'`, canonical
 ## 12. Completion receipt
 
 - Base SHA: `d6b4b3d5285fdba01508366fa6bdced8be1b44fa`
-- Dispatch bundle and seal identity: `PENDING`
-- Final commit or working-tree state: `PENDING`
-- Exact changed files and effective-line deltas: `PENDING`
-- A1-A6 results: `PENDING`
-- Focused commands, exits and counts: `PENDING`
-- Sealed packet/resume status: `PENDING`
-- Both typecheck configurations: `PENDING`
-- Wave-end gate stages: `PENDING`
-- Base-versus-wave failure identity diff: `PENDING`
-- Source and root byte pins: foundation `scene-v1-c72afb9994bd6e8c4a6168e56fdc221e`; frontage `scene-v1-38ea62d8983609e19e4fe03cb64092af`; geometry `scene-v1-3c720d7ef19b040779a7fb82feb85011`; graph `scene-v1-18be7a3de95499aca1ca2a094c6d0e1e`; arrangement `scene-v1-a1cfadea8ca1bba796bfed3e0a1cb671`; DCEL `scene-v1-9e5a1400770196ff6da8be9417138d0d`; parcel `scene-v1-71946b930acf2a0080c4bd57658b31b6`; root `PENDING`
+- Dispatch bundle and seal identity: MF-T1F sealed session digest `74038483313f13c3c25b6d826850e17543859bdb13b651bc3df22d1daea6c730`; capsule digest `8834ad0d56320d1d08af6583b90ffc93b86e2225de4f24bbcef98b84f5d76b97`
+- Final commit or working-tree state: `325e16aaebb63cb3304443c3a92da27860c655af`; implementation tree clean before terminal governance
+- Exact changed files and effective-line deltas: exact six-path manifest; effective production delta `111/154` (`fabricRoot.js` `107/150`, `index.js` `+4/4`); fixture `+17` effective / `+19` raw within `20`; census `0` effective / `+5` raw within `12`
+- A1-A6 results: six new acceptance cases pass; focused root/parcel/graph suites `18/18`; final combined packet audit ended `0 P0 / 0 P1`
+- Focused commands, exits and counts: focused suites `18/18`; sovereignty/negative walkers `42/42`; scoped ESLint and `git diff --check` clean; all exit `0`
+- Sealed packet/resume status: `check:packet` and `implementation:resume` passed on the final pre-commit bytes; the exact sealed session completed all required steps
+- Both typecheck configurations: full ratchet `173/173`, no regression; domain-strict `1134/1134`, no regression
+- Wave-end gate stages: final `npm run check:tail` exit `0`; test ratchet `28,616` tests with the inherited `11` known failures and no new failure; lint `29` warnings/`0` errors; build passed in `27.80s`; prerender wrote `314` routes; strict dist `409/409`
+- Base-versus-wave failure identity diff: `NONE`
+- Source and root byte pins: foundation `scene-v1-c72afb9994bd6e8c4a6168e56fdc221e`; frontage `scene-v1-38ea62d8983609e19e4fe03cb64092af`; geometry `scene-v1-3c720d7ef19b040779a7fb82feb85011`; graph `scene-v1-18be7a3de95499aca1ca2a094c6d0e1e`; arrangement `scene-v1-a1cfadea8ca1bba796bfed3e0a1cb671`; DCEL `scene-v1-9e5a1400770196ff6da8be9417138d0d`; parcel `scene-v1-71946b930acf2a0080c4bd57658b31b6`; root `scene-v1-48ad7a068361f2a59aa7cf5a53308faf`
 - Generated artifacts: `NONE`
-- Deviations: `PENDING`
+- Deviations: `NONE`
 - Out-of-scope observations: genuine ABI/law/provenance authorities and canonical Fabric promotion remain a later persistence/provenance packet; buildings and projection follow this bounded first-slice root
 - Judgment calls: the transitional artifact has a distinct kind and hash domain. It cannot be relabeled into the canonical contract.
