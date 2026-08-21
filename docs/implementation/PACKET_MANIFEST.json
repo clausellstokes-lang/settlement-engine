@@ -17766,6 +17766,196 @@
           "check:tail"
         ]
       ]
+    },
+    {
+      "id": "WF-1D",
+      "status": "DRAFT",
+      "packetPath": "docs/implementation/packets/fp/WF-1D.md",
+      "verifiedBase": "cdfe5a96716250af71f4e91305beb8716987e4f3",
+      "changeManifest": [
+        {
+          "_note": "M1. THE NET-ZERO SEAM IN A ZERO-HEADROOM FILE. 818 effective against a frozen .size-baseline.json literal of 818, pinned exact in BOTH directions and re-enforced by a generated per-file max-lines override, so growth has no lawful cure. Seven sites: the cause-table import block collapses 4 lines to 2 and buys the patronFall.js import; a BY-NAME strict flag gate materializes the ring map; terminationReason gains a defaulted fallCause parameter on an existing line; the dissolvedCase map callback swaps to the new selector; a one-line per-deployment lookup; the argument and receipt lines each gain one appended member. Re-measured on BOTH instruments on BOTH sides: eslint Linter 818 = 818, wc -l 1045 = 1045.",
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/warTermination.js"
+        },
+        {
+          "_note": "M2. The closed four-key FALL_CAUSE_PROSE table and the dissolvedClauseFor selector, placed ABOVE TERMINATION_PEACE_PROSE so the three module-load totality assertions keep their position at the file foot, and given their OWN docblocks so no existing export JSDoc is orphaned (the positional-docblock shape that cost WF-1B nine strict errors against a green ratchet). Keys are exactly PATRON_FALL_CAUSES in codepoint order; the selector returns the base clause unchanged for every other casus. 71 -> 83 against an 800 layer ceiling.",
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/warTerminationCauseTables.js"
+        },
+        {
+          "_note": "M3a. THE ESTATE FIRST FAITH-to-WAR COUPLING ROW, CPL-23, in the WAR volume leaf because its owningVolume IS WAR. Both read and counterforce address into warTermination.js so the walker licensingRows filter matches on direction plus importer module. The receiptField is STATE-ROOTED (pulseRecord.warTerminationReads) rather than a returned read: a returned-read-only row would join the frozen exact-set roster of four unsampled rows in couplingReceiptSample.test.js and red a monotone-down ledger. 383 -> 403.",
+          "action": "MODIFY",
+          "path": "src/domain/certification/couplingRegistryWar.js"
+        },
+        {
+          "_note": "M3b. The composing head: import, compose into COUPLING_REGISTRY, and re-export by name. Required by couplingRegistrationGaps, which fails a packet that names a coupling leaf without also naming the head and the pin file. WARNING the import block and the re-export block are SEPARATE in this file; a re-export creates no local binding, so a row added only to the re-export imports as undefined. 109 -> 113.",
+          "action": "MODIFY",
+          "path": "src/domain/certification/couplingRegistry.js"
+        },
+        {
+          "_note": "M4. COMMENT ONLY, zero effective lines. The header claimed the leaf sat beside its ONLY importer so scanCrossLayerPairs would yield zero pairs; this member gives it a second importer in another layer and makes that untrue. Re-worded to name both importers and to record that the cross-layer read is LICENSED by M3a rather than absent, so a later WF compiler prices a third importer correctly.",
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/patronFall.js"
+        },
+        {
+          "_note": "M5a. The six acceptance cases as six straight-line it() calls with string-literal titles, added INTO the EXISTING WR-1 cause dissolution describe. No new describe, no .each, no runIf, no nesting, so suiteTitles does not move. The ring is seeded THROUGH the landed recordPatronFall writer and the drive spells the LITERAL faithUnseatingEnabled true. Three negative arms carry same-line anchored markers.",
+          "action": "MODIFY",
+          "path": "tests/domain/warTermination.test.js"
+        },
+        {
+          "_note": "M5b. THE EXACT-LIST ROSTER PIN. couplingRegistry.test.js deep-equals the whole COUPLING_REGISTRY against a hand-composed list, so a new row reds it until the spread is named. Required as a change path by couplingRegistrationGaps precisely so a reader is put in front of every pin the file contains.",
+          "action": "MODIFY",
+          "path": "tests/domain/couplingRegistry.test.js"
+        },
+        {
+          "_note": "M6. The WHOLE five-figure lighting tuple re-derived by execution in this commit, never patched figure by figure: 2485/364/2121/20618/5768 -> 2485/364/2121/20624/5768. The STARTING figure was RE-READ from this walker own live constant at cdfe5a96 rather than inherited from the compile, which had predicted it by adding WF-1C +7 across another member landing; the live constant already carried that +7, so inheriting the arithmetic would have landed 20625. Authorizing decision ODQ 321.",
+          "action": "MODIFY",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        },
+        {
+          "_note": "M7. This packet.",
+          "action": "CREATE",
+          "path": "docs/implementation/packets/fp/WF-1D.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE CONSUMPTION SURFACE WF-1a RESERVED FOR THIS MEMBER. Preamble P2.11 forbids any WF wave giving it a second caller ahead of WF-1d. Executed at this base: one definition, ZERO callers in src. This member takes the caller the law reserved, discharging WF-1a producer-first identity claim rather than re-pricing it.",
+          "path": "src/domain/worldPulse/patronFall.js",
+          "symbol": "export function fallCauseFor"
+        },
+        {
+          "_note": "THE ONE WRITER of the fall ring. Every fixture in this member seeds the ring THROUGH this function, never by poking the object, so a pin cannot assert over a shape the engine would not produce.",
+          "path": "src/domain/worldPulse/patronFall.js",
+          "symbol": "export function recordPatronFall"
+        },
+        {
+          "_note": "THE CLOSED FOUR-TOKEN VOCABULARY. A6 asserts the new prose table keys EQUAL this array, so a later fifth cause reds in the battery rather than rendering a blank clause.",
+          "path": "src/domain/worldPulse/patronFall.js",
+          "symbol": "export const PATRON_FALL_CAUSES"
+        },
+        {
+          "_note": "THE PURE READ this member joins into. It mutates nothing, which A5 re-asserts across the landing by freezing the whole worldState to JSON and comparing after the read.",
+          "path": "src/domain/worldPulse/warTermination.js",
+          "symbol": "export function readWarTerminations"
+        },
+        {
+          "_note": "THE TABLE THE SELECTOR NOW WRAPS. It stays exported from this leaf and is no longer imported by warTermination.js; the freed import specifier is exactly what pays for the patronFall.js import at net zero.",
+          "path": "src/domain/worldPulse/warTerminationCauseTables.js",
+          "symbol": "export const DISSOLVED_CAUSE_PROSE"
+        },
+        {
+          "_note": "DELIBERATELY NOT TOUCHED, and load-bearing: this is the second specifier in the collapsed import block. Its continued export is what lets that block shrink from four lines to two.",
+          "path": "src/domain/worldPulse/warTerminationCauseTables.js",
+          "symbol": "export const TERMINATION_PEACE_PROSE"
+        },
+        {
+          "_note": "THE ROW BUILDER every registry leaf uses. M3a goes through it rather than freezing a literal by hand, so the row cannot drift from the schema shape.",
+          "path": "src/domain/certification/couplingRegistrySchema.js",
+          "symbol": "export function couplingRow"
+        },
+        {
+          "_note": "THE COMPOSED REGISTRY. Executed at this base it held 49 rows with ZERO carrying direction FAITH-to-WAR and ZERO naming warTermination.js, which is what makes M3a a mint rather than an amendment.",
+          "path": "src/domain/certification/couplingRegistry.js",
+          "symbol": "export const COUPLING_REGISTRY"
+        },
+        {
+          "_note": "THE CHRONICLE ROW MECHANISM, keyed on impactKind. A6 asserts this table gains NO key, over a table first proved to carry pantheon_extinction, because this member mints a receipt kind rather than an impactKind and no walker arm requires a KIND_SECTION key to have a minter.",
+          "path": "src/domain/display/chroniclersLetter.js",
+          "symbol": "export const KIND_SECTION"
+        },
+        {
+          "_note": "THE SERIALIZED KEY ORDER. A5 asserts it is unchanged rather than assuming it: this member adds zero top-level keys, so the array-order-IS-key-order law is untouched.",
+          "path": "src/domain/worldPulse/worldState.js",
+          "symbol": "export const CONDITIONAL_LEDGER_KEYS"
+        },
+        {
+          "_note": "THE VEIL. religionStates is a member of this deny list and is absent from the public ledger allowlist, so the receipt four-token bucket crosses nothing that did not cross yesterday. A5 asserts both halves.",
+          "path": "src/domain/display/worldSnapshotPublic.js",
+          "symbol": "export const WORLD_SNAPSHOT_HARD_DENY"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "MAIN BEHAVIOUR, and the LIT-MUTANT CONTROL. Lit on both flags, a sacred war whose pinned patron anchor moved, against a settlement whose ring records that patron fall, carries patronFallCause discredited on the receipt AND the typed clause in reason. The ring is seeded through recordPatronFall and asserted before it is used; the drive spells the LITERAL faithUnseatingEnabled true, because mechanismLitCoverage grants AUTO credit only on a literal and a computed key attributes to NO key."
+        },
+        {
+          "id": "A2",
+          "case": "ABSENT vs FALSE vs LIT, at the byte level, plus the CASUS-GUARD pin. Flag-absent and flag-false serialize identically over the same fixture and only the literal lit drive moves a byte, so the fence has something to see. The case also pins that a GRIEVANCE war with both anchors pinned and their fall recorded carries NO patronFallCause key, which is the only arm that convicts the deleted sacred_claim guard, and that the other fifteen casus clauses are unchanged across the selector refactor."
+        },
+        {
+          "id": "A3",
+          "case": "NO INVENTED CAUSE, AND NO KEY. Lit, with a ring that records nothing for the pinned ref, the receipt carries NO patronFallCause key at all (absent, never null) and serializes byte-identically to the dark arm. Executed on BOTH sides of the landing, because a lit world whose ring records no fall for the pinned ref is byte-identical to dark, which is exactly the shape that would make a dormancy fixture silently vacuous. Anchored."
+        },
+        {
+          "id": "A4",
+          "case": "THE CHARTERED LEGACY ARM. A deployment predating the anchors reaches causeState anchor_unavailable with dissolvedCauseTypes empty and is named nothing. Missing history is not evidence. MEASURED AND IT MATTERS: this arm honesty comes from the ABSENT pinned anchor rather than from the casus guard, which is why the guard needed its own pin in A2 and why mutant (c) survived until it got one. Anchored."
+        },
+        {
+          "id": "A5",
+          "case": "LIFECYCLE AND THE VEIL. The whole worldState is frozen to JSON and compared after the read, so the no-mutation law is asserted rather than assumed; CONDITIONAL_LEDGER_KEYS is unchanged over a list first proved non-empty; religionStates is in WORLD_SNAPSHOT_HARD_DENY and not in the public ledger allowlist. Zero new persisted material, zero new top-level keys, no normalizer owed. Anchored."
+        },
+        {
+          "id": "A6",
+          "case": "REGISTRATION AND VOCABULARY TOTALITY, WITH THE REFUSED ROW ASSERTED AS AN ABSENCE. Object.keys(FALL_CAUSE_PROSE) EQUALS PATRON_FALL_CAUSES exactly; the FAITH-to-WAR pair is licensed by exactly ONE COUPLING_REGISTRY row whose read AND counterforce modules are both warTermination.js and whose flags name faithUnseatingEnabled; and KIND_SECTION gains NO key, asserted over a table first proved to carry pantheon_extinction so the negative cannot pass over an empty object. Anchored."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/warTermination.test.js",
+          "tests/domain/warTerminationPulse.test.js",
+          "tests/domain/warCostsIntegration.test.js",
+          "tests/domain/warCoalitionWr6.test.js",
+          "tests/domain/patronFall.test.js",
+          "tests/domain/couplingRegistry.test.js",
+          "tests/domain/couplingReceiptSample.test.js",
+          "tests/domain/subsystemRowsWar.test.js",
+          "tests/domain/religionDormancy.byteIdentity.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/couplingInclusion.walker.test.js",
+          "tests/lint/couplingDesk.walker.test.js",
+          "tests/lint/heraldRouting.walker.test.js",
+          "tests/lint/sizeBaseline.test.js",
+          "tests/lint/domainAnyCastBaseline.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/property/worldpulseDeityGolden.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/domain/worldPulse/warTermination.js"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "npm",
+          "run",
+          "validate:packets"
+        ],
+        [
+          "npm",
+          "run",
+          "check:tail"
+        ]
+      ]
     }
   ]
 }
