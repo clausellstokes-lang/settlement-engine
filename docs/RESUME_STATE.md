@@ -74,6 +74,13 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ §311.7-.9 (~12:15 ET): the owner delegated and the chair refined the FULL
+# undercity doctrine — sewer ladder (six causes, per-quarter), the component law
+# (license/anchor/driver/temperament, four closed temperaments), and the
+# connectivity laws (native/breach/funded + refusal; seven laws; sewers-as-spine
+# ⇒ archipelago undercities where absent; isolation VISIBLE). All design-of-
+# record; spec fold rides next touch; §290.4 position unchanged; typed joints →
+# D3a portal work; licenses' dossier facts → the D3a dossier-surface audit.
 # ⭐⭐ §311+§312 (~11:55 ET): OWNER UNDERCITY DOCTRINE recorded (seeded/causal/
 # proportional + §311.6 temperaments: sewers city+metro always, SOME towns,
 # surface-coupled; crypts monotone-grow zoned religious/cemetery/residential/
