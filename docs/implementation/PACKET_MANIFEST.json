@@ -16174,6 +16174,726 @@
           "validate:packets"
         ]
       ]
+    },
+    {
+      "id": "MF-T1X",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/town-cartography/MF-T1X.md",
+      "verifiedBase": "39715d75a64819ee125148192cdc541e9f8992c9",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/domain/townMap/fabric/operations.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/townMap/fabric/massingProjection.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/townMap/fabric/projection.js"
+        },
+        {
+          "action": "REGISTER",
+          "path": "src/domain/townMap/fabric/index.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/domain/townMapFantasyConstruction.test.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/domain/townMapShapeKernel.test.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export const SETTLEMENT_FABRIC_FOUNDATION_SCHEMA_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export const SETTLEMENT_FABRIC_FOUNDATION_LAW_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export const FABRIC_COORDINATE_ABI"
+        },
+        {
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export const CURRENT_MAP_TRADITION_ID"
+        },
+        {
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export function canonicalArtifactRef"
+        },
+        {
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export function canonicalRectBounds"
+        },
+        {
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export function requireCanonicalId"
+        },
+        {
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export function requireCanonicalInt"
+        },
+        {
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export function requireCanonicalRecord"
+        },
+        {
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export function sealCanonicalArtifact"
+        },
+        {
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export function sealFabricFoundation"
+        },
+        {
+          "path": "src/domain/townMap/fabric/settlementFoundation.js",
+          "symbol": "export const ORTHOGONAL_CROSS_PLAN_KIND"
+        },
+        {
+          "path": "src/domain/townMap/fabric/settlementFoundation.js",
+          "symbol": "export const ORTHOGONAL_CROSS_CELL_NAMES"
+        },
+        {
+          "path": "src/domain/townMap/fabric/settlementFoundation.js",
+          "symbol": "export function prepareOrthogonalCrossPlan"
+        },
+        {
+          "path": "src/domain/townMap/fabric/settlementFoundation.js",
+          "symbol": "export function deriveOrthogonalCrossRows"
+        },
+        {
+          "path": "src/domain/townMap/fabric/frontage.js",
+          "symbol": "export const SETTLEMENT_FRONTAGE_SUBDIVISION_LAW_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/frontage.js",
+          "symbol": "export const FRONTAGE_AXIS_KEYS"
+        },
+        {
+          "path": "src/domain/townMap/fabric/frontage.js",
+          "symbol": "export function subdivideSettlementFrontages"
+        },
+        {
+          "path": "src/domain/townMap/fabric/streetGeometry.js",
+          "symbol": "export const STREET_GEOMETRY_SCHEMA_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/streetGeometry.js",
+          "symbol": "export const STREET_GEOMETRY_LAW_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/streetGeometry.js",
+          "symbol": "export function compileOrthogonalCrossStreetGeometry"
+        },
+        {
+          "path": "src/domain/townMap/fabric/streetGraph.js",
+          "symbol": "export const STREET_GRAPH_SCHEMA_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/streetGraph.js",
+          "symbol": "export const STREET_GRAPH_LAW_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/streetGraph.js",
+          "symbol": "export function compileOrthogonalCrossStreetGraph"
+        },
+        {
+          "path": "src/domain/townMap/fabric/boundaryArrangement.js",
+          "symbol": "export const CADASTRAL_BOUNDARY_ARRANGEMENT_SCHEMA_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/boundaryArrangement.js",
+          "symbol": "export const CADASTRAL_BOUNDARY_ARRANGEMENT_LAW_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/boundaryArrangement.js",
+          "symbol": "export function compileOrthogonalCrossCadastralArrangement"
+        },
+        {
+          "path": "src/domain/townMap/fabric/dcelEmbedding.js",
+          "symbol": "export function derivePlanarDcelEmbedding"
+        },
+        {
+          "path": "src/domain/townMap/fabric/dcel.js",
+          "symbol": "export const PLANAR_DCEL_SCHEMA_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/dcel.js",
+          "symbol": "export const PLANAR_DCEL_LAW_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/dcel.js",
+          "symbol": "export function compileOrthogonalCrossPlanarDcel"
+        },
+        {
+          "path": "src/domain/townMap/fabric/parcelRegistry.js",
+          "symbol": "export const PARCEL_REGISTRY_SCHEMA_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/parcelRegistry.js",
+          "symbol": "export const PARCEL_REGISTRY_LAW_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/parcelRegistry.js",
+          "symbol": "export function compileOrthogonalCrossParcelRegistry"
+        },
+        {
+          "path": "src/domain/townMap/fabric/fabricRoot.js",
+          "symbol": "export const FIRST_SLICE_FABRIC_ROOT_SCHEMA_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/fabricRoot.js",
+          "symbol": "export const FIRST_SLICE_FABRIC_ROOT_LAW_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/fabricRoot.js",
+          "symbol": "export function compileOrthogonalCrossFirstSliceFabricRoot"
+        },
+        {
+          "path": "src/domain/townMap/fabric/building.js",
+          "symbol": "export const EXPLICIT_BUILDING_MASS_LAW_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/building.js",
+          "symbol": "export const SPATIAL_RECIPE_SCHEMA_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/building.js",
+          "symbol": "export const CANONICAL_ORIGIN_KINDS"
+        },
+        {
+          "path": "src/domain/townMap/fabric/building.js",
+          "symbol": "export const EXPLICIT_BUILDING_GEOMETRY_LAWS"
+        },
+        {
+          "path": "src/domain/townMap/fabric/building.js",
+          "symbol": "export function createSpatialRecipeSnapshot"
+        },
+        {
+          "path": "src/domain/townMap/fabric/building.js",
+          "symbol": "export function createCanonicalOrigin"
+        },
+        {
+          "path": "src/domain/townMap/fabric/building.js",
+          "symbol": "export function compileOriginNeutralBuildingGeometry"
+        },
+        {
+          "path": "src/domain/townMap/fabric/building.js",
+          "symbol": "export function bindBuildingOrigin"
+        },
+        {
+          "path": "src/domain/townMap/fabric/building.js",
+          "symbol": "export function compileExplicitBuildingMass"
+        },
+        {
+          "path": "src/domain/townMap/fabric/shapes.js",
+          "symbol": "export const COMPOSITE_SHAPE_LAW_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/shapes.js",
+          "symbol": "export const SHAPE_COORDINATE_ABI"
+        },
+        {
+          "path": "src/domain/townMap/fabric/shapes.js",
+          "symbol": "export const SHAPE_VOCABULARY_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/shapes.js",
+          "symbol": "export const PLAN_SHAPE_KINDS"
+        },
+        {
+          "path": "src/domain/townMap/fabric/shapes.js",
+          "symbol": "export const VERTICAL_SOLID_KINDS"
+        },
+        {
+          "path": "src/domain/townMap/fabric/shapes.js",
+          "symbol": "export const ROOF_SHAPE_KINDS"
+        },
+        {
+          "path": "src/domain/townScene/stableScene.js",
+          "symbol": "export function sceneDigest"
+        },
+        {
+          "path": "src/domain/townScene/stableScene.js",
+          "symbol": "export function stableSceneStringify"
+        },
+        {
+          "path": "src/domain/deterministicSort.js",
+          "symbol": "export const compareCodepoint"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "subdivideSettlementFrontages,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "compileOrthogonalCrossStreetGeometry,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "compileOrthogonalCrossStreetGraph,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "compileOrthogonalCrossCadastralArrangement,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "compileOrthogonalCrossPlanarDcel,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "compileOrthogonalCrossParcelRegistry,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "compileOrthogonalCrossFirstSliceFabricRoot,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "compileExplicitBuildingMass,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "createSpatialRecipeSnapshot,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "createCanonicalOrigin,"
+        },
+        {
+          "path": "tests/fixtures/townMapSettlementFabricFixtures.js",
+          "symbol": "export const SETTLEMENT_AXES"
+        },
+        {
+          "path": "tests/fixtures/townMapSettlementFabricFixtures.js",
+          "symbol": "export const STREET_GRAPH_ID"
+        },
+        {
+          "path": "tests/fixtures/townMapSettlementFabricFixtures.js",
+          "symbol": "export const BOUNDARY_ARRANGEMENT_ID"
+        },
+        {
+          "path": "tests/fixtures/townMapSettlementFabricFixtures.js",
+          "symbol": "export const PLANAR_DCEL_ID"
+        },
+        {
+          "path": "tests/fixtures/townMapSettlementFabricFixtures.js",
+          "symbol": "export const PARCEL_REGISTRY_ID"
+        },
+        {
+          "path": "tests/fixtures/townMapSettlementFabricFixtures.js",
+          "symbol": "export const FIRST_SLICE_FABRIC_ROOT_ID"
+        },
+        {
+          "path": "tests/fixtures/townMapSettlementFabricFixtures.js",
+          "symbol": "export function makeSettlementFoundation"
+        },
+        {
+          "path": "tests/fixtures/townMapSettlementFabricFixtures.js",
+          "symbol": "export function makeSettlementStreetGeometry"
+        },
+        {
+          "path": "tests/fixtures/townMapSettlementFabricFixtures.js",
+          "symbol": "export function makeSettlementStreetGraph"
+        },
+        {
+          "path": "tests/fixtures/townMapSettlementFabricFixtures.js",
+          "symbol": "export function makeSettlementBoundaryArrangement"
+        },
+        {
+          "path": "tests/fixtures/townMapSettlementFabricFixtures.js",
+          "symbol": "export function makeSettlementPlanarDcel"
+        },
+        {
+          "path": "tests/fixtures/townMapSettlementFabricFixtures.js",
+          "symbol": "export function makeSettlementParcelRegistry"
+        },
+        {
+          "path": "tests/fixtures/townMapSettlementFabricFixtures.js",
+          "symbol": "export function makeSettlementFabricRoot"
+        },
+        {
+          "path": "tests/fixtures/townMapSettlementFabricFixtures.js",
+          "symbol": "export function makeSettlementMasses"
+        },
+        {
+          "path": "tests/domain/townMapSettlementFabric.test.js",
+          "symbol": "MF-W3S1 orthogonal-cross settlement fabric"
+        },
+        {
+          "path": "tests/property/townMapSettlementFabricDeterminism.test.js",
+          "symbol": "MF-W3S1 settlement fabric determinism"
+        },
+        {
+          "path": "tests/domain/townMapStreetGeometry.test.js",
+          "symbol": "MF-T1G canonical orthogonal-cross street geometry"
+        },
+        {
+          "path": "tests/property/townMapStreetGeometryDeterminism.test.js",
+          "symbol": "MF-T1G street geometry determinism"
+        },
+        {
+          "path": "tests/domain/townMapStreetGraph.test.js",
+          "symbol": "MF-T1N canonical orthogonal-cross street graph"
+        },
+        {
+          "path": "tests/property/townMapStreetGraphDeterminism.test.js",
+          "symbol": "MF-T1N street graph determinism"
+        },
+        {
+          "path": "tests/domain/townMapBoundaryArrangement.test.js",
+          "symbol": "MF-T1A canonical post-W3 cadastral boundary arrangement"
+        },
+        {
+          "path": "tests/property/townMapBoundaryArrangementDeterminism.test.js",
+          "symbol": "MF-T1A cadastral boundary arrangement determinism"
+        },
+        {
+          "path": "tests/domain/townMapPlanarDcel.test.js",
+          "symbol": "MF-T1D canonical reference-only planar DCEL"
+        },
+        {
+          "path": "tests/property/townMapPlanarDcelDeterminism.test.js",
+          "symbol": "MF-T1D planar DCEL determinism"
+        },
+        {
+          "path": "tests/domain/townMapParcelRegistry.test.js",
+          "symbol": "MF-T1P canonical reference-only parcel registry"
+        },
+        {
+          "path": "tests/property/townMapParcelRegistryDeterminism.test.js",
+          "symbol": "MF-T1P parcel-registry determinism"
+        },
+        {
+          "path": "tests/domain/townMapFabricRoot.test.js",
+          "symbol": "MF-T1F transitional first-slice Fabric reference root"
+        },
+        {
+          "path": "tests/property/townMapFabricRootDeterminism.test.js",
+          "symbol": "MF-T1F first-slice Fabric-root determinism"
+        },
+        {
+          "path": "tests/domain/townMapShapeKernel.test.js",
+          "symbol": "MF-SH1 bounded semantic shape kernel"
+        },
+        {
+          "path": "tests/domain/townMapExplicitBuilding.test.js",
+          "symbol": "MF-VS1 explicit mass and fixed-survey projection"
+        },
+        {
+          "path": "tests/domain/townMapCustomParity.test.js",
+          "symbol": "MF-VS1 built-in/custom parity and package removal"
+        },
+        {
+          "path": "src/domain/townMap/fabric/building.js",
+          "symbol": "export const INSTITUTION_SPATIAL_RECIPE_SCHEMA_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/building.js",
+          "symbol": "export const SPATIAL_RECIPE_ROLES"
+        },
+        {
+          "path": "src/domain/townMap/fabric/massingRoster.js",
+          "symbol": "export const FIRST_SLICE_MASSING_ROSTER_SCHEMA_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/massingRoster.js",
+          "symbol": "export const FIRST_SLICE_MASSING_ROSTER_LAW_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/massingRoster.js",
+          "symbol": "export function compileOrthogonalCrossFirstSliceMassingRosterBundle"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "compileOrthogonalCrossFirstSliceMassingRosterBundle"
+        },
+        {
+          "path": "tests/fixtures/townMapSettlementFabricFixtures.js",
+          "symbol": "export const FIRST_SLICE_MASSING_ROSTER_ID"
+        },
+        {
+          "path": "tests/fixtures/townMapSettlementFabricFixtures.js",
+          "symbol": "export function makeSettlementMassingRosterBundleInputs"
+        },
+        {
+          "path": "tests/domain/townMapMassingRoster.test.js",
+          "symbol": "MF-T1M explicit varied first-slice massing roster bundle"
+        },
+        {
+          "path": "src/domain/townMap/fabric/projection.js",
+          "symbol": "export const FIXED_SURVEY_LIGHT_V1"
+        },
+        {
+          "path": "src/domain/townMap/fabric/projection.js",
+          "symbol": "export function projectFirstSliceFixedSurvey"
+        },
+        {
+          "path": "src/domain/townMap/fabric/projection.js",
+          "symbol": "export function firstSliceScreenDrawOps"
+        },
+        {
+          "path": "src/domain/townMap/fabric/projection.js",
+          "symbol": "export function firstSliceProjectionToSvg"
+        },
+        {
+          "path": "src/domain/townMap/townMapDraw.js",
+          "symbol": "export function drawListToSvg"
+        },
+        {
+          "path": "src/design/townMapExportPalette.js",
+          "symbol": "export const EXPORT_PALETTE"
+        },
+        {
+          "path": "src/domain/townMap/fabric/massingProjection.js",
+          "symbol": "export const FIRST_SLICE_MASSING_PROJECTION_LAW_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/massingProjection.js",
+          "symbol": "export function projectOrthogonalCrossFirstSliceMassingFixedSurvey"
+        },
+        {
+          "path": "src/domain/townMap/fabric/projection.js",
+          "symbol": "export function projectResolvedFirstSliceFixedSurvey"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "projectOrthogonalCrossFirstSliceMassingFixedSurvey,"
+        },
+        {
+          "path": "tests/domain/townMapMassingProjection.test.js",
+          "symbol": "MF-T1V roster-aware fixed-survey massing projection"
+        },
+        {
+          "path": "src/domain/townMap/fabric/content.js",
+          "symbol": "export const FIRST_SLICE_DOCUMENT_SCHEMA_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/content.js",
+          "symbol": "export function createFirstSliceDocument"
+        },
+        {
+          "path": "src/domain/townMap/fabric/content.js",
+          "symbol": "export function saveFirstSliceDocument"
+        },
+        {
+          "path": "src/domain/townMap/fabric/content.js",
+          "symbol": "export function resolveFirstSliceContent"
+        },
+        {
+          "path": "src/domain/townMap/fabric/content.js",
+          "symbol": "export function loadFirstSliceDocument"
+        },
+        {
+          "path": "src/domain/townMap/fabric/content.js",
+          "symbol": "export function assertFirstSliceMutable"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "FIRST_SLICE_DOCUMENT_SCHEMA_VERSION,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "assertFirstSliceMutable,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "createFirstSliceDocument,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "loadFirstSliceDocument,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "resolveFirstSliceContent,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "saveFirstSliceDocument,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/content.js",
+          "symbol": "export const FIRST_SLICE_MASSING_DOCUMENT_SCHEMA_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/content.js",
+          "symbol": "export const FIRST_SLICE_MASSING_DOCUMENT_LAW_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/content.js",
+          "symbol": "export function createFirstSliceMassingDocument"
+        },
+        {
+          "path": "src/domain/townMap/fabric/content.js",
+          "symbol": "export function saveFirstSliceMassingDocument"
+        },
+        {
+          "path": "src/domain/townMap/fabric/content.js",
+          "symbol": "export function loadFirstSliceMassingDocument"
+        },
+        {
+          "path": "src/domain/townMap/fabric/content.js",
+          "symbol": "export function assertFirstSliceMassingMutable"
+        },
+        {
+          "path": "src/domain/townMap/fabric/massingProjection.js",
+          "symbol": "export const FIRST_SLICE_MASSING_DOCUMENT_PROJECTION_LAW_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/massingProjection.js",
+          "symbol": "export function projectSavedOrthogonalCrossFirstSliceMassingFixedSurvey"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "FIRST_SLICE_MASSING_DOCUMENT_PROJECTION_LAW_VERSION,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "projectSavedOrthogonalCrossFirstSliceMassingFixedSurvey,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "FIRST_SLICE_MASSING_DOCUMENT_LAW_VERSION,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "FIRST_SLICE_MASSING_DOCUMENT_SCHEMA_VERSION,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "assertFirstSliceMassingMutable,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "createFirstSliceMassingDocument,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "loadFirstSliceMassingDocument,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "saveFirstSliceMassingDocument,"
+        },
+        {
+          "path": "tests/domain/townMapMassingPersistence.test.js",
+          "symbol": "MF-T1S roster-aware first-slice massing persistence"
+        },
+        {
+          "path": "src/domain/townMap/fabric/operations.js",
+          "symbol": "export const FANTASY_CONSTRUCTION_OPERATION_KIND"
+        },
+        {
+          "path": "src/domain/townMap/fabric/operations.js",
+          "symbol": "export const FANTASY_CANON_GATE"
+        },
+        {
+          "path": "src/domain/townMap/fabric/operations.js",
+          "symbol": "export function registerFantasyConstructionMechanism"
+        },
+        {
+          "path": "src/domain/townMap/fabric/operations.js",
+          "symbol": "export function createFantasyConstructionOperation"
+        },
+        {
+          "path": "src/domain/townMap/fabric/operations.js",
+          "symbol": "export function executeFantasyConstruction"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "FANTASY_CANON_GATE,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "FANTASY_CONSTRUCTION_OPERATION_KIND,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "createFantasyConstructionOperation,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "executeFantasyConstruction,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "registerFantasyConstructionMechanism,"
+        },
+        {
+          "path": "tests/domain/townMapFantasyConstruction.test.js",
+          "symbol": "MF-VS1 registered fantasy construction"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "Exact MF-T1S bytes and active snapshots load internally; stateful-accessor probes prove mechanism creator, operation creator and the retargeted executor each snapshot opaque input once; every installed snapshot, mechanism, operation, recipe and origin replays; the operation carries exact schema 1 and private law mf-t1x-explicit-fantasy-construction-operation-v1 while an unversioned operation refuses; the preserved legacy mechanism fixture remains scene-v1-56e0d430be735fbbab2f7aa4b4b50281 but cannot execute; and the result is frozen exact { constructionState, receipt }."
+        },
+        {
+          "id": "A2",
+          "case": "The unchanged two-body document and roster plus the explicit free-parcel operation produce exactly three building-ID-sorted masses; the new rectilinear and gabled mass is DM-private, BUILT_IN, AUTHORED, bound by the v2 mechanism's exact spatial-recipe ref, compiled once from complete geometry, and state plus schema-v1 receipt form the exact acyclic graph while the effect binds exact building ID, plot ref and mass ref without historical or probability authority."
+        },
+        {
+          "id": "A3",
+          "case": "The saved projector re-executes internally; the entire PUBLIC before and after projection, screen operations and SVG are byte-identical and leak no hidden authority; DM binds the exact before document, load-produced report, state and receipt, has exactly 21 ordered operations, and gains the third mass's actual shell-derived shadow, building and ridge primitives through the shared path, including the 87-character executable building-ID witness."
+        },
+        {
+          "id": "A4",
+          "case": "One closed literal refusal table has exactly six top-level classes: executor or projector envelope forgery including the old loaded request; invalid or internally read-only saved source; crossed, unversioned or non-replaying operation; legacy-v1, missing, non-replaying, duplicate or wrong-ref mechanism; non-replaying or non-DM, non-BUILT_IN or non-AUTHORED payload authority including recipe-ref mismatch; and building, plot or construction-operation collision or attempted chaining."
+        },
+        {
+          "id": "A5",
+          "case": "Repeat execution, canonical JSON clones and equivalent mechanism-registry order produce identical state, receipt and DM bytes; caller graphs remain unchanged and unfrozen; exact matching uses artifactId plus contentHash; and 96-character document, operation and mechanism IDs plus the compiler-bounded 87-character building ID still produce bounded state, receipt and projection IDs."
+        },
+        {
+          "id": "A6",
+          "case": "MF-T1M still refuses a third body; saved MF-T1S exact-installed PUBLIC and DM remain scene-v1-b90080500e9e0a99b6ee469444832743 / scene-v1-47ec385c5ea913fbad576ef8cc2d2219, direct MF-T1V remain scene-v1-2f65d0d84551c889da48e08ceb1eb27f / scene-v1-bc2930de2297900d8715aa32b1a884c3, and legacy remain scene-v1-9820c3f2273a313f22ff9246c65e1891 / scene-v1-1945e8a01df6c24788c3393c4e3c452d; MF-T1S save bytes and both base masses and roster remain unchanged; the executor stays exported but rejects the old loaded envelope and has no second alias; and no excluded authority or second compiler, projector or persistence path appears."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/townMapFantasyConstruction.test.js",
+          "tests/domain/townMapMassingPersistence.test.js",
+          "tests/domain/townMapMassingProjection.test.js",
+          "tests/domain/townMapMassingRoster.test.js",
+          "tests/domain/townMapShapeKernel.test.js",
+          "tests/domain/townMapExplicitBuilding.test.js",
+          "tests/domain/townMapCustomParity.test.js",
+          "tests/property/townMapFirstSliceDeterminism.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "npm",
+          "run",
+          "validate:packets"
+        ]
+      ]
     }
   ]
 }
