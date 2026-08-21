@@ -7,7 +7,7 @@
   `f4ad467d889ce5467a96604f28f2c49aaafcef57`. The exact registered fantasy
   construction, deterministic receipt replay and PUBLIC/DM privacy tranche is
   complete.
-- **Current measured checkpoint (2026-08-21):** `130` packets / `0` READY.
+- **Current measured checkpoint (2026-08-21):** `131` packets / `0` READY.
   The bounded first-map sequence is complete: sealed fabric/frontage, explicit
   varied massing, shared fixed-survey projection/draw/SVG, built-in/custom parity,
   save plus visible read-only missing-package reload, and one registered fantasy
@@ -1042,6 +1042,7 @@ re-derives that lane and decides whether to compile its immediate dependent.
 
 | Dispatch | Packet | Status | Why this is the boundary | Explicitly excluded |
 |---:|---|---|---|---|
+| MF-T2A | [`MF-T2A`](./packets/town-cartography/MF-T2A.md) | **DRAFT** — the D3a first act, in flight on lane TE-T2A | Land the fabric single-declaration law: one `tests/lint/**` walker asserting that no exported name is declared in two files under `src/domain/townMap/fabric/`, measured at exactly zero of 94 distinct names across 18 files, so the port about to pour 54 sandbox modules into that directory cannot deliver two same-named opposite-convention exports; its removing power proven by a planted sweep duplicate | any `src/**` byte, the sandbox-side rename, a scan root wider than `fabric/`, a baseline/allow-list/exemption door, a parser dependency, and every later D3a port member |
 | MF-T1X | [`MF-T1X`](./packets/town-cartography/MF-T1X.md) | **LANDED** at `f4ad467d`; do not redispatch | Retarget `executeFantasyConstruction` to one opaque saved-byte operation authorized by one replayed v2 exact-recipe mechanism; derive one acyclic three-mass state/receipt and reuse the MF-T1V/T1S projection so the DM-private addition leaves PUBLIC bytes exact | second operation/chaining, caller-loaded/readOnly authority, executable legacy semantic-list mechanism, roster/document widening, state persistence, custom/public fantasy mass, dossier/seed/sampling, new geometry/projection/draw path, UI/store/migration, eighth path or seventh test |
 | MF-T1S | [`MF-T1S`](./packets/town-cartography/MF-T1S.md) | **LANDED** at `136efaa5`; do not redispatch | Canonically save the exact MF-T1M bundle and detached compile input, simulate package removal with an empty active installed-snapshot projection, reload visible unresolved custom content read-only, and project only from saved bytes through MF-T1V | fantasy/dossier/seed/sampling, UI, database/store, actual package uninstall, migration, citywide fill, new projection math or canonical projection promotion |
 | MF-T1V | [`MF-T1V`](./packets/town-cartography/MF-T1V.md) | **LANDED** at `66dbed7c`; do not redispatch | Replay the exact MF-T1M bundle and project both varied bodies through the one fixed-survey draw/SVG path with origin-neutral PUBLIC privacy and roster-bound DM authority | document/content/persistence, fantasy/sampling, citywide fill, new shapes or lights, UI/export cutover, canonical projection promotion |

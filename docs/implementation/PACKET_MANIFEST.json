@@ -17131,6 +17131,146 @@
           "check:tail"
         ]
       ]
+    },
+    {
+      "id": "MF-T2A",
+      "status": "DRAFT",
+      "packetPath": "docs/implementation/packets/town-cartography/MF-T2A.md",
+      "verifiedBase": "f20b9faa828469fed6f3fccae19f7c08508a5213",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "tests/lint/townMapFabricSingleDeclaration.walker.test.js"
+        },
+        {
+          "_note": "TWO edits in one file and both are obligatory: the numbered plant entry after entry 28, AND the MUTATED_FILES dirty-guard row for its host. mutationCoverageManifest.test.js binds the two lists in BOTH directions, so a plant whose host is unguarded reds the terminal gate.",
+          "action": "MODIFY",
+          "path": "scripts/mutation-sweep.sh"
+        },
+        {
+          "action": "MODIFY",
+          "path": "scripts/mutation-coverage-manifest.json"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/packets/town-cartography/MF-T2A.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE PLANTED IDENTITY. Declared exactly once in the whole fabric directory; the sweep plants a second declaration of this name and the walker must convict it.",
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export const CURRENT_MAP_TRADITION_ID"
+        },
+        {
+          "_note": "THE PLANT HOST. It neither declares nor imports CURRENT_MAP_TRADITION_ID, which is what lets it host a syntactically valid second declaration; dcel.js could not (J-TET2A-1).",
+          "path": "src/domain/townMap/fabric/dcelEmbedding.js",
+          "symbol": "export function derivePlanarDcelEmbedding"
+        },
+        {
+          "_note": "THE REASON THE MUTATION-COVERAGE ROW IS OWED AT COMPILE: tests/lint is an enumerated enforcer directory, so a new file there is an enumerated invariant the moment it lands.",
+          "path": "tests/lint/mutationCoverage.shared.mjs",
+          "symbol": "export const ENFORCER_DIRS"
+        },
+        {
+          "path": "tests/lint/mutationCoverage.shared.mjs",
+          "symbol": "export function parseGuardedMutatedFiles"
+        },
+        {
+          "path": "tests/lint/mutationCoverage.shared.mjs",
+          "symbol": "export function parseSweepMutationTargets"
+        },
+        {
+          "_note": "THE SHAPE PRECEDENT this walker copies exactly: one literal describe, straight-line test calls, string-literal titles, guard-the-guard arm first.",
+          "path": "tests/lint/townMapMassingSilhouette.walker.test.js",
+          "symbol": "massing silhouette totality (the institution silhouette law)"
+        },
+        {
+          "path": "scripts/mutation-sweep.sh",
+          "symbol": "MUTATED_FILES=("
+        },
+        {
+          "path": "scripts/mutation-sweep.sh",
+          "symbol": "check_caught \"massing/silhouette totality unmapped kind\""
+        },
+        {
+          "_note": "MONOTONE-DOWN. This packet adds a mutation row and never an uncovered row, so this figure is untouched.",
+          "path": "scripts/mutation-coverage-manifest.json",
+          "symbol": "\"uncoveredBaseline\""
+        },
+        {
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "symbol": "const CENSUS = Object.freeze({"
+        },
+        {
+          "_note": "THE ARM THAT BINDS THE PLANT TO ITS GUARD ROW in both directions.",
+          "path": "tests/lint/mutationCoverageManifest.test.js",
+          "symbol": "DIRTY-GUARD TOTALITY"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "The law holds on the live tree. Every .js file directly under src/domain/townMap/fabric is enumerated from disk, its top-level export declarations collected, and the duplicate set deep-equals the empty array. No baseline, no allow-list, no exemption door: the population is exactly zero and the assertion says so."
+        },
+        {
+          "id": "A2",
+          "case": "Non-vacuity, the guard-the-guard arm, asserted BEFORE the law. The enumeration finds at least 18 files and at least 94 distinct exported names, so an emptied directory, a mis-rooted scan or a silently broken regex reds here instead of letting the totality assertion below pass on nothing."
+        },
+        {
+          "id": "A3",
+          "case": "Counterforce: it convicts. An in-test synthetic two-file source map declaring one identifier in both files yields exactly one duplicate entry naming that identifier and BOTH declaring file paths, in sorted order, and the failure message carries the TO-COMPLY instruction."
+        },
+        {
+          "id": "A4",
+          "case": "The scan's exact boundary, pinned in BOTH directions. A re-export, a star re-export, an export default and an INDENTED export inside a template literal each contribute no declaration. A COLUMN-ZERO export inside a template literal and inside a block comment each DO contribute one, which is asserted rather than denied: an extra text match can only add an identifier and never remove one, so the scan over-convicts loudly and can never under-convict silently."
+        },
+        {
+          "id": "A5",
+          "case": "The named historical regression, executed as a fixture rather than as a scan of the sealed sandbox. In-test sources reproduce the two clipHalfPlane signatures with opposite half-plane conventions; the walker convicts clipHalfPlane by name and the message names both declaring files. The ODQ section 310.3(7) defect is caught by name before the port can deliver it."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/negativeAssertionAnchor.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/townMapFabricSingleDeclaration.walker.test.js",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/build/townMapLazy.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "tests/lint/townMapFabricSingleDeclaration.walker.test.js"
+        ],
+        [
+          "npm",
+          "run",
+          "validate:packets"
+        ],
+        [
+          "npm",
+          "run",
+          "check:tail"
+        ]
+      ]
     }
   ]
 }
