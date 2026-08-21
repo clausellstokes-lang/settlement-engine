@@ -231,13 +231,46 @@ export function ensureReligionState(state, settlement, tier) {
 // the IMPOSE_CULT handler and the sim read the SAME single-source applier.)
 
 /**
+ * WF-1b ⛔ THE ONE WRITER of `deities[ref].suppressed` and `deities[ref].suppressedAtTick`.
+ *
+ * Three call sites suppress a creed — the same-niche push-out and the cross-niche eviction in
+ * `attemptEntry`, and the siege resolution in `resolvePatronContest` — and every one of them
+ * routes here. It performs the IDENTICAL spread those sites performed inline, so the record's
+ * existing key order is preserved and `suppressed`/`share`/`standing` keep their positions;
+ * `suppressedAtTick` therefore appends LAST, and only when the fold handed down a finite tick.
+ *
+ * ⛔ UNEXPORTED, on `pruneSuppressed`'s own precedent in this module: all three callers live in
+ * this file, and an export would invite a fourth suppression site that the write-site census pin
+ * (`tests/domain/patronFall.test.js`) exists to forbid.
+ *
+ * ⛔ CONDITIONAL MATERIALIZATION, on the `noneShare` idiom `applyUnaffiliatedSink` already uses:
+ * with no finite tick the key is never created, so the serialized bytes are unchanged. That is
+ * the whole of the dark byte-identity claim at this level, and the fold's `unseating ? tick :
+ * null` fork is the SECOND, independent holder of it — neither guard may be assumed to cover
+ * for the other.
+ *
+ * ⭐ DEITY DOCTRINE: the stamp records WHEN THE BELIEVERS' CREED WAS PUT OUT OF THE LIGHT by an
+ * eviction, a capacity contest or a siege — three political and social acts. It asserts nothing
+ * about a god.
+ *
+ * @param {any} state @param {string} ref @param {number|null} [tick]
+ */
+function suppressDeity(state, ref, tick) {
+  const rec = { ...state.deities[ref], suppressed: true, share: 0, standing: 'cult' };
+  if (Number.isFinite(tick)) rec.suppressedAtTick = tick;
+  state.deities[ref] = rec;
+}
+
+/**
  * Attempt to bring a newcomer deity into the settlement this tick. Implements the
  * three entry paths (open niche+free slot → cult; same-niche push-out; capacity-full
  * cross-niche eviction). `newcomerStrength` (0..1) is the kernel-computed local pull;
  * `force` (occupation) bypasses the capacity cap. Returns { entered, path, evicted }.
  * Mutates `state.deities` in place; caller renorms after.
  * @param {any} state @param {any} deity @param {number} newcomerStrength
- * @param {{ force?: boolean }} [opts]
+ * @param {{ force?: boolean, tick?: number|null }} [opts] WF-1b: `tick` joins the EXISTING bag
+ *   rather than widening the signature, which is why all fifteen test call sites stay valid
+ *   unedited. Absent or non-finite ⇒ the suppression stamp is never materialized.
  */
 export function attemptEntry(state, deity, newcomerStrength, opts = {}) {
   const ref = String(deity?._deityRef || deity?.name || '');
@@ -259,7 +292,7 @@ export function attemptEntry(state, deity, newcomerStrength, opts = {}) {
   if (sameNiche) {
     if (opts.force || claim > deities[sameNiche].share * RELIGION_TUNING.PUSH_MARGIN) {
       const evictedShare = deities[sameNiche].share;
-      deities[sameNiche] = { ...deities[sameNiche], suppressed: true, share: 0, standing: 'cult' };
+      suppressDeity(state, sameNiche, opts.tick);
       return enter(seed(evictedShare), 'same_niche_pushout', sameNiche);
     }
     return { entered: false, path: 'niche_held' };
@@ -274,7 +307,7 @@ export function attemptEntry(state, deity, newcomerStrength, opts = {}) {
   const weakest = active.slice().sort((a, b) => (deities[a].share - deities[b].share) || codepoint(a, b))[0];
   if (weakest && claim > deities[weakest].share * RELIGION_TUNING.EVICTION_MARGIN) {
     const evictedShare = deities[weakest].share;
-    deities[weakest] = { ...deities[weakest], suppressed: true, share: 0, standing: 'cult' };
+    suppressDeity(state, weakest, opts.tick);
     return enter(seed(evictedShare), 'cross_niche_eviction', weakest);
   }
   return { entered: false, path: 'capacity_full' };
@@ -284,11 +317,15 @@ export function attemptEntry(state, deity, newcomerStrength, opts = {}) {
  * Move every active deity's share toward its target (gradual), apply the patron's
  * erodable downward-defense buffer, renorm to 100, and refresh standings.
  * @param {any} state @param {Record<string, number>} strengthByRef  0..1 per active deity
+ * @param {{ narrativePrune?: boolean }} [opts] WF-1b: forwarded to `pruneSuppressed`. The bag is a
+ *   defaulted trailing parameter, so the five existing call sites stay valid unedited.
+ * @returns {string[]} WF-1b: the refs the prune deleted, empty when it deleted none. This is a
+ *   WIDENING, not a change: every existing call site is a bare expression statement, measured.
  */
-export function advanceShares(state, strengthByRef) {
+export function advanceShares(state, strengthByRef, opts = {}) {
   const deities = state.deities;
   const keys = activeRefs(deities);
-  if (!keys.length) return;
+  if (!keys.length) return [];
   const totalStrength = keys.reduce((t, k) => t + clamp01(strengthByRef[k] ?? 0), 0) || 1;
   // patron buffer erodes while a rival is within striking distance.
   const patronRef = state.patronRef;
@@ -309,7 +346,7 @@ export function advanceShares(state, strengthByRef) {
   }
   renormShares(deities);
   for (const k of keys) deities[k].standing = standingFor(deities[k].share, deities[k].standing);
-  pruneSuppressed(state);
+  return pruneSuppressed(state, opts);
 }
 
 /**
@@ -349,12 +386,43 @@ export function applyUnaffiliatedSink(state, { secularPull = 0, crisisDisorder =
   return { share: noneInt, rising: none > prev };
 }
 
-/** Drop suppressed cults that have fully faded (kept only as latent memory while share 0 a while). @param {any} state */
-function pruneSuppressed(state) {
+/**
+ * Drop suppressed cults that have fully faded (kept only as latent memory while share 0 a while).
+ *
+ * WF-1b — THE FLAG-FORKED NARRATIVE PRUNE KEY. Dark, the order is codepoint and the behaviour is
+ * the landed one, byte for byte. Lit, the order is NEWEST-SUPPRESSED FIRST, so `slice(KEEP)` drops
+ * the LONGEST-DORMANT creed rather than the one whose ref happens to sort last — which is what
+ * makes the obituary derivable link by link instead of an accident of the alphabet.
+ *
+ * ⛔ THE COMPARATOR IS TOTAL, and its tiebreak is load-bearing in two distinct cases. Two entries
+ * carrying the SAME stamp subtract to 0 and fall through to codepoint. Two UNSTAMPED entries
+ * subtract `-Infinity − -Infinity`, which is `NaN` — falsy — and fall through to codepoint by the
+ * same `||`. So legacy records written before this wave, and records written dark, keep exactly
+ * today's order among themselves while sorting BELOW every stamped entry. No two entries ever
+ * compare equal-and-unordered.
+ *
+ * ⛔ THE FIRE BAR IS THE EXISTING `KEEP`, READ IN ITS OWN SCOPE (ODQ §308.3 RAISED-4). This wave
+ * authors no number at all: the bar DERIVES from the landed constant rather than transcribing its
+ * value, so `KEEP` can move without a second site rotting. `KEEP` is also deliberately NOT promoted
+ * into `RELIGION_TUNING` — relocating a live constant into a frozen tuning table is owner-signature
+ * surface under THE PROMISE and buys nothing this wave needs.
+ *
+ * @param {any} state
+ * @param {{ narrativePrune?: boolean }} [opts]
+ * @returns {string[]} the refs deleted, in prune order; empty when nothing was pruned.
+ */
+function pruneSuppressed(state, opts = {}) {
   // keep at most a few suppressed entries (latent revival memory); prune the rest.
   const supp = Object.keys(state.deities).filter((k) => state.deities[k].suppressed).sort(codepoint);
   const KEEP = 3;
-  if (supp.length > KEEP) for (const k of supp.slice(KEEP)) delete state.deities[k];
+  if (supp.length <= KEEP) return [];
+  const dormancy = (/** @type {string} */ k) => state.deities[k].suppressedAtTick ?? -Infinity;
+  const order = opts.narrativePrune
+    ? supp.slice().sort((a, b) => (dormancy(b) - dormancy(a)) || codepoint(a, b))
+    : supp;
+  const dropped = order.slice(KEEP);
+  for (const k of dropped) delete state.deities[k];
+  return dropped;
 }
 
 /**
@@ -440,8 +508,11 @@ export function patronContestOdds(state) {
  * false when the niche is uncontested (caller runs the deterministic flip).
  * @param {any} state
  * @param {{ weightedPick: (items: any[], weights: number[]) => any }} rng
+ * @param {number|null} [tick] WF-1b: a DEFAULTED TRAILING parameter, so every existing call site —
+ *   the fold, the two `scripts/audit/religion-balance.mjs` sites and the seven test sites — stays
+ *   valid unedited. Non-finite ⇒ the siege suppresses exactly as before and stamps nothing.
  */
-export function resolvePatronContest(state, rng) {
+export function resolvePatronContest(state, rng, tick = null) {
   const T = RELIGION_TUNING;
   const active = activeRefs(state.deities);
   const patronRef = state.patronRef && state.deities[state.patronRef] && !state.deities[state.patronRef].suppressed ? state.patronRef : null;
@@ -482,7 +553,7 @@ export function resolvePatronContest(state, rng) {
     const winnerNiche = state.deities[winner].niche;
     for (const k of active) {
       if (k !== winner && state.deities[k].niche === winnerNiche) {
-        state.deities[k] = { ...state.deities[k], suppressed: true, share: 0, standing: 'cult' };
+        suppressDeity(state, k, tick);
       }
     }
     state.patronRef = winner;

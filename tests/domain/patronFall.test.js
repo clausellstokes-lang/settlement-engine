@@ -17,10 +17,16 @@
  *
  * @enforced-by tests/lint/sovereigntyLightingContract.walker.test.js
  */
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
 import { describe, it, expect } from 'vitest';
 import { PATRON_FALL_CAUSES, FALL_RING_CAP, classifyPatronFall, recordPatronFall, fallCauseFor } from '../../src/domain/worldPulse/patronFall.js';
 import { advanceReligionStates } from '../../src/domain/worldPulse/religiousContest.js';
-import { patronSnapshot, RELIGION_TUNING } from '../../src/domain/worldPulse/religionState.js';
+import { patronSnapshot, RELIGION_TUNING, attemptEntry, resolvePatronContest, advanceShares } from '../../src/domain/worldPulse/religionState.js';
+import { nicheOf } from '../../src/domain/worldPulse/cultImpositionApply.js';
+import { ensureWorldState, runWorldStateMigrations, CONDITIONAL_LEDGER_KEYS } from '../../src/domain/worldPulse/worldState.js';
+import { WORLD_SNAPSHOT_HARD_DENY, WORLD_SNAPSHOT_PUBLIC_LEDGER_ALLOWLIST } from '../../src/domain/display/worldSnapshotPublic.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { createPRNG } from '../../src/kernel/prng.js';
@@ -117,13 +123,13 @@ const THRESHER = deity('Thresher', 'neutral', 'neutral', 'major');
 /** FORCED EVICTION. The seated patron is diluted to 82 share by three IMPOSE_CULT entries
  *  in other niches, which is what lets a same-niche claim clear PUSH_MARGIN 1.1 at all.
  *  MEASURED: Loam is evicted and the seat changes at tick 2. */
-function eviction() {
+function eviction(rules = { faithUnseatingEnabled: true }) {
   const b = save('b', 'Bcity', LOAM, 'city');
   b.settlement.config.cultDeitySnapshots = ['Ashen', 'Brine', 'Cinder']
     .map((n, i) => ({ ...deity(n, i === 1 ? 'peaceful' : 'warlike', i === 0 ? 'evil' : 'good', 'cult'), lawAxis: 'neutral' }));
   return region([save('a', 'Acity', THRESHER, 'metropolis'), b],
     [{ id: 'edge.a.b', from: 'a', to: 'b', relationshipType: 'allied' }], 'supp',
-    { simulationRules: { faithUnseatingEnabled: true } });
+    { simulationRules: rules });
 }
 
 const ASHGRAVE = deity('Ashgrave', 'warlike', 'evil', 'cult');
@@ -288,5 +294,219 @@ describe('WF-1a · the typed patron fall — the flag, the leaf, the ring and th
     expect(fallCauseFor(null, null)).toBeNull();
     // The classifier is TOTAL: it never returns null for a real transition.
     expect(PATRON_FALL_CAUSES).toContain(classifyPatronFall({}));
+  });
+
+  // ── WF-1b · THE STAMPED SUPPRESSION AND THE FLAG-FORKED PRUNE KEY ───────────────────
+  // ⛔ EVERY FIXTURE BELOW WAS RUN AND PRINTED BEFORE ITS ASSERTION WAS WRITTEN, at this tip,
+  // and one of those runs REFUTED a pin that reading alone would have written — see A1.
+  // The eight cases are straight-line `it` calls inside WF-1a's existing describe on purpose:
+  // this member mints no test file and no suite title, so the estate's lighting census moves
+  // by titles only.
+
+  it('WF-1b A1 · the same-niche push-out stamps suppressedAtTick, and the hand-authored niche that would make this pin vacuous is PROVEN vacuous', () => {
+    const newcomer = { _deityRef: 'd.B', name: 'B' };
+    /** @param {string} incumbentNiche @param {{tick?: number|null}} [opts] */
+    const push = (incumbentNiche, opts = {}) => {
+      const state = { capacity: 3, patronRef: 'd.A', deities: {
+        'd.A': { deityRef: 'd.A', snapshot: { _deityRef: 'd.A', name: 'A' }, niche: incumbentNiche, share: 60, standing: 'patron', suppressed: false, legitimacy: 0.5, tenure: 5 },
+      } };
+      return { state, out: attemptEntry(state, newcomer, 0.9, opts) };
+    };
+    // ⛔⛔ THE MEASURED HAZARD, AND IT IS NOT IN THE FAMILY ANNEX. `nicheOf` is a COMPUTED niche
+    // (`temper:alignment`), so an incumbent carrying a hand-authored niche string never matches
+    // the newcomer's: the entry falls through to open_slot, evicts nothing, and a site-:262 pin
+    // passes GREEN having asserted nothing. The fixture must build the niche THROUGH nicheOf.
+    expect(nicheOf(newcomer)).toBe('neutral:neutral');
+    expect(RELIGION_TUNING.PUSH_MARGIN).toBe(1.1);   // claim 90 clears 60 x 1.1 = 66
+    const lit = push(nicheOf(newcomer), { tick: 7 });
+    expect(lit.out).toEqual({ entered: true, path: 'same_niche_pushout', evicted: 'd.A' });
+    expect(lit.state.deities['d.A'].suppressed).toBe(true);
+    expect(lit.state.deities['d.A'].share).toBe(0);
+    expect(lit.state.deities['d.A'].standing).toBe('cult');
+    expect(lit.state.deities['d.A'].suppressedAtTick).toBe(7);
+    // THE VACUITY CONTROL: the identical fixture with a hand-authored niche cannot execute the
+    // defect at all. This arm is the reason the arm above means something.
+    const authored = push('harvest', { tick: 7 });
+    expect(authored.out).toEqual({ entered: true, path: 'open_slot', evicted: null });
+    expect(authored.state.deities['d.A'].suppressed).toBe(false);
+    // …AND DARK the same push-out suppresses exactly as it always did and stamps nothing.
+    const dark = push(nicheOf(newcomer));
+    expect(dark.out).toEqual({ entered: true, path: 'same_niche_pushout', evicted: 'd.A' });
+    expect(dark.state.deities['d.A'].suppressed).toBe(true);
+    expect(Object.hasOwn(dark.state.deities['d.A'], 'suppressedAtTick')).toBe(false);
+  });
+
+  it('WF-1b A2 · absent and false serialize identically on a SUPPRESSING deity-bearing world, and the LITERAL lit drive materializes the stamp', () => {
+    const absent = JSON.stringify(drive(eviction({}), 20).world.religionStates);
+    const off = JSON.stringify(drive(eviction({ faithUnseatingEnabled: false }), 20).world.religionStates);
+    // THE LIT-MUTANT CONTROL. The absent-vs-false differential is blind by design. The drive is
+    // the LITERAL key: mechanismLitCoverage grants AUTO credit only on a literal, and a computed
+    // key attributes to NO key. ⛔ The deity-free corpus golden is NOT this fence and is vacuous
+    // for faith; every deity here arrives through the doctrine path.
+    const lit = JSON.stringify(drive(eviction({ faithUnseatingEnabled: true }), 20).world.religionStates);
+    expect(absent).toBe(off);
+    expect(lit).not.toBe(absent);
+    // NON-VACUITY, TWICE OVER: the fixture really carries faith, AND the dark run really did
+    // suppress a creed — so the absence below is the missing STAMP, never a missing suppression.
+    expect(absent).toContain(ref('Loam'));
+    expect(absent).toContain('"suppressed":true');
+    // anchored: the two positives directly above prove the dark serialization is populated, spellable AND genuinely suppressing, so this absence measures the un-materialized stamp rather than an empty subject
+    expect(absent).not.toContain('suppressedAtTick');
+    expect(lit).toContain('suppressedAtTick');
+  });
+
+  it('WF-1b A3 · the siege stamps only at the resolving tick, and the two ticks that OWN the seat while suppressing nothing stamp nothing', () => {
+    const niche = nicheOf({ _deityRef: 'd.x', name: 'x' });
+    const state = { capacity: 5, patronRef: 'd.A', deities: {
+      'd.A': { deityRef: 'd.A', snapshot: { _deityRef: 'd.A', name: 'A' }, niche, share: 50, standing: 'patron', suppressed: false, legitimacy: 0.05, tenure: 3 },
+      'd.B': { deityRef: 'd.B', snapshot: { _deityRef: 'd.B', name: 'B' }, niche, share: 50, standing: 'state', suppressed: false, legitimacy: 0.9, tenure: 3 },
+    } };
+    const rng = { weightedPick: (/** @type {string[]} */ items) => (items.includes('d.B') ? 'd.B' : items[0]) };
+    const seen = [];
+    for (let tick = 1; tick <= 3; tick += 1) {
+      const owned = resolvePatronContest(state, rng, tick);
+      seen.push({ tick, owned, suppressed: state.deities['d.A'].suppressed === true, stamp: state.deities['d.A'].suppressedAtTick ?? null });
+    }
+    // ⛔ MEASURED: the siege returns owned=true on ticks 1 and 2 while suppressing NOTHING. Those
+    // two rows are a genuine negative — the counterforce is running — and not an absence of setup.
+    expect(RELIGION_TUNING.PATRON_FLIP_TICKS).toBe(3);
+    expect(seen).toEqual([
+      { tick: 1, owned: true, suppressed: false, stamp: null },
+      { tick: 2, owned: true, suppressed: false, stamp: null },
+      { tick: 3, owned: true, suppressed: true, stamp: 3 },
+    ]);
+    expect(state.patronRef).toBe('d.B');
+  });
+
+  it('WF-1b A4 · the stamp is cleared by RESURGENCE and by nothing else, asserted at the byte level in both directions', () => {
+    const newcomer = { _deityRef: 'd.B', name: 'B' };
+    const state = { capacity: 3, patronRef: 'd.A', deities: {
+      'd.A': { deityRef: 'd.A', snapshot: { _deityRef: 'd.A', name: 'A' }, niche: nicheOf(newcomer), share: 60, standing: 'patron', suppressed: false, legitimacy: 0.5, tenure: 5 },
+    } };
+    attemptEntry(state, newcomer, 0.9, { tick: 11 });
+    expect(state.deities['d.A'].suppressedAtTick).toBe(11);
+    expect(JSON.stringify(state.deities['d.A'])).toContain('"suppressedAtTick":11');
+    // ⭐ RESURGENCE: attemptEntry's seed() replaces the returning creed's record WHOLESALE, and the
+    // seed carries no stamp — so a creed back in the light carries no stale mark of its dormancy.
+    const back = attemptEntry(state, { _deityRef: 'd.A', name: 'A' }, 0.9, { tick: 19 });
+    expect(back.entered).toBe(true);
+    expect(state.deities['d.A'].suppressed).toBe(false);
+    const resurged = JSON.stringify(state.deities['d.A']);
+    expect(resurged).toContain('"suppressed":false');
+    // anchored: the positive one line up proves the resurged record is populated and spellable, so this absence is the CLEARED stamp and not an empty object
+    expect(resurged).not.toContain('suppressedAtTick');
+    // …and the creed it displaced on its way back IS stamped, so the clear is scoped to the
+    // returning record rather than being a blanket failure to write.
+    expect(state.deities['d.B'].suppressedAtTick).toBe(19);
+  });
+
+  it('WF-1b A5 · the narrative prune drops the LONGEST-DORMANT where the dark prune drops the codepoint-last, on a fixture whose two orders disagree', () => {
+    // ⛔ A fixture whose codepoint order and stamp order AGREE is vacuous — base == cure — and is
+    // a STOP. These disagree by construction: the longest-dormant is d.S2 (stamp 10) while the
+    // codepoint-last is d.S4. Whichever ref the prune drops therefore names which key it sorted on.
+    const STAMPS = { 'd.S1': 40, 'd.S2': 10, 'd.S3': 30, 'd.S4': 20 };
+    /** @param {Record<string, number|undefined>} stamps */
+    const build = (stamps) => ({ capacity: 9, patronRef: 'd.LIVE', deities: {
+      'd.LIVE': { deityRef: 'd.LIVE', snapshot: { _deityRef: 'd.LIVE', name: 'LIVE' }, niche: 'a:a', share: 100, standing: 'patron', suppressed: false },
+      ...Object.fromEntries(Object.keys(STAMPS).map((k) => [k, {
+        deityRef: k, snapshot: { _deityRef: k, name: k }, niche: `${k}:x`, share: 0, standing: 'cult', suppressed: true,
+        ...(Number.isFinite(stamps[k]) ? { suppressedAtTick: stamps[k] } : {}),
+      }])),
+    } });
+    const dark = build(STAMPS);
+    expect(advanceShares(dark, { 'd.LIVE': 1 })).toEqual(['d.S4']);
+    const lit = build(STAMPS);
+    expect(advanceShares(lit, { 'd.LIVE': 1 }, { narrativePrune: true })).toEqual(['d.S2']);
+    expect(Object.hasOwn(lit.deities, 'd.S2')).toBe(false);
+    expect(Object.hasOwn(lit.deities, 'd.S4')).toBe(true);
+    // THE TIE / LEGACY ARM. An UNSTAMPED entry — a record written dark, or before this wave —
+    // sorts BELOW every stamped one and is dropped first, exactly as the volume specifies.
+    const legacy = build({ ...STAMPS, 'd.S1': undefined });
+    expect(advanceShares(legacy, { 'd.LIVE': 1 }, { narrativePrune: true })).toEqual(['d.S1']);
+    // …and two entries that are BOTH unstamped fall back to codepoint between themselves, which
+    // is the second, distinct reason the comparator needs a total tiebreak.
+    const twoLegacy = build({ ...STAMPS, 'd.S1': undefined, 'd.S3': undefined });
+    expect(advanceShares(twoLegacy, { 'd.LIVE': 1 }, { narrativePrune: true })).toEqual(['d.S3']);
+  });
+
+  it('WF-1b A6 · the stamp round-trips through ensureWorldState and the schema-2 migration, adds no top-level ledger key, and stays behind the veil', () => {
+    const stamped = { patronRef: null, capacity: 3, deities: { 'd.A': { deityRef: 'd.A', snapshot: { _deityRef: 'd.A' }, niche: 'a:a', share: 0, standing: 'cult', suppressed: true, suppressedAtTick: 12 } } };
+    const bare = { patronRef: 'd.A', capacity: 3, deities: { 'd.A': { deityRef: 'd.A', snapshot: { _deityRef: 'd.A' }, niche: 'a:a', share: 100, standing: 'patron', suppressed: false } } };
+    // BOTH ARMS through the REAL seam. religionStates takes the deepCloneConditionalLedger branch,
+    // so no dedicated normalizer is owed and an added sub-key rides verbatim.
+    for (const [label, st] of /** @type {[string, any][]} */ ([['field-present', stamped], ['field-absent', bare]])) {
+      expect(JSON.stringify(ensureWorldState({ religionStates: { b: st } }).religionStates.b), label).toBe(JSON.stringify(st));
+    }
+    // SUB-KEY ORDER IS THE WRITER'S ENUMERATION AND IS PINNED, NOT ASSUMED: the spread preserves
+    // the record's existing keys in place, so the stamp appends LAST.
+    expect(Object.keys(stamped.deities['d.A']).at(-1)).toBe('suppressedAtTick');
+    // ⛔ THE LIVE MIGRATION, WHICH NEITHER COPY OF THE VOLUME MENTIONS. The { to: 2 } chief→patron
+    // rename spreads ...rest, so a new conditional sub-key survives it. Asserted, not assumed.
+    const migrated = runWorldStateMigrations({ religionStates: { b: { chiefRef: 'd.A', chiefHeld: 2, deities: stamped.deities } } });
+    expect(migrated.religionStates.b.patronRef).toBe('d.A');
+    expect(migrated.religionStates.b.deities['d.A'].suppressedAtTick).toBe(12);
+    // ZERO NEW TOP-LEVEL KEYS, asserted rather than assumed: the stamp lives INSIDE an existing
+    // conditional ledger, so the append-only ledger-key order does not move.
+    expect(CONDITIONAL_LEDGER_KEYS).toContain('religionStates');
+    // anchored: the membership positive one line up proves the frozen ledger list is populated and spellable, so this absence measures that the wave added NO top-level key rather than an empty list
+    expect(CONDITIONAL_LEDGER_KEYS).not.toContain('suppressedAtTick');
+    // THE VEIL, asserted rather than reasoned about.
+    expect(WORLD_SNAPSHOT_HARD_DENY).toContain('religionStates');
+    // anchored: the deny-membership positive one line up proves both frozen lists are populated and spellable, so this absence is the ledger genuinely staying behind the veil rather than an empty allowlist
+    expect(WORLD_SNAPSHOT_PUBLIC_LEDGER_ALLOWLIST).not.toContain('religionStates');
+  });
+
+  it('WF-1b A7 · the prune returns exactly the refs it deleted and an EMPTY ARRAY when it deleted none, and its fire bar derives from the landed KEEP', () => {
+    /** @param {number} n */
+    const build = (n) => ({ capacity: 9, patronRef: 'd.LIVE', deities: {
+      'd.LIVE': { deityRef: 'd.LIVE', snapshot: { _deityRef: 'd.LIVE', name: 'LIVE' }, niche: 'a:a', share: 100, standing: 'patron', suppressed: false },
+      ...Object.fromEntries(Array.from({ length: n }, (_, i) => [`d.S${i + 1}`, {
+        deityRef: `d.S${i + 1}`, snapshot: { _deityRef: `d.S${i + 1}`, name: `S${i + 1}` }, niche: `n${i}:x`, share: 0, standing: 'cult', suppressed: true,
+      }])),
+    } });
+    // ⛔ MEASURED, at this tip. The bar is `supp.length > KEEP` read where KEEP already lives, so
+    // it DERIVES from the landed constant instead of transcribing its value (ODQ §308.3 RAISED-4).
+    const none = advanceShares(build(3), { 'd.LIVE': 1 });
+    expect(Array.isArray(none)).toBe(true);
+    expect(none).toEqual([]);
+    expect(advanceShares(build(4), { 'd.LIVE': 1 })).toEqual(['d.S4']);
+    expect(advanceShares(build(5), { 'd.LIVE': 1 })).toEqual(['d.S4', 'd.S5']);
+    // THE EMPTY-KEYS ARM RETURNS THE SAME SHAPE — never null, never undefined, so the seam the
+    // WF-8 beat member lands on can be consumed without a nullish guard on any path.
+    const noFaith = advanceShares({ capacity: 3, patronRef: null, deities: {} }, {});
+    expect(Array.isArray(noFaith)).toBe(true);
+    expect(noFaith).toEqual([]);
+  });
+
+  it('WF-1b A8 · the comment-stripped source scan finds ONE raw suppression write, inside the sole writer, and exactly THREE routed call sites', () => {
+    const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
+    const src = readFileSync(join(ROOT, 'src', 'domain', 'worldPulse', 'religionState.js'), 'utf8');
+    const stripped = src.replace(/\/\*[\s\S]*?\*\//g, '').split('\n').map((l) => l.replace(/\/\/.*$/, '')).join('\n');
+    const rawWrites = [...stripped.matchAll(/suppressed:\s*true/g)];
+    const declarations = [...stripped.matchAll(/function suppressDeity\(/g)];
+    const callSites = [...stripped.matchAll(/suppressDeity\(/g)].length - declarations.length;
+    // ⛔ BOTH DIRECTIONS RED. A fourth site spelled INLINE raises the raw-write count; a fourth
+    // site routed through the helper raises the call-site count, which is the reviewed act. The
+    // volume's obligation — a future fourth site reds the pin instead of minting a stamp-less
+    // entry — is discharged by the pair, never by either count alone.
+    expect(declarations).toHaveLength(1);
+    expect(rawWrites).toHaveLength(1);
+    expect(callSites).toBe(3);
+    // …AND THE ONE RAW WRITE IS THE WRITER'S OWN, not a stray that happens to keep the count at
+    // one. Without this arm an inline write could replace the helper's and the counts would not move.
+    const from = stripped.indexOf('function suppressDeity(');
+    const body = stripped.slice(from, stripped.indexOf('\n}', from));
+    expect(body).toContain('suppressed: true');
+    expect(body).toContain('Number.isFinite(tick)');
+    // ⚠ SPECTACLE-AWARENESS (§P2.9), stated affirmatively and MEASURED rather than asserted in
+    // prose: the grand-observance predicate passes ANY act at scaleBand >= SPECTACLE_SCALE, so a
+    // negative arm over a drawsPilgrims-class predicate can be silently satisfied. This member
+    // touches no such predicate in either file, so no negative arm above can go vacuous that way.
+    const fold = readFileSync(join(ROOT, 'src', 'domain', 'worldPulse', 'religiousContest.js'), 'utf8');
+    const spectacle = /drawsPilgrims|SPECTACLE_SCALE|scaleBand/;
+    expect(spectacle.test(src)).toBe(false);
+    expect(spectacle.test(fold)).toBe(false);
+    // NON-VACUITY OF THAT SCAN ITSELF: the predicate is real and the regex finds it at its home.
+    expect(spectacle.test(readFileSync(join(ROOT, 'src', 'domain', 'traditions', 'pilgrimage.js'), 'utf8'))).toBe(true);
   });
 });

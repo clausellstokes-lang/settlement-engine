@@ -4845,7 +4845,17 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // fantasy-construction file moves from two to the closed six-case A1-A6 denominator.
     // Its suite and file classification stay fixed; the shape-kernel title is rewired in
     // place, so exactly four test titles and no suite title are added.
-    files: 2484, parked: 364, credited: 2120, titles: 20598, suiteTitles: 5767,
+    // ── RE-RECORDED 2026-08-21 BY WF-1B, THE STAMPED SUPPRESSION (ODQ §308.4 / §309) ──
+    // 2,484/364/2,120/20,598/5,767 → 2,484/364/2,120/20,606/5,767. ⭐ This member mints NO
+    // test file at all: its eight-case acceptance battery extends the ALREADY-CREDITED
+    // tests/domain/patronFall.test.js as straight-line `it` calls inside that file's ONE
+    // existing describe — no new describe, no `.each`, no `runIf`, no nesting — so exactly
+    // eight test titles and ZERO suite titles are added. Its §2.6 write-site census pin rides
+    // that same file on the landed tests/domain/impactKindWalkers.test.js precedent (a source
+    // scan over src/domain run from tests/domain/) rather than minting a tests/lint/** walker,
+    // which is what keeps `files`, `parked`, `credited` and `suiteTitles` all standing still.
+    // No parser door, parked-file rule, or existing file changed classification.
+    files: 2484, parked: 364, credited: 2120, titles: 20606, suiteTitles: 5767,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

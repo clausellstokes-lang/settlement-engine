@@ -674,6 +674,18 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
   // foothold is never on cooldown ⇒ byte-identical for a fresh recruitment.
   const footholdCooldownSet = spread ? footholdCooldownKeys(worldState, tick) : null;
 
+  // ── WF-1b · THE FLAG IS READ HERE, BY NAME, ONCE, AND NEVER ENTERS religionState.js ─────
+  // ⛔ The BY-NAME spelling is load-bearing: a read reached only through a frozen-list `.every()`
+  // is a computed member access, attributes to NO key, and would hide a fully wired flag from the
+  // engine-gated-key census. Strict `=== true`, exactly as WF-1a's gate below.
+  // `religionState.js` has no `worldState` in any signature and this wave does not give it one —
+  // the TICK'S PRESENCE is the fork. Dark, `stampTick` is null, `suppressDeity` never
+  // materializes its key, and the serialized bytes are the landed ones. That holds TWICE over:
+  // this fold also returns at its head on `isSubsystemActive(snapshot, 'religion')` — deity
+  // PRESENCE, not config — so a deity-free world is unchanged even LIT.
+  const unseating = worldState?.simulationRules?.faithUnseatingEnabled === true;
+  const stampTick = unseating ? tick : null;
+
   // 3. Evolve each settlement's pantheon (codepoint-sorted ⇒ deterministic).
   const ids = (snapshot?.settlements || []).map((/** @type {any} */ it) => String(it.id)).sort(codepoint);
   for (const cid of ids) {
@@ -760,7 +772,7 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
         }
         // WF-1a: the return was already computed and DISCARDED here; assigning it is what makes
         // the `suppressed` arm derivable with no signature change to attemptEntry.
-        const entered = attemptEntry(state, deity, strength, { force: Boolean(occupied) });
+        const entered = attemptEntry(state, deity, strength, { force: Boolean(occupied), tick: stampTick });
         // ⚠ `evicted` is present only on the ENTERED arms of attemptEntry's union return —
         // the refusal arms omit the key entirely — so the read is narrowed with `in` rather
         // than cast. religionState.js is WF-1b's file and is deliberately not touched here,
@@ -780,7 +792,7 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
       // present faith's growth toward its strength (hold AND take, symmetric).
       strengthByRef[dref] = clamp01(pietyMult * deityLocalStrength({ snapshot, deity: state.deities[dref].snapshot, deityRef: dref, neighbourIds, carrier, moodDeity, lens, worldState, cid, targetMass, crisisDisorder, spatialDigest, rankStrengthOf }));
     }
-    advanceShares(state, strengthByRef);
+    advanceShares(state, strengthByRef, { narrativePrune: unseating });
     // Legitimacy: each active faith drifts (slowly) toward its rightful-claim target —
     // ruler endorsement + neighbour recognition + tenure + chronicle momentum, minus
     // the heresy stain and corruption rot. Distinct from share; it LAGS conversion.
@@ -808,7 +820,7 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
     // discarded inside the test. Short-circuit order is preserved exactly — an absent
     // contestRng still means resolvePatronContest is never called — so this is a rename, not
     // a behaviour change. It is what separates `discredited` from `displaced`.
-    const contestOwned = Boolean(contestRng) && resolvePatronContest(state, contestRng);
+    const contestOwned = Boolean(contestRng) && resolvePatronContest(state, contestRng, stampTick);
     if (!contestOwned) selectPatron(state);
 
     // ── WF-1a · THE TYPED PATRON FALL ────────────────────────────────────────────────
@@ -820,7 +832,10 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
     // even lit. The outgoing seat is priorPatron — NEVER prevPatron (see the capture note
     // above) — and a settlement whose seat is being filled for the FIRST time has a null
     // priorPatron, so a first seed records nothing: nothing fell.
-    if (worldState?.simulationRules?.faithUnseatingEnabled === true
+    // WF-1b: the by-name read moved to ONE hoisted local above the settlement loop; this block
+    // now reads it. A rename, not a behaviour change — the short-circuit order is preserved
+    // exactly, and the read is still the literal token, still strict `=== true`.
+    if (unseating
       && priorPatron && state.patronRef !== priorPatron) {
       recordPatronFall(state, {
         ref: priorPatron,
