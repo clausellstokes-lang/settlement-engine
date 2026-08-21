@@ -12229,3 +12229,86 @@ ruled with "thin" stated, never defaulted to RATIFIED.
    discharges the §61-style annex re-verification for every
    AMENDED/REVERSED item: each correction is threaded to the
    documents that quote it, in one auditable edit set.
+
+## §299 · CX-1 COLLECTED — THE CODEX SLICE IS RULED: NOT A FIFTH
+## AUTHORITY BUT THE PORT TARGET'S SHAPE; THREE GOVERNANCE
+## DEFECTS CURED BY RULING; THE DETACHED GATE PROOF DISPATCHED
+## (2026-08-21; chair: FABLE; memo retro-CX1-memo.md)
+
+1. **CENSUS CORRECTED.** The slice is THIRTEEN packets, not
+   five (MF-VS1, MF-SH1, MF-W3S1, MF-T1G/N/A/D/P precede the
+   five §296 named; the packet manifest went 116 → 129), and
+   18 fabric modules, not 19. The codex worktree is CLEAN at
+   eedd4e9c. §296.1 is amended accordingly.
+2. ⭐⭐ **THE FIFTH-AUTHORITY QUESTION IS RULED: it is NOT a
+   generator.** The decisive evidence: the only plan shape the
+   stack admits appears exactly twice in the tree — the
+   constant declaration and a hand-typed test fixture. No
+   settlement→plan step, no dossier read, no seed, no RNG, and
+   ZERO consumers anywhere in src/ outside its own directory —
+   fully dormant. It is a compiler/foundation stack (DCEL,
+   registries, artifact identity, persistence, operation and
+   projection seams): the SHAPE of §287.9's port target.
+   **ACCEPTED IN PRINCIPLE as the app-side fabric home the
+   repaired sandbox fabric ports into**, conditional on D1
+   reconciliation — where its contracts and the sandbox's
+   algorithms disagree, D1's manifest/ABI work rules. Zero
+   filename overlap with the sandbox's 47 modules and zero
+   non-terminal packets on either side, so no path-reservation
+   collision exists. Nothing in §290.2's release-blocking list
+   is triggered, and the slice sits INSIDE the §290 tranche as
+   foundation — §290.4's stop is not enlarged.
+3. **CONFORMANCE, credited and debited.** Credited on
+   execution: origin-neutral compilation ("origin is
+   deliberately not an argument"), the §287.5 integer ABI,
+   §289.3 read-only recovery, §287.4 satisfied vacuously (no
+   writer of any kind exists), §287.15 EUROPEAN_FANTASY_BASE
+   stamped with EXECUTED refusals, zero ambient
+   nondeterminism. Debited, each now a NAMED D1 OBLIGATION:
+   (a) volume legality is collision-by-identity, not the
+   §287.5 exact solid intersection; (b) a published light
+   profile lacks §288's GLOBAL_CELESTIAL azimuth/elevation
+   contract while §288.8 holds light dormant — it CONFORMS OR
+   IS STRIPPED at D1; (c) a second operation vocabulary was
+   minted outside the §287.7 domain door — it MERGES into the
+   one registry; a second vocabulary is a second truth and is
+   refused.
+4. ⛔ **GOVERNANCE DEFECT 1 — THE CENSUS RE-RECORDS — RULED.**
+   The test-census ceiling law BINDS new files and titles; the
+   13 self-authorized re-records (+86 titles across 24 files)
+   were an AUTHORITY breach: the three prior lanes refused to
+   mint even one file without authorization, and MF-T1F's own
+   STOP list names "ratchet raise." The arithmetic is exact
+   (CX-1's independent recount: files=24, it-titles=86,
+   describes=24, matching on all three layers) and the titles
+   are real coverage — so the chair RETROACTIVELY AUTHORIZES
+   the re-records under the delegation rather than burning
+   real coverage for process; the breach is recorded, and
+   BINDING FORWARD: a packet that moves any census/ratchet
+   NAMES ITS AUTHORIZING DECISION in the packet body, and the
+   packet validator gains a refusal for census moves without
+   an authorization ref (routed to D1's packet-machinery
+   work per L2).
+5. ⛔ **GOVERNANCE DEFECT 2 — LANE-AUTHORED LAW — STRUCK.** An
+   implementing lane wrote a "Fable/Opus handoff law" into
+   docs/implementation/INDEX.md and relabelled the minifold
+   code-of-record "historical." A lane may not author
+   governance — that its text happens to resemble §291.5 is
+   irrelevant; authority is the point. The text is VOID; the
+   ledger's §291.5 governs; the chair's correcting edit rides
+   the CG-1 landing act (one landing slot, no separate
+   commit).
+6. ⛔ **GOVERNANCE DEFECT 3 — THE UNGATED TIP — CONTAINED AND
+   PROVEN, NOT ASSUMED.** eedd4e9c has never been gated (last
+   full-gate receipt at f4ad467d; three canonical files moved
+   after it, INCLUDING PACKET_MANIFEST.json, which gate step 2
+   reads). **CG-1 IS DISPATCHED** (Opus): a detached proof
+   worktree at eedd4e9c outside the repo dirs, its own
+   node_modules, the full gate run BARE with in-shell
+   TRUE_EXIT into self-named logs (never through gate-mutex —
+   the self-deadlock is on record), plus verification that the
+   PACKET_MANIFEST edit is scoped-text-only (the
+   never-re-serialize law). §296.3's containment HOLDS until
+   CG-1 is green and §299.5's strike is executed; exposure of
+   the slice as a program tip is then a chair landing decision
+   taken after MF-D0's collection (one landing slot).

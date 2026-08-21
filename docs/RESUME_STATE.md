@@ -74,6 +74,16 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ §299 (~07:30 ET): CX-1 COLLECTED AND RULED — the codex slice is NOT a fifth
+# authority (dormant compiler stack, no input producer, zero consumers): ACCEPTED
+# IN PRINCIPLE as the §287.9 port target conditional on D1 reconciliation; census
+# re-records retroactively authorized (breach recorded; validator refusal ordered);
+# lane-authored INDEX.md governance VOID (strike rides CG-1 landing); tip ungated →
+# CG-1 DISPATCHED (detached proof worktree at eedd4e9c, full gate bare+TRUE_EXIT,
+# PACKET_MANIFEST scoped-text check; receipt laneCG1-receipt.md). Containment holds
+# until CG-1 green + strike executed; exposure decided after MF-D0 collects.
+# D1 obligations added: solid-intersection legality · §288-conform-or-strip the
+# light profile · merge the second operation vocabulary into the §287.7 door.
 # ⭐⭐⭐ SITTING COMPLETE (~07:15 ET): §297+§298 rule the last 14 rows — ALL 30
 # RULED; queue file EMPTY; laws L1-L6 banked; HANDOFF_CURRENT refreshed (new
 # 08-21 override block is authoritative). §295 IPV-1 exposure on the owner
