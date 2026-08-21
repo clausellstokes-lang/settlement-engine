@@ -13897,3 +13897,37 @@ recommended. Implementation, per item:
   whole-document name check passed after the row was deleted — cured to section-scoped
   ordered name@version lists, twelve negative controls now red) is banked in memory; the
   simulationRulesDialog red was proven contention flake three ways and never banked.
+
+## §324 — COLLECTION + CAS: WF-1C LANDED; THE CASCADE ADVANCES (2026-08-21 ~15:24)
+
+- **TE-WF1C collected.** Tip cdfe5a96 — six commits on 2cdb87fa (DRAFT → READY →
+  implementation → LANDED → the any-cast cure → the §16 figure correction), working tree
+  clean, §9 filled with executed measured arms (chair-verified at the committed tip: the
+  tick-2 empty-changes measurement, the labelled custom-slug truncation arm, the
+  deity-fixture headline). Terminal 17/17 + smoke:boot, run three times; the third full
+  run gates the exact landed bytes. The realm last-seat beat is live behind its flag;
+  dark is byte-identical to the pre-wiring golden; census closes +0/+0/+0/+7/+0.
+- **§324.1 CAS EXECUTED:** claude/composite-r4 moved 2cdb87fa → cdfe5a96 (compare-and-
+  swap on the old value; read back).
+- **§324.2 Lane findings banked:** the snapshot-dependence refutation (production's
+  pre-tick snapshot always takes the fallback arm — A1 pins the production shape) · the
+  domain any-cast ratchet is a second ledger only the full gate reads (bit two WF members
+  running; in memory) · the dark-fence fixture over a quiet world is vacuous (cured with
+  a maturing ascendancy) · the anchor marker reads a comment's LAST line (three arms
+  initially reported un-anchored).
+- **§324.3 RAISED-A ACCEPTED, folded into WF-1D:** pulseKernel.js and applyWorldPulse.js
+  are recorded as zero-headroom-class files in the family-law amendment that rides
+  WF-1D's landing (the preamble batch: pulseKernel 1581/1581 + applyWorldPulse 941/941
+  rows), WITH §314.2 re-stamps of every citing packet in the same landing.
+- **§324.4 RAISED-B QUEUED as a micro-item on the WF-1E seed:** deityNameForRef's
+  truncating branch is live on an unflagged surface today (executed blast radius in the
+  lane receipt); the cure re-records one labelled measured-truth arm and is NOT taken
+  mid-cascade.
+- **§324.5 Dispatches:** TE-WF1D dispatched on cdfe5a96 (slot-aware; re-reads the census
+  tuple at base with the step-8 STOP; carries the §324.3 amendment batch). The TE-T2B
+  agent is ordered to cherry-pick its four commits onto cdfe5a96 and re-run the ONE
+  terminal; **§322.3 amended in execution mode:** the MF-PREAMBLE fence clause (the
+  entry-closure fence discharges post-build only) is DELEGATED to that same landing as a
+  fifth commit with its §314.2 re-stamps, so one landing and one gate cover the
+  amendment. NOTICES still lands last (§323.1). RS-5 stays paused until the remaining
+  terminals clear.

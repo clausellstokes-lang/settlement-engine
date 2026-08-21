@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~15:24 ET: WF-1C LANDED — CAS claude/composite-r4 2cdb87fa → cdfe5a96
+# (§324). TE-WF1D DISPATCHED on cdfe5a96 (carries the preamble batch + zero-
+# headroom amendment + re-stamps). T2B agent ordered to rebase onto cdfe5a96 +
+# re-gate, WITH the MF-PREAMBLE fence clause delegated to its landing (§324.5).
+# Then NOTICES last, then RS-5 resume. RAISED-B queued on the WF-1E seed.
 # ⭐ ~15:18 ET: TE-NOTICES COMPLETE — green at base, but COMMITTED NOTHING;
 # files sit in tenotices-tree working tree. Lands LAST via agent message at slot
 # (§323.1) with the OFL.txt rider (§323.2). dompurify+rgbcolor+png-js DOCKETED
