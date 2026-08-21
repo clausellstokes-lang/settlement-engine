@@ -74,6 +74,17 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ §304 (~09:05 ET): OWNER ORDERED THE FIVE FORWARD CHANGES — IMPLEMENTED:
+# MF-I1 DISPATCHED (deciding instruments: G-40 trio + roof-count + Q-1 guard;
+# runs G-39's four-outcome rule AS WRITTEN → laneMFI1-receipt.md) · MF-CB1
+# DISPATCHED (G-43 counterfactual benchmark skeleton on laneMFCB1-tip copy of
+# D1; seven §276.1b arms, directions registered pre-run, findings-only →
+# laneMFCB1-receipt.md; benchmark re-runs at EVERY wave seal from now on) ·
+# exemplar-diversification standing order (≥1 new world per wave to 16;
+# today 10) · D3a chartered as THE PORT WAVE, twin-life bounded, prove-then-
+# cut at seal · eyes-on law codified (chair views every moved leaf per
+# collection; owner zoom set named per row). FOUR agent lanes now: W3F, I1,
+# CB1 + RS-4 tail (9 cells). Collections → §305+.
 # ⭐⭐⭐ §303 (~08:45 ET): MF-D1 COLLECTED (ZERO bytes proven, five foundations,
 # stream audit discharged, stage-graph SCC found) — ten raised items RULED:
 # §297.4c conversion PARKED (ground blast radius; byte-neutral lift ratified);

@@ -12652,3 +12652,67 @@ ruled with "thin" stated, never defaulted to RATIFIED.
    being six replicas of one site — the cheapest multiplier
    in the corpus, additive only. One declared shift,
    attributed per mechanism, D0-pattern.
+
+## §304 · OWNER ORDER: THE CHAIR'S FIVE FORWARD CHANGES ARE
+## IMPLEMENTED ("Do these", 2026-08-21; chair: FABLE)
+
+The owner ordered the five process changes the chair
+recommended. Implementation, per item:
+
+1. ⭐⭐ **DECIDING INSTRUMENTS FIRST — LANE MF-I1 DISPATCHED**
+   (Opus; receipt laneMFI1-receipt.md): builds G-40's three
+   instruments (footprint rectangularity, per-epoch tone
+   contrast on the §6.2 window pairs, tower spacing with an
+   honest feasibility bar), the roof-count instrument that
+   restores T-01's withdrawn rungs and the population fit,
+   and §297.7b's Q-1 guard with a planted-violation arm —
+   every extractor validated on a positive control with a
+   measured recovery rate (the program's known instrument
+   disease, guarded). ⭐ THEN IT RUNS G-39's four-outcome
+   decision rule AS WRITTEN and reports which pre-registered
+   outcome obtains — the mush hypothesis gets its verdict
+   from the rule, not from anyone's taste. Under L6 the
+   holdout is excluded on every channel.
+2. **EXEMPLAR DIVERSIFICATION IS A STANDING ORDER**: every
+   map wave from W3 forward mints AT LEAST ONE new
+   distinct-world exemplar (new seed, new world — never a
+   variant) until the fixture corpus reaches SIXTEEN distinct
+   worlds; the chair tracks the count at each collection
+   (today: 10 distinct worlds wearing 17 names; W3F mints the
+   eleventh). Censuses re-base additively; the multiplied-
+   sample caveat retires when the count reaches its target.
+3. ⭐⭐ **THE COUNTERFACTUAL BENCHMARK IS PULLED FORWARD FROM
+   W8 — LANE MF-CB1 DISPATCHED** (Opus; receipt
+   laneMFCB1-receipt.md): the G-43 skeleton on the D1
+   foundations — the typed token registry (exact paths,
+   direction predicates, tolerances, forbidden sets;
+   E∩F=∅ pre, A∩F reported post), the seven §276.1b arms
+   with every direction registered BEFORE the run, the
+   four §287.8 report quantities, planted MISWIRED and
+   collateral counterfactuals proving the harness convicts,
+   zero plate bytes moved. An arm that FAILS its direction
+   is a FINDING (the mis-wired-fact class caught early —
+   the benchmark's whole purpose); findings-only, cures
+   routed by the chair. From now on the benchmark re-runs
+   at every wave seal, not at W8 alone; W8 keeps the full
+   battery as its closing loop.
+4. **D3a IS CHARTERED AS THE PORT WAVE, TWIN-LIFE BOUNDED**:
+   the port begins AT D3a's dispatch, not after it — the
+   §303.5 plan governs (codex record shapes + embedder in;
+   arrangement compiler/census/registry out; D1's ABI wins);
+   the sandbox fabric is retired as geometry code-of-record
+   AT THE PORT'S SEAL under the prove-then-cut law, so the
+   two implementations never live as long-term twins. The
+   D3a brief inherits this charter plus §299.3's three
+   obligations and §287.16's dormant-explicit-input massing
+   scope.
+5. ⭐ **THE EYES-ON CHANNEL IS LAW**: (a) at every wave
+   collection the chair personally views a zoom of EVERY
+   leaf the declared shift moved (extends L5/§292.5 from
+   verdicts to coverage); (b) every collection row names its
+   retained zoom set so the owner can look at any moment —
+   the owner's eye remains the program's highest-yield
+   defect finder and is never rationalized away by a green
+   census; (c) the §216 comparison round keeps the blinded
+   2AFC and the G-44 halo ablation unchanged. Lanes render;
+   the chair looks; the owner adjudicates.
