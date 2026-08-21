@@ -12716,3 +12716,48 @@ recommended. Implementation, per item:
    census; (c) the §216 comparison round keeps the blinded
    2AFC and the G-44 halo ablation unchanged. Lanes render;
    the chair looks; the owner adjudicates.
+
+## §305 · RS-4 IS COMPLETE — THE FULL GRID PROVES THE COLLAPSE
+## GONE; §272.5's DEMAND IS DISCHARGED AND THE P4 ARC CLOSES
+## (2026-08-21 ~09:25 ET; chair: FABLE, collection executed in
+## person)
+
+1. **THE GRID CLOSED CLEAN.** The chair-resumed final segment
+   finished 36/36 cells exit 0, SEGMENT_EXIT=0 in the run log;
+   rs4-resume-gen re-derived **{totalCells:162, complete:162,
+   corrupt:0, segments:[]}**. The guarded evaluation ran ONCE
+   and credited: the sentinel reads "credited runs=4 at
+   2026-08-21T14:24:41Z" (it lives at the scratchpad root, not
+   in rs4-receipts/ — recorded so no successor mis-checks as
+   the chair briefly did). The RS-3 non-idempotence guard is
+   now armed against any re-run.
+2. ⭐⭐ **§272.5's SINGULAR DEMAND — "SHOW THE COLLAPSE GONE" —
+   IS DISCHARGED AT FULL GRID SCALE**, chair-recomputed from
+   the raw receipts, not read from a summary: **ZERO of 162
+   cells below the 0.05 collapse floor.** The lowest ratio in
+   the entire grid is **0.3091 — and it is exactly the cell
+   that failed at RS-3** (w0-soak / ca-bd7e00d6: 17,682 → 680
+   then; 17,682 → **5,466** now, failures empty, precisely
+   TE36's cured-column prediction). All three worlds reproduce
+   the cured figures to the person (§294.0's partial-grid
+   observation now holds over the whole grid). **The tail
+   survives — 39 of 162 under 0.5** — so the cure did not
+   flatten the distribution into a floor: worlds can still
+   fail for cause, which is the anti-floor claim proven at
+   soak scale on top of the unit arms.
+3. **THE P4 ARC CLOSES**: diagnosed (RS-1) → replicated
+   independently (RS-3, §268) → repaired with the anti-floor
+   battery (§271) → landed and exposed (§272) → **proven
+   cured by a full 162-cell soak at the exposed tip (this
+   row)**. Caveat carried from §294.0: ca-015 (RS-1's own row)
+   is not in RS-4's independently-constructed array; the class
+   is proven by the clean grid, not by a re-run of that cell.
+   The growth-side tail curves and memory-watermark items stay
+   PROVISIONAL inputs to the owner's tuning pass, unchanged.
+   The three P4 constants remain flagged for the tuning
+   signature with the re-record redo obligation on file.
+4. **NEXT SOAK LAW**: RS-5 fires at the NEXT build-branch
+   exposure that changes engine behaviour (f8d978df added only
+   dormant map foundations — no engine surface moved, so no
+   soak is owed at it); the §268.4b hold-for-exposure
+   discipline stands.
