@@ -1,4 +1,15 @@
 export {
+  ANGLE_TABLE_SIZE, COORDINATE_ABI, COORDINATE_ABI_SCHEMA_VERSION, COORDINATE_ABI_VERSION,
+  GEOMETRY_QUANTUM, HEIGHT_QUANTUM, MAX_WORLD_UNITS, ROUNDING_RULE, canonicalBytes, heightQ,
+  isNegativeZeroText, pointQ, reconcilesToTopologyText, ringQ, ringText, topologyTextOf,
+  withinAbiBounds, worldQ,
+} from './coordinateAbi.js';
+export {
+  CROSS_EPS, TOPOLOGY_PLACES, absArea, area, bounds, clipHalfPlaneAgainstNormal, distToSegment,
+  offsetLine, pointInPolygon, pointLocateRing, polygonIntersectionArea, properCross, q6,
+  segIntersect, triangulateSimple, triangulationIsSound,
+} from './exactGeometry.js';
+export {
   FABRIC_COORDINATE_ABI,
   CURRENT_MAP_TRADITION_ID,
   FABRIC_FOUNDATION_LAW_VERSION,

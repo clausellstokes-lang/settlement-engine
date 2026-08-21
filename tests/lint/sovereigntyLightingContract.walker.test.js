@@ -4887,7 +4887,33 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // figure: the census is SEQUENCED and stopped at `titles`, which is itself the executed
     // proof that `files`, `parked` and `credited` did not move — a sequenced census cannot
     // reach a later figure past a red earlier one.
-    files: 2485, parked: 364, credited: 2121, titles: 20618, suiteTitles: 5768,
+    // ── RE-RECORDED 2026-08-21 BY MF-T2B, THE VERSIONED INTEGER COORDINATE ABI ──
+    // AUTHORIZING DECISION: ODQ §312 (the D3a port dispatch that commissions this member) and
+    // ODQ §315 (this seat's dispatch under the §291.5 seat model), under the §310.4 wave charter
+    // and §299.4's binding-forward rule that a packet moving any census or ratchet NAMES ITS
+    // AUTHORIZING DECISION in the packet body. It is named in MF-T2B's header.
+    // 2,485/364/2,121/20,618/5,768 → 2,487/364/2,123/20,625/5,770. This member mints the family's
+    // two-file acceptance shape and nothing else: tests/domain/townMapCoordinateAbi.test.js (the
+    // A1-A4, A6, A7 matrix — SIX titles) and tests/property/townMapCoordinateAbiDeterminism.test.js
+    // (A5, the replay companion — ONE title). Each is ONE literal describe holding straight-line
+    // test() calls with string-literal titles; no .each, no runIf, no nesting, no loop-registered
+    // case, and A5's source scan loops INSIDE its one named test (the SP-D idiom). So both files
+    // are CREDITED rather than parked and every one of their seven titles is visible to the
+    // census: +2 files, +2 credited, +7 titles, +2 suite titles.
+    // ⚠ THE TITLES DELTA IS SEVEN, NOT SIX — 6 + 1, counted against the two files rather than
+    // inherited from the compiled draft, whose §9 predicted +6 while its own §7 assigned six cases
+    // to the domain file and one to the companion.
+    // `parked` holds at 364: no parked-file rule, parser door or existing file's classification
+    // moved. This member mints NO tests/lint/** file, so no mutation-coverage row is owed.
+    // ⛔⛔ RE-BASELINED AT THE CAS-SLOT LANDING, AND THE OLD FIGURE WAS A TRAP WORTH NAMING.
+    // This member was built and gated on 2cdb87fa, where its AFTER was titles 20,618. WF-1C
+    // then landed +7 titles of its own, so 20,618 became WF-1C's AFTER as well — the SAME
+    // NUMBER meaning two different things. Keeping this member's original tuple through the
+    // rebase would have recorded WF-1C's post-value as MF-T2B's and lost seven titles. The
+    // BEFORE above is therefore WF-1C's landed value and titles carries BOTH deltas: 20,611
+    // + 7 (WF-1C) + 7 (this member) = 20,625. Re-derived by EXECUTION at the rebased tip,
+    // never by arithmetic alone; the walker's own convictions are quoted in the lane receipt.
+    files: 2487, parked: 364, credited: 2123, titles: 20625, suiteTitles: 5770,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

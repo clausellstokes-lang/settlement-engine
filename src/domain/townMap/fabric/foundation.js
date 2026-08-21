@@ -4,6 +4,7 @@
  */
 
 import { sceneDigest } from '../../townScene/stableScene.js';
+import { MAX_WORLD_UNITS } from './coordinateAbi.js';
 import {
   ORTHOGONAL_CROSS_PLAN_KIND,
   deriveOrthogonalCrossRows,
@@ -25,8 +26,18 @@ export function requireCanonicalRecord(value, label) {
   return /** @type {Record<string, unknown>} */ (value);
 }
 
-/** @param {unknown} value @param {string} label @param {number} [min] @param {number} [max] */
-export function requireCanonicalInt(value, label, min = 0, max = 1000) {
+/**
+ * ⭐ MF-T2B — the defaults are now the COORDINATE ABI's envelope, not the fixture-era
+ * `0..1000` wall. ODQ §303.5: *"D1's versioned ABI wins… the codex 0..1000 wall is a
+ * fixture-era constraint; the ported record shapes re-parameterize onto the ABI."* The wall
+ * was always a DEFAULT PARAMETER rather than a constant, so re-parameterising is argument
+ * threading at the call sites and every explicit-range caller is untouched. ⛔ Widening an
+ * acceptance range changes only which inputs THROW; it cannot change the representation of an
+ * input that was already accepted, so `FABRIC_COORDINATE_ABI` and every artifact digest stay
+ * exactly where they were.
+ * @param {unknown} value @param {string} label @param {number} [min] @param {number} [max]
+ */
+export function requireCanonicalInt(value, label, min = -MAX_WORLD_UNITS, max = MAX_WORLD_UNITS) {
   if (!Number.isSafeInteger(value) || Number(value) < min || Number(value) > max) {
     throw new TypeError(`${label} must be an integer in ${min}..${max}`);
   }
