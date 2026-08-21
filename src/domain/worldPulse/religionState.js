@@ -253,9 +253,21 @@ export function ensureReligionState(state, settlement, tier) {
  * eviction, a capacity contest or a siege — three political and social acts. It asserts nothing
  * about a god.
  *
- * @param {any} state @param {string} ref @param {number|null} [tick]
+ * ⛔ THE PARAMETER IS TYPED STRUCTURALLY AND NOT AS `any`, DELIBERATELY. The file carries a frozen
+ * per-file any-cast allowance (`tests/lint/.domain-any-baseline.json`) that is MONOTONE-DOWN, so a
+ * new hole here reds `domainAnyCastBaseline.test.js` — and that ratchet says in terms that neither
+ * widening the baseline nor adding a declared-overrun row is the cure. The index signature is what
+ * lets the conditional stamp be assigned without a cast.
+ *
+ * @param {{ deities: Record<string, Record<string, unknown>> }} state
+ * @param {string} ref
+ * @param {number|null} [tick]
  */
 function suppressDeity(state, ref, tick) {
+  // The annotation is load-bearing for the STRICT typechecker, not decoration: a spread of an
+  // indexed record does NOT carry its index signature onto the result, so without it the
+  // conditional stamp below is a TS2339 on a freshly-widened literal.
+  /** @type {Record<string, unknown>} */
   const rec = { ...state.deities[ref], suppressed: true, share: 0, standing: 'cult' };
   if (Number.isFinite(tick)) rec.suppressedAtTick = tick;
   state.deities[ref] = rec;
