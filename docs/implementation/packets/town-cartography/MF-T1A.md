@@ -1,13 +1,16 @@
 # Fabric Topology / MF-T1A — canonical post-W3 cadastral boundary arrangement
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed commit:** `edf5268d1dcad84f1f69f59191ea14aa02a6cb88`
 - **Packet version:** `1`
 - **Verified base:** `codex/first-map-vertical-slice` at `ad2bc28b243a09f29657c43525332f9c32c79636`
-- **Last revalidated:** `2026-08-20` at `ad2bc28b243a09f29657c43525332f9c32c79636`
+- **Last revalidated:** `2026-08-20` at `edf5268d1dcad84f1f69f59191ea14aa02a6cb88`
 - **Depends on:** MF-T1N at `40b29038d40ce50096e6b3450748ee6318bff285`
 - **Collision group:** `town-map-canonical-fabric-topology`
-- **Commit authority:** agent may stage and commit the exact manifest after all packet checks pass; no push, merge, cleanup, or adjacent repair
+- **Commit authority:** LANDED; do not redispatch
 - **Baseline posture:** MF-T1N wave-end gate passed with 28,592 tests and the inherited 11-known-failure ceiling; lint held 29 warnings and zero errors; build and 314-route prerender passed; strict dist passed 409/409; terminal governance validates 121 packets with zero READY before this promotion
+
+> This packet landed at the commit above. It is terminal and must not be redispatched.
 
 ## 1. Reconciled authority
 
@@ -221,18 +224,18 @@ Stop if base/seal/cleanliness differs; 32 unique lines, V24/C1 or cycle rank 9 c
 
 ## 12. Completion receipt
 
-- Base SHA:
-- Dispatch bundle and seal identity:
-- Final commit or working-tree state:
-- Exact changed files and effective-line deltas:
-- A1-A6 results:
-- Focused commands, exits, and counts:
-- Sealed packet/resume status:
-- Both typecheck configurations:
-- Wave-end gate stages:
-- Base-versus-wave failure identity diff:
-- Source and arrangement byte pins:
+- Base SHA: `ad2bc28b243a09f29657c43525332f9c32c79636`
+- Dispatch bundle and seal identity: MF-T1A sealed session digest `08c2f2620a95ba002e56adff799add2f6cce71fd9a6e3e50bc5df6afda3b04d4`; capsule digest `80d46d20292c3141446267c67ddee069f436405ffd7c1269a27385226999ce6a`
+- Final commit or working-tree state: `edf5268d1dcad84f1f69f59191ea14aa02a6cb88`; implementation tree clean before terminal governance
+- Exact changed files and effective-line deltas: exact six-path manifest; positive effective production delta `251/254` (`boundaryArrangement.js` `247/250`, `index.js` `+4/4`); fixture `+15/22`; census `+5/-1` within `+12`
+- A1-A6 results: six new acceptance cases pass; focused source/topology suite `24/24`; two independent bounded audits ended `0 P0 / 0 P1`
+- Focused commands, exits, and counts: sealed packet suite `17/17`; sovereignty/negative walkers `42/42`; scoped ESLint and `git diff --check` clean; all exit `0`
+- Sealed packet/resume status: `check:packet` and `implementation:resume` passed on the final pre-commit bytes; the exact session fingerprint completed all eight steps
+- Both typecheck configurations: full ratchet `173/173`, no regression; domain-strict `1134/1134`, no regression
+- Wave-end gate stages: `npm run check:tail` exit `0`; test ratchet `28,598` tests with the inherited `11` known failures and no new failure; lint `29` warnings/`0` errors; build passed in `29.16s`; prerender wrote `314` routes; strict dist `409/409`
+- Base-versus-wave failure identity diff: `NONE`
+- Source and arrangement byte pins: foundation `scene-v1-c72afb9994bd6e8c4a6168e56fdc221e`; frontage subdivision `scene-v1-38ea62d8983609e19e4fe03cb64092af`; street geometry `scene-v1-3c720d7ef19b040779a7fb82feb85011`; arrangement `scene-v1-a1cfadea8ca1bba796bfed3e0a1cb671`
 - Generated artifacts: `NONE`
-- Deviations: `NONE | STOP`
-- Out-of-scope observations:
-- Judgment calls: `NONE`
+- Deviations: `NONE`
+- Out-of-scope observations: DCEL, faces, parcel semantics, the reference-only Fabric root, buildings, persistence, projection and UI remain later bounded packets
+- Judgment calls: exact foundation replay through the sole sealer and a seven-boundaries-per-block census close coordinated hash-correct forgeries without widening beyond the six-case packet

@@ -14883,7 +14883,7 @@
     },
     {
       "id": "MF-T1A",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T1A.md",
       "verifiedBase": "ad2bc28b243a09f29657c43525332f9c32c79636",
       "changeManifest": [
@@ -14927,7 +14927,15 @@
         { "path": "tests/domain/townMapSettlementFabric.test.js", "symbol": "MF-W3S1 orthogonal-cross settlement fabric" },
         { "path": "tests/property/townMapSettlementFabricDeterminism.test.js", "symbol": "MF-W3S1 settlement fabric determinism" },
         { "path": "tests/domain/townMapStreetGeometry.test.js", "symbol": "MF-T1G canonical orthogonal-cross street geometry" },
-        { "path": "tests/property/townMapStreetGeometryDeterminism.test.js", "symbol": "MF-T1G street geometry determinism" }
+        { "path": "tests/property/townMapStreetGeometryDeterminism.test.js", "symbol": "MF-T1G street geometry determinism" },
+        { "path": "src/domain/townMap/fabric/boundaryArrangement.js", "symbol": "export const CADASTRAL_BOUNDARY_ARRANGEMENT_SCHEMA_VERSION" },
+        { "path": "src/domain/townMap/fabric/boundaryArrangement.js", "symbol": "export const CADASTRAL_BOUNDARY_ARRANGEMENT_LAW_VERSION" },
+        { "path": "src/domain/townMap/fabric/boundaryArrangement.js", "symbol": "export function compileOrthogonalCrossCadastralArrangement" },
+        { "path": "src/domain/townMap/fabric/index.js", "symbol": "compileOrthogonalCrossCadastralArrangement," },
+        { "path": "tests/fixtures/townMapSettlementFabricFixtures.js", "symbol": "export const BOUNDARY_ARRANGEMENT_ID" },
+        { "path": "tests/fixtures/townMapSettlementFabricFixtures.js", "symbol": "export function makeSettlementBoundaryArrangement" },
+        { "path": "tests/domain/townMapBoundaryArrangement.test.js", "symbol": "MF-T1A canonical post-W3 cadastral boundary arrangement" },
+        { "path": "tests/property/townMapBoundaryArrangementDeterminism.test.js", "symbol": "MF-T1A cadastral boundary arrangement determinism" }
       ],
       "acceptanceCases": [
         { "id": "A1", "case": "The canonical source set publishes one connected, codepoint-ordered V24/E32 cadastral arrangement with exact role/source counts and cycle rank nine." },
