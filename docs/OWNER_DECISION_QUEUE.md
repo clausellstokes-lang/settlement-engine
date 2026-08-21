@@ -12761,3 +12761,72 @@ recommended. Implementation, per item:
    dormant map foundations — no engine surface moved, so no
    soak is owed at it); the §268.4b hold-for-exposure
    discipline stands.
+
+## §306 · MF-CB1 COLLECTED — THE COUNTERFACTUAL BENCHMARK EXISTS,
+## CONVICTS, AND CAUGHT THREE ENGINE FINDINGS ON ITS FIRST RUN;
+## THE INERTIA LAW GETS ITS NUMBER (2026-08-21; chair: FABLE;
+## receipt laneMFCB1-receipt.md, 709 lines)
+
+1. **COLLECTED, ALL CONFIRMED.** G-43 is built on the D1
+   foundations at zero plate bytes (0 of 170 keys), suite
+   286 → 321 TRUE_EXIT=0, the modules pinned to the manifest's
+   FOUNDATIONS node so read-side-only is a graph fact. The
+   registry proves E∩F=∅ BY CONSTRUCTOR; every arm carries a
+   firing set (a zero must first prove it fired); five planted
+   conviction arms (MISWIRED, wrong-direction, F-violation,
+   NOT_FIRED, bad path) prove the harness convicts; arm B's
+   mutated leaf reproduced 409/409 components of an
+   independently built leaf it never saw — the strongest
+   non-vacuity proof available. §4.1d's no-tuning-after-
+   inspection was honoured: two instrument-side registration
+   errors are REPORTED, not re-registered — the record of
+   record is 2 PASS / 4 MISWIRED / 1 COLLATERAL / 0 NOT_FIRED
+   (corrected reading 4/2/1, labelled PLAUSIBLE).
+2. ⭐⭐ **THREE ENGINE FINDINGS, EACH THE MIS-WIRED-FACT CLASS
+   CAUGHT EARLY — the §304.3 pull-forward's whole argument,
+   vindicated on day one:** (a) a 40% population cut CONTRACTS
+   the built extent, violating §276.1b's registered direction
+   — the high-water law is STARVED, not broken:
+   deriveHighWater's three evidence channels are empty on 16
+   of 17 leaves (a dossier-evidence gap), and a second
+   separate defect survives the pinned-extent control: the
+   ring re-traces against drawn fabric even at fixed extent —
+   the §297.3a retrospective-partition gap now has a CAUSAL
+   receipt. (b) shifting the wall's date 142 years moves ZERO
+   wall geometry — ageAtBuild derives from population alone,
+   so no dossier fact can move a vintage: the generative-epoch
+   gap, measured. (c) a cathedral reaches the map but reserves
+   no ground (12.60 vs the 15.37 compound floor) — a massing/
+   compound question for D3a. ⚠ Plus a live INPUT TRAP: writing
+   terrain to config.terrainOverride — the field the exemplar
+   harness itself passes — is a SILENT NO-OP (0 of 409
+   components move). W3F's new exemplar is CHECKED FOR THIS
+   TRAP at its collection.
+3. ⭐⭐ **THE INERTIA LAW HAS ITS NUMBER: pooled causal
+   precision 0.039.** Ninety-six percent of everything that
+   moves under a single-fact change was not expected to move —
+   the measured baseline of the §11/§161k inertia problem
+   (key-anchored local diffs), which until today was an
+   aspiration without a metric. Every future benchmark seal
+   reports it; the drift/inertia program's job is to move it
+   toward 1.0 without breaking responsiveness (0.820 today).
+4. **RULINGS ON THE RAISED ITEMS.** (a) The three missing
+   dossier surfaces — a resource LOCATION, a dated
+   CONSTRUCTION OPERATION, an institution FOUNDING YEAR
+   (proven: the same cathedral appears on the year-18 leaf) —
+   are ADOPTED as W8 prerequisites routed into the D3a/A0–A5
+   charter as THE DOSSIER-SURFACE BATCH, together with the
+   high-water evidence gap from 2(a). (b) The four
+   registration amendments apply PROSPECTIVELY at the next
+   seal; this run's record stands unamended. (c) The
+   ring-follows-occupancy and wall-year findings feed the
+   W4-class generative-epoch work already ordered at §297.3a
+   — they are its causal receipts, not new scope. (d) The
+   benchmark's standing home: ADOPTED as the lane recommends —
+   a harness command with a captured self-named log, RE-RUN AT
+   EVERY WAVE SEAL, ratcheting |A∩F| only (only-shrinks);
+   responsiveness and precision are REPORTED metrics, not yet
+   ratcheted. (e) The terrain three-spelling alias and the
+   silent-no-op trap are named W4 cures; the .joined roster
+   asymmetry is deferred-with-record in the receipt. The six
+   in-lane judgment calls at §7.0 are RATIFIED as tabled.
