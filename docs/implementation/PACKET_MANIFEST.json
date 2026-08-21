@@ -15035,7 +15035,7 @@
     },
     {
       "id": "MF-T1P",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T1P.md",
       "verifiedBase": "0465e6f5e4a6b6d38770cc552069e24257b1e7d4",
       "changeManifest": [
@@ -15096,7 +15096,15 @@
         { "path": "tests/domain/townMapBoundaryArrangement.test.js", "symbol": "MF-T1A canonical post-W3 cadastral boundary arrangement" },
         { "path": "tests/property/townMapBoundaryArrangementDeterminism.test.js", "symbol": "MF-T1A cadastral boundary arrangement determinism" },
         { "path": "tests/domain/townMapPlanarDcel.test.js", "symbol": "MF-T1D canonical reference-only planar DCEL" },
-        { "path": "tests/property/townMapPlanarDcelDeterminism.test.js", "symbol": "MF-T1D planar DCEL determinism" }
+        { "path": "tests/property/townMapPlanarDcelDeterminism.test.js", "symbol": "MF-T1D planar DCEL determinism" },
+        { "path": "src/domain/townMap/fabric/parcelRegistry.js", "symbol": "export const PARCEL_REGISTRY_SCHEMA_VERSION" },
+        { "path": "src/domain/townMap/fabric/parcelRegistry.js", "symbol": "export const PARCEL_REGISTRY_LAW_VERSION" },
+        { "path": "src/domain/townMap/fabric/parcelRegistry.js", "symbol": "export function compileOrthogonalCrossParcelRegistry" },
+        { "path": "src/domain/townMap/fabric/index.js", "symbol": "compileOrthogonalCrossParcelRegistry," },
+        { "path": "tests/fixtures/townMapSettlementFabricFixtures.js", "symbol": "export const PARCEL_REGISTRY_ID" },
+        { "path": "tests/fixtures/townMapSettlementFabricFixtures.js", "symbol": "export function makeSettlementParcelRegistry" },
+        { "path": "tests/domain/townMapParcelRegistry.test.js", "symbol": "MF-T1P canonical reference-only parcel registry" },
+        { "path": "tests/property/townMapParcelRegistryDeterminism.test.js", "symbol": "MF-T1P parcel-registry determinism" }
       ],
       "acceptanceCases": [
         { "id": "A1", "case": "Eight ordered parcel rows bind unique plot, frontage and four-edge bounded-face identities while the cross and exterior faces remain unused." },

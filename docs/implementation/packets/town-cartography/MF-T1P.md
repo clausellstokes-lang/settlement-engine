@@ -1,13 +1,16 @@
 # Fabric Topology / MF-T1P — canonical reference-only parcel registry
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed commit:** `7fd8ad3f077a0dbd6765e8bdd906c281a3716659`
 - **Packet version:** `1`
 - **Verified base:** `codex/first-map-vertical-slice` at `0465e6f5e4a6b6d38770cc552069e24257b1e7d4`
-- **Last revalidated:** `2026-08-20` at `0465e6f5e4a6b6d38770cc552069e24257b1e7d4`
+- **Last revalidated:** `2026-08-20` at `7fd8ad3f077a0dbd6765e8bdd906c281a3716659`
 - **Depends on:** MF-T1D at `b020f74352b0bf9b07eeba80bc41b4b5d53796ca`
 - **Collision group:** `town-map-canonical-fabric-topology`
-- **Commit authority:** agent may stage and commit the exact manifest after all packet checks pass; no push, merge, cleanup, or adjacent repair
+- **Commit authority:** LANDED; do not redispatch
 - **Baseline posture:** MF-T1D wave-end gate passed with 28,604 tests and the inherited 11-known-failure ceiling; lint held 29 warnings and zero errors; build and 314-route prerender passed; strict dist passed 409/409; terminal governance validates 123 packets with zero READY before this promotion
+
+> This packet landed at the commit above. It is terminal and must not be redispatched.
 
 ## 1. Reconciled authority
 
@@ -206,17 +209,17 @@ Stop on source replay mismatch; any need to copy or repair geometry/topology; an
 ## 12. Completion receipt
 
 - Base SHA: `0465e6f5e4a6b6d38770cc552069e24257b1e7d4`
-- Dispatch bundle and seal identity: `PENDING`
-- Final commit or working-tree state: `PENDING`
-- Exact changed files and effective-line deltas: `PENDING`
-- A1-A6 results: `PENDING`
-- Focused commands, exits and counts: `PENDING`
-- Sealed packet/resume status: `PENDING`
-- Both typecheck configurations: `PENDING`
-- Wave-end gate stages: `PENDING`
-- Base-versus-wave failure identity diff: `PENDING`
-- Source and registry byte pins: subdivision `scene-v1-38ea62d8983609e19e4fe03cb64092af`; arrangement `scene-v1-a1cfadea8ca1bba796bfed3e0a1cb671`; DCEL `scene-v1-9e5a1400770196ff6da8be9417138d0d`; registry `PENDING`
+- Dispatch bundle and seal identity: MF-T1P sealed session digest `ecb55fba95d900dcd06e04d780ed1d0d25366add45b6b3af6f855bb85f5d2283`; capsule digest `0dce675a150a2c67c4bc37b0bf3c3573436001302149e7b4bef2e1088690424f`
+- Final commit or working-tree state: `7fd8ad3f077a0dbd6765e8bdd906c281a3716659`; implementation tree clean before terminal governance
+- Exact changed files and effective-line deltas: exact six-path manifest; effective production delta `220/254` (`parcelRegistry.js` `216/250`, `index.js` `+4/4`); fixture `+16/18`; census stayed within `+12`
+- A1-A6 results: six new acceptance cases pass; focused MF-T1P plus MF-T1D suite `12/12`; final independent packet audit ended `0 P0 / 0 P1`
+- Focused commands, exits and counts: parcel/DCEL suites `12/12`; sovereignty/negative walkers `42/42`; scoped ESLint and `git diff --check` clean; all exit `0`
+- Sealed packet/resume status: `check:packet` and `implementation:resume` passed on the final pre-commit bytes; the exact sealed session completed all required steps
+- Both typecheck configurations: full ratchet `173/173`, no regression; domain-strict `1134/1134`, no regression
+- Wave-end gate stages: final `npm run check:tail` exit `0`; test ratchet `28,610` tests with the inherited `11` known failures and no new failure; lint `29` warnings/`0` errors; build passed in `29.22s`; prerender wrote `314` routes; strict dist `409/409`
+- Base-versus-wave failure identity diff: `NONE`
+- Source and registry byte pins: subdivision `scene-v1-38ea62d8983609e19e4fe03cb64092af`; arrangement `scene-v1-a1cfadea8ca1bba796bfed3e0a1cb671`; DCEL `scene-v1-9e5a1400770196ff6da8be9417138d0d`; registry `scene-v1-71946b930acf2a0080c4bd57658b31b6`
 - Generated artifacts: `NONE`
-- Deviations: `PENDING`
+- Deviations: `NONE`
 - Out-of-scope observations: the reference-only Fabric root, parcel lifecycle/ownership, buildings, persistence, projection and UI remain later bounded packets
-- Judgment calls: plot IDs remain the first-tranche parcel identities so a topology implementation-ID change cannot churn semantic parcel identity
+- Judgment calls: plot IDs remain the first-tranche parcel identities so a topology implementation-ID change cannot churn semantic parcel identity. Replay-proven frontage selectors are preserved exactly rather than reminted or subjected to a downstream 96-character cap; valid upstream selectors may be 100 characters.
