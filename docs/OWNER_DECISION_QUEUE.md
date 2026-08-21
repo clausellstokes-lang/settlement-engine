@@ -13223,6 +13223,53 @@ recommended. Implementation, per item:
    §13/§168 spec fold as §311; implementation position
    unchanged under §290.4.
 
+### §311.8 · THE FULL UNDERGROUND COMPONENT LAW, REFINED AT THE
+### OWNER'S EXTENDED DELEGATION ("not just sewers but the
+### placement and growth of all the underground layer
+### components")
+
+1. **THE GENERAL FORM, binding on every component**: LICENSE
+   (the facts that permit it) + ANCHOR (the surface feature it
+   sits under/beside) + EXTENT DRIVER (the quantity that grows
+   it) + TEMPERAMENT + CAUSED PORTALS (its surface joins).
+   Nothing exists without its license, sits off its anchor, or
+   grows by anything but its driver.
+2. **THE FOUR TEMPERAMENTS ARE CLOSED VOCABULARY**: (a) STATIC
+   terrain fact (caverns — never grow nor diminish); (b)
+   MONOTONE excavation (crypts/ossuaries by burial demand ×
+   institution age, with plague-year surge pits; cellars/
+   undercrofts by quarter trade volume, the smuggler subset by
+   criminal share at gates/waterfronts; mines/quarries at the
+   dossier's resource sites while worked, ABANDONED not erased
+   after); (c) SURFACE-COUPLED infrastructure (sewers per
+   §311.7; wells/cisterns by water need, tier-scaled); (d)
+   DEMAND-DRIVEN colonization (the undercity proper per
+   §311.4; smugglers' tunnels ONLY where a wall or toll makes
+   the dig worth it — a bypass needs something to bypass).
+   Every future component declares one temperament.
+3. **CONSEQUENCE STATES on existing extent**: deep workings
+   near the water table FLOOD; plague years and collapses
+   SEAL — use recedes, dug space never does (the underground
+   high-water law §311.3 applied). Institutional vaults/
+   dungeons: under the owning institution, licensed by its
+   type, rare event-driven growth.
+4. **COLONIZATION ORDER**: the undercity grows from the seeds
+   nearest its surface causes (the shadows district, the
+   waterfront, the gates), every colonized piece bound to a
+   surface cover by the UNIVERSAL FRONT; inter-piece links
+   are funded digs (§311.6.4).
+5. **THE WHOLE LAYER IS G-43-TESTABLE**, with directions
+   registrable before any run: move the resource site → the
+   mine moves; remove the wall → the smugglers' tunnel loses
+   its license; add the plague at year N → the pit, the
+   sealed gallery, and the rebuilt quarter's drains appear.
+   Routing per L2: the same §13/§168 spec fold; implementation
+   position unchanged under §290.4; the dossier facts named
+   here (demographics' dead, trade volume, criminal share,
+   syndicate standings, resource sites) join the D3a-era
+   dossier-surface audit so every license has a live home
+   before the stratum compiles.
+
 ## §312 · TC-D3A COLLECTED — THE PORT PLAN IS PRICED (16
 ## MEMBERS), THREE RULINGS MADE, AND THE SANDBOX EVIDENCE IS
 ## PRESERVED OUT OF /tmp (2026-08-21; chair: FABLE; receipt
