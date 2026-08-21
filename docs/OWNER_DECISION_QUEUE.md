@@ -14092,3 +14092,39 @@ recommended. Implementation, per item:
   that final tip (§328.6, heads-up protocol) → RS-5 resumes for its last 90 cells →
   the cascade's closing collection → the §290 mandatory review stop, where the owner
   may fire the ultra review.
+
+## §330 — COLLECTION + CAS: THE OFL COMPLETION LANDED; RS-5 RESUMED; TE-T2C DISPATCHED (2026-08-21 ~19:15)
+
+- **TE-OFL collected.** Tip fb80e32f — one commit on 190895a4, three files. The licence
+  body landed VERBATIM, assembled by concatenation with the SHA verified BEFORE use and
+  re-verified on the committed blob (the last 4,303 bytes still hash to
+  3c17a839…7239); the incompleteness marker and how-to section are gone; both notices
+  copies updated in three places each; NO test file was touched — the two-directional
+  pin was authored to hold on both sides of the cure and did, and its liveness was
+  CONFIRMED by re-inserting the marker (1 failed / 23 passed) with a checksum-verified
+  restore. Full terminal green bare, TRUE_EXIT=0, verify:dist as the chain's last link.
+  The lane proved its six pre-sweep reds are base reds by a pristine run at 190895a4
+  and flagged its own amended commit (febda218, wrong byte figure in the message,
+  caught before any gate; tree byte-identical to fb80e32f; unreferenced). CAS
+  EXECUTED: claude/composite-r4 190895a4 → fb80e32f (read back). ⚠ The original
+  NOTICES agent's transcript was LOST between its landing and this completion — the
+  fresh lane needed nothing from it because the pin, the provenance file, and the
+  receipts carried everything; that is the pin-and-provenance discipline paying
+  directly.
+- **§330.1 The OFL compliance gap (§323.2) is CLOSED.** public/fonts/OFL.txt is
+  complete and ships beside the fonts it covers. Still open on the owner/counsel
+  docket: dompurify + rgbcolor elections, the png-js manifest note (§323.3).
+- **§330.2 RS-5 RESUMED (§329.3):** rs5-resume-gen validated 72 complete cells, zero
+  corrupt, and wrote two segment configs; segments b (36 cells) then c (54) run
+  chained in one background shell against the unchanged substrate at tip f9bd533f,
+  receipts accumulating in the same durable directory, pids written eagerly for exact
+  pause. Launch confirmed by the runner's own log line. Evaluator runs ONCE at
+  completion; its collection row proves the WF-1B exposure and re-proves P4.
+- **§330.3 TE-T2C DISPATCHED** on fb80e32f per §328.6, carrying the §328 rulings and a
+  STRICTER terminal protocol than WF-1D's: it must WAIT for the chair's explicit GO
+  after its heads-up, because the soak is now live and must be paused PID-exactly
+  before any full gate.
+- **§330.4 The afternoon cascade is CLOSED: six landings, five CASes**, branch at
+  fb80e32f: WF-1C · MF-T2B(+fence amendment) · the notices surface · WF-1D(+the
+  four-file zero-headroom law) · the OFL completion. What remains before the §290
+  review stop: TE-T2C's landing and RS-5's closing collection.

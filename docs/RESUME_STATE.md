@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~19:15 ET: CASCADE CLOSED (§330) — OFL completion LANDED, CAS
+# 190895a4 → fb80e32f (five CASes today). RS-5 RESUMED (segments b=36 then
+# c=54 chained, 1 worker, receipts durable; pause via rs5-receipts/pids.json).
+# TE-T2C DISPATCHED on fb80e32f (waits for explicit GO before its terminal).
+# Remaining before the §290 stop: T2C landing + RS-5 evaluator + collection.
 # ~18:52 ET: NOTICES agent's transcript GONE (resume refused) — OFL completion
 # re-briefed to a FRESH lane TE-OFL (self-contained: tenotices-tree, checkout
 # 190895a4, SHA-verify the elected body, complete OFL.txt + both notices rows
