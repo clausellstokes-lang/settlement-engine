@@ -13432,3 +13432,48 @@ recommended. Implementation, per item:
    would block any future default-index operation. The
    harness-exit-0-vs-TRUE_EXIT=1 observation re-confirms L3's
    reason a third time today.
+
+## §314 · THE EXPOSURE DAY CLOSES ITS LOOP — WF-1B LIVE, THE
+## MAP FAMILY LAW LANDED, RS-5 UP, THE FIRST PORT EXECUTOR AND
+## THE NEXT ENGINE COMPILE BOTH RUNNING (2026-08-21; chair:
+## FABLE; owner in-chat: "keep doing the simulation work as
+## well!")
+
+1. **EXECUTED SINCE §313**: the ratchet re-run at the cured
+   tip came back GREEN (11 known of 28,646 at ceiling 11,
+   TRUE_EXIT=0 — the census absorbing WF-1B's +8 exactly);
+   **CAS claude/composite-r4 9d851fae → f9bd533f** (WF-1B is
+   LIVE); **the MF-PREAMBLE landed chair-signed at f20b9faa**
+   (STAMP GRANTED per §312.2b written into the file; CLAIM_RE
+   pre-scanned CLEAN across all four map drafts — the §313
+   lesson applied BEFORE writing this time; live SHA-256
+   7a39a28e…04de8); **RS-5 is bringing up** (the exposed tip
+   archived outside the repo, path-swapped
+   gen-config/resume-gen/evaluator staged, the full grid
+   launching under rs5-run.log with durable receipts);
+   **TE-T2A dispatched** (Track-0 guard green-at-zero +
+   MF-T2A, staged promotion one member at a time).
+2. ⚠ **A SELF-INFLICTED PROSE DEFECT, FOUND BY THE CHAIR'S OWN
+   CHECK**: the §313 paraphrase cure re-hashed the
+   WF-PREAMBLE (live SHA ca02c8a1…) while the landed WF-1B
+   still cites the pre-cure hash. VERIFIED: no machine check
+   reads the citation (the validator's "preamble" is the
+   packet's own header), so nothing is red — but the citation
+   law's integrity matters. **THE RE-STAMP RIDES THE NEXT
+   LANDING CAS** (one landing slot; TE-T2A holds it), routed
+   here per L2. ⭐ CLASS NOTE: a preamble edit re-hashes the
+   family law — the editing act OWNS the re-stamp of every
+   citing packet in the same landing.
+3. **THE OWNER'S ORDER — SIMULATION CONTINUES IN PARALLEL —
+   EXECUTED**: **TC-WF1C dispatched** (Opus compile): WF-1c,
+   the realm last-seat beat, against the LIVE preamble hash,
+   on WF-1B's landed machinery, with the §309 boundary kept
+   sharp (if the realm beat also needs the missing FAITH kind
+   registry, STOP-and-RAISE with numbers — the WF-8
+   once-built economics may claim it too, and that ruling is
+   the chair's). The engine ladder's standing order after
+   WF-1c: WF-1d (the warTermination join — its file at
+   818/818 zero-headroom shrink-only is the named hazard),
+   then the WC/INT/WY/POP/LG queue interleaving with the map
+   port's members, two build tracks under one landing slot
+   each, exactly as the owner's parallel directive requires.
