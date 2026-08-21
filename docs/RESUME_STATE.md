@@ -74,6 +74,20 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ §311+§312 (~11:55 ET): OWNER UNDERCITY DOCTRINE recorded (seeded/causal/
+# proportional + §311.6 temperaments: sewers city+metro always, SOME towns,
+# surface-coupled; crypts monotone-grow zoned religious/cemetery/residential/
+# outskirts; caverns static; connectivity encouraged NOT required). TC-D3A
+# COLLECTED: 16-member port plan; kernel quadratic (12.7x repair, SHA-identical);
+# ABI fake-tie throw → BigInt+divergences ONE member; version-string cutover its
+# own micro-wave (157 pins/12 files); full port ≥36 members. RULINGS: rename
+# split ratified (guard green-at-zero now); ⭐ MAP FAMILY STAMPED by §312.2b
+# (trains cap 8); port-seal = dual-run equivalence, NOT D3a; §306.4a producers
+# own train + RS-5 at ITS exposure; MF-PREAMBLE signing WAITS for TE-WF1B (one
+# landing slot). ⭐ PRESERVED OUT OF /tmp: refs/preserve/map-sandbox-w3f-sealed
+# (ee0db96d) + refs/preserve/program-receipts-2026-08-21 (a61c8b9b).
+# Lanes out: TE-WF1B. Next: collect it → CAS → RS-5 → land MF-PREAMBLE + first
+# D3a packets → dispatch executors.
 # ⭐⭐⭐ §310 (~11:30 ET): MF-W3F COLLECTED — FRESH W3 SEALS at laneMFW3F-tip
 # (demotion-before-packer; SW-1 5/5; inter-ring 0/18 cured by the INERTIA PIN
 # direction; 11th world Baigou; suite 296; all censuses 0/18; arm-Z 34/34;

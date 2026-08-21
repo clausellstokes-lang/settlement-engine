@@ -13155,3 +13155,97 @@ recommended. Implementation, per item:
    GENERATION-SPEC §13/§168 fold rides the next spec touch as
    one edit; implementation remains post-parity-slice content
    under §290.4 unless the owner promotes it.
+
+### §311.6 · OWNER REFINEMENTS, SAME SITTING — THE THREE
+### GROWTH TEMPERAMENTS AND OPTIONAL CONNECTIVITY
+
+1. **SEWERS (owner):** ALL cities and metropolises have them;
+   only SOME towns; below that, none. Sewers expand ONLY as
+   the SURFACE expands — new ring above, new branches below,
+   never the reverse — so the vertical dependency stays
+   one-way and acyclic, and the sewer map inherits the
+   surface's epoch structure for free. ⚠ The "some towns"
+   membership needs a DERIVATION HOME (candidates the dossier
+   holds: planned/charter founding, prosperity band, civic
+   infrastructure institutions; weighted-still-diced per the
+   house idiom) — flagged as a compile-time question, never a
+   causeless coin flip.
+2. **CRYPTS (owner):** zoned around religious places,
+   cemeteries, residential quarters, and the settlement's
+   outskirts; they GROW (excavated, burial-demand-driven) and
+   are not likely to DIMINISH — the monotone case of the
+   underground high-water law.
+3. **CAVERNS (owner):** never grow nor diminish — static
+   terrain facts, seed-permanent, licensed by the ground,
+   epoch-invariant.
+4. **CONNECTIVITY (owner):** encouraged but NOT required for
+   most appropriate undercity pieces. §311.3's
+   "inherits connectivity" is AMENDED accordingly: isolated
+   pieces are lawful and navigable within themselves via
+   their own surface portals; colonization PREFERS connected
+   reach; any new linking passage is a dug act with a cause
+   and a payer (syndicate-funded visible work), never an
+   assumed corridor.
+
+## §312 · TC-D3A COLLECTED — THE PORT PLAN IS PRICED (16
+## MEMBERS), THREE RULINGS MADE, AND THE SANDBOX EVIDENCE IS
+## PRESERVED OUT OF /tmp (2026-08-21; chair: FABLE; receipt
+## laneTCD3A-receipt.md; drafts D3A-PLAN, MF-PREAMBLE, MF-T2A,
+## MF-T2B)
+
+1. **COLLECTED.** The port decomposed into 16 priced members
+   over four tracks (first-act guard; the foundation port —
+   the true spine is 19 declarations / ~170 effective lines;
+   §287.16 massing foundations; §299.3 obligations; §306.4a's
+   four engine-side producers). Executed findings that shaped
+   it: the codex DCEL kernel is QUADRATIC with one line 84%
+   of the cost — the amortized repair is 12.7× and
+   SHA-identical at four sizes (a repair, not a shift); at
+   ABI scale the kernel THROWS on valid ground (a Number
+   orient reads 0 where BigInt reads −1 — a fake "angular
+   tie"), which is why the BigInt conversion and the §303.5
+   divergence extensions ship as ONE member; the ABI range
+   widening is byte-neutral but the version string is pinned
+   by 157 digest pins across 12 files — its cutover is its
+   own micro-wave; the FULL port is ≥36 members / 14,230
+   lines, so twin-life spans multiple waves by measurement.
+   Staged promotion is MANDATORY (every member shares two
+   change paths). The lane read §311 mid-compile and
+   correctly did NOT expand to meet it (§290.4).
+2. **THE THREE RULINGS.** (a) The clipHalfPlane rename split:
+   RATIFIED — the guard lands NOW green-at-zero over
+   fabric/** (0 duplicates of 94, no baseline needed) and
+   discharges the rename when the geometry ports; the
+   literal §310.3(7) wording is amended to match the measured
+   fact that both offending exports live only in the retiring
+   sandbox. (b) ⭐⭐ **THE MAP FAMILY IS STAMPED, by this
+   row**: the stamp's substance — Fable examination of the
+   family's law substrate — is discharged beyond any §70-era
+   round by the §291–§310 record itself (the retrovalidation
+   sitting over the program's rows; the CF-1-corrected spec;
+   every wave since D0 collected by the Fable chair in
+   person under L1–L7). The MF preamble carries the stamp
+   line citing this row; map trains cap at EIGHT, halving
+   terminal-gate count. Vetoable. (c) **"The port's seal"
+   CLARIFIED**: twin-life retirement fires when the DUAL-RUN
+   EQUIVALENCE proves the app-side generator subsumes the
+   sandbox (the §14 prove-then-cut condition) — NOT at
+   D3a-the-wave's seal; with the port measured at ≥36
+   members, D3a's seal retires nothing. The §306.4a
+   producers ride their OWN train and RS-5 fires at ITS
+   exposure, per the lane's recommendation. The MF-PREAMBLE
+   signing-and-landing WAITS for TE-WF1B's collection — one
+   landing slot.
+3. ⭐ **PRESERVATION EXECUTED (the finding that could not
+   wait)**: the sealed sandbox tips and the program's
+   receipts lived ONLY in /private/tmp — temporary by the
+   program's own §243 law, and the sandbox is not a git
+   repository. Preserved by plumbing into the repo's object
+   store: **refs/preserve/map-sandbox-w3f-sealed**
+   (ee0db96d — the sealed fresh-W3 code/tests/harness, 2,218
+   files, no node_modules) and
+   **refs/preserve/program-receipts-2026-08-21** (a61c8b9b —
+   28 lane receipts + the sitting's 19 memos/drafts). The
+   generator of record and its evidence now survive a
+   reboot. Preservation refs ride the eventual push as
+   branch backup per the standing §71.5 pattern.
