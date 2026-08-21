@@ -13103,3 +13103,55 @@ recommended. Implementation, per item:
    dormant-explicit-input massing scope, §290.1's core-first
    slice — compile first, chair lands, executors build on the
    packet system.
+
+## §311 · OWNER DESIGN DIRECTIVE — THE UNDERCITY IS SEEDED,
+## CAUSAL, AND PROPORTIONAL (2026-08-21, in-chat; chair
+## concurrence recorded; design-only — implementation keeps its
+## queue position under §290)
+
+1. **THE EXISTENCE GATE (owner):** the underground SHEET
+   appears ONLY if the settlement actually has qualifying
+   subterranean institutions — sewers, crypts, cellars and
+   their kin. No qualifying seed → no sheet. This is the
+   licensing rule for §287.4's fact-licensed
+   StrataExistencePlan: seed classes are TYPED sources with
+   dossier homes (sanitation infrastructure at the tiers that
+   earn it; crypt-bearing institutions; cellar-bearing
+   commerce; mine/quarry workings where terrain licenses
+   them).
+2. **CAUSAL, NEVER COSMETIC (owner):** every underground
+   element maps IN RELATION TO THE SURFACE — a sewer that
+   makes no sense for the settlement's layout is decoration
+   and cannot be navigated or plotted. Chair's engineering
+   note: sewers are derivable TODAY — under the drawn street
+   web, along the relief substrate's fall lines, draining to
+   the placed water; crypts under the institutions that bury;
+   cellars under the commerce that stores; every
+   surface↔underground access (church stair, well-house,
+   sewer grate, cellar door) is a §287.5 two-endpoint portal
+   with a surface cause.
+3. ⭐⭐ **THE UNDERCITY IS AN EPOCH OF THE UNDERGROUND NETWORK
+   (owner):** it REQUIRES at least one/some mundane seeds and
+   GROWS from them into its own thing — a miniature
+   civilization reflecting the surface (§168's
+   undercity-as-city and the UNIVERSAL FRONT unchanged).
+   Chair consequences drawn and recorded: the epoch machinery
+   applies vertically — the mundane network is epoch zero;
+   the inertia law holds (new digging never re-rolls old
+   crypts); and the HIGH-WATER LAW runs underground — dug is
+   forever, so a receding syndicate leaves abandoned
+   galleries, sealed doors and flooded sections: the fossil
+   vocabulary below ground.
+4. **PROPORTIONAL FILL (owner):** how much of the seeded
+   spaces the undercity colonizes is PROPORTIONAL to the
+   economy, to the criminal share of that economy, and to
+   crime-syndicate power standings — typed dossier facts,
+   a DERIVATION never a dial, THE PROMISE intact. Two-level
+   reading preserved from the owner's wording: the SHEET
+   exists with any qualifying seed (the honest mundane
+   network, however modest); the UNDERCITY additionally
+   requires the criminal-economic drivers that grew it.
+5. **ROUTING (L2):** this row is the design of record; the
+   GENERATION-SPEC §13/§168 fold rides the next spec touch as
+   one edit; implementation remains post-parity-slice content
+   under §290.4 unless the owner promotes it.
