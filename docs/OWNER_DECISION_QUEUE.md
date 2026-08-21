@@ -13629,3 +13629,42 @@ recommended. Implementation, per item:
    NOTICES as each greens, plus the soak. The owner's three
    parallel directives (map, simulation, website) are all
    moving.
+
+## §318 · THE ARROW/RIBBON ANSWERED — THE V5 BANK PURGED A
+## SECOND TIME AND ITS RECOVERY DISPATCHED; THE LANDING-PAGE
+## HANDOFF DISCOVERED AND QUEUED AT THE CEILING (2026-08-21;
+## chair: FABLE; owner in-chat: "what about the arrow ribbon")
+
+1. **STATUS OF THE ARROW (the Ribbon/V5 identity program)**:
+   its BUILD waves wait by the owner's own §119 order —
+   post-full-soak-and-tune, at the tail. The §121 counsel
+   pass banked its three deliverables (the consolidated V5
+   spec; the asset manifest with the KEEP-5/CUT-5/HOLD-2 cull
+   and THREE owner-owed regeneration prompts ready-to-run at
+   the owner's leisure; the wave plan); six visual OQs bank
+   for the post-tune sitting. Nothing about the slot changes
+   unless the owner pulls it forward — offered, not assumed.
+2. ⚠⚠ **THE BANK IS PURGED A SECOND TIME** — laneV5C-* is
+   gone from the scratchpad again, the exact §121.2 loss mode
+   recurring, and the §312.3 preservation sweep predated
+   awareness of these files. **V5-R DISPATCHED** (Opus):
+   transcript-replay recovery, the method of record, from the
+   a244e7a3 session transcript; the chair preserves the
+   recovered files into the object store on collection
+   (extending refs/preserve). The §121.2 corollary is now
+   TWICE-proven law: banked deliverables fold to a durable
+   surface the day they bank.
+3. ⭐ **THE LANDING-PAGE HANDOFF IS DISCOVERED AND IS REAL
+   QUEUED WEBSITE WORK**: the owner's design project holds
+   "HANDOFF — Landing Page for Claude Code.md" (159 lines, an
+   approved-prototype implementation spec: rewrite
+   HomeLanding.jsx as the scrollable advertisement+onboarding
+   "salt road" page, tokens-only, verbs/type/color law,
+   every-control-works, A11y, reduced-motion) beside the
+   approved prototype and reference assets. **QUEUED FOR THE
+   NEXT FREED AGENT SLOT** — four lanes are at the owner's
+   ceiling now (T2B, WF1C, NOTICES, V5-R); the landing
+   implementation dispatches the moment one collects, with
+   the HANDOFF as its binding spec and the BRAND-landing
+   conventions loaded. It lands dark-until-deploy like every
+   product surface; the deploy stays the owner's gate.
