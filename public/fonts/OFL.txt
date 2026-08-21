@@ -1,0 +1,71 @@
+SIL OPEN FONT LICENSE NOTICE - the Lora and Nunito families
+===========================================================
+
+*** FULL LICENCE TEXT NOT YET INCLUDED - THIS FILE IS INCOMPLETE ***
+
+Read this first. This file carries the copyright notices and Reserved Font Name
+declarations for the two font families served from this origin, and it names the
+licence they are offered under. It does NOT yet carry the body of that licence.
+The SIL Open Font License asks that its text accompany the fonts, so until the
+body below is filled in, that obligation is only partly met. The gap is recorded
+here rather than papered over. See "How to complete this file" at the foot.
+
+The fonts themselves are unmodified. Neither family is renamed, and no Reserved
+Font Name is used on a derivative.
+
+
+THE FONTS THIS COVERS
+---------------------
+
+  public/fonts/Lora-Regular.ttf        public/fonts/Lora-Regular.woff2
+  public/fonts/Lora-Italic.ttf         public/fonts/Lora-Italic.woff2
+  public/fonts/Lora-Bold.ttf           public/fonts/Lora-Bold.woff2
+  public/fonts/Lora-BoldItalic.ttf     public/fonts/Lora-BoldItalic.woff2
+
+  public/fonts/Nunito-Regular.ttf      public/fonts/Nunito-Regular.woff2
+  public/fonts/Nunito-Italic.ttf       public/fonts/Nunito-Italic.woff2
+  public/fonts/Nunito-Bold.ttf         public/fonts/Nunito-Bold.woff2
+  public/fonts/Nunito-ExtraBold.ttf    public/fonts/Nunito-ExtraBold.woff2
+
+
+COPYRIGHT NOTICES
+-----------------
+
+Each line below was read out of the corresponding TTF name table (name ID 0) in
+this repository. All four faces of each family carry an identical notice.
+
+Lora:
+Copyright 2011 The Lora Project Authors (https://github.com/cyrealtype/Lora-Cyrillic), with Reserved Font Name "Lora".
+
+Nunito:
+Copyright 2014 The Nunito Project Authors (https://github.com/googlefonts/nunito)
+
+
+THE LICENCE
+-----------
+
+Both families are licensed under the SIL Open Font License, Version 1.1.
+
+The Nunito faces declare the licence URL in their own metadata (name ID 14):
+https://scripts.sil.org/OFL
+
+The Lora faces carry the copyright with the Reserved Font Name wording but
+declare no licence URL field; the canonical text is the same document.
+
+
+HOW TO COMPLETE THIS FILE
+-------------------------
+
+Replace this section with the verbatim body of the SIL Open Font License,
+Version 1.1, retrieved from the canonical source named above, and delete the
+incomplete marker at the top of this file.
+
+The body was not written here by the lane that created the file: no copy of the
+OFL text exists anywhere in this repository, in its installed packages, or in
+the font binaries (every face has an empty name ID 13, the License Description
+field), and that lane had no network access. Reproducing a licence from memory
+risks shipping terms that differ from the real ones, which is worse than
+shipping none, so the gap was left visible and reported instead.
+
+When the body lands, update the font rows in THIRD-PARTY-NOTICES.md and in
+public/third-party-notices.html to match.

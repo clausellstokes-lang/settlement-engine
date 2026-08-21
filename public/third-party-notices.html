@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>SettlementForge Third-Party Notices</title>
+  <!--
+    SettlementForge third-party notices (ODQ 295.5c).
+
+    Self-contained by design, exactly like /status.html: no external scripts, no
+    fonts, no stylesheets, no images, no network calls. It is served straight from
+    /third-party-notices.html, outside the app bundle, so it stays readable
+    independently of the application.
+
+    THE AUTHORITATIVE COPY IS THIRD-PARTY-NOTICES.md AT THE REPOSITORY ROOT.
+    This page renders the same content. Edit both in the same change:
+    tests/build/thirdPartyNoticesPage.test.js holds them in agreement.
+
+    NOT LINKED. Nothing in the application navigation or footer points here yet.
+    Lighting the link is a separate, owner-visible act; the page ships first so
+    the notices exist at a stable URL.
+
+    The only href on the page is the support mailto. Copyright strings that
+    contain a URL are rendered as plain text on purpose, so a compliance page
+    never becomes a set of outbound jumps.
+  -->
+  <style>
+    :root {
+      --ink: #23201a; --body: #4a463d; --muted-text: #7a746a;
+      --paper: #f6f2e9; --card: #fffdf8; --border: #ddd6c6; --rule: #b8945f;
+      --flag: #9a6b12; --flag-bg: #f6eeda;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ink: #efe9dc; --body: #cec7b8; --muted-text: #9a9385;
+        --paper: #1a1814; --card: #221f19; --border: #3a352c; --rule: #b8945f;
+        --flag: #d6ab5a; --flag-bg: #332c18;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--paper); color: var(--body);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6; padding: 0 20px;
+    }
+    .wrap { max-width: 880px; margin: 0 auto; padding: 48px 0 64px; }
+    header h1 {
+      font-family: Georgia, "Times New Roman", serif; color: var(--ink);
+      font-size: 28px; font-weight: 600; margin: 0 0 4px;
+    }
+    header p.lede { margin: 0 0 8px; color: var(--muted-text); font-size: 15px; }
+    .verified {
+      border-top: 2px solid var(--rule); border-bottom: 1px solid var(--border);
+      padding: 16px 0; margin: 24px 0 32px; font-size: 15px;
+    }
+    h2 {
+      font-family: Georgia, "Times New Roman", serif; color: var(--ink);
+      font-size: 15px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      margin: 40px 0 12px;
+    }
+    h3 {
+      font-family: Georgia, "Times New Roman", serif; color: var(--ink);
+      font-size: 17px; font-weight: 600; margin: 28px 0 8px;
+    }
+    p { margin: 0 0 14px; }
+    ul { margin: 0 0 14px; padding-left: 22px; }
+    li { margin-bottom: 6px; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em; color: var(--ink);
+    }
+    pre {
+      background: var(--card); border: 1px solid var(--border);
+      padding: 14px 16px; overflow-x: auto; font-size: 13px; line-height: 1.5;
+      white-space: pre-wrap; word-break: break-word; color: var(--body);
+    }
+    .tablewrap { overflow-x: auto; margin: 0 0 18px; }
+    table { border-collapse: collapse; width: 100%; font-size: 14px; }
+    caption { text-align: left; color: var(--muted-text); font-size: 13px; padding-bottom: 8px; }
+    th, td {
+      border: 1px solid var(--border); padding: 8px 10px;
+      text-align: left; vertical-align: top;
+    }
+    th { background: var(--card); color: var(--ink); font-weight: 700; }
+    .flag {
+      background: var(--flag-bg); border-left: 3px solid var(--flag);
+      padding: 14px 16px; margin: 0 0 18px;
+    }
+    .flag strong { color: var(--ink); }
+    footer {
+      margin-top: 44px; padding-top: 16px; border-top: 1px solid var(--rule);
+      color: var(--muted-text); font-size: 14px;
+    }
+    footer a { color: var(--rule); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Third-party notices</h1>
+      <p class="lede">SettlementForge distributes third-party software. This page is the inventory of what we ship, who holds the copyright in it, and under which terms it reaches you.</p>
+    </header>
+
+    <section class="verified">
+      <p><strong>Verified 21 August 2026</strong>, against the build branch <code>claude/composite-r4</code> at <code>2cdb87fa</code>. Every licence identifier below was read out of the artefact in our own repository &mdash; a file header, a bundled licence file, a package manifest, or a font&rsquo;s embedded name table. None was taken on trust from an upstream project page, and none was invented.</p>
+    </section>
+
+    <h2>What this covers</h2>
+    <p>Three populations of third-party code and data reach a browser from our origins:</p>
+    <ul>
+      <li>the vendored Fantasy Map Generator fork, served from the map origin, together with the libraries vendored inside it (section 1);</li>
+      <li>the web fonts served from the application origin (section 2);</li>
+      <li>the application&rsquo;s production dependency tree, whose modules the build may include in the shipped bundle (section 3).</li>
+    </ul>
+    <p>Development-only tooling is not distributed and is out of scope. The edge functions execute server-side and convey nothing to a browser.</p>
+    <p>Section 1.4 reports TinyMCE exactly as it ships today. The disposition of that component is an open matter for the project owner and its counsel; this page reports the present state and settles nothing about it.</p>
+
+    <h2>1. The vendored map</h2>
+    <p>The map surface is a fork of Azgaar&rsquo;s Fantasy Map Generator, embedded in an iframe and deployed as static files to the map origin.</p>
+
+    <h3>1.1 Fantasy Map Generator</h3>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Component</th><th>Version</th><th>Licence</th><th>Copyright holder</th></tr></thead>
+        <tbody>
+          <tr><td>Fantasy Map Generator (forked)</td><td>fork revision <code>sfdrop16</code></td><td>MIT, with an added derivative-works clause</td><td>Max Haniyeu (Azgaar)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The notice we serve is <code>/map/LICENSE-FMG.txt</code>, reproduced here in full:</p>
+<pre>MIT License
+
+Copyright 2017-2024 Max Haniyeu (Azgaar), azgaar.fmg@yandex.com
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+You can produce, without restrictions, any derivative works from the original
+software and even reap commercial benefits from the sale of the secondary product.
+The derivates include created maps, map images, screenshots, videos, and other materials.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</pre>
+    <p>The two paragraphs beginning &ldquo;You can produce, without restrictions&rdquo; are not part of the standard MIT text. They are the upstream project&rsquo;s own widening of the grant, quoted so a reader can see the licence we actually received rather than a template.</p>
+    <div class="flag">
+      <p><strong>A third-party-within-third-party note.</strong> The upstream project&rsquo;s road builder computes an Urquhart graph, and that utility carries an upstream provenance comment showing it was copied in from an Observable notebook rather than authored by the project. A permissive top-level grant does not reach code the project itself copied in from elsewhere, so the provenance of that utility is a separate open question. In our tree the routine survives inside the fork&rsquo;s built bundle as <code>calculateUrquhartEdges</code>; minification has stripped the comment, so the provenance is recorded here rather than in the shipped bytes. We have adopted none of that code into the application: our own generators are written from scratch.</p>
+    </div>
+
+    <h3>1.2 Libraries vendored inside the fork</h3>
+    <p>Twenty files plus the TinyMCE subtree. Every one is pinned by name, size and SHA-256 in the fork&rsquo;s vendor manifest. The version column repeats what the artefact itself declares, and reads &ldquo;not declared&rdquo; where the file carries no version string. The notice column records the licence evidence present in <em>our</em> copy of the file, which is the copy a browser receives.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>File</th><th>Version</th><th>Licence</th><th>Notice carried in our copy</th></tr></thead>
+        <tbody>
+          <tr><td><code>alea.min.js</code></td><td>not declared</td><td>MIT, and BSD for the derivative</td><td>&copy;2010 Johannes Baago&euml;, MIT license; Derivative &copy;2017-2020 W. Mac McMeans, BSD license.</td></tr>
+          <tr><td><code>d3.min.js</code></td><td>5.8.0</td><td>ISC upstream</td><td>Header names the project and &ldquo;Copyright 2019 Mike Bostock&rdquo;; no licence word in our copy</td></tr>
+          <tr><td><code>delaunator.min.js</code></td><td>not declared</td><td>ISC upstream</td><td>None &mdash; see section 1.5</td></tr>
+          <tr><td><code>dropbox-sdk.min.js</code></td><td>not declared</td><td>MIT upstream</td><td>None &mdash; see section 1.5</td></tr>
+          <tr><td><code>flatqueue.js</code></td><td>not declared</td><td>ISC upstream</td><td>None &mdash; see section 1.5</td></tr>
+          <tr><td><code>indexedDB.js</code></td><td>not declared</td><td>not determinable from our copy</td><td>None &mdash; see section 1.5</td></tr>
+          <tr><td><code>jquery-3.1.1.min.js</code></td><td>3.1.1</td><td>MIT</td><td>jQuery v3.1.1 | (c) jQuery Foundation | jquery.org/license</td></tr>
+          <tr><td><code>jquery-ui.css</code></td><td>1.12.1</td><td>MIT</td><td>Copyright jQuery Foundation and other contributors; Licensed MIT</td></tr>
+          <tr><td><code>jquery-ui.min.js</code></td><td>1.12.1</td><td>MIT upstream</td><td>None &mdash; see section 1.5</td></tr>
+          <tr><td><code>jquery.ui.touch-punch.min.js</code></td><td>0.2.3</td><td><strong>MIT or GPL-2.0, at our election &mdash; see section 1.3</strong></td><td>Copyright 2011-2014, Dave Furfero / Dual licensed under the MIT or GPL Version 2 licenses.</td></tr>
+          <tr><td><code>jszip.min.js</code></td><td>3.6.0</td><td><strong>MIT or GPL-3.0, at our election &mdash; see section 1.3</strong></td><td>(c) 2009-2016 Stuart Knightley / Dual licenced under the MIT license or GPLv3.</td></tr>
+          <tr><td><code>loopsubdivison.min.js</code></td><td>not declared</td><td>MIT</td><td>@license MIT - Copyright (c) 2022 Stephens Nunnally</td></tr>
+          <tr><td><code>mapControls.min.js</code></td><td>not declared</td><td>MIT upstream (a three.js example)</td><td>None &mdash; see section 1.5</td></tr>
+          <tr><td><code>objexporter.min.js</code></td><td>not declared</td><td>MIT upstream (a three.js example)</td><td>None &mdash; see section 1.5</td></tr>
+          <tr><td><code>openwidget.min.js</code></td><td>not declared</td><td>not determinable from our copy</td><td>None &mdash; see section 1.6</td></tr>
+          <tr><td><code>orbitControls.min.js</code></td><td>not declared</td><td>MIT upstream (a three.js example)</td><td>None &mdash; see section 1.5</td></tr>
+          <tr><td><code>polylabel.min.js</code></td><td>not declared</td><td>ISC upstream</td><td>None &mdash; see section 1.5</td></tr>
+          <tr><td><code>rgbquant.min.js</code></td><td>not declared</td><td>MIT</td><td>&copy; 2015, Leon Sorokin, MIT</td></tr>
+          <tr><td><code>simplify.js</code></td><td>not declared</td><td>BSD-2-Clause upstream</td><td>(c) 2017, Vladimir Agafonkin; no licence word in our copy</td></tr>
+          <tr><td><code>three.min.js</code></td><td>r140</td><td>MIT</td><td>@license Copyright 2010-2022 Three.js Authors SPDX-License-Identifier: MIT</td></tr>
+          <tr><td><code>tinymce/**</code> (123 files)</td><td>7.1.0</td><td><strong>GPL-2.0-or-later &mdash; see section 1.4</strong></td><td>The bundled <code>license.md</code>, reproduced in section 1.4</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>1.3 The two dual-licence elections</h3>
+    <p>Two vendored libraries are offered under a choice of terms. <strong>We elect the MIT licence for both.</strong> The elections are recorded here so a recipient knows which grant we distribute under, and so the question is settled on the record rather than left to inference.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Component</th><th>Offered under</th><th>Our election</th></tr></thead>
+        <tbody>
+          <tr><td>JSZip 3.6.0</td><td>the MIT licence <em>or</em> GPL-3.0</td><td><strong>MIT</strong></td></tr>
+          <tr><td>jQuery UI Touch Punch 0.2.3</td><td>the MIT licence <em>or</em> GPL-2.0</td><td><strong>MIT</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Under those elections the terms are the MIT terms reproduced in section 4.1, and the copyright notices are those in the table above: &ldquo;(c) 2009-2016 Stuart Knightley&rdquo; for JSZip, and &ldquo;Copyright 2011-2014, Dave Furfero&rdquo; for Touch Punch.</p>
+
+    <h3>1.4 TinyMCE, as it ships today</h3>
+    <p>This section states what is served. It settles nothing.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Component</th><th>Version</th><th>Licence</th><th>Copyright holder</th></tr></thead>
+        <tbody>
+          <tr><td>TinyMCE (123 files)</td><td>7.1.0</td><td>GNU General Public Licence version 2 or later</td><td>Ephox Corporation DBA Tiny Technologies, Inc.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The licence file we serve at <code>/map/libs/tinymce/license.md</code> reads, in full:</p>
+<pre># Software License Agreement
+
+**TinyMCE** &ndash; [&lt;https://github.com/tinymce/tinymce&gt;](https://github.com/tinymce/tinymce)
+Copyright (c) 2024, Ephox Corporation DBA Tiny Technologies, Inc.
+
+Licensed under the terms of [GNU General Public License Version 2 or later](http://www.gnu.org/licenses/gpl.html).</pre>
+    <p>The facts, each read from our own tree:</p>
+    <ul>
+      <li>The 123 files are served as static assets from the map origin, and we have never modified them: the subtree entered this repository in a single commit on 24 April 2026 and no commit has touched it since. Every shippable file in it is pinned by SHA-256 in the fork&rsquo;s vendor manifest, and the build gate compares those pins against the bytes on disk.</li>
+      <li>The map fork&rsquo;s notes editor loads TinyMCE from that local copy, not from any remote host, and its initialisation call sets the editor&rsquo;s own GPL-mode licence key.</li>
+      <li>What we distribute is the minified build plus the licence text above. We ship no corresponding source and no written offer for it.</li>
+    </ul>
+    <p>Whether that is sufficient, and what should change, is an open question for the project owner and its counsel. This page does not answer it.</p>
+
+    <h3>1.5 Libraries we distribute without a notice</h3>
+    <p>Nine of the vendored files carry no copyright or licence text at all in our copy: <code>delaunator.min.js</code>, <code>dropbox-sdk.min.js</code>, <code>flatqueue.js</code>, <code>indexedDB.js</code>, <code>jquery-ui.min.js</code>, <code>mapControls.min.js</code>, <code>objexporter.min.js</code>, <code>orbitControls.min.js</code> and <code>polylabel.min.js</code>. Upstream each is permissive, and the licence column in section 1.2 records that upstream position; but the artefact we serve carries nothing, so a recipient of our bytes alone receives no notice. Recording that gap here is the interim measure. Restoring the per-file headers, or shipping the upstream licence files alongside them, is tracked work.</p>
+
+    <h3>1.6 openwidget</h3>
+    <p>An 829-byte upstream chat-widget loader arrived with the fork. It carries no licence text. It also carries a hard-coded organisation identifier that appears nowhere else in this repository; the fork patch that disabled it records that the identifier is the upstream author&rsquo;s, so any chat opened through it would route to him rather than to us. On this branch the only reference to the file sits below an unconditional early return added by that patch, and the map origin&rsquo;s content-security policy names no third-party script host, so the widget does not load. The file is nevertheless still served, which is why it is listed. Removing it is tracked work.</p>
+
+    <h2>2. Fonts</h2>
+    <p>Two font families are served from the application origin and are also embedded in exported PDFs. Both are SIL Open Font Licence families; the copyright strings below were read out of each file&rsquo;s own embedded name table.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Family</th><th>Faces shipped</th><th>Licence</th><th>Copyright, verbatim from the font</th></tr></thead>
+        <tbody>
+          <tr><td>Lora</td><td>Regular, Italic, Bold, Bold Italic (TTF and WOFF2)</td><td>SIL Open Font License 1.1</td><td><code>Copyright 2011 The Lora Project Authors (https://github.com/cyrealtype/Lora-Cyrillic), with Reserved Font Name "Lora".</code></td></tr>
+          <tr><td>Nunito</td><td>Regular, Italic, Bold, Extra Bold (TTF and WOFF2)</td><td>SIL Open Font License 1.1</td><td><code>Copyright 2014 The Nunito Project Authors (https://github.com/googlefonts/nunito)</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The Nunito faces name their licence URL in the font itself; the Lora faces carry the copyright with the Reserved Font Name wording but no licence URL field. Both families are shipped unmodified: neither is renamed, and no Reserved Font Name is used on a derivative.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>File</th><th>What it is</th><th>State</th></tr></thead>
+        <tbody>
+          <tr><td><code>public/fonts/OFL.txt</code></td><td>the notice file served alongside the fonts: both families&rsquo; copyright and Reserved Font Name lines, read out of the TTF name tables, plus the licence identity and the canonical URL</td><td><strong>incomplete &mdash; the licence body is not yet in it</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="flag">
+      <p><strong>The Open Font Licence asks that its text accompany the fonts, and that half is still open.</strong> The notice file carries the copyright notices and names the licence, so the fonts no longer travel with nothing; it does not yet carry the body of the licence, and it says so on its own first line. The body was not written from memory: no copy of the OFL text exists in this repository, in its installed packages, or in the font binaries themselves &mdash; every face has an empty License Description field &mdash; and reproducing a licence inexactly is worse than not reproducing it. Pasting the verbatim body in from the canonical source completes both the file and this row.</p>
+    </div>
+
+    <h2>3. The application&rsquo;s production dependencies</h2>
+    <p>The table below is the complete production dependency tree of the application package: every entry in the lock file not marked development-only, at the exact version the lock file pins, with the licence identifier and copyright line read from the installed package itself. A given build includes the subset of these modules that the bundler reaches, so this list is a superset of any one bundle.</p>
+    <p>Direct dependencies are <code>@react-pdf/renderer</code>, <code>@supabase/supabase-js</code>, <code>dompurify</code>, <code>immer</code>, <code>jspdf</code>, <code>lucide-react</code>, <code>react</code>, <code>react-dom</code>, <code>seedrandom</code>, <code>three</code> and <code>zustand</code>. Four rows are marked &ldquo;nested under&rdquo; a parent: those are second copies of a package installed beneath a dependency that needs a different version, and each is listed at its own version.</p>
+
+    <h3>3.1 Licences in play</h3>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Licence</th><th>Packages</th></tr></thead>
+        <tbody>
+          <tr><td>MIT</td><td>95</td></tr>
+          <tr><td>ISC</td><td>5</td></tr>
+          <tr><td>MIT and Zlib (combined)</td><td>2</td></tr>
+          <tr><td>Apache-2.0</td><td>1</td></tr>
+          <tr><td>MPL-2.0 or Apache-2.0 (see section 3.3)</td><td>1</td></tr>
+          <tr><td>MIT or an alternative offered by the author (see section 3.3)</td><td>1</td></tr>
+          <tr><td>0BSD</td><td>1</td></tr>
+          <tr><td>No identifier in the package manifest (see the note below)</td><td>1</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><code>png-js</code> states no licence field in its package manifest, but ships a licence file carrying the MIT text and &ldquo;Copyright (c) 2017 Devon Govett&rdquo;. We treat it as MIT on the strength of the file it distributes.</p>
+
+    <h3>3.2 The inventory</h3>
+    <div class="tablewrap">
+      <table>
+        <caption>The production dependency tree, 107 packages.</caption>
+        <thead><tr><th>Package</th><th>Version</th><th>Licence</th><th>Copyright</th></tr></thead>
+        <tbody>
+          <tr><td><code>@babel/runtime</code></td><td>7.29.2</td><td>MIT</td><td>Copyright (c) 2014-present Sebastian McKenzie and other contributors</td></tr>
+          <tr><td><code>@noble/ciphers</code></td><td>1.3.0</td><td>MIT</td><td>Copyright (c) 2022 Paul Miller (https://paulmillr.com)</td></tr>
+          <tr><td><code>@noble/hashes</code></td><td>1.8.0</td><td>MIT</td><td>Copyright (c) 2022 Paul Miller (https://paulmillr.com)</td></tr>
+          <tr><td><code>@react-pdf/fns</code></td><td>3.1.3</td><td>MIT</td><td>not stated in the distributed package</td></tr>
+          <tr><td><code>@react-pdf/font</code></td><td>4.0.8</td><td>MIT</td><td>not stated in the distributed package</td></tr>
+          <tr><td><code>@react-pdf/image</code></td><td>3.1.0</td><td>MIT</td><td>not stated in the distributed package</td></tr>
+          <tr><td><code>@react-pdf/layout</code></td><td>4.6.1</td><td>MIT</td><td>not stated in the distributed package</td></tr>
+          <tr><td><code>@react-pdf/pdfkit</code></td><td>5.1.1</td><td>MIT</td><td>Copyright (c) 2014 Devon Govett</td></tr>
+          <tr><td><code>@react-pdf/primitives</code></td><td>4.3.0</td><td>MIT</td><td>not stated in the distributed package</td></tr>
+          <tr><td><code>@react-pdf/reconciler</code></td><td>2.0.0</td><td>MIT</td><td>not stated in the distributed package</td></tr>
+          <tr><td><code>scheduler</code> (nested under <code>@react-pdf/reconciler</code>)</td><td>0.25.0-rc-603e6108-20241029</td><td>MIT</td><td>Copyright (c) Meta Platforms, Inc. and affiliates.</td></tr>
+          <tr><td><code>@react-pdf/render</code></td><td>4.5.1</td><td>MIT</td><td>not stated in the distributed package</td></tr>
+          <tr><td><code>@react-pdf/renderer</code></td><td>4.5.1</td><td>MIT</td><td>not stated in the distributed package</td></tr>
+          <tr><td><code>@react-pdf/stylesheet</code></td><td>6.2.1</td><td>MIT</td><td>not stated in the distributed package</td></tr>
+          <tr><td><code>@react-pdf/svg</code></td><td>1.1.0</td><td>MIT</td><td>not stated in the distributed package</td></tr>
+          <tr><td><code>@react-pdf/textkit</code></td><td>6.3.0</td><td>MIT</td><td>not stated in the distributed package</td></tr>
+          <tr><td><code>@react-pdf/types</code></td><td>2.11.1</td><td>MIT</td><td>not stated in the distributed package</td></tr>
+          <tr><td><code>@supabase/auth-js</code></td><td>2.103.0</td><td>MIT</td><td>Copyright (c) 2020 Supabase</td></tr>
+          <tr><td><code>@supabase/functions-js</code></td><td>2.103.0</td><td>MIT</td><td>not stated in the distributed package</td></tr>
+          <tr><td><code>@supabase/phoenix</code></td><td>0.4.0</td><td>MIT</td><td>Copyright (c) 2014 Chris McCord</td></tr>
+          <tr><td><code>@supabase/postgrest-js</code></td><td>2.103.0</td><td>MIT</td><td>not stated in the distributed package</td></tr>
+          <tr><td><code>@supabase/realtime-js</code></td><td>2.103.0</td><td>MIT</td><td>not stated in the distributed package</td></tr>
+          <tr><td><code>@supabase/storage-js</code></td><td>2.103.0</td><td>MIT</td><td>not stated in the distributed package</td></tr>
+          <tr><td><code>@supabase/supabase-js</code></td><td>2.103.0</td><td>MIT</td><td>not stated in the distributed package</td></tr>
+          <tr><td><code>@swc/helpers</code></td><td>0.5.21</td><td>Apache-2.0</td><td>not stated in the distributed package (authored by the swc project)</td></tr>
+          <tr><td><code>@types/node</code></td><td>25.6.0</td><td>MIT</td><td>Copyright (c) Microsoft Corporation.</td></tr>
+          <tr><td><code>@types/pako</code></td><td>2.0.4</td><td>MIT</td><td>Copyright (c) Microsoft Corporation.</td></tr>
+          <tr><td><code>@types/raf</code></td><td>3.4.3</td><td>MIT</td><td>Copyright (c) Microsoft Corporation.</td></tr>
+          <tr><td><code>@types/trusted-types</code></td><td>2.0.7</td><td>MIT</td><td>Copyright (c) Microsoft Corporation.</td></tr>
+          <tr><td><code>@types/ws</code></td><td>8.18.1</td><td>MIT</td><td>Copyright (c) Microsoft Corporation.</td></tr>
+          <tr><td><code>abs-svg-path</code></td><td>0.1.1</td><td>MIT</td><td>not stated in the distributed package</td></tr>
+          <tr><td><code>base64-arraybuffer</code></td><td>1.0.2</td><td>MIT</td><td>Copyright (c) 2012 Niklas von Hertzen</td></tr>
+          <tr><td><code>base64-js</code></td><td>1.5.1</td><td>MIT</td><td>Copyright (c) 2014 Jameson Little</td></tr>
+          <tr><td><code>bidi-js</code></td><td>1.0.3</td><td>MIT</td><td>Copyright (c) 2021 Jason Johnston</td></tr>
+          <tr><td><code>brotli</code></td><td>1.3.3</td><td>MIT</td><td>not stated in the distributed package</td></tr>
+          <tr><td><code>browserify-zlib</code></td><td>0.2.0</td><td>MIT</td><td>Copyright (c) 2014-2015 Devon Govett &lt;devongovett@gmail.com&gt;</td></tr>
+          <tr><td><code>pako</code> (nested under <code>browserify-zlib</code>)</td><td>1.0.11</td><td>(MIT AND Zlib)</td><td>Copyright (C) 2014-2017 by Vitaly Puzrin and Andrei Tuputcyn</td></tr>
+          <tr><td><code>canvg</code></td><td>3.0.11</td><td>MIT</td><td>Copyright (c) 2010 - present Gabe Lerner (gabelerner@gmail.com) - https://github.com/canvg/canvg</td></tr>
+          <tr><td><code>clone</code></td><td>2.1.2</td><td>MIT</td><td>Copyright © 2011-2015 Paul Vorbach &lt;paul@vorba.ch&gt;</td></tr>
+          <tr><td><code>color-name</code></td><td>2.1.0</td><td>MIT</td><td>Copyright (c) 2015 Dmitry Ivanov</td></tr>
+          <tr><td><code>color-string</code></td><td>2.1.4</td><td>MIT</td><td>Copyright (c) 2011 Heather Arthur &lt;fayearthur@gmail.com&gt;</td></tr>
+          <tr><td><code>core-js</code></td><td>3.49.0</td><td>MIT</td><td>Copyright (c) 2013–2025 Denis Pushkarev (zloirock.ru)</td></tr>
+          <tr><td><code>css-line-break</code></td><td>2.1.0</td><td>MIT</td><td>Copyright (c) 2017 Niklas von Hertzen</td></tr>
+          <tr><td><code>dfa</code></td><td>1.2.0</td><td>MIT</td><td>not stated in the distributed package</td></tr>
+          <tr><td><code>dompurify</code></td><td>3.4.12</td><td>(MPL-2.0 OR Apache-2.0)</td><td>not stated in the distributed package</td></tr>
+          <tr><td><code>emoji-regex-xs</code></td><td>1.0.0</td><td>MIT</td><td>Copyright (c) 2024 Steven Levithan</td></tr>
+          <tr><td><code>events</code></td><td>3.3.0</td><td>MIT</td><td>Copyright Joyent, Inc. and other Node contributors.</td></tr>
+          <tr><td><code>fast-deep-equal</code></td><td>3.1.3</td><td>MIT</td><td>Copyright (c) 2017 Evgeny Poberezkin</td></tr>
+          <tr><td><code>fast-png</code></td><td>6.4.0</td><td>MIT</td><td>Copyright (c) 2015 Michaël Zasso</td></tr>
+          <tr><td><code>fflate</code></td><td>0.8.2</td><td>MIT</td><td>Copyright (c) 2023 Arjun Barrett</td></tr>
+          <tr><td><code>fontkit</code></td><td>2.0.4</td><td>MIT</td><td>not stated in a licence file; package author Devon Govett</td></tr>
+          <tr><td><code>hsl-to-hex</code></td><td>1.0.0</td><td>MIT</td><td>not stated in the distributed package</td></tr>
+          <tr><td><code>hsl-to-rgb-for-reals</code></td><td>1.1.1</td><td>ISC</td><td>not stated in the distributed package</td></tr>
+          <tr><td><code>html2canvas</code></td><td>1.4.1</td><td>MIT</td><td>Copyright (c) 2012 Niklas von Hertzen</td></tr>
+          <tr><td><code>hyphen</code></td><td>1.14.1</td><td>ISC</td><td>Copyright (c) 2026, Yevhen Tiurin &lt;yevhentiurin@gmail.com&gt;</td></tr>
+          <tr><td><code>iceberg-js</code></td><td>0.8.1</td><td>MIT</td><td>Copyright (c) 2025 Supabase</td></tr>
+          <tr><td><code>immer</code></td><td>11.1.4</td><td>MIT</td><td>Copyright (c) 2017 Michel Weststrate</td></tr>
+          <tr><td><code>inherits</code></td><td>2.0.4</td><td>ISC</td><td>Copyright (c) Isaac Z. Schlueter</td></tr>
+          <tr><td><code>iobuffer</code></td><td>5.4.0</td><td>MIT</td><td>Copyright (c) 2015 Michaël Zasso</td></tr>
+          <tr><td><code>is-url</code></td><td>1.2.4</td><td>MIT</td><td>not stated in the distributed package</td></tr>
+          <tr><td><code>jay-peg</code></td><td>1.1.1</td><td>MIT</td><td>Copyright (c) 2024 Diego Muracciole &lt;diegomuracciole@gmail.com&gt;</td></tr>
+          <tr><td><code>js-md5</code></td><td>0.8.3</td><td>MIT</td><td>Copyright 2014-2023 Chen, Yi-Cyuan</td></tr>
+          <tr><td><code>js-tokens</code></td><td>4.0.0</td><td>MIT</td><td>Copyright (c) 2014, 2015, 2016, 2017, 2018 Simon Lydell</td></tr>
+          <tr><td><code>jspdf</code></td><td>4.2.1</td><td>MIT</td><td>Copyright (c) 2010-2025 James Hall, https://github.com/MrRio/jsPDF</td></tr>
+          <tr><td><code>linebreak</code></td><td>1.1.0</td><td>MIT</td><td>Copyright (c) 2014-present Devon Govett</td></tr>
+          <tr><td><code>base64-js</code> (nested under <code>linebreak</code>)</td><td>0.0.8</td><td>MIT</td><td>Copyright (c) 2014</td></tr>
+          <tr><td><code>loose-envify</code></td><td>1.4.0</td><td>MIT</td><td>Copyright (c) 2015 Andres Suarez &lt;zertosh@gmail.com&gt;</td></tr>
+          <tr><td><code>lucide-react</code></td><td>0.383.0</td><td>ISC</td><td>Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT). All other copyright (c) for Lucide are held by Lucide Contributors 2022.</td></tr>
+          <tr><td><code>media-engine</code></td><td>1.0.3</td><td>MIT</td><td>not stated in the distributed package</td></tr>
+          <tr><td><code>normalize-svg-path</code></td><td>1.1.0</td><td>MIT</td><td>Copyright © 2008-2013 Dmitry Baranovskiy (http://raphaeljs.com)</td></tr>
+          <tr><td><code>object-assign</code></td><td>4.1.1</td><td>MIT</td><td>Copyright (c) Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</td></tr>
+          <tr><td><code>pako</code></td><td>2.1.0</td><td>(MIT AND Zlib)</td><td>Copyright (C) 2014-2017 by Vitaly Puzrin and Andrei Tuputcyn</td></tr>
+          <tr><td><code>parse-svg-path</code></td><td>0.1.2</td><td>MIT</td><td>Copyright (c) 2013 Jake Rosoman &lt;jkroso@gmail.com&gt;</td></tr>
+          <tr><td><code>performance-now</code></td><td>2.1.0</td><td>MIT</td><td>Copyright (c) 2017 Braveg1rl</td></tr>
+          <tr><td><code>png-js</code></td><td>2.0.0</td><td>UNSTATED</td><td>Copyright (c) 2017 Devon Govett</td></tr>
+          <tr><td><code>postcss-value-parser</code></td><td>4.2.0</td><td>MIT</td><td>Copyright (c) Bogdan Chadkin &lt;trysound@yandex.ru&gt;</td></tr>
+          <tr><td><code>prop-types</code></td><td>15.8.1</td><td>MIT</td><td>Copyright (c) 2013-present, Facebook, Inc.</td></tr>
+          <tr><td><code>queue</code></td><td>6.0.2</td><td>MIT</td><td>Copyright (c) 2014 Jesse Tane &lt;jesse.tane@gmail.com&gt;</td></tr>
+          <tr><td><code>raf</code></td><td>3.4.1</td><td>MIT</td><td>Copyright 2013 Chris Dickinson &lt;chris@neversaw.us&gt;</td></tr>
+          <tr><td><code>react</code></td><td>19.2.5</td><td>MIT</td><td>Copyright (c) Meta Platforms, Inc. and affiliates.</td></tr>
+          <tr><td><code>react-dom</code></td><td>19.2.5</td><td>MIT</td><td>Copyright (c) Meta Platforms, Inc. and affiliates.</td></tr>
+          <tr><td><code>react-is</code></td><td>16.13.1</td><td>MIT</td><td>Copyright (c) Facebook, Inc. and its affiliates.</td></tr>
+          <tr><td><code>regenerator-runtime</code></td><td>0.13.11</td><td>MIT</td><td>Copyright (c) 2014-present, Facebook, Inc.</td></tr>
+          <tr><td><code>require-from-string</code></td><td>2.0.2</td><td>MIT</td><td>Copyright (c) Vsevolod Strukchinsky &lt;floatdrop@gmail.com&gt; (github.com/floatdrop)</td></tr>
+          <tr><td><code>restructure</code></td><td>3.0.2</td><td>MIT</td><td>Copyright (c) 2015-present Devon Govett</td></tr>
+          <tr><td><code>rgbcolor</code></td><td>1.0.1</td><td>MIT OR SEE LICENSE IN FEEL-FREE.md</td><td>Copyright (c) 2016 Stoyan Stefanov, http://phpied.com/</td></tr>
+          <tr><td><code>safe-buffer</code></td><td>5.2.1</td><td>MIT</td><td>Copyright (c) Feross Aboukhadijeh</td></tr>
+          <tr><td><code>scheduler</code></td><td>0.27.0</td><td>MIT</td><td>Copyright (c) Meta Platforms, Inc. and affiliates.</td></tr>
+          <tr><td><code>seedrandom</code></td><td>3.0.5</td><td>MIT</td><td>Copyright 2019 David Bau.</td></tr>
+          <tr><td><code>stackblur-canvas</code></td><td>2.7.0</td><td>MIT</td><td>Copyright (c) 2010 Mario Klingemann</td></tr>
+          <tr><td><code>string_decoder</code></td><td>1.3.0</td><td>MIT</td><td>Copyright Node.js contributors. All rights reserved.</td></tr>
+          <tr><td><code>svg-arc-to-cubic-bezier</code></td><td>3.2.0</td><td>ISC</td><td>Copyright (c) 2017, Colin Meinke</td></tr>
+          <tr><td><code>svg-pathdata</code></td><td>6.0.3</td><td>MIT</td><td>Copyright © 2017 Nicolas Froidure</td></tr>
+          <tr><td><code>text-segmentation</code></td><td>1.0.3</td><td>MIT</td><td>Copyright (c) 2021 Niklas von Hertzen</td></tr>
+          <tr><td><code>three</code></td><td>0.185.1</td><td>MIT</td><td>Copyright © 2010-2026 three.js authors</td></tr>
+          <tr><td><code>tiny-inflate</code></td><td>1.0.3</td><td>MIT</td><td>Copyright (c) 2015-present Devon Govett</td></tr>
+          <tr><td><code>tslib</code></td><td>2.8.1</td><td>0BSD</td><td>Copyright (c) Microsoft Corporation.</td></tr>
+          <tr><td><code>undici-types</code></td><td>7.19.2</td><td>MIT</td><td>Copyright (c) Matteo Collina and Undici contributors</td></tr>
+          <tr><td><code>unicode-properties</code></td><td>1.4.1</td><td>MIT</td><td>Copyright 2018</td></tr>
+          <tr><td><code>unicode-trie</code></td><td>2.0.0</td><td>MIT</td><td>Copyright 2018</td></tr>
+          <tr><td><code>pako</code> (nested under <code>unicode-trie</code>)</td><td>0.2.9</td><td>MIT</td><td>Copyright (C) 2014-2016 by Vitaly Puzrin</td></tr>
+          <tr><td><code>util-deprecate</code></td><td>1.0.2</td><td>MIT</td><td>Copyright (c) 2014 Nathan Rajlich &lt;nathan@tootallnate.net&gt;</td></tr>
+          <tr><td><code>utrie</code></td><td>1.0.2</td><td>MIT</td><td>Copyright (c) 2021 Niklas von Hertzen</td></tr>
+          <tr><td><code>vite-compatible-readable-stream</code></td><td>3.6.1</td><td>MIT</td><td>Copyright Node.js contributors. All rights reserved.</td></tr>
+          <tr><td><code>ws</code></td><td>8.21.0</td><td>MIT</td><td>Copyright (c) 2011 Einar Otto Stangvik &lt;einaros@gmail.com&gt;</td></tr>
+          <tr><td><code>yoga-layout</code></td><td>3.2.1</td><td>MIT</td><td>not stated in the distributed package</td></tr>
+          <tr><td><code>zustand</code></td><td>5.0.12</td><td>MIT</td><td>Copyright (c) 2019 Paul Henschel</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>3.3 Dual-licensed packages with no election recorded</h3>
+    <p>Two production packages offer a choice of terms and no choice has been recorded:</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Package</th><th>Version</th><th>Offered under</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><code>dompurify</code></td><td>3.4.12</td><td>the Mozilla Public Licence 2.0 <em>or</em> Apache-2.0 (it ships both texts)</td><td>no election recorded</td></tr>
+          <tr><td><code>rgbcolor</code></td><td>1.0.1</td><td>the MIT licence <em>or</em> the alternative terms the package offers alongside it</td><td>no election recorded; reaches the tree only as an optional dependency of <code>canvg</code> under <code>jspdf</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Unlike the two map libraries in section 1.3, these were not part of the licence review that produced this page, and electing on either is a decision for the project owner rather than a note to be added quietly here. Both are listed so the question is visible. We use <code>dompurify</code> unmodified, and we redistribute both unmodified.</p>
+
+    <h2>4. Licence texts</h2>
+    <p>Where a licence is short and shared by many packages, its text is reproduced here once and the copyright notices it applies to are the ones listed in the tables above. Where a licence is long, the package&rsquo;s own copy travels inside the package.</p>
+
+    <h3>4.1 The MIT licence</h3>
+    <p>Reproduced verbatim from the copy bundled with React, less its copyright line &mdash; the copyright lines this text applies to are the ones in the tables above.</p>
+<pre>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</pre>
+
+    <h3>4.2 The ISC licence</h3>
+    <p>Reproduced verbatim from the copy bundled with <code>inherits</code>, less its copyright line.</p>
+<pre>Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
+FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.</pre>
+
+    <h3>4.3 The 0BSD licence</h3>
+    <p>Reproduced verbatim from the copy bundled with <code>tslib</code>, less its copyright line. It applies to <code>tslib</code>, copyright Microsoft Corporation.</p>
+<pre>Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.</pre>
+
+    <h3>4.4 The longer licences</h3>
+    <ul>
+      <li><strong>GNU General Public Licence version 2 or later</strong> applies to TinyMCE (section 1.4). The notice we serve is the bundled <code>license.md</code>, reproduced in section 1.4; it points at the GNU project&rsquo;s own copy of the licence text.</li>
+      <li><strong>Apache-2.0</strong> applies to <code>@swc/helpers</code>, and is one of the two options for <code>dompurify</code> (section 3.3). Each package ships the full text as its own licence file.</li>
+      <li><strong>Mozilla Public Licence 2.0</strong> is the other <code>dompurify</code> option; that package ships the full text alongside the Apache one.</li>
+      <li><strong>SIL Open Font License 1.1</strong> applies to the Lora and Nunito families (section 2). The Nunito faces carry the licence URL in their own metadata, and a notice file is served alongside the fonts &mdash; carrying their copyright notices today, and the licence body once it is pasted in (section 2).</li>
+      <li><strong>Zlib</strong>, combined with MIT, applies to <code>pako</code>; the package ships both texts.</li>
+    </ul>
+
+    <h2>5. Keeping this current</h2>
+    <p>This page is maintained by hand. When a dependency is added, removed or upgraded, or when anything under the vendored map libraries or the fonts changes, this page and the repository&rsquo;s <code>THIRD-PARTY-NOTICES.md</code> are updated together in the same change; a test holds the two in agreement so the surface cannot rot silently.</p>
+
+    <footer>
+      <p>Corrections and questions: <a href="mailto:support@settlementforge.com">support@settlementforge.com</a>.</p>
+      <p>Last verified: 21 August 2026.</p>
+    </footer>
+  </div>
+</body>
+</html>

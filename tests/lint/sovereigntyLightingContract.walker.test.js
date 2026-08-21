@@ -4913,7 +4913,41 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // BEFORE above is therefore WF-1C's landed value and titles carries BOTH deltas: 20,611
     // + 7 (WF-1C) + 7 (this member) = 20,625. Re-derived by EXECUTION at the rebased tip,
     // never by arithmetic alone; the walker's own convictions are quoted in the lane receipt.
-    files: 2487, parked: 364, credited: 2123, titles: 20625, suiteTitles: 5770,
+    // ── RE-RECORDED 2026-08-21 BY TE-NOTICES, THE THIRD-PARTY-NOTICES SURFACE ──
+    // AUTHORIZING DECISION: ODQ §317.1, which dispatches this lane and names its deliverables
+    // — THIRD-PARTY-NOTICES.md, a dark served page, and "a pin so the surface cannot rot" —
+    // under the §295.5c charter, plus the §323.2 rider that adds public/fonts/OFL.txt.
+    // §299.4's binding-forward rule is satisfied by naming those decisions here.
+    // 2,487/364/2,123/20,625/5,770 → 2,488/364/2,124/20,649/5,776. This member mints exactly ONE test
+    // file, tests/build/thirdPartyNoticesPage.test.js: SIX literal describes holding
+    // TWENTY-FOUR straight-line it() calls with string-literal titles — no .each, no runIf,
+    // no nesting, no loop-registered case, and every loop lives INSIDE a named test (the SP-D
+    // idiom) — so the file is CREDITED rather than parked and all of its titles are visible.
+    // `parked` holds because no parked-file rule, parser door or existing file's
+    // classification moved. The lane's other three files are a Markdown notice document, a
+    // static page under public/, and a plain-text font notice; none is a test file.
+    // THE DELTAS ARE +1 file, +1 credited, +24 titles, +6 suite titles, and they RECONCILE
+    // against the file's own shape: `grep -c '^describe('` is 6 and the it() count is 24.
+    // ⚠ THE SUITE DELTA IS SIX, NOT FIVE, and the walker is what caught it: the §323.2 OFL
+    // rider added a sixth describe after this block's prose was first drafted at five. The
+    // executed conviction (expected 5776 to be 5770) corrected the prose, which is the whole
+    // reason the tuple is derived rather than described.
+    // ⚠ THE FIRST DRAFT PARKED ITSELF AND WAS REWRITTEN RATHER THAN RE-RECORDED: five rows
+    // were generated from a table with a template title, the exact shape SP-D and the GR-2
+    // repair round both recorded as parking a whole file. They are spelled out one it() per
+    // entry now.
+    // ⛔⛔ THE OLD TUPLE WAS DISCARDED AT THE CAS-SLOT REBASE, AND IT WAS THE §325.2 TRAP
+    // EXACTLY. This lane was built and gated on 2cdb87fa, where its AFTER was
+    // 2,486/364/2,122/20,632/5,773. WF-1C then landed +7 titles and MF-T2B +2 files/+7 titles,
+    // so the BEFORE moved to 20,625 — and the old AFTER of 20,632 is now NUMERICALLY EQUAL to
+    // 20,625 + 7, a figure that looks like a correct sum of this member's own delta while
+    // actually encoding the two landed members' titles and none of this one's. Carrying it
+    // would have recorded a plausible-looking number that means something else entirely. The
+    // BEFORE above is the landed value at b25907f9 and the whole tuple below was RE-DERIVED
+    // BY EXECUTING THE WALKER at that tip, figure by figure against its sequenced
+    // convictions, never by arithmetic on the old row; the convictions are quoted in the lane
+    // receipt.
+    files: 2488, parked: 364, credited: 2124, titles: 20649, suiteTitles: 5776,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
