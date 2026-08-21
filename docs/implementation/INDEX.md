@@ -1,6 +1,22 @@
 # Implementation packet index
 
 - **Status:** CANONICAL
+- **Current code of record (first-map continuation):**
+  `/Users/cstokes/.codex/worktrees/first-map-vertical-slice` on
+  `codex/first-map-vertical-slice`; MF-T1V is verified against full source base
+  `838710e93665d743a7a3d7c517f072fa91e192cf`.
+- **Current measured checkpoint (2026-08-20):** `127` packets / `1` READY.
+  MF-T1V is promoted by this index revision but is not yet dispatched. Its
+  bounded next command is `npm run implementation:dispatch -- MF-T1V`; if a
+  sealed session already exists, use `npm run implementation:resume -- MF-T1V`
+  instead. The MF-T1V packet and its atomic session receipt own all detailed
+  paths, hashes, checks and STOP conditions.
+- **Fable / Opus handoff law:** start at the first READY row under **Current
+  packet set**, read only that linked packet, and do not infer authority from
+  the historical program log below. This checkpoint is updated at promotion,
+  implementation landing, terminalization and any blocking owner decision.
+- **Historical integration record (retained below):** the older minifold status
+  is provenance, not the active first-map continuation state.
 - **Code of record:** `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`
 - **Measured branch/SHA:** `claude/composite-r4` at the `cs-b` train terminal.
 - **Measured:** 2026-08-15 — **THE `cs-b` TRAIN LANDED ALL FOUR MEMBERS: THE SECOND HALF OF THE
@@ -1020,6 +1036,7 @@ re-derives that lane and decides whether to compile its immediate dependent.
 
 | Dispatch | Packet | Status | Why this is the boundary | Explicitly excluded |
 |---:|---|---|---|---|
+| MF-T1V | [`MF-T1V`](./packets/town-cartography/MF-T1V.md) | **READY** at `838710e9`; exact-manifest commit authority | Replay the exact MF-T1M bundle and project both varied bodies through the one fixed-survey draw/SVG path with origin-neutral PUBLIC privacy and roster-bound DM authority | document/content/persistence, fantasy/sampling, citywide fill, new shapes or lights, UI/export cutover, canonical projection promotion |
 | MF-T1M | [`MF-T1M`](./packets/town-cartography/MF-T1M.md) | **LANDED** at `bffd1bcb`; do not redispatch | Compile two explicit parcel-bound varied masses and publish a reference-only transitional roster bundle without adding a second geometry owner | sampling/dossier/seed/weights, citywide fill, world-institution siting, `MASSING_PHASE`, copied geometry, projection/persistence/UI, new shape grammar |
 | MF-T1F | [`MF-T1F`](./packets/town-cartography/MF-T1F.md) | **LANDED** at `325e16aa`; do not redispatch | Join the six landed first-slice fabric authorities by exact replay and refs without falsely claiming the full canonical Fabric contract | canonical `FABRIC`, ABI/law/provenance fabrication, copied rows, consumers, buildings, persistence/projection/UI, arbitrary morphology |
 | MF-T1P | [`MF-T1P`](./packets/town-cartography/MF-T1P.md) | **LANDED** at `7fd8ad3f`; do not redispatch | Bind the eight landed W3 plot/frontage identities to the eight four-edge bounded DCEL faces without copying geometry or adding legal parcel semantics | geometry/topology copies, ownership/use/access, adjacency, mutation, Fabric root, buildings, persistence/UI, arbitrary parcels |
