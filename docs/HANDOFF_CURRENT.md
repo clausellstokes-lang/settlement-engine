@@ -1,6 +1,6 @@
 # HANDOFF — CURRENT PROGRAM STATE (model-agnostic successor bootstrap)
 
-**Updated 2026-08-20 by the §§287–§289 whole-system map review and owner amendments. This file is refreshed at
+**Updated 2026-08-21 at the §321 collection (ledger through §321; refreshed at every collection per ODQ §233). This file is refreshed at
 every collection (ODQ §233). If you are a successor — any model, any account —
 read this whole file, then docs/START_HERE.md, then the tail of
 docs/OWNER_DECISION_QUEUE.md (the ledger; ODQ §§150–§276 plus collecting/amending §§287–§289 contain the map
@@ -8,71 +8,78 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
-## ⭐⭐ CURRENT OVERRIDE — 2026-08-21, THE FABLE RETROVALIDATION SITTING IS
-## COMPLETE; LEDGER THROUGH §298 @ this commit
+## ⭐⭐ CURRENT OVERRIDE — 2026-08-21 (~15:05 ET), LEDGER THROUGH §321;
+## BUILD claude/composite-r4 @ 2cdb87fa; THREE LANES IN FLIGHT + RS-5 PAUSED
 
-This block supersedes everything below it (the 08-20 override becomes history
-where they conflict; its map-architecture content §287–§290 remains binding).
+This block supersedes everything below it (the earlier 08-21 and 08-20
+overrides become history where they conflict; the map-architecture content of
+§287–§290 remains binding).
 
-1. **THE SITTING (ODQ §291–§298) IS COMPLETE.** All 30 queued Opus-chaired
-   rows ruled (§293/§294/§297/§298); the queue file is EMPTY. Owner directives
-   §291 (grant refreshed incl. EMERGENT; the review-improve doctrine; the
-   30-min wakeup + four-lane cadence) and §291.5 (Fable architects/judges,
-   Opus verifies/implements) and §292 (five method refinements) are OPERATIVE
-   LAW. New laws: **L1** grade-drift guard · **L2** routed-orders ·
-   **L3** receipted-instrument · **L4** redefined-census · **L5** zoom-scope ·
-   **L6** whole-channel holdout. REVERSED at the sitting: §240's tier-ceiling
-   table and free-dividends claim; §250's 1.8–2.9× epoch figures (true
-   window-independent range 1.33–1.44×); §242's holdout rulings (moot/void
-   per §287.10). The recurring defect class across all 30 rows was
-   RECEIPT→LEDGER TRANSIT — quote receipts, never summarize grades up.
-2. **PROGRESS SINCE (same day, ledger §299-§303):** MF-D0 SEALED (the offset
-   kernel: 38 self-crossings → 0 in every ring family; §278 re-stated; W2's
-   causes reversed — mitre + terrain pull) · MF-D1 SEALED (all five §287.8
-   foundations at ZERO bytes: S0-S23 executable manifest + walker; stream
-   audit discharged by 1.3M-draw counterfactual; integer ABI v1 reconciled
-   over 4.4M numbers; exact solid legality; spatial receipts; DCEL dual-run
-   with Euler oracle) · CF-1 SEALED (§300: all sitting corrections in
-   spec/atlas; hf389 renamed, corpus gate 313/313) · CG-1 SEALED (§302: the
-   codex tip gate-proven GREEN; §299.5 strike executed; ⭐ BUILD BRANCH
-   LANDED claude/composite-r4 @ f8d978df) · the §296 codex arc CLOSED
-   (§299/§302: port-target, not a fifth authority; port plan precise at
-   §303.5 — record shapes + embedder in, arrangement/census/registry out,
-   ABI wins). Laws L1-L7 banked. IN FLIGHT NOW: RS-4's final segment
-   (~22 cells; on SEGMENT_EXIT=0 run rs4-evaluate.mjs ONCE) and **MF-W3F,
-   fresh W3** (charter ODQ §303.9; base laneMFD1-tip; receipt
-   laneMFW3F-receipt.md).
-3. ⛔ **THE CODEX FIRST-MAP VERTICAL SLICE (§296):** branch
-   `codex/first-map-vertical-slice` @ eedd4e9c on 4eafca31 — five packets
-   (MF-T1F/M/V/S/X), 62 files, +14,767, creating src/domain/townMap/fabric/
-   in the app tree; §290-shaped; NO ledger row dispatched it. Under CX-1
-   review; CONTAINMENT: no packet builds on it and it is not a program tip
-   until ruled. The 08-20 line "no dimensional scene is built / four map
-   candidates" is STALE accordingly.
-4. ⛔⛔ **THE VENDORED-FMG EXPOSURE (§295, owner/counsel docket):** public/map
-   (636 files, MIT) vendors GPLv2+ TinyMCE (123 files) that IS actively
-   served on ledger/build refs (the 07-20 security patch localized it; CSP
-   blocks the CDN); production master is 2,790 commits stale with a WORSE
-   posture (live third-party phone-home, jQuery CVEs); the working tree's
-   public/map is an UNVETTED upstream drop (foreign WIP — preserve, never
-   commit); dist/ (Jul 28) was built from the dirty tree. Chair
-   recommendation vetoable at §295.5: counsel on the GPL question; Option B
-   (strip tinymce subtree) pending owner on the notes-editor degrade; a
-   THIRD-PARTY-NOTICES surface chartered as dark repair; scrub rides the
-   push decision. The xref-fmg clone is deleted.
-5. **NEXT SAFE ORDER (§294.9 discharged the build gate):** MF-D0 collect →
-   the D1 foundations (manifest/ABI/solid/receipt/DCEL; carries the ordered
-   sweeps: publication-guard the four raw surfaces, substrate.js salt,
-   blocked-arm sweep, stream-derivation audit) → fresh W3 (demotion-before-
-   packer first; self-intersection census; strict-form containment recount;
-   §241 census reconciliation; year-018 1.38× characterization; the
-   street-web partial-rederivation lifecycle question; CX-13 migrating-centre
-   verification; circuitDemotion second witness) → D3a → D4 → the §290
-   parity slice → the mandatory review stop. The CX-1 ruling decides how the
-   codex slice slots into (or is reworked for) that order.
-6. **RESUME:** docs/RESUME_STATE.md's hand note is current to the minute;
-   the §-numbered rulings are the authority; the session scratchpad
-   (6298872d-…) holds the five evidence memos.
+1. **THE SITTING (ODQ §291–§298) IS COMPLETE** — all 30 queued rows ruled; the
+   queue file is EMPTY. Operative law: §291 grant (incl. EMERGENT permissions;
+   the review-improve doctrine; 30-min wakeup; four lanes) · §291.5 seats
+   (Fable architects/judges, Opus verifies/implements) · §292 five refinements ·
+   laws **L1–L7** (grade-drift · routed-orders · receipted-instrument ·
+   redefined-census · zoom-scope · whole-channel holdout · corpus-is-a-sample).
+   REVERSED at the sitting: §240's ceiling table + free-dividends; §250's epoch
+   figures (true window-independent range 1.33–1.44×); §242's holdout rows.
+   The sitting's recurring defect class was RECEIPT→LEDGER TRANSIT — quote
+   receipts, never summarize grades up.
+2. **SEALED SINCE (§299–§310):** MF-D0 (offset kernel; 38 self-crossings → 0)
+   · MF-D1 (all five §287.8 foundations at ZERO bytes) · CF-1 (corpus gate
+   313/313) · CG-1 (codex tip landed; the §296 arc CLOSED as port-target per
+   §303.5) · **fresh W3 SEALED** (SW-1 5/5, the 11th world; map code of record
+   = the sealed lane tips, preserved at refs/preserve/map-sandbox-w3f-sealed) ·
+   **G-39 REFUTED** by the pre-registered perimeter-range rule (register
+   0.69–0.72) · **G-43 LIVE** (the counterfactual benchmark; three engine
+   findings — high-water starvation 16/17, wall-year inertness, the cathedral
+   floor; causal precision 0.039 is THE inertia number and THE tuning-pass
+   input) · **RS-4/P4 CLOSED** (162/162, none below floor) · **WF-1B LANDED**
+   (suppressDeity single writer; census +8) with RS-5 fired at its exposure.
+3. **WF/MF FAMILY MACHINERY (§312–§321):** WF-PREAMBLE and MF-PREAMBLE landed
+   chair-signed (MF stamp granted §312.2b) · ⭐ §314.2 CITATION RE-STAMP LAW —
+   a preamble edit re-hashes the family law, and the editing act owns every
+   citing packet's re-stamp in the same landing (executed at build commit
+   2cdb87fa) · MF-T2A landed (map port member 1) · WF-1C compiled (its §9
+   GOVERNS: no CAS until executed greens arrive; the receipt names tip
+   253f2028) · the WF-1D compile collected at §321 (net-zero warTermination
+   join 818/818; a dead Chronicle row REFUSED with an absence pin; the
+   minter-totality walker arm ordered §321.2a; WF-1E seeded) · **§320 LAW: a
+   delivered spec is presumed implemented until the live tree says otherwise**
+   (the landing-page stale dispatch was correctly refused). Undercity doctrine
+   complete at §311–§311.9 (component law = LICENSE + ANCHOR + EXTENT-DRIVER +
+   TEMPERAMENT + CAUSED-PORTALS; four temperaments; connectivity classes).
+   V5 counsel bank recovered byte-exact (refs/preserve/v5-counsel-bank);
+   program receipts preserved out of /tmp
+   (refs/preserve/program-receipts-2026-08-21).
+4. **IN FLIGHT AT THIS WRITE:** three executors — TE-WF1C (terminal gate; CAS
+   FIRST on its §9 greens), TE-T2B (map member 2), TE-NOTICES (third-party
+   notices surface; self-resumes on armed waiters and fills its
+   GATE_RESULTS/FINAL_TIP placeholders; CAS LAST). The CAS queue is SERIALIZED
+   onto 2cdb87fa. **RS-5 is PAUSED by chair at 73/163 cells** (§302.3 load
+   orchestration; PID-exact; receipts durable; resume = `node
+   rs5-resume-gen.mjs` in the a244e7a3 scratchpad, relaunch per segment,
+   evaluator ONCE at completion — its collection row re-proves P4 at the new
+   tip). After WF-1C's CAS: dispatch TE-WF1D on the moved tip (it re-reads the
+   census tuple at base; the pulseKernel 1581/1581 + applyWorldPulse 941/941
+   preamble rows ride its landing WITH re-stamps of all citing packets).
+5. **ULTRACODE (probed 08-21 ~15:00):** an Agent `remote`-isolation dispatch
+   MATERIALIZES LOCALLY (a worktree on this Mac at .claude/worktrees/) — cloud
+   lanes are NOT reachable from a session, so the local box is the compute
+   envelope and §302.3 load orchestration stays. The working cloud lever is the
+   owner-typed `/code-review ultra` (bundles the local branch; needs no push) —
+   recommended AT the §290 mandatory review stop once the cascade lands. Do
+   not re-probe.
+6. ⛔⛔ **UNCHANGED DOCKETS (owner's, visible):** the vendored-FMG/TinyMCE
+   exposure (§295, owner/counsel; the working tree's public/map drop is
+   foreign WIP — NEVER commit it) · §317.1 website decision list · §316.2C
+   beat copy · §320.3 anon-ceiling disclosure · tuning-signature items · every
+   push remains owner-gated (the repo has never been pushed).
+7. **RESUME:** docs/RESUME_STATE.md's hand note is current to the minute; the
+   §-numbered rulings are the authority. Session scratchpad 6298872d-… holds
+   the drafts (WF-1C/WF-1D/D3A-PLAN/MF-T2B + the WF-1E seed), lane receipts
+   and executor worktrees; the a244e7a3 scratchpad holds the sealed map lane
+   tips and the rs5 machinery.
 
 ## HISTORICAL OVERRIDE — 2026-08-20, ledger collected through §289
 

@@ -74,6 +74,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ~15:08 ET: HANDOFF_CURRENT REFRESHED through §321 (the owed refresh) —
+# new CURRENT OVERRIDE block: sitting law, seals §299-§310, WF/MF machinery
+# §312-§321, in-flight lanes + RS-5 pause, ultracode probe, dockets.
 # ⭐ ~15:02 ET: ULTRACODE PROBED — Agent remote-isolation MATERIALIZES LOCALLY
 # (probe ran on this Mac in .claude/worktrees/agent-*, base d024286e): cloud
 # LANES unavailable from this session; the local box is the compute envelope.
