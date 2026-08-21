@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~17:34 ET: NOTICES LANDED — CAS b25907f9 → 159ec24e (§327); WF-1D's
+# watcher unblocks → third rebase → heads-up → GO. OFL body FETCHED by chair
+# (two upstreams identical below the pointer line; elected + SHA'd in
+# scratchpad ofl-1.1-elected-body.txt); completion commit runs LAST via the
+# NOTICES agent after WF-1D lands (§327.3). Then RS-5.
 # ~17:25 ET: WF-1D hold ACK'd, parked clean w/ ref-watcher (self-resumes on
 # NOTICES' CAS). RAISED-4's two falsified sentences batched onto the WF-1E
 # seed with RAISED-B (§326.4) — three micro-items now ride WF-1E.

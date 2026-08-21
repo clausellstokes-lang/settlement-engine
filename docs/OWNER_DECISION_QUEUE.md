@@ -13996,3 +13996,35 @@ recommended. Implementation, per item:
 - Lane state at the hold: tip 91c50357 parked clean, focused proof green, 134 packets,
   net-zero re-confirmed on all three governed files; a watcher polls the branch ref for
   NOTICES' CAS, then the third rebase begins unprompted.
+
+## §327 — COLLECTION + CAS: THE NOTICES SURFACE LANDED; THE OFL BODY FETCHED BY CHAIR; COMPLETION SEQUENCED LAST (2026-08-21 ~17:34)
+
+- **TE-NOTICES' landing collected.** One commit, 159ec24e on b25907f9 — five files, the
+  dark notices surface + the §323.2 OFL rider, full terminal green bare with per-step
+  captured exits (ratchet at ceiling 11/28,665; strict dist 52 files/433 tests; boot
+  524/524; both served copies byte-identical in dist). Seventeen mutations, seventeen
+  convictions across both rounds. CAS EXECUTED: claude/composite-r4 b25907f9 → 159ec24e
+  (read back). WF-1D's watcher unblocks on this move.
+- **§327.1 The §325.2 trap fired a THIRD time and was caught by law, not luck:** the
+  lane's stale titles figure (20,632) exceeded the new base's 20,625 by exactly seven —
+  reading as "+7 for my member" while encoding WF-1C's titles and none of its own. The
+  walker's sequenced convictions produced the true union 2,488/364/2,124/20,649/5,776,
+  and ALSO convicted the lane's own stale prose (a sixth describe the drafted sentence
+  did not know about). Deriving beats describing; the law holds.
+- **§327.2 The OFL rider shipped deliberately incomplete and the lane was right to
+  refuse reconstruction:** an inexact licence body is a compliance defect wearing a
+  compliance fix's message. The missing piece needed a NETWORK, not a human: the chair
+  fetched both families' upstream OFL.txt from the Google Fonts repository, proved the
+  bodies byte-identical below the FAQ-pointer line (sole delta: https vs http scheme),
+  elected the https variant, and parked it with SHA-256 provenance
+  (scratchpad ofl-1.1-elected-body.txt, SHA-256
+  3c17a8394f32ef59bcf50896331249c22a4a4b9c53a5c6d5b9b88464b1c77239, +
+  ofl-body-provenance.md).
+- **§327.3 Sequencing:** the completion commit (paste body, drop marker, update both
+  notices rows — the lane's two-directional pin forces all three together) runs as the
+  FINAL small landing, by the TE-NOTICES agent, AFTER WF-1D lands — so nobody rebases a
+  fourth time. Then RS-5 resumes. The OFL-NOTICE.txt rename is DECLINED: completion is
+  imminent, and OFL.txt is the name every scanner expects beside OFL fonts.
+- **§327.4 Unchanged:** dompurify + rgbcolor elections and the png-js manifest note
+  remain on the owner/counsel docket (§323.3). The foreign stash the lane observed
+  (analytics-intelligence-layer) was left alone — owner WIP.
