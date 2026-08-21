@@ -14028,3 +14028,38 @@ recommended. Implementation, per item:
 - **§327.4 Unchanged:** dompurify + rgbcolor elections and the png-js manifest note
   remain on the owner/counsel docket (§323.3). The foreign stash the lane observed
   (analytics-intelligence-layer) was left alone — owner WIP.
+
+## §328 — MF-T2C COMPILE COLLECTED AND CHAIR-REVIEWED; FIVE RULINGS; DISPATCH SEQUENCED (2026-08-21 ~18:00)
+
+- **TC-T2C's compile collected** (draft-MF-T2C.md 636L + laneTCT2C-receipt.md + the
+  t2c-probe/ executed evidence, scratchpad-only; every read pinned to b25907f9 so
+  in-flight landings could not shear it). Member 3 extends the adopted embedder in
+  place — two modified files, zero new leaves, 120–160 effective of the 400 cap — and
+  its centerpiece defect is CONFIRMED by execution: the R-MF-2 angular-tie throw on
+  valid BigInt-scale ground, reachable today precisely because T2B widened the wall.
+  Chair spot-review executed: claim-scan zero hits, ten STOP-RE-DERIVE markers, the
+  requiredSymbols law honored (symbols at the LANDED flip, no figures), the T2A
+  mutation-plant anchor line preserved byte-identically by explicit instruction.
+- **§328.1 RAISED-1 ACCEPTED:** HOLE_CYCLE/ENCLOSED_BY_EXTERIOR port faithfully as
+  defensive vocabulary with the executed zero-occurrence finding in the docblock and NO
+  reachability pin — a pin over a shape no input produces is the vacuity class this
+  program keeps convicting.
+- **§328.2 RAISED-2 ACCEPTED:** innerBoundaryHalfEdgeIds ships declared-and-empty,
+  exactly as the sealed reference publishes it — §303.5 record-shapes-in; filling it
+  is machinery neither source has.
+- **§328.3 RAISED-3 ACCEPTED:** the derived +8 titles supersedes the plan's +6; the
+  executor re-derives at its own base regardless (step-8 STOP).
+- **§328.4 RAISED-4 RULED — BOUNDARY_EPS_Q = 0.5 is ABI-STRUCTURAL, not tuning; the
+  member is NOT blocked.** Reasoning, vetoable: it is the half-quantum membership
+  radius that DEFINES boundaryRule 'CLOSED' on the integer lattice — the unique value
+  making boundary classification exact and symmetric at the quantum scale; it is
+  internal (unexported), ported verbatim from the sealed reference, and cannot move
+  without redefining the landed ABI contract; no world-visible distribution depends on
+  it (the member lands dormant). ⚠ Tuning is an owner carve-out BY NATURE — the owner
+  may veto this classification, which would re-block the member on the tuning docket.
+- **§328.5 RAISED-5 ACCEPTED:** plan §3.2(a)'s wall-clock assertion converts to a
+  correctness-at-scale pin (Euler identity on the ~1.8k-boundary grid) with wall clock
+  as receipt evidence only — a timing pin is a flake by construction.
+- **§328.6 Dispatch sequencing:** TE-T2C dispatches AFTER the OFL completion lands
+  (the next wave's first executor, on the final tip — no rebase tax), carrying the
+  same 3-minute terminal heads-up protocol so it coexists with the resumed RS-5.

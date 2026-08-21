@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~18:00 ET: T2C COMPILE COLLECTED + REVIEWED — five rulings §328 (EPS
+# ruled ABI-structural NOT tuning, owner-vetoable; dead vocab ports pinless;
+# +8 titles stands). TE-T2C dispatches AFTER the OFL completion, with the
+# heads-up protocol, alongside resumed RS-5. WF-1D terminal still running.
 # ~17:40 ET: WF-1D second heads-up — rebased onto 159ec24e, tip 190895a4,
 # eight census blocks enumerated, tuple re-derived (+6 titles only), focused
 # proof 253 tests green. GO SENT; terminal launching bare on a quiet machine.
