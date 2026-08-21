@@ -13187,6 +13187,42 @@ recommended. Implementation, per item:
    and a payer (syndicate-funded visible work), never an
    assumed corridor.
 
+### §311.7 · THE SEWER DERIVATION, REFINED BY THE CHAIR AT THE
+### OWNER'S DELEGATION ("refine that suggestion with your best
+### judgement")
+
+1. **SANITATION IS A LADDER, NOT A SWITCH**: cesspits/latrines
+   (no sheet contribution) → culverted stream / market-square
+   drain (a small real seed) → quarter-level network → the
+   full web. Cities and metropolises always top-rung
+   (§311.6.1); towns land by derivation.
+2. **SIX TYPED CAUSES, each with a stated weight and an
+   existing dossier home**: planned/charter/military founding
+   (`founding.kind`); prosperity band; civic capacity
+   (government/civic institutions); gradient + outfall
+   (relief + water mode — a flat dry town honestly gets
+   cesspits); a plague/great-fire REBUILD in the immutable
+   event log (sanitation arrives in the rebuilding — the
+   wall-as-event pattern applied to drains); high-water
+   population past the cesspit-failure line.
+3. **MECHANICS**: above a derived threshold CERTAIN; below a
+   floor ABSENT; in the declared middle band
+   WEIGHTED-STILL-DICED with a seed-keyed draw (the district-
+   affinity idiom). The weights are typed constants riding
+   the TUNING SIGNATURE; no free scalar.
+4. ⭐ **COVERAGE IS PER-QUARTER, NOT PER-TOWN**: drains under
+   the planned quarter, none under the organic faubourg;
+   mains extend only under rings whose vintage postdates the
+   works — composing with §311.6.1's surface coupling and the
+   epoch machinery, so the sewer sheet is another layer of
+   visible history.
+5. **PROPERTIES**: PROMISE-safe (immutable inputs, seed-keyed
+   draw, nothing minted) and G-43-TESTABLE (founding-kind
+   flip and plague-at-year-N become registrable arms with
+   pre-declared directions). Routing per L2: rides the same
+   §13/§168 spec fold as §311; implementation position
+   unchanged under §290.4.
+
 ## §312 · TC-D3A COLLECTED — THE PORT PLAN IS PRICED (16
 ## MEMBERS), THREE RULINGS MADE, AND THE SANDBOX EVIDENCE IS
 ## PRESERVED OUT OF /tmp (2026-08-21; chair: FABLE; receipt
