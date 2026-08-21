@@ -74,6 +74,13 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~09:40 ET: TC-WF DISPATCHED (Opus compile lane; the chair signs) — drafts
+# draft-WF-PREAMBLE.md + draft-WF-SUBSTRATE.md in the NEW session scratchpad
+# (6298872d), receipt laneTCWF-receipt.md; shape precedent WC-PREAMBLE; stamp =
+# ODQ §78 round + five F-obligations; ⚠ suppressedAtTick greps ZERO in src at
+# f8d978df — the annex resolves the live spelling. On collection: chair signs,
+# lands both by plumbing on the BUILD branch (CAS from f8d978df), THEN WF-1b
+# compiles. FOUR lanes out: W3F · I1 · CB1 · TC-WF.
 # ⭐⭐ §305 (~09:30 ET): RS-4 COMPLETE AND COLLECTED @ b179879d — 162/162, ZERO
 # below the collapse floor, RS-3's failing cell cured at 0.3091 (5,466 to the
 # person), tail survives 39/162; evaluator credited ONCE (sentinel at scratchpad
