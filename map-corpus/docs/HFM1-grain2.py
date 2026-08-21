@@ -8,8 +8,11 @@ Two job sets:
   NEW    = HF-M1's own eye-set windows, read off a decile-gridded render of each plate
            (HFM1-grid.py). Windows are [E]; everything inside them is [M].
 """
-import json, os
+import json, os, sys
 from PIL import Image
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+CORPUS = os.path.dirname(HERE)
 
 REPRO = [
  ("hf10-thorp-plains",.36,.38,.63,.70,"thorp"), ("hf12-thorp-coastal",.30,.34,.72,.78,"thorp"),
@@ -65,7 +68,7 @@ NEW = [
  ("hf104-metropolis-caravan",.17,.04,.83,.88,"metropolis",""),
  ("hf105-metropolis-ribbon",.03,.04,.95,.92,"metropolis","RIBBON: cross-axis box; cartouche in NE corner"),
  ("hf374-city-unequal-circuit-metropolis",.04,.06,.92,.90,"metropolis",""),
- ("hf389-city-metropolis-grain-max",.03,.10,.90,.95,"metropolis",""),
+ ("hf389-city-metropolis-wallshape",.03,.10,.90,.95,"metropolis",""),
 ]
 
 def measure(path, x0, y0, x1, y1):
@@ -98,11 +101,20 @@ def measure(path, x0, y0, x1, y1):
 out=[]
 for job in REPRO:
     stem,x0,y0,x1,y1,band = job
-    r = measure("map-refs/%s.png"%stem, x0,y0,x1,y1)
+    r = measure(os.path.join(CORPUS,"plates","%s.png"%stem), x0,y0,x1,y1)
     r.update({"file":stem,"band":band,"set":"REPRO","window":[x0,y0,x1,y1],"note":""}); out.append(r)
 for job in NEW:
     stem,x0,y0,x1,y1,band,note = job
-    r = measure("map-refs/%s.png"%stem, x0,y0,x1,y1)
+    r = measure(os.path.join(CORPUS,"plates","%s.png"%stem), x0,y0,x1,y1)
     r.update({"file":stem,"band":band,"set":"NEW","window":[x0,y0,x1,y1],"note":note}); out.append(r)
-json.dump(out, open("HFM1-grain2.json","w"), indent=1)
-print("rows", len(out))
+output_path=os.path.join(HERE,"HFM1-grain2.json")
+if "--write" in sys.argv:
+    temp=output_path+".tmp"
+    with open(temp,"w") as handle:
+        json.dump(out,handle,indent=1)
+        handle.write("\n")
+    os.replace(temp,output_path)
+    print("wrote",output_path,"rows",len(out))
+else:
+    print(json.dumps(out,indent=1))
+    print("DRY RUN — pass --write to persist; rows",len(out))

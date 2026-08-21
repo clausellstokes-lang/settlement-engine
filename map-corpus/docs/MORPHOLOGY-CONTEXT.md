@@ -2,6 +2,15 @@
 ### Lane MF-S3b (Opus 5), 2026-08-17. ODQ §245 (study the urban planning) as sharpened by **§246 (the reconstruction test)**.
 ### Advisory deliverable. Read-only lane: no git writes, no memory writes, no edits outside this file, the `MFS3B-*` instruments and the receipt.
 
+> **STATUS RECONCILIATION — 2026-08-20.** This is a visual-corpus reconstruction and hypothesis
+> catalogue, not historical evidence and not an executable mechanism registry. `GENERATION-SPEC`
+> §§10.17–10.23 and ODQ §287 supersede every proposed derivation/default that conflicts with typed
+> canonical causes, evidence-domain dormancy, inertia, uncertainty, or the no-frequency law. In
+> particular, corpus scenes do not license universal open fields, tier/prosperity siting, water-
+> access wealth rules, automatic custodian dwellings, country/culture morphotypes, wall defaults or
+> rural ratios. Every `CX-*` proposal remains dormant until explicit canon and the matching promoted
+> evidence domain authorize it; the corpus may grade visual register only.
+
 **The question this document answers is §246's, not §245's.** Not "what does the corpus
 look like" but **"if we had to produce a plate of this kind with OUR pipeline, what would
 we need, what would we emit, and where would we diverge?"** Every finding therefore lands
@@ -30,7 +39,12 @@ both a void and a logistics fact) I cross-reference rather than re-derive, and s
 
 ## §0 · METHOD, SAMPLE, AND THE HONESTY KEY
 
-### §0.1 · The blind holdout is excluded — the accounting
+### §0.1 · The closed legacy evaluation roster is excluded — the accounting
+
+⚠ **STATUS CORRECTION (SPEC §10.17):** this lane did not open the 81 excluded image files, but it
+did reason from some of their index descriptions, and the broader corpus program had already
+viewed/measured every plate. This is a clean lane-level pixel exclusion, not proof that the final
+roster was untouched by calibration.
 
 `docs/laneHFM1-holdout-proposal.json` names three overlapping sets. The brief requires the
 UNION of the proposal and its adopted 12-swap fix (§244.6):
@@ -46,7 +60,7 @@ UNION of the proposal and its adopted 12-swap fix (§244.6):
 
 **81 plates were excluded and never opened by this lane.** The union is larger than either
 individual list because the swap replaced twelve members without the two lists being
-nested; excluding only one list would have leaked plates that are holdout members under
+nested; excluding only one list would have leaked plates that are evaluation members under
 the adopted set. The excluded ids are listed in the receipt.
 
 This cost the study real evidence and the cost is named, not hidden: the holdout took
@@ -1850,7 +1864,9 @@ and inside it, ground enclosed but **not built**.
 
 ---
 
-### TRACE 4 · hf389 `city-metropolis-grain-max` (Varrenholt) — the whole-system metropolis
+### TRACE 4 · hf389 `city-metropolis-wallshape` (Varrenholt) — the whole-system metropolis
+<!-- ⟦FOLD §297/§298⟧ renamed from `city-metropolis-grain-max` at §298.2e: the plate measures the COARSEST grain of the nine metropolis plates, so the old stem mis-taught. -->
+
 
 **What it is.** Wall as a chain with a church-precinct notch, a river run that stops at a
 chain, a straight new west run, a wobbling south suburb run and a bad closure. Towers

@@ -4,6 +4,15 @@
 ### Advisory deliverable. Read-only lane: no git writes, no memory writes, no edits outside this file and the `MFS3a-*` instruments and JSON beside it.
 ### Sibling lane MF-S3b holds the CONTEXT half (geography, water, walls, edges, institution siting, circulation, regional morphotypes). Cross-references are marked **→ S3b**; nothing here duplicates that half.
 
+> **STATUS RECONCILIATION — 2026-08-20.** This is a visual-corpus reconstruction and hypothesis
+> catalogue, not historical evidence and not an executable mechanism registry. `GENERATION-SPEC`
+> §§10.17–10.23 and ODQ §287 supersede every proposed derivation/default that conflicts with typed
+> canonical causes, evidence-domain dormancy, inertia, uncertainty, or the no-frequency law. Corpus
+> measurements may continue to grade visual register; they cannot establish historical causation,
+> prevalence, cultural priors, operation order or numeric morphology defaults. Every proposed
+> mechanism remains dormant until the current manifest and matching promoted evidence scope (where
+> required) authorize it.
+
 ---
 
 ## §0 · WHAT THIS DOCUMENT IS, AND HOW TO READ IT
@@ -33,11 +42,11 @@ So every finding below is written in two parts.
 
 ### §0.2 · EXCLUSIONS APPLIED
 
-**THE BLIND HOLDOUT — 91 PLATES EXCLUDED [M, CONFIRMED].** `laneHFM1-holdout-proposal.json` was parsed for every `hf<n>` token appearing **anywhere** in the file — the `proposed`, `kept`, `added` and `dropped` arms *and* the 12-swap `minimal_swap` arms. That conservative union is **91 distinct plates**, all present on disk. Every one was excluded from every observation, measurement, sample and trace in this document. (The narrower reading — `proposed ∪ minimal_swap.proposed` — is 81 plates; I took the wider union because the brief said "conservatively", and because a plate named in the `dropped` arm is still a plate whose identity the holdout design has reasoned about.)
+**THE CLOSED LEGACY EVALUATION EXCLUSION — 91 PLATES [M, CONFIRMED].** `laneHFM1-holdout-proposal.json` was parsed for every `hf<n>` token appearing **anywhere** in the file — the `proposed`, `kept`, `added` and `dropped` arms *and* the 12-swap `minimal_swap` arms. That conservative union is **91 distinct plates**, all present on disk. Every one was excluded from every observation, measurement, sample and trace in this document. (The narrower reading — `proposed ∪ minimal_swap.proposed` — is 81 plates.) ⚠ This is a clean lane-level exclusion, not an untouched-calibration claim; SPEC §10.17 records the broader history.
 
 **STUDIABLE FRAME: 222 plates**, composed as — town 49 · specimen 28 · terrain 27 · zoom 15 · city 15 · village 12 · stressor 11 · fantastical 10 · systems 8 · underground 7 · metropolis 6 · lens 6 · thorp 5 · hamlet 5 · series 5 · chrome 4 · exp 4 · trade 3 · institution 2. By era: HF-1 35 · HF-2 21 · HF-3 54 · HF-4b 51 · HF-4c 61.
 
-**THE LETTERING SCRUB — 35 plates [M, CONFIRMED].** Parsed from `laneHF4-receipt.md`'s scrub section: hf148, hf170, hf171, hf190, hf249, hf253, hf268, hf284, hf287, hf292, hf295, hf296, hf298, hf299, hf306, hf309, hf310, hf314, hf318, hf328, hf329, hf341, hf348, hf350, hf351, hf353, hf356, hf357, hf361, hf368, hf372, hf373, hf374, hf375, hf383. **No naming or lettering observation in this document is drawn from any of them.** Their geometry is used freely and is cited as geometry — hf306 and hf298 in particular carry load in §8 and §10, on plan structure only.
+**THE LETTERING SCRUB — 34 plates [M, CORRECTED].** Parsed from `laneHF4-receipt.md`'s scrub section: hf148, hf170, hf171, hf190, hf249, hf253, hf268, hf284, hf287, hf292, hf295, hf296, hf298, hf299, hf306, hf309, hf310, hf314, hf318, hf328, hf329, hf341, hf348, hf350, hf351, hf353, hf356, hf357, hf361, hf368, hf372, hf374, hf375, hf383. `hf373` is the receipt's **cured replacement**, not a scrub member; the former broad-regex frame captured it by mistake. **No naming or lettering observation in this document is drawn from the 34.** Their geometry is used freely and is cited as geometry.
 
 ### §0.3 · SAMPLE
 
@@ -552,11 +561,11 @@ Six findings that fall outside the brief's ten headings.
 
 > **MECHANISM:** if the dossier says the settlement is growing this decade, mint the *supply* of that growth — a brickfield/quarry/timber yard sited by terrain, a works yard near the active edge, a rebuild strip inside a recent event footprint. **DERIVATION HOME:** `population` trajectory (growing/stable/declining) + `terrain` (clay, stone, timber) + recent `event history`. **VERDICT: MISSING.** §161b's terraforming law has the visible-work rule ("every terraform leaves its workings legible in ink") which is the same instinct applied to landscape; nothing applies it to **building**. Cheap, high narrative return, and it makes growth visible in a *snapshot*, which matters because §161k ruled the year dimension ships as snapshots rather than animation.
 
-### §10.3 · WITHDRAWN — a finding whose only source was a holdout plate
+### §10.3 · WITHDRAWN — a finding whose only source was evaluation-excluded
 
-**This slot held a finding about DESIRE PATHS** (informal worn tracks cutting the corners between formal radiating roads outside a gate). **It has been withdrawn**, because on the exclusion audit its sole source turned out to be a plate in the blind holdout, and the calibration index records it as *the only plate in the corpus that draws unofficial movement* — so there is no second, studiable witness to re-source it from.
+**This slot held a finding about DESIRE PATHS** (informal worn tracks cutting the corners between formal radiating roads outside a gate). **It has been withdrawn**, because on the exclusion audit its sole source turned out to be a plate in this lane's closed evaluation exclusion, and the calibration index records it as *the only plate in the corpus that draws unofficial movement* — so there is no second, studiable witness to re-source it from.
 
-The slot is left in place rather than renumbered so the withdrawal is visible rather than invisible. **If a future lane wants this finding, it must come from the holdout's own release, not from here.** Nothing downstream in §12–§13 depends on it.
+The slot is left in place rather than renumbered so the withdrawal is visible rather than invisible. **If a future lane wants this finding, it must come from a new independent witness outside this synthetic corpus, not from relabeling the legacy roster.** Nothing downstream in §12–§13 depends on it.
 
 ### §10.4 · SETTLEMENTS THAT MOVED
 
@@ -743,7 +752,7 @@ Filed honestly rather than dressed as rules. Each is something the corpus does w
 
 Stated affirmatively so nothing is re-found as a gap.
 
-- **No holdout plate was opened, measured, or cited.** 91 excluded.
+- **No image in this lane's 91-id evaluation exclusion was opened, measured, or cited.** This is a lane-level pixel-exclusion statement, not a broader blindness claim.
 - **No lettering or naming observation** is drawn from the 35 scrub-list plates; hf306, hf298 and hf309 are used for geometry only and are marked as such at each use.
 - **The atlas was not edited** and none of its figures is restated as mine; where I overlap a target I name it (T-01, T-03, T-04, T-05, T-08, T-17, T-18, GAP-B, GAP-D, GAP-H) and state what I add or correct.
 - **The context half is untouched** — geography, water, walls as defence, edges, institution siting, circulation and regional morphotypes are lane MF-S3b's, and are cross-referenced, not duplicated.

@@ -222,6 +222,12 @@ retained as the LARGE-SCALE WALL-SHAPE exemplar and is relabelled — the string
 actively misleading and will mis-teach any consumer who trusts filenames.** `hf34` remains the
 best-painted metropolis in the corpus (REG 69.0).
 
+⭐ ⟦FOLD §297/§298⟧ **THE RECOMMENDED RELABEL WAS ORDERED AT ODQ §298.2e AND IS NOW EXECUTED:
+`hf389-city-metropolis-grain-max` → `hf389-city-metropolis-wallshape`** (plate + preview twin), with
+the measured register's `stem` key, `MFS3a-frame.json` and every index/prose reference synced and
+`corpus_integrity.py` re-run green at **313/313**. *The old string is quoted above deliberately — it
+is the evidence for the rename, not a live path.*
+
 Note in passing: `hf374`, the other §24 wall-shape metropolis, measures **REG 20.4 — 11th-worst of the
 corpus's 59 ★★★ plates.** The wall-shape cure (#24) and the register decline arrived in the same
 plates; that co-occurrence is worth the chair's attention, though nothing here establishes a cause.

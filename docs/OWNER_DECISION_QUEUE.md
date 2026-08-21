@@ -12312,3 +12312,70 @@ ruled with "thin" stated, never defaulted to RATIFIED.
    CG-1 is green and §299.5's strike is executed; exposure of
    the slice as a program tip is then a chair landing decision
    taken after MF-D0's collection (one landing slot).
+
+## §300 · CF-1 COLLECTED GREEN — THE SITTING'S CORRECTIONS ARE
+## IN THE DOCUMENTS, THE CORPUS GATE CLOSED 313/313 AFTER THE
+## RENAME, AND THE FOUR RAISED ITEMS ARE RULED (2026-08-21;
+## chair: FABLE; receipt laneCF1-receipt.md with before/after
+## hunks for every edit)
+
+1. **COLLECTED.** 66 ⟦FOLD §297/§298⟧ markers across five
+   documents, every edit surgical (spec fold markers 138 →
+   182, exactly +44, none removed; 17 edited table rows with
+   zero column mismatches). Landed: the epoch figures at
+   1.33–1.44× (eight sites; 9.5→9.4); the ≤4-epoch scope; the
+   G-34 arithmetic; the junction-law scoping with the
+   "accretion" rationale struck; the triad at sixteen of
+   sixteen, W4-class; the §240.2 caps stamped withdrawn at all
+   three spec consumers; SUB-2's legs + the countersignature
+   law; the W8 ACROSS-GENERATIONS wording; §255's corrected
+   orderings; tone IQR at 17.9≈18. Atlas: warmth to the HF-1
+   daylight centroid **36 / #F8E9D4** with the estimator named
+   across the preamble AND all six operative rows including
+   the role table (the §257(d) wrong-level cure fixed at the
+   right level); the TEACHING/REGISTER star split installed.
+   The hf389 rename executed with full key sync;
+   `corpus_integrity.py` → status ok, 313/313/313, zero
+   semantic mismatches, TRUE_EXIT=0 (CONFIRMED, per L3).
+   CF-1 independently re-derived every chartered figure from
+   the instrument files BEFORE editing — all matched exactly.
+2. **THE FOUR RAISED ITEMS, RULED.** (a) The shared index's
+   71 map-corpus paths staged as deletions: the STANDING
+   disposition holds — the shared index is not refreshed
+   (concurrent lanes), the private-index method is the only
+   lawful commit path and is immune by construction
+   (read-tree HEAD first); no naive `git commit` may ever run
+   in this tree, which is already law. Chair verification
+   note: `git diff HEAD` is POISONED by those staged
+   deletions (it reports whole files deleted) — attribution
+   in this tree is done by `git show HEAD:path | cmp`, never
+   by diff listings. (b) The "~2 units" warmth-gap wording:
+   RATIFIED (the receipt's honesty over a chartered decimal
+   its evidence contradicted — exactly right). (c) §240.2's
+   source-level stamp: the ledger is APPEND-ONLY; §297.3b IS
+   the source-level withdrawal (a later row is the ledger's
+   correction mechanism), so no in-place edit of §240.2 is
+   wanted; the spec stamps cover every consumer. (d) The two
+   scope calls (tone-IQR corrected in the atlas as well as
+   the spec; the calibration headline re-roled): RATIFIED —
+   both are the coherence condition working.
+3. **THE FLAGGED INSTRUMENT BREAK IS FIXED BY THE CHAIR**:
+   HFM1-grain2.py's hard-coded old stem →
+   `hf389-city-metropolis-wallshape` (one token), so the
+   grain instrument re-runs against the renamed plate.
+4. **DURABILITY: the attributed working-tree edits are
+   COMMITTED with this row.** CF-1's eight files, plus the
+   08-20 review's uncommitted edits now attributed —
+   MORPHOLOGY-PLAN.md and laneHF4-receipt.md (E2's mtime
+   table: the closed-legacy/scrub-34 blocks and the in-place
+   star-count correction) and the §287.11 corpus-machinery
+   repairs in HFM1-grain2.py / HFM1-register.py (canonical
+   paths replacing vanished map-refs; dry-run-by-default
+   writers). Verified by cmp against HEAD blobs:
+   HFM1-bands.py and corpus_integrity.py are IDENTICAL to
+   HEAD (their diff listings were pure index poisoning) and
+   are not committed. ⚠ CF-1's forward-risk note stands for
+   the sealed-holdout program: the atlas/receipt documents
+   have now been edited in place across three eras — the
+   as-filed §249-era atlas exists only in git history; cite
+   by commit when historical figures matter.

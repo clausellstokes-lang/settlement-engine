@@ -142,6 +142,10 @@ per plate as the run descriptions become place labels. Worth paying.
 
 ## 6. THE FINAL CORPUS — the frozen north star's table of contents
 
+⚠ **HF-M1 STATUS CORRECTION:** the category/tier totals below are the receipt's filing-time
+classification, not the current 313-row register. Use `laneHFM1-corpus-measured.csv` for current
+classification totals; keep this table as round provenance.
+
 **313 plates, 313 previews, all 4K 5056×3392, in `scratchpad/map-refs/`.**
 
 | Class | n | Range | The plates a consumer should reach for first |
@@ -236,7 +240,8 @@ not taste, and does not need re-validation.
 
 **Judgment-dense and Fable-unvalidated — re-validate these first:**
 
-- **The star ratings themselves.** I awarded ★★★ to 41 of my 78. HF-3's rate was much lower. Either the
+- **The star ratings themselves.** ⛔ The filing-time claim "41 of 78" is arithmetically wrong;
+  `HFM1-star-audit.txt` closes at **55 of 78 (70.5%)**. HF-3's rate was much lower. Either the
   prompts genuinely improved (the specimen-sheet format and the enumeration cure both landed hard) or my
   bar is softer than Fable's. **This is the single most likely place my grading is wrong**, and it is
   cheap to check: re-grade any ten ★★★ plates and see whether the rate survives.

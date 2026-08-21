@@ -95,7 +95,7 @@
   "hf384"
  ],
  "studiable_n": 222,
- "scrub_lettering_n": 35,
+ "scrub_lettering_n": 34,
  "scrub_lettering_ids": [
   "hf148",
   "hf170",
@@ -128,7 +128,6 @@
   "hf361",
   "hf368",
   "hf372",
-  "hf373",
   "hf374",
   "hf375",
   "hf383"
@@ -1675,11 +1674,11 @@
    "stem": "hf388-spec-settlement-glyph-ladder"
   },
   "hf389": {
-   "file": "hf389-city-metropolis-grain-max.png",
+   "file": "hf389-city-metropolis-wallshape.png",
    "category": "metropolis",
    "tier": "metropolis",
    "era": "HF-4c",
-   "stem": "hf389-city-metropolis-grain-max"
+   "stem": "hf389-city-metropolis-wallshape"
   },
   "hf390": {
    "file": "hf390-spec-folio-sheet-index.png",
