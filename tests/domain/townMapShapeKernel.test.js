@@ -7,18 +7,14 @@ import {
   ROOF_SHAPE_KINDS,
   SHAPE_COORDINATE_ABI,
   VERTICAL_SOLID_KINDS,
-  canonicalArtifactRef,
   compileExplicitBuildingMass,
-  createFantasyConstructionOperation,
   createFirstSliceDocument,
   createSpatialRecipeSnapshot,
-  executeFantasyConstruction,
   firstSliceProjectionToSvg,
   firstSliceScreenDrawOps,
   loadFirstSliceDocument,
   projectFirstSliceFixedSurvey,
   resolveFirstSliceContent,
-  registerFantasyConstructionMechanism,
   saveFirstSliceDocument,
 } from '../../src/domain/townMap/fabric/index.js';
 import { stableSceneStringify } from '../../src/domain/townScene/stableScene.js';
@@ -214,7 +210,7 @@ describe('MF-SH1 bounded semantic shape kernel', () => {
     }]);
   });
 
-  it('is byte-identical on repeated shape compilation, projection, and fantasy construction', () => {
+  it('is byte-identical on repeated shape compilation and projection', () => {
     const first = makeShapeDocument();
     const second = makeShapeDocument();
     expect(second.mass.contentHash).toBe(first.mass.contentHash);
@@ -225,38 +221,5 @@ describe('MF-SH1 bounded semantic shape kernel', () => {
       audience: 'PUBLIC',
     });
     expect(project(second.document).contentHash).toBe(project(first.document).contentHash);
-
-    const empty = createFirstSliceDocument({
-      documentId: 'map-document:shape-kernel:operation',
-      foundation: first.foundation,
-      subdivision: first.subdivision,
-      masses: [],
-      operationRefs: [],
-    });
-    const mechanism = registerFantasyConstructionMechanism({
-      mechanismId: 'mechanism:shaped-necromantic-construction:v1',
-      mechanismVersion: 1,
-      allowedSemanticTypeIds: ['semantic:necromantic-observatory'],
-    });
-    const operation = createFantasyConstructionOperation({
-      operationId: first.spec.constructionOperationId,
-      beforeDocumentRef: canonicalArtifactRef(empty),
-      mechanismRef: canonicalArtifactRef(mechanism),
-      spec: first.spec,
-      recipeSnapshot: first.recipeSnapshot,
-      origin: first.origin,
-    });
-    const loaded = {
-      document: empty,
-      resolutionReport: resolveFirstSliceContent(empty, []),
-      readOnly: false,
-    };
-    const execute = () => executeFantasyConstruction({
-      loaded,
-      operation,
-      mechanismRegistry: [mechanism],
-    });
-    expect(execute().mass.geometry).toEqual(first.mass.geometry);
-    expect(stableSceneStringify(execute())).toBe(stableSceneStringify(execute()));
   });
 });

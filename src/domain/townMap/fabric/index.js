@@ -55,9 +55,11 @@ export {
 } from './building.js';
 export { FIRST_SLICE_MASSING_ROSTER_LAW_VERSION, FIRST_SLICE_MASSING_ROSTER_SCHEMA_VERSION, compileOrthogonalCrossFirstSliceMassingRosterBundle } from './massingRoster.js';
 export {
+  FIRST_SLICE_MASSING_CONSTRUCTION_PROJECTION_LAW_VERSION,
   FIRST_SLICE_MASSING_DOCUMENT_PROJECTION_LAW_VERSION,
   FIRST_SLICE_MASSING_PROJECTION_LAW_VERSION,
   projectOrthogonalCrossFirstSliceMassingFixedSurvey,
+  projectSavedFirstSliceMassingFantasyConstructionFixedSurvey,
   projectSavedOrthogonalCrossFirstSliceMassingFixedSurvey,
 } from './massingProjection.js';
 export {
@@ -91,6 +93,8 @@ export {
 export {
   FANTASY_CANON_GATE,
   FANTASY_CONSTRUCTION_OPERATION_KIND,
+  FIRST_SLICE_MASSING_CONSTRUCTION_STATE_LAW_VERSION,
+  FIRST_SLICE_MASSING_CONSTRUCTION_STATE_SCHEMA_VERSION,
   createFantasyConstructionOperation,
   executeFantasyConstruction,
   registerFantasyConstructionMechanism,

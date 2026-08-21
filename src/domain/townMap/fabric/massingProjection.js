@@ -4,15 +4,21 @@ import { stableSceneStringify } from '../../townScene/stableScene.js';
 import { compileOrthogonalCrossFirstSliceMassingRosterBundle } from './massingRoster.js';
 import { requireCanonicalRecord } from './foundation.js';
 import { loadFirstSliceMassingDocument } from './content.js';
+import { executeFantasyConstruction } from './operations.js';
 import { projectResolvedFirstSliceFixedSurvey } from './projection.js';
 
 export const FIRST_SLICE_MASSING_PROJECTION_LAW_VERSION =
   'mf-t1v-first-slice-massing-fixed-survey-v1';
 export const FIRST_SLICE_MASSING_DOCUMENT_PROJECTION_LAW_VERSION =
   'mf-t1s-first-slice-massing-document-fixed-survey-v1';
+export const FIRST_SLICE_MASSING_CONSTRUCTION_PROJECTION_LAW_VERSION =
+  'mf-t1x-first-slice-massing-construction-fixed-survey-v1';
 
 const INPUT_KEYS = Object.freeze(['audience', 'massingBundle', 'massingCompileInput']);
 const SAVED_INPUT_KEYS = Object.freeze(['audience', 'bytes', 'installedRecipeSnapshots']);
+const FANTASY_INPUT_KEYS = Object.freeze([
+  'audience', 'bytes', 'installedRecipeSnapshots', 'mechanismRegistry', 'operation',
+]);
 
 /** @param {unknown} value @param {string} label @param {readonly string[]} keys */
 function exactRecord(value, label, keys) {
@@ -93,6 +99,40 @@ export function projectSavedOrthogonalCrossFirstSliceMassingFixedSurvey(input) {
       lawVersion: FIRST_SLICE_MASSING_DOCUMENT_PROJECTION_LAW_VERSION,
       document: massingDocument,
       resolutionReport: report,
+    },
+  });
+}
+
+/** @param {unknown} input */
+export function projectSavedFirstSliceMassingFantasyConstructionFixedSurvey(input) {
+  const request = exactRecord(
+    JSON.parse(stableSceneStringify(input)), 'saved fantasy projection input', FANTASY_INPUT_KEYS,
+  );
+  if (!Array.isArray(request.installedRecipeSnapshots)) {
+    throw new TypeError('installedRecipeSnapshots must be an array');
+  }
+  const execution = executeFantasyConstruction({
+    bytes: request.bytes, installedRecipeSnapshots: request.installedRecipeSnapshots,
+    mechanismRegistry: request.mechanismRegistry, operation: request.operation,
+  });
+  const loaded = loadFirstSliceMassingDocument(
+    /** @type {string} */ (request.bytes),
+    /** @type {Array<Record<string,unknown>>} */ (request.installedRecipeSnapshots),
+  );
+  const massingDocument = requireCanonicalRecord(loaded.document, 'loaded massing document');
+  const compileInput = requireCanonicalRecord(massingDocument.massingCompileInput, 'massingCompileInput');
+  return projectPreparedMassing({
+    audience: request.audience,
+    compileInput,
+    bundle: { buildingMasses: execution.constructionState.buildingMasses },
+    unresolvedEntityIds: [],
+    sourceDescriptor: {
+      kind: 'MASSING_CONSTRUCTION_STATE',
+      lawVersion: FIRST_SLICE_MASSING_CONSTRUCTION_PROJECTION_LAW_VERSION,
+      beforeDocument: massingDocument,
+      resolutionReport: loaded.resolutionReport,
+      constructionState: execution.constructionState,
+      receipt: execution.receipt,
     },
   });
 }

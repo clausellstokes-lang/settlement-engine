@@ -150,6 +150,15 @@ function requireArtifactDigest(artifact, label) {
   }
 }
 
+/** @param {unknown} left @param {unknown} right */
+function sameCanonical(left, right) { return stableSceneStringify(left) === stableSceneStringify(right); }
+
+/** @param {unknown} value */
+function isExactCommittedRef(value) {
+  const ref = requireCanonicalRecord(value, 'committed artifact ref');
+  return Object.keys(ref).length === 2 && sameCanonical(ref, canonicalArtifactRef(ref));
+}
+
 /**
  * Sole fixed-survey core. Audience filtering happens before any building draw
  * op, warning, or source authority exists.
@@ -164,11 +173,40 @@ export function projectResolvedFirstSliceFixedSurvey(input) {
   const blocks = /** @type {Array<Record<string,unknown>>} */ (foundation.blockFaces);
   const frontages = /** @type {Array<Record<string,unknown>>} */ (subdivision.frontages);
   const masses = /** @type {Array<Record<string,unknown>>} */ (source.masses);
+  const descriptor = requireCanonicalRecord(source.sourceDescriptor, 'projection sourceDescriptor');
+  let constructionAuthority = null; if (descriptor.kind === 'MASSING_CONSTRUCTION_STATE') {
+    const beforeDocument = requireCanonicalRecord(descriptor.beforeDocument, 'before document'); const report = requireCanonicalRecord(descriptor.resolutionReport, 'resolutionReport');
+    const state = requireCanonicalRecord(descriptor.constructionState, 'construction state'); const receipt = requireCanonicalRecord(descriptor.receipt, 'construction receipt');
+    for (const [artifact, label] of /** @type {Array<[Record<string,unknown>,string]>} */ ([[beforeDocument, 'before document'], [report, 'resolutionReport'], [state, 'construction state'], [receipt, 'construction receipt']])) requireArtifactDigest(artifact, label);
+    const bundle = requireCanonicalRecord(beforeDocument.massingBundle, 'before massingBundle'); const roster = requireCanonicalRecord(bundle.massingRoster, 'before massingRoster');
+    const compileInput = requireCanonicalRecord(beforeDocument.massingCompileInput, 'before massingCompileInput'); const changes = Array.isArray(state.changeOperationRefs) ? state.changeOperationRefs : [];
+    const stateMasses = Array.isArray(state.buildingMasses) ? state.buildingMasses : []; const effect = requireCanonicalRecord(receipt.effect, 'receipt.effect');
+    const baseMasses = Array.isArray(bundle.buildingMasses) ? bundle.buildingMasses : [];
+    const basePreserved = baseMasses.length === 2 && baseMasses.every((base) => stateMasses.filter((mass) => sameCanonical(base, mass)).length === 1);
+    const addedMasses = stateMasses.filter((mass) => !baseMasses.some((base) => sameCanonical(base, mass)));
+    const massIds = stateMasses.map((mass) => String(massGeometry(requireCanonicalRecord(mass, 'state mass')).buildingId));
+    const effected = stateMasses.filter((mass) => sameCanonical(canonicalArtifactRef(requireCanonicalRecord(mass, 'state mass')), effect.massRef)); const effectGeometry = effected.length === 1 ? massGeometry(effected[0]) : {};
+    if (descriptor.lawVersion !== 'mf-t1x-first-slice-massing-construction-fixed-survey-v1'
+      || beforeDocument.artifactKind !== 'FIRST_SLICE_MASSING_DOCUMENT' || beforeDocument.schemaVersion !== 1 || beforeDocument.lawVersion !== 'mf-t1s-first-slice-massing-document-v1'
+      || report.artifactKind !== 'CONTENT_RESOLUTION_REPORT'
+      || state.artifactKind !== 'FIRST_SLICE_MASSING_CONSTRUCTION_STATE' || state.schemaVersion !== 1 || state.lawVersion !== 'mf-t1x-first-slice-massing-construction-state-v1'
+      || receipt.artifactKind !== 'FANTASY_CONSTRUCTION_RECEIPT' || receipt.schemaVersion !== 1 || receipt.lawVersion !== state.lawVersion
+      || !sameCanonical(report.sourceDocumentRef, canonicalArtifactRef(beforeDocument))
+      || !sameCanonical(state.beforeDocumentRef, canonicalArtifactRef(beforeDocument)) || !sameCanonical(state.baseMassingRosterRef, canonicalArtifactRef(roster))
+      || changes.length !== 1 || !sameCanonical(changes[0], receipt.operationRef) || !isExactCommittedRef(changes[0]) || !isExactCommittedRef(receipt.mechanismRef)
+      || stateMasses.length !== 3 || !basePreserved || new Set(massIds).size !== 3 || !sameCanonical(massIds, [...massIds].sort())
+      || !Array.isArray(source.unresolvedEntityIds) || source.unresolvedEntityIds.length !== 0 || !Array.isArray(report.unresolved) || report.unresolved.length !== 0
+      || !sameCanonical(receipt.beforeDocumentRef, canonicalArtifactRef(beforeDocument)) || !sameCanonical(receipt.afterConstructionStateRef, canonicalArtifactRef(state))
+      || !sameCanonical(Object.keys(effect).sort(), ['buildingId', 'kind', 'massRef', 'plotRef']) || effect.kind !== 'BUILDING_ADDED' || addedMasses.length !== 1 || effected.length !== 1 || !sameCanonical(effected[0], addedMasses[0]) || effect.buildingId !== effectGeometry.buildingId || !sameCanonical(effect.plotRef, effectGeometry.plotRef)
+      || !sameCanonical(foundation, compileInput.foundation) || !sameCanonical(subdivision, compileInput.frontageSubdivision) || !sameCanonical(masses, stateMasses)) {
+      throw new TypeError('massing construction projection descriptor is invalid');
+    }
+    constructionAuthority = { beforeDocument, report, state, receipt, roster };
+  }
   const visibleMasses = masses.filter((mass) => audience === 'DM' || massGeometry(mass).privacy === 'PUBLIC');
   const visibleIds = new Set(visibleMasses.map((mass) => String(massGeometry(mass).buildingId)));
   const unresolvedVisible = new Set((Array.isArray(source.unresolvedEntityIds)
     ? source.unresolvedEntityIds : []).map(String).filter((entityId) => visibleIds.has(entityId)));
-  const descriptor = requireCanonicalRecord(source.sourceDescriptor, 'projection sourceDescriptor');
   const unresolvedVisibleIds = [...unresolvedVisible];
   if (descriptor.kind === 'MASSING_DOCUMENT') unresolvedVisibleIds.sort();
   const semanticPrimitives = [];
@@ -293,6 +331,27 @@ export function projectResolvedFirstSliceFixedSurvey(input) {
     artifactId = `projection:${String(audience).toLowerCase()}:${sceneDigest({
       domain: lawVersion, audience, sourceAuthority,
     })}`;
+  } else if (constructionAuthority) {
+    const { beforeDocument, report, state, receipt, roster } = constructionAuthority;
+    const lawVersion = String(descriptor.lawVersion);
+    if (audience === 'DM') {
+      sourceAuthority = {
+        kind: 'DM_MASSING_CONSTRUCTION_STATE', lawVersion,
+        documentRef: canonicalArtifactRef(beforeDocument), contentResolutionReportRef: canonicalArtifactRef(report),
+        constructionStateRef: canonicalArtifactRef(state), receiptRef: canonicalArtifactRef(receipt),
+      };
+    } else {
+      const publicLaw = 'mf-t1s-first-slice-massing-document-fixed-survey-v1';
+      sourceAuthority = {
+        kind: 'PUBLIC_MASSING_DOCUMENT_DERIVATION', lawVersion: publicLaw,
+        firstSliceFabricRootRef: roster.firstSliceFabricRootRef,
+        foundationRef: canonicalArtifactRef(foundation), frontageSubdivisionRef: canonicalArtifactRef(subdivision),
+        visibleGeometryRefs: visibleMasses.map((mass) => canonicalArtifactRef(massGeometry(mass))),
+        unresolvedVisibleEntityIds: [],
+      };
+      artifactId = `projection:public:${sceneDigest({ domain: publicLaw, audience, sourceAuthority })}`;
+    }
+    if (audience === 'DM') artifactId = `projection:dm:${sceneDigest({ domain: lawVersion, audience, sourceAuthority })}`;
   } else {
     throw new TypeError('projection sourceDescriptor kind is not supported');
   }
