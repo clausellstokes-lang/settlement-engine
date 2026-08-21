@@ -12,14 +12,17 @@
   varied massing, shared fixed-survey projection/draw/SVG, built-in/custom parity,
   save plus visible read-only missing-package reload, and one registered fantasy
   construction with deterministic PUBLIC/DM replay all have landed.
-- **Fable / Opus handoff law:** there is no coding authority. Do not redispatch
-  MF-T1X or infer a successor from the historical program log. Any continuation
-  must first derive and promote a new finite packet. Dossier-conditioned sampling
-  remains deferred until genuine dossier, seed, candidate and choice-receipt
-  authority exists; UI/store integration, operation chaining and adjacent edge
-  cases remain outside this completed slice.
-- **Historical integration record (retained below):** the older minifold status
-  is provenance, not the active first-map continuation state.
+- **Continuation authority (ODQ §291.5 / §299.5):** dispatch authority is the
+  chair's, exercised through this packet system — do not redispatch MF-T1X or
+  infer a successor from the log; any continuation derives and promotes a new
+  finite packet. Deferred scope recorded by the lane: dossier-conditioned
+  sampling waits for genuine dossier/seed/candidate/choice-receipt authority;
+  UI/store integration, operation chaining and adjacent edge cases sit outside
+  this completed slice. (A lane-authored "handoff law" formerly stood here;
+  struck per ODQ §299.5 — lanes do not author governance.)
+- **Minifold integration record (retained below):** provenance of the build
+  program; its standing relative to the first-map continuation is ruled at
+  ODQ §299/§301, not relabelled by a lane.
 - **Code of record:** `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`
 - **Measured branch/SHA:** `claude/composite-r4` at the `cs-b` train terminal.
 - **Measured:** 2026-08-15 — **THE `cs-b` TRAIN LANDED ALL FOUR MEMBERS: THE SECOND HALF OF THE
