@@ -8,8 +8,8 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
-## ⭐⭐ CURRENT OVERRIDE — 2026-08-21 (~15:05 ET), LEDGER THROUGH §321;
-## BUILD claude/composite-r4 @ 2cdb87fa; THREE LANES IN FLIGHT + RS-5 PAUSED
+## ⭐⭐ CURRENT OVERRIDE — 2026-08-21 (~16:05 ET), LEDGER THROUGH §326;
+## BUILD claude/composite-r4 @ b25907f9; NOTICES LANDING + WF-1D + T2C-COMPILE IN FLIGHT
 
 This block supersedes everything below it (the earlier 08-21 and 08-20
 overrides become history where they conflict; the map-architecture content of
@@ -52,17 +52,24 @@ overrides become history where they conflict; the map-architecture content of
    V5 counsel bank recovered byte-exact (refs/preserve/v5-counsel-bank);
    program receipts preserved out of /tmp
    (refs/preserve/program-receipts-2026-08-21).
-4. **IN FLIGHT AT THIS WRITE:** three executors — TE-WF1C (terminal gate; CAS
-   FIRST on its §9 greens), TE-T2B (map member 2), TE-NOTICES (third-party
-   notices surface; self-resumes on armed waiters and fills its
-   GATE_RESULTS/FINAL_TIP placeholders; CAS LAST). The CAS queue is SERIALIZED
-   onto 2cdb87fa. **RS-5 is PAUSED by chair at 73/163 cells** (§302.3 load
-   orchestration; PID-exact; receipts durable; resume = `node
-   rs5-resume-gen.mjs` in the a244e7a3 scratchpad, relaunch per segment,
-   evaluator ONCE at completion — its collection row re-proves P4 at the new
-   tip). After WF-1C's CAS: dispatch TE-WF1D on the moved tip (it re-reads the
-   census tuple at base; the pulseKernel 1581/1581 + applyWorldPulse 941/941
-   preamble rows ride its landing WITH re-stamps of all citing packets).
+4. **IN FLIGHT AT THIS WRITE (~16:05):** SINCE 15:05 — **WF-1C LANDED**
+   (CAS 2cdb87fa → cdfe5a96, §324: the realm last-seat beat live behind flag;
+   snapshot-dependence pin refutation; the any-cast second-ledger lesson) and
+   **MF-T2B LANDED REBASED** (CAS cdfe5a96 → b25907f9, §325: dormant integer
+   ABI + exact-geometry core; the MF-PREAMBLE fence amendment carried with
+   both citers re-stamped to the 0706aad6… hash). ⚠⚠ TWO NEW BANKED HAZARDS
+   (§325.2/.3 + memory rebase-slot-landing-hazards): NEVER carry a census
+   tuple across a rebase (identical figure, two meanings — re-derive by
+   execution); compute a family-law re-stamp hash AFTER the landing's LAST
+   edit. NOW RUNNING: TE-NOTICES landing its four files + the §323.2 OFL.txt
+   rider on b25907f9 (terminal; CASes next) · TE-WF1D building slot-aware
+   (its landing carries the pulseKernel 1581 + applyWorldPulse 941
+   zero-headroom family-law amendment WITH re-stamps; it will message the
+   chair ~3 min before its terminal so the soak can be paused) · TC-T2C
+   compiling the third D3a member draft (scratchpad-only). **RS-5 (paused
+   73/163): resume at NOTICES' collection to use WF-1D's build window; pause
+   again on WF-1D's terminal heads-up; evaluator ONCE at completion; its
+   collection row re-proves P4 + WF-1B exposure at the final tip.**
 5. **ULTRACODE (probed 08-21 ~15:00):** an Agent `remote`-isolation dispatch
    MATERIALIZES LOCALLY (a worktree on this Mac at .claude/worktrees/) — cloud
    lanes are NOT reachable from a session, so the local box is the compute

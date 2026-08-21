@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ~16:05 ET: PARALLELISM SPIN-UP (§326) — TC-T2C compile lane spawned
+# (scratchpad-only); RS-5 window-resume protocol: resume at NOTICES' collection,
+# pause on WF-1D's terminal heads-up (WF-1D so ordered). HANDOFF re-folded
+# through §326. Four seats occupied.
 # ⭐⭐ ~15:58 ET: MF-T2B LANDED REBASED — CAS cdfe5a96 → b25907f9 (§325);
 # uninterrupted 18/18 sweep; fence amendment + re-stamps carried; census-
 # coincidence + intra-commit re-stamp hazards banked. NOTICES slot OPENED on

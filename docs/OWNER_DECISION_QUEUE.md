@@ -13964,3 +13964,21 @@ recommended. Implementation, per item:
 - **§325.5 Slot order:** the NOTICES slot is now OPEN on b25907f9 (its agent messaged:
   commit + the §323.2 OFL.txt rider + terminal + report tip). WF-1D continues building
   slot-aware and lands after. RS-5 stays paused until BOTH remaining terminals clear.
+
+## §326 — PARALLELISM AUDIT (owner query) + CHAIR-PLANE SPIN-UP (2026-08-21 ~16:05)
+
+- **Owner asked whether everything parallelizable is parallel.** Executor plane: yes —
+  TE-NOTICES gates its landing while TE-WF1D builds; landings/gates serialize by law
+  (§292.3 one-landing-one-gate; §325.2 is today's proof of why). Chair plane: a real gap
+  — two startable items sat idle between collections. Closed now:
+- **§326.1 TC-T2C SPAWNED** (compile seat, scratchpad-only): the third D3a member's
+  draft, unblocked the moment T2B's paths landed at b25907f9. The chair reviews the
+  draft before any executor dispatch.
+- **§326.2 RS-5 WINDOW-RESUME PROTOCOL:** resume the soak at NOTICES' collection (using
+  WF-1D's long build window) instead of holding it until all terminals clear; TE-WF1D is
+  ordered to message the chair ~3 minutes before starting its terminal so the soak is
+  paused PID-exactly for the gate, then resumed after. Executors never touch the soak
+  processes themselves.
+- **§326.3 Lane census at this write:** TE-NOTICES (landing+terminal) · TE-WF1D (build)
+  · TC-T2C (compile) · chair (collections + this row) = four seats occupied, one gate
+  active, consistent with §291.2c.
