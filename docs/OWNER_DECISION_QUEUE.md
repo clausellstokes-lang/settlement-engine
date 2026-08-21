@@ -13722,3 +13722,57 @@ recommended. Implementation, per item:
    approved screenshots by the lane's own rendered eyes.
    Four lanes at ceiling again: T2B · WF1C · NOTICES ·
    LANDING, plus RS-5.
+
+## §320 · TE-LANDING COLLECTED — THE RIGHT ZERO: THE PAGE IS
+## ALREADY BUILT AND THE SPEC IS ITS ORIGIN DOCUMENT; THE
+## CHAIR'S DISPATCH ERROR BANKED; THE INDEX FOLDED; WF-1d
+## COMPILES ON THE FREED SLOT (2026-08-21; chair: FABLE;
+## receipt laneTELANDING-receipt.md)
+
+1. ⭐⭐ **COLLECTED — ZERO DIFF, AND THE REFUSAL IS THE
+   DELIVERABLE.** The salt-road landing page ALREADY EXISTS
+   (commit a943cd8d + ~15 successors; the live component's
+   own docstring cites the handoff BY SECTION NUMBER; all
+   five resized landing assets exist at the named paths
+   under the byte budgets). The Jul-11 handoff is that work's
+   ORIGIN document; executing it as briefed would have
+   REVERTED roughly eight later owner rulings (the film
+   ruling, the Walk W1 population correction — whose figures
+   the spec still carries wrong — the founder never-sold
+   ruling, the tagline deletion, and more), each traced to
+   its commit. The lane's reds were four-leg-triaged to
+   machine-load flake with zero attributable to code; no
+   gate was owed at zero diff. **THE REFUSAL IS RATIFIED AS
+   EXEMPLARY** — live code outranks a delivered spec, and
+   the spec's own zero-contradictions law is what forced the
+   call.
+2. ⚠ **THE CHAIR'S DISPATCH ERROR, BANKED AS LAW**: §318.3
+   treated a delivered handoff's existence as evidence of
+   pending work without checking the implementing history —
+   the exact inverse of the ARCHITECTED-vs-BUILT census law.
+   ⭐ **A DELIVERED SPEC IS PRESUMED IMPLEMENTED UNTIL THE
+   LIVE TREE SAYS OTHERWISE; the dispatch check is one
+   grep of the target surface, and it belongs to the chair
+   BEFORE the lane.** (Memory:
+   landing-handoff-spec-is-closed-and-superseded.md.)
+3. **RAISED ITEMS ROUTED**: the anonymous size ceiling is now
+   disclosed NOWHERE on the landing (the widget carrying its
+   one string was deleted by a later ruling) — an OWNER
+   product-disclosure question, docketed with §317.1's list;
+   the obsolete strings.js clause and the inert anonSize
+   binding are recorded in the receipt; any future landing
+   packet needs exact per-file targets (broad fences
+   forbidden — the lane quoted the standard).
+4. **CHAIR MAINTENANCE EXECUTED**: MEMORY.md was past its own
+   ~17KB hard limit — FOLDED to 14.1KB via
+   archive-2026-08-21-index-fold-6.md (rows relocated
+   VERBATIM per the fold-never-trim law: the closed build-era
+   rows, ES-5d, the program-law and landed-dark blocks, five
+   hazard rows), with the FOLD-6 pointer, the landing memory,
+   and the 08-21 exposure-arc pointer added. **THE FREED SLOT
+   DISPATCHES TC-WF1D** (the wf-1 ladder's final stage: the
+   warTermination dissolution join at a shrink-only 818/818,
+   the FaithSection cause-chain line, the Chronicle obituary
+   row — both §316.2A zero-headroom hazards binding, serial
+   after WF-1C). Four lanes: T2B · WF1C · NOTICES · WF1D
+   compile, plus RS-5.
