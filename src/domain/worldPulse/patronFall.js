@@ -18,11 +18,25 @@
  * PURE: no `worldState` in any signature, no snapshot, no RNG, no wall clock. The fold
  * computes the four booleans; this module turns them into one token and one record.
  *
- * ⛔ THE FILE NAME IS LOAD-BEARING. It sits under `src/domain/worldPulse/` beside its
- * only importer (`religiousContest.js`) precisely so `scanCrossLayerPairs` yields zero
- * pairs and both coupling-registry ceilings stand still. Renaming it into a spelling no
- * `LAYER_PATTERNS` entry claims would mint a cross-layer pair against a baseline that
- * has zero headroom.
+ * ⛔ THE FILE NAME IS LOAD-BEARING. It sits under `src/domain/worldPulse/` where the FAITH
+ * layer's exact-path `LAYER_PATTERNS` row claims it. Renaming it into a spelling no
+ * `LAYER_PATTERNS` entry claims would mint an UNLAYERED module against a baseline that has
+ * zero headroom.
+ *
+ * ⚠ THIS LEAF NOW HAS TWO IMPORTERS, AND THE SECOND ONE CROSSES A LAYER. WF-1a wrote that
+ * the file sat "beside its ONLY importer (`religiousContest.js`)" so `scanCrossLayerPairs`
+ * would yield zero pairs; WF-1d made that untrue by giving `fallCauseFor` its chartered
+ * production caller in `warTermination.js`, which is a WAR module. The paragraph is
+ * corrected here rather than left standing, because a WF compiler pricing a third importer
+ * against the old sentence would price it wrong.
+ *
+ * ⭐ BOTH COUPLING CEILINGS STILL STAND STILL, AND THE REASON IS THE LAWFUL CURE RATHER THAN
+ * AN ABSENCE OF PRESSURE. A new cross-layer pair is licensed by a COUPLING_REGISTRY ROW, not
+ * by a baseline bump: WF-1d landed `CPL-23.FAITH_TO_WAR.WF-1d.dissolution_names_the_fall`
+ * (`couplingRegistryWar.js`) in the same commit as the import, so the FAITH→WAR pair reaches
+ * the walker's licensing filter and neither `UNLAYERED_BASELINE_CEILING` nor
+ * `ARGUED_ROSTER_CEILING` moves — both files are already claimed by a layer.
+ * ⛔ A THIRD IMPORTER IN A NEW LAYER OWES ITS OWN ROW, IN ITS OWN COMMIT.
  *
  * @enforced-by tests/domain/patronFall.test.js
  */

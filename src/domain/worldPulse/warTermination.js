@@ -87,10 +87,8 @@ function codepointCompare(a, b) {
 // room for. The public import surface is unchanged: WAR_CAUSE_DISSOLUTION is
 // re-exported here, exactly as tierResourceDynamics re-exports the tier applier
 // it lost to the same pressure.
-import {
-  DISSOLVED_CAUSE_PROSE,
-  TERMINATION_PEACE_PROSE,
-} from './warTerminationCauseTables.js';
+import { dissolvedClauseFor, TERMINATION_PEACE_PROSE } from './warTerminationCauseTables.js';
+import { fallCauseFor } from './patronFall.js';
 export { WAR_CAUSE_DISSOLUTION } from './warTerminationCauseTables.js';
 
 /** Closed qualitative projection used by every persisted term. */
@@ -414,21 +412,21 @@ function seatBooksReason(books, actorName, contributed, momentumBroken) {
 
 /** Authored decision sentence; raw scores, multipliers, and engine tokens stay out.
  * @param {{attackerName:string, decidingTerm:string, causeState:string,
- *   dissolvedCauseTypes:string[], trajectory?:string, homeFrontBand?:string,
+ *   dissolvedCauseTypes:string[], fallCause?:string|null, trajectory?:string, homeFrontBand?:string,
  *   trajectoryContributed?:boolean,homeFrontContributed?:boolean}} args
  * @returns {string} */
 function terminationReason({
   attackerName,
   decidingTerm,
   causeState,
-  dissolvedCauseTypes,
+  dissolvedCauseTypes, fallCause = null,
   trajectory = 'even',
   homeFrontBand = 'quiet',
   trajectoryContributed = false,
   homeFrontContributed = false,
 }) {
   const subject = `${attackerName}'s council`;
-  const dissolvedCase = dissolvedCauseTypes.map((type) => DISSOLVED_CAUSE_PROSE[type]).filter(Boolean).join('; ');
+  const dissolvedCase = dissolvedCauseTypes.map((type) => dissolvedClauseFor(type, fallCause)).filter(Boolean).join('; ');
   if (causeState === 'dissolved' && decidingTerm === 'cost_to_stop') {
     return `The war has outlived its reason: ${dissolvedCase}. Still, ${subject} holds because peace would exact the heavier price.`;
   }
@@ -505,6 +503,7 @@ export function readWarTerminations({
     return { receipts: [], byAttacker: new Map() };
   }
 
+  const unseatingRings = /** @type {Record<string, Parameters<typeof fallCauseFor>[0]>} */ (rules.faithUnseatingEnabled === true ? asObject(state.religionStates) : {});
   const deployments = asObject(state.deployments);
   const byId = snapshot?.byId instanceof Map ? snapshot.byId : new Map();
   const now = wholeTick(tick ?? state.tick);
@@ -821,6 +820,7 @@ export function readWarTerminations({
         dispositionReasons.push(deityWar.receipt);
       }
     }
+    const fallCause = effectiveCause.dissolvedCauseTypes.includes('sacred_claim') ? fallCauseFor(unseatingRings[attackerId], deployment.attackerPatronRef) || fallCauseFor(unseatingRings[targetId], deployment.defenderPatronRef) : null;
     const attackerName = settlementName(attackerItem, 'The attacking court');
     const booksReason = seatBooksReason(books, attackerName, booksContributed, momentumBroken);
     const booksPublicReason = books.interestKind === 'patron'
@@ -830,7 +830,7 @@ export function readWarTerminations({
       attackerName,
       decidingTerm,
       causeState: effectiveCause.causeState,
-      dissolvedCauseTypes: effectiveCause.dissolvedCauseTypes,
+      dissolvedCauseTypes: effectiveCause.dissolvedCauseTypes, fallCause,
       trajectory: trajectoryRead.trajectory,
       homeFrontBand: homeFront.band,
       trajectoryContributed,
@@ -889,7 +889,7 @@ export function readWarTerminations({
         authorityChangeKind: 'corruption_verdict',
         authorityVerdictId,
       } : {}),
-      decidingTerm,
+      decidingTerm, ...(fallCause ? { patronFallCause: fallCause } : {}),
       causeState: effectiveCause.causeState,
       ...(effectiveCause.dissolvedCauseTypes.length
         ? { dissolvedCauseTypes: [...effectiveCause.dissolvedCauseTypes] }

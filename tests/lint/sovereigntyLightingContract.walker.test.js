@@ -4947,7 +4947,32 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // BY EXECUTING THE WALKER at that tip, figure by figure against its sequenced
     // convictions, never by arithmetic on the old row; the convictions are quoted in the lane
     // receipt.
-    files: 2488, parked: 364, credited: 2124, titles: 20649, suiteTitles: 5776,
+    // ── RE-RECORDED 2026-08-21 BY WF-1D, THE WAR-DISSOLUTION JOIN THAT NAMES THE FALL ──
+    // AUTHORIZING DECISION: ODQ §321 (this member's landing dispatch), under the §320
+    // compile dispatch and §299.4's binding-forward rule that a packet moving any census
+    // or ratchet NAMES ITS AUTHORIZING DECISION in the packet body. It is named in WF-1D's
+    // header and in its priced-obligations census row.
+    // ⭐ This member mints NO test file: its six-case acceptance battery extends the
+    // ALREADY-CREDITED tests/domain/warTermination.test.js as straight-line `it()` calls
+    // inside that file's ONE existing 'WR-1 cause dissolution' describe — no new describe,
+    // no `.each`, no `runIf`, no nesting, no loop-registered case — so exactly SIX test
+    // titles and ZERO suite titles are added. No parser door, parked-file rule, or existing
+    // file's classification moved, which is what holds `files`, `parked` and `credited`
+    // still across this member.
+    // ⛔⛔ THIS MEMBER PAID THE SAME-NUMBER TRAP THREE TIMES, AND EXECUTION CAUGHT IT EACH TIME.
+    // (1) At compile: the draft predicted this member's STARTING figure by adding WF-1C's
+    //     +7 across another member's landing. Re-read at cdfe5a96, the live constant ALREADY
+    //     carried that +7, so applying the compile's arithmetic would have landed 20,625.
+    // (2) At the first CAS slot: built and gated on cdfe5a96 its AFTER was titles 20,624.
+    //     MF-T2B then landed +7 titles and +2 files, so the tuple was re-derived at b25907f9.
+    // (3) At the second CAS slot: TE-NOTICES then landed +24 titles, +1 file, +1 credited and
+    //     +6 suite titles, so EVERY figure moved again and the BEFORE above is NOTICES'
+    //     landed value.
+    // ⛔ AT NO POINT WAS A FIGURE OBTAINED BY ADDING. At each slot the tuple line was set to a
+    //   deliberate placeholder so the SEQUENCED walker had to convict on every figure in turn,
+    //   and each value was taken from its own assertion message. Arithmetic would have produced
+    //   the same tuple; it would not have been evidence. Convictions quoted in the lane receipt.
+    files: 2488, parked: 364, credited: 2124, titles: 20655, suiteTitles: 5776,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

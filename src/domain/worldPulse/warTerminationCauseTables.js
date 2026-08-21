@@ -82,6 +82,54 @@ export const DISSOLVED_CAUSE_PROSE = Object.freeze({
   atrocity_answer: 'the burning that turned these courts against a neighbour is no longer spoken of as a cause',
 });
 
+/**
+ * WF-1d — the closed reader clauses for WHY a war's patron creed lost its seat, one per
+ * member of `PATRON_FALL_CAUSES`. Keyed on FALL causes, NOT on war reasons, and therefore
+ * deliberately outside all three module-load totality assertions at the foot of this file.
+ *
+ * ⛔ THE DEITY DOCTRINE BINDS EVERY CLAUSE. Faith is CULTURAL, never theological. Each
+ * clause names a BELIEVER-SIDE or POLITICAL act — a contest lost, pews turned, a garrison
+ * seated, a rite driven out — exactly as WF-1a's four tokens do. ⛔ NOT ONE OF THEM SAYS A
+ * GOD FELL, FAILED, DIED, DEPARTED OR WAS DEFEATED, and none names a deity: the clause names
+ * the act, and no deity ref reaches this table at all.
+ *
+ * ⛔ FOUR KEYS, IN CODEPOINT ORDER, AND THE SET IS NOT WIDENED. `abandoned` is absent
+ * because WF-1a CUT it on a measurement (zero producers), and a fifth cause may not land
+ * here without its producer in the same commit. The acceptance battery asserts these keys
+ * EQUAL `PATRON_FALL_CAUSES`, so a fifth cause reds there rather than rendering a blank.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const FALL_CAUSE_PROSE = Object.freeze({
+  discredited: 'the creed lost its rightful claim in the town it was named from',
+  displaced: 'the town turned its devotion to another altar',
+  imposed: 'a garrison seated another creed in its place',
+  suppressed: 'the old rite was put out of the light by force',
+});
+
+/**
+ * The reader clause for one dissolved casus — today's clause, decorated with the typed
+ * patron fall when a SACRED claim died and the settlement's own ring records why.
+ *
+ * ⛔ ADDITIVE OR NOTHING, AND THIS IS A BYTE CLAIM: every one of the other fifteen casus
+ * types, and a `sacred_claim` with no recorded fall, returns `DISSOLVED_CAUSE_PROSE[type]`
+ * UNCHANGED. The join can only ever lengthen one sentence; it can never alter another.
+ *
+ * PURE: a table lookup over two frozen literals. No rng, no clock, no state, no flag — the
+ * flag gate lives at the call site, by name.
+ *
+ * @param {string} type one member of WAR_REASON_TYPES
+ * @param {string|null} [fallCause] one member of PATRON_FALL_CAUSES, or null when the ring
+ *   records no fall for the anchor this war pinned. A cause outside the closed vocabulary
+ *   is treated exactly as null — the caller cannot widen the reader surface by passing one.
+ * @returns {string} the reader clause
+ */
+export function dissolvedClauseFor(type, fallCause = null) {
+  const base = DISSOLVED_CAUSE_PROSE[type];
+  if (type !== 'sacred_claim' || !base) return base;
+  const named = fallCause === null || fallCause === undefined ? '' : FALL_CAUSE_PROSE[String(fallCause)];
+  return named ? `${base} — ${named}` : base;
+}
+
 /** Closed, number-free peace clauses for the WR-1 reader surface. */
 export const TERMINATION_PEACE_PROSE = Object.freeze({
   exhaustion: 'War-weariness is drawing the court toward a settlement.',

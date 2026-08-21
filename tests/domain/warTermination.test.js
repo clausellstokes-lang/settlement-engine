@@ -17,6 +17,15 @@ import {
 import { WAR_REASON_TYPES } from '../../src/domain/worldPulse/warReasonTaxonomy.js';
 import { REASON_TUNING } from '../../src/domain/worldPulse/warReasons.js';
 import { MOMENTUM_TUNING } from '../../src/domain/worldPulse/momentum.js';
+import { FALL_CAUSE_PROSE } from '../../src/domain/worldPulse/warTerminationCauseTables.js';
+import { PATRON_FALL_CAUSES, recordPatronFall } from '../../src/domain/worldPulse/patronFall.js';
+import { COUPLING_REGISTRY } from '../../src/domain/certification/couplingRegistry.js';
+import { KIND_SECTION } from '../../src/domain/display/chroniclersLetter.js';
+import { CONDITIONAL_LEDGER_KEYS } from '../../src/domain/worldPulse/worldState.js';
+import {
+  WORLD_SNAPSHOT_HARD_DENY,
+  WORLD_SNAPSHOT_PUBLIC_LEDGER_ALLOWLIST,
+} from '../../src/domain/display/worldSnapshotPublic.js';
 
 const LIT_RULES = Object.freeze({
   warLayerEnabled: true,
@@ -343,6 +352,119 @@ describe('WR-1 cause dissolution', () => {
     }).byAttacker.get('wolf');
     expect(recovered?.dissolvedCauseTypes).toEqual(['opportunism']);
     expect(recovered?.receipt.reason).toContain('no longer sees an undefended prize');
+  });
+
+  // ── WF-1d · THE DISSOLUTION-NAMES-THE-FALL JOIN (six acceptance cases) ──────────
+  // A sacred war outliving its faith could say only THAT the claim died, never why.
+  // These six pin the join, its two fences, and its registration. The ring is always
+  // seeded THROUGH the landed recordPatronFall writer, never by poking the object,
+  // and the drive always spells the LITERAL faithUnseatingEnabled: true.
+  const SACRED_PINS = { attackerPatronRef: 'sun-old', defenderPatronRef: 'moon-old' };
+  const sacredWar = (extraRules, religionStates, dep = deployment('b', ['sacred_claim'], SACRED_PINS)) => readWarTerminations({
+    worldState: world({
+      deployments: { a: dep },
+      reasonPairs: { 'a>b': reasonEntry([['sacred_claim', 0.8]]) },
+      rules: { ...LIT_RULES, ...extraRules },
+      extra: religionStates ? { religionStates } : {},
+    }),
+    snapshot: snapshot([
+      town('a', { name: 'Aster', patronRef: 'sun-new' }),
+      town('b', { name: 'Briar', patronRef: 'moon-old' }),
+    ]),
+  }).byAttacker.get('a');
+  const ringFor = (ref, cause) => {
+    const religion = {};
+    recordPatronFall(religion, { ref, cause, atTick: 7 });
+    return { a: religion };
+  };
+
+  it('WF-1d names the fall: a lit dissolution carries the typed token and the house clause', () => {
+    const ring = ringFor('sun-old', 'discredited');
+    expect(ring.a.patronFalls).toEqual([{ ref: 'sun-old', cause: 'discredited', atTick: 7 }]);
+    const lit = sacredWar({ faithUnseatingEnabled: true }, ring);
+    expect(lit?.dissolvedCauseTypes).toEqual(['sacred_claim']);
+    expect(lit?.receipt.causeState).toBe('dissolved');
+    expect(lit?.receipt.patronFallCause).toBe('discredited');
+    expect(lit?.receipt.reason).toContain('no longer worshipped from the same throne'
+      + ' — the creed lost its rightful claim in the town it was named from');
+  });
+
+  it('WF-1d dormancy: flag-absent and flag-false receipts are byte-identical, and only the lit drive moves a byte', () => {
+    const dark = JSON.stringify(sacredWar({}, ringFor('sun-old', 'discredited'))?.receipt);
+    const off = JSON.stringify(sacredWar({ faithUnseatingEnabled: false }, ringFor('sun-old', 'discredited'))?.receipt);
+    const lit = JSON.stringify(sacredWar({ faithUnseatingEnabled: true }, ringFor('sun-old', 'discredited'))?.receipt);
+    expect(dark).toBe(off);
+    // The fence has something to SEE: without this the two arms above could agree
+    // because the join is dead rather than because it is dormant.
+    expect(lit).not.toBe(dark);
+    expect(dark).toContain('no longer worshipped from the same throne. Still,');
+    // The other fifteen casus clauses are untouched by the selector refactor. This arm is
+    // also the GUARD pin: the anchors ARE pinned and the ring DOES record their fall, so
+    // only the sacred_claim guard stops a grievance war from wearing a patron-fall token.
+    const other = sacredWar({ faithUnseatingEnabled: true }, ringFor('sun-old', 'discredited'),
+      deployment('b', ['grievance'], SACRED_PINS));
+    expect(other?.dissolvedCauseTypes).toEqual(['grievance']);
+    const otherKeys = Object.keys(other?.receipt || {});
+    expect(other?.receipt.reason).toContain('the court no longer recognizes the grievance that raised its banners');
+    expect(otherKeys).not.toContain('patronFallCause'); // anchored: this drive pins both anchors and records their fall — the A1 case proves that same ring DOES set the key on a sacred war, so only the casus guard can be holding here
+  });
+
+  it('WF-1d honesty: a lit world whose ring records no fall for the PINNED anchor invents no cause', () => {
+    const lit = sacredWar({ faithUnseatingEnabled: true }, ringFor('some-other-god', 'displaced'));
+    const dark = sacredWar({}, ringFor('some-other-god', 'displaced'));
+    expect(lit?.receipt.causeState).toBe('dissolved');
+    expect(JSON.stringify(lit?.receipt)).toBe(JSON.stringify(dark?.receipt));
+    const litKeys = Object.keys(lit?.receipt || {});
+    expect(litKeys.length).toBeGreaterThan(0);
+    expect(litKeys).not.toContain('patronFallCause'); // anchored: the receipt rendered with a non-empty key set (asserted above) and the A1 case sets this exact key on this exact drive
+  });
+
+  it('WF-1d legacy: an anchor_unavailable deployment gets no invented cause, by the existing control flow', () => {
+    const legacy = sacredWar({ faithUnseatingEnabled: true }, ringFor('sun-old', 'discredited'),
+      deployment('b', ['sacred_claim']));
+    expect(legacy?.receipt.causeState).toBe('anchor_unavailable');
+    expect(legacy?.dissolvedCauseTypes).toEqual([]);
+    const legacyKeys = Object.keys(legacy?.receipt || {});
+    expect(legacyKeys.length).toBeGreaterThan(0);
+    expect(legacyKeys).not.toContain('patronFallCause'); // anchored: causeState anchor_unavailable and dissolvedCauseTypes [] are asserted above over a ring that DOES name sun-old, so the guard is proven false rather than the fixture unreached
+  });
+
+  it('WF-1d lifecycle and veil: nothing persists, no ledger key moves, and the receipt crosses no veil', () => {
+    const ring = ringFor('sun-old', 'discredited');
+    const worldBefore = world({
+      deployments: { a: deployment('b', ['sacred_claim'], SACRED_PINS) },
+      reasonPairs: { 'a>b': reasonEntry([['sacred_claim', 0.8]]) },
+      rules: { ...LIT_RULES, faithUnseatingEnabled: true },
+      extra: { religionStates: ring },
+    });
+    const frozen = JSON.stringify(worldBefore);
+    readWarTerminations({
+      worldState: worldBefore,
+      snapshot: snapshot([
+        town('a', { name: 'Aster', patronRef: 'sun-new' }),
+        town('b', { name: 'Briar', patronRef: 'moon-old' }),
+      ]),
+    });
+    expect(JSON.stringify(worldBefore)).toBe(frozen);
+    expect(CONDITIONAL_LEDGER_KEYS.length).toBeGreaterThan(0);
+    expect([...CONDITIONAL_LEDGER_KEYS]).not.toContain('patronFallCause'); // anchored: the length floor asserted above proves the frozen list really loaded, so this cannot pass over an empty array
+    expect(WORLD_SNAPSHOT_HARD_DENY).toContain('religionStates');
+    expect([...WORLD_SNAPSHOT_PUBLIC_LEDGER_ALLOWLIST]).not.toContain('religionStates'); // anchored: the hard-deny membership asserted above proves the veil tables loaded and DO carry religionStates
+  });
+
+  it('WF-1d registration: the vocabularies match, the pair is licensed once, and no Chronicle row exists', () => {
+    expect(Object.keys(FALL_CAUSE_PROSE).sort()).toEqual([...PATRON_FALL_CAUSES].sort());
+    const faithWar = COUPLING_REGISTRY.filter((row) => row.direction === 'FAITH→WAR');
+    expect(faithWar).toHaveLength(1);
+    expect(faithWar[0].read.split('#')[0]).toBe('src/domain/worldPulse/warTermination.js');
+    expect(faithWar[0].counterforce.split('#')[0]).toBe('src/domain/worldPulse/warTermination.js');
+    expect(faithWar[0].flags).toContain('faithUnseatingEnabled');
+    // The Chronicle row is REFUSED on a measurement: this member mints a receipt kind, not
+    // an impactKind, so a KIND_SECTION row would have no minter and nothing would red on it.
+    const sectionKeys = Object.keys(KIND_SECTION);
+    expect(sectionKeys).toContain('pantheon_extinction');
+    expect(sectionKeys).not.toContain('war_termination_read'); // anchored: the pantheon_extinction membership asserted above proves KIND_SECTION loaded and carries the faith family, so this is a populated-table negative
+    expect(sectionKeys.filter((key) => key.startsWith('patron_fall'))).toEqual([]);
   });
 });
 

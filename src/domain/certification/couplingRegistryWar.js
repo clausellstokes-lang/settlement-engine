@@ -525,3 +525,36 @@ export const WR7_ENVOY_COUPLINGS = Object.freeze([
   WR7_ENVOY_PLANT_COUPLING,
   WR7_SILENCE_INFERENCE_COUPLING,
 ]);
+
+/** WF-1d's three gates, all LANDED: the war layer, the termination reader, and WF-1a's
+ * unseating key, which is read BY NAME and strict `=== true` at the join's own seam. */
+const WF1D_DISSOLUTION_FALL_FLAGS = Object.freeze([
+  'warLayerEnabled',
+  'warTerminationEnabled',
+  'faithUnseatingEnabled',
+]);
+
+/** WF-1d / CPL-23. THE ESTATE'S FIRST FAITH→WAR ROW, and the coupling
+ * `DESIGN_FP_FAITH.md` §5-WF-1 declares in terms. A sacred war's founding claim dies when
+ * the pinned patron anchor moves; until now the receipt could say only THAT it died. The
+ * dissolution read now consults the settlement's own typed fall ring through WF-1a's pure
+ * `fallCauseFor` and names WHY the creed lost the seat — a political and social fact about
+ * people, never a claim about a god. The counterforce reads the same evidence to author the
+ * reader clause, so the token and the sentence cannot disagree. */
+export const WF1D_DISSOLUTION_FALL_COUPLING = couplingRow({
+  couplingId: 'CPL-23.FAITH_TO_WAR.WF-1d.dissolution_names_the_fall',
+  pairId: 'CPL-23',
+  direction: 'FAITH→WAR',
+  read: 'src/domain/worldPulse/warTermination.js#readWarTerminations.fallCauseFor',
+  receiptField: 'pulseRecord.warTerminationReads[].{patronFallCause,reason}',
+  counterforce: 'src/domain/worldPulse/warTermination.js#terminationReason.dissolvedClauseFor',
+  flags: WF1D_DISSOLUTION_FALL_FLAGS,
+  owningVolume: 'WAR',
+  owningWave: 'WF-1d',
+  intendedDesk: 'war',
+});
+
+/** The FAITH×WAR couplings the WF train lands against the war volume. */
+export const WF_FAITH_WAR_COUPLINGS = Object.freeze([
+  WF1D_DISSOLUTION_FALL_COUPLING,
+]);

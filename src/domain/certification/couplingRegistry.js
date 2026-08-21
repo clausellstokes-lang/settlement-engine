@@ -29,6 +29,7 @@ import {
   WR5_WAR_RULING_COUPLINGS,
   WR6_WAR_COALITION_COUPLINGS,
   WR7_ENVOY_COUPLINGS,
+  WF_FAITH_WAR_COUPLINGS,
 } from './couplingRegistryWar.js';
 // The first non-WAR leaf (FP wave TR-1). One sibling per volume, as CW-0w slice 1 built
 // this family to accept.
@@ -117,6 +118,8 @@ export {
   WR7_CARRIED_SHEET_COUPLING,
   WR7_ENVOY_PLANT_COUPLING,
   WR7_ENVOY_COUPLINGS,
+  WF1D_DISSOLUTION_FALL_COUPLING,
+  WF_FAITH_WAR_COUPLINGS,
 } from './couplingRegistryWar.js';
 
 export const COUPLING_REGISTRY = Object.freeze([
@@ -138,6 +141,11 @@ export const COUPLING_REGISTRY = Object.freeze([
   // arithmetic borrowing the row vocabulary it used to author, and the covert
   // traveller's hidden-path franchise read.
   ...ES_ESPIONAGE_COUPLINGS,
+  // FP WF-1d (2026-08-21): the estate's FIRST FAITH→WAR rows. One — the war-dissolution
+  // receipt naming the typed patron fall. It rides the WAR leaf rather than opening a
+  // FAITH one because its owningVolume IS WAR: the read lives in warTermination.js and
+  // the row licenses that file's import of the faith leaf.
+  ...WF_FAITH_WAR_COUPLINGS,
 ]);
 
 /** @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */

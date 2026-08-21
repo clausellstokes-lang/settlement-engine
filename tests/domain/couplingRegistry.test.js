@@ -10,6 +10,7 @@ import {
   WR4_INSTITUTION_HOME_FRONT_COUPLING,
   WR4_TRADE_HOME_FRONT_COUPLING,
   WR4_WAR_COST_COUPLINGS,
+  WF_FAITH_WAR_COUPLINGS,
   WR5_BILATERAL_PEACE_COUPLING,
   WR5_REFUSAL_PRICE_COUPLING,
   WR5_SEAT_ACCEPTANCE_COUPLING,
@@ -149,6 +150,11 @@ describe('CW-0 coupling registry', () => {
       ...IN_INFORMATION_COUPLINGS,
       // FP ES-1 (2026-08-06): the first ESPIONAGE rows, appended in wave order.
       ...ES_ESPIONAGE_COUPLINGS,
+      // FP WF-1d (2026-08-21): the estate's FIRST FAITH→WAR row, appended in wave order.
+      // It rides the WAR leaf rather than opening a FAITH one because its owningVolume IS
+      // WAR — the read lives in warTermination.js, and the row is what licenses that file's
+      // cross-layer import of the faith leaf in the same commit.
+      ...WF_FAITH_WAR_COUPLINGS,
     ]);
     expect(WR3_LINEAGE_COUPLING).toEqual({
       couplingId: 'CPL-3.POP_TO_WAR.WR-3.lineage',
