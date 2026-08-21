@@ -74,6 +74,14 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ §306+§307 (~10:15 ET): CB1 + I1 COLLECTED @ 5be2075a — G-43 benchmark LIVE
+# (3 engine findings: high-water starved 16/17, wall-year moves nothing, cathedral
+# floor; INERTIA NUMBER = causal precision 0.039, re-run at every seal ratcheting
+# |A∩F|) · G-39 REFUTED row 2 (rectangularity 0.69-0.72 vs 0.92 ceiling; chaos
+# scoping DEAD; perimeter-RANGE register fact adopted; tone-contrast NULL parks
+# the pigment leg; towers corners-only refuted). Seven MFI1 instruments COMMITTED.
+# Dossier-surface batch (resource location, dated construction op, institution
+# founding year, high-water evidence) → D3a charter. TWO lanes out: W3F · TC-WF.
 # ⭐ ~09:40 ET: TC-WF DISPATCHED (Opus compile lane; the chair signs) — drafts
 # draft-WF-PREAMBLE.md + draft-WF-SUBSTRATE.md in the NEW session scratchpad
 # (6298872d), receipt laneTCWF-receipt.md; shape precedent WC-PREAMBLE; stamp =
