@@ -17290,6 +17290,238 @@
           "check:tail"
         ]
       ]
+    },
+    {
+      "id": "WF-1C",
+      "status": "DRAFT",
+      "packetPath": "docs/implementation/packets/fp/WF-1C.md",
+      "verifiedBase": "2cdb87fac566b3d6803a0dce9d59df13f07c1c9e",
+      "changeManifest": [
+        {
+          "_note": "M1. The derived last-seat predicate as an unexported helper. It reads the module's OWN qualifyingTier for the ladder question and spells no numeric literal — MINOR_DEMOTE is 1 in this same scope, so a literal 1 would be a RAISED-4 STOP by coincidence of value. ratchetPantheonTiers is NOT touched, which is what keeps its three landed changes.length pins green unedited.",
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/pantheon.js"
+        },
+        {
+          "_note": "M2. The third arm of synthesizePantheonArcs, keyed on change.lastSeat === true, authored to the FULL sibling field set (an incomplete set mints a wizard-news authoring debt row and STOPS the landing). The twilight's two existing salience values are extracted into named module consts read by BOTH arms; no new number is authored. The false parenthesis in the :217-223 header comment is corrected in the same commit.",
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/realmEvents.js"
+        },
+        {
+          "_note": "M3. ONE WHAT_PHRASES row beside pantheon_twilight — an in-world subject phrase with no underscore and none of the engine-jargon tokens settlementRumors.test.js denies at the player surface. The kind is deliberately NOT added to rumorPhrasePools.js or FAITH_DESK_KINDS: that roster is corpus-bound and would owe an authored pool with a CADENCE floor.",
+          "action": "MODIFY",
+          "path": "src/domain/display/settlementRumors.js"
+        },
+        {
+          "_note": "M4. ONE KIND_SECTION row beside its two siblings. KIND_SECTION_CORRESPONDENCE maps traditions to split, so the prefix router's faith desk is accepted; without the row the beat falls to the letter's sundry bucket.",
+          "action": "MODIFY",
+          "path": "src/domain/display/chroniclersLetter.js"
+        },
+        {
+          "_note": "M5. ZERO-HEADROOM FILE: 1581 effective against a frozen scripts/.size-baseline.json literal of 1581, pinned EXACT IN BOTH DIRECTIONS, and re-enforced by a generated per-file max-lines override. GROWTH HAS NO LAWFUL CURE. Exactly ONE line is modified — the faithDeltas key — to carry the by-name gate read on the same line. Add no line, delete no line, move no line. Re-measure 1581 before AND after the edit; a difference in either direction is a STOP.",
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/pulseKernel.js"
+        },
+        {
+          "_note": "M6. The seven acceptance cases of the packet's section 9, as exactly seven straight-line test( calls with string-literal titles, added INTO the EXISTING realm-arcs describe. No new describe, no .each, no runIf, no nesting — so suiteTitles does not move.",
+          "action": "TEST",
+          "path": "tests/domain/pantheon.test.js"
+        },
+        {
+          "_note": "M7. One EXPECTED_VOICE row: pantheon_extinction null, beside its two siblings which are both null. Verified by execution, not chosen: newsVoiceCategory matches no explicit classifier for the token and reaches the set-but-unclassified guard, so null is the value the walker arm demands.",
+          "action": "TEST",
+          "path": "tests/domain/impactKindWalkers.test.js"
+        },
+        {
+          "_note": "M8. Re-derive the WHOLE five-figure census tuple in THIS commit. Never inherit; never patch one figure. Authorizing decision ODQ 314.3, restated at ODQ 316.",
+          "action": "TEST",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/packets/fp/WF-1C.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE PER-TICK PANTHEON WRITE. The last-seat rows ride the changes array this already returns; its options bag gains one defaulted unseating key, so no call site moves.",
+          "path": "src/domain/worldPulse/pantheon.js",
+          "symbol": "export function advancePantheon"
+        },
+        {
+          "_note": "DELIBERATELY NOT TOUCHED. Its changes stays tier-only, which is what keeps pantheon.test.js's three res.changes.length pins — they call this DIRECTLY, not through advancePantheon — green UNEDITED. That is the executed proof the widening is additive.",
+          "path": "src/domain/worldPulse/pantheon.js",
+          "symbol": "export function ratchetPantheonTiers"
+        },
+        {
+          "_note": "THE ZERO-SEAT REMNANT. This already keeps a deity that lost its last seat, at seats 0 — the volume's \"the pantheon entry persists as the remnant it already is\". This member reads that fact and does not create it.",
+          "path": "src/domain/worldPulse/pantheon.js",
+          "symbol": "export function applyPantheonSeats"
+        },
+        {
+          "_note": "THE LADDER QUESTION, DELEGATED. The fire predicate asks this pure function whether the tier ladder still has anything to say, instead of spelling a threshold. This is how RAISED-4 is satisfied BY CONSTRUCTION.",
+          "path": "src/domain/worldPulse/pantheon.js",
+          "symbol": "export function qualifyingTier"
+        },
+        {
+          "path": "src/domain/worldPulse/pantheon.js",
+          "symbol": "export function countSeats"
+        },
+        {
+          "path": "src/domain/worldPulse/pantheon.js",
+          "symbol": "export function createPantheonEntry"
+        },
+        {
+          "path": "src/domain/worldPulse/pantheon.js",
+          "symbol": "export function deityIdOf"
+        },
+        {
+          "path": "src/domain/worldPulse/pantheon.js",
+          "symbol": "export const PANTHEON_TUNING"
+        },
+        {
+          "_note": "THE ARC SYNTHESIS. Gains a third arm keyed on the optional lastSeat flag; the two existing predicates both require from !== to and are provably blind to a row whose from equals its to.",
+          "path": "src/domain/worldPulse/realmEvents.js",
+          "symbol": "export function synthesizePantheonArcs"
+        },
+        {
+          "path": "src/domain/worldPulse/realmEvents.js",
+          "symbol": "export function synthesizeRealmEvents"
+        },
+        {
+          "_note": "THE KERNEL MOUTH, and a ZERO-HEADROOM file. The simulationRules local declared inside this function is in scope at both pantheon sites, which is what makes the net-zero one-line substitution possible at all.",
+          "path": "src/domain/worldPulse/pulseKernel.js",
+          "symbol": "export function simulateCampaignWorldPulse"
+        },
+        {
+          "_note": "THE NORMALIZER THAT DOES NOT ALLOW-LIST. Executed: it returns true for the VIRTUAL flag. Had it allow-listed keys, the gate would be permanently false and the whole feature would ship dark with every fence green.",
+          "path": "src/domain/worldPulse/simulationRules.js",
+          "symbol": "export function normalizeSimulationRules"
+        },
+        {
+          "_note": "DOES NOT MOVE. This member mints no flag and adds no registry row, so virtual stays 24, union 81 and union-minus-governed 56, and contributionLedgerShape's literal stays 24.",
+          "path": "src/domain/worldPulse/simulationRules.js",
+          "symbol": "export const ENGINE_GATED_VIRTUAL_RULE_KEYS"
+        },
+        {
+          "_note": "THE FLAG THIS MEMBER RIDES, minted by WF-1a, pinned as the quoted key token rather than as any line of the register whose membership later waves keep changing. This member lights it nowhere; it adds a SECOND by-name read, in pulseKernel.js.",
+          "path": "src/domain/worldPulse/simulationRules.js",
+          "symbol": "'faithUnseatingEnabled'"
+        },
+        {
+          "_note": "THE OUTER GATE that makes a deity-free world byte-identical even LIT. It short-circuits on deity PRESENCE, not on config, ahead of any flag read.",
+          "path": "src/domain/worldPulse/subsystemActivation.js",
+          "symbol": "export function isSubsystemActive"
+        },
+        {
+          "path": "src/domain/display/settlementRumors.js",
+          "symbol": "export const WHAT_PHRASES"
+        },
+        {
+          "path": "src/domain/display/chroniclersLetter.js",
+          "symbol": "export const KIND_SECTION"
+        },
+        {
+          "path": "src/domain/realm/heraldRouting.js",
+          "symbol": "export function SECTION_OF"
+        },
+        {
+          "_note": "THE ANTI-TIDY ANCHOR. The new kind takes NO row here, and that refusal is arithmetic rather than taste: a third routed-but-unregistered pantheon row grows a ceiling asserted SHRINK-ONLY, which has no lawful growth cure. A5 asserts the absence and MUTANT (d) plants the row and proves it reds.",
+          "path": "src/domain/realm/heraldRouting.js",
+          "symbol": "export const EXACT_SECTION"
+        },
+        {
+          "_note": "THE PREFIX RULE that files a pantheon_* kind at the faith desk for free, with no token-map row and no registry at all. If it is ever removed, this member needs the FAITH kind registry and the whole re-filing economics re-open: STOP and re-raise.",
+          "path": "src/domain/realm/heraldRouting.js",
+          "symbol": "export const PREFIX_RULES"
+        },
+        {
+          "path": "src/domain/realm/heraldRouting.js",
+          "symbol": "export function isExplicitlyRouted"
+        },
+        {
+          "_note": "Executed at compile and re-executed at the implementing tip: it matches no explicit classifier for the new token and reaches the set-but-unclassified guard, so null is the EXPECTED_VOICE value the walker arm demands.",
+          "path": "src/domain/display/newsVoice.js",
+          "symbol": "export function newsVoiceCategory"
+        },
+        {
+          "_note": "THE LEDGER KEY ORDER. This member adds ZERO new top-level keys, so the array does not move and the array-order-IS-serialized-key-order law is untouched. A6 asserts it across the landing rather than assuming it.",
+          "path": "src/domain/worldPulse/worldState.js",
+          "symbol": "export const CONDITIONAL_LEDGER_KEYS"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "Main behaviour, and it fires ONCE. Lit, a one-seat cult creed whose last settlement changes patron produces exactly one realm-scope pantheon_extinction entry naming the creed; the FOLLOWING tick, with the ledger unchanged at zero seats, produces none. The headline is pinned on a deity:<Name> fixture where the name resolves in full; the custom:<slug> truncation rides a SEPARATELY LABELLED measured-truth arm carrying a defect annotation, so a later repair re-records one labelled arm rather than silently changing a green pin."
+        },
+        {
+          "id": "A2",
+          "case": "Absent vs false vs lit, at the byte level, on a deity-BEARING world. Absent and false produce byte-identical pulse output over the same seeded drive; the LITERAL faithUnseatingEnabled true drive moves at least one fenced byte — the LIT-MUTANT CONTROL, because the absent-vs-false differential is blind by design. The fixture matures an ascendancy in EVERY arm so no hash is taken over an empty feed. The case also asserts the existing ascendancy and twilight entries are byte-identical across the landing — the control on the salience extraction."
+        },
+        {
+          "id": "A3",
+          "case": "THE COUNTERFACTUAL — the wave is not redundant with pantheon_twilight. The SAME one-seat 1 to 0 transition, run against the PRE-FEATURE base, emits nothing at all, and specifically no pantheon_twilight. Without this arm the beat could be a duplicate of a beat that already fires and no pin would notice."
+        },
+        {
+          "id": "A4",
+          "case": "NO DOUBLE OBITUARY — the tier boundary, non-vacuously. A major creed collapsing to zero seats emits no pantheon_extinction, and DOES emit its pantheon_twilight once the dwell matures. A fixture that only checked the cult case would pass while the engine emitted two realm obituaries one tick apart. The case also asserts the exclusivity invariant: no deity carries both a tier-change row and a last-seat row in the same tick."
+        },
+        {
+          "id": "A5",
+          "case": "THE REGISTRATION TOTALITY, AND THE ANTI-TIDY PIN. The new kind is phrased in WHAT_PHRASES, classified null in EXPECTED_VOICE, returns null from newsVoiceCategory, and SECTION_OF resolves it to the faith desk — with NO EXACT_SECTION row, asserted as an absence. And the six kindPoolFloors figures stand still: REGISTRIES 10, the small-family exact list, REGISTERED_KIND_COUNT 112, ROUTED_TOKENS 378, unvoiced 274, divergence 8."
+        },
+        {
+          "id": "A6",
+          "case": "Lifecycle: nothing persists, and the ledger shape is unchanged. The per-deity pantheon record carries exactly its five existing keys after a landing-tick that fires the beat — lastSeat reaches memoryState on no path. CONDITIONAL_LEDGER_KEYS is unchanged across the landing (zero new top-level keys, ASSERTED not assumed); a field-absent and a field-present world round-trip through ensureWorldState byte-identically; a zero-seat remnant survives the round trip as the ledger entry it already is."
+        },
+        {
+          "id": "A7",
+          "case": "The wizard-news authoring join, three arms. The new entry is a fully-authored site: the walker's debt ledger is unchanged at 19 entries with none for realmEvents.js; the exact identity candidateSites.length === sites.length + 1 holds; and the per-path exact pins it names are untouched. Spectacle-aware: this member touches no drawsPilgrims-class predicate and no scale band, so no negative in this battery can be silently satisfied at a high scale band."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/pantheon.test.js",
+          "tests/domain/realmEvents.test.js",
+          "tests/domain/impactKindWalkers.test.js",
+          "tests/domain/settlementRumors.test.js",
+          "tests/domain/rumorPhrasePools.test.js",
+          "tests/domain/religionDormancy.byteIdentity.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/kindPoolFloors.walker.test.js",
+          "tests/lint/heraldRouting.walker.test.js",
+          "tests/lint/wizardNewsAuthoring.walker.test.js",
+          "tests/lint/sizeBaseline.test.js",
+          "tests/lint/couplingInclusion.walker.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/proseNumerics.test.js",
+          "tests/property/worldpulseDeityGolden.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/domain/worldPulse/pulseKernel.js"
+        ],
+        [
+          "npm",
+          "run",
+          "validate:packets"
+        ],
+        [
+          "npm",
+          "run",
+          "check:tail"
+        ]
+      ]
     }
   ]
 }
