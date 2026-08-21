@@ -1,0 +1,761 @@
+{
+ "instrument": "MFI1-tone",
+ "gap": "G-40(ii)",
+ "exclusions": {
+  "plates_on_disk": 313,
+  "holdout_arm_proposed": 53,
+  "holdout_arm_minimal_swap": 53,
+  "holdout_arms_intersection": 25,
+  "holdout_union_excluded": 81,
+  "holdout_union_present_on_disk": 81,
+  "plates_admissible": 232,
+  "plates_excluded": 81,
+  "arithmetic": "313 on disk - 81 holdout = 232 admissible",
+  "scrub_34_naming_barred": 34,
+  "scrub_intersect_holdout": []
+ },
+ "skipped": [],
+ "within_region_null": {
+  "n": 2,
+  "delta_tone_L_p50": 10.96,
+  "delta_tone_L_p90": 18.73,
+  "overlap_p50": 0.405,
+  "sep_standardised_p90": 1.21,
+  "meaning": "the separation this instrument returns between two halves of ONE region. A pair separation must clear this to mean anything."
+ },
+ "nulls": [
+  {
+   "plate": "hf26-town-fire-rebuild",
+   "region": "hf26@old",
+   "arm": "within-region null",
+   "region_a": "hf26@old|left",
+   "region_b": "hf26@old|right",
+   "delta_tone_L": 3.5,
+   "delta_chroma": 10.5,
+   "delta_warm": 10.5,
+   "sep_standardised": 0.522,
+   "overlap": 0.3636,
+   "pooled_robust_sd_L": 6.7,
+   "n_masses_a": 10,
+   "n_masses_b": 22,
+   "underpowered": true
+  },
+  {
+   "plate": "hf26-town-fire-rebuild",
+   "region": "hf26@newquarter",
+   "arm": "within-region null",
+   "region_a": "hf26@newquarter|left",
+   "region_b": "hf26@newquarter|right",
+   "delta_tone_L": 1.34,
+   "delta_chroma": 9.0,
+   "delta_warm": 9.0,
+   "sep_standardised": 0.226,
+   "overlap": 0.0,
+   "pooled_robust_sd_L": 5.93,
+   "n_masses_a": 5,
+   "n_masses_b": 1,
+   "underpowered": true
+  },
+  {
+   "plate": "hf26-town-fire-rebuild",
+   "region": "hf26@old",
+   "arm": "within-region null",
+   "region_a": "hf26@old|left",
+   "region_b": "hf26@old|right",
+   "delta_tone_L": 3.5,
+   "delta_chroma": 10.5,
+   "delta_warm": 10.5,
+   "sep_standardised": 0.522,
+   "overlap": 0.3636,
+   "pooled_robust_sd_L": 6.7,
+   "n_masses_a": 10,
+   "n_masses_b": 22,
+   "underpowered": true
+  },
+  {
+   "plate": "hf26-town-fire-rebuild",
+   "region": "hf26@burnt",
+   "arm": "within-region null",
+   "region_a": "hf26@burnt|left",
+   "region_b": "hf26@burnt|right",
+   "delta_tone_L": 23.67,
+   "delta_chroma": 6.0,
+   "delta_warm": 6.0,
+   "sep_standardised": 1.543,
+   "overlap": 0.0,
+   "pooled_robust_sd_L": 15.34,
+   "n_masses_a": 3,
+   "n_masses_b": 12,
+   "underpowered": true
+  },
+  {
+   "plate": "hf274-city-twin-bridge",
+   "region": "hf274@oldbank",
+   "arm": "within-region null",
+   "region_a": "hf274@oldbank|left",
+   "region_b": "hf274@oldbank|right",
+   "delta_tone_L": 1.25,
+   "delta_chroma": 2.5,
+   "delta_warm": 2.5,
+   "sep_standardised": 0.074,
+   "overlap": 0.3805,
+   "pooled_robust_sd_L": 16.96,
+   "n_masses_a": 28,
+   "n_masses_b": 29,
+   "underpowered": false
+  },
+  {
+   "plate": "hf274-city-twin-bridge",
+   "region": "hf274@newcharter",
+   "arm": "within-region null",
+   "region_a": "hf274@newcharter|left",
+   "region_b": "hf274@newcharter|right",
+   "delta_tone_L": 22.67,
+   "delta_chroma": 13.0,
+   "delta_warm": 13.0,
+   "sep_standardised": 5.477,
+   "overlap": 0.0667,
+   "pooled_robust_sd_L": 4.14,
+   "n_masses_a": 15,
+   "n_masses_b": 7,
+   "underpowered": true
+  },
+  {
+   "plate": "hf239-castra-town",
+   "region": "hf239@vicus",
+   "arm": "within-region null",
+   "region_a": "hf239@vicus|left",
+   "region_b": "hf239@vicus|right",
+   "delta_tone_L": 4.0,
+   "delta_chroma": 0.0,
+   "delta_warm": 0.0,
+   "sep_standardised": 0.594,
+   "overlap": 0.1111,
+   "pooled_robust_sd_L": 6.73,
+   "n_masses_a": 27,
+   "n_masses_b": 1,
+   "underpowered": true
+  },
+  {
+   "plate": "hf239-castra-town",
+   "region": "hf239@camp",
+   "arm": "within-region null",
+   "region_a": "hf239@camp|left",
+   "region_b": "hf239@camp|right",
+   "delta_tone_L": 20.67,
+   "delta_chroma": 23.0,
+   "delta_warm": 23.0,
+   "sep_standardised": 1.336,
+   "overlap": 0.4288,
+   "pooled_robust_sd_L": 15.47,
+   "n_masses_a": 57,
+   "n_masses_b": 27,
+   "underpowered": false
+  },
+  {
+   "plate": "hf347-town-three-circuits",
+   "region": "hf347@core",
+   "arm": "within-region null",
+   "region_a": "hf347@core|left",
+   "region_b": "hf347@core|right",
+   "delta_tone_L": 31.33,
+   "delta_chroma": 4.0,
+   "delta_warm": 4.0,
+   "sep_standardised": 39.013,
+   "overlap": 0.0,
+   "pooled_robust_sd_L": 0.8,
+   "n_masses_a": 3,
+   "n_masses_b": 1,
+   "underpowered": true
+  },
+  {
+   "plate": "hf347-town-three-circuits",
+   "region": "hf347@outerring",
+   "arm": "within-region null",
+   "status": "EMPTY"
+  },
+  {
+   "plate": "hf40-slum-fringe-city",
+   "region": "hf40@rich",
+   "arm": "within-region null",
+   "status": "EMPTY"
+  },
+  {
+   "plate": "hf40-slum-fringe-city",
+   "region": "hf40@poor",
+   "arm": "within-region null",
+   "region_a": "hf40@poor|left",
+   "region_b": "hf40@poor|right",
+   "delta_tone_L": 50.0,
+   "delta_chroma": 20.0,
+   "delta_warm": 20.0,
+   "sep_standardised": 16.352,
+   "overlap": 0.1667,
+   "pooled_robust_sd_L": 3.06,
+   "n_masses_a": 6,
+   "n_masses_b": 3,
+   "underpowered": true
+  },
+  {
+   "plate": "hf72-dumbbell-town",
+   "region": "hf72@east",
+   "arm": "within-region null",
+   "region_a": "hf72@east|left",
+   "region_b": "hf72@east|right",
+   "delta_tone_L": 22.5,
+   "delta_chroma": 5.5,
+   "delta_warm": 5.5,
+   "sep_standardised": 3.698,
+   "overlap": 0.0,
+   "pooled_robust_sd_L": 6.08,
+   "n_masses_a": 2,
+   "n_masses_b": 23,
+   "underpowered": true
+  },
+  {
+   "plate": "hf72-dumbbell-town",
+   "region": "hf72@west",
+   "arm": "within-region null",
+   "region_a": "hf72@west|left",
+   "region_b": "hf72@west|right",
+   "delta_tone_L": 1.0,
+   "delta_chroma": 2.0,
+   "delta_warm": 2.0,
+   "sep_standardised": 0.231,
+   "overlap": 0.2857,
+   "pooled_robust_sd_L": 4.32,
+   "n_masses_a": 7,
+   "n_masses_b": 7,
+   "underpowered": true
+  }
+ ],
+ "scale_invariance": [
+  {
+   "pair": "old fabric -> new quarter",
+   "longside": 2200,
+   "delta_tone_L": 23.17,
+   "overlap": 0.0488,
+   "sep_standardised": 4.262
+  },
+  {
+   "pair": "old fabric -> new quarter",
+   "longside": 3000,
+   "delta_tone_L": 23.16,
+   "overlap": 0.1212,
+   "sep_standardised": 3.885
+  },
+  {
+   "pair": "old fabric -> new quarter",
+   "longside": 3800,
+   "delta_tone_L": 24.0,
+   "overlap": 0.0976,
+   "sep_standardised": 3.665
+  },
+  {
+   "pair": "old fabric -> burnt quarter",
+   "longside": 2200,
+   "delta_tone_L": 23.33,
+   "overlap": 0.1501,
+   "sep_standardised": 0.959
+  },
+  {
+   "pair": "old fabric -> burnt quarter",
+   "longside": 3000,
+   "delta_tone_L": 24.0,
+   "overlap": 0.1841,
+   "sep_standardised": 1.542
+  },
+  {
+   "pair": "old fabric -> burnt quarter",
+   "longside": 3800,
+   "delta_tone_L": 32.75,
+   "overlap": 0.1707,
+   "sep_standardised": 1.893
+  },
+  {
+   "pair": "Oldbank -> Newcharter",
+   "longside": 2200,
+   "delta_tone_L": 3.33,
+   "overlap": 0.3542,
+   "sep_standardised": 0.263
+  },
+  {
+   "pair": "Oldbank -> Newcharter",
+   "longside": 3000,
+   "delta_tone_L": 2.75,
+   "overlap": 0.3742,
+   "sep_standardised": 0.184
+  },
+  {
+   "pair": "Oldbank -> Newcharter",
+   "longside": 3800,
+   "delta_tone_L": 5.0,
+   "overlap": 0.3431,
+   "sep_standardised": 0.27
+  },
+  {
+   "pair": "vicus -> castra camp",
+   "longside": 2200,
+   "delta_tone_L": 7.34,
+   "overlap": 0.4773,
+   "sep_standardised": 0.514
+  },
+  {
+   "pair": "vicus -> castra camp",
+   "longside": 3000,
+   "delta_tone_L": 6.17,
+   "overlap": 0.4314,
+   "sep_standardised": 0.428
+  },
+  {
+   "pair": "vicus -> castra camp",
+   "longside": 3800,
+   "delta_tone_L": 7.5,
+   "overlap": 0.4871,
+   "sep_standardised": 0.503
+  },
+  {
+   "pair": "core -> outer ring",
+   "longside": 2200,
+   "delta_tone_L": 0.75,
+   "overlap": 0.2833,
+   "sep_standardised": 0.072
+  },
+  {
+   "pair": "core -> outer ring",
+   "longside": 3000,
+   "delta_tone_L": 33.66,
+   "overlap": 0.0,
+   "sep_standardised": 3.061
+  },
+  {
+   "pair": "core -> outer ring",
+   "longside": 3800,
+   "delta_tone_L": 28.33,
+   "overlap": 0.1111,
+   "sep_standardised": 2.52
+  },
+  {
+   "pair": "rich -> poor (comparison case)",
+   "longside": 2200,
+   "delta_tone_L": 4.67,
+   "overlap": 0.2083,
+   "sep_standardised": 0.576
+  },
+  {
+   "pair": "rich -> poor (comparison case)",
+   "longside": 3000,
+   "delta_tone_L": 9.33,
+   "overlap": 0.0769,
+   "sep_standardised": 0.355
+  },
+  {
+   "pair": "rich -> poor (comparison case)",
+   "longside": 3800,
+   "delta_tone_L": 34.17,
+   "overlap": 0.0,
+   "sep_standardised": 4.175
+  },
+  {
+   "pair": "east nucleus -> west (comparison case)",
+   "longside": 2200,
+   "delta_tone_L": 3.17,
+   "overlap": 0.5256,
+   "sep_standardised": 0.348
+  },
+  {
+   "pair": "east nucleus -> west (comparison case)",
+   "longside": 3000,
+   "delta_tone_L": 0.34,
+   "overlap": 0.3756,
+   "sep_standardised": 0.039
+  },
+  {
+   "pair": "east nucleus -> west (comparison case)",
+   "longside": 3800,
+   "delta_tone_L": 2.0,
+   "overlap": 0.4259,
+   "sep_standardised": 0.255
+  }
+ ],
+ "pairs": [
+  {
+   "plate": "hf26-town-fire-rebuild",
+   "pair": "old fabric -> new quarter",
+   "kind": "epoch",
+   "longside": 3000,
+   "plate_paper_L": 215.3,
+   "plate_ink_thr": 88.9,
+   "plate_body_thr": 165.8,
+   "a": {
+    "n_masses": 33,
+    "dropped_as_ink": 0,
+    "fill_L_p50": 149.0,
+    "fill_L_p25": 142.0,
+    "fill_L_p75": 152.33,
+    "d_paper_p50": 66.33,
+    "d_paper_p25": 63.0,
+    "d_paper_p75": 73.33,
+    "chroma_p50": 68.0,
+    "warm_p50": 68.0,
+    "cell_pitch_px": 31.86,
+    "win_px": [
+     1800,
+     845
+    ]
+   },
+   "b": {
+    "n_masses": 8,
+    "dropped_as_ink": 0,
+    "fill_L_p50": 172.17,
+    "fill_L_p25": 167.5,
+    "fill_L_p75": 173.25,
+    "d_paper_p50": 43.17,
+    "d_paper_p25": 42.08,
+    "d_paper_p75": 47.83,
+    "chroma_p50": 82.5,
+    "warm_p50": 82.5,
+    "cell_pitch_px": 44.3,
+    "win_px": [
+     900,
+     886
+    ]
+   },
+   "region_a": "hf26@old",
+   "region_b": "hf26@newquarter",
+   "delta_tone_L": 23.16,
+   "delta_chroma": 14.5,
+   "delta_warm": 14.5,
+   "sep_standardised": 3.885,
+   "overlap": 0.1212,
+   "pooled_robust_sd_L": 5.96,
+   "n_masses_a": 33,
+   "n_masses_b": 8,
+   "underpowered": true
+  },
+  {
+   "plate": "hf26-town-fire-rebuild",
+   "pair": "old fabric -> burnt quarter",
+   "kind": "epoch",
+   "longside": 3000,
+   "plate_paper_L": 215.3,
+   "plate_ink_thr": 88.9,
+   "plate_body_thr": 165.8,
+   "a": {
+    "n_masses": 33,
+    "dropped_as_ink": 0,
+    "fill_L_p50": 149.0,
+    "fill_L_p25": 142.0,
+    "fill_L_p75": 152.33,
+    "d_paper_p50": 66.33,
+    "d_paper_p25": 63.0,
+    "d_paper_p75": 73.33,
+    "chroma_p50": 68.0,
+    "warm_p50": 68.0,
+    "cell_pitch_px": 31.86,
+    "win_px": [
+     1800,
+     845
+    ]
+   },
+   "b": {
+    "n_masses": 13,
+    "dropped_as_ink": 19,
+    "fill_L_p50": 125.0,
+    "fill_L_p25": 116.0,
+    "fill_L_p75": 147.67,
+    "d_paper_p50": 90.33,
+    "d_paper_p25": 67.67,
+    "d_paper_p75": 99.33,
+    "chroma_p50": 33.0,
+    "warm_p50": 33.0,
+    "cell_pitch_px": 32.07,
+    "win_px": [
+     1200,
+     866
+    ]
+   },
+   "region_a": "hf26@old",
+   "region_b": "hf26@burnt",
+   "delta_tone_L": 24.0,
+   "delta_chroma": 35.0,
+   "delta_warm": 35.0,
+   "sep_standardised": 1.542,
+   "overlap": 0.1841,
+   "pooled_robust_sd_L": 15.57,
+   "n_masses_a": 33,
+   "n_masses_b": 13,
+   "underpowered": false
+  },
+  {
+   "plate": "hf274-city-twin-bridge",
+   "pair": "Oldbank -> Newcharter",
+   "kind": "epoch",
+   "longside": 3000,
+   "plate_paper_L": 222.0,
+   "plate_ink_thr": 100.1,
+   "plate_body_thr": 184.8,
+   "a": {
+    "n_masses": 62,
+    "dropped_as_ink": 1,
+    "fill_L_p50": 151.75,
+    "fill_L_p25": 143.25,
+    "fill_L_p75": 164.58,
+    "d_paper_p50": 70.25,
+    "d_paper_p25": 57.42,
+    "d_paper_p75": 78.75,
+    "chroma_p50": 53.25,
+    "warm_p50": 53.25,
+    "cell_pitch_px": 21.64,
+    "win_px": [
+     1200,
+     966
+    ]
+   },
+   "b": {
+    "n_masses": 20,
+    "dropped_as_ink": 0,
+    "fill_L_p50": 154.5,
+    "fill_L_p25": 152.25,
+    "fill_L_p75": 171.33,
+    "d_paper_p50": 67.5,
+    "d_paper_p25": 50.67,
+    "d_paper_p75": 69.75,
+    "chroma_p50": 61.75,
+    "warm_p50": 61.75,
+    "cell_pitch_px": 28.39,
+    "win_px": [
+     900,
+     745
+    ]
+   },
+   "region_a": "hf274@oldbank",
+   "region_b": "hf274@newcharter",
+   "delta_tone_L": 2.75,
+   "delta_chroma": 8.5,
+   "delta_warm": 8.5,
+   "sep_standardised": 0.184,
+   "overlap": 0.3742,
+   "pooled_robust_sd_L": 14.98,
+   "n_masses_a": 62,
+   "n_masses_b": 20,
+   "underpowered": false
+  },
+  {
+   "plate": "hf239-castra-town",
+   "pair": "vicus -> castra camp",
+   "kind": "epoch",
+   "longside": 3000,
+   "plate_paper_L": 236.0,
+   "plate_ink_thr": 111.1,
+   "plate_body_thr": 196.7,
+   "a": {
+    "n_masses": 28,
+    "dropped_as_ink": 0,
+    "fill_L_p50": 154.83,
+    "fill_L_p25": 144.83,
+    "fill_L_p75": 159.42,
+    "d_paper_p50": 81.17,
+    "d_paper_p25": 76.58,
+    "d_paper_p75": 91.17,
+    "chroma_p50": 81.0,
+    "warm_p50": 81.0,
+    "cell_pitch_px": 27.12,
+    "win_px": [
+     900,
+     705
+    ]
+   },
+   "b": {
+    "n_masses": 87,
+    "dropped_as_ink": 0,
+    "fill_L_p50": 161.0,
+    "fill_L_p25": 151.33,
+    "fill_L_p75": 175.67,
+    "d_paper_p50": 75.0,
+    "d_paper_p25": 60.33,
+    "d_paper_p75": 84.67,
+    "chroma_p50": 68.0,
+    "warm_p50": 68.0,
+    "cell_pitch_px": 27.51,
+    "win_px": [
+     1020,
+     1128
+    ]
+   },
+   "region_a": "hf239@vicus",
+   "region_b": "hf239@camp",
+   "delta_tone_L": 6.17,
+   "delta_chroma": 13.0,
+   "delta_warm": 13.0,
+   "sep_standardised": 0.428,
+   "overlap": 0.4314,
+   "pooled_robust_sd_L": 14.42,
+   "n_masses_a": 28,
+   "n_masses_b": 87,
+   "underpowered": false
+  },
+  {
+   "plate": "hf347-town-three-circuits",
+   "pair": "core -> outer ring",
+   "kind": "epoch",
+   "longside": 3000,
+   "plate_paper_L": 238.3,
+   "plate_ink_thr": 88.2,
+   "plate_body_thr": 180.8,
+   "a": {
+    "n_masses": 9,
+    "dropped_as_ink": 0,
+    "fill_L_p50": 202.67,
+    "fill_L_p25": 174.67,
+    "fill_L_p75": 204.33,
+    "d_paper_p50": 35.67,
+    "d_paper_p25": 34.0,
+    "d_paper_p75": 63.67,
+    "chroma_p50": 38.0,
+    "warm_p50": 38.0,
+    "cell_pitch_px": 29.85,
+    "win_px": [
+     539,
+     806
+    ]
+   },
+   "b": {
+    "n_masses": 1,
+    "dropped_as_ink": 0,
+    "fill_L_p50": 169.0,
+    "fill_L_p25": 169.0,
+    "fill_L_p75": 169.0,
+    "d_paper_p50": 69.33,
+    "d_paper_p25": 69.33,
+    "d_paper_p75": 69.33,
+    "chroma_p50": 35.0,
+    "warm_p50": 35.0,
+    "cell_pitch_px": 42.1,
+    "win_px": [
+     421,
+     1208
+    ]
+   },
+   "region_a": "hf347@core",
+   "region_b": "hf347@outerring",
+   "delta_tone_L": 33.66,
+   "delta_chroma": 3.0,
+   "delta_warm": 3.0,
+   "sep_standardised": 3.061,
+   "overlap": 0.0,
+   "pooled_robust_sd_L": 11.0,
+   "n_masses_a": 9,
+   "n_masses_b": 1,
+   "underpowered": true
+  },
+  {
+   "plate": "hf40-slum-fringe-city",
+   "pair": "rich -> poor (comparison case)",
+   "kind": "district",
+   "longside": 3000,
+   "plate_paper_L": 237.7,
+   "plate_ink_thr": 88.2,
+   "plate_body_thr": 183.8,
+   "a": {
+    "n_masses": 5,
+    "dropped_as_ink": 0,
+    "fill_L_p50": 149.33,
+    "fill_L_p25": 140.33,
+    "fill_L_p75": 155.67,
+    "d_paper_p50": 88.33,
+    "d_paper_p25": 82.0,
+    "d_paper_p75": 97.33,
+    "chroma_p50": 33.0,
+    "warm_p50": 32.0,
+    "cell_pitch_px": 36.75,
+    "win_px": [
+     1080,
+     1470
+    ]
+   },
+   "b": {
+    "n_masses": 13,
+    "dropped_as_ink": 0,
+    "fill_L_p50": 158.67,
+    "fill_L_p25": 112.0,
+    "fill_L_p75": 167.67,
+    "d_paper_p50": 79.0,
+    "d_paper_p25": 70.0,
+    "d_paper_p75": 125.67,
+    "chroma_p50": 29.0,
+    "warm_p50": 29.0,
+    "cell_pitch_px": 26.25,
+    "win_px": [
+     960,
+     1470
+    ]
+   },
+   "region_a": "hf40@rich",
+   "region_b": "hf40@poor",
+   "delta_tone_L": 9.33,
+   "delta_chroma": 4.0,
+   "delta_warm": 3.0,
+   "sep_standardised": 0.355,
+   "overlap": 0.0769,
+   "pooled_robust_sd_L": 26.32,
+   "n_masses_a": 5,
+   "n_masses_b": 13,
+   "underpowered": true
+  },
+  {
+   "plate": "hf72-dumbbell-town",
+   "pair": "east nucleus -> west (comparison case)",
+   "kind": "district",
+   "longside": 3000,
+   "plate_paper_L": 216.3,
+   "plate_ink_thr": 115.3,
+   "plate_body_thr": 189.4,
+   "a": {
+    "n_masses": 25,
+    "dropped_as_ink": 0,
+    "fill_L_p50": 162.67,
+    "fill_L_p25": 156.5,
+    "fill_L_p75": 171.0,
+    "d_paper_p50": 53.67,
+    "d_paper_p25": 45.33,
+    "d_paper_p75": 59.83,
+    "chroma_p50": 75.0,
+    "warm_p50": 75.0,
+    "cell_pitch_px": 34.45,
+    "win_px": [
+     900,
+     1309
+    ]
+   },
+   "b": {
+    "n_masses": 18,
+    "dropped_as_ink": 0,
+    "fill_L_p50": 163.0,
+    "fill_L_p25": 160.33,
+    "fill_L_p75": 169.42,
+    "d_paper_p50": 53.33,
+    "d_paper_p25": 46.92,
+    "d_paper_p75": 56.0,
+    "chroma_p50": 89.0,
+    "warm_p50": 89.0,
+    "cell_pitch_px": 28.97,
+    "win_px": [
+     690,
+     1168
+    ]
+   },
+   "region_a": "hf72@east",
+   "region_b": "hf72@west",
+   "delta_tone_L": 0.34,
+   "delta_chroma": 14.0,
+   "delta_warm": 14.0,
+   "sep_standardised": 0.039,
+   "overlap": 0.3756,
+   "pooled_robust_sd_L": 8.74,
+   "n_masses_a": 25,
+   "n_masses_b": 18,
+   "underpowered": false
+  }
+ ]
+}

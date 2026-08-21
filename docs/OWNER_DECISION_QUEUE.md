@@ -12830,3 +12830,77 @@ recommended. Implementation, per item:
    silent-no-op trap are named W4 cures; the .joined roster
    asymmetry is deferred-with-record in the receipt. The six
    in-lane judgment calls at §7.0 are RATIFIED as tabled.
+
+## §307 · MF-I1 COLLECTED — G-39 IS REFUTED BY ITS OWN
+## PRE-REGISTERED RULE; THE MUSH PROGRAM GETS A MEASURED TARGET
+## INSTEAD OF A BORROWED THEORY (2026-08-21; chair: FABLE;
+## receipt laneMFI1-receipt.md; instruments committed with this
+## row)
+
+1. **COLLECTED.** Seven instruments landed in map-corpus/docs
+   (exclusions, footprints, g39, roofs, tone, towers, q1guard —
+   .py + .json; validation PNGs stay local per the corpus
+   binary policy), one ⟦FOLD §304⟧ edit set in the spec, zero
+   git operations by the lane. L6 held: the lane excluded the
+   UNION of both roster arms (a strict superset — 28 plates
+   excluded unnecessarily, zero holdout members touched) —
+   RATIFIED as the safe direction. The footprint extractor was
+   validated the way this program now demands: measured
+   recovery 0.973–1.000 on a planted synthetic control, its
+   own validation sheets convicting two of its defects
+   mid-build, both cured with before/after published.
+2. ⭐⭐⭐ **G-39's FOUR-OUTCOME RULE, RUN AS WRITTEN, RETURNS
+   ROW 2: THE CHAOS-AT-LARGE / ORTHOGONAL-AT-SMALL HYPOTHESIS
+   IS REFUTED FOR OUR TARGET.** Arm 1 disordered (φ 0.0983,
+   solidity 0.7455, elongation 2.143 — reproducing the spec's
+   own published figures); arm 2 IRREGULAR: pooled footprint
+   rectangularity 0.6945/0.7230 against a measured ceiling
+   where a perfect rectangle reads 0.921 and an L-shape 0.704
+   — unanimous across two extraction modes and two subject
+   sets. Per the rule's own row: G-38 keeps its four axes; the
+   chaos scoping is NOT adopted; §261.3's gate is DISCHARGED
+   BY REFUTATION and the principle may no longer be cited.
+   The pre-registration held end to end — the program's
+   falsification machinery worked exactly as designed on its
+   highest-profile hypothesis.
+3. ⭐⭐ **THE FINDING THAT REPLACES THE THEORY: at town tier
+   and above the corpus draws PERIMETER-BLOCK RANGES, not
+   individual footprints.** The mechanical-bars cure therefore
+   aims at continuous range-masses with irregular internal
+   division at the measured 0.69–0.72 rectangularity register
+   — a lawful VALIDATION TARGET under GAP-B (never a generator
+   input) — not at footprint-level chaos. The mush program
+   now has a measured destination instead of a borrowed
+   mechanism.
+4. **THE OTHER VERDICTS.** (a) G-40(ii) reads NULL: per-epoch
+   material/tone separation has NO corpus signature (both
+   powered pairs under the instrument's own 10.96 L
+   within-region null) — §297.3c's W4 triad scope is AMENDED:
+   grain and plot-variance carry vintage legibility; a pigment
+   channel would be a DECLARED DEPARTURE and is PARKED as
+   owner-adjacent taste. (b) The tower hand-sample REFUTES the
+   corners-only mechanism as a corpus law (2 of 5 walled
+   plates carry zero towers; hf347's smooth oval carries 17
+   with no corners) — §261.4 working as designed: the Watabou
+   candidate loses to corpus evidence; tower placement derives
+   from run-typing + the hand-sample in the wall-iconography
+   work; SUB-3 stays HELD (its metric is still not plate-side
+   measurable). (c) G-40(i) plate-side is NOT DELIVERED and
+   the lane published NO fake recovery — ACCEPTED as the
+   correct failure mode; the generated-side spec + 5-plate
+   hand sample stand; plate-side parked. (d) The roof-count
+   instrument improves on the grain kernel (25 masses on hf90
+   vs "99.6 cells") but at 0.875/0.56 recall/precision it
+   proposes NO rungs — §298.4c's restoration stays OPEN; T-01's
+   low rungs remain UNVALIDATED-BY-INSTRUMENT; precision work
+   joins the instrument backlog. (e) The Q-1 guard is built,
+   its planted-violation arm fires, and it scans green — it
+   joins the corpus gate family.
+5. **THE LANE'S ALARM IS THE KNOWN CONDITION**: the shared
+   index's 71 staged map-corpus deletions are §300.2a's
+   poisoned-index state, already ruled — the private-index
+   method is the only lawful commit path and is immune by
+   construction; no one commits the default index in this
+   tree. Restated here because a second lane independently
+   tripped on it. The instruments and the fold are committed
+   WITH THIS ROW by that method.

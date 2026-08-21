@@ -2717,6 +2717,25 @@ instruments are re-runnable against any render directory.
    TWELVE-ROOF thorp, returns 99.6 "cells across".** **What restores them: a ROOF-COUNT
    instrument** — these plates carry 6–24 roofs, so an eye count is *exact*. **Any grading
    verdict already issued against them is withdrawn with them.**
+   ⟦FOLD §304⟧ ⚠ **THE ROOF-COUNT INSTRUMENT NOW EXISTS AND THE RUNGS ARE STILL WITHDRAWN — THOSE
+   ARE TWO DIFFERENT FACTS.** `MFI1-roofs.py` (ODQ §298.4c) counts DRAWN BUILDING MASSES in the
+   low-tier windows, quoted unchanged from `HFM1-grain2.py`'s table, and never consults the grain
+   kernel. Measured, holdout excluded: **thorp 3·9·11·11·17·25 (n=6, p50 11) · hamlet
+   20·25·26·40·49 (n=5, p50 26) · village 6·15·19·30·34·45 (n=6, p50 24.5)** — and on `hf90` it
+   returns **25 masses** where the grain kernel returns 99.6 "cells across", so it is measuring the
+   right KIND of thing. ⛔⛔ **BUT ITS RECOVERY IS PUBLISHED AND IT IS NOT GOOD ENOUGH TO SET A
+   BAND: recall 0.875, precision 0.56 against a hand count on hf90** (false positives are one
+   named class — hedge-bank fragments at field boundaries), and longside stability is 6 of 8. **No
+   rungs are proposed here and none may be adopted from these figures.** §257.3(b) is untouched:
+   the thorp/hamlet numbers may remain a GENERATION INPUT labelled UNVALIDATED-BY-INSTRUMENT; they
+   may not be GRADED. ⚠ *And "twelve roofs" is undefined — planes or masses? MF-I1 counts masses
+   and hand-counts 16 in the hf90 window; the definition is a chair ruling.*
+   ⭐ ⟦FOLD §304⟧ **AND THE PROHIBITION IS NOW ENFORCED BY MACHINERY, NOT BY MEMORY**:
+   `MFI1-q1guard.py` (ODQ §297.7b) REDS if any grading surface under `map-corpus/docs` issues a
+   verdict against a withdrawn rung. It carries a **planted-violation arm** — 3 planted sentences
+   must fire, 5 near-misses quoted from these documents must stay quiet, and the directory walk is
+   exercised on a planted file — and it currently scans GREEN over 16 surfaces. Exit 0/1/2, no
+   side effects, runs beside `corpus_integrity.py`.
 3. ⚠ **INSTRUMENT PROVENANCE — know which ruler produced each number before you compare to it.**
    `MFS1-measure.py` (texture blocks, palette clusters, colour-family shares) — ⛔ **its
    `center_edge_ratio` is the one noisy field: median 7% deviation, max 44%. DO NOT BAND THAT
@@ -2753,7 +2772,7 @@ the 12-plate sample they were drawn from.*
 
 | tier | **target band (cells across)** | basis | status |
 |---|---|---|---|
-| **thorp** | ⛔ **none — WITHDRAWN** | published 8–14 rested on n=1 with a **misplaced window** | **may not be graded** until a roof-count instrument exists |
+| **thorp** | ⛔ **none — WITHDRAWN** | published 8–14 rested on n=1 with a **misplaced window** | **may not be graded**. ⟦FOLD §304⟧ *the roof-count instrument now exists (`MFI1-roofs.py`) but reads at precision 0.56 and sets no band; the rung stays withdrawn and `MFI1-q1guard.py` enforces it* |
 | **hamlet** | ⛔ **none — WITHDRAWN** | published 18–26 was **interpolated through that same fault** | **may not be graded** |
 | **village** | **30 – 50** | [M] n=5 → re-measured n=9, 6/9 in band, median 48.0 → **45.9** | ✅ UNCHANGED |
 | **town** | **45 – 80** | [M] n=8 → re-measured n=12, 10/12 in band, median 61.3 → **57.0** | ✅ UNCHANGED |
@@ -3243,8 +3262,8 @@ substituted**, and a later lane that changes a law's execution must add a row be
 | # | law | INTENT preserved | execution changed FROM → TO | ⭐ measurable signature, unchanged or improved | status |
 |---|---|---|---|---|---|
 | **SUB-1** | §239.2 / the wide-main-street laws — **street hierarchy must be legible** | importance is readable at a glance without a label | *stroke a wider line* → ⭐ **per-edge SETBACKS chosen by what the edge faces**; visible width is the sum of two facing setbacks | §2.5 scanline **p97/p50 organic 16–30**; widest channel p99 **2.7–6.4 plot-widths**; §2.4 distance-transform hierarchy **1.79–3.32–7.30** | ⭐ **ADOPTED at §258.3(a).** Bonus: §239's wall-side street **falls out for free** instead of being special-cased |
-| **SUB-2** | §246 / S10's plot-series intent — **organic plot geometry** | the plot series stays an irregular, believable comb | *recurse until the piece IS the building* → ⭐ **recurse to the PLOT, then FIT a footprint from a rectilinear vocabulary** | §2.5 burgage geometry **depth:width 4–6:1**, building **30–45% of plot depth**, touching the street line, widths ±20–40% never exact; §2.4 **block solidity 0.60–0.86** and **elongation 1.6–3.0**. ⟦FOLD §297/§298⟧ **AND THE §4.1c LEGS, NAMED IN THE ROW AS §263.3c REQUIRES:** `block_solidity_p50` (corpus median **0.748**) · `block_elongation_p50/p90` (median **2.14**, band 1.6–3.0) · `orientation_order_phi` (whole settlement 0.044–**0.103**–0.433) · `orientation_entropy`. ⚠ **Every named leg is BLOCK-scale. The triangular-remnant claim is FOOTPRINT-scale, and no footprint-shape metric exists in the measured register — that is §4.1c arm 2 / G-40(iii), unbuilt.** So the row's signature is **complete at block scale and PENDING at footprint scale**; the footprint half may not be graded until G-40(iii) reads a number | ⭐ **ADOPTED at §263.4.** Our aspect constraint becomes a **HARD FILTER**; the wedge becomes unrepresentable rather than caught |
-| **SUB-3** | ATLAS banned prior #7 — **repeated elements must not read as machine-set** | the "generated" tell is removed | *seeded spacing VARIANCE on an interval we choose* → ⭐ **place by STRUCTURE (the corners that exist) and never choose an interval at all** | ⛔ **NO SIGNATURE EXISTS YET — G-40's tower-spacing instrument** (spacing CV along the circuit; towers per unit length) | ⚠⚠ **PROVISIONAL AND HELD.** §258.2's own rule forbids a substitution that cannot name its signature, so **this one is recorded as PENDING and may not land before W0 builds the instrument** |
+| **SUB-2** | §246 / S10's plot-series intent — **organic plot geometry** | the plot series stays an irregular, believable comb | *recurse until the piece IS the building* → ⭐ **recurse to the PLOT, then FIT a footprint from a rectilinear vocabulary** | §2.5 burgage geometry **depth:width 4–6:1**, building **30–45% of plot depth**, touching the street line, widths ±20–40% never exact; §2.4 **block solidity 0.60–0.86** and **elongation 1.6–3.0**. ⟦FOLD §297/§298⟧ **AND THE §4.1c LEGS, NAMED IN THE ROW AS §263.3c REQUIRES:** `block_solidity_p50` (corpus median **0.748**) · `block_elongation_p50/p90` (median **2.14**, band 1.6–3.0) · `orientation_order_phi` (whole settlement 0.044–**0.103**–0.433) · `orientation_entropy`. ⚠ **Every named leg is BLOCK-scale. The triangular-remnant claim is FOOTPRINT-scale, and no footprint-shape metric exists in the measured register — that is §4.1c arm 2 / G-40(iii), unbuilt.** So the row's signature is **complete at block scale and PENDING at footprint scale**; the footprint half may not be graded until G-40(iii) reads a number.<br>⟦FOLD §304⟧ ✅ **THE FOOTPRINT HALF NOW HAS ITS NUMBER AND MAY BE GRADED**: `footprint_rectangularity` p50 **0.6945** (`mass`) / **0.7230** (`region`) — ⚠ **against a MEASURED rectangle ceiling of 0.921, an L-shape reference of 0.704 and a wedge reference of 0.557, never against 1.0** (`MFI1-control.json`). ⭐ **The triangular-remnant claim is now checkable: a wedge is the one shape this instrument separates cleanly from the corpus's own distribution**, so the HARD FILTER can be graded rather than asserted | ⭐ **ADOPTED at §263.4.** Our aspect constraint becomes a **HARD FILTER**; the wedge becomes unrepresentable rather than caught |
+| **SUB-3** | ATLAS banned prior #7 — **repeated elements must not read as machine-set** | the "generated" tell is removed | *seeded spacing VARIANCE on an interval we choose* → ⭐ **place by STRUCTURE (the corners that exist) and never choose an interval at all** | ⛔ **NO SIGNATURE EXISTS YET — G-40's tower-spacing instrument** (spacing CV along the circuit; towers per unit length).<br>⟦FOLD §304⟧ ⚠⚠ **AND MF-I1'S HAND PASS SAYS THE PROPOSED SIGNATURE IS THE WRONG ONE.** Five non-holdout walled plates, counted by eye: **hf324 0 towers** (hedged bank), **hf239 0** (vallum et fossa, four gates, no bastions), hf364 10±2, hf347 17±3, hf331 25±4. ⛔ **Two of five circuits carry NO towers, and hf347's is a SMOOTH OVAL WITH NO CORNERS carrying seventeen** — so "place by the corners that exist" would emit nothing there and would emit towers on two circuits that should have none. ⭐ **MF-I1's proposed replacement signature, for the chair: PRESENCE-then-SPACING** — first whether the circuit is masonry at all, then `spacing_cv` along it, with `corner_share` reported as a *description* rather than a rule | ⚠⚠ **PROVISIONAL AND HELD.** §258.2's own rule forbids a substitution that cannot name its signature, so **this one is recorded as PENDING and may not land before W0 builds the instrument**.<br>⟦FOLD §304⟧ ⛔ **STILL HELD after MF-I1** — the plate-side instrument was attempted and honestly refused, so no signature reads yet; and the hand sample has now put the *stated* mechanism in doubt as well as its measurement |
 
 ⛔⛔ ⟦FOLD §297/§298⟧ **TWO ADDITIONS TO THE REGISTER'S OWN LAW, BOTH NOW BINDING (§293.5a).**
 **(1) A SUBSTITUTION'S NAMED SIGNATURE MUST BE A METRIC THAT EXISTS IN THE MEASURED REGISTER** —
@@ -3369,7 +3388,7 @@ its urgency — which is precisely the distinction the RANK-is-not-WAVE rule exi
 | **2** | **G-7** | ⛔ **FRONTAGE-FIRST GENERATION + explicit plot/frontage lineage and typed split/amalgamation operations** | block face from the street graph; declared plan/holding module; inherited frontage/parcel geometry; dated `SPLIT`, `AMALGAMATION` and corner/function facts. ⛔ Tier, current wealth and age do not set numeric module widths or mutation rates | ⭐ **PLAN's #1 and ATLAS's SCOPE-1 converge on the software order, while §10.21 supplies the historical evidence boundary.** Most settlement plates require the relation; frequencies and dimensions remain cohort-gated | needs S8's block faces. **Unlocks block silhouette and backland/court classification only from canonical parcels and occupation, never as synthetic side effects** |
 | **3** | **G-34** | ⛔⛔ **ONE PREDICATE, ONE HOME — AND A CHECK THAT FAILS WHEN TWO MODULES ASK THE SAME GEOMETRIC QUESTION DIFFERENTLY.** Unify `deriveBridges`' crossing predicate with §205A's cured one; rule on `rank === 'passage'`; replace first-crossing-per-channel with `covered === inside` | none — it is an enforcement mechanism, not a derivation | ⛔ **92 of 127 street-over-water violations (72%) CANNOT BE EXEMPTED BY CONSTRUCTION.** Unblocks most of G-28's §205A residual | ⭐ **THE §238 PREDICATE CLASS RECURRING FOR THE FOURTH TIME, AND ITS SHAPE IS NEW — see §4.1a.** Cheap; needs a **ruling** more than a lane |
 | **4** | ⟦NEW⟧ **G-37** | ⭐⭐ **FIT THE FOOTPRINT FROM A RECTILINEAR VOCABULARY INSTEAD OF SUBDIVIDING UNTIL THE PIECE *IS* THE BUILDING** — subdivide to get the **PLOT**, then **FIT**; our aspect-ratio constraint becomes a **HARD FILTER**, not a tendency | building **kind** × district **lifestyle** (both dossier facts); the vocabulary itself is supplied per material by **G-6** | every footprint on every leaf at town+ and many below. ⭐ **The cleanest leg (c) in the fold**: §2.5's alley/sliver floor is **0.02–0.08** and b8 reads **0.16/0.09/0.09** — *the town moved the WRONG way* — and that is exactly the quantity this mechanism moves | ⭐ **A §258.2 SUBSTITUTION (SUB-2, §263.4).** Needs **G-7**'s plot series to fit into. **Supersedes** WATABOU §5.2's *modulations + an aspect filter* — the stronger option is **not to produce the wedge** |
-| **5** | ⟦NEW⟧ **G-40** | ⛔⛔ **THE THREE MISSING INSTRUMENTS** — (i) **tower spacing** (spacing CV along the circuit + towers per unit circuit length); (ii) **per-epoch material / tone contrast** (a between-region fill-tone separation, not a whole-plate statistic); (iii) ⟦lane finding⟧ **footprint-scale rectangularity**, absent from the entire register | none — they are **measurements**, not derivations | ⛔ **each one GATES a ranked mechanism**: (i) S13's tower-corner rule, §3.4 #7's re-read and **SUB-3**; (ii) per-epoch material, which sits in §4.1b's ungated list until it reads; (iii) **half of G-39** | ⭐ **§263.6a ORDERED (i) AND (ii) BUILT; (iii) IS THIS LANE'S ADDITION AND IS VETOABLE.** Cheap, and **all three land in W0**. ⚠⚠ *Two prior-art products now agree on the tower mechanism while we still cannot check it against a number — which is exactly the condition that lets a plausible idea become an unmeasured habit* |
+| **5** | ⟦NEW⟧ **G-40** | ⛔⛔ **THE THREE MISSING INSTRUMENTS** — (i) **tower spacing** (spacing CV along the circuit + towers per unit circuit length); (ii) **per-epoch material / tone contrast** (a between-region fill-tone separation, not a whole-plate statistic); (iii) ⟦lane finding⟧ **footprint-scale rectangularity**, absent from the entire register | none — they are **measurements**, not derivations | ⛔ **each one GATES a ranked mechanism**: (i) S13's tower-corner rule, §3.4 #7's re-read and **SUB-3**; (ii) per-epoch material, which sits in §4.1b's ungated list until it reads; (iii) **half of G-39** | ⭐ **§263.6a ORDERED (i) AND (ii) BUILT; (iii) IS THIS LANE'S ADDITION AND IS VETOABLE.** Cheap, and **all three land in W0**. ⚠⚠ *Two prior-art products now agree on the tower mechanism while we still cannot check it against a number — which is exactly the condition that lets a plausible idea become an unmeasured habit*<br>⟦FOLD §304⟧ ⭐⭐ **BUILT (MF-I1): (iii) BUILT AND SPENT** — recovery 0.973–1.000 on a synthetic control, corpus p50 0.6945/0.7230 against a measured rectangle ceiling of 0.921; **G-39 arm 2 read.** **(ii) BUILT AND READS NULL** — within-region null Δ 10.96 L, and both powered epoch pairs sit at or below it. **(i) NOT DELIVERED plate-side and honestly refused** (§298.5a: unmeasured recovery may not gate); generated-side spec + a 5-plate hand sample instead, and that sample already refutes a corners-only rule. ⛔ *The two that read are SPENT; the one that does not is the one still gating S13 and SUB-3* |
 | **6** | **G-3** | ⛔ **THE CIRCUIT AS A CHAIN OF TYPED RUNS (nine types, each with a cause)** + per-run tower policy | substrate + `institutions` + §240 epoch index + fabric extent + `history` fortification events | **CONTEXT #2: every walled trace (4/8).** Unblocks CX-14, CX-16, CX-18, CX-19, CX-20 | ⛔⛔ **§251.4b RULED: §240 AND THE RUN CHAIN ARE ONE PIECE OF WORK AND LAND TOGETHER.** Three rings without run typing come out CONCENTRIC. Blocks §252.3a's metropolis third circuit |
 | **7** | **G-8** | ⛔ **TYPED SUPERSESSION OF A CIRCUIT OR WORK** — retained wall, converted route, frontage break, reused tower, filled ditch, garden, quarrying or removal are distinct dated operations | actual supersession/demolition/reuse events and preserved lineage; no land-pressure or prosperity fallback | every canonical multi-circuit or demotion history. Atlas cases establish possibilities, not a universal transition ladder or rate | ⛔ a new project must not erase predecessor identity. If the successor operation is absent, preserve known state/`UNKNOWN`; do not synthesize a fossil |
 | **8** | ⟦NEW⟧ **G-42** | ⛔⛔ **EPOCHS ARE FABRIC/OPERATION PHASES, NOT CIRCUIT EPOCHS** — a wall is a dated project within the sequence rather than its definition | explicit dated plan, occupation, route, growth, fortification, destruction, reuse and rebuilding operations. ⛔ Derived from canon, never a knob; synthetic `≤4` is a representation observation, not a historical ceiling | every settlement with more than one registered phase, including unwalled cases | ⭐⭐ **PRECEDES G-9.** `epochAxis.js` must stop minting history from circuit count and materialise the canonical operation sequence instead |
@@ -3390,7 +3409,7 @@ its urgency — which is precisely the distinction the RANK-is-not-WAVE rule exi
 | **23** | **G-17** | ⛔ **HIGH-WATER MEMORY + TYPED CONTRACTION/REUSE:** `intramuralVacancy`, preserved boundary/route/parcel lineage and cause-specific dated operations; a shared `ghostInk` may render inherited geometry, but no universal four-step/LIFO removal sequence executes | high-water vs current occupation plus explicit abandonment, destruction, relocation, amalgamation, agricultural reuse, rebuilding or `UNKNOWN` evidence; terrain/resources constrain a recorded reuse but do not invent its cause | every high-water and demotion plate | ⭐ **§239.4 already RECORDS the dividend.** What occupies or erases the ground must come from typed history; “run growth backwards” remains a research candidate, never the fallback |
 | **24** | **G-21** | ⛔ **STREET WIDTH FROM GRAPH LOAD** (betweenness over gates, market, quays, institutions) — the class ladder becomes the **quantiser**, not the source | `tradeRouteAccess` + the neighbour link + `institutions` + `tier` (class count) + `population` (absolute width) | every leaf; T-04's hierarchy depth | needs **G-1** for the gate weights. ⭐ **PRIOR-ART supplies the blueprint (reuse discount) and CONVERGES with §250.6c** |
 | **25** | **G-19** | ⛔ **`backlandCore` AS A CANONICAL PARCEL/OCCUPATION OBJECT** + typed court/access classification | parcel lineage, frontage, access rights, occupation, function and dated change; no district-wealth, population-pressure or age fallback | every block with known parcel/backland state | a court is classified from actual access and occupation. Synthetic isolation bands are detectors only and do not mint backland or courts |
-| **26** | ⟦NEW⟧ **G-39** | ⚠⚠ **THE CHAOS / ORTHOGONALITY TEST — A HYPOTHESIS ABOUT *OUR MUSH* THAT MUST BE MEASURED BEFORE IT DRIVES A REWORK.** The claim: chaos belongs at the LARGE scale (block frames meeting at organic angles) and orthogonality at the SMALL scale (the buildings inside them near-rectangular) | none — **it is a TEST, not a mechanism.** Its *outcome* would license changes to G-38's grid-chaos axis and G-37's vocabulary | ⛔ **§261.3 DOWNGRADED IT FROM A DESCRIPTION OF OUR TARGET TO A HYPOTHESIS ABOUT OUR DEFECT**, and it **must be tested against the corpus's own measured block elongation and plot variance before it drives a rework**. It was previously read as the diagnosis of why our output looks like mush | ⛔⛔ **BLOCKS any S7 / S10 / S11 rework justified on this basis.** ⚠ **Half-runnable today** — the full metric specification is §4.1c; the small-scale half needs **G-40(iii)** |
+| **26** | ⟦NEW⟧ **G-39** | ⚠⚠ **THE CHAOS / ORTHOGONALITY TEST — A HYPOTHESIS ABOUT *OUR MUSH* THAT MUST BE MEASURED BEFORE IT DRIVES A REWORK.** The claim: chaos belongs at the LARGE scale (block frames meeting at organic angles) and orthogonality at the SMALL scale (the buildings inside them near-rectangular) | none — **it is a TEST, not a mechanism.** Its *outcome* would license changes to G-38's grid-chaos axis and G-37's vocabulary | ⛔ **§261.3 DOWNGRADED IT FROM A DESCRIPTION OF OUR TARGET TO A HYPOTHESIS ABOUT OUR DEFECT**, and it **must be tested against the corpus's own measured block elongation and plot variance before it drives a rework**. It was previously read as the diagnosis of why our output looks like mush | ⛔⛔ **BLOCKS any S7 / S10 / S11 rework justified on this basis.** ⚠ **Half-runnable today** — the full metric specification is §4.1c; the small-scale half needs **G-40(iii)**<br>⟦FOLD §304⟧ ⛔⛔ **RUN (MF-I1). OUTCOME = §4.1c ROW 2: arm 1 DISORDERED (φ 0.0983 · solidity 0.7455 · elongation 2.143, n=31), arm 2 ALSO IRREGULAR (0.6945/0.7230 against a rectangle ceiling of 0.921, unanimous over two modes and two subject sets). THE HYPOTHESIS IS REFUTED FOR OUR TARGET; G-38 keeps its four axes; the chaos scoping is NOT adopted.** The block is discharged BY REFUTATION — the principle may no longer be cited as a justification at all. **G-39 IS CLOSED.** |
 | **27** | **G-4** | ⛔ **THE BEARING TO WATER** — the direction of open water, not merely its presence | ⭐ **the S2 substrate's own geometry (§161a) — DERIVED, never minted** | every coastal and bankside leaf: district anchoring, the water-termination run, the second-bank rule, edge kind per bearing | **BLOCKED on G-2**, then it is **one vector**. ⚠ **Must never be conflated with wind/sun bearings, which are NOT derivable and stay in Appendix A** |
 | **28** | **G-23** | ⛔ **TYPED EXTRAMURAL ROUTE/GATE/INSTITUTION PROJECTS** — each ribbon, suburb, roadside institution and noxious-use relation carries its own dated cause | canonical route ranks, circuit intersections, institution function/right and dated project | every recorded extramural development | unequal extents may be preserved but not synthesised as a default. The ≤2-gate, single-arc and distance ladders are uncalibrated hypotheses, not one lookup table |
 | **29** | **G-22** | ⛔ **CENTRE TYPOLOGY (six kinds) + `secondAuthority ⇒ secondCentre` + market placement by arrival mode** | `institutions` + `powerStructure` (§161l) + `foundingKind` + event history | **CONTEXT #7 (markets); PLAN #9.** Multiplies voids; the strongest single "this is a working place" signal | ⭐ **We appear to have ONE square primitive against the corpus's six structurally distinct types** |
@@ -3530,7 +3549,7 @@ to these studies ships is an open owner item (§264.4) and is not settled here.*
 | **Randomise the STOP THRESHOLD, not the output size** | WATABOU **#4** | S10/S11 | `block_area_cv` · `block_area_p90_over_p10` | **W3** ⭐ *structurally cannot produce a degenerate plot — strictly better than sampling a size distribution* |
 | **Per-edge setbacks as street hierarchy** → **SUB-1** | WATABOU **#5** | S7 | `street_share_of_hull` ⚠ *aggregate proxy — no per-tier width metric exists* | **W3** |
 | **Outskirts thinning keyed to road proximity and enclosure** | WATABOU **#6** | S15 | built-density falloff · `hull_frac_of_frame` · `deadend_share` | **W5** ⭐ *the thing that makes an UNWALLED settlement look intentional* |
-| **Towers at wall corners; evenness inherited, never enforced** → **SUB-3** | WATABOU **#7** | S13 | ⛔ **NONE EXISTS — G-40(i)** | **W2**, gated on **W0** |
+| **Towers at wall corners; evenness inherited, never enforced** → **SUB-3** | WATABOU **#7** | S13 | ⛔ **NONE EXISTS — G-40(i)**. ⟦FOLD §304⟧ *and MF-I1's 5-plate hand sample refutes corners-only as the governing rule: 2 of 5 circuits carry zero towers and hf347's smooth oval carries 17 with no corners at all* | **W2**, still gated on **W0** — ⛔ **the gate did NOT lift** |
 | **Ordered claim list, greedily consumed, truncated by size** — ⚠ *the mechanism only* | WATABOU **#8** | S16 | ward-mix composition by tier | **W6** ⛔ *their list is REFUSED* |
 | **Defensive seat edge-adjacent and outside the circuit BY CONSTRUCTION** | WATABOU **#9** | S13/S16 | citadel wall-attachment on walled plates | **W2** ⛔ *their distance-rank SELECTION is refused — site comes from terrain and dossier* |
 | **Subdivide the neighbourhood to make room rather than rejecting a placement** | WATABOU **#10** | S7/S13 | gate/road connectivity · `gamma_connectivity` | **W3** ⭐ *converts a failure case into a construction step* |
@@ -3545,7 +3564,7 @@ neither lost nor smuggled in.**
 
 | mechanism | why it is ungated |
 |---|---|
-| **Building material varies per epoch** — the cheapest way to make an epoch boundary legible | ⛔ **no corpus metric for between-region tone or texture contrast exists.** ⭐ **Promotable the moment G-40(ii) reads** — and it is the only row here with a named path out |
+| **Building material varies per epoch** — the cheapest way to make an epoch boundary legible | ⛔ **no corpus metric for between-region tone or texture contrast exists.** ⭐ **Promotable the moment G-40(ii) reads** — and it is the only row here with a named path out.<br>⟦FOLD §304⟧ ⛔⛔ **IT HAS READ, AND IT READS NULL.** `MFI1-tone.py`: of §6.2's four epoch pairs the two adequately-powered ones separate by **2.75 L** and **6.17 L** against a measured **within-region null of 10.96 L (p90 18.73)**; the contemporaneous-district negative control reads **0.34 L**; the only powered contrast that clears the null is hf26's **BURNT** quarter at 24.0 L, which is a fire scar (§161g), not a material vintage. ⛔ **The mechanism therefore has NO corpus signature. It is not promoted. If it is adopted it must be adopted as a DECLARED DEPARTURE from the corpus register, argued on legibility and labelled as such — never as something the plates do.** ⚠ Honest limit: 3 of 7 pairs are underpowered (small `@part` windows), so this is a null at n=2 powered epoch pairs, not a proof of absence |
 | **The full-employment objective exposed as a user choice** | a generator *objective*, not a geometric output. Nothing in the measured register responds to it. Recorded because making an objective function explicit is good design |
 | **Per-entity public/private notes with a player-write flag** | product feature, not plan-craft. No metric, and correctly so |
 | **Persistent entity → user-document linkage** | ⭐ **the sharpest PRODUCT insight in either study and entirely outside the map program's gates** — the place a user's campaign attaches to a generated world |
@@ -3607,6 +3626,51 @@ statistic over the corpus's own drawn masses** — the building-scale analogue o
 MECHANISM it inspired survives independently.** G-37's fit-the-footprint has its own three legs and
 its own measured miss (the alley/sliver floor) and does not rest on this test at all. ⚠ *What the
 test governs is whether we may say WHY we did it.*
+
+#### ⟦FOLD §304⟧ ⛔⛔ **THE RULE HAS BEEN RUN. THE OUTCOME IS ROW 2: THE HYPOTHESIS IS REFUTED.**
+
+**MF-I1, ODQ §304. Instrument `MFI1-g39.py`; evidence `MFI1-g39.json`, `MFI1-footprints.json`,
+`MFI1-control.json`; receipt `laneMFI1-receipt.md` §3. Holdout excluded on every channel (L6);
+thorp and hamlet excluded from both arms because §244.5 invalidates the cell pitch there.**
+
+**ARM 1 — DISORDERED [M, CONFIRMED], n = 31 whole-settlement windows.** `orientation_order_phi`
+p50 **0.0983** · `block_solidity_p50` p50 **0.7455** · `block_elongation_p50` p50 **2.143** (p90
+4.612) · `orientation_entropy` p50 **3.4728**. ⭐ *These reproduce this document's own published
+0.103 / 0.748 / 2.14 to within rounding, so the third rule row — "arm 1 ordered, re-examine the
+instrument" — is not in play.*
+
+**ARM 2 — IRREGULAR [M, CONFIRMED], unanimously across two extraction modes and two subject
+sets.** Pooled footprint rectangularity p50 **0.6945** (`mass`, 4,317 footprints over 37 windows)
+and **0.7230** (`region`, 9,705 over 38); on the footprint-resolving subset **0.7078** / **0.7269**.
+⚠ **Read these against the instrument's MEASURED reference points, never against 1.0**: through
+this extractor a *perfect rectangle* reads **0.921**, an *L-shape* **0.704**, an *ellipse* 0.771, a
+*wedge* 0.557 (synthetic control, recovery 0.973–1.000, merge ≤ 0.038, split 0.000, spurious ≤
+0.054). **The corpus's drawn masses sit at the L-SHAPE reference, and 1.3–1.9% of them reach the
+rectangle reading.** The result is flat across eight size bins, so it is not a discretisation
+artefact.
+
+> ### ⛔ **OUTCOME: "arm 1 disordered AND arm 2 ALSO irregular" — HYPOTHESIS REFUTED FOR OUR
+> TARGET. G-38 KEEPS ITS FOUR AXES; THE CHAOS SCOPING IS NOT ADOPTED.**
+> The §261.3 block on S7/S10/S11 rework *justified on this principle* is DISCHARGED BY REFUTATION,
+> not by permission: that justification may no longer be cited at all. **G-37 and G-38 are
+> untouched — they never rested on this test** (§4.3's edge says so), and the honest note above
+> stands: the mechanism survives, the reason for it does not.
+
+⚠⚠ **AND THE FINDING THAT QUALIFIES THE QUESTION ITSELF (MF-I1, RAISED to the chair).** Arm 2 asks
+about *"the buildings inside them"*. **At town tier and above THIS CORPUS DOES NOT DRAW INDIVIDUAL
+BUILDING FOOTPRINTS**: its dense fabric is drawn as **continuous perimeter-block RANGES with
+serrated frontages** — one unbroken band per block, no party lines inside it — confirmed on the
+validation sheets (`MFI1-overlay/hf364-{mass,region}.png`). The verdict above is unchanged because
+the **footprint-resolving** subject set — the zoom plates and the village tier, the only frames
+where one building is drawn at a time — returns the same reading. But the corpus's answer to *"are
+the small pieces rectangular"* is partly **"there are no small pieces drawn there."** ⛔ *A future
+lane must not re-run arm 2 on the dense frame and report a RANGE's shape as a BUILDING's.*
+
+⚠ **The arm-2 cut is MF-I1's operationalisation, not §4.1c's**: this block named the two outcomes
+and put no number on either. The cut used is the **midpoint of the control's own rectangle and
+L-shape readings, 0.8125**, anchored on a synthetic that never saw the corpus. **Any cut between
+0.74 and 0.92 returns the same row**, so the choice is not load-bearing — and the lane discloses
+that it had seen preliminary corpus values before fixing it.
 
 ### ⟦FOLD §275⟧ §4.1d · THE VALIDATION ADDITIONS — G-43…G-47 (ODQ §275, chaired-in-person fold)
 
@@ -3689,9 +3753,20 @@ G-40(ii) per-epoch tone contrast   ──GATES──▶ per-epoch material (§4.
 G-40(iii) footprint rectangularity ──GATES──▶ G-39 arm 2       [this lane's finding]
       ⭐ ALL THREE ARE MEASUREMENTS, ALL THREE ARE CHEAP, AND ALL THREE PRECEDE THE MECHANISM
          THEY GATE. §263.6a ordered (i) and (ii); (iii) is proposed.
+   ⟦FOLD §304⟧ EDGE STATUS AFTER MF-I1:
+      G-40(iii) ✅ BUILT AND SPENT — MFI1-footprints.py; G-39 arm 2 read, gate DISCHARGED.
+      G-40(ii)  ✅ BUILT AND READ NULL — MFI1-tone.py; the gate is discharged and the
+                mechanism it gated has NO corpus signature.  ⛔ per-epoch material may only
+                be adopted as a DECLARED DEPARTURE from the corpus register, never as
+                something the plates do.
+      G-40(i)   ⛔ STILL OPEN, and narrowed: plate-side extraction attempted and REFUSED
+                (unmeasured recovery, §298.5a's rule applied).  Generated-side spec + a
+                5-plate hand sample delivered.  S13's corner rule and SUB-3 STAY HELD.
 
 G-39 (the chaos/orthogonality TEST) ──BLOCKS──▶ any S7/S10/S11 rework citing that principle
       ⚠ It does NOT block G-37 or G-38, which stand on their own legs.        [§261.3]
+   ⟦FOLD §304⟧ ⛔ RUN, AND THE BLOCK IS DISCHARGED BY REFUTATION (§4.1c): the principle may
+      no longer be CITED as a justification at all.  G-37 / G-38 unaffected, as this edge said.
 
 G-38 (four axes, ONE routine) ──MUST PRECEDE──▶ writing any per-district generator
       ⚠ STRUCTURAL, not sequential: retrofitting a parameterisation is the expensive path.
@@ -3795,8 +3870,8 @@ outstanding obligations from the last two waves and one is housekeeping the conf
 | ⭐ **G-34 — ⟦FOLD §264⟧ NO LONGER A RULING, NOW A BUILD** | ✅ **§262.2 RULED IT: three build-fixes, one bug-fix, one named exemption.** (a) one predicate, one home + a check that reds on a second spelling · (b) **build the bridge** for `rank === 'passage'` · (c) **fix the loop** so a street meeting a meander twice gets two bridges · (d) land the dead-`anchorKey` mill cure · (e) name the **coast-vs-river** exemption in the census. ⚠⚠ **THE CURE IS NOT TO CONVICT LESS** |
 | **G-33 the stale figures** | metropolis `GRAIN_BAND` → 80–120 with `GRAIN_SEAMS` re-derived (C-2); thorp/hamlet rungs labelled UNMEASURED — ⟦FOLD §264⟧ **and §257.3(b) has now ruled they MAY remain generation inputs**, so the label is `UNVALIDATED-BY-INSTRUMENT` and not a deletion (C-3); paper warmth → 37 (C-1) |
 | ⭐ **THE DISTINCT-SITE TOTAL** | one line in the harness: publish the **10-world** total beside every 16-leaf total (§0.3b) |
-| ⟦FOLD §264⟧ ⛔⛔ **G-40 · THE THREE MISSING INSTRUMENTS** | **(i) TOWER SPACING** — spacing CV along the circuit + towers per unit circuit length. **(ii) PER-EPOCH MATERIAL / TONE CONTRAST** — a between-region fill-tone separation, not a whole-plate statistic. **(iii) ⟦lane proposal, vetoable⟧ FOOTPRINT RECTANGULARITY** — the building-scale analogue of `block_solidity_p50`, absent from the entire register. ⭐ **§263.6a ordered (i) and (ii) and put them here.** ⚠ *Each GATES a ranked mechanism, and they are the difference between an argued rule and an unmeasured habit* |
-| ⟦FOLD §264⟧ ⚠⚠ **G-39 · THE CHAOS/ORTHOGONALITY TEST — RUN IT HERE, BECAUSE IT GATES W3** | §261.3 requires the hypothesis to be **tested against the corpus before it drives a rework**, and W3 is the wave that would do the rework. **Arm 1 (large scale) is runnable today** on `block_solidity_p50` · `block_elongation_p50/p90` · `orientation_entropy` · `orientation_order_phi`. **Arm 2 (small scale) runs the moment G-40(iii) exists** — which is why the instrument and the test belong in the same wave. **The four-outcome decision rule is written in §4.1c and was written BEFORE the numbers so it cannot be fitted afterwards** |
+| ⟦FOLD §264⟧ ⛔⛔ **G-40 · THE THREE MISSING INSTRUMENTS** | **(i) TOWER SPACING** — spacing CV along the circuit + towers per unit circuit length. **(ii) PER-EPOCH MATERIAL / TONE CONTRAST** — a between-region fill-tone separation, not a whole-plate statistic. **(iii) ⟦lane proposal, vetoable⟧ FOOTPRINT RECTANGULARITY** — the building-scale analogue of `block_solidity_p50`, absent from the entire register. ⭐ **§263.6a ordered (i) and (ii) and put them here.** ⚠ *Each GATES a ranked mechanism, and they are the difference between an argued rule and an unmeasured habit*<br>⟦FOLD §304⟧ **STATUS: (iii) ✅ BUILT + SPENT · (ii) ✅ BUILT, READS NULL · (i) ⛔ OPEN.** `MFI1-footprints.py` · `MFI1-tone.py` · `MFI1-towers.py`, with `MFI1-exclusions.py` carrying L6 in code and `MFI1-control.json` carrying the recovery figures. ⛔ **W0 does NOT close on G-40**: the tower arm is still owed, and S13's corner rule / §3.4 #7 / SUB-3 stay held until it reads |
+| ⟦FOLD §264⟧ ⚠⚠ **G-39 · THE CHAOS/ORTHOGONALITY TEST — RUN IT HERE, BECAUSE IT GATES W3** | §261.3 requires the hypothesis to be **tested against the corpus before it drives a rework**, and W3 is the wave that would do the rework. **Arm 1 (large scale) is runnable today** on `block_solidity_p50` · `block_elongation_p50/p90` · `orientation_entropy` · `orientation_order_phi`. **Arm 2 (small scale) runs the moment G-40(iii) exists** — which is why the instrument and the test belong in the same wave. **The four-outcome decision rule is written in §4.1c and was written BEFORE the numbers so it cannot be fitted afterwards**<br>⟦FOLD §304⟧ ✅ **DONE, AND THE RULE WAS APPLIED AS WRITTEN: OUTCOME ROW 2, HYPOTHESIS REFUTED** (`MFI1-g39.py` → `MFI1-g39.json`; the full record is in §4.1c and in `laneMFI1-receipt.md` §3). **W3 may not cite the chaos/orthogonality principle as its justification.** |
 | ⟦FOLD §264⟧ ⭐ **THE DERIVED-vs-DRAWN GRAIN CENSUS** | §257.3(c) ordered it and this document had never recorded it: **derived grain and drawn grain must agree within a stated tolerance**, so the loss between intent and output can never again be invisible. The metropolis derives **≈113** and draws **70**. `MFB8-runprobe.py` already separates what RESOLVES from what EXISTS — **the census is the tolerance around it** |
 
 **EXIT CRITERIA (measurements):**
@@ -5428,10 +5503,25 @@ leaves(settlement, year) =
    degenerate one, and that is a finding rather than a shift.
 ```
 
+> ⟦FOLD §301⟧ ⭐⭐ **THE CHAIR RE-STATED THIS PREDICTION AT ODQ §301.2, AND THE CORRECTION IS
+> MEASURED RATHER THAN ARGUED.** It was right about the WALL RING — MF-D0's arm W guarded only
+> the wall and moved precisely the five leaves named here — and wrong as the wave's bound,
+> because the offset primitive also emits the ditch, the claim line, the closed circuit and the
+> demotion's garden ring, and nothing had ever counted those. Asked of every published ring
+> family, the sealed W2 base carries **38 self-crossing segments over 24 of its 90 rings**; the
+> wall polygon was **32%** of the defect. The kernel's true radius is therefore **the 11
+> circuit-publishing leaves, with all six unwalled leaves byte-identical** — and the
+> ordinary-case test the block above asks for is answered by arm Z instead: withdraw the repair
+> at its own switch and the tip is **34/34 byte-identical** to the base.
+
 **EXIT CRITERIA:**
 
 ```
-self-intersection census        11 → 0   (§274.3 ordered it; this is what clears it)
+self-intersection census        12 → 0   ⟦FOLD §301⟧ CORRECTED from 11 per ODQ §301.3:
+                                the 11 was MF-W1b's tip over SIXTEEN leaves; W2 minted the
+                                `crossing` leaf and the figure became 12 over seventeen.
+                                The ALL-RING figure — the one the kernel was graded on —
+                                is 38 → 0 over every published ring family.
 the four drawn censuses         0, area-true, unchanged
 determinism                     10/10, one digest
 op ceiling                      no ceiling raised
@@ -6706,8 +6796,8 @@ loss/recovery chronology), which are listed there rather than duplicated here �
 
 | wave | contents | EXIT CRITERIA (measurements) |
 |---|---|---|
-| **D0** · the kernel | real polygon offset; `properCross` ONE home; self-intersection census | self-intersection **11 → 0** · four drawn censuses **0** area-true · determinism 10/10 · **only the 5 broken leaves move, proved leaf-by-leaf** · no ceiling raised |
-| **D1** · the volume law | S20 → `classifyVolumeRelationship`; the attachment vocabulary; `clearHeight`/`separation` | 0 illegal intersections on every leaf · **every attachment kind proved non-vacuous by counterfactual** · gatehouse/bridge/gallery fixtures pass · house-in-road still convicts |
+| **D0** · the kernel — ⟦FOLD §301⟧ **COLLECTED** | real polygon offset; `properCross` ONE home; self-intersection census | ⟦FOLD §301⟧ self-intersection **12 → 0** (corrected from 11; §301.3) · ALL-RING **38 → 0** in every family · four drawn censuses **0** area-true · determinism 10/10 · **the 11 circuit-publishing leaves move, six unwalled byte-identical, proved leaf-by-leaf** · no ceiling raised |
+| **D1** · the foundations — ⟦FOLD §301⟧ **BUILT IN SANDBOX** | ⟦FOLD §301⟧ RE-SCOPED to §287.8 / §10.16(3): the executable S0–S23 manifest with its drift walker; the versioned integer coordinate ABI; exact solid legality; the `state_t → canonicalSpatial_t → spatialReceipt_t` seam; the `CadastralBoundaryArrangement`/DCEL face-adjacency-point-location dual-run. **The volume law's attachment vocabulary needs `MassPartQ`/`SolidPartQ`, which D3a mints — the typed contract lands here, the third dimension there.** Frontage/parcel equivalence is explicitly NOT a D1 exit | ⟦FOLD §301⟧ manifest re-derived from the module graph, drift refused with planted counterfactuals · ABI integer, versioned, reconciling to the six-decimal topology key as an identity, safe-integer bound proved over the corpus · exact intersection area-true, with the interval predicate and collision-by-identity both convicted by counterexample · receipts dated strictly later by construction · DCEL faces/adjacency/point-location dual-run on all 17 exemplars with every disagreement explained · **the foundations move ZERO bytes on every leaf** |
 | **D2** · projection instrument | G-51P; G-52 settled; the light cartouche | visual bands published only for roof-plane ink, ridge/hip density and per-face tone separation · `SHADOW_DIR`'s grade resolved or withdrawn · no world-height claim |
 | **D3a** · dormant massing foundation | S11/S12/S13/S16 composite `MassPartQ[]`; functional volumes; explicit-input analytic roof compiler; component/phase material slots and typed alteration operations; no live empirical resolver | supplied canonical fixtures close, quantize and round-trip · roof/part ownership closes · hall/attic/storey fixtures remain distinct · component/chronology censuses 12–16 pass · live seeds remain byte-identical because no `AMP-1` prior executes · ⚠ explicit-fixture browser cost priced in the receipt (§220) |
 | **D3b** · evidence-gated massing/material activation | scoped European function/structure-conditioned mechanisms and engineering ranges promoted only after `AMP-1` development, reliability and sealed-holdout gates; no occurrence distribution/activation weight | preregistered conditional-range/coherence thresholds pass · holdout result reported without retuning · scope/counterexamples/version/declared shift named · exact massing evidence binding matches · generated ATLAS ridge/hip row and visual bands pass without violating structural holdout · otherwise `UNCALIBRATED` or `HOLDOUT_FAILED`, not a guessed default |
@@ -8072,6 +8162,18 @@ interface ArtifactIdentity {
 
 ### §10.2 · THE TEMPORAL RECEIPT SEAM — the map may become physics, but never in the pass that drew it
 
+> ⟦FOLD §301⟧ **STATUS: THE SEAM IS BUILT IN THE SANDBOX (MF-D1) — `fabric/spatialReceipt.js`.**
+> `canonicalSpatial()` builds the durable digest from a NAMED FIELD ROSTER rather than from the
+> fabric object, so §10.1's refusal — *"No aggregate digest is accepted as proof of a narrower
+> invariant"* — is structural: a projection-only change provably cannot move the spatial hash, and
+> a durable change provably does. The same-pass refusal is arithmetic, not validation: a receipt
+> whose `effectiveAt` is not strictly later than every source time cannot be constructed. The
+> dependency roster is closed by kind AND temporal branch, in order, and a no-effect result takes
+> the separate `noEffectDiagnostic` door. A source scan over the whole fabric layer confirms no
+> module writes the dossier, the world or the economy, and no module persists. ⚠ `ArtifactId`,
+> `ProvenanceRef`, `LawVersion` and the closed id registries are `null` — named absent, not
+> stubbed — and the digest is declared a 128-bit FINGERPRINT, never cryptography.
+
 §6.7's floating land currently casts shade, S18 consumes that shade, and S18 can affect prosperity/siting that helped decide what the floating land carries. That is a same-pass causal cycle even if the module graph is acyclic.
 
 The legal seam is the spatial engine's established two-phase pattern:
@@ -8394,6 +8496,21 @@ the same report ref and refuses a mismatch, so screen and every export format ex
 read-only unresolved state rather than dropping it.
 
 ### §10.4 · THE COORDINATE AND HASH ABI — canonical truth is integer truth
+
+> ⟦FOLD §301⟧ **STATUS: BUILT IN THE SANDBOX (MF-D1) — `fabric/coordinateAbi.js`,
+> `COORDINATE_ABI_VERSION = 1`, quantum `1/1000000`.** ⭐⭐ **THE INTEGER IS READ OUT OF THE
+> EXISTING SIX-DECIMAL TEXT, NOT RE-ROUNDED, AND THAT IS THE WHOLE DESIGN.** `Math.round(v * 1e6)`
+> — the obvious spelling — disagrees with `q6` on two counts, both executed: `toFixed` strips the
+> sign before rounding and breaks a tie AWAY FROM ZERO while `Math.round` breaks it toward `+∞`
+> (they differ on `−1/128`, an exactly representable double), and the multiply is itself one more
+> rounded operation (they differ on `1000.1234565`). Reading the digits out of `q6`'s own output
+> makes the reconciliation an IDENTITY: **0 failures over 4,423,599 published numbers on the
+> 17-leaf corpus.** ODQ §269.3's tie-rule argument is wrapped, not reopened. The safe-integer
+> bound is proved rather than assumed — max |coordinate| measures **1,286.63** against a ceiling
+> of **9,007,199,254**, seven million times the headroom. ⛔ ONE FINDING: `q6` publishes
+> `"-0.000000"` for a value rounding to zero from below, so the legacy topology key has TWO
+> spellings of one quantum; the ABI has one, and the corpus does not currently exercise the
+> difference (0 occurrences — latent, not live).
 
 Serialization-time rounding is not enough. Any raw floating result that decides topology, legality, ordering, identity or a content hash is nondeterministic authority.
 
@@ -9892,6 +10009,21 @@ The map document owns portrait edits and projection choices. It does **not** bec
 Dead ends, frontage, parcels and inherited street grain have inertia. A poverty designation cannot instantaneously rewrite the roads while the invalidation table claims street topology remained byte-identical.
 
 ### §10.14 · THE EXECUTABLE MANIFEST — architecture stops being prose at this seam
+
+> ⟦FOLD §301⟧ **STATUS: BUILT IN THE SANDBOX (MF-D1, `laneMFD1-receipt.md`) — DESIGN elsewhere.**
+> `fabric/stageManifest.js` carries the node table and `tests/lint/stageManifest.walker.test.js`
+> re-derives every field from the parsed module graph and refuses a disagreement, with planted
+> counterfactuals for a new module, a new import, a new random namespace and a new inversion. The
+> §10.14 fields that need artifact families this era does not have — typed gate expressions,
+> observation-acceptance policies, output-authority contracts, `ArtifactHashRef` closures — are
+> named ABSENT in the artifact rather than stubbed. ⭐⭐ **AND THE MANIFEST'S FIRST FINDING IS A
+> STRUCTURAL ONE: the MODULE import graph is acyclic and the STAGE graph is not.** Collapsed onto
+> the public S0–S23 ids the graph carries one strongly-connected component spanning S2·S3·S4·S6·S13,
+> closed by exactly two declared module imports (`relief.js ← umbrella.js`,
+> `districtPartition.js ← wallCircuit.js`); cut those two and it is a DAG. The public numbering is
+> a narrative order, and this is the measurement that says so. ⚠ Also published: S1, S8, S9 and
+> S12 own **no module at all**, and eight random-namespace spellings are claimed by more than one
+> stage.
 
 The strongest missing foundation from the historical workplan is restored. One generated/executable manifest owns:
 
@@ -12408,9 +12540,9 @@ the walled-thorp question decided) in the epoch-calibration work; Q-6 carries in
 | `MFS3a-*` / `MFS3B-context-census.py` | the plan and context censuses | re-runnable beside their compendiums |
 | `MFARCH2-scc.mjs` | the SCC diagnostic at binding **and** field granularity | ⚠ **an SCC is only as wide as its scan** — five write-backs hid inside `censusLeaf` |
 | `MFARCH2-hashtiers.mjs` · `-engines.mjs` · `-det.mjs` · `-drawn.mjs` | the three hash tiers · four V8 modes · cross-process determinism · the drawn censuses | ⛔ RASTER exits non-zero when `sharp` is unavailable; a driver that cannot run is reported, never passed quietly |
-| ⟦FOLD §264⟧ ⛔ **tower spacing** — *does not exist* | spacing CV along the circuit · towers per unit circuit length | **G-40(i), ORDERED at §263.6a, lands in W0.** Gates S13's corner rule, §3.4 #7's re-read and **SUB-3** |
-| ⟦FOLD §264⟧ ⛔ **per-epoch material / tone contrast** — *does not exist* | a **between-region** fill-tone (and texture) separation | **G-40(ii), ORDERED at §263.6a, lands in W0.** ⚠ `fill_tone_iqr` and `wash_within_sigma` are **whole-plate** statistics and are not substitutes |
-| ⟦FOLD §264⟧ ⛔ **footprint rectangularity** — *does not exist* | the building-scale analogue of `block_solidity_p50` | ⭐ **THIS LANE'S FINDING, vetoable.** CONFIRMED by enumerating the planmetric and voidmetric key sets: **the finest spatial SHAPE metric we hold is BLOCK-scale.** Gates **G-39 arm 2** |
+| ⟦FOLD §304⟧ ⚠ **tower spacing** — **PARTLY BUILT; the plate-side arm is REFUSED, not shipped** | spacing CV along the circuit · towers per unit circuit length · ⭐ **`corner_share`**, the quantity that actually tests the corner rule | **G-40(i). `MFI1-towers.py`: the GENERATED-side instrument is specified to implementation, and a 5-plate hand sample is measured. The PLATE-side extractor is withheld — it cannot separate a tower bulge from a gatehouse and its recovery is unmeasured, so §298.5a's refusal applies.** ⛔ **No corpus band exists. S13's corner rule, §3.4 #7's re-read and SUB-3 STAY HELD.** ⚠⚠ *And the hand pass already bites: **2 of 5 walled plates carry a circuit with ZERO towers** (a vallum, a hedged bank), and hf347's circuit is a **smooth oval with no corners** carrying seventeen — so a corners-only rule is refuted as the GOVERNING rule by the corpus's own drawing* |
+| ⟦FOLD §304⟧ ✅ **per-epoch material / tone contrast** — **BUILT, AND IT READS NULL** | `d_paper = paper_L(plate) − median fill L(region)`; **Δtone**, Δchroma, a standardised separation and a bounded **overlap coefficient** between two regions' per-mass tone distributions | **G-40(ii). `MFI1-tone.py` → `MFI1-tone.json`.** Invariant to window size/area (a distribution statistic, never a count), to the plate's paper tone (one shared reference) and to render longside (23.17/23.16/24.0 across 2200–3800). **Zero point MEASURED, not assumed: the within-region null is Δ 10.96 L (p90 18.73).** ⛔ **THE READING: of §6.2's four epoch pairs, the two adequately-powered ones read 2.75 L and 6.17 L — AT OR BELOW THE NULL. The one powered contrast that clears it is hf26's BURNT quarter (24.0 L), which is §161g's fire scar, not a material vintage. The contemporaneous-district negative control reads 0.34 L.** ⚠ `fill_tone_iqr` and `wash_within_sigma` remain whole-plate statistics and are still not substitutes |
+| ⟦FOLD §304⟧ ✅ **footprint rectangularity** — **BUILT AND SPENT** | `area / min-area-bounding-rect area` per drawn footprint (rotating calipers), with `convexity`, `elongation`, `area_cells` | **G-40(iii). `MFI1-footprints.py` → `MFI1-footprints.json` + `MFI1-control.json`.** ⭐ **Recovery MEASURED on a synthetic positive control, which is the point: 0.973–1.000 (`mass`) / 0.943–0.992 (`region`), merge ≤ 0.038, split 0.000 / ≤ 0.135, spurious ≤ 0.054 at the validated operating point (cell pitch ≥ 33 px; at 22 px spurious hits 0.57, so the instrument autoscales every window to a 40 px pitch).** ⚠⚠ **A PERFECT RECTANGLE READS 0.921 THROUGH THIS EXTRACTOR, NOT 1.0** — the control's reference set is rectangle 0.921 · L-shape 0.704 · ellipse 0.771 · wedge 0.557, and every corpus figure must be read against it. **Corpus: p50 0.6945 / 0.7230.** Gate on **G-39 arm 2** DISCHARGED (§4.1c) |
 | ⟦FOLD §264⟧ ⭐ **derived-grain vs drawn-grain tolerance** — *does not exist* | the disagreement between what `cells(pop)` intends and what the plate shows | **ORDERED at §257.3(c) and never recorded until this fold.** `MFB8-runprobe.py` is the instrument; the census is the tolerance around it. **W0** |
 
 ### C.2 · The module map at MF-ARCH-2's tip
