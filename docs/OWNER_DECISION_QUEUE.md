@@ -11278,3 +11278,46 @@ complies (the chair read all 25 rows from the primary record;
 the four verification lanes run on Opus), and every build lane
 dispatched under §291.4 will be an Opus lane working to a
 Fable-authored brief, collected and ruled by the Fable chair.
+
+## §292 · FIVE SITTING-METHOD REFINEMENTS PROPOSED, OWNER-ORDERED
+## IMPLEMENTED ("implement those", 2026-08-21; chair: FABLE)
+
+The chair offered five refinements to the owner's stated
+approach; the owner ordered them implemented. They are now
+OPERATIVE LAW for this sitting and the resume phase:
+
+1. **DEPENDENCY-ORDERED RULINGS.** The sitting rules §267–§274
+   FIRST (the rows the build depends on: spike, RS-3, perf, W1,
+   P4, W2), then the corpus/prior-art/meta clusters. The map
+   D0 lane dispatches the moment §267–§274 are ruled — "review
+   before build" holds for everything the build depends on,
+   without serializing the build behind rows it does not.
+2. **RS-4'S MONITOR RESUMES DURING THE SITTING, NOT AFTER** —
+   mechanical continuation of already-dispatched verification
+   (Opus-side under §291.5), whose receipts are themselves
+   evidence for the §268/§271/§272 rulings. It resumes as soon
+   as the E4 lane's recon confirms the exact resume path; the
+   grid is never restarted (§275.1 stands).
+3. **FOUR LANES IS A CEILING, NOT A QUOTA.** The scarce
+   resources remain the landing slot and the gate; idle lane
+   capacity during a landing window or a judgment-dense phase
+   is CORRECT and is reported as fact, never filled for
+   appearance. (Refines §291.2c; the safety shape is unchanged.)
+4. **THE REVIEW-IMPROVE DOCTRINE ROUTES THROUGH THE BUILD
+   SHEET.** An improvement found in review is pushed for by
+   architecting it into the right wave with consequences
+   threaded through every consumer — one declared shift, never
+   a second truth landed at the discovery point. Triage is by
+   consequence: diminishing-returns items are pursued BEHIND
+   high-consequence items, never instead of them. (This is
+   §291.2b's coherence condition made operational.)
+5. **AESTHETIC/FORENSIC VERDICTS SIT IN THE FABLE SEAT, always.**
+   Lanes deliver renders and described observations; the chair
+   looks and rules. §262.3's practice is now standing law; the
+   queued Opus-made zoom verdicts (§238.2c, §252.3c, §274.3)
+   get the chair's own eyes at their rulings.
+
+Plus the §265.2b mitigation restated for this sitting: every
+ruling re-derives from PRIMARY receipts (the queue entry is an
+index, never the evidence); a row whose evidence is thin is
+ruled with "thin" stated, never defaulted to RATIFIED.

@@ -66,8 +66,14 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 #   E3 retro-E3-memo.md — prior-art/meta §247/§248/§253/§254/§258/§259/§263/§265/§266
 #   E4 retro-E4-memo.md — engine/soak/waves §267-§274 + RS-4 resume recon
 # The chair has READ all 25 rows + §275-§290 from the primary record already.
-# NEXT ACTS (in order): collect E1-E4 → rule 25 rows RATIFIED/AMENDED/REVERSED in
-# ODQ rows (§292+) → empty the queue file → §61-style annex re-verify any A/R →
+# ⭐ §292 (owner: "implement those") NOW GOVERNS THE SITTING'S METHOD:
+# dependency-ordered rulings (§267-§274 FIRST, map D0 dispatches when they clear);
+# RS-4 monitor resumes DURING the sitting once E4's recon lands; 4 lanes =
+# ceiling not quota; review-improvements route through the build sheet; aesthetic
+# verdicts are the Fable chair's own eyes. Rulings begin at §293.
+# NEXT ACTS (in order): collect E4 → rule §267-§274 (§293+) → dispatch map D0 +
+# resume RS-4 → collect E1-E3 → rule remaining 18 rows → empty the queue file →
+# §61-style annex re-verify any A/R →
 # refresh HANDOFF_CURRENT + this note → THEN dispatch per §291.4: map lane D0
 # offset kernel from sealed W2 (sandbox mf-proto/build-out; W3 partial tip is
 # ABANDONED EVIDENCE, do not build on it) + engine lane RS-4 monitor resume at
