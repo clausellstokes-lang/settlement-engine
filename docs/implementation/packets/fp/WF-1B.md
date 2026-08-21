@@ -1,6 +1,25 @@
 # WF / WF-1B — the stamped suppression and the flag-forked prune key (SINGLE MEMBER per ODQ §309; stage 2 of the `wf-1` split promotion; compiled as WF-1b-i)
 
-- **Status:** DRAFT
+- **Status:** READY
+- **Promotion note:** promoted from DRAFT by lane TE-WF1B under ODQ §291.5 / §308.4 at
+  `d6a932c1`, after re-executing the whole §15 preflight at this member's own tip rather than
+  inheriting a single figure. Every §15 gate discharged: HEAD is `9d851fae`; the
+  `f8d978df..9d851fae` window is docs-only by executed `git diff --name-only`; both §8
+  production targets are clean with no foreign dirt; all twenty §14 symbols resolve;
+  `validate:packets` exits 0 at the tip and the §8 collision check re-runs clean (130 rows,
+  128 LANDED + 1 SUPERSEDED + this one, and no OTHER non-terminal row names either target
+  file); `religionState.js` re-measures **356** and `religiousContest.js` **468** with
+  eslint's own `Linter`; the lighting tuple and the six `.prose-numerics-baseline.json` rows
+  are re-read from the live files; the own-footprint golden is captured on a deity-BEARING
+  fixture; and the A1/A3/A5/A7 fixtures were RUN and PRINTED before any pin was written.
+  ⛔ **`BASE_STATE.json` is re-read and re-discharged here, and it is MEASURED NOT CITABLE at
+  this base — WF-1A's finding reproduces, independently, rather than being inherited.** The
+  capsule is stamped at `b8946403` (2026-08-16) and its own `consumptionLaw` admits a
+  descendant only when the window is DOCS-ONLY. Executed: `b8946403` IS an ancestor of
+  `9d851fae`, but `git diff --name-only b8946403 9d851fae` returns **233 paths of which 192
+  are outside `docs/`** (`package.json`, `scripts/.size-baseline.json`, five `e2e/` specs and
+  more), so the docs-only arm fails and the capsule may not be cited as executed. Every figure
+  in this packet is this lane's own re-execution (§P8).
 - **Compile note:** compiled by lane TC-WF1B under ODQ §291.5; the chair lands. ⚠ The status
   value above stands ALONE on its line because the validator's header parser
   (`parsePacketHeader`, `scripts/implementation-packets.mjs`) anchors the status row at

@@ -16929,7 +16929,7 @@
     },
     {
       "id": "WF-1B",
-      "status": "DRAFT",
+      "status": "READY",
       "packetPath": "docs/implementation/packets/fp/WF-1B.md",
       "verifiedBase": "9d851faeb7cac73217d508f621d1d9ee29f2c145",
       "changeManifest": [
