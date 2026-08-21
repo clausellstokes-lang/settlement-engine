@@ -1,6 +1,6 @@
 # WF / WF-1D — the war-dissolution join that names the fall (stage 4 of the `wf-1` split promotion)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Compile note:** compiled by lane TC-WF1D under ODQ §291.5/§320; BUILT AND VERIFIED by lane
   TE-WF1D under ODQ §321. ⚠ The status value above stands ALONE on its line because
   `parsePacketHeader` (`scripts/implementation-packets.mjs`) anchors the status row at
@@ -665,10 +665,10 @@ stronger than the predicted A3-alone and needs no re-shape.
 | `WORLD_SNAPSHOT_HARD_DENY` | `src/domain/display/worldSnapshotPublic.js` |
 | `WORLD_SNAPSHOT_PUBLIC_LEDGER_ALLOWLIST` | `src/domain/display/worldSnapshotPublic.js` |
 | `faithUnseatingEnabled` | `src/domain/worldPulse/simulationRules.js` |
-| `dissolvedClauseFor` *(created; added at the flip to LANDED)* | `src/domain/worldPulse/warTerminationCauseTables.js` |
-| `FALL_CAUSE_PROSE` *(created; added at the flip to LANDED)* | `src/domain/worldPulse/warTerminationCauseTables.js` |
-| `WF1D_DISSOLUTION_FALL_COUPLING` *(created; added at the flip to LANDED)* | `src/domain/certification/couplingRegistryWar.js` |
-| `WF_FAITH_WAR_COUPLINGS` *(created; added at the flip to LANDED)* | `src/domain/certification/couplingRegistryWar.js` |
+| `dissolvedClauseFor` *(CREATED by this member)* | `src/domain/worldPulse/warTerminationCauseTables.js` |
+| `FALL_CAUSE_PROSE` *(CREATED by this member)* | `src/domain/worldPulse/warTerminationCauseTables.js` |
+| `WF1D_DISSOLUTION_FALL_COUPLING` *(CREATED by this member)* | `src/domain/certification/couplingRegistryWar.js` |
+| `WF_FAITH_WAR_COUPLINGS` *(CREATED by this member)* | `src/domain/certification/couplingRegistryWar.js` |
 
 `retiredSymbols`: **none.**
 
@@ -683,3 +683,58 @@ examined; the faith gate is false so the ring map is empty and the lookup finds 
 lit on both, a world whose ring records nothing for the pinned anchor produces a byte-identical
 receipt (A3, executed on both sides of the landing). ⛔ **Lighting either flag is owner-gated,
 always.**
+
+---
+
+## §16 · THE LANDING RECORD
+
+Built and verified by lane **TE-WF1D** in an isolated `--detach` worktree at
+`cdfe5a96716250af71f4e91305beb8716987e4f3` with its own `node_modules` (`npm ci`, exit 0).
+No ref was moved by this lane; the chair CASes.
+
+### 16.1 The commits
+
+| # | subject |
+|---|---|
+| 1 | `docs(WF): the zero-headroom class has four members — record it in the family law` (the ODQ §324.3 preamble batch + the SHA re-stamp it forces) |
+| 2 | `docs(WF-1D): open the war-dissolution join at DRAFT` |
+| 3 | `docs(WF-1D): DRAFT -> READY, with the whole §11 preflight executed at this tip` |
+| 4 | `feat(WF-1d): the dissolution names the fall …` (the eight-file implementation) |
+| 5 | this flip |
+
+### 16.2 The measured result
+
+| measure | before | after |
+|---|---|---|
+| `warTermination.js` effective (eslint `Linter`) | **818** | **818** — EXACT against a frozen 818 |
+| `warTermination.js` physical (`wc -l`) | **1045** | **1045** |
+| `pulseKernel.js` / `applyWorldPulse.js` | 1581 / 941 | **1581 / 941** — untouched |
+| `COUPLING_REGISTRY` rows | 49 | **50** (one `FAITH→WAR`, the estate's first) |
+| lighting census | `2485/364/2121/20618/5768` | **`2485/364/2121/20624/5768`** |
+| `typecheck:ratchet` | 173 / ceiling 173 | **173 / 173** |
+| `typecheck:domain:strict` | 1134 / ceiling 1134 | **1134 / 1134** |
+| any-cast ledger | `warTermination.js` allowance **0** | **0 holes added** |
+
+### 16.3 The focused proof
+
+`17` test files, **229 tests, all passing, TRUE_EXIT=0**, captured in-shell from a self-named
+log — the full §12 battery including the committed deity-BEARING golden master, which is the
+own-footprint fence and which this lane never wrote.
+
+### 16.4 What refutation found that assertion would not have
+
+1. ⛔ **A SURVIVING MUTANT.** The chartered MUTANT (c) did not convict: the legacy arm's honesty
+   came from its ABSENT pinned anchor, not from the `sacred_claim` guard. Measured, the guard
+   protects something else entirely — a **grievance** war with pinned anchors and a recorded fall
+   would otherwise wear `patronFallCause: "discredited"`. Pinned, and (c) now convicts.
+2. ⛔ **A `ReferenceError` CAUGHT BEFORE IT WAS COMMITTED.** The composing head's import block and
+   re-export block are separate; the first edit reached only the latter, which creates no local
+   binding.
+3. ⛔ **THREE COMPILE FIGURES THAT WOULD HAVE REDDENED A TERMINAL** — the census double-count, the
+   deep-equal roster pin, and the returned-read `receiptField` that would have raised a
+   monotone-down ledger.
+4. ⚠ **THE ANCHOR BILL, PAID TWICE.** A `// anchored:` marker counts only on the assertion's own
+   line or the SINGLE line directly above; a marker that WRAPS does not count. Five sites reddened
+   before the same-line idiom was adopted.
+
+⭐ **Every one of the four was found by running something, not by reading something.**

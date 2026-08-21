@@ -17769,7 +17769,7 @@
     },
     {
       "id": "WF-1D",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/fp/WF-1D.md",
       "verifiedBase": "cdfe5a96716250af71f4e91305beb8716987e4f3",
       "changeManifest": [
@@ -17874,6 +17874,26 @@
           "_note": "THE VEIL. religionStates is a member of this deny list and is absent from the public ledger allowlist, so the receipt four-token bucket crosses nothing that did not cross yesterday. A5 asserts both halves.",
           "path": "src/domain/display/worldSnapshotPublic.js",
           "symbol": "export const WORLD_SNAPSHOT_HARD_DENY"
+        },
+        {
+          "_note": "CREATED BY THIS MEMBER. The closed four-key reader table for WHY a patron creed lost the seat, keyed on FALL causes rather than war reasons and therefore deliberately outside all three module-load totality assertions at the foot of its file. A6 asserts its keys EQUAL PATRON_FALL_CAUSES, so a later fifth cause reds in the battery rather than rendering a blank clause.",
+          "path": "src/domain/worldPulse/warTerminationCauseTables.js",
+          "symbol": "export const FALL_CAUSE_PROSE"
+        },
+        {
+          "_note": "CREATED BY THIS MEMBER. The selector that decorates a dissolved sacred_claim clause with the typed fall and returns every other clause byte-unchanged. Its return type and its table are annotated explicitly rather than inferred, which is what kept typecheck:domain:strict at its floor where WF-1B paid nine errors for the same shape.",
+          "path": "src/domain/worldPulse/warTerminationCauseTables.js",
+          "symbol": "export function dissolvedClauseFor"
+        },
+        {
+          "_note": "CREATED BY THIS MEMBER. CPL-23, the estate first FAITH-to-WAR coupling row, licensing warTermination.js cross-layer import of the faith leaf. Deleting it while leaving the import is mutant (e), which reds both A6 and the inclusion walker licensing arm.",
+          "path": "src/domain/certification/couplingRegistryWar.js",
+          "symbol": "export const WF1D_DISSOLUTION_FALL_COUPLING"
+        },
+        {
+          "_note": "CREATED BY THIS MEMBER. The FAITH-to-WAR aggregate the composing head imports, composes into COUPLING_REGISTRY and re-exports by name. It exists as an aggregate so a later WF wave appends a row without touching the head composition again.",
+          "path": "src/domain/certification/couplingRegistryWar.js",
+          "symbol": "export const WF_FAITH_WAR_COUPLINGS"
         }
       ],
       "acceptanceCases": [
