@@ -12379,3 +12379,99 @@ ruled with "thin" stated, never defaulted to RATIFIED.
    have now been edited in place across three eras — the
    as-filed §249-era atlas exists only in git history; cite
    by commit when historical figures matter.
+
+## §301 · MF-D0 COLLECTED — THE OFFSET KERNEL LANDS, THE DEFECT
+## WAS THREE TIMES THE ORDERED CENSUS AND IS ZERO IN EVERY RING
+## FAMILY; THE KERNEL IS ADOPTED OVER THE WALL-ONLY GUARD; LAW
+## L7; D1 DISPATCHES (2026-08-21; chair: FABLE; receipt
+## laneMFD0-receipt.md, every figure log-traced; the chair's own
+## zoom on the cured metropolis)
+
+1. **COLLECTED, ALL CONFIRMED BY CAPTURED RUNS.** Ordered
+   census 12 → 0 (W2's instrument, unmodified). The true
+   surface: asked of EVERY published ring family (wall, ditch,
+   claim line, closed circuit, demotion garden), sealed W2
+   carries **38 self-crossing segments over 24 of its 90
+   rings** — the wall polygon was 32% of the defect; the tip
+   reads **0 in every family**. Suite 246 → 248 TRUE_EXIT=0;
+   determinism 10/10; four drawn censuses 0/0/0/0 area-true
+   over 23,557; containment residual 0/17; 102/102 renders
+   under unraised ceilings (the metropolis 6 primitives
+   cheaper). `properCross` has ONE exported home with a source
+   scan pinning it. **The chair viewed the cured metropolis at
+   3000px: the X-crossing, the empty closed loop and the
+   self-doubling triangle are GONE; the circuits read as
+   continuous angular traces** — remaining visible roughness
+   is the two different predicates in items 5-6 below.
+2. ⭐⭐ **RAISED-4 RULED: THE KERNEL IS ADOPTED; the wall-only
+   guard (arm W) is REFUSED.** §287.12 preserves legacy bytes
+   WHEN VALID — a self-crossing ditch ring is not a valid
+   result, does not bound a solid, and would be handed to D1
+   for volume and D4 for light. Shipping 11 known folded ditch
+   rings to honour a blast-radius forecast made before anyone
+   counted the ditches would fit the cure to the prediction.
+   **§278's five-leaf figure is hereby RE-STATED by the chair:
+   right about the wall ring (arm W proves it exactly), wrong
+   as the wave's bound — the kernel's true radius is the 11
+   circuit-publishing leaves, with all six unwalled leaves
+   byte-identical.** The attribution is exemplary: arm Z (the
+   repair withdrawn at its own switch) is 34/34 byte-identical
+   to base — the executed no-op control — and each mechanism
+   is attributed by its own arm. ONE declared shift, banked
+   for the landing declaration. Arm W survives as the built
+   one-line veto (laneMFD0-cfW).
+3. **RAISED-3/2/1 — THE RECORD IS CORRECTED.** Both of W2
+   §9.1's diagnosed causes are WRONG (resampleClosed
+   introduces zero crossings; the 63.5-unit closure push
+   arrives after the fold): the real producers are the
+   vertex-normal MITRE (8 of 12) and an unnamed TERRAIN PULL
+   (4 of 12). §294.7a's acceptance criterion inherited W2's
+   wrong causal model; the kernel cured at the true causes,
+   which satisfies the criterion's intent. W2 §9.1's
+   affected-leaf list was its BASE row (highwater's wall is
+   clean at the sealed tip; crossing is the fifth leaf). The
+   graded figure is 12 → 0; SPEC §278's literal "11" was the
+   stale base figure — the one-line spec correction rides the
+   D1 brief per L2.
+4. **RAISED-5 ACCEPTED**: the splitAtGates seam fix rode
+   along, was NECESSARY to land, is a real latent defect (0 of
+   25 base rings trip it), and is proved byte-neutral at base
+   by arm Z — §278's ride-alone intent is satisfied in
+   substance: one declared shift, every mechanism separately
+   attributed. The chair prefers this to papering the seam or
+   burning the wave.
+5. **RAISED-6 — A NEW NAMED CENSUS IS ORDERED**: the
+   metropolis's circuits cross EACH OTHER (20 at base, 10 at
+   tip — halved as a side effect; the old-core pair unchanged
+   at 6). A ring-nesting predicate is a different law from
+   self-intersection and nothing pins it. The instrument
+   exists (laneMFD0-interring.mjs); the census joins W3's
+   standing 0/0 family with its cure in W3's scope.
+6. **RAISED-7 ACCEPTED**: the terrain pull searches one ±45°
+   diagonal — the kernel refuses its invalid results; the
+   re-aim is trace-behaviour work owned by W3, not the
+   micro-wave. **RAISED-8 ADOPTED AS ⭐ LAW L7: A STAGE
+   MEASURED ONLY OVER THE CORPUS IS MEASURED OVER A SAMPLE —
+   the corpus is not the population**; extends the standing
+   census-over-derived-set law to stage-level claims.
+7. **COST ACCEPTED, LEVER NAMED**: highwater loses its five
+   filled-ditch gardens (city 5→2, metropolis 10→6, migration
+   5→2) — W2's exit 7 was already PARTIAL; the composition-
+   order move (demotion before the packer) is W3's FIRST item
+   and is the cure. **HAZARD RECORDED**: preview-tip/
+   node_modules is pruned to 17 files, so every sealed tree's
+   symlink dangles — laneMFW2-tip cannot run its suite as it
+   stands; the working method is MF-D0's hardlink copy from
+   rs4/node_modules; MFW2-crop.mjs is dead, laneMFD0-crop.mjs
+   replaces it.
+8. **D0 IS SEALED at laneMFD0-tip. MF-D1 DISPATCHES NOW** —
+   the foundations wave (executable S0–S23 manifest,
+   versioned integer coordinate ABI, exact solid legality,
+   spatial receipts, DCEL face/adjacency/point-location
+   dual-run), carrying every obligation the sitting routed to
+   it: the §299.3 codex-reconciliation trio, §299.4's
+   validator refusal, the §293.3c stream-derivation audit,
+   §293.7's street-web lifecycle question, §297.4b's
+   publication-guard sweep, §297.4c's substrate salt,
+   §298.6a's blocked-arm sweep, and the §278 figure
+   correction. Fresh W3 follows D1, per the standing order.

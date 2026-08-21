@@ -74,6 +74,18 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ §301 (~08:10 ET): MF-D0 COLLECTED — kernel ADOPTED (12→0 ordered census;
+# TRUE surface 38 crossings/24 of 90 rings, now 0 in EVERY family; arm-Z no-op
+# control 34/34; §278 five-leaf figure RE-STATED to 11 circuit-publishing leaves,
+# 6 unwalled byte-identical; W2's two diagnosed causes REVERSED — real: mitre 8 +
+# terrain pull 4; law L7 banked; inter-ring census ordered into W3; highwater
+# ditch-garden cost accepted, W3 demotion-order is the cure; ⚠ preview-tip/
+# node_modules PRUNED — sealed trees' symlinks dangle, hardlink-copy from
+# rs4/node_modules is the method). D0 SEALED at laneMFD0-tip.
+# ⭐ MF-D1 DISPATCHED (foundations: S0-S23 manifest + stream audit, integer ABI,
+# solid legality, spatial receipts, DCEL dual-run + codex reconciliation, the
+# routed sweeps; receipt → laneMFD1-receipt.md; ZERO-byte rule — stops if any
+# leaf moves). Fresh W3 follows D1. Still out: RS-4 segment · CG-1 gate proof.
 # ⭐ §300 (~07:50 ET): CF-1 COLLECTED GREEN AND COMMITTED @ 886932f0 — sitting
 # corrections live in spec (44 markers)+atlas (19)+registers; hf389 renamed,
 # corpus gate 313/313 TRUE_EXIT=0; raised items ruled (index-poisoning note:
