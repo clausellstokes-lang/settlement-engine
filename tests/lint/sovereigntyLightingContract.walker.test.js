@@ -4972,7 +4972,33 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   deliberate placeholder so the SEQUENCED walker had to convict on every figure in turn,
     //   and each value was taken from its own assertion message. Arithmetic would have produced
     //   the same tuple; it would not have been evidence. Convictions quoted in the lane receipt.
-    files: 2488, parked: 364, credited: 2124, titles: 20655, suiteTitles: 5776,
+    // ── RE-RECORDED 2026-08-21 BY MF-T2C, THE PLANAR EMBEDDER EXTENDED ONTO THE ABI ────
+    // AUTHORIZING DECISION: ODQ §312 (the D3a port dispatch that commissions this member)
+    // and ODQ §328 (this seat's own dispatch, which ruled the draft's RAISED items), under
+    // the wave charter at §310.4 and §299.4's binding-forward rule that a packet moving any
+    // census or ratchet NAMES ITS AUTHORIZING DECISION in the packet body. The family's stamp
+    // is GRANTED at ODQ §312.2b.
+    // 2,488/364/2,124/20,655/5,776 → 2,490/364/2,126/20,663/5,778.
+    // THE CAUSE IS TWO NEW TEST FILES and nothing else:
+    // tests/domain/townMapDcelEmbeddingExtension.test.js (ONE literal describe, SEVEN
+    // straight-line test() calls with string-literal titles) and
+    // tests/property/townMapDcelEmbeddingDeterminism.test.js (ONE literal describe, ONE
+    // straight-line test()). No .each, no runIf, no nesting, no loop-registered case; every
+    // loop lives INSIDE a named test (the SP-D idiom), so BOTH files are CREDITED and all
+    // eight titles are visible. The deltas are exactly +2 files, +2 credited, +8 titles,
+    // +2 suite titles, and PARKED IS UNCHANGED at 364 — no parked-file rule, parser door or
+    // existing file's classification moved. The member's two production edits
+    // (dcelEmbedding.js, dcel.js) and its packet document are not test files.
+    // ⚠ THE TITLE DELTA IS EIGHT, NOT THE D3a PLAN'S PREDICTED SIX. It is derived from the
+    // actual test() calls rather than copied from the plan — the same correction MF-T2B made
+    // when its own +6 estimate measured +7.
+    // ⛔ NO FIGURE HERE WAS OBTAINED BY ADDING. The tuple line was set to a deliberate
+    //   placeholder of zeros and the SEQUENCED walker was made to convict on each figure in
+    //   turn, five runs, each value taken from its own assertion message ("expected 2490 to
+    //   be +0", "expected 364 to be +0", "expected 2126 to be +0", "expected 20663 to be +0",
+    //   "expected 5778 to be +0"). Arithmetic would have produced the same tuple; it would not
+    //   have been evidence. The convictions are quoted verbatim in the lane receipt.
+    files: 2490, parked: 364, credited: 2126, titles: 20663, suiteTitles: 5778,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
