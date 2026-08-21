@@ -16,6 +16,7 @@
 > their shared law is structural rather than merely discouraged.
 
 - **Status:** **LANDED, chair-signed**, at `f20b9faa` (ODQ §314; STAMP GRANTED at ODQ §312.2b). Cited by the SHA-256 of this file as landed; a later edit re-hashes it and the editing act owns every citing packet's re-stamp in the same landing (ODQ §314.2).
+- **Amendments:** **§315** — the status line above corrected to a landed value and the citation prohibition dropped (raised by MF-T2A). **§324.5** — §P2.2 gains the post-build dormancy clause and the forensic-zoom obligation, raised by MF-T2A's RAISED-2 and executed at MF-T2B's landing, which is the member that first proved the fence discharges only after a build. Each amendment re-hashed this file and re-stamped both citing packets in its own landing, per §314.2.
 - **Volume:** `map-corpus/docs/GENERATION-SPEC.md` — THE GENERATION SPECIFICATION, the map
   program's spine and build sheet (§246.3), as corrected by ⟦FOLD §287⟧ **§10**, which *"wins on a
   direct conflict with §§6–§9"*.
@@ -147,6 +148,17 @@ a leaf outside `src/domain/townMap/**` re-prices ALL FOUR from scratch** — see
    runs it focusedly** — an added leaf that drags a new transitive import into the entry closure
    is exactly how a dormant port stops being dormant, and the first-paint budget is where it
    shows.
+   ⛔⛔ **AND IT DISCHARGES POST-BUILD ONLY: A PRE-BUILD SKIP IS NOT A DISCHARGE** (ODQ §324.5,
+   raised by MF-T2A and executed at MF-T2B, the first member to add production leaves). The file
+   is `describe.runIf(distExists)` and a second arm is additionally `it.skipIf(!process.env
+   .VERIFY_DIST)`, so on a fresh worktree the whole suite is gated off and the run reports exit
+   **0 over ZERO executed tests** — the estate's "a green that never ran" shape. **Build `dist/`
+   first, then run it under `VERIFY_DIST=1`, and report the EXECUTED counts.** ⚠ And because the
+   fence keys on `townMapModel`'s own fingerprint rather than on the arriving leaf, a member that
+   adds one owes the forensic zoom as well: walk the entry chunk's transitive static closure and
+   confirm that a string literal unique to the new leaf appears in **none** of those chunks and in
+   a lazy chunk elsewhere in `dist/` — an absence measured against a denominator that does not
+   contain the surface proves nothing about it.
 3. **A BARREL HOP DRAGS THE WHOLE FAMILY.** The sandbox's `coordinateAbi.js` imports three symbols
    from a **681-effective-line** module; the measured transitive closure of what the five D1
    foundation modules actually need is **19 declarations / ~170 effective lines**. ⛔ **An MF port

@@ -6,7 +6,7 @@
 - **Last revalidated:** 2026-08-21 at `f20b9faa` by lane TE-T2A, every row re-executed at this tip
 - **Depends on:** `NONE` — this member depends on nothing and protects everything after it
 - **Family preamble:** `docs/implementation/preambles/MF-PREAMBLE.md`, SHA-256
-  `6670a0465bc2b82eb1b23bbad4b60b847bf3398b1e20f6f64ecfa5cfac68192b` (re-stamped at ODQ §315 with the preamble's status-line fix; original citation `7a39a28e…4de8`. Its §P2 hazard dispositions,
+  `0706aad6a84e4f74ec47602e9e3222fc398c4c8864bb38c79ac480c2a11db4ed` (re-stamped at ODQ §324.5 with the §P2.2 post-build dormancy clause THIS PACKET'S OWN RAISED-2 asked for; superseding the §315 status-line re-stamp `6670a046…192b`, itself superseding the original `7a39a28e…4de8`). Its §P2 hazard dispositions,
   §P3 anchor preflight, §P3b mutation-coverage obligation, §P4 registration template, §P5 census
   law, §P6 mutant hygiene and §P7 STOP set bind this packet and are not restated here.
 - **Collision group:** `d3a-port` — shares

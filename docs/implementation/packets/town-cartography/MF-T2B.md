@@ -3,15 +3,20 @@
 - **Status:** LANDED
 - **Packet version:** 1
 - **Verified base:** `claude/composite-r4` at `2cdb87fac566b3d6803a0dce9d59df13f07c1c9e`
-- **Last revalidated:** 2026-08-21 at `7cb2c730` (the DRAFT tip) by lane TE-T2B — the whole §4
-  preflight re-executed there and identical in every figure: both port-source SHA-256 values, the
-  preamble's SHA-256, `foundation.js` **143** / `fabric/index.js` **101** effective, **157** digest
-  pins across 12 files, and the census tuple `2485 / 364 / 2121 / 20611 / 5768`
+- **Last revalidated:** 2026-08-21 at `cdfe5a96` by lane TE-T2B, at the CAS-slot landing — this
+  member was compiled, built and gated on `2cdb87fa`, then WF-1C landed and the whole §4 preflight
+  was **re-executed at the new base**. Every figure is identical there — both port-source SHA-256
+  values, `foundation.js` **143** / `fabric/index.js` **101** effective, **157** digest pins across
+  12 files, the fabric at **18 files / 94 distinct exported names / 0 duplicated** — with exactly
+  ONE exception: the census `titles` figure, which WF-1C moved by +7. The base tuple is therefore
+  `2485 / 364 / 2121 / 20618 / 5768`
 - **Depends on:** `MF-T2A` — LANDED and terminal at `37fb6916`. Its single-declaration law binds
   this member: the arriving clipper takes a distinct name
 - **Family preamble:** `docs/implementation/preambles/MF-PREAMBLE.md`, SHA-256
-  `6670a0465bc2b82eb1b23bbad4b60b847bf3398b1e20f6f64ecfa5cfac68192b` (the ODQ §315 re-stamp;
-  re-hashed by this lane at `2cdb87fa` and matching). Its §P1 refutations, §P2 hazard
+  `0706aad6a84e4f74ec47602e9e3222fc398c4c8864bb38c79ac480c2a11db4ed` (re-stamped at ODQ §324.5,
+  in this member's own landing commit, with the §P2.2 post-build dormancy clause — superseding the
+  §315 status-line re-stamp `6670a046…192b`, which this lane re-hashed and matched at `2cdb87fa`).
+  Its §P1 refutations, §P2 hazard
   dispositions, §P3 anchor preflight, §P4 registration template, §P5 census law, §P6 mutant
   hygiene, §P7 STOP set and §P8 capsule law bind this packet and are not restated here.
 - **Collision group:** `d3a-port` — shares
@@ -26,7 +31,8 @@
   against the plain `src/domain/**` ceiling of **800**; no `townMap` path carries a
   `scripts/.size-baseline.json` entry and none is on the hot-file list; the fabric directory
   carries **0 duplicated export names of 94 distinct names across 18 files**; test census
-  `2485 / 364 / 2121 / 20611 / 5768`; `BASE_STATE.json` is stamped `b8946403` and is **NOT
+  `2485 / 364 / 2121 / 20618 / 5768` (re-measured at `cdfe5a96`; it read `… / 20611 / …` at the
+  `2cdb87fa` compile base and WF-1C moved `titles` by +7); `BASE_STATE.json` is stamped `b8946403` and is **NOT
   citable at this base** by its own `consumptionLaw` (preamble §P8)
 
 > **`censusAuthorization`:** this packet moves the test census by two credited files, seven titles
@@ -35,6 +41,10 @@
 > under the wave charter at **§310.4** and §299.4's binding-forward rule that *"a packet that moves
 > any census/ratchet NAMES ITS AUTHORIZING DECISION in the packet body."* The family's stamp is
 > **GRANTED** at ODQ §312.2b, so `town-cartography` sits in the eight-member engine-train column.
+> ⚠ **The move's SIZE is unchanged by the CAS-slot rebase — its BASELINE is not.** WF-1C landed
+> `+7` titles between this member's gate and its landing, so the same `+2 / +0 / +2 / +7 / +2`
+> delta now sits on a different tuple. The figures were re-derived by execution at the rebased tip
+> under **ODQ §324.5**; no new census authority is claimed and no figure was patched alone.
 
 > ⛔ **PORT SOURCE PROVENANCE (preamble §P1 R-MF-4).** The sandbox is not a git repository, so
 > there is no commit to cite. This packet names its sources by path **and SHA-256**, re-hashed by
@@ -216,7 +226,7 @@ measurement.
 | The standing law | `tests/lint/townMapFabricSingleDeclaration.walker.test.js` | the single-declaration law | landed by MF-T2A, green at zero over 18 files / 94 names | ⛔ **binds this member: the arriving clipper takes a distinct name** |
 | Digest pins | `tests/domain/townMapPlanarDcel.test.js` (+11 files) | 157 literal digest pins, 118 distinct values | frozen | must stay green untouched — the member's own no-op control |
 | Test precedent | `tests/domain/townMapParcelRegistry.test.js` + `tests/property/townMapParcelRegistryDeterminism.test.js` | the acceptance matrix + the replay companion | the family's two-file shape | **copy this proof shape** |
-| Census | `tests/lint/sovereigntyLightingContract.walker.test.js` | `CENSUS` | `2485 / 364 / 2121 / 20611 / 5768` | re-record all five together with the cause; never re-serialise |
+| Census | `tests/lint/sovereigntyLightingContract.walker.test.js` | `CENSUS` | `2485 / 364 / 2121 / 20618 / 5768` at `cdfe5a96` | re-record all five together with the cause; never re-serialise |
 
 **Forbidden alternatives:**
 
@@ -429,7 +439,7 @@ line or the line immediately above it. ⚠ For a multi-line comment only the **L
 **Predicted census motion — the family's domain-matrix + determinism-companion shape:**
 
 ```
-2485 / 364 / 2121 / 20611 / 5768   →   2487 / 364 / 2123 / 20618 / 5770
+2485 / 364 / 2121 / 20618 / 5768   →   2487 / 364 / 2123 / 20625 / 5770
                                        +2 files · +0 parked · +2 credited · +7 titles · +2 suites
 ```
 
@@ -563,7 +573,8 @@ none is inherited from the compile, from the capsule, or from a sibling lane.
   identical both times):
   `123f3c17ebd42da5223216f0029617706db49b3de7ab602acd6edcf72a2c8404  coordinateAbi.js` ·
   `c40c75b1fff4dd7393677f18e5b755dfb2a7fe17f4bc94a2a30f97621c78ed6e  fabricGeometry.js`.
-  Family preamble re-hashed to `6670a046…192b` — matching.
+  Family preamble re-hashed to `6670a046…192b` — matching at the compile base; this member's own
+  landing commit then amends §P2.2 and re-stamps every citer to `0706aad6…b4ed` (ODQ §324.5).
 - **Final state:** working tree CLEAN at the LANDED tip.
 - **Changed files and effective lines against the §3 budget:**
 
@@ -594,8 +605,12 @@ none is inherited from the compile, from the capsule, or from a sibling lane.
   (census, anchor, single-declaration, mutation-coverage) **4 files / 55 tests passed**,
   TRUE_EXIT=0 · single-declaration law green with the fabric at **20 files / 128 distinct exported
   names / 0 duplicates**, up from 18 / 94 / 0.
-- **Census before → after:** `2485 / 364 / 2121 / 20611 / 5768` → `2487 / 364 / 2123 / 20618 /
-  5770`. **`parked` unmoved at 364.** The walker reached and cleared `suiteTitles` — **33 passed
+- **Census before → after:** `2485 / 364 / 2121 / 20618 / 5768` → `2487 / 364 / 2123 / 20625 /
+  5770`. ⛔ **The `titles` figures were RE-BASELINED at the CAS-slot landing and the old one was a
+  trap:** this member's original AFTER was `20,618`, and WF-1C's landed AFTER is also `20,618` —
+  the same number meaning two different things. Carrying the original tuple through the rebase
+  would have recorded WF-1C's post-value as this member's and silently lost seven titles. Re-derived
+  by EXECUTION at the rebased tip, never by arithmetic alone. **`parked` unmoved at 364.** The walker reached and cleared `suiteTitles` — **33 passed
   (33)**. The arm is proven non-vacuous in both directions by planted figures that convict with
   the LIVE value named: `expected 2487 to be 2486` on `files` and `expected 20618 to be 20617` on
   `titles`. ⚠ The titles delta is **+7**, corrected from the compiled draft's +6 (§9).
