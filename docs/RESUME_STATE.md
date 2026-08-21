@@ -74,6 +74,12 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~17:18 ET: WF-1D HELD AT THE TERMINAL DOOR — its heads-up arrived (rebased
+# tip 91c50357 on b25907f9, focused proof green) but NOTICES' terminal is LIVE
+# (ratchet workers, load ~40) and NOTICES CASes first (§325.5), so WF-1D
+# rebases a THIRD time onto NOTICES' tip before its gate. §326.2 amended in
+# execution: RS-5 resumes AFTER WF-1D's terminal (the NOTICES-collection
+# window vanished into WF-1D's gate slot). Soak confirmed OFF right now.
 # ~16:05 ET: PARALLELISM SPIN-UP (§326) — TC-T2C compile lane spawned
 # (scratchpad-only); RS-5 window-resume protocol: resume at NOTICES' collection,
 # pause on WF-1D's terminal heads-up (WF-1D so ordered). HANDOFF re-folded
