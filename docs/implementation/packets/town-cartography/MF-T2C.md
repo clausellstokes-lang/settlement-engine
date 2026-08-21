@@ -1,6 +1,6 @@
 # Town cartography / MF-T2C — the embedder extended onto the ABI (BigInt, components, degeneracy, point location)
 
-- **Status:** DRAFT
+- **Status:** READY
 - **Packet version:** 1
 - **Verified base:** `claude/composite-r4` at `fb80e32f03564e6edcbad4bf37de27694c2fe986`
 - **Base posture:** the whole §4 preflight was re-executed at that base; every figure below is a

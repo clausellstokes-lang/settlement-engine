@@ -17769,7 +17769,7 @@
     },
     {
       "id": "MF-T2C",
-      "status": "DRAFT",
+      "status": "READY",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T2C.md",
       "verifiedBase": "fb80e32f03564e6edcbad4bf37de27694c2fe986",
       "changeManifest": [
