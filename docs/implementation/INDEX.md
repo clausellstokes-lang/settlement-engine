@@ -3,23 +3,24 @@
 - **Status:** CANONICAL
 - **Current code of record (first-map continuation):**
   `/Users/cstokes/.codex/worktrees/first-map-vertical-slice` on
-  `codex/first-map-vertical-slice`; MF-T1S is verified against full source base
-  `7913cab3305b79c79c7079bc2129b2c8f4f423b8`.
-- **Current measured checkpoint (2026-08-21):** `128` packets / `1` READY.
-  MF-T1S is promoted by this index revision. If no current sealed session
-  exists, run `npm run implementation:dispatch -- MF-T1S`; if one exists, use
-  `npm run implementation:resume -- MF-T1S`. The packet owns the exact paths,
-  hashes, checks and STOP conditions; a stale seal must be refreshed before
-  implementation edits.
-  Its package-removal proof is headless simulation: reload/project the saved
-  bytes with an explicitly empty active `installedRecipeSnapshots` array. It
-  does not uninstall a package or mutate a real store. Fantasy-operation replay
-  follows persistence; dossier-conditioned sampling remains deferred behind
-  genuine dossier, seed and choice-receipt authority.
-- **Fable / Opus handoff law:** start at the first READY row under **Current
-  packet set**, read only that linked packet, and do not infer authority from
-  the historical program log below. This checkpoint is updated at promotion,
-  implementation landing, terminalization and any blocking owner decision.
+  `codex/first-map-vertical-slice`; MF-T1S implementation landed at full commit
+  `136efaa5b636570fc4fd2aa45dbf654bef3f2769`.
+- **Current measured checkpoint (2026-08-21):** `128` packets / `0` READY after
+  this terminal revision. MF-T1S's packet and atomic session receipt contain
+  its exact paths, hashes, checks and STOP conditions. Its package-removal proof
+  is an explicitly empty active installed-snapshot view, not a real uninstall.
+  The next bounded outcome is MF-T1X: replay exactly one registered
+  `EXPLICIT_FANTASY_CANON` construction from MF-T1S saved bytes as a sealed
+  one-operation after-state and project it through the existing fixed-survey
+  draw/SVG path. MF-T1X has no READY packet yet; it must be separately compiled,
+  audited and promoted before any implementation edit. Dossier-conditioned
+  sampling remains deferred behind genuine dossier, seed and choice-receipt
+  authority.
+- **Fable / Opus handoff law:** no READY row exists at this checkpoint. Do not
+  infer coding authority from MF-T1X's name, the historical program log, or an
+  older brief. The next act is governance-only compilation and audit of MF-T1X;
+  implementation begins only after a separately committed READY packet exposes
+  its exact paths and STOP conditions.
 - **Historical integration record (retained below):** the older minifold status
   is provenance, not the active first-map continuation state.
 - **Code of record:** `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`
@@ -1041,7 +1042,7 @@ re-derives that lane and decides whether to compile its immediate dependent.
 
 | Dispatch | Packet | Status | Why this is the boundary | Explicitly excluded |
 |---:|---|---|---|---|
-| MF-T1S | [`MF-T1S`](./packets/town-cartography/MF-T1S.md) | **READY** — dispatch with `npm run implementation:dispatch -- MF-T1S` | Canonically save the exact MF-T1M bundle and detached compile input, simulate package removal with an empty active installed-snapshot projection, reload visible unresolved custom content read-only, and project only from saved bytes through MF-T1V | fantasy/dossier/seed/sampling, UI, database/store, actual package uninstall, migration, citywide fill, new projection math or canonical projection promotion |
+| MF-T1S | [`MF-T1S`](./packets/town-cartography/MF-T1S.md) | **LANDED** at `136efaa5`; do not redispatch | Canonically save the exact MF-T1M bundle and detached compile input, simulate package removal with an empty active installed-snapshot projection, reload visible unresolved custom content read-only, and project only from saved bytes through MF-T1V | fantasy/dossier/seed/sampling, UI, database/store, actual package uninstall, migration, citywide fill, new projection math or canonical projection promotion |
 | MF-T1V | [`MF-T1V`](./packets/town-cartography/MF-T1V.md) | **LANDED** at `66dbed7c`; do not redispatch | Replay the exact MF-T1M bundle and project both varied bodies through the one fixed-survey draw/SVG path with origin-neutral PUBLIC privacy and roster-bound DM authority | document/content/persistence, fantasy/sampling, citywide fill, new shapes or lights, UI/export cutover, canonical projection promotion |
 | MF-T1M | [`MF-T1M`](./packets/town-cartography/MF-T1M.md) | **LANDED** at `bffd1bcb`; do not redispatch | Compile two explicit parcel-bound varied masses and publish a reference-only transitional roster bundle without adding a second geometry owner | sampling/dossier/seed/weights, citywide fill, world-institution siting, `MASSING_PHASE`, copied geometry, projection/persistence/UI, new shape grammar |
 | MF-T1F | [`MF-T1F`](./packets/town-cartography/MF-T1F.md) | **LANDED** at `325e16aa`; do not redispatch | Join the six landed first-slice fabric authorities by exact replay and refs without falsely claiming the full canonical Fabric contract | canonical `FABRIC`, ABI/law/provenance fabrication, copied rows, consumers, buildings, persistence/projection/UI, arbitrary morphology |

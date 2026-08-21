@@ -15507,7 +15507,7 @@
     },
     {
       "id": "MF-T1S",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T1S.md",
       "verifiedBase": "7913cab3305b79c79c7079bc2129b2c8f4f423b8",
       "changeManifest": [
@@ -16048,6 +16048,74 @@
         {
           "path": "src/domain/townMap/fabric/index.js",
           "symbol": "saveFirstSliceDocument,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/content.js",
+          "symbol": "export const FIRST_SLICE_MASSING_DOCUMENT_SCHEMA_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/content.js",
+          "symbol": "export const FIRST_SLICE_MASSING_DOCUMENT_LAW_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/content.js",
+          "symbol": "export function createFirstSliceMassingDocument"
+        },
+        {
+          "path": "src/domain/townMap/fabric/content.js",
+          "symbol": "export function saveFirstSliceMassingDocument"
+        },
+        {
+          "path": "src/domain/townMap/fabric/content.js",
+          "symbol": "export function loadFirstSliceMassingDocument"
+        },
+        {
+          "path": "src/domain/townMap/fabric/content.js",
+          "symbol": "export function assertFirstSliceMassingMutable"
+        },
+        {
+          "path": "src/domain/townMap/fabric/massingProjection.js",
+          "symbol": "export const FIRST_SLICE_MASSING_DOCUMENT_PROJECTION_LAW_VERSION"
+        },
+        {
+          "path": "src/domain/townMap/fabric/massingProjection.js",
+          "symbol": "export function projectSavedOrthogonalCrossFirstSliceMassingFixedSurvey"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "FIRST_SLICE_MASSING_DOCUMENT_PROJECTION_LAW_VERSION,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "projectSavedOrthogonalCrossFirstSliceMassingFixedSurvey,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "FIRST_SLICE_MASSING_DOCUMENT_LAW_VERSION,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "FIRST_SLICE_MASSING_DOCUMENT_SCHEMA_VERSION,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "assertFirstSliceMassingMutable,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "createFirstSliceMassingDocument,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "loadFirstSliceMassingDocument,"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "saveFirstSliceMassingDocument,"
+        },
+        {
+          "path": "tests/domain/townMapMassingPersistence.test.js",
+          "symbol": "MF-T1S roster-aware first-slice massing persistence"
         }
       ],
       "acceptanceCases": [

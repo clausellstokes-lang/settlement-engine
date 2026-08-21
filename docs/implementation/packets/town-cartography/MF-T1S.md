@@ -1,16 +1,19 @@
 # First-Slice Persistence / MF-T1S — roster-aware save, reload, and projection
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed commit:** 136efaa5b636570fc4fd2aa45dbf654bef3f2769
 - **Packet version:** 1
 - **Verified base:** codex/first-map-vertical-slice at 7913cab3305b79c79c7079bc2129b2c8f4f423b8
-- **Last revalidated:** 2026-08-21 at 7913cab3305b79c79c7079bc2129b2c8f4f423b8
+- **Last revalidated:** 2026-08-21 at 136efaa5b636570fc4fd2aa45dbf654bef3f2769
 - **Depends on:** MF-T1V at 66dbed7c41f9bafc48e738badd7c053e3009f649; MF-T1M at bffd1bcb7a8bc2087d467e6dc73de42641f717e2; MF-VS1 at 7c34f50fd99fcf34c478ec56cbae42240bcd7486
 - **Collision group:** town-map-first-slice-massing-persistence
-- **Commit authority:** this READY packet alone; exact six-path manifest only
+- **Commit authority:** LANDED; do not redispatch
 - **Baseline posture:** MF-T1V landed and terminalized on a clean tree; the focused predecessor battery passes 3 files / 15 tests, both Git-admin receipts are complete, and terminal governance validates 127 packets with zero READY before this promotion
 - **Package-removal proof:** simulated only by reloading/projecting saved bytes with an explicitly empty active installed-snapshot projection; this packet does not uninstall a package or mutate a real store
 
-> Only this READY implementation packet defines coding authority. Design files, queues, progress notes, commit subjects, and briefs cannot expand that authority.
+> While READY, this packet alone defined coding authority; design files, queues,
+> progress notes, commit subjects, and briefs could not expand it. It has now
+> landed at the commit above, is terminal, and must not be redispatched.
 
 > Family-preamble ruling: town-cartography has no family preamble, and the immediate MF-T1M and MF-T1V predecessors were promoted and landed in the same three-governance-file form. That measured local precedent controls MF-T1S, so the absent family preamble is not a dispatch blocker and this promotion does not invent a fourth governance file. Any future family-wide preamble correction is a separate governance act and cannot widen this implementation packet.
 
@@ -382,15 +385,64 @@ Stop on fantasy, dossier, seed, sampling, PRNG, UI, worker, database, store, act
 
 ## 15. Completion receipt
 
-- Base SHA:
-- Promotion commit:
+- Base SHA: `7913cab3305b79c79c7079bc2129b2c8f4f423b8`
+- Promotion commit: `84ed1d71b503fd8570a100ae27da9c5526195c52`
 - Dispatch capsule / packet / seal:
-- Final implementation commit and exact six paths:
-- Effective-line ledger:
-- Whole sovereignty census before / after:
-- A1-A6 evidence, including canonical byte hashes and maximum ID lengths:
+  `80c7d40f9cfc841e48bba5428e27740f0d514d45e7a85c2d7c4b2eeb80fc281c` /
+  `0a25c1765dae18f8af6f1cfaa0a21c487fa6249438827e7dcc5b87f763ab9d66` /
+  `b6fbc565d5fcee7cb24a014bc455c9a5db341f37c2dc3a892fb35f59d71c19a2`.
+- Final implementation commit: `136efaa5b636570fc4fd2aa45dbf654bef3f2769`;
+  exactly the six declared paths.
+- Effective-line ledger: `content.js +170/170`, final `336/336`;
+  `massingProjection.js +45/75`, final `83/113`;
+  `projection.js +40/40`, final `319/319`;
+  `index.js +8/12`, final `97/101`;
+  total production `263/297`; new domain test `388/390`;
+  sovereignty walker `+0/12` effective (`+5/-1` raw).
+- Whole sovereignty census:
+  `2483/364/2119/20588/5766` →
+  `2484/364/2120/20594/5767`.
+- A1-A6 evidence: focused behavior passed `6` files / `27` tests;
+  governance walkers passed `2` files / `42` tests; resolved reload retains
+  `18` ordered operations, while an explicitly empty active snapshot view
+  retains both masses and adds exactly one warning/circle for `19` operations.
+  Built-in/custom PUBLIC bytes remain equal, hidden-ID PUBLIC projection/SVG
+  remains byte-identical, DM binds the exact document/report, and both opaque
+  request APIs pass their snapshot-once accessor probes.
+- Canonical saved evidence: document
+  `scene-v1-f9606e8d4e3b8ce4a794c3017d260332`; saved bytes SHA-256
+  `6af655e70d1255fec6671a96d9788f43c0407659c52e8f115a3e441de17b1b4f`
+  over `112874` bytes; exact-installed / empty-active resolution reports
+  `scene-v1-231eae03362dbaea78f28637958e9ebc` /
+  `scene-v1-e217dc6e2817db279f5d415a657bb849`.
+- Saved projection hashes: exact-installed PUBLIC / DM
+  `scene-v1-b90080500e9e0a99b6ee469444832743` /
+  `scene-v1-47ec385c5ea913fbad576ef8cc2d2219`;
+  empty-active PUBLIC / DM
+  `scene-v1-789365674a376732914cbd0b0166b9f4` /
+  `scene-v1-a58ca8b107c6b080a7ef2d7de083e08a`.
+  Maximum document / report / PUBLIC projection / DM projection artifact-ID
+  lengths are `96 / 60 / 59 / 55`.
 - Direct MF-T1V PUBLIC / DM hashes:
+  `scene-v1-2f65d0d84551c889da48e08ceb1eb27f` /
+  `scene-v1-bc2930de2297900d8715aa32b1a884c3`.
 - Legacy document PUBLIC / DM hashes:
-- Focused behavior and governance walker counts:
-- Static, type, packet-session and whole-tree tail results:
-- Adjacent discoveries and explicitly deferred authority:
+  `scene-v1-9820c3f2273a313f22ff9246c65e1891` /
+  `scene-v1-1945e8a01df6c24788c3393c4e3c452d`.
+- Static and packet gates: targeted ESLint clean; `tsconfig.full.json`
+  `173/173`; `tsconfig.domain-strict.json` `1134/1134`; packet session `PASSED`
+  all eight steps with no failed, blocked or remaining step; independent bounded
+  audit `GO — 0 P0 / 0 P1`.
+- Whole-tree landing gate: `npm run check:tail` exited `0`; test ratchet
+  `28634` tests with `11` inherited failures at ceiling and no new failure;
+  ESLint `0` errors / `29` warnings; build `25.51s`; prerender `314` routes;
+  strict dist `51` files / `409` tests with zero missing, duplicate, failed,
+  non-run or uncollected rows.
+- Adjacent discoveries: package removal remains an honest empty-active-snapshot
+  simulation, not a store/package uninstall. The legacy fantasy executor is not
+  safe to reuse against this roster-aware document. The separately bounded
+  MF-T1X successor must load MF-T1S bytes internally, replay exactly one
+  registered `EXPLICIT_FANTASY_CANON` construction as a sealed one-operation
+  after-state, and reuse the existing fixed-survey draw/SVG path.
+  Dossier-conditioned sampling, UI, store, migration, operation chaining and
+  general event-log authority remain deferred.
