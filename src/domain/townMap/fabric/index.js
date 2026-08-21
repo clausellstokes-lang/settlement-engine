@@ -27,6 +27,10 @@ export {
   compileOrthogonalCrossStreetGraph,
 } from './streetGraph.js';
 export {
+  CADASTRAL_BOUNDARY_ARRANGEMENT_LAW_VERSION, CADASTRAL_BOUNDARY_ARRANGEMENT_SCHEMA_VERSION,
+  compileOrthogonalCrossCadastralArrangement,
+} from './boundaryArrangement.js';
+export {
   CANONICAL_ORIGIN_KINDS,
   EXPLICIT_BUILDING_GEOMETRY_LAWS,
   EXPLICIT_BUILDING_MASS_LAW_VERSION,

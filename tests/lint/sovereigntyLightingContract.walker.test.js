@@ -4812,7 +4812,11 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // 2,471/364/2,107/20,546/5,754 → 2,473/364/2,109/20,552/5,756. The domain
     // matrix contributes five titles and one suite; the replay/ID-closure companion
     // contributes one title and one suite. Both files are credited; no parser door moved.
-    files: 2473, parked: 364, credited: 2109, titles: 20552, suiteTitles: 5756,
+    // ── RE-RECORDED 2026-08-20 BY MF-T1A, THE CADASTRAL ARRANGEMENT ────────
+    // 2,473/364/2,109/20,552/5,756 → 2,475/364/2,111/20,558/5,758. The domain
+    // matrix contributes five titles and one suite; the determinism companion adds one
+    // title and one suite. Both files are credited; no parser door changes classification.
+    files: 2475, parked: 364, credited: 2111, titles: 20558, suiteTitles: 5758,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

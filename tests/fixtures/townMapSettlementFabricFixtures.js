@@ -1,5 +1,6 @@
 import {
   compileExplicitBuildingMass,
+  compileOrthogonalCrossCadastralArrangement,
   compileOrthogonalCrossStreetGeometry,
   compileOrthogonalCrossStreetGraph,
   createCanonicalOrigin,
@@ -18,6 +19,7 @@ export const SETTLEMENT_AXES = Object.freeze({
 export const SETTLEMENT_ID = 'settlement:cross:001';
 export const STREET_GEOMETRY_ID = 'street-geometry:settlement-cross:001';
 export const STREET_GRAPH_ID = 'street-graph:settlement-cross:001';
+export const BOUNDARY_ARRANGEMENT_ID = 'cadastral-arrangement:settlement-cross:001';
 
 export const SETTLEMENT_CELLS = Object.freeze([
   { cell: 'LOW_X_LOW_Z', blockId: 'block:settlement:low-x-low-z', edgeId: 'edge:settlement:low-x-low-z' },
@@ -68,6 +70,19 @@ export function makeSettlementStreetGraph(planOverrides = {}) {
     streetGeometry: fixture.geometry,
   });
   return { ...fixture, graph };
+}
+
+/** @param {Record<string,unknown>} [planOverrides] */
+export function makeSettlementBoundaryArrangement(planOverrides = {}) {
+  const fixture = makeSettlementStreetGeometry(planOverrides);
+  const frontageSubdivision = subdivideSettlementFrontages(fixture.foundation, SETTLEMENT_AXES);
+  const arrangement = compileOrthogonalCrossCadastralArrangement({
+    artifactId: BOUNDARY_ARRANGEMENT_ID,
+    foundation: fixture.foundation,
+    frontageSubdivision,
+    streetGeometry: fixture.geometry,
+  });
+  return { ...fixture, frontageSubdivision, arrangement };
 }
 
 /** @param {Record<string,unknown>} [planOverrides] */
