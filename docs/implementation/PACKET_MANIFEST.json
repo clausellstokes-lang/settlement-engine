@@ -17530,7 +17530,7 @@
     },
     {
       "id": "MF-T2B",
-      "status": "DRAFT",
+      "status": "READY",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T2B.md",
       "verifiedBase": "2cdb87fac566b3d6803a0dce9d59df13f07c1c9e",
       "changeManifest": [

@@ -1,9 +1,12 @@
 # Town cartography / MF-T2B — the versioned integer ABI and the exact-geometry core
 
-- **Status:** DRAFT
+- **Status:** READY
 - **Packet version:** 1
 - **Verified base:** `claude/composite-r4` at `2cdb87fac566b3d6803a0dce9d59df13f07c1c9e`
-- **Last revalidated:** 2026-08-21 at `2cdb87fa` by lane TE-T2B, every row re-executed at this tip
+- **Last revalidated:** 2026-08-21 at `7cb2c730` (the DRAFT tip) by lane TE-T2B — the whole §4
+  preflight re-executed there and identical in every figure: both port-source SHA-256 values, the
+  preamble's SHA-256, `foundation.js` **143** / `fabric/index.js` **101** effective, **157** digest
+  pins across 12 files, and the census tuple `2485 / 364 / 2121 / 20611 / 5768`
 - **Depends on:** `MF-T2A` — LANDED and terminal at `37fb6916`. Its single-declaration law binds
   this member: the arriving clipper takes a distinct name
 - **Family preamble:** `docs/implementation/preambles/MF-PREAMBLE.md`, SHA-256
