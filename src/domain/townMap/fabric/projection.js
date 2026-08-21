@@ -2,6 +2,7 @@
 
 import { EXPORT_PALETTE } from '../../../design/townMapExportPalette.js';
 import { drawListToSvg } from '../townMapDraw.js';
+import { sceneDigest, stableSceneStringify } from '../../townScene/stableScene.js';
 import {
   canonicalArtifactRef,
   canonicalRectBounds,
@@ -131,30 +132,32 @@ function primitive(primitiveId, semanticId, kind, op) {
   return { primitiveId, semanticId, kind, op };
 }
 
+/** @param {Record<string,unknown>} artifact @param {string} label */
+function requireArtifactDigest(artifact, label) {
+  const { contentHash, ...body } = artifact;
+  if (typeof contentHash !== 'string' || contentHash !== sceneDigest(body)) {
+    throw new TypeError(`${label} contentHash mismatch`);
+  }
+}
+
 /**
- * Audience filtering happens before any building draw op or unresolved warning
- * exists. Package metadata is never copied into a primitive.
- * @param {{document:Record<string,unknown>,resolutionReport:Record<string,unknown>,audience:'PUBLIC'|'DM'}} input
+ * Sole fixed-survey core. Audience filtering happens before any building draw
+ * op, warning, or source authority exists.
+ * @param {Record<string,unknown>} input
  */
-export function projectFirstSliceFixedSurvey(input) {
-  const source = requireCanonicalRecord(input, 'projection input');
-  const mapArtifact = requireCanonicalRecord(source.document, 'map artifact');
-  const report = requireCanonicalRecord(source.resolutionReport, 'resolutionReport');
+export function projectResolvedFirstSliceFixedSurvey(input) {
+  const source = requireCanonicalRecord(input, 'resolved projection input');
   const audience = source.audience;
   if (!['PUBLIC', 'DM'].includes(String(audience))) throw new TypeError('audience must be PUBLIC or DM');
-  const foundation = requireCanonicalRecord(mapArtifact.foundation, 'map artifact.foundation');
-  const subdivision = requireCanonicalRecord(mapArtifact.subdivision, 'map artifact.subdivision');
+  const foundation = requireCanonicalRecord(source.foundation, 'projection foundation');
+  const subdivision = requireCanonicalRecord(source.frontageSubdivision, 'projection frontageSubdivision');
   const blocks = /** @type {Array<Record<string,unknown>>} */ (foundation.blockFaces);
   const frontages = /** @type {Array<Record<string,unknown>>} */ (subdivision.frontages);
-  const masses = /** @type {Array<Record<string,unknown>>} */ (mapArtifact.masses);
+  const masses = /** @type {Array<Record<string,unknown>>} */ (source.masses);
   const visibleMasses = masses.filter((mass) => audience === 'DM' || massGeometry(mass).privacy === 'PUBLIC');
   const visibleIds = new Set(visibleMasses.map((mass) => String(massGeometry(mass).buildingId)));
-  const unresolvedRows = Array.isArray(report.unresolved) ? report.unresolved : [];
-  const unresolvedVisible = new Set(unresolvedRows
-    .map((row) => requireCanonicalRecord(row, 'unresolved row'))
-    .map((row) => requireCanonicalRecord(row.subject, 'unresolved subject'))
-    .map((subject) => String(subject.entityId))
-    .filter((entityId) => visibleIds.has(entityId)));
+  const unresolvedVisible = new Set((Array.isArray(source.unresolvedEntityIds)
+    ? source.unresolvedEntityIds : []).map(String).filter((entityId) => visibleIds.has(entityId)));
   const semanticPrimitives = [];
 
   for (const block of blocks) {
@@ -212,32 +215,84 @@ export function projectFirstSliceFixedSurvey(input) {
     }
   }
   const drawOps = semanticPrimitives.map((row) => row.op);
-  const sourceAuthority = audience === 'DM'
-    ? {
-      kind: 'DM_CANONICAL',
-      documentRef: canonicalArtifactRef(mapArtifact),
-      contentResolutionReportRef: canonicalArtifactRef(report),
-    }
-    : {
-      kind: 'PUBLIC_DERIVATION',
-      publicInputRef: canonicalArtifactRef(sealCanonicalArtifact({
-        artifactKind: 'PUBLIC_PROJECTION_INPUT',
-        artifactId: `${mapArtifact.artifactId}:public-input`,
+  const descriptor = requireCanonicalRecord(source.sourceDescriptor, 'projection sourceDescriptor');
+  let sourceAuthority;
+  let artifactId;
+  if (descriptor.kind === 'DOCUMENT') {
+    const mapArtifact = requireCanonicalRecord(descriptor.document, 'map artifact');
+    const report = requireCanonicalRecord(descriptor.resolutionReport, 'resolutionReport');
+    sourceAuthority = audience === 'DM'
+      ? {
+        kind: 'DM_CANONICAL', documentRef: canonicalArtifactRef(mapArtifact),
+        contentResolutionReportRef: canonicalArtifactRef(report),
+      }
+      : {
+        kind: 'PUBLIC_DERIVATION',
+        publicInputRef: canonicalArtifactRef(sealCanonicalArtifact({
+          artifactKind: 'PUBLIC_PROJECTION_INPUT', artifactId: `${mapArtifact.artifactId}:public-input`,
+          foundationRef: canonicalArtifactRef(foundation), subdivisionRef: canonicalArtifactRef(subdivision),
+          visibleGeometryRefs: visibleMasses.map((mass) => canonicalArtifactRef(massGeometry(mass))),
+          unresolvedVisibleEntityIds: [...unresolvedVisible].sort(),
+        })),
+      };
+    artifactId = `${mapArtifact.artifactId}:projection:${String(audience).toLowerCase()}`;
+  } else if (descriptor.kind === 'MASSING') {
+    const roster = requireCanonicalRecord(descriptor.massingRoster, 'massingRoster');
+    const lawVersion = String(descriptor.lawVersion);
+    sourceAuthority = audience === 'DM'
+      ? { kind: 'DM_MASSING_ROSTER', lawVersion, massingRosterRef: canonicalArtifactRef(roster) }
+      : {
+        kind: 'PUBLIC_MASSING_DERIVATION', lawVersion,
+        firstSliceFabricRootRef: roster.firstSliceFabricRootRef,
         foundationRef: canonicalArtifactRef(foundation),
-        subdivisionRef: canonicalArtifactRef(subdivision),
+        frontageSubdivisionRef: canonicalArtifactRef(subdivision),
         visibleGeometryRefs: visibleMasses.map((mass) => canonicalArtifactRef(massGeometry(mass))),
-        unresolvedVisibleEntityIds: [...unresolvedVisible].sort(),
-      })),
-    };
+      };
+    artifactId = `projection:${String(audience).toLowerCase()}:${sceneDigest({
+      domain: lawVersion, audience, sourceAuthority,
+    })}`;
+  } else {
+    throw new TypeError('projection sourceDescriptor kind is not supported');
+  }
   return sealCanonicalArtifact({
     artifactKind: 'FIRST_SLICE_PROJECTION',
-    artifactId: `${mapArtifact.artifactId}:projection:${String(audience).toLowerCase()}`,
+    artifactId,
     sourceAuthority,
     lightProfile: FIXED_SURVEY_LIGHT_V1,
     audience,
     semanticPrimitives,
     drawOps,
     warnings: [...unresolvedVisible].map((entityId) => ({ code: 'UNRESOLVED_CUSTOM_CONTENT', entityId })),
+  });
+}
+
+/** @param {{document:Record<string,unknown>,resolutionReport:Record<string,unknown>,audience:'PUBLIC'|'DM'}} input */
+export function projectFirstSliceFixedSurvey(input) {
+  const source = requireCanonicalRecord(input, 'projection input');
+  const audience = source.audience;
+  const mapArtifact = requireCanonicalRecord(
+    JSON.parse(stableSceneStringify(source.document)), 'map artifact',
+  );
+  const report = requireCanonicalRecord(
+    JSON.parse(stableSceneStringify(source.resolutionReport)), 'resolutionReport',
+  );
+  requireArtifactDigest(mapArtifact, 'map artifact');
+  requireArtifactDigest(report, 'resolutionReport');
+  if (stableSceneStringify(report.sourceDocumentRef)
+    !== stableSceneStringify(canonicalArtifactRef(mapArtifact))) {
+    throw new TypeError('resolutionReport belongs to another map artifact');
+  }
+  const unresolvedEntityIds = (Array.isArray(report.unresolved) ? report.unresolved : [])
+    .map((row) => requireCanonicalRecord(row, 'unresolved row'))
+    .map((row) => requireCanonicalRecord(row.subject, 'unresolved subject'))
+    .map((subject) => String(subject.entityId));
+  return projectResolvedFirstSliceFixedSurvey({
+    audience,
+    foundation: mapArtifact.foundation,
+    frontageSubdivision: mapArtifact.subdivision,
+    masses: mapArtifact.masses,
+    unresolvedEntityIds,
+    sourceDescriptor: { kind: 'DOCUMENT', document: mapArtifact, resolutionReport: report },
   });
 }
 

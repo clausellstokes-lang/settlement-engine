@@ -4832,7 +4832,11 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // 2,481/364/2,117/20,576/5,764 → 2,482/364/2,118/20,582/5,765. The one
     // credited domain file contributes the closed six-case A1-A6 denominator and one
     // suite. Fixtures add no titles; no parser door or parked classification moved.
-    files: 2482, parked: 364, credited: 2118, titles: 20582, suiteTitles: 5765,
+    // ── RE-RECORDED 2026-08-20 BY MF-T1V, THE ROSTER-AWARE PROJECTION ──
+    // 2,482/364/2,118/20,582/5,765 → 2,483/364/2,119/20,588/5,766. The one
+    // credited domain file contributes exactly A1-A6 and one suite. No parser door,
+    // parked-file rule, or existing file changed classification.
+    files: 2483, parked: 364, credited: 2119, titles: 20588, suiteTitles: 5766,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

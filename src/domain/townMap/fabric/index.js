@@ -55,6 +55,10 @@ export {
 } from './building.js';
 export { FIRST_SLICE_MASSING_ROSTER_LAW_VERSION, FIRST_SLICE_MASSING_ROSTER_SCHEMA_VERSION, compileOrthogonalCrossFirstSliceMassingRosterBundle } from './massingRoster.js';
 export {
+  FIRST_SLICE_MASSING_PROJECTION_LAW_VERSION,
+  projectOrthogonalCrossFirstSliceMassingFixedSurvey,
+} from './massingProjection.js';
+export {
   COMPOSITE_SHAPE_LAW_VERSION,
   PLAN_SHAPE_KINDS,
   ROOF_SHAPE_KINDS,
