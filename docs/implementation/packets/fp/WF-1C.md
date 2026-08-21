@@ -1,6 +1,6 @@
 # WF / WF-1C — the realm last-seat beat (SINGLE MEMBER; stage 3 of the `wf-1` split promotion)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Compile note:** compiled by lane TC-WF1C under ODQ §291.5; the chair lands. ⚠ The status value
   above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line — trailing prose
@@ -769,3 +769,189 @@ WF-1d or the WF-8 beat member is chartered to edit, and no row names `warTermina
 | `lastSeatLosses` *(created; add at the flip to LANDED, not before)* | `src/domain/worldPulse/pantheon.js` |
 
 `retiredSymbols`: **none.**
+
+---
+
+## §16 · THE LANDING RECORD (written at the flip to LANDED by lane TE-WF1C)
+
+### 16.1 What landed, commit by commit
+
+| sha | what |
+|---|---|
+| `8b88c14a` | The packet lands at **DRAFT**, with its `PACKET_MANIFEST.json` row spliced as a scoped text APPEND and its `INDEX.md` row inserted after WF-1B |
+| `1791fb93` | **DRAFT → READY**, after re-executing the whole §11 preflight at this tip |
+| `adb5faf3` | **The implementation** — M1 through M8 |
+
+### 16.2 ⭐ THE AUTHORED COPY, VERBATIM — **OWNER-REVIEWABLE** (ODQ §316)
+
+The chair ruled the copy ships as compiled and is marked owner-reviewable at the walk. It is quoted
+here in full so the owner reviews bytes rather than a description, and so the boundary with WF-8's
+settlement-voiced obituary stays legible — **this beat is realm-voiced and names no town**
+(`settlementIds` is `[]`, asserted at A1):
+
+- **headline** — `The Last Altar of ${name}`
+- **summary** — *"No settlement in the realm still keeps ${name}'s rite. The last altar stands cold,
+  the clergy have scattered to other doors, and what survives of the faith is memory rather than
+  practice."*
+- **reasons[0]** — *"${name} holds no seat anywhere in the realm."*
+- **reasons[1]** — *"The last settlement that kept the rite now keeps another, and no tier remains
+  for the creed to fall from."*
+- **the townsperson's phrase** (`WHAT_PHRASES`) — *"a faith with no altar left"*
+
+⛔ **DEITY-DOCTRINE CHECK, LINE BY LINE.** Every sentence records what BELIEVERS did — a rite kept
+or not kept, altars, clergy, settlements. No line asserts that a god died, left, or was defeated,
+and the entry never leaves the cultural register. A1 additionally pins that the beat names no
+settlement, which is what keeps it distinct from the WF-8 beat.
+
+### 16.3 PER-ACCEPTANCE-CASE RESULT — seven of seven
+
+`npx vitest run tests/domain/pantheon.test.js` and its four siblings → **5 files passed, 427 tests
+passed**, TRUE_EXIT=**0**.
+
+| case | what it proves | result |
+|---|---|---|
+| A1 | the beat fires ONCE on the crossing tick, names the creed, names no town, and says nothing on the following tick; PLUS the separately labelled truncation arm and its own control | **PASS** |
+| A2 | absent ≡ false at the byte level on a deity-BEARING full-pulse drive, the literal lit drive moves, the persisted ledger is identical in all three arms, and the salience extraction preserved every value | **PASS** |
+| A3 | the counterfactual: the same one-seat transition emits nothing at the pre-feature base, and specifically no twilight | **PASS** |
+| A4 | no double obituary — the major collapse is silent on the seat-loss tick and its twilight lands alone one tick later; plus the per-deity exclusivity invariant over both ticks | **PASS** |
+| A5 | the registration totality, the anti-tidy absence with both siblings as positive controls, and the six kind censuses re-derived from the LIVE registries | **PASS** |
+| A6 | nothing persists: five ledger keys exactly, the flag on no persisted path, zero new top-level keys, and the remnant round-trips | **PASS** |
+| A7 | the authoring join: the new site is inside the denominator and clean, the debt ledger is unmoved at 19, and the exact candidate identity holds | **PASS** |
+
+⭐ **THE LANDED SIBLINGS' FENCES SURVIVE, AND IT IS A MEASURED CHECK RATHER THAN A CONCLUSION.**
+`tests/domain/patronFall.test.js` (WF-1a's and WF-1b's arms) and `tests/domain/realmEvents.test.js`
+are **green, UNEDITED**, alongside `kindPoolFloors`, `heraldRouting`, `wizardNewsAuthoring`,
+`sizeBaseline`, `couplingInclusion`, `proseNumerics` and `worldpulseDeityGolden` — **9 files, 114
+tests, TRUE_EXIT=0**. `ratchetPantheonTiers` was deliberately not touched, so its three landed
+`res.changes.length` pins are the executed proof that the widening is additive.
+
+### 16.4 THE DARK FENCE, MEASURED AGAINST A PRE-WIRING GOLDEN
+
+Captured on a deity-BEARING full-pulse fixture BEFORE the first edit and re-run after. ⚠ The first
+fixture this lane built was **VACUOUS** — a quiet two-settlement world emits no news at all in any
+arm, so absent-≡-false would have held over an empty list. The fixture below matures an
+**Ascendancy in every arm**, so each hash is taken over a non-empty feed.
+
+| arm | before wiring | after wiring | verdict |
+|---|---|---|---|
+| absent | `abf823a87b36bcc1` / 1,449 B | `abf823a87b36bcc1` / 1,449 B | **IDENTICAL** |
+| false | `abf823a87b36bcc1` / 1,449 B | `abf823a87b36bcc1` / 1,449 B | **IDENTICAL** |
+| **LIT** | `abf823a87b36bcc1` / 1,449 B | **`759003f621df7e69` / 3,115 B, two beats present** | **MOVED — the fence can see** |
+| the persisted pantheon, all three arms | `048e14540e0b135d` | `048e14540e0b135d` | **IDENTICAL** — the rows are transient |
+
+**DECLARED SHIFT: NOT INCURRED.** No preset declares the flag, so no same-seed golden can reach the
+lit path; the only motion is inside the flag, on a lane-built fixture.
+
+### 16.5 THE MUTANTS — five planted, five convicted, both STOP conditions checked
+
+Each planted by `cp`, `node --check`ed in its host, convicted, and restored with the restore
+**proved by digest** — never by eye, and never with the `git checkout` family. All four hosts return
+to their pristine md5 and `git status` is empty afterwards.
+
+| mutant | §14 predicted | ACTUALLY convicted | verdict |
+|---|---|---|---|
+| **(a)** delete the ladder-silent guard | A4 alone | **A4 alone** (1 failed / 35 passed) | PASS, exactly as predicted |
+| **(b)** drop the had-a-seat half | A1's second arm alone | **A1 alone** (1 failed / 35 passed) | PASS |
+| **(c)** force the gate true | A2 alone | **A2 alone** (1 failed / 35 passed) | PASS |
+| **(d)** ⭐ the TIDY mutant | A5, plus `kindPoolFloors` arms | **A5 plus THREE named `kindPoolFloors` arms** (4 failed / 44 passed) | PASS — the prediction under-enumerated which arms reach the arithmetic; it did not find entanglement |
+| **(e)** remove the phrase row | the `unphrased` arm | **`unphrased` plus A5** (2 failed / 38 passed) | PASS — A5 pins the phrase row as part of the registration totality |
+
+⛔ **THE §14 STOP IS CHECKED AND DOES NOT FIRE.** *"If (a) and (b) convict the same arms, one of the
+two guards is vacuous."* They do not: **(a) = {A4}** and **(b) = {A1}** are disjoint. Each guard
+suppresses a beat the other cannot, proven by execution rather than by reasoning about the code.
+
+### 16.6 ⛔⛔ RAISED-B, MEASURED AND REFUSED — the ruling's own arm decided it
+
+§2.3 carries the executed blast radius. The short form: **one** caller, inside
+`synthesizePantheonArcs`, whose two LANDED arms run **unflagged** from `pulseKernel.js:1870`, and
+whose tick-2 Twilight reaches the truncating branch today with no WF-1c code present. A live surface
+shares the helper, so the chair's refuse-arm fires and the cure is not taken here.
+
+⭐ **AND A PIN WAS REFUTED BY RUNNING IT** — see §16.8. The measured truth arm is pinned at
+`The Last Altar of Forge` with a defect annotation, beside the control that proves the arm is about
+the fallback rather than about the fixture.
+
+### 16.7 THE CENSUS ARITHMETIC — it closes exactly
+
+**`2,485 / 364 / 2,121 / 20,611 / 5,768` → `2,485 / 364 / 2,121 / 20,618 / 5,768`**
+
+| figure | before | after | delta | why |
+|---|---:|---:|---:|---|
+| files | 2485 | 2485 | **+0** | the member mints NO test file |
+| parked | 364 | 364 | **+0** | no parked-file rule changed |
+| credited | 2121 | 2121 | **+0** | `pantheon.test.js` was already credited |
+| **titles** | 20611 | **20618** | **+7** | the seven acceptance cases, one `test(` each |
+| suiteTitles | 5768 | 5768 | **+0** | straight-line calls in the ONE existing describe |
+
+**Attribution is exact: 7 cases → 7 titles, in one file**, so no title was swallowed by a parked
+classification. ⚠ The sequenced walker stopped at the titles figure (`expected 20618 to be 20611`),
+which is itself the executed proof that `files`, `parked` and `credited` did **not** move — a
+sequenced census cannot reach a later figure past a red earlier one. After the tuple was re-derived
+WHOLE, the walker passes **33/33**, TRUE_EXIT=0, reaching and clearing `suiteTitles`.
+**Authorizing decision: ODQ §314.3**, restated at **§316**.
+
+### 16.8 ⭐⭐ FINDINGS THE COMPILE COULD NOT HAVE HAD
+
+1. ⛔⛔ **A PIN WAS REFUTED BY RUNNING IT, AND IT WOULD HAVE PASSED WHILE ASSERTING NOTHING.** The
+   name a beat prints depends on **which snapshot the arcs are handed**. The kernel passes THIS
+   tick's pre-tick snapshot, in which an extinct creed already holds no seat, so the name falls back
+   to a tail of the ref. Handing the arcs the PRIOR tick's snapshot resolves the name by scan
+   instead and hides the fallback completely — executed both ways:
+   `custom:sun_of_the_deep_forge` prints **"Forge"** under the production shape and
+   **"Sun of the Deep Forge"** under the stale one. A truncation pin built on the prior snapshot is
+   green and empty. A1 pins the production shape and carries the stale one as its control.
+2. ⚠ **THE OBVIOUS DARK-FENCE FIXTURE IS VACUOUS.** A quiet two-settlement world drives a pulse that
+   emits **no news at all** — `newsBytes=2`, `selected=0` — so "absent is byte-identical to false"
+   holds over an empty list and proves nothing. The landed A2 fixture matures an Ascendancy in every
+   arm so each hash is taken over a real feed. §16.4.
+3. ⚠ **THE ANCHOR MARKER IS READ ON THE COMMENT'S LAST LINE, AND THIS LANE PAID IT.** Three
+   negatives carried `// anchored: …` as the FIRST line of a multi-line comment; the walker read the
+   last line, saw no marker, and reported three un-anchored assertions against a ceiling of zero.
+   The recorded rule is exact and it bites the natural writing order: **put the marker on the line
+   immediately above the assertion, as that comment's last line.** A negative reached through a
+   continuation (`expect(x)\n  .not.toContain(y)`) needs the value hoisted to a local first, or the
+   marker lands above the wrong line.
+4. ⚠ **`realmEvents.js` carries FIVE authoring sites, not three.** Two pre-existing sites in the
+   compound-signature synthesizer are inside the census denominator with empty `routeTokens`. A7
+   pins all five and asserts the three pantheon tokens by name, so a later member that touches the
+   compound sites sees them.
+
+### 16.9 THE ONE MEASURED DEVIATION FROM THE PACKET'S OWN ESTIMATE
+
+⚠ **M2 measures +26 effective lines against its instruction row's `≤22`.** The figure is honest
+arithmetic rather than slack: the wizard-news authoring wall requires the FULL sibling field set, and
+that field set alone is **22 lines**; the arm's own guard line, its branch line and the two extracted
+salience consts are the remaining four. The row's estimate was compiled before the code existed and
+the compile receipt labelled it a prediction. **The governed budgets both hold**: the aggregate
+production delta is **44** against §8's `≤49` and `PACKET_STANDARD`'s `400`. Measured with eslint's
+own `Linter`, before and after:
+
+| file | before | after | delta |
+|---|---:|---:|---:|
+| `pantheon.js` | 160 | 177 | +17 |
+| `realmEvents.js` | 283 | 309 | **+26** |
+| `settlementRumors.js` | 508 | 509 | +1 |
+| `chroniclersLetter.js` | 220 | 220 | +0 |
+| ⛔ `pulseKernel.js` | **1581** | **1581** | **0 — NET ZERO, against a frozen literal of 1581** |
+
+⛔ **M5's net zero is proved on both sides of the edit and by the linter besides**: the diff is one
+insertion and one deletion on line 1604, and `npx eslint src/domain/worldPulse/pulseKernel.js`
+returns TRUE_EXIT=0 against the generated per-file `max-lines` override.
+
+### 16.10 OBLIGATIONS RE-VERIFIED AT THE TIP
+
+| obligation | verdict at the tip |
+|---|---|
+| §49/§50/§148 flag mint | **NOT INCURRED** — no flag minted; the virtual register is untouched at 24 with the flag at index 9 |
+| §104.4 edge-shared closures | **NOT INCURRED, re-derived from the five committed metas' own `inputs`** (110/66/111/2/2): not one of this packet's five production paths appears in ANY closure, so M2's comment edit is free |
+| test census | **INCURRED, TITLES ONLY** — §16.7 |
+| §102.2 / §P3b mutation coverage | **NOT INCURRED** — no `tests/lint/**` file added |
+| §85.4 seeded chooser | **NOT INCURRED** — zero new PRNG streams; the kernel's fork order does not move |
+| size baseline / hot files | **INCURRED, DISCHARGED** — §16.9; the two named zero-headroom-class files are untouched and re-measured at 818 and 797 |
+| `negativeAssertionAnchor` | **INCURRED, ceiling zero, DISCHARGED** — walker green at 9/9 after the marker placement was corrected; §16.8(3) |
+| coupling registry, BOTH halves | **NOT INCURRED** — no module created, no import edge added; the walker is green with both ceilings still |
+| hand-keyed address rot | **NOT INCURRED** — 413 rows, zero keying any file this packet names; `proseNumerics` green |
+| wizard-news authoring walker | **INCURRED AS A STOP, DISCHARGED** — the new site is fully authored, the debt ledger is unmoved at 19, and no row for `realmEvents.js` appeared |
+| declared shift | **NOT INCURRED** — §16.4 |
+| chair value signature | **NOT INCURRED** — the member authors no number; the predicate spells none and the salience derives from the twilight's own constants |
+| `docs/**.md` naked-claim debt | **INCURRED, PAID** — the live `CLAIM_RE` returns zero matches over this packet and over the INDEX row |

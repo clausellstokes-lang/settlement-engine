@@ -17293,7 +17293,7 @@
     },
     {
       "id": "WF-1C",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/fp/WF-1C.md",
       "verifiedBase": "2cdb87fac566b3d6803a0dce9d59df13f07c1c9e",
       "changeManifest": [
@@ -17378,6 +17378,11 @@
         {
           "path": "src/domain/worldPulse/pantheon.js",
           "symbol": "export const PANTHEON_TUNING"
+        },
+        {
+          "_note": "CREATED BY THIS MEMBER, added at the flip to LANDED. The derived last-seat predicate, unexported: it reads the module's own qualifyingTier for the ladder question and spells no numeric literal at all.",
+          "path": "src/domain/worldPulse/pantheon.js",
+          "symbol": "function lastSeatLosses"
         },
         {
           "_note": "THE ARC SYNTHESIS. Gains a third arm keyed on the optional lastSeat flag; the two existing predicates both require from !== to and are provably blind to a row whose from equals its to.",
