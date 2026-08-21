@@ -1,13 +1,16 @@
 # First-Slice Massing / MF-T1M — explicit varied massing roster bundle
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed commit:** `bffd1bcb7a8bc2087d467e6dc73de42641f717e2`
 - **Packet version:** `1`
 - **Verified base:** `codex/first-map-vertical-slice` at `8ba553a32d0fbc4408d0243dff514d7eef0b6b6a`
-- **Last revalidated:** `2026-08-20` at `8ba553a32d0fbc4408d0243dff514d7eef0b6b6a`
+- **Last revalidated:** `2026-08-20` at `bffd1bcb7a8bc2087d467e6dc73de42641f717e2`
 - **Depends on:** MF-T1F at `325e16aaebb63cb3304443c3a92da27860c655af`; MF-SH1 at `3cf12008e1d4ea7411a61f59b8e633a7b993dd1f`; MF-VS1 at `7c34f50fd99fcf34c478ec56cbae42240bcd7486`
 - **Collision group:** `town-map-first-slice-massing`
-- **Commit authority:** agent may stage and commit the exact manifest; no push
+- **Commit authority:** LANDED; do not redispatch
 - **Baseline posture:** MF-T1F wave-end gate passed with `28,616` tests and the inherited `11` known failures; both typecheck ratchets, lint, build, `314`-route prerender and strict `409/409` dist passed; terminal governance validates `125` packets with zero READY before this promotion
+
+> This packet landed at the commit above. It is terminal and must not be redispatched.
 
 ## 1. Reconciled authority
 
@@ -253,17 +256,17 @@ Stop on source/recipe/origin replay mismatch; any need for a dossier/seed placeh
 ## 12. Completion receipt
 
 - Base SHA: `8ba553a32d0fbc4408d0243dff514d7eef0b6b6a`
-- Dispatch bundle and seal identity: PENDING
-- Final commit or working-tree state: PENDING
-- Exact changed files and effective-line deltas: PENDING
-- A1-A6 results: PENDING
-- Focused commands, exits and counts: PENDING
-- Sealed packet/resume status: PENDING
-- Typecheck ratchets: PENDING
-- Wave-end gate stages: PENDING
-- Base-versus-wave failure identity diff: PENDING
-- Source and output byte pins: PENDING
+- Dispatch bundle and seal identity: MF-T1M seal digest `25fd5ac9f9f067f7fc61f6b8c9f25de9c26ea6a84d56ed09b9c7c98db3e7dfe3`; capsule digest `e09081e026eed167beb23f417f74605aa8cdf080c85d6fbb6132ea28e9e88a2e`
+- Final commit or working-tree state: `bffd1bcb7a8bc2087d467e6dc73de42641f717e2`; implementation tree clean before terminal governance
+- Exact changed files and effective-line deltas: exact six-path manifest; production `176/240` effective (`massingRoster.js` `169/230`, `building.js` `+4/6`, `index.js` `+3/4`); fixture `+99` effective / `+101` raw within `120`; test `296/360` effective; census `0` effective / `+5/-1` raw within `12`
+- A1-A6 results: exactly six acceptance cases pass; A4 contains exactly nine refusal rows; final independent audit ended `0 P0 / 0 P1`
+- Focused commands, exits and counts: declared massing/root/shape/building/custom suites `23/23`; sovereignty/negative walkers `42/42`; final hostile eight-file battery `65/65`; scoped ESLint and `git diff --check` clean; all exit `0`
+- Sealed packet/resume status: `check:packet` and `implementation:resume` passed; Git-admin state is `PASSED` with all eight steps complete and none failed, blocked or remaining
+- Both typecheck configurations: full ratchet `173/173`, no regression; domain-strict `1134/1134`, no regression
+- Wave-end gate stages: final `npm run check:tail` exit `0`; test ratchet `28,622` tests with the inherited `11` known failures and no new failure; lint `29` warnings / `0` errors; build passed in `27.63s`; prerender wrote `314` routes; strict dist `409/409`
+- Base-versus-wave failure identity diff: `NONE`
+- Source and output byte pins: Fabric root `scene-v1-48ad7a068361f2a59aa7cf5a53308faf`; parcel registry `scene-v1-71946b930acf2a0080c4bd57658b31b6`; roster `scene-v1-6b58a0b2b11bbfa7b1407f8e67c3c3f1`; INSTITUTION mass `scene-v1-7bb1a5d6057f3edfee43e0d28954d199`; BUILDING mass `scene-v1-870321cb10e1289c77f2cd072aab8b1a`
 - Generated artifacts: `NONE`
-- Deviations: `NONE` expected
+- Deviations: `NONE`
 - Out-of-scope observations: canonical dossier/selection-context, seed authority, provenance and complete choice-receipt families block the separate upstream sampler; canonical `MASSING_PHASE` promotion remains later
 - Judgment calls: the outer bundle is not an artifact; it makes sibling mass refs resolvable without giving the roster a second copy of geometry

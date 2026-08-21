@@ -15227,7 +15227,7 @@
     },
     {
       "id": "MF-T1M",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T1M.md",
       "verifiedBase": "8ba553a32d0fbc4408d0243dff514d7eef0b6b6a",
       "changeManifest": [
@@ -15334,7 +15334,16 @@
         { "path": "tests/property/townMapFabricRootDeterminism.test.js", "symbol": "MF-T1F first-slice Fabric-root determinism" },
         { "path": "tests/domain/townMapShapeKernel.test.js", "symbol": "MF-SH1 bounded semantic shape kernel" },
         { "path": "tests/domain/townMapExplicitBuilding.test.js", "symbol": "MF-VS1 explicit mass and fixed-survey projection" },
-        { "path": "tests/domain/townMapCustomParity.test.js", "symbol": "MF-VS1 built-in/custom parity and package removal" }
+        { "path": "tests/domain/townMapCustomParity.test.js", "symbol": "MF-VS1 built-in/custom parity and package removal" },
+        { "path": "src/domain/townMap/fabric/building.js", "symbol": "export const INSTITUTION_SPATIAL_RECIPE_SCHEMA_VERSION" },
+        { "path": "src/domain/townMap/fabric/building.js", "symbol": "export const SPATIAL_RECIPE_ROLES" },
+        { "path": "src/domain/townMap/fabric/massingRoster.js", "symbol": "export const FIRST_SLICE_MASSING_ROSTER_SCHEMA_VERSION" },
+        { "path": "src/domain/townMap/fabric/massingRoster.js", "symbol": "export const FIRST_SLICE_MASSING_ROSTER_LAW_VERSION" },
+        { "path": "src/domain/townMap/fabric/massingRoster.js", "symbol": "export function compileOrthogonalCrossFirstSliceMassingRosterBundle" },
+        { "path": "src/domain/townMap/fabric/index.js", "symbol": "compileOrthogonalCrossFirstSliceMassingRosterBundle" },
+        { "path": "tests/fixtures/townMapSettlementFabricFixtures.js", "symbol": "export const FIRST_SLICE_MASSING_ROSTER_ID" },
+        { "path": "tests/fixtures/townMapSettlementFabricFixtures.js", "symbol": "export function makeSettlementMassingRosterBundleInputs" },
+        { "path": "tests/domain/townMapMassingRoster.test.js", "symbol": "MF-T1M explicit varied first-slice massing roster bundle" }
       ],
       "acceptanceCases": [
         { "id": "A1", "case": "The frozen bundle contains exactly two sibling masses and two sorted bindings: the BUILDING is rectilinear and gabled, the INSTITUTION is the circular cylindrical conical composite, and they occupy distinct parcels." },
