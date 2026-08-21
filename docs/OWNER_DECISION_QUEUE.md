@@ -13477,3 +13477,57 @@ recommended. Implementation, per item:
    then the WC/INT/WY/POP/LG queue interleaving with the map
    port's members, two build tracks under one landing slot
    each, exactly as the owner's parallel directive requires.
+
+## §315 · TE-T2A COLLECTED FULLY GREEN — THE FIRST PORT MEMBER
+## IS TERMINAL, THE PREAMBLE'S SELF-CONTRADICTION IS FIXED, AND
+## BOTH CITING PACKETS ARE RE-STAMPED IN ONE LANDING
+## (2026-08-21; chair: FABLE; receipt laneTET2A-receipt.md, 412
+## lines / 55 self-named logs)
+
+1. **COLLECTED.** MF-T2A ran DRAFT → READY → LANDED →
+   terminalized with validate:packets at every transition
+   (130/0 → 131/0 → 131/1 → 131/0); the manifest row a
+   scoped append (140 insertions, 0 deletions); the census
+   closed EXACTLY on prediction with parked held at 364 and
+   the delta equal to the five titles added; zero src/ bytes
+   moved; both typecheckers at exact floors. **All 17 gate
+   steps + smoke:boot exit 0 — the first terminal in the
+   sequence needing no inherited-red argument**: the §313
+   preamble cure HELD (the arm did not fire), the ratchet's
+   live failing set equals the frozen set member for member
+   (11 of 28,651), and the flake did not fire even at load
+   average 142. **CAS EXECUTED: claude/composite-r4 f20b9faa
+   → 7567a2c7.**
+2. **THE LANE'S TWO REFUTATIONS OF THE CHAIR-RULED DRAFT ARE
+   RATIFIED** (the receipts culture converting a draft's
+   claims into executed truth before pinning): the
+   mutation-plant host moved (the drafted plant was a
+   redeclaration — it would have proven the walker against a
+   parse error, not against two same-named implementations),
+   and the export-in-template-literal claim corrected with
+   BOTH directions pinned, over-conviction stated as the safe
+   direction.
+3. ⭐ **THE PREAMBLE'S SELF-CONTRADICTION, FIXED AT THE RIGHT
+   LEVEL**: the MF-PREAMBLE's own Status line still read
+   "DRAFT — awaiting chair signature" while its stamp line
+   recorded the §312.2b grant. THE CHAIR LANDED ONE RE-STAMP
+   COMMIT (2cdb87fa) executing §314.2's class note in full:
+   the Status line fixed (LANDED, chair-signed, with the
+   edit-owns-re-stamps law stated inline), WF-1B's citation
+   re-stamped to the live WF hash (ca02c8a1…), and MF-T2A's
+   citation re-stamped to the NEW MF hash (6670a046…) — three
+   files, three lines, CLAIM_RE-scanned clean, one landing.
+   **CAS: 7567a2c7 → 2cdb87fa.** The citation loop is closed
+   on both families.
+4. **THE runIf-VACUITY NOTE IS ROUTED**: townMapLazy's
+   describe.runIf(distExists) reports exit 0 on zero executed
+   tests in a fresh worktree — T2A refused the skip-as-pass
+   and ran it for real (3 passed under VERIFY_DIST=1);
+   binding on TE-T2B (the first member adding production
+   leaves, where the entry-closure check is live) via its
+   dispatch brief, and a candidate for the D1 walker family's
+   executed-count arm at the next instrument touch.
+   **TE-T2B IS DISPATCHED** on 2cdb87fa under the staged-
+   promotion law. The parallel state: TE-T2B (map port) +
+   TC-WF1C (engine compile) building, RS-5 gridding at the
+   WF-1B exposure.

@@ -74,6 +74,12 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ §315 (~13:15 ET): TE-T2A COLLECTED FULLY GREEN (first no-inherited-red
+# terminal; census exact; CAS f20b9faa→7567a2c7) → chair re-stamp landing
+# 2cdb87fa (MF-PREAMBLE Status fixed LANDED; WF-1B→ca02c8a1…; MF-T2A→6670a046…;
+# citation loop CLOSED both families). TE-T2B DISPATCHED on 2cdb87fa (staged
+# promotion; dist-built runIf check binding). PARALLEL: TE-T2B (map) + TC-WF1C
+# (engine compile) + RS-5 grid (receipts growing). Collections → §316+.
 # ⭐⭐⭐ §313-§314 (~12:45 ET): WF-1B COLLECTED, the inherited red was the CHAIR'S
 # OWN §308 preamble (quoted matcher convicts — cured in person f9bd533f;
 # paraphrase-never-transcribe); ratchet re-run GREEN (11 known/28,646 at ceiling,
