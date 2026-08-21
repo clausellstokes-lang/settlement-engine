@@ -1,16 +1,18 @@
 # First-Slice Fantasy Construction / MF-T1X — one saved-byte explicit-canon operation
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed commit:** f4ad467d889ce5467a96604f28f2c49aaafcef57
 - **Packet version:** 1
 - **Verified base:** codex/first-map-vertical-slice at 39715d75a64819ee125148192cdc541e9f8992c9
-- **Last revalidated:** 2026-08-21 at 39715d75a64819ee125148192cdc541e9f8992c9
+- **Last revalidated:** 2026-08-21 at f4ad467d889ce5467a96604f28f2c49aaafcef57
 - **Depends on:** MF-T1S at 136efaa5b636570fc4fd2aa45dbf654bef3f2769; MF-T1V at 66dbed7c41f9bafc48e738badd7c053e3009f649; MF-T1M at bffd1bcb7a8bc2087d467e6dc73de42641f717e2; MF-VS1 at 7c34f50fd99fcf34c478ec56cbae42240bcd7486
 - **Collision group:** town-map-first-slice-saved-fantasy-construction
-- **Commit authority:** this READY packet alone; one implementation commit, then terminalize
+- **Commit authority:** LANDED; do not redispatch
 - **Baseline posture:** MF-T1S landed, passed its whole-tree tail, and terminalized on a clean tree with 128 packets / 0 READY; its saved document, exact active-snapshot resolution, fixed-survey projection, privacy hashes and stop boundary are the predecessor contract
 
-> While READY, this packet alone defines coding authority. Design files, queues,
-> progress notes, commit subjects and briefs cannot expand it.
+> While READY, this packet alone defined coding authority. Design files, queues,
+> progress notes, commit subjects and briefs could not expand it. It has now
+> landed at the commit above, is terminal and must not be redispatched.
 
 > Family-preamble ruling: town-cartography has no family preamble, and the
 > immediate MF-T1M, MF-T1V and MF-T1S predecessors were promoted and landed in
@@ -462,10 +464,62 @@ Stop on UI, worker, store, database, package-manager, actual uninstall, migratio
 ## 16. Completion receipt
 
 - Base SHA: `39715d75a64819ee125148192cdc541e9f8992c9`.
-- Promotion commit / dispatch capsule / packet hash / seal: PENDING.
-- Final implementation commit and exact seven-path manifest: PENDING.
-- Effective-line ledger and whole sovereignty census: PENDING.
-- A1-A6 focused evidence, state/receipt/projection hashes and maximum ID lengths: PENDING.
-- MF-T1S saved, direct MF-T1V and legacy document predecessor hashes: PENDING revalidation against the pinned values.
-- Static, packet, whole-tree tail and independent bounded audit: PENDING.
-- Adjacent discoveries: record only; do not widen this packet.
+- Promotion commit: `d9953a294a3d1bd30ac5d8fef19b0d0e796aeb3d`.
+- Dispatch capsule / packet / seal:
+  `b0be2b651a53762f638f232a4cfea5e4a452b486025bcc802097d63620749971` /
+  `6b72351e885f3c87abc1dbc2981ddc7e3c2ff2b44cab5e4625595054e71a707b` /
+  `184f2b9f161131f5ee04823b0eb56a344a02cb8d363bedad4b15ab77341c7d47`.
+- Final implementation commit: `f4ad467d889ce5467a96604f28f2c49aaafcef57`;
+  exactly the seven declared paths.
+- Effective-line ledger: `operations.js +147/190`, final `278/321`;
+  `massingProjection.js +38/65`, final `121/148`;
+  `projection.js +55/55`, final `374/374`;
+  `index.js +4/15`, final `101/112`;
+  total production `244/325`; fantasy test `+292/310`, final `372/390`;
+  shape-kernel test `-36`, final `212/268`; sovereignty walker `+0/12`
+  effective (`+5/-1` raw).
+- Whole sovereignty census:
+  `2484/364/2120/20594/5767` →
+  `2484/364/2120/20598/5767`.
+- A1-A6 focused evidence: the packet battery passed `8` files / `38` tests;
+  governance walkers passed `2` files / `42` tests. The one explicit operation
+  adds one DM-private built-in/authored GABLE mass, seals one three-mass state
+  plus external acyclic receipt, and projects `21` ordered DM operations through
+  the shared path while the entire PUBLIC projection/draw/SVG stays byte-equal.
+  Mechanism, operation, recipe, origin and opaque-request accessor probes close;
+  the old caller-loaded envelope and legacy v1 mechanism remain non-executable.
+- Canonical execution evidence: mechanism
+  `scene-v1-23299cf0f8fed9ed3dceddac127d44bf`; operation
+  `scene-v1-8a0cd522b9e5c59f4c01705ecf879635`; third mass
+  `scene-v1-004c9499a4c4abf29878cc3d7f17838c`; state
+  `scene-v1-ea6790887933ebb16efe167cc477bc0b`; receipt
+  `scene-v1-6b4c293768da933608fa93ebbadf608c`; DM projection
+  `scene-v1-b823486fbb95fcf6910f42db19f96788`.
+- PUBLIC before/after remains exactly
+  `scene-v1-b90080500e9e0a99b6ee469444832743`. Maximum-input witnesses produce
+  state / receipt / DM projection hashes
+  `scene-v1-a96d455653ee4def69f8e8325dcb6099` /
+  `scene-v1-52d2cdc434cf8d9b43ea34d82f77d44d` /
+  `scene-v1-e5c43d1fa69c2546ed5a68e30e88d954`; maximum geometry/state/receipt/
+  projection artifact-ID lengths are `96/68/70/55`.
+- Predecessor hashes revalidated: saved MF-T1S PUBLIC / DM
+  `scene-v1-b90080500e9e0a99b6ee469444832743` /
+  `scene-v1-47ec385c5ea913fbad576ef8cc2d2219`; direct MF-T1V PUBLIC / DM
+  `scene-v1-2f65d0d84551c889da48e08ceb1eb27f` /
+  `scene-v1-bc2930de2297900d8715aa32b1a884c3`; legacy document PUBLIC / DM
+  `scene-v1-9820c3f2273a313f22ff9246c65e1891` /
+  `scene-v1-1945e8a01df6c24788c3393c4e3c452d`. The legacy v1 mechanism remains
+  `scene-v1-56e0d430be735fbbab2f7aa4b4b50281` and non-executable.
+- Static and packet gates: targeted ESLint clean; `tsconfig.full.json`
+  `173/173`; `tsconfig.domain-strict.json` `1134/1134`; packet session `PASSED`
+  all eight steps with no failed, blocked or remaining step; independent bounded
+  audit `GO — 0 P0 / 0 P1`.
+- Whole-tree landing gate completed the full `npm run check` chain: test ratchet
+  `28638` tests with `11` inherited failures at ceiling and no new failure;
+  ESLint `0` errors / `29` warnings; build `28.40s`; prerender `314` routes;
+  strict dist `51` files / `409` tests with zero missing, duplicate, failed,
+  non-run or uncollected rows.
+- Adjacent discoveries: none widened this packet. The requested bounded first-map
+  sequence is complete. Dossier-conditioned sampling still requires genuine
+  dossier, seed, candidate and choice-receipt authority; UI/store integration,
+  additional operations and general event-log authority remain deferred.
