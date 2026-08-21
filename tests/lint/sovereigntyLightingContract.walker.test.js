@@ -4867,7 +4867,27 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // and every one of its five titles is visible to the census: +1 file, +1 credited,
     // +5 titles, +1 suite title, and `parked` holds at 364 because no parked-file rule, parser
     // door or existing file's classification moved. Zero production lines change in the member.
-    files: 2485, parked: 364, credited: 2121, titles: 20611, suiteTitles: 5768,
+    // ── RE-RECORDED 2026-08-21 BY WF-1C, THE REALM LAST-SEAT BEAT ──
+    // AUTHORIZING DECISION: ODQ §314.3 (this member's compile dispatch), restated at ODQ
+    // §316, under §299.4's binding-forward rule that a packet moving any census or ratchet
+    // NAMES ITS AUTHORIZING DECISION in the packet body. It is named in WF-1C's header and
+    // in its priced-obligations census row.
+    // 2,485/364/2,121/20,611/5,768 → 2,485/364/2,121/20,618/5,768. ⭐ This member mints NO
+    // test file at all: its seven-case acceptance battery extends the ALREADY-CREDITED
+    // tests/domain/pantheon.test.js as straight-line `test()` calls inside that file's ONE
+    // existing realm-arcs describe — no new describe, no `.each`, no `runIf`, no nesting —
+    // so exactly seven test titles and ZERO suite titles are added. Its registration and
+    // authoring-join pins ride that same file on the landed tests/domain/impactKindWalkers
+    // .test.js precedent (a source scan run from tests/domain/) rather than minting a
+    // tests/lint/** walker, which is what keeps `files`, `parked`, `credited` and
+    // `suiteTitles` all standing still. The describe's TITLE is reworded to name the third
+    // arc, which is cardinality-neutral (the WF-1a M7 precedent). No parser door, parked-file
+    // rule, or existing file changed classification.
+    // ⚠ THE WHOLE TUPLE WAS RE-DERIVED BY EXECUTION IN THIS COMMIT, never patched figure by
+    // figure: the census is SEQUENCED and stopped at `titles`, which is itself the executed
+    // proof that `files`, `parked` and `credited` did not move — a sequenced census cannot
+    // reach a later figure past a red earlier one.
+    files: 2485, parked: 364, credited: 2121, titles: 20618, suiteTitles: 5768,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

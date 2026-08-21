@@ -216,11 +216,25 @@ export function synthesizeCompoundSignatures({ worldState, tick = 0, now = null 
 
 // ── Pantheon realm arcs ─────────────────────────────────────────────────────
 // A deity crossing INTO 'major' is the campaign-epic payoff — "The Ascendancy of
-// X". A deity falling TO 'cult' (or losing its last seat — extinction) is "The
-// Twilight of X". A minor↔minor drift is not realm news. These are synthesized
-// from the per-tick tier CHANGES the pantheon ratchet emits, NOT re-derived from
-// the ledger (so an Ascendancy fires ONCE, on the crossing tick, never re-emitted
-// every tick the deity holds major). Gated by religion activity at the call site.
+// X". A deity falling TO 'cult' is "The Twilight of X". A minor↔minor drift is not
+// realm news. These are synthesized from the per-tick CHANGES the pantheon ratchet
+// emits, NOT re-derived from the ledger (so an Ascendancy fires ONCE, on the
+// crossing tick, never re-emitted every tick the deity holds major). Gated by
+// religion activity at the call site.
+//
+// ⛔ LOSING THE LAST SEAT IS A SEPARATE KIND, NOT THE TWILIGHT. The Twilight arm
+// keys on a tier CROSSING and can never see a seat count, so a creed already at the
+// cult floor leaves the realm entirely without moving a tier — measured, and it is
+// the gap WF-1c's third arm below fills. That arm is flag-gated at the kernel and
+// keys on the row's own last-seat flag; it never re-reads seats here.
+//
+// The Twilight's salience is named once below and read by BOTH the Twilight arm and
+// the extinction arm. ⛔ NO THIRD VALUE IS AUTHORED: the extinction is the Twilight's
+// terminal case and takes its salience class BY DERIVATION from these live constants,
+// so the beat lands owing no owner value signature. Drift is falsifiable by pins that
+// already exist — the sibling ascendancy score is asserted across three realmMult arms.
+const TWILIGHT_SCORE = 84;
+const TWILIGHT_SEVERITY = 0.78;
 
 /**
  * A human display name for a deity ref, given the pre-tick snapshot to resolve it.
@@ -247,7 +261,10 @@ function deityNameForRef(snapshot, deityId) {
  * a twilight when a deity falls TO 'cult'. Codepoint-sorted by deity id (stable).
  *
  * @param {Object} [args]
- * @param {Array<{deityId:string, from:string, to:string}>} [args.changes]
+ * @param {Array<{deityId:string, from:string, to:string, lastSeat?:boolean}>} [args.changes]
+ *   WF-1c widens this array by one OPTIONAL boolean and not at all in `from`/`to`. A
+ *   last-seat row carries `from === to`, so the two tier predicates below — which each
+ *   require `from !== to` — are provably blind to it.
  * @param {any} [args.snapshot]  the pre-tick snapshot, to resolve deity names.
  * @param {number} [args.tick]
  * @param {(string|null)} [args.now]
@@ -267,11 +284,41 @@ export function synthesizePantheonArcs({ changes = [], snapshot = null, tick = 0
   const entries = [];
   const ordered = [...changes].sort((a, b) => (String(a.deityId) < String(b.deityId) ? -1 : String(a.deityId) > String(b.deityId) ? 1 : 0));
   for (const change of ordered) {
+    const lastSeat = change.lastSeat === true;
     const ascendancy = change.to === 'major' && change.from !== 'major';
     const twilight = change.to === 'cult' && change.from !== 'cult';
-    if (!ascendancy && !twilight) continue;
+    if (!ascendancy && !twilight && !lastSeat) continue;
+    // ⚠ MEASURED LEGIBILITY LIMIT, DECLARED RATHER THAN DISCOVERED (WF-1c RAISED-B). A
+    // creed that lost its last seat is carried by NO settlement, so every extinction beat
+    // takes this helper's ref-tail fallback — exact for the `deity:<Name>` form, lossy for
+    // the `custom:<slug>` form, which yields one word. The defect is pre-existing and
+    // already reachable through the Twilight arm above; repairing it changes what the two
+    // LANDED arms print, so it is a chair micro-item rather than this member's to take.
     const name = deityNameForRef(snapshot, change.deityId);
-    if (ascendancy) {
+    if (lastSeat) {
+      entries.push({
+        id: `wizard_news.${tick}.pantheon.extinction.${stablePantheonPart(change.deityId)}`,
+        tick,
+        scope: 'realm',
+        significance: 'major',
+        score: Math.round(TWILIGHT_SCORE * g),
+        headline: `The Last Altar of ${name}`,
+        summary: `No settlement in the realm still keeps ${name}'s rite. The last altar stands cold, the clergy have scattered to other doors, and what survives of the faith is memory rather than practice.`,
+        kind: 'pantheon',
+        impactKind: 'pantheon_extinction',
+        channelType: null,
+        severity: TWILIGHT_SEVERITY,
+        settlementIds: [],
+        impactIds: [],
+        channelIds: [],
+        reasons: [
+          `${name} holds no seat anywhere in the realm.`,
+          'The last settlement that kept the rite now keeps another, and no tier remains for the creed to fall from.',
+        ],
+        tags: ['world_pulse', 'pantheon', 'extinction', String(change.deityId)],
+        createdAt: now,
+      });
+    } else if (ascendancy) {
       entries.push({
         id: `wizard_news.${tick}.pantheon.ascendancy.${stablePantheonPart(change.deityId)}`,
         tick,
@@ -300,13 +347,13 @@ export function synthesizePantheonArcs({ changes = [], snapshot = null, tick = 0
         tick,
         scope: 'realm',
         significance: 'major',
-        score: Math.round(84 * g),
+        score: Math.round(TWILIGHT_SCORE * g),
         headline: `The Twilight of ${name}`,
         summary: `${name} has fallen to a cult: abandoned altars, scattered clergy, and a faith remembered more than practised.`,
         kind: 'pantheon',
         impactKind: 'pantheon_twilight',
         channelType: null,
-        severity: 0.78,
+        severity: TWILIGHT_SEVERITY,
         settlementIds: [],
         impactIds: [],
         channelIds: [],

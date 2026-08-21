@@ -1,3 +1,7 @@
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+
 import { describe, expect, test } from 'vitest';
 
 import {
@@ -14,10 +18,30 @@ import {
 } from '../../src/domain/worldPulse/pantheon.js';
 import { synthesizePantheonArcs } from '../../src/domain/worldPulse/realmEvents.js';
 import { previewCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
-import { ensureWorldState } from '../../src/domain/worldPulse/worldState.js';
+import { ensureWorldState, CONDITIONAL_LEDGER_KEYS } from '../../src/domain/worldPulse/worldState.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { normalizeForDormancy } from '../helpers/dormancyOracle.js';
+// WF-1c's registration-totality battery (A5) and authoring join (A7). The registry list
+// mirrors kindPoolFloors.walker.test.js's own denominator so the six figures it freezes are
+// re-derived from the LIVE sources here rather than quoted from prose.
+import { EXACT_SECTION, SECTION_OF, isExplicitlyRouted } from '../../src/domain/realm/heraldRouting.js';
+import { newsVoiceCategory } from '../../src/domain/display/newsVoice.js';
+import { WHAT_PHRASES } from '../../src/domain/display/settlementRumors.js';
+import { KIND_SECTION } from '../../src/domain/display/chroniclersLetter.js';
+import {
+  ENVOY_KIND_REGISTRY,
+  WAR_COALITION_KIND_REGISTRY,
+  WAR_COST_KIND_REGISTRY,
+  WAR_DISPOSITION_KIND_REGISTRY,
+  WAR_LINEAGE_KIND_REGISTRY,
+  WAR_RULING_KIND_REGISTRY,
+} from '../../src/domain/worldPulse/eventProse.js';
+import { COMMERCIAL_KIND_REGISTRY } from '../../src/domain/worldPulse/commercialReasonsNews.js';
+import { GRAMMAR_KIND_REGISTRY } from '../../src/domain/worldPulse/grammarNews.js';
+import { INFORMATION_KIND_REGISTRY } from '../../src/domain/worldPulse/informationNews.js';
+import { SOVEREIGNTY_KIND_REGISTRY } from '../../src/domain/worldPulse/sovereigntyNews.js';
+import { censusNewsAuthoringSites, debtLedgerRows } from '../lint/newsAuthoringCensus.shared.mjs';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Feature D / R4 — pantheon ledger + lazy tiering. The determinism danger zone.
@@ -275,8 +299,38 @@ describe('pantheon — cascade containment (bounded per-tick change, convergence
 });
 
 // ── 6. Realm arcs ─────────────────────────────────────────────────────────────
-describe('pantheon — realm arcs (Ascendancy / Twilight)', () => {
+//
+// WF-1c adds the THIRD arc — the realm last-seat beat — and its seven acceptance cases
+// live at the foot of this describe.
+//
+// ⛔ EVERY FIXTURE BELOW WAS RUN AND PRINTED BEFORE ITS ASSERTION WAS WRITTEN, and the
+// order is the point rather than a courtesy. `TIER_HOLD_TICKS` is 2 and
+// `MAX_TIER_CHANGES_PER_TICK` is 2, so a fixture advanced fewer than two ticks can never
+// observe A4's Twilight arm, and a fixture whose creed is not at the cult floor produces
+// base == cure and a silently vacuous pin.
+//
+// ⛔⛔ ONE PIN WAS REFUTED BY RUNNING IT, AND IT IS RECORDED HERE BECAUSE IT WOULD HAVE
+// PASSED WHILE ASSERTING NOTHING: the name a beat prints depends on WHICH snapshot the
+// arcs are handed. The kernel passes THIS tick's pre-tick snapshot, in which an extinct
+// creed already holds no seat, so the name falls back to a tail of the ref. Handing the
+// arcs the PRIOR tick's snapshot resolves the name by scan instead and hides the fallback
+// completely — measured, both ways, in A1. The fixtures below use the production shape.
+//
+// ⛔ THE DEITY DOCTRINE BINDS THE FIXTURES TOO: every deity arrives through the doctrine
+// path (`config.primaryDeitySnapshot`, what SET_PRIMARY_DEITY writes), never a catalogue
+// and never a premade pool. The beats record what BELIEVERS did — a seat kept or not kept
+// — and no assertion here says a god died.
+describe('pantheon — realm arcs (Ascendancy / Twilight / the last altar)', () => {
   const snapshot = snapshotForSaves([save('a', 'A', { deity: deitySnapshot('Vael', { rank: 'major' }) })]);
+
+  // A deity carrying NO `_deityRef`: `deityIdOf` derives `deity:<Name>` from the name, which
+  // is the ref shape whose display name survives the fallback intact. Distinct from
+  // `deitySnapshot`, which mints the `custom:<slug>` shape — the two are the whole subject
+  // of A1's second arm.
+  const bareDeity = (name, rank = 'cult') => ({ name, alignmentAxis: 'neutral', temperamentAxis: 'neutral', rankAxis: rank });
+  const PALE = bareDeity('The Pale Warden');
+  const HARROW = bareDeity('Harrow');
+  const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
   test('a deity reaching major emits an Ascendancy arc', () => {
     const entries = synthesizePantheonArcs({
@@ -322,6 +376,227 @@ describe('pantheon — realm arcs (Ascendancy / Twilight)', () => {
     // A bad/absent realmMult is treated as 1.0 (defensive).
     expect(synthesizePantheonArcs({ changes: change, snapshot, tick: 5, now: NOW, realmMult: 0 })[0].score).toBe(86);
     expect(synthesizePantheonArcs({ changes: change, snapshot, tick: 5, now: NOW, realmMult: NaN })[0].score).toBe(86);
+  });
+
+  test('A1 the last-seat beat fires ONCE on the crossing tick and names the creed the realm no longer keeps', () => {
+    const held = snapshotForSaves([save('a', 'A', { deity: PALE })]);
+    const lost = snapshotForSaves([save('a', 'A', { deity: HARROW })]);
+    const seated = advancePantheon({ pantheon: {}, snapshot: held, unseating: true });
+    expect(seated.changes).toEqual([]); // holding its one seat is not news
+    const crossing = advancePantheon({ pantheon: seated.pantheon, snapshot: lost, unseating: true });
+    expect(crossing.changes).toEqual([{ deityId: 'deity:The Pale Warden', from: 'cult', to: 'cult', lastSeat: true }]);
+    // PRODUCTION SNAPSHOT SHAPE: the kernel hands the arcs THIS tick's pre-tick snapshot,
+    // in which the creed already holds no seat anywhere.
+    const arcs = synthesizePantheonArcs({ changes: crossing.changes, snapshot: lost, tick: 5, now: NOW });
+    expect(arcs.length).toBe(1);
+    expect(arcs[0].impactKind).toBe('pantheon_extinction');
+    expect(arcs[0].scope).toBe('realm');
+    expect(arcs[0].kind).toBe('pantheon');
+    expect(arcs[0].headline).toBe('The Last Altar of The Pale Warden');
+    expect(arcs[0].settlementIds).toEqual([]); // realm-voiced: it names no town
+    // AND IT FIRES ONCE. The following tick, ledger unchanged at zero seats, says nothing
+    // further — the pantheon entry persists as the remnant it already is.
+    const after = advancePantheon({ pantheon: crossing.pantheon, snapshot: lost, unseating: true });
+    expect(after.changes).toEqual([]);
+    expect(synthesizePantheonArcs({ changes: after.changes, snapshot: lost, tick: 6, now: NOW })).toEqual([]);
+    expect(after.pantheon['deity:The Pale Warden']).toMatchObject({ seats: 0, tier: 'cult', tierHeld: 0 });
+
+    // ── SEPARATELY LABELLED MEASURED-TRUTH ARM (WF-1c RAISED-B) ──────────────────
+    // A KNOWN DEFECT IN A SHARED HELPER, PINNED RATHER THAN REPAIRED. `deityNameForRef`
+    // keeps only the last token of a ref, so a `custom:<slug>` creed prints one word. This
+    // arm asserts the CURRENT behaviour, not the desired one; if the chair takes the cure,
+    // exactly this arm re-records with a declared cause instead of a green pin quietly
+    // changing meaning. The refusal is a measurement: the helper's only caller serves two
+    // LANDED, unflagged arms, so repairing it changes what a live campaign prints.
+    const slug = { _deityRef: 'custom:sun_of_the_deep_forge', name: 'Sun of the Deep Forge', alignmentAxis: 'neutral', temperamentAxis: 'neutral', rankAxis: 'cult' };
+    const slugHeld = snapshotForSaves([save('a', 'A', { deity: slug })]);
+    const slugSeated = advancePantheon({ pantheon: {}, snapshot: slugHeld, unseating: true });
+    const slugCrossing = advancePantheon({ pantheon: slugSeated.pantheon, snapshot: lost, unseating: true });
+    const slugArcs = synthesizePantheonArcs({ changes: slugCrossing.changes, snapshot: lost, tick: 5, now: NOW });
+    expect(slugArcs[0].headline).toBe('The Last Altar of Forge'); // DEFECT: authored name is 'Sun of the Deep Forge'
+    // The control that proves the arm above is about the FALLBACK and not about the fixture:
+    // handed the prior snapshot, where the creed is still carried, the same ref resolves whole.
+    expect(synthesizePantheonArcs({ changes: slugCrossing.changes, snapshot: slugHeld, tick: 5, now: NOW })[0].headline)
+      .toBe('The Last Altar of Sun of the Deep Forge');
+  });
+
+  test('A2 absent, false and lit are byte-separable on a deity-bearing world; only the literal lit drive moves', () => {
+    const VAEL = deitySnapshot('Vael', { rank: 'major' });
+    const drive = (rules) => previewCampaignWorldPulse({
+      campaign: {
+        id: 'wf1c-fence', name: 'WF1C Fence', settlementIds: ['s1', 's2', 's3', 's4'],
+        worldState: {
+          rngSeed: 'wf1c-fence-seed', tick: 4,
+          simulationRules: { religionDynamicsEnabled: true, ...rules },
+          // Vael matures an Ascendancy in EVERY arm (the non-vacuity control, so no hash
+          // below is taken over an empty feed); Pale held its one seat last tick and holds
+          // none now.
+          pantheon: {
+            'custom:lu_vael': { wins: 3, losses: 0, seats: 4, tier: 'minor', tierHeld: 1 },
+            'deity:The Pale Warden': { wins: 0, losses: 1, seats: 1, tier: 'cult', tierHeld: 0 },
+          },
+        },
+        regionalGraph: ensureRegionalGraph({ edges: [], channels: [] }),
+        wizardNews: { currentTick: 4, entries: [] },
+      },
+      saves: ['s1', 's2', 's3', 's4'].map((id, i) => save(id, `S${i}`, { deity: VAEL })),
+      interval: 'one_month', now: NOW,
+    });
+    const absent = drive({});
+    const dark = drive({ faithUnseatingEnabled: false });
+    const lit = drive({ faithUnseatingEnabled: true });
+    // NON-VACUITY FIRST: every arm really ran the pantheon fold and really emitted a beat.
+    for (const pulse of [absent, dark, lit]) {
+      expect((pulse.wizardNews?.entries || []).some(e => e.impactKind === 'pantheon_ascendancy')).toBe(true);
+    }
+    const news = (p) => JSON.stringify(p.wizardNews?.entries || []);
+    expect(news(dark)).toBe(news(absent)); // absent ≡ false, to the byte
+    expect(news(lit)).not.toBe(news(absent)); // THE LIT-MUTANT CONTROL: the fence can see
+    expect(news(lit)).toContain('pantheon_extinction');
+    // The lit arm one line above proves the token is spellable and really reachable in this
+    // exact drive, so what follows is a fact about the gate rather than a dead fixture.
+    // anchored: the same drive lit contains this token (asserted immediately above).
+    expect(news(absent)).not.toContain('pantheon_extinction');
+    // The rows are TRANSIENT: the persisted ledger is identical in all three arms.
+    expect(JSON.stringify(lit.worldState.pantheon)).toBe(JSON.stringify(absent.worldState.pantheon));
+    // THE CONTROL ON THE SALIENCE EXTRACTION: naming the Twilight's two values changed
+    // neither of them, and left the Ascendancy's own literals alone.
+    const asc = (absent.wizardNews.entries || []).find(e => e.impactKind === 'pantheon_ascendancy');
+    expect([asc.score, asc.severity]).toEqual([86, 0.8]);
+    const twi = synthesizePantheonArcs({ changes: [{ deityId: 'custom:lu_vael', from: 'minor', to: 'cult' }], snapshot, tick: 5, now: NOW })[0];
+    expect([twi.score, twi.severity]).toEqual([84, 0.78]);
+    const ext = (lit.wizardNews.entries || []).find(e => e.impactKind === 'pantheon_extinction');
+    expect([ext.score, ext.severity]).toEqual([84, 0.78]); // derived from the Twilight, not authored
+  });
+
+  test('A3 the counterfactual: the same one-seat transition emits nothing at all at the pre-feature base', () => {
+    const held = snapshotForSaves([save('a', 'A', { deity: PALE })]);
+    const lost = snapshotForSaves([save('a', 'A', { deity: HARROW })]);
+    const seated = advancePantheon({ pantheon: {}, snapshot: held, unseating: true });
+    // DARK IS THE PRE-FEATURE BASE, byte-identically: with the key absent the returned
+    // `changes` is the tier ratchet's own array, unwidened.
+    const base = advancePantheon({ pantheon: seated.pantheon, snapshot: lost });
+    expect(base.changes).toEqual([]);
+    expect(synthesizePantheonArcs({ changes: base.changes, snapshot: lost, tick: 5, now: NOW })).toEqual([]);
+    // AND SPECIFICALLY NO TWILIGHT — the wave is not redundant with a beat that already
+    // fires. The reason is the ladder itself: a one-seat deity is ALREADY at the cult floor,
+    // so the seat loss crosses no threshold and the tier ratchet has nothing to report.
+    expect(qualifyingTier(1, 'cult')).toBe('cult');
+    expect(qualifyingTier(0, 'cult')).toBe('cult');
+    // The identical transition lit DOES produce a row (asserted two lines below), so the
+    // silence here belongs to the base and not to a fixture that never moved a seat.
+    const baseFeed = JSON.stringify(synthesizePantheonArcs({ changes: base.changes, snapshot: lost, tick: 5, now: NOW }));
+    // anchored: the same transition lit yields exactly one row (asserted on the next line).
+    expect(baseFeed).not.toContain('pantheon_twilight');
+    expect(advancePantheon({ pantheon: seated.pantheon, snapshot: lost, unseating: true }).changes).toHaveLength(1);
+  });
+
+  test('A4 no double obituary: a major creed collapsing to zero is silent, and its Twilight lands alone one tick later', () => {
+    const elsewhere = snapshotForSaves([save('s1', 'S1', { deity: bareDeity('Xor') })]);
+    const led = { 'deity:Sun': { ...createPantheonEntry(), seats: 4, tier: 'major' } };
+    // TICK 1 — the seats vanish here, and the beat must NOT fire: the tier ladder still has
+    // somewhere to take this creed, so the Twilight is the one that will speak.
+    const t1 = advancePantheon({ pantheon: led, snapshot: elsewhere, unseating: true });
+    expect(t1.changes).toEqual([]);
+    expect(t1.pantheon['deity:Sun']).toMatchObject({ seats: 0, tier: 'major', tierHeld: 1 });
+    // TICK 2 — the dwell matures and the Twilight lands, ALONE. Without the ladder guard the
+    // realm would carry an extinction on tick 1 and this Twilight on tick 2: two obituaries,
+    // one tick apart, for one event.
+    const t2 = advancePantheon({ pantheon: t1.pantheon, snapshot: elsewhere, unseating: true });
+    expect(t2.changes).toEqual([{ deityId: 'deity:Sun', from: 'major', to: 'cult' }]);
+    const arcs = synthesizePantheonArcs({ changes: t2.changes, snapshot: elsewhere, tick: 2, now: NOW });
+    expect(arcs.map(e => e.impactKind)).toEqual(['pantheon_twilight']);
+    // THE EXCLUSIVITY INVARIANT, over both ticks: no deity may carry a tier-change row and a
+    // last-seat row in the same tick.
+    for (const res of [t1, t2]) {
+      const tiered = res.changes.filter(c => c.lastSeat !== true).map(c => c.deityId);
+      const unseated = res.changes.filter(c => c.lastSeat === true).map(c => c.deityId);
+      expect(tiered.filter(id => unseated.includes(id))).toEqual([]);
+    }
+  });
+
+  test('A5 the registration totality: routed by prefix with NO exact row, and the six kind censuses stand still', () => {
+    expect(isExplicitlyRouted('pantheon_extinction')).toBe(true);
+    expect(SECTION_OF('pantheon_extinction')).toBe('faith');
+    expect(WHAT_PHRASES.pantheon_extinction).toBe('a faith with no altar left');
+    expect(KIND_SECTION.pantheon_extinction).toBe('traditions');
+    expect(newsVoiceCategory({ impactKind: 'pantheon_extinction' })).toBe(null);
+    // ⛔⛔ THE ANTI-TIDY PIN. Both siblings carry an EXACT_SECTION row and this kind must
+    // NOT, because a third routed-but-unregistered pantheon row grows a ceiling asserted
+    // shrink-only, which has no lawful growth cure. The two positives make the absence a
+    // fact about this kind rather than about the map.
+    expect('pantheon_ascendancy' in EXACT_SECTION).toBe(true);
+    expect('pantheon_twilight' in EXACT_SECTION).toBe(true);
+    expect('pantheon_extinction' in EXACT_SECTION).toBe(false);
+    // The six figures kindPoolFloors freezes, re-derived from the LIVE registries.
+    const registries = [
+      ['WAR_DISPOSITION', WAR_DISPOSITION_KIND_REGISTRY], ['WAR_LINEAGE', WAR_LINEAGE_KIND_REGISTRY],
+      ['WAR_COST', WAR_COST_KIND_REGISTRY], ['WAR_RULING', WAR_RULING_KIND_REGISTRY],
+      ['WAR_COALITION', WAR_COALITION_KIND_REGISTRY], ['ENVOY', ENVOY_KIND_REGISTRY],
+      ['COMMERCIAL', COMMERCIAL_KIND_REGISTRY], ['GRAMMAR', GRAMMAR_KIND_REGISTRY],
+      ['SOVEREIGNTY', SOVEREIGNTY_KIND_REGISTRY], ['INFORMATION', INFORMATION_KIND_REGISTRY],
+    ];
+    const allRows = registries.flatMap(([, rows]) => [...rows]);
+    const registered = new Set(allRows.map(r => String(r.kind)));
+    const routedTokens = Object.keys(EXACT_SECTION);
+    const unvoiced = routedTokens.filter(t => !registered.has(t));
+    expect(registries.length).toBe(10);
+    expect(registries.filter(([, rows]) => rows.length < 5).map(([name]) => name)).toEqual(['INFORMATION']);
+    expect(allRows.length).toBe(112);
+    expect(routedTokens.length).toBe(378);
+    expect(unvoiced.length).toBe(274);
+    expect(allRows.length - routedTokens.filter(t => registered.has(t)).length).toBe(8);
+  });
+
+  test('A6 nothing persists: the ledger keeps its five keys, gains no top-level key, and round-trips the remnant', () => {
+    const held = snapshotForSaves([save('a', 'A', { deity: PALE })]);
+    const lost = snapshotForSaves([save('a', 'A', { deity: HARROW })]);
+    const seated = advancePantheon({ pantheon: {}, snapshot: held, unseating: true });
+    const crossing = advancePantheon({ pantheon: seated.pantheon, snapshot: lost, unseating: true });
+    expect(Object.keys(crossing.pantheon['deity:The Pale Warden'])).toEqual(['wins', 'losses', 'seats', 'tier', 'tierHeld']);
+    // The row IS carried on this very tick's `changes`, so what follows is a fact about
+    // what persists rather than about a tick on which the beat never fired.
+    expect(JSON.stringify(crossing.changes)).toContain('lastSeat');
+    // anchored: this exact tick's `changes` carries the flag (asserted on the line above).
+    expect(JSON.stringify(crossing.pantheon)).not.toContain('lastSeat');
+    // ZERO NEW TOP-LEVEL KEYS — the array's order IS the serialized key order, asserted
+    // rather than assumed.
+    expect([...CONDITIONAL_LEDGER_KEYS]).toEqual([
+      'pantheon', 'religionStates', 'warPosture', 'occupations', 'pausedAdvance',
+      'martialReadiness', 'conquestFeeds', 'mercenaryMarket', 'rulesetLog', 'spatialDigest',
+      'spatialLedgers', 'narrativeTempo', 'politicsLedgers', 'factionPairStates', 'envoyErrands',
+    ]);
+    // A zero-seat remnant survives the lifecycle round trip as the ledger entry it already is.
+    const remnant = { 'deity:The Pale Warden': { wins: 0, losses: 1, seats: 0, tier: 'cult', tierHeld: 0 } };
+    const round = ensureWorldState({ rngSeed: 'wf1c-round', tick: 4, pantheon: remnant }, { id: 'wf1c-round' });
+    expect(JSON.stringify(round.pantheon)).toBe(JSON.stringify(remnant));
+    // And a field-absent world round-trips without materializing anything.
+    expect('pantheon' in ensureWorldState({ rngSeed: 'wf1c-round', tick: 4 }, { id: 'wf1c-round' })).toBe(false);
+  });
+
+  test('A7 the wizard-news authoring join: the new site is inside the denominator, clean, and the debt ledger is unmoved', () => {
+    const census = censusNewsAuthoringSites(REPO_ROOT, isExplicitlyRouted);
+    const debt = debtLedgerRows(census.sites);
+    const frozen = JSON.parse(readFileSync(join(REPO_ROOT, 'tests/lint/.wizard-news-authoring-baseline.json'), 'utf8'));
+    expect(frozen.entries.length).toBe(19);
+    expect(debt.length).toBe(19);
+    // A NEW ROW MUST BE FIXED, NEVER BASELINED — the walker's own instruction. This member's
+    // file owes none.
+    expect(debt.filter(r => r.path === 'src/domain/worldPulse/realmEvents.js')).toEqual([]);
+    // THE POSITIVE CONTROL that makes the empty list above mean something: the new authoring
+    // site is really IN the census, really routes on its own token, and really carries no issue.
+    const mine = census.sites.filter(s => s.path === 'src/domain/worldPulse/realmEvents.js');
+    expect(mine.length).toBe(5);
+    expect(mine.flatMap(s => s.routeTokens).sort()).toEqual(['pantheon_ascendancy', 'pantheon_extinction', 'pantheon_twilight']);
+    expect(mine.flatMap(s => s.issues)).toEqual([]);
+    // The exact identity holds: exactly one candidate is excluded as a non-authoring shape.
+    expect(census.candidateSites.length).toBe(census.sites.length + 1);
+    const byPath = new Map();
+    for (const site of census.sites) byPath.set(site.path, [...(byPath.get(site.path) || []), site]);
+    expect(byPath.get('src/domain/worldPulse/informationStatecraft.js')?.length).toBe(3);
+    expect(byPath.get('src/domain/worldPulse/supplyWebWarfare.js')?.length).toBe(4);
+    expect(byPath.get('src/domain/worldPulse/momentum.js')?.length).toBe(1);
+    expect(byPath.get('src/store/mapSlice.js')?.length).toBe(1);
   });
 });
 

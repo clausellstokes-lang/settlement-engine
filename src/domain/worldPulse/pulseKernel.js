@@ -1601,7 +1601,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     const advanced = advancePantheon({
       pantheon: memoryState.pantheon || {},
       snapshot: pantheonSeatSnapshot,
-      faithDeltas: pendingFaithDeltas,
+      faithDeltas: pendingFaithDeltas, unseating: simulationRules.faithUnseatingEnabled === true,
     });
     // Only materialize the pantheon key when the ledger is non-empty — an active
     // religion with no seats/deltas yet stays absent (byte-neutral under the oracle).

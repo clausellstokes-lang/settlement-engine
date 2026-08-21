@@ -304,6 +304,7 @@ export const WHAT_PHRASES = Object.freeze({
   religious_pressure: 'a stir among the faithful',
   pantheon_ascendancy: 'a faith ascendant',
   pantheon_twilight: 'a faith in twilight',
+  pantheon_extinction: 'a faith with no altar left',
   moral_reckoning: 'a reckoning',
   belief_misjudgment: 'a dangerous misjudgement',
   stressor_birth_religious_conversion_fracture: 'a schism among the faithful',

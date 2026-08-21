@@ -384,22 +384,77 @@ export function ratchetPantheonTiers(ledger) {
 }
 
 /**
+ * The realm LAST-SEAT rows for this tick: one per creed whose seat count reached zero
+ * on a transition the TIER LADDER CANNOT NARRATE. A one-seat deity is already at the
+ * cult floor, so losing that seat moves no tier, produces no change row, and leaves the
+ * realm's own chronicle silent while the last altar in the world goes out.
+ *
+ * ⛔ THE PREDICATE IS DERIVED AND SPELLS NO NUMBER. `> 0` and `=== 0` are the presence
+ * and absence of seats rather than bands, and the tier question is delegated entirely to
+ * this module's own `qualifyingTier`. A literal for the charter's "seats 1 → 0" would
+ * collide with `MINOR_DEMOTE`, which is 1 in this same module scope, and would read as
+ * correct while meaning something else.
+ *
+ * ⛔⛔ THE LADDER-SILENT GUARD IS WHAT PREVENTS A DOUBLE OBITUARY, and it is measured
+ * rather than defensive: a MAJOR creed collapsing to zero loses its seats on one tick
+ * and crosses to 'cult' on the NEXT, after the hysteresis dwell. Without the guard the
+ * realm would carry an extinction on the first tick and a Twilight about the same creed
+ * on the second — two obituaries, one tick apart, for one event. With it, a creed whose
+ * tier still has somewhere to fall stays silent and the Twilight covers it.
+ *
+ * The two row kinds are provably exclusive per deity per tick: `ratchetPantheonTiers`
+ * takes the no-change branch for any deity whose qualifying tier EQUALS its current one,
+ * which is exactly the condition this predicate requires.
+ *
+ * @param {Record<string, any>} preSeats - the ledger BEFORE this tick's seat re-count.
+ * @param {Record<string, any>} postSeats - the same ledger after `applyPantheonSeats`.
+ * @returns {Array<{deityId: string, from: string, to: string, lastSeat: boolean}>}
+ *   codepoint-sorted by deityId; empty when no creed left the realm this tick.
+ */
+function lastSeatLosses(preSeats, postSeats) {
+  /** @type {Array<{deityId: string, from: string, to: string, lastSeat: boolean}>} */
+  const rows = [];
+  const base = preSeats && typeof preSeats === 'object' ? preSeats : {};
+  const next = postSeats && typeof postSeats === 'object' ? postSeats : {};
+  for (const id of Object.keys(next).sort(codepoint)) {
+    const prevSeats = Math.max(0, Math.floor(Number(base[id]?.seats) || 0));
+    const seats = Math.max(0, Math.floor(Number(next[id]?.seats) || 0));
+    if (!(prevSeats > 0 && seats === 0)) continue;
+    const curTier = isKnownTier(next[id]?.tier) ? next[id].tier : 'cult';
+    if (qualifyingTier(seats, curTier) !== curTier) continue; // the ladder still speaks
+    rows.push({ deityId: id, from: curTier, to: curTier, lastSeat: true });
+  }
+  return rows;
+}
+
+/**
  * The full per-tick pantheon write, post-apply (READ-LAST/WRITE-NEXT, mirroring the
  * dispositionStats seam): ratchet this tick's conversion wins/losses, re-count
  * seats from the PRE-TICK snapshot, then re-derive tiers with dwell + cap. Returns
  * the next pantheon and the tier changes (for realm-arc synthesis). Pure.
  *
+ * ⛔ DARK IS BYTE-IDENTICAL BY CONSTRUCTION. With `unseating` absent or false the
+ * returned `changes` IS `tiered.changes` — the same array, unwidened — so a caller that
+ * never passes the key cannot tell this member landed.
+ *
  * @param {Object} args
  * @param {Record<string, any>} [args.pantheon] - the current (pre-tick) pantheon, or undefined.
  * @param {any} args.snapshot - the PRE-TICK snapshot seats are aggregated from.
  * @param {Array<{deityId:string, outcome:'win'|'loss'}>} [args.faithDeltas]
- * @returns {{ pantheon: Record<string, any>, changes: Array<{deityId:string, from:string, to:string}> }}
+ * @param {boolean} [args.unseating] - WF-1c's gate, read BY NAME and strictly at the
+ *   kernel's call site. When true the returned `changes` is the codepoint-sorted union
+ *   of the tier changes and this tick's last-seat rows; `ratchetPantheonTiers` itself is
+ *   untouched either way, so its own callers see tier rows only.
+ * @returns {{ pantheon: Record<string, any>, changes: Array<{deityId:string, from:string, to:string, lastSeat?:boolean}> }}
  */
-export function advancePantheon({ pantheon = {}, snapshot, faithDeltas = [] }) {
-  let next = applyFaithDeltas(pantheon, faithDeltas);
-  next = applyPantheonSeats(next, countSeats(snapshot));
-  const tiered = ratchetPantheonTiers(next);
-  return { pantheon: tiered.ledger, changes: tiered.changes };
+export function advancePantheon({ pantheon = {}, snapshot, faithDeltas = [], unseating = false }) {
+  const preSeats = applyFaithDeltas(pantheon, faithDeltas);
+  const seated = applyPantheonSeats(preSeats, countSeats(snapshot));
+  const tiered = ratchetPantheonTiers(seated);
+  const changes = unseating === true
+    ? [...tiered.changes, ...lastSeatLosses(preSeats, seated)].sort((a, b) => codepoint(a.deityId, b.deityId))
+    : tiered.changes;
+  return { pantheon: tiered.ledger, changes };
 }
 
 export const PANTHEON_TUNING = Object.freeze({

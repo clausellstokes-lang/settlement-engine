@@ -117,7 +117,7 @@ export const KIND_SECTION = Object.freeze({
   generosity_credit_default: 'trade', generosity_purchase: 'trade', generosity_trade_overture: 'trade',
   // Of faith and custom.
   faith_foothold_recruited: 'traditions', faith_pact_formed: 'traditions',
-  pantheon_ascendancy: 'traditions', pantheon_twilight: 'traditions',
+  pantheon_ascendancy: 'traditions', pantheon_twilight: 'traditions', pantheon_extinction: 'traditions',
   tradition: 'traditions', tradition_change: 'traditions', moral_reckoning: 'traditions',
   belief_misjudgment: 'traditions', cause_lifecycle: 'traditions',
   stressor_birth_religious_conversion_fracture: 'traditions',
