@@ -17530,7 +17530,7 @@
     },
     {
       "id": "MF-T2B",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T2B.md",
       "verifiedBase": "2cdb87fac566b3d6803a0dce9d59df13f07c1c9e",
       "changeManifest": [
@@ -17631,6 +17631,50 @@
           "_note": "THE DORMANCY FENCE. It is describe.runIf(distExists), so a fresh worktree reports exit 0 on ZERO executed tests; the real discharge is post-build under VERIFY_DIST=1 and a pre-build skip may not be reported as a pass.",
           "path": "tests/build/townMapLazy.test.js",
           "symbol": "describe.runIf(distExists)"
+        },
+        {
+          "_note": "THE WIDENED WALL'S SOURCE. foundation.js sources its defaults from this constant rather than from a literal, which is what makes the re-parameterisation one edit instead of a sweep.",
+          "path": "src/domain/townMap/fabric/coordinateAbi.js",
+          "symbol": "export const MAX_WORLD_UNITS"
+        },
+        {
+          "_note": "THE ONE FUNCTION WHOSE SPELLING IS LOAD-BEARING. It reads the integer out of q6's own text; Math.round(v * 1e6) is wrong twice and A3 convicts it by counterexample with a positive control.",
+          "path": "src/domain/townMap/fabric/coordinateAbi.js",
+          "symbol": "export function worldQ"
+        },
+        {
+          "_note": "THE TIE RULE AS DATA, so a test asserts it rather than a comment claiming it.",
+          "path": "src/domain/townMap/fabric/coordinateAbi.js",
+          "symbol": "export const ROUNDING_RULE"
+        },
+        {
+          "_note": "The sandbox's TRIG_N, declared locally with an equality pin rather than dragging a 270-effective-line table in for one integer. Vetoable judgment, named in the packet.",
+          "path": "src/domain/townMap/fabric/coordinateAbi.js",
+          "symbol": "export const ANGLE_TABLE_SIZE"
+        },
+        {
+          "_note": "THE ODQ 310.3(7) RENAME, EXECUTED AT THE PORT. The bare name clipHalfPlane is never declared app-side; the later tranche's opposite-convention twin arrives as clipHalfPlaneAlongNormal.",
+          "path": "src/domain/townMap/fabric/exactGeometry.js",
+          "symbol": "export function clipHalfPlaneAgainstNormal"
+        },
+        {
+          "_note": "A BARREL BLOCK, named per module. No export star: a star makes the single-declaration law unenforceable and name ambiguity a runtime question.",
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "} from './coordinateAbi.js';"
+        },
+        {
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "} from './exactGeometry.js';"
+        },
+        {
+          "_note": "THE DOMAIN MATRIX'S DESCRIBE TITLE, which is also a census key — renaming it moves suiteTitles and is never the cure for a red.",
+          "path": "tests/domain/townMapCoordinateAbi.test.js",
+          "symbol": "MF-T2B versioned integer coordinate ABI"
+        },
+        {
+          "_note": "THE REPLAY COMPANION'S DESCRIBE TITLE, likewise a census key.",
+          "path": "tests/property/townMapCoordinateAbiDeterminism.test.js",
+          "symbol": "MF-T2B coordinate-ABI determinism"
         }
       ],
       "acceptanceCases": [

@@ -1,6 +1,6 @@
 # Town cartography / MF-T2B — the versioned integer ABI and the exact-geometry core
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** 1
 - **Verified base:** `claude/composite-r4` at `2cdb87fac566b3d6803a0dce9d59df13f07c1c9e`
 - **Last revalidated:** 2026-08-21 at `7cb2c730` (the DRAFT tip) by lane TE-T2B — the whole §4
@@ -394,7 +394,7 @@ canonical. A3 executes both.
 | ID | Case | Fixture/input | Required observation | Test home |
 |---|---|---|---|---|
 | **A1** | Main behavior — the widened envelope accepts an ABI-scale quantum, and still refuses past the envelope | `requireCanonicalInt(1286630000, 'q')`, `requireCanonicalInt(-1286630000, 'q')`, `requireCanonicalInt(MAX_WORLD_UNITS + 1, 'q')` | the first two return their value; the third still throws, naming the new range — so the widening is a re-parameterisation and not the removal of a wall | domain |
-| **A2** | Dormancy — nothing consumes it | a source scan of `src/` for importers of either new leaf, outside `src/domain/townMap/fabric/` | **zero** importers; and `tests/build/townMapLazy.test.js` green POST-BUILD under `VERIFY_DIST=1` | domain |
+| **A2** | Dormancy — nothing consumes it | a source scan of every `.js`/`.jsx` under `src/` for the two leaves' **bare basenames**, outside `src/domain/townMap/fabric/` | **zero** references; the scan's four known in-directory hits asserted FIRST as the guard-the-guard arm; and `tests/build/townMapLazy.test.js` green POST-BUILD under `VERIFY_DIST=1` | domain |
 | **A3** | Counterforce — the obvious spelling is convicted by counterexample, with a positive control | `v = -1/128`, an exactly representable double whose sixth decimal is an exact tie, AND its positive twin `+1/128` | `worldQ(-1/128)` is **−7813** (from `q6`'s `-0.007813`) while `Math.round(v * 1e6)` is **−7812** — they DISAGREE; on `+1/128` both are **7813** — they AGREE. The divergence is the SIGN RULE, and `ROUNDING_RULE.tieBreak === 'HALF_AWAY_FROM_ZERO'` names which one is canonical | domain |
 | **A4** | Boundary / refusal | `worldQ(Infinity)`, `worldQ(NaN)`, `withinAbiBounds(MAX_WORLD_UNITS + 1)`, `heightQ()`, `pointQ(null)` | `null`, `null`, `false`, **throws** naming SPEC §10.16's status override, `null` — and `COORDINATE_ABI.contentHash` / `provenanceRef` / `unitRegistryRef` are `null`, named **ABSENT rather than stubbed** | domain |
 | **A5** | Idempotency / replay | every function called twice on the same input; `canonicalBytes` over a fixed roster | byte-identical both times; **no `Date`, `Math.random`, `Intl`, `toLocale`, `performance` or `crypto` reachable** from either leaf, proved by source scan with a positive control | property |
@@ -412,6 +412,15 @@ AND its exception set, both as positives**, so neither can be discovered later a
 ⭐⭐ **A7 IS THIS PACKET'S CENTRAL CLAIM.** Widening an acceptance range changes which inputs
 THROW; it cannot change the representation of an input that was already accepted. ⛔ **A moved
 digest is therefore a STOP, not a re-record.**
+
+⭐⭐ **AND A2'S FIRST SPELLING UNDER-CONVICTED, WHICH ONLY THE MUTATION SWEEP COULD SHOW.** The
+scan keyed on `./<basename>` — the specifier every LAWFUL in-directory importer happens to write —
+so its guard-the-guard arms passed green while a planted consumer importing
+`../townMap/fabric/coordinateAbi.js` walked straight through the dormancy pin. The cure is the
+BARE basename: it can only ADD a file to the list and never remove one, so the scan over-convicts
+loudly (a mention in prose counts) and can never under-convict silently, which is the only
+direction of error a dormancy pin may have. **The eight-mutant sweep in §10 is not decoration; it
+is the arm that found this.**
 
 ⛔ **Anchor law:** A2, A4 and A5 assert absences. Each carries a `tests/helpers/anchoredNegatives.js`
 call **by name on the same line**, or `// anchored: <why this cannot go vacuous>` on the assertion
@@ -476,6 +485,22 @@ sh scripts/gate-mutex.sh --run -- npx vitest run \
 # so on a fresh worktree it SKIPS and reports exit 0 on ZERO executed tests. Build first, then:
 VERIFY_DIST=1 npx vitest run tests/build/townMapLazy.test.js ; echo TRUE_EXIT=$?
 
+# ⭐ THE REMOVING-POWER SWEEP — eight mutants, each planted in a host it PARSES in, each
+# convicting a NAMED arm, each restored digest-exact. The sweep opens by asserting the PRISTINE
+# tree is GREEN: without that control an all-mutants-red log is indistinguishable from a broken
+# runner, which is exactly how this lane's first spelling failed (it passed a reporter name vitest
+# 4.1.8 does not have, so every "conviction" was a reporter-load failure over zero collected tests).
+#   M1 worldQ := Math.round(v*1e6)          -> A3 + A4 + A6
+#   M2 requireCanonicalInt defaults 0..1000 -> A1 + A7
+#   M3 heightQ returns 0                    -> A4
+#   M4 contentHash := 'pending'             -> A4
+#   M5 a consumer outside the fabric dir    -> A2
+#   M6 a clock read planted in a leaf       -> A5
+#   M7 ANGLE_TABLE_SIZE := 512              -> A6
+#   M8 FABRIC_COORDINATE_ABI moves          -> A7
+# ⛔ Restore by BYTE COPY verified with `cmp` — never the `git checkout --` family the shared-tree
+# protocol forbids.
+
 # Sealed receipt and exact-state handoff; neither is landing authority
 npm run check:packet -- MF-T2B
 npm run implementation:resume -- MF-T2B
@@ -525,24 +550,100 @@ next wave.
 
 ## 12. Completion receipt
 
-- Base SHA:
-- Dispatch bundle and seal identity:
-- Port-source SHA-256 re-check, verbatim:
-- Final commit or working-tree state:
-- Exact changed files and effective-line deltas against the §3 budget:
-- Acceptance cases A1–A7:
-- ⭐ **A7 untouched-pin control**: the 12 suites, their pass counts, and the statement that no
-  digest literal was edited:
-- ⭐ **The before/after equality over every fabric-touching test file**:
-- Anchor-walker preflight exit:
-- Focused commands, exits, and counts:
-- Census before → after, and `parked`:
-- Sealed per-step receipt and exact-state resume status:
-- Both typecheck configurations, named with their windows:
-- Wave-end gate stages actually executed (17-step `&&` chain — say which ran):
-- Base-versus-wave failure identity diff:
-- Dormancy result (`townMapLazy` POST-BUILD under `VERIFY_DIST=1`, and the zero-importer scan):
-- Generated artifacts: `NONE`
-- Deviations: `NONE | STOP`
-- Out-of-scope observations, without investigation:
-- Judgment calls:
+Executed by lane TE-T2B in its own detached worktree. Every figure below was captured in-shell;
+none is inherited from the compile, from the capsule, or from a sibling lane.
+
+- **Base SHA:** `2cdb87fac566b3d6803a0dce9d59df13f07c1c9e`. Lifecycle: DRAFT `7cb2c730` → READY
+  `e6e261a8` → implementation `db2e386f` → LANDED (this commit).
+- **Dispatch bundle and seal identity:** none minted. `check:packet` and `implementation:resume`
+  both refuse a non-READY packet by design — *"sealed packet evidence is an inner loop; `npm run
+  check` remains the landing gate"*, TRUE_EXIT=2 on each — and the sealed inner loop could not have
+  measured a tree that did not yet hold the deliverable. The landing gate is the full check chain.
+- **Port-source SHA-256 re-check, verbatim** (re-executed at the base AND again at the DRAFT tip,
+  identical both times):
+  `123f3c17ebd42da5223216f0029617706db49b3de7ab602acd6edcf72a2c8404  coordinateAbi.js` ·
+  `c40c75b1fff4dd7393677f18e5b755dfb2a7fe17f4bc94a2a30f97621c78ed6e  fabricGeometry.js`.
+  Family preamble re-hashed to `6670a046…192b` — matching.
+- **Final state:** working tree CLEAN at the LANDED tip.
+- **Changed files and effective lines against the §3 budget:**
+
+  | file | effective | budget |
+  |---|---:|---:|
+  | `coordinateAbi.js` (new) | **95** | ≤250 per leaf |
+  | `exactGeometry.js` (new) | **169** | ≤250 per leaf |
+  | `foundation.js` | 143 → **144** (`+1`) | ≤6 delta |
+  | `fabric/index.js` | 101 → **112** (`+11`) | ≤14 delta |
+  | **total new/changed production** | **276** | ≤400 |
+
+- **Acceptance cases A1–A7: all seven pass.** `tests/domain/townMapCoordinateAbi.test.js` +
+  `tests/property/townMapCoordinateAbiDeterminism.test.js` → **2 files, 7 tests passed**,
+  TRUE_EXIT=0. Each arm is proven REMOVABLE by an eight-mutant sweep (§10): every mutant
+  `node --check` clean in its host, every conviction attributed to a NAMED failing arm, every
+  restore verified by `cmp`, and pristine-green and clean-re-run controls both 7/7.
+- ⭐ **A7 untouched-pin control:** the twelve digest-pin suites, **12 files / 74 tests passed**,
+  TRUE_EXIT=0 — byte-identical to the capture taken before the first edit. `git diff` over those
+  twelve files is **empty**: not one digest literal was edited. The working-tree pin re-census
+  still reads **157 literal pins across 12 files, 118 distinct values**.
+- ⭐ **The before/after equality over every fabric-touching test file:** 28 files / 142 tests,
+  identical in both captures — 12 files/74 tests, 8/58, 8/10. This is what turns "widening is
+  byte-neutral" from an argument into a measurement: the widening changes which inputs a shared
+  validator REFUSES, and a refusal pin lives wherever a fixture is out of range.
+- **Anchor-walker preflight:** `negativeAssertionAnchor.walker` **9 passed**, TRUE_EXIT=0. Both new
+  files sit at their ceiling of zero.
+- **Focused commands:** `eslint` over the six manifest paths TRUE_EXIT=0 · the four lint walkers
+  (census, anchor, single-declaration, mutation-coverage) **4 files / 55 tests passed**,
+  TRUE_EXIT=0 · single-declaration law green with the fabric at **20 files / 128 distinct exported
+  names / 0 duplicates**, up from 18 / 94 / 0.
+- **Census before → after:** `2485 / 364 / 2121 / 20611 / 5768` → `2487 / 364 / 2123 / 20618 /
+  5770`. **`parked` unmoved at 364.** The walker reached and cleared `suiteTitles` — **33 passed
+  (33)**. The arm is proven non-vacuous in both directions by planted figures that convict with
+  the LIVE value named: `expected 2487 to be 2486` on `files` and `expected 20618 to be 20617` on
+  `titles`. ⚠ The titles delta is **+7**, corrected from the compiled draft's +6 (§9).
+- **Both typecheck configurations, named with their windows:** `typecheck:ratchet`
+  (`tsconfig.full.json`) — **173 errors, ceiling 173**, exactly at floor. `typecheck:domain:strict`
+  (`tsconfig.domain-strict.json`) — **1134 errors, ceiling 1134**, exactly at floor. The strict
+  ratchet is PER-FILE with an implicit zero for a new file, so both new leaves are strict-clean.
+- **Wave-end gate:** run at the LANDED tip by the executing lane and recorded in
+  `laneTET2B-receipt.md` with a per-step `TRUE_EXIT` rather than the `&&` chain's blackout. ⚠ The
+  packet is not re-opened to paste those figures in: amending it after the gate sealed the tip
+  would leave the receipt describing bytes the gate never saw.
+- ⭐ **Dormancy — EXECUTED POST-BUILD, never a skip.** `tests/build/townMapLazy.test.js` is
+  `describe.runIf(distExists)`; on a fresh worktree it reports TRUE_EXIT=0 on **zero executed
+  tests**, and this lane refused to report that as a discharge. After `npm run build`
+  (TRUE_EXIT=0, 314 static route documents): `VERIFY_DIST=1 npx vitest run` → **3 passed (3)**,
+  TRUE_EXIT=0, all three arms including the anti-vacuity arm. **And a forensic zoom past the
+  fence's own fingerprint:** the entry static closure is 8 chunks, and every
+  minification-surviving string literal unique to these two leaves — `COORDINATE_ABI`,
+  `HALF_AWAY_FROM_ZERO`, `DOMAIN_SEPARATED_CANONICAL_BYTES`, `CCW_OUTER_CW_HOLE`,
+  `plan-q1-0-1000-v1`, the `heightQ` refusal text — appears in **0 of those 8 chunks and in a lazy
+  chunk elsewhere in `dist/`**. The absence is therefore dormancy rather than an absent build.
+  The zero-importer scan (A2) is green with its four in-directory anchors asserted first.
+- **Generated artifacts:** `NONE`.
+- **Deviations:** `NONE`. No STOP condition fired. No digest moved, no version string moved, no
+  ratchet/baseline/budget/ceiling was raised, no tuning constant was touched, `heightQ()` still
+  throws, and no member outside this one held a shared D3a change path.
+- **Out-of-scope observations, without investigation:**
+  1. `src/domain/townMap/index.js:14` is `export * from './fabric/index.js';` — a star export at
+     the HEAD barrel, while preamble §P2.4 forbids star exports in the FABRIC barrel. It is the
+     only star in that file, so no name is made ambiguous (measured: zero collisions between this
+     member's 34 arriving names and that file's 118 explicit exports), and it is why no head-barrel
+     edit is owed. Recorded, not investigated.
+  2. `vitest 4.1.8` has no `basic` reporter: passing `--reporter=basic` exits non-zero WITHOUT
+     collecting a test. Any harness that reads that exit as a test result is measuring nothing.
+  3. A foreign stash sits in the shared repository (`On analytics-intelligence-layer:
+     generation-tuning fixes`). Not this lane's; untouched.
+- **Judgment calls** (each vetoable, each recorded rather than smuggled):
+  1. **`ANGLE_TABLE_SIZE = 1024` is declared locally** rather than porting `trigTable.js` for one
+     integer, and pinned by equality in A6. Chose the local declaration over a third leaf and 270
+     effective lines. The table ports with the geometry that reads it.
+  2. **The bare name `clipHalfPlane` is never declared app-side**, not even once. MF-T2A's law
+     would permit one declaration; this packet forbids even that, because the defect is that the
+     bare name carries no convention.
+  3. **The port preserves the sandbox's export posture** — `crossParams`, `inTriangleStrict` and
+     `triPairArea` stay module-private. Chose faithfulness to the source's encapsulation over
+     publishing all nineteen declarations.
+  4. **A6 asserts the identity AND its exception set**, rather than the unqualified identity the
+     compiled draft asked for. Chose a table that spans zeros honestly plus a counted exception
+     over a table trimmed to agree with its deriver.
+  5. **The two acceptance files are `CREATE` rows, not `TEST` rows.** Measured, not assumed:
+     `TEST` reds `validate:packets` at DRAFT because a TEST path must exist at every status.
