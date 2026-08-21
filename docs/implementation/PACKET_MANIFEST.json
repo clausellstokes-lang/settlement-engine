@@ -17769,7 +17769,7 @@
     },
     {
       "id": "MF-T2C",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T2C.md",
       "verifiedBase": "fb80e32f03564e6edcbad4bf37de27694c2fe986",
       "changeManifest": [
@@ -17892,6 +17892,26 @@
           "_note": "THE DORMANCY FENCE. It is describe.runIf(distExists), so a fresh worktree reports exit 0 on ZERO executed tests; the real discharge is post-build under VERIFY_DIST=1 and a pre-build skip may not be reported as a pass.",
           "path": "tests/build/townMapLazy.test.js",
           "symbol": "describe.runIf(distExists)"
+        },
+        {
+          "_note": "THE DELIVERABLE. Added at the flip to LANDED, never at READY: the validator resolves every row against the LIVE tree at EVERY status, so a symbol the deliverable CREATES cannot be named before it exists. Point location is the third leg of ODQ 287.8, which both codex packets list as an explicit non-goal.",
+          "path": "src/domain/townMap/fabric/dcelEmbedding.js",
+          "symbol": "export function locateFace"
+        },
+        {
+          "_note": "THE CLOSED FACE-KIND VOCABULARY. HOLE_CYCLE is defensive under the kernel's noded-input precondition and no test claims it fires; the list is still published so a consumer reads the vocabulary rather than guessing it.",
+          "path": "src/domain/townMap/fabric/dcelEmbedding.js",
+          "symbol": "export const PLANAR_EMBEDDING_FACE_KINDS"
+        },
+        {
+          "_note": "THE DOMAIN MATRIX'S DESCRIBE TITLE, which is also a census key — renaming it moves suiteTitles and is never the cure for a red.",
+          "path": "tests/domain/townMapDcelEmbeddingExtension.test.js",
+          "symbol": "MF-T2C planar-embedding extension"
+        },
+        {
+          "_note": "THE REPLAY COMPANION'S DESCRIBE TITLE, likewise a census key.",
+          "path": "tests/property/townMapDcelEmbeddingDeterminism.test.js",
+          "symbol": "MF-T2C planar-embedding determinism"
         }
       ],
       "acceptanceCases": [

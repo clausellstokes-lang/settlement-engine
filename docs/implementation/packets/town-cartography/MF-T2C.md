@@ -1,6 +1,6 @@
 # Town cartography / MF-T2C — the embedder extended onto the ABI (BigInt, components, degeneracy, point location)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** 1
 - **Verified base:** `claude/composite-r4` at `fb80e32f03564e6edcbad4bf37de27694c2fe986`
 - **Base posture:** the whole §4 preflight was re-executed at that base; every figure below is a
@@ -521,4 +521,101 @@ next wave.
 
 ## 12. Completion receipt
 
-*(filled at the flip to LANDED)*
+**Base and lifecycle.** Built on a detached ref at `fb80e32f03564e6edcbad4bf37de27694c2fe986` in
+the lane's own worktree with its own `node_modules` (`npm ci`, TRUE_EXIT=0). Commits:
+`a615cfdd` (DRAFT) → `3482a063` (READY) → `0918f8d3` (implementation) → this one (LANDED). No ref
+was moved by the lane; the chair CASes. Working tree at the LANDED tip: clean apart from this
+commit's own three doc files.
+
+**Hashes, recomputed at the base rather than quoted.** The family preamble is
+`0706aad6a84e4f74ec47602e9e3222fc398c4c8864bb38c79ac480c2a11db4ed` (`git show fb80e32f:… |
+shasum -a 256`) — no third re-stamp occurred. The port source `fabricDcel.js` re-hashed to
+`01da024a8655ce9e468a75a53ffc49a4e28508d2d7a9400cbe2dbf1b6d81197b`, matching the header table.
+Neither is a STOP.
+
+**Changed files and effective lines** (eslint's own `Linter`, never `wc -l`): `dcelEmbedding.js`
+169 → **267**, `dcel.js` 89 → **93**; **118 effective lines added and 23 removed**, i.e. 141
+touched of the 220 budget, inside the compile's 120–160 estimate. `dcelEmbedding.js` remains far
+under the plain `src/domain/**` 800 ceiling.
+
+**The §4 step-7 captures against the UNEDITED kernel, verbatim** — no pin was written before them:
+
+```
+A2 abi-triangle            THROW "DCEL vertex has an angular tie"     (Number cross 0, BigInt -1n)
+A2 true-collinear-tie      THROW "DCEL vertex has an angular tie"
+A3 open-chain              THROW "DCEL face must have nonzero signed area"
+A4 two-components          faces=4 exteriors=2 under ONE singular outerFaceId
+A5 nested                  faces=4 exteriors=2; the singular field names the INNER ring's walk
+A8 grid-30 (1860 bounds)   V=961 E=1860 F=901  V-E+F=2   [646.07 ms]
+```
+
+**A1–A8 executed:** 2 files / 8 tests, TRUE_EXIT=0. Every figure in §9's observation column is a
+printed result from the edited kernel, not a prediction.
+
+**The untouched-pin control:** the twelve digest-pin suites gave **12 files / 74 tests** both
+before the first edit and after the last, with per-file counts identical row for row; no pin file
+appears in the change set at all. Mutant M7 proves that green can red.
+
+**Mutants: eight planted, eight convicted, eight restored digest-exact** (`cmp` verified, never
+`git checkout --`), with a pristine-green control before and a clean re-run after. M1→A2, M2→A3,
+M3→A4+A5, M4→A6, M5→A1, M6→A1, M7→the exact-key pin, M8→A5+A6.
+
+**Census before → after, all five re-derived together by placeholder-and-convict:**
+
+```
+2488 / 364 / 2124 / 20655 / 5776   →   2490 / 364 / 2126 / 20663 / 5778
+delta  +2 / +0 / +2 / +8 / +2
+```
+
+`parked` did not move, and conviction 2 is the executed proof of that rather than an assumption.
+The named interior red was observed at conviction 1 and cleared; the census walker then ran
+1 file / 33 tests, TRUE_EXIT=0. The `suiteTitles` and `titles` deltas were additionally proved
+away from the walker by counting `describe(` and `test(` across the whole `tests/` change set
+including the untracked files: 1+1 and 7+1, with zero added to any tracked test file.
+
+**Both typecheck configurations, by name and window:** `typecheck:ratchet` (`tsconfig.full.json`)
+173 errors against ceiling 173, and `typecheck:domain:strict` (`tsconfig.domain-strict.json`) 1134
+against ceiling 1134 — identical before and after, so the member added no type debt and needed no
+widening. Neither baseline carries a `townMap` key, so the allowance was zero in both.
+
+**Anchor preflight:** it CONVICTED on the first run — one un-anchored negative at line 124 of the
+new domain matrix, ceiling zero — and was cured with a stated reason rather than a deleted
+assertion. Re-run TRUE_EXIT=0.
+
+**Dormancy, POST-BUILD only:** `npm run build` TRUE_EXIT=0; without `VERIFY_DIST` the fence
+reports `2 passed | 1 skipped` and is NOT a discharge; under `VERIFY_DIST=1` it reports
+**3 passed**, TRUE_EXIT=0. Forensic zoom over the fence's own BFS: the entry static closure is
+**8 js chunks of 524**; `HOLE_CYCLE`, the angular-tie message and `innerBoundaryHalfEdgeIds` each
+appear in exactly ONE lazy chunk and in ZERO entry chunks, with `createElement` and `useState`
+asserted present in the closure as scanner controls. ⚠ `OUTSIDE_ABI`, `ENCLOSED_BY_EXTERIOR` and
+`PLANAR_EMBEDDING_FACE_KINDS` are absent from the WHOLE bundle because `locateFace` has no
+consumer yet, so those three rows prove nothing and are set aside; the three that ship are the
+evidence.
+
+**The MF-T2A sweep plant still applies.** The exact `perl` substitution of entry 28a was run
+against the edited file in a scratch copy: one occurrence planted, and `node --check` PARSES — so
+the plant remains a live second declaration rather than the J-TET2A-1 parse-error class. The
+anchor line survives byte-identical at column zero in the committed blob and
+`CURRENT_MAP_TRADITION_ID` count in the host is 0.
+
+**Measured wall clock, as receipt evidence only — no credited test asserts it:** the A8 grid at
+1,860 boundaries took 646.07 ms on the unedited kernel and 174.91 ms on the repaired traversal
+(3.7× at this size); the ABI-triangle embed is 1.44 ms. ⚠ The compile's 12.7× was measured at
+2,112–8,320 boundaries where the quadratic term dominates far harder; these are consistent
+measurements at different sizes, not the same measurement.
+
+**Generated artifacts:** `NONE`. **Deviations:** none that reached a STOP. One compile figure was
+corrected at the base and recorded (§4). **Out-of-scope observations, recorded and not
+investigated:** `docs/implementation/INDEX.md` is edited by every packet landing but reserved in
+only four historical, terminal `changeManifest`s; this member follows the MF-T2A/MF-T2B precedent
+of adding its row without reserving the path. `npm run check:packet` and
+`npm run implementation:resume` both exit 2 from a detached executor worktree because they require
+`git symbolic-ref HEAD`; neither is landing authority, and the tool says so itself.
+
+**Judgment calls, each vetoable:** the four §1 resolutions (extend-in-place with a legacy
+projection at the seal; `EXTERIOR` kept while `HOLE_CYCLE`/`DEGENERATE` arrive unchanged;
+`locateFace` takes ABI quanta; the angular-tie throw preserved and made exact), plus the two this
+lane added — treating the corrected nested-fixture note as a re-derivation rather than a §11 STOP,
+because the base is byte-identical to the compile tip and the difference was a probe's
+mis-zipping; and following the landed family precedent on the INDEX row rather than minting a new
+path reservation.
