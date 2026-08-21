@@ -15362,7 +15362,7 @@
     },
     {
       "id": "MF-T1V",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T1V.md",
       "verifiedBase": "838710e93665d743a7a3d7c517f072fa91e192cf",
       "changeManifest": [
@@ -15483,7 +15483,12 @@
         { "path": "src/domain/townMap/fabric/projection.js", "symbol": "export function firstSliceScreenDrawOps" },
         { "path": "src/domain/townMap/fabric/projection.js", "symbol": "export function firstSliceProjectionToSvg" },
         { "path": "src/domain/townMap/townMapDraw.js", "symbol": "export function drawListToSvg" },
-        { "path": "src/design/townMapExportPalette.js", "symbol": "export const EXPORT_PALETTE" }
+        { "path": "src/design/townMapExportPalette.js", "symbol": "export const EXPORT_PALETTE" },
+        { "path": "src/domain/townMap/fabric/massingProjection.js", "symbol": "export const FIRST_SLICE_MASSING_PROJECTION_LAW_VERSION" },
+        { "path": "src/domain/townMap/fabric/massingProjection.js", "symbol": "export function projectOrthogonalCrossFirstSliceMassingFixedSurvey" },
+        { "path": "src/domain/townMap/fabric/projection.js", "symbol": "export function projectResolvedFirstSliceFixedSurvey" },
+        { "path": "src/domain/townMap/fabric/index.js", "symbol": "projectOrthogonalCrossFirstSliceMassingFixedSurvey," },
+        { "path": "tests/domain/townMapMassingProjection.test.js", "symbol": "MF-T1V roster-aware fixed-survey massing projection" }
       ],
       "acceptanceCases": [
         { "id": "A1", "case": "The exact two-body bundle projects to one frozen FIRST_SLICE_PROJECTION with the fixed light, 18 ordered primitives/draw ops, the exact kind census, a four-vertex rectilinear shadow and a ten-vertex composite shadow containing [850,670]." },

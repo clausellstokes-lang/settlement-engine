@@ -1,15 +1,18 @@
 # First-Slice Projection / MF-T1V — roster-aware fixed-survey projection
 
-- **Status:** READY
+- **Status:** LANDED
+- **Landed commit:** `66dbed7c41f9bafc48e738badd7c053e3009f649`
 - **Packet version:** `1`
 - **Verified base:** `codex/first-map-vertical-slice` at `838710e93665d743a7a3d7c517f072fa91e192cf`
-- **Last revalidated:** `2026-08-20` at `838710e93665d743a7a3d7c517f072fa91e192cf`
+- **Last revalidated:** `2026-08-20` at `66dbed7c41f9bafc48e738badd7c053e3009f649`
 - **Depends on:** MF-T1M at `bffd1bcb7a8bc2087d467e6dc73de42641f717e2`; MF-VS1 at `7c34f50fd99fcf34c478ec56cbae42240bcd7486`; MF-SH1 at `3cf12008e1d4ea7411a61f59b8e633a7b993dd1f`
 - **Collision group:** `town-map-first-slice-massing-projection`
-- **Commit authority:** this READY packet alone; exact manifest only
+- **Commit authority:** LANDED; do not redispatch
 - **Baseline posture:** MF-T1M landed and terminalized on a clean tree; its focused suites passed `18/18`, governance walkers passed `42/42`, and terminal governance validates `126` packets with zero READY before this promotion
 
 > Only this READY implementation packet defines coding authority. Design files, queues, progress notes, commit subjects, and briefs cannot expand that authority.
+
+> This packet landed at the commit above. It is terminal and must not be redispatched.
 
 ## 1. Reconciled authority
 
@@ -285,8 +288,27 @@ Stop on any bundle accepted without complete MF-T1M replay; caller-bundle use af
 ## 12. Completion receipt
 
 - Base SHA: `838710e93665d743a7a3d7c517f072fa91e192cf`
-- Dispatch bundle and seal identity: `PENDING`
-- Final commit or working-tree state: `PENDING`
-- Effective-line ledger: `PENDING`
-- A1-A6 evidence: `PENDING`
-- Adjacent discoveries: `PENDING`
+- Promotion commit: `4cdeec49871e235fdb8cd8ab7c9a00a1ba04ad83`
+- Dispatch capsule / packet / seal: `b5f25e1de9f545a960a774bac801accb027b3e3a321e64bcbd766556213ece1a` /
+  `783acba7d130720e8a7f4c9f188b4e33d732c94b2d8e3dba0973bc2d7efc3836` /
+  `b6ad29b5d4e77554924290e3f5109b7f0e4516f1398b7f5c88629dc7960111e4`.
+- Final implementation commit: `66dbed7c41f9bafc48e738badd7c053e3009f649`; exactly the five declared paths.
+- Effective-line ledger: `massingProjection.js 38/100`; `projection.js +51/55`, final
+  `279/312`; `index.js +4/4`; total production `93/159`; new test `301/330`;
+  sovereignty census `2482/364/2118/20582/5765` → `2483/364/2119/20588/5766`.
+- A1-A6 evidence: focused behavior `5` files / `21` tests; governance walkers
+  `2` files / `42` tests; exact `18`-op and shadow census; built-in/custom PUBLIC
+  byte parity; hidden-ID PUBLIC stability; DM roster binding; legacy PUBLIC/DM
+  hashes `scene-v1-9820c3f2273a313f22ff9246c65e1891` /
+  `scene-v1-1945e8a01df6c24788c3393c4e3c452d`; accessor-mutation replay tests green.
+- Static and packet gates: targeted ESLint clean; full type `173/173`; strict
+  domain `1134/1134`; packet session `PASSED` all eight steps with no failed,
+  blocked or remaining step; independent bounded audit `0 P0 / 0 P1`.
+- Whole-tree landing gate: exit `0`; `28,628` tests with the inherited `11`
+  known failures at ceiling; ESLint `0` errors / `29` warnings; build `26.64s`;
+  prerender `314` routes; strict dist `51` files / `409` tests with zero missing,
+  duplicate, failed, non-run or uncollected rows.
+- Adjacent discoveries: legacy v1 document creation still does not provide the
+  roster-aware persistence contract, and the screen/SVG adapters remain headless.
+  Both are deliberately deferred; no sampler/dossier/seed/fantasy/UI authority
+  was introduced.
