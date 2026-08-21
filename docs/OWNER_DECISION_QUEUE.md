@@ -13931,3 +13931,36 @@ recommended. Implementation, per item:
   fifth commit with its §314.2 re-stamps, so one landing and one gate cover the
   amendment. NOTICES still lands last (§323.1). RS-5 stays paused until the remaining
   terminals clear.
+
+## §325 — COLLECTION + CAS: MF-T2B LANDED REBASED, WITH THE FENCE AMENDMENT; TWO NEW HAZARD CLASSES (2026-08-21 ~15:58)
+
+- **TE-T2B's rebased landing collected.** Tip b25907f9 — five commits on cdfe5a96
+  (DRAFT → READY → the dormant integer ABI + exact-geometry core → LANDED → the
+  MF-PREAMBLE amendment with both citers re-stamped), clean tree. The sweep is
+  UNINTERRUPTED this time: all eighteen steps green in one sequential run (15m32s at
+  load 4); the §322 asterisk is discharged by absence — the load diagnosis confirmed.
+  validate:packets 133 packets; ratchet ceiling held at 11/28,665. §324.1's CAS is
+  superseded in sequence: claude/composite-r4 moved cdfe5a96 → b25907f9 (CAS on old
+  value; read back). Tip 28565244 is superseded and was never CAS'd.
+- **§325.1 Chair note corrected by the lane, honestly:** my §324.5 message said WF-1C
+  touched no map bytes — true of src/, but three shared META files (the census walker,
+  PACKET_MANIFEST.json, INDEX.md) overlapped. The lane measured before picking and
+  resolved by RE-DERIVATION, not hand-merge: manifest re-appended by its asserting
+  script (every pre-existing row byte-identical), census re-executed.
+- **§325.2 NEW HAZARD CLASS — the census-tuple coincidence trap:** WF-1C's landed
+  titles figure EQUALLED T2B's own pre-rebase AFTER (same number, two meanings);
+  carrying the tuple across the rebase would have silently lost seven titles behind an
+  arithmetic that still closed. LAW: NEVER carry a census tuple across a rebase —
+  re-derive every figure by execution at the new base. Banked to memory.
+- **§325.3 NEW HAZARD CLASS — the intra-commit re-stamp stale:** the lane's first
+  re-stamp used a hash computed BEFORE its last preamble edit (the Amendments line),
+  staleing every citer inside the same commit. LAW (§314.2 extension): compute the
+  family-law hash AFTER the final edit of the landing, and verify each citer against
+  the live file, not the value computed mid-edit. Banked to memory.
+- **§325.4 The amended §P2.2 obligation was discharged against the member itself**
+  (post-build dormancy 3/3 under VERIFY_DIST; forensic zoom over all eight
+  entry-closure chunks). The lane's RAISED-1 (--reporter estate grep) was already
+  discharged by the chair at §322.4 — closed.
+- **§325.5 Slot order:** the NOTICES slot is now OPEN on b25907f9 (its agent messaged:
+  commit + the §323.2 OFL.txt rider + terminal + report tip). WF-1D continues building
+  slot-aware and lands after. RS-5 stays paused until BOTH remaining terminals clear.

@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~15:58 ET: MF-T2B LANDED REBASED — CAS cdfe5a96 → b25907f9 (§325);
+# uninterrupted 18/18 sweep; fence amendment + re-stamps carried; census-
+# coincidence + intra-commit re-stamp hazards banked. NOTICES slot OPENED on
+# b25907f9 (agent messaged). WF-1D building slot-aware. RS-5 still paused.
 # ⭐⭐ ~15:24 ET: WF-1C LANDED — CAS claude/composite-r4 2cdb87fa → cdfe5a96
 # (§324). TE-WF1D DISPATCHED on cdfe5a96 (carries the preamble batch + zero-
 # headroom amendment + re-stamps). T2B agent ordered to rebase onto cdfe5a96 +
