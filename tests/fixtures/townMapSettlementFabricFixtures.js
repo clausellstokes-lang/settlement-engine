@@ -1,4 +1,5 @@
 import {
+  COMPOSITE_SHAPE_LAW_VERSION,
   compileExplicitBuildingMass,
   compileOrthogonalCrossCadastralArrangement,
   compileOrthogonalCrossFirstSliceFabricRoot,
@@ -26,6 +27,7 @@ export const BOUNDARY_ARRANGEMENT_ID = 'cadastral-arrangement:settlement-cross:0
 export const PLANAR_DCEL_ID = 'planar-dcel:settlement-cross:001';
 export const PARCEL_REGISTRY_ID = 'parcel-registry:settlement-cross:001';
 export const FIRST_SLICE_FABRIC_ROOT_ID = 'first-slice-fabric-root:settlement-cross:001';
+export const FIRST_SLICE_MASSING_ROSTER_ID = 'first-slice-massing-roster:settlement-cross:001';
 
 export const SETTLEMENT_CELLS = Object.freeze([
   { cell: 'LOW_X_LOW_Z', blockId: 'block:settlement:low-x-low-z', edgeId: 'edge:settlement:low-x-low-z' },
@@ -187,4 +189,103 @@ export function makeSettlementMasses(planOverrides = {}) {
     return compileExplicitBuildingMass({ foundation, subdivision, spec, recipeSnapshot, origin });
   });
   return { foundation, subdivision, selectedPlots, masses };
+}
+
+/** @param {Record<string,unknown>} [planOverrides] */
+export function makeSettlementMassingRosterBundleInputs(planOverrides = {}) {
+  const fixture = makeSettlementFabricRoot(planOverrides);
+  const [buildingParcel, institutionParcel] = fixture.parcelRegistry.parcels;
+  const buildingRecipe = createSpatialRecipeSnapshot({
+    packageClass: 'BUILT_IN',
+    packageId: 'package:settlementforge-core',
+    packageVersion: '1.0.0',
+    entryId: 'recipe:settlement-gabled-range',
+    entryVersion: 1,
+    semanticTypeId: 'semantic:settlement-gabled-range',
+    spatialRole: 'BUILDING',
+  });
+  const institutionRecipe = createSpatialRecipeSnapshot({
+    packageClass: 'BUILT_IN',
+    packageId: 'package:settlementforge-core',
+    packageVersion: '1.0.0',
+    entryId: 'recipe:astronomers-college',
+    entryVersion: 1,
+    semanticTypeId: 'semantic:astronomers-college',
+    spatialRole: 'INSTITUTION',
+    geometryLaw: COMPOSITE_SHAPE_LAW_VERSION,
+  });
+  const origin = createCanonicalOrigin({
+    kind: 'BUILT_IN',
+    sourceId: 'package:settlementforge-core',
+    sourceVersion: '1.0.0',
+    contentHash: 'builtin-first-slice-massing-v1',
+  });
+  const buildingPlot = fixture.frontageSubdivision.plots
+    .find((plot) => plot.plotId === buildingParcel.parcelId);
+  const buildingSpec = {
+    buildingId: 'building:settlement-gabled-range:01',
+    semanticTypeId: 'semantic:settlement-gabled-range',
+    foundationRef: fixture.frontageSubdivision.foundationRef,
+    plotRef: buildingParcel.plotRef,
+    privacy: 'PUBLIC',
+    footprint: buildingPlot.fittedFootprint,
+    baseElevationQ: 0,
+    wallTopQ: 48,
+    roof: { kind: 'GABLE', eaveQ: 48, ridgeQ: 72, ridgeAxis: 'X' },
+    materials: { wallMaterialId: 'material:timber-frame', roofMaterialId: 'material:thatch' },
+    functionId: 'function:dwelling',
+    constructionOperationId: 'op:construct-settlement-gabled-range:01',
+  };
+  const attachment = {
+    buildingId: 'building:astronomers-college:01',
+    semanticTypeId: 'semantic:astronomers-college',
+    foundationRef: fixture.frontageSubdivision.foundationRef,
+    plotRef: institutionParcel.plotRef,
+    privacy: 'PUBLIC',
+    footprint: [[570, 530], [700, 530], [700, 660], [570, 660]],
+    baseElevationQ: 0,
+    wallTopQ: 50,
+    roof: { kind: 'GABLE', eaveQ: 50, ridgeQ: 80, ridgeAxis: 'X' },
+    materials: { wallMaterialId: 'material:dressed-stone', roofMaterialId: 'material:slate' },
+    functionId: 'function:astronomical-college',
+    constructionOperationId: 'op:construct-astronomers-college:01',
+  };
+  const institutionSpec = {
+    buildingId: attachment.buildingId,
+    semanticTypeId: attachment.semanticTypeId,
+    constructionOperationId: attachment.constructionOperationId,
+    attachment,
+    radialPart: {
+      partId: 'part:astronomers-college-tower',
+      role: 'TOWER',
+      attachmentAnchorQ: [700, 595],
+      plan: {
+        kind: 'CIRCULAR', centerQ: [700, 595], radiusQ: 60,
+        segments: 16, orientation: 'VERTEX_EAST',
+      },
+      vertical: { kind: 'CYLINDER', baseQ: 0, topQ: 130 },
+      roof: { kind: 'CONICAL', eaveQ: 130, apexQ: 300 },
+      materials: { wallMaterialId: 'material:stone', roofMaterialId: 'material:copper' },
+    },
+  };
+  const bodyInputs = [
+    { spec: buildingSpec, recipeSnapshot: buildingRecipe, origin },
+    { spec: institutionSpec, recipeSnapshot: institutionRecipe, origin },
+  ];
+  return {
+    ...fixture,
+    bodyInputs,
+    input: {
+      artifactId: FIRST_SLICE_MASSING_ROSTER_ID,
+      foundation: fixture.foundation,
+      frontageSubdivision: fixture.frontageSubdivision,
+      streetGeometry: fixture.geometry,
+      streetGraph: fixture.graph,
+      boundaryArrangement: fixture.arrangement,
+      planarDcel: fixture.dcel,
+      parcelRegistry: fixture.parcelRegistry,
+      firstSliceFabricRoot: fixture.fabricRoot,
+      bodyInputs,
+    },
+  };
 }

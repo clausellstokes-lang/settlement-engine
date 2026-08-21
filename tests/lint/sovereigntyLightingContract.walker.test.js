@@ -4828,7 +4828,11 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // 2,479/364/2,115/20,570/5,762 → 2,481/364/2,117/20,576/5,764. The domain
     // matrix contributes five titles and one suite; its determinism companion contributes
     // one title and one suite. Both files are credited; no parser door moved.
-    files: 2481, parked: 364, credited: 2117, titles: 20576, suiteTitles: 5764,
+    // ── RE-RECORDED 2026-08-20 BY MF-T1M, THE EXPLICIT MASSING ROSTER BUNDLE ──
+    // 2,481/364/2,117/20,576/5,764 → 2,482/364/2,118/20,582/5,765. The one
+    // credited domain file contributes the closed six-case A1-A6 denominator and one
+    // suite. Fixtures add no titles; no parser door or parked classification moved.
+    files: 2482, parked: 364, credited: 2118, titles: 20582, suiteTitles: 5765,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

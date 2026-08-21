@@ -45,12 +45,15 @@ export {
   CANONICAL_ORIGIN_KINDS,
   EXPLICIT_BUILDING_GEOMETRY_LAWS,
   EXPLICIT_BUILDING_MASS_LAW_VERSION,
+  INSTITUTION_SPATIAL_RECIPE_SCHEMA_VERSION,
+  SPATIAL_RECIPE_ROLES,
   bindBuildingOrigin,
   compileExplicitBuildingMass,
   compileOriginNeutralBuildingGeometry,
   createCanonicalOrigin,
   createSpatialRecipeSnapshot,
 } from './building.js';
+export { FIRST_SLICE_MASSING_ROSTER_LAW_VERSION, FIRST_SLICE_MASSING_ROSTER_SCHEMA_VERSION, compileOrthogonalCrossFirstSliceMassingRosterBundle } from './massingRoster.js';
 export {
   COMPOSITE_SHAPE_LAW_VERSION,
   PLAN_SHAPE_KINDS,

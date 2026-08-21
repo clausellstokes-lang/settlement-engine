@@ -16,6 +16,8 @@ import {
 
 export const EXPLICIT_BUILDING_MASS_LAW_VERSION = 'explicit-building-mass-v1';
 export const SPATIAL_RECIPE_SCHEMA_VERSION = 1;
+export const INSTITUTION_SPATIAL_RECIPE_SCHEMA_VERSION = 2;
+export const SPATIAL_RECIPE_ROLES = Object.freeze(['BUILDING', 'INSTITUTION']);
 export const CANONICAL_ORIGIN_KINDS = Object.freeze(['AUTHORED', 'BUILT_IN', 'CUSTOM', 'IMPORTED']);
 export const EXPLICIT_BUILDING_GEOMETRY_LAWS = Object.freeze([
   EXPLICIT_BUILDING_MASS_LAW_VERSION,
@@ -34,7 +36,7 @@ function requireVersion(value, label) {
  * Recipe identity is package-specific; recipe semantics are what the origin-neutral
  * geometry compiler consumes.
  * @param {{packageClass:string,packageId:string,packageVersion:string|number,entryId:string,
- *   entryVersion:string|number,semanticTypeId:string,geometryLaw?:string}} input
+ *   entryVersion:string|number,semanticTypeId:string,geometryLaw?:string,spatialRole?:string}} input
  */
 export function createSpatialRecipeSnapshot(input) {
   const source = requireCanonicalRecord(input, 'recipe snapshot');
@@ -53,10 +55,12 @@ export function createSpatialRecipeSnapshot(input) {
   if (!EXPLICIT_BUILDING_GEOMETRY_LAWS.includes(geometryLaw)) {
     throw new TypeError('recipe geometryLaw is not registered');
   }
+  const spatialRole = source.spatialRole === undefined ? 'BUILDING' : String(source.spatialRole);
+  if (!SPATIAL_RECIPE_ROLES.includes(spatialRole)) throw new TypeError('recipe spatialRole is not registered');
   return sealCanonicalArtifact({
     artifactKind: 'SPATIAL_RECIPE_SNAPSHOT',
     artifactId: `${packageId}:recipe:${entryId}:${entryVersion}`,
-    schemaVersion: SPATIAL_RECIPE_SCHEMA_VERSION,
+    schemaVersion: spatialRole === 'INSTITUTION' ? INSTITUTION_SPATIAL_RECIPE_SCHEMA_VERSION : SPATIAL_RECIPE_SCHEMA_VERSION,
     packageClass,
     packageId,
     packageVersion,
@@ -64,7 +68,7 @@ export function createSpatialRecipeSnapshot(input) {
     entryVersion,
     semantics: {
       semanticTypeId,
-      spatialRole: 'BUILDING',
+      spatialRole,
       geometryLaw,
     },
   });
