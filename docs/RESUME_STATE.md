@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~15:12 ET: TE-T2B TERMINAL @ 28565244 — CAS HELD behind WF-1C (§322.1);
+# on WF-1C's CAS message the T2B agent to rebase+re-gate (§322.2); MF-PREAMBLE
+# amendment deferred to ride T2B's landing with re-stamps (§322.3); estate
+# clean of vitest --reporter=basic (§322.4); T2C queues behind (§322.5).
 # ~15:08 ET: HANDOFF_CURRENT REFRESHED through §321 (the owed refresh) —
 # new CURRENT OVERRIDE block: sitting law, seals §299-§310, WF/MF machinery
 # §312-§321, in-flight lanes + RS-5 pause, ultracode probe, dockets.

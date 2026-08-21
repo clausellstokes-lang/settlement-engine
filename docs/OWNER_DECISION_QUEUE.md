@@ -13828,3 +13828,37 @@ recommended. Implementation, per item:
    packet's own step-8 STOP) with the preamble batch riding
    its landing. TC-WF1D's compile-time base remains valid by
    its own blob-identity checks.
+
+## §322 — COLLECTION: TE-T2B TERMINAL (map port member 2); CAS HELD BEHIND WF-1C (2026-08-21 ~15:12)
+
+- **Receipt:** laneTET2B-receipt.md (session scratchpad 6298872d). Tip **28565244** — four
+  commits on claude/composite-r4@2cdb87fa in t2b-tree (detached, clean; no ref moved by the
+  lane). DRAFT→READY→implementation→LANDED with validate:packets green at every transition
+  (131→132 packets). The versioned integer ABI + the 19-declaration exact-geometry closure
+  arrive dormant, character-identical to the sealed source; requireCanonicalInt default
+  bounds widen to ±9007199254; the §310.3(7) rename ships as clipHalfPlaneAgainstNormal.
+  276 effective lines against the 400 cap. Census 2485/364/2121/20611/5768 →
+  2487/364/2123/20618/5770 with parked held; both typecheckers at floor; smoke:boot 524/524.
+- **Gate:** all eighteen steps green at the tip. One asterisk, honestly reported: step 15
+  red once under RS-5's load (load average 267 — distributionEnvelopes.test.js builds 300
+  settlements in a 60s beforeAll), then green re-executed at the same unchanged tip; the
+  suite passes isolated 8/8 in 14.36s and its 128-file import closure reaches no fabric
+  byte. Nothing was banked; no ratchet update ran. The §322.2 re-gate will produce the
+  uninterrupted sweep on the record anyway.
+- **§322.1 JUDGMENT (chair): the CAS is HELD.** TE-WF1C is still running its terminal at
+  tip 253f2028 on the same base, and a branch move under a running executor invalidates its
+  session (standing hazard law). Order: WF-1C CASes first; T2B follows rebased. Veto flips
+  the order at the cost of voiding WF-1C's in-flight terminal.
+- **§322.2 On WF-1C's CAS:** message the TE-T2B agent (context intact) to cherry-pick its
+  four commits onto the moved tip and re-run the ONE terminal per the slot-aware law; its
+  new tip then CASes. RS-5 stays paused until this cascade completes.
+- **§322.3 The lane's requested MF-PREAMBLE amendment** (the entry-closure fence discharges
+  post-build only; a pre-build SKIP is not a discharge) is **DEFERRED to ride T2B's landing**
+  as a chair commit WITH §314.2 re-stamps of every citing packet — never as a free-floating
+  preamble edit.
+- **§322.4 Estate grep executed (chair):** no vitest `--reporter=basic` exists in
+  scripts/, tests/, package.json, or CI — every `--reporter` occurrence is a Playwright
+  JSON reporter, valid there. The trap was lane-local; the lane recorded both harness
+  findings (the reporter trap; the guard-the-guard import-key cure) in memory.
+- **§322.5 MF-T2C:** its shared change paths release only when T2B's commits LAND on the
+  branch — promotion queues behind §322.2, not before.
