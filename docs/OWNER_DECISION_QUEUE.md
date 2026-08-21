@@ -11709,3 +11709,79 @@ ruled with "thin" stated, never defaulted to RATIFIED.
    folded in. Remaining sitting tranches: the E1
    (map-architecture) and E2 (corpus/measurement) clusters,
    ruled next on the union of their memos' evidence.
+
+## §295 · IPV-1 COLLECTED — THE VENDORED-FMG EXPOSURE IS REAL,
+## SERVED, AND OWNER/COUNSEL-GRADE; §293.2's MITIGATING FACT IS
+## CORRECTED (2026-08-21; chair: FABLE; memo retro-IPV1-memo.md,
+## all six census questions answered by execution)
+
+1. ⛔⛔ **THE CORRECTION FIRST: the local TinyMCE is NOT dead
+   weight.** §293.2a recorded the vendored copy's notes editor
+   as loading TinyMCE from the upstream CDN — TRUE ONLY ON
+   STALE MASTER. A SettlementForge security patch (e2b7abf8,
+   2026-07-20) deliberately re-pointed the loader at OUR local
+   copy; the /map/ CSP (script-src 'self') blocks the CDN
+   outright; our own init call sets license_key:"gpl". On the
+   ledger ref, the build branch, and HEAD we ACTIVELY SERVE
+   GPLv2-or-later TinyMCE 7.1.0 (123 files, 4.13 MB,
+   byte-identical to upstream, sha-verified) from our origin —
+   minified bytes plus license text, with NO corresponding
+   source, no written offer, and NO attribution surface
+   anywhere (zero mentions of Azgaar in src/).
+2. **THE FEATURE IS FIRST-CLASS, so removal is a product
+   decision, not a repair**: Realm is a top-nav cell; /map
+   redirects into it; WorldMapStage.jsx holds the only iframe
+   in src/; eight app modules, the validate:map gate step,
+   post-deploy verification and the map.settlementforge.com
+   deploy topology all consume public/map. It is on 404 of 404
+   local heads and 39 of 40 remote refs.
+3. ⚠⚠ **PRODUCTION (master, the only ref that deploys) IS
+   2,790 COMMITS STALE AND CARRIES THE WORSE POSTURE**: the
+   broken CDN loader (the patch comment records the remote
+   fetch was already failing), a LIVE openwidget phone-home
+   carrying a THIRD PARTY'S organizationId, and jQuery 3.1.1
+   with three logged CVEs. The next deploy — already
+   owner-gated under the standing confirm-each boundary —
+   closes the operational half by itself.
+4. ⚠⚠ **FOREIGN WIP RECORDED LOUDLY (preserve, never commit
+   as-is)**: the shared tree's dirty public/map is an unvetted
+   upstream FMG drop sitting since Jul 22 — 43 files reverted
+   to pre-hardening state (~20 XSS sanitizers undone,
+   openwidget re-enabled, a PII console leak restored),
+   VENDOR-MANIFEST.json and sf-origin.js DELETED, plus two
+   untracked inert additions (a second phone-home beacon; a
+   Google-CDN service worker). validate:map would fail closed
+   on it today. ⚠ The on-disk dist/ (Jul 28) WAS BUILT FROM
+   THE DIRTY TREE and contains those files — if any manual
+   deploy ever used that dist, the unvetted drop shipped;
+   CI-only deploys mean it did not. Owner attention flagged.
+5. **DISPOSITION — the four options are in the memo with full
+   breakage sets; the chair's VETOABLE RECOMMENDATION, with
+   the decision classes respected:** (a) the GPL question
+   itself is COUNSEL'S (§254.5.5) — the crux to put to them:
+   whether the iframe-isolated FMG+TinyMCE bundle is a
+   separate work / mere aggregation from the proprietary app,
+   and the separate §253.2 Urquhart-provenance issue that no
+   top-level license cures. (b) Pending counsel, the chair
+   recommends OPTION B (strip libs/tinymce only): it removes
+   the copyleft conveyance, keeps the Realm feature whole, and
+   the notes editor degrades gracefully to the contenteditable
+   fallback — but that rich→plain change is USER-VISIBLE, so
+   it is raised to the owner, not decided. Cost is bounded
+   and enumerated (manifest re-pin 140→20; three test pins
+   re-authored in place; one docs line). Option D (back to
+   CDN) is refused on the chair's own authority — it reverts
+   a security patch and cannot work under our CSP. (c) A
+   THIRD-PARTY-NOTICES surface is CHARTERED as dark repair
+   regardless of (b) — §248.4 already named the obligation,
+   nine vendored libs ship with no notice at all, and two
+   dual-license elections (jszip, touch-punch) are unrecorded;
+   it lands dark and rides the next owner-confirmed deploy.
+   (d) A history scrub (3,576 commits, 404 heads, ~37
+   worktrees, 39 remote refs) RIDES THE EVENTUAL PUSH
+   DECISION, exactly like the standing IP-doc scrub items.
+6. **SAFE ACT EXECUTED**: the 78 MB xref-fmg scratch clone
+   (GPL tinymce + the phone-home widget aboard) is DELETED per
+   §293.4, its sha-verification role having been discharged in
+   the memo. The owner docket gains items 1-5 above; the
+   HANDOFF refresh at sitting close carries them.
