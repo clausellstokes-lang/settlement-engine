@@ -74,6 +74,16 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐⭐ §308 (~10:35 ET): WF FAMILY LAW SIGNED AND LANDED — BUILD BRANCH MOVES
+# f8d978df → 9d851fae (WF-PREAMBLE 758 + WF-SUBSTRATE 424 + the volume RE-FOLD
+# closing the two-copy divergence — nine §78 cure hunks; CLASS NOTE: a ledger-
+# signed cure must reach the BUILD copy in the same act). Preamble SHA-256
+# cd067ba1…3211. Rulings: 8-member cap live via §P10; WF-1b SPLIT pre-authorized
+# (i: tick threading+suppressedAtTick / ii: prune key+obituary beat); prune bar
+# DERIVES from KEEP (literal 4 = STOP); spectacle-aware negatives (§P2.9).
+# TC-WF1B COMPILE DISPATCHED (drafts draft-WF-1B*.md + laneTCWF1B-receipt.md;
+# chair lands, then the executor; RS-5 fires at the WF-1b landing exposure).
+# Lanes out: W3F · TC-WF1B.
 # ⭐⭐ §306+§307 (~10:15 ET): CB1 + I1 COLLECTED @ 5be2075a — G-43 benchmark LIVE
 # (3 engine findings: high-water starved 16/17, wall-year moves nothing, cathedral
 # floor; INERTIA NUMBER = causal precision 0.039, re-run at every seal ratcheting

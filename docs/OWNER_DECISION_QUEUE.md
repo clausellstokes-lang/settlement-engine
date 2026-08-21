@@ -12904,3 +12904,65 @@ recommended. Implementation, per item:
    tree. Restated here because a second lane independently
    tripped on it. The instruments and the fold are committed
    WITH THIS ROW by that method.
+
+## §308 · TC-WF COLLECTED AND THE WF FAMILY LAW IS SIGNED AND
+## LANDED — THE VOLUME'S COPY DIVERGENCE IS CLOSED, THE FIVE
+## RAISED CALLS ARE RULED, AND WF-1b's COMPILE DISPATCHES; THE
+## BUILD BRANCH MOVES f8d978df → 9d851fae (2026-08-21; chair:
+## FABLE; receipt laneTCWF-receipt.md)
+
+1. **COLLECTED AND SIGNED.** The preamble (758 lines, WC-shape:
+   §P0 architected-vs-built measured by module census, eight
+   WF-era refutations, twelve standing dispositions, seven
+   registers, sixteen STOPs, §P10 stamp line) and the substrate
+   annex (424 lines: 102 graded claims — 79 MEASURED-TRUE / 23
+   REFUTED, mechanically counted; the §78 stamp and all five
+   F-obligations quoted with premises independently
+   re-measured; two-anchor addresses) are chair-signed and
+   LANDED at 9d851fae with the volume re-fold. Preamble
+   SHA-256 cd067ba1ce41232a99dee9a7247f4c82d47fbe2b4fd9bb8599
+   784d4a33136211 — every WF packet cites it. The lane's six
+   judgment calls (J-TCWF-1..6) are RATIFIED.
+2. ⛔⭐ **THE DOMINANT FINDING, CURED AT THE ROOT (RAISED-1,
+   door a): the WF volume existed in two materially different
+   copies** — the build branch carried the PRE-§78 text (774
+   lines) while the ledger held the cured copy (846; nine
+   hunks, every one a §78 cure; five dead premises, four
+   wave-mis-building). The §257.2 ruling-after-fold class AT
+   VOLUME SCALE. The landing re-folds the build copy to the
+   ledger blob 169c75e7 so the branch where compiles run
+   carries the signed cures; the preamble's warning is now
+   historical. ⭐ CLASS NOTE for every family: a cure signed on
+   the ledger must reach the BUILD copy of its volume in the
+   same act or a compiler inherits the corpse.
+3. **THE REMAINING RAISED CALLS, RULED.** (RAISED-2) WF engine
+   trains now cap at EIGHT — the §78 stamp governs via the
+   preamble's §P10 line; WF-1A takes no in-place erratum
+   (landed packets are history; the preamble's supersession
+   sentence is the record). (RAISED-3) WF-1b's one-member
+   charter predates three measured facts (a two-signature tick
+   threading with 15 test call sites; pruneSuppressed
+   unexported behind advanceShares — an architectural fork;
+   the extinction beat = one Herald desk kind = five
+   registration homes): **a SPLIT IS PRE-AUTHORIZED at the
+   compile's own pricing**, default boundary WF-1b-i (tick
+   threading + single-writer helper + suppressedAtTick) /
+   WF-1b-ii (the prune key + the beat); the compiler may
+   propose better with numbers; the non-path-disjoint serial
+   promotion law applies. (RAISED-4) the obituary's
+   "≥4-suppressed" bar MUST BE EXPRESSED AS A DERIVATION FROM
+   THE EXISTING KEEP CONSTANT (fires when count exceeds KEEP)
+   — a literal 4 is forbidden; so it is (b), no new F-5 band
+   and no stall, BY CONSTRUCTION. (RAISED-5) the
+   spectacle-vacuity refutation binds now via the preamble's
+   §P2.9; the volume-text correction rides the next WF docs
+   act, deferred-with-record; every WF-0-era negative arm must
+   be spectacle-aware. (RAISED-10) the §27 dispatch gate is
+   the LEDGER's (ODQ §27 + the standing queue notes) — chair-
+   verified; no build-branch document by that name exists,
+   correctly.
+4. **WF-1b's COMPILE DISPATCHES NOW** (Opus compile lane,
+   drafts to the session scratchpad, the chair lands): against
+   preamble-by-SHA at 9d851fae, carrying this row's rulings.
+   Its landing, when it comes, is the next ENGINE-BEHAVIOUR
+   exposure — RS-5 fires there (§305.4).
