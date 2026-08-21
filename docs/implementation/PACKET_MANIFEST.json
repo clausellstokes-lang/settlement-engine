@@ -16929,7 +16929,7 @@
     },
     {
       "id": "WF-1B",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/fp/WF-1B.md",
       "verifiedBase": "9d851faeb7cac73217d508f621d1d9ee29f2c145",
       "changeManifest": [
@@ -17050,6 +17050,11 @@
           "_note": "THE VEIL. religionStates is a member of this deny list and is NOT in WORLD_SNAPSHOT_PUBLIC_LEDGER_ALLOWLIST, so the new sub-key sits inside a ledger the deny census already covers and no new deny row is owed.",
           "path": "src/domain/display/worldSnapshotPublic.js",
           "symbol": "export const WORLD_SNAPSHOT_HARD_DENY"
+        },
+        {
+          "_note": "THE ONE WRITER, CREATED BY THIS MEMBER — added at the flip to LANDED and NOT before, because the validator asserts every required symbol is PRESENT at every status. Pinned as the DECLARATION and deliberately UNEXPORTED: its three callers all live in religionState.js, and an export would invite a fourth suppression site that the A8 write-site census pin exists to forbid.",
+          "path": "src/domain/worldPulse/religionState.js",
+          "symbol": "function suppressDeity"
         }
       ],
       "acceptanceCases": [

@@ -1,6 +1,6 @@
 # WF / WF-1B — the stamped suppression and the flag-forked prune key (SINGLE MEMBER per ODQ §309; stage 2 of the `wf-1` split promotion; compiled as WF-1b-i)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Promotion note:** promoted from DRAFT by lane TE-WF1B under ODQ §291.5 / §308.4 at
   `d6a932c1`, after re-executing the whole §15 preflight at this member's own tip rather than
   inheriting a single figure. Every §15 gate discharged: HEAD is `9d851fae`; the
@@ -672,6 +672,107 @@ live gate or by ODQ §309, and each recorded here rather than made silently.
   paraphrase, never to tag. Executed both ways at this tip; the receipt carries the transcript.
   *Say "veto" to restore the literal spelling and tag it with `@enforced-by` instead — which
   requires a target that genuinely resolves within ±3 lines.*
+- **J-TEWF1B-4 — A8's "both counts equal 3" could not be built, because the cure makes it
+  arithmetically impossible, and the pin was built to its PURPOSE instead.** §2.6 and §9 A8
+  specify a scan asserting that the `suppressed: true` write count EQUALS the `suppressDeity(`
+  call count *"and both equal 3"*. That describes the tree BEFORE the cure. Measured after it,
+  comment-stripped: the raw idiom appears **once** (inside the sole writer, which is the whole
+  point of routing) and `suppressDeity(` appears **four** times — one declaration and **three**
+  call sites. No edit can make both counts 3 without un-doing the single-writer routing. The
+  landed pin therefore asserts the invariant the volume actually asked for — *"a future fourth
+  site reds the pin instead of minting a stamp-less entry"* — in both directions: **raw writes
+  EXACTLY 1, declarations EXACTLY 1, call sites EXACTLY 3**, plus an arm proving the one raw
+  write sits INSIDE `suppressDeity` (without it, an inline write could replace the helper's and
+  no count would move). A fourth inline write reds the first; a fourth routed site reds the
+  third — the reviewed act. *Say "veto" for a different pin shape; the invariant, not the
+  arithmetic, is what §2.6 was buying.*
+
+---
+
+## §16 · THE LANDING RECORD (lane TE-WF1B — executed, not predicted)
+
+### 16.1 The mutant convictions, against §13's predictions
+
+| mutant | §13 predicted | ACTUALLY convicted | verdict |
+|---|---|---|---|
+| (a) revert the `:262` site to a raw spread | A8 + the site's own case, nothing else | **A1, A2, A4, A8** | PASS. The two extra arms BOTH exercise `:262` — the eviction fixture's suppression IS the same-niche push-out, and A4's resurgence displaces through it. The prediction under-enumerated which arms reach the site; it did not find entanglement |
+| (b) collapse the lit comparator to codepoint | A5 alone | **A5 alone** | PASS, and ⭐ **it did NOT red A7** — the §13 STOP (ordering entangled with the return seam) does not fire |
+| (c) drop the `Number.isFinite` guard | A2 and A4 | **A1, A2, A8** | PASS on substance. A4 stays green because every stamp it drives is an explicit finite tick and the resurged record comes from `seed()`, which never reaches the writer. A1's and A2's DARK arms are the behavioural convictions |
+| (d) return `null` from the empty-prune arm | A7 alone | **A7 alone** | PASS |
+| (e) ⭐ **LANE-ADDED** — delete the fold's `unseating ? tick : null` fork | — | **A2 alone** | PASS, and it is what makes (c) non-vacuous |
+
+⚠⚠ **THE REDUNDANT-SECOND-GUARD HAZARD IS DISCHARGED BY EXECUTION, IN BOTH DIRECTIONS.** §13
+warns that the `Number.isFinite(tick)` check and the fold's fork can EACH independently hold dark
+byte-identity, so convicting one may be covered by the other. Mutant (c) deletes the guard and
+mutant (e) deletes the fork; **each reds on its own**, so neither is decorative. The §13 STOP
+comparing (a) and (c) also does not fire — their conviction sets differ (A4 is red under (a) and
+green under (c)). Every mutant was planted by `cp`, convicted, and restored **`cmp`- and
+`md5`-exact**; `religionState.js` returns to `5261fb714d43f8ba629e24a73dc0bdb3` and
+`religiousContest.js` to `c3533b73dc24426da1216d00406b55d8` after every plant.
+
+### 16.2 ⛔⛔ THE TERMINAL IS NOT GATE-GREEN, AND THE RED IS INHERITED FROM THE BASE
+
+`tests/docs/enforcement-claims.test.js` reds on two arms, and **neither is this member's**. The
+offending claim is at `docs/implementation/preambles/WF-PREAMBLE.md:461` — the family preamble's
+own ⚠⚠ warning about the naked-claim scan, which transcribes the banned vocabulary while warning
+against transcribing it. The scanner's nil-count pattern matches inside that sentence's own
+thirty-count example, which is verbatim the hazard the sentence itself describes.
+
+⚠ **AND THIS LANE MADE THE SAME MISTAKE WHILE WRITING THIS PARAGRAPH.** The first draft of the
+sentence above quoted both spellings literally to explain the match, which minted the claim key
+this member exists to avoid; the pre-write scan caught it at one hit and it was paraphrased. The
+law is not "be careful with the vocabulary" — it is **run the scan on your own prose, every
+time, because explaining the trap is the most natural way to fall into it.**
+
+**FOUR LEGS, EXECUTED:**
+
+1. **It reproduces at the PRISTINE BASE.** A second detached worktree at `9d851fae`, with nothing
+   of this lane's in it, runs `npx vitest run tests/docs/enforcement-claims.test.js` → `2 failed |
+   19 passed (21)`, TRUE_EXIT=**1**. Both arms red before this member exists.
+2. **This lane touched neither file.** `git diff 9d851fae --name-only --
+   docs/implementation/preambles/WF-PREAMBLE.md tests/docs/enforcement-claims.test.js` is EMPTY.
+3. **This packet contributes ZERO claims.** The live `CLAIM_RE` over `WF-1B.md` returns 0 hits,
+   and `WF-1B.md` appears nowhere in the failure's seven-claim list.
+4. **One arm is banked and the other is not.** `scripts/.test-ratchet-baseline.json` banks
+   *"every completeness claim carries an `@enforced-by` tag with ≥1 target"* (entry 5 of 11) but
+   NOT *"the banked naked-claim debt is frozen PER CLAIM — a seventh cannot hide inside it"*. The
+   unbanked arm is what reds `test:ratchet`, and the `&&` chain takes `build` and `verify:dist`
+   dark behind it.
+
+⛔ **THIS LANE DOES NOT REPAIR IT**, on three independent grounds: PACKET_STANDARD's gate law says
+in terms *"compare failure identities with a committed-base run … do not repair unrelated rows"*
+(done, above); the preamble is not in this packet's closed §8 change manifest, and out-of-manifest
+editing invalidates the session; and the preamble is **chair-signed law** under ODQ §308, so
+amending it is a chair act. Banking the arm is refused outright — *"a failing enforcement walker
+is never banked as ordinary test debt"*, and the guard exists precisely to stop a seventh claim
+hiding inside six.
+
+⭐ **THE CURE IS ONE LINE AND IT IS THE ESTATE'S OWN STANDING LAW** (MX-1 and GR-4C both carry it):
+paraphrase, never transcribe, because *transcribing the vocabulary IS an occurrence*. The
+preamble's sentence needs the same treatment this packet's §6 row received at J-TEWF1B-3 — for
+example, ending it *"…and never accept a nil-count match that is silently a thirty-count one."*
+That is a chair edit to a chair-signed file, offered here with its measurement rather than made.
+
+### 16.3 Findings the compile could not have had
+
+- ⭐ **THE SCHISM FIXTURE RESOLVES A SIEGE WITHOUT SUPPRESSING ANYTHING.** WF-1a's `schism()`
+  seats two cults in DIFFERENT niches, so the contest is ORGANIC, and the resolution loop
+  suppresses only *same-niche* rivals of the winner — of which there are none. Executed: the lit
+  schism drive is byte-identical before and after this member (`926af81b5ad3431b`, 973 bytes, no
+  stamp). A lane reaching for `schism()` to prove the `:485` site would write a silently vacuous
+  pin; A3 uses a direct `resolvePatronContest` fixture whose two creeds SHARE a niche.
+- ⚠ **A DOCBLOCK IS POSITIONAL, AND MOVING A FUNCTION UNDER ONE SILENTLY RE-PARENTS IT.** Placing
+  `suppressDeity` directly above `export function attemptEntry` orphaned `attemptEntry`'s JSDoc
+  onto the new function; `typecheck:domain:strict` caught it as **9** new errors against a
+  per-file baseline of 0 (`TS7006` implicit-any on all three positional parameters, `TS2339` on
+  every `opts.force` / `opts.tick` read). ⛔ **`typecheck:ratchet` stayed GREEN throughout** — the
+  two-typechecker receipt law earning its keep, and a per-file `tsc` would have shown nothing.
+- ⚠ **THE INDEX STATUS COLUMN IS READ LITERALLY AND `PACKET_STATUSES` IS SCANNED IN ARRAY ORDER**
+  (`BLOCKED, DRAFT, LANDED, READY, STALE, SUPERSEDED`), FIRST MATCH WINNING. A status cell reading
+  *"promoted from draft in-lane"* let the lowercase `draft` out-rank the bolded `READY` beside it:
+  `validate:packets` reported `status disagrees with index: manifest=READY index=DRAFT`,
+  TRUE_EXIT=1. The estate's index rows warn about this in terms; it is cheap to re-confirm and
+  cheaper to forget.
 
 ---
 
