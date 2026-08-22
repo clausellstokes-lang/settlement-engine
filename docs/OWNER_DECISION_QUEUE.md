@@ -14397,3 +14397,29 @@ recommended. Implementation, per item:
   meet a permanently quiet machine — the heads-up protocol simplifies to
   serialization between the two of them); the delegated §187 decision sitting is the
   chair's next block; the minKeys measurement waits on a free slot.
+
+## §341 — OWNER DIRECTIVE: THE 300-YEAR TUNING PASS GAINS A MAP LEG (2026-08-21 ~23:25)
+
+- **Owner in-chat: "Make sure that the 300 year tuning now also looks at the maps."**
+  The tuning-pass charter (the endgame's LAST item; signature still owner-only) is
+  AMENDED: every candidate dial is evaluated on BOTH ledgers — the simulation
+  observables (the 300y population runaway, epoch multiples, the G-43 causal-precision
+  0.039 inertia input) AND the map consequences of the same worlds.
+- **§341.1 The map leg, concretely:** for each candidate tuning, sample the fabric map
+  at checkpoints across the timeline (at minimum early / mid / late / year-300) and
+  require: (a) FOOTPRINT COHERENCE — the drawn settlement grows when and only when its
+  population/economy history says so (§287's durable-spatial-truth law measured over
+  the whole span, not one snapshot); (b) UNDERCITY LAWFULNESS — sewers stay
+  surface-coupled, crypts monotone, caverns static (§311 temperaments) under every
+  candidate trajectory; (c) INSTRUMENT RANGE — the corpus grain/register kernels
+  (MF-S1/HF-M1 machinery) stay in-band on the sampled plates at every rung the world
+  passes through; (d) COUNTERFACTUAL STABILITY — the G-43 benchmark reads map deltas
+  as an observed channel, so a dial that cures population figures but makes walls or
+  districts thrash between adjacent candidates FAILS tuning.
+- **§341.2 Feasibility is already sequenced:** tuning is last, after the parity slice —
+  by tuning time the fabric map derives from any world year, and every instrument the
+  map leg needs already exists (the corpus gate, the grain kernels, G-43); the
+  amendment wires them into the tuning harness rather than inventing new ones. The
+  harness work is chartered into the tuning-pass preparation.
+- **§341.3 Unchanged:** the tuning signature remains the owner's; this adds evaluation
+  surface, not a new signer.

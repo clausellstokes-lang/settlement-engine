@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~23:25 ET: OWNER DIRECTIVE (§341) — the 300y tuning pass gains a MAP
+# LEG: footprint coherence over the span, §311 undercity lawfulness, corpus
+# kernels in-band at checkpoints, G-43 reads map deltas. Signature still
+# owner-only. Memory rows amended.
 # ⭐⭐ ~23:10 ET: RS-5 PROGRAM CLOSED (§340) — attribution CONFIRMED host
 # artifact (solo re-run: assertion passed, ~93s total); grid verdict FINAL
 # AND CLEAN. Preserved: refs/preserve/rs5-soak-complete-2026-08-21=d25c6e37
