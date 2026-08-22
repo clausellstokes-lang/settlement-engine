@@ -74,6 +74,12 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~20:25 ET: WF-8 at the door (tip 47ea9c9b on a09138d7; A5 debt CLOSED
+# CONFIRMED; 4 self-reds cured vs base-proof; R-7 trio handled — (c) cured
+# IN CODE via the snapshot accessor when --write + P7.13 both blocked). GO
+# SENT on quiet track (load 5.0); file-count override RATIFIED 17→20 (class
+# basis; each file named). Baseproof kept until collection. On green: CAS →
+# mint's final-tip message same minute.
 # ⭐⭐ ~20:00 ET: INV-DESC CONFIRMED WIDER (§373) — 933 authored institution
 # descriptions INVISIBLE on the paid surface TODAY (live half); edit-ghosting
 # latent behind the flag. RR-2 chartered + compile dispatched (cure one line,
