@@ -16777,3 +16777,43 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   §355 hunt. The exhibit veto window remains open, unvetoed. WEB-7's run 2
   fired detached at 19:12:56Z. The CAS cadence resumes on RR-2's clean
   green.
+
+## §415 — WEB-7 COLLECTED GREEN (ALL 18 STEPS, ONE DETACHED INVOCATION); SIX JUDGMENTS RATIFIED; A STALE COMPILE FIGURE CORRECTED IN §402 C6's RECORD (2026-08-23 ~06:10)
+
+- **The member:** tip e5975829 (pinned), parent 19b799ce unmoved,
+  fast-forwardable as it stands; S0 two-part WHOLE read-not-inherited;
+  terminal run 2 GREEN end-to-end DETACHED IN ITS OWN SESSION (the §414 cure
+  applied; run 1's 77-byte wrapper kill retired with its classification,
+  never counted). Census +5 titles/+1 suite from the walker's own sequenced
+  convictions; the 433→438 dist figure exactly the five tests/build titles.
+- **The licence work at the §317.1 standard:** every fact read from the
+  lane's own installed packages by SHA; TWO WORDS recorded (Apache-2.0,
+  MIT) and NO licence body added anywhere — rgbcolor's equivalence to the
+  §4.1 MIT text CHECKED by normalization (1,020 characters exact), not
+  asserted. The both-sides pin compares ordered name@version=licence lists
+  AND pins the elected values as literals, so mutual agreement on a wrong
+  election still reds. Four mutants convict, restores checksum-verified.
+- **A STALE COMPILE FIGURE, corrected for the record:** the OFL rider was
+  ALREADY DISCHARGED before the website compile's own pin (the cure
+  fb80e32f is an ancestor of eb6124a6) — the compile read TE-NOTICES'
+  findings DOCUMENT instead of the tree at its pin, and the stale line rode
+  into §402 C6 and the WEB-7 brief. The lane reported rather than
+  re-executed — re-pasting a byte-correct body is the motion §317.1 exists
+  to prevent. COMPILE-HYGIENE NOTE, standing: a findings document is a
+  point-in-time artifact; a compile verifies each finding AT ITS OWN PIN.
+- **SIX JUDGMENTS RATIFIED:** J1 (one coherent §3.3, not a self-
+  contradicting pair), J2 (raw manifest strings + election pointer, the
+  house idiom), J3 (counts unchanged, labels naming the election — hiding
+  that a choice existed would be the quiet lie), J4 (no body added), J5
+  (elected VALUES kept out of requiredSymbols — the landed-packet-trap law
+  applied prospectively to a future re-election), J6 (the stale rider
+  reported, not worked around).
+- **The family-founding threeway noted for the landing merges:** WEB-1
+  (INDEX section), WEB-6 (family), WEB-7 (dir with no header, single-row
+  inserts) each founded website/ differently at their bases — keep-one on
+  the directory/header, keep-both on the rows, resolved at each landing
+  slot in order. The §410/§411 reservation mechanism PROVEN by WEB-7's
+  two-packet probe stands in the record.
+- ALL FOUR WEBSITE BUILDS ARE NOW GREEN-AND-HOLDING (WEB-1, WEB-4, WEB-5,
+  WEB-6, WEB-7 — five cars; WEB-2/WEB-3 await 197's landing). Nine proven
+  tips pinned. The cascade waits on RR-2's run-3 landing terminal.

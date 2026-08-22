@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~06:10: WEB-7 COLLECTED (§415) — e5975829 pinned, 18 steps green
+# detached (the §414 cure applied); no licence body added, both-sides pin
+# with literal values; OFL rider was STALE-AT-COMPILE (compile-hygiene note:
+# verify findings at the compile's own pin). FIVE website cars green-holding;
+# NINE tips pinned. Cascade waits on RR-2 run 3.
 # ⚠ ~05:40: WRAPPER-KILL CLASS NAMED (§414) — two gates killed by the
 # harness wrapper timeout in one hour (73-77B header-only logs + stale
 # mutex lock). RR-2's silent kill caught by chair liveness check; resumed
