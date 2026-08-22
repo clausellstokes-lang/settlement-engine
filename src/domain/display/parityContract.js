@@ -86,7 +86,12 @@ export const SHARED_FIELDS = Object.freeze([
 ]);
 
 export const PARITY_EXEMPT = Object.freeze([
-  { fact: 'summary.arrivalScene',  reason: 'AI-only prose (narrativeMode); no canonical scalar equivalent.' },
+  // §373 — these two captions previously read "no canonical scalar equivalent", which was
+  // not the ground. The scalars DO exist: both are generator-written, screen-rendered and
+  // DM-editable through the prose-edit queue. The PDF deliberately reads them from the AI
+  // overlay only, so the surfaces intentionally differ until the owner rules.
+  { fact: 'summary.arrivalScene',  reason: 'The PDF reads this prose from the AI overlay only. The settlement\'s own canonical scalar exists, is generator-written, screen-rendered and DM-editable; whether the PDF gains that scalar as a fallback is an open owner product call (ODQ §373.3). Until it is ruled the two surfaces intentionally differ, and the exemptions test pins that behavior.' },
+  { fact: 'overview.pressureSentence', reason: 'Same ground as summary.arrivalScene: the PDF reads this prose from the AI overlay only, while the settlement\'s canonical scalar is generator-written, screen-rendered and DM-editable. The scalar fallback for the PDF is the same open owner product call (ODQ §373.3).' },
   { fact: 'overview.thesis',       reason: 'AI-only prose (narrativeMode).' },
   { fact: 'aiAppendix.*',          reason: 'AI-narrative path only; absent from the data dossier.' },
   { fact: 'daily.passages',        reason: 'AI-only prose passages (narrativeMode).' },

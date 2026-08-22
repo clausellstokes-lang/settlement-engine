@@ -435,4 +435,11 @@ export const REMOVED_DEAD_FIELDS = Object.freeze([
       + 'chain: every committed write of this key sits on AI-context, narrative-context '
       + 'or settlement records, never on an institution.',
   },
+  {
+    field: 'inst?.blurb',
+    file: 'src/pdf/lib/viewModelBodySlices.js',
+    removed: '§373 — dead READ arm in servicesSlice\'s description chain: no institution '
+      + 'producer, admission-schema row or edit path has ever written this key on an '
+      + 'institution record, at any commit since genesis, so the arm never selected.',
+  },
 ]);

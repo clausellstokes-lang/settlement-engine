@@ -209,7 +209,9 @@ export function servicesSlice(active) {
     notes: inst?.notes || null,
     staffing: inst?.staffing || null,
     // Extra detail: surface any narrative/structural fields the engine emits
-    description:    inst?.description || inst?.blurb || null,
+    // §373 — the schema key is `desc` and the catalog producer writes it; the custom arm
+    // writes `description`. `desc` reads first so a DM edit wins over generated text.
+    description:    inst?.desc || inst?.description || null,
     leader:         inst?.leader || inst?.headedBy || inst?.master || null,
     building:       inst?.building || inst?.location || inst?.quarter || null,
     founded:        inst?.founded || inst?.foundedYear || null,
