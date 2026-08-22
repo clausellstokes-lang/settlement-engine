@@ -74,6 +74,12 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ~23:45 ET: T2D at the door (lane commit f7765cf1; leaf 201/210 eff; census
+# +2/+0/+2/+8/+2 by conviction) — HELD behind WF-1E's running gate. Rulings
+# sent: strict-interiority arm RATIFIED (4th witness class: shared-endpoint
+# collinear passes the atomic early-return); compile §1.8 float==exact claim
+# CORRECTED (differ by 5056, float past MAX_SAFE_INTEGER); rename declined.
+# On WF-1E's CAS: T2D rebases -> immediate GO.
 # ⭐ ~23:35 ET: WF-1E terminal heads-up at tip 3ac279db (direct child of
 # f5332cf7; census +6 by conviction; kernel net-zero both instruments) — GO
 # SENT (no soak to pause; T2D not yet at the door). Chair rulings in the GO:
