@@ -53,6 +53,7 @@ import {
 import {
   buildSettlementContentProvenance,
 } from '../../src/domain/content/settlementContentProvenance.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 /** Minimal store: import slice + the auth/library/campaign seams it reads. */
 function makeStore(extra = {}) {
@@ -844,5 +845,205 @@ describe('importAccountData — export→import round-trip', () => {
     expect(saveMock).not.toHaveBeenCalled();
     expect(store.getState().savedSettlements).toEqual([]);
     expect(store.getState().campaigns).toEqual([]);
+  });
+});
+
+/**
+ * §359.10 / §66.4 — "Import my data" is a RESTORE, not a reset.
+ *
+ * The file this path reads is the user's OWN exporter-produced estate, so their
+ * lived history travels with it, admission-walled per field. These arms walk the
+ * whole write lifecycle: export → import → the second-pass wiring re-address →
+ * the store cache → re-export → import again.
+ */
+describe('importAccountData — restore semantics (§359.10)', () => {
+  const LIVED_STATE = (over = {}) => ({
+    phase: 'canon',
+    eventLog: [{ id: 'ev-1', type: 'CUT_TRADE_ROUTE', at: '2026-02-02T00:00:00.000Z' }],
+    systemState: { unrest: 3 },
+    locks: { npcs: true },
+    canonizedAt: '2026-01-15T00:00:00.000Z',
+    ...over,
+  });
+  const LIVED = (name = 'Old Harbor', over = {}) => ({
+    ...SETTLEMENT(name),
+    aiData: { aiSettlement: { summary: `${name} is salt-cured and stubborn.` } },
+    campaignState: LIVED_STATE(),
+    versionHistory: [{ id: 'snap-1', label: 'Before the fire' }],
+    ...over,
+  });
+
+  test('restores phase, event log, version history and AI prose byte-for-byte', async () => {
+    const source = LIVED();
+    const store = makeStore();
+    const res = await store.getState().importAccountData(fileFor({ settlements: [source] }));
+
+    expect(res.ok).toBe(true);
+    expect(res.settlementRestoreNotices).toEqual([]);
+    const [[entry]] = saveMock.mock.calls;
+    expect(entry.campaignState).toEqual(source.campaignState);
+    expect(entry.versionHistory).toEqual(source.versionHistory);
+    expect(entry.aiData).toEqual(source.aiData);
+    // The live cache carries the same restored state the write did.
+    const cached = store.getState().savedSettlements[0];
+    expect(cached.campaignState).toEqual(source.campaignState);
+    expect(cached.versionHistory).toEqual(source.versionHistory);
+    expect(cached.aiData).toEqual(source.aiData);
+    // Ownership is still remapped; restore widened no identity surface.
+    const keys = Object.keys(entry);
+    for (const owned of ['id', 'user_id']) {
+      expectAbsentWithAnchor(keys, owned, 'campaignState', `${owned} on the restore surface`);
+    }
+    const serialized = JSON.stringify(entry);
+    for (const foreign of ['SOMEONE-ELSES-USER-ID', 'EMBEDDED-OLD-ID']) {
+      expectAbsentWithAnchor(serialized, foreign, 'Old Harbor', 'source identity after restore');
+    }
+  });
+
+  test('a tampered field resets ALONE, with a notice, while its siblings restore', async () => {
+    const store = makeStore();
+    const res = await store.getState().importAccountData(fileFor({
+      settlements: [
+        LIVED('Tampered', {
+          campaignState: LIVED_STATE({ eventLog: ['not-an-event-object'] }),
+        }),
+        LIVED('Intact'),
+      ],
+    }));
+
+    expect(res.ok).toBe(true);
+    // Never a whole-file rejection for one bad field: BOTH settlements landed.
+    expect(res.settlementsImported).toBe(2);
+    expect(res.settlementsSkipped).toEqual([]);
+    // ...and never a silent partial: the fallback is surfaced, named by row.
+    expect(res.settlementRestoreNotices).toEqual([
+      { name: 'Tampered', reason: expect.stringMatching(/event history/i) },
+    ]);
+    const [[tampered], [intact]] = saveMock.mock.calls;
+    expect(tampered.campaignState.eventLog).toEqual([]);
+    expect(tampered.campaignState.phase).toBe('canon');
+    expect(tampered.versionHistory).toEqual([{ id: 'snap-1', label: 'Before the fire' }]);
+    expect(intact.campaignState.eventLog).toHaveLength(1);
+  });
+
+  test('restores neighbour wiring only when both endpoints came from this file', async () => {
+    const wired = (name, id, partnerId, partnerName) => ({
+      ...LIVED(name),
+      id,
+      settlement: {
+        name,
+        tier: 'town',
+        neighbourNetwork: [{
+          id: partnerId,
+          linkId: 'link_src-a_src-b',
+          name: partnerName,
+          neighbourName: partnerName,
+          relationshipType: 'trade_partner',
+          relationshipFrom: 'src-a',
+          relationshipTo: 'src-b',
+        }],
+        interSettlementRelationships: [{
+          linkId: 'link_src-a_src-b',
+          npcName: 'Mira',
+          partnerSettlement: partnerName,
+        }],
+      },
+    });
+    const store = makeStore();
+    const res = await store.getState().importAccountData(fileFor({
+      settlements: [
+        wired('Harbor', 'src-a', 'src-b', 'Ford'),
+        wired('Ford', 'src-b', 'src-a', 'Harbor'),
+        // A third row pointing at a partner left behind in the source account.
+        { ...wired('Orphan', 'src-c', 'src-missing', 'Gone'), id: 'src-c' },
+      ],
+    }));
+
+    expect(res.ok).toBe(true);
+    const byName = Object.fromEntries(
+      store.getState().savedSettlements.map(s => [s.name, s]),
+    );
+    // Both sides of the intra-envelope edge point at the FRESH ids and agree on
+    // one link id — the join the interSettlementRelationships rows ride on.
+    const harborEdge = byName.Harbor.settlement.neighbourNetwork[0];
+    const fordEdge = byName.Ford.settlement.neighbourNetwork[0];
+    expect(harborEdge.id).toBe(byName.Ford.id);
+    expect(fordEdge.id).toBe(byName.Harbor.id);
+    expect(harborEdge.linkId).toBe(fordEdge.linkId);
+    expect(harborEdge.relationshipFrom).toBe(byName.Harbor.id);
+    expect(harborEdge.relationshipTo).toBe(byName.Ford.id);
+    expect(byName.Harbor.settlement.interSettlementRelationships)
+      .toEqual([{ linkId: harborEdge.linkId, npcName: 'Mira', partnerSettlement: 'Ford' }]);
+    // The dangling endpoint rebuilds empty, and NO source id reached the store.
+    expect(byName.Orphan.settlement.neighbourNetwork).toEqual([]);
+    expect(byName.Orphan.settlement.interSettlementRelationships).toEqual([]);
+    const library = JSON.stringify(store.getState().savedSettlements);
+    for (const sourceId of ['src-a', 'src-b', 'src-c', 'src-missing', 'link_src-']) {
+      expectAbsentWithAnchor(library, sourceId, 'Harbor', 'source ids after the re-address');
+    }
+    // neighborRelationship stays null: it is matched BY NAME at the save
+    // boundary and would otherwise bind an import onto an unrelated save.
+    for (const save of store.getState().savedSettlements) {
+      expect(save.settlement.neighborRelationship).toBeNull();
+    }
+  });
+
+  test('survives the SECOND lifecycle path: import, re-export, import again', async () => {
+    const source = LIVED();
+    const first = makeStore();
+    expect((await first.getState().importAccountData(fileFor({ settlements: [source] }))).ok)
+      .toBe(true);
+
+    // Re-export the restored library exactly as the Data & Privacy section does,
+    // then feed that file back through the importer under a second account.
+    const reExported = buildAccountExport({
+      auth: { user: { id: 'IMPORTER-ID', email: 'me@x.test' }, tier: 'premium' },
+      savedSettlements: first.getState().savedSettlements,
+      campaigns: [],
+      customContent: {},
+    });
+    expect(reExported.version).toBe(ACCOUNT_EXPORT_VERSION);
+
+    saveMock.mockClear();
+    const second = makeStore();
+    const res = await second.getState().importAccountData(JSON.stringify(reExported));
+
+    expect(res.ok).toBe(true);
+    expect(res.settlementRestoreNotices).toEqual([]);
+    const [[entry]] = saveMock.mock.calls;
+    expect(entry.campaignState).toEqual(source.campaignState);
+    expect(entry.versionHistory).toEqual(source.versionHistory);
+    expect(entry.aiData).toEqual(source.aiData);
+    // The second generation is still ownership-clean: the first import's fresh
+    // ids are not carried into the second account's rows.
+    expectAbsentWithAnchor(
+      Object.keys(entry), 'id', 'campaignState', 'id on the second crossing',
+    );
+    expectAbsentWithAnchor(
+      JSON.stringify(entry), 'fresh-1', 'Old Harbor', 'first-generation ids on the second crossing',
+    );
+  });
+
+  test('still ignores export-only service records on the restore surface', async () => {
+    const store = makeStore();
+    const res = await store.getState().importAccountData(fileFor({
+      settlements: [LIVED()],
+      serviceRecords: {
+        schemaVersion: 1,
+        importable: false,
+        operatorMessages: [{ id: 'om-1', body: 'not portable' }],
+        consentChanges: [{ id: 'cc-1', plane: 'research' }],
+      },
+    }));
+
+    expect(res.ok).toBe(true);
+    const [[entry]] = saveMock.mock.calls;
+    expectAbsentWithAnchor(
+      Object.keys(entry), 'serviceRecords', 'campaignState', 'serviceRecords on the restore surface',
+    );
+    const snapshot = JSON.stringify(store.getState());
+    for (const record of ['om-1', 'cc-1', 'not portable']) {
+      expectAbsentWithAnchor(snapshot, record, 'Old Harbor', 'service records in the store');
+    }
   });
 });

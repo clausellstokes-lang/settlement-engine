@@ -490,6 +490,7 @@ export default function AccountDataPrivacySection({
                     || importResult?.campaignsSkipped?.length
                     || importResult?.customContentSkipped?.length
                     || importResult?.settlementContentWarnings?.length
+                    || importResult?.settlementRestoreNotices?.length
                     || importResult?.campaignContentWarnings?.length) ? (
                     <details style={{ marginTop: SP.xs }}>
                       <summary style={{ cursor: 'pointer', fontWeight: 700 }}>
@@ -498,6 +499,7 @@ export default function AccountDataPrivacySection({
                           + (importResult.campaignsSkipped?.length || 0)
                           + (importResult.customContentSkipped?.length || 0)
                           + (importResult.settlementContentWarnings?.length || 0)
+                          + (importResult.settlementRestoreNotices?.length || 0)
                           + (importResult.campaignContentWarnings?.length || 0)
                         )} notices
                       </summary>
@@ -513,6 +515,14 @@ export default function AccountDataPrivacySection({
                         ))}
                         {(importResult.settlementContentWarnings || []).map((entry, i) => (
                           <li key={`sp-${i}`}>{entry.name}: {entry.reason}</li>
+                        ))}
+                        {/* Per-field restore fallbacks (§359.10): this file is the
+                            user's own estate, so its lived history is restored —
+                            a field that fails its validator falls back to the
+                            reset value FOR THAT FIELD and says so here, rather
+                            than the whole file being refused. */}
+                        {(importResult.settlementRestoreNotices || []).map((entry, i) => (
+                          <li key={`sr-${i}`}>{entry.name}: {entry.reason}</li>
                         ))}
                         {(importResult.campaignContentWarnings || []).map((entry, i) => (
                           <li key={`cb-${i}`}>{entry.name}: {entry.reason}</li>

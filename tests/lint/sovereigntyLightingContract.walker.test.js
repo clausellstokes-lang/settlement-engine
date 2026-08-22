@@ -5335,7 +5335,40 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   reverted all three landed re-records while every WEB-4 proof stayed green — the arm is
     //   one equality and cannot say whose delta vanished. Negative control at the slot: the slot's
     //   own tuple put back reds at `titles` by exactly this delta ("expected 20732 to be 20730").
-    files: 2500, parked: 365, credited: 2135, titles: 20732, suiteTitles: 5787,
+    // ── RE-RECORDED 2026-08-22 BY TE-WEB5 (WEB-5, import-vs-restore), CAUSE ATTRIBUTED ──
+    // 2,500/365/2,135/20,732/5,787 → 2,500/365/2,135/20,750/5,791: +18 on `titles` and +4 on
+    // `suiteTitles`. `files`, `parked` and `credited` are UNCHANGED and that is structural
+    // rather than lucky: WEB-5 adds NO test file at all, only `describe`/`it` arms inside two
+    // suites the census already credits.
+    //   tests/lib/accountImport.test.js ......... +13 titles, +3 suites (the opt-in default
+    //                                             arm, the per-field admission arms, the
+    //                                             gallery pinned-absence arm, the wiring arms)
+    //   tests/store/accountImportSlice.test.js ... +5 titles, +1 suite (the round trip, the
+    //                                             per-row notice arm, the intra-envelope
+    //                                             wiring arm, the second round trip, the
+    //                                             service-records arm)
+    // `censusAuthorization`: ODQ §359.10 (the ruling), §402 C3 (the chair's signature on the
+    //   compiled semantics), §409.1.
+    // ⛔ ATTRIBUTED BY ISOLATION, NOT BY ARITHMETIC, AT THE AUTHORING BASE 19b799ce (tuple
+    //   2,497/364/2,133/20,719/5,785). Reverting BOTH files convicted 20,719 / 5,785 GREEN — the
+    //   proof that nothing else in this member touches the census. accountImportSlice alone
+    //   convicted 20,724 / 5,786; accountImport alone convicted 20,732 / 5,788; both together
+    //   20,737 / 5,789. The suite layer was read under a -1 sentinel because the arm is
+    //   sequenced and `titles` would otherwise refuse before reaching it. Every figure was read
+    //   from the arm's own failure message, never computed — the two deltas close (5+13=18,
+    //   1+3=4) as a CHECK on the readings rather than as their source.
+    // ⭐⭐ THE CARRY LAW, EXECUTED AT THE LANDING SLOT. This member was authored at base 19b799ce
+    //   (after-figure 2,497/364/2,133/20,737/5,789) and rebased onto acc466a6 (WEB-4, the 28th
+    //   landing). The DELTA `+0/+0/+0/+18/+4` is what crossed; the tuple was RE-DERIVED at this
+    //   base by execution, never carried. ⛔ THE BASE HAD MOVED UNDER IT: H8B (+4 titles),
+    //   MF-T2H (+2 files/+2 credited/+6 titles/+2 suite titles), WEB-1 (+1 file/+1 parked/
+    //   +1 title) and WEB-4 (+2 titles) re-recorded the four blocks directly above, so the
+    //   after-figure re-derives 20,737 → 20,750 and 5,789 → 5,791. Carrying the authored tuple
+    //   would have silently reverted all four landed re-records while every WEB-5 proof stayed
+    //   green — the arm is one equality and cannot say whose delta vanished. Negative control at
+    //   the slot: the slot's own tuple put back reds at `titles` by exactly this delta
+    //   ("expected 20750 to be 20732").
+    files: 2500, parked: 365, credited: 2135, titles: 20750, suiteTitles: 5791,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

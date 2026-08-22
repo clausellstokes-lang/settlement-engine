@@ -20,6 +20,16 @@
  *   • A same-owner mid-batch failure attempts cleanup by fresh id and reports
  *     any row it cannot remove. An account switch preserves the new owner's
  *     integrity and explicitly reports rows left in the previous account.
+ *
+ * RESTORE, NOT RESET, ON THIS SURFACE (§359.10). The file this path reads is
+ * the user's OWN exporter-produced estate, so `campaignState.phase`,
+ * `campaignState.eventLog`, `versionHistory` and `aiData` are carried through
+ * the per-field admission wall in lib/accountImport.js, and the cross-settlement
+ * wiring is re-addressed INTRA-ENVELOPE in the same second pass that re-addresses
+ * the founding receipt — after every fresh id is known, so only ids this batch
+ * minted can appear in an edge. Field-level fallbacks surface as
+ * `settlementRestoreNotices`; the gallery importer keeps the distrust reset and
+ * is not touched by any of this.
  */
 
 import { saves as savesService } from '../lib/saves.js';
@@ -27,6 +37,7 @@ import { activeSaveCount } from '../lib/saveAccess.js';
 import {
   ensureNormalizeLoaded,
   prepareSettlementEntry,
+  restoreIntraEnvelopeWiring,
   validateAccountImport,
 } from '../lib/accountImport.js';
 import {
@@ -118,6 +129,7 @@ export const createAccountImportSlice = (set, get) => ({
  *   customContentImportCounts?: Record<string, number>|null,
  *   customContentSkipped?: Array<{ name: string, reason: string }>,
  *   settlementContentWarnings?: Array<{ name: string, reason: string }>,
+ *   settlementRestoreNotices?: Array<{ name: string, reason: string }>,
  *   campaignContentWarnings?: Array<{ name: string, reason: string }>,
    *   overLimit?: boolean,
    *   previousAccountSaveCount?: number,
@@ -388,12 +400,22 @@ export const createAccountImportSlice = (set, get) => ({
     }
     const prepared = [];
     const settlementsSkipped = [];
+    const settlementRestoreNotices = [];
     for (const rawSettlement of rawSettlements) {
+      // THIS surface is the user's own estate (§359.10) — restore their lived
+      // history, admission-walled per field. Every field that fails its wall
+      // falls back to the reset value for THAT field and says so here.
       const preparedResult = prepareSettlementEntry(
         rawSettlement,
-        { sourceName, importedAt },
+        { sourceName, importedAt, restoreLifecycle: true },
       );
       if (preparedResult.ok === true) {
+        for (const notice of preparedResult.restoreNotices || []) {
+          settlementRestoreNotices.push({
+            name: preparedResult.entry.name,
+            reason: notice.reason,
+          });
+        }
         const sourceProvenance =
           preparedResult.entry.settlement.customContentProvenance;
         if (sourceProvenance != null) {
@@ -419,6 +441,10 @@ export const createAccountImportSlice = (set, get) => ({
         prepared.push({
           entry: preparedResult.entry,
           oldId: rawSettlement?.id != null ? String(rawSettlement.id) : null,
+          // The PRE-scrub source blob, kept for the intra-envelope wiring
+          // re-address below. It never reaches the store: only ids this batch
+          // itself minted survive that pass.
+          sourceSettlement: rawSettlement?.settlement,
         });
       } else {
         const name = (
@@ -474,9 +500,29 @@ export const createAccountImportSlice = (set, get) => ({
       // is intentionally dormant when the source parent did not land (including a parent
       // dropped by the slot cap): its source id remains historical provenance, and this
       // import path creates no live regional lineage edge from the receipt alone.
+      //
+      // The restored cross-settlement wiring re-addresses in this SAME pass and
+      // for the same reason: an edge is stated in save ids, and only ids this
+      // batch minted may appear. Every row lands DORMANT first and gains its
+      // wiring only once both endpoints are proven present — so no foreign id
+      // reaches the store even transiently, and a dangling endpoint stays empty.
       for (let i = 0; i < landed.length; i += 1) {
         const current = landed[i];
-        const settlement = remapSettlementParentRefForImport(current.settlement, idMap);
+        const wiring = restoreIntraEnvelopeWiring(toImport[i].sourceSettlement, {
+          idMap,
+          ownSaveId: current.id,
+        });
+        const rewired = (
+          wiring.neighbourNetwork.length > 0
+          || wiring.interSettlementRelationships.length > 0
+        )
+          ? {
+              ...current.settlement,
+              neighbourNetwork: wiring.neighbourNetwork,
+              interSettlementRelationships: wiring.interSettlementRelationships,
+            }
+          : current.settlement;
+        const settlement = remapSettlementParentRefForImport(rewired, idMap);
         if (settlement === current.settlement) continue;
         assertSessionCurrent();
         await savesService.update(current.id, { settlement }, saveOptions);
@@ -733,6 +779,7 @@ export const createAccountImportSlice = (set, get) => ({
       customContentImportCounts,
       customContentSkipped,
       settlementContentWarnings,
+      settlementRestoreNotices,
       campaignContentWarnings,
       overLimit,
     };
