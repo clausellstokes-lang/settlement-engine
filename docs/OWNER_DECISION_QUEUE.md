@@ -15727,3 +15727,41 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
 - **§384.3** RR-1's hazard memorialization (any regen of the 13 unscanned
   generated files is a mint trigger) is confirmed into the memory estate
   alongside its note file.
+
+## §385 — COLLECTION + CAS: THE HOUSEKEEPING BUNDLE LANDED — NINE REPAIRS AND THE DISCHARGE LAW; H8 CONVICTED, SPLIT, AND RE-SEEDED (2026-08-22 ~14:10)
+
+- **TE-HOUSE collected.** Tip dfa892cfb872 — TEN commits on CT-1a's landing (H8
+  dropped by the §364 split rule after run 1's terminal convicted it), run 2 green
+  on all twenty steps with both readings agreeing; the frozen ELEVEN at ceiling
+  over 28,734 tests; strict dist the chain's last link; the log verified by
+  printed path and self-identified by its own start stamp. ⛔ THE CAS-TARGET
+  CORRECTION IS THE COLLECTION'S HEADLINE ACT: the chair's GO named the RED
+  stack's tip; the lane refused it and named the green one — landing the GO's SHA
+  would have landed a red tree. CAS EXECUTED to the READ full SHA: 71159a21 →
+  dfa892cfb872 (read back).
+- **§385.1 What the car carries:** the mutex reaper + arm 1b · the validator
+  run-binding (proven by a refused corrupted commit) · the checkbox closures ·
+  the PACKET_STANDARD amendment · the truthful landing-page stamp · the
+  single-source roster (with the pinned declaration DERIVED, not deleted) · the
+  memoized walker (34.7s → 3.8s, count invariant) · load-stamped gate receipts ·
+  and THE DISCHARGE LAW (H9): convicted in three directions plus the
+  self-contradiction fence — the §379 one-way ratchet is machinery now, never
+  surgery again. Footprint 15 paths, ZERO under src/.
+- **§385.2 H8's conviction and re-seed:** a comment-only edit staled the edge
+  bundle's raw-source hash — invisible to focused tests, lint, both typecheck
+  ratchets, and the whole sweep; ONLY the terminal saw it (the argument for the
+  terminal existing, now with its cleanest specimen). Isolation-convicted (one
+  file reverted: 2-failed → 45-passed). Re-seeded with its full recipe (fence
+  names BOTH files; runs build:edge-shared; declared generated-artifact shift;
+  the refuted atlas rows ride along; content preserved at d896b64b) — QUEUED
+  after RR-2. **LAW BANKED: an edit — even comment-only — to any file the edge
+  bundle INLINES is a regeneration trigger invisible pre-terminal; members
+  touching src/ check bundle membership first.**
+- **§385.3 The two structural findings + the credits:** a bundle that fences no
+  meta file inherits no meta conflicts (proven by hash across three landings) ·
+  the isolation-derived census whose base conviction simultaneously proved
+  CT-1a's zero motion · the wrapper trap's SECOND decisive firing (harness 0,
+  true 1) · the lane's unearned-claim self-correction ('a right answer reached by
+  an unearned route is still the wrong method') credited per §365.2's precedent.
+  **THE RATCHET CURE IS NEXT-UP** (messaged): cherry-pick 3c781e7e across the
+  drift to dfa892cfb872, then the handshake.

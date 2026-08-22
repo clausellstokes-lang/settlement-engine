@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~14:10: BUNDLE LANDED — CAS 71159a21 → dfa892cfb872 (§385; 17th
+# landing; nine repairs + the discharge law; H8 split+re-seeded, queued
+# after RR-2). ⛔ The lane REFUSED the chair's GO-SHA (the red stack) and
+# named the green tip — collection headline. Inlined-file law banked.
+# RATCHET CURE next-up. Queue: cure → OSR-10 → RR-1 regen → RR-2 → H8.
 # ⚠→⭐ ~13:40: BUNDLE run-1 RED — H8's comment-only edit staled the edge
 # bundle's RAW-SOURCE hash (aiGroundingBundle inlines userEdits.js); ONLY
 # the terminal could see it; the WRAPPER TRAP fired again (harness 0, true
