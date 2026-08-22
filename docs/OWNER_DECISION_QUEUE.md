@@ -15796,3 +15796,22 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
 - **§386.3 TE-OSR10 DISPATCHED** (the §384.1 charter: the envelope
   re-reconciliation micro-mint, schema 9→10, the §349 runbook reused). Then RR-1
   regenerates, RR-2 promotes, and the H8+1b bundle closes the queue.
+
+## §387 — OWNER CHALLENGE #5: THE WINDOW BLOCKS LANDINGS, NOT BUILDS — THREE SEATS FILLED (2026-08-22 ~16:00)
+
+- **Owner: 'are you not running things in parallel?' — correct again.** One active
+  lane during the mint's window, when the §353 law blocks LANDINGS and GOs, never
+  builds. The envelope sequencing constrains ORDER (mint → RR-1 → RR-2 before any
+  content car re-breaks it), not parallelism. FILLED to the cap: **TE-T2Bf**
+  (the §372 separator micro-fix — the collision witness executed both ways, the
+  frozen pin's declared re-record; precedes MF-T2H) and **TE-CT2** (the growth
+  chapter — additive blocks per CT-1a's landed shape; its lawful envelope break
+  recorded per §384.2's batching policy with the state pre-written for the next
+  trailing mint) build now beside the mint; the H8+1b executor follows on the next
+  free seat. Landing order after the window: RR-1 → RR-2 → then the builds in GO
+  order.
+- **§387.1 The recurring lesson, named for the wakeup's prompt at its next
+  re-mint:** the chair's serialization instinct repeatedly conflates 'the track is
+  reserved' with 'the shop is closed' — five owner corrections now (§344, §365,
+  §367, §370's inverse, here). The seat-filling question at every wakeup is not
+  'is the track busy' but 'is every buildable car building'.
