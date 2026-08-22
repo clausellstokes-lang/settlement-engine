@@ -1,6 +1,6 @@
 # Town cartography / MF-T2F — exact solid legality, extended from area to VOLUME: the §287.5 predicate home ported onto the landed massing vocabulary, with the R-MF-2 volume-arm conviction CURED in BigInt (§299.3(a) discharged app-side)
 
-- **Status:** DRAFT
+- **Status:** READY
 - **Packet version:** 1
 - **Verified base:** `claude/composite-r4` at `a09138d7da6b6a4148ce864496cb3ed41b775c44`
   (the MF-T2E landing). Every preflight row below was re-executed at THIS base by the

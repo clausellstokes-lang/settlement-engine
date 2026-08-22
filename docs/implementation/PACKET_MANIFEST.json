@@ -19061,7 +19061,7 @@
     },
     {
       "id": "MF-T2F",
-      "status": "DRAFT",
+      "status": "READY",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T2F.md",
       "verifiedBase": "a09138d7da6b6a4148ce864496cb3ed41b775c44",
       "changeManifest": [
