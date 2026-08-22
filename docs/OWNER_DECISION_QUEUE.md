@@ -14504,3 +14504,32 @@ recommended. Implementation, per item:
 - **§344.2 Seats now:** TE-T2D (terminal) · TE-WF1F (build) · MEAS-MINKEYS (measure)
   · TC-T2E (compile) · chair (the §187 sitting recon begun this turn — source rows
   located; rulings land as §345). One gate at a time stands.
+
+## §345 — COLLECTION + CAS: MF-T2D LANDED — THE DAY CLOSES AT EIGHT; D3a's CORE IS COMPLETE (2026-08-22 ~01:40)
+
+(The §187 sitting's rulings, previously slated for this number, land as §346.)
+
+- **TE-T2D collected.** Tip 27c250f9 — one commit rebased onto WF-1E's landing, seven
+  files, terminal green on all twenty steps with BOTH exit reports agreeing
+  (gate-tail's own line + the in-shell capture); ratchet AT the frozen 11 of 28,693;
+  137 packets; strict dist 52/433 zero anomalies; the leaf still cmp-byte-identical
+  to the mutant-convicted revision post-gate. CAS EXECUTED: 3ac279db → 27c250f9
+  (read back; the superseded pre-rebase commit f7765cf1 was NOT CASed, per the
+  lane's own warning). Census as landed: 2,492/364/2,128/20,677/5,780.
+- **§345.1 FORMALLY RECORDED, per the lane's request:** (a) the FOURTH WITNESS CLASS
+  — a collinear overlap sharing one endpoint passes the kernel's atomic check by its
+  early return and is refused later as an angular tie; this is WHY the endpoint arm
+  is spelled with strict interiority (ratified in-flight, now on the ledger beside
+  the compile's three witnesses); (b) the COMPILE RECEIPT §1.8 CORRECTION — the
+  eps-band float and exact denominators differ by 5,056 with the float past
+  MAX_SAFE_INTEGER; the compile compared PRINTED values (the printed-value cousin of
+  the §332.1 instrument law; no later member inherits the false figure).
+- **§345.2 THE DAY (2026-08-21→22) CLOSES AT EIGHT LANDINGS, SEVEN CASes:** WF-1C ·
+  MF-T2B(+fence) · notices · WF-1D(+zero-headroom law) · OFL completion · MF-T2C ·
+  WF-1E · MF-T2D. **D3a's core is COMPLETE: T2A records, T2B integer ABI +
+  exact geometry, T2C embedder, T2D noder — the map engine's mathematical spine is
+  fully ported, dormant, behind the untouched digest pins.** The WF-1 ladder is
+  complete but for WF-1F (in flight). RS-5's 162-world clean bill is preserved.
+- **§345.3 In flight at this write:** TE-WF1F (slot-aware; rebases onto 27c250f9
+  before its terminal; GO on request) · MEAS-MINKEYS · TC-T2E (chair-tier compile)
+  · the §187 sitting (chair; rulings → §346).

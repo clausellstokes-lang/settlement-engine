@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~01:40 ET: MF-T2D LANDED — CAS 3ac279db → 27c250f9 (§345). THE DAY
+# CLOSES AT EIGHT LANDINGS; D3a CORE COMPLETE; WF-1 ladder complete but for
+# WF-1F (in flight, rebases onto 27c250f9). Handoff re-folded through §345.
+# Sitting rulings → §346. In flight: WF-1F · MEAS-MINKEYS · TC-T2E.
 # ⭐ ~01:05 ET: ALL SEATS FILLED (§344) — TE-WF1F + MEAS-MINKEYS + TC-T2E
 # dispatched beside T2D's gate; chair began the §187 sitting recon (rulings
 # land as §345). One-gate law stands; WF-1F slot-aware behind T2D.
