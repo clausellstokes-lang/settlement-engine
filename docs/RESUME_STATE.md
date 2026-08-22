@@ -74,6 +74,15 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~10:00: TE-HOUSE BUILT at aeeb1822 (11 commits, per-member proofs; H9
+# discharge convicted 3 directions + fence; rebase pre-flown onto cb369d2b
+# ZERO conflicts). Notes parked: census commit DROPS + re-derives at true
+# base (triple-conflict with T2F landed + T2G in-flight — correct); H5's
+# red cured by DERIVING the pinned declaration from the roster; ⚠ NEW
+# CLASS TO BANK: A FRESH WORKTREE RUNS NO HOOKS (.husky/_ gitignored) —
+# hook-proving lanes must `npx husky` first or read FALSE GREENS. J3/J9 +
+# the atlas stale-quote debt ratify/queue at its collection. Waits for its
+# slot after T2G → CT-1a → RR-1.
 # ⭐⭐ ~09:40: MF-T2F LANDED — CAS 42e12a76 → cb369d2b0b63 (§381; the port
 # train's first gated car; 14th landing of the arc). Lessons: carry law's
 # 5th firing caught · the FABRICATED-SHA class + tip-guard cure · the tail
