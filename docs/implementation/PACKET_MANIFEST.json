@@ -19058,6 +19058,119 @@
         [ "npm", "run", "validate:packets" ],
         [ "npm", "run", "check:tail" ]
       ]
+    },
+    {
+      "id": "MF-T2F",
+      "status": "DRAFT",
+      "packetPath": "docs/implementation/packets/town-cartography/MF-T2F.md",
+      "verifiedBase": "a09138d7da6b6a4148ce864496cb3ed41b775c44",
+      "changeManifest": [
+        {
+          "_note": "LEAF 1, THE EXACT CORE, DORMANT. Ordered by ODQ 348.2: the D1 VOLUME arm multiplied in Number over a float polygon-intersection area, and R-MF-2 fires at the port. Exact BigInt ear-clip triangulation whose closing guard is an EQUALITY (the sum of the emitted triangles' absolute twice-areas must equal the ring's own), homogeneous-coordinate clipping, and rational shared area. Imports `bounds` from exactGeometry.js and nothing else; the float area spellings are deliberately NOT imported because importing them would re-admit the convicted arithmetic.",
+          "action": "CREATE",
+          "path": "src/domain/townMap/fabric/exactIntersectionArea.js"
+        },
+        {
+          "_note": "LEAF 2, THE PORTED CONTRACT, DORMANT. A port-by-hash member: the source is the sealed MF-D1 solidLegality.js, blob 0c46df07, SHA-256 b2f59501..., re-verified at this base. Six divergences, each ordered or forced and each executed against the real leaves before any pin was written. The two-leaf split is the cap-respecting shape the chair fixed at ODQ 371.1, not a renegotiation: the executed basis is 307 effective lines against a 250 single-leaf cap.",
+          "action": "CREATE",
+          "path": "src/domain/townMap/fabric/solidLegality.js"
+        },
+        {
+          "_note": "A NEW acceptance file, A1-A7. CREATE rather than TEST: the validator asserts a TEST path exists at EVERY status, and existence for a CREATE row is assertable only at LANDED.",
+          "action": "CREATE",
+          "path": "tests/domain/townMapSolidLegality.test.js"
+        },
+        {
+          "_note": "A NEW acceptance file, A8, the determinism companion. CREATE for the same reason as its sibling.",
+          "action": "CREATE",
+          "path": "tests/property/townMapSolidLegalityDeterminism.test.js"
+        },
+        {
+          "_note": "THE ONE SHARED D3a CHANGE PATH this member reserves. All five figures re-recorded together at this base: the BASE tuple proven by a GREEN walker run (five exact equalities), the AFTER tuple convicted key by key with a -1 sentinel. The census is SEQUENCED, so the sentinel walk had to be made cumulative before four of the five arms could be reached at all. It reserves NO path on fabric/index.js and NO path on any existing production file. Every other D3a member was measured LANDED at this base, so the path is uncontended.",
+          "action": "TEST",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/packets/town-cartography/MF-T2F.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE MF-T2A PLANT HOST. This exact line must survive byte-identical at column zero or the sweep's perl plant silently stops applying. This member does not open that host at all; the row is the guard that says so, and it was grepped before and after the edit with an EMPTY diff on the file.",
+          "path": "src/domain/townMap/fabric/dcelEmbedding.js",
+          "symbol": "export function derivePlanarDcelEmbedding"
+        },
+        {
+          "_note": "THE PLANT ITSELF. Its host neither declares nor imports CURRENT_MAP_TRADITION_ID, so the planted second declaration parses; this member keeps that precondition true by creating four files that do not import it either (grepped: zero occurrences in all four).",
+          "path": "scripts/mutation-sweep.sh",
+          "symbol": "check_caught \"town-map/fabric duplicate export declaration\""
+        },
+        {
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export const CURRENT_MAP_TRADITION_ID"
+        },
+        {
+          "_note": "THE INTEGER WALL every quantum is refused through. The one validator spelling; divergence D-5 replaces the source's String() coercion with it.",
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export function requireCanonicalInt"
+        },
+        {
+          "_note": "THE FREEZE every published answer goes through. Executed at this base: it accepts BigInt fields, so no second freezing spelling was needed for the exact magnitudes.",
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export function deepFreezeCanonical"
+        },
+        {
+          "_note": "THE ABI VERSION the plan-era solid stamps. READ, never moved.",
+          "path": "src/domain/townMap/fabric/coordinateAbi.js",
+          "symbol": "export const COORDINATE_ABI_VERSION"
+        },
+        {
+          "_note": "THE RECORD VOCABULARY THIS PREDICATE READS, landed by MF-T2E. Divergence D-1 keys on partId precisely so these records are admitted with zero adaptation, which was executed: solidPartQ records go straight into solidOverlap. The leaves do NOT import this module; records arrive as arguments.",
+          "path": "src/domain/townMap/fabric/massPart.js",
+          "symbol": "export function solidPartQ"
+        },
+        {
+          "_note": "THE GEOMETRY HOME, IMPORTED NARROWLY AND NOT EXTENDED. Only `bounds` is taken (an axis-aligned box over integers below 2^53 is exact in Number). This float area spelling is the R-MF-2 witness itself: re-executed at this base it reads 0 on a legal wall-scale sliver whose exact twice-area is -1.",
+          "path": "src/domain/townMap/fabric/exactGeometry.js",
+          "symbol": "export function area"
+        },
+        {
+          "_note": "THE FLOAT INTERSECTION AREA THE LEGALITY PATH NO LONGER CONSUMES. Kept public and untouched for its fixture-scale geometry role; the row is the guard that says the cure did not edit it. Re-executed at this base: polygonIntersectionArea(sliver, sliver) = 0 on ground whose exact shared area is 1/2.",
+          "path": "src/domain/townMap/fabric/exactGeometry.js",
+          "symbol": "export function polygonIntersectionArea"
+        },
+        {
+          "_note": "THE STANDING LAW that binds the ten arriving export names. Its guard-the-guard floors are lower bounds, so arriving leaves can only strengthen them; green before and after.",
+          "path": "tests/lint/townMapFabricSingleDeclaration.walker.test.js",
+          "symbol": "THE LAW: no exported name is declared in two files under the fabric directory"
+        },
+        {
+          "_note": "THE HEIGHT DOOR, HELD SHUT. This member decides about vertical intervals and still never opens heightQ: the intervals are explicit input quanta, and the row is the guard that says the door is untouched. Re-executed at this base: it throws. NOTE ON THIS LIST'S SHAPE AT DRAFT/READY — the twelve symbols this member CREATES (ten exports and two describe titles) join it at the FLIP TO LANDED and never at READY, because a requiredSymbols row is a claim that the symbol is in the tree while a CREATE row is only a promise until it is kept.",
+          "path": "src/domain/townMap/fabric/coordinateAbi.js",
+          "symbol": "export function heightQ"
+        }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "Main behaviour: the port-fidelity quintet answered on LANDED MF-T2E solidPartQ records, admitted with zero adaptation. Positive control FIRST — a genuinely overlapping pair returns VOLUME with sharedHeightQ 750n and sharedVolumeQ {75000000000n,1n}, so every DISJOINT and REFUSED arm below is a decision rather than a dead call. Then the half-open adjacency law as arithmetic (a stacked pair shares its whole footprint and encloses sharedVolumeQ {0n,1n}); DIFFERENT_SUPPORT_SURFACE with the bridge sentence byte-verbatim and verdict null; PLANAR_ONLY against a planEraSolid record with verticalStatus ABSENT and no sharedVolumeQ property at all; SAME_SOLID_ID with verdict null; and every one of the five results, and their exact magnitudes, deep-frozen." },
+        { "id": "A2", "case": "Unanswerable footprints and malformed inputs are refused TYPED, never answered. Positive control first (an ordinary square IS answerable through the same call), then each of the exact core's three named refusal arms by its own fixture: the bowtie and a collinear ring fire the degenerate arm; cross-A, whose exact twice-area is 48000000 and which therefore never reaches that arm, completes ear-clipping and is convicted ONLY by the exactness identity. Divergence D-4 is pinned directly: solidOverlap on an unanswerable footprint THROWS a TypeError naming the offending label and arm, where the sealed spelling answers VOLUME sharedAreaQ 100000000 OVERLAPPING from a partial float triangulation. The landed wall's own refusals are pinned in its own words, plus both exactRatioQ refusals." },
+        { "id": "A3", "case": "The plan's named pin, left to this member by MF-T2E: two solids stacked at a shared quantum share their whole footprint and ZERO volume. The positive control lives in the same test — dropping the upper solid by ONE quantum produces sharedHeightQ 1n and sharedVolumeQ {100000000n,1n} — so the zero beside it is the half-open law rather than an inert predicate." },
+        { "id": "A4", "case": "The forbidden interval predicate kept as a FALSIFIABLE negative control. Positive control first: on nested squares both spellings say OVERLAPPING. Then on the L-and-notch pair intervalOverlapVerdict reports a collision where the exact answer is sharedAreaQ {0n,1n} and DISJOINT_OR_ABUTTING — the 287.5 gap measured rather than asserted. Falsifiable in the other direction too: separated bodies read DISJOINT, which is the arm that convicts a deleted XY test. The incumbent boolean overlap test is NOT mentioned, per preamble P2.8." },
+        { "id": "A5", "case": "The carried ODQ 348.2 / R-MF-2 conviction, cured on BOTH arms, with the float witnessed IN-TEST rather than cited. Arm 1: the test's own Number shoelace reads exactly 0 on the sliver a=[0,0] b=[m-1,m] c=[m,m+1] with m=1286630001, its own BigInt shoelace reads -1n, and the LIVE exactGeometry area() reads 0 — then solidOverlap answers OVERLAPPING with sharedAreaQ {1n,2n} and sharedVolumeQ {1500n,1n}, and footprintIsAnswerable accepts the ring the float spelling refuses. Arm 2: coincident squares of side s=94906267 (ODD by design, so s squared sits off the float lattice; an even side would have made the arm vacuous) pin sharedAreaQ to {9007199515875289n,1n} and sharedVolumeQ to {27021598547625867000n,1n} while the test witnesses BigInt(s*s) differing from the exact square. Positive control: at fixture scale the ordinary triangle agrees in both spellings at {12000000n,1n}." },
+        { "id": "A6", "case": "The plan-era constants carry no tuning dial and no caller can smuggle a vertical. Guard-the-guard openers first: PLAN_ERA_VERTICAL is frozen, its kind is ABSENT and its reason has real content, so the equalities that follow are about a live record. Then OVERLAP_FLOOR_Q is exactly 0n and typeof bigint; planEraSolid mints vertical BY IDENTITY and reads abiVersion from the LIVE import; and the absence arm — the constructor has arity three and a fourth argument carrying an INTERVAL is not accepted, anchored on the identity assertion above so an unchanged ABSENT cannot pass as a missing field." },
+        { "id": "A7", "case": "dualRunLegality counts disagreements over a mixed roster and the counts CLOSE. Guard-the-guard openers first: the roster is populated and the caller-supplied incumbent stub genuinely answers true somewhere, so a zero false-positive count would mean agreement rather than silence. Then pairs 3, unanswerable 1 (the bowtie, skipped by footprintIsAnswerable), exactOverlapping 2, intervalOverlapping 3, intervalFalsePositive 1, intervalFalseNegative 0, legacyFalsePositive 1, and one sample carrying both partIds and sharedAreaQ {0n,1n}. With no incumbent supplied the legacy counters stay honest zeros while the interval comparison still runs." },
+        { "id": "A8", "case": "Determinism, replay and purity across both leaves. Twelve published calls over the A1/A5 fixtures replay identically under a BigInt-aware serializer, with pinned answers beside the replay so a leaf that replays a wrong shape cannot pass by being consistently wrong; two calls are not the same object; a mutation of the caller's own footprint array after construction does not reach the published record. Then the source scan, with TWO controls rather than one: control one asserts the RAW file really does contain the vocabulary (in the docblocks that explain why the code avoids it), which proves the comment stripper has work to do; control two asserts a token planted in CODE is seen by the very filter used for the negative. Only then is the comment-stripped code of each leaf asserted to reach no clock or float token." }
+      ],
+      "checks": [
+        [ "npx", "vitest", "run", "tests/lint/negativeAssertionAnchor.walker.test.js" ],
+        [ "npx", "vitest", "run", "tests/domain/townMapSolidLegality.test.js", "tests/property/townMapSolidLegalityDeterminism.test.js", "tests/lint/townMapFabricSingleDeclaration.walker.test.js", "tests/lint/sovereigntyLightingContract.walker.test.js" ],
+        [ "npx", "eslint", "src/domain/townMap/fabric/exactIntersectionArea.js", "src/domain/townMap/fabric/solidLegality.js", "tests/domain/townMapSolidLegality.test.js", "tests/property/townMapSolidLegalityDeterminism.test.js" ],
+        [ "npm", "run", "typecheck:ratchet" ],
+        [ "npm", "run", "typecheck:domain:strict" ],
+        [ "npm", "run", "build" ],
+        [ "npm", "run", "validate:packets" ],
+        [ "npm", "run", "check:tail" ]
+      ]
     }
   ]
 }
