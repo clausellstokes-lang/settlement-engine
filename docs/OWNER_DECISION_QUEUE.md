@@ -15239,3 +15239,21 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
 - **§366.1 Mechanics noted for the successor:** the job is session-local and
   auto-expires in 7 days — the seamless-resume note carries the re-arm instruction;
   a successor re-creates it as its first act if absent.
+
+## §367 — TWO OPEN LANES FILLED FROM THE QUEUE (owner order); THE ZSH LESSON BIT THE CHAIR (2026-08-22 ~17:10)
+
+- **Owner: two lanes open — fill from the trains.** Verified first: T2E's quiet gate
+  IS mid-run (fired 00:52:30 with the load stamp in its own log — the §358 cure
+  practiced before it lands; 9 workers, the box deliberately its alone); TE-RATCHET
+  still building. FILLED: **MEAS-DUALRUN** (the §348.2 arrangement-equivalence
+  measurement — phase 1 zero-compute setup now: extract the sealed ref, inventory
+  comparable surfaces, design the battery with the declared-divergence roster;
+  phase 2 batteries only on track-open) and **TC-READREPAIR** (compile the §353.3
+  dead-reader repair — the design question argued from evidence: delete vs repoint
+  vs writer-side, with the PDF golden bill priced). Both under the
+  zero-compute-until-track-open constraint; the §365.1 seat law notes the owner's
+  count governs the fill order.
+- **§367.1 Small chair confession for the class record:** the chair's own seat-audit
+  compound was aborted by a zsh no-match glob — the exact §358.1 lesson, one turn
+  after banking it. Guarded on the retry; the lesson's recurrence interval is
+  apparently measured in minutes.
