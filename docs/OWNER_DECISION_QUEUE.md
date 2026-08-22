@@ -17424,3 +17424,43 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   kinds. 234 hunt artifacts preserved.
 - The cascade resumes: T2H landing → the website cars → T2J → T2K → T2L →
   T2M. The producers ruling is the chair's next act.
+
+## §433 — THE PRODUCER CHARTER RULED (C1-C6 SIGNED, J1-J8 RATIFIED); TWO EXECUTORS DISPATCHED; THE UNDERCITY CHARTER COLLECTED AND QUEUED FOR ITS RULING (2026-08-23 ~21:00)
+
+- **draft-PRODUCERS-PLAN.md RULED AS COMPILED.** The central architecture
+  ratified: the generator golden hashes the WHOLE settlement, so the train
+  takes only lawful shapes — two PURE DERIVERS at the domain root
+  (golden- and census-inert by the estate's own documented mechanisms) and
+  ONE pulse-seam writer riding existing registered lifecycle machinery
+  (§423's cheap path, no verb minted). Shape-3 (generation-side given-past
+  facts) REFUSED and docketed to the owner with its full bill (O1).
+- **THE SIX CHAIR ITEMS, SIGNED:** C1 — the N/Q/R roster CONFIRMED (T2R =
+  the high-water read; the §421 gloss was a paraphrase, amended here; the
+  T2P compile dockets separately under its §423 question). C2 — the
+  domain-root homes RATIFIED (J2's argued divergence from the D3A
+  prediction; the one state-writer stays INTERIOR-familied). C3 — the
+  producers land DARK and the dossier consumer cars DOCKET to the content
+  train (record-gated, the CT-1a pattern — the facts will not sit unspoken
+  indefinitely). C4 — scheduling: all three BUILD now as seats allow
+  (R and Q dispatched this row; N at the next free seat under the cap);
+  landings slot after the current cascade in the R → Q → N weak preference.
+  C5 — **the tierGrammar-port obligation RECORDED AS LAW:** the port member
+  that lands tierGrammar imports src/domain/highWater.js and deletes its
+  local copy IN THE SAME COMMIT — two truths of the high-water law never
+  coexist on the branch (carried into the port plan's notes). C6 — the
+  typed-qualifier fallback PRE-AUTHORIZED for T2Q's calendar seam (never a
+  lie: datedAt 'PROPOSAL' over invented precision); the seam escalates to
+  the chair only if S0 finds something the fallback cannot type honestly.
+- J1-J8 RATIFIED as written — J6/J7 (the roster pin over the barred sweep;
+  the domain-tree home over a lint-tree obligation) are the deferral
+  discipline at its best. O1-O3 join the owner docket. **TE-T2R and TE-T2Q
+  DISPATCHED** (independent engine-side builds at the moving branch tip;
+  they hold long — their landings follow the map stack).
+- **The UNDERCITY charter (draft-UNDERCITY-PLAN.md, §431's order) is
+  COLLECTED** — headline: OB-7's lost spec RECOVERED VERBATIM from the
+  purged session's subagent transcript (the banked recovery route);
+  OB-6 recommended DECLINE-AS-DEFAULT with the priced optional car
+  owner-routed; six golden-inert engine cars in two trains QUEUED BEHIND
+  this producer train by its own dependency; the CT-4 fact contract
+  (F1-F6) as the one interface. **Its full ruling follows at the next
+  chair beat** — nothing in it can build before the producers anyway.
