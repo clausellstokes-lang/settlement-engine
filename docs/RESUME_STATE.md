@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~20:20 ET: MF-T2C LANDED 18/18 — CAS fb80e32f → f5332cf7 (§332; SIX
+# landings/CASes today; D3a 1-3 complete, dark). Instrument law banked to
+# memory. RS-5 RESUMED (b=18 then c=54; 90/162 durable). TC-T2D + TC-WF1E
+# compiles spawned (drafts only). ⛔ NO landing before the §290 review stop
+# (arrives at RS-5's closing collection). Handoff re-folded through §332.
 # ⭐ ~19:58 ET: T2C held its terminal on five sweep reds — chair VERIFIED all
 # five BANKED (baseline + TE-OFL's green at the same commit); GO sent; soak
 # PAUSED PID-exactly (receipts 73→91 before pause). §331: clamp debt grew

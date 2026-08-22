@@ -8,8 +8,8 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
-## ⭐⭐ CURRENT OVERRIDE — 2026-08-21 (~18:45 ET), LEDGER THROUGH §329;
-## BUILD claude/composite-r4 @ 190895a4; FIVE LANDINGS TODAY — CLOSING SEQUENCE RUNNING
+## ⭐⭐ CURRENT OVERRIDE — 2026-08-21 (~20:20 ET), LEDGER THROUGH §332;
+## BUILD claude/composite-r4 @ f5332cf7; SIX LANDINGS/SIX CASes — SOAK FINISHING, REVIEW STOP NEXT
 
 This block supersedes everything below it (the earlier 08-21 and 08-20
 overrides become history where they conflict; the map-architecture content of
@@ -52,22 +52,21 @@ overrides become history where they conflict; the map-architecture content of
    V5 counsel bank recovered byte-exact (refs/preserve/v5-counsel-bank);
    program receipts preserved out of /tmp
    (refs/preserve/program-receipts-2026-08-21).
-4. **THE AFTERNOON CASCADE (through ~18:45): ALL FIVE LANDINGS ARE ON THE
-   BRANCH.** Four CASes today: 2cdb87fa → cdfe5a96 (WF-1C, §324) → b25907f9
-   (MF-T2B rebased + the MF-PREAMBLE fence amendment, §325) → 159ec24e (the
-   notices surface + OFL rider, §327) → 190895a4 (WF-1D + the four-file
-   zero-headroom family law, §329). ⚠⚠ The §325.2 census-tuple law FIRED
-   THREE TIMES today and caught all three (memory:
-   rebase-slot-landing-hazards). MF-T2C is COMPILED and chair-reviewed
-   (§328; draft in the session scratchpad; ⚠ the BOUNDARY_EPS_Q
-   ABI-structural ruling is owner-vetoable). WF-1E's seed carries three
-   micro-items (§326.4). **RUNNING NEXT, in order (§329.3):** the OFL
-   completion commit by the NOTICES agent on 190895a4 (elected licence body +
-   SHA in scratchpad ofl-1.1-elected-body.txt / ofl-body-provenance.md) →
-   CAS → TE-T2C dispatch on the final tip (3-minute terminal heads-up
-   protocol) → RS-5 resume (paused 73/163; rs5-resume-gen.mjs in the
-   a244e7a3 scratchpad; evaluator ONCE at completion) → the closing
-   collection → the §290 review stop (owner may fire /code-review ultra).
+4. **THE DAY'S CASCADE IS COMPLETE (through ~20:20): SIX LANDINGS, SIX
+   CASes** — 2cdb87fa → cdfe5a96 (WF-1C §324) → b25907f9 (MF-T2B + fence
+   amendment §325) → 159ec24e (notices + OFL rider §327) → 190895a4 (WF-1D +
+   the four-file zero-headroom law §329) → fb80e32f (the OFL completion §330)
+   → f5332cf7 (MF-T2C §332: the embedder survives ABI scale; D3a members 1–3
+   all landed dark). ⚠⚠ LAWS BANKED TODAY: §325.2 census-tuple-across-rebase
+   (fired 3×, caught 3×) · §325.3 re-stamp-after-last-edit · §332.1 a captured
+   exit from the WRONG INSTRUMENT is not a receipt (bare vitest convicts
+   BANKED debt; do the baseline lookup) · §331.1 clamp debt grew 73→75
+   invisibly under a banked red (chartered). **RUNNING NOW:** RS-5 final
+   segments (90/162 durable; b=18 then c=54 chained; evaluator ONCE at
+   completion) · TC-T2D + TC-WF1E compile lanes (drafts only). ⛔ NO further
+   landing before the §290 MANDATORY REVIEW STOP, which arrives at RS-5's
+   closing collection — the owner may fire /code-review ultra there over the
+   whole day.
 5. **ULTRACODE (probed 08-21 ~15:00):** an Agent `remote`-isolation dispatch
    MATERIALIZES LOCALLY (a worktree on this Mac at .claude/worktrees/) — cloud
    lanes are NOT reachable from a session, so the local box is the compute

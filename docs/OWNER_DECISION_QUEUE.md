@@ -14161,3 +14161,32 @@ recommended. Implementation, per item:
 - **§331.4 RECORDED, NOT REPAIRED:** docs/implementation/INDEX.md is edited by every
   packet landing but reserved in only four historical terminal changeManifests — a
   packet-standard inconsistency for a future PACKET_STANDARD amendment, not a lane fix.
+
+## §332 — COLLECTION + CAS: MF-T2C LANDED 18/18; THE INSTRUMENT LAW BANKED; NEXT-WAVE COMPILES SPAWNED (2026-08-21 ~20:20)
+
+- **TE-T2C collected.** Tip f5332cf7 — four commits on fb80e32f, terminal 18/18 under
+  the chair's GO (ratchet at 11 known of 28,679, ceiling held; strict dist 52/433;
+  boot 524/524; started at load 3.76 on the paused-soak window). The branch was
+  re-read unchanged before AND after the gate. CAS EXECUTED: fb80e32f → f5332cf7
+  (read back). Census +2/+0/+2/+8/+2 by placeholder-and-convict; eight mutants
+  convicted and restored digest-exact; the twelve digest-pin suites identical
+  file-for-file with M7 proving the green is a measurement. **D3a members 1–3 are on
+  the branch: the exact-geometry ABI stack survives ABI scale with typed degeneracy,
+  per-component outers, and point location — all dormant.**
+- **§332.1 LAW BANKED (L3 corollary; memory wrong-instrument-exit-is-not-a-receipt):**
+  a correctly captured exit from an instrument that is not the gate's is equally not a
+  receipt — bare vitest convicts banked debt; the baseproof control proves
+  pre-existing, never blocking; the missing step is the baseline lookup. The lane
+  derived this itself post-GO and verified the five banked titles before launching.
+- **§332.2 The §2.1 compile erratum is RATIFIED:** the probe zipped a faceId-sorted
+  list against a discovery-ordered one; the divergence-3 defect was LIVE on the nested
+  fixture, worse than compiled; A1's alignment pin closes the trap inside the kernel.
+- **§332.3 RS-5 RESUMED again** (segments b=18 then c=54 chained; 90/162 durable, zero
+  corrupt). Evaluator ONCE at completion; then the closing collection row.
+- **§332.4 Next-wave compiles SPAWNED, drafts only:** TC-T2D (the noder/arrangement
+  member the T2C draft explicitly excludes) and TC-WF1E (the seeded member carrying
+  the three §326.4 micro-items + WF-1D's RAISED-3). ⛔ NO further landing before the
+  §290 mandatory review stop — compiling is preparation, not landing; the stop
+  arrives at RS-5's closing collection, where the owner may fire /code-review ultra.
+- **§332.5 Worktree custody note:** tet2c-baseproof's node_modules symlinks into
+  tet2c-tree — remove the baseproof FIRST if either is cleaned up.
