@@ -978,6 +978,11 @@
    "kind": "mutation",
    "label": "town-map/fabric duplicate export declaration"
   },
+  "tests/lint/townMapStageManifest.walker.test.js": {
+   "kind": "mutation",
+   "label": "town-map/stage-manifest foundation wired into a stage",
+   "what": "The S0-S23 record's safety argument is that no stage imports the read-side machinery (SPEC 10.15(4)). The plant imports stageManifest.js into fabricRng.js -- the ONE landed fabric module the record assigns to a STAGE -- creating the cross-node edge FOUNDATIONS>S0 that the record does not carry. Target src/domain/townMap/fabric/fabricRng.js is tracked and clean and joins MUTATED_FILES in the same edit, so the E-A attribution control applies."
+  },
   "tests/design/textureBudget.test.js": {
    "kind": "mutation",
    "label": "ribbon/retina texture budget blown",

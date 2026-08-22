@@ -101,6 +101,7 @@ MUTATED_FILES=(
   src/domain/worldPulse/worldPulseFeedCuration.js
   src/lib/chronicle.js
   src/domain/townMap/fabric/dcelEmbedding.js
+  src/domain/townMap/fabric/fabricRng.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -477,6 +478,20 @@ check_caught "town-map/fabric duplicate export declaration" src/domain/townMap/f
 #      its own failure the first time.
 perl -0pi -e "s/  opacities: Object\.freeze\(\[0\.13, 0\.2, 0\.27\]\),/  opacities: Object.freeze([0.5, 0.6, 0.7]),/" src/components/nav/FletchBand.jsx
 check_caught "ribbon/retina texture budget blown" src/components/nav/FletchBand.jsx "npx vitest run tests/design/textureBudget.test.js"
+
+# 28c. Town-map STAGE MANIFEST — a FOUNDATION wired into a stage (D3a, MF-T2J;
+#      SPEC 10.15(4), "keep consumers on the legacy accessor until every
+#      equivalence gate passes"). The whole safety argument for the read-side
+#      machinery is that no stage imports it. Written in a receipt that is a
+#      promise; written as an edge set it is a refusal. fabricRng.js is the ONE
+#      landed fabric module the S0-S23 record assigns to a stage (S0), so
+#      importing stageManifest.js into it creates the cross-node edge
+#      FOUNDATIONS>S0 that the record does not carry — the exact shape of a lane
+#      wiring a foundation into the generation path. The host was chosen because
+#      the plant PARSES there and adds no cycle: stageManifest.js imports only
+#      coordinateAbi.js, which does not reach fabricRng.js.
+perl -0pi -e "s/^export const FABRIC_FORK_NAMESPACE = /import { STAGE_IDS } from '.\/stageManifest.js';\nexport const FABRIC_FORK_NAMESPACE = /m" src/domain/townMap/fabric/fabricRng.js
+check_caught "town-map/stage-manifest foundation wired into a stage" src/domain/townMap/fabric/fabricRng.js "npx vitest run tests/lint/townMapStageManifest.walker.test.js"
 
 # 29. K-1 kernel LOD-ladder totality — a NEW arch grammar ruleset lands under
 #     arch/rulesets/ with no LOD-ladder + mesh-budget walker coverage. Every

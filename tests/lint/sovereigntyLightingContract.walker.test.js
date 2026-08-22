@@ -5440,7 +5440,49 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   one equality and cannot say whose delta vanished. Negative control at the slot: the
     //   slot's own tuple put back reds at `titles` by exactly this delta
     //   ("expected 20756 to be 20751").
-    files: 2500, parked: 365, credited: 2135, titles: 20756, suiteTitles: 5792,
+    // ── RE-RECORDED 2026-08-22 BY MF-T2J (the executable S0–S23 stage manifest), CAUSE ATTRIBUTED ──
+    // 2499/364/2135/20725/5787 → 2501/364/2137/20731/5789. THE CAUSE IS TWO NEW TEST FILES and
+    // nothing else: the member ports one dormant fabric leaf, `fabric/stageManifest.js`, and lands
+    // the source-derived walker and the artifact acceptance file that check it.
+    //   tests/lint/townMapStageManifest.walker.test.js .. +1 file, +3 titles, +1 suite title
+    //   tests/domain/townMapStageManifest.test.js ....... +1 file, +3 titles, +1 suite title
+    // No rule here widened or narrowed and no existing file changed shape. PARKED IS UNCHANGED at
+    // 364, and it was EARNED rather than lucky: both files are ONE literal `describe` with
+    // straight-line `test` calls and string-literal titles, so door 3's reader recognises all six
+    // statically and credits both files. Every loop in either file — over the fabric directory,
+    // over the node table, over the two declared inversions — runs INSIDE a named test, the SP-D
+    // idiom this family's own walkers already follow. The arithmetic closes: 364 + 2137 = 2501.
+    // `censusAuthorization`: ODQ §276 (the build sheet that architects the §275 adoptions) ·
+    // ODQ §304.4 (the D3a port charter, twin-life bounded) — under §299.4's binding-forward rule.
+    // The family's stamp is GRANTED at ODQ §312.2b.
+    // ⛔ ATTRIBUTED BY ISOLATION, NOT BY ARITHMETIC, at THIS base. With the walker pinned at the
+    //   after tuple, hiding townMapStageManifest.walker.test.js alone convicted `files` at 2500;
+    //   hiding townMapStageManifest.test.js alone convicted 2500; hiding BOTH convicted 2499 —
+    //   the base tuple EXACTLY, which is also the proof that nothing else in the tree moved this
+    //   census under the lane. Each figure was read from the arm's own failure message.
+    // ⚠ THE SEQUENCED WALK WAS RUN RATHER THAN SHORT-CIRCUITED. `files` reds first and blacks out
+    //   the four arms below it, so the tuple was re-derived one figure at a time: `files` 2501,
+    //   then `parked` PASSED at 364 without ever redding, then `credited` 2137, then `titles`
+    //   20731, then `suiteTitles` 5789, then GREEN at 33/33.
+    // ⚠ THE CARRY LAW. This member is STACKED on MF-T2H's unlanded holding commit, which is itself
+    //   stacked on MF-T2Bf's, and it will be rebased at its landing slot. The DELTA
+    //   (+2/+0/+2/+6/+2) is what crosses; the tuple above is re-derived from the hash after the
+    //   last edit at that slot, never carried.
+    // ⭐⭐ THE CARRY LAW, EXECUTED AT THE LANDING SLOT — THE MAP STACK (ODQ §461.2: MF-T2J, MF-T2K,
+    //   MF-T2L and MF-T2M landed as ONE stacked landing by TE-MAPSTACK-LANDING, 2026-08-23). This
+    //   member was authored at base 05e7f9d5 (MF-T2H's PRE-REBASE holding; after-figure
+    //   2,501/364/2,137/20,731/5,789) and rebased onto 11539636 (WEB-7, the 31st landing) as the
+    //   FIRST member of the chain. The DELTA `+2/+0/+2/+6/+2` is what crossed; the tuple was
+    //   RE-DERIVED at the stack tip by execution, never carried. ⛔ THE BASE HAD MOVED UNDER IT:
+    //   H8B (+4 titles), WEB-1 (+1 file/+1 parked/+1 title), WEB-4 (+2 titles), WEB-5 (+18
+    //   titles/+4 suite titles), WEB-6 (+1 title) and WEB-7 (+5 titles/+1 suite title)
+    //   re-recorded the blocks directly above, so the slot reads 2,500/365/2,135/20,756/5,792 and
+    //   this member's POSITION in the chain re-derives to 2,502/365/2,137/20,762/5,794 (the figure
+    //   its rebased commit carries). ⚠ In a stacked landing only the LAST tuple line below is
+    //   live: each position's figure is arithmetic at its rebase stop and the SUM is convicted
+    //   once at the stack tip, with the negative control (the slot's own tuple put back) redding
+    //   at `files` by exactly the summed delta.
+    files: 2502, parked: 365, credited: 2137, titles: 20762, suiteTitles: 5794,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
