@@ -74,6 +74,12 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~20:00 ET: INV-DESC CONFIRMED WIDER (§373) — 933 authored institution
+# descriptions INVISIBLE on the paid surface TODAY (live half); edit-ghosting
+# latent behind the flag. RR-2 chartered + compile dispatched (cure one line,
+# declared shift w/ owner FYI-veto exhibit; OSR shrink split-promoted w/ RR-1
+# behind the mint). Agreement-pin instrument chartered (probe red 7/16 at
+# base). Cap holds: WF-8 · DOSSIER · TE-T2F · TC-RR2.
 # ⭐⭐ ~19:30 ET: DUALRUN phase 1 (§372) — F-1 FOUND BY READING: landed
 # canonicalBytes dropped the U+001F separators (digest injectivity lost; pin
 # froze the defect) → MF-T2Bf micro-fix CHARTERED, after T2F, BEFORE T2H.

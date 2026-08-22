@@ -15382,3 +15382,37 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   shell extractor matched nothing, hashed two empty strings, and reported SAME —
   cured with a SYMBOL-FOUND CONTROL that turns exactly that into a STOP. An
   extraction that found nothing is not an extraction that found equality.
+
+## §373 — INV-DESC CONFIRMED, WIDER THAN RAISED: 933 AUTHORED DESCRIPTIONS INVISIBLE ON THE PAID SURFACE; RR-2 CHARTERED (2026-08-22 ~20:00)
+
+- **THE VERDICT (executed probe, CONFIRMED):** the editor writes institutions[i].desc;
+  the PDF slice reads description||blurb — and the split severity is the finding:
+  the EDIT-ghosting half is LATENT (the sole queueEdit('edit-prose') call site sits
+  behind the default-false workbench flag), but the GENERATED-prose half is LIVE
+  TODAY — 933 authored one-liners (311 canonical + 622 variants, measured) are
+  structurally invisible in every PDF and Foundry journal ever exported; a custom
+  institution is WORSE (two descriptions on one record — the stale generated blurb
+  prints while the workbench shows the DM's text). Lifecycle otherwise clean (the
+  edit survives regen/reload/import).
+- **§373.1 RR-2 CHARTERED (compile dispatched on the freed seat, cap held at four):**
+  the read-side, migration-free cure (`inst?.desc || inst?.description`, desc first
+  — the DM's pen wins; the dead blurb arm struck; the faction slice's correct form
+  is the in-repo precedent) + the DECLARED SHIFT priced honestly (§110.3 +
+  §72.3 key-by-key goldens, with a before/after PDF page as the owner's FYI-VETO
+  EXHIBIT — the §362 grant read as covering a drafted shift with exhibits, veto on
+  sight) + the OSR shrink riding SPLIT PROMOTION with RR-1 behind the mint.
+- **§373.2 THE STRUCTURAL FINDING — a new instrument chartered:** the OSR ratchet is
+  BLIND to this class (a PARTIAL writer — the custom arm writes description — hides
+  the missing-main-writer defect). INV-DESC's working prototype (red at base on 7
+  of 16 queue-wired editable paths) becomes the EDITABLE-PATH↔CONSUMER AGREEMENT
+  PIN, landing with the cures it convicts or with attributed banked rows.
+- **§373.3 Sibling dispositions:** the FALSE justification at parityContract.js:89
+  → fixed inside RR-2 (a comment that lies about WHY is the §320 class one level
+  down) · economicViability.summary's read-time overwrite of a DM-editable field
+  (vs DS-GEN-11) → chartered for investigation, not cured · safetyDesc/
+  economicDragDesc (no export reader) → the §369.2 owner-cull docket ·
+  userEdits.js:36-40's phantom regenerate-branch claim → the housekeeping bundle.
+- **§373.4 For the assessment record:** this is the product→experience gap's
+  perfect specimen — the depth existed, authored, for months; the surface never
+  showed it; no instrument could see it; a reading lane found it in an afternoon.
+  The cheapest large experience win in the program: one line, plus proofs.
