@@ -16944,3 +16944,37 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   divergence is CT-2's; warFaith's is CT-3's), and the §414-as-corrected
   terminal. The cascade behind it: H8B → CT-3 → T2H → the website cars →
   T2J.
+
+## §419 — THE T2K COMPILE RULED: FOUR RAISED ITEMS ANSWERED, ELEVEN COMPILE JUDGMENTS RATIFIED; TE-T2K DISPATCHED (2026-08-23 ~08:30)
+
+- **draft-MF-T2K.md COLLECTED AND RULED AS COMPILED** (687 lines, the T2J
+  form, CLAIM_RE 0). The central reframing accepted: a DESIGN-IMPLEMENTATION
+  member, measured not assumed (four greps prove the sealed fabric holds no
+  support machinery beyond the bare id string T2F already ported) — the
+  T2E precedent class. The key design ratified: derived owner-qualified
+  surfaceId with caller-supplied REFUSED (the free-alias law made
+  structural), injectivity by `:`-reservation in the segment grammar (the
+  T2Bf lesson translated to a wall-lawful idiom — measured, the C0 idiom is
+  unavailable here); the DAG law landed roster-shaped with the §416.1
+  identity arm designed in; the slot axis total with the no-inference law
+  structural in both directions; MASSING_UNKNOWN_REASONS imported not
+  re-declared (one vocabulary, drift impossible).
+- **THE FOUR RAISED, RULED:**
+  1. **CONNECTIONS OUT** — the plan's reading confirmed over T2F's INDEX
+     phrase (J-TCT2K-11's argument is decisive: no substrate this era, and a
+     fake connection would license exactly what F's refusal refuses). The
+     INDEX cell's overstatement is recorded here as corrected.
+  2. **THE ROSTER RENAME RIDES MF-T2L's LANDING ACT** — one honest word
+     (UNASSIGNED_LANDED_MODULES) over a third roster; T2L hits the same
+     walker arm, its landing act edits that file anyway, and T2J will be
+     terminal by then, so the rename is free at that touch. Until then the
+     walker's failure message, not its constant name, is the contract.
+  3. **CAPS RATIFIED as proposed:** leaf ≤200, packet ≤210 effective; a
+     split proposed rather than renegotiated on overflow.
+  4. **THE ERA REFUSAL stands** for MAINTAINED_FREE_SPACE — a closed list
+     ports whole; the typed refusal names the §299.3c-blocked substrate and
+     flips deliberately in the operation-seam member.
+- J-TCT2K-1..11 RATIFIED as written. **TE-T2K DISPATCHED** on the packet as
+  ruled (stacked on the D3a stack's then-current tip; the packet's own §11
+  carries the fresh-law implementation order). Active: CT-2-landing ·
+  TE-T2K; the cascade continues.

@@ -74,6 +74,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~08:30: T2K COMPILE RULED (§419) — design-implementation reframing
+# accepted; connections OUT; roster rename rides T2L's landing act; caps
+# ≤200/≤210 ratified; era refusal stands; J1-11 ratified. TE-T2K dispatched.
 # ⭐⭐ ~07:50: T2Bf LANDED (§418, 22nd) — tip 3519dcc1; slot pattern
 # RATIFIED as standard (blob carry-proof, keep-both + deep-compare, delta
 # never tuple, detached terminal, mutex-liveness obeyed). DISPATCH RULE:
