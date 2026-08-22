@@ -15976,3 +15976,47 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   throws, the shrink regenerates at C2 — a freeze never rebases). MEMORY.md
   measured OVER its hard read limit on arrival (17,899 bytes) — fold 7 is the
   chair's next act, one lane past due.
+
+## §393 — H8B COLLECTED: BOTH MEMBERS BUILT AND PROVEN; FOUR JUDGMENTS RATIFIED; A NEW STANDING LAW — ATTRIBUTION SWEEPS RUN MUTEXED (2026-08-22 ~19:20)
+
+- **The member:** tip 3102d67e for CAS, two severable commits over base 9bfae712
+  (5770a08c the H8 re-seed, 3102d67e Cure 1b), tree clean, no ref moved, npm ci
+  genuine by the 468-vs-453 entry tell. The gate table is clean and UNCONTENDED
+  (mutex acquired after 27 polls): check-test-ratchet exit 0 at ceiling 11
+  unmoved, +4 tests = exactly the four new meta-arms, eslint 0.
+- **H8 re-seed proven the hard way:** the negative control FIRST (the freshness
+  pin reds pre-regen, so the stale-bundle defect is demonstrated, not assumed);
+  after regen exactly one bundle line moves (the Source-hash banner comment) and
+  the stripped-banner sha256 is identical both sides at 9920 lines. FIVE atlas
+  rows corrected (the charter named four; the lane found a fifth citing the
+  retired sentence). Finding #10 withdrawn as stated, its narrower survivor
+  kept, the genuinely-open full-regen question preserved open.
+- **A charter-expectation CORRECTION recorded:** esbuild drops module-header
+  JSDoc, so a header-comment edit moves ZERO bundled bytes and ONLY the recorded
+  input hash — the inlined-file law's refinement, in the packet and receipt.
+- **Cure 1b proven by dual-drive contract control:** byte-identical outputs on
+  the REGRESSION case, +2/+5 advisory lines on SCOPE SENTINEL / STRICT DIST,
+  exits identical throughout; evidence resolution hoisted into one lazy
+  evidenceFor (green runs pay nothing); uncollectedOf's pinned shape untouched.
+- **Four judgments RATIFIED:** (1) staging all five bundle metas — matches all
+  six prior regen commits; (2) the fifth atlas row — class-complete, exactly the
+  size-to-class law; (3) STRICT DIST's own cost advisory rather than the census
+  one — that surface banks nothing, the distinction is correct; (4) leaving
+  MEMORY.md to the chair with the topic file written — right under live
+  concurrent writers; the index line is added at this collection.
+- **RULING on the RAISED (standing law, the load-contamination family's third
+  face):** ANY SWEEP WHOSE FAILING SET WILL BE READ FOR ATTRIBUTION RUNS UNDER
+  THE MUTEX or on a verified-quiet track; a bare sweep is smoke only. Evidence:
+  same tree, same commit — bare-while-contended 8 files/17 tests, mutexed 3/5;
+  all twelve extras were budget timeouts, and the contended run implicated the
+  lighting walker's census right after a re-record when the failing arm was
+  actually DOOR 3 PARSER. Also confirmed live: test:ratchet returned exit 3 =
+  the mutex giving up after 40 polls, the gate never ran — the recorded law
+  observed in the wild.
+- **The window coordination executed at this collection:** the mint's watcher
+  fired itself at 14:01:15Z on the H8B trough (trackempty=verified, mutex held);
+  the chair resumed the mint lane with the chain order — a green definitive
+  ratchet is NOT the terminal; fire ONE full bare check at C2 while the track is
+  quiet (build/verify:dist have never run there) — and ordered CT-3/T2H to hold
+  heavy batteries until it completes. H8B holds for GO; landing order unchanged:
+  mint → RR-1 → RR-2 → T2Bf → CT-2 → H8B/CT-3/T2H in GO order.

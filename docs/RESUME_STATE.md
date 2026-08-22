@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~19:20: H8B COLLECTED (§393) — tip 3102d67e green uncontended, holds
+# for GO. NEW LAW: attribution sweeps run MUTEXED. Mint watcher SELF-FIRED
+# 14:01Z on the H8B trough; chair resumed the lane: green ratchet → chain ONE
+# full bare check at C2; CT-3/T2H ordered to hold heavies. CAS on its green.
 # ⭐ ~19:00: OSR-10 COLLECTED (§392) — mint PROVEN (C1 12b3aa53 permanent /
 # C2 eb6124a6 for CAS), no new law, ALL-SAME 1412/1412, §389.1 closed in
 # agreement. ⚠ TERMINAL RED on box capacity (hook timeout under H8B load);
