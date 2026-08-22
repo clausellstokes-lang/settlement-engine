@@ -74,6 +74,14 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ~03:05: WF-8 lane CLOSED (observed the CAS itself). TWO FLAGS for the
+# train's closing collection + memory pass: (1) a compile's register table is
+# a SAMPLE not a denominator — three NOT-INCURRED verdicts wrong, each found
+# only by running an instrument the packet never named (L7 applied to
+# compiles); (2) chroniclersLetter.test.js is INVISIBLE to the lighting
+# census (titles uncredited; nothing reds to say so) — any title arithmetic
+# over it is the wrong denominator. Also queued-deferred: the FAITH annex URL
+# promotion at its second consumer.
 # ⭐⭐ ~02:50: WF-8A LANDED — CAS a09138d7 → 47ea9c9b (§376; eleven/28,719
 # exact; obituaries live; A5 debt closed). ⛔ THE MINT'S WINDOW OPENS: rebuild
 # messaged on 47ea9c9b; NO GOs until its CAS. Then: T2F → T2G → RR pair →
