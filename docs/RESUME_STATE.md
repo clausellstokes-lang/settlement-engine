@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ~03:25 ET: WF-1F at the door (tip 055d520d on 27c250f9; census +0 all five,
+# NO re-record owed; declared shift 45/0/0 key-by-key, one pin re-records) —
+# GO SENT, track clear (T2E building, no gate). Ratified: the third stale-
+# clause repair (WF-1E falsified it); the scan-width guard for the dead-prose
+# prohibition (mutant b now convicts); arms folded into A1 (census zero).
 # ⭐ ~03:05 ET: TC-T2E collected (§348) — dispatch candidates REFUTED, member
 # 5 = MassPartQ RATIFIED (design-implementation, caps 160/180); TE-T2E
 # DISPATCHED on the freed seat. QUEUE now: TE-OSR9 (awaits charter review) ·
