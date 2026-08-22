@@ -41,6 +41,23 @@ describe('PDF viewModel parity', () => {
     expect(vm.raw).toBe(settlement);
     expect(vm.active).toBeTruthy();
     expect(vm.narrativeMode).toBe(false);
+
+    // §353.3 cured semantics: legacy strain-list keys planted on an institution
+    // record never reach the services slice (no producer ever wrote them there).
+    // anchored: detailed.length >= 1 plus name/category flow-through prove the
+    // seeded row was mapped — the [] cannot come from an empty or dropped list.
+    const seeded = {
+      ...settlement,
+      institutions: [
+        { ...settlement.institutions[0], pressures: ['legacy-a'], stresses: ['legacy-b'] },
+        ...settlement.institutions.slice(1),
+      ],
+    };
+    const vm2 = buildViewModel({ settlement: seeded });
+    expect(vm2.services.detailed.length).toBeGreaterThanOrEqual(1);
+    expect(vm2.services.detailed[0].pressures).toEqual([]);
+    expect(vm2.services.detailed[0].name).toBe(vm.services.detailed[0].name);
+    expect(vm2.services.detailed[0].category).toBe(vm.services.detailed[0].category);
   });
 });
 

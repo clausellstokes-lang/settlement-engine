@@ -218,7 +218,9 @@ export function servicesSlice(active) {
     requirements:   inst?.requirements || inst?.dependencies || [],
     products:       inst?.products || inst?.outputs || [],
     customers:      inst?.customers || inst?.clientele || [],
-    pressures:      inst?.pressures || inst?.stresses || [],
+    // §353.3 — no institution producer, admission schema, or edit path ever wrote a strain-
+    // list key on institutions; the empty field keeps the slice contract (section stays inert).
+    pressures:      [],
     plotHooks:      inst?.plotHooks || [],
     tags:           inst?.tags || [],
   }));

@@ -412,11 +412,25 @@ export const ENGINE_FIELD_REGISTRY = Object.freeze([
 // Fields deleted because nothing read them. The walking test asserts the
 // file no longer mentions them — a dead field cannot quietly return without
 // arriving through the registry above (i.e., with a reader).
+// The registry also holds dead READS removed from a consumer (the field token
+// is the exact read expression), guarded by the same walker.
 export const REMOVED_DEAD_FIELDS = Object.freeze([
   {
     field: 'hasRegionalSignal',
     file: 'src/domain/region/deriveRegionalState.js',
     removed: 'Wave 8 — write-only boolean on deriveLocalDelta; every consumer thresholds '
       + 'changes[].magnitude itself.',
+  },
+  {
+    field: 'inst?.pressures',
+    file: 'src/pdf/lib/viewModelBodySlices.js',
+    removed: '§353.3 — dead READ arm on servicesSlice: no institution producer, admission '
+      + 'schema, or edit path has ever written a pressures key on institution records.',
+  },
+  {
+    field: 'inst?.stresses',
+    file: 'src/pdf/lib/viewModelBodySlices.js',
+    removed: '§353.3 — dead READ arm on servicesSlice: no institution producer, admission '
+      + 'schema, or edit path has ever written a stresses key on institution records.',
   },
 ]);
