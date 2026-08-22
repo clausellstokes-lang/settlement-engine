@@ -74,6 +74,14 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~17:35 ET: TE-RATCHET BUILT+PARKED at 3c781e7e (+499/-4, 2 files) —
+# contract proven by BASE-VS-CURED dual drive (24/24 identical exits, byte-
+# identical --update writes over 12 fixtures); spec CORRECTED from vitest
+# source (timeout PROSE never reaches the JSON — stack overwritten with the
+# placeholder marker; duration-vs-budget + marker are the live signals; a
+# prose classifier fails open). Lands AFTER the mint. Its freed active seat
+# is RESERVED for WF-8's activation on T2E's imminent CAS — wakeup: do not
+# double-fill.
 # ⭐ ~17:10 ET: TWO LANES FILLED (§367) — MEAS-DUALRUN (phase-1 setup) +
 # TC-READREPAIR (compile), both zero-compute until track-open. T2E's gate
 # confirmed mid-run (00:52:30, load-stamped). Board: T2E gate · RATCHET ·
