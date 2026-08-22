@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~11:05: MF-T2G LANDED — CAS cb369d2b0b63 → ac0d0149 (§382; 15th
+# landing; D3a member 7; the §379 notes live). Tail law's THIRD face banked
+# (process-lineage identification). CT-1a messaged next-up. Queue: CT-1a →
+# RR-1 slot decision → HOUSE → ratchet cure → RR-2.
 # ~10:45 WAKEUP: FOURTH raced GO caught (T2G's log: 'Gate NOT started';
 # send was queued-not-resuming) — RE-SENT, now resuming. PATTERN NOTE for
 # the GO protocol: a send that returns 'queued for delivery' to a lane

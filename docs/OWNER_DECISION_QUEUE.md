@@ -15640,3 +15640,27 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   from 5b594a93's content onto cb369d2b0b63 — three landings of drift (WF-8A, the
   mint, T2F); the §379 notes ride its own commits; census by conviction; focused
   re-proof; the handshake heads-up. Then CT-1a, then RR-1's slot decision.
+
+## §382 — COLLECTION + CAS: MF-T2G LANDED — THE REMOVAL MEMBER; THE TAIL LAW'S THIRD FACE (2026-08-22 ~11:05)
+
+- **TE-T2G collected.** Tip ac0d0149 — four commits on T2F's landing, terminal green
+  on all seventeen steps with both exit readings agreeing; the frozen ELEVEN held
+  exactly at 28,729 tests with the +8/+2 arithmetic closing at estate scale; zero
+  strays on the quiet draw across all 954 log lines. CAS EXECUTED: cb369d2b0b63 →
+  ac0d0149 (read back). D3a member 7: the §299.3(b) light-profile discharge — the
+  nonconforming published record stripped with the shadow draw-ops preserved
+  byte-identically, the twelve-pin declared shift landing with zero added and zero
+  removed, and the §379 discharge notes alive in all four landed packets,
+  re-grepped post-pick.
+- **§382.1 THE TAIL LAW'S THIRD FACE BANKED:** gate-tail streams only the tail —
+  the lane's own log was 47 lines of a 954-line run, and reading it alone would
+  support a confident wrong claim that three steps ran. The full log is identified
+  BY PROCESS LINEAGE (walking the pid tree from the ratchet up through check to the
+  wrapper), never by recency in a shared TMPDIR — the self-naming discipline
+  applied to a file the lane did not name. The trilogy: the tail under-reports; the
+  printed path is the first cure; process lineage is the cure when no path printed.
+- **§382.2 Standing adoptions confirmed in the row:** the carry law's third face
+  (the trilogy complete) · trap-guarded sentinels as estate standard · the
+  MapOverlay warning noted pre-existing in a file the member never opened.
+  **CT-1a IS NEXT-UP** (messaged): one commit onto ac0d0149, MANIFEST/INDEX
+  conflicts expected, zero census motion by design, then the handshake.
