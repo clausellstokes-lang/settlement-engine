@@ -70,7 +70,7 @@ describe('the dossier state-prose projection', () => {
     }
   });
 
-  it('carries the measured corpus: 62 state blocks over 6 desks, 78 causal families', () => {
+  it('carries the measured corpus: 65 state blocks over 6 desks, 78 causal families', () => {
     // 59 block headers were authored at the 2026-08-03 merge; DS-GEN-4 is FOLDED INTO
     // DS-STR-1 (§0h V1-a) and keeps its id for cross-references without owning a pool,
     // so 58 landed.
@@ -86,7 +86,18 @@ describe('the dossier state-prose projection', () => {
     // and the causal leaf came out of the regeneration BYTE-IDENTICAL, and general +
     // defense differ only by their header count line plus the added blocks — zero
     // existing pools changed, so no same-seed sentence anywhere in the estate moved.
-    expect(allStateBlocks.length).toBe(62);
+    //
+    // 62 → 65 (2026-08-22, car CT-2, ratified at ODQ §378 and sequenced at §387).
+    // The growth chapter adds THREE blocks — DS-POP-3 (the direction of the roll read
+    // against the approach), DS-GEN-15 (the fabric wears it), DS-GEN-16 (what the years
+    // left standing) — on the same wholly-new-block shape, and lands DARK. Measured at
+    // this landing, not asserted, and TIGHTER than CT-1a's: SIX of the seven leaves came
+    // out of the regeneration BYTE-IDENTICAL (defense, economy, power, stressors,
+    // warFaith and the causal leaf), only general.generated.js moved at all, and its
+    // ONLY removed line is its own header count comment. Key-by-key across all seven:
+    // 3 ADDED, 0 REMOVED, 0 CHANGED. No existing pool changed length, so drawVariant's
+    // `% eligible.length` cannot select differently anywhere, and there is no capsule.
+    expect(allStateBlocks.length).toBe(65);
     expect(Object.keys(DOSSIER_CAUSAL_PROSE).length).toBe(78);
   });
 
@@ -103,7 +114,11 @@ describe('the dossier state-prose projection', () => {
     // between a stale floor and the real total is exactly where a later parser regression
     // hides — the pool a grammar change silently stops consuming still leaves the estate
     // above 2153, and this pin is the only thing in the tree that would have noticed.
-    expect(stateVariants).toBeGreaterThanOrEqual(2201);
+    //
+    // 2201 → 2238 (2026-08-22, CT-2, ODQ §378/§387). Re-pinned to the MEASURED total
+    // again, per CT-0 §5 R-5 and on CT-1a's ratified precedent: the floor tracks the
+    // corpus at every car, so the slack a parser regression could hide in never opens.
+    expect(stateVariants).toBeGreaterThanOrEqual(2238);
     expect(causalVariants).toBeGreaterThanOrEqual(468);
   });
 
