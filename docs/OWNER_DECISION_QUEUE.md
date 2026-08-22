@@ -15466,3 +15466,29 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
 - **§375.2** Unexplained-but-harmless: 0-byte task outputs appearing per-minute in
   the tasks dir (~02:10–02:14) — noted for the next quiet audit, not chased
   mid-train.
+
+## §376 — COLLECTION + CAS: WF-8A LANDED — THE WORLD WRITES OBITUARIES; THE MINT'S WINDOW OPENS (2026-08-22 ~02:50)
+
+- **TE-WF8 collected.** Tip 47ea9c9b — one commit, 22 files on a09138d7, terminal
+  green with BOTH exit readings agreeing (in-shell + the gate's own tail), fired
+  bare with the ratchet taking the mutex itself after zero polls. The frozen
+  ELEVEN held exactly over 28,719 tests; strict dist clean every direction; the
+  §358.2 quiet draw drew nothing. CAS EXECUTED: a09138d7 → 47ea9c9b (read back).
+  The settlement obituary is live machinery: one beat per creed that permanently
+  vanishes, proven by the independent cross-check (minted beats ≡ the
+  permanently-vanished set, tick-for-tick ×5 fixtures) with the false-receipt
+  metronome cured (§356.1); the minter-totality guard stands with its
+  written-ruling escape proven by plants (P2 CLEARS — the half that did not
+  exist); pantheon A5's debt CONFIRMED-closed; the four zero-headroom files at
+  ZERO changed bytes. The 17→20 override and R-5 are written into packet §7 as
+  ratified. tewf8-baseproof retained as R-7 evidence until this row's successor
+  collections close.
+- **§376.1 THE MINT'S PROTECTED WINDOW OPENS (§353):** the final tip is 47ea9c9b;
+  the rebuild message goes out with this row. From the mint's C1 heads-up to its
+  CAS: NO GO to any lane, no chair landing. Per the mint's own executed probes,
+  WF-8's two worldPulse leaves are the ONLY live candidate for a new inventory
+  row — if one appears at the reconciliation, its attribution is pre-narrowed and
+  the §353.5 three-branch rule governs.
+- **§376.2 The closing train's score so far:** WF-1F · MF-T2E · WF-8A landed —
+  three of four cars; the mint's rebuild is the last. Behind the window, in
+  order: TE-T2F (first slot), TE-T2G, then the RR pair and the ratchet cure.

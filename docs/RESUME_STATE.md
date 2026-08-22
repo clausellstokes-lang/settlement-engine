@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~02:50: WF-8A LANDED — CAS a09138d7 → 47ea9c9b (§376; eleven/28,719
+# exact; obituaries live; A5 debt closed). ⛔ THE MINT'S WINDOW OPENS: rebuild
+# messaged on 47ea9c9b; NO GOs until its CAS. Then: T2F → T2G → RR pair →
+# ratchet cure.
 # ⭐ ~02:20: T2G RULED (§375 — the removal member; 12-literal declared shift;
 # T2Bf-independent) + TE-T2G dispatched. ⚠ TC-DOSSIER SILENTLY LOST (6h, zero
 # artifacts, not in roster) — re-dispatched fresh; NEW CLASS RULE: a compile
