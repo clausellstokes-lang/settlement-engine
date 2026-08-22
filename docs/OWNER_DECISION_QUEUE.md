@@ -16978,3 +16978,44 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   ruled (stacked on the D3a stack's then-current tip; the packet's own §11
   carries the fresh-law implementation order). Active: CT-2-landing ·
   TE-T2K; the cascade continues.
+
+## §420 — CT-2 IS LANDED (THE 23RD LANDING): THE ENVELOPE READING REVERSED AT THE SLOT AND ATTRIBUTED POSITIVELY; THE LEAF-DIGEST RE-KEY RATIFIED; FOUR INSTRUMENT LIES BANKED; H8B's GO ISSUED (2026-08-23 ~09:10)
+
+- **THE CAS EXECUTED:** claude/composite-r4 moved 3519dcc1 → 1a437bca; the
+  growth chapter (DS-POP-3, DS-GEN-15/16, +959 lines) is on the branch; both
+  CT-2 pins cleaned. Terminal green both halves in one detached invocation
+  (343s, TREE_HEAD_AFTER equal to the tip — the gate mutated nothing), zero
+  strays, the conflict resolved by the ratified pattern WITH A REFINEMENT
+  BANKED: manifest row surgery must be STRING-AWARE (a brace inside a value
+  defeats naive matching), and an auto-merged INDEX is verified, never
+  trusted.
+- **⭐⭐ THE §12 RE-STAMP REVERSED — the deferred act paid for itself:** at
+  the schema-9 base both sides exited 1 and only digests could discriminate;
+  at this slot the RR re-freezes plus the schema-10 mint left the envelope
+  WHOLE (exit 0, 1995 exactly matching), so the exits now discriminate
+  directly — and the break at this landing is WHOLLY CT-2's, attributed
+  POSITIVELY: dropping only its regenerated leaf into a pristine slot-base
+  checkout flips the bare gate 0→1. Lawful under §384.2's batching; recorded
+  in the landed §12 with live figures measured, nothing inherited
+  (frozenAtSha 4f42be70; the schema-10 vocabulary moved — manifests.*.entries,
+  no top-level sourceTree/scanTree — the schema-9 prose corrected).
+- **RATIFIED — the member-row re-key onto the LEAF DIGEST:** a row keyed on
+  a commit hash is UNSTAMPABLE BY CONSTRUCTION (stamping a member's own sha
+  into the member changes it — it went stale at the amend and again at the
+  rebase); the leaf digest is what the envelope actually binds and survives
+  both. Banked as the standing shape for envelope member rows.
+- **§394 F1 MEASURED FINAL for the trailing mint:** general.generated.js
+  3df1a6ee→436f763d at this landing (CT-2's); warFaith 6f74d5df at frozen AND
+  base AND member — unmoved here, CT-3 originates it. All seven leaves
+  matched frozen at the slot base; exactly one moves. The leaf count
+  corrected in the open (seven: six state + causal; the earlier flag wrong).
+- **FOUR INSTRUMENT LIES CAUGHT AND BANKED (the truncated-artifact class):**
+  git rev-parse ECHOES an unresolvable arg to stdout before its non-zero
+  exit (an || echo ABSENT never fires; absence reads as DIFF) · macOS sed
+  has no \b (a timing-strip that silently doesn't strip) · vitest POSITIONAL
+  full-path filters collect NOTHING and exit 1 (a nothing-ran wearing a red)
+  · gate-tail's visible log holds only the tail while the body streams to
+  $TMPDIR (a frozen 77-byte log mid-run is NORMAL, not a kill — refines
+  §414's tell: the kill diagnosis needs the dead pid, not the small log).
+- **H8B's GO ISSUED** with the pattern as refined; then CT-3 → T2H → the
+  website cars → T2J → T2K.
