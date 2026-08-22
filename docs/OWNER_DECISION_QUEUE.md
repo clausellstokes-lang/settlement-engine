@@ -15605,3 +15605,38 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   then TE-HOUSE (its post-WF-8A blocker satisfied; H9 now carries the row-style
   census and the two-row-styles requirement) and the RR pair (post-mint blocker
   now satisfied) and the ratchet cure per the queue.
+
+## §381 — COLLECTION + CAS: MF-T2F LANDED — THE EXACT-LEGALITY PORT; THE PORT TRAIN'S FIRST GATED CAR (2026-08-22 ~09:40)
+
+- **TE-T2F collected.** Tip cb369d2b0b63422d — four commits on the mint's C2,
+  terminal green in 16m08s with the STARTED/FINISHED handshake bracketing the run
+  and the exit captured in-shell (unlosable by turn boundaries). The full 20-step
+  body located BY THE WRAPPER'S PRINTED PATH — never mtime over a shared TMPDIR —
+  and preserved (96,813 bytes). Ratchet at the frozen ELEVEN of 28,727 exactly,
+  zero strays; both typecheck ceilings at zero headroom; the 29 lint warnings
+  proven disjoint from the member's files by intersection. CAS EXECUTED:
+  42e12a76 → cb369d2b0b63 (read back). D3a member 6 of 16: solid legality + exact
+  intersection area, two dormant leaves, rationals under the D1 names, the typed
+  refusal over silent garbage — the float verdict-inversion cured with its carried
+  fixture convicting.
+- **§381.1 THE COLLECTION'S THREE LESSONS:** (a) the census-carry law's FIFTH
+  firing, caught by the lane's stop-even-on-clean-pick script — four figures
+  self-consistent, one wrong by exactly a sibling's twenty titles; (b) ⛔ THE
+  FABRICATED-SHA CLASS, its second specimen (the first bit the chair pre-§320):
+  the lane EXTENDED a short SHA instead of reading it, owned the word
+  'fabrication', and was saved by its terminal runner's TIP GUARD (expected-vs-
+  rev-parse, abort on mismatch) — the lesson is THE GUARD, not the care: no SHA in
+  any report is typed rather than read, and every landing script carries the
+  guard; (c) THE TAIL IS NOT THE GATE — gate-tail prints 40 lines and a green
+  exit is not evidence the chain RAN; the body is located by the printed path and
+  verified step-by-step (the second lane tonight to check the resumed-gate trap
+  rather than trust it).
+- **§381.2 THE §12 QUESTION RULED — DO NOT AMEND:** the packet's landing record
+  omits the check:tail row per the family precedent (T2E identical), and the
+  lane's instinct is affirmed as law: THE GATED BYTES OUTRANK THE MORE COMPLETE
+  DOCUMENT — a docs amendment would hand the chair a tip the gate never ran
+  against. The terminal result's home is the lane receipt and this collection row.
+- **§381.3 T2G IS NEXT-UP** (messaged): cherry-pick its discharge-notes landing
+  from 5b594a93's content onto cb369d2b0b63 — three landings of drift (WF-8A, the
+  mint, T2F); the §379 notes ride its own commits; census by conviction; focused
+  re-proof; the handshake heads-up. Then CT-1a, then RR-1's slot decision.

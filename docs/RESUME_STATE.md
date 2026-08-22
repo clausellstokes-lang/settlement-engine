@@ -74,6 +74,12 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~09:40: MF-T2F LANDED — CAS 42e12a76 → cb369d2b0b63 (§381; the port
+# train's first gated car; 14th landing of the arc). Lessons: carry law's
+# 5th firing caught · the FABRICATED-SHA class + tip-guard cure · the tail
+# is not the gate. §12 ruled: gated bytes outrank document completeness.
+# T2G messaged next-up. Queue: T2G → CT-1a → RR-1 slot → HOUSE → ratchet
+# cure → RR-2.
 # ~08:40: RR-1 REHEARSAL PAIR parked (C1 75fdb2d1 / C2 b13f60f3 on
 # 42e12a76; regenerates at slot if the tip moved). Shrink exact −2/−2, no
 # surprise row. JUDGMENT to ratify at its slot msg: schema-9 shrink digest
