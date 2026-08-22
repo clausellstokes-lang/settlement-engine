@@ -15933,3 +15933,46 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
 - Both lanes hold for GO; the landing order is unchanged: mint → RR-1 → RR-2 →
   T2Bf → CT-2 → H8B/CT-3/T2H in GO order. Stacked lanes re-stamp at their slots
   per the rebase-slot laws.
+
+## §392 — OSR-10 COLLECTED: THE SCHEMA-10 MINT BUILT AND PROVEN; TERMINAL RED ON BOX CAPACITY, HONESTLY CLASSIFIED; CAS HELD FOR A GREEN TERMINAL (2026-08-22 ~19:00)
+
+- **The mint:** C1 12b3aa53 (the PERMANENT subjectSha — never amend, never rebase
+  across), C2 eb6124a6 = the tip for CAS; base 9bfae712 unmoved; C1 an ancestor
+  of C2; fast-forward clean. NO NEW GOVERNANCE LAW NEEDED: schema 9's two
+  generalisations (retained count DERIVED from each target's own law; unscanned
+  movement recorded by named path) carried the recurrence as data — and the
+  4/7-vs-5/6 delta against target 9 is the proof the derived count measures
+  rather than echoes: package.json had ALSO moved (H2 8e02e514, a lint-staged
+  glob; lockfile unmoved; the §349.2 any-byte trigger absorbed as data), and
+  both arms are pinned.
+- **Reconciliation ALL-SAME 1412/1412** proven KEY-BY-KEY against a pre-write
+  copy; digests.rowTags byte-identical (40 rows — the bank provably did not
+  grow); every manifest movement names a landed commit (T2F 6b7748e6, T2G
+  b128d30a, CT-1a 71159a21); the triage gate proven LIVE (a mutated row →
+  exit 2, no ledger). In-tree gate 0 AND detached gate 0 in a fresh worktree
+  with its own npm ci; digests reproduce 6/6 both ways in .git-less extractions;
+  the C1 dark window closed with ZERO walker edits.
+- **§389.1's cross-check CLOSED IN AGREEMENT:** the mint's S0 WAS the bare
+  script and read exit 1 at base — CT-2's reading corroborated from the other
+  side; two of its three digests independently reproduced. The 2157/2144
+  figure is RETIRED: at C2 the trees are 2159/2146, still 13 unscanned. And
+  S0's harness reported the exit-1 control as "exit 0" — the wrapper trap's
+  FOURTH firing, this time on a control.
+- **⚠ THE TERMINAL IS RED (TRUE_EXIT=1) AND IS NOT REPORTED GREEN.** Eleven
+  validates, both typechecks and lint passed; test:ratchet redded the scope
+  sentinel via distributionEnvelopes' 60s HOOK timeout under three-lane load
+  (peak 186): 8 hook-skips + 1 pre-existing = the 9 the ceiling caught; all 34
+  failing assertions classified — 23 timeouts, 11 real = the frozen census
+  EXACTLY, zero strays; isolation independently 41/41. build/verify:dist UNRUN.
+  **THE CAS IS HELD until a green terminal at C2** — a classification is not a
+  gate. The lane's definitive re-run is ARMED behind a live load-watcher
+  (verified real contention: H8B mid-battery, six workers at 70-88%; the
+  watcher gives up ~40 min and self-reports). **Chair plan: fire the definitive
+  terminal by resuming the lane at the H8B-completion trough, before CT-3/T2H
+  reach their heavy phases.** This is the SECOND mint terminal redded by box
+  capacity under concurrent lanes — recorded as an environmental fact of the
+  four-lane era, not a code fact.
+- **RR-1 IS UNBLOCKED at the CAS** (the envelope whole, --write no longer
+  throws, the shrink regenerates at C2 — a freeze never rebases). MEMORY.md
+  measured OVER its hard read limit on arrival (17,899 bytes) — fold 7 is the
+  chair's next act, one lane past due.

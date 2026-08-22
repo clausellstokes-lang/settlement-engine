@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~19:00: OSR-10 COLLECTED (§392) — mint PROVEN (C1 12b3aa53 permanent /
+# C2 eb6124a6 for CAS), no new law, ALL-SAME 1412/1412, §389.1 closed in
+# agreement. ⚠ TERMINAL RED on box capacity (hook timeout under H8B load);
+# CAS HELD for a green terminal at C2 — fire via lane resume at the H8B
+# trough. RR-1 unblocks at CAS. MEMORY fold 7 owed by chair.
 # ⭐ ~18:25: SEATS REFILLED (§391) — TE-CT3 (stacked on CT-2 5941093f; draft
 # chair-approved + 2 formalization notes) and TE-T2H (stacked on T2Bf 7d6bde7c;
 # carries the three §390 charters). FOUR ACTIVE: OSR-10 mint · H8B · CT-3 · T2H.
