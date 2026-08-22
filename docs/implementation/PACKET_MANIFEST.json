@@ -18624,7 +18624,7 @@
     },
     {
       "id": "MF-T2E",
-      "status": "DRAFT",
+      "status": "READY",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T2E.md",
       "verifiedBase": "5d18b4a0c5515baa795c6fc763258a17d607d1ed",
       "changeManifest": [

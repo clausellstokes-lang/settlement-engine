@@ -1,6 +1,6 @@
 # Town cartography / MF-T2E — `MassPartQ` / `SolidPartQ`: the typed functional-volume vocabulary (the quantized vertical truth D3a mints, in the exact shape the D1 legality predicate already admits)
 
-- **Status:** DRAFT
+- **Status:** READY
 - **Packet version:** 1
 - **Verified base:** `claude/composite-r4` at `5d18b4a0c5515baa795c6fc763258a17d607d1ed`
   (the MF-T2D landing). Every preflight row below was re-executed at THIS base by the implementing
