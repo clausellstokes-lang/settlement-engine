@@ -17367,3 +17367,21 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   built (T2H, T2J, T2K, T2L, T2M holding; T2Bf/CT-2 landed; the producers
   chartered awaiting ruling). What remains map-side is landings, the
   producer builds, D3b activation later, and the visual waves.
+
+## §431 — OWNER ORDER: THE UNDERCITY TRAIN STARTS — TC-UNDERCITY DISPATCHED (2026-08-23 ~19:00)
+
+- **Owner: "can you start the undercity train?" — started.** TC-UNDERCITY
+  dispatched (chair-tier compile): the §311-§311.9 doctrine compiled into
+  priced cars, with the §359.3 OB-6 fold (the roster expansion belongs to
+  this charter, not a second truth), the §359.4 OB-7 revisit ruled-or-
+  deferred explicitly, and **the CT-4 FACT CONTRACT as its own section** —
+  the prose chapter compiles against typed engine facts this train
+  produces, never invented flavor. The fabric-vs-engine split briefed with
+  the TC-PRODUCERS finding (generation-path additions are declared-shift
+  class priced to the owner; pulse-side/pure-deriver shapes golden-inert —
+  preferred where lawful; fabric-side geometry lands dormant under the
+  town-cartography stamp). The §423 door law binds any operation
+  vocabulary. Compile-only beside the hunt's deciding terminal — zero
+  vitest from the lane.
+- Seats: the hunt (deciding run, final legs) · TC-UNDERCITY. The producers
+  ruling remains queued behind the hunt verdict.
