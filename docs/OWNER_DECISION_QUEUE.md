@@ -16759,3 +16759,21 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   05e7f9d5 — three-deep, rebase-slot laws briefed; lands after T2H). Active:
   RR-2 (landing terminal) · WEB-7 (terminal running) · T2J. One seat held
   open for the cascade's landing work.
+
+## §414 — A NEW LIVENESS TRAP NAMED: THE WRAPPER-TIMEOUT GATE KILL (TWO SPECIMENS IN ONE HOUR); RR-2's SILENT KILL CAUGHT BY THE CHAIR'S CHECK (2026-08-23 ~05:40)
+
+- **The class:** the harness's background-wrapper timeout kills the child
+  gate seconds in — the tell is a 73-77 byte log (npm's headers, nothing
+  else) plus a stale gate-mutex lock from a dead PID. WEB-7 classified it
+  first (run 1 retired, lock reclaimed with `gate-mutex --run -- true`,
+  run 2 re-fired DETACHED IN ITS OWN SESSION with a silent-death guard —
+  now the standard cure). **RR-2 was bitten by the same class silently:**
+  its LANDING2 log reads 73 bytes at 14:03 and the lane went quiet — caught
+  by the chair's liveness check of its self-named logs (the receipt-stub
+  law paying out), resumed with the recovery order. Banked to the
+  liveness-traps family.
+- RR-2's stray ledger (now THREE specimens, all cleared at base and tip,
+  none on its surfaces, the authoritative ratchet at eleven) files to the
+  §355 hunt. The exhibit veto window remains open, unvetoed. WEB-7's run 2
+  fired detached at 19:12:56Z. The CAS cadence resumes on RR-2's clean
+  green.
