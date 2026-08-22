@@ -154,8 +154,14 @@ const LAYER_PATTERNS = Object.freeze({
     // EVENT — a patron falling — so it matched none of them and landed as a NEW UNLAYERED
     // module against a baseline with zero headroom. That is the whole of the finding: the
     // module owns FAITH's subject outright (the closed fall vocabulary, the classifier and
-    // the one ring writer), its only importer is religiousContest.js in this same family,
-    // and it reads no other port. It is NOT an ARGUED_UNLAYERED case — that roster is for
+    // the one ring writer). ⚠ IT NOW HAS TWO IMPORTERS AND THE SECOND CROSSES A LAYER:
+    // religiousContest.js in this same family, and warTermination.js — a WAR module — which
+    // WF-1d gave `fallCauseFor` as its chartered production caller. THE RATIO IS UNAFFECTED,
+    // because the ratio reads SUBJECT OWNERSHIP and never importer count (WF-1d RAISED-4's
+    // own finding); what the second importer owes is a licensing row, and WF-1d landed
+    // `CPL-23.FAITH_TO_WAR.WF-1d.dissolution_names_the_fall` in couplingRegistryWar.js in the
+    // same commit, so the pair reaches the licensing filter and neither ceiling moves.
+    // It is NOT an ARGUED_UNLAYERED case — that roster is for
     // modules owning no subject at all — on exactly the reading that gave peopleLedger.js
     // WAR and emigreErrand.js INTERIOR: the distinction is SUBJECT, not program.
     // ⛔ AN EXACT-PATH REGEX, NOT A `patron[A-Z]` PREFIX: a prefix would claim files nobody

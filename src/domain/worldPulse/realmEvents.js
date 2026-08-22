@@ -9,6 +9,7 @@
  */
 
 import { settlementCaptureState } from './factionCapture.js';
+import { deityDisplayNameFromRef } from '../display/deityNames.js';
 
 const REALM_STRESSOR_THRESHOLD = 3;
 
@@ -238,6 +239,8 @@ const TWILIGHT_SEVERITY = 0.78;
 
 /**
  * A human display name for a deity ref, given the pre-tick snapshot to resolve it.
+ * The authored name wins whenever a settlement still carries the creed; otherwise
+ * the estate's shared floor renders the whole slug (e.g. 'custom:lu_vael' → 'Lu Vael').
  * @param {any} snapshot
  * @param {any} deityId
  * @returns {string}
@@ -250,9 +253,12 @@ function deityNameForRef(snapshot, deityId) {
     const ref = deity._deityRef || deity.primaryDeityRef || (deity.name ? `deity:${deity.name}` : null);
     if (String(ref) === String(deityId) && deity.name) return String(deity.name);
   }
-  // Fall back to a readable tail of the ref (e.g. 'custom:lu_vael' → 'Vael').
-  const tail = String(deityId).split(/[:_]/).filter(Boolean).pop() || String(deityId);
-  return tail.charAt(0).toUpperCase() + tail.slice(1);
+  // ⭐ THE ESTATE'S ONE SHARED FLOOR, NOT A THIRD PRIVATE COPY (WF-1f, ODQ §326.4).
+  // `realmArcSummary.js` and `worldSnapshotPublic.js` each paid the lossy tail-pop —
+  // which kept only the ref's LAST token and printed "Father" for a war-father slug —
+  // and both converged on `deityDisplayNameFromRef`. This was the third producer still
+  // carrying the private copy; it now reads the same resolver, so the three cannot drift.
+  return deityDisplayNameFromRef(deityId);
 }
 
 /**
@@ -288,12 +294,13 @@ export function synthesizePantheonArcs({ changes = [], snapshot = null, tick = 0
     const ascendancy = change.to === 'major' && change.from !== 'major';
     const twilight = change.to === 'cult' && change.from !== 'cult';
     if (!ascendancy && !twilight && !lastSeat) continue;
-    // ⚠ MEASURED LEGIBILITY LIMIT, DECLARED RATHER THAN DISCOVERED (WF-1c RAISED-B). A
+    // ⭐ THE LEGIBILITY LIMIT WF-1c DECLARED IS NOW CURED (RAISED-B, taken as WF-1f). A
     // creed that lost its last seat is carried by NO settlement, so every extinction beat
-    // takes this helper's ref-tail fallback — exact for the `deity:<Name>` form, lossy for
-    // the `custom:<slug>` form, which yields one word. The defect is pre-existing and
-    // already reachable through the Twilight arm above; repairing it changes what the two
-    // LANDED arms print, so it is a chair micro-item rather than this member's to take.
+    // reaches this helper's floor rather than its snapshot scan. The floor used to keep
+    // only the ref's last token, printing one word for a `custom:<slug>` creed; it is now
+    // the shared resolver, so the whole slug is rendered. What it still cannot recover is
+    // the casing and punctuation the slug itself destroyed — only an authored name carried
+    // on a live snapshot, or a display name persisted at mint, holds those.
     const name = deityNameForRef(snapshot, change.deityId);
     if (lastSeat) {
       entries.push({

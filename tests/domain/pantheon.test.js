@@ -27,6 +27,9 @@ import { normalizeForDormancy } from '../helpers/dormancyOracle.js';
 // re-derived from the LIVE sources here rather than quoted from prose.
 import { EXACT_SECTION, SECTION_OF, isExplicitlyRouted } from '../../src/domain/realm/heraldRouting.js';
 import { newsVoiceCategory } from '../../src/domain/display/newsVoice.js';
+// WF-1f's agreement arm: the estate's ONE shared deity-name floor, read here so A1 asserts
+// the arc producer against the resolver itself rather than against a re-declared copy of it.
+import { deityDisplayNameFromRef } from '../../src/domain/display/deityNames.js';
 import { WHAT_PHRASES } from '../../src/domain/display/settlementRumors.js';
 import { KIND_SECTION } from '../../src/domain/display/chroniclersLetter.js';
 import {
@@ -401,23 +404,68 @@ describe('pantheon — realm arcs (Ascendancy / Twilight / the last altar)', () 
     expect(synthesizePantheonArcs({ changes: after.changes, snapshot: lost, tick: 6, now: NOW })).toEqual([]);
     expect(after.pantheon['deity:The Pale Warden']).toMatchObject({ seats: 0, tier: 'cult', tierHeld: 0 });
 
-    // ── SEPARATELY LABELLED MEASURED-TRUTH ARM (WF-1c RAISED-B) ──────────────────
-    // A KNOWN DEFECT IN A SHARED HELPER, PINNED RATHER THAN REPAIRED. `deityNameForRef`
-    // keeps only the last token of a ref, so a `custom:<slug>` creed prints one word. This
-    // arm asserts the CURRENT behaviour, not the desired one; if the chair takes the cure,
-    // exactly this arm re-records with a declared cause instead of a green pin quietly
-    // changing meaning. The refusal is a measurement: the helper's only caller serves two
-    // LANDED, unflagged arms, so repairing it changes what a live campaign prints.
+    // ── THE CURED FLOOR, RE-RECORDED WITH A DECLARED CAUSE (WF-1c RAISED-B → WF-1f) ──
+    // ⭐ THIS PIN'S VALUE MOVED ONCE, DELIBERATELY, AND THIS IS THE RECORD OF IT.
+    // WF-1c measured a defect in `deityNameForRef` and pinned it rather than repairing it:
+    // the floor kept only the ref's LAST token, so a `custom:<slug>` creed carried by no
+    // settlement printed a single word — this arm read 'The Last Altar of Forge' for a creed
+    // authored 'Sun of the Deep Forge'. ODQ §326.4 took the cure as WF-1f: the floor is now
+    // the estate's shared `deityDisplayNameFromRef`, which renders the WHOLE slug. The shift
+    // is DECLARED — live campaigns' arc copy changes for uncarried refs whose colon-tail
+    // carries '_' or '-' — and the value below was derived by EXECUTING the cured helper.
     const slug = { _deityRef: 'custom:sun_of_the_deep_forge', name: 'Sun of the Deep Forge', alignmentAxis: 'neutral', temperamentAxis: 'neutral', rankAxis: 'cult' };
     const slugHeld = snapshotForSaves([save('a', 'A', { deity: slug })]);
     const slugSeated = advancePantheon({ pantheon: {}, snapshot: slugHeld, unseating: true });
     const slugCrossing = advancePantheon({ pantheon: slugSeated.pantheon, snapshot: lost, unseating: true });
     const slugArcs = synthesizePantheonArcs({ changes: slugCrossing.changes, snapshot: lost, tick: 5, now: NOW });
-    expect(slugArcs[0].headline).toBe('The Last Altar of Forge'); // DEFECT: authored name is 'Sun of the Deep Forge'
+    expect(slugArcs[0].headline).toBe('The Last Altar of Sun Of The Deep Forge');
     // The control that proves the arm above is about the FALLBACK and not about the fixture:
-    // handed the prior snapshot, where the creed is still carried, the same ref resolves whole.
+    // handed the prior snapshot, where the creed is still carried, the same ref resolves to
+    // the AUTHORED name — whose casing the slug destroyed and no floor can recover. The two
+    // strings differ by exactly that casing, which is what keeps this a live discriminator:
+    // a floor that silently started winning over the scan would red the line below.
     expect(synthesizePantheonArcs({ changes: slugCrossing.changes, snapshot: slugHeld, tick: 5, now: NOW })[0].headline)
       .toBe('The Last Altar of Sun of the Deep Forge');
+
+    // ── AGREEMENT WITH THE ONE SHARED RESOLVER (WF-1f) ───────────────────────────
+    // The point of the cure is that `realmEvents.js` stopped carrying a PRIVATE copy of a
+    // resolver two other producers already share. This arm keeps the third producer from
+    // drifting back: for every ref the snapshot cannot resolve, the beat's own name must be
+    // exactly what `deityDisplayNameFromRef` returns. Each ref below is absent from `lost`,
+    // so the scan genuinely misses and the floor genuinely runs — asserted, not assumed.
+    const floorRefs = ['custom:sun_of_the_deep_forge', 'custom:war_father', 'custom:the-silent-queen', 'converted:aurelion_the_dawnfather', 'deity:Unwritten'];
+    for (const ref of floorRefs) {
+      const beat = synthesizePantheonArcs({ changes: [{ deityId: ref, from: 'cult', to: 'cult', lastSeat: true }], snapshot: lost, tick: 5, now: NOW })[0];
+      const floor = deityDisplayNameFromRef(ref);
+      expect(beat.headline, ref).toBe(`The Last Altar of ${floor}`);
+      expect(beat.summary.startsWith(`No settlement in the realm still keeps ${floor}'s rite.`), ref).toBe(true);
+      expect(beat.reasons[0], ref).toBe(`${floor} holds no seat anywhere in the realm.`);
+    }
+    // ⛔ NON-VACUITY, TWO WAYS. (1) Four of the five refs carry a '_' or '-' in the tail, so
+    // the floor returns MORE than one word — the shape the old tail-pop could never produce;
+    // reverting the cure reds this arm on the first of them. (2) The fifth carries neither,
+    // so it proves the arm is not merely counting spaces.
+    expect(floorRefs.filter((r) => deityDisplayNameFromRef(r).includes(' ')).length).toBe(4);
+    expect(deityDisplayNameFromRef('deity:Unwritten')).toBe('Unwritten');
+    // And the positive control: where the scan DOES resolve, the authored name wins over the
+    // floor, so the two paths stay distinguishable rather than collapsing into one.
+    expect(synthesizePantheonArcs({ changes: slugCrossing.changes, snapshot: slugHeld, tick: 5, now: NOW })[0].headline)
+      .not.toBe(`The Last Altar of ${deityDisplayNameFromRef('custom:sun_of_the_deep_forge')}`);
+
+    // ⛔ THE CURE REPLACED A FLOOR, NOT A SCAN — AND THIS IS THE ARM THAT SAYS SO (WF-1f).
+    // `deityNames.js` also exports `deityNameFromSnapshots`, which reads cultDeitySnapshots
+    // as well as the patron. Delegating the WHOLE helper to it would silently widen what the
+    // arc producer scans, so the cure deliberately took only the floor. The fixture below is
+    // the one world where the two answers differ: a town whose PATRON is Harrow but which
+    // still keeps the forge creed as a CULT. The beat must render the floor's casing — the
+    // cult snapshot's authored casing appearing here would mean the scan had been widened.
+    const cultKeeper = save('a', 'A', { deity: HARROW });
+    cultKeeper.settlement.config.cultDeitySnapshots = [slug];
+    const cultSnap = snapshotForSaves([cultKeeper]);
+    expect(cultSnap.settlements[0].settlement.config.cultDeitySnapshots.length).toBe(1); // the fixture really carries it
+    const cultBeat = synthesizePantheonArcs({ changes: [{ deityId: slug._deityRef, from: 'cult', to: 'cult', lastSeat: true }], snapshot: cultSnap, tick: 5, now: NOW })[0];
+    expect(cultBeat.headline).toBe('The Last Altar of Sun Of The Deep Forge');
+    expect(cultBeat.headline).not.toBe('The Last Altar of Sun of the Deep Forge');
   });
 
   test('A2 absent, false and lit are byte-separable on a deity-bearing world; only the literal lit drive moves', () => {

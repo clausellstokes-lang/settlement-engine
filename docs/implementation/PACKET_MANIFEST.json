@@ -18503,6 +18503,124 @@
         [ "npm", "run", "validate:packets" ],
         [ "npm", "run", "check:tail" ]
       ]
+    },
+    {
+      "id": "WF-1F",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/fp/WF-1F.md",
+      "verifiedBase": "27c250f94bb7c5c799693a62985c5ddecd4b6c7c",
+      "changeManifest": [
+        {
+          "_note": "THE THIRD PRODUCER, RE-JOINED TO THE ESTATE'S ONE SHARED FLOOR. deityNameForRef kept a private lossy tail-pop that popped only the ref's LAST token, so an uncarried custom:<slug> creed printed one word; it now returns deityDisplayNameFromRef, the resolver realmArcSummary.js and worldSnapshotPublic.js already converged on after paying the identical defect. +1 import line against -2 +1 in the fallback: 309 -> 309 effective, NET ZERO. The wider deityNameFromSnapshots was REFUSED because it also reads cultDeitySnapshots, which would silently widen what the arc producer scans; that refusal is now enforced by a pin rather than by prose.",
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/realmEvents.js"
+        },
+        {
+          "_note": "ONE PHYSICAL LINE, CHANGED IN PLACE (git diff --numstat 1 1), inside the faithUnseatingEnabled row's `other` value. Three clauses were false at this base: the war-dissolution join had LANDED, ODQ 309 re-filed the settlement obituary beat out of WF-1b and into WF-8, and WF-1E had landed the ring's first production reader. 723 -> 723 effective. other.length 2509 -> 2786 against the contract's >400 floor; the row still grades UNOBSERVED and nothing about certification moves. All five edge-bundle metas were re-scanned: zero hits, so the 104.4 comment-edit ratchet is NOT INCURRED.",
+          "action": "MODIFY",
+          "path": "src/domain/certification/subsystemRowsVirtual.js"
+        },
+        {
+          "_note": "THE ONE COMMITTED PIN THAT RE-RECORDS, plus two new arms — all three folded INSIDE the EXISTING A1 test, so no title moves and the census stays still. The re-recorded value was derived by EXECUTING the cured helper, never predicted. The agreement arm pins the beat's own name against deityDisplayNameFromRef for five refs the snapshot cannot resolve; the scan-width arm builds the one world where the two resolvers disagree (a town whose PATRON is Harrow but which still keeps the forge creed as a CULT) and convicts the refused widening, which passed 36/36 before it existed.",
+          "action": "TEST",
+          "path": "tests/domain/pantheon.test.js"
+        },
+        {
+          "_note": "COMMENT-ONLY. The FAITH exact-path row's justification claimed patronFall.js's only importer was religiousContest.js; WF-1D licensed a second, warTermination.js, under CPL-23.FAITH_TO_WAR.WF-1d.dissolution_names_the_fall in couplingRegistryWar.js. The ratio is UNAFFECTED because it reads subject ownership, never importer count. This file carries NO row in FROZEN_UNANCHORED_NEGATIVES, so it sits at an exact ceiling of zero and any scanned negative matcher spelled in prose would red the anchor walker; the new prose was scanned and mutant (e) proves the trap is live.",
+          "action": "TEST",
+          "path": "tests/lint/couplingInclusion.walker.test.js"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/packets/fp/WF-1F.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE ESTATE'S ONE SHARED DEITY-NAME FLOOR, now read by a third producer. Renaming or removing it breaks the convergence this member exists to complete.",
+          "path": "src/domain/display/deityNames.js",
+          "symbol": "export function deityDisplayNameFromRef"
+        },
+        {
+          "_note": "THE WIDER RESOLVER THIS MEMBER DELIBERATELY DID NOT ADOPT. Named so a later reader sees the refusal was a choice between two live exports, not an oversight.",
+          "path": "src/domain/display/deityNames.js",
+          "symbol": "export function deityNameFromSnapshots"
+        },
+        {
+          "_note": "THE ARC PRODUCER whose module-local deityNameForRef was cured. Its sole production caller is the kernel's pantheon-arcs site.",
+          "path": "src/domain/worldPulse/realmEvents.js",
+          "symbol": "export function synthesizePantheonArcs"
+        },
+        {
+          "_note": "THE FALL CLASSIFIER whose second, cross-layer importer the walker comment now names.",
+          "path": "src/domain/worldPulse/patronFall.js",
+          "symbol": "export function fallCauseFor"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "THE DECLARED SHIFT, RE-RECORDED WITH ITS CAUSE. The measured-truth arm WF-1C authored for exactly this cure now pins the cured floor's output, derived by executing the helper rather than predicted. The stale-snapshot control does NOT move and stays a live discriminator: handed the prior snapshot the same ref resolves by SCAN to the AUTHORED name, whose casing the slug destroyed and no floor can recover, so the two strings differ by exactly that casing and a floor that began winning over the scan would red it."
+        },
+        {
+          "id": "A2",
+          "case": "AGREEMENT WITH THE ONE SHARED RESOLVER, so the third producer cannot drift again. For five refs absent from the snapshot — four carrying a '_' or '-' in the tail and one carrying neither — the beat's headline, summary opening and first reason all equal what deityDisplayNameFromRef returns. Non-vacuity is asserted two ways: the four multi-word answers are a shape the old tail-pop could never produce, and the fifth proves the arm is not merely counting spaces."
+        },
+        {
+          "id": "A3",
+          "case": "THE CURE REPLACED A FLOOR, NOT A SCAN. On a fixture whose patron is Harrow but which still keeps the forge creed as a CULT, the extinction beat must render the FLOOR's casing; the cult snapshot's authored casing appearing there would mean the producer's scan had been widened to cultDeitySnapshots. The fixture is asserted to really carry the cult snapshot before the arm consumes it."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/pantheon.test.js",
+          "tests/domain/patronFall.test.js",
+          "tests/domain/subsystemRowsVirtual.test.js",
+          "tests/property/worldpulseDeityGolden.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/couplingInclusion.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "tests/lint/sizeBaseline.test.js",
+          "tests/lint/domainAnyCastBaseline.test.js",
+          "tests/lint/proseNumerics.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/domain/worldPulse/realmEvents.js",
+          "src/domain/certification/subsystemRowsVirtual.js",
+          "tests/domain/pantheon.test.js",
+          "tests/lint/couplingInclusion.walker.test.js"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "npm",
+          "run",
+          "validate:packets"
+        ],
+        [
+          "npm",
+          "run",
+          "check:tail"
+        ]
+      ]
     }
   ]
 }
