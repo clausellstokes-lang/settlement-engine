@@ -16067,3 +16067,39 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   its own micro-item; deliberately deferred, documented).
 - CT-3 HOLDS for GO; landing order unchanged: mint → RR-1 → RR-2 → T2Bf →
   CT-2 → H8B/CT-3/T2H in GO order (CT-3 lands after CT-2 by stacking).
+
+## §395 — THE SCHEMA-10 MINT IS LANDED (THE 19TH LANDING); THE WINDOW IS CLOSED; RR-1 RE-DISPATCHED AT THE NEW TIP; THE ARM-AND-WAIT WATCHER ADOPTED AS ESTATE STANDARD (2026-08-22 ~19:55)
+
+- **The terminal closed GREEN as the standard demanded:** ONE end-to-end bare
+  `npm run check` at C2 into the verified trough (live=0), every step run,
+  TRUE_EXIT=0 agreeing with the gate's own tail exit — an agreement that means
+  something only because the lane caught the harness lying twice earlier (the
+  wrapper trap's S0 and run-1 firings). build ran for the FIRST TIME EVER at C2
+  (3929 modules) and verify:dist read STRICT DIST OK 52/433 zero-defect.
+  Run-1's red is RETIRED with its full classification (23 load timeouts vs the
+  frozen eleven, the 60s hook arithmetic closing exactly), both logs preserved.
+- **THE CAS EXECUTED:** ancestry verified (base 9bfae712 and C1 12b3aa53 both
+  ancestors of C2), then claude/composite-r4 moved 9bfae712 →
+  eb6124a6f3527d6aebd3119ee3ebebfc42902dd6 by compare-and-swap. ⛔ C1
+  12b3aa5308c027dfceeb3fb7e43b7c0414e4e639 is the PERMANENT subjectSha — never
+  amend, never rebase across. THE PROTECTED WINDOW IS CLOSED; landings and GOs
+  resume.
+- **RULED, from the lane's raised item: the ARM-AND-WAIT WATCHER IS THE ESTATE
+  STANDARD** for any terminal gate under multi-lane load — a watcher with
+  self-excluding grep patterns that fires only into a verified-quiet trough,
+  plus a chair-held track. It has now worked twice where firing into
+  contention failed twice. Lanes stop rediscovering it per §-brief; it rides
+  every executor brief from here.
+- **RR-1 RE-DISPATCHED (TE-RR1B)** at the new tip — the pre-compaction lane is
+  gone from the roster, so a fresh executor carries the ratified charter
+  (draft-READREPAIR.md): the dead-arm deletion, every figure re-derived at
+  base, every evidence leg re-verified, the schema-10 shrink `--write` with
+  key-by-key attribution, chair authority for its packet promotions granted
+  in-brief. It is the NEXT LANDING. RR-2 stays split-promotion-chained behind
+  RR-1's LANDED status, with the chair's owed exhibit act (§374) before its
+  exposing CAS.
+- **T2H's battery hold LIFTED** with the §393 mutex law and the new-tip fact
+  (its stacked base unchanged; rebase at its slot). CT-3's AFTER battery
+  self-runs on its own mutex poller. Three seats active (RR-1, CT-3, T2H);
+  the fourth seat's candidates and the HANDOFF_CURRENT refresh (stale at
+  §345) are the chair's next queue reads.

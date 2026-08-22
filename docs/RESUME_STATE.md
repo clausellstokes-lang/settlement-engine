@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~19:55: THE MINT LANDED (§395) — CAS 9bfae712 → eb6124a6 EXECUTED;
+# window CLOSED. Terminal green end-to-end (build FIRST EVER at C2;
+# verify:dist 52/433). ⛔ C1 12b3aa53 permanent. Arm-and-wait watcher =
+# ESTATE STANDARD. RR-1 re-dispatched fresh (TE-RR1B) at eb6124a6 — NEXT
+# LANDING; RR-2 chained behind it + owed §374 exhibit. T2H hold lifted.
 # ⭐ ~19:40: CT-3 COLLECTED (§394) — tip eb0412e2 stacked on CT-2, built +
 # holding; AFTER battery/gate DEFERRED-DECLARED behind the mint's mutex
 # (packet §13). ⭐ F1: warFaith divergence ORIGINATES at CT-3 — trailing-mint
