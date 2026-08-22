@@ -105,8 +105,18 @@ const sectionPad = (isMobile) => ({ padding: isMobile ? `0 ${SP.md}px ${SP.xxl *
 // owner order (2026-07-22): the Cnocby sample-draft card (MiniDossierCard) now
 // fills that slot in §01. The widget was landing-only (never used by the Create
 // page's own size picker), so its code is deleted as dead landing chrome. Its
-// forge.draft* / forge.sizes / forge.mode* / forge.ceiling copy keys are now
-// unreferenced on the landing (left in place as inert strings, not retyped).
+// forge.draft* / forge.sizes / forge.mode* copy keys are unreferenced on the
+// landing (left in place as inert strings, not retyped).
+//
+// ⚠ forge.ceiling IS THE EXCEPTION, AND WAS THE DEFECT (§320.3): the widget's
+// removal took the anon SIZE-CEILING DISCLOSURE off the page with it, while the
+// key and its claims-parity pin stayed green — a claim bound to enforcement that
+// no visitor could read. §363.1 rules it back on: the sentence is RE-LIT in the
+// §01 panel below, at the landing's anonymous entry point. The words are the
+// owner-era spec string, re-referenced and NOT retyped, so the tierFacts binding
+// (tests/copy/landingClaimsParity.test.js) holds unchanged — and that same file
+// now carries a RENDERED arm, so un-referencing this key again reds the gate
+// instead of passing quietly.
 
 // ── 06 · Commons — SIX slots, fed dynamically from the community gallery (W1) ─
 // Fetched once on below-fold mount (anon-permitted public read), ranked by
@@ -362,6 +372,15 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
               <Button variant="primary" onClick={() => onNavigate('generate')}>{tl('forge.cta')}</Button>
               <span style={{ fontFamily: sans, fontSize: FS.sm, fontWeight: 700, color: SECOND }}>{tl('forge.micro')}</span>
             </div>
+            {/* THE ANON SIZE CEILING (§363.1). It sits DIRECTLY under the CTA row
+                because that row is where the promise is made: "No account needed"
+                is true, and this is the one sentence that says what the free door
+                actually opens onto. Always visible — no cap, no state, no hover.
+                Same understated disclosure idiom as §03's aiNote (§3.1 tokens
+                only, no new design-system motion). */}
+            <p style={{ margin: `${SP.sm}px 0 0`, fontFamily: sans, fontSize: FS.sm, fontWeight: 700, color: SECOND }}>
+              {tl('forge.ceiling')}
+            </p>
           </div>
           {/* Owner order (2026-07-22): the Instant Draft widget slot now hosts the
               Cnocby sample-draft card (MiniDossierCard), relocated from §02. The

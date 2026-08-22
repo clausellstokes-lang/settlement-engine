@@ -5368,7 +5368,47 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   green — the arm is one equality and cannot say whose delta vanished. Negative control at
     //   the slot: the slot's own tuple put back reds at `titles` by exactly this delta
     //   ("expected 20750 to be 20732").
-    files: 2500, parked: 365, credited: 2135, titles: 20750, suiteTitles: 5791,
+    // ── RE-RECORDED 2026-08-22 BY TE-WEB6 (WEB-6, the anon-ceiling disclosure), CAUSE
+    //    ATTRIBUTED ─────────────────────────────────────────────────────────────────
+    // 2,500/365/2,135/20,750/5,791 → 2,500/365/2,135/20,751/5,791: +1 on `titles` ALONE. Every
+    // other key is UNCHANGED: the member mints no test FILE and opens no `describe` — it adds
+    // ONE `it` arm inside the existing "landing copy — claims-vs-enforcement parity (bar 13)"
+    // suite, so `files`, `credited`, `suiteTitles` and PARKED (365) all stand.
+    //   tests/copy/landingClaimsParity.test.js ..... +1 title (the RENDERED arm that cures
+    //                                                the §320.3 rendered-surface vacuity:
+    //                                                the ceiling claim is now asserted in
+    //                                                the HTML the page emits, not only in
+    //                                                the copy registry it is stored in)
+    // `censusAuthorization`: ODQ §363.1 (the disclosure ruling, closing §320.3), under the
+    // website train's charter at ODQ §402.
+    // ⛔ ATTRIBUTED BY ISOLATION, NOT BY ARITHMETIC, AT THE AUTHORING BASE 19b799ce (tuple
+    //   2,497/364/2,133/20,719/5,785) — the TE-HOUSE block above is the idiom, obeyed here in
+    //   full. The member touches TWO test files, and only one of them is this census's business:
+    //     · BASEPROOF, separate detached worktree at 19b799ce with its own `npm ci`: this
+    //       walker GREEN, 33/33, exit 0. So 20,719 was an answer to the question at the
+    //       base actually being built on, not a carried tuple.
+    //     · Reverting landingClaimsParity ALONE, with the homeLanding edit fully applied,
+    //       convicted 20,719 GREEN (33/33). That is the proof that the OTHER file's edit is
+    //       CENSUS-NEUTRAL and that nothing else in the member reaches this arm.
+    //     · Reverting homeLanding ALONE, with the parity arm applied, convicted 20,720.
+    //   Each figure was read from the arm's own failure message, never computed.
+    // ⚠ THE OTHER FILE'S EDIT IS A TITLE RENAME, AND A RENAME IS COUNT-NEUTRAL BY
+    //   CONSTRUCTION — which is exactly why it was measured rather than assumed.
+    //   tests/ui/homeLanding.test.jsx inverted a stale pin ("the anon ceiling string does
+    //   not appear on the landing" → "…appears exactly once… (§363.1)"): one title out, one
+    //   title in. The count cannot see it, and the isolation above is the receipt that it did not.
+    // ⭐⭐ THE CARRY LAW, EXECUTED AT THE LANDING SLOT. This member was authored at base 19b799ce
+    //   (after-figure 2,497/364/2,133/20,720/5,785) and rebased onto dffa2b97 (WEB-5, the 29th
+    //   landing). The DELTA `+0/+0/+0/+1/+0` is what crossed; the tuple was RE-DERIVED at this
+    //   base by execution, never carried. ⛔ THE BASE HAD MOVED UNDER IT: H8B (+4 titles),
+    //   MF-T2H (+2 files/+2 credited/+6 titles/+2 suite titles), WEB-1 (+1 file/+1 parked/
+    //   +1 title), WEB-4 (+2 titles) and WEB-5 (+18 titles/+4 suite titles) re-recorded the five
+    //   blocks directly above, so the after-figure re-derives 20,720 → 20,751. Carrying the
+    //   authored tuple would have silently reverted all five landed re-records while every WEB-6
+    //   proof stayed green — the arm is one equality and cannot say whose delta vanished.
+    //   Negative control at the slot: the slot's own tuple put back reds at `titles` by exactly
+    //   this delta ("expected 20751 to be 20750").
+    files: 2500, parked: 365, credited: 2135, titles: 20751, suiteTitles: 5791,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

@@ -97,14 +97,22 @@ describe('HomeLanding — scrollable landing', () => {
     expect(screen.queryByText('07 · Set out')).toBeNull();
   });
 
-  // Owner walk order 10 (2026-07-22): the Instant Draft widget — the ceiling
-  // string's only landing carrier — left the landing (the Cnocby card took
-  // its slot). The ceiling copy lives on the Create page's own picker now;
-  // the landing must NOT show it.
-  test('the anon ceiling string does not appear on the landing', async () => {
+  // ⚠ THIS PIN WAS INVERTED, AND THE HISTORY IS THE POINT.
+  // Owner walk order 10 (2026-07-22) removed the Instant Draft widget — the
+  // ceiling string's only landing carrier — and this pin was written to hold
+  // the landing CLEAR of it. What that silently also removed was the anon
+  // SIZE-CEILING DISCLOSURE from the page an anonymous visitor actually enters
+  // through; the copy key and its claims-parity binding stayed green the whole
+  // time (§320.3, the rendered-surface vacuity).
+  // §363.1 SUPERSEDES walk order 10 on exactly this point: "the anonymous size
+  // ceiling appears in one sentence at the landing's anonymous entry point."
+  // So the assertion flips from 0 to EXACTLY ONE — which is also what this
+  // file's own docblock has claimed all along. Exactly one, not ≥1: two copies
+  // of a disclosure is a design defect, and the §01 panel is its one home.
+  test('the anon ceiling string appears exactly once on the landing (§363.1)', async () => {
     renderLanding();
     await screen.findByText(landing.closer.h2, {}, { timeout: 10_000 }); // page settled
-    expect(screen.queryAllByText(landing.forge.ceiling)).toHaveLength(0);
+    expect(screen.queryAllByText(landing.forge.ceiling)).toHaveLength(1);
   });
 
   test('decorative chips stay spans; the forge-exact control is a real button', async () => {
