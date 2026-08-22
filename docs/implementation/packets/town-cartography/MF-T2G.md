@@ -1,6 +1,6 @@
 # Town cartography / MF-T2G — the §288-nonconforming light profile STRIPPED from every published projection (§299.3(b) discharged): a record-only deletion inside a dormant module, with the twelve-pin digest re-record declared, captured and bounded
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** 1
 - **Verified base:** `claude/composite-r4` at `cb369d2b0b63422db6f91af6c0f4feabcf5ff2dc`
   (the MF-T2F landing), **read from git at this lane's start and never extended from a quoted
@@ -448,8 +448,128 @@ the next wave.
 
 ## 12. Completion receipt
 
-*(filled at the flip to LANDED, and MUST include the twelve-pin before/after digest table —
-the declared shift's one-time record, §72.3-form: key-by-key, zero added, zero removed)*
+**§299.3(b) is discharged.** No published projection carries a light profile; the record, its
+identity, its mode string, its publication field and its barrel row are gone from the module,
+from the export surface and from every emitted chunk.
+
+### 12.1 · THE DECLARED ONE-TIME SHIFT — the twelve pins, key by key (§72.3 form)
+
+| # | file | surface | before | after |
+|---:|---|---|---|---|
+| 1 | `townMapMassingProjection.test.js` | legacy PUBLIC | `scene-v1-9820c3f2273a313f22ff9246c65e1891` | `scene-v1-f9b571a76668a7eee533f1eb0d091db0` |
+| 2 | `townMapMassingProjection.test.js` | legacy DM | `scene-v1-1945e8a01df6c24788c3393c4e3c452d` | `scene-v1-d143b6efee808314e8dde7ab5ea9f42a` |
+| 3 | `townMapMassingPersistence.test.js` | direct PUBLIC | `scene-v1-2f65d0d84551c889da48e08ceb1eb27f` | `scene-v1-1321ec6f9b44ec8e1b4e303334e8b964` |
+| 4 | `townMapMassingPersistence.test.js` | direct DM | `scene-v1-bc2930de2297900d8715aa32b1a884c3` | `scene-v1-bbd197b33ba3de7c61b76ac7f4e7f352` |
+| 5 | `townMapMassingPersistence.test.js` | legacy PUBLIC | `scene-v1-9820c3f2273a313f22ff9246c65e1891` | `scene-v1-f9b571a76668a7eee533f1eb0d091db0` |
+| 6 | `townMapMassingPersistence.test.js` | legacy DM | `scene-v1-1945e8a01df6c24788c3393c4e3c452d` | `scene-v1-d143b6efee808314e8dde7ab5ea9f42a` |
+| 7 | `townMapFantasyConstruction.test.js` | saved PUBLIC | `scene-v1-b90080500e9e0a99b6ee469444832743` | `scene-v1-41f2d7037e51306297e632379fc2664c` |
+| 8 | `townMapFantasyConstruction.test.js` | saved DM | `scene-v1-47ec385c5ea913fbad576ef8cc2d2219` | `scene-v1-9880b235ec01b4162a05d711a2d3e7bc` |
+| 9 | `townMapFantasyConstruction.test.js` | direct PUBLIC | `scene-v1-2f65d0d84551c889da48e08ceb1eb27f` | `scene-v1-1321ec6f9b44ec8e1b4e303334e8b964` |
+| 10 | `townMapFantasyConstruction.test.js` | direct DM | `scene-v1-bc2930de2297900d8715aa32b1a884c3` | `scene-v1-bbd197b33ba3de7c61b76ac7f4e7f352` |
+| 11 | `townMapFantasyConstruction.test.js` | legacy PUBLIC | `scene-v1-9820c3f2273a313f22ff9246c65e1891` | `scene-v1-f9b571a76668a7eee533f1eb0d091db0` |
+| 12 | `townMapFantasyConstruction.test.js` | legacy DM | `scene-v1-1945e8a01df6c24788c3393c4e3c452d` | `scene-v1-d143b6efee808314e8dde7ab5ea9f42a` |
+
+**ZERO ADDED, ZERO REMOVED, and that is measured rather than asserted.** `tests/` carries
+**124** `scene-v1-<32hex>` literal occurrences and **85 distinct values** BOTH before and
+after. Exactly six values leave (occurrence counts 3+3+2+2+1+1 = **12**) and exactly six
+arrive (3+3+2+2+1+1 = **12**); the six arriving values occurred **zero** times anywhere in
+`src` or `tests` beforehand, which is why the distinct count holds. Per-file occurrence counts
+are identical across all eleven carrying files. `LEGACY_HASH` is byte-identical.
+
+Each after-value was captured **twice, independently, and agreed**: once by the
+pristine/stripped probe trees, once from the live interior-red failure messages of the three
+suites. The movement is `contentHash`-only, proved as a whole-body claim on all six surfaces.
+
+### 12.2 · Symbols
+
+- **Created:** the two `it` titles, now in `requiredSymbols`. ⛔ No re-recorded digest figure
+  entered `requiredSymbols`.
+- **Retired:** `FIXED_SURVEY_LIGHT_V1`, with no successor.
+
+### 12.3 · ⭐ THE §379 DISCHARGE AMENDMENT — four landed packets, chair-authorized
+
+The retirement collided with a class nobody had hit before: **four LANDED packets — MF-VS1,
+MF-T1S, MF-T1V, MF-T1X — pinned `export const FIXED_SURVEY_LIGHT_V1` in `requiredSymbols`**,
+and `implementation-packets.mjs` enforces requiredSymbols existence at EVERY status by
+deliberate design. The symbol this member was authorized to retire was simultaneously pinned
+as must-survive by four terminal packets. This lane STOPPED rather than widening the manifest
+(§11 names it in terms) and raised it; **ODQ §379 ruled the discharge-note form and authorized
+the edit inside this landing**, on the §314.2 principle that the editing act owns the
+amendment.
+
+Executed: in each of the four packets, the one row keyed on the PAIR (`projection.js`,
+`export const FIXED_SURVEY_LIGHT_V1`) was deleted **by unique key, never a blanket
+substitution** (the class rule the chair ruled on MF-T2E's incident), and one dated amendment
+note was attached to the adjacent surviving row — in all four cases the sibling
+`projection.js` export that outlived the retiree, which is the best available host. The diff
+is exactly four rows out and four notes in; every other packet object is byte-identical, and
+every row count outside the four is unchanged.
+
+⚠ **A shape worth recording:** the manifest carries **two row styles** — a four-line expanded
+object and a one-line compact one (MF-T1V). The first cut of the surgical editor knew only the
+expanded form and **refused on MF-T1V rather than guessing**, which is the behaviour a
+by-unique-key editor should have. A blanket substitution would have silently succeeded on all
+four and been unverifiable.
+
+**The durable half is not this member's:** ODQ §379 chartered **TE-HOUSE H9** — the validator
+gains discharge semantics, so a LANDED `retiredSymbols` row discharges earlier
+`requiredSymbols` rows for the same `(path, symbol)` pair, with a test planting exactly this
+collision. Future retirements keep their rows and discharge them; no successor does packet
+surgery. §379 also made this lane's compile-gap finding **binding compile law**: a retirement
+member's preflight MUST cross-check its `retiredSymbols` against ALL landed `requiredSymbols`
+— the §4 row that did not exist.
+
+### 12.4 · Executed verification at the landing
+
+| gate | result |
+|---|---|
+| `validate:packets` | TRUE_EXIT=0 at every transition |
+| anchor walker | TRUE_EXIT=0, 9 tests |
+| eslint, six edited files | TRUE_EXIT=0 |
+| `typecheck:ratchet` | 173 / ceiling 173 — unmoved |
+| `typecheck:domain:strict` | 1134 / ceiling 1134 — unmoved |
+| focused battery | TRUE_EXIT=0 |
+| census walker | TRUE_EXIT=0, tuple `2497/364/2133/20714/5785` |
+| untouched-pin control, 38 files, two trees | both arms TRUE_EXIT=0; one file moved, by exactly two titles; 198 → 200 |
+| four mutants | all convict, all restored `cmp`-identical, clean re-runs |
+| post-build dormancy fence | TRUE_EXIT=0, **3 EXECUTED** tests |
+| forensic zoom | stripped literals 2/2/1 chunks → **0**, denominators 1437 assets / 710 JS chunks, control passing both sides |
+| entry static closure | 8 chunks before, 8 after; every probe literal 0 of 8 |
+| effective lines | projection.js 374 → 365, index.js 112 → 111; net −10 |
+| probe battery, re-executed at the carried-forward base | 119 checks, 0 fail, TRUE_EXIT=0 — all six before/after values IDENTICAL to the a09138d7 measurement |
+
+### 12.5 · The carry-forward, and what it cost to do honestly
+
+This member was built and fully proven at `a09138d7`, then carried across **three landings** —
+WF-8A, the OSR schema-9 mint, and MF-T2F — before it reached a slot. Nothing was assumed to
+have survived:
+
+- **Overlap measured with `comm`, per commit and over the union.** None of the five code/test
+  hosts collides with anything in the window; exactly the three shared meta paths do. The mint
+  is disjoint from this member entirely. `package.json`/`package-lock.json` did not move, so no
+  schema-mint trigger fired.
+- **The three shared meta files were byte-restored from the new base and this lane's appends
+  re-run on top** — never merged, never hand-patched. The census block went in BELOW MF-T2F's,
+  in landing order; the index row was **lifted verbatim from this lane's own original commit**
+  rather than retyped; the manifest object was re-appended by the same re-runnable inserter,
+  which anchors on the array terminator rather than on a sibling id and proves its own result
+  is a pure insert.
+- **Every figure was re-derived, and one changed:** the fabric declared-name floor moved
+  `140 → 139` at the old base and `150 → 149` here, because MF-T2F added ten names across two
+  modules. The census pair moved wholesale. The six edit-host and preamble hashes, the
+  five-site reference census, the `canonicalBytes` independence grep, the digest denominator
+  (124 occurrences / 85 distinct), the twelve pin values, both typecheck ceilings, the zoom
+  denominators and the entry closure all reproduced **identically**.
+- **The base SHA was read from git, never extended from the quoted prefix** (§381).
+
+⭐ **The census carry law's third face, recorded because it is genuinely a different shape.**
+MF-T2E's lesson was a *fresh* figure filed under the *wrong name*. MF-T2F's was a sequenced
+sentinel that read *nothing* and invited a fallback to whatever number was on screen. This
+member's is neither: `20684` was **right when it was measured** and went stale underneath its
+own packet while the branch moved three times. No instrument was wrong and no one misread
+anything — the number simply stopped being an answer to the question being asked. The cure is
+the same in all three, and it is the one the chair states as law: **re-derive at the base you
+are actually landing on, and carry the DELTA, never the tuple.**
 
 ## 13. RAISED — for the chair
 

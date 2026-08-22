@@ -14465,10 +14465,7 @@
           "symbol": "export function resolveFirstSliceContent"
         },
         {
-          "path": "src/domain/townMap/fabric/projection.js",
-          "symbol": "export const FIXED_SURVEY_LIGHT_V1"
-        },
-        {
+          "_note": "requiredSymbols row (FIXED_SURVEY_LIGHT_V1) discharged 2026-08-22 by MF-T2G's authorized retirement — ODQ §375/§379; the symbol’s history is this note.",
           "path": "src/domain/townMap/fabric/projection.js",
           "symbol": "export function firstSliceScreenDrawOps"
         },
@@ -15478,8 +15475,7 @@
         { "path": "tests/fixtures/townMapSettlementFabricFixtures.js", "symbol": "export const FIRST_SLICE_MASSING_ROSTER_ID" },
         { "path": "tests/fixtures/townMapSettlementFabricFixtures.js", "symbol": "export function makeSettlementMassingRosterBundleInputs" },
         { "path": "tests/domain/townMapMassingRoster.test.js", "symbol": "MF-T1M explicit varied first-slice massing roster bundle" },
-        { "path": "src/domain/townMap/fabric/projection.js", "symbol": "export const FIXED_SURVEY_LIGHT_V1" },
-        { "path": "src/domain/townMap/fabric/projection.js", "symbol": "export function projectFirstSliceFixedSurvey" },
+        { "_note": "requiredSymbols row (FIXED_SURVEY_LIGHT_V1) discharged 2026-08-22 by MF-T2G's authorized retirement — ODQ §375/§379; the symbol’s history is this note.", "path": "src/domain/townMap/fabric/projection.js", "symbol": "export function projectFirstSliceFixedSurvey" },
         { "path": "src/domain/townMap/fabric/projection.js", "symbol": "export function firstSliceScreenDrawOps" },
         { "path": "src/domain/townMap/fabric/projection.js", "symbol": "export function firstSliceProjectionToSvg" },
         { "path": "src/domain/townMap/townMapDraw.js", "symbol": "export function drawListToSvg" },
@@ -15958,10 +15954,7 @@
           "symbol": "MF-T1M explicit varied first-slice massing roster bundle"
         },
         {
-          "path": "src/domain/townMap/fabric/projection.js",
-          "symbol": "export const FIXED_SURVEY_LIGHT_V1"
-        },
-        {
+          "_note": "requiredSymbols row (FIXED_SURVEY_LIGHT_V1) discharged 2026-08-22 by MF-T2G's authorized retirement — ODQ §375/§379; the symbol’s history is this note.",
           "path": "src/domain/townMap/fabric/projection.js",
           "symbol": "export function projectFirstSliceFixedSurvey"
         },
@@ -16632,10 +16625,7 @@
           "symbol": "MF-T1M explicit varied first-slice massing roster bundle"
         },
         {
-          "path": "src/domain/townMap/fabric/projection.js",
-          "symbol": "export const FIXED_SURVEY_LIGHT_V1"
-        },
-        {
+          "_note": "requiredSymbols row (FIXED_SURVEY_LIGHT_V1) discharged 2026-08-22 by MF-T2G's authorized retirement — ODQ §375/§379; the symbol’s history is this note.",
           "path": "src/domain/townMap/fabric/projection.js",
           "symbol": "export function projectFirstSliceFixedSurvey"
         },
@@ -19229,7 +19219,7 @@
     },
     {
       "id": "MF-T2G",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T2G.md",
       "verifiedBase": "cb369d2b0b63422db6f91af6c0f4feabcf5ff2dc",
       "changeManifest": [
@@ -19307,6 +19297,16 @@
           "_note": "The describe the two new titles land inside. It is not created by this member, so the row is admissible at every status.",
           "path": "tests/domain/townMapMassingProjection.test.js",
           "symbol": "describe('MF-T1V roster-aware fixed-survey massing projection'"
+        },
+        {
+          "_note": "CREATED BY THIS MEMBER, which is why it joins at LANDED and never at READY: the strip pin, whose byte scans carry the found-the-symbol control.",
+          "path": "tests/domain/townMapMassingProjection.test.js",
+          "symbol": "MF-T2G strips the §288-nonconforming light profile from every published surface"
+        },
+        {
+          "_note": "CREATED BY THIS MEMBER. The exact-roster prevention guard, in both directions. NO re-recorded digest FIGURE enters requiredSymbols - a landed packet carrying one traps every later train.",
+          "path": "tests/domain/townMapMassingProjection.test.js",
+          "symbol": "MF-T2G pins the published projection key roster in both directions"
         }
       ],
       "retiredSymbols": [
