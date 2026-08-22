@@ -17156,3 +17156,31 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   rebase that resurrects a retracted claim is the merge-destroys-cures
   class). Its §12 records the lawful break DEEPENED: warFaith is CT-3's at
   this landing, general was CT-2's. After CT-3: T2H, then the website cars.
+
+## §425 — THE T2L COMPILE RULED: FIVE RAISED ITEMS ANSWERED; TE-T2L DISPATCHED (2026-08-23 ~12:00)
+
+- **draft-MF-T2L.md COLLECTED AND RULED AS COMPILED.** Vegetation is a
+  DESIGN-IMPLEMENTATION member, measured with a firing control per the §422
+  discipline (zero sealed vegetation modules — the sandbox draws trees as
+  presentation stipple only). The design ratified: ONE leaf discharging the
+  §287.5 both-halves law — the durable trunk/canopy mass threading ONE
+  re-derived T2K support key into both solidPartQ volumes (ground-authority
+  disagreement UNCONSTRUCTIBLE), and the nonpersistent instance field as a
+  DETERMINISTIC, PARAMETER-FREE, INTEGER-EXACT derivation (hash32+modulo
+  into the foundation's own rect law; the float-path helpers refused), the
+  era law stamped so the future recipe cutover is a DECLARED SHIFT.
+- **THE FIVE RAISED, RULED:** (1) the both-halves reading — RECORD+DERIVATION
+  in one leaf IS both halves; record-only would be the half-contract the
+  plan forbids; the compiled reading stands. (2) the accepted-not-derived
+  fieldKey — the T2E precedent replayed, RATIFIED; the derivation-owner
+  arrives with the recipe member. (3) caps RATIFIED at leaf ≤230 / packet
+  ≤240 on predicted ≈195, split-don't-renegotiate. (4) the named future
+  declared-shift at the recipe member RATIFIED and recorded — that member
+  inherits the §72/§110.3 bill by name. (5) the severable title word-swap
+  INCLUDED — it rides the same §419 rename edit in this member's landing
+  act.
+- The compile's base hygiene noted: executed at T2K's collected 4d2d17f8
+  with the census base tuple matching T2K's predicted after-tuple exactly —
+  the stack's arithmetic closing across three members. **TE-T2L DISPATCHED**
+  on the packet as ruled. Seats: CT-3-landing · TC-T2M · TE-T2L; one held
+  for T2H's landing turn.

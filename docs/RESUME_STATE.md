@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~12:00: T2L COMPILE RULED (§425) — design-implementation confirmed;
+# both-halves = record+derivation in one leaf; caps ≤230/≤240; recipe
+# member inherits the declared-shift bill by name. TE-T2L dispatched
+# (stacked on T2K 4d2d17f8). Seats: CT-3-landing · TC-T2M · TE-T2L.
 # ⭐⭐ ~11:30: H8B LANDED (§424, 24th) — tip ec8f3359; byte-identity carry
 # proof; terminal green FIRST RUN. Producers charter IN (T2N/T2R pure
 # derivers golden-inert; T2Q rides existing verbs; T2P dockets separately —
