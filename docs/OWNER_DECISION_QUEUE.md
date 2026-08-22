@@ -15320,3 +15320,32 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   prompt is RE-MINTED with the cap as a hard line (⛔ never exceed four; if over,
   park the least time-critical) — the enforcement lives in the enforcer, not in the
   chair's memory. The §365.1 parked-holds-no-seat rule stands beneath the cap.
+
+## §371 — TC-T2F RULED: SEVEN RULINGS; TE-T2F DISPATCHED ON THE FREED SEAT (2026-08-22 ~19:00)
+
+- **draft-MF-T2F collected** (735L, claim-scan 0/0 at final bytes, probes executed on
+  scratchpad copies under the compute constraint). F ports the sealed D1
+  solid-legality predicate onto T2E's vocabulary as TWO dormant leaves, discharging
+  §299.3(a); the carried float-volume conviction is EXECUTED both ways (the verdict
+  inversion at m=1286630001 — overlapping ground answered DISJOINT — and the −1784
+  integer drift at ~1% wall scale); probe2's finding that the sealed spelling
+  SILENTLY ANSWERS GARBAGE on unanswerable footprints is the class §334.2 exists
+  for. The compile's skeptic pass caught its own near-vacuous fixture (an
+  even-sided square is float-representable; the pinned odd s=94906267 is not).
+- **§371.1 THE SEVEN RULINGS:** (1) EXACT RESULT TYPES ACCEPTED — {numQ, denQ}
+  rational publication under the D1 field names: where division exists the rational
+  IS the exact answer; the kernel's truth outranks the sealed letter (§334.2's
+  chain), and the member is dormant so no consumer breaks. (2) The DISCHARGE
+  READING accepted — the predicate lands home; the operations.js consumer wiring is
+  the named successor behind the T2S ruling, soak-owing. (3) The TWO-LEAF SPLIT
+  accepted on the measured 282-effective basis; caps tightened ≤190/≤175, packet
+  ≤340. (4) OVERLAP_FLOOR_Q = 0n RULED STRUCTURAL — the neutral element is not a
+  dial; any future NONZERO floor is the tunable surface. (5) dualRunLegality PORTS
+  NOW — it is the §312.2c retirement's measurement machinery and MEAS-DUALRUN's
+  future instrument, dormant. (6) The D-4 TYPED REFUSAL accepted with its executed
+  witness — a silent garbage answer becomes a typed refusal, divergence declared.
+  (7) The stray posture (§358.2 + the ELEVEN banked) binds the executor's gate.
+- **§371.2 TE-T2F DISPATCHED** on the compile's freed seat (Opus; the draft carries
+  the judgment) — active stays at the §370 cap of four: WF-8 · TC-DOSSIER ·
+  INV-DESC · TE-T2F. Its terminal queues behind the closing train and NEVER inside
+  the mint's §353 window.
