@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~04:40 ET: T2E mid-lane (§351) — SPEC ANCHOR CURED (the dirty W3F fold
+# committed with this row; hash-cited files must be committed objects);
+# ownerless gate-mutex lock clearance RATIFIED (recover_dead_owner defect →
+# TE-HOUSE queue: reap ownerless locks w/ age guard); M7 self-closure ok.
+# T2E at READY, 118/160 eff; gate later by heads-up.
 # ⭐ ~04:10 ET: TC-WF8 collected (§350) — kernel wiring ZERO (fold owns the
 # seam); §321.2a premise narrowed (S-1: existing arms DO red dead rows; the
 # arm's value = the written-ruling escape); LAST_ALTAR_SEVERITY 0.5 chair-

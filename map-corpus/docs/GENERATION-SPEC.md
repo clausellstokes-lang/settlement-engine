@@ -4081,6 +4081,33 @@ Seven district generators all work, all pass, and make the parameterisation unaf
 **Later canonical plan/parcel/occupation operations supply values; W3 supplies only the axes.**
 
 **EXIT CRITERIA (measurements):**
+
+> ⟦FOLD §303⟧ ⭐⭐⭐ **FRESH W3 (MF-W3F) — WHAT IS MET, AND WHAT IS NOT.** Built on MF-D1's sealed
+> tip; every figure below traces to a self-named captured log in the lane's scratchpad (Law L3).
+> **The wave's ordered FIRST ITEM and its adopted exit criteria are met; the CONTENT criteria 1–13
+> below are NOT, and that is stated plainly rather than graded around** — this wave took §303.9's
+> consolidated sheet (the composition-order move, the street-web cures, the inter-ring law, the
+> containment recount, the terrain-pull re-aim), not the frontage/subdivision content.
+>
+> | what was ordered | result | log |
+> |---|---|---|
+> | ⭐ **§274.5a · the fossils enter the derivation before the packer holds their ground** | **MET.** Tower rounds sited **3 → 15**, ditch gardens **10 → 18**; every remaining refusal is attributed to a NAMED senior claim instead of to a cottage that arrived first | `laneMFW3F-fossil-{base,tip}.log` |
+> | ⭐⭐ **SW-1's five machine-checkable criteria** (adopted as this wave's exit criteria at §303.4; four of five failed at D1) | **ALL FIVE MET.** SW-1a shared mutable geometry **68 → 0**; SW-1b a source walker over the version declaration, 7 arms with planted counterfactuals; SW-1c the published grade disagreed on **11 of 17 → 0 of 18**; SW-1d colliding gate keys **12 of 38 → 0 of 37**; SW-1e stale square radii **22 of 22 → 0 of 23** | `laneMFW3F-sw1-{base,tip}.log`; `tests/lint/streetWebVersion.walker.test.js` |
+> | ⭐ **§301.5 · the ring-nesting census joins the standing 0/0 family** | **MET.** Circuit-vs-circuit crossings **10 → 0** over 18 leaves, pinned with two counterfactual arms. ⚠ The cure's DIRECTION was decided by a landed pin: pulling the superseded ring in red §240.4's inertia seam, so **the later ring yields to the earlier** and the trace runs innermost-first. ⛔ The stage attribution says the trace's stages never CREATE an inter-ring crossing — **the epoch BODIES cross 112 times before any ring is traced** (`body 112 · hull 24 · pull 8 · offset 6 · smooth 6 · bound 4 · traced 4 · nested 0`), so the census is 0 because the RINGS are guarded, not because the bodies nest | `laneMFW3F-interring-{base,tip}.log`, `laneMFW3F-irstage.log` |
+> | **§297.5d · the strict-form containment recount** | **DONE, and §252's zero is the weakest of four readings.** Over the ORIGINAL denominator (all drawn bodies) with a facet-resolution AREA predicate: held-by-OWN-ring **4**, own-or-later **2**, centroid-own **2**, centroid-own-or-later **0** — every one of §252's three relaxations is load-bearing. §240.1's half-ring arm re-authored non-vacuously; `boundEpoch`'s docstring corrected | `laneMFW3F-contain-strict-{base,tip}.log` |
+> | **§301.6 · the terrain pull re-aimed** | **MET.** The ±45° single-diagonal search (a measured producer of 4 of 12 self-crossing segments) becomes 8 bearings at 2 radii plus the origin. It is the wave's largest mechanism: **11 of 17 leaves**, attributed by its own arm | `laneMFW3F-attrib.log` |
+> | ⭐ **one additional distinct-world walled riverside exemplar** | **MINTED** (`town-2`, seed `thornbeck-4`) — additive only, every census re-based over **18 leaves / 12 distinct sites** | `harness/exemplars.mjs` |
+> | **§298.5d · circuitDemotion's second witness** | **THE ORDER'S PREMISE IS REFUTED — it is not n=1.** Five independent corpus witnesses (hf124, hf241, hf306, hf318, hf365, hf385), each row of the table carried by three or more; **hf385 is the CURE of hf347 and carries every row**, so the shape flag never touched the vocabulary. The table is NOT provisional | `map-corpus/docs/laneHF-CALIBRATION.md` |
+> | **§273.6a · the through-river bank-asymmetry arm** | **RUN FOR THE FIRST TIME AND PASSES at n=1** — `crossing` reads **79.7/20.3** inside the ~70/30 band. ⚠ AND IT IS NOT DISCRIMINATING: the bankside leaves score 73–100% on the same instrument, so the arm cannot tell a through town from a bankside one | `laneMFW3F-banks-tip.log` |
+> | ⭐ **frontage/parcel DCEL equivalence + S8 blocks-as-faces** (§10.15(2)) | **BUILT AS A READ-SIDE SUBJECT.** 16,079 S8 faces from wall/street boundaries (water/cliff held per §297.2b); **parcel → face 84.9%**, legacy block → face 84.2%, and ⭐ **block cohesion 93.8%** — a legacy block's parcels land in ONE derived face. ⛔ S9 frontage is still NOT BUILT | `laneMFW3F-s8-tip.log` |
+> | **§303.6 · the noding residual** | **0 on 18 of 18, and Euler's identity now holds on 18 of 18** (D1: 11 of 17). The chair's snap-rounding prior is adopted — ⛔ **but its implicit half is REFUTED: the residual is NOT MONOTONE in the quantum** (6·8·2·0·9·0 over 1·100·1000·5000·20000·100000), so the declaration is a LADDER walked to the first rung that clears, published per arrangement | `laneMFW3F-noding.mjs`, `laneMFW3F-dcel-tip.log` |
+> | **the proof floor** | suite **286 → 296** `TRUE_EXIT=0` · determinism **10/10** · four drawn censuses **0/0/0/0 area-true over 25,016** bodies · self-crossing **0/18**, ALL-RING **0/18**, inter-ring **0/18**, containment residual **0/18** · **108/108 renders under unraised ceilings** | `laneMFW3F-{suite,det,drawn,ops,contain}-tip.log` |
+>
+> ⛔ **CRITERIA 1–13 BELOW ARE UNADDRESSED BY THIS WAVE** and remain W3 content work: the
+> junction-mix bands, the block shape bands, frontage continuity, the plot-series rhythm, corner
+> plots, courts, the grain re-measure, the single subdivision routine, the footprint vocabulary,
+> the snap's degree guard, per-edge setbacks and the typed road/water interaction.
+
 1. **`X:T ≤ 0.09` and `deg≥5 share ≤ 0.01` on every leaf**, with `γ ∈ [0.39, 0.52]` and mean
    degree in `[2.1, 2.7]`. **Counterfactual: a lattice fixture must red.**
    ⛔ ⟦FOLD §297/§298⟧ **THIS EXIT IS SAME-INSTRUMENT OR IT IS NOT AN EXIT (§298.5a).** The bands
@@ -10331,7 +10358,7 @@ snapshot at the time that table was written; they are not silently refreshed evi
 | W0 | closed with instruments/verification receipts |
 | W1 / W1B | landed/closed in the sandbox program |
 | W2 | lane completed and outputs/receipt exist; its own exit report is 7 met, 2 partial, 1 not built |
-| W3 | **killed mid-lane**; no receipt, changed tests, manifest or W3 output set — not a result |
+| W3 | ⟦FOLD §303⟧ the killed lane remains quarantined evidence. **FRESH W3 (MF-W3F) IS BUILT IN THE SANDBOX** against D1's sealed tip — receipt `laneMFW3F-receipt.md`, one declared same-seed shift attributed by eleven counterfactual arms with an executed no-op control (arm Z, **34/34 byte-identical to the sealed base**). Its first item, §274.5a's composition-order move, is landed; SW-1's five exit criteria all pass; the §301.5 inter-ring census joins the standing 0/0 family at **10 → 0**. **S9 frontage itself is still NOT BUILT** — what landed is S8 blocks-as-faces as a read-side equivalence subject (§10.15(2)), not a live producer |
 | §§6–§9 dimensional/authorship | design-only; no `DimensionalScene`, canonical `MassPartQ[]`, `MapDocument` or typed authoring implementation landed |
 | §275 historical cohort/counterfactual/halo | design-only, not executed |
 | §287 | architecture, governance and corpus-instrument repair only; no generator wave dispatched |

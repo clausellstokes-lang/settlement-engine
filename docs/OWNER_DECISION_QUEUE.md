@@ -14706,3 +14706,31 @@ recommended. Implementation, per item:
   draft carries the judgment). The dual-run equivalence measurement remains queue
   head for the NEXT free seat. Seats: WF-1F (gate) · TE-T2E (build) · TE-OSR9
   (build) · TE-WF8 (new) = four + chair.
+
+## §351 — TE-T2E MID-LANE COLLECTION: THE SPEC ANCHOR CURED; THE MUTEX DEFECT FOUND AND ITS CLEARANCE RATIFIED (2026-08-22 ~04:40)
+
+- **TE-T2E is READY-flipped at 118 effective lines (cap 160)** with every preflight
+  STOP re-derived at 27c250f9: preamble and sealed-source hashes MATCH (plus the
+  bonus cross-check tying the landed coordinateAbi docblock to the sealed hash);
+  the census convicted figure-by-figure, catching the draft's stale tuple (T2D's
+  pre-landing tree) exactly as the law intends; both typecheck floors exact.
+- **§351.1 THE SPEC-ANCHOR DEFECT, CURED BY CHAIR COMMIT IN THIS LANDING:** the MF
+  family's spec anchor (aa613cb8…) resolved only to the ledger worktree's DIRTY
+  working copy of map-corpus/docs/GENERATION-SPEC.md — unreproducible from history
+  by any later checkout. Verified by content comparison: the whole delta is ONE
+  27-line addition, the ⟦FOLD §303⟧ W3F results block (chair-era program work never
+  committed; zero committed lines move). The fold is COMMITTED with this row, making
+  the anchor a durable object. The class lesson joins the §312.3/§318 family: a
+  HASH-CITED file must be a committed object the day it is cited.
+- **§351.2 J-TET2E-0 RATIFIED — the guarded rmdir of the ownerless gate-mutex lock:**
+  an empty lock dir (no pid file, no live runner) is unreclaimable by
+  recover_dead_owner's `[ -n "$_stale_owner" ] || return 1`, so a process killed
+  between mkdir and pid-write deadlocks the slot forever. The lane's evidence
+  (empty dir, no owner, two lanes polling) justified the clearance; WF-1F acquired
+  properly immediately after. **The recover_dead_owner defect is QUEUED to TE-HOUSE:**
+  reap ownerless locks under an age guard, with a test that plants the
+  killed-between-mkdir-and-pid-write state.
+- **§351.3** The lane's M7 self-closure ratified (its own matrix review found A2
+  never fed a bad footprint coordinate; two arms added inside A2, census unmoved).
+  Outstanding for the lane: the census re-record, the seven-mutant sweep, the
+  after-arm, the dormancy fence + zoom, LANDED, and the gate by heads-up.
