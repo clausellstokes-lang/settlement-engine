@@ -20193,6 +20193,223 @@
           "check:tail"
         ]
       ]
+    },
+    {
+     "id": "WEB-1",
+     "status": "LANDED",
+     "packetPath": "docs/implementation/packets/website/WEB-1.md",
+     "verifiedBase": "84e06412f6fdca91020197f2a332ba7f98642f64",
+     "changeManifest": [
+      {
+       "_note": "Consent model v2 -> v3. defaults() flips `research` to false so every person-adjacent plane is OFF; `essential` is untouched and stays ON unless DNT (chair C1). CONSENT_MODEL_VERSION 2 -> 3. CONSENT_KEY is deliberately NOT bumped - bumping discards every stored record and silently re-decides for users who chose, which was v2's lesson and binds v3 identically in the other direction. The header law is rewritten, including a correction: it claimed PrivacySettings was the SOLE setConsent caller, which was true when written and false at this base (consentSync.applyServerOptOut arrived later). The invariant that matters was never 'one caller' but 'no caller writes a record the user did not cause'.",
+       "action": "MODIFY",
+       "path": "src/lib/consent.js"
+      },
+      {
+       "_note": "The server half, and the train's FIRST migration to UPDATE existing telemetry_consent rows (124 moved the default and deliberately rewrote nothing). PART 1 restores 036's column default for fresh profiles. PART 2 flips existing rows under a CONJUNCTION - `v` absent AND zero consent_change_records - because neither signal subsumes the other: 194's trigger records only CHANGED keys while the `v` stamp lands wholesale, so a no-op save stamps `v` with zero records; and the trigger defaults its version to 1 when `v` is absent, so a non-mirror write leaves records on an unstamped row. Carries a mandatory `-- @rollback:` note: profiles and consent_change_records are both on MONEY_PII_TABLES and the discipline walker reads the whole source, comments included.",
+       "action": "CREATE",
+       "path": "supabase/migrations/197_consent_person_adjacent_default.sql"
+      },
+      {
+       "_note": "A4's four corners plus their controls, seeded through the REAL write paths rather than hand-written jsonb: ARM C drives the no-op-save specimen through public.set_my_telemetry_consent itself. Controls prove all four rows entered with research ON (so three 'still true' arms cannot pass for the wrong reason), that the specimen is real (v=2 with zero records, against a contrast row that gets both), and that the reverse gap is real. NEW FILE = a CREATE row at every packet status.",
+       "action": "CREATE",
+       "path": "tests/security/consentPersonAdjacentDefault.pglite.test.js"
+      },
+      {
+       "_note": "DECLARED re-point from v2, cause stated in-file. Five arms invert with the default; one NEW arm pins that CONSENT_KEY does not move across a model revision. A rename is title-count-neutral, so this file contributes the census's entire +1 title.",
+       "action": "TEST",
+       "path": "tests/lib/consent.test.js"
+      },
+      {
+       "_note": "DECLARED re-point from v2, cause stated in-file, plus the file header which still described the v2 default after the bodies were re-pointed. Four arms invert because the first click on an untouched record is now a GRANT rather than a revoke. The component itself is BYTE-UNCHANGED - it renders whatever getConsent() returns.",
+       "action": "TEST",
+       "path": "tests/ui/privacySettings.test.jsx"
+      },
+      {
+       "_note": "Gate 4 of the ten-gate migration bill, and the one that bit only at the terminal. MIGRATION_TRAIN_REPO_HEAD 196 -> 197 plus a NEW REVIEWED WAVE `consent-person-adjacent-default`. The previous wave's `to:` was deliberately NOT extended: that wave is simulation-metrics-storage, and folding a consent migration into it would corrupt the record an operator reads. The train's first DATA wave - it creates nothing, so expectedObjects is one already-existing table and the review subject is the predicate, not the DDL.",
+       "action": "MODIFY",
+       "path": "scripts/ops/migrationRehearsalCore.mjs"
+      },
+      {
+       "_note": "The wave pins, the plan figures (repoHead, pendingCount, the [from,to] list, the Array.from length, the snapshot pair), and the four RELATIVE plan.waves.at(-N) pins that each shift by one when a wave is appended. Adds an assertion that 197 takes `documented-manual-reversal` from its own annotation rather than the wave's forward-only policy, because flattening that distinction would tell an operator the whole wave is reversible when its data half is not.",
+       "action": "TEST",
+       "path": "tests/ops/migrationRehearsal.test.js"
+      },
+      {
+       "_note": "Gate 6: deployRunbookFreshness derives the head basename from disk and asserts DEPLOY.md names it. ONLY the head line is touched; CLAIM_RE was run first and this edit adds no new completeness claim.",
+       "action": "MODIFY",
+       "path": "docs/DEPLOY.md"
+      },
+      {
+       "_note": "Gate 8: architectureFreshness pins BOTH figures here - `migrations are contiguous to N` and the `head N is M ahead of P` blocker line. The contiguous line sits inside a dated BANKED note and reads like historical prose; it is a pinned figure and must move.",
+       "action": "MODIFY",
+       "path": "docs/CURRENT_STATE.md"
+      },
+      {
+       "_note": "Gate 8: architectureFreshness and docCounts both pin `**migrations/** (N)`.",
+       "action": "MODIFY",
+       "path": "ARCHITECTURE.md"
+      },
+      {
+       "_note": "Gate 9: the E-A totality contract - a NEW invariant test file owes a mutation-coverage entry. Registered with the estate's own idiom for runIf-gated pglite suites, `{kind: rationale, ref: pglite-executed}`, which is honest here because the per-suite mutation proofs WERE executed: M4a reds ARM C and M4b reds ARM D, each restored byte-identically and verified by diff.",
+       "action": "REGISTER",
+       "path": "scripts/mutation-coverage-manifest.json"
+      },
+      {
+       "_note": "Census re-record 2499/364/2135/20729/5787 -> 2500/365/2135/20730/5787 at the landing slot 84e06412, the after-figure convicted by the arm's own equality with the slot tuple read back as the control (expected 2500 to be 2499). The DELTA +1/+1/+0/+1/+0 crossed the rebase, never the tuple: the authored figure (2497/364/2133/20719/5785 -> 2498/365/2133/20720/5785 at eb6124a6) sat on a base H8B and MF-T2H had since moved. The cause block names both independent causes. Records that the new pglite suite PARKS on describe.runIf() - measured, and byte-identical to why operatorMessages.pglite.test.js parks - so credited does not move and the file's twelve pins are real coverage the census cannot see.",
+       "action": "MODIFY",
+       "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+      }
+     ],
+     "requiredSymbols": [
+      {
+       "path": "src/lib/consent.js",
+       "symbol": "CONSENT_MODEL_VERSION"
+      },
+      {
+       "path": "src/lib/consent.js",
+       "symbol": "research: false, ai_prose: false, market: MARKET_INSIGHTS_DEFAULT"
+      },
+      {
+       "path": "supabase/migrations/197_consent_person_adjacent_default.sql",
+       "symbol": "(p.telemetry_consent ->> 'v') is null"
+      },
+      {
+       "path": "supabase/migrations/197_consent_person_adjacent_default.sql",
+       "symbol": "not exists ("
+      },
+      {
+       "path": "supabase/migrations/197_consent_person_adjacent_default.sql",
+       "symbol": "@rollback:"
+      },
+      {
+       "path": "tests/lib/consent.test.js",
+       "symbol": "consent model v3 — the person-adjacent split"
+      },
+      {
+       "path": "tests/lib/consent.test.js",
+       "symbol": "honors an explicit research opt-IN verbatim — a v2-era grant SURVIVES the v3 flip"
+      },
+      {
+       "path": "tests/lib/consent.test.js",
+       "symbol": "does NOT bump CONSENT_KEY across the model revision"
+      },
+      {
+       "path": "tests/security/consentPersonAdjacentDefault.pglite.test.js",
+       "symbol": "ARM C — stamp, NO history: the no-op-save reviewer is untouched (the F1 specimen)"
+      },
+      {
+       "path": "tests/security/consentPersonAdjacentDefault.pglite.test.js",
+       "symbol": "ARM D — history, NO stamp: the non-mirror-written row is untouched"
+      },
+      {
+       "path": "tests/security/consentPersonAdjacentDefault.pglite.test.js",
+       "symbol": "CONTROL: the specimen is real — a no-op save stamps `v` and writes ZERO change records"
+      },
+      {
+       "path": "scripts/ops/migrationRehearsalCore.mjs",
+       "symbol": "consent-person-adjacent-default"
+      },
+      {
+       "path": "tests/ops/migrationRehearsal.test.js",
+       "symbol": "consent-person-adjacent-default"
+      },
+      {
+       "path": "docs/DEPLOY.md",
+       "symbol": "197_consent_person_adjacent_default.sql"
+      }
+     ],
+     "retiredSymbols": [
+      {
+       "path": "src/lib/consent.js",
+       "symbol": "research: on,"
+      },
+      {
+       "path": "tests/lib/consent.test.js",
+       "symbol": "consent model v2 — research opt-out default"
+      },
+      {
+       "path": "tests/ui/privacySettings.test.jsx",
+       "symbol": "research toggle defaults ON (opt-out) absent DNT"
+      },
+      {
+       "path": "docs/DEPLOY.md",
+       "symbol": "196_world_sim_metrics.sql"
+      }
+     ],
+     "acceptanceCases": [
+      {
+       "id": "A1",
+       "case": "an untouched client record (absent, or updatedAt 0) resolves research/ai_prose/market false and essential true; DNT absent"
+      },
+      {
+       "id": "A2",
+       "case": "a v2-era EXPLICIT choice is honoured verbatim in BOTH directions: an opt-IN keeps true across the flip, an opt-OUT keeps false"
+      },
+      {
+       "id": "A3",
+       "case": "DNT hard-overrides essential, research and market to false regardless of any stored grant"
+      },
+      {
+       "id": "A4",
+       "case": "the migration's four corners, seeded through the real RPC: neither signal flips OFF; stamp+history untouched; stamp with NO history untouched (the no-op-save specimen); history with NO stamp untouched"
+      },
+      {
+       "id": "A5",
+       "case": "a profile minted after the migration carries the v3 default, and the flip leaves an honest system-sourced audit row while touching no other plane"
+      },
+      {
+       "id": "A6",
+       "case": "the ingest clamp still refuses a client-claimed research payload when the server column is false (existing arm re-run, not rewritten)"
+      },
+      {
+       "id": "A7",
+       "case": "the on-by-construction receipt: the engine-telemetry wall walker and the 196 DDL column-absence stay green at the member, proving the anonymous half needs no flag"
+      },
+      {
+       "id": "A8",
+       "case": "purgeRevoked still drops research-plane records under a v3 default, with no phantom revoke event required"
+      }
+     ],
+     "checks": [
+      [
+       "npx",
+       "vitest",
+       "run",
+       "tests/lib/consent.test.js",
+       "tests/lib/consentSync.test.js",
+       "tests/ui/privacySettings.test.jsx",
+       "tests/security/consentPersonAdjacentDefault.pglite.test.js"
+      ],
+      [
+       "npx",
+       "vitest",
+       "run",
+       "tests/lint/engineTelemetryWall.walker.test.js",
+       "tests/security/worldSimMetrics.pglite.test.js",
+       "tests/lib/analyticsQueue.test.js",
+       "tests/edgeFunctions/ingestActorLinks.test.js"
+      ],
+      [
+       "npx",
+       "vitest",
+       "run",
+       "tests/ops",
+       "tests/docs",
+       "tests/lint",
+       "tests/build"
+      ],
+      [
+       "npm",
+       "run",
+       "validate:packets"
+      ],
+      [
+       "npm",
+       "run",
+       "check:tail"
+      ]
+     ]
     }
   ]
 }

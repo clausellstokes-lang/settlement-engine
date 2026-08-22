@@ -3,12 +3,16 @@
  *
  * tests/ui/privacySettings.test.jsx — the disclosure lives HERE, silently.
  *
- * The research opt-out has no pop-up and no first-run notice anywhere. The one
- * and only disclosure surface is the Privacy & data section, in the owner's copy.
- * This pins:
+ * The research default has no pop-up and no first-run notice anywhere, in either
+ * direction. The one and only disclosure surface is the Privacy & data section, in
+ * the owner's copy. This pins:
  *   - the owner's research-block heading ("You're helping improve the generator")
  *     and body render;
- *   - the research toggle defaults ON (opt-out) absent DNT / an explicit choice;
+ *   - the research toggle defaults OFF (opt-IN) absent DNT / an explicit choice —
+ *     consent model v3, the person-adjacent split (§359.6). ⚠ RE-POINTED: v2 had
+ *     this ON, and the four toggle-driven arms below invert with it, because the
+ *     first click on an untouched record is now a GRANT rather than a revoke. The
+ *     component itself is BYTE-UNCHANGED; it renders whatever getConsent() returns.
  *   - no floating "Research contribution notice" is rendered by this section.
  *
  * It also pins the SERVER MIRROR half (consentSync.js): a toggle writes locally AND pushes
