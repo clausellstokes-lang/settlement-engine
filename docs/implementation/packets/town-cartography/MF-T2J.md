@@ -57,11 +57,23 @@
 >
 > **Deliverables, hashed after this member (all three are CREATE — none existed at the base):**
 >
+> | file | SHA-256 after this member, read at the COMMITTED tip with `git show HEAD:` |
+> |---|---|
+> | `src/domain/townMap/fabric/stageManifest.js` | `ad639c8e525f0db469660767fb5904825bf8d33a7b259f33de1f5d2c1c2286b2` |
+> | `tests/lint/townMapStageManifest.walker.test.js` | `cae279abb87cdc19593ba49f8916200f5912e45e7b6a47b2e51366090555e316` |
+> | `tests/domain/townMapStageManifest.test.js` | `413832ff90e87941998b09f4de80bcf3363bf4bb918d510c284461f5fd5e2114` |
+>
+> **The three MODIFY hosts, at the same tip:**
+>
 > | file | SHA-256 after this member |
 > |---|---|
-> | `src/domain/townMap/fabric/stageManifest.js` | *(stamped at the landing slot, from the hash after the last edit)* |
-> | `tests/lint/townMapStageManifest.walker.test.js` | *(same)* |
-> | `tests/domain/townMapStageManifest.test.js` | *(same)* |
+> | `tests/lint/sovereigntyLightingContract.walker.test.js` | `94726e38d924e6fe7cd5a4b8c0bc5256638dd7c02b7561d5315cce09a0d69fe4` |
+> | `scripts/mutation-sweep.sh` | `f0c680c7b1e7676e42b4cbedf2ef3d24bea65d3f6df36fdda872821e075e252b` |
+> | `scripts/mutation-coverage-manifest.json` | `2e50630c4fc8bb0145bc888554aec712cc15da35a027c0b43f40bae08527586c` |
+>
+> ⭐ **THE DIGESTS ARE READ FROM THE COMMIT, NOT FROM THE WORKING TREE.** The pre-commit hook runs
+> `eslint --fix` on staged JS and can re-stage after a green; `stageManifest.js` and the walker
+> compare byte-identical to their pre-battery digests, so the hook changed nothing.
 >
 > ⚠ **THE TUPLE AND EVERY HASH ARE RE-STAMPED AT THE LANDING SLOT, NOT CARRIED.** This member is
 > stacked THREE DEEP on unlanded holding commits and will be rebased. Per the carry law the DELTA
@@ -485,9 +497,56 @@ dormancy-boundary STOP. Every probe is verified UNIQUE to this member's leaf acr
 `src/` before it is used, and positive controls owned by LANDED fabric modules prove the denominator
 contains the fabric surface (§P2.13).
 
-## §11 · THE TERMINAL RECORD
+## §11 · THE PRE-TERMINAL RECORD, AND WHAT THE TERMINAL STILL OWES
 
-*Filled at the GO, from the gate's own tail. Both typecheck configurations are reported by name and
-window (§P5), the steps that actually RAN are listed because `npm run check` is a 17-step `&&` chain
-that blacks out everything behind a red, and the pre-gate sweep `npx vitest run tests/lint
-tests/build tests/ops` (§408) is recorded separately from the mutexed attribution instrument.*
+### §11.1 · The post-build fence and the forensic zoom — EXECUTED (§P2.2, ODQ §324.5)
+
+`npm run build` green (17.37s; postbuild wrote 314 static route documents). Then the fence, under the
+environment variable that un-skips its second arm:
+`VERIFY_DIST=1 npx vitest run tests/build/townMapLazy.test.js` → **3 passed (3), TRUE_EXIT 0** —
+EXECUTED counts, not a pre-build skip.
+
+The forensic zoom over **710 dist chunks**, with every probe first verified UNIQUE to this member's
+leaf across the whole of `src/` (the withdrawn-probe lesson MF-T2H banked):
+`mf-d1-sandbox-stage-manifest-v1`, `GENERATION_MANIFEST`, `S13>S6`, `customParityFixtureRegistryRef`,
+`executableVocabularyRef`, `invalidationRoots`, `PUBLIC_ORDER_INVERSIONS`, `STAGE_GRAPH_SCC` —
+**0 chunks each**. Three positive controls owned by LANDED fabric modules — `plan-q1-0-1000-v1`,
+`CANONICAL_SPATIAL_OPERATION`, `ORTHOGONAL_CROSS_PLAN` — **1 chunk each**, so the denominator
+demonstrably contains the fabric surface and the absence is not vacuous (§P2.13). **The leaf never
+entered the module graph at all**, which is the strongest form the dormancy result can take, and it
+is the expected answer for a member that wires no importer.
+
+### §11.2 · The pre-gate sweep (§408) — EXECUTED, and every red is BANKED
+
+`npx vitest run tests/lint tests/build tests/ops`, TRUE_EXIT **1**:
+`3 failed | 188 passed (191)` files, `5 failed | 2164 passed | 63 skipped (2232)` tests.
+
+**All five reds were classified against `scripts/.test-ratchet-baseline.json` by an executed
+title-prefix join, not by eye — STRAYS: 0** against the frozen roster of eleven measured at
+`4deb4f026644cba500b0efc1e051fdea2ff96041`:
+
+| red | disposition |
+|---|---|
+| `clampPrimitiveBaseline.test.js` · baseline exactly matches the files that still define a local clamp | BANKED |
+| `warCostKindPools.walker.test.js` · `'war_trajectory_winning'` retains the five receipt-annex families | BANKED |
+| `warCostKindPools.walker.test.js` · `'war_trajectory_losing'` … | BANKED |
+| `warCostKindPools.walker.test.js` · `'trajectory_misread'` … | BANKED |
+| `warRulingKindPools.walker.test.js` · `'succession_demand_inherited'` … | BANKED |
+
+⚠ **AND A SIXTH BANKED RED SITS OUTSIDE THAT SWEEP'S SCOPE, LOOKED UP RATHER THAN ASSUMED.**
+`tests/docs` reads `1 failed | 236 passed (237)`, and the failure is
+`enforcement-claims.test.js :: every completeness claim carries an @enforced-by tag`, also one of the
+frozen eleven. Its six naked claims sit in `docs/FABLE_VALIDATION_QUEUE.md`,
+`docs/GOLDEN_SHIFT_LEDGER.md` and `docs/implementation/packets/foreign-policy/IN-0C.md` — **none of
+which this member touches** — and the exact `CLAIM_RE` run over this packet returns **0 hits**, so
+no new per-claim debt arrives with it.
+
+### §11.3 · What the terminal still owes
+
+*Filled at the GO, from the gate's own tail: one full bare `npm run check:tail` from a fresh shell,
+never wrapped in `gate-mutex.sh --run` (which self-deadlocks and reports exit 3), with
+`; echo TRUE_EXIT=$?` read in-shell and the gate's own `[gate-tail] exit:` line quoted beside it.
+Both typecheck configurations are reported by name and window (§P5) — `typecheck:ratchet`
+(`tsconfig.full.json`) and `typecheck:domain:strict` (`tsconfig.domain-strict.json`), the latter
+already measured at 1134 of ceiling 1134 in §4 row 8 — and the steps that actually RAN are listed,
+because `npm run check` is a 17-step `&&` chain that blacks out everything behind a red.*
