@@ -5,12 +5,18 @@
  * malformed row, missing migration genesis, disabled sentinel, or unbound scan
  * path must stop the gate before the expensive producer corpus executes.
  *
- * ── ⭐⭐ SIX IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ───
+ * ── ⭐⭐ SEVEN IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **8**: schema 7's tagged numeric heuristic-leaf
+ * `BASELINE_SCHEMA` is **9**: schema 8's tagged numeric heuristic-leaf envelope
+ * re-governed to the landed post-EP-1 truth. The identity, topology inventory
+ * and envelope remain `<key> on <shape>` plus sparse `rowTags`; the schema mint
+ * binds the corpus's dark `advanceEpochEnabled` decision, the two package.json
+ * script additions, the moved unscanned generated-source input, and a bank that
+ * grows by the four declared eventLog explained-writer identities.
+ *
+ * `RETIRED_CORPUS_COVERAGE_BASELINE_SCHEMA` is **8**: schema 7's tagged numeric
  * inventory after the shared builder gained an opt-in scalar second consumer.
- * The identity, topology inventory and envelope remain `<key> on <shape>` plus
- * sparse `rowTags`; the schema mint binds the governed builder transition.
+ * Retired, never redefined, never deleted.
  *
  * `RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA` is **7**: schema 6's
  * numeric inventory with explained-writer findings re-admitted and BANKED BY
@@ -41,13 +47,13 @@
  * (`assertBaselineRow`, consumed by both the envelope validator and the gate's
  * `rowOf`), and each definition carries its own executed pins.
  *
- * ⚠⚠ SCHEMAS 4 THROUGH 8 *DO* SHARE ONE ENVELOPE VALIDATOR, AND THAT IS THE
+ * ⚠⚠ SCHEMAS 4 THROUGH 9 *DO* SHARE ONE ENVELOPE VALIDATOR, AND THAT IS THE
  * OPPOSITE CALL FOR THE OPPOSITE REASON. Schema 3's shape genuinely differs
  * (exact identity, thirteen-field sentinel, `count === 1`), so a shared
  * validator would have had to be a parameterised superset of two different
- * laws. The five leaf schemas have the same numeric envelope law and identity
- * grammar; schemas 7 and 8 share the same tagged extension too. Only the
- * finding-set PRODUCER differs, so five copies would be one live law with five
+ * laws. The six leaf schemas have the same numeric envelope law and identity
+ * grammar; schemas 7, 8 and 9 share the same tagged extension too. Only the
+ * finding-set PRODUCER differs, so six copies would be one live law with six
  * homes, which is exactly the
  * CR-OSR-FREEZE-8 shape. The one thing that must not be shared is the schema
  * NUMBER, so `validateLeafBaseline` takes it as an argument and each entry
@@ -82,6 +88,22 @@
  * have justified a mint of their own ride for free. The genesis is a PURE
  * SHRINK: no identity is added, so the migration ledger carries no contested
  * row.
+ *
+ * ⚠⚠ WHY SCHEMA 9 EXISTS (measured): the same forcing mechanism a fourth time,
+ * and this time NOTHING IN THE INSTRUMENT MOVED FIRST — the estate moved under
+ * a frozen instrument. Three landed changes each fall inside a digest this
+ * envelope binds: the corpus builder now holds `advanceEpochEnabled` dark by a
+ * declared decision, `package.json` gained two npm scripts (a governed scanner
+ * input, with the lockfile untouched), and one `.generated.js` subject input
+ * changed — a SUBJECT-BUT-UNSCANNED path, so it moves `unscannedInputDigest`
+ * rather than `detectorDigest`. Any one of the three makes the gate return 1
+ * and an ordinary `--write` THROW, so the re-freeze is only expressible as a
+ * mint. Riding with it: the bank grows by the four declared eventLog
+ * explained-writer identities whose writer is the store/command layer the
+ * generation corpus never runs. Unlike schema 8, this target does NOT assert a
+ * same-only topology invariant: the mint is cut at a later tip than the one it
+ * was measured at, so legitimate landings may move rows and each one is
+ * reconciled through its own reviewed, accepted, noted decision instead.
  */
 import {
   FULL_GIT_SHA,
@@ -99,7 +121,11 @@ import {
 /** The RETIRED bank-by-rule tagged definition. Schema 8 keeps its tagged
  *  topology envelope while binding the opt-in scalar consumer. Never redefined. */
 export const RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA = 7;
-export const BASELINE_SCHEMA = 8;
+/** The RETIRED corpus-coverage definition — schema 9's predecessor. Same tagged
+ *  topology envelope; schema 9 re-governs it to the landed post-EP-1 inputs and
+ *  a bank grown by four declared identities. Never redefined, never deleted. */
+export const RETIRED_CORPUS_COVERAGE_BASELINE_SCHEMA = 8;
+export const BASELINE_SCHEMA = 9;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -476,7 +502,7 @@ export function validateSchema3Baseline(baseline) {
   return baseline;
 }
 
-/* ══ HEURISTIC-LEAF ENVELOPES — 4–7 retired, 8 live ════════════════════════ */
+/* ══ HEURISTIC-LEAF ENVELOPES — 4–8 retired, 9 live ════════════════════════ */
 
 /**
  * ⛔ RETIRED — the UNFILTERED heuristic-leaf definition (CR-OSR-FREEZE-3-R1).
@@ -514,9 +540,26 @@ export function validateSchema7Baseline(baseline) {
   );
 }
 
-/** The LIVE authority — schema 7's tagged numeric topology envelope after the
- *  governed builder gained its opt-in scalar second consumer. */
+/**
+ * ⛔ RETIRED — schema 7's tagged numeric topology envelope after the governed
+ * builder gained its opt-in scalar second consumer. Kept executable for the
+ * same two reasons every retired validator is: the committed schema-8 genesis
+ * stays verifiable, and the schema-8 → schema-9 migration validates its own
+ * predecessor envelope with the governed law rather than an ad-hoc one.
+ * NEVER redefined in place.
+ */
 export function validateSchema8Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_CORPUS_COVERAGE_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
+/** The LIVE authority — schema 8's tagged numeric topology envelope re-governed
+ *  to the landed post-EP-1 detector and unscanned inputs, with the bank grown by
+ *  the four declared eventLog explained-writer identities. */
+export function validateSchema9Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 
@@ -582,7 +625,7 @@ function validateHeuristicInventory(inventory, scanTree) {
  *   schema 3    "current" = the exact detector, "legacy" = the governed heuristic
  *               detector; the two tool digests DIFFER (only the legacy one folds
  *               in `legacyAlgorithm`).
- *   schema 4/5/6 there is no second detector. The heuristic leg IS the current
+ *   schema 4-9  there is no second detector. The heuristic leg IS the current
  *               authority, so current* === legacy* in EVERY field — including the
  *               artifact digest and the scanner-tool digest, which must both
  *               reconstruct from the FROZEN legacy algorithm. A receipt naming an
@@ -667,7 +710,7 @@ function validateHeuristicMigrationReceipt(receipt, baseline) {
  * multiplicity, heuristic telemetry, and a one-detector migration receipt.
  *
  * ⚠ `schema` IS AN ARGUMENT, NOT A CONSTANT READ FROM MODULE SCOPE. Schemas 4
- * through 8 share this law exactly (see the module header for why sharing is
+ * through 9 share this law exactly (see the module header for why sharing is
  * right here and wrong for schema 3); what must never be shared is WHICH number
  * each accepts, so each entry point below supplies its own and a pin drives
  * every direction of the refusal.

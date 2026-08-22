@@ -86,11 +86,12 @@ import {
   MIN_ROWS,
   ORIGIN_MIN_ROWS,
   RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA,
+  RETIRED_CORPUS_COVERAGE_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema8Baseline,
+  validateSchema9Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -126,11 +127,15 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  * 5 = the same identity narrowed by M6 + M8/M9 alone (RETIRED).
  * 6 = the same identity narrowed by M6, M11, M12 and clear-outright M8/M9 (retired).
  * 7 = schema 6's numeric set with M8/M9 rows re-admitted and tagged (RETIRED).
- * 8 = the same banked topology law after AO-0's opt-in scalar second consumer. THE LIVE AUTHORITY.
+ * 8 = the same banked topology law after AO-0's opt-in scalar second consumer (RETIRED).
+ * 9 = schema 8's topology and tag law re-governed to the landed post-EP-1 inputs,
+ *     with the M8/M9 bank grown by the four declared eventLog identities.
+ *     THE LIVE AUTHORITY.
  */
 export {
   BASELINE_SCHEMA, MIN_ROWS, ORIGIN_MIN_ROWS,
   RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA,
+  RETIRED_CORPUS_COVERAGE_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -1028,6 +1033,70 @@ export const EXPLAINED_WRITER_EXEMPTIONS = Object.freeze([
       + ' campaignState itself, so the STORE-layer writer is never run — one lifecycle step'
       + ' further out than saves.js and the same class.',
   }),
+  // ⭐⭐ CR-OSR-SCHEMA-9 / M9 — THE FOUR eventLog IDENTITIES, AND ONLY FOUR.
+  //
+  // ⚠⚠ TWO UNRELATED RECORDS SHARE THE LEAF NAME `eventLog`, AND THAT IS THE
+  // WHOLE FINDING. The corpus's `eventLog` is the WORLD-STATE log —
+  // `{changes, id, impactIds, recordedAt, sourceEvent, sourceSettlementId,
+  // sourceSettlementName}`. Every read banked below is of the CAMPAIGN log,
+  // `{event, deltas, narrativeSummary, ...}`, minted by `applyEvent` at :52-66
+  // when a player COMMITS an event through the store/command layer. The two
+  // records share almost no keys, which is the same fact as the measured 2/7
+  // best sibling coverage that keeps M6 from ever bridging them: no family
+  // relation can, and no threshold retune should be asked to.
+  //
+  // ⚠ THE SET IS EXACTLY WHAT GATE 0 ADMITS, AND THE INSTRUMENT DREW THE LINE
+  // ITSELF. Probing `applyEvent.js` for all 26 flagged eventLog keys admits
+  // these four and REFUSES the other 22 — including `type` and `targetId`,
+  // which are reads of the INNER Event object (a different, correct home) and
+  // are therefore NOT banked here. Banking them would have been the dishonest
+  // half of the split, and the machinery refuses it rather than the prose.
+  //
+  // ⚠ TAGGING IS PER-IDENTITY, EVERYWHERE THE IDENTITY APPEARS — the declared
+  // granularity of this filter. Three of the banked addresses sit in
+  // `chronicleFeed.js`, whose OTHER eventLog identities are cross-source
+  // compatibility arms of a different class and stay untagged. That is the
+  // ruling's arithmetic, not a widening.
+  Object.freeze({
+    identity: 'appliedAt on eventLog',
+    mechanism: 'save-time-writer',
+    writer: 'src/domain/events/applyEvent.js',
+    ruling: 'CR-OSR-SCHEMA-9 / M9 — ODQ §346.1 Ruling-B eventLog precedent',
+    why: 'The commit timestamp of a campaign EventLogEntry, written by applyEvent as it'
+      + ' persists the entry. Only the STORE/COMMAND layer calls applyEvent, and the'
+      + ' generation corpus executes generation plus the domain pulse and never commits an'
+      + ' event, so no run of it can ever produce this key.',
+  }),
+  Object.freeze({
+    identity: 'deltas on eventLog',
+    mechanism: 'save-time-writer',
+    writer: 'src/domain/events/applyEvent.js',
+    ruling: 'CR-OSR-SCHEMA-9 / M9 — ODQ §346.1 Ruling-B eventLog precedent',
+    why: 'The system-state delta applyEvent records onto the campaign EventLogEntry it mints'
+      + ' at commit time. The corpus never runs the store/command layer that calls it, so the'
+      + ' key is absent from every generated world by construction — one lifecycle step out'
+      + ' from campaignPulseHelpers, the same class.',
+  }),
+  Object.freeze({
+    identity: 'event on eventLog',
+    mechanism: 'save-time-writer',
+    writer: 'src/domain/events/applyEvent.js',
+    ruling: 'CR-OSR-SCHEMA-9 / M9 — ODQ §346.1 Ruling-B eventLog precedent',
+    why: 'The committed Event carried inside its campaign EventLogEntry, written by applyEvent'
+      + ' when the store commits. The corpus builds worlds without ever committing an event,'
+      + ' so its own eventLog is the WORLD-STATE log, which has no such key — a shared leaf'
+      + ' name over two unrelated records.',
+  }),
+  Object.freeze({
+    identity: 'narrativeSummary on eventLog',
+    mechanism: 'save-time-writer',
+    writer: 'src/domain/events/applyEvent.js',
+    ruling: 'CR-OSR-SCHEMA-9 / M9 — ODQ §346.1 Ruling-B eventLog precedent',
+    why: 'The prose the event pipeline produced, persisted onto the campaign EventLogEntry by'
+      + ' applyEvent at commit time. Generation never reaches that writer — the corpus runs no'
+      + ' store or command layer — so the summary exists only on saved campaigns and never on'
+      + ' a freshly generated world.',
+  }),
 ]);
 
 /** The mechanisms an entry may claim. TOTAL positive predicate: an unlisted
@@ -1132,7 +1201,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema8Baseline(baseline);
+  validateSchema9Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -1861,10 +1930,31 @@ function unscannedInputDigestOf(snapshot) {
   return digestOf(snapshot.sourceTree.entries.filter((entry) => !scanned.has(entry.path)));
 }
 
+/**
+ * ⚠⚠ THE GENESIS CONDITION IS "THE PREDECESSOR IS NOT THIS SCHEMA", NOT A NAMED
+ * PREDECESSOR NUMBER — and the difference is the difference between a mint that
+ * can add a declaration and one that cannot.
+ *
+ * It used to name the schema-6 predecessor specifically. Under any LATER mint
+ * that adds an entry to `EXPLAINED_WRITER_EXEMPTIONS`, a newly declared identity
+ * has `priorCount === 0`, so it takes the `count > priorCount` arm and is handed
+ * `raiseReason` — which is ALWAYS `null` during a migration, because
+ * `--raise-explained-writer` is illegal with `--migrate-schema`. A null reason
+ * then reds TWICE: the tag grammar demands a 1-240 character string, and the
+ * genesis check demands `tag.reason === declaration.ruling`. A declaration-adding
+ * mint was therefore not expressible, and nothing said so.
+ *
+ * The condition below is behavior-preserving for every committed baseline — at
+ * each governed mint the predecessor's schema is by construction the retired one,
+ * and every committed genesis already carries `reason === ruling` (which is what
+ * the A5 genesis pin enforces) — and correct for every future mint that adds a
+ * declaration. Ordinary maintenance is unaffected: there the predecessor IS this
+ * schema, so prior reasons are preserved and growth still needs `raiseReason`.
+ */
 function rowTagsOf(inventory, predecessorBaseline, raiseReason) {
   const declarations = new Map(EXPLAINED_WRITER_EXEMPTIONS
     .map((entry) => [entry.identity, entry]));
-  const genesis = predecessorBaseline?.schema === RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA;
+  const genesis = predecessorBaseline?.schema !== BASELINE_SCHEMA;
   const rowTags = {};
   for (const [file, row] of Object.entries(inventory)) {
     for (const [identity, count] of Object.entries(row)) {
@@ -1905,7 +1995,10 @@ export function baselineOf({
       'That derived re-freeze may only lower or delete rows; the governed reasoned path may raise tagged rows only.',
       'Detector changes require a new governed instrument migration.',
       'The RETIRED schema-3 exact "<key> on <shape> @ <origin> # <site>" spelling cannot enter this file.',
-      'SCHEMA 8 = schema 7 BANK-BY-RULE topology plus the governed opt-in scalar second consumer.',
+      'SCHEMA 9 = schema 8\'s topology and tag law, re-governed to the landed post-EP-1 inputs:',
+      'the corpus holds advanceEpochEnabled dark, package.json carries two added scripts, one',
+      'generated (subject-but-unscanned) source input moved, and the M8/M9 bank grows by the four',
+      'declared eventLog identities whose writer is the store/command layer the corpus never runs.',
       'The byte-frozen detector is unchanged; its output is narrowed by THREE clearing filters —',
       'CR-OSR-FREEZE-6 shape-family union (M6), the M11 DOM-global receiver exclusion, the M12',
       'language-surface residual — while M8/M9 findings stay present under sparse rowTags. All are inside',
@@ -1913,7 +2006,7 @@ export function baselineOf({
       'An untagged row means: a guarded read, of a real record rather than browser or language surface,',
       'of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.',
       'A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.',
-      'Schemas 4–7 are the RETIRED numeric predecessors.',
+      'Schemas 4–8 are the RETIRED numeric predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -2086,7 +2179,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema8Baseline,
+    validateBaseline: validateSchema9Baseline,
     assertExplainedWriterRowTags,
     validateBaselineHistory,
     committedInputManifestsFor,

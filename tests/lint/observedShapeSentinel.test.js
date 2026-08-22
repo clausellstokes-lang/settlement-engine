@@ -1,4 +1,5 @@
 import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
 import { describe, expect, test } from 'vitest';
 
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
@@ -32,6 +33,7 @@ import {
   isObservedShapeSubjectPath,
   LANGUAGE_SURFACE_RESIDUAL_KEYS,
   RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA,
+  RETIRED_CORPUS_COVERAGE_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -49,6 +51,7 @@ import {
   validateSchema6Baseline,
   validateSchema7Baseline,
   validateSchema8Baseline,
+  validateSchema9Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   artifactBaselineSchemaOf,
@@ -1017,16 +1020,37 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       'neighbourNetwork on settlement',
       'stresses on settlement',
       'worldPulse on campaignState',
+      // ⭐ CR-OSR-SCHEMA-9 / M9 — the four eventLog identities, and ONLY four.
+      // `type on eventLog` and `targetId on eventLog` are reads of the INNER
+      // Event, a different and correct home; gate 0 REFUSES them on the named
+      // writer, so the machinery draws the split rather than the prose.
+      'appliedAt on eventLog',
+      'deltas on eventLog',
+      'event on eventLog',
+      'narrativeSummary on eventLog',
     ]);
     expect(EXPLAINED_WRITER_EXEMPTIONS.map(({ mechanism }) => mechanism)).toEqual([
       'admission-list', 'save-time-writer', 'admission-list', 'save-time-writer',
+      'save-time-writer', 'save-time-writer', 'save-time-writer', 'save-time-writer',
     ]);
     expect(EXPLAINED_WRITER_EXEMPTIONS.map(({ writer }) => writer)).toEqual([
       'src/components/dossier/LockControls.jsx',
       'src/lib/saves.js',
       'src/domain/settlement.schema.js',
       'src/store/campaignPulseHelpers.js',
+      'src/domain/events/applyEvent.js',
+      'src/domain/events/applyEvent.js',
+      'src/domain/events/applyEvent.js',
+      'src/domain/events/applyEvent.js',
     ]);
+    // ⚠ THE M9 eventLog BANK NAMES ONE RULING, AND THE SAME ONE FOR ALL FOUR.
+    // At genesis this exact string is stamped into every tagged row's `reason`,
+    // and `assertExplainedWriterTagTransition` then forbids changing a reason
+    // without numeric growth — so it is chosen once and pinned here.
+    expect([...new Set(EXPLAINED_WRITER_EXEMPTIONS
+      .filter(({ identity }) => identity.endsWith(' on eventLog'))
+      .map(({ ruling }) => ruling))])
+      .toEqual(['CR-OSR-SCHEMA-9 / M9 — ODQ §346.1 Ruling-B eventLog precedent']);
     // ⚠⚠ THE ONE ROW RE-TRIAGED OUT OF CLASS (a), PINNED IN BOTH DIRECTIONS.
     // `factions on locks` was banked as a true positive on evidence that turned
     // out to be a grep artifact, and the two acts — removing it from the guard
@@ -1081,9 +1105,28 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       'neighbourNetwork on settlement',
       'stresses on settlement',
       'worldPulse on campaignState',
+      'appliedAt on eventLog',
+      'deltas on eventLog',
+      'event on eventLog',
+      'narrativeSummary on eventLog',
     ]);
-    expect(evidence.map(({ key }) => key))
-      .toEqual(['factions', 'neighbourNetwork', 'stresses', 'worldPulse']);
+    expect(evidence.map(({ key }) => key)).toEqual([
+      'factions', 'neighbourNetwork', 'stresses', 'worldPulse',
+      'appliedAt', 'deltas', 'event', 'narrativeSummary',
+    ]);
+    // ⚠ THE M9 SPLIT IS MACHINE-DRAWN, NOT ARGUED. The same probe that admits
+    // the four banked keys on `applyEvent.js` REFUSES the two nearest
+    // non-candidates, which are reads of the inner Event rather than of the log
+    // entry. Without this arm the pin above would only say "these four are
+    // declared", which is also true of any four somebody chose to declare.
+    const applyEventSource = readFileSync(
+      new URL('../../src/domain/events/applyEvent.js', import.meta.url),
+      'utf8',
+    );
+    for (const key of ['type', 'targetId']) {
+      expect(writeShapesIn(applyEventSource, key), `${key} became bankable on applyEvent.js`)
+        .toEqual([]);
+    }
     // ⚠ EVERY entry, not just the first: an evidence array where one row proved
     // itself and three were never probed is the shape this loop exists to refuse.
     expect(evidence.filter(({ spellings }) => !spellings.length)).toEqual([]);
@@ -1241,8 +1284,13 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
    * PRODUCER, so two copies would be one live law with two homes. What must never
    * be shared is the NUMBER — pinned here in BOTH directions.
    */
+  // ⚠ THE TITLE IS DELIBERATELY UNCHANGED ACROSS THE SCHEMA-9 MINT. A test
+  // title is a census key; renaming one is a delete-plus-add that no count
+  // figure can distinguish from a swap. Schemas 8 and 9 joined schema 7 in the
+  // tagged half, and that is said here rather than in the name.
   test('A5: schemas 4-6 retain the numeric law and schema 7 adds authenticated row tags', () => {
-    expect(BASELINE_SCHEMA).toBe(8);
+    expect(BASELINE_SCHEMA).toBe(9);
+    expect(RETIRED_CORPUS_COVERAGE_BASELINE_SCHEMA).toBe(8);
     expect(RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA).toBe(7);
     expect(RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA).toBe(4);
     expect(RETIRED_FILTERED_LEAF_BASELINE_SCHEMA).toBe(5);
@@ -1252,7 +1300,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     const stats = leafStats();
     const live = validBaseline({ corpus, stats, frozen: [leafFindingOf()] });
     expect(live.schema).toBe(BASELINE_SCHEMA);
-    expect(validateSchema8Baseline(live)).toBe(live);
+    expect(validateSchema9Baseline(live)).toBe(live);
     expect(assertExplainedWriterRowTags(live)).toBe(live);
     expect(() => validateSchema4Baseline(live)).toThrow(/noncanonical fields/);
     expect(() => validateSchema5Baseline(live)).toThrow(/noncanonical fields/);
@@ -1262,19 +1310,30 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     delete numeric.digests.rowTags;
     const unfiltered = { ...numeric, schema: RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA };
     expect(validateSchema4Baseline(unfiltered)).toBe(unfiltered);
-    expect(() => validateSchema8Baseline(unfiltered)).toThrow();
+    expect(() => validateSchema9Baseline(unfiltered)).toThrow();
 
     const filtered = { ...numeric, schema: RETIRED_FILTERED_LEAF_BASELINE_SCHEMA };
     expect(validateSchema5Baseline(filtered)).toBe(filtered);
-    expect(() => validateSchema8Baseline(filtered)).toThrow();
+    expect(() => validateSchema9Baseline(filtered)).toThrow();
 
     const surface = { ...numeric, schema: RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA };
     expect(validateSchema6Baseline(surface)).toBe(surface);
-    expect(() => validateSchema8Baseline(surface)).toThrow(/noncanonical fields/);
+    expect(() => validateSchema9Baseline(surface)).toThrow(/noncanonical fields/);
 
     const retiredBanked = { ...structuredClone(live), schema: RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA };
     expect(validateSchema7Baseline(retiredBanked)).toBe(retiredBanked);
-    expect(() => validateSchema8Baseline(retiredBanked)).toThrow();
+    expect(() => validateSchema9Baseline(retiredBanked)).toThrow();
+
+    // ⭐ THE RETIRED-8 RUNG, MIRRORING THE SCHEMA-7 PAIR ABOVE. Schema 8's
+    // validator must stay executable — the committed schema-8 genesis is the
+    // migration predecessor and has to remain verifiable — and it must refuse
+    // the live number, or a retired definition would be one a live one can move.
+    const retiredCorpusCoverage = {
+      ...structuredClone(live), schema: RETIRED_CORPUS_COVERAGE_BASELINE_SCHEMA,
+    };
+    expect(validateSchema8Baseline(retiredCorpusCoverage)).toBe(retiredCorpusCoverage);
+    expect(() => validateSchema9Baseline(retiredCorpusCoverage)).toThrow(/is not schema 9/);
+    expect(() => validateSchema8Baseline(live)).toThrow(/is not schema 8/);
 
     const missing = structuredClone(live);
     const declared = leafFindingOf({
@@ -1352,12 +1411,12 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       baselineSchema: artifactBaselineSchemaOf('legacy-leaf'),
       siteSchema: 'source-position-v1',
     });
-    // ⚠ The ARTIFACT schema is 2 and the BASELINE schema in force is 8. They are
+    // ⚠ The ARTIFACT schema is 2 and the BASELINE schema in force is 9. They are
     // different numbers naming different things, and conflating them is what
     // `artifactBaselineSchemaOf` exists to prevent.
     expect(artifactBaselineSchemaOf('legacy-leaf')).toBe(2);
     expect(artifactBaselineSchemaOf('exact-origin')).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(8);
+    expect(BASELINE_SCHEMA).toBe(9);
     expect(() => artifactBaselineSchemaOf('heuristic')).toThrow(/scan mode is unsupported/);
   });
 

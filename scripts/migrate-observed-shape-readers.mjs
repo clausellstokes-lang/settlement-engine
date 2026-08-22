@@ -37,9 +37,21 @@
  *   schema 6 -> 7  (RETIRED) the same numeric reconciliation, re-admitting
  *     explained-writer rows and binding their governance in sparse rowTags.
  *
- *   schema 7 -> 8  (LIVE)    the same tagged numeric reconciliation after the
+ *   schema 7 -> 8  (RETIRED) the same tagged numeric reconciliation after the
  *     governed corpus builder gains an opt-in scalar second consumer. Its
  *     default topology bytes stay stable; the frozen artifact remains topology.
+ *
+ *   schema 8 -> 9  (LIVE)    the same tagged numeric reconciliation, re-governing
+ *     the instrument to inputs that moved UNDER it: the corpus's dark
+ *     `advanceEpochEnabled` decision, two added `package.json` scripts, and one
+ *     changed generated (subject-but-UNSCANNED) source file. Two things make it
+ *     the first target that is not a straight repeat of its predecessor: the
+ *     delta is FIVE governed paths rather than four, and the unscanned input
+ *     digest MOVED — recorded for review by named path instead of refused,
+ *     because refusing it would leave the instrument permanently dark. Its
+ *     reconciliation is NOT constrained to same-only rows (see
+ *     `assertCorpusCoverageInventoryInvariant`, which is schema 8's alone):
+ *     the mint is cut at a later tip than the one it was measured at.
  *
  * In every family, the predecessor baseline and scan artifacts are
  * canonical, content-addressed inputs sharing one committed source, execution
@@ -77,6 +89,7 @@ import {
   validateSchema6Baseline,
   validateSchema7Baseline,
   validateSchema8Baseline,
+  validateSchema9Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -96,9 +109,13 @@ export const FILTERED_TARGET_SCHEMA = 5;
 export const SURFACE_FILTERED_TARGET_SCHEMA = 6;
 /** The RETIRED bank-by-rule target. */
 export const BANKED_EXPLAINED_WRITER_TARGET_SCHEMA = 7;
-/** The LIVE target: schema 7's tagged topology inventory after the governed
- *  builder gains its opt-in scalar second consumer. */
+/** The RETIRED corpus-coverage target: schema 7's tagged topology inventory
+ *  after the governed builder gains its opt-in scalar second consumer. */
 export const CORPUS_COVERAGE_TARGET_SCHEMA = 8;
+/** The LIVE target: schema 8's tagged topology inventory re-governed to the
+ *  landed post-EP-1 detector and unscanned inputs, with the explained-writer
+ *  bank grown by the four declared eventLog identities. */
+export const EPOCH_DARK_CORPUS_TARGET_SCHEMA = 9;
 
 /**
  * The complete, reviewed detector transition admitted by the retired 6→7 mint.
@@ -124,6 +141,21 @@ export const CORPUS_COVERAGE_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/**
+ * The exact scanner inputs changed by the schema 8→9 epoch-dark mint — FIVE,
+ * not four, and that is why the retained-count law below had to stop being a
+ * hard-coded seven. `package.json` moved on its own (two added npm scripts, the
+ * lockfile untouched) and `observed-shape-corpus.mjs` moved for EP-1, both
+ * BEFORE this mint was cut; the three instrument files are the mint's own.
+ */
+export const EPOCH_DARK_CORPUS_SCANNER_DELTA_PATHS = Object.freeze([
+  'package.json',
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/lib/observed-shape-corpus.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -142,6 +174,8 @@ const BANKED_EXPLAINED_WRITER_SCANNER_TRANSITION_POLICY =
   'schema-6-to-7-exact-scanner-transition-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
+const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
+  'schema-8-to-9-exact-scanner-transition-v1';
 
 /**
  * ⭐⭐ THE ONE TABLE THAT PAIRS A LEAF TARGET WITH ITS PREDECESSOR SCHEMA.
@@ -162,6 +196,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [SURFACE_FILTERED_TARGET_SCHEMA]: FILTERED_TARGET_SCHEMA,
   [BANKED_EXPLAINED_WRITER_TARGET_SCHEMA]: SURFACE_FILTERED_TARGET_SCHEMA,
   [CORPUS_COVERAGE_TARGET_SCHEMA]: BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
+  [EPOCH_DARK_CORPUS_TARGET_SCHEMA]: CORPUS_COVERAGE_TARGET_SCHEMA,
 });
 
 /**
@@ -177,6 +212,7 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   [RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA]: validateSchema6Baseline,
   [RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA]: validateSchema7Baseline,
   [CORPUS_COVERAGE_TARGET_SCHEMA]: validateSchema8Baseline,
+  [EPOCH_DARK_CORPUS_TARGET_SCHEMA]: validateSchema9Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -483,29 +519,82 @@ const manifestEntriesByPath = (manifest) => new Map(
   manifest.entries.map((entry) => [entry.path, entry]),
 );
 
-function unscannedInputDigestOf({ sourceTree, scanTree }) {
+/** The SUBJECT inputs the scan does not read — generated JS and JSON. Bound by
+ *  the envelope, never parsed, and therefore the one governed surface that can
+ *  move without any detector or scanned source moving with it. */
+function unscannedEntriesOf({ sourceTree, scanTree }) {
   const scannedPaths = new Set(scanTree.entries.map((entry) => entry.path));
-  return digestOf(sourceTree.entries.filter((entry) => !scannedPaths.has(entry.path)));
+  return sourceTree.entries.filter((entry) => !scannedPaths.has(entry.path));
 }
 
+function unscannedInputDigestOf(trees) {
+  return digestOf(unscannedEntriesOf(trees));
+}
+
+/**
+ * ⭐ THE MOVED UNSCANNED INPUTS, BY NAME. A digest inequality says only "these
+ * two sets differ", which is not something a reviewer can accept or refuse. This
+ * derives the actual paths from the two manifests, so the review decision is
+ * taken over named files.
+ */
+function unscannedMovementOf(predecessor, legacyArtifact) {
+  const before = new Map(unscannedEntriesOf(predecessor.manifests)
+    .map((entry) => [entry.path, entry]));
+  const after = new Map(unscannedEntriesOf(legacyArtifact)
+    .map((entry) => [entry.path, entry]));
+  const added = [...after.keys()].filter((path) => !before.has(path)).sort();
+  const removed = [...before.keys()].filter((path) => !after.has(path)).sort();
+  const modified = [...before.keys()]
+    .filter((path) => after.has(path)
+      && canonicalJson(before.get(path)) !== canonicalJson(after.get(path)))
+    .sort();
+  return {
+    added,
+    removed,
+    modified,
+    changedPaths: sortedUnique([...added, ...removed, ...modified]),
+  };
+}
+
+/**
+ * ⚠⚠ `reviewableUnscannedMovement` IS PER-TARGET AND NEVER RETROACTIVE. Targets
+ * 7 and 8 keep unscanned-input EQUALITY as a hard refusal, because that is the
+ * law each of them was actually governed under and a retroactive relaxation
+ * would falsify their recorded transitions. Target 9 declares the movement
+ * REVIEWABLE because its cause is a landed generated-source re-record, and the
+ * alternative — refusing it — leaves the instrument permanently un-mintable and
+ * therefore permanently dark. Reviewable is not silent: the movement is recorded
+ * by NAMED PATH in the transition record, travels into the report's issue list,
+ * and needs the same accepted, noted decision every other governed row needs.
+ * The STANDING gate arm is untouched: `check-observed-shape-readers.mjs` still
+ * returns 1 the moment the live unscanned digest leaves the frozen one.
+ */
 const SCANNER_TRANSITION_BY_TARGET = new Map([
   [BANKED_EXPLAINED_WRITER_TARGET_SCHEMA, Object.freeze({
     deltaPaths: BANKED_EXPLAINED_WRITER_SCANNER_DELTA_PATHS,
     inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
     policy: BANKED_EXPLAINED_WRITER_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: false,
   })],
   [CORPUS_COVERAGE_TARGET_SCHEMA, Object.freeze({
     deltaPaths: CORPUS_COVERAGE_SCANNER_DELTA_PATHS,
     inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
     policy: CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: false,
+  })],
+  [EPOCH_DARK_CORPUS_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: EPOCH_DARK_CORPUS_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
   })],
 ]);
 
 /**
- * The two governed detector-tree transitions (6→7 and 7→8) share one
+ * The three governed detector-tree transitions (6→7, 7→8 and 8→9) share one
  * fail-closed proof. Inventory reconciliation alone cannot distinguish a ruled
  * scanner edit from an arbitrary detector rewrite, so each target supplies an
- * exact predecessor, input universe and four-path delta.
+ * exact predecessor, input universe and delta-path set.
  */
 function governedScannerTransitionOf(predecessor, legacyArtifact, targetSchema) {
   const transition = SCANNER_TRANSITION_BY_TARGET.get(targetSchema);
@@ -553,16 +642,32 @@ function governedScannerTransitionOf(predecessor, legacyArtifact, targetSchema) 
     }
     return { path, predecessor: predecessorEntry, current: currentEntry };
   });
+  // ⚠⚠ THE RETAINED COUNT IS DERIVED FROM THIS TARGET'S OWN LAW, NEVER A
+  // LITERAL. It used to be a hard-coded `!== 7`, which silently assumed every
+  // future mint changes exactly four of the eleven governed inputs — an
+  // assumption the 8→9 five-path delta falsifies. The arithmetic is identical
+  // for targets 7 and 8 (11 − 4 = 7), so this is a generalisation and not a
+  // relaxation; the count is still EXACT and still fails closed.
+  const retainedPaths = transition.inputPaths.length - transition.deltaPaths.length;
   const unchangedPaths = beforePaths.filter((path) => !modifiedPaths.includes(path));
-  if (unchangedPaths.length !== 7) {
-    throw new Error(`observed-shape ${transitionLabel} scanner transition must retain exactly seven byte-identical detector inputs; received ${unchangedPaths.length}`);
+  if (unchangedPaths.length !== retainedPaths) {
+    throw new Error(`observed-shape ${transitionLabel} scanner transition must retain exactly ${retainedPaths} byte-identical detector inputs; received ${unchangedPaths.length}`);
   }
 
   const predecessorUnscannedInputDigest = predecessor.scannerProvenance.unscannedInputDigest;
   const currentUnscannedInputDigest = unscannedInputDigestOf(legacyArtifact);
+  let unscannedMovement = null;
   if (predecessorUnscannedInputDigest !== currentUnscannedInputDigest) {
-    throw new Error(`observed-shape ${transitionLabel} scanner transition changes unscanned governed source inputs:`
-      + ` ${predecessorUnscannedInputDigest} != ${currentUnscannedInputDigest}`);
+    if (!transition.reviewableUnscannedMovement) {
+      throw new Error(`observed-shape ${transitionLabel} scanner transition changes unscanned governed source inputs:`
+        + ` ${predecessorUnscannedInputDigest} != ${currentUnscannedInputDigest}`);
+    }
+    unscannedMovement = unscannedMovementOf(predecessor, legacyArtifact);
+    // Anti-vacuity: a moved digest that names no path would be a review over
+    // nothing, and the accepted decision would mean nothing.
+    if (!unscannedMovement.changedPaths.length) {
+      throw new Error(`observed-shape ${transitionLabel} scanner transition reports a moved unscanned input digest that names no changed path`);
+    }
   }
   if (predecessor.migrationReview.scanConfigDigest !== legacyArtifact.digests.scanConfig) {
     throw new Error(`observed-shape ${transitionLabel} scanner transition changes the governed scan configuration`);
@@ -593,6 +698,7 @@ function governedScannerTransitionOf(predecessor, legacyArtifact, targetSchema) 
     modifiedPaths,
     unchangedPaths,
     changes,
+    ...(unscannedMovement ? { unscannedMovement } : {}),
   };
 }
 
@@ -690,6 +796,15 @@ function predecessorRowsOf(predecessorBaseline, legacyInventory) {
  * topology baseline. Keep both statements executable — identical canonical
  * bytes and a same-only reconciliation — so neither representation can drift
  * away from the other during a later refactor.
+ *
+ * ⚠⚠ THIS INVARIANT IS SCHEMA 8'S ALONE, AND ITS ABSENCE ELSEWHERE IS DECLARED
+ * RATHER THAN FORGOTTEN. Schema 9 deliberately does NOT get one: that mint is
+ * cut at a later tip than the one its inventory was measured at, so a landed
+ * repair may legitimately move a row, and a hard same-only rule would force the
+ * executor to choose between a false claim and an un-mintable instrument.
+ * Schema 9 reconciles every non-'same' row through its own reviewed, accepted,
+ * noted decision instead — which is strictly more information than this
+ * invariant carries, and never a bulk accept.
  */
 function assertCorpusCoverageInventoryInvariant(
   predecessor,
@@ -1112,8 +1227,15 @@ export function heuristicMigrationReport(
         rowId: scannerTransitionRowIdOf(scannerTransition),
         reconciliation: 'scanner-transition',
         modifiedPaths: scannerTransition.modifiedPaths,
+        ...(scannerTransition.unscannedMovement
+          ? { unscannedPaths: scannerTransition.unscannedMovement.changedPaths }
+          : {}),
         message: `schema-${predecessorSchema} to schema-${targetSchema} governed scanner transition requires one accepted review decision: `
-          + scannerTransition.modifiedPaths.join(', '),
+          + scannerTransition.modifiedPaths.join(', ')
+          + (scannerTransition.unscannedMovement
+            ? '; UNSCANNED governed source inputs moved and are RECORDED for the same decision: '
+              + scannerTransition.unscannedMovement.changedPaths.join(', ')
+            : ''),
       }] : []),
     ],
   };
@@ -1447,11 +1569,12 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : CORPUS_COVERAGE_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : EPOCH_DARK_CORPUS_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
-    CORPUS_COVERAGE_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${CORPUS_COVERAGE_TARGET_SCHEMA} (live corpus-coverage leaf),`
+    CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${EPOCH_DARK_CORPUS_TARGET_SCHEMA} (live epoch-dark leaf),`
+      + ` ${CORPUS_COVERAGE_TARGET_SCHEMA} (retired corpus-coverage leaf),`
       + ` ${BANKED_EXPLAINED_WRITER_TARGET_SCHEMA} (retired banked explained-writer leaf),`
       + ` ${SURFACE_FILTERED_TARGET_SCHEMA} (retired surface-filtered leaf),`
       + ` ${FILTERED_TARGET_SCHEMA} (retired M6/M8-only filtered leaf),`
@@ -1460,7 +1583,7 @@ export function run(argv = process.argv.slice(2)) {
   }
   const heuristicTarget = LEAF_MIGRATION_PREDECESSOR[targetSchema] !== undefined;
   if (!predecessorPath || !legacyPath || (!heuristicTarget && !currentPath)) {
-    throw new Error('usage: migrate-observed-shape-readers.mjs --predecessor=<predecessor-baseline.json> --legacy=<legacy-artifact.json> [--target-schema=8] [--current=<exact-artifact.json> --target-schema=3] [--json=<report.json>] [--review-template=<review.json>] [--review=<completed-review.json> --bundle=<governed-review.json>]');
+    throw new Error('usage: migrate-observed-shape-readers.mjs --predecessor=<predecessor-baseline.json> --legacy=<legacy-artifact.json> [--target-schema=9] [--current=<exact-artifact.json> --target-schema=3] [--json=<report.json>] [--review-template=<review.json>] [--review=<completed-review.json> --bundle=<governed-review.json>]');
   }
   if (heuristicTarget && currentPath) {
     throw new Error(`observed-shape --current is only valid for the retired --target-schema=${RETIRED_EXACT_TARGET_SCHEMA} pairing;`
