@@ -14734,3 +14734,32 @@ recommended. Implementation, per item:
   never fed a bad footprint coordinate; two arms added inside A2, census unmoved).
   Outstanding for the lane: the census re-record, the seven-mutant sweep, the
   after-arm, the dormancy fence + zoom, LANDED, and the gate by heads-up.
+
+## §352 — COLLECTION + CAS: WF-1F LANDED (THE CLOSING TRAIN'S FIRST CAR); A MUTEX-ECOLOGY RULE (2026-08-22 ~05:20)
+
+- **TE-WF1F collected.** Tip 5d18b4a0 — one commit on 27c250f9, terminal green from
+  the gate's own tail line (ratchet at the frozen 11 of 28,693; 138 packets; strict
+  dist 52/433; boot 524/524; both typecheck floors exact). CAS EXECUTED: 27c250f9 →
+  5d18b4a0 (read back). The three micro-repairs are landed: the deity name no longer
+  truncates (the estate cure reused; the declared shift proven key-by-key, 45/0/0,
+  exactly one pin re-recorded), and both stale prose clauses plus the third the lane
+  found are corrected.
+- **§352.1 THE POST-GO AMENDMENT RATIFIED:** adversarial self-review found a FOURTH
+  copy difference (null → 'Null'/'Undefined' vs empty string), PROVED unreachable
+  (the id is an Object.keys iteration variable, always a non-empty string; both
+  upstream builders guard null before a key mints), and documented anyway — the
+  declared-shift claim is scoped to reachable copy, and an unstated unreachable
+  difference is a defect a later lane re-finds. The gate ran on the amended tip, so
+  the green binds the CAS.
+- **§352.2 MUTEX-ECOLOGY RULE (new, from the lane's second finding):** the chair's
+  GO said 'no gate'; in truth TE-T2E lawfully held the vitest machine lock around a
+  focused sweep (WF-1F's first wrapper died at the harness ceiling — exit 143, a
+  wrapper death never a verdict, classified correctly) and TE-OSR9 ran a lint sweep
+  UNMUTEXED during the gate. LAW: (a) heavy focused vitest sweeps (tests/lint,
+  tests/build, multi-file batteries) are wrapped in the machine mutex — T2E's
+  behavior is the standard; (b) single-file focused runs may stay bare; (c) the
+  chair's GO states the LOCK picture, not just the gate picture. TE-OSR9 advised
+  directly.
+- **§352.3** The closing train proceeds: T2E rebases onto 5d18b4a0 (its watcher
+  knows), convicts its census, sweeps, and requests the slot; OSR9 and WF8 behind
+  it.

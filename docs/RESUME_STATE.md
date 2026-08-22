@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~05:20 ET: WF-1F LANDED — CAS 27c250f9 → 5d18b4a0 (§352; closing
+# train car 1/4). Post-GO amendment ratified (4th unreachable difference
+# documented). NEW MUTEX-ECOLOGY RULE: heavy sweeps mutexed, GOs state the
+# LOCK picture (OSR9 advised). Next: T2E rebase → slot; then OSR9, WF8.
 # ⭐ ~04:40 ET: T2E mid-lane (§351) — SPEC ANCHOR CURED (the dirty W3F fold
 # committed with this row; hash-cited files must be committed objects);
 # ownerless gate-mutex lock clearance RATIFIED (recover_dead_owner defect →
