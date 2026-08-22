@@ -74,6 +74,13 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~11:30: CT-1a GO SENT — ⚠ result was 'QUEUED for delivery' = the race
+# pattern (~100% tonight): EXPECT the race; the next event MUST verify the
+# started-line in laneTECT1A gate log and re-send if absent. Banked with
+# the GO: regex-is-not-a-manifest-instrument (3rd variance: entry-level
+# indent) · carry-proof-by-absence as the recommended first rebase step ·
+# the honest-capture confession. On green: CAS 71159a21 → 16th landing →
+# RR-1 slot decision.
 # ⭐⭐ ~11:05: MF-T2G LANDED — CAS cb369d2b0b63 → ac0d0149 (§382; 15th
 # landing; D3a member 7; the §379 notes live). Tail law's THIRD face banked
 # (process-lineage identification). CT-1a messaged next-up. Queue: CT-1a →
