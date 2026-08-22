@@ -14794,3 +14794,18 @@ recommended. Implementation, per item:
   sweep ran 34s locked vs 224s bare, and the bare run's two timeout flakes vanish
   in isolation — contention was the whole story. Bank delta pre-verified by the
   rehearsal: 44/31 → 60/40, exactly the four identities' untagged footprint.
+
+- **§353.5 (appended ~06:10) — THE FLIP SIDE OF MINT-LAST, STATED BY THE LANE AND
+  RECORDED:** minting last means the train's own new reads freeze as ACCEPTED DEBT
+  at arrival multiplicity (a row IS its ceiling), not as caught defects — tolerable
+  only because the gate has been dark since the drift anyway, and honest only if
+  said out loud, which it now is. **THE LANE'S THREE-BRANCH REBUILD RULE IS
+  RATIFIED AS STATED, no branch flipped:** (1) attributable AND benign (an executed
+  reading of the source site, never a count judgment) → accept with an individually
+  reasoned note naming the landed commit, every note in the receipt for the §290
+  review to re-inspect; (2) attributable but a genuine reader-with-no-writer
+  candidate → STOP-RAISE BEFORE the baseline writes — freezing a live defect as
+  accepted debt is the one thing this instrument exists to prevent, and a mint is
+  the one moment it can happen silently; (3) unattributable → STOP-RAISE per J2.
+  The predecessor reconciled ALL-SAME, so every non-'same' row at the rebuild is
+  new information by construction.

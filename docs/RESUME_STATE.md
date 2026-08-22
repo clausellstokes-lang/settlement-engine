@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ~06:10 ET: §353.5 — mint-last's flip side recorded (new train reads freeze
+# as accepted debt, said out loud); OSR9's three-branch rebuild rule RATIFIED
+# unflipped (benign=executed reading w/ per-row notes; defect-candidate =
+# STOP-RAISE before the baseline writes). Ack rides the rebuild trigger.
 # ⭐ ~05:50 ET: OSR9's structural raise RULED (§353) — mints cannot be
 # cherry-picked (law banked to OSR memory); RESEQUENCED: T2E → WF-8 → OSR9
 # LAST, window protected (no GO between its C1 and CAS). Stresses triage
