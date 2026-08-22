@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~10:20: T2G GO SENT (tip ac0d0149 on cb369d2b0b63; track load 2.13).
+# ADOPTED into the collection: the carry law's THIRD FACE ('right when
+# measured, stale under its own packet — carry the DELTA never the tuple';
+# the trilogy complete) + TRAP-GUARDED SENTINELS as the standard for all
+# shared-tree plants. On green: CAS → CT-1a next-up → RR-1 slot decision.
 # ⭐ ~10:00: TE-HOUSE BUILT at aeeb1822 (11 commits, per-member proofs; H9
 # discharge convicted 3 directions + fence; rebase pre-flown onto cb369d2b
 # ZERO conflicts). Notes parked: census commit DROPS + re-derives at true
