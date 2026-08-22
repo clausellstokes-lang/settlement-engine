@@ -807,9 +807,29 @@ describe('EP-0 · the closure record, re-run rather than transcribed', () => {
     expect(mentions.length, 'MENTIONS is a different, larger population').toBeGreaterThan(callers.length);
   });
 
-  test('hash-helper DEFINITIONS in src = 32', () => {
+  test('hash-helper DEFINITIONS in src = 34', () => {
+    // grep -rnE "function (fnv1a32|hash01|hashUnit|hash32|fnv1a)" src | wc -l
+    // ⭐ RE-RECORDED 2026-08-22 BY MF-T2H: 32 → 34, a DECLARED arrival rather than a discovered
+    // one. The +2 are `hash32` and `hashUnit` in `src/domain/townMap/fabric/fabricRng.js`, the
+    // seeding law ported from the sealed W3 sandbox tip with the D3a port tranche.
+    // ⛔ THE DISPOSITION, AND IT IS WHY THIS IS THE ONLY ARM THAT MOVED. This census anchors on
+    // the READ — a value taken off a world-shaped object — and on the COMPOSITIONS built from a
+    // world root. The fabric's seeding law does NEITHER: it takes `settlementSeed` as an ARGUMENT
+    // and never reaches for `worldState.rngSeed`, which is the whole architectural point of the
+    // key-anchored fork (a fabric that read ambient state could not promise byte-unchanged output
+    // for unchanged facts). Measured, not asserted: with the member applied this file reds on
+    // exactly ONE of its 31 arms — this counter — while both exact-set rosters, COMPOSITIONS and
+    // READ_SITES, stay green. Two new DEFINITIONS, zero new roots.
+    // ⚠ AND THE TWO NAMES COULD NOT BE CHOSEN AWAY. They are the sealed source's own API, pinned
+    // by the port's sealed-equivalence proof (64 of 64 stream rows byte-for-byte); renaming them
+    // to dodge this regex would break the equivalence this instrument has no view of.
+    // `censusAuthorization`: ODQ §276 (the build sheet), §304.4 (the D3a port charter) and §390
+    // (the chartered additions), under §299.4's binding-forward rule. ⭐ THE RE-RECORD ITSELF IS
+    // RATIFIED AT ODQ §403, which ruled the escalation clause above reserved for a new COMPOSITION
+    // or a new READ — neither of which this creates — with WF-8A's 14 → 15 (§350) the governing
+    // shape.
     const re = /function (fnv1a32|hash01|hashUnit|hash32|fnv1a)/;
-    expect(ALL_FILES.reduce((n, f) => n + read(f).split('\n').filter((l) => re.test(l)).length, 0)).toBe(32);
+    expect(ALL_FILES.reduce((n, f) => n + read(f).split('\n').filter((l) => re.test(l)).length, 0)).toBe(34);
   });
 
   test('the corpus the whole census walks is real', () => {

@@ -5237,7 +5237,41 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   own failure message ("expected 20723 to be 20719"), never computed, and the
     //   delta is +4 against exactly four added arms: a delta SMALLER than the titles
     //   added would have meant a parked file swallowing them, and is not accepted here.
-    files: 2497, parked: 364, credited: 2133, titles: 20723, suiteTitles: 5785,
+    // ── RE-RECORDED 2026-08-22 BY MF-T2H (the spatial-receipt seam), CAUSE ATTRIBUTED ──
+    // 2497/364/2133/20723/5785 → 2499/364/2135/20729/5787. THE CAUSE IS TWO NEW TEST FILES and
+    // nothing else: the member ports two dormant fabric leaves and lands their acceptance pair.
+    //   tests/domain/townMapSpatialReceipt.test.js .......... +1 file, +4 titles, +1 suite title
+    //   tests/property/townMapFabricRngDeterminism.test.js .. +1 file, +2 titles, +1 suite title
+    // No rule here widened or narrowed and no existing file changed shape. PARKED IS UNCHANGED
+    // at 364, and that was EARNED rather than lucky: both files are ONE literal `describe` with
+    // straight-line `test` calls and string-literal titles, so door 3's reader recognises all
+    // six statically and credits both files. Every loop in either file runs INSIDE a named test
+    // — the SP-D idiom the family's own walkers already follow. The arithmetic closes:
+    // 364 + 2135 = 2499.
+    // `censusAuthorization`: ODQ §276 (the build sheet that architects the §275 adoptions) ·
+    // ODQ §304.4 (the D3a port charter, twin-life bounded) · ODQ §390 (the chartered additions
+    // this member executes: the dep-join injectivity cure, the ABI-version trigger and the
+    // control-byte lesson) · under §299.4's binding-forward rule. The family's stamp is GRANTED
+    // at ODQ §312.2b.
+    // ⛔ ATTRIBUTED BY ISOLATION, NOT BY ARITHMETIC, at THIS base. With the walker pinned at the
+    //   after tuple, hiding townMapSpatialReceipt.test.js alone convicted `files` at 2498;
+    //   hiding townMapFabricRngDeterminism.test.js alone convicted 2498; hiding BOTH convicted
+    //   2497 — the base tuple EXACTLY, which is also the proof that nothing else in the tree
+    //   moved this census under the lane. Each figure was read from the arm's own failure
+    //   message, never computed.
+    // ⚠ THE SEQUENCED WALK WAS RUN RATHER THAN SHORT-CIRCUITED. `files` reds first and blacks
+    //   out the four arms below it, so the tuple was re-derived one figure at a time: `files`
+    //   2499, then `parked` PASSED at 364 without ever redding, then `credited` 2135, then
+    //   `titles`, then `suiteTitles` 5787, then GREEN. A census re-record that patched
+    //   `files` and assumed the rest would have shipped four unmeasured figures.
+    // ⭐⭐ THE CARRY LAW, EXECUTED AT THE LANDING SLOT. This member was authored STACKED on
+    //   MF-T2Bf's unlanded holding commit (7d6bde7c) and rebased here onto b10ed1a1. The DELTA
+    //   `+2/+0/+2/+6/+2` is what crossed; the tuple was RE-DERIVED at this base, never carried.
+    //   ⛔ AND THE BASE HAD MOVED UNDER IT: TE-H8B's Cure 1b re-recorded `titles` 20,719 → 20,723
+    //   in the block directly above, so this member's own after-figure re-derives 20,725 → 20,729.
+    //   Carrying the authored tuple would have silently reverted H8B's landed +4 — which is the
+    //   whole reason the delta, and never the tuple, is the thing that crosses a rebase.
+    files: 2499, parked: 364, credited: 2135, titles: 20729, suiteTitles: 5787,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

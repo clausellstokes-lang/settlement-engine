@@ -20032,6 +20032,167 @@
         [ "npm", "run", "validate:packets" ],
         [ "npm", "run", "check:tail" ]
       ]
+    },
+    {
+      "id": "MF-T2H",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/town-cartography/MF-T2H.md",
+      "verifiedBase": "b10ed1a1f5a0f2acd00bbfc9b5d0a41931697c3d",
+      "changeManifest": [
+        {
+          "_note": "THE SEAM. §287.4's state_t -> canonicalSpatial_t -> spatialReceipt_t as a typed artifact, ported from the sealed W3 tip onto MF-T2Bf's cured canonicalBytes. Three rules become UNREPRESENTABLE rather than forbidden: a receipt is dated for LATER, the dependency roster is closed by kind and temporal branch IN ORDER, and a no-effect result is a separately typed diagnostic. The digest is built from a NAMED FIELD ROSTER, never from the object, which is what makes §10.1's refusal structural. ONE DECLARED DIVERGENCE from the sealed source (ODQ §390.1): every composite preimage is LENGTH-PREFIXED, curing the non-injective dependency join and the three identical seams beside it, each with an executed collision witness both ways plus a negative control. 137 effective lines against the 250-per-leaf cap. Dormant: no consumer, no barrel row, nothing persisted.",
+          "action": "CREATE",
+          "path": "src/domain/townMap/fabric/spatialReceipt.js"
+        },
+        {
+          "_note": "THE SEEDING LAW, key-anchored — the other half of the port and spatialReceipt.js's only sibling import (hash32). A true leaf: it imports nothing, so its measured closure is itself. ONE DECLARED OMISSION (J-TET2H-1): legacySubstrateForkKey is NOT ported, because it is a byte-compatibility shim for substrate.js, which this tranche does not port, and its docblock cites a sandbox pin absent from this tree. 77 effective lines against the 250-per-leaf cap; sealed is 80 and the -3 is the omitted shim. All 64 seed/key/variant/year rows reproduce the sealed stream byte-for-byte.",
+          "action": "CREATE",
+          "path": "src/domain/townMap/fabric/fabricRng.js"
+        },
+        {
+          "_note": "THE ACCEPTANCE MATRIX — four cases, ONE literal describe, straight-line test calls with string-literal titles, every loop INSIDE a named test (the SP-D idiom), so the census credits the file rather than parking it. A1 is the guard-the-guard arm the family opens with; A2-A4 each drive a refusal beside its positive control, and A3 carries the §390.1 collision witness with the pre-cure string named as a literal so the control cannot rot into comparing the deriver with itself. The digest is deliberately NOT re-derived here (§P2.10).",
+          "action": "TEST",
+          "path": "tests/domain/townMapSpatialReceipt.test.js"
+        },
+        {
+          "_note": "THE REPLAY COMPANION — two cases. B1 drives a 48-row seed/key/variant/year matrix twice and requires 48 DISTINCT readings, so a stuck generator cannot satisfy the equality; it pins the fork-key grammar as literals and freezes the hash ALGORITHM with two INTEGER pins, because a drop-in replacement that is equally deterministic would pass every relational assertion and still re-roll the corpus. B2 carries MF-T2B's six-token nondeterminism vocabulary verbatim over BOTH new leaves, with the planted positive control asserted BEFORE the absence.",
+          "action": "TEST",
+          "path": "tests/property/townMapFabricRngDeterminism.test.js"
+        },
+        {
+          "_note": "THE CENSUS RE-RECORD, all five figures re-derived together with the cause stated: TWO NEW TEST FILES and nothing else. 2497/364/2133/20723/5785 -> 2499/364/2135/20729/5787 (RE-DERIVED AT THE LANDING SLOT b10ed1a1: TE-H8B's Cure 1b moved titles 20719 -> 20723 between this member's authoring base and the slot, so the after-figure moved with it. The DELTA +2/+0/+2/+6/+2 is what crossed the rebase; carrying the authored tuple would have silently reverted H8B's landed +4.). The walk was SEQUENCED (files reds first and blacks out the four arms below it) and each figure was read from its own arm's failure message; attribution is BY ISOLATION, with both files hidden convicting the base tuple exactly. parked holds at 364 because both files spell every title as a literal. censusAuthorization: ODQ §276, §304.4, §390.",
+          "action": "MODIFY",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        },
+        {
+          "_note": "THE ENTROPY-ROOT CENSUS closure-record figure, re-recorded 32 -> 34 with its cause and its disposition. The +2 are hash32 and hashUnit in fabricRng.js, and they are DEFINITIONS rather than ROOTS: this census anchors on the READ of a world-shaped object and on COMPOSITIONS built from a world root, and the fabric seeding law does NEITHER — it takes settlementSeed as an ARGUMENT and never reaches for worldState.rngSeed, which is the architectural point of the key-anchored fork. Measured rather than argued: with the member applied the file reds on exactly ONE of its 31 arms, this counter, while BOTH exact-set rosters (COMPOSITIONS and READ_SITES) stay green — two new definitions, zero new roots. The two names could not be chosen away: they are the sealed API the port equivalence proof pins across 64 of 64 stream rows. censusAuthorization: ODQ §276, §304.4, §390. The re-record itself is RATIFIED at ODQ §403, which ruled the walker's escalation clause reserved for a new COMPOSITION or a new READ — neither of which this member creates — with the WF-8A 14 -> 15 re-record (§350) the governing shape.",
+          "action": "MODIFY",
+          "path": "tests/lint/entropyRootCensus.walker.test.js"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/packets/town-cartography/MF-T2H.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE CURED ENCODER THIS MEMBER PORTS ONTO, and the reason MF-T2Bf precedes it. §372 records that a spatialReceipt port at the pre-cure encoding cannot reproduce sealed digests; this member verified all four U+001F escape separators present at its base before porting anything. Renaming or removing it retires the seam.",
+          "path": "src/domain/townMap/fabric/coordinateAbi.js",
+          "symbol": "export function canonicalBytes"
+        },
+        {
+          "_note": "HELD AT ITS CURRENT VALUE AND NOT PINNED TO A FIGURE HERE (ODQ §390.2). MF-T2Bf minted this row so a later member that PERSISTS a canonicalBytes result would find the obligation instead of rediscovering it; MF-T2H is the first member to answer it, and the answer is NO — every digest here is computed, returned frozen and dropped. The version holds at 1 and the standing trigger passes forward unchanged.",
+          "path": "src/domain/townMap/fabric/coordinateAbi.js",
+          "symbol": "export const COORDINATE_ABI_VERSION"
+        },
+        {
+          "_note": "THE ABI GEOMETRY READS THE PORT DEPENDS ON. canonicalSpatial routes every durable field through these two, which is why this member computes no product of ABI quanta of its own and owes no BigInt under R-MF-2.",
+          "path": "src/domain/townMap/fabric/coordinateAbi.js",
+          "symbol": "export function ringText"
+        },
+        {
+          "_note": "The scalar half of the same dependency — a numeric durable field is quantized through worldQ rather than stringified raw.",
+          "path": "src/domain/townMap/fabric/coordinateAbi.js",
+          "symbol": "export function worldQ"
+        },
+        {
+          "_note": "THE RATCHET THAT DECIDES THE SPELLING, named so the authority for the escape form is findable from the manifest rather than only from packet prose. It did not fire from the sealed sources (0 raw C0 bytes in both) but it convicted this lane's own authoring twice; naming it keeps the next port from re-deriving why.",
+          "path": "tests/lint/controlBytes.test.js",
+          "symbol": "export function findControlBytes"
+        },
+        {
+          "_note": "THE ANCHOR HELPER THE ACCEPTANCE MATRIX ROUTES ITS CONTAINMENT NEGATIVES THROUGH, called by name on the same line as required by §P3 — an alias or a wrapper is not recognised by the walker. A4's roster-exclusion pins depend on it existing under this exact name.",
+          "path": "tests/helpers/anchoredNegatives.js",
+          "symbol": "export function expectAbsentWithAnchor"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "GUARD-THE-GUARD, the arm every MF walker opens with. The receipt vocabularies are live and mutually closed — 7 kinds, 10 roster branches, every branch key naming a registered kind and every registered kind carrying a branch — and a well-formed receipt CONSTRUCTS, frozen, with a fingerprint-shaped contentHash and the three absent §10.2 artifact families null rather than stubbed. Without this arm the three refusal cases below could all pass on nothing."
+        },
+        {
+          "id": "A2",
+          "case": "RULE 1 — a receipt dated inside its own pass cannot be constructed. The positive control comes first: the smallest lawful effectiveAt constructs. The EQUAL case is then pinned by itself, because strict-greater versus greater-or-equal is the branch a mutant flips and the one that would re-open same-pass feedback; then the earlier cases; then the source ref's own time, which counts as well as the observation; then an ABSENT source time, which is a refusal rather than a free pass."
+        },
+        {
+          "id": "A3",
+          "case": "RULE 2 and the injectivity cure. An unregistered kind, an unknown temporal branch, a missing role, an extra role and a REORDERING are each construction failures, while the four-role seasonal branch still constructs so the roster is not merely refusing everything. Then the ODQ §390.1 witness: the engineered pair collides under the sealed spelling against a NAMED literal and is DISTINCT through the live module; the three sibling seams follow; and two plainly distinct inputs read DISTINCT while identical input reads IDENTICAL, so an after-run reporting no collisions cannot be a witness that stopped comparing."
+        },
+        {
+          "id": "A4",
+          "case": "RULE 3 and the named field roster. An empty causal receipt is unrepresentable in BOTH directions and the diagnostic is a separately typed artifact carrying no contentHash. Then the structural proof, DRIVEN rather than asserted: adding EVERY excluded field at once leaves the spatial digest byte-identical while touching ONE roster field moves it — a whole-object hash would fail the first assertion, which is precisely the defect §10.1 forbids."
+        },
+        {
+          "id": "B1",
+          "case": "Same seed, key, variant and year replay byte-identically. A 48-row matrix is driven twice and compared, and asserted to hold 48 DISTINCT readings. The inertia law is then driven rather than described: a neighbour's 25 draws cannot move this entity's first draw; a changed year, a reroll salt, a sampleIndex and a mechanicId each move only what they should; and all-zero weights degrade to a uniform pick rather than silently to index 0."
+        },
+        {
+          "id": "B2",
+          "case": "No clock, ambient-randomness, locale or internationalization token is reachable from either new leaf. MF-T2B's six-token vocabulary is carried verbatim so both fabric leaves are judged by one standard, with a planted occurrence asserted to be SEEN before the absence is asserted, and the anchor comment naming why the empty result is purity rather than a broken scan. It convicted this lane twice during the build — once on ported prose and once on the prose explaining the first cure."
+        },
+        {
+          "id": "A5",
+          "case": "SEALED EQUIVALENCE, SCOPED BY THE DECLARED DIVERGENCE. Every non-digest field of both artifacts, all five exported vocabularies, fingerprint itself and all TEN refusal paths (identical error type AND message) are byte-identical to the sealed source; only the digest differs, and only where the length-prefix cure applies. fabricRng carries no divergence at all: 64 of 64 seed/key/variant/year rows reproduce the sealed stream byte-for-byte, and the one declared omission is confirmed present in sealed and absent from the port."
+        },
+        {
+          "id": "A6",
+          "case": "THE MEMBER IS DORMANT, AND THAT WAS EXECUTED RATHER THAN ASSUMED. A tree-wide grep for either leaf finds only the two acceptance files, the intra-member import edge and packet prose — no landed production consumer, no barrel row, no persistence seam, nothing stored. COORDINATE_ABI_VERSION therefore holds at 1 (ODQ §390.2) and there is no declared shift, because there is nothing downstream of this member to shift."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/townMapSpatialReceipt.test.js",
+          "tests/property/townMapFabricRngDeterminism.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/controlBytes.test.js",
+          "tests/lint/townMapFabricSingleDeclaration.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/build/townMapLazy.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/townMap",
+          "tests/property/townMap"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint",
+          "tests/build"
+        ],
+        [
+          "npm",
+          "run",
+          "validate:packets"
+        ],
+        [
+          "npm",
+          "run",
+          "check:tail"
+        ]
+      ]
     }
   ]
 }
