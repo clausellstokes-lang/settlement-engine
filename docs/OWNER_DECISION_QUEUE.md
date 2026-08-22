@@ -17117,3 +17117,42 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   member reconciling into one grammar, not a port. **§423.1 SEAT: TC-T2M
   dispatched on TC-T2S's freed seat** — with this ruling, the map program
   has NO blocked member. Cap: H8B-landing · TC-T2L · TC-PRODUCERS · TC-T2M.
+
+## §424 — H8B IS LANDED (THE 24TH LANDING); THE PRODUCERS CHARTER COLLECTED WITH THREE RESHAPING FINDINGS; CT-3's GO ISSUED WITH THE AMENDMENT-RESURRECTION HAZARD FLAGGED (2026-08-23 ~11:30)
+
+- **THE CAS EXECUTED:** claude/composite-r4 moved 1a437bca → ec8f3359 (two
+  severable commits; the H8 re-seed + Cure 1b are on the branch; the pin
+  cleaned). The slot work's standout: THE CARRY PROVEN BY BYTE-IDENTITY —
+  git diff base..tip pre-rebase equals git diff slot..new-tip exactly; the
+  flagged docs intersection checked honestly and refuted by name-only diff;
+  S0 two-part read live at both ends BYTE-IDENTICAL (CT-2's lawful break
+  pre-existing, untouched — this landing moves no leaf digest); the
+  terminal GREEN FIRST RUN, 20 steps, +4 tests = exactly its four arms,
+  with every "failed/refused/error" token in the body CLASSIFIED rather
+  than waved at. Its standing memory item was already discharged at §393
+  (the index line exists) — noted so the lane's flag closes.
+- **THE PRODUCERS CHARTER COLLECTED** (draft-PRODUCERS-PLAN.md, 602 lines,
+  the §423 ruling folded in mid-compile as ordered). THREE CONFIRMED
+  FINDINGS RESHAPE THE §5 PRICING: (1) the high-water evidence channels
+  already have healthy pulse-time writers — the gap is generated un-pulsed
+  leaves, not missing writers; (2) the generator golden hashes the WHOLE
+  settlement, so dormant-until-consumed is STRUCTURALLY UNAVAILABLE on the
+  generation path (the foundingCatalog header states trap and cure); (3)
+  therefore T2N and T2R compile as PURE DERIVERS at the domain root
+  (golden- and census-inert, the ageBands precedent) and T2Q is the ONE
+  pulse-seam writer riding existing registered lifecycle verbs — §423's
+  cheap lawful path, priced first as ordered, with an S0 arm proving no
+  new door verb is needed. Generation-side given-past facts REFUSED and
+  priced to the owner docket with the full bill stated. **RAISED-C1
+  CONFIRMED: T2P (construction operations proper) is OUTSIDE this train
+  and dockets as its own compile post-§423.** The charter's full ruling
+  and executor dispatches follow the chair's read at the next beat; the
+  ruled §312.2c soak obligation attaches at the train's exposure, blocking
+  nothing (§337).
+- **CT-3's GO ISSUED with the amendment-resurrection hazard flagged:** its
+  base predates CT-2's §401 amendment, so its tree carries the RETRACTED
+  false claim — the rebase takes the slot's CT-2-owned blocks, re-applies
+  only its three added blocks, and grep-verifies the retraction held (a
+  rebase that resurrects a retracted claim is the merge-destroys-cures
+  class). Its §12 records the lawful break DEEPENED: warFaith is CT-3's at
+  this landing, general was CT-2's. After CT-3: T2H, then the website cars.
