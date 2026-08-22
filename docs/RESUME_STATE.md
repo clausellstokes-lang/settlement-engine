@@ -74,6 +74,13 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~16:20: CT-3 §355 STOP + THE HUNT FIRES (§429) — run 2 redded
+# DISJOINT assertions on a quiet box (prngSeedEntropy birthday-equality;
+# readerShapeResolver 300>256). Landing-on-isolated-evidence REFUSED.
+# Hunt phase 1 = serialized instrumented terminal at b10ed1a1 (chair-
+# authorized, NOT the lane's third run); T2M batteries HELD. Green →
+# land + datum; red → reproducible specimen, CT-3 parks. Claim-audit
+# resurrections banked with credit.
 # ⭐ ~15:10: T2L COLLECTED (§428) — 6c920593 pinned, 149 eff, third rename
 # site ratified, M3 equivalence pinned+replanted, sweep honesty (disjoint
 # strays → §355). CT-3 re-run FIRED at load 6.45. T2M building. Producers

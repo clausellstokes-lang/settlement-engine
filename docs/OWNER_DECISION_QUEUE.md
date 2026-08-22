@@ -17287,3 +17287,45 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
 - T2L HOLDS behind T2K in the D3a stack. Meanwhile: CT-3's decisive re-run
   fired at load 6.45 (vs the 150 that made the timeout); T2M still
   building. The producers ruling remains the chair's next queued act.
+
+## §429 — CT-3's §355 STOP HONORED; THE VARYING-CAST HUNT EXECUTES NOW, PHASE 1 = A SERIALIZED INSTRUMENTED TERMINAL AT ITS TIP; LANDING-ON-ISOLATED-EVIDENCE REFUSED (2026-08-23 ~16:20)
+
+- **The stop was lawful and the evidence is the program's sharpest flake
+  record yet:** run 1 TIMEOUT (distributionEnvelopes' 60s hook at load
+  65-150 — the §392-known first casualty); run 2 on a DELIBERATELY QUIET
+  box (load ~22) redded TWO ASSERTIONS with an EMPTY intersection —
+  prngSeedEntropy (a birthday-class statistical test asserting a HARD
+  equality, flaky by design per its own header) and readerShapeResolver
+  (an inline-string analysis reading 300 > 256 that passes everywhere
+  else — the shared-state co-residency suspect). Two runs, two disjoint
+  casts, one unchanged tree: the varying-cast signature, now held by the
+  hunt with specimens from FIVE lanes.
+- **CT-3's member itself is beyond reproach at its tip b10ed1a1:** the §401
+  hazard discharged with the amendment proven ONE corpus line and the
+  re-application proven by remove-and-match-the-slot byte-for-byte; **two
+  resurrections greps could never catch, found by CLAIM-AUDIT:** its packet
+  cited the retracted claim as PRECEDENT (all probes read zero), and its
+  verification table QUOTED the probe strings — a proof that falsifies
+  itself; plus the A8 tuple internally contradictory (the carry law
+  violated in its own prose). All three cured — the retraction discipline's
+  deepest reading yet, banked with credit. Isolated evidence all green
+  (movement contract, goldens both ways, both sweeps' stable set identical
+  to siblings', typechecks at ceiling).
+- **RULED:** (a) landing on isolated evidence REFUSED — no landing without
+  a green terminal, no exceptions; (b) **THE §355 HUNT EXECUTES NOW** —
+  phase 1 is a CHAIR-AUTHORIZED serialized instrumented terminal at
+  b10ed1a1 (explicitly NOT the lane's third re-run; its spent budget stays
+  spent — the distinction recorded so the one-re-run law is not eroded):
+  T2M's batteries HELD, the track proven foreign-vitest-free, the run's
+  results JSON + per-file worker assignments preserved so failing tests'
+  CO-RESIDENCY is recorded (the hypothesis: shared-state leakage expressed
+  by worker-scheduling casts). GREEN serialized → CT-3 lands on it AND the
+  hunt gains the concurrency-expression datum; RED serialized → a
+  reproducible-at-quiet specimen, MORE valuable than the landing — CT-3
+  parks pending diagnosis. (c) prngSeedEntropy's hard-equality birthday
+  test goes on the hunt's docket for a RECOMMENDATION (tolerance vs
+  banking vs redesign) — assertion-weakening is never a lane act and the
+  instrument ruling is the chair's, later.
+- ⛔ The stale-pin trap re-flagged: holding-ct3 = ba806682 (pre-rebase,
+  carries the retracted claim) — the CAS target is b10ed1a1 ONLY, from the
+  landing report.
