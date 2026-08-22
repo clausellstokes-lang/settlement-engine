@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~21:40: WEBSITE CHARTER RULED (§402) — C1-C7 SIGNED (essential stays
+# ON; retention 90d+durable-cohorts; import-restore surface-as-provenance,
+# owner veto window = the plan doc; WEB-7 included), J1-J10 ratified;
+# 'campaign' rec → owner docket. TE-WEB1 DISPATCHED (consent split).
+# Migration cars sequential. FOUR: RR-1 · T2H · CT-2-amend · WEB-1.
 # ⭐ ~21:15: POP2 COLLECTED (§401) — DS-POP-2 item RETIRED (false positive:
 # the deriver EXISTS, trendLens.js display layer). REAL defect: the false
 # "NAMING CORRECTION" is IN the corpus in both CT holding tips — CT-2

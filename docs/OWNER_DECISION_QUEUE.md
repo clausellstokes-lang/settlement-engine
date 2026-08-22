@@ -16287,3 +16287,48 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   (the queued cure would have "fixed" a correct title).
 - **§401.1 SEATS:** POP2's seat is taken by CT-2's amendment work. FOUR
   ACTIVE: RR-1 · T2H · TC-WEBSITE · CT-2-amend.
+
+## §402 — THE WEBSITE TRAIN CHARTER RULED AS COMPILED: C1-C7 SIGNED, J1-J10 RATIFIED, TWO TRAINS CHARTERED; WEB-1 DISPATCHED (2026-08-22 ~21:40)
+
+- **TC-WEBSITE's compile (draft-WEBSITE-PLAN.md) is COLLECTED AND RULED AS
+  COMPILED.** Two trains, seven cars, one recommendation; every read pinned to
+  eb6124a6; the un-stamped four-member cap held; the §377.1/§389.1/§393/§395
+  laws carried into every car's own text.
+- **The seven chair questions, signed (each owner-vetoable by a word):**
+  C1 SIGNED — essential stays ON-unless-DNT; "person-adjacent" reads as the
+  research/market planes (actor/device-linked by table shape), the ONLY reading
+  under which §117's launch-blocking collection and §359.6's OFF-default both
+  survive; a stricter reading re-opens §117 and would go to the owner.
+  C2 SIGNED — the retention table as compiled: 90-day raw with the cohort
+  aggregate made durable FIRST (backfill → parity → only then prune, order
+  mandatory); export-then-prune at a 400-day ceiling failing closed for the
+  research plane; client errors 30d and world_sim_metrics indefinite stand.
+  C3 SIGNED — import-vs-restore: THE SURFACE IS THE PROVENANCE; the account
+  surface restores lived history (phase/eventLog/versionHistory/aiData)
+  admission-walled per field, fail closed per field with surfaced notices;
+  gallery keeps the distrust reset. Per §359.10 the owner's veto window is
+  this document.
+  C4 SIGNED — the J-TE28-3 footprint-census reconstruction accepted, flagged
+  as reconstruction; the member's pins enforce the real footprint regardless;
+  transcript-replay recovery stays available on request.
+  C5 SIGNED — referral conversions derive from the referral tables read-side;
+  no analytics write ever touches the money path.
+  C6 SIGNED — WEB-7 INCLUDED: the §362.2 elections record at this train's
+  touch, and the OFL no-licence-file gap cures with it.
+  C7 SIGNED — the two-train topology at the cap.
+- **J1-J10 RATIFIED as written** — noting J3 (durable-aggregate-first) and J7
+  (per-field fail-closed, never whole-file rejection) as the two the chair
+  would have imposed had the compile not; and J5/J9 as the §320-class honesty
+  discipline applied at both levels.
+- **The 'campaign' recommendation goes to the OWNER DOCKET with its duty
+  census** (O1): keep the DM-facing label, keep engine symbols, re-word the
+  three measured collision strings in the prose batch; a full rename is a
+  train of its own and not recommended. O2-O5 docketed as compiled (O3
+  recommendation: purge; O4: three migrations await the owner's db push).
+- **DISPATCH: TE-WEB1 takes the free seat** (the consent-default split, the
+  compiled dispatch order's head). Both trains build on free seats per §388;
+  every gate/CAS queues behind the standing landing order (mint → RR-1 → RR-2
+  → T2Bf → CT-2 → H8B/CT-3/T2H → then these). Migration-bearing members build
+  SEQUENTIALLY (the head-number race is real); WEB-2 dispatches after WEB-1's
+  number is fixed at its base.
+- FOUR ACTIVE: RR-1 · T2H · CT-2-amend · WEB-1.
