@@ -74,6 +74,12 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~04:45: T2G's STOP-RAISE RULED (§379) — the estate's FIRST cross-packet
+# retirement collision: four landed packets pin the §375-authorized retiree.
+# Ruling: discharge-NOTES (4× row-out/note-in, unique-key, in T2G's landing)
+# + H9 chartered (validator discharge semantics + planted-collision test) +
+# BINDING COMPILE LAW: retirement preflights cross-check ALL landed
+# requiredSymbols. Mint's gate still the track's one event.
 # ⭐ ~04:20: CT-0 RATIFIED post-correction (§378) — R-4 inversion REFUTED by
 # grep (WHY never WHEN, both trees); golden bill blob-proven at the landing
 # tree. TE-CT1a DISPATCHED (additive-new-blocks = zero same-seed movement,

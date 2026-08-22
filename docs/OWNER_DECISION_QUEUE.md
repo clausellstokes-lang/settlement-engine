@@ -15542,3 +15542,33 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   the WF-1E pattern. Its landing queues behind T2F and T2G per the §361.2
   interleave; the mint's window binds it like everyone. Active: the mint (gate) ·
   TE-T2G · TE-CT1a = three; T2F parked at its door.
+
+## §379 — T2G'S STOP-RAISE RULED: THE RETIREMENT ONE-WAY RATCHET, DISCHARGED BY NOTE NOW AND BY LAW NEXT (2026-08-22 ~04:45)
+
+- **THE FIRST CROSS-PACKET RETIREMENT COLLISION IN THE ESTATE:** four LANDED packets
+  pin `FIXED_SURVEY_LIGHT_V1` in requiredSymbols (enforced at every status by
+  deliberate validator design) while §375 authorized MF-T2G to retire it — the
+  validator's required/retired cross-check is WITHIN one packet only, so
+  retiredSymbols was, read literally, unusable for any symbol a landed packet ever
+  named. The lane found it AT THE VALIDATOR (not by reading), held under three laws
+  without curing, and priced both options. Its member is otherwise fully proven at
+  base (the whole-body contentHash claim on all six surfaces; the saved-pair
+  digests measured; twelve re-records key-by-key 124/85 both sides; four sharp
+  mutants; the found-the-symbol control both sides).
+- **§379.1 RULED — (a) IN THE DISCHARGE-NOTE FORM, chair-authorized:** the four
+  rows delete BY UNIQUE KEY, each replaced by a dated amendment line citing
+  §375/§379 so the historical claim survives the row (deletion alone would erase
+  the fact that four packets once required the symbol). Executed inside T2G's
+  landing per the §314.2 editing-act principle; diffs provably exactly
+  4×(row out, note in); validator green after.
+- **§379.2 (b) CHARTERED — TE-HOUSE H9:** the validator gains DISCHARGE SEMANTICS
+  (a LANDED retiredSymbols row discharges earlier requiredSymbols rows for the
+  same (path, symbol)), with a test planting exactly this collision. Future
+  retirements keep the rows and discharge them; this surgery is the last of its
+  kind.
+- **§379.3 BINDING COMPILE LAW (the lane's compile-gap finding):** every retirement
+  member's preflight MUST cross-check its retiredSymbols against ALL landed
+  requiredSymbols — the §4 row that did not exist, now required in every TC brief.
+- **§379.4** The benign chunk-membership shift (FIRST_SLICE_PROJECTION between two
+  lazy chunks, entry closure unmoved) accepted as recorded, so no successor
+  re-derives it as a surprise.
