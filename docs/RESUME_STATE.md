@@ -74,6 +74,12 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~07:25: POST-WINDOW SPIN-UP — T2F activated (rebasing onto 42e12a76);
+# TE-HOUSE dispatched (9 members incl. H9 discharge semantics + the style
+# census + both-styles requirement); TE-RR1 dispatched (shrink held until
+# next-up — a freeze REGENERATES, never rebases). Gate queue: T2F → T2G →
+# CT-1a → RR-1 → HOUSE → ratchet cure → RR-2. Active: T2F · HOUSE · RR1 = 3
+# of cap 4.
 # ⭐⭐⭐ ~07:10: THE CLOSING TRAIN IS COMPLETE — FULLGATE2 GREEN (captured
 # line), CAS 47ea9c9b → 42e12a76 (§380). Schema-9 LIVE; window CLOSED; the
 # memory pass banked (liveness-traps family + refinements). POST-WINDOW:
