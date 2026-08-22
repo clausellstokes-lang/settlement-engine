@@ -592,6 +592,62 @@ export async function run(argv = []) {
     try { return execSync('git rev-parse HEAD', { cwd: ROOT, encoding: 'utf8' }).trim(); } catch { return 'unknown'; }
   })();
 
+  // ── SHARED EVIDENCE RESOLUTION (Cure 1b) ──────────────────────────────────
+  // Cure 1 taught the REGRESSION block to say whether the clock ran out or the
+  // value was wrong. That question is asked at every red, not just that one, so
+  // the resolution is hoisted here and the STRICT DIST and SCOPE SENTINEL blocks
+  // now answer it too. ONE spelling, reused three times — a second copy would be
+  // free to drift from the census's idea of a budget.
+  //
+  // ⛔ WHAT REDS IS UNTOUCHED. These lines are appended to failure arrays that are
+  // already non-empty by the time they are reached; no verdict, threshold, or exit
+  // code moves. Only what a red SAYS changes.
+  //
+  // LAZY AND MEMOISED: `globalTestTimeoutOf` reads the vitest config off disk and
+  // `timeoutLiteralsOf` reads a test file, so both are deferred behind first use
+  // and cached. A GREEN run does neither — the OK paths pay nothing for this.
+  let globalBudgetMemo = null;
+  const globalBudgetLazy = () => (globalBudgetMemo ??= globalTestTimeoutOf());
+  const literalsCache = new Map();
+  const literalsFor = (file) => {
+    if (!literalsCache.has(file)) {
+      let literals = [];
+      try {
+        literals = timeoutLiteralsOf(fs.readFileSync(path.join(ROOT, file), 'utf8'));
+      } catch {
+        // A row whose file is gone declares nothing; the suite-wide budget stands.
+      }
+      literalsCache.set(file, literals);
+    }
+    return literalsCache.get(file);
+  };
+  // Returns { lines, class } so a caller can both PRINT the evidence and reason
+  // about the class (the regression block's cost-failure inference needs the latter).
+  const evidenceFor = (row, file) => {
+    const literals = literalsFor(file);
+    const { budget: globalBudget, source: budgetSource } = globalBudgetLazy();
+    const budget = Math.max(globalBudget, ...literals);
+    return {
+      lines: failureEvidenceOf(row, { budget, budgetSource, literals }),
+      class: classifyFailure({
+        duration: row?.duration,
+        message: (row?.failureMessages || [])[0] || '',
+        budget,
+      }).class,
+    };
+  };
+  // A suite-level failure carries no per-test row, so the evidence is taken from
+  // the SUITE: its own elapsed clock and its own message. This is the arm that
+  // answers "did the `beforeAll` hook TIME OUT, or did it throw?" — a question the
+  // uncollected block could not previously answer, and one that matters precisely
+  // because the recorded beforeAll case serialises an EMPTY suite message.
+  const suiteAsRow = (suite) => ({
+    duration: (Number.isFinite(suite?.endTime) && Number.isFinite(suite?.startTime))
+      ? suite.endTime - suite.startTime
+      : undefined,
+    failureMessages: suite?.message ? [String(suite.message)] : [],
+  });
+
   // ── Strict post-build authority ──────────────────────────────────────
   // There is no baseline and no debt concept here. Once the artifact exists,
   // every on-disk build contract must appear exactly once and pass whole.
@@ -671,13 +727,21 @@ export async function run(argv = []) {
       );
     }
     const incomplete = rows.filter((row) => !row.file || !row.fullName || row.status !== 'passed');
+    const strictClasses = [];
     for (const status of ['failed', ...NON_RUN_STATUSES]) {
       const matches = incomplete.filter((row) => row.status === status);
       if (matches.length) {
-        failures.push(
-          `  ${status.toUpperCase()} build-test row(s):`,
-          ...matches.map((row) => `    ${row.id}`),
-        );
+        failures.push(`  ${status.toUpperCase()} build-test row(s):`);
+        for (const row of matches) {
+          failures.push(`    ${row.id}`);
+          // Cure 1b — evidence for FAILED rows only. A non-run row has neither a
+          // duration nor a message, so a class line under it would be manufactured
+          // rather than measured; those rows keep their bare identity.
+          if (status !== 'failed') continue;
+          const evidence = evidenceFor(row, row.file);
+          strictClasses.push(evidence.class);
+          failures.push(...evidence.lines);
+        }
       }
     }
     const unknown = incomplete.filter((row) => !['failed', ...NON_RUN_STATUSES].includes(row.status));
@@ -703,6 +767,19 @@ export async function run(argv = []) {
       if (!Number.isInteger(report?.[field]) || report[field] !== measured) {
         failures.push(`  report counter ${field}=${String(report?.[field])} disagrees with ${measured} row(s).`);
       }
+    }
+
+    // Cure 1b — the same inference Cure 1 drew for the census, restated for the
+    // surface that HAS no census: strict dist banks nothing, so a budget expiry
+    // here is not debt to record but work to cut. Named so a reader does not go
+    // looking for a dist defect that the clock, not the artifact, produced.
+    if (strictClasses.some((c) => c === 'TIMEOUT' || c === 'QUERY-BUDGET')) {
+      failures.push(
+        '',
+        '  ⚠ A BUDGET EXPIRY IS A COST FAILURE. Strict dist has no census to bank it in and no debt',
+        '    concept to absorb it: cut the row\'s per-run work or give it an explicit per-test budget',
+        '    carrying the measured figure. Raising the suite-wide testTimeout only hides the next one.',
+      );
     }
 
     if (failures.length) {
@@ -786,13 +863,29 @@ export async function run(argv = []) {
   const allowedUncollected = baseline.uncollectedSuites || {};
   const newUncollected = uncollected.filter((f) => !allowedUncollected[f]);
   if (newUncollected.length) {
+    // Cure 1b — resolve each named suite back to its report entry so the evidence
+    // comes from the SUITE's own clock and message. `uncollectedOf` returns
+    // normalised paths, so the index is keyed the same way; its return shape is
+    // deliberately NOT changed, because the meta-test pins it.
+    const suiteByPath = new Map(
+      (Array.isArray(report?.testResults) ? report.testResults : [])
+        .map((s) => [normalizePath(s.name || s.file || '(unnamed suite)'), s]),
+    );
     scopeFailures.push(
       `  ${newUncollected.length} suite(s) FAILED WITHOUT A MEASURABLE TEST — they either produced ZERO`,
       '    tests (a collection error) or failed as a whole while every test they enumerated was a',
       '    SKIP (a `beforeAll`/`afterAll` that threw). Either way every test they own left the',
       '    census instead of being measured, and a skip ceiling cannot see the difference:',
-      ...newUncollected.map((f) => `      ${f}`),
     );
+    for (const f of newUncollected) {
+      scopeFailures.push(`      ${f}`);
+      const suite = suiteByPath.get(f);
+      if (!suite) continue;
+      // Indented one level past the file name it belongs to; `failureEvidenceOf`
+      // owns its own base indent and is NOT reshaped, so Cure 1's landed bytes on
+      // the regression block stay exactly as they were.
+      scopeFailures.push(...evidenceFor(suiteAsRow(suite), f).lines.map((l) => `  ${l}`));
+    }
   }
 
   // (1) EXACT MEMBERSHIP: every baselined test whose FILE still exists on disk
@@ -954,38 +1047,19 @@ export async function run(argv = []) {
       // question gets asked, so it is the one surface that must answer it. The
       // budget is resolved PER FILE, and the file's own declared literals are
       // read at most once each.
-      const globalBudget = globalTestTimeoutOf();
-      const literalsCache = new Map();
-      const literalsFor = (file) => {
-        if (!literalsCache.has(file)) {
-          let literals = [];
-          try {
-            literals = timeoutLiteralsOf(fs.readFileSync(path.join(ROOT, file), 'utf8'));
-          } catch {
-            // A row whose file is gone declares nothing; the suite-wide budget stands.
-          }
-          literalsCache.set(file, literals);
-        }
-        return literalsCache.get(file);
-      };
+      //
+      // ⚠ Cure 1b: the per-file budget resolution that used to live inline here is
+      // now `evidenceFor`, hoisted so STRICT DIST and SCOPE SENTINEL answer the same
+      // question with the SAME arithmetic. The bytes this block prints are unchanged
+      // — same budget (`max(global, ...literals)`), same source, same literals.
       lines.push(`  ${regressions.length} failing test(s) NOT in the frozen census:`);
       for (const id of regressions) {
         lines.push(`    ${id}`);
         const row = liveById.get(id);
         if (!row) continue;
-        const literals = literalsFor(row.file);
-        const budget = Math.max(globalBudget.budget, ...literals);
-        const evidence = failureEvidenceOf(row, {
-          budget,
-          budgetSource: globalBudget.source,
-          literals,
-        });
-        classes.push(classifyFailure({
-          duration: row.duration,
-          message: (row.failureMessages || [])[0] || '',
-          budget,
-        }).class);
-        lines.push(...evidence);
+        const evidence = evidenceFor(row, row.file);
+        classes.push(evidence.class);
+        lines.push(...evidence.lines);
       }
     }
     if (hidden.length) {

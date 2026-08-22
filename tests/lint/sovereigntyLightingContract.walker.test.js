@@ -5221,7 +5221,23 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   proof that nothing else in the bundle touches this census. implementationPackets
     //   alone convicted 20,715; gateMutex alone convicted 20,718. Each figure was read from
     //   the arm's own failure message, never computed.
-    files: 2497, parked: 364, credited: 2133, titles: 20719, suiteTitles: 5785,
+    // ── RE-RECORDED 2026-08-22 BY TE-H8B (Cure 1b), CAUSE ATTRIBUTED ──────────
+    // 20,719 → 20,723 on `titles` ALONE. Every other key is UNCHANGED: this member
+    // adds no test FILE and no `describe`, only four `it` arms inside two existing
+    // suites in tests/lint/testRatchet.test.js —
+    //   ⭐ CURE 1b: an uncollected suite is CLASSIFIED, not merely named
+    //   ⭐ CURE 1b: the EMPTY-message `beforeAll` case is still classified, by the clock
+    //   ⭐ CURE 1b: a FAILED build-test row is CLASSIFIED, not merely named
+    //   ⭐ CURE 1b NEGATIVE CONTROL: a NON-RUN build row gets no manufactured class
+    // `censusAuthorization`: ODQ §386.2 (Cure 1b), §385.2 (the bundle).
+    // ⛔ ATTRIBUTED BY ISOLATION, NOT BY ARITHMETIC, at THIS base. Reverting the ONE
+    //   test file with the scripts/check-test-ratchet.mjs cure still fully applied
+    //   convicted 20,719 GREEN — which is also the proof that the script half of this
+    //   member moves no title at all. The after figure 20,723 was read from the arm's
+    //   own failure message ("expected 20723 to be 20719"), never computed, and the
+    //   delta is +4 against exactly four added arms: a delta SMALLER than the titles
+    //   added would have meant a parked file swallowing them, and is not accepted here.
+    files: 2497, parked: 364, credited: 2133, titles: 20723, suiteTitles: 5785,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

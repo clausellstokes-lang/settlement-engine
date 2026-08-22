@@ -1298,6 +1298,88 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
       }
     });
 
+    // ── ⚠⚠ CURE 1b: THE EVIDENCE BLOCK REACHES STRICT DIST ───────────────────
+    // Strict dist is the surface with NO census and NO debt concept, which makes
+    // the timeout-vs-assertion question sharper here, not softer: there is nothing
+    // to bank a cost failure into, so a reader who cannot tell the two apart is
+    // left deciding whether the DIST ARTIFACT is broken or the clock merely ran
+    // out. It named the row and stopped. Now it classifies it.
+    //
+    // ⛔ WHAT REDS IS UNTOUCHED — every strict-dist arm above was written before
+    // this existed and passes verbatim; these arms pin only what the red SAYS.
+    test('⭐ CURE 1b: a FAILED build-test row is CLASSIFIED, not merely named', () => {
+      const TIMEOUT_KILL = 'Error: STACK_TRACE_ERROR\n    at task (file:///…/@vitest/runner)';
+      const failed = run({
+        // A realistic failed build test: the row fails, its suite fails with it, and
+        // the report's own counters follow — so this red is about the FAILED row and
+        // not a counter disagreement standing in for one.
+        report: strictReport((report) => {
+          const suite = report.testResults[0];
+          suite.status = 'failed';
+          suite.assertionResults[0].status = 'failed';
+          suite.assertionResults[0].duration = 20528.109540999998;
+          suite.assertionResults[0].failureMessages = [TIMEOUT_KILL];
+          report.numPassedTests -= 1;
+          report.numFailedTests += 1;
+          report.success = false;
+        }),
+        exitCode: 1,
+        args: ['--verify-dist'],
+        noBaseline: true,
+      });
+      expect(failed.status, failed.out).not.toBe(0);
+      expect(failed.out).toMatch(/STRICT DIST REFUSED/);
+      expect(failed.out).toMatch(/FAILED build-test row\(s\):/);
+
+      // (a) THE DURATION AND THE BUDGET, on the row's own line — the same shape the
+      // regression block prints, from the same resolver.
+      expect(failed.out, 'a failed build row must print its duration against a budget')
+        .toMatch(/TIMEOUT · ran 20528ms against a \d+ms budget/);
+      // (b) THE REASON.
+      expect(failed.out).toContain('vitest serialises a timeout kill as `Error: STACK_TRACE_ERROR`');
+      // (c) THE FIRST LINE ONLY.
+      expect(failed.out).toContain('msg: Error: STACK_TRACE_ERROR');
+      expect(
+        failed.out.split('\n').filter((l) => l.includes('@vitest/runner')),
+        'the block prints the FIRST line only',
+      ).toEqual([]);
+      // (d) ⭐ THE INFERENCE STRICT DIST IS ENTITLED TO, and it is NOT the census
+      // one: this surface banks nothing, so the advisory must not tell a reader to
+      // keep a cost failure out of a census that does not exist here.
+      expect(failed.out).toMatch(/A BUDGET EXPIRY IS A COST FAILURE/);
+      expect(failed.out).toContain('Strict dist has no census to bank it in');
+      // anchored: the advisory's own strict-dist sentence is asserted PRESENT on the line directly above, so the block is proven live and fully printed here; this denial can therefore only mean the wording emitted was the strict-dist one and not the census-flavoured variant
+      expect(failed.out, 'the census-flavoured wording belongs to the regression block').not.toMatch(/NEVER DEBT/);
+    });
+
+    test('⭐ CURE 1b NEGATIVE CONTROL: a NON-RUN build row gets no manufactured class', () => {
+      // A pending/skipped row carries neither a duration nor a message. Printing a
+      // class under it would be inventing evidence rather than reporting it — the
+      // exact failure mode an evidence block is most tempting to fall into, since
+      // `classifyFailure` will always return SOMETHING if you ask it.
+      const nonRun = run({
+        report: strictReport((report) => {
+          const suite = report.testResults[0];
+          suite.assertionResults[0].status = 'pending';
+          report.numPassedTests -= 1;
+          report.numPendingTests += 1;
+        }),
+        exitCode: 0,
+        args: ['--verify-dist'],
+        noBaseline: true,
+      });
+      expect(nonRun.status, nonRun.out).not.toBe(0);
+      // LIVENESS ANCHOR: pin the live, fully-printed refusal that names the row
+      // before denying anything about it, so the denials below cannot pass by the
+      // output having drifted away entirely.
+      expect(nonRun.out).toMatch(/STRICT DIST REFUSED/);
+      expect(nonRun.out).toMatch(/PENDING build-test row\(s\):/);
+      // anchored: the REFUSED verdict and the PENDING row header pinned on the two lines above prove this is a live refusal that reached and named the non-run row, so this denial states that no duration line was manufactured under a row that carries no duration
+      expect(nonRun.out, 'a non-run row has no duration to classify').not.toMatch(/ · ran .* against a \d+ms budget/);
+      // anchored: same two pinned assertions above — the refusal is live and names the row, so this denial states that no message line was manufactured under a row that carries no message
+      expect(nonRun.out, 'a non-run row has no message to quote').not.toMatch(/^\s+msg: /m);
+    });
+
     test('does NOT fail closed when the suite really ran and really failed', () => {
       // The discriminator must distinguish "ran with failures" from "did not
       // run", or the guard is an always-red gate that would simply be deleted.
@@ -1619,6 +1701,134 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
       // and a hit here would mean the skip arm fired while the discriminator stayed quiet.
       // anchored: the /SCOPE SENTINEL/ and /FAILED WITHOUT A MEASURABLE TEST/ assertions two lines up prove the subject is a live, fully-printed failure report, so this denial can only be read as "the OTHER arm did not fire"
       expect(r.out, 'the skip ceiling must not be the thing that reds — it was set to 50').not.toMatch(/skipped tests grew/);
+    });
+
+    // ── ⚠⚠ CURE 1b: THE EVIDENCE BLOCK REACHES THE SCOPE SENTINEL ────────────
+    // Cure 1 taught the REGRESSION red to say whether the clock ran out or the
+    // value was wrong. This red could not answer it at all: it named the suite and
+    // stopped, so the reader of a `beforeAll` explosion still had to go find the
+    // report to learn whether the hook TIMED OUT or THREW — the same hunt §358.3
+    // measured and closed for the other block.
+    //
+    // ⛔ WHAT REDS IS UNTOUCHED. The two arms above this one were written before
+    // the evidence existed and still pass verbatim; these arms pin only what the
+    // red SAYS. The suite carries no per-test row by construction, so the evidence
+    // is taken from the SUITE's own clock and message.
+    test('⭐ CURE 1b: an uncollected suite is CLASSIFIED, not merely named', () => {
+      const TIMEOUT_KILL = 'Error: STACK_TRACE_ERROR\n    at task (file:///…/@vitest/runner)';
+      const runStart = 1_700_000_000_000;
+      const classified = run({
+        entries: {},
+        // Built raw rather than through `reportOf`: this arm needs the SUITE-level
+        // clock and message, which the shared helper does not emit and which the
+        // arms above must keep not emitting.
+        report: {
+          startTime: runStart,
+          // Declared == counted, so the SCOPE COLLAPSE arm stays silent and this
+          // red is attributable to the uncollected discriminator alone.
+          numPendingTests: 2,
+          numTodoTests: 0,
+          testResults: [
+            {
+              name: join(ROOT, REAL),
+              status: 'passed',
+              startTime: runStart + 500,
+              endTime: runStart + 600,
+              assertionResults: [{ fullName: 'a', title: 'a', ancestorTitles: [], status: 'passed' }],
+            },
+            {
+              name: join(ROOT, REAL2),
+              status: 'failed',
+              startTime: runStart + 100,
+              endTime: runStart + 100 + 20528,
+              message: TIMEOUT_KILL,
+              assertionResults: [
+                { fullName: 'x', title: 'x', ancestorTitles: [], status: 'skipped' },
+                { fullName: 'y', title: 'y', ancestorTitles: [], status: 'skipped' },
+              ],
+            },
+          ],
+        },
+        skippedCeiling: 50,
+      });
+      expect(classified.status, classified.out).not.toBe(0);
+      expect(classified.out).toMatch(/SCOPE SENTINEL/);
+      expect(classified.out).toMatch(/FAILED WITHOUT A MEASURABLE TEST/);
+
+      // (a) THE CLASS AND THE CLOCK, taken from the suite. The budget is matched as
+      // a number rather than frozen — it is read from the live vitest config, which
+      // the estate governs elsewhere (same rule as the regression block's pins).
+      expect(classified.out, 'the uncollected suite must print its elapsed clock against a budget')
+        .toMatch(/TIMEOUT · ran 20528ms against a \d+ms budget/);
+      // (b) THE REASON, and it is the MARKER — not the clock. This message names
+      // `STACK_TRACE_ERROR`, so the class must be decided by the marker branch,
+      // which is what makes the verdict independent of whatever the budget is.
+      expect(classified.out).toContain('vitest serialises a timeout kill as `Error: STACK_TRACE_ERROR`');
+      // (c) THE FIRST LINE OF THE SUITE MESSAGE, one line only.
+      expect(classified.out).toContain('msg: Error: STACK_TRACE_ERROR');
+      expect(
+        classified.out.split('\n').filter((l) => l.includes('@vitest/runner')),
+        'the block prints the FIRST line only — a full stack would bury the next suite',
+      ).toEqual([]);
+      // (d) THE EVIDENCE IS NESTED UNDER THE FILE IT BELONGS TO. Two suites are in
+      // this report and only one is uncollected; evidence printed at the file's own
+      // indent would read as a sibling entry rather than as that file's evidence.
+      const lines = classified.out.split('\n');
+      const fileLine = lines.findIndex((l) => l.trim() === REAL2);
+      expect(fileLine, `${REAL2} must be named in the red`).toBeGreaterThan(-1);
+      expect(lines[fileLine + 1], 'the class line must sit directly under its file, indented past it')
+        .toMatch(/^ {8}TIMEOUT · /);
+    });
+
+    test('⭐ CURE 1b: the EMPTY-message `beforeAll` case is still classified, by the clock', () => {
+      // ⚠⚠ THE ONE THAT MOTIVATES THIS. The recorded CR-TRFZ-4 measurement is
+      // explicit that the `beforeAll` throw serialises with an EMPTY suite message
+      // — that is precisely why the discriminator could not be message-keyed. A
+      // message-keyed EVIDENCE block would fail on the same case, printing nothing
+      // useful exactly where the reader is most lost. The clock still answers.
+      //
+      // The elapsed figure is deliberately far past any plausible suite budget
+      // rather than a measured one: the probe recorded status/message/rows, never a
+      // duration, and a figure that merely grazed the budget would silently change
+      // class the day someone declares a longer timeout in the named file.
+      const runStart = 1_700_000_000_000;
+      const mute = run({
+        entries: {},
+        report: {
+          startTime: runStart,
+          numPendingTests: 2,
+          numTodoTests: 0,
+          testResults: [
+            {
+              name: join(ROOT, REAL),
+              status: 'passed',
+              startTime: runStart + 500,
+              endTime: runStart + 600,
+              assertionResults: [{ fullName: 'a', title: 'a', ancestorTitles: [], status: 'passed' }],
+            },
+            {
+              name: join(ROOT, REAL2),
+              status: 'failed',
+              startTime: runStart + 100,
+              endTime: runStart + 100 + 999_999,
+              // NO `message` key at all — the measured shape.
+              assertionResults: [
+                { fullName: 'x', title: 'x', ancestorTitles: [], status: 'skipped' },
+                { fullName: 'y', title: 'y', ancestorTitles: [], status: 'skipped' },
+              ],
+            },
+          ],
+        },
+        skippedCeiling: 50,
+      });
+      expect(mute.status, mute.out).not.toBe(0);
+      expect(mute.out).toMatch(/FAILED WITHOUT A MEASURABLE TEST/);
+      // The clock alone carries the verdict here.
+      expect(mute.out, 'an empty suite message must still yield a class')
+        .toMatch(/TIMEOUT · ran 999999ms against a \d+ms budget/);
+      expect(mute.out).toContain('the row ran at or past its whole budget');
+      // And it says so honestly rather than printing an empty `msg:` line.
+      expect(mute.out).toContain('msg: (the report carried no failure message)');
     });
 
     test('⚠⚠ CR-TRFZ-4 NEGATIVE CONTROL: a DELIBERATELY skipped suite is still just skips', () => {
