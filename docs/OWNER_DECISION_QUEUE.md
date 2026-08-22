@@ -16850,3 +16850,14 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   re-stamp from the post-edit hash, S0 at the new base, and the §414-as-
   corrected detached terminal. The cascade order behind it: CT-2 →
   H8B/CT-3 → T2H → the five website cars.
+
+- **§416.1 RR-2's close-out, cross-verified from the branch:** clean
+  fast-forward, exactly its three commits gained, the cure and tombstone read
+  off the branch itself, both halves in requiredSymbols at LANDED (a merge
+  resolution deleting either now reds validate:packets — the
+  merge-destroys-cures law pre-armed). ONE NEW INSTRUMENT LESSON, banked: its
+  close-out guard printed "branch moved since my green" ON ITS OWN LANDING —
+  a base-vs-tip comparison cannot distinguish "a sibling landed ahead" from
+  "I landed" and needs an identity arm (is the new tip MY tip?) before
+  crying alarm. The sitting's pattern named: a check that detects only
+  CHANGE will keep reporting success as failure.

@@ -74,6 +74,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~06:50: RR-2 close-out verified from the branch (§416.1); NEW LAW:
+# change-only guards need an identity arm (success reads as failure
+# otherwise). Lane complete. Awaiting T2Bf's rebase+terminal.
 # ⭐⭐ ~06:30: RR-2 LANDED (§416, 21st) — tip 0afddfe9; 933 descriptions
 # SHIP; veto window closed unvetoed. §414 CORRECTED (liveness-probe before
 # reclaim; quiet watcher ≠ dead; heartbeat every sample). T2Bf GO issued
