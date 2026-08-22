@@ -74,6 +74,13 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~22:15: DISK-FULL EVENT (§403) — volume hit 100%; holding tips PINNED
+# to refs/preserve/holding-* then ~24 landed-member trees reclaimed (~19GB).
+# T2H COLLECTED (3 files commit-at-resume; J-TET2H-9 ratified); CT-2
+# amendment COLLECTED at 85fb1c2d (re-stamp-at-rebase ratified; annex-only
+# correction banked); WEB-1 preflight collected (envelope INTACT corroborated;
+# consentSync judgment ratified). Prevention adopted: lanes clean aux trees;
+# chair prunes at landing; pin-before-prune law.
 # ⭐⭐ ~21:40: WEBSITE CHARTER RULED (§402) — C1-C7 SIGNED (essential stays
 # ON; retention 90d+durable-cohorts; import-restore surface-as-provenance,
 # owner veto window = the plan doc; WEB-7 included), J1-J10 ratified;

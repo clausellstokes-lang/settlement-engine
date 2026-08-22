@@ -16332,3 +16332,55 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   SEQUENTIALLY (the head-number race is real); WEB-2 dispatches after WEB-1's
   number is fixed at its base.
 - FOUR ACTIVE: RR-1 · T2H · CT-2-amend · WEB-1.
+
+## §403 — THE DISK-FULL EVENT: MACHINE-WIDE ENOSPC, CHAIR RECLAMATION EXECUTED; THREE COLLECTIONS RIDE THE SAME ROW (2026-08-22 ~22:15)
+
+- **The event:** the volume hit 100% (925MiB free) — ~40GB of accumulated lane
+  worktrees in the session scratchpad (~860MB each, ~25 of them). ENOSPC wears
+  MISLEADING ERRORS: the harness fails before the command runs (it cannot open
+  its own output file); the wrapper reported exit 0 over a TRUNCATED npm ci;
+  and a dep-broken tree makes the bare OSR gate exit 1 with
+  ERR_MODULE_NOT_FOUND — the §397 two-part rule caught that one THIRD
+  exit-lie live at CT-2.
+- **The reclamation (chair):** FIRST all five unlanded holding tips pinned to
+  refs/preserve/holding-{t2bf,ct2,h8b,ct3,t2h} — a detached worktree HEAD is
+  the ONLY ref on a holding commit, so tree cleanup without the pins risks gc
+  losing proven work. THEN ~24 dead worktrees of LANDED members deleted
+  (commits on-branch, checkouts regenerable) + git worktree prune; CT-2 had
+  already cleared its own two aux trees. ~19GB reclaiming; active/holding
+  trees untouched; zero foreign WIP touched (the analytics stash and MFI1
+  artifacts preserved).
+- **T2H COLLECTED (built; three files to commit at resume):** tip 2064a67e +
+  three verified-uncommitted files (the ENOSPC cut mid-commit) — ordered
+  committed first at resume; new tip will supersede. The member: 214 eff both
+  leaves, §390.1 CURED AS A RULE (all FOUR constructible seams length-prefixed;
+  22/22 witnesses, 12/12 refusal-parity, 64/64 rng stream rows byte-exact);
+  §390.2 determined NO persistence — ABI version holds at 1; census delta
+  +2/0/+2/+6/+2 exact; 7/7 mutants; two reds honestly cured (29 strict
+  typecheck errors cured by TYPEDEFS with 0 any-tokens — the any-ledger
+  refused correctly; entropy census 32→34). **J-TET2H-9 RATIFIED** (the
+  walker's escalation clause covers a new COMPOSITION/READ; this member
+  creates neither; WF-8A §350 is the precedent) — J-TET2H-1/2 likewise.
+  Terminal NOT run — fires at its GO.
+- **CT-2's §401 AMENDMENT COLLECTED at 85fb1c2d:** the false claim retracted
+  and swept to ZERO hits across all six surfaces; root cause recorded — the
+  absence claim was made from `grep | head -10` TRUNCATED output (the
+  estate lesson's sharpest specimen); full battery green including the strict
+  204-line both-ways diff. **The chair's step-2 prediction CORRECTED by
+  measurement:** RECEIPT/STATE-KEY/PROVENANCE lines are annex-only metadata
+  never projected, so the leaf is byte-identical — banked. **Re-stamp-at-
+  rebase RATIFIED** (§12 stays pinned at 9bfae712; the reading re-stamps at
+  the landing slot where it binds).
+- **WEB-1 PREFLIGHT COLLECTED (blocked at ENOSPC, resumed):** S0 two-part
+  reading at eb6124a6 = envelope INTACT (exit 0, 1998 findings matching
+  frozen — corroborating the mint from a second lane); migration head 196 →
+  member's is 197; the migration bill priced PARTIAL and flagged honestly
+  (two test files unread — closes before the migration is written).
+  **Its judgment RATIFIED:** consentSync's applyServerOptOut is a
+  provenance-honoring NARROWING caller, not a second defaults-writer — no
+  STOP; the stale sole-caller header sentence corrects as a declared
+  comment-only edit; A2's cross-device conservatism pinned as-designed.
+- **STANDING PREVENTION ADOPTED:** a lane removes its own aux trees (baseproof
+  etc.) at completion; the chair prunes a landed member's tree at its landing;
+  holding tips are ALWAYS ref-pinned before any tree cleanup. Banked to
+  memory with the ENOSPC error-taxonomy.
