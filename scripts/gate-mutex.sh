@@ -23,6 +23,7 @@ OWNER_FILE="$LOCK_DIR/pid"
 REAPER_DIR="${LOCK_DIR}.reaper"
 REAPER_OWNER_FILE="$REAPER_DIR/pid"
 LEGACY_SCAN="${GATE_MUTEX_LEGACY_SCAN:-1}"
+ORPHAN_GRACE_MINUTES="${GATE_MUTEX_ORPHAN_GRACE_MINUTES:-10}"
 OWN_LOCK=0
 OWN_REAPER=0
 
@@ -51,6 +52,12 @@ case "$LEGACY_SCAN" in
         exit 2
         ;;
 esac
+case "$ORPHAN_GRACE_MINUTES" in
+    ''|*[!0-9]*)
+        echo "gate-mutex: GATE_MUTEX_ORPHAN_GRACE_MINUTES must be a non-negative integer." >&2
+        exit 2
+        ;;
+esac
 
 usage() {
     echo "usage: sh scripts/gate-mutex.sh [--wait | --run -- <command...>]" >&2
@@ -70,6 +77,17 @@ read_pid() {
 
 pid_is_live() {
     kill -0 "$1" 2>/dev/null
+}
+
+# A creator killed between `mkdir` and its pid write leaves a directory NOBODY can
+# prove dead: read_pid fails, so every recovery arm that demands a readable dead
+# owner declines forever and the slot is lost until a human removes it. Age is the
+# only honest evidence available for such a directory, so an ownerless guard is
+# reclaimable only once it is older than the grace. `find -prune -mmin` is the
+# portable age test (BSD and GNU both carry -mmin); `stat` is not, and the script
+# stays node-free.
+dir_is_aged() {
+    [ -n "$(find "$1" -prune -mmin "+$ORPHAN_GRACE_MINUTES" 2>/dev/null)" ]
 }
 
 # Ancestry of this process: self, the calling shell, and every parent up to init.
@@ -152,14 +170,40 @@ acquire_reaper() {
     if [ -n "$_reaper_owner" ] && ! pid_is_live "$_reaper_owner"; then
         rm -f "$REAPER_OWNER_FILE"
         rmdir "$REAPER_DIR" 2>/dev/null || true
+    elif [ -z "$_reaper_owner" ] && dir_is_aged "$REAPER_DIR"; then
+        # The same killed-mid-acquisition window on the guard itself. Left alone an
+        # ownerless reaper dir blocks EVERY primary recovery forever, so the primary
+        # cure would be unreachable without this arm.
+        rm -f "$REAPER_OWNER_FILE"
+        rmdir "$REAPER_DIR" 2>/dev/null || true
     fi
+    return 1
+}
+
+# The killed-between-mkdir-and-pid-write state on the PRIMARY lock: the directory
+# exists with no readable owner, so recover_dead_owner's dead-pid evidence can never
+# be produced. Reclaim it only past the grace, and only after re-confirming
+# ownerlessness UNDER the reaper guard — the mirror of the dead-owner re-read.
+reclaim_ownerless_lock() {
+    dir_is_aged "$LOCK_DIR" || return 1
+    acquire_reaper || return 1
+    _recheck_owner=$(read_pid "$OWNER_FILE" 2>/dev/null || true)
+    if [ -z "$_recheck_owner" ] && dir_is_aged "$LOCK_DIR"; then
+        rm -f "$OWNER_FILE"
+        if rmdir "$LOCK_DIR" 2>/dev/null; then
+            echo "gate-mutex: reclaimed ownerless lock aged >${ORPHAN_GRACE_MINUTES}m."
+            release_reaper
+            return 0
+        fi
+    fi
+    release_reaper
     return 1
 }
 
 recover_dead_owner() {
     [ -d "$LOCK_DIR" ] || return 1
     _stale_owner=$(read_pid "$OWNER_FILE" 2>/dev/null || true)
-    [ -n "$_stale_owner" ] || return 1
+    [ -n "$_stale_owner" ] || { reclaim_ownerless_lock; return $?; }
     pid_is_live "$_stale_owner" && return 1
     acquire_reaper || return 1
 

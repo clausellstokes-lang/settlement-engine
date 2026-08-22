@@ -4,6 +4,7 @@ import {
   mkdtempSync,
   readFileSync,
   rmSync,
+  utimesSync,
   writeFileSync,
 } from 'node:fs';
 import { spawn, spawnSync } from 'node:child_process';
@@ -128,6 +129,91 @@ describe('gate-mutex --run atomic ownership', () => {
     expect(result.status).toBe(23);
     expect(result.stdout).toMatch(/acquired atomic lock/i);
     expect(existsSync(f.lock)).toBe(false);
+  });
+
+  // ── THE OWNERLESS WINDOW (ODQ §351.2 / §364 R1) ────────────────────────────────────
+  // A creator killed between `mkdir "$LOCK_DIR"` and its pid write leaves a directory
+  // with no readable owner. Every recovery arm demanded a readable DEAD owner, so that
+  // directory was permanently unreapable: describe_lock reported "an unreadable owner"
+  // forever and every --run caller polled to GAVE UP (exit 3). Age is the only evidence
+  // such a directory can produce, so the reap is grace-guarded — and the fresh arms
+  // below are what keep the guard honest, since a lock inside its (millisecond)
+  // acquisition window must never be stolen.
+  const backdate = (target) => {
+    const old = new Date(Date.now() - 6 * 60 * 60 * 1000);
+    utimesSync(target, old, old);
+  };
+
+  it('reaps an aged ownerless lock left by a creator killed mid-acquisition', () => {
+    const f = fixture();
+    mkdirSync(f.lock);
+    backdate(f.lock);
+
+    const result = run(
+      f.lock,
+      ['--run', '--', 'sh', '-c', 'exit 23'],
+      { GATE_MUTEX_MAX_POLLS: '0', GATE_MUTEX_POLL_SECONDS: '0' },
+    );
+
+    expect(result.status, `${result.stdout}\n${result.stderr}`).toBe(23);
+    expect(result.stdout).toMatch(/acquired atomic lock/i);
+    expect(existsSync(f.lock)).toBe(false);
+  });
+
+  it('never reaps a fresh ownerless lock still inside its acquisition window', () => {
+    const f = fixture();
+    mkdirSync(f.lock);
+
+    const result = run(
+      f.lock,
+      ['--run', '--', 'sh', '-c', 'exit 23'],
+      { GATE_MUTEX_MAX_POLLS: '0', GATE_MUTEX_POLL_SECONDS: '0' },
+    );
+
+    expect(result.status).toBe(3);
+    expect(result.stdout).toMatch(/GAVE UP/i);
+    expect(existsSync(f.lock)).toBe(true);
+    expect(existsSync(join(f.lock, 'pid'))).toBe(false);
+  });
+
+  it('reaps an aged ownerless reaper guard that would otherwise block every recovery', () => {
+    const f = fixture();
+    const reaper = `${f.lock}.reaper`;
+    mkdirSync(f.lock);
+    writeFileSync(join(f.lock, 'pid'), '99999999\n');
+    mkdirSync(reaper);
+    backdate(reaper);
+
+    // Two polls: the first reclaims the guard (acquire_reaper reports failure by
+    // design after a recovery), the second acquires it and reclaims the dead lock.
+    const result = run(
+      f.lock,
+      ['--run', '--', 'sh', '-c', 'exit 23'],
+      { GATE_MUTEX_MAX_POLLS: '2', GATE_MUTEX_POLL_SECONDS: '0' },
+    );
+
+    expect(result.status, `${result.stdout}\n${result.stderr}`).toBe(23);
+    expect(existsSync(f.lock)).toBe(false);
+    expect(existsSync(reaper)).toBe(false);
+  });
+
+  it('never reaps a fresh reaper guard, leaving the dead lock for its own owner', () => {
+    const f = fixture();
+    const reaper = `${f.lock}.reaper`;
+    mkdirSync(f.lock);
+    writeFileSync(join(f.lock, 'pid'), '99999999\n');
+    mkdirSync(reaper);
+
+    const result = run(
+      f.lock,
+      ['--run', '--', 'sh', '-c', 'exit 23'],
+      { GATE_MUTEX_MAX_POLLS: '2', GATE_MUTEX_POLL_SECONDS: '0' },
+    );
+
+    expect(result.status).toBe(3);
+    expect(result.stdout).toMatch(/GAVE UP/i);
+    expect(existsSync(reaper)).toBe(true);
+    expect(readFileSync(join(f.lock, 'pid'), 'utf8').trim()).toBe('99999999');
   });
 
   it('never removes a lock whose ownership changed before cleanup', () => {
