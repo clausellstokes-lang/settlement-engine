@@ -7,7 +7,7 @@ no surface because this leaf performs no arithmetic on quanta at all), §P2 haza
 anchor preflight, §P3b, §P4 registration template, §P5 census law, §P6 mutant hygiene, §P7 STOP set
 and §P8 capsule law bind and are not restated.
 
-- **Status:** DRAFT
+- **Status:** READY
 - **Packet version:** 1
 - **Verified base:** `claude/composite-r4` at `f7ba314505703b96097b8aba568cc80e3ec30023`
   ⚠⚠ **READ THE NEXT SIX LINES BEFORE TRUSTING THAT ROW.** The SHA is MF-T2J's **HOLDING

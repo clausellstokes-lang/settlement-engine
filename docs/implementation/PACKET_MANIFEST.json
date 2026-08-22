@@ -20035,7 +20035,7 @@
     },
     {
       "id": "MF-T2K",
-      "status": "DRAFT",
+      "status": "READY",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T2K.md",
       "verifiedBase": "f7ba314505703b96097b8aba568cc80e3ec30023",
       "changeManifest": [
