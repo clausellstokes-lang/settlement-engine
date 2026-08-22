@@ -107,13 +107,33 @@ function codeOnly(source) {
   return source.replace(/\/\*[\s\S]*?\*\//g, blank).replace(/^[ \t]*\/\/.*$/gm, blank);
 }
 
+/**
+ * THE LIVE SCAN, READ ONCE (HUNT-1 Cure 2, ODQ §357.1(2) / §358.3 / §364.2).
+ * A single failing arm used to perform ~nine full walks of `src/` — thousands of sync
+ * reads — inside one 20s budget, and was killed by that budget twice on the record.
+ * The tree cannot change while one test file runs: the file plants only IN-MEMORY
+ * overlays (it writes nothing), and vitest's isolate:true gives it its own fork
+ * registry, so the memo cannot leak into another file. Lazy, so importing the module
+ * still costs nothing.
+ * @type {ReadonlyArray<{path:string,code:string}>|null}
+ */
+let LIVE = null;
+function liveCorpus() {
+  if (LIVE === null) {
+    // Frozen so the shared read cannot be mutated in place by a caller — the memo's
+    // one new hazard, closed by construction rather than by convention.
+    LIVE = Object.freeze(walk(SRC).map((full) => ({
+      path: relative(REPO, full).split('\\').join('/'),
+      code: codeOnly(readFileSync(full, 'utf8')),
+    })));
+  }
+  return LIVE;
+}
+
 /** Every `src/` module as `{ path, code }`, plus any planted overlay entries. */
 function corpus(overlay = []) {
-  const live = walk(SRC).map((full) => ({
-    path: relative(REPO, full).split('\\').join('/'),
-    code: codeOnly(readFileSync(full, 'utf8')),
-  }));
-  return [...live, ...overlay.map((o) => ({ path: o.path, code: codeOnly(o.code) }))];
+  if (overlay.length === 0) return liveCorpus();
+  return [...liveCorpus(), ...overlay.map((o) => ({ path: o.path, code: codeOnly(o.code) }))];
 }
 
 /** `{ path, id }` for every `export const <ID>` whose identifier the pattern admits. */
