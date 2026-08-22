@@ -13,7 +13,7 @@
  * PUBLISHED DATA and this file checks the two directions that are real:
  *
  *   • THE ACCOUNTING (test 2) — every `.js` under the fabric directory is either ASSIGNED by the
- *     record or on the frozen codex roster. Exact in BOTH directions, so an arrival that claims
+ *     record or on the frozen unassigned-landed roster. Exact in BOTH directions, so an arrival that claims
  *     no stage reds, and a departure cannot go unbanked either.
  *   • THE AGREEMENT (test 3) — every module that is BOTH landed AND assigned has its imports, its
  *     key spellings and its `fabricRng(` fork sites re-parsed from source with `acorn` and refused
@@ -55,13 +55,13 @@ const read = (/** @type {string} */ f) => readFileSync(join(FABRIC, f), 'utf8');
 const parse = (/** @type {string} */ s) => Parser.parse(s, { ecmaVersion: 2024, sourceType: 'module' });
 
 /**
- * ⛔ THE CODEX-SLICE ROSTER — the fabric modules this tree owns that the sealed record never
+ * ⛔ THE UNASSIGNED-LANDED ROSTER — the fabric modules this tree owns that the sealed record never
  * measured, published as data so silence cannot be mistaken for coverage. It is EXACT in both
  * directions and it is deliberately STABLE across the whole port: a later member lands a module
  * the record already assigns, which moves the assigned side and leaves this list alone. Only a
  * brand-new non-sandbox fabric module reds here, and that is exactly the drift §10.14 refuses.
  */
-const CODEX_SLICE_MODULES = Object.freeze([
+const UNASSIGNED_LANDED_MODULES = Object.freeze([
   'boundaryArrangement.js', 'boundaryNoder.js', 'building.js', 'content.js', 'dcel.js',
   'dcelEmbedding.js', 'exactGeometry.js', 'exactIntersectionArea.js', 'fabricRoot.js',
   'foundation.js', 'frontage.js', 'index.js', 'massPart.js', 'massingProjection.js',
@@ -72,9 +72,18 @@ const CODEX_SLICE_MODULES = Object.freeze([
   // D3a design-implementation mint, not a sandbox module, so `nodeOfModule()` rightly resolves it
   // to no node and the record's 49-module lead is untouched. `FOUNDATION_READERS` is unmoved
   // because the leaf imports exactly `foundation.js` and `massPart.js`, neither of which this
-  // roster tracks. ⚠ The constant's NAME reads "codex" and this module is not codex — RAISED for
-  // a later rename or a third roster, never silently absorbed.
+  // roster tracks. ⭐ Renamed CODEX_SLICE_MODULES → UNASSIGNED_LANDED_MODULES at MF-T2L per ODQ
+  // §419.2: the roster holds landed modules the record does not assign — codex-slice files and
+  // D3a mints alike — and now says so.
   'supportSurface.js',
+  // ⭐ MF-T2L, appended in alphabetical position — the second D3a design-implementation mint
+  // this roster absorbs (the act the failure message above orders). THE WHY (packet §1.8):
+  // vegetation is minted from the volume's §10.6 contract, not ported — the sealed fabric holds
+  // zero vegetation modules (measured, packet provenance table) — so `nodeOfModule()` rightly
+  // resolves it to no node and the record's 49-module lead is untouched. FOUNDATION_READERS is
+  // unmoved: the leaf imports foundation.js, massPart.js, supportSurface.js and fabricRng.js,
+  // none of which that roster tracks.
+  'vegetation.js',
 ]);
 
 /**
@@ -202,17 +211,17 @@ describe('§287.8 / §10.14 · the S0-S23 stage manifest is CHECKED against this
     expect(shown.forks[FOUNDATION_NODE]).toBe(1);
   });
 
-  test('every fabric module in this tree is accounted for — assigned by the record or on the frozen codex roster — and each landed foundation module names its real readers', () => {
+  test('every fabric module in this tree is accounted for — assigned by the record or on the frozen unassigned-landed roster — and each landed foundation module names its real readers', () => {
     // ── THE ACCOUNTING, EXACT IN BOTH DIRECTIONS ────────────────────────────────────────────
     const onDisk = files();
     const assigned = onDisk.filter((f) => nodeOfModule(f) !== null);
     const unassigned = onDisk.filter((f) => nodeOfModule(f) === null);
     expect(
       unassigned,
-      'a fabric module belongs to neither the S0-S23 record nor the codex roster. Assign it to a'
-      + ' node in stageManifest.js, or add it to CODEX_SLICE_MODULES here and say why in the'
+      'a fabric module belongs to neither the S0-S23 record nor the unassigned-landed roster. Assign it to a'
+      + ' node in stageManifest.js, or add it to UNASSIGNED_LANDED_MODULES here and say why in the'
       + ' packet — silence is what SPEC 10.14 orders refused',
-    ).toEqual([...CODEX_SLICE_MODULES]);
+    ).toEqual([...UNASSIGNED_LANDED_MODULES]);
     expect(assigned).toEqual(['coordinateAbi.js', 'fabricRng.js', 'solidLegality.js',
       'spatialReceipt.js', 'stageManifest.js']);
     expect(assigned.length + unassigned.length).toBe(onDisk.length);
@@ -295,7 +304,7 @@ describe('§287.8 / §10.14 · the S0-S23 stage manifest is CHECKED against this
     // (i) an arrival that claims no stage — the accounting arm's subject
     expect(nodeOfModule('plantedStage.js')).toBe(null);
     expect(Object.keys({ ...real, 'plantedStage.js': 'export const x = 1;\n' })
-      .filter((f) => nodeOfModule(f) === null).length).toBe(CODEX_SLICE_MODULES.length + 1);
+      .filter((f) => nodeOfModule(f) === null).length).toBe(UNASSIGNED_LANDED_MODULES.length + 1);
 
     // (ii) A FOUNDATION WIRED INTO A STAGE — the §10.15(4) defect, and the one this member's
     //      sweep plant reproduces on disk. The edge appears and it is not in the record.
