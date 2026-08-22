@@ -14884,3 +14884,43 @@ recommended. Implementation, per item:
   inside its window costs a rebuild — if the mint's gate strays, the §353 window
   law means it re-runs INSIDE the window with no landing between, which remains
   safe, only slow).
+
+## §356 — WF-8A PARKED AT THE STAND-DOWN: THE FALSE-RECEIPT CURE RATIFIED; THE HAND-COPY OVERRIDE; THE BANKED-COUNT CORRECTION (2026-08-22 ~11:10)
+
+- **TE-WF8 collected in parked form** (tip cdb906f7 on 5d18b4a0; one commit, 20
+  files, +1677/−44; every gate it could run green with convictions quoted; the
+  three §350 plants each proven including P2's escape — the half that did not
+  exist). **THE HEADLINE: the packet's §0.1 mint rule produced a FALSE RECEIPT,
+  caught by driving it** — 25 obituaries for 3 creeds in one 16-tick village, 22
+  repeats. Two re-entry roads found by execution: a neighbour still carrying the
+  creed, and the settlement's own embedded snapshot reinstalled as dominant patron
+  (measured through the REAL pulse: extinct at tick 4, reinstalled at 5, announced
+  again at 9). 'None there now keep the rite' must be true PAST the tick that says
+  it.
+- **§356.1 R-5 RATIFIED — the mint rule's two added conjuncts stand.** The proof
+  standard is the reason: the cure is proven by an INDEPENDENT cross-check (the
+  minted beats equal, tick-for-tick and creed-for-creed, the set of creeds that
+  permanently vanish, computed from serialized state alone, ×5 fixtures) plus
+  real-pulse reachability (each creed named exactly once across 22 pulses).
+  Vetoing restores a metronome wearing an obituary's name.
+- **§356.2 R-6 RULED — the second hand-copied registry list:** pantheon.test.js A5
+  re-derives six figures from its own hand-copy; the packet's battery omitted the
+  file and the rebase caught the miss (raised, not absorbed — correctly). The
+  handwritten-count override RISES 17 → 18 on the same class precedent as §350's
+  12 → 17, AND the structural repair (A5 importing the ONE list — the
+  single-source law applied to a test) is CHARTERED onto the housekeeping queue,
+  never taken inside a faith member. ⚠ The A5 cure is EDITED, NOT YET VERIFIED
+  (the stand-down interrupted it): its figures are PLAUSIBLE by derivation; its
+  verification is the lane's FIRST act after its GO, before anything else.
+- **§356.3 BRIEF CORRECTION, binding on future dispatches:** the frozen banked set
+  is ELEVEN (warCost ×3, warRuling, clampPrimitive, enforcement-claims,
+  voiceMechanics ×4, metronomeCooldownLint) — the chair's recent briefs quoted the
+  sweep-visible six. Lanes discovered the full set themselves by baseline lookup,
+  which is the law working, but briefs now say eleven.
+- **§356.4** Substrate findings accepted: the governed FAITH corpus already
+  existed and nothing read it — the pool comes from the annex, clerk-never-writer;
+  the §85.4a chooser constant lands on the IN-1c-a precedent; the §85.4b debt row
+  is NOT incurred (proven by the walker's direct imports). The FAITH shrink-back
+  obligation re-affirmed (§350.2). Sequence unchanged: T2E's quiet-track gate →
+  CAS → WF-8's GO (rebase onto T2E's tip; verify A5 FIRST; sweep; battery;
+  terminal) → the mint's window.

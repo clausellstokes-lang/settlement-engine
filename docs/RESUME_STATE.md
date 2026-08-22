@@ -74,6 +74,12 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~11:10 ET: WF-8A parked+collected (§356) — the mint rule was a FALSE
+# RECEIPT (25 beats/3 creeds; two re-entry roads found by real-pulse
+# execution; cure proven by independent cross-check ×5) → R-5 RATIFIED.
+# R-6: second hand-copy found (pantheon A5) → override 17→18 + structural
+# repair queued; ⚠ A5 cure EDITED-NOT-VERIFIED (its GO's first act). Briefs
+# corrected: the banked set is ELEVEN, not six. Tip cdb906f7 parked.
 # ⭐ ~10:20 ET: LOAD RULING — the stray windows ran at 10x oversubscription
 # (46/76/82 on 8 cores; chair-ps'd: T2E's confirming ratchet owns 7 workers,
 # earlier stacked with WF-8's sweep). ORDERS: T2E's final gate ONLY on a
