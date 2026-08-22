@@ -714,10 +714,14 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       taggedRows: taggedAddresses.length,
     // ⚠ THE INVENTORY TRIPLE IS UNCHANGED ACROSS THE SCHEMA-9 MINT, AND THAT IS
     // THE CLAIM RATHER THAN AN ACCIDENT: M8/M9 BANKS rows, it does not clear them,
-    // so a bank that grew by 16 reads must leave 1998/1412/387 exactly where it
-    // was. A triple that moves in the same commit as a bank growth means the
-    // filter stopped banking and started clearing.
-    }).toEqual({ reads: 1998, identities: 1412, files: 387, bankedReads: 60, taggedRows: 40 });
+    // so a bank that grew by 16 reads must leave the mint-era 1998/1412/387 exactly
+    // where it was. A triple that moves in the same commit as a bank growth means
+    // the filter stopped banking and started clearing.
+    // ⭐ MOVED 2026-08-22 BY RR-1 (§353.3/§369): the two dead institution strain-list
+    // read arms left servicesSlice at their only site — TWO untagged rows of one
+    // file, hence −2 reads / −2 identities on a governed shrink re-freeze; files and
+    // the tagged/banked figures cannot move (both rows were untagged).
+    }).toEqual({ reads: 1996, identities: 1410, files: 387, bankedReads: 60, taggedRows: 40 });
     expect(Object.fromEntries(EXPLAINED_WRITER_EXEMPTIONS.map(({ identity }) => {
       const rows = taggedAddresses.filter((row) => row.identity === identity);
       return [identity, {
