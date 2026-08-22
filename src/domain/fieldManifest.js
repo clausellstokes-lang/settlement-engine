@@ -412,11 +412,27 @@ export const ENGINE_FIELD_REGISTRY = Object.freeze([
 // Fields deleted because nothing read them. The walking test asserts the
 // file no longer mentions them — a dead field cannot quietly return without
 // arriving through the registry above (i.e., with a reader).
+// It also holds the MIRROR class: dead READ arms removed from a consumer — a
+// fallback whose key no writer produced — keyed on the read expression itself.
 export const REMOVED_DEAD_FIELDS = Object.freeze([
   {
     field: 'hasRegionalSignal',
     file: 'src/domain/region/deriveRegionalState.js',
     removed: 'Wave 8 — write-only boolean on deriveLocalDelta; every consumer thresholds '
       + 'changes[].magnitude itself.',
+  },
+  {
+    field: 'inst?.pressures',
+    file: 'src/pdf/lib/viewModelBodySlices.js',
+    removed: '§353.3 — dead READ arm in servicesSlice: no institution producer, admission '
+      + 'schema row or edit path has ever written a strain-list key on an institution '
+      + 'record, so this arm never selected. The bare output property survives.',
+  },
+  {
+    field: 'inst?.stresses',
+    file: 'src/pdf/lib/viewModelBodySlices.js',
+    removed: '§353.3 — dead READ arm in servicesSlice, the second fallback of the same '
+      + 'chain: every committed write of this key sits on AI-context, narrative-context '
+      + 'or settlement records, never on an institution.',
   },
 ]);

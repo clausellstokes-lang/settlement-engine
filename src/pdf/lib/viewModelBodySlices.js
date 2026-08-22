@@ -218,7 +218,9 @@ export function servicesSlice(active) {
     requirements:   inst?.requirements || inst?.dependencies || [],
     products:       inst?.products || inst?.outputs || [],
     customers:      inst?.customers || inst?.clientele || [],
-    pressures:      inst?.pressures || inst?.stresses || [],
+    // §353.3 — dead read arms removed: no institution producer, admission-schema row or edit
+    // path has ever written a strain-list key here; the section renders nothing for an empty list.
+    pressures:      [],
     plotHooks:      inst?.plotHooks || [],
     tags:           inst?.tags || [],
   }));
