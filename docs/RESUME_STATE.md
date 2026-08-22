@@ -74,6 +74,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~20:50 ET: RR-2 ruled (§374) — one-line cure + shift bill + exhibit act
+# owed at landing; agreement pin = ONE title; 11/5 correction credited.
+# TC-T2G dispatched (port pipeline). Cap: WF-8 · DOSSIER · TE-T2F · TC-T2G.
 # ⭐ ~20:25 ET: WF-8 at the door (tip 47ea9c9b on a09138d7; A5 debt CLOSED
 # CONFIRMED; 4 self-reds cured vs base-proof; R-7 trio handled — (c) cured
 # IN CODE via the snapshot accessor when --write + P7.13 both blocked). GO

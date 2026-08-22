@@ -15416,3 +15416,25 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   perfect specimen — the depth existed, authored, for months; the surface never
   showed it; no instrument could see it; a reading lane found it in an afternoon.
   The cheapest large experience win in the program: one line, plus proofs.
+
+## §374 — TC-RR2 RULED AS COMPILED; TC-T2G DISPATCHED TO KEEP THE PORT PIPELINE FULL (2026-08-22 ~20:50)
+
+- **draft-RR2 collected and RULED as compiled:** the one-line desc-first cure with
+  the blurb strike under the genesis standard (re-proven at the pin — the one
+  historical hit wrote FACTION blurbs); the shift bill three-part with the exhibit
+  plan (the chair POSTS the base/cured render pair BEFORE the exposing CAS — an
+  owed chair act at the landing); the agreement-pin instrument folded as ONE static
+  title (banked set stays ELEVEN; zero new files); the 11/5 path-census correction
+  credited — the compile re-verified rather than inherited the prototype's
+  hardcoded 9/7. Sibling dispositions ratified: the parityContract caption cure
+  in-member + the J5 exemption row (vetoable, accepted) · INV-EVS chartered
+  diagnosis-only (the DM's-pen-vs-reconciled-sentence fork goes to the owner
+  after) · safetyDesc/economicDragDesc to the §369.2 docket with guardAssessment
+  named as the if-add shape · H8 (the userEdits doc lie) to the housekeeping
+  bundle. All six judgments ratified. Sequencing stands: OSR9-C2 → RR-1 → RR-2,
+  DRAFT/BLOCKED until RR-1 flips; a surprise desc-on-institutions row at the
+  shrink write is STOP-RAISE.
+- **§374.1 SCHEDULER:** TC-T2G dispatched on the freed seat (member G's compile —
+  the port pipeline stays full while F's executor builds). Cap held: WF-8
+  (terminal) · TC-DOSSIER · TE-T2F · TC-T2G. Owner-register additions from RR-2's
+  raises: the scalar-fallback product call · the viability fork (post-INV-EVS).
