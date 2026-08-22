@@ -210,6 +210,54 @@ function narrationRows(year, index, id) {
   ].map(([measure, value]) => row(id, 'sim_narration_tempo', 'year', index, { measure }, value));
 }
 
+/**
+ * ⭐ THE §180.3a ADDRESS-CHAIN ROW (ODQ §359.9). SK-0's `measureAddressChain` already
+ * publishes both the counts and the rates, and the rates are ALREADY integer milli —
+ * so this transform copies and never computes. Compare `narrationRows` directly above,
+ * which multiplies a float rate by 1000 because its instrument publishes floats: doing
+ * the same arithmetic here would be RESAMPLING a value the receipt already decided,
+ * and the charter forbids that in the same sentence that licenses emitting.
+ *
+ * ⛔ A YEAR WITHOUT THE INSTRUMENT EMITS NOTHING, NOT ZEROES. `measureAddressChain`'s
+ * header states the law for its own field: "A receipt without this key is an instrument
+ * gap, not a zero." A v4-era receipt, or any year observed before SK-0 landed, would
+ * otherwise publish a floor of zeroes indistinguishable from a world whose narration
+ * carries no addresses at all — and a curve band frozen over invented zeroes is worse
+ * than an absent curve, because a later reader cannot tell it from a measurement.
+ */
+export const SUPPORTED_ADDRESS_CHAIN_SCHEMA_VERSIONS = Object.freeze([1]);
+
+function addressChainRows(year, index, id) {
+  const chain = year?.addressChain;
+  // Absence is the instrument gap. `obj()` is deliberately NOT used here: it would
+  // turn a missing block into `{}` and every measure below into a manufactured 0.
+  if (!chain || typeof chain !== 'object' || Array.isArray(chain)) return [];
+  const version = num(chain.schemaVersion);
+  if (!SUPPORTED_ADDRESS_CHAIN_SCHEMA_VERSIONS.includes(version)) {
+    throw new Error(
+      `unsupported addressChain schemaVersion ${version}; supported: ${SUPPORTED_ADDRESS_CHAIN_SCHEMA_VERSIONS.join(', ')}`
+      + ' — a later instrument may keep these field names and mean something else by them',
+    );
+  }
+  const depth = obj(chain.depthHistogram);
+  return [
+    ['news_rows_measured', chain.rows],
+    ['subject_addressed', chain.subjectAddressed],
+    ['typed_action', chain.typedAction],
+    ['affected_settlements', chain.affectedSettlements],
+    ['reason', chain.reason],
+    ['fully_addressed', chain.fullyAddressed],
+    // Verbatim: the receipt's own milli fields, copied, never re-divided.
+    ['subject_addressed_rate_milli', chain.subjectAddressedRateMilli],
+    ['typed_action_rate_milli', chain.typedActionRateMilli],
+    ['affected_settlements_rate_milli', chain.affectedSettlementsRateMilli],
+    ['reason_rate_milli', chain.reasonRateMilli],
+    ['fully_addressed_rate_milli', chain.fullyAddressedRateMilli],
+    // The containment ladder, folded into `measure` rather than a second dimension.
+    ...[0, 1, 2, 3, 4].map((rung) => [`depth_${rung}`, depth[rung]]),
+  ].map(([measure, value]) => row(id, 'sim_address_chain', 'year', index, { measure }, value));
+}
+
 function warRows(receipt, id) {
   const observation = obj(receipt.warConvergence);
   const census = obj(receipt.warConvergenceCensus);
@@ -282,6 +330,7 @@ export function emitRows(receipt, identity) {
       ...tempoRows(year, index, id),
       ...successionRows(year, index, id),
       ...narrationRows(year, index, id),
+      ...addressChainRows(year, index, id),
     );
   });
   arr(obj(receipt).stressorCounts).forEach((count, index) => {

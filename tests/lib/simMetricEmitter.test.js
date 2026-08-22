@@ -21,6 +21,7 @@ import {
   emit,
   emitRows,
   emittedDimViolations,
+  SUPPORTED_ADDRESS_CHAIN_SCHEMA_VERSIONS,
   SUPPORTED_SOAK_RECEIPT_SCHEMA_VERSIONS,
 } from '../../scripts/telemetry/simMetricEmitter.mjs';
 import { simMetricsByEpoch } from '../../scripts/telemetry/simMetricRegistry.mjs';
@@ -69,6 +70,13 @@ describe('the simulation metric emitter', () => {
     expect(FIXTURE.withFailures.failures.length).toBeGreaterThanOrEqual(1);
     expect(FIXTURE.clean.behavioral.yearly
       .every((year) => year.phraseRepetition.observations > 0)).toBe(true);
+    // WEB-4: the address-chain block is present and NON-DEGENERATE in every clean year,
+    // so the totality assertion below cannot be satisfied by a row of zeroes — and it is
+    // ABSENT from every withFailures year, so the instrument-gap arm has a live subject.
+    expect(FIXTURE.clean.behavioral.yearly
+      .every((year) => year.addressChain.rows > 0 && year.addressChain.fullyAddressed > 0)).toBe(true);
+    expect(FIXTURE.withFailures.behavioral.yearly
+      .some((year) => year.addressChain !== undefined)).toBe(false);
     // ── and only then, the transform ────────────────────────────────────────
     const rows = emitRows(FIXTURE.clean, IDENTITY);
     const failed = emitRows(FIXTURE.withFailures, IDENTITY);
@@ -87,6 +95,94 @@ describe('the simulation metric emitter', () => {
     expect([...years].sort()).toEqual([0, 1, 2]);
     expect(rows.filter((entry) => entry.epoch_kind === 'run')
       .every((entry) => entry.epoch_index === 0)).toBe(true);
+  });
+
+  it('⭐ emits the address-chain row VERBATIM from the receipt — the milli fields are copied, never re-derived', () => {
+    const chain = FIXTURE.clean.behavioral.yearly[0].addressChain;
+    // The fixture's own arity FIRST, as this file's header requires: a block of zeroes
+    // would let every equality below hold while measuring nothing.
+    expect(chain.rows).toBeGreaterThan(0);
+    expect(chain.fullyAddressedRateMilli).toBeGreaterThan(0);
+    expect(chain.fullyAddressedRateMilli).toBeLessThan(1000);
+    const rows = emitRows(FIXTURE.clean, IDENTITY)
+      .filter((entry) => entry.metric === 'sim_address_chain' && entry.epoch_index === 0);
+    const byMeasure = Object.fromEntries(rows.map((entry) => [entry.dims.measure, entry.value]));
+    // ⛔ THE VALUE-IDENTITY ARM. Each figure is compared to the RECEIPT'S OWN field, not
+    // to a literal and not to a recomputation: a transform that divided a count by
+    // `rows` itself would be resampling an observation the instrument already made,
+    // and comparing against a recomputation here would agree with that mistake.
+    expect(byMeasure.news_rows_measured).toBe(chain.rows);
+    expect(byMeasure.subject_addressed).toBe(chain.subjectAddressed);
+    expect(byMeasure.typed_action).toBe(chain.typedAction);
+    expect(byMeasure.affected_settlements).toBe(chain.affectedSettlements);
+    expect(byMeasure.reason).toBe(chain.reason);
+    expect(byMeasure.fully_addressed).toBe(chain.fullyAddressed);
+    expect(byMeasure.subject_addressed_rate_milli).toBe(chain.subjectAddressedRateMilli);
+    expect(byMeasure.typed_action_rate_milli).toBe(chain.typedActionRateMilli);
+    expect(byMeasure.affected_settlements_rate_milli).toBe(chain.affectedSettlementsRateMilli);
+    expect(byMeasure.reason_rate_milli).toBe(chain.reasonRateMilli);
+    expect(byMeasure.fully_addressed_rate_milli).toBe(chain.fullyAddressedRateMilli);
+    // The containment ladder rides `measure`, so no second dimension is minted.
+    for (const rung of [0, 1, 2, 3, 4]) {
+      expect(byMeasure[`depth_${rung}`]).toBe(chain.depthHistogram[String(rung)]);
+    }
+    expect([...new Set(rows.flatMap((entry) => Object.keys(entry.dims)))]).toEqual(['measure']);
+    // Every year is present, so the band family is a CURVE and not one point.
+    const years = emitRows(FIXTURE.clean, IDENTITY)
+      .filter((entry) => entry.metric === 'sim_address_chain')
+      .map((entry) => entry.epoch_index);
+    expect([...new Set(years)].sort()).toEqual([0, 1, 2]);
+
+    // ⛔⛔ THE ARM THAT ACTUALLY CONVICTS RESAMPLING, AND THE REASON IT HAD TO BE
+    // BUILT THIS WAY. The fixture's rates are internally consistent — each one IS
+    // round(count/rows*1000) — so a transform that divided the counts itself would
+    // produce byte-identical output and every equality above would still pass. A
+    // consistent fixture cannot tell copying from recomputing. This probe therefore
+    // hands the transform a SYNTHETIC block whose rates disagree with its counts and
+    // asserts the RECEIPT wins: the emitter is a transform, not an auditor, and the
+    // instrument that made the observation is the only thing entitled to decide what
+    // its own rate means. A resampling emitter reports 500 here; this one reports 999.
+    const contradictory = structuredClone(FIXTURE.clean);
+    contradictory.behavioral.yearly[0].addressChain = {
+      ...contradictory.behavioral.yearly[0].addressChain,
+      rows: 10,
+      fullyAddressed: 5,
+      fullyAddressedRateMilli: 999,
+      subjectAddressed: 5,
+      subjectAddressedRateMilli: 1,
+    };
+    const probed = Object.fromEntries(emitRows(contradictory, IDENTITY)
+      .filter((entry) => entry.metric === 'sim_address_chain' && entry.epoch_index === 0)
+      .map((entry) => [entry.dims.measure, entry.value]));
+    expect(probed.fully_addressed_rate_milli).toBe(999);
+    expect(probed.subject_addressed_rate_milli).toBe(1);
+    expect(probed.news_rows_measured).toBe(10);
+    // …and the recomputation the mutant would perform is a DIFFERENT number, which is
+    // what makes the two assertions above a discriminating test rather than a tautology.
+    expect(Math.round((5 / 10) * 1000)).not.toBe(999);
+  });
+
+  it('⛔ treats a year without the address-chain instrument as a GAP, not a floor of zeroes', () => {
+    const stripped = structuredClone(FIXTURE.clean);
+    for (const year of stripped.behavioral.yearly) delete year.addressChain;
+    const rows = emitRows(stripped, IDENTITY);
+    // Silence, and no throw: a v4-era receipt observed before the instrument landed
+    // must not publish zeroes a later reader cannot tell from a measurement.
+    expect(rows.filter((entry) => entry.metric === 'sim_address_chain')).toEqual([]);
+    // …and the rest of the transform is untouched by the absence, which is what makes
+    // this a gap in ONE instrument rather than a broken receipt.
+    expect(rows.filter((entry) => entry.metric === 'sim_narration_tempo').length).toBeGreaterThan(0);
+    // CONTROL: the same walk over the unstripped receipt DOES emit, so the arm above
+    // is measuring the strip and not an emitter that never emits.
+    expect(emitRows(FIXTURE.clean, IDENTITY)
+      .filter((entry) => entry.metric === 'sim_address_chain').length).toBeGreaterThan(0);
+    // ⛔ AND AN UNRECOGNISED INSTRUMENT SCHEMA IS REFUSED RATHER THAN PARSED. A later
+    // measureAddressChain may keep these field names and mean something else by them;
+    // best-effort would publish that silently under this row's name.
+    expect([...SUPPORTED_ADDRESS_CHAIN_SCHEMA_VERSIONS]).toEqual([1]);
+    const ahead = structuredClone(FIXTURE.clean);
+    ahead.behavioral.yearly[0].addressChain.schemaVersion = 2;
+    expect(() => emitRows(ahead, IDENTITY)).toThrow(/unsupported addressChain schemaVersion 2/);
   });
 
   it('emits no PII dimension and no dimension the registry did not declare', () => {

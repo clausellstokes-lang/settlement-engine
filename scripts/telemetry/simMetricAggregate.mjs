@@ -104,6 +104,12 @@ export function aggregate(rows) {
     // ⭐ The §151.3 band rider's EXPERIENCE-facing family: how much news the world
     // actually authored per year, and how repetitive it was.
     narrationTempo: series(groups.get('sim_narration_tempo') || [], 'measure'),
+    // ⭐ The §180.3a companion: how ADDRESSED that news was, per year. The rate
+    // series are integer milli end to end — the receipt decided them, the emitter
+    // copied them, and this layer folds them without touching the arithmetic.
+    // An empty object is the honest reading of a receipt whose years carry no
+    // address-chain instrument; it is never a series of zeroes.
+    addressChain: series(groups.get('sim_address_chain') || [], 'measure'),
     stressorRhythm: series(groups.get('sim_stressor_rhythm') || [], 'measure').active_stressors || [],
     succession: series(groups.get('sim_succession') || [], 'measure'),
     warCadence: {

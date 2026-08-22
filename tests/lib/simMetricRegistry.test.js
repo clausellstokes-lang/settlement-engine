@@ -19,6 +19,7 @@ import {
   EPOCH_BY_ARITY,
   RECEIPT_FIELD_ARITY,
   registryDefects,
+  simMetric,
 } from '../../scripts/telemetry/simMetricRegistry.mjs';
 
 /** A well-formed row to mutate into each control. */
@@ -27,7 +28,10 @@ const withRow = (patch) => [{ ...sound, ...patch }];
 
 describe('the simulation metric registry', () => {
   it('spells every name with the ONE wire contract imported from analyticsEvents.js', () => {
-    expect(SIM_METRIC_NAMES.length).toBe(12);
+    // ⚠ DECLARED MOVE 12 → 13 (WEB-4, ODQ §359.9): the sim_address_chain row. The
+    // figure is the arm the file header's prose has to agree with, and the header
+    // said "Eleven" against twelve rows until this member corrected it.
+    expect(SIM_METRIC_NAMES.length).toBe(13);
     expect(SIM_METRIC_NAMES.filter((name) => !EVENT_NAME_RE.test(name))).toEqual([]);
     expect(SIM_METRICS.filter((row) => row.class !== SIM_EVENT_CLASS)).toEqual([]);
     expect(registryDefects()).toEqual([]);
@@ -67,6 +71,21 @@ describe('the simulation metric registry', () => {
         expect(EPOCH_BY_ARITY[RECEIPT_FIELD_ARITY[field]]).toBe(row.epoch);
       }
     }
+    // ⭐ WEB-4's MEASURED SHAPE, PINNED RATHER THAN DESCRIBED. `addressChain` rides
+    // INSIDE each yearly observation, so `sim_address_chain` declares the year-series
+    // `behavioral.yearly` and RECEIPT_FIELD_ARITY owes it NO new entry. The compile
+    // allowed for the other branch — addressChain as its own receipt key, which would
+    // have owed one — and the measurement refutes it. If a later member ever hoists
+    // the block to the receipt root this pin reds, which is the point of writing the
+    // reading down as an assertion.
+    expect(simMetric('sim_address_chain').source).toEqual(['behavioral.yearly']);
+    expect(RECEIPT_FIELD_ARITY['behavioral.yearly']).toBe('year-series');
+    expect(RECEIPT_FIELD_ARITY.addressChain).toBeUndefined();
+    // CONTROL C — the row minted WITHOUT a matching arity entry, which is the
+    // conviction the registry's own header predicted for exactly this row.
+    expect(registryDefects([{ ...simMetric('sim_address_chain'), source: ['addressChain'] }])).toEqual([
+      'sim_address_chain: source addressChain is not a measured receipt field',
+    ]);
     // CONTROL A — a row claiming a per-year epoch over a run-scalar field.
     expect(registryDefects(withRow({ epoch: 'year' }))).toContain(
       'sim_run_summary: source passed is run-scalar (epoch run) but the row declares year',

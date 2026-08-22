@@ -71,6 +71,12 @@ describe('the simulation metric read layer', () => {
     expect(report.warCadence.census.countedWars).toBe(4);
     expect(report.narrationTempo.news_rows_observed).toEqual([40, 50, 60]);
     expect(report.narrationTempo.family_repeat_rate_milli).toEqual([75, 80, 83]);
+    // ⭐ WEB-4's §180.3a family, folded the same way — and the rate series arrives as
+    // INTEGERS end to end, which is the whole reason the instrument publishes milli.
+    expect(report.addressChain.news_rows_measured).toEqual([40, 50, 60]);
+    expect(report.addressChain.fully_addressed_rate_milli).toEqual([700, 720, 783]);
+    expect(report.addressChain.depth_4).toEqual([3, 5, 7]);
+    expect(Object.values(report.addressChain).flat().every(Number.isInteger)).toBe(true);
     expect(report.findings).toEqual({});
   });
 

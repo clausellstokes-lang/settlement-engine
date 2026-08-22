@@ -1,5 +1,5 @@
 {
-  "note": "AUTHORED fixture (never captured from a run: nothing soaks before tm+sk lands). Its own arity is asserted BEFORE any transform output, because a fixture that cannot execute its own defect produces a green, meaningless pin. Its phraseRepetition block carries non-zero observations in every year, so the news-cadence rows the §151.3 band rider added cannot pass vacuously.",
+  "note": "AUTHORED fixture (never captured from a run: nothing soaks before tm+sk lands). Its own arity is asserted BEFORE any transform output, because a fixture that cannot execute its own defect produces a green, meaningless pin. Its phraseRepetition block carries non-zero observations in every year, so the news-cadence rows the §151.3 band rider added cannot pass vacuously. Its addressChain block is present in every CLEAN year and absent from every withFailures year, so both halves of the §180.3a law are live: the measured half and the instrument-gap half. Every count, rate and histogram bucket in it was computed by measureAddressChain arithmetic and checked against it — the depth histogram sums to rows, depth>=1 equals subjectAddressed, and each rate is round(count/rows*1000) — so the verbatim-value arm compares against figures the instrument itself would have produced.",
   "clean": {
     "schemaVersion": 5,
     "kind": "whole_world_soak",
@@ -258,6 +258,27 @@
             "worstWindow": null,
             "byWindow": []
           },
+          "addressChain": {
+            "schemaVersion": 1,
+            "rows": 40,
+            "subjectAddressed": 36,
+            "typedAction": 40,
+            "affectedSettlements": 38,
+            "reason": 30,
+            "fullyAddressed": 28,
+            "depthHistogram": {
+              "0": 4,
+              "1": 10,
+              "2": 14,
+              "3": 9,
+              "4": 3
+            },
+            "subjectAddressedRateMilli": 900,
+            "typedActionRateMilli": 1000,
+            "affectedSettlementsRateMilli": 950,
+            "reasonRateMilli": 750,
+            "fullyAddressedRateMilli": 700
+          },
           "beliefDivergence": {
             "observed": false
           }
@@ -375,6 +396,27 @@
             "worstWindow": null,
             "byWindow": []
           },
+          "addressChain": {
+            "schemaVersion": 1,
+            "rows": 50,
+            "subjectAddressed": 46,
+            "typedAction": 50,
+            "affectedSettlements": 47,
+            "reason": 39,
+            "fullyAddressed": 36,
+            "depthHistogram": {
+              "0": 4,
+              "1": 12,
+              "2": 18,
+              "3": 11,
+              "4": 5
+            },
+            "subjectAddressedRateMilli": 920,
+            "typedActionRateMilli": 1000,
+            "affectedSettlementsRateMilli": 940,
+            "reasonRateMilli": 780,
+            "fullyAddressedRateMilli": 720
+          },
           "beliefDivergence": {
             "observed": false
           }
@@ -491,6 +533,27 @@
             "untrackedFamilies": [],
             "worstWindow": null,
             "byWindow": []
+          },
+          "addressChain": {
+            "schemaVersion": 1,
+            "rows": 60,
+            "subjectAddressed": 57,
+            "typedAction": 60,
+            "affectedSettlements": 58,
+            "reason": 50,
+            "fullyAddressed": 47,
+            "depthHistogram": {
+              "0": 3,
+              "1": 14,
+              "2": 21,
+              "3": 15,
+              "4": 7
+            },
+            "subjectAddressedRateMilli": 950,
+            "typedActionRateMilli": 1000,
+            "affectedSettlementsRateMilli": 967,
+            "reasonRateMilli": 833,
+            "fullyAddressedRateMilli": 783
           },
           "beliefDivergence": {
             "observed": false

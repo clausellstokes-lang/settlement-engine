@@ -5301,7 +5301,41 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   the two blocks directly above, so the after-figure re-derives 20,720 → 20,730. Carrying the
     //   authored tuple would have silently reverted BOTH landed re-records while every WEB-1 proof
     //   stayed green — the arm is one equality and cannot say whose delta vanished.
-    files: 2500, parked: 365, credited: 2135, titles: 20730, suiteTitles: 5787,
+    // ── RE-RECORDED 2026-08-22 BY WEB-4 (THE sim_address_chain REGISTRY ROW) ───────────
+    // 2,500/365/2,135/20,730/5,787 → 2,500/365/2,135/20,732/5,787: 20,730 → 20,732 on `titles`
+    // ALONE. Every other key is UNCHANGED: the member mints no test FILE and opens no
+    // `describe`, so `files`, `parked`, `credited` and `suiteTitles` do not move, and those
+    // four are asserted BEFORE `titles` — their passing is the receipt that the file-level
+    // prediction was right.
+    //   tests/lib/simMetricEmitter.test.js ......... +2 titles (the verbatim-value arm and
+    //                                                the instrument-gap arm, both straight-line
+    //                                                `it()` calls with string-literal titles
+    //                                                inside the existing suite)
+    // The member's other five touched test files gain ASSERTIONS inside existing arms and no
+    // title at all: simMetricRegistry (the 12→13 figure, the measured-source pin and its
+    // control), simMetricAggregate (the folded series), curveBandFreeze (the band-family
+    // membership), engineTelemetryWall (the 12→13 figure). A census cannot see an assertion,
+    // which is exactly why the +2 was attributed rather than counted.
+    // `censusAuthorization`: ODQ §359.9 (the ruling, "GO as queued") and J-TE28-3 / §182.3
+    // (the four priced obligations this member discharges), under the website train's charter.
+    // ⛔ ATTRIBUTED BY ISOLATION, NOT BY ARITHMETIC, AT THE AUTHORING BASE 19b799ce. Reverting
+    //   THAT ONE FILE to the base with the whole rest of the member applied convicted the base
+    //   tuple GREEN by equality — which in a sequenced census executes all five arms, and is
+    //   separately the proof that nothing else in the member reaches this census. The after
+    //   figure was read from the member's own interior red, "expected 20721 to be 20719", which
+    //   arrived AT `titles` and not at `files` — the shape a sibling landing mid-edit would NOT
+    //   have.
+    // ⭐⭐ THE CARRY LAW, EXECUTED AT THE LANDING SLOT. This member was authored at base 19b799ce
+    //   (tuple 2,497/364/2,133/20,719/5,785, after-figure 2,497/364/2,133/20,721/5,785) and rebased
+    //   onto 4060f690 (WEB-1, the 27th landing). The DELTA `+0/+0/+0/+2/+0` is what crossed; the
+    //   tuple was RE-DERIVED at this base by execution, never carried. ⛔ THE BASE HAD MOVED UNDER
+    //   IT: H8B (+4 titles), MF-T2H (+2 files/+2 credited/+6 titles/+2 suite titles) and WEB-1
+    //   (+1 file/+1 parked/+1 title) re-recorded the three blocks directly above, so the
+    //   after-figure re-derives 20,721 → 20,732. Carrying the authored tuple would have silently
+    //   reverted all three landed re-records while every WEB-4 proof stayed green — the arm is
+    //   one equality and cannot say whose delta vanished. Negative control at the slot: the slot's
+    //   own tuple put back reds at `titles` by exactly this delta ("expected 20732 to be 20730").
+    files: 2500, parked: 365, credited: 2135, titles: 20732, suiteTitles: 5787,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

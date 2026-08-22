@@ -2,10 +2,17 @@
  * simMetricRegistry.mjs — the CLOSED simulation-metric vocabulary (ODQ §117a, §149.2).
  *
  * WHAT
- *   Eleven typed rows naming every figure the diagnostic soak publishes as a
+ *   Thirteen typed rows naming every figure the diagnostic soak publishes as a
  *   SIMULATION-class metric. Each row carries the exact receipt field it is read
  *   from, so the emitter transforms a soak receipt and never invents, resamples,
  *   or re-derives an observation.
+ *
+ *   ⚠ THE COUNT IN THIS SENTENCE IS LOAD-BEARING AND IT HAS BEEN WRONG. It read
+ *   "Eleven" while the frozen array held TWELVE rows, from the §151.3 rider's
+ *   landing until WEB-4's. A header that miscounts its own array is the §320 class
+ *   one level down: nothing reds, and every later reader inherits the error. The
+ *   arm that CANNOT drift is `SIM_METRIC_NAMES.length` in
+ *   tests/lib/simMetricRegistry.test.js — this prose exists to agree with it.
  *
  * WHY ITS OWN REGISTRY, AND NOT `src/lib/analyticsEvents.js` (ODQ §149.2, chair)
  *   `EVENT_CLASS` there is DERIVED 1:1 from `EVENTS`, and `EVENTS` is shipped to
@@ -96,7 +103,7 @@ export const EPOCH_BY_ARITY = Object.freeze({
 });
 
 /**
- * The eleven. `dims` are the typed dimension keys each emitted row carries beyond
+ * The thirteen. `dims` are the typed dimension keys each emitted row carries beyond
  * the run identity; `unit` names what `value` counts.
  */
 export const SIM_METRICS = Object.freeze([
@@ -183,16 +190,58 @@ export const SIM_METRICS = Object.freeze([
    * Wizard News row of the year through `measurePhraseRepetition`, so this row is a
    * transform of an observation that exists, not a new observation.
    *
-   * ⛔ ADDRESS-CHAIN RATES ARE NOT ADDED, AND THE PRICE IS NAMED INSTEAD. No receipt
-   * field measures address completeness; supplying one means editing
+   * ⛔ ADDRESS-CHAIN RATES WERE NOT ADDED HERE, AND THE PRICE WAS NAMED INSTEAD. At
+   * §151.3 no receipt field measured address completeness; supplying one meant editing
    * `scripts/audit/behavioral-observation.mjs`, which is inside
    * `REALM_SCALE_SOURCE_PATHS` and would move the certification source fingerprint,
    * and it changes what the behavioral observation MEANS. Minting a row with no
    * source would red this registry's own arity arm, which is the correct outcome —
-   * so the gap is reported to the chair rather than papered over.
+   * so the gap was reported to the chair rather than papered over.
+   *
+   * ⭐ THAT GAP IS CLOSED (ODQ §180.3a → SK-0 → WEB-4). The chair placed the
+   * instrument on SK-0, the member that ALREADY moved the fingerprint for the
+   * soak-script extension, so both changes rode ONE declared move rather than two:
+   * `measureAddressChain` now lives in behavioral-observation.mjs and every yearly
+   * observation carries an `addressChain` block. The row below is therefore a pure
+   * TRANSFORM of an observation that exists — see `sim_address_chain` — and adding
+   * it costs zero motion under `scripts/audit`. Paying the fingerprint price a
+   * second time to re-reach that directory would move the certification aggregate
+   * for nothing, so nothing here reaches it.
    */
   Object.freeze({
     name: 'sim_narration_tempo',
+    class: SIM_EVENT_CLASS,
+    dims: Object.freeze(['measure']),
+    unit: 'news_rows',
+    epoch: 'year',
+    source: Object.freeze(['behavioral.yearly']),
+  }),
+  /**
+   * ⭐ THE §180.3a ADDRESS-CHAIN ROW (ODQ §359.9; J-TE28-3's fourth obligation).
+   * The NEWS ADDRESS LAW's four mandatory parts, measured per year over the SAME
+   * uncapped freshly-authored Wizard News rows `sim_narration_tempo` reads — so the
+   * band set watches whether the world's narration is ADDRESSED, not only how much
+   * of it there is.
+   *
+   * ⛔ THE SOURCE IS `behavioral.yearly`, AND THAT IS A MEASURED READING RATHER THAN
+   * A PREDICTED ONE. The compile allowed for `addressChain` arriving as its own
+   * receipt key, which would have owed `RECEIPT_FIELD_ARITY` a new entry. Measured at
+   * this base it does NOT: `observeBehavioralYear` returns it INSIDE each yearly
+   * observation, exactly as it returns `phraseRepetition`, `succession` and `motion`.
+   * The arity table names top-level receipt fields and the one dotted year-series
+   * path; a sub-field of a year entry has never had a row and does not get one here.
+   * A row whose declared source is not in that table reds this registry's own arity
+   * arm — which is what makes this reading checkable instead of asserted. The
+   * `SIM_METRIC_EPOCHS` note above is the standing precedent for preferring the
+   * measurement over the compile's prediction.
+   *
+   * ⚠ `unit` is `news_rows` rather than `milli` because the row carries BOTH counts
+   * and integer-milli rates under one `measure` dim, exactly as its sibling does over
+   * exactly these rows. The depth histogram folds into `measure` (`depth_0`…`depth_4`)
+   * rather than minting a second dimension that would be blank on every other row.
+   */
+  Object.freeze({
+    name: 'sim_address_chain',
     class: SIM_EVENT_CLASS,
     dims: Object.freeze(['measure']),
     unit: 'news_rows',

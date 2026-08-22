@@ -53,6 +53,11 @@ describe('curve band freezing', () => {
     // ⭐ The §151.3 experience family is among them, so the band set reaches
     // experience-facing aggregates and not only engine ones.
     expect(families).toContain('sim_narration_tempo');
+    // ⭐ WEB-4 (ODQ §359.9 / §180.3a): and the band set watches whether that news is
+    // ADDRESSED, not only how much of it there is. A row added to the registry becomes
+    // a watched curve automatically — this assertion is what proves the automatic path
+    // actually ran for this row rather than being described.
+    expect(families).toContain('sim_address_chain');
     // A run-epoch row must NOT become a band family: a run scalar has no curve.
     const runRows = SIM_METRICS.filter((row) => row.epoch === 'run').map((row) => row.name);
     expect(families.filter((family) => runRows.includes(family))).toEqual([]);

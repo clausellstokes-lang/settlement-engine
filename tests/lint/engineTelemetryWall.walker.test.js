@@ -266,7 +266,10 @@ describe('the engine/telemetry wall', () => {
     expect(leaked).toEqual([]);
     // The guard is sufficient BECAUSE the two name sets are disjoint, and that
     // disjointness is pinned in tests/lib/simMetricRegistry.test.js.
-    expect(SIM_METRIC_NAMES.length).toBe(12);
+    // ⚠ DECLARED MOVE 12 → 13 (WEB-4, ODQ §359.9): the sim_address_chain row joins the
+    // closed set the ingest path must keep refusing, so the disjointness this arm leans
+    // on is re-asserted over the wider set rather than over the set it was written for.
+    expect(SIM_METRIC_NAMES.length).toBe(13);
   });
 
   it('ARM F — the folded arms: the analytics-module roster, and the Operator Messages receipt discipline', () => {
