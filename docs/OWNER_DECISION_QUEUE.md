@@ -14423,3 +14423,31 @@ recommended. Implementation, per item:
   harness work is chartered into the tuning-pass preparation.
 - **§341.3 Unchanged:** the tuning signature remains the owner's; this adds evaluation
   surface, not a new signer.
+
+## §342 — COLLECTION + CAS: WF-1E LANDED — THE FAITH PANEL SAYS WHY (2026-08-22 ~00:20)
+
+- **TE-WF1E collected.** Tip 3ac279db — ONE commit, a direct child of f5332cf7 (the
+  branch never moved during its build, so no rebase and no tuple re-derivation were
+  owed), 12 files, 852+/12−. Terminal green from the gate's own tail line
+  (TRUE_EXIT=0): 136 packets; both typecheck floors exact; ratchet at the frozen 11
+  of 28,685 with the six enforcement-claims offenders INSIDE it; strict dist 52/433;
+  boot 524/524. CAS EXECUTED: f5332cf7 → 3ac279db (read back). T2D's watcher fires
+  on this move.
+- **§342.1 The member, plainly:** a town whose ring records a patron's fall now
+  renders ONE typed sentence in the faith panel's cause-chain block, flag-gated —
+  NINE effective production lines, with the kernel edit at NET ZERO on both
+  instruments both sides (1581/1581 eff, 2865/2865 physical, rng.fork 22→22, no draw
+  added/moved/removed) and the other three zero-headroom files untouched and
+  re-measured. Census +6 titles by conviction; 61 re-record blocks preserved in
+  landing order.
+- **§342.2 Recorded findings:** the three compile corrections (§12 of the packet: the
+  projector address; Q4 ruled; the chair-approved A4 narrowing) · the BASE_STATE
+  capsule measured NOT CITABLE at this base (the b8946403→f5332cf7 window is 265
+  files, not docs-only) — WF-1A's finding reproduces and every premise figure was
+  re-executed rather than cited · the chair's C-3 and J-1 rulings live in receipt
+  §10. The Q4 corpus amendment landed source-first with its generator in the SAME
+  commit; the section-sliced pin holds on both sides.
+- **§342.3 The simulator thread's day:** WF-1C, WF-1D, WF-1E all landed — the realm
+  last-seat beat, the war-dissolution join, and the cause sentence: the WF-1 ladder
+  the §316.2 compile opened is COMPLETE except the WF-1F micro-member. T2D rebases
+  onto 3ac279db next; its GO is immediate on its focused green.
