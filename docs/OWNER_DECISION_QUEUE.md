@@ -16384,3 +16384,11 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   etc.) at completion; the chair prunes a landed member's tree at its landing;
   holding tips are ALWAYS ref-pinned before any tree cleanup. Banked to
   memory with the ENOSPC error-taxonomy.
+
+- **§403.1 THE UNIFYING LAW, from CT-2's stand-down note, banked:** the
+  truncated grep and the module-error exit are ONE failure in two costumes —
+  A TRUNCATED ARTIFACT ACCEPTED AS COMPLETE. An instrument that CAN be
+  truncated needs a COMPLETENESS check, never just an exit check: no `| head`
+  beneath an absence claim; prove a toolchain RESOLVES before reading its
+  verdict; the §397 two-part rule works precisely because it forces a
+  differently-shaped second observation of the same thing.
