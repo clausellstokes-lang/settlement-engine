@@ -19061,9 +19061,10 @@
     },
     {
       "id": "MF-T2F",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T2F.md",
-      "verifiedBase": "a09138d7da6b6a4148ce864496cb3ed41b775c44",
+      "_verifiedBaseNote": "BUILT and fully proven at a09138d7 (the MF-T2E landing), then re-based onto 42e12a76 after WF-8A and the OSR mint took the track. Every figure that could move was re-derived at the landing base and one of them did: WF-8A added one test file carrying twenty titles, so the census ends are 2495/364/2131/20704/5783 -> 2497/364/2133/20712/5785 here, where the build base measured ...20684/5782 -> ...20692/5784. Carrying the earlier tuple would have published titles 20692 against a true 20712. See the packet section 4.5.",
+      "verifiedBase": "42e12a76f1dd35e09a8938ad34a08795c33a4f6f",
       "changeManifest": [
         {
           "_note": "LEAF 1, THE EXACT CORE, DORMANT. Ordered by ODQ 348.2: the D1 VOLUME arm multiplied in Number over a float polygon-intersection area, and R-MF-2 fires at the port. Exact BigInt ear-clip triangulation whose closing guard is an EQUALITY (the sum of the emitted triangles' absolute twice-areas must equal the ring's own), homogeneous-coordinate clipping, and rational shared area. Imports `bounds` from exactGeometry.js and nothing else; the float area spellings are deliberately NOT imported because importing them would re-admit the convicted arithmetic.",
@@ -19144,6 +19145,60 @@
           "_note": "THE STANDING LAW that binds the ten arriving export names. Its guard-the-guard floors are lower bounds, so arriving leaves can only strengthen them; green before and after.",
           "path": "tests/lint/townMapFabricSingleDeclaration.walker.test.js",
           "symbol": "THE LAW: no exported name is declared in two files under the fabric directory"
+        },
+        {
+          "_note": "THE EXACT CORE'S THREE EXPORTS, joined at the flip to LANDED. exactRatioQ is the ONE mint of the published exact-quantity shape, so two equal magnitudes are always deep-equal records and exact zero is always {0n, 1n}.",
+          "path": "src/domain/townMap/fabric/exactIntersectionArea.js",
+          "symbol": "export function exactRatioQ"
+        },
+        {
+          "_note": "THE ANSWERABILITY SEAM. Three named refusal arms, each with an executed fixture: degenerate (bowtie and collinear rings), no admissible ear, and the exactness identity. The identity arm catches the completed-but-unsound class a float tolerance cannot separate from rounding - cross-A, twice-area 48000000, whose ear-clipping COMPLETES and sums to 208000000.",
+          "path": "src/domain/townMap/fabric/exactIntersectionArea.js",
+          "symbol": "export function assertAnswerableFootprintQ"
+        },
+        {
+          "path": "src/domain/townMap/fabric/exactIntersectionArea.js",
+          "symbol": "export function sharedFootprintAreaExactQ"
+        },
+        {
+          "_note": "THE PLAN-ERA VERTICAL, ported verbatim from the sealed source.",
+          "path": "src/domain/townMap/fabric/solidLegality.js",
+          "symbol": "export const PLAN_ERA_VERTICAL"
+        },
+        {
+          "_note": "THE NO-TUNING PIN. Exactly zero, typed BigInt so it is compared against exact numerators rather than coerced. An abutment produces zero shared area under an exact predicate, so no tolerance is needed and none is offered; a tolerance here would be a tuning dial on a law.",
+          "path": "src/domain/townMap/fabric/solidLegality.js",
+          "symbol": "export const OVERLAP_FLOOR_Q"
+        },
+        {
+          "path": "src/domain/townMap/fabric/solidLegality.js",
+          "symbol": "export function planEraSolid"
+        },
+        {
+          "_note": "THE PREDICATE ODQ 287.5 FORBIDS, ported FAITHFULLY as the negative control so the gap is measured rather than asserted. Nothing may decide with it. A4 pins it in BOTH directions, which is what keeps it falsifiable.",
+          "path": "src/domain/townMap/fabric/solidLegality.js",
+          "symbol": "export function intervalOverlapVerdict"
+        },
+        {
+          "path": "src/domain/townMap/fabric/solidLegality.js",
+          "symbol": "export function footprintIsAnswerable"
+        },
+        {
+          "_note": "THE ONE LEGALITY PREDICATE HOME - the app-side home of ODQ 287.5 and the substance of the 299.3(a) discharge. It reads landed MF-T2E records directly and answers REFUSED / PLANAR_ONLY / VOLUME with every decision and every published magnitude exact in BigInt.",
+          "path": "src/domain/townMap/fabric/solidLegality.js",
+          "symbol": "export function solidOverlap"
+        },
+        {
+          "path": "src/domain/townMap/fabric/solidLegality.js",
+          "symbol": "export function dualRunLegality"
+        },
+        {
+          "path": "tests/domain/townMapSolidLegality.test.js",
+          "symbol": "describe('MF-T2F solid legality'"
+        },
+        {
+          "path": "tests/property/townMapSolidLegalityDeterminism.test.js",
+          "symbol": "describe('MF-T2F solid legality determinism'"
         },
         {
           "_note": "THE HEIGHT DOOR, HELD SHUT. This member decides about vertical intervals and still never opens heightQ: the intervals are explicit input quanta, and the row is the guard that says the door is untouched. Re-executed at this base: it throws. NOTE ON THIS LIST'S SHAPE AT DRAFT/READY — the twelve symbols this member CREATES (ten exports and two describe titles) join it at the FLIP TO LANDED and never at READY, because a requiredSymbols row is a claim that the symbol is in the tree while a CREATE row is only a promise until it is kept.",

@@ -1,13 +1,16 @@
 # Town cartography / MF-T2F — exact solid legality, extended from area to VOLUME: the §287.5 predicate home ported onto the landed massing vocabulary, with the R-MF-2 volume-arm conviction CURED in BigInt (§299.3(a) discharged app-side)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** 1
-- **Verified base:** `claude/composite-r4` at `a09138d7da6b6a4148ce864496cb3ed41b775c44`
-  (the MF-T2E landing). Every preflight row below was re-executed at THIS base by the
-  implementing lane TE-T2F; nothing is inherited from the compile, from the capsule, or from a
-  sibling. ⚠ The compile was pinned to `5d18b4a0` and every figure it carried was marked
-  `STOP: RE-DERIVE AT BASE`; each re-derivation is recorded in §4 with its instrument, and the
-  ONE shear the re-derivation found (§4 row 3) is named rather than absorbed.
+- **Verified base:** `claude/composite-r4` at `42e12a76f1dd35e09a8938ad34a08795c33a4f6f`
+  (the OSR schema-9 re-freeze, C2). ⚠ **This member was BUILT and fully proven at
+  `a09138d7`** — the MF-T2E landing — and then re-based here after WF-8A (`47ea9c9b`) and the
+  OSR mint (`158d99cd`, `42e12a76`) took the track first. Both bases are recorded, and §4.5
+  carries the re-derivation: **every figure that could move was re-derived at `42e12a76`, and
+  one of them did.** Nothing is inherited from the compile, from the capsule, or from a sibling.
+  The compile was pinned to `5d18b4a0` and marked every figure `STOP: RE-DERIVE AT BASE`; each
+  re-derivation is recorded in §4 with its instrument, and the ONE shear the first re-derivation
+  found (§4 row 3) is named rather than absorbed.
 - **Chair review:** ODQ §371 ruled all seven RAISED items (§13). The rulings are folded into the
   body below and re-stated in §13 beside the question each answered.
 - **Depends on:** `MF-T2E` (**LANDED** — `massPart.js`, the `solidPartQ`/`massPartQ` records whose
@@ -267,16 +270,16 @@ npm run implementation:dispatch -- MF-T2F
 Then, before any edit — every row re-executed at the dispatch base; nothing inherited from this
 compile, from the capsule, or from a sibling packet:
 
-| # | Check | Result EXECUTED at this base (`a09138d7`) |
+| # | Check | Result EXECUTED at the build base `a09138d7` AND re-executed at the landing base `42e12a76` (§4.5) |
 |---|---|---|
 | 0 | `git show a09138d7:docs/implementation/preambles/MF-PREAMBLE.md \| shasum -a 256` | `0706aad6a84e4f74ec47602e9e3222fc398c4c8864bb38c79ac480c2a11db4ed` — **MATCH**, no further re-stamp |
 | 1 | port-source re-hash: `git cat-file blob 0c46df0729b3da609c4fa1c09e67520dd1a4ecdf \| shasum -a 256` | `b2f59501f1902cd74b470238996c5bd875a84a8934aa8124517d2159bdb7f645` — **MATCH** (§P1 R-MF-4 satisfied) |
 | 2 | substrate existence: `git show a09138d7:src/domain/townMap/fabric/massPart.js \| shasum -a 256` | PRESENT, `d52c19fadbe6c06bb906d1dc0c93e1a76114f189078943da099c59c07985e76f` — the compile's value unchanged; the §4.2 P5 interop probes reproduce |
 | 3 | name-collision scan over `src tests` for the ten arriving names plus the two leaf basenames | ⚠ **SHEAR — ONE HIT, and the compile's cross-check was WRONG.** `grep` exit 0, one line: `src/domain/townMap/fabric/massPart.js:9`, a DOCBLOCK PROSE mention (*"MF-D1's `solidLegality.js` declared it in…"*). Per-name breakdown executed: every one of the ten export names has **zero** files; only the string `solidLegality` matches, and only in a comment. A prose reference is not a live declaration, so this is NOT the STOP condition (§11 names *"any of the ten colliding with a live declaration"*), but the compile asserted "T2E's leaf names none of these" and that assertion was false. Recorded rather than absorbed |
 | 4 | `npx vitest run tests/lint/townMapFabricSingleDeclaration.walker.test.js` | green at base (5/5) and green after the leaves land (5/5) — the floors are lower bounds, so the ten arriving exports only strengthen them |
-| 5 | the untouched-pin denominator: an EXPLICIT list enumerated at base, the union of MF-T2E's 57-path control set and every `tests/**/townMap*.test.js` basename match | **67 files**, captured to `laneTET2F-control-set.txt`. The list is fixed at base, so this member's two new files (which match `townMap*`) cannot enter it and cannot move the denominator. BEFORE arm: 67 files / 444 tests / 0 non-passed |
-| 6 | the census tuple, by −1 sentinel | **`2494/364/2130/20684/5782`**, and it is proven rather than read: the walker ran GREEN at base, and every one of its five assertions is an exact equality, so a green run convicts all five figures at once |
-| 7 | `npm run typecheck:ratchet` · `npm run typecheck:domain:strict` | `173 error(s), ceiling 173` and `1134 errors, ceiling 1134` — both AT ceiling, zero headroom, both `TRUE_EXIT=0` |
+| 5 | the untouched-pin denominator: an EXPLICIT list enumerated at base, the union of MF-T2E's 57-path control set and every `tests/**/townMap*.test.js` basename match | **67 files** at BOTH bases — the list was re-derived at `42e12a76` and is byte-identical, because WF-8A and the mint added no `townMap` suite. The list is fixed at base, so this member's two new files (which match `townMap*`) cannot enter it and cannot move the denominator. BEFORE arm: 67 files / 444 tests / 0 non-passed |
+| 6 | the census tuple, by −1 sentinel | build base `2494/364/2130/20684/5782`; **landing base `2495/364/2131/20704/5783`** — WF-8A's one new test file carries twenty titles. Both are proven rather than read: the walker ran GREEN at each base, and every one of its five assertions is an exact equality, so a green run convicts all five figures at once. The landing-base arm was run BARE in a pristine worktree at `42e12a76` |
+| 7 | `npm run typecheck:ratchet` · `npm run typecheck:domain:strict` | `173 error(s), ceiling 173` and `1134 errors, ceiling 1134` — both AT ceiling, zero headroom, both `TRUE_EXIT=0`, and unchanged at the landing base |
 | 8 | §P2.9 unedited-substrate captures — the §4.2 probes re-executed at base BEFORE any pin was written | ALL REPRODUCE. Sealed blobs re-extracted from `refs/preserve/map-sandbox-w3f-sealed` and re-hashed; app modules re-extracted at `a09138d7` and hashing exactly the compile's values (`foundation 1ada51b6…`, `coordinateAbi 424500a8…`, `exactGeometry dcd16370…`, `settlementFoundation 01bc29b6…`). Driver `TRUE_EXIT=0`, zero FAIL lines; probes 2–4 `TRUE_EXIT=0`. ⛔ The sealed tree is imported by NOTHING in `src/` or `tests/` |
 
 ### 4.2 · The captures this packet's pins are written FROM — RE-EXECUTED AT THIS BASE
@@ -338,6 +341,49 @@ probe3/4  three self-crossing rings with NONZERO 2A (48000000 / 42000000 / 72000
       degenerate arm instead
 ```
 
+### 4.5 · ⭐⭐ THE RE-BASE ONTO `42e12a76`, AND THE FIGURE THE CARRY WOULD HAVE GOT WRONG
+
+This member was built, swept and fully proven at `a09138d7`. WF-8A and the OSR mint's two commits
+then took the track. The four commits were cherry-picked onto the new tip in a FRESH worktree with
+its own `npm ci` — never a rebase in place — one at a time, with conflicts reported rather than
+resolved.
+
+**What actually conflicted:** exactly one path, `tests/lint/sovereigntyLightingContract.walker.test.js`,
+at the `feat` commit. `PACKET_MANIFEST.json` and `INDEX.md` auto-merged (WF-8A's rows and this
+member's are disjoint within each file). Resolution was by **byte-restore from the NEW base**
+(`git show 42e12a76:… `, `cmp`-verified) followed by re-applying this member's block **below**
+WF-8A's, in landing order — never by accepting a merge of the two blocks.
+
+**Overlap, measured by `comm` rather than assumed:**
+
+| against | shared paths |
+|---|---|
+| the OSR mint (C1 + C2, 8 files) | **NONE — disjoint** |
+| WF-8A (22 files) | exactly 3: `INDEX.md`, `PACKET_MANIFEST.json`, the census walker |
+
+The mint's own two C2 files (`scripts/.observed-shape-readers-baseline.json` and
+`tests/lint/observedShapeReaders.walker.test.js`) are untouched by this member: `git diff 42e12a76
+HEAD` over both is empty.
+
+⭐⭐ **THE CARRY WOULD HAVE BEEN WRONG, AND THIS IS THE FIFTH FIRING OF THE COINCIDENCE LAW.**
+At `a09138d7` the measured ends were `2494/364/2130/20684/5782 → 2496/364/2132/20692/5784`. WF-8A
+landed ONE new test file carrying **twenty** titles, so at `42e12a76` the true ends are
+`2495/364/2131/20704/5783 → 2497/364/2133/20712/5785`. Carrying the earlier AFTER tuple would have
+published **`titles: 20692` against a true `20712`** — off by exactly WF-8A's twenty, in the one
+figure a reader is least likely to recompute by hand, while the other four stayed self-consistent.
+The BASE arm was re-proven by running the walker BARE in a pristine worktree at `42e12a76`, where
+it passed 33/33 (which is what says WF-8A and the mint left the census consistent); only then was
+the AFTER arm convicted afresh by the cumulative sentinel.
+
+**What did NOT move, verified rather than assumed:** the preamble hash (`0706aad6…`), the sealed
+port-source hash (`b2f59501…`), `massPart.js` (`d52c19fa…`), and `foundation.js` /
+`coordinateAbi.js` / `exactGeometry.js` / `massPart.js` all byte-identical between the two bases;
+the name-collision scan returning the same single prose hit; both typecheck ceilings still exactly
+173/173 and 1134/1134; the 67-path untouched-pin denominator re-derived at the new base and
+**identical** (WF-8A and the mint added no `townMap` suite); both leaves and both acceptance files
+`cmp`-identical to the bytes the nine-mutant sweep ran against, so the sweep transfers with proof
+— and it was re-run at the new base anyway, convicting the same arms.
+
 ### 4.3 · ⭐ The LIVE captures — the implemented leaves driven before any pin was written
 
 The §4.2 battery proves the PROTOTYPE reproduces at this base. The pins in §9 are written from a
@@ -388,13 +434,21 @@ options, never `wc -l`:
 | leaf | effective | cap | headroom |
 |---|---:|---:|---:|
 | `src/domain/townMap/fabric/exactIntersectionArea.js` | **160** | 190 | 30 |
-| `src/domain/townMap/fabric/solidLegality.js` | **147** | 175 | 28 |
-| packet production total | **307** | 340 | 33 |
+| `src/domain/townMap/fabric/solidLegality.js` | **150** | 175 | 25 |
+| packet production total | **310** | 340 | 30 |
 
 The compile's basis was the 282-line executed prototype (core ≈ 145, contract ≈ 137); the landed
-split measures 307, the +25 being the seam the split itself costs — the core's exported surface,
+split measures 310, the +28 being the seam the split itself costs — the core's exported surface,
 its JSDoc type contracts, and the result typedefs the strict configuration requires. Every figure
 sits inside the cap the chair fixed at §371, and no cap was renegotiated.
+
+⚠ **This table was re-measured on the COMMITTED bytes, and the first reading was stale.** An
+earlier measurement recorded the contract leaf at 147; three further type-annotation edits landed
+after it (the result-shape typedefs and the two verdict locals the strict configuration needs),
+and the figure moved to 150 without anything re-measuring it. Caught by re-running the instrument
+against the committed file rather than trusting the number already written down — the same law as
+the census: a figure is a measurement of one tree at one moment, and carrying it forward is a
+stale read that happens to look sound.
 
 ## 5. Verified tree contract
 
@@ -609,13 +663,19 @@ above.
 
 ```
 DELTA: +2 files · +0 parked · +2 credited · +8 titles (7 domain + 1 property) · +2 suites
-BASE  (walker GREEN at a09138d7, all five exact equalities passing):  2494/364/2130/20684/5782
-AFTER (each figure CONVICTED by its own -1 sentinel arm):             2496/364/2132/20692/5784
-  files       "expected 2496 to be -1"
+⭐ THE LANDING BASE (42e12a76), which is what the walker carries:
+BASE  (walker GREEN there, BARE, in a pristine worktree — 33/33):    2495/364/2131/20704/5783
+AFTER (each figure CONVICTED by its own -1 sentinel arm):            2497/364/2133/20712/5785
+  files       "expected 2497 to be -1"
   parked      "expected 364 to be -1"      ⭐ UNCHANGED — both new files are CREDITED
-  credited    "expected 2132 to be -1"
-  titles      "expected 20692 to be -1"
-  suiteTitles "expected 5784 to be -1"
+  credited    "expected 2133 to be -1"
+  titles      "expected 20712 to be -1"
+  suiteTitles "expected 5785 to be -1"
+
+The build base (a09138d7) measured 2494/364/2130/20684/5782 -> 2496/364/2132/20692/5784 by the
+same method. Both ends were re-derived rather than carried, and §4.5 records why that mattered:
+WF-8A's single new test file carries TWENTY titles, so the carried AFTER tuple would have
+published titles 20692 against a true 20712.
 The suite layer is proven SEPARATELY as well: `describe(` appears exactly once per new file, and
 the two titles grep as `MF-T2F solid legality` and `MF-T2F solid legality determinism`; the
 evidence layer greps as exactly 7 + 1 straight-line `test(` calls.
@@ -758,6 +818,76 @@ the next wave.
 ## 12. Completion receipt
 
 *(filled at the flip to LANDED)*
+
+**Landing base:** `42e12a76f1dd35e09a8938ad34a08795c33a4f6f` (build base `a09138d7`; see §4.5).
+**Lane:** TE-T2F, own detached worktree with its own `node_modules` from `npm ci`
+(`NPMCI_TRUE_EXIT=0`), plus a second pristine base-proof worktree at the landing tip for the BARE
+arms. No ref moved by this lane. Every row below was re-executed at the LANDING base.
+
+**Delivered:** the two leaves (`fabric/exactIntersectionArea.js` 160 eff, `fabric/solidLegality.js`
+150 eff), the two acceptance files (A1–A7 domain, A8 property), the census re-record, this packet.
+**Zero existing production files modified**, exactly as §3 priced.
+
+| gate row | result |
+|---|---|
+| `npx eslint` over all four new files | `ESLINT_ALL_TRUE_EXIT=0` |
+| `npm run typecheck:ratchet` | `173 error(s), ceiling 173` · `TRUE_EXIT=0` — zero new type errors against a zero-headroom ceiling |
+| `npm run typecheck:domain:strict` | `1134 errors, ceiling 1134` · `TRUE_EXIT=0` — same |
+| effective-line ledger (eslint `Linter`), re-measured on the COMMITTED bytes | 160/190 · 150/175 · packet 310/340 |
+| `tests/domain/townMapSolidLegality.test.js` + the property companion | 8 passed · `TRUE_EXIT=0` |
+| `tests/lint/negativeAssertionAnchor.walker.test.js` | 9 passed · `TRUE_EXIT=0` |
+| `tests/lint/townMapFabricSingleDeclaration.walker.test.js` | 5 passed · `TRUE_EXIT=0` |
+| `tests/lint/sovereigntyLightingContract.walker.test.js` | 33 passed BARE at the landing base before the re-record, and 33 passed after it · `TRUE_EXIT=0` |
+| untouched-pin control (67 explicit paths, list re-derived at the landing base) | before 67/444/0 · after 67/444/0 · **per-file diff EMPTY** |
+| `npm run build` | `TRUE_EXIT=0` |
+| post-build `VERIFY_DIST=1 … tests/build/townMapLazy.test.js` | 3 passed · `TRUE_EXIT=0` |
+| post-build `VERIFY_DIST=1 npx vitest run tests/build` | 52 files / 433 tests passed · `TRUE_EXIT=0` |
+| `npx vitest run tests/lint tests/docs` | 6 failed / 1828 passed — **all six are members of the ELEVEN banked set**, zero strays. The same six, by name, at both bases |
+
+**The removing-power sweep — nine mutants, each planted from pristine bytes, each convicted by a
+NAMED arm, each restored by byte copy verified with `cmp` (never the `git checkout --` family).**
+M0 pristine-green control passed 8/8 first; the clean re-run after the sweep passed 8/8 again.
+⭐ The sweep was run at BOTH bases and convicted the identical arms at each. Both leaves and both
+acceptance files are `cmp`-identical across the re-base, so the first sweep transfers with proof
+rather than by assumption — and it was re-run anyway, because an equivalence pin stays green over
+a deleted cure and only re-execution can tell the two apart.
+
+| mutant | predicted arm | arm that ACTUALLY convicted, with its message |
+|---|---|---|
+| M1 core ring twice-area → Number shoelace | A5 arm 1, A2 | **A5 and A8.** ⚠ A2 did NOT fire: the sliver's answerability assertion lives in A5, not A2, so the packet's prediction split one test's coverage across two |
+| M2 interval read closed (`h = hi − lo + 1n`) | A3 | **A1, A3, A5, A8** — `expected 2n to be 1n` on the stacked pair's height |
+| M3 `SAME_SOLID_ID` refusal deleted | A1 | **A1** — `expected 'VOLUME' to be 'REFUSED'` |
+| M4 `DIFFERENT_SUPPORT_SURFACE` refusal deleted | A1 | **A1** — `expected 'VOLUME' to be 'REFUSED'` |
+| M5 `PLANAR_ONLY` arm deleted | A1 | **A1 and A8** |
+| M6 verdict floor loosened `>` → `>=` | A3/A4 | **A1, A3, A4, A7** — `expected 'OVERLAPPING' to be 'DISJOINT_OR_ABUTTING'` |
+| M7 `intervalOverlapVerdict` XY arm deleted | A4 (the notch's OVERLAPPING vanishes) | **A4, by the OTHER direction** — `expected 'OVERLAPPING' to be 'DISJOINT'` on the separated pair. Deleting the arm cannot remove an OVERLAPPING answer; what it removes is the control's ability to say DISJOINT, and A4 pins both directions, which is why it still convicts |
+| M8 exactness IDENTITY check deleted | A2 | **A2** — `expected true to be false`: cross-A becomes "answerable" and is silently answered |
+| M9 rational gcd reduction broken | A5 arm 1 | **A1, A3, A5, A8** — `expected { numQ: 3000n, denQ: 2n } to deeply equal { numQ: 1500n, denQ: 1n }` |
+
+**Dormancy, discharged POST-BUILD with the forensic zoom and live scanner controls, both
+denominators named:** 710 emitted JS chunks scanned, 8 entry-closure chunks. Controls asserted
+PRESENT first — `'must be an object'` in 1 entry-closure chunk, and the landed fabric wall's own
+`'must be a canonical id'` in 1 emitted chunk (proving the reader sees this family's text where it
+ships). All five member-unique literals: **entry 0, any 0**.
+⭐ **Stated honestly rather than glossed:** nothing imports either leaf, so they appear in NO
+emitted chunk at all — a weaker claim than "excluded from the entry closure". The same is true of
+MF-T2E's landed `massPart.js` one commit down, whose own unique literal also scans to zero, so
+this member's zero is the sibling precedent's zero.
+
+**Anchors preserved, grepped before and after at BOTH bases:**
+`export function derivePlanarDcelEmbedding(input) {` stands at `dcelEmbedding.js:140` at column
+zero with an EMPTY diff on that file, and `CURRENT_MAP_TRADITION_ID` appears zero times in all four
+created files.
+
+**Merge integrity, checked because a conflict resolution can delete a landed cure while its
+equivalence pins stay green:** all twelve created `requiredSymbols` rows resolve against the LIVE
+tree (12 of 12, zero unresolved); WF-8A's packet row survives in both `PACKET_MANIFEST.json` and
+`INDEX.md`; the mint's two C2 files are untouched by this member; and `git diff --name-only
+42e12a76 HEAD` returns exactly this member's eight paths and nothing else.
+
+**Behaviour shift: NONE.** This member adds two leaves nothing calls. Every fabric-touching suite
+in the 67-path control returned identical per-file counts and statuses; no digest, golden or
+exact-key pin moved.
 
 ---
 
