@@ -74,6 +74,14 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ~08:40: RR-1 REHEARSAL PAIR parked (C1 75fdb2d1 / C2 b13f60f3 on
+# 42e12a76; regenerates at slot if the tip moved). Shrink exact −2/−2, no
+# surprise row. JUDGMENT to ratify at its slot msg: schema-9 shrink digest
+# semantics — DERIVED digests move with a legit shrink (tool universe
+# byte-identical = the real STOP class); memorialized in its scratchpad
+# note. NEW datum for the debt-cure charter: clampPrimitiveBaseline's
+# banked row names two townCartography files the tree NO LONGER HAS (debt
+# rotting in the deletion direction too). T2F's gate still running.
 # ⭐ ~08:15: T2F terminal-ready at cb369d2b (the carry law's FIFTH firing
 # caught — 4 self-consistent figures, 1 wrong by 20; mutant sweep re-run
 # despite cmp-identity). GO SENT w/ honest lock picture (RR-1's single-
