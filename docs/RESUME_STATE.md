@@ -74,6 +74,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~20:30: SEAT REFILLED (§398) — TC-WEBSITE dispatched (the §359 items
+# 6-10 charter compile + naming rec + queued-surface sweep; chair-tier,
+# compile-only). FOUR ACTIVE: RR-1 · T2H · INV-EVS · TC-WEBSITE.
 # ⭐ ~20:20: CT-3 COMPLETE (§397) — tip SUPERSEDED to ba806682 (AFTER
 # batteries green, mutexed sweep zero-stray); gate-deferral-to-slot RATIFIED
 # (base not an ancestor of the moved branch). ⚠ NEW TRAP: the S0 is a TWO-PART

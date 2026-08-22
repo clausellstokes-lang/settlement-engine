@@ -16155,3 +16155,19 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   the printed staleness line; an exit alone convicts nothing.
 - CT-3 HOLDS at ba806682; landing order unchanged (after CT-2, which rebases
   onto the mint at its slot).
+
+## §398 — THE FREED SEAT REFILLED: TC-WEBSITE DISPATCHED (THE WEBSITE TRAIN'S CHARTER COMPILE, CHAIR-TIER) (2026-08-22 ~20:30)
+
+- CT-3's completion freed its seat; the highest-value ready work is the compile
+  §359 itself routed: **the website train's charter**, carrying items 6-10
+  (consent-default split · retention numbers from the ruled principle · the
+  referral emit wiring · the sim_address_chain row with J-TE28-3's four
+  obligations · import-vs-restore semantics from §66.4) plus the 'campaign'
+  naming RECOMMENDATION (owner's word after) and a sweep for the other queued
+  website-surface items (the arrow-ribbon ask included). Compile-only: writes
+  nothing, prices per PACKET_STANDARD, splits open questions CHAIR/OWNER;
+  owner COPY is never a car — placeholder-marked, copy walks stay on the
+  docket. **Chair-tier under §343.1** (judgment-dense design/pricing;
+  precedent TC-READREPAIR, TC-RR2). Deliverable: draft-WEBSITE-PLAN.md for
+  chair review.
+- FOUR SEATS ACTIVE: RR-1 (landing-critical) · T2H · INV-EVS · TC-WEBSITE.
