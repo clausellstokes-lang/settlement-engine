@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~05:30: CT-1a BUILT+HOLDING at 14727eca (4 blocks/48 variants; ZERO
+# same-seed movement both-ways-proven; voice budgets flat; the `·`-header
+# dodge of the banked em-pin credited; load-flake delta correctly classified
+# by bidirectional-set-difference). JC-1/JC-3/deviation RATIFIED by message.
+# Queue: mint CAS → T2F → T2G → CT-1a. Mint's gate airborne mid-chain.
 # ⭐ ~05:05: T2G LANDED-IN-WORKTREE at 5b594a93 (the §379 discharge executed
 # 4x row-out/note-in; validator green; the two-row-styles fact → H9's
 # charter; cherry-pick priced, correctly held for the window). ⚠ MINT's GO
