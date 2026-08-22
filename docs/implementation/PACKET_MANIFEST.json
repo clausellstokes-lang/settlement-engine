@@ -20282,6 +20282,143 @@
       ]
     },
     {
+      "id": "MF-T2M",
+      "status": "DRAFT",
+      "packetPath": "docs/implementation/packets/town-cartography/MF-T2M.md",
+      "verifiedBase": "4d2d17f86f173686d142a97e3fd356d6b7be97e6",
+      "changeManifest": [
+        {
+          "_note": "THE LEAF. The GENERATION-SPEC's ArchitecturalHistoryOperation as a D3a era slice, sealed through the fabric's ONE artifact grammar with artifactKind ARCHITECTURAL_HISTORY_OPERATION - the spelling the SPEC's own CoreArtifactKind union already carries, so the member JOINS the grammar rather than minting beside it. PAYLOAD LEVEL ONLY (ODQ 423/423.1): no gate, no verb, no executor, no receipt, no store row; its artifacts are proposals until a registered store verb accepts them. Three central behaviours: artifactId is DERIVED from content and a caller-supplied artifactId or contentHash is refused BY NAME (the MF-T2K free-alias law); the one-way before-ref law is STRUCTURAL because no after-ref field exists to misuse; and the cause axis is total in two arms with the no-inference law spelled in BOTH directions with DISTINCT messages. CAUSE_UNKNOWN_REASONS is declared LOCALLY rather than imported from massPart.js, because the two SPEC four-lists are NOT byte-identical here - they differ by one member each way as sets and swap two positions - and A1 pins both facts so a deduplication cannot fuse two vocabularies the SPEC keeps distinct. 210 effective lines against the ODQ 426-carried 220-per-leaf cap. Dormant: no consumer, no barrel row, nothing persisted, a SINK in the module graph. Imports EXACTLY foundation.js and townScene/stableScene.js, neither tracked by FOUNDATION_READERS and both already inside the fabric's transitive closure, so no new module enters any import graph.",
+          "action": "CREATE",
+          "path": "src/domain/townMap/fabric/architecturalHistory.js"
+        },
+        {
+          "_note": "THE ACCEPTANCE FILE. Six cases, ONE literal describe, straight-line test calls with string-literal titles, every loop INSIDE a named test (the SP-D idiom). A1 opens with the guard-the-guard floors, then the ANTI-DRIFT pin that compares this member's live CAUSE_UNKNOWN_REASONS against the live MASSING_UNKNOWN_REASONS in both directions - symmetric difference, intersection and the order swap - then constructs all twelve kinds. A2 pins the derived identity, six single-field perturbations giving six distinct ids, and a TAMPER caught only by replay because the tampered record was RESEALED and its own contentHash is self-consistent. A3 runs thirteen typed refusals with the unmutated input constructing first. A4 proves the endpoint law symmetric over both split/merge kinds and proves the two arms' messages DIFFERENT so neither covers for the other. A5 pins the fixture's determinism, ascending dates, replay verification and one recorded contentHash golden. A6 is the STRIP CONTRACT: anchored absences through expectAbsentWithAnchor by name, then every survivor proved POSITIVELY - the full execute path, the v1-legacy schemaVersion refusal, and a resealed non-replaying operation still refused.",
+          "action": "CREATE",
+          "path": "tests/domain/townMapArchitecturalHistory.test.js"
+        },
+        {
+          "_note": "THE SHAPE-B STRIP, production half one. ODQ 423(1): the module demotes from door-claimant to payload compiler. The FANTASY_CANON_GATE export and ALL SIX of its use sites are removed (the v1-legacy mechanism seal, the v2 mechanism seal, the operation seal, and the gate-equality legs of both the replay check and the executor's mechanism check); the operation's artifactKind reads PROPOSED_SPATIAL_OPERATION so proposal-grade and accepted-grade stop sharing a word (ODQ 426(1)); and the mechanism and operation law versions are re-stamped because those two SHAPES lost a field (ODQ 426(2)) while the state and receipt laws are untouched because those shapes never carried a gate. THE DEMOTION REMOVED A CLAIM, NOT A CHECK, and A6 proves each survivor positively. 278 effective lines before, 276 after.",
+          "action": "MODIFY",
+          "path": "src/domain/townMap/fabric/operations.js"
+        },
+        {
+          "_note": "THE SHAPE-B STRIP, production half two. The barrel's operations block drops the FANTASY_CANON_GATE row; the other six re-exports stay. This is the ONLY reason the barrel is opened - the new leaf deliberately takes NO barrel row, continuing the five-dormant-leaves zero-row precedent. 111 effective lines before, 110 after.",
+          "action": "MODIFY",
+          "path": "src/domain/townMap/fabric/index.js"
+        },
+        {
+          "_note": "ONE DECLARED LITERAL SHIFT, WITH ITS CAUSE WRITTEN BESIDE IT (the MF-T2G re-record precedent in this same file). The v1-legacy mechanism seal lost its gate field, so its sealed bytes and digest moved: LEGACY_HASH goes scene-v1-56e0d430be735fbbab2f7aa4b4b50281 to scene-v1-5994c3ce8cf9d4d9b1ed8ffa2d6e4d1f. EXACTLY ONE literal moves and that was PROVED BY EXECUTION rather than predicted - the battery was run with the strip in place and read 1 failed of 6, the single failure being this literal, while the six scene-v1 projection pins in this file's A6 ride non-fantasy projections that embed no operation artifact and passed unmoved in the same run. A second moved literal would have been a STOP. The arm's semantics are untouched: it still convicts an accidental reseal of the legacy mechanism, which is why the literal is kept rather than derived.",
+          "action": "TEST",
+          "path": "tests/domain/townMapFantasyConstruction.test.js"
+        },
+        {
+          "_note": "THE ODQ 423.1 OPTION-D PREVENTION ARM - the executable form of the two-level law, so the class that produced the 299.3c blocker cannot be minted again silently. One added test in MF-T2A's walker, the chartered fabric-scan home, which is LANDED and UNRESERVED at this base: over every fabric source, exactly zero line-anchored acceptance-gate export declarations, with a failure message citing 423.1 and naming the lawful cure (a door verb is a store-registry row, not a fabric export). THE ANCHOR IS THE EXPORT-DECLARATION GRAMMAR AND THAT WAS MEASURED: stageManifest.js lawfully carries 'gate' as a 10.14 manifest field name and a watergate random namespace, both of which a naive substring scan convicts and both of which the test itself proves INERT against this matcher - after proving the matcher live on a planted declaration. Its removing power is proven IN-LANE by mutant M8, whose red is quoted verbatim in the packet; the standing scripts/mutation-sweep.sh row DEFERS per 417 and ODQ 426(5) because MF-T2J reserves that path at READY. No mutation-coverage-manifest byte moves: this is an edit to an already-enumerated file.",
+          "action": "TEST",
+          "path": "tests/lint/townMapFabricSingleDeclaration.walker.test.js"
+        },
+        {
+          "_note": "THE PACKET.",
+          "action": "DOC",
+          "path": "docs/implementation/packets/town-cartography/MF-T2M.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE SEAL THIS MEMBER JOINS RATHER THAN DUPLICATES. Every record is sealed through this one function, which is what makes the new artifact kind a member of the fabric's ONE sealed-artifact grammar instead of a second grammar beside it. Remove it and the member has no grammar to join.",
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export function sealCanonicalArtifact"
+        },
+        {
+          "_note": "THE ID WALL EVERY IDENTITY PASSES, including the DERIVED artifactId. The derivation is 57 characters against this grammar's 96-character cap, and an over-long or mis-cased id is refused BY this wall, typed, rather than repaired here.",
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export function requireCanonicalId"
+        },
+        {
+          "_note": "THE NEAR-COLLISION THIS MEMBER PINS RATHER THAN IMPORTS. A1 compares this LIVE list against this member's own CAUSE_UNKNOWN_REASONS in both directions, so a drift or a well-meaning deduplication in massPart.js reds this member's battery instead of silently fusing two vocabularies the SPEC keeps distinct. Remove or rename it and the anti-drift pin has no subject.",
+          "path": "src/domain/townMap/fabric/massPart.js",
+          "symbol": "export const MASSING_UNKNOWN_REASONS"
+        },
+        {
+          "_note": "THE STRIP'S SURVIVOR OF RECORD, and the reason A6 can prove the demotion removed a CLAIM rather than a check: the full execute path still runs end to end after the gate is gone. MF-VS1 pins this too; the row is repeated here because this member is the one that could have broken it.",
+          "path": "src/domain/townMap/fabric/operations.js",
+          "symbol": "export function executeFantasyConstruction"
+        }
+      ],
+      "retiredSymbols": [
+        {
+          "_note": "ODQ 423(1): the acceptance-gate claim is the Shape-B strip's subject. This row DISCHARGES MF-T1X's requiredSymbols row for the same pair at the LANDED flip, per the 379.2 validator semantics. The 379.3 binding preflight was re-executed at this base: exactly MF-T1X pins this pair and no other packet pins any substring the strip removes; MF-VS1 pins only the three compiler functions, all of which survive.",
+          "path": "src/domain/townMap/fabric/operations.js",
+          "symbol": "export const FANTASY_CANON_GATE"
+        },
+        {
+          "_note": "The barrel half of the same retirement. Discharges MF-T1X's index.js row at the LANDED flip. Until then the validator reads a FOUR-ERROR window by design - two MF-T1X rows missing, two retiredSymbols rows already absent - which was named in advance, quoted verbatim in the packet at DRAFT and at READY, proved to be the whole red set by a strip-reverted control run reading FULL GREEN, and BLESSED at ODQ 426(4).",
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "FANTASY_CANON_GATE,"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "Guard-the-guard first: the three closed vocabularies are nonempty, frozen and deep-equal to the SPEC-verbatim literals (12 kinds, 5 cause kinds, 4 unknown reasons). Then THE ANTI-DRIFT PIN against the live massPart MASSING_UNKNOWN_REASONS in both directions - the symmetric difference is exactly SOURCE_SILENT one way and NOT_OBSERVED the other, the intersection is exactly the remaining three, and the ORDER differs too because indices 1 and 2 are swapped, so substituting the one token still does not make the ordered lists equal. Then the happy path: one operation per constructible class, each frozen deep and each replaying JSON-identical, and all twelve kinds constructed so a trimmed closed list would red."
+        },
+        {
+          "id": "A2",
+          "case": "The artifactId spells arch-history-op with a content digest and is inside the landed wall; the same input replays byte-identical including contentHash; six single-field perturbations give six distinct artifactIds; a caller-supplied artifactId and a caller-supplied contentHash are each refused naming the free-alias law; and the TAMPER pin - one payload byte moved through a RESEAL, so the tampered record's own contentHash is self-consistent and only the replay through the sole creator can convict it, with the untouched record replaying as the positive control first."
+        },
+        {
+          "id": "A3",
+          "case": "Thirteen typed refusals with the unmutated input constructing FIRST so each is attributable to the one field it changes: unknown kind, empty affected set, duplicate affected id, an affected id and a bodyId failing the wall, negative and fractional effectiveAt, a third cause status, a cause kind outside the closed five, a cause reason outside the closed four, a malformed beforeMassingRef and provenanceRef, and an extra field riding along. Then the NO-INFERENCE law in BOTH directions with DISTINCT message pins, so neither arm can cover for the other when one is deleted."
+        },
+        {
+          "id": "A4",
+          "case": "The endpoint law binds exactly the two split/merge kinds. Both construct as positive controls first. Then missing, short, duplicated and self-naming are refused symmetrically over both; a plain kind carrying either endpoint field is refused and each split kind carrying the OTHER kind's field is refused, which is the exact-record direction; and the two arms' refusal messages are proved DIFFERENT and to name their own field, so a deleted arm cannot be covered by its sibling."
+        },
+        {
+          "id": "A5",
+          "case": "The deterministic fixture: two independent calls are byte-identical; three operations carry strictly ascending dates asserted both as a literal triple and as a pairwise inequality; every record re-derives through the sole creator and shares the fixture's before-ref; the declared coverage is really exercised - both cause arms and the endpoint kind; and the terminal record's contentHash is pinned to one recorded golden, the determinism receipt, which a deliberate fixture change re-records WITH its cause under the honest-shift law."
+        },
+        {
+          "id": "A6",
+          "case": "THE STRIP CONTRACT. Anchored absences through expectAbsentWithAnchor called BY NAME: the gate is gone from the barrel's exported names, and no gate key survives on a freshly-sealed v2 mechanism, v1-legacy mechanism, operation, construction state or receipt - each absence anchored by a sibling key that rides the very same seal call. The operation's artifactKind reads PROPOSED_SPATIAL_OPERATION. Then every survivor POSITIVELY: the full execute path still yields exactly constructionState and receipt with three masses and a BUILDING_ADDED effect, deep-frozen; the v1-legacy mechanism still refuses execution on the schemaVersion arm; and a resealed non-replaying operation is still refused. The demotion removed a CLAIM, not a check."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/negativeAssertionAnchor.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/townMapArchitecturalHistory.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/townMapFantasyConstruction.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/townMapFabricSingleDeclaration.walker.test.js",
+          "tests/lint/townMapStageManifest.walker.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/build/townMapLazy.test.js"
+        ]
+      ]
+    },
+    {
       "id": "MF-T2J",
       "status": "READY",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T2J.md",
