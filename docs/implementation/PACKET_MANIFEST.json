@@ -19481,6 +19481,101 @@
         [ "npm", "run", "validate:packets" ],
         [ "npm", "run", "check:tail" ]
       ]
+    },
+    {
+      "id": "RR-1",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/osr-repair/RR-1.md",
+      "verifiedBase": "eb6124a6f3527d6aebd3119ee3ebebfc42902dd6",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/pdf/lib/viewModelBodySlices.js"
+        },
+        {
+          "action": "REGISTER",
+          "path": "src/domain/fieldManifest.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/pdf/viewModelParity.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/observedShapeReaders.walker.test.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "scripts/.observed-shape-readers-baseline.json"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/pdf/lib/viewModelBodySlices.js",
+          "symbol": "export function servicesSlice"
+        },
+        {
+          "path": "src/pdf/lib/viewModelBodySlices.js",
+          "symbol": "export function economicsSlice"
+        },
+        {
+          "path": "src/domain/fieldManifest.js",
+          "symbol": "export const REMOVED_DEAD_FIELDS"
+        },
+        {
+          "path": "src/domain/fieldManifest.js",
+          "symbol": "inst?.pressures"
+        },
+        {
+          "path": "src/domain/fieldManifest.js",
+          "symbol": "inst?.stresses"
+        },
+        {
+          "path": "tests/joins/fieldManifest.test.js",
+          "symbol": "removed dead fields stay removed"
+        },
+        {
+          "path": "tests/pdf/viewModelParity.test.js",
+          "symbol": "wires the raw settlement through and defaults to the non-AI data path"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "A settlement whose first institution carries both legacy strain keys yields an empty pressures list on that slice row, while the same row's name and category flow through and the detailed list is non-empty. RED at base and GREEN at the cure, and the captured transition is the conviction of the base defect rather than a claim about it."
+        },
+        {
+          "id": "A2",
+          "case": "Both tombstone rows convict at base through the comment-stripped registry walker, each naming its own row, and hold after the cure. A future reintroduction of either read expression reds tests/joins/fieldManifest.test.js by name."
+        },
+        {
+          "id": "A3",
+          "case": "Zero output shift across five configurations by twelve seeds including both fixed seeds: the full services slice is deep-equal between the cured code and the base expression applied to the same raw records, over 1957 institution records, none of which carries either key. The golden view model does not move and no snapshot is re-recorded anywhere."
+        },
+        {
+          "id": "A4",
+          "case": "The surviving PRESSURES block is live code rather than decoration: handed a non-empty list at the element-tree level it still renders, and it goes dark only on the empty list. The Institutions section source is untouched, since a cull is owner-gated."
+        },
+        {
+          "id": "A5",
+          "case": "The governed shrink re-freeze moves the inventory by exactly the two deleted rows with nothing added, recounted, entering or leaving, and row tags identical. Every moved tree-manifest entry attributes to one of this member's own source edits and the detector tree does not move. The walker is green at C2 on figures read off the re-frozen baseline, and the standalone gate exits clean in a detached worktree with its own install."
+        },
+        {
+          "id": "A6",
+          "case": "Census stillness: no new test file, no new test title, the banked-failure set unmoved at eleven, and the negative-assertion anchor counts unchanged because the folded arm asserts positively and the tombstone walker's idiom sits outside the three scanned matchers."
+        }
+      ],
+      "checks": [
+        [ "npx", "vitest", "run", "tests/pdf/viewModelParity.test.js", "tests/pdf/goldenViewModel.test.js", "tests/pdf/screenParitySource.test.js", "tests/pdf/viewModelDocReference.test.js", "tests/pdf/sections.smoke.test.js", "tests/pdf/fullDocByteRender.test.js", "tests/joins/fieldManifest.test.js" ],
+        [ "npx", "vitest", "run", "tests/lint", "tests/build" ],
+        [ "npx", "eslint", "src/pdf/lib/viewModelBodySlices.js", "src/domain/fieldManifest.js", "tests/pdf/viewModelParity.test.js", "tests/lint/observedShapeReaders.walker.test.js" ],
+        [ "npm", "run", "typecheck:ratchet" ],
+        [ "npm", "run", "typecheck:domain:strict" ],
+        [ "npm", "run", "check:observed-shape-readers" ],
+        [ "npx", "vitest", "run", "tests/docs/enforcement-claims.test.js" ],
+        [ "npm", "run", "validate:packets" ],
+        [ "npm", "run", "check:tail" ]
+      ]
     }
   ]
 }
