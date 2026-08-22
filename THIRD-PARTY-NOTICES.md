@@ -9,7 +9,10 @@ same content as a served page at `/third-party-notices.html`.
 `2cdb87fa`. Every licence identifier below was read out of the artefact in this
 repository — a file header, a bundled licence file, a package's own
 `package.json`, or a font's embedded name table. None was taken on trust from an
-upstream project page, and none was invented.
+upstream project page, and none was invented. The two production-dependency
+elections in §3.3 were added later, on 2026-08-22 at `19b799ce`, and the
+packages they name were re-read at that commit rather than carried over from the
+verification above.
 
 **What this covers.** Three populations of third-party code and data reach a
 browser from our origins:
@@ -257,8 +260,8 @@ needs a different version, and each is listed at its own version.
 | ISC | 5 |
 | MIT and Zlib (combined) | 2 |
 | Apache-2.0 | 1 |
-| MPL-2.0 or Apache-2.0 (see §3.3) | 1 |
-| MIT or an alternative offered by the author (see §3.3) | 1 |
+| MPL-2.0 or Apache-2.0 — Apache-2.0 elected (see §3.3) | 1 |
+| MIT or an alternative offered by the author — MIT elected (see §3.3) | 1 |
 | 0BSD | 1 |
 | No identifier in `package.json` (see the note under the table) | 1 |
 
@@ -314,7 +317,7 @@ MIT on the strength of the file it distributes.
 | `core-js` | 3.49.0 | MIT | Copyright (c) 2013–2025 Denis Pushkarev (zloirock.ru) |
 | `css-line-break` | 2.1.0 | MIT | Copyright (c) 2017 Niklas von Hertzen |
 | `dfa` | 1.2.0 | MIT | not stated in the distributed package |
-| `dompurify` | 3.4.12 | (MPL-2.0 OR Apache-2.0) | not stated in the distributed package |
+| `dompurify` | 3.4.12 | (MPL-2.0 OR Apache-2.0) — **Apache-2.0 at our election, see §3.3** | not stated in the distributed package |
 | `emoji-regex-xs` | 1.0.0 | MIT | Copyright (c) 2024 Steven Levithan |
 | `events` | 3.3.0 | MIT | Copyright Joyent, Inc. and other Node contributors. |
 | `fast-deep-equal` | 3.1.3 | MIT | Copyright (c) 2017 Evgeny Poberezkin |
@@ -355,7 +358,7 @@ MIT on the strength of the file it distributes.
 | `regenerator-runtime` | 0.13.11 | MIT | Copyright (c) 2014-present, Facebook, Inc. |
 | `require-from-string` | 2.0.2 | MIT | Copyright (c) Vsevolod Strukchinsky <floatdrop@gmail.com> (github.com/floatdrop) |
 | `restructure` | 3.0.2 | MIT | Copyright (c) 2015-present Devon Govett |
-| `rgbcolor` | 1.0.1 | MIT OR SEE LICENSE IN FEEL-FREE.md | Copyright (c) 2016 Stoyan Stefanov, http://phpied.com/ |
+| `rgbcolor` | 1.0.1 | MIT OR SEE LICENSE IN FEEL-FREE.md — **MIT at our election, see §3.3** | Copyright (c) 2016 Stoyan Stefanov, http://phpied.com/ |
 | `safe-buffer` | 5.2.1 | MIT | Copyright (c) Feross Aboukhadijeh |
 | `scheduler` | 0.27.0 | MIT | Copyright (c) Meta Platforms, Inc. and affiliates. |
 | `seedrandom` | 3.0.5 | MIT | Copyright 2019 David Bau. |
@@ -378,20 +381,41 @@ MIT on the strength of the file it distributes.
 | `yoga-layout` | 3.2.1 | MIT | not stated in the distributed package |
 | `zustand` | 5.0.12 | MIT | Copyright (c) 2019 Paul Henschel |
 
-### 3.3 Dual-licensed packages with no election recorded
+### 3.3 The two production-dependency elections
 
-Two production packages offer a choice of terms and no choice has been recorded:
+Two production packages are offered under a choice of terms, and both choices
+are now recorded. **We elect Apache-2.0 for `dompurify` and the MIT licence for
+`rgbcolor`.** The elections are recorded here so a recipient knows which grant
+we distribute under, and so the question is settled on the record rather than
+left to inference:
 
-| Package | Version | Offered under | Status |
+| Package | Version | Offered under | **Our election** |
 |---|---|---|---|
-| `dompurify` | 3.4.12 | the Mozilla Public Licence 2.0 **or** Apache-2.0 (it ships both `LICENSE` and `LICENSE-MPL`) | no election recorded |
-| `rgbcolor` | 1.0.1 | the MIT licence **or** the alternative terms in the package's own `FEEL-FREE.md` | no election recorded; reaches the tree only as an optional dependency of `canvg` under `jspdf` |
+| `dompurify` | 3.4.12 | the Mozilla Public Licence 2.0 **or** Apache-2.0 (it ships both `LICENSE` and `LICENSE-MPL`) | **Apache-2.0** |
+| `rgbcolor` | 1.0.1 | the MIT licence **or** the alternative terms in the package's own `FEEL-FREE.md` | **MIT** |
 
-Unlike the two map libraries in §1.3, these were not part of the licence review
-that produced this file, and electing on either is a decision for the project
-owner rather than a note to be added quietly here. Both are listed so the
-question is visible. We use `dompurify` unmodified, and we redistribute both
-unmodified.
+The two rows in §1.3 were the earlier half of the same question, and these two
+follow the same standard: where a permissive option is offered beside a
+copyleft or bespoke one, the permissive option is the one we take. The
+disposition is the project owner's, taken on the record; nothing here was
+decided quietly.
+
+Under those elections:
+
+- **`dompurify` reaches you under Apache-2.0.** The package ships the full
+  Apache-2.0 text as its own `LICENSE`, and ships the Mozilla Public Licence 2.0
+  text as `LICENSE-MPL`. Both files travel inside the package unchanged, so the
+  option we did not take is still visible to anyone who receives it. See §4.4.
+- **`rgbcolor` reaches you under the MIT licence.** The package ships its own
+  `LICENSE.md`, which carries the MIT terms above the copyright line in the
+  table in §3.2 and then names the choice in its own words; the terms are the
+  MIT terms reproduced in §4.1, which that file's body matches. The alternative
+  it offers, `FEEL-FREE.md`, is not the grant we rely on. `rgbcolor` reaches the
+  tree only as an optional dependency of `canvg` under `jspdf`.
+
+Every licence identifier and licence body named in this section was read out of
+the package installed from this repository's lock file. We use `dompurify`
+unmodified, and we redistribute both unmodified.
 
 ---
 
@@ -469,10 +493,12 @@ PERFORMANCE OF THIS SOFTWARE.
 - **GNU General Public Licence version 2 or later** applies to TinyMCE (§1.4).
   The notice we serve is `/map/libs/tinymce/license.md`, reproduced in §1.4; it
   points at `http://www.gnu.org/licenses/gpl.html` for the licence text.
-- **Apache-2.0** applies to `@swc/helpers`, and is one of the two options for
-  `dompurify` (§3.3). Each package ships the full text as its own `LICENSE`.
-- **Mozilla Public Licence 2.0** is the other `dompurify` option; that package
-  ships the full text as `LICENSE-MPL`.
+- **Apache-2.0** applies to `@swc/helpers`, and to `dompurify` under the
+  election recorded in §3.3. Each package ships the full text as its own
+  `LICENSE`.
+- **Mozilla Public Licence 2.0** is the `dompurify` option we did not elect;
+  that package ships the full text as `LICENSE-MPL`, and it travels with the
+  package unchanged so a recipient can see the option we passed over.
 - **SIL Open Font License 1.1** applies to the Lora and Nunito families (§2).
   The Nunito faces carry `https://scripts.sil.org/OFL` in their own metadata,
   and `public/fonts/OFL.txt` is served alongside the fonts — carrying their

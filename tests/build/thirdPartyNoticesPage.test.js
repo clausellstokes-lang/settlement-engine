@@ -15,9 +15,12 @@
  *   2. A LOAD-BEARING ENTRY VANISHES. The entries that carry real obligation are
  *      the vendored map fork (MIT, with its widened grant), TinyMCE (GPL-2.0 or
  *      later, reported as it ships and deliberately deciding nothing), and the
- *      two dual-licence elections the notices exist to record — MIT elected for
- *      JSZip and for jQuery UI Touch Punch. Those four are pinned by name in
- *      BOTH files.
+ *      dual-licence elections the notices exist to record — MIT elected for
+ *      JSZip and for jQuery UI Touch Punch among the vendored map libraries
+ *      (section 1.3), and Apache-2.0 elected for dompurify with MIT for
+ *      rgbcolor among the production dependencies (section 3.3, ODQ 362.2).
+ *      All of those are pinned by name in BOTH files, and the section-3.3 pair
+ *      is compared as an ordered list read out of that section alone.
  *
  * The page is also held to the status page's contract: self-contained, so it can
  * be read independently of the application, and carrying exactly one href (the
@@ -103,6 +106,40 @@ function inventoryFromPage(source) {
   const table = section.split('</table>')[0];
   return [...table.matchAll(/<tr><td><code>([^<]+)<\/code>[^|]*?<\/td><td>([^<]+)<\/td>/g)]
     .map((m) => `${m[1]}@${m[2]}`);
+}
+
+/**
+ * The production-dependency elections as each file states them: one
+ * `name@version=licence` string per row, in document order.
+ *
+ * SLICED TO SECTION 3.3 ON BOTH SIDES, and that scoping is the whole pin. Both
+ * packages are named in at least four other registers — section 3's prose list
+ * of direct dependencies, the section 3.1 summary, their own section 3.2
+ * inventory rows, and section 4.4's licence-text notes — so a whole-document
+ * `includes('dompurify')` stays green after the election row is deleted, which
+ * is exactly the vacuity the inventory extractors above were rewritten to
+ * escape. Section 3.3 is the only region where an ELECTION is stated, so it is
+ * the only region worth reading, and the elected licence is captured rather
+ * than merely the package name: an election silently flipped from Apache-2.0 to
+ * MPL-2.0 is the drift that would matter most and a name-only scan sees none of
+ * it.
+ */
+function electionsFromMarkdown(source) {
+  const section = source.split('### 3.3')[1];
+  if (section === undefined) return [];
+  const table = section.split('\n## ')[0];
+  return [...table.matchAll(/^\| `([^`]+)` \| (\S+) \|[^|]*\| \*\*([^*|]+)\*\* \|$/gm)]
+    .map((m) => `${m[1]}@${m[2]}=${m[3]}`);
+}
+
+function electionsFromPage(source) {
+  const section = source.split('<h3>3.3 ')[1];
+  if (section === undefined) return [];
+  const table = section.split('</table>')[0];
+  return table.split('</tr>')
+    .map((row) => /<td><code>([^<]+)<\/code><\/td><td>([^<]+)<\/td>[\s\S]*<td><strong>([^<]+)<\/strong><\/td>/.exec(row))
+    .filter((match) => match !== null)
+    .map((m) => `${m[1]}@${m[2]}=${m[3]}`);
 }
 
 describe('the third-party notices surface exists in both formats', () => {
@@ -227,6 +264,80 @@ describe('the two copies agree on the dependency inventory', () => {
     // ...and prose that merely NAMES a package is not a row.
     expect(inventoryFromPage('<caption>The production dependency tree, 0 packages.</caption>'
       + '<tbody></tbody></table><p><code>zustand</code></p>')).toEqual([]);
+  });
+});
+
+describe('the two production-dependency elections are recorded (ODQ 362.2)', () => {
+  /**
+   * The elections as decided: Apache-2.0 for dompurify, MIT for rgbcolor. Pinned
+   * as literals rather than derived from either document, because a pin that
+   * reads its expected value out of the thing it is checking asserts only that
+   * the two copies agree with each other — which the ordered comparison below
+   * already covers — and would follow a wrong election down without a word.
+   */
+  const ELECTIONS = ['dompurify@3.4.12=Apache-2.0', 'rgbcolor@1.0.1=MIT'];
+  const fromMd = electionsFromMarkdown(md);
+  const fromPage = electionsFromPage(html);
+
+  it('both scans really read an election table (neither is looking at nothing)', () => {
+    expect(fromMd.length).toBeGreaterThan(0);
+    expect(fromPage.length).toBeGreaterThan(0);
+  });
+
+  it('the page records exactly the elections the Markdown records', () => {
+    // Ordered, package AND version AND elected licence: a dropped row, an added
+    // row, a re-ordered row, a version that moved on one side, and an election
+    // flipped on one side are all caught by this one assertion.
+    expect(fromPage).toEqual(fromMd);
+  });
+
+  it('both copies elect Apache-2.0 for dompurify and MIT for rgbcolor', () => {
+    expect(fromMd).toEqual(ELECTIONS);
+    expect(fromPage).toEqual(ELECTIONS);
+  });
+
+  it('both copies say plainly which grant each package reaches a recipient under', () => {
+    for (const source of [mdFlat, htmlFlat]) {
+      expect(source).toContain('We elect Apache-2.0 for');
+      // The option NOT taken stays visible, which is the point of recording an
+      // election rather than silently deleting the alternative.
+      expect(source).toMatch(/Mozilla Public Licence 2\.0[\s\S]{0,200}did not elect/);
+    }
+  });
+
+  it('CONTROL: both extractors are scoped to section 3.3, and a deleted row is seen as deleted', () => {
+    const forgedMd = '### 3.2 The inventory\n\n'
+      + '| `dompurify` | 3.4.12 | (MPL-2.0 OR Apache-2.0) | not stated |\n\n'
+      + '### 3.3 elections\n\n'
+      + '| `left-pad` | 1.0.0 | MIT **or** GPL-2.0 | **MIT** |\n\n## 4. next\n';
+    expect(electionsFromMarkdown(forgedMd)).toEqual(['left-pad@1.0.0=MIT']);
+    // THE VACUITY THIS PIN EXISTS TO REFUSE: strike the election row and the
+    // document still CONTAINS the package name, because its inventory row and
+    // its prose both name it. A whole-document includes() would stay green here.
+    const struckMd = forgedMd.replace('| `left-pad` | 1.0.0 | MIT **or** GPL-2.0 | **MIT** |\n', '');
+    expect(struckMd).toContain('dompurify');
+    expect(electionsFromMarkdown(struckMd)).toEqual([]);
+
+    const forgedHtml = '<h3>3.2 The inventory</h3><table>'
+      + '<tr><td><code>dompurify</code></td><td>3.4.12</td><td>(MPL-2.0 OR Apache-2.0)</td><td>x</td></tr>'
+      + '</table><h3>3.3 elections</h3><table><thead><tr><th>Package</th></tr></thead><tbody>'
+      + '<tr><td><code>left-pad</code></td><td>1.0.0</td><td>MIT <em>or</em> GPL-2.0</td>'
+      + '<td><strong>MIT</strong></td></tr></tbody></table><p><code>dompurify</code> again</p>';
+    expect(electionsFromPage(forgedHtml)).toEqual(['left-pad@1.0.0=MIT']);
+    const struckHtml = forgedHtml.replace(
+      '<tr><td><code>left-pad</code></td><td>1.0.0</td><td>MIT <em>or</em> GPL-2.0</td>'
+      + '<td><strong>MIT</strong></td></tr>',
+      '',
+    );
+    expect(struckHtml).toContain('dompurify');
+    expect(electionsFromPage(struckHtml)).toEqual([]);
+    // ...and an inventory row is never mistaken for an election, however
+    // table-shaped: it carries no elected-licence cell at all.
+    expect(electionsFromMarkdown('### 3.3 x\n| `dompurify` | 3.4.12 | (MPL-2.0 OR Apache-2.0) | not stated |\n'))
+      .toEqual([]);
+    expect(electionsFromPage('<h3>3.3 x</h3><table>'
+      + '<tr><td><code>dompurify</code></td><td>3.4.12</td><td>(MPL-2.0 OR Apache-2.0)</td><td>x</td></tr>'
+      + '</table>')).toEqual([]);
   });
 });
 

@@ -20670,6 +20670,96 @@
         [ "npm", "run", "validate:packets" ],
         [ "npm", "run", "check:tail" ]
       ]
+    },
+    {
+      "id": "WEB-7",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/website/WEB-7.md",
+      "verifiedBase": "19b799ce718d52e36a3b14a85fa9cfd5051ccf26",
+      "changeManifest": [
+        {
+          "_note": "Section 3.3 is reframed from 'Dual-licensed packages with no election recorded' to 'The two production-dependency elections', in the section 1.3 idiom, with an 'Our election' column resolving dompurify 3.4.12 to Apache-2.0 and rgbcolor 1.0.1 to MIT per ODQ 362.2. The section 3.1 count rows and the two section 3.2 inventory rows gain the election pointer that section 1.2 already carries for JSZip and Touch Punch; section 4.4 stops calling Apache-2.0 'one of the two options' for dompurify and names it the grant a recipient receives. The verification stamp says plainly that these rows were re-read at this base rather than carried over from 2cdb87fa. No licence body is added: Apache-2.0 already travels inside the package under 4.4 and the MIT text is already reproduced once in 4.1.",
+          "action": "MODIFY",
+          "path": "THIRD-PARTY-NOTICES.md"
+        },
+        {
+          "_note": "The served page carries the same change in the page idiom, so the URL a recipient visits and the authoritative Markdown say the same thing. The page stays DARK - no link is lit anywhere, and the darkness pin is re-run untouched.",
+          "action": "MODIFY",
+          "path": "public/third-party-notices.html"
+        },
+        {
+          "_note": "The section-sliced elections pin, BOTH SIDES. electionsFromMarkdown slices between '### 3.3' and the next '##'; electionsFromPage slices between '<h3>3.3 ' and that section's '</table>'. Rows are read as name@version=licence and the two ordered lists compared with toEqual, so a dropped, added, re-ordered or one-sidedly-flipped election reds. The elected values are ALSO pinned as literals so mutual agreement on a wrong election still reds. The CONTROL feeds both extractors a forged row, a struck row and a section-3.2-shaped near-miss, and asserts the struck document still CONTAINS the package name while the extractor returns [] - the whole-document includes() vacuity, executed. Existing file extended: one describe, five it() titles, no new test file.",
+          "action": "TEST",
+          "path": "tests/build/thirdPartyNoticesPage.test.js"
+        },
+        {
+          "_note": "The estate lighting census re-recorded on titles and suiteTitles alone, 20719/5785 -> 20724/5786, with the attribution block naming censusAuthorization 362.2 and 402 C6 per 299.4's binding-forward rule. Derived figure by figure from the walker's own convictions; because the census is sequenced, the first red arriving at titles is the executed proof that files, parked and credited did not move.",
+          "action": "MODIFY",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "The elected VALUES are deliberately NOT named here. A landed packet asserting 'Apache-2.0' as a live symbol would trap a future owner who re-elects; the rows anchor on structure instead, and the pin below is what holds the values.",
+          "path": "THIRD-PARTY-NOTICES.md",
+          "symbol": "### 3.3 The two production-dependency elections"
+        },
+        {
+          "path": "public/third-party-notices.html",
+          "symbol": "<h3>3.3 The two production-dependency elections</h3>"
+        },
+        {
+          "path": "tests/build/thirdPartyNoticesPage.test.js",
+          "symbol": "function electionsFromMarkdown"
+        },
+        {
+          "path": "tests/build/thirdPartyNoticesPage.test.js",
+          "symbol": "function electionsFromPage"
+        },
+        {
+          "path": "tests/build/thirdPartyNoticesPage.test.js",
+          "symbol": "the two production-dependency elections are recorded (ODQ 362.2)"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "Both notices copies record the two elections at section 3.3 in the section 1.3 idiom: dompurify 3.4.12 resolves to Apache-2.0 and rgbcolor 1.0.1 to MIT, and neither copy still describes either package as having no election recorded."
+        },
+        {
+          "id": "A2",
+          "case": "The elections pin reads its rows from section 3.3 ALONE on both sides and compares ordered name@version=licence lists. A control feeds each extractor a forged row, a struck row and a section-3.2-shaped near-miss, and asserts the struck document still contains the package name while the extractor returns an empty list."
+        },
+        {
+          "id": "A3",
+          "case": "Four executed mutations convict: the page's rgbcolor election row deleted (2 red), the Markdown dompurify election flipped to MPL-2.0 (2 red), the Markdown 3.3 heading renumbered so the section vanishes (5 red, including the liveness arm), and the not-elected sentence removed from the page (1 red). Each is restored and the restoration checksum-verified."
+        },
+        {
+          "id": "A4",
+          "case": "Every licence fact is re-derived from the package installed at this base, never recalled: dompurify's manifest string and its two shipped licence files by SHA-256, rgbcolor's manifest string and its two shipped files by SHA-256, and the executed finding that rgbcolor's own MIT body whitespace-normalises to exactly the text section 4.1 already reproduces."
+        },
+        {
+          "id": "A5",
+          "case": "The OFL rider is reported as already discharged rather than re-executed: public/fonts/OFL.txt is present at this base, its trailing 4,303 bytes hash to the chair's elected-body SHA-256, the incompleteness marker is absent, and the cure's commit is an ancestor of the compile's own pin. No licence text is re-shipped."
+        },
+        {
+          "id": "A6",
+          "case": "The page stays dark and the existing surface pins hold: nothing in src/ references the notices page, the page carries exactly one href, it loads no external resource, the 107-row inventory still agrees between the two copies, and the OFL agreement arm is green in the cured direction."
+        },
+        {
+          "id": "A7",
+          "case": "Census motion is titles and suiteTitles only, derived from the walker's sequenced convictions rather than arithmetic, with no new test file, no change to files/parked/credited, and the banked-failure set unmoved at eleven."
+        }
+      ],
+      "checks": [
+        [ "npx", "vitest", "run", "tests/build/thirdPartyNoticesPage.test.js" ],
+        [ "npx", "vitest", "run", "tests/lint/sovereigntyLightingContract.walker.test.js" ],
+        [ "npx", "vitest", "run", "tests/lint", "tests/build", "tests/ops" ],
+        [ "npx", "vitest", "run", "tests/docs/enforcement-claims.test.js" ],
+        [ "npx", "eslint", "tests/build/thirdPartyNoticesPage.test.js", "tests/lint/sovereigntyLightingContract.walker.test.js" ],
+        [ "npm", "run", "validate:packets" ],
+        [ "npm", "run", "check:tail" ]
+      ]
     }
   ]
 }

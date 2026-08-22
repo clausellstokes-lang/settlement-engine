@@ -5408,7 +5408,39 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   proof stayed green — the arm is one equality and cannot say whose delta vanished.
     //   Negative control at the slot: the slot's own tuple put back reds at `titles` by exactly
     //   this delta ("expected 20751 to be 20750").
-    files: 2500, parked: 365, credited: 2135, titles: 20751, suiteTitles: 5791,
+    // ── RE-RECORDED 2026-08-22 BY WEB-7, THE NOTICES ELECTIONS RECORD ──
+    // `censusAuthorization`: ODQ §362.2 (the signature on the two dual-licence elections,
+    // which directs the notices surface to record both at its next touched landing) and
+    // ODQ §402 C6 (the chair's inclusion of WEB-7 in the website train), under §299.4's
+    // binding-forward rule that a member moving any census NAMES ITS AUTHORIZING DECISION.
+    // Both are named in WEB-7's packet header.
+    // 20,719/5,785 → 20,724/5,786 on `titles` and `suiteTitles` ALONE. `files`, `parked`
+    // and `credited` are UNCHANGED and the census is SEQUENCED, so their stillness is
+    // EXECUTED rather than asserted: the first conviction arrived at `titles`, which a
+    // sequenced census cannot reach past a red `files`, `parked` or `credited`.
+    // This member mints NO test file. It extends the already-credited
+    // tests/build/thirdPartyNoticesPage.test.js with ONE literal describe holding FIVE
+    // straight-line it() calls with string-literal titles — no .each, no runIf, no
+    // nesting, and every loop lives INSIDE a named test (the SP-D idiom) — so the file
+    // stays credited and all five titles are visible. Its other two files are a Markdown
+    // notice document and a static page under public/; neither is a test file.
+    // ⛔ DERIVED FIGURE BY FIGURE FROM THE WALKER'S OWN CONVICTIONS, never by arithmetic:
+    //   "expected 20724 to be 20719" and then, on the re-run the sequence permitted,
+    //   "expected 5786 to be 5785". The suite delta was READ rather than predicted, which
+    //   is the lesson the §323.2 rider taught this same block one member earlier.
+    // ⭐⭐ THE CARRY LAW, EXECUTED AT THE LANDING SLOT. This member was authored at base 19b799ce
+    //   (after-figure 2,497/364/2,133/20,724/5,786) and rebased onto 2b82121f (WEB-6, the 30th
+    //   landing). The DELTA `+0/+0/+0/+5/+1` is what crossed; the tuple was RE-DERIVED at this
+    //   base by execution, never carried. ⛔ THE BASE HAD MOVED UNDER IT: H8B (+4 titles),
+    //   MF-T2H (+2 files/+2 credited/+6 titles/+2 suite titles), WEB-1 (+1 file/+1 parked/
+    //   +1 title), WEB-4 (+2 titles), WEB-5 (+18 titles/+4 suite titles) and WEB-6 (+1 title)
+    //   re-recorded the six blocks directly above, so the after-figure re-derives
+    //   20,724 → 20,756 and 5,786 → 5,792. Carrying the authored tuple would have silently
+    //   reverted all six landed re-records while every WEB-7 proof stayed green — the arm is
+    //   one equality and cannot say whose delta vanished. Negative control at the slot: the
+    //   slot's own tuple put back reds at `titles` by exactly this delta
+    //   ("expected 20756 to be 20751").
+    files: 2500, parked: 365, credited: 2135, titles: 20756, suiteTitles: 5792,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

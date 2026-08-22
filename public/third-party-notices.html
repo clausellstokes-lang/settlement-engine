@@ -103,7 +103,7 @@
     </header>
 
     <section class="verified">
-      <p><strong>Verified 21 August 2026</strong>, against the build branch <code>claude/composite-r4</code> at <code>2cdb87fa</code>. Every licence identifier below was read out of the artefact in our own repository &mdash; a file header, a bundled licence file, a package manifest, or a font&rsquo;s embedded name table. None was taken on trust from an upstream project page, and none was invented.</p>
+      <p><strong>Verified 21 August 2026</strong>, against the build branch <code>claude/composite-r4</code> at <code>2cdb87fa</code>. Every licence identifier below was read out of the artefact in our own repository &mdash; a file header, a bundled licence file, a package manifest, or a font&rsquo;s embedded name table. None was taken on trust from an upstream project page, and none was invented. The two production-dependency elections in section 3.3 were added later, on 22 August 2026 at <code>19b799ce</code>, and the packages they name were re-read at that commit rather than carried over from the verification above.</p>
     </section>
 
     <h2>What this covers</h2>
@@ -271,8 +271,8 @@ Licensed under the terms of [GNU General Public License Version 2 or later](http
           <tr><td>ISC</td><td>5</td></tr>
           <tr><td>MIT and Zlib (combined)</td><td>2</td></tr>
           <tr><td>Apache-2.0</td><td>1</td></tr>
-          <tr><td>MPL-2.0 or Apache-2.0 (see section 3.3)</td><td>1</td></tr>
-          <tr><td>MIT or an alternative offered by the author (see section 3.3)</td><td>1</td></tr>
+          <tr><td>MPL-2.0 or Apache-2.0 &mdash; Apache-2.0 elected (see section 3.3)</td><td>1</td></tr>
+          <tr><td>MIT or an alternative offered by the author &mdash; MIT elected (see section 3.3)</td><td>1</td></tr>
           <tr><td>0BSD</td><td>1</td></tr>
           <tr><td>No identifier in the package manifest (see the note below)</td><td>1</td></tr>
         </tbody>
@@ -330,7 +330,7 @@ Licensed under the terms of [GNU General Public License Version 2 or later](http
           <tr><td><code>core-js</code></td><td>3.49.0</td><td>MIT</td><td>Copyright (c) 2013–2025 Denis Pushkarev (zloirock.ru)</td></tr>
           <tr><td><code>css-line-break</code></td><td>2.1.0</td><td>MIT</td><td>Copyright (c) 2017 Niklas von Hertzen</td></tr>
           <tr><td><code>dfa</code></td><td>1.2.0</td><td>MIT</td><td>not stated in the distributed package</td></tr>
-          <tr><td><code>dompurify</code></td><td>3.4.12</td><td>(MPL-2.0 OR Apache-2.0)</td><td>not stated in the distributed package</td></tr>
+          <tr><td><code>dompurify</code></td><td>3.4.12</td><td>(MPL-2.0 OR Apache-2.0) &mdash; <strong>Apache-2.0 at our election, see section 3.3</strong></td><td>not stated in the distributed package</td></tr>
           <tr><td><code>emoji-regex-xs</code></td><td>1.0.0</td><td>MIT</td><td>Copyright (c) 2024 Steven Levithan</td></tr>
           <tr><td><code>events</code></td><td>3.3.0</td><td>MIT</td><td>Copyright Joyent, Inc. and other Node contributors.</td></tr>
           <tr><td><code>fast-deep-equal</code></td><td>3.1.3</td><td>MIT</td><td>Copyright (c) 2017 Evgeny Poberezkin</td></tr>
@@ -371,7 +371,7 @@ Licensed under the terms of [GNU General Public License Version 2 or later](http
           <tr><td><code>regenerator-runtime</code></td><td>0.13.11</td><td>MIT</td><td>Copyright (c) 2014-present, Facebook, Inc.</td></tr>
           <tr><td><code>require-from-string</code></td><td>2.0.2</td><td>MIT</td><td>Copyright (c) Vsevolod Strukchinsky &lt;floatdrop@gmail.com&gt; (github.com/floatdrop)</td></tr>
           <tr><td><code>restructure</code></td><td>3.0.2</td><td>MIT</td><td>Copyright (c) 2015-present Devon Govett</td></tr>
-          <tr><td><code>rgbcolor</code></td><td>1.0.1</td><td>MIT OR SEE LICENSE IN FEEL-FREE.md</td><td>Copyright (c) 2016 Stoyan Stefanov, http://phpied.com/</td></tr>
+          <tr><td><code>rgbcolor</code></td><td>1.0.1</td><td>MIT OR SEE LICENSE IN FEEL-FREE.md &mdash; <strong>MIT at our election, see section 3.3</strong></td><td>Copyright (c) 2016 Stoyan Stefanov, http://phpied.com/</td></tr>
           <tr><td><code>safe-buffer</code></td><td>5.2.1</td><td>MIT</td><td>Copyright (c) Feross Aboukhadijeh</td></tr>
           <tr><td><code>scheduler</code></td><td>0.27.0</td><td>MIT</td><td>Copyright (c) Meta Platforms, Inc. and affiliates.</td></tr>
           <tr><td><code>seedrandom</code></td><td>3.0.5</td><td>MIT</td><td>Copyright 2019 David Bau.</td></tr>
@@ -397,18 +397,24 @@ Licensed under the terms of [GNU General Public License Version 2 or later](http
       </table>
     </div>
 
-    <h3>3.3 Dual-licensed packages with no election recorded</h3>
-    <p>Two production packages offer a choice of terms and no choice has been recorded:</p>
+    <h3>3.3 The two production-dependency elections</h3>
+    <p>Two production packages are offered under a choice of terms, and both choices are now recorded. <strong>We elect Apache-2.0 for <code>dompurify</code> and the MIT licence for <code>rgbcolor</code>.</strong> The elections are recorded here so a recipient knows which grant we distribute under, and so the question is settled on the record rather than left to inference.</p>
     <div class="tablewrap">
       <table>
-        <thead><tr><th>Package</th><th>Version</th><th>Offered under</th><th>Status</th></tr></thead>
+        <thead><tr><th>Package</th><th>Version</th><th>Offered under</th><th>Our election</th></tr></thead>
         <tbody>
-          <tr><td><code>dompurify</code></td><td>3.4.12</td><td>the Mozilla Public Licence 2.0 <em>or</em> Apache-2.0 (it ships both texts)</td><td>no election recorded</td></tr>
-          <tr><td><code>rgbcolor</code></td><td>1.0.1</td><td>the MIT licence <em>or</em> the alternative terms the package offers alongside it</td><td>no election recorded; reaches the tree only as an optional dependency of <code>canvg</code> under <code>jspdf</code></td></tr>
+          <tr><td><code>dompurify</code></td><td>3.4.12</td><td>the Mozilla Public Licence 2.0 <em>or</em> Apache-2.0 (it ships both texts)</td><td><strong>Apache-2.0</strong></td></tr>
+          <tr><td><code>rgbcolor</code></td><td>1.0.1</td><td>the MIT licence <em>or</em> the alternative terms the package offers alongside it</td><td><strong>MIT</strong></td></tr>
         </tbody>
       </table>
     </div>
-    <p>Unlike the two map libraries in section 1.3, these were not part of the licence review that produced this page, and electing on either is a decision for the project owner rather than a note to be added quietly here. Both are listed so the question is visible. We use <code>dompurify</code> unmodified, and we redistribute both unmodified.</p>
+    <p>The two rows in section 1.3 were the earlier half of the same question, and these two follow the same standard: where a permissive option is offered beside a copyleft or bespoke one, the permissive option is the one we take. The disposition is the project owner&rsquo;s, taken on the record; nothing here was decided quietly.</p>
+    <p>Under those elections:</p>
+    <ul>
+      <li><strong><code>dompurify</code> reaches you under Apache-2.0.</strong> The package ships the full Apache-2.0 text as its own licence file, and ships the Mozilla Public Licence 2.0 text beside it. Both travel inside the package unchanged, so the option we did not take is still visible to anyone who receives it. See section 4.4.</li>
+      <li><strong><code>rgbcolor</code> reaches you under the MIT licence.</strong> The package ships its own licence file, which carries the MIT terms above the copyright line in the table in section 3.2 and then names the choice in its own words; the terms are the MIT terms reproduced in section 4.1, which that file&rsquo;s body matches. The alternative it offers alongside is not the grant we rely on. <code>rgbcolor</code> reaches the tree only as an optional dependency of <code>canvg</code> under <code>jspdf</code>.</li>
+    </ul>
+    <p>Every licence identifier and licence body named in this section was read out of the package installed from our own lock file. We use <code>dompurify</code> unmodified, and we redistribute both unmodified.</p>
 
     <h2>4. Licence texts</h2>
     <p>Where a licence is short and shared by many packages, its text is reproduced here once and the copyright notices it applies to are the ones listed in the tables above. Where a licence is long, the package&rsquo;s own copy travels inside the package.</p>
@@ -463,8 +469,8 @@ PERFORMANCE OF THIS SOFTWARE.</pre>
     <h3>4.4 The longer licences</h3>
     <ul>
       <li><strong>GNU General Public Licence version 2 or later</strong> applies to TinyMCE (section 1.4). The notice we serve is the bundled <code>license.md</code>, reproduced in section 1.4; it points at the GNU project&rsquo;s own copy of the licence text.</li>
-      <li><strong>Apache-2.0</strong> applies to <code>@swc/helpers</code>, and is one of the two options for <code>dompurify</code> (section 3.3). Each package ships the full text as its own licence file.</li>
-      <li><strong>Mozilla Public Licence 2.0</strong> is the other <code>dompurify</code> option; that package ships the full text alongside the Apache one.</li>
+      <li><strong>Apache-2.0</strong> applies to <code>@swc/helpers</code>, and to <code>dompurify</code> under the election recorded in section 3.3. Each package ships the full text as its own licence file.</li>
+      <li><strong>Mozilla Public Licence 2.0</strong> is the <code>dompurify</code> option we did not elect; that package ships the full text alongside the Apache one, and it travels with the package unchanged so a recipient can see the option we passed over.</li>
       <li><strong>SIL Open Font License 1.1</strong> applies to the Lora and Nunito families (section 2). The Nunito faces carry the licence URL in their own metadata, and a notice file is served alongside the fonts &mdash; carrying their copyright notices and the verbatim body of the licence (section 2).</li>
       <li><strong>Zlib</strong>, combined with MIT, applies to <code>pako</code>; the package ships both texts.</li>
     </ul>
