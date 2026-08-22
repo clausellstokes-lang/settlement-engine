@@ -15868,3 +15868,39 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   walker/sentinel tests are reader-census instruments only. OSR-10's S0
   cross-check is pending against this row: its base must read EXIT 1 at
   9bfae712 — a whole reading there is itself a finding, not a green.
+
+## §390 — T2Bf COLLECTED: BUILT + FULL-GATE GREEN, HOLDING FOR THE WINDOW; ONE JUDGMENT RATIFIED, THREE RAISED ITEMS RULED (2026-08-22 ~18:05)
+
+- **The member:** tip 7d6bde7c for CAS, base 9bfae712 unmoved. The collision
+  witness executed BOTH WAYS — three engineered tag-seam collisions at base, zero
+  with the member, negative control distinct in both readings; separator count
+  0→4; mutants convict independently (stripping the separators reds the pin, the
+  injectivity arm convicts alone). Declared re-record 0 added / 0 removed / 1
+  moved, cause stated at the pin (§372/§387); census unmoved
+  2497/364/2133/20719/5785. Full gate exit 0: banked 11 of 11 (ceiling 11),
+  STRICT DIST 52/433 zero-defect, typecheck 173/173. Foreign stash preserved.
+- **J-TET2BF-1 RATIFIED:** the backslash-u001f ESCAPE spelling over raw U+001F
+  bytes. The controlBytes ratchet stays unmoved — the lane rightly refused to
+  widen a landed guard, and the chair declines it too: the escape plus the
+  output-equivalence proof (both function bodies evaluated over six tuples to
+  one digest b278b339) is the better cure. Noted for the record: that same
+  ratchet is the defect's origin — MF-T2B could not copy the sealed bytes
+  either, re-spelled them, and dropped four invisible separators with nothing
+  on screen to show it.
+- **Rulings on the three RAISED:**
+  1. **§372.2 comparator divergence row — QUEUED** (deferred, not dropped): the
+     dual-run comparator gets a declared-divergence row for the escape spelling
+     at MEASDUAL phase-2 or the comparator's next touch, whichever comes first,
+     else it reads the cured module as drift.
+  2. **The dependency-ref join non-injectivity** (sealed source too — a
+     one-element list containing 'a,b' joins like the two-element 'a','b') —
+     **CHARTERED INTO T2H's brief:** cure by length-prefixed or escaped join
+     BEFORE sealSpatialEffect becomes its first real consumer; T2Bf already
+     precedes T2H in the port order.
+  3. **COORDINATE_ABI_VERSION — STANDING TRIGGER recorded:** the bump lands
+     WITH the first member that persists a canonicalBytes artifact; T2H's
+     brief carries it beside the join cure. Held at 1 now — nothing was ever
+     minted under the broken encoding.
+- Window law unchanged: T2Bf HOLDS; landing order mint → RR-1 → RR-2 → the
+  builds in GO order. Two of four seats now free (T2Bf, CT-2 done-and-holding);
+  refill per §388 is the next seat question.

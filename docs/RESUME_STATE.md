@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~18:05: T2Bf COLLECTED (§390) — tip 7d6bde7c, full gate exit 0, holds
+# for GO after RR-2. J-TET2BF-1 ratified (the u001f ESCAPE; ratchet unmoved).
+# T2H's brief now OWES: the dep-join injectivity cure + the ABI-version
+# trigger. Comparator divergence row QUEUED. Two seats free — refill per §388.
 # ⭐ ~17:40: THE ENVELOPE QUESTION SETTLED BY DISCRIMINATOR — both gate
 # exits 1; the envelope is DIGEST-based; §384 UNAMENDED; CT-2's break real
 # and ADDITIVE (direct digest triple: frozen/base/member all differ). CT-2
