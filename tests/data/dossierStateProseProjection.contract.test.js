@@ -70,7 +70,7 @@ describe('the dossier state-prose projection', () => {
     }
   });
 
-  it('carries the measured corpus: 65 state blocks over 6 desks, 78 causal families', () => {
+  it('carries the measured corpus: 68 state blocks over 6 desks, 78 causal families', () => {
     // 59 block headers were authored at the 2026-08-03 merge; DS-GEN-4 is FOLDED INTO
     // DS-STR-1 (§0h V1-a) and keeps its id for cross-references without owning a pool,
     // so 58 landed.
@@ -97,7 +97,19 @@ describe('the dossier state-prose projection', () => {
     // ONLY removed line is its own header count comment. Key-by-key across all seven:
     // 3 ADDED, 0 REMOVED, 0 CHANGED. No existing pool changed length, so drawVariant's
     // `% eligible.length` cannot select differently anywhere, and there is no capsule.
-    expect(allStateBlocks.length).toBe(65);
+    //
+    // 65 → 68 (2026-08-22, car CT-3, ratified at ODQ §378 and sequenced at §387). The
+    // institutions chapter adds THREE blocks — DS-GEN-17 (the company the town keeps),
+    // DS-GEN-18 (why these workshops) and DS-FTH-4 (why the temple holds its ground) —
+    // on the same wholly-new-block shape, and lands DARK. This car is the first to touch
+    // TWO leaves, because DS-FTH- routes to the warFaith desk while DS-GEN- routes to
+    // general; FIVE leaves came out of the regeneration BYTE-IDENTICAL (defense, economy,
+    // power, stressors and the causal leaf) and each of the two that moved has exactly
+    // ONE removed line, its own header count comment. Key-by-key across all seven:
+    // 3 ADDED, 0 REMOVED, 0 CHANGED, and zero pre-existing (blockId, poolKey) pools
+    // changed length — measured directly, which is the property drawVariant actually
+    // reads. No same-seed movement, so no capsule.
+    expect(allStateBlocks.length).toBe(68);
     expect(Object.keys(DOSSIER_CAUSAL_PROSE).length).toBe(78);
   });
 
@@ -118,7 +130,11 @@ describe('the dossier state-prose projection', () => {
     // 2201 → 2238 (2026-08-22, CT-2, ODQ §378/§387). Re-pinned to the MEASURED total
     // again, per CT-0 §5 R-5 and on CT-1a's ratified precedent: the floor tracks the
     // corpus at every car, so the slack a parser regression could hide in never opens.
-    expect(stateVariants).toBeGreaterThanOrEqual(2238);
+    //
+    // 2238 → 2269 (2026-08-22, CT-3, ODQ §378/§387). Re-pinned to the MEASURED total on
+    // the same standing rule. The car's own arithmetic is thirteen pools and thirty-one
+    // variants across two desks: general 613 → 634 and warFaith 411 → 421.
+    expect(stateVariants).toBeGreaterThanOrEqual(2269);
     expect(causalVariants).toBeGreaterThanOrEqual(468);
   });
 

@@ -34,6 +34,15 @@ left standing), dark on the same terms. The rule above governs this paragraph
 too: the figures here are **this chapter's own authored arithmetic and nothing
 else**, and no current corpus total is asserted anywhere in this file.
 
+**AS EXTENDED ONCE MORE (CT-3, 2026-08-22).** The train's third car adds a
+seventh section beside the sixth: **three blocks, thirteen pools, thirty-one
+authored variants** on the institutions a town keeps and why it keeps them (what
+the roster says about the place, why these workshops and not others, and what
+holds an observance in its ground), dark on the same terms. The rule above
+governs this paragraph too: the figures here are **this chapter's own authored
+arithmetic and nothing else**, and no current corpus total is asserted anywhere
+in this file. This chapter **mints no slot at all** — a first for the train.
+
 **What this file is.** The dossier-native register applied not to joins but to
 **STANDING STATE**. The sibling annex answers *why is the town like this*; this
 file answers the prior question the dossier never actually asked in prose —
@@ -419,6 +428,21 @@ reads at all**, and which is absent entirely in an aspatial world; where the
 mirror is dark the block is silent by construction and owns nothing. When the
 composer lane wires any of the three, the cells above gain them and this
 paragraph goes with the one before it.
+
+**THE CT-3 INSTITUTION BLOCKS LAND ON THE SAME TERMS — the census is UNCHANGED A
+THIRD TIME.** `DS-GEN-17`, `DS-GEN-18` and `DS-FTH-4` (the CT-3 section at the end
+of this file) **add no RENDERED SURFACE**, so the denominator above is untouched
+and the coverage reading stands, and none of the three is written into the
+owning-block column, for the same reason the two chapters before it were not.
+Two caveats belong here rather than only in their own blocks. `DS-GEN-18` is
+**silent by construction** on a settlement carrying neither an active chain nor an
+exploitation ledger, exactly as `DS-GEN-15` is silent where the fabric mirror is
+dark; `R-DST-K` governs the silence in both. And `DS-FTH-4`'s `ENDOWED` pool keys
+on `templeWealth`, which is **architected and NOT BUILT at this tip** (WF-7): the
+pool is authored, marked, and **not drawable until that field exists**, on the
+same convention `DS-FTH-3` already uses for its tenure-dependent variants. When
+the composer lane wires any of the three, the cells above gain them and this
+paragraph goes with the two before it.
 
 **RECORDED SCOPE EXCLUSIONS — surfaces deliberately outside the denominator.**
 Each is a decision, not an oversight, and each is vetoable.
@@ -5872,3 +5896,170 @@ the blocks themselves rather than left for a later reader to re-find: no variant
 roll's movement to the roads (`R-DST-B`, and `DS-POP-1` owns that record), no variant splits a
 gain between birth and arrival (the demographic receipt is `DS-POP-1`'s), and no variant connects
 an unanchored event forward (`DS-GEN-9`'s gate).
+
+---
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+## CT-3 — THE INSTITUTIONS A TOWN KEEPS (why the roster, why these crafts, and why the observance holds)
+
+*Authored 2026-08-22 under the content-train charter (ODQ §360 / §360.1 / §361), compiled at
+CT-0 and ratified at ODQ §378; sequenced at §387. Three blocks, thirteen pools, thirty-one
+variants. The blocks land DARK: no desk reads them yet, and composer wiring is its own lane
+(CT-0 R-1, confirmed at §378), exactly as CT-1a and CT-2 landed.*
+
+*Register inheritance is by BLOCK ID, which is this file's addressing scheme (§0h V1-f). The two
+`DS-GEN-` blocks inherit WRITER-4's `R-DST-W4-*` resolutions and `DS-FTH-4` inherits WRITER-3's
+faith rulings, exactly as they would if they sat inside those clusters. They are gathered in one
+section, beside CT-1a's and CT-2's, so the chapter is reviewable and vetoable as a unit and so no
+cluster's own closing arithmetic is falsified by an addition made weeks after its merge.*
+
+*THE CHAPTER LAW (CT-0 §2, `R-DST-W4-a` generalised): STRUCTURAL CAUSE IS LICENSED, HISTORICAL
+CAUSE IS RECORD-GATED. This chapter's subject is COMPOSITION — what a town keeps and what keeping
+it means — and composition is standing configuration almost everywhere, so `R-DST-B` licenses a
+structural clause and forbids a historical one across nearly the whole chapter. The one exception
+is `upstreamMissing[]`, which is a RECORDED break and licenses `DS-GEN-18`'s `STALLED` pool to say
+that a supply failed. Everywhere else the prose says what IS and declines to say how it got there.*
+
+*⛔ **THE OB-5 BOUNDARY, RE-VERIFIED AT THIS TIP AND NOT ASSUMED FROM THE COMPILE.** No variant in
+this chapter asserts WHERE an institution sits, or reads a `priorityCategory` row, or reasons from
+one. The 42 mis-keyed craft and commerce rows (ODQ §174.2, cure chartered as OB-5) make
+placement-by-category prose untruthful at this tip, and siting prose is a post-OB-5, post-seam
+entry (CT-0 R-2 / R-6). Every claim below is COMPOSITION, FUNCTION or SUPPLY, and never siting,
+adjacency, precinct or route.*
+
+*⛔ **THIS CHAPTER MINTS NO SLOT.** It is the first car of the train that does not, and the absence
+is a finding rather than a tidiness: the compiled draft declared three mints and, measured against
+this annex, not one of them was needed. The two corrections are recorded on the blocks that carry
+them. §0c-2's own preamble mints only "the proper nouns §0c does not carry", and §0c carries every
+fill this chapter needs.*
+
+*THE PRECEDENCE PRINCIPLE, STATED ONCE FOR THE CHAPTER. Each block's state key is a TOTAL,
+DETERMINISTIC resolution over its own receipt tuple: the keys are evaluated in a STATED ORDER and
+the first whose antecedent holds is the resolution. The order is **MOST-CONSTRAINED ANTECEDENT
+FIRST**, because a key exists to say what is DISTINCTIVE about this town, and an antecedent that
+almost every town satisfies distinguishes nothing while crowding out the ones that do. Where a
+key's antecedent set cannot cover the tuple, the residue is written down explicitly and never left
+implicit: `DS-GEN-17` carries a pure else-arm, and `DS-GEN-18` and `DS-FTH-4` carry a stated
+SILENCE under `R-DST-K`. `DS-FTH-4` departs from the ordering principle once, for a quoted reason
+recorded on the block.*
+
+*No variant below carries a digit, an em dash or an exclamation point; the block headers use a
+middle dot for the same reason CT-1a's and CT-2's do, since a title is projected verbatim into its
+desk leaf and the leaf's em-dash count is pinned exactly. Mechanisms travel and geography does not:
+no compass word, no real-world place, no named analogy.*
+
+---
+
+### DS-GEN-17 · Overview/Power › The company the town keeps (what the roster says about the place) · `compound.inst{hasCourtSystem, hasPrison, hasHospital, hasChurch, hasGranary, hasPort, hasNavy, hasMagicInst}` × tier
+
+**RECEIPT:** the institution-composition booleans derived at `src/generators/priorityHelpers.js` by name-matching the settlement's own institution roster (`hasCourtSystem` · `hasPrison` · `hasHospital` · `hasChurch` · `hasGranary` · `hasPort` · `hasNavy` · `hasMagicInst`, alongside `hasMilitaryInst` and `hasWatch`), which is the same boolean set `DS-DEF-6`'s receipt names · the settlement tier. Read as COMPOSITION ONLY: the booleans say WHAT the roster carries, never where a row of it stands.
+**STATE-KEY:** a TOTAL, DETERMINISTIC resolution over the boolean set, evaluated in the ORDER WRITTEN and stopping at the first key whose antecedent holds — `ADMINISTERED` (`hasCourtSystem` AND `hasPrison`) / `GARRISONED` (a standing paid force: `hasMilitaryInst`, or `hasNavy`, or `hasWatch`) / `LETTERED` (`hasMagicInst`) / `PROVISIONED` (`hasGranary` OR `hasHospital`) / `BARE` (the else-arm: none of the four antecedents holds). **THE ORDER IS MOST-CONSTRAINED FIRST, AND THE ORDER IS THE ARGUMENT.** `ADMINISTERED` requires TWO simultaneous booleans and is the hardest antecedent in the set to satisfy. `GARRISONED` requires a force the town PAYS for rather than merely a wall it built. `LETTERED` requires the single most tier-gated row in the set. `PROVISIONED` requires either of the two commonest rows and would swamp every other reading if it ran first, since a granary is close to universal above the smallest tiers, and a key that fires on almost every town tells a reader nothing about this one. Ordering by how hard an antecedent is to satisfy therefore also orders by how much the resolved key says about THIS town rather than about towns in general.
+⛔ **WHY `BARE` CANNOT CARRY THE TIER CLAUSE THE COMPILE GAVE IT.** The compiled draft keyed `BARE` as *few of the above, LOW TIER*. **A tier-gated else-arm is not total.** A high-tier settlement whose roster happens to carry none of the four antecedents would resolve to NO KEY AT ALL, and the block would fall silent on precisely the town whose empty roster is most worth remarking. `BARE` is therefore the pure else-arm, and tier stays in the receipt as what it actually is: the fact that EXPLAINS a thin roster without GATING the key. A composer may still read tier to choose among `BARE`'s variants; it may not read it to decide whether `BARE` applies.
+**SLOTS:** `{settlement}`
+**SECTION-TARGET:** `overview` · also `power`
+**PROVENANCE:** The composition mechanism: what a town keeps at all is the town explaining what it is for. Spoken strictly through the boolean composition facts, and through no count, no siting and no adjacency. `R-DST-B` is satisfied without strain, because the roster booleans are STANDING CONFIGURATION and every variant below is a structural clause; not one reaches for how the roster came to be the way it is, and there is no cause pool in this block. **Non-redundancy (`R-DST-A`):** `DS-DEF-6` reads the same booleans and reads them as defense CAPABILITY, keyed against `scores.economic/magical`, `tradeAccess` and `blockade`; this block reads them as civic CHARACTER, keyed against nothing but themselves and tier, and the two compose on different pages (`overview`/`power` against `defense`). Two blocks may read one row where they assert DIFFERENT FACTS about it, which is the case `DS-GEN-15` and `DS-GEN-16` established for the stones and the record and which this block inherits rather than re-argues.
+
+**`ADMINISTERED`**
+1. `[ledger]` {settlement} keeps a court and keeps a place for those the court is finished with, which means the town has decided its quarrels are its own business to settle.
+2. `[visitor]` {settlement} is administered, visibly: rules here have rooms, and the rooms have officers.
+3. `[street]` In {settlement} the law is a building you can point to, and the pointing settles a certain number of arguments on its own.
+
+**`GARRISONED`**
+1. `[visitor]` Armed order is part of {settlement}'s furniture; the town keeps professionals for its safety rather than trusting to luck and neighbours.
+2. `[ledger]` {settlement} pays for its own defense in wages, not only in stone, and the paying is a standing decision renewed every season.
+
+**`LETTERED`**
+1. `[visitor]` {settlement} supports work that only towns of a certain seriousness support, and the seriousness rubs off on the rest of the place.
+2. `[street]` There are people in {settlement} whose whole trade is knowing things, and the town has decided it can afford them.
+
+**`PROVISIONED`**
+1. `[ledger]` {settlement} keeps stores against the bad season and care for the bad year; the town has met scarcity before and built its answer into the roster.
+2. `[elder]` A town does not keep a granary out of optimism; {settlement}'s provision is the polite form of its memory.
+
+**`BARE`**
+1. `[counterforce]` {settlement} keeps few institutions because it needs few; what a larger town does with buildings, this one does with acquaintance.
+2. `[street]` Nothing in {settlement} is official that could instead be somebody's job on the side.
+
+---
+
+### DS-GEN-18 · Economics/Services › Why these workshops (the crafts explained by their feed) · `economicState.activeChains[]` × `resourceAnalysis.exploitation` × `economicState.{isEntrepot, primaryImports}`
+
+**RECEIPT:** `economicState.activeChains[]` rows, each carrying `resource`, `status`, `upstreamMissing[]`, `processingInstitutions[]` and `outputs[]` · `resourceAnalysis.exploitation`, whose engine shape is exactly `{ fullyExploited, partiallyExploited, unexploited }` with each row carrying its own `rawResource` (the shape `src/pdf/lib/viewModelBodySlices.js` names in terms) · `economicState.isEntrepot` and `primaryImports[]`.
+**STATE-KEY:** a TOTAL, DETERMINISTIC resolution evaluated in the ORDER WRITTEN and stopping at the first key whose antecedent holds — `STALLED` (a chain row with a non-empty `upstreamMissing[]`) / `HOME-FED` (a chain row whose `resource` appears in `fullyExploited` or `partiallyExploited`) / `BOUGHT-IN` (`isEntrepot`, or a chain row fed from `primaryImports[]`) / `UNWORKED` (`unexploited` non-empty). **THE ORDER IS THE CHAPTER'S PRINCIPLE APPLIED AGAIN.** `STALLED` is keyed on a single chain row's own `upstreamMissing[]`, the narrowest antecedent in the tuple and the only one naming a live defect; a town whose feed has failed should say so before it says anything comfortable about its supply. `HOME-FED` is next because it requires TWO RECORDS TO AGREE, a chain row and an exploitation row naming the same resource. `BOUGHT-IN` is next because `isEntrepot` is a TOWN-level flag, true of the whole settlement regardless of any particular craft, and is therefore the weaker and less specific antecedent of the two supply readings. `UNWORKED` is last because the exploitation ledger's residue is close to universal and would otherwise swamp every reading that actually explains a workshop.
+⛔ **THE RESIDUE IS SILENCE, AND IT IS WRITTEN DOWN RATHER THAN LEFT IMPLICIT.** Where NONE of the four antecedents holds — no chain row, no exploitation list, nothing to explain — **this block offers no variant at all** rather than resolving to a default. Totality is therefore a property of the PAIR (the stated silence, the stated order) and not of the order alone, and it is stated that way deliberately: the alternative is an else-arm that fires on a town with an empty record, which would put an authored sentence on nothing. `R-DST-K` governs, on the precedent `DS-GEN-15` set for the fabric mirror.
+**SLOTS:** `{settlement}` `{institution}` `{resource}` `{good}`
+⚠ **A SLOT CORRECTION, RECORDED RATHER THAN MADE SILENTLY.** All four slots above are ESTABLISHED §0c rows and this block mints NOTHING. The compiled draft declared a `workshop` slot and the `resource` slot as MINTED here per §0c-2. Neither is minted. `{resource}` is an established §0c row already used throughout this annex; and §0c already carries `{institution}` — "a named building or house on the settlement's roster" — which is PRECISELY the fill the draft described for its `workshop` spelling, a `processingInstitutions[]` row's own recorded name. §0c-2 mints only "the proper nouns §0c does not carry", so a second spelling for a fill §0c already addresses would have split one register in two for no gain and charged the composer lane a fill table it does not need. `DS-SUP-2` already writes this exact fill as `{institution}`, and this block follows it unchanged.
+⛔ **AND A PARSER HAZARD FOUND BY THIS CORRECTION, RECORDED FOR EVERY LATER WRITER.** `slotsOn()` harvests EVERY brace token on the `**SLOTS:**` line and applies no note-stripping to it, so a slot merely QUOTED in an aside on that line is DECLARED by the projection. The first draft of this note sat in an italic parenthetical on the SLOTS line and silently gave this block a fifth declared slot it refuses to mint. Nothing reds: the projection contract's undeclared-slot ceiling counts slots USED but not DECLARED, never the reverse. **A slot correction therefore belongs on its own line, as this one does, and never on the SLOTS line.**
+**SECTION-TARGET:** `economy` · also `overview`
+**PROVENANCE:** The supply-cascade mechanism, spoken only at the joins the chain rows actually record: a workshop exists because its feed exists, which the chain row says, or because the town buys its feed, which `isEntrepot` and `primaryImports[]` say. The substitution clause, that a town which cannot make a thing acquires a trade in it, is licensed strictly by those two fields and by no general economics. `R-DST-B` holds throughout and the line falls in one place: `upstreamMissing[]` is a RECORDED break and licenses `STALLED`'s clause about a supply that failed upstream, while `unexploited` is a standing ledger reading and licenses structure only, so `UNWORKED`'s variants name the absence and offer candidate reasons WITHOUT ASSERTING ANY OF THEM. **Non-redundancy (`R-DST-A`):** `DS-SUP-1` and `DS-SUP-2` render chain STATUS, what the chain is doing, in the canonical seven-status vocabulary; this block renders chain REASON, why the craft is here at all. The two cite the same rows and assert different facts about them, and a composer drawing both must not draw them into one cell.
+⚠ **`{institution}` IS DELIBERATELY NOT OFFERED IN `UNWORKED`.** That key means no processing institution exists for the resource in question, so a variant offering the slot there would be a GUARANTEED FILL FAILURE. Both `UNWORKED` variants name the absence in common words and use `{settlement}` and `{resource}` only. This is the `{defwork}` discipline (never offered to a settlement whose list is empty) applied to an established slot rather than a minted one.
+
+**`STALLED`**
+1. `[unfolding]` {institution} at {settlement} outlived its feed; the {resource} stopped arriving and the craft is living on stores, habit, and hope in that order.
+2. `[ledger]` {settlement} keeps {institution} on a supply that has failed upstream; the building stands, the skill remains, and the books wait.
+
+**`HOME-FED`**
+1. `[ledger]` {settlement}'s workshops stand at the end of short arguments: the {resource} is here, so {institution} is here, and the one explains the other.
+2. `[visitor]` The crafts of {settlement} are the country around it, worked up: what the ground gives, the town finishes.
+3. `[street]` Nobody asks why {settlement} keeps {institution}; the {resource} answers before the question is done.
+
+**`BOUGHT-IN`**
+1. `[ledger]` {settlement} works {good} it cannot raise; the town buys its feedstock the way other towns grow it, and the buying is a settled part of the craft.
+2. `[visitor]` What {settlement} cannot make, it has learned to deal in, and the dealing employs as many hands as the making would.
+3. `[street]` {institution} at {settlement} eats what the carts bring; the town's crafts begin at the weighbeam, not the field.
+
+**`UNWORKED`**
+1. `[counterforce]` The ground at {settlement} offers {resource} the town does not yet take; the absence of any house to work it is a decision, or a shortage of hands, or a matter of time.
+2. `[visitor]` There is more in {settlement}'s country than {settlement} works, and a stranger with capital notices it quickly.
+
+---
+
+### DS-FTH-4 · Faith/Power › Why the temple holds its ground (standing, tenure, endowment) · `worldState.religionStates[cid]` × `templeWealth` × `compound.inst.hasChurch`
+
+**RECEIPT:** `worldState.religionStates[cid].deities[ref]`, whose live shape is `{ deityRef, snapshot, niche, share, standing, standingHeld, suppressed, legitimacy, tenure, heresyStain }` (`src/domain/worldPulse/religionState.js`); this block reads `share`, `standing`, `legitimacy`, `niche` and `tenure`, and no other member · `compound.inst.hasChurch` · `templeWealth`, ⚠ **which does not exist at this tip.**
+⚠ **`templeWealth` IS ARCHITECTED AND NOT BUILT, AND `ENDOWED` IS MARKED ACCORDINGLY.** Measured here rather than inherited: `templeWealth` occurs NOWHERE in `src/`, `scripts/` or `tests/`, its only occurrence in the tree outside the design record being `DS-FTH-3`'s own projected title. The design record says the same in terms — `docs/DESIGN_FP_ARCH_WF.md`'s verification row V27 reads *no temple wealth anywhere*, `docs/DESIGN_FP_ARCH_SP.md`'s row V16 reads *Verified ABSENT*, and `docs/DESIGN_FP_FAITH.md` carries it as WF-7's planned banded stock. So `ENDOWED` is authored against a field that does not yet exist and **IS NOT DRAWABLE UNTIL WF-7 LANDS.** The pool is kept rather than dropped, on `DS-FTH-3`'s own established convention, which marks a tenure-dependent variant and rules that a composer without the field "must not draw them"; both `ENDOWED` variants carry that mark below. Its two variants become correct on the day the field does, the block is DARK meanwhile so nothing draws them in the interim, and `DS-FTH-3` already binds the spelling `templeWealth.band`, so this block does not invent a rung vocabulary for a ladder WF-7 has not yet minted.
+**STATE-KEY:** a TOTAL, DETERMINISTIC resolution evaluated in the ORDER WRITTEN and stopping at the first key whose antecedent holds — `CONTESTED` (a rival niche occupied, OR `legitimacy` in its low band) / `ROOTED` (`share` high AND `tenure` long) / `ENDOWED` (`templeWealth.band` high, UNREACHABLE at this tip, see above) / `THIN` (the explicit else-arm). ⛔ **THE GATE ABOVE THE ORDER:** where `religionStates[cid]` is absent (the religion simulation dark) or `compound.inst.hasChurch` is false, no observance holds ground in this town at all and **the block is SILENT**, offering no variant rather than resolving to `THIN`. `R-DST-K` governs, as it governs `DS-GEN-18`'s silence.
+⛔ **WHY `CONTESTED` OUTRANKS `ROOTED`, WHICH INVERTS THE CHAPTER'S USUAL RULE.** The other two blocks resolve most-constrained-antecedent-first, and by that rule `ROOTED` would run first: it requires two simultaneous facts where `CONTESTED` requires either of two. It is ordered the other way on **TRUTH-PRESERVATION, which outranks the ordering heuristic wherever the two disagree.** `ROOTED`'s variants assert an UNQUESTIONED hold — *not a choice anyone remembers making*, *the town arranges itself accordingly* — and a live rival niche or a low legitimacy reading FALSIFIES that assertion outright. A precedence order exists to stop the corpus asserting what its own receipt contradicts; where the constrainedness rule would yield a false sentence and truth-preservation a true one, the second governs. Recorded here because this is the ONE place in the chapter where the two rules disagree, and a later writer must not read it as an inconsistency in the principle.
+**SLOTS:** `{settlement}` `{institution}` `{creed}` `{timeband_age}`
+⚠ **THE SECOND SLOT CORRECTION.** All four above are ESTABLISHED: `{institution}` and `{creed}` are §0c rows and `{timeband_age}` is §0d's predicate band. The compiled draft declared a `temple` slot as BORROWED. It is neither borrowed nor established — that spelling occurs **ZERO** times in this annex. §0c's `{institution}` is the correct address for it, and this annex already fills `{institution}` with a temple in `DS-POW-`'s theocracy arm. Nothing is minted. The SLOTS-line parser hazard recorded on `DS-GEN-18` governs this note too, which is why it sits on its own line.
+⛔ **THE DEITY DOCTRINE BINDS THIS BLOCK.** `{creed}` fills with the faith by its authored name; no variant below names a deity, characterises a theology, or reads a deity axis. Faith here is culture and institution, never doctrine.
+**SECTION-TARGET:** `faith` · also `power`
+**PROVENANCE:** The institutional-gravity mechanism, composition arm only: an observance holds ground in a town because standing, tenure and endowment hold it there, all three being typed facts the religion state carries. `R-DST-B`: `share`, `standing` and `legitimacy` are BANDS carrying no provenance and get plain description; `tenure` is the one field here that licenses a clause with a LENGTH in it, exactly as `DS-FTH-3` rules, and `ROOTED` is the only pool that takes that licence. **⚠ WF-8A ADJACENCY, RE-CHECKED AT THIS TIP AND MADE STRUCTURAL RATHER THAN BEHAVIOURAL.** `faithPanelModel` carries `patronFallSentence` over `FALL_SENTENCE`, four authored strings keyed to `PATRON_FALL_CAUSES` (`discredited` · `displaced` · `imposed` · `suppressed`), which `DS-FTH-1` surrounds as authored copy. Every one of those four narrates a SEAT CHANGE. This block narrates PERSISTENCE and never a fall: `CONTESTED` describes a contest that has NOT resolved, and its `[counterforce]` variant states outright that no breach divides the town; `THIN` describes a small holding rather than a lost one. The disjointness is made STRUCTURAL by a change to the receipt itself — `patronFalls[]`, which the compiled draft listed, is REMOVED from this block's receipt, because a receipt names what a block READS and no pool here may read it. `DS-FTH-1` owns the fall; this block owns what happens when nothing falls. **Non-redundancy (`R-DST-A`):** `DS-FTH-1` renders the panel and `DS-FTH-3` the state table beneath it; this block renders the WHY-FRAME of the observance's persistence and composes beside both, never over the same cell. **Audience:** `DS-FTH-2` owns the free-tier teaser and its rule that no creed is named there, so this block is keyed to the UNLOCKED panel only. **No precinct geometry, no processional route, no siting** — CT-1b holds those, and the OB-5 boundary above forbids them here in any case.
+
+**`CONTESTED`**
+1. `[unfolding]` {institution} at {settlement} holds its ground but not unquestioned; another observance wants the same hours of the same people, and both keep count.
+2. `[street]` {settlement} has more than one answer to the large questions now, and the answers are polite in public and precise in private.
+3. `[counterforce]` No open breach divides {settlement}'s faiths; the contest stays at the level of attendance, and attendance is watched like weather.
+
+**`ROOTED`**
+1. `[elder]` {creed} has held {settlement} {timeband_age}, long enough that the town's calendar and the observance's calendar are the same document.
+2. `[street]` Faith in {settlement} is not a choice anyone remembers making; {institution} was here, is here, and the town arranges itself accordingly.
+3. `[ledger]` {institution}'s standing at {settlement} is old and entered everywhere: in the rolls, in the feast days, in who is buried where.
+
+**`ENDOWED`**
+1. `[ledger]` {institution} at {settlement} is propertied, and property is patience: the observance can outlast bad seasons, thin years, and unfriendly officers. *— requires `templeWealth`*
+2. `[visitor]` Whatever else changes in {settlement}, {institution}'s holdings do not look like they intend to. *— requires `templeWealth`*
+
+**`THIN`**
+1. `[ledger]` {creed} keeps a footing at {settlement} rather than a hold; the observance is present, and presence is the extent of it.
+2. `[street]` {institution} at {settlement} is one thread in the town's week, not the loom.
+
+---
+
+**CT-3 SECTION ENDS.** Three blocks, thirteen pools, thirty-one authored variants:
+`DS-GEN-17` (the company the town keeps), `DS-GEN-18` (why these workshops) and `DS-FTH-4` (why
+the temple holds its ground). No pool falls below the two-variant floor the projection contract
+holds; every slot a variant uses is declared on its block's SLOTS line; every angle is drawn from
+§0b's palette; and **no slot is minted**, which is a first for this train. The chapter adds no
+rendered surface, so §0g's denominator and its coverage reading are unchanged.
+Three claims the CT-3 draft carried were CORRECTED at authoring and the corrections are recorded
+in the blocks themselves rather than left for a later reader to re-find: the draft's `workshop` and
+`temple` spellings are not new slots but `{institution}`, which §0c has carried all along; the
+`resource` slot was declared minted and is established; and `BARE`'s tier clause was dropped
+because a tier-gated else-arm is not total. A fourth item is recorded on `DS-FTH-4`: `templeWealth`
+is architected and unbuilt, so `ENDOWED` is authored, marked and not drawable until WF-7 lands.
+⚠ **The two refused spellings are written WITHOUT BRACES throughout this section, deliberately.** A
+brace-wrapped mention in prose is indistinguishable from a use under a `grep`, and this file's own
+slot register is audited that way; writing them bare keeps a later census of "is this slot used"
+honest, and keeps the SLOTS-line parser hazard recorded on `DS-GEN-18` from recurring by accident.

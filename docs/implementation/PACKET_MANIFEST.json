@@ -19914,6 +19914,124 @@
         [ "npm", "run", "validate:packets" ],
         [ "npm", "run", "check:tail" ]
       ]
+    },
+    {
+      "id": "CT-3",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/content-train/CT-3.md",
+      "verifiedBase": "ec8f33598d5de05225c5eecfe3da637e6d425c78",
+      "changeManifest": [
+        {
+          "_note": "THE GOVERNED CORPUS. Three WHOLLY NEW blocks appended as one CT-3 section (DS-GEN-17 the company the town keeps, DS-GEN-18 why these workshops, DS-FTH-4 why the temple holds its ground), plus an AS EXTENDED ONCE MORE note and a DARK note in the coverage census. NO slot register row is added, because this chapter MINTS NO SLOT: the compile declared a workshop slot and a temple slot as new and a resource slot as minted, and all three are refused because 0c already carries {institution} (a named building or house on the settlement's roster) and {resource}. NEW blocks, never an append to an existing pool: drawVariant hashes seed::blockId::poolKey and indexes % eligible.length, so appending would move every seeded draw over that pool while a new block moves nothing. Headers use a middle dot rather than the house em dash, on CT-1a's ratified precedent, because a block title is projected verbatim into its desk leaf and the leaves sit inside voiceMechanics Tier 2, whose per-file em-dash pin is red-and-banked and must not deepen. Each block's state key is a TOTAL DETERMINISTIC resolution with its precedence order written into the block, and each residue is explicit: DS-GEN-17 carries a pure else-arm and the other two carry a stated R-DST-K silence. No existing block was edited, including DS-FTH-3 whose patron-fall enumeration carries a drift this packet records rather than corrects.",
+          "action": "DOC",
+          "path": "docs/content/RECEIPT_POOLS_DOSSIER_STATE.md"
+        },
+        {
+          "_note": "THE PROJECTION, REGENERATED IN THE SAME COMMIT by the existing npm run gen:dossier-prose. 21 to 23 blocks and 613 to 634 variants. Measured, not asserted: key-by-key against the pre-change leaf the diff is ADDED [DS-GEN-17, DS-GEN-18], REMOVED [], CHANGED [], and the only removed LINE is the leaf's own header count comment. The em-dash and exclamation counts are unchanged at 159 and 0. This leaf ALREADY differed from the schema-10 frozen baseline at the SLOT BASE (frozen 3df1a6ee, slot base 436f763d), because CT-2 landed ahead of this car and moved it; so this car DEEPENS CT-2's lawful 384.2 break on this leaf rather than originating one.",
+          "action": "MODIFY",
+          "path": "src/data/dossierStateProse/general.generated.js"
+        },
+        {
+          "_note": "THE SECOND PROJECTION LEAF, and the first time the content train touches two. DS-FTH- is claimed by the warFaith desk while DS-GEN- is claimed by general, so DS-FTH-4 lands here: 8 to 9 blocks and 411 to 421 variants. Key-by-key the diff is ADDED [DS-FTH-4], REMOVED [], CHANGED [], and the only removed LINE is the leaf's own header count comment. The em-dash and exclamation counts are unchanged at 120 and 0. ATTRIBUTION NOTE FOR THE TRAILING MINT, MEASURED AT THE SLOT RATHER THAN INFERRED: this leaf sat BYTE-FOR-BYTE AT ITS SCHEMA-10 FROZEN VALUE at the slot base (6f74d5df both sides) because CT-2 does not touch it, so unlike the general leaf this car ORIGINATES its observed-shape divergence IN WHOLE, and a mint attributing warFaith to any earlier car would be wrong. This is 420's measured F1, re-derived at the slot.",
+          "action": "MODIFY",
+          "path": "src/data/dossierStateProse/warFaith.generated.js"
+        },
+        {
+          "_note": "THE TWO PIN MOVEMENTS, both in the existing literal describe and neither adding a test. The exact block count re-records 65 to 68 with ODQ 378 and 387 cited at the assertion; the state-variant floor re-pins 2238 to 2269 per CT-0 R-5 on CT-1a's and CT-2's ratified precedent, because slack between a stale floor and the real total is where a later parser regression hides. No new test file, no new suite, no .each, no runIf, so no census gains a row and the pinned ceiling is not approached. The floor test's title does not move; the block-count test's title carries its own figure and moves with it, and that test PASSES and is not one of the eleven baselined census rows.",
+          "action": "TEST",
+          "path": "tests/data/dossierStateProseProjection.contract.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE GOVERNED CORPUS, block one. The header PREFIX is pinned rather than the bare id, so a later car cannot satisfy this row with a cross-reference in prose. The middle dot is load-bearing: an em dash here would be projected verbatim into general.generated.js and would deepen the red-and-banked voiceMechanics per-file pin.",
+          "path": "docs/content/RECEIPT_POOLS_DOSSIER_STATE.md",
+          "symbol": "### DS-GEN-17 \u00b7 Overview/Power"
+        },
+        {
+          "_note": "THE GOVERNED CORPUS, block two.",
+          "path": "docs/content/RECEIPT_POOLS_DOSSIER_STATE.md",
+          "symbol": "### DS-GEN-18 \u00b7 Economics/Services"
+        },
+        {
+          "_note": "THE GOVERNED CORPUS, block three, and the only one that lands in the warFaith desk.",
+          "path": "docs/content/RECEIPT_POOLS_DOSSIER_STATE.md",
+          "symbol": "### DS-FTH-4 \u00b7 Faith/Power"
+        },
+        {
+          "_note": "THE PROJECTION LANDED, block one. Quoted WITH its JSON delimiters so the row cannot be satisfied by a comment or by a prose mention of the id.",
+          "path": "src/data/dossierStateProse/general.generated.js",
+          "symbol": "\"DS-GEN-17\""
+        },
+        {
+          "_note": "THE PROJECTION LANDED, block two.",
+          "path": "src/data/dossierStateProse/general.generated.js",
+          "symbol": "\"DS-GEN-18\""
+        },
+        {
+          "_note": "THE PROJECTION LANDED, block three, in the SECOND leaf. This row is the one that proves the two-desk routing actually happened rather than being asserted in prose.",
+          "path": "src/data/dossierStateProse/warFaith.generated.js",
+          "symbol": "\"DS-FTH-4\""
+        },
+        {
+          "_note": "A POOL LABEL, not a block id, and the one that proves this chapter's totality formalization survived into the projection. BARE is DS-GEN-17's PURE ELSE-ARM. The compile keyed it as few institutions AND low tier; a tier-gated else-arm is not total, because a high-tier settlement carrying none of the four antecedents would resolve to no key at all. Deliberately NOT a count: a figure here would be re-recorded by a later car and would trap this packet forever.",
+          "path": "src/data/dossierStateProse/general.generated.js",
+          "symbol": "BARE"
+        },
+        {
+          "_note": "A POOL LABEL that proves the chapter's fill-failure refusal survived. UNWORKED is the one key of DS-GEN-18 that means NO processing institution exists, so {institution} is deliberately not offered there and both its variants use only {settlement} and {resource}. This is the {defwork} discipline applied to an established slot rather than a minted one.",
+          "path": "src/data/dossierStateProse/general.generated.js",
+          "symbol": "UNWORKED"
+        },
+        {
+          "_note": "A POOL LABEL that carries this chapter's one real engine finding. ENDOWED is authored against templeWealth, which is ARCHITECTED AND NOT BUILT at this tip: it appears nowhere in src, scripts or tests, and the estate's own design record verifies it absent at DESIGN_FP_ARCH_WF V27 and DESIGN_FP_ARCH_SP V16, carrying it as WF-7's planned banded stock. The pool is kept, marked and NOT DRAWABLE until WF-7 lands, on DS-FTH-3's own established convention for a field-dependent variant. Pinned so the interlock cannot be lost silently by a later edit.",
+          "path": "src/data/dossierStateProse/warFaith.generated.js",
+          "symbol": "ENDOWED"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "The projection is not stale, the parser dropped nothing, and the contract passes WHOLE. node scripts/generate-dossier-state-prose.mjs --check verifies 68 state blocks / 2269 variants across 6 desks and 78 causal families / 468 variants by byte-comparing every emitted leaf against a fresh re-derivation from the two authored annexes; and the projection contract passes on the re-recorded exact 68 and the raised floor 2269 as well as on every pin that did NOT move: causal 78 and the six-per-family arm, the thin-pool floor of 2 (six of the thirteen new pools sit exactly AT it, so the arm is not vacuous over this car), the dm-only floor, the undeclared-slot ceiling and the no-markdown scan."
+        },
+        {
+          "id": "A2",
+          "case": "The three blocks landed in the RIGHT TWO desks with the measured shape: general 21 to 23 blocks and 613 to 634 variants, warFaith 8 to 9 blocks and 411 to 421 variants, with zero edits to the generator's DESKS table because DS-GEN- is already claimed by general and DS-FTH- by warFaith. This is the first car of the train to touch two leaves, so the no-movement proof is stated over FIVE byte-identical leaves rather than six."
+        },
+        {
+          "id": "A3",
+          "case": "NO SAME-SEED PROSE MOVED, proven in both directions rather than argued. Key-by-key over every leaf: 3 blocks ADDED, 0 REMOVED, 0 CHANGED. Measured directly at the property drawVariant actually reads: ZERO pre-existing (blockId, poolKey) pools changed length anywhere in the estate. Byte comparison: defense, economy, power, stressors and dossierCausalProse all BYTE-IDENTICAL. In each of the two leaves that moved, the only removed line is its header count comment. Goldens over tests/property + tests/dossier + the seven prose readers run BOTH WAYS at the base and again after."
+        },
+        {
+          "id": "A4",
+          "case": "The banked voice debt does not deepen by one character, on BOTH regenerated leaves: general em 159 to 159 and warFaith em 120 to 120, bang 0 to 0 and en-dash 0 to 0 on every leaf, and defense, economy, power, stressors and the causal leaf byte-identical so their counts cannot have moved. The requires-templeWealth marks on ENDOWED cost the leaf nothing because the generator's cleanText strips a slot-requirement note from the projected text."
+        },
+        {
+          "id": "A5",
+          "case": "The register holds over all 31 variants and all 3 headers, scanned rather than asserted: zero digits, zero em dashes, zero en dashes, zero exclamation points, no residual backtick or bold markup, every slot used declared on its block's SLOTS line, every angle drawn from the section 0b palette, and every pool angle-distinct."
+        },
+        {
+          "id": "A6",
+          "case": "THE STATE KEYS ARE TOTAL AND DETERMINISTIC and the precedence is written into the annex, not only into this packet. The chapter's principle is most-constrained-antecedent-first, stated once and applied three times; DS-GEN-17 resolves ADMINISTERED then GARRISONED then LETTERED then PROVISIONED then a pure else-arm BARE; DS-GEN-18 resolves STALLED then HOME-FED then BOUGHT-IN then UNWORKED under a stated silence; DS-FTH-4 resolves CONTESTED then ROOTED then ENDOWED then an explicit else-arm THIN under a stated hasChurch gate, inverting the chapter principle ONCE on truth-preservation because ROOTED asserts an unquestioned hold that a live rival niche falsifies. The eight-case cap binds per block and is met at 5 / 4 / 4, counted from the landed projection rather than from the draft."
+        },
+        {
+          "id": "A7",
+          "case": "THE FIVE CORRECTIONS HOLD AND THE CHAPTER MINTS NO SLOT. The compile's workshop and temple spellings are 0c's {institution}; its resource slot was declared minted and is established; BARE's tier clause is dropped; and patronFalls[] is removed from DS-FTH-4's receipt so the WF-8A disjointness from faithPanelModel's four FALL_SENTENCE strings is STRUCTURAL rather than behavioural. Verified: the refused spellings return grep 0 over the whole annex, declared-slot-set equals used-slot-set EXACTLY on all three blocks, and the live CLAIM_RE lifted from tests/docs/enforcement-claims.test.js finds zero hits, so the per-claim naked-claim freeze that reds a GREEN test stays green."
+        },
+        {
+          "id": "A8",
+          "case": "THE OSR ENVELOPE IS MOVED BY THIS MEMBER, recorded rather than minted, and the two leaves are in DIFFERENT ATTRIBUTION POSITIONS: CT-2's break on general is DEEPENED here, and warFaith's break is ORIGINATED here in whole. The instrument is the gate script run bare and read-only, NEVER the walker or sentinel test, because reader neutrality does not imply envelope neutrality: node scripts/check-observed-shape-readers.mjs exits 1 at the SLOT BASE AND at this member with the same schema-10 instrument-staleness line, so the exits alone give no per-file resolution. The additive question is settled by per-leaf digests at frozen / base / member, both leaves being verified members of the 13-path unscanned set that unscannedInputDigestOf digests. Read at schema 10, frozenAtSha 4f42be70, sourceTree 2159 and scanTree 2146: general reads 3df1a6ee frozen, 436f763d at the slot base (CT-2 moved it) and 4576697b here, so this car DEEPENS CT-2's break; warFaith reads 6f74d5df frozen and 6f74d5df AT THE SLOT BASE, exactly at frozen, and c374510c here, so this car ORIGINATES that leaf's break in whole and a mint attributing warFaith earlier would be wrong."
+        }
+      ],
+      "checks": [
+        [ "npm", "run", "gen:dossier-prose" ],
+        [ "node", "scripts/generate-dossier-state-prose.mjs", "--check" ],
+        [ "npx", "vitest", "run", "tests/data/dossierStateProseProjection.contract.test.js", "tests/copy/voiceMechanics.test.js" ],
+        [ "npx", "vitest", "run", "tests/property", "tests/dossier", "tests/domain/stateProseKernel.test.js", "tests/domain/economyStateProseDesk.test.js", "tests/components/faithPanelModel.test.js" ],
+        [ "npx", "vitest", "run", "tests/docs", "tests/lint", "tests/build" ],
+        [ "npm", "run", "validate:packets" ],
+        [ "npm", "run", "check:tail" ]
+      ]
     }
   ]
 }
