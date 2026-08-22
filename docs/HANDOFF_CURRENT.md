@@ -8,6 +8,101 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
+## ⭐⭐⭐ CURRENT OVERRIDE — 2026-08-23 (~13:30), LEDGER THROUGH §427 — THE SUCCESSION HANDOFF
+## BUILD claude/composite-r4 @ ec8f3359 — 24 LANDINGS THIS ARC; THE 25TH (CT-3) MID-GATE AT HANDOFF
+
+**This block supersedes everything below it.** Written for an account-switch
+succession: the prior chair's session (and its lane agents) die with it; every
+artifact below survives on disk. The repo is authoritative over this summary.
+
+### 0 · WHERE EVERYTHING IS
+- **Ledger:** THIS branch (review-fixes-2026-07-08), docs/OWNER_DECISION_QUEUE.md
+  through **§427**; docs/RESUME_STATE.md is the running act-log (read its tail).
+  Ledger commits: PRIVATE-INDEX METHOD ONLY (the main worktree matches no branch).
+- **Build:** claude/composite-r4 @ **ec8f3359** (24 landings: schema-10 mint →
+  RR-1 → RR-2 [the 933 descriptions] → T2Bf → CT-2 → H8B).
+- **The prior session's scratchpad (ALL drafts + lane receipts live here, READ IT):**
+  `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/6298872d-53af-4c8a-99e5-139bfc5bfc1f/scratchpad/`
+  Key files: draft-MF-T2L.md · draft-MF-T2M.md · draft-PRODUCERS-PLAN.md ·
+  draft-T2S-DOOR-BRIEF.md · draft-WEBSITE-PLAN.md · draft-MF-T2K.md ·
+  lane receipts laneTE*/laneTC*-receipt.md (the survey-before-resume inputs).
+- **Auto-memory** (same machine+path ⇒ same dir) is current; MEMORY.md indexes it.
+
+### 1 · SUCCESSOR'S FIRST ACTS, IN ORDER
+1. **Re-arm the §388 wakeup** (CronCreate, `13,33,53 * * * *`, session-scoped —
+   the prior job died): prompt = the four checks, headlined **"IS EVERY BUILDABLE
+   CAR BUILDING?"** + raced-GO/lost-lane/read-never-extend protocols (§388).
+2. **Collect CT-3's landing** — its terminal was MID-GATE at handoff, DETACHED
+   (survives the session): receipt `laneTECT3-receipt.md` names the log paths.
+   On TRUE_EXIT=0 **plus** the gate tail's own exit line: CAS
+   `ec8f3359 → b10ed1a1f5a0f2acd00bbfc9b5d0a41931697c3d` (verify ancestry
+   first; CT-3's retraction-grep was ZERO — the §401 false claim stayed dead),
+   then delete refs/preserve/holding-ct3. On a red: classify per §358.2/§355
+   (load ~88 from three sibling batteries was PRE-STAMPED as evidence in its
+   receipt — expect TIMEOUT-class strays, one quiet re-run, second stray STOPs).
+3. **Survey the killed builders BY RECEIPT (the 529-law — partial edits exist):**
+   TE-T2L (vegetation, draft-MF-T2L.md ruled §425) and TE-T2M (arch-history +
+   the Shape-B strip, draft-MF-T2M.md ruled §426) were BUILDING at handoff; both
+   were ordered to checkpoint (commit verified WIP + receipt). Read their
+   receipts; re-dispatch fresh executors that RESUME from the receipt+worktree
+   state (verify every claimed proof before trusting it).
+4. **Continue the landing cascade** (ONE gate at a time, the §418/§420 slot
+   pattern): after CT-3 → **T2H** (pin holding-t2h-r2 = 05e7f9d5; ALSO delete
+   the stale holding-t2h = superseded 2064a67e at its landing) → the five
+   website cars in GO order → T2J (f7ba3145) → T2K (4d2d17f8) → T2L → T2M.
+   Every GO carries: rebase with carry-proof-by-absence FIRST, manifest
+   keep-both + row-level deep-compare (string-aware surgery), re-stamp DELTA
+   never tuple, S0 two-part READ LIVE (baselines quoted as context only), the
+   detached-own-session terminal with heartbeat-every-sample and
+   LIVENESS-PROBE-BEFORE-RECLAIM. Website pins: WEB-1 4065b326 · WEB-4
+   378f9276 · WEB-5 6d6572ea · WEB-6 5b0a399f · WEB-7 e5975829. ⚠ WEB-1/WEB-6/
+   WEB-7 each founded packets/website/ differently — second-and-later landings
+   keep-one on the family header, keep-both on rows. ⚠ WEB-1's landing carries
+   migration 197 → then WEB-2/WEB-3 UNBLOCK (dispatch from draft-WEBSITE-PLAN
+   §2/§3; migration numbers sequential). ⚠ T2L's landing act carries the §419
+   rename (CODEX_SLICE_MODULES→UNASSIGNED_LANDED_MODULES) + deferred rows;
+   T2M's carries the BLESSED four-red validate:packets window (§426 — clears
+   at the LANDED flip; never a failure).
+5. **Rule + dispatch the producers train:** read draft-PRODUCERS-PLAN.md
+   (collected §424, NOT yet ruled), rule its RAISED split, dispatch T2N/T2Q/T2R
+   executors (T2N/T2R pure derivers golden-inert; T2Q rides existing verbs per
+   §423). Docket the T2P compile (§424 RAISED-C1 confirmed).
+
+### 2 · THE ARC'S BINDING LAWS BY § (full text in the ODQ rows)
+§389.1 the bare gate script IS the envelope instrument, TWO-PART reading (exit
+AND printed line; §397) · §393 attribution sweeps MUTEXED · §395 arm-and-wait
+watcher = terminal standard · §408 the pre-gate sweep is tests/lint tests/build
+**tests/ops**; a new migration owes a NEW reviewed wave · §410 retrospective
+packet mints enter at TERMINAL status · §414+§416 the wrapper-timeout gate-kill
+class; liveness-probe (ps the lock pid) before ANY reclaim; heartbeat every
+sample · §416.1 movement guards need an IDENTITY arm · §417 stacked members
+DEFER shared walker rows to the landing act (texts in each packet) · §418/§420
+the slot pattern + four instrument lies (rev-parse echoes its arg; sed \b;
+vitest positional filters; gate-tail body in $TMPDIR) · §403.1 a truncatable
+instrument needs a COMPLETENESS check · §423 THE DOOR: store registry = verb
+census, domain = payload grammar, Option-D structural law · §406 consent
+provenance signals are non-equivalent (the conjunction predicate).
+
+### 3 · AFTER THE CASCADE (the standing remaining-arc, ~35-55h)
+Producers build+land → WEB-2/3 → content tail (WF-8 shrink-back CAR carries the
+§400 FTH-3 doc shrink; CT-4 undercity chapter; CT-5; ONE trailing OSR mint per
+§384.2 with the attribution table: general=CT-2, warFaith=CT-3, +T2M's lawful
+flip) → undercity train (compile first) → housekeeping (HANDOFF re-refresh,
+MEASDUAL phase-2 at a quiet window, §384.2b durable doc [chair-authored —
+governance], INV-EVS worktree prune after the owner rules) → parity train +
+the §290 review stop (recommend /code-review ultra — OWNER fires it) →
+ENDGAME: walk + ONE regen → terminal soak → TUNING WITH THE MAP LEG (§341;
+owner signs) → V5 waves → cull → IP scrub (two docs leave the repo) → push.
+
+### 4 · OWNER DOCKET (untouched by any lane)
+Tuning signature · cull §67.6 · every push/merge/deploy · three db-push
+migrations · copy walks (beat copy, FALL_SENTENCE, §320.3 wording, RR-2 glance)
+· 'campaign' word (rec: keep-and-reword, §402) · O3 retroactive purge (rec:
+purge) · the §399 viability-summary fork (rec: projectBeside keyed on
+_userEdits; third arm honest) · TinyMCE/GPL + FMG counsel · support mailbox ·
+CI log paste · founder-transfer legal · partial refunds NONE until the webhook
+deploys.
+
 ## ⭐⭐ CURRENT OVERRIDE — 2026-08-22 (~01:40 ET), LEDGER THROUGH §345;
 ## BUILD claude/composite-r4 @ 27c250f9; EIGHT LANDINGS — D3a CORE + WF-1 LADDER COMPLETE
 

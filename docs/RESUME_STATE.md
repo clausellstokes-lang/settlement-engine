@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐⭐ ~13:30: SUCCESSION PREPARED (§427) — HANDOFF_CURRENT refreshed
+# through §427 (first acts: wakeup re-arm → collect CT-3's detached gate
+# [CAS ec8f3359→b10ed1a1 on green] → survey T2L/T2M by receipt → cascade).
+# Lanes checkpointed. A SUCCESSOR STARTS AT docs/HANDOFF_CURRENT.md.
 # ⭐ ~12:40: T2M COMPILE RULED (§426) — door-brief importer premise
 # corrected (ruling stands); kind rename + prevention arm ratified;
 # FOUR-RED window BLESSED (§379.2 discharge, clears at LANDED flip);

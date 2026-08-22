@@ -17223,3 +17223,21 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   the D3a stack's then-current tip, re-derived with evidence). With this,
   EVERY map member is built, building, or landing. Seats: CT-3-landing ·
   TE-T2L · TE-T2M; one held for T2H's landing turn.
+
+## §427 — THE SUCCESSION PREPARED (OWNER ACCOUNT SWITCH IMMINENT): HANDOFF REFRESHED THROUGH THIS ROW; LANES CHECKPOINTED; THE COLLECT-AND-RESUME PROTOCOL WRITTEN (2026-08-23 ~13:30)
+
+- **Owner: weekly quota ending; a successor account continues.** Executed now:
+  (1) checkpoint orders to the two building lanes (TE-T2L, TE-T2M — commit
+  verified WIP to the detached ref + a zero-context receipt) and the
+  standalone-receipt order to CT-3 (whose DETACHED terminal survives the
+  session and was mid-gate at load ~88, its contention evidence pre-stamped);
+  (2) **docs/HANDOFF_CURRENT.md REFRESHED** with a full §427-era CURRENT
+  OVERRIDE — the succession's first acts in order (wakeup re-arm; CT-3
+  collection with the CAS instruction; the 529-law survey of the killed
+  builders; the cascade's GO recipe with every holding pin listed; the
+  producers ruling), the arc's binding laws by §, the remaining program, and
+  the owner docket. The prior session's scratchpad path (all drafts and
+  receipts) is named absolutely — it survives the session.
+- **The successor's one-line bootstrap:** read docs/HANDOFF_CURRENT.md on this
+  branch, then RESUME_STATE.md's tail, then act. The ledger outranks every
+  summary including the handoff.
