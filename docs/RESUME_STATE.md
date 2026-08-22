@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~10:50: THE DOOR RULED (§423) — verbs = store census, payloads =
+# domain grammar (option B + option D structural law); T2M + T2P UNBLOCK;
+# Shape-B strip rides T2M; Shape A docketed. NO MAP MEMBER IS BLOCKED.
+# TC-T2M dispatched. Cap: H8B-landing · T2L · PRODUCERS · T2M compiles.
 # ⭐ ~10:10: T2K COLLECTED (§422) — 4d2d17f8 pinned, 182 eff, zero
 # equivalent mutants, withdrawn-probe discipline, two honest deviations;
 # J1-8 ratified. TC-T2S dispatched (the §299.3c door brief — T2M's

@@ -17075,3 +17075,45 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   src/store, evidence assembled compile-side, the chair rules after. This
   completes the §421 owner order: every map-remainder track is now moving
   or briefing. Cap: H8B-landing · TC-T2L · TC-PRODUCERS · TC-T2S.
+
+## §423 — THE DOMAIN DOOR RULED (§299.3c/§287.7 CLOSED): VERBS ARE THE STORE'S CENSUS, PAYLOADS ARE THE DOMAIN'S GRAMMAR; T2M AND T2P UNBLOCK; THE STRUCTURAL LAW ADOPTED (2026-08-23 ~10:50)
+
+- **RULED — OPTION B AS RECOMMENDED, the level the estate already runs:**
+  the store registry (src/store/operationRegistry.js) is THE census of DOOR
+  VERBS; one domain artifact grammar owns operation PAYLOADS. The §299.3c
+  "second vocabulary merges" obligation is satisfied AT THE SEMANTIC LEVEL —
+  one verb census plus one payload grammar is one truth in two lawful
+  layers, with the projection direction the architecture already enforces
+  (store imports domain, never the reverse). The crux that decides it, all
+  three legs executed by the brief: the registry walker asserts
+  covered ⊆ denominator (a verb that is not a real store action reds); the
+  dead-op ratchet forbids a caller-less verb from shipping; and
+  ARCHITECTURE.md's own write-path sentence already names
+  domain-operation-under-a-store-door as the target topology. The
+  row-merge-now reading is the ONE reading the estate's executed law
+  refuses — F1 declined on that evidence.
+- **CONSEQUENCES:** (1) fabric/operations.js DEMOTES from door-claimant to
+  payload compiler — the TC-D3A Shape-B strip, executed inside MF-T2M's
+  scope; its artifacts are proposal-grade until a registered store verb
+  accepts them. (2) **MF-T2M UNBLOCKS** as a domain member: architectural-
+  history artifacts + deterministic fixtures joining the fabric's ONE
+  sealed-artifact grammar, dormant, zero store rows, live seeds
+  byte-identical. (3) The store-side door verb lands WITH the executor
+  tranche (Shape A stays docketed — F2's flip costs nothing when an
+  executor nears). (4) **MF-T2P UNBLOCKS**; whether its dated construction
+  facts ride existing registered pulse verbs or defer a new verb to Shape A
+  is its compile question, relayed to TC-PRODUCERS mid-compile.
+- **OPTION D ADOPTED — the one-sentence structural law:** an operation
+  VOCABULARY may exist in exactly two places — the store registry's verb
+  rows and the domain's sealed-artifact payload grammar; a module claiming
+  both levels, or a third vocabulary at either level, is refused at review
+  as a second truth. (Structural prevention: the class that produced this
+  blocker cannot be minted again.)
+- **A premise correction from the brief, recorded:** the sealed sandbox
+  carries NO operation vocabulary — the "second vocabulary" was the landed
+  codex fabric/operations.js all along (dormant, zero importers); the
+  sealed side carries the HISTORY substrate (epochAxis/lineage/stateMarks —
+  "address is an event-dated attribute of identity"), so T2M is a LAND-NEW
+  member reconciling into one grammar, not a port. **§423.1 SEAT: TC-T2M
+  dispatched on TC-T2S's freed seat** — with this ruling, the map program
+  has NO blocked member. Cap: H8B-landing · TC-T2L · TC-PRODUCERS · TC-T2M.
