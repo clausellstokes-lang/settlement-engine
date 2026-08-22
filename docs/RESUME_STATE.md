@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ~06:05: CT-1a AMENDED to 3768eb47 (supersedes 14727eca) — the two-row-
+# styles pointer MEASURED (1367/504 expanded/inline; its entry the sole
+# all-inline outlier of 140) and restyled to byte-match its T2 neighbours,
+# w/ _note fields explaining every pin; re-proven post-amend; mint-
+# disjointness measured empty. Style census → H9's charter data.
 # ⚠ ~05:50: MINT'S GATE RED at test:ratchet — 5 non-census strays (4 in
 # HUNT-1's confirmed timeout files; 1 new name); build+verify:dist UNRUN;
 # the WRAPPER TRAP fired (harness said exit 0, braced TRUE_EXIT=1 — the
