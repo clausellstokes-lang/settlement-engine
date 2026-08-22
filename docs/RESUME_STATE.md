@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~07:20: T2J COLLECTED (§417) — f7ba3145 pinned (stack intact); sealed
+# equivalence TOTAL; SCC pinned + MINIMALITY proof; denominator defect
+# cured (frozen reader roster); 8 judgments ratified; shared-census-row
+# deferred-to-landing-act LAW banked (bites K/L/M). TC-T2K dispatched.
 # ⭐ ~06:50: RR-2 close-out verified from the branch (§416.1); NEW LAW:
 # change-only guards need an identity arm (success reads as failure
 # otherwise). Lane complete. Awaiting T2Bf's rebase+terminal.

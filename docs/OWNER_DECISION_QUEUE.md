@@ -16861,3 +16861,52 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   "I landed" and needs an identity arm (is the new tip MY tip?) before
   crying alarm. The sitting's pattern named: a check that detects only
   CHANGE will keep reporting success as failure.
+
+## §417 — T2J COLLECTED: TOTAL SEALED EQUIVALENCE, THE SCC PINNED WITH A MINIMALITY PROOF, A DENOMINATOR DEFECT CURED; EIGHT JUDGMENTS RATIFIED (2026-08-23 ~07:20)
+
+- **The member:** tip f7ba3145 (pinned), four commits on T2H's holding
+  05e7f9d5 (the three-deep stack verified intact against the moved branch);
+  preamble cited by the family's exact SHA. **Sealed equivalence TOTAL — 0
+  differences** across every exported value, both topology modes, and all 81
+  table rows; two declared non-behavioural divergences (header prose; the
+  strict-narrowing lambda). Effective 219 of 250, instrument validated by
+  reproducing T2H's published figures first. Dormancy proven (a SINK with
+  one outbound import); entry-closure POST-BUILD with the 710-chunk zoom;
+  census predicted +2/0/+2/+6/+2 and MEASURED the same five, attributed by
+  isolation with the both-hidden control reading the base tuple exactly.
+- **⭐ THE SCC PINNED BEYOND THE SEALED RECORD:** one component
+  (S2·S3·S4·S6·S13), Tarjan written IN THE TEST, and — new here — the
+  feedback set proven MINIMAL by cutting each declared inversion alone
+  (each leaves a named residue), so a "cleanup" dropping either reds
+  against a residue, not a count. The port preserves; W4 repairs.
+- **THE SHARPEST FINDING:** the sealed "FOUNDATIONS has no outbound edge"
+  arm passes ON A WRONG DENOMINATOR — the derivation skips unassigned
+  files while four of coordinateAbi's seven live readers are unassigned
+  codex modules (§P2.13 exactly; not a §P7.2 breach — all pre-existing and
+  in-directory). CURED by a frozen whole-directory reader roster so a new
+  reader reds on arrival. **J-TET2J-4 RATIFIED** with the port-improvement
+  doctrine noted; RAISED-1 recorded (the sealed arm is defective wherever
+  ported; the sealed tip stays unedited per R-MF-4).
+- **Mutant hygiene at the standard:** 7/7 convicted digest-exact with a
+  clean-tree control and three single-arm subsumption convictions; TWO
+  EQUIVALENT MUTANTS found, their enabling conditions PINNED as stated
+  properties, then re-planted in convicting spellings (J-TET2J-8 ratified —
+  an equivalence is banked as a property, never left as luck). The
+  mutation-coverage row taken at the ruling's FIRST preference with the
+  hand-executed plant proving 2-failed-1-passed and the guard-the-guard arm
+  green throughout.
+- **J-TET2J-1 RATIFIED — the shared-census-path row DEFERRED TO THE LANDING
+  ACT:** the duplicate-change-path refusal executed (fires at DRAFT too);
+  a lane may not assert another member's completion (§299.5) and may not
+  edit the validator; the row's exact text is written verbatim in packet
+  §1.4 for the chair's landing act to insert. **THE DURABLE LAW BANKED (the
+  lane's RAISED-1a):** every later stacked D3a member (K/L/M) hits the same
+  refusal while its predecessor is READY — the T2J shape (code edit proved
+  at tip; shared row deferred verbatim to the landing act) is the standing
+  cure. J-TET2J-2/3/5/6/7 likewise ratified.
+- RAISED-2/3 recorded as carried published data: the two whole-fabric
+  figures (statefulForkSites=17; manifestModules===readdir) restore as
+  exact equalities at the member that lands the LAST sandbox module;
+  namespaceCollisions' same-node arm stays pinned-equivalent. T2J HOLDS
+  deep in the queue (after T2H). **§417.1 SEAT: TC-T2K dispatched** (the
+  §374.1 precedent — the port pipeline stays full; compile-tier per §343.1).
