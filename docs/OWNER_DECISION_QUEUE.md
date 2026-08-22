@@ -15765,3 +15765,34 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   an unearned route is still the wrong method') credited per §365.2's precedent.
   **THE RATCHET CURE IS NEXT-UP** (messaged): cherry-pick 3c781e7e across the
   drift to dfa892cfb872, then the handshake.
+
+## §386 — COLLECTION + CAS: THE RATCHET CURE LANDED — GATES SAY WHAT THEY MEAN; THE §357 ARC CLOSES (2026-08-22 ~15:30)
+
+- **TE-RATCHET collected.** Tip 9bfae712602b — one commit on the bundle's landing,
+  terminal green with both readings agreeing and the track's emptiness
+  re-confirmed by the chain's own zero-poll lock acquisitions. The frozen ELEVEN
+  at ceiling across 28,734 tests with ZERO strays — so the cure's evidence block
+  correctly printed NOTHING (bound to reds; there were none), its liveness proven
+  where liveness is provable: the meta-test's fake-runner arms, 64/64 at the same
+  tip. The green binds to the committed bytes (worktree blobs equal to HEAD; the
+  gate the tree's last action). CAS EXECUTED: dfa892cf → 9bfae712602b (read back).
+  **FROM THIS LANDING, EVERY NON-CENSUS RED PRINTS ITS CLASS (TIMEOUT ·
+  QUERY-BUDGET · ASSERTION), ITS DURATION AGAINST ITS BUDGET, ITS FIRST MESSAGE
+  LINE, THE MACHINE'S LOAD, AND THE EVIDENCE FILE'S PATH — the §355-§358 arc,
+  opened by a haunted suite, closes as instrumentation.**
+- **§386.1 The environmental red, owned and banked:** run 1 died on two suites
+  whose packages were absent from the lane's node_modules — cloned from the MAIN
+  checkout, whose install predates the branch split by five weeks (15
+  lockfile-declared packages missing). The lane owned both the reasoning gap
+  ('sound about the drift, silent about the clone source') and the passed-over
+  tell (453 vs 468 entries). LAW BANKED: NEVER clone node_modules from the main
+  checkout into a lane worktree — npm ci against the lockfile, with the
+  entry-count tell as the cheap detector. The re-fire was a DECLARED re-run with
+  the cause proven environmental first — the distinction the re-run law hangs on.
+- **§386.2 CURE 1b CHARTERED** into the H8 re-seed bundle: the run-1 red landed
+  on the exact surface Cure 1 scoped out — the scope-sentinel block prints no
+  report path, costing the hand-reproduction the cure abolishes one block over;
+  the deferral is now a measured argument, and the helpers are already exported.
+- **§386.3 TE-OSR10 DISPATCHED** (the §384.1 charter: the envelope
+  re-reconciliation micro-mint, schema 9→10, the §349 runbook reused). Then RR-1
+  regenerates, RR-2 promotes, and the H8+1b bundle closes the queue.

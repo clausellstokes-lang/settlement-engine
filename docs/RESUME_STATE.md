@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~15:30: RATCHET CURE LANDED — CAS dfa892cf → 9bfae712602b (§386; 18th
+# landing; GATES SAY TIMEOUT-vs-ASSERTION from here — the §357 arc CLOSED).
+# Environmental red owned (never clone node_modules from main — npm ci;
+# 453-vs-468 tell). CURE 1b chartered into the H8 bundle. TE-OSR10
+# dispatching. Queue: OSR-10 → RR-1 regen → RR-2 → H8+1b.
 # ⭐ ~14:45: RATCHET CURE terminal-ready at 9bfae712 (content-level carry
 # proof: identical blobs; census green upgraded to PLANT-CONVICTION —
 # +1 title reds the walker, restored byte-exact; sibling coexistence
