@@ -20034,6 +20034,139 @@
       ]
     },
     {
+      "id": "MF-T2J",
+      "status": "DRAFT",
+      "packetPath": "docs/implementation/packets/town-cartography/MF-T2J.md",
+      "verifiedBase": "05e7f9d56eec119102f540e316bd8e1061f81a92",
+      "changeManifest": [
+        {
+          "_note": "THE LEAF. SPEC 10.14's executable S0-S23 stage manifest, ported from the sealed W3 tip as PUBLISHED DATA rather than as a self-deriving table, because 49 of the 54 modules it names do not exist in this tree. Sealed equivalence is TOTAL: 10 exported values, 5 nullary functions, topologicalNodeIds in both modes, all 25 stageOrderIndex rows and all 56 nodeOfModule rows compare with ZERO differences. Two declared divergences, neither behavioural: the header prose is rewritten because the sealed one says the table is source-derived and here it is not, and .map(Object.freeze) becomes .map((node) => Object.freeze(node)) because the bare reference erases the element type under tsconfig.domain-strict.json. 219 effective lines against the 400 cap and the 250-per-leaf cap. Dormant: no consumer, no barrel row, nothing persisted, and the leaf is a SINK in the module graph.",
+          "action": "CREATE",
+          "path": "src/domain/townMap/fabric/stageManifest.js"
+        },
+        {
+          "_note": "THE SOURCE-DERIVED WALKER, the sealed 12-arm file re-aimed at this tree arm by arm with each disposition recorded in the packet. Three cases, ONE literal describe, straight-line test calls with string-literal titles, every loop INSIDE a named test (the SP-D idiom). L1 shows the acorn derivation working on a synthetic map BEFORE it is trusted. L2 is the accounting, exact in both directions, plus the NAMED DENOMINATOR: the sealed foundations-have-no-outbound-edge arm passes here for the wrong reason, so each landed foundation module's real reader roster is read from the WHOLE directory and frozen. L3 is the agreement plus the 293.3c stream audit plus four plants. Owes and carries a mutation-coverage row under P3b.",
+          "action": "TEST",
+          "path": "tests/lint/townMapStageManifest.walker.test.js"
+        },
+        {
+          "_note": "THE ARTIFACT ACCEPTANCE FILE - the record checked against itself by an independently written Tarjan, so the component the manifest PUBLISHES is compared against one the test COMPUTES. D2 carries the headline: the module graph is acyclic and the STAGE graph is not, one component spanning S2/S3/S4/S6/S13 closed by two named imports, PRESERVED as published data rather than repaired (W4 owns the repair). It also carries a result the sealed record does not publish: the feedback set is MINIMAL, since cutting either inversion alone leaves a different still-cyclic residue. D1 and D3 pin the stamped strings, the absent-not-stubbed law, purity, the inversion-to-node-table join, the derived order against every acyclic edge, the foundation closure, the unbuilt roster and the eight namespace collisions.",
+          "action": "TEST",
+          "path": "tests/domain/townMapStageManifest.test.js"
+        },
+        {
+          "_note": "THE P3b MUTATION-COVERAGE ROW every new tests/lint/** file owes, priced at compile rather than discovered at the terminal. ONE surgical insert beside its sibling row (5 insertions, 0 deletions, uncoveredBaseline untouched at 198), kind 'mutation', label 'town-map/stage-manifest foundation wired into a stage'. NEVER an uncovered row and NEVER a re-serialisation.",
+          "action": "MODIFY",
+          "path": "scripts/mutation-coverage-manifest.json"
+        },
+        {
+          "_note": "THE STANDING PLANT that gives the row its removing power - entry 28c plus one MUTATED_FILES entry, the two-file edit the E-A law requires. The plant imports stageManifest.js into fabricRng.js, the ONE landed fabric module the record assigns to a STAGE, creating the cross-node edge FOUNDATIONS>S0 the record does not carry: the exact shape of SPEC 10.15(4)'s defect. EXECUTED BY HAND, because no build lane may run the sweep on this tree (its revert is the git checkout family the shared-tree protocol forbids): pre-plant digest 4094ecb8, planted 5fcbd82d, the plant parses, the walker reads 2 failed | 1 passed with the guard-the-guard arm still GREEN, and the restore is cmp-identical and digest-exact.",
+          "action": "MODIFY",
+          "path": "scripts/mutation-sweep.sh"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/packets/town-cartography/MF-T2J.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE ONE FIELD THE PUBLISHED RECORD READS FROM LIVE CODE, which is what joins the sandbox table to this tree. GENERATION_MANIFEST.coordinateAbiVersion is asserted equal to it, and the sealed-equivalence proof only holds because it reads 1 here. This member PERSISTS nothing, so the ODQ 390.2 standing trigger passes forward untouched.",
+          "path": "src/domain/townMap/fabric/coordinateAbi.js",
+          "symbol": "export const COORDINATE_ABI_VERSION"
+        },
+        {
+          "_note": "THE S0 MODULE THE LIVE ARMS DERIVE OVER. It is the only landed fabric module the record assigns to a public stage, so it is what makes the cross-node edge S0>FOUNDATIONS real and what the 293.3c stream audit reads for module-level mutable state. Remove it and the walker exact pins have no subject.",
+          "path": "src/domain/townMap/fabric/fabricRng.js",
+          "symbol": "export function fabricRng"
+        },
+        {
+          "_note": "THE SWEEP PLANT'S PERL ANCHOR. Entry 28c substitutes on this exact line; if it is renamed or moved the plant silently mutates NOTHING and the sweep reports a caught mutant it never planted - the stale-anchor class this estate has recorded. Named here so a rename reds the manifest rather than hollowing out the E-A row.",
+          "path": "src/domain/townMap/fabric/fabricRng.js",
+          "symbol": "export const FABRIC_FORK_NAMESPACE"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "L1",
+          "case": "Guard-the-guard, in the walker. The record is populated (23 nodes, 54 modules, 88 edges) and the fabric directory is live (at least 27 files); then the acorn derivation is SHOWN WORKING on a two-file synthetic map before it is trusted, yielding the import, the cross-node edge, both key spellings and the fork site. A derivation that returned empty for everything would satisfy every refusal in L3 forever."
+        },
+        {
+          "id": "L2",
+          "case": "The accounting, exact in BOTH directions, plus the named denominator. Every landed .js file is assigned by the record or on the frozen codex roster; no module is claimed twice; an unknown name resolves to no node; the record 49-module lead is published. Then each landed foundation module real reader roster, read from the WHOLE directory rather than from the assigned subset, frozen exact, with the seven readers of coordinateAbi.js asserted so the roster cannot rot into an empty scan."
+        },
+        {
+          "id": "L3",
+          "case": "The agreement, plus the 293.3c stream audit, plus four plants. No node imports, mints or forks beyond what the record allows and no derived edge sits outside it; FOUNDATIONS, the one fully landed node, is pinned EXACT on imports, key spellings, fork sites and edges. Every live fabricRng fork takes the settlement seed, the home holds no module-level mutable state, and no artifact publishes a live handle. The plants are an unclaimed arrival, a foundation wired into a stage, an unregistered key spelling and a fork site in a node the record says has none."
+        },
+        {
+          "id": "D1",
+          "case": "Guard-the-guard, in the artifact file. The manifest is frozen, its vocabularies are mutually closed, and artifactKind, schemaVersion and lawVersion are pinned as literals so P7.4 motion must be deliberate. coordinateAbiVersion is joined to this tree live COORDINATE_ABI_VERSION. Absent-not-stubbed is DRIVEN: the eleven named fields are absent from the artifact and the same filter is shown convicting on a doctored key list. Purity closes it, with the planted positive control asserted BEFORE the absence."
+        },
+        {
+          "id": "D2",
+          "case": "THE STRONGLY-CONNECTED COMPONENT. Tarjan is guarded first on a two-cycle and a DAG; then the component is pinned as exactly one, with its membership a literal, the record agreeing, closedBy a literal, the RAW stage graph having no topological order at all, and cutting exactly the two inversions leaving a DAG. Then minimality: each single cut residue is pinned by name and shown to differ from the published roster, so a cleanup that drops one inversion reds against a measured component rather than against a count."
+        },
+        {
+          "id": "D3",
+          "case": "The projections. Each inversion joins the node table by stage rather than by a text scan, which is what this tree can check since neither declared importer exists here. The derived order is checked to respect EVERY acyclic edge, not merely to have the right length and be unique. The foundation closure is empty and its projection is shown able to speak. The unbuilt roster owns no node and no public stage is silently empty. The eight namespace collisions are enumerated. Two equivalence conditions found by mutant are pinned here rather than left as luck."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/negativeAssertionAnchor.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/townMapStageManifest.walker.test.js",
+          "tests/domain/townMapStageManifest.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "tests/lint/entropyRootCensus.walker.test.js",
+          "tests/lint/townMapFabricSingleDeclaration.walker.test.js",
+          "tests/lint/controlBytes.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/build/townMapLazy.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/domain/townMap/fabric/stageManifest.js",
+          "tests/lint/townMapStageManifest.walker.test.js",
+          "tests/domain/townMapStageManifest.test.js"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "npm",
+          "run",
+          "validate:packets"
+        ],
+        [
+          "npm",
+          "run",
+          "check:tail"
+        ]
+      ]
+    },
+    {
       "id": "MF-T2H",
       "status": "READY",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T2H.md",
