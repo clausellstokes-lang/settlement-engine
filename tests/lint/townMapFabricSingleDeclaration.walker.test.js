@@ -74,6 +74,38 @@ function duplicatesOf(sourcesByFile) {
 const TO_COMPLY = 'give the two implementations distinct names; a re-export'
   + ' (`export { X } from \'./y.js\'`) is the lawful way to have ONE implementation at two addresses';
 
+/**
+ * ⭐⭐ THE §423.1 OPTION-D LAW, IN ITS EXECUTABLE FORM (added by MF-T2M).
+ *
+ * ODQ §423.1: *"an operation VOCABULARY may exist in exactly two places — the store registry's
+ * verb rows and the domain's sealed-artifact payload grammar; a module claiming both levels, or a
+ * third vocabulary at either level, is refused at review as a second truth."* Option D was adopted
+ * *"so the class that produced this blocker cannot be minted again"*, and prose law that nothing
+ * executes is prose. This is the half a scan can decide: ACCEPTANCE lives at the store door, so no
+ * fabric module may export an acceptance GATE. (The layer half — no fabric module may import the
+ * store — is `tests/architecture/layerBoundaries.test.js`'s, transitively, and is NOT duplicated.)
+ *
+ * ⚠ WHY THE ANCHOR IS THE EXPORT-DECLARATION GRAMMAR AND NOT A `gate` TEXT SCAN. Measured before
+ * this arm was written: `stageManifest.js` lawfully carries `'gate'` as a §10.14 manifest FIELD
+ * NAME and `'*|watergate|*|*'` as a random namespace. A naive substring scan convicts both. The
+ * anchored form cannot: a field name and a namespace can never match an export declaration.
+ *
+ * VICTORY ASSERTION, NOT A BASELINE — the population is EXACTLY ZERO the moment MF-T2M's strip
+ * lands, and there is deliberately no allow-list, because a door is a place to bank the first
+ * offender. A future acceptance-gate mint reds ON ARRIVAL.
+ */
+const GATE_EXPORT_RE = /^export\s+const\s+[A-Z0-9_]*_GATE\s*=/gm;
+
+/** @param {string} source @returns {string[]} every acceptance-gate export this source declares */
+function gateExportsOf(source) {
+  return [...source.matchAll(GATE_EXPORT_RE)].map((match) => match[0].trim());
+}
+
+const GATE_TO_COMPLY = 'acceptance lives at the STORE DOOR, never in a payload grammar (ODQ'
+  + ' §423.1). A door verb is a row in src/store/operationRegistry.js — not a fabric export. If'
+  + ' this constant is payload VOCABULARY rather than an acceptance gate, name it for what it is:'
+  + ' the offending suffix is what makes it read as a gate';
+
 const FABRIC_FILES = readdirSync(join(ROOT, FABRIC_DIR)).filter((f) => f.endsWith('.js')).sort();
 const FABRIC_SOURCES = /** @type {Array<[string, string]>} */ (
   FABRIC_FILES.map((f) => [f, readFileSync(join(ROOT, FABRIC_DIR, f), 'utf8')])
@@ -126,6 +158,29 @@ describe('fabric single-declaration law (the ODQ 310.3(7) source scan)', () => {
     // real duplicate in silence. Measured before this pin was written, not reasoned about.
     expect(declarationsOf('const doc = `\nexport const fromTemplate = 1;\n`;\n')).toEqual(['fromTemplate']);
     expect(declarationsOf('/*\nexport const fromBlockComment = 2;\n*/\n')).toEqual(['fromBlockComment']);
+  });
+
+  test('THE ODQ 423.1 TWO-LEVEL LAW: no fabric module declares an acceptance gate', () => {
+    // A6 (MF-T2M). GUARD-THE-GUARD FIRST, in this file's own idiom: the enumeration must be live
+    // before a zero means anything, and the matcher must be able to match at all — otherwise this
+    // victory assertion passes on nothing, which is the exact vacuity §P6 names.
+    expect(FABRIC_FILES.length).toBeGreaterThanOrEqual(18);
+    expect(gateExportsOf("export const PROBE_CANON_GATE = 'X';\n"))
+      .toEqual(['export const PROBE_CANON_GATE =']);
+    // …and the lawful text the naive scan would have convicted is proved INERT here, in both of
+    // the shapes actually present in this directory.
+    expect(gateExportsOf("const m = { 'gate': 1 };\nconst ns = ['*|watergate|*|*'];\n")).toEqual([]);
+
+    const offenders = FABRIC_SOURCES
+      .flatMap(([file, source]) => gateExportsOf(source).map((decl) => `${decl}  <-  ${file}`));
+    expect(
+      offenders,
+      `\nAn ACCEPTANCE GATE is exported from ${FABRIC_DIR}/. ODQ 423.1 puts an operation`
+      + ` vocabulary in exactly two places — the store registry's verb rows and the domain's`
+      + ` sealed-artifact payload grammar — and refuses a module that claims both levels as a`
+      + ` second truth. This directory is the payload level. ${GATE_TO_COMPLY}:\n`
+      + `${offenders.join('\n')}\n`,
+    ).toEqual([]);
   });
 
   test('the named regression: two clipHalfPlane declarations with opposite conventions are caught', () => {

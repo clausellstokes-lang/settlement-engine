@@ -5558,7 +5558,54 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   MF-T2J's walker) rode this member's own atomic commit through the rebase: neither spelling
     //   existed at the slot, so nothing was skipped and nothing re-done. Only the LAST tuple line
     //   below is live; the SUM is convicted once at the stack tip.
-    files: 2504, parked: 365, credited: 2139, titles: 20774, suiteTitles: 5796,
+    // ── RE-RECORDED 2026-08-22 BY MF-T2M (architectural-history operations + the §423 strip) ──
+    // 2502/364/2138/20737/5790 → 2503/364/2139/20744/5791. ALL FIVE FIGURES RE-DERIVED TOGETHER.
+    // THE CAUSE HAS TWO NAMED SOURCES, which is why `titles` moves by SEVEN and not by six:
+    //   tests/domain/townMapArchitecturalHistory.test.js ... +1 file, +6 titles, +1 suite title
+    //   tests/lint/townMapFabricSingleDeclaration.walker.test.js .......... +1 title, +0 files
+    // The seventh title is the ODQ §423.1 Option-D PREVENTION ARM — the executable form of the
+    // two-level law ("acceptance lives at the store door; a payload grammar carries no gate"),
+    // added to the walker that already owns this directory's declaration laws rather than minted
+    // as a new tests/lint file, which would have cost a §P3b mutation-coverage row and a second
+    // census file. The +7 shape was RAISED as a deviation from the plan's fixed +6
+    // single-behaviour shape and RATIFIED at ODQ §426(3).
+    // PARKED IS UNCHANGED at 364 and it was EARNED: the new file is ONE literal `describe` with
+    // six straight-line `test` calls and string-literal titles, every loop INSIDE a named test
+    // (the SP-D idiom), so door 3's reader credits all six statically. The arithmetic closes:
+    // 364 + 2139 = 2503.
+    // `censusAuthorization`: ODQ §276 (the build sheet) · ODQ §304.4 (the D3a port charter) ·
+    // ODQ §310.4 (the wave charter) · ODQ §423.1 (the structural law this member's walker arm
+    // executes) and ODQ §426 (its compile ruling) — under §299.4's binding-forward rule.
+    // The family's stamp is GRANTED at ODQ §312.2b.
+    // ⛔ ATTRIBUTED BY ISOLATION IN TWO STEPS, because the motion has TWO sources. Executed at
+    //   this base: (A) hiding townMapArchitecturalHistory.test.js ALONE reads
+    //   2502/364/2138/20738/5790 — the base tuple with ONLY the walker arm's +1 title, GREEN at
+    //   33/33; (B) reverting the walker arm as well reads 2502/364/2138/20737/5790 — the base
+    //   tuple EXACTLY, GREEN at 33/33. Both restores were proved digest-exact, and together they
+    //   prove nothing else in the tree moved this census under the lane.
+    // ⚠ THE SEQUENCED WALK WAS RUN RATHER THAN SHORT-CIRCUITED, each figure read from its own
+    //   arm's failure message: `files` 2503, then `parked` PASSED at 364 without ever redding,
+    //   then `credited` 2139, then `titles` 20744, then `suiteTitles` 5791, then GREEN at 33/33.
+    // ⚠ THE CARRY LAW. This member is STACKED on MF-T2K's unlanded holding commit `4d2d17f8`,
+    //   itself stacked on MF-T2J's, MF-T2H's and MF-T2Bf's, and it will be rebased at its landing
+    //   slot — where MF-T2L's own deferred row also lands. The DELTA (+1/+0/+1/+7/+1) is what
+    //   crosses; the tuple above is re-derived from the hash after the last edit at that slot,
+    //   never carried.
+    // ⭐⭐ THE CARRY LAW, EXECUTED AT THE LANDING SLOT — THE MAP STACK (ODQ §461.2), member FOUR,
+    //   THE SIBLING FACE (ODQ §430 ruling 1). This member was authored at base 4d2d17f8 (MF-T2K's
+    //   holding) as a SIBLING of MF-T2L, not stacked on it — the two members' authored after-
+    //   figures (2,503/364/2,139/20,743/5,791 and 2,503/364/2,139/20,744/5,791) are NOT
+    //   alternatives to choose between; they are two deltas over the same base. Rebased onto the
+    //   rebased MF-T2L tip over 11539636 (WEB-7, the 31st landing), the resolution is the SUM OF
+    //   DELTAS, never either tuple: slot 2,500/365/2,135/20,756/5,792 + MF-T2J (+2/+0/+2/+6/+2)
+    //   + MF-T2K (+1/+0/+1/+6/+1) + MF-T2L (+1/+0/+1/+6/+1) + MF-T2M (+1/+0/+1/+7/+1) =
+    //   +5/+0/+5/+25/+5 = 2,505/365/2,140/20,781/5,797 — the ONE live tuple line below, CONVICTED
+    //   BY EXECUTION at the stack tip (33/33) with the negative control: the slot's own tuple put
+    //   back reds at `files` ("expected 2505 to be 2500"), the summed delta exactly, and the file
+    //   restored byte-identical. ⛔ THE BASE HAD MOVED UNDER THE WHOLE STACK by the six landings
+    //   MF-T2J's paragraph names (+1/+1/+0/+31/+5 between 05e7f9d5 and the slot), which is why no
+    //   member's authored tuple survives: the DELTAS crossed, the tuples were re-derived.
+    files: 2505, parked: 365, credited: 2140, titles: 20781, suiteTitles: 5797,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

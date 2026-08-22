@@ -23,8 +23,22 @@ import {
   replayArchitecturalHistoryOperation,
 } from '../../src/domain/townMap/fabric/architecturalHistory.js';
 import { MASSING_UNKNOWN_REASONS } from '../../src/domain/townMap/fabric/massPart.js';
+import * as publicFabricApi from '../../src/domain/townMap/fabric/index.js';
+import {
+  canonicalArtifactRef,
+  compileOrthogonalCrossFirstSliceMassingRosterBundle,
+  createCanonicalOrigin,
+  createFantasyConstructionOperation,
+  createFirstSliceMassingDocument,
+  createSpatialRecipeSnapshot,
+  executeFantasyConstruction,
+  registerFantasyConstructionMechanism,
+  saveFirstSliceMassingDocument,
+} from '../../src/domain/townMap/fabric/index.js';
 import { sealCanonicalArtifact } from '../../src/domain/townMap/fabric/foundation.js';
 import { stableSceneStringify } from '../../src/domain/townScene/stableScene.js';
+import { makeSettlementMassingRosterBundleInputs } from '../fixtures/townMapSettlementFabricFixtures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 /** SPEC `ArchitecturalHistoryOperationKind`, re-typed from the blob rather than imported. */
 const SPEC_KINDS = [
@@ -67,6 +81,59 @@ function input(overrides = {}) {
     provenanceRef: PROVENANCE,
     ...overrides,
   };
+}
+
+/**
+ * The MF-T1X execution fixture, re-spelled compactly for A6. It exists so the STRIP's survivors
+ * can be proved POSITIVELY here — that the demotion removed a claim rather than a check — without
+ * this file depending on another acceptance file's private helpers.
+ */
+function makeExecutionFixture() {
+  const base = makeSettlementMassingRosterBundleInputs();
+  const bundle = compileOrthogonalCrossFirstSliceMassingRosterBundle(base.input);
+  const document = createFirstSliceMassingDocument({
+    documentId: 'document:first-slice-massing:001', massingBundle: bundle,
+    massingCompileInput: base.input,
+  });
+  const spatialRecipe = createSpatialRecipeSnapshot({
+    packageClass: 'BUILT_IN', packageId: 'package:settlementforge-core', packageVersion: '1.0.0',
+    entryId: 'recipe:fantasy-watch-house', entryVersion: 1,
+    semanticTypeId: 'semantic:fantasy-watch-house', spatialRole: 'BUILDING',
+  });
+  const canonicalOrigin = createCanonicalOrigin({ kind: 'AUTHORED',
+    sourceId: 'canon:fantasy-watch-house', sourceVersion: '1.0.0',
+    contentHash: 'authored-fantasy-canon-v1' });
+  const plot = base.frontageSubdivision.plots
+    .find((row) => row.plotId === 'block:settlement:high-x-low-z:plot:01');
+  const operationId = 'op:construct-fantasy-watch-house:01';
+  const spec = {
+    buildingId: 'building:fantasy-watch-house:01',
+    semanticTypeId: spatialRecipe.semantics.semanticTypeId,
+    foundationRef: base.frontageSubdivision.foundationRef,
+    plotRef: { artifactId: base.frontageSubdivision.artifactId,
+      contentHash: base.frontageSubdivision.contentHash, plotId: plot.plotId },
+    privacy: 'DM', footprint: plot.fittedFootprint, baseElevationQ: 0, wallTopQ: 48,
+    roof: { kind: 'GABLE', eaveQ: 48, ridgeQ: 72, ridgeAxis: 'X' },
+    materials: { wallMaterialId: 'material:dressed-stone', roofMaterialId: 'material:slate' },
+    functionId: 'function:fantasy-watch', constructionOperationId: operationId,
+  };
+  const mechanism = registerFantasyConstructionMechanism({
+    mechanismId: 'mechanism:fantasy-watch-house:v2', mechanismVersion: 2,
+    spatialRecipeRef: canonicalArtifactRef(spatialRecipe),
+  });
+  const legacyMechanism = registerFantasyConstructionMechanism({
+    mechanismId: 'mechanism:necromantic-construction:v1', mechanismVersion: 1,
+    allowedSemanticTypeIds: ['semantic:necromantic-observatory'],
+  });
+  const operation = createFantasyConstructionOperation({
+    operationId, beforeDocumentRef: canonicalArtifactRef(document),
+    mechanismRef: canonicalArtifactRef(mechanism), spec,
+    recipeSnapshot: spatialRecipe, origin: canonicalOrigin,
+  });
+  return { mechanism, legacyMechanism, operation, request: {
+    bytes: saveFirstSliceMassingDocument(document), installedRecipeSnapshots: [],
+    operation, mechanismRegistry: [mechanism],
+  } };
 }
 
 /** Deep-frozen, all the way down. */
@@ -300,5 +367,56 @@ describe('MF-T2M architectural-history operations and the deterministic fixture'
     // the packet body. A deliberate fixture change re-records this WITH its cause stated (the
     // honest-shift law); an accidental one reds here, which is the whole point of a golden.
     expect(fixture.operations[2].contentHash).toBe('scene-v1-c75cab40b6e086edaa26f04c3c4593ff');
+  });
+
+  test('A6 the §423 Shape-B strip removed a CLAIM and not a check — the gate is gone from the barrel and from every sealed shape, and every survivor still refuses what it refused before', () => {
+    const fixture = makeExecutionFixture();
+
+    // ── THE ABSENCES, EVERY ONE ANCHORED BY A LIVE SIBLING ──────────────────────────────────
+    // The barrel no longer re-exports the acceptance gate. The anchor travels the same export
+    // block, so a barrel that emptied or rotted reds on the anchor instead of passing here.
+    expectAbsentWithAnchor(Object.keys(publicFabricApi), 'FANTASY_CANON_GATE',
+      'FANTASY_CONSTRUCTION_OPERATION_KIND', 'the §423 gate demotion');
+
+    // No sealed shape carries a `gate` key any more. Each subject is a FRESHLY SEALED artifact,
+    // and each absence is anchored by a sibling key that rides the very same seal call — so a
+    // seal that stopped producing anything reds on the anchor.
+    const result = executeFantasyConstruction(fixture.request);
+    const sealed = [
+      ['v2 mechanism', fixture.mechanism, 'spatialRecipeRef'],
+      ['v1-legacy mechanism', fixture.legacyMechanism, 'allowedSemanticTypeIds'],
+      ['operation', fixture.operation, 'operationKind'],
+      ['construction state', result.constructionState, 'buildingMasses'],
+      ['receipt', result.receipt, 'effect'],
+    ];
+    for (const [label, artifact, anchorKey] of sealed) {
+      expectAbsentWithAnchor(Object.keys(artifact), 'gate', anchorKey, `${label} seal`);
+    }
+
+    // ── THE RENAME, POSITIVELY: proposal-grade and accepted-grade no longer share a word ────
+    expect(fixture.operation.artifactKind).toBe('PROPOSED_SPATIAL_OPERATION');
+
+    // ── THE SURVIVORS, POSITIVELY. The full execute path still produces both artifacts with
+    //    their predecessor structural pins honoured.
+    expect(Object.keys(result).sort()).toEqual(['constructionState', 'receipt']);
+    expect(result.constructionState.artifactKind).toBe('FIRST_SLICE_MASSING_CONSTRUCTION_STATE');
+    expect(result.constructionState.buildingMasses.length).toBe(3);
+    expect(result.receipt.artifactKind).toBe('FANTASY_CONSTRUCTION_RECEIPT');
+    expect(result.receipt.effect.kind).toBe('BUILDING_ADDED');
+    expectDeepFrozen(result);
+
+    // …the v1-legacy mechanism still REFUSES execution — the schemaVersion arm, untouched by the
+    // strip, so no refusal class was lost when the gate leg went.
+    expect(fixture.legacyMechanism.schemaVersion).toBe(undefined);
+    expect(() => executeFantasyConstruction({ ...fixture.request,
+      mechanismRegistry: [fixture.legacyMechanism] })).toThrow(TypeError);
+
+    // …and a NON-REPLAYING operation is still refused. The tamper is a reseal, so the artifact's
+    // own contentHash is consistent and only the replay check can convict it.
+    const body = JSON.parse(stableSceneStringify(fixture.operation));
+    delete body.contentHash;
+    body.payload.spec.wallTopQ = 96;
+    expect(() => executeFantasyConstruction({ ...fixture.request,
+      operation: sealCanonicalArtifact(body) })).toThrow(TypeError);
   });
 });

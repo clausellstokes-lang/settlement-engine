@@ -31,7 +31,15 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const DOCUMENT_ID = 'document:first-slice-massing:001';
 const FREE_PLOT_ID = 'block:settlement:high-x-low-z:plot:01';
-const LEGACY_HASH = 'scene-v1-56e0d430be735fbbab2f7aa4b4b50281';
+// ⚠ RE-RECORDED BY MF-T2M WITH ITS CAUSE STATED (ODQ §423(1)/§426; authorization: packet body).
+// The §423 Shape-B strip removed the acceptance-gate field from the v1-legacy mechanism seal, so
+// the sealed BYTES of that one artifact moved and its digest moved with them. This is a DECLARED
+// shift, not a drift: it is the only literal in this file that moves, because it is the only pin
+// that seals an artifact the strip touched. The six `scene-v1-*` projection literals in A6 ride
+// NON-fantasy projections that embed no operation artifact and were verified UNMOVED in the same
+// run. The arm's semantics are untouched — it still convicts an accidental reseal of the legacy
+// mechanism, which is exactly why the literal is kept rather than derived.
+const LEGACY_HASH = 'scene-v1-5994c3ce8cf9d4d9b1ed8ffa2d6e4d1f';
 
 function clone(value) { return JSON.parse(stableSceneStringify(value)); }
 function refOf(artifact) { return canonicalArtifactRef(artifact); }

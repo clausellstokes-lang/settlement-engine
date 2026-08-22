@@ -1,4 +1,36 @@
-/** One bounded registered fantasy construction operation. */
+/**
+ * One bounded registered fantasy construction operation, COMPILED AS A PAYLOAD.
+ *
+ * ⛔⛔ THE §423 SHAPE-B DEMOTION, EXECUTED BY MF-T2M. This module used to name its artifacts
+ * CANONICAL and carry its own acceptance GATE — door-status semantics, at the payload level.
+ * ODQ §423 ruled the two levels apart: *"the store registry (src/store/operationRegistry.js) is
+ * THE census of DOOR VERBS; one domain artifact grammar owns operation PAYLOADS … (1)
+ * fabric/operations.js DEMOTES from door-claimant to payload compiler … its artifacts are
+ * proposal-grade until a registered store verb accepts them."* So the gate export and its six
+ * use sites are gone, and the operation's kind reads `PROPOSED_SPATIAL_OPERATION`: proposal-grade
+ * and accepted-grade no longer share a word. The SPEC's canonical-spatial-operation union row now
+ * means exactly what §423 says it means — the kind an ACCEPTED operation carries, minted at the
+ * door by the executor tranche (§423(3)), which is not this module and never was. ⚠ That union
+ * spelling is deliberately NOT written here as a literal: earlier members' forensic zooms use it
+ * as a dist positive control, and a surviving comment would let one of them pass on prose.
+ *
+ * ⭐ THE DEMOTION REMOVED A CLAIM, NOT A CHECK. Every refusal this module could make before, it
+ * still makes: the v1-legacy mechanism still refuses execution on `schemaVersion !== 2`, the
+ * operation still refuses on a wrong schema, law version or operation kind, and a non-replaying
+ * operation, mechanism or recipe is still refused. What is gone is the assertion that passing
+ * those checks makes an artifact CANONICAL — a grade this level has no authority to award.
+ *
+ * ⚠ THE TWO LAW VERSIONS MOVED WITH THE SHAPES THAT MOVED. A law string names a shape; the
+ * mechanism and operation shapes lost their `gate` field, so both are re-stamped. The state and
+ * receipt laws are UNCHANGED — those shapes never carried a gate, and the ref VALUES they embed
+ * move only because ref hashes move, which is ref semantics rather than a law change.
+ *
+ * ⛔ AND NO ACCEPTANCE GATE MAY BE MINTED HERE AGAIN. §423.1: *"an operation VOCABULARY may exist
+ * in exactly two places — the store registry's verb rows and the domain's sealed-artifact payload
+ * grammar; a module claiming both levels, or a third vocabulary at either level, is refused at
+ * review as a second truth."* The executable form of that law is an arm in
+ * `tests/lint/townMapFabricSingleDeclaration.walker.test.js`, and it reds on arrival.
+ */
 
 import { sceneDigest, stableSceneStringify } from '../../townScene/stableScene.js';
 import {
@@ -17,14 +49,13 @@ import {
 } from './foundation.js';
 
 export const FANTASY_CONSTRUCTION_OPERATION_KIND = 'CONSTRUCT_EXPLICIT_BUILDING';
-export const FANTASY_CANON_GATE = 'EXPLICIT_FANTASY_CANON';
 export const FIRST_SLICE_MASSING_CONSTRUCTION_STATE_SCHEMA_VERSION = 1;
 export const FIRST_SLICE_MASSING_CONSTRUCTION_STATE_LAW_VERSION =
   'mf-t1x-first-slice-massing-construction-state-v1';
 
-const MECHANISM_LAW_VERSION = 'mf-t1x-registered-fantasy-construction-mechanism-v2';
+const MECHANISM_LAW_VERSION = 'mf-t2m-registered-fantasy-construction-mechanism-v3';
 const OPERATION_SCHEMA_VERSION = 1;
-const OPERATION_LAW_VERSION = 'mf-t1x-explicit-fantasy-construction-operation-v1';
+const OPERATION_LAW_VERSION = 'mf-t2m-proposed-fantasy-construction-operation-v1';
 const EXECUTION_KEYS = Object.freeze([
   'bytes', 'installedRecipeSnapshots', 'mechanismRegistry', 'operation',
 ]);
@@ -117,7 +148,7 @@ export function registerFantasyConstructionMechanism(input) {
     }
     return sealCanonicalArtifact({
       artifactKind: 'REGISTERED_FANTASY_MECHANISM', artifactId: mechanismId,
-      mechanismVersion, gate: FANTASY_CANON_GATE,
+      mechanismVersion,
       operationKind: FANTASY_CONSTRUCTION_OPERATION_KIND, allowedSemanticTypeIds,
     });
   }
@@ -127,7 +158,7 @@ export function registerFantasyConstructionMechanism(input) {
   return sealCanonicalArtifact({
     artifactKind: 'REGISTERED_FANTASY_MECHANISM', artifactId: mechanismId,
     schemaVersion: 2, lawVersion: MECHANISM_LAW_VERSION, mechanismVersion,
-    gate: FANTASY_CANON_GATE, operationKind: FANTASY_CONSTRUCTION_OPERATION_KIND,
+    operationKind: FANTASY_CONSTRUCTION_OPERATION_KIND,
     spatialRecipeRef: exactRef(source.spatialRecipeRef, 'spatialRecipeRef'),
   });
 }
@@ -143,9 +174,9 @@ export function createFantasyConstructionOperation(input) {
     throw new TypeError('building constructionOperationId must equal operationId');
   }
   return sealCanonicalArtifact({
-    artifactKind: 'CANONICAL_SPATIAL_OPERATION', artifactId: operationId,
+    artifactKind: 'PROPOSED_SPATIAL_OPERATION', artifactId: operationId,
     schemaVersion: OPERATION_SCHEMA_VERSION, lawVersion: OPERATION_LAW_VERSION,
-    operationKind: FANTASY_CONSTRUCTION_OPERATION_KIND, gate: FANTASY_CANON_GATE,
+    operationKind: FANTASY_CONSTRUCTION_OPERATION_KIND,
     beforeDocumentRef: exactRef(source.beforeDocumentRef, 'beforeDocumentRef'),
     mechanismRef: exactRef(source.mechanismRef, 'mechanismRef'),
     payload: {
@@ -166,7 +197,7 @@ function replayOperation(value) {
     recipeSnapshot: payload.recipeSnapshot, origin: payload.origin,
   });
   if (source.schemaVersion !== OPERATION_SCHEMA_VERSION || source.lawVersion !== OPERATION_LAW_VERSION
-    || source.operationKind !== FANTASY_CONSTRUCTION_OPERATION_KIND || source.gate !== FANTASY_CANON_GATE) {
+    || source.operationKind !== FANTASY_CONSTRUCTION_OPERATION_KIND) {
     throw new TypeError('operation is not executable MF-T1X fantasy construction');
   }
   requireReplay(source, replayed, 'operation');
@@ -235,7 +266,6 @@ export function executeFantasyConstruction(input) {
     mechanisms.find((row) => `${row.artifactId}\0${row.contentHash}` === mechanismKey)
   );
   if (!mechanism || mechanism.schemaVersion !== 2 || mechanism.lawVersion !== MECHANISM_LAW_VERSION
-    || mechanism.gate !== FANTASY_CANON_GATE
     || mechanism.operationKind !== FANTASY_CONSTRUCTION_OPERATION_KIND) {
     throw new TypeError('fantasy mechanism ref is not executable');
   }
