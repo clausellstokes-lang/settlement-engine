@@ -15492,3 +15492,27 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
 - **§376.2 The closing train's score so far:** WF-1F · MF-T2E · WF-8A landed —
   three of four cars; the mint's rebuild is the last. Behind the window, in
   order: TE-T2F (first slot), TE-T2G, then the RR pair and the ratchet cure.
+
+## §377 — CT-0 COLLECTED WITH A CHAIR-CAUGHT PIN ERROR: THE LEDGER-IS-NOT-THE-BUILD-TREE LAW (2026-08-22 ~03:55)
+
+- **TC-DOSSIER-2 delivered all four CT-0 artifacts** (the mapping, three chapter
+  corpus drafts, the receipt stubbed-then-appended per §375.1) with strong internal
+  discipline — 113 variants scanned clean by execution, the register spec inheriting
+  the annex laws, the additive-new-block golden analysis (appending to a pool moves
+  every seeded draw over it; a NEW block moves nothing — so the drafts carry zero
+  same-seed prose movement). **BUT the chair review caught a load-bearing pin error:
+  every ENGINE-FACT figure was read at the LEDGER branch tip (7cc37b08), while the
+  content train lands on claude/composite-r4 — 100+ build-era commits ahead** (the
+  WF members incl. the Q4 corpus amendment, the fabric members, the epoch ladder).
+  The compile's own R-4 ('no wall year exists at this tip') may INVERT at the true
+  tree. A targeted re-verification is ordered: the Tier-A/B inventory, the golden
+  bill's figures, and the modulo analysis, re-read at the build tip, with a
+  PIN-CORRECTION section recording both readings where they differ. The corpus
+  drafts stand, claims to be re-judged.
+- **§377.1 LAW BANKED (the branch-topology hazard's newest face):** THE LEDGER
+  BRANCH IS NOT THE BUILD TREE — engine facts are read at claude/composite-r4
+  ONLY; the ledger branch's src is the July review-era tree plus ledger commits,
+  and any compile that pins it inherits a stale world. Kin to 'the main worktree
+  matches no branch'; joins the memory pass at the closing collection.
+- **§377.2** The dispatch queue holds: CT-1a waits on the corrected CT-0; the mint's
+  gate (GO delivered) remains the track's one event.

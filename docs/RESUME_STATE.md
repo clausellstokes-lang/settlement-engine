@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~03:55: CT-0 delivered BUT pin error chair-caught (§377) — engine facts
+# read at the LEDGER tip, not the build branch; re-verification ordered w/
+# PIN-CORRECTION section. LAW: THE LEDGER BRANCH IS NOT THE BUILD TREE
+# (engine facts at claude/composite-r4 only). Corpus drafts stand.
 # ⭐ ~03:40: THE MINT AT ITS DOOR — C1'=158d99cd (subjectSha, NEVER amend/
 # rebase across), C2'=42e12a76 (the CAS tip). Reconciliation MEASURED
 # ALL-SAME (the train's 10 files moved zero rows); bank 44/31→60/40 exactly
