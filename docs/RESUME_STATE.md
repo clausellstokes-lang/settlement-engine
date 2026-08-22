@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~19:40: CT-3 COLLECTED (§394) — tip eb0412e2 stacked on CT-2, built +
+# holding; AFTER battery/gate DEFERRED-DECLARED behind the mint's mutex
+# (packet §13). ⭐ F1: warFaith divergence ORIGINATES at CT-3 — trailing-mint
+# attribution datum. 7 judgments ratified; DS-FTH-3 five-vs-four patron-fall
+# diagnosis QUEUED. Five proven tips now hold behind the window.
 # ⭐ ~19:20: H8B COLLECTED (§393) — tip 3102d67e green uncontended, holds
 # for GO. NEW LAW: attribution sweeps run MUTEXED. Mint watcher SELF-FIRED
 # 14:01Z on the H8B trough; chair resumed the lane: green ratchet → chain ONE

@@ -16020,3 +16020,50 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   quiet (build/verify:dist have never run there) — and ordered CT-3/T2H to hold
   heavy batteries until it completes. H8B holds for GO; landing order unchanged:
   mint → RR-1 → RR-2 → T2Bf → CT-2 → H8B/CT-3/T2H in GO order.
+
+## §394 — CT-3 COLLECTED: BUILT AND HOLDING; SEVEN JUDGMENTS RATIFIED; THE WARFAITH ATTRIBUTION FINDING BANKED FOR THE TRAILING MINT (2026-08-22 ~19:40)
+
+- **The member:** tip eb0412e2 for CAS, stacked base 5941093f (CT-2's holding
+  commit) rev-parse-verified; 7 files, +993/−5; tree clean, no ref moved. Proof
+  so far: key-by-key 3 ADDED / 0 REMOVED / 0 CHANGED across all seven leaves
+  PLUS the sharper property measurement — zero pre-existing (blockId, poolKey)
+  pools changed length anywhere; gen 68 blocks / 2269 variants, contract 9/9;
+  em-dash/en-dash/bang counts unmoved on every leaf both ways; envelope by the
+  bare script both sides exit 1 (§389.1 compliant, no test-based claim); both
+  typecheck ceilings unmoved; validate:packets 145 green at every status;
+  CLAIM_RE 0 on all three docs. Its BEFORE goldens ran green (108 files / 747)
+  before the chair's battery hold; **the AFTER goldens, the lint+build sweep,
+  and the full gate are DEFERRED by declared state in packet §13** — armed on a
+  bounded mutex-poller per the hold, with the full gate as the terminal on GO
+  per the CT-2 pattern. This is compliance with §393's coordination, recorded
+  so the landing record cannot be misread as a skipped proof.
+- **⭐ FINDING F1, BANKED FOR THE §384.2 TRAILING MINT'S ATTRIBUTION TABLE:**
+  warFaith.generated.js sat BYTE-FOR-BYTE AT its frozen baseline at CT-3's base
+  (6f74d5df) — **CT-3 originates that leaf's envelope divergence IN WHOLE**,
+  unlike general.generated.js which was already off frozen (CT-1a-era). A
+  trailing mint attributing warFaith to any earlier car would be wrong; the
+  first CT car to touch two leaves is this one (DS-FTH- routes to warFaith).
+- **F2:** templeWealth is ARCHITECTED-NOT-BUILT (WF-7), verified against the
+  estate's own rows; ENDOWED kept and marked not-drawable until WF-7 lands —
+  a recorded deferral, not a gap.
+- **F3:** the lane introduced, found, and cured its own slotsOn() harvest
+  defect (slot corrections on the SLOTS line silently DECLARED the very
+  spellings the chapter refuses; nothing reds because the contract counts only
+  used-but-undeclared) — found by parse-back declared-vs-used comparison,
+  cured, and written into the annex.
+- **SEVEN JUDGMENTS RATIFIED**, the batch governed by the ratified principle
+  that the annex's standing laws outrank the chapter mapping — including where
+  they amend chair-approved draft text: J1 (reuse §0c's {institution}; mint no
+  slot §0c lacks a need for), J2 (articles + UNWORKED slot-drop; a guaranteed
+  fill failure is not prose), J3 (BARE's tier clause removed — a tier-gated
+  else-arm is not total; the chair's own formalization note applied), J4
+  (CONTESTED outranks ROOTED on truth-preservation, one recorded inversion),
+  J5 (ENDOWED kept+marked), J6 (patronFalls[] removed from the receipt —
+  WF-8A disjointness made STRUCTURAL and then measured), J7 (pool order =
+  precedence order for auditability).
+- **RAISED-NOT-TAKEN, QUEUED as a housekeeping diagnosis:** DS-FTH-3's prose
+  enumerates FIVE patron-fall causes while PATRON_FALL_CAUSES is frozen at
+  FOUR — determine which side errs (rides the WF-8 shrink-back obligation or
+  its own micro-item; deliberately deferred, documented).
+- CT-3 HOLDS for GO; landing order unchanged: mint → RR-1 → RR-2 → T2Bf →
+  CT-2 → H8B/CT-3/T2H in GO order (CT-3 lands after CT-2 by stacking).
