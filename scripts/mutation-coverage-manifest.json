@@ -1342,6 +1342,10 @@
    "kind": "mutation",
    "label": "secrets/committed AWS key shape"
   },
+  "tests/security/consentPersonAdjacentDefault.pglite.test.js": {
+   "kind": "rationale",
+   "ref": "pglite-executed"
+  },
   "tests/security/creditAllocationTrigger.pglite.test.js": {
    "kind": "rationale",
    "ref": "pglite-executed"

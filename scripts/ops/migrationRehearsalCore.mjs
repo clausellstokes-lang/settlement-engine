@@ -16,7 +16,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
 export const MIGRATION_TRAIN_BASE_HEAD = 121;
-export const MIGRATION_TRAIN_REPO_HEAD = 196;
+export const MIGRATION_TRAIN_REPO_HEAD = 197;
 
 const FORWARD_ONLY_REASON = [
   'No automatic schema rollback is admitted for this wave.',
@@ -380,6 +380,40 @@ export const MIGRATION_WAVES = Object.freeze([
       Object.freeze({ kind: 'table', name: 'public.world_sim_metrics' }),
       Object.freeze({ kind: 'function', name: 'load_sim_metrics' }),
       Object.freeze({ kind: 'function', name: 'rollup_sim_metrics' }),
+    ]),
+  }),
+  Object.freeze({
+    id: 'consent-person-adjacent-default',
+    from: 197,
+    to: 197,
+    purpose: 'Consent model v3 (§359.6): anything person-adjacent defaults OFF, so the '
+      + '`research` plane returns to opt-IN on the server. This is the FIRST wave in the '
+      + 'train to UPDATE existing telemetry_consent rows — 124 moved the column default '
+      + 'and deliberately rewrote nothing — so the wave that matters here is a DATA wave, '
+      + 'not a shape wave: it creates no object and defines no function. It reads '
+      + 'public.consent_change_records (194) in its predicate and, through 194\'s existing '
+      + 'trigger, causes a system-sourced row to be written there for each profile it '
+      + 'flips. The anonymous simulation half of the ruling needs no migration at all: '
+      + 'world_sim_metrics is PII-free by schema, so nothing about it is consent-gated.',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: [
+        FORWARD_ONLY_REASON,
+        'The column-default half IS trivially reversible (restore 124\'s default), and the '
+        + 'migration\'s own @rollback annotation spells that statement out — which is why '
+        + 'this migration classifies as documented-manual-reversal rather than taking the '
+        + 'wave policy.',
+        'The DATA half is deliberately not scripted. Re-flipping the updated rows back to '
+        + 'research:true would re-opt-in a population on a default they never chose, which '
+        + 'is the v2 lesson run backwards and a worse harm than the drift it would undo. '
+        + 'The affected rows are individually identifiable — a consent_change_records row, '
+        + 'research true→false, source \'system\', inside this migration\'s window — so a '
+        + 'targeted reversal remains possible on owner direction. It is unscripted because '
+        + 'doing it unreviewed is the harm, not because it is impossible.',
+      ].join(' '),
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({ kind: 'table', name: 'public.profiles' }),
     ]),
   }),
 ]);

@@ -5271,7 +5271,37 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   in the block directly above, so this member's own after-figure re-derives 20,725 → 20,729.
     //   Carrying the authored tuple would have silently reverted H8B's landed +4 — which is the
     //   whole reason the delta, and never the tuple, is the thing that crosses a rebase.
-    files: 2499, parked: 364, credited: 2135, titles: 20729, suiteTitles: 5787,
+    // ── RE-RECORDED 2026-08-22 BY TE-WEB1 (WEB-1, the consent-default split), CAUSE ATTRIBUTED ──
+    // 2,499/364/2,135/20,729/5,787 → 2,500/365/2,135/20,730/5,787. Two independent causes, and
+    // NEITHER is a rule change — no classifier here widened or narrowed:
+    //   +1 file / +1 PARKED: tests/security/consentPersonAdjacentDefault.pglite.test.js, the
+    //     migration-197 provenance suite. CREDITED IS UNCHANGED at 2,135 because the file PARKS.
+    //   +1 title: tests/lib/consent.test.js gained one arm ('does NOT bump CONSENT_KEY across
+    //     the model revision'). That file is credited, so its one new title is the whole delta.
+    //     The v3 re-point renamed several sibling titles; a rename is title-count-neutral, which
+    //     is why the evidence layer moves by exactly one and not by the size of the edit.
+    // ⚠⚠ THE PARK IS THE IDIOM, NOT A DEFECT, AND IT WAS MEASURED RATHER THAN ASSUMED. The new
+    //   file's park reasons are `SUITE_NOT_RUNNING:describe.runIf()` plus one
+    //   `TEST_UNREGISTERED:it` per arm — BYTE-IDENTICAL to the reason its peer
+    //   tests/security/operatorMessages.pglite.test.js parks, and to every runIf-gated pglite
+    //   suite in the estate. A pglite suite must gate on the migration file existing, and that
+    //   gate is exactly what this reader cannot resolve statically.
+    // ⛔ SO THIS FILE'S TWELVE PINS ARE REAL COVERAGE THIS CENSUS CANNOT SEE. `liveTitlesIn`
+    //   returns 0 and `liveSuiteTitlesIn` returns 0 for it, measured directly. Do NOT read
+    //   `titles: 20,730` as "WEB-1 added one test" — WEB-1 added thirteen, twelve of which are
+    //   invisible here BY CONSTRUCTION. The visible +1 is the jsdom arm alone. This note exists
+    //   because a future lane attributing a title delta by arithmetic would mis-attribute this
+    //   one, and because a parked file's pins are the coverage a census is least able to defend.
+    // `censusAuthorization`: ODQ §359.6 (the ruling), §402 (C1/J2), §406 (the amended predicate).
+    // ⭐⭐ THE CARRY LAW, EXECUTED AT THE LANDING SLOT. This member was authored at base eb6124a6
+    //   (tuple 2,497/364/2,133/20,719/5,785, after-figure 2,498/365/2,133/20,720/5,785) and rebased
+    //   onto 84e06412 (MF-T2H, the 26th landing). The DELTA `+1/+1/+0/+1/+0` is what crossed; the
+    //   tuple was RE-DERIVED at this base by execution, never carried. ⛔ THE BASE HAD MOVED UNDER
+    //   IT: H8B (+4 titles) and MF-T2H (+2 files/+2 credited/+6 titles/+2 suite titles) re-recorded
+    //   the two blocks directly above, so the after-figure re-derives 20,720 → 20,730. Carrying the
+    //   authored tuple would have silently reverted BOTH landed re-records while every WEB-1 proof
+    //   stayed green — the arm is one equality and cannot say whose delta vanished.
+    files: 2500, parked: 365, credited: 2135, titles: 20730, suiteTitles: 5787,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

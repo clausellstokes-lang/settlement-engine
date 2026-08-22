@@ -74,10 +74,13 @@ describe('PrivacySettings — the silent research disclosure', () => {
     expect(screen.getByText(/turn it off here at any time/i)).toBeTruthy();
   });
 
-  test('research toggle defaults ON (opt-out) absent DNT and any stored choice', () => {
+  // RE-POINTED for consent model v3 (§359.6): research is person-adjacent, so it
+  // defaults OFF (opt-IN). v2 asserted 'true' here. The component is byte-unchanged —
+  // it renders whatever getConsent() returns, and what changed is the default.
+  test('research toggle defaults OFF (opt-in) absent DNT and any stored choice', () => {
     render(<PrivacySettings />);
     const research = screen.getByRole('switch', { name: /You're helping improve the generator/i });
-    expect(research.getAttribute('aria-checked')).toBe('true');
+    expect(research.getAttribute('aria-checked')).toBe('false');
   });
 
   test('does not render a floating first-run research notice', () => {
@@ -96,11 +99,12 @@ describe('PrivacySettings — the silent research disclosure', () => {
     fireEvent.click(screen.getByRole('switch', { name: /You're helping improve the generator/i }));
 
     // Local first: the choice is in force whatever the network does.
-    expect(getConsent().research).toBe(false);
+    // RE-POINTED (v3): the toggle now starts OFF, so the first click is a GRANT.
+    expect(getConsent().research).toBe(true);
     // Then mirrored, as the WHOLE record (not a one-key patch) so the row is complete.
     await waitFor(() => expect(pushTelemetryConsent).toHaveBeenCalledTimes(1));
     const sent = pushTelemetryConsent.mock.calls[0][0];
-    expect(sent.research).toBe(false);
+    expect(sent.research).toBe(true);
     expect(sent.essential).toBe(true);
     expect(sent.market).toBe(false);
     expect(track).not.toHaveBeenCalled();
@@ -114,9 +118,10 @@ describe('PrivacySettings — the silent research disclosure', () => {
     const notice = await screen.findByRole('status');
     expect(notice.textContent).toMatch(/could not reach your account/i);
     // The toggle stays where the user put it, and so does the stored record.
+    // RE-POINTED (v3): the first click is now a GRANT, so "where the user put it" is ON.
     expect(screen.getByRole('switch', { name: /You're helping improve the generator/i })
-      .getAttribute('aria-checked')).toBe('false');
-    expect(getConsent().research).toBe(false);
+      .getAttribute('aria-checked')).toBe('true');
+    expect(getConsent().research).toBe(true);
   });
 
   test('no failure notice is rendered while the mirror is succeeding', async () => {
@@ -134,14 +139,17 @@ describe('PrivacySettings — the silent research disclosure', () => {
     render(<PrivacySettings />);
     const research = screen.getByRole('switch', { name: /You're helping improve the generator/i });
 
-    fireEvent.click(research); // on -> off
-    fireEvent.click(research); // off -> on
+    // RE-POINTED (v3): the toggle starts OFF, so the click order inverts. The
+    // property under test is unchanged and in fact reads more directly now — the
+    // older GRANT must not land after the newer OPT-OUT.
+    fireEvent.click(research); // off -> on  (the older grant)
+    fireEvent.click(research); // on  -> off (the newer opt-out)
     await waitFor(() => expect(pushTelemetryConsent).toHaveBeenCalledTimes(1));
-    expect(pushTelemetryConsent.mock.calls[0][0].research).toBe(false);
+    expect(pushTelemetryConsent.mock.calls[0][0].research).toBe(true);
 
     releaseFirst({ ok: true });
     await waitFor(() => expect(pushTelemetryConsent).toHaveBeenCalledTimes(2));
-    expect(pushTelemetryConsent.mock.calls[1][0].research).toBe(true);
+    expect(pushTelemetryConsent.mock.calls[1][0].research).toBe(false);
   });
 
   test('a same-owner re-login warns when an authorized mirror was dropped', async () => {

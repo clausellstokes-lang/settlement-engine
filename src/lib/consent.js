@@ -3,26 +3,56 @@
  *
  * Tiers (doc §3):
  *   essential — product telemetry. Default ON unless DNT or explicit opt-out.
- *   research  — full structural fingerprints + research-class events. Default now
- *               ON unless DNT (owner-ratified OPT-OUT, consent model v2). Anonymous
- *               structure only — never names/prose/secrets.
+ *   research  — full structural fingerprints + research-class events. Default OFF
+ *               (consent model v3, the person-adjacent split). Anonymous structure
+ *               only — never names/prose/secrets.
  *   ai_prose  — reserved; gates nothing in v1. Named so the UI doesn't churn later.
  *
- * ── Consent model v2 (the research opt-out flip) ─────────────────────────────
- * `research` default flipped false → !dntEnabled(). CONSENT_KEY is DELIBERATELY
- * NOT bumped: bumping the storage key would discard every stored record and
- * silently re-opt-in users who had explicitly opted out — the opposite of what a
- * flip must preserve. Instead the meaning changed under the SAME key, and prior
- * explicit choices are honored via the `updatedAt` provenance:
- *   - a stored record with updatedAt > 0  ⇒ the user opened the consent UI and
- *     set their preferences ⇒ honor the stored flags VERBATIM (their false stays
- *     false; their true stays true).
+ * ── Consent model v3 (the person-adjacent split) ─────────────────────────────
+ * THE RULING (§359.6): anonymous simulation aggregates are ON by CONSTRUCTION;
+ * anything person-adjacent is OFF by DEFAULT. Those are two different mechanisms,
+ * and only the second one lives here.
+ *
+ * The anonymous half needs no flag at all: `world_sim_metrics` is PII-free BY
+ * SCHEMA (no actor column, no session column — the columns are simply not there)
+ * and is emitted by the operator-side soak pipeline, not by clients. Nothing about
+ * it is consent-gated because no person is in the data. That is what
+ * "on-by-construction" means, and it is enforced structurally by
+ * tests/lint/engineTelemetryWall.walker.test.js, not by anything in this file.
+ *
+ * The person-adjacent half is this file's job. `research` captures structural
+ * fingerprints keyed to a person's device and edits, so under the ruling it joins
+ * `ai_prose` and `market` in defaulting OFF. v2 had flipped it ON (an opt-OUT);
+ * v3 flips it back to opt-IN. `essential` is unchanged and stays ON unless DNT —
+ * it is the product's own operation, not a person-adjacent capture (chair C1).
+ *
+ * ── The flip discipline, reused in reverse ───────────────────────────────────
+ * CONSENT_KEY is DELIBERATELY NOT bumped. Bumping the storage key would discard
+ * every stored record and silently re-decide for users who had explicitly chosen —
+ * the opposite of what a flip must preserve. This was v2's lesson and it binds v3
+ * identically, in the other direction. The meaning changes under the SAME key, and
+ * prior explicit choices are honored via the `updatedAt` provenance:
+ *   - a stored record with updatedAt > 0  ⇒ the user opened the consent UI and set
+ *     their preferences ⇒ honor the stored flags VERBATIM. A v2-era explicit
+ *     opt-IN to research KEEPS its true; an explicit opt-OUT keeps its false.
  *   - absence, or updatedAt === 0         ⇒ no user choice recorded ⇒ apply the
- *     new defaults (research ON unless DNT).
- * The updatedAt distinction is only real if NOTHING writes a record without user
- * action. Verified: the sole `setConsent` caller is PrivacySettings (a user
- * toggle); no boot/auto path writes consent. `CONSENT_MODEL_VERSION` is stamped
- * on every research capture so a payload's consent basis is auditable.
+ *     new defaults (research OFF).
+ *
+ * ⚠ The updatedAt distinction is only real if nothing writes a record without user
+ * action. `setConsent` has exactly TWO callers, and neither writes a default:
+ *   1. PrivacySettings.update() — a user toggle. The user-action path.
+ *   2. consentSync.applyServerOptOut() — the sign-in PULL. It only ever NARROWS
+ *      (a server false over a local true) and is itself gated on the server row's
+ *      `v` stamp, which only a mirror write puts there. It cannot manufacture a
+ *      default: it needs a recorded server choice to act on at all.
+ * (An earlier revision of this header claimed PrivacySettings was the SOLE caller.
+ * That was true when written and is not true now — consentSync arrived after it.
+ * The invariant that actually matters was never "one caller"; it is "no caller
+ * writes a record the user did not cause", which both callers satisfy.)
+ *
+ * `CONSENT_MODEL_VERSION` is stamped on every research capture so a payload's
+ * consent basis is auditable, and it is the same stamp consentSync mirrors into
+ * `profiles.telemetry_consent.v` — the server-side twin of `updatedAt`.
  *
  * Dependency-free by design (analytics.js imports this; this must not import
  * analytics, or we'd create a cycle). Consent changes are SERVICE compliance
@@ -33,8 +63,9 @@
  */
 
 export const CONSENT_KEY = 'sf_consent_v1';
-/** Consent-model revision. v2 = the research opt-out flip. Stamped on research captures. */
-export const CONSENT_MODEL_VERSION = 2;
+/** Consent-model revision. v3 = the person-adjacent split (research back to opt-IN).
+ *  Stamped on research captures and mirrored to profiles.telemetry_consent.v. */
+export const CONSENT_MODEL_VERSION = 3;
 
 // ── Market-insights consent plane (design §5, plane 3) ───────────────────────
 // The THIRD consent plane: whether a user's coarse usage may be included in the
@@ -61,11 +92,15 @@ export function dntEnabled() {
 }
 
 function defaults() {
-  // Consent model v2: essential AND research default ON unless DNT (research is now
-  // an OPT-OUT). ai_prose stays opt-in (reserved). market (§5 plane 3) is opt-IN,
-  // defaulting to MARKET_INSIGHTS_DEFAULT. updatedAt 0 = "no user choice yet".
+  // Consent model v3 (the person-adjacent split): `essential` is the product's own
+  // operation and defaults ON unless DNT. Everything person-adjacent defaults OFF —
+  // research (structural fingerprints keyed to a device), ai_prose (reserved), and
+  // market (§5 plane 3, via MARKET_INSIGHTS_DEFAULT). The anonymous simulation
+  // aggregates the ruling puts ON-by-construction are not represented here at all:
+  // they are PII-free by schema and never pass through this gate.
+  // updatedAt 0 = "no user choice yet".
   const on = !dntEnabled();
-  return { essential: on, research: on, ai_prose: false, market: MARKET_INSIGHTS_DEFAULT, updatedAt: 0 };
+  return { essential: on, research: false, ai_prose: false, market: MARKET_INSIGHTS_DEFAULT, updatedAt: 0 };
 }
 
 function readRaw() {
