@@ -14312,3 +14312,42 @@ recommended. Implementation, per item:
   slice) rather than the chair's convenience boundary at the soak's collection. The
   /code-review ultra recommendation STANDS as an owner keystroke at any quiet
   boundary they choose — the branch is review-ready at every CAS.
+
+## §338 — THE UI COHORT'S LAST OPEN RULING (C, eventLog) RULED; MEMORY CORRECTED; TWO ITEMS DOCKETED (2026-08-21 ~22:30)
+
+- **UICR's brief collected** (laneUICR-brief.md; read-only; every quotation recovered
+  from surviving subagent transcripts after the triage artifacts were purged — the
+  THIRD scratchpad-loss incident, and the recovery route is now law, see §338.4).
+  Measured at f5332cf7: Rulings A (stresses alias) and B (worldPulse) and H26 are
+  CLOSED AND LANDED with live machinery; only C was open — unmoved through three
+  schema mints with zero of its 33 rows tagged.
+- **§338.1 RULING C RULED (chair-scope; vetoable):** the mechanism verdict is
+  RATIFIED — the rows sit on a wrong home by leaf-name cross-home substitution, the
+  'fixture-bounded bucket' option never existed in the repo (which is why C outlived
+  A and B), and ZERO of the 33 rows is a defect: four identities are provably written
+  by applyEvent.js:52-66 through the store/command layer the corpus never executes
+  (the exact argument already accepted for Ruling B), and the other 24 are ONE
+  polymorphic-parameter mis-binding in chronicleFeed.js's normalizeEntry (six
+  defensive OR-chains accounting for all 24 exactly). DISPOSITION SPLIT: bank only
+  the writer-backed ~4 under M9 on the Ruling-B precedent; M9 is REFUSED for the ~22
+  without a real writer (naming a writer that does not write them is the
+  fit-motivated reduction CR-OSR-FREEZE-7 prohibits); for those, a READ-ONLY
+  estate-wide measurement of SHAPE_FAMILY_FILTER minKeys 8→7 is CHARTERED (M6 misses
+  the rescue by exactly one key) and runs at the next free lane slot; NO mint is
+  spent on this alone — it rides the next governed mint under the gate-RED /
+  prove-detached law. Stated explicitly per the brief's tripwire: **minKeys is an
+  INSTRUMENT THRESHOLD, not a tuning signature** — it changes what a measurement
+  scans, not what any world computes; chair-scope.
+- **§338.2 OWNER DOCKET (+2, adjacent but outside this ruling):** ancientRuinsEnabled
+  (curing it ENABLES a capability — genuinely-new-capability class) and the
+  aiOverlayVerifier fence re-point (alters an anti-hallucination guard on a PAID AI
+  surface) — both escalated as owner-owed, joining the standing docket.
+- **§338.3 BRANCH-DIVERGENCE FACT recorded:** merge-base 4a9b6cf4, neither branch an
+  ancestor of the other; the OSR instrument is stale on the LEDGER branch by three
+  mints (schema 4 vs 8) — OSR rulings are read at the BUILD tip only.
+- **§338.4 MEMORY CORRECTED (five items):** the ui-cohort row rewritten (A/B/H26
+  closed-landed; C ruled here); the endgame row's 'queues on the BUILD branch' claim
+  corrected — FABLE_VALIDATION_QUEUE.md and SOL_QUEUE.md exist on BOTH branches; NEW
+  LAW banked: subagent JSONL transcripts under ~/.claude/projects/**/subagents/
+  survive scratchpad purges and are the recovery route of record (proven for the V5
+  bank and now the UI charter).
