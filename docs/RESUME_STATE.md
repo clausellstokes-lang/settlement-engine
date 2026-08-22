@@ -74,6 +74,12 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~14:45: RATCHET CURE terminal-ready at 9bfae712 (content-level carry
+# proof: identical blobs; census green upgraded to PLANT-CONVICTION —
+# +1 title reds the walker, restored byte-exact; sibling coexistence
+# recorded). GO SENT — 'QUEUED' result = race expected: NEXT EVENT verifies
+# the started-line and re-sends if absent. On green: CAS (read the SHA) →
+# §357 arc closes → OSR-10 charter.
 # ⭐⭐ ~14:10: BUNDLE LANDED — CAS 71159a21 → dfa892cfb872 (§385; 17th
 # landing; nine repairs + the discharge law; H8 split+re-seeded, queued
 # after RR-2). ⛔ The lane REFUSED the chair's GO-SHA (the red stack) and
