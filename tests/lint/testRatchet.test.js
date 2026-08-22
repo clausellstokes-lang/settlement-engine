@@ -40,6 +40,8 @@ import { describe, expect, test } from 'vitest';
 import {
   DEBT_CLASSES, discoverBuildTestFiles, identityOf, normalizePath, rowsOf,
   runnerCommandOf, SOURCE_TEST_EXCLUDE, uncollectedOf, SCOPE_FLOOR_RATIO,
+  classifyFailure, failureEvidenceOf, globalTestTimeoutOf, timeoutLiteralsOf,
+  FAILURE_CLASSES, VITEST_DEFAULT_TEST_TIMEOUT,
 } from '../../scripts/check-test-ratchet.mjs';
 // DERIVED, never restated: the discharge below asserts that the rehearsal train still
 // reaches the migration whose cure retired the owner-gated rows. A literal here would go
@@ -1042,7 +1044,10 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
   // Named, never edited — this file is the only one this lane owns here.
   const REAL = 'tests/lint/testRatchet.test.js';
   const REAL2 = 'scripts/check-test-ratchet.mjs';
-  const T = (name, status = 'failed') => ({ name, status });
+  // `extra` carries the per-row fields a real vitest report writes beside the
+  // verdict — `duration` and `failureMessages`. Omitting it reproduces the exact
+  // row shape every arm below this one was written against.
+  const T = (name, status = 'failed', extra = null) => ({ name, status, extra });
 
   /** Build a jest/vitest-shaped report. Absolute suite paths also pin normalization.
    *  `suiteStatus` carries the SUITE-level verdict vitest emits beside the rows —
@@ -1054,6 +1059,7 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
         ...(s.suiteStatus ? { status: s.suiteStatus } : {}),
         assertionResults: (s.tests || []).map((t) => ({
           fullName: t.name, title: t.name, ancestorTitles: [], status: t.status,
+          ...(t.extra || {}),
         })),
       })),
     };
@@ -1332,9 +1338,22 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
     test('a baselined failing test passes (debt is banked, not forgiven-then-refused)', () => {
       const r = run({
         entries: { [identityOf(REAL, 'a')]: {} },
-        suites: [{ file: REAL, tests: [T('a')] }],
+        suites: [{
+          file: REAL,
+          // The banked row carries a REAL failure message, so the evidence block
+          // has everything it would need to print — and must still stay silent.
+          tests: [T('a', 'failed', { duration: 12.5, failureMessages: ['AssertionError: banked'] })],
+        }],
       });
       expect(r.status, r.out).toBe(0);
+      // ── THE EVIDENCE BLOCK IS BOUND TO THE RED, and this is the control that
+      // says so. A green gate that also copied an 11.5MB report and stamped the
+      // machine would be paying the cure's whole cost on every passing run.
+      // LIVENESS ANCHOR first: exit 0 alone is satisfied by a gate that printed
+      // nothing at all, so pin the success verdict before denying anything.
+      expect(r.out).toMatch(/OK — no test regressions/);
+      // anchored: the success verdict pinned on the line above proves this output is the live, fully-printed OK report, so the denial states that the evidence block WITHHELD itself on a green — it cannot pass by the output having drifted away
+      expect(r.out).not.toMatch(/full runner report:|machine at this run:|ASSERTION ·/);
     });
 
     test('⛔ A FAILING TEST ABSENT FROM THE CENSUS IS A REGRESSION, even in a baselined FILE', () => {
@@ -1348,6 +1367,100 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
       expect(r.status, r.out).not.toBe(0);
       expect(r.out).toMatch(/testRatchet\.test\.js :: b/);
       expect(r.out).not.toMatch(/:: a\b/);
+
+      // ── ⚠⚠ THE EVIDENCE BLOCK, DRIVEN (the §358.3 cure) ────────────────────
+      // Naming the row was all this red ever did, and HUNT-1 measured what that
+      // cost: across four full-suite runs a per-test TIMEOUT and a genuine value
+      // mismatch were INDISTINGUISHABLE here, while the report that settled each
+      // one in a line sat orphaned under a random mkdtemp name nobody printed.
+      // So the three rows below are the three MEASURED shapes, verbatim from the
+      // recovered reports, and each must come back CLASSIFIED:
+      //   • a timeout kill  — 20,528ms, `Error: STACK_TRACE_ERROR`
+      //     (tests/lint/lawBandTable.walker.test.js, run C)
+      //   • a query budget  —  5,470ms, `Unable to find role=…`
+      //     (tests/components/npcAuthoringScope.test.jsx, runs C and D)
+      //   • an assertion    —  0.462ms, `AssertionError: expected 19 …`
+      //     (tests/copy/voiceMechanics.test.js, all four runs)
+      // ⛔ These are OUTPUT pins only. The verdict, the census comparison and the
+      // exit code are untouched by any of it — proven by the arms above and below,
+      // which were written before this block existed and still pass unchanged.
+      const TIMEOUT_KILL = 'Error: STACK_TRACE_ERROR\n    at task (file:///…/@vitest/runner)';
+      const QUERY_EXPIRY = 'Error: Unable to find role="button" and name `/Mara/i`'
+        + '\n\nIgnored nodes: comments, script, style';
+      const VALUE_MISMATCH = 'AssertionError: expected 19 to be less than or equal to 6'
+        + '\n    at tests/copy/voiceMechanics.test.js:139:7';
+      const classified = run({
+        entries: { [identityOf(REAL, 'banked')]: {} },
+        suites: [{
+          file: REAL,
+          tests: [
+            T('banked'),
+            T('killed at its budget', 'failed', {
+              duration: 20528.109540999998, failureMessages: [TIMEOUT_KILL],
+            }),
+            T('query budget expired', 'failed', {
+              duration: 5470.076292000001, failureMessages: [QUERY_EXPIRY],
+            }),
+            T('a real verdict', 'failed', {
+              duration: 0.46191700000008495, failureMessages: [VALUE_MISMATCH],
+            }),
+          ],
+        }],
+      });
+      expect(classified.status, classified.out).not.toBe(0);
+
+      // (a) THE DURATION AND THE BUDGET, on the row's own line. The budget figure
+      // is matched as a number rather than pinned: it is read from the live vitest
+      // config, and freezing it here would put a second address on a tunable the
+      // estate already governs elsewhere.
+      expect(classified.out, 'the timeout kill must print its duration against a budget')
+        .toMatch(/TIMEOUT · ran 20528ms against a \d+ms budget/);
+      expect(classified.out, 'a sub-millisecond row must not read as an unmeasured one')
+        .toMatch(/ASSERTION · ran <1ms against a \d+ms budget/);
+      expect(classified.out).toMatch(/QUERY-BUDGET · ran 5470ms against a \d+ms budget/);
+
+      // (b) THE CLASSIFICATION SAYS WHY, and the three reasons are three different
+      // mechanisms — the marker, the library budget, the verdict. A block that
+      // printed one reason for everything would be a label, not a discriminator.
+      expect(classified.out).toContain('vitest serialises a timeout kill as `Error: STACK_TRACE_ERROR`');
+      expect(classified.out).toContain('a library query budget expired (Testing Library)');
+      expect(classified.out).toContain('a real verdict — read the message');
+      expect(classified.out, 'a cost failure must never be read as bankable debt')
+        .toMatch(/A BUDGET EXPIRY IS A COST FAILURE, NEVER DEBT/);
+
+      // (c) THE FIRST LINE OF THE MESSAGE — the half HUNT-1 had to recover from
+      // TMPDIR by mtime. One line each, never the whole 8,915-character stack.
+      expect(classified.out).toContain('msg: Error: STACK_TRACE_ERROR');
+      expect(classified.out).toContain('msg: Error: Unable to find role="button" and name `/Mara/i`');
+      expect(classified.out).toContain('msg: AssertionError: expected 19 to be less than or equal to 6');
+      expect(
+        classified.out.split('\n').filter((l) => l.includes('Ignored nodes')),
+        'the block prints the FIRST line only — a full stack would bury the next row',
+      ).toEqual([]);
+
+      // (d) THE MACHINE, because a budget expiry under heavy oversubscription is
+      // the recorded MACHINE-LOAD ARTIFACT shape and the load is not recoverable
+      // from anything else after the fact.
+      expect(classified.out).toMatch(/machine at this run: load [\d.]+\/[\d.]+\/[\d.]+ over \d+ core\(s\)/);
+
+      // (e) ⭐ THE REPORT IS NAMED AND IT IS REALLY THERE. A printed path that did
+      // not resolve would be worse than no path at all, so both are OPENED here,
+      // and the stable copy is proven BYTE-IDENTICAL to the report it copies —
+      // not merely present.
+      const named = /full runner report: (\S+)/.exec(classified.out);
+      expect(named, 'the red must name the report it was decided from').toBeTruthy();
+      expect(existsSync(named[1]), `${named[1]}: named but not on disk`).toBe(true);
+      const stable = /stable copy of it:\s+(\S+)/.exec(classified.out);
+      expect(stable, 'the last red must be one open away, not an mtime hunt').toBeTruthy();
+      expect(
+        readFileSync(stable[1], 'utf8'),
+        'the stable copy is a COPY — a truncated or stale one proves nothing',
+      ).toBe(readFileSync(named[1], 'utf8'));
+      // ⛔ BOTH PATHS LIVE OUTSIDE THE REPO. The header's law: a report written
+      // into the tree is the recorded bare-`--json` hazard wearing a new coat.
+      for (const p of [named[1], stable[1]]) {
+        expect(relative(ROOT, p).startsWith('..'), `${p} is inside the repo`).toBe(true);
+      }
     });
 
     test('a new failure gets NO credit from slack elsewhere in the census', () => {
@@ -1407,6 +1520,16 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
       });
       expect(r.status, r.out).not.toBe(0);
       expect(r.out).toMatch(/SKIPPED|HOLE/i);
+      // THE REPORT IS NAMED ON THIS RED TOO, and that is deliberate: this arm has
+      // ZERO non-census failing rows, so a path printed only beside a classified
+      // row would leave the hidden-debt red exactly as unreadable as before.
+      expect(r.out).toMatch(/full runner report: \S+/);
+      expect(r.out).toMatch(/machine at this run: load/);
+      // …and nothing is CLASSIFIED here, because a skip has no duration and no
+      // message to classify. The two assertions above prove the block printed, so
+      // this denial reads as "the per-row half correctly stayed empty".
+      // anchored: the `full runner report:` and `machine at this run:` matches two lines up prove the evidence block is present and fully printed, so this denies a per-row classification specifically — not an absent report
+      expect(r.out).not.toMatch(new RegExp(`(?:${FAILURE_CLASSES.join('|')}) · ran`));
     });
 
     test('growth in the suite-wide skip count reds the gate', () => {
@@ -1967,6 +2090,147 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
         file: 'tests/x.test.js', fullName: 'outer > inner > case',
         id: 'tests/x.test.js :: outer > inner > case', status: 'failed',
       }]);
+      // ⚠ THE ASSERTION ABOVE IS LOAD-BEARING FOR THE TWO FIELDS ADDED BELOW, and
+      // it is `toEqual` on purpose: a report that carries neither `duration` nor
+      // `failureMessages` must still produce the row this file has always pinned.
+      // The keys ARE on the row — they simply hold `undefined`, which `toEqual`
+      // ignores — so the row shape grew without any consumer's expectation moving.
+      expect(Object.keys(rows[0]).sort()).toEqual(
+        ['duration', 'failureMessages', 'file', 'fullName', 'id', 'status'],
+      );
+
+      // ── THE EVIDENCE FIELDS ARE CARRIED, NOT SYNTHESISED ────────────────────
+      // The gate's whole cure rests on these two reaching the printer intact, so
+      // pin the passthrough against a REAL recovered row rather than a sketch.
+      const carried = rowsOf({
+        testResults: [{
+          name: 'tests/lint/lawBandTable.walker.test.js',
+          assertionResults: [{
+            fullName: 'reds on a SECOND exporting module',
+            status: 'failed',
+            duration: 20528.109540999998,
+            failureMessages: ['Error: STACK_TRACE_ERROR\n    at task (…)'],
+          }],
+        }],
+      }, ROOT);
+      expect(carried[0].duration).toBe(20528.109540999998);
+      expect(carried[0].failureMessages).toEqual(['Error: STACK_TRACE_ERROR\n    at task (…)']);
+
+      // ── ⚠⚠ THE CLASSIFIER, ARM BY ARM ──────────────────────────────────────
+      // ORDER IS THE DESIGN, so each arm is driven where it is the ONLY one that
+      // could fire, and the closed class set is pinned so a sixth label cannot
+      // appear without this file admitting it.
+      const budget = 20000;
+      expect(FAILURE_CLASSES).toEqual(['TIMEOUT', 'QUERY-BUDGET', 'ASSERTION', 'UNCLASSIFIED']);
+
+      // ARM 2 — the marker, on a duration WELL INSIDE the budget, so nothing but
+      // the marker can be doing the work. This is the arm that catches a timeout
+      // whose row is charged a budget wider than the suite-wide one.
+      expect(classifyFailure({
+        duration: 12, message: 'Error: STACK_TRACE_ERROR\n    at task (…)', budget,
+      }).class).toBe('TIMEOUT');
+
+      // ⛔ AND FIRST-LINE ONLY. A stack that merely MENTIONS the marker below a
+      // real verdict must stay an ASSERTION — otherwise every failure whose stack
+      // runs through the runner's own frames gets relabelled a timeout, which is
+      // the exact misclassification this cure exists to end, pointing the other way.
+      expect(classifyFailure({
+        duration: 12,
+        message: 'AssertionError: expected 19 to be 6\n    at x\nError: STACK_TRACE_ERROR',
+        budget,
+      }).class).toBe('ASSERTION');
+
+      // ARM 3 — duration alone, with NO message at all. The arm that still works
+      // when the runner writes nothing but a number.
+      expect(classifyFailure({ duration: 20528, message: '', budget }).class).toBe('TIMEOUT');
+      expect(classifyFailure({ duration: 19999, message: '', budget }).class).toBe('UNCLASSIFIED');
+
+      // ARM 1 — the prose. ⚠ MEASURED ABSENT from vitest 4's JSON (the reporter
+      // serialises the rewritten STACK, not the message), so this arm is dead
+      // weight against today's runner and is kept for the day a reporter starts
+      // emitting `error.message` — at which point it must not silently reclassify.
+      expect(classifyFailure({
+        duration: 12, message: 'Error: Test timed out in 20000ms.', budget,
+      }).class).toBe('TIMEOUT');
+
+      // ARM 4 — a LIBRARY budget, which is a cost failure of a different clock and
+      // is therefore named separately rather than folded into TIMEOUT.
+      expect(classifyFailure({
+        duration: 5470, message: 'Error: Unable to find role="button" and name `/Mara/i`', budget,
+      }).class).toBe('QUERY-BUDGET');
+
+      // ARM 5 — the only class that is DEBT.
+      expect(classifyFailure({
+        duration: 0.55, message: 'AssertionError: expected 1435 to be less than or equal to 670', budget,
+      }).class).toBe('ASSERTION');
+
+      // ── THE BUDGET READER ──────────────────────────────────────────────────
+      // Driven against synthetic roots, never by re-running the gate's own regex
+      // over the same file it reads: a fixture that mirrors the deriver proves the
+      // regex equals itself and nothing else.
+      const configured = join(TMP, `budget-${seq += 1}`);
+      mkdirSync(configured, { recursive: true });
+      const declared = 34567;
+      writeFileSync(join(configured, 'vite.config.js'), `export default { test: { testTimeout: ${declared} } };\n`);
+      expect(globalTestTimeoutOf(configured)).toEqual({
+        budget: declared, source: 'vite.config.js testTimeout',
+      });
+      const bare = join(TMP, `budget-${seq += 1}`);
+      mkdirSync(bare, { recursive: true });
+      expect(globalTestTimeoutOf(bare)).toEqual({
+        budget: VITEST_DEFAULT_TEST_TIMEOUT,
+        source: "vitest's own default (no config testTimeout found)",
+      });
+      // …and the LIVE repo really is read, which is what makes the printed budget
+      // a fact about this run rather than a constant. The figure itself is not
+      // frozen here: it is a tunable the estate governs in one place already.
+      const live = globalTestTimeoutOf(ROOT);
+      expect(live.source).toBe('vite.config.js testTimeout');
+      expect(live.budget).toBeGreaterThanOrEqual(1000);
+
+      // ── THE PER-FILE LITERAL SCAN ──────────────────────────────────────────
+      // Both spellings a file uses to give itself a wider clock. TWO hazards are
+      // designed out of these fixtures, and both have bitten this estate before:
+      //   • the numbers are INTERPOLATED, so this file's own source carries neither
+      //     pattern — a fixture written as a bare literal would be found by the very
+      //     scan it tests, and would widen this file's own printed budget;
+      //   • the callee is a NEUTRAL name, never a test-registration token, so the
+      //     estate's title census cannot read a forged title out of a string here.
+      // The scan keys on the trailing argument, not on who is being called, so a
+      // neutral callee exercises exactly the same branch.
+      const perTest = 60000;
+      const queryBudget = 5000;
+      expect(timeoutLiteralsOf(`register('slow', async () => { await x(); }, ${perTest});`))
+        .toEqual([perTest]);
+      expect(timeoutLiteralsOf(`await findByRole('button', { timeout: ${queryBudget} });`)).toEqual([queryBudget]);
+      expect(timeoutLiteralsOf(`register('a', () => {}, ${queryBudget});\nregister('b', () => {}, ${perTest});`))
+        .toEqual([queryBudget, perTest]);
+      // Short numbers are not budgets: `}, 999)` is an argument list, and a
+      // three-digit trailing literal would sweep up ordinary call sites.
+      expect(timeoutLiteralsOf('fn(() => { g(); }, 999);')).toEqual([]);
+      expect(timeoutLiteralsOf('const rows = list.map((r) => r.id);')).toEqual([]);
+
+      // ── THE PRINTED LINES ──────────────────────────────────────────────────
+      // The gate prints exactly what this returns, so pin the bytes here and the
+      // arms above are what makes the end-to-end assertions non-circular.
+      expect(failureEvidenceOf(carried[0], {
+        budget: 20000, budgetSource: 'vite.config.js testTimeout', literals: [],
+      })).toEqual([
+        '      TIMEOUT · ran 20528ms against a 20000ms budget (vite.config.js testTimeout)'
+        + ' — vitest serialises a timeout kill as `Error: STACK_TRACE_ERROR`'
+        + " with the stack captured at the test's own registration site",
+        '      msg: Error: STACK_TRACE_ERROR',
+      ]);
+      // A row the report gave no duration and no message is still printed — as an
+      // admission that it could not be classified, never as a silent omission.
+      expect(failureEvidenceOf({ file: 'tests/x.test.js', fullName: 'y' }, {
+        budget: 20000, budgetSource: 'vite.config.js testTimeout', literals: [queryBudget],
+      })).toEqual([
+        '      UNCLASSIFIED · ran an unrecorded duration against a 20000ms budget'
+        + ' (vite.config.js testTimeout; the file also declares 5000ms)'
+        + ' — no timeout signal and no assertion signal — open the full report',
+        '      msg: (the report carried no failure message)',
+      ]);
     });
 
     test('uncollectedOf names every suite whose failure the PER-TEST census cannot see', () => {

@@ -68,6 +68,8 @@
  * `--outputFile=<path>` (equals-sign) spelling. Recorded hazard: a BARE `--json`
  * eats the NEXT POSITIONAL as its output path and silently overwrites that file
  * while exiting 0 — the only tell is `git status`. Never reintroduce a bare flag.
+ * The same law binds the stable last-red copy taken on a regression red: it lives
+ * in `os.tmpdir()`, never in the tree.
  */
 import { execSync } from 'node:child_process';
 import fs from 'node:fs';
@@ -167,10 +169,175 @@ export function rowsOf(report, root = ROOT) {
     for (const a of suite.assertionResults || []) {
       const fullName = a.fullName
         || [...(a.ancestorTitles || []), a.title].filter(Boolean).join(' > ');
-      rows.push({ file, fullName, id: identityOf(file, fullName), status: a.status });
+      rows.push({
+        file,
+        fullName,
+        id: identityOf(file, fullName),
+        status: a.status,
+        // ⚠ CARRIED VERBATIM, NEVER SYNTHESISED. These two fields are the whole
+        // evidence a red used to destroy (see THE EVIDENCE BLOCK below). They are
+        // passed through EXACTLY as the runner wrote them — `undefined` when the
+        // report omits them — so a report shape that carries neither produces the
+        // same row object it always did.
+        duration: a.duration,
+        failureMessages: a.failureMessages,
+      });
     }
   }
   return rows;
+}
+
+/**
+ * ── ⚠⚠ THE EVIDENCE BLOCK — why a red now prints its own cause ───────────────
+ *
+ * Until 2026-08-22 this gate printed a failing row's IDENTITY and nothing else.
+ * The `duration` and `failureMessages` were parsed and dropped, and the vitest
+ * JSON landed under a random `mkdtempSync` name that was never printed. The
+ * effect, measured over four full-suite runs (HUNT-1, ODQ §355→§358): **a
+ * per-test TIMEOUT and a genuine value mismatch were indistinguishable at the
+ * only surface anyone reads**, so every stray red had to be re-run, re-isolated
+ * and argued about from scratch — while the report that settled it in one line
+ * sat orphaned in TMPDIR among hundreds of nameless siblings.
+ *
+ * ⛔ THIS CHANGES WHAT A RED *SAYS*, NEVER WHEN IT FIRES. No verdict, ceiling,
+ * baseline comparison or exit code below is touched by anything in this section.
+ *
+ * ── THE MEASURED SHAPES (recovered reports, vitest 4.1.8, 2026-08-22) ────────
+ * The classification had to be derived from the JSON, because the JSON does not
+ * say "timeout" anywhere:
+ *
+ *   row                                   duration   failureMessages[0] first line
+ *   distribution.test.js (timeout kill)   56,955ms   Error: STACK_TRACE_ERROR
+ *   lawBandTable.walker (timeout kill)    20,528ms   Error: STACK_TRACE_ERROR
+ *   npcAuthoringScope (query budget)       5,470ms   Error: Unable to find role="button" …
+ *   the 11 census rows (real debt)        0–182ms    AssertionError: expected 1435 to be …
+ *
+ * ⚠⚠ THE PROSE `Test timed out in 20000ms` IS **CLI-ONLY** AND NEVER REACHES THE
+ * JSON. Read `makeTimeoutError` in @vitest/runner: it builds that message and then
+ * OVERWRITES `error.stack` with the stack of a placeholder `new Error('STACK_TRACE_ERROR')`
+ * captured at the `it(` call site. The JSON reporter serialises the STACK, so the
+ * prose is lost and the marker is what survives. Measured: `'timed out'` appears in
+ * ZERO of the four recovered reports' failure messages. A classifier keyed on the
+ * prose would therefore fail OPEN on every real timeout in this estate.
+ */
+
+/** vitest 4's own non-browser default — used ONLY when no config names a budget. */
+export const VITEST_DEFAULT_TEST_TIMEOUT = 5000;
+
+/** The closed set of classes a failing row can be sorted into. */
+export const FAILURE_CLASSES = ['TIMEOUT', 'QUERY-BUDGET', 'ASSERTION', 'UNCLASSIFIED'];
+
+/** Config files that could plausibly carry the suite-wide budget, in resolution order. */
+const TIMEOUT_CONFIG_FILES = [
+  'vitest.config.js', 'vitest.config.mjs', 'vitest.config.ts', 'vite.config.js', 'vite.config.mjs',
+];
+
+/**
+ * The suite-wide per-test budget, read from the vitest config by TEXT rather than
+ * by import: importing the config would pull the whole vite plugin graph into a
+ * gate that must stay cheap and must never fail because a plugin threw. A missed
+ * read degrades to vitest's own default and SAYS SO in the printed source, so the
+ * reader is never shown a budget the run did not use without being told.
+ */
+export function globalTestTimeoutOf(root = ROOT) {
+  for (const name of TIMEOUT_CONFIG_FILES) {
+    const file = path.join(root, name);
+    if (!fs.existsSync(file)) continue;
+    let match = null;
+    try {
+      match = /\btestTimeout\s*:\s*(\d+)/.exec(fs.readFileSync(file, 'utf8'));
+    } catch {
+      // An unreadable config names no budget; fall through to the next candidate.
+    }
+    if (match) return { budget: Number(match[1]), source: `${name} testTimeout` };
+  }
+  return { budget: VITEST_DEFAULT_TEST_TIMEOUT, source: "vitest's own default (no config testTimeout found)" };
+}
+
+/**
+ * Every explicit millisecond budget DECLARED IN ONE TEST FILE'S SOURCE — the
+ * trailing-argument spelling (a four-digit-or-longer number passed after the test
+ * body's closing brace) and the options spelling (a `timeout` key with a
+ * three-digit-or-longer value). Both are budgets the file gave itself, and either
+ * can put a row's real ceiling far above the suite-wide one.
+ *
+ * ⚠ STATED AGAINST INTEREST: this is a TEXT scan over the WHOLE file, comments
+ * included, so it cannot tell a per-test vitest override from a Testing Library
+ * query budget, and it cannot tell WHICH test an override belongs to. Comments are
+ * deliberately NOT stripped: a missed literal NARROWS the threshold, and a narrow
+ * threshold is the only direction that can INVENT a TIMEOUT label on a genuine
+ * assertion failure. A falsely wide one merely costs a label, because the
+ * `STACK_TRACE_ERROR` arm convicts every real vitest kill whatever the threshold
+ * says. So the scan errs wide on purpose, and the literals are PRINTED rather than
+ * silently folded in.
+ */
+export function timeoutLiteralsOf(src) {
+  const found = new Set();
+  for (const m of String(src).matchAll(/\}\s*,\s*(\d{4,})\s*\)/g)) found.add(Number(m[1]));
+  for (const m of String(src).matchAll(/\btimeout\s*:\s*(\d{3,})\b/g)) found.add(Number(m[1]));
+  return [...found].sort((a, b) => a - b);
+}
+
+/**
+ * Sort ONE failing row into the closed class set above.
+ *
+ * ORDER IS THE DESIGN. The arms run strongest-evidence first, and each is
+ * measured rather than assumed:
+ *   1. the runner NAMED the timeout (never seen in vitest 4's JSON; kept because a
+ *      reporter that starts emitting `error.message` must not silently reclassify);
+ *   2. the `STACK_TRACE_ERROR` marker on the FIRST LINE — the surviving fingerprint
+ *      of a timeout kill, and first-line-only so a marker buried in a stack cannot
+ *      relabel an assertion;
+ *   3. duration at or past the budget — the arm that needs no message at all, and
+ *      the one that still works when the runner writes nothing but a number;
+ *   4. a library query budget (Testing Library's `Unable to find …`), which is a
+ *      COST failure too but of a different budget, so it is named separately;
+ *   5. an assertion signal — a real verdict, i.e. the only class that is DEBT.
+ */
+export function classifyFailure({ duration, message, budget }) {
+  const text = String(message || '');
+  const firstLine = text.split('\n', 1)[0];
+  const ms = Number.isFinite(duration) ? duration : null;
+  if (/\b(?:Test|Hook) timed out in \d+\s*ms/i.test(text)) {
+    return { class: 'TIMEOUT', why: 'the runner named the timeout in its own message' };
+  }
+  if (/^\s*Error:\s*STACK_TRACE_ERROR\b/.test(firstLine)) {
+    return {
+      class: 'TIMEOUT',
+      why: 'vitest serialises a timeout kill as `Error: STACK_TRACE_ERROR`'
+        + " with the stack captured at the test's own registration site",
+    };
+  }
+  if (ms !== null && Number.isFinite(budget) && ms >= budget) {
+    return { class: 'TIMEOUT', why: 'the row ran at or past its whole budget' };
+  }
+  if (/Unable to find\b|Timed out in waitFor|exceeded timeout of \d+/i.test(firstLine)) {
+    return { class: 'QUERY-BUDGET', why: 'a library query budget expired (Testing Library), not the suite-wide one' };
+  }
+  if (/AssertionError\b|\bexpected\b/i.test(firstLine)) {
+    return { class: 'ASSERTION', why: 'a real verdict — read the message' };
+  }
+  return { class: 'UNCLASSIFIED', why: 'no timeout signal and no assertion signal — open the full report' };
+}
+
+/**
+ * The two evidence lines printed UNDER a failing row's identity. Exported so the
+ * meta-test drives the exact bytes the gate emits rather than a re-implementation.
+ */
+export function failureEvidenceOf(row, { budget, budgetSource, literals = [] } = {}) {
+  const raw = Number.isFinite(row?.duration) ? row.duration : null;
+  // A sub-millisecond row rounds to `0ms`, which reads as "no measurement" — the
+  // one thing this line exists to stop being ambiguous about.
+  const ms = raw === null ? null : (raw > 0 && Math.round(raw) === 0 ? '<1ms' : `${Math.round(raw)}ms`);
+  const message = (row?.failureMessages || [])[0] || '';
+  const firstLine = message.split('\n', 1)[0].trim();
+  const verdict = classifyFailure({ duration: row?.duration, message, budget });
+  const declared = literals.length ? `; the file also declares ${literals.join('ms, ')}ms` : '';
+  return [
+    `      ${verdict.class} · ran ${ms === null ? 'an unrecorded duration' : ms}`
+    + ` against a ${budget}ms budget (${budgetSource}${declared}) — ${verdict.why}`,
+    `      msg: ${firstLine || '(the report carried no failure message)'}`,
+  ];
 }
 
 /**
@@ -780,13 +947,77 @@ export async function run(argv = []) {
 
   if (regressions.length || hidden.length) {
     const lines = ['[test-ratchet] TEST REGRESSIONS (fix them; do not widen the census):'];
+    const classes = [];
     if (regressions.length) {
+      // ── THE EVIDENCE BLOCK (see the section above rowsOf) ─────────────────
+      // A non-census red is the ONE surface where the timeout-vs-assertion
+      // question gets asked, so it is the one surface that must answer it. The
+      // budget is resolved PER FILE, and the file's own declared literals are
+      // read at most once each.
+      const globalBudget = globalTestTimeoutOf();
+      const literalsCache = new Map();
+      const literalsFor = (file) => {
+        if (!literalsCache.has(file)) {
+          let literals = [];
+          try {
+            literals = timeoutLiteralsOf(fs.readFileSync(path.join(ROOT, file), 'utf8'));
+          } catch {
+            // A row whose file is gone declares nothing; the suite-wide budget stands.
+          }
+          literalsCache.set(file, literals);
+        }
+        return literalsCache.get(file);
+      };
       lines.push(`  ${regressions.length} failing test(s) NOT in the frozen census:`);
-      lines.push(...regressions.map((id) => `    ${id}`));
+      for (const id of regressions) {
+        lines.push(`    ${id}`);
+        const row = liveById.get(id);
+        if (!row) continue;
+        const literals = literalsFor(row.file);
+        const budget = Math.max(globalBudget.budget, ...literals);
+        const evidence = failureEvidenceOf(row, {
+          budget,
+          budgetSource: globalBudget.source,
+          literals,
+        });
+        classes.push(classifyFailure({
+          duration: row.duration,
+          message: (row.failureMessages || [])[0] || '',
+          budget,
+        }).class);
+        lines.push(...evidence);
+      }
     }
     if (hidden.length) {
       lines.push(`  ${hidden.length} baselined test(s) are now SKIPPED — a skipped test is a HOLE, not a fix:`);
       lines.push(...hidden.map((id) => `    ${id}`));
+    }
+    // ⛔ THE ONE INFERENCE THIS BLOCK IS ALLOWED TO MAKE, and it points AWAY from
+    // the census: a cost failure is never debt, so the census must never absorb it
+    // (the frozen ⛔ NO row is attributed to a TIMEOUT pin refuses it anyway).
+    if (classes.some((c) => c === 'TIMEOUT' || c === 'QUERY-BUDGET')) {
+      lines.push('');
+      lines.push('  ⚠ A BUDGET EXPIRY IS A COST FAILURE, NEVER DEBT. Cut the row\'s per-run work or give it an');
+      lines.push('    explicit per-test budget carrying the measured figure — never bank one in the census, and');
+      lines.push('    never raise the suite-wide testTimeout (that hides the next one).');
+    }
+    // The machine is half the classification: a budget expiry under heavy
+    // oversubscription is the recorded MACHINE-LOAD ARTIFACT shape, and the load
+    // at the moment of the red is not recoverable afterwards from anything else.
+    const cores = os.cpus().length;
+    lines.push('');
+    lines.push(`  machine at this run: load ${os.loadavg().map((n) => n.toFixed(2)).join('/')} over ${cores} core(s)`);
+    // ⚠ THE REPORT SURVIVES; IT WAS ONLY EVER NAMELESS. Printing its own path ends
+    // the mtime forensics, and the stable copy ends the "which of the hundreds of
+    // test-ratchet-* dirs was mine" question for the LAST red specifically.
+    // ⛔ BOTH PATHS ARE OUTSIDE THE REPO — the header's law, not a preference.
+    lines.push(`  full runner report: ${OUT}`);
+    const stable = path.join(os.tmpdir(), 'test-ratchet-last-red.json');
+    try {
+      fs.copyFileSync(OUT, stable);
+      lines.push(`  stable copy of it:  ${stable}`);
+    } catch (e) {
+      lines.push(`  (the stable copy at ${stable} could not be written: ${e.message})`);
     }
     lines.push('');
     lines.push(`Frozen census is ${Object.keys(entries).length} failing test(s), measured at ${baseline.measuredAtSha || 'unknown'}.`);
