@@ -35,16 +35,16 @@
  },
  "digests": {
   "corpusMeta": "ef19224c20401a94c9b20611ff65e607bfaa5b345b3ec88eaa40b220e5e915bb",
-  "inventory": "4529df4642415543628547349fb088d9038054dfe1c023e5565cff2121d1152f",
-  "manifests": "bf82f8512cb3548d451129c8147f09b14bd310dcbf6b37ebd1ad5da417206691",
+  "inventory": "adf41f9a6fb705020217043d5d79a68bf06288f0e17376d8810d241a700eb870",
+  "manifests": "70ef5b9c01ed9faaf203846523ce7e92ec710b2a9e12a7dc47a7f51a4c594877",
   "migrationReview": "d385b7ac755f4eaae531a0b53c59add20a5633a1b4659b742bad0306979fd557",
   "rowTags": "e4efe2363101a1d70a81f6de882573eeed6f2334b227cc493b6e82a7c42f1398",
-  "scanStats": "492aa62d15b5bf72c99d3c65368c30a25c70381b42e066b40a05dd6fd97e0c0a",
-  "sentinel": "caf7a121e1ed05059d681791b4a257ad6b766aba7d83a1c040cc7a971b776de4"
+  "scanStats": "561ec1ed7642a575a6e721add69cf770a6cdac1b4a533737155f1c59a54bf7a0",
+  "sentinel": "e1528f42131e3e83f2137e9197b6bf541096fa301ac3176589489dd308874a0c"
  },
  "frozen": "2026-08-22",
- "frozenAtSha": "12b3aa5308c027dfceeb3fb7e43b7c0414e4e639",
- "identities": 1412,
+ "frozenAtSha": "2f41eb0f568caf0d8168b1d6e9b1a7cbc70ff73e",
+ "identities": 1410,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
    "mapEdits on settlement": 1
@@ -2069,7 +2069,6 @@
    "outputs on institutions": 1,
    "plotHooks on activeChains": 1,
    "plotHooks on institutions": 1,
-   "pressures on institutions": 1,
    "priorityNote on issues": 1,
    "priorityNotes on economicViability": 1,
    "processing on activeChains": 1,
@@ -2092,7 +2091,6 @@
    "staffing on institutions": 1,
    "statusNote on institutions": 1,
    "statusReason on institutions": 1,
-   "stresses on institutions": 1,
    "structuralGaps on resourceAnalysis": 1,
    "structuralGaps on settlement": 1,
    "subCategory on institutions": 1,
@@ -2319,7 +2317,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "95b42c8f0b03c7977368ee47ba4324eefb9f5577fd7da779950a83720d7dd181",
+   "digest": "c8ff85ed0dff35f8975151d1774b5870e4478521dc1b74da1104f7ddd3177116",
    "entries": [
     {
      "mode": "100644",
@@ -9247,8 +9245,8 @@
     {
      "mode": "100644",
      "path": "src/domain/fieldManifest.js",
-     "sha256": "a8339fccb3a08b76d96fc92ab0f270b3b379793f85b62c1e8b541bf865d8dd7c",
-     "size": 19868,
+     "sha256": "ca0a4c7402753117ef812bba2488843cba665cb7a5394c584ba9f400ce8b89f7",
+     "size": 20709,
      "type": "file"
     },
     {
@@ -16513,8 +16511,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/lib/viewModelBodySlices.js",
-     "sha256": "4e3080f40b90c37041b8aac48c378fd837b8900f70ad3eda8151b9fe9a3c666e",
-     "size": 16937,
+     "sha256": "d49b0b2b4493512a3ebb2172c282893003b53ec370b1eeee6f43373827974a57",
+     "size": 17097,
      "type": "file"
     },
     {
@@ -17515,7 +17513,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "bbaff61a7fea1a1186e127c4ea800b04859d0c63399b3aec024cde749a281c74",
+   "digest": "eb86ae5755593c425bb98210aae2e0cff9a0c5b722724a38fb43efd1f5024b17",
    "entries": [
     {
      "mode": "100644",
@@ -24282,8 +24280,8 @@
     {
      "mode": "100644",
      "path": "src/domain/fieldManifest.js",
-     "sha256": "a8339fccb3a08b76d96fc92ab0f270b3b379793f85b62c1e8b541bf865d8dd7c",
-     "size": 19868,
+     "sha256": "ca0a4c7402753117ef812bba2488843cba665cb7a5394c584ba9f400ce8b89f7",
+     "size": 20709,
      "type": "file"
     },
     {
@@ -31548,8 +31546,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/lib/viewModelBodySlices.js",
-     "sha256": "4e3080f40b90c37041b8aac48c378fd837b8900f70ad3eda8151b9fe9a3c666e",
-     "size": 16937,
+     "sha256": "d49b0b2b4493512a3ebb2172c282893003b53ec370b1eeee6f43373827974a57",
+     "size": 17097,
      "type": "file"
     },
     {
@@ -32543,7 +32541,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "a8b2615717e33ee580bc92d27e04c4f1479917681c8bac9981bee8e4edb690d6",
+   "digest": "f3b10af32f7f0455987013c26f6e25945fbcb6a39bfb1f5b776e256f4167d57c",
    "entries": [
     {
      "mode": "100644",
@@ -39401,8 +39399,8 @@
     {
      "mode": "100644",
      "path": "src/domain/fieldManifest.js",
-     "sha256": "a8339fccb3a08b76d96fc92ab0f270b3b379793f85b62c1e8b541bf865d8dd7c",
-     "size": 19868,
+     "sha256": "ca0a4c7402753117ef812bba2488843cba665cb7a5394c584ba9f400ce8b89f7",
+     "size": 20709,
      "type": "file"
     },
     {
@@ -46667,8 +46665,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/lib/viewModelBodySlices.js",
-     "sha256": "4e3080f40b90c37041b8aac48c378fd837b8900f70ad3eda8151b9fe9a3c666e",
-     "size": 16937,
+     "sha256": "d49b0b2b4493512a3ebb2172c282893003b53ec370b1eeee6f43373827974a57",
+     "size": 17097,
      "type": "file"
     },
     {
@@ -47923,22 +47921,22 @@
  },
  "scanStats": {
   "files": 2146,
-  "reads": 123463,
-  "resolved": 9249,
+  "reads": 123461,
+  "resolved": 9247,
   "unresolved": 114214
  },
  "scannerProvenance": {
   "detectorDigest": "3d97159912f6dbfa3b7c25c962dbb61e501b434e6ac4d6a15d817a69f7e5dce4",
-  "executionTreeDigest": "95b42c8f0b03c7977368ee47ba4324eefb9f5577fd7da779950a83720d7dd181",
-  "scanTreeDigest": "bbaff61a7fea1a1186e127c4ea800b04859d0c63399b3aec024cde749a281c74",
-  "sourceTreeDigest": "a8b2615717e33ee580bc92d27e04c4f1479917681c8bac9981bee8e4edb690d6",
+  "executionTreeDigest": "c8ff85ed0dff35f8975151d1774b5870e4478521dc1b74da1104f7ddd3177116",
+  "scanTreeDigest": "eb86ae5755593c425bb98210aae2e0cff9a0c5b722724a38fb43efd1f5024b17",
+  "sourceTreeDigest": "f3b10af32f7f0455987013c26f6e25945fbcb6a39bfb1f5b776e256f4167d57c",
   "unscannedInputDigest": "26764dcc6a3e2929adbdbc48619d97ad052e91caabd1222e653899a0239555e6"
  },
  "schema": 10,
  "sentinel": {
-  "resolvedReads": 9249,
+  "resolvedReads": 9247,
   "totalKeys": 6611,
   "usableShapes": 338
  },
- "total": 1998
+ "total": 1996
 }

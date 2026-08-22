@@ -712,12 +712,16 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       files: Object.keys(liveInventory).length,
       bankedReads: taggedAddresses.reduce((sum, row) => sum + row.count, 0),
       taggedRows: taggedAddresses.length,
-    // ⚠ THE INVENTORY TRIPLE IS UNCHANGED ACROSS THE SCHEMA-9 MINT, AND THAT IS
-    // THE CLAIM RATHER THAN AN ACCIDENT: M8/M9 BANKS rows, it does not clear them,
-    // so a bank that grew by 16 reads must leave 1998/1412/387 exactly where it
-    // was. A triple that moves in the same commit as a bank growth means the
+    // ⚠ THE INVENTORY TRIPLE IS UNCHANGED ACROSS A MINT, AND THAT IS THE CLAIM
+    // RATHER THAN AN ACCIDENT: M8/M9 BANKS rows, it does not clear them, so a bank
+    // that grew by 16 reads had to leave the schema-9 triple (1998/1412/387) exactly
+    // where it was. A triple that moves in the same commit as a bank growth means the
     // filter stopped banking and started clearing.
-    }).toEqual({ reads: 1998, identities: 1412, files: 387, bankedReads: 60, taggedRows: 40 });
+    // ⭐ RR-1 (§353.3) moved it for the OTHER lawful reason — an ESTATE SHRINK, not a
+    // filter change: two dead read arms deleted from ONE file, so reads and identities
+    // each fall by two while files, bankedReads and taggedRows all hold. A shrink that
+    // moved the banked figures too would mean a cleared row wearing a shrink's clothes.
+    }).toEqual({ reads: 1996, identities: 1410, files: 387, bankedReads: 60, taggedRows: 40 });
     expect(Object.fromEntries(EXPLAINED_WRITER_EXEMPTIONS.map(({ identity }) => {
       const rows = taggedAddresses.filter((row) => row.identity === identity);
       return [identity, {
@@ -860,7 +864,8 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
    * only remaining site. ONE file (WhatChangedPanel lost its last raw row), ONE
    * identity, TWO reads, hence −1/−1/−2 on the raw reading alone. The filtered
    * figure cannot move because M12 was already clearing exactly those two reads,
-   * which is also why the frozen inventory (`total: 1998`) needs no re-freeze.
+   * which is also why the frozen inventory needed no re-freeze (`total` stood at
+   * 1998 then; RR-1's later shrink took it to 1996 — this is a dated account).
    */
   test('the UNREVIEWED-UI cohort is ENFORCED, banked, and exactly its measured size', () => {
     const cohort = cohortOf(inventoryOf(live.findings));
