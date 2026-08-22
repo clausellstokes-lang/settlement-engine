@@ -14600,3 +14600,43 @@ recommended. Implementation, per item:
   9. Implementation lanes for whatever §348 (the sitting) decides
 - **§347.2 Seats at this write:** TE-WF1F (build; the wave's last landing) · TC-T2E
   (compile) · TC-OSR9 (new) · TC-WF8 (new) = four occupied + chair (the sitting).
+
+## §348 — TC-T2E COLLECTED: THE DISPATCH'S CANDIDATES REFUTED, MEMBER 5 RATIFIED; TE-T2E DISPATCHED (2026-08-22 ~03:05)
+
+(The §187 sitting takes the next free row number on completion.)
+
+- **TC-T2E collected** (draft-MF-T2E.md 654L, 8 STOP markers, claim-scan zero bound to
+  final bytes; receipt + executed probe tree; reads pinned to 3ac279db with the one
+  sanctioned ledger read recorded). **The lane REFUSED both candidates the §344.1
+  dispatch named, correctly:** the fabric-extraction producer is already fenced
+  outside D3a by the accepted §334.4 judgment (it consumes what only the ~9,900-line
+  generator half produces, itself fenced by plan §2.2 + §290.4), and the §312.2c
+  retirement cannot fire before an app-side generator exists — and is not a
+  port-member shape (it decomposes into a read-only equivalence measurement + an
+  eventual retirement packet). The plan's 16-member roster stands; the train
+  continues A→B→C→D→E.
+- **§348.1 MEMBER 5 RATIFIED: MassPartQ/SolidPartQ, the typed functional-volume
+  vocabulary — a DESIGN-IMPLEMENTATION member** (the sandbox's own sources declare
+  these types design-only, so there is no hash to port): one dormant leaf with three
+  closed SPEC-verbatim vocabularies, a total knowledge axis that structurally cannot
+  carry a value while unknown, the D1 half-open vertical interval, and two frozen
+  constructors whose discriminant the D1 legality predicate admits verbatim. Zero
+  existing files modified; caps TIGHTENED below standard (leaf 160/250, packet
+  180/400). Executed evidence behind every pin, including the writer-to-reader
+  solidOverlap proof and the R-MF-2 BigInt degeneracy arm; the lowercase-only
+  canonical-id grammar fact (execution caught what reading would have missed).
+- **§348.2 The six other RAISED items RATIFIED as recommended:** the dual-run
+  equivalence measurement is CHARTERED as a read-only lane over
+  refs/preserve/map-sandbox-w3f-sealed and JOINS THE DISPATCH QUEUE (it delivers the
+  value both refused candidates were after, lawfully) · the §P2.7 height-door
+  reading stands (contract minted deliberately; publication still owed) · records
+  land UNSTAMPED per the T2D precedent (the first persisting member mints) · the
+  vocabulary scope as drafted · the carried T2F conviction (the D1 VOLUME arm
+  multiplies in Number over a float area — R-MF-2 fires at F's port; the executed
+  fixture travels with the seed) · the shell-machinery omission (member K's subject;
+  field names upward-compatible).
+- **§348.3 SCHEDULER APPLIED:** TE-T2E dispatched on the freed seat (Opus per
+  §343.2 — the draft carries the judgment). Queue re-groomed: the dual-run
+  measurement lane inserts after TE-WF8. One process note from the lane banked: a
+  pipe tail's exit is not grep's exit — its own first collision scan caught and
+  corrected the class before it shipped.

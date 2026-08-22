@@ -74,6 +74,12 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~03:05 ET: TC-T2E collected (§348) — dispatch candidates REFUTED, member
+# 5 = MassPartQ RATIFIED (design-implementation, caps 160/180); TE-T2E
+# DISPATCHED on the freed seat. QUEUE now: TE-OSR9 (awaits charter review) ·
+# TE-WF8 (awaits compile review) · DUAL-RUN measurement (new, after WF8) ·
+# D4 charter · TE-HOUSE · landing-page recon · sitting implementations.
+# Seats: WF1F · OSR9 · WF8 · TE-T2E = 4 + chair.
 # ⭐⭐ ~02:35 ET: OWNER ORDER (§347) — SELF-REFILLING SCHEDULER is law: every
 # free seat takes the queue head at every collection/wakeup. QUEUE: 1 TC-OSR9
 # (running) · 2 TC-WF8 (running) · 3 TE-T2E (awaits draft review) · 4 TE-OSR9
