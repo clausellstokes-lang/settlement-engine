@@ -1,0 +1,18 @@
+[driver] RS-5 FULL GRID starting 12:23:54 at tip f9bd533f (§313/§305.4 exposure soak)
+[soak] 162 cells, 3 workers, tip f9bd533fb272b65387eba0fa7cf1f8d39aebf99f
+[driver] RS-5 SEGMENT_EXIT=143 14:57:31
+[driver] RS-5 PAUSED BY CHAIR 14:57:33 (§302.3 orchestration — gates take priority; resume via rs5-resume-gen)
+[driver] RS-5 RESUMING 23:12:32 (§329.3 closing sequence; chair resume; segments b=36 c=54 from rs5-resume-gen)
+[soak] 36 cells, 1 workers, tip f9bd533fb272b65387eba0fa7cf1f8d39aebf99f
+[driver] RS-5 PAUSED BY CHAIR 23:58:20 (§331 — T2C terminal slot; five sweep reds verified BANKED, gate expected green; resume via rs5-resume-gen)
+[driver] RS-5 RESUMING 00:17:09 (§332 — T2C landed and CASed; segments b=18 c=54)
+[soak] 18 cells, 3 workers, tip f9bd533fb272b65387eba0fa7cf1f8d39aebf99f
+[soak] 18/18 cells exit 0
+[driver] RS-5 SEGMENT-B EXIT=0 00:39:06
+[soak] 54 cells, 3 workers, tip f9bd533fb272b65387eba0fa7cf1f8d39aebf99f
+[soak] 54/54 cells exit 0
+[driver] RS-5 SEGMENT-C EXIT=0 02:01:22
+[driver] RS-5 ATTRIBUTION RE-RUN 02:02:59 (§339 — cell ca-bb8e999d wall-time trend, quiet-machine four-leg; receipts to rs5-receipts-attrib, NEVER credited)
+[soak] 1 cells, 1 workers, tip f9bd533fb272b65387eba0fa7cf1f8d39aebf99f
+[soak] 1/1 cells exit 0
+[driver] ATTRIB EXIT=0 02:04:42

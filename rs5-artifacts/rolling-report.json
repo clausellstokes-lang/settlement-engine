@@ -1,0 +1,58 @@
+{
+  "kind": "soak_rolling_report",
+  "profile": "cert-30",
+  "archivedTipSha": "4eafca31a295b5288f8c5b0b551e248e386e7791",
+  "findingsOnly": true,
+  "additive": true,
+  "additiveNote": "a rolling result never substitutes for any rung, boundary or official instrument (§141)",
+  "cells": 162,
+  "findings": [
+    {
+      "id": "throw_or_assert",
+      "class": "deterministic",
+      "detail": "assertion failed: per-year wall-time trend not age-linear",
+      "cellKey": "w0-soak-b::30::4::ca-bb8e999d",
+      "identity": "throw_or_assert|w0-soak-b::30::4::ca-bb8e999d|unknown",
+      "known": false
+    }
+  ],
+  "observability": [
+    {
+      "id": "memory_watermark",
+      "class": "host-observability",
+      "detail": "peak heap 857MB reached the per-world band",
+      "cellKey": "w0-soak::30::4::ca-d4b94088"
+    },
+    {
+      "id": "memory_watermark",
+      "class": "host-observability",
+      "detail": "peak heap 1263MB reached the per-world band",
+      "cellKey": "w0-soak-b::30::4::ca-ec6e1847"
+    },
+    {
+      "id": "tick_duration_blowout",
+      "class": "host-observability",
+      "detail": "per-year wall time Q1 2214.1ms → Q4 21808.4ms",
+      "cellKey": "w0-soak-b::30::4::ca-bb8e999d"
+    },
+    {
+      "id": "memory_watermark",
+      "class": "host-observability",
+      "detail": "peak heap 987MB reached the per-world band",
+      "cellKey": "w0-soak-b::30::4::ca-67fa1474"
+    },
+    {
+      "id": "memory_watermark",
+      "class": "host-observability",
+      "detail": "peak heap 996MB reached the per-world band",
+      "cellKey": "w0-soak-b::30::4::ca-7df9c70c"
+    },
+    {
+      "id": "memory_watermark",
+      "class": "host-observability",
+      "detail": "peak heap 1140MB reached the per-world band",
+      "cellKey": "w0-soak-c::30::4::ca-354f1bf1"
+    }
+  ],
+  "orphanFindings": []
+}
