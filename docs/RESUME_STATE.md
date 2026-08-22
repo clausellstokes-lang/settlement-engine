@@ -74,6 +74,13 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⛔→⭐ ~12:20: RR-1's STOP ruled (§384) — CT-1a's regen broke the OSR
+# envelope (predicted trigger class, firing in the wild; CT-1a lawful).
+# RE-SEQUENCED: HOUSE next-up → ratchet cure → OSR-10 micro-mint (envelope
+# re-reconciliation only) → RR-1 regenerates → RR-2. POLICY: content cars
+# batch into one trailing mint per train (short-term) + declared-movement
+# class chartered as an H-item (durable). S0 rule binds compiles: OSR gate
+# at the ACTUAL base.
 # ⭐⭐ ~11:55: CT-1a LANDED — CAS ac0d0149 → 71159a21 (§383; 16th landing;
 # THE FIRST ATLAS PROSE in the product, zero seeded motion). Three bankings
 # in the row. RR-1's slot OPENED w/ the digest-semantics ratification (pair

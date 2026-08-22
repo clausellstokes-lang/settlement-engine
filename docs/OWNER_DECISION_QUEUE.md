@@ -15690,3 +15690,40 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   rebases); its schema-9 shrink digest-semantics judgment is RATIFIED with the
   slot message (derived digests move with a legitimate shrink; the byte-identical
   tool universe is the invariant). Then the bundle, then the ratchet cure.
+
+## §384 — RR-1's STOP-RAISE RULED: THE ENVELOPE BREAK ATTRIBUTED TO CT-1a's LAWFUL LANDING; THE QUEUE RE-SEQUENCED; SCHEMA-10 CHARTERED; THE CONTENT-TRAIN POLICY SET (2026-08-22 ~12:20)
+
+- **THE STOP (RR-1's hash walk, not inference):** at pristine 71159a21 the OSR
+  envelope check refuses every governed write — two subject-but-unscanned inputs
+  (the regenerated dossierStateProse leaves) moved, both by CT-1a's tip commit;
+  the detectorTree's 11 entries byte-intact; the envelope whole at 42e12a76.
+  CT-1a's terminal lawfully never saw it (the OSR gate sits outside check and CI
+  by design). This is the REAL tool-universe STOP class, correctly distinguished
+  from the ratified derived-digest movement, and the §349 charter's own predicted
+  trigger ('one generated subject-but-unscanned source input moved') firing in
+  the wild. The lane's refusal to improvise a cure is the discipline working.
+- **§384.1 RE-SEQUENCED:** RR-1's slot YIELDS (parked, regeneration is minutes
+  once the envelope is whole; its rehearsal stands as the mechanics proof). THE
+  BUNDLE (TE-HOUSE) goes NEXT-UP — its members touch no OSR surface (scripts,
+  tests, docs, the packet validator; the detectorTree unmoved), so it lands green
+  at this tip. Then the RATCHET CURE. Then **TE-OSR10, chartered here: a
+  MICRO-MINT whose only content is the envelope re-reconciliation** — schema
+  9→10 via the mint's own proven machinery (the §349 runbook reused; the CH-6
+  review path covering the two moved prose leaves, plus any the bundle's landing
+  window adds; expected reconciliation ALL-SAME since generated prose is subject,
+  never reader). Then RR-1 regenerates at the post-mint tip; RR-2 promotes on
+  its flip.
+- **§384.2 THE DURABLE POLICY, chartered (chair-scope instrument governance per
+  the §338/§346 precedent, owner-vetoable):** the content train regenerates these
+  leaves EVERY car — a mint per car is absurd and mint-per-train is the §353 law
+  generalized. RULED: (a) short-term, content cars BATCH — the envelope
+  re-governs ONCE per train via a trailing micro-mint (OSR-10 covers CT-1a; the
+  content train's later cars accumulate into the next); (b) durable, an H-item
+  joins the next bundle: the instrument gains a DECLARED-MOVEMENT class for the
+  generated-prose leaves (regeneration is declared unscanned movement, recorded
+  at the freeze without blocking governed writes between mints) — the H9
+  discharge-semantics pattern applied to the envelope. RR-1's S0 rule binds all
+  compiles NOW: run the OSR gate at the member's ACTUAL base during preflight.
+- **§384.3** RR-1's hazard memorialization (any regen of the 13 unscanned
+  generated files is a mint trigger) is confirmed into the memory estate
+  alongside its note file.
