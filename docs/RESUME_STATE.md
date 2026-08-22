@@ -74,6 +74,13 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~17:40: THE ENVELOPE QUESTION SETTLED BY DISCRIMINATOR — both gate
+# exits 1; the envelope is DIGEST-based; §384 UNAMENDED; CT-2's break real
+# and ADDITIVE (direct digest triple: frozen/base/member all differ). CT-2
+# withdrew in full; NEW LAW BANKED: READER NEUTRALITY ≠ ENVELOPE NEUTRALITY
+# — only the bare gate script answers the envelope. CT-2's tip now 5941093f
+# (break-recorded form + the lesson in-packet). CT-3 keeps the premise.
+# OSR-10 cross-check expectation: base reads exit 1; disagreement = finding.
 # ⭐ ~17:00: CT-2 BUILT+HOLDING at 26f51466 (3 blocks/37 variants; six of
 # seven leaves byte-identical; envelope WHOLE at its base → its break
 # wholly attributable, pre-writing the trailing mint). THREE REFUSALS OF
