@@ -19229,7 +19229,7 @@
     },
     {
       "id": "MF-T2G",
-      "status": "DRAFT",
+      "status": "READY",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T2G.md",
       "verifiedBase": "cb369d2b0b63422db6f91af6c0f4feabcf5ff2dc",
       "changeManifest": [

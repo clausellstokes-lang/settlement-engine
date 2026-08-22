@@ -1,6 +1,6 @@
 # Town cartography / MF-T2G — the §288-nonconforming light profile STRIPPED from every published projection (§299.3(b) discharged): a record-only deletion inside a dormant module, with the twelve-pin digest re-record declared, captured and bounded
 
-- **Status:** DRAFT
+- **Status:** READY
 - **Packet version:** 1
 - **Verified base:** `claude/composite-r4` at `cb369d2b0b63422db6f91af6c0f4feabcf5ff2dc`
   (the MF-T2F landing), **read from git at this lane's start and never extended from a quoted
