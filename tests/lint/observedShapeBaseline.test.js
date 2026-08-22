@@ -12,6 +12,7 @@ import {
   parseLeafBaselineIdentity,
   RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA,
   RETIRED_CORPUS_COVERAGE_BASELINE_SCHEMA,
+  RETIRED_EPOCH_DARK_CORPUS_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   validateSchema3Baseline,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
@@ -23,6 +24,7 @@ import {
   validateSchema7Baseline,
   validateSchema8Baseline,
   validateSchema9Baseline,
+  validateSchema10Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   digestOf,
@@ -251,7 +253,8 @@ describe('observed-shape schema-3 baseline envelope', () => {
 
   test('the RETIRED exact definition still names schema 3, and refuses the live schema', () => {
     expect(RETIRED_EXACT_BASELINE_SCHEMA).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(9);
+    expect(BASELINE_SCHEMA).toBe(10);
+    expect(RETIRED_EPOCH_DARK_CORPUS_BASELINE_SCHEMA).toBe(9);
     expect(RETIRED_CORPUS_COVERAGE_BASELINE_SCHEMA).toBe(8);
     expect(RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA).toBe(7);
     expect(RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA).toBe(4);
@@ -386,6 +389,12 @@ function validSchema8Baseline() {
 
 function validSchema9Baseline() {
   const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_EPOCH_DARK_CORPUS_BASELINE_SCHEMA;
+  return baseline;
+}
+
+function validSchema10Baseline() {
+  const baseline = validSchema7Baseline();
   baseline.schema = BASELINE_SCHEMA;
   return baseline;
 }
@@ -406,6 +415,20 @@ function mutateSchema8(mutator) {
 
 function mutateSchema9(mutator) {
   const baseline = validSchema9Baseline();
+  mutator(baseline);
+  baseline.digests.inventory = digestOf(baseline.inventory);
+  baseline.digests.rowTags = digestOf(baseline.rowTags);
+  baseline.digests.sentinel = digestOf(baseline.sentinel);
+  baseline.digests.scanStats = digestOf(baseline.scanStats);
+  baseline.digests.manifests = digestOf(baseline.manifests);
+  if (baseline.migrationReview) {
+    baseline.digests.migrationReview = digestOf(baseline.migrationReview);
+  }
+  return baseline;
+}
+
+function mutateSchema10(mutator) {
+  const baseline = validSchema10Baseline();
   mutator(baseline);
   baseline.digests.inventory = digestOf(baseline.inventory);
   baseline.digests.rowTags = digestOf(baseline.rowTags);
@@ -558,7 +581,7 @@ describe('observed-shape schema-6 baseline envelope', () => {
     // returns 1 at the schema rung before the envelope law is ever reached, so
     // it would prove the wrong refusal — this test is about the ENVELOPE
     // validator running before the corpus, not about the schema check.
-    const malformed = mutateSchema9((baseline) => { delete baseline.migrationReview; });
+    const malformed = mutateSchema10((baseline) => { delete baseline.migrationReview; });
     let corpusCalls = 0;
     const overrides = {
       baselineExists: () => true,
@@ -578,16 +601,26 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
   test('A5: schemas 4-6 keep numeric inventory and only schema 7 admits sparse rowTags', () => {
     const retired = validSchema7Baseline();
     const baseline = validSchema8Baseline();
-    const live = validSchema9Baseline();
+    const epochDark = validSchema9Baseline();
+    const live = validSchema10Baseline();
     expect(validateSchema7Baseline(retired)).toBe(retired);
     expect(validateSchema8Baseline(baseline)).toBe(baseline);
-    expect(validateSchema9Baseline(live)).toBe(live);
+    expect(validateSchema9Baseline(epochDark)).toBe(epochDark);
+    expect(validateSchema10Baseline(live)).toBe(live);
     expect(() => validateSchema7Baseline(baseline)).toThrow(/is not schema 7/);
     expect(() => validateSchema8Baseline(retired)).toThrow(/is not schema 8/);
-    // ⚠ THE 8/9 PAIR IS PINNED IN BOTH DIRECTIONS FOR THE SAME REASON THE 7/8
-    // PAIR IS: three schemas now share one tagged envelope law, so the only
-    // thing keeping them from meaning each other is the NUMBER each accepts.
+    // ⚠ EVERY ADJACENT PAIR IS PINNED IN BOTH DIRECTIONS FOR ONE REASON: FOUR
+    // schemas now share one tagged envelope law, so the only thing keeping them
+    // from meaning each other is the NUMBER each accepts. ⚠⚠ THE 9/10 PAIR IS
+    // THE ONE THAT MATTERS MOST RIGHT NOW — schema 10 re-governs schema 9's
+    // envelope with NOTHING ELSE CHANGED, so these two are byte-identical in
+    // every field except the number, and a validator that shrugged at the
+    // number would accept a stale freeze as a current one.
     expect(() => validateSchema9Baseline(baseline)).toThrow(/is not schema 9/);
+    expect(() => validateSchema8Baseline(epochDark)).toThrow(/is not schema 8/);
+    expect(() => validateSchema7Baseline(epochDark)).toThrow(/is not schema 7/);
+    expect(() => validateSchema10Baseline(epochDark)).toThrow(/is not schema 10/);
+    expect(() => validateSchema9Baseline(live)).toThrow(/is not schema 9/);
     expect(() => validateSchema8Baseline(live)).toThrow(/is not schema 8/);
     expect(() => validateSchema7Baseline(live)).toThrow(/is not schema 7/);
     expect(typeof baseline.inventory['src/probe.js'][LEAF_IDENTITY]).toBe('number');
@@ -597,6 +630,7 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
       [RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA, validateSchema6Baseline],
     ]) {
       expect(() => validate({ ...baseline, schema })).toThrow(/noncanonical fields/);
+      expect(() => validate({ ...epochDark, schema })).toThrow(/noncanonical fields/);
       expect(() => validate({ ...live, schema })).toThrow(/noncanonical fields/);
     }
   });
@@ -629,6 +663,7 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     expect(() => validateSchema7Baseline(mutateSchema7(mutator))).toThrow();
     expect(() => validateSchema8Baseline(mutateSchema8(mutator))).toThrow();
     expect(() => validateSchema9Baseline(mutateSchema9(mutator))).toThrow();
+    expect(() => validateSchema10Baseline(mutateSchema10(mutator))).toThrow();
   });
 
   test('A5 independently integrity-binds the sparse tag map', () => {
@@ -638,8 +673,11 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     const retired = validSchema8Baseline();
     retired.rowTags['src/probe.js'][LEAF_IDENTITY].reason = 'changed after signing';
     expect(() => validateSchema8Baseline(retired)).toThrow(/rowTags digest mismatch/);
-    const live = validSchema9Baseline();
+    const epochDark = validSchema9Baseline();
+    epochDark.rowTags['src/probe.js'][LEAF_IDENTITY].reason = 'changed after signing';
+    expect(() => validateSchema9Baseline(epochDark)).toThrow(/rowTags digest mismatch/);
+    const live = validSchema10Baseline();
     live.rowTags['src/probe.js'][LEAF_IDENTITY].reason = 'changed after signing';
-    expect(() => validateSchema9Baseline(live)).toThrow(/rowTags digest mismatch/);
+    expect(() => validateSchema10Baseline(live)).toThrow(/rowTags digest mismatch/);
   });
 });

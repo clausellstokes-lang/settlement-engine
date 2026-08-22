@@ -19,6 +19,8 @@ import {
   CORPUS_COVERAGE_TARGET_SCHEMA,
   EPOCH_DARK_CORPUS_SCANNER_DELTA_PATHS,
   EPOCH_DARK_CORPUS_TARGET_SCHEMA,
+  PROSE_REGEN_SCANNER_DELTA_PATHS,
+  PROSE_REGEN_TARGET_SCHEMA,
   FILTERED_TARGET_SCHEMA,
   HEURISTIC_TARGET_SCHEMA,
   heuristicMigrationReport,
@@ -42,6 +44,7 @@ import {
   validateSchema7Baseline,
   validateSchema8Baseline,
   validateSchema9Baseline,
+  validateSchema10Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 
 const SUBJECT_SHA = 'a'.repeat(40);
@@ -50,6 +53,7 @@ const HASH_A = '1'.repeat(64);
 const HASH_B = '2'.repeat(64);
 const HASH_C = '3'.repeat(64);
 const HASH_D = '4'.repeat(64);
+const HASH_E = '5'.repeat(64);
 const LEGACY_MODULE_SHA = governedLegacyDetectorSha256();
 const LEGACY_ALGORITHM = Object.freeze({
   baseSha: '6e7acc4dd88a43cb608f40bc77db3b2130a1e2de',
@@ -825,6 +829,14 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     return baseline;
   }
 
+  function schema9BaselineOf(artifact) {
+    const baseline = schema8BaselineOf(artifact);
+    baseline._doc = ['schema-9 tagged predecessor fixture'];
+    baseline.schema = EPOCH_DARK_CORPUS_TARGET_SCHEMA;
+    validateSchema9Baseline(baseline);
+    return baseline;
+  }
+
   const predecessorScannerSha = 'b'.repeat(40);
   const unscannedSourceEntry = entry('src/unscanned.json', HASH_C);
 
@@ -889,6 +901,36 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
       const schema7Sha = schema7Changed.has(path) ? HASH_B : originalSha;
       const predecessorSha = schema8Changed.has(path) ? HASH_C : schema7Sha;
       const sha256 = current && schema9Changed.has(path) ? HASH_D : predecessorSha;
+      return entry(path, sha256, entryOverrides[path] || {});
+    });
+    const transitionSourceTree = manifest([sourceEntry, unscannedEntry]);
+    return {
+      detectorTree: manifest(detectorEntries),
+      sourceTree: transitionSourceTree,
+      executionTree: manifest([...transitionSourceTree.entries, ...detectorEntries]),
+    };
+  }
+
+  /** The 9→10 rung. Layered once more, so the schema-9 side is the state the
+   *  schema-8→9 mint actually left behind and the schema-10 delta is measured
+   *  against it rather than against a synthetic origin. */
+  function proseRegenTransitionTrees({
+    current = false,
+    changedPaths = PROSE_REGEN_SCANNER_DELTA_PATHS,
+    entryOverrides = {},
+    unscannedEntry = unscannedSourceEntry,
+    inputPaths = BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+  } = {}) {
+    const schema7Changed = new Set(BANKED_EXPLAINED_WRITER_SCANNER_DELTA_PATHS);
+    const schema8Changed = new Set(CORPUS_COVERAGE_SCANNER_DELTA_PATHS);
+    const schema9Changed = new Set(EPOCH_DARK_CORPUS_SCANNER_DELTA_PATHS);
+    const schema10Changed = new Set(changedPaths);
+    const detectorEntries = inputPaths.map((path) => {
+      const originalSha = path === LEGACY_ALGORITHM.modulePath ? LEGACY_MODULE_SHA : HASH_A;
+      const schema7Sha = schema7Changed.has(path) ? HASH_B : originalSha;
+      const schema8Sha = schema8Changed.has(path) ? HASH_C : schema7Sha;
+      const predecessorSha = schema9Changed.has(path) ? HASH_D : schema8Sha;
+      const sha256 = current && schema10Changed.has(path) ? HASH_E : predecessorSha;
       return entry(path, sha256, entryOverrides[path] || {});
     });
     const transitionSourceTree = manifest([sourceEntry, unscannedEntry]);
@@ -1099,14 +1141,14 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
       expect(report.target.baselineSchema).toBe(HEURISTIC_TARGET_SCHEMA);
       expect(report.rows).toEqual([]);
 
-      // ⭐ THE BARE CLI ALWAYS MEANS THE LIVE TARGET, WHICH IS NOW 9 — and a
+      // ⭐ THE BARE CLI ALWAYS MEANS THE LIVE TARGET, WHICH IS NOW 10 — and a
       // schema-2 predecessor cannot reach it, because `LEAF_MIGRATION_PREDECESSOR`
       // pairs each target with exactly its own predecessor. The refusal is the
       // pin: nothing silently re-runs a retired migration, and the default moving
       // with the live schema is what makes the bare CLI mean the current mint.
       expect(() => runMigration([
         `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`,
-      ])).toThrow(/predecessor baseline must be a schema-8 object/);
+      ])).toThrow(/predecessor baseline must be a schema-9 object/);
       // …and the RETIRED live target of the previous mint is still reachable by
       // name, still refusing the same schema-2 predecessor for its own reason.
       expect(() => runMigration([
@@ -1118,14 +1160,17 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
         `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`,
         `--current=${currentPath}`, `--target-schema=${HEURISTIC_TARGET_SCHEMA}`,
       ])).toThrow(/--current is only valid for the retired/);
-      // ⚠⚠ THIS PIN IS AN INVERSE, AND IT FLIPPED WITH THE MINT: target 9 used
-      // to be the refused number and is now the LIVE one, so the refusal moves
-      // to the first number outside the table. Keeping an unreachable target
-      // named here is the point — a target the CLI would accept but no rung
-      // defines is exactly the silent mode switch this refusal exists to stop.
+      // ⚠⚠ THIS PIN IS AN INVERSE, AND IT FLIPS AT EVERY MINT: target 9 was the
+      // refused number until the schema-9 mint made it live, target 10 was the
+      // refused number until this one did, so the refusal moves again to the
+      // first number outside the table. Keeping an unreachable target named here
+      // is the point — a target the CLI would accept but no rung defines is
+      // exactly the silent mode switch this refusal exists to stop. ⚠ A stale
+      // inverse pin does not red; it quietly stops testing anything, because the
+      // number it names has become valid.
       expect(() => runMigration([
-        `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`, '--target-schema=10',
-      ])).toThrow(/--target-schema must be 9/);
+        `--predecessor=${predecessorPath}`, `--legacy=${legacyPath}`, '--target-schema=11',
+      ])).toThrow(/--target-schema must be 10/);
       expect(() => runMigration([`--predecessor=${predecessorPath}`, '--target-schema=3']))
         .toThrow(/usage:/);
     } finally {
@@ -1156,10 +1201,13 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     // silently start naming something else.
     expect(CORPUS_COVERAGE_TARGET_SCHEMA).toBe(8);
     expect(EPOCH_DARK_CORPUS_TARGET_SCHEMA).toBe(9);
+    expect(PROSE_REGEN_TARGET_SCHEMA).toBe(10);
     // ⚠⚠ THE CHAIN IS SINGLE-STEP, PINNED AS AN EXACT TABLE. A skipped rung —
     // 2 → 6, which would re-bank a two-mints-old inventory as if four filters
     // had run — is not expressible, because no such pairing exists.
-    expect(LEAF_MIGRATION_PREDECESSOR).toEqual({ 4: 2, 5: 4, 6: 5, 7: 6, 8: 7, 9: 8 });
+    expect(LEAF_MIGRATION_PREDECESSOR).toEqual({
+      4: 2, 5: 4, 6: 5, 7: 6, 8: 7, 9: 8, 10: 9,
+    });
     // The kind is DERIVED from the table, so a target can never name a migration
     // it did not perform.
     expect(heuristicReportOf(heuristicFixture()).kind)
@@ -1183,15 +1231,22 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     expect(() => heuristicMigrationReport(
       fixture.predecessor, fixture.legacy, text, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
     )).toThrow(/predecessor baseline must be a schema-8 object/);
+    expect(() => heuristicMigrationReport(
+      fixture.predecessor, fixture.legacy, text, PROSE_REGEN_TARGET_SCHEMA,
+    )).toThrow(/predecessor baseline must be a schema-9 object/);
     // …and a target outside the table is refused by a TOTAL predicate rather
     // than by an enumeration of the numbers somebody thought to forbid.
-    expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text, 10))
-      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8 or 9;/);
+    // ⚠ THE OUT-OF-TABLE PROBE MOVES UP A RUNG AT EVERY MINT — it was 10 until
+    // schema 10 became live. A probe left pointing at a number the table has
+    // since adopted stops proving the predicate is total and starts proving
+    // nothing at all, while still passing for the wrong reason.
+    expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text, 11))
+      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8 or 9 or 10;/);
     // ⚠ AND OMITTING IT IS THE SAME REFUSAL, WHICH IS WHY THERE IS NO DEFAULT:
     // a defaulted target is the one input in this chain a caller could get wrong
     // silently, and it would decide which migration ran.
     expect(() => heuristicMigrationReport(fixture.predecessor, fixture.legacy, text))
-      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8 or 9;/);
+      .toThrow(/leaf migration target must be 4 or 5 or 6 or 7 or 8 or 9 or 10;/);
 
     // A6 positive arm: one valid schema-6 envelope can advance exactly one rung
     // to 7, retaining the numeric inventory alphabet and reconciliation ledger.
@@ -1720,5 +1775,145 @@ describe('observed-shape schema-2 -> schema-4 heuristic migration', () => {
     nonGenesis8.frozenAtSha = 'c'.repeat(40);
     expect(() => reportFor9(epochDarkTargetArtifact, nonGenesis8))
       .toThrow(/requires the immutable schema-8 migration genesis/);
+
+    /* ══ A6 LIVE ARM — THE 9→10 RUNG ═══════════════════════════════════════
+     * ⭐ THIS RUNG IS THE PROOF THAT THE 8→9 GENERALISATIONS WERE LAWS AND NOT
+     * ACCOMMODATIONS, and it is worth more than a repeat of its predecessor for
+     * one reason: it exercises both of them AT DIFFERENT VALUES.
+     *   · the delta is FOUR governed paths, so the retained count is SEVEN.
+     *     Target 9's was five and six. A hard-coded retained count could have
+     *     matched either but not both, so the pair is what convicts a literal.
+     *   · the UNSCANNED movement is reviewable AGAIN, at a second target,
+     *     declared in target 10's own entry rather than inherited — the class
+     *     recurred within nine commits of the schema-9 freeze.
+     * The targets 7 and 8 refusals above remain the paired controls proving
+     * reviewability is per-target and never retroactive.
+     */
+    // ⚠ NOT 'a' — that is this file's own SUBJECT_SHA, and a fixture SHA that
+    // collides with an unrelated constant makes a later "fresh scanner SHA"
+    // refusal pass or fail for a reason that has nothing to do with this rung.
+    const proseRegenTargetSha = 'e'.repeat(40);
+    const proseRegenPredecessorArtifact = legacyArtifact([
+      oldFinding(10, 100, 'held', 'row'),
+      oldFinding(40, 400, 'arrived', 'row'),
+    ], {
+      subjectSha: epochDarkTargetSha,
+      scannerSha: epochDarkTargetSha,
+      ...proseRegenTransitionTrees(),
+    });
+    const predecessor9 = schema9BaselineOf(proseRegenPredecessorArtifact);
+    expect(validatePredecessorBaseline(predecessor9, EPOCH_DARK_CORPUS_TARGET_SCHEMA))
+      .toEqual(predecessor9);
+
+    const proseRegenTargetTrees = proseRegenTransitionTrees({
+      current: true, unscannedEntry: movedUnscannedEntry,
+    });
+    const proseRegenTargetArtifact = legacyArtifact([
+      oldFinding(10, 100, 'held', 'row'),
+      oldFinding(40, 400, 'arrived', 'row'),
+    ], {
+      subjectSha: proseRegenTargetSha,
+      scannerSha: proseRegenTargetSha,
+      ...proseRegenTargetTrees,
+    });
+    const report10 = heuristicMigrationReport(
+      predecessor9,
+      proseRegenTargetArtifact,
+      predecessorText(predecessor9),
+      PROSE_REGEN_TARGET_SCHEMA,
+    );
+    expect(report10.kind).toBe('observed-shape-schema-9-to-10-migration');
+    expect(report10.inputs.scannerTransitionDigest).toBe(digestOf(report10.scannerTransition));
+    expect(report10.scannerTransition).toMatchObject({
+      predecessorSchema: EPOCH_DARK_CORPUS_TARGET_SCHEMA,
+      targetSchema: PROSE_REGEN_TARGET_SCHEMA,
+      modifiedPaths: PROSE_REGEN_SCANNER_DELTA_PATHS,
+    });
+    // ⚠⚠ FOUR AND SEVEN, AGAINST TARGET 9'S FIVE AND SIX. Read together these
+    // two arms are what makes the derived retained count a measurement instead
+    // of a coincidence that happened to match one mint.
+    expect(report10.scannerTransition.modifiedPaths).toHaveLength(4);
+    expect(report10.scannerTransition.unchangedPaths).toHaveLength(7);
+    expect(report9.scannerTransition.unchangedPaths).not
+      .toHaveLength(report10.scannerTransition.unchangedPaths.length);
+    expect([...report10.scannerTransition.modifiedPaths,
+      ...report10.scannerTransition.unchangedPaths].sort())
+      .toEqual(BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS);
+
+    // ── THE REVIEWABLE UNSCANNED MOVEMENT, BY NAMED PATH, AT A SECOND TARGET ─
+    expect(report10.scannerTransition.predecessor.unscannedInputDigest)
+      .not.toBe(report10.scannerTransition.current.unscannedInputDigest);
+    expect(report10.scannerTransition.unscannedMovement).toEqual({
+      added: [],
+      removed: [],
+      modified: ['src/unscanned.json'],
+      changedPaths: ['src/unscanned.json'],
+    });
+    const transitionIssue10 = report10.issues
+      .find((issue) => issue.reconciliation === 'scanner-transition');
+    expect(transitionIssue10.unscannedPaths).toEqual(['src/unscanned.json']);
+    expect(transitionIssue10.message).toContain('src/unscanned.json');
+
+    // ⚠ AND THE FIELD IS STILL ABSENT WHEN NOTHING MOVED — the anti-decoration
+    // control, re-run at this target rather than assumed to carry over.
+    const stillUnscanned10 = heuristicMigrationReport(
+      predecessor9,
+      legacyArtifact([
+        oldFinding(10, 100, 'held', 'row'),
+        oldFinding(40, 400, 'arrived', 'row'),
+      ], {
+        subjectSha: proseRegenTargetSha,
+        scannerSha: proseRegenTargetSha,
+        ...proseRegenTransitionTrees({ current: true }),
+      }),
+      predecessorText(predecessor9),
+      PROSE_REGEN_TARGET_SCHEMA,
+    );
+    expect(stillUnscanned10.scannerTransition.unscannedMovement).toBeUndefined();
+
+    const readable10 = structuredClone(predecessor9);
+    readable10.schema = PROSE_REGEN_TARGET_SCHEMA;
+    expect(validateSchema10Baseline(readable10)).toBe(readable10);
+    expect(() => validateSchema9Baseline(readable10)).toThrow(/is not schema 9/);
+
+    const reportFor10 = (artifact, predecessor = predecessor9) => heuristicMigrationReport(
+      predecessor,
+      artifact,
+      predecessorText(predecessor),
+      PROSE_REGEN_TARGET_SCHEMA,
+    );
+    const targetWith10 = (treeOverrides = {}, artifactOverrides = {}) => legacyArtifact([
+      oldFinding(10, 100, 'held', 'row'),
+      oldFinding(40, 400, 'arrived', 'row'),
+    ], {
+      subjectSha: proseRegenTargetSha,
+      scannerSha: proseRegenTargetSha,
+      ...treeOverrides,
+      ...artifactOverrides,
+    });
+    expect(() => reportFor10(targetWith10(proseRegenTransitionTrees({
+      current: true,
+      unscannedEntry: movedUnscannedEntry,
+      changedPaths: PROSE_REGEN_SCANNER_DELTA_PATHS.slice(1),
+    })))).toThrow(/must modify exactly/);
+    expect(() => reportFor10(targetWith10(proseRegenTransitionTrees({
+      current: true,
+      unscannedEntry: movedUnscannedEntry,
+      changedPaths: [...PROSE_REGEN_SCANNER_DELTA_PATHS, fifthPath],
+    })))).toThrow(/must modify exactly/);
+    expect(() => reportFor10(targetWith10(proseRegenTransitionTrees({
+      current: true,
+      unscannedEntry: movedUnscannedEntry,
+      inputPaths: [...BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS, 'scripts/extra.mjs'],
+    })))).toThrow(/exact governed 11-input/);
+    expect(() => reportFor10(targetWith10(proseRegenTargetTrees, {
+      subjectSha: epochDarkTargetSha,
+      scannerSha: epochDarkTargetSha,
+    }))).toThrow(/fresh committed scanner SHA/);
+
+    const nonGenesis9 = structuredClone(predecessor9);
+    nonGenesis9.frozenAtSha = 'd'.repeat(40);
+    expect(() => reportFor10(proseRegenTargetArtifact, nonGenesis9))
+      .toThrow(/requires the immutable schema-9 migration genesis/);
   });
 });

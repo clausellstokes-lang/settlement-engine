@@ -87,11 +87,12 @@ import {
   ORIGIN_MIN_ROWS,
   RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA,
   RETIRED_CORPUS_COVERAGE_BASELINE_SCHEMA,
+  RETIRED_EPOCH_DARK_CORPUS_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema9Baseline,
+  validateSchema10Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -129,13 +130,16 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  * 7 = schema 6's numeric set with M8/M9 rows re-admitted and tagged (RETIRED).
  * 8 = the same banked topology law after AO-0's opt-in scalar second consumer (RETIRED).
  * 9 = schema 8's topology and tag law re-governed to the landed post-EP-1 inputs,
- *     with the M8/M9 bank grown by the four declared eventLog identities.
- *     THE LIVE AUTHORITY.
+ *     with the M8/M9 bank grown by the four declared eventLog identities (RETIRED).
+ * 10 = schema 9's topology, tag law and eight-identity bank UNCHANGED, re-governed
+ *     to two regenerated subject-but-unscanned prose leaves and one added
+ *     package.json lint-staged binding. THE LIVE AUTHORITY.
  */
 export {
   BASELINE_SCHEMA, MIN_ROWS, ORIGIN_MIN_ROWS,
   RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA,
   RETIRED_CORPUS_COVERAGE_BASELINE_SCHEMA,
+  RETIRED_EPOCH_DARK_CORPUS_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -1201,7 +1205,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema9Baseline(baseline);
+  validateSchema10Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -1995,10 +1999,10 @@ export function baselineOf({
       'That derived re-freeze may only lower or delete rows; the governed reasoned path may raise tagged rows only.',
       'Detector changes require a new governed instrument migration.',
       'The RETIRED schema-3 exact "<key> on <shape> @ <origin> # <site>" spelling cannot enter this file.',
-      'SCHEMA 9 = schema 8\'s topology and tag law, re-governed to the landed post-EP-1 inputs:',
-      'the corpus holds advanceEpochEnabled dark, package.json carries two added scripts, one',
-      'generated (subject-but-unscanned) source input moved, and the M8/M9 bank grows by the four',
-      'declared eventLog identities whose writer is the store/command layer the corpus never runs.',
+      'SCHEMA 10 = schema 9\'s topology, tag law and eight-identity M8/M9 bank, ALL UNCHANGED,',
+      're-governed to the landed inputs a second time: two dossier-prose generated',
+      '(subject-but-unscanned) sources were regenerated and package.json gained one lint-staged',
+      'binding, with the lockfile untouched. This rung declares no identity and retunes nothing.',
       'The byte-frozen detector is unchanged; its output is narrowed by THREE clearing filters —',
       'CR-OSR-FREEZE-6 shape-family union (M6), the M11 DOM-global receiver exclusion, the M12',
       'language-surface residual — while M8/M9 findings stay present under sparse rowTags. All are inside',
@@ -2006,7 +2010,7 @@ export function baselineOf({
       'An untagged row means: a guarded read, of a real record rather than browser or language surface,',
       'of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.',
       'A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.',
-      'Schemas 4–8 are the RETIRED numeric predecessors.',
+      'Schemas 4–9 are the RETIRED numeric predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -2179,7 +2183,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema9Baseline,
+    validateBaseline: validateSchema10Baseline,
     assertExplainedWriterRowTags,
     validateBaselineHistory,
     committedInputManifestsFor,

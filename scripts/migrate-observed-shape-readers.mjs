@@ -90,6 +90,7 @@ import {
   validateSchema7Baseline,
   validateSchema8Baseline,
   validateSchema9Baseline,
+  validateSchema10Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -112,10 +113,16 @@ export const BANKED_EXPLAINED_WRITER_TARGET_SCHEMA = 7;
 /** The RETIRED corpus-coverage target: schema 7's tagged topology inventory
  *  after the governed builder gains its opt-in scalar second consumer. */
 export const CORPUS_COVERAGE_TARGET_SCHEMA = 8;
-/** The LIVE target: schema 8's tagged topology inventory re-governed to the
- *  landed post-EP-1 detector and unscanned inputs, with the explained-writer
- *  bank grown by the four declared eventLog identities. */
+/** The RETIRED epoch-dark target: schema 8's tagged topology inventory
+ *  re-governed to the landed post-EP-1 detector and unscanned inputs, with the
+ *  explained-writer bank grown by the four declared eventLog identities. */
 export const EPOCH_DARK_CORPUS_TARGET_SCHEMA = 9;
+/** The LIVE target: schema 9's tagged topology inventory and its eight-identity
+ *  bank, unchanged, re-governed to two regenerated subject-but-unscanned prose
+ *  leaves and one added package.json lint-staged binding. An ENVELOPE
+ *  RE-RECONCILIATION and nothing else — no declaration, no threshold, no
+ *  filter, no bank growth. */
+export const PROSE_REGEN_TARGET_SCHEMA = 10;
 
 /**
  * The complete, reviewed detector transition admitted by the retired 6→7 mint.
@@ -156,6 +163,26 @@ export const EPOCH_DARK_CORPUS_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/**
+ * The exact scanner inputs changed by the schema 9→10 prose-regen mint — FOUR.
+ * `package.json` moved on its own before this mint was cut (one added
+ * lint-staged binding, the lockfile untouched); the three instrument files are
+ * the mint's own schema rung. `observed-shape-corpus.mjs` is NOT here: this mint
+ * changes no corpus decision, which is why the inventory is expected to
+ * reconcile all-same.
+ *
+ * ⚠ DELIBERATELY ITS OWN CONSTANT even though the schema 6→7 delta happens to
+ * name the same four paths today. These are two different recorded transitions,
+ * and aliasing them would let an edit made for one silently redefine the other's
+ * governed provenance. Each target owns its own closed subject to accept.
+ */
+export const PROSE_REGEN_SCANNER_DELTA_PATHS = Object.freeze([
+  'package.json',
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -176,6 +203,8 @@ const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
   'schema-8-to-9-exact-scanner-transition-v1';
+const PROSE_REGEN_SCANNER_TRANSITION_POLICY =
+  'schema-9-to-10-exact-scanner-transition-v1';
 
 /**
  * ⭐⭐ THE ONE TABLE THAT PAIRS A LEAF TARGET WITH ITS PREDECESSOR SCHEMA.
@@ -197,6 +226,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [BANKED_EXPLAINED_WRITER_TARGET_SCHEMA]: SURFACE_FILTERED_TARGET_SCHEMA,
   [CORPUS_COVERAGE_TARGET_SCHEMA]: BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
   [EPOCH_DARK_CORPUS_TARGET_SCHEMA]: CORPUS_COVERAGE_TARGET_SCHEMA,
+  [PROSE_REGEN_TARGET_SCHEMA]: EPOCH_DARK_CORPUS_TARGET_SCHEMA,
 });
 
 /**
@@ -213,6 +243,7 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   [RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA]: validateSchema7Baseline,
   [CORPUS_COVERAGE_TARGET_SCHEMA]: validateSchema8Baseline,
   [EPOCH_DARK_CORPUS_TARGET_SCHEMA]: validateSchema9Baseline,
+  [PROSE_REGEN_TARGET_SCHEMA]: validateSchema10Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -560,10 +591,14 @@ function unscannedMovementOf(predecessor, legacyArtifact) {
  * ⚠⚠ `reviewableUnscannedMovement` IS PER-TARGET AND NEVER RETROACTIVE. Targets
  * 7 and 8 keep unscanned-input EQUALITY as a hard refusal, because that is the
  * law each of them was actually governed under and a retroactive relaxation
- * would falsify their recorded transitions. Target 9 declares the movement
- * REVIEWABLE because its cause is a landed generated-source re-record, and the
- * alternative — refusing it — leaves the instrument permanently un-mintable and
- * therefore permanently dark. Reviewable is not silent: the movement is recorded
+ * would falsify their recorded transitions. Targets 9 and 10 each declare the
+ * movement REVIEWABLE — separately, in their own entries, never by a shared
+ * default — because in each case its cause is a landed generated-source
+ * re-record, and the alternative — refusing it — leaves the instrument
+ * permanently un-mintable and therefore permanently dark. ⭐ Target 10 is the
+ * evidence that this was the right law rather than a one-off accommodation: the
+ * class RECURRED within nine commits of the schema-9 freeze, and the target-9
+ * apparatus carried it with no new law. Reviewable is not silent: the movement is recorded
  * by NAMED PATH in the transition record, travels into the report's issue list,
  * and needs the same accepted, noted decision every other governed row needs.
  * The STANDING gate arm is untouched: `check-observed-shape-readers.mjs` still
@@ -588,10 +623,16 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     policy: EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY,
     reviewableUnscannedMovement: true,
   })],
+  [PROSE_REGEN_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: PROSE_REGEN_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: PROSE_REGEN_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
+  })],
 ]);
 
 /**
- * The three governed detector-tree transitions (6→7, 7→8 and 8→9) share one
+ * The four governed detector-tree transitions (6→7, 7→8, 8→9 and 9→10) share one
  * fail-closed proof. Inventory reconciliation alone cannot distinguish a ruled
  * scanner edit from an arbitrary detector rewrite, so each target supplies an
  * exact predecessor, input universe and delta-path set.
@@ -1569,11 +1610,13 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : EPOCH_DARK_CORPUS_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : PROSE_REGEN_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
-    CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${EPOCH_DARK_CORPUS_TARGET_SCHEMA} (live epoch-dark leaf),`
+    CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
+    PROSE_REGEN_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${PROSE_REGEN_TARGET_SCHEMA} (live prose-regen leaf),`
+      + ` ${EPOCH_DARK_CORPUS_TARGET_SCHEMA} (retired epoch-dark leaf),`
       + ` ${CORPUS_COVERAGE_TARGET_SCHEMA} (retired corpus-coverage leaf),`
       + ` ${BANKED_EXPLAINED_WRITER_TARGET_SCHEMA} (retired banked explained-writer leaf),`
       + ` ${SURFACE_FILTERED_TARGET_SCHEMA} (retired surface-filtered leaf),`
@@ -1583,7 +1626,7 @@ export function run(argv = process.argv.slice(2)) {
   }
   const heuristicTarget = LEAF_MIGRATION_PREDECESSOR[targetSchema] !== undefined;
   if (!predecessorPath || !legacyPath || (!heuristicTarget && !currentPath)) {
-    throw new Error('usage: migrate-observed-shape-readers.mjs --predecessor=<predecessor-baseline.json> --legacy=<legacy-artifact.json> [--target-schema=9] [--current=<exact-artifact.json> --target-schema=3] [--json=<report.json>] [--review-template=<review.json>] [--review=<completed-review.json> --bundle=<governed-review.json>]');
+    throw new Error('usage: migrate-observed-shape-readers.mjs --predecessor=<predecessor-baseline.json> --legacy=<legacy-artifact.json> [--target-schema=10] [--current=<exact-artifact.json> --target-schema=3] [--json=<report.json>] [--review-template=<review.json>] [--review=<completed-review.json> --bundle=<governed-review.json>]');
   }
   if (heuristicTarget && currentPath) {
     throw new Error(`observed-shape --current is only valid for the retired --target-schema=${RETIRED_EXACT_TARGET_SCHEMA} pairing;`

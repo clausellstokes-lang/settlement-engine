@@ -34,6 +34,7 @@ import {
   LANGUAGE_SURFACE_RESIDUAL_KEYS,
   RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA,
   RETIRED_CORPUS_COVERAGE_BASELINE_SCHEMA,
+  RETIRED_EPOCH_DARK_CORPUS_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -52,6 +53,7 @@ import {
   validateSchema7Baseline,
   validateSchema8Baseline,
   validateSchema9Baseline,
+  validateSchema10Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   artifactBaselineSchemaOf,
@@ -1284,12 +1286,13 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
    * PRODUCER, so two copies would be one live law with two homes. What must never
    * be shared is the NUMBER — pinned here in BOTH directions.
    */
-  // ⚠ THE TITLE IS DELIBERATELY UNCHANGED ACROSS THE SCHEMA-9 MINT. A test
-  // title is a census key; renaming one is a delete-plus-add that no count
-  // figure can distinguish from a swap. Schemas 8 and 9 joined schema 7 in the
-  // tagged half, and that is said here rather than in the name.
+  // ⚠ THE TITLE IS DELIBERATELY UNCHANGED ACROSS THE SCHEMA-9 AND SCHEMA-10
+  // MINTS. A test title is a census key; renaming one is a delete-plus-add that
+  // no count figure can distinguish from a swap. Schemas 8, 9 and 10 joined
+  // schema 7 in the tagged half, and that is said here rather than in the name.
   test('A5: schemas 4-6 retain the numeric law and schema 7 adds authenticated row tags', () => {
-    expect(BASELINE_SCHEMA).toBe(9);
+    expect(BASELINE_SCHEMA).toBe(10);
+    expect(RETIRED_EPOCH_DARK_CORPUS_BASELINE_SCHEMA).toBe(9);
     expect(RETIRED_CORPUS_COVERAGE_BASELINE_SCHEMA).toBe(8);
     expect(RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA).toBe(7);
     expect(RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA).toBe(4);
@@ -1300,7 +1303,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     const stats = leafStats();
     const live = validBaseline({ corpus, stats, frozen: [leafFindingOf()] });
     expect(live.schema).toBe(BASELINE_SCHEMA);
-    expect(validateSchema9Baseline(live)).toBe(live);
+    expect(validateSchema10Baseline(live)).toBe(live);
     expect(assertExplainedWriterRowTags(live)).toBe(live);
     expect(() => validateSchema4Baseline(live)).toThrow(/noncanonical fields/);
     expect(() => validateSchema5Baseline(live)).toThrow(/noncanonical fields/);
@@ -1310,19 +1313,19 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     delete numeric.digests.rowTags;
     const unfiltered = { ...numeric, schema: RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA };
     expect(validateSchema4Baseline(unfiltered)).toBe(unfiltered);
-    expect(() => validateSchema9Baseline(unfiltered)).toThrow();
+    expect(() => validateSchema10Baseline(unfiltered)).toThrow();
 
     const filtered = { ...numeric, schema: RETIRED_FILTERED_LEAF_BASELINE_SCHEMA };
     expect(validateSchema5Baseline(filtered)).toBe(filtered);
-    expect(() => validateSchema9Baseline(filtered)).toThrow();
+    expect(() => validateSchema10Baseline(filtered)).toThrow();
 
     const surface = { ...numeric, schema: RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA };
     expect(validateSchema6Baseline(surface)).toBe(surface);
-    expect(() => validateSchema9Baseline(surface)).toThrow(/noncanonical fields/);
+    expect(() => validateSchema10Baseline(surface)).toThrow(/noncanonical fields/);
 
     const retiredBanked = { ...structuredClone(live), schema: RETIRED_BANKED_EXPLAINED_WRITER_BASELINE_SCHEMA };
     expect(validateSchema7Baseline(retiredBanked)).toBe(retiredBanked);
-    expect(() => validateSchema9Baseline(retiredBanked)).toThrow();
+    expect(() => validateSchema10Baseline(retiredBanked)).toThrow();
 
     // ⭐ THE RETIRED-8 RUNG, MIRRORING THE SCHEMA-7 PAIR ABOVE. Schema 8's
     // validator must stay executable — the committed schema-8 genesis is the
@@ -1332,8 +1335,19 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       ...structuredClone(live), schema: RETIRED_CORPUS_COVERAGE_BASELINE_SCHEMA,
     };
     expect(validateSchema8Baseline(retiredCorpusCoverage)).toBe(retiredCorpusCoverage);
-    expect(() => validateSchema9Baseline(retiredCorpusCoverage)).toThrow(/is not schema 9/);
+    expect(() => validateSchema10Baseline(retiredCorpusCoverage)).toThrow(/is not schema 10/);
     expect(() => validateSchema8Baseline(live)).toThrow(/is not schema 8/);
+
+    // ⭐ THE RETIRED-9 RUNG, MIRRORING THE RETIRED-8 PAIR ABOVE. Schema 10
+    // re-governs schema 9's envelope with nothing else changed, so these two
+    // differ in the NUMBER ALONE — which makes this the pair most able to go
+    // quietly wrong, and the one that most needs pinning in both directions.
+    const retiredEpochDark = {
+      ...structuredClone(live), schema: RETIRED_EPOCH_DARK_CORPUS_BASELINE_SCHEMA,
+    };
+    expect(validateSchema9Baseline(retiredEpochDark)).toBe(retiredEpochDark);
+    expect(() => validateSchema10Baseline(retiredEpochDark)).toThrow(/is not schema 10/);
+    expect(() => validateSchema9Baseline(live)).toThrow(/is not schema 9/);
 
     const missing = structuredClone(live);
     const declared = leafFindingOf({
@@ -1411,12 +1425,12 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       baselineSchema: artifactBaselineSchemaOf('legacy-leaf'),
       siteSchema: 'source-position-v1',
     });
-    // ⚠ The ARTIFACT schema is 2 and the BASELINE schema in force is 9. They are
-    // different numbers naming different things, and conflating them is what
+    // ⚠ The ARTIFACT schema is 2 and the BASELINE schema in force is 10. They
+    // are different numbers naming different things, and conflating them is what
     // `artifactBaselineSchemaOf` exists to prevent.
     expect(artifactBaselineSchemaOf('legacy-leaf')).toBe(2);
     expect(artifactBaselineSchemaOf('exact-origin')).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(9);
+    expect(BASELINE_SCHEMA).toBe(10);
     expect(() => artifactBaselineSchemaOf('heuristic')).toThrow(/scan mode is unsupported/);
   });
 
