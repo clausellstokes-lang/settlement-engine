@@ -209,8 +209,14 @@ committed object: the compile hashed the working file, and that file is dirty re
 branch. Proved harmless for THIS member rather than assumed — the committed blob was extracted and
 diffed against the working file, and the entire 32-line difference is one `⟦FOLD §303⟧` progress
 block plus one status-table row, both about MF-W3F. **§7.1.2, §10.5 and §10.16 are byte-identical
-under either reading**, so every vocabulary pinned below is the same text. Carried to the chair as
-RAISED-A (§13): the anchor is not reproducible from git history by a later checkout.
+under either reading**, so every vocabulary pinned below is the same text.
+
+✅ **CURED BEFORE THIS PACKET LANDED — ODQ §351.1.** The chair had already verified the entire W3F
+delta and committed the spec file to the ledger branch. Re-verified at this member's landing:
+`git rev-parse review-fixes-2026-07-08:map-corpus/docs/GENERATION-SPEC.md` now returns
+**`aa613cb8d9ea8b895236304e9e72b08940ba1698`**, identical to the working file's hash. The family's
+anchor is a durable committed object and the preflight row is satisfiable through git by any later
+checkout. The finding above is retained as the record of WHY it needed curing, not as a live defect.
 
 ### 4.2 · The captures this packet's pins are written FROM (all re-executed at THIS base)
 
@@ -608,12 +614,15 @@ figure to the wrong key and that its own confirming run caught it.
    repointed, verified by reading the diff line by line. ⭐ A blanket substitution across a SHARED
    manifest cannot satisfy "verify every staged hunk is yours" by construction: it edits by
    pattern, and a sibling's row matches the same pattern.
+   ⭐⭐ **THE CLASS RULE, ruled by the chair on this incident:** scope any manifest edit to your own
+   row **by unique key**, never by a blanket substitution. The validator's DRAFT-time blind spot —
+   the corruption was caught at READY but not at DRAFT — is queued to TE-HOUSE as a validator gap.
 
 ## 13. RAISED for the chair
 
 | # | the call | this lane's recommendation |
 |---|---|---|
-| **A** | ⭐⭐ **NEW, found at this base.** The family's cited GENERATION-SPEC anchor `aa613cb8…1698` is an **uncommitted working-tree state** in the main worktree, not a committed git object (the committed blob is `7dcd70ab…` at every ledger commit checked). Every packet in this family cites it, and it is not reproducible from git history by any later checkout — it evaporates if the file is ever committed, reverted or stashed. Proved harmless for THIS member by diffing the two versions (the whole difference is an MF-W3F progress fold; §7.1.2/§10.5/§10.16 are byte-identical). | **Commit the spec file, or re-cite the family's packets to the committed blob.** Outside this member's manifest, so recorded rather than fixed. Until then, a preflight row that says "MATCH REQUIRED" against `aa613cb8…` can only be satisfied by hashing the working file, and a lane that resolves the blob through git will read a STOP that is not real. |
+| **A** | ✅ **CURED at ODQ §351.1, before this member landed.** The finding: the family's cited GENERATION-SPEC anchor `aa613cb8…1698` was an **uncommitted working-tree state**, not a committed object (git resolved that path to `7dcd70ab…` at every ledger commit checked), so it was not reproducible from history by any later checkout. The chair had already verified the whole W3F delta and committed the spec file. **Re-verified at this member's landing: the ledger branch now resolves the path to `aa613cb8…1698`, matching the working file.** | Closed. No action owed. Retained here as the record of why the anchor needed curing — a preflight row reading "MATCH REQUIRED" against a working-tree-only hash is a STOP that a later lane cannot discharge through git, and that is now impossible. |
 | **B** | **The §P2.7 height door.** This member mints the vertical-interval CONTRACT (explicit integer quanta through the landed wall) and declares that act deliberately in §1.5; `heightQ()` stays throwing (re-verified at this base); height's first PUBLICATION into any artifact stays owed. | Confirm the reading. Either reading leaves the executor's instructions identical. |
 | **C** | **The T2F carry, inherited from the compile:** the D1 predicate's VOLUME arm computes `sharedVolumeQ = areaQ * h` in Number over a float `polygonIntersectionArea` — at ABI scale that product exceeds exact float range (the P4 fixture already yields 7.5e10 at toy scale). | **Carry as a NAMED note to MF-T2F's compile** — its BigInt-conversion decision, not this member's to fix or pin. |
 | **D** | **The knowledge axis omits `provenanceRef`/`coverageRef`** (SPEC §7.1.2 makes the first REQUIRED). No such substrate exists in this era. | Confirm. Alternative — mint a placeholder ref — refused: a required field carrying a placeholder is a worse lie than a missing one, which is the landed ABI record's own recorded posture. |
