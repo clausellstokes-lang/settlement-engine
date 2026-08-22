@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~04:10 ET: TC-WF8 collected (§350) — kernel wiring ZERO (fold owns the
+# seam); §321.2a premise narrowed (S-1: existing arms DO red dead rows; the
+# arm's value = the written-ruling escape); LAST_ALTAR_SEVERITY 0.5 chair-
+# SIGNED w/ derivation (presentation weight, vetoable); no new flag (dark
+# inherited). TE-WF8 DISPATCHED. Dual-run measurement = next queue head.
 # ⭐ ~03:40 ET: OSR9 charter collected + RATIFIED (§349) — two-commit lawful
 # sequence; THIRD drift cause found (warFaith.generated unscanned digest);
 # CH-6 review path ratified (J1); two migration-law defects fixed in-scope;

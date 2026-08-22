@@ -14672,3 +14672,37 @@ recommended. Implementation, per item:
   charter carries the judgment). Its full terminal queues behind WF-1F's running
   gate and TE-T2E's, by heads-up. Seats: WF-1F (gating) · TE-T2E (build) · TC-WF8
   (compile) · TE-OSR9 (new) = four + chair.
+
+## §350 — TC-WF8 COLLECTED: FOUR RULINGS INCLUDING A SIGNED VALUE; A §321.2a PREMISE CORRECTED; TE-WF8 DISPATCHED (2026-08-22 ~04:10)
+
+- **TC-WF8 collected** (draft-WF-8.md, a full DRAFT packet at base 27c250f9; receipt;
+  claim-scan zero on both; every probe in a throwaway archive tree with cmp-exact
+  restores). The central result: the KERNEL-WIRING ACCOUNTING IS ZERO, confirmed by
+  tracing every link — the fold already owns the seam WF-1B promised, the kernel
+  already forwards outcomes, the news layer already stamps candidateType — so the
+  obituary travels as a fold-minted outcome and NONE of the four zero-headroom files
+  is touched (all four re-measured exact). ~143 effective lines of 400.
+- **§350.1 S-1 RECORDED — §321.2a's premise is NARROWED BY EXECUTION:** TC-WF1D's
+  'nothing would red on a dead row' is refuted — a planted dead KIND_SECTION key
+  reds the existing C2 arm and the herald walker twice more. The ordered
+  minter-totality arm's real value is the WRITTEN-RULING ESCAPE (a dead-but-ruled
+  key can lawfully exist) plus stale/orphan hygiene, which no existing arm provides.
+- **§350.2 RULINGS:** R-1 RATIFIED — the one-row FAITH kind registry lands honestly,
+  with the shrink-back review OBLIGATED on the next WF-8 member. R-2 RATIFIED as
+  recommended — C2's substance relocates into the herald routing walker with
+  KIND_SECTION_MINTER_RULINGS (empty at mint), hygiene arms, §75 controls, and the
+  three executor plants; the tests/lint twin is declined. **R-3: the chair SIGNS
+  LAST_ALTAR_SEVERITY = 0.5** (vetoable) — derivation recorded: deliberately below
+  newsEntryForOutcome's 0.72 major-entry line so the obituary surfaces as a notable
+  RECORD, not an alarm, while the kind's cadence class stays major on the distinct
+  pool-floor axis; the outcome carries no deltas and applyOutcomeToSettlement no-ops
+  on it by construction, so this is presentation weight, not engine math (§328.4's
+  class); it ALSO joins the §341 tuning pass's review surface with every news
+  weight. R-4 RATIFIED — no new flag: darkness is inherited (no preset declares
+  faithUnseatingEnabled; the same-seed golden runs both sides and any motion is a
+  STOP). S-2..S-5 accepted as recorded (the §85.4 manifest widening; the dead
+  prose-numerics rows; EXPECTED_VOICE not incurred; the WF-1B-I clauses discharged).
+- **§350.3 SCHEDULER APPLIED:** TE-WF8 dispatched on the freed seat (Opus — the
+  draft carries the judgment). The dual-run equivalence measurement remains queue
+  head for the NEXT free seat. Seats: WF-1F (gate) · TE-T2E (build) · TE-OSR9
+  (build) · TE-WF8 (new) = four + chair.
