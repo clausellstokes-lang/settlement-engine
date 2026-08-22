@@ -35,16 +35,16 @@
  },
  "digests": {
   "corpusMeta": "ef19224c20401a94c9b20611ff65e607bfaa5b345b3ec88eaa40b220e5e915bb",
-  "inventory": "adf41f9a6fb705020217043d5d79a68bf06288f0e17376d8810d241a700eb870",
-  "manifests": "70ef5b9c01ed9faaf203846523ce7e92ec710b2a9e12a7dc47a7f51a4c594877",
+  "inventory": "3427992fcdf9a473dd46b05c8ac24fe2edbe4f0c98d357bae9319a2f3480ad3a",
+  "manifests": "085be838465c227de6ff90febde95a75f55fc3420c81e6c98030a4b94891623a",
   "migrationReview": "d385b7ac755f4eaae531a0b53c59add20a5633a1b4659b742bad0306979fd557",
   "rowTags": "e4efe2363101a1d70a81f6de882573eeed6f2334b227cc493b6e82a7c42f1398",
   "scanStats": "561ec1ed7642a575a6e721add69cf770a6cdac1b4a533737155f1c59a54bf7a0",
   "sentinel": "e1528f42131e3e83f2137e9197b6bf541096fa301ac3176589489dd308874a0c"
  },
  "frozen": "2026-08-22",
- "frozenAtSha": "2f41eb0f568caf0d8168b1d6e9b1a7cbc70ff73e",
- "identities": 1410,
+ "frozenAtSha": "4f42be7085ae29dba02edeecff1dde9e5f48841a",
+ "identities": 1409,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
    "mapEdits on settlement": 1
@@ -2023,7 +2023,6 @@
    "accessibility on exploitation": 1,
    "amount on incomeSources": 1,
    "availableResources on settlement": 1,
-   "blurb on institutions": 1,
    "building on institutions": 1,
    "capacity on institutions": 1,
    "chainDepth on institutions": 1,
@@ -2317,7 +2316,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "c8ff85ed0dff35f8975151d1774b5870e4478521dc1b74da1104f7ddd3177116",
+   "digest": "269db33a1fa819dc4054d61362ae8d1de0ff0348ee88b84741ee7419d922f26f",
    "entries": [
     {
      "mode": "100644",
@@ -8692,8 +8691,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/parityContract.js",
-     "sha256": "6ab93e6cf17e6bbaccc1b7c5b43741bf7a85d9da836215d449a44c75d2f4818e",
-     "size": 6180,
+     "sha256": "29264a1f9f5b0cb297cae554c384e0d872cb603ee2d57580927984c4a1cd0639",
+     "size": 7138,
      "type": "file"
     },
     {
@@ -9245,8 +9244,8 @@
     {
      "mode": "100644",
      "path": "src/domain/fieldManifest.js",
-     "sha256": "ca0a4c7402753117ef812bba2488843cba665cb7a5394c584ba9f400ce8b89f7",
-     "size": 20709,
+     "sha256": "9346f362fe92914c35019b8f191c032e8ced71cb956218a6566ec41c8636450f",
+     "size": 21060,
      "type": "file"
     },
     {
@@ -16511,8 +16510,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/lib/viewModelBodySlices.js",
-     "sha256": "d49b0b2b4493512a3ebb2172c282893003b53ec370b1eeee6f43373827974a57",
-     "size": 17097,
+     "sha256": "326eebea6b97f688cfa330878e5231fc552fb47515ddc66f34bc9bb13838322c",
+     "size": 17276,
      "type": "file"
     },
     {
@@ -17513,7 +17512,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "eb86ae5755593c425bb98210aae2e0cff9a0c5b722724a38fb43efd1f5024b17",
+   "digest": "59f531b325817f8b680bce52614376fce26d986d89234daf5d21805ce1177540",
    "entries": [
     {
      "mode": "100644",
@@ -23727,8 +23726,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/parityContract.js",
-     "sha256": "6ab93e6cf17e6bbaccc1b7c5b43741bf7a85d9da836215d449a44c75d2f4818e",
-     "size": 6180,
+     "sha256": "29264a1f9f5b0cb297cae554c384e0d872cb603ee2d57580927984c4a1cd0639",
+     "size": 7138,
      "type": "file"
     },
     {
@@ -24280,8 +24279,8 @@
     {
      "mode": "100644",
      "path": "src/domain/fieldManifest.js",
-     "sha256": "ca0a4c7402753117ef812bba2488843cba665cb7a5394c584ba9f400ce8b89f7",
-     "size": 20709,
+     "sha256": "9346f362fe92914c35019b8f191c032e8ced71cb956218a6566ec41c8636450f",
+     "size": 21060,
      "type": "file"
     },
     {
@@ -31546,8 +31545,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/lib/viewModelBodySlices.js",
-     "sha256": "d49b0b2b4493512a3ebb2172c282893003b53ec370b1eeee6f43373827974a57",
-     "size": 17097,
+     "sha256": "326eebea6b97f688cfa330878e5231fc552fb47515ddc66f34bc9bb13838322c",
+     "size": 17276,
      "type": "file"
     },
     {
@@ -32541,7 +32540,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "f3b10af32f7f0455987013c26f6e25945fbcb6a39bfb1f5b776e256f4167d57c",
+   "digest": "226d8a07183332f4942de44474909ab7aef357b4cfc3a6009fbafc74033d2fb1",
    "entries": [
     {
      "mode": "100644",
@@ -38846,8 +38845,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/parityContract.js",
-     "sha256": "6ab93e6cf17e6bbaccc1b7c5b43741bf7a85d9da836215d449a44c75d2f4818e",
-     "size": 6180,
+     "sha256": "29264a1f9f5b0cb297cae554c384e0d872cb603ee2d57580927984c4a1cd0639",
+     "size": 7138,
      "type": "file"
     },
     {
@@ -39399,8 +39398,8 @@
     {
      "mode": "100644",
      "path": "src/domain/fieldManifest.js",
-     "sha256": "ca0a4c7402753117ef812bba2488843cba665cb7a5394c584ba9f400ce8b89f7",
-     "size": 20709,
+     "sha256": "9346f362fe92914c35019b8f191c032e8ced71cb956218a6566ec41c8636450f",
+     "size": 21060,
      "type": "file"
     },
     {
@@ -46665,8 +46664,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/lib/viewModelBodySlices.js",
-     "sha256": "d49b0b2b4493512a3ebb2172c282893003b53ec370b1eeee6f43373827974a57",
-     "size": 17097,
+     "sha256": "326eebea6b97f688cfa330878e5231fc552fb47515ddc66f34bc9bb13838322c",
+     "size": 17276,
      "type": "file"
     },
     {
@@ -47927,9 +47926,9 @@
  },
  "scannerProvenance": {
   "detectorDigest": "3d97159912f6dbfa3b7c25c962dbb61e501b434e6ac4d6a15d817a69f7e5dce4",
-  "executionTreeDigest": "c8ff85ed0dff35f8975151d1774b5870e4478521dc1b74da1104f7ddd3177116",
-  "scanTreeDigest": "eb86ae5755593c425bb98210aae2e0cff9a0c5b722724a38fb43efd1f5024b17",
-  "sourceTreeDigest": "f3b10af32f7f0455987013c26f6e25945fbcb6a39bfb1f5b776e256f4167d57c",
+  "executionTreeDigest": "269db33a1fa819dc4054d61362ae8d1de0ff0348ee88b84741ee7419d922f26f",
+  "scanTreeDigest": "59f531b325817f8b680bce52614376fce26d986d89234daf5d21805ce1177540",
+  "sourceTreeDigest": "226d8a07183332f4942de44474909ab7aef357b4cfc3a6009fbafc74033d2fb1",
   "unscannedInputDigest": "26764dcc6a3e2929adbdbc48619d97ad052e91caabd1222e653899a0239555e6"
  },
  "schema": 10,
@@ -47938,5 +47937,5 @@
   "totalKeys": 6611,
   "usableShapes": 338
  },
- "total": 1996
+ "total": 1995
 }

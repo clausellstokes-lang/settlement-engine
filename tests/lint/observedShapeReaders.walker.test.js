@@ -721,7 +721,20 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // filter change: two dead read arms deleted from ONE file, so reads and identities
     // each fall by two while files, bankedReads and taggedRows all hold. A shrink that
     // moved the banked figures too would mean a cleared row wearing a shrink's clothes.
-    }).toEqual({ reads: 1996, identities: 1410, files: 387, bankedReads: 60, taggedRows: 40 });
+    // ⭐ RR-2 (§373) moved it again the SAME lawful way and from the SAME file, one
+    // property up: 1996/1410 → 1995/1409. The struck arm is the `blurb` fallback of the
+    // institution DESCRIPTION chain — writerless at every commit since genesis — and it
+    // was the file's last row on that key, so exactly one identity and one read leave
+    // while files holds at 387 (viewModelBodySlices keeps its other eighty rows).
+    // ⚠ THE SIBLING ARM OF THE SAME CURE ADDS NO ROW, AND THAT IS ASSERTED HERE BY
+    // ARITHMETIC RATHER THAN ASSUMED: the cure also introduces a NEW read, `inst?.desc`.
+    // `desc` has abundant institution writers, so it resolves and mints nothing. Had the
+    // detector's writer census disagreed, `reads` would have held at 1996 with
+    // `identities` still falling — a shrink and a mint cancelling to look like stillness.
+    // Both figures falling by exactly one is what rules that out.
+    // ⛔ These two literals were READ OFF the re-frozen baseline after the governed
+    // `--write`, never predicted from the delta.
+    }).toEqual({ reads: 1995, identities: 1409, files: 387, bankedReads: 60, taggedRows: 40 });
     expect(Object.fromEntries(EXPLAINED_WRITER_EXEMPTIONS.map(({ identity }) => {
       const rows = taggedAddresses.filter((row) => row.identity === identity);
       return [identity, {
@@ -865,7 +878,8 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
    * identity, TWO reads, hence −1/−1/−2 on the raw reading alone. The filtered
    * figure cannot move because M12 was already clearing exactly those two reads,
    * which is also why the frozen inventory needed no re-freeze (`total` stood at
-   * 1998 then; RR-1's later shrink took it to 1996 — this is a dated account).
+   * 1998 then; RR-1's later shrink took it to 1996 and RR-2's to 1995 — this is a
+   * dated account).
    */
   test('the UNREVIEWED-UI cohort is ENFORCED, banked, and exactly its measured size', () => {
     const cohort = cohortOf(inventoryOf(live.findings));
