@@ -14221,3 +14221,43 @@ recommended. Implementation, per item:
 - **§333.5 Census sequencing for the post-stop trains:** WF-1E/WF-1F/MF-T2D interleave
   under the standing laws — placeholder-and-convict at the executor tip, never carry a
   tuple across a rebase (§325.2), serialized CAS slots.
+
+## §334 — MF-T2D COMPILE COLLECTED AND CHAIR-REVIEWED; SIX RULINGS (2026-08-21 ~21:20)
+
+- **TC-T2D collected** (draft-MF-T2D.md 640L, 8 STOP markers, claim-scan zero;
+  laneTCT2D-receipt.md; reads pinned to f5332cf7 except one recorded, sanctioned ODQ
+  read for the §303.5 text). Member 4: ONE new dormant leaf boundaryNoder.js — the
+  sandbox noding machinery (snap-to-rung, bounded split passes, dedupe, the
+  quantum-ladder walk) ported from the sealed source (SHA verified three ways incl.
+  the refs/preserve blob), output adapted to the codex boundary-row shape so the
+  landed kernel admits it verbatim. Zero existing production files modified; the only
+  shared change path is the census walker; budget 230 of 400.
+- **§334.1 THE COMPILE'S CENTERPIECE FINDING IS ACCEPTED AS EXECUTED:** sealed-noder
+  residual-zero does NOT imply the landed kernel's precondition — three CONFIRMED
+  witness classes (T-junction; collinear overlap under float properCross; an eps-band
+  crossing at exact parameter 1.1e-13 inside CROSS_EPS). The honesty note is part of
+  the record: the executed divergence is the epsilon band, not a float sign flip.
+- **§334.2 RAISED-1 RULED — ADOPT the exact cut predicate:** the cut rule is the
+  kernel's own admission predicate inverted (strict-interior crossings + the
+  endpoint-on-interior arm), prototyped and executed — cures all three witness
+  classes, keeps parity with the sealed noder on its own class, Euler holds on every
+  output, re-noding is a fixed point. This diverges from the sandbox LETTER and
+  follows the deeper law: where the sealed letter and the landed kernel disagree, the
+  kernel's precondition is the authority (§303.5's ABI-wins, one level up). The
+  sandbox-letter fallback is recorded, not taken; the divergence ships declared with
+  its witnesses.
+- **§334.3 RAISED-2 RULED (the §328.4 pattern):** the quantum ladder + walk is CARRIED
+  PORTED STRUCTURE, not a rung choice — the plan's 'carries rung 0' line is refuted by
+  the source's own sweep (rung 0 strands two real leaves). Any future rung CHANGE is
+  owner-tunable surface; the carried ladder is not.
+- **§334.4 RAISED-3/4/5/6 ACCEPTED:** no artifactKind/schemaVersion on the in-memory
+  record (second-truth avoidance; the sealed persisted shape stays the single truth) ·
+  no barrel registration (T2C precedent) · the defensive post-snap wall re-validation
+  ports with a docblock finding and the RE-TARGETED mutant (the first spelling was
+  proven vacuous by the lane's own skeptic pass) · real-leaf noding stays OUT pending
+  the §312.2c dual-run gate.
+- **§334.5** The plan's retire/delete order for boundaryArrangement.js is REFUTED at
+  the landed tree and does not execute; retirement remains the §312.2c dual-run act.
+  Both next-wave drafts (WF-1E §333, MF-T2D §334) are now dispatch-ready and HELD —
+  ⛔ nothing lands before the §290 review stop, which arrives at RS-5's closing
+  collection.

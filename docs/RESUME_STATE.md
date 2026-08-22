@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~21:20 ET: T2D COMPILE COLLECTED + RULED (§334) — exact cut predicate
+# ADOPTED (kernel's precondition outranks the sandbox letter; 3 executed
+# witnesses); ladder=carried structure; 4 accepts. BOTH next-wave drafts
+# ready + HELD behind the §290 stop. Only RS-5 still runs.
 # ⭐ ~20:50 ET: WF-1E COMPILE COLLECTED + RULED (§333) — split to WF-1F
 # RATIFIED (cap law); Q4 RULED chair-scope: DS-FTH corpus = reader-side
 # spelling law, Lane P, section-sliced pin (vetoable; lifts the DRAFT gate);
