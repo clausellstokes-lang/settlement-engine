@@ -14451,3 +14451,28 @@ recommended. Implementation, per item:
   last-seat beat, the war-dissolution join, and the cause sentence: the WF-1 ladder
   the §316.2 compile opened is COMPLETE except the WF-1F micro-member. T2D rebases
   onto 3ac279db next; its GO is immediate on its focused green.
+
+## §343 — OWNER RULE CHANGE: IMPLEMENTATION MAY BE DEFERRED TO FABLE AT CHAIR DISCRETION, APPROPRIATELY (2026-08-22 ~00:45)
+
+- **Owner in-chat: "any implementation that you think should be deferred to fable, I
+  will allow it, but make it appropriate."** §291.5's seat law (Fable architects,
+  manages, surveys, judges; Opus verifies and implements) is AMENDED with a chair
+  discretion clause: an implementation may be assigned to a Fable-tier lane — or
+  taken by the chair directly — when the chair deems the slice's judgment density
+  warrants the top tier.
+- **§343.1 THE APPROPRIATENESS TEST (binding on every invocation; the dispatch or
+  ledger row states which criterion applies):** Fable-tier implementation is
+  appropriate when one or more hold — (a) the implementation IS the design: the
+  member sits on an architecture boundary where coding decisions are rulings (the
+  T2D cut-predicate class); (b) zero-headroom / high-blast-radius edits where a
+  misjudgment ships silently and no instrument can catch it; (c) cross-system
+  coherence work under the review-improve doctrine, where the edit must be weighed
+  against every adjacent system at once; (d) forensic or recovery implementation
+  where evidence interpretation dominates the typing. DEFAULT UNCHANGED: a
+  well-specified packet executes on Opus — the compile-then-execute pattern works
+  precisely because the draft carries the judgment, and spending the top tier on
+  carried judgment is the inappropriateness the owner's 'make it appropriate'
+  forbids.
+- **§343.2** Every Fable-tier implementation dispatch names its §343.1 criterion in
+  the ledger row that dispatches it; a dispatch that cannot name one defaults to
+  Opus.

@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~00:45 ET: OWNER RULE CHANGE (§343) — implementation may defer to
+# FABLE-tier at chair discretion under the §343.1 appropriateness test
+# (implementation-is-design / zero-headroom / cross-system coherence /
+# forensic); default stays Opus; every Fable dispatch names its criterion.
 # ~00:35 ET: T2D rebased onto 3ac279db (lane commit 27c250f9) — census
 # re-convicted (+6 titles = exactly WF-1E's, the carry-trap near-miss
 # DOCUMENTED in the block), shear check executed clean, focused 55/55,
