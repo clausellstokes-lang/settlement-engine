@@ -17477,3 +17477,39 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   the roster row re-applies against the renamed constant). EVERY MAP
   MEMBER IS NOW COMPLETE AND PROVEN; the stack lands in order behind the
   cascade.
+
+## §434 — T2R's S0 STOP RULED: THE CHANNEL-1 ERASURE FINDING CONFIRMED (THE ENGINE'S DEMOTING WRITE DESTROYS THE EVIDENCE IT CREATES); THE READER BUILDS WITH peakTier PRECEDENCE; TWO ENGINE CURES TO THE OWNER (2026-08-23 ~22:10)
+
+- **The finding, executed not read:** THREE demoting tier writers exist
+  (calamityKernel's demotedTier write, tierOutcomeApply's demotion branch,
+  the resettle path's forced thorp) — and the A/B counterfactual proves the
+  consequence: the same souls, same seed, read demoted:false as the engine
+  leaves them and demoted:true/deficit 0.44 with the tier preserved.
+  **Channel 1 of the high-water evidence is erased by the very act that
+  creates it.** The charter's §5.3 reserved exactly this to the chair; the
+  lane's STOP, its four completed S0 arms after the trip, and its warm
+  worktree are the §-standard honored (all four judgments RATIFIED).
+- **RULED:** the app-side reader lands with channel 1 reading BOTH sources
+  under DECLARED PRECEDENCE — peakTier (monotone, survives decline) first,
+  the sealed tier-vs-popToTier read as residual — and the calamity-path gap
+  DOCUMENTED as a typed understatement (the sealed law's own
+  "understates rather than invents" covers it; the reader never guesses).
+  A6 re-scoped to the FROZEN DEMOTING-WRITER ROSTER (a fourth reds on
+  arrival); the populationHistory roster pins at the MEASURED nine+one
+  (the charter's five was stale — the §417 wrong-denominator lesson
+  avoided by measurement); the uncapped realmVerbExecution writer frozen
+  as-is with the flag; the window prose states the measured TWELVE
+  (declared divergence from the sealed prose).
+- **TWO ENGINE CURES DOCKETED TO THE OWNER as §433-O2's first instances,
+  priced not built:** (i) the peakTier stamp extended to the demoting
+  paths (calamity/tierOutcome/resettle) so future demotions leave
+  channel-1 evidence — same-seed pulse motion, one typed field, the
+  T2Q-class bill; (ii) the ring cap on realmVerbExecution:786 (today it
+  grows unbounded — 30 writes, 30 entries, every sibling caps) — a real
+  defect whose cure moves same-seed state. Both carry S0's executed
+  evidence.
+- **BANKED (build-era lesson 11):** an evidence reader's channel can be
+  destroyed by the same event that creates it — before porting ANY reader,
+  sweep EVERY writer of the channel's substrate and pin the destroyer
+  roster; a reader built against a channel the engine demolishes lands the
+  wrong truth with green tests.
