@@ -37,7 +37,11 @@ artifact below survives on disk. The repo is authoritative over this summary.
    On TRUE_EXIT=0 **plus** the gate tail's own exit line: CAS
    `ec8f3359 → b10ed1a1f5a0f2acd00bbfc9b5d0a41931697c3d` (verify ancestry
    first; CT-3's retraction-grep was ZERO — the §401 false claim stayed dead),
-   then delete refs/preserve/holding-ct3. On a red: classify per §358.2/§355
+   then delete refs/preserve/holding-ct3. ⛔ NEVER READ THE CAS TARGET OFF
+   THAT PIN: holding-ct3 points at ba806682, the PRE-REBASE tip still carrying
+   the §401-retracted claim — landing it resurrects the retraction. The ONLY
+   lawful target is b10ed1a1 (above, and in the receipt's bordered block).
+   On a red: classify per §358.2/§355
    (load ~88 from three sibling batteries was PRE-STAMPED as evidence in its
    receipt — expect TIMEOUT-class strays, one quiet re-run, second stray STOPs).
 3. **Survey the killed builders BY RECEIPT (the 529-law — partial edits exist):**

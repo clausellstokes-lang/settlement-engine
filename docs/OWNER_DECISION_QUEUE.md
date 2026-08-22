@@ -17241,3 +17241,14 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
 - **The successor's one-line bootstrap:** read docs/HANDOFF_CURRENT.md on this
   branch, then RESUME_STATE.md's tail, then act. The ledger outranks every
   summary including the handoff.
+
+- **§427.1 A SUCCESSION TRAP CAUGHT BY THE LANE AND SEALED INTO THE HANDOFF:**
+  refs/preserve/holding-ct3 points at ba806682 — CT-3's PRE-REBASE build tip,
+  stacked on the superseded 5941093f and still carrying the §401-retracted
+  claim. A successor reading the CAS target off the pin would land the wrong
+  tree and resurrect the retraction. The only lawful target is b10ed1a1;
+  warned in the lane receipt's bordered block AND now in the handoff override.
+  THE GENERAL LAW, noted: a holding pin goes stale the moment a rebase
+  supersedes it — the CAS target comes from the LANDING REPORT, never from a
+  pin. CT-3's gate continues under load ~150 (three sibling batteries;
+  evidence pre-stamped; a timeout-class red classifies as load artifact).
