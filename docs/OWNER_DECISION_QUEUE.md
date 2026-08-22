@@ -14375,3 +14375,25 @@ recommended. Implementation, per item:
 - **§339.3 The closing preservation is QUEUED with the collection:** rs5-receipts +
   rs5-artifacts fold to refs/preserve on the attribution re-run's completion (the
   fold-on-bank law; scratchpads have eaten three deliverables this month).
+
+## §340 — THE RS-5 PROGRAM CLOSES: THE ONE FINDING IS A CONFIRMED HOST ARTIFACT; EVERYTHING PRESERVED (2026-08-21 ~23:10)
+
+- **§340.1 ATTRIBUTION CONFIRMED — the wall-time finding CLOSES as machine noise.**
+  The identical cell (ca-bb8e999d, same substrate, same tip, same config) re-ran solo
+  on the quiet host: 1/1 exit 0, the age-linearity assertion PASSED, zero findings,
+  and the whole cell (primary 42.6s + replay 41.5s + divergence control 8.8s)
+  finished in ~93 seconds — against 21.8s PER SIMULATED YEAR under contention. The
+  §328.5 timing-flake classification held; no engine aging cost exists in that flag
+  combination.
+- **§340.2 THE RS-5 VERDICT IS FINAL AND UNQUALIFIED: the grid is CLEAN.** 162/162
+  cells; the WF-1B exposure holds at soak scale; P4 re-proven; memory in-band. The
+  §305.4/§313 exposure collection is SEALED.
+- **§340.3 PRESERVED (fold-on-bank):** refs/preserve/rs5-soak-complete-2026-08-21 =
+  d25c6e37 — 336 files: all 162 receipts, the evaluator artifacts (rolling report,
+  curves, provisional curves; sentinel runs=5), the attribution receipt, both
+  configs, the resume/evaluate machinery, and the full run log with every
+  pause/resume line. The scratchpad can now eat nothing that matters.
+- **§340.4 REMAINING IN FLIGHT:** TE-WF1E and TE-T2D building (their terminals now
+  meet a permanently quiet machine — the heads-up protocol simplifies to
+  serialization between the two of them); the delegated §187 decision sitting is the
+  chair's next block; the minKeys measurement waits on a free slot.

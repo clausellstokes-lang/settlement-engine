@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~23:10 ET: RS-5 PROGRAM CLOSED (§340) — attribution CONFIRMED host
+# artifact (solo re-run: assertion passed, ~93s total); grid verdict FINAL
+# AND CLEAN. Preserved: refs/preserve/rs5-soak-complete-2026-08-21=d25c6e37
+# (336 files). In flight: WF-1E + T2D builds; next chair block = the §187
+# delegated decision sitting.
 # ⭐⭐ ~22:50 ET: RS-5 COMPLETE 162/162 (§339) — grid CLEAN: WF-1B exposure
 # + P4 both hold; evaluator credited ONCE (runs=5). One wall-time assertion
 # (ca-bb8e999d) re-running solo on the quiet box for attribution (separate
