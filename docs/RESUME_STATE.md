@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~17:50 ET: MF-T2E LANDED — CAS 5d18b4a0 → a09138d7 (§368; the quiet
+# draw CLEAN, 20/20 steps from the FULL log; the +7 ratchet-vs-census cross-
+# check banked as method). WF-8 ACTIVATED (A5 verification first, rebase onto
+# a09138d7, terminal by heads-up). Then the mint's window closes the train.
 # ⭐ ~17:35 ET: TE-RATCHET BUILT+PARKED at 3c781e7e (+499/-4, 2 files) —
 # contract proven by BASE-VS-CURED dual drive (24/24 identical exits, byte-
 # identical --update writes over 12 fixtures); spec CORRECTED from vitest

@@ -15257,3 +15257,29 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   compound was aborted by a zsh no-match glob — the exact §358.1 lesson, one turn
   after banking it. Guarded on the retry; the lesson's recurrence interval is
   apparently measured in minutes.
+
+## §368 — COLLECTION + CAS: MF-T2E LANDED ON THE QUIET DRAW; THE +7 CROSS-CHECK; WF-8 ACTIVATES (2026-08-22 ~17:50)
+
+- **TE-T2E collected.** Tip a09138d7 — five commits on 5d18b4a0, the terminal green
+  on the chair's quiet track with ZERO strays (under the §355 criterion, genuine
+  signal: the timeout mechanism absent, the draw clean). The lane checked the
+  RESUMED-GATE TRAP rather than trusting it: the printed tail showed only the last
+  steps, so it opened the full 96,493-byte log and confirmed all TWENTY steps ran.
+  CAS EXECUTED: 5d18b4a0 → a09138d7 (read back). The typed functional-volume
+  vocabulary is landed dormant: 118/160 effective, ten created symbols, zero
+  existing production files modified, seven mutants convicted, dormancy proven
+  against live controls.
+- **§368.1 THE +7 CROSS-CHECK, recorded as the week's cleanest census validation:**
+  the ratchet counted 28,700 collected tests vs WF-1F's 28,693 — exactly the
+  member's seven acceptance titles. Two UNRELATED instruments (source-text parsing
+  vs live-suite collection) agreeing on the delta retro-validates the tuple the
+  lane's own first broken instrument had endangered. Banked as method: when a
+  census figure was ever in doubt, the ratchet's total is its independent witness.
+- **§368.2 The lane's self-corrections stand in the packet body** (the
+  mis-attributing census instrument; the blanket sed; the M7 matrix hole; the
+  PLAUSIBLE-dressed-as-CONFIRMED mechanism story recorded against itself). D3a
+  member 5 of 16 is on the branch; the train's tail (WF-8 → the mint) proceeds.
+- **§368.3 WF-8 ACTIVATED into the reserved seat:** rebase cdb906f7's content onto
+  a09138d7; the A5 cure verification FIRST (§356.2's edited-not-verified debt);
+  then the mutexed sweep, the 24-file battery, and the terminal by heads-up. The
+  mint rebuilds once on WF-8's landed tip, last, in its protected window.
