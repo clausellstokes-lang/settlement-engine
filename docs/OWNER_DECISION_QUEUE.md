@@ -15283,3 +15283,30 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   a09138d7; the A5 cure verification FIRST (§356.2's edited-not-verified debt);
   then the mutexed sweep, the 24-file battery, and the terminal by heads-up. The
   mint rebuilds once on WF-8's landed tip, last, in its protected window.
+
+## §369 — TC-READREPAIR RULED: DELETION BY GENESIS PROOF; A POSSIBLE EDIT-LOSS PATH ESCALATED TO ITS OWN LANE (2026-08-22 ~18:30)
+
+- **draft-READREPAIR (RR-1) collected and RULED: DELETION** — the dead arms become
+  `pressures: []` with the slice field and render block retained. The proof standard
+  sets precedent: a GENESIS WALK (git log -S to the first commit) shows no producer
+  EVER wrote either key, so no persisted save from any version can carry them —
+  deletion is honest across the entire lifecycle, not merely at today's tip.
+  Repoint REFUSED (the real strain datum is status/statusReason, already read and
+  rendered); writer-side REFUSED as new capability and RAISED, not smuggled. The
+  five §10 judgments RATIFIED as recorded (the tombstone-token design that is
+  census-invisible and anchor-walker-safe is the standout).
+- **§369.1 SEQUENCING (RAISED-1 accepted):** RR-1 is BLOCKED behind the OSR9 mint's
+  C2 — the shrink re-freeze is mechanically impossible pre-mint and the two packets
+  share the walker-figure path. RR-1 dispatches post-mint, split promotion.
+- **§369.2 OWNER DOCKET (+1, RAISED-2):** the viewModelBodySlices SPECULATIVE-ALIAS
+  HABITAT — ~30 unruled alias arms in one slice file, several (servicesOffered
+  among them) also writerless; culling never-fed print surfaces is the owner's
+  carve-out. A read-only habitat MEASUREMENT (which arms are writerless, per the
+  genesis-walk method) is QUEUED so the ruling lands over measured rows.
+- **§369.3 RAISED-3 ESCALATED — INV-DESC DISPATCHED on the freed seat:** the editor
+  admits institution `desc` while the PDF slice reads `description`/`blurb` — the
+  estate's most-bitten class (a write that ghosts on another path) on a user-facing
+  surface. Diagnosis lane: full lifecycle trace (write/read-every-consumer/persist/
+  regen/undo/import), the decisive executed probe, and the sibling census of
+  reader-vs-writer key agreement across ALL editable fields. Findings only; the
+  cure charters separately; anything persistence-shaped comes back owner-marked.
