@@ -265,7 +265,11 @@ describe('reader-with-no-writer ratchet: the frozen inventory', () => {
     expect({
       reads: persistedTags.reduce((sum, row) => sum + row.count, 0),
       addresses: persistedTags.length,
-    }).toEqual({ reads: 44, addresses: 31 });
+    }).toEqual({ reads: 60, addresses: 40 });
+    // ⚠ THE PER-IDENTITY MAP IS THE POINT, NOT THE TOTAL. 60/40 is the same
+    // arithmetic as 44/31 plus 16/9, and a total alone cannot tell a bank that
+    // grew by the four declared eventLog identities from one that grew by four
+    // of anything else. The schema-9 mint's whole ruling is WHICH rows joined.
     expect(Object.fromEntries(EXPLAINED_WRITER_EXEMPTIONS.map(({ identity }) => {
       const matches = persistedTags.filter((row) => row.identity === identity);
       return [identity, {
@@ -277,7 +281,21 @@ describe('reader-with-no-writer ratchet: the frozen inventory', () => {
       'neighbourNetwork on settlement': { reads: 36, addresses: 24 },
       'stresses on settlement': { reads: 4, addresses: 3 },
       'worldPulse on campaignState': { reads: 2, addresses: 2 },
+      'appliedAt on eventLog': { reads: 1, addresses: 1 },
+      'deltas on eventLog': { reads: 2, addresses: 1 },
+      'event on eventLog': { reads: 9, addresses: 4 },
+      'narrativeSummary on eventLog': { reads: 4, addresses: 3 },
     });
+    // ⭐ THE SCHEMA-9 GENESIS STAMPED ONE REASON ONTO ALL FOUR NEW ROWS AND LEFT
+    // THE FOUR OLDER ONES ALONE. `assertExplainedWriterTagTransition` then makes a
+    // reason unchangeable without numeric growth, so genesis is the only moment
+    // the string is writable and this is the only place it can be checked against
+    // the rows it actually landed on.
+    const eventLogTags = persistedTags.filter(({ identity }) => identity.endsWith(' on eventLog'));
+    expect(eventLogTags).toHaveLength(9);
+    expect([...new Set(eventLogTags
+      .map(({ file, identity }) => baseline.rowTags[file][identity].reason))])
+      .toEqual(['CR-OSR-SCHEMA-9 / M9 — ODQ §346.1 Ruling-B eventLog precedent']);
     const rows = Object.entries(baseline.inventory);
     expect(rows.length).toBeGreaterThan(0);
     // Every row is an identity map, never a bare count. This is the pin that
@@ -591,7 +609,7 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       + '.toLocaleString read onto an OBSERVED shape — TRIAGE the row, do not widen or relax this\n'
       + 'pin. The 22 surviving reads across 21 files are all on non-observed receivers.',
     ).toBe(0);
-    expect(live.explainedWriters.banked).toBe(44);
+    expect(live.explainedWriters.banked).toBe(60);
     expect(Object.entries(corpus.shapes)
       .filter(([, shape]) => shape.keys.includes('source'))
       .map(([name]) => name)).toEqual([
@@ -627,11 +645,39 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // The explained-writer set is EXACT, because it is the one filter whose
     // membership is hand-declared rather than derived from a rule.
     expect([...live.explainedWriters.bankedIdentities].sort()).toEqual([
+      'appliedAt on eventLog',
+      'deltas on eventLog',
+      'event on eventLog',
       'factions on locks',
+      'narrativeSummary on eventLog',
       'neighbourNetwork on settlement',
       'stresses on settlement',
       'worldPulse on campaignState',
     ]);
+    // ⚠ AND THE OTHER eventLog IDENTITIES STAY UNBANKED — §346.1 banked four and
+    // left the rest RECORDED-EXPLAINED. Both halves are anchored, because a bare
+    // exclusion is true just as happily when the whole cohort drifted out of the
+    // estate as when gate 0 correctly refused it.
+    const liveEventLog = [...new Set(live.findings
+      .map((finding) => identityOf(finding))
+      .filter((identity) => identity.endsWith(' on eventLog')))];
+    const bankedEventLog = live.explainedWriters.bankedIdentities
+      .filter((identity) => identity.endsWith(' on eventLog'));
+    expect(bankedEventLog).toHaveLength(4);
+    expect(liveEventLog.length).toBeGreaterThan(bankedEventLog.length);
+    for (const refused of ['type on eventLog', 'targetId on eventLog']) {
+      // POSITIVE first: the refusal is a RULING about a read that is still live,
+      // not an observation that the read went away. Both survive in the estate, on
+      // the inner Event's own (correct) home.
+      expect(liveEventLog, `${refused} left the estate — the exclusion below is vacuous`)
+        .toContain(refused);
+      // …and excluded from the BANK, anchored on a sibling travelling the SAME
+      // filter on the SAME shape, so an emptied bank reds on the anchor instead.
+      expectAbsentWithAnchor(
+        bankedEventLog, refused, 'event on eventLog',
+        `gate 0 refuses ${refused} on applyEvent.js — it reads the inner Event`,
+      );
+    }
     // M11 names the receiver it fired on, so a filter that started matching
     // something other than a host global would be visible rather than merely
     // arithmetically larger.
@@ -666,7 +712,12 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       files: Object.keys(liveInventory).length,
       bankedReads: taggedAddresses.reduce((sum, row) => sum + row.count, 0),
       taggedRows: taggedAddresses.length,
-    }).toEqual({ reads: 1998, identities: 1412, files: 387, bankedReads: 44, taggedRows: 31 });
+    // ⚠ THE INVENTORY TRIPLE IS UNCHANGED ACROSS THE SCHEMA-9 MINT, AND THAT IS
+    // THE CLAIM RATHER THAN AN ACCIDENT: M8/M9 BANKS rows, it does not clear them,
+    // so a bank that grew by 16 reads must leave 1998/1412/387 exactly where it
+    // was. A triple that moves in the same commit as a bank growth means the
+    // filter stopped banking and started clearing.
+    }).toEqual({ reads: 1998, identities: 1412, files: 387, bankedReads: 60, taggedRows: 40 });
     expect(Object.fromEntries(EXPLAINED_WRITER_EXEMPTIONS.map(({ identity }) => {
       const rows = taggedAddresses.filter((row) => row.identity === identity);
       return [identity, {
@@ -678,13 +729,17 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       'neighbourNetwork on settlement': { reads: 36, addresses: 24 },
       'stresses on settlement': { reads: 4, addresses: 3 },
       'worldPulse on campaignState': { reads: 2, addresses: 2 },
+      'appliedAt on eventLog': { reads: 1, addresses: 1 },
+      'deltas on eventLog': { reads: 2, addresses: 1 },
+      'event on eventLog': { reads: 9, addresses: 4 },
+      'narrativeSummary on eventLog': { reads: 4, addresses: 3 },
     });
 
     // A7 guard mutant: the retired clear-outright behavior loses exactly the
     // bank and therefore cannot satisfy the live count asserted above.
     const bankedIdentities = new Set(live.explainedWriters.bankedIdentities);
     const clearOutright = live.findings.filter((finding) => !bankedIdentities.has(identityOf(finding)));
-    expect(clearOutright).toHaveLength(live.findings.length - 44);
+    expect(clearOutright).toHaveLength(live.findings.length - 60);
     expect(inventoryOf(clearOutright)).not.toEqual(liveInventory);
   });
 
