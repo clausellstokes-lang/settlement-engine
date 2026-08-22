@@ -14274,3 +14274,21 @@ recommended. Implementation, per item:
   (128 findings, 34 true positives, triaged 08-15), verifying each is still open at
   both tips after today's six landings. The chair rules on its report; any cures the
   rulings order become post-stop packets.
+
+## §336 — THE OWNER'S BLANKET GRANT INTERPRETED; THE DELEGATED DECISION SITTING CHARTERED (2026-08-21 ~22:00)
+
+- **Owner in-chat: "I give permissions if that is what you're asking for."** Chair
+  interpretation, stated vetoably: this converts the §187/§317.1 batch's
+  PREFERENCE-SHAPED items into chair rulings (consent-default split, retention,
+  naming, community, import-vs-restore, scale-bar unit name, OB-5's declared-shift
+  fix, the MF gate recs, referral-loop wiring, the sim_address_chain rider, the OSR
+  re-governance option, §320.3's disclosure). It does NOT transfer the by-nature
+  carve-outs or fact-dependent items, which STAY OWNER: lens entitlement
+  (paid-surface), cull, the support-email mailbox (a fact only the owner has), ci-1c
+  (the owner's CI log), every licence election (§295/§323.3 legal), tuning signature,
+  every push, and the V5 §119 post-tune slot (not pulled forward by a general grant).
+- **§336.1 THE DELEGATED DECISION SITTING IS CHARTERED** as the chair's next act
+  after the §290 review stop opens (or during the soak window as capacity allows):
+  rule each delegable §187 item from its per-item source rows, each ruling vetoable,
+  recorded in one sitting row; the lost sitting document is reconstructed from §187 +
+  source rows in the same act (the §317.2 evidence-loss cure).
