@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~14:00 ET: OWNER DIRECTIVE (§360) — the atlas research feeds the dossier
+# prose: CONTENT TRAIN chartered (TC-DOSSIER queued at next free seat; four
+# binding laws stated: clerk-never-writer, only-explain-what-the-engine-
+# knows, setting-agnostic mechanisms, instruments bind).
 # ⭐⭐ ~13:40 ET: THE DELEGATED SITTING EXECUTED (§359) — 11 rulings (PACES
 # signed; OB-5 FIX chartered; consent split + retention principle; referral
 # + address-chain GO; import-vs-restore opened; OSR item closed-superseded;

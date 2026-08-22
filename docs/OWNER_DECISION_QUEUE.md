@@ -15045,3 +15045,28 @@ its source row. Every ruling is vetoable by a word.
 
 The website train's charter (queue) now carries items 6–10's implementation plus the
 naming recommendation; the engine queue gains OB-5's declared-shift member.
+
+## §360 — OWNER DIRECTIVE: THE ATLAS RESEARCH FEEDS THE DOSSIER PROSE; THE CONTENT TRAIN CHARTERED (2026-08-22 ~14:00)
+
+- **Owner in-chat: the mapmaking research (the European-atlas grounding — why and
+  how settlement forms emerged and evolved) should refine the dossier's generation
+  prose, where appropriate and relevant; comprehensive and cohesive.** Chartered as
+  the CONTENT TRAIN: TC-DOSSIER (compile) joins the dispatch queue at the next free
+  seat; its executor follows the WF-1E/Lane P precedent (corpus amended
+  SOURCE-FIRST with gen:dossier-prose in the same commit; section-sliced pins).
+- **§360.1 THE FOUR LAWS THAT SHAPE IT, stated at charter so no lane rediscovers
+  them:** (1) CLERK-NEVER-WRITER — 'refine prose' means refining the AUTHORED
+  GOVERNED CORPORA generation draws from, never runtime authorship; (2)
+  ONLY-EXPLAIN-WHAT-THE-ENGINE-KNOWS — an atlas mechanism may ground a dossier
+  sentence ONLY where the engine holds the typed fact (wall year, market placement,
+  road hierarchy, ward zoning); mechanisms the engine does not simulate are never
+  asserted as this-town facts; (3) SETTING-AGNOSTIC — the atlas's mechanisms
+  travel, its geography does not (burgage logic yes, 'like Flanders' never); (4)
+  THE INSTRUMENTS BIND — voice-ratchet budgets (the P-3 corpora debt is BANKED and
+  must not deepen), dossier goldens move ONLY under the declared-shift machinery,
+  and the census/pin exposure of the 411-variant estate is priced in the compile.
+- **§360.2 The compile's deliverables:** the mapping (engine typed facts × atlas
+  mechanisms × existing corpus coverage — where refinement is 'appropriate and
+  relevant' becomes a measured list, not a vibe); the register spec (legibility law:
+  glance → sentence; the news address law's explanatory shape); the refined corpus
+  drafts; the golden-movement bill. Chair reviews before any executor.
