@@ -16598,3 +16598,36 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   the §402 C3-signed semantics; migration-free). FOUR ACTIVE: RR-2 · WEB-6 ·
   WEB-1 (packet addendum) · WEB-5. WEB-2/WEB-3 still wait on 197's landing;
   WEB-7 is the next fill.
+
+## §410 — WEB-1's PACKET MINTED; A NEW VALIDATOR LAW BANKED (RETROSPECTIVE MINTS CANNOT ENTER AT DRAFT); THE REBASE CONSEQUENCES MEASURED (2026-08-23 ~02:20)
+
+- **The mint:** new tip 4065b326 (pinned; supersedes e1c08332 as the CAS
+  target) — the WEB-1 packet founds the WEBSITE family under §408's
+  authority; manifest row inserted as text; validate:packets 144/0 READY plus
+  the hook's independent staged check; CLAIM_RE zero.
+- **THE NEW LAW, discovered by the validator's own refusal:** authoring at
+  DRAFT was REJECTED — "retiredSymbols[0].symbol is already absent before
+  DRAFT." A retiredSymbols row is a PROMISE at any non-terminal status (the
+  symbol must still exist) and becomes a CLAIM only at LANDED — so for a
+  member whose work is already complete, DRAFT is not the wrong label, it is
+  INVALID. Retrospective mints enter at the terminal status. Banked to
+  memory; the next retrospective mint will reach for DRAFT by instinct.
+- **Pre-verifying the retirement rows caught the rot class a SECOND time in
+  one member:** privacySettings.test.jsx's file header still described the
+  v2 opt-out default after its bodies were re-pointed — the same
+  stale-header rot cured in consent.js one commit earlier. Fixed, suite
+  10/10, the retirement row honest.
+- **The rebase-slot consequences MEASURED, not assumed** (RR-1 landed under
+  the lane): base still an ancestor; ONE guaranteed conflict —
+  PACKET_MANIFEST.json, same append anchor as RR-1's row (mechanical
+  keep-both to 145, but hand-resolved and re-validated per the
+  merge-destroys-cures law); INDEX clean; census evidence-not-licence
+  (RR-1's test-title delta measured zero — the tuple still re-derives at the
+  post-rebase hash); S0's baseline moved 1998→1996 with frozenAtSha now
+  2f41eb0f — the landing base re-reads, never inherits. The landing-slot
+  terminal re-runs end-to-end at the GO; e1c08332's green stands as the
+  BUILD proof.
+- WEB-1 HOLDS on 4065b326. **§410.1 SEAT:** the addendum's completion frees
+  the seat → **TE-WEB7 dispatched** (the §362.2 elections recording + the
+  OFL licence files; C6-signed inclusion). FOUR ACTIVE: RR-2 · WEB-6 ·
+  WEB-5 · WEB-7.

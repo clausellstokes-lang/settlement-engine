@@ -74,6 +74,12 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~02:20: WEB-1 PACKET MINTED (§410) — tip 4065b326 pinned; NEW LAW:
+# retrospective mints enter at TERMINAL status (validator refused DRAFT —
+# retiredSymbols is a promise pre-LANDED); header-rot caught twice in one
+# member; rebase consequences measured (manifest conflict with RR-1 known,
+# S0 baseline now 1996 @ 2f41eb0f). TE-WEB7 dispatched. FOUR: RR-2 · WEB-6
+# · WEB-5 · WEB-7.
 # ⭐ ~01:40: WEB-4 COLLECTED (§409) — tip 378f9276 pinned; measured shape
 # REFUTED the predicted arity entry (pinned refusal); M2 vacuity caught
 # (internally-consistent fixture = unconvictable resampler); composed build
