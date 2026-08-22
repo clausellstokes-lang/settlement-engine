@@ -5129,7 +5129,51 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   adopted verbatim: a FRESH figure attributed to the WRONG NAME is the failure mode, and
     //   an unchanged key (this member does not move `parked`) is where the mis-attribution
     //   hides, because its assertion PASSES and the loop reads the NEXT key's number.
-    files: 2495, parked: 364, credited: 2131, titles: 20704, suiteTitles: 5783,
+    // ── RE-RECORDED 2026-08-22 BY MF-T2F, CAUSE MEASURED AND DECOMPOSED ────────────
+    // 2,495/364/2,131/20,704/5,783 → 2,497/364/2,133/20,712/5,785. THE CAUSE IS TWO NEW
+    // TEST FILES AND NOTHING ELSE. `censusAuthorization`: ODQ §312 (the D3a port dispatch,
+    // whose §312.1 roster carries the §299.3 obligations as a named track), §365 (the
+    // chair's dispatch of this member's compile) and §371 (the chair's review, which ruled
+    // all seven RAISED items and fixed the two-leaf shape), under the §310.4 wave charter.
+    //   tests/domain/townMapSolidLegality.test.js ............. 7 titles, 1 suite title
+    //   tests/property/townMapSolidLegalityDeterminism.test.js  1 title,  1 suite title
+    // THE DELTA IS DECOMPOSED RATHER THAN ASSERTED, and it closes exactly:
+    //   7 + 1 = 8 titles       (20,704 → 20,712)
+    //   1 + 1 = 2 suite titles ( 5,783 →  5,785)
+    //   2 new files, 2 newly credited, 0 newly parked
+    // PARKED IS UNCHANGED at 364, and that was earned: each file spells every title as a
+    // string literal and every loop runs INSIDE a named test (the SP-D idiom), so door 3's
+    // reader recognises all of them statically and credits both files. No rule here widened
+    // or narrowed and NO existing file changed shape — this member modifies zero existing
+    // production files, and its two new leaves (fabric/exactIntersectionArea.js and
+    // fabric/solidLegality.js) and its packet document are not test files, so none of them
+    // reaches this census.
+    // ⚠⚠ BOTH ENDS RE-DERIVED AT THE POST-MINT BASE (42e12a76), AND THE CARRY WOULD HAVE
+    //   BEEN WRONG. This member was built and fully proven at a09138d7, where the measured
+    //   ends were 2,494/364/2,130/20,684/5,782 → 2,496/364/2,132/20,692/5,784. WF-8A then
+    //   landed one new test file carrying TWENTY titles, and the OSR mint landed on top. The
+    //   BASE arm was re-proven by running this walker BARE in a pristine worktree at
+    //   42e12a76, where it passed 33/33 — which is what says WF-8A and the mint left the
+    //   census consistent — and only then was the AFTER arm convicted afresh. ⭐ Carrying the
+    //   earlier AFTER tuple would have published `titles: 20,692` against a true 20,712: off
+    //   by exactly WF-8A's twenty, and off in the one figure a reader is least likely to
+    //   recompute by hand. Four of the five figures would still have been self-consistent.
+    // ⚠⚠ THE SENTINEL WALK HAD TO BE CUMULATIVE, AND THE OBVIOUS INSTRUMENT READS NOTHING.
+    //   This census is SEQUENCED: `files` is asserted first, so with a stale tuple in place
+    //   EVERY run reds on `files` and the other four assertions are never evaluated at all.
+    //   A one-key-per-run sentinel sweep therefore produced a figure for `files` and the
+    //   literal absence of a message for the rest — which this lane ABORTED on rather than
+    //   reading a number off a different assertion. The walk was rebuilt cumulatively: each
+    //   already-convicted key restored to its measured value so the NEXT key could be
+    //   reached, exactly one -1 in the line at a time, this file rebuilt from its pristine
+    //   `git show` bytes before every run and byte-restored with `cmp` after the last.
+    // ⭐ THE PAIR OF LESSONS, NOW COMPLETE. MF-T2E recorded the first half: a FRESH figure
+    //   attributed to the WRONG NAME, because an unchanged key's assertion passes and a
+    //   positional loop reads the next key's number. This is the second half: in a sequenced
+    //   census the naive sentinel does not mis-attribute, it reads NOTHING — and silence is
+    //   the safer failure only if the instrument is built to abort on it rather than fall
+    //   back to whatever number happens to be on screen.
+    files: 2497, parked: 364, credited: 2133, titles: 20712, suiteTitles: 5785,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
