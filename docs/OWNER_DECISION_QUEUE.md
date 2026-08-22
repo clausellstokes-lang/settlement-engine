@@ -15904,3 +15904,32 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
 - Window law unchanged: T2Bf HOLDS; landing order mint → RR-1 → RR-2 → the
   builds in GO order. Two of four seats now free (T2Bf, CT-2 done-and-holding);
   refill per §388 is the next seat question.
+
+## §391 — THE TWO FREED SEATS REFILLED PER §388: TE-CT3 AND TE-T2H DISPATCHED, BOTH STACKED (2026-08-22 ~18:25)
+
+- **The §388 seat question asked at the T2Bf collection, answered without waiting
+  for a wakeup:** two lanes done-and-holding freed two seats; the two
+  highest-value ready cars took them. FOUR ACTIVE AGAIN: OSR-10 (mint, window
+  holder) · H8B (building) · CT-3 · T2H.
+- **TE-CT3 dispatched** — the institutions chapter (DS-GEN-17 the civic-character
+  roster, DS-GEN-18 the workshop-feed reasons, DS-FTH-4 the temple's tenure),
+  chair-reviewed and APPROVED from the TC-DOSSIER-2 draft with two binding
+  formalization notes: state-key derivers must resolve TOTALLY and
+  DETERMINISTICALLY with a stated precedence where keys co-fire; the eight-case
+  cap confirmed at 5/4/4 keys per block. OB-5 siting boundary, deity doctrine,
+  and the WF-8A FALL_SENTENCE disjointness all re-verified at the executor's own
+  tip. STACKED on CT-2's holding 5941093f (same corpus doc and leaves); carries
+  the §389/§389.1 envelope law verbatim — bare gate script both sides, expect
+  exit 1 both, break-recorded packet §12, leaf digests at frozen/base/member.
+- **TE-T2H dispatched** — the spatial-receipt seam (§287.4, D3a member 7):
+  spatialReceipt.js + fabricRng.js, ≈220 of 400 eff, census +2/0/+2/+6/+2, the
+  three unrepresentable rules and the named-field-roster digest as the design
+  core. STACKED on T2Bf's holding 7d6bde7c because the port REQUIRES the cured
+  separator encoding (§372). Carries the three §390 charters: the dep-join
+  injectivity cure IN THE PORT with an executed collision witness; the
+  ABI-version trigger determined-and-recorded (expected: no persistence, version
+  holds at 1); the control-byte lesson (sealed U+001F re-spelled as escapes with
+  output-equivalence digest proof, never a ratchet widening).
+- Both lanes hold for GO; the landing order is unchanged: mint → RR-1 → RR-2 →
+  T2Bf → CT-2 → H8B/CT-3/T2H in GO order. Stacked lanes re-stamp at their slots
+  per the rebase-slot laws.

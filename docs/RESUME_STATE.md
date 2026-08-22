@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~18:25: SEATS REFILLED (§391) — TE-CT3 (stacked on CT-2 5941093f; draft
+# chair-approved + 2 formalization notes) and TE-T2H (stacked on T2Bf 7d6bde7c;
+# carries the three §390 charters). FOUR ACTIVE: OSR-10 mint · H8B · CT-3 · T2H.
+# Landing order: mint → RR-1 → RR-2 → T2Bf → CT-2 → H8B/CT-3/T2H in GO order.
 # ⭐ ~18:05: T2Bf COLLECTED (§390) — tip 7d6bde7c, full gate exit 0, holds
 # for GO after RR-2. J-TET2BF-1 ratified (the u001f ESCAPE; ratchet unmoved).
 # T2H's brief now OWES: the dep-join injectivity cure + the ABI-version
