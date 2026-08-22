@@ -14292,3 +14292,23 @@ recommended. Implementation, per item:
   rule each delegable §187 item from its per-item source rows, each ruling vetoable,
   recorded in one sitting row; the lost sitting document is reconstructed from §187 +
   source rows in the same act (the §317.2 evidence-loss cure).
+
+## §337 — OWNER DIRECTIVE: IMPLEMENTATION DOES NOT WAIT ON THE SOAK; BOTH EXECUTORS DISPATCHED (2026-08-21 ~22:10)
+
+- **Owner in-chat: "Don't stop another implementation for the simulator behind a soak
+  gate. Keep going and do both simultaneously."** The §332.4/§334.5 hold — which
+  coupled the next landings to RS-5's closing collection — is DISSOLVED by owner
+  order. The soak is evidence-gathering and runs in parallel with building; it gates
+  nothing.
+- **§337.1 DISPATCHED SIMULTANEOUSLY on f5332cf7:** TE-WF1E (the FaithSection
+  cause-chain member; its DRAFT gate already lifted by the §333.2 Q4 ruling) and
+  TE-T2D (the boundary noder; §334 rulings binding). Both run their builds and
+  focused proofs alongside RS-5. UNCHANGED LAWS: one full gate at a time — each lane
+  sends the terminal heads-up and WAITS for the chair's explicit GO (the chair pauses
+  the soak PID-exactly per gate, resumes after); serialized CAS slots
+  (first-green lands first, the other rebases slot-aware); §325.2
+  placeholder-and-convict at the executor tip, never carry a tuple.
+- **§337.2 The review stop repositions to its ORIGINAL §290 place** (after the parity
+  slice) rather than the chair's convenience boundary at the soak's collection. The
+  /code-review ultra recommendation STANDS as an owner keystroke at any quiet
+  boundary they choose — the branch is review-ready at every CAS.

@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~22:10 ET: OWNER ORDER (§337) — the soak gates NOTHING; TE-WF1E +
+# TE-T2D DISPATCHED simultaneously on f5332cf7, builds parallel with RS-5.
+# One full gate at a time (heads-up → chair pauses soak → GO); first-green
+# CASes first, the other rebases. Review stop back at its original §290
+# post-parity place; ultra = owner keystroke at any boundary.
 # ⭐ ~22:00 ET: OWNER GRANT interpreted (§336) — delegable §187 items become
 # chair rulings (sitting chartered); by-nature + fact items stay owner (email
 # mailbox, lens, cull, licences, tuning, pushes, V5 slot). Sequence table
