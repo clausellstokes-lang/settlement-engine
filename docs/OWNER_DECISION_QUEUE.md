@@ -15103,3 +15103,39 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   ~10–18 lane-hours; CT-1b/4/5 ≈ 3 cars, ~8–14 lane-hours later. The train's
   proof shape follows WF-1E's Lane P precedent (source-first corpus + generator in
   one commit; section-sliced agreement pins on both sides).
+
+## §362 — THE SIGNATURE GRANT APPLIED: THREE SIGNATURES LAND; THE NON-SIGNATURE ITEMS NAMED PLAINLY; ONE REGISTER CORRECTION (2026-08-22 ~15:00)
+
+- **Owner in-chat: "for everything that requires just my signature, I give it."**
+  Applied with the boundary a signature demands: it attaches only to a DRAFTED
+  thing. Three land now:
+- **§362.1 SIGNED — MF-0F's declared same-seed shift** (§162.4's queued gate; the
+  one-key proof banked per §187). The signature attaches to the shift AS SPECCED;
+  it executes inside the member that lands it, carrying the §110.3 three-part
+  declared-shift proof at landing.
+- **§362.2 SIGNED — the two dual-licence elections** (§323.3): dompurify 3.4.12
+  elects Apache-2.0; rgbcolor 1.0.1 elects MIT — following the owner's OWN §295
+  precedent (the permissive-standard election made for jszip and touch-punch).
+  The notices surface records both at its next touched landing. (The TinyMCE/GPL
+  question is NOT this class — it needs a disposition and counsel, not a
+  signature, and stays owner/counsel.)
+- **§362.3 SIGNED-AS-RECOMMENDED — the LENS_COUNT entitlement act** (§162.4). The
+  recommendation's full text lived in the lost §187 document; the signature
+  attaches to the act AS RECOMMENDED IN ITS SOURCE ROWS, with the implementing
+  member required to QUOTE the reconstructed recommendation at landing — a
+  material deviation from it returns to the owner. MF-D5's persisted-signal shape
+  (the third §162.4 gate) upgrades likewise: signed-as-recommended, §359.5's
+  build-time chair review still applying mechanically.
+- **§362.4 NOT COVERED, stated plainly:** the TUNING signature — constitutionally
+  attached to reviewing RESULTS (the Promise: pre-signing unseen same-seed world
+  changes would gut the law it exists to enforce) · every COPY item (beat copy,
+  FALL_SENTENCE walk, the disclosure wording, 'campaign' naming) — a signature on
+  words requires the words before the eyes · the FACTS (the support mailbox, the
+  CI log) · the ACTS (push, merge, deploy, the IP scrub, the three V5 regen
+  prompts) · the LEGAL DISPOSITIONS (TinyMCE/GPL; founder transfers) · the §67.6
+  21-row cull, which rides its existing mechanism (listed in the first PR's body
+  where its rows are visible).
+- **§362.5 REGISTER CORRECTION:** the V5 asset cull (KEEP-5/CUT-5/HOLD-2) was
+  ALREADY EXECUTED 2026-08-06 — the §-earlier deferral register overstated it as
+  pending; the remaining V5 owner items are the three regeneration prompts and
+  the post-tune sitting only.
