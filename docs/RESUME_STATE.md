@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~17:00 ET: WAKEUP RETUNED (§366) — 20-min recurring (:13/:33/:53), the
+# §347 refill program IN the prompt (seats/stalls/ledger/groom, act-not-
+# report). ⚠ Session-local, 7-day expiry: A SUCCESSOR RE-CREATES IT FIRST
+# (CronCreate; prompt text in §366).
 # ⭐ ~16:40 ET: OWNER CHALLENGE #4 (§365) — the D3a port train STARTS:
 # TC-T2F dispatched (member F + the carried float-volume cure). SEAT LAW
 # corrected: parked lanes don't occupy seats; four ACTIVE = T2E gate ·

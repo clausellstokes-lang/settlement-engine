@@ -15223,3 +15223,19 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   and the lane said so in its receipt rather than dropping it quietly. Its gate is
   running on independently re-verified quiet (load 3.62; slot free; no prior
   quiet-gate log — corroborating that the first GO never arrived).
+
+## §366 — OWNER ORDER: THE SCHEDULER TIED TO THE WAKEUP; CADENCE 30 → 20 MINUTES (2026-08-22 ~17:00)
+
+- **Owner in-chat: tie the §347 lane-refill program to the wakeup, and change the
+  wakeup to every 20 minutes.** EXECUTED: the old wakeup (which had decayed to a
+  one-shot) is deleted; a recurring 20-minute cadence job is live (fires at
+  :13/:33/:53 to stay off the crowd marks), its prompt CARRYING the program — four
+  checks, act-not-report: (1) SEAT REFILL per §347.1/§365.1 (parked ≠ active; the
+  queue head takes any free active seat; the three invariants + the §353 mint-window
+  block); (2) STALL DETECTION incl. the raced-GO class (a GO >20 min old with no
+  gate log started is re-verified by the lane's self-named logs and re-sent); (3)
+  LEDGER currency (owed collections executed, not noted); (4) QUEUE GROOMING. An
+  all-clear is one line, never manufactured work.
+- **§366.1 Mechanics noted for the successor:** the job is session-local and
+  auto-expires in 7 days — the seamless-resume note carries the re-arm instruction;
+  a successor re-creates it as its first act if absent.
