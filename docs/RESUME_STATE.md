@@ -74,6 +74,12 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐⭐ ~20:20: CT-3 LANDED (§432, 25th) + THE §355 HUNT CLOSED — the
+# contamination hypothesis UNSUPPORTED (the instrument manufactured the
+# specimen: path-derived statistic × the hunt's own TMPDIR; sentinel-vs-
+# regressions non-comparability; corrected ratchet CLEAN at ordinary load).
+# Tolerance micro-fix + worker-cap experiment chartered; TMPDIR hygiene =
+# standing order. T2M hold LIFTED; T2H GO issued. Cascade rolls.
 # ⭐ ~19:00: UNDERCITY STARTED (§431, owner order) — TC-UNDERCITY compiling
 # (§311 doctrine → cars; OB-6 folded; OB-7 revisit; CT-4 fact contract;
 # declared-shift vs golden-inert split briefed). Hunt run 4 in final legs.

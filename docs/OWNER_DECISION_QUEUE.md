@@ -17385,3 +17385,42 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   vitest from the lane.
 - Seats: the hunt (deciding run, final legs) · TC-UNDERCITY. The producers
   ruling remains queued behind the hunt verdict.
+
+## §432 — CT-3 IS LANDED (THE 25TH LANDING) AND THE §355 HUNT IS CLOSED: THE VARYING-CAST CONTAMINATION HYPOTHESIS IS UNSUPPORTED — THE SPECIMEN WAS THE INSTRUMENT (2026-08-23 ~20:20)
+
+- **THE CAS EXECUTED:** claude/composite-r4 moved ec8f3359 → b10ed1a1 on
+  HUNT2_TRUE_EXIT=0 with tail agreement — the banked eleven EXACT, strict
+  dist zero-defect, at ORDINARY load (17-82, deliberately not a quiet box).
+  The institutions chapter is on the branch; both stale pins deleted
+  (holding-ct3's pre-rebase trap and t2h's superseded first pin). T2M's
+  vitest hold LIFTED; T2H's GO issued with the slot pattern plus the new
+  TMPDIR hygiene order.
+- **THE HUNT'S VERDICT, three findings, all executed:**
+  **A — THE INSTRUMENT MANUFACTURED THE SPECIMEN.** readerShapeResolver's
+  scan writes its probe under tmpdir() and maxReadTokenLength is
+  PATH-DERIVED: the three-arm control (48-char pass / 132-char fail-301 /
+  19-char pass) reproduced run 3's 301 and run 2's 300
+  character-for-character — the hunt's own long lane TMPDIR was the
+  reproducible stray. **B — THE DISJOINT-SETS INFERENCE COMPARED
+  NON-COMPARABLE OUTPUTS:** the scope sentinel fires INSTEAD OF the
+  regressions list, so run 1's report and run 2's were different document
+  kinds; the §355 stop was right on the evidence held — the evidence was
+  malformed two ways at once. **C — CORRECTED, THE RATCHET IS CLEAN:** the
+  genuine phenomena reduce to the load-starved distributionEnvelopes hook
+  (the box-saturation canary; the gate self-saturates to load ~70-110 with
+  its own ten workers) and prngSeedEntropy's measured ~0.072% birthday
+  odds. NEITHER reproduced. **The estate's oldest ghost dissolves.**
+- **RULINGS FROM THE DOCKET:** (1) prngSeedEntropy's TOLERANCE cure
+  (size >= length-2; a real collapse sits three orders below the
+  threshold) ADOPTED AS A CHARTERED MICRO-FIX riding the next housekeeping
+  car — never edited unilaterally; the seed shape untouched
+  (constitutional). (2) THE WORKER-CAP EXPERIMENT chartered: one timed
+  capped-worker gate at a free moment prices Finding 0's cure (the gate's
+  self-saturation may be the whole timeout class). (3) THE METHOD LAWS
+  BANKED: "quiet" is MEASURED LOAD with ps -r attribution (process counts
+  lied three ways); a LONG TMPDIR is a test-statistic hazard (every
+  terminal brief now carries the short-TMPDIR order); a sentinel report
+  and a regressions list are DIFFERENT DOCUMENTS — never compare across
+  kinds. 234 hunt artifacts preserved.
+- The cascade resumes: T2H landing → the website cars → T2J → T2K → T2L →
+  T2M. The producers ruling is the chair's next act.
