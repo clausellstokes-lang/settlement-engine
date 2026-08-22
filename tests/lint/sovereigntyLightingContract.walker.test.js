@@ -5482,7 +5482,43 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   live: each position's figure is arithmetic at its rebase stop and the SUM is convicted
     //   once at the stack tip, with the negative control (the slot's own tuple put back) redding
     //   at `files` by exactly the summed delta.
-    files: 2502, parked: 365, credited: 2137, titles: 20762, suiteTitles: 5794,
+    // ── RE-RECORDED 2026-08-22 BY MF-T2K (support-relative solids and component slots), CAUSE ──
+    // 2501/364/2137/20731/5789 → 2502/364/2138/20737/5790. THE CAUSE IS ONE NEW TEST FILE and
+    // nothing else: the member lands one dormant fabric leaf, `fabric/supportSurface.js`, and the
+    // single acceptance file that checks it.
+    //   tests/domain/townMapSupportSurface.test.js .... +1 file, +6 titles, +1 suite title
+    // No rule here widened or narrowed and no existing file changed shape. PARKED IS UNCHANGED at
+    // 364, and it was EARNED rather than lucky: the file is ONE literal `describe` with six
+    // straight-line `test` calls and string-literal titles, so door 3's reader recognises all six
+    // statically and credits the file. Its one loop — over the closed kind vocabulary, proving the
+    // kind-to-token table total — runs INSIDE a named test, the SP-D idiom this family's own
+    // walkers already follow. The arithmetic closes: 364 + 2138 = 2502.
+    // `censusAuthorization`: ODQ §276 (the build sheet that architects the §275 adoptions) ·
+    // ODQ §304.4 (the D3a port charter, twin-life bounded) · ODQ §310.4 (the wave charter) ·
+    // ODQ §417.1 (this member's compile dispatch) — under §299.4's binding-forward rule.
+    // The family's stamp is GRANTED at ODQ §312.2b.
+    // ⛔ ATTRIBUTED BY ISOLATION, NOT BY ARITHMETIC, at THIS base. With the walker pinned at the
+    //   after tuple, hiding townMapSupportSurface.test.js alone convicted `files` at 2501 — the
+    //   base tuple EXACTLY, which is also the proof that nothing else in the tree moved this
+    //   census under the lane. Each figure was read from the arm's own failure message.
+    // ⚠ THE SEQUENCED WALK WAS RUN RATHER THAN SHORT-CIRCUITED. `files` reds first and blacks out
+    //   the four arms below it, so the tuple was re-derived one figure at a time: `files` 2502,
+    //   then `parked` PASSED at 364 without ever redding, then `credited` 2138, then `titles`
+    //   20737, then `suiteTitles` 5790, then GREEN at 33/33.
+    // ⚠ THE CARRY LAW. This member is STACKED on MF-T2J's unlanded holding commit, which is itself
+    //   stacked on MF-T2H's and MF-T2Bf's, and it will be rebased at its landing slot. The DELTA
+    //   (+1/+0/+1/+6/+1) is what crosses; the tuple above is re-derived from the hash after the
+    //   last edit at that slot, never carried.
+    // ⭐⭐ THE CARRY LAW, EXECUTED AT THE LANDING SLOT — THE MAP STACK (ODQ §461.2), member TWO.
+    //   This member was authored at base f7ba3145 (MF-T2J's holding; after-figure
+    //   2,502/364/2,138/20,737/5,790) and rebased onto the rebased MF-T2J tip over 11539636
+    //   (WEB-7, the 31st landing). The DELTA `+1/+0/+1/+6/+1` is what crossed; the tuple was
+    //   RE-DERIVED at the stack tip by execution, never carried. ⛔ THE BASE HAD MOVED UNDER IT by
+    //   the same six landings MF-T2J's paragraph names (+1 file/+1 parked/+0 credited/+31
+    //   titles/+5 suite titles between 05e7f9d5 and the slot), so this member's POSITION in the
+    //   chain re-derives to 2,503/365/2,138/20,768/5,795. Only the LAST tuple line below is live;
+    //   the SUM is convicted once at the stack tip.
+    files: 2503, parked: 365, credited: 2138, titles: 20768, suiteTitles: 5795,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

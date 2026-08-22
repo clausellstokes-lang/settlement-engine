@@ -67,6 +67,14 @@ const CODEX_SLICE_MODULES = Object.freeze([
   'foundation.js', 'frontage.js', 'index.js', 'massPart.js', 'massingProjection.js',
   'massingRoster.js', 'operations.js', 'parcelRegistry.js', 'projection.js',
   'settlementFoundation.js', 'shapes.js', 'streetGeometry.js', 'streetGraph.js',
+  // ⭐ MF-T2K, appended in alphabetical position — exactly the act the failure message above
+  // orders for a landed module the record does not assign. THE WHY (packet §1.8): the leaf is a
+  // D3a design-implementation mint, not a sandbox module, so `nodeOfModule()` rightly resolves it
+  // to no node and the record's 49-module lead is untouched. `FOUNDATION_READERS` is unmoved
+  // because the leaf imports exactly `foundation.js` and `massPart.js`, neither of which this
+  // roster tracks. ⚠ The constant's NAME reads "codex" and this module is not codex — RAISED for
+  // a later rename or a third roster, never silently absorbed.
+  'supportSurface.js',
 ]);
 
 /**
