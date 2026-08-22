@@ -8975,7 +8975,7 @@ Shared spine (cited once, applies to every event-verb row below):
 - maturity: built
 - status: CONFIRMED
 - evidence: userEdits.js:1-42,52-118, settlementSlice.js:87-92
-- notes/gaps: ⚠️ **regen-edit-loss applies here and is stated in the module's own header** (:36-40): "only the NPC reroll has a preservation tail. An edited institution, faction, or history beat is still replaced wholesale by its own regenerate path." So an authored institution description is destroyed by a section regen while the edit record promises canon/locked status — a displayed-promise/actual-behaviour mismatch on an economy entity.
+- notes/gaps: ⚠️ **REFUTED AND CORRECTED (§385.2).** This row rested on a `userEdits.js` header sentence — "only the NPC reroll has a preservation tail. An edited institution, faction, or history beat is still replaced wholesale by its own regenerate path" — that has since been retired from the module as false. `settlementSlice.regenSection` has exactly TWO branches, `npcs` and `history`, so there is no institution section reroll for an authored description to be destroyed by: institution prose is not section-rerolled at all. The displayed-promise/actual-behaviour mismatch asserted here does not hold at the stated mechanism. Whether a FULL regenerate (which rebuilds the whole settlement) discards authored institution prose is a separate and still-unexecuted question — see the not-verified notes later in this file.
 
 ### [added-by-verifier] Workbench Entity Inspector — the institution card (flag-gated)
 - class: influenceable (read surface; zero economy verbs)
@@ -9082,7 +9082,7 @@ Shared spine (cited once, applies to every event-verb row below):
 
 9. **[added-by-verifier] no-provenance + no-per-item-undo — the 15-op toggle surface.** Every `toggleSlice` operation is registered (`operationRegistry` :242-256) with `receiptRef:null, undoToken:null`, and the bags are store-GLOBAL (`targetScope:'global'`), not save-scoped. Configuring institutions/services/goods for one settlement silently shapes the next generation, with bulk reset as the only recovery. Same class as Gap 3, one order of magnitude wider. CONFIRMED as-coded; whether global scope is intended is an owner call.
 
-10. **[added-by-verifier] promise/behaviour mismatch — authored institution prose does not survive regeneration.** `userEdits.js` sets `_authored: true`, which `canonStatus.js` promotes to `source:'user'`, `canonStatus:'canon'`, `locked:true` — but the module's own header (:36-40) records that only the NPC reroll has a preservation tail, so an edited institution description is replaced wholesale by its regenerate path. Instance of the known regen-edit-loss class, landing on an economy-family entity. CONFIRMED from the module's own documented scope note; the destructive path itself was not executed this session, so the *behaviour* is PLAUSIBLE-per-doc rather than executed-CONFIRMED.
+10. **[added-by-verifier] ~~promise/behaviour mismatch — authored institution prose does not survive regeneration.~~ REFUTED AT ITS STATED MECHANISM (§385.2).** The finding read: `userEdits.js` sets `_authored: true`, which `canonStatus.js` promotes to `source:'user'`, `canonStatus:'canon'`, `locked:true` — but the module's own header (:36-40) records that only the NPC reroll has a preservation tail, so an edited institution description is replaced wholesale by its regenerate path. That header sentence was the finding's whole evidentiary base, it self-labelled PLAUSIBLE-per-doc, and it has now been retired from `userEdits.js` as false: `settlementSlice.regenSection` has exactly TWO branches, `npcs` and `history`, so no institution section reroll exists to replace anything. The finding is therefore withdrawn as stated. What survives it is narrower and is NOT an instance of the regen-edit-loss class on institutions: authored history ENTRIES (historicalEvent / currentTension rows) do not survive `regenSection('history')`, which is owner-parked for want of an identity scheme. Whether a FULL regenerate discards authored institution prose was never executed and remains open.
 
 11a. **[added-by-verifier, 2nd pass] dead branch behind a live handler — a DM IMPAIR can never break a food anchor.** `mutateEntities.js:258-260` gates the `food_anchor_lost` rise on `severity >= 0.6 && type === 'capacity'`, but `EventComposer.jsx:129-132` hard-codes `dimension = 'legitimacy'` for every IMPAIR_INSTITUTION (severity 0.7), deliberately hiding both from the DM. So the branch is reachable only from REMOVE_INSTITUTION (which hard-codes 0.7 capacity) and the folded, unauthorable DAMAGE_INSTITUTION. Either the composer needs a dimension choice ("close the mill" vs "disgrace the mill") or the capacity branch should be documented as remove-only. CONFIRMED by reading both sides. This is also a legibility gap in the opposite direction from Gap 7: the verb's LABEL ("Impair institution") promises a general weakening; the code delivers exactly one axis.
 
@@ -10664,7 +10664,7 @@ Headline hazard verdicts (both CONFIRMED this session):
 - surveyor: none
 - maturity: partial (domain+store built, UI missing)
 - status: CONFIRMED (absence of mounts verified by the EditableText grep; store gate read)
-- notes/gaps: regen survival is NPC-only — an edited institution/faction/history beat is replaced wholesale by its own regen path (`userEdits.js:36-38`; history deferral `settlementSlice.js:1043-1064`). Exposing history-beat editing before the history-regen identity scheme lands would widen the loss window.
+- notes/gaps: corrected (§385.2) — the former `userEdits.js:36-38` claim that an edited institution/faction/history beat is "replaced wholesale by its own regen path" was retired as false. `settlementSlice.regenSection` branches on `npcs` and `history` only, so institution and faction prose is never section-rerolled at all. On the history branch, wired `history.*` root prose DOES survive via `historyPreservation.js` `restoreAuthoredHistory`; authored history ENTRIES (historicalEvent / currentTension rows) genuinely do not, because they carry no identity to be preserved by (owner-parked; the deferral is recorded on the history branch itself). Exposing history-ENTRY editing before that identity scheme lands would widen the loss window.
 
 ### B3. DM Notes + Campaign Context (NotesTab)
 - class: authorable
@@ -11959,7 +11959,7 @@ tip `59f76448`. All re-derivations below were run against this tree.
 - maturity: built
 - status: CONFIRMED
 - evidence: as cited
-- notes/gaps: SCOPE line at :36-38 is explicit — only the NPC reroll has a preservation tail; edited institutions/factions/history beats are still replaced wholesale by their own regenerate paths.
+- notes/gaps: the SCOPE line formerly at :36-38 ("only the NPC reroll has a preservation tail") was retired as false and rewritten (§385.2). `settlementSlice.regenSection` branches on `npcs` and `history` only, so edited institutions and factions are never section-rerolled; on the history branch wired `history.*` prose survives via `restoreAuthoredHistory`, while authored history ENTRIES do not (owner-parked, no identity to preserve them by).
 
 ### Save deletion cascade (removeSavedSettlement / destroySavedSettlement)
 - class: structural (entity existence)
@@ -12410,7 +12410,7 @@ All 200 gap entries from the 15 slices, grouped by kind. Each line is an index e
 
 178. npc-family §12 — history regen destroys authored history (owner decision, in-code); mobile NPC editing read-mostly; alignment/role facet sim-adoption seam owner-gated (documented)
 179. narrative-evidence §5 — HAZARD:history-regen-loss, the same deferral from the evidence side — blocks safe exposure of the historicalEvent/currentTension members of B2 (documented, owner-gated)
-180. economy-family §10 — authored institution prose does not survive full regeneration per the module's own scope note (PLAUSIBLE-per-doc; regenSection has no institution branch at all — the destructive path would be full regeneration, not executed)
+180. economy-family §10 — WITHDRAWN as stated (§385.2): the scope note it cited has been retired from `userEdits.js` as false, and regenSection has no institution branch at all, so there is no section-reroll path to destroy authored institution prose. Whether FULL regeneration discards it was never executed and stays open.
 180b. presentation-scene §7 — OWNER-DECISION recorded, deliberately NOT recommended: joining the scene and canonical address spaces (kept separate by constitutional intent); related owner-gated adjacents from memory: compendium deep-link scheme, terrain-at-cursor (recorded; owner queue #15)
 181. presentation-scene §10 — the 3D portrait lane's promotion switch `settlementScene3dDefault` is OFF pending external evidence in the promotion contract — an owner-visible readiness gate, not a defect (CONFIRMED)
 

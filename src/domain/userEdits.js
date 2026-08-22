@@ -33,9 +33,19 @@
  * That tag is what carries an edited NPC through a section reroll:
  * domain/regenerationPreservation.js reads it via regenerationMode's
  * preservation rules and re-seats the character in the fresh roster.
- * SCOPE — only the NPC reroll has a preservation tail. An edited
- * institution, faction, or history beat is still replaced wholesale by
- * its own regenerate path.
+ *
+ * SCOPE — settlementSlice.regenSection has exactly TWO branches, `npcs`
+ * and `history`. There is therefore NO institution or faction section
+ * reroll for an edit to survive: those records are not rerolled at all
+ * (only a FULL regenerate rebuilds them, and that rebuilds the whole
+ * settlement). On the history branch, wired `history.*` prose survives
+ * because domain/historyPreservation.js `restoreAuthoredHistory`
+ * re-applies it; authored history ENTRIES (historicalEvent /
+ * currentTension rows) do NOT — they carry no identity to be preserved
+ * by, which is owner-parked and why they are absent from
+ * QUEUE_WIRED_PROSE_PATHS. The true statement lives in
+ * store/settlementPendingEdits.js's register; this paragraph is kept in
+ * agreement with it.
  *
  * Pure, synchronous, no I/O. Callers either pass a draft (Immer) or a
  * mutable clone they own.
