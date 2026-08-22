@@ -14763,3 +14763,34 @@ recommended. Implementation, per item:
 - **§352.3** The closing train proceeds: T2E rebases onto 5d18b4a0 (its watcher
   knows), convicts its census, sweeps, and requests the slot; OSR9 and WF8 behind
   it.
+
+## §353 — OSR9'S STRUCTURAL RAISE RULED: THE MINT GOES LAST; THE UN-CHERRY-PICKABLE-MINT LAW BANKED (2026-08-22 ~05:50)
+
+- **TE-OSR9 raised, correctly and before it bit:** an OSR mint CANNOT be
+  cherry-picked — the baseline's migrationReview.subjectSha must be a committed
+  ancestor whose own tree reconstructs the input manifests and whose committed
+  baseline matches the predecessor hash; a rebase rewrites the SHA and fails all
+  three demands, one of them unrepairably (a rebased C1 sits on a different src
+  tree). A cherry-picked mint is a permanently red OSR gate curable only by
+  reverting both commits. **LAW BANKED: a mint REGENERATES at the final tip, and
+  NOTHING lands between its C1 and its CAS.**
+- **§353.1 SEQUENCING RULED — the mint goes LAST in the closing train** (T2E →
+  WF-8 → OSR9), for a reason beyond the lane's own: a fresh freeze followed by any
+  landing that adds scanned reads goes stale immediately; minting last captures the
+  train's final truth. Window protection guaranteed by the chair: no GO to anyone
+  and no chair landing between C1 (SHA stated in the heads-up) and the mint's CAS.
+- **§353.2 The rehearsal is accepted as METHOD PROOF** (full mint executed at
+  27c250f9: governed chain exit 0; froze 1998/1412/387; reconciliation ALL-SAME so
+  J2 never fired; digests reproduce BOTH ways from extractions). CH-3/CH-5/CH-6
+  RATIFIED as load-bearing — the executed refusals prove the instrument was
+  un-mintable as written, confirming §349.1(c).
+- **§353.3 The stresses triage RATIFIED at branch 3 ('neither'):** gate 0 refuses
+  both keys on every institution producer, no admission list names them, so the row
+  stays untagged and C1 carries FOUR entries. The stronger finding is recorded:
+  BOTH arms of the OR-chain at viewModelBodySlices.js:221 are dead — deliberately
+  deferred, documented, not a bug to re-find. **A READ-REPAIR lane joins the queue**
+  (after the dual-run measurement), correctly kept out of the mint.
+- **§353.4** The §352.2 mutex rule's empirical validation banked: the same walker
+  sweep ran 34s locked vs 224s bare, and the bare run's two timeout flakes vanish
+  in isolation — contention was the whole story. Bank delta pre-verified by the
+  rehearsal: 44/31 → 60/40, exactly the four identities' untagged footprint.

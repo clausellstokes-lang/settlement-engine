@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~05:50 ET: OSR9's structural raise RULED (§353) — mints cannot be
+# cherry-picked (law banked to OSR memory); RESEQUENCED: T2E → WF-8 → OSR9
+# LAST, window protected (no GO between its C1 and CAS). Stresses triage
+# branch-3 ratified; READ-REPAIR lane queued after dual-run. Rehearsal =
+# method proof; bank delta 44/31→60/40 pre-verified.
 # ⭐⭐ ~05:20 ET: WF-1F LANDED — CAS 27c250f9 → 5d18b4a0 (§352; closing
 # train car 1/4). Post-GO amendment ratified (4th unreachable difference
 # documented). NEW MUTEX-ECOLOGY RULE: heavy sweeps mutexed, GOs state the
