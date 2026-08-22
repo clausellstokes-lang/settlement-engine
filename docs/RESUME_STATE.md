@@ -74,6 +74,16 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⚠→⭐ ~13:40: BUNDLE run-1 RED — H8's comment-only edit staled the edge
+# bundle's RAW-SOURCE hash (aiGroundingBundle inlines userEdits.js); ONLY
+# the terminal could see it; the WRAPPER TRAP fired again (harness 0, true
+# 1 — 2nd time on a decisive run). SPLIT RULE APPLIED as designed: H8
+# dropped by its own commit (drop-over-regenerate argued: never widen a
+# fence to an undeclared governed artifact), H9+census replayed, new tip
+# dfa892cf, run 2 firing. H8 RE-SEEDED w/ recipe (fence names BOTH files,
+# runs build:edge-shared, declared generated-artifact shift). NEW LAW to
+# bank: comment-only edits to edge-bundle-INLINED files are regeneration
+# triggers invisible pre-terminal — check bundle membership first.
 # ⭐ ~13:00: BUNDLE terminal-ready at a4f8fc3f (11 commits on 71159a21;
 # ZERO conflicts — structural: no member fences the meta files; census
 # dropped+re-derived by isolation 20,714→20,719 with per-member convictions;
