@@ -5024,7 +5024,42 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // ⭐ AND `suiteTitles` IS PROVED SEPARATELY, per the sequenced-census law: the WHOLE
     //   member diff over tests/ was grepped for added `describe(` lines and the count is ZERO,
     //   which is independent of the walker's own fifth figure never having had to execute.
-    files: 2490, parked: 364, credited: 2126, titles: 20669, suiteTitles: 5778,
+    // ── RE-RECORDED 2026-08-21 BY MF-T2D, THE BOUNDARY NODER ───────────────────────────
+    // AUTHORIZING DECISION: ODQ §312 (the D3a port dispatch that commissions this member)
+    // and ODQ §334 (this seat's own dispatch, which reviewed the draft and ruled its RAISED
+    // items — §334.2 adopting the exact cut predicate, §334.3 the verbatim ladder-and-walk
+    // port, §334.4 the record shape and the defensive wall arm, §334.5 keeping
+    // boundaryArrangement.js), under the wave charter at §310.4 and §299.4's binding-forward
+    // rule that a packet moving any census or ratchet NAMES ITS AUTHORIZING DECISION in the
+    // packet body. The family's stamp is GRANTED at ODQ §312.2b.
+    // 2,490/364/2,126/20,669/5,778 → 2,492/364/2,128/20,677/5,780.
+    // THE CAUSE IS TWO NEW TEST FILES and nothing else:
+    // tests/domain/townMapBoundaryNoder.test.js (ONE literal describe, SEVEN straight-line
+    // test() calls with string-literal titles) and
+    // tests/property/townMapBoundaryNoderDeterminism.test.js (ONE literal describe, ONE
+    // straight-line test()). No .each, no runIf, no nesting, no loop-registered case; every
+    // loop lives INSIDE a named test (the SP-D idiom), so BOTH files are CREDITED and all
+    // eight titles are visible. The deltas are exactly +2 files, +2 credited, +8 titles,
+    // +2 suite titles, and PARKED IS UNCHANGED at 364 — no parked-file rule, parser door or
+    // existing file's classification moved. This member modifies ZERO existing production
+    // files; its ONE new leaf (src/domain/townMap/fabric/boundaryNoder.js) and its packet
+    // document are not test files, so neither reaches this census.
+    // ⚠ THE TITLE DELTA IS EIGHT, NOT THE D3a PLAN'S PREDICTED SIX — derived from the actual
+    // test() calls rather than copied from the plan, the same correction MF-T2B (+6→+7) and
+    // MF-T2C (+6→+8) each recorded before it.
+    // ⛔ NO FIGURE HERE WAS OBTAINED BY ADDING, AND THIS BLOCK IS THE SECOND DERIVATION OF
+    //   ITS OWN TUPLE. This lane first convicted 2,492/364/2,128/20,671/5,780 against the
+    //   PRE-WF-1E base. WF-1E then landed first, carrying +6 titles of its own, and that
+    //   earlier tuple died on contact: `titles` is 20,677 here, not 20,671. The lane
+    //   byte-restored this file from the new base and re-convicted ALL FIVE figures against
+    //   the new tip rather than re-using or adjusting the earlier ones — five more runs, each
+    //   value taken from its own assertion message ("expected 2492 to be -1", "expected 364
+    //   to be -1", "expected 2128 to be -1", "expected 20677 to be -1", "expected 5780 to be
+    //   -1"). ⭐ THE LESSON THE NEAR-MISS RECORDS: a census tuple is a measurement of ONE
+    //   tree, so carrying one across a sibling's landing is not an optimisation but a stale
+    //   read that happens to look arithmetically sound. Four of the five figures were
+    //   genuinely unchanged, which is exactly what would have made a carried tuple feel safe.
+    files: 2492, parked: 364, credited: 2128, titles: 20677, suiteTitles: 5780,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

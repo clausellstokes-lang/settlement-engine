@@ -18408,6 +18408,101 @@
           "check:tail"
         ]
       ]
+    },
+    {
+      "id": "MF-T2D",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/town-cartography/MF-T2D.md",
+      "verifiedBase": "3ac279db4232cc65abb57c4fa016578efd0f695d",
+      "changeManifest": [
+        {
+          "_note": "THE ONE NEW LEAF, DORMANT. The noding passes, the uniform-grid bucketing, the pass cap and the quantum ladder arrive verbatim from the sealed sandbox tip; the CUT PREDICATE is the landed kernel's own admission predicate, exact, inverted into cuts (ODQ 334.2) because four executed witness classes show the sandbox letter's output being refused by the landed kernel.",
+          "action": "CREATE",
+          "path": "src/domain/townMap/fabric/boundaryNoder.js"
+        },
+        {
+          "_note": "A NEW acceptance file. CREATE rather than TEST: the validator asserts a TEST path exists at EVERY status, and existence for a CREATE row is assertable only at LANDED.",
+          "action": "CREATE",
+          "path": "tests/domain/townMapBoundaryNoder.test.js"
+        },
+        {
+          "_note": "A NEW acceptance file, the determinism companion. CREATE for the same reason as its sibling.",
+          "action": "CREATE",
+          "path": "tests/property/townMapBoundaryNoderDeterminism.test.js"
+        },
+        {
+          "_note": "THE ONE SHARED D3a CHANGE PATH this member reserves. All five figures re-recorded together by placeholder-and-convict, with the cause and the authorizing decision named. It reserves NO path on fabric/index.js and NO path on any existing production file.",
+          "action": "TEST",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/packets/town-cartography/MF-T2D.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE KERNEL THIS MEMBER FEEDS, and the MF-T2A PLANT HOST. This exact line must survive byte-identical at column zero or the sweep's perl plant silently stops applying. This member does not open that host at all; the row is the guard that says so.",
+          "path": "src/domain/townMap/fabric/dcelEmbedding.js",
+          "symbol": "export function derivePlanarDcelEmbedding"
+        },
+        {
+          "_note": "THE PLANT ITSELF. Its host neither declares nor imports CURRENT_MAP_TRADITION_ID, so the planted second declaration parses; this member keeps that precondition true by creating a leaf that does not import it either.",
+          "path": "scripts/mutation-sweep.sh",
+          "symbol": "check_caught \"town-map/fabric duplicate export declaration\""
+        },
+        {
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export const CURRENT_MAP_TRADITION_ID"
+        },
+        {
+          "_note": "THE FROZEN VERSION STRING the noder READS and never moves.",
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export const FABRIC_COORDINATE_ABI"
+        },
+        {
+          "_note": "THE UNTOUCHED CODEX JIG. ODQ 334.5 keeps it; retirement is 312.2c's dual-run act, not D3a's.",
+          "path": "src/domain/townMap/fabric/boundaryArrangement.js",
+          "symbol": "export function compileOrthogonalCrossCadastralArrangement"
+        },
+        {
+          "_note": "THE ARRIVING NODER. Directory-internal and unexported by the barrel by ruling (ODQ 334.4); the acceptance battery is its only caller until the tranche that ports the fabric extraction wires the composition.",
+          "path": "src/domain/townMap/fabric/boundaryNoder.js",
+          "symbol": "export function nodeBoundarySegments"
+        },
+        {
+          "_note": "THE PORTED LADDER, carried verbatim as owner tuning surface (ODQ 310.3 item 9 / 334.3). A8 pins the triple by equality and its frozenness, so a rung cannot be added, removed or retuned by this member or silently by a later one.",
+          "path": "src/domain/townMap/fabric/boundaryNoder.js",
+          "symbol": "export const ARRANGEMENT_QUANTUM_LADDER"
+        },
+        {
+          "path": "tests/domain/townMapBoundaryNoder.test.js",
+          "symbol": "describe('MF-T2D boundary noder'"
+        },
+        {
+          "path": "tests/property/townMapBoundaryNoderDeterminism.test.js",
+          "symbol": "describe('MF-T2D boundary noder determinism'"
+        }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "Main behaviour: a proper crossing is noded and every published row wears the kernel-admissible shape. The tests' own exact oracle finds two crossings in the RAW input and zero in the output; twelve boundaries, rawSegmentCount eight, quantum 1000, passes two, residual zero, splits eight, duplicates zero; every row's key list is exactly boundaryId/role/sourceId/support/geometry, ids are unique twelve of twelve and codepoint-sorted, direction canonical, coordinates safe integers on the rung grid; the landed kernel embeds V=10 E=12 F=4 C=1 with V-E+F = 1+C and kinds BOUNDED three, EXTERIOR one." },
+        { "id": "A2", "case": "The eps-band crossing the landed float predicate calls not-proper. properCross answers false at wall scale and true on an ordinary fixture-scale crossing, so the divergence is the SCALE, asserted as two positives; the raw pair fed to the kernel throws the atomic message as the positive control; the noder splits it into three rows because its snapped cut merges into a shared endpoint, and the kernel then embeds with V-E+F equal to one plus componentCount." },
+        { "id": "A3", "case": "A T-junction: an endpoint touching another segment's interior. The oracle finds zero crossings and one touch, and properCross answers false, so a crossings-only predicate cannot cure it; the raw shape throws the atomic message; the noder cuts the run-through edge into six rows with splits two and residual zero, the touch point appears in exactly three rows, and the kernel embeds V=6 E=6 F=2 with Euler holding." },
+        { "id": "A4", "case": "Collinear overlaps decompose into runs, exact duplicates collapse, and the shared-endpoint overlap is cured too. The raw overlap throws the atomic message and the noder yields exactly three runs with duplicatesDropped one; the doubled segment yields one row with duplicatesDropped one and the survivor keeps the FIRST occurrence's lineage. The fourth witness class: a collinear overlap sharing one endpoint passes the kernel's pairwise atomic check, which returns early on a single shared endpoint, and is refused by the angular-tie arm instead; the noder cures it to two rows the kernel embeds." },
+        { "id": "A5", "case": "Idempotence: re-noding noded output is a fixed point. splitCount zero, nodingPasses one, residualProperCrossings zero, duplicatesDropped zero, rawSegmentCount twelve, and both the id list and the geometry identical to A1's because ids digest geometry." },
+        { "id": "A6", "case": "Refusals are typed, never floats, never silent. A positive control first, then eight refusals each asserted by its exact message: non-integer and out-of-wall coordinates through the landed wall naming its range, missing settlementId, empty role, empty sourceId, non-record input, non-array segments, and a mis-shaped segment. The empty list returns the empty record with zero residual without throwing, and a sub-rung segment collapses under the snap and is dropped. The post-snap wall re-validation is defensive and unreachable at the finest rung, so no test claims to reach it and no mutant targets it." },
+        { "id": "A7", "case": "Determinism, replay and purity. Six published behaviours replay byte-identically and every published record serialises, proving no BigInt reached the surface; pinned answers sit beside the replay so a leaf that replays a wrong answer cannot pass by being consistently wrong; the reversed input publishes the same id list; and a source scan of the leaf finds no forbidden nondeterminism identifier, with a planted occurrence asserted seen first." },
+        { "id": "A8", "case": "Correctness at scale plus the ported-value pins. A synthetic twenty-by-twenty grid carrying four hundred raw crossings, plus one long diagonal whose crossings fall off the rung grid for four hundred and forty in total, nodes to zero residual at the finest rung with nine hundred and twenty-one boundaries; the independent recount over the output is zero and zero; the diagonal's un-snapped crossing is asserted off-grid first so the every-coordinate-is-a-rung-multiple claim has something to refute it; the kernel embeds with Euler holding; and ARRANGEMENT_QUANTUM_LADDER deep-equals the sandbox triple and is frozen. No wall-clock figure is asserted." }
+      ],
+      "checks": [
+        [ "npx", "vitest", "run", "tests/lint/negativeAssertionAnchor.walker.test.js" ],
+        [ "npx", "vitest", "run", "tests/domain/townMapBoundaryNoder.test.js", "tests/property/townMapBoundaryNoderDeterminism.test.js", "tests/lint/townMapFabricSingleDeclaration.walker.test.js", "tests/lint/sovereigntyLightingContract.walker.test.js" ],
+        [ "npx", "eslint", "src/domain/townMap/fabric/boundaryNoder.js", "tests/domain/townMapBoundaryNoder.test.js", "tests/property/townMapBoundaryNoderDeterminism.test.js" ],
+        [ "npm", "run", "typecheck:ratchet" ],
+        [ "npm", "run", "typecheck:domain:strict" ],
+        [ "npm", "run", "validate:packets" ],
+        [ "npm", "run", "check:tail" ]
+      ]
     }
   ]
 }
