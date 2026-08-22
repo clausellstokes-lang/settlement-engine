@@ -74,6 +74,12 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~12:30 ET: T2E's run 4 REFUTED the reliable-trigger claim (same tree,
+# different victim; distribution vanished; npcAuthoringScope drew — the
+# §357 first-test cold-start victim, converging independently). Four runs,
+# four casts, load-correlated exactly as H2 predicts. QUIET-TRACK VERIFIED
+# (zero heavy procs; 1-min 10.88 decay residue) — T2E's final GO SENT with
+# the §357 news. On green: CAS → WF-8 (A5 first) → the mint's window.
 # ⭐⭐ ~11:40 ET: HUNT-1 CRACKED IT (§357) — the 'contamination' is TIMEOUT
 # EXHAUSTION under load, masked by the ratchet DELETING the vitest JSON
 # (identity-only output). H1 foreclosed (isolate+forks). Known-flake
