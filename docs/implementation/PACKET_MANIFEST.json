@@ -20157,7 +20157,7 @@
     },
     {
       "id": "MF-T2L",
-      "status": "DRAFT",
+      "status": "READY",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T2L.md",
       "verifiedBase": "4d2d17f86f173686d142a97e3fd356d6b7be97e6",
       "changeManifest": [

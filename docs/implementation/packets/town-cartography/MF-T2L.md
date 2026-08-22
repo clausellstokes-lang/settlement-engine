@@ -1,6 +1,6 @@
 # MF-T2L — vegetation: the durable trunk/canopy mass and the deterministic nonpersistent instance field
 
-- **Status:** DRAFT
+- **Status:** READY
 - **Packet version:** 1
 - **Ruling:** implemented by lane TE-T2L against the chair ruling at ODQ §425, which took all five
   of the compile's questions as settled: both halves discharged as RECORD + DERIVATION in the one
@@ -19,8 +19,8 @@
   `05e7f9d56eec119102f540e316bd8e1061f81a92` and MF-T2Bf's landed commit, so this member is **FIVE
   DEEP**. The branch token names the branch of record this member is verified FOR and will land on;
   the row is **re-stamped at the landing slot** once MF-T2H, MF-T2J and MF-T2K land and this member
-  is rebased. It is MF-T2K's holding commit and the D3a
-  stack's then-current tip. Derived rather than assumed: `git merge-base --is-ancestor` reports
+  is rebased. ⭐ The base was DERIVED at lane start rather than inherited:
+  `git merge-base --is-ancestor` reports
   MF-T2H's `05e7f9d5` an ancestor of it and reports it an ancestor of NEITHER
   `claude/composite-r4` nor `review-fixes-2026-07-08`, so the five-deep stack is unrebased and
   unlanded and branches at `9bfae712`. ⚠ The stack is rebased at the landing slot; the census DELTA
