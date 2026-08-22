@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ~15:55 ET: T2E's quiet-track GO had RACED its turn boundary (no gate log,
+# machine idle 3h, branch unmoved) — GO RE-SENT on the verified-quiet track
+# (load 4.5). Lesson: after a GO, verify the gate STARTED (a log appears)
+# within minutes; a resumed agent's pending notification can predate the GO.
 # ⭐ ~15:40 ET: LP-RECON collected (§363) — queue row 8 STRUCK (ceiling was
 # the seat ceiling, long discharged); TE-LPDOC (cure the lying bridge doc)
 # joins the housekeeping bundle; §320.3 dropped thread RULED: DISCLOSE
