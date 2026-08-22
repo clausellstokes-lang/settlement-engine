@@ -74,6 +74,13 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~03:40: THE MINT AT ITS DOOR — C1'=158d99cd (subjectSha, NEVER amend/
+# rebase across), C2'=42e12a76 (the CAS tip). Reconciliation MEASURED
+# ALL-SAME (the train's 10 files moved zero rows); bank 44/31→60/40 exactly
+# the four identities; digests 6/6 both ways; the A/B-control catch (a probe
+# omitting the declared chain ≠ the chain's inventory) earmarked for
+# collection. GO SENT on verified-empty track (load 2.85). On green: CAS →
+# window closes → train COMPLETE → T2F's slot.
 # ~03:05: WF-8 lane CLOSED (observed the CAS itself). TWO FLAGS for the
 # train's closing collection + memory pass: (1) a compile's register table is
 # a SAMPLE not a denominator — three NOT-INCURRED verdicts wrong, each found
