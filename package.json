@@ -130,6 +130,9 @@
   "lint-staged": {
     "*.{js,jsx,mjs,cjs}": [
       "eslint --fix"
+    ],
+    "docs/implementation/**": [
+      "sh scripts/validate-packets-staged.sh"
     ]
   }
 }
