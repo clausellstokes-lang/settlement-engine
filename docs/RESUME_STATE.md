@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~16:20: OWNER ORDER (§388) — PARALLEL ALWAYS: the wakeup RE-MINTED
+# (job 5d5f53c5) with 'IS EVERY BUILDABLE CAR BUILDING?' as check 1 + the
+# build-vs-land law + all delivery protocols. TE-H8B dispatched — FOUR
+# building beside the window: OSR-10 · T2Bf · CT2 · H8B. ⚠ Successor
+# re-arms the §388 wakeup prompt FIRST.
 # ⭐ ~16:00: OWNER CHALLENGE #5 (§387) — window blocks LANDINGS not builds:
 # TE-T2Bf + TE-CT2 dispatched beside the mint (cap 3+1); H8+1b next seat.
 # Landing order: OSR-10 → RR-1 → RR-2 → builds in GO order. Lesson for the

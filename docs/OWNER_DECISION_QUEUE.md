@@ -15815,3 +15815,21 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   reserved' with 'the shop is closed' — five owner corrections now (§344, §365,
   §367, §370's inverse, here). The seat-filling question at every wakeup is not
   'is the track busy' but 'is every buildable car building'.
+
+## §388 — OWNER ORDER: PARALLEL ALWAYS, WHERE A LANE IS FREE AND A TRAIN IS READY; THE WAKEUP RE-MINTED WITH THE BUILD-VS-LAND LAW (2026-08-22 ~16:20)
+
+- **Owner: 'keep running things in parallel where a lane is free and a train is
+  ready. why did you stop?' — the honest diagnosis, recorded:** at every landing the
+  chair optimizes the gate queue and treats parked as natural, conflating BLOCKED
+  FROM LANDING with BLOCKED FROM BUILDING. Five corrections, one root. THE FIX IS
+  STRUCTURAL: the wakeup is re-minted (job 5d5f53c5) with the corrected first
+  question — 'IS EVERY BUILDABLE CAR BUILDING?' — and the explicit law that
+  windows, holds, and gate queues reserve the TRACK, never the SHOP; plus the
+  raced-GO, lost-lane, and read-never-extend protocols in its standing text.
+  A successor re-arms THIS prompt.
+- **§388.1 The fourth seat filled: TE-H8B dispatched** (the H8 re-seed with its
+  edge-bundle regeneration done right + Cure 1b's evidence-printing extension to
+  the scope-sentinel and strict-dist blocks — both members severable, the recipe
+  §385.2/§386.2). FOUR BUILDING BESIDE THE WINDOW: OSR-10 (the mint) · T2Bf ·
+  CT2 · H8B. Landing order unchanged: mint → RR-1 → RR-2 → the builds in GO
+  order.
