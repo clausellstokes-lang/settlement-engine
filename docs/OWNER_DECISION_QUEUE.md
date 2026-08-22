@@ -16123,3 +16123,35 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   §396) · DS-POP-2's charter hunt · the §384.2b declared-movement durable doc ·
   the DS-FTH-3 five-vs-four diagnosis (§394) · MEASDUAL phase-2 at a quiet
   window · the §374 exhibit act before RR-2's exposing CAS.
+
+## §397 — CT-3 COMPLETE: TIP SUPERSEDED TO ba806682; THE AFTER BATTERIES GREEN; THE GATE-DEFERRAL RATIFIED; A NEW S0 INSTRUMENT TRAP BANKED (2026-08-22 ~20:20)
+
+- **The supersession:** CT-3's tip for CAS is now ba8066821a267a16883cd2ac0053b3809e0a27b1
+  (supersedes §394's eb0412e2; 7 files, +1050/−5 — the AFTER batteries and the
+  §12.1 packet update rolled in). Base 5941093f unchanged; three worktrees
+  detached and clean; no ref moved.
+- **The deferred proofs all landed green:** AFTER goldens 108 files / 747 both
+  ways exit 0 (stripped diff 4-vs-4 lines, RUN-root path only); the pre-gate
+  sweep run BOTH ARMS UNDER THE MUTEX — identical 5 failed / 2007 passed both
+  sides, all five matched INDIVIDUALLY to banked rows, zero strays. Recorded as
+  §393's law working in the build direction: CT-1a and CT-2 both had to isolate
+  flake here; the mutexed battery removed it entirely.
+- **The branch moved under the lane and it handled the topology correctly:**
+  it measured that 9bfae712 is an ancestor of the new tip while its own base
+  and tip are not; packet §12.1 records the landing-slot arithmetic CHANGING IN
+  KIND — the post-mint envelope is WHOLE (its own bare-gate reading at the new
+  tip: exit 0, 1998 findings matching frozen), both its leaves sit exactly at
+  their new frozen values, so at landing CT-2 originates general's break and
+  CT-3 originates warFaith's, the train breaking a whole envelope
+  lawfully-by-batching (§384.2). Re-stamp inputs precomputed.
+- **RATIFIED — the full-gate deferral to the landing slot:** the lane's base is
+  provably not an ancestor of the branch, so a gate receipt taken now would
+  certify a tree that is not the one that lands. The CT-2 precedent applied,
+  stated in packet §13.
+- **NEW INSTRUMENT TRAP, BANKED:** the bare gate script imports typescript
+  transitively — on a worktree without npm ci it exits 1 with
+  ERR_MODULE_NOT_FOUND, **a module error wearing the envelope verdict's exit
+  code**. The §389.1 standing S0 is therefore a TWO-PART reading: the exit AND
+  the printed staleness line; an exit alone convicts nothing.
+- CT-3 HOLDS at ba806682; landing order unchanged (after CT-2, which rebases
+  onto the mint at its slot).

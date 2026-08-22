@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~20:20: CT-3 COMPLETE (§397) — tip SUPERSEDED to ba806682 (AFTER
+# batteries green, mutexed sweep zero-stray); gate-deferral-to-slot RATIFIED
+# (base not an ancestor of the moved branch). ⚠ NEW TRAP: the S0 is a TWO-PART
+# reading — exit AND printed staleness line (ERR_MODULE_NOT_FOUND wears exit 1).
 # ⭐ ~20:05: FOURTH SEAT FILLED (§396) — TE-INVEVS dispatched (diagnosis-only,
 # the §374 viability-summary charter; owner fork after). FOUR ACTIVE: RR-1 ·
 # CT-3 · T2H · INV-EVS. Chair queue: HANDOFF refresh (owed) · DS-POP-2 hunt ·
