@@ -56,47 +56,20 @@ import {
   poolDepth,
 } from '../helpers/kindPoolWalker.js';
 import { EXACT_SECTION } from '../../src/domain/realm/heraldRouting.js';
-import {
-  ENVOY_KIND_REGISTRY,
-  WAR_COALITION_KIND_REGISTRY,
-  WAR_COST_KIND_REGISTRY,
-  WAR_DISPOSITION_KIND_REGISTRY,
-  WAR_LINEAGE_KIND_REGISTRY,
-  WAR_RULING_KIND_REGISTRY,
-} from '../../src/domain/worldPulse/eventProse.js';
-import { COMMERCIAL_KIND_REGISTRY } from '../../src/domain/worldPulse/commercialReasonsNews.js';
-import { GRAMMAR_KIND_REGISTRY } from '../../src/domain/worldPulse/grammarNews.js';
-import { FAITH_KIND_REGISTRY } from '../../src/domain/worldPulse/faithNews.js';
-import { INFORMATION_KIND_REGISTRY } from '../../src/domain/worldPulse/informationNews.js';
-import { SOVEREIGNTY_KIND_REGISTRY } from '../../src/domain/worldPulse/sovereigntyNews.js';
+// THE ONE ROSTER (ODQ §356.2): this list used to be transcribed here AND, by hand, inside
+// tests/domain/pantheon.test.js's A5. Both now read the same frozen source, so a registry
+// that joins or leaves breaks both consumers identically instead of drifting one of them.
+import { KIND_REGISTRIES } from '../helpers/kindRegistryRoster.js';
 
 /**
- * EVERY phrased-kind registry in the tree, named by its program. Listed rather than globbed
- * because a registry that stopped being imported would silently leave the estate-wide claim —
- * a missing entry here is a review conversation, not a quiet shrink of the denominator.
+ * The estate-wide denominator, now DERIVED rather than transcribed.
+ * ⛔ THIS DECLARATION IS PRESERVED DELIBERATELY: GR-4B-IIIA's `requiredSymbols` names
+ * `const REGISTRIES = Object.freeze` in this file, and that row is a standing preservation
+ * obligation the validator asserts at every status. The single-source repair removes the
+ * duplicated LIST, never the declaration a landed packet is entitled to find here.
  * @type {ReadonlyArray<readonly [string, ReadonlyArray<any>]>}
  */
-const REGISTRIES = Object.freeze([
-  ['WAR_DISPOSITION', WAR_DISPOSITION_KIND_REGISTRY],
-  ['WAR_LINEAGE', WAR_LINEAGE_KIND_REGISTRY],
-  ['WAR_COST', WAR_COST_KIND_REGISTRY],
-  ['WAR_RULING', WAR_RULING_KIND_REGISTRY],
-  ['WAR_COALITION', WAR_COALITION_KIND_REGISTRY],
-  ['ENVOY', ENVOY_KIND_REGISTRY],
-  ['COMMERCIAL', COMMERCIAL_KIND_REGISTRY],
-  ['GRAMMAR', GRAMMAR_KIND_REGISTRY],
-  ['SOVEREIGNTY', SOVEREIGNTY_KIND_REGISTRY],
-  // IN-1c-a: the fifth FP registry family, and the estate's first ONE-ROW registry. Its single
-  // kind is a DOSSIER LINE with `section: null`, so it registers WITHOUT routing — which is why
-  // it moves REGISTERED_KIND_COUNT and the divergence identity below while leaving
-  // ROUTED_TOKENS exactly where it is.
-  ['INFORMATION', INFORMATION_KIND_REGISTRY],
-  // WF-8a: the SIXTH FP registry family, and the estate's SECOND deliberately one-row one. Its
-  // single kind is the settlement extinction obituary, which DOES carry a Herald desk — so
-  // unlike INFORMATION's dossier line it moves ROUTED_TOKENS and REGISTERED_KIND_COUNT
-  // together and leaves the registered-minus-routed difference below exactly where it was.
-  ['FAITH', FAITH_KIND_REGISTRY],
-]);
+const REGISTRIES = Object.freeze([...KIND_REGISTRIES]);
 
 /**
  * GR-0's declared floor exception, carried here with the same written reason its own walker

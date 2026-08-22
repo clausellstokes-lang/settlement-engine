@@ -22,9 +22,10 @@ import { ensureWorldState, CONDITIONAL_LEDGER_KEYS } from '../../src/domain/worl
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { normalizeForDormancy } from '../helpers/dormancyOracle.js';
-// WF-1c's registration-totality battery (A5) and authoring join (A7). The registry list
-// mirrors kindPoolFloors.walker.test.js's own denominator so the six figures it freezes are
-// re-derived from the LIVE sources here rather than quoted from prose.
+// WF-1c's registration-totality battery (A5) and authoring join (A7). The registry list is
+// IMPORTED, not re-typed: A5 and kindPoolFloors.walker.test.js share the ONE roster, so the
+// six figures A5 freezes are re-derived from the LIVE sources through the same denominator
+// the walker uses (ODQ §356.2 R-6).
 import { EXACT_SECTION, SECTION_OF, isExplicitlyRouted } from '../../src/domain/realm/heraldRouting.js';
 import { newsVoiceCategory } from '../../src/domain/display/newsVoice.js';
 // WF-1f's agreement arm: the estate's ONE shared deity-name floor, read here so A1 asserts
@@ -32,19 +33,7 @@ import { newsVoiceCategory } from '../../src/domain/display/newsVoice.js';
 import { deityDisplayNameFromRef } from '../../src/domain/display/deityNames.js';
 import { WHAT_PHRASES } from '../../src/domain/display/settlementRumors.js';
 import { KIND_SECTION } from '../../src/domain/display/chroniclersLetter.js';
-import {
-  ENVOY_KIND_REGISTRY,
-  WAR_COALITION_KIND_REGISTRY,
-  WAR_COST_KIND_REGISTRY,
-  WAR_DISPOSITION_KIND_REGISTRY,
-  WAR_LINEAGE_KIND_REGISTRY,
-  WAR_RULING_KIND_REGISTRY,
-} from '../../src/domain/worldPulse/eventProse.js';
-import { COMMERCIAL_KIND_REGISTRY } from '../../src/domain/worldPulse/commercialReasonsNews.js';
-import { GRAMMAR_KIND_REGISTRY } from '../../src/domain/worldPulse/grammarNews.js';
-import { INFORMATION_KIND_REGISTRY } from '../../src/domain/worldPulse/informationNews.js';
-import { FAITH_KIND_REGISTRY } from '../../src/domain/worldPulse/faithNews.js';
-import { SOVEREIGNTY_KIND_REGISTRY } from '../../src/domain/worldPulse/sovereigntyNews.js';
+import { KIND_REGISTRIES } from '../helpers/kindRegistryRoster.js';
 import { censusNewsAuthoringSites, debtLedgerRows } from '../lint/newsAuthoringCensus.shared.mjs';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -578,21 +567,14 @@ describe('pantheon — realm arcs (Ascendancy / Twilight / the last altar)', () 
     expect('pantheon_twilight' in EXACT_SECTION).toBe(true);
     expect('pantheon_extinction' in EXACT_SECTION).toBe(false);
     // The six figures kindPoolFloors freezes, re-derived from the LIVE registries.
-    const registries = [
-      ['WAR_DISPOSITION', WAR_DISPOSITION_KIND_REGISTRY], ['WAR_LINEAGE', WAR_LINEAGE_KIND_REGISTRY],
-      ['WAR_COST', WAR_COST_KIND_REGISTRY], ['WAR_RULING', WAR_RULING_KIND_REGISTRY],
-      ['WAR_COALITION', WAR_COALITION_KIND_REGISTRY], ['ENVOY', ENVOY_KIND_REGISTRY],
-      ['COMMERCIAL', COMMERCIAL_KIND_REGISTRY], ['GRAMMAR', GRAMMAR_KIND_REGISTRY],
-      ['SOVEREIGNTY', SOVEREIGNTY_KIND_REGISTRY], ['INFORMATION', INFORMATION_KIND_REGISTRY],
-      // WF-8a: the SIXTH registry family. ⛔⛔ THIS LIST IS A SECOND TRANSCRIPTION OF
-      // kindPoolFloors.walker.test.js's REGISTRIES, and the fork is the finding: WF-8a's
-      // registration moved the shared figures and reddened this pin, which no packet had
-      // named, because a hand-copied denominator drifts the moment the original moves.
-      // Adding FAITH here is the honest repair for THIS landing; the structural repair is to
-      // import the one list rather than re-type it, and that is recorded as owed rather than
-      // taken inside a faith member.
-      ['FAITH', FAITH_KIND_REGISTRY],
-    ];
+    // ⛔⛔ THIS LIST WAS A SECOND TRANSCRIPTION of kindPoolFloors.walker.test.js's REGISTRIES,
+    // and the fork was the finding: WF-8a's registration moved the shared figures and reddened
+    // this pin, which no packet had named, because a hand-copied denominator drifts the moment
+    // the original moves. The structural repair is DONE (ODQ §356.2 R-6, TE-HOUSE H5) — both
+    // this pin and the walker now read the ONE roster, so a registry that joins or leaves
+    // breaks both identically. The six figures below stay literal: they are deliberate freezes,
+    // and the repair removed the duplicated LIST, never the freezes.
+    const registries = KIND_REGISTRIES;
     const allRows = registries.flatMap(([, rows]) => [...rows]);
     const registered = new Set(allRows.map(r => String(r.kind)));
     const routedTokens = Object.keys(EXACT_SECTION);
