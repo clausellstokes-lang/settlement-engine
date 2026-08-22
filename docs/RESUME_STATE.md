@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~20:50 ET: WF-1E COMPILE COLLECTED + RULED (§333) — split to WF-1F
+# RATIFIED (cap law); Q4 RULED chair-scope: DS-FTH corpus = reader-side
+# spelling law, Lane P, section-sliced pin (vetoable; lifts the DRAFT gate);
+# FALL_SENTENCE copy docketed owner-reviewable. Dispatch waits on the §290
+# stop. T2D compile + RS-5 segments still running.
 # ⭐⭐ ~20:20 ET: MF-T2C LANDED 18/18 — CAS fb80e32f → f5332cf7 (§332; SIX
 # landings/CASes today; D3a 1-3 complete, dark). Instrument law banked to
 # memory. RS-5 RESUMED (b=18 then c=54; 90/162 durable). TC-T2D + TC-WF1E

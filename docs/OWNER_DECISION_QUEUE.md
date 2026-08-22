@@ -14190,3 +14190,34 @@ recommended. Implementation, per item:
   arrives at RS-5's closing collection, where the owner may fire /code-review ultra.
 - **§332.5 Worktree custody note:** tet2c-baseproof's node_modules symlinks into
   tet2c-tree — remove the baseproof FIRST if either is cleaned up.
+
+## §333 — WF-1E COMPILE COLLECTED AND CHAIR-REVIEWED; FIVE RULINGS; Q4 RULED (2026-08-21 ~20:50)
+
+- **TC-WF1E collected** (draft-WF-1E.md 383 effective lines, claim-scan zero, budget
+  inside ≤400; companions: the pre-executed WF-1F seed + receipt + the git-archive pin
+  extraction). Member: the FaithSection cause-chain line — the sixth defaulted
+  projector parameter, one conditional-spread patronFall key (flag AND ring, so a
+  lit-then-darkened world self-heals on the first dark tick), the kernel's sixth
+  argument packed net-zero against the frozen 1581, the frozen four-key FALL_SENTENCE
+  copy map, one Cause render below FaithSection's twelve baseline-pinned lines. Chair
+  spot-review executed: the do-not-promote-past-DRAFT gate present at line 179 with
+  its STOP arm at 351; the census is the single STOP figure (every other figure
+  re-executed at the pin; the executor re-derives the census at its base).
+- **§333.1 THE SPLIT IS RATIFIED:** the three §326.4 micro-items move to WF-1F rather
+  than breaching two PACKET_STANDARD caps (logic files 5>3, handwritten 13>12) — the
+  standard forbids quiet renegotiation and the split costs nothing (no shared path,
+  instrument, or proof). The WF-1F seed's pre-executed content is ACCEPTED: RAISED-B
+  cures by REUSING deityDisplayNameFromRef (the estate's existing cure for this exact
+  lossy tail-pop, four import precedents), exactly one committed pin re-records, and
+  the declared-shift proof is chartered per §P7.11.
+- **§333.2 Q4 RULED (chair-scope, per the lane's enumeration — last WF hit §78.3
+  'stay open'; nothing §308–§332 rules on it):** the DS-FTH corpus binds as
+  READER-SIDE SPELLING LAW via the Lane P mechanism, with a SECTION-SLICED agreement
+  pin per the doc-agreement-vacuity class. Vetoable; on this ruling the draft's
+  DRAFT-gate lifts — but nothing dispatches before the §290 review stop regardless.
+- **§333.3 The member name WF-1E is RATIFIED** as seeded.
+- **§333.4 OWNER DOCKET:** the FALL_SENTENCE four-key copy ships as compiled and is
+  marked owner-reviewable, joining the §316.2C copy walk (the WF-1C precedent).
+- **§333.5 Census sequencing for the post-stop trains:** WF-1E/WF-1F/MF-T2D interleave
+  under the standing laws — placeholder-and-convict at the executor tip, never carry a
+  tuple across a rebase (§325.2), serialized CAS slots.
