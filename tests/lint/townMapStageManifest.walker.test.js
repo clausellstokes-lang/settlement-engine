@@ -62,6 +62,19 @@ const parse = (/** @type {string} */ s) => Parser.parse(s, { ecmaVersion: 2024, 
  * brand-new non-sandbox fabric module reds here, and that is exactly the drift §10.14 refuses.
  */
 const UNASSIGNED_LANDED_MODULES = Object.freeze([
+  // ⭐ MF-T2M, appended in FIRST alphabetical position — the act this walker's own failure
+  // message orders for a landed module the record does not assign. THE WHY (packet §1.9): the
+  // leaf is a D3a design-implementation mint against the GENERATION-SPEC contract, never a
+  // sandbox module, so the sealed record measured a tree it was never in and `nodeOfModule()`
+  // rightly resolves it to no node. The record's 49-module lead pin and the assigned-set literal
+  // are untouched, and the accounting arithmetic pin is computed, so it self-adjusts.
+  // `FOUNDATION_READERS` is unmoved: the leaf imports exactly `foundation.js` and
+  // `../../townScene/stableScene.js`, neither of which this roster tracks; `operations.js` is
+  // EDITED rather than created by that member, is already on this roster, and reads no tracked
+  // module. ⚠ Authored against the roster's pre-§419.2 name; re-applied at the MAP STACK landing
+  // slot against the RENAMED constant (MF-T2L's act, ODQ §430 ruling 1), where the naming mismatch
+  // MF-T2K and MF-T2M both RAISED is DISCHARGED by the rename rather than absorbed.
+  'architecturalHistory.js',
   'boundaryArrangement.js', 'boundaryNoder.js', 'building.js', 'content.js', 'dcel.js',
   'dcelEmbedding.js', 'exactGeometry.js', 'exactIntersectionArea.js', 'fabricRoot.js',
   'foundation.js', 'frontage.js', 'index.js', 'massPart.js', 'massingProjection.js',
