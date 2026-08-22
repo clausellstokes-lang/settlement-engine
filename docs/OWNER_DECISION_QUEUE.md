@@ -14955,3 +14955,35 @@ recommended. Implementation, per item:
   QUIET re-run) — it was right for the wrong ontology; under the true mechanism,
   'quiet' removes the cause rather than the coincidence. The quiet-track ruling
   for T2E's final gate stands unchanged.
+
+## §358 — HUNT-1 FINAL: THE MECHANISM CONFIRMED PER-STRAY; A RETRACTION THAT SHARPENS THE CURE; THE PROTOCOL SIMPLIFIES (2026-08-22 ~12:50)
+
+- **CONFIRMED WITH RECEIPTS:** all four runs' full vitest reports recovered
+  (laneHUNT1-runA/B/C/D-results.json). Every stray is a time-budget expiry with
+  duration in hand — distribution's trade-route arm ran 56,955ms against its 20s
+  budget (a sync body: the timer fires only when the loop yields; ~2s isolated
+  became ~57s at load 82); lawBandTable's arm was KILLED at 20,528ms (the count
+  was never wrong; the walk died at its budget); npcAuthoringScope 5,470ms on the
+  5s cold-lazy query. NOT ONE value mismatch anywhere; the census 11 fail
+  identically in all four reports with intact AssertionErrors. Run D (T2E's
+  confirming draw) = census 11 + ONE confirmed timeout — nothing implicates the
+  member; T2E's landing decision input is closed.
+- **§358.1 THE RETRACTION, RECORDED WITH ITS LESSON:** the ratchet does NOT
+  delete the reports — they are ORPHANED in TMPDIR (path never printed), findable
+  by mtime; the hunt's 'deleted' claim came from a zsh no-match glob read as an
+  empty listing, self-caught and corrected. The gate-surface effect stands
+  (nobody sees the messages). The day's third instrument-identity lesson: a glob
+  that matched nothing is not a directory that holds nothing.
+- **§358.2 THE INTERIM PROTOCOL SIMPLIFIES (law until cure 1 lands):** for ANY
+  stray, past or future — locate the run's results.json in TMPDIR by mtime and
+  READ THE ROW; settled on the spot. This retires §355.2's multi-run
+  classification for the common case (repetition remains the tool when no report
+  survives).
+- **§358.3 CURE 1's SPEC AMENDED by measurement:** vitest 4 serializes a timeout
+  kill as 'STACK_TRACE_ERROR' with the stack at the it( — the 'Test timed out'
+  prose is CLI-only. The ratchet therefore prints DURATION (duration >
+  testTimeout is the reliable JSON signal) plus the report's own path.
+  **TE-RATCHET DISPATCHED on the hunt's freed seat** (Opus; the report carries
+  the judgment): the evidence-preservation cure + its meta-test extension; lands
+  AFTER the closing train (slot-aware; heads-up protocol). Cures 2–3 (corpus
+  memoization; load-stamped receipts) hold on the queue.

@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~12:50 ET: HUNT-1 FINAL (§358) — mechanism CONFIRMED per-stray with
+# recovered reports (all timeouts, zero value mismatches; reports ORPHANED
+# not deleted — zsh no-match glob retraction). Protocol simplifies: read the
+# results.json row by mtime. TE-RATCHET (cure 1) dispatched on the freed
+# seat; lands after the closing train.
 # ⭐ ~12:30 ET: T2E's run 4 REFUTED the reliable-trigger claim (same tree,
 # different victim; distribution vanished; npcAuthoringScope drew — the
 # §357 first-test cold-start victim, converging independently). Four runs,
