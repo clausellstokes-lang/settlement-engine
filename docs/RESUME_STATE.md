@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~08:15: T2F terminal-ready at cb369d2b (the carry law's FIFTH firing
+# caught — 4 self-consistent figures, 1 wrong by 20; mutant sweep re-run
+# despite cmp-identity). GO SENT w/ honest lock picture (RR-1's single-
+# threaded shrink rehearsal the only load; heavy-proof hold ordered on
+# RR-1/HOUSE until the gate lands). On green: CAS → T2G next-up.
 # ⭐ ~07:25: POST-WINDOW SPIN-UP — T2F activated (rebasing onto 42e12a76);
 # TE-HOUSE dispatched (9 members incl. H9 discharge semantics + the style
 # census + both-styles requirement); TE-RR1 dispatched (shrink held until
