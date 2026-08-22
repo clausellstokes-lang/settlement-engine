@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~03:40 ET: OSR9 charter collected + RATIFIED (§349) — two-commit lawful
+# sequence; THIRD drift cause found (warFaith.generated unscanned digest);
+# CH-6 review path ratified (J1); two migration-law defects fixed in-scope;
+# STOP-RAISE on unattributable growth (J2). TE-OSR9 DISPATCHED on the freed
+# seat. Mint-trigger law widened in memory (any package.json byte change).
 # ~03:25 ET: WF-1F at the door (tip 055d520d on 27c250f9; census +0 all five,
 # NO re-record owed; declared shift 45/0/0 key-by-key, one pin re-records) —
 # GO SENT, track clear (T2E building, no gate). Ratified: the third stale-

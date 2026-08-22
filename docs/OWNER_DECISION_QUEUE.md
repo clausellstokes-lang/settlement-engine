@@ -14640,3 +14640,35 @@ recommended. Implementation, per item:
   measurement lane inserts after TE-WF8. One process note from the lane banked: a
   pipe tail's exit is not grep's exit — its own first collision scan caught and
   corrected the class before it shipped.
+
+## §349 — TC-OSR9 COLLECTED: THE MINT CHARTER RATIFIED WITH ALL SIX JUDGMENTS; TE-OSR9 DISPATCHED (2026-08-22 ~03:40)
+
+- **TC-OSR9 collected** (draft-OSR9-MINT.md + receipt; reads pinned to 27c250f9).
+  The charter is exactly §346.2's four items and nothing else; minKeys stays 8, θ
+  stays 0.80, the boundary pin is a named negative control. The lawful two-commit
+  sequence was determined FROM CODE: C1 (schema-9 instrument code + code-bound pin
+  re-records, P1–P8) → the migration run on the clean committed C1 tree → C2
+  (baseline + live-figure re-records, P9–P11, all STOP-marked) → prove in-tree AND
+  detached at C2, with the extract-and-recompute digest reproduction as the
+  verification; amending C1 is forbidden forever. The declared red window between
+  C1 and C2 exists only inside the lane's worktree; the branch moves once, at C2.
+- **§349.1 RULINGS:** (a) J1 RATIFIED — CH-6 makes unscanned-input movement
+  reviewable for target 9; without it the mint cannot lawfully proceed, because the
+  charter DISCOVERED A THIRD DRIFT CAUSE §346.2 missed: warFaith.generated.js moved
+  the unscanned-input digest (the §346.2 cause list is hereby annotated). Instrument
+  governance is chair-scope per the §338/§346 precedent; owner veto available.
+  (b) J2 RATIFIED — unattributable inventory growth at execution is STOP-RAISE,
+  never bulk-accept. (c) The TWO LATENT MIGRATION-LAW DEFECTS (rowTagsOf's genesis
+  condition minting a null tag reason for any newly declared identity — a
+  declaration-adding mint was impossible as written; the hard-coded four-path delta
+  in the governed-scanner transition) are FIXED IN-SCOPE as required machinery, not
+  scope creep. (d) The remaining four charter judgments ratified as recorded in its
+  §8.
+- **§349.2 MEMORY REFINED NOW:** the mint-trigger law widens — ANY package.json
+  byte change (not only a dependency bump) moves the unscanned-input surface and is
+  a mint trigger. The three instrument-law traps and the third drift cause bank at
+  the execution collection.
+- **§349.3 SCHEDULER APPLIED:** TE-OSR9 dispatched on the freed seat (Opus — the
+  charter carries the judgment). Its full terminal queues behind WF-1F's running
+  gate and TE-T2E's, by heads-up. Seats: WF-1F (gating) · TE-T2E (build) · TC-WF8
+  (compile) · TE-OSR9 (new) = four + chair.
