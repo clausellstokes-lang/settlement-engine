@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐⭐ ~07:10: THE CLOSING TRAIN IS COMPLETE — FULLGATE2 GREEN (captured
+# line), CAS 47ea9c9b → 42e12a76 (§380). Schema-9 LIVE; window CLOSED; the
+# memory pass banked (liveness-traps family + refinements). POST-WINDOW:
+# T2F messaged (rebase→handshake GO) → T2G → CT-1a → TE-HOUSE + RR pair +
+# ratchet cure. Two-day arc: THIRTEEN landings.
 # ~06:45: 2nd corroboration (the failing step alone: 11/11, zero strays) +
 # FULLGATE2 airborne 08:39:40Z (conditions in the start line; honest caveat:
 # load decaying 12/18/24 at fire, no vitest competitor — a repeat red with

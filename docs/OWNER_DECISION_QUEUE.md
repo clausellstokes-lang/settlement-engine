@@ -15572,3 +15572,36 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
 - **§379.4** The benign chunk-membership shift (FIRST_SLICE_PROJECTION between two
   lazy chunks, entry closure unmoved) accepted as recorded, so no successor
   re-derives it as a surprise.
+
+## §380 — COLLECTION + CAS: THE OSR-9 MINT LANDED; THE CLOSING TRAIN IS COMPLETE; THE WINDOW CLOSES (2026-08-22 ~07:10)
+
+- **TE-OSR9 collected.** FULLGATE2 green — TRUE_EXIT=0 captured in the self-named
+  log with STRICT DIST OK as the chain's last link, fired by the self-arming job
+  onto a verified-empty track with its conditions in its own start line. CAS
+  EXECUTED: 47ea9c9b → 42e12a76 (read back). C1' 158d99cd stands as the permanent
+  subjectSha ancestor under the never-amend law. The schema-9 freeze is LIVE: the
+  reconciliation ALL-SAME 1412/1412; the four eventLog identities banked with
+  genesis reasons (44/31 → 60/40); the stresses row triaged untagged; digests
+  reproduced both ways in .git-less extractions; the in-tree AND detached gates
+  green.
+- **§380.1 THE CLOSING TRAIN IS COMPLETE — four cars: WF-1F · MF-T2E · WF-8A ·
+  OSR-9.** The §376.1 window CLOSES with this CAS. The run-1 red is collected as
+  the §355-class's fully-documented specimen: five timeouts (20.3–23.2s vs the 20s
+  budget, the marker on every row, zero assertion shapes) against the eleven
+  banked assertions in milliseconds — total separation, corroborated by the
+  step-alone re-run; the WRAPPER TRAP fired on the run that mattered most (the
+  harness said exit 0; the braced capture said red) — the capture law's executed
+  vindication.
+- **§380.2 THE MEMORY PASS (banked this collection):** the liveness-traps family
+  (three raced GOs → the started-handshake; the silently-lost compile → the
+  90-minute artifact rule; the pgrep self-match near-miss → exclude own pgroup) ·
+  §358.2 refined: identify the results file BY CONTENT, not mtime · compile
+  registers and content bills are SAMPLES, not denominators (WF-8's three refuted
+  NOT-INCURRED + CT-0's three bill corrections) · chroniclersLetter.test.js is
+  census-invisible (nothing reds to say so) · the A/B-control face of the
+  instrument law (a probe omitting the declared chain ≠ the chain's inventory).
+- **§380.3 THE POST-WINDOW SEQUENCE BEGINS:** TE-T2F messaged (rebase onto
+  42e12a76, focused re-proof, terminal by started-handshake GO) → TE-T2G → CT-1a →
+  then TE-HOUSE (its post-WF-8A blocker satisfied; H9 now carries the row-style
+  census and the two-row-styles requirement) and the RR pair (post-mint blocker
+  now satisfied) and the ratchet cure per the queue.
