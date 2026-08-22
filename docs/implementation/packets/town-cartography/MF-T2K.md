@@ -377,3 +377,75 @@ user-visible surface, and moves no seed byte.
 | Acceptance cases | `6` | ≤8 |
 
 No override requested; no split needed. Both ratified caps hold with room.
+
+## §12 · COMPLETION RECEIPT — executed by lane TE-T2K at base `f7ba3145`
+
+**TIP FOR CAS: `088945bf`** at the time this section was written; the stamping commit that carries
+this section supersedes it, and the receipt row below is the authority. Three build commits on a
+detached ref, **no ref moved**, tree clean.
+
+| # | commit | subject |
+|---|---|---|
+| 1 | `59ea7e3b` | `feat(MF-T2K)` — the leaf, the acceptance file and BOTH walker edits, atomically |
+| 2 | `dad5a351` | `docs(MF-T2K)` — the packet at DRAFT, with its manifest and INDEX rows |
+| 3 | `088945bf` | `docs(MF-T2K)` — DRAFT → READY with the §4 preflight executed at this base |
+
+**Deliverable digests, read from the COMMITTED tip with `git show HEAD:`:**
+
+| file | SHA-256 |
+|---|---|
+| `src/domain/townMap/fabric/supportSurface.js` | `9d0e162b4bb592de6e95b80be6dea356279aeea8aea2e021ee8e62815ede2ea7` |
+| `tests/domain/townMapSupportSurface.test.js` | `7c3f69680cb352411358126a230cde030744b2dc2f3a34f97799047664ee6a31` |
+| `tests/lint/townMapStageManifest.walker.test.js` | `c2cabb6ee48cd74708bef689c051b94b7e50bd23e44f1bcb4d218808b2477961` |
+| `tests/lint/sovereigntyLightingContract.walker.test.js` | `784464018b7edbd391eb6c80cb84f4f4701765bfc8ff536a57b07ce79aa9513c` |
+
+**The two pinned-unmoved substrate files re-hashed at HEAD**, so "zero production files move" is a
+measurement rather than a claim: `massPart.js` `d52c19fa…e76f` and `solidLegality.js`
+`950680dc…391f` — **byte-identical to their base values.**
+
+**Results.**
+
+- **Acceptance A1–A6: 6 passed (6), TRUE_EXIT 0.**
+- **Census** `2501/364/2137/20731/5789` → `2502/364/2138/20737/5790`, walked SEQUENCED with each
+  figure read from its own arm's failure message, GREEN **33/33** at the after tuple. Isolation:
+  hiding the one new test file alone convicted `files` at **2501**, the base tuple exactly. Re-run
+  AFTER the cause paragraph landed: still 33/33, TRUE_EXIT 0.
+- **Stage-manifest walker with leaf + roster row: 3 passed, TRUE_EXIT 0.** onDisk 28 = assigned 5 +
+  unassigned 23; record lead **49**; `FOUNDATION_READERS` unmoved with `coordinateAbi.js` at 7.
+- **Anchor walker 9 passed · single-declaration walker 5 passed · combined focused battery 56
+  passed (56), TRUE_EXIT 0.** Scoped `eslint` over all four touched files: **exit 0**.
+- **`typecheck:domain:strict` 1134 / ceiling 1134, exit 0. `typecheck:ratchet` 173 / ceiling 173,
+  exit 0.** ZERO new errors in either; **0 `any` in a type position**.
+- **Mutants 7/7 convicted plus the guard-the-guard arm**, clean-tree control **exit 0 with 6 passed
+  (6)** first, every restore **digest-exact**, `git diff` over the fabric directory empty. §P6
+  subsumption proved by execution (§7). **Zero equivalent mutants.**
+- **`validate:packets` green at BOTH transitions:** DRAFT `147 packets (2 READY)`, READY
+  `147 packets (3 READY)`, both TRUE_EXIT 0. The duplicate-path refusal executed and quoted at §8.
+- **Entry-closure fence POST-BUILD** (`npm run build` exit 0, 314 prerendered route documents), then
+  `VERIFY_DIST=1` → **3 passed (3), TRUE_EXIT 0** — EXECUTED, not a pre-build skip.
+- **Forensic zoom over 710 dist chunks.** Six probes verified unique to the leaf across `src/`
+  (`assertSupportAcyclicity` · `COMPONENT_SLOT_ROLES` · `SUPPORT_SURFACE_KINDS` ·
+  `componentSlotRoster` · `UNCOVERED_BY_DESIGN` · the segment-reservation message): **0 chunks
+  each.** ⚠ Two candidate probes were **WITHDRAWN** rather than reported, and the reason is the
+  withdrawn-probe lesson itself: `support:terrain-face:` and `support:world-datum:` appear in **zero**
+  `src/` files, because the key is BUILT from the token table and never spelled as a literal — an
+  absence measured with a probe that is not in the source proves nothing. Three positive controls
+  owned by landed fabric modules (`plan-q1-0-1000-v1`, `CANONICAL_SPATIAL_OPERATION`,
+  `ORTHOGONAL_CROSS_PLAN`) read **1 chunk each**, so the denominator provably contains the fabric
+  surface.
+- **§408 pre-gate sweep** `npx vitest run tests/lint tests/build tests/ops`: TRUE_EXIT 1,
+  `3 failed | 188 passed (191)` files, `5 failed | 2164 passed | 63 skipped (2232)` tests. All five
+  joined to the frozen eleven by an executed title-prefix match against
+  `scripts/.test-ratchet-baseline.json` (`4deb4f02`), each `class: "debt"`: **STRAYS 0.** The
+  figures are identical to MF-T2J's sweep at the same base, which is the second reading that this
+  member added no red to these three directories.
+- **S0, TWO-PART, at this base** (§389.1/§397): the bare gate script `check-observed-shape-readers`
+  read **exit 1** WITH the printed envelope verdict *"observed-shape detector or unscanned execution
+  input changed since the schema-9 instrument was governed; an ordinary gate/write cannot migrate
+  the instrument"* — a real envelope reading, not the `ERR_MODULE_NOT_FOUND` module error that wears
+  the same exit code. This member writes no governed file and does not move that state.
+- **`package.json` / `package-lock.json` byte-unmoved.** No dependency arrives.
+
+**THE FULL GATE IS DEFERRED TO THE LANDING SLOT**, on the CT-2 / MF-T2J precedent: this lane's base
+is provably not an ancestor of the branch, so a gate receipt taken now would certify a tree that is
+not the one that lands. The detached terminal fires at the GO.
