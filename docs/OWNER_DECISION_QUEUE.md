@@ -15172,3 +15172,33 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
 - **§363.4 Topology caution reinforced:** the build tip is NOT an ancestor of the
   ledger branch and the main worktree's landing surfaces are thousands of porcelain
   lines stale — landing-estate reads go through `git show claude/composite-r4:` only.
+
+## §364 — TC-HOUSE REVIEWED AND RULED; H7 ADDED; TE-HOUSE SLOTTED POST-WF-8A; TC-DOSSIER TAKES THE FREED SEAT (2026-08-22 ~16:20)
+
+- **draft-HOUSE-1 collected and RULED** (seven members ≈165 lines, disjoint fences,
+  one commit per member, the severable split rule ratified — a failing member rebases
+  out by its own commit). Rulings on its raises: **R1 ACCEPTED** — acquire_reaper's
+  identical ownerless window joins as severable arm 1b under the same age guard ·
+  **R2 ACCEPTED** — the §354.2 blind spot is a RUN-BINDING gap, not a missing check
+  (the convicting join is status-unconditional; nothing runs it between a DRAFT-time
+  manifest edit and the next gate) — H2 charters the lint-staged binding; the deeper
+  manifest-vs-md row join stays SEEDED · **R4 noted** (the checkboxes live at
+  805/841/871) · **R5 ACCEPTED AND BINDING** — the bundle bases on the POST-WF-8A tip
+  (WF-8A's parked tree already hand-edits A5's figures; the roster is eleven
+  registries there), so TE-HOUSE dispatches after WF-8A's CAS.
+- **§364.1 H7 ADDED (the charter predates §363):** TE-LPDOC folds into the bundle —
+  cure docs/LANDING_HANDOFF_AMENDMENTS.md's false 'current law' claim with a truthful
+  status stamp per the §320 law (a delivered spec is presumed implemented; the live
+  tree outranks it), ≤10 lines, its own severable commit, §363 authority.
+- **§364.2 Fold/seed judgments RATIFIED as drafted:** 6a NARROWED to the one measured
+  offender (the five-file family audit seeded — unmeasured members, and one sibling's
+  deliberate double-scan would go VACUOUS if memoized: the vacuity discipline applied
+  to a performance cure) · 6b folded whole · npcAuthoringScope stabilization SEEDED
+  (post-ratchet-cure, its timeouts become legible before we spend on them) · the
+  TMPDIR orphan sweep SEEDED to a later pass, not scope-added to the mid-build
+  TE-RATCHET.
+- **§364.3 SCHEDULER:** TC-DOSSIER (CT-0, §361's queue head) DISPATCHED on the freed
+  seat — chair-tier compile (the fact×mechanism×coverage mapping is judgment-dense,
+  §343.1(a)); zero-compute until the track opens. Seats: T2E (gate, firing) ·
+  TE-RATCHET (build) · TE-WF8 (parked, next after T2E) · TC-DOSSIER (new) = four +
+  chair.

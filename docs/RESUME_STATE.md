@@ -74,6 +74,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~16:20 ET: TC-HOUSE ruled (§364) — 8 members now (H7=LPDOC added);
+# TE-HOUSE bases POST-WF-8A (R5 binding); folds/seeds ratified (6a narrowed;
+# vacuity-aware). TC-DOSSIER (CT-0) DISPATCHED on the freed seat.
 # ~15:55 ET: T2E's quiet-track GO had RACED its turn boundary (no gate log,
 # machine idle 3h, branch unmoved) — GO RE-SENT on the verified-quiet track
 # (load 4.5). Lesson: after a GO, verify the gate STARTED (a log appears)
