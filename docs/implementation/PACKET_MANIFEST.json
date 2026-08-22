@@ -19226,6 +19226,138 @@
         [ "npm", "run", "validate:packets" ],
         [ "npm", "run", "check:tail" ]
       ]
+    },
+    {
+      "id": "MF-T2G",
+      "status": "DRAFT",
+      "packetPath": "docs/implementation/packets/town-cartography/MF-T2G.md",
+      "verifiedBase": "cb369d2b0b63422db6f91af6c0f4feabcf5ff2dc",
+      "changeManifest": [
+        {
+          "_note": "THE STRIP HOST. The §288-nonconforming PROJECTION_LIGHT_PROFILE record and its one publication field are deleted; the two module-internal shadow constants and the whole shadow arithmetic stay, byte-identical, and that preservation was proved by cmp on the extracted region rather than by eye. Net -9 effective, measured with eslint's own Linter.",
+          "action": "MODIFY",
+          "path": "src/domain/townMap/fabric/projection.js"
+        },
+        {
+          "_note": "THE BARREL. One export row removed; the other three projection rows stay. Net -1 effective. This is the second shared D3a path this member reserves.",
+          "action": "MODIFY",
+          "path": "src/domain/townMap/fabric/index.js"
+        },
+        {
+          "_note": "The identity-arm host: the profile import is removed, the identity arm is rewritten as an anchored absence, two of the twelve declared digest literals are re-recorded, and the member's two new titles land inside the existing MF-T1V describe as straight-line it() calls with string-literal titles.",
+          "action": "TEST",
+          "path": "tests/domain/townMapMassingProjection.test.js"
+        },
+        {
+          "_note": "Four of the twelve declared digest literals. The save-bytes pins in the same arm are UNCHANGED and were proved unchanged: documents never embedded the profile.",
+          "action": "TEST",
+          "path": "tests/domain/townMapMassingPersistence.test.js"
+        },
+        {
+          "_note": "Six of the twelve declared digest literals, including the saved pair the compile could not execute and left to the executor. LEGACY_HASH in the same file is a saved-DOCUMENT digest, is not among the twelve, and is byte-identical through the strip.",
+          "action": "TEST",
+          "path": "tests/domain/townMapFantasyConstruction.test.js"
+        },
+        {
+          "_note": "THE SHARED D3a CENSUS PATH. All five figures re-derived together at this base by cumulative-walk conviction with a -1 sentinel, in ONE re-record block naming its cause and its censusAuthorization refs. +2 titles and nothing else; parked unmoved.",
+          "action": "TEST",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/packets/town-cartography/MF-T2G.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE MF-T2A PLANT HOST. This exact line must survive byte-identical at column zero or the sweep's perl plant silently stops applying. This member does not open that host at all; the row is the guard that says so, and it was grepped before and after the edit.",
+          "path": "src/domain/townMap/fabric/dcelEmbedding.js",
+          "symbol": "export function derivePlanarDcelEmbedding"
+        },
+        {
+          "_note": "THE PLANT ITSELF. Its host neither declares nor imports CURRENT_MAP_TRADITION_ID, so the planted second declaration parses; this member keeps that precondition true by editing no file that imports it.",
+          "path": "scripts/mutation-sweep.sh",
+          "symbol": "check_caught \"town-map/fabric duplicate export declaration\""
+        },
+        {
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export const CURRENT_MAP_TRADITION_ID"
+        },
+        {
+          "_note": "THE DIGEST SEAM this member's declared shift rides, and does not touch. Preserved so a later act cannot move the seal site without this packet's guard reddening.",
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export function sealCanonicalArtifact"
+        },
+        {
+          "_note": "THE SHADOW MACHINERY THE STRIP PRESERVES. ODQ §375 ratified the record-vs-shadows boundary; this row is the machine-readable form of that ratification. The draw geometry it produces was proved byte-identical through the strip.",
+          "path": "src/domain/townMap/fabric/projection.js",
+          "symbol": "function shadowPolygon"
+        },
+        {
+          "_note": "THE PUBLICATION SITE. One seal call publishes every FIRST_SLICE_PROJECTION, which is why exactly one field removal moves exactly the twelve pins and nothing else.",
+          "path": "src/domain/townMap/fabric/projection.js",
+          "symbol": "export function projectResolvedFirstSliceFixedSurvey"
+        },
+        {
+          "_note": "The projector the barrel still exports — A2's positive control, so a strip that emptied the export surface could not pass as a strip that removed one row.",
+          "path": "src/domain/townMap/fabric/index.js",
+          "symbol": "projectFirstSliceFixedSurvey"
+        },
+        {
+          "_note": "The describe the two new titles land inside. It is not created by this member, so the row is admissible at every status.",
+          "path": "tests/domain/townMapMassingProjection.test.js",
+          "symbol": "describe('MF-T1V roster-aware fixed-survey massing projection'"
+        }
+      ],
+      "retiredSymbols": [
+        {
+          "_note": "THE MEMBER'S WHOLE CHARTER. ODQ §299.3(b) offered conform-or-strip; §288.8 sequences the conforming fixed survey after D4 and §290.4 forbids enlarging the tranche, so this is a strip. NO SUCCESSOR SYMBOL EXISTS AND NONE IS NAMED — the D4-era profile is a future charter's to promise, and an empty successor is the honest record of a removal.",
+          "path": "src/domain/townMap/fabric/projection.js",
+          "symbol": "FIXED_SURVEY_LIGHT_V1"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "The rewritten identity arm: the published projection carries no light profile. The positive control is FIRST and was already in the arm — the artifact kind, the eighteen-primitive census with SHADOW at two, and the shadow hull shapes — so the absence is measured against a projection proved to have been produced. The absence itself routes through expectAbsentWithAnchor by name on the same line, with a sibling key as the liveness anchor, and it was proved RED against the unedited module before the strip was applied."
+        },
+        {
+          "id": "A2",
+          "case": "NEW. The strip pin, on all four driven surfaces plus the barrel. The §372.3 found-the-symbol control runs FIRST on every surface: the canonical bytes are proved to carry a known-present symbol, so an extraction that found nothing cannot pass as an absence. Then each of the four forbidden strings is absent from every surface's bytes through the anchored helper. The barrel arm asserts the record is gone from the namespace with a sibling export as the anchor and the projector's presence as the positive control."
+        },
+        {
+          "id": "A3",
+          "case": "NEW. The exact published key roster, on all four surfaces, as the prevention guard in BOTH directions: the profile cannot silently return AND no second field can silently vanish. The second direction was proved by a mutant that deletes warnings from the sealed publication, which reds this case alone among the new ones."
+        },
+        {
+          "id": "A4",
+          "case": "The six-pin re-record in the fantasy-construction A6 arm: the six literals equal this lane's own base captures, each captured twice independently and agreed. LEGACY_HASH in the same file is byte-identical, and the cause comment naming this member and its authorization is present."
+        },
+        {
+          "id": "A5",
+          "case": "The four-pin re-record in the massing-persistence A6 arm, with the save-bytes pins in the same arm unchanged — proved rather than assumed by a negative control that drives the saved-document digest through both trees and finds it identical."
+        },
+        {
+          "id": "A6",
+          "case": "The two-pin re-record of the legacy pair in the massing-projection A6 arm. A mutant reverting exactly one of these literals reds this suite alone, which is what makes the re-record load-bearing rather than decorative."
+        },
+        {
+          "id": "A7",
+          "case": "No-op controls: nothing else moved. The full fabric-touching battery was run in a separate worktree at the verified base and again in the edited tree, and per-file test counts AND full title sets were compared. Exactly one file moved, by exactly the two added titles. Independently, the digest-literal denominator over tests/ was enumerated: the same occurrence total and the same distinct count before and after, with exactly twelve occurrences carrying six values out and six values in, zero pins added and zero removed."
+        },
+        {
+          "id": "A8",
+          "case": "Determinism and replay of the stripped projector: the existing first-slice determinism property suite stays green untouched, and replay identity plus deep-frozenness were separately executed on the stripped probe tree."
+        }
+      ],
+      "checks": [
+        [ "npx", "vitest", "run", "tests/lint/negativeAssertionAnchor.walker.test.js" ],
+        [ "npx", "vitest", "run", "tests/domain/townMapMassingProjection.test.js", "tests/domain/townMapMassingPersistence.test.js", "tests/domain/townMapFantasyConstruction.test.js", "tests/property/townMapFirstSliceDeterminism.test.js", "tests/lint/townMapFabricSingleDeclaration.walker.test.js", "tests/lint/sovereigntyLightingContract.walker.test.js" ],
+        [ "npm", "run", "typecheck:ratchet" ],
+        [ "npm", "run", "typecheck:domain:strict" ],
+        [ "npm", "run", "validate:packets" ],
+        [ "npm", "run", "check:tail" ]
+      ]
     }
   ]
 }
