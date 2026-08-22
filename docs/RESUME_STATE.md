@@ -74,6 +74,12 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~09:30 ET: THE VARYING-CAST FINDING (§355) — the suite's full-run
+# context is intermittently contaminated (3 runs, 3 disjoint stray casts;
+# lawBandTable green-at-census now flapping). T2E ruled INNOCENT (5 legs);
+# classified-re-run protocol is LAW (one re-run after classification; 2nd
+# stray = STOP). HUNT-1 chartered+dispatched (chair-tier forensic; heavy
+# runs only in granted windows). Protocol + finding banked to memory.
 # ⚠ ~08:05 ET: T2E's gate hit a NON-BANKED red — distribution.test.js fails
 # in-suite only (32/32 isolated, both trees; seed-deterministic → order/state
 # contamination). Deciding arm running (base-proof ratchet). Chair evidence

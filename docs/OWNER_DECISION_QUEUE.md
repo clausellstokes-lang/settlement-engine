@@ -14846,3 +14846,41 @@ recommended. Implementation, per item:
   at DRAFT — **the validator's DRAFT-time integrity blind spot is QUEUED to
   TE-HOUSE**; class note: scope manifest edits to your own row by unique key); the
   M7 matrix hole self-closed pre-sweep.
+
+## §355 — THE VARYING-CAST FINDING: THE SUITE'S FULL-RUN CONTEXT IS INTERMITTENTLY CONTAMINATED; THE PROTOCOL AND THE HUNT (2026-08-22 ~09:30)
+
+- **THE FINDING (T2E's diagnosis, three runs of executed evidence):** three
+  full-suite runs at or one commit above the same tree produced three DISJOINT
+  non-census failure sets — WF-1F's terminal CLEAN; T2E's gate red on
+  distribution.test.js; the pristine base-proof red on npcAuthoringScope (the known
+  flake, appearing WITHOUT the member existing) + lawBandTable. No stray repeats
+  across runs. The base tree alone reds on a varying cast. The sharpest datum:
+  lawBandTable traces to cf7e6466, PRE-DATING the frozen census, untouched since,
+  green when the census was measured — a structural walker giving two answers at
+  one commit is order/resolution-dependent pollution caught in the act.
+- **§355.1 T2E'S ATTRIBUTION ACCEPTED — the member is innocent by five legs** (no
+  importer; 32/32 isolated ×3 both trees; byte-unchanged 182 commits; passed in
+  the pristine full run; that run minted its own disjoint strays). The lane's
+  refusal to run the E1/E2 narrowing experiment on a refuted premise, and its
+  repetition test of 'reliably', are the correct scientific moves and are recorded
+  as such.
+- **§355.2 THE CLASSIFIED-RE-RUN PROTOCOL (law until the cure lands):** a stray
+  non-census red in a full run is classified — baseline lookup → isolation ×3 →
+  pristine-base full run. If the stray does not repeat across runs it is the
+  SUITE'S contamination, not the member's, and ONE full re-run is lawful (this is
+  the four-leg law generalized, not rerun-until-green: the member is classified
+  innocent BEFORE the re-run, which tests the instrument's next draw). A SECOND
+  stray on the re-run = STOP; the train holds and the hunt takes the track.
+  T2E is granted its classified re-run at a09138d7.
+- **§355.3 HUNT-1 CHARTERED AND DISPATCHED** (chair-tier, §343.1(d) forensic):
+  hypotheses — worker-level module-state leakage with schedule-selected victims;
+  load-correlated timeouts misread as assertions (nobody has yet READ the actual
+  failure messages in the logs — the hunt's first act); resolution/module-cache
+  double-registration (the TC5BI seam class). Cheap analysis first; full-suite
+  experiments only in chair-granted track windows. The cure, when found, is its
+  own lane.
+- **§355.4** Until the hunt lands: every gate verdict carries stray risk; GOs
+  continue; the mint's protected window gets PRIORITY track clearance (a stray
+  inside its window costs a rebuild — if the mint's gate strays, the §353 window
+  law means it re-runs INSIDE the window with no landing between, which remains
+  safe, only slow).
