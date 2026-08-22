@@ -16487,3 +16487,40 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   handshake also collected: fresh tree, S0 INTACT, six-gate bill re-taken
   green (39/39), the 194-not-consent-named location correction noted. WEB-1
   builds the full member now and holds.
+
+## §407 — RR-1 IS LANDED (THE 20TH LANDING); FIVE JUDGMENTS RATIFIED; RR-2 UNBLOCKED AND DISPATCHED; TWO MORE WEBSITE CARS TAKE THE FREED SEATS (2026-08-23 ~00:15)
+
+- **THE CAS EXECUTED:** ancestry verified, claude/composite-r4 moved
+  eb6124a6 → 19b799ce718d52e36a3b14a85fa9cfd5051ccf26 by compare-and-swap.
+  RR-1's member: the dead-arm deletion with tombstone rows and the folded
+  parity arm; the governed schema-10 shrink (two rows removed, key-by-key
+  against a pre-write copy, triple 1998/1412/387 → 1996/1410/387 with
+  bankedReads 60 and taggedRows 40 HOLDING — the pairing that proves a shrink
+  is not a cleared row in disguise; detectorTree byte-identical); every
+  evidence leg re-derived at base and held; envelope two-part readings at all
+  four points including a detached own-install proof; the full gate
+  TRUE_EXIT=0 with tail agreement, all 17 steps, census at ceiling 11
+  UNMOVED. Its run-1 ENOSPC red was honestly discarded on the instrument's
+  own fail-closed statement.
+- **A DRAFT ERROR CORRECTED IN THE OPEN:** the consumer census was THREE
+  readers of services.detailed, not two (journalPages.js carried the read at
+  the draft's own pin) — recorded in the packet, not silently fixed; the
+  pressures datum still has exactly one reader, so the ruling stands.
+- **FIVE JUDGMENTS RATIFIED:** J-RR1B-1 (record the census correction),
+  J-RR1B-2 (stale-figure comments amended beyond the draft's list — the §320
+  class policed at the comment level), J-RR1B-3 (the capsule's canned 1998 is
+  synthetic parser stdout, untouched — correct), J-RR1B-4 (manifest/INDEX
+  omitted from changeManifest per live precedent — the path-reservation law),
+  J-RR1B-5 (ENOSPC reclamation limited to its own discharged proof tree).
+  The tipproof worktree removed post-CAS as the lane asked.
+- **THE CASCADE ADVANCES:** RR-2's split-promotion chain is OPEN —
+  **TE-RR2 dispatched** at the new tip with the §374-ruled draft, the
+  declared-output-shift bill, ZERO new test files, and the EXHIBIT deliverable
+  (the base/cured Institutions-chapter render pair the chair posts to the
+  owner BEFORE the exposing CAS — the §374 owed act, built early so it never
+  blocks). **TE-WEB6** (the ceiling disclosure, two files) and **TE-WEB4**
+  (the address-chain registry row, zero scripts/audit motion) take the freed
+  seats — both migration-free, so the §402 sequential-migration rule is
+  unviolated while WEB-1 holds 197. FOUR ACTIVE: WEB-1 · RR-2 · WEB-6 ·
+  WEB-4. Landing queue: RR-2 (post-exhibit) → T2Bf → CT-2 → H8B/CT-3 → T2H →
+  then the website cars in GO order.

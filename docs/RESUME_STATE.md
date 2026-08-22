@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~00:15: RR-1 LANDED (§407, 20th landing) — tip 19b799ce; five
+# judgments ratified; the third-reader draft error recorded in the open.
+# TE-RR2 dispatched (exhibit pair deliverable — chair posts BEFORE its CAS);
+# TE-WEB6 + TE-WEB4 fill the seats (migration-free). FOUR: WEB-1 · RR-2 ·
+# WEB-6 · WEB-4. Queue: RR-2 → T2Bf → CT-2 → H8B/CT-3 → T2H → website cars.
 # ⭐ ~23:45: WEB-1 F1 RULED (§406) — the signed migration predicate AMENDED
 # to the CONJUNCTION (v-stamp null AND zero change records; no-op save =
 # stamp without records, the false positive); verify guard: grep-prove no
