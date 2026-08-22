@@ -74,6 +74,13 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~21:10 ET: RACED-GO AGAIN on WF-8 (no terminal log 40 min after GO;
+# machine idle) — GO RE-SENT with everything standing. T2F terminal-ready at
+# d835477d but HELD behind WF-8 + the mint window; its three findings ruled
+# (§6a docblock≠declaration; §6b the cumulative-walk census lesson BANKED,
+# the sequenced-sentinel defect's second face; §6c committed-bytes re-measure
+# credited). ⚠ CLASS NOTE: TWO raced GOs in one evening — until cured, EVERY
+# GO gets a started-check within minutes (the wakeup's check 2 + chair habit).
 # ⭐ ~20:50 ET: RR-2 ruled (§374) — one-line cure + shift bill + exhibit act
 # owed at landing; agreement pin = ONE title; 11/5 correction credited.
 # TC-T2G dispatched (port pipeline). Cap: WF-8 · DOSSIER · TE-T2F · TC-T2G.
