@@ -16718,3 +16718,44 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   reservation coordination was PROVEN BY EXECUTION — a two-packet probe
   returns the duplicate-change-path error at DRAFT and READY and none at
   LANDED/SUPERSEDED, the §410 law's mechanism observed directly.
+
+## §413 — WEB-5 COLLECTED GREEN; THE EXPORTER VERDICT MEASURED (v4, ZERO MOTION); THE OPT-IN JUDGMENT RATIFIED; T2J TAKES A FREED SEAT (2026-08-23 ~05:00)
+
+- **The member:** tip 6d6572ea (pinned), two commits on 19b799ce, no ref
+  moved, terminal end-to-end GREEN with tail agreement on a quiet track (load
+  13-25 after 25 mutex polls), log identified by cwd LINEAGE with two
+  gate-tails live. Final sweep on the committed tree: five reds, ALL FIVE
+  BANKED, zero strays.
+- **The measured exporter verdict:** v4 with ZERO exporter motion — executed,
+  not predicted: preflightAccountExport carries savedSettlements VERBATIM and
+  the only stripping projection has zero consumers; both charter STOPs are
+  MOOT rather than merely unfired. **One charter prediction REFUTED:** no
+  eventLog validator exists anywhere in src/lib or src/domain — the predicted
+  anchor carries nothing for it; the wall is stated in-member at the
+  persisted schema's own shape, refutation recorded in module, packet, and
+  judgment ledger.
+- **Two charter gaps the lane closed correctly:** RESTORE IS OPT-IN — the
+  restoring function's second caller is the reconciliation slice whose own
+  admission declares these fields unsupported; a default-ON restore would
+  have silently rewritten another slice's contract (and opt-in bought zero
+  interior reds). And neighbour-edge DIRECTION ids are save-ids too —
+  remapped, or the edge DROPPED rather than landed with a stale endpoint.
+- **A self-review hardening taken at the cost of a gate cycle, RATIFIED:** a
+  bare-index read of the id map would resolve __proto__/constructor ids from
+  the user-supplied file against the map's prototype — never live (the
+  production caller uses Object.create(null)) but exported on a
+  hostile-input path; cured with the own-key guard, M9 convicting it. The
+  in-flight gate was queued-only when stopped (nothing stale), the re-run
+  clean — and the wrapper reported "exit 0" for the KILLED run, the trap's
+  next firing, correctly not cited.
+- **Twelve mutants against two green controls; fourteen bare negatives cured
+  BY ANCHORING, never by raising ceilings.** J-WEB5-10 ratified (terminal
+  mint, validator-confirmed reserving nothing against WEB-6's hold);
+  **J-WEB5-12 ruled: DEFERRED-DOCUMENTED** — surfacing dropped-edge counts
+  as user notices is a defensible UX addition the compiled semantics did not
+  order; it joins the website train's next-touch queue, not this member.
+- **§413.1 SEAT:** WEB-5's completion frees a seat → **TE-T2J dispatched**
+  (the stage-manifest port, D3a member 8, STACKED on T2H's holding
+  05e7f9d5 — three-deep, rebase-slot laws briefed; lands after T2H). Active:
+  RR-2 (landing terminal) · WEB-7 (terminal running) · T2J. One seat held
+  open for the cascade's landing work.

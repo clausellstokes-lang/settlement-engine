@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~05:00: WEB-5 COLLECTED (§413) — tip 6d6572ea pinned; exporter verdict
+# v4/zero-motion; eventLog-validator refutation recorded; opt-in restore
+# ratified; proto-pollution hardening + honest stopped-gate. J-WEB5-12
+# deferred-documented. TE-T2J dispatched stacked on T2H (3-deep).
 # ⭐ ~04:10: WEB-7 BUILT (§412.1) — e5975829, terminal armed behind RR-2's
 # landing gate; OFL rider found already-discharged at base; reservation law
 # proven by executed two-packet probe. Awaiting RR-2's terminal → CAS.
