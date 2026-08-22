@@ -15516,3 +15516,29 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   matches no branch'; joins the memory pass at the closing collection.
 - **§377.2** The dispatch queue holds: CT-1a waits on the corrected CT-0; the mint's
   gate (GO delivered) remains the track's one event.
+
+## §378 — CT-0 RATIFIED AFTER THE PIN CORRECTION; THE R-4 HYPOTHESIS REFUTED BY GREP; TE-CT1a DISPATCHED (2026-08-22 ~04:20)
+
+- **The pin correction executed cleanly and the compile survives almost whole:**
+  the chair's inversion hypothesis (that the build tree's epoch ladder might carry
+  wall dates, enabling WHEN-prose) is REFUTED by executed greps — zero wall-date
+  hits in composite-r4's src; the 5,894-line fabric substrate is geometry, not
+  chronology; the advance-epoch ledger is the sim stamp, not a construction date.
+  All 20 claim judgments stand on BOTH trees: CT-1a explains WHY, never WHEN.
+  Every golden-bill figure is now proven AT THE LANDING TREE by blob-equality
+  (the contract pins, the prose kernel — so the modulo analysis is CONFIRMED on
+  build — the generator, the voice baseline); the four voiceMechanics banked rows
+  present; the drafts adjusted in place with the §0 PIN-CORRECTION section (dual
+  pin, both readings recorded); the 113 variants untouched and re-scanned clean.
+- **§378.1 CT-0 IS RATIFIED DISPATCHABLE.** The Tier-A additions on build
+  (patronFallSentence + PATRON_FALL_CAUSES among them — WF-8A's own landing
+  already feeding the mapping) change no chapter verdict. The DS-FTH-4 adjacency
+  note (CT-3's pools describe standing persistence, never narrate a fall —
+  disjoint from FALL_SENTENCE) is the coherence law applied at draft time.
+- **§378.2 TE-CT1a DISPATCHED on the freed seat** — the morphology chapter lands
+  as ADDITIVE NEW BLOCKS (a new block moves zero seeded draws — the blob-proven
+  modulo fact — so the chapter carries ZERO same-seed prose movement, proven by
+  both-ways goldens with any motion a STOP), source-first with the generator per
+  the WF-1E pattern. Its landing queues behind T2F and T2G per the §361.2
+  interleave; the mint's window binds it like everyone. Active: the mint (gate) ·
+  TE-T2G · TE-CT1a = three; T2F parked at its door.

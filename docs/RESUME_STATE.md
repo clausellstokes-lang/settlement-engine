@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~04:20: CT-0 RATIFIED post-correction (§378) — R-4 inversion REFUTED by
+# grep (WHY never WHEN, both trees); golden bill blob-proven at the landing
+# tree. TE-CT1a DISPATCHED (additive-new-blocks = zero same-seed movement,
+# proven both-ways; lands after T2F/T2G). Active: mint-gate · T2G · CT1a.
 # ⭐ ~03:55: CT-0 delivered BUT pin error chair-caught (§377) — engine facts
 # read at the LEDGER tip, not the build branch; re-verification ordered w/
 # PIN-CORRECTION section. LAW: THE LEDGER BRANCH IS NOT THE BUILD TREE
