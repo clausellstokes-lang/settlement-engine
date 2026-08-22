@@ -19695,6 +19695,117 @@
         [ "npm", "run", "validate:packets" ],
         [ "npm", "run", "check:tail" ]
       ]
+    },
+    {
+      "id": "MF-T2Bf",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/town-cartography/MF-T2Bf.md",
+      "verifiedBase": "0afddfe971ea682573ac7045ee27eb25a2045a55",
+      "changeManifest": [
+        {
+          "_note": "THE DEFECT HOST. canonicalBytes emits the four U+001F field separators again, so the artifact-digest preimage is injective across every field seam. Spelled as ESCAPES because tests/lint/controlBytes.test.js forbids a raw C0 byte under src/** or tests/** — the same ratchet that forced MF-T2B to re-spell them, which is how all four were dropped. OUTPUT is byte-identical to the sealed source, proved by evaluating both function bodies over six tuples. 95 -> 95 effective lines, NET ZERO: every added line is a comment. The deps join, the signature and every other export are byte-identical.",
+          "action": "MODIFY",
+          "path": "src/domain/townMap/fabric/coordinateAbi.js"
+        },
+        {
+          "_note": "THE PIN THAT FROZE THE DEFECT, RE-RECORDED WITH ITS CAUSE (ODQ §372/§387; cause: injectivity restoration), plus the collision pair as two anchored arms and one named module-scope separator constant. All of it lands INSIDE the existing A5 test as straight-line statements — WF-1F's shape — so no title, suite title, credited file or parked row moves and the census is still. The 26-call replay roster and its length pin are untouched.",
+          "action": "TEST",
+          "path": "tests/property/townMapCoordinateAbiDeterminism.test.js"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/packets/town-cartography/MF-T2Bf.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE CURED FUNCTION. Renaming or removing it silently retires the whole member; MF-T2H ports the receipt layer directly onto it.",
+          "path": "src/domain/townMap/fabric/coordinateAbi.js",
+          "symbol": "export function canonicalBytes"
+        },
+        {
+          "_note": "HELD AT ITS CURRENT VALUE BY J-TET2BF-2 and NOT pinned to a figure here: no artifact was ever minted under the separator-less encoding, so a bump would migrate nothing. The row exists so a later member that PERSISTS a canonicalBytes result finds the obligation instead of rediscovering it.",
+          "path": "src/domain/townMap/fabric/coordinateAbi.js",
+          "symbol": "export const COORDINATE_ABI_VERSION"
+        },
+        {
+          "_note": "THE RATCHET THAT DECIDES THE SPELLING. This member reversed its own first cure when this walker red; naming it makes the authority for the escape form findable from the manifest rather than only from the packet prose.",
+          "path": "tests/lint/controlBytes.test.js",
+          "symbol": "export function findControlBytes"
+        },
+        {
+          "_note": "THE NAMED SEPARATOR. The pins read through it rather than through a bare literal, because a bare invisible literal in a pin is the exact shape that let the defect land.",
+          "path": "tests/property/townMapCoordinateAbiDeterminism.test.js",
+          "symbol": "const ABI_FIELD_SEPARATOR"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "THE COLLISION WITNESS, EXECUTED BOTH WAYS. Three engineered tuple pairs crossing the deps->body seam, the kind->schema->deps seam, and the nested-receipt shape MF-T2H will use, driven against the LIVE module at the verified base and again with the member applied: 3 of 3 COLLIDE before, 0 of 3 collide after, separator count 0 -> 4. The negative control — two plainly distinct tuples — reads DISTINCT in BOTH readings, so an after-run reporting no collisions cannot be a witness that stopped comparing."
+        },
+        {
+          "id": "A2",
+          "case": "THE DECLARED RE-RECORD, KEY BY KEY. Exactly ONE committed pin moves, the line ODQ §372 names: canonicalBytes(K, 2, null, x). Added 0, removed 0, moved 1. Its cause is stated at the pin in the source, naming §372 and §387, so a successor learns why the literal changed without leaving the file."
+        },
+        {
+          "id": "A3",
+          "case": "THE GUARD IS MACHINERY, NOT THE RE-RECORDED LITERAL. The collision pair lands inside the same test: a positive control asserting that stripping the separators back out reproduces the ONE pre-cure string, named as a literal so the control cannot degrade into comparing the deriver with itself, and the cure arm asserting the two encodings differ. Both arms convict independently under the mutant."
+        },
+        {
+          "id": "A4",
+          "case": "OUTPUT EQUIVALENCE WITH THE SEALED SOURCE, DESPITE A DECLARED SPELLING DIVERGENCE. The sealed function source normalised from its raw byte to the escape spelling is byte-identical to the landed one, and both function bodies evaluated over six tuples — empty kind, negative schema, multi-dep, unicode body, and both collision tuples — produce identical output on every case, output digest b278b339c81ca3a684d7ebadd6cf30e7480489a4a42a81838d17bd298880b78a on both sides."
+        },
+        {
+          "id": "A5",
+          "case": "ZERO BLAST RADIUS, RE-VERIFIED AT THIS BASE RATHER THAN CARRIED FROM §372. A tree-wide grep finds the declaration, one barrel re-export row, the pin host and two packet prose mentions — no landed production consumer, nothing persisted, contentHash declared null — so the encoding change moves nothing an owner or a campaign can observe and no shift is declared."
+        },
+        {
+          "id": "A6",
+          "case": "THE MEMBER IS CENSUS-NEUTRAL BY CONSTRUCTION AND THAT WAS CHECKED, NOT ASSUMED. The tuple 2497 / 364 / 2133 / 20719 / 5785 reads identically before and after: no test file, describe or literal title is added, and every new statement is straight-line inside an already-credited test."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/property/townMapCoordinateAbiDeterminism.test.js",
+          "tests/domain/townMapCoordinateAbi.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/controlBytes.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/townMap",
+          "tests/property/townMap"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint",
+          "tests/build"
+        ],
+        [
+          "npm",
+          "run",
+          "validate:packets"
+        ],
+        [
+          "npm",
+          "run",
+          "check:tail"
+        ]
+      ]
     }
   ]
 }

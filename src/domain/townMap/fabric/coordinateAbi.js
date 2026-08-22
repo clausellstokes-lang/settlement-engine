@@ -236,14 +236,28 @@ export function reconcilesToTopologyText(v) {
  * artifacts encode alike is in the prefix: kind, schema, ABI version, and the ordered
  * dependency refs. ⚠ What this produces is a FINGERPRINT input — never a security primitive and
  * never an authorization decision.
+ *
+ * ⛔⛔ THE FOUR U+001F FIELD SEPARATORS ARE LOAD-BEARING AND ARE NOT DECORATION. They sit after
+ * the ABI version, after the kind, after the schema and after the dependency list’s closing
+ * bracket. Without them the four fields run together and the preimage stops being INJECTIVE:
+ * `deps:['a']` with body `']body:b'` and `deps:['a]body:']` with body `'b'` encode to the SAME
+ * bytes, which hands two different artifacts one fingerprint.
+ *
+ * ⚠ THEY ARE SPELLED AS `\u001f` ESCAPES, AND THAT SPELLING IS THE WHOLE STORY OF THE DEFECT. The
+ * sealed source carries RAW U+001F bytes, and `tests/lint/controlBytes.test.js` forbids a raw C0
+ * byte anywhere under `src/**` or `tests/**` — so the port could NOT copy them and had to
+ * re-spell them, and in re-spelling them it dropped all four with nothing on screen to show for
+ * it (ODQ §372). The OUTPUT is byte-identical to the sealed encoding; only the source spelling
+ * differs, and that divergence is DECLARED. The guard is MACHINERY and not this comment: the
+ * determinism companion drives that collision pair and asserts the two encodings DIFFER.
  * @param {string} artifactKind @param {number} schemaVersion
  * @param {readonly string[]|null|undefined} orderedDependencyRefs @param {string} bodyText
  * @returns {string}
  */
 export function canonicalBytes(artifactKind, schemaVersion, orderedDependencyRefs, bodyText) {
   const deps = (orderedDependencyRefs || []).map((d) => String(d)).join(',');
-  return `abi:${COORDINATE_ABI_VERSION}kind:${artifactKind}schema:${schemaVersion}`
-    + `deps:[${deps}]body:${bodyText}`;
+  return `abi:${COORDINATE_ABI_VERSION}\u001fkind:${artifactKind}\u001fschema:${schemaVersion}`
+    + `\u001fdeps:[${deps}]\u001fbody:${bodyText}`;
 }
 
 /** A ring as canonical ABI text — integers, never the decimal string.

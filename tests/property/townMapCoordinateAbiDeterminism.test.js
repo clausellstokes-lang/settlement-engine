@@ -55,6 +55,13 @@ const LEAF_PATHS = Object.freeze([
   'src/domain/townMap/fabric/exactGeometry.js',
 ]);
 
+/**
+ * U+001F, the ABI's field separator. It is NAMED here because the character does not print: a
+ * bare literal inside the pins below would read as line noise, and reading as line noise is how
+ * four of them were dropped from the module in the first place (ODQ §372).
+ */
+const ABI_FIELD_SEPARATOR = '\u001f';
+
 const RING = Object.freeze([[0, 0], [1.5, 0], [1.5, 2.25], [0, 2.25]]);
 const SQUARE = Object.freeze([[0, 0], [10, 0], [10, 10], [0, 10]]);
 const OVERLAP = Object.freeze([[5, 5], [15, 5], [15, 15], [5, 15]]);
@@ -101,7 +108,29 @@ describe('MF-T2B coordinate-ABI determinism', () => {
     expect(polygonIntersectionArea(SQUARE, OVERLAP)).toBe(25);
     expect(triangulationIsSound(SQUARE, triangulateSimple(SQUARE))).toBe(true);
     expect(ringText(RING)).toBe('0,0;1500000,0;1500000,2250000;0,2250000');
-    expect(canonicalBytes('K', 2, null, 'x')).toBe('abi:1kind:Kschema:2deps:[]body:x');
+    // ⭐⭐ THE FIELD-SEPARATOR PIN, RE-RECORDED — ODQ §372 / §387, member MF-T2Bf. The line this
+    // replaces asserted the SEPARATOR-LESS string, and that is how the defect survived a landing:
+    // the landed `canonicalBytes` had dropped all four U+001F separators the sealed source uses,
+    // and a pin over the wrong bytes is green forever. DECLARED CAUSE: INJECTIVITY RESTORATION.
+    // Nothing about the encoding was retuned: the sealed encoding was restored, and the function's
+    // OUTPUT is byte-identical to the sealed source again. Only the SOURCE SPELLING differs — the
+    // escape form, because `tests/lint/controlBytes.test.js` bans the raw byte the sealed file
+    // carries, which is the same ratchet that forced the re-spelling that dropped them.
+    expect(canonicalBytes('K', 2, null, 'x'))
+      .toBe(`abi:1${ABI_FIELD_SEPARATOR}kind:K${ABI_FIELD_SEPARATOR}schema:2`
+        + `${ABI_FIELD_SEPARATOR}deps:[]${ABI_FIELD_SEPARATOR}body:x`);
+    // ⛔ THE INJECTIVITY WITNESS, AS MACHINERY RATHER THAN AS THE COMMENT ABOVE. Two DISTINCT
+    // (kind, schemaVersion, deps, body) tuples that the separator-less encoding mapped onto ONE
+    // string. The first assertion is the POSITIVE CONTROL: strip the separators back out and both
+    // encodings ARE the single pre-cure string, named as a literal so the control cannot drift
+    // into comparing the deriver with itself. The second assertion is the cure.
+    const collideA = canonicalBytes('CANONICAL_SPATIAL', 1, ['a'], ']body:b');
+    const collideB = canonicalBytes('CANONICAL_SPATIAL', 1, ['a]body:'], 'b');
+    const preCureBytes = 'abi:1kind:CANONICAL_SPATIALschema:1deps:[a]body:]body:b';
+    const stripped = [collideA, collideB].map((b) => b.split(ABI_FIELD_SEPARATOR).join(''));
+    expect(stripped, 'the pair stopped colliding without the separators — the witness rotted')
+      .toEqual([preCureBytes, preCureBytes]);
+    expect(collideA).not.toBe(collideB);
 
     const sources = LEAF_PATHS.map((path) => readFileSync(resolve(REPO_ROOT, path), 'utf8'));
     expect(sources.every((src) => src.length > 2000), 'a leaf read empty — the scan rotted')
