@@ -74,6 +74,12 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~23:35 ET: WF-1E terminal heads-up at tip 3ac279db (direct child of
+# f5332cf7; census +6 by conviction; kernel net-zero both instruments) — GO
+# SENT (no soak to pause; T2D not yet at the door). Chair rulings in the GO:
+# sixth banked red acknowledged; C-3 A4-shape APPROVED (round trip +
+# containment over refuted equality); J-1 FALL_SENTENCE export RATIFIED.
+# On green: CAS -> T2D rebases onto it.
 # ⭐ ~23:25 ET: OWNER DIRECTIVE (§341) — the 300y tuning pass gains a MAP
 # LEG: footprint coherence over the span, §311 undercity lawfulness, corpus
 # kernels in-band at checkpoints, G-43 reads map deltas. Signature still
