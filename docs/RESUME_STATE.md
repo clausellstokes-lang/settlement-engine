@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~02:20 ET: MEAS-MINKEYS collected (§346) — charter premise REFUTED by
+# measurement (zero rows clear; θ is the gate, not key count); minKeys change
+# REFUSED; the 4 bank under M9 riding the OWED schema-9 OSR re-freeze mint
+# (instrument out of freeze at tip — EP-1 digest drift; nothing gated blocks).
+# The 22 = recorded-explained non-defects. Sitting rulings → §347.
 # ⭐⭐ ~01:40 ET: MF-T2D LANDED — CAS 3ac279db → 27c250f9 (§345). THE DAY
 # CLOSES AT EIGHT LANDINGS; D3a CORE COMPLETE; WF-1 ladder complete but for
 # WF-1F (in flight, rebases onto 27c250f9). Handoff re-folded through §345.

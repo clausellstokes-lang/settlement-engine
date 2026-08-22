@@ -14533,3 +14533,41 @@ recommended. Implementation, per item:
 - **§345.3 In flight at this write:** TE-WF1F (slot-aware; rebases onto 27c250f9
   before its terminal; GO on request) · MEAS-MINKEYS · TC-T2E (chair-tier compile)
   · the §187 sitting (chair; rulings → §346).
+
+## §346 — MEAS-MINKEYS COLLECTED: THE §338.1 CURE PATH IS REFUTED BY MEASUREMENT; THE OSR RE-FREEZE IS OWED (2026-08-22 ~02:20)
+
+(The §187 sitting's rulings shift once more, to §347 — collections land in event order.)
+
+- **The chartered premise is DEAD, and the lane killed it honestly:** dropping
+  SHAPE_FAMILY_FILTER minKeys 8→7 clears ZERO additional rows estate-wide (M6's
+  clearance is 122 reads / 31 identities at BOTH settings; inventory deltas all
+  zero; measured at 3ac279db and re-executed identically at 27c250f9). The brief's
+  'misses by exactly one key' was arithmetically true and CAUSALLY WRONG — θ is the
+  real gate: eventLog's best sibling coverage is 0.286 against θ=0.80, so admission
+  finds no family. The counterfactual is worse (θ→0.286 clears only 13/47 reads and
+  ERASES a genuine read). Controls: the parameterized filter reproduces the live
+  instrument exactly; the full chain reproduces the committed baseline at address
+  level 1412/1412/0/0/0.
+- **§346.1 RULING AMENDED (supersedes §338.1's cure path):** the minKeys change is
+  REFUSED — zero benefit, plus an executed cost surface (a named boundary pin reds
+  by design; the edit moves the detector digest and demands a schema-9 mint; three
+  7-key families would gain 120–168-key acceptance unions nothing exercises). The
+  FOUR writer-backed identities still bank under M9 — now corroborated by the
+  instrument's own gate-0 write-shape probe, which mechanically admits exactly
+  those four and refuses all 22 others. **The 22 stand as RECORDED-EXPLAINED
+  non-defects**: one normalizeEntry polymorphic mis-binding, correctly refused by
+  the machinery, curable only by a future production re-binding of the four
+  heterogeneous feed sources — chartered as an OPTION, not scheduled.
+- **§346.2 ⚠⚠ THE OSR INSTRUMENT IS OUT OF FREEZE AT THE BUILD TIP** — the live
+  detector digest ≠ the baseline's recorded digest (method validated by reproducing
+  the frozen digest exactly from the freeze SHA's extraction). Cause: EP-1's
+  advanceEpochEnabled corpus change (2026-08-16) + two package.json scripts. The
+  standalone runner returns 1 at the tip; NOTHING IS BLOCKED (it is wired into no
+  gate), but **a governed schema-9 re-freeze mint + migration bundle is OWED** and
+  is now the named vehicle: the M9 four-identity banking rides it; minKeys does
+  NOT. 'stresses on institutions' is confirmed live-untriaged and joins the mint's
+  triage list. The standing memory row ('OSR instrument STALE') now has its digest
+  evidence.
+- **§346.3 Figure hygiene:** the cohort is exactly 33 rows / 26 identities / 47
+  reads / 4 files; the honest split is 4 admissible / 22 refused identities — the
+  '~22' looseness in charter and brief is corrected here.
