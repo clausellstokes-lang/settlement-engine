@@ -19576,6 +19576,125 @@
         [ "npm", "run", "validate:packets" ],
         [ "npm", "run", "check:tail" ]
       ]
+    },
+    {
+      "id": "RR-2",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/osr-repair/RR-2.md",
+      "verifiedBase": "19b799ce718d52e36a3b14a85fa9cfd5051ccf26",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/pdf/lib/viewModelBodySlices.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/display/parityContract.js"
+        },
+        {
+          "action": "REGISTER",
+          "path": "src/domain/fieldManifest.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/pdf/parityContractExemptions.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/observedShapeReaders.walker.test.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "scripts/.observed-shape-readers-baseline.json"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/pdf/lib/viewModelBodySlices.js",
+          "symbol": "export function servicesSlice"
+        },
+        {
+          "path": "src/pdf/lib/viewModelBodySlices.js",
+          "symbol": "export function defenseSlice"
+        },
+        {
+          "path": "src/domain/display/parityContract.js",
+          "symbol": "export const PARITY_EXEMPT"
+        },
+        {
+          "path": "src/domain/display/parityContract.js",
+          "symbol": "export const SHARED_FIELDS"
+        },
+        {
+          "path": "src/domain/fieldManifest.js",
+          "symbol": "export const REMOVED_DEAD_FIELDS"
+        },
+        {
+          "path": "src/store/settlementPendingEdits.js",
+          "symbol": "export const QUEUE_WIRED_PROSE_PATHS"
+        },
+        {
+          "path": "tests/joins/fieldManifest.test.js",
+          "symbol": "removed dead fields stay removed"
+        },
+        {
+          "path": "src/domain/fieldManifest.js",
+          "symbol": "inst?.blurb"
+        },
+        {
+          "path": "src/pdf/lib/viewModelBodySlices.js",
+          "symbol": "inst?.desc || inst?.description"
+        },
+        {
+          "path": "tests/pdf/parityContractExemptions.test.js",
+          "symbol": "every queue-wired DM edit reaches the export key its surface reads"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "A catalog institution's authored desc reaches services.detailed[i].description at baseline, and a DM edit replaces it. RED at base with the agreement pin reporting a failure list of exactly ['institution.desc'], GREEN at the cure; the captured transition is the conviction of the base defect rather than a claim about it."
+        },
+        {
+          "id": "A2",
+          "case": "A custom institution with a generated description and no edit still renders the generated text, so the description arm is load-bearing and survives; with a DM desc edit applied the edit wins the position. Both arms live inside the instrument fixture, and the ordering is pinned by its own assertion rather than left incidental."
+        },
+        {
+          "id": "A3",
+          "case": "The declared shift is enumerated key by key over 60 cases — five configurations by twelve seeds including the committed parity, exemptions and byte-render seeds — walking 2396 institution rows. The raw settlement is byte-identical between base and cure at every case, zero keys are added or removed, and every one of the 2396 moved keys is services.detailed[i].description moving from null to an authored string."
+        },
+        {
+          "id": "A4",
+          "case": "The rendered surfaces carry the restored prose: the Institutions chapter renders a description on every institution card where the base rendered one on none of the catalog rows, and the Foundry institutionsPage bullet carries the em-dash and the line for the same fixture. Proved by a rendered exhibit pair on one fixed seed rather than by byte comparison, since react-pdf byte output is non-deterministic."
+        },
+        {
+          "id": "A5",
+          "case": "The agreement pin is green at the cure with eleven reaching paths verified against their rendered consumers, a five-row exclusion register each citing its docket, a completeness arm comparing the register to the live edit queue in both directions, and a baseline no-marker control taken before any edit is applied."
+        },
+        {
+          "id": "A6",
+          "case": "The governed shrink re-freeze moves the inventory by exactly the one struck row: reads fall by one and identities by one while files, banked reads and tagged rows all hold. The walker is green at C2 on figures read off the re-frozen baseline rather than predicted, and the standalone gate exits clean in a detached worktree with its own install."
+        },
+        {
+          "id": "A7",
+          "case": "Census stillness: no new test file, exactly one new statically-registered title, the banked-failure set unmoved at eleven, the golden view-model snapshot unmoved, and no snapshot re-recorded anywhere across the whole tests/pdf suite."
+        },
+        {
+          "id": "A8",
+          "case": "Lifecycle round trip: applying a DM edit to a catalog institution and then reverting it returns the slice description to the generated desc string, never to null and never to the absence the base defect produced. The persist, regenerate and import paths are untouched by this member."
+        }
+      ],
+      "checks": [
+        [ "npx", "vitest", "run", "tests/pdf/parityContractExemptions.test.js", "tests/pdf/goldenViewModel.test.js", "tests/pdf/viewModelParity.test.js", "tests/pdf/sections.smoke.test.js", "tests/pdf/fullDocByteRender.test.js", "tests/joins/fieldManifest.test.js" ],
+        [ "npx", "vitest", "run", "tests/lint", "tests/build" ],
+        [ "npx", "eslint", "src/pdf/lib/viewModelBodySlices.js", "src/domain/display/parityContract.js", "src/domain/fieldManifest.js", "tests/pdf/parityContractExemptions.test.js" ],
+        [ "npm", "run", "typecheck:ratchet" ],
+        [ "npm", "run", "typecheck:domain:strict" ],
+        [ "npm", "run", "check:observed-shape-readers" ],
+        [ "npx", "vitest", "run", "tests/docs/enforcement-claims.test.js" ],
+        [ "npm", "run", "validate:packets" ],
+        [ "npm", "run", "check:tail" ]
+      ]
     }
   ]
 }
