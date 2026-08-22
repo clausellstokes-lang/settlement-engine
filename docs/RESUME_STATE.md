@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~02:20: T2G RULED (§375 — the removal member; 12-literal declared shift;
+# T2Bf-independent) + TE-T2G dispatched. ⚠ TC-DOSSIER SILENTLY LOST (6h, zero
+# artifacts, not in roster) — re-dispatched fresh; NEW CLASS RULE: a compile
+# with no artifact in ~90 min is presumed lost. WF-8's gate ALIVE (output
+# fresh 02:09). Active: WF-8 · DOSSIER-2 · TE-T2G.
 # ⭐ ~21:10 ET: RACED-GO AGAIN on WF-8 (no terminal log 40 min after GO;
 # machine idle) — GO RE-SENT with everything standing. T2F terminal-ready at
 # d835477d but HELD behind WF-8 + the mint window; its three findings ruled

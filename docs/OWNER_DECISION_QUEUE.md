@@ -15438,3 +15438,31 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   the port pipeline stays full while F's executor builds). Cap held: WF-8
   (terminal) · TC-DOSSIER · TE-T2F · TC-T2G. Owner-register additions from RR-2's
   raises: the scalar-fallback product call · the viability fork (post-INV-EVS).
+
+## §375 — T2G RULED (THE REMOVAL MEMBER); THE DOSSIER COMPILE DECLARED SILENTLY LOST AND RE-DISPATCHED (2026-08-22 ~21:20 / 02:20)
+
+- **draft-MF-T2G collected and RULED** (630L, claim-scanned 0/0, the whole strip
+  EXECUTED on copied trees before any pin — 84 checks green). Member 6 is the
+  §299.3(b) LIGHT-PROFILE STRIP, the train's first REMOVAL member: net −10
+  effective, deleting the published record that lacks §288's contract while
+  PRESERVING the shadow draw-ops (RAISED-1 RATIFIED — the debit names a published
+  dimensional profile; draw content is not one; §288.8 sequences the survey after
+  D4; the primitive census is byte-identical through the strip). RAISED-2 ACCEPTED:
+  the twelve moving pin literals across three files are the member's DECLARED
+  one-time shift — contentHash-only movement with artifactId/primitives/drawOps
+  byte-identical is the cleanest shift shape the program has. The MF-T2Bf
+  independence CONFIRMED by import-chain proof (sceneDigest, not canonicalBytes;
+  the executor re-proves at base). The single-declaration floor measured INVERTING
+  for a removal (140→139). Never-re-serialize docs untouched (RAISED-4). The
+  remaining raises ratified as recorded. **TE-T2G DISPATCHED** (build now,
+  slot-aware; its gate queues at the tail of the post-mint stack).
+- **§375.1 TC-DOSSIER DECLARED SILENTLY LOST:** dispatched ~16:20, six hours, ZERO
+  artifacts, no completion notification, absent from the live-agent roster — the
+  silent-agent-loss class (kin to the twice-fired raced-GO). RE-DISPATCHED fresh
+  with the same §360.2/§361 charter. CLASS NOTE for the wakeup and successors: a
+  compile lane that has produced NO scratchpad file within ~90 minutes is presumed
+  lost — check the roster, re-dispatch; the §365.2 corroboration method (absence
+  of the expected artifact) applies to lanes exactly as to gates.
+- **§375.2** Unexplained-but-harmless: 0-byte task outputs appearing per-minute in
+  the tasks dir (~02:10–02:14) — noted for the next quiet audit, not chased
+  mid-train.
