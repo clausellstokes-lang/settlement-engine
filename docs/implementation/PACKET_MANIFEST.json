@@ -19358,6 +19358,129 @@
         [ "npm", "run", "validate:packets" ],
         [ "npm", "run", "check:tail" ]
       ]
+    },
+    {
+      "id": "CT-1A",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/content-train/CT-1A.md",
+      "verifiedBase": "47ea9c9bacd93f60eb9bf1a05ef4d26d86aabd17",
+      "changeManifest": [
+        {
+          "_note": "THE GOVERNED CORPUS. Four WHOLLY NEW blocks appended as one CT-1a section (DS-GEN-12 the ground, DS-GEN-13 the market and the roads, DS-GEN-14 founded once grown since, DS-DEF-11 why the wall and why not), plus the {defwork} row in the merged slot register and a DARK note in the coverage census. NEW blocks, never an append to an existing pool: drawVariant hashes seed::blockId::poolKey and indexes % eligible.length, so appending would move every seeded draw over that pool while a new block moves nothing. Headers use a middle dot rather than the house em dash because a block title is projected verbatim into its desk leaf and the leaves sit inside voiceMechanics Tier 2, whose per-file em-dash pin is red-and-banked and must not deepen. No existing block was edited.",
+          "action": "DOC",
+          "path": "docs/content/RECEIPT_POOLS_DOSSIER_STATE.md"
+        },
+        {
+          "_note": "THE PROJECTION, REGENERATED IN THE SAME COMMIT by the existing npm run gen:dossier-prose. 15 to 18 blocks and 540 to 576 variants. Measured, not asserted: key-by-key against the pre-change leaf the diff is ADDED [DS-GEN-12, DS-GEN-13, DS-GEN-14], REMOVED [], CHANGED [], and the only removed LINE is the leaf's own header count comment. The em-dash and exclamation counts are unchanged at 158 and 0.",
+          "action": "MODIFY",
+          "path": "src/data/dossierStateProse/general.generated.js"
+        },
+        {
+          "_note": "THE PROJECTION, REGENERATED IN THE SAME COMMIT. 10 to 11 blocks and 371 to 383 variants. Key-by-key ADDED [DS-DEF-11], REMOVED [], CHANGED []; em-dash and exclamation counts unchanged at 74 and 0. The other four desk leaves and the causal leaf came out of the same run BYTE-IDENTICAL, which is the estate-wide half of the no-movement proof.",
+          "action": "MODIFY",
+          "path": "src/data/dossierStateProse/defense.generated.js"
+        },
+        {
+          "_note": "THE TWO PIN MOVEMENTS, both in the existing literal describe and neither adding a test. The exact block count re-records 58 to 62 with ODQ 378 cited at the assertion; the state-variant floor re-pins 2153 to 2201 per CT-0 R-5, because slack between a stale floor and the real total is where a later parser regression hides. No new test file, no new suite, no .each, no runIf. The floor test's title does not move at all; the block-count test's title carries its own figure and moves with it, and that test PASSES and is not one of the eleven baselined census rows.",
+          "action": "TEST",
+          "path": "tests/data/dossierStateProseProjection.contract.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE GOVERNED CORPUS, block one. The header PREFIX is pinned rather than the bare id, so a later car cannot satisfy this row with a cross-reference in prose. The middle dot is load-bearing: an em dash here would be projected verbatim into general.generated.js and would deepen the red-and-banked voiceMechanics per-file pin.",
+          "path": "docs/content/RECEIPT_POOLS_DOSSIER_STATE.md",
+          "symbol": "### DS-GEN-12 · Overview"
+        },
+        {
+          "_note": "THE GOVERNED CORPUS, block two.",
+          "path": "docs/content/RECEIPT_POOLS_DOSSIER_STATE.md",
+          "symbol": "### DS-GEN-13 · Overview/Economics"
+        },
+        {
+          "_note": "THE GOVERNED CORPUS, block three.",
+          "path": "docs/content/RECEIPT_POOLS_DOSSIER_STATE.md",
+          "symbol": "### DS-GEN-14 · History"
+        },
+        {
+          "_note": "THE GOVERNED CORPUS, block four, and the only DS-DEF- member of this car.",
+          "path": "docs/content/RECEIPT_POOLS_DOSSIER_STATE.md",
+          "symbol": "### DS-DEF-11 · Defense"
+        },
+        {
+          "_note": "THE ONE SLOT THIS CHAPTER MINTS, carried in the merged 0c-2 register so the file keeps ONE slot home. Pinned because a slot used but undeclared is counted by the projection contract's undeclared-slot ceiling, which only ratchets DOWN.",
+          "path": "docs/content/RECEIPT_POOLS_DOSSIER_STATE.md",
+          "symbol": "{defwork}"
+        },
+        {
+          "_note": "THE PROJECTION LANDED, block one. Quoted WITH its JSON delimiters so the row cannot be satisfied by a comment or by a prose mention of the id.",
+          "path": "src/data/dossierStateProse/general.generated.js",
+          "symbol": "\"DS-GEN-12\""
+        },
+        {
+          "_note": "THE PROJECTION LANDED, block two.",
+          "path": "src/data/dossierStateProse/general.generated.js",
+          "symbol": "\"DS-GEN-13\""
+        },
+        {
+          "_note": "THE PROJECTION LANDED, block three.",
+          "path": "src/data/dossierStateProse/general.generated.js",
+          "symbol": "\"DS-GEN-14\""
+        },
+        {
+          "_note": "THE PROJECTION LANDED, block four, in the OTHER desk leaf. Both leaves are named so a regression that drops one desk from the prefix split cannot pass on the strength of the other.",
+          "path": "src/data/dossierStateProse/defense.generated.js",
+          "symbol": "\"DS-DEF-11\""
+        },
+        {
+          "_note": "A POOL LABEL, not a block id. DS-DEF-11's five pool keys are what the reader actually indexes, so pinning one proves the pool labels survived the parser rather than only the block header. Deliberately NOT a count: a figure here would be re-recorded by CT-2 and would trap this LANDED packet forever.",
+          "path": "src/data/dossierStateProse/defense.generated.js",
+          "symbol": "WALLED-STRAINED"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "The projection is not stale and the parser dropped nothing: node scripts/generate-dossier-state-prose.mjs --check verifies 62 state blocks / 2201 variants across 6 desks and 78 causal families / 468 variants, byte-comparing every emitted leaf against a fresh re-derivation from the two authored annexes."
+        },
+        {
+          "id": "A2",
+          "case": "The projection contract passes WHOLE, including the re-recorded exact 62 and the raised floor 2201, and including the pins that did NOT move: causal 78 and the six-per-family arm, the thin-pool floor of 2 (five of the seventeen new pools sit exactly AT it, so the arm is not vacuous over this car), the dm-only floor, the undeclared-slot ceiling and the no-markdown scan."
+        },
+        {
+          "id": "A3",
+          "case": "The four blocks landed in the right desks with the measured shapes: general 15 to 18 blocks and 540 to 576 variants, defense 10 to 11 and 371 to 383, with zero edits to the generator's DESKS table because every prefix was already claimed."
+        },
+        {
+          "id": "A4",
+          "case": "NO SAME-SEED PROSE MOVED, proven in both directions rather than argued. Key-by-key over every leaf: 4 blocks ADDED, 0 REMOVED, 0 CHANGED. Byte comparison: economy, power, stressors, warFaith and dossierCausalProse all BYTE-IDENTICAL. In the two leaves that moved, the only removed line is the header count comment. Goldens over tests/property + tests/dossier + the four prose readers run BOTH WAYS: 104 files / 707 tests passed at the base and again after, with the two logs identical once timing is stripped."
+        },
+        {
+          "id": "A5",
+          "case": "The banked voice debt does not deepen by one character: general em 158 to 158, defense em 74 to 74, both bang 0 to 0, Tier-2 total 1438 to 1438, JSX total 19 to 19, and the four banked voiceMechanics rows keep file, title, verdict and numbers. The before and after runs of voiceMechanics plus the contract test differ by a single millisecond timing line and nothing else."
+        },
+        {
+          "id": "A6",
+          "case": "The register holds over all 48 variants, scanned rather than asserted: zero digits, zero em dashes, zero en dashes, zero exclamation points, no residual backtick or bold markup, every slot used declared on its block's SLOTS line, every angle drawn from the section 0b palette, and the mandatory counterforce arm present where the engine records a gate (UNWALLED-LARGE, MARKET-NARROW, NO-MARKET)."
+        },
+        {
+          "id": "A7",
+          "case": "WHY, NEVER WHEN: no variant names a wall year, a founding date or a construction epoch, because the engine holds none at this tip. Re-verified at this base by exhaustive grep over src for wallYear, wall_year, wallRing and circuitLadder, which finds nothing, and the deliberate absence is recorded in DS-DEF-11's own PROVENANCE line so no later writer re-finds it as a gap."
+        },
+        {
+          "id": "A8",
+          "case": "The docs writes introduce no new completeness claim: the LIVE CLAIM_RE lifted from tests/docs/enforcement-claims.test.js finds zero hits across the annex, the packet and the index, so the per-claim naked-claim freeze that reds a GREEN test stays green."
+        }
+      ],
+      "checks": [
+        [ "npm", "run", "gen:dossier-prose" ],
+        [ "node", "scripts/generate-dossier-state-prose.mjs", "--check" ],
+        [ "npx", "vitest", "run", "tests/data/dossierStateProseProjection.contract.test.js", "tests/copy/voiceMechanics.test.js" ],
+        [ "npx", "vitest", "run", "tests/property", "tests/dossier", "tests/domain/stateProseKernel.test.js", "tests/domain/economyStateProseDesk.test.js" ],
+        [ "npx", "vitest", "run", "tests/docs", "tests/lint", "tests/build" ],
+        [ "npm", "run", "validate:packets" ],
+        [ "npm", "run", "check:tail" ]
+      ]
     }
   ]
 }

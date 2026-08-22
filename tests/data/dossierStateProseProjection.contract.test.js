@@ -70,10 +70,23 @@ describe('the dossier state-prose projection', () => {
     }
   });
 
-  it('carries the measured corpus: 58 state blocks over 6 desks, 78 causal families', () => {
-    // 59 block headers are authored; DS-GEN-4 is FOLDED INTO DS-STR-1 (§0h V1-a) and
-    // keeps its id for cross-references without owning a pool, so 58 land.
-    expect(allStateBlocks.length).toBe(58);
+  it('carries the measured corpus: 62 state blocks over 6 desks, 78 causal families', () => {
+    // 59 block headers were authored at the 2026-08-03 merge; DS-GEN-4 is FOLDED INTO
+    // DS-STR-1 (§0h V1-a) and keeps its id for cross-references without owning a pool,
+    // so 58 landed.
+    //
+    // 58 → 62 (2026-08-22, content train car CT-1a, ratified at ODQ §378). The chapter
+    // adds FOUR blocks of engine-known morphology — DS-GEN-12 (the ground), DS-GEN-13
+    // (the market and the roads), DS-GEN-14 (founded once, grown since), DS-DEF-11 (why
+    // the wall, and why not) — as WHOLLY NEW blocks. That shape is the whole point of
+    // the car and it is load-bearing here: drawVariant keys its hash on
+    // `${seed}::${blockId}::${poolKey}` and indexes `% eligible.length`, so APPENDING to
+    // an existing pool would move every seeded draw over that pool, while a NEW block
+    // moves nothing. Measured at the landing, not asserted: the other five desk leaves
+    // and the causal leaf came out of the regeneration BYTE-IDENTICAL, and general +
+    // defense differ only by their header count line plus the added blocks — zero
+    // existing pools changed, so no same-seed sentence anywhere in the estate moved.
+    expect(allStateBlocks.length).toBe(62);
     expect(Object.keys(DOSSIER_CAUSAL_PROSE).length).toBe(78);
   });
 
@@ -81,9 +94,16 @@ describe('the dossier state-prose projection', () => {
     const stateVariants = allStateBlocks.reduce((n, [, b]) => n + variantCount(b), 0);
     const causalVariants = Object.values(DOSSIER_CAUSAL_PROSE)
       .reduce((n, b) => n + variantCount(b), 0);
-    // Measured at the projection's first landing. Adding variants is expected and
+    // Measured at the projection's first landing (2153). Adding variants is expected and
     // lawful; a DROP means the parser lost content or the corpus was cut.
-    expect(stateVariants).toBeGreaterThanOrEqual(2153);
+    //
+    // 2153 → 2201 (2026-08-22, CT-1a, ODQ §378 — CT-0 §5 R-5). The floor is re-pinned to
+    // the MEASURED total at each content-train car rather than left where it was. Leaving
+    // it is lawful and was the alternative on the bill; it is refused because the slack
+    // between a stale floor and the real total is exactly where a later parser regression
+    // hides — the pool a grammar change silently stops consuming still leaves the estate
+    // above 2153, and this pin is the only thing in the tree that would have noticed.
+    expect(stateVariants).toBeGreaterThanOrEqual(2201);
     expect(causalVariants).toBeGreaterThanOrEqual(468);
   });
 

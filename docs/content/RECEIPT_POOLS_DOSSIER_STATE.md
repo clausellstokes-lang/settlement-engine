@@ -16,6 +16,16 @@ Section order is WRITER-1 → WRITER-4; the writer markers are kept because each
 carries cluster-scoped resolutions, and **block ids, not file position, are the
 addressing scheme**. Every merge decision is recorded in §0h and is vetoable.
 
+**AS EXTENDED (CT-1a, 2026-08-22).** The content train adds a fifth section
+after the four clusters: **four blocks, seventeen pools, forty-eight authored
+variants** of engine-known morphology (why walls, why the market, why the ground
+disposes the town, founded-once-grown-since), dark until a composer reads them.
+The merge figures in the paragraph above are the 2026-08-03 merge's own and are
+left exactly as they were measured then. **The CURRENT counts are not asserted
+here at all** — they are measured from the projection itself by
+`tests/data/dossierStateProseProjection.contract.test.js`, which is the only
+place in this estate where a corpus total is allowed to be a number.
+
 **What this file is.** The dossier-native register applied not to joins but to
 **STANDING STATE**. The sibling annex answers *why is the town like this*; this
 file answers the prior question the dossier never actually asked in prose —
@@ -150,6 +160,7 @@ per-block declarations of WRITER-4). Nothing is minted here.*
 | `{event}` | a historical event by its recorded name | WRITER-4 |
 | `{founder}` | `founding.foundedBy` | WRITER-4 |
 | `{challenge}` | `founding.initialChallenge` | WRITER-4 |
+| `{defwork}` | the settlement's own wall-class work **by its recorded name** — the roster row `defenseProfile.institutions.walls` matched (wall · citadel · palisade · earthwork); never a baked or invented noun, and never offered to a settlement whose wall-class list is empty | CT-1a |
 
 **THE SLOTS-LINE CONVENTION, RECONCILED (§0h V1-h).** WRITER-2 declares each
 block's **permitted palette**; the other three declare the **used set**. The
@@ -371,6 +382,18 @@ below as co-owners of the surfaces their words reach. **Coverage: 77/77.**
 ★ = authored by VERIFIER-1 to close a census gap (§0h V1-b). Four shapes,
 **closing six census rows that had no owner** (6 · 7 · 10 · 16 · 18–21 · 30 ·
 50) and adding depth to four more.
+
+**THE CT-1a MORPHOLOGY BLOCKS ARE AUTHORED AND DARK — the census is UNCHANGED.**
+`DS-GEN-12`, `DS-GEN-13`, `DS-GEN-14` and `DS-DEF-11` (the CT-1a section at the
+end of this file) explain why the town has the shape it has. **They add no
+RENDERED SURFACE**, so the denominator above is untouched and coverage stays
+**77/77**. They are deliberately NOT written into the owning-block column: no
+desk reads them yet (CT-0 R-1 — content first, composer wiring its own lane),
+and listing an unread block as a surface's owner would assert a reach it does
+not have. Their SECTION-TARGET lines name the surfaces they are written FOR —
+rows 18/30 and 29 (`DS-GEN-12`), rows 6/7 and 29 (`DS-GEN-13`), rows 43/44
+(`DS-GEN-14`), rows 73/75 (`DS-DEF-11`). When the composer lane wires them, the
+cells above gain them and this paragraph goes.
 
 **RECORDED SCOPE EXCLUSIONS — surfaces deliberately outside the denominator.**
 Each is a decision, not an oversight, and each is vetoable.
@@ -5521,3 +5544,160 @@ unchanged.
 cluster hooks framing + relations + general state — `DS-GEN-4` retired to a
 pointer into `DS-STR-1` (§0h V1-a) and `DS-GEN-11` authored at the merge
 (§0h V1-b).
+
+---
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+## CT-1a — MORPHOLOGY, ENGINE-KNOWN (why the town has the shape it has)
+
+*Authored 2026-08-22 under the content-train charter (ODQ §360 / §360.1 / §361),
+compiled at CT-0 and ratified at ODQ §378. Four blocks, seventeen pools, forty-eight
+variants. The blocks land DARK: no desk reads them yet, and composer wiring is its own
+lane (CT-0 R-1, confirmed at §378).*
+
+*Register inheritance is by BLOCK ID, which is this file's addressing scheme (§0h V1-f).
+The three `DS-GEN-` blocks inherit WRITER-4's `R-DST-W4-*` resolutions and the one
+`DS-DEF-` block inherits WRITER-2's cluster rulings, exactly as they would if they sat
+inside those clusters. They are gathered in one section rather than split across two so
+the chapter is reviewable and vetoable as a unit, and so neither cluster's own closing
+arithmetic is falsified by an addition made weeks after its merge.*
+
+*THE CHAPTER LAW (CT-0 §2, `R-DST-W4-a` generalised): STRUCTURAL CAUSE IS LICENSED,
+HISTORICAL CAUSE IS RECORD-GATED. A mechanism with no fact to instantiate it is not
+background colour; it is unsaid. WHY, never WHEN: no wall year, no circuit epoch and no
+construction date exists anywhere in the engine at this tip (verified by exhaustive grep
+at CT-0 §0), so no variant below reaches for one, and wall age stays a CT-1b entry.
+Mechanisms travel and geography does not: no compass word, no real-world place, no named
+analogy. No variant carries a digit, an em dash or an exclamation point.*
+
+---
+
+### DS-GEN-12 · Overview › The ground and the approaches (how the site disposes the town) · `config.terrainType` read as terrain families
+
+**RECEIPT:** `config.terrainType`, whose live vocabulary is exactly seven values (`TERRAIN_OPTIONS = ['plains','hills','forest','riverside','coastal','mountain','desert']`, `src/components/gallery/galleryUtils.js`, aligned to `resolveConfig` + `getTerrainType` in `src/generators/terrainHelpers.js`) · the water-bearing pair is the engine's own (`WATER_TERRAIN = new Set(['coastal','riverside'])`, `src/domain/resourceTerrainCompatibility.js`)
+**STATE-KEY:** terrain family, a total partition of the seven values — `WATER-EDGE` (`coastal`, `riverside`) / `HIGH-GROUND` (`mountain`, `hills`) / `WOODLAND` (`forest`) / `OPEN-GROUND` (`plains`) / `DRY-GROUND` (`desert`)
+**SLOTS:** `{settlement}`
+**SECTION-TARGET:** `overview` · also `history`
+**PROVENANCE:** Non-redundancy (R-DST-A): `DS-GEN-6` answers why the town EXISTS (route × deficit × tier) and `DS-ECO-11` answers what the ground is WORTH. This block answers how the ground DISPOSES the town: the working edge, the constraint, the approach. Structural cause only, spoken strictly through the terrain field the engine holds. No compass words, no named geography, no street-level geometry — the map engine owns geometry and the dossier owns disposition. The partition is TOTAL over the live enum, so no settlement falls through it.
+
+**`WATER-EDGE`**
+1. `[visitor]` The water is the first thing a stranger understands about {settlement}; everything the town does for a living happens within reach of it.
+2. `[ledger]` {settlement} keeps its working life at the water and its sleeping life behind it, and the books are written at the working end.
+3. `[street]` In {settlement} the way to anywhere important runs along the water or down to it.
+4. `[elder]` The water was here before the town, and {settlement} has arranged itself around that seniority ever since.
+
+**`HIGH-GROUND`**
+1. `[visitor]` {settlement} sits where the ground made standing possible rather than easy, and the town's shape is the ground's ruling on the matter.
+2. `[street]` Nothing in {settlement} is level for long; the town takes the slope as a condition of living here.
+3. `[ledger]` What {settlement} spends on carrying things up, it recovers in what the high ground spares it.
+
+**`WOODLAND`**
+1. `[visitor]` {settlement} is a clearing that learned to stay open; the wood stands close enough to be a neighbour and near enough to be a livelihood.
+2. `[elder]` The town's edge against the trees has been argued over for as long as anyone has kept the argument.
+3. `[street]` In {settlement} the wood is where things come from, and the town is where they are made into something.
+
+**`OPEN-GROUND`**
+1. `[ledger]` {settlement} sits in country that offers no argument against it, so the town's shape is its own habit rather than the land's instruction.
+2. `[visitor]` Nothing hems {settlement} in; where the town stops, it stops by custom, not necessity.
+3. `[street]` The fields begin where {settlement} loses interest, and not before.
+
+**`DRY-GROUND`**
+1. `[ledger]` {settlement} is arranged around what little the ground concedes; the town's shape is the shape of its water.
+2. `[visitor]` Everything green in {settlement} is deliberate, and the deliberateness says more about the place than any wall could.
+3. `[elder]` The dry country keeps the town honest: {settlement} holds exactly the ground it can water and not a yard more.
+
+---
+
+### DS-GEN-13 · Overview/Economics › The market and the roads (where the town trades, and why there) · market-class institution presence × `config.tradeRouteAccess` × `economicState.isEntrepot`
+
+**RECEIPT:** market-class institution presence, read through the engine's own market name class (`/\b(market|bazaar|exchange|shambles|stalls)\b/i`, `src/domain/townMap/glyphAssign.js`) · `economicState.isEntrepot` (read live at `src/generators/narrativeGenerator.js`) · `config.tradeRouteAccess` (live enum `port` · `river` · `crossroads` · `road` · `isolated` · `mountain_pass` · `mountain_road` · `desert_road`, `getTerrainType`, `src/generators/terrainHelpers.js`)
+**STATE-KEY:** `MARKET-OPEN` (market-class institution present, open approach) / `MARKET-NARROW` (market-class institution present, narrow approach) / `ENTREPOT` (`isEntrepot`) / `NO-MARKET` (no market-class institution). NARROW adopts `DS-ECO-1`'s C2/C5 convention (`isolated` / `mountain_pass`) and extends it by one spelling to `mountain_road`, the same shape under a different name; the remaining values are OPEN.
+**SLOTS:** `{settlement}` `{good}`
+**SECTION-TARGET:** `overview` · also `economy`
+**PROVENANCE:** The accretion mechanism (stalls crowd where the traffic is) is engine-native at the habit level, and this block speaks it as ORIENTATION and CUSTOM only, never as map geometry: which gate, which square and which frontage are the map engine's facts, not the dossier's, and none of them exists here. `DS-ECO-4` owns prices and `DS-ECO-12` owns the trade-profile rows; this block owns why the town's exchange has the shape it has at all. The one-value extension of `DS-ECO-1`'s narrow convention is recorded above rather than made silently.
+
+**`MARKET-OPEN`**
+1. `[street]` Market day is {settlement} at its truest: the roads bring the custom, and the custom is the argument for the stalls.
+2. `[ledger]` {settlement}'s market lives off through-traffic; the town sells to the road as much as to itself.
+3. `[visitor]` A stranger finds {settlement}'s market without directions, because the busiest way through town leads there on its own.
+4. `[elder]` The market was where the carts already stopped; the stalls came to the stopping, and {settlement} grew around the habit.
+
+**`MARKET-NARROW`**
+1. `[ledger]` {settlement}'s market serves the town itself; little passes through that was not always coming here.
+2. `[street]` What {settlement} makes, {settlement} mostly buys from itself, and the market is the room where that happens.
+3. `[counterforce]` No great road feeds {settlement}'s market, and the market has made its peace with that: it is a town's exchange, not a region's.
+
+**`ENTREPOT`**
+1. `[ledger]` {settlement}'s market handles more than the town could ever use; the difference is the town's living.
+2. `[visitor]` Half of what changes hands in {settlement} is only pausing here, and the town has built itself around the pause.
+3. `[street]` In {settlement} the {good} on the stalls has usually seen more of the world than the people selling it.
+
+**`NO-MARKET`**
+1. `[counterforce]` {settlement} keeps no market worth the name; exchange here happens at doorsteps and in yards, at the scale the town actually needs.
+2. `[visitor]` Nothing in {settlement} is arranged for buying and selling in quantity, which tells a stranger the essential thing about the place.
+
+---
+
+### DS-GEN-14 · History › Founded once, grown since (the first cause, and the accretion over it) · `history.founding` presence × `history.age` banded
+
+**RECEIPT:** `history.founding{reason, foundedBy, initialChallenge, overcoming}` and `history.age`, both minted on the history object (`src/generators/historyGenerator.js`) — the founding row is a TYPED RECORD, which is what makes the historical clause here record-gated and therefore lawful
+**STATE-KEY:** `FOUNDED-YOUNG` (founding record present, low age band) / `FOUNDED-OLD` (founding record present, high age band) / `GROWN-UNRECORDED` (no founding record)
+**SLOTS:** `{settlement}` `{timeband_age}`
+**SECTION-TARGET:** `history` · also `overview`
+**PROVENANCE:** The accretion mechanism: a town is layers of decisions and the oldest decision is its reason. Spoken only through the founding record and the age field, and the age becomes a band in the desk — never a numeral in the prose (§0d). Non-redundant with `DS-GEN-9`, which renders the founding ROW and the event timeline; this block renders what the row MEANS for the town's present shape. It names no year and no date, because the engine holds a founding REASON and an AGE and no construction date of any kind.
+
+**`FOUNDED-YOUNG`**
+1. `[ledger]` {settlement} is young enough that its first reason is still its working reason; the town has not yet had time to become anything else.
+2. `[visitor]` Everything in {settlement} was built by people who could still say why, and the whole town has that directness.
+3. `[street]` {settlement} does what it was made to do; the founders' argument has not yet been improved on.
+
+**`FOUNDED-OLD`**
+1. `[elder]` {settlement} was made on purpose, and the purpose is {timeband_age}; what stands now is every year's amendment to it.
+2. `[ledger]` The town's first reason is on record and its present shape is the record of everything since; {settlement} is the argument and all its revisions at once.
+3. `[visitor]` {settlement} reads as a place built to a plan that life has been editing for generations, and the editing is most of what a stranger sees.
+
+**`GROWN-UNRECORDED`**
+1. `[elder]` Nobody wrote down the beginning of {settlement}; the town simply proved convenient, and convenience compounded.
+2. `[street]` {settlement} was never founded so much as agreed to, one household at a time.
+
+---
+
+### DS-DEF-11 · Defense › Why the wall, and why not · `defenseProfileHasWalls` × `config.monsterThreat` × tier × the economic-upkeep gate
+
+**RECEIPT:** `defenseProfileHasWalls(settlement.defenseProfile)` (`src/domain/causalState.js`), the canonical wall reader `DS-DEF-10` already keys on, over `defenseProfile.institutions.walls` — the engine's wall name class is `'wall'`, `'citadel'`, `'palisade'`, `'earthwork'`, `'inner citadel'`, `'massive walls'` (`src/generators/defenseGenerator.js`) · `config.monsterThreat` · `defenseProfile.scores` and the generator's own ECONOMIC-UPKEEP GATE, whose recorded law is that paid defenses degrade when unpaid, that BUILT WALLS KEEP STANDING, and that unpaid soldiers desert slowly (`src/generators/defenseGenerator.js`) · `settlement.tier`
+**STATE-KEY:** `WALLED-THREATENED` (walls, live threat) / `WALLED-QUIET` (walls, no live threat) / `WALLED-STRAINED` (walls, impaired upkeep) / `UNWALLED-SMALL` (no walls, village and below) / `UNWALLED-LARGE` (no walls, town and above)
+**SLOTS:** `{settlement}` `{defwork}` *(minted by this chapter per §0c-2: fills with the settlement's own wall-class institution by its RECORDED name, never a baked or invented noun; a settlement with no wall-class row is not offered a variant that needs one)*
+**SECTION-TARGET:** `defense` · also `overview`
+**PROVENANCE:** The enclosure mechanism is engine-native TWICE OVER, and both halves are structural reads of live fields: the threat side (walls score against the threat axes) and the purse side (the upkeep gate, whose asymmetry between stone and wages is the generator's own recorded rule, not an authored flourish). The one historical clause this block might want — WHEN the wall was raised — has NO backing fact at this tip and is deliberately absent; it arrives with the fabric epochs (CT-1b). R-DST-A: `DS-DEF-5` is the armed-forces SURFACE and `DS-DEF-10` the arms LADDER; this block is the why-frame for the fortification fact alone and composes BESIDE them, never over the same cell twice. `UNWALLED-LARGE` is the mandatory `[counterforce]` arm (§0b): the engine records a gate, so the dossier must be able to say the wall did NOT get built.
+
+**`WALLED-THREATENED`**
+1. `[ledger]` {settlement} keeps its {defwork} because the country requires it; the threat is on the town's books as plainly as the grain.
+2. `[street]` Nobody in {settlement} thinks of the {defwork} as ornament; the town knows what it is for and checks it.
+3. `[visitor]` {settlement} is enclosed the way working things are enclosed: against something, and recently attended to.
+
+**`WALLED-QUIET`**
+1. `[visitor]` {settlement} keeps a {defwork} the present peace does not obviously require, and keeping it is cheaper than ever needing it again.
+2. `[elder]` The {defwork} stands ahead of any present need; walls are easier to keep than to raise, and {settlement} keeps this one.
+3. `[ledger]` The town pays little for its {defwork} now that it asks little of it; built work stands on its own patience.
+
+**`WALLED-STRAINED`**
+1. `[ledger]` {settlement}'s {defwork} stands better than the watch that should man it; stone keeps itself, and wages do not.
+2. `[unfolding]` The {defwork} around {settlement} is sound and the muster behind it is thinning, which is the kind of arithmetic a town notices late.
+
+**`UNWALLED-SMALL`**
+1. `[street]` {settlement} is too small to wall and knows it; the town's safety is its neighbours, its distance, and its unimportance.
+2. `[visitor]` No wall marks where {settlement} ends; at this size the country and the town simply agree to differ.
+
+**`UNWALLED-LARGE`**
+1. `[counterforce]` {settlement} has reached a size that usually buys stone, and has not bought it; whether that is confidence or thrift, the openness is itself a statement.
+2. `[ledger]` A town of {settlement}'s weight without a circuit is spending its defense money on something else, and the books say what.
+
+---
+
+**CT-1a SECTION ENDS.** Four blocks, seventeen pools, forty-eight authored variants:
+`DS-GEN-12` (the ground), `DS-GEN-13` (the market and the roads), `DS-GEN-14` (founded
+once, grown since) and `DS-DEF-11` (why the wall, and why not). No pool falls below the
+two-variant floor the projection contract holds; every slot a variant uses is declared on
+its block's SLOTS line; every angle is drawn from §0b's palette. The chapter adds no
+rendered surface, so §0g's denominator and its 77/77 coverage are unchanged.
