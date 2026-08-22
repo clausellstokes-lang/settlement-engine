@@ -74,6 +74,13 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~17:00: CT-2 BUILT+HOLDING at 26f51466 (3 blocks/37 variants; six of
+# seven leaves byte-identical; envelope WHOLE at its base → its break
+# wholly attributable, pre-writing the trailing mint). THREE REFUSALS OF
+# ITS OWN DRAFT RATIFIED — the annex's standing laws outrank the chapter
+# mapping (join-without-attribution; prosperity refused on R-DST-B's text;
+# the recorded-unanchored gate pool). DS-POP-2 title fix queued; CT-3 caps
+# eight cases. Lands after RR-2.
 # ⭐⭐ ~16:20: OWNER ORDER (§388) — PARALLEL ALWAYS: the wakeup RE-MINTED
 # (job 5d5f53c5) with 'IS EVERY BUILDABLE CAR BUILDING?' as check 1 + the
 # build-vs-land law + all delivery protocols. TE-H8B dispatched — FOUR
