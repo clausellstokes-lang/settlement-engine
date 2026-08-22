@@ -16562,3 +16562,39 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
 - WEB-1 HOLDS on its new tip when reported. Seats: RR-2 · WEB-6 · WEB-4
   active; WEB-1 wrapping its addendum. WEB-2/WEB-3 stay migration-blocked
   until 197 LANDS (§402's sequential rule); WEB-5/WEB-7 are the next fills.
+
+## §409 — WEB-4 COLLECTED GREEN; THE MEASURED SHAPE OVERRULED THE PREDICTED ONE; SIX JUDGMENTS RATIFIED; WEB-5 TAKES THE SEAT (2026-08-23 ~01:40)
+
+- **The member:** tip 378f9276 (pinned at refs/preserve/holding-web4), four
+  commits, base 19b799ce unmoved, S0 two-part WHOLE at both ends (1996
+  matching frozen — neither inherited nor made a break). A1-A7 executed;
+  census +2 titles ONLY, attributed by ISOLATION (revert-one-file convicts
+  the base figure green); packet green at all three statuses in the new
+  website family dir; no re-recorded figure in requiredSymbols.
+- **THE HEADLINE: J-WEB4-1 RATIFIED — the charter's predicted RECEIPT_FIELD_ARITY
+  entry is REFUTED BY MEASUREMENT.** addressChain rides INSIDE behavioral.yearly
+  entries (the phraseRepetition sibling's exact shape), so the arity table is
+  byte-unchanged and the row declares the year-series source — with the
+  refusal PINNED (the arity key asserted undefined) so a later hoist reds
+  instead of drifting. The verify-at-build clause did its job; the
+  decade-epoch precedent honored.
+- **M2's VACUITY CAUGHT AT AUTHORING — banked:** a fixture whose rates are
+  internally consistent makes a resampling mutant BYTE-IDENTICAL — the
+  fixture-mirrors-deriver class wearing an emitter face; the cure is a
+  synthetic block whose rates DISAGREE with its counts so the receipt-wins
+  arm can convict. J-WEB4-2..6 likewise ratified (sibling-idiom dims/unit;
+  the emit-nothing law with its band-freeze consequence recorded; the
+  schemaVersion throw; the header count corrected to thirteen with the stale
+  §151.3 note SUPERSEDED IN PLACE, priced as a ratchet-firing comment edit).
+- **The terminal accepted as the BUILD proof:** 16 steps green in one bare
+  gate; verify:dist alone hit the mutex give-up (exit 3 = the mutex, not a
+  red; pid-lineage-proven log) and closed green standalone. Per the standing
+  queue pattern the LANDING terminal re-runs end-to-end at the GO — recorded
+  so the composed build proof is never mistaken for the landing proof.
+- **More §355 material:** the varying-cast strays REPRODUCED AT A CLEAN BASE
+  worktree with its own install (disjoint sets both trees; five stable
+  banked rows at both) — filed to the chartered hunt.
+- **§409.1 SEAT:** WEB-4's seat → **TE-WEB5 dispatched** (import-vs-restore,
+  the §402 C3-signed semantics; migration-free). FOUR ACTIVE: RR-2 · WEB-6 ·
+  WEB-1 (packet addendum) · WEB-5. WEB-2/WEB-3 still wait on 197's landing;
+  WEB-7 is the next fill.
