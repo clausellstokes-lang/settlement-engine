@@ -16415,3 +16415,18 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   car; the vite-worker pointer — full row already archived; §27
   build-everything — program executed, train law living in briefs and topic
   file). Index back under the limit.
+
+- **§404.1 THE RECLAMATION COMPLETED — AND A CHAIR RACE OWNED:** the background
+  job finished all 24 deletions; the volume reads **20Gi free (90%)**, fully
+  off the floor; git worktree prune run from the repo (the job's own prune
+  failed on cwd — it ran from the scratchpad). ⚠ THE RACE: the job's delete
+  list, launched before WEB-1's survival report, carried laneTEWEB1-tree from
+  the lane's own earlier offer — and deleted it AFTER the chair ratified
+  reusing it. The ratification was voided by the chair's own in-flight job;
+  the lane was correct on the facts it had. WEB-1 ordered to STOP,
+  RECREATE fresh, and re-take all six baseline gate figures in the new tree
+  (receipts bind to a tree state). THE LESSON, same family as §403.1 one
+  level up: a delete list is a STALE ARTIFACT the moment new reports arrive —
+  a chair launching destructive background work must re-verify the list
+  against every report that lands between launch and completion, or exclude
+  actively-owned paths outright.
