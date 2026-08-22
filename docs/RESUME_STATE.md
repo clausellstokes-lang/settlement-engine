@@ -74,6 +74,12 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~11:40 ET: HUNT-1 CRACKED IT (§357) — the 'contamination' is TIMEOUT
+# EXHAUSTION under load, masked by the ratchet DELETING the vitest JSON
+# (identity-only output). H1 foreclosed (isolate+forks). Known-flake
+# reclassified same class. Cures: ratchet evidence-preservation FIRST (own
+# lane), corpus memoization, load-stamped receipts. Quiet-track plan stands.
+# Memory resolved-appended.
 # ⭐⭐ ~11:10 ET: WF-8A parked+collected (§356) — the mint rule was a FALSE
 # RECEIPT (25 beats/3 creeds; two re-entry roads found by real-pulse
 # execution; cure proven by independent cross-check ×5) → R-5 RATIFIED.

@@ -14924,3 +14924,34 @@ recommended. Implementation, per item:
   obligation re-affirmed (§350.2). Sequence unchanged: T2E's quiet-track gate →
   CAS → WF-8's GO (rebase onto T2E's tip; verify A5 FIRST; sweep; battery;
   terminal) → the mint's window.
+
+## §357 — HUNT-1'S MECHANISM: THE 'CONTAMINATION' IS TIMEOUT EXHAUSTION MASKED BY AN EVIDENCE-DELETING INSTRUMENT (2026-08-22 ~11:40)
+
+- **The varying cast is ONE class, identified from archived receipts with zero new
+  compute:** per-test time-budget exhaustion under oversubscription. The proofs:
+  lawBandTable's EXACT failing arm has TWICE before failed with 'Test timed out in
+  20000ms' in named logs (it walks ~1,600 files ×9 with sync reads inside one 20s
+  budget — 'two answers at one commit' is finished-vs-didn't); distribution.test.js
+  is the config's own commented historical load-timeout victim; npcAuthoringScope
+  — the estate's 'known flake' — is always the suite's FIRST test (cold import +
+  findBy budget) and was previously classified MACHINE at load 72–142. **H1
+  (module-state leakage) is STRUCTURALLY FORECLOSED** — vitest 4.1.8 defaults
+  isolate:true + forks, fresh registry per file; the only shared channel is the
+  box. H3 refuted (the walker reads disk, not the module graph). The chair's
+  hybrid objection is CONCEDED on execution history.
+- **§357.1 THE LOAD-BEARING DEFECT IS THE INSTRUMENT'S:** check-test-ratchet
+  prints failure IDENTITY only and DELETES the vitest JSON — stripping the
+  'timed out' discriminator. Timeouts have been masquerading as logic reds all
+  along, and every downstream classification inherited the blindness. This is a
+  §332.1-class defect IN THE GATE ITSELF. **CURE PRIORITY SET:** (1) ratchet
+  evidence-preservation (its own small lane, ahead of the housekeeping bundle);
+  (2) corpus() memoization; (3) load-stamped gate receipts. Cure shapes land in
+  laneHUNT1-report.md; the confirmatory arm (T2E's results.json failureMessages,
+  captured before deletion) is in flight.
+- **§357.2 RECLASSIFICATIONS pending the report:** tonight's three strays, the
+  npcAuthoringScope 'known flake', and the sibling receipts (sovereigntyLighting
+  DOOR 3, siteCoherenceRatchet C5, postureNameCollision ×3, WF1B's meta-pin
+  stray) re-file under the one class. The §355 protocol STANDS (classify → one
+  QUIET re-run) — it was right for the wrong ontology; under the true mechanism,
+  'quiet' removes the cause rather than the coincidence. The quiet-track ruling
+  for T2E's final gate stands unchanged.
