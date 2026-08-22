@@ -5059,7 +5059,47 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   tree, so carrying one across a sibling's landing is not an optimisation but a stale
     //   read that happens to look arithmetically sound. Four of the five figures were
     //   genuinely unchanged, which is exactly what would have made a carried tuple feel safe.
-    files: 2492, parked: 364, credited: 2128, titles: 20677, suiteTitles: 5780,
+    // ── RE-RECORDED 2026-08-21 BY MF-T2E, CAUSE MEASURED AND DECOMPOSED ────────────
+    // 2,492/364/2,128/20,677/5,780 → 2,494/364/2,130/20,684/5,782. THE CAUSE IS TWO NEW
+    // TEST FILES AND NOTHING ELSE. `censusAuthorization`: ODQ §312 (the D3a port dispatch),
+    // §344.1 (the compile) and §348 (the chair's review, which ratified this member and
+    // TIGHTENED its caps), under the §310.4 wave charter.
+    //   tests/domain/townMapMassPart.test.js .............. 6 titles, 1 suite title
+    //   tests/property/townMapMassPartDeterminism.test.js . 1 title,  1 suite title
+    // THE DELTA IS DECOMPOSED RATHER THAN ASSERTED, and it closes exactly:
+    //   6 + 1 = 7 titles       (20,677 → 20,684)
+    //   1 + 1 = 2 suite titles ( 5,780 →  5,782)
+    //   2 new files, 2 newly credited, 0 newly parked
+    // PARKED IS UNCHANGED at 364, and that was earned: each file spells every title as a
+    // string literal and every loop runs INSIDE a named test (the SP-D idiom), so door 3's
+    // reader recognises all of them statically and credits both files. No rule here widened
+    // or narrowed and NO existing file changed shape — this member modifies zero existing
+    // production files, and its one new leaf (src/domain/townMap/fabric/massPart.js) and its
+    // packet document are not test files, so neither reaches this census.
+    // ⚠ BOTH ENDS READ AT THIS COMMIT'S OWN BASE (5d18b4a0, the WF-1F landing), NOT at the
+    //   tip this member was prepared against. MF-T2E was built on 27c250f9 and WF-1F took the
+    //   CAS slot first. Rather than carry the earlier tuple — which happened to be numerically
+    //   identical, and is exactly the shape of carry that feels safe — this lane byte-restored
+    //   this file from the NEW base and re-measured BOTH ends there: the walker was first run
+    //   BARE in a pristine base-proof tree at 5d18b4a0 and passed 33/33, which is what proves
+    //   WF-1F moved nothing, and only then was the AFTER tuple convicted.
+    // ⛔⛔ THIS TUPLE IS THE SECOND INSTRUMENT'S READING, AND THE FIRST INSTRUMENT LIED.
+    //   The lane's first conviction sweep ran the walker with the BASE tuple in place and
+    //   attributed the Nth failure to the Nth key. But `parked` is UNCHANGED by this member,
+    //   so its assertion PASSED and the next failure belonged to `credited` — the loop read a
+    //   TRUE figure (`expected 2130 to be 2128`) and wrote it under the WRONG NAME, leaving
+    //   `files: 2494, parked: 2130, credited: 364, titles: 364, suiteTitles: 364`. Its own
+    //   CONFIRMING RUN caught it (exit 1); the file was byte-restored from HEAD via
+    //   `git show` (never the `git checkout --` family) and proved identical by `cmp`, and
+    //   every figure was re-convicted with a **-1 SENTINEL**, one key per run, each arm
+    //   aborting unless its message read literally "expected <N> to be -1":
+    //   "expected 2494 to be -1", "expected 364 to be -1", "expected 2130 to be -1",
+    //   "expected 20684 to be -1", "expected 5782 to be -1".
+    // ⭐ THE LESSON, which is the standing law wearing a new hat: "never carry a tuple" is
+    //   usually read as a warning about STALE figures. This was a FRESH figure attributed to
+    //   the WRONG NAME. A number being real does not make it trustworthy; the instrument must
+    //   be able to say which question the number answers. The sentinel is what says it.
+    files: 2494, parked: 364, credited: 2130, titles: 20684, suiteTitles: 5782,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
