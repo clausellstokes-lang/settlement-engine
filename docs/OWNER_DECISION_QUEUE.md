@@ -16253,3 +16253,37 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   misnaming hunt — its detail was lost to compaction; recover, verify at tip,
   charter the cure shape; sonnet-tier, diagnosis-only). FOUR ACTIVE: RR-1 ·
   T2H · TC-WEBSITE · POP2.
+
+## §401 — POP2 COLLECTED: THE QUEUED DS-POP-2 ITEM IS A FALSE POSITIVE — RETIRED; THE REAL DEFECT IS THE FALSE CLAIM WRITTEN INTO THE CORPUS — CT-2 AMENDMENT ORDERED (2026-08-22 ~21:15)
+
+- **The hunt recovered the item intact and then overturned it, all-CONFIRMED:**
+  DS-POP-2's title is CORRECT. populationTrendBand exists at
+  src/domain/display/trendLens.js:47 — the tree's ONE function of that name,
+  signature exactly matching the title, sole consumer buildTrendLenses
+  (WhatChangedPanel), created FOURTEEN DAYS before DS-POP-2 was authored, and
+  DS-POP-2's own prose quotes the module's doc comments verbatim. CT-2's lane
+  had searched beliefAxes/beliefMap only and missed the display layer. **The
+  queued housekeeping doc-fix is RETIRED as a confirmed false positive.**
+- **The graver finding:** the research miss did not stay in scratch — CT-2
+  wrote it into the corpus itself as a "NAMING CORRECTION" callout inside
+  DS-POP-3's RECEIPT field, byte-identical in BOTH unlanded holding tips
+  (CT-2 5941093f, CT-3 ba806682). Landed as-is, the corpus would permanently
+  assert a false claim in its own provenance text.
+- **RULED AND ORDERED (chair): CT-2 amends NOW, off the critical path** —
+  correct/delete the callout in the corpus doc + regen the leaf in the same
+  commit; the change sits inside CT-2's OWN added block so the movement
+  contract stays 3 ADDED / 0 / 0 with one added key's content differing;
+  focused battery re-run in full; the false claim swept from packet, manifest
+  entry, and commit message too (the doc-agreement law — prose keeps a claim
+  alive). A new holding tip supersedes 5941093f. CT-3 is NOT rebuilt now — it
+  re-stamps at its landing slot per its precomputed inputs, and its GO will
+  carry this amendment fact. RR-1 still lands first; the GO order is
+  unchanged.
+- **THE LESSON, BANKED ESTATE-WIDE (build-era lesson 10):** an in-prose
+  correction asserting a symbol's ABSENCE is an ABSENCE CLAIM and owes the
+  same tree-wide receipt as an absence pin — one subsystem's grep is not the
+  tree. Caught only because the chair dispatched an independent re-verification
+  before building the cure: diagnose-before-mutating validated twice over
+  (the queued cure would have "fixed" a correct title).
+- **§401.1 SEATS:** POP2's seat is taken by CT-2's amendment work. FOUR
+  ACTIVE: RR-1 · T2H · TC-WEBSITE · CT-2-amend.

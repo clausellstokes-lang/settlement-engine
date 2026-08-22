@@ -74,6 +74,12 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~21:15: POP2 COLLECTED (§401) — DS-POP-2 item RETIRED (false positive:
+# the deriver EXISTS, trendLens.js display layer). REAL defect: the false
+# "NAMING CORRECTION" is IN the corpus in both CT holding tips — CT-2
+# AMENDMENT ORDERED now (new tip will supersede 5941093f); CT-3 re-stamps
+# at slot, GO carries the fact. Lesson 10 banked (absence claims owe
+# tree-wide receipts). FOUR: RR-1 · T2H · TC-WEBSITE · CT-2-amend.
 # ⭐ ~21:00: FTH34 COLLECTED+RULED (§400) — PROSE-OVERCLAIMS confirmed
 # ('abandoned' cut at WF-1A, zero producers); shrink-back RIDES the WF-8
 # car; producer door open (fifth cause lands WITH its producer). Seat →
