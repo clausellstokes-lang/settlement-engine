@@ -20035,7 +20035,7 @@
     },
     {
       "id": "MF-T2J",
-      "status": "DRAFT",
+      "status": "READY",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T2J.md",
       "verifiedBase": "05e7f9d56eec119102f540e316bd8e1061f81a92",
       "changeManifest": [

@@ -1,6 +1,6 @@
 # Town cartography / MF-T2J — the executable S0–S23 stage manifest, ported as a published record, with the stage-graph SCC preserved rather than repaired
 
-- **Status:** DRAFT
+- **Status:** READY
 - **Packet version:** 1
 - **Verified base:** `claude/composite-r4` at `05e7f9d56eec119102f540e316bd8e1061f81a92`
   ⚠⚠ **READ THE NEXT FOUR LINES BEFORE TRUSTING THAT ROW.** The SHA is MF-T2H's **HOLDING
