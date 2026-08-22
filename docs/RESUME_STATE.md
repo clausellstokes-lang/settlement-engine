@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~23:45: WEB-1 F1 RULED (§406) — the signed migration predicate AMENDED
+# to the CONJUNCTION (v-stamp null AND zero change records; no-op save =
+# stamp without records, the false positive); verify guard: grep-prove no
+# auto path stamps v, else STOP. A4→4 arms, M4 strengthened. WEB-1 building.
 # ⭐ ~23:20: T2H RECOMMITTED (§405) — tip 05e7f9d5 (pinned -r2), re-proven
 # AT the committed tip; two new traps banked (zsh PIPESTATUS empty capture;
 # pre-commit --fix voids a green invisibly — cure: git show HEAD re-proof).

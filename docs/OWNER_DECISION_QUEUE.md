@@ -16457,3 +16457,33 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
 - T2H HOLDS behind RR-1 → RR-2 → T2Bf → CT-2 → H8B/CT-3; its dist/ (710
   chunks) preserved for the GO re-proof. **RR-1's terminal gate is LIVE** in
   its own tree at load 48 — the landing cascade's first terminal is running.
+
+## §406 — WEB-1's F1 CONFIRMED: THE SIGNED §1.2 PREDICATE AMENDED TO THE CONJUNCTION; ONE VERIFY GUARD ADDED (2026-08-22 ~23:45)
+
+- **The finding, all evidence executed at base:** the C2-era clause ("flip
+  existing profiles only where the user has ZERO consent_change_records
+  rows") has a FALSE POSITIVE — 194's trigger inserts change records ONLY per
+  changed key while the v-stamp lands on the whole write, so a user who opened
+  Privacy & data and SAVED WITHOUT CHANGING ANYTHING carries v=2 with zero
+  change records; the signed predicate would flip that user's research OFF
+  despite a deliberate review that left it on — precisely the harm the v2
+  provenance lesson exists to prevent. The reverse non-equivalence also holds
+  (a system/unsubscribe write can land records on an UNSTAMPED row, 194:430).
+- **RULED: the predicate becomes the CONJUNCTION** — flip only where the
+  v-stamp is null AND no change records exist; both provenance signals absent
+  before any row is touched. A4 widens to four pglite arms (the new arm:
+  mirrored + no history → UNTOUCHED); M4 strengthens to drop-either-conjunct.
+  The §402-signed clause is AMENDED here; owner-vetoable as all of it.
+- **THE VERIFY GUARD (chair-added):** the conjunction under-flips at scale IF
+  any boot-time/auto client path stamps v without a user save — the lane
+  proves by grep that set_my_telemetry_consent's client callers are
+  user-action paths only, records the grep as the enabling receipt, and
+  STOP-RAISEs if an auto path exists. The residual sets recorded honestly in
+  the packet (neither-signal rows flip OFF by intent; reviewers keep state;
+  the under-flip set proven empty by the guard).
+- **BANKED:** the v-stamp and the compliance trail are NON-EQUIVALENT
+  provenance signals in both directions — the plan reached for the compliance
+  table when the canonical stamp was already in the column. GEN-2's
+  handshake also collected: fresh tree, S0 INTACT, six-gate bill re-taken
+  green (39/39), the 194-not-consent-named location correction noted. WEB-1
+  builds the full member now and holds.
