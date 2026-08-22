@@ -16103,3 +16103,23 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   self-runs on its own mutex poller. Three seats active (RR-1, CT-3, T2H);
   the fourth seat's candidates and the HANDOFF_CURRENT refresh (stale at
   §345) are the chair's next queue reads.
+
+## §396 — THE FOURTH SEAT FILLED: TE-INVEVS DISPATCHED (DIAGNOSIS-ONLY, §374's CHARTER) (2026-08-22 ~20:05)
+
+- **The §388 seat question, answered at the landing rather than the wakeup:**
+  the mint's completion freed its seat; the queue's best zero-contention fill
+  is the §374-chartered INV-EVS diagnosis — `viabilitySummaryFor` under
+  canonicalViewModel discards the DM's authored economicViability.summary in
+  three of four branches on BOTH surfaces, against the projection module's own
+  "a DM-edited field always wins its position whole." Scope exactly as
+  chartered: confirm on an AUTHORED value with executed probes, enumerate the
+  four branches with per-branch evidence, frame the DM's-pen-vs-reconciled-
+  sentence fork FOR THE OWNER with projectBesideDmField as the both-keeping
+  shape. Diagnosis-only: no edits, no refs, findings + recommendation; the
+  owner rules (it moves output on two surfaces).
+- **FOUR SEATS ACTIVE:** RR-1 (landing-critical, at eb6124a6) · CT-3 (AFTER
+  battery self-running) · T2H (building) · INV-EVS (diagnosing). Chair queue
+  reads standing: the HANDOFF_CURRENT refresh (stale at §345, owed through
+  §396) · DS-POP-2's charter hunt · the §384.2b declared-movement durable doc ·
+  the DS-FTH-3 five-vs-four diagnosis (§394) · MEASDUAL phase-2 at a quiet
+  window · the §374 exhibit act before RR-2's exposing CAS.

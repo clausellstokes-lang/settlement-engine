@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~20:05: FOURTH SEAT FILLED (§396) — TE-INVEVS dispatched (diagnosis-only,
+# the §374 viability-summary charter; owner fork after). FOUR ACTIVE: RR-1 ·
+# CT-3 · T2H · INV-EVS. Chair queue: HANDOFF refresh (owed) · DS-POP-2 hunt ·
+# §384.2b doc · DS-FTH-3 diagnosis · §374 exhibit before RR-2's CAS.
 # ⭐⭐ ~19:55: THE MINT LANDED (§395) — CAS 9bfae712 → eb6124a6 EXECUTED;
 # window CLOSED. Terminal green end-to-end (build FIRST EVER at C2;
 # verify:dist 52/433). ⛔ C1 12b3aa53 permanent. Arm-and-wait watcher =
