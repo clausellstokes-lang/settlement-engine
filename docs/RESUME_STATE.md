@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~17:10: T2M COLLECTED (§430) — faf3def4 pinned; strip proven
+# line-by-line; four-red window executed WITH control; --no-verify
+# ratified (blessed-window-only); SIBLING of T2L (sum-of-deltas at slot).
+# THE MAP BUILD PHASE IS COMPLETE. Two steps run at the hunt hold-lift.
 # ⭐⭐ ~16:20: CT-3 §355 STOP + THE HUNT FIRES (§429) — run 2 redded
 # DISJOINT assertions on a quiet box (prngSeedEntropy birthday-equality;
 # readerShapeResolver 300>256). Landing-on-isolated-evidence REFUSED.

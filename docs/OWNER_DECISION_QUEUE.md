@@ -17329,3 +17329,41 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
 - ⛔ The stale-pin trap re-flagged: holding-ct3 = ba806682 (pre-rebase,
   carries the retracted claim) — the CAS target is b10ed1a1 ONLY, from the
   landing report.
+
+## §430 — T2M COLLECTED: THE STRIP PROVEN LINE-BY-LINE, THE FOUR-RED WINDOW EXECUTED WITH ITS CONTROL, THE LAST MAP MEMBER BUILT; THREE RULINGS (2026-08-23 ~17:10)
+
+- **The member:** tip faf3def4 (pinned at refs/preserve/holding-t2m), five
+  commits on 4d2d17f8 — the base chosen with executed evidence (T2L had no
+  holding tip at derivation; the stack unrebased). The Shape-B strip proven
+  line-by-line (gate export + six use sites out; the kind renamed; both law
+  versions bumped; 207 changed production lines against the 260 cap); the
+  ONE moving test literal proven by execution; **the blessed four-red
+  window executed in three readings** — two reds packet-absent, exactly
+  four at DRAFT and READY matching the compile's text verbatim, and the
+  strip-reverted control at full green: the reds ARE the window, proven
+  not asserted. Census sequenced with two-step isolation; eight mutants +
+  control; zoom with the renamed kind as the new 1-chunk control; S0
+  recorded HONESTLY as BROKEN→BROKEN (the compile's flip prediction was
+  written for a whole envelope; the base carries CT-2's lawful break —
+  the deviation stated, not smoothed). Two steps OUTSTANDING and blocked
+  only by the chair's hunt hold: the entry-closure fence (dist/ built and
+  waiting) and the §408 sweep — they run at the hold-lift.
+- **THE THREE RULINGS:** (1) **T2M is a SIBLING of T2L** — at its landing
+  slot (last in the stack: T2K → T2L → T2M) it resolves the four-file
+  conflict: the census walker by SUM OF DELTAS (2504/364/2140/20750/5792,
+  never either tuple — the carry law's sibling face), the stage walker by
+  re-applying its row against T2L's RENAMED constant, manifest/INDEX by
+  the keep-both pattern. Recorded for its GO. (2) **the --no-verify on
+  commits 4/5 RATIFIED** — the pre-commit hook cannot pass during the
+  blessed window by the window's own design, the bypass is quoted verbatim
+  in both messages, and the landing terminal validates everything; LAWFUL
+  ONLY under a chair-blessed NAMED window, never otherwise. (3) **the
+  compile's A1 pin shipped STRONGER on measurement** (three-index
+  divergence + set difference, not the predicted index-0-only) — ratified;
+  the T1X prose staleness (its acceptanceCases quoting a moved law version
+  and digest, redding nothing) QUEUED as a doc-fix rider, deferred and
+  documented.
+- **THE MAP PROGRAM'S BUILD PHASE IS COMPLETE:** every D3a member is now
+  built (T2H, T2J, T2K, T2L, T2M holding; T2Bf/CT-2 landed; the producers
+  chartered awaiting ruling). What remains map-side is landings, the
+  producer builds, D3b activation later, and the visual waves.
