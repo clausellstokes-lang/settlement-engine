@@ -74,6 +74,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ~21:40 ET: UI stream spun up (§335) — lane UICR preparing the 3 open
+# UI-cohort chair rulings (read-only; verifies against both tips). Big UI
+# items remain OWNER-docketed. RS-5 still running; drafts held at the stop.
 # ⭐ ~21:20 ET: T2D COMPILE COLLECTED + RULED (§334) — exact cut predicate
 # ADOPTED (kernel's precondition outranks the sandbox letter; 3 executed
 # witnesses); ladder=carried structure; 4 accepts. BOTH next-wave drafts

@@ -14261,3 +14261,16 @@ recommended. Implementation, per item:
   Both next-wave drafts (WF-1E §333, MF-T2D §334) are now dispatch-ready and HELD —
   ⛔ nothing lands before the §290 review stop, which arrives at RS-5's closing
   collection.
+
+## §335 — OWNER PARALLELISM QUERY #2: THE UI STREAM SPUN UP (2026-08-21 ~21:40)
+
+- **Owner asked whether map, simulation, AND UI design run in parallel.** Honest
+  answer given: map and simulation yes (interleaved all day — six landings, two
+  next-wave compiles, the soak); UI design NO — the largest queued UI items are
+  OWNER-DOCKETED decisions (§317.1 website list, §316.2C beat copy, §320.3
+  disclosure, the V5/Ribbon post-tune sitting), and the §290 stop bars landings.
+- **§335.1 The chair-scope UI work that IS startable was started:** lane UICR
+  (read-only) assembles ruling briefs for the UI cohort's THREE OPEN CHAIR RULINGS
+  (128 findings, 34 true positives, triaged 08-15), verifying each is still open at
+  both tips after today's six landings. The chair rules on its report; any cures the
+  rulings order become post-stop packets.
