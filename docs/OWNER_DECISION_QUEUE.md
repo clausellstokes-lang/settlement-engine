@@ -16171,3 +16171,55 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   precedent TC-READREPAIR, TC-RR2). Deliverable: draft-WEBSITE-PLAN.md for
   chair review.
 - FOUR SEATS ACTIVE: RR-1 (landing-critical) · T2H · INV-EVS · TC-WEBSITE.
+
+## §399 — INV-EVS COLLECTED: THE DISPLACEMENT CONFIRMED ON BOTH SURFACES, A SECOND DEFECT FOUND, THE FORK RIPE FOR THE OWNER (2026-08-22 ~20:45)
+
+- **All-CONFIRMED diagnosis at eb6124a6, two executed probes, no edits.** The
+  charter's premise CORRECTED first: the surfaces share the DERIVATION, not the
+  helper (the PDF reads the viewModel helper at two call sites; the screen
+  calls deriveViability directly and applies its own prefix strip) — and the
+  difference matters.
+- **(a) CONFIRMED with a real pipeline settlement and the real writer:** the
+  DM's authored economicViability.summary is DISPLACED on both surfaces — and
+  the displacement is READ-SIDE: the pen survives in storage and even in the
+  derivation's own rawSummary return; both surfaces simply read .summary and
+  never .rawSummary. Which is exactly why no instrument sees it: the
+  projection test asserts paths are editable (never that blocks route through
+  projectBesideDmField), and the no-writer scan hunts ASSIGNMENTS in a
+  directory neither file is in. projectBesideDmField/SettlementField have
+  ZERO production consumers — the cure shape is built and unwired.
+- **(b) The branch table executed:** of the four branches reachable with an
+  authored value, exactly ONE keeps it (viable===false), and the common case
+  (any food deficit — most settlements by design) discards it. **A SECOND
+  DEFECT:** on that one surviving branch the SCREEN truncates the pen at its
+  first colon (the verdict-prefix strip regex eats the DM's own clause), so NO
+  branch renders the pen whole on screen, and the two surfaces disagree there.
+- **(c) THE FORK, NOW RIPE ON THE OWNER DOCKET (it moves output on two paid
+  surfaces; §374.1's register row filled in):** the pen's side (queue-wired,
+  registered editable, labelled, DS-GEN-11-mapped, the amended SP-6 promise)
+  versus the machine sentence's honesty function (never claiming
+  self-sufficiency against a deficit — estate law). LOAD-BEARING FACTS: the
+  honesty is DOUBLE-COVERED (consistency.js already warns non-blockingly on
+  the same shape — one instrument warns, one silences; only the silencing one
+  costs the pen); the DM lever is FLAG-DARK in production (latent — cure
+  before it lights); but a LIVE non-DM writer exists NOW (the AI-narrative
+  rewrite is discarded on the same branches under narrativeMode).
+  **The lane's recommendation, carried to the owner with the chair's
+  endorsement:** adopt projectBesideSettlementField at both call sites (field
+  in the verdict position, the machine sentence beside, muted), precedence
+  keyed on _userEdits — NOT on v.summary presence (the trap: rawSummary
+  conflates the pen with legacy generator meta-language). Six costs and three
+  flip-conditions stated in the report; **a THIRD ARM presented honestly:**
+  if the verdict callout is engine-receipt territory, remove the field from
+  the editable maps and the promise stops being broken by no longer being
+  made. OWNER RULES; the AI-clone precedence question is its own sub-call.
+- **Adjacent findings QUEUED (recorded, not chased):** overview.viabilitySummary
+  is a dead slice field with no reader; two stale doc citations (the atlas's
+  no-mount claim, the coherence audit's index.ts attribution) join the
+  housekeeping docket; the strained sub-wordings' tradeAccess reachability on
+  old saves noted unexplored. The probe worktree INVEVS-tree is left in place
+  for owner-review reproducibility.
+- **§399.1 SEAT:** INV-EVS's seat refilled with TE-FTH34 (the §394
+  five-vs-four patron-fall diagnosis; diagnosis-only, cheap-tier per the
+  staffing rule — low judgment density). FOUR ACTIVE: RR-1 · T2H ·
+  TC-WEBSITE · FTH34.
