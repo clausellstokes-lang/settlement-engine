@@ -74,6 +74,13 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ~06:45: 2nd corroboration (the failing step alone: 11/11, zero strays) +
+# FULLGATE2 airborne 08:39:40Z (conditions in the start line; honest caveat:
+# load decaying 12/18/24 at fire, no vitest competitor — a repeat red with
+# >20s marker rows reads EXTERNAL-CONSUMPTION not regression, by rows). ⚠
+# NEAR-MISS TO BANK: a pgrep-f wait loop whose pattern matches its OWN
+# cmdline can spin forever while reporting 'armed' — exclude own pgroup.
+# (It exited correctly this time; the trap is real.)
 # ⭐ ~06:25: MINT'S RED CLASSIFIED DECISIVELY — 16 rows split 11 assertions
 # (=the banked census, all ms) / 5 timeouts (=the strays, all >20s w/ the
 # marker); zero overlap; F8 innocent by its row. TWO PROTOCOL REFINEMENTS:
