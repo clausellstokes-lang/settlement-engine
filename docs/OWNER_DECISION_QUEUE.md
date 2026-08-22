@@ -17037,3 +17037,41 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   vocabulary merge crossing src/domain → src/store — an architecture
   question the chair briefs at the next free seat, not a lane's call).
 - Seats at the cap: H8B-landing · TE-T2K · TC-T2L · TC-PRODUCERS.
+
+## §422 — T2K COLLECTED: BUILT AND GREEN AT 182 EFFECTIVE; EIGHT JUDGMENTS RATIFIED; THE WITHDRAWN-PROBE DISCIPLINE NOTED; TC-T2S TAKES THE FREED SEAT (2026-08-23 ~10:10)
+
+- **The member:** tip 4d2d17f8 (pinned at refs/preserve/holding-t2k), four
+  commits on T2J's holding f7ba3145 — the stack-state re-derived with
+  evidence before building (the cascade had landed T2Bf/CT-2 but the D3a
+  stack is unrebased, so the pin held; the §416.1 identity arm applied at
+  close). All 18 preflight rows re-executed; A1-A6 green; census walked
+  sequenced with the one-file isolation convicting the base tuple exactly;
+  M1-M7 + guard-the-guard convicted with ZERO equivalent mutants and the
+  M3/M4 subsumption proved by execution at distinct lines; the §408
+  three-directory sweep zero-stray with figures identical to T2J's at the
+  same base; the duplicate-path probes quoted verbatim, both rows deferred
+  per §417.
+- **TWO HONEST DEVIATIONS, recorded not smoothed:** the compile's row-5
+  sealed-grep figure (1 hit) re-executes to 0 — the lane proved its
+  instrument live with a control grep BEFORE believing the zero, and the
+  design-implementation conclusion is STRENGTHENED; and the leaf's first
+  strict reading (+7/+1) was cured by TYPEDEF AND RESTRUCTURE at the zero
+  allowance, never by widening or a cast row.
+- **THE WITHDRAWN-PROBE DISCIPLINE, noted for the estate:** two zoom probes
+  were WITHDRAWN mid-proof because the key is built from a token table — the
+  probe strings appear in zero src files, so an absence measured with them
+  proves nothing (the self-supplied-anchor law applied to one's own
+  instruments). Six live probes at 0 chunks + three positive controls at 1
+  each carried the proof instead.
+- **J-TET2K-1..8 RATIFIED** — the standouts: J-3 (input-independence made
+  TESTABLE by fixing the order deterministically), J-4 (the blocked seventh
+  kind carried as a null-segments table row so totality is provable), J-8
+  (the acceptance file riding the atomic commit as a superset of the
+  binding requirement). RAISED-1 already ruled (§419: the rename rides
+  T2L); RAISED-2 recorded. Full gate deferred to the landing slot on the
+  ratified precedent. T2K HOLDS behind T2J.
+- **§422.1 SEAT: TC-T2S dispatched** — the §299.3c door decision brief
+  (T2M's blocker): the operation-vocabulary merge crossing src/domain →
+  src/store, evidence assembled compile-side, the chair rules after. This
+  completes the §421 owner order: every map-remainder track is now moving
+  or briefing. Cap: H8B-landing · TC-T2L · TC-PRODUCERS · TC-T2S.
