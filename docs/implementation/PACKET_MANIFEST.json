@@ -19806,6 +19806,114 @@
           "check:tail"
         ]
       ]
+    },
+    {
+      "id": "CT-2",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/content-train/CT-2.md",
+      "verifiedBase": "3519dcc1368ab4f2f48c06b6c6cfe8c80c3bc3c4",
+      "changeManifest": [
+        {
+          "_note": "THE GOVERNED CORPUS. Three WHOLLY NEW blocks appended as one CT-2 section (DS-POP-3 the direction of the roll read against the approach, DS-GEN-15 the fabric wears it, DS-GEN-16 what the years left standing), plus the {calamity} row in the merged slot register, an AS EXTENDED AGAIN note and a DARK note in the coverage census. NEW blocks, never an append to an existing pool: drawVariant hashes seed::blockId::poolKey and indexes % eligible.length, so appending would move every seeded draw over that pool while a new block moves nothing. Headers use a middle dot rather than the house em dash, on CT-1a's ratified precedent, because a block title is projected verbatim into its desk leaf and the leaves sit inside voiceMechanics Tier 2, whose per-file em-dash pin is red-and-banked and must not deepen. No existing block was edited. This lane briefly asserted in DS-POP-3's RECEIPT that DS-POP-2's title named a nonexistent function; that claim was FALSE (populationTrendBand is exported from src/domain/display/trendLens.js and its signature matches the title exactly) and was removed under ODQ 401, with DS-POP-3 re-keyed onto that same display-layer reader so the two POP blocks read ONE band.",
+          "action": "DOC",
+          "path": "docs/content/RECEIPT_POOLS_DOSSIER_STATE.md"
+        },
+        {
+          "_note": "THE PROJECTION, REGENERATED IN THE SAME COMMIT by the existing npm run gen:dossier-prose. 18 to 21 blocks and 576 to 613 variants. This is the ONLY generated leaf this car touches, because DS-GEN- and DS-POP- are both claimed by the general desk. Measured, not asserted: key-by-key against the pre-change leaf the diff is ADDED [DS-POP-3, DS-GEN-15, DS-GEN-16], REMOVED [], CHANGED [], and the only removed LINE is the leaf's own header count comment. The em-dash and exclamation counts are unchanged at 158 and 0. The other SIX leaves, defense and economy and power and stressors and warFaith and the causal leaf, came out of the same run BYTE-IDENTICAL, which is the estate-wide half of the no-movement proof and is tighter than CT-1a's because this car moves one leaf rather than two.",
+          "action": "MODIFY",
+          "path": "src/data/dossierStateProse/general.generated.js"
+        },
+        {
+          "_note": "THE TWO PIN MOVEMENTS, both in the existing literal describe and neither adding a test. The exact block count re-records 62 to 65 with ODQ 378 and 387 cited at the assertion; the state-variant floor re-pins 2201 to 2238 per CT-0 R-5 on CT-1a's ratified precedent, because slack between a stale floor and the real total is where a later parser regression hides. No new test file, no new suite, no .each, no runIf. The floor test's title does not move; the block-count test's title carries its own figure and moves with it, and that test PASSES and is not one of the eleven baselined census rows, which was re-verified at this base by enumerating the baseline's entries object rather than by inheriting CT-1a's reading.",
+          "action": "TEST",
+          "path": "tests/data/dossierStateProseProjection.contract.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE GOVERNED CORPUS, block one. The header PREFIX is pinned rather than the bare id, so a later car cannot satisfy this row with a cross-reference in prose. The middle dot is load-bearing: an em dash here would be projected verbatim into general.generated.js and would deepen the red-and-banked voiceMechanics per-file pin.",
+          "path": "docs/content/RECEIPT_POOLS_DOSSIER_STATE.md",
+          "symbol": "### DS-POP-3 · Population/History"
+        },
+        {
+          "_note": "THE GOVERNED CORPUS, block two.",
+          "path": "docs/content/RECEIPT_POOLS_DOSSIER_STATE.md",
+          "symbol": "### DS-GEN-15 · History"
+        },
+        {
+          "_note": "THE GOVERNED CORPUS, block three.",
+          "path": "docs/content/RECEIPT_POOLS_DOSSIER_STATE.md",
+          "symbol": "### DS-GEN-16 · History"
+        },
+        {
+          "_note": "THE ONE SLOT THIS CHAPTER MINTS, carried in the merged 0c-2 register so the file keeps ONE slot home. Pinned because a slot used but undeclared is counted by the projection contract's undeclared-slot ceiling, which only ratchets DOWN. The CT-2 corpus draft called it borrowed; it occurs zero times elsewhere in the annex, so it is minted here.",
+          "path": "docs/content/RECEIPT_POOLS_DOSSIER_STATE.md",
+          "symbol": "{calamity}"
+        },
+        {
+          "_note": "THE PROJECTION LANDED, block one. Quoted WITH its JSON delimiters so the row cannot be satisfied by a comment or by a prose mention of the id.",
+          "path": "src/data/dossierStateProse/general.generated.js",
+          "symbol": "\"DS-POP-3\""
+        },
+        {
+          "_note": "THE PROJECTION LANDED, block two.",
+          "path": "src/data/dossierStateProse/general.generated.js",
+          "symbol": "\"DS-GEN-15\""
+        },
+        {
+          "_note": "THE PROJECTION LANDED, block three.",
+          "path": "src/data/dossierStateProse/general.generated.js",
+          "symbol": "\"DS-GEN-16\""
+        },
+        {
+          "_note": "A POOL LABEL, not a block id, and the one that proves this chapter's central refusal survived into the projection. RECORDED-UNANCHORED exists because DS-GEN-9 rules that an unanchored event gets described and NOT connected forward; without this pool the block would have had to borrow an anchored sentence for the unanchored case. Deliberately NOT a count: a figure here would be re-recorded by a later car and would trap this packet forever.",
+          "path": "src/data/dossierStateProse/general.generated.js",
+          "symbol": "RECORDED-UNANCHORED"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "The projection is not stale, the parser dropped nothing, and the contract passes WHOLE. node scripts/generate-dossier-state-prose.mjs --check verifies 65 state blocks / 2238 variants across 6 desks and 78 causal families / 468 variants by byte-comparing every emitted leaf against a fresh re-derivation from the two authored annexes; and the projection contract passes on the re-recorded exact 65 and the raised floor 2238 as well as on every pin that did NOT move: causal 78 and the six-per-family arm, the thin-pool floor of 2 (nine of the fifteen new pools sit exactly AT it, so the arm is not vacuous over this car), the dm-only floor, the undeclared-slot ceiling and the no-markdown scan."
+        },
+        {
+          "id": "A2",
+          "case": "The three blocks landed in the one desk with the measured shape: general 18 to 21 blocks and 576 to 613 variants, with zero edits to the generator's DESKS table because DS-GEN- and DS-POP- are both already claimed by that desk."
+        },
+        {
+          "id": "A3",
+          "case": "NO SAME-SEED PROSE MOVED, proven in both directions rather than argued. Key-by-key over every leaf: 3 blocks ADDED, 0 REMOVED, 0 CHANGED. Byte comparison: defense, economy, power, stressors, warFaith and dossierCausalProse all BYTE-IDENTICAL. In the one leaf that moved, the only removed line is the header count comment. Goldens over tests/property + tests/dossier + the four prose readers run BOTH WAYS: 107 files / 733 tests at the base and again after, and the two logs with timing stripped are IDENTICAL line for line across 203 lines."
+        },
+        {
+          "id": "A4",
+          "case": "The banked voice debt does not deepen by one character: general em 158 to 158 and bang 0 to 0, Tier-2 total 1438 to 1438, JSX total 19 to 19, and the four banked voiceMechanics rows keep file, title, verdict and numbers on both sides."
+        },
+        {
+          "id": "A5",
+          "case": "The register holds over all 37 variants and all 3 headers, scanned rather than asserted: zero digits, zero em dashes, zero en dashes, zero exclamation points, no residual backtick or bold markup, every slot used declared on its block's SLOTS line, every angle drawn from the section 0b palette, and the mandatory counterforce arm present where the engine records a gate (RISING-NARROW, WORN-PLAIN, UNMARKED)."
+        },
+        {
+          "id": "A6",
+          "case": "THE THREE REFUSALS HOLD. No variant attributes the roll's movement to the roads, because R-DST-B rules a configuration field licenses structure and never history and DS-POP-2 rules the band carries no provenance at all. No variant splits a gain between birth and arrival, because the demographic receipt and the migration ledger are DS-POP-1's record. No variant connects an unanchored event forward, because DS-GEN-9 rules anchored the causal gate. Each refusal is recorded in the block that would have carried it, and the section's closing paragraph names all three so no later writer re-finds them as gaps."
+        },
+        {
+          "id": "A7",
+          "case": "The docs writes introduce no new completeness claim: the LIVE CLAIM_RE lifted from tests/docs/enforcement-claims.test.js finds zero hits across the annex, so the per-claim naked-claim freeze that reds a GREEN test stays green."
+        },
+        {
+          "id": "A8",
+          "case": "THE OSR ENVELOPE IS BROKEN BY THIS MEMBER and the break is recorded rather than minted. RE-STAMPED at the slot base under SCHEMA 10, and the reading REVERSES the schema-9 one this packet first carried. The instrument is the gate script run bare and read-only, NOT the walker test: node scripts/check-observed-shape-readers.mjs exits 0 at the slot base 3519dcc1 printing observed-shape readers 1995 findings exactly matching the frozen inventory, and exits 1 at this member with the schema-10 instrument line. So unlike at the schema-9 base, where both sides exited 1 and the digests alone had to settle it, THE EXITS NOW DISCRIMINATE and the break at this landing is wholly this member's. Attributed POSITIVELY rather than by elimination: dropping only the regenerated leaf into an otherwise pristine checkout of the slot base flips that same bare gate from exit 0 to exit 1, so the leaf alone carries it. At schema 10 the baseline carries manifests.sourceTree with 2159 entries and manifests.scanTree with 2146, the leaf is in the first and not the second so its bytes feed unscannedInputDigest, and its sha256 reads 3df1a6ee both frozen and at the slot base against 436f763d here. All seven prose leaves match their frozen digest at the slot base, so the envelope is whole there in the leaves too and this member moves exactly one. For the trailing mint's attribution table under 394 F1: general.generated.js diverges here and is this member's, while warFaith.generated.js reads 6f74d5df frozen and at the base and here alike, so its divergence originates at CT-3 and must not be attributed to this car. The reader-census property is true but separate: zero of the seven prose leaves appear in the baseline inventory, so no reader row moves, and a later car must not reason from reader neutrality to envelope neutrality."
+        }
+      ],
+      "checks": [
+        [ "npm", "run", "gen:dossier-prose" ],
+        [ "node", "scripts/generate-dossier-state-prose.mjs", "--check" ],
+        [ "npx", "vitest", "run", "tests/data/dossierStateProseProjection.contract.test.js", "tests/copy/voiceMechanics.test.js" ],
+        [ "npx", "vitest", "run", "tests/property", "tests/dossier", "tests/domain/stateProseKernel.test.js", "tests/domain/economyStateProseDesk.test.js" ],
+        [ "npx", "vitest", "run", "tests/docs", "tests/lint", "tests/build" ],
+        [ "npm", "run", "validate:packets" ],
+        [ "npm", "run", "check:tail" ]
+      ]
     }
   ]
 }

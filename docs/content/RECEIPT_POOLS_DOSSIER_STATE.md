@@ -26,6 +26,14 @@ here at all** — they are measured from the projection itself by
 `tests/data/dossierStateProseProjection.contract.test.js`, which is the only
 place in this estate where a corpus total is allowed to be a number.
 
+**AS EXTENDED AGAIN (CT-2, 2026-08-22).** The train's second car adds a sixth
+section beside the fifth: **three blocks, fifteen pools, thirty-seven authored
+variants** on growth and what the years did (the direction of the roll read
+against the approach, the fabric's own dated marks, and what a recorded blow
+left standing), dark on the same terms. The rule above governs this paragraph
+too: the figures here are **this chapter's own authored arithmetic and nothing
+else**, and no current corpus total is asserted anywhere in this file.
+
 **What this file is.** The dossier-native register applied not to joins but to
 **STANDING STATE**. The sibling annex answers *why is the town like this*; this
 file answers the prior question the dossier never actually asked in prose —
@@ -161,6 +169,7 @@ per-block declarations of WRITER-4). Nothing is minted here.*
 | `{founder}` | `founding.foundedBy` | WRITER-4 |
 | `{challenge}` | `founding.initialChallenge` | WRITER-4 |
 | `{defwork}` | the settlement's own wall-class work **by its recorded name** — the roster row `defenseProfile.institutions.walls` matched (wall · citadel · palisade · earthwork); never a baked or invented noun, and never offered to a settlement whose wall-class list is empty | CT-1a |
+| `{calamity}` | the recorded blow **by its own typed word** — from a fabric scar's `kind` where the mirror is the source (`DS-GEN-15`) or from a `historicalEvents[]` row's `type` where the record is (`DS-GEN-16`); never a baked or invented noun, and never offered to a settlement whose scar list or event record is empty. The kind-to-word and type-to-word tables are WIRING work and are raised at CT-0 R-3, so a composer that has not built them must not draw a pool that uses this slot | CT-2 |
 
 **THE SLOTS-LINE CONVENTION, RECONCILED (§0h V1-h).** WRITER-2 declares each
 block's **permitted palette**; the other three declare the **used set**. The
@@ -394,6 +403,22 @@ not have. Their SECTION-TARGET lines name the surfaces they are written FOR —
 rows 18/30 and 29 (`DS-GEN-12`), rows 6/7 and 29 (`DS-GEN-13`), rows 43/44
 (`DS-GEN-14`), rows 73/75 (`DS-DEF-11`). When the composer lane wires them, the
 cells above gain them and this paragraph goes.
+
+**THE CT-2 GROWTH BLOCKS LAND ON THE SAME TERMS — the census is UNCHANGED
+AGAIN.** `DS-POP-3`, `DS-GEN-15` and `DS-GEN-16` (the CT-2 section at the end of
+this file) **add no RENDERED SURFACE**, so the denominator above is untouched and
+the coverage reading stands. They are likewise NOT written into the owning-block
+column, for the same reason: no desk reads them yet. Two of the three carry a
+caveat worth recording here rather than only in their own blocks. `DS-POP-3`'s
+nearest surface row is the one the census already marks as **the corpus's one
+genuine gap** (row 38, the Overview identity strip, whose trend lens `DS-POP-2`
+holds with **no surface**), so `DS-POP-3` inherits that gap rather than closing
+it, and `R-DST-K` governs both until a population-trend surface exists.
+`DS-GEN-15` reads the urban-fabric mirror, which **no other block in this annex
+reads at all**, and which is absent entirely in an aspatial world; where the
+mirror is dark the block is silent by construction and owns nothing. When the
+composer lane wires any of the three, the cells above gain them and this
+paragraph goes with the one before it.
 
 **RECORDED SCOPE EXCLUSIONS — surfaces deliberately outside the denominator.**
 Each is a decision, not an oversight, and each is vetoable.
@@ -5701,3 +5726,149 @@ once, grown since) and `DS-DEF-11` (why the wall, and why not). No pool falls be
 two-variant floor the projection contract holds; every slot a variant uses is declared on
 its block's SLOTS line; every angle is drawn from §0b's palette. The chapter adds no
 rendered surface, so §0g's denominator and its 77/77 coverage are unchanged.
+
+---
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+## CT-2 — GROWTH AND WHAT THE YEARS DID (why the roll moves, and what the record and the stones still carry)
+
+*Authored 2026-08-22 under the content-train charter (ODQ §360 / §360.1 / §361), compiled at
+CT-0 and ratified at ODQ §378; sequenced at §387. Three blocks, fifteen pools, thirty-seven
+variants. The blocks land DARK: no desk reads them yet, and composer wiring is its own lane
+(CT-0 R-1, confirmed at §378), exactly as CT-1a landed.*
+
+*Register inheritance is by BLOCK ID, which is this file's addressing scheme (§0h V1-f). The two
+`DS-GEN-` blocks inherit WRITER-4's `R-DST-W4-*` resolutions and `DS-POP-3` inherits WRITER-3's
+population rulings, exactly as they would if they sat inside those clusters. They are gathered
+in one section, beside CT-1a's, so the chapter is reviewable and vetoable as a unit and so no
+cluster's own closing arithmetic is falsified by an addition made weeks after its merge.*
+
+*THE CHAPTER LAW (CT-0 §2, `R-DST-W4-a` generalised): STRUCTURAL CAUSE IS LICENSED, HISTORICAL
+CAUSE IS RECORD-GATED. This chapter is the one where that law does the most work, because the
+subject is change over time and the temptation is to explain it. **`R-DST-B` is the binding
+constraint and it is quoted here so no later writer has to re-derive it:** a standing
+configuration field licenses a structural clause and NEVER a historical one, and "a prosperity
+rung, a food label, a posture word and a market band carry NO provenance whatsoever". `DS-POP-2`
+adds the same ruling for the trend band itself: the band "carries no provenance", and "a variant
+explaining why the town is thinning would be inventing history". `DS-POP-1` already owns the
+movement that produced the roll, because the migration ledger and the demographic receipt ARE
+provenance. So `DS-POP-3` below says what the town's DIRECTION and its APPROACH mean together,
+as structure, and never once says where the people came from or went. The record-gated half of
+the chapter lives in the other two blocks, where dated rows exist to gate it.*
+
+*No variant below carries a digit, an em dash or an exclamation point; the block headers use a
+middle dot for the same reason CT-1a's do, since a title is projected verbatim into its desk leaf
+and the leaf's em-dash count is pinned exactly. Mechanisms travel and geography does not: no
+compass word, no real-world place, no named analogy.*
+
+---
+
+### DS-POP-3 · Population/History › The direction of the roll, read against the approach · the trend band over `settlement.populationHistory` × `config.tradeRouteAccess`
+
+**RECEIPT:** the demographic trend band is derived by `populationTrendBand(settlement.populationHistory)` (`src/domain/display/trendLens.js`), returning `{band −2..+2, net, window}` over the recent window against the same `AXIS_TUNING` thresholds the sim axis uses, and returning band zero with window under two where the ring is too short to trend · `config.tradeRouteAccess` (live enum `port` · `river` · `crossroads` · `road` · `isolated` · `mountain_pass` · `mountain_road` · `desert_road`) · **THIS IS `DS-POP-2`'s READER, DELIBERATELY.** The sibling block keys on the same display-layer function, whose sole consumer is `buildTrendLenses` and through it `WhatChangedPanel`; keying this block on the same one keeps the two POP blocks reading one band rather than two, which is what `R-DST-A` is for. The believed `populationTrendBand` FIELD on a belief record (`beliefMap.js`, present only when `beliefAxesEnabled`) is a different thing that shares the name, and it is NEVER this block's source: a believed band is not engine truth, and `DS-POP-1` already marks its believed pool `dm-only` by construction.
+**STATE-KEY:** the band's SIGN × the approach's width, a total partition — `RISING-OPEN` (band above zero, open approach) / `RISING-NARROW` (band above zero, narrow approach) / `LEVEL` (band at zero, either approach) / `FALLING-OPEN` (band below zero, open approach) / `FALLING-NARROW` (band below zero, narrow approach). NARROW adopts `DS-GEN-13`'s convention unchanged (`isolated` · `mountain_pass` · `mountain_road`); every other value is OPEN. The band's MAGNITUDE is deliberately not keyed: `DS-POP-2` owns the five-rung verb ladder over it, and a second ladder on the same fact is exactly what `R-DST-A` forbids.
+**SLOTS:** `{settlement}`
+**SECTION-TARGET:** `population` · also `overview`
+**PROVENANCE:** **THIS BLOCK HAS NO CAUSE POOL, AND THE ABSENCE IS THE DESIGN.** `R-DST-B` rules that a configuration field licenses structure and never history; `DS-POP-2` rules that the band carries no provenance; `DS-POP-1` holds the migration ledger and the demographic receipt, which are the only fields in the estate that license a clause about why the roll moved, and it reads "the movement that produced it" already. What is left, and what is genuinely unowned, is the JOIN: a town's direction of travel means something different at the end of an easy road than at the end of a hard one, and that difference is entailed by the two standing fields alone. A narrow approach makes arrival costly, so arrival at a narrow-approach town is deliberate; an open approach makes arrival cheap, so an open-approach town's direction is not evidence of anything having been chosen. Not one variant below says where a person came from, where one went, or why. `R-DST-A`: `DS-POP-2` is the LADDER for this fact and `DS-POP-1` the movement SURFACE; this block is the why-frame for the pairing alone and composes BESIDE them, never over the same cell. In practice the pairing question is presently moot, since `DS-POP-2` is marked NO SURFACE and the dossier has no population-trend surface at all; when one lands, a composer draws at most one of the three. `R-DST-G` is satisfied: the rising pools carry more variants than the falling ones, not fewer.
+
+**`RISING-OPEN`**
+1. `[ledger]` {settlement} is getting larger and can be reached without much deciding; the roll and the approaches agree with one another, and the town has to plan for both at once.
+2. `[street]` Arriving at {settlement} is easy, and there are more people here than the older rolls describe; the town has not had to be sought out in order to fill.
+3. `[visitor]` {settlement} stands open to its approaches and is plainly carrying more than it used to, which is the ordinary condition of a place that is convenient.
+
+**`RISING-NARROW`**
+1. `[ledger]` {settlement} is growing at the end of a hard approach; whatever the town has been gaining, it has not been gaining it by being easy to get to.
+2. `[visitor]` For a place this troublesome to reach, {settlement} is remarkably full, and the difficulty of arriving is the measure of what the arriving is worth.
+3. `[counterforce]` {settlement} has every structural excuse to be shrinking and is not: the ways in are poor, the country is long, and the roll rises regardless.
+
+**`LEVEL`**
+1. `[ledger]` {settlement}'s roll holds where it is, and the approaches neither fill the town nor drain it; the arrangement is steady in both respects at once.
+2. `[elder]` {settlement} is the size it has been, and the ways in and out have not moved it in either direction.
+
+**`FALLING-OPEN`**
+1. `[ledger]` {settlement} is getting smaller, and it is not for want of a way in; the approaches are open and the roll falls beside them.
+2. `[counterforce]` Reaching {settlement} is easy and remaining is evidently the harder part, since the roads that would bring people would carry them out just as readily.
+3. `[street]` {settlement} is well approached and thinner than it was, and the two facts sit uncomfortably beside one another.
+
+**`FALLING-NARROW`**
+1. `[ledger]` {settlement} is losing what it had and is hard to reach, and a town in that position gets smaller quietly, without anyone outside marking the stages.
+2. `[elder]` The ways into {settlement} were always poor and the town was always small enough to carry that; it is smaller now, and the poor ways make the smallness harder to answer.
+
+---
+
+### DS-GEN-15 · History › The fabric wears it (what the town's stones still carry) · `settlement.urbanFabric` through `fabricRead`
+
+**RECEIPT:** the urban-fabric mirror, read only through its canonical reader (`src/domain/townMap/fabricRead.js`): `hasFabric(settlement)` · `fabricScarsOf` returning `[{ kind, severity 0..1, week }]`, the typed stressor scars the module's own comment describes as burn lots, plague quarters and siege repairs · `fabricRebirthsOf` returning `[{ classes, type, week }]` · `fabricDriftOf` returning 0..1, where zero is a lawful rubric-faithful fabric and one is chaotic encroachment, and `null` when the mirror is absent · `fabricStocksFor`. The scars decay by the age-overlay law (`SCAR_DECADE_HALF_LIFE_WEEKS`, `src/domain/townMap/ageOverlay.js`), so an old mark reads faint by the engine's own arithmetic and not by an authored guess.
+**STATE-KEY:** `SCARRED-FRESH` (a scar carried at high severity) / `SCARRED-FADING` (scars on record, decayed low) / `REBUILT` (a rebirth row on record) / `ENCROACHED` (drift high, no scar or rebirth dominating) / `WORN-PLAIN` (mirror present, no scars and no rebirths)
+**SLOTS:** `{settlement}` `{calamity}` `{timeband_since}` *(`{calamity}` is MINTED BY THIS CHAPTER per §0c-2 and declared in the merged register above: it fills from the scar row's own `kind`, never from a baked or invented noun, and a settlement whose scar list is empty is not offered a variant that needs one. The kind-to-word table is wiring work and is raised at CT-0 R-3.)*
+**SECTION-TARGET:** `history` · also `overview`
+**PROVENANCE:** **ABSENT MIRROR ⇒ NO SENTENCE.** `hasFabric` is false for every aspatial world and every settlement the fabric layer has not touched, and each reader then returns empty or null. That is `R-DST-K` exactly, and it is the block's own dormancy wall: silence is the correct output and no variant here may be drawn as a fallback. The mechanism is engine-native end to end and every historical clause below is gated by a DATED row, which is what `R-DST-B` requires: the scars and the rebirths carry their own `week`, so a variant may say a thing happened and how long ago without inventing either. **Non-redundancy is MEASURED, not asserted: no other block in this annex reads the fabric mirror at all** (`urbanFabric`, `fabricRead`, `fabricScars` and `ageOverlay` return zero occurrences across the file outside this block), so the `R-DST-A` pairing question does not arise. The line this block does not cross: the mirror records THAT a quarter was rebuilt and WHEN, never where it sits or what shape it took, and no variant reaches for a location, a direction or a geometry. `DS-GEN-16` is the sibling and reads a different record entirely, and the two are distinguished in that block's own provenance.
+
+**`SCARRED-FRESH`**
+1. `[street]` The {calamity} is still legible in {settlement}, and the town works around the mark the way a hand works around a cut.
+2. `[visitor]` Something went wrong here {timeband_since}, and {settlement} has not finished absorbing it; the damage is part of the town's present tense.
+3. `[unfolding]` {settlement} carries the {calamity}'s mark openly, and the repair is happening at the speed of means rather than of wish.
+
+**`SCARRED-FADING`**
+1. `[elder]` The {calamity} has nearly left {settlement}'s fabric; what was a wound is becoming a feature, the way towns digest their disasters.
+2. `[street]` Only people who knew {settlement} before still see where the {calamity} sat; the town has grown over it the way turf grows over a track.
+
+**`REBUILT`**
+1. `[visitor]` Part of {settlement} reads newer than the rest, all of a piece and all at once, which is how a town writes down that something happened to it and it decided to continue.
+2. `[ledger]` A share of {settlement} was made twice, and the second making is plainer, straighter, and still a little foreign to what surrounds it.
+3. `[elder]` The rebuilt ground at {settlement} is the town's proof of itself: what fell was answered, and the answer is lived in.
+
+**`ENCROACHED`**
+1. `[street]` {settlement} is thickening from the inside: yards give way to rooms, lanes narrow by consent, and each year the town holds a little more life in the same skin.
+2. `[ledger]` What was open ground inside {settlement} keeps becoming built ground; nobody ordered it, and the record of it is simply the town itself.
+
+**`WORN-PLAIN`**
+1. `[elder]` {settlement}'s fabric carries no great wound, only wear; the town has been spared the memorable disasters and shows the ordinary kind of age instead.
+2. `[counterforce]` No calamity has marked {settlement}'s fabric within the mirror's reckoning, and the evenness of the town is that absence made visible.
+
+---
+
+### DS-GEN-16 · History › What the years left standing (the recorded blow, and whether the record carries it forward) · `history.historicalEvents[]{type, yearsAgo, severity, anchored, lastingEffects[]}`
+
+**RECEIPT:** `history.historicalEvents[]` rows composed at `src/generators/historyGenerator.js` from `src/data/historyData.js`, each carrying `type`, `yearsAgo`, `severity` (`minor` · `major` · `catastrophic`), `anchored`, and `lastingEffects[]` selected per event (`historyGenerator.js`, `selectedEffects`) · the same rows the dossier already renders as a timeline (`src/components/new/tabs/HistoryTab.jsx`) and the PDF carries at `src/pdf/lib/viewModel.js`
+**STATE-KEY:** `ANCHORED-RECENT` (a severe anchored event in the near bands) / `ANCHORED-OLD` (a severe anchored event, old, carrying `lastingEffects`) / `LAYERED-ANCHORED` (more than one anchored event on the record) / `RECORDED-UNANCHORED` (a severe event on the record that is NOT anchored) / `UNMARKED` (no severe event on the record)
+**SLOTS:** `{settlement}` `{calamity}` `{timeband_age}` *(`{calamity}` as minted for this chapter; here it fills from the event row's own `type` rather than from a scar kind)*
+**SECTION-TARGET:** `history` · also `tensions`
+**PROVENANCE:** **`anchored` IS THE GATE, AND THIS BLOCK IS BUILT AROUND IT.** `DS-GEN-9` rules that `anchored: true` is the record's own assertion that an event still bears on the present and is therefore the licence for an "and it still" clause, that an unanchored event "gets described and NOT connected forward", and that this is "the sharpest line in the shape and the easiest to blur". A block whose entire subject is an event's PRESENT REMAINDER blurs that line by construction unless the gate is keyed, so it is keyed: every forward-connecting pool below requires `anchored`, and `RECORDED-UNANCHORED` exists precisely so that the unanchored case has somewhere lawful to go instead of borrowing an anchored sentence. Its two variants describe the event and decline to carry it forward, which is the ruling rendered as prose. **Non-redundancy, twice over (`R-DST-A`):** `DS-GEN-9` renders the event rows AS A TIMELINE and owns the founding and the record itself; this block renders what the record says REMAINS, and only where `anchored` or `lastingEffects` actually asserts a remainder. `DS-GEN-15` reads the fabric mirror, which is what the STONES show; this block reads the history table, which is what the RECORD says. The two cite different fields and may compose together, since neither restates the other's cell. No variant carries a year: `DS-GEN-9` records that the surface prints a numeral beside its own band ladder, and `R-DST-D` keeps the prose banded.
+
+**`ANCHORED-RECENT`**
+1. `[street]` The {calamity} is recent enough that {settlement} still divides time by it, and the record still marks it as bearing on the town today.
+2. `[unfolding]` What the {calamity} took from {settlement} is still being counted, and some of the counting is done aloud.
+3. `[visitor]` {settlement} has the particular carefulness of a town that was lately reminded what can happen to towns.
+
+**`ANCHORED-OLD`**
+1. `[elder]` The {calamity} is {timeband_age} now, and {settlement} keeps it the way old towns keep such things, in habits whose reasons have outlived the people who could explain them.
+2. `[ledger]` The record of the {calamity} survives in what {settlement} does differently since; the event is old and its instructions are still being followed.
+3. `[street]` Nobody now in {settlement} saw the {calamity}, and everybody here lives in the town it made.
+
+**`LAYERED-ANCHORED`**
+1. `[elder]` {settlement}'s record is a stack of hard seasons survived in order, and the record still marks each of them as bearing on the town.
+2. `[visitor]` {settlement} has been knocked down and has answered more than once, and the answering shows; this is a town with practice.
+
+**`RECORDED-UNANCHORED`**
+1. `[ledger]` The {calamity} stands on {settlement}'s record and the record does not carry it forward; it happened here, and what it left is no longer counted among the things that explain the place.
+2. `[elder]` {settlement} keeps the {calamity} as an event rather than as a cause, which is what a town does with the troubles it has finished having.
+
+**`UNMARKED`**
+1. `[counterforce]` No great blow stands on {settlement}'s record; the town's history is the quieter kind, and its evenness is the inheritance.
+2. `[ledger]` {settlement}'s books record no disaster worth the word, which is itself a fact about the place worth recording.
+
+---
+
+**CT-2 SECTION ENDS.** Three blocks, fifteen pools, thirty-seven authored variants:
+`DS-POP-3` (the direction of the roll against the approach), `DS-GEN-15` (the fabric wears it)
+and `DS-GEN-16` (what the years left standing). No pool falls below the two-variant floor the
+projection contract holds; every slot a variant uses is declared on its block's SLOTS line;
+every angle is drawn from §0b's palette; `{calamity}` is minted here and registered above. The
+chapter adds no rendered surface, so §0g's denominator and its coverage reading are unchanged.
+Three claims the CT-2 draft carried were REFUSED at authoring and the refusals are recorded in
+the blocks themselves rather than left for a later reader to re-find: no variant attributes the
+roll's movement to the roads (`R-DST-B`, and `DS-POP-1` owns that record), no variant splits a
+gain between birth and arrival (the demographic receipt is `DS-POP-1`'s), and no variant connects
+an unanchored event forward (`DS-GEN-9`'s gate).
