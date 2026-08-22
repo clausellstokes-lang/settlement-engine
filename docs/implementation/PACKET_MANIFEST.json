@@ -18624,7 +18624,7 @@
     },
     {
       "id": "MF-T2E",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T2E.md",
       "verifiedBase": "5d18b4a0c5515baa795c6fc763258a17d607d1ed",
       "changeManifest": [
@@ -18697,6 +18697,51 @@
           "_note": "THE STANDING LAW that binds the eight arriving export names. Its guard-the-guard floors are lower bounds, so an arriving leaf can only strengthen them.",
           "path": "tests/lint/townMapFabricSingleDeclaration.walker.test.js",
           "symbol": "THE LAW: no exported name is declared in two files under the fabric directory"
+        },
+        {
+          "_note": "THE ARRIVING VOCABULARIES, closed and SPEC-verbatim. Joined at the flip to LANDED, never at READY. Pinned by deep equality in A5 behind a guard-the-guard opener, so a later widening reds on arrival.",
+          "path": "src/domain/townMap/fabric/massPart.js",
+          "symbol": "export const FUNCTIONAL_VOLUME_KINDS"
+        },
+        {
+          "path": "src/domain/townMap/fabric/massPart.js",
+          "symbol": "export const MORPHOLOGY_ROLE_KINDS"
+        },
+        {
+          "path": "src/domain/townMap/fabric/massPart.js",
+          "symbol": "export const MASSING_UNKNOWN_REASONS"
+        },
+        {
+          "_note": "THE KNOWLEDGE AXIS. The UNKNOWN arm carries no value field at all, which is what makes the SPEC's no-inference law structural rather than advisory.",
+          "path": "src/domain/townMap/fabric/massPart.js",
+          "symbol": "export function knownMassingFact"
+        },
+        {
+          "path": "src/domain/townMap/fabric/massPart.js",
+          "symbol": "export function unknownMassingFact"
+        },
+        {
+          "_note": "THE HALF-OPEN VERTICAL INTERVAL, the rule MF-D1 declared in advance so D3a would inherit it rather than mint a second one.",
+          "path": "src/domain/townMap/fabric/massPart.js",
+          "symbol": "export function verticalIntervalQ"
+        },
+        {
+          "_note": "THE QUANTIZED SOLID. Its {kind:'INTERVAL', baseQ, topQ} discriminant is what the D1 legality predicate reads; executed read-only against the sealed predicate at this base, the stacked pair returns sharedHeightQ 0 and DISJOINT_OR_ABUTTING.",
+          "path": "src/domain/townMap/fabric/massPart.js",
+          "symbol": "export function solidPartQ"
+        },
+        {
+          "_note": "THE MASS PART, carrying the SPEC 10.5 identity law part.solid.partId === part.partId.",
+          "path": "src/domain/townMap/fabric/massPart.js",
+          "symbol": "export function massPartQ"
+        },
+        {
+          "path": "tests/domain/townMapMassPart.test.js",
+          "symbol": "describe('MF-T2E mass-part vocabulary'"
+        },
+        {
+          "path": "tests/property/townMapMassPartDeterminism.test.js",
+          "symbol": "describe('MF-T2E mass-part determinism'"
         }
       ],
       "acceptanceCases": [

@@ -1,6 +1,6 @@
 # Town cartography / MF-T2E — `MassPartQ` / `SolidPartQ`: the typed functional-volume vocabulary (the quantized vertical truth D3a mints, in the exact shape the D1 legality predicate already admits)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** 1
 - **Verified base:** `claude/composite-r4` at `5d18b4a0c5515baa795c6fc763258a17d607d1ed`
   (the MF-T2D landing). Every preflight row below was re-executed at THIS base by the implementing
@@ -345,8 +345,19 @@ Internal, unexported: `ringAreaSign2x` (the BigInt decision) and `requireVocabul
 | `CREATE` | `src/domain/townMap/fabric/massPart.js` | the eight §6 exports + internal `ringAreaSign2x`, `requireVocabularyMember` | **≤160 eff** (measured **118**) | The §6 contract. Imports ONLY the four foundation validators and `COORDINATE_ABI_VERSION`. ⛔ The BigInt check is internal; the docblock carries the R-MF-2 reason with the P1 figures and the §10.16(3) charter line |
 | `CREATE` | `tests/domain/townMapMassPart.test.js` | `describe('MF-T2E mass-part vocabulary')`, A1–A6 | `n/a` | ONE literal `describe`, six straight-line `test()` calls, string-literal titles; fixtures built inside named tests; id fixtures fit the §4.2 P2b grammar |
 | `CREATE` | `tests/property/townMapMassPartDeterminism.test.js` | `describe('MF-T2E mass-part determinism')`, A7 | `n/a` | The replay + purity companion, matching MF-T2B's property-file shape |
-| `TEST` | `tests/lint/sovereigntyLightingContract.walker.test.js` | the `CENSUS` object | `+13/−1` | ONE re-record block naming its cause and the `censusAuthorization` refs; all five figures re-derived together at the base by placeholder-and-convict |
+| `TEST` | `tests/lint/sovereigntyLightingContract.walker.test.js` | the `CENSUS` object | `+41/−1` measured (see note) | ONE re-record block naming its cause and the `censusAuthorization` refs; all five figures re-derived together at the base by placeholder-and-convict |
 | `DOC` | `docs/implementation/packets/town-cartography/MF-T2E.md` | this packet | `n/a` | The packet, its status transitions, and its §12 landing record |
+
+⚠ **The census row's max delta was raised from a drafted `+13/−1` to the measured `+41/−1`, and
+saying so is the point.** The estimate was written before the block's required CONTENT was known:
+the re-record must carry the instrument-failure record AND the both-ends-at-the-new-base record
+(§9), and truncating an audit trail to hit a self-estimated line count would be the wrong trade.
+The measured figure is somewhat above the two landed precedents for the same block on the same
+file — MF-T2C `+27/−1`, MF-T2D `+36/−1` — and the excess is exactly the two incidents this member
+had to record. ⛔ No budget in §3 moves: this is a comment block in a test file, not a production
+line, and the "delta in a shared/hot file" row stays `0` because no manifest path is on the
+hot-file list. **J-TET2E-1, vetoable:** the alternative is to cut the incident narratives down to
+the drafted size, which this lane refuses to do on its own authority.
 
 Generated artifacts: `NONE`. No other file may be edited. ⚠ The two acceptance files are `CREATE`
 rows, not `TEST` rows (the MF-T2B/T2C/T2D measured precedent: the validator asserts a TEST path
@@ -391,15 +402,34 @@ executed at THIS base (§4.2).
 `tests/helpers/anchoredNegatives.js` by name on the same line, or carries an inline
 `anchored:` reason on the assertion line or the line immediately above.
 
-**Census motion — MEASURED, not predicted:**
+**Census motion — MEASURED at both ends by placeholder-and-convict, never predicted and never
+carried:**
 
 ```
-BASE  (placeholder-and-convict, all five, at 27c250f9):
-  files: 2492, parked: 364, credited: 2128, titles: 20677, suiteTitles: 5780
-DELTA: +2 files · +0 parked · +2 credited · +7 titles (6 domain + 1 property) · +2 suites
-AFTER (re-convicted after the edit):
-  files: 2494, parked: 364, credited: 2130, titles: 20684, suiteTitles: 5782
+BASE  (all five convicted at 5d18b4a0):  2492 / 364 / 2128 / 20677 / 5780
+AFTER (all five re-convicted):           2494 / 364 / 2130 / 20684 / 5782
+DELTA: +2 files · +0 parked · +2 credited · +7 titles · +2 suites
+
+decomposed, and it closes exactly:
+  tests/domain/townMapMassPart.test.js .............. 6 titles, 1 suite title
+  tests/property/townMapMassPartDeterminism.test.js . 1 title,  1 suite title
+  6 + 1 = 7 titles        (20,677 -> 20,684)
+  1 + 1 = 2 suite titles  ( 5,780 ->  5,782)
 ```
+
+⛔⛔ **THE FIRST INSTRUMENT LIED AND THE RE-RECORD BLOCK SAYS SO.** The lane's first conviction
+sweep attributed the Nth assertion failure to the Nth census key. `parked` is UNCHANGED by this
+member, so its assertion PASSED and the next failure belonged to `credited` — a TRUE figure written
+under the WRONG NAME, corrupting every later arm. Its own confirming run caught it; the walker was
+byte-restored from HEAD by `git show` (never the `git checkout --` family) and proved identical by
+`cmp`; and all five figures were re-convicted with a **-1 sentinel**, one key per run, each arm
+aborting unless its message read literally `expected <N> to be -1`. The confirming run is green
+(33 passed). ⭐ The standing law is usually read as a warning about STALE figures; this was a FRESH
+figure attributed to the wrong name.
+
+⛔ `parked` stays at its recorded value, and it was earned rather than lucky: each file spells every
+title as a string literal and every loop runs INSIDE a named test (the SP-D idiom), so door 3's
+reader recognises all of them statically and credits both files.
 
 ⛔ `parked` stays at its recorded value. One literal `describe` per file, straight-line `test()`
 calls, string-literal titles; loops live INSIDE named tests, so both files are CREDITED rather than
@@ -478,7 +508,106 @@ next wave.
 
 ## 12. Completion receipt
 
-*(filled at the flip to LANDED)*
+**Commits on the executing lane's detached ref** (the chair moves the branch; this lane moved no
+ref, staged only named paths, and never used `git add -A/-u/.`):
+
+| sha | transition | validator |
+|---|---|---|
+| `14cc6b4e` | DRAFT | `TRUE_EXIT=0`, 139 packets (0 READY) |
+| `6f306ed9` | DRAFT → READY, §4 preflight re-executed at this base | `TRUE_EXIT=0`, 139 packets (1 READY) |
+| `bfa5709e` | the implementation + the census re-record | — |
+| *(this commit)* | READY → LANDED | see below |
+
+⚠ **THIS MEMBER WAS REBASED: TE-WF1F took the CAS slot first.** The lane was prepared against
+`27c250f9` (commits `77f03446` / `b389a73d` / `8a2b46d5` / `50d7a8ea`, now superseded); the branch
+advanced to `5d18b4a0`. A cherry-pick was attempted first and conflicted on `PACKET_MANIFEST.json`,
+so it was ABORTED in favour of the protocol's own remedy: the three shared meta files were
+**byte-restored from the NEW base** and this lane's appends re-run on top, leaving WF-1F's manifest
+and index rows carried forward untouched and in landing order. Every preflight row, the census at
+BOTH ends, both typecheck floors, the build, the dormancy fence, the forensic zoom, the
+untouched-pin control and the full seven-mutant sweep were **re-executed at `5d18b4a0`** — nothing
+was carried across the move on the strength of having been true before it.
+
+**The four created symbols**, joining `requiredSymbols` at this flip and not before:
+`massPart.js`'s eight exports (`FUNCTIONAL_VOLUME_KINDS`, `MORPHOLOGY_ROLE_KINDS`,
+`MASSING_UNKNOWN_REASONS`, `knownMassingFact`, `unknownMassingFact`, `verticalIntervalQ`,
+`solidPartQ`, `massPartQ`) and the two describe titles.
+
+**Measured against §3:** leaf **118** effective lines (eslint's own `Linter`,
+`{skipBlankLines, skipComments}`) against the chair's tightened cap of **160**; packet total 118
+against **180**. Zero existing production files modified. Zero barrel edit. `retiredSymbols` empty.
+
+**Verification, every exit captured in-shell:**
+
+```
+anchor preflight ................. TRUE_EXIT=0   9 passed
+member battery + both walkers .... TRUE_EXIT=0   4 files, 45 passed
+eslint (leaf + both test files) .. TRUE_EXIT=0
+typecheck:ratchet ................ TRUE_EXIT=0   173 errors, ceiling 173  (AT ceiling, unmoved)
+typecheck:domain:strict .......... TRUE_EXIT=0   1134 errors, ceiling 1134 (AT ceiling, unmoved)
+npm run build .................... TRUE_EXIT=0   524 chunks
+dormancy fence VERIFY_DIST=1 ..... TRUE_EXIT=0   3 passed
+validate:packets ................. TRUE_EXIT=0
+```
+
+**The untouched-pin control, compared PER FILE rather than by a summary line:** 57 fabric-touching
+files (the digest-pin, golden and determinism suites included), the same explicit denominator at
+both ends — `FILES before=57 after=57`, `TESTS before=387 after=387`,
+**`FILES_WITH_ANY_MOVEMENT=0`**. Every file reports the identical count AND status at both ends.
+
+**The forensic zoom, denominators named:** 524 dist chunks, 8 entry-closure chunks. Four
+member-unique string literals: `entry_closure=0`, `all_dist=0`. Scanner controls asserted present
+first — `::town-map:v1` in 3 of 524, `createElement` in 4 of 8 closure chunks. ⭐ Stated honestly:
+this leaf is in NO chunk because nothing imports it, not "safely in a lazy chunk".
+
+**The removing-power sweep — seven mutants, each convicted by its NAMED arm:**
+
+```
+M0 pristine-green control ............................. TRUE_EXIT=0
+M1 BigInt decision -> float shoelace .................. A6   (the valid sliver is refused)
+M2 half-open -> closed interval ....................... A2   ([b, b) is accepted)
+M3 UNKNOWN arm keeps a value .......................... A3 + A7
+M4 part/solid identity law deleted .................... A4
+M5 vocabulary membership deleted ...................... A3 + A5
+M6 freeze dropped on the published solid .............. A1
+M7 footprint coordinate validation bypassed ........... A2
+restore by byte copy, cmp-verified .................... TRUE_EXIT=0
+M8 clean re-run after restore ......................... TRUE_EXIT=0
+```
+
+⭐ **M7 convicts only because designing it exposed a hole in this lane's own matrix:** A2 exercised
+a bad interval quantum and a degenerate ring but never a bad footprint COORDINATE, so the mutant
+would have survived. Two arms were added to the existing A2 before the sweep ran — no title moves,
+so the census delta is unaffected.
+
+**Anchors preserved by construction and verified by grep at both ends:** the MF-T2A plant line
+`export function derivePlanarDcelEmbedding(input) {` is present at column zero, byte-identical, in
+a host this member never opened; `CURRENT_MAP_TRADITION_ID` appears zero times in all three created
+files, keeping the plant's precondition true.
+
+**Census:** `2492/364/2128/20677/5780` → `2494/364/2130/20684/5782`, **both ends measured at
+`5d18b4a0`**, delta `+2/+0/+2/+7/+2`, decomposed and closing exactly. The BASE arm is a walker run
+BARE in a pristine base-proof tree at the new base (33/33 green), which is what PROVES WF-1F moved
+nothing rather than taking its commit message's word for it. The tuple is numerically identical to
+the one derived at the old base — precisely the shape of carry that feels safe — and was re-derived
+anyway. ⛔ The re-record block records that this lane's FIRST instrument mis-attributed a true
+figure to the wrong key and that its own confirming run caught it.
+
+**⚠ Two lane errors, both caught by machinery and both recorded rather than absorbed:**
+
+1. **The first census instrument lied.** It attributed the Nth assertion failure to the Nth key;
+   `parked` was unchanged, so its assertion passed and a true `credited` figure was written under
+   `parked`, corrupting every later arm. Its own confirming run caught it (exit 1). The walker was
+   byte-restored via `git show` — never the `git checkout --` family — proved identical by `cmp`,
+   and every figure re-convicted with a `-1` sentinel that makes each arm self-identifying.
+2. **A blanket `sed` rewrote a SIBLING's landed row.** Repointing this packet's `verifiedBase` at
+   the new base, the substitution also changed WF-1F's `verifiedBase` in the shared manifest.
+   `validate:packets` caught it at the READY transition (*"WF-1F verifiedBase disagrees with packet
+   Markdown"*) — ⚠ it did NOT fire at DRAFT, and the bad state had already been committed. That
+   commit was discarded, the manifest rebuilt from the base, and only this member's own entry
+   repointed, verified by reading the diff line by line. ⭐ A blanket substitution across a SHARED
+   manifest cannot satisfy "verify every staged hunk is yours" by construction: it edits by
+   pattern, and a sibling's row matches the same pattern.
 
 ## 13. RAISED for the chair
 
