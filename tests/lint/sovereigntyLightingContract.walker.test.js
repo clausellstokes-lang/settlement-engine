@@ -5204,7 +5204,24 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   the branch moved. Nothing about 20684 was ever wrong; it simply stopped being an
     //   answer to the question. The cure is the same in all three — re-derive at the base
     //   you are actually landing on, and carry the DELTA, never the tuple.
-    files: 2497, parked: 364, credited: 2133, titles: 20714, suiteTitles: 5785,
+    // ── RE-RECORDED 2026-08-22 BY TE-HOUSE (the housekeeping bundle), CAUSE ATTRIBUTED ──
+    // 20,714 → 20,719 on `titles` ALONE. Every other key is UNCHANGED: the bundle adds no
+    // test FILE and no `describe`, only `it` arms inside two existing suites.
+    //   tests/scripts/gateMutex.test.js ............ +4 titles (H1: the two aged-orphan reaps
+    //                                                and their two fresh negative controls)
+    //   tests/scripts/implementationPackets.test.js  +1 title  (H9: the §379.2 discharge)
+    // `censusAuthorization`: ODQ §351.2 and §364 R1 (H1), §379.2 (H9), §364 (the bundle).
+    // ⛔ THE CARRY LAW OBEYED, AND THIS IS THE FOURTH FACE OF IT. This bundle first measured
+    //   its delta at 42e12a76 and recorded 20,709. That tuple was RIGHT WHEN MEASURED and went
+    //   stale three landings later — T2F re-recorded to 20,712, T2G to 20,714. The stale
+    //   commit was DROPPED, not adjusted: only the DELTA (+5) crossed, and the tuple was
+    //   re-derived here from scratch.
+    // ⛔ ATTRIBUTED BY ISOLATION, NOT BY ARITHMETIC, at THIS base. Reverting BOTH files with
+    //   the other eight members fully applied convicted 20,714 GREEN — which is also the
+    //   proof that nothing else in the bundle touches this census. implementationPackets
+    //   alone convicted 20,715; gateMutex alone convicted 20,718. Each figure was read from
+    //   the arm's own failure message, never computed.
+    files: 2497, parked: 364, credited: 2133, titles: 20719, suiteTitles: 5785,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
