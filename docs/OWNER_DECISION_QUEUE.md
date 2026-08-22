@@ -15833,3 +15833,38 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   §385.2/§386.2). FOUR BUILDING BESIDE THE WINDOW: OSR-10 (the mint) · T2Bf ·
   CT2 · H8B. Landing order unchanged: mint → RR-1 → RR-2 → the builds in GO
   order.
+
+## §389 — THE ENVELOPE QUESTION SETTLED BY DISCRIMINATOR; §384 STANDS; NEW LAW: READER NEUTRALITY ≠ ENVELOPE NEUTRALITY (2026-08-22 ~17:40)
+
+- **CT-2's envelope-whole correction is WITHDRAWN by its own run of the
+  chair-specified discriminator:** `node scripts/check-observed-shape-readers.mjs`
+  bare, read-only, in-shell capture — pristine base 9bfae712 → EXIT 1; the member
+  → EXIT 1; the same schema-9 staleness line both sides, `--report`
+  short-circuiting identically. The envelope is DIGEST-based; the CT-1a-era break
+  is EXTANT; **RR-1's §384 attribution STANDS UNAMENDED.** CT-2's earlier reading
+  was the §332.1 wrong-instrument class: it measured with the walker/sentinel
+  TESTS, which pass on both trees and say nothing about the gate.
+- **Additivity settled past the exits, by the digests directly:**
+  `general.generated.js` reads 065eb202 (frozen at 158d99cd) / 3df1a6ee (base) /
+  436f763d (member); the leaf sits in the baseline's sourceTree (2157) and NOT
+  in scanTree (2144) — exactly the `unscannedInputDigestOf` domain. So the leaf
+  already differed from frozen AT BASE (a regenerated prose leaf is part of the
+  extant break) and MOVES AGAIN in the member: **CT-2's break is real and
+  ADDITIVE** — the §349 warFaith shape. The §384.2 trailing-mint batching policy
+  fires as chartered when the content cars land after schema-10.
+- **The surviving half, banked TRUE-BUT-DIFFERENT:** zero of the seven dossier
+  prose leaves appear in the baseline's `inventory`, so a regenerated leaf moves
+  no reader row. THE LAW (now in packet §12 and here): READER NEUTRALITY DOES
+  NOT IMPLY ENVELOPE NEUTRALITY — only the bare gate script answers the second.
+  **CT-3 KEEPS the OSR-break premise;** CT-2's premise-free advice is withdrawn
+  with the rest.
+- **CT-2's tip for CAS is now 5941093f** (supersedes 104abfd7/26f51466; same 6
+  files, +933/−4; packet §12, manifest case A8, and the commit message all carry
+  the break-recorded form plus the lesson; re-run green: validate:packets 144/0
+  READY, --check 65 blocks / 2238 variants, tree clean, no ref moved). Still
+  queued after RR-2. Nothing else in the member changed.
+- **§389.1 STANDING S0 ADOPTED (CT-2's proposal, ratified):** the bare gate
+  script IS the envelope instrument for every S0/discriminator reading; the
+  walker/sentinel tests are reader-census instruments only. OSR-10's S0
+  cross-check is pending against this row: its base must read EXIT 1 at
+  9bfae712 — a whole reading there is itself a finding, not a green.
