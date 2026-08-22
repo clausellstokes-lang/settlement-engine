@@ -16817,3 +16817,36 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
 - ALL FOUR WEBSITE BUILDS ARE NOW GREEN-AND-HOLDING (WEB-1, WEB-4, WEB-5,
   WEB-6, WEB-7 — five cars; WEB-2/WEB-3 await 197's landing). Nine proven
   tips pinned. The cascade waits on RR-2's run-3 landing terminal.
+
+## §416 — RR-2 IS LANDED (THE 21ST LANDING): THE 933 DESCRIPTIONS SHIP; THE VETO WINDOW CLOSED UNVETOED; §414 CORRECTED BY THE LANE'S OWN VERIFICATION; T2Bf's GO ISSUED (2026-08-23 ~06:30)
+
+- **THE CAS EXECUTED:** claude/composite-r4 moved 19b799ce → 0afddfe9 after
+  the landing terminal ran GREEN IN ONE UNINTERRUPTED INVOCATION — twenty
+  steps, both exit readings agreeing, fired into a REAL trough (load 4.18,
+  zero siblings, both mutex acquisitions at 0 polls), detached in its own
+  session per §414. The §374 exhibit was posted ~03:40 and NO VETO arrived;
+  the window closed at this CAS. The PDF Institutions chapter and the
+  Foundry journal now print the 933 authored one-liners.
+- **⚠ §414 IS CORRECTED — the lane refuted the chair's recovery diagnosis
+  by verification before acting, and both counts were wrong for its case:**
+  (1) the mutex lock was NOT stale — ps showed the pid ALIVE, a sibling
+  lane's gate 10 minutes in; the prescribed reclaim would have DESTROYED A
+  LIVE SIBLING'S RUN. (2) Its watcher was NOT wrapper-killed — it logged
+  only on clean samples, so a quiet log was a healthy trough-waiter. THE
+  LAW AS RE-BANKED: a LIVENESS PROBE (ps on the lock's pid) precedes ANY
+  reclaim; the kill tell is a DEAD pid + a header-only GATE log — a small
+  or quiet WATCHER log alone proves nothing; and heartbeat-on-every-sample
+  is the watcher standard so silence is never ambiguous again. The chair's
+  order said "expect a stale lock" and the lane treated expectation as
+  hypothesis — that discipline is the §-lesson.
+- **Also from the landing:** J1 EXONERATED by the fixture's own code (the
+  gateMutex test hard-overrides its env, so the exported budget never
+  reached it — refuted by reading, not assumed); the ±1 ratchet scope
+  figure (28737/28738 at one commit) recorded as lawful under the 0.9×
+  floor rather than smoothed; the background wrapper's "exit 0" over a red
+  — its THIRD lie of the sitting — again caught only in-shell.
+- **T2Bf's GO ISSUED** (the next landing): rebase onto 0afddfe9 with
+  carry-proof-by-absence first, the manifest keep-both conflict expected,
+  re-stamp from the post-edit hash, S0 at the new base, and the §414-as-
+  corrected detached terminal. The cascade order behind it: CT-2 →
+  H8B/CT-3 → T2H → the five website cars.
