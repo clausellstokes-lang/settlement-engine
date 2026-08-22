@@ -16707,3 +16707,14 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   its green. TWO FACTS BANKED to memory: the mutex env knob propagates only
   when EXPORTED; the packet validator cross-checks manifest↔index↔packet so
   a two-of-three status flip reads as disagreement.
+
+- **§412.1 WEB-7 BUILT at e5975829, terminal armed behind the mutex** (RR-2's
+  landing gate holds the track; the watcher fires at the quiet). Notables
+  ahead of its collection: the OFL rider was ALREADY DISCHARGED AT BASE (the
+  cure is an ancestor of the compile's own pin — reported stale, correctly
+  not re-executed); every licence fact re-derived from the installed
+  packages by SHA (rgbcolor's MIT body proved normalize-identical to the
+  §4.1 text already present, so no body was added); and the §411
+  reservation coordination was PROVEN BY EXECUTION — a two-packet probe
+  returns the duplicate-change-path error at DRAFT and READY and none at
+  LANDED/SUPERSEDED, the §410 law's mechanism observed directly.
