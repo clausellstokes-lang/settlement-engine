@@ -15349,3 +15349,36 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   the judgment) — active stays at the §370 cap of four: WF-8 · TC-DOSSIER ·
   INV-DESC · TE-T2F. Its terminal queues behind the closing train and NEVER inside
   the mint's §353 window.
+
+## §372 — MEAS-DUALRUN PHASE 1 COLLECTED: THE SEPARATOR DEFECT CHARTERED; THE §312.2c SCOPE CORRECTED; THE LANE PARKED READY (2026-08-22 ~19:30)
+
+- **F-1, found by reading (CONFIRMED):** the landed canonicalBytes
+  (coordinateAbi.js:243 at 5d18b4a0) DROPPED all four U+001F field separators the
+  sealed source uses to keep the artifact-digest preimage injective — distinct
+  (kind, schemaVersion, deps, body) tuples can collide. Invisible to eye-diff (the
+  character does not print); FROZEN by the landed determinism pin (green because it
+  asserts the separator-less string). Blast radius today zero (no landed consumer);
+  MF-T2H's spatialReceipt port would fail to reproduce sealed digests with the
+  cause far from the symptom. **CHARTERED: MF-T2Bf, a micro-fix member** — restore
+  the separators (~2 lines) + the determinism pin's DECLARED re-record (the
+  legitimate cause stated: injectivity restoration; the pin froze a defect) —
+  QUEUED after TE-T2F's landing and STRICTLY BEFORE MF-T2H. The lane correctly took
+  no cure (read-only; a landed production file + landed pin + digest preimage).
+- **§372.1 RAISED-2 RECORDED — the scope correction:** this measurement is
+  PORT-FIDELITY EVIDENCE on the four surfaces that ported; it is NOT the §312.2c
+  retirement gate and must never be read as one — 50 of the sealed fabric's 54
+  modules have no landed counterpart, and the app-side generator §312.2c requires
+  does not exist. Consistent with §348's refusal; the retirement stays behind the
+  generator.
+- **§372.2 The battery stands parked READY** (preflight green over 16 provenance
+  rows, re-proven at firing time so a shifted base is caught not inherited; the
+  declared-divergence roster is DATA the comparator reads — sixteen rows with ODQ
+  authorities, F-1 deliberately excluded so a finding cannot be talked into a
+  licence). Two settled statically already: the geometry core byte-identical but
+  for the declared rename; the ABI identical but for heightQ prose and F-1. The
+  SHORT-TRACK option (the complete noder verdict in ~20 minutes) is noted for the
+  first open window after the closing train.
+- **§372.3 F-4's method lesson banked with the §358 family:** the lane's first
+  shell extractor matched nothing, hashed two empty strings, and reported SAME —
+  cured with a SYMBOL-FOUND CONTROL that turns exactly that into a STOP. An
+  extraction that found nothing is not an extraction that found equality.

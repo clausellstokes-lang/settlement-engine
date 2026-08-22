@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~19:30 ET: DUALRUN phase 1 (§372) — F-1 FOUND BY READING: landed
+# canonicalBytes dropped the U+001F separators (digest injectivity lost; pin
+# froze the defect) → MF-T2Bf micro-fix CHARTERED, after T2F, BEFORE T2H.
+# §312.2c scope corrected (not the retirement gate — 50/54 unported).
+# Battery parked ready; 20-min short-track noted for the first open window.
 # ⭐ ~19:00 ET: T2F ruled (§371) — exact rationals under D1 names; two-leaf
 # split on the measured 282; 0n floor = structural; typed refusal over silent
 # garbage; dualRunLegality ports now. TE-T2F DISPATCHED (cap holds at 4:
