@@ -695,6 +695,17 @@ HEAD or symbol change makes a READY packet STALE until revalidated. When work
 lands, the coordinator records the landing SHA, changes the packet to LANDED,
 and updates `INDEX.md` before opening the next dependent packet.
 
+`docs/implementation/INDEX.md` is a COORDINATION-LEDGER surface maintained by the
+coordinator at every status transition — never a change-manifest surface. Packets do
+not list it, its edits reserve no change path, and the four historical terminal rows
+that name it (IA-1, IA-2, INFRA-M1-DOCS, EFF-M4) are grandfathered records, not
+precedent. Authority: `OWNER_DECISION_QUEUE.md` §331.4.
+
+A shared-manifest edit is scoped to YOUR OWN ROW BY UNIQUE KEY; blanket substitutions
+are forbidden, because a sibling's row matches the same pattern — the class the §354.2
+incident convicted, where one packet's `verifiedBase` repoint silently rewrote another's.
+Authority: `OWNER_DECISION_QUEUE.md` §354.2.
+
 Do not pre-author the entire program. Compile the next packet only when its
 dependencies are landed and its live substrate is measurable. This is the
 primary scope-control rule.
