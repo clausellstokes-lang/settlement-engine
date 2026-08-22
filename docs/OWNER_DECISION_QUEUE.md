@@ -16430,3 +16430,30 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   a chair launching destructive background work must re-verify the list
   against every report that lands between launch and completion, or exclude
   actively-owned paths outright.
+
+## §405 — T2H RECOMMITTED AND RE-PROVEN AT THE TIP; TWO NEW TRAP SPECIMENS BANKED; THE FRESH PIN EXECUTED (2026-08-22 ~23:20)
+
+- **The recovery:** new tip 05e7f9d5 (pinned at refs/preserve/holding-t2h-r2;
+  the superseded 2064a67e stays pinned until landing). The lane AMENDED rather
+  than stacked — preserving the preamble's same-commit law for argued entries
+  and the member's one-commit shape (9 files, +1782/−3) — and used the amend
+  to correct two stale pre-cure figures in the message (eff 137/214; twelve
+  refusal paths). §403's J-TET2H-9 ruling now RECORDED on all three surfaces
+  (packet censusAuthorization, the walker arm's comment, the manifest row).
+- **The ENOSPC re-runs were necessary and honest:** the three files were edited
+  AFTER the last captured log, so nothing verified them with a quotable
+  receipt — all re-executed with in-shell exits at the COMMITTED tip (entropy
+  31/31, validate:packets 145/1 READY, eslint clean, C0=0 across seven files,
+  CLAIM_RE 0 measured).
+- **TWO NEW SPECIMENS, banked by the lane to memory:** (1) `${PIPESTATUS[0]}`
+  is bash; under zsh it expands EMPTY beside a green-looking tail — AN EMPTY
+  CAPTURE IS A FAILED CAPTURE (the fifth bite of piped-gate-exit-masking, and
+  the nastiest: the earlier four printed a wrong number, this one prints
+  none). (2) the pre-commit hook's eslint --fix re-stages — AN EDIT AFTER THE
+  GREEN that `git diff HEAD` is structurally blind to because worktree and
+  HEAD move together; the cure is re-proving AT the committed tip via
+  `git show HEAD:<file>`, which the lane executed (no content had moved —
+  learned by executing, not by the diff). Index folded by the lane to 17,130.
+- T2H HOLDS behind RR-1 → RR-2 → T2Bf → CT-2 → H8B/CT-3; its dist/ (710
+  chunks) preserved for the GO re-proof. **RR-1's terminal gate is LIVE** in
+  its own tree at load 48 — the landing cascade's first terminal is running.

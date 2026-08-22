@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~23:20: T2H RECOMMITTED (§405) — tip 05e7f9d5 (pinned -r2), re-proven
+# AT the committed tip; two new traps banked (zsh PIPESTATUS empty capture;
+# pre-commit --fix voids a green invisibly — cure: git show HEAD re-proof).
+# RR-1's TERMINAL IS LIVE. Queue: RR-1 → RR-2 → T2Bf → CT-2 → H8B/CT-3 → T2H.
 # ⚠ ~23:00: §404.1 — reclamation DONE (20Gi free); chair race owned: the
 # background job deleted laneTEWEB1-tree AFTER the reuse ratification (stale
 # delete list). WEB-1 ordered to recreate + re-take baselines. Prune run.
