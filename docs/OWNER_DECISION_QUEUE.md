@@ -14351,3 +14351,27 @@ recommended. Implementation, per item:
   LAW banked: subagent JSONL transcripts under ~/.claude/projects/**/subagents/
   survive scratchpad purges and are the recovery route of record (proven for the V5
   bank and now the UI charter).
+
+## §339 — RS-5 COMPLETE: 162/162, THE GRID IS CLEAN; ONE WALL-TIME ASSERTION UNDER ATTRIBUTION (2026-08-21 ~22:50)
+
+- **THE SOAK IS DONE.** Segments b (18/18) and c (54/54) exit 0; 162 receipts durable
+  across two chair pauses with zero corruption. The evaluator ran ONCE and credited
+  (sentinel: runs=5); artifacts durable at rs5-artifacts/ (rolling-report, curves,
+  provisional-curves), findings-only/additive per §141.
+- **§339.1 THE VERDICT: ZERO engine-behavior findings across the whole grid.** The
+  WF-1B exposure (suppressDeity single-writer) is CLEAN at soak scale, and no
+  P4-class regression appears anywhere — the §305.4/§313 exposure question is
+  answered. Six observability rows are memory watermarks INSIDE the per-world band —
+  recorded, not failures.
+- **§339.2 The single finding is a WALL-TIME assertion** (per-year wall time Q1
+  2214ms → Q4 21808ms, 'trend not age-linear', cell ca-bb8e999d, known:false) — the
+  timing-assertion class §328.5 already ruled flake-by-construction, with a named
+  suspect: that segment ran while terminals and builds contended for the box. AN
+  ATTRIBUTION RE-RUN of the one cell is executing on the quiet machine (config
+  rs5-config-attrib-bb8e999d.json; receipts to rs5-receipts-attrib, a SEPARATE dir —
+  the evaluator's credit is not idempotent and is NOT re-run). If the quiet run is
+  age-linear: host artifact, recorded closed. If it reproduces: a real superlinear
+  aging cost in that flag combination — a NEW engine finding chartered for diagnosis.
+- **§339.3 The closing preservation is QUEUED with the collection:** rs5-receipts +
+  rs5-artifacts fold to refs/preserve on the attribution re-run's completion (the
+  fold-on-bank law; scratchpads have eaten three deliverables this month).
