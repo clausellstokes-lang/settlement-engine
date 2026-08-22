@@ -17184,3 +17184,42 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   the stack's arithmetic closing across three members. **TE-T2L DISPATCHED**
   on the packet as ruled. Seats: CT-3-landing · TC-T2M · TE-T2L; one held
   for T2H's landing turn.
+
+## §426 — THE T2M COMPILE RULED: SIX RAISED ITEMS ANSWERED; A DOOR-BRIEF PREMISE CORRECTED; THE FOUR-RED WINDOW BLESSED; TE-T2M DISPATCHED (2026-08-23 ~12:40)
+
+- **draft-MF-T2M.md COLLECTED AND RULED AS COMPILED** (764 lines, the T2K
+  form). The member: fabric/architecturalHistory.js — the spec's twelve-kind
+  operation PAYLOAD grammar sealed through the one fabric grammar with a
+  deterministic fixture — plus the §423 Shape-B strip priced line-by-line
+  (the gate export and six use sites out of operations.js, one barrel row,
+  the kind renamed, two law versions bumped).
+- **A DOOR-BRIEF PREMISE CORRECTED, ruling unaffected:** "zero importers"
+  was a grep blind spot — the barrel re-exports the module's symbols and
+  massingProjection imports the executor directly, so operations.js IS
+  bundled. The §423 level-split ruling stands untouched (it was about
+  levels, never importer counts), but the strip now has REAL dist
+  consequences, proven in the zoom: gate strings at zero chunks, the
+  renamed kind as the new positive control.
+- **THE SIX RAISED, RULED:** (1) the kind RENAME RATIFIED
+  (CANONICAL→PROPOSED_SPATIAL_OPERATION — the demotion made legible in the
+  artifact itself; earlier members' recorded controls become historical at
+  their own landings, which precede this one). (2) the law-version
+  partition RATIFIED as compiled. (3) the +7-title shape RATIFIED — the
+  seventh is the §423.1 Option-D PREVENTION ARM in the single-declaration
+  walker, exactly what the structural law ordered; deviation declared and
+  authorized. (4) **THE FOUR-RED validate:packets WINDOW BLESSED** — the
+  §379.2 discharge of MF-T1X's two gate pins forces it at DRAFT/READY,
+  clearing atomically at the LANDED flip; named verbatim in advance with
+  the strip-reverted control run required (the TE-T2G named-interior-red
+  precedent). (5) the sweep-row deferral RATIFIED per §417. (6) the
+  fixture golden protocol RATIFIED as compiled, vetoable at collection.
+- Also carried: operations.js sits in ALL THREE OSR subject manifests, so
+  this member flips the bare gate at a WHOLE envelope — the §384.2
+  break-recorded form with positive attribution rides; exactly one test
+  literal moves (a v1-mechanism seal hash, declared); the one-token
+  cause-unknown divergence pinned as ANTI-DRIFT rather than imported —
+  correct: a near-identical list imported would silently fuse two
+  vocabularies the spec keeps distinct. **TE-T2M DISPATCHED** (stacks on
+  the D3a stack's then-current tip, re-derived with evidence). With this,
+  EVERY map member is built, building, or landing. Seats: CT-3-landing ·
+  TE-T2L · TE-T2M; one held for T2H's landing turn.
