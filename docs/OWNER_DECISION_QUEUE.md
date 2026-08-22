@@ -17513,3 +17513,12 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   sweep EVERY writer of the channel's substrate and pin the destroyer
   roster; a reader built against a channel the engine demolishes lands the
   wrong truth with green tests.
+
+- **§434.1 SECOND RECLAMATION EXECUTED** (T2H's 3.0Gi flag): fifteen
+  landed-member trees removed (CT-2, CT-3, H8B, RR-1, RR-2, T2Bf, and the
+  finished compile/diagnosis lanes), 2.9 → 7.8Gi free, worktrees pruned.
+  Held: every unlanded holding tree, the warm T2R tree, the MEAS battery
+  (parked-ready), INVEVS (owner-review), the hunt's preserved artifacts.
+  **The §403 prevention RE-ADOPTED as practice, not just law: each CAS now
+  deletes the landed member's trees in the same act** — the drift from
+  law to practice is how 3Gi happened twice.
