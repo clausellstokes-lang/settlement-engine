@@ -2,9 +2,9 @@ import { readFileSync } from 'node:fs';
 
 import { describe, expect, it } from 'vitest';
 
+import * as publicFabricApi from '../../src/domain/townMap/fabric/index.js';
 import {
   FIRST_SLICE_MASSING_PROJECTION_LAW_VERSION,
-  FIXED_SURVEY_LIGHT_V1,
   canonicalArtifactRef,
   compileOrthogonalCrossFirstSliceMassingRosterBundle,
   createCanonicalOrigin,
@@ -116,7 +116,8 @@ describe('MF-T1V roster-aware fixed-survey massing projection', () => {
     const bundle = compileBundle(fixture);
     const projection = projectBundle(fixture, bundle, 'PUBLIC');
     expect(projection.artifactKind).toBe('FIRST_SLICE_PROJECTION');
-    expect(projection.lightProfile).toBe(FIXED_SURVEY_LIGHT_V1);
+    expectAbsentWithAnchor(Object.keys(projection), 'lightProfile', 'drawOps',
+      'MF-T2G §299.3b — no published projection carries a light profile');
     expect(projection.semanticPrimitives).toHaveLength(18);
     expect(projection.drawOps).toHaveLength(18);
     expect(Object.fromEntries(['GROUND', 'FRONTAGE', 'SHADOW', 'BUILDING', 'ROOF_RIDGE']
@@ -287,10 +288,13 @@ describe('MF-T1V roster-aware fixed-survey massing projection', () => {
     const { document } = makeFirstSliceDocument();
     const resolutionReport = resolveFirstSliceContent(document, []);
     const legacyPublic = projectFirstSliceFixedSurvey({ document, resolutionReport, audience: 'PUBLIC' });
+    // re-recorded by MF-T2G (§299.3b light-profile strip; authorization: packet body) — the
+    // published artifact lost one field, so its contentHash moved once. artifactId, primitives,
+    // drawOps, sourceAuthority and warnings are byte-identical through the strip.
     expect(legacyPublic.contentHash)
-      .toBe('scene-v1-9820c3f2273a313f22ff9246c65e1891');
+      .toBe('scene-v1-f9b571a76668a7eee533f1eb0d091db0');
     expect(projectFirstSliceFixedSurvey({ document, resolutionReport, audience: 'DM' }).contentHash)
-      .toBe('scene-v1-1945e8a01df6c24788c3393c4e3c452d');
+      .toBe('scene-v1-d143b6efee808314e8dde7ab5ea9f42a');
     const mutableDocument = clone(document);
     const forgedFootprint = mutableDocument.masses[0].geometry.footprint
       .map(([x, z]) => [x + 1, z]);
@@ -326,5 +330,54 @@ describe('MF-T1V roster-aware fixed-survey massing projection', () => {
       'FIRST_SLICE_MAP_DOCUMENT', 'CONTENT_RESOLUTION_REPORT', 'MASSING_PHASE',
       'PUBLIC_PROJECTION_INPUT', 'choiceReceipt', 'persistence',
     ]) expectAbsentWithAnchor(bytes, forbidden, 'FIRST_SLICE_PROJECTION', 'massing projection boundary');
+  });
+
+  it('MF-T2G strips the §288-nonconforming light profile from every published surface', () => {
+    const { document } = makeFirstSliceDocument();
+    const resolutionReport = resolveFirstSliceContent(document, []);
+    const fixture = makeSettlementMassingRosterBundleInputs();
+    const bundle = compileBundle(fixture);
+    const surfaces = [
+      ['legacy PUBLIC', projectFirstSliceFixedSurvey({ document, resolutionReport, audience: 'PUBLIC' })],
+      ['legacy DM', projectFirstSliceFixedSurvey({ document, resolutionReport, audience: 'DM' })],
+      ['direct PUBLIC', projectBundle(fixture, bundle, 'PUBLIC')],
+      ['direct DM', projectBundle(fixture, bundle, 'DM')],
+    ];
+    expect(surfaces).toHaveLength(4);
+    for (const [label, projection] of surfaces) {
+      // THE FOUND-THE-SYMBOL CONTROL FIRST (§372.3): an extraction that finds nothing is not
+      // an absence, so every scan below runs on bytes proven to carry a known-present symbol.
+      const bytes = stableSceneStringify(projection);
+      expect(bytes, label).toContain('FIRST_SLICE_PROJECTION');
+      for (const forbidden of [
+        'lightProfile', 'PROJECTION_LIGHT_PROFILE', 'light:fixed-survey:v1', 'FIXED_SURVEY',
+      ]) expectAbsentWithAnchor(bytes, forbidden, 'FIRST_SLICE_PROJECTION', `${label} light profile`);
+    }
+    // …and the barrel no longer publishes the record, with a sibling export as the anchor.
+    expect(typeof publicFabricApi.projectFirstSliceFixedSurvey).toBe('function');
+    expectAbsentWithAnchor(Object.keys(publicFabricApi), 'FIXED_SURVEY_LIGHT_V1',
+      'projectFirstSliceFixedSurvey', 'fabric barrel export surface');
+  });
+
+  it('MF-T2G pins the published projection key roster in both directions', () => {
+    const { document } = makeFirstSliceDocument();
+    const resolutionReport = resolveFirstSliceContent(document, []);
+    const fixture = makeSettlementMassingRosterBundleInputs();
+    const bundle = compileBundle(fixture);
+    const projections = [
+      projectFirstSliceFixedSurvey({ document, resolutionReport, audience: 'PUBLIC' }),
+      projectFirstSliceFixedSurvey({ document, resolutionReport, audience: 'DM' }),
+      projectBundle(fixture, bundle, 'PUBLIC'),
+      projectBundle(fixture, bundle, 'DM'),
+    ];
+    expect(projections).toHaveLength(4);
+    // An EXACT roster catches both directions: the profile cannot silently return, AND no
+    // second field can silently vanish. A one-sided absence pin would only catch the first.
+    for (const projection of projections) {
+      expect(Object.keys(projection).sort()).toEqual([
+        'artifactId', 'artifactKind', 'audience', 'contentHash', 'drawOps',
+        'semanticPrimitives', 'sourceAuthority', 'warnings',
+      ]);
+    }
   });
 });

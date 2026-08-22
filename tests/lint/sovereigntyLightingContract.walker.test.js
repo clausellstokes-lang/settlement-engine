@@ -5173,7 +5173,38 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   census the naive sentinel does not mis-attribute, it reads NOTHING — and silence is
     //   the safer failure only if the instrument is built to abort on it rather than fall
     //   back to whatever number happens to be on screen.
-    files: 2497, parked: 364, credited: 2133, titles: 20712, suiteTitles: 5785,
+    //
+    // ── RE-RECORDED 2026-08-22 BY MF-T2G (THE D3a PORT TRAIN'S REMOVAL MEMBER) ─────────
+    // 2497/364/2133/20712/5785 → 2497/364/2133/20714/5785. THE CAUSE IS TWO ADDED TITLES
+    // AND NOTHING ELSE: the §299.3(b) light-profile strip's two new arms, both straight-line
+    // `it()` calls with string-literal titles landing INSIDE the existing MF-T1V describe in
+    // tests/domain/townMapMassingProjection.test.js — one proving the stripped record is
+    // absent from all four published surfaces and the barrel, one pinning the published key
+    // roster in both directions. No test FILE is minted, so `files` and `credited` do not
+    // move; no `describe` is opened, so `suiteTitles` does not move; PARKED IS UNCHANGED
+    // at 364.
+    // `censusAuthorization`: ODQ §312 (the D3a dispatch, whose §312.1 roster carries the
+    // §299.3 obligations as a named track) · ODQ §375 (the chair's ruling of this member,
+    // which ACCEPTED the declared one-time digest shift and RATIFIED the record-vs-shadows
+    // boundary) · ODQ §379 (the retirement discharge) · under the wave charter at §310.4 and
+    // §299.4's binding-forward rule.
+    // ⚠⚠ BOTH ENDS RE-DERIVED AT THIS COMMIT'S OWN BASE, AND THE FIRST READING WAS THROWN
+    //   AWAY. This member was built and fully proved at a09138d7, where the pair read
+    //   2494/364/2130/20684/5782 → …/20686/…. THREE landings then intervened — WF-8A, the
+    //   OSR schema-9 mint, and MF-T2F — so those figures were carried forward as a DELTA
+    //   ONLY (+2 titles) and both ends were measured again from scratch at cb369d2b. The
+    //   base read GREEN by equality, which in a sequenced census executes and so convicts
+    //   all five arms, and separately by a -1 sentinel whose message read literally
+    //   "expected 20712 to be -1". The after end came from the member's own interior red,
+    //   "expected 20714 to be 20712", which arrived AT `titles` — not at `files`, which is
+    //   what a sibling landing mid-edit would have looked like.
+    // ⭐ THE CARRY LAW, THIRD FACE. T2E recorded a fresh figure under the wrong NAME; T2F
+    //   recorded a sequenced sentinel reading NOTHING. This member is the third shape: a
+    //   figure that was RIGHT WHEN MEASURED and went stale underneath its own packet while
+    //   the branch moved. Nothing about 20684 was ever wrong; it simply stopped being an
+    //   answer to the question. The cure is the same in all three — re-derive at the base
+    //   you are actually landing on, and carry the DELTA, never the tuple.
+    files: 2497, parked: 364, credited: 2133, titles: 20714, suiteTitles: 5785,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

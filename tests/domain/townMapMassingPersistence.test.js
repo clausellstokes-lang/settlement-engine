@@ -398,8 +398,11 @@ describe('MF-T1S roster-aware first-slice massing persistence', () => {
     const directDm = projectOrthogonalCrossFirstSliceMassingFixedSurvey({
       audience: 'DM', massingBundle: directBundle, massingCompileInput: directFixture.input,
     });
-    expect(directPublic.contentHash).toBe('scene-v1-2f65d0d84551c889da48e08ceb1eb27f');
-    expect(directDm.contentHash).toBe('scene-v1-bc2930de2297900d8715aa32b1a884c3');
+    // re-recorded by MF-T2G (§299.3b light-profile strip; authorization: packet body) — the
+    // published artifact lost one field, so its contentHash moved once. The save-bytes pins in
+    // this same arm are UNCHANGED: documents never embedded the profile.
+    expect(directPublic.contentHash).toBe('scene-v1-1321ec6f9b44ec8e1b4e303334e8b964');
+    expect(directDm.contentHash).toBe('scene-v1-bbd197b33ba3de7c61b76ac7f4e7f352');
 
     const { document: legacyDocument } = makeFirstSliceDocument();
     const resolutionReport = resolveFirstSliceContent(legacyDocument, []);
@@ -409,8 +412,9 @@ describe('MF-T1S roster-aware first-slice massing persistence', () => {
     const legacyDm = projectFirstSliceFixedSurvey({
       document: legacyDocument, resolutionReport, audience: 'DM',
     });
-    expect(legacyPublic.contentHash).toBe('scene-v1-9820c3f2273a313f22ff9246c65e1891');
-    expect(legacyDm.contentHash).toBe('scene-v1-1945e8a01df6c24788c3393c4e3c452d');
+    // re-recorded by MF-T2G (§299.3b light-profile strip; authorization: packet body)
+    expect(legacyPublic.contentHash).toBe('scene-v1-f9b571a76668a7eee533f1eb0d091db0');
+    expect(legacyDm.contentHash).toBe('scene-v1-d143b6efee808314e8dde7ab5ea9f42a');
     expect(firstSliceScreenDrawOps(saved)).toBe(saved.drawOps);
     expect(saved.drawOps).toEqual(directPublic.drawOps);
     expect(firstSliceProjectionToSvg(saved)).toBe(firstSliceProjectionToSvg(directPublic));

@@ -352,19 +352,23 @@ describe('MF-VS1 registered fantasy construction', () => {
     const saved = ['PUBLIC', 'DM'].map((audience) => (
       projectSavedOrthogonalCrossFirstSliceMassingFixedSurvey({ audience, bytes: custom.bytes,
         installedRecipeSnapshots: custom.installedRecipeSnapshots }).contentHash));
-    expect(saved).toEqual(['scene-v1-b90080500e9e0a99b6ee469444832743',
-      'scene-v1-47ec385c5ea913fbad576ef8cc2d2219']);
+    // re-recorded by MF-T2G (§299.3b light-profile strip; authorization: packet body) — all six
+    // literals in this arm ride the ONE seal site the strip touched. The arm's semantics are
+    // untouched: it still proves the projections replay to their recorded values. LEGACY_HASH
+    // above is a saved-DOCUMENT digest, not a projection, and does not move.
+    expect(saved).toEqual(['scene-v1-41f2d7037e51306297e632379fc2664c',
+      'scene-v1-9880b235ec01b4162a05d711a2d3e7bc']);
     const direct = makeSettlementMassingRosterBundleInputs();
     const bundle = compileOrthogonalCrossFirstSliceMassingRosterBundle(direct.input);
     expect(['PUBLIC', 'DM'].map((audience) => projectOrthogonalCrossFirstSliceMassingFixedSurvey({
       audience, massingBundle: bundle, massingCompileInput: direct.input }).contentHash))
-      .toEqual(['scene-v1-2f65d0d84551c889da48e08ceb1eb27f',
-        'scene-v1-bc2930de2297900d8715aa32b1a884c3']);
+      .toEqual(['scene-v1-1321ec6f9b44ec8e1b4e303334e8b964',
+        'scene-v1-bbd197b33ba3de7c61b76ac7f4e7f352']);
     const { document } = makeFirstSliceDocument(); const report = resolveFirstSliceContent(document, []);
     expect(['PUBLIC', 'DM'].map((audience) => projectFirstSliceFixedSurvey({
       document, resolutionReport: report, audience }).contentHash))
-      .toEqual(['scene-v1-9820c3f2273a313f22ff9246c65e1891',
-        'scene-v1-1945e8a01df6c24788c3393c4e3c452d']);
+      .toEqual(['scene-v1-f9b571a76668a7eee533f1eb0d091db0',
+        'scene-v1-d143b6efee808314e8dde7ab5ea9f42a']);
     expect(saveFirstSliceMassingDocument(fixture.base.document)).toBe(fixture.base.bytes);
     expect(baseMasses(result.constructionState, fixture.base)).toEqual(fixture.base.bundle.buildingMasses);
     expect(result.constructionState.baseMassingRosterRef).toEqual(refOf(fixture.base.bundle.massingRoster));

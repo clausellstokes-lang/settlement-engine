@@ -17,14 +17,8 @@ import {
 const FIXED_DIRECTION_Q = Object.freeze([2, 1]);
 const FIXED_SHADOW_DENOMINATOR_Q = 4;
 
-export const FIXED_SURVEY_LIGHT_V1 = sealCanonicalArtifact({
-  artifactKind: 'PROJECTION_LIGHT_PROFILE',
-  artifactId: 'light:fixed-survey:v1',
-  profileVersion: 1,
-  mode: 'FIXED_SURVEY',
-  directionQ: FIXED_DIRECTION_Q,
-  shadowRunDenominatorQ: FIXED_SHADOW_DENOMINATOR_Q,
-});
+// MF-T2G (ODQ §299.3b): the §288-nonconforming PROJECTION_LIGHT_PROFILE record was
+// stripped; a conforming fixed-survey profile arrives with D4+ light (§288.8), not here.
 
 /** @param {Record<string,unknown>} mass */
 function massGeometry(mass) {
@@ -359,7 +353,6 @@ export function projectResolvedFirstSliceFixedSurvey(input) {
     artifactKind: 'FIRST_SLICE_PROJECTION',
     artifactId,
     sourceAuthority,
-    lightProfile: FIXED_SURVEY_LIGHT_V1,
     audience,
     semanticPrimitives,
     drawOps,

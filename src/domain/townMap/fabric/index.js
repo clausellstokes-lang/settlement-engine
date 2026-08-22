@@ -96,7 +96,6 @@ export {
   saveFirstSliceMassingDocument,
 } from './content.js';
 export {
-  FIXED_SURVEY_LIGHT_V1,
   firstSliceProjectionToSvg,
   firstSliceScreenDrawOps,
   projectFirstSliceFixedSurvey,
