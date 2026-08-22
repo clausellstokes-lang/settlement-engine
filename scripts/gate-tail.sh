@@ -23,8 +23,16 @@ if [ "$#" -eq 0 ]; then
   exit 2
 fi
 LOG="${TMPDIR:-/tmp}/gate-tail.$$.log"
-"$@" >"$LOG" 2>&1
+# THE LOAD CONTEXT, STAMPED IN THE LOG BODY (HUNT-1 Cure 3). A stray timeout is
+# classified by asking what else the box was doing; that answer was reconstructed from
+# memory, after the fact, every time. Stamped here it is evidence. `getconf
+# _NPROCESSORS_ONLN` is the portable core count — no `nproc` dependency. The stamps go
+# in the BODY: the contract that the last two printed lines are the full-log path and
+# the real exit code is byte-preserved.
+{ echo "[gate-tail] start: $(uptime) · cores: $(getconf _NPROCESSORS_ONLN)"; } >"$LOG"
+"$@" >>"$LOG" 2>&1
 code=$?
+echo "[gate-tail] end: $(uptime)" >>"$LOG"
 tail -n "$LINES" "$LOG"
 echo "[gate-tail] full log: $LOG"
 echo "[gate-tail] exit: $code (the gate's own status, not a pipe's)"
