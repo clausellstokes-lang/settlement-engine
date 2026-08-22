@@ -74,6 +74,12 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~15:40 ET: LP-RECON collected (§363) — queue row 8 STRUCK (ceiling was
+# the seat ceiling, long discharged); TE-LPDOC (cure the lying bridge doc)
+# joins the housekeeping bundle; §320.3 dropped thread RULED: DISCLOSE
+# (wording → website train + owner copy walk); census-ceiling memory
+# corrected (11/17, headroom exists, branch-dependent); session receipts
+# FOLDED: refs/preserve/session-receipts-2026-08-22 = 7684f2e7 (103 files).
 # ⭐⭐ ~15:00 ET: SIGNATURE GRANT APPLIED (§362) — SIGNED: MF-0F's declared
 # shift · dompurify=Apache-2.0 + rgbcolor=MIT (owner's §295 precedent) ·
 # LENS_COUNT + MF-D5 as-recommended (member quotes the rec at landing).

@@ -15139,3 +15139,36 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   ALREADY EXECUTED 2026-08-06 — the §-earlier deferral register overstated it as
   pending; the remaining V5 owner items are the three regeneration prompts and
   the post-tune sitting only.
+
+## §363 — LP-RECON COLLECTED: A STALE QUEUE ROW STRUCK, THE DROPPED §320.3 THREAD RULED, A MEMORY CORRECTED, THE FOLD EXECUTED (2026-08-22 ~15:40)
+
+- **The landing-page queue row (§347.1 row 8) is STRUCK** — the '§318.3 ceiling' was
+  the FOUR-LANE SEAT ceiling, discharged the same day it was named (§319.3 dispatched
+  into the freed seat; §320 collected TE-LANDING at zero diff, exemplary refusal).
+  The dispatchable replacement is **TE-LPDOC**: cure docs/LANDING_HANDOFF_AMENDMENTS.md,
+  whose 'handoff + this file = current law' claim is 37 landing-estate commits stale —
+  THE MECHANISM behind §320.2's banked error (the chair reached for the Desktop spec
+  because the in-repo bridge lied about being current; a truthful ledger removes the
+  need to remember). One file, ~2 lane-hours, zero census exposure; JOINS THE
+  HOUSEKEEPING BUNDLE at the chair's review of draft-HOUSE-1.
+- **§363.1 THE DROPPED THREAD RULED — §320.3, the anon-ceiling disclosure:** §336
+  converted it to a chair ruling; §359 ruled it in neither register — caught by the
+  recon. RULED NOW: **DISCLOSE, plainly** — the anonymous size ceiling appears in one
+  sentence at the landing's anonymous entry point; consumer-honest, the receipts
+  ethos applied to the storefront. The WORDING drafts in the website train's charter
+  and joins the owner's copy walk with the other copy items (§362.4's boundary:
+  decisions chair, words owner-eyed).
+- **§363.2 MEMORY CORRECTED:** test-census-ceiling-forecloses-new-rows claimed 17/17
+  zero headroom; at the build tip the baseline holds ELEVEN entries against the
+  unchanged CEILING=17 — six rows of headroom exist ('just census it' is available
+  again, though an entry remains a deliberate attributed hand edit by the baseline's
+  own law). The ledger branch still carries the old 17-entry copy — the figure is
+  BRANCH-DEPENDENT; read it at the build tip.
+- **§363.3 THE PRESERVATION FOLD EXECUTED:** refs/preserve/session-receipts-2026-08-22
+  = 7684f2e7 — 103 files: every lane receipt and draft of this session (including
+  laneTELANDING-receipt.md, the sole detailed record of the §320 exemplary refusal,
+  caught scratchpad-only mid-recurrence of the twice-proven loss mode) plus the four
+  recovered hunt run-reports. Fold-on-bank is now fold-on-schedule.
+- **§363.4 Topology caution reinforced:** the build tip is NOT an ancestor of the
+  ledger branch and the main worktree's landing surfaces are thousands of porcelain
+  lines stale — landing-estate reads go through `git show claude/composite-r4:` only.
