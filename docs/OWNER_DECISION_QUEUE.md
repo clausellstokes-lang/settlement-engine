@@ -16631,3 +16631,43 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   the seat → **TE-WEB7 dispatched** (the §362.2 elections recording + the
   OFL licence files; C6-signed inclusion). FOUR ACTIVE: RR-2 · WEB-6 ·
   WEB-5 · WEB-7.
+
+## §411 — WEB-6 COLLECTED GREEN; SIX JUDGMENTS RATIFIED; THE RESERVATION FLAG COORDINATED; THE FAMILY-FOUNDING DUPLICATION NOTED (2026-08-23 ~03:00)
+
+- **The member:** tip 5b0a399f (pinned), base 19b799ce unmoved; S0 two-part
+  WHOLE at base AND re-run at tip (perishability honored — the OSR gate sits
+  outside check). The defect CONVICTED BY EXECUTION: the base SSR render
+  (57,200 bytes) contains the section's other keys and NOT forge.ceiling —
+  the section was alive, the disclosure was not in it; that same render is
+  now the cure and the pin. A1-A4 executed with the anchors-green-while-red
+  proof; the A4 bundle check's FIRST read was VACUOUS (the control also
+  returned 0) and was re-anchored on a genuinely-eager string — the
+  rendered-surface second-vacuity law self-applied.
+- **The two-file manifest was short by two, both found by executing:** the
+  homeLanding INVERSE pin from walk order 10 (superseded by §363.1) — whose
+  docblock had said "EXACTLY once" while the pin asserted zero FOR A MONTH
+  with nothing reddening; and the lighting walker's exact-equality census
+  (+1 title, re-stamped 20,719 → 20,720, attributed by ISOLATION with a
+  baseproof and two single-revert convictions).
+- **SIX JUDGMENTS RATIFIED:** the SSR arm (the plan's own stronger form);
+  the CTA-row placement (it qualifies "No account needed" — placement
+  judgment, not new copy); the title rename (§320-class cure, file UNBANKED
+  so no census key at risk — the banked-rename prohibition checked first);
+  the widened manifest (mandatory consequences); the family founding
+  (correct at its base — see below); exit-3-as-mutex + clean re-run (the
+  standing law applied; run 2 end-to-end green with tail agreement).
+- **⚠ THE FAMILY-FOUNDING DUPLICATION, noted for the landing slots:** WEB-1
+  and WEB-6 EACH founded docs/implementation/packets/website/ + the INDEX
+  family section in their own holding trees (unavoidable — same base era).
+  Whichever lands second resolves keep-one-header/merge-rows at its rebase;
+  recorded here and in both eventual GOs.
+- **THE RESERVATION FLAG COORDINATED:** WEB-6, as the manifest's only
+  non-terminal packet, holds the census-holder reservation on the lighting
+  walker — WEB-5 and WEB-7 (in flight) instructed to mint RETROSPECTIVELY AT
+  TERMINAL per §410, which reserves nothing and dissolves the collision.
+- **The varying-cast stray recorded, not cured** (postureNameCollision: red
+  at the verified base in its own worktree, 20/20 in isolation, never fired
+  under the authoritative instrument) — §355 hunt material. The banked
+  ELEVEN held in both full-suite runs. The lane's index-fold flag: another
+  micro-fold executed at this row (the command-registry/faction-rename/
+  design-handoff row relocated VERBATIM to the 08-22 archive).
