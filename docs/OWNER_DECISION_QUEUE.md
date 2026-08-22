@@ -16910,3 +16910,37 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   namespaceCollisions' same-node arm stays pinned-equivalent. T2J HOLDS
   deep in the queue (after T2H). **§417.1 SEAT: TC-T2K dispatched** (the
   §374.1 precedent — the port pipeline stays full; compile-tier per §343.1).
+
+## §418 — T2Bf IS LANDED (THE 22ND LANDING); THE SLOT PATTERN RATIFIED AS THE STANDARD; A DISPATCH-HYGIENE CORRECTION; CT-2's GO ISSUED (2026-08-23 ~07:50)
+
+- **THE CAS EXECUTED:** claude/composite-r4 moved 0afddfe9 → 3519dcc1. The
+  separator restoration is on the branch; the superseded build-tip pin
+  deleted. The slot work is RATIFIED AS THE STANDARD REBASE PATTERN:
+  carry-proof-by-absence at BLOB level first (one object across all three
+  bases — nobody touched the cure); conflicts resolved by taking the slot
+  base's file byte-for-byte and re-running the append on top, then
+  ROW-LEVEL DEEP-COMPARE (145→146 manifest rows, 0 missing 0 drifted;
+  148→149 INDEX rows, RR rows verified present); every figure re-derived
+  with the DELTA carried never the tuple — including the census reading
+  identical FOR A CHECKED REASON (six touched test files, zero title
+  motion, delta zero); the terminal detached-in-own-session green with both
+  exit lines and the mutex-liveness correction OBEYED (inspected first;
+  none held).
+- **A DISPATCH-HYGIENE CORRECTION, banked:** the chair's GO quoted RR-1's
+  baseline as the expected S0 figure — ONE FREEZE STALE (RR-2 re-froze
+  after; the live reading is 1995/1409 at 4f42be70). The lane read the
+  live baseline rather than inheriting the quote, and the envelope was
+  mis-read by nobody. STANDING RULE: a GO quotes baselines as CONTEXT
+  ONLY, never as expected values — the lane reads its own. Also corrected:
+  schema-10 has no WHOLE token; it signals a break by THROWING, so exit 0
+  plus the exact-match line IS the whole reading.
+- **An observation recorded:** runtime tests moved 28734→28738 while the
+  census tuple held still — the documented static-vs-runtime split
+  (loop/each-registered cases are census-invisible), stated rather than
+  smoothed.
+- **CT-2's GO ISSUED** with the slot pattern, the §12 envelope re-stamp at
+  its actual base (the §412-ratified deferred act), the §384.2
+  break-recorded form with the §394 F1 attribution note (general's
+  divergence is CT-2's; warFaith's is CT-3's), and the §414-as-corrected
+  terminal. The cascade behind it: H8B → CT-3 → T2H → the website cars →
+  T2J.
