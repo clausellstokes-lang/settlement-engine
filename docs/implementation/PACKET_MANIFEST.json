@@ -20034,6 +20034,128 @@
       ]
     },
     {
+      "id": "MF-T2K",
+      "status": "DRAFT",
+      "packetPath": "docs/implementation/packets/town-cartography/MF-T2K.md",
+      "verifiedBase": "f7ba314505703b96097b8aba568cc80e3ec30023",
+      "changeManifest": [
+        {
+          "_note": "THE LEAF. SPEC 10.5's typed SupportSurfaceRef and SPEC 6.4.1's component-slot axis, as the D3a-core era slice. A design-implementation member, not a port-by-hash one: four greps over the 54 sealed fabric modules return ZERO support-registry, slot or role machinery, so there is no sandbox module to port and the sources are the volume's contract plus the landed substrate. Three central behaviours: surfaceId is DERIVED and a caller-supplied one is refused (SPEC 10.5's not-a-free-alias law); injectivity is bought by RESERVING ':' in the segment grammar rather than by a separator byte, because the derived key must pass the landed id wall which admits no C0 byte and controlBytes.test.js forbids the raw byte in source; and the slot axis is TOTAL with the no-inference law structural in BOTH directions. 182 effective lines against the ratified 200-per-leaf and 210-packet caps. Dormant: no consumer, no barrel row, nothing persisted, and the leaf is a SINK in the module graph. Imports EXACTLY foundation.js and massPart.js, which is a design constraint rather than an accident: FOUNDATION_READERS is frozen over the whole fabric directory and tracks coordinateAbi.js and solidLegality.js, so importing either would owe a roster edit inside another member's reserved file for zero behaviour.",
+          "action": "CREATE",
+          "path": "src/domain/townMap/fabric/supportSurface.js"
+        },
+        {
+          "_note": "THE ACCEPTANCE FILE. Six cases, ONE literal describe, straight-line test calls with string-literal titles, the one loop INSIDE a named test (the SP-D idiom). A1 is the guard-the-guard arm: three vocabularies nonempty and frozen, the IMPORTED MASSING_UNKNOWN_REASONS pinned here too so a drift in massPart.js reds this battery, and the kind-to-token table shown TOTAL before any key is trusted. A2 pins the derived key spellings, proves the landed id wall admits them through massPart.solidPartQ, and proves the engineered near-collision pair UNCONSTRUCTIBLE. A4 opens with the lawful identity arm and proves the order input-independent. A6 runs the LANDED solidOverlap over solids keyed by this member and pins the cross-support refusal verbatim: the test imports the predicate, the leaf does not.",
+          "action": "CREATE",
+          "path": "tests/domain/townMapSupportSurface.test.js"
+        },
+        {
+          "_note": "THE PACKET.",
+          "action": "DOC",
+          "path": "docs/implementation/packets/town-cartography/MF-T2K.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE IMPORTED VOCABULARY. SPEC 6.4.1's UnknownMaterialFact.reason is byte-identical and same-ordered to this list, so the leaf IMPORTS it rather than re-declaring it and drift becomes structurally impossible. Remove or rename it and the member's one-vocabulary law has no subject; A1 pins the four literals on this side too, so the two ends cannot silently disagree.",
+          "path": "src/domain/townMap/fabric/massPart.js",
+          "symbol": "export const MASSING_UNKNOWN_REASONS"
+        },
+        {
+          "_note": "THE ID WALL THE DERIVED KEY MUST PASS. The whole key design rests on this grammar admitting no C0 byte and capping at 96 characters, which is why injectivity is bought by reserving ':' in the segment grammar instead of by a separator byte. An over-long derivation is refused BY this wall, typed, rather than truncated here.",
+          "path": "src/domain/townMap/fabric/foundation.js",
+          "symbol": "export function requireCanonicalId"
+        },
+        {
+          "_note": "THE CONSUMER OF RECORD. MF-T2F's DIFFERENT_SUPPORT_SURFACE refusal is the seam this member's keys feed, and A6 executes it rather than narrating it. Remove it and the F-to-K seam has no proof.",
+          "path": "src/domain/townMap/fabric/solidLegality.js",
+          "symbol": "export function solidOverlap"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "Guard-the-guard, first. The three exported vocabularies are nonempty, frozen and deep-equal to the SPEC-verbatim literals (7 kinds, 9 roles, 4 absence reasons); the IMPORTED MASSING_UNKNOWN_REASONS is pinned to its four literals here too, so a drift in massPart.js reds this member's own battery; and the kind-to-token table is shown TOTAL over the closed vocabulary - every kind either derives a key or refuses as the named blocked kind - BEFORE any key is trusted. Then each constructible kind constructs, frozen, and replays JSON-identical."
+        },
+        {
+          "id": "A2",
+          "case": "The key. Derived surfaceId equals the documented spelling per kind (support:terrain-face:p1, support:wall-top:b1:w9:cap, support:world-datum:d0, support:roof-face:b1:r1:rf); distinct refs give distinct keys; the derived key is ADMITTED by the landed wall, executed through massPart.solidPartQ, which is also the upward-compatibility proof; a caller-supplied surfaceId is refused; and the engineered near-collision pair - two DISTINCT refs that would join to the ONE key support:wall-top:a:b:c:d - is UNCONSTRUCTIBLE, each half refused naming the reservation, with the lawful control constructing beside them."
+        },
+        {
+          "id": "A3",
+          "case": "The refusals, with the unmodified fixture constructing FIRST so each refusal is attributable to the one field it changes: unknown kind, MAINTAINED_FREE_SPACE naming the blocked operation substrate, missing patchId, missing ownerPartId, an uppercase segment, an over-long derivation refused by the landed wall rather than truncated, non-record input, and an extra field refused by name."
+        },
+        {
+          "id": "A4",
+          "case": "The acyclicity law, identity arm FIRST: an all-rooted roster returns every part, and the same roster in another array order answers identically, so the order is provably input-independent; a three-deep chain terrain to wall to part-on-its-roof orders correctly. Then duplicate partId, unresolved ownerPartId, self-support and a two-part cycle are each refused by name, and the two production messages are proved DIFFERENT so neither arm can cover for the other when one is deleted."
+        },
+        {
+          "id": "A5",
+          "case": "Component slots as a TOTAL axis: PRESENT, NONE and UNKNOWN each construct frozen; a fourth status is refused rather than defaulted; NONE and UNKNOWN carrying a materialId are refused and PRESENT carrying a reason is refused, so the no-inference law is structural in both directions; each status validates against the RIGHT closed list, so an absence reason on the UNKNOWN arm refuses and vice versa; and the roster is nonempty, uniquely keyed by slotId, and built through the one construction route."
+        },
+        {
+          "id": "A6",
+          "case": "The consumer seam F to K, executed rather than narrated. The LANDED solidOverlap runs over solidPartQ records keyed by THIS member: one derived terrain key with overlapping intervals gives VOLUME and OVERLAPPING with sharedVolumeQ pinned exactly, the stacked half-open pair gives sharedVolumeQ zero and DISJOINT_OR_ABUTTING, and two different derived keys give REFUSED with DIFFERENT_SUPPORT_SURFACE, verdict null and the detail string verbatim. The refusal STAYS a refusal: this member mints no connection vocabulary."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/negativeAssertionAnchor.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/townMapSupportSurface.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/townMapStageManifest.walker.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "tests/lint/townMapFabricSingleDeclaration.walker.test.js",
+          "tests/lint/entropyRootCensus.walker.test.js",
+          "tests/lint/controlBytes.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/build/townMapLazy.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/domain/townMap/fabric/supportSurface.js",
+          "tests/domain/townMapSupportSurface.test.js"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "npm",
+          "run",
+          "validate:packets"
+        ],
+        [
+          "npm",
+          "run",
+          "check:tail"
+        ]
+      ]
+    },
+    {
       "id": "MF-T2J",
       "status": "READY",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T2J.md",
