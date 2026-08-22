@@ -14987,3 +14987,61 @@ recommended. Implementation, per item:
   the judgment): the evidence-preservation cure + its meta-test extension; lands
   AFTER the closing train (slot-aware; heads-up protocol). Cures 2–3 (corpus
   memoization; load-stamped receipts) hold on the queue.
+
+## §359 — THE DELEGATED DECISION SITTING (§336.1 EXECUTED): ELEVEN RULINGS, SEVEN STAY-OWNER ITEMS; THE §187 BATCH IS RECONSTRUCTED HERE (2026-08-22 ~13:40)
+
+This row executes the §336.1 charter under the owner's grant and, per §317.2, serves
+as the reconstruction of record for the lost §187 sitting document — each item cites
+its source row. Every ruling is vetoable by a word.
+
+**RULED (chair, under the §336 grant):**
+1. **OB-4 SIGNED: the scale bar prints PACES** (source §199.2b — it already prints
+   '200 PACES pending signature'). Period-correct, setting-agnostic (the product-scope
+   law), derived from the re-minted population÷density metric. Signed as-printing.
+2. **OB-5 RATIFIED: FIX** (source §174.2 — 42 craft/commerce entries mis-keyed
+   'government'; the tannery sits at the civic core today). The chair's own standing
+   recommendation adopted: the upstream catalog cure is CHARTERED as a small
+   declared-shift member on the engine queue (rides the §110.3 three-part proof); the
+   map was already immune from birth by deriving from the atlas column.
+3. **OB-6 FOLDED** into the undercity train's charter — the §311 doctrine now governs
+   the whole subject; a separate roster-expansion decision would be a second truth.
+4. **OB-7 DEFERRED-RECORDED** (the audit's own optional-escalation spec); revisits at
+   the undercity train's charter.
+5. **MF-D5's derive-from-events rec ACCEPTED** — canonical-truth doctrine (derive
+   projections, never store parallel state). **Its persisted-signal SHAPE is
+   ACCEPTED IN PRINCIPLE** (the ring buffer cannot carry the high-water mark; the
+   signal persists as its own field), with the CONCRETE shape chair-reviewed at the
+   D-family member that builds it — not ruled blind here.
+6. **THE CONSENT-DEFAULT SPLIT RATIFIED AS RECOMMENDED** (source §187): anonymous
+   simulation aggregates ON-by-construction; anything person-adjacent OFF by
+   default. This is the privacy-preserving default and it ships as the design.
+7. **RETENTION: THE PRINCIPLE IS SET** — the shortest retention consistent with
+   product function, privacy-preserving default; the concrete numbers are compiled
+   by the website train's charter FROM this principle and chair-signed there
+   (the item's detail died with the §187 document; the principle outlives it).
+8. **THE REFERRAL LOOP: GO** (source §-referral row: migration 107 ships, nothing
+   emits — the structural blindness). The emit wiring rides the website train as
+   already scoped on the tm client train.
+9. **THE sim_address_chain REGISTRY ROW: GO as queued** (J-TE28-3's four priced
+   obligations, riding the same train).
+10. **IMPORT-VS-RESTORE (Q4 §66.4): the gate OPENS under the grant** — the concrete
+   semantics are compiled by the website train's charter from §66.4's row and
+   chair-signed at that compile, vetoable then.
+11. **THE OSR RE-GOVERNANCE ITEM: CLOSED-SUPERSEDED** — the §349–§358 schema-9 mint
+   arc IS the re-governance, executed with a stronger review instrument (the
+   migration-review bundle) than the eyes-on-the-diff option contemplated.
+
+**STAY-OWNER (by nature or by fact; unchanged by the grant):**
+- The LENS_COUNT entitlement act (a PAID SURFACE moves — §162.4).
+- MF-0F's declared same-seed shift (explicitly queued as an owner gate; the Promise's
+  signature class).
+- The cull (carve-out by nature).
+- 'Campaign' naming (explicitly owner-parked at the push-cadence row; the website
+  train compiles a recommendation for the owner's word).
+- Community (a genuinely-new-capability question).
+- The support email (a fact only the owner has — the mailbox).
+- ci-1c (blocked on the owner's CI-log paste; discriminating lines enumerated in
+  laneCIX-report.md).
+
+The website train's charter (queue) now carries items 6–10's implementation plus the
+naming recommendation; the engine queue gains OB-5's declared-shift member.

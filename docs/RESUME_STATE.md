@@ -74,6 +74,12 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~13:40 ET: THE DELEGATED SITTING EXECUTED (§359) — 11 rulings (PACES
+# signed; OB-5 FIX chartered; consent split + retention principle; referral
+# + address-chain GO; import-vs-restore opened; OSR item closed-superseded;
+# OB-6 folded, OB-7 deferred; MF-D5 recs accepted) + 7 stay-owner items.
+# §187's lost doc reconstructed AS §359. Lanes: T2E gating · TE-RATCHET ·
+# TC-HOUSE · LP-RECON + parked WF-8/OSR9.
 # ⭐⭐ ~12:50 ET: HUNT-1 FINAL (§358) — mechanism CONFIRMED per-stray with
 # recovered reports (all timeouts, zero value mismatches; reports ORPHANED
 # not deleted — zsh no-match glob retraction). Protocol simplifies: read the
