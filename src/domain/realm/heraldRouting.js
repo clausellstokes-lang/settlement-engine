@@ -147,6 +147,12 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   // adjudication kinds cannot do the same (adjudication is never a token output) and
   // fall to the events catch-all below, exactly as the WR-5 decision records do.
   sovereignty_sale_judged: 'faith',
+  // WF-8a. The settlement extinction obituary — a town's last altar to one creed going dark.
+  // The `faith_` family prefix below would route it free, and that is exactly why the exact row
+  // is here: a desk-BEARING registered kind that routed only by prefix would raise the
+  // estate-wide registered-minus-routed difference by one and quietly claim to be deskless.
+  // The prefix is the cheap door and the trap (WF-PREAMBLE §P4); this row is the refusal.
+  faith_last_altar_dark: 'faith',
   major: 'faith', minor: 'faith', cult: 'faith', // deity tiers (DEITY_TIER_KEYS)
 
   // ── TRADE — goods, money, roads, resources, institutions, non-war relations ───

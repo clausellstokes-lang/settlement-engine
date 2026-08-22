@@ -118,6 +118,15 @@ export const KIND_SECTION = Object.freeze({
   // Of faith and custom.
   faith_foothold_recruited: 'traditions', faith_pact_formed: 'traditions',
   pantheon_ascendancy: 'traditions', pantheon_twilight: 'traditions', pantheon_extinction: 'traditions',
+  // WF-8a — THE ROW WF-1d REFUSED, RESURRECTED WITH ITS LIVE MINTER IN THE SAME COMMIT, which
+  // is the condition ODQ §321.2(a) always set for it. WF-1d's refusal stands untouched for
+  // WF-1d's OWN kinds (war_termination_read and the patron_fall* family are receipt kinds that
+  // mint no candidateType and earn no row here). This one does: religiousContest.js's fold
+  // mints `candidateType: 'faith_last_altar_dark'` at the one deletion path. The settlement
+  // obituary is a traditions beat — the realm-scale sibling pantheon_extinction sits one line
+  // above it — and `traditions` is a documented SPLIT, so its Herald desk of `faith` is a split
+  // outcome rather than a KIND_SECTION_DIVERGENCES row.
+  faith_last_altar_dark: 'traditions',
   tradition: 'traditions', tradition_change: 'traditions', moral_reckoning: 'traditions',
   belief_misjudgment: 'traditions', cause_lifecycle: 'traditions',
   stressor_birth_religious_conversion_fracture: 'traditions',
@@ -125,6 +134,29 @@ export const KIND_SECTION = Object.freeze({
   // Of mercy given (relief granted and relief refused — the succor floor's own pair).
   generosity_refusal: 'mercy', generosity_refuge: 'mercy',
 });
+
+/**
+ * ⛔⛔ THE WRITTEN-RULING ESCAPE FOR A MINTER-LESS `KIND_SECTION` KEY (ODQ §321.2a).
+ *
+ * Every key above is required to be a genuinely minted kind — a literal `candidateType:` or
+ * `impactKind:` somewhere in src/domain — and that requirement is ABSOLUTE today, which is the
+ * defect this map closes. A key that a chair has lawfully ruled may stand WITHOUT a live minter
+ * has no way to say so: the totality arm sees only "dead", and the only ways to make the tree
+ * green are to delete a ruled row or to mint a producer nobody wants. Neither is the ruling.
+ *
+ * A row here is `kind -> the ODQ §-ref that lets it stand`. It is the recorded-judgment idiom
+ * `KIND_SECTION_DIVERGENCES` (heraldRouting.js) already uses, and its hygiene is enforced rather
+ * than trusted: `tests/lint/heraldRouting.walker.test.js` reds a ruling that names a key which
+ * IS minted (a stale ruling outliving its cause), a ruling that names a key `KIND_SECTION` does
+ * not carry (an orphan), and a ruling whose value does not spell a §-ref at all.
+ *
+ * ⛔ EMPTY AT MINT, AND THAT IS A MEASUREMENT RATHER THAN A STARTING POINT. Every key above was
+ * verified minted at this landing, so there is no ruling to record. An escape that opens with
+ * an occupant is an escape whose first use was never reviewed.
+ *
+ * @type {Readonly<Record<string, string>>}
+ */
+export const KIND_SECTION_MINTER_RULINGS = Object.freeze({});
 
 /** Greeting variants (FNV-picked by the diff's own fingerprint — deterministic). */
 const GREETINGS = Object.freeze([

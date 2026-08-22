@@ -56,6 +56,12 @@ import { rulerLens, deityLegitimacyTarget, stepDeityLegitimacy, deityGrowthFavor
 // WF-1a: the typed patron fall. A PURE leaf beside this, its only importer — the placement
 // is what keeps scanCrossLayerPairs at zero pairs against two zero-headroom ceilings.
 import { classifyPatronFall, recordPatronFall } from './patronFall.js';
+// WF-8a: the settlement extinction obituary. A FAITH-layer leaf beside this one (claimed by
+// LAYER_PATTERNS.FAITH's `faith` prefix, so no registry row is owed), plus the display-side
+// name resolver — `display/` sits outside CENSUS_SCOPE_RE and four worldPulse modules already
+// read it, so neither import mints a coupling pair.
+import { faithReceipt } from './faithNews.js';
+import { deityDisplayNameFromRef } from '../display/deityNames.js';
 import { deityTemper, chaos01 } from './deityAxes.js';
 import { methodClash, STANCE_TUNING } from './deityStance.js';
 // Phase 4 W-F4b — the SPREAD-lane inter-deity stance CONSUMER (betrayal/pact events,
@@ -694,7 +700,12 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
     const reaching = reach.get(cid);
     const hasState = Boolean(prior[cid]?.deities && Object.keys(prior[cid].deities).length);
     // A settlement carries faith if it has an embedded patron OR any DM-imposed cult.
-    const hasDeity = Boolean(deitySnapshotFor(snapshot, cid)) || ((settlement.config?.cultDeitySnapshots || []).length > 0);
+    // WF-8a: the imposed-cult list is HOISTED rather than re-read. It is consulted twice now —
+    // here for the dormancy gate and at the extinction fence below — and the observed-shape
+    // reader ratchet addresses debt by finding IDENTITY, so a second `config.cultDeitySnapshots`
+    // site would raise this file's frozen ceiling for a value it already had in hand.
+    const cultSnaps = settlement.config?.cultDeitySnapshots || [];
+    const hasDeity = Boolean(deitySnapshotFor(snapshot, cid)) || cultSnaps.length > 0;
     if (!hasDeity && !hasState && !reaching) continue;     // dormancy: untouched ⇒ no state
 
     const tier = settlement.tier || settlement.config?.tier || 'village';
@@ -792,7 +803,66 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
       // present faith's growth toward its strength (hold AND take, symmetric).
       strengthByRef[dref] = clamp01(pietyMult * deityLocalStrength({ snapshot, deity: state.deities[dref].snapshot, deityRef: dref, neighbourIds, carrier, moodDeity, lens, worldState, cid, targetMass, crisisDisorder, spatialDigest, rankStrengthOf }));
     }
-    advanceShares(state, strengthByRef, { narrativePrune: unseating });
+    // ── WF-8a · THE SETTLEMENT EXTINCTION OBITUARY ───────────────────────────────────
+    // ⛔ THE NAMES ARE READ BEFORE THE CALL OR THEY ARE UNREADABLE. `pruneSuppressed` DELETES
+    // the entries it drops, so a creed's authored snapshot name exists only on this side of
+    // the seam; reading it afterwards would find the key gone and quietly name every extinct
+    // creed by its slug. Behind the SAME hoisted `unseating` local WF-1b lit — no second flag
+    // read, no new key, and dark the map is never built.
+    const dyingNames = unseating
+      ? new Map(Object.keys(state.deities).filter((k) => state.deities[k].suppressed)
+        .map((k) => [k, String(state.deities[k].snapshot?.name || '')]))
+      : null;
+    // WF-1b's landed return, consumed at last: the refs the prune deleted, in prune order. The
+    // bar is `pruneSuppressed`'s own `KEEP`, so no number is authored here or read from here.
+    const prunedRefs = advanceShares(state, strengthByRef, { narrativePrune: unseating });
+    if (unseating) {
+      // ⛔⛔ THE ROADS BACK, AND BOTH WERE FOUND BY RUNNING THE FIXTURE RATHER THAN BY READING.
+      // `pruneSuppressed` deletes an entry the moment the suppressed set outgrows KEEP, but a
+      // deletion is not an EXTINCTION: a creed with a road back re-enters next tick, is
+      // re-suppressed, and is deleted again, so a bare per-deletion mint announces the same
+      // town's last altar every tick for as long as the road holds. The obituary says "none
+      // there now keep the rite", and that has to be true past the tick that says it.
+      //
+      // ROAD ONE — A CARRIER. A neighbour still projecting the creed re-enters it at 3a.
+      // Measured: sixteen ticks of one ringed village produced TWENTY-FIVE obituaries for THREE
+      // creeds; with this road closed, exactly the creeds that never came back are named.
+      //
+      // ROAD TWO — THE SETTLEMENT'S OWN EMBEDDED SNAPSHOTS. `ensureReligionState`'s DM-re-assign
+      // branch re-installs `config.primaryDeitySnapshot` as the DOMINANT patron whenever state
+      // and config disagree, and the cult snapshots re-seed on an emptied pantheon. Measured
+      // through the REAL pulse: a village announced its own patron extinct at tick 4, had it
+      // reinstalled at tick 5, and announced it again at tick 9. This road is the stronger of
+      // the two and it is invisible to `reaching` entirely.
+      // ⛔ READ THROUGH THE ESTATE'S OWN ACCESSOR AND THE HOISTED LIST, never a second poke at
+      // `settlement.config`. The reader-with-no-writer ratchet caught the first spelling: it
+      // added a NEW `primaryDeityRef` identity (frozen ceiling zero) and pushed two more over
+      // their ceilings, and its guidance is exactly right — `deitySnapshotFor` resolves the SAME
+      // embedded snapshot through `snapshot.byId`, which is where `settlement` itself came from,
+      // so this is the identical value read at a site the estate already accounts for. The
+      // denormalized `primaryDeityRef` was redundant with the snapshot's own `_deityRef` and is
+      // simply gone.
+      const embedded = new Set([
+        String(deitySnapshotFor(snapshot, cid)?._deityRef || ''),
+        // ⚠ THE PARAMETER IS TYPED STRUCTURALLY AND NOT AS `any`, DELIBERATELY: this file carries
+        // a frozen per-file any-cast allowance that is MONOTONE-DOWN, so a new hole here reds
+        // `domainAnyCastBaseline.test.js` — and that ratchet says in terms that widening the
+        // baseline is not the cure. The snapshot shape is all this read needs.
+        ...cultSnaps.map((/** @type {{_deityRef?: string, name?: string}} */ d) => String(d?._deityRef || d?.name || '')),
+      ].filter(Boolean));
+      for (const deadRef of prunedRefs) {
+        if (reaching?.has(deadRef) || embedded.has(deadRef)) continue;
+        outcomes.push(faithReceipt({
+          cid,
+          settlementName: nameFor(cid),
+          ref: deadRef,
+          // The authored name, else the estate's converged resolver for an uncarried ref — and
+          // an extinct creed is definitionally uncarried.
+          creedName: dyingNames?.get(deadRef) || deityDisplayNameFromRef(deadRef),
+          tick,
+        }));
+      }
+    }
     // Legitimacy: each active faith drifts (slowly) toward its rightful-claim target —
     // ruler endorsement + neighbour recognition + tenure + chronicle momentum, minus
     // the heresy stain and corruption rot. Distinct from share; it LAGS conversion.

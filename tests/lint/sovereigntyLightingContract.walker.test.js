@@ -5099,7 +5099,37 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   usually read as a warning about STALE figures. This was a FRESH figure attributed to
     //   the WRONG NAME. A number being real does not make it trustworthy; the instrument must
     //   be able to say which question the number answers. The sentinel is what says it.
-    files: 2494, parked: 364, credited: 2130, titles: 20684, suiteTitles: 5782,
+    // ── RE-RECORDED 2026-08-22 BY WF-8A, CAUSE MEASURED AND DECOMPOSED ────────────
+    // 2,494/364/2,130/20,684/5,782 → the tuple below. THE CAUSE IS ONE NEW TEST FILE AND
+    // EIGHT ACCEPTANCE CASES. `censusAuthorization`: ODQ §309.3 (the beat re-filed to WF-8),
+    // §321.2a (the ordered minter-totality arm), §347.1(2) and §350 (the dispatch and its
+    // four rulings).
+    //   tests/lint/faithKindPools.walker.test.js ......... 11 titles, 1 suite title (NEW FILE)
+    //   tests/domain/patronFall.test.js .................. +8 titles (B1-B8, the existing describe)
+    //   tests/lint/heraldRouting.walker.test.js .......... +1 title  (the §321.2a arm)
+    //   tests/domain/chroniclersLetter.test.js ........... ZERO — see the measured note below
+    // ⛔⛔ THE C2 REMOVAL CONTRIBUTES NOTHING, AND THAT WAS THE MEMBER'S SHARPEST CENSUS
+    //   SURPRISE. The compile predicted `suiteTitles` NET ZERO — the new walker's one suite
+    //   title against the removed C2 describe's one. That prediction was REFUTED BY
+    //   ISOLATION: with C2's block reverted and every other edit in place, this walker
+    //   convicted the IDENTICAL titles and suiteTitles figures. `tests/domain/
+    //   chroniclersLetter.test.js` is NOT CREDITED by this census, so its describe and its
+    //   `it` were never counted and removing them moved nothing. The delta is the new
+    //   walker's alone. ⭐ A PARKED FILE SWALLOWS ITS TITLES: an arithmetic prediction over a
+    //   file the census cannot see is a prediction about the wrong denominator, and nothing
+    //   reds to say so. The `describe(` grep law agreed with the prediction and was ALSO
+    //   wrong, for the same reason — it counts source, not credited source.
+    // ⚠ BOTH ENDS READ AT THIS COMMIT'S OWN BASE (a09138d7, the MF-T2E landing). This member
+    //   was built at 27c250f9, re-derived whole at 5d18b4a0 when WF-1F took the CAS slot, and
+    //   re-derived WHOLE AGAIN here rather than carried across either move — the tuple was
+    //   byte-identical across the first rebase, which is exactly the shape of carry that
+    //   feels safe and is refused anyway.
+    // ⛔ EVERY FIGURE CONVICTED WITH A -1 SENTINEL, one key per run, each arm aborting unless
+    //   its message read literally "expected <N> to be -1" — MF-T2E's own recorded lesson,
+    //   adopted verbatim: a FRESH figure attributed to the WRONG NAME is the failure mode, and
+    //   an unchanged key (this member does not move `parked`) is where the mis-attribution
+    //   hides, because its assertion PASSES and the loop reads the NEXT key's number.
+    files: 2495, parked: 364, credited: 2131, titles: 20704, suiteTitles: 5783,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

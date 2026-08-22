@@ -282,29 +282,21 @@ describe('C2 — cap honesty (the letter must not claim completeness it cannot k
   });
 });
 
-describe('C2 — KIND_SECTION drift walker (every key is a genuinely minted kind)', () => {
-  it('every mapped kind exists as a minted candidateType or a literal impactKind', async () => {
-    const { KIND_SECTION } = await import('../../src/domain/display/chroniclersLetter.js');
-    const { readFileSync, readdirSync, statSync } = await import('node:fs');
-    const { join } = await import('node:path');
-    const walk = (dir, out = []) => {
-      for (const e of readdirSync(dir)) {
-        const p = join(dir, e);
-        if (statSync(p).isDirectory()) walk(p, out);
-        else if (/\.js$/.test(e) && !/\.test\./.test(e)) out.push(p);
-      }
-      return out;
-    };
-    const minted = new Set();
-    for (const f of walk('src/domain')) {
-      const src = readFileSync(f, 'utf8');
-      for (const m of src.matchAll(/candidateType:\s*['"]([a-z][a-z0-9_]*)['"]/g)) minted.add(m[1]);
-      for (const m of src.matchAll(/impactKind:\s*['"]([a-z][a-z0-9_]*)['"]/g)) minted.add(m[1]);
-    }
-    expect(minted.size).toBeGreaterThan(50); // non-vacuous scan
-    const dead = Object.keys(KIND_SECTION).filter((k) => !minted.has(k));
-    expect(dead).toEqual([]); // a struck/renamed mint must be struck here too
-    const valid = new Set(['wars', 'courts', 'trade', 'traditions', 'mercy', 'sundry']);
-    for (const v of Object.values(KIND_SECTION)) expect(valid.has(v)).toBe(true);
-  });
-});
+// ⛔⛔ THE C2 KIND_SECTION DRIFT BLOCK MOVED — A DECLARED RE-RECORD, NEVER A DELETION
+// (WF-8a, ODQ §321.2(a); the packet states it and so does this comment).
+//
+// Its whole substance now lives in tests/lint/heraldRouting.walker.test.js, in the arm titled
+// 'every KIND_SECTION key is MINTED or RULED, and no ruling is stale, orphaned or unreferenced':
+// the same literal candidateType/impactKind scan over src/domain, the same non-vacuity floor,
+// the same frozen-six section vocabulary check — and THREE things this block could not do.
+//
+// WHY IT MOVED RATHER THAN GAINED A TWIN. §321.2(a) ordered the minter check into the WALKER
+// ESTATE, and KIND_SECTION's own walker is heraldRouting.walker.test.js — the file that already
+// imports the table, pins its correspondence and reds on its divergences. Keeping a second copy
+// here would have made two homes for one truth, and the ruling escape would have been enforced
+// in one of them and foreclosed in the other, which is worse than either alone.
+//
+// WHAT THE RELOCATED ARM ADDS: the written-ruling escape (KIND_SECTION_MINTER_RULINGS, empty at
+// mint), the hygiene that keeps it honest (a stale ruling reds, an orphan ruling reds, a ruling
+// with no §-ref reds), and two in-suite §75 controls that drive the predicate BOTH ways on every
+// ordinary run. Nothing was weakened: a dead key still reds, and it reds in more ways.

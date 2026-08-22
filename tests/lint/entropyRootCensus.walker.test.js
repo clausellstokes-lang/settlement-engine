@@ -787,14 +787,22 @@ describe('EP-0 · the closure record, re-run rather than transcribed', () => {
     expect({ hits, calls }).toEqual({ hits: 9, calls: 6 });
   });
 
-  test('`hash01` CALLER modules = 14, and the figure is a caller count not a mention count', () => {
+  test('`hash01` CALLER modules = 15, and the figure is a caller count not a mention count', () => {
     // grep -rn "hash01(" src | grep -v "function hash01(" | cut -d: -f1 | sort -u | wc -l
-    // ⚠ THE VOLUME FROZE TEN. Measured at this base it is FOURTEEN — the four arrivals are the
-    // espionage trio and informationNews, landed by families EP never touches. That is why the
-    // baseline is DERIVED at each compile and never inherited.
+    // ⚠ THE VOLUME FROZE TEN. Measured at the EP base it was FOURTEEN — the four arrivals were
+    // the espionage trio and informationNews, landed by families EP never touches. That is why
+    // the baseline is DERIVED at each compile and never inherited.
+    // ⭐ RE-RECORDED 2026-08-22 BY WF-8A: 14 → 15, and the +1 is a DECLARED arrival rather than a
+    // discovered one. `src/domain/worldPulse/faithNews.js` is the estate's SIXTH phrased-kind
+    // registry and its picker copies the CURED `hash01` spelling verbatim from informationNews,
+    // which is caller fourteen — the same avalanche-before-multiply cure, taken for the same
+    // recorded reason (a raw `fnv % poolLength` aliases onto a parity class). ⛔ THE GROWTH IS
+    // THE POINT, NOT A COST: every new caller of the cured root is one fewer site that could
+    // have copied the uncured one, and the nine sites still carrying it are docketed as
+    // CR-IN1C-DRIFT. Authorized at ODQ §350 with the registry mint.
     const callers = ALL_FILES.filter((f) => read(f).split('\n')
       .some((l) => l.includes('hash01(') && !/function hash01\(/.test(l)));
-    expect(callers).toHaveLength(14);
+    expect(callers).toHaveLength(15);
     const mentions = ALL_FILES.filter((f) => read(f).includes('hash01'));
     expect(mentions.length, 'MENTIONS is a different, larger population').toBeGreaterThan(callers.length);
   });

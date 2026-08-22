@@ -18410,6 +18410,302 @@
       ]
     },
     {
+     "id": "WF-8A",
+     "status": "LANDED",
+     "packetPath": "docs/implementation/packets/fp/WF-8A.md",
+     "verifiedBase": "27c250f94bb7c5c799693a62985c5ddecd4b6c7c",
+     "changeManifest": [
+      {
+       "_note": "THE REGISTRY LEAF. FAITH_KIND_REGISTRY (one row), the cured hash01 keyed pick copied verbatim from informationNews.js with NO unseeded arm, faithReceipt, and the member's ONE authored value FAITH_NEWS_TUNING.LAST_ALTAR_SEVERITY (chair-signed at ODQ 350.2 R-3). Claimed by LAYER_PATTERNS.FAITH's own prefix, so no coupling row is owed.",
+       "action": "CREATE",
+       "path": "src/domain/worldPulse/faithNews.js"
+      },
+      {
+       "_note": "THE CORPUS, TRANSCRIBED FROM THE GOVERNED ANNEX. Five variants byte-identical to docs/content/RECEIPT_POOLS_FAITH.md's faith.extinction.last_altar block, which was authored 2026-08-02 and which nothing in the tree read until this member. The walker re-derives the whole pool from the document on every run.",
+       "action": "CREATE",
+       "path": "src/domain/worldPulse/faithReceiptPools.js"
+      },
+      {
+       "_note": "THE PRODUCER. The pre-prune name capture, WF-1b's landed advanceShares return consumed at last, and one receipt per creed with NO ROAD BACK. The two roads -- a neighbour still carrying the creed, and the settlement's own embedded snapshots that ensureReligionState reinstalls as dominant patron -- were found by EXECUTION and are fenced at the seam from data already in scope. Dark, the name map is never built and the mint is skipped.",
+       "action": "MODIFY",
+       "path": "src/domain/worldPulse/religiousContest.js"
+      },
+      {
+       "_note": "+1 EXACT_SECTION row. The faith_ family prefix would route the token free; the exact row is the refusal to take the cheap door, and it is what keeps the estate-wide registered-minus-routed honesty check still at its measured value of eight.",
+       "action": "MODIFY",
+       "path": "src/domain/realm/heraldRouting.js"
+      },
+      {
+       "_note": "+1 KIND_SECTION row -- the row WF-1d refused, resurrected WITH its live minter in the same commit, which is the condition ODQ 321.2(a) always set for it -- plus KIND_SECTION_MINTER_RULINGS, the written-ruling escape, EMPTY AT MINT by measurement.",
+       "action": "MODIFY",
+       "path": "src/domain/display/chroniclersLetter.js"
+      },
+      {
+       "_note": "+1 WHAT_PHRASES row, distinct in wording from the realm-scale pantheon_extinction sibling above it: one town's last altar, not a faith gone from the realm.",
+       "action": "MODIFY",
+       "path": "src/domain/display/settlementRumors.js"
+      },
+      {
+       "_note": "+1 HBF- classification row (ODQ 85.4a). HBF-34 is the THIRD member of the HBF-07 / HBF-33 prose-pick family and takes their DEFER disposition rather than a fresh reading; all three close together or not at all.",
+       "action": "MODIFY",
+       "path": "src/domain/worldPulse/habitForkRegistry.js"
+      },
+      {
+       "_note": "NEW FILE -- the family walker every registry family owes. Both-direction exact census, the annex re-derivation through the shared fail-closed reader, the orthogonal slot witness, both eligibility arms, TWO in-suite mutant controls proven to THROW, and the DEITY DOCTRINE asserted on rendered prose. It imports BOTH new leaves directly, which is what gives them lit coverage rather than debt. ONE literal describe, straight-line tests. This is the NAMED interior red.",
+       "action": "TEST",
+       "path": "tests/lint/faithKindPools.walker.test.js"
+      },
+      {
+       "_note": "REGISTRIES 10 -> 11, REGISTERED_KIND_COUNT 112 -> 113, ROUTED_TOKENS 378 -> 379, the small-family exact list gains FAITH in the order the arm's OWN OUTPUT gave. The unvoiced backlog and the registered-minus-routed difference of eight are UNMOVED, which is the measured consequence of the kind carrying a desk. Every figure convicted by execution, one at a time.",
+       "action": "TEST",
+       "path": "tests/lint/kindPoolFloors.walker.test.js"
+      },
+      {
+       "_note": "THE 321.2a MINTER-TOTALITY ARM, ONE new test: every KIND_SECTION key minted OR ruled, no stale ruling, no orphan ruling, every ruling spelling a section-ref, and the letter's frozen-six vocabulary check relocated with it. THREE in-suite controls drive the predicate both ways on every run. Convicted by three planted defects, each restored cmp-exact.",
+       "action": "TEST",
+       "path": "tests/lint/heraldRouting.walker.test.js"
+      },
+      {
+       "_note": "DEFER_CEILING 30 -> 31, exact in both directions. Not discretionary: HBF-34 is discovered by the walker's own KEYED_RACE signature, its honest disposition is DEFER, and leaving the ceiling at 30 would leave the tree red and make the ruled row unexecutable. The IN-1c-a terminal 24c61190 records this same one-row-plus-one-constant shape verbatim.",
+       "action": "TEST",
+       "path": "tests/lint/chooserTotality.walker.test.js"
+      },
+      {
+       "_note": "C2's KIND_SECTION drift block REMOVED with a pointer comment -- a DECLARED re-record under ODQ 321.2(a), never a silent deletion. Its substance is relocated, not weakened: the new arm reds on a dead key in more ways than the old one did.",
+       "action": "TEST",
+       "path": "tests/domain/chroniclersLetter.test.js"
+      },
+      {
+       "_note": "B1-B8 as eight straight-line it() calls inside the EXISTING literal describe. No new file, no new describe, no .each, no runIf. Every fixture was RUN AND PRINTED before its pin was written, and the first run REFUTED the compile's mint rule. The step/drive helpers surrender the fold's outcome stream additively.",
+       "action": "TEST",
+       "path": "tests/domain/patronFall.test.js"
+      },
+      {
+       "_note": "THE A6 DECLARED RE-RECORD, COMMENT ONLY. Every assertion is unchanged and still true -- proven by a diff filter showing zero non-comment changed lines -- and only the justification is re-recorded, because execution refuted its second clause.",
+       "action": "TEST",
+       "path": "tests/domain/warTermination.test.js"
+      },
+      {
+       "_note": "A SECOND, UNDISCOVERED TRANSCRIPTION of the kind censuses, found by running this file at the rebase base after WF-1F touched it -- no packet named it and the compile's register table listed only kindPoolFloors. WF-1c's A5 re-derives the same six figures from its OWN hand-copied registry list, so a chair-authorized registration reds it. FOUR figures re-recorded as a DECLARED act with the authorizing decisions named, the FAITH registry added to the local list, and the title taking the rename door so census cardinality stands still. WF-1c's own claim -- its kind routes by prefix and files no exact row -- is untouched and still asserted.",
+       "action": "TEST",
+       "path": "tests/domain/pantheon.test.js"
+      },
+      {
+       "_note": "THE SIX HAND-KEYED PROSE-NUMERIC ADDRESSES, RE-ADDRESSED AND NEVER DELETED (WF-PREAMBLE P4). The compile ruled this obligation NOT INCURRED on a scan that found no row keyed to a touched file; refuted by the sweep -- SIX rows key religiousContest.js, the same six WF-1a paid for, and the fold edit pushed both addresses down. `line` is the ONLY field that changed on exactly six rows; 413 rows in, 413 out, zero added, zero removed, asserted field-by-field.",
+       "action": "REGISTER",
+       "path": "tests/lint/.prose-numerics-baseline.json"
+      },
+      {
+       "_note": "THE `hash01` CALLER CENSUS, 14 -> 15, a DECLARED arrival. faithNews.js is the fifteenth caller because its picker copies the CURED avalanche-before-multiply spelling from informationNews (the fourteenth) rather than the uncured `fnv % poolLength` nine sites still carry. The growth is the point: every caller of the cured root is one fewer site that could have copied the uncured one. Found only by the full-gate sweep -- no packet named this instrument.",
+       "action": "TEST",
+       "path": "tests/lint/entropyRootCensus.walker.test.js"
+      },
+      {
+       "_note": "The lighting census, re-derived WHOLE by placeholder-and-convict, five figures in sequence. The TRUE BASE was re-measured with every one of this member's test edits held aside and reproduced the compile's figures exactly; the suite-title prediction of net zero was then REFUTED by isolation and corrected by measurement.",
+       "action": "TEST",
+       "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+      },
+      {
+       "_note": "ODQ 102.2 -- the mandatory mutation-coverage row for the new tests/lint file. ONE rationale entry plus its invariants row, inserted SURGICALLY: the diff is five inserted lines and zero deleted, after a first attempt that re-serialized the file was thrown away.",
+       "action": "REGISTER",
+       "path": "scripts/mutation-coverage-manifest.json"
+      },
+      {
+       "action": "DOC",
+       "path": "docs/implementation/packets/fp/WF-8A.md"
+      }
+     ],
+     "requiredSymbols": [
+      {
+       "_note": "THE FOLD THIS MEMBER'S ONE PRODUCTION CONSUMER LIVES IN.",
+       "path": "src/domain/worldPulse/religiousContest.js",
+       "symbol": "export function advanceReligionStates"
+      },
+      {
+       "_note": "WF-1b's landed seam. It returns the refs the prune deleted and the return was DISCARDED at this base; this member consumes it.",
+       "path": "src/domain/worldPulse/religionState.js",
+       "symbol": "export function advanceShares"
+      },
+      {
+       "_note": "THE OUTER GATE. Deity PRESENCE, not config -- which is why dark is byte-identical twice over.",
+       "path": "src/domain/worldPulse/subsystemActivation.js",
+       "symbol": "export function isSubsystemActive"
+      },
+      {
+       "path": "src/domain/realm/heraldRouting.js",
+       "symbol": "export const EXACT_SECTION"
+      },
+      {
+       "path": "src/domain/realm/heraldRouting.js",
+       "symbol": "export const KIND_SECTION_CORRESPONDENCE"
+      },
+      {
+       "_note": "THE TABLE THE REFUSED ROW REJOINS.",
+       "path": "src/domain/display/chroniclersLetter.js",
+       "symbol": "export const KIND_SECTION"
+      },
+      {
+       "path": "src/domain/display/settlementRumors.js",
+       "symbol": "export const WHAT_PHRASES"
+      },
+      {
+       "_note": "THE GENERIC TRANSPORT that makes the kernel-wiring bill ZERO: it stamps candidateType as the entry's impactKind.",
+       "path": "src/domain/worldPulse/worldPulseFeedCuration.js",
+       "symbol": "export function newsEntryForOutcome"
+      },
+      {
+       "path": "src/domain/worldPulse/worldPulseFeedCuration.js",
+       "symbol": "export function isDriftOnlyOutcome"
+      },
+      {
+       "_note": "THE CURED PICK'S HASH. Avalanched before the multiply, which is why the choice does not alias onto a parity class.",
+       "path": "src/domain/region/contestMath.js",
+       "symbol": "export function hash01"
+      },
+      {
+       "_note": "THE ESTATE'S CONVERGED RESOLVER for an uncarried ref, and an extinct creed is definitionally uncarried.",
+       "path": "src/domain/display/deityNames.js",
+       "symbol": "export function deityDisplayNameFromRef"
+      },
+      {
+       "path": "src/domain/worldPulse/habitForkRegistry.js",
+       "symbol": "export const HABIT_FORK_REGISTRY"
+      },
+      {
+       "_note": "THE TEMPLATE THIS FAMILY COPIES, including its cured picker and its row-constructor parameter order.",
+       "path": "src/domain/worldPulse/informationNews.js",
+       "symbol": "export const INFORMATION_KIND_REGISTRY"
+      },
+      {
+       "_note": "CREATED BY THIS MEMBER. The one-row governed registry.",
+       "path": "src/domain/worldPulse/faithNews.js",
+       "symbol": "export const FAITH_KIND_REGISTRY"
+      },
+      {
+       "_note": "CREATED BY THIS MEMBER. The one authored value, owner-reviewable under 42/43.",
+       "path": "src/domain/worldPulse/faithNews.js",
+       "symbol": "export const FAITH_NEWS_TUNING"
+      },
+      {
+       "_note": "CREATED BY THIS MEMBER. The outcome builder the fold pushes.",
+       "path": "src/domain/worldPulse/faithNews.js",
+       "symbol": "export function faithReceipt"
+      },
+      {
+       "_note": "CREATED BY THIS MEMBER. The annex-verbatim corpus.",
+       "path": "src/domain/worldPulse/faithReceiptPools.js",
+       "symbol": "export const FAITH_RECEIPTS"
+      },
+      {
+       "_note": "CREATED BY THIS MEMBER. The 321.2a written-ruling escape, empty at mint by measurement.",
+       "path": "src/domain/display/chroniclersLetter.js",
+       "symbol": "export const KIND_SECTION_MINTER_RULINGS"
+      }
+     ],
+     "acceptanceCases": [
+      {
+       "id": "B1",
+       "case": "A CARRIER WITHDRAWAL DARKENS THE LAST ALTARS, THROUGH THE REAL PULSE. Four neighbours change their own patron rite by the doctrine path at pulse six; nobody carries the old creeds to the town any more, and its last altars to them go dark in that same pulse. Each creed is named EXACTLY ONCE across twenty-two pulses -- the arm the first implementation failed -- and each obituary carries the creed's AUTHORED snapshot name and the town's name, read off the rendered headline rather than off the id."
+      },
+      {
+       "id": "B2",
+       "case": "THE NEAR-MISS NEGATIVE, with its positive companion travelling the identical filter. The identical ring, seed, pulse count and impactKind filter with NO withdrawal produces no obituary at all, while the withdrawal arm in the same test produces several; and the ring is proven to have really run and really carried faith, so the emptiness is a settlement whose creeds all still have a road home rather than a fixture that did nothing."
+      },
+      {
+       "id": "B3",
+       "case": "PER DELETED CREED, NEVER PER TICK. Three altars go dark at ONE pulse and there are THREE beats, all the same tick and the same town and all distinct creeds. A per-tick mint would read exactly one here."
+      },
+      {
+       "id": "B4",
+       "case": "BOTH ROADS BACK FENCED, EACH CONVICTED WITH ITS DELETION PROVEN FIRST. Road two: the town's config names its patron forever, so ensureReligionState reinstalls it as dominant; the creed is asserted PRESENT one tick in and ABSENT at the end of the run -- a real deletion -- and announced nowhere. Road one: the held ring announces none of its deleted creeds while the withdrawn ring announces the same creeds by name."
+      },
+      {
+       "id": "B5",
+       "case": "DORMANCY. Absent and false are byte-identical in religion state AND in the fold's outcome stream on a deity-BEARING fixture; the LITERAL faithUnseatingEnabled true drive moves a fenced byte (the lit-mutant control, without which the differential is blind by design); the fixture is proven to really carry faith; and the rendered feed carries no obituary dark, read through the same filter that finds them lit."
+      },
+      {
+       "id": "B6",
+       "case": "REGISTRATION TOTALITY BOTH DIRECTIONS, FROM THE KIND THE FIXTURE ACTUALLY PRODUCED rather than a literal typed in the test. The pool clears its derived floor, requiredSlots is parallel, all three registration homes carry the kind, it is EXPLICITLY routed rather than riding the family prefix, and the registry's declared desk is the desk the router actually answers."
+      },
+      {
+       "id": "B7",
+       "case": "THE SURFACED ENTRY IS A RECORD, ADDRESS-COMPLETE AND GAME-GRADE, ON THE APPLIED PATH -- asserted on the entry the REAL pulse put in the feed. Applied not queued; notable not major, because the severity sits below the major-entry line; settlement scope; the typed action, the place, the source event that encodes both settlement and creed, and a reason naming the parties; and no numeral, engine slug or template residue on composed reader output."
+      },
+      {
+       "id": "B8",
+       "case": "THE PICK IS DETERMINISTIC ON ITS KEY AND THE POOL GENUINELY SPREADS. Same key, same sentence -- forever. Different (settlement, creed) keys reach at least two distinct variants, with the witness keys taken from the fixture's OWN creeds rather than authored strings, and the engine's own obituaries are shown not to be all one line."
+      }
+     ],
+     "checks": [
+      [
+       "npx",
+       "vitest",
+       "run",
+       "tests/lint/faithKindPools.walker.test.js",
+       "tests/lint/kindPoolFloors.walker.test.js",
+       "tests/lint/heraldRouting.walker.test.js",
+       "tests/lint/chooserTotality.walker.test.js",
+       "tests/lint/phrasedKindPools.walker.test.js",
+       "tests/lint/mutationCoverageManifest.test.js",
+       "tests/lint/negativeAssertionAnchor.walker.test.js",
+       "tests/lint/couplingInclusion.walker.test.js",
+       "tests/lint/sovereigntyLightingContract.walker.test.js",
+       "tests/lint/sizeBaseline.test.js",
+       "tests/lint/heraldContaminationFence.test.js",
+       "tests/lint/wizardNewsAuthoring.walker.test.js",
+       "tests/domain/habitForkRegistry.test.js",
+       "tests/domain/candidateTypeVoicePhrasing.walker.test.js",
+       "tests/domain/impactKindWalkers.test.js",
+       "tests/domain/chroniclersLetter.test.js",
+       "tests/domain/heraldIntegrity.test.js",
+       "tests/domain/patronFall.test.js",
+       "tests/domain/religionState.test.js",
+       "tests/domain/religiousContest.test.js",
+       "tests/domain/warTermination.test.js",
+       "tests/property/worldpulseDeityGolden.test.js",
+       "tests/property/mechanismLitCoverage.test.js"
+      ],
+      [
+       "npx",
+       "vitest",
+       "run",
+       "tests/lint",
+       "tests/build"
+      ],
+      [
+       "npx",
+       "eslint",
+       "src/domain/worldPulse/faithNews.js",
+       "src/domain/worldPulse/faithReceiptPools.js",
+       "src/domain/worldPulse/religiousContest.js",
+       "src/domain/worldPulse/habitForkRegistry.js",
+       "src/domain/realm/heraldRouting.js",
+       "src/domain/display/chroniclersLetter.js",
+       "src/domain/display/settlementRumors.js"
+      ],
+      [
+       "npm",
+       "run",
+       "typecheck:ratchet"
+      ],
+      [
+       "npm",
+       "run",
+       "typecheck:domain:strict"
+      ],
+      [
+       "npm",
+       "run",
+       "validate:packets"
+      ],
+      [
+       "npm",
+       "run",
+       "check:tail"
+      ]
+     ]
+    },
+    {
       "id": "MF-T2D",
       "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T2D.md",

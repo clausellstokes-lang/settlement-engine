@@ -459,8 +459,25 @@ describe('WR-1 cause dissolution', () => {
     expect(faithWar[0].read.split('#')[0]).toBe('src/domain/worldPulse/warTermination.js');
     expect(faithWar[0].counterforce.split('#')[0]).toBe('src/domain/worldPulse/warTermination.js');
     expect(faithWar[0].flags).toContain('faithUnseatingEnabled');
-    // The Chronicle row is REFUSED on a measurement: this member mints a receipt kind, not
-    // an impactKind, so a KIND_SECTION row would have no minter and nothing would red on it.
+    // ⛔ A DECLARED RE-RECORD OF THIS JUSTIFICATION — COMMENT ONLY (WF-8a, ODQ §309 / §321.2a).
+    // Every assertion below is unchanged and still true; only the reasoning is re-recorded, and
+    // it is re-recorded because execution refuted half of it.
+    //
+    // WHAT STANDS. The Chronicle row is REFUSED for WF-1d's OWN kinds on a measurement that has
+    // not moved: this member mints a receipt kind, not an impactKind, so `war_termination_read`
+    // and the `patron_fall*` family earn no KIND_SECTION row. Both absences are asserted below.
+    //
+    // WHAT WAS WRONG. The old clause said such a row "would have no minter and nothing would red
+    // on it". The second half was already false when it was written — a planted dead key reds
+    // the KIND_SECTION minter check, which has existed since 1477c284 — and it is doubly false
+    // now: WF-8a relocated that check into tests/lint/heraldRouting.walker.test.js and gave it a
+    // written-ruling escape plus stale/orphan hygiene. A minter-less key reds there, and only
+    // there. The refusal was right; the reason it gave was not the reason.
+    //
+    // ⭐ AND THE SETTLEMENT OBITUARY IS THE COUNTER-EXAMPLE, LAWFULLY. WF-8a lands
+    // `faith_last_altar_dark` in KIND_SECTION WITH its live minter in the same commit — the
+    // condition §321.2(a) always set for the row it refused. It collides with none of the
+    // absences below, which is why this pin flips in JUSTIFICATION and not in assertion.
     const sectionKeys = Object.keys(KIND_SECTION);
     expect(sectionKeys).toContain('pantheon_extinction');
     expect(sectionKeys).not.toContain('war_termination_read'); // anchored: the pantheon_extinction membership asserted above proves KIND_SECTION loaded and carries the faith family, so this is a populated-table negative

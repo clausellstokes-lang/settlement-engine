@@ -54,7 +54,7 @@ import { TABLE_EVENT_KINDS } from '../../src/domain/tableEvents.js';
 import { REGIONAL_CHANNEL_TYPES } from '../../src/domain/region/graph.js';
 import { DEITY_TIER_KEYS } from '../../src/domain/customContentSchema.js';
 import { WHAT_PHRASES } from '../../src/domain/display/settlementRumors.js';
-import { KIND_SECTION } from '../../src/domain/display/chroniclersLetter.js';
+import { KIND_SECTION, KIND_SECTION_MINTER_RULINGS } from '../../src/domain/display/chroniclersLetter.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const DOMAIN = join(ROOT, 'src', 'domain');
@@ -95,6 +95,30 @@ const PROPOSAL_KINDS = Object.freeze([
 
 /** Expand a template family over a closed base domain. */
 function expand(prefix, bases) { return bases.map((b) => `${prefix}${b}`); }
+
+/** The letter's own closed section vocabulary — the frozen six KIND_SECTION values. */
+const LETTER_SECTIONS = Object.freeze(['wars', 'courts', 'trade', 'traditions', 'mercy', 'sundry']);
+/** A ruling's value must resolve to a decision, not to a shrug. */
+const ODQ_REF_RE = /§\d+(?:\.\d+)*[a-z]?/;
+
+/**
+ * THE MINTER-TOTALITY PREDICATE (ODQ §321.2a), as a PURE local helper so both of its directions
+ * can be driven as in-suite §75 controls rather than argued about in a comment.
+ *
+ * A `KIND_SECTION` key earns its place by having a live minter — a literal `candidateType:` or
+ * `impactKind:` somewhere in src/domain — OR by carrying a written chair ruling that lets it
+ * stand without one. Returns the keys that have NEITHER.
+ *
+ * @param {Record<string,string>} sections  the KIND_SECTION map
+ * @param {Set<string>} minted  every scanned candidateType/impactKind literal
+ * @param {Record<string,string>} rulings  KIND_SECTION_MINTER_RULINGS
+ * @returns {string[]} sorted keys that are neither minted nor ruled
+ */
+function minterlessKeys(sections, minted, rulings) {
+  return Object.keys(sections)
+    .filter((key) => !minted.has(key) && !Object.hasOwn(rulings, key))
+    .sort();
+}
 
 describe('Herald routing table — totality + single-home + consistency', () => {
   test('the six sections are exactly the frozen set', () => {
@@ -229,6 +253,73 @@ describe('Herald routing table — totality + single-home + consistency', () => 
   test('every recorded divergence names a real KIND_SECTION key (no stale divergence)', () => {
     const stale = Object.keys(KIND_SECTION_DIVERGENCES).filter((k) => !(k in KIND_SECTION));
     expect(stale).toEqual([]);
+  });
+
+  test('every KIND_SECTION key is MINTED or RULED, and no ruling is stale, orphaned or unreferenced', () => {
+    // ⭐⭐ THE §321.2a MINTER-TOTALITY ARM, AND IT ARRIVES BY RELOCATION RATHER THAN BY MINT.
+    // This check's substance lived in tests/domain/chroniclersLetter.test.js's C2 block since
+    // 1477c284, where it did real work — a planted dead key reds it — but it lived in the wrong
+    // estate and it was ABSOLUTE: a key a chair had lawfully ruled may stand without a minter
+    // had no way to say so, so the only ways to green the tree were to delete a ruled row or to
+    // mint a producer nobody wanted. §321.2(a) ordered the arm into the walker estate with a
+    // written-ruling escape and the hygiene that keeps the escape honest. WF-8a lands all three
+    // and REMOVES the C2 block in the same commit — a DECLARED re-record, one truth, one home.
+    //
+    // ⛔ THE ESCAPE IS EMPTY AT MINT, which is a measurement rather than a starting point: every
+    // key in the table today is genuinely minted, so there is nothing to rule.
+    const minted = new Set(scannedLiterals());
+    // NON-VACUITY FIRST. Every claim below is worthless if the source scan returned nothing, and
+    // "no dead keys" is trivially true against an empty minted set only in the wrong direction —
+    // it would report EVERY key dead — while "no stale rulings" would pass silently.
+    expect(minted.size).toBeGreaterThan(50);
+    expect(Object.keys(KIND_SECTION).length).toBeGreaterThan(50);
+
+    // (i) TOTALITY. To comply when this reds: mint the producer, strike the row, or record a
+    // chair ruling in KIND_SECTION_MINTER_RULINGS with the §-ref that authorizes it.
+    expect(
+      minterlessKeys(KIND_SECTION, minted, KIND_SECTION_MINTER_RULINGS),
+      'a KIND_SECTION key has no minter and no written ruling — a struck or renamed mint must be'
+      + ' struck here too, and a row that is meant to outlive its producer needs its §-ref',
+    ).toEqual([]);
+
+    // (ii) NO STALE RULING. A ruling outliving the absence it excused is a standing licence
+    // nobody reviewed; the moment a key is minted again its ruling must go.
+    expect(
+      Object.keys(KIND_SECTION_MINTER_RULINGS).filter((key) => minted.has(key)).sort(),
+      'a minter ruling names a key that IS minted — delete the ruling, the exception is spent',
+    ).toEqual([]);
+
+    // (iii) NO ORPHAN RULING. A ruling for a key the letter no longer carries is a slot any
+    // future key could occupy without review.
+    expect(
+      Object.keys(KIND_SECTION_MINTER_RULINGS).filter((key) => !(key in KIND_SECTION)).sort(),
+      'a minter ruling names a key KIND_SECTION does not carry — delete the orphan',
+    ).toEqual([]);
+
+    // (iv) EVERY RULING SPELLS A DECISION. A free-text excuse is how an escape becomes a habit.
+    expect(
+      Object.entries(KIND_SECTION_MINTER_RULINGS)
+        .filter(([, ref]) => !ODQ_REF_RE.test(String(ref)))
+        .map(([key]) => key).sort(),
+      'a minter ruling carries no resolvable §-ref — name the decision that authorizes it',
+    ).toEqual([]);
+
+    // (v) THE SECTION VOCABULARY, which C2 carried and which moves with it: every value is one
+    // of the letter's frozen six.
+    expect(
+      [...new Set(Object.values(KIND_SECTION))].filter((v) => !LETTER_SECTIONS.includes(v)).sort(),
+      'a KIND_SECTION value is outside the letter\'s frozen six section ids',
+    ).toEqual([]);
+
+    // ── THE IN-SUITE §75 CONTROLS, EXECUTED ON EVERY ORDINARY RUN ──────────────────
+    // Both directions of the predicate, driven on fabricated tables so the arms above cannot be
+    // green because the predicate stopped answering. A dead key CONVICTS; the same dead key with
+    // a ruling CLEARS. Without the second, the escape would be untested machinery.
+    expect(minterlessKeys({ zz_dead_row: 'sundry' }, minted, {})).toEqual(['zz_dead_row']);
+    expect(minterlessKeys({ zz_dead_row: 'sundry' }, minted, { zz_dead_row: '§321.2a' })).toEqual([]);
+    // …and a MINTED key is never reported dead, whatever the rulings say — the control that
+    // stops a predicate returning every key from satisfying the first control above.
+    expect(minterlessKeys({ conquest: 'wars' }, minted, {})).toEqual([]);
   });
 
   describe('heraldSectionOfRecord — structural precedence', () => {

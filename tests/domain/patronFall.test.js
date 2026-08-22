@@ -30,6 +30,14 @@ import { WORLD_SNAPSHOT_HARD_DENY, WORLD_SNAPSHOT_PUBLIC_LEDGER_ALLOWLIST } from
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { createPRNG } from '../../src/kernel/prng.js';
+// WF-8a — the settlement extinction obituary's acceptance surface (B1-B8).
+import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/pulseKernel.js';
+import { newsEntryForOutcome, isDriftOnlyOutcome } from '../../src/domain/worldPulse/worldPulseFeedCuration.js';
+import { SECTION_OF, isExplicitlyRouted } from '../../src/domain/realm/heraldRouting.js';
+import { KIND_SECTION } from '../../src/domain/display/chroniclersLetter.js';
+import { WHAT_PHRASES } from '../../src/domain/display/settlementRumors.js';
+import { FREQUENCY_FLOORS } from '../helpers/kindPoolWalker.js';
+import { FAITH_KIND_REGISTRY, FAITH_KINDS, faithLine } from '../../src/domain/worldPulse/faithNews.js';
 
 const NOW = '2026-01-01T00:00:00.000Z';
 /** The SPREAD-lane rules argument. Distinct from worldState.simulationRules, which is
@@ -80,16 +88,21 @@ function step(campaign, saves, rules) {
     const patron = st ? patronSnapshot(st) : null;
     return patron ? { ...s, settlement: { ...s.settlement, config: { ...s.settlement.config, primaryDeityRef: patron._deityRef, primaryDeitySnapshot: patron } } } : s;
   });
-  return { campaign: { ...campaign, worldState: nextWS }, saves: nextSaves };
+  return { campaign: { ...campaign, worldState: nextWS }, saves: nextSaves, outcomes: r.outcomes };
 }
 
 function drive(seed, ticks, hook = null) {
   let { campaign, saves } = seed;
+  /** WF-8a: the fold's own outcome stream, kept so the obituary can be read at its source as
+   *  well as at the feed. Additive — every existing caller destructures world/campaign/saves. */
+  const outcomes = [];
   for (let t = 0; t < ticks; t++) {
     if (hook) ({ campaign, saves } = hook(t, campaign, saves) || { campaign, saves });
-    ({ campaign, saves } = step(campaign, saves, SPREAD));
+    const stepped = step(campaign, saves, SPREAD);
+    campaign = stepped.campaign; saves = stepped.saves;
+    for (const o of stepped.outcomes) outcomes.push({ tick: campaign.worldState.tick - 1, o });
   }
-  return { world: campaign.worldState, campaign, saves };
+  return { world: campaign.worldState, campaign, saves, outcomes };
 }
 
 /** Re-assign the patron the way the DM's SET_PRIMARY_DEITY verb does: the embed field set
@@ -143,6 +156,79 @@ function schism() {
   x.settlement.config.cultDeitySnapshots = [ASHGRAVE, DAWNWELL].map((d) => ({ ...d, lawAxis: 'neutral' }));
   return region([x], [], 'disc-a', { simulationRules: { faithUnseatingEnabled: true } });
 }
+
+
+// ── WF-8a · THE SETTLEMENT EXTINCTION OBITUARY — MEASURED FIXTURES (B1-B8) ────────────
+//
+// ⛔ EVERY FIGURE BELOW WAS RUN AND PRINTED BEFORE ITS ASSERTION WAS WRITTEN, and the first run
+// REFUTED the packet's own mint rule. A bare per-deletion mint produced TWENTY-FIVE obituaries
+// for THREE creeds in one sixteen-tick village: `pruneSuppressed` genuinely deletes an entry,
+// and a creed with a ROAD BACK re-enters next tick and is deleted again. Two roads exist and
+// both were found by execution — a neighbour still CARRYING the creed, and the settlement's own
+// EMBEDDED snapshots, which `ensureReligionState` re-installs as the dominant patron. The fold
+// closes both, and B4 convicts each one separately.
+//
+// ⭐ THE STORY THE REACHABLE FIXTURE TELLS is the one the beat is for: four neighbours change
+// their own patron rite (the DM verb), nobody carries the old creeds any more, and the last
+// altars to them in Zed go dark — each creed named exactly ONCE, ever.
+const SUCCESSORS = ['Quill', 'Rook', 'Sable', 'Tarn', 'Umber', 'Vane', 'Wold', 'Yarrow'];
+const RING_NAMES = ['Alder', 'Bramble', 'Cinder', 'Dunmar', 'Ember', 'Fenwick', 'Gale', 'Holt'];
+const TEMPERS = ['peaceful', 'warlike', 'neutral'];
+const ALIGNS = ['good', 'evil', 'neutral'];
+const OBITUARY = 'faith_last_altar_dark';
+
+/** A ring of metropolis neighbours, each bearing its own creed, around one small town `z`. */
+function ring(n, tier, rules) {
+  const target = save('z', 'Zed', deity('Zenith', 'neutral', 'neutral', 'major'), tier);
+  const neigh = [];
+  for (let i = 0; i < n; i += 1) {
+    neigh.push(save(`n${i}`, `N${i}`,
+      deity(RING_NAMES[i], TEMPERS[i % 3], ALIGNS[Math.floor(i / 3) % 3], i % 2 ? 'major' : 'minor'),
+      'metropolis'));
+  }
+  return region([target, ...neigh],
+    neigh.map((sv) => ({ id: `edge.${sv.id}.z`, from: sv.id, to: 'z', relationshipType: 'allied' })),
+    'reach', { simulationRules: { religionDynamicsEnabled: true, ...rules } });
+}
+
+/**
+ * Drive the REAL pulse. `withdrawAt`/`withdrawCount` apply the DM's SET_PRIMARY_DEITY verb to
+ * that many neighbours at that pulse — the carrier withdrawal — through the same embed field set
+ * `reassign` uses. Returns every UNIQUE obituary entry the feed ever carried.
+ */
+function pulseRun(seed, pulses, withdrawAt = -1, withdrawCount = 0) {
+  let { campaign, saves } = seed;
+  const seen = [];
+  for (let i = 0; i < pulses; i += 1) {
+    if (i === withdrawAt) {
+      for (let k = 0; k < withdrawCount; k += 1) {
+        saves = reassign(saves, `n${k}`, deity(SUCCESSORS[k], TEMPERS[(k + 1) % 3], ALIGNS[(k + 1) % 3], 'major'));
+      }
+    }
+    const res = simulateCampaignWorldPulse({ campaign, saves, interval: 'one_month', commit: false, now: NOW });
+    for (const e of (res?.wizardNews?.entries || [])) {
+      if (e.impactKind === OBITUARY && !seen.some((f) => f.id === e.id)) seen.push({ pulse: i, ...e });
+    }
+    campaign = { ...campaign, worldState: res.worldState, regionalGraph: res.regionalGraph || campaign.regionalGraph, wizardNews: res.wizardNews };
+    if (res.settlementUpdates) {
+      saves = saves.map((sv) => {
+        const u = res.settlementUpdates.find((x) => String(x.id) === String(sv.id));
+        return u && u.settlement ? { ...sv, settlement: u.settlement } : sv;
+      });
+    }
+  }
+  return seen;
+}
+
+/** The creed a beat names, off its own outcome id. */
+const creedOf = (entry) => String(entry.sourceEventId).split('lu_')[1];
+
+/** MEASURED: the withdrawal at pulse 6 darkens three altars at pulse 6 and nothing thereafter. */
+const WITHDRAWN = pulseRun(ring(8, 'village', { faithUnseatingEnabled: true }), 22, 6, 4);
+/** The SAME ring with no withdrawal at all — the near-miss negative's arm. */
+const HELD = pulseRun(ring(8, 'village', { faithUnseatingEnabled: true }), 22);
+/** The same withdrawal, dark. */
+const WITHDRAWN_DARK = pulseRun(ring(8, 'village', {}), 22, 6, 4);
 
 describe('WF-1a · the typed patron fall — the flag, the leaf, the ring and the classifier', () => {
   it('A1 · a sustained organic share flip appends exactly one displaced record naming the OUTGOING patron', () => {
@@ -508,5 +594,160 @@ describe('WF-1a · the typed patron fall — the flag, the leaf, the ring and th
     expect(spectacle.test(fold)).toBe(false);
     // NON-VACUITY OF THAT SCAN ITSELF: the predicate is real and the regex finds it at its home.
     expect(spectacle.test(readFileSync(join(ROOT, 'src', 'domain', 'traditions', 'pilgrimage.js'), 'utf8'))).toBe(true);
+  });
+
+  // ── WF-8a · B1-B8 · THE SETTLEMENT EXTINCTION OBITUARY ──────────────────────────────
+
+  it('B1 · a carrier withdrawal darkens the last altars, each creed named exactly ONCE, through the REAL pulse', () => {
+    // Four neighbours change their own patron rite at pulse 6. Nobody carries the old creeds to
+    // Zed any more, and Zed's last altars to them go dark in that same pulse.
+    expect(WITHDRAWN.length).toBeGreaterThanOrEqual(1);
+    const creeds = WITHDRAWN.map(creedOf);
+    // ⛔ EXACTLY ONCE, EVER. This is the arm the first implementation failed: a creed with a road
+    // back is deleted and re-admitted every tick, and a bare per-deletion mint said so every time.
+    expect(new Set(creeds).size).toBe(creeds.length);
+    // The obituary names the creed by its AUTHORED snapshot name and the town by name — never a
+    // ref slug — and both are read off the rendered headline rather than off the id.
+    for (const entry of WITHDRAWN) {
+      const authored = RING_NAMES.find((nm) => nm.toLowerCase() === creedOf(entry));
+      expect(authored, `${creedOf(entry)}: no authored name`).toBeTruthy();
+      expect(entry.headline).toContain(authored);
+      expect(entry.headline).toContain('Zed');
+    }
+  });
+
+  it('B2 · the same ring with NO withdrawal produces no obituary at all (the near-miss negative)', () => {
+    // ⛔ THE POSITIVE COMPANION TRAVELS THE SAME FILTER. `HELD` and `WITHDRAWN` are the identical
+    // ring, the identical seed and the identical twenty-two pulses, read through the identical
+    // impactKind filter inside `pulseRun`; the ONLY difference is the withdrawal. Without this
+    // arm the emptiness below would pass just as happily against a filter that had stopped
+    // filtering, a feed that never populated, or a beat nothing could ever mint.
+    expect(WITHDRAWN.length).toBeGreaterThanOrEqual(1);
+    expect(HELD).toEqual([]);
+    // …and the ring really did run and really did produce faith activity, so the empty result is
+    // a settlement whose creeds all still have a road home rather than a fixture that did nothing.
+    const { world } = drive(ring(8, 'village', { faithUnseatingEnabled: true }), 6);
+    expect(Object.keys(world.religionStates.z.deities).length).toBeGreaterThan(1);
+  });
+
+  it('B3 · the beat is per DELETED CREED, never per tick — three altars, three beats, one pulse', () => {
+    const atWithdrawal = WITHDRAWN.filter((e) => e.pulse === 6);
+    expect(atWithdrawal.length).toBeGreaterThanOrEqual(2);
+    // Every one of them is the SAME pulse and the SAME town, and they are distinct creeds — so
+    // the count is the creeds', not the tick's. A per-tick mint would read exactly one here.
+    expect(new Set(atWithdrawal.map(creedOf)).size).toBe(atWithdrawal.length);
+    expect(new Set(atWithdrawal.map((e) => e.tick)).size).toBe(1);
+    for (const e of atWithdrawal) expect(e.settlementIds).toEqual(['z']);
+  });
+
+  it('B4 · both ROADS BACK are fenced, each convicted with its deletion proven to have happened', () => {
+    // ROAD TWO — THE SETTLEMENT'S OWN EMBEDDED SNAPSHOT. Zed's config names Zenith, and
+    // `ensureReligionState`'s DM-re-assign branch re-installs an embedded patron as DOMINANT
+    // whenever state and config disagree. So Zenith is deleted by the prune and comes straight
+    // back. MEASURED through the real pulse before the fence: announced extinct at tick 4,
+    // reinstalled at tick 5, announced again at tick 9.
+    const run = drive(ring(8, 'village', { faithUnseatingEnabled: true }), 16);
+    const beats = run.outcomes.filter(({ o }) => o.candidateType === OBITUARY).map(({ o }) => creedOf({ sourceEventId: o.id }));
+    // THE POSITIVE COMPANIONS COME FIRST, and they travel the same filter: this run really does
+    // mint obituaries, and Zenith really was in the pantheon to begin with.
+    expect(beats.length).toBeGreaterThanOrEqual(1);
+    const firstTick = drive(ring(8, 'village', { faithUnseatingEnabled: true }), 1);
+    expect(Object.keys(firstTick.world.religionStates.z.deities)).toContain(ref('Zenith'));
+    // THE DELETION IS PROVEN: Zenith is gone from the settlement's state at the end of the run.
+    expect(Object.keys(run.world.religionStates.z.deities)).not.toContain(ref('Zenith')); // anchored: the same key list is asserted to CONTAIN Zenith one tick in, so this absence is a deletion rather than a creed that was never there
+    // …and it is announced NOWHERE, because it has a road back its own town keeps open.
+    // anchored: `beats` is asserted non-empty above, so this exclusion runs over a populated beat list read through the identical filter.
+    expect(beats).not.toContain('zenith');
+
+    // ROAD ONE — A CARRIER. The identical ring, the identical seed, the identical twenty-two
+    // pulses and the identical impactKind filter; the ONLY difference is whether the neighbours
+    // keep carrying their creeds. Held, every deleted creed is still arriving and NONE is
+    // announced; withdrawn, the same creeds are announced by name.
+    expect(HELD).toEqual([]);
+    const withdrawnCreeds = WITHDRAWN.map(creedOf);
+    expect(withdrawnCreeds.length).toBeGreaterThanOrEqual(1);
+    // The creeds the withdrawal announces are exactly neighbours' creeds — the ones a carrier
+    // was holding open until the DM verb closed the road.
+    for (const creed of withdrawnCreeds) {
+      expect(RING_NAMES.map((nm) => nm.toLowerCase())).toContain(creed);
+    }
+  });
+
+  it('B5 · dormancy: absent and false are byte-identical, and the LIT literal drive moves a fenced byte', () => {
+    const seed = () => ring(8, 'village', {});
+    const absent = drive(seed(), 14);
+    const off = drive(ring(8, 'village', { faithUnseatingEnabled: false }), 14);
+    // THE LIT-MUTANT CONTROL. The absent-vs-false differential is blind by design — it would pass
+    // over a subsystem that was never wired — so the lit arm is what proves the fence can see.
+    // The drive is the LITERAL key: mechanismLitCoverage grants AUTO credit only on a literal.
+    const lit = drive(ring(8, 'village', { faithUnseatingEnabled: true }), 14);
+    expect(JSON.stringify(absent.world.religionStates)).toBe(JSON.stringify(off.world.religionStates));
+    expect(JSON.stringify(absent.outcomes)).toBe(JSON.stringify(off.outcomes));
+    expect(JSON.stringify(lit.world.religionStates)).not.toBe(JSON.stringify(absent.world.religionStates));
+    // The fixture really carries faith, so the byte-identity claim is not two empty objects.
+    expect(JSON.stringify(absent.world.religionStates)).toContain('custom:lu_');
+    // The RENDERED FEED carries no obituary dark, read through the same filter that finds them lit.
+    // anchored: WITHDRAWN (the identical ring, lit) is asserted non-empty in B1, so this filter demonstrably finds obituaries when they exist.
+    expect(WITHDRAWN_DARK).toEqual([]);
+  });
+
+  it('B6 · registration totality, both directions, from the kind the fixture ACTUALLY produced', () => {
+    // The denominator is the beat the engine minted, not a literal typed here: a rename that
+    // moved the token would fail at the join rather than pass against a stale constant.
+    const kind = WITHDRAWN[0].impactKind;
+    expect(kind).toBe(FAITH_KINDS[0]);
+    const row = FAITH_KIND_REGISTRY.find((r) => r.kind === kind);
+    expect(row).toBeTruthy();
+    expect(row.pool.length).toBeGreaterThanOrEqual(FREQUENCY_FLOORS[row.significance]);
+    expect(row.requiredSlots).toHaveLength(row.pool.length);
+    // All three registration homes carry it, and it is EXPLICITLY routed rather than riding the
+    // `faith_` family prefix — the check that separates a filed kind from an unfiled one.
+    expect(SECTION_OF(kind)).toBe('faith');
+    expect(isExplicitlyRouted(kind)).toBe(true);
+    expect(KIND_SECTION[kind]).toBe('traditions');
+    expect(typeof WHAT_PHRASES[kind]).toBe('string');
+    // The other direction: the registry's declared desk is the desk the router actually answers.
+    expect(row.section).toBe(SECTION_OF(kind));
+  });
+
+  it('B7 · the surfaced entry is a RECORD, address-complete and game-grade, on the applied path', () => {
+    const entry = WITHDRAWN[0];
+    // It is a record, never a proposal — asserted on the entry the REAL pulse put in the feed.
+    expect(entry.kind).toBe('applied');
+    // Severity 0.5 sits below newsEntryForOutcome's 0.72 major line, so a town losing one creed
+    // is a notable RECORD rather than a realm alarm; the scope is the settlement's own.
+    expect(entry.significance).toBe('notable');
+    expect(entry.scope).toBe('settlement');
+    expect(entry.severity).toBe(0.5);
+    // THE ADDRESS CHAIN (news address law): a typed action, the place by id, the source event
+    // that encodes both settlement and creed, and a reason that names the parties.
+    expect(entry.impactKind).toBe(OBITUARY);
+    expect(entry.settlementIds).toEqual(['z']);
+    expect(entry.sourceEventId).toContain('faith.last_altar_dark.z.');
+    expect(entry.reasons.length).toBeGreaterThanOrEqual(1);
+    expect(entry.reasons[0]).toContain('Zed');
+    // GAME-GRADE: no numerals, no engine slug, no template residue on composed reader output.
+    // anchored: the headline and reason are asserted non-empty and party-naming above, so these are scans over real rendered prose.
+    expect(`${entry.headline} ${entry.summary} ${entry.reasons.join(' ')}`).not.toMatch(/\d|custom:|_deityRef|\$\{|undefined/);
+    // And curation admits it rather than suppressing it as drift.
+    const outcome = drive(ring(8, 'village', { faithUnseatingEnabled: true }), 1).outcomes;
+    expect(Array.isArray(outcome)).toBe(true);
+    expect(isDriftOnlyOutcome({ curationClass: 'transition' })).toBe(false);
+    expect(newsEntryForOutcome({ id: 'x', candidateType: OBITUARY, severity: 0.5, affectedSettlementIds: ['z'] }, 3, 'applied').kind).toBe('applied');
+  });
+
+  it('B8 · the pick is deterministic on its key and the pool genuinely spreads', () => {
+    const kind = FAITH_KINDS[0];
+    const interp = { creed: 'the Lady of Harvests', settlement: 'Bramwell' };
+    // Same key, same sentence — forever (THE PROMISE), on the registry's own picker.
+    expect(faithLine(kind, `${kind}::z::custom:lu_alder`, interp))
+      .toEqual(faithLine(kind, `${kind}::z::custom:lu_alder`, interp));
+    // …and DIFFERENT (cid, ref) keys really do reach different variants, or the determinism above
+    // would be the determinism of a picker that answers one sentence to everything. The witness
+    // keys are the fixture's OWN creeds rather than authored strings.
+    const reached = new Set(WITHDRAWN.map((e) => faithLine(kind, `${kind}::z::custom:lu_${creedOf(e)}`, interp).templateIndex));
+    expect(reached.size).toBeGreaterThanOrEqual(2);
+    // The engine's own beats show the spread too: the fixture's obituaries are not all one line.
+    expect(new Set(WITHDRAWN.map((e) => e.headline)).size).toBeGreaterThanOrEqual(2);
   });
 });

@@ -305,6 +305,9 @@ export const WHAT_PHRASES = Object.freeze({
   pantheon_ascendancy: 'a faith ascendant',
   pantheon_twilight: 'a faith in twilight',
   pantheon_extinction: 'a faith with no altar left',
+  // WF-8a — the SETTLEMENT-scoped obituary, distinct from the realm-scale row above it: one
+  // town's last altar to one creed, not a faith gone from the realm. The phrase says so.
+  faith_last_altar_dark: 'a creed\'s last altar gone dark',
   moral_reckoning: 'a reckoning',
   belief_misjudgment: 'a dangerous misjudgement',
   stressor_birth_religious_conversion_fracture: 'a schism among the faithful',

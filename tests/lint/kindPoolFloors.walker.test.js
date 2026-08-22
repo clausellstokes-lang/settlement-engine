@@ -66,6 +66,7 @@ import {
 } from '../../src/domain/worldPulse/eventProse.js';
 import { COMMERCIAL_KIND_REGISTRY } from '../../src/domain/worldPulse/commercialReasonsNews.js';
 import { GRAMMAR_KIND_REGISTRY } from '../../src/domain/worldPulse/grammarNews.js';
+import { FAITH_KIND_REGISTRY } from '../../src/domain/worldPulse/faithNews.js';
 import { INFORMATION_KIND_REGISTRY } from '../../src/domain/worldPulse/informationNews.js';
 import { SOVEREIGNTY_KIND_REGISTRY } from '../../src/domain/worldPulse/sovereigntyNews.js';
 
@@ -90,6 +91,11 @@ const REGISTRIES = Object.freeze([
   // it moves REGISTERED_KIND_COUNT and the divergence identity below while leaving
   // ROUTED_TOKENS exactly where it is.
   ['INFORMATION', INFORMATION_KIND_REGISTRY],
+  // WF-8a: the SIXTH FP registry family, and the estate's SECOND deliberately one-row one. Its
+  // single kind is the settlement extinction obituary, which DOES carry a Herald desk — so
+  // unlike INFORMATION's dossier line it moves ROUTED_TOKENS and REGISTERED_KIND_COUNT
+  // together and leaves the registered-minus-routed difference below exactly where it was.
+  ['FAITH', FAITH_KIND_REGISTRY],
 ]);
 
 /**
@@ -160,7 +166,12 @@ const LEGACY_UNVOICED_TOKENS = 274;
 // +1 at GR-4b-ii-W2: `reaffirmed`, that question's HONOR terminal answered aloud — a
 // desk-BEARING row, so it moves this figure and REGISTERED_KIND_COUNT together and leaves
 // the registered-minus-routed difference below untouched at 7.
-const ROUTED_TOKENS = 378;
+// +1 at WF-8a: `faith_last_altar_dark`, the settlement extinction obituary. A desk-BEARING row,
+// so it moves this figure and REGISTERED_KIND_COUNT TOGETHER and leaves the registered-minus-
+// routed difference below untouched at 8 — the opposite road from IN-1c-a's dossier line. The
+// `faith_` family prefix would have routed the token free; the EXACT_SECTION row is what keeps
+// this census honest about a kind that genuinely files a desk.
+const ROUTED_TOKENS = 379;
 // +1 at IN-0C: the eighth GR-0 lifecycle pool (`treaty_disclosure_opened`).
 // +1 at GR-4b: the ninth (`disavowed_by_succession`), the registry's first `major` row.
 // +1 at GR-4b-iii-a: the tenth (`succession_question_opened`), a `notable` row.
@@ -181,7 +192,10 @@ const ROUTED_TOKENS = 378;
 // page's standing-line block, so it takes the same no-desk road `succession_question_open`
 // took: ROUTED_TOKENS holds at 378 while this figure moves, and the divergence below rises
 // by exactly one.
-const REGISTERED_KIND_COUNT = 112;
+// +1 at WF-8a: `faith_last_altar_dark`, the whole of the estate's SIXTH registry family (FAITH)
+// and its first row. Unlike `mirror_standing_line` above it this row CARRIES a desk, so
+// ROUTED_TOKENS moves with it and the divergence below stays at 8.
+const REGISTERED_KIND_COUNT = 113;
 
 const violations = floorViolations(ALL_ROWS, { declaredExceptions: DECLARED_EXCEPTIONS });
 const unvoiced = Object.keys(EXACT_SECTION).filter((token) => !REGISTERED_KINDS.has(token));
@@ -190,7 +204,7 @@ describe('SP-E frequency-scaled floors — anti-vacuity anchors', () => {
   test('every registry is live and the denominator is real', () => {
     // Nothing below means anything if a registry emptied or an import went stale: a violation
     // list is trivially short when there is nothing to violate.
-    expect(REGISTRIES).toHaveLength(10);
+    expect(REGISTRIES).toHaveLength(11);
     for (const [name, rows] of REGISTRIES) {
       expect(rows.length, `${name}: registry is empty`).toBeGreaterThanOrEqual(1);
     }
@@ -203,7 +217,16 @@ describe('SP-E frequency-scaled floors — anti-vacuity anchors', () => {
     // exception instead keeps all nine at five-or-more by exact equality AND makes a SECOND
     // small family a visible, reviewed act rather than a number that quietly slipped.
     expect(REGISTRIES.filter(([, rows]) => rows.length < 5).map(([name]) => name))
-      .toEqual(['INFORMATION']);
+    // ⭐ THE SECOND SMALL FAMILY, AND ITS ADMISSION IS THE REVIEWED ACT THIS LIST EXISTS TO
+    // FORCE (ODQ §309.3 / §347.1(2), ruled at §350). WF-8a mints FAITH as a ONE-ROW family
+    // because the FAITH volume's remaining narration kinds each need their own producer and
+    // this member carries the one beat whose producer already exists — the sequencing WF-8's
+    // multi-member arithmetic imposes, not a preference. The ORDER below is the registry
+    // declaration order and was taken from this arm's own output, never predicted.
+    // ⛔ THE SHRINK-BACK IS A RECORDED OBLIGATION of the next WF-8 member that takes FAITH to
+    // five rows or more: strike FAITH from this list in that same commit. It is deferred and
+    // written down here rather than dropped.
+      .toEqual(['INFORMATION', 'FAITH']);
     expect(ALL_ROWS).toHaveLength(REGISTERED_KIND_COUNT);
     expect(REGISTERED_KINDS.size, 'two registries claim the same kind').toBe(REGISTERED_KIND_COUNT);
     expect(Object.keys(EXACT_SECTION)).toHaveLength(ROUTED_TOKENS);

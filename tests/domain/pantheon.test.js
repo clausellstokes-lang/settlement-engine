@@ -43,6 +43,7 @@ import {
 import { COMMERCIAL_KIND_REGISTRY } from '../../src/domain/worldPulse/commercialReasonsNews.js';
 import { GRAMMAR_KIND_REGISTRY } from '../../src/domain/worldPulse/grammarNews.js';
 import { INFORMATION_KIND_REGISTRY } from '../../src/domain/worldPulse/informationNews.js';
+import { FAITH_KIND_REGISTRY } from '../../src/domain/worldPulse/faithNews.js';
 import { SOVEREIGNTY_KIND_REGISTRY } from '../../src/domain/worldPulse/sovereigntyNews.js';
 import { censusNewsAuthoringSites, debtLedgerRows } from '../lint/newsAuthoringCensus.shared.mjs';
 
@@ -563,7 +564,7 @@ describe('pantheon — realm arcs (Ascendancy / Twilight / the last altar)', () 
     }
   });
 
-  test('A5 the registration totality: routed by prefix with NO exact row, and the six kind censuses stand still', () => {
+  test('A5 the registration totality: routed by prefix with NO exact row, and the six kind censuses move only where a registration authorized it', () => {
     expect(isExplicitlyRouted('pantheon_extinction')).toBe(true);
     expect(SECTION_OF('pantheon_extinction')).toBe('faith');
     expect(WHAT_PHRASES.pantheon_extinction).toBe('a faith with no altar left');
@@ -583,15 +584,31 @@ describe('pantheon — realm arcs (Ascendancy / Twilight / the last altar)', () 
       ['WAR_COALITION', WAR_COALITION_KIND_REGISTRY], ['ENVOY', ENVOY_KIND_REGISTRY],
       ['COMMERCIAL', COMMERCIAL_KIND_REGISTRY], ['GRAMMAR', GRAMMAR_KIND_REGISTRY],
       ['SOVEREIGNTY', SOVEREIGNTY_KIND_REGISTRY], ['INFORMATION', INFORMATION_KIND_REGISTRY],
+      // WF-8a: the SIXTH registry family. ⛔⛔ THIS LIST IS A SECOND TRANSCRIPTION OF
+      // kindPoolFloors.walker.test.js's REGISTRIES, and the fork is the finding: WF-8a's
+      // registration moved the shared figures and reddened this pin, which no packet had
+      // named, because a hand-copied denominator drifts the moment the original moves.
+      // Adding FAITH here is the honest repair for THIS landing; the structural repair is to
+      // import the one list rather than re-type it, and that is recorded as owed rather than
+      // taken inside a faith member.
+      ['FAITH', FAITH_KIND_REGISTRY],
     ];
     const allRows = registries.flatMap(([, rows]) => [...rows]);
     const registered = new Set(allRows.map(r => String(r.kind)));
     const routedTokens = Object.keys(EXACT_SECTION);
     const unvoiced = routedTokens.filter(t => !registered.has(t));
-    expect(registries.length).toBe(10);
-    expect(registries.filter(([, rows]) => rows.length < 5).map(([name]) => name)).toEqual(['INFORMATION']);
-    expect(allRows.length).toBe(112);
-    expect(routedTokens.length).toBe(378);
+    // ⛔ A DECLARED RE-RECORD OF FOUR FIGURES (WF-8a, ODQ §309.3 / §321.2a / §347.1(2) / §350).
+    // WF-1c's claim that its OWN kind takes the prefix door and files no exact row is UNTOUCHED
+    // and is asserted three lines above; what moved is the ambient census around it, because
+    // WF-8a registers a desk-BEARING kind with a chair-authorized EXACT_SECTION row. The two
+    // figures that DID NOT move are the load-bearing ones: `unvoiced` is a shrink-only ceiling
+    // and holds at its measured value, and the registered-minus-routed difference holds at
+    // eight — which is exactly what a kind that carries a desk is supposed to do, and the
+    // opposite of what WF-1c's prefix-routed kind would have done.
+    expect(registries.length).toBe(11);
+    expect(registries.filter(([, rows]) => rows.length < 5).map(([name]) => name)).toEqual(['INFORMATION', 'FAITH']);
+    expect(allRows.length).toBe(113);
+    expect(routedTokens.length).toBe(379);
     expect(unvoiced.length).toBe(274);
     expect(allRows.length - routedTokens.filter(t => registered.has(t)).length).toBe(8);
   });
