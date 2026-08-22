@@ -14823,3 +14823,26 @@ recommended. Implementation, per item:
   re-derived 60/40 pins use the anchored form). FLEET ADVISORY sent to TE-WF8 (the
   train's largest new negative surface): anchored form for every new negative +
   the mutexed sweep BEFORE requesting the slot.
+
+## §354 — T2E AT THE DOOR: GO ISSUED WITH THE LOCK PICTURE; J-TET2E-1 RATIFIED; A VALIDATOR GAP QUEUED (2026-08-22 ~07:10)
+
+- **TE-T2E terminal-ready at 70fd4946** (four commits on 5d18b4a0; the aborted
+  cherry-pick correctly resolved by byte-restore + re-append; the BASE census arm
+  run BARE in a pristine baseproof tree — proving WF-1F moved nothing by execution
+  rather than by its commit message; the AFTER tuple convicted with a −1 sentinel
+  one key per run; 118/160 effective; seven mutants convicted; the untouched-pin
+  control at 57 files/387 tests with zero per-file movement). GO issued WITH the
+  §352.2(c) lock picture (WF-8's possible pre-slot sweep named).
+- **§354.1 Its items A/B were ALREADY CURED/QUEUED** (§351.1 committed the spec
+  fold before the lane recommended it; §351.2 ratified the lock clearance and
+  queued the reaper) — the scheduler's collection cadence beat the lane's own
+  raise, which is the system working. C carries per §348.2. **D (J-TET2E-1)
+  RATIFIED**: the census row's max delta rises to the measured +41/−1 — the
+  incident narratives ARE the value; truncating machinery-caught failures to fit a
+  drafted estimate optimizes the wrong thing.
+- **§354.2 THREE LANE ERRORS, all machinery-caught, recorded in the packet body:**
+  the Nth-failure/Nth-key census mis-attribution (its own confirming run caught
+  it); the blanket sed that rewrote a sibling's manifest row (caught at READY, NOT
+  at DRAFT — **the validator's DRAFT-time integrity blind spot is QUEUED to
+  TE-HOUSE**; class note: scope manifest edits to your own row by unique key); the
+  M7 matrix hole self-closed pre-sweep.

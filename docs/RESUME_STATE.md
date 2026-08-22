@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~07:10 ET: T2E GO SENT w/ lock picture (§354) — tip 70fd4946; its A/B
+# already cured/queued (§351 beat the raise); J-TET2E-1 ratified (+41/-1);
+# validator DRAFT-time gap queued to TE-HOUSE. On green: CAS → WF-8 slot →
+# the mint's protected window.
 # ~06:40 ET: §353.6 — OSR9's rehearsal caught its own vacuous control (bare
 # not.toContain; anchor walker per-file ceiling); cured two-half at the
 # throwaway tip; advisory sent to WF-8 (anchored form + pre-slot mutexed
