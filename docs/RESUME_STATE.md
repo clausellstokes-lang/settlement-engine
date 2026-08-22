@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~14:20 ET: CONTENT TRAIN ARCHITECTED + SLOTTED (§361) — CT-0 compile at
+# QUEUE HEAD; CT-1a/2/3 interleave with the D3a port train; CT-1b behind
+# parity; CT-4 behind undercity; CT-5 pre-V5. Every CT car carries its
+# declared-shift proof. ~6 cars, ~18-32 lane-hours total.
 # ⭐ ~14:00 ET: OWNER DIRECTIVE (§360) — the atlas research feeds the dossier
 # prose: CONTENT TRAIN chartered (TC-DOSSIER queued at next free seat; four
 # binding laws stated: clerk-never-writer, only-explain-what-the-engine-

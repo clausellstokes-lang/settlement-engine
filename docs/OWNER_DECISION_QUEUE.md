@@ -15070,3 +15070,36 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   relevant' becomes a measured list, not a vibe); the register spec (legibility law:
   glance → sentence; the news address law's explanatory shape); the refined corpus
   drafts; the golden-movement bill. Chair reviews before any executor.
+
+## §361 — THE CONTENT TRAIN ARCHITECTED AND SLOTTED (owner: "comprehensively architect it in") (2026-08-22 ~14:20)
+
+- **§361.1 THE ARCHITECTURE — six stages, staged by what the engine can back:**
+  **CT-0** the compile (§360.2's deliverables: the fact×mechanism×coverage mapping,
+  the register spec, corpus drafts, the golden bill) · **CT-1a** MORPHOLOGY,
+  engine-known: why walls, gates, market placement, road rank, organic-vs-planned —
+  keyed to facts the ENGINE holds today (wall years, placements, the institution
+  atlas), landable BEFORE the parity slice · **CT-1b** MORPHOLOGY, fabric-derived:
+  ward shapes, block grain, frontage — the facts only the new map engine mints;
+  slots AFTER the parity train · **CT-2** GROWTH: why the town grew when it did —
+  epochs, ribbon development, suburbs, keyed to population/economy history ·
+  **CT-3** INSTITUTIONS: why the temple, the guild, the tannery sit where they sit
+  — the atlas category column + the affinity matrix (and OB-5's cure makes the
+  prose truthful at the civic core) · **CT-4** UNDERCITY: the §311 doctrine's
+  causal story in prose — slots AFTER the undercity train builds it · **CT-5** the
+  REGISTER HARMONIZATION pass: one voice across chapters, the legibility law's
+  glance→sentence→table, and the voice-debt reconciliation (the banked P-3 debt
+  addressed, never deepened).
+- **§361.2 THE SLOTTING, exactly:** TC-DOSSIER (CT-0) takes the QUEUE HEAD for the
+  next free seat (owner directive outranks the unhurried measurement items).
+  CT-1a/CT-2/CT-3 INTERLEAVE with the D3a port train — content cars take CAS slots
+  between port cars (disjoint surfaces: corpora + generators + dossier tests vs
+  townMap/fabric; only the shared meta files overlap, governed by the standing
+  rebase laws). CT-1b couples behind the parity train. CT-4 behind the undercity
+  train. CT-5 runs before the endgame's V5 sitting (prose describes mechanisms and
+  facts, not tuned magnitudes — safe pre-tuning; the §341 map leg judges maps, not
+  prose). EVERY CT landing carries its declared-shift proof — dossier goldens move
+  only under the §72.3 machinery, key-by-key.
+- **§361.3 Budget added to the board:** CT-0 ~1h compile; CT-1a/2/3 ≈ 3 cars,
+  ~10–18 lane-hours; CT-1b/4/5 ≈ 3 cars, ~8–14 lane-hours later. The train's
+  proof shape follows WF-1E's Lane P precedent (source-first corpus + generator in
+  one commit; section-sliced agreement pins on both sides).
