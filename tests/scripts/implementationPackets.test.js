@@ -532,6 +532,121 @@ describe('IA-1 implementation packet manifest and capsule', () => {
     }
   });
 
+  it('discharges an earlier required symbol only when a LANDED packet retires that exact pair', () => {
+    // ── THE FIRST CROSS-PACKET RETIREMENT COLLISION, PLANTED (ODQ §379 / §379.2) ──────
+    // Four LANDED packets pinned `FIXED_SURVEY_LIGHT_V1` in requiredSymbols — enforced at
+    // EVERY status by deliberate design — while MF-T2G was authorized to retire it. The
+    // required/retired cross-check is WITHIN one packet only, so read literally
+    // retiredSymbols was unusable for any symbol a landed packet had ever named, and the
+    // first collision had to be cured by surgery on the older rows. The pair below is that
+    // collision by name; what it pins is that the rows may now STAY and be discharged.
+    const LIGHT_PATH = 'src/domain/townMap/fabric/projection.js';
+    const RETIRED = 'FIXED_SURVEY_LIGHT_V1';
+    const SURVIVOR = 'export function firstSliceScreenDrawOps';
+    const NEVER_RETIRED = 'FIXED_SURVEY_LIGHT_V2';
+    // The tree AFTER the authorized retirement: the retiree is gone, its siblings remain.
+    write(root, LIGHT_PATH, `${SURVIVOR}() { return []; }\n`);
+
+    /**
+     * P-1 is the OLDER LANDED packet whose requiredSymbols named the retiree; P-2 is the
+     * retiring packet, whose status is the variable under test.
+     * @param {string} retirerStatus @param {Array<{path:string,symbol:string}>} extraRequired
+     */
+    const planted = (retirerStatus, extraRequired = []) => {
+      const candidate = clone(manifest);
+      candidate.packets[0].status = 'LANDED';
+      candidate.packets[0].requiredSymbols.push(
+        { path: LIGHT_PATH, symbol: RETIRED },
+        { path: LIGHT_PATH, symbol: SURVIVOR },
+        ...extraRequired,
+      );
+      candidate.packets[1].status = retirerStatus;
+      candidate.packets[1].retiredSymbols = [{ path: LIGHT_PATH, symbol: RETIRED }];
+      write(root, INDEX_PATH, [
+        '| Packet | Status |',
+        '|---|---|',
+        '| [P-1](./packets/P-1.md) | LANDED |',
+        `| [P-2](./packets/P-2.md) | ${retirerStatus} |`,
+      ].join('\n'));
+      write(root, 'docs/implementation/packets/P-1.md', packetMarkdown('P-1', 'LANDED'));
+      write(root, 'docs/implementation/packets/P-2.md', packetMarkdown('P-2', retirerStatus));
+      return validatePacketManifest(candidate, { rootDir: root });
+    };
+
+    // DIRECTION 1 — the discharge fires: the older packet's row survives its own retirement.
+    expect(planted('LANDED')).toEqual({ ok: true, errors: [] });
+
+    // DIRECTION 2 — existence enforcement is NOT weakened. A symbol nobody retired still
+    // reds from the same packet, in the same run, alongside the discharged row.
+    const undischarged = planted('LANDED', [{ path: LIGHT_PATH, symbol: NEVER_RETIRED }]);
+    expect(undischarged.ok).toBe(false);
+    expect(undischarged.errors).toEqual([
+      `P-1.requiredSymbols[3].symbol is missing from ${LIGHT_PATH}: ${NEVER_RETIRED}`,
+    ]);
+
+    // DIRECTION 3 — only LANDED discharges. SUPERSEDED is the clean discriminator: it is
+    // terminal, so it asserts in NEITHER direction and contributes no error of its own,
+    // yet it is not the authorized removal, so the older row reds exactly as before.
+    expect(planted('SUPERSEDED').errors).toEqual([
+      `P-1.requiredSymbols[1].symbol is missing from ${LIGHT_PATH}: ${RETIRED}`,
+    ]);
+
+    // A retirement that deleted the whole file discharges too — otherwise the row stays
+    // permanently red under a different message and the law is half a law.
+    const fileDeleted = clone(manifest);
+    fileDeleted.packets[0].status = 'LANDED';
+    fileDeleted.packets[0].requiredSymbols.push({ path: LIGHT_PATH, symbol: RETIRED });
+    fileDeleted.packets[1].status = 'LANDED';
+    fileDeleted.packets[1].retiredSymbols = [{ path: LIGHT_PATH, symbol: RETIRED }];
+    write(root, INDEX_PATH, [
+      '| Packet | Status |', '|---|---|',
+      '| [P-1](./packets/P-1.md) | LANDED |', '| [P-2](./packets/P-2.md) | LANDED |',
+    ].join('\n'));
+    write(root, 'docs/implementation/packets/P-2.md', packetMarkdown('P-2', 'LANDED'));
+    rmSync(join(root, LIGHT_PATH));
+    expect(validatePacketManifest(fileDeleted, { rootDir: root })).toEqual({ ok: true, errors: [] });
+
+    // A packet that names one pair as BOTH required and retired contributes NO discharge:
+    // the contradiction is its own error, and a red manifest may not silence a live guard
+    // in a different packet. P-2 self-contradicts; P-1's identical row must still red.
+    write(root, LIGHT_PATH, `${SURVIVOR}() { return []; }\n`);
+    const selfContradicting = clone(manifest);
+    selfContradicting.packets[0].status = 'LANDED';
+    selfContradicting.packets[0].requiredSymbols.push({ path: LIGHT_PATH, symbol: RETIRED });
+    selfContradicting.packets[1].status = 'LANDED';
+    selfContradicting.packets[1].requiredSymbols = [{ path: LIGHT_PATH, symbol: RETIRED }];
+    selfContradicting.packets[1].retiredSymbols = [{ path: LIGHT_PATH, symbol: RETIRED }];
+    expect(validatePacketManifest(selfContradicting, { rootDir: root }).errors).toEqual([
+      `P-1.requiredSymbols[1].symbol is missing from ${LIGHT_PATH}: ${RETIRED}`,
+      `P-2 names ${LIGHT_PATH} :: ${RETIRED} as BOTH required and retired`,
+      `P-2.requiredSymbols[0].symbol is missing from ${LIGHT_PATH}: ${RETIRED}`,
+    ]);
+
+    // ROW STYLE IS IRRELEVANT BY CONSTRUCTION, asserted rather than assumed: the manifest
+    // carries the retirement rows in an expanded multi-line form in the thousands and a
+    // one-line compact form in the hundreds. Serialized both ways through the real file
+    // reader, the verdict is identical — the discharge reads PARSED rows, so a future
+    // text-level tool is the only place style can bite, and such a tool must refuse rather
+    // than guess on a form it cannot parse.
+    write(root, LIGHT_PATH, `${SURVIVOR}() { return []; }\n`);
+    const both = clone(manifest);
+    both.packets[0].status = 'LANDED';
+    both.packets[0].requiredSymbols.push({ path: LIGHT_PATH, symbol: RETIRED });
+    both.packets[1].status = 'LANDED';
+    both.packets[1].retiredSymbols = [{ path: LIGHT_PATH, symbol: RETIRED }];
+    const expanded = JSON.stringify(both, null, 2);
+    const compact = expanded.replace(
+      /\{\n\s+"path": "([^"]+)",\n\s+"symbol": "([^"]+)"\n\s+\}/g,
+      (_all, p, s) => `{ "path": "${p}", "symbol": "${s}" }`,
+    );
+    expect(compact).not.toBe(expanded);
+    for (const serialized of [expanded, compact]) {
+      write(root, MANIFEST_PATH, `${serialized}\n`);
+      const loaded = loadPacketManifest({ rootDir: root });
+      expect(validatePacketManifest(loaded, { rootDir: root })).toEqual({ ok: true, errors: [] });
+    }
+  });
+
   it('emits a deterministic hash-bearing READY capsule with exact symbol evidence', () => {
     manifest.packets[0].changeManifest.push({ action: 'CREATE', path: 'src/future.js' });
     const first = buildCodingCapsule(manifest, 'P-1', { rootDir: root });

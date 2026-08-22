@@ -436,6 +436,51 @@ export function validatePacketManifest(manifest, options = {}) {
   /** @type {Map<string,string>} */
   const changePathOwners = new Map();
 
+  // ── §379.2 DISCHARGE SEMANTICS ─────────────────────────────────────────────────────
+  // A retirement is a ONE-WAY RATCHET across the estate, and requiredSymbols is asserted
+  // at EVERY status by deliberate design. Those two rules collided the first time a
+  // packet retired a symbol four LANDED packets had required (FIXED_SURVEY_LIGHT_V1,
+  // MF-T2G): the required/retired cross-check is WITHIN one packet only, so read
+  // literally, retiredSymbols was unusable for any symbol a landed packet had ever
+  // named, and the only cure was surgery on the older rows.
+  //
+  // A LANDED retiredSymbols row now DISCHARGES the requiredSymbols rows naming the same
+  // (path, symbol) pair. Those rows are historical claims about a world an authorized
+  // retirement removed — not live obligations — so future retirements KEEP the rows and
+  // discharge them instead of deleting them.
+  //
+  // THREE FENCES, each of which the plants exercise:
+  //  - ONLY LANDED discharges. A DRAFT or READY retirement is a promise, and a promise
+  //    may not silence a live guard.
+  //  - ONLY the named pair. Every other requiredSymbols row keeps its total,
+  //    status-blind existence check; a missing symbol nobody retired still reds.
+  //  - A packet that names a pair as BOTH required and retired contributes NO discharge.
+  //    That contradiction is already an error, and a red manifest must not quietly
+  //    silence a live guard somewhere else.
+  //
+  // Row STYLE is irrelevant here by construction: this reads the PARSED manifest, so the
+  // expanded four-line row and the one-line compact row (both live in the tree, in the
+  // thousands and the hundreds respectively) are the same object. Any future tool that
+  // EDITS these rows as text must handle both or refuse — the surgical editor that
+  // refused rather than guess on the compact style is the behaviour to copy.
+  /** @type {Set<string>} */
+  const dischargedSymbolKeys = new Set();
+  for (const rawPacket of packets) {
+    if (!isRecord(rawPacket) || rawPacket.status !== 'LANDED') continue;
+    const retiredRows = Array.isArray(rawPacket.retiredSymbols) ? rawPacket.retiredSymbols : [];
+    if (retiredRows.length === 0) continue;
+    const requiredRows = Array.isArray(rawPacket.requiredSymbols) ? rawPacket.requiredSymbols : [];
+    const ownRequired = new Set(requiredRows
+      .filter((row) => isRecord(row) && typeof row.path === 'string' && typeof row.symbol === 'string')
+      .map((row) => `${row.path}\0${row.symbol}`));
+    for (const row of retiredRows) {
+      if (!isRecord(row) || typeof row.path !== 'string' || typeof row.symbol !== 'string') continue;
+      if (packetPathProblem(row.path) || row.symbol.trim().length === 0) continue;
+      const key = `${row.path}\0${row.symbol}`;
+      if (!ownRequired.has(key)) dischargedSymbolKeys.add(key);
+    }
+  }
+
   for (let packetIndex = 0; packetIndex < packets.length; packetIndex += 1) {
     const rawPacket = packets[packetIndex];
     const prefix = `packets[${packetIndex}]`;
@@ -571,6 +616,10 @@ export function validatePacketManifest(manifest, options = {}) {
       const key = `${row.path}\0${row.symbol}`;
       if (symbolKeys.has(key)) addError(errors, `${idLabel} contains duplicate required symbol: ${row.path} :: ${row.symbol}`);
       symbolKeys.add(key);
+      // §379.2: an authorized LANDED retirement of this exact pair discharges the row.
+      // The duplicate check above still runs — the row must stay well-formed and unique;
+      // only the EXISTENCE assertions below are answered by the retirement.
+      if (dischargedSymbolKeys.has(key)) continue;
       if (!fileExists(rootDir, row.path)) {
         addError(errors, `${at}.path does not exist: ${row.path}`);
         continue;
