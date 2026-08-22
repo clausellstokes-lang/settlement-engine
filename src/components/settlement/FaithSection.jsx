@@ -72,7 +72,7 @@ function Cause({ children }) {
 /** The full, read-only faith panel (ACTIVE mode). */
 function ActiveFaith({ model }) {
   const [faithOpen, setFaithOpen] = useState(false);
-  const { patron, cults, effects, live, ranks, piety, unaffiliated, mandate, sinkSentence } = model;
+  const { patron, cults, effects, live, ranks, piety, unaffiliated, mandate, sinkSentence, patronFallSentence } = model;
 
   return (
     <section
@@ -192,9 +192,10 @@ function ActiveFaith({ model }) {
         )}
 
         {/* Cause chains as sentences — the legibility law */}
-        {piety && (piety.sentences.length > 0 || sinkSentence) && (
+        {(patronFallSentence || sinkSentence || (piety && piety.sentences.length > 0)) && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 5, borderTop: `1px solid ${BORDER2}`, paddingTop: 10 }}>
-            {piety.sentences.map((s, i) => <Cause key={`s-${i}`}>{s}</Cause>)}
+            {patronFallSentence && <Cause>{patronFallSentence}</Cause>}
+            {piety && piety.sentences.map((s, i) => <Cause key={`s-${i}`}>{s}</Cause>)}
             {sinkSentence && <Cause>{sinkSentence}</Cause>}
           </div>
         )}

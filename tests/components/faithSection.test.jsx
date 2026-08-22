@@ -29,6 +29,7 @@ vi.mock('../../src/store/index.js', () => {
 
 import { useStore } from '../../src/store/index.js';
 import FaithSection from '../../src/components/settlement/FaithSection.jsx';
+import { recordPatronFall } from '../../src/domain/worldPulse/patronFall.js';
 
 // A distinctive latent-deity name — if it ever appears in a free render, the
 // privacy gate has failed.
@@ -158,6 +159,49 @@ describe('FaithSection — the live faith panel + cause chains as sentences', ()
     expect(piety.textContent).toMatch(/Mostly the faith of the wider realm\./);
     expect(piety.textContent).not.toMatch(/local ×/);
     expect(piety.textContent).not.toMatch(/realm ×/);
+  });
+
+  it('WF-1E A6 · a lit patron fall renders as the FIRST cause sentence, and a dark panel renders none', () => {
+    useStore.__set({ auth: { tier: 'premium' } });
+    // THE RING RECORD IS BUILT BY ITS REAL WRITER, never hand-mirrored: a fixture that
+    // retypes the deriver's own shape can never see a shape change (the recorded
+    // fixture-mirrors-deriver vacuity class).
+    const ring = {};
+    recordPatronFall(ring, { ref: 'deity:core:ash', cause: 'suppressed', atTick: 12 });
+    expect(ring.patronFalls).toHaveLength(1);
+
+    const litSettlement = livePantheon();
+    litSettlement.config.faithProfile.patronFall = ring.patronFalls[0];
+    const { container } = render(<FaithSection settlement={litSettlement} />);
+
+    // THE POSITIVE CONTROLS: the panel really mounted and the cause-chain block really
+    // rendered its SIBLING sentences in this same render. Without them a "the sentence is
+    // absent" arm below would pass over a component that never rendered at all — the
+    // rendered-surface-negative second vacuity.
+    expect(screen.getByTestId('faith-section')).toBeTruthy();
+    expect(container.textContent).toMatch(/no longer lives like its god/i);
+    expect(container.textContent).toMatch(/Crisis calls the faithful home/i);
+    // The fall sentence is in the DOM, inside the cause-chain block that holds those siblings.
+    expect(container.textContent).toMatch(/The patron fell — suppressed: the creed was driven from its seat by force/);
+    // AND IT LEADS: a seat changing hands outranks devotion-drift lines, so it renders FIRST
+    // inside the block. Ordering is the claim — compare positions, not mere presence.
+    const fallAt = container.textContent.indexOf('The patron fell —');
+    const driftAt = container.textContent.search(/no longer lives like its god/i);
+    const sinkAt = container.textContent.search(/Crisis calls the faithful home/i);
+    expect(fallAt).toBeGreaterThan(-1);
+    expect(fallAt).toBeLessThan(driftAt);
+    expect(fallAt).toBeLessThan(sinkAt);
+    // No deity slug or ref reaches the rendered panel — the line names the act, not the creed.
+    // anchored: the fall sentence was just asserted present in this same rendered DOM, so the panel demonstrably rendered and this absence is the ref really being withheld
+    expect(container.textContent).not.toContain('deity:core:ash');
+
+    cleanup();
+    // THE DARK ARM: the identical panel with no projected patronFall renders no fall line,
+    // while its sibling cause sentences still render — the fence, not an empty surface.
+    const { container: dark } = render(<FaithSection settlement={livePantheon()} />);
+    expect(dark.textContent).toMatch(/no longer lives like its god/i);
+    // anchored: the sibling cause sentence one line up proves the cause-chain block rendered in THIS dark render too, so the absence below is the fence holding
+    expect(dark.textContent).not.toMatch(/The patron fell/);
   });
 
   it('a freshly-activated settlement (embeds, no faithProfile yet) shows the day-one static state', () => {

@@ -2110,7 +2110,7 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-FTH-1": {
-    "title": "DS-FTH-1 — War & Faith › Faith panel (ACTIVE mode) · `faithPanelModel(settlement) → {patron, cults, ranks, piety, unaffiliated, mandate, sinkSentence, live}`",
+    "title": "DS-FTH-1 — War & Faith › Faith panel (ACTIVE mode) · `faithPanelModel(settlement) → {patron, cults, ranks, piety, unaffiliated, mandate, sinkSentence, patronFallSentence, live}`",
     "slots": [
       "settlement",
       "creed",

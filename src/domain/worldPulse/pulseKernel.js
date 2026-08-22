@@ -1770,7 +1770,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // discredited one erodes it (feeding the coup cluster). No-op without religionStates,
     // a non-royal/theocratic government, or a deity-free settlement (byte-identical).
     if (nextReligionStates) {
-      projected = projectReligionStateOntoSettlement(projected, nextReligionStates, update.saveId, nextPietyByCid, nextMartialByCid);
+      projected = projectReligionStateOntoSettlement(projected, nextReligionStates, update.saveId, nextPietyByCid, nextMartialByCid, simulationRules);
       projected = applyDivineMandate(projected);
     }
     // W-C5: stamp the lazy compromise-lifecycle display read-model onto compromised NPCs

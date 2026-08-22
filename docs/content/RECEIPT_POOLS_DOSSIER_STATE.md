@@ -4186,7 +4186,7 @@ one crisis twice.
 
 ---
 
-### DS-FTH-1 — War & Faith › Faith panel (ACTIVE mode) · `faithPanelModel(settlement) → {patron, cults, ranks, piety, unaffiliated, mandate, sinkSentence, live}`
+### DS-FTH-1 — War & Faith › Faith panel (ACTIVE mode) · `faithPanelModel(settlement) → {patron, cults, ranks, piety, unaffiliated, mandate, sinkSentence, patronFallSentence, live}`
 
 **STATE-KEY.** `patron.rankAxis` (`major` · `minor` · `cult`) × `cults[]`
 presence × `piety.band` (`devout` · `faithful` · `observant` · `lukewarm` ·
@@ -4200,8 +4200,11 @@ as a percentage. Every variant below carries the band word and no arithmetic
 (§0d, R-DST-D): the panel keeps its figures, the prose bands the same facts.
 **E-4 governs every line** — standing, share, claim and devotion are
 believer-side facts and no line reports a divine act. The three
-`divineMandateStatus` phrasings and the four `CAUSE_SENTENCE` strings are
-existing authored copy this block **surrounds**, never rewrites (R-DST-C).
+`divineMandateStatus` phrasings, the four `CAUSE_SENTENCE` strings and the four
+`FALL_SENTENCE` strings behind `patronFallSentence` — one per member of
+`PATRON_FALL_CAUSES`, each naming a believer-side or political act by which a
+seat changed hands — are existing authored copy this block **surrounds**, never
+rewrites (R-DST-C).
 **R-DST-B:** `piety.band` and the `ranks[]` shape carry NO provenance and get
 plain description; only `piety.causes[]` licenses a cause clause, and those pools
 are marked. Sibling: `DS-FTH-3` reads the underlying religion state; this block

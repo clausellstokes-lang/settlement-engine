@@ -4998,7 +4998,33 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   be +0", "expected 364 to be +0", "expected 2126 to be +0", "expected 20663 to be +0",
     //   "expected 5778 to be +0"). Arithmetic would have produced the same tuple; it would not
     //   have been evidence. The convictions are quoted verbatim in the lane receipt.
-    files: 2490, parked: 364, credited: 2126, titles: 20663, suiteTitles: 5778,
+    // ── RE-RECORDED 2026-08-21 BY WF-1E, THE FaithSection CAUSE-CHAIN LINE ────────────
+    // AUTHORIZING DECISION: ODQ §333 (the compile collection and its five rulings — §333.2
+    // ruling volume Q4, §333.5 sequencing the census across the post-stop trains) and ODQ
+    // §337 (this executor's dispatch), under §299.4's binding-forward rule that a packet
+    // moving any census or ratchet NAMES ITS AUTHORIZING DECISION in the packet body. The
+    // family's §70.4 stamp is GRANTED at ODQ §78.1.
+    // 2,490/364/2,126/20,663/5,778 → 2,490/364/2,126/20,669/5,778.
+    // THE CAUSE IS SIX NEW TITLES IN TWO EXISTING FILES and nothing else — NO new test file,
+    // so `files`, `parked` and `credited` are all UNCHANGED and no new describe was written,
+    // so `suiteTitles` is unchanged too:
+    //   tests/components/faithPanelModel.test.js — FIVE straight-line it() calls with
+    //     string-literal titles, added INSIDE the existing literal describe('faithPanelModel').
+    //   tests/components/faithSection.test.jsx — ONE straight-line it() with a string-literal
+    //     title, added INSIDE the existing live-faith-panel describe.
+    // No .each, no runIf, no nesting, no loop-registered case; every loop lives INSIDE a named
+    // test (the SP-D idiom), so both files stay CREDITED and all six titles are visible. The
+    // member's production edits (religionState.js, pulseKernel.js, faithPanelModel.js,
+    // FaithSection.jsx), its corpus amendment and its packet document are not test files.
+    // ⛔ NO FIGURE HERE WAS OBTAINED BY ADDING. The tuple line was set to a deliberate
+    //   placeholder of zeros and the SEQUENCED walker was made to convict on each figure in
+    //   turn, five runs, each value taken from its own assertion message ("expected 2490 to
+    //   be +0", "expected 364 to be +0", "expected 2126 to be +0", "expected 20669 to be +0",
+    //   "expected 5778 to be +0"). The convictions are quoted verbatim in the lane receipt.
+    // ⭐ AND `suiteTitles` IS PROVED SEPARATELY, per the sequenced-census law: the WHOLE
+    //   member diff over tests/ was grepped for added `describe(` lines and the count is ZERO,
+    //   which is independent of the walker's own fifth figure never having had to execute.
+    files: 2490, parked: 364, credited: 2126, titles: 20669, suiteTitles: 5778,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

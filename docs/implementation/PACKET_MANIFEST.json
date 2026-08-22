@@ -18220,6 +18220,194 @@
           "check:tail"
         ]
       ]
+    },
+    {
+      "id": "WF-1E",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/fp/WF-1E.md",
+      "verifiedBase": "f5332cf70520a1cdef6cc326ae000acec118da85",
+      "changeManifest": [
+        {
+          "_note": "THE PROJECTOR. A sixth defaulted parameter simulationRules and ONE conditional spread appended LAST in the faithProfile literal, so no existing key's serialized order moves. The fence is the FLAG AND the ring: gating on the ring alone would render a fall in a dark world, because the ring is history and history is immutable under THE PROMISE.",
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/religionState.js"
+        },
+        {
+          "_note": "A ZERO-HEADROOM FILE at 1581 effective against a frozen literal of 1581, pinned exact in BOTH directions. This member spends exactly ONE modified line here, packing the sixth argument onto the existing single-line call: 1581 -> 1581 effective and 2865 -> 2865 on wc -l, measured on both sides, with the diff a single in-place line change. No PRNG draw was added, moved or removed and the fork order is untouched (22 rng.fork sites before and after).",
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/pulseKernel.js"
+        },
+        {
+          "_note": "THE READ-MODEL. A frozen four-key FALL_SENTENCE table whose key set the acceptance battery asserts EQUALS PATRON_FALL_CAUSES, plus patronFallSentence derived from the projected record's typed cause and returned on the existing closing line. Exported rather than module-local so the totality pin cannot be written by re-declaring the map in its own fixture (J-TEWF1E-1).",
+          "action": "MODIFY",
+          "path": "src/components/settlement/faithPanelModel.js"
+        },
+        {
+          "_note": "THE RENDERED SURFACE. The destructure and the cause-chain guard widen IN PLACE and the one added line lands at 197 — below all twelve hand-keyed prose-numerics rows, which top out at 188, so no baseline address rots. The fall renders FIRST inside the block: a seat changing hands outranks devotion drift.",
+          "action": "MODIFY",
+          "path": "src/components/settlement/FaithSection.jsx"
+        },
+        {
+          "_note": "THE DS-FTH-1 CORPUS AMENDMENT, under the ODQ 333.2 ruling that the corpus binds as reader-side spelling law. The heading signature gains patronFallSentence and one ENTAILMENT sentence names the four new authored strings as copy the block SURROUNDS (R-DST-C). npm run gen:dossier-prose ran in the SAME commit; the generated artefact moved exactly one line with all 411 variants unchanged.",
+          "action": "DOC",
+          "path": "docs/content/RECEIPT_POOLS_DOSSIER_STATE.md"
+        },
+        {
+          "_note": "A1-A5 as five straight-line it() calls inside the EXISTING literal describe. No new file, no new describe, no .each, no runIf. Every fixture was run and printed before its pin was written, once pristine and once wired, and every ring is asserted seeded before it is consumed.",
+          "action": "TEST",
+          "path": "tests/components/faithPanelModel.test.js"
+        },
+        {
+          "_note": "A6, one straight-line it() inside the EXISTING live-panel describe. The ring record is built by its real writer rather than hand-mirrored, so the fixture cannot mirror the deriver.",
+          "action": "TEST",
+          "path": "tests/components/faithSection.test.jsx"
+        },
+        {
+          "_note": "THE ONE SHARED CHANGE PATH this member reserves — the census tuple, re-derived ALL FIVE figures together by placeholder-and-convict at this base, with its cause and its authorizing decisions named, and this member's re-record block appended AFTER every existing block.",
+          "action": "TEST",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/packets/fp/WF-1E.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE PROJECTOR BEING EXTENDED, and the sole production writer of config.faithProfile.",
+          "path": "src/domain/worldPulse/religionState.js",
+          "symbol": "export function projectReligionStateOntoSettlement"
+        },
+        {
+          "path": "src/domain/worldPulse/religionState.js",
+          "symbol": "export function divineMandateStatus"
+        },
+        {
+          "_note": "THE READ-MODEL the panel renders.",
+          "path": "src/components/settlement/faithPanelModel.js",
+          "symbol": "export function faithPanelModel"
+        },
+        {
+          "path": "src/components/settlement/faithPanelModel.js",
+          "symbol": "export function legitimacyBand"
+        },
+        {
+          "_note": "CREATED BY THIS MEMBER. The frozen four-key copy table, owner-reviewable per ODQ 333.4.",
+          "path": "src/components/settlement/faithPanelModel.js",
+          "symbol": "export const FALL_SENTENCE"
+        },
+        {
+          "_note": "THE RING'S ONE SANCTIONED WRITER. This member never calls it in production; it reads the projected record by property access.",
+          "path": "src/domain/worldPulse/patronFall.js",
+          "symbol": "export function recordPatronFall"
+        },
+        {
+          "_note": "THE FROZEN FOUR-TOKEN VOCABULARY the copy table's key set is asserted equal to.",
+          "path": "src/domain/worldPulse/patronFall.js",
+          "symbol": "export const PATRON_FALL_CAUSES"
+        },
+        {
+          "path": "src/domain/worldPulse/patronFall.js",
+          "symbol": "export const FALL_RING_CAP"
+        },
+        {
+          "_note": "THE IMPORT DROP asserted in A5.",
+          "path": "src/lib/importScrub.js",
+          "symbol": "export function scrubImportedConfig"
+        },
+        {
+          "_note": "THE TOP-LEVEL LEDGER ORDER this member does not move.",
+          "path": "src/domain/worldPulse/worldState.js",
+          "symbol": "export const CONDITIONAL_LEDGER_KEYS"
+        },
+        {
+          "path": "src/domain/worldPulse/simulationRules.js",
+          "symbol": "export function normalizeSimulationRules"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "MAIN BEHAVIOUR and VOCABULARY TOTALITY. Lit on the LITERAL faithUnseatingEnabled true drive, a ring bearing a discredited fall: the model carries the exact compiled sentence; Object.keys(FALL_SENTENCE) EQUALS PATRON_FALL_CAUSES with both sides sorted, so neither literal's declaration order is the claim; all four members render distinct non-empty copy; and every rendered sentence is scanned for divine-act phrasing and for a deity ref, so the DEITY DOCTRINE is asserted rather than trusted."
+        },
+        {
+          "id": "A2",
+          "case": "ABSENT vs FALSE vs LIT at the byte level on the serialized config. The non-vacuity control runs FIRST: every arm's profile carries the patron and both creeds, so byte-identity is not a comparison of two empty objects. Then absent is byte-identical to false, the lit arm differs, and the lit patronFall equals the ring record exactly. Anchored."
+        },
+        {
+          "id": "A3",
+          "case": "NO RING means NO KEY means NO SENTENCE. Lit and deity-bearing with the ring ABSENT, faithProfile carries no patronFall key at all — absent, never null, because a key is a byte — its key list is pinned exactly, and the derived sentence is null. The positive control sits in the same test: the identical drive WITH a ring does carry the key, so the absence is the fence holding rather than a drive that never reached the writer. Anchored."
+        },
+        {
+          "id": "A4",
+          "case": "THE DS-FTH-1 ROUND TRIP, SECTION-SLICED ON BOTH SIDES. The block is sliced out of the corpus source and out of the generated artefact — never a whole-document includes, which goes vacuous on the block's own surrounding prose — and the ordered signature key lists must agree, must contain patronFallSentence, and must name nothing the live built model lacks. The bound list is a deliberate SUBSET of the model's thirteen keys, so the third arm is measured containment rather than set equality."
+        },
+        {
+          "id": "A5",
+          "case": "LIFECYCLE. scrubImportedConfig DROPS faithProfile, with a surviving-sibling positive control proving the scrub returned a populated config; CONDITIONAL_LEDGER_KEYS is unchanged so no top-level serialized key moves; and the self-heal is executed on the SAME state object — lit carries the key, the same state re-projected dark does not, and the ring is still intact afterwards, which is what makes the projection rather than the history the thing the flag governs. Anchored."
+        },
+        {
+          "id": "A6",
+          "case": "THE RENDERED SURFACE ACTUALLY RENDERED. ACTIVE panel, lit model whose ring record is built by its real writer rather than hand-mirrored: the fall sentence is in the DOM, it renders FIRST inside the cause-chain block with positions compared rather than mere presence, the sibling Cause sentences are present in the SAME render so the negative cannot pass over an unmounted panel, and no deity slug reaches the DOM. The dark arm renders no fall line while its siblings still render. Anchored."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/components/faithPanelModel.test.js",
+          "tests/components/faithSection.test.jsx",
+          "tests/domain/religionState.test.js",
+          "tests/domain/patronFall.test.js",
+          "tests/domain/religionDormancy.byteIdentity.test.js",
+          "tests/lib/importScrub.test.js",
+          "tests/data/dossierStateProseProjection.contract.test.js",
+          "tests/domain/divineMandate.test.js",
+          "tests/domain/pietyDynamics.test.js",
+          "tests/domain/faithSpreadGate.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/sizeBaseline.test.js",
+          "tests/lint/domainAnyCastBaseline.test.js",
+          "tests/lint/proseNumerics.test.js",
+          "tests/lint/couplingInclusion.walker.test.js",
+          "tests/property/worldpulseDeityGolden.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/domain/worldPulse/religionState.js",
+          "src/domain/worldPulse/pulseKernel.js",
+          "src/components/settlement/faithPanelModel.js",
+          "src/components/settlement/FaithSection.jsx"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "npm",
+          "run",
+          "validate:packets"
+        ],
+        [
+          "npm",
+          "run",
+          "check:tail"
+        ]
+      ]
     }
   ]
 }

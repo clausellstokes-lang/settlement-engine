@@ -73,6 +73,20 @@ const STRUCTURAL_LABEL = Object.freeze({
   devotion: 'Patron devotion',
 });
 
+// WF-1E: THE TYPED PATRON FALL AS ONE SENTENCE. Keys are exactly PATRON_FALL_CAUSES
+// (patronFall.js's frozen four-token vocabulary) — the acceptance battery asserts the two
+// key sets EQUAL, so a fifth cause or a renamed token reds there rather than rendering
+// nothing. ⛔ THE DEITY DOCTRINE: every clause names a BELIEVER-SIDE or POLITICAL act —
+// a creed losing its claim, a town's devotion drifting, a ruler's decree, rites driven
+// out. None says a god fell, failed, died or departed; no deity axis is read and no deity
+// name is printed. An unknown cause renders NOTHING (total, never throws).
+export const FALL_SENTENCE = Object.freeze({
+  discredited: 'The patron fell — discredited: the creed lost its rightful claim, and the town let another take the seat.',
+  displaced: 'The patron fell — displaced: the town’s devotion drifted to another creed until the seat changed hands.',
+  imposed: 'The patron fell — imposed: the seat changed hands by decree of those who rule, not by the drift of belief.',
+  suppressed: 'The patron fell — suppressed: the creed was driven from its seat by force, its rites pushed out of the light.',
+});
+
 /**
  * WHERE the amplification comes from, in words. The composite is localMult ×
  * realmMult; naming the two factors as bare coefficients is exactly what the
@@ -175,6 +189,13 @@ export function faithPanelModel(settlement) {
     else if (piety.trend === 'rising') sinkSentence = `Crisis calls the faithful home — the unaffiliated (${unaffiliated}%) drift back to the temples.`;
   }
 
+  // WF-1E: the cause-chain line for a seat that CHANGED HANDS. profile.patronFall is the
+  // ring's newest record verbatim ({ ref, cause, atTick }) and only materializes behind the
+  // faithUnseatingEnabled fence, so a dark world derives nothing. The CAUSE alone renders:
+  // the raw ref is a slug, and un-slugifying it is the display-resolver estate rather than
+  // this panel's, which deliberately reads only its own settlement.
+  const patronFallSentence = (profile && FALL_SENTENCE[profile.patronFall?.cause]) || null;
+
   return {
     hasEmbed: true, live,
     patron: {
@@ -185,6 +206,6 @@ export function faithPanelModel(settlement) {
       alignmentAxis: patronSnap.alignmentAxis || null,
     },
     cults: cultsSnap.map((c) => ({ name: c?.name, rankAxis: c?.rankAxis || null, domain: c?.domain || c?.portfolio || null })),
-    effects, ranks, unaffiliated, contested, patronSecurity, piety, mandate, sinkSentence,
+    effects, ranks, unaffiliated, contested, patronSecurity, piety, mandate, sinkSentence, patronFallSentence,
   };
 }

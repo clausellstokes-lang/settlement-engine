@@ -599,8 +599,14 @@ export function patronSnapshot(state) {
  *   W-F8: the tick's martial-readiness/experience read-model per settlement. Attached to
  *   faithProfile.martial (conditional) so next tick's expression sites read it; absent for
  *   a war-free faith settlement ⇒ no martial key ⇒ byte-identical under the oracle.
+ * @param {Record<string, unknown>|null} [simulationRules] WF-1E: the tick's normalized rules,
+ *   read ONLY for the virtual `faithUnseatingEnabled` gate. The fence is the FLAG AND the ring,
+ *   never the ring alone: the ring is HISTORY and immutable under THE PROMISE, so a world lit
+ *   once and then darkened keeps it forever — gating on the ring would render a fall in a dark
+ *   world. Absent / false ⇒ no patronFall key ⇒ byte-identical under the dormancy oracle, and
+ *   because the projection is re-derived every tick the fence SELF-HEALS on the first dark tick.
  */
-export function projectReligionStateOntoSettlement(settlement, religionStates, saveId, pietyByCid = null, martialByCid = null) {
+export function projectReligionStateOntoSettlement(settlement, religionStates, saveId, pietyByCid = null, martialByCid = null, simulationRules = null) {
   const state = religionStates?.[String(saveId)];
   if (!state || !state.deities) return settlement;
   const active = activeRefs(state.deities);
@@ -633,6 +639,9 @@ export function projectReligionStateOntoSettlement(settlement, religionStates, s
     ...(unaffiliated > 0 ? { unaffiliated } : {}),
     ...(piety ? { piety } : {}),
     ...(martial ? { martial } : {}),
+    // WF-1E: the NEWEST patron fall, verbatim from the ring (recordPatronFall prepends), for
+    // the faith panel's cause-chain line. FLAG AND RING — see the simulationRules param note.
+    ...(simulationRules?.faithUnseatingEnabled === true && Array.isArray(state.patronFalls) && state.patronFalls.length ? { patronFall: state.patronFalls[0] } : {}),
   };
   return { ...settlement, config: { ...settlement.config, faithProfile } };
 }
