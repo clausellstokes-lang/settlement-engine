@@ -14571,3 +14571,32 @@ recommended. Implementation, per item:
 - **§346.3 Figure hygiene:** the cohort is exactly 33 rows / 26 identities / 47
   reads / 4 files; the honest split is 4 admissible / 22 refused identities — the
   '~22' looseness in charter and brief is corrected here.
+
+## §347 — OWNER ORDER: THE SELF-REFILLING LANE SCHEDULER (2026-08-22 ~02:35)
+
+(The §187 sitting's rulings land as §348.)
+
+- **Owner in-chat: "run a program that when one lane is free (of the four max) the
+  next available build takes it."** RULED INTO STANDING LAW: at EVERY collection or
+  wakeup, the chair refills every free seat (four agent lanes max) from the head of
+  the DISPATCH QUEUE below, respecting three invariants — one full gate at a time ·
+  a compile's draft passes chair review before its executor dispatches · owner-gated
+  items never auto-dispatch. The queue lives in RESUME_STATE and is re-groomed at
+  each collection; a successor chair inherits and continues it.
+- **§347.1 THE DISPATCH QUEUE (groomed at this write):**
+  1. TC-OSR9 — charter the owed schema-9 OSR re-freeze mint (§346.2) ← DISPATCHED NOW
+  2. TC-WF8 — compile the settlement-obituary member (§309 re-filing; carries the
+     §321.2a minter-totality arm and the lawful resurrection of the refused
+     KIND_SECTION row) ← DISPATCHED NOW
+  3. TE-T2E — executor for the next map member (awaits TC-T2E's draft + chair review)
+  4. TE-OSR9 — executor for the mint (awaits charter + review; its gate obeys the
+     freeze law: prove DETACHED, shrink re-freeze is plain --write)
+  5. TE-WF8 — executor (awaits compile + review)
+  6. D4 charter compile (awaits the D3a-close ruling that TC-T2E's draft informs)
+  7. TE-HOUSE — micro-housekeeping bundle (the three stale review-program
+     checkboxes, the §331.4 PACKET_STANDARD reservation amendment)
+  8. Landing-page handoff recon/compile (§318.3's queued-at-the-ceiling constraint
+     resolved first)
+  9. Implementation lanes for whatever §348 (the sitting) decides
+- **§347.2 Seats at this write:** TE-WF1F (build; the wave's last landing) · TC-T2E
+  (compile) · TC-OSR9 (new) · TC-WF8 (new) = four occupied + chair (the sitting).

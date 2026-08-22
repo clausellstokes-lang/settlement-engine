@@ -74,6 +74,12 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~02:35 ET: OWNER ORDER (§347) — SELF-REFILLING SCHEDULER is law: every
+# free seat takes the queue head at every collection/wakeup. QUEUE: 1 TC-OSR9
+# (running) · 2 TC-WF8 (running) · 3 TE-T2E (awaits draft review) · 4 TE-OSR9
+# · 5 TE-WF8 · 6 D4 charter · 7 TE-HOUSE micro-bundle · 8 landing-page recon
+# · 9 §348-decided implementations. Invariants: one gate · compile→review→
+# executor · owner-gated never auto. Seats: WF1F+T2E+OSR9+WF8 = 4 + chair.
 # ⭐ ~02:20 ET: MEAS-MINKEYS collected (§346) — charter premise REFUTED by
 # measurement (zero rows clear; θ is the gate, not key count); minKeys change
 # REFUSED; the 4 bank under M9 riding the OWED schema-9 OSR re-freeze mint
