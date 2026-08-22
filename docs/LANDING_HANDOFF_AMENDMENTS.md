@@ -1,8 +1,17 @@
 # Landing Page — Owner Amendments to the Handoff Spec
 
-The binding spec is `HANDOFF - Landing Page for Claude Code.md` (the design
-project). This file records every owner amendment issued since; **handoff +
-this file = current law**. Sections below are numbered by wave.
+> **STATUS (stamped 2026-08-22, ODQ §363/§364.1): HISTORICAL — NOT CURRENT LAW.**
+> The landing page is BUILT (from `a943cd8d` onward). `HANDOFF - Landing Page for
+> Claude Code.md` is that work's ORIGIN document, and this file records the owner
+> amendments through wave W-L2 only. Many later owner rulings have moved the page
+> since, and they are recorded in `OWNER_DECISION_QUEUE.md`, not here. **The LIVE
+> TREE outranks both documents** — a delivered spec is presumed implemented until
+> the tree says otherwise (§320.2). Read this file as a record of why the page
+> departed from its spec; never as a work order, and never as the page as it stands.
+
+The origin spec is `HANDOFF - Landing Page for Claude Code.md` (the design
+project). This file records every owner amendment issued through W-L2. Sections
+below are numbered by wave.
 
 ## W-L1 (initial build, committed a943cd8d)
 
