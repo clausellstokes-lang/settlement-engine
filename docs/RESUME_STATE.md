@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~11:55: CT-1a LANDED — CAS ac0d0149 → 71159a21 (§383; 16th landing;
+# THE FIRST ATLAS PROSE in the product, zero seeded motion). Three bankings
+# in the row. RR-1's slot OPENED w/ the digest-semantics ratification (pair
+# regenerates at 71159a21). Queue: RR-1 → HOUSE → ratchet cure → RR-2.
 # ⭐ ~11:30: CT-1a GO SENT — ⚠ result was 'QUEUED for delivery' = the race
 # pattern (~100% tonight): EXPECT the race; the next event MUST verify the
 # started-line in laneTECT1A gate log and re-send if absent. Banked with

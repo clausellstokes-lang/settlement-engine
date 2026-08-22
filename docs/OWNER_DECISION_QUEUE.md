@@ -15664,3 +15664,29 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   MapOverlay warning noted pre-existing in a file the member never opened.
   **CT-1a IS NEXT-UP** (messaged): one commit onto ac0d0149, MANIFEST/INDEX
   conflicts expected, zero census motion by design, then the handshake.
+
+## §383 — COLLECTION + CAS: CT-1a LANDED — THE FIRST ATLAS PROSE; THE CONTENT TRAIN'S FIRST CAR (2026-08-22 ~11:55)
+
+- **TE-CT1a collected.** Tip 71159a21 — one commit on T2G's landing, terminal green
+  on all seventeen steps with both readings agreeing and the full 954-line log
+  verified by PRINTED PATH with the pid-lineage cross-check on its own filename.
+  The frozen ELEVEN at ceiling; zero strays (the porcelain empty after the gate).
+  CAS EXECUTED: ac0d0149 → 71159a21 (read back). **THE DOSSIER NOW CARRIES THE
+  ATLAS'S WHY:** DS-GEN-12 (the ground disposes the town, total over the terrain
+  vocabulary) · DS-GEN-13 (the market and the roads) · DS-GEN-14 (founded once,
+  grown since) · DS-DEF-11 (why the wall, and why not) — four blocks, seventeen
+  pools, forty-eight variants, dark, additive, ZERO seeded-draw motion proven
+  key-by-key and both-ways at the landing base, the banked voice debt unmoved to
+  the character.
+- **§383.1 THE THREE BANKINGS confirmed in the row:** REGEX IS NOT A MANIFEST
+  INSTRUMENT — parse, or refuse (the third manifest variance: entry-level indent;
+  a regex mis-measured its neighbour silently) · CARRY-PROOF-BY-ABSENCE as the
+  recommended FIRST step of every rebase re-derivation (a zero-commit drift walk
+  over the subject paths before re-measuring anything) · the honest-capture
+  confession joins the wrapper-trap ledger — THREE times this sitting a wrapper or
+  pipe read 0 against a true 1; only in-shell captures reach receipts.
+- **§383.2 RR-1's SLOT OPENS (messaged):** the tip moved past its rehearsal base,
+  so the pair REGENERATES at 71159a21 per its own framing (a freeze never
+  rebases); its schema-9 shrink digest-semantics judgment is RATIFIED with the
+  slot message (derived digests move with a legitimate shrink; the byte-identical
+  tool universe is the invariant). Then the bundle, then the ratchet cure.
