@@ -74,6 +74,15 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⚠ ~05:50: MINT'S GATE RED at test:ratchet — 5 non-census strays (4 in
+# HUNT-1's confirmed timeout files; 1 new name); build+verify:dist UNRUN;
+# the WRAPPER TRAP fired (harness said exit 0, braced TRUE_EXIT=1 — the
+# capture law vindicated on the run that mattered). LOAD SOURCE NAMED:
+# CT-1a's unmutexed golden batteries ran during the gate window (lane slip
+# + chair lock-picture slip). ORDERS SENT: read the results rows (§358.2)
+# → if timeouts, ONE full re-run on the now-frozen track, no further GO
+# needed, handshake required. CAS BAR RULED: classified + quiet re-run
+# green = clean green (§355.2 is the bar).
 # ⭐ ~05:30: CT-1a BUILT+HOLDING at 14727eca (4 blocks/48 variants; ZERO
 # same-seed movement both-ways-proven; voice budgets flat; the `·`-header
 # dodge of the banked em-pin credited; load-flake delta correctly classified
