@@ -9,10 +9,10 @@
   "That derived re-freeze may only lower or delete rows; the governed reasoned path may raise tagged rows only.",
   "Detector changes require a new governed instrument migration.",
   "The RETIRED schema-3 exact \"<key> on <shape> @ <origin> # <site>\" spelling cannot enter this file.",
-  "SCHEMA 9 = schema 8's topology and tag law, re-governed to the landed post-EP-1 inputs:",
-  "the corpus holds advanceEpochEnabled dark, package.json carries two added scripts, one",
-  "generated (subject-but-unscanned) source input moved, and the M8/M9 bank grows by the four",
-  "declared eventLog identities whose writer is the store/command layer the corpus never runs.",
+  "SCHEMA 10 = schema 9's topology, tag law and eight-identity M8/M9 bank, ALL UNCHANGED,",
+  "re-governed to the landed inputs a second time: two dossier-prose generated",
+  "(subject-but-unscanned) sources were regenerated and package.json gained one lint-staged",
+  "binding, with the lockfile untouched. This rung declares no identity and retunes nothing.",
   "The byte-frozen detector is unchanged; its output is narrowed by THREE clearing filters —",
   "CR-OSR-FREEZE-6 shape-family union (M6), the M11 DOM-global receiver exclusion, the M12",
   "language-surface residual — while M8/M9 findings stay present under sparse rowTags. All are inside",
@@ -20,7 +20,7 @@
   "An untagged row means: a guarded read, of a real record rather than browser or language surface,",
   "of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.",
   "A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.",
-  "Schemas 4–8 are the RETIRED numeric predecessors."
+  "Schemas 4–9 are the RETIRED numeric predecessors."
  ],
  "corpusMeta": {
   "configs": 4,
@@ -36,14 +36,14 @@
  "digests": {
   "corpusMeta": "ef19224c20401a94c9b20611ff65e607bfaa5b345b3ec88eaa40b220e5e915bb",
   "inventory": "4529df4642415543628547349fb088d9038054dfe1c023e5565cff2121d1152f",
-  "manifests": "0cb48ed7492dc4330e0e3004b6f20ff29521d475b2d3af29450dd2d7bee4229b",
-  "migrationReview": "4ee4a8a2084a7d3ead0a132f72527aeccfdabc07dcaae3c2530289500b4113a2",
+  "manifests": "bf82f8512cb3548d451129c8147f09b14bd310dcbf6b37ebd1ad5da417206691",
+  "migrationReview": "d385b7ac755f4eaae531a0b53c59add20a5633a1b4659b742bad0306979fd557",
   "rowTags": "e4efe2363101a1d70a81f6de882573eeed6f2334b227cc493b6e82a7c42f1398",
-  "scanStats": "35952e6cf5a7715ac713efb4c13507574466cee75c3c035e817a14e6e0ff1894",
+  "scanStats": "492aa62d15b5bf72c99d3c65368c30a25c70381b42e066b40a05dd6fd97e0c0a",
   "sentinel": "caf7a121e1ed05059d681791b4a257ad6b766aba7d83a1c040cc7a971b776de4"
  },
  "frozen": "2026-08-22",
- "frozenAtSha": "158d99cdb5d94b2247971af90edfcd0baeac1e87",
+ "frozenAtSha": "12b3aa5308c027dfceeb3fb7e43b7c0414e4e639",
  "identities": 1412,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2236,7 +2236,7 @@
  "manifests": {
   "detectorTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "6434b8f9f7eef23ebadf698cf5da7ef551dc4edadbef6dfa8af2d2190c1c40df",
+   "digest": "3d97159912f6dbfa3b7c25c962dbb61e501b434e6ac4d6a15d817a69f7e5dce4",
    "entries": [
     {
      "mode": "100644",
@@ -2248,15 +2248,15 @@
     {
      "mode": "100644",
      "path": "package.json",
-     "sha256": "72de69df7cbfbe2770876f6bae05c11920106f3c29376c261f947895f80062b5",
-     "size": 7668,
+     "sha256": "cb7bc42cb55581dbb3f0e1783c4b3143cf716f87e09161994c1a3681dc6f1419",
+     "size": 7753,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "29668bf4b96c83131aa52a81f8d6e23ba9d4a2cd229bc4753402b2b47f9cedf6",
-     "size": 125787,
+     "sha256": "088652d118eaacc468fd2bb9021dcfa334a908b82f51e1ef973b3a1d83d56e8b",
+     "size": 126067,
      "type": "file"
     },
     {
@@ -2276,8 +2276,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "c0dafc36e4dbfe7a01cc85bda0898d43435a2fb3f6c170c0a9388a6ee7f1263d",
-     "size": 41595,
+     "sha256": "390935b30d2fe756023008d27e0c417115b5f758bb602bf3d6e3a6ed24747302",
+     "size": 44203,
      "type": "file"
     },
     {
@@ -2304,8 +2304,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "79c8144ea55c060ee2c34662d106b8b1948ab1ef1a6902b63717a18a6b244bab",
-     "size": 76531,
+     "sha256": "78d6364ce0a913a92d6bf2e152d3bc9fcc7453012b132348bec61e45b2f8f2ff",
+     "size": 78814,
      "type": "file"
     },
     {
@@ -2319,7 +2319,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "7eee96e973d76647446c3b4592f52a3f618e5947d74e507e276c11d9ccae3437",
+   "digest": "95b42c8f0b03c7977368ee47ba4324eefb9f5577fd7da779950a83720d7dd181",
    "entries": [
     {
      "mode": "100644",
@@ -2331,15 +2331,15 @@
     {
      "mode": "100644",
      "path": "package.json",
-     "sha256": "72de69df7cbfbe2770876f6bae05c11920106f3c29376c261f947895f80062b5",
-     "size": 7668,
+     "sha256": "cb7bc42cb55581dbb3f0e1783c4b3143cf716f87e09161994c1a3681dc6f1419",
+     "size": 7753,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "29668bf4b96c83131aa52a81f8d6e23ba9d4a2cd229bc4753402b2b47f9cedf6",
-     "size": 125787,
+     "sha256": "088652d118eaacc468fd2bb9021dcfa334a908b82f51e1ef973b3a1d83d56e8b",
+     "size": 126067,
      "type": "file"
     },
     {
@@ -2359,8 +2359,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "c0dafc36e4dbfe7a01cc85bda0898d43435a2fb3f6c170c0a9388a6ee7f1263d",
-     "size": 41595,
+     "sha256": "390935b30d2fe756023008d27e0c417115b5f758bb602bf3d6e3a6ed24747302",
+     "size": 44203,
      "type": "file"
     },
     {
@@ -2387,8 +2387,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "79c8144ea55c060ee2c34662d106b8b1948ab1ef1a6902b63717a18a6b244bab",
-     "size": 76531,
+     "sha256": "78d6364ce0a913a92d6bf2e152d3bc9fcc7453012b132348bec61e45b2f8f2ff",
+     "size": 78814,
      "type": "file"
     },
     {
@@ -6944,8 +6944,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/defense.generated.js",
-     "sha256": "44f4f4aaa111d55ab1c361415bd6d57f66aa2fe1d1fe67a3a33e1b6d4fb3d4ad",
-     "size": 108470,
+     "sha256": "9138d0342c7dcea6e966c4daa6431c1e849a2b6a73a49820f30f10b9ee8e7f3f",
+     "size": 112100,
      "type": "file"
     },
     {
@@ -6958,8 +6958,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/general.generated.js",
-     "sha256": "065eb20206bbc3a80b8e985f38c9e42fe1aec35d27edc88f3667d6a03b9b7d4c",
-     "size": 154801,
+     "sha256": "3df1a6eea082f0f641598181a42c57e036679edb7a0b0cb69bd3ba7c87aac1d8",
+     "size": 164932,
      "type": "file"
     },
     {
@@ -10716,6 +10716,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/townMap/fabric/exactIntersectionArea.js",
+     "sha256": "bbc53021ec8dc69d48f7393ac874cd0ff686177d8cf42d46f33bb016945062b2",
+     "size": 11116,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/townMap/fabric/fabricRoot.js",
      "sha256": "d550039f01bb9b198c1bb2142edf9458ca31ebb285e4052b1cd9e4d61e200c1b",
      "size": 6548,
@@ -10738,8 +10745,8 @@
     {
      "mode": "100644",
      "path": "src/domain/townMap/fabric/index.js",
-     "sha256": "fc7286e23287811e70cbc00db9da4d578ea0cc29af6b8c07da65bb2a33a6819e",
-     "size": 4074,
+     "sha256": "39b216accbca6d79f61c42fc79e39b065391fada6745985a616c864b9c446bc7",
+     "size": 4049,
      "type": "file"
     },
     {
@@ -10780,8 +10787,8 @@
     {
      "mode": "100644",
      "path": "src/domain/townMap/fabric/projection.js",
-     "sha256": "769254042f48a7977086ffeef064d431490c33a9691e42cdb837ec5139564c67",
-     "size": 23086,
+     "sha256": "782f50a7d6aeec02e53d2d521da445ea2653c30cc7b19dca0e1902cf97bfa9ae",
+     "size": 22943,
      "type": "file"
     },
     {
@@ -10796,6 +10803,13 @@
      "path": "src/domain/townMap/fabric/shapes.js",
      "sha256": "a966bd0bf4a6554b9e6cbac950086bc0934ffb5faebdcc15199d58ae5159c099",
      "size": 13229,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/townMap/fabric/solidLegality.js",
+     "sha256": "950680dccdef2a7dd30407d657da201f8afec96c25999104b7d89e4fb0ab391f",
+     "size": 13250,
      "type": "file"
     },
     {
@@ -17501,7 +17515,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "be8a557a636774c1e6b089c51e7f2e66c6a614ac65fc0e36b82d57175dcffce3",
+   "digest": "bbaff61a7fea1a1186e127c4ea800b04859d0c63399b3aec024cde749a281c74",
    "entries": [
     {
      "mode": "100644",
@@ -25737,6 +25751,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/townMap/fabric/exactIntersectionArea.js",
+     "sha256": "bbc53021ec8dc69d48f7393ac874cd0ff686177d8cf42d46f33bb016945062b2",
+     "size": 11116,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/townMap/fabric/fabricRoot.js",
      "sha256": "d550039f01bb9b198c1bb2142edf9458ca31ebb285e4052b1cd9e4d61e200c1b",
      "size": 6548,
@@ -25759,8 +25780,8 @@
     {
      "mode": "100644",
      "path": "src/domain/townMap/fabric/index.js",
-     "sha256": "fc7286e23287811e70cbc00db9da4d578ea0cc29af6b8c07da65bb2a33a6819e",
-     "size": 4074,
+     "sha256": "39b216accbca6d79f61c42fc79e39b065391fada6745985a616c864b9c446bc7",
+     "size": 4049,
      "type": "file"
     },
     {
@@ -25801,8 +25822,8 @@
     {
      "mode": "100644",
      "path": "src/domain/townMap/fabric/projection.js",
-     "sha256": "769254042f48a7977086ffeef064d431490c33a9691e42cdb837ec5139564c67",
-     "size": 23086,
+     "sha256": "782f50a7d6aeec02e53d2d521da445ea2653c30cc7b19dca0e1902cf97bfa9ae",
+     "size": 22943,
      "type": "file"
     },
     {
@@ -25817,6 +25838,13 @@
      "path": "src/domain/townMap/fabric/shapes.js",
      "sha256": "a966bd0bf4a6554b9e6cbac950086bc0934ffb5faebdcc15199d58ae5159c099",
      "size": 13229,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/townMap/fabric/solidLegality.js",
+     "sha256": "950680dccdef2a7dd30407d657da201f8afec96c25999104b7d89e4fb0ab391f",
+     "size": 13250,
      "type": "file"
     },
     {
@@ -32515,7 +32543,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "290d94ed72c5b556c4c91ce83d9440d53ad0808fc64b43ab672d6ae149b2a9a8",
+   "digest": "a8b2615717e33ee580bc92d27e04c4f1479917681c8bac9981bee8e4edb690d6",
    "entries": [
     {
      "mode": "100644",
@@ -37070,8 +37098,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/defense.generated.js",
-     "sha256": "44f4f4aaa111d55ab1c361415bd6d57f66aa2fe1d1fe67a3a33e1b6d4fb3d4ad",
-     "size": 108470,
+     "sha256": "9138d0342c7dcea6e966c4daa6431c1e849a2b6a73a49820f30f10b9ee8e7f3f",
+     "size": 112100,
      "type": "file"
     },
     {
@@ -37084,8 +37112,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/general.generated.js",
-     "sha256": "065eb20206bbc3a80b8e985f38c9e42fe1aec35d27edc88f3667d6a03b9b7d4c",
-     "size": 154801,
+     "sha256": "3df1a6eea082f0f641598181a42c57e036679edb7a0b0cb69bd3ba7c87aac1d8",
+     "size": 164932,
      "type": "file"
     },
     {
@@ -40842,6 +40870,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/townMap/fabric/exactIntersectionArea.js",
+     "sha256": "bbc53021ec8dc69d48f7393ac874cd0ff686177d8cf42d46f33bb016945062b2",
+     "size": 11116,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/townMap/fabric/fabricRoot.js",
      "sha256": "d550039f01bb9b198c1bb2142edf9458ca31ebb285e4052b1cd9e4d61e200c1b",
      "size": 6548,
@@ -40864,8 +40899,8 @@
     {
      "mode": "100644",
      "path": "src/domain/townMap/fabric/index.js",
-     "sha256": "fc7286e23287811e70cbc00db9da4d578ea0cc29af6b8c07da65bb2a33a6819e",
-     "size": 4074,
+     "sha256": "39b216accbca6d79f61c42fc79e39b065391fada6745985a616c864b9c446bc7",
+     "size": 4049,
      "type": "file"
     },
     {
@@ -40906,8 +40941,8 @@
     {
      "mode": "100644",
      "path": "src/domain/townMap/fabric/projection.js",
-     "sha256": "769254042f48a7977086ffeef064d431490c33a9691e42cdb837ec5139564c67",
-     "size": 23086,
+     "sha256": "782f50a7d6aeec02e53d2d521da445ea2653c30cc7b19dca0e1902cf97bfa9ae",
+     "size": 22943,
      "type": "file"
     },
     {
@@ -40922,6 +40957,13 @@
      "path": "src/domain/townMap/fabric/shapes.js",
      "sha256": "a966bd0bf4a6554b9e6cbac950086bc0934ffb5faebdcc15199d58ae5159c099",
      "size": 13229,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/townMap/fabric/solidLegality.js",
+     "sha256": "950680dccdef2a7dd30407d657da201f8afec96c25999104b7d89e4fb0ab391f",
+     "size": 13250,
      "type": "file"
     },
     {
@@ -47620,29 +47662,29 @@
   }
  },
  "migrationReview": {
-  "bundleDigest": "5533c077dc6e176e9dfa3dfa6331e2760fd12a41eb582b14bf582112a799cf13",
+  "bundleDigest": "876f80c567619d4fb12650e8b006155916314a9461d92a2abf2be6c889d38f72",
   "corpusDigest": "e31eac0d548b6ae7bda7d9dfbf368c3dfd4a424a2662247911239d996676d543",
-  "currentArtifactDigest": "051091361c9bf6556f56c4c7eaa259df97a88e498c74bec63cdea638cb2f89cb",
-  "currentDetectorDigest": "6434b8f9f7eef23ebadf698cf5da7ef551dc4edadbef6dfa8af2d2190c1c40df",
+  "currentArtifactDigest": "67350a8f29a2830ee8bf4bff2bedaad46e1b5a8e0c0968acd21ccf06aa1f5f3a",
+  "currentDetectorDigest": "3d97159912f6dbfa3b7c25c962dbb61e501b434e6ac4d6a15d817a69f7e5dce4",
   "currentFindingsDigest": "0b0e22038063e79e30d1da1c2486fb0a7aaebd9040b5721c5addcd27d913fa9d",
-  "currentScannerSha": "158d99cdb5d94b2247971af90edfcd0baeac1e87",
-  "currentScannerToolDigest": "3174d92eb8a68f68c83f9222f5ac902be532464a9f0a48248e994757f557a3b7",
-  "detectorTreeDigest": "6434b8f9f7eef23ebadf698cf5da7ef551dc4edadbef6dfa8af2d2190c1c40df",
-  "executionTreeDigest": "7eee96e973d76647446c3b4592f52a3f618e5947d74e507e276c11d9ccae3437",
+  "currentScannerSha": "12b3aa5308c027dfceeb3fb7e43b7c0414e4e639",
+  "currentScannerToolDigest": "5986af20026e2e53bfcdcffd196eb4bad9f599228ce16e3b9ec7aad451f96a46",
+  "detectorTreeDigest": "3d97159912f6dbfa3b7c25c962dbb61e501b434e6ac4d6a15d817a69f7e5dce4",
+  "executionTreeDigest": "95b42c8f0b03c7977368ee47ba4324eefb9f5577fd7da779950a83720d7dd181",
   "legacyAlgorithmBaseSha": "6e7acc4dd88a43cb608f40bc77db3b2130a1e2de",
-  "legacyArtifactDigest": "051091361c9bf6556f56c4c7eaa259df97a88e498c74bec63cdea638cb2f89cb",
-  "legacyDetectorDigest": "6434b8f9f7eef23ebadf698cf5da7ef551dc4edadbef6dfa8af2d2190c1c40df",
-  "legacyScannerSha": "158d99cdb5d94b2247971af90edfcd0baeac1e87",
-  "legacyScannerToolDigest": "3174d92eb8a68f68c83f9222f5ac902be532464a9f0a48248e994757f557a3b7",
-  "predecessorBaselineDigest": "c6f1e5a8ccd9caf0ed79d288bac6c1a2d5d666cc937c460460ea9a7d5f156606",
-  "predecessorBaselineTextSha256": "b4ac6506c4069c7acd26e86968310fa7a41e83943ded398853d4f8daacca7012",
+  "legacyArtifactDigest": "67350a8f29a2830ee8bf4bff2bedaad46e1b5a8e0c0968acd21ccf06aa1f5f3a",
+  "legacyDetectorDigest": "3d97159912f6dbfa3b7c25c962dbb61e501b434e6ac4d6a15d817a69f7e5dce4",
+  "legacyScannerSha": "12b3aa5308c027dfceeb3fb7e43b7c0414e4e639",
+  "legacyScannerToolDigest": "5986af20026e2e53bfcdcffd196eb4bad9f599228ce16e3b9ec7aad451f96a46",
+  "predecessorBaselineDigest": "697a4f5fd4fde01a4e12d8bc18612349a3f84703d20c55655145f901fef3d855",
+  "predecessorBaselineTextSha256": "1f9193e893bcc546e3ab44e78cd90339f3d3932da1e55d02231e05f334585153",
   "predecessorInventoryDigest": "4529df4642415543628547349fb088d9038054dfe1c023e5565cff2121d1152f",
-  "reportDigest": "eebee1394590d74c86346aefe725383ac54763c8d502b283b98d3526f0c288b8",
-  "reviewDigest": "f5dd35cd9e6a28ba45974a7548bbcb822f7a2da65b74bcba202a0785b47e66e2",
+  "reportDigest": "14833b8e0d8b4baaf89462e9d705853175c9f083d4319768ac8a33831d130bfa",
+  "reviewDigest": "9e01369b0fe48ec91c033fc62a4d119b5a3652670d3c638557fcb4bf8b72f1fa",
   "scanConfigDigest": "cef0ab59a909576cf6a8820ada14f6afba8acad45fe13dd7b91b60f4c63335fc",
-  "scanTreeDigest": "be8a557a636774c1e6b089c51e7f2e66c6a614ac65fc0e36b82d57175dcffce3",
-  "sourceTreeDigest": "290d94ed72c5b556c4c91ce83d9440d53ad0808fc64b43ab672d6ae149b2a9a8",
-  "subjectSha": "158d99cdb5d94b2247971af90edfcd0baeac1e87",
+  "scanTreeDigest": "bbaff61a7fea1a1186e127c4ea800b04859d0c63399b3aec024cde749a281c74",
+  "sourceTreeDigest": "a8b2615717e33ee580bc92d27e04c4f1479917681c8bac9981bee8e4edb690d6",
+  "subjectSha": "12b3aa5308c027dfceeb3fb7e43b7c0414e4e639",
   "targetInventoryDigest": "4529df4642415543628547349fb088d9038054dfe1c023e5565cff2121d1152f"
  },
  "minRows": 40,
@@ -47880,19 +47922,19 @@
   }
  },
  "scanStats": {
-  "files": 2144,
-  "reads": 123398,
+  "files": 2146,
+  "reads": 123463,
   "resolved": 9249,
-  "unresolved": 114149
+  "unresolved": 114214
  },
  "scannerProvenance": {
-  "detectorDigest": "6434b8f9f7eef23ebadf698cf5da7ef551dc4edadbef6dfa8af2d2190c1c40df",
-  "executionTreeDigest": "7eee96e973d76647446c3b4592f52a3f618e5947d74e507e276c11d9ccae3437",
-  "scanTreeDigest": "be8a557a636774c1e6b089c51e7f2e66c6a614ac65fc0e36b82d57175dcffce3",
-  "sourceTreeDigest": "290d94ed72c5b556c4c91ce83d9440d53ad0808fc64b43ab672d6ae149b2a9a8",
-  "unscannedInputDigest": "540750a927817f35a0f562920a246419a8a372203ad487c9652889d7d84f2f4a"
+  "detectorDigest": "3d97159912f6dbfa3b7c25c962dbb61e501b434e6ac4d6a15d817a69f7e5dce4",
+  "executionTreeDigest": "95b42c8f0b03c7977368ee47ba4324eefb9f5577fd7da779950a83720d7dd181",
+  "scanTreeDigest": "bbaff61a7fea1a1186e127c4ea800b04859d0c63399b3aec024cde749a281c74",
+  "sourceTreeDigest": "a8b2615717e33ee580bc92d27e04c4f1479917681c8bac9981bee8e4edb690d6",
+  "unscannedInputDigest": "26764dcc6a3e2929adbdbc48619d97ad052e91caabd1222e653899a0239555e6"
  },
- "schema": 9,
+ "schema": 10,
  "sentinel": {
   "resolvedReads": 9249,
   "totalKeys": 6611,
