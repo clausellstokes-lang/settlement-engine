@@ -16671,3 +16671,39 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   ELEVEN held in both full-suite runs. The lane's index-fold flag: another
   micro-fold executed at this row (the command-registry/faction-rename/
   design-handoff row relocated VERBATIM to the 08-22 archive).
+
+## §412 — RR-2 COLLECTED; THE EXHIBIT POSTED (THE §374 ACT DISCHARGED, VETO WINDOW OPEN); THE LANDING GO ISSUED (2026-08-23 ~03:40)
+
+- **The member:** tip 0afddfe9, three commits at base 19b799ce (still the
+  branch tip — no rebase owed). S0 two-part WHOLE (1996). Every charter leg
+  re-derived at base (the a9138d7 STOP marks honored); one charter staleness
+  noted correctly as not-a-STOP (the OSR schema is 10 now). The genesis
+  re-proof re-run: the sole historical blurb writer touched FACTION comments,
+  never institutions — the strike stands.
+- **THE SHIFT BILL, executed at scale:** 60 cases × 2396 institution rows —
+  raw settlements byte-identical both sides; keys added 0 / removed 0 /
+  moved 2396, EVERY one services.detailed[i].description null→authored,
+  off-spec ZERO; no golden moved (42 files/339 tests green, zero snapshot
+  re-records). The dark data was real and the cure touches nothing else.
+- **THE EXHIBIT POSTED TO THE OWNER** (page-1 render pair + glance): 1 of 59
+  cards printed a description at base — and that one was a CUSTOM
+  institution showing its stale generated line — 59 of 59 cured. §374's
+  chair act is DISCHARGED; the veto window runs until the CAS.
+- **JUDGMENTS RATIFIED:** J1 (the mutex-patience env knob — weakens no
+  check; and the knob must be EXPORTED, banked); J2 (the surgical manifest
+  splice, with the re-serialize attempt REVERTED after it reformatted
+  4267/1355 and a 144-packet deep-compare proving the final 107/0 pure —
+  the never-re-serialize law executed properly); J3 (facts surfaced upward,
+  the chair banks).
+- **The sitting's SECOND stray set FILED to the §355 hunt** (DOOR 3 timeout ·
+  npcAuthoringScope query-budget; both cleared at pristine base AND the
+  lane's tree, neither on RR-2's surfaces, the authoritative ratchet at
+  eleven throughout; classify-once-then-STOP followed). **The wrapper lied
+  AGAIN** — "exit code 0" over TRUE_EXIT=3 — the trap's next firing, caught
+  by the in-shell capture as always.
+- **GO ISSUED:** one clean end-to-end landing terminal at 0afddfe9 (the
+  composed proof stands as BUILD receipt only), branch-tip==base re-verified
+  at fire time, exported mutex patience, arm-and-wait. The CAS follows on
+  its green. TWO FACTS BANKED to memory: the mutex env knob propagates only
+  when EXPORTED; the packet validator cross-checks manifest↔index↔packet so
+  a two-of-three status flip reads as disagreement.
