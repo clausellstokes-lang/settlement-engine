@@ -14476,3 +14476,16 @@ recommended. Implementation, per item:
 - **§343.2** Every Fable-tier implementation dispatch names its §343.1 criterion in
   the ledger row that dispatches it; a dispatch that cannot name one defaults to
   Opus.
+
+- **§343.3 (owner in-chat, same sitting: "same with verification"):** the discretion
+  clause extends to VERIFICATION — a verify pass may run on a Fable-tier lane (or the
+  chair) when its judgment density warrants it: (a) the verification must rule on
+  WHAT COUNTS AS PROOF (instrument-identity questions — the §332.1 class); (b)
+  vacuity hunting dominates (the pin-vacuity families, where a green can be a lie and
+  spotting it is the whole job); (c) the evidence web spans systems (the
+  receipt→ledger-transit class the retrovalidation sitting convicted); (d)
+  adversarial re-derivation of a chair or compile artifact where the flaw, if any,
+  is in the reasoning rather than the arithmetic. Default unchanged: Opus verifies
+  well-instrumented claims — an executed instrument does not need a smarter reader,
+  it needs an honest one. §343.2's naming rule applies identically: every Fable-tier
+  verification dispatch names its criterion.

@@ -74,6 +74,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~00:50 ET: §343.3 — the same Fable-tier discretion extends to
+# VERIFICATION (proof-identity rulings / vacuity hunting / cross-system
+# webs / adversarial re-derivation); Opus still verifies instrumented claims.
 # ⭐ ~00:45 ET: OWNER RULE CHANGE (§343) — implementation may defer to
 # FABLE-tier at chair discretion under the §343.1 appropriateness test
 # (implementation-is-design / zero-headroom / cross-system coherence /
