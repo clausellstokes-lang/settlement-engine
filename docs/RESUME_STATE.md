@@ -74,6 +74,12 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~05:05: T2G LANDED-IN-WORKTREE at 5b594a93 (the §379 discharge executed
+# 4x row-out/note-in; validator green; the two-row-styles fact → H9's
+# charter; cherry-pick priced, correctly held for the window). ⚠ MINT's GO
+# RACED — THIRD tonight (2h idle, no gate log) — RE-SENT with a started-
+# handshake demand (a started-line in the log within minutes). Chair habit
+# is the backstop: the cron starves while turns run.
 # ⭐⭐ ~04:45: T2G's STOP-RAISE RULED (§379) — the estate's FIRST cross-packet
 # retirement collision: four landed packets pin the §375-authorized retiree.
 # Ruling: discharge-NOTES (4× row-out/note-in, unique-key, in T2G's landing)
