@@ -74,6 +74,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~22:45: WEB-1 GO (§404) — widened migration bill accepted (rollback
+# note MANDATORY via MONEY_PII_TABLES; DEPLOY.md head line is a RED TEST;
+# three-file minimum for 197); tree-reuse ratified; index folded+row added.
 # ⭐⭐ ~22:15: DISK-FULL EVENT (§403) — volume hit 100%; holding tips PINNED
 # to refs/preserve/holding-* then ~24 landed-member trees reclaimed (~19GB).
 # T2H COLLECTED (3 files commit-at-resume; J-TET2H-9 ratified); CT-2

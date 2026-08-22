@@ -16392,3 +16392,26 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   beneath an absence claim; prove a toolchain RESOLVES before reading its
   verdict; the §397 two-part rule works precisely because it forces a
   differently-shaped second observation of the same thing.
+
+## §404 — WEB-1 GO ISSUED WITH THE WIDENED MIGRATION BILL; THE TREE-REUSE JUDGMENT RATIFIED; INDEX MAINTENANCE (2026-08-22 ~22:45)
+
+- **WEB-1's resumed handshake collected:** tip unchanged at eb6124a6, clean
+  tree, genuine npm ci, S0 two-part INTACT. Its tree-reuse judgment RATIFIED
+  (the resume order's deleted-tree premise was the chair's error; the lane
+  honored the substance and saved 1.3GB on a 98% volume).
+- **THE MIGRATION BILL WIDENED AND ACCEPTED — the §403.1 completeness law's
+  first live application:** enumerated by grepping every tests/** reader of
+  supabase/migrations (six gates, 39 tests, all baseline-green) instead of
+  the two remembered names. TWO HARD-FAIL beyond the plan: the
+  rollback-discipline contract (profiles AND consent_change_records are on
+  MONEY_PII_TABLES ⇒ 197 MUST carry a -- @rollback: note; even a comment
+  naming a listed table arms the regex) and the deploy-runbook freshness pin
+  (DEPLOY.md's head line is a RED TEST, not prose drift). Minimum deliverable
+  for 197 is therefore THREE files. GO issued to build with that shape;
+  banked to memory (new-migration-owes-six-gates-two-bite.md, the lane's
+  file, now indexed by the chair).
+- **Index maintenance:** the migration row added; three closed/superseded rows
+  folded to the 08-22 archive (notices — superseded by the chartered WEB-7
+  car; the vite-worker pointer — full row already archived; §27
+  build-everything — program executed, train law living in briefs and topic
+  file). Index back under the limit.
