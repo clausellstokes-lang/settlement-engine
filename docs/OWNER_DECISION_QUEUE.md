@@ -15310,3 +15310,13 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   regen/undo/import), the decisive executed probe, and the sibling census of
   reader-vs-writer key agreement across ALL editable fields. Findings only; the
   cure charters separately; anything persistence-shaped comes back owner-marked.
+
+## §370 — OWNER ORDER: HARD CAP FOUR ACTIVE LANES (2026-08-22 ~18:40)
+
+- **Owner in-chat: 'limit to four active lanes.'** The chair had crept to five with
+  INV-DESC's dispatch. RESTORED: MEAS-DUALRUN parks at its phase-1 completion (the
+  least time-critical seat — its phase 2 is track-blocked regardless), leaving four
+  active: WF-8 (the critical path) · TC-DOSSIER · TC-T2F · INV-DESC. The wakeup's
+  prompt is RE-MINTED with the cap as a hard line (⛔ never exceed four; if over,
+  park the least time-critical) — the enforcement lives in the enforcer, not in the
+  chair's memory. The §365.1 parked-holds-no-seat rule stands beneath the cap.
