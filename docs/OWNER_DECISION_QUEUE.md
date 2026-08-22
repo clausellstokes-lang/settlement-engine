@@ -17252,3 +17252,38 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   supersedes it — the CAS target comes from the LANDING REPORT, never from a
   pin. CT-3's gate continues under load ~150 (three sibling batteries;
   evidence pre-stamped; a timeout-class red classifies as load artifact).
+
+## §428 — T2L COLLECTED: BUILT AND GREEN AT 149 EFFECTIVE; THE THIRD RENAME SITE RATIFIED; THE SWEEP HONESTY NOTED; ITS STRAYS FILED TO §355 (2026-08-23 ~15:10)
+
+- **The member:** tip 6c920593 (pinned at refs/preserve/holding-t2l), four
+  commits on T2K's holding 4d2d17f8 — the stack state derived with
+  merge-base evidence, the §416.1 identity arm applied at close (the ledger
+  moved; not its stack's tip; proceeded). All 19 preflights re-executed;
+  every consulted hash byte-matched; the effective-line instrument validated
+  on FOUR knowns before pricing; A1-A6 green; census walked sequenced with
+  the isolation conviction exact; both typecheckers at ceiling with zero
+  new errors; determinism proven (same input → byte-identical record;
+  integer-exactness on both axes); 149 effective against the ratified 230.
+  One compile deviation reported not smoothed (row 8's control reads 7
+  files, not 4 — the control FIRES, so the six zeros beside it are real).
+- **J-TET2L-1 RATIFIED — the THIRD rename site taken on the lane's own
+  census:** the draft named two prose sites; the lane's occurrence census
+  found the roster's own declaration docblock still titled with the retired
+  word, directly above the renamed constant — swapped, severable, exactly
+  the class-completeness law (§419.2 exists to retire the word, not two
+  instances of it). J-TET2L-2 likewise (the compile's M3 proven EQUIVALENT
+  under the implemented design — the exact-field door refuses before the
+  threading is reached — diagnosed, condition pinned, re-planted convicting
+  two arms).
+- **THE SWEEP HONESTY, noted as the standard:** the lane REFUSED to report
+  "STRAYS 0" — the stable red set matches T2J/T2K exactly, but both runs
+  carried strays with DISJOINT casts, run 1's self-attributed (its own
+  build held the machine; every stray at 24-63s duration). Determination
+  supported four ways (all strays green focused at tip; none reads its
+  surfaces; its census green on every execution; classify-then-ONE-re-run
+  honored) — **the stray sets FILED to the §355 hunt**, which now holds
+  specimens from four distinct lanes at multiple commits: the varying-cast
+  signature is box-level and chartered, never a member's to absorb.
+- T2L HOLDS behind T2K in the D3a stack. Meanwhile: CT-3's decisive re-run
+  fired at load 6.45 (vs the 150 that made the timeout); T2M still
+  building. The producers ruling remains the chair's next queued act.

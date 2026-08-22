@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~15:10: T2L COLLECTED (§428) — 6c920593 pinned, 149 eff, third rename
+# site ratified, M3 equivalence pinned+replanted, sweep honesty (disjoint
+# strays → §355). CT-3 re-run FIRED at load 6.45. T2M building. Producers
+# ruling = chair's next act.
 # ⚠ ~13:50: §427.1 — holding-ct3 pin is PRE-REBASE (ba806682, carries the
 # retracted claim); CAS target is b10ed1a1 ONLY (from the landing report,
 # never a pin). Handoff + receipt both warn. Gate alive at load ~150.
