@@ -485,13 +485,56 @@ denominator provably contains the fabric surface. Figures are in §11.
 - **`validate:packets`:** green at DRAFT and again at READY. **Duplicate-path probe:** EXECUTED with
   the deferred rows present, refusal quoted; the rows were removed and the validator re-run green.
 - **Fence:** post-build, `VERIFY_DIST=1` → 3 passed (3), exit 0.
-- **§408 pre-gate sweep** over `tests/lint tests/build tests/ops`: every red joined to
-  `scripts/.test-ratchet-baseline.json` by an executed title-prefix match, STRAYS 0.
+- **§408 pre-gate sweep** over `tests/lint tests/build tests/ops`, run TWICE and reported as it
+  happened rather than as it was predicted. The STABLE red set is **five tests in three files**, and
+  all five join `scripts/.test-ratchet-baseline.json`'s frozen eleven by executed title-prefix
+  match at `4deb4f02` — `clampPrimitiveBaseline` (entry 7), `warCostKindPools` ×3 (entries 8–10),
+  `warRulingKindPools` (entry 11). That is the identical set MF-T2J and MF-T2K reported at this same
+  base. ⚠ **BOTH RUNS ALSO CARRIED STRAYS, AND THE TWO STRAY SETS ARE DISJOINT** — run 1:
+  `townScene3dLazy` ×5, `observedShapeSentinel`, `postureNameCollision`,
+  `sovereigntyLightingContract` (13 failed / 7 files); run 2: `townSceneLocalMatrixAudit` ×2 and
+  `postureNameCollision` (8 failed / 5 files). **Every stray file from both runs passes GREEN when
+  run focused at this tip** (3 files / 86 passed and 2 files / 22 passed, both exit 0), and run 1's
+  strays each carried 24–63 second durations because that sweep was run while `npm run build` held
+  the machine. This is the estate's known varying-cast intermittent contamination, not this
+  member's: nothing in the stray cast reads this member's leaf, its acceptance file or either
+  walker it edits, and the member's own file
+  (`tests/lint/sovereigntyLightingContract.walker.test.js`) is green focused at 33/33 on every
+  execution. Per the varying-cast protocol the run was classified and re-run ONCE; a second stray is
+  a STOP, so the hunt is left to its chartered owner (§355) and is recorded here rather than chased.
 - **S0, two-part, at this base:** exit 1 WITH the printed schema-9 envelope verdict — a real
   reading rather than the `ERR_MODULE_NOT_FOUND` trap. This member writes no governed file.
 - The full gate is deferred to the landing slot under the ratified rule: this lane's base is
   provably not an ancestor of the branch, so a gate receipt taken now would certify a tree that is
   not the one that lands.
+
+### §11.1 · DELIVERABLE DIGESTS, read from the COMMITTED tip with `git show HEAD:`
+
+⚠ Read from the committed tip rather than from the working tree, because the pre-commit hook can
+re-stage — and it was checked: `git diff HEAD` over the four code deliverables reads empty, so the
+hook changed nothing under this lane.
+
+| deliverable | SHA-256 at the committed tip |
+|---|---|
+| `src/domain/townMap/fabric/vegetation.js` | `52ab2efda906190b08ae16fc4031569b67c43a42f8900af6755ca51173838971` |
+| `tests/domain/townMapVegetation.test.js` | `b447b6c6782af03e89b675383b95c95153db64019fba6ca03ed8ee5adc4473fb` |
+| `tests/lint/townMapStageManifest.walker.test.js` | `d11ece38aa7d9257422b525dc27ce881fd56f3832d6a72c84aa4e8096eda1a17` |
+| `tests/lint/sovereigntyLightingContract.walker.test.js` | `9bdf53c055ebadb49248fee6e4508c543a6775a39d4d67d8283f715e28f588b3` |
+
+**PINNED UNMOVED at the tip** — every consulted source still hashes to its base value:
+`supportSurface.js` `9d0e162b…2ea7` · `massPart.js` `d52c19fa…e76f` · `fabricRng.js`
+`4094ecb8…6e95a` · `foundation.js` `1ada51b6…93e3` · `solidLegality.js` `950680dc…391f`.
+`package.json` and `package-lock.json` are byte-unmoved against the base (executed
+`git diff --name-only` over both paths reads empty), so no mint trigger fires.
+
+**Diff against the base:** 7 files, 1322 insertions, 11 deletions; production surface is ONE file.
+
+**Forensic zoom, executed over the built tree:** 710 chunks in the denominator. Four leaf probes,
+each verified a string LITERAL present in the leaf and unique across `src/` beforehand
+(`mf-vegfield-era-uniform-rect-v1`, `DROUGHT_DECIDUOUS`, the count-0 refusal fragment, and the
+`VEGETATION` kind) → **0 chunks each**; ZERO probes withdrawn. Three positive controls owned by
+landed fabric modules → **1 chunk each**, so the denominator provably contains the fabric surface
+and the absence is measured against something rather than against nothing.
 
 ## §12 · HARD SCOPE BUDGET (ODQ §425-ratified)
 
