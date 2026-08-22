@@ -74,6 +74,14 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ~10:45 WAKEUP: FOURTH raced GO caught (T2G's log: 'Gate NOT started';
+# send was queued-not-resuming) — RE-SENT, now resuming. PATTERN NOTE for
+# the GO protocol: a send that returns 'queued for delivery' to a lane
+# whose turn is ENDING has raced ~100% tonight; a send returning 'Resuming
+# agent' delivers. Chair habit: after any 'queued' GO result, expect the
+# race and verify the started-line within minutes. Seats: T2G (re-firing) ·
+# HOUSE/RR-1/CT-1a parked = 1 active of 4; queue holds (their slots are
+# sequential behind T2G by design — no refill manufactured). Ledger current.
 # ⭐ ~10:20: T2G GO SENT (tip ac0d0149 on cb369d2b0b63; track load 2.13).
 # ADOPTED into the collection: the carry law's THIRD FACE ('right when
 # measured, stale under its own packet — carry the DELTA never the tuple';
