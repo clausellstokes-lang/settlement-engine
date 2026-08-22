@@ -1,15 +1,18 @@
 # Town cartography / MF-T2M — architectural-history operations and deterministic fixtures: the §287.16 massing-foundation member that lands the SPEC's twelve-kind dated-operation payload grammar as a domain member of the fabric's ONE sealed-artifact grammar, and executes the §423 Shape-B strip that demotes `fabric/operations.js` from door-claimant to payload compiler
 
-- **Status:** DRAFT
+- **Status:** READY
 - **Packet version:** 1
 - **Implemented by:** lane TE-T2M, against the chair-ruled compile `draft-MF-T2M.md`
   (ODQ §426; compiled by TC-T2M under ODQ §423.1).
 - **Ruling of record:** **ODQ §423** (the domain door; Option B + the §423.1 Option-D law) as
   ruled at **ODQ §426**. This member executes consequences (1) and (2); the store side is
   UNTOUCHED — consequence (3) keeps the door verb docketed with the executor tranche.
-- **Verified base:** `4d2d17f86f173686d142a97e3fd356d6b7be97e6`
-- **Base provenance:** `refs/preserve/holding-t2k`,
-  MF-T2K's holding tip. ⭐ **DERIVED WITH EXECUTED EVIDENCE, not assumption:** TE-T2L had
+- **Verified base:** `claude/composite-r4` at `4d2d17f86f173686d142a97e3fd356d6b7be97e6`
+- **Base provenance:** the branch token above names the code of record and the landing branch,
+  exactly as MF-T2H, MF-T2J and MF-T2K spell it; the base OBJECT is
+  `refs/preserve/holding-t2k` —
+  MF-T2K's holding tip, and it is NOT yet an ancestor of that branch, which is the whole point of
+  a holding stack. ⭐ **DERIVED WITH EXECUTED EVIDENCE, not assumption:** TE-T2L had
   committed no holding tip when this lane derived its base (its worktree HEAD read `4d2d17f8`
   with uncommitted work, and `refs/preserve/holding-t2l` did not exist), and the cascade had NOT
   rebased the D3a stack — `git merge-base --is-ancestor` reports `05e7f9d5` (T2H), `f7ba3145`
