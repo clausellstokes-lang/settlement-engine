@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~01:00: WEB-1 COLLECTED (§408) — green at e1c08332; guard CLEAN
+# (under-flip set empty); bill 6→10 gates; SWEEP LAW AMENDED (+tests/ops;
+# new migration owes a NEW reviewed wave). Packet mint authority granted —
+# addendum commit supersedes as CAS target. WEB-2/3 wait on 197 landing.
 # ⭐⭐ ~00:15: RR-1 LANDED (§407, 20th landing) — tip 19b799ce; five
 # judgments ratified; the third-reader draft error recorded in the open.
 # TE-RR2 dispatched (exhibit pair deliverable — chair posts BEFORE its CAS);

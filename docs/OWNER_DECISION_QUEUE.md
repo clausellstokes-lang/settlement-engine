@@ -16524,3 +16524,41 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   unviolated while WEB-1 holds 197. FOUR ACTIVE: WEB-1 · RR-2 · WEB-6 ·
   WEB-4. Landing queue: RR-2 (post-exhibit) → T2Bf → CT-2 → H8B/CT-3 → T2H →
   then the website cars in GO order.
+
+## §408 — WEB-1 COLLECTED GREEN; THE GUARD CLEAN; THE BILL WIDENED TO TEN GATES; THE PACKET MINT AUTHORITY GRANTED (2026-08-23 ~01:00)
+
+- **The member:** built and full-gate green at e1c08332 (12 files, +631/−78,
+  base eb6124a6, no ref moved) — a packet addendum commit follows under this
+  row's authority and supersedes it as the CAS target. The conjunction's
+  VERIFY GUARD came back CLEAN with the enabling receipt: exactly one client
+  caller of the stamping RPC, rooted in the PrivacySettings toggle handler;
+  the sign-in path selects-and-narrows localStorage only; no edge function or
+  script writes the column — THE UNDER-FLIP SET IS PROVEN EMPTY and the §406
+  conjunction stands. M4a/M4b redden exactly the predicted arms; the four A4
+  corners seeded through the REAL RPC with a live-trigger contrast row and an
+  all-ON control (the pins cannot pass for the wrong reason).
+- **THE BILL WIDENED AGAIN — SIX → TEN gates, three more hard-failing,** found
+  by enumerating readers-of-the-readers (CURRENT_STATE's "contiguous to 196"
+  line is a PINNED FIGURE wearing dated prose). **GATE 10 is the estate
+  lesson: tests/ops/migrationRehearsal is INVISIBLE to every pre-terminal
+  sweep** — the wave manifest must gain a NEW REVIEWED WAVE for any new
+  migration or the suite collects zero and the scope sentinel fires at the
+  terminal. THE SWEEP LAW IS AMENDED: the pre-gate sweep is
+  `vitest run tests/lint tests/build tests/ops` from here forward (banked).
+- **JUDGMENTS RATIFIED:** the NEW WAVE over extending simulation-metrics-
+  storage (an operator's record must not be corrupted for a lane's
+  convenience); the reversibility-distinction pin (a forward-only WAVE
+  containing a documented-manual-reversal MIGRATION — policy-level
+  classification would lie to the operator); the census cause-block declaring
+  the parked pglite suite's twelve invisible pins (the parked-file law
+  honored at authoring time, `credited` correctly unmoved).
+- **THE PACKET RULING:** the lane declined to mint a packet ID in a governed
+  manifest without explicit authority — reasonable under §299.5's shadow, and
+  the distinction is now recorded: a MEMBER PACKET is the standard
+  deliverable, not governance; the §299.5 class is a lane authoring LAW.
+  **Mint authority GRANTED here** for the WEB-1 packet, the manifest row, and
+  the new website family's INDEX row, as a second commit; the terminal
+  re-runs at the GO per the standing queue pattern.
+- WEB-1 HOLDS on its new tip when reported. Seats: RR-2 · WEB-6 · WEB-4
+  active; WEB-1 wrapping its addendum. WEB-2/WEB-3 stay migration-blocked
+  until 197 LANDS (§402's sequential rule); WEB-5/WEB-7 are the next fills.
