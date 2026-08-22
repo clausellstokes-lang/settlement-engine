@@ -802,12 +802,16 @@ expected eager ≈ two key literals against the 85 B margin (measure-first law a
       COMMITTED — verdict (0C/14H/68M/109L; defect mass migrated to cross-wave seams +
       built-but-unwired class), full 191-finding register with per-slice coverage, owner-urgent
       list (§6), fix-program shape (§7), dimension re-dispatch queue (§8).
-- [ ] **Phase V — VERIFY** (Opus, model:'opus'): DISPATCHED 2026-07-16 ~00:12 as workflow
+- [x] **Phase V — VERIFY** (Opus, model:'opus'): DISPATCHED 2026-07-16 ~00:12 as workflow
       `wf_475bdd2a-7b5` — 96 Opus agents (14 highs × 2 lenses refute+re-derive, 68 mediums × 1
       refuter; agents self-extract finding details from the banked RAW_SURVEY_RESULTS.json);
       lows defer to implementation-time verification (recorded, not dropped). The 10-dim
       survey remainder re-dispatched simultaneously (resume of `wf_d69567dc-f0d`, 23 slices
       cached). Both launched when capacity returned (owner: "do it now").
+      **[CLOSED-SUPERSEDED 2026-08-22: overtaken in substance — per-finding verification was
+      re-executed and ruled by the retrovalidation sitting (ODQ §293/§294/§297/§298, all 30
+      rows ruled) and by the build era's per-landing terminal gates. Closed as a record,
+      never deleted.]**
 - [x] **Phase P — WAVE PLAN (final, 2026-07-16 ~01:30).** LANDING BASE RE-RULED: the merge
       session STALLED at W3a (no commits since 22:12; WIP idle 3+ hrs — session dead). Per the
       owner's charter order (fix THEN merge), Phase F lands on **review-fixes** now; the merge
@@ -838,7 +842,7 @@ expected eager ≈ two key literals against the 85 B margin (measure-first law a
         the G2+lighting regen moment.
       REFUTED findings (6) are EXCLUDED from all briefs; PARTIAL corrections BIND the fix
       shapes (verdict records in docs/review-r2/VERIFY_*.json are part of each brief).
-- [ ] **Phase F — FIX WAVES** (Opus implementers, Fable §0.3 review per wave, full gate per
+- [x] **Phase F — FIX WAVES** (Opus implementers, Fable §0.3 review per wave, full gate per
       wave): **OPEN. Baseline gate GREEN @ 853bc923-era tree: 9,896/9,897 (882 files) +
       verify:dist 119/119, exit 0** (log: scratchpad/baseline-gate-r2.log; any later red is
       wave-caused). BATCH 1 DISPATCHED 2026-07-16 ~01:40 as workflow `wf_40d34edf-230` —
@@ -858,6 +862,10 @@ expected eager ≈ two key literals against the 85 B margin (measure-first law a
       to delegate anything to you should a decision need to be made as long as it is set with
       the standard that I set at the beginning! Continue all the way until everything is
       done!")** — standing constitution + owner-gated classes survive as always.
+      **[CLOSED-SUPERSEDED 2026-08-22: this is the DISPATCH-TRACKING box; its own completion
+      is recorded in the "Phase F — COMPLETE" row immediately below, which has been checked
+      since 2026-07-16. The open box was bookkeeping lag, not open work. Closed as a record,
+      never deleted.]**
 - [x] **Phase F — COMPLETE (2026-07-16): ✅ SURFACE-2 MERGED @ f6986be3** — all 14 remaining
       items (whispers wired + walker fully strict at ceiling 0; palette single-source + hex
       scan; deity names from snapshots via one shared resolver; naval legibility — sea
@@ -868,7 +876,11 @@ expected eager ≈ two key literals against the 85 B margin (measure-first law a
       running. **PHASE F TOTALS: 8 waves + FP-G8 merged (~90 findings closed incl. all
       verified highs), suite 9,896 → 10,122+ (+226 pins), first paint −55.5 KB, RATCHET #10,
       3 owner-gated deferrals recorded, G2 parked red-by-design awaiting the regen moment.**
-- [ ] **Phase E — END**: final gate + ledger rows + memory + owner report.
+- [x] **Phase E — END**: final gate + ledger rows + memory + owner report.
+      **[CLOSED-SUPERSEDED 2026-08-22: a one-shot END phase was overtaken by the build era's
+      standing cadence — a terminal gate, ledger rows, a memory pass and an owner report at
+      EVERY landing (ODQ §293/§294/§297/§298 and the collections after them). There is no
+      remaining one-time act to perform. Closed as a record, never deleted.]**
 
 **PHASE M TAKEOVER DOSSIER (read-only prep, 2026-07-16 ~05:30):** merge branch at c89a5372
 (W1+W2+W3a committed). The dead session's worktree (.claude/worktrees/agent-a04d3f325c72e62dd)
