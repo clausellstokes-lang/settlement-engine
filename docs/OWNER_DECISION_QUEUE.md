@@ -14809,3 +14809,17 @@ recommended. Implementation, per item:
   the one moment it can happen silently; (3) unattributable → STOP-RAISE per J2.
   The predecessor reconciled ALL-SAME, so every non-'same' row at the rebuild is
   new information by construction.
+
+- **§353.6 (appended ~06:40) — THE REHEARSAL'S VINDICATION, AND A FLEET ADVISORY:**
+  OSR9's mutexed pre-terminal sweep at the throwaway tip caught ITS OWN new control
+  as vacuous — a bare not.toContain that held both when the guard worked and when
+  the guarded bank vanished (the anti-vacuity control vacuous one level up), flagged
+  by the anchor walker's per-file exact ceiling. Cured at the rehearsal head in the
+  two-half form that cannot both go vacuous (positive-liveness of the refused reads
+  + an anchored exclusion traveling the same filter; the cohort check compares
+  against the bank's own length, not a literal). Left alone this reds INSIDE the
+  protected CAS window — the exact 'full-gate-only ratchets bite at the terminal'
+  pattern, pre-paid at zero cost. The carry-forward is in the rebuild runbook (the
+  re-derived 60/40 pins use the anchored form). FLEET ADVISORY sent to TE-WF8 (the
+  train's largest new negative surface): anchored form for every new negative +
+  the mutexed sweep BEFORE requesting the slot.

@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ~06:40 ET: §353.6 — OSR9's rehearsal caught its own vacuous control (bare
+# not.toContain; anchor walker per-file ceiling); cured two-half at the
+# throwaway tip; advisory sent to WF-8 (anchored form + pre-slot mutexed
+# sweep). Rehearsal head f91d5de0. Still waiting: T2E's heads-up.
 # ~06:10 ET: §353.5 — mint-last's flip side recorded (new train reads freeze
 # as accepted debt, said out loud); OSR9's three-branch rebuild rule RATIFIED
 # unflipped (benign=executed reading w/ per-row notes; defect-candidate =
