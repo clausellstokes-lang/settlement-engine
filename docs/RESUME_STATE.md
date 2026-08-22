@@ -74,6 +74,12 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~10:20 ET: LOAD RULING — the stray windows ran at 10x oversubscription
+# (46/76/82 on 8 cores; chair-ps'd: T2E's confirming ratchet owns 7 workers,
+# earlier stacked with WF-8's sweep). ORDERS: T2E's final gate ONLY on a
+# chair-verified quiet track (load<~6; criterion unchanged, drawn on quiet);
+# WF-8 stood down entirely until its slot; HUNT-1 zero-compute + given the
+# load evidence (hybrid H2→H1 hypothesis noted). Confirming cast pending.
 # ⭐⭐ ~09:30 ET: THE VARYING-CAST FINDING (§355) — the suite's full-run
 # context is intermittently contaminated (3 runs, 3 disjoint stray casts;
 # lawBandTable green-at-census now flapping). T2E ruled INNOCENT (5 legs);
