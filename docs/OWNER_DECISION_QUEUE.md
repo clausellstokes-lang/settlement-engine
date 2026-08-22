@@ -16223,3 +16223,33 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   five-vs-four patron-fall diagnosis; diagnosis-only, cheap-tier per the
   staffing rule — low judgment density). FOUR ACTIVE: RR-1 · T2H ·
   TC-WEBSITE · FTH34.
+
+## §400 — FTH34 COLLECTED AND RULED: THE PROSE OVERCLAIMS; THE SHRINK-BACK RIDES THE WF-8 CAR; THE PRODUCER DOOR STAYS OPEN (2026-08-22 ~21:00)
+
+- **The verdict, all-CONFIRMED at eb6124a6:** DS-FTH-3 enumerates FIVE
+  patron-fall causes; PATRON_FALL_CAUSES is frozen at FOUR ('abandoned'
+  absent). The classifier is total over four arms and structurally cannot emit
+  a fifth; the sole writer REFUSES out-of-vocabulary causes with a negative
+  test pinning exactly 'abandoned'; the sink crossing ('abandoned''s natural
+  producer) never vacates the patron seat — zero producers. History: the
+  constant has NEVER had a fifth member; the doc block predates the engine
+  module by 13 days; WF-1A's own packet §10 records the cut ("zero producers;
+  a later WF member may earn a fifth cause") and the certification registry
+  independently restates the four-token vocabulary.
+- **RULED (chair):** cure shape 1 — the DOC SHRINK-BACK — RIDES THE
+  ALREADY-QUEUED WF-8 SHRINK-BACK CAR, not its own car: remove 'abandoned'
+  from DS-FTH-3's STATE-KEY enumeration and delete its FALL block until a
+  producer lands. The block is UNDRAWABLE (no state can carry the value), so
+  the removal moves zero seeded draws — the executor still proves it
+  key-by-key with goldens both ways per the CT pattern, and the regen rides
+  the §384.2 content batching. THE PRODUCER DOOR STAYS OPEN as WF-1A wrote
+  it: if a future WF member builds pure-secularization seat vacancy, the
+  fifth cause and its doc block land IN THE SAME COMMIT as the producer.
+  Vetoable; ruled chair-side because the movement is provably zero.
+- Incidental from the lane, noted: origin/claude/composite-r4 is a week stale
+  against the local ref — by design (pushes are owner-gated); lanes pin to
+  the LOCAL ref.
+- **§400.1 SEAT:** FTH34's seat refilled with TE-POP2 (the DS-POP-2 title
+  misnaming hunt — its detail was lost to compaction; recover, verify at tip,
+  charter the cure shape; sonnet-tier, diagnosis-only). FOUR ACTIVE: RR-1 ·
+  T2H · TC-WEBSITE · POP2.

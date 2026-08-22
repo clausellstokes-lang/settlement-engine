@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~21:00: FTH34 COLLECTED+RULED (§400) — PROSE-OVERCLAIMS confirmed
+# ('abandoned' cut at WF-1A, zero producers); shrink-back RIDES the WF-8
+# car; producer door open (fifth cause lands WITH its producer). Seat →
+# TE-POP2 (DS-POP-2 hunt, sonnet). FOUR: RR-1 · T2H · TC-WEBSITE · POP2.
 # ⭐ ~20:45: INV-EVS COLLECTED (§399) — displacement CONFIRMED both surfaces
 # (read-side; common branch discards the pen); SECOND defect: screen colon-
 # truncation on the one surviving branch; cure shape built-and-unwired.
