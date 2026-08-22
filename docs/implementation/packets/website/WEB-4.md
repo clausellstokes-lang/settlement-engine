@@ -1,6 +1,6 @@
 # Website / WEB-4 — the sim_address_chain registry row (member 4 of `W-A`)
 
-- **Status:** DRAFT
+- **Status:** READY
 - **Packet version:** `1`
 - **Verified base:** `claude/composite-r4` at `19b799ce718d52e36a3b14a85fa9cfd5051ccf26`
 - **Last revalidated:** 2026-08-22 at `19b799ce718d52e36a3b14a85fa9cfd5051ccf26`

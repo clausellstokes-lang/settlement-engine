@@ -20413,7 +20413,7 @@
     },
     {
       "id": "WEB-4",
-      "status": "DRAFT",
+      "status": "READY",
       "packetPath": "docs/implementation/packets/website/WEB-4.md",
       "verifiedBase": "19b799ce718d52e36a3b14a85fa9cfd5051ccf26",
       "changeManifest": [
