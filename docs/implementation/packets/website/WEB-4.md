@@ -1,9 +1,21 @@
 # Website / WEB-4 — the sim_address_chain registry row (member 4 of `W-A`)
 
-- **Status:** READY
+- **Status:** LANDED
+- **Implementation:** built by lane TE-WEB4 on 2026-08-22 at base `19b799ce` as
+  `c558e2a3a3dde28a6604a532830315be678f8eb3`, rebased at the landing slot onto
+  `4060f690` (WEB-1, the 27th landing) as `8a345910ca3bc5908970132454ec2e9fcb46c250`; the
+  chair CASes the landing. Do not redispatch. ⚠ If the landing rebases, the census tuple in
+  `tests/lint/sovereigntyLightingContract.walker.test.js` and this sha must be
+  re-derived from the hash AFTER the last edit — never carried across a rebase.
 - **Packet version:** `1`
-- **Verified base:** `claude/composite-r4` at `19b799ce718d52e36a3b14a85fa9cfd5051ccf26`
-- **Last revalidated:** 2026-08-22 at `19b799ce718d52e36a3b14a85fa9cfd5051ccf26`
+- **Verified base:** `claude/composite-r4` at `4060f690036c79e1c6190cb052bdb221bde93cde`
+- **Last revalidated:** 2026-08-22 at `4060f690036c79e1c6190cb052bdb221bde93cde` (the landing slot; authored and
+  first validated at `19b799ce718d52e36a3b14a85fa9cfd5051ccf26`)
+- **Landing note:** rebased by lane TE-WEB4-LANDING onto `4060f690`, four commits
+  carried. The census tuple below and the walker's were RE-DERIVED at the slot by
+  execution (slot `2,500/365/2,135/20,730/5,787` + this member's delta `+0/+0/+0/+2/+0`),
+  never carried; the negative control with the slot's own tuple reds at `titles` with
+  "expected 20732 to be 20730". See §12.
 - **Train:** `W-A` (telemetry and privacy), family **website/product-surface** —
   un-stamped, so any train carrying it holds the four-member cap.
 - **Owner authority:** `OWNER_DECISION_QUEUE.md` **§359.9** ("GO as queued") over
@@ -130,12 +142,13 @@ npm run check:tail
 |---|---|---|---|
 | `SIM_METRIC_NAMES.length` (registry pin) | 12 | 13 | the row |
 | `SIM_METRIC_NAMES.length` (wall walker ARM E) | 12 | 13 | the row, over the closed set the ingest path refuses |
-| estate census `titles` | 20,719 | 20,721 | two `it` arms in `tests/lib/simMetricEmitter.test.js` |
+| estate census `titles` | 20,730 (slot) | 20,732 | two `it` arms in `tests/lib/simMetricEmitter.test.js`; authored as 20,719 → 20,721 at base `19b799ce`, the delta `+2` re-derived at the slot by execution |
 
 `files`, `parked`, `credited` and `suiteTitles` do not move: no test file is minted and
-no `describe` is opened. The census delta was attributed BY ISOLATION at this base —
+no `describe` is opened. The census delta was attributed BY ISOLATION at the authoring base —
 reverting that one file with the whole rest of the member applied convicts the before
-figure green — and never by arithmetic.
+figure green — and never by arithmetic. At the slot the delta, not the tuple, crossed the
+rebase: H8B, MF-T2H and WEB-1 had re-recorded the walker under this member.
 
 ## §9 · MUTANTS, AND WHY THE SECOND ONE NEEDED A NEW PROBE
 
@@ -172,3 +185,92 @@ a mutant nothing convicts, and the value-identity arm would have been decorative
 - ⚠ §102.3: none of this member's paths matches a `NAME_PATTERN` token, so no row is
   owed.
 - ⚠ Census: no new test file, two titles, zero suite titles.
+
+## §11 · GATE EVIDENCE (lane TE-WEB4, 2026-08-22)
+
+**S0, two-part, both ends (at the BUILD base `19b799ce`; the slot reading is in §12).** At that base: exit `0`, printed
+`observed-shape readers: 1996 finding(s), exactly matching the frozen inventory` —
+WHOLE. At this member's HEAD: exit `0`, the identical line. The envelope neither
+inherited a break nor made one; no generated prose leaf and none of the unscanned
+files is in this member's change surface.
+
+**The terminal — ONE full bare gate**, `npm run check:tail`, log identified by its
+printed path and its pid lineage rather than by recency. Steps, in the `&&` chain's
+own order:
+
+| step | verdict |
+|---|---|
+| the eleven `validate:*` scripts | pass; `validate:packets` reported `145 packets (1 READY)` inside the gate |
+| `typecheck:ratchet` | `OK — no type regressions (173 error(s), ceiling 173)` |
+| `typecheck:domain:strict` | `no strict-type regressions (1134 errors, ceiling 1134)` |
+| `lint` | pass (warnings only; the chain continued) |
+| `test:ratchet` | `OK — no test regressions (11 known failure(s) of 28738 tests, ceiling 11)` — the banked ELEVEN sits at its ceiling and does not move |
+| `build` + `postbuild` | built in 42.30s; 314 static route documents prerendered |
+| `verify:dist` | ⚠ the mutex GAVE UP after 40 polls, held by another lane |
+
+⚠ **THE GATE'S OWN EXIT WAS `3`, AND `3` IS THE MUTEX GIVING UP, NOT A RED.** Four
+lanes were contending and the load average stood at 64 when `verify:dist` asked for
+the lock. Every step before it had already passed, so the terminal was closed by
+running that one step alone: `npm run verify:dist`, exit `0`, `STRICT DIST OK — 52
+discovered/reported file(s), 433 test(s), zero failed/non-run/uncollected/missing/extra/
+duplicate rows`. The distinction is recorded rather than smoothed over, because an
+exit read as a red here would have cost a whole re-run of a green gate.
+
+**Tail agreement.** The tail the wrapper printed and the full log body agree: the
+give-up lines are the last thing in both, and the ratchet's OK line is present in the
+body at the step the tail no longer reached.
+
+**Pre-existing reds, looked up rather than assumed.** `npx vitest run tests/lint
+tests/build` is red at this member AND at a clean base worktree of the same commit
+with its own install. Five failures are stable at both trees — `clampPrimitiveBaseline`
+(1), `warCostKindPools` (3), `warRulingKindPools` (1). The remainder VARY BY RUN at
+both trees and in disjoint sets: the base's full sweep produced two `townScene3dLazy`
+failures this lane never saw, and the lane's produced `postureNameCollision` and
+`townSceneLocalMatrixAudit` failures the base did not. That is the recorded
+varying-cast contamination whose hunt is already chartered, reproduced here at BASE
+and therefore not this member's. No file in any red set is one this member touches,
+and the estate ratchet — the instrument the gate actually runs — sits at its ceiling.
+`tests/docs/enforcement-claims.test.js` is red identically at both trees, on the same
+six banked rows in files this member does not touch; its own documents carry zero
+claim-vocabulary hits, measured with the pattern lifted from the test.
+
+**Mutants, each convicting a branch and each restored digest-exact** (`shasum -a 256`
+before and after, identical): M1 → `sim_address_chain: source addressChain is not a
+measured receipt field`; M2 → `expected 500 to be 999`; M3 →
+`sim_address_chain: dim actor_id is PII-bearing`, in the registry pin and in the wall
+walker's schema arm.
+
+## §12 · THE LANDING SLOT (lane TE-WEB4-LANDING, 2026-08-22, slot `4060f690`)
+
+**The rebase.** `git rebase --onto 4060f690 19b799ce`, detached, four commits carried
+(implementation `8a345910ca3bc5908970132454ec2e9fcb46c250`, then DRAFT, READY, LANDED). Carry-proof at
+BLOB level first: of the fourteen delivered paths exactly three had moved under the
+member — the census walker (H8B, MF-T2H and WEB-1 re-recorded it), `PACKET_MANIFEST.json`
+(150 rows at the slot) and `INDEX.md` (RR-2 at this row's anchor). Every other path is
+the same blob at base and slot; `packets/website/` exists at the slot because WEB-1
+founded it, so this packet is the family's second file, not its first.
+
+**The surgery.** Walker: the slot's file byte-for-byte with this member's block appended
+below WEB-1's. Manifest: the slot's bytes plus this row by string surgery, never
+re-serialized; deep-compare 150 → 151, added `["WEB-4"]`, removed `[]`, drifted `[]`,
+prefix and suffix byte-identical, the row differing from its authored form in exactly
+`verifiedBase`. INDEX: the slot's file plus this row after RR-2's (the infrastructure
+table's append order), one line added and none removed.
+
+**The census, re-derived by execution, never carried.** Slot tuple read from the file,
+`2,500/365/2,135/20,730/5,787`; this member's delta `+0/+0/+0/+2/+0`; the walker pinned at
+`20,732` is green (33/33) under the shared gate mutex, and the negative control — the
+slot's own tuple put back — reds at `titles` with "expected 20732 to be 20730", the
+delta exactly, then the file restored byte-identical.
+
+**S0 at the slot, two-part.** Part 1: `node scripts/check-observed-shape-readers.mjs`
+exits `1` at the rebased tip with "observed-shape detector or unscanned execution input
+changed since the schema-10 instrument was governed; an ordinary gate/write cannot
+migrate the instrument" — and the SAME line, byte-identical (one sha256 across all
+three logs), at the chair's clean baseproof `b10ed1a1` and at a throwaway worktree at
+the exact slot `4060f690`. Pre-existing from the landed stack, mint-class, recorded not
+cured; the §11 reading above was taken BEFORE the envelope broke. Part 2: the baseline
+`scripts/.observed-shape-readers-baseline.json` is the same blob at slot and tip
+(`frozenAtSha 4f42be70`), and this member cannot move the predicate: none of its fourteen
+files is in the detector tree (11 files) or among the 24 unscanned execution inputs, and
+none appears in the reader inventory at all.

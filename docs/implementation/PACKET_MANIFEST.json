@@ -20413,9 +20413,9 @@
     },
     {
       "id": "WEB-4",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/website/WEB-4.md",
-      "verifiedBase": "19b799ce718d52e36a3b14a85fa9cfd5051ccf26",
+      "verifiedBase": "4060f690036c79e1c6190cb052bdb221bde93cde",
       "changeManifest": [
         { "action": "MODIFY", "path": "scripts/telemetry/simMetricRegistry.mjs" },
         { "action": "MODIFY", "path": "scripts/telemetry/simMetricEmitter.mjs" },
