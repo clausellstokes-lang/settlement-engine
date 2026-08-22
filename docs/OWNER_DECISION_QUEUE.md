@@ -14489,3 +14489,18 @@ recommended. Implementation, per item:
   well-instrumented claims — an executed instrument does not need a smarter reader,
   it needs an honest one. §343.2's naming rule applies identically: every Fable-tier
   verification dispatch names its criterion.
+
+## §344 — OWNER PARALLELISM QUERY #3: EVERY FREE SEAT FILLED (2026-08-22 ~01:05)
+
+- **Owner asked why the separable items were not already running in parallel lanes.**
+  The honest answer: the chair over-serialized toward a tidy day-close — one lane was
+  gating while three startable items idled. Corrected in this sitting:
+- **§344.1 DISPATCHED:** TE-WF1F (the three micro-repairs; Opus per §343.2 — the seed
+  carries the judgment; slot-aware behind T2D's landing) · MEAS-MINKEYS (the §338.1
+  chartered read-only measurement; Opus — instrumented measurement) · TC-T2E
+  (chair-tier compile of the NEXT map member — scope determination between the
+  fabric-extraction producer and the §312.2c dual-run retirement is itself a boundary
+  argument, the §343.1(a) class).
+- **§344.2 Seats now:** TE-T2D (terminal) · TE-WF1F (build) · MEAS-MINKEYS (measure)
+  · TC-T2E (compile) · chair (the §187 sitting recon begun this turn — source rows
+  located; rulings land as §345). One gate at a time stands.
