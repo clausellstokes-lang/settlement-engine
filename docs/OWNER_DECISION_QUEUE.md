@@ -17019,3 +17019,21 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   §414's tell: the kill diagnosis needs the dead pid, not the small log).
 - **H8B's GO ISSUED** with the pattern as refined; then CT-3 → T2H → the
   website cars → T2J → T2K.
+
+## §421 — OWNER ORDER: THE MAP-PORT REMAINDER PARALLELIZED — TWO COMPILES DISPATCHED; THE ONE BLOCKER NAMED (2026-08-23 ~09:30)
+
+- **Owner: "Can you run the map port remainder in parallel?" — YES, and it
+  now is.** The remainder's three tracks: (1) **TC-T2L dispatched** — the
+  vegetation member's compile (both halves or neither, per the plan's own
+  law; stacks on T2K when both are ready; carries the §419 roster-rename
+  rider for its landing act). (2) **TC-PRODUCERS dispatched** — the
+  §306.4a producer batch's charter (T2N/T2Q/T2R: resource location, dated
+  construction operations, institution founding years — the facts the
+  dossier already knows how to talk about and the engine never records;
+  independent of every port member per the plan; THE PROMISE priced
+  honestly — any same-seed output motion goes to the owner split).
+  Compiles are read-only, so they cost the landing track nothing.
+  (3) **T2M stays blocked on the §299.3c door ruling** (the operation-
+  vocabulary merge crossing src/domain → src/store — an architecture
+  question the chair briefs at the next free seat, not a lane's call).
+- Seats at the cap: H8B-landing · TE-T2K · TC-T2L · TC-PRODUCERS.

@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~09:30: MAP REMAINDER PARALLELIZED (§421, owner order) — TC-T2L +
+# TC-PRODUCERS compiling; T2M blocked on the §299.3c door ruling (chair
+# brief at next free seat). Cap: H8B-landing · T2K · T2L-compile ·
+# PRODUCERS-compile.
 # ⭐⭐ ~09:10: CT-2 LANDED (§420, 23rd) — tip 1a437bca; envelope reading
 # REVERSED at slot (whole → CT-2's lawful break, positively attributed);
 # leaf-digest re-key RATIFIED; four instrument lies banked (rev-parse echo,
