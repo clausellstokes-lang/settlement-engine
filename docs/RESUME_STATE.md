@@ -74,6 +74,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~16:40 ET: OWNER CHALLENGE #4 (§365) — the D3a port train STARTS:
+# TC-T2F dispatched (member F + the carried float-volume cure). SEAT LAW
+# corrected: parked lanes don't occupy seats; four ACTIVE = T2E gate ·
+# RATCHET · DOSSIER · T2F. T2E's PLAUSIBLE-as-CONFIRMED self-retraction
+# credited (§365.2); its gate running on re-verified quiet.
 # ⭐ ~16:20 ET: TC-HOUSE ruled (§364) — 8 members now (H7=LPDOC added);
 # TE-HOUSE bases POST-WF-8A (R5 binding); folds/seeds ratified (6a narrowed;
 # vacuity-aware). TC-DOSSIER (CT-0) DISPATCHED on the freed seat.

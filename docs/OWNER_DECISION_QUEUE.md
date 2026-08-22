@@ -15202,3 +15202,24 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   §343.1(a)); zero-compute until the track opens. Seats: T2E (gate, firing) ·
   TE-RATCHET (build) · TE-WF8 (parked, next after T2E) · TC-DOSSIER (new) = four +
   chair.
+
+## §365 — OWNER CHALLENGE #4: THE D3a PORT TRAIN STARTS NOW; THE SEAT ACCOUNTING CORRECTED (2026-08-22 ~16:40)
+
+- **Owner: 'why not start the D3a port train?' — the honest answer was habit.** Only
+  gates and CAS slots truly serialize; a compile touches nothing and waits for
+  nothing. **TC-T2F DISPATCHED** (chair-tier; zero-compute until the track opens):
+  member F's scope from the §312.1 roster, discharging §299.3(a), carrying the
+  §348.2 float-volume conviction and its executed fixture as the cure's arm.
+- **§365.1 SEAT ACCOUNTING CORRECTED (law):** the four-lane cap counts ACTIVE
+  working lanes; a PARKED lane (built, holding for its slot) does not occupy a seat.
+  Active now: T2E (gate) · TE-RATCHET (build) · TC-DOSSIER (compile) · TC-T2F
+  (compile) = four active; TE-WF8 parked. The scheduler refills on ACTIVE-seat
+  frees.
+- **§365.2 T2E's epistemics correction, recorded with credit:** the lane retracted
+  its own mechanism story — 'the cast varies' was CONFIRMED; 'therefore state
+  leakage' was only ever PLAUSIBLE and it had stated it as the former, with the
+  discriminating question (the failure REASON) available and unasked. The
+  attribution work beneath (five legs) stands; the story ran ahead of its evidence
+  and the lane said so in its receipt rather than dropping it quietly. Its gate is
+  running on independently re-verified quiet (load 3.62; slot free; no prior
+  quiet-gate log — corroborating that the first GO never arrived).
