@@ -21849,6 +21849,156 @@
           "check:tail"
         ]
       ]
-    }
+    },
+    {
+    "id": "MF-UC3",
+    "status": "READY",
+    "packetPath": "docs/implementation/packets/town-cartography/MF-UC3.md",
+    "verifiedBase": "4060f690036c79e1c6190cb052bdb221bde93cde",
+    "changeManifest": [
+     {
+      "_note": "THE CLOSED JOINT VOCABULARY as data (charter J-R2-2, ODQ §311.9.2(iii)/§311.8.2). Minted by UC-0, the train's first car, so every component row from UC-3 onward imports one truth rather than hardcoding the strings. CARRIED HERE AS IDENTICAL BYTES from the sibling TE-UC0 lane worktree (sha256 f9445c9868122a41d33d984700ffc19693cc9c6168fec440df0f64d31f7ed13f, cmp exit 0) because it is not on the branch at this base and a leaf may not import a file that does not exist. THE LANDING ACT KEEPS ONE COPY: whichever T-UC1 car lands first delivers the file and the second lane's blob is byte-identical, so the rebase has nothing to merge. Zero-import, 8 effective lines against the 20 cap.",
+      "action": "CREATE",
+      "path": "src/domain/undercity/jointVocabulary.js"
+     },
+     {
+      "_note": "THE STATIC COMPONENTS (§311.6.3/§311.8.2(a)). deriveStaticComponents answers what the ground gave a town, from stored facts alone. THE LICENSE IS READ, NEVER TABULATED: the licensed terrain set is re-derived at every call as the terrain whose institutionModifiers carries an 'Underground network' row - the [D6 THE UNDERWAYS] rows at geographyData.js:267-274 and :576-582 - and the MODIFIER NUMBER IS NEVER READ, because a coefficient would be a tuning input this car declares none of. The ground's hardness is the typed string architectureModifiers.stoneAvailability, which selects the extents the ground ADMITS: a grammar table, not a weight. The anchor is a verbatim TERRAIN_DATA naturalFeatures string picked by the settlement's seed-stable id. A cave mouth is a breach-kind join only where the anchor is itself an opening into the ground; elsewhere surfaceJoins is EMPTY, the lawful isolated cavern of §311.6.4 - hill country reaches that state on every world. The flood refusal is the catalog's own forbiddenResources union over the subterranean-facet rows, derived at load and never restated; measured live on 8 of 30 hill settlements. EPOCH-INVARIANT BY CONSTRUCTION: no tick, year, history, calamity stamp, population or tier of the settlement is reachable, so §443's pulse-written-key law does not bind this car. 111 effective lines against the 250-per-leaf cap. Dormant: no production importer, nothing persisted, the generator golden bytewise unmoved.",
+      "action": "CREATE",
+      "path": "src/domain/undercity/staticComponents.js"
+     },
+     {
+      "_note": "THE ACCEPTANCE - EIGHT arms, ONE literal describe, straight-line it calls with string-literal titles and every loop INSIDE a named test, so the census credits the file rather than parking it. A1 is the guard-the-guard arm, and it re-derives EVERY table from TERRAIN_DATA rather than trusting the leaf's copy, so a table that drifts from the geography it claims to read reds here. Every arm runs over REAL generated settlements (7 terrains x 2 tiers, fixed seeds); the counterfactuals move ONE stored input. A3 carries the floodplain refusal on a REAL marsh-bearing hill thorp, with the drained counterfactual proving the refusal rather than an absence. Every negative carries its // anchored: line.",
+      "action": "CREATE",
+      "path": "tests/domain/undercityStaticComponents.test.js"
+     },
+     {
+      "action": "DOC",
+      "path": "docs/implementation/packets/town-cartography/MF-UC3.md"
+     }
+    ],
+    "requiredSymbols": [
+     {
+      "_note": "THE LICENSE ITSELF. The leaf reads the EXISTENCE of the [D6 THE UNDERWAYS] 'Underground network' row on a terrain and the typed architectureModifiers.stoneAvailability beside it; removing or renaming the table retires the whole car. Named so the authority for the license is findable from the manifest rather than only from packet prose.",
+      "path": "src/data/geographyData.js",
+      "symbol": "export const TERRAIN_DATA"
+     },
+     {
+      "_note": "THE GROUND'S REFUSAL. The 'tunnels flood' list is derived at load from the union of forbiddenResources over every catalog row DECLARING the subterranean facet, so the leaf restates nothing. If the catalog stops declaring that facet the refusal silently empties - which is why the acceptance pins waterloggedResourceKeys() against the live derivation.",
+      "path": "src/data/institutionalCatalog.js",
+      "symbol": "export const institutionalCatalog"
+     },
+     {
+      "_note": "THE ONE TERRAIN READ. Every terrain resolution goes through here (its own header: scattering the chain across call sites is how the simulation layer read the never-written config.terrain for years). The 'auto' sentinel guard is pinned by the acceptance's A8 arm on BOTH legs of the chain.",
+      "path": "src/domain/resolveTerrain.js",
+      "symbol": "export function resolveSettlementTerrain"
+     },
+     {
+      "_note": "THE NATIVE PROJECTION the flood refusal reads - the same one assembleInstitutions refuses by, so a custom resource merely spelled 'marshlands' does not acquire built-in physics. Reading config.nearbyResources raw instead would be a second truth.",
+      "path": "src/domain/content/customContentSemanticAuthority.js",
+      "symbol": "export function nativeSemanticResourceKeys"
+     },
+     {
+      "_note": "THE ESTATE'S ONE SANCTIONED STRING ORDER, used for the row sort and for the waterloggedResourceKeys receipt.",
+      "path": "src/domain/deterministicSort.js",
+      "symbol": "export const compareCodepoint"
+     },
+     {
+      "_note": "THE SLUG NORMALISER for the seed token, and the source of the identity fallback for an un-normalised object. A true dependency-free leaf.",
+      "path": "src/domain/worldPulse/stablePart.js",
+      "symbol": "export function stablePart"
+     },
+     {
+      "_note": "THE HASH ROOT, IMPORTED RATHER THAN RESTATED (J-TEUC3-2). Restating it defined a fnv1a32 that entropyRootCensus.walker's 'hash-helper DEFINITIONS in src = 34' counter matched, reddening a THIRD interior red on a walker path MF-T2H reserves at READY. Reusing the kernel root - the src/domain/dossier/entityLinks.js precedent - defines no root, adds no census row and needs no walker edit. Only the Murmur finaliser is local, and it is outside the counter's name set.",
+      "path": "src/kernel/proseHash.js",
+      "symbol": "export function fnv1a32"
+     },
+     {
+      "_note": "THE ANCHOR HELPER the acceptance routes its transition negatives through, called by name on the same line as §P3 requires - an alias or a wrapper is not recognised by the walker. A3's and A7's present-then-absent arms depend on it existing under this exact name.",
+      "path": "tests/helpers/anchoredNegatives.js",
+      "symbol": "export function expectPresentThenAbsent"
+     },
+     {
+      "_note": "THE CORPUS SOURCE. Every acceptance arm runs over REAL settlements this pipeline generates, never a hand-built fixture, so the terrain and roster the deriver reads are the ones the generator actually writes.",
+      "path": "src/generators/generateSettlementPipeline.js",
+      "symbol": "export function generateSettlementPipeline"
+     }
+    ],
+    "acceptanceCases": [
+     {
+      "id": "A1",
+      "case": "GUARD-THE-GUARD, then totality. 14 real generated worlds, every id an s_<16hex>, every terrain a published TERRAIN_DATA class; the corpus carries BOTH licensing grounds (4 settlements) and exactly ONE licensed-but-waterlogged ground - the fuel A3 burns. Every table is re-derived from TERRAIN_DATA inside this arm (the licensed set, the hardness classes, the opening features, the flood list), so a table that drifts from the geography it claims to read reds here rather than passing on its own copy. Then: at most one row per world, every field inside its closed vocabulary. Without this arm the membership assertions below could all pass on nothing."
+     },
+     {
+      "id": "A2",
+      "case": "EPOCH INVARIANCE (§311.6.3). A settlement given a new tier, four times the population, a 300-year history, a plague stamp, a world clock and an epoch counter derives BYTE-IDENTICAL caverns. The structural proof rides beside the behavioural one: the comment-stripped source contains no settlement epoch read, no townMap import, no clock and no ambient randomness - with three positives asserted first so the scan cannot go vacuous."
+     },
+     {
+      "id": "A3",
+      "case": "TERRAIN LICENSING over REAL settlements, and no cavern in the floodplain. Caverns appear on exactly mountain/town, mountain/thorp and hills/town; the ten unlicensed worlds give none. The marsh-bearing hill THORP - licensed ground, refused by the catalog's own 'tunnels flood' list - gives none, and DRAINING its native roster gives it one, so the arm measures a refusal rather than an absence. Flooding a mountain town takes its cavern away as a present-then-absent transition."
+     },
+     {
+      "id": "A4",
+      "case": "SEED DETERMINISM. Two independently generated same-seed worlds are deep-equal; a structuredClone is identical; a RENAME is identical (the cave sits where the seed put it, whatever the town is called); a NEW IDENTITY moves the ground (extent chamber -> system). THE PROMISE: the seed is the world."
+     },
+     {
+      "id": "A5",
+      "case": "THE §311.8.1 GENERAL FORM, whole. Every row declares temperament STATIC and sourceKind DERIVED_V1; its license reason matches the LIVE D6 row; every surfaceJoins entry has a kind in JOINT_KINDS and an anchor equal to the row's own anchor; and the join count is exactly 1 where the anchor is a ground opening and 0 otherwise. BOTH STATES OCCUR on real worlds: one cave mouth (breach at 'cave system') and two lawful ISOLATED caverns ('mountain pass', 'terraced fields')."
+     },
+     {
+      "id": "A6",
+      "case": "THE DERIVER'S OWN VALIDATION refuses a joint kind outside the closed vocabulary. staticSurfaceJoin builds breach and stair rows and REFUSES 'tunnel', 'shaft', 'BREACH', null and an anchorless join - a component may lack a portal, never carry an invented one. And the constructor is the live path, not a side door: every join the corpus actually produces passes the vocabulary."
+     },
+     {
+      "id": "A7",
+      "case": "G-43, the directional arm registered before the run. A plains town gains a cavern on mountain rock (anchor 'mine entrance', with its breach); a mountain town loses it on the flat, as a present-then-absent transition; hill stone gives a smaller, unentered cave whose extent is admissible for 'high' and not for 'very high'."
+     },
+     {
+      "id": "A8",
+      "case": "REFUSAL AND VERSION DISCIPLINE. null, undefined, {}, a null config, an unpublished terrain and the 'auto' sentinel on BOTH legs of the resolver chain all yield [] without throwing; an identity-less object still derives from its ground, so the deriver is total rather than lucky; DERIVED_V1 is frozen and every exported vocabulary is Object.isFrozen."
+     }
+    ],
+    "checks": [
+     [
+      "npx",
+      "vitest",
+      "run",
+      "tests/domain/undercityStaticComponents.test.js"
+     ],
+     [
+      "npx",
+      "vitest",
+      "run",
+      "tests/property/generatorGoldenMaster.test.js",
+      "tests/lint/observedShapeReaders.walker.test.js",
+      "tests/lint/entropyRootCensus.walker.test.js",
+      "tests/lint/negativeAssertionAnchor.walker.test.js",
+      "tests/lint/domainAnyCastBaseline.test.js"
+     ],
+     [
+      "npx",
+      "vitest",
+      "run",
+      "tests/lint",
+      "tests/build",
+      "tests/ops"
+     ],
+     [
+      "npm",
+      "run",
+      "typecheck:ratchet"
+     ],
+     [
+      "npm",
+      "run",
+      "typecheck:domain:strict"
+     ],
+     [
+      "npm",
+      "run",
+      "validate:packets"
+     ]
+    ],
+    "retiredSymbols": []
+   }
   ]
 }
