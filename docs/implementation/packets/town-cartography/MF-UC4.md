@@ -179,6 +179,20 @@ EXECUTION at the landing slot and apply only this delta.**
 
 **DELTA: `+1 files / +0 parked / +1 credited / +8 titles / +1 suiteTitles`.**
 
+⚠⚠ **THE BRANCH MOVED UNDER THIS LANE AND THE TUPLE MOVED WITH IT — MEASURED, NOT PREDICTED.**
+`claude/composite-r4` now reads **`1b1de759155631b61659d8faff7fe69836687385`** (MF-UC1's landing,
+which happened while this member built). At that slot the walker's live tuple reads
+`files: 2513, parked: 366, credited: 2147, titles: 20838, suiteTitles: 5805` — UC-1's own identical
+delta already applied — so a tuple carried from this packet's base would silently revert it. The
+landing act applies THIS DELTA to the SLOT's tuple and re-derives the whole thing by execution.
+The collision was characterized at blob level: **no code-path collision at all.** Every `src/**` and
+`tests/**` path this member touches is UNMOVED between this base and the slot; the only overlaps are
+the two standing meta files (`INDEX.md`, `PACKET_MANIFEST.json`), governed by the standing rebase
+laws. `ruinFilterRoster.walker` moved at the slot to **91** (UC-1's raise) and this member owes it
+nothing — its leaf never spells `.institutions` — so 91 still holds, to be re-proved from the arm's
+own message at the slot. `validate:packets` at the slot reads 166 packets, so this member makes
+**167** there rather than the 166 measured here.
+
 Walked at this base, each figure taken from the arm's OWN failure message and substituted
 mechanically by the driver — never computed by the lane:
 
