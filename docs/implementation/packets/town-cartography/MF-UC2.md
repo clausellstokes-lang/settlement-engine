@@ -245,7 +245,7 @@ abandonment, never a shrink (§311.8.3: "use recedes, dug space never does").
 | # | instrument | PREDICTED | MEASURED |
 |---|---|---|---|
 | I1 | `generatorGoldenMaster` + fixture `29c6cc8f…` | UNMOVED bytewise | ✓ identical before and after; test green |
-| I2 | `observedShapeReaders.walker` (1995/1409/387/60/40) | UNMOVED | ⚠ **RED at first authoring — one NEW ceiling-0 row IN A SIBLING'S LANDED FILE; CURED**, see §5.1 |
+| I2 | `observedShapeReaders.walker` (1995/1409/387/60/40) | UNMOVED | ⚠ **RED at first authoring — one NEW ceiling-0 row IN A SIBLING'S LANDED FILE; CURED**, see J-TEUC2-8 and §1.3 |
 | I3 | `sovereigntyLightingContract.walker` (2513/366/2147/20838/5805) | INTERIOR RED by design, exactly `+1/+0/+1/+8/+1` | ✓ walked to `2514/366/2148/20846/5806`, green 33/33, all five figures convicted by execution, then REVERTED digest-exact (§9) |
 | I4 | `negativeAssertionAnchor.walker` | UNMOVED — every negative carries its `// anchored:` line | ✓ green. The MF-UC4 lesson was paid BEFORE the walker could charge for it: the three `anchored:` tokens sit on the IMMEDIATELY PRECEDING line, never on the first line of a two-line comment |
 | I5 | `seedLoopTotality.walker` | UNMOVED — ceiling 0 per new test file | ✓ green, and trivially so: the acceptance contains NO `for (` loop at all |
@@ -401,7 +401,32 @@ restore is digest-exact. No `it(` or `describe(` is added or removed, so no cens
 `negativeAssertionAnchor.walker` · `seedLoopTotality.walker` — `Test Files 6 passed (6)`,
 `Tests 71 passed (71)`.
 
-**SECOND DRIVE** at the final tip: see §7.2.
+**SECOND DRIVE** at the final tip: §7.2 — the member-caused red is gone and nothing replaced it.
+
+### §7.2 · The SECOND drive, at the final tip
+
+Run at the shipped bytes, mutexed (the mutex was held by a sibling lane's test ratchet for the
+first 25 polls; the lock's pid was liveness-probed with a live child process rather than reclaimed,
+per §414/§416). `git rev-parse HEAD` and `git status --porcelain` identical before and after.
+
+`Test Files 6 failed | 1305 passed | 7 skipped (1318)` · `Tests 9 failed | 18466 passed | 114 skipped (18589)` · 329.10s · `SWEEP2_TRUE_EXIT=1`.
+
+**9 failing titles, and the member-caused one is GONE:** `resourceSites` no longer
+appears. What remains is exactly the eight banked reds plus this member's one authorized interior
+red (the deferred census row). **NO STRAY** in either drive, so no re-run was owed and no §432
+escalation is open.
+
+**§469, discharged by INPUT PROVENANCE rather than by a second whole-corpus run at the chair
+baseproof** (J-TEUC2-11): the five banked test FILES — `enforcement-claims`, `warCostKindPools`,
+`warRulingKindPools`, `metronomeCooldownLint`, `clampPrimitiveBaseline` — are **byte-IDENTICAL**
+between this tree and `chair-baseproof-b10ed1a1` (whose `git status --porcelain` is empty), so
+their assertion blocks cannot differ for anything this member did. Two of them are checked further
+because a bare file-identity argument would not reach them: `clampPrimitiveBaseline` scans `src/**`
+for LOCAL clamp definitions and **neither file this member adds or changes defines one** (both
+import the kernel's `clamp`, executed grep); and `enforcement-claims` scans `docs/**.md`, which this
+member DOES move — settled by measurement, not by argument: **CLAIM_RE counts 0 at BASE and 0 at
+TIP over both touched docs, DELTA 0 on each.**
+
 
 ---
 
@@ -470,3 +495,6 @@ No other member-caused red stands at this tip.
 | J-TEUC2-7 | **`smugglerShareFloor` is 0.45, not the rounder 0.50** | A large mass of the corpus reads criminal share EXACTLY 0.500, so a floor there decides hundreds of settlements on the comparison operator alone. 0.35–0.50 license the identical 191; 0.45 makes the same cut strictly inside a gap. 0.55 collapses the PLACE condition to three refusals and was refused for making the gate/waterfront fact nearly decorative |
 | J-TEUC2-8 | **`src/domain/institutionFounding.js` (a landed sibling) is MODIFIED by this member** | The OSR violation this member caused lives in T2Q's file, not this one (§5.1), and it was attributed by execution. Curing it at the consumer was impossible (the resolver substitutes parameter sentinels through any wrapper) and both banking routes are governed. The change is two lines, behaviour-identical, and uses the file's OWN existing discipline for its other two pulse-written keys. Refused: leaving the walker red; adding an `EXPLAINED_WRITER_EXEMPTIONS` entry (a governed instrument migration) |
 | J-TEUC2-9 | **The leaf is ONE file at 246 effective, not the charter's authorized split** | The charter permits splitting crypts from cellars/mines if the measurement crosses 250. The first draft measured 274 and was compacted to 246 by tightening object literals — no substance removed. A split would have cost a second CREATE row and a shared-law module for 24 lines |
+| J-TEUC2-10 | **`tests/domain/resourceSites.test.js` (a second landed sibling) is MODIFIED** — its dormancy arm becomes an EXACT ADMISSION MAP rather than an empty list | The alternative was to stop consuming T2N, which would mean re-deriving where a seam sits: the second truth the charter forbids by name. The arm's real claim — golden inertness on the GENERATION path — is untouched by a dormant consumer. Refused: deleting the arm (that disables a guard); a bare `length <= 1` (that is a budget, not a ratchet); leaving it red (charter §4 authorizes exactly ONE interior red and it is the census row) |
+| J-TEUC2-11 | **The §469 classification is discharged by INPUT PROVENANCE rather than by a second whole-corpus run in the chair baseproof** | The five banked test FILES are byte-IDENTICAL between this tree and `chair-baseproof-b10ed1a1` (whose porcelain is 0), so their assertion blocks cannot differ for any reason this member caused. The ONE banked red whose input this member DOES move is `enforcement-claims`, which scans `docs/**.md` — and that is settled by measurement instead of by argument: CLAIM_RE counts 0 at BASE and 0 at TIP over both touched docs, DELTA 0. A second full-corpus run at a base four landings older would have compared a different test population, not a cleaner one. Refused: skipping the question; asserting "pre-existing" from the title alone |
+| J-TEUC2-12 | **The surge pit is anchored at the CODEPOINT-first burying institution, and the leaf was CHANGED to make that true** | The first draft passed the pre-sort array and anchored at the ROSTER-first crypt while its own comment claimed codepoint-first. The acceptance caught the divergence (pit at `multiple_monasteries`, codepoint-first crypt `great_cathedral`). Fixing the COMMENT would have been the cheaper lie; the reading must be stable across every derivation of the same settlement, so the code moved |
