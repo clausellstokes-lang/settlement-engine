@@ -20016,3 +20016,71 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   as MOVED with plausible ids; `--verify --quiet` is what makes a blob
   reading real. Seats: UC-4 landing (Opus, resumed with the cure) · UC-2
   build (Opus).
+
+## §490 — UC-4 LANDED (THE 45TH) `[OPUS-RUN · FABLE-VALIDATION OWED]` AFTER THE §489 CURE: THE UNDERCITY FLAG AND ITS PERSISTED SIGNAL ARE ON THE BRANCH, DARK; UC-2 BUILT AND INTO THE LANDING SEAT; R-INST-6 — THE LAST RESEARCH TRANCHE — DISPATCHED (2026-08-23 13:11 CDT)
+
+- **§490.1 LANDED.** TE-UC4-LANDING: the §489 cure executed exactly (three
+  literals + a `// §489:` line; negative control `expected 25 to be 24`;
+  the lighting walker RE-WALKED green at the unchanged tuple
+  `2514/366/2148/20846/5806`, 33/33; one measured widening flagged as
+  J-UC4L-8: WF-1a's own commit `66fda66d` moved the arm's two live summary
+  PROSE figures with its literals, so `24`→`25` / `56 of 81`→`57 of 82` in
+  the prose followed the precedent — the EP-1/WF-1a ancestry rows untouched;
+  reverse = revert those two comment lines alone). Cure commit `f1e4d515`
+  = 9 over slot `1b1de759`, both blobs sha256-proved. Terminal re-fired
+  17:45→18:05Z, all twenty chain steps: `valid: 167 packets (0 READY)` ·
+  `head = 199 (199 files, contiguous)` · 173/173 · 1134/1134 · `11 known
+  failure(s) of 28888 tests, ceiling 11` (+8 = the acceptance file, three
+  independent attributions) · `STRICT DIST OK 52/438` · `[gate-tail] exit:
+  0` · `TRUE_EXIT=0` · 19.0 GB free. **CAS `1b1de759 → f1e4d515`.** Pruned
+  holding-uc4 + uc4-landed-tip, the tree, /tmp/uc4l; the two gate bodies
+  archived. `undercityHighWaterEnabled` is on the branch DARK; lighting it
+  is R-5 (the owner's tuning-time call). LAW refined by the lane's memory
+  correction: a landing lane STOPS and reports; the CHAIR rules the cure
+  in-train under §479.2; prose figures move with their literals, ancestry
+  rows never.
+- **§490.2 MF-UC2 BUILT AND HOLDING** `[OPUS-RUN · FABLE-VALIDATION OWED]`
+  (TE-UC2, Opus): tip `69496557` = 4 over `1b1de759`, porcelain empty, four
+  commits' blobs proved. Leaf `monotoneComponents.js` 247 effective (under
+  the 250 cap — no split). S0: FIVE charter corrections by measurement
+  (`districtProfile.js` is at `src/domain/`, not `spatial/`; corruption
+  `:539-542`; T2N's predicted path CONFIRMED `src/domain/resourceSites.js`
+  export `deriveResourceSites`; T2Q ships THREE founding kinds — the charter
+  named two — `FOUNDED_UNDATED` gets a typed age floor of 0 with
+  `ageUnderstated`, never an invented year; `surfaceJoins` elements are
+  `{kind, anchor}`); the charter's owed UC-0 walk discharged: there is NO
+  cumulative-dead home, so burial demand compiles as T2R's high-water
+  population (the one reading that cannot fall — MONOTONE made structural) +
+  the dated mass-death record. All seven keys UC-4's inertia arm names are on
+  every row — proved BY COMPOSITION at UC-4's landed tip (4 files / 55
+  tests). Two member-caused reds in SIBLINGS' landed files, attributed by
+  execution and cured in-member: T2Q's `foundedAt on institutions` at
+  ceiling 0 (UC-2 is its first grounded caller; ⚠ the landed CALL-RECEIVER
+  idiom does NOT cure it — `resolveCall` substitutes through wrappers; cure =
+  computed-key access, T2Q's own discipline for its other pulse-written keys)
+  and T2N's dormancy arm (`importersOf` empty — a producer's dormancy arm
+  EXPIRES at its first consumer; cure = an exact admission map with a
+  reasoned entry, non-vacuity proved by perturbation). Acceptance 8/8, NINE
+  mutants convict (m9 isolates A8), census delta `+1/+0/+1/+8/+1` with four
+  negative controls, `ruinFilterRoster` 91 → 92, validator 167 (1 READY),
+  173/173 · 1134/1134, golden unmoved, sweep twice (10 reds then 9 = eight
+  banked + the authorized census row), 0 strays. Twelve judgments — the
+  sharpest RATIFIED: the vault licence REFUTED by the 420-settlement sweep
+  (2,788 rows → 472) and re-cut to `institutionFunction ∈ {arms, judges}`;
+  `smugglerShareFloor` 0.45 not 0.50 because a corpus mass sits EXACTLY at
+  0.500; §469 discharged by input provenance (J-TEUC2-11). Pinned
+  `refs/preserve/holding-uc2`. **TE-UC2-LANDING dispatched (Opus)** onto
+  `f1e4d515`: expected tuple `2515/366/2149/20854/5807`, roster 92, `valid:
+  168 packets (0 READY)`, ratchet 28896, and — first application — the
+  §489.3 GREP-DRIVEN ARM over all 37 trees before the sweep.
+- **§490.3 R-INST-6 DISPATCHED (Opus)** `[OPUS-RUN · FABLE-VALIDATION OWED]`
+  — criminal/underground institutions and their FRONTS, the undercity seam:
+  the whole Criminal shelf (≈25 rows over five tiers), families A–I,
+  three-direction method, the measured priest-hole and the measured
+  smugglers' cellar as the two concealed-cell primaries, the two-plan front
+  (`TWO_PLAN_FRONT` / `HIDE_CELL` / `CONCEALED_STAIR`), a UC SEAM TABLE per
+  entry (the undercity component row already beneath it, its joint kind, what
+  DW adds above), attested-vs-legendary smugglers' tunnels as the largest
+  discrepancy bucket, and a RESEARCH-COMPLETE statement for DW-0. When it
+  delivers, research is COMPLETE and DW-0 starts in the second seat (§482).
+  Seats: UC-2 landing (Opus) · R-INST-6 (Opus).
