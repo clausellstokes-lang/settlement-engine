@@ -18548,3 +18548,37 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   research seats keep priority for freed build seats until the six
   tranches + the addendum are in.
 - Memory: the DW program state note gains the re-sequence.
+
+## §457 — THE HOLD-UP DIAGNOSED: THE SHARED LOCK-DIR EXPORT DOES NOT SURVIVE THE HARNESS'S FRESH SHELL PER COMMAND — A SIBLING RATCHET RAN UNDER ITS OWN TMPDIR LOCK BESIDE A LANDING GATE; THE LEGACY SCAN HELD; LAW §440.2 SHARPENED TO INLINE-EVERY-COMMAND (2026-08-22 22:30 CDT)
+
+- **What the owner saw:** "what's holding everything up?" — WEB-6's
+  `verify:dist` at 15 minutes for a 2-minute step. **What it was:** the
+  step's wrapper HELD the shared lock (pid 71654) but sat in the mutex's
+  legacy-scan wait (`sleep 30` its only child) because a foreign vitest was
+  RUNNING — TE-WEB3's full `check-test-ratchet.mjs` (pid 64435, 14 min in),
+  holding `/tmp/web3/settlementforge-vitest-gate.lock`: the PER-TMPDIR
+  default, not the shared dir. ROOT CAUSE: the harness starts a FRESH shell
+  for every Bash command; the lane's earlier `export GATE_MUTEX_LOCK_DIR=…`
+  did not reach the command that launched the ratchet. §440.2 assumed a
+  persistent shell; lanes do not have one.
+- **What held:** the §440.2 analysis named the legacy `ps`-scan as the
+  backstop with a two-waiters race; here it was the SERIALIZER — WEB-6's
+  step correctly waited for WEB-3's running workers. Nothing raced, nothing
+  is red; the cost is ~15 minutes of gate wall-clock and the same again
+  for every sibling battery queued behind both.
+- **LAW §440.2 SHARPENED (and carried into every brief from here):** every
+  battery/terminal command carries its exports INLINE IN THE SAME COMMAND
+  LINE — `export GATE_MUTEX_LOCK_DIR=/tmp/settlementforge-vitest-gate.lock;
+  export GATE_MUTEX_MAX_POLLS=480; export TMPDIR=/tmp/<lane>; sh
+  scripts/gate-mutex.sh --run -- …` — and a pre-run `ls -d` of the shared
+  lock shows who holds it. The three live build lanes were ordered so
+  mid-run; WEB-3's ratchet is allowed to finish (killing 15 minutes of
+  work buys nothing — the scan serializes). The terminal scripts already
+  carry the export inside the script body, so landings were never exposed.
+- **The broader answer to "why so slow", recorded:** one 8-core box; one
+  full gate at a time by law (20–35 min each); every other battery waits
+  behind it by design (the alternative produced the §355-era strays).
+  Mitigations ruled: stacked landings for the map four and the producer
+  three (J, vetoable — §454-era chat), at most two fresh build dispatches
+  while a landing gate runs, batteries fired at the gate's release. The
+  gate's own 20–35 minutes is the floor short of a second machine.

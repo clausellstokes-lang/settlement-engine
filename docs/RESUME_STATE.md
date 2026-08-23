@@ -51,6 +51,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⚠ 22:30 CDT 08-22: §457 — hold-up diagnosed: exports do not survive the
+# harness fresh shell → WEB-3 ran a ratchet under its own TMPDIR lock; legacy
+# scan serialized (no race). LAW: inline the exports on EVERY command line.
+# Stacked landings ruled for the map four + producer three.
 # ⭐⭐ 22:10 CDT 08-22: §456 OWNER ORDER — DW program AFTER its research (not
 # post-endgame), lands before the terminal soak; the 300-year soak gains a
 # DW leg. DESIGN_DWELLINGS_PROGRAM.md amended (preamble, §9, §10, §13, §15).
