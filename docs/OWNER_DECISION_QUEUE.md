@@ -17678,3 +17678,28 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   load-paths/renovation pass (DW law 5's physical basis); five located
   sources queued, Pantin's town-house plans first. Three of four lanes
   confirmed stopped; T2R's checkpoint pending its queue drain.
+
+- **§439.4 T2R's CHECKPOINT — the §434 member BUILT at a6001d47 (pinned),
+  all five ruling points executed:** the two-arm channel-1 read with the
+  typed NO_PEAK_TIER_STAMP gap and understated:true (the reader never
+  guesses); the destroyer roster frozen at the MEASURED eighteen sites
+  across five modules, three adjudicated DEMOTING; the nine-plus-one ring
+  roster with the uncapped writer flagged; the twelve-window prose; ZERO
+  engine bytes (two creates, nothing modified). Goldens bytewise identical
+  before and after — the dormancy claim executed. **Two INERT MUTANTS found
+  and REPLACED, the lesson kept:** an equal-rank boundary flip that could
+  never observe (the floor is always below current) and a walk-depth mutant
+  invisible to a count threshold until the guard gained a nesting assertion
+  — mutant hygiene's newest specimens. Its own sweep red isolated BY
+  MOVING THE MEMBER ASIDE and cured by typedef at the monotone-down ledger;
+  **nine sweep reds left honestly UNATTRIBUTED as the successor's first
+  job** — several reader-shaped, none claimed pre-existing without the
+  lookup. J5-J8 RATIFIED, including J8's --no-verify WITH ITS DECLARATION:
+  a session-death checkpoint is the second lawful bypass context, lawful
+  ONLY declared plainly (the landing terminal validates everything); a
+  silent bypass would have been the offense, not the flag.
+- **ALL FOUR LANES ARE NOW AT CONFIRMED STOP POINTS.** The succession
+  package is complete in every particular; the successor's queue reads:
+  collect T2H's surviving gate → resume T2R (attribute the nine, run the
+  typecheckers, write the packet) → finish T2Q (one clean gate + one
+  baseproof) → resume DWR1A → rule the undercity → the cascade.
