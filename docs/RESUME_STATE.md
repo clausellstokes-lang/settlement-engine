@@ -51,6 +51,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐ 07:10 CDT 08-23: §476 — R-INST-3 DELIVERED (370KB, 16/16; ~850k tokens).
+# Seat 2 HELD for UC-1 until the UC stack lands (cost judgment, vetoable).
+# Live: UCSTACK-landing only.
 # ⚠ 06:55 CDT 08-23: §475 — UC stack terminal RED at 0ccd5794: cohesionWeave.js
 # is an edge-bundle input, bundles stale (6 reds, one class). RULED regen
 # in-train → re-fire; a THIRD UC-0 class drops UC-0 from the stack.

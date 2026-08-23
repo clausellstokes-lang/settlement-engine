@@ -19400,3 +19400,55 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   `src/domain/spatial/**`, `src/domain/worldPulse/simulationRules.js`, or
   any other rostered input (grep the five `.meta.json` rosters at S0 —
   a one-line check that would have caught this at the build).
+
+## §476 — R-INST-3 DELIVERED AT DEPTH (370 KB; 16/16 FAMILIES; THE KILLED SUB-LANES RECOVERED FROM THEIR TRANSCRIPTS); THE SECOND SEAT HELD FOR UC-1 (2026-08-23 07:10 CDT)
+
+- **The dossier** (`draft-R-INST-3-FAITH-LEARNING.md`, 370,440 B; receipt;
+  `RINST3-merge/`): the resumed lane found none of the seven killed
+  sub-lanes had written a report, recovered their transcripts from the
+  session dir (the transcript-survival route of record, §338.4), extracted
+  every fetched page and saved primary, read the primaries itself, and
+  wrote §1–§17 + §Σ SOLO with zero searches (the session cap was
+  exhausted at 06:14Z) and ten verification fetches. 16/16 at depth on
+  reachable evidence; PARTIAL retained for four named source gaps. Tally:
+  218 sub-lane CONFIRMED · 164 LOCAL · 45 digest · 8 PARENT-VERIFIED
+  figures · 13 PLAUSIBLE · 12 CONTESTED; 27 open questions; C0 0.
+- **Load-bearing figures (parent-verified):** Durham's cloister alleys
+  "about 15 ft wide" round a 145-ft garth, eleven bays a side — the only
+  measured English cloister-walk width found (Rievaulx's garth 42 m) ·
+  Escomb's chancel arch 5 ft 3 in in a 14 ft 6 in nave — the parish SCREEN
+  passage at the floor, a cell with a stair at the cathedral grade · the
+  college study closet 3½–5 × 4½–6 ft with its own window, four to a
+  chamber; New College's quad 177½ × 125½ ft — the staircase-entry plan as
+  a THIRD circulation system.
+- **Grammar findings:** the cloister walk is the canonical GALLERY carrying
+  four functions at once (corridor · carrel study-hall — Gloucester's
+  stone carrels 4 ft × 19 in × 6 ft 9 in · wash-place · procession); the
+  SCREEN is a new primitive (wall-with-passage → SCREEN_CELL); four
+  corridor-licence mechanisms (program, surveillance, sight-line —
+  Maragheh's meridian corridor, fashion); the anchorhold is a cell with
+  `approach: NONE`; storage — library/charnel/vestry/study/carrel are
+  `sizeFrom: host` cells, the charnel wants `lightReq: GROUND_LEVEL_SPLAY`,
+  library bay pitch 4–7½ ft by fittings system (lectern → stall → wall),
+  `CLOSET{MUNIMENT}` recurs across four tranches as one cell type.
+  **NO_BUILDING / HOSTED verdicts:** shrine, access walk, churchyard,
+  grove = NO_BUILDING; musician, healer, school, sub-endowment library,
+  pre-1320 university, archive, anchorite = HOSTED; parish church and
+  priest's house OWN at every tier; monastery, cathedral + close, college,
+  great library OWN a precinct; scriptorium needs no row. The closed parti
+  enum has nine building members (BASILICAN · CLAUSTRAL · COLLEGIATE_COURT
+  · MOSQUE_COURT · SYNAGOGUE_HALL · CENTRALIZED · STAVE · MEETING_HOUSE ·
+  TEMPLE_CELLA, + NONE_HOSTED / NO_BUILDING) — all as functions, no
+  doctrine (the deity doctrine held). Engine gaps (15; top five): a `parti`
+  field on faith/learning interior kinds (today only the basilican
+  two-cell renders); the ENDOWMENT/LICENCE/SEE event stream (DESIGN §3's
+  tenure — no field, load-bearing seven times); `religiousCenter`
+  exclusivity wrong at city tier; three catalog learning rows would close
+  the gap; deity rank licenses nothing structural.
+- **Cost note for the owner:** this lane spent ~850k tokens solo (the
+  transcript recovery is read-heavy). Three tranches remain (R-INST-4
+  resume, R-INST-5 magical, R-INST-6 criminal). Under the two-lane cap and
+  the owner's usage windows, the chair HOLDS the second seat for UC-1's
+  build (Opus, cheap, unblocked the moment the UC stack lands — ETA ~30
+  min) rather than start a research lane into the window now; research
+  resumes after UC-1. Vetoable by a word.
