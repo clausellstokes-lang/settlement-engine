@@ -18605,3 +18605,39 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   ruling), then the producers stacked (T2R → T2Q → T2N), then UC-0, then
   WEB-2/WEB-3/HK-A singly as built. Seats: WEB-7 landing · TE-UC3 ·
   TE-WEB3 · TE-HK-A (cap).
+
+## §459 — UC-3 BUILT AT 64a4b259 (THE STATIC COMPONENTS: THE TERRAIN LICENSE READ FROM THE DATA, THE FLOODPLAIN REFUSAL PROVEN LIVE); TC-R-INST-2 DISPATCHED (2026-08-22 22:40 CDT)
+
+- **§459.1 MF-UC3 BUILT:** tip 64a4b259 (4559b9bd member · 64a4b259 packet,
+  hooks ON) on base 4060f690, tree clean, PINNED at refs/preserve/holding-uc3.
+  The terrain license is READ, never tabulated: "the terrain whose
+  `institutionModifiers` carries an 'Underground network' row" —
+  geographyData.js:267-274 (mountain) and :576-582 (hills), the modifier
+  NUMBER never read (a coefficient would be an R-3 input; this car declares
+  none); the ground's hardness is the typed `stoneAvailability` string
+  selecting admitted extents. No floodplain/marsh terrain CLASS exists —
+  the refusal is resource-level (the catalog's `forbiddenResources` on the
+  three subterranean rows, derived at load) — and it is a LIVE branch: 50
+  of 210 real settlements carry a waterlogging resource, 8 on licensed hill
+  ground. jointVocabulary.js carried from UC-0 byte-identical (sha
+  `f9445c98…`; the landing act keeps ONE copy; one shape flagged for
+  convergence: a join is `{ kind, anchor }`). Golden bytewise unmoved;
+  reader walker 1995/1409/387 unmoved (reads no pulse-written key);
+  acceptance 8/8 over 14 real settlements; SIX mutants convict (m1 exposed
+  a real property — the license is two conjoined data gates — so m6 deletes
+  the license wholesale to convict the arm). **One UNPREDICTED interior
+  red cured by REUSE:** `entropyRootCensus.walker` (35 vs 34 — a local
+  FNV matched its hash-helper regex); a third interior red is unauthorized
+  and that walker path is reserved by MF-T2H at READY, so the FNV root
+  now imports from `src/kernel/proseHash.js` (the entityLinks precedent),
+  counter stays 34. Census `+1/0/+1/+8/+1` walked, attributed by isolation,
+  reverted (§417). Both typecheckers were RED first (+1 full, +5 strict)
+  and cured by typedef. Sweep = the named interior red + the banked five,
+  zero strays. Packet READY (`valid: 151 packets (2 READY)`). No STOP.
+- **§459.2 TC-R-INST-2 DISPATCHED** (Fable; trade/commerce/crafts — the
+  largest tranche, 80–120 entries expected; circulation AND storage
+  typology per §452/§453; the R-INST-1 roster method reused; incremental
+  in-place writing with RESUME POINTs per §448). Research fills the seat
+  while WEB-7's gate runs (no box load). Seats: WEB-7 landing · TE-WEB3 ·
+  TE-HK-A · TC-R-INST-2 (cap). Holding for landing: T-UC1 = UC-0 a5c6c4fa
+  + UC-3 64a4b259 (UC-1 after T2R lands).
