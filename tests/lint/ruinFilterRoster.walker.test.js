@@ -363,7 +363,17 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // ones. Both dispositions are stated in the leaf's own header, so the file-granular
     // compliance this walker documents as an accepted gap is not being used to hide one.
     // Read from this arm's own failure message ("expected 91 to be 90"), never computed.
-    expect(readers.length).toBe(91);
+    // RE-MEASURED 2026-08-23 BY MF-UC2: 91 → 92. ONE new reader, src/domain/undercity/
+    // monotoneComponents.js, and it is COMPLIANT rather than exempt — it imports
+    // `isLiveInstitution` and consults it on EVERY institution-anchored row. Its disposition is
+    // the third this train has taken and the only one of its kind: the ruin state is neither
+    // filtered away nor ignored, it is READ AND TYPED, landing on the row as `abandoned`. A
+    // MONOTONE component may not be erased by its institution's ruin (§311.3, "dug is forever":
+    // a burnt-out church's crypt is a fossil, not an absence), so filtering would delete dug
+    // space; but crediting a flattened building with a growing excavation would be this walker's
+    // own defect class, so the row stops growing and says why. The disposition is stated in the
+    // leaf's own header. Read from this arm's own failure message ("expected 92 to be 91").
+    expect(readers.length).toBe(92);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {

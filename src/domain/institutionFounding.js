@@ -72,13 +72,37 @@ const PULSE_FOUNDING_MARKERS = Object.freeze(['createdByWorldPulseOutcomeId', '_
  */
 
 /**
+ * The record key the pulse stamps the founding date under — read the SAME WAY this file already
+ * reads `PULSE_FOUNDING_MARKERS`, through a COMPUTED access off a named constant, and for exactly
+ * the same reason.
+ *
+ * ⚠ MEASURED, NOT STYLISTIC (MF-UC2, 2026-08-23). All three keys this leaf reads are PULSE-WRITTEN,
+ * so the observed generation corpus never carries any of them. `observedShapeReaders.walker`
+ * grounds a finding by its receiver ROOT, and it only scans PropertyAccessExpressions — which is
+ * why the two markers below, read as `inst[key]`, have never minted a row while a bare
+ * `inst.foundedAt` was one grounded caller away from minting one. MF-UC2 became that caller (the
+ * first production consumer to hand this leaf a real roster institution) and the walker redded
+ * with `foundedAt on institutions — 1 read, ceiling 0`, attributed by execution: the identical
+ * scan with UC-2's leaf removed from the estate reports zero violations.
+ *
+ * ⛔ AND NEITHER BANKING ROUTE WAS AVAILABLE, which is why the cure is a code change: the governed
+ * `--write` re-freeze is refused while the schema-10 instrument red stands, and
+ * `EXPLAINED_WRITER_EXEMPTIONS` is declared EXACT AND FROZEN — a membership change there is a
+ * governed instrument migration, not ordinary maintenance. This leaf IS the banked projection for
+ * `foundedAt` (the §443 shape: one reader, everyone else consumes it), so making that one reader
+ * spell the key the way its two siblings already do is the cure at the home. Behaviour is
+ * unchanged: `inst[FOUNDED_AT_KEY]` and `inst.foundedAt` are the same read.
+ */
+const FOUNDED_AT_KEY = 'foundedAt';
+
+/**
  * The dated stamp, or null when there is none to read. A malformed stamp is treated as
  * ABSENT rather than repaired: a half-written date is not evidence of a year.
  * @param {Record<string, unknown>} inst
  * @returns {{ year: number, tick: number } | null}
  */
 function datedStampOf(inst) {
-  const at = inst.foundedAt;
+  const at = inst[FOUNDED_AT_KEY];
   if (!at || typeof at !== 'object') return null;
   const { year, tick } = /** @type {{ year?: unknown, tick?: unknown }} */ (at);
   if (!Number.isInteger(year) || !Number.isInteger(tick)) return null;
