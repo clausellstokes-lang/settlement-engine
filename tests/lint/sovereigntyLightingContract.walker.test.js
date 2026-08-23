@@ -5856,7 +5856,42 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   back at the slot's 2,145 reds at `credited` ("expected 2146 to be 2145"), the credit
     //   itself — the proof that the new file is COUNTED rather than parked — the file restored
     //   byte-identical both times. `parked` holds at WEB-2's 366.
-    files: 2512, parked: 366, credited: 2146, titles: 20826, suiteTitles: 5803,
+    // ── RE-RECORDED 2026-08-23 BY THE HK-A LANDING (HK-1 · HK-2 · HK-3, the housekeeping car), WITH ITS CAUSE STATED ──
+    // 2,500/365/2,135/20,750/5,791 → 2,500/365/2,135/20,754/5,792 at the BUILD base dffa2b97
+    // (WEB-5's retrospective mint). THE CAUSE IS FOUR NEW TITLES AND ONE NEW SUITE TITLE IN TWO
+    // ALREADY-CREDITED FILES, and nothing else. NO test file is created, so `files`, `parked`
+    // and `credited` do not move and their three assertions passed ahead of the red rather than
+    // being reasoned about. The titles:
+    //   +3 titles / +1 suite title: tests/domain/underwaysCouplings.test.js gains the describe
+    //     'D6 — the REAL catalog institution couples (the landed-dark defect HK-1 cured)' with
+    //     its three arms — the catalog row coupling at village/town/city, the anti-vacuity
+    //     control that the catalog declares NO institutionFunction, and the coupling-5 skip
+    //     against a RENAMED institution (ODQ §445.3: the facet read was querying a dead key).
+    //   +1 title: tests/scripts/implementationPackets.test.js gains 'reds a requiredSymbols row
+    //     that pins a migration FILENAME in a doc, and only that shape' (HK-3's moving-head
+    //     guard, ODQ §455.2). Both files were already CREDITED and both spell every new title as
+    //     a literal, so neither parks. HK-2 (MF-T2H's LANDED flip, §454.3) adds no title.
+    // `censusAuthorization`: ODQ §445.3 (HK-1), §454.3 (HK-2), §455.2/§455.3 (HK-3 and the car's
+    // dispatch), §463.2 (HK-A complete), §478.3 (WEB-2's DEPLOY row deleted at this act),
+    // §479.3 (the GO).
+    // ⛔ CONVICTED AT THE BUILD, then REVERTED per §417: walked at f2b2711b with each figure read
+    //   from its own failure message ("expected 20754 to be 20750" → "expected 5792 to be 5791"),
+    //   the whole arm green at the new tuple (33/33), the edit reverted (`git checkout --`), and
+    //   the row rode the lane receipt into this landing slot so the tuple is re-derived here,
+    //   never carried.
+    // ⭐⭐ THE CARRY LAW, EXECUTED AT THE LANDING SLOT (TE-HKA-LANDING, 2026-08-23; §457/§469
+    //   laws). This car was authored at base dffa2b97 (after-figure 2,500/365/2,135/20,754/
+    //   5,792) and rebased onto 64da7d5d (WEB-3's landing, the 42nd). The DELTA `+0/+0/+0/+4/+1`
+    //   is what crossed. ⛔ THE BASE HAD MOVED UNDER IT: WEB-6, WEB-7, the four-member MAP STACK,
+    //   the three-member PRODUCER TRAIN, UC-0, UC-3, WEB-2 and WEB-3 re-recorded the blocks
+    //   directly above, so the slot reads 2,512/366/2,146/20,826/5,803 and the after-figure
+    //   re-derives to 2,512/366/2,146/20,830/5,804 — the ONE live tuple line below, CONVICTED BY
+    //   EXECUTION at the rebased tip (33/33) with TWO negative controls: the slot's own tuple put
+    //   back reds at `titles` ("expected 20830 to be 20826"), this car's +4 exactly; and
+    //   `suiteTitles` alone put back at the slot's 5,803 reds at `suiteTitles` ("expected 5804 to
+    //   be 5803"), HK-1's one new describe — the file restored byte-identical both times.
+    //   `files`, `parked` and `credited` hold at WEB-3's 2,512 / 366 / 2,146.
+    files: 2512, parked: 366, credited: 2146, titles: 20830, suiteTitles: 5804,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

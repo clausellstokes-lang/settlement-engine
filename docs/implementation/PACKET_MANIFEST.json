@@ -22204,10 +22204,6 @@
       {
        "path": "scripts/ops/migrationRehearsalCore.mjs",
        "symbol": "id: 'retention-numbers',"
-      },
-      {
-       "path": "docs/DEPLOY.md",
-       "symbol": "198_retention_numbers.sql"
       }
      ],
      "retiredSymbols": [],

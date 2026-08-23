@@ -286,4 +286,16 @@ happens the posture section above is what keeps the gate green, and a future mem
   landing act as §478.3 ruled; the twelve migration gates, not a landed packet's pins, are what
   hold 198's figures true. Vetoable: restoring the three rows re-reds the validator at any
   head above 198.
+- ⛔ **THE FOURTH ROW DELETED AT HK-A's LANDING (TE-HKA-LANDING, 2026-08-23; chair rulings ODQ
+  §455.2 and §478.3):** `docs/DEPLOY.md` :: `198_retention_numbers.sql` — the CURRENT
+  migration-head FILENAME quoted in a doc, the exact shape §455.2 ruled out of WEB-1 and HK-3
+  turned into machinery. With HK-3's validator guard on the branch, `validate:packets` at the
+  rebased tree was RED on precisely this row (`WEB-2.requiredSymbols[17].symbol pins a MIGRATION
+  FILENAME in a doc`) and on nothing else; after the deletion it reads
+  `valid: 165 packets (0 READY)`. The row was not a live trap at this slot (WEB-2's own preambles
+  section names 198 independently), but §478.3 rules the guard stays strict and mints no
+  "permanently-named" exemption. `requiredSymbols` is now 17 rows; migration 198 stays pinned
+  by its content anchors against the migration FILE at its own path, by the pglite suite's
+  titles, and by the STABLE rehearsal token `retention-numbers`. Vetoable: restoring the row
+  re-reds the validator's guard on arrival.
 

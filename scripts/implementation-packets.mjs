@@ -94,14 +94,22 @@ const GLOB_OR_NUL = /[\0*?[\]{}!]/;
 // carries the general law ("never put a re-recorded FIGURE in requiredSymbols", ODQ TE-26).
 // This turns that law into machinery for the one shape that has actually bitten.
 //
-// SCOPED TO DOCS PATHS DELIBERATELY, and the boundary is measured rather than guessed: at
-// this base exactly one estate row matches the filename shape at all outside docs —
-// TM-2A's `const SIM_METRIC_MIGRATIONS = Object.freeze([...196_world_sim_metrics.sql...])`
-// against `tests/lint/engineTelemetryWall.walker.test.js`. That row is a frozen roster
-// CONSTANT in the test that owns it, is not the moving head, and is exactly the pin the
-// walker exists to hold — so widening this refusal to every path would refuse a correct
-// row. The refusal is also SHAPE-scoped: it reads the `symbol`, never the doc's contents,
-// so a doc row naming a real heading or an exported token is untouched.
+// SCOPED TO DOCS PATHS DELIBERATELY. The boundary was measured, not guessed, and the
+// measurement is stated here correctly (D-HKA-1, ODQ §463.3 — the HK-3 commit message and
+// the first draft of this comment claimed TM-2A's row "matches the filename shape outside
+// docs"; under the ANCHORED regex below, ZERO estate rows match at any path). The nearest
+// non-doc row is TM-2A's `const SIM_METRIC_MIGRATIONS = Object.freeze([...196_world_sim_
+// metrics.sql...])` against `tests/lint/engineTelemetryWall.walker.test.js`, which only
+// CONTAINS a filename inside a frozen roster constant — a correct pin, the one the walker
+// exists to hold, and not the moving head. The docs/ scope is kept on its own merits: a
+// test or a script may legitimately pin a bare migration basename as a symbol (a roster
+// constant's line, a rehearsal wave's file reference), whereas a doc quoting the basename is
+// quoting the head. TM-2A's row at its own non-docs path is the third negative control in
+// tests/scripts/implementationPackets.test.js, and the same roster-constant symbol is not
+// refused at a docs path either (measured at the node level at HK-A's build) — the regex is
+// anchored, so only a BARE basename trips it. The refusal is also SHAPE-scoped: it reads the
+// `symbol`, never the doc's contents, so a doc row naming a real heading or an exported
+// token is untouched.
 const MIGRATION_FILENAME_SYMBOL = /^\d{3}_.*\.sql$/;
 const DOCS_PATH_PREFIX = 'docs/';
 
