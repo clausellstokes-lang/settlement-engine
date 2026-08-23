@@ -23082,6 +23082,11 @@
           "path": "tests/lint/facetInferenceHonesty.walker.test.js"
         },
         {
+          "_note": "THE SECOND CENSUS A NEW tests/lint FILE REDS (the charter named it). scripts/mutation-coverage-manifest.json's TOTALITY arm enumerates every test file under the seven ENFORCER DIRS, and tests/lint is one, so the new walker owes an entry. `uncovered` is refused twice over - by the file header (do NOT mark it uncovered) and by the SHRINK-ONLY arm, which pins the uncovered count EXACTLY at uncoveredBaseline 198 - so the entry is a `rationale` naming the nine mutants this lane actually drove against the walker's nine arms. ATTRIBUTED BY EXECUTION rather than assumed: the arm is GREEN at the clean base 00e7af612 and RED at this member's tip. Non-vacuity of the cure proved by perturbing the new key to a file that does not exist, which reds BOTH the TOTALITY arm and the stale-entry arm; restored digest-exact.",
+          "action": "MODIFY",
+          "path": "scripts/mutation-coverage-manifest.json"
+        },
+        {
           "action": "TEST",
           "path": "tests/domain/cohesionWeave.test.js"
         },

@@ -2110,6 +2110,10 @@
    "kind": "rationale",
    "ref": "wf8a-faith-kind-pools-executed-2026-08-21"
   },
+  "tests/lint/facetInferenceHonesty.walker.test.js": {
+   "kind": "rationale",
+   "rationale": "CH-1's anchor-discipline walker for the ONE facet chokepoint (MF-CH1, ODQ 503.3). Every one of its nine arms already carries a convicting mutant that was DRIVEN at the build rather than described: restoring the bare /den/ reds A1, A3, A5, A6 and A8; restoring the bare /fort/ reds A1, A3 and A5; a naive leading word boundary on the craft row, on the arms row alone, and on mill each red A2 and A3; appending an unanchored alternative reds A5; widening the substructure sewer pattern reds A3, A4 and A6; and breaking the file's own source parser reds A0, A6 and A7 - nine drives, each restored digest-exact with a clean re-run green at both ends. The arms are self-guarding too: A0 executes the table parsed out of the SHIPPED source against the real chokepoint over all 933 catalog cells, A5 refuses to split a pattern it cannot split soundly, A6 exhibits the one historical collision the change removed, and A7 carries a synthetic negative. A planted sweep regression would have to mutate src/domain/spatial/cohesionWeave.js, which is not in MUTATED_FILES; widening that refusal list for a file whose mutant set is already enumerated and executed is the disproportionate half of this contract."
+  },
   "tests/lint/oathStampTotality.walker.test.js": {
    "kind": "rationale",
    "ref": "oath-stamp-totality-executed-2026-08-04"
