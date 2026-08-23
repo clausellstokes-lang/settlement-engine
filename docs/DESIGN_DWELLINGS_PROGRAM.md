@@ -30,6 +30,20 @@ of the map program); nothing that can move an output lands after the
 signature (the endgame-tail law holds). Coordination carry-notes are planted
 NOW (§16) so nothing built in the current arc precludes DW.
 
+**§494 (owner, 2026-08-23): THE COMPOUND IS A FIRST-CLASS OBJECT, AND THE
+PROPERTY LINE IS DRAWN.** A property is not a building: it is a `compound`
+with a parcel boundary and typed MEMBERS (main building, yard, court,
+detached outbuilding, garden, well, midden) that belong to it even when they
+do not touch it. DW-1 mints the vocabulary and the `CompoundMember` contract
+(beside `CirculationCell` §452 and `StorageCell` §453); DW-2 places members
+inside the parcel and carries `compound.entrances` (the R-INST-5/R-INST-6
+joint single-controlled-entrance finding) plus the second subordinate
+entrance R-INST-6 finding 2 demands; DW-6 projects the parcel ring and the
+member polygons to the drawn surfaces so the map can outline a property.
+The owner's hover requirement (a yellow halo/border on the whole property
+line, members included, on hover and on pin) is a MAP car that consumes
+DW-6's projection — ODQ §494.
+
 **§482 (owner, 2026-08-23): "DW program before the code-review ultra."** The
 DW build arc (DW-0 through DW-7 and the DW-S wiring) completes and lands
 BEFORE the §290 review stop, so `/code-review ultra` reviews the dwellings
@@ -294,7 +308,7 @@ gate each corpus wave (the CT-0 pattern).
 | DW-3 | fixtures/dressing + supply-state variants | DW-1/2 |
 | DW-4 | the undercity projection seam | undercity landed |
 | DW-5 | the validator suite + continuity arms | DW-2..4 |
-| DW-6 | projections: pane, tiers, PDF, Foundry-walls | DW-2..5 |
+| DW-6 | projections: pane, tiers, PDF, Foundry-walls, **the parcel ring + compound member polygons for the map's property-line halo (§494)** | DW-2..5 |
 | DW-7 | deltas/editing + news hooks + the estate view | DW-6 |
 | DW-S | THE SOAK LEG: the 300-year soak gains a dwellings leg (boundedness, determinism, continuity, lawfulness per epoch); findings feed the tuning pass | DW-5; runs in the diagnostic soak and the terminal soak (§456) |
 

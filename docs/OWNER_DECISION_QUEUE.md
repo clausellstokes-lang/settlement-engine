@@ -20240,3 +20240,81 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   law). This row is the real content, committed on top. LAW for the chair's
   own scripts: the writer must exit non-zero into the committer — chain the
   python and the commit with `&&`, never as separate statements in one block.
+
+## §494 — OWNER DIRECTIVE (in-chat, 2026-08-23 14:19 CDT): HOVER MUST HALO THE **PROPERTY LINE**, NOT THE BUILDING — A COMPOUND (YARD, COURT, DETACHED OUTBUILDING) IS ONE PROPERTY AND MUST DRAW AS ONE. MEASURED ANSWER TO "DOES IT SHOW THAT TODAY?": **NO** — AND THE THREE REASONS ARE AT THREE DIFFERENT DEPTHS
+
+- **§494.1 THE DIRECTIVE (verbatim):** "if a building had a yard or was a
+  court, when a mouse hovers over a building it should highlight around that
+  building on the map in like a yellow halo or border that shows the property
+  line, including a court or yard or whatever configuration within that
+  property line it is." And the question: "If a building had a court or yard
+  or other structure attached to it that's included in the property line even
+  though it may simply be separated and not physically attached to the main
+  building, does it show that on the map?"
+- **§494.2 THE MEASURED ANSWER (chair, read at the build tip `f1e4d515`; no
+  lane, no guess):** **it does not.** Three findings, three depths:
+  (a) **The 2D town map's hover is a SQUARE, not an outline.**
+  `SettlementMapPane.jsx:605-625` draws every building as an 8 px `rect` that
+  becomes 11 px on hover with a brighter fill and a 2.5 px stroke; the
+  DISTRICT polygons above it (`:524-535`) do get a hover fill at 0.24 opacity
+  — so a hovered building highlights ITSELF, and a hovered district
+  highlights its polygon, but nothing between the two exists.
+  (b) **The compiled cartography sheet deliberately draws no parcels.**
+  `cartographyPaint.js:19-21`, in its own words: a parcel emits no op because
+  "a parcel is a placement SLOT, not a drawn thing" — it is READ only so a
+  building's tone can ride the ward that owns its parcel. The invariant
+  `footprint ⊂ parcel ⊂ ward` is guaranteed by the model
+  (`MapCartographySubTab.jsx:16-18`), so EVERY building already knows its
+  parcel; the parcel rows projected to the painter carry `{id, wardId}` and
+  no ring, while the real geometry sits deeper in the fabric
+  (`parcelRegistry.js`, `boundaryArrangement`, `planarDcel`,
+  `frontageSubdivision`). **The property line exists as data and is not
+  projected to any drawn surface.**
+  (c) **A COMPOUND does not exist in the model at all.** There is no
+  yard, court, or detached-but-same-property outbuilding: the interior work
+  derives one footprint with ONE `entranceSide` (`interiorModel.js`), and the
+  townMap building record is a point with an `anchorKey`. So the second
+  question's case — a structure on the same property, separated, not
+  physically attached — has nothing to draw FROM today. (The 3D scene has a
+  GOLD selection halo, `threeSceneRuntime.js:450-463`, but it is a disc at
+  the building's centre, not a boundary.)
+- **§494.3 RULED — THE WORK, AND WHERE EACH PIECE LANDS (vetoable):** the
+  directive is THREE items, and only the third is a UI car.
+  **(1) THE COMPOUND, in DW** — a property is a first-class object: a
+  `compound` with a parcel boundary and MEMBERS (main building · yard ·
+  court · detached outbuilding · garden · well · midden), each member typed,
+  the whole carrying `entrances` (R-INST-5/R-INST-6's joint
+  `compound.entrances: 1` finding — a precinct with one controlled entrance)
+  and the second subordinate entrance R-INST-6 finding 2 demands. This is
+  the same object six research tranches kept asking for from the other side
+  (the inn's galleried COURTYARD, the college COURT, the fondaco/han court of
+  identical cells, the rookery court, the hospital's entrance courtyard, the
+  smithy's edge-sited yard, the brewhouse outshut) — DW-1 vocabulary +
+  **DW-2 geometry (placement of members inside the parcel)**; the charter's
+  §5 contracts gain `CompoundMember` beside `CirculationCell` (§452) and
+  `StorageCell` (§453).
+  **(2) THE PROJECTION** — the parcel ring (and the compound's member
+  polygons) reach the drawn surface: a `parcel`/`compound` op in
+  `cartographyPaint.js`'s emitted list at the correct back-to-front layer
+  (under buildings, over wards), and the same geometry threaded to the 2D
+  pane. This is a MAP-program car, not a DW car, and it is the piece that
+  makes the halo drawable at all. Sequenced with DW-6 (projections).
+  **(3) THE HALO** — hover (and pin) draws the property line: a yellow
+  border/halo around the whole compound, members included, with the same
+  hover-key state machine the pane already runs (`pinned ?? hovered`), the
+  district-polygon precedent for opacity, and the touch posture unchanged
+  (touch drops hover; tap pins). Accessibility: it is a BORDER as well as a
+  tint, so it survives colour-blind and high-contrast modes. A UI car after
+  (2); the 3D scene's gold halo is re-pointed at the compound outline in the
+  same car or a sibling.
+  **Owner acceptance to write into the car:** hovering any member of a
+  property highlights the WHOLE property line, once, with no double-draw
+  where members touch.
+- **§494.4 RECORDED, NOT STARTED.** Both seats are full (UC-2's landing; the
+  CH charter compile) and the cap is two (§465). Item (1) is added to
+  `DESIGN_DWELLINGS_PROGRAM.md` now (§5 contract + §9 waves) so DW-0 compiles
+  it rather than discovering it; items (2) and (3) enter the arc after the DW
+  geometry core exists — a halo drawn before the compound is modelled would
+  outline a point. If the owner wants the halo SOONER than DW-2, the fallback
+  is a parcel-only outline (the ring exists in the fabric today) with no
+  members — say the word and it becomes a near-term map car.
