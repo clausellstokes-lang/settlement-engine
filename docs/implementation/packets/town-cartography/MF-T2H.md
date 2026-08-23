@@ -1,7 +1,30 @@
 # Town cartography / MF-T2H — the spatial-receipt seam, ported onto the cured ABI, with the dependency-join injectivity gap closed as a declared divergence
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** 1
+- **Landing note (ODQ §442.1, recorded here at HK-2 / ODQ §454.3):** this member LANDED on
+  2026-08-22 and this packet's status row lagged the branch by 8 commits — three landings
+  (WEB-1 the 27th, WEB-4 the 28th, WEB-5 the 29th), measured with
+  `git rev-list --count 84e06412..dffa2b97` rather than counted from memory. Run 2 of the
+  terminal, fired detached and never killed, ENDED 00:46:10Z with `TRUE_EXIT=0` +
+  `[gate-tail] exit: 0` + `free_kb_at_end=7811004`; every step was read from the body rather
+  than trusted from the exit — all eleven `validate:*`, both typecheckers, lint 0 errors
+  (29 pre-existing warnings), `test:ratchet OK — no test regressions (11 known failure(s) of
+  28748 tests, ceiling 11)`, build ✓ 3929 modules, and `STRICT DIST OK — 52 file(s), 433
+  test(s)`. The suite total of 28,748 is +10 over the last recorded gate (28,738), consistent
+  with this member's +6 titles. The chair executed the CAS `b10ed1a1 → 84e06412` with an
+  old-value assertion; `claude/composite-r4` = **84e06412**. Do not redispatch.
+  ⭐ **J-TET2H-7 IS DISCHARGED BY THIS FLIP.** That judgment kept this member's OWN new
+  exports out of `requiredSymbols` because §P7.13 makes a row naming a symbol the deliverable
+  CREATES a STOP at READY — such a row reds against every tree that does not already carry
+  the member. At LANDED the tree carries them, so the rows JOIN here, in the manifest, in the
+  MF-T2B shape (that LANDED packet names five exports of its own two created leaves plus one
+  anchor per created test file). Only symbols this packet NAMES were added, each verified to
+  resolve live: `spatialEffectReceipt`, `canonicalSpatial`, `noEffectDiagnostic` and
+  `fingerprint` from `spatialReceipt.js`; `FABRIC_FORK_NAMESPACE`, `hash32` and `hashUnit`
+  from `fabricRng.js`; and the one `describe` anchor of each new acceptance file.
+  ⛔ `legacySubstrateForkKey` is NOT named — J-TET2H-1 declares it UNPORTED, and a row for an
+  absent symbol would red the manifest at every status.
 - **Verified base:** `claude/composite-r4` at `b10ed1a1f5a0f2acd00bbfc9b5d0a41931697c3d`
   ⭐⭐ **RE-STAMPED AT THE LANDING SLOT, AS THIS ROW PROMISED IT WOULD BE (J-TET2H-6).** The member
   was authored against MF-T2Bf's **HOLDING (unlanded)** commit `7d6bde7c`, which was never an

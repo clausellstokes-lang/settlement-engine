@@ -20588,7 +20588,7 @@
     },
     {
       "id": "MF-T2H",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T2H.md",
       "verifiedBase": "b10ed1a1f5a0f2acd00bbfc9b5d0a41931697c3d",
       "changeManifest": [
@@ -20657,6 +20657,51 @@
           "_note": "THE ANCHOR HELPER THE ACCEPTANCE MATRIX ROUTES ITS CONTAINMENT NEGATIVES THROUGH, called by name on the same line as required by §P3 — an alias or a wrapper is not recognised by the walker. A4's roster-exclusion pins depend on it existing under this exact name.",
           "path": "tests/helpers/anchoredNegatives.js",
           "symbol": "export function expectAbsentWithAnchor"
+        },
+        {
+          "_note": "JOINED AT THE FLIP TO LANDED (HK-2, ODQ §454.3) — THE ROW THAT DISCHARGES J-TET2H-7. That judgment kept this member's OWN new exports out of requiredSymbols because §P7.13 makes a row naming a symbol the deliverable CREATES a STOP at READY: it reds against every tree that does not already carry the member, which is every tree a READY packet is checked on. At LANDED the tree carries them and each row becomes a live guard instead of a false alarm. The shape is MF-T2B's, this family's own LANDED precedent — exports of each created leaf plus one describe anchor per created acceptance file — and only symbols the packet itself NAMES were added, each verified to resolve live before the flip. ⛔ legacySubstrateForkKey is deliberately absent: J-TET2H-1 declares it UNPORTED, and a required row for a symbol that does not exist reds the manifest at every status. THE SEAM'S MOUTH — §287.4's state_t -> spatialReceipt_t. Renaming or removing it retires the seam this packet exists to land.",
+          "path": "src/domain/townMap/fabric/spatialReceipt.js",
+          "symbol": "export function spatialEffectReceipt"
+        },
+        {
+          "_note": "Joined at the flip to LANDED (HK-2, ODQ §454.3); see the spatialEffectReceipt row above for the J-TET2H-7 discharge. THE CANONICALISING STEP the digest is built from, and the reason the NAMED FIELD ROSTER refusal is structural rather than conventional.",
+          "path": "src/domain/townMap/fabric/spatialReceipt.js",
+          "symbol": "export function canonicalSpatial"
+        },
+        {
+          "_note": "Joined at the flip to LANDED (HK-2, ODQ §454.3); see the spatialEffectReceipt row above for the J-TET2H-7 discharge. THE SEPARATELY TYPED NO-EFFECT RESULT — one of the three rules this port makes UNREPRESENTABLE rather than forbidden. Collapsing it back into a nullable receipt is the regression this row names.",
+          "path": "src/domain/townMap/fabric/spatialReceipt.js",
+          "symbol": "export function noEffectDiagnostic"
+        },
+        {
+          "_note": "Joined at the flip to LANDED (HK-2, ODQ §454.3); see the spatialEffectReceipt row above for the J-TET2H-7 discharge. THE DIGEST PRIMITIVE the sealed-equivalence proof pins byte-identically across the declared length-prefix divergence.",
+          "path": "src/domain/townMap/fabric/spatialReceipt.js",
+          "symbol": "export function fingerprint"
+        },
+        {
+          "_note": "Joined at the flip to LANDED (HK-2, ODQ §454.3); see the spatialEffectReceipt row above for the J-TET2H-7 discharge. THE KEY-ANCHORED FORK NAMESPACE. The packet's chunk census uses it as one of three positive controls owned by LANDED fabric leaves; changing the string re-rolls every fabric stream.",
+          "path": "src/domain/townMap/fabric/fabricRng.js",
+          "symbol": "export const FABRIC_FORK_NAMESPACE"
+        },
+        {
+          "_note": "Joined at the flip to LANDED (HK-2, ODQ §454.3); see the spatialEffectReceipt row above for the J-TET2H-7 discharge. ONE OF THE TWO NEW DEFINITIONS the entropy-root census re-recorded 32 -> 34 for (ratified at ODQ §403). It is a DEFINITION and not a ROOT — it takes settlementSeed as an argument and never reaches for worldState.rngSeed — and that distinction is what the re-record was ratified on, so the name must stay findable from the manifest.",
+          "path": "src/domain/townMap/fabric/fabricRng.js",
+          "symbol": "export function hash32"
+        },
+        {
+          "_note": "Joined at the flip to LANDED (HK-2, ODQ §454.3); see the spatialEffectReceipt row above for the J-TET2H-7 discharge. THE OTHER of the two entropy-census definitions, named for the same reason as hash32.",
+          "path": "src/domain/townMap/fabric/fabricRng.js",
+          "symbol": "export function hashUnit"
+        },
+        {
+          "_note": "Joined at the flip to LANDED (HK-2, ODQ §454.3); see the spatialEffectReceipt row above for the J-TET2H-7 discharge. THE ACCEPTANCE MATRIX'S ONE LITERAL DESCRIBE — the SP-D idiom that keeps the census crediting this file rather than parking it. Renaming it parks the file and silently removes four acceptance cases from the evidence layer.",
+          "path": "tests/domain/townMapSpatialReceipt.test.js",
+          "symbol": "describe('MF-T2H spatial-receipt seam'"
+        },
+        {
+          "_note": "Joined at the flip to LANDED (HK-2, ODQ §454.3); see the spatialEffectReceipt row above for the J-TET2H-7 discharge. THE REPLAY COMPANION'S DESCRIBE, for the same reason.",
+          "path": "tests/property/townMapFabricRngDeterminism.test.js",
+          "symbol": "describe('MF-T2H fabric seeding-law determinism'"
         }
       ],
       "acceptanceCases": [
