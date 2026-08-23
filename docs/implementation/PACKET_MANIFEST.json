@@ -23067,7 +23067,7 @@
     },
     {
       "id": "MF-CH1",
-      "status": "DRAFT",
+      "status": "READY",
       "packetPath": "docs/implementation/packets/catalog-hygiene/MF-CH1.md",
       "verifiedBase": "00e7af612d428078634d52ea37054bd00b773ca6",
       "changeManifest": [
@@ -23185,8 +23185,109 @@
           "symbol": "const DECLARED_INFERENCE_DELTA = Object.freeze({"
         }
       ],
-      "acceptanceCases": [],
-      "checks": [],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "The four mis-inferring rows stop asserting a nature AND the DERIVED INTERIOR each one draws moves to generic - pinned at the interior because facetOf is off the generation pipeline and a record digest cannot see it (ODQ 503.2). The arm also pins the BEFORE half through the frozen pre-CH-1 table, so it records a MOVE rather than a state. Convicted by M1 (bare den restores vice on three rows) and M2 (bare fort restores security on the fourth)."
+        },
+        {
+          "id": "A2",
+          "case": "THE GAP THE CH SKEPTIC PANEL FOUND: both Blacksmith rows keep institutionFunction 'arms' as well as 'craft', because /smith/ sits in TWO table rows and the charter's own acceptance pinned only one of them. A 13-row non-regression roster carries Sawmill x2, Mill x2, Resident smith, Gambling den, Town watch, Massive walls and fortifications, Banking houses, Barracks and Courthouse alongside them. Convicted by M4, which naively anchors the ARMS row alone, and by M3 and M5."
+        },
+        {
+          "id": "A3",
+          "case": "The whole-catalog differential against a frozen copy of the pre-CH-1 table is EXACTLY the declared four-cell delta and nothing else - the 'nothing else moved' claim, executed over 933 cells rather than asserted. Both sides read a declaration-stripped entity, so the arm survives CH-3a's facets key and CH-3's chartered row deletion instead of foreclosing them. Convicted by every source mutant. IT CARRIES ITS OWN NON-VACUITY FLOOR, which the test file states as a separate arm A0 - the walker holds NINE arms against these eight manifest cases: the FACET_INFERENCE table read out of the SHIPPED source bytes reproduces facetOf's answer on all 933 cells, so this differential cannot be measuring a bug in the walker's own re-implementation of inferFacet. A0 is convicted by M8, breaking the parser's row scan, which reds A6 and A7 with it."
+        },
+        {
+          "id": "A4",
+          "case": "The undercity SEED GATE is still: institutionSubstructure moves zero of the 311 rows, with a non-vacuity floor proving the kind really does resolve on this catalog. Convicted by M9, appending granar to the sewer pattern, which flips the three granary rows. NOTE, corrected at the build: dropping the ^ from ^access to does NOT convict this arm - the phrase only ever occurs at the start of a name, so no verdict moves - and the test comment now says so instead of claiming a mutant that was described rather than driven."
+        },
+        {
+          "id": "A5",
+          "case": "ANCHOR DISCIPLINE, the arm that removes the class's habitat: every alternative in every FACET_INFERENCE pattern carries a word boundary or a start anchor, source-scanned over the shipped bytes. It guards its own split - if any pattern ever uses a group or a character class, either of which could hide an alternation bar, the arm reds rather than mis-splitting. Convicted by M6, appending an unanchored alternative, and by M7."
+        },
+        {
+          "id": "A6",
+          "case": "No catalog row matches two rules within one facet kind by accident, and the ONE deliberate ordering override that survives is declared by name rather than scoped away: institutionSubstructure's leading 'access to' rule deliberately beats crypt for the two 'Access to parish church' rows, because the church is elsewhere. The same scan under the pre-CH-1 table exhibits the accidental collision CH-1 removed - Resident smith (part-time) matching craft and vice at once - which is what makes the arm a measurement rather than an empty loop. This corrects the charter's claim of zero collisions."
+        },
+        {
+          "id": "A7",
+          "case": "Every DECLARED catalog facet names a real value of its kind, and every institutionNature declaration names an INTERIOR_KINDS member. Today no catalog row declares a kind FACET_INFERENCE also infers, so the arm states its own emptiness rather than hiding it: the scan is held live by an EXACT count of the three Underground network rows that do carry facets, and by a synthetic negative and positive pair. It is ready for CH-3a's first declaration."
+        },
+        {
+          "id": "A8",
+          "case": "What the reader actually sees, pinned as ROOMS rather than as a facet token: a village parish priest's resolved room set moves from the tavern's common, kitchen and cellar to the generic main and back. This is the legibility payoff of the whole car and the most direct statement of what was wrong with it. Convicted by M1."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/facetInferenceHonesty.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/cohesionWeave.test.js",
+          "tests/interior/interiorModel.test.js",
+          "tests/interior/interiorExport.test.js",
+          "tests/interior/interiorLens.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/undercityMonotoneComponents.test.js",
+          "tests/domain/undercityStrataExistence.test.js",
+          "tests/domain/undercitySewerDerivation.test.js",
+          "tests/data/underwaysInstitutionParity.test.js",
+          "tests/domain/underwaysCouplings.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/property"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/mutationCoverageManifest.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint",
+          "tests/build",
+          "tests/docs",
+          "tests/ops",
+          "tests/domain",
+          "tests/property",
+          "tests/edgeFunctions",
+          "tests/scripts",
+          "tests/ui",
+          "tests/data"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "npm",
+          "run",
+          "validate:packets"
+        ]
+      ],
       "retiredSymbols": []
     }
   ]

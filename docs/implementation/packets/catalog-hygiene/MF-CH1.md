@@ -1,6 +1,6 @@
 # Catalog hygiene / MF-CH1 — INFERENCE HONESTY: the ONE facet chokepoint stops reading words that are not there, and the proof is pinned at the DERIVED INTERIOR because the corpus digest cannot see it
 
-- **Status:** DRAFT
+- **Status:** READY
 - **Packet version:** 1
 - **Verified base:** `claude/composite-r4` at `00e7af612d428078634d52ea37054bd00b773ca6`
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
@@ -90,7 +90,8 @@ settlement. **This car adds no catalog-row key of any kind.**
 | 7 | the edge-bundle rosters | `src/domain/spatial/cohesionWeave.js` is an input of **three** of the five: `aiCharterBundle`, `aiGroundingBundle`, `aiOutputSchemaBundle` (`grep -l` over `supabase/functions/_shared/*.meta.json`) ⇒ `npm run build:edge-shared` runs in this member's commit, all five `.meta.json` commit as a set, and `tests/edgeFunctions` joins the sweep (§475) | OWED, PAID (§8) |
 | 8 | `validate:packets` at base | `[implementation-packets] valid: 168 packets (0 READY)`, TRUE_EXIT 0 | GREEN |
 | 9 | change-path reservation (§471/§480) | **zero non-terminal packets** in the manifest at this base, so no path this car names is reserved by another | CLEAR |
-| 10 | the new-family cost | the validator has **no family concept at all** — `family` is not a field it reads; a family is only the directory segment inside `packetPath`. Admitting `catalog-hygiene` costs exactly three things and no code change: the packet `.md` at the new path, its manifest entry, and its `INDEX.md` row (the validator cross-checks `packetPath` ↔ index link ↔ status cell). Read at `scripts/implementation-packets.mjs` `validatePacketManifest` / `parseIndexPacketStatuses` | CONFIRMED |
+| 10 | the mutation-coverage census | `scripts/mutation-coverage-manifest.json` enumerates every test file under the seven ENFORCER DIRS, and `tests/lint` is one. A new file there owes an entry. **GREEN at base, RED at this tip — attributed by execution (§6.2)** | OWED, PAID as a `rationale` (§6.3) |
+| 11 | the new-family cost | the validator has **no family concept at all** — `family` is not a field it reads; a family is only the directory segment inside `packetPath`. Admitting `catalog-hygiene` costs exactly three things and no code change: the packet `.md` at the new path, its manifest entry, and its `INDEX.md` row (the validator cross-checks `packetPath` ↔ index link ↔ status cell). Read at `scripts/implementation-packets.mjs` `validatePacketManifest` / `parseIndexPacketStatuses` | CONFIRMED |
 
 ---
 
@@ -203,12 +204,198 @@ unaffected, proved by running `tests/interior/**` green (§6).
 | A7 | every declared catalog facet names a real value, with a live-scan count and a synthetic negative | M8 |
 | A8 | what the reader sees: the village parish priest's room set moves `common/kitchen/cellar` → `main/back` | M1 |
 
+⚠ **NINE TEST ARMS, EIGHT MANIFEST CASES.** `implementation-packets.mjs` caps `acceptanceCases`
+at 8, so **A0 is carried inside A3's manifest case** — it is literally A3's non-vacuity floor and
+reads as one claim. The test file keeps the nine `it(` arms, which is what the census counted.
+
 ---
 
-## §6 · EXECUTION LOG — to be completed at READY
+## §6 · EXECUTION LOG
 
-## §7 · THE CENSUS — to be completed at READY
+Every battery on one command line with the lock dir exported inline (§440.2) and the exit
+captured unpiped. `npm run check*` was never wrapped in the mutex (§460.1).
 
-## §8 · THE EDGE BUNDLES — to be completed at READY
+### §6.1 · The batteries
 
-## §9 · JUDGMENTS AND DEFERRALS — to be completed at READY
+| battery | result |
+|---|---|
+| the acceptance, `tests/lint/facetInferenceHonesty.walker.test.js` | `Test Files 1 passed (1)` · `Tests 9 passed (9)` · **TRUE_EXIT 0**, re-run AT the committed tip (`b2a3b463d`) after the blob proof, not only before it |
+| **the §489.3 grep arm — 52 files**, `git grep -l` over 21 tokens (`FACET_INFERENCE · facetOf · inferFacet · declaredFacet · interiorKindOf · interiorFunctionOf · INTERIOR_KINDS · hasCharityFacet · resolveRoomSet · templateOf · institutionNature · institutionFunction · institutionSubstructure · Priest (resident) · Warden's Lodge · Charlatan fortune tellers · Dragon resident · Blacksmith · Sawmill · cohesionWeave · interiorTemplates`) across **all** of `tests/`, not the charter's 16-file list | `Test Files 1 failed \| 51 passed (52)` · `Tests 1 failed \| 902 passed (903)` · TRUE_EXIT 1, the one red being the deferred census row |
+| the three `interiorFixtures` consumers (`interiorModel` was in the grep arm; `interiorExport` and `interiorLens` reach the fixture only through it) | `Test Files 2 passed (2)` · `Tests 14 passed (14)` · TRUE_EXIT 0 |
+| `tests/property` with the golden blob compared on both sides | `Test Files 101 passed (101)` · `Tests 643 passed (643)` · TRUE_EXIT 0. `tests/fixtures/generator-golden-master.json` SHA-256 `29c6cc8f…` **before and after**, `git status --porcelain` empty |
+| `npm run typecheck:ratchet` | `[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).` TRUE_EXIT 0 |
+| `npm run typecheck:domain:strict` | `[domain-strict] ✓ no strict-type regressions (1134 errors, ceiling 1134).` TRUE_EXIT 0 |
+| `npx eslint` on both touched JS files | TRUE_EXIT 0, no output |
+| `npx eslint --fix-dry-run` on both | TRUE_EXIT 0, no output |
+| `npm run validate:packets` | `[implementation-packets] valid: 169 packets` — TRUE_EXIT 0 at DRAFT and at READY |
+| C0 scan (`grep -c -P '[\x00-\x08\x0B\x0C\x0E-\x1F]'`) over every authored file | **0** on all five, re-run before each commit |
+| `CLAIM_RE` (the exact regex from `tests/docs/enforcement-claims.test.js:40`) over every added line, `src` comments included | **0 hits** |
+
+### §6.2 · The mutants — nine drives, each restored digest-exact
+
+Every drive ran the acceptance alone, mutexed, exit captured. The file's SHA-256 was recorded
+before the drive and re-compared after the restore; every restore was exact, and a clean re-run
+was green after the last.
+
+| # | mutation | arms it convicted |
+|---|---|---|
+| M1 | `\bdens?\b` → `den` | A1 · A3 · A5 · A6 · A8 |
+| M2 | `\bforts?\b\|\bfortif\|\bfortress` → `fort` | A1 · A3 · A5 |
+| M3 | `smiths?\b` → `\bsmith` in the `craft` row | A2 · A3 |
+| M4 | **`smiths?\b` → `\bsmith` in the `arms` row ALONE — the A5-gap drive** | A2 · A3 |
+| M5 | `mills?\b` → `\bmill` | A2 · A3 |
+| M6 | append an unanchored `\|lodge` to the `vice` row | A1 · A3 · A5 |
+| M7 | drop the `^` from `^access to ` | **A5 only** |
+| M8 | break the walker's own source parser (`.slice(1)` on the row scan) | A0 · A6 · A7 |
+| M9 | append `\|\bgranar` to the `sewer` pattern | A3 · A4 · A6 |
+
+⚠ **M7 CORRECTED A CLAIM THIS PACKET WAS ABOUT TO MAKE.** A4's first draft named "drop the `^`
+from `^access to `" as its convicting mutant. Driven, it convicts A5 and **not A4** — the phrase
+only ever occurs at the start of a name, so no verdict moves. The comment in the test file was
+rewritten to name M9, which does convict it, and to say plainly that M7 does not. A mutant that
+was described rather than driven would have shipped that as a lie.
+
+Two further controls, both outside the acceptance:
+
+* **C1 — the naive-anchoring control.** Uniform leading `\b` on the two stem exceptions:
+  `CHANGED_CELLS 10` (4 cures + the 6 regressions tabled in §3). Restored digest-exact.
+* **C3 — the blindness control (§0).** `faith` pattern → `/./i`: **15,101 interior cells move
+  across 504 of 504 settlements; the corpus digest does not move at all.** Restored digest-exact.
+
+### §6.3 · The sweep — two drives, and the one member-caused red
+
+**FIRST DRIVE**, mutexed, over `tests/lint tests/build tests/docs tests/ops tests/domain
+tests/property tests/edgeFunctions tests/scripts tests/ui tests/data`:
+`Test Files 7 failed | 1477 passed | 7 skipped (1491)` · `Tests 9 failed | 19519 passed |
+114 skipped (19642)` · 330.06 s · **SWEEP_TRUE_EXIT 1**.
+
+| # | failing title | class |
+|---|---|---|
+| 1 | `sovereigntyLightingContract.walker` — THE CENSUS IS AN ASSERTION, NOT A SENTENCE | **THIS MEMBER'S ONE AUTHORIZED INTERIOR RED** — the deferred census row (§417, §7) |
+| 2 | `mutationCoverageManifest` — TOTALITY: every enumerated invariant file has a manifest entry | ⚠ **MEMBER-CAUSED. CURED IN-MEMBER** at `c4d7d753f` |
+| 3 | `enforcement-claims` — every completeness claim carries an `@enforced-by` tag | BANKED. Six naked claims, in `FABLE_VALIDATION_QUEUE.md` ×4, `GOLDEN_SHIFT_LEDGER.md` and `IN-0C.md` — **none of them a file this member touches** |
+| 4 | `metronomeCooldownLint` — the non-cooldown emitter set may only SHRINK | BANKED |
+| 5–7 | `warCostKindPools.walker` ×3 — `war_trajectory_winning` / `war_trajectory_losing` / `trajectory_misread` | BANKED |
+| 8 | `warRulingKindPools.walker` — `succession_demand_inherited` | BANKED |
+| 9 | `clampPrimitiveBaseline` — baseline matches the files that still define a local clamp | BANKED. This member defines no local clamp |
+
+**NO STRAY.** All nine are accounted for, so no re-run was owed (§355) and no §432 escalation is
+open.
+
+⭐ **THE BANKED SET AT THIS BASE IS SEVEN, NOT THE EIGHT THE LAST LANDING SAW — and that is proved
+by execution rather than read off a commit subject.** A detached baseproof worktree at the clean
+base `00e7af612` (`git status --porcelain` empty apart from the linked `node_modules`; the same
+`package-lock` because this member changes no `package.json` byte) ran the seven candidate files:
+`Test Files 5 failed | 2 passed (7)` · `Tests 7 failed | 140 passed (147)` · TRUE_EXIT 1, the
+seven titles being rows 3–9 above **exactly**. The eighth title the last landing banked — the
+PER-CLAIM naked-claim pin — is GREEN at this base, because the base commit itself is the MF-UC2
+landing that paid it. The same run also proves the two attributions this member owes:
+`mutationCoverageManifest` **8/8 GREEN at base** and `sovereigntyLightingContract` **33/33 GREEN
+at base**, so both reds at the tip are this member's and are dispositioned above.
+
+**§469, discharged by INPUT PROVENANCE** (the MF-UC2 method, J-TEUC2-11) **and by the base run
+above.** The five banked test FILES — `enforcement-claims`, `warCostKindPools`,
+`warRulingKindPools`, `metronomeCooldownLint`, `clampPrimitiveBaseline` — are `cmp`-IDENTICAL
+between this tree and the chair baseproof `chair-baseproof-b10ed1a1` (HEAD
+`b10ed1a1f5a0f2acd00bbfc9b5d0a41931697c3d`, porcelain empty), so their assertion blocks cannot
+differ for anything this member caused. The one banked red whose INPUT this member does move is
+`enforcement-claims`, which scans `docs/**.md`: settled by measurement, `CLAIM_RE` counts **0**
+over every line this member adds to `MF-CH1.md`, `INDEX.md` and the manifest.
+
+**THE CURE, and its non-vacuity.** `uncovered` is refused twice — by the manifest test's own
+header and by the SHRINK-ONLY arm that pins the uncovered count EXACTLY at `uncoveredBaseline`
+198 — so the entry is a `rationale` that names the nine drives in §6.2. Perturbing the new key to
+a file that does not exist reds BOTH the TOTALITY arm and the stale-entry arm; restored
+digest-exact. At the cured bytes: `mutationCoverageManifest` 8/8, the acceptance 9/9.
+
+**SECOND DRIVE** at the final tip: §6.4.
+
+---
+
+## §7 · THE CENSUS — WALKED, THEN REVERTED (§417)
+
+Walked at this member's own base, figure by figure, each read from its own failure message in
+assertion order and never computed:
+
+* `files` — "expected 2516 to be 2515"
+* `parked` — **PASSED UNMOVED** at 366
+* `credited` — "expected 2150 to be 2149"
+* `titles` — "expected 20863 to be 20854"
+* `suiteTitles` — "expected 5808 to be 5807"
+
+**DELTA `+1 / +0 / +1 / +9 / +1`** → `files: 2516, parked: 366, credited: 2150, titles: 20863,
+suiteTitles: 5808`. The walked tuple is GREEN by execution: `Test Files 1 passed (1)` ·
+`Tests 33 passed (33)` · TRUE_EXIT 0.
+
+⭐ **THE DELTA EQUALS THE TITLES THIS MEMBER WROTE**, so no title was swallowed by a parked file:
+the walker holds 9 `it(` and 1 `describe(`, and the census moved by exactly 9 and 1. **NEGATIVE
+CONTROL:** `suiteTitles` alone put back to 5,807 reds at `suiteTitles` — the member's one new
+describe. The walker file was then **restored digest-exact** (SHA-256
+`811b044a8d6527d5216eec9434f097be06a5e7b0bfbed7bec79194272d9b8399` before and after, porcelain
+empty), and **the row rides this packet into the landing act** rather than being carried across a
+rebase.
+
+⛔ **THE RATCHET CEILING IS NOT TOUCHED.** The recorded hazard ("just census it" is unavailable)
+governs `scripts/.test-ratchet-baseline.json`, whose `CEILING` is a literal 17 and whose entry
+count is 11. This member adds **no** failing row there — its walker passes — so no ceiling moves
+and no walker ledger entry is owed (`WALKER_ROWS_ADMITTED` / `WALKER_ROWS_OWED` govern census
+rows, and this walker has none).
+
+---
+
+## §8 · THE EDGE BUNDLES (§475)
+
+`src/domain/spatial/cohesionWeave.js` is an input of **three** of the five rosters — proved by
+`grep -l` over `supabase/functions/_shared/*.meta.json`, not from memory:
+`aiCharterBundle.meta.json`, `aiGroundingBundle.meta.json`, `aiOutputSchemaBundle.meta.json`.
+(`src/domain/interior/interiorTemplates.js` is in **none**, and this member does not modify it.)
+
+`npm run build:edge-shared` ran **inside the member commit** (`BUILD_EXIT 0`). The regenerated
+artifacts split exactly as the law predicts:
+
+* the **three** bundle `.js` files carry real content movement — the inlined table;
+* their three `.meta.json` files move `generatedAt` **and** `sourceHash`
+  (`a8ae453f07314002 → d10dc5a1753bb224`, `5ccae1a97b7a9c45 → 74c1e8a2d91b00ea`,
+  `313a31ab0e5a9aec → 8ac93ac85a31f5c0`);
+* `analyticsEventsBundle.meta.json` and `intentAtlasBundle.meta.json` move the **`generatedAt`
+  stamp and nothing else** — verified line by line on the diff.
+
+**All five metas are committed as a set**, following the landed precedent for this exact file:
+`6ecac22a4` ("chore(MF-UC0): re-bundle edge-shared — cohesionWeave.js is a real bundle input, ODQ
+§475") committed the two stamp-only metas alongside the three real ones, as did `b325fc07f`
+(MF-UC4) and `2d1e09ceb`. `tests/edgeFunctions` joined the sweep and is green in both drives.
+
+---
+
+## §9 · JUDGMENTS (each vetoable by a word) AND DEFERRALS
+
+| id | judgment |
+|---|---|
+| **J-TECH1-1** | **Decided:** `\bcults?\b` and `\bforts?\b` carry the optional plural, where the charter wrote `\bcult\b` and `\bfort\b`. **Why:** the same table already needs `\bdens?\b`, `smiths?\b` and `mills?\b`; a stem that admits its own plural everywhere else should not silently refuse it in two rows. **Rejected:** the charter's literal spelling — it would drop a future "Blood cults" or "Hill forts" for no measured gain. **Reversal:** delete the two `s?`. **Blast radius:** ZERO — measured, both forms move the same 4 cells of 933 |
+| **J-TECH1-2** | **Decided:** the accepted cost of the leading-`\b` default is DECLARED in the source header and in §4 rather than engineered away. A closed compound burying the keyword second (a custom "Nightwatch", a "Bodyguard lodge") stops inferring. **Why:** the owner's finite-semantics law makes a declared facet the right answer for custom content, and the chokepoint already reads one. **Rejected:** widening every keyword to a two-sided stem set — that invents claims about words the catalog never uses, which is the same unearned-claim failure this car exists to remove. **Reversal:** add the compound as its own anchored alternative. **Blast radius:** ZERO live catalog rows — every keyword's mid-word-only hit list is empty except `smith`, `mill` and `den`, all three handled explicitly |
+| **J-TECH1-3** | **Decided:** acceptance A3 is a DIFFERENTIAL against a frozen copy of the pre-CH-1 table, read on a declaration-stripped entity — not a frozen inventory of every row's verdict. **Why:** an exact inventory would red on CH-3's chartered DELETION of the village `Smuggling network` row (§503.5) and on CH-3a's `facets` key, foreclosing later cars of its own train — the recorded hazard. The differential still convicts every anchor change, and `DECLARED_INFERENCE_DELTA` makes the next author declare what they moved. **Rejected:** a frozen `name → value` map. **Reversal:** replace the differential with that map. **Blast radius:** A3 survives catalog rows being added or deleted and survives declarations being added |
+| **J-TECH1-4** | **Decided:** A6 DECLARES the one surviving multi-rule collision (`^access to ` beating `crypt` on the two `Access to parish church` rows) by name, instead of scoping the arm to the two kinds where zero collisions remain. **Why:** scoping would hide a live ordering dependency inside the undercity's own seed kind. The charter's §1(c) arm 1 claimed ZERO collisions after the change; that is corrected here. **Rejected:** scoping the arm. **Reversal:** scope it. **Blast radius:** none — the arm is stricter, not looser |
+| **J-TECH1-5** | **Decided:** A1 pins the LIVE derived interior (declarations honoured) as well as the inference-only verdict, and the CH-3a re-record is SIGNPOSTED in the test-file header rather than engineered around. **Why:** the chair's brief requires the interior the engine actually derives to be pinned; making the arm immune to a declaration would pin something the engine does not produce. **Rejected:** pinning only the declaration-stripped read. **Reversal:** drop the `liveInteriorKind` half. **Blast radius:** CH-3a moves ONE cell of this arm, `generic` → `faith`, and the header says so by name |
+| **J-TECH1-6** | **Decided:** the corpus denominator is restated as **504** (6 tiers × 12 cultures × 7 terrains, the generator golden master's own grid at this base) rather than copied as the charter's and the panel's 420. **Why:** `CULTURE_PROFILE_KEYS` holds 11 keys plus the `mediterranean` alias at `00e7af612`; a figure that does not re-derive is a figure that will be re-quoted wrongly. **Rejected:** reproducing 420 by trimming the culture list to match a prior lane. **Blast radius:** every per-settlement figure in §4 is on the 504 grid and is labelled as such; the ratios agree with the panel's |
+| **J-TECH1-7** | **Decided:** the mutation-coverage entry is a `rationale`, not a planted sweep regression. **Why:** planting would have to add `src/domain/spatial/cohesionWeave.js` to the sweep's `MUTATED_FILES` refusal list — a second file and a widened `git checkout --` blast radius — for a walker whose nine mutants are already enumerated and executed (§6.2). **Rejected:** the plant (the manifest header's stated preference) and `uncovered` (refused by the header and by the SHRINK-ONLY arm). **Reversal:** plant the mutation and flip the entry to `kind: "mutation"` with its label. **Blast radius:** the uncovered count stays exactly 198 |
+
+**DEFERRALS — deliberately deferred, documented, not bugs to re-find:**
+
+1. **The `facets: { institutionNature: 'faith' }` override on `Priest (resident)` → CH-3a**, by the
+   chair's ruling §503.3. Until it lands, those settlements draw the `generic` interior rather
+   than the `faith` one. That is *less wrong* than a tavern, and it is not this car's call.
+2. **`Warden's Lodge`, `Charlatan fortune tellers` and `Dragon resident` now fall to `generic`**
+   and no existing `INTERIOR_KINDS` member is right for any of them (R-INST-5: a moated lodge
+   compound, a temporary booth with NO_BUILDING, and an occupation of an existing structure).
+   A real `hospitality` / `lodge` / `site` vocabulary is **DW-1's** work (§491.2). Assigning one
+   of them a near-enough kind would replace one unearned claim with another.
+3. **The `hasVice` shift is DARK** until `underwaysOrganicFoundingEnabled` is lit — the owner's
+   R-5 — and it is recorded in §4 so the lighting regen does not discover it as a surprise.
+4. **`tests/generation.test.js`** (the repo's one root-level test file) sits outside both the ten
+   sweep trees and the grep arm's token set; it is run explicitly in §6.4 rather than left unstated.
+5. **The charter's `catalog-hygiene` family is admitted here** with the three artefacts §2 row 11
+   names. No validator change was needed, and none was made.
+
+---
+
+## §6.4 · THE SECOND DRIVE — to be stamped at the final tip
