@@ -51,6 +51,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐ 01:05 CDT 08-23: §463 — WEB-3 da9d9c40 + HK-A f2b2711b COMPLETE, pinned
+# (HK-2 frees the walker path at its landing). R-INST-3 + R-INST-4 dispatched.
+# Seats: MAPSTACK-landing · R-INST-CIRC · R-INST-3 · R-INST-4. Code shop
+# empty until T2R lands (UC-1/UC-4) and T2N+T2Q land (UC-2/UC-5).
 # ⭐⭐ 00:55 CDT 08-23: §462 — R-INST-2 DELIVERED (582KB; 124 entries/20
 # families; ~30 entries have NO BUILDING in the English register → NO_BUILDING
 # + HOSTED are required grammar concepts). TC-R-INST-CIRC dispatched. Seats:

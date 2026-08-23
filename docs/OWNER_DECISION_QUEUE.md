@@ -18788,3 +18788,64 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   EXTERIOR_WALK proposals and the prohibition class). Seats: MAP-STACK
   landing · TE-HK-A · TE-WEB3 · TC-R-INST-CIRC (cap). Research queue:
   R-INST-3 → R-INST-4 → R-INST-5 (magical) → R-INST-6.
+
+## §463 — WEB-3 AND HK-A COMPLETE AND PINNED (THE BUILD SHOP IS EMPTY OF CODE CARS UNTIL T2R LANDS); TWO MORE RESEARCH TRANCHES DISPATCHED; TWO LANE-BANKED LAWS AND TWO DEFERRED ROWS (2026-08-23 01:05 CDT)
+
+- **§463.1 WEB-3 COMPLETE:** tip da9d9c40 (4 commits over acc466a6;
+  porcelain empty), PINNED at holding-web3. Its dead terminal-2 result was
+  found ON DISK (`/tmp/web3/GATE-2.exit` = 1) — a full gate at the landing
+  state with exactly ONE row beyond the eleven, the `title=` census — so the
+  two terminal-1 cures held and the lighting-walker timeout was contention
+  (twice witnessed). The §460.2 raise applied in the house form
+  (re-measured: 485 → 486; `AdminTrendsPanel.jsx` 15 → 16, nothing else;
+  the four downstream readers of the constant checked — `BASE_STATE.json`
+  is a stamped snapshot that owes nothing). The landing-state artifacts
+  removed after diff-reading (the 198 copy's sha `d96a1065…` = WEB-2's).
+  Widened 7-tree sweep quiet: 7 banked (incl. `metronomeCooldownLint`, new
+  to the widened sweep, proved pre-existing at the baseproof), 3+1 caused
+  by the expected 198 gap (`expected 199 to be 198`; contiguity; the
+  rehearsal chain), 1 §417 census row — zero strays, zero member reds;
+  `check-migration-head` reds on the 198 gap by design (the slot after
+  WEB-2 satisfies it). Both typecheckers at ceiling; `valid: 152 packets
+  (2 READY)`. Lands AFTER WEB-2.
+- **§463.2 HK-A COMPLETE:** tip f2b2711b (3 commits over dffa2b97 — the
+  brief's "2b82121f" was a base mis-statement, corrected by the lane: a
+  rebase-slot landing four commits behind), PINNED at holding-hka. HK-1
+  re-proved: BEFORE/AFTER on the real rows at three tiers
+  (`hasClandestineFacet` false → true; `settlementHasUnderways` true);
+  sibling `institutionLifecycle.js:442` cured in the same commit;
+  **INERTNESS CONFIRMED** — `tests/property` 101 files / 643 tests green,
+  the generator golden blob identical base vs tip, the OSR baseline blob
+  identical; walker literals 1995/1409/387 unmoved. HK-2: MF-T2H LANDED on
+  all three surfaces with 15 requiredSymbols rows → **`valid: 152 packets
+  (0 READY)`** — the census-walker path is FREE once this lands. HK-3: the
+  row deleted; the validator guard's POSITIVE control reds
+  (`pins a MIGRATION FILENAME in a doc`), three negatives hold; the
+  estate-wide scan is empty. Sweep widened to tests/domain + tests/data:
+  the banked six + the §417 row + `metronomeCooldownLint` (pre-existing
+  two ways). Census `+0/+0/+0/+4/+1` walked and reverted.
+- **§463.3 DEFERRED ROWS (documented, not bugs to re-find):** D-HKA-1 —
+  HK-3's commit message and source comment claim TM-2A's row "matches the
+  filename shape outside docs"; measured, ZERO rows match at any path —
+  the docs/ scoping is right, the justification prose is wrong; cure = a
+  comment-only edit at HK-A's landing act with the prose-numerics ratchet
+  re-proved (§104.4 risk), never an amend. D-HKA-2 / **HK-4 queued**:
+  `src/domain/worldPulse/razingExecution.js` is an un-ratcheted E4-2a
+  condition-bearing emitter (the banked `metronomeCooldownLint` red names
+  it) that no lane saw because none swept `tests/domain` before — a
+  housekeeping car after the cascade.
+- **§463.4 LAWS BANKED from the lanes' reports:** (a) an in-flight gate's
+  result SURVIVES the lane's death on disk — a resuming executor reads
+  `*.exit` / the wrapper log BEFORE relaunching anything (WEB-3's terminal
+  2 finished after its lane died; re-firing would have wasted 20 minutes);
+  (b) raising a walker constant owes a FOUR-READER check (the live
+  readers, the stamped snapshots, the walkers that pin it) before the
+  constant moves.
+- **§463.5 DISPATCHED:** TC-R-INST-3 (faith + learning — the deity doctrine
+  restated as the tranche's first law: parti families and liturgical
+  FUNCTION, never doctrine) and TC-R-INST-4 (hospitality / entertainment /
+  poverty / utility — the inn-yard gallery and carriage passage as §452's
+  signature classes). Seats: MAP-STACK landing · TC-R-INST-CIRC ·
+  TC-R-INST-3 · TC-R-INST-4 (cap). The code shop is EMPTY of buildable
+  cars until T2R lands (UC-1, UC-4) and T2N+T2Q land (UC-2, UC-5); HK-4
+  and the R-INST-5/6 tranches fill seats as they free.
