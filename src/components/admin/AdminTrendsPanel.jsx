@@ -11,6 +11,7 @@
  *   • a distribution snapshot, horizontal bars                (report_distribution, overall)
  *   • a two-dimension heatmap (e.g. culture × terrain)        (report_crosstab)
  *   • edit-kind and lifecycle (capture-point) breakdowns      (report_distribution)
+ *   • the referral funnel, intents → grants → clawbacks       (report_referral_funnel)
  *   • computed tuning signals (skew + big movers)
  *
  * Everything routes through the admin-actions edge function (server-side
@@ -161,6 +162,10 @@ export default function AdminTrendsPanel() {
       editKinds: callAdmin({ action: 'get_analytics_distribution', field: 'edit_kind', from, to }),
       capture: callAdmin({ action: 'get_analytics_distribution', field: 'capture_point', from, to }),
       crosstab: callAdmin({ action: 'get_analytics_crosstab', rowField, colField, from, to }),
+      // WEB-3: the referral funnel, read from the referral tables themselves
+      // (migration 199) rather than from any analytics event — the money path
+      // gains no second, weaker ledger of a fact it already records.
+      referralFunnel: callAdmin({ action: 'get_referral_funnel', from, to }),
       // System-behaviour (what the CODE does)
       pulseMutations: callAdmin({ action: 'get_pulse_mutations', from, to }),
       stressorGenesis: callAdmin({ action: 'get_stressor_genesis', from, to }),
@@ -348,6 +353,12 @@ export default function AdminTrendsPanel() {
 
         <Card title="Lifecycle (capture points)">
           <BarList rows={data.capture?.rows || []} />
+        </Card>
+
+        <Card title="Referral funnel (intents → grants)">
+          <MiniTable rows={data.referralFunnel?.rows || []}
+            columns={['bucket', 'intents_recorded', 'referrals_granted', 'referrals_clawed_back']}
+            numeric={['intents_recorded', 'referrals_granted', 'referrals_clawed_back']} />
         </Card>
       </div>
 

@@ -16,7 +16,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
 export const MIGRATION_TRAIN_BASE_HEAD = 121;
-export const MIGRATION_TRAIN_REPO_HEAD = 198;
+export const MIGRATION_TRAIN_REPO_HEAD = 199;
 
 const FORWARD_ONLY_REASON = [
   'No automatic schema rollback is admitted for this wave.',
@@ -454,6 +454,39 @@ export const MIGRATION_WAVES = Object.freeze([
       Object.freeze({ kind: 'function', name: 'analytics_monthly_prune' }),
       Object.freeze({ kind: 'function', name: 'analytics_nightly_maintenance' }),
       Object.freeze({ kind: 'function', name: 'report_retention' }),
+    ]),
+  }),
+  Object.freeze({
+    id: 'referral-funnel-report',
+    from: 199,
+    to: 199,
+    purpose: 'The READ half of the referral funnel (§359.8): one SECURITY DEFINER report '
+      + 'function, service_role only, that counts public.referrals\' intent / grant / '
+      + 'clawback stamps per day. It is the smallest wave in the train by construction — it '
+      + 'creates no table, alters no column, writes no row and touches no policy, because the '
+      + 'conversion half of the funnel deliberately mints NO new record: the referral tables '
+      + 'already hold the money-grade truth and a second, weaker ledger on the money path was '
+      + 'the alternative this member refused. The operator-visible surface is one admin card; '
+      + 'the money path itself is byte-unchanged, and the wave exposes no user-facing '
+      + 'subsystem at all.',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: [
+        FORWARD_ONLY_REASON,
+        'This wave is nonetheless the cheapest reversal in the train, and the migration\'s own '
+        + '@rollback annotation spells the whole of it out as a single statement — which is why '
+        + '199 classifies as documented-manual-reversal rather than taking the wave policy. '
+        + 'Dropping the function destroys nothing: it holds no state, nothing else depends on '
+        + 'it, and the only consequence is that one admin card reports an error while every '
+        + 'other panel keeps working.',
+        'A forward fix is likewise cheap. No product code path calls the function — only the '
+        + 'privilege-gated admin-actions edge route does — so a defect here cannot degrade any '
+        + 'user-facing surface; it can only make one operator card show its error, which is the '
+        + 'direction that gets noticed.',
+      ].join(' '),
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({ kind: 'function', name: 'report_referral_funnel' }),
     ]),
   }),
 ]);

@@ -840,6 +840,15 @@ export async function handleAdminActions(
         return json({ success: true, rows: data || [], refreshedAt: new Date().toISOString() });
       }
 
+      // ── Referral funnel (migration 199, WEB-3). Read-only over the referral
+      // tables themselves — the money-grade record — so the conversion half of
+      // the funnel needs no analytics event on the money path (§402 C5).
+      case "get_referral_funnel": {
+        const { data, error } = await adminClient.rpc("report_referral_funnel", { p_from: pFrom, p_to: pTo });
+        if (error) return adminFail(error, 500);
+        return json({ success: true, rows: data || [], refreshedAt: new Date().toISOString() });
+      }
+
       case "get_npc_distribution": {
         if (typeof field !== "string") return json({ error: "Missing field" }, 400);
         const { data, error } = await adminClient.rpc("report_npc_distribution", { p_field: field, p_from: pFrom, p_to: pTo });

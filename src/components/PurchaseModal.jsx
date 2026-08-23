@@ -44,7 +44,9 @@ export default function PurchaseModal({ onClose }) {
   // body. Null while the flag is off — the checkout body is then byte-identical.
   const [captchaToken, setCaptchaToken] = useState(null);
   // Referral intent (107): self-gates to signed-in, unpaid, never-referred.
-  const referral = useReferralIntent();
+  // The surface label is WEB-3's only funnel prop beyond the outcome; the hook
+  // owns the emit because it is the only place the outcome is observable.
+  const referral = useReferralIntent('purchase_modal');
 
   // Shared modal focus management: focus-in, Tab cycling, Escape-to-close, and
   // focus restore on unmount. Replaces the hand-rolled backdrop role=button.

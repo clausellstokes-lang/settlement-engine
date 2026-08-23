@@ -58,8 +58,17 @@ export { EDIT_KINDS };
  *  Funnel.welcomeView / Funnel.landingFixtureForge seams. Essential class.
  *  rev 12: consent_updated retires from product analytics. Consent changes are
  *  durable SERVICE-class compliance records in their own store; keeping an
- *  analytics name after the emitter was removed would misstate the boundary. */
-export const EVENTS_REV = 12;
+ *  analytics name after the emitter was removed would misstate the boundary.
+ *  rev 13: WEB-3 (§359.8) — the referral loop stops being structurally blind.
+ *  Migration 107 shipped the whole money loop and nothing emitted, so the funnel
+ *  intent recorded → first payment → grant claimed was invisible to every read
+ *  surface. Two CLIENT events join: referral_intent_recorded (surface + outcome)
+ *  and redeem_code_checked (outcome only — NEVER the code string, which would
+ *  undo 107's enumeration-hardening). The CONVERSION half emits nothing: the
+ *  referral tables are the money-grade record and the admin read layer
+ *  aggregates them (report_referral_funnel, migration 199). No analytics write
+ *  ever touches the money path. */
+export const EVENTS_REV = 13;
 
 export const EVENTS = Object.freeze({
   // ── Minimum 4-event funnel ─────────────────────────────────────────────
@@ -284,6 +293,23 @@ export const EVENTS = Object.freeze({
   //    surface ∈ {interview, oracle, corpus, interpret}; verdict ∈
   //    {answered, refused, accepted, declined, revised, drawn}.
   SURVEYOR_ADOPTION:              'surveyor_adoption',
+
+  // ── WEB-3 (rev 13): the REFERRAL LOOP funnel (migration 107's blind half) ──
+  //    Both essential class, both fired POST-HOC by a client observer that can
+  //    never block or delay a purchase. Structure-never-content is stricter here
+  //    than anywhere else in the registry because the inputs ARE secrets:
+  //    referral_intent_recorded carries the SURFACE and the collapsed OUTCOME and
+  //    never the referrer's account number; redeem_code_checked carries the
+  //    collapsed OUTCOME ALONE and never the code string — 107 deliberately made
+  //    unknown/inactive/expired/exhausted indistinguishable, and an event naming
+  //    the code would hand an observer the enumeration oracle the RPC refuses.
+  //    Props: { surface ∈ {pricing, purchase_modal}, outcome ∈ {recorded,
+  //    rejected, error} } and { outcome ∈ {valid, invalid, error} }.
+  //    The CONVERSION half has no event by design (§402 C5): referral_intents'
+  //    own status transitions are the money-grade truth and the admin funnel
+  //    reads them through report_referral_funnel (migration 199).
+  REFERRAL_INTENT_RECORDED:       'referral_intent_recorded',
+  REDEEM_CODE_CHECKED:            'redeem_code_checked',
 });
 
 /**

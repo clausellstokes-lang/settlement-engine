@@ -78,7 +78,9 @@ export default function PricingPage({ onNavigate }) {
   const [redeemCode, setRedeemCode]     = useState(() => getPendingRedeemCode());
   const [redeemNotice, setRedeemNotice] = useState(null);
   // Referral intent (107): self-gates to signed-in, unpaid, never-referred.
-  const referral = useReferralIntent();
+  // The surface label is WEB-3's only funnel prop beyond the outcome; the hook
+  // owns the emit because it is the only place the outcome is observable.
+  const referral = useReferralIntent('pricing');
   const livePricing = useLivePricing();
 
   // Keep the cross-surface stash in sync with the field so the code survives

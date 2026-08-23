@@ -23,6 +23,7 @@ import { t } from '../../copy/index.js';
 import { isConfigured } from '../../lib/supabase.js';
 import { auth as authService } from '../../lib/auth.js';
 import { validateRedeemCode, setPendingRedeemCode, clearPendingRedeemCode } from '../../lib/referralRedeem.js';
+import { track, EVENTS } from '../../lib/analytics.js';
 import Button from '../primitives/Button.jsx';
 import {
   GOLD_BG, GOLD_TXT, INK, BODY, SECOND, BORDER, sans, SP, FS, swatch, AMBER_DEEP } from '../theme.js';
@@ -144,8 +145,14 @@ export function RedeemBlock({ onNavigatePricing }) {
     }
     setChecking(true);
     setNote(null);
+    // WEB-3 (§359.8): the single collapsed verdict this surface produces.
+    // 'error' until the RPC settles into something better; already_used folds
+    // into 'invalid' because the funnel's three values are the ruled contract
+    // and a fourth would re-widen what 107 deliberately collapsed.
+    let outcome = 'error';
     try {
       const res = await validateRedeemCode(v);
+      outcome = res.valid ? 'valid' : 'invalid';
       if (res.valid) {
         setPendingRedeemCode(v);
         setAccepted(true);
@@ -163,6 +170,10 @@ export function RedeemBlock({ onNavigatePricing }) {
       setNote({ tone: 'warn', text: t('account.redeemCheckFailed') });
     } finally {
       setChecking(false);
+      // Structure, never content: the OUTCOME alone. The code string is the
+      // secret 107's collapsed verdict exists to protect — emitting it would
+      // hand an observer the enumeration oracle the RPC refuses to be.
+      track(EVENTS.REDEEM_CODE_CHECKED, { outcome });
     }
   }
 

@@ -45,12 +45,26 @@ const SRC = have ? readFileSync(MIG, 'utf-8') : '';
 // 107 so the mode-gate tests run against the real, current function.
 const MIG_112 = resolve(process.cwd(), 'supabase', 'migrations', '112_reserve_redemption_mode_gate.sql');
 const SRC_112 = existsSync(MIG_112) ? readFileSync(MIG_112, 'utf-8') : '';
+// 199 (WEB-3) adds the READ half — report_referral_funnel over these same tables.
+// Applied here rather than in a suite of its own because the fixtures that make a
+// funnel row true are exactly the intents/grants/clawbacks this file already drives
+// through the real RPCs; a separate suite would have to re-forge them by hand.
+const MIG_199 = resolve(process.cwd(), 'supabase', 'migrations', '199_referral_funnel_report.sql');
+const HAVE_199 = existsSync(MIG_199);
+const SRC_199 = HAVE_199 ? readFileSync(MIG_199, 'utf-8') : '';
 
 // Vacuity guard (runs unconditionally): if the targeted migration is ever
 // renamed/removed the runIf suite below silently runs ZERO assertions while
 // reporting green. Fail loudly here instead.
 it('migration 107 present (suite not vacuous)', () => {
   expect(have).toBe(true);
+});
+
+// Second vacuity guard, same reason: the funnel-report arms below assert against
+// 199's function, and a renumber would make them skip silently inside a suite
+// that still reports green on 107's arms alone.
+it('migration 199 present (the funnel-report arms are not vacuous)', () => {
+  expect(HAVE_199).toBe(true);
 });
 
 const REFERRER = '11111111-1111-1111-1111-111111111111';
@@ -194,6 +208,8 @@ describe.runIf(have)('107 referral + redeem codes — real SQL (pglite)', () => 
     // 112 on top: recreates reserve_redemption with the mode gate (drops the 2-arg
     // overload, creates the 3-arg p_mode form).
     if (SRC_112) await db.exec(SRC_112);
+    // 199 on top: the read-only funnel report. It adds no writer — proven below.
+    if (SRC_199) await db.exec(SRC_199);
 
     // Table privileges for the client role: PostgREST's authenticated role has
     // table grants in prod — RLS (not the grant layer) must be what denies.
@@ -752,6 +768,94 @@ describe.runIf(have)('107 referral + redeem codes — real SQL (pglite)', () => 
       await seedCode({ code: 'BLIND', applies_to: 'subscription', kind: 'credits', credit_amount: 10, stripe_coupon_id: null, max_uses: 5 });
       const r = await reserve('BLIND', REFEREE);            // 2-arg → p_mode defaults null → gate skipped
       expect(r.ok).toBe(true);
+    });
+  });
+
+  // ── 199 report_referral_funnel — the READ half (WEB-3, A6) ──────────────────
+  describe('report_referral_funnel — the read-only funnel over the referral tables', () => {
+    it('A6a: counts intents, grants and clawbacks per day, each from its OWN stamp', async () => {
+      // Two real intents through the real RPC, one of them granted and then clawed
+      // back — the lifecycle the funnel is supposed to make legible.
+      await intent(REFEREE, ACCT[REFERRER]);
+      await intent(MALLORY, ACCT[REFERRER]);
+      const refereeRow = await superRow(
+        'select id from public.referrals where referee_user_id = $1', [REFEREE]);
+      expect(refereeRow.id).toBeTruthy();
+      const granted = await grant(REFEREE, 'in_funnel_1', 900);
+      expect(granted.ok).toBe(true);
+      const clawed = await clawback('in_funnel_1');
+      expect(clawed.ok).toBe(true);
+
+      const rows = (await asService(
+        'select * from public.report_referral_funnel($1::date, $2::date)',
+        ['1970-01-01', '2999-12-31'],
+      )).rows;
+      // Everything happened inside one test, so all three stamps land on today.
+      expect(rows.length).toBe(1);
+      expect(Number(rows[0].intents_recorded)).toBe(2);
+      expect(Number(rows[0].referrals_granted)).toBe(1);
+      expect(Number(rows[0].referrals_clawed_back)).toBe(1);
+      // The window is a real filter, not decoration: a range that excludes today
+      // returns nothing at all rather than the same figures.
+      const outside = (await asService(
+        'select * from public.report_referral_funnel($1::date, $2::date)',
+        ['1970-01-01', '1970-01-02'],
+      )).rows;
+      expect(outside.length).toBe(0);
+    });
+
+    it('A6b: the report returns COUNTS only — no user id, account number or invoice id', async () => {
+      await intent(REFEREE, ACCT[REFERRER]);
+      await grant(REFEREE, 'in_funnel_2', 900);
+      const rows = (await asService(
+        'select * from public.report_referral_funnel($1::date, $2::date)',
+        ['1970-01-01', '2999-12-31'],
+      )).rows;
+      expect(rows.length).toBe(1);
+      // The COLUMN SET is the contract — an identity column added later reds here
+      // even if no test ever reads its value.
+      expect(Object.keys(rows[0]).sort()).toEqual(
+        ['bucket', 'intents_recorded', 'referrals_clawed_back', 'referrals_granted']);
+      const serialized = JSON.stringify(rows);
+      // anchored: the two assertions above prove `rows` is a real, single, fully-keyed
+      // row, so an empty or reshaped result cannot make these three pass vacuously.
+      expect(serialized).not.toContain(REFEREE);
+      // anchored: same row, same reason.
+      expect(serialized).not.toContain(ACCT[REFERRER]);
+      // anchored: same row, same reason — and the grant above really used this id.
+      expect(serialized).not.toContain('in_funnel_2');
+    });
+
+    it('A6c: EXECUTE is service_role only — authenticated, anon and PUBLIC are all revoked', async () => {
+      const sig = 'public.report_referral_funnel(date, date)';
+      const row = await superRow(
+        `select has_function_privilege('service_role',  $1, 'EXECUTE') as svc,
+                has_function_privilege('authenticated', $1, 'EXECUTE') as auth,
+                has_function_privilege('anon',          $1, 'EXECUTE') as anon,
+                has_function_privilege('public',        $1, 'EXECUTE') as pub`,
+        [sig]);
+      expect(row.svc).toBe(true);
+      expect(row.auth).toBe(false);
+      expect(row.anon).toBe(false);
+      expect(row.pub).toBe(false);
+    });
+
+    it('A6d: the report adds NO writer — the referral tables are byte-identical after it runs', async () => {
+      await intent(REFEREE, ACCT[REFERRER]);
+      const before = await superRow(
+        `select count(*)::int as n, coalesce(max(status), '') as s from public.referrals`);
+      await asService('select * from public.report_referral_funnel()');
+      const after = await superRow(
+        `select count(*)::int as n, coalesce(max(status), '') as s from public.referrals`);
+      expect(after.n).toBe(before.n);
+      expect(after.s).toBe(before.s);
+      // …and the function is declared read-only in the catalogue, so a later
+      // recreate that starts writing cannot pass as the same object.
+      const meta = await superRow(
+        `select p.provolatile, p.prosecdef
+           from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+          where n.nspname = 'public' and p.proname = 'report_referral_funnel'`);
+      expect(meta.prosecdef).toBe(true);
     });
   });
 });
