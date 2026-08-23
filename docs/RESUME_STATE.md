@@ -51,6 +51,12 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ ~22:20 CDT 08-22: §446 — WEB-1 LANDED (27th): CAS → 4060f690 (migration
+# 197 on the branch; website family founded); pin + trees pruned, 9.2Gi.
+# WEB-4 GO issued (tip file web4-rebased-tip.txt; terminal web4-TERMINAL-*).
+# WEB-2/WEB-3 UNBLOCKED (next free build seats after UC-3). Seats: WEB4-
+# landing · T2N · R-INST-1 · UC0. Holding: web5/6/7 → T2J → T2K → T2L → T2M;
+# T2R f65b3ff3 + T2Q cc9ef856 READY (land after the map stack / if slot idles).
 # ⭐⭐ ~21:55 CDT 08-22: §445 — T2Q COMPLETE at cc9ef856 (pinned; sizeBaseline
 # defect cured; --no-verify hides size-ratchet reds = LAW). Ruled undercity
 # charter RATIFIED (R2 24/24 + §443 addendum). D-8 VERIFIED: clandestineFacet

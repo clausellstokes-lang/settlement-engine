@@ -24,6 +24,10 @@ The §427 block's structure stands; THIS delta supersedes its state figures:
 > the landing seat (GO §442.2). DWR1A collected (§442.3). The undercity charter
 > is RULED at §441 (TC-UNDERCITY-R2 applying it). Holding queue after WEB-1:
 > web4/5/6/7 → T2J → T2K → T2L → T2M; producers T2R/T2Q resuming; T2N next seat.
+> **§446:** WEB-1 LANDED — build at **4060f690** (27 landings; migration 197 on
+> the branch). WEB-4 in the landing seat. T2R (f65b3ff3) and T2Q (cc9ef856)
+> COMPLETE and pinned; T2N and UC-0 building; R-INST-1 researching. HK-1
+> (the dead underways facet key, §445.3) and WEB-2/WEB-3 queued.
 
 1. **BUILD is at b10ed1a1 — 25 LANDINGS** (since §427: CT-3 landed §432 after
    the §355 hunt CLOSED — the varying-cast contamination hypothesis is

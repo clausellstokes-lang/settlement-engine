@@ -18145,3 +18145,47 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   which the signature governs) · J3 R-INST-1 before UC-3 for the freed seat
   (the owner's §438 cost-accepted research was seatless all evening; UC-3
   takes the next seat).
+
+## §446 — WEB-1 LANDED (THE 27TH): MIGRATION 197 ON THE BRANCH, THE WEBSITE FAMILY FOUNDED; WEB-4's GO ISSUED; WEB-2/WEB-3 UNBLOCKED (2026-08-22 ~22:20 CDT)
+
+- **§446.1 WEB-1 LANDED.** TE-WEB1-LANDING executed the full slot pattern
+  on the first try: carry-proof at blob level (exactly three of fifteen
+  paths moved at the slot — the census walker, INDEX, the manifest; no
+  foreign `197_*`), the walker resolved keep-both + DELTA `+1/+1/+0/+1/+0`
+  → **2500/365/2135/20730/5787** convicted 33/33 WITH a negative control
+  (the slot tuple reds by exactly the delta), the manifest by string surgery
+  149 → 150 (ADDED=["WEB-1"], zero drift), S0 two-part LIVE with the
+  baseline lookup executed TWICE (the schema-10 staleness line
+  byte-identical at the chair baseproof and at a throwaway slot worktree;
+  0 of its files in the detector tree or unscanned inputs; the baseline
+  blob identical slot vs tip), pre-gate sweep = the banked four files / six
+  tests exactly, zero strays. Terminal detached via the setsid launcher,
+  bare, shared lock dir, quiet trough, 15 min: `TRUE_EXIT=0` +
+  `[gate-tail] exit: 0` + `free_kb_at_end=8072876`; `no test regressions (11
+  known failure(s) of 28761 tests, ceiling 11)`; `STRICT DIST OK — 52 /
+  433`; `valid: 150 packets (1 READY)`; migration head 197 contiguous. Chair
+  re-read the body step roster, ancestry (2 commits over 84e06412) and the
+  migration tree before the CAS. **CAS `84e06412 → 4060f690`** (547e4d58
+  member + 4060f690 packet). Pruned: holding-web1, laneTEWEB1-tree (862M),
+  laneTEWEB1-baseproof (669M), /tmp/web1. Disk 9.2Gi. The lane's re-stamp
+  hazards (the baseline's real path under `scripts/`; both tuple spellings;
+  `rebase --continue` runs no hook) are banked in memory.
+- **§446.2 WHAT THE LANDING CARRIES:** migration 197 (consent
+  person-adjacent default; repo-side only — the `db push` remains the
+  owner's train, now THREE pending: 195/196/197, with 197's
+  `-- @rollback:` note declaring documented-manual-reversal) · the WEBSITE
+  packet family founded (WEB-1 is its header; later cars keep-one on the
+  header, keep-both on rows) · `CONSENT_MODEL_VERSION` 3 · the rehearsal
+  manifest's new reviewed wave. **WEB-2 (retention numbers) and WEB-3 (the
+  referral emit wiring) are UNBLOCKED** — draft-WEBSITE-PLAN §2/§3,
+  migration numbers sequential from 198 — queued for the next free build
+  seats behind UC-3.
+- **§446.3 WEB-4 GO ISSUED** (TE-WEB4-LANDING; holding 378f9276 = four
+  commits over 19b799ce; rebase onto 4060f690; delta `+0/+0/+0/+2/+0`;
+  keep-one on the website family header; the packet already at LANDED
+  status in the holding commits — the validator's acceptance confirmed or
+  reported; the WEB-1 landing receipt named as the executed template).
+  Seats: WEB-4 landing · TE-T2N · TC-R-INST-1 · TE-UC0 (cap). Build queue
+  at the next free seat: UC-3 → WEB-2 → WEB-3 → HK-1 → R-INST-2..6.
+- **Memory index folded (fold 8b)** to 16,713 bytes after two lanes' notes
+  pushed it over the ceiling; every link resolves.
