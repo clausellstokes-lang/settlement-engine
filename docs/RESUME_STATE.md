@@ -51,6 +51,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐ 21:35 CDT 08-22 (true clock; the four labels above ran ~2h fast): §453
+# OWNER DIRECTIVE — closets/pantries: STORAGE/SERVICE cells first-class in the
+# DW grammar (closed set in DESIGN_DWELLINGS_PROGRAM S6/§5/§8); addendum lane
+# = CIRC+STORAGE.
 # ⭐ ~00:15 CDT 08-23: §452 OWNER DIRECTIVE — DW circulation: hallways + long
 # hallway chambers first-class (closed class set in DESIGN_DWELLINGS_PROGRAM
 # S6/§5/§8); R-INST-CIRC addendum queued; future tranches carry it.

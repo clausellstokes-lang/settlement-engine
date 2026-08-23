@@ -18392,3 +18392,26 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
 - Queue effect: a TC-R-INST-CIRC addendum lane (Fable) joins the research
   queue behind R-INST-2 to retrofit circulation rows onto R-INST-1's 14
   families and DWR1A's §1/§4; the owner's CT-0 sittings gate the rosters.
+
+## §453 — OWNER DIRECTIVE (in-chat, 2026-08-22 ~21:35 CDT): CLOSETS AND PANTRIES — STORAGE AND SERVICE CELLS ARE FIRST-CLASS ROOMS IN THE DWELLINGS GRAMMAR WHERE APPROPRIATE; CLOCK CORRECTION FOR §449–§452
+
+- **Owner:** "And closets and pantries too where appropriate." RECORDED
+  beside §452 and written into docs/DESIGN_DWELLINGS_PROGRAM.md S6/§5/§8: a
+  closed STORAGE/SERVICE class set — CLOSET · PANTRY · BUTTERY · LARDER ·
+  STILL_ROOM / DAIRY / SCULLERY · STORE · CELLAR / UNDERCROFT (the §311
+  component, drawn here only as its surface joint) · ATTIC / GARRET_STORE
+  — each with a light requirement (larders/pantries NONE or north), a size
+  bucket, fixtures and an adjacency law (pantry/buttery off the service end
+  of the hall, the medieval pair across the screens passage; larder away
+  from the hearth; the closet off its chamber); licensing graded by era,
+  tier and prosperity (a cottage has a shelf and a chest, a merchant's
+  house the pantry and the cellar, the great house the service range); a
+  space too small to be a cell is a FIXTURE of its host (press, aumbry,
+  hanging shelf), never an invented room. A `StorageCell` contract lands
+  beside `CirculationCell`. Every research entry reports its STORAGE
+  TYPOLOGY beside its circulation typology; the R-INST-CIRC addendum lane
+  becomes CIRC+STORAGE over R-INST-1 and DWR1A.
+- **Clock correction (chair's own error):** the labels on §449 ("~23:25"),
+  §450 ("~23:40"), §451 ("~23:55") and §452 ("00:15 08-23") run about two
+  hours FAST; the wall clock at §452 was ~21:25 CDT 08-22. True order and
+  content are unaffected; from this row every label is read from `date`.

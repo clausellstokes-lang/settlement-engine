@@ -135,6 +135,31 @@ S6 CIRCULATION — doors, stairs (type per parti and prosperity: ladder →
    undercity projection where a stair or passage meets a cellar. The
    research tranches (§8) report the circulation typology PER ENTRY; the
    CT-0 taste sitting gates the rosters.
+   **STORAGE AND SERVICE CELLS (owner directive, ODQ §453, 2026-08-22):
+   closets and pantries — and their kin — are likewise first-class cells
+   where the building's kind and indications license them, never folded
+   into "the room" as invisible space.** The closed class set the corpus
+   program researches: `CLOSET` (the garderobe-as-closet, the chamber
+   closet, the study closet of the great house; the press/aumbry as a
+   fixture when the space is too small to be a cell) · `PANTRY` (bread and
+   dry stores; the medieval pantry paired with the buttery across the
+   screens passage) · `BUTTERY` (drink stores; the pantry's pair) · `LARDER`
+   (cold/meat store — north side, no hearth, slate shelves) · `STILL_ROOM`
+   / `DAIRY` / `SCULLERY` (prosperity- and institution-graded service cells)
+   · `STORE` (the warehouse bay, the shop's back store, the armory's racks
+   as fixtures vs the arsenal's floor-per-weapon-class as cells) · `CELLAR`
+   / `UNDERCROFT` (the below-ground store — a §311 component, licensed by
+   the undercity train and drawn here only as its surface joint) · `ATTIC`
+   / `GARRET_STORE`. Each carries light requirement (larders and pantries
+   want NONE or north light), a size bucket, fixtures (shelves, hooks,
+   bins, the press), and an adjacency law (pantry/buttery off the service
+   end of the hall; larder away from the kitchen hearth; the closet off its
+   chamber). Licensing is graded by era, tier and prosperity exactly as the
+   circulation classes are — a thorp's cottage has a hanging shelf and a
+   chest, not a pantry; a town merchant's house has the pantry and the
+   cellar; the great house has the whole service range. The research
+   tranches report the STORAGE TYPOLOGY per entry beside the circulation
+   typology.
 S7 FIXTURES & DRESSING — typed fixtures per function at the prosperity/wear
    grade (finite semantics: closed vocabularies, PRESENT/NONE-with-reason);
    supply-state variants (the stalled chain's cold forge); abstract-shape
@@ -159,6 +184,12 @@ S9 VALIDATION — the lawfulness walker certifies: floor satisfied, ceiling
   fixtures[], joints[] }` — circulation as a first-class cell class (ODQ
   §452); `FloorPlan.storeys[].cells[]` may be a Function cell or a
   CirculationCell; reachability (S6) is proven over both.
+- `StorageCell { class: CLOSET | PANTRY | BUTTERY | LARDER | STILL_ROOM |
+  DAIRY | SCULLERY | STORE | CELLAR | UNDERCROFT | ATTIC | GARRET_STORE,
+  license (kind × indications × era grade), sizeBucket, lightReq (NONE |
+  NORTH | ANY), fixtures[], adjacency[] }` — storage/service as a first-class
+  cell class (ODQ §453); a space below the cell floor is a FIXTURE of its
+  host cell (a press, an aumbry, a hanging shelf), never an invented room.
 - `Parti { id, form, weights(prosperity×institution×culture), verticalGrammar,
   stairGrammar, exteriorConsequences[] }`
 - `FloorPlan { buildingId, derivedAt{year,tick}, circumstancesDigest, storeys[]
@@ -216,8 +247,11 @@ the closed circulation classes the building historically carries, at which
 era grade and prosperity, with measured widths/lengths where a primary
 source exists, and the indications that license each — hallways and long
 hallway chambers are never omitted for being "empty" space; they are the
-grammar's spine for multi-room buildings.** R-INST-1 (delivered before
-§452) and DWR1A owe a CIRCULATION ADDENDUM pass.
+grammar's spine for multi-room buildings — and its STORAGE TYPOLOGY (ODQ
+§453): closets, pantries, butteries, larders, stores and service cells,
+with the size/light/adjacency laws that license each.** R-INST-1
+(delivered before §452/§453) and DWR1A owe a CIRCULATION + STORAGE
+ADDENDUM pass.
 
 The atlas method applied to interiors: measure real historical plans into
 grammars — hall houses, longhouses, burgage plots, tenements, courtyard
