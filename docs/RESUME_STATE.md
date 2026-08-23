@@ -74,6 +74,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ~01:55: §439.1 — T2H stop point CONFIRMED (succession header written;
+# gate survives inside test:ratchet). Standing rule: GOs never predict the
+# census walker untouched; disk-check before trusting any green.
 # ⭐⭐⭐ ~01:40: SECOND SUCCESSION (§439) — owner switching NOW. Four lanes
 # ordered to stop points (T2H's detached gate survives — collect per its
 # receipt; T2R/T2Q checkpoint; DWR1A partial saved). HANDOFF delta sealed

@@ -17627,3 +17627,17 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   predates. RESUME_STATE's tail is the act-log of record. The successor's
   bootstrap is unchanged: read docs/HANDOFF_CURRENT.md on this branch, then
   RESUME_STATE's tail, then act; the ledger outranks every summary.
+
+- **§439.1 T2H's STOP POINT CONFIRMED:** the succession header is written
+  (collection rule, verified pin, the stray protocol with sibling load
+  pre-stamped) plus two load-bearing additions — the wrapper log's
+  structural blindness (progress lives in the $TMPDIR body; liveness is
+  ps -r) and the DISK CAVEAT ON ANY GREEN (this session's ENOSPC mode
+  produced a false green once; the collector checks free space at end
+  before trusting exit 0). **A DISPATCH CORRECTION RECORDED AS STANDING
+  RULE:** the GO brief predicted "none of your files touched" — wrong,
+  because H8B had re-recorded the SAME census tuple; the carry-proof-first
+  ordering caught it before the conflict could. THE RULE: a GO never
+  predicts the shared census walker untouched — EVERY member touches it,
+  and the sum-of-deltas resolution is flagged in every GO from here.
+  The gate survives detached, inside test:ratchet at the switch.
