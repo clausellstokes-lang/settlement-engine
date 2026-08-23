@@ -54,6 +54,7 @@
  */
 
 import { POPULATION_RANGES, TIER_ORDER, popToTier } from '../data/constants.js';
+import { clamp } from '../kernel/math.js';
 import { buildCalamityLedger } from './display/calamityLedger.js';
 
 /**
@@ -113,9 +114,6 @@ export const RING_WINDOW_ENTRIES = RING_RETAINED_PREFIX + 1;
  * moving it is a declared shift against the sealed law, not a tuning pass.
  */
 export const DEMOTION_THRESHOLD = 0.08;
-
-/** @param {number} n @param {number} lo @param {number} hi @returns {number} */
-const clamp = (n, lo, hi) => (n < lo ? lo : n > hi ? hi : n);
 
 /** A finite number, or the fallback. @param {unknown} v @param {number} fallback */
 const num = (v, fallback) => (Number.isFinite(Number(v)) ? Number(v) : fallback);

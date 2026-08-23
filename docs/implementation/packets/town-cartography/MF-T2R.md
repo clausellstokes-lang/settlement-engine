@@ -24,6 +24,23 @@
   train tip (33/33) with the negative controls *"the estate's file count moved — re-measure, do not re-word: expected 2508 to be 2505"* (control A, the summed delta +3) and *"… expected 2508 to be 2507"* (control B, MF-T2Q's position put back — MF-T2N's +1 alone, the proof that no sibling's delta was dropped by the merge). Every digest this packet cites
   (the delivered files, the preamble, the generator-golden fixture, the sealed port source) re-verified at the landed tree — none moved,
   so no RE-HASHED note is owed. The two worldPulse MODIFY hosts of MF-T2Q were UNMOVED at the slot (blob-identical at b10ed1a1 and 421c7345).
+- **Landing follow-on (TE-PRODUCERS-LANDING, 2026-08-23, ODQ §469 — `fix(MF-T2R)`):** the landing's widened
+  pre-gate sweep convicted `tests/lint/clampPrimitiveBaseline.test.js` naming THIS leaf — `highWater.js` defined a local
+  `const clamp` (the estate has ONE clamp primitive, `src/kernel/math.js`), hidden inside an already-banked red: the
+  received set read `…(76)` at the train tip against `…(75)` at the build base, and the +1 was this file. The build
+  lane's "RED, identical — PRE-EXISTING (isolation: member moved aside)" was a title-level reading; the received-list
+  diff is the instrument that convicts. CURED IN-TRAIN as ONE import (`import { clamp } from '../kernel/math.js'`)
+  replacing the local definition; nothing else moved. BEHAVIOR-IDENTICAL, by the one call site: `clamp(1 - current / peak, 0, 1)`
+  runs only under `peak > 0`; `current = Math.max(0, num(s.population, 0))` is finite by `num`'s `Number.isFinite`
+  narrowing, and every reading's `peak` is finite (`floorOf` → `num(…, 0)`; the ring maximum is taken only over
+  `Number.isFinite(p)` entries; channel 3's `current + lost` sums `Math.max(0, Math.floor(num(stamp.exodus, 0)))`
+  rows), so the argument is always finite and the kernel clamp's non-finite arm (→ `lo`) is unreachable here — no
+  same-seed shift, and the golden manifest `29c6cc8f…` is bytewise unchanged. RE-HASHED: the leaf's committed blob is now
+  `2ff3948f…`; every `021808ba…` citation in the §10.2 / §6 prose below names the pre-§469 blob AS PROVED THEN and is
+  left verbatim. Mutants m2 (channel-3 exodus addition dropped → A2 red) and m3 (understate flipped → A2 + A4 + A7 red)
+  re-planted against the cured leaf and restored digest-exact; clean control 7/7. `clampPrimitiveBaseline` is back to
+  the banked base reading (`…(75)`, the same thirteen pre-existing offenders, this file absent); both typecheck
+  ratchets at their ceilings (173 / 1134).
 - **Charter and rulings:** `draft-PRODUCERS-PLAN.md` §5 (this member), §§1–2 (the measured
   substrate and the three lawful shapes), §8 (execution law), §9 (STOP set), §10–§11
   (judgments, RAISED). Ruled at **ODQ §433** (C1–C6 signed, J1–J8 ratified; TE-T2R dispatched)
@@ -133,7 +150,7 @@
 >
 > | file | action | SHA-256 (committed blob) | effective lines |
 > |---|---|---|---:|
-> | `src/domain/highWater.js` | CREATE | `021808baf043477d924fb1e5a1820df30f8298cc29982737650c9f868dd701f8` (the §443 follow-on; `718bcee4…` at `a6001d47`) | **104** of 250 (107 before §443; charter predicted ~80–110) |
+> | `src/domain/highWater.js` | CREATE | `2ff3948f00a8eff1fe1392766080254223aa4a400f4de085e2c89e10a5a5923a` (the §469 landing follow-on — the kernel-clamp import; `021808ba…` at the §443 follow-on; `718bcee4…` at `a6001d47`) | **104** of 250 (unchanged by §469: one import line replaced one `const` line; 107 before §443; charter predicted ~80–110) |
 > | `tests/domain/highWater.test.js` | CREATE | `bfa9371fa5f3ef8825ebb0c62e32fb1c92dde8ca65475cd3aa3716fa90484c15` | 197 (test; not a production budget) |
 >
 > Neither path exists at `b10ed1a1` (`git ls-tree b10ed1a1 -- <path>` is empty for both and for
@@ -378,7 +395,7 @@ a property, never left as luck (J-TET2J-8).
 
 | Action | File | Region | Delta | Instruction |
 |---|---|---|---:|---|
-| `CREATE` | `src/domain/highWater.js` | new domain-root leaf | **104** effective of 250 | `deriveHighWater`, `HIGH_WATER_CHANNELS`, `HIGH_WATER_GAPS`, `RING_RETAINED_PREFIX`, `RING_WINDOW_ENTRIES`, `DEMOTION_THRESHOLD`; imports `../data/constants.js` and `./display/calamityLedger.js` (§443) only; pure; DISPLAY-LAZY by inheritance |
+| `CREATE` | `src/domain/highWater.js` | new domain-root leaf | **104** effective of 250 | `deriveHighWater`, `HIGH_WATER_CHANNELS`, `HIGH_WATER_GAPS`, `RING_RETAINED_PREFIX`, `RING_WINDOW_ENTRIES`, `DEMOTION_THRESHOLD`; imports `../data/constants.js`, `../kernel/math.js` (`clamp`, §469) and `./display/calamityLedger.js` (§443) only; pure; DISPLAY-LAZY by inheritance |
 | `CREATE` | `tests/domain/highWater.test.js` | new acceptance file | 197 (test) | one literal `describe`, seven straight-line `it`; the two source-scan rosters; anchored negatives through `expectAbsentWithAnchor` |
 | `DOC` | `docs/implementation/packets/town-cartography/MF-T2R.md` | new | — | this packet |
 | `DOC` | `docs/implementation/PACKET_MANIFEST.json` | one packet row appended by TEXT surgery (parsed to verify, never re-serialised) | — | registration |
