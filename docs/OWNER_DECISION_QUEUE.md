@@ -19574,3 +19574,66 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   READY)` after HK-2's flip). Seats: HK-A landing · TE-UC1 (cap). After
   HK-A the holding roster is EMPTY until UC-1 builds — the landing seat
   then takes the next built car (UC-1 → the W-C cars → UC-4 / UC-2+UC-5).
+
+## §480 — MF-UC1 BUILT AND HOLDING (THE SEWER LADDER + WELLS/CISTERNS): WEIGHT SET B CHOSEN BY MEASUREMENT OVER 420 SETTLEMENTS, THE FOUNDING SLOT INERT, THE CALAMITY CAUSE READ AS A DATED RECORD NOT A KIND; R-INST-4 RESUMED SOLO FROM SIX KILLED SUB-LANE TRANSCRIPTS (2026-08-23 09:20 CDT)
+
+- **§480.1 HOLDING.** TE-UC1 (Opus, §447): tip `53d7e492` = 8 commits over
+  `c1295938` (= the expected base); porcelain empty; every committed blob
+  shasum-matched to the worktree (the pre-commit `eslint --fix` re-indexed
+  nothing on any of the eight). Pinned `refs/preserve/holding-uc1`. S0 home
+  table all CONFIRMED, no STOP: 'Sewage system' `institutionalCatalog.js:2225`
+  (city block, rolled at metropolis via `assembleInstitutions.js:243`);
+  'Aqueduct or water system' `:2239` `required:true` at city+ (the tier read
+  IS the roster read); district enum pinned by value (§441.5(d) refuses the
+  import); prosperity `corruption.js:528`; civic via
+  `facetOf(…,'institutionNature')==='civic'`; gradient `resolveTerrain.js:57`;
+  calamity via `calamityLedger.js:62`; high-water `highWater.js:183`;
+  `founding.kind` NO TYPED HOME (0 hits). Gates: golden sha unmoved
+  (`29c6cc8f…`); reader-walker `{1995/1409/387/60/40}` unmoved; census
+  `2510/365/2145/20817/5802 → 2511/365/2146/20825/5803` (delta
+  **+1/+0/+1/+8/+1**, reverted digest-exact §417); acceptance 8/8; seven
+  mutants / seven convictions, restores digest-exact; leaf 209 effective;
+  typecheck 173/173, domain-strict 1134/1134; `valid: 164 packets (2 READY)`
+  at its base; final sweep 8 failed = six banked + `clampPrimitiveBaseline`
+  pre-existing by received-list diff (§469 form: ADDED 13 none the
+  member's) + the one named interior census red. 0 `undercity|sewerDerivation|
+  MF-UC1` rows in any of the eight.
+- **§480.2 THE FACTS THE LANDING MUST CARRY.** The build branch moved twice
+  under the lane (WEB-2, WEB-3): no code-path collision (overlap = INDEX +
+  PACKET_MANIFEST only; no new `src/domain` file, so `ruinFilterRoster` still
+  reads 90 → 91 there); ⛔ the census tuple moved and `parked` 365 → 366 at
+  `64da7d5d` — the landing carries the DELTA only (a carried tuple would
+  silently revert a landed park with every proof green — §420 law, third
+  specimen). Written into the packet's own census block.
+- **§480.3 THREE VETOABLE CALLS (ratified by the chair, each reverts by a
+  leaf edit + acceptance re-run):** J-TEUC1-4 the tier floor/ceiling read the
+  HIGH-WATER tier (the built extent is the historical maximum — `highWater.js`'s
+  own law; wells the same) · J-TEUC1-5 `GRADIENT_OUTFALL` declares LOWERS and
+  carries the impediment (the owner's framing; keeps the 2-direction
+  vocabulary free of a member the corpus never produces) · J-TEUC1-6 the
+  sanitation read stays ruin-BLIND while the civic count is ruin-FILTERED
+  (§441.1 one-truth vs the walker's crediting class; stated in leaf,
+  acceptance and walker note). **F-UC1-1 (chair's eye, ratified):**
+  `calamity.js:260` is constitutional — the engine never asserts a disaster
+  KIND — so the charter's "plague/great-fire REBUILD" cause is a DATED
+  calamity in the immutable record read as the ledger's count; branching on
+  `flavorSuggestion` would have asserted a kind the engine refuses to.
+  Pinned: identical ladders under 'plague', 'fire' and no kind. Weights: set
+  **B** (prosperity .25 / civic .25 / calamity .15 / high-water .35, gradient
+  −.30) — D refused by measurement (the owner's own flat-dry-town example
+  failed 6 of 30); B satisfies all four ruled invariants and maximizes cause
+  liveness (50/34/29/65/68 of 420); the zero-weight founding slot measured
+  INERT on all 420 (the brief's m4 mutant convicted only a constant pin —
+  arm A4 reordered so the behavioural claim leads). UC-0's seam agrees
+  420/420; UC-0's leaf not edited. Two member-caused sweep reds cured
+  in-member (`// anchored:` must sit on the IMMEDIATELY preceding line; the
+  leaf enrolled as a `.institutions` reader) — both banked in memory by the
+  lane.
+- **§480.4 SEATS.** HK-A landing (running) · **TC-R-INST-4 (RESUME, Fable,
+  solo)** dispatched 09:15 CDT: WebSearch exhausted session-wide since
+  06:14:48Z (ONE probe then zero), WebFetch-only; recovery by the R-INST-3
+  method of record from the six killed sub-lane transcripts (AB/CD/EFG/HI/
+  JK/LM, 248–567 KB each, under the session's `subagents/`) plus the
+  primaries the sub-lanes saved to disk (`RINST4-*`); deliverable §2–§14 +
+  §15 + §Σ + ledger + method; status map kept honest; RESUME POINTs every
+  30 min. UC-1's landing (single) follows HK-A's in the landing seat.

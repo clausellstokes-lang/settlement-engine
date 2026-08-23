@@ -51,6 +51,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 09:20 CDT 08-23: §480 — UC-1 BUILT, holding-uc1 53d7e492 (carry DELTA
+# +1/+0/+1/+8/+1). R-INST-4 RESUMED solo (WebFetch-only, transcript recovery).
+# Seats: HKA-landing · R-INST-4.
 # ⭐⭐⭐ 08:55 CDT 08-23: §479 — WEB-3 LANDED (42nd): migration 199; CAS →
 # 64da7d5d. Third moving-head specimen (FIGURES) cured in-train → HK-5 queued.
 # HK-A landing GO (last holding car). Seats: HKA-landing · UC1.
