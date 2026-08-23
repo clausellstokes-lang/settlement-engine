@@ -5891,7 +5891,54 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   `suiteTitles` alone put back at the slot's 5,803 reds at `suiteTitles` ("expected 5804 to
     //   be 5803"), HK-1's one new describe — the file restored byte-identical both times.
     //   `files`, `parked` and `credited` hold at WEB-3's 2,512 / 366 / 2,146.
-    files: 2512, parked: 366, credited: 2146, titles: 20830, suiteTitles: 5804,
+    // ── RE-RECORDED 2026-08-23 BY THE MF-UC1 LANDING (the sewer ladder plus wells and cisterns), CAUSE ATTRIBUTED ──
+    // 2,510/365/2,145/20,817/5,802 → 2,511/365/2,146/20,825/5,803 at the BUILD base c1295938
+    // (the UC-0 + UC-3 stacked landing). ONE cause, and it is not a rule change — no classifier
+    // here widened or narrowed:
+    //   +1 file / +1 CREDITED / +8 titles / +1 suite title:
+    //     tests/domain/undercitySewerDerivation.test.js, the member's acceptance suite — ONE
+    //     literal `describe` and EIGHT straight-line `it()` arms, with `.each`, `runIf`, `.skip`,
+    //     `.todo` and `.concurrent` all measured at ZERO occurrences over the file, so it is
+    //     CREDITED and every title counts. `parked` does NOT move — and on the walk below it
+    //     PASSED without redding, which is the receipt that the file is credited rather than an
+    //     inference from the shape.
+    //   The eight arms: the §441.1 ROSTER RULE three ways over REAL settlements (with the UC-0
+    //     seam); the owner's own example, a flat dry town honestly getting cesspits with no draw
+    //     taken; G-43's rebuild arm, where a dated calamity raises the rung and drains the
+    //     rebuilt quarter while the cause reads THAT a calamity happened and never WHICH KIND;
+    //     the HONEST FOUNDING arm, pinning the NO_TYPED_HOME slot as a behavioural no-op over the
+    //     whole roster-free corpus; the PER-QUARTER law; middle-band determinism over a band
+    //     proved non-empty first; boundaries and totality; and wells and cisterns.
+    //   +0 from everything else this member touches: the landing moves six paths and only that
+    //     one is a test file. tests/lint/ruinFilterRoster.walker.test.js moves a COUNT literal
+    //     (90 → 91, its own arm's message) and adds no title; the packet, the manifest row and
+    //     the index line are docs.
+    // `censusAuthorization`: ODQ §311 (the undercity doctrine), §359.3 (the OB-6 fold), §431
+    // (this dispatch), §441 (the ruling, ratified at §445.2).
+    // ⛔ CONVICTED AT THE BUILD, then REVERTED per §417: the walker edit was made and walked
+    //   figure by figure at base c1295938 ("expected 2511 to be 2510", "expected 2146 to be
+    //   2145", "expected 20825 to be 20817", "expected 5803 to be 5802"), the whole arm green at
+    //   the new tuple (33/33), the edit reverted digest-exact, and the row rode the packet (§8)
+    //   into this landing slot so the tuple is re-derived here, never carried.
+    // ⭐⭐ THE CARRY LAW, EXECUTED AT THE LANDING SLOT (TE-UC1-LANDING, 2026-08-23; §420/§457/
+    //   §469/§480.2). This member was authored at base c1295938 (after-figure 2,511/365/2,146/
+    //   20,825/5,803) and rebased onto 0f3897a5 (the HK-A landing, the 43rd). The DELTA
+    //   `+1/+0/+1/+8/+1` is what crossed. ⛔ THE BASE HAD MOVED UNDER IT: WEB-2, WEB-3 and HK-A
+    //   re-recorded the three blocks directly above, so the slot reads
+    //   2,512/366/2,146/20,830/5,804 — note `parked` at 366, WEB-2's park, which carrying this
+    //   member's build tuple would have SILENTLY REVERTED while every proof in the packet stayed
+    //   green, exactly the failure §469 names — and the after-figure re-derives to
+    //   2,513/366/2,147/20,838/5,805, the ONE live tuple line below, CONVICTED BY EXECUTION at
+    //   the rebased tip (33/33) with every figure READ FROM ITS OWN FAILURE MESSAGE in assertion
+    //   order and never computed: `files` "expected 2513 to be 2512" → `parked` PASSED UNMOVED at
+    //   366 → `credited` "expected 2147 to be 2146" → `titles` "expected 20838 to be 20830" →
+    //   `suiteTitles` "expected 5805 to be 5804". The walked figures equal the packet's carried
+    //   delta exactly, so no title was swallowed by a parked file. TWO negative controls: the
+    //   slot's own tuple put back reds at `files` ("expected 2513 to be 2512"), this member's +1
+    //   exactly; and `suiteTitles` alone put back at the slot's 5,804 reds at `suiteTitles`
+    //   ("expected 5805 to be 5804"), the member's one new describe — the file restored
+    //   byte-identical both times.
+    files: 2513, parked: 366, credited: 2147, titles: 20838, suiteTitles: 5805,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

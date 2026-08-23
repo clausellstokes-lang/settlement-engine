@@ -1,8 +1,11 @@
 # Town cartography / MF-UC1 — the undercity's SANITATION LADDER and its wells: `deriveSewerLadder` derives which rung a settlement's drains reach, WHY, WHICH quarters they serve, and the wells its water need licenses — one truth with the dossier roster, keyed to the high-water tier, and dark
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** 1
-- **Verified base:** `claude/composite-r4` at `c129593816b13640e5740603ca3e51d68ee711fc`
+- **Verified base:** `claude/composite-r4` at `0f3897a56ba57201ca499651f963eb0d11b65761`
+  ⚠⚠ **AS AUTHORED — the row above now names the LANDING SLOT (`0f3897a5`, the HK-A landing, the
+  43rd; see §12 below); the BUILD base was `c129593816b13640e5740603ca3e51d68ee711fc`.** The
+  continuation that follows was written at that BUILD base:
   — the UNDERCITY-STACK landing (ODQ §472.4: MF-UC0 → MF-UC3), read with `git rev-parse` at the
   lane's opening and re-read at every proof below. Every figure in this packet was executed at
   THIS base by the implementing lane TE-UC1; nothing is inherited from the charter
@@ -544,3 +547,56 @@ edit; no validator edit; no shared-path reservation that a split promotion would
 | J-TEUC1-6 | The sanitation read stays RUIN-BLIND while the civic count is RUIN-FILTERED | §441.1's one-truth rule versus the walker's crediting class; both are stated in the leaf, the acceptance and the walker note rather than resting on file-granular compliance (§1.1) |
 | J-TEUC1-7 | The district 12-enum is a PINNED COPY with an ordered-equality drift ratchet in the acceptance | §441.5(d) forbids the import path's coupling; §474 asks for intent over list-equality, but this list is this file's own COPY of a list another module owns, where equality IS the intent |
 | J-TEUC1-8 | The gradient grammar is a declared table over the published terrain vocabulary | the estate stores no elevation, relief or drainage field (executed); inventing a number would be a second truth, and the table is exhaustiveness-pinned against the live keys with its exclusion set named |
+
+---
+
+## §12 · THE LANDING SLOT (TE-UC1-LANDING, 2026-08-23 — slot `0f3897a5`, the HK-A landing, the 43rd)
+
+- **Rebase:** `git rebase --onto 0f3897a56ba57201ca499651f963eb0d11b65761 c129593816b13640e5740603ca3e51d68ee711fc 53d7e492…`,
+  detached, the eight holding commits carried as authored. **Carry-proof at blob level FIRST**
+  (braced `${sha}:path`, with non-vacuity controls): of the six member paths, **two moved** at the
+  slot — `docs/implementation/INDEX.md` (`e573162c9a` → `eb0bc0776b`) and
+  `docs/implementation/PACKET_MANIFEST.json` (`ad7fa79486` → `11a37fe4c5`); three did not exist at
+  either end (this car creates them); and ⭐ `tests/lint/ruinFilterRoster.walker.test.js` was the
+  **SAME blob** `f990edcee9` at base and slot, so the `90 → 91` re-record still applied. Controls:
+  `package.json` `2b5ec2014c` and `package-lock.json` `1a8a80b12b` identical at base and slot (**no
+  mint trigger crossed**), and a nonexistent path resolved ABSENT at both. `tests/lint/sovereigntyLightingContract.walker.test.js`
+  moved at the slot as expected and is base-identical in the holding (the §417 revert), so the
+  member never touched it in the rebase. **§475:** all four member-src spellings hit **0** of the
+  five `supabase/functions/_shared/*.meta.json` input rosters (control `cohesionWeave.js` hits 3),
+  so no `build:edge-shared` is owed.
+- **The rebase stopped exactly once**, at 6/8, on exactly the two expected paths, one hunk each.
+- **Surgery:** manifest = the slot's bytes plus this row appended by string surgery from the
+  holding commit's own insert bytes, never re-serialized — the predecessor row's closing brace
+  gained the one comma JSON requires. Deep-compare **165 → 166, ADDED=["MF-UC1"], REMOVED=[],
+  DRIFTED=[]**, and the inserted block is byte-identical to the authored one
+  (sha256 `6fec52a3b09c08c3238c4195ee16966b…`, 15,315 B). INDEX keep-both, this row at the
+  "Current packet set" head above WEB-2 (newest-first order), the added line `cmp` 0 against the
+  authored line — **no slot row moved**.
+- **The status walk:** READY → LANDED at the re-stamp; `verifiedBase` → the slot sha, scoped to
+  this row's span. `requiredSymbols` 9 → 14: the delivered `deriveSewerLadder`; the catalog's
+  `'Sewage system'` (the row §441.1's one-truth rule stands on) and `'Aqueduct or water system'`
+  (the wells licence); the acceptance suite's one literal `describe`; and the ruin-filter
+  disposition MARKER this car is the cause of. ⛔ The marker is pinned and **never the count** —
+  a re-recorded FIGURE in `requiredSymbols` is refused by the estate's own law (ODQ TE-26), and
+  that count moves the moment any sibling lands a reader. The high-water and calamity-ledger
+  reads were already pinned at READY and were not duplicated.
+- **The census row, written ONCE here and re-derived by execution (§420/§457/§469/§480.2):** the
+  slot read `2512/366/2146/20830/5804`; the DELTA `+1/+0/+1/+8/+1` that crossed re-derives to
+  **`2513/366/2147/20838/5805`**, and each of the four moved figures was read from the arm's own
+  failure message in assertion order, never computed. `parked` PASSED unmoved at **366** — WEB-2's
+  park, which carrying this member's build tuple would have silently reverted. The walked figures
+  equal the carried delta exactly, so no title was swallowed by a parked file. Two negative
+  controls and the file's byte-identical restore are in the lane receipt.
+- **The roster count re-read at the slot, as the packet's own rebase note required:** the arm's
+  message convicts `expected 91 to be 90` with the slot's figure put back, and passes at 91 — so
+  the base's 90 was still right and no sibling landed an `.institutions` reader under `src/domain`.
+- **S0, the gates and the terminal:** the two-part S0 reading, the mutexed re-proofs, the widened
+  sweep classification and the full bare `npm run check:tail` verdict lines are recorded in the
+  lane receipt (`laneTEUC1-receipt.md`, "THE LANDING SLOT").
+- **Landing judgments (vetoable):** J-UC1L-1 one landing-act commit rather than three; J-UC1L-2 the
+  INDEX status cell flipped READY → LANDED — ⭐ NOT cosmetic: `validate:packets` cross-checks the
+  index's own STATUS column against the manifest (`indexStatuses`, reached through the manifest's
+  `indexPath`), so a manifest-only flip is a RED. A first draft of this note claimed no test read
+  that column; the validator's message corrected it before the commit;
+  J-UC1L-3 the five `requiredSymbols` additions above, and the choice of a marker over a count.

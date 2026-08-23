@@ -22391,9 +22391,9 @@
     },
    {
     "id": "MF-UC1",
-    "status": "READY",
+    "status": "LANDED",
     "packetPath": "docs/implementation/packets/town-cartography/MF-UC1.md",
-    "verifiedBase": "c129593816b13640e5740603ca3e51d68ee711fc",
+    "verifiedBase": "0f3897a56ba57201ca499651f963eb0d11b65761",
     "changeManifest": [
      {
       "_note": "THE SANITATION LADDER + WELLS/CISTERNS (\u00a7311.7 / \u00a7311.8.2(c)), the surface-coupled car. deriveSewerLadder answers which rung a town's drains reach, WHY, WHICH quarters they serve, and what wells its water need licenses. ONE TRUTH WITH THE DOSSIER (\u00a7441.1): FULL WEB exists exactly where the roster carries the sanitation institution, read through MF-UC0's OWN sanitationRosterOf and never a second read; cities and metropolises carry a QUARTER-NETWORK floor; towns are capped below the web; below town the derived ceiling is cesspits - the owner's three sentences as one grammar table. THE TIER READ IS THE HIGH-WATER TIER, not the current one: built extent derives from the historical maximum (highWater.js's constitutional law), so a city that peaked and shrank keeps the drains it built, and \u00a7434's typed shortfall rides out as highWaterUnderstated rather than being absorbed. FIVE LIVE CAUSES with stated weights plus the FOUNDING_CHARTER slot typed at ZERO WEIGHT marked NO_TYPED_HOME (grep founding.kind|foundingKind -> 0 hits; prose-regex refused by name), each row carrying the live accessor it was read through as a receipt. GRADIENT_OUTFALL declares LOWERS and carries the IMPEDIMENT - the owner's own framing, and what makes the closed 2-direction vocabulary live on every world. THE CALAMITY CAUSE READS THAT A CALAMITY HAPPENED, NEVER WHICH KIND: calamity.js:260 is constitutional (the engine never asserts a disaster kind), so the cause is the ledger's COUNT of dated records, reached through buildCalamityLedger and never off the raw pulse-written key (\u00a7443). Per-quarter coverage is keyed to the district 12-enum PINNED BY VALUE (\u00a7441.5(d) - districtProfile pulls factionProfile/causalState/activeConditions/threatProfile behind it), with an ordered-equality drift ratchet in the acceptance. Every ladder and well row carries temperament SURFACE_COUPLED and a geometry-free surfaceJoins[] from jointVocabulary: one grate per DRAINED quarter (caused by the coverage, \u00a7311.2; EMPTY at cesspits, lawful), a stair to the well-house for wells. rosterAnchors[] carries the CANONICAL institution key (\u00a7441.5(k)) for CT-4's F2 sentence. Feeds UC-0's existence gate through its optional second argument - seam D-UC0-3, proven 420/420 - and UC-0's leaf is NOT edited. 209 effective lines against the 250-per-leaf cap; zero existing production files modified. Dormant: no production importer, nothing persisted, the generator golden bytewise unmoved.",
@@ -22460,6 +22460,31 @@
       "_note": "THE CLOSED JOINT VOCABULARY (MF-UC0's data module, charter J-R2-2). Every grate and stair this car emits is validated through isJointKind, so a component may lack a portal but none may carry an invented one - UC-3's law, kept.",
       "path": "src/domain/undercity/jointVocabulary.js",
       "symbol": "export function isJointKind"
+     },
+     {
+      "_note": "THE DELIVERED DERIVER, pinned at the LANDED flip. `deriveSewerLadder(settlement, { highWater? })` is this car's whole public answer — which rung a town's drains reach, WHY, WHICH quarters they serve, and what wells its water need licenses — so its disappearance must be detectable before UC-2, UC-4 or UC-5 compile against it.",
+      "path": "src/domain/undercity/sewerDerivation.js",
+      "symbol": "export function deriveSewerLadder"
+     },
+     {
+      "_note": "THE ROSTER ROW THE §441.1 ONE-TRUTH RULE STANDS ON. FULL WEB exists exactly where the roster carries this catalog institution, read through MF-UC0's OWN `sanitationRosterOf` and never a second read. The NAME is pinned rather than the read, because if the catalog ever drops it the ladder and the existence gate would go on agreeing — on the wrong answer, silently.",
+      "path": "src/data/institutionalCatalog.js",
+      "symbol": "'Sewage system'"
+     },
+     {
+      "_note": "THE WELLS LICENCE. This row is `required: true` in the catalog's CITY block, so city and metropolis carry a water system BY CONSTRUCTION and the tier-scaled well extent is licensed by the LIVE catalog rather than by a table this car invents (§311.8.2(c)).",
+      "path": "src/data/institutionalCatalog.js",
+      "symbol": "'Aqueduct or water system'"
+     },
+     {
+      "_note": "THE ACCEPTANCE SUITE, pinned at the LANDED flip in the MF-T2H shape: ONE literal `describe` over eight straight-line arms. It is also the whole cause of this landing's census move, so its deletion would move the lighting-census tuple and this row names the file that would then owe the re-measure.",
+      "path": "tests/domain/undercitySewerDerivation.test.js",
+      "symbol": "describe('MF-UC1 — the undercity sanitation ladder and its wells'"
+     },
+     {
+      "_note": "THE RUIN-FILTER DISPOSITION THIS CAR IS THE CAUSE OF: the leaf is a new `.institutions` reader in src/domain and it is COMPLIANT rather than exempt — its civic-capacity count routes through `liveInstitutions`, while its other roster read delegates to MF-UC0's already-exempt `sanitationRosterOf`. ⛔ The MARKER is pinned and NEVER the count: a re-recorded FIGURE in requiredSymbols is refused by the estate's own law (ODQ TE-26), and that count moves the moment any sibling lands a reader.",
+      "path": "tests/lint/ruinFilterRoster.walker.test.js",
+      "symbol": "RE-MEASURED 2026-08-23 BY MF-UC1"
      }
     ],
     "acceptanceCases": [
