@@ -51,6 +51,8 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 10:40 CDT 08-23: §486 — UC-1 LANDED (44th) [OPUS-RUN]: CAS → 1b1de759; 166/0 READY.
+# R-INST-5 dispatched (Opus). Seats: UC4-build · R-INST-5. Holding: none.
 # ⭐⭐⭐ 10:10 CDT 08-23: §485 — R-INST-4 DELIVERED (399 KB, 13/13) [OPUS-RUN]; dossiers
 # preserved refs/preserve/research-dossiers-2026-08-23=3b164bde. UC-4 build dispatched (Opus).
 # Seats: UC1-landing (Opus) · UC4-build (Opus).

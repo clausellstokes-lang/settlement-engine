@@ -19814,3 +19814,41 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   flag-minting wave; C-2 persisted-signal shape for the chair's §359.5
   review; four-surface bill + edge-bundle regen). Seats: UC-1 landing (Opus)
   · UC-4 build (Opus).
+
+## §486 — UC-1 LANDED (THE 44TH) `[OPUS-RUN · FABLE-VALIDATION OWED]`: THE SEWER LADDER + WELLS ON THE BRANCH, 166 PACKETS / 0 READY; THE §410 FLIP IS A THREE-PLACE EDIT; `adversarial-verify` IS NOT REGISTERED THIS SESSION; R-INST-5 DISPATCHED INTO THE FREE SEAT (2026-08-23 10:40 CDT)
+
+- **§486.1 LANDED** (TE-UC1-LANDING, the first Opus landing): tip `1b1de759`
+  = 9 over slot `0f3897a5`; carry table at blob level (INDEX + manifest
+  MOVED; three created paths ABSENT both ends; the ruinFilterRoster walker
+  UNMOVED `f990edce`; controls held; §475 0 roster hits, control 3); one
+  rebase stop on exactly the two expected paths, keep-both by text surgery,
+  manifest deep-compare 165 → 166 ADDED=[MF-UC1] DRIFTED=[]; tuple walked
+  `2512/366/2146/20830/5804` + `+1/+0/+1/+8/+1` = **2513/366/2147/20838/5805**
+  (parked never redded — credited), both controls convict; roster 91 proved
+  by the 90 control; MF-UC1 → LANDED, requiredSymbols 9 → 14, verifiedBase
+  = slot; S0 both parts (cmp 0 vs baseproof; reader literals hold); ten-tree
+  sweep 7/7 banked by assertion-block sha, 0 strays; terminal: `valid: 166
+  packets (0 READY)` · `head = 199 (199 files, contiguous)` · 173/173 ·
+  1134/1134 · `11 known failure(s) of 28880 tests, ceiling 11` (+8 = the new
+  acceptance file, attributed by execution) · `STRICT DIST OK 52/438` ·
+  `[gate-tail] exit: 0` · `TRUE_EXIT=0` · 19.6 GB free. **CAS `0f3897a5 →
+  1b1de759`.** Pruned holding-uc1, tree, /tmp/uc1l; gate body archived.
+  Holding roster EMPTY; J-UC1L-1..6 stand in the receipt (vetoable).
+- **§486.2 THREE LAWS FROM THE LANE:** (a) the §410 LANDED flip is a
+  THREE-place edit — manifest `status`, the packet Markdown header, AND the
+  INDEX STATUS column (reached through the manifest's `indexPath`, so a
+  source grep for the INDEX path finds nothing); a manifest-only flip reds
+  the validator twice. (b) `anthropic-skills:adversarial-verify` is NOT
+  registered in this session (`Unknown skill`; the plugin dir lacks it) —
+  every brief names it; from now briefs say "apply deep-work §5's
+  verification core" (memory banked). (c) `while read … path` in zsh
+  destroys `$PATH` (`path` is tied) — a post-commit blob check printed a
+  false HOOK-CHANGED for every file; use another variable name.
+- **§486.3 SEATS.** With nothing holding, the free seat takes research:
+  **TC-R-INST-5 (magical/fantasy institutions) dispatched on Opus**
+  `[OPUS-RUN · FABLE-VALIDATION OWED]` — three-direction method (historical
+  ANALOGUE building · GENRE CONVENTION labelled as such · the ENGINE's own
+  contract), setting-agnostic and magic-as-practice-never-metaphysics (the
+  deity doctrine transposed), magic level reported as a closed licensing
+  dial; ≤45 searches. Seats: UC-4 build (Opus) · R-INST-5 (Opus). UC-4's
+  landing takes the seat when it builds.
