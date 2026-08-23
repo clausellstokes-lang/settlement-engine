@@ -18641,3 +18641,55 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   while WEB-7's gate runs (no box load). Seats: WEB-7 landing · TE-WEB3 ·
   TE-HK-A · TC-R-INST-2 (cap). Holding for landing: T-UC1 = UC-0 a5c6c4fa
   + UC-3 64a4b259 (UC-1 after T2R lands).
+
+## §460 — THE FIRST USAGE-WINDOW CLOSURE, SURVIVED BY THE CARD: FOUR LANES DIED MID-TURN (~22:50 CDT), FOUR RESUMED FROM THEIR RESUME POINTS AT 00:25; LAW — BUILDERS NEVER RUN check:tail; WEB-3's TITLE-CENSUS RAISE AUTHORIZED (2026-08-23 00:30 CDT)
+
+- **What happened:** the owner's 5-hour usage window closed at ~22:50 CDT
+  (reset 00:20). TE-WEB7-LANDING, TE-WEB3, TE-HK-A and TC-R-INST-2 all died
+  mid-turn; the chair's session itself survived (the §388 wakeup job 0383ec45
+  is still armed; no re-arm owed). The §448 mechanisms held: every lane had
+  a RESUME POINT within minutes of death, every worktree was clean or
+  declared-dirty, no detached instrument was running (WEB-3's chair-ordered
+  gate stop had taken effect — the box was idle at pickup, load 2.6, lock
+  free, 13Gi).
+- **Resume points read, NOT extended:** WEB-7 — rebased tip 11539636, proven
+  through the re-stamp, its contended pre-gate sweep finished after death
+  (`SWEEP1_TRUE_EXIT=1`, to classify), terminal never fired · WEB-3 — three
+  commits at 7c97c51c + three declared landing-state artifacts (the 198
+  dormant carry, the rehearsal head, the tuple) to remove · HK-A — ALL THREE
+  fixes committed (b4c9cb7e HK-1 · c2e4a2c9 HK-2 · f2b2711b HK-3 over
+  2b82121f), final proof + report owed · R-INST-2 — 31 KB dossier with the
+  §0 roster done, rounds 1–3 gathered, every family still UNSTARTED in the
+  status map. All four RE-DISPATCHED from those points (WEB-7 Fable; HK-A
+  and WEB-3 Opus; R-INST-2 Fable), the first one the critical path.
+- **§460.1 LAW — BUILDERS NEVER RUN `npm run check:tail`.** WEB-3's build
+  lane ran the full gate in its build tree (6 min in, the shared mutex
+  held) while the landing seat waited — the chair ordered it stopped. The
+  landing terminal is the gate; a builder's proof is the WIDENED mutexed
+  sweep — `tests/lint tests/build tests/docs tests/ops` PLUS `tests/domain`
+  / `tests/edgeFunctions` / `tests/ui` / `tests/data` whenever the member
+  touches a UI prop, an edge function, a domain reader or data (WEB-3's own
+  lesson: three real reds lived outside the four-tree sweep) — plus its
+  batteries, both typecheckers bare, eslint, validate:packets. Carried in
+  every brief from here.
+- **§460.2 WEB-3's STOP RULED — AUTHORIZED:** `TITLE_BASELINE` 485 → 486
+  in `tests/domain/guidanceRegistry.walker.test.js`. The funnel card's
+  heading is a React `Card` prop rendered into an `<h4>`
+  (AdminTrendsCharts.jsx:37), not a native tooltip; acceptance A7's ruled
+  mount cannot be expressed without it; the walker's own comment block
+  records this exact situation and the correct executor behaviour (the
+  IN-1b STOP, authorized at CR-IN1B-8). Applied in the house form — the
+  receipt in the comment block: base acc466a6 = 485, tip = 486,
+  `AdminTrendsPanel.jsx` 15 → 16 and nothing else moved. The lane's other
+  two terminal-only reds were real and are cured in 7c97c51c
+  (`adminActionTwoKeyWalker` — the read-only `get_referral_funnel` action
+  classified ungated with its reason; `edgeSharedBundleReproducibility` —
+  the lane had restored four sibling `*.meta.json` and thereby broke the
+  bundle set's `generatedAt` coherence — convicting its own judgment and
+  cured by regenerating the set); the census-walker TIMEOUT was
+  load-suspect and the quiet resume settles it.
+- **§460.3 The landing order stands** (WEB-7 → the map stack as one → the
+  producers as one → UC-0/UC-3 → WEB-2 → WEB-3 → HK-A), with one note:
+  HK-A's HK-2 is what flips MF-T2H to LANDED and frees the census-walker
+  path for READY packets — until it lands, members enter at LANDED directly
+  (the §410 form, as WEB-5/6/7 did).

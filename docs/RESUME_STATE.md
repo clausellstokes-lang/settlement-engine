@@ -51,6 +51,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 00:30 CDT 08-23: §460 — FIRST WINDOW CLOSURE (~22:50→00:20) survived:
+# 4 lanes died, 4 resumed from RESUME POINTs (WEB7-landing @11539636 → terminal;
+# HK-A f2b2711b final proof; WEB-3 7c97c51c artifacts+title raise AUTHORIZED;
+# R-INST-2 from status map). LAW §460.1: builders never run check:tail.
+# Wakeup 0383ec45 still armed. Seats: WEB7-landing · HK-A · WEB3 · R-INST-2.
 # ⭐⭐ 22:45 CDT 08-22: §459 — UC-3 BUILT 64a4b259 (pinned holding-uc3). TC-R-
 # INST-2 dispatched (trade/crafts). Seats: WEB7-landing · WEB3 · HK-A · R-INST-2.
 # ⭐⭐⭐ 22:40 CDT 08-22: §458 — WEB-6 LANDED (30th): CAS → 2b82121f. WEB-7 GO
