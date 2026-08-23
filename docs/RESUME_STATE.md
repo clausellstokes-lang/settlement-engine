@@ -51,6 +51,8 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 13:54 CDT 08-23: §492 — OWNER "Do it": CH train GO; compile brief READY at
+# $SP/CH-charter-compile-brief.md; dispatch at UC-2's CAS (Opus). Seats: UC2-landing · R-INST-6.
 # ⭐⭐⭐ 13:48 CDT 08-23: §491 — "How do we fix these?": CATALOG-HYGIENE TRAIN CH-1/2/3 (repairs,
 # before DW-0) + the grammar gaps mapped onto DW waves. Vetoable.
 # ⭐⭐⭐ 13:11 CDT 08-23: §490 — UC-4 LANDED (45th) CAS → f1e4d515; UC-2 BUILT holding-uc2

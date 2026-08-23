@@ -20131,3 +20131,28 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   (corrected catalog) → DW waves → ONE trailing OSR mint → parity →
   `/code-review ultra` → endgame. Vetoable by a word; the CH charter is
   compiled when R-INST-6 delivers (one Opus compile lane, skeptic-checked).
+
+## §492 — OWNER: "Do it" — THE §491 PLAN IS GO; THE CH CHARTER COMPILE IS PREPARED AND DISPATCHES AT THE FIRST FREE SEAT, AHEAD OF R-INST-6 (2026-08-23 13:54 CDT)
+
+- **§492.1 GO.** The catalog-hygiene train (CH-1 inference honesty · CH-2
+  the magic license · CH-3 the data slips + HK-6) and the Track-B mapping
+  onto the DW waves are AUTHORIZED as written at §491. Under the cap (§465:
+  two seats, both occupied — UC-2's landing curing a grep-arm-found comment
+  red before its terminal; R-INST-6 at families A–G), the compile cannot
+  start this minute; the chair has WRITTEN the compile brief
+  (`$SP/CH-charter-compile-brief.md`, 10.7 KB: measured homes at file:line
+  or CORRECTED/REFUTED, the regex before/after table run over the WHOLE
+  catalog by script, the per-entry override field, the magic-license field
+  and the three gate rewrites, the G2 rows resolved row by row, every
+  declared same-seed shift MEASURED over a seed sweep with the exact
+  re-record list, the packet stubs with de-duplicated change paths, the
+  grep-driven arm per car, anti-scope, judgments) so the dispatch is one
+  call the moment a seat frees. Re-sequenced: the CH compile does NOT wait
+  for R-INST-6 (its inputs are R-INST-2/3/4/5, all delivered) — it takes
+  UC-2's seat when that landing CASes; a skeptic lane (§441 J7) follows the
+  compile; the chair rules; CH-1 builds. R-INST-6 → DW-0 unchanged.
+- **§492.2 ORDER OF THE NEXT SEATS:** UC-2 landing (in seat) → **CH
+  compile** → CH skeptic → CH-1 build → CH-1 landing ‖ R-INST-6 (in seat) →
+  DW-0 charter compile (§482) → CH-2 → CH-3 → UC-5 → the W-C cars …
+  (single landing seat throughout; DW-0's compile and the CH cars
+  interleave by readiness).
