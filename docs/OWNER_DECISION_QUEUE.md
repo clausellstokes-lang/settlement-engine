@@ -20156,3 +20156,87 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   DW-0 charter compile (§482) → CH-2 → CH-3 → UC-5 → the W-C cars …
   (single landing seat throughout; DW-0's compile and the CH cars
   interleave by readiness).
+
+## §493 — ⭐⭐ DW-R RESEARCH IS COMPLETE: R-INST-6 DELIVERED `[OPUS-RUN · FABLE-VALIDATION OWED]` (344 KB; 28 ENTRIES / 9 FAMILIES; 45-ITEM LEDGER) — ALL SIX TRANCHES + THE ADDENDUM PRESERVED AT 07fbed7b (2.9 MB); THE CH CHARTER COMPILE DISPATCHED INTO THE FREED SEAT (2026-08-23 14:16 CDT)
+
+- **§493.1 DELIVERED.** `draft-R-INST-6-CRIMINAL.md` = 344,382 B, 20
+  sections, assembled only by `RINST6-merge/assemble.sh` over 16 parts; C0 0
+  over 25 authored files; no emoji. Roster audit CLOSES at **28** entries in
+  9 families (3+2+8+2+2+3+5+3), each row in exactly one family — the shelf is
+  28, not the 25 the dispatch said nor the 27 the undercity charter cites
+  (that figure counts `priorityCategory: 'criminal'`, which excludes
+  `Contract killer` — the charter's figure is CORRECTED). Six families FULL,
+  G and H PARTIAL with the owed item named (no measured message-loft of any
+  period; the holding cell measured only through its licit twin), I
+  boundary-only by charter. Tally: 114 CONFIRMED opened, 100 digest, 8
+  CONVENTION, 14 GATED, 40 NO TYPED HOME, 30 HOME; 45 ledger items in seven
+  buckets built by script over 82 markers; 39 WebSearch / 23 WebFetch / 4
+  curl (three PDFs recovered by curl carry the best evidence).
+- **§493.2 THE FIVE FINDINGS (DW-0 inputs):** (1) `NO_BUILDING` must be a
+  first-class, REASONED, PROJECTABLE verdict — on this shelf only **3 of 28**
+  rows get a building of their own and **11 get no cell anywhere**, while the
+  engine resolves every institution to a template and draws a box (asked by
+  7 of 9 families; the sixth tranche to demand it); (2) a building needs a
+  SECOND, SUBORDINATE entrance with different reach — `interiorModel.js`
+  derives one `entranceSide`, so the two-plan front, the receiver's side
+  door and the external cellar stair are all inexpressible; (3)
+  `compound.entrances: 1` as a first-class parti attribute — a TWO-TRANCHE
+  joint recommendation (R-INST-5's five magical precincts + this tranche's
+  rookery court, fondaco, han, bastle, triad lodge); (4) **THE COMPLEMENT
+  LAW** — the illicit building is the COMPLEMENT of the licit one (no
+  pawnbroker means the fence needs premises; no bonded warehouse means the
+  smuggler needs a store; no legal slave market means the trafficking row
+  acquires cells), computable from the roster with no stored byte, and the
+  catalog's own `exclusionConditions` already say so; (5) the UC seam is ONE
+  joint kind at ONE anchor — `stair` at "cellar door", 11 of 28 rows — and
+  `colonization.js`'s `frontFor(seed)` ALREADY implements the UNIVERSAL
+  FRONT returning the canonical institution key, so law 7's per-building
+  query is a lookup and charter section 16 carry-note 1 is SATISFIED.
+  Caveats: UC-5 `connectivity.js` exists at no ref (routes not yet drawable)
+  and the criminal shelf seeds the sheet only 3 times in 28 — a criminal
+  basement is nearly always a LICIT institution's seed.
+- **§493.3 THREE NEW CH ITEMS + TWO CORRECTIONS.** D6-1: `Smuggling network`
+  (village L865) carries `minTier: 'city'` while authored in the village
+  block — a SECOND sighting of R-INST-5's G2 shape on a SECOND shelf, which
+  promotes CH-3's item to a **catalog-wide `minTier`-vs-authoring-block
+  AUDIT** over all 311 entries. R-INST-6-1: `Underground city` (L2383) and
+  `Black market bazaar` (L2375) are subterranean in their own prose but
+  declare no subterranean facet, so they seed the sheet ZERO times
+  (golden-shifting to add). `Kidnapping ring`'s description contradicts its
+  `exclusionConditions`. Corrections: the catalog's `Rookery` is a LOFT OF
+  MESSAGE BIRDS, not a slum (both researched, kept apart — the dispatch
+  brief's assumption was wrong); the `Slave market` rows are R-INST-2's
+  family R, not R-INST-4's; no gallows, counterfeiting or spy row exists
+  anywhere in the catalog.
+- **§493.4 RESEARCH COMPLETE — the corpus for DW-0** (preserved
+  `refs/preserve/research-dossiers-2026-08-23` = **07fbed7b**, 2.9 MB incl.
+  receipts and both charters): R-INST-1 139 KB (civic+defense, 14 families) ·
+  R-INST-2 582 KB (trade/crafts, 124 entries / 20 families) · R-INST-3 370 KB
+  (faith+learning, 16 families) · R-INST-4 399 KB (hospitality etc., 13/13) ·
+  R-INST-5 361 KB (magical, 32 entries / 11 families) · R-INST-6 344 KB
+  (criminal, 28 entries / 9 families) · CIRC addendum 281 KB (17 families + 6
+  dwelling types) · DWR1A 91 KB. **DW-0's reading order, as the last lane
+  left it:** R-INST-6 sec-Sigma.2 (the sixteen engine gaps — the first two
+  block most families in ALL six tranches), then R-INST-5 §488.2 with its
+  §1.4 and §15.2 (the two-tranche entrances-1 recommendation), then R-INST-6
+  sec-Sigma.5 (the UC seam table), then the seven ledgers, which are the P1c
+  work order and do not overlap. **The lane's closing judgment, RATIFIED by
+  the chair:** six tranches from unrelated literatures keep returning one
+  structural answer — MOST CATALOG ENTRIES ARE NOT BUILDINGS; if DW-0 signs
+  bands assuming an institution IS a building, the grammar is wrong for the
+  majority of the roster in every settlement it draws. This is now the FIRST
+  line of DW-0's brief.
+- **§493.5 SEATS.** The freed seat took **TC-CH-COMPILE (Opus)** — the
+  §491/§492 catalog-hygiene charter, brief `$SP/CH-charter-compile-brief.md`
+  (preserved), amended with D6-1's catalog-wide audit, R-INST-6-1, the
+  Kidnapping-ring slip, the R-INST-6 cross-check for CH-2's licence values,
+  and an anti-scope entry naming the two entrance findings as DW work.
+  Seats: UC-2 landing (Opus) · CH compile (Opus). DW-0's charter compile is
+  UNBLOCKED and takes the next free seat (§482).
+- **§493.6 A JUNK COMMIT ON THE LEDGER BRANCH, DECLARED:** `b5c6cb2d1`
+  carries this row's SUBJECT but an EMPTY tree change — an f-string brace in
+  the chair's writer script threw before the file was written while the
+  commit step ran anyway. Not rewritten (the branch is shared; §shared-tree
+  law). This row is the real content, committed on top. LAW for the chair's
+  own scripts: the writer must exit non-zero into the committer — chain the
+  python and the commit with `&&`, never as separate statements in one block.
