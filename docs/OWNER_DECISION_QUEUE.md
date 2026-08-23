@@ -19319,3 +19319,41 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   (resume, Fable, SOLO, the CIRC-addendum spellings as its vocabulary)
   takes the seat; UC-1 builds the moment the UC stack lands. Seats:
   UC-STACK landing · TC-R-INST-3 (cap).
+
+## §474 — THE UC-0 + UC-3 LANDING HELD AT 006c07be ON A REAL MEMBER STOP (UC-0'S A6: A TEXT-TOKEN CENSUS PINNED TO ITS OWN LEAF — THE FORECLOSES-LATER-CARS CLASS); RULED: CURE IN-TRAIN, THEN FIRE (2026-08-23 06:35 CDT)
+
+- **Proven before the STOP:** carry-proof (cohesionWeave.js and the
+  ruinFilter walker UNMOVED at the slot, applied clean, +7 ≤ 15; the
+  census walker in neither diff — written once at the landing act); the
+  jointVocabulary single copy by construction (git dropped the identical
+  add/add; blob `44803aa7` on every side; UC-3's CREATE row removed at the
+  re-stamp — J-UCST-1 ratified); tuple `2510/365/2145/20817/5802` with
+  both controls; S0 pre-existing by lookup; `valid: 163 packets (1 READY)`
+  with the §410 refusal executed; the golden unmoved; the widened sweep
+  7/8 banked with received lists quoted (clampPrimitive at the base's
+  thirteen; ruinFilter 90, entropyRoot 34, the lighting walker, any-cast,
+  seedLoopTotality all GREEN).
+- **The STOP:** `tests/domain/undercityStrataExistence.test.js:254` (UC-0's
+  A6) — received-list diff `+ src/domain/undercity/staticComponents.js`.
+  The arm censuses every src file whose TEXT contains `domain/undercity/`
+  and pins the set `toEqual` its own leaf; UC-3's leaf carries the same
+  charter-closure prose line. The arm's INTENT (nothing outside the
+  directory reaches the leaves) is unbroken; the PIN contradicts UC-0's own
+  "binds forward: UC-3 imports jointVocabulary.js" and would red again at
+  UC-1, UC-2, UC-4, UC-5. Neither build lane could see it (UC-3's tree
+  never held UC-0's acceptance file). A specimen of the self-referential
+  `list == list` vacuity family in its forward-foreclosing form — banked
+  by the lane (`prose-token-importer-pin-forecloses-later-train-cars`).
+- **RULED: CURE IN-TRAIN (option 1).** A6 becomes a POSITIVE control
+  (`toContain` the leaf) + the intent arm (files mentioning the token that
+  are NOT under `src/domain/undercity/` → `[]`), the planted-outside-importer
+  conviction kept; a `fix(MF-UC0)` follow-on with hooks ON; hash row
+  re-stamped; no census motion; the sweep re-shown; then the terminal at
+  the new tip. J-UCST-2 (terminal held — any cure moves the tip; firing
+  unchanged would red test:ratchet on a title absent from the baseline)
+  and J-UCST-3 (cure rehearsed then reverted) RATIFIED as the landing
+  discipline at its best.
+- **Law for every train car's acceptance from here:** a census-class arm
+  over a shared namespace (a directory token, a family prefix, a roster
+  name) pins the INTENT with a positive control and an exclusion set,
+  never `toEqual` a list that the next car of the same train must grow.

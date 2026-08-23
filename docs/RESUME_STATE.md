@@ -51,6 +51,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⚠ 06:35 CDT 08-23: §474 — UC stack HELD at 006c07be: UC-0's A6 pins a text-
+# token census toEqual its own leaf (UC-3 trips it). RULED cure-in-train
+# (positive control + outsiders=[]) → follow-on → terminal.
 # ⭐ 06:20 CDT 08-23: §473 — website-2 charter RULED-AS-AMENDED (W-C WEB-8→9a→9b
 # →10; W-D WEB-11). R-INST-3 resumed solo in seat 2 (UC-1 waits for UC-0 to
 # land). Seats: UCSTACK-landing · R-INST-3.
