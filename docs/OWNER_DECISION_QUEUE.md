@@ -17568,3 +17568,24 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   seal before landing, activation last behind an exhibit — truth first,
   charm last. ARCHITECTED-NOT-BUILT discipline and the post-endgame
   sequencing unchanged.
+
+## §437 — OWNER ORDER: THE DWELLINGS WORK INTEGRATED INTO THE SEQUENCE — RESEARCH RUNS NOW, SANDBOX IN THE ENDGAME'S QUIET WINDOWS, REPO-BYTE WORK STAYS POST-ENDGAME; THE CARRY-NOTES PLANTED; TC-DWR1A DISPATCHED (2026-08-24 ~00:50)
+
+- **The integration law:** DW's ZERO-REPO-BYTE phases slot early — P1a-P1d
+  research/corpus/instruments/benchmark-pre-registration run IN PARALLEL
+  with the current arc as seats allow (the atlas-research precedent: the
+  map corpus was read while builds ran); DW-0's band-signing batches into
+  an owner sitting once taste-samples exist; the P2 sandbox (own worktree,
+  zero repo bytes) runs in the endgame's quiet windows contending with
+  nothing. P3-P8 stay STRICTLY post-endgame. The design doc's sequencing
+  amended; **§16 carry-notes PLANTED into the current arc** so nothing
+  built now precludes DW: the undercity graph stays per-building
+  addressable (a stated future consumer in its packet); the D5 strata wave
+  designs stable part-naming (the parti↔massing seam); the tuning pass's
+  leg architecture is leg-extensible.
+- **TC-DWR1A DISPATCHED on the free seat** — the P1a construction-history
+  research dossier (how dwellings, houses, and institutions were physically
+  built: the bay system, hearths, load paths, stairs, party-wall law,
+  burgage tax morphology, guild practice), read-only, scratchpad-only,
+  owner taste-gated before any grammar work. The remaining-arc tables now
+  carry DW-research as a parallel lane, not a post-launch footnote.

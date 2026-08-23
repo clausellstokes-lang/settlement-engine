@@ -4,11 +4,18 @@
 is the owner–chair design conversation of that sitting (the ledger row cites it).
 Per the estate's architected-design discipline (the §287.16 precedent): this
 document is design with NO implementation and may not be reported as built.
-**SEQUENCE: the first post-endgame program.** Hard prerequisites, in order:
-D3b (the fabric maps LIVE), the undercity train LANDED (the one underground
-graph exists), the producer train LANDED (founding years/high-water/locations
-recorded). Nothing here may be built, chartered into cars, or golden-touched
-before those land and the endgame (soak → tuning → cull → push) completes.
+**SEQUENCE (integrated per ODQ §437): the ZERO-REPO-BYTE phases run early;
+the repo-byte phases stay post-endgame.** Specifically: P1a-P1d (research,
+corpus, instruments, benchmark pre-registration) are read-only and run IN
+PARALLEL with the current arc as seats allow — the atlas-research precedent;
+DW-0's band-signing rides an owner sitting once taste-samples exist (batched
+with other owner sittings); the P2 SANDBOX (own worktree, zero repo bytes)
+runs in the endgame's quiet windows and never contends with a landing gate
+or the soak. P3-P8 (the spec volume, preamble, compile, dark port,
+activation, tuning leg, style) remain STRICTLY POST-ENDGAME: no repo byte,
+no car, no golden motion before D3b is live, the undercity and producer
+trains are landed, and the endgame completes. Coordination carry-notes are
+planted NOW (§16) so nothing built in the current arc precludes DW.
 
 ---
 
@@ -257,3 +264,21 @@ the LANDING, and ACTIVATION came last behind an exhibit — truth first, charm
 last. The DW program inherits that spine unchanged, and adds P1a because a
 floor plan's honesty lives one level deeper than a town plan's: in HOW the
 building could actually have been built.
+
+---
+
+## §16 · INTEGRATION CARRY-NOTES (planted into the current arc, ODQ §437)
+
+1. **The undercity train** (draft-UNDERCITY-PLAN.md): the connectivity
+   graph's record shape gains a stated FUTURE CONSUMER — DW law 7 projects
+   the graph into floor plans; the graph's rows must remain per-building
+   addressable (anchor → building id) so the projection needs no re-shape.
+2. **The D3A/fabric plan**: law 9's exterior-consequences seam (a parti as a
+   named massing part) is carried beside the tierGrammar note — the D5
+   strata wave designs part-naming so DW can later bind interiors to named
+   parts without a massing re-shape.
+3. **The endgame tuning design**: the tuning pass's leg architecture (the
+   §341 map leg) is built leg-EXTENSIBLE, so the DW interiors leg (P7)
+   attaches later without re-architecture.
+4. **The research lanes** (TC-DWR*) write ONLY to the scratchpad/ledger-doc
+   surfaces; their dossiers are owner taste-gated before any grammar work.

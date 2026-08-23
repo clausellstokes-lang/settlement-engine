@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~00:50: DW INTEGRATED (§437, owner order) — research NOW (TC-DWR1A
+# dispatched: construction-history dossier), sandbox in endgame quiet
+# windows, repo-byte work post-endgame; carry-notes planted (undercity
+# graph addressability, D5 part-naming, tuning leg-extensibility).
 # ⭐ ~00:20: DW BUILD PATH TRANSPOSED (§436, owner order) — the map
 # method copied phase-by-phase into the doc's §15 (charter→research→
 # sandbox→spec→preamble→dark port→activation→tuning leg→style last);
