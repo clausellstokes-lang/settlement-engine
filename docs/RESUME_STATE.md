@@ -51,6 +51,8 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 15:12 CDT 08-23: §501 — CH charter compiled (86.5 KB): FOUR mis-inferences (a priest drawing
+# the tavern in 70/420), the research cure wrong twice, CH-1 zero-shift + dispatchable. Skeptic in the seat.
 # ⭐⭐⭐ 15:09 CDT 08-23: §499 MASTER PRE-REVIEW SEQUENCE set (A compiles+band sitting · B CH/UC-5/MP-1 ·
 # C money · D housekeeping · E DW incl. ESTATE wave · F content · G mint+parity · H review) + DW-0 extended to a
 # code architecture doc. §500: the reverse motions (split/swap/dissolution) + the ownership-boundedness soak arm.

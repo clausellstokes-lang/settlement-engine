@@ -10,7 +10,7 @@ this one.**
 
 ## ⛔⛔⛔ PICKUP CARD — REWRITTEN AT EVERY LEDGER COMMIT (owner directive §448: the chair's 5-hour usage window closes often; a successor or the same chair picks up HERE in 60 seconds)
 
-**AS OF 2026-08-23 15:09 CDT · ledger §500 · ⭐⭐ DW-R RESEARCH COMPLETE · ⛔ EVERY DISPATCH `model: "opus"` (§484) · build `claude/composite-r4` = `00e7af61` (46 landings; 0 READY across 168 packets; `undercityHighWaterEnabled` on the branch DARK; migrations 197/198/199 on the branch) · LANE CAP = TWO (§465)**
+**AS OF 2026-08-23 15:12 CDT · ledger §501 · ⭐⭐ DW-R RESEARCH COMPLETE · ⛔ EVERY DISPATCH `model: "opus"` (§484) · build `claude/composite-r4` = `00e7af61` (46 landings; 0 READY across 168 packets; `undercityHighWaterEnabled` on the branch DARK; migrations 197/198/199 on the branch) · LANE CAP = TWO (§465)**
 
 FIRST ACTS ON PICKUP, IN ORDER:
 1. `git -C /Users/cstokes/Desktop/settlement-engine log -1 --oneline review-fixes-2026-07-08 claude/composite-r4` — if either moved past this card, the ODQ tail is newer than this card; read it.
@@ -21,7 +21,7 @@ FIRST ACTS ON PICKUP, IN ORDER:
 
 | seat | lane | worktree (6298872d scratchpad) | receipt | state at card time | on pickup |
 |---|---|---|---|---|---|
-| COMPILE | TC-CH-COMPILE (**Opus**, solo) `[OPUS-RUN · FABLE-VALIDATION OWED]` | laneTCCH-tree (read-only runs; commits NOTHING) | laneTCCH-receipt.md · draft-CATALOG-HYGIENE-PLAN.md | compiling the CH charter (CH-1 inference honesty · CH-2 magicLicense · CH-3 the catalog-wide minTier audit + slips + HK-6) from the brief `$SP/CH-charter-compile-brief.md` | on completion: skeptic lane (§441 J7) then the chair rules, then CH-1 build; the next free seat takes DW-0's charter compile |
+| SKEPTIC | TC-CH-SKEPTIC (**Opus**, solo) `[OPUS-RUN · FABLE-VALIDATION OWED]` | laneTCSKEP-tree (probes only; reverts cmp-clean) | laneTCSKEP-receipt.md · draft-CH-SKEPTIC-REPORT.md | attacking the CH charter on eight fronts + evidencing the chair's two rulings (the 10-row minTier divergence; an rng-PRESERVING religiousCenter cure) | on completion: the chair rules the charter, then CH-1 dispatches (it blocks on nothing else) |
 | COMPILE | TC-DW0 (**Opus**, solo) `[OPUS-RUN · FABLE-VALIDATION OWED]` | laneTCDW0-tree (read-only probes; commits NOTHING) | laneTCDW0-receipt.md · DW0-merge/ · draft-DWELLINGS-CHARTER.md | compiling THE DWELLINGS CHARTER (vocabularies, contracts incl. hostedIn/NO_BUILDING/occupies, the pipeline, the waves, **the ESTATE wave per §496.4**, DW-S, and §7 THE OWNER'S BANDS) | on completion: skeptic lane (§441 J7), chair rules, then THE OWNER SITS THE BANDS (§11) before DW-1 builds |
 
 COMPLETE AND PINNED (holding for landing slots): **NONE** — the build shop is empty of cars for the first time since §442. Next builds: CH-1 (after its charter is ruled) · UC-5 · MP-1 (§495).

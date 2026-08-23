@@ -20713,3 +20713,82 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   strength, per culture. Determinism arm added beside the accretion arm: the
   same seed replayed to the same year reproduces the same holdings, and no
   reverse motion may rewrite an earlier year's record.
+
+## §501 — THE CATALOG-HYGIENE CHARTER COMPILED `[OPUS-RUN]` (86.5 KB): THE MIS-INFERENCE SET IS **FOUR, NOT THREE** — A PARISH PRIEST HAS BEEN DRAWING THE TAVERN INTERIOR IN 70 OF 420 SETTLEMENTS; THE RESEARCH'S PRESCRIBED CURE IS WRONG TWICE; CH-1 IS ZERO-SHIFT AND DISPATCHABLE; THE SKEPTIC PANEL IS IN THE SEAT WITH TWO RULINGS TO EVIDENCE (2026-08-23 15:12 CDT)
+
+- **§501.1 DELIVERED.** `draft-CATALOG-HYGIENE-PLAN.md` = 86,536 B / 1,164
+  lines, C0 0; receipt 12,236 B; nothing committed, the private worktree
+  reverted with three cmp-clean restores. Base `f1e4d515`; the branch advanced
+  to `00e7af61` mid-lane and the lane CHECKED rather than assumed — `git diff`
+  over all ten CH-touched files across that range is EMPTY, so every measured
+  home holds at the new tip (the two moved figures restated: tuple
+  `2515/366/2149/20854/5807`, 168 packets, **zero non-terminal**).
+  **Measured-home tally over 40 rows: 24 CONFIRMED · 9 CORRECTED · 3 REFUTED ·
+  4 NEW** — the §441 J7 skeptic law earning its keep inside a compile.
+- **§501.2 THE FIND OF THE LANE.** The mis-inference set is **FOUR**: `Priest
+  (resident)` (village, Religious shelf) infers `vice` because "resi**den**t"
+  contains `den` — **a parish priest drawing the TAVERN interior in 70 of 420
+  settlements.** No research tranche found it; it fell out of running the
+  table over the whole catalog rather than over the names a dossier happened
+  to name. It is also the sharpest possible argument for CH-1.
+- **§501.3 THE RESEARCH'S PRESCRIBED CURE IS WRONG TWICE.** R-INST-5's G1 said
+  "anchor the regexes": (a) `/fort/` matches "fortune" AT a word boundary, so
+  anchoring CANNOT cure `Charlatan fortune tellers`; (b) a naive leading-`\b`
+  REGRESSES `Blacksmith` and `Sawmill`, whose correct `craft` verdicts ride a
+  mid-word match. The lane designed a PER-KEYWORD table instead and measured
+  it: **exactly 4 of 933 cells move, all four the defects, zero collateral.**
+- **§501.4 TWO CLASSES ARE BIGGER THAN §491 SAID.** The `minTier`-versus-block
+  divergence is **TEN rows, not five** (five no tranche saw: `Planar traders`
+  + four Entertainment rows), and the shelf-as-gate paths are **FIVE, not
+  three** — the fifth, `generationContext.js:132 nativeInstitutionRequiresMagic`,
+  strikes 26 rows by unanchored substring BEFORE any probability and is what
+  actually decides a dead-magic world (it also discharges the estate's own
+  `DESIGN_REALM_MAGIC_TOGGLE.md:514-519` "Chair to schedule"). **G6 is REFUTED
+  by execution** (`Dragon resident`: 0 instances in 840 dead-magic
+  settlements) and G5 half-refuted; the one real generation-versus-UI
+  divergence is **G4's** Adventurers' charter hall (16 instances at
+  `magicExists:false`, invisible in the grid). CH-2 needs five production
+  files and CH-3 four against the ≤3 ceiling, so the three-car spine becomes a
+  **six-car train** by proposed splits.
+- **§501.5 THE DECLARED SHIFTS, ALL EXECUTED OVER ONE 420-SETTLEMENT CORPUS
+  with a control reproducing the base digest:** CH-1 anchoring **0 rosters
+  changed, corpus digest BYTE-IDENTICAL** (111 interior kinds; `hasVice` flips
+  in 70 villages but DARK) — with `tests/property/generatorGoldenMaster.test.js`
+  green at the patch (1 file / 3 tests / TRUE_EXIT=0) and a focused battery
+  7 files / 110 tests / TRUE_EXIT=0; CH-2's model 361 of 2,100 magic cases;
+  CH-3's `religiousCenter` **81 of 420 AND ~130 NAMES re-rolled** (the fix
+  returns before an rng draw at `assembleInstitutions.js:323`, re-sequencing
+  everything downstream); the `minTier` data fixes 97 / 108 of 420 (both
+  REFUSED by the lane); the recommended reader fix, R-INST-6-1's facets and the
+  prose run **0 each**.
+- **§501.6 TWO SELF-CAUGHT DEFECTS, CURED BEFORE HAND-OFF** (the honesty the
+  program runs on): the lane mis-named the golden master, found the real one
+  and ran it; and it asserted "no engine reader enforces the tanner prose",
+  checked, found the claim STANDS but the overstatement has **five spellings**
+  rather than the one R-INST-2 faulted — which widened CH-3 and forced its
+  split.
+- **§501.7 THE CHAIR'S TWO RULINGS, AND WHY THE SKEPTIC GOES FIRST.**
+  **J-CH-3-1:** the lane recommends closing the `minTier` divergence at the
+  READER (0 shift), which CONTRADICTS §491's "the authoring block is the
+  structural truth" (a data fix costing 97–108 of 420). I will not rule it on
+  philosophy: the skeptic is gathering the evidence that decides it — each
+  row's `desc` prose read for metropolis-versus-city intent, the authoring
+  clustering that a copy-paste slip leaves as fingerprints, and both readers
+  measured so the chair can see which surface lies today. **The
+  `religiousCenter` 81-settlement, 130-name shift:** the skeptic is probing a
+  cure the compile did not try — **make the fix rng-PRESERVING** (consume and
+  discard the same draw) so the corrected behaviour lands with the downstream
+  sequence untouched and the NAME shift falls to zero; if it works the ruling
+  becomes easy, and if it cannot work the skeptic must say why at the
+  mechanism level.
+- **§501.8 SEATS AND STATE.** **TC-CH-SKEPTIC dispatched (Opus)** into the
+  freed seat with the eight-front attack list — the CH-1 zero-shift claim
+  attacked three ways INCLUDING a non-vacuity control (break a regex, prove
+  the digest MOVES), the fourth mis-inference verified, the refutations-by-
+  absence re-probed for vacuity, the car splits checked against the live
+  manifest's change-path reservations, and every unexecuted claim in the
+  charter listed and cheaply tested. **CH-1 blocks on nothing else** — it is
+  fully measured, green at the patch, and dispatchable the moment the charter
+  is ratified. Nine open questions block CH-3 and re-shape CH-2. Seats: DW-0
+  charter+architecture compile (Opus) · CH skeptic (Opus). Memory FOLD 12
+  taken (16,061 → 15,487 B).
