@@ -188,31 +188,35 @@ describe('MF-UC1 — the undercity sanitation ladder and its wells', () => {
   });
 
   it('the HONEST FOUNDING arm (§441.2): the NO_TYPED_HOME slot sits at zero weight and perturbing its input moves NOTHING, while each of the five live causes moves the rung monotone in its declared direction', () => {
-    // The slot is typed, named, and weightless.
+    // ⭐ THE BEHAVIOURAL CLAIM FIRST, so it stands on its own rather than behind a constant pin:
+    // perturbing the slot's input moves NOTHING, in every spelling §311.7.2 might have meant, on
+    // every roster-free settlement in the corpus. A slot that had quietly acquired a live read
+    // would part here even if its weight row still read zero.
+    const free = CORPUS.map(withoutSanitation);
+    const planned = free.map((s) => ({ ...s, founding: { kind: 'planned', reason: 'a chartered new town, laid out to a plan' } }));
+    const military = free.map((s) => ({ ...s, founding: { kind: 'military', reason: 'a garrison thrown up at the ford' } }));
+    expect(planned.map((s) => deriveSewerLadder(s).rung)).toEqual(free.map((s) => deriveSewerLadder(s).rung));
+    expect(military.map((s) => deriveSewerLadder(s))).toEqual(free.map((s) => deriveSewerLadder(s)));
+    // anchored: the two ladder sets above are proven deep-equal to the unperturbed ones, so the
+    // leaf demonstrably reads no founding field; the scan pins that it also NAMES none — the prose
+    // `founding.reason` regex this charter refuses by name.
+    expect(leafCode).not.toMatch(/founding\.|foundedBy|arrivalDetail|\breason\b/);
+
+    // Then the typed slot itself: named, weightless, and the only weightless one.
     expect(SEWER_CAUSES).toContain(NO_TYPED_HOME_CAUSE);
     expect(SEWER_DERIVATION_TUNING.weights[NO_TYPED_HOME_CAUSE]).toBe(0);
+    expect(sewerCauses(free[0], { population: 0 }).find((c) => c.cause === NO_TYPED_HOME_CAUSE).home).toBe('NO_TYPED_HOME');
     const live = SEWER_CAUSES.filter((c) => c !== NO_TYPED_HOME_CAUSE);
     expect(live.length).toBe(5);
     expect(live.every((c) => SEWER_DERIVATION_TUNING.weights[c] > 0)).toBe(true);
     expect(CAUSE_DIRECTIONS).toEqual(['RAISES', 'LOWERS']);
     expect(new Set(live.map((c) => CAUSE_DIRECTION[c]))).toEqual(new Set(['RAISES', 'LOWERS']));
 
-    // PERTURBING THE SLOT'S INPUT MOVES NOTHING — every spelling §311.7.2 might have meant.
-    const base = withoutSanitation(world('city', 'riverside', 'uc1-founding'));
-    const planned = { ...base, founding: { kind: 'planned', reason: 'a chartered new town, laid out to a plan' } };
-    const military = { ...base, founding: { kind: 'military', reason: 'a garrison thrown up at the ford' } };
-    expect(deriveSewerLadder(planned)).toEqual(deriveSewerLadder(base));
-    expect(deriveSewerLadder(military)).toEqual(deriveSewerLadder(base));
-    // anchored: the two ladders above are proven deep-equal to the base, so the leaf demonstrably
-    // reads no founding field; the scan pins that it also names none (prose-regex refused by name).
-    expect(leafCode).not.toMatch(/founding\.|foundedBy|arrivalDetail|\breason\b/);
-
     // EACH LIVE CAUSE MOVES THE RUNG MONOTONE IN ITS DECLARED DIRECTION — measured over the WHOLE
     // roster-free corpus, one input at a time, because a rung is a three-bucket quantization and a
     // single settlement can absorb a real cause without crossing a boundary. Two claims per cause:
     // it NEVER moves the rung the wrong way, and it moves it the RIGHT way SOMEWHERE (a weight that
     // never moves anything would be decorative — the sweep's liveness measurement, pinned).
-    const free = CORPUS.map(withoutSanitation);
     const raise = [
       ['PROSPERITY_BAND', (s) => ({ ...s, economicState: { ...s.economicState, prosperity: 'Destitute' } }), (s) => ({ ...s, economicState: { ...s.economicState, prosperity: 'Wealthy' } })],
       ['CIVIC_CAPACITY', (s) => ({ ...s, institutions: s.institutions.filter((i) => facetOf(i, 'institutionNature') !== 'civic') }), (s) => ({ ...s, institutions: [...s.institutions, { name: 'Town hall' }, { name: 'High court' }, { name: 'Grand assembly' }, { name: 'Elders council' }] })],
@@ -285,6 +289,22 @@ describe('MF-UC1 — the undercity sanitation ladder and its wells', () => {
     const floorRungs = [...Array(6).keys()].map((n) => deriveSewerLadder({ ...thorp, id: `s_floor_${n}` }).rung);
     expect(new Set(floorRungs)).toEqual(new Set(['cesspits']));
     expect(deriveSewerLadder(thorp).score).toBeLessThanOrEqual(SEWER_DERIVATION_TUNING.absentFloor);
+
+    // THE OWNER'S THIRD SENTENCE, "below that none": no roster-free settlement under town reaches a
+    // sewer, and the cap is STRUCTURAL, not lucky — a village with every raising cause at its
+    // maximum still gets cesspits, because its derived ceiling is the bottom rung.
+    const small = CORPUS.filter((s) => ['thorp', 'hamlet', 'village'].includes(s.tier)).map(withoutSanitation);
+    expect(small.length).toBe(21);
+    expect([...new Set(small.map((s) => deriveSewerLadder(s).rung))]).toEqual(['cesspits']);
+    const maxedVillage = {
+      ...withoutSanitation(world('village', 'hills', 'uc1-ceiling')),
+      economicState: { prosperity: 'Wealthy' },
+      config: { terrainType: 'hills', tradeRouteAccess: 'river' },
+      calamityHistory: stamps(9, 'x'),
+      institutions: [{ name: 'Village hall' }, { name: 'Moot court' }, { name: 'Free assembly' }, { name: 'Elders council' }],
+    };
+    expect(deriveSewerLadder(maxedVillage).score).toBeGreaterThan(SEWER_DERIVATION_TUNING.absentFloor);
+    expect(deriveSewerLadder(maxedVillage).rung).toBe('cesspits');
 
     // THE CERTAIN THRESHOLD: drive every raising cause to its maximum and the ceiling is reached
     // without a draw — every identity agrees.
