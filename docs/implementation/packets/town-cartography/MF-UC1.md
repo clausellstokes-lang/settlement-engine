@@ -140,9 +140,20 @@
 >     files: 2511, parked: 365, credited: 2146, titles: 20825, suiteTitles: 5803,
 > ```
 >
-> ⚠ **REBASE LAW (§457/§469):** the tuple above is a BUILD-BASE reading. If the branch moves under
-> this member, the chair re-derives at the landing slot and carries only the DELTA
-> `+1/+0/+1/+8/+1` — never this tuple. The same applies to the `ruinFilterRoster` figure below
+> ⚠⚠ **REBASE LAW (§457/§469) — AND IT ALREADY BIT, MEASURED BEFORE THIS LANE CLOSED.** The tuple
+> above is a BUILD-BASE reading. `claude/composite-r4` moved out from under this member while it
+> built: WEB-2 then WEB-3 landed, and at `64da7d5d163053bda3aef8ffa7358f5cf112cd26` the census
+> literal reads **`files: 2512, parked: 366, credited: 2146, titles: 20826, suiteTitles: 5803`**
+> (`:5859`) against this member's base reading of `2510 / 365 / 2145 / 20817 / 5802` (`:5782`).
+> ⛔ Note `parked` moved to **366** — carrying this member's tuple across that landing would
+> SILENTLY REVERT a landed park while every proof in this packet stayed green, which is exactly
+> the failure the law names. **Carry only the DELTA `+1/+0/+1/+8/+1` and re-derive the whole tuple
+> by execution at the landing slot.** The landing was characterized: it collides with this member
+> on NO code path — the only overlap is the two standing meta files (`INDEX.md`,
+> `PACKET_MANIFEST.json`), governed by the standing rebase laws — and it added no `src/domain`
+> file, so the `ruinFilterRoster` figure below still reads 90 → 91 at that tip (`git diff
+> --name-only c1295938 64da7d5d -- tests/lint/ruinFilterRoster.walker.test.js` is empty). That
+> figure is nevertheless a COUNT: re-read it from the arm's own failure message at the slot. The same applies to the `ruinFilterRoster` figure below
 > (90 → 91): it is a COUNT of `.institutions` readers in `src/domain`, and any sibling that lands
 > a new reader first moves it.
 
