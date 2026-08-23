@@ -250,8 +250,10 @@ describe('MF-UC0 — the underground existence gate, the substructure facet, and
     expect(importsOf(sources[0]).concat(importsOf(sources[1])).filter((p) => p.includes('townMap'))).toEqual([]);
     const importers = walk(join(ROOT, 'src')).filter((p) => readFileSync(p, 'utf8').includes('domain/undercity/'))
       .map((p) => relative(ROOT, p).replace(/\\/g, '/')).sort();
-    // anchored: the leaf's own header prose names `src/domain/undercity/**`, so the scanner is proven to see the token before the production set is asserted empty
-    expect(importers).toEqual(['src/domain/undercity/strataExistence.js']);
+    // anchored: the leaf's own header prose names `src/domain/undercity/**`, so the scanner is proven to see the token before the production set OUTSIDE the directory is asserted empty
+    expect(importers).toContain('src/domain/undercity/strataExistence.js');
+    // Later undercity cars (UC-3's staticComponents.js first) lawfully join the directory and carry the same closure prose; the closure is that NOTHING OUTSIDE src/domain/undercity/ reaches the leaves (ODQ §474).
+    expect(importers.filter((p) => !p.startsWith('src/domain/undercity/'))).toEqual([]);
   });
 
   it('A7 · G-43 arm: remove the last qualifying institution → exists flips false; restore it → true (directional, pre-declared)', () => {
