@@ -20084,3 +20084,50 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   discrepancy bucket, and a RESEARCH-COMPLETE statement for DW-0. When it
   delivers, research is COMPLETE and DW-0 starts in the second seat (§482).
   Seats: UC-2 landing (Opus) · R-INST-6 (Opus).
+
+## §491 — THE OWNER ASKED "HOW DO WE FIX THESE?": THE RESEARCH-EXPOSED DEFECTS SPLIT INTO A CATALOG-HYGIENE TRAIN (REPAIRS, LAND BEFORE DW-0) AND THE DW PROGRAM ITSELF (CAPABILITY, ALREADY ORDERED) — CHARTERED, VETOABLE (2026-08-23 13:48 CDT)
+
+- **§491.1 TRACK A — THE CATALOG-HYGIENE TRAIN (CH), repair-class under
+  §464, chair-chartered, each car declaring its same-seed shift and
+  re-recording goldens BY NAME (non-negotiable 10):**
+  **CH-1** `FACET_INFERENCE` word-boundary anchoring (`cohesionWeave.js`) +
+  an explicit per-entry `interiorKind` override so a NAME is never the only
+  evidence + a walker asserting no catalog name matches more than one rule
+  (the estate anchored the sibling detector for exactly this reason and
+  never carried it across — R-INST-5 G1; R-INST-4's every-inn-→-generic).
+  **CH-2** a declared per-entry `magicLicense: NONE|LOW|MEDIUM|HIGH` over the
+  32 Magic/Exotic rows (the four tokens `getMagicLevel` already emits); the
+  THREE shelf-as-gate code paths read the license, never the shelf (G3/G4/
+  G5/G6); the leaked goods vocabulary leaves the institution gate (G7); a
+  walker that every Magic/Exotic row declares a license. **CH-3** data
+  slips: the five `minTier: 'metropolis'` rows authored in the CITY block
+  (G2 — the tier block is the structural truth; resolve row by row);
+  `religiousCenter` exclusivity at city tier (R-INST-3); L1670
+  `priorityCategory: 'military'` on a civic row and L1112 "MUST be
+  downstream" (R-INST-2); + HK-6's three "Eberron" strings folded in (the
+  variants are golden-pinned — re-recorded deliberately). Each car: ≤3
+  production files, a mutexed sweep + the §489.3 grep-driven arm, the
+  declared shift in the packet and the commit. Order: after UC-2 lands and
+  R-INST-6 delivers, in the second seat interleaved with UC-5 / W-C
+  landings; ALL THREE LAND BEFORE DW-0 so the dwellings compile reads a
+  corrected catalog. Packets under a new `catalog-hygiene` family (MF is
+  the wrong family — these are catalog/inference repairs).
+- **§491.2 TRACK B — THE GRAMMAR GAPS ARE THE DW PROGRAM (§9 waves,
+  already ordered §456/§482), mapped:** `hostedIn` + `NO_BUILDING` → DW-1
+  vocabularies (dark) + DW-2 placement · vertical partis
+  (`STACKED_HALL_OVER_ARCADE`, N-identical-floor warehouse), the `VERTICAL`
+  / `EXTERIOR_WALK` classes, the `SCREEN` primitive → DW-1 + DW-2 · the
+  circulation classes with era/institution licences and width buckets
+  (§452) → DW-2 · storage cells with adjacency PROHIBITIONS (§453) → DW-1
+  contract + DW-5 validator · dated `reclassedTo[]` with causes + the
+  OCCUPATION relation (R-INST-5 finding 1; no institution ever generates a
+  landscape fossil) → DW-3 + DW-5 continuity · precinct inversion
+  (`compound.entrances: 1`; court/causeway as frontage) → DW-2 frontage
+  reader · a `parti` field on faith/learning kinds + the ENDOWMENT/LICENCE
+  event stream → DW-1 + DW-7 · the ring primitive's numbers (Fortune/Rose)
+  and the three OPEN widths → DW-R corpus (ledgered until a primary turns
+  up). Owner act owed: the band-signing sitting at DW-0 (§11).
+- **§491.3 THE SEQUENCE:** UC-2 lands → R-INST-6 delivers → CH-1/2/3 → DW-0
+  (corrected catalog) → DW waves → ONE trailing OSR mint → parity →
+  `/code-review ultra` → endgame. Vetoable by a word; the CH charter is
+  compiled when R-INST-6 delivers (one Opus compile lane, skeptic-checked).
