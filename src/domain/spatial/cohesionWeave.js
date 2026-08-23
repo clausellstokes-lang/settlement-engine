@@ -255,23 +255,46 @@ export function structuralLens({ economicBase, governingArchetype, rulingPower }
  * Declaration always wins; these fire ONLY as the fallback for an entity that carries no
  * declared facet. @type {Readonly<Record<string, ReadonlyArray<{ value: string, rx: RegExp }>>>}
  */
+/**
+ * WORD-ANCHORING, PER KEYWORD AND EVIDENCE-DRIVEN (CH-1, ODQ §503.3). A bare substring lets a
+ * NAME assert a nature it never claimed: "resi(den)t", "War(den)'s", "Dragon resi(den)t" each
+ * read as `vice`, so a village parish priest drew the TAVERN interior. The cure is an anchor on
+ * every alternative — but NOT a uniform leading `\b`, which was refuted by running all 51
+ * keywords over every catalog row before this edit:
+ *   - DEFAULT: a LEADING `\b` — the keyword has to open a word.
+ *   - `smiths?\b` / `mills?\b`: a TRAILING boundary instead, because English closes these two
+ *     stems into compounds the table MEANS to catch (Blacksmith · Blacksmiths (3-10) · Sawmill ·
+ *     Sawmill (commercial)). A leading `\b` here would strip `craft` from those four rows AND
+ *     `arms` from the two Blacksmith rows — six cells of collateral, the trap this file walks
+ *     into if a later author "tidies" the anchoring into one uniform shape.
+ *   - `\bdens?\b` / `\bcults?\b`: BOTH boundaries, because a leading one still admits "denizen"
+ *     and "cultural".
+ *   - `\bforts?\b|\bfortif|\bfortress`: an explicit stem set, because "fortune" opens a word, so
+ *     no boundary can separate a fortune-teller from a fortification.
+ * ACCEPTED COST, stated rather than hidden: a keyword must now open a word (or, for the two stem
+ * exceptions, close one), so a closed compound that buries the keyword in second position — a
+ * custom "Nightwatch", a "Bodyguard lodge" — stops inferring. Such an entity DECLARES its facet
+ * (`facets: { <kind>: <value> }` or a `facet:<kind>:<value>` tag), which is the affordance this
+ * chokepoint was built for and a truer answer than a guess made from a name.
+ * The anchor discipline itself is walked in tests/lint/facetInferenceHonesty.walker.test.js.
+ */
 const FACET_INFERENCE = Object.freeze({
   // nature: craft / faith / security / trade / vice / learning / civic (§I.1).
   institutionNature: [
-    { value: 'faith', rx: /temple|shrine|church|monaster|chapel|cathedral|abbey|cloister|cult/i },
-    { value: 'security', rx: /barrack|garrison|watch|guard|militia|fort|citadel/i },
-    { value: 'trade', rx: /market|guild|exchange|bank|counting|merchant|bazaar/i },
-    { value: 'craft', rx: /forge|smith|workshop|foundry|mill|tannery|atelier/i },
-    { value: 'learning', rx: /librar|academy|college|school|scriptorium|university/i },
-    { value: 'vice', rx: /tavern|brothel|den|gambling|smuggl/i },
-    { value: 'civic', rx: /\bhall\b|court|assembly|council|magistrat/i },
+    { value: 'faith', rx: /\btemple|\bshrine|\bchurch|\bmonaster|\bchapel|\bcathedral|\babbey|\bcloister|\bcults?\b/i },
+    { value: 'security', rx: /\bbarrack|\bgarrison|\bwatch|\bguard|\bmilitia|\bforts?\b|\bfortif|\bfortress|\bcitadel/i },
+    { value: 'trade', rx: /\bmarket|\bguild|\bexchange|\bbank|\bcounting|\bmerchant|\bbazaar/i },
+    { value: 'craft', rx: /\bforge|smiths?\b|\bworkshop|\bfoundry|mills?\b|\btannery|\batelier/i },
+    { value: 'learning', rx: /\blibrar|\bacademy|\bcollege|\bschool|\bscriptorium|\buniversity/i },
+    { value: 'vice', rx: /\btavern|\bbrothel|\bdens?\b|\bgambling|\bsmuggl/i },
+    { value: 'civic', rx: /\bhall\b|\bcourt|\bassembly|\bcouncil|\bmagistrat/i },
   ],
   // functions: feeds / arms / moves-goods / hears-secrets / heals / judges (§I.1).
   institutionFunction: [
-    { value: 'heals', rx: /almshouse|hospice|infirmary|hospital|healer|apothecar/i },
-    { value: 'feeds', rx: /granary|storehouse|kitchen|almon/i },
-    { value: 'arms', rx: /armor|arsenal|barrack|foundry|smith/i },
-    { value: 'judges', rx: /court|tribunal|magistrat|assize/i },
+    { value: 'heals', rx: /\balmshouse|\bhospice|\binfirmary|\bhospital|\bhealer|\bapothecar/i },
+    { value: 'feeds', rx: /\bgranary|\bstorehouse|\bkitchen|\balmon/i },
+    { value: 'arms', rx: /\barmor|\barsenal|\bbarrack|\bfoundry|smiths?\b/i },
+    { value: 'judges', rx: /\bcourt|\btribunal|\bmagistrat|\bassize/i },
   ],
   // substructure: crypt / cellar / sewer / mine / none — the undercity EXISTENCE GATE's seed
   // classes (ODQ §311.1; MF-UC0, §441.5(a)). INFERENCE-ONLY: never a catalog `facets` key
@@ -282,12 +305,14 @@ const FACET_INFERENCE = Object.freeze({
   // church / cathedral / monastery / graveyard rows; `cellar` = the nine granary / warehouse /
   // root-cellar / vintner / brewer rows. `none` is a lawful DECLARED value too (a custom
   // "Temple of the Open Sky" declaring none overrides the crypt inference).
+  // CH-1 anchored these alternatives for the same discipline; every one of the 311 rows keeps
+  // the verdict it had (no keyword here had a mid-word-only match), so the seed gate is still.
   institutionSubstructure: [
     { value: 'none', rx: /^access to /i },
-    { value: 'sewer', rx: /sewage|sewer|drain/i },
-    { value: 'mine', rx: /\bmine\b|quarry/i },
-    { value: 'crypt', rx: /church|cathedral|monaster|friary|abbey|graveyard|cemetery|ossuary|crypt|temple/i },
-    { value: 'cellar', rx: /warehouse|cellar|granar|storehouse|undercroft|vintner|brewer/i },
+    { value: 'sewer', rx: /\bsewage|\bsewer|\bdrain/i },
+    { value: 'mine', rx: /\bmine\b|\bquarry/i },
+    { value: 'crypt', rx: /\bchurch|\bcathedral|\bmonaster|\bfriary|\babbey|\bgraveyard|\bcemetery|\bossuary|\bcrypt|\btemple/i },
+    { value: 'cellar', rx: /\bwarehouse|\bcellar|\bgranar|\bstorehouse|\bundercroft|\bvintner|\bbrewer/i },
   ],
 });
 

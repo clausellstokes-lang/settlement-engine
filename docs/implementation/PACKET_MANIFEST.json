@@ -23064,6 +23064,125 @@
         ]
       ],
       "retiredSymbols": []
+    },
+    {
+      "id": "MF-CH1",
+      "status": "DRAFT",
+      "packetPath": "docs/implementation/packets/catalog-hygiene/MF-CH1.md",
+      "verifiedBase": "00e7af612d428078634d52ea37054bd00b773ca6",
+      "changeManifest": [
+        {
+          "_note": "INFERENCE HONESTY. One production file: the FACET_INFERENCE table behind the ONE facet chokepoint. Every alternative was a bare substring, so a NAME asserted a nature it never claimed - `den` inside \"resi(den)t\" and \"War(den)'s\" typed a village parish priest, a ranger lodge and a dragon's lair as `vice`, and `fort` inside \"fortune\" typed a fairground booth as `security`. `Priest (resident)` is required at village with baseChance 1, so a village parish priest drew the TAVERN interior - common room, kitchen, cellar - every time. THE ANCHORING IS PER-KEYWORD AND EVIDENCE-DRIVEN, NOT UNIFORM: all 51 keywords were measured against every catalog row before the edit, and a naive leading word boundary costs SIX cells over four rows, not four - the two Blacksmith rows lose `institutionFunction: arms` as well as `craft`, which the charter's own acceptance did not pin. So `smith` and `mill` take a TRAILING boundary, `den` and `cult` take both, and `fort` takes an explicit stem set because \"fortune\" opens a word and no boundary can separate it from a fortification. THE PROOF IS PINNED AT THE DERIVED INTERIOR, NEVER AT A RECORD DIGEST (ODQ 503.2): facetOf is called ZERO times in the generation pipeline, so a whole-record corpus digest cannot see this file at all - re-proved by this lane, breaking the faith pattern to match any character moves 15,101 interior cells across 504 of 504 settlements while the digest stays byte-identical. Measured delta: exactly 4 cells of 933, all institutionNature, all four the defect rows; 150 of 504 settlements change an interior; hasCharityFacet unmoved at 432; the CIVIC_CAPACITY count unmoved at 695; institutionSubstructure, the undercity seed kind, moves ZERO of 311; and the dark hasVice read flips 336 to 252, which is the engine no longer proposing smugglers' tunnels under a parish priest on the day its flag lights. THE facets OVERRIDE IS NOT IN THIS CAR - the chair re-homed it to CH-3a at 503.3 because it lands on every village record and reds generatorGoldenMaster. cohesionWeave.js is an input to THREE of the five edge bundles, so build:edge-shared rides the member commit and all five metas commit as a set (475).",
+          "action": "MODIFY",
+          "path": "src/domain/spatial/cohesionWeave.js"
+        },
+        {
+          "_note": "The anchor-discipline walker. Nine arms, each with a mutant that convicts it, and every arm pinned at the catalog verdict or the derived interior rather than at a record hash. A0 proves the parse of the shipped table reproduces facetOf on all 933 cells, which is the non-vacuity floor for A3, A6 and A7. A3 is a DIFFERENTIAL against a frozen copy of the pre-CH-1 table, so it survives a later catalog row being added or deleted and it survives CH-3a's declared facets key - both sides read a declaration-stripped entity. A5 is the source scan that removes the class's habitat: a future author cannot add a bare substring here without this arm naming it.",
+          "action": "CREATE",
+          "path": "tests/lint/facetInferenceHonesty.walker.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/domain/cohesionWeave.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/interior/interiorModel.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/domain/undercityMonotoneComponents.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/domain/undercityStrataExistence.test.js"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/packets/catalog-hygiene/MF-CH1.md"
+        },
+        {
+          "action": "DOC",
+          "path": "supabase/functions/_shared/aiCharterBundle.js"
+        },
+        {
+          "action": "DOC",
+          "path": "supabase/functions/_shared/aiCharterBundle.meta.json"
+        },
+        {
+          "action": "DOC",
+          "path": "supabase/functions/_shared/aiGroundingBundle.js"
+        },
+        {
+          "action": "DOC",
+          "path": "supabase/functions/_shared/aiGroundingBundle.meta.json"
+        },
+        {
+          "action": "DOC",
+          "path": "supabase/functions/_shared/aiOutputSchemaBundle.js"
+        },
+        {
+          "action": "DOC",
+          "path": "supabase/functions/_shared/aiOutputSchemaBundle.meta.json"
+        },
+        {
+          "action": "DOC",
+          "path": "supabase/functions/_shared/analyticsEventsBundle.meta.json"
+        },
+        {
+          "action": "DOC",
+          "path": "supabase/functions/_shared/intentAtlasBundle.meta.json"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/domain/spatial/cohesionWeave.js",
+          "symbol": "const FACET_INFERENCE = Object.freeze({"
+        },
+        {
+          "path": "src/domain/spatial/cohesionWeave.js",
+          "symbol": "export function facetOf"
+        },
+        {
+          "path": "src/domain/spatial/cohesionWeave.js",
+          "symbol": "function declaredFacet"
+        },
+        {
+          "path": "src/domain/spatial/cohesionWeave.js",
+          "symbol": "function inferFacet"
+        },
+        {
+          "path": "src/domain/spatial/cohesionWeave.js",
+          "symbol": "export function hasCharityFacet"
+        },
+        {
+          "path": "src/domain/interior/interiorTemplates.js",
+          "symbol": "export function interiorKindOf"
+        },
+        {
+          "path": "src/domain/interior/interiorTemplates.js",
+          "symbol": "export function interiorFunctionOf"
+        },
+        {
+          "path": "src/domain/interior/interiorTemplates.js",
+          "symbol": "export function resolveRoomSet"
+        },
+        {
+          "path": "src/domain/undercity/monotoneComponents.js",
+          "symbol": "import { facetOf } from '../spatial/cohesionWeave.js';"
+        },
+        {
+          "path": "tests/lint/facetInferenceHonesty.walker.test.js",
+          "symbol": "const PRE_CH1_INFERENCE = Object.freeze({"
+        },
+        {
+          "path": "tests/lint/facetInferenceHonesty.walker.test.js",
+          "symbol": "const DECLARED_INFERENCE_DELTA = Object.freeze({"
+        }
+      ],
+      "acceptanceCases": [],
+      "checks": [],
+      "retiredSymbols": []
     }
   ]
 }
