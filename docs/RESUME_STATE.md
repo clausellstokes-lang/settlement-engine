@@ -51,6 +51,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 17:09 CDT 08-23: §506 — DWELLINGS CHARTER RATIFIED as amended (2f98a169). A SCALE EXISTED
+# (PLAN_UNIT_CM_BY_TIER) — concept-word grep beat two lanes. Band Zero = the MEASURABLE, ruled the slot face.
+# Identical footprints = DEFECT (CG-2). CG-1 dispatched. THE OWNER SITTING IS THE CRITICAL PATH.
 # ⭐⭐⭐ 16:47 CDT 08-23: §505 — MF-CH1 BUILT, holding-ch1 fe88c28c7 (chair-pinned; tip was unreachable).
 # 4 of 933 cells; interior moves in 150/504; banked set is SEVEN proved by execution. Landing dispatched.
 # ⭐⭐⭐ 16:12 CDT 08-23: §504 — DW panel: NOT ratified. Capacity + merge theorems refuted; the cartography

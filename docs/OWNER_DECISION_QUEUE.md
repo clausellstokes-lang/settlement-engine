@@ -21126,3 +21126,91 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   re-verification, the member's own 52-file grep arm to re-run, and the
   standing order to STOP rather than cure if the terminal reds outside the
   sweep. Seats: TC-DW0-R2 amendment (Opus) · CH-1 landing (Opus).
+
+## §506 — ⭐⭐ THE DWELLINGS CHARTER IS **RATIFIED** AS AMENDED (237.5 KB + 141.7 KB): A SCALE ALREADY EXISTED AND BOTH PRIOR LANES MISSED IT BY GREPPING THE CONCEPT WORD; THE MERGE HOLDS INSIDE THE SUITE'S OWN TOLERANCE; THE IDENTICAL FOOTPRINTS ARE A **DEFECT** (CG-2); CG-1 DISPATCHED — AND THE OWNER'S SIGNING SHEET IS READY, 20 ROWS (2026-08-23 17:09 CDT)
+
+- **§506.1 RATIFIED.** Charter 164,539 → **237,547 B**, architecture 103,566 →
+  **141,659 B**, plus `draft-DW-RATIFICATION-BRIEF.md` 19,626 B (5.4 pages);
+  both amended THROUGH their own assemblers with provenance PROVED (outputs
+  copied aside, assemblers re-run, both cmp-IDENTICAL — nothing hand-edited);
+  C0 0 and emoji 0 on all three; **976 cross-references swept, zero
+  dangling.** Preserved at `refs/preserve/research-dossiers-2026-08-23` =
+  **`2f98a169`** (3.53 MB) with both skeptic reports. **The chair RATIFIES**
+  on the lane's own sentence: the three refuted claims are replaced by
+  executed measurement WITH FAILING CONTROLS and the circular premise is
+  deleted and re-argued from a testable rule — and ratification therefore
+  also commits the estate to repairing somebody else's landed cartography
+  stage before DW writes its first line.
+- **§506.2 ⭐⭐ THE SCALE EXISTED ALL ALONG — AND THE MISS IS THE LESSON.**
+  §504.4 (mine) said "no plan-unit-to-physical scale exists anywhere in
+  `src/`". **REFUTED:** `PLAN_UNIT_CM_BY_TIER` at
+  `src/domain/townScene/compileTownSceneManifest.js:99-108` — thorp 10 cm,
+  hamlet 14, village 20, town 30, city 50, metropolis 80 per plan unit — read
+  at `:286` and already consumed inside the cartography stage at
+  `cartographyBuildings.js:333`. **Two lanes and the chair grepped the CONCEPT
+  WORD "scale" and missed the engine's own spelling.** Chair-verified
+  independently before ratifying. **LAW banked: grep the ENGINE'S spelling,
+  not the concept — a concept-word grep beat two lanes and a chair in one
+  day.** The consequence for the owner is better than the finding: **BAND ZERO
+  is no longer "choose a scale" but "choose the MEASURABLE"** — the whole plot
+  edge (median **83.5 ft**, under which Pantin's 30–50 ft gate admits
+  **98.8%** of parcels) versus the **building slot's face (41.8 ft, 77%)**,
+  which is **the only one available at allocation time**. **RULED: the
+  measurable is the SLOT FACE** (mechanics decide it — the whole-plot edge is
+  not knowable when allocation runs), and what the owner sits is how hard the
+  gate should bite, since 77% is a soft filter. B3 is re-derived as a FUNCTION
+  of the scale, two boundaries marked sourced and three interpolated.
+- **§506.3 THE OTHER FOUR AMENDMENTS, EXECUTED.** **A1:** H21 refuted for
+  emitted rows (occupancy over band 123/598 fixture max 7; 228/624 pipeline
+  max 11) with the subdivision half kept; the predicate re-derived as
+  `availableToProgram = 4 − flagshipsBoundHere` and `BUILDINGS_PER_PARCEL`
+  re-typed as a target on the non-flagship fill. **The 13.0%
+  identical-footprint rate (183 groups / 369 of 2,839 rows, attribution 100%
+  same-parcel / same-subcell / same-permille) is RULED A DEFECT, NOT A
+  DESIGN** — the exemption's declared scope is that an institution APPEARS,
+  the file guards duplicate IDENTITY and not GEOMETRY, and no test asserts
+  footprint uniqueness — chartered as **CG-2** and explicitly NOT built over.
+  **A2:** the 646/1,056 non-collinearity is confirmed but harmless — **max
+  deviation 0.7070 plan units, max squared 0.4999 against the suite's own
+  constant of 1, ZERO exceedances in 1,056**; symmetric difference ≤1.403% of
+  the parcel; 1,056/1,056 merged parcels three-vertex; 0/4,224 subcell pack
+  failures. The rule is rewritten in `withinWard`'s own terms, the arm can now
+  pass, and the FAILING control is measured (the vertex-crossing quad reads
+  devSq 291.3–3,183.6 and passes 0 of 528) — so theorem (b)'s refusal stands,
+  confirmed 528/528. **A3:** split three ways with a test each — the ESTATE
+  wave is **DARK but not inert** (inside `townCartographyEnabled`, set true
+  NOWHERE in `src/`, though eight test files compile it lit); the circular
+  "purity" citation is deleted and the one-flag posture re-argued on a
+  testable rule (inherit a gate or mint one); **DW-7a mints because
+  `InteriorView.jsx:58` is ungated and live.**
+- **§506.4 CG-1 DIAGNOSED AND DISPATCHED.** The throw rate is **32 of 48
+  (66.7%)**, and the diagnosis is ruled: **the stage is TOO STRICT and the
+  pipeline output is NOT malformed** — the dark compile succeeds 144/144,
+  `MAXIMUM_WARDS` never bites, nothing is orphaned, **only a number fails**:
+  the per-tier caps `{8,12,20,32,64,96}` against real counts peaking at TOWN,
+  with hamlet, village and town failing 24 of 24. **The real defect is the
+  CALIBRATION CORPUS** — the stage has only ever been proved against
+  `makeTournFixture` fixture output — so the car's structural half is a
+  REAL-PIPELINE fixture corpus wired into the stage's own suite
+  (structural-prevention: it removes the bug class's habitat), and the caps
+  are its second half. The chair ratifies the RULE `max(current,
+  ceil(measuredMax × 1.5))` as REPAIR and orders the VALUES re-derived by the
+  build lane rather than inherited (`{18,30,59,92,77,96}` is the amendment's
+  reading, not a given). **TE-CG-1 dispatched (Opus)**, with the standing
+  order to STOP rather than widen if anything other than a number fails.
+- **§506.5 THE SHAPE, AND WHAT IS HONESTLY UNTESTED.** Totals **41 cars / 45
+  DW commits / 47 dispatched** (EST-2 splits into EST-2a/EST-2b rather than
+  widening the eight-arm cap). Signing sheet **20 rows, BAND ZERO first, every
+  row marked measured / sourced / taste / deferred**; 10 of 10 MUST-FIX fixed,
+  the 4 OVERSTATED and 2 UNDERSTATED dispositioned, all 5
+  preference-bands acted on. Stated affirmatively by the lane and carried
+  here: **B2's four research counts are still un-re-derived — the largest
+  untested body under the sheet**; no test exists yet for CG-1, CG-2, EST-2a
+  or EST-2b, so every claim about which surfaces they move is labelled a
+  READING, not a measurement; nothing has been measured in a browser. Two of
+  the lane's own bands (B8's 5–15%, B14's six-to-three wear mapping) are
+  flagged in the sheet as ITS judgment, not evidence. **The lane deliberately
+  did not write to the shared memory** — it cited the concurrent-writer
+  warning and the size ceiling and named the four durable facts instead; the
+  chair banks them (§506.6). Seats: CH-1 landing (Opus) · CG-1 build (Opus).
+  **The owner's sitting is READY and is now the critical path.**
