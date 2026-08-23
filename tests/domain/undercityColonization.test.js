@@ -121,11 +121,16 @@ describe('MF-UC4 — the undercity epoch layer (colonization and the vertical hi
   test('A3 · a receding syndicate leaves fossils on the LIT path, and the dark path says so honestly', () => {
     const risen = withSyndicate(withProfile(world(), { effective: 80 }), 90);
     const fallen = withSyndicate(withProfile(world(), { effective: 80 }), 5);
-    // TWO ADVANCES through the REAL seam, the first advance's own output fed back in — a memory,
-    // not a level. The flag literal below is what the mechanism-lit coverage walker reads.
+    // ⭐ THREE ADVANCES through the REAL seam, each one's own output world fed into the next: the
+    // MINT, then a pass AT THE PEAK, then the FALL. The middle pass is not padding — the fold
+    // records history SINCE LIGHTING, so a state minted in the same pass takes no mark and a
+    // two-advance drive would record only the fall. And the third pass is the arm: a fold that
+    // merely TRACKS the level answers 0.05 there and leaves no recession to fossilize, so only a
+    // MEMORY produces the rows below. The flag literal is what the mechanism-lit walker reads.
     const litRules = { undercityHighWaterEnabled: true };
     let lit = advance({ factionStates: {}, simulationRules: litRules }, risen, 'lit-1');
     lit = advance(lit, risen, 'lit-2');
+    lit = advance(lit, fallen, 'lit-3');
     const marks = Object.values(lit.factionStates).map((st) => powerHighWaterOf(st));
     expect(marks.some((m) => m != null && m > 0.5), 'the lit seam recorded a high mark').toBe(true);
     // The mark PROJECTS onto the settlement, which is where the deriver reads it.
@@ -155,10 +160,15 @@ describe('MF-UC4 — the undercity epoch layer (colonization and the vertical hi
       abandoned: false, temperament: 'MONOTONE', surfaceJoins: Object.freeze([Object.freeze({ kind: 'stair', anchor: 'church stair' })]),
     })]);
     const before = JSON.stringify(uc2Contract);
-    const quiet = deriveUndercity(withSyndicate(withProfile(world(), { effective: 20 }), 5));
+    const quiet = deriveUndercity(withSyndicate(withProfile(world(), { effective: 60 }), 10));
     const busy = deriveUndercity(withSyndicate(withProfile(world(), { effective: 95 }), 95));
+    // BOTH epochs are LIVE, so the comparison below measures GROWTH rather than the arrival of an
+    // undercity where there was none — the distinction a frozen colonization would otherwise hide.
+    expect(quiet.present).toBe(true);
+    expect(busy.present).toBe(true);
+    const dugIn = (u) => u.components.filter((c) => c.kind === 'colonized_seed').length;
     // The earlier epoch's rows are untouched across a colonization that demonstrably GREW.
-    expect(busy.components.length).toBeGreaterThan(quiet.components.length);
+    expect(dugIn(busy)).toBeGreaterThan(dugIn(quiet));
     expect(JSON.stringify(uc2Contract)).toBe(before);
     // DISJOINT BY TEMPERAMENT, which is what makes "never re-rolls" structural rather than
     // hopeful: every row this car produces is DEMAND_DRIVEN, so no monotone row is ever its output.
@@ -227,6 +237,10 @@ describe('MF-UC4 — the undercity epoch layer (colonization and the vertical hi
     const u = deriveUndercity(s);
     const colonized = u.components.filter((c) => c.kind === 'colonized_seed');
     expect(colonized.length).toBeGreaterThan(1);
+    // ⭐ THE POSITIVE HALF FIRST: a REAL institution really is seated below on a real generated
+    // world. Without this the loop's two-branch reading is satisfied by a world where every front
+    // collapsed to anonymous fabric — the law's honest half standing in for its whole.
+    expect(colonized.filter((c) => c.front.kind === 'INSTITUTION').length).toBeGreaterThan(0);
     for (const row of colonized) {
       expect(['INSTITUTION', 'ANONYMOUS_FABRIC']).toContain(row.front.kind);
       if (row.front.kind === 'INSTITUTION') {
