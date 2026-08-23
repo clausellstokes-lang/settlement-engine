@@ -57,7 +57,7 @@ L371  compileTownWardLayers(...)
 L385  compileTownParcelLayers(...)          <- UNCHANGED (the ONE LAW's carve)
 NEW   compileProgramMinimumLookup(...)      <- EST-1: institutions -> ProgramMinimum
 NEW   allocateParcels({ parcels, institutionBindings, programs, ... })
-                                            <- EST-2: SELECT and UNION candidates
+                                            <- EST-2a MERGE + EST-2b SELECT
 NEW   [time advance only] accreteEstates(...)  <- EST-5
 L400  compileTownBuildingLayers(...)        <- consumes the ALLOCATED parcels
 L413  return { ..., estates, programs }
@@ -87,10 +87,30 @@ it; `PARCEL_EDGE_DIVISIONS = 3` at `cartographyTuning.js:217`;
 Vertex 0 is the ward centroid; vertices 1–2 are consecutive cuts of ONE ward
 boundary edge (L95-105). Therefore:
 
-- **the outer edge is the STREET FRONTAGE** and its length is computable;
-- **the union of `(e,s)` and `(e,s+1)` is exactly `[C, cuts[s], cuts[s+2]]`** —
-  a triangle of the same family, because the three cuts are collinear on ward
-  edge `e`.
+- **the outer edge is unambiguous and its length is computable** — measured,
+  1,098 of 1,098 shipped parcels yield exactly one, none degenerate. ⛔ **It is
+  a WARD BOUNDARY, not a street** (amended, charter §Σ AR-4): only 163 of 1,098
+  outer-edge midpoints (14.8%) lie within 8 plan units of any street polyline,
+  and the median distance to the nearest street is 41.1 plan units. **And what a
+  parti is gated on is HALF that edge** — the medial subcell's own face, which is
+  the ground one building fronts and the only frontage measurable available
+  before the building is drawn (charter §7 BAND ZERO).
+- ⛔ **the union of `(e,s)` and `(e,s+1)` is `[C, cuts[s], cuts[s+2]]` BY
+  CONSTRUCTION, and equals the true union to within the suite's own
+  one-squared-unit lattice tolerance** — NOT exactly, and the difference is the
+  amendment (charter §Σ AR-2). The compile's reason, "the three cuts are
+  collinear on ward edge `e`", is **false**: `cartographyParcels.js:100-104`
+  rounds both interior cuts onto the integer lattice, and **646 of 1,056 real
+  adjacent triples (61.2%) are not collinear.** What holds instead, measured:
+  the middle cut's perpendicular deviation from the chord is at most **0.7070**
+  plan units — the sqrt(0.5) lattice bound `withinWard`'s own comment names at
+  `tests/domain/townCartographyParcels.test.js:164-172` — so the squared
+  deviation maxes at **0.4999** against that predicate's constant of **1**, with
+  **0 exceedances in 1,056**. The symmetric difference against the true union is
+  at most **1.403%** of the merged parcel's area (median 0.213%). **1,056 of
+  1,056 merged parcels are three-vertex triangles** (so the
+  `parcel.polygon.length !== 3` pin at `:265` stays green) and **0 of 4,224 of
+  their medial subcells fail the existing pack predicate.**
 
 **WHAT CHANGES: nothing in this file.** The merge is a CONSUMER. Chair Q-C (see
 charter §9.6) recommends a new leaf for exactly this reason — `cartographyParcels.js`
@@ -117,6 +137,47 @@ load-bearing.
 
 The header at **L22-24**: "A dwelling that cannot pack is SKIPPED — fill is
 best-effort. An institution that cannot pack is NAMED."
+
+> ### ⛔ 0.3a · THE FLAGSHIP EXEMPTION, AND THE DEFECT ITS UNSTATED HALF PRODUCES
+>
+> **New in the amendment (charter §Σ AR-1; §0 H21, H29). Read this before
+> writing a line of EST-2a, EST-2b or EST-3.**
+>
+> **What the exemption is, in the code's own words.** `cartographyBuildings.js:215-217`
+> declares the `occupancy` map as *"Non-flagship occupancy per parcel; flagships
+> are exempt (§6.3a3)"*, and `:298-307` implements it: at round `k === 1` a
+> canonical institution takes its BOUND parcel unconditionally with
+> `subcell = arrived % 4`, and **never increments `occupancy`.** The stated
+> reason is at `:299-300` — *"a canonical institution always appears, or the map
+> forks from the dossier."* **That reason is sound and the exemption is a design
+> decision**: the roster's truth outranks a geometric cap, which is the same
+> principle chair ruling R2′ rests on.
+>
+> **What it also does, which nothing declares.** Because the flagship round does
+> not consume a subcell, the instance round's `subcell = occupancy.get(parcel.id) || 0`
+> (`:317`) and the dwelling fill's `for (let subcell = occupancy.get(parcel.id) || 0; …)`
+> (`:359`) both BEGIN at the subcell the first flagship already holds. And
+> `arrived % 4` WRAPS, so the fifth flagship on a parcel stands where the first
+> one stands. Measured over 32 real pipeline settlements: **183 duplicate-footprint
+> groups, 369 of 2,839 rows (13.0%)**, attribution **100% single-mechanism —
+> same parcel, same medial subcell, same shrink permille**; zero duplicate parcel
+> polygons, zero rounding collapse. Occupancy over the tier band runs **20.6% on
+> the fixture corpus (max 7) and 36.5% on pipeline settlements (max 11)**.
+>
+> **Ruled a DEFECT, not a design, and it gets its own car (CG-2).** The
+> exemption's declared scope is *appearance*; nothing claims two rows may share
+> ground. The file guards duplicate IDENTITY (`:382`) and not duplicate GEOMETRY;
+> `packFootprint`'s docstring calls the four subcells "the theorem
+> `BUILDINGS_PER_PARCEL <= 4` states"; and no test anywhere asserts footprint
+> uniqueness. **EST-2b and EST-3 may not be built until CG-2 lands**, because
+> `programSatisfied` would otherwise be a receipt for a capacity nothing keeps.
+>
+> **CG-2's cure reuses machinery already in this file:** the flagship round
+> increments `occupancy`; when its bound parcel is full it spills to the ward's
+> next parcel by the sibling walk at **`:309-314`** the instance round already
+> uses; and when the ward is full it takes the "an institution that cannot pack
+> is NAMED" path the header at `:22-24` already promises — which is R2′(e)'s
+> REPORTED CONTRADICTION.
 
 **WHAT CHANGES.** EST-3 inserts a program-driven placement BEFORE the current
 subcell assignment for INSTITUTION rows only. Dwelling packing is untouched.
@@ -299,7 +360,46 @@ file appears only under LANDED packets (`TC-3A/3B/4/5A` for the cartography,
 `MF-UC0` for `cohesionWeave.js`, `MF-VS1`/`MF-T*` for the fabric). **No change
 path is reserved against any file DW would touch**, so arch-4's cars can claim
 their paths freely. Re-run the scan at the DW-1 base before minting, because the
-CH cars will land in between and will reserve `cohesionWeave.js` and the catalog.
+CH cars will land in between and will reserve `cohesionWeave.js` and the catalog
+— ⛔ **and so will CG-1 and CG-2, which reserve `cartographyTuning.js` and
+`cartographyBuildings.js` respectively** (charter §5.0′). EST-3 modifies
+`cartographyBuildings.js` and every EST car touches `cartographySynthesis.js`, so
+the de-duplication at DW-1's base must include the CG paths, not only CH's.
+
+### ⛔ 0.13 · THE PHYSICAL SCALE — IT EXISTS, IT IS PER-TIER, AND DW MUST NOT MINT ONE
+
+**New in the amendment (charter §Σ AR-4; §0 H30). Both the compile lane and the
+skeptic panel reported that no plan-unit-to-physical scale exists in `src/`.
+Both were wrong, and both missed it the same way: they grepped the word *scale*,
+and the engine's spelling is `planUnitCm`.**
+
+**CONFIRMED, at file:line.** `PLAN_UNIT_CM_BY_TIER` at
+`src/domain/townScene/compileTownSceneManifest.js:99-108`:
+
+```js
+Object.freeze({ thorp: 10, hamlet: 14, village: 20, town: 30, city: 50, metropolis: 80 })
+```
+
+— centimetres per plan unit. Read at **`:286`**, shipped on every manifest as
+`space.planUnitCm`, validated as a positive integer at
+`manifestContract.js:216`, consumed by `compileTownSceneGeometry.js` (default 30,
+at `:67`, `:160`, `:229`) and by `threeSceneRuntime.js:422` to place 3D geometry
+in centimetres — **and already read INSIDE the cartography stage** at
+`cartographyBuildings.js:333`, where `heightPermille` divides by
+`canonical.planUnitCm`.
+
+**WHAT CHANGES.** `geometry/frontageReader.js` converts to feet through
+`manifest.space.planUnitCm` and **never through a DW-minted constant**. A second
+scale would be a second truth about how big a town is, and the 3D massing already
+draws from the first. The `frontageQ` field of arch-2 §2.3 stays in plan units;
+the BUCKET is computed in feet from it.
+
+⚠ **AND THE THING A BUILDER WILL OTHERWISE GET WRONG.** The plan frame is
+**tier-invariant** — measured, a town's ward bounding box spans about 814 plan
+units and a metropolis's about 807, while the metropolis holds twenty times the
+population. Real size is expressed by `planUnitCm`, not by extent. **So a plan
+unit has no constant physical value, and any DW code that hard-codes one is
+wrong at five tiers out of six.**
 
 ## arch-1 · THE MODULE TREE
 
@@ -357,7 +457,7 @@ src/domain/dwellings/                 (new — the grammar; pure)
   index.js                            (the barrel)
 
 src/domain/townCartography/           (existing dir; new leaves)
-  cartographyAllocation.js            (EST-2: select + union; pure, zero entropy)
+  cartographyAllocation.js            (EST-2a union + EST-2b select; pure, zero entropy)
   cartographyEstates.js               (EST-4/5: ownership, accretion, reverse motions)
 
 src/domain/soak/                      (existing tree; one new leaf)
@@ -372,8 +472,8 @@ Legend: **eff** is the estimated effective line count; **cap** is 250 for a leaf
 
 | File | Responsibility (ONE each) | Exports | Imports | eff | Kind |
 |---|---|---|---|---|---|
-| `vocabulary/cellVocabulary.js` | the 83 cell kinds, frozen, with their group | `CELL_KINDS`, `CELL_GROUP`, `isCellKind` | none | ~110 | pure, CREATE |
-| `vocabulary/fixtureVocabulary.js` | the 81 fixture kinds + `RECESS` + `SUBDIVISION` | `FIXTURE_KINDS`, `isFixtureKind`, `RECESS_STATES` | none | ~110 | pure, CREATE |
+| `vocabulary/cellVocabulary.js` | the 83 cell kinds, frozen, with their group (⛔ **28 − 2 dead + 57 new**, charter §Σ AR-7 — the total is unchanged, both intermediates are corrected) | `CELL_KINDS`, `CELL_GROUP`, `isCellKind` | none | ~110 | pure, CREATE |
+| `vocabulary/fixtureVocabulary.js` | ⛔ the **82** fixture kinds (was 81) + `RECESS` + `SUBDIVISION` | `FIXTURE_KINDS`, `isFixtureKind`, `RECESS_STATES` | none | ~110 | pure, CREATE |
 | `vocabulary/partiCatalog.js` | the 48 partis + `GATED_COURT_RING`'s attribute space + the instance list | `PARTIS`, `PARTI_FAMILY`, `GATED_COURT_RING_INSTANCES`, `isParti` | none | ~150 | pure, CREATE |
 | `vocabulary/circulationVocabulary.js` | 9 classes, ~55 sub-forms, 5 width + 4 length buckets, 6 licence grades | `CIRCULATION_CLASSES`, `SUB_FORMS`, `WIDTH_BUCKETS`, `LENGTH_BUCKETS`, `LICENCE_GRADES` | none | ~180 | pure, CREATE |
 | `vocabulary/storageVocabulary.js` | the §453 classes + ~35 sub-forms + the 6 adjacency polarities + the general store prohibition | `STORAGE_CLASSES`, `STORAGE_SUB_FORMS`, `ADJACENCY_POLARITIES`, `storeProhibitsDoor` | none | ~170 | pure, CREATE |
@@ -384,7 +484,7 @@ Legend: **eff** is the estimated effective line count; **cap** is 250 for a leaf
 
 | File | Responsibility | Exports | eff | Kind |
 |---|---|---|---|---|
-| `geometry/frontageReader.js` | the ORDERED frontage list from a parcel polygon; frontage kinds and status grades; `frontageBucket` | `readFrontages`, `frontageBucketOf` | ~160 | pure, CREATE |
+| `geometry/frontageReader.js` | the ORDERED frontage list from a parcel polygon; frontage kinds and status grades; `frontageBucket`. ⛔ **The bucket is computed from the SUBCELL FACE (half the outer edge), converted to feet through `manifest.space.planUnitCm` — never a DW constant** (arch-0 §0.13, charter §7 BAND ZERO). `OPEN_SHOPFRONT`/`GATE_PASSAGE` are derived from the STREET layer explicitly and recorded `refused` where none is within reach: the outer edge is a ward boundary and only 14.8% are near a street | `readFrontages`, `frontageBucketOf`, `slotFaceOf` | ~180 | pure, CREATE |
 | `geometry/verticalPartition.js` | `heightPermille` → `Storey[]`; double-height cells; descending ladders; `privacyDepth` | `partitionVertical` | ~170 | pure, CREATE |
 | `geometry/partiPlacement.js` | the eligible-set filter (program → frontage → era/culture) then the weighted draw; `PartiModifier` | `eligiblePartis`, `drawParti` | ~200 | pure, CREATE |
 | `geometry/circulationDeriver.js` | the two-step S8 (required-by-kind, then optional-with-`mintedBy`); the second subordinate entrance | `deriveCirculation` | ~210 | pure, CREATE |
@@ -453,7 +553,7 @@ of the headroom the DW work is estimated to consume:
 | `interiorFootprint.js` | 56 | 800 | ~120 | 680 | DW-2a |
 | `interiorModel.js` | 249 | 800 | ~275 | 525 | DW-2b/d/e, DW-3a, DW-6a |
 | `interiorExport.js` | 53 | 800 | ~110 | 690 | DW-6c |
-| `cartographySynthesis.js` | 242 | 800 | ~262 | 538 | EST-2, EST-3, EST-5 |
+| `cartographySynthesis.js` | 242 | 800 | ~262 | 538 | EST-2b, EST-3, EST-4, EST-5 |
 | `cartographyBuildings.js` | 229 | 800 | ~265 | 535 | EST-3 |
 | `cartographyPaint.js` | 143 | 800 | ~165 | 635 | DW-6d (after MP-1) |
 | `cartographyTuning.js` | 143 | 800 | ~175 | 625 | wherever a signed band lands |
@@ -484,10 +584,21 @@ Each of these is enforced by a source scan in arch-5, not by convention.
 
 ### 1.5 · Total new surface
 
-**33 new files** (~4,600 effective lines, of which ~700 is the split program
+⛔ **41 new files** (amended, charter §Σ AR-8 — the compile said 33 and the
+skeptic panel said 40; both are wrong). Counted off the §1.1 tree: **30** `.js`
+entries. `programMinimumTable.js` is then replaced by `programMinimumTable/index.js`
+plus **11** shelf files — a net +11 — giving **41**. The panel's 40 missed
+`index.js`, which §1.2's own table names as a `CREATE` row at ~40 effective.
+
+**41 new files** (~4,600 effective lines, of which ~700 is the split program
 table), plus **8 modified files** consuming ~200 effective lines of headroom
 between them. That is the honest size of the DW program's code, measured against
 the caps rather than estimated against feel.
+
+⛔ **Two further files land OUTSIDE that total**, in the CG train, and they are
+MODIFY rather than CREATE: `cartographyTuning.js` (CG-1) and
+`cartographyBuildings.js` (CG-2), plus one new fixture module and two new test
+files (charter §5.0′). They repair landed code DW did not write.
 
 ## arch-2 · THE CONTRACTS AS CONCRETE SHAPES
 
@@ -517,16 +628,38 @@ closed enum member, never a number, so a tuning change never breaks a type.
  * @property {string[]} [mergedFrom]  DERIVED   present IFF this is an amalgamation
  * @property {number}   [since]       DERIVED   the year the merge happened
  * @property {string}   [cause]       DERIVED   a closed enum member, never prose
- * @property {number} frontageQ       DERIVED   the outer edge's length, plan units
+ * @property {number} frontageQ       DERIVED   the OUTER EDGE's length, plan units.
+ *                                              NOT the bucket input -- see slotFaceQ.
+ * @property {number} slotFaceQ       DERIVED   frontageQ / 2: the medial subcell's own
+ *                                              face, and the length B3's bucket reads
+ *                                              (charter SS7 BAND ZERO, AR-4)
  * @property {'INTRA_EDGE'|'VERTEX'} [mergeKind] DERIVED
  */
 ```
 
 **Refusals.** A cross-ward merge throws a premise error (it breaks the
 containment theorem). A `VERTEX` merge is refused in the first landing (charter
-§9.3 D-4) because the union is a quadrilateral and
-`cartographyBuildings.js`'s medial-subdivision proof does not apply to one. A
-`polygon` that is not integer, or whose area is zero, throws.
+§9.3 D-4) because the union is a quadrilateral — **measured, 528 of 528 are
+genuine convex quads with zero degenerating to a triangle** — and
+`cartographyBuildings.js`'s medial-subdivision proof does not apply to one
+(`packFootprint` destructures three vertices at `:121`). A `polygon` that is not
+integer, or whose area is zero, throws.
+
+⛔ **AND ONE REFUSAL THE COMPILE DID NOT STATE (amended, charter §Σ AR-2).** An
+`INTRA_EDGE` merge whose middle cut lies further than the suite's
+one-squared-unit lattice tolerance from the chord **throws**, rather than being
+silently accepted. Measured, no real geometry does — max squared deviation
+**0.4999 over 1,056 triples, zero exceedances** — which is exactly why the
+refusal is cheap to state and why it is the arm's failing control that has to
+come from somewhere else (a vertex-crossing pair: squared deviation **291.3 to
+3,183.6**, 0 of 528 passing).
+
+⚠ **THE THING AN ALLOCATOR WILL GET BACKWARDS.** Two wedges carry four medial
+subcells each — eight slots. Their union is one triangle with **four**.
+**A merge HALVES the slot count while roughly doubling each slot's ground and its
+frontage** (median frontage 44.0 → 90.6 plan units; measured, 1,056 of 1,056
+merged parcels still yield four packable subcells). Merge to fit a BIGGER cell,
+never to fit more of them.
 
 ---
 
@@ -614,8 +747,26 @@ FIRE · ABANDONMENT`.
  *           |'TRANSPORT_EDGE'|'WATER_EDGE'|'COVERED'|'LIBERTY_BOUNDARY'
  *           |'ORIENTED_AXIS'} kind         DERIVED
  * @property {'PRIMARY'|'SUBORDINATE'} status  DERIVED
- * @property {number} lengthQ               DERIVED  plan units
+ * @property {number} lengthQ               DERIVED  plan units, the FULL edge
+ * @property {number} slotFaceQ             DERIVED  lengthQ / 2 -- the bucket's input
+ * @property {number} lengthFt              DERIVED  slotFaceQ * planUnitCm / 30.48.
+ *                                                   planUnitCm comes from the MANIFEST
+ *                                                   (manifest.space.planUnitCm); a DW
+ *                                                   constant here is a bug at five of
+ *                                                   six tiers (arch-0 SS0.13)
  * @property {'SHOP'|'NARROW'|'STANDARD'|'WIDE'|'GRAND'} bucket  DERIVED
+ *                                                   bucketOf(lengthFt): 6-10 | 10-20 |
+ *                                                   20-30 | 30-50 | 50+. SHOP and WIDE
+ *                                                   are SOURCED (Salter via Pantin;
+ *                                                   Pantin primary); NARROW, STANDARD
+ *                                                   and GRAND's floor are INTERPOLATED
+ *                                                   and the spec must say so
+ * @property {boolean} streetBacked         DERIVED  is a street polyline within reach of
+ *                                                   this edge's midpoint? Measured at
+ *                                                   base: TRUE for only 14.8% of parcels,
+ *                                                   so this is a real field, not a
+ *                                                   formality, and OPEN_SHOPFRONT /
+ *                                                   GATE_PASSAGE require it
  * @property {[PlanPoint,PlanPoint]} edge   DERIVED
  */
 ```
@@ -912,13 +1063,30 @@ worldSeed
    |             (STORED) only when it happens at a time advance; at generation the
    |             merge is part of the starting world and needs no event.
    |   refuses: cross-ward merge; VERTEX merge (first landing); more than
-   |            PARCEL_EDGE_DIVISIONS-1 = 2 unions per ward edge
+   |            PARCEL_EDGE_DIVISIONS-1 = 2 unions per ward edge; an INTRA_EDGE
+   |            merge outside the one-squared-unit lattice tolerance (AMENDED)
+   |   >>> CAPACITY IS FOUR SLOTS, NOT THE TIER BAND (AMENDED, charter SS4.2):
+   |   >>>   capacity(parcel)           = 4     the medial subcells; a merge does
+   |   >>>                                      NOT raise it -- it HALVES the slot
+   |   >>>                                      count and doubles each slot
+   |   >>>   reservedForFill(parcel)    = BUILDINGS_PER_PARCEL[tier]  -- a TARGET
+   |   >>>   availableToProgram(parcel) = 4 - flagships bound here
+   |   >>> and this predicate is only TRUE once CG-2 lands: today the flagship
+   |   >>> round consumes no subcell, so nothing enforces the left-hand side
+   |   >>> (arch-0 SS0.3a). EST-2 MAY NOT BE BUILT BEFORE CG-2.
    |   >>> the REPORTED CONTRADICTION exits here if the program cannot be met
    |   byte-stable: zero entropy consumed -- every choice is a sceneDigest read,
    |            exactly as cartographyParcels.js:34-38 requires
    v
 [A4] PARTI ELIGIBILITY BY FRONTAGE  -- geometry/frontageReader.js + partiPlacement.js
    |   computes: the ORDERED frontage list; frontageBucket; the ELIGIBLE parti set
+   |   >>> THE BUCKET READS THE SUBCELL FACE, NOT THE WHOLE EDGE (AMENDED,
+   |   >>> charter SS7 BAND ZERO). Measured over 1,098 real parcels under the
+   |   >>> engine's own per-tier scale: the whole edge gives a median of 83.5 ft
+   |   >>> and Pantin's 30-ft gate admits 98.8% -- a filter that filters nothing.
+   |   >>> The subcell face gives 41.8 ft and refuses about a quarter. It is also
+   |   >>> the ONLY frontage measurable available HERE, before the draw.
+   |   >>> Feet come from manifest.space.planUnitCm. Never a DW constant.
    |   filter order (chair R1): program -> frontage -> era/culture -> then weights
    |   derived-not-stored: all
    |   refuses: a parti whose frontageMin exceeds the envelope's bucket; a parti
@@ -988,7 +1156,7 @@ only entropy in the whole pass is A4's parti draw, forked on
 year N -> year N+1
    |
    v
-[B1] OWNERSHIP EVENT  -- cartographyEstates.js
+[T1] OWNERSHIP EVENT  -- cartographyEstates.js
    |   one of: ACQUIRE | SWAP | PARTITION | DISSOLUTION
    |   inputs: prosperity rung, succession, the closure machinery's own output
    |           (institutionLifecycle.js:1006-1024 -> status 'remnant' + worldPulseFate)
@@ -998,37 +1166,37 @@ year N -> year N+1
    |--- SWAP: geometry UNCHANGED. One dated event; nothing redrawn. STOP HERE.
    |
    v
-[B2] GROUND MOTION  -- cartographyAllocation.js
+[T2] GROUND MOTION  -- cartographyAllocation.js
    |   ACQUIRE   -> merge, per A3's rules (intra-edge only)
    |   PARTITION -> UN-MERGE, PREFERRING THE REMEMBERED SEAM (SS500 R10.b):
    |                Parcel.mergedFrom is read and the split follows it exactly.
    |                No new geometry, no arbitrary cut.
-   |   refuses: a split line that would pass through a built range (see B3')
+   |   refuses: a split line that would pass through a built range (see T3')
    v
-[B3] ACCRETION -- THE ONLY LAWFUL MOTION ON BUILT FABRIC
+[T3] ACCRETION -- THE ONLY LAWFUL MOTION ON BUILT FABRIC
    |   every range present at year N is present and UNMOVED at year N+1
    |   the new work goes into the ACQUIRED ground: a new range, an outbuilding,
    |   or a COURT formed by enclosing the gap between the two
    |   >>> THE SEAM IS A FEATURE. Misaligned ranges, a break in the roofline, a
    |   >>> court where the gap was. Do not smooth it.
    |
-   [B3'] WHEN A SPLIT MUST CUT THROUGH BUILT FABRIC (SS500 R10.c), in order:
+   [T3'] WHEN A SPLIT MUST CUT THROUGH BUILT FABRIC (SS500 R10.c), in order:
    |   (1) constrain the line to run BETWEEN structures -- seam, alley, flank
    |   (2) else emit a TYPED SHARED CONDITION: PARTY_WALL | ENCROACHMENT |
    |       CHIEF_RENT, each a named member with a receipt, never an accident
    v
-[B4] RECLASS ON DISSOLUTION
+[T4] RECLASS ON DISSOLUTION
    |   the buildings do NOT vanish. reclassedTo[] gains a dated link, seeded from
    |   worldPulseFate (shuttered | bankrupt | closed_for_want_of_custom)
    |   >>> read worldPulseFate as a SIGNAL; never re-derive it from the name --
    |   >>> closureFateForInstitution (L651-656) uses unanchored substrings
    v
-[B5] THE CHRONICLE ENTRY  -- the NEWS ADDRESS LAW
+[T5] THE CHRONICLE ENTRY  -- the NEWS ADDRESS LAW
    |   address chain + typed action + names + reason:
    |   "In 1387 the Cordwainer household threw two burgages together on Sheep
    |    Street after the fire on the north side."
    v
-[B6] RE-DERIVE  -- A5 through A10 run again over the UNCHANGED lived record
+[T6] RE-DERIVE  -- A5 through A10 run again over the UNCHANGED lived record
        every plan is a pure function of (worldSeed, buildingId, circumstances@N+1)
        fossils are minted by DIFFING against the prior derivation
        refuses: writing a generation-path byte (THE PROMISE)
@@ -1038,6 +1206,15 @@ year N -> year N+1
 same seed to the same year reproduces the same holdings and the same plans
 byte-for-byte, and no reverse motion rewrites what an earlier year recorded.*
 Charter §6.1 arms A8 and A9 are its mechanical statements.
+
+> ⛔ **STAGE LABELS RENAMED (amended, charter §Σ AR-8).** This pass's stages were
+> labelled `[B1]`..`[B6]` in the compile. That was a SECOND name for the stages
+> the charter's §4.5 already calls **T1..T5**, and it collided with the band ids
+> `B1`..`B18` of charter §7 — so a builder reading both documents met `B3` meaning
+> *accretion* here and *frontage buckets* there. They are now **T1..T6**, matching
+> the charter, with `T6` the architecture's own name for what the charter's
+> diagram writes as "then S5..S12 re-derive". No behaviour changes; one name for
+> one thing does.
 
 ---
 
@@ -1049,7 +1226,7 @@ Charter §6.1 arms A8 and A9 are its mechanical statements.
 | **REPORTED CONTRADICTION** (the ward cannot host what the roster claims) | A3, after bounded merging | a named finding on the plan's `certification`, DM-readable: the institution, the tier, the minimum, the best envelope found |
 | **No eligible parti** | A4 | falls to the tier's own `HOSTED` or `NO_BUILDING` row if the program declares one; otherwise the A3 contradiction |
 | **`occupies` with no suitable structure** | A5.2 | degrades to `NO_BUILDING` with reason `ON_ANOTHERS_GROUND` — *no institution ever generates a landscape fossil* |
-| **Split line through built fabric** | B3' | a typed shared condition, with a receipt |
+| **Split line through built fabric** | T3' | a typed shared condition, with a receipt |
 
 **None of these is a silent shrink.** That is the whole content of chair R2′.
 
@@ -1088,7 +1265,9 @@ wave, landing in the cartography tree).
 holds **167 LANDED + 1 SUPERSEDED + ZERO non-terminal** packets, and every
 DW-relevant file appears only under LANDED ones. **No path below is reserved.**
 ⚠ Re-run the scan at the DW-1 base: the CH cars will land in between and will
-reserve `cohesionWeave.js` and `institutionalCatalog.js`.
+reserve `cohesionWeave.js` and `institutionalCatalog.js` — ⛔ **and so will CG-1
+and CG-2, which reserve `cartographyTuning.js` and `cartographyBuildings.js`,
+both of which later EST cars also touch.**
 
 **Standing rows every car carries** (stated once, not repeated per car):
 sweep trees = `tests/domain`, `tests/lint`, `tests/property`, `tests/docs`, plus
@@ -1099,27 +1278,67 @@ wrapped in the mutex (self-deadlock); batteries mutexed on one command line with
 
 ---
 
+### ⛔ CG — THE CARTOGRAPHY GROUND (new; charter §5.0′, §Σ AR-5). LANDS BEFORE EVERYTHING.
+
+**Family: `cartography`, not `dwellings`.** These repair landed code DW did not
+write and they do not belong to DW's family or its car count. They are here
+because the DW build lane is the lane that will open them.
+
+#### `CG-1` — the per-tier bands must fit what the generator produces
+- **family** cartography · **depends on** nothing · **blocks** DW-1a
+- **changeManifest**
+  - `MODIFY src/domain/townCartography/cartographyTuning.js` — re-derive `MAXIMUM_INSTITUTION_BINDINGS` and `TC3_LAYER_MAX_BYTES` by the stated rule `max(current, ceil(measuredMax × 1.5))`; max +14 eff
+  - `CREATE tests/fixtures/pipelineCartographyCorpus.js` — **one seeded `generateSettlementPipeline` settlement per tier, frozen**
+  - `CREATE tests/domain/cartographyGroundCorpus.test.js`
+- **requiredSymbols** `TOWN_CARTOGRAPHY_TUNING`, `cartographyBand`, `CARTOGRAPHY_TIERS` (preserved)
+- **acceptance (6)**
+  1. every settlement of the real-pipeline corpus compiles LIT without throwing — *mutant: restore any one old cap.* **This arm fails 24/24 at base for hamlet, village and town, which is what makes it an arm rather than a restatement**
+  2. the existing 20-row fixture corpus still compiles LIT and its output is **byte-identical** to today — *mutant: move a band the fixture corpus sits under* — the dormancy proof
+  3. every band is the stated function of the corpus, not a literal — *mutant: hand-edit one number*
+  4. **no band FALLS** — *mutant: lower `metropolis` from 96 to the measured 89*
+  5. the real-pipeline corpus is non-vacuous: one settlement per tier, and at least one that threw at base — **the vacuity guard, and it is not optional here: a corpus of six metropolises would pass arm 1 trivially**
+  6. `MAXIMUM_WARDS` is untouched — *mutant: raise it* — it never bit (districts 1..7 against caps 8..48) and a band that never bit must not move under cover of one that did
+- **census** +6 titles · **⛔ GOLDENS: the LIT cartography surfaces re-record** (settlements that threw now emit rows); the dark path and the dormancy golden do not move · **DECLARED SHIFT: yes** · **flag** none
+- ⚠ **one thing to report, not to fix here:** a metropolis projects a median of **53** canonical scene buildings and a town **55**, at twenty times the population. Look and write it down; the cause is upstream of this stage (charter §9.3 D-11)
+
+#### `CG-2` — a flagship consumes the ground it stands on
+- **family** cartography · **depends on** CG-1 · **blocks** DW-1a and, specifically, EST-2b
+- **changeManifest**
+  - `MODIFY src/domain/townCartography/cartographyBuildings.js` — the flagship round increments `occupancy`; spills to the ward sibling by the existing walk at `:309-314`; falls to the existing NAMED-premise path at `:338` when the ward is full; max +18 eff
+  - `CREATE tests/domain/cartographySubcellCollision.test.js`
+- **requiredSymbols** `compileTownBuildingLayers` (preserved)
+- **acceptance (5)**
+  1. **no two rows in a compiled block share a footprint** — *mutant: restore the non-consuming flagship.* **Fails 183 times over 32 settlements at base**
+  2. **every canonical institution still appears** — *mutant: cap flagships and drop the surplus.* This arm protects the exemption's real purpose, which is the one thing the cure must not break
+  3. a flagship whose bound parcel is full lands on a ward sibling — *mutant: remove the spill*
+  4. a flagship whose whole ward is full is NAMED, never silently dropped — *mutant: `continue`*
+  5. dwelling packing is byte-identical to today — *mutant: touch a dwelling shrink permille* — the dormancy proof
+- **census** +5 titles · **⛔ GOLDENS: the same LIT surfaces; CG-1 and CG-2 re-record as ONE act** · **DECLARED SHIFT: yes** · **flag** none
+
+---
+
 ### DW-1 — the vocabularies
 
 #### `DW-1a` — the cell vocabulary
-- **family** dwellings · **depends on** CH-1 LANDED
+- **family** dwellings · **depends on** CH-1 LANDED ⛔ **and CG-1, CG-2 LANDED**
 - **changeManifest**
   - `CREATE src/domain/dwellings/vocabulary/cellVocabulary.js` — `CELL_KINDS`, `CELL_GROUP`, `isCellKind`; max +120 eff
-  - `MODIFY src/domain/interior/interiorTemplates.js` — `ROOM_KINDS` re-points at `CELL_KINDS`; **retire `'stall'`**; max +10 eff
+  - `MODIFY src/domain/interior/interiorTemplates.js` — `ROOM_KINDS` re-points at `CELL_KINDS`; ⛔ **retire BOTH `'stall'` and `'dais'`** (the `FURNISHING_KINDS` `dais` at `:53` STAYS); max +10 eff
   - `CREATE tests/domain/dwellingsCellVocabulary.test.js`
 - **requiredSymbols** `ROOM_KINDS`, `interiorKindOf`, `resolveRoomSet` (preserved)
-- **retiredSymbols** — none (a member of an array, not a symbol); the retirement is asserted in the acceptance
-- **acceptance (5)**
+- **retiredSymbols** — none (members of an array, not symbols); the retirements are asserted in the acceptance
+- **acceptance (6)** — ⛔ **arms 3–5 amended (charter §Σ AR-7): TWO members retire, not one, and the walker pins the intermediates as well as the total**
   1. `CELL_KINDS` is frozen and every member is unique — *mutant: duplicate a member*
   2. every `TEMPLATES` room kind is a `CELL_KINDS` member — *mutant: rename one template room*
-  3. `'stall'` is absent from `CELL_KINDS` — *mutant: re-add it*
-  4. **no source file under `src/` produces `'stall'`** (the retirement is real, not cosmetic) — *mutant: add a `kind: 'stall'` literal anywhere*
-  5. the count is exactly 83 — *mutant: add or drop one*
-- **census** +5 titles · **goldens** none — **DECLARED SHIFT: NONE** (no producer reads the new members) · **flag** none
+  3. **both `'stall'` and `'dais'` are absent from `CELL_KINDS`** — *mutant: re-add either*
+  4. **no source file under `src/` produces `room('stall'` or `room('dais'`** (the retirements are real, not cosmetic) — *mutant: add a `room('dais', …)` call anywhere.* ⚠ **The scan must match the ROOM-PRODUCER spelling, not the bare string:** `'dais'` still occurs four times in `src/` after this car, twice as the surviving `FURNISHING_KINDS` member and twice in furnish lists at `interiorTemplates.js:140` and `:166`. **A bare `grep "'dais'"` arm would be red forever and would then be widened until it proved nothing** — this is exactly the cross-vocabulary collision that hid the dead member in the first place
+  5. `FURNISHING_KINDS.dais` **survives** — *mutant: retire it too* — it has two live producers and retiring it deletes drawn furniture
+  6. the counts are exactly **28 retired-2 added-57 = 83** — all three figures, not just the total — *mutant: add or drop one at any of the three*
+- **census** +6 titles · **goldens** none — **DECLARED SHIFT: NONE** (no producer reads the new members) · **flag** none
 
 #### `DW-1b` — fixtures, `RECESS`, `SUBDIVISION`
 - `CREATE .../vocabulary/fixtureVocabulary.js` (+120) · `MODIFY interiorTemplates.js` (`FURNISHING_KINDS`, +6) · `CREATE tests/domain/dwellingsFixtureVocabulary.test.js`
-- **acceptance (4)** frozen+unique; every template `furnish` member is a `FIXTURE_KINDS` member; `RECESS_STATES` is exactly `OPEN|BLOCKED`; count is 81
+- **acceptance (4)** frozen+unique; every template `furnish` member is a `FIXTURE_KINDS` member; `RECESS_STATES` is exactly `OPEN|BLOCKED`; ⛔ **count is 82** (`22 + 60`, amended from 81 — charter §Σ AR-7)
 - +4 titles · no goldens · **SHIFT: NONE** · no flag
 
 #### `DW-1c` — the parti catalog
@@ -1199,32 +1418,84 @@ wrapped in the mutex (self-deadlock); batteries mutexed on one command line with
   6. every `cells[].kind` is a `CELL_KINDS` member
 - **census** +6 titles across four cars · **SHIFT: NONE** (data with no consumer yet) · no flag
 
-#### `EST-2` — allocation with merge
-- **depends on** EST-1, DW-2a
+#### `EST-2` — allocation with merge  ⛔ *(SPLITS into EST-2a and EST-2b — see the box below)*
+- **depends on** EST-1d, DW-2a, ⛔ **CG-2** (its capacity predicate is only true once the flagship round consumes its subcell — arch-0 §0.3a)
 - `CREATE src/domain/townCartography/cartographyAllocation.js` (+220)
 - `MODIFY src/domain/townCartography/cartographySynthesis.js` — insert the call between L385 and L400; rewrite `binding.parcelId` only; max +14 eff
 - `CREATE tests/domain/townCartographyAllocation.test.js`
 - **requiredSymbols** `compileTownParcelLayers`, `compileTownBuildingLayers`, `carveCandidates` is private so name `compileTownParcelLayers` only
-- **acceptance (8, the cap)**
-  1. **the union of `(e,s)` and `(e,s+1)` is exactly the triangle `[C, cuts[s], cuts[s+2]]`** — *mutant: union by convex hull, which would give the same points but a different vertex ORDER and would break `scenePointInPolygon`*
-  2. a merged parcel passes `scenePointInPolygon` on every vertex of every medial subcell — the theorem survives — *mutant: allow a VERTEX merge*
+- **acceptance (8, the cap)** — ⛔ **arms 1 and 2 REWRITTEN (charter §Σ AR-2). The
+  compile's arm 1 asserted the union is EXACTLY `[C, cuts[s], cuts[s+2]]`, which
+  is unpassable: 646 of 1,056 real triples are not collinear. It is replaced by
+  two arms, a construction claim and a bounded-fidelity claim, and the second
+  carries a control that genuinely fails.**
+  1. **CONSTRUCTION.** The merged parcel IS `[C, cuts[s], cuts[s+2]]` — built,
+     not computed — and `polygon.length === 3`. *Mutant: emit the true
+     four-vertex union (the convex hull of the two wedges), which is
+     geometrically more exact and reds `townCartographyParcels.test.js:265`.*
+     **This arm exists to make that trade explicit: we keep the triangle and
+     accept at most 1.4% of the parcel's ground in error, rather than keep the
+     ground and lose the three-vertex pin.**
+  1b. **BOUNDED FIDELITY, in the suite's own unit.** For every merge the
+     compiler performs, `scenePointSegmentDistanceSq(cuts[s+1], cuts[s], cuts[s+2]) <= 1`
+     — the exact constant and predicate `withinWard` uses at
+     `tests/domain/townCartographyParcels.test.js:164-172`, cited by name so the
+     two can never drift — **and** the symmetric difference
+     `area(cuts[s], cuts[s+1], cuts[s+2])` is at most 2% of the merged parcel's
+     area. **Measured at base: max squared deviation 0.4999 and max symmetric
+     difference 1.403%, over 1,056 triples, zero exceedances — so the arm passes
+     with real headroom rather than sitting on its boundary.**
+     ⛔ ***THE CONTROL, and it must be in the same file (ODQ §503: a control that
+     cannot fail proves nothing).*** Run the identical predicate over a
+     VERTEX-CROSSING pair — wedge `(e,2)` with `(e+1,0)`, whose "middle cut" is
+     the shared ward vertex. **Measured: squared deviation 291.3 (min) to 3,183.6
+     (max) over 528 pairs; 0 of 528 pass.** The arm must assert the subject
+     passes AND the control fails, in one test, or it proves only that the
+     tolerance is large.
+  2. a merged parcel passes `scenePointInPolygon` on every vertex of every
+     medial subcell — the theorem survives — *mutant: allow a VERTEX merge*.
+     **Measured at base: 0 of 4,224 subcell failures over 1,056 merges, so this
+     arm is green by construction and its job is to stay that way.**
+  2b. ⛔ **CAPACITY IS FOUR SLOTS (new arm, charter §Σ AR-1).** `availableToProgram`
+     is `4 − flagshipsBoundHere`, never `BUILDINGS_PER_PARCEL[tier]`, and
+     `programSatisfied` is a claim about it. *Mutant: use the tier band* — which
+     passes trivially at city and metropolis (band 4 = slots 4) and **fails at
+     thorp, hamlet, village and town**, so the mutant is convicted exactly where
+     the real cap ladder and the real slot count disagree.
   3. a cross-ward merge throws a premise error — *mutant: allow it*
   4. at most 2 unions per ward edge — *mutant: unbounded loop*
   5. **zero entropy consumed**: the allocation runs identically with a poisoned PRNG — *mutant: call `rng()` once*
   6. the candidate ORDER is `orderCandidates`' order, unchanged — *mutant: re-sort*
   7. when no envelope satisfies the program after bounded merging, the **REPORTED CONTRADICTION** is emitted with the institution, tier, minimum and best envelope — *mutant: return the best envelope silently*
   8. `binding.parcelId` is the ONLY binding field written — *mutant: touch `placement`*
-- **census** +8 titles
-- **⛔ GOLDENS: THIS CAR MOVES THEM.** The cartography determinism goldens and any same-seed map golden re-record. **DECLARED SHIFT: the drawn map of every settlement changes** — parcels merge, bindings re-point. Named in the packet, re-recorded with the cause stated, per the non-negotiable.
-- no flag
+
+> ### ⛔ EST-2 SPLITS IN TWO — TEN ARMS DO NOT FIT AN EIGHT-ARM CAP
+>
+> The amendment added arms 1b and 2b, taking EST-2 from 8 to **10**. The cap is
+> 8, and widening a cap to fit a car is the move this estate does not make. The
+> car splits along the seam its own arms already have:
+>
+> | Car | Files | Arms | What it is |
+> |---|---|---|---|
+> | **EST-2a — THE MERGE** | `CREATE cartographyAllocation.js` (the union half, ~110 eff) · `CREATE tests/domain/townCartographyMerge.test.js` | **1, 1b (+ its control), 2, 3, 4** — five | pure geometry: the chord triangle, the lattice tolerance with its failing control, subcell survival, the cross-ward refusal, the bounded union count |
+> | **EST-2b — THE ALLOCATION** | `MODIFY cartographyAllocation.js` (the select half, ~110 eff) · `MODIFY cartographySynthesis.js` (+14) · `CREATE tests/domain/townCartographyAllocation.test.js` | **2b, 5, 6, 7, 8** — five | the capacity predicate, determinism, candidate order, the reported contradiction, the single-field binding write |
+>
+> **EST-2a carries the declared shift and the golden re-record; EST-2b rides it**
+> — the same one-act rule the compile gave EST-2/EST-3, now over three cars.
+> **The program is 41 cars / 45 dispatchable commits** (44 + this split). Charter
+> §5.0's figure moves with it.
+
+- **census** +5 titles (EST-2a) and +5 (EST-2b)
+- **⛔ GOLDENS: THIS PAIR MOVES THEM.** The cartography determinism goldens and every same-seed LIT map surface re-record. **DECLARED SHIFT: the drawn map of every settlement changes** — parcels merge, bindings re-point. ⛔ **Amended (charter §Σ AR-3): confined to the LIT surfaces. The dark path and `townCartographyDormancyGolden.test.js` do NOT move**, because `townCartographyEnabled` is set true nowhere in `src/` and the dormancy arms do not depend on the block's contents. Named in the packet, re-recorded with the cause stated, per the non-negotiable.
+- no flag — it lands inside `townCartographyEnabled` (charter §0.5's amended table)
 
 #### `EST-3` — the draft on assembled ground
-- **depends on** EST-2, DW-2c
+- **depends on** EST-2b, DW-2c
 - `MODIFY src/domain/townCartography/cartographyBuildings.js` — institution rows claim the subcell(s) their program needs; dwellings untouched; max +36 eff
 - `MODIFY src/domain/townCartography/cartographySynthesis.js` (+6)
 - `CREATE tests/domain/townCartographyProgramDraft.test.js`
 - **acceptance (7)** an institution claims ≥1 subcell and never more than 4; the three-rung shrink ladder is REUSED unchanged — *mutant: add a fourth rung*; `packFootprint`'s exact predicate still runs on every vertex; dwelling packing is byte-identical to today — *mutant: change a dwelling shrink permille* — the dormancy proof; a town inn's draft contains every cell of its `ProgramMinimum`; **there is no draft-then-redraft** (assert the draft function is called exactly once per building) — *mutant: call it twice*; an institution that cannot pack is still NAMED, now with the richer payload
-- +7 titles · **⛔ GOLDENS MOVE** (footprints shift) · **DECLARED SHIFT: yes, the same one as EST-2, re-recorded once across the pair** · no flag
+- +7 titles · **⛔ GOLDENS MOVE** (footprints shift) · **DECLARED SHIFT: yes, the same one as EST-2a/2b, re-recorded ONCE across the three** · no flag
 
 #### `EST-4` — ownership
 - **depends on** DW-1f
@@ -1233,7 +1504,7 @@ wrapped in the mutex (self-deadlock); batteries mutexed on one command line with
 - +6 titles · **SHIFT: NONE** (estates emit no op until DW-6d) · no flag
 
 #### `EST-5` — accretion and the reverse motions
-- **depends on** EST-4, EST-2
+- **depends on** EST-4, EST-2b
 - `MODIFY src/domain/townCartography/cartographyEstates.js` (+60) · `CREATE tests/domain/townCartographyAccretion.test.js` · `MODIFY cartographySynthesis.js` (+6)
 - **acceptance (8, the cap)**
   1. **every range present at year N is present and unmoved at year N+1** — the constitutional arm — *mutant: re-draft on acquisition*
@@ -1290,13 +1561,14 @@ wrapped in the mutex (self-deadlock); batteries mutexed on one command line with
 ### 4.1 · The order, as a dispatch list
 
 ```
-CH-1, CH-2, CH-3                       (not DW's; must be LANDED first)
+CG-1 -> CG-2                           (not DW's; LANDED FIRST -- charter SS5.0')
+CH-1, CH-2, CH-3                       (not DW's; must be LANDED before DW-1a)
 DW-R1 -> DW-R2 -> DW-R3
 DW-1a -> DW-1b            (both touch interiorTemplates.js: serialize them)
 DW-1c, DW-1d, DW-1e, DW-1f            (parallel; no shared file)
 DW-2a -> DW-2b -> DW-2d -> DW-2e      (2b/2d/2e all touch interiorModel.js: serialize)
 EST-1a..1d -> DW-2c                    (2c needs the program table)
-EST-2 -> EST-3                         (the golden re-record is ONE act across the pair)
+EST-2a -> EST-2b -> EST-3              (the golden re-record is ONE act across the three)
 EST-4 -> EST-5
 EST-6
 DW-3a -> DW-3b
@@ -1310,20 +1582,31 @@ DW-7a                                   (LAST — the only light car, the only f
 DW-S1 -> DW-S2 -> DW-S3                (after DW-5)
 ```
 
-**Two serialization rules that are not obvious and will bite:**
+**⛔ THREE serialization rules that are not obvious and will bite** (the first is
+new — charter §Σ AR-5):
+
+0. **CG-1 and CG-2 land before DW-1a, ahead of CH.** They MODIFY
+   `cartographyTuning.js` and `cartographyBuildings.js`, both of which EST-3 also
+   modifies, so the manifest scan at each EST base must include the CG paths.
+   And EST-2b's capacity arm is only true once CG-2 lands.
 1. **`interiorModel.js` is touched by DW-2b, DW-2d, DW-2e, DW-3a and DW-6a.**
    Five cars, one file. They must be serialized, and each must re-read the file
    at its own base — a pre-commit `eslint --fix` re-stages, so `git diff HEAD` is
    blind and the green must be re-proven AT the committed tip.
-2. **`cartographySynthesis.js` is touched by EST-2, EST-3, EST-4 and EST-5.**
+2. **`cartographySynthesis.js` is touched by EST-2b, EST-3, EST-4 and EST-5.**
    Same rule. And it is a LANDED `MODIFY` path in three earlier packets
    (TC-3A/3B/4), so the manifest scan must be re-run before each of the four.
 
-**Total: 41 cars** (DW-R 3, DW-1 6, DW-2 5, ESTATE 9 after EST-1's split into
-four, DW-3 3, DW-4 2, DW-5 4, DW-6 5, DW-7 4). ⚠ The charter's §5 headline says
-41 with EST-1 as one car; the split makes it **44 dispatchable commits**. The
-charter's figure counts CARS as planned; this figure counts COMMITS as
-dispatched. Both are stated so neither is a surprise.
+**Total: 41 DW cars / ⛔ 45 dispatchable commits** (DW-R 3, DW-1 6, DW-2 5,
+ESTATE **10** after EST-1's four-way split and EST-2's two-way split, DW-3 3,
+DW-4 2, DW-5 4, DW-6 5, DW-7 4). The charter's §5 headline counts CARS as
+planned; this figure counts COMMITS as dispatched; the difference is EST-1 (+3)
+and EST-2 (+1). ⛔ **Amended (charter §Σ AR-2/AR-9): the compile said 41/41 and
+arch-4 said 41/44; EST-2's rewritten acceptance takes it to 45.**
+
+⛔ **Plus TWO prerequisite commits outside that total, CG-1 and CG-2** — family
+`cartography`, repairing landed code (charter §5.0′), exactly as CH-1/2/3 sit
+outside it. **The arc a build lane actually dispatches is 47 commits.**
 
 ## arch-5 · THE TEST ARCHITECTURE
 
@@ -1338,8 +1621,10 @@ never before it.
 
 | Walker | Asserts | Discovery half (automatic) | Registration half (manual) | The mutant that convicts it |
 |---|---|---|---|---|
-| **W1 containment is still a theorem** | every footprint's every vertex, and its anchor, passes `scenePointInPolygon` against its parcel — **including merged parcels** | walk every building row of a generated settlement at 5 seeded tiers | none | union two wedges by convex hull (same points, wrong vertex order) |
-| **W2 one writer per fact** | a source scan: only `cartographyAllocation.js` writes `binding.parcelId`; only `cartographyEstates.js` writes an `Estate`; only `verticalPartition.js` builds a `Storey[]`; only `yardFixtures.js` emits a `YardFixture` | glob `src/**/*.js`, regex the write shapes (assignment, `push`, `splice`, spread-rebuild) | the exempt list, one entry per legal writer | add a second `.parcelId =` anywhere |
+| **W1 containment is still a theorem** | every footprint's every vertex, and its anchor, passes `scenePointInPolygon` against its parcel — **including merged parcels** | walk every building row of a generated settlement at 5 seeded tiers, ⛔ **over BOTH corpora — the 20-row fixture set AND the real-pipeline set CG-1 lands** | none | union two wedges by convex hull (same points, wrong vertex order) |
+| ⛔ **W0 no two rows share a footprint** *(new; charter §Σ AR-1 / §0 H29)* | no two building rows in one compiled block have byte-identical footprints | hash every row's footprint per block and group | none | **restore the non-consuming flagship round — which fails 183 times over 32 real settlements at base.** This walker lands WITH CG-2, never before it, because before it the property is simply false |
+| ⛔ **W0b every settlement compiles** *(new; charter §Σ AR-5 / §0 H31)* | every member of the real-pipeline corpus compiles LIT without a premise error | iterate the frozen corpus | the corpus module | restore any pre-CG-1 per-tier band — **fails 24/24 at hamlet, village and town** |
+| **W2 one writer per fact** | a source scan: only `cartographyAllocation.js` writes `binding.parcelId` (EST-2b); only `cartographyEstates.js` writes an `Estate`; only `verticalPartition.js` builds a `Storey[]`; only `yardFixtures.js` emits a `YardFixture` | glob `src/**/*.js`, regex the write shapes (assignment, `push`, `splice`, spread-rebuild) | the exempt list, one entry per legal writer | add a second `.parcelId =` anywhere |
 | **W3 every program row is registered** | exact-set equality between the catalog's (shelf, name, tier) triples that can fire and the `ProgramMinimum` table's keys | read `institutionalCatalog.js` and enumerate | the 11 shelf files | add a catalog row without a program row; delete a program row whose catalog row still exists |
 | **W4 every estate member resolves** | every `EstateMember.parcelId` names a parcel in the same block; every `ownerRef` is an institution anchor or `ANONYMOUS_FABRIC` | walk the compiled block | none | point a member at a deleted parcel |
 | **W5 accretion never rewrites a lived range** | for every property that grew between epoch N and N+1, the set of ranges at N is a SUBSET of the set at N+1, and each has identical geometry | diff two epochs of the same seed | none | re-draft on acquisition |
@@ -1358,22 +1643,46 @@ new test file is a CREATE, never a TEST — the TEST path must exist at every
 status). Arms are capped at 8 and each names the mutant that would convict it —
 arch-4 carries them.
 
-**The two arms every car has, whatever else it has:**
+**The ⛔ THREE arms every car has, whatever else it has** (the third is new —
+charter §Σ AR-2/AR-5):
 
 1. **The dormancy proof.** Before the wiring, the car's own change is
    byte-identical to today on a fixed seed set. DW-2a's fallback arm, EST-3's
-   dwelling-packing arm and DW-7a's flag-off arm are the three that matter most.
+   dwelling-packing arm, CG-1's fixture-corpus arm and DW-7a's flag-off arm are
+   the four that matter most.
 2. **The vacuity guard.** An arm that could pass over an empty population must
    assert the population is non-empty first. Measured precedent: a whole-document
    `includes(name)` PASSED after the row it checked was deleted, because the
    prose named it too. Slice the section, compare ordered lists.
+3. ⛔ **THE FAILING CONTROL — a control that cannot fail proves nothing**
+   (ODQ §503's measurement law, and this program earned it twice). **Any arm
+   asserting that a measured quantity sits inside a tolerance must, in the same
+   test file, run the identical predicate over a population that is OUTSIDE it,
+   and assert that it fails.** Without the second half the arm only proves the
+   tolerance is loose. Worked instances this architecture already carries:
+   EST-2a's lattice arm passes 1,056 of 1,056 intra-edge triples and must show
+   the vertex-crossing control failing 528 of 528; CG-1's compile arm passes on
+   the real-pipeline corpus and fails 24 of 24 at three tiers with any old band
+   restored; CG-2's uniqueness arm fails 183 times at base. **An arm whose base
+   state is already green has not been shown to measure anything.**
+
+> ⛔ **AND THE CORPUS RULE THAT REMOVES THE HABITAT (charter §Σ AR-5).** The
+> defect CG-1 repairs exists because **every cartography corpus pin in the suite
+> runs against `makeTownFixture` output** — hand-made settlements with small,
+> tidy rosters — and the stage was therefore never once run against what the
+> generator actually produces. Measured, real settlements exceed a shipped
+> per-tier band at four of six tiers, three of them every single time. **From
+> CG-1 onward, every corpus pin over the cartography stage runs against BOTH
+> corpora**, and a new per-tier band is authored against the real one. That rule,
+> not the six numbers CG-1 moves, is the actual cure.
 
 ### 5.3 · Layer 3 — the property and golden surfaces, and which move
 
 | Surface | Moves? | When, and why |
 |---|---|---|
-| `tests/domain/townCartographyDeterminism.test.js` | **YES** | EST-2/EST-3: parcels merge and footprints move. **ONE re-record across the pair**, cause stated. |
-| the same-seed map goldens | **YES** | same cause, same act |
+| ⛔ **the eight LIT cartography test files** — `townCartographyParcels`, `…Buildings`, `…Wards`, `…Paint`, `…Determinism`, `townSceneCartography`, `tests/lib/townCartographyBlock`, `tests/hooks/useTownCartographyBlock` | **YES, TWICE** | **first by CG-1+CG-2** (settlements that threw now compile; colliding footprints separate) — ONE re-record across that pair — **then by EST-2a+EST-2b+EST-3** (parcels merge, footprints move) — a second re-record across those three. Two declared acts, each with its cause stated. |
+| ⛔ `tests/property/townCartographyDormancyGolden.test.js` | **NO** | its dark baseline predates the stage and is untouched; its lit arm asserts that stripping the block recovers the dark manifest, which stays true when the block's CONTENTS change. **Named explicitly so nobody re-records it "to be safe" — doing so would destroy the fence.** |
+| the same-seed map goldens | **YES** | same cause, same acts |
 | `tests/domain/townCartographyPaint.test.js` (the op-count identity) | **YES** | first by MP-1 (the `parcel` op), then by DW-6d (`estate`/`member`) |
 | the interior goldens | **NO** | DW-2a's fallback is byte-identical; every other DW-1/2 car is dark |
 | generation goldens (economy, power, services, news) | **NO** | DW writes no generation byte. **This is a claim a car must PROVE, not assert:** every wave runs the generation golden and cites it green. |
@@ -1413,7 +1722,7 @@ tells them:
 
 | Ratchet | State at base | What DW does to it |
 |---|---|---|
-| **The test census** | grows with every added title | ~130 new titles across 44 commits. Each car states its own delta. ⚠ A delta SMALLER than the titles added is not arithmetic to accept — attribute it by reverting one test file at a time, because a parked file swallows its titles. |
+| **The test census** | grows with every added title | ⛔ **~145 new titles across 47 commits** (amended: +2 from DW-1a's widened acceptance and EST-2's split, +11 from CG-1 and CG-2). Each car states its own delta. ⚠ A delta SMALLER than the titles added is not arithmetic to accept — attribute it by reverting one test file at a time, because a parked file swallows its titles. |
 | **The banked-failure ratchet** `scripts/.test-ratchet-baseline.json` | **11 entries**, `CEILING = 17` (`tests/lint/testRatchet.test.js:181`) — it has burned DOWN from 17 | DW should add **zero** entries. A banked failure is a debt, and every DW car is new code with no legacy red. |
 | **The size baseline** `scripts/.size-baseline.json` | **10 entries**, none a DW file | DW adds **zero** entries and moves **zero**. The largest modified file ends at ~275 effective against a ceiling of 800. A car that would need an entry has mis-scoped. |
 | **`sizeBaseline.test.js`'s honesty arm** | demands a file under its layer ceiling has NO entry | nothing to do, but do not "helpfully" add one |
@@ -1451,8 +1760,10 @@ control is an anxiety.
 
 ### R-1 · THE SAME-SEED SHIFT AND THE ONE-REGEN DEADLINE — **cost: the endgame tail**
 
-**The risk.** The ESTATE wave (EST-2 + EST-3) changes the drawn map of every
-settlement that already exists. The endgame plans exactly ONE regeneration before
+**The risk.** The ESTATE wave (EST-2a + EST-2b + EST-3) changes the drawn map of
+every settlement that already exists — and ⛔ **the CG train moves the same
+surfaces first**, so there are now TWO declared re-records before the regen, not
+one (charter §Σ AR-3/AR-5). The endgame plans exactly ONE regeneration before
 the terminal soak. **If this arc lands after that regen, it forces a second one**,
 and the tail order (ODQ §341/§456) has no room for it: nothing that can move an
 output may land after the tuning signature.
@@ -1465,9 +1776,11 @@ be re-made, and it is the only risk on the list that a build lane cannot fix.
 the owner before the bands, as chair ruling R7 requires. **The control is that
 the owner reads it.**
 
-**Secondary control.** EST-2 and EST-3 re-record their goldens as ONE act with
-the cause stated, so the shift is one declared event in the history rather than
-two undeclared ones.
+**Secondary control.** CG-1 and CG-2 re-record as ONE act; EST-2a, EST-2b and
+EST-3 re-record as a SECOND, each with its cause stated, so the shifts are two
+declared events in the history rather than five undeclared ones. ⛔ **And the
+shifts are confined to the eight LIT cartography test surfaces**: no user sees a
+pixel move, because `townCartographyEnabled` is set true nowhere in `src/`.
 
 ---
 
@@ -1484,19 +1797,75 @@ refusal-over-repair; R2′ (§497) superseded it because a refusal at draw time
 makes the map contradict the roster. **The reconciliation is that allocation
 SELECTS and UNIONS before anything is drawn** — no drawn shape is ever repaired.
 
-**Controls.**
+**⛔ AND THE CONTROL THE COMPILE WROTE COULD NOT PASS (amended, charter §Σ AR-2).**
+The compile's EST-2 arm 1 asserted the union of two adjacent same-edge wedges is
+**EXACTLY** `[C, cuts[s], cuts[s+2]]`, on the reasoning that the three cuts are
+collinear. **They are not: `cartographyParcels.js:100-104` rounds both interior
+cuts onto the integer lattice, and 646 of 1,056 real triples (61.2%) are
+non-collinear.** The arm was unpassable and its subject was the wrong one — the
+honest four-vertex union is what the "mutant" would have produced.
+
+**Controls, as amended.**
 - W1 (arch-5): every vertex and anchor of every footprint passes
-  `scenePointInPolygon` against its parcel, including merged parcels.
-- EST-2 acceptance arm 1: the union of two adjacent same-edge wedges is EXACTLY
-  `[C, cuts[s], cuts[s+2]]` — the mutant is a convex-hull union, which produces
-  the same points in a different vertex ORDER and breaks the predicate.
-- EST-2 acceptance arm 4: at most 2 unions per ward edge, so the "loop" is a
-  bounded `for`, not a retry.
+  `scenePointInPolygon` against its parcel, including merged parcels — **over
+  both corpora**.
+- **EST-2a arm 1 (CONSTRUCTION):** the merged parcel IS `[C, cuts[s], cuts[s+2]]`
+  and `polygon.length === 3`. *Mutant: emit the true four-vertex union*, which is
+  geometrically exact and reds `townCartographyParcels.test.js:265`. The arm
+  exists to make that trade explicit.
+- **EST-2a arm 1b (BOUNDED FIDELITY, in the suite's own unit):**
+  `scenePointSegmentDistanceSq(cuts[s+1], cuts[s], cuts[s+2]) <= 1` — the exact
+  predicate and constant `withinWard` uses at `townCartographyParcels.test.js:164-172`,
+  whose own comment names the sqrt(0.5) lattice bound — plus a symmetric
+  difference at most 2% of the merged parcel. **Measured: max squared deviation
+  0.4999, max symmetric difference 1.403%, over 1,056 triples, zero exceedances.**
+  ⛔ ***With its failing control in the same file:*** the same predicate over
+  vertex-crossing pairs gives squared deviations of **291.3 to 3,183.6, 0 of 528
+  passing.** Subject 1,056/1,056; control 0/528.
+- EST-2a arm 4: at most 2 unions per ward edge, so the "loop" is a bounded `for`,
+  not a retry.
 - EST-3 acceptance arm 2: the three-rung shrink ladder is reused UNCHANGED.
 
-**Residual.** The VERTEX-crossing merge yields a quadrilateral, and
+**Residual.** The VERTEX-crossing merge yields a quadrilateral — **measured, 528
+of 528 are genuine convex quads with zero degenerate**, and `packFootprint`
+destructures three vertices at `:121` — so
 `cartographyBuildings.js`'s medial-subdivision-into-four proof does not apply to
 one. **Deferred, not solved** (charter §9.3 D-4). The first landing refuses it.
+**The charter got this refusal right while getting the theorem it depended on
+wrong**, and the asymmetry is worth carrying: structure read from the source
+held; geometry inferred without running it did not.
+
+---
+
+### R-2b · ⛔ THE CAPACITY THE ALLOCATOR IS BUILT ON DOES NOT EXIST YET — **cost: a receipt that means nothing**
+
+**New in the amendment (charter §Σ AR-1; §0 H21, H29; arch-0 §0.3a).**
+
+**The risk.** The compile made H21's "at most four buildings fit a parcel" the
+capacity predicate at charter §4.2 step 4. Measured, the engine emits up to
+**7 rows per parcel on the fixture corpus and 11 on real pipeline settlements**,
+and **13.0% of all rows share a byte-identical footprint with another row** —
+because a flagship is exempt from the occupancy cap and never consumes a subcell.
+**An allocator built on the stated bound triggers its bounded UNION on the wrong
+condition, and `programSatisfied` is a receipt for a capacity nothing keeps.**
+
+**Controls.**
+- **CG-2 makes the bound true before EST-2b is written** — the flagship round
+  consumes its subcell, spills to a ward sibling, and falls to the existing NAMED
+  premise path when the ward is full. **EST-2b's dependency on CG-2 is the
+  control; without it the arm below is unfalsifiable.**
+- **EST-2b arm 2b:** `availableToProgram = 4 − flagshipsBoundHere`, never the
+  tier band. *Mutant: use `BUILDINGS_PER_PARCEL[tier]`* — which **passes
+  trivially at city and metropolis** (band 4 = slots 4) and **fails at thorp,
+  hamlet, village and town**, convicting the mutant exactly where the two
+  disagree.
+- **W0 (arch-5):** no two rows in a compiled block share a footprint. Fails 183
+  times at base; lands with CG-2.
+
+**Residual.** ⚠ **A merge HALVES the slot count while doubling each slot** — two
+wedges carry eight medial subcells, their union carries four. An allocator that
+merges to fit *more* cells has the sign backwards. Stated in charter §4.2 and
+arch-2 §2.1; there is no test that catches the sign error, only the prose.
 
 ---
 
@@ -1516,11 +1885,11 @@ already careful about order-dependence, and a new selection pass is exactly wher
 that care gets dropped.
 
 **Controls.**
-- EST-2 acceptance arm 5: **the allocation runs identically with a poisoned
+- EST-2b acceptance arm 5: **the allocation runs identically with a poisoned
   PRNG.** The mutant is a single `rng()` call.
-- EST-2 acceptance arm 6: the candidate order is `orderCandidates`' order,
+- EST-2b acceptance arm 6: the candidate order is `orderCandidates`' order,
   unchanged.
-- EST-2 acceptance arm 8: `binding.parcelId` is the only binding field written —
+- EST-2b acceptance arm 8: `binding.parcelId` is the only binding field written —
   because the header at `cartographySynthesis.js:397` requires the receipt be
   consumed VERBATIM.
 - W8 (purity scan) over both new cartography leaves.
@@ -1559,9 +1928,45 @@ exact shape of a reassuring lie.
 
 ---
 
-### R-5 · PERFORMANCE — **cost: a product claim**
+### R-5 · PERFORMANCE — ⛔ **DISCHARGED BY MEASUREMENT. THE ANSWER IS NOT CLOSE.**
 
-**What I measured** (executed reads of the tuning constants at base; these are
+**Amended (charter §Σ AR-10). The compile could produce only an analytic bound
+and said so honestly; the skeptic panel ran the wall clock. Here is the number,
+and it is the one the owner will quote.**
+
+| Stage (median ms, node, 7 reps after warm-up, real pipeline settlements) | thorp | village | town | city | metropolis |
+|---|---|---|---|---|---|
+| **A. Full settlement generation** | 7.1 | 16.9 | 24.6 | 23.4 | **29.9** |
+| **B. Map/cartography manifest compile, LIT** | 11.5 | — | — | — | **139.7** |
+| **C. ONE interior plan derivation, per building** | 0.2 | 0.4 | 0.7 | 0.9 | **1.3** |
+| **D. Eager derivation of EVERY drawn building** *(the case the architecture excludes)* | 1.0 | — | — | — | **~309** |
+
+**⭐ A metropolis costs about 30 ms to generate and about 140 ms to compile its
+map — roughly 170 ms against a 2,000 ms budget. The architecture's lazy,
+per-building plan derivation adds 1.3 ms on click, which is invisible. Even the
+worst case the architecture explicitly excludes — deriving all 240 drawn
+buildings eagerly — costs about 309 ms, which still fits inside two seconds
+alongside everything else.**
+
+**Two seconds survives with roughly an order of magnitude of headroom, and it
+survives even if the laziness contract is broken.** The dominant cost is the
+EXISTING cartography compile at 140 ms, not anything DW adds.
+
+**Two honest caveats.** (i) These are node-side numbers on one machine with a
+warm module graph; browser numbers will differ, though the ratio to budget is
+what matters and it is about 12 to 1. (ii) EST-2b's allocation is not measured
+because it does not exist — but its own bound (at most 96 institutions × 24
+candidates = 2,304 integer comparisons) is negligible beside a 140 ms compile
+that already runs point-in-polygon over 5,961 vertices.
+
+**Control: the pre-DW-2 measurement lane charter C5 ordered is STRUCK.** Keep a
+timing series in DW-S for drift. **Do not spend a lane on this.**
+
+**The analytic bounds below are retained because they are still the right way to
+reason about the SHAPE of the cost, and because they are what the timing table
+above should be checked against if either ever changes.**
+
+**What was read** (executed reads of the tuning constants at base; these are
 real bounds, not estimates):
 
 | Bound | Value | Source |
@@ -1576,7 +1981,7 @@ real bounds, not estimates):
 
 **The derived cost of the NEW work, per settlement, worst case (metropolis):**
 
-- **Allocation (EST-2):** ≤ 96 institutions × ≤ 24 candidates = **≤ 2,304
+- **Allocation (EST-2a/2b):** ≤ 96 institutions × ≤ 24 candidates = **≤ 2,304
   program-satisfaction tests**, each a small array comparison, plus ≤ 2 unions
   per institution. Bounded, integer, no allocation of geometry. **Negligible
   against the existing packing pass, which already runs a 3-rung ladder with an
@@ -1592,14 +1997,19 @@ vendor-lazy contract, DW-6a). Nothing derives 11,520 cells during a settlement
 build. The only places that derive everything are (a) the PDF chapter, which is
 an explicit user act, and (b) the soak leg, which is offline.
 
-**⚠ WHAT I DID NOT MEASURE, stated plainly.** I did not run a wall-clock probe. I
-did not create the worktree, and no timing figure in this document is executed.
-The bounds above are arithmetic over constants I read; the *time* those bounds
-translate into is unmeasured. **Charter §9.6 Q-D asks the chair to order a
-measurement lane before DW-2 lands** — it is one probe, cheap now and expensive
-after.
+⛔ **The compile's closing paragraph here read "WHAT I DID NOT MEASURE, stated
+plainly. I did not run a wall-clock probe… Charter §9.6 Q-D asks the chair to
+order a measurement lane before DW-2 lands." It has been run.** The declaration
+was honest and it is superseded by the table at the head of this row; Q-D is
+CLOSED and C5 is DISCHARGED, not ordered.
 
-**Control.** The probe lane, plus a soak-leg timing series once DW-S exists.
+**Control.** A soak-leg timing series once DW-S exists, for drift only.
+
+⚠ **One thing the measurement changes about where to look.** The compile named
+plan derivation as "the cost driver" at up to 11,520 cells per metropolis. The
+wall clock says otherwise: **the existing 140 ms cartography compile is 82% of
+the total and DW's lazy derivation is 0.8% of it.** If anyone ever optimises for
+speed here, the target is the compile, not the plans.
 
 ---
 
@@ -1675,8 +2085,10 @@ whichever lands first pays it once.
 ### R-9 · FIVE CARS, ONE FILE — **cost: a lost green**
 
 **The risk.** `interiorModel.js` is touched by DW-2b, DW-2d, DW-2e, DW-3a and
-DW-6a; `cartographySynthesis.js` by EST-2, EST-3, EST-4 and EST-5. Nine cars,
-two files. In a shared tree with a pre-commit `eslint --fix` that RE-STAGES,
+DW-6a; `cartographySynthesis.js` by EST-2b, EST-3, EST-4 and EST-5. Nine cars,
+two files. ⛔ **And `cartographyBuildings.js` is now touched by CG-2 as well as
+EST-3, and `cartographyTuning.js` by CG-1 — two more MODIFY paths in the same
+trees, which the manifest scan at each EST base must include.** In a shared tree with a pre-commit `eslint --fix` that RE-STAGES,
 `git diff HEAD` is blind and a green proven before the hook is not a green at the
 committed tip.
 
@@ -1705,13 +2117,48 @@ the enum growth cannot silently outrun the drawing.
 
 | # | Risk | Cost if wrong | Control | Residual |
 |---|---|---|---|---|
-| R-1 | the one-regen deadline | the endgame tail | charter §7's first line — the owner reads it | none once ruled |
-| R-2 | the containment theorem | the map's only proof | W1 + EST-2 arms 1/4 + EST-3 arm 2 | the VERTEX merge, deferred |
-| R-3 | determinism under merge | THE PROMISE | EST-2 arms 5/6/8, W8, DW-S A4/A8 | none |
+| ⛔ **R-0** | ⛔ **THE GROUND DOES NOT HOLD** — the stage throws on 32 of 48 real settlements and puts 13% of its rows on occupied ground | **the whole DW program: every geometry car reads what that stage emits** | **CG-1 and CG-2, landing before DW-1**; W0 and W0b; the real-pipeline corpus rule (arch-5 §5.2) | ⚠ the town/metropolis canonical-count inversion, reported by CG-1 and **not fixed** (charter D-11) |
+| R-1 | the one-regen deadline | the endgame tail | charter §7's first line — the owner reads it | ⛔ the arc is now **two repair cars longer** before the regen |
+| R-2 | the containment theorem | the map's only proof | W1 + **EST-2a arms 1/1b (with its failing control) + arm 4** + EST-3 arm 2 | the VERTEX merge, deferred |
+| ⛔ **R-2b** | ⛔ **the capacity the allocator tests does not exist** | `programSatisfied` is a receipt for nothing; the UNION fires on the wrong condition | **CG-2 first**; EST-2b arm 2b; W0 | **a merge HALVES the slots** — prose only, no test catches the sign error |
+| R-3 | determinism under merge | THE PROMISE | EST-2b arms 5/6/8, W8, DW-S A4/A8 | none |
 | R-4 | the consolidation runaway | a 300-y world that looks fine | DW-S A7, both ends, per epoch | **the vacuity trap — A7 must report "not exercised"** |
-| R-5 | performance | a product claim | bounds computed; **wall clock UNMEASURED** | charter Q-D: order a probe lane |
+| R-5 | performance | a product claim | ⛔ **MEASURED: ~170 ms of a 2,000 ms budget; 1.3 ms per building on click. C5 discharged, the lane STRUCK** | node only; browser unmeasured |
 | R-6 | household identity | a feature the owner expects | EST-4 arm 2; charter §7 B11 tells them | family holdings wait |
 | R-7 | the CH dependency | rework of DW-1 | CH lands first; no name-derived facets | none |
 | R-8 | the painter's identity | a late terminal red | DW-6d arm 1; handed to MP-1 | none |
-| R-9 | nine cars, two files | a lost green | serialize; re-prove at the tip | none |
+| R-9 | nine cars, two files | a lost green | serialize; re-prove at the tip | ⛔ **CG-1/CG-2 add two more MODIFY paths in the same two trees** — the manifest scan at each EST base must include them |
 | R-10 | the 3× vocabulary | a slow wave | enums dark; coverage armed at DW-6a | none |
+| ⛔ **R-11** | ⛔ **the frontage gate measures the wrong length** | chair ruling R1 admits 98.8% of parcels and filters nothing; every parti is eligible everywhere | charter §7 **BAND ZERO**, owner-signed; DW-2a reads the SUBCELL FACE and converts through `manifest.space.planUnitCm` | our plots are still fan wedges, not burgage strips — **the numbers become honest; the shape does not** (charter D-1) |
+
+---
+
+## AMENDMENT RECORD
+
+**Lane TC-DW0-R2 (ODQ §484/§504.6), `[OPUS-RUN · FABLE-VALIDATION OWED]`.** Every
+change this amendment made to the DW architecture, its panel finding, and its
+evidence. The charter's own record at `§Σ AMENDMENT RECORD` is the authority for
+the measurements; this table says what moved in THIS document. Base unchanged:
+`claude/composite-r4` = `00e7af612d428078634d52ea37054bd00b773ca6`. **Zero repo
+bytes written.**
+
+| # | Part | What changed | Panel finding |
+|---|---|---|---|
+| **A-1** | arch-0 §0.2 | The merge claim re-stated: `[C, cuts[s], cuts[s+2]]` **by construction and within the suite's one-squared-unit lattice tolerance**, not "exactly". The street clause on the outer edge struck. | MF-2, MF-9 |
+| **A-2** | arch-0 §0.3a *(new)* | **The flagship exemption and the subcell collision, diagnosed to the line.** Ruled a defect, chartered as CG-2, with the cure that reuses the sibling walk already at `:309-314`. | MF-1 |
+| **A-3** | arch-0 §0.12 | The change-path scan now includes the CG paths, which reserve `cartographyTuning.js` and `cartographyBuildings.js` before EST-3 touches the latter. | AR-5 |
+| **A-4** | arch-0 §0.13 *(new)* | **`PLAN_UNIT_CM_BY_TIER` exists at `compileTownSceneManifest.js:99-108`** and DW must not mint a scale. ⛔ **This refutes MF-4's central claim** — both the compile lane and the panel greped the word *scale*, and the engine's spelling is `planUnitCm`. Also: **the plan frame is tier-invariant**, so a hard-coded foot value is wrong at five tiers of six. | MF-4, refuted |
+| **A-5** | arch-1.2, 1.5 | `frontageReader.js` re-specified (subcell face, manifest scale, explicit street derivation); cell/fixture counts corrected; ⛔ **"33 new files" → 41** — the compile said 33, the panel said 40, and 40 missed `programMinimumTable/index.js`, which arch-1.2 itself names as a CREATE row. | MF-6, MF-9, and a correction to the panel |
+| **A-6** | arch-2 §2.1, §2.3 | `Parcel` gains `slotFaceQ`; `Frontage` gains `slotFaceQ`, `lengthFt` and `streetBacked`, with the bucket's sourced/interpolated provenance in the typedef. The `INTRA_EDGE` tolerance refusal added. The **merge-halves-the-slots** warning added. | MF-2, MF-4, MF-9 |
+| **A-7** | arch-3 | Pass B's stage labels `[B1]..[B6]` → **`[T1]..[T6]`**, matching the charter's own §4.5 names and ending the collision with the band ids `B1..B18`. A3's capacity box and A4's frontage box rewritten. | new, found in the cross-reference sweep |
+| **A-8** | arch-4 | **CG-1 and CG-2 chartered as full packet stubs** (family `cartography`, before everything). **EST-2's arm 1 replaced by arms 1, 1b and 2b — which takes it to ten arms against a cap of eight, so EST-2 SPLITS into EST-2a and EST-2b** rather than the cap being widened. DW-1a's acceptance widened to two retirements, with the warning that a bare `grep "'dais'"` arm would be red forever. Totals: **41 cars / 45 DW commits / 47 dispatched.** | MF-1, MF-2, MF-7, MF-10 |
+| **A-9** | arch-5 | **A THIRD standing arm on every car: the failing control** (ODQ §503's law), with three worked instances. **The real-pipeline corpus rule** — every cartography corpus pin runs against both corpora — which is the structural cure, not CG-1's six numbers. W0 and W0b added. The dormancy golden named as a surface that must NOT be re-recorded. | MF-10, and the §503 measurement laws |
+| **A-10** | arch-6 | R-2's control replaced with one that can pass and one that can fail; **R-2b (the capacity), R-0 (the ground) and R-11 (the frontage measurable) added**; **R-5 discharged by measurement** and the ordered lane struck. | MF-1, MF-2, MF-4, MF-10, C5 |
+
+**What this amendment did NOT change in the architecture, affirmatively.** The
+module tree's shape, the single-writer assignments, the purity rules, the layer
+inclusion baselines, the DW-3/4/5/6/7 car definitions, the soak-leg arms, and the
+whole of arch-2's contract set apart from the three fields named above. **And no
+test was run against CG-1, CG-2, EST-2a or EST-2b, because none exists** — every
+claim in this document about which surfaces those cars move is a reading of the
+code, and arch-5 §5.3 labels it as such.
