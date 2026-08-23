@@ -17663,3 +17663,18 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   the observedShapeSentinel timeout needs a baseproof at b10ed1a1 before
   classification. The checkpoint discipline at its best: nothing guessed,
   everything stated.
+
+- **§439.3 DWR1A's PARTIAL DOSSIER SAVED — nothing gathered lost:** real
+  sourced substance already in hand (the 1189 Assize of Building PRIMARY
+  TEXT — the 3-ft stone party wall at 16 ft with 1.5 ft from each
+  neighbour; the 1667 Act's four street-rank house classes with statutory
+  storey heights; dendro-dated peasant houses at ~881 sq ft and £2-£11
+  build cost; cruck ≤6 m spans vs box-frame storeys; the mid-16th-century
+  chimney threshold that floored-over the open halls; Norwich's 70+
+  undercrofts). Contested scholarship held BOTH-SIDED (the Great Rebuilding
+  debate; jetty purpose), the burgage-tax causation flagged unverified with
+  its negation search queued. Successor's two priorities named: the
+  bay-width figures (the most grammar-load-bearing number) and the §4
+  load-paths/renovation pass (DW law 5's physical basis); five located
+  sources queued, Pantin's town-house plans first. Three of four lanes
+  confirmed stopped; T2R's checkpoint pending its queue drain.
