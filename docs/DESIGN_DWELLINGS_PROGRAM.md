@@ -110,9 +110,31 @@ S4 FUNCTION ROSTER (laws 1–3) — the institution's floor set + prosperity
 S5 PLACEMENT — functions → rooms within the parti: frontage weighting (law 6),
    split-vs-cram budget, adjacency preferences (kitchen near hall, workshop
    at the frontage), party-wall and window/light constraints per function.
-S6 CIRCULATION — doors, corridors minimized, stairs (type per parti and
-   prosperity: ladder → winder → spiral → grand), reachability to every room
-   and inserted gallery; the street entrance on the frontage room.
+S6 CIRCULATION — doors, stairs (type per parti and prosperity: ladder →
+   winder → spiral → grand), reachability to every room and inserted gallery;
+   the street entrance on the frontage room. **CIRCULATION CLASSES (owner
+   directive, ODQ §452, 2026-08-23): hallways, passages and LONG HALLWAY
+   CHAMBERS are first-class room classes, not leftover space — licensed where
+   the building's KIND and its INDICATIONS (parti, storeys, tier, prosperity,
+   institution function, era grade) call for them, never minimized by
+   default.** The closed class set the corpus program researches and the
+   grammar draws from: `THROUGH_ROOM` (enfilade — the pre-corridor default;
+   rooms open into rooms) · `CROSS_PASSAGE` / `SCREENS_PASSAGE` (the hall
+   house's front-to-back passage behind the screens) · `CORRIDOR` (the
+   dedicated hallway — historically LATE in domestic work: a 17th-century
+   innovation in the English register, so its license is era-graded and
+   institution-graded, while barracks, hospitals, colleges, monasteries,
+   prisons and great houses license it earlier by their own program) ·
+   `GALLERY` / `LONG_GALLERY` (the long hallway chamber — a room in its own
+   right: the great house's long gallery, the cloister walk, the arcaded
+   loggia, the jetty-side pentice, the inn's gallery over the yard, the
+   barracks' stair-and-landing module) · `LOBBY` / `VESTIBULE` (the
+   lobby-entry plan at the chimney threshold; the porch) · `STAIR_HALL`.
+   Each carries its own fixtures, light requirement and width/length buckets
+   (finite semantics), and each is a §311.9-style TYPED JOINT for the
+   undercity projection where a stair or passage meets a cellar. The
+   research tranches (§8) report the circulation typology PER ENTRY; the
+   CT-0 taste sitting gates the rosters.
 S7 FIXTURES & DRESSING — typed fixtures per function at the prosperity/wear
    grade (finite semantics: closed vocabularies, PRESENT/NONE-with-reason);
    supply-state variants (the stalled chain's cold forge); abstract-shape
@@ -131,6 +153,12 @@ S9 VALIDATION — the lawfulness walker certifies: floor satisfied, ceiling
 - `Function { kind, minDims, aspectBounds, lightReq, adjacency[], fixtures[] }`
   (window/light as first-class constraint — adopted from the Dwellings
   study's room-type vocabulary).
+- `CirculationCell { class: THROUGH_ROOM | CROSS_PASSAGE | SCREENS_PASSAGE |
+  CORRIDOR | GALLERY | LONG_GALLERY | LOBBY | VESTIBULE | STAIR_HALL, license
+  (kind × indications × era grade), widthBucket, lengthBucket, lightReq,
+  fixtures[], joints[] }` — circulation as a first-class cell class (ODQ
+  §452); `FloorPlan.storeys[].cells[]` may be a Function cell or a
+  CirculationCell; reachability (S6) is proven over both.
 - `Parti { id, form, weights(prosperity×institution×culture), verticalGrammar,
   stairGrammar, exteriorConsequences[] }`
 - `FloorPlan { buildingId, derivedAt{year,tick}, circumstancesDigest, storeys[]
@@ -182,7 +210,14 @@ and crafts (the largest) · R-INST-3 faith + learning · R-INST-4 hospitality,
 entertainment, poverty and utility · R-INST-5 MAGICAL/fantasy institutions
 (the fiction-and-lore leg) · R-INST-6 criminal/underground fronts (the
 undercity seam). Each tranche reads the ACTUAL catalog entries from the
-repo, researches per-entry, and delivers a taste-gated dossier.
+repo, researches per-entry, and delivers a taste-gated dossier. **Every
+entry's dossier row reports its CIRCULATION TYPOLOGY (ODQ §452): which of
+the closed circulation classes the building historically carries, at which
+era grade and prosperity, with measured widths/lengths where a primary
+source exists, and the indications that license each — hallways and long
+hallway chambers are never omitted for being "empty" space; they are the
+grammar's spine for multi-room buildings.** R-INST-1 (delivered before
+§452) and DWR1A owe a CIRCULATION ADDENDUM pass.
 
 The atlas method applied to interiors: measure real historical plans into
 grammars — hall houses, longhouses, burgage plots, tenements, courtyard

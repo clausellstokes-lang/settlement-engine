@@ -10,7 +10,7 @@ this one.**
 
 ## ⛔⛔⛔ PICKUP CARD — REWRITTEN AT EVERY LEDGER COMMIT (owner directive §448: the chair's 5-hour usage window closes often; a successor or the same chair picks up HERE in 60 seconds)
 
-**AS OF 2026-08-22 ~23:55 CDT · ledger §451 · build `claude/composite-r4` = `acc466a6` (28 landings)**
+**AS OF 2026-08-22 00:15 CDT 08-23 · ledger §452 · build `claude/composite-r4` = `acc466a6` (28 landings)**
 
 FIRST ACTS ON PICKUP, IN ORDER:
 1. `git -C /Users/cstokes/Desktop/settlement-engine log -1 --oneline review-fixes-2026-07-08 claude/composite-r4` — if either moved past this card, the ODQ tail is newer than this card; read it.

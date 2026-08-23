@@ -51,6 +51,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐ ~00:15 CDT 08-23: §452 OWNER DIRECTIVE — DW circulation: hallways + long
+# hallway chambers first-class (closed class set in DESIGN_DWELLINGS_PROGRAM
+# S6/§5/§8); R-INST-CIRC addendum queued; future tranches carry it.
 # ⭐⭐ ~23:55 CDT 08-22: §451 — UC-0 BUILT a5c6c4fa (pinned holding-uc0; walls
 # home found; ruinFilter exemption ruled doctrine-grounded). TE-WEB3 dispatched
 # (Opus, migration 199). Seats: WEB5-landing · UC3 · WEB2 · WEB3.

@@ -18367,3 +18367,28 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   the recorded expected red). Seats: WEB-5 landing · TE-UC3 · TE-WEB2 ·
   TE-WEB3 (cap). Build queue: HK-1 → R-INST-2..6 → UC-1/UC-4 (after T2R
   lands) → UC-2/UC-5 (after T2N+T2Q).
+
+## §452 — OWNER DIRECTIVE (in-chat, 2026-08-23 ~00:15 CDT): THE DWELLINGS GRAMMAR CARRIES HALLWAYS AND LONG HALLWAY CHAMBERS AS FIRST-CLASS ROOMS WHERE THE BUILDING AND ITS INDICATIONS CALL FOR THEM
+
+- **Owner:** "regarding the dwellings, where reasonable, don't forget
+  hallways and long hallway chambers where appropriate to building and
+  indications." RECORDED as a standing DW law and written into
+  docs/DESIGN_DWELLINGS_PROGRAM.md: S6 (the circulation stage — "corridors
+  minimized" STRUCK; the closed CIRCULATION CLASS set: THROUGH_ROOM ·
+  CROSS_PASSAGE / SCREENS_PASSAGE · CORRIDOR (era- and institution-graded —
+  late in the domestic register, early in barracks / hospitals / colleges /
+  monasteries / prisons / great houses) · GALLERY / LONG_GALLERY (the long
+  hallway chamber as a room in its own right: long gallery, cloister walk,
+  arcaded loggia, inn gallery, the barracks stair-and-landing module) ·
+  LOBBY / VESTIBULE · STAIR_HALL), §5 (a `CirculationCell` contract beside
+  `Function`), §8 (every research entry reports its circulation typology;
+  R-INST-1 and DWR1A owe a CIRCULATION ADDENDUM pass; R-INST-2..6 carry it
+  in their briefs). Finite semantics: width/length BUCKETS, light
+  requirement, fixtures, and the typed joint where a passage meets the
+  undercity (the §311.9 joint vocabulary UC-0 just minted). Historical
+  honesty binds: the corridor's license is graded, never a default —
+  the through-room/enfilade is the pre-corridor truth, and the research
+  reports which register says so.
+- Queue effect: a TC-R-INST-CIRC addendum lane (Fable) joins the research
+  queue behind R-INST-2 to retrofit circulation rows onto R-INST-1's 14
+  families and DWR1A's §1/§4; the owner's CT-0 sittings gate the rosters.
