@@ -51,6 +51,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 16:12 CDT 08-23: §504 — DW panel: NOT ratified. Capacity + merge theorems refuted; the cartography
+# stage throws on 56% of real settlements (CG-1 chartered, lands before DW-1). C5 DISCHARGED: ~170ms of 2000ms.
+# No plan-unit scale exists → BAND ZERO. Amendment lane dispatched.
 # ⭐⭐⭐ 15:51 CDT 08-23: §503 — CH panel: `facetOf` is OFF the pipeline, so the corpus digest is BLIND.
 # CH-1 re-scoped to one file + dispatched; religiousCenter takes the rng-fork variant; minTier ruled three ways.
 # ⭐⭐⭐ 15:33 CDT 08-23: §502 — DWELLINGS CHARTER (164.5 KB) + ARCHITECTURE (103.6 KB) delivered,

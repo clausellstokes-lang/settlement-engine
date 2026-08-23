@@ -20963,3 +20963,90 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
 - **§503.6 STATE.** Seats: DW skeptic (Opus) · TE-CH-1 build (Opus). CH-2 and
   CH-3/CH-3a re-shape on these rulings when a seat frees; the two measurement
   laws of §503.2 are banked to memory and go into every later CH brief.
+
+## §504 — THE DW SKEPTIC PANEL: **NOT SAFE TO RATIFY** — THE CAPACITY THEOREM AND THE MERGE THEOREM BOTH REFUTED BY MEASUREMENT, A CIRCULAR PREMISE CARRIES THE FLAG BILL, AND **THE CARTOGRAPHY STAGE THROWS ON 56% OF REAL PIPELINE SETTLEMENTS**; C5 DISCHARGED — **TWO SECONDS SURVIVES WITH TENFOLD HEADROOM**; THE AMENDMENT LANE DISPATCHED (2026-08-23 16:12 CDT)
+
+- **§504.1 THE PANEL.** `draft-DW-SKEPTIC-REPORT.md` 44,281 B; **61 claims
+  adjudicated — 41 CONFIRMED · 9 REFUTED · 4 OVERSTATED · 2 UNDERSTATED · 5
+  bands that are preference rather than measurement**; 10 MUST-FIX items; **25
+  executed probes** (10 node probes over real generated corpora, a mutexed
+  battery, two recounts of the charter's own tables, 12 source probes, every
+  absence claim carrying a positive control). Corpora: 132 wards / 528 ward
+  edges / 1,056 wedge pairs / 1,098 shipped parcels / 1,764 streets / 48 fresh
+  pipeline settlements / 288 generated interiors / 1,497 building rows / 5,961
+  footprint vertices. Base green proved 5 files / 180 tests TRUE_EXIT=0;
+  worktree left porcelain-empty, nothing committed. **The panel's own verdict
+  on the program: the architecture is right and nothing here argues for a
+  different one — the failures are INFERENCE FROM CORRECT READINGS, which is
+  why the fixes are cheap.**
+- **§504.2 THE THREE REFUTATIONS THAT BLOCK RATIFICATION.** (1) **The capacity
+  theorem is false.** "At most four buildings fit a parcel" fails on 156 of
+  426 occupancy checks, reaching **16 buildings on one metropolis parcel**,
+  and **218 of 1,497 building rows (14.6%) share an IDENTICAL footprint with
+  another building** — the parish church and subsistence farming standing on
+  the same three points. The cause is the engine's own stated exemption at
+  `cartographyBuildings.js:216` implemented at `:299-301`, twenty lines from
+  the code the charter quoted; §4.2 step 4 had made that false bound EST-2's
+  capacity predicate. (2) **The intra-edge merge theorem is false.** 646 of
+  1,056 adjacent cut triples (61.2%) are NOT collinear because
+  `cartographyParcels.js:100-104` ROUNDS interior cuts onto the integer
+  lattice — and the existing suite already allows a one-square-unit tolerance
+  for exactly this — so arch-6 R-2's arm 1 cannot pass and J5's rationale is
+  false. **The charter got the theorem it REFUSED right (the vertex-crossing
+  quad, confirmed 528/528) and the one it DEPENDS ON wrong.** (3) **A circular
+  premise carries the flag bill:** §5.0 marks the ESTATE wave "dark" in the
+  same row that declares it changes the drawn map of every settlement, and
+  §0.5 justifies the one-flag bill by citing "§6's purity argument" — the word
+  *purity* occurs exactly once in the charter, inside that citation.
+- **§504.3 ⭐ THE FINDING OUTSIDE THE ATTACK LIST, AND THE MOST IMPORTANT ONE:
+  over 48 real `generateSettlementPipeline` settlements with the cartography
+  rule lit, 27 (56%) THREW premise errors** — every village and every town
+  row — because the 20-row corpus the stage is proved against is
+  `makeTournFixture`-style FIXTURE output, not pipeline output. **This is a
+  defect in LANDED code and it blocks the entire DW program**, which builds on
+  that stage. Chartered as **CG-1, THE CARTOGRAPHY GROUND**, to be diagnosed
+  to the mechanism and **landed BEFORE DW-1 builds**. C1 therefore stands but
+  on honest ground: the cartography synthesis world is the only CANDIDATE, not
+  a world that already has a parcel for every building of every settlement.
+- **§504.4 ⭐ FOR THE OWNER — BAND B3 IS NOT SIGNABLE, AND CHAIR RULING R1 IS
+  VACUOUS UNTIL A SCALE IS SIGNED.** Three of B3's five boundaries are
+  interpolations between two sourced anchors, and all five are stated in FEET
+  while **no plan-unit-to-physical scale exists anywhere in `src/`**. Under
+  the natural 1:1 reading, of 1,098 real parcels SHOP gets **0** and NARROW
+  gets **0**, and Pantin's 30–50 ft gate — which §497 R2′ makes the hard
+  filter on parti eligibility — would admit **98% of all parcels**. **RULED:
+  the sitting is restructured so THE SCALE IS BAND ZERO**, the first thing the
+  owner signs, with the measured frontage distribution over 1,098 real parcels
+  and two or three candidate scales priced by what each implies; B3's five
+  boundaries are then re-derived FROM the chosen scale as a function rather
+  than hand-set, each marked sourced or interpolated. (Also fixed: §4.6 and
+  §6.2 both point the owner at B12 for the acquisition/partition band; it is
+  **B9** — and every other cross-reference is being swept.)
+- **§504.5 ⭐ C5 DISCHARGED BY MEASUREMENT — THE NUMBER THE CHARTER COULD NOT
+  PRODUCE.** A metropolis costs **~30 ms to generate and ~140 ms to compile
+  its map — about 170 ms against a 2,000 ms budget**; lazy per-building
+  derivation adds **1.3 ms on click**; even the eager worst case the
+  architecture excludes (all 240 buildings) is **~309 ms**. arch-6 R-5 was
+  UNDERSTATED: **the owner's two-second build survives with roughly an order
+  of magnitude of headroom.** No measurement lane is ordered; the ruling is
+  discharged.
+- **§504.6 THE CHAIR DOES NOT RATIFY; THE AMENDMENT LANE IS DISPATCHED
+  (TC-DW0-R2, Opus)** with five ruled amendments — re-derive the capacity
+  predicate from the measured distribution and say whether the 14.6%
+  identical-footprint rate is a DESIGN or a DEFECT (if a defect, it gets its
+  own car rather than the estate wave being built on top of it); replace the
+  merge theorem with the lattice tolerance the suite already uses, written so
+  the arm can pass and a control can fail; resolve dark-versus-light on
+  measurement and re-price the flag bill at six surfaces if it is light;
+  restructure the sitting around BAND ZERO with B3 re-derived as a function of
+  the scale; and diagnose plus charter CG-1. Every one of the panel's 10
+  MUST-FIX items, its 4 OVERSTATED and 2 UNDERSTATED verdicts, and its 5
+  preference-not-measurement bands is dispositioned — fixed, refused with
+  reason, or deferred with a home — and each of those five bands either gets a
+  measurement, is restated as an explicit taste choice the owner is TOLD is a
+  taste choice, or is struck. Output: both documents amended through their own
+  assemblers with an `## AMENDMENT RECORD`, plus a ≤6-page
+  `draft-DW-RATIFICATION-BRIEF.md`. Seats: TE-CH-1 build (Opus) · TC-DW0-R2
+  (Opus). **The owner's band sitting waits on the ratification brief, and now
+  opens with a single foundational question: what is a plan unit worth in
+  feet.**
