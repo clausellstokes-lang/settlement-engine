@@ -19060,3 +19060,19 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   controls, the generator golden's sha re-proved unmoved (the train's
   dormancy claim), one terminal. Expected 161 packets. Seats: PRODUCERS
   landing · TC-WEBSITE-2 (cap).
+
+## §468 — THE SECOND WINDOW CLOSURE (~01:45 → 05:20 CDT) SURVIVED: THE PRODUCERS' LANDING RESUMED AT ITS CONVICTED TIP; THE WEBSITE-2 COMPILE RE-DISPATCHED FROM SCRATCH (2026-08-23 05:25 CDT)
+
+- **What happened:** the owner's window closed at ~01:45 CDT (reset 05:20).
+  Two lanes died mid-turn; the chair's session and the wakeup (807a0a6a)
+  survived. At pickup: refs unmoved (ledger §467, build 421c7345), lock
+  free, load 2.4, 17Gi, no instrument running.
+- **TE-PRODUCERS-LANDING** had completed §§1–6 and committed the FINAL TIP
+  **3008719a** (8 over the slot: T2R's four, T2Q SQUASHED to one per §445.1
+  J1 — `e099e4ea` — T2N's two, the landing act; porcelain empty; RESUME
+  POINT 06:46Z with S0 / sweep / terminal as the exact next acts). RESUMED
+  from that point (Fable). **TC-WEBSITE-2** died before writing a byte —
+  RE-DISPATCHED from scratch with receipt-stub-first and write-in-place as
+  its first law (the one lane tonight that left no resume point did so
+  because it was still reading; the §448 law now says the stub precedes
+  the reading). Seats: PRODUCERS landing · TC-WEBSITE-2 (cap).
