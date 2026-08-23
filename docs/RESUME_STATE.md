@@ -51,6 +51,19 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ ~19:45 CDT 08-22: §440 — THE SUCCESSOR IS SEATED (Fable, session
+# 695a70c5). T2H's gate had NOT survived (SIGTERM in test:ratchet 19:21);
+# RUN 2 fired 19:27 CDT detached (setsid), same tip 84e06412 on b10ed1a1,
+# CAS on TRUE_EXIT=0 + tail exit line + disk ≥300MB. Wakeup job 0383ec45.
+# Lanes: TE-T2R (nine reds → typecheck → packet), TE-T2Q (mutexed clean
+# sweep + sentinel baseproof), TC-DWR1A (sources → round 6 → §4 → magical
+# conventions). Shared baseproof: successor scratchpad/chair-baseproof-
+# b10ed1a1. NEW LAW §440.2: export GATE_MUTEX_LOCK_DIR=/tmp/settlementforge-
+# vitest-gate.lock in EVERY battery (per-lane TMPDIR defeats the lock).
+# Successor scratchpad: /private/tmp/claude-502/-Users-cstokes-Desktop-
+# settlement-engine/695a70c5-80ee-4ebd-b806-a8c102244d16/scratchpad/ (the
+# program scratchpad 6298872d… stays the receipt home). Next: rule the
+# undercity charter; collect T2H; then the cascade.
 # ⭐⭐⭐ CURRENT (2026-08-21 ~06:05 ET) — THE FABLE RETROVALIDATION SITTING IS OPEN
 # (ODQ §291 @ ledger bd98a314; §291.5 seat model + this note ride the next commit).
 # Successor bootstrap: docs/HANDOFF_CURRENT.md → ODQ tail (§287-§291.5) →

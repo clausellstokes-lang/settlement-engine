@@ -17703,3 +17703,59 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   collect T2H's surviving gate → resume T2R (attribute the nine, run the
   typecheckers, write the packet) → finish T2Q (one clean gate + one
   baseproof) → resume DWR1A → rule the undercity → the cascade.
+
+## §440 — THE SUCCESSOR SEATED (2026-08-22 ~19:45 CDT): T2H's GATE DID NOT SURVIVE THE SWITCH — RE-FIRED DETACHED (RUN 2); THE WAKEUP RE-ARMED; THREE LANES RESUMED FROM RECEIPTS; A MUTEX LOCK-DIR HAZARD FOUND AND PINNED
+
+- **The §439 claim "T2H's detached gate survives" was FALSE, and the
+  successor verified before acting:** zero vitest/node processes, no
+  `t2h-TERMINAL-exit.txt`, the wrapper log header-only, `/tmp/t2h` last
+  written 19:21 CDT (the minute of the §439.4 ledger commit), and the
+  $TMPDIR body's last line `gate-mutex.sh: line 137: 23416 Terminated: 15`
+  — SIGTERM inside `test:ratchet` (mutex PID 21771). The §414 wrapper-kill
+  class, reaching a run the prior chair believed detached. Run 1's logs
+  preserved as `t2h-TERMINAL-84e06412.KILLED-run1.log` +
+  `t2h-gatebody-20828.KILLED-run1.log`; /tmp/t2h (392M of the ratchet
+  meta-test's fixture litter) cleared per TMPDIR hygiene.
+- **§440.1 RUN 2 FIRED 19:27 CDT (00:27:05Z)** at the same rebased tip
+  84e06412 (parent b10ed1a1 re-verified as ancestor; pin holding-t2h-slot
+  re-verified), load 2.99, 9.3G free, via a setsid DOUBLE-FORK launcher
+  (`chair-detach.py`, successor scratchpad) so no harness process-group
+  kill can reach it — the prior "detached own session" evidently was not.
+  A kill is NOT a stray: the receipt's one-quiet-re-run budget is UNSPENT.
+  Collection rule unchanged: TRUE_EXIT=0 AND the gate tail's own exit line
+  AND free disk at end ≥ 300MB → CAS b10ed1a1 → 84e06412.
+- **§440.2 LAW (new, pinned in every battery from here): THE GATE MUTEX'S
+  DEFAULT LOCK DIR LIVES UNDER $TMPDIR, SO THE §432 PER-LANE SHORT TMPDIRs
+  (/tmp/t2h, /tmp/t2r, /tmp/t2q) DEFEAT THE DIRECTORY LOCK ACROSS LANES.**
+  Cross-lane exclusion rested only on the `ps`-scan legacy backstop, which
+  has a race (two waiters that both see zero vitest start together). Cure:
+  `export GATE_MUTEX_LOCK_DIR=/tmp/settlementforge-vitest-gate.lock` in
+  every terminal and every mutexed battery (T2H's run-2 script carries it;
+  both executor briefs carry it; the vitest self-test overrides the
+  variable in its own fixture, so it cannot interfere). §393 "attribution
+  sweeps MUTEXED" is now actually true across lanes.
+- **§440.3 The §388 wakeup re-armed** (job 0383ec45, `13,33,53 * * * *`,
+  session-scoped, 7-day expiry) carrying the four checks headlined IS
+  EVERY BUILDABLE CAR BUILDING?, the raced-GO / lost-lane /
+  read-never-extend protocols, and the run-2 log paths.
+- **§440.4 Three lanes re-dispatched FROM RECEIPTS, survey-first:**
+  TE-T2R (attribute the nine, both typecheckers, the packet, a FOLLOW-ON
+  commit with hooks — the --no-verify checkpoint stays pinned at
+  holding-t2r) · TE-T2Q (one clean MUTEXED §408 sweep, the
+  observedShapeSentinel baseproof, strict typecheck re-run) · TC-DWR1A
+  (the queued sources, search round 6, the continental check, §4, the
+  §438 magical-from-lore section as CONVENTIONS). A SHARED BASEPROOF
+  worktree at b10ed1a1 (`chair-baseproof-b10ed1a1`, deps `cp -Rc` from
+  the T2R tree — lockfile byte-identical, `npm ls` exit 0, zero extra
+  disk) serves both executors' baseline lookups. Seats: T2R + DWR1A
+  Fable-tier (attribution and packet authoring are judgment-dense; §343.3
+  appropriateness), T2Q Opus (§291.5). Four seats filled with the gate.
+  A monitor watches run 2 for its exit line, a silent death, or low disk.
+- **Judgments (vetoable):** J1 re-fire rather than stray-count (a SIGTERM
+  is not a verdict). J2 the shared lock dir (reverse: drop the export; the
+  per-TMPDIR default returns). J3 the chair-built shared baseproof instead
+  of two lane-built ones (reverse: each lane `git worktree add` + `npm ci`).
+  J4 T2R lands as a follow-on commit, not an amend, so the pinned
+  checkpoint stays honest (reverse: amend and re-pin). J5 the seat tiers.
+- **Next chair act:** rule the UNDERCITY charter (draft-UNDERCITY-PLAN.md,
+  collected §433) while the gate runs; collect T2H on the monitor's event.

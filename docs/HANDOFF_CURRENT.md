@@ -12,6 +12,15 @@ this one.**
 
 The §427 block's structure stands; THIS delta supersedes its state figures:
 
+> **§440 CORRECTION (successor, 2026-08-22 19:45 CDT):** item 2 below is WRONG
+> — T2H's gate did NOT survive the switch (SIGTERM inside test:ratchet at
+> 19:21). RUN 2 was fired 19:27 CDT at the same tip 84e06412, detached by
+> setsid; collect it per the receipt's rule (TRUE_EXIT=0 + tail exit line +
+> disk ≥300MB at end → CAS b10ed1a1 → 84e06412). Item 4's three lanes were
+> re-dispatched from their receipts at §440.4; the wakeup is job 0383ec45.
+> NEW LAW §440.2: every battery exports
+> `GATE_MUTEX_LOCK_DIR=/tmp/settlementforge-vitest-gate.lock`.
+
 1. **BUILD is at b10ed1a1 — 25 LANDINGS** (since §427: CT-3 landed §432 after
    the §355 hunt CLOSED — the varying-cast contamination hypothesis is
    UNSUPPORTED, the specimen was the hunt's own TMPDIR; the flake doctrine,
