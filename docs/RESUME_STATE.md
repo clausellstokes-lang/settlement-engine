@@ -51,6 +51,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 01:40 CDT 08-23: §467 — MAP STACK LANDED (32nd–35th): CAS → 421c7345;
+# D3a core on the branch, dormant. PRODUCERS GO (R→Q(squash)→N, one terminal).
+# Seats: PRODUCERS-landing · WEBSITE-2 compile.
 # ⭐ 01:35 CDT 08-23: §466 — CIRC+STORAGE addendum delivered (281KB; CORRIDOR
 # cell vs corridorPlanned parti ratified). TC-WEBSITE-2 compile in seat 2.
 # Live: MAPSTACK-landing · WEBSITE-2.

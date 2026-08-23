@@ -19007,3 +19007,56 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   owner's exact Stripe to-do list as an output. Seats: MAP-STACK landing ·
   TC-WEBSITE-2 (cap). Second-seat queue after it: R-INST-3 (resume) →
   R-INST-4 (resume) → R-INST-5 → R-INST-6 → HK-4.
+
+## §467 — THE MAP STACK LANDED (LANDINGS 32–35: MF-T2J, MF-T2K, MF-T2L, MF-T2M): THE D3a MAP ENGINE CORE IS ON THE BRANCH, DORMANT; THE PRODUCERS' STACKED LANDING GO ISSUED (2026-08-23 01:35 CDT)
+
+- **§467.1 THE MAP STACK LANDED.** TE-MAPSTACK-LANDING executed the first
+  stacked landing of the program on the first try: carry-proof over the
+  whole union found the three predicted hot files plus ONE the GO missed
+  (`scripts/mutation-coverage-manifest.json` — WEB-1's row at a disjoint
+  hunk, auto-merged, accepted only after a JSON deep-compare); nothing
+  under `src/domain/townMap/**` had moved; all 18 member paths landed
+  blob-identical to their holding tips. Nine conflict stops, all predicted,
+  each resolved keep-slot + re-apply with per-row deep-compare (154 → 158,
+  ADDED = K, L, M, J in authored order; zero drift). The §419 rename rode
+  T2L's commit verbatim (neither spelling existed at the slot); T2M's
+  roster row re-applied against the renamed constant in alphabetical
+  position (roster 25). **SUM-OF-DELTAS:** slot 2505-era `2500/365/2135/
+  20756/5792` + J `+2/0/+2/+6/+2` + K `+1/0/+1/+6/+1` + L `+1/0/+1/+6/+1` +
+  M `+1/0/+1/+7/+1` = **2505/365/2140/20781/5797**, convicted 33/33 with
+  Control A (slot tuple back → "expected 2505 to be 2500") AND Control B
+  (T2L's position back → "expected 2505 to be 2504", T2M's sibling delta
+  alone). **The §426 window executed exactly as ruled:** four red lines at
+  the pre-LANDED tip (MF-T1X `requiredSymbols[145]/[149]` missing
+  `FANTASY_CANON_GATE`; MF-T2M `retiredSymbols[0]/[1]` already absent) and
+  CLEARED at the LANDED flip — `valid: 158 packets (1 READY)`; no bypass
+  needed (rebase replays run no hook; the landing commit ran with hooks
+  ON). The seven §417 deferred rows entered the manifest verbatim with
+  slot clauses. S0 pre-existing by lookup; zero stack files among the 387
+  reader rows. Sweep widened: 6/6 banked, zero strays, zero the stack's.
+  Terminal 14m49s, detached, outlasted in-turn: `TRUE_EXIT=0` +
+  `[gate-tail] exit: 0` + `free_kb_at_end=13592592`; `28807 tests, ceiling
+  11` (+25 = the summed titles); `STRICT DIST OK 52/438`. Chair re-read the
+  body roster, ancestry (18 over 11539636), the four packet statuses, the
+  tuple and the rename before the CAS. **CAS `11539636 → 421c7345`.**
+  Pruned holding-t2j/k/l/m, the landing tree and the four old build trees.
+  Disk 17Gi. Judgments ratified: J-MAPSTK-1 (T2M's stale "reads codex"
+  comment re-worded to the slot truth) · -2 (row order as authored) · -3
+  (deferred `_note`s verbatim + slot clause) · -4 (LANDED-direct without
+  re-executing the duplicate-path refusal — the validator blob identical).
+  Deferred rows documented: MF-T1X's stale `acceptanceCases` prose (§430
+  queue); T2M's sweep row (§426(5)); the S0 mint.
+- **§467.2 WHAT IS NOW ON THE BRANCH:** the map program's D3a core complete
+  and dormant — MF-T2A..T2H (the spine) + T2J (the S0–S23 stage manifest)
+  + T2K (the support surface and the key a caller may not spell) + T2L
+  (one ground authority) + T2M (the twelve-kind operation payload grammar
+  and the §423 Shape-B strip: `operations.js` demoted to payload compiler).
+  The map is not yet VISIBLE (D3b activation is a later wave); it is
+  ported, proven equivalent to the sealed sandbox, and inert.
+- **§467.3 THE PRODUCERS' GO (TE-PRODUCERS-LANDING, Fable):** T2R f65b3ff3
+  (4 over b10ed1a1) → T2Q cc9ef856 (2 over b10ed1a1, SQUASHED to one per
+  §445.1 J1 with tree-equality proven) → T2N 9f05fbb4 (2 over 84e06412),
+  rebased in sequence, entered at LANDED, sum-of-deltas with both
+  controls, the generator golden's sha re-proved unmoved (the train's
+  dormancy claim), one terminal. Expected 161 packets. Seats: PRODUCERS
+  landing · TC-WEBSITE-2 (cap).
