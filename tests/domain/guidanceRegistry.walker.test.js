@@ -342,7 +342,26 @@ describe('title= ratchet — native OS tooltips are a shrink-only census', () =>
   // MEASURED WHOLE, NEVER TRANSCRIBED: countTitles() over the landing tree reads 485,
   // against 484 measured the same way at the packet's verified base 6ad9f8dd — a
   // per-file delta of exactly +1, in RelationshipsTab.jsx, and nothing else moved.
-  const TITLE_BASELINE = 485;
+  //
+  // WEB-3 — THE THIRD RAISE, AND THE 482 → 484 BLOCK ASKED TO BE READ BEFORE IT: +1
+  // React component PROP, the same Card/Section-prop class the regex cannot distinguish
+  // from a native tooltip, and NOT an OS tooltip. WEB-3's admin funnel surface mounts one
+  // `<Card title=…>` in AdminTrendsPanel.jsx per that packet's acceptance A7; Card's ONLY
+  // heading API is that prop (AdminTrendsCharts.jsx:37 renders it into an `<h4>`), so the
+  // mount the packet rules cannot be expressed without it. This is byte-for-byte the
+  // FP IN-1b situation directly above, and the same executor behaviour was followed: the
+  // implementing lane STOPPED on this ratchet rather than raising it unbidden. Authorized
+  // at OWNER_DECISION_QUEUE §460.
+  // 485 → 486.
+  // ⛔ AND IT IS NOT THE RELOCATION EITHER. Like IN-1b and unlike the 482 → 484 entry,
+  // this row is NOT in scripts/.test-ratchet-baseline.json and never was: it reddened the
+  // gate honestly, on arrival, as an unfrozen row reported against the frozen census —
+  // which is the guard doing precisely its job. Shrink-only resumes from 486.
+  // MEASURED WHOLE, NEVER TRANSCRIBED: countTitles() over the member tip reads 486,
+  // against 485 measured the same way at the packet's verified base acc466a6 — a per-file
+  // delta computed in BOTH directions over every src/** .js/.jsx of exactly +1, in
+  // src/components/admin/AdminTrendsPanel.jsx (15 → 16), and nothing else moved.
+  const TITLE_BASELINE = 486;
 
   function countTitles() {
     let n = 0;

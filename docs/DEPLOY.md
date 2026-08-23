@@ -157,10 +157,7 @@ derives the head from `supabase/migrations/` and fails the gate if this line dri
 
 This line records the head **on disk**, not a clearance to apply it: `195` carries its
 own owner-gated, dark header (`AUTHORED, NOT DEPLOYED`), so whether it ships in a given
-cutover is the owner's call — read that file's preamble before pushing. The head this
-line replaced was `197_consent_person_adjacent_default.sql`, and that migration is a DATA
-migration rather than a shape one — it rewrites existing `telemetry_consent` rows — so
-its own preamble is worth reading in the same pass.
+cutover is the owner's call — read that file's preamble before pushing.
 
 **Read these preambles before the push, whatever the head number says.** Most
 migrations are additive and need no separate reading; these are the pending ones whose

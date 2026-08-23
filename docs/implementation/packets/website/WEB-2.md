@@ -275,4 +275,15 @@ happens the posture section above is what keeps the gate green, and a future mem
 - **S0 at the slot:** the two-part reading and its baseline lookup are in the lane receipt.
 - **Terminal:** the full bare `npm run check:tail` fires at the LANDED tip itself; its verdict
   lines are in the lane receipt and the chair's ledger row.
+- **Three `requiredSymbols` rows DELETED at WEB-3's landing (TE-WEB3-LANDING, 2026-08-23):**
+  `MIGRATION_TRAIN_REPO_HEAD = 198` (`scripts/ops/migrationRehearsalCore.mjs`),
+  `**migrations/** (198)` (`ARCHITECTURE.md`) and `migrations are contiguous to 198`
+  (`docs/CURRENT_STATE.md`). Each pinned the CURRENT migration-head figure — the one value every
+  later migration is required to move — so they redded `validate:packets` the moment 199 landed
+  on top: the ODQ §455.2 class (HK-3 for WEB-1's filename row) and the §478.3 ruling for this
+  packet's own `docs/DEPLOY.md` filename row, one specimen wider (figures, not a filename, so
+  HK-3's planned filename guard would not have caught them). The DEPLOY row is left for HK-A's
+  landing act as §478.3 ruled; the twelve migration gates, not a landed packet's pins, are what
+  hold 198's figures true. Vetoable: restoring the three rows re-reds the validator at any
+  head above 198.
 

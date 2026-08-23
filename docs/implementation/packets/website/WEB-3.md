@@ -1,21 +1,37 @@
 # Website / WEB-3 — the referral loop emit wiring (member 3 of `W-A`)
 
-- **Status:** READY
-- **Implementation:** built by lane TE-WEB3 on 2026-08-23 at base `acc466a6` as
-  `be07c6c3eb061a5663eab8ebd482e6cdd5607b68`; the chair CASes the landing. Do not
-  redispatch. ⚠ If the landing rebases, the census tuple in §8 and this sha must be
-  re-derived from the hash AFTER the last edit — never carried across a rebase.
+- **Status:** LANDED
+- **Landed at:** the `W-A` train's third car, on the lane tip held for the chair's CAS.
+  Built by lane TE-WEB3 on 2026-08-23 at base `acc466a6` (holding tip
+  `da9d9c40731fddc93ae4d03e12d742e36a3574a5`, four commits, pinned at
+  `refs/preserve/holding-web3`). Do not redispatch. The census tuple in §8 and the
+  implementation shas were re-derived from the hash AFTER the last edit at the slot, never
+  carried across the rebase.
 - **Packet version:** `1`
-- **Verified base:** `claude/composite-r4` at `acc466a6e6c15ea904b47c50b2b41732b516b4b1`
-- **Last revalidated:** 2026-08-23 at `acc466a6e6c15ea904b47c50b2b41732b516b4b1`
+- **Verified base:** `claude/composite-r4` at `718e485529cdcfc6eff4c0b0e1e508bb31e1a994`
+- **Last revalidated:** 2026-08-23 at `718e485529cdcfc6eff4c0b0e1e508bb31e1a994`
+- **Landing note:** the verified base is the landing slot (WEB-2's landing, the 41st). The
+  member was authored at `acc466a6e6c15ea904b47c50b2b41732b516b4b1` (WEB-4's landing) as
+  `be07c6c3` (the member) + `fd1c617e` (this packet) + `7c97c51c` (the terminal-found cures)
+  + `da9d9c40` (the §460.2 raise), and rebased onto the slot by lane TE-WEB3-LANDING as
+  `b1ab1fbf26fd9dbbfa2f589d651be35f3547f544` (the member, with the edge-shared bundle set
+  regenerated at the slot) + `9082bc8f` + `acc64db4a` + the commit that carries this re-stamp;
+  43 landings crossed. Twelve of the twenty-nine delivered paths had moved under it — the three
+  migration-doc figures, the rehearsal core and its test (WEB-2's 198 wave is the slot's; the
+  199 wave and pins were re-applied on top), `INDEX.md`, the manifest, and all five edge-shared
+  bundle `.meta.json` (the UC-stack's §475 regen) — every one resolved keep-slot + re-apply;
+  the other seventeen are the SAME blob as the holding commit's. The census walker (§8) was
+  written ONCE at this landing act, never carried. See §13.
 - **Train:** `W-A` (telemetry and privacy), family **website/product-surface** —
   un-stamped, so any train carrying it holds the four-member cap.
 - **Owner authority:** `OWNER_DECISION_QUEUE.md` **§359.8** (the ruling: "migration 107
   ships, nothing emits — the structural blindness"), ruled as compiled at **§402**, whose
   chair question **C5 is SIGNED** and judgment **J4 RATIFIED**: referral conversions
   derive read-side from the referral tables and no analytics write ever touches the money
-  path. Compile of record: the website train's charter §3.
-- **Depends on:** **migration 198 (WEB-2), which lands FIRST by train order.** This member
+  path. Compile of record: the website train's charter §3. The member's ONE STOP — the
+  `title=` shrink-only census — is ruled at **§460** (see §5b).
+- **Depends on:** **migration 198 (WEB-2), which lands FIRST by train order** — DISCHARGED at
+  the slot: 198 is on the branch (ODQ §478) and 199 is contiguous on it natively. This member
   is authored at 199 and its docs figures are written to the LANDING state (199 migration
   files, contiguous to 199, head 199 is 78 ahead of applied head 121). See §11.
 - **Collision group:** none with WEB-1 (`src/lib/consent.js`) or WEB-4
@@ -123,7 +139,7 @@ bites, and `generatedAt` records WHEN THE BUILD RAN, not whether a byte moved. R
 restore: one `build:edge-shared`, all six metas committed together. Found only by the
 terminal, never by the four-tree sweep.
 
-## §5b ⛔ THE ONE STOP: THE `title=` RATCHET, RAISED AND NOT SELF-AUTHORIZED
+## §5b ⛔ THE ONE STOP: THE `title=` RATCHET — RAISED, THEN AUTHORIZED AT §460
 
 `tests/domain/guidanceRegistry.walker.test.js`'s shrink-only census reads **486 against a
 baseline of 485** at this member's tip. The cause is `<Card title="Referral funnel (intents
@@ -134,17 +150,22 @@ renders it into an `<h4>`), so A7's ruled mount cannot be expressed without it.
 This is byte-for-byte the FP IN-1b situation the walker's own comment block records — and
 that block also records the correct executor behaviour: the implementing lane **STOPPED on
 this ratchet rather than raising it unbidden**, and the raise was authorized at CR-IN1B-8.
-So the baseline is **left at 485** and the raise is RAISED, with the same evidence IN-1b
-supplied, measured whole and never transcribed:
+So the baseline was **left at 485**, the row was RAISED rather than self-authorized, and
+the evidence handed over is the one IN-1b supplied, measured whole and never transcribed:
 
 - `countTitles()` over base `acc466a6` = **485**; over this tip = **486**.
 - Per-file delta, computed both directions across every `src/**` `.js`/`.jsx`:
   **`src/components/admin/AdminTrendsPanel.jsx`: 15 → 16, and NOTHING else moved.**
 
-⇒ **The chair's call:** authorize `TITLE_BASELINE` 485 → 486 at the landing (with this
-per-file receipt in the walker's comment block, the house form), or rule that the funnel
-card render A7 requires is not worth the row. Until then this ONE gate row is red by
-design, and it is the member's only STOP.
+⇒ **RULED — the raise is AUTHORIZED at `OWNER_DECISION_QUEUE.md` §460**, on the ground the
+raise was asked on: the funnel card's heading is a React `Card` prop rendered into an
+`<h4>`, not a native tooltip, and A7's ruled mount cannot be expressed without it; the
+IN-1b precedent applies exactly. **APPLIED** in the house form the walker's own comment
+block documents — `TITLE_BASELINE` raised by exactly one, with the per-file receipt above
+written into that block, both figures re-measured at the tip that carries the raise (the
+base read taken from an integrity-checked `git archive` of `acc466a6`, never from the live
+tree). `tests/domain/guidanceRegistry.walker.test.js` is therefore a **change path of this
+member** and appears in the change manifest; it is the ONE STOP, discharged.
 
 ## §6 · SCOPE AND BOUNDARY (the non-goals, affirmatively)
 
@@ -181,6 +202,7 @@ design, and it is the member's only STOP.
 | `docs/CURRENT_STATE.md` train blocker | head 197, 76 ahead | head **199**, **78** ahead | same, over applied head 121 |
 | `docs/DEPLOY.md` current head line | `197_consent_person_adjacent_default.sql` | `199_referral_funnel_report.sql` | same |
 | `MIGRATION_TRAIN_REPO_HEAD` | 197 | 199 | the new reviewed wave |
+| `TITLE_BASELINE` (`tests/domain/guidanceRegistry.walker.test.js`) | 485 | **486** | the funnel card's `<Card title=…>` heading prop — a raise, authorized at §460 and applied in the walker's house form; see §5b. Re-measured at the tip in both directions: the whole delta is `AdminTrendsPanel.jsx` 15 → 16 |
 | estate census `files/parked/credited/titles/suiteTitles` | 2,500 / 365 / 2,135 / 20,732 / 5,787 | **2,501 / 365 / 2,136 / 20,741 / 5,788** | delta `+1/+0/+1/+9/+1` — one new CREDITED test file with nine straight-line `test()` arms and one `describe`. `parked` does NOT move: the new file is a jsdom component test, not a runIf-gated suite |
 | `tests/lint/.prose-numerics-baseline.json` | 3 rows at lines 253 / 372 / 372 | 258 / 383 / 383 | LINE SHIFT ONLY in `AdminTrendsPanel.jsx`; 413 rows before and after, no row added, removed, or re-categorised |
 
@@ -193,6 +215,17 @@ therefore **absent from the change manifest**, and that is doubly correct: MF-T2
 and READY is non-terminal, so it RESERVES the walker and the validator refuses a second
 claim on it — a member that had also written the walker could not have been packeted at
 all until MF-T2H lands.
+
+⭐ **RE-DERIVED AT THE LANDING SLOT (TE-WEB3-LANDING, 2026-08-23).** The slot `718e4855` reads
+`2,511 / 366 / 2,145 / 20,817 / 5,802` (WEB-2's landing re-recorded the block above this
+member's); the delta `+1/+0/+1/+9/+1` is what crossed, so the landed tuple is
+**`2,512 / 366 / 2,146 / 20,826 / 5,803`** — the ONE live tuple line in the walker, convicted by
+execution at the rebased tree (33/33, mutexed) with two negative controls: the slot's own
+tuple put back reds at `files` ("expected 2512 to be 2511"), and `credited` alone put back at
+the slot's 2,145 reds at `credited` ("expected 2146 to be 2145") — the proof that the new file
+is COUNTED rather than parked; the file restored byte-identical both times. The walker `TEST`
+row joins this change manifest only now, at LANDED: MF-T2H is still READY at the slot and
+reserves the path, and a terminal status reserves nothing (the §410 order — walk first).
 
 ⚠ **A6's four arms are INVISIBLE TO THE CENSUS.** They live in
 `tests/security/referralRedeem.pglite.test.js`, which is PARKED, so `credited` does not
@@ -268,8 +301,13 @@ four target files, and a CLEAN-TREE CONTROL over the same three suites is green 
 
 ## §11 ⛔ THE 198 DEPENDENCY, AND WHAT WAS PROVED WHERE
 
-Migration 198 (WEB-2) is not on the branch at this base and lands FIRST. Four gates
-therefore red at this member's tip, all for the one reason, each with its exact text:
+**DISCHARGED AT THE SLOT (§13):** WEB-2 landed at `718e4855` (ODQ §478), so at the verified
+base `ls supabase/migrations` ends 196 / 197 / 198 with no foreign `199_*`, and this member's
+199 is contiguous natively — the four build-state reds below are history, and the carry was
+never needed at the landing. The rest of this section records the BUILD state as it was.
+
+Migration 198 (WEB-2) was not on the branch at the build base and landed FIRST. Four gates
+therefore redded at this member's build tip, all for the one reason, each with its exact text:
 
 | gate | red at the tip | green under the carry |
 |---|---|---|
@@ -307,3 +345,47 @@ npm run check:observed-shape-readers
 npm run validate:packets
 npm run check:tail
 ```
+
+## §13 · THE LANDING SLOT
+
+- **Rebase:** `git rebase --onto 718e4855 acc466a6 HEAD`, detached, the four holding commits
+  carried as authored. Carry-proof at blob level FIRST (braced `${sha}:path`, with non-vacuity
+  controls: `package.json` / `package-lock.json` identical at base and slot — no mint trigger
+  crossed; a nonexistent path reads ABSENT; the known-moved census walker reads as moved).
+  Twelve of twenty-nine delivered paths had moved at the slot and every one was resolved
+  keep-slot + re-apply: `ARCHITECTURE.md` `(198)` → `(199)`; `docs/CURRENT_STATE.md` both
+  figures → contiguous to 199, head 199 is 78 ahead of 121; `docs/DEPLOY.md` head line →
+  `199_referral_funnel_report.sql` with WEB-2's "Read these preambles before the push" section
+  kept verbatim (the build's extra sentence naming 197 as "the head this line replaced" was
+  DROPPED at the slot — it would have been false, 198 is the head this line replaced, and the
+  preambles section already names 197 for WEB-1's pinned symbol); the rehearsal core keeps
+  WEB-2's `retention-numbers` wave and appends `referral-funnel-report` with head 199; the
+  rehearsal test keeps WEB-2's 198 block at `.at(-2)` (its header retitled "198 IS …", the same
+  edit WEB-2 made to 197's) ahead of this member's 199 block at `.at(-1)`, every relative pin
+  shifted by two and the three absolute figures at 199 / 78; `INDEX.md` keep-both (this row
+  between RR-2 and WEB-4, where the build placed it); the manifest = the slot's bytes + this
+  row appended by string surgery, never re-serialized (164 → 165, ADDED=["WEB-3"], REMOVED=[],
+  DRIFTED=[]).
+- **The edge-shared bundle set (§475 law):** `src/lib/analyticsEvents.js` is a rostered input
+  of `analyticsEventsBundle`, and all five `.meta.json` had moved at the slot (the UC-stack's
+  regen at 11:54:54Z). `npm run build:edge-shared` was run ONCE at the commit-1 stop of the
+  rebase, so the member commit carries ONE coherent set: the three UC-0 bundle `.js` byte-
+  identical to the slot's, `analyticsEventsBundle.js` byte-identical to the build's, the five
+  metas within one builder window; the build's later re-stamp of the four sibling metas
+  (7c97c51c) resolved keep-ours (the regen), so that commit carries no meta change.
+- **The sibling contract that trapped this landing (raised, cured in-train, vetoable):**
+  `validate:packets` at the re-stamped tree redded on THREE rows of WEB-2's LANDED
+  `requiredSymbols` — `MIGRATION_TRAIN_REPO_HEAD = 198`, `**migrations/** (198)`,
+  `migrations are contiguous to 198` — each a pin on the current migration-head FIGURE that
+  199 is required to move. The §455.2 / §478.3 class, one specimen wider (figures, not a
+  filename). Cured as those rulings cure it: the three rows deleted inside WEB-2's manifest row
+  span with the citation written into WEB-2's packet §11; WEB-2's `docs/DEPLOY.md` filename row
+  left for HK-A's landing act as §478.3 ruled (the slot's preambles section satisfies it). No
+  other row of any packet moved. RAISED for HK-3: the validator guard must refuse a
+  migration-head FIGURE pin on these three paths, not only a filename pin on a doc.
+- **The status walk:** READY → LANDED at the re-stamp, FIRST, so the walker `TEST` row could
+  join the manifest (§8). `verifiedBase` → the slot sha in the header and the manifest row,
+  scoped to this row's span — WEB-5's `acc466a6` row at the slot untouched.
+- **The migration bill at the slot:** the twelve gates re-run mutexed at the rebased tree with
+  per-file verdicts; S0 two-part; the widened sweep; the terminal — all in the lane receipt
+  (`laneTEWEB3-receipt.md`, "THE LANDING SLOT").

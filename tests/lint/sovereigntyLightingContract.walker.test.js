@@ -5817,7 +5817,46 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   the park itself — the file restored byte-identical both times. `parked` moves 365 → 366
     //   for the SECOND time in the website train (WEB-1's pglite suite was the first); `credited`
     //   holds at the slot's 2,145.
-    files: 2511, parked: 366, credited: 2145, titles: 20817, suiteTitles: 5802,
+    // ── RE-RECORDED 2026-08-23 BY TE-WEB3-LANDING (WEB-3, the referral loop emit wiring), CAUSE ATTRIBUTED ──
+    // 2,500/365/2,135/20,732/5,787 → 2,501/365/2,136/20,741/5,788 at the BUILD base acc466a6
+    // (WEB-4's landing). ONE cause, and it is not a rule change — no classifier here widened or
+    // narrowed:
+    //   +1 file / +1 CREDITED / +9 titles / +1 suite title: tests/components/referralFunnelTelemetry.test.jsx,
+    //     the member's jsdom component suite (one literal `describe`, nine straight-line `test()`
+    //     arms A1–A8 with A1b's recursive totality scan; no `.each`, no `runIf`, no nesting), so
+    //     the file is CREDITED and every title counts. `parked` does NOT move.
+    //   +0 from tests/security/referralRedeem.pglite.test.js, which gained A6's FOUR arms (the
+    //     report function's posture: service_role only, `authenticated` refused, pg_temp-last
+    //     search_path, and the live positive control) — that file is PARKED (`describe.runIf()`),
+    //     so the four are real coverage this census cannot see, exactly as WEB-1's and WEB-2's
+    //     pglite suites above. Do NOT read the `+9` as the member's whole test count: it added
+    //     thirteen, four of them invisible here BY CONSTRUCTION.
+    //   +0 from tests/ops/migrationRehearsal.test.js (pins only, no new title) and from
+    //     tests/domain/guidanceRegistry.walker.test.js (the §460-authorized `title=` baseline raise
+    //     485 → 486 and its receipt in the comment block — a constant and prose, no title).
+    // `censusAuthorization`: ODQ §359.8 (the ruling — "migration 107 ships, nothing emits"), §402
+    // (C5 SIGNED, J4 RATIFIED: conversions derive read-side, no analytics write on the money
+    // path), §460.2 (the title-census raise authorized), §463.1 (this member complete), §478.4
+    // (the GO: 199 contiguous on WEB-2's 198 natively).
+    // ⛔ CONVICTED AT THE BUILD, then REVERTED per §417: the walker went green at the predicted
+    //   after-figure with each figure read from its own failure message in the documented order
+    //   (`files` "expected 2501 to be 2500" → `parked` PASSED UNMOVED at 365, the receipt that the
+    //   new file is credited → `credited` → `titles` → `suiteTitles`, 33/33), the edit was
+    //   reverted (`git checkout --`), and the row rode the packet (§8) into this landing slot so
+    //   the tuple is re-derived here, never carried.
+    // ⭐⭐ THE CARRY LAW, EXECUTED AT THE LANDING SLOT (TE-WEB3-LANDING, 2026-08-23; §457/§469
+    //   laws). This member was authored at base acc466a6 (after-figure 2,501/365/2,136/20,741/
+    //   5,788) and rebased onto 718e4855 (WEB-2's landing, the 41st). The DELTA `+1/+0/+1/+9/+1`
+    //   is what crossed. ⛔ THE BASE HAD MOVED UNDER IT: the four-member MAP STACK, the
+    //   three-member PRODUCER TRAIN, UC-0, UC-3 and WEB-2 re-recorded the blocks directly above,
+    //   so the slot reads 2,511/366/2,145/20,817/5,802 and the after-figure re-derives to
+    //   2,512/366/2,146/20,826/5,803 — the ONE live tuple line below, CONVICTED BY EXECUTION at
+    //   the rebased tip (33/33) with TWO negative controls: the slot's own tuple put back reds at
+    //   `files` ("expected 2512 to be 2511"), this member's +1 exactly; and `credited` alone put
+    //   back at the slot's 2,145 reds at `credited` ("expected 2146 to be 2145"), the credit
+    //   itself — the proof that the new file is COUNTED rather than parked — the file restored
+    //   byte-identical both times. `parked` holds at WEB-2's 366.
+    files: 2512, parked: 366, credited: 2146, titles: 20826, suiteTitles: 5803,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
