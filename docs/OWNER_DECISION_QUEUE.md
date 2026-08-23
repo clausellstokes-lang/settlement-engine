@@ -19720,3 +19720,39 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
 - **§483.3 HOUSEKEEPING.** MEMORY.md reached 16,849 B (the lane's +1 index
   line) — folded by the chair this sitting (FOLD 9). The lane's judgments
   J-HKL-1..4 stand as written in its receipt (vetoable there).
+
+## §484 — OWNER DIRECTIVE: EVERYTHING RUNS ON OPUS 5 FOR NOW; FABLE VALIDATES RETROACTIVELY WHEN THE OWNER SAYS SO; EVERY OPUS-RUN ITEM IS MARKED (2026-08-23 09:55 CDT)
+
+- **§484.1 THE DIRECTIVE (verbatim):** "continue everything currently and
+  future to run on opus 5 for right now with retroactive validatin with fable
+  when I say so, they should be marked".
+- **§484.2 APPLIED AT ONCE.** (a) The running Fable lane TC-R-INST-4 was
+  STOPPED at 14:46Z (its last RESUME POINT 14:40:40Z: all 13 families
+  written, §15/§Σ drafted) and relaunched on Opus to finish (ledger, method,
+  appendix, banner, assembly). (b) UC-1's landing was already on Opus
+  (§483.2). (c) Every future `Agent` dispatch carries `model: "opus"` —
+  builds, landings, research, compiles, skeptic panels, sweeps — until the
+  owner lifts it. (d) The CHAIR itself is this session's model (Fable) and
+  cannot switch models from inside the session; the owner switches the chair
+  by changing the session's model in the app — the pickup card and this
+  ledger are model-agnostic, so a successor chair on Opus resumes identically.
+- **§484.3 THE MARK.** Every ledger row for work performed on Opus carries
+  the tag **`[OPUS-RUN · FABLE-VALIDATION OWED]`** in its header; each item
+  is entered in the **OPUS REGISTER** on the pickup card (item · artifact ·
+  tip/sha · what a Fable validator must re-prove). Landed code carries the
+  mark in its packet's landing note (`MF-*.md` §"landing") — never in
+  requiredSymbols. Pre-directive Opus builds (WEB-2, WEB-3, UC-3, T2Q resume,
+  HK-A build, UC-1 build, the website-2 skeptic) are listed in the register
+  under "PRE-DIRECTIVE — landed under a Fable landing lane + chair
+  verification" so the owner can include or exclude them when the validation
+  pass is called.
+- **§484.4 THE RETROACTIVE VALIDATION PROTOCOL (runs only when the owner says
+  so):** per register item, one Fable validator lane under an
+  adversarial-verify brief: re-derive the item's claims at the LANDED tip
+  (acceptance + mutants re-driven, census/golden/reader-walker literals
+  re-walked, the sweep classification re-diffed), refute the item's judgment
+  calls, and stamp the ledger row `[FABLE-VALIDATED §N]` or raise a STOP with
+  the defect and its cure; research dossiers get a Fable source re-verification
+  of every PARENT-VERIFIED / grammar-load-bearing figure. Items cleared are
+  struck from the register; the register is the owner's audit surface.
+  Seats: UC-1 landing (Opus) · R-INST-4 finish (Opus).

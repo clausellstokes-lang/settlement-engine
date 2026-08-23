@@ -51,6 +51,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 09:55 CDT 08-23: §484 — OWNER: EVERYTHING ON OPUS 5 now; Fable validates
+# retroactively when told; mark `[OPUS-RUN · FABLE-VALIDATION OWED]` + OPUS REGISTER on the card.
+# R-INST-4 stopped (Fable) → relaunched on Opus. Seats: UC1-landing (Opus) · R-INST-4 (Opus).
 # ⭐⭐⭐ 09:45 CDT 08-23: §483 — HK-A LANDED (43rd): CAS → 0f3897a5; 0 READY/165.
 # UC-1 landing dispatched on OPUS (slot 0f3897a5). Seats: UC1-landing · R-INST-4.
 # ⭐⭐⭐ 09:35 CDT 08-23: §482 — OWNER: DW PROGRAM BEFORE /code-review ultra. Order:
