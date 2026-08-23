@@ -90,6 +90,25 @@ import { SANITATION_LADDER, institutionAnchorKey, sanitationRosterOf } from './s
 
 /** @typedef {import('./jointVocabulary.js').JointKind} JointKind */
 /** @typedef {import('./strataExistence.js').SanitationRung} SanitationRung */
+/**
+ * The estate's own settlement type. Declared here as the leaf's input rather than a private
+ * loose shape, because each collaborator this leaf hands the settlement to (`corruption.js`'s
+ * climate read, the calamity ledger, the high-water reader) declares ITS input in these terms:
+ * a private `{ institutions?: unknown }` shape would force a cast at every call, and the
+ * WF-1B/WF-1C law is cure by TYPEDEF, never by widening. This is a JSDoc type import only — no
+ * runtime edge is added. TOTALITY is a runtime property and is preserved: every field is
+ * narrowed in-body, and `null`, `undefined` and malformed inputs all yield a typed result.
+ * @typedef {import('../settlement.schema.js').SimSettlement} SimSettlement
+ */
+/**
+ * The leaf's ONE input type: the estate's settlement plus the pulse-written calamity key spelled
+ * the way `highWater.js`'s own `HighWaterInput` spells it. The key is DECLARED rather than left
+ * to `SimSettlement`'s index signature because `buildCalamityLedger` takes a WEAK type, and TS
+ * refuses a weak-type argument that declares none of its properties — highWater.js declares the
+ * same property for the same reason. Declaring it is not a second truth: the VALUE is still read
+ * only through the banked ledger projection, never off this key (§443).
+ * @typedef {SimSettlement & { calamityHistory?: import('../display/calamityLedger.js').CalStampLike[] }} SewerInput
+ */
 /** @typedef {'ROSTER_FULL_WEB'|'TIER_FLOOR'|'DERIVED'} RungSource */
 /** @typedef {'PROSPERITY_BAND'|'CIVIC_CAPACITY'|'GRADIENT_OUTFALL'|'CALAMITY_REBUILD'|'HIGH_WATER_POPULATION'|'FOUNDING_CHARTER'} SewerCause */
 /** @typedef {'RAISES'|'LOWERS'} CauseDirection */
@@ -127,6 +146,9 @@ import { SANITATION_LADDER, institutionAnchorKey, sanitationRosterOf } from './s
  * @typedef {Object} SewerLadder
  * @property {SanitationRung} rung
  * @property {RungSource} rungSource
+ * @property {string[]} rosterAnchors the CANONICAL institution keys (§441.5(k), UC-0's
+ *   `institutionAnchorKey`) of the sanitation institutions the roster carries — the receipt CT-4
+ *   cites when `rungSource` is ROSTER_FULL_WEB (§7 F2). Empty on every other source.
  * @property {CauseRow[]} causes
  * @property {Record<string, boolean>} perQuarterCoverage keyed by the pinned district 12-enum
  * @property {WellRow[]} wells
@@ -340,7 +362,7 @@ function hasOutfall(config, terrain) {
 /**
  * THE FIVE LIVE CAUSES AND THE HONEST ZERO, each read through its ONE live accessor and each
  * carrying that accessor as a receipt. Total on garbage: every value narrows in-body.
- * @param {{ institutions?: unknown, config?: unknown }} s
+ * @param {SewerInput} s
  * @param {{ population: number }} highWater
  * @returns {CauseRow[]}
  */
@@ -422,7 +444,7 @@ function deriveWells(tier, identity, covered) {
  * the same coverage and the same wells. Feeds UC-0's existence gate through its optional second
  * argument — `deriveStrataExistence(s, { sanitationRung: deriveSewerLadder(s).rung })` — which is
  * the whole of seam D-UC0-3; UC-0's leaf needs no edit.
- * @param {{ institutions?: unknown, config?: unknown, id?: unknown, name?: unknown }|null|undefined} settlement
+ * @param {SewerInput|null|undefined} settlement
  * @param {{ highWater?: { population?: unknown, tier?: unknown, understated?: unknown } }} [opts]
  *   a `deriveHighWater` result a caller has ALREADY computed — one truth, never a second read
  * @returns {SewerLadder}
@@ -430,7 +452,7 @@ function deriveWells(tier, identity, covered) {
 export function deriveSewerLadder(settlement, opts = {}) {
   const s = settlement && typeof settlement === 'object' ? settlement : {};
   const supplied = opts && typeof opts === 'object' ? opts.highWater : undefined;
-  const hw = supplied && typeof supplied === 'object' ? supplied : deriveHighWater(/** @type {never} */ (s));
+  const hw = supplied && typeof supplied === 'object' ? supplied : deriveHighWater(s);
   const highWater = {
     population: Number.isFinite(Number(hw.population)) ? Number(hw.population) : 0,
     tier: typeof hw.tier === 'string' ? hw.tier : '',
@@ -446,11 +468,13 @@ export function deriveSewerLadder(settlement, opts = {}) {
   /** @type {RungSource} */
   let rungSource = 'DERIVED';
   if (index < bounds.floor) { index = bounds.floor; rungSource = 'TIER_FLOOR'; }
-  if (sanitationRosterOf(s.institutions).length > 0) {
+  const roster = sanitationRosterOf(s.institutions);
+  if (roster.length > 0) {
     index = SANITATION_LADDER.length - 1;
     rungSource = 'ROSTER_FULL_WEB';
   }
   const rung = SANITATION_LADDER[index];
+  const rosterAnchors = roster.map(institutionAnchorKey).filter((k) => typeof k === 'string').sort(compareCodepoint);
   const covered = [...QUARTER_COVERAGE_BY_RUNG[rung]].sort(compareCodepoint);
   const coveredSet = new Set(covered);
   /** @type {Record<string, boolean>} */
@@ -465,6 +489,7 @@ export function deriveSewerLadder(settlement, opts = {}) {
   return {
     rung,
     rungSource,
+    rosterAnchors,
     causes,
     perQuarterCoverage,
     wells: deriveWells(highWater.tier, identity, covered),

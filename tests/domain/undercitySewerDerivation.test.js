@@ -99,14 +99,18 @@ describe('MF-UC1 — the undercity sanitation ladder and its wells', () => {
     expect(withRoster.length).toBeGreaterThan(0);
     expect(cities.length - withRoster.length).toBeGreaterThan(0);
 
-    // (i) the institution ⇒ FULL WEB, and it says so.
+    // (i) the institution ⇒ FULL WEB, it says so, and it names the institution by its CANONICAL
+    // key (§441.5(k)) — the receipt CT-4's F2 cites when the source is the roster.
     const web = deriveSewerLadder(withRoster[0]);
     expect(web.rung).toBe('full_web');
     expect(web.rungSource).toBe('ROSTER_FULL_WEB');
+    expect(web.rosterAnchors).toEqual(['sewage_system']);
+    expect(withRoster[0].institutions.some((i) => i.catalogId === 'sewage_system')).toBe(true);
 
     // (ii) strike it from the SAME settlement: the city falls to the floor, never to the web.
     const floored = deriveSewerLadder(withoutSanitation(withRoster[0]));
     expect(floored.rung).toBe('quarter_network');
+    expect(floored.rosterAnchors).toEqual([]);
     expect(RUNG_SOURCES).toContain(floored.rungSource);
     // anchored: `floored.rung` is pinned to 'quarter_network' on the line above, so this scan is live.
     expect([floored.rung]).not.toContain('full_web');
