@@ -85,6 +85,26 @@ const ID_TOKEN = /^[A-Za-z0-9][A-Za-z0-9+._-]*$/;
 const BRANCH_TOKEN = /^[A-Za-z0-9][A-Za-z0-9._/-]*$/;
 const GLOB_OR_NUL = /[\0*?[\]{}!]/;
 
+// ── THE MOVING-HEAD REFUSAL (HK-3, chair ruling recorded at ODQ §455) ────────────────
+// A `requiredSymbols` row pins a symbol that must EXIST. A migration FILENAME quoted in a
+// DOC is not a symbol — it is a figure that moves the moment the next migration lands, and
+// pinning it inside a packet turns every later migration member into a red against a
+// packet it never touched. WEB-1 pinned `197_consent_person_adjacent_default.sql` against
+// `docs/DEPLOY.md`'s current-migration-head line; WEB-2 hit it, and the estate already
+// carries the general law ("never put a re-recorded FIGURE in requiredSymbols", ODQ TE-26).
+// This turns that law into machinery for the one shape that has actually bitten.
+//
+// SCOPED TO DOCS PATHS DELIBERATELY, and the boundary is measured rather than guessed: at
+// this base exactly one estate row matches the filename shape at all outside docs —
+// TM-2A's `const SIM_METRIC_MIGRATIONS = Object.freeze([...196_world_sim_metrics.sql...])`
+// against `tests/lint/engineTelemetryWall.walker.test.js`. That row is a frozen roster
+// CONSTANT in the test that owns it, is not the moving head, and is exactly the pin the
+// walker exists to hold — so widening this refusal to every path would refuse a correct
+// row. The refusal is also SHAPE-scoped: it reads the `symbol`, never the doc's contents,
+// so a doc row naming a real heading or an exported token is untouched.
+const MIGRATION_FILENAME_SYMBOL = /^\d{3}_.*\.sql$/;
+const DOCS_PATH_PREFIX = 'docs/';
+
 /** @param {unknown} value @returns {value is Record<string, unknown>} */
 function isRecord(value) {
   return !!value && typeof value === 'object' && !Array.isArray(value);
@@ -616,6 +636,20 @@ export function validatePacketManifest(manifest, options = {}) {
       const key = `${row.path}\0${row.symbol}`;
       if (symbolKeys.has(key)) addError(errors, `${idLabel} contains duplicate required symbol: ${row.path} :: ${row.symbol}`);
       symbolKeys.add(key);
+      // THE MOVING-HEAD REFUSAL — see MIGRATION_FILENAME_SYMBOL above. Asserted BEFORE the
+      // retirement discharge and before the existence check, because this is a defect in the
+      // ROW'S SHAPE rather than a claim about the tree: such a row is wrong even on the one
+      // tree where the figure happens to be current, which is precisely why it shipped.
+      if (row.path.startsWith(DOCS_PATH_PREFIX) && MIGRATION_FILENAME_SYMBOL.test(row.symbol)) {
+        addError(
+          errors,
+          `${at}.symbol pins a MIGRATION FILENAME in a doc: ${row.symbol}. The current head is a`
+          + ' FIGURE that moves with the next migration, so this row traps every later migration'
+          + ' member against a packet it never touched. Pin a stable anchor in the doc, or pin the'
+          + ' migration file itself under supabase/migrations/.',
+        );
+        continue;
+      }
       // §379.2: an authorized LANDED retirement of this exact pair discharges the row.
       // The duplicate check above still runs — the row must stay well-formed and unique;
       // only the EXISTENCE assertions below are answered by the retirement.

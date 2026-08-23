@@ -13,6 +13,24 @@
   ruling: C1 signed, J2 ratified) · **§406** (the amended migration predicate) · **§408**
   (the authority to mint this packet).
 - **censusAuthorization:** §359.6.
+- ⛔ **POST-LANDING CORRECTION (HK-3, chair ruling at ODQ §455):** this packet's
+  `requiredSymbols` carried a fourteenth row, `docs/DEPLOY.md` ::
+  `197_consent_person_adjacent_default.sql` — the CURRENT migration-head figure, quoted in
+  a doc, inside a LANDED packet. It was true the day it was written and became a trap the
+  moment the next migration landed: WEB-2 hit it, and the estate already carried the general
+  law (never put a re-recorded FIGURE in `requiredSymbols`, ODQ TE-26). **The row is
+  DELETED** from this packet's manifest entry. Nothing else about the member changes — §7's
+  migration-mint bill still stands, `deployRunbookFreshness` still holds the DEPLOY.md head
+  line as a RED TEST rather than prose (`tests/docs/deployRunbookFreshness.test.js`), and
+  migration 197 itself is still pinned FIVE ways, none of them a moving figure: three
+  content anchors against the migration FILE at its own path (rows 2-4, including the
+  mandatory `-- @rollback:` note), and the STABLE rehearsal token
+  `consent-person-adjacent-default` against `scripts/ops/migrationRehearsalCore.mjs` and
+  `tests/ops/migrationRehearsal.test.js` (rows 11-12). HK-3
+  also turns the general law into machinery: `validatePacketManifest` now REFUSES any
+  `requiredSymbols` row whose symbol is a bare migration filename against a docs path, with
+  the deleted row replanted as the positive control in
+  `tests/scripts/implementationPackets.test.js`.
 - **Compile of record:** `draft-WEBSITE-PLAN.md` §1 (member) and §13 (standing laws).
 
 ---

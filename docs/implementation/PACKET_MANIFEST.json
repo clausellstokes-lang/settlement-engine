@@ -20911,10 +20911,6 @@
       {
        "path": "tests/ops/migrationRehearsal.test.js",
        "symbol": "consent-person-adjacent-default"
-      },
-      {
-       "path": "docs/DEPLOY.md",
-       "symbol": "197_consent_person_adjacent_default.sql"
       }
      ],
      "retiredSymbols": [

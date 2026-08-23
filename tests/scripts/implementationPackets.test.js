@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import {
   mkdirSync,
   mkdtempSync,
+  readFileSync,
   rmSync,
   writeFileSync,
 } from 'node:fs';
@@ -756,5 +757,79 @@ describe('IA-1 implementation packet manifest and capsule', () => {
     expect(runImplementationPacketsCli(['capsule', 'P-2'], { rootDir: root, ...streams })).toBe(1);
     expect(stdout).toBe('');
     expect(stderr).toContain('packet P-2 is not READY');
+  });
+
+  // ── HK-3 (chair ruling, ODQ §455) — THE MOVING-HEAD REFUSAL ───────────────────────────
+  // WEB-1 pinned `docs/DEPLOY.md` :: `197_consent_person_adjacent_default.sql` — the
+  // CURRENT migration head, quoted in a doc, inside a LANDED packet. The row was true on the
+  // day it was written and became a trap the moment the next migration landed: WEB-2 hit it.
+  // The estate already carried the general law (never put a re-recorded FIGURE in
+  // requiredSymbols); this arm is the machinery for the one shape that has actually bitten.
+  it('reds a requiredSymbols row that pins a migration FILENAME in a doc, and only that shape', () => {
+    write(root, 'docs/DEPLOY.md', [
+      '# Deploy runbook',
+      '',
+      '**Current migration head: `197_consent_person_adjacent_default.sql`** (this moves).',
+      '',
+      'The stable anchor a packet may pin instead: Current migration head',
+      '',
+    ].join('\n'));
+    write(root, 'supabase/migrations/197_consent_person_adjacent_default.sql',
+      '-- @rollback: documented-manual-reversal\nalter table consent_change_records add column v int;\n');
+
+    /** @param {{ path: string, symbol: string }} extraRow */
+    const withRow = (extraRow) => {
+      const candidate = clone(manifest);
+      candidate.packets[0].requiredSymbols.push(extraRow);
+      return validatePacketManifest(candidate, { rootDir: root });
+    };
+
+    // THE CLEAN CONTROL FIRST — without it a refusal proves nothing about this arm, only
+    // that the fixture is broken somewhere.
+    expect(validatePacketManifest(manifest, { rootDir: root })).toEqual({ ok: true, errors: [] });
+
+    // THE POSITIVE CONTROL: the exact row HK-3 deleted from WEB-1, replanted.
+    const planted = withRow({ path: 'docs/DEPLOY.md', symbol: '197_consent_person_adjacent_default.sql' });
+    expect(planted.ok).toBe(false);
+    expect(errorText(planted)).toContain('pins a MIGRATION FILENAME in a doc');
+    expect(errorText(planted)).toContain('197_consent_person_adjacent_default.sql');
+    // …and the refusal is about the ROW'S SHAPE, so it fires even though the doc really does
+    // contain the string today. That is the whole point: the row was wrong when it was true.
+    expect(readFileSync(join(root, 'docs/DEPLOY.md'), 'utf8'))
+      .toContain('197_consent_person_adjacent_default.sql');
+
+    // THE THREE NEGATIVE CONTROLS, so the arm cannot be a blanket refusal of anything .sql:
+    //   a) the migration FILE pinned at its own path is the correct, stable spelling;
+    //   b) a stable doc anchor in the same doc is untouched;
+    //   c) a migration filename quoted inside a longer symbol against a NON-docs path — the
+    //      live estate's one instance of the shape (TM-2A's frozen SIM_METRIC_MIGRATIONS
+    //      roster) — is a correct pin and must stay green.
+    write(root, 'tests/lint/engineTelemetryWall.walker.test.js',
+      "const SIM_METRIC_MIGRATIONS = Object.freeze(['supabase/migrations/196_world_sim_metrics.sql']);\n");
+    for (const row of [
+      { path: 'supabase/migrations/197_consent_person_adjacent_default.sql', symbol: 'consent_change_records' },
+      { path: 'docs/DEPLOY.md', symbol: 'Current migration head' },
+      {
+        path: 'tests/lint/engineTelemetryWall.walker.test.js',
+        symbol: "const SIM_METRIC_MIGRATIONS = Object.freeze(['supabase/migrations/196_world_sim_metrics.sql']);",
+      },
+    ]) {
+      expect(withRow(row), `${row.path} :: ${row.symbol} must NOT be refused`)
+        .toEqual({ ok: true, errors: [] });
+    }
+
+    // AND THE LIVE MANIFEST, which is the claim the deletion actually makes: no estate row
+    // carries this shape any more. Read from the repository rather than from the fixture.
+    const live = loadPacketManifest();
+    expect(validatePacketManifest(live, {}).errors
+      .filter((message) => message.includes('pins a MIGRATION FILENAME in a doc')))
+      .toEqual([]);
+    // …and the population this arm governs is pinned as a FLOOR, because a refusal over an
+    // empty subject proves nothing (the empty-population class): the estate really does
+    // carry docs-path requiredSymbols rows for this guard to be silent ABOUT.
+    const docRows = live.packets.flatMap((packet) => (packet.requiredSymbols ?? [])
+      .filter((symbolRow) => String(symbolRow.path).startsWith('docs/')));
+    expect(docRows.length, 'no packet pins a docs path at all — the guard has no live subject')
+      .toBeGreaterThan(0);
   });
 });
