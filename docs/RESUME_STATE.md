@@ -51,6 +51,8 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 09:35 CDT 08-23: §482 — OWNER: DW PROGRAM BEFORE /code-review ultra. Order:
+# content train → DW arc → OSR mint → parity → review → endgame. DW-0 starts at R-INST-6.
 # ⭐⭐⭐ 09:30 CDT 08-23: §481 — SEAT MODEL AMENDED: landings → OPUS (UC-1 first);
 # sub-lanes explicit model; phase-split at ~150 calls. Fable spend measured 1.14B ctx.
 # ⭐⭐⭐ 09:20 CDT 08-23: §480 — UC-1 BUILT, holding-uc1 53d7e492 (carry DELTA

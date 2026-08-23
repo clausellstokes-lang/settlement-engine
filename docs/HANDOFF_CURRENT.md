@@ -183,10 +183,13 @@ Producers build+land → WEB-2/3 → content tail (WF-8 shrink-back CAR carries 
 §384.2 with the attribution table: general=CT-2, warFaith=CT-3, +T2M's lawful
 flip) → undercity train (compile first) → housekeeping (HANDOFF re-refresh,
 MEASDUAL phase-2 at a quiet window, §384.2b durable doc [chair-authored —
-governance], INV-EVS worktree prune after the owner rules) → parity train +
-the §290 review stop (recommend /code-review ultra — OWNER fires it) →
-ENDGAME: walk + ONE regen → terminal soak → TUNING WITH THE MAP LEG (§341;
-owner signs) → V5 waves → cull → IP scrub (two docs leave the repo) → push.
+governance], INV-EVS worktree prune after the owner rules) → **THE DW
+PROGRAM (§482: DW-0 charter → DW-R → DW-1..7 → DW-S wiring; DW-0 starts when
+R-INST-6 delivers; builds on Opus) → the ONE trailing OSR mint after the last
+DW car → parity train (DW facts included)** → the §290 review stop
+(/code-review ultra — OWNER fires it; reviews DW too) → ENDGAME: walk + ONE
+regen → terminal soak WITH the DW leg → TUNING WITH THE MAP LEG (§341; owner
+signs) → V5 waves → cull → IP scrub (two docs leave the repo) → push.
 
 ### 4 · OWNER DOCKET (untouched by any lane)
 Tuning signature · cull §67.6 · every push/merge/deploy · three db-push

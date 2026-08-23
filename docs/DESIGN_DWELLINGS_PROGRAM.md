@@ -30,6 +30,14 @@ of the map program); nothing that can move an output lands after the
 signature (the endgame-tail law holds). Coordination carry-notes are planted
 NOW (§16) so nothing built in the current arc precludes DW.
 
+**§482 (owner, 2026-08-23): "DW program before the code-review ultra."** The
+DW build arc (DW-0 through DW-7 and the DW-S wiring) completes and lands
+BEFORE the §290 review stop, so `/code-review ultra` reviews the dwellings
+code; the ONE trailing OSR mint follows the last DW car, and the parity train
+follows the mint (covering DW's spatial facts). DW-0 starts in the second
+seat the moment R-INST-6 delivers. The endgame order (walk → ONE REGEN →
+soak with the DW leg → tuning → signature → push) is unchanged.
+
 ---
 
 ## §1 · THESIS
@@ -279,7 +287,7 @@ gate each corpus wave (the CT-0 pattern).
 
 | Wave | Content | Depends on |
 |---|---|---|
-| DW-0 | charter compile from THIS document; owner sits the bands | RESEARCH COMPLETE (R-INST-1..6 + the circulation/storage addendum + DWR1A residuals, taste-gated) — §456 |
+| DW-0 | charter compile from THIS document; owner sits the bands | RESEARCH COMPLETE (R-INST-1..6 + the circulation/storage addendum + DWR1A residuals, taste-gated) — §456; starts the moment R-INST-6 delivers; the whole DW arc lands BEFORE the §290 review stop — §482 |
 | DW-R1..R3 | the corpus (partis; functions/rosters; fixtures) | DW-0 |
 | DW-1 | vocabularies + rosters landed dark (engine leaves, golden-inert) | R-waves |
 | DW-2 | the geometry core: vertical partition + parti placement + circulation over parcel polygons | D3b live; DW-1 |

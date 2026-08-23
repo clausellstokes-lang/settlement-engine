@@ -19660,3 +19660,27 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   brief beats a 300-call transcript replay); the chair batches reads and
   stops polling. Fable keeps: charters, rulings, skeptic briefs, compile/
   synthesis parents, and the chair. Veto reverts to §447's table.
+
+## §482 — OWNER DIRECTIVE: "DW program before the code-review ultra" — THE DWELLINGS BUILD MOVES AHEAD OF THE §290 REVIEW STOP; THE TRAILING OSR MINT AND THE PARITY TRAIN FOLLOW IT (2026-08-23 09:25 CDT)
+
+- **§482.1 THE DIRECTIVE (verbatim):** "DW program before teh code-review
+  ultra". The owner had been shown the remaining arc as a table with the DW
+  program (#20) after the review keystroke (#19); this inverts them.
+- **§482.2 THE SEQUENCE AS NOW RULED** (chair's placement of the rest is
+  vetoable): current seats (HK-A landing · R-INST-4) → UC-1 landing → UC-4 ·
+  R-INST-5 · UC-2 · R-INST-6 · UC-5 · the W-C cars (WEB-8 → 9a → 9b → 10) ·
+  WEB-11 · HK-4/HK-5 → housekeeping sweep → content train (CT-4 / CT-5 /
+  WF-8) → **THE DW PROGRAM (DW-0 charter compile → DW-R1..R3 → DW-1..DW-7 →
+  DW-S wiring), its members landing by the full landing law** → ONE trailing
+  OSR mint (after the LAST DW car, so it stays one mint — §384.2) → parity
+  train (now covering DW's spatial facts too, §289) → **the §290 review stop:
+  `/code-review ultra` (owner keystroke) reviews the dwellings code** →
+  ENDGAME: walk → ONE REGEN (founding.kind) → the 300-year soak WITH the DW
+  leg (§456) → tuning pass (runaway + map leg + undercity weights + DW soak
+  findings; owner signs) → V5 / cull / IP scrub → push.
+- **§482.3 START RULE:** DW-0 (the charter compile, Fable) starts in the
+  second seat the moment R-INST-6 delivers — research complete per §456 —
+  interleaving with the remaining UC/W-C cars by readiness; DW build phases
+  run on Opus (§481). Band-signing at DW-0 rides an owner sitting (§11).
+  DESIGN_DWELLINGS_PROGRAM.md preamble + §9 amended; HANDOFF §3 arc rewritten;
+  memory appended.
