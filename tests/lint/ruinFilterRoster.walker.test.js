@@ -98,6 +98,11 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   'src/domain/mapProfile.js': 'existence-gate (deferred) — .some() walls → hasWalls; a ruined citadel still reads walled (owner glance)',
   'src/domain/contradictions.js': 'existence-gate — narrative QA detectors (.some presence)',
   'src/domain/traditions/politics.js': 'existence/candidate — tradition-owner candidate membership (deferred; owner glance)',
+  // MF-UC0 (ODQ §311.1, §441, §445.2): the underground SHEET's existence gate reads the RAW
+  // roster ON PURPOSE. §311.3 — "the HIGH-WATER LAW runs underground: dug is forever" — a
+  // ruined church's crypt is a fossil (UC-4's recession vocabulary), never an absence; filtering
+  // the roster here would erase every seed the doctrine says cannot recede. Not a provider sum.
+  'src/domain/undercity/strataExistence.js': 'existence-gate — §311.1 sheet gate over the raw roster; §311.3 dug is forever (a ruined institution\'s seed is a fossil, not an absence)',
   // ── name-lookup / target-selection: resolves ONE institution, not a provider sum ─
   'src/domain/worldPulse/entrepotKernel.js': 'name-lookup + write — founds/looks up one institution',
   'src/domain/worldPulse/supplyKernel.js': 'name-lookup + mutation — resolves one consuming institution; stamps impairments',
@@ -344,7 +349,10 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // ⛔ EXACT, and shrink-or-grow both mean re-measure: a new `.institutions` reader in
     // src/domain moves this figure, and the cure is to route it through the accessor or
     // disposition it — never to nudge this number.
-    expect(readers.length).toBe(89);
+    // RE-MEASURED 2026-08-23 BY MF-UC0: 89 → 90. ONE new reader, src/domain/undercity/
+    // strataExistence.js, DISPOSITIONED above as an existence-gate exemption (§311.3); read
+    // from this arm's own failure message ("expected 90 to be 89"), never computed.
+    expect(readers.length).toBe(90);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {
