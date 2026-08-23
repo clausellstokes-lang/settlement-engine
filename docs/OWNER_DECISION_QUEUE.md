@@ -20384,3 +20384,97 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   CH cars (the catalog fixes are already compiling and CH-1 is drafted first),
   and its landing takes a normal slot. If the owner wants it AHEAD of CH, say
   so and it takes the next free seat instead. Seats: UC-2 landing · CH compile.
+
+## §496 — UC-2 LANDED (THE 46TH) `[OPUS-RUN]` — THE BUILD SHOP IS EMPTY OF CARS FOR THE FIRST TIME SINCE §442; DW-0's CHARTER COMPILE DISPATCHED; AND THE OWNER'S **ESTATE WAVE** SPECIFIED IN CHAT AND SENT INTO THAT COMPILE WITH SEVEN CHAIR RULINGS (2026-08-23 14:51 CDT)
+
+- **§496.1 LANDED.** TE-UC2-LANDING: tip `00e7af61` = 6 over slot `f1e4d515`;
+  carry table at blob level with `--verify --quiet` throughout (3 created, 2
+  MOVED, 3 UNMOVED incl. the ruin walker PROVED unmoved); two rebase stops,
+  both INDEX-only (MF-UC2 sits at array position 165, so UC-4's comma-seam
+  surgery never arose); manifest 167 → 168 ADDED=[MF-UC2] DRIFTED=[]; tuple
+  walked `2515/366/2149/20854/5807` with both controls; roster 91 at the slot
+  BY EXECUTION and 92 at the tip; the three-place flip (requiredSymbols
+  16 → 21); S0 both parts clean, zero OSR rows minted; sweep 7/7 banked, 0
+  strays; terminal 20/20 steps — `valid: 168 packets (0 READY)` · `head =
+  199` · 173/173 · 1134/1134 · `11 known failure(s) of **28896** tests,
+  ceiling 11` (the slot's 28888 proved by execution, +8 attributed three
+  independent ways) · `STRICT DIST OK` · `[gate-tail] exit: 0` · `TRUE_EXIT=0`
+  · 19.1 GB free. **CAS `f1e4d515 → 00e7af61`.** Pruned holding-uc2 and
+  uc2-landed-tip, the tree, /tmp/uc2l; gate body archived. **The holding
+  roster is EMPTY** — the undercity train T-UC1/T-UC2/T-UC3 is complete but
+  for UC-5.
+- **§496.2 THE §489.3 GREP ARM PAID FOR ITSELF ON ITS FIRST RUN.** The sweep
+  caught a member-caused red the build lane could not see: a GREEN test
+  (`tests/docs/enforcement-claims.test.js`, the per-claim naked-claim freeze)
+  turned RED on ONE JSDoc clause at `src/domain/institutionFounding.js:86` —
+  a twelfth failing title against a ceiling of eleven, which `test:ratchet`
+  refuses to absorb, so the terminal was GUARANTEED to fail. Root cause is a
+  **mis-record in the estate's own memory**, now corrected: `gatherClaims()`
+  walks every `src/**` `.js`/`.jsx`/`.ts` COMMENT line, not only docs — so a
+  docs-only CLAIM_RE pass at build time is blind to a claim written in a code
+  comment. Cured in-train on the §489 precedent (one clause reworded,
+  behaviour-identical; conviction and negative control both executed). The
+  lane also WIDENED the arm structurally when the literal symbol grep proved
+  vacuous for a dormant leaf — 71 files in un-swept trees that read `src/**`
+  — and that widening is what found the second item (`voiceMechanics` +1, one
+  em-dash in a provenance string, banked, recorded not cured). **LAW: the
+  grep arm is widened BY SHAPE when a symbol grep returns only files already
+  in the battery.**
+- **§496.3 DW-0's CHARTER COMPILE DISPATCHED (Opus)** into the freed seat —
+  the owner's §482 start condition (research complete) is met. Its brief
+  opens with the chair-ratified first line (MOST CATALOG ENTRIES ARE NOT
+  BUILDINGS), carries the seven-document reading order, the three missing
+  RELATIONS (`hostedIn`, `NO_BUILDING`, `occupies`), the §494 compound, the
+  §495 correction, the CH-in-flight dependency (catalog TYPING changes under
+  it), and — the section DW-0 exists to produce — **§7 THE OWNER'S BANDS**,
+  a sitting document in the owner's register (glance → sentence → table,
+  every formula translated).
+- **§496.4 ⭐ THE OWNER'S ESTATE WAVE (in chat, this sitting) — specified,
+  ruled, and sent into the compile.** The owner's four points: (1) an
+  institution's building is RE-DRAFTED within its plot against district and
+  prosperity so the type is credible — no one-room inn — with storeys and a
+  court as needed; (2) plots EXPAND OR MERGE into ESTATES where prosperity
+  and neighbourhood warrant, with EMERGENT COURTS and YARDS; (3) small
+  DERIVED EMBELLISHMENTS dress the estate on the map (a tannery's yard shows
+  hides stretched drying); (4) it assigns the PROPERTY LINES the halo
+  consumes. **Seven chair rulings sent with it (each vetoable):** R1
+  **frontage GATES the parti and the program is absorbed by DEPTH AND
+  HEIGHT, never sideways** (Pantin's 6–10 ft shops; the parallel-hall parti
+  needing 30–50 ft; R-INST-1's civic STACK) — never draw the building from
+  the plot nor grow the plot to fit the building; R2 **REFUSAL OVER
+  REPAIR** — the cartography leaf earns containment as a THEOREM by having
+  no clipping, jitter or retry, so a re-draft that retries until it fits
+  destroys the theorem; when no eligible parti fits, the institution
+  DEGRADES HONESTLY (smaller parti, or the HOSTED / NO_BUILDING verdict the
+  research already demands); R3 **merging is a DATED EVENT and WARD-LOCAL** —
+  an estate REMEMBERS it was two plots with a date and a cause (the Promise;
+  law 5), and only adjacent wedges of one ward may merge, because the union
+  of adjacent triangles of one fan is still contained and non-overlapping
+  while a cross-ward merge breaks the theorem; R4 **courts and yards are
+  DEFINITIONS, not data** — yard = plot minus footprints, COURT = the
+  topological case where footprints ENCLOSE part of that leftover, so
+  "emergent" is literally true and nothing is stored; a NAMED court (the
+  collegiate court, the fondaco, the inn's galleried yard) is the parti's own
+  declaration and outranks the emergent reading; R5 **embellishments are a
+  CLOSED, DERIVED vocabulary** keyed by institution function × prosperity ×
+  WEAR × season (the research already carries the sets: tanning pits and
+  drying frames, the smithy's quench pit, the brewing outshut, the kiln's
+  stokehole at 10–30 m, bee boles, the midden), DETERMINISTIC (same seed,
+  same hides — or the Promise and every golden break) and never asserting a
+  fact the engine lacks (a ruined tannery sheds its frames first — R-INST-1's
+  decline ladder); R6 **it is its own WAVE between the geometry core and the
+  fixtures wave — the ESTATE wave — and MP-1 is its map-side consumer**, so
+  the halo is built ONCE (MP-1 draws today's plot line; the same overlay
+  later consumes estates, courts and members with no UI rework); R7 **the
+  sequencing constraint the owner must see in the band sitting: this wave
+  changes the drawn map of every settlement — a declared one-time same-seed
+  shift — and the endgame plans exactly ONE REGEN, so the estate wave MUST
+  land before that regen or it forces a second one.**
+- **§496.5 MEMORY FOLD 11** (the index hit 16,160 B): nine rows folded
+  verbatim to `archive-2026-08-23-index-fold-11.md` — census machinery
+  (banked failures lie twice; loop-registered tests; the union law; SCW-1;
+  the TEST-row rule) and gate/commit mechanics (mutex self-deadlock; the
+  shared lock dir; the private-index method; reserved change paths). Index
+  now 14,703 B; every pointer link-checked. Seats: CH compile (Opus) · DW-0
+  compile (Opus). Holding: none. Next: the CH skeptic, then CH-1; UC-5 and
+  MP-1 queued.

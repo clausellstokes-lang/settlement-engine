@@ -51,6 +51,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 14:51 CDT 08-23: §496 — UC-2 LANDED (46th) CAS → 00e7af61; holding roster EMPTY.
+# DW-0 charter compile dispatched; the OWNER'S ESTATE WAVE specified + 7 chair rulings sent into it.
+# Memory FOLD 11. Seats: CH-compile · DW0-compile.
 # ⭐⭐⭐ 14:33 CDT 08-23: §495 — CORRECTION: parcel rows DO carry `polygon`; the property line is a
 # PUBLISH. Map car MP-1 chartered (parcel op + hover halo + yard by subtraction). Wedge-shape limit stated.
 # ⭐⭐⭐ 14:19 CDT 08-23: §494 — OWNER: hover halos the PROPERTY LINE (compound = building +
