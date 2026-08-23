@@ -398,4 +398,36 @@ artifacts split exactly as the law predicts:
 
 ---
 
-## §6.4 · THE SECOND DRIVE — to be stamped at the final tip
+## §6.4 · THE SECOND DRIVE, AT THE FINAL TIP
+
+Run at the shipped bytes of `3c4b283f2` (the READY docs commit), mutexed, over the same ten
+trees. `git rev-parse HEAD` and `git status --porcelain` identical before and after (the tip
+unmoved, the tree clean).
+
+`Test Files 6 failed | 1478 passed | 7 skipped (1491)` · `Tests 8 failed | 19520 passed | 114 skipped (19642)` · 345.32 s · **SWEEP2_TRUE_EXIT 1**.
+
+**EIGHT failing titles, and the member-caused one is GONE:** `mutationCoverageManifest` no
+longer appears. What remains is **exactly the seven banked reds** proved at the clean base in
+§6.3 **plus this member's one authorized interior red** (the deferred census row). **NO STRAY**
+in either drive, so no re-run was owed (§355) and no §432 escalation is open.
+
+⚠ **ONE NEAR-MISCLASSIFICATION, RECORDED SO THE NEXT READER DOES NOT REPEAT IT.** This drive's
+log carries four alarming lines that are **not failures**: `vendored lib …__exact_set_probe__.js
+… NOT pinned in VENDOR-MANIFEST.json`, `pinned in manifest is missing on disk: flatqueue.js`, and
+two `VENDOR-MANIFEST.json has no libs to verify`. They are the **child-process stdout of
+`scripts/validate-map-fork.mjs`**, which `tests/build/vendorManifestExactSet.test.js` runs on
+purpose and asserts on — the test plants the probe, moves `flatqueue.js` aside, and restores
+both in a `finally`. The file appears in NEITHER drive's failing list and the worktree porcelain
+was empty throughout. A sweep log line is not a verdict; only the `×` list and the summary are.
+
+**§6.5 · TWO INSTRUMENTS OUTSIDE THE TEN TREES, run explicitly rather than left unstated:**
+
+* `tests/generation.test.js` — the repo's one root-level test file, outside both the sweep trees
+  and the grep arm's token set: `Test Files 1 passed (1)` · `Tests 21 passed (21)` · TRUE_EXIT 0,
+  with the golden blob still `29c6cc8f…`.
+* `tests/interior/interiorExport.test.js` and `tests/interior/interiorLens.test.js` — the two
+  `interiorFixtures` consumers the grep arm's tokens do not reach: 14/14 green (§6.1).
+
+Both S0 walkers rode the sweep and are green in both drives: `observedShapeReaders.walker`
+(the reader literals at `:737` unmoved) and `ruinFilterRoster.walker` (the reader count still 92,
+no disposition owed — this car adds no `.institutions` reader).
