@@ -19684,3 +19684,39 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   run on Opus (§481). Band-signing at DW-0 rides an owner sitting (§11).
   DESIGN_DWELLINGS_PROGRAM.md preamble + §9 amended; HANDOFF §3 arc rewritten;
   memory appended.
+
+## §483 — HK-A LANDED (THE 43RD): THE CLANDESTINE-FACET KEY CURED, MF-T2H FLIPPED LANDED, THE FILENAME GUARD LIVE, WEB-2's LAST HEAD-PIN GONE — 0 READY ACROSS 165 PACKETS; UC-1's LANDING DISPATCHED ON OPUS (§481 APPLIED) (2026-08-23 09:45 CDT)
+
+- **§483.1 LANDED.** TE-HKA-LANDING: 4 of 12 paths moved at the slot (INDEX,
+  manifest, `institutionLifecycle.js` — T2Q's hunks at 853+ vs HK-1's at 426 —
+  and the prose-numerics baseline); the rebase auto-merged with zero stops and
+  that was PROVED, not accepted (8 unmoved paths blob-identical to the holding;
+  the 4 moved paths' slot→tip diff bodies sha-identical to base→holding).
+  Manifest DRIFTED set `[MF-T2H READY 6 → LANDED 15, WEB-1 14 → 13, WEB-2
+  18 → 17]`. §478.3 executed: with HK-3's guard on the branch the validator was
+  red on exactly `WEB-2.requiredSymbols[17] … 198_retention_numbers.sql` and
+  nothing else; after the scoped 95-byte deletion **`valid: 165 packets (0
+  READY)`** — the first 0-READY reading since MF-T2H's row reserved the walker
+  path (§410). Guard controls: both positives red when replanted, three
+  negatives green, estate scan `[]` over 2,204 rows. D-HKA-1 comment-only (0
+  non-comment lines), both measured claims re-proved. Tuple slot +
+  `+0/+0/+0/+4/+1` = **2512/366/2146/20830/5804**, 33/33, both controls.
+  S0 pre-existing `c5b67844…` byte-identical at tip and baseproof; no reader
+  added. Nine-tree mutexed sweep `7 failed | 20136 passed`, 7/7 banked by
+  machine-compared assertion blocks, 0 strays. Terminal 14:13→14:31Z:
+  `valid: 165 packets (0 READY)` · `head = 199 (199 files, contiguous)` ·
+  173/173 · 1134/1134 · `11 known failure(s) of 28872 tests, ceiling 11`
+  (+4 over WEB-3 attributed by execution: underwaysCouplings 6 → 9,
+  implementationPackets 15 → 16) · `STRICT DIST OK 52/438` · `[gate-tail]
+  exit: 0` · `TRUE_EXIT=0` · `free_kb_at_end=20058752`. **CAS `64da7d5d →
+  0f3897a5`.** Pruned holding-hka, the tree, /tmp/hkal; gate body archived.
+  Holding roster: UC-1 only.
+- **§483.2 UC-1's LANDING DISPATCHED ON OPUS** (the first §481 application):
+  rebase `--onto 0f3897a5 c1295938 53d7e492`; delta `+1/+0/+1/+8/+1` over the
+  new slot tuple → `2513/366/2147/20838/5805`; MF-UC1's row enters LANDED
+  (§410 form, no head pins); expect `valid: 166 packets (0 READY)`;
+  ruinFilterRoster 90 → 91 re-verified at the slot by execution; terminal
+  `uc1-TERMINAL-<tip8>.log`. Seats: UC-1 landing (Opus) · R-INST-4 (Fable).
+- **§483.3 HOUSEKEEPING.** MEMORY.md reached 16,849 B (the lane's +1 index
+  line) — folded by the chair this sitting (FOLD 9). The lane's judgments
+  J-HKL-1..4 stand as written in its receipt (vetoable there).
