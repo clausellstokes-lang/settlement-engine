@@ -18951,3 +18951,59 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   point is its receipt as it stood at the kill plus whatever its six
   sub-lanes wrote to disk (SL-AB/CD/EFG/HI/JK/LM — transcripts survive).
   Both resume from their status maps at a free second seat.
+
+## §466 — THE CIRCULATION + STORAGE ADDENDUM DELIVERED (281 KB; 23 OF 25 UNITS AT DEPTH; THE THREE DOSSIERS CONVERGE); TC-WEBSITE-2 DISPATCHED IN THE SECOND SEAT (2026-08-23 01:35 CDT)
+
+- **The addendum** (`draft-R-INST-CIRC-ADDENDUM.md`): every R-INST-1 family
+  and every DWR1A dwelling type has circulation, storage and both-sided
+  counterexample rows with licensing indications; two units PARTIAL (the
+  tenement's close/turnpike stair; the lobby-entry lobby's size) because
+  the session's shared WebSearch cap (200) was hit — the R-INST-2 hazard,
+  now seen twice: **the cap is per SESSION, shared by every lane**; a
+  research lane that fans out spends it for everyone (moot under §465,
+  recorded for when the cap lifts).
+- **Load-bearing figures:** the gate passage CLOSED by proxy (portcullis
+  leaves 19 × 12¼ ft Bootham, 13½ ft Walmgate → ≈3.4–4.1 m clear, a single
+  lane; wicket 0.53 × 1.37 m) · the one measured pre-1800 corridor (Fleet
+  Prison galleries 66 yd × "not seven feet", Howard 1777) anchoring
+  NARROW < 1.8 m; cloister walks 2.5 → ~4 m anchoring STANDARD; Kerr 1864
+  prescribing corridor 6–12 ft / gallery 14–20 ft · long galleries
+  (Hardwick 166 ft; Vyne 74 × 16; Haddon 110 × 17) → BROAD 4–7 m gentry /
+  HALL-GRADE > 7 m prodigy; screens passages 3–10 ft (Pantin); the Dartmoor
+  longhouse passage 0.8–1.5 m.
+- **Storage laws:** (L1) buttery + pantry at the lower end of the hall off
+  the screens (Boorde 1542, Pantin ×4, Bodiam, Wealden — no counterexample
+  found); (L2) the cellar "under the service end" (the §453 text's "under
+  the buttery" CORRECTED); (L4) the larder law FLIPS by era — 1542 "anexed
+  to the kychen" vs 1864 "north and east… no fireplace or hot smoke-flue"
+  (Kerr) — plus Kerr's door PROHIBITIONS and the muniment room's "no
+  heating" (binds the archive, not the money: Tallinn's treasury sits by
+  the furnace).
+- **Vocabulary delta (§4) → the DW contracts:** two new top-level classes
+  (R-INST-2's) with civic/defence members — `VERTICAL` (hoist · chute ·
+  well-shaft · hatch · portcullis windlass) and `EXTERIOR_WALK` (court ring
+  · yard · parade · wall-walk · range · street); ~45 circulation sub-forms
+  (CORRIDOR{MURAL | SIDE_PASSAGE | DOUBLE_LOADED | THROUGH_LANE | BRIDGE},
+  GALLERY{ARCADE | CLOISTER_WALK | TRESAUNCE | INN | GALLERY_OVER | VERANDA
+  | CELL_BLOCK}, LOBBY{PORCH | BARBICAN | DOOR_LOBBY}, STAIR_HALL{VICE |
+  EXTERNAL | FOREBUILDING | MODULE | COMMON}); nine joint/adjacency
+  attributes the contracts lack (joint target incl. UNDERCITY /
+  OTHER_BUILDING / EXTERIOR; `severable`; refused joints; light
+  VIA_CORRIDOR / END_WINDOWS / BARRED; adjacency POLARITY incl.
+  FORBIDDEN_DOOR, REQUIRED_ABOVE/BELOW, GUARDIAN_ADJACENT,
+  NOT_ON_SUSPENDED_TIMBER; building-wide `noFire`; `mintedBy/killedBy`);
+  ~35 storage sub-forms. **THE KEY STRUCTURAL PROPOSAL, RATIFIED for the
+  DW spec:** split `CORRIDOR` the CELL (early and program-licensed —
+  Rochester 1127, Holstentor 1464, Vasari 1565, the Fleet) from
+  `corridorPlanned` the PARTI attribute (≥1650 English domestic) — this
+  reconciles §452's "late" with the evidence; three spelling corrections
+  across the dossiers; the three dossiers CONVERGE on the §452/§453
+  top-level sets. Tally: 25 parent-verified · 54 sub-lane CONFIRMED · 148
+  carried · 71 PLAUSIBLE · 31 NOT FOUND; 24 open questions; C0 0.
+- **TC-WEBSITE-2 DISPATCHED** (Fable, solo, no fan-out) in the second seat:
+  the WEB-8 (de-advertise + enforcement-symbol pin + the pdfExport pin +
+  stale SKUs) and WEB-9 (the $14.99 Surveyor tier with a margin-derived
+  allowance; the annual Cartographer plan) charters per §464.2, with the
+  owner's exact Stripe to-do list as an output. Seats: MAP-STACK landing ·
+  TC-WEBSITE-2 (cap). Second-seat queue after it: R-INST-3 (resume) →
+  R-INST-4 (resume) → R-INST-5 → R-INST-6 → HK-4.

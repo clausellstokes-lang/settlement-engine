@@ -51,6 +51,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐ 01:35 CDT 08-23: §466 — CIRC+STORAGE addendum delivered (281KB; CORRIDOR
+# cell vs corridorPlanned parti ratified). TC-WEBSITE-2 compile in seat 2.
+# Live: MAPSTACK-landing · WEBSITE-2.
 # ⛔ 01:30 CDT 08-23: §465.1 — 14 research SUB-LANES + R-INST-4 STOPPED (the cap
 # includes sub-lanes; no fan-out while it stands). Live: MAPSTACK-landing +
 # R-INST-CIRC (solo).
