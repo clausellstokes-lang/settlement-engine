@@ -20,6 +20,10 @@ The §427 block's structure stands; THIS delta supersedes its state figures:
 > re-dispatched from their receipts at §440.4; the wakeup is job 0383ec45.
 > NEW LAW §440.2: every battery exports
 > `GATE_MUTEX_LOCK_DIR=/tmp/settlementforge-vitest-gate.lock`.
+> **§442:** T2H LANDED — build is at **84e06412** (26 landings). WEB-1 is in
+> the landing seat (GO §442.2). DWR1A collected (§442.3). The undercity charter
+> is RULED at §441 (TC-UNDERCITY-R2 applying it). Holding queue after WEB-1:
+> web4/5/6/7 → T2J → T2K → T2L → T2M; producers T2R/T2Q resuming; T2N next seat.
 
 1. **BUILD is at b10ed1a1 — 25 LANDINGS** (since §427: CT-3 landed §432 after
    the §355 hunt CLOSED — the varying-cast contamination hypothesis is

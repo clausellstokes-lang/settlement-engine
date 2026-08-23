@@ -51,6 +51,19 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ ~20:40 CDT 08-22: §442 — T2H LANDED (26th): run-2 green two-part,
+# CAS → 84e06412, pins + tree pruned. WEB-1 GO issued (landing seat; rebase
+# onto 84e06412; tip file web1-rebased-tip.txt; terminal web1-TERMINAL-*.log).
+# DWR1A collected NEAR-COMPLETE (90.7KB; frontage-tax causation UNSUPPORTED
+# — vetoable correction; CT-0 sitting docketed O-DW1). TC-UNDERCITY-R2
+# dispatched. Seats: WEB1-landing · T2R · T2Q · UC-R2. Next: T2N at next seat.
+# ⭐⭐ ~20:20 CDT 08-22: §441 — UNDERCITY CHARTER RULED after a 3-lens
+# skeptic panel (23 findings): sewers ONE TRUTH by the roster; founding.kind
+# has NO typed home (five causes); criminal share HAS a home (corruption.js
+# :539); UC-4 = flag wave ALONE (four-surface bill; lighting = owner R-5);
+# MF-UC0..5 under the stamped MF family; THREE trains (UC-0/UC-3/UC-1 ·
+# UC-4 · UC-2/UC-5). TC-UNDERCITY-R2 queued at next free seat. J7: a
+# skeptic panel precedes every charter ruling.
 # ⭐⭐⭐ ~19:45 CDT 08-22: §440 — THE SUCCESSOR IS SEATED (Fable, session
 # 695a70c5). T2H's gate had NOT survived (SIGTERM in test:ratchet 19:21);
 # RUN 2 fired 19:27 CDT detached (setsid), same tip 84e06412 on b10ed1a1,

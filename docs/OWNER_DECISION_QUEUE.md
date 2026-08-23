@@ -17759,3 +17759,232 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   checkpoint stays honest (reverse: amend and re-pin). J5 the seat tiers.
 - **Next chair act:** rule the UNDERCITY charter (draft-UNDERCITY-PLAN.md,
   collected §433) while the gate runs; collect T2H on the monitor's event.
+
+## §441 — THE UNDERCITY CHARTER RULED AFTER A THREE-LENS SKEPTIC PANEL: FOUR STOP-CLASS DEFECTS CURED BY RULING, THE TOPOLOGY RE-CUT TO THREE TRAINS UNDER THE STAMPED MF FAMILY, FIVE ROWS TO THE OWNER DOCKET; TC-UNDERCITY-R2 CHARTERED TO APPLY IT (2026-08-22 ~20:20 CDT)
+
+- **Method:** before ruling draft-UNDERCITY-PLAN.md (collected §433), the chair
+  ran three read-only skeptic lenses against it at b10ed1a1 — doctrine fidelity
+  (§311 verbatim), estate reality (every §3 home re-walked), packet/gate law
+  (the validator read, not remembered). 23 findings, 40 solid confirmations;
+  every finding below carries its executed evidence in the panel record
+  (successor scratchpad tasks/w7ectvopq.output). The charter's doctrine
+  quotations, OB-6/OB-7 authority, §423 compliance, no-migration claim, §424
+  inheritance (the golden hashes the WHOLE settlement:
+  generatorGoldenMaster.test.js:238-241) and catalog/line citations all
+  VERIFIED. One panel claim corrected by the chair's own read: metropolises
+  DO draw the city catalog (assembleInstitutions.js:243 mergeCatalogs), so
+  'Sewage system' can roll at metropolis; the 40%-of-cities figure stands.
+- **§441.1 STOP 1 CURED — ONE TRUTH FOR SEWERS.** The catalog already
+  generates 'Sewage system' (institutionalCatalog.js:2225, city block,
+  baseChance 0.4, not required; rolled at city AND metropolis), plus
+  'Aqueduct or water system' (2239) and 'Public bathhouse' (978, town, tag
+  sanitation). UC-1's "cities/metropolises top rung ALWAYS" would contradict
+  the dossier roster in ~60% of cities — a second truth. RULED (chair
+  refinement of §311.6.1 under the §311 delegation; vetoable): the FULL WEB
+  rung exists EXACTLY where the roster carries 'Sewage system' (or a custom
+  institution declaring the sanitation/drains facet); cities and
+  metropolises carry a FLOOR of QUARTER NETWORK (the owner's "all
+  cities/metropolises have sewers" kept as drains in the planned quarters);
+  towns derive by the causes between cesspits / culvert / quarter network
+  and cannot reach full web without the institution (the owner's "only
+  SOME towns"). UC-0's sanitation SEED reads the SAME roster institutions,
+  with §311.7.1's cesspits-contribute-no-sheet stated as rung ≥ culvert.
+  The §3 audit table gains the three catalog rows as CONFIRMED homes. The
+  catalog alternative (required:true at city) is R-6 below, NOT recommended.
+- **§441.2 STOP 2 CURED — `founding.kind` HAS NO TYPED HOME.**
+  genArrivalDetail (narrativeGenerator.js ~432-446) returns prose picks
+  (reason/foundedBy strings); `grep -rn 'founding\.kind|foundingKind' src`
+  → display projection only. §311.7.2's first cause named a home that does
+  not exist; the compile-level pass did not walk it. RULED: UC-1 builds with
+  FIVE live causes; the founding-kind slot stays in the typed weight table
+  at ZERO WEIGHT with a `NO_TYPED_HOME` marker; regex-matching the prose
+  `reason` string is REFUSED by name (the name-string idiom). A typed
+  `founding.kind` on the generation path is R-7 below (the ONE-REGEN is its
+  natural vehicle).
+- **§441.3 STOP 3 CURED — THE CRIMINAL SHARE HAS A STORED HOME.** The
+  charter's "NO stored scalar — DERIVED" row and J-10 are REFUTED by
+  measurement: safetyProfile.js:619 `blackMarketCapture` (0-80, generation-
+  time; prose at :623 "captures an estimated N% of economic activity"),
+  already read as the criminal share by EconomicsTrade.jsx:360,
+  causalState.js:837/969, economicState.js:319 and — decisively —
+  corruption.js:539-541, which derives the 0..1 crime driver with
+  `compound.criminalEffective` precedence. RULED: UC-4's
+  `drivers.criminalShare` CONSUMES that exact mapping (import or re-export
+  corruption.js's read; never a parallel weighting). J-10 is STRUCK and
+  replaced: "one truth — blackMarketCapture/criminalEffective per
+  corruption.js:539-541". A.CRIMINAL faction power remains the SEPARATE
+  syndicate-standings input.
+- **§441.4 STOP 4 CURED — UC-4 IS A FLAG-MINTING WAVE AND RIDES ALONE.**
+  PACKET_STANDARD: a flag-minting wave is a train boundary (first member or
+  alone) with a four-surface bill — ENGINE_GATED_VIRTUAL_RULE_KEYS row in
+  simulationRules.js, the authored certification row in
+  subsystemRowsVirtual.js IN THE SAME COMMIT (engineGatedRuleKeys.walker +
+  subsystemRowsVirtual.test.js red otherwise — the TR-1 incident), the
+  literal `<flag>: true` drive in the acceptance file, `npm run
+  build:edge-shared` whenever simulationRules.js moves. RULED: UC-4 is its
+  own one-member train T-UC2 (after T2R lands); the bill is PRICED in its
+  packet; the certification row is EXEMPT from the ≤15 shared-file delta
+  as authored data in a rows module that grows by one row per flag (the
+  precedent row is ~60 lines; vetoable, the alternative is a new rows
+  file); the "consume MF-D5's idiom if landed first" branch is STRUCK — no
+  MF-D5 packet exists; UC-4 IS the first builder of the §359.5 persisted-
+  signal shape and carries the concrete shape to the chair (C-2 at its
+  packet). LIGHTING the flag in DEFAULT_SIMULATION_RULES is same-seed pulse
+  motion — the class §434 docketed to the owner — R-5 below. Until lit,
+  F5.fossils / drivers.highWater are DARK-BY-DEFAULT on every live world:
+  §7 F5 carries the caveat and CT-4's contract term 3 FORBIDS asserting
+  fossils on the dark path (the quiet-world vacuity class).
+- **§441.5 MUST-FIXES RULED:** (a) FACETS — the chokepoint has two facet
+  kinds (cohesionWeave.js:258-275; declared facets on exactly three
+  catalog rows); UC-0 prices ONE new inference-only facet kind
+  `institutionSubstructure` (crypt | cellar | sewer | mine | none) in
+  FACET_INFERENCE, measured against the ≤15 hot-file cap and PROVEN
+  golden-inert at UC-0's S0 (generation never reads facet kinds — prove it,
+  do not assert it); catalog `facets` additions are REFUSED as R-2
+  golden-shift; the key spelling UC-0 reads is pinned with a positive arm
+  (`facetOf(i,'subterranean')` for the network rows). (b) THE GENERAL FORM
+  WHOLE — every component row carries `temperament` (the closed 4-enum)
+  and a geometry-free `surfaceJoins[]` (joint kind from UC-5's closed
+  vocabulary + the anchoring surface feature: church stair, well-house,
+  sewer grate, cellar door — §311.2, now quoted in §1); wells/cisterns
+  MOVE out of UC-3 into UC-1 as the second SURFACE-COUPLED component.
+  (c) SMUGGLERS' TUNNELS gain their producing car: a UC-4 demand-driven
+  component row (license = wall/toll fact + criminal share; anchor =
+  gate/waterfront; extent = contraband flow); the remove-the-wall arm
+  registers on UC-4's row, UC-5's edge arm is its consequence. (d) WALLS
+  home: siteGenesis.js is townMap-side with no wall accessor → the row
+  reads HOME OWED AT UC-0 (engine-side accessor: demographicsObservation /
+  warDeployment / safetyProfile spellings to walk); `src/domain/undercity/**`
+  may NOT import `src/domain/townMap/**` (the first-paint closure guard).
+  (e) CENSUS bullet rewritten to T2Q's shape: each car predicts its
+  five-figure delta in a `censusAuthorization` PROSE block (the validator
+  has no such key — it is preamble law); the walker path is in NO car's
+  changeManifest; the row text is deferred verbatim to the landing act
+  (§417); every negative assertion carries `// anchored:`; "ceiling
+  motion" and C-3 are STRUCK (the test-ratchet debt baseline is a
+  monotone-down ceiling a new passing file never touches — a different
+  instrument; the memory claim that the census "sits AT its ceiling" is
+  re-checked at §363.2: 11 entries, 6 headroom). (f) `dependsOn` is a
+  prose header line; NO UC packet carrying a producer symbol in
+  requiredSymbols is minted — even DRAFT — before that producer's landing
+  sha (requiredSymbols resolve live at every status); T2Q's real symbol is
+  `institutionFoundingOf` in src/domain/institutionFounding.js; T2N's
+  `src/domain/resourceSites.js` is a PREDICTED path. (g) PRE_SEED age rule
+  in UC-2: age = the settlement's history age for PRE_SEED institutions,
+  the FOUNDED year otherwise — one rule, pinned; UC-1's sixth cause reads
+  T2R's reader AS RULED at §434 (peakTier precedence; understatement never
+  invented). (h) §10's §355 row is STALE (the hunt CLOSED at §432) →
+  replaced by §432's laws: short TMPDIR on every terminal, quiet = measured
+  load + ps -r, a sentinel report and a regressions list are different
+  documents, strays classify-then-one-re-run and escalate to the CHAIR.
+  (i) New test files are CREATE rows (TEST reserved for existing files).
+  (j) The "119 mentions" figure is dropped (142 at b10ed1a1 by
+  `grep -rhoi underways src tests | wc -l`; the instrument was unnamed).
+  (k) Anchor-key law: rows anchor by the canonical institution key (id
+  when present — optional today per settlement.schema.js:744 — else the
+  registry's stable name key, never the display name); the §437 carry note
+  reads "anchor → institution key the fabric resolves to its building".
+- **§441.6 TUNING EXPOSURE RULED (vetoable, flagged as a graze of §362.4):**
+  `SEWER_DERIVATION_TUNING` and the UC-2/UC-4 extent coefficients are
+  PROVISIONAL until the tuning signature; they are EXPOSABLE-PROVISIONAL —
+  CT-4 may compile and expose rung/cause sentences against the provisional
+  defaults, exactly as every other pre-signature surface does under §337
+  (the soak gates nothing) and §341 (tuning is LAST and signs everything at
+  once). Each packet names the defaults' provenance (who chose them, from
+  what measurement). The owner may veto to "dark until signed" by a word.
+- **§441.7 TOPOLOGY AND FAMILY RE-CUT (C-1/C-4 ruled):** THREE trains —
+  **T-UC1 = UC-0 / UC-3 / UC-1** (UC-0 and UC-3 compile NOW, no producer
+  input; UC-1 compiles after T2R lands) · **T-UC2 = UC-4 alone** (the flag
+  wave; after T2R) · **T-UC3 = UC-2 / UC-5** (after T2N + T2Q land). The
+  cars file under the STAMPED town-cartography family as **MF-UC0 … MF-UC5**,
+  citing MF-PREAMBLE by SHA unchanged and ODQ §311 as the doctrine citation
+  — the §433 C2 precedent (T2N/T2Q/T2R are the same domain-root-deriver
+  shape under MF). NO new family, NO UC-PREAMBLE, no stamp question: the
+  8-cap engine train holds every train here at ≤3. Reversal: found the
+  `undercity` family with its own preamble when undercity GEOMETRY (D5) or
+  the DW program needs a distinct law substrate. J-8 is superseded.
+- **§441.8 OWNER DOCKET (parked, each with the chair's recommendation):**
+  R-1 OB-6 roster expansion — DECLINE (unchanged) · R-5 LIGHT the undercity
+  high-water flag in defaults — same-seed pulse shift, soak + declared-shift
+  bill — recommend: light it in the tuning pass with the map leg · R-6
+  make 'Sewage system' required at city+ — NOT recommended (the §441.1
+  one-truth rule makes the roster honest as it stands) · R-7 a typed
+  `founding.kind` on the generation path — recommend: bundle into the
+  endgame's ONE REGEN as a declared shift, so UC-1's sixth cause wakes then
+  · R-3 tuning constants registered as tuning-pass inputs (unchanged).
+- **§441.9 DISPATCH:** TC-UNDERCITY-R2 (compile seat, chair-tier) at the
+  NEXT FREE SEAT — applies this ruling to draft-UNDERCITY-PLAN.md in place
+  (every §441 item an explicit edit; the §3 table re-walked at the
+  executor base; CLAIM_RE 0; C0 0), then the chair ratifies the ruled
+  charter and dispatches UC-0 and UC-3 as the first two buildable cars.
+  Seats now: T2H landing · TE-T2R · TE-T2Q · TC-DWR1A (cap). Queue: R2
+  compile → T2N (§433 C4) → UC-0/UC-3 builders.
+- **Judgments (vetoable):** J1 refine §311.6.1 by the roster (§441.1) over
+  a catalog bill · J2 five causes now, typed slot at zero (§441.2) · J3
+  consume corruption.js's read (§441.3) · J4 UC-4 alone + certification-row
+  cap exemption (§441.4) · J5 exposable-provisional tuning (§441.6) · J6
+  MF family, three trains (§441.7) · J7 a skeptic panel before every
+  charter ruling from here (the §311.7.2 home error and the J-10 refutation
+  were both invisible to a single reader — a compile's "CONFIRMED" is a
+  hypothesis until a second instrument walks it).
+
+## §442 — T2H LANDED (THE 26TH): RUN 2 GREEN ON THE TWO-PART READING, CAS b10ed1a1 → 84e06412; WEB-1's LANDING GO ISSUED; DWR1A COLLECTED NEAR-COMPLETE WITH A VETOABLE CORRECTION TO THE OWNER'S WORDING; TC-UNDERCITY-R2 DISPATCHED (2026-08-22 ~20:40 CDT)
+
+- **§442.1 T2H LANDED.** Run 2 (fired 19:27 CDT, detached) ENDED 00:46:10Z:
+  `TRUE_EXIT=0` + `[gate-tail] exit: 0` + `free_kb_at_end=7811004`; every
+  step in the body (all eleven validate:*, both typecheckers, lint 0 errors
+  / 29 pre-existing warnings, `test:ratchet OK — no test regressions (11
+  known failure(s) of 28748 tests, ceiling 11)`, build ✓ 3929 modules,
+  `STRICT DIST OK — 52 file(s), 433 test(s)`); suite total +10 over the
+  last recorded gate (28738), consistent with the member's +6 titles. The
+  19-minute wall-clock (vs the 27-62 min history) is the quiet box, read
+  from the body step by step, not trusted from the exit. CAS executed
+  `b10ed1a1 → 84e06412` with old-value assertion; `claude/composite-r4` =
+  **84e06412**. Pruned at the CAS per §434.1: refs/preserve/holding-t2h-slot
+  (landed) and holding-t2h-r2 (the superseded pre-rebase 05e7f9d5 — content
+  carried by the landed commit), and the 862M t2h-tree. Run-2 logs
+  preserved: `t2h-TERMINAL-84e06412.log`, `t2h-TERMINAL-exit.txt`,
+  `t2h-gatebody-69695.GREEN-run2.log`. Disk 8.3Gi.
+- **§442.2 WEB-1 GO ISSUED (TE-WEB1-LANDING, the landing seat):** holding
+  tip 4065b326 (e1c08332 + packet) over base eb6124a6, rebasing `--onto`
+  84e06412 — seven landings behind the slot; the GO carries the full slot
+  pattern (carry-proof-by-absence at blob level FIRST with the census
+  walker named as CERTAINLY moved; keep-both + row-level deep-compare by
+  string surgery; WEB-1 FOUNDS the website family header; DELTA
+  `+1/+1/+0/+1/+0` never tuple — the pglite suite parks; S0 two-part LIVE
+  with the baseline lookup, the CT-2/CT-3-era envelope red pre-stamped as
+  mint-class; migration-197 collision check at the slot; the detached
+  setsid terminal with the §440.2 shared lock dir; rebased tip written to
+  `web1-rebased-tip.txt` BEFORE the terminal so the chair can pin it).
+  ⚠ Its landing carries migration 197 (repo-side only; the db-push stays
+  the owner's) and UNBLOCKS WEB-2/WEB-3 (draft-WEBSITE-PLAN §2/§3).
+- **§442.3 DWR1A COLLECTED — NEAR-COMPLETE (PARTIAL marker retained by the
+  charter's all-sections rule):** the dossier grew 35 → 90.7 KB; §1 bays,
+  §2 materials, §3 hearth, §4 load paths (the formerly unstarted leg,
+  DW law 5's physical basis), §5 stairs, §6 urban customs, §7 institutions
+  (+smithy, warehouse, tithe barn) and a NEW §10 magical-institution
+  CONVENTIONS section (§438) are at charter depth; §8 tenement letting
+  (Pantin 403 on both ADS paths) and §9 undercroft separate-letting remain
+  residual. BAY WIDTH: Hewett's glossary "generally one perch" (16.5 ft)
+  PRIMARY; Bridge House c.1500 at ≈12.4 ft bays (measured survey); Great
+  Coxwell barn ≈21.7 ft/bay (dendro 1291-2); a 6-8 ft blog counter-claim
+  held, not adopted; measured house-bay DISTRIBUTIONS not found (the P1c
+  input). CONTINENTAL: three heat regimes (open hearth · wall fireplace +
+  flue · the central-European stove wall with mandatory kitchen separation)
+  — the floored-hall transition is one abstract event with a different
+  anchor object per regime (the dossier's self-declared weakest link,
+  flagged for the owner's taste-gate). **VETOABLE CORRECTION TO §436/§437's
+  WORDING:** the burgage frontage-TAX causation for narrow plots is
+  UNSUPPORTED after the negation search (fixed per-plot money rents; Hull
+  1347 shows frontage as a value variable) — the register keeps
+  frontage-VALUE, not frontage-tax. Smithy folklore (stone-built) is
+  contradicted by two 12th-c excavations (timber, edge-sited). Tally:
+  CONFIRMED 91 (15 digest-grade) / PLAUSIBLE 23 / 9 contested; open
+  questions 14. C0 = 0. The owner's CT-0 sitting over the dossier is
+  DOCKETED (O-DW1), not scheduled by any lane. The remaining §438 R-INST
+  tranches dispatch as seats free.
+- **§442.4 TC-UNDERCITY-R2 DISPATCHED** at the freed seat (§441.9) to apply
+  all 24 §441 items to the charter in place, re-walking the §3 table at
+  b10ed1a1 with file:line receipts. Seats: WEB-1 landing · TE-T2R · TE-T2Q
+  · TC-UNDERCITY-R2 (cap). Queue: T2N (§433 C4) → UC-0/UC-3 builders →
+  R-INST tranches.
