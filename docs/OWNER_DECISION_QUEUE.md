@@ -20534,3 +20534,56 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   the charter's judgment ledger as SUPERSEDED WITH THE OWNER'S REASONING so
   no successor re-litigates it. Seats unchanged: CH compile (Opus) · DW-0
   compile (Opus), the latter now holding both the §496.4 rulings and R2'.
+
+## §498 — OWNER DEFINES "ESTATE" AS AN **OWNERSHIP SET, NOT AN ADJACENCY**, AND ANSWERS THE ORDERING QUESTION: ASSEMBLE-THEN-DRAFT AT GENERATION, **ACCRETE** AT TIME ADVANCE — TWO OBJECTS SPLIT, A TWO-TIER HALO FALLS OUT (2026-08-23 15:02 CDT)
+
+- **§498.1 THE DEFINITION (owner, verbatim):** an estate is "the combination
+  of multiple, not necessarily connected, buildings belonging to one singular
+  institution or individual", and the mechanism "goes for both the initial
+  draft to get the initial plot going and future advancement in time."
+- **§498.2 THE CHAIR HAD CONFLATED TWO OBJECTS; THEY ARE NOW SPLIT (R8).**
+  **PARCEL / PROPERTY LINE** = a contiguous piece of ground with ONE boundary;
+  merging adjacent wedges within one ward (§496.4 R3, unchanged and still
+  theorem-safe) makes a BIGGER PARCEL, and that boundary is what MP-1's halo
+  outlines. **ESTATE / HOLDING** = an OWNERSHIP relation over one or more
+  parcels, contiguous or NOT — the abbey with an outlying grange, the merchant
+  with a house on one street and a warehouse on the quay, the innkeeper with
+  the stable-block across the lane. Contracts: `Parcel` and `Estate {
+  ownerRef, members[], since, cause }`. `ownerRef` resolves to an
+  INSTITUTION's canonical key or a HOUSEHOLD from the demography layer —
+  ⚠ **never a named individual whose fate the engine would then owe a story
+  to** (product scope: world-only, never a named character's fate); if no
+  household identity exists to hang an owner on, DW-0 reports it as a
+  measured gap rather than inventing a person. Membership by owner also
+  finally TYPES R-INST-5's OCCUPATION relation: `owns` versus `occupies` on
+  the same member row (the lent palace; the criminal front).
+- **§498.3 THE TWO-TIER HALO FALLS OUT FREE (a product win):** hovering any
+  member highlights ITS property line strongly and the estate's other
+  holdings faintly — hover the merchant's house and everything they hold
+  lights up across the town. One hover, two tiers, no new data. Sent to MP-1's
+  charter (§495) so the halo is built once.
+- **§498.4 THE ORDERING ANSWER (R9) — DIFFERENT AT THE TWO TIMES, AND THAT IS
+  THE PROMISE, NOT A COMPROMISE.** At the **INITIAL draft: assemble the ground
+  first, then draft ONCE** — the §497 R2' chain (program minimum → choose or
+  merge parcels until the envelope satisfies it → one draft on the assembled
+  ground); nothing is drawn and thrown away, determinism is trivial. At
+  **TIME ADVANCE: the ground merges and the buildings ACCRETE — never redraw
+  what history already built** (lived history is immutable, constitutional):
+  the existing ranges STAY and the new work goes into the acquired ground as a
+  new range, an outbuilding, or a COURT formed by enclosing the gap.
+  **The constraint produces the better result** — the tell-tale of a real
+  amalgamated property is exactly that it still reads as two plots joined
+  (misaligned ranges, a seam in the roofline, a court where the gap was), so
+  the visible seam is compiled as a FEATURE, never an artefact to smooth away.
+  Accretion is the ONLY lawful time-advance motion on an existing property.
+- **§498.5 EVERY AMALGAMATION IS A DATED EVENT THAT REACHES THE CHRONICLE.**
+  `since` + `cause` on the estate, and the event obeys the NEWS ADDRESS LAW
+  (address chain + typed action + names + reason), so the DM reads "in <year>
+  the <household> threw two burgages together after <cause>" — free narrative
+  from a geometric fact. **One mechanism, both phases:** the program-minimum
+  test, the merge rule and the ownership set are invoked at generation and
+  again at each advance, never two implementations that can disagree. DW-S
+  gains two soak assertions: accretion never rewrites lived ranges, and
+  estates only grow or dissolve by dated events. New owner bands: the
+  prosperity threshold for acquisition, amalgamation frequency per century,
+  and whether non-contiguous holdings are common or rare by culture.
