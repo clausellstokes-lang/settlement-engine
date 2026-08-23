@@ -46,7 +46,7 @@ function codeOnly(source) {
 }
 
 describe('WC-0E · the war-circulation flags, the contribution ledger shape, and the blocks[] arm', () => {
-  it('joins both flags to the manifest and holds the triple bijection at 24', () => {
+  it('joins both flags to the manifest and holds the triple bijection at 25', () => {
     for (const flag of FLAGS) expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toContain(flag);
     // 22 → 23 at EP-1 (2026-08-16), which mints advanceEpochEnabled with its certification
     // row in the same commit. THIS FILE IS A NAMED PATH ON EVERY FLAG-MINTING PACKET for
@@ -56,8 +56,14 @@ describe('WC-0E · the war-circulation flags, the contribution ledger shape, and
     // 23 → 24 at WF-1a (2026-08-16), which mints faithUnseatingEnabled with its certification
     // row in the same commit. The title is RENAMED rather than a new one added, so the
     // estate's test census carries no cardinality change for this obligation.
-    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(24);
-    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(24);
+    // 24 → 25 at MF-UC4 (2026-08-23, the undercity train's T-UC2), which mints
+    // undercityHighWaterEnabled with its certification row in the same commit. ⚠ THE COMMENT
+    // ABOVE IS THE WHOLE REASON THIS OBLIGATION KEEPS BEING FOUND LATE, AND IT WAS FOUND LATE
+    // AGAIN: MF-UC4 paid the four surfaces its charter priced and met these two literals at the
+    // widened sweep, in a war-circulation suite no undercity battery would have thought to name.
+    // The path is in that member's changeManifest for the next reader's sake.
+    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS).toHaveLength(25);
+    expect(VIRTUAL_SUBSYSTEM_ROWS).toHaveLength(25);
     // ⭐ THE BIJECTION IS A TRIPLE, NOT A PAIR. The ordered-equality pin in
     // subsystemRowsVirtual.test.js couples the manifest to VIRTUAL_RULES; direction 3 of
     // engineGatedRuleKeys couples the manifest to the certification rows. A flag mint moves

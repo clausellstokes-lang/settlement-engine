@@ -28,12 +28,13 @@
  * stands. The peak is not: nothing in the estate retains a faction's historical maximum power, and
  * a derivation cannot reconstruct a maximum from a present value. So ONE field persists —
  * `powerHighWater`, a monotone, drop-when-absent number on the faction record — folded at an
- * EXISTING registered pulse seam (`ensureFactionStates`, pulseKernel.js:347, every tick over every
- * settlement's roster) behind ONE NEW VIRTUAL FLAG, and projected onto the settlement's own roster
- * by the seam that already projects live faction state. The GR-5A monotone-memory precedent
- * (pactAmendment.js:136/160/188 + peaceTerms.js:759) is followed shape for shape: gate by NAME with
- * `=== true`, a reader that resolves ABSENCE without writing, a fold that only ever moves UP, and
- * no clearer anywhere.
+ * EXISTING registered pulse seam (`ensureFactionStates`, which the pulse runs every advance over
+ * every settlement's roster) behind ONE NEW VIRTUAL FLAG, and projected onto the settlement's own
+ * roster by the seam that already projects live faction state. The GR-5A monotone-memory precedent
+ * (`treatyRenewalActive` / `worstObservedEverOf` / `worstObservedEverAfter` in pactAmendment.js,
+ * assigned at one line in peaceTerms.js) is followed shape for shape: gate by NAME with `=== true`,
+ * a reader that resolves ABSENCE without writing, a fold that only ever moves UP, and no clearer
+ * anywhere.
  *
  * ⛔ DARK BY DEFAULT, AND THE DARK PATH LIES ABOUT NOTHING (§441.4, R-5). The flag is ABSENT from
  * `DEFAULT_SIMULATION_RULES`, so on every live world today the fold is never evaluated, no record

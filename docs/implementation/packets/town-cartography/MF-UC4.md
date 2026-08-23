@@ -131,9 +131,11 @@ one commit; §441.4 adds the test-side list and the acceptance literal, and §47
 | 2 | `src/domain/certification/subsystemRowsVirtual.js` | the AUTHORED row, `undercityHighWaterEnabled`, in the GR-5A monotone-memory row's shape: three empty channels each with its written reason, a long `other` narrative, `expectedTempo: 'per_tick'` (the GATE's cadence, not the value's), three invariants, `soakEvidence: 'unobserved'`. 723 → **753** effective, under the 800 layer ceiling. **EXEMPT from the ≤15 shared-file delta as AUTHORED DATA** in a module that grows by exactly one row per flag (§441.4 J4; vetoable — reversal in §8) | `subsystemRowsVirtual.test.js` green |
 | 3 | `tests/domain/subsystemRowsVirtual.test.js` | the THREE module-scope edits the file's own header prices (`:141-151`): the const, the `VIRTUAL_RULES` member at its authoring-order position, and the `LANE_LEAVES` entry. **ZERO new test titles**, so no census figure moves for them; the lane leaf is the PURE leaf alone (`colonization.js`), never `factionCompetition.js`, which mints seven candidate literals of its own | `subsystemRowsVirtual.test.js` + `engineGatedRuleKeys.walker` green |
 | 4 | `tests/domain/undercityColonization.test.js` | the flag driven LITERALLY — `undercityHighWaterEnabled: true` appears as a literal in three arms (A3, A6) and is fed to the REAL `ensureFactionStates` | `mechanismLitCoverage` green |
+| **5** | `tests/domain/contributionLedgerShape.test.js` | ⚠ **A FIFTH SURFACE THE CHARTER DID NOT PRICE, AND THE FILE ITSELF PREDICTED THAT.** Its own comment reads: *"THIS FILE IS A NAMED PATH ON EVERY FLAG-MINTING PACKET … these two literals are the FOURTH obligation of the flag-mint bill, they live in a WAR-circulation suite no epoch battery would think to name, and a wave that pays the other three finds them at the terminal gate instead."* This wave paid the four the charter priced and met these two at the widened sweep, exactly as written. `ENGINE_GATED_VIRTUAL_RULE_KEYS` and `VIRTUAL_SUBSYSTEM_ROWS` both `toHaveLength(24)` → **25**, and the test TITLE is RENAMED (`at 24` → `at 25`) rather than a new one added, which is the EP-1 / WF-1a precedent and is why no census figure moves for it | `contributionLedgerShape` green |
 
 **Budget.** Three modified production files — `simulationRules.js`, `subsystemRowsVirtual.js` and
-the pulse-seam file `factionCompetition.js` — plus the leaf. Exactly the charter's cap.
+the pulse-seam file `factionCompetition.js` — plus the leaf. Exactly the charter's cap. The fifth
+surface and the two dormancy cures in §4.5 are TEST-side and cost no production file.
 
 ### §3.1 · WHY `factionCompetition.js` IS THE SEAM — a measurement, not a preference
 
@@ -237,6 +239,39 @@ unmodified. The interior red this member leaves is exactly this one walker, by d
      (`pactAmendment.js:150-153` states the law verbatim).
    Re-probed at the shipped bytes: `violations: 0`, `stale: 0`, and the leaf contributes NO findings
    at all, so `1995 / 1409 / 387` stands unmoved — confirmed by the walker running GREEN.
+
+### §4.5 · THREE MORE MEMBER-CAUSED REDS THE WIDENED SWEEP FOUND, ALL CURED IN-MEMBER
+
+None is a STOP; each is a guard this member is the first car to reach.
+
+3. **`tests/lint/pulseKernelLineAddress.walker.test.js` RULE 1** — the leaf's header cited the seam
+   as a hand-keyed kernel line address. The walker's inventory is FROZEN AT ZERO and takes no
+   allowlist, and its reason is right: *"a line number is text ABOUT source that no test compares TO
+   source"*. Cured by citing the seam by NAME (`ensureFactionStates`) with no basename and no
+   number, so neither RULE 1 nor RULE 2's content-anchor obligation applies. Verified: `grep -rn
+   'pulseKernel\.js:[0-9]' src tests` returns nothing outside the walker itself.
+4. **`tests/domain/contributionLedgerShape.test.js`** — the fifth flag-bill surface, §3 row 5.
+5. **`tests/domain/undercityStrataExistence.test.js` A6** — UC-0's dormancy arm asserted that
+   NOTHING outside `src/domain/undercity/` reaches the leaves. This member is the first car with a
+   pulse seam, so that claim had to move — and the charter is the authority for moving it: §4's
+   first-paint law reads *"Every UC deriver is reached from dormant or lazy consumers (CT-4 prose,
+   D5 fabric, THE PULSE SEAM)"*. Cured by an EXACT admission map with a written reason per member
+   (the `EXEMPT_RULE_KEYS` discipline), so a NEW importer still reds and the admission cannot grow
+   silently.
+   ⭐⭐ **AND THE CURE EXPOSED THAT THE ARM WAS BLIND IN THE DIRECTION THAT MATTERS.** The scan was
+   `src.includes('domain/undercity/')` — a MENTION scan. `factionCompetition.js` imports the leaf as
+   `'../undercity/colonization.js'`, which contains no such substring, so **the first real
+   production importer of an undercity leaf was invisible to the arm that exists to find one**,
+   while the certification row that merely NAMES the path in a `module:` data string enrolled. The
+   scan is now the UNION of the mention and the RESOLVED RELATIVE IMPORT EDGE. Non-vacuity proved by
+   execution: the old scan's importer list is missing exactly
+   `src/domain/worldPulse/factionCompetition.js`, and the widened one contains it. Both admissions
+   say which kind they are — a data mention or a real edge.
+
+   ⛔ **THE CENSUS DELTA WAS RE-WALKED AFTER ALL FIVE CURES AND IS UNCHANGED** at
+   `+1 / +0 / +1 / +8 / +1` — measured by a second full walk from the arm's own failure messages,
+   not inferred from "a rename moves nothing". Both touched test files still carry one `describe`
+   and eight `it`/`test` calls.
 
 ---
 
@@ -372,6 +407,8 @@ signed" by a word.
 | J-TEUC4-7 | **Flood and seal each land on ONE working, addressed by index, not on a band.** | A band would sever a whole colonization at once; the doctrine's consequence is that the DEEPEST cut meets the water table and a DATED collapse seals the newest one still in use. Reversal: replace the two indices with a fraction. |
 | J-TEUC4-8 | **The certification row takes the ≤15 shared-file exemption as AUTHORED DATA** (§441.4 J4, restated here because this member is the one that spends it). | `subsystemRowsVirtual.js` is a rows module that grows by exactly one row per flag; the row is prose data, not logic. Reversal: the row lands as its own rows file admitted by the module, and the cap applies to the admitting edit. |
 | J-TEUC4-9 | **`expectedTempo: 'per_tick'`.** | The GATE is reached every advance on every settlement; the VALUE moves rarely and only upward. The GR-5A row makes the same call in the same words. Reversal: `rare`, at the cost of a soak floor that measures the value rather than the gate. |
+| J-TEUC4-10 | **UC-0's dormancy arm is WIDENED to resolve relative import edges, not merely narrowed to admit this seam.** | Admitting the seam alone would have left the arm green for the wrong reason: measured, its mention scan could not see `'../undercity/colonization.js'` at all, so the first real importer of an undercity leaf was invisible to the guard written to find one. A guard that reads green while blind is worse than a red. The widening is nine lines inside the existing arm, adds no test title, and is proved non-vacuous by exhibiting the file the old scan missed. Reversal: restore the `includes`-only scan and delete the admission map — and inherit the blindness. |
+| J-TEUC4-11 | **`tests/domain/contributionLedgerShape.test.js` and `tests/domain/undercityStrataExistence.test.js` are edited by THIS member although both belong to LANDED packets.** | Both are guards this member is the first car to reach, both cures are the ones those files' own comments prescribe, and neither path is reserved by any non-terminal packet (measured: the manifest carries 164 LANDED + 1 SUPERSEDED and no other status). Both ride as `TEST` rows in this member's `changeManifest`. Reversal: revert either file and the corresponding red returns. |
 
 ---
 

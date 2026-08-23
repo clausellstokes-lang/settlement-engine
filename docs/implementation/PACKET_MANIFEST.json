@@ -22602,6 +22602,16 @@
           "path": "tests/domain/subsystemRowsVirtual.test.js"
         },
         {
+          "_note": "SURFACE 5 OF THE FLAG BILL, and the file's OWN comment predicted this wave would meet it late: \"THIS FILE IS A NAMED PATH ON EVERY FLAG-MINTING PACKET ... these two literals are the FOURTH obligation of the flag-mint bill, they live in a WAR-circulation suite no epoch battery would think to name, and a wave that pays the other three finds them at the terminal gate instead.\" ENGINE_GATED_VIRTUAL_RULE_KEYS and VIRTUAL_SUBSYSTEM_ROWS both toHaveLength 24 -> 25, and the test TITLE is RENAMED (at 24 -> at 25) rather than a new one added - the EP-1 / WF-1a precedent, which is why no census figure moves for it. Re-walked after the edit: the delta is unchanged.",
+          "action": "TEST",
+          "path": "tests/domain/contributionLedgerShape.test.js"
+        },
+        {
+          "_note": "UC-0's A6 DORMANCY ARM, widened rather than merely narrowed (J-TEUC4-10). It asserted that NOTHING outside src/domain/undercity/ reaches the leaves; this member is the first car with a pulse seam, and the charter is the authority for moving that claim (draft-UNDERCITY-PLAN.md section 4: every UC deriver is reached from dormant or lazy consumers - CT-4 prose, D5 fabric, THE PULSE SEAM). Cured by an EXACT admission map with a written reason per member, so a NEW importer still reds. AND THE CURE EXPOSED A BLINDNESS: the scan was a MENTION scan, and factionCompetition.js imports the leaf as '../undercity/colonization.js', which contains no such substring - so the FIRST real production importer of an undercity leaf was invisible to the arm written to find one, while a certification row that merely NAMES the path in a data string enrolled. The scan is now the UNION of the mention and the RESOLVED RELATIVE IMPORT EDGE, proved non-vacuous by exhibiting the file the old scan missed. No test title is added or renamed.",
+          "action": "TEST",
+          "path": "tests/domain/undercityStrataExistence.test.js"
+        },
+        {
           "action": "DOC",
           "path": "docs/implementation/packets/town-cartography/MF-UC4.md"
         },

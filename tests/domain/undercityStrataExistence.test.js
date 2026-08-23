@@ -248,12 +248,53 @@ describe('MF-UC0 — the underground existence gate, the substructure facet, and
     expect(importsOf(sources[0]).length).toBeGreaterThan(3);
     // anchored: the import list above is proven non-empty, so an empty townMap filter is a real absence
     expect(importsOf(sources[0]).concat(importsOf(sources[1])).filter((p) => p.includes('townMap'))).toEqual([]);
-    const importers = walk(join(ROOT, 'src')).filter((p) => readFileSync(p, 'utf8').includes('domain/undercity/'))
+    // ⚠⚠ MF-UC4 FOUND THIS SCAN BLIND IN THE DIRECTION THAT MATTERS, AND WIDENED IT.
+    // The original scan was a MENTION scan — `src.includes('domain/undercity/')`. A sibling module
+    // importing a leaf as `'../undercity/colonization.js'` contains no such substring, so the FIRST
+    // real production importer of an undercity leaf was invisible to the arm that exists to find
+    // one, while a certification row that merely NAMES the path in a data string enrolled. The scan
+    // is now the UNION of the mention and the RESOLVED RELATIVE IMPORT EDGE, so it sees both, and
+    // the anchor below still proves it sees the mention half.
+    const undercityDir = join(ROOT, 'src/domain/undercity');
+    const reachesLeaf = (abs, src) => src.includes('domain/undercity/')
+      || [...src.matchAll(/from\s+['"](\.[^'"]+)['"]/g)]
+        .some((m) => join(dirname(abs), m[1]).startsWith(`${undercityDir}/`));
+    const importers = walk(join(ROOT, 'src')).filter((p) => reachesLeaf(p, readFileSync(p, 'utf8')))
       .map((p) => relative(ROOT, p).replace(/\\/g, '/')).sort();
     // anchored: the leaf's own header prose names `src/domain/undercity/**`, so the scanner is proven to see the token before the production set OUTSIDE the directory is asserted empty
     expect(importers).toContain('src/domain/undercity/strataExistence.js');
-    // Later undercity cars (UC-3's staticComponents.js first) lawfully join the directory and carry the same closure prose; the closure is that NOTHING OUTSIDE src/domain/undercity/ reaches the leaves (ODQ §474).
-    expect(importers.filter((p) => !p.startsWith('src/domain/undercity/'))).toEqual([]);
+    // Later undercity cars (UC-3's staticComponents.js first) lawfully join the directory and carry the same closure prose.
+    // ⭐ MF-UC4 ADMITS THE FIRST PRODUCTION IMPORTER FROM OUTSIDE THE DIRECTORY, AND IT IS THE ONE
+    // THE CHARTER NAMED. draft-UNDERCITY-PLAN.md §4's first-paint law reads "Every UC deriver is
+    // reached from dormant or lazy consumers (CT-4 prose, D5 fabric, THE PULSE SEAM)", and UC-4's
+    // vertical high-water signal IS that pulse seam — a chartered design, not a leak. So the claim
+    // this arm owns was never "nothing imports the leaves" (true only while no car had a seam) but
+    // "nothing on the FIRST-PAINT or GENERATION path does". The set below is EXACT and every member
+    // carries a written reason, so a NEW importer still reds here and the admission cannot grow
+    // silently — the EXEMPT_RULE_KEYS discipline, borrowed rather than invented.
+    // ⚠ THE SCAN IS A MENTION SCAN, NOT AN IMPORT SCAN — deliberately, as its own anchor line two
+    // above says (the leaf's header PROSE is what proves it sees the token). So a file that merely
+    // NAMES a leaf in data or prose enrols exactly like one that imports it, and each admission
+    // below has to say which of the two it is.
+    const ALLOWED_PRODUCTION_IMPORTERS = Object.freeze({
+      'src/domain/certification/subsystemRowsVirtual.js':
+        'MF-UC4: a DATA MENTION, not an import edge. The engine-gated virtual cohort\'s certification'
+        + ' row names its subsystem\'s modules in a `module:` string, which this mention scan cannot'
+        + ' tell from an import; the file imports nothing at all. The underways row records the same'
+        + ' hazard in the other direction for the ruin-filter walker.',
+      'src/domain/worldPulse/factionCompetition.js':
+        'MF-UC4 (ODQ §311.3 / §359.5 / §441.4): a REAL import edge, and the ONE registered pulse seam'
+        + ' that folds the monotone vertical high-water mark and projects it onto the settlement'
+        + ' roster. Measured OUTSIDE the entry\'s first-paint static import closure and off the'
+        + ' generation path, so the dormancy this arm asserts still holds everywhere it is asserted.',
+    });
+    const outside = importers.filter((p) => !p.startsWith('src/domain/undercity/'));
+    for (const p of outside) {
+      const reason = ALLOWED_PRODUCTION_IMPORTERS[p];
+      expect(typeof reason, `${p} imports an undercity leaf with no written reason — admit it here with one, or route the read`).toBe('string');
+      expect(reason.length, `${p}: the admission reason is too thin to review`).toBeGreaterThan(120);
+    }
+    expect(outside).toEqual(Object.keys(ALLOWED_PRODUCTION_IMPORTERS).sort());
   });
 
   it('A7 · G-43 arm: remove the last qualifying institution → exists flips false; restore it → true (directional, pre-declared)', () => {
