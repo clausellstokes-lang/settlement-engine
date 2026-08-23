@@ -51,6 +51,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐ 05:55 CDT 08-23: §470 — WEBSITE-2 charter collected (W-C: WEB-8/9a/9b/10 +
+# WEB-11; O-P1 premise false for 4/6 rows — gate is viewerCanAuthor; Surveyor
+# server path already built; allowance 25 credits; THE ALLOWANCE TRAP). Skeptic
+# (single Opus) in seat 2. Correction: prior lane HAD written (695a scratchpad).
 # ⚠ 05:45 CDT 08-23: §469 — producers landing HELD: T2R defines a local clamp
 # (clampPrimitiveBaseline 76 vs 75; the build receipt misread it by title).
 # RULED cure-in-train (kernel clamp import) → re-proof → follow-on → terminal.

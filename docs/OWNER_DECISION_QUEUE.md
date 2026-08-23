@@ -19111,3 +19111,67 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   entropyRoot, the lighting walker, the any-cast ledger) is accepted only
   with the RECEIVED-LIST DIFF quoted — "same title red at base" is not a
   receipt. Carried into every build brief from here.
+
+## §470 — THE WEBSITE-2 CHARTER COLLECTED (FOUR CARS + ONE PRICED; TWO MEASURED FACTS RESHAPE THE §464.2 RULINGS); A CORRECTION TO §468; THE SKEPTIC PASS DISPATCHED AS ONE AGENT UNDER THE CAP (2026-08-23 05:55 CDT)
+
+- **Correction to §468 (chair's error):** the first TC-WEBSITE-2 lane did
+  NOT die before writing — it had a receipt (two RESUME POINTs) and a
+  583-line §0–§3 draft on disk in the SUCCESSOR's scratchpad (695a70c5),
+  where the chair looked only in the program scratchpad (6298872d). The
+  redispatched lane found it, re-verified every §0–§3 claim by grep, and
+  resumed. Law for the card: the receipt path a lane is given is the path
+  the pickup reads — and the pickup greps BOTH scratchpads before
+  declaring a lane artifact-less.
+- **The charter** (`draft-WEBSITE-PLAN-2.md`, 1042 lines, 93.5 KB; receipt
+  `laneTCWEBSITE2-receipt.md`, both in 695a70c5/scratchpad): train W-C =
+  WEB-8 (~50 eff; the de-advertise + an enforcement-symbol pin + pdfExport
+  → false + `ACTIVE_CHECKOUT_SKUS` for .env.example) · WEB-9a (~57 eff,
+  DARK: `SURVEYOR_PLAN` + the client purchase/reconcile arm, lit by env) ·
+  WEB-9b (~113 eff: the pricing page/copy/design-doc reconciliation
+  19.99 → 14.99) · WEB-10 (~52 eff, **STOP-CLASS**: the webhook's
+  allowance table + `premium_annual` in webhook and create-checkout; no
+  migration — `monthly_allowance` reused) + WEB-11 priced (the annual
+  plan's client half, a W-D train). Every charter path: zero commits
+  between b10ed1a1 and 421c7345 (executed).
+- **Two measured facts that amend the §464.2 rulings (ratified subject to
+  the skeptic pass):** (1) **O-P1's premise was FALSE for four of its six
+  paywall rows** — the gate is spelled `viewerCanAuthor`
+  (viewerAuthority.js:74-78 → SettlementDetail.jsx:231 → `entitled` in
+  EditControls:93 / FogControls:70 / Notes:33,157 /
+  useTownMapPresentation:121) and is already pinned by dmPinsTierGate /
+  fogTierGate / changeViewDepthGate / settlementMapPaneEdit; the recon's
+  grep looked for `canUse*` (88 hits, none in the map chrome). Only
+  `interiors` (InteriorView mounted by nothing) and `v2-redraw` (zero UI
+  callers) are unenforced — and both are UNSHIPPED. WEB-8 therefore
+  compiles to the ruling's INTENT (every advertised row names a resolving
+  enforcement symbol; the two unshipped rows de-advertised until they
+  ship), the literal ten-row de-advertise priced as fallback. (2)
+  **Surveyor's purchase → grant path is ALREADY BUILT and Deno-tested**
+  (create-checkout :72/:97; webhook grant :2890-2913, revoke :3277,
+  renewal :3057-3063; pins at :694/:713/:3271/:3293/:3339) — only the
+  CLIENT half is missing; the monthly allowance is webhook-minted (a hard
+  `30` at :406 behind a PREMIUM price-id gate, :359-373) so the allowance
+  and the annual plan are MONEY-PATH edits → WEB-10, STOP-class with its
+  bill (both Deno suites, the identity check on the renamed title at
+  :3293, DEPLOY.md, the event types). **THE ALLOWANCE TRAP** (owner
+  to-do #2): the gate is fail-OPEN when `STRIPE_PRICE_PREMIUM` is unset —
+  the first Surveyor invoice would mint the Cartographer 30 — so the env
+  must be SET before the Surveyor price is created.
+- **Allowance arithmetic (PLAUSIBLE — PRICING_MARGIN_SHEET.md is absent):**
+  `creditValueUsd` 0.157 under 174's 2.5×/1.2× policy; $14.99 net of
+  Stripe ≈ $14.26 → policy ceiling ≈ 90 credits; **25 credits** (=
+  `NEW_PACKS.credits_25`, so the copy derives with zero hand-typed
+  numbers) → 9.1× / 4.4× margin. Cartographer's $5.99/30 reads 2.9× /
+  1.4× — THIN, NOT UNDERWATER (the recon compared credit value, not
+  COGS; §449's "plausibly underwater" is withdrawn). Annual $59.90: 300
+  credits (10 × 30) clears 3.07× / 1.47×; 360 would sit on the floor.
+- **The owner's Stripe to-do (eight items, §4 of the charter) — by nature
+  the owner's:** create the Surveyor recurring price; SET
+  `STRIPE_PRICE_PREMIUM` first (the trap); the `STRIPE_PRICE_SURVEYOR`
+  secret; the annual price + function deploy (WEB-10); `db push`
+  139/150/159 (appliedHead 121); confirm the three webhook event types;
+  the customer-portal product list; counsel's TERMS placeholders.
+- **Skeptic pass dispatched as ONE agent (Opus, §447 verifier; §465 —
+  the three lenses in one brief)**. Seats: PRODUCERS landing (curing) ·
+  the skeptic. The charter is RULED after the pass; its cars build on
+  Opus as the second seat frees, landing after HK-A.
