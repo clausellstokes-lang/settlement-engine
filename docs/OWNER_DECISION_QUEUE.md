@@ -21050,3 +21050,79 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   (Opus). **The owner's band sitting waits on the ratification brief, and now
   opens with a single foundational question: what is a plan unit worth in
   feet.**
+
+## §505 — MF-CH1 BUILT AND HOLDING `[OPUS-RUN]`: THE FACET CHOKEPOINT STOPS READING WORDS THAT ARE NOT THERE — **4 CELLS OF 933 MOVE, AND THE INTERIOR CHANGES IN 150 OF 504 SETTLEMENTS**; THE BLINDNESS LAW RE-EXECUTED; THE BANKED SET IS **SEVEN, NOT EIGHT**, PROVED BY EXECUTION; ⛔ AN UNREACHABLE TIP PINNED BY THE CHAIR (2026-08-23 16:47 CDT)
+
+- **§505.1 ⛔ THE PIN FIRST.** The lane reported a tip unreachable from
+  `claude/composite-r4` whose ONLY ref was its own worktree's detached HEAD —
+  the disk-exhaustion law's exact hazard (a detached worktree HEAD is a
+  commit's only ref; REF-PIN before any tree cleanup). The chair pinned
+  `refs/preserve/holding-ch1` = **`fe88c28c7`** before doing anything else,
+  then verified: 4 commits over `00e7af61`, ancestor exit 0, porcelain empty,
+  14 files.
+- **§505.2 THE MEASUREMENT.** The 933-cell table re-derived by the lane (not
+  the charter's): `ROWS 311 · FACET_KINDS 3 · CELLS 933 · **CHANGED_CELLS 4**`
+  — `Priest (resident)` village/Religious, `Warden's Lodge` town/Magic,
+  `Charlatan fortune tellers` town/Adventuring (from `security`), `Dragon
+  resident` city/Exotic; all four `vice`-or-`security` → null ⇒ `generic`.
+  `institutionFunction` zero; `institutionSubstructure` (the undercity seed
+  gate) zero. **Control C1 confirms the panel and corrects the charter:** a
+  naive uniform leading `\b` gives CHANGED_CELLS 10 = the 4 cures + **6
+  regression cells over 4 rows** — `Blacksmith` and `Blacksmiths (3-10)` lose
+  `institutionFunction: 'arms'` AS WELL AS `craft`, and both `Sawmill` rows
+  lose `craft`. Acceptance A2 pins both halves on both Blacksmith rows and
+  mutant M4 drives the `arms` row alone.
+- **§505.3 THE DERIVED READS — WHERE THE BUG ACTUALLY LIVED.** Interior kind
+  moves in **150 of 504 settlements** (Priest 84, Charlatan 66, Warden's Lodge
+  2, Dragon resident 0 at this grid's magic level); dark `hasVice` 336 → 252;
+  `hasCharityFacet` **UNMOVED** 432 → 432 and CIVIC_CAPACITY **UNMOVED**
+  695 → 695 (two more of the charter's arguments refuted by measurement); and
+  **`monotoneComponents` — the consumer the charter's derived-read table
+  missed — UNMOVED**. ⚠ The lane restated the denominator honestly: **504**
+  (6 tiers × 12 cultures × 7 terrains, the golden master's own grid), not the
+  charter's 420 from a 10-culture list.
+- **§505.4 THE BLINDNESS LAW RE-EXECUTED IN PLACE (§503.2).** Corpus digest
+  `479a7992568d5b80…` byte-identical before and after, 0 of 504 record hashes
+  moved — and the lane proved that means nothing by breaking the `faith`
+  pattern to `/./i`: **15,101 interior cells move across 504 of 504
+  settlements while the digest stays byte-identical.** The packet quotes the
+  law beside the negative claim so no successor mistakes one for the other.
+  Golden `29c6cc8f…` unmoved at both ends; `tests/property` 101 files / 643
+  tests green.
+- **§505.5 ⭐ THE BANKED SET IS SEVEN, NOT EIGHT — PROVED, NOT READ.** The
+  lane stood up a detached baseproof worktree at the clean base and measured
+  exactly seven reds (7 of 147), rather than inheriting the count from a
+  commit subject — and the same run pinned BOTH of its own reds to itself
+  (`mutationCoverageManifest` 8/8 green at base; `sovereigntyLightingContract`
+  33/33 green at base). One member-caused red cured in-member: a new
+  `tests/lint` file owes a `scripts/mutation-coverage-manifest.json` entry,
+  and because `uncovered` is refused twice (header + the SHRINK-ONLY arm
+  pinning the count at 198) it took a `rationale` naming the nine drives;
+  perturbing the key reds both the TOTALITY and the stale-entry arms.
+  ⚠ A near-misclassification recorded rather than buried: four alarming
+  `vendored lib …` lines in the log are the CHILD STDOUT of
+  `validate-map-fork.mjs`, which `vendorManifestExactSet.test.js` runs and
+  asserts on — that file fails in neither drive.
+- **§505.6 THE REST OF THE PROOF.** Nine acceptance arms, **nine mutants
+  driven**, each restored digest-exact — and **M7 corrected a claim the packet
+  was about to make** (A4's drafted mutant does not convict A4; driven, it reds
+  A5 instead, so the comment now names M9, which does convict it). §475 paid:
+  three of five rosters hit, `build:edge-shared` in the member commit, three
+  metas moved `sourceHash` and two only `generatedAt`, all five committed as a
+  set per the `6ecac22a4` precedent. §489.3 grep arm **52 files** (21 tokens
+  across all of `tests/`, versus the charter's 16) → 902/903, the one red the
+  deferred census. Census DELTA **`+1/+0/+1/+9/+1`**, walked and reverted
+  digest-exact, riding the packet to the landing act (§417) — and the new test
+  file reds **THREE** censuses now, not two; the lane widened that law.
+  Typecheckers verbatim 173/173 and 1134/1134; eslint and `--fix-dry-run` both
+  0; `ruinFilterRoster` 92 unmoved. **Answer to the chair's question about the
+  new packet family: the validator has NO family concept at all** — `family`
+  is not a field it reads, a family is only the directory segment inside
+  `packetPath`, so admitting `catalog-hygiene` cost three artifacts and **no
+  code change**. Seven vetoable judgments and four deferrals recorded; **no
+  STOP**.
+- **§505.7 SEATS.** **TE-CH1-LANDING dispatched (Opus)** — its brief carries
+  the seven-banked correction, the three-census law, the five-bundle
+  re-verification, the member's own 52-file grep arm to re-run, and the
+  standing order to STOP rather than cure if the terminal reds outside the
+  sweep. Seats: TC-DW0-R2 amendment (Opus) · CH-1 landing (Opus).

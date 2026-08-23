@@ -51,6 +51,8 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 16:47 CDT 08-23: §505 — MF-CH1 BUILT, holding-ch1 fe88c28c7 (chair-pinned; tip was unreachable).
+# 4 of 933 cells; interior moves in 150/504; banked set is SEVEN proved by execution. Landing dispatched.
 # ⭐⭐⭐ 16:12 CDT 08-23: §504 — DW panel: NOT ratified. Capacity + merge theorems refuted; the cartography
 # stage throws on 56% of real settlements (CG-1 chartered, lands before DW-1). C5 DISCHARGED: ~170ms of 2000ms.
 # No plan-unit scale exists → BAND ZERO. Amendment lane dispatched.
