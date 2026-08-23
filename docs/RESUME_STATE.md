@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐⭐ ~23:40: THE DW PROGRAM ARCHITECTED (§435, owner order) —
+# docs/DESIGN_DWELLINGS_PROGRAM.md landed (nine laws, 13-system weave,
+# 9-stage pipeline, DW-0..7 waves; ARCHITECTED-NOT-BUILT; first
+# post-endgame program). Current arc unchanged.
 # ~23:00: §434.1 — second reclamation: 15 landed trees removed, 7.8Gi
 # free; prune-at-each-CAS re-adopted as practice. T2H gate in ratchet leg.
 # ⭐⭐ ~22:10: T2R's STOP RULED (§434) — channel-1 ERASURE confirmed by

@@ -17522,3 +17522,27 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   **The §403 prevention RE-ADOPTED as practice, not just law: each CAS now
   deletes the landed member's trees in the same act** — the drift from
   law to practice is how 3Gi happened twice.
+
+## §435 — OWNER ORDER: THE DWELLINGS PROGRAM ARCHITECTED — docs/DESIGN_DWELLINGS_PROGRAM.md LANDED ON THE LEDGER (ARCHITECTED, NOT BUILT) (2026-08-23 ~23:40)
+
+- **Owner: "comprehensively, cohesively, coherently, seamlessly architect all
+  of this out for eventual implementation" — executed.** The design
+  conversation of this sitting (interior floor plans on building click) is
+  formalized as the DW program's architecture document: the NINE FOUNDING
+  LAWS (functions-not-rooms · the three-clamp ceiling · floor-is-existence ·
+  derive-don't-store with delta edits · stable anchors · frontage-from-the-
+  parcel · basements-as-undercity-projections · the parti draw · vertical
+  honesty); the canonical-inputs weave across THIRTEEN existing systems; the
+  nine-stage pure derivation pipeline; the typed data contracts; the
+  determinism/change model with dated fossils; the projection surfaces
+  (including Foundry-scenes-with-walls, the measured VTT market gap); the
+  corpus program (the atlas method applied to interiors; Yoshida on the
+  reading list); the DW-0..DW-7 wave breakdown with dependencies; the
+  instruments; the owner-signature surfaces named for the DW-0 sitting; the
+  Dwellings-study market posture; the affirmative anti-scope.
+- **DISCIPLINE:** ARCHITECTED-NOT-BUILT per the §287.16 precedent — no
+  implementation, no cars, no golden motion; **sequenced as the FIRST
+  POST-ENDGAME program**, hard-gated on D3b live + undercity landed +
+  producers landed + the endgame complete. The owner's conversation is the
+  origin document; the §434-era research (the Watabou corpus read) is folded
+  as §12. Nothing in the current arc changes.

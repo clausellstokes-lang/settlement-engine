@@ -1,0 +1,229 @@
+# DESIGN — THE DWELLINGS PROGRAM (DW): interior floor plans as a projection of the world
+
+**STATUS: ARCHITECTED, NOT BUILT.** Owner-ordered at ODQ §435 (2026-08-23); origin
+is the owner–chair design conversation of that sitting (the ledger row cites it).
+Per the estate's architected-design discipline (the §287.16 precedent): this
+document is design with NO implementation and may not be reported as built.
+**SEQUENCE: the first post-endgame program.** Hard prerequisites, in order:
+D3b (the fabric maps LIVE), the undercity train LANDED (the one underground
+graph exists), the producer train LANDED (founding years/high-water/locations
+recorded). Nothing here may be built, chartered into cars, or golden-touched
+before those land and the endgame (soak → tuning → cull → push) completes.
+
+---
+
+## §1 · THESIS
+
+Every building the map shows becomes, on first click, a floor plan that can
+EXPLAIN ITSELF: derived from facts the world already holds, contradicting no
+other surface, inventing nothing. The product thesis (map AND context) applied
+one level deeper. Immersion is defined structurally: the absence of
+contradiction plus the presence of time.
+
+## §2 · THE NINE FOUNDING LAWS
+
+1. **FUNCTIONS, NOT ROOMS.** The requirement roster requires FUNCTIONS (forge,
+   hearth, sleeping, storage…). Prosperity buys walls first, then duplication:
+   at the floor, functions share one crammed space; rising wealth splits
+   functions into rooms; the ceiling duplicates them (multiple forges, the
+   armor annex). Room-assignment failure is structurally impossible because
+   requirements GENERATE rooms, never chase them.
+2. **THE THREE-CLAMP CEILING.** An interior is bounded by (a) its
+   institution's own ceiling, (b) its parcel/massing footprint (no interior
+   exceeds the exterior), (c) its settlement's economy (no building
+   out-prospers its town — read from the dossier's economic bands).
+3. **THE FLOOR IS EXISTENCE.** The bare-essential function set IS the license
+   to exist (no forge, no smithy). Prosperity adds, never substitutes; decline
+   sheds in a stated order, essentials never.
+4. **DERIVE, DON'T STORE.** The plan is a pure function of
+   (worldSeed, buildingId, circumstancesSnapshot). First click derives;
+   nothing is persisted; identical forever at identical circumstances. Only
+   DM EDITS persist — as DELTAS replayed over every fresh derivation (the
+   settlement editor's settled cure; the estate's most-bitten class
+   pre-answered).
+5. **STABLE ANCHORS.** Re-derivation under changed circumstances reads as
+   RENOVATION, not replacement: core functions anchor by stable keys
+   (the stablePart idiom); small changes add/shed around fixed hearts; every
+   re-derivation is DATED and narratable (fossils, renovation years — the
+   undercity's dated-fossil pattern extended above ground).
+6. **FRONTAGE FROM THE PARCEL.** Orientation is READ off the parcel's own
+   street-frontage data, never guessed: commerce functions weight to the
+   frontage edge with the street door; living behind; service to the rear or
+   back lane. Corner lots pick a primary frontage from the street hierarchy.
+   The market-stall poverty inversion is lawful (no storefront room — the
+   dossier already says such trades sell at the market).
+7. **BASEMENTS ARE THE UNDERCITY'S PROJECTION.** One canonical underground
+   graph (the undercity train's connectivity graph). A below-grade room,
+   hatch, or passage exists in a floor plan IFF the graph anchors it at that
+   building. Attics are building-local; basements are graph-canonical.
+   Criminal fronts, crypts, and sealed former connections render from the
+   same rows the undercity map reads. Never a coin-flip basement.
+8. **THE PARTI DRAW.** Generation's top-level draw is the organizing FORM —
+   the double-height hall with galleried wings, the grand-stair spine, the
+   courtyard ring, the many-roomed block — weighted by prosperity ×
+   institution × culture, drawn from the measured historical parti catalog.
+   Function-mapping happens WITHIN the drawn parti's discipline. Variety is a
+   seeded weighted draw INSIDE owner-signed ranges: prosperity sets bounds,
+   the dice pick within them — reflective, never uniform.
+9. **VERTICAL HONESTY.** Storeys are a PARTITION of the massing's measured
+   height envelope. Double-height cells (the great hall) lawfully spend
+   vertical budget; storey heights vary by status (the piano nobile); the
+   interior floor count always reconciles with the exterior silhouette. A
+   parti with exterior consequences (tall hall windows) is eventually a named
+   massing part both surfaces read (the D5-strata seam, designed-for now).
+
+## §3 · CANONICAL INPUTS — what each existing system supplies (read-only)
+
+| System | Supplies | Interior consequence |
+|---|---|---|
+| Institution catalog | category-tiered REQUIREMENT ROSTERS (+rare overrides) | lawful per-type interiors; ~dozens of category laws, not 311 hand rosters |
+| Economy/chains | prosperity band; the chains feeding each craft; entrepôt/imports | split-vs-cram; the stalled chain's cold second forge; bought-in goods |
+| Demography | household size/structure, age bands | who sleeps where; tenement subdivision; servants; roles never named fates |
+| Simulation history | founding year (T2Q's stamp), dated events, calamities | building age styles it; scarred beams; dated renovations |
+| High-water (T2R) | peak tier vs present | DECLINE MADE SPATIAL: overbuilt shabby grandeur, subdivided mansions |
+| Faith | tenure/endowment/culture (never theology) | rooted temples accrete chapels; thin ones bare; symmetric temple partis |
+| Defense/war | compound booleans, garrison state | stocked or empty armories; requisitioned rooms under martial law |
+| Undercity graph | licensed anchored connections, fossils | law 7 wholesale |
+| Map fabric | parcel polygon, frontage, massing volumes, party walls, support surfaces | laws 6 & 9; stairs anchored where geometry allows; no TARDIS rooms |
+| News | the address law | events resolve INTO rooms; renovations emit news back |
+| Custom content | the admission machinery | custom institutions inherit category rosters + overrides |
+| Tiers/entitlements | the projection machinery | player-safe plan free; DM secrets premium |
+| Foundry/PDF pipeline | scene/journal exports | floor plans as FOUNDRY SCENES WITH WALL DATA; multi-floor PDF |
+
+## §4 · THE DERIVATION PIPELINE (pure, staged, per building)
+
+S1 CIRCUMSTANCES SNAPSHOT — assemble the typed input record from §3's readers
+   (a pure gather; the snapshot's shape is the program's first data contract).
+S2 PARTI DRAW (law 8) — seeded weighted draw over the catalog, clamped by the
+   three clamps.
+S3 VERTICAL PARTITION (law 9) — storeys from the massing envelope; double
+   cells per the parti; attic/basement slots (basement only if law 7 grants).
+S4 FUNCTION ROSTER (laws 1–3) — the institution's floor set + prosperity
+   additions + household functions from demography; shedding order attached.
+S5 PLACEMENT — functions → rooms within the parti: frontage weighting (law 6),
+   split-vs-cram budget, adjacency preferences (kitchen near hall, workshop
+   at the frontage), party-wall and window/light constraints per function.
+S6 CIRCULATION — doors, corridors minimized, stairs (type per parti and
+   prosperity: ladder → winder → spiral → grand), reachability to every room
+   and inserted gallery; the street entrance on the frontage room.
+S7 FIXTURES & DRESSING — typed fixtures per function at the prosperity/wear
+   grade (finite semantics: closed vocabularies, PRESENT/NONE-with-reason);
+   supply-state variants (the stalled chain's cold forge); abstract-shape
+   rendering at the player tier, named-and-stated at the DM tier.
+S8 UNDERCITY PROJECTION (law 7) — render the building's slice of the graph:
+   stairs down, hatches, sealed arches with dates.
+S9 VALIDATION — the lawfulness walker certifies: floor satisfied, ceiling
+   respected, every room licensed, every absence reasoned, circulation total,
+   geometry legal (no overlaps/slivers; minimum dimensions and aspect ratios
+   per function), vertical partition exact. A plan ships only certified.
+
+## §5 · DATA CONTRACTS (all closed vocabularies; finite-semantics law)
+
+- `RequirementRoster { institutionCategory, floorFunctions[], ladder[]
+  (prosperity rung → additions/duplications), sheddingOrder[], ceiling }`
+- `Function { kind, minDims, aspectBounds, lightReq, adjacency[], fixtures[] }`
+  (window/light as first-class constraint — adopted from the Dwellings
+  study's room-type vocabulary).
+- `Parti { id, form, weights(prosperity×institution×culture), verticalGrammar,
+  stairGrammar, exteriorConsequences[] }`
+- `FloorPlan { buildingId, derivedAt{year,tick}, circumstancesDigest, storeys[]
+  { cells[] { function(s), polygon, doors[], windows[], fixtures[] } },
+  underLinks[], fossils[], certification }` — DERIVED, never persisted.
+- `PlanDelta { buildingId, path, op, value, editedAt }` — the only stored
+  artifact; replayed at S9-post.
+- Secrecy: every cell/fixture/link carries the projection tier
+  (player/DM) via the existing entitlement machinery — no second system.
+
+## §6 · DETERMINISM & CHANGE
+
+Seeded draws fork per (worldSeed, buildingId, axis) — the drawVariant idiom.
+Re-derivation triggers: prosperity band change, institution status change,
+household change, physical restructure (post-D3b massing edits), undercity
+graph change. Each re-derivation is dated; diffs against the prior derivation
+mint FOSSILS (a sealed arch, a bricked door) and MAY emit news (the address
+law in reverse). Anchor stability (law 5) bounds churn: the validator's
+continuity arm asserts core-function anchors persist across single-band
+changes. THE PROMISE: plans are projections — lived history immutable, the
+starting world untouched; nothing here writes generation-path bytes, ever.
+
+## §7 · PROJECTIONS
+
+On-click pane (lazy, the vendor-lazy contract); DM/player tiers; the PDF
+chapter (multi-floor pages); FOUNDRY SCENES WITH WALLS (the VTT gap the
+market measurably wants — repeatedly requested of Dwellings, never delivered);
+SVG/PNG export via the existing export surfaces. The estate view: the parcel's
+buildings top-down with the main plan opened — read straight from fabric data.
+
+## §8 · THE CORPUS PROGRAM (DW-R — the long pole)
+
+The atlas method applied to interiors: measure real historical plans into
+grammars — hall houses, longhouses, burgage plots, tenements, courtyard
+houses, temples (symmetric partis), inns/taverns/shops, workshops by trade.
+Sources: measured-plan literature; Yoshida's *Houses with a Story* for
+narrative-cutaway taste. Deliverables: the parti catalog with weights, the
+function vocabulary with constraints, per-category requirement rosters,
+the fixture vocabulary with prosperity/wear grades. Owner taste-samples
+gate each corpus wave (the CT-0 pattern).
+
+## §9 · IMPLEMENTATION WAVES (for the eventual charter compile; sizes rough)
+
+| Wave | Content | Depends on |
+|---|---|---|
+| DW-0 | charter compile from THIS document; owner sits the bands | endgame complete |
+| DW-R1..R3 | the corpus (partis; functions/rosters; fixtures) | DW-0 |
+| DW-1 | vocabularies + rosters landed dark (engine leaves, golden-inert) | R-waves |
+| DW-2 | the geometry core: vertical partition + parti placement + circulation over parcel polygons | D3b live; DW-1 |
+| DW-3 | fixtures/dressing + supply-state variants | DW-1/2 |
+| DW-4 | the undercity projection seam | undercity landed |
+| DW-5 | the validator suite + continuity arms | DW-2..4 |
+| DW-6 | projections: pane, tiers, PDF, Foundry-walls | DW-2..5 |
+| DW-7 | deltas/editing + news hooks + the estate view | DW-6 |
+
+Rough scale: one-third to one-half of the map program (its hardest substrate
+— exact geometry, massing, determinism law — already exists).
+
+## §10 · INSTRUMENTS
+
+The lawfulness walker (S9) as a landed test family; plan goldens per fixture
+settlement (derived plans are generation-golden-inert by construction —
+the producer-train architecture law reused); the continuity arm; the
+no-second-truth scans (no fixture vocabulary outside the roster; no
+underground geometry outside the graph; the §423-style two-homes law for any
+interior "operation" if one ever exists).
+
+## §11 · OWNER-SIGNATURE SURFACES (named now, signed at DW-0)
+
+The prosperity floor/ceiling bands per category; the parti weights; the
+shedding/splitting orders; storey-height ranges; the fixture grade tables;
+the corpus taste-samples. All world-shaping constants — the tuning class.
+
+## §12 · MARKET POSTURE (from the Dwellings study, ODQ §435's research)
+
+The competitor's own audience asked for: guaranteed room types, real building
+types, VTT wall export, basement control, a "normality" slider, multi-floor
+PDF — each is a natural consequence of facts-first here, several were
+declined there as structurally hard. His deliberate strengths to respect:
+instant generation feel, abstract-furniture legibility (our player tier),
+exploration interest (ours arrives via secrets/fossils/undercity, never
+incoherent mazes). Nobody has interiors WITH MEANING; this program is the
+moat's second storey.
+
+## §13 · ANTI-SCOPE (affirmative)
+
+No named-character fates (roles only — the product-scope law). No CAD/manual
+wall editing (deltas are intents, not geometry surgery). No real-world
+architectural compliance. No generation-path writes. No theology in temples
+(culture only). Not started, in any form, before the endgame completes.
+
+## §14 · OPEN QUESTIONS (for DW-0)
+
+Q1 the parti↔massing named-part seam's exact contract (law 9's exterior
+consequences). Q2 whether the estate view is DW-6 or a fabric deliverable.
+Q3 the news-emission threshold for renovations (what's newsworthy). Q4 the
+free-tier depth (how much plan is free vs DM). Q5 fixture art direction
+(abstract vs illustrated at the DM tier — owner taste).
+
+---
+*Architected 2026-08-23 from the owner–chair conversation at ODQ §435; the
+conversation is this program's origin document. The ledger outranks this
+summary where they ever disagree.*
