@@ -335,6 +335,17 @@ export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   // this census exists: a computed member access attributes to NO key and would be fully
   // wired, genuinely gated, and invisible here.
   'treatyRenewalEnabled',
+  // Joined 2026-08-23 by the undercity train's MF-UC4 (ODQ §311.3/§359.5/§441.4, dispatched
+  // §484) under CR-WR10-C item 4, in the SAME commit as its ONE first real gate read
+  // (`undercity/colonization.undercityHighWaterActive`, read BY NAME with the strict
+  // `=== true` idiom) and its AUTHORED certification row. It sorts here because that is
+  // alphabetical order — `undercity` before `underways` — not precedence.
+  // ⚠ WHY IT TOOK A ROW RATHER THAN AN EXEMPTION: it writes a real PERSISTED field. The
+  // gate opens a monotone `powerHighWater` fold on the faction record inside
+  // factionCompetition.ensureFactionStates, which the pulse runs every tick over every
+  // settlement's roster, and the mark is then projected onto the settlement itself. A
+  // persisted-state writer is exactly what the exempt list's own comment refuses to shrug at.
+  'undercityHighWaterEnabled',
   // Joined 2026-08-14 by GAP-1 under OWNER_DECISION_QUEUE §32 ruling 1, with its
   // AUTHORED certification row in the same commit, and on the same footing as
   // settlementPoliticsEnabled above: the gate read is not new, the DETECTION is. This

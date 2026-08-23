@@ -14,6 +14,12 @@ import { governingFactionOf } from '../rulingPower.js';
 // ES-5b — a REAL cross-layer pair (INFO→INTERIOR), TAKEN rather than avoided, and
 // licensed in this same commit by CPL-20 `ES5B_ABSENCE_BENCH_COUPLING`. Never baselined.
 import { presenceSharesFor } from './espionage/espionagePresence.js';
+// MF-UC4 — THE VERTICAL HIGH-WATER SIGNAL (ODQ §311.3, §359.5). This layer already owns the live
+// faction-power reading (see projectFactionStatesOntoSettlement's header: the roster IS the live
+// power source), and a syndicate's PEAK standing is the one undercity fact no derivation can
+// recover once the roster has moved past it. The gate, the reader and the monotone fold all live
+// in the undercity leaf; this file supplies the two seams and nothing else.
+import { powerHighWaterOf, undercityHighWaterActive, withPowerHighWater } from '../undercity/colonization.js';
 
 // Canonical archetype → factionCompetition's local vocabulary (the FACTION_POWER_BASES
 // keys). Folds the archetypes this layer doesn't model: government/other → civic,
@@ -220,10 +226,17 @@ function topFactionEntries(item, worldState = null) {
 /** @param {any} worldState @param {any} snapshot @param {any} rng */
 export function ensureFactionStates(worldState, snapshot, rng) {
   const factionStates = { ...(worldState.factionStates || {}) };
+  // MF-UC4 — the vertical high-water fold, gated ONCE by name. DARK (the key is absent from
+  // DEFAULT_SIMULATION_RULES) ⇒ the expression below is never evaluated, no state gains the key,
+  // and every advance is byte-identical to the pre-UC4 engine. The fold records history SINCE
+  // LIGHTING: a state minted THIS pass takes its first mark on the next one, exactly as GR-5A's
+  // monotone memory declares (a record written before the wave carries no key).
+  const highWaterLit = undercityHighWaterActive(worldState);
   for (const item of snapshot.settlements) {
     const entries = settlementFactions(item);
     entries.forEach((/** @type {any} */ faction, /** @type {any} */ index) => {
       const id = factionId(item.id, faction, index);
+      if (highWaterLit && factionStates[id]) factionStates[id] = withPowerHighWater(factionStates[id], factionPower(faction, index));
       if (factionStates[id]) return;
       const local = rng.fork(`faction:${id}`);
       const archetype = inferFactionArchetype(faction);
@@ -573,6 +586,14 @@ export function projectFactionStatesOntoSettlement(settlement, factionStates, se
     const suppressed = state.suppressedInstitutions || [];
     if (faction.suppressedInstitutions != null || suppressed.length) {
       if (!sameStringList(faction.suppressedInstitutions, suppressed)) patch.suppressedInstitutions = [...suppressed];
+    }
+
+    // MF-UC4: project the recorded vertical high-water mark so the undercity deriver reads it off
+    // the SETTLEMENT it is handed, never off worldState. Absent (the dark path) ⇒ the quiet-state
+    // discipline above applies unchanged and nothing is materialized onto the roster entry.
+    const highWaterMark = powerHighWaterOf(state);
+    if (faction.powerHighWater != null || highWaterMark != null) {
+      if (faction.powerHighWater !== highWaterMark) patch.powerHighWater = highWaterMark;
     }
 
     if (!Object.keys(patch).length) return faction; // identity no-op

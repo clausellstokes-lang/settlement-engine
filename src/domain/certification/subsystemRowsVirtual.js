@@ -1287,6 +1287,56 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
     // the honest reading and the only lawful one: a row that observes nothing must say so.
     soakEvidence: 'unobserved',
   }),
+  // ── THE VERTICAL HIGH-WATER MARK (MF-UC4, draft-UNDERCITY-PLAN.md §4 UC-4) ──
+  // AUTHORED, NEVER PENDING. This lane's pending array is empty, so there is nowhere to defer
+  // to, and manifesting is itself the act that makes a virtual key censusable.
+  Object.freeze({
+    rule: 'undercityHighWaterEnabled',
+    title: 'The vertical high-water mark (a syndicate remembers its strongest year)',
+    module: 'src/domain/undercity/colonization.js,src/domain/worldPulse/factionCompetition.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY: this wave mints no pulse candidate and composes no beat, so there
+      // is no `candidateType` literal in it to declare. The undercity leaf is a pure deriver
+      // and the seam is a field fold — neither produces an event.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY. BEHAVIORAL_MOVER_FAMILIES is a closed vocabulary of BEHAVIOURAL
+      // families and the only member this fold could ride is the faction layer's own, which
+      // would grade this row ALIVE off every faction advance in worlds where the flag has
+      // never been true. The treaty-renewal row above refuses the same temptation identically.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY, AND THE REASON IS THE SHARP ONE. The field is written INSIDE a
+      // faction record under `worldState.factionStates` and projected onto a settlement's own
+      // power roster — both containers the faction competition layer fills in every world where
+      // this flag has never been true, so declaring either would grade this row ALIVE off
+      // somebody else's writes. There is no per-field channel to declare, so the row declares
+      // nothing rather than a container it does not own.
+      stateKeys: Object.freeze([]),
+      other: 'ONE GATE, ONE WRITE SITE, AND ONE READER, ALL IN THIS WAVE. undercityHighWaterActive (undercity/colonization.js) reads undercityHighWaterEnabled by name with the strict === true idiom and it is the ONE read of this key in the tree; the by-name spelling is load-bearing rather than stylistic, because a frozen-list conjunction is a computed member access and would hide a fully wired flag from the engine-gated-key census entirely. WHAT THIS WAVE BUILDS: one conditional, monotone, drop-when-absent field, powerHighWater, folded at the single site in factionCompetition.ensureFactionStates that already walks every settlement roster entry every advance, plus the projection that carries the mark onto the settlement power roster beside the capture rung, the reader that resolves absence to null, and the undercity deriver that turns a fall from the mark into dated fossils. WHY IT EXISTS: faction power is renormalized from the roster on every advance, so a syndicate that ruled a town for a decade and was broken last year reads, on the parchment, as a syndicate that never ruled — and the undercity doctrine (ODQ §311.3) says the opposite about the ground: use recedes, dug space never does. A recession cannot be measured against a peak the estate does not keep, which is the whole of the §359.5 persisted-signal finding, first built here. WHAT IT DELIBERATELY DOES NOT BUILD: no catalog row, no institution, no candidate, no news kind, no Herald desk, no dossier surface, no store verb and no payload grammar, no geometry of any kind, and no default lighting — lighting this key in DEFAULT_SIMULATION_RULES is same-seed pulse motion and is docketed to the owner as R-5. THE MARK IS OBSERVED, NEVER TRUE: its source is the roster power the pulse itself renormalized, so a syndicate whose strength no advance ever saw leaves no mark. IT IS MONOTONE AND HAS NO CLEARER: it moves up and never down, and no code path deletes it. THE FOLD RECORDS HISTORY SINCE LIGHTING and says so rather than implying it — a faction state minted in the same pass takes its first mark on the next one, and a record written before this wave carries no key and is never backfilled. THE DARK PATH IS PINNED AS AN ABSENCE, NOT AS A ZERO: with the flag absent the reader answers null and the deriver returns an EMPTY fossil list, which is the honest reading (no instrument) rather than the quiet lie (no recession) — the content train is forbidden to ground a sentence in that empty list. WHAT WOULD BE NEEDED TO OBSERVE IT DISPOSITIVELY: a v5 receipt carrying a per-faction power-history distribution, which no census reads today.',
+    }),
+    // The fold sits inside ensureFactionStates, which the pulse runs every tick over every
+    // settlement's factions — so when the flag is lit the write site is REACHED per tick, even
+    // though the VALUE moves rarely and only ever upward.
+    expectedTempo: 'per_tick',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'the_mark_is_gated_and_a_dark_world_gains_no_key',
+        description: 'With the flag absent or false the fold expression is never evaluated — not merely harmless but unreached — so no faction state gains the key, the projection materializes nothing onto the roster, and a dark advance is byte-identical to the pre-UC4 engine. Drop-when-absent means the key is never written as null and never backfilled onto a legacy record.',
+        check: 'NOT expressible from a receipt: no census reads per-faction fields. Pinned in tests/domain/undercityColonization.test.js by a dark-versus-lit differential driven through the REAL ensureFactionStates, with the dark arm asserting the serialized state is unchanged and the lit arm asserting the key appears.',
+      }),
+      Object.freeze({
+        name: 'the_fold_is_monotone_and_the_reader_reports_absence',
+        description: 'The mark moves UP and never down: a syndicate that rises and then falls keeps the rise. And an unmarked record answers null rather than zero — zero would assert that the syndicate was always powerless, which is a claim the instrument has not made. The distinction is what makes the dark-path fossil list an honest empty rather than a vacuous fence.',
+        check: 'NOT expressible from a receipt. Pinned in tests/domain/undercityColonization.test.js over TWO advances driven through the real seam, feeding the first advance\'s own output world back in — a single-advance harness cannot tell a memory from a level — plus a null-versus-zero arm on an unmarked roster.',
+      }),
+      Object.freeze({
+        name: 'the_criminal_share_is_consumed_and_never_re_weighted',
+        description: 'The colonization driver `criminalShare` IS corruption.js\'s own reading of the stored profile, imported rather than recomputed, so the undercity and the corruption layer can never disagree about how criminal a town is. A parallel weighting would have minted a second truth for the one driver the doctrine names.',
+        check: 'NOT expressible from a receipt: no census carries the criminal share. Pinned in tests/domain/undercityColonization.test.js by an equality arm that drives readCorruptionClimate and the deriver over the same profiles, including both precedence branches and the unset default.',
+      }),
+    ]),
+    // No channel at all, so the row can never be ALIVE and says so honestly.
+    soakEvidence: 'unobserved',
+  }),
 ]);
 
 /**
