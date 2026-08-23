@@ -119,7 +119,7 @@ key stops being written and every already-written mark becomes an inert field no
 
 ---
 
-## §3 · THE FLAG BILL — FOUR SURFACES, ONE COMMIT, WITH RECEIPTS
+## §3 · THE FLAG BILL — FIVE SURFACES, ONE COMMIT, WITH RECEIPTS
 
 CR-WR10-C item 4 binds the manifest entry, the first real gate read and the certification row into
 one commit; §441.4 adds the test-side list and the acceptance literal, and §475 adds the bundle.
@@ -335,7 +335,7 @@ sweep vacuity class, and the clean control is what caught it. The third drive is
 | `eslint` on every touched JS path | TRUE_EXIT 0, empty report; `--fix --dry-run` changes nothing |
 | generator golden | `29c6cc8f…` before the first edit and after the last |
 
-The widened sweep and its classification are §10.
+The widened sweep and its classification are §11.
 
 ---
 
@@ -434,3 +434,45 @@ verb and no payload grammar (§423). No user-visible surface. No geometry — th
 drawn joints and the registration ghost are the map program's D5 wave. No default lighting (R-5). No
 edit to either census walker beyond the walk-and-revert above. No dependency bump. No second
 derivation of any fact another car owns.
+
+---
+
+## §11 · THE WIDENED SWEEP AND ITS CLASSIFICATION — 7/7 BANKED, 1 DEFERRED, 0 STRAYS
+
+Nine trees, mutexed, run ONCE at the holding tip: `tests/lint tests/build tests/docs tests/ops
+tests/domain tests/property tests/edgeFunctions tests/scripts tests/data`. The box was verified
+quiet before launch (no foreign vitest, gate-tail or check process by `ps`; the lock directory
+absent) and the lock was acquired after 0 polls.
+
+**`Test Files 6 failed | 1304 passed | 7 skipped (1317)` · `Tests 8 failed | 18459 passed | 114
+skipped (18581)` · TRUE_EXIT 1 · 4m50s · head unchanged and porcelain 0 before AND after, so the
+tree did not move under the run. No stray, no re-run owed.**
+
+⭐ THE THREE CURES ARE ATTRIBUTED BY ARITHMETIC AGAINST THE SAME CORPUS, not by inspection. The
+FIRST sweep, at the pre-cure tip, read `9 failed | 1301 passed (1317)` and `11 failed | 18459…`
+— precisely `18456 passed`; the second reads `6 failed | 1304 passed (1317)` and `8 failed | 18459
+passed`. Identical totals, three files and three tests moved from failed to passed.
+
+**BASELINE LOOKUP EXECUTED** at the chair baseproof `chair-baseproof-b10ed1a1` (HEAD re-read
+`b10ed1a1f5a0…`; its porcelain **0 before AND after**; its own short TMPDIR; **`package-lock.json`
+`cmp` exit 0 against this tree**, so the two runs share an install), over the five failing files
+only: `Test Files 5 failed (5)`, `Tests 7 failed | 99 passed (106)`.
+
+**§469 SATISFIED PROPERLY — not title identity, the ASSERTION BLOCKS were machine-compared** (ANSI
+stripped, timings and tree roots normalized, per-block SHA-256). **7 of 7 byte-identical, 0
+differing, 0 unmatched at the baseproof.**
+
+| # | red at the tip | block sha | verdict |
+|---|---|---|---|
+| 1 | `enforcement-claims` :: every completeness claim carries an @enforced-by tag | `5d6c29c5ef495ee2` | BANKED |
+| 2 | `clampPrimitiveBaseline` :: baseline exactly matches … | `4907e1ee9a498dd6` | BANKED |
+| 3–5 | `warCostKindPools.walker` ×3 (`war_trajectory_winning`, `war_trajectory_losing`, `trajectory_misread`) | `a8b37345…` `29d8c753…` `d580f9f4…` | BANKED |
+| 6 | `warRulingKindPools.walker` :: `'succession_demand_inherited'` … | `bbd6a1396003e0e1` | BANKED |
+| 7 | `metronomeCooldownLint` :: the non-cooldown emitter set may only SHRINK | `60d0af8a9f33448a` | BANKED |
+| 8 | `sovereigntyLightingContract.walker` :: THE CENSUS IS AN ASSERTION, NOT A SENTENCE | tip-only | **MINE — THE ONE NAMED INTERIOR RED, DEFERRED BY §417.** Its own message is this member's delta: *"the estate's file count moved — re-measure, do not re-word: expected 2513 to be 2512"* |
+
+A grep of all eight FAIL lines for `MF-UC4 \| undercityColonization \| colonization \|
+factionCompetition \| contributionLedgerShape \| undercityStrataExistence \| pulseKernelLineAddress`
+returns **0**. **Classification: 7/7 banked, 1 deferred by design, 0 strays, no STOP.**
+
+---
