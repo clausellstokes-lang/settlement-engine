@@ -5997,7 +5997,56 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   ("expected 2514 to be 2513"), this member's +1 exactly; and `suiteTitles` alone put back
     //   at the slot's 5,805 reds at `suiteTitles` ("expected 5806 to be 5805"), the member's one
     //   new describe — the file restored byte-identical (cmp 0) both times.
-    files: 2514, parked: 366, credited: 2148, titles: 20846, suiteTitles: 5806,
+    // ── RE-RECORDED 2026-08-23 BY THE MF-UC2 LANDING (the undercity MONOTONE components —
+    //   crypts, surge pits, undercrofts, smuggler cellars, workings and sealed vaults),
+    //   CAUSE ATTRIBUTED ──
+    // 2,514/366/2,148/20,846/5,806 → 2,515/366/2,149/20,854/5,807 at the landing slot f1e4d515
+    // (the MF-UC4 landing, the 45th). ONE cause, and it is not a rule change — no classifier
+    // here widened or narrowed:
+    //   +1 file / +1 CREDITED / +8 titles / +1 suite title:
+    //     tests/domain/undercityMonotoneComponents.test.js, the member's acceptance suite — ONE
+    //     literal `describe` and EIGHT straight-line `it()` arms, with `.each`, `runIf`, `.skip`,
+    //     `.todo`, `.concurrent` and `skipIf` all measured at ZERO occurrences over the file, so
+    //     it is CREDITED and every title counts. `parked` does NOT move — and on the walk below
+    //     it PASSED without redding at 366, which is the receipt that the file is credited
+    //     rather than an inference from its shape.
+    //   The eight arms: A1 G-43, the mine moves with its resource site, plus the general form
+    //     over the whole corpus; A2 MONOTONICITY, advancing the calendar never shrinks a crypt;
+    //     A3 ABANDONED-NEVER-ERASED, an exhausted seam keeps its working at exactly the extent
+    //     the town that dug it earned; A4 the SURGE PIT, one pit per dated year of mass death,
+    //     beside the burying ground; A5 the undercroft tracking quarter trade, with an honestly
+    //     ZERO driver on the dark path; A6 the VAULT under the institution FUNCTION that
+    //     licenses it and no other; A7 the SMUGGLER subset needing BOTH facts, the wall and the
+    //     criminal share; and A8 the PRE_SEED age rule in its two spellings.
+    //   +0 from the two OTHER test files this member edits, ATTRIBUTED BY COUNTING AT BOTH ENDS
+    //     rather than assumed. tests/domain/resourceSites.test.js re-states T2N's dormancy arm
+    //     as an EXACT admission map inside the body of an arm that already existed (1 describe
+    //     and 6 tests at the SLOT, 1 and 6 at this tip). tests/lint/ruinFilterRoster.walker.test.js
+    //     moves its reader literal 91 → 92 and the disposition comment above it, nothing else
+    //     (1 describe and 5 tests at both ends). Everything else the landing moves is `src` or
+    //     docs.
+    // `censusAuthorization`: ODQ §311 (the undercity doctrine), §431 (the train's dispatch),
+    // §441 (the ruling, ratified §445.2) and §484 (this member's dispatch,
+    // `[OPUS-RUN · FABLE-VALIDATION OWED]`).
+    // ⛔ CONVICTED AT THE BUILD, then REVERTED per §417: every figure was walked at the build
+    //   base 1b1de759, the edit reverted digest-exact, and the row rode the packet into this
+    //   landing act so the tuple is re-derived here rather than carried.
+    // ⭐⭐ THE CARRY LAW, EXECUTED AT THE LANDING SLOT (TE-UC2-LANDING, 2026-08-23; §420/§457/
+    //   §469/§480.2/§489.3). This member was authored at base 1b1de759 (MF-UC1's landing, the
+    //   44th) and rebased onto f1e4d515 (the MF-UC4 landing, the 45th, which landed while this
+    //   member was holding). The DELTA `+1/+0/+1/+8/+1` is what crossed, and the base HAD MOVED
+    //   under it: UC-4 re-recorded the block directly above with a delta of exactly the same
+    //   shape, so the after-figure re-derives to 2,515/366/2,149/20,854/5,807 — the ONE live
+    //   tuple line below — CONVICTED BY EXECUTION at the rebased tip (33/33) with every figure
+    //   READ FROM ITS OWN FAILURE MESSAGE in assertion order and never computed: `files`
+    //   "expected 2515 to be 2514" → `parked` PASSED UNMOVED at 366 → `credited` "expected 2149
+    //   to be 2148" → `titles` "expected 20854 to be 20846" → `suiteTitles` "expected 5807 to be
+    //   5806". The walked figures equal the packet's carried delta exactly, so no title was
+    //   swallowed by a parked file. TWO negative controls: the slot's own tuple put back reds at
+    //   `files` ("expected 2515 to be 2514"), this member's +1 exactly; and `suiteTitles` alone
+    //   put back at the slot's 5,806 reds at `suiteTitles` ("expected 5807 to be 5806"), the
+    //   member's one new describe — the file restored byte-identical (cmp 0) both times.
+    files: 2515, parked: 366, credited: 2149, titles: 20854, suiteTitles: 5807,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

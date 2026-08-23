@@ -22391,9 +22391,9 @@
     },
    {
    "id": "MF-UC2",
-   "status": "READY",
+   "status": "LANDED",
    "packetPath": "docs/implementation/packets/town-cartography/MF-UC2.md",
-   "verifiedBase": "1b1de759155631b61659d8faff7fe69836687385",
+   "verifiedBase": "f1e4d5150748f13cc27fbbb2d34db614d49d7620",
    "changeManifest": [
     {
      "_note": "THE MONOTONE COMPONENTS (311.8.2(b) / 311.8.3), the first car of T-UC3. deriveMonotoneComponents(settlement, opts) answers what a town DUG and never filled in: crypts under what buries, the surge pit a dated year of mass death digs, undercrofts under what stores and the smuggler subset of those, workings at the dossier's own seams, and sealed vaults under what arms and what judges. MONOTONE IS STRUCTURAL, NOT HOPEFUL: no extent driver here can FALL. Burial demand reads deriveHighWater(...).population - T2R's constitutional peak, the only population reading that cannot go down - institution age grows with the calendar and nothing else, and a worked seam keeps the extent the town that dug it earned. Recession is therefore always a posture or an abandonment, never a shrink (311.8.3, use recedes and dug space never does). BURIAL DEMAND HAS NO CUMULATIVE-DEAD HOME and one is not invented: the estate records deaths only as per-tick pulse receipts (demographicsKernel folds births/deaths into the population and keeps no running total) and as dated losses on a calamity stamp, so the charter's phrase compiles as the two facts that exist. THE SURGE PIT READS DATED MASS DEATH, NEVER 'PLAGUE': calamity.js:260 is constitutional that the engine asserts no disaster kind, flavorSuggestion is never read, and calamityHistory is reached only through buildCalamityLedger (443). ONE TRUTH PER FACT, all consumed and none re-derived: T2N's deriveResourceSites (the charter-PREDICTED path CONFIRMED at src/domain/resourceSites.js), T2Q's institutionFoundingOf with the 441.5(g) PRE_SEED age rule widened to its third kind FOUNDED_UNDATED (an age floor of zero carried as ageUnderstated, never an invented year), T2R's deriveHighWater, UC-0's institutionAnchorKey and institutionSubstructure facet, UC-1's pinned district 12-enum and water-route vocabulary, UC-3's excavation-affinity constant, and corruption.js:539-542's one criminal-share reading. THE RUIN STATE IS READ AND TYPED rather than filtered or ignored: filtering would erase dug space (311.3) and ignoring would credit a flattened building with a growing excavation, so isLiveInstitution is consulted per row and the answer lands as `abandoned`. 247 effective lines against the 250-per-leaf cap, so the charter's split rule was not needed (the first draft measured 274 and was compacted, not split). Dormant: no production importer, nothing persisted, the generator golden bytewise unmoved.",
@@ -22501,6 +22501,31 @@
      "_note": "THE RUIN-FILTER DISPOSITION THIS CAR IS THE CAUSE OF. The MARKER is pinned and NEVER the count: a re-recorded FIGURE in requiredSymbols is refused by the estate's own law (ODQ TE-26), and that count moves the moment any sibling lands a reader.",
      "path": "tests/lint/ruinFilterRoster.walker.test.js",
      "symbol": "RE-MEASURED 2026-08-23 BY MF-UC2"
+    },
+    {
+     "_note": "THE CLOSED KIND VOCABULARY this car declares - the six monotone component kinds in the doctrine's own order. Pinned as a SYMBOL, never as a count: the array's length is a figure and a figure in requiredSymbols is refused by the estate's own law (ODQ TE-26).",
+     "path": "src/domain/undercity/monotoneComponents.js",
+     "symbol": "export const MONOTONE_COMPONENT_KINDS"
+    },
+    {
+     "_note": "THE ONE TUNING SURFACE (441.6 / 8 R-3), bounded, typed and frozen, PROVISIONAL / EXPOSABLE-PROVISIONAL and a registered TUNING-PASS INPUT. The pin holds the surface's EXISTENCE at one address so a later tuning pass cannot silently grow a second one.",
+     "path": "src/domain/undercity/monotoneComponents.js",
+     "symbol": "export const MONOTONE_EXTENT_TUNING"
+    },
+    {
+     "_note": "THE ZONE-KEY ACCESSOR the display and dossier surfaces read the car through, pinned so the dormant leaf keeps a named public edge rather than only its deriver.",
+     "path": "src/domain/undercity/monotoneComponents.js",
+     "symbol": "export function monotoneZoneKeys"
+    },
+    {
+     "_note": "THE T2Q CURE THIS MEMBER IS THE CAUSE OF (5.1, J-TEUC2-8): the founding-date key read through a COMPUTED access off a named constant, the same discipline institutionFounding.js already uses for its two other pulse-written keys. Pinned so the cure cannot be silently reverted to a bare inst.foundedAt, which is what grounded the observed-shape walker in the first place.",
+     "path": "src/domain/institutionFounding.js",
+     "symbol": "const FOUNDED_AT_KEY"
+    },
+    {
+     "_note": "T2N'S DORMANCY ARM, RE-STATED AS AN EXACT ADMISSION MAP (J-TEUC2-10) - the UC-4 ALLOWED_PRODUCTION_IMPORTERS idiom. The MARKER is pinned and never the admission COUNT: a new importer must red the arm, and the map is the machinery that makes it.",
+     "path": "tests/domain/resourceSites.test.js",
+     "symbol": "const ADMITTED_IMPORTERS = Object.freeze({"
     }
    ],
    "acceptanceCases": [

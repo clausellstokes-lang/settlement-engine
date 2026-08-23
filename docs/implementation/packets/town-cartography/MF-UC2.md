@@ -1,8 +1,11 @@
 # Town cartography / MF-UC2 — the undercity's MONOTONE COMPONENTS: `deriveMonotoneComponents` derives the crypts under what buries, the pit a dated year of mass death digs, the undercrofts under what stores and their smuggler subset, the workings at the dossier's own seams, and the sealed vaults under what arms and what judges — monotone by construction, abandoned but never erased, and dark
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** 1
-- **Verified base:** `claude/composite-r4` at `1b1de759155631b61659d8faff7fe69836687385`
+- **Verified base:** `claude/composite-r4` at `f1e4d5150748f13cc27fbbb2d34db614d49d7620`
+  ⚠⚠ **AS AUTHORED — the row above now names the LANDING SLOT (`f1e4d515`, MF-UC4's landing, the
+  45th; see §12 below); the BUILD base was `1b1de759155631b61659d8faff7fe69836687385`.** The
+  continuation that follows was written at that BUILD base:
   — the MF-UC1 landing (ODQ §484's slot), read with `git rev-parse` at the lane's opening and
   re-read at every proof below. Every figure in this packet was executed at THIS base by the
   implementing lane TE-UC2; nothing is inherited from the charter (`draft-UNDERCITY-PLAN.md`,
@@ -498,3 +501,89 @@ No other member-caused red stands at this tip.
 | J-TEUC2-10 | **`tests/domain/resourceSites.test.js` (a second landed sibling) is MODIFIED** — its dormancy arm becomes an EXACT ADMISSION MAP rather than an empty list | The alternative was to stop consuming T2N, which would mean re-deriving where a seam sits: the second truth the charter forbids by name. The arm's real claim — golden inertness on the GENERATION path — is untouched by a dormant consumer. Refused: deleting the arm (that disables a guard); a bare `length <= 1` (that is a budget, not a ratchet); leaving it red (charter §4 authorizes exactly ONE interior red and it is the census row) |
 | J-TEUC2-11 | **The §469 classification is discharged by INPUT PROVENANCE rather than by a second whole-corpus run in the chair baseproof** | The five banked test FILES are byte-IDENTICAL between this tree and `chair-baseproof-b10ed1a1` (whose porcelain is 0), so their assertion blocks cannot differ for any reason this member caused. The ONE banked red whose input this member DOES move is `enforcement-claims`, which scans `docs/**.md` — and that is settled by measurement instead of by argument: CLAIM_RE counts 0 at BASE and 0 at TIP over both touched docs, DELTA 0. A second full-corpus run at a base four landings older would have compared a different test population, not a cleaner one. Refused: skipping the question; asserting "pre-existing" from the title alone |
 | J-TEUC2-12 | **The surge pit is anchored at the CODEPOINT-first burying institution, and the leaf was CHANGED to make that true** | The first draft passed the pre-sort array and anchored at the ROSTER-first crypt while its own comment claimed codepoint-first. The acceptance caught the divergence (pit at `multiple_monasteries`, codepoint-first crypt `great_cathedral`). Fixing the COMMENT would have been the cheaper lie; the reading must be stable across every derivation of the same settlement, so the code moved |
+
+## §12 · THE LANDING SLOT (TE-UC2-LANDING, 2026-08-23 — slot `f1e4d515`, MF-UC4's landing, the 45th)
+
+Landed by lane **TE-UC2-LANDING**, **`[OPUS-RUN · FABLE-VALIDATION OWED]`** (ODQ §484). The lane
+moved no ref; the chair executes the CAS `f1e4d515 → this tip`.
+
+- **Carry-proof at blob level FIRST** (braced `${sha}:path` with `git rev-parse --verify --quiet`
+  throughout; ⚠ a BARE `git rev-parse sha:path` ECHOES ITS ARGUMENT on failure, so an abbreviated
+  slice prints the COMMIT sha as if it were a blob). Of the **8** member paths, **three are created
+  by this member** (the packet, `src/domain/undercity/monotoneComponents.js`,
+  `tests/domain/undercityMonotoneComponents.test.js` — ABSENT at base AND at slot), **two moved** at
+  the slot — `docs/implementation/INDEX.md` (`509d51b48d` → `eff57cc375`) and
+  `docs/implementation/PACKET_MANIFEST.json` (`5c0c41a555` → `61ea072df6`) — and the other **three
+  are the SAME blob at base and slot**, so no code path collided: `src/domain/institutionFounding.js`
+  (`1f4ac865a9`), `tests/domain/resourceSites.test.js` (`36819ff0dc`) and
+  `tests/lint/ruinFilterRoster.walker.test.js` (`f6c6d1b540`). The roster walker's UNMOVED reading
+  was PROVED rather than assumed from UC-4's diff. Controls: `package.json` `2b5ec2014c` and
+  `package-lock.json` `1a8a80b12b` identical at base, slot and holding (no mint trigger crossed),
+  and a nonexistent path under `src/domain/undercity/` resolved ABSENT at all three.
+  `tests/lint/sovereigntyLightingContract.walker.test.js` MOVED at the slot (`53f2aae16f` →
+  `6edf58a3fa`) and this member does not touch it, so the slot's version simply carries — and it is
+  the file the census row below re-stamps.
+- **§475: this member owes NO regen, and none was run.** Neither `institutionFounding.js` nor the
+  leaf nor anything under `src/domain/undercity/` appears in any of the five
+  `supabase/functions/_shared/*.meta.json` input rosters (0 hits each; positive control
+  `cohesionWeave.js` hits 3 of the five). `package-lock.json` is UNMOVED, so the install is the same.
+- **The rebase stopped TWICE** — at 2/4 (`df0addbf9`, the packet at DRAFT) and at 3/4 (`b68301666`,
+  the flip to READY) — both times on `docs/implementation/INDEX.md` ALONE, one conflict hunk each.
+  `PACKET_MANIFEST.json` AUTO-MERGED cleanly at both stops: this member's row sits at array position
+  165 rather than last, so the closing-brace comma seam UC-4 had to hand-surge never arose. The leaf
+  commit and the final docs commit applied with zero stops, as their unmoved blobs predicted.
+- **Surgery, keep-both, by text only.** INDEX: this row placed FIRST at the "Current packet set"
+  head, above MF-UC4 — the table is newest-first, so **no slot row moved**; `diff SLOT resolved` is
+  **+1 / −0**, the added line `cmp`s 0 (4,437 B) against this member's own authored row, the MF-UC4
+  slot row `cmp`s 0 (3,906 B) against the slot's, and the diff CONTENT-line sha256 is identical
+  base→holding and slot→tip (`ee169208508bf3e9…`) with matching hunk headers. MANIFEST: deep-compare
+  **167 → 168, ADDED=["MF-UC2"], REMOVED=[], DRIFTED=[]**, non-packet keys identical, slot row ORDER
+  preserved, and the inserted block byte-identical to the holding's (sha256 `8ae984b09a2f5408…`, 202
+  lines, 17,739 B). Of the 8 paths, **six are blob-identical to the holding** at the rebased tip; the
+  two that differ are exactly the two that moved.
+- **The status walk — THREE places, not one** (§486.2): the manifest row (`status` READY → LANDED,
+  `verifiedBase` → the slot sha `f1e4d5150748f13cc27fbbb2d34db614d49d7620`, `requiredSymbols`
+  **16 → 21**), this packet's own Markdown header, and the **INDEX STATUS column**, which the
+  validator reaches through the manifest's `indexPath`. The five added rows are the closed kind
+  vocabulary `MONOTONE_COMPONENT_KINDS`, the one tuning surface `MONOTONE_EXTENT_TUNING`, the public
+  accessor `monotoneZoneKeys`, the T2Q cure's named constant `FOUNDED_AT_KEY`, and T2N's admission
+  map `ADMITTED_IMPORTERS`. ⛔ Every one is a symbol or a marker and **not a count** — each occurs
+  EXACTLY ONCE in its file (control: an invented symbol occurs 0 times) — because a re-recorded
+  FIGURE in `requiredSymbols` is refused by the estate's own law (ODQ TE-26). The ruin-filter MARKER
+  and `deriveMonotoneComponents` were already pinned at READY and were not duplicated.
+- **The census row, written ONCE here and re-derived by execution (§420/§457/§469/§480.2):** the slot
+  read `2514/366/2148/20846/5806`; the DELTA `+1/+0/+1/+8/+1` that crossed re-derives to
+  **`2515/366/2149/20854/5807`**, each moved figure read from the arm's own failure message in
+  assertion order and never computed (`expected 2515 to be 2514` → `expected 2149 to be 2148` →
+  `expected 20854 to be 20846` → `expected 5807 to be 5806`), the whole arm green at the end
+  (33/33). ⭐ `parked` PASSED unmoved at **366** on every iteration, which is the receipt that the
+  acceptance file is CREDITED rather than an inference from its shape. Two negative controls (the
+  slot tuple back; `suiteTitles` alone back) both red as predicted and the file restored `cmp` 0
+  each time.
+- **The two other test files this member edits move NO census figure, counted at both ends:**
+  `tests/domain/resourceSites.test.js` is 1 `describe` / 6 tests at the SLOT and 1 / 6 at this tip
+  (the admission map sits inside a body that already existed), and
+  `tests/lint/ruinFilterRoster.walker.test.js` is 1 / 5 at both ends (only the literal and its
+  disposition comment moved). The acceptance file is 1 `describe` / 8 `it()` / **0** loop
+  registrations — the whole of the delta.
+- **`ruinFilterRoster` proved at BOTH ends by execution:** **91 GREEN at the slot** (a temporary
+  detached worktree at `f1e4d515` with this lane's `node_modules` linked — `Tests 12 passed (12)`)
+  and **92 GREEN at the tip** (`Tests 12 passed (12)`); the control that puts 92 back to 91 at the
+  tip reds with `expected 92 to be 91` and the restore is `cmp` 0.
+- **⭐ THE §489.3 GREP-DRIVEN ARM, and what it caught.** Every symbol, const and enum value this
+  member adds was grepped with `git grep -l -F` across ALL of `tests/`; the union of hits is 8 files,
+  all already in this landing's focused battery. Because the member ADDS a `src/domain/**` file the
+  arm was then widened structurally — every test OUTSIDE the sweep's eleven trees that reads `src/**`
+  from disk and mentions `src/domain`, **71 files in one mutexed run**: `Test Files 1 failed | 70
+  passed (71)`, `Tests 4 failed | 786 passed (790)`. The one red is `tests/copy/voiceMechanics.test.js`,
+  a `src/data` + `src/domain` string-literal debt ratchet in a tree no sweep covers — the §489 shape
+  exactly. It is **BANKED and NOT CURED**: all four of its failing titles are entries in
+  `scripts/.test-ratchet-baseline.json` (4 of its 11), and at the SLOT the same file reads
+  `Tests 4 failed | 12 passed (16)` with the JSX arm byte-for-byte identical (`expected 19 to be less
+  than or equal to 6` — this member adds no `.jsx`, so that arm alone convicts the file as red at the
+  slot). The E2 total moves **1467 → 1468** against a budget of 670, and the arm's own per-file diff
+  names the cause: `src/domain/undercity/monotoneComponents.js: baseline em:0 bang:0 → current em:1
+  bang:0` — ONE em-dash, inside the engine-internal extent-driver provenance receipt at the leaf's
+  `RARE_EVENT_DEPOSIT` row, not player copy. 59 other files sit over their baselines in the same
+  list. Recorded rather than repaired (J-UC2L-1): the ratchet is presence-based by title, so nothing
+  regresses, and rewriting a member leaf at the landing act would void the build lane's byte proofs.
