@@ -21316,12 +21316,12 @@
     },
     {
       "id": "MF-T2R",
-      "status": "BLOCKED",
+      "status": "READY",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T2R.md",
       "verifiedBase": "b10ed1a1f5a0f2acd00bbfc9b5d0a41931697c3d",
       "changeManifest": [
         {
-          "_note": "THE READER, Shape 1 (charter §2; ODQ §433 C2): deriveHighWater re-expressed from the sealed tierGrammar.js (refs/preserve/map-sandbox-w3f-sealed, SHA-256 f152d700…, re-hashed before the port) over the LANDED popToTier / POPULATION_RANGES / TIER_ORDER rather than a second tier table. Channel 1 in TWO ARMS under declared precedence (ODQ §434): the monotone peakTier stamp LEADS, the stored-tier-above-popToTier disagreement is the RESIDUAL; the §434 gap typed as NO_PEAK_TIER_STAMP with understated:true, never a guessed peak. Channel 2 declares the MEASURED twelve-entry window; channel 3 sums dated exodus. Pure, total, frozen v1 (derivation HIGH_WATER_V1). 107 effective of 250. Cast-free: HighWaterInput typedef and an enumerated TIER_FLOOR map, so the any-cast ledger owes nothing.",
+          "_note": "THE READER, Shape 1 (charter §2; ODQ §433 C2): deriveHighWater re-expressed from the sealed tierGrammar.js (refs/preserve/map-sandbox-w3f-sealed, SHA-256 f152d700…, re-hashed before the port) over the LANDED popToTier / POPULATION_RANGES / TIER_ORDER rather than a second tier table. Channel 1 in TWO ARMS under declared precedence (ODQ §434): the monotone peakTier stamp LEADS, the stored-tier-above-popToTier disagreement is the RESIDUAL; the §434 gap typed as NO_PEAK_TIER_STAMP with understated:true, never a guessed peak. Channel 2 declares the MEASURED twelve-entry window; channel 3 sums dated exodus READ THROUGH the existing dossier projection display/calamityLedger.js (ODQ §443 C-a — the townMap/changeView.js precedent; DISPLAY-LAZY by inheritance, first-paint consumers refused by the vendorPdfLazy byte budget), so the observed-shape reader walker holds at 387/1409/1995. Pure, total, frozen v1 (derivation HIGH_WATER_V1). 104 effective of 250. Cast-free: HighWaterInput typedef and an enumerated TIER_FLOOR map, so the any-cast ledger owes nothing.",
           "action": "CREATE",
           "path": "src/domain/highWater.js"
         },
@@ -21366,6 +21366,11 @@
           "symbol": "export function forceCalamityStrike"
         },
         {
+          "_note": "THE ONE APP-SIDE PROJECTION OF THE STRIKE RECORD that channel 3 reads through (ODQ §443 C-a). Renaming or re-shaping it (count / totalExodus) silently changes the high-water peak; a second direct read of the persisted record would re-open the observed-shape reader red this ruling closed.",
+          "path": "src/domain/display/calamityLedger.js",
+          "symbol": "export function buildCalamityLedger"
+        },
+        {
           "_note": "THE ANCHORED-NEGATIVE ROUTE (preamble §P3): every absence assertion in the acceptance routes through this helper BY NAME so the anchor walker can see it.",
           "path": "tests/helpers/anchoredNegatives.js",
           "symbol": "export function expectAbsentWithAnchor"
@@ -21408,7 +21413,7 @@
       ],
       "checks": [
         [ "npx", "vitest", "run", "tests/domain/highWater.test.js" ],
-        [ "npx", "vitest", "run", "tests/lint/negativeAssertionAnchor.walker.test.js", "tests/lint/domainAnyCastBaseline.test.js" ],
+        [ "npx", "vitest", "run", "tests/lint/negativeAssertionAnchor.walker.test.js", "tests/lint/domainAnyCastBaseline.test.js", "tests/lint/observedShapeReaders.walker.test.js" ],
         [ "npx", "vitest", "run", "tests/property/generatorGoldenMaster.test.js" ],
         [ "npx", "vitest", "run", "tests/lint", "tests/build", "tests/ops" ],
         [ "npm", "run", "typecheck:ratchet" ],

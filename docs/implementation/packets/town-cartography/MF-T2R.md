@@ -1,6 +1,6 @@
 # Town cartography / MF-T2R — the HIGH-WATER evidence read landed app-side, and the three channels proven whole: `deriveHighWater` re-expressed from the sealed tip over the LANDED tier table, channel 1 read under declared `peakTier` precedence, and the two writer rosters that keep the channels honest frozen by source scan
 
-- **Status:** BLOCKED
+- **Status:** READY
 - **Packet version:** 1
 - **Verified base:** `claude/composite-r4` at `b10ed1a1f5a0f2acd00bbfc9b5d0a41931697c3d`
   — the CT-3 landing, read with `git rev-parse` at the lane's opening and re-read at the
@@ -47,8 +47,8 @@
 - **Commit authority:** the executing lane commits on its own detached ref; the chair moves
   the branch. This lane moved no ref. ⚠ The member's first commit (`23e0bcd9`) was a session
   checkpoint made with `--no-verify` (declared lawful at §439.4); the hook ran on the packet
-  commit. The code tip is `a6001d47` (both delivered blobs hashed there and byte-identical at
-  the packet tip); every resume-era proof in §10 was executed against it.
+  commit and on the §443 follow-on. The leaf moved ONCE after the checkpoint — the §443 C-a cure
+  — and every §10.2 proof was re-executed against the cured blob `021808ba…`.
 
 > **`censusAuthorization`:** this packet moves the test census by
 > **`+1 files / +0 parked / +1 credited / +7 titles / +1 suiteTitles`** — exactly the charter's
@@ -67,9 +67,9 @@
 > edit was made, proved green, and then REVERTED ON PURPOSE at the member commit: the row is
 > inserted by the chair's landing act at the train terminal, so the census arm of
 > `sovereigntyLightingContract.walker` REDS at this member's tip — **that is the ONE NAMED
-> interior red (charter §6 / preamble §P7.12), not a defect.** ⛔ A SECOND, UNNAMED red stands
-> at this tip and is the STOP of §10.1 — it is NOT lawful interior debt and the packet is BLOCKED
-> on it. The exact text to paste, replacing
+> interior red (charter §6 / preamble §P7.12), not a defect.** A second member-caused red
+> (the observed-shape reader walker) was raised at the resume, RULED at §443 and CURED in the
+> follow-on — §10; no other red stands at this tip. The exact text to paste, replacing
 > the `files: … suiteTitles: …` line inside the `CENSUS` object (at ~`:5240` at this base), is:
 >
 > ```
@@ -113,7 +113,7 @@
 >
 > | file | action | SHA-256 (committed blob) | effective lines |
 > |---|---|---|---:|
-> | `src/domain/highWater.js` | CREATE | `718bcee4400404aaab9e12bcd1a5a8db1b5d8379d29b5e4c65480d35093dcf26` | **107** of 250 (charter predicted ~80–110) |
+> | `src/domain/highWater.js` | CREATE | `021808baf043477d924fb1e5a1820df30f8298cc29982737650c9f868dd701f8` (the §443 follow-on; `718bcee4…` at `a6001d47`) | **104** of 250 (107 before §443; charter predicted ~80–110) |
 > | `tests/domain/highWater.test.js` | CREATE | `bfa9371fa5f3ef8825ebb0c62e32fb1c92dde8ca65475cd3aa3716fa90484c15` | 197 (test; not a production budget) |
 >
 > Neither path exists at `b10ed1a1` (`git ls-tree b10ed1a1 -- <path>` is empty for both and for
@@ -133,7 +133,8 @@ J2 ratified at §433 C2) and one acceptance file carrying two structural rosters
    import a generation-side module; a domain-root leaf has no such constraint, and a second tier
    table would be a second truth. The leaf reads the LANDED `popToTier` / `POPULATION_RANGES` /
    `TIER_ORDER`. The channels and the understate-never-invent law port verbatim in substance;
-   the window prose states what the engine MEASURABLY does (§2.3).
+   the window prose states what the engine MEASURABLY does (§2.3). Channel 3 is read through
+   the existing dossier projection `display/calamityLedger.js` (ODQ §443; §2.4).
 2. **Channel 1 read in TWO ARMS under DECLARED PRECEDENCE (ODQ §434):** the monotone
    `config.peakTier` / `_config.peakTier` stamp LEADS; the stored-`tier`-above-`popToTier`
    disagreement is the RESIDUAL. Both are read; neither invents. Where the stamp is absent the
@@ -243,6 +244,20 @@ prose reads "the ring settles at 12 — 11 retained plus one appended", and
 `RING_WINDOW_SATURATED` fires at `history.length >= 12`. Declared divergence from the sealed
 prose; the charter's acceptance 4 ("ELEVEN-entry window") is amended by §434 to TWELVE.
 
+### §2.4 Channel 3 reads the calamity LEDGER, not the strike record (ODQ §443)
+
+`buildCalamityLedger(s)` projects each persisted stamp through `projectCalamityStamp`
+(`exodus` → `Math.max(0, Math.floor(num(exodus, 0)))`, non-object stamps dropped) and returns
+`{ entries, count, totalExodus, … }`; channel 3 reads `count` and `totalExodus`, so
+`population = current + Σ exodus` and the `DATED_LOSSES` evidence line are BEHAVIOR-IDENTICAL to
+the direct read on every engine stamp (`calamityKernel.js` writes integer `exodus`, e.g. 840 in
+A2). The ONE declared narrowing: on a MALFORMED record a fractional `exodus` is floored and a
+non-object entry is not counted — the ledger's honest count, never an invented soul. The window
+prose names the channel as `the calamity ledger: N dated loss record(s)`. `HighWaterInput`
+types the field by importing the ledger's own `CalStampLike`, so the projection is called
+without a cast and both typecheckers hold their ceilings. The leaf inherits the ledger's
+DISPLAY-LAZY law (header; §10.2).
+
 ## §3 · THE TWO ROSTERS, MEASURED AT THIS BASE (the §417 wrong-denominator lesson applied)
 
 Both scans walk EVERY non-test `.js` under `src/domain/worldPulse` (413 files, 394 top-level,
@@ -290,12 +305,13 @@ writer cannot arrive without reddening the exact-set line and being adjudicated 
 | 8 | anchors (§P3) | `tests/lint/negativeAssertionAnchor.walker.test.js` 9/9 green at the member; every negative carries `// anchored:` or routes through `expectAbsentWithAnchor` BY NAME. ⚠ The walker reds on a two-line `// anchored:` comment whose LAST line lacks the marker — found and cured before the proof |
 | 9 | census tuple at base, re-derived | `2497 / 364 / 2133 / 20723 / 5785` (the charter's `20719` was stale) |
 | 10 | census tuple with the member, read from the walker's own failure messages then confirmed green 33/33 | `2498 / 364 / 2134 / 20730 / 5786` — exactly `+1 / 0 / +1 / +7 / +1`; then REVERTED per §417 (the named interior red) |
-| 11 | effective lines, eslint `Linter` `max-lines {skipBlankLines, skipComments}` | leaf **107** of 250; no hot file opened; no `scripts/.size-baseline.json` row |
+| 11 | effective lines, eslint `Linter` `max-lines {skipBlankLines, skipComments}` | leaf **104** of 250 after §443 (107 before); no hot file opened; no `scripts/.size-baseline.json` row |
 | 12 | `package.json` / `package-lock.json` motion | none — no §349.2 mint trigger; the lane's `npm ci` tree stays valid (`npm ls` exit 0) |
 | 13 | the two typecheck configurations, by name, bare, at the member tip | `typecheck:ratchet` → `[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).` exit 0 · `typecheck:domain:strict` → `[domain-strict] ✓ no strict-type regressions (1134 errors, ceiling 1134).` exit 0 |
 | 14 | `tests/lint/domainAnyCastBaseline.test.js` (the monotone-down any-cast ledger) | RED at `23e0bcd9` (three `any`-holes in the leaf — MINE); CURED at `a6001d47` by typedef (`HighWaterInput`; `TIER_FLOOR` built by enumeration), never by widening; re-proved green |
 | 15 | raw C0 control bytes in every authored file (`LC_ALL=C grep -c $'[\x01-\x08\x0b\x0c\x0e-\x1f]'`) | 0 in the leaf, the test, this packet, the manifest and the index — U+001F has entered lane prose three times this program, so it is scanned, not assumed |
 | 16 | the enforcement-claims `CLAIM_RE` (`tests/docs/enforcement-claims.test.js`) over this packet | 0 hits |
+| 17 | `tests/lint/observedShapeReaders.walker.test.js` with the member (after §443) | GREEN; `A1/A7` reads **387 / 1409 / 1995**, the base figures exactly — the leaf adds NO reader row (§10.2) |
 
 ## §5 · ACCEPTANCE — SEVEN ARMS, ONE LITERAL `describe`, STRAIGHT-LINE `it` (7/7 green, exit 0)
 
@@ -305,7 +321,7 @@ read, and the channels proven whole')`:
 | # | arm | what it proves |
 |---|---|---|
 | A1 | **guard-the-guard** | `PULSE_FILES > 300`, the walk DESCENDS (a path deeper than four segments exists), both scans non-empty, `HIGH_WATER_CHANNELS.length === 4`, `HIGH_WATER_GAPS.length === 2` — before any roster assertion can pass on nothing |
-| A2 | **the lived interval, with and without the strike** (charter acceptance 1+2, the §306.2 input-trap law) | a real settlement through `forceCalamityStrike` (year 20, tick 1040, catastrophic): ONE dated stamp, `exodus > 0`, `result.population === current + exodus`, `demoted: true`, `DATED_LOSSES` credited, the evidence names the souls; the COUNTERFACTUAL without the strike reads `population === current`, `demoted: false`, `deficit: 0`, and `DATED_LOSSES` ABSENT (anchored by the positive arm above it); plus the determinism companion (`toEqual` on a second derivation) |
+| A2 | **the lived interval, with and without the strike** (charter acceptance 1+2, the §306.2 input-trap law; channel 3 via the calamity ledger after §443 — 7/7 re-proved, walker at 387/1409/1995) | a real settlement through `forceCalamityStrike` (year 20, tick 1040, catastrophic): ONE dated stamp, `exodus > 0`, `result.population === current + exodus`, `demoted: true`, `DATED_LOSSES` credited, the evidence names the souls; the COUNTERFACTUAL without the strike reads `population === current`, `demoted: false`, `deficit: 0`, and `DATED_LOSSES` ABSENT (anchored by the positive arm above it); plus the determinism companion (`toEqual` on a second derivation) |
 | A3 | **channel 1's declared precedence** (§434 ruling 1) | stamp present → `PEAK_TIER_STAMP` credited, `demoted: true`, `TIER_DISAGREEMENT` absent (anchored); stamp absent with a stored tier above its population → `TIER_DISAGREEMENT` credited, the evidence says "a recorded demotion", `PEAK_TIER_STAMP` absent (anchored); BOTH present → `channels` is exactly `['PEAK_TIER_STAMP']` and `population` is 5,001 (the LANDED city floor) |
 | A4 | **channel 2's TWELVE-entry window** (§434 ruling 4) | `RING_WINDOW_ENTRIES === 12 === RING_RETAINED_PREFIX + 1`; a ring built by the engine's own idiom for thirty writes settles at 12; the window prose carries "the ring settles at 12" and "11 retained plus one appended" (positive control); `RING_WINDOW_SATURATED` present; the 9,000 peak that fell out thirty writes ago is UNDERSTATED — `population === 430`, `demoted: false` |
 | A5 | **the frozen ring-writer roster** (§434 ruling 3) | live scan `toEqual` the frozen eleven rows; nine `append`, one `constructor`, exactly one `UNCAPPED` |
@@ -319,8 +335,9 @@ written), no privacy boundary (no rendered surface), no idempotent-write case (n
 
 ## §6 · MUTANTS — m1–m4 ALL CONVICT, planted against the CURED leaf and restored digest-exact
 
-Harness `/tmp/t2r/mutants.sh`; every conviction re-run and re-banked against the cured leaf
-`718bcee4…` (test `bfa9371f…`) so no conviction rests on the pre-cure shape:
+Harness `/tmp/t2r/mutants.sh` (re-run mutexed as `mutants-443.sh`); every conviction re-run and
+re-banked against the cured leaf `718bcee4…` and AGAIN against the §443 leaf `021808ba…` (test
+`bfa9371f…`), so no conviction rests on a superseded shape:
 
 | # | mutant | expected | executed |
 |---|---|---|---|
@@ -328,7 +345,7 @@ Harness `/tmp/t2r/mutants.sh`; every conviction re-run and re-banked against the
 | m2 | channel 3's exodus addition dropped | A2 red | **RED** — `population` reads `current`, not `current + exodus` |
 | m3 | understate flipped to INVENT (a peak floor raised without evidence) | A7 red | **RED on A2, A4 AND A7** — the invention shows up everywhere the reader is supposed to stay at its floor |
 | m4 | the scan walk stops recursing | A1 red | **RED** — the nesting assertion in the guard-the-guard arm |
-| control | the cured leaf restored | green | **PASS**, 7/7, digest `718bcee4…` reproduced |
+| control | the cured leaf restored | green | **PASS**, 7/7, digest `718bcee4…` reproduced; after §443 digest `021808ba…` reproduced |
 
 ⚠ **Two earlier mutant candidates were INERT and were REPLACED — the record matters (§P6):**
 a `>` → `>=` flip on the residual arm convicted nothing, because an equal-rank tier floor is
@@ -341,7 +358,7 @@ a property, never left as luck (J-TET2J-8).
 
 | Action | File | Region | Delta | Instruction |
 |---|---|---|---:|---|
-| `CREATE` | `src/domain/highWater.js` | new domain-root leaf | **107** effective of 250 | `deriveHighWater`, `HIGH_WATER_CHANNELS`, `HIGH_WATER_GAPS`, `RING_RETAINED_PREFIX`, `RING_WINDOW_ENTRIES`, `DEMOTION_THRESHOLD`; reads `../data/constants.js` only; pure |
+| `CREATE` | `src/domain/highWater.js` | new domain-root leaf | **104** effective of 250 | `deriveHighWater`, `HIGH_WATER_CHANNELS`, `HIGH_WATER_GAPS`, `RING_RETAINED_PREFIX`, `RING_WINDOW_ENTRIES`, `DEMOTION_THRESHOLD`; imports `../data/constants.js` and `./display/calamityLedger.js` (§443) only; pure; DISPLAY-LAZY by inheritance |
 | `CREATE` | `tests/domain/highWater.test.js` | new acceptance file | 197 (test) | one literal `describe`, seven straight-line `it`; the two source-scan rosters; anchored negatives through `expectAbsentWithAnchor` |
 | `DOC` | `docs/implementation/packets/town-cartography/MF-T2R.md` | new | — | this packet |
 | `DOC` | `docs/implementation/PACKET_MANIFEST.json` | one packet row appended by TEXT surgery (parsed to verify, never re-serialised) | — | registration |
@@ -357,8 +374,8 @@ does not attach. **Symbols the deliverable CREATES** (`export function deriveHig
 `const ARGUED_NON_SETTLEMENT`, the one describe title) join `requiredSymbols` **at the flip to
 LANDED, never at READY** (the MF-T2E/MF-T2F precedent; PACKET_STANDARD §"Change manifest").
 At READY the rows name only what the deliverable PRESERVES: the landed tier table and
-`popToTier`, the `peakTier` stamp write, the strike seam the acceptance drives, and the anchored
-helper. `retiredSymbols`: **EMPTY**.
+`popToTier`, the `peakTier` stamp write, the strike seam the acceptance drives, the ledger projection channel 3 reads through (§443),
+the coupling-census scope, and the anchored helper. `retiredSymbols`: **EMPTY**.
 
 ## §8 · JUDGMENT CALLS, VETOABLE
 
@@ -384,7 +401,12 @@ helper. `retiredSymbols`: **EMPTY**.
   `refs/preserve/holding-t2r` (= `a6001d47`) and a follow-on keeps that pin honest; the hook
   ran on the follow-on and every proof was re-executed at the tip. Say "veto" to flip it to a
   squash at landing.
-- **J-TET2R-7 — the packet is committed at BLOCKED, not READY, because §10.1's STOP stands.**
+- **J-TET2R-8 — the ledger route's one narrowing DECLARED, not hidden (§2.4):** floor on a
+  fractional `exodus`, non-object stamps uncounted — identical on every engine stamp, honest on
+  malformed input. Chosen over re-implementing the projection's arithmetic in the leaf, which
+  would be the second reader the ruling exists to refuse.
+- **J-TET2R-7 — SUPERSEDED by ODQ §443.** The packet was committed at BLOCKED at `387a3b34`
+  because §10.1's STOP stood; the ruling cured it and the follow-on returns it to READY.
   PACKET_STANDARD rules that "READY except for" is DRAFT or BLOCKED; a READY flag on a member
   with an uncured member-caused red would invite the landing act. The DRAFT → READY walk was
   executed and validated green at both (receipt), then the status moved to BLOCKED with the
@@ -400,6 +422,12 @@ helper. `retiredSymbols`: **EMPTY**.
 | O-i | **Stamp `peakTier` on the DEMOTING paths** (`calamityKernel.js` strike seam, `tierOutcomeApply.js` demotion branch, `settlementLifecycleFirstClass.js` resettle) so a future demotion leaves channel-1 evidence where it stands today erased. | Same-seed PULSE motion: one typed field on every settlement that demotes. The T2Q-class bill — the pinned post-pulse artifacts enumerated and the motion attributed key-by-key (§421(2)); the RS-5 obligation attaches at exposure (§312.2c). S0's A/B counterfactual (§1) is the evidence. |
 | O-ii | **Cap the ring append in `realmVerbExecution.js`** (today `[...history, {…}]` with no `.slice` — 30 writes, 30 entries; every sibling writer caps at 11 retained). | A real defect whose cure MOVES same-seed state (a parent's ring shrinks to 12). Same declared-shift protocol; until ruled, the writer is frozen as-is by A5 and only ever HELPS this reader. |
 
+### Deferred, with the ruling that parks it
+
+| # | item | where it rides |
+|---|---|---|
+| D-1 | **The estate cure for pulse-written keys under the observed-shape reader walker** — a `pulse-time-writer` mechanism row in `EXPLAINED_WRITER_EXEMPTIONS` for `calamityHistory on settlement` (writer `worldPulse/calamityKernel.js`), the governed re-freeze, and the walker's pinned literals re-read off it. | **The estate cure rides the trailing OSR mint (§384.2)** — ODQ §443 C-b. Not this member's; recorded here so the next reader of a pulse-only key finds the docket instead of the red. |
+
 ### Chair (recorded; nothing here blocks the landing)
 
 1. **RAISED-1 — the port tranche's C5 carry row is live:** the tierGrammar port imports this
@@ -414,7 +442,7 @@ helper. `retiredSymbols`: **EMPTY**.
    leaves are generated and un-pulsed; W4's retrospective-partition work (§306.4(c)) owns that
    cut, and a packet predicting a passing benchmark arm from this member has mis-predicted.
 
-## §10 · THE GATES, AND THE ATTRIBUTION OF EVERY RED — ⛔ ONE STOP STANDS
+## §10 · THE GATES, AND THE ATTRIBUTION OF EVERY RED — ONE STOP RAISED, RULED AT §443, CURED
 
 **Executed at the resume (2026-08-22 evening CDT), every exit captured in-shell, every vitest
 invocation under `scripts/gate-mutex.sh --run` on the shared lock, logs under `/tmp/t2r`:**
@@ -423,19 +451,19 @@ invocation under `scripts/gate-mutex.sh --run` on the shared lock, logs under `/
 |---|---|---|---|
 | `npm run typecheck:ratchet` | — | `[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).` exit 0 | GREEN at the exact ceiling |
 | `npm run typecheck:domain:strict` | — | `[domain-strict] ✓ no strict-type regressions (1134 errors, ceiling 1134).` exit 0 | GREEN at the exact ceiling |
-| `npm run validate:packets` | — | `valid: 149 packets` at DRAFT, at READY and at BLOCKED, exit 0 each | GREEN |
+| `npm run validate:packets` | — | `valid: 149 packets` at DRAFT, at READY, at BLOCKED and at READY again after §443, exit 0 each | GREEN |
 | `tests/lint/domainAnyCastBaseline.test.js` | green | RED at `23e0bcd9` (MINE) → CURED by typedef at `a6001d47`, green | the FIRST member-caused red, cured |
 | `tests/lint/sovereigntyLightingContract.walker.test.js` (census arm) | green | RED by construction | the ONE NAMED interior red (census note; §417 T2J shape) |
 | `clampPrimitiveBaseline` · `warCostKindPools.walker` · `warRulingKindPools.walker` | RED | RED, identical | PRE-EXISTING at base (isolation: red with the member moved aside) |
 | `observedShapeSentinel` · `exportTokenCoverage` · `proseFamilyContract.walker` · `readerShapeResolver` · `siteCoherenceRatchet` · `postureNameCollision.walker` · `tests/build/townScene3dLazy` · `tests/build/townSceneLocalMatrixAudit` | **PASS** (9 files, 221 passed, exit 0, `attrib-base.log`) | **PASS** (8 of the 9 files, `attrib-work.log`) | the §408 sweep's reds on these eight were LOAD STRAYS of a contended run (the §393 class — budget timeouts wearing real tests' names); they do not fail quiet in either tree. `dist/` was ABSENT in both trees; the two `tests/build` files pass without it |
-| **`tests/lint/observedShapeReaders.walker.test.js`** | **PASS** | **RED — 2 arms** | ⛔ **MINE. THE SECOND MEMBER-CAUSED RED. STOP.** |
+| **`tests/lint/observedShapeReaders.walker.test.js`** | **PASS** | **RED — 2 arms at `a6001d47`; GREEN at the §443 follow-on** | **MINE — the second member-caused red; STOPPED, RULED (§443 C-a), CURED** (§10.1–§10.2) |
 | `tests/docs` (20 files) + `tests/scripts/implementationPackets.test.js`, with the packet, manifest row and index row in place | `enforcement-claims` RED on SIX naked claims (`FABLE_VALIDATION_QUEUE.md` ×4, `GOLDEN_SHIFT_LEDGER.md`, `IN-0C.md`), `docs-claims-base.log` | the SAME six, and nothing else (`docs-sweep.log`: 1 failed / 155 passed) | PRE-EXISTING naked-claim debt, identical set at base; this packet, its index row and the leaf add no claim (`CLAIM_RE` probe 0 hits) |
 
-### §10.1 ⛔ THE STOP — the smallest measured contradiction
+### §10.1 THE STOP — raised at the resume, RULED at ODQ §443, and CURED under the ruling
 
-`observedShapeReaders.walker` is GREEN at the base and RED with the member. Its two arms:
-`SHRINK-ONLY: no file exceeds its frozen ceiling, and no row has vanished` reads
-`{ violations: 1, stale: 0 }` against `{ violations: 0, stale: 0 }`; `A1/A7` reads
+At the resume, `observedShapeReaders.walker` was GREEN at the base and RED with the member:
+`SHRINK-ONLY: no file exceeds its frozen ceiling, and no row has vanished` read
+`{ violations: 1, stale: 0 }` against `{ violations: 0, stale: 0 }`, and `A1/A7` read
 `files 388 / identities 1410 / reads 1997` against the pinned `387 / 1409 / 1995`. Reproduced
 outside vitest with the walker's own composition (`osr-repro.mjs`, exit 0); the ONE violation,
 verbatim:
@@ -445,44 +473,51 @@ src/domain/highWater.js: read(s) of a key no writer produces, outside the frozen
     NEW      calamityHistory on settlement — 2 read(s); this file has no frozen row for it (ceiling 0)
 ```
 
-The site is `highWater.js:229`, channel 3's guard
-`Array.isArray(s.calamityHistory) ? s.calamityHistory : []`. The reader-with-no-writer
-ratchet measures the OBSERVED corpus — generated worlds — and on a generated world
-`calamityHistory` is never written: its writer is the PULSE-time strike seam
-(`calamityKernel.js`, the same module §1 convicts), which the corpus does not run far enough
-to see. That is the §306.2(a) finding itself, restated by an instrument: the channel is empty
-on every generated leaf and fills only in a lived interval (charter §1.2). The three existing
-readers of the key (`display/calamityLedger.js`, `worldPulse/calamityKernel.js`,
-`worldPulse/upswingKernel.js`) are banked as ordinary per-file debt at ceiling 2; the
-baseline's own law is *"never raise a number, never add a file, never add an identity"*, and
-the governed `--write` refuses a NEW row by design. ⚠ The same module's `config.peakTier` read
-was NOT flagged; the mechanism was not investigated (PLAUSIBLE: optional-chained reads through
-`config` are outside the resolver's reach) and nothing here rests on it.
+The site was the pre-ruling leaf's channel-3 guard (`Array.isArray(s.calamityHistory) …`,
+then at `:229`). The reader-with-no-writer ratchet measures the OBSERVED corpus — generated
+worlds — and on a generated world the strike record is never written: its writer is the
+PULSE-time strike seam (`calamityKernel.js`, the same module §1 convicts), which the corpus does
+not run far enough to see. That is the §306.2(a) finding itself, restated by an instrument: the
+channel is empty on every generated leaf and fills only in a lived interval (charter §1.2). The
+three existing readers of the key (`display/calamityLedger.js`, `worldPulse/calamityKernel.js`,
+`worldPulse/upswingKernel.js`) are banked as ordinary per-file debt at ceiling 2; the baseline's
+own law is *"never raise a number, never add a file, never add an identity"*, and the governed
+`--write` refuses a NEW row by design. ⚠ The same module's `config.peakTier` read was NOT
+flagged; the mechanism was not investigated (PLAUSIBLE: optional-chained reads through `config`
+are outside the resolver's reach) and nothing here rests on it.
 
 Separately and NOT this member's: `node scripts/check-observed-shape-readers.mjs` exits 1 at
 the base AND with the member with the schema-10 envelope-staleness line (the CT-2/CT-3
-MINT-class item) — a different instrument from the walker TEST, which is green at base.
+MINT-class item) — a different instrument from the walker TEST.
 
-**Charter §9.4 / preamble §P7.12 / the resume order: a second member-caused red is a STOP —
-report, never repair silently.** It is NOT cured here, and the packet is BLOCKED rather than
-READY (PACKET_STANDARD: "READY except for" is not a status).
+Under charter §9.4 / preamble §P7.12 this second member-caused red was REPORTED, not repaired:
+the lane held at `387a3b34` with the packet BLOCKED and the three cure shapes priced. **ODQ §443
+ruled it** (below) and the lane executed the ruling as a follow-on.
 
-### §10.2 The cure shapes, PRICED for the chair — no repair is speculated into the tree
+### §10.2 ⭐ THE RULING (ODQ §443) — C-a for the member, C-b for the estate, C-c refused
 
-| # | shape | cost | what it asks |
+| # | shape | ruling | state |
 |---|---|---|---|
-| C-a | **Route channel 3 through the existing banked reader.** `display/calamityLedger.js` exports `buildCalamityLedger(settlement)` (rows carry a numeric `exodus`) and ALREADY holds the banked `calamityHistory` read at ceiling 2; `src/domain/townMap/changeView.js` is the in-estate precedent ("the settlement's calamityHistory, projected through the existing dossier read"). The leaf imports it and reads no `calamityHistory` key. | ~3 effective lines in the leaf; re-run A1–A7, re-plant m2, anchor walker, any-cast ledger, both typecheckers, this walker; packet §2/§7 amended; census unchanged | a domain-root leaf importing a DISPLAY-LAZY leaf (its header: *"imported ONLY from lazy display/dossier surfaces"*, `@enforced-by tests/build/vendorPdfLazy.test.js`). `highWater.js` is DARK today and `changeView.js` already does this inside `townMap`, so the first-paint fence is not crossed now — but the tierGrammar port (C5) inherits the import, and the chair rules whether one app-side reader of the channel is the better architecture or a layering debt |
-| C-b | **Bank the identity under the explained-writer mechanism** — a new `EXPLAINED_WRITER_EXEMPTIONS` row `calamityHistory on settlement` with a new mechanism (`pulse-time-writer`, writer `worldPulse/calamityKernel.js`), then the governed re-freeze. | MINT-CLASS: the exemption is per-IDENTITY everywhere it appears (it re-classes the three banked rows too — a set-growing mint, the H26 shape); the re-freeze is BLOCKED today by the schema-10 envelope staleness; the walker's pinned literals (`reads 1995 / identities 1409 / files 387 / bankedReads 60 / taggedRows 40`) are re-read off the re-frozen baseline | the OSR mint lane, not this member; it also cures the CT-2/CT-3 staleness in the same act |
-| C-c | **Delete channel 3.** | — | REFUSED: acceptance A2 and the §306.2 law rest on it; the charter names the dated-loss channel as the strongest available proof |
+| C-a | **Route channel 3 through the existing banked reader** `src/domain/display/calamityLedger.js` (`buildCalamityLedger(settlement)`; rows carry `{year, tick, deaths, exodus, …}` via `projectCalamityStamp`) — the `townMap/changeView.js` precedent, same import spelling relative to `src/domain/`. | **RULED for the member.** The layering question is answered: `src/domain/display/**` is DOMAIN-side projection, not the UI layer, so a domain-root deriver importing it is lawful. Its DISPLAY-LAZY law (*"imported ONLY from lazy display/dossier surfaces, never from the first-paint entry closure"*, `@enforced-by tests/build/vendorPdfLazy.test.js`) **TRANSFERS to `highWater.js` by inheritance**: first-paint consumers of `deriveHighWater` are refused by the vendorPdfLazy byte budget. Its consumers are dormant derivers and lazy surfaces — the undercity UC-1/UC-4 readers of this leaf are consumed by the CT-4 prose and the D5 fabric, both lazy. | **EXECUTED** in this packet's follow-on commit: both reads of the persisted strike record replaced by the ledger projection; the inheritance written into the leaf header; §2.4 states the one declared narrowing |
+| C-b | **Bank the identity under the explained-writer mechanism** — a `pulse-time-writer` row in `EXPLAINED_WRITER_EXEMPTIONS` (writer `worldPulse/calamityKernel.js`) and the governed re-freeze, which also re-reads the walker's pinned literals. | **RULED for the estate; DOCKETED to the trailing OSR mint (§384.2)** — not this member's. | **DEFERRED — the estate cure rides the trailing OSR mint** (recorded in the deferred rows, §9) |
+| C-c | Delete channel 3. | **REFUSED** — acceptance A2 and the §306.2 law rest on it. | — |
 
-This lane's recommendation is **C-a** as the member's cure and **C-b** as the estate's cure, with
-the chair ruling the layering question C-a raises. Until ruled, the leaf is exactly the
-committed blob `718bcee4…` and nothing about it moved at the resume.
+**C-a, executed and re-proved at the cured leaf `021808ba…` (104 effective of 250, down from
+107), every exit captured, every vitest invocation mutexed (`reprove-443.log`,
+`osr-repro-443.log`, `mutants-443.log`, `typecheck-*-443.log`, `eslint-leaf-443.log`):**
+
+| proof | result |
+|---|---|
+| `tests/lint/observedShapeReaders.walker.test.js` | **GREEN** (27 tests) — the `A1/A7` literals read **`files 387 / identities 1409 / reads 1995`** with the member, exactly the base figures (quoted from the walker's own composition: `violations: 0 stale: 0`, `findings mentioning highWater: 0`, `{"reads":1995,"identities":1409,"files":387}`) |
+| acceptance `tests/domain/highWater.test.js` | **7/7 GREEN** |
+| anchor walker · any-cast ledger · generator golden | **GREEN** in the same run (5 files / 59 tests / exit 0); `tests/fixtures/generator-golden-master.json` still `29c6cc8f…` bytewise |
+| mutants m1–m4 re-planted against the NEW leaf | **ALL CONVICT on the same arms as before** — m1 → A4; **m2 (channel-3 exodus addition dropped) → A2, still**; m3 → A2 + A4 + A7; m4 → A1; each restored digest-exact to `021808ba…`; clean control 7/7 exit 0. No mutant went inert under the ledger route, so none was replaced |
+| `typecheck:ratchet` / `typecheck:domain:strict` | `(173 error(s), ceiling 173)` / `(1134 errors, ceiling 1134)`, exit 0 each — the ledger input is typed by importing `CalStampLike` from the ledger, never by a cast |
+| `npx eslint src/domain/highWater.js` | exit 0, no output |
+| C0 control bytes / `CLAIM_RE` | 0 / 0 |
 
 ### §10.3 What the resume did NOT do
 
-It did not re-run the banked acceptance, anchor, mutant or golden proofs (receipt law: the
-blobs they were banked against are byte-identical at this tip — leaf `718bcee4…`, test
-`bfa9371f…`, proved by `git show HEAD:<path> | shasum -a 256`). It did not run the full gate or
-`check:tail` (the landing terminal's act). It did not edit the walker, the baseline, the
-exemption bank, or the leaf.
+It did not run the full gate or `check:tail` (the landing terminal's act). It did not edit the
+walker, its baseline, or the exemption bank (the ruling's own prohibition). The `tests/docs`
+enforcement-claims red is the pre-existing six, identical at base, and was not touched.

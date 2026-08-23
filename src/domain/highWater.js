@@ -41,9 +41,20 @@
  * any rule below is a declared shift by construction, not a tweak.
  *
  * PURITY: pure reads and arithmetic. No `Date`, no `Math.random`, no `Intl`, no I/O.
+ *
+ * ⚠ DISPLAY-LAZY BY INHERITANCE (ODQ §443). Channel 3 is read through the existing dossier
+ * projection `display/calamityLedger.js` (`buildCalamityLedger`) rather than through a second
+ * read of the persisted strike record — ONE app-side reader of that channel (the
+ * `townMap/changeView.js` precedent), and the observed-shape reader walker holds the ceiling it
+ * already holds. That leaf is DISPLAY-LAZY ("imported ONLY from lazy display/dossier surfaces,
+ * never from the first-paint entry closure"), and the law TRANSFERS to this file: first-paint
+ * consumers of `deriveHighWater` are refused by the vendorPdfLazy byte budget
+ * (@enforced-by tests/build/vendorPdfLazy.test.js). Its consumers are dormant derivers and lazy
+ * surfaces — the CT-4 prose and the D5 fabric (the undercity UC-1/UC-4 readers), all lazy.
  */
 
 import { POPULATION_RANGES, TIER_ORDER, popToTier } from '../data/constants.js';
+import { buildCalamityLedger } from './display/calamityLedger.js';
 
 /**
  * THE CHANNELS, in the order they are TRUSTED. `channels` on the result lists exactly the
@@ -58,8 +69,9 @@ import { POPULATION_RANGES, TIER_ORDER, popToTier } from '../data/constants.js';
  *                             fires on saves, imports and every path that never demotes.
  *  3. `POPULATION_RING`     — `populationHistory[].population`, a real maximum but only
  *                             across the retained window (see RING_WINDOW_ENTRIES).
- *  4. `DATED_LOSSES`        — `calamityHistory` exodus stamps; each is population that WAS
- *                             here, so the pre-loss level is recoverable by addition.
+ *  4. `DATED_LOSSES`        — the calamity ledger's exodus stamps (the persisted strike record,
+ *                             projected by `display/calamityLedger.js`); each is population
+ *                             that WAS here, so the pre-loss level is recoverable by addition.
  * @type {ReadonlyArray<string>}
  */
 export const HIGH_WATER_CHANNELS = Object.freeze([
@@ -132,7 +144,7 @@ const floorOf = (tier) => num(TIER_FLOOR.get(tier), 0);
  * @property {unknown} [population]
  * @property {unknown} [tier]
  * @property {unknown} [populationHistory]
- * @property {unknown} [calamityHistory]
+ * @property {import('./display/calamityLedger.js').CalStampLike[]} [calamityHistory]
  * @property {{ peakTier?: unknown }} [config]
  * @property {{ peakTier?: unknown }} [_config]
  */
@@ -226,21 +238,19 @@ export function deriveHighWater(settlement) {
   }
 
   // ── CHANNEL 3 — dated losses. Each exodus is population that used to be present. ──
-  const calamity = Array.isArray(s.calamityHistory) ? s.calamityHistory : [];
-  if (calamity.length) {
-    let lost = 0;
-    for (const c of calamity) {
-      const e = num(c && c.exodus, 0);
-      if (e > 0) lost += e;
-    }
+  // Read through the ONE app-side projection of the strike record (§443): the ledger's rows
+  // carry a non-negative integer `exodus` per dated stamp, and `totalExodus` is their sum.
+  const ledger = buildCalamityLedger(s);
+  if (ledger.count) {
+    const lost = ledger.totalExodus;
     if (lost > 0) {
       readings.push({
         channel: 'DATED_LOSSES',
         peak: current + lost,
-        line: `${calamity.length} dated loss record(s) totalling ${lost} souls`,
+        line: `${ledger.count} dated loss record(s) totalling ${lost} souls`,
       });
     }
-    windows.push(`calamityHistory: ${calamity.length} dated loss record(s)`);
+    windows.push(`the calamity ledger: ${ledger.count} dated loss record(s)`);
   }
 
   // The peak is the highest justified reading; every channel that reaches it is credited,
