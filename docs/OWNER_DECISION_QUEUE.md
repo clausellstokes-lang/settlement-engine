@@ -18415,3 +18415,43 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   §450 ("~23:40"), §451 ("~23:55") and §452 ("00:15 08-23") run about two
   hours FAST; the wall clock at §452 was ~21:25 CDT 08-22. True order and
   content are unaffected; from this row every label is read from `date`.
+
+## §454 — WEB-5 LANDED (THE 29TH): IMPORT-VS-RESTORE SEMANTICS; WEB-6's GO ISSUED; MF-T2H's PENDING LANDED FLIP DOCKETED AS HK-2; THE OWNER'S TWO-SECOND POINT RECORDED (2026-08-22 21:40 CDT)
+
+- **§454.1 WEB-5 LANDED.** TE-WEB5-LANDING rebased 6d6572ea onto acc466a6
+  (two commits), walker = slot + `+0/+0/+0/+18/+4` → **2500/365/2135/20750/
+  5791** convicted with the control, manifest 151 → 152 zero drift, S0
+  pre-existing by lookup; terminal detached, ~22 min, never killed:
+  `TRUE_EXIT=0` + `[gate-tail] exit: 0` + `free_kb_at_end=10368264`; `28781
+  tests, ceiling 11` (+18 = the member's titles); `STRICT DIST OK 52/433`;
+  `valid: 152 packets (1 READY)`. The lane yielded its turn to its monitor
+  repeatedly (the WEB-4 habit); the chair's own monitor owned collection
+  and the chair re-read the body, ancestry and tuple before the CAS. **CAS
+  `acc466a6 → dffa2b97`.** Pruned holding-web5, laneTEWEB5-tree, /tmp/web5.
+  Disk 11Gi. Law sharpened in the WEB-6 brief: a landing lane OUTLASTS its
+  gate in its own turn; "waiting for the monitor" is not a stop point.
+- **§454.2 WEB-6 GO ISSUED** (TE-WEB6-LANDING; holding 5b0a399f over
+  19b799ce; delta `+0/+0/+0/+1/+0`; the packet is at DRAFT in the holding
+  commit → walked DRAFT→READY before the gate and READY→LANDED after the
+  green, WEB-4's pattern, with the carve-out stated: the flip commit is
+  docs-only status bytes over the gated tip; anything more re-fires).
+  Seats: WEB-6 landing · TE-UC3 · TE-WEB2 · TE-WEB3 (cap). Landing order
+  after WEB-6: WEB-7 → T2J → T2K → T2L → T2M → T2R → T2Q → T2N → UC-0.
+- **§454.3 HK-2 DOCKETED:** MF-T2H's packet is still READY on the branch
+  (its LANDED flip + the `requiredSymbols` rows that join at the flip are
+  pending since §442) — a docs-only housekeeping commit with
+  validate:packets + the reader-walker re-run (requiredSymbols resolve
+  live at every status). Rides with HK-1 at the next housekeeping seat.
+- **§454.4 Owner (in-chat, ~21:30 CDT):** "mine is also 2 seconds to build.
+  It's complex in construct but simple in calculations for a computer plus
+  our artwork design for the maps should give it something to compete
+  against all aesthetically at a very reasonable price." RECORDED as the
+  owner's positioning stance: the generation cost is not the gap (the
+  recon found ~6 s of PipelineReveal THEATRE over a sub-second compute —
+  the 280 ms-per-step reveal is a design choice, not a compute floor, and
+  is the owner's to shorten); the aesthetic contest is to be entered with
+  the map program's artwork design at a reasonable price, not refused. The
+  chair's assessment rows (§449) are amended by this stance: "refuse the
+  aesthetics contest" is the SPEC's wording about geometry authority, not
+  the product posture — the deterministic map competes on BOTH truth and
+  art.

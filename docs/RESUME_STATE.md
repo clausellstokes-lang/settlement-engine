@@ -51,6 +51,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 21:40 CDT 08-22: §454 — WEB-5 LANDED (29th): CAS → dffa2b97; pruned.
+# WEB-6 GO (DRAFT→READY→gate→LANDED). HK-2 = MF-T2H LANDED flip docketed.
+# Seats: WEB6-landing · UC3 · WEB2 · WEB3.
 # ⭐ 21:35 CDT 08-22 (true clock; the four labels above ran ~2h fast): §453
 # OWNER DIRECTIVE — closets/pantries: STORAGE/SERVICE cells first-class in the
 # DW grammar (closed set in DESIGN_DWELLINGS_PROGRAM S6/§5/§8); addendum lane
