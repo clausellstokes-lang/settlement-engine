@@ -20879,3 +20879,87 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   per-settlement wall-clock. Seats: CH skeptic (Opus) · DW skeptic (Opus).
   **The owner's band sitting is the next act that is theirs, and it waits on
   this panel.**
+
+## §503 — THE CH SKEPTIC PANEL REFUTES ITS OWN CHARTER'S HEADLINE AND THE CHAIR'S §491 FRAMING: **`facetOf` IS CALLED ZERO TIMES IN THE GENERATION PIPELINE**, SO THE CORPUS DIGEST IS STRUCTURALLY BLIND; CH-1 RE-SCOPED TO ONE FILE AND DISPATCHED; ALL THREE RULINGS MADE (2026-08-23 15:51 CDT)
+
+- **§503.1 THE PANEL.** `draft-CH-SKEPTIC-REPORT.md` 35,054 B, C0 0; **54
+  verdict rows — 39 CONFIRMED · 4 REFUTED · 2 UNDERSTATED · 1 NEW defect · 1
+  cosmetic · 4 untested · 3 source-only** on **43 EXECUTED probes** (16 full
+  420-settlement corpus generations, a 2,100-settlement magic axis, three
+  140-settlement NPC sweeps, five instrumented traces, 4 mutexed batteries
+  with exits captured unpiped, 14 source censuses); worktree cmp-clean against
+  the COMMITTED blobs, main repo never written. It reproduced three of the
+  charter's digests to the byte and confirmed the 4-of-933 table, the 111/420
+  interior kinds, `hasVice` 287 → 217, P5's 26 rows, the shelf at 28, and the
+  G5/G6 refutations **with a positive control** (`Dragon resident` 0 at
+  dead-magic but 11 at pm50) — the charter is largely sound, and the four
+  refutations are the ones that matter.
+- **§503.2 ⭐⭐ THE FINDING THAT OUTLIVES THIS TRAIN: `facetOf` IS CALLED ZERO
+  TIMES IN 420 GENERATION-PIPELINE RUNS** (live instrumented counter). So
+  **a whole-record corpus digest is STRUCTURALLY BLIND to every
+  `FACET_INFERENCE` change** — proved by breaking the `faith` regex to `/./i`,
+  which moved an interior kind in all 420 settlements while the digest stayed
+  byte-identical. The charter's headline "0 rosters changed, digest
+  BYTE-IDENTICAL" was therefore TRUE AND MEANINGLESS as evidence of
+  inertness. **LAW, banked to memory and written into every CH brief: a
+  digest that cannot fail proves nothing; a `FACET_INFERENCE` change is pinned
+  at the DERIVED INTERIOR, never at the record digest.** Second law from the
+  same lane: **any catalog-row key addition (`facets`, `minTier`,
+  `priorityCategory`) reds `generatorGoldenMaster` because
+  `assembleInstitutions` SPREADS the row onto the record.**
+- **§503.3 RULING 1 — CH-1 RE-SCOPED TO ONE PRODUCTION FILE, AND DISPATCHED.**
+  The charter's CH-1 shipped two files; the panel proved the second one
+  breaks the headline: `facets: { institutionNature: 'faith' }` on
+  `Priest (resident)` — `required: true, baseChance: 1` at village — lands on
+  every village record, moves 70 of 420 and REDS
+  `generatorGoldenMaster.test.js` (three-way control: base and
+  anchoring-only both `1a4a8d3f85e6…` green; anchoring+override
+  `20f4c34915681e1c…` RED). It also refuted one of the override's own
+  arguments: `hasCharityFacet` does not move at all (417/420 before and
+  after, 0 newly charity-capable; villages already 70/70 via `Parish
+  church`). **RULED: CH-1 = `cohesionWeave.js` anchoring ONLY; the override
+  moves to CH-3a beside R-INST-6-1's two identical `facets` keys** — which
+  restores a truthful byte-identical headline and frees CH-1 and CH-3a from
+  serial-minting. **TE-CH-1 dispatched (Opus)** with the acceptance re-pointed
+  at the DERIVED INTERIOR with failing controls, the corpus/golden kept only
+  as a NEGATIVE claim carrying the blindness law beside it, the defect count
+  corrected to **6 cells over 4 rows** (naive anchoring also strips
+  `institutionFunction: 'arms'` from `Blacksmith` AND `Blacksmiths (3-10)`,
+  which acceptance A5 failed to pin), the §475 three-bundle regen in the same
+  commit, and the grep arm widened to include
+  **`src/domain/undercity/monotoneComponents.js`** — a NEW `facetOf` consumer
+  that landed with MF-UC2 inside the charter's own measurement window and
+  which the charter's derived-read table and grep list both missed (N−1 of N).
+- **§503.4 RULING 2 — `religiousCenter`: THE PREMISE WAS WRONG AND THE
+  RNG-PRESERVING CURE WINS.** `Multiple monasteries` reaches a city's final
+  roster **0 times of 70 today** — not "one or the other": 26 blocked by the
+  group and **21 pushed then DELETED by `coherenceRepairPass` as
+  `unsupported_institution`** (21/21 logged at the splice). The chair's
+  "~130 NAMES re-rolled" was half wrong: **settlement names move 0 under both
+  variants**; the real cost is NPC rosters. **RULED: take variant B, the
+  side-stream `rng.fork`** — 34 of 420 rosters instead of 81, NPC name lists
+  moving in **5 of 140 instead of 73**, and no spurious `Monastery or friary`.
+  The undeclared side effect the charter never priced — the fix injecting a
+  TOWN-tier `Monastery or friary` into 21 cities and 5 metropolises — is
+  ACCEPTED ON THE RESEARCH (R-INST-3: cities hold multiple religious houses;
+  a city monastery is historically right) but must be **DECLARED and PINNED**
+  in CH-3's packet, never ridden in silently. ⚠ **New docket item (D-CH-1):
+  `coherenceRepairPass` silently deletes 21/21 institutions the roster asked
+  for as `unsupported_institution` — a repair pass that deletes without a
+  receipt is a quiet-lie candidate; chartered for its own look, not for CH.**
+- **§503.5 RULING 3 — `minTier` IS NOT ONE CLASS, AND THE CHAIR'S §491
+  FRAMING IS REFUTED BY POSITION.** §491 said "the authoring block is the
+  structural truth"; the panel refuted the copy-paste-slip reading by
+  POSITION — the gated rows are INTERLEAVED with un-gated ones inside both
+  blocks (city/Entertainment rows 5,6,8,9 of 10; city/Exotic 1,2,5,6,7 of 7),
+  which is exactly the evidence my framing lacked. And only **5 of the 10
+  move anything** at default magic (four `hiMagicInsts`-hard-zeroed rows are
+  inert). **RULED, three-way:** the eight interleaved rows take the READER
+  fix (0 shift); the village `Smuggling network` (`:865`) is **DELETED** — it
+  is dead at 0/70 with AND without its gate and duplicated at city (`:1998`),
+  so the row is not a tier bug but a dead duplicate; and `Dragon resident`
+  takes the DATA fix, because **its own description says "living in city"**
+  and contradicts its metropolis gate (+7 city settlements, declared).
+- **§503.6 STATE.** Seats: DW skeptic (Opus) · TE-CH-1 build (Opus). CH-2 and
+  CH-3/CH-3a re-shape on these rulings when a seat frees; the two measurement
+  laws of §503.2 are banked to memory and go into every later CH brief.
