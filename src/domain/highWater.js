@@ -111,12 +111,34 @@ const num = (v, fallback) => (Number.isFinite(Number(v)) ? Number(v) : fallback)
 /** Rank a tier in the LANDED order; -1 when unknown. @param {unknown} t @returns {number} */
 const rankOf = (t) => (typeof t === 'string' ? TIER_ORDER.indexOf(t) : -1);
 
+/**
+ * Landed population floors, keyed by tier. Built by enumerating the landed table rather
+ * than indexing it, so the lookup is typed end to end and needs no cast.
+ * @type {ReadonlyMap<string, number>}
+ */
+const TIER_FLOOR = new Map(
+  Object.entries(POPULATION_RANGES).map(([tier, range]) => [tier, num(range?.min, 0)]),
+);
+
 /** The landed population floor of a tier, or 0 when the tier is unknown.
  *  @param {string} tier @returns {number} */
-const floorOf = (tier) => num(/** @type {any} */ (POPULATION_RANGES)[tier]?.min, 0);
+const floorOf = (tier) => num(TIER_FLOOR.get(tier), 0);
+
+/**
+ * What this reader needs from a settlement. Everything is optional and `unknown` because
+ * the deriver is TOTAL: it is handed live settlements, save round-trips, and fixtures, and
+ * narrows every field in-body rather than trusting a shape.
+ * @typedef {Object} HighWaterInput
+ * @property {unknown} [population]
+ * @property {unknown} [tier]
+ * @property {unknown} [populationHistory]
+ * @property {unknown} [calamityHistory]
+ * @property {{ peakTier?: unknown }} [config]
+ * @property {{ peakTier?: unknown }} [_config]
+ */
 
 /** The monotone peak stamp, dual-written config + _config so it survives a regeneration.
- *  @param {any} s @returns {string|null} */
+ *  @param {HighWaterInput} s @returns {string|null} */
 const peakTierStampOf = (s) => {
   const raw = s?.config?.peakTier ?? s?._config?.peakTier;
   return typeof raw === 'string' && rankOf(raw) >= 0 ? raw : null;
@@ -146,7 +168,7 @@ const peakTierStampOf = (s) => {
  * accident of this function's shape rather than the state of the evidence.
  *
  * Total: any input, including `null` and malformed shapes, yields a typed result.
- * @param {any} settlement @returns {HighWater}
+ * @param {HighWaterInput|null|undefined} settlement @returns {HighWater}
  */
 export function deriveHighWater(settlement) {
   const s = settlement || {};
@@ -222,12 +244,21 @@ export function deriveHighWater(settlement) {
   }
 
   // The peak is the highest justified reading; every channel that reaches it is credited,
-  // in HIGH_WATER_CHANNELS trust order.
+  // in HIGH_WATER_CHANNELS trust order. Built by an explicit walk rather than
+  // `.map(...).filter(Boolean)` so the credited entries stay TYPED all the way to the
+  // result — a filtered array does not narrow, and the casts that would paper over that
+  // are the second ledger this estate refuses.
   let peak = current;
   for (const r of readings) if (r.peak > peak) peak = r.peak;
-  const supporting = HIGH_WATER_CHANNELS
-    .map((c) => readings.find((r) => r.channel === c && r.peak === peak))
-    .filter((r) => r !== undefined);
+  /** @type {string[]} */ const evidence = [];
+  /** @type {string[]} */ const channels = [];
+  for (const channel of HIGH_WATER_CHANNELS) {
+    for (const r of readings) {
+      if (r.channel !== channel || r.peak !== peak) continue;
+      channels.push(r.channel);
+      evidence.push(r.line);
+    }
+  }
 
   const deficit = peak > 0 ? clamp(1 - current / peak, 0, 1) : 0;
   return {
@@ -236,8 +267,8 @@ export function deriveHighWater(settlement) {
     window: [...windows, ...blind.map((b) => `BLIND: ${b}`)].join('; '),
     demoted: deficit > DEMOTION_THRESHOLD,
     deficit,
-    evidence: supporting.map((r) => /** @type {{ line: string }} */ (r).line),
-    channels: supporting.map((r) => /** @type {{ channel: string }} */ (r).channel),
+    evidence,
+    channels,
     gaps,
     understated: gaps.length > 0,
     derivation: 'HIGH_WATER_V1',
