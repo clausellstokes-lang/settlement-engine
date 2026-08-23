@@ -8,6 +8,53 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
+## ⭐⭐⭐⭐ SUCCESSION ADDENDUM — 2026-08-24 (~01:40), LEDGER THROUGH §439 — READ THIS DELTA FIRST, THEN THE §427 BLOCK BELOW
+
+The §427 block's structure stands; THIS delta supersedes its state figures:
+
+1. **BUILD is at b10ed1a1 — 25 LANDINGS** (since §427: CT-3 landed §432 after
+   the §355 hunt CLOSED — the varying-cast contamination hypothesis is
+   UNSUPPORTED, the specimen was the hunt's own TMPDIR; the flake doctrine,
+   TMPDIR hygiene, and the two real phenomena are §432's record).
+2. **T2H's landing gate is MID-RUN, DETACHED (survives):** rebased tip
+   84e06412 on b10ed1a1, pinned at refs/preserve/holding-t2h-slot; collect
+   per laneTET2H-receipt.md's succession header — on TRUE_EXIT=0 + tail
+   agreement CAS b10ed1a1 → 84e06412; sibling load (T2R/T2Q batteries) is
+   pre-stamped context for any stray.
+3. **HOLDING FOR LANDING after T2H:** the five website cars (pins
+   holding-web1/4/5/6/7) → T2J (f7ba3145) → T2K (4d2d17f8) → T2L (6c920593)
+   → T2M (faf3def4; sibling-of-T2L: sum-of-deltas at its slot; the blessed
+   four-red window §426). The slot pattern §418/§420; prune each landed
+   member's trees AT the CAS (§434.1).
+4. **BUILDING (killed by the switch; resume FROM RECEIPTS, survey-first):**
+   TE-T2R (the §434-RULED member: peakTier precedence, destroyer roster,
+   documented calamity gap — laneTET2R-receipt.md) · TE-T2Q (charter §4 +
+   §433-C6's pre-authorized fallback — laneTET2Q-receipt.md) · TC-DWR1A
+   (the P1a construction-history dossier, PARTIAL at
+   draft-DWR1A-CONSTRUCTION-HISTORY.md). T2N never dispatched — next free
+   seat, charter §3 of draft-PRODUCERS-PLAN.md.
+5. **AWAITING THE CHAIR'S RULING:** the UNDERCITY charter
+   (draft-UNDERCITY-PLAN.md, collected §433 — six golden-inert cars, two
+   trains, queued behind the producers; rule its RAISED then dispatch).
+6. **THE DW PROGRAM (§435-§438):** docs/DESIGN_DWELLINGS_PROGRAM.md is the
+   architecture + the transposed build path + the integrated sequencing —
+   research runs NOW as seats allow (six R-INST tranches chartered §438,
+   owner cost ACCEPTED, per-institution incl. magical-from-lore under
+   conventions-never-expression + deity doctrine + finite semantics);
+   sandbox in endgame quiet windows; repo-byte work post-endgame. Carry
+   notes planted (undercity graph addressability; D5 part-naming; tuning
+   leg-extensibility).
+7. **NEW SINCE §427 in the owner docket:** the §434 engine cures O2-i/O2-ii
+   (peakTier stamp on demoting paths; the uncapped realmVerbExecution ring)
+   · the §433-O1 generation-side given-past fork · prngSeedEntropy's
+   tolerance micro-fix chartered §432 (rides housekeeping).
+8. **FRESH LAWS the §427 block predates:** §432 (the flake doctrine; short
+   TMPDIR every terminal; quiet = measured load + ps -r) · §433 (producer
+   architecture; the tierGrammar import-swap obligation C5) · §434 (the
+   destroyer-roster law; evidence-erasure lesson 11) · §418/§420 slot
+   pattern + instrument lies · §408 tests/ops sweep · §410 retrospective
+   mints · §416.1 identity arm · §417 deferred rows.
+
 ## ⭐⭐⭐ CURRENT OVERRIDE — 2026-08-23 (~13:30), LEDGER THROUGH §427 — THE SUCCESSION HANDOFF
 ## BUILD claude/composite-r4 @ ec8f3359 — 24 LANDINGS THIS ARC; THE 25TH (CT-3) MID-GATE AT HANDOFF
 

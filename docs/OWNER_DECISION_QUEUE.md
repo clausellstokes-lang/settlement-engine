@@ -17613,3 +17613,17 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   needs one; research fills the rest. DWR1A (construction history)
   continues unchanged as P1a; the R-INST series is P1b's per-institution
   half, taste-gated per tranche.
+
+## §439 — THE SECOND SUCCESSION EXECUTED (OWNER SWITCHING NOW): ALL FOUR LANES ORDERED TO STOP POINTS; THE HANDOFF DELTA SEALED (2026-08-24 ~01:40)
+
+- Stop-point orders delivered: T2H (its detached gate survives; the receipt's
+  succession header carries the collection rule and the CAS instruction);
+  T2R and T2Q (checkpoint verified WIP + zero-context receipts); DWR1A (the
+  partial dossier saved with a status map). The HANDOFF gains a §439-era
+  DELTA BLOCK above the §427 override: the 25-landing state, T2H's mid-gate
+  collection, the holding queue with every pin, the killed builders'
+  resume-from-receipt list, the undercity ruling owed, the DW program's
+  integrated state, the new owner-docket items, and the fresh laws §427
+  predates. RESUME_STATE's tail is the act-log of record. The successor's
+  bootstrap is unchanged: read docs/HANDOFF_CURRENT.md on this branch, then
+  RESUME_STATE's tail, then act; the ledger outranks every summary.
