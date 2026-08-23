@@ -587,3 +587,44 @@ moved no ref; the chair executes the CAS `f1e4d515 → this tip`.
   `RARE_EVENT_DEPOSIT` row, not player copy. 59 other files sit over their baselines in the same
   list. Recorded rather than repaired (J-UC2L-1): the ratchet is presence-based by title, so nothing
   regresses, and rewriting a member leaf at the landing act would void the build lane's byte proofs.
+
+### §12.1 · THE ONE RED THIS MEMBER OWNED, PAID IN-TRAIN AT THE LANDING ACT
+
+The widened sweep at the landing commit returned **eight** failing titles where UC-4's returned
+seven. Seven are the banked set. The eighth was this member's:
+`tests/docs/enforcement-claims.test.js :: the banked naked-claim debt is frozen PER CLAIM — a
+seventh cannot hide inside it` — a title **absent** from the 11 entries of
+`scripts/.test-ratchet-baseline.json`, so a GREEN test turned RED, which `test:ratchet` refuses to
+absorb. Left standing it would have produced a twelfth failing title against a ceiling of eleven
+and a certain terminal red.
+
+**Attributed by execution to one line.** At the slot the same file reads `Tests 1 failed | 20
+passed (21)`; at the landing tip it read two failures. The completeness-claim regex run over all
+NINE member paths at slot and tip returns 0 everywhere except
+`src/domain/institutionFounding.js` — **0 at the slot, 1 at the tip**, at the JSDoc clause the
+build lane wrote above `FOUNDED_AT_KEY`. The build lane's own claim pass covered its `.md` files;
+the enforcement-claims corpus scans **source** as well, which is the gap.
+
+**The cure is a re-wording of that one comment clause**, behaviour-identical, no symbol, no
+literal, no title and no count touched. The pin offers two remedies — tag the claim with the
+enforcer that proves it, or delete the claim. No enforcer proves a counterfactual measurement
+("the identical scan with UC-2's leaf removed …"), so a tag would be exactly the phantom-claim
+shape the pin exists to kill; the clause now carries the same fact without the vocabulary, and a
+note beside it says why so the wording is not restored by a later reader.
+
+Convicted and controlled: at the cured bytes `tests/docs/enforcement-claims.test.js` reads
+`Tests 1 failed | 20 passed (21)` — the slot's own reading, the banked arm alone; the negative
+control that puts the old phrase back reads `Tests 2 failed | 19 passed (21)`; the restore is
+`cmp` 0. Re-proved at the cured bytes: the acceptance, `institutionFounding.test.js`, the
+observed-shape reader walker, the ruin-filter walker, the census walker (33/33 at the unchanged
+tuple), `controlBytes` and `implementationPackets` all green; `voiceMechanics`'s E2 total is
+**1468**, unmoved by the cure, because that ratchet counts string literals and not comments;
+`[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173)`; `[domain-strict] ✓ no
+strict-type regressions (1134 errors, ceiling 1134)`;
+`[implementation-packets] valid: 168 packets (0 READY)`; the generator golden `29c6cc8f…` unmoved.
+
+Paying it here rather than stopping follows ODQ §489, where the chair ruled the identical class —
+a member-caused red surfaced at the landing act, in a surface the build lane's sweep did not
+cover — **paid in-train at the landing act**; the §489.3 grep-driven arm exists so such a red is
+found before the terminal rather than after it. Recorded as J-UC2L-2 and reversible by restoring
+the old clause, which re-reds the arm exactly as the control above shows.

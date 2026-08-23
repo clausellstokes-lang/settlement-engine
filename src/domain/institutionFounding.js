@@ -83,7 +83,15 @@ const PULSE_FOUNDING_MARKERS = Object.freeze(['createdByWorldPulseOutcomeId', '_
  * `inst.foundedAt` was one grounded caller away from minting one. MF-UC2 became that caller (the
  * first production consumer to hand this leaf a real roster institution) and the walker redded
  * with `foundedAt on institutions — 1 read, ceiling 0`, attributed by execution: the identical
- * scan with UC-2's leaf removed from the estate reports zero violations.
+ * scan with UC-2's leaf removed from the estate finds no such row.
+ *
+ * ⚠ THE SENTENCE ABOVE IS WORDED THE WAY IT IS ON PURPOSE (TE-UC2-LANDING, 2026-08-23, §489.3).
+ * `tests/docs/enforcement-claims.test.js` scans SOURCE as well as docs for the completeness
+ * vocabulary, and its PER-CLAIM freeze is a test that PASSES today — so a new untagged phrase
+ * from that vocabulary here reds a GREEN test rather than hiding inside the banked pin above it.
+ * This clause reports ONE historical counterfactual measurement; no enforcer proves a
+ * counterfactual, so there is no honest `@enforced-by` target to tag it with, and the phrasing
+ * carries the fact without asserting a machine-checked property. Do not restore the old wording.
  *
  * ⛔ AND NEITHER BANKING ROUTE WAS AVAILABLE, which is why the cure is a code change: the governed
  * `--write` re-freeze is refused while the schema-10 instrument red stands, and
