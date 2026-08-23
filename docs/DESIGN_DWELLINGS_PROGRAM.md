@@ -4,18 +4,31 @@
 is the owner–chair design conversation of that sitting (the ledger row cites it).
 Per the estate's architected-design discipline (the §287.16 precedent): this
 document is design with NO implementation and may not be reported as built.
-**SEQUENCE (integrated per ODQ §437): the ZERO-REPO-BYTE phases run early;
-the repo-byte phases stay post-endgame.** Specifically: P1a-P1d (research,
-corpus, instruments, benchmark pre-registration) are read-only and run IN
-PARALLEL with the current arc as seats allow — the atlas-research precedent;
-DW-0's band-signing rides an owner sitting once taste-samples exist (batched
-with other owner sittings); the P2 SANDBOX (own worktree, zero repo bytes)
-runs in the endgame's quiet windows and never contends with a landing gate
-or the soak. P3-P8 (the spec volume, preamble, compile, dark port,
-activation, tuning leg, style) remain STRICTLY POST-ENDGAME: no repo byte,
-no car, no golden motion before D3b is live, the undercity and producer
-trains are landed, and the endgame completes. Coordination carry-notes are
-planted NOW (§16) so nothing built in the current arc precludes DW.
+**SEQUENCE (RE-ORDERED by the owner at ODQ §456, 2026-08-22, superseding
+§437's "post-endgame"): THE DWELLINGS PROGRAM RUNS AFTER ITS RESEARCH, AND
+ITS OUTPUT GOES INTO THE 300-YEAR SOAK.** Specifically: P1a-P1d (research,
+corpus, instruments, benchmark pre-registration) run NOW in parallel with the
+current arc as seats allow (the atlas-research precedent; R-INST-1..6 + the
+§452/§453 circulation-and-storage addendum + DWR1A's residuals); DW-0's
+band-signing rides an owner sitting once the dossiers exist; then — with the
+research COMPLETE and taste-gated — P2 (the sandbox), P3 (DWELLING-SPEC), P4
+(DW-PREAMBLE + the compile), P5 (the dark port) and P6 (activation) run as
+the program's next arc, INSIDE the endgame's pre-soak window: the DW members
+land by the estate's full landing law after the undercity and producer
+trains, BEFORE the terminal soak. **THE SOAK LAW (§456): the 300-year soak —
+the diagnostic soak at build-complete-dark and the terminal soak before the
+tuning signature — gains a DWELLINGS LEG**: at every soak epoch, every
+building's plan is re-derived and the leg asserts boundedness (cell counts,
+re-derivation churn, fossil counts never runaway — the population-runaway
+lesson applied to interiors), determinism (same epoch, same plan), the
+continuity arm (core-function anchors persist across single-band changes
+over 300 years), and the lawfulness walker green on every sampled plan; its
+findings are tuning-pass inputs beside the 300y runaway and the map leg (P7).
+Consequence, stated plainly: the terminal soak, the tuning signature and the
+push move later by the DW build's duration (rough scale: one-third to one-half
+of the map program); nothing that can move an output lands after the
+signature (the endgame-tail law holds). Coordination carry-notes are planted
+NOW (§16) so nothing built in the current arc precludes DW.
 
 ---
 
@@ -266,7 +279,7 @@ gate each corpus wave (the CT-0 pattern).
 
 | Wave | Content | Depends on |
 |---|---|---|
-| DW-0 | charter compile from THIS document; owner sits the bands | endgame complete |
+| DW-0 | charter compile from THIS document; owner sits the bands | RESEARCH COMPLETE (R-INST-1..6 + the circulation/storage addendum + DWR1A residuals, taste-gated) — §456 |
 | DW-R1..R3 | the corpus (partis; functions/rosters; fixtures) | DW-0 |
 | DW-1 | vocabularies + rosters landed dark (engine leaves, golden-inert) | R-waves |
 | DW-2 | the geometry core: vertical partition + parti placement + circulation over parcel polygons | D3b live; DW-1 |
@@ -275,6 +288,7 @@ gate each corpus wave (the CT-0 pattern).
 | DW-5 | the validator suite + continuity arms | DW-2..4 |
 | DW-6 | projections: pane, tiers, PDF, Foundry-walls | DW-2..5 |
 | DW-7 | deltas/editing + news hooks + the estate view | DW-6 |
+| DW-S | THE SOAK LEG: the 300-year soak gains a dwellings leg (boundedness, determinism, continuity, lawfulness per epoch); findings feed the tuning pass | DW-5; runs in the diagnostic soak and the terminal soak (§456) |
 
 Rough scale: one-third to one-half of the map program (its hardest substrate
 — exact geometry, massing, determinism law — already exists).
@@ -283,8 +297,10 @@ Rough scale: one-third to one-half of the map program (its hardest substrate
 
 The lawfulness walker (S9) as a landed test family; plan goldens per fixture
 settlement (derived plans are generation-golden-inert by construction —
-the producer-train architecture law reused); the continuity arm; the
-no-second-truth scans (no fixture vocabulary outside the roster; no
+the producer-train architecture law reused); the continuity arm; **the
+300-year SOAK LEG (§456): per-epoch plan re-derivation across the soak's
+cells with boundedness / determinism / continuity / lawfulness arms and a
+findings report read at the tuning pass**; the no-second-truth scans (no fixture vocabulary outside the roster; no
 underground geometry outside the graph; the §423-style two-homes law for any
 interior "operation" if one ever exists).
 
@@ -310,7 +326,8 @@ moat's second storey.
 No named-character fates (roles only — the product-scope law). No CAD/manual
 wall editing (deltas are intents, not geometry surgery). No real-world
 architectural compliance. No generation-path writes. No theology in temples
-(culture only). Not started, in any form, before the endgame completes.
+(culture only). No repo-byte work before the research is complete and
+taste-gated (§456 — "do the dwellings program after the research").
 
 ## §14 · OPEN QUESTIONS (for DW-0)
 
@@ -346,6 +363,7 @@ that path exactly, each phase with its named counterpart and its gate.
 | P5 | The port: member-by-member, TOTAL sealed equivalence, dormancy proofs, deferred rows, the landing cascade | **the DW port**: members land DARK with sealed-equivalence discipline against the DW sandbox; the click surface stays unwired | the landed program, inert | every member's own gate; the estate's full landing law |
 | P6 | D3b — the activation wave; prove-then-cut vs legacy | **DW ACTIVATION**: the click surface lights; the exhibit gate is the owner's before/after sitting (no legacy to cut — the cut counterpart is the blind-panel benchmark passing + the owner's word) | interiors LIVE | owner exhibit + veto window |
 | P7 | The tuning pass gains the MAP LEG (§341) | **the tuning pass gains the INTERIORS LEG**: plan-lawfulness and distribution drift read at tuning checkpoints | interiors inside the world's health metrics | owner-signed tuning, as ever |
+| P6b | The rolling soaks (RS-1..RS-5) + the 300-year research soak that found the population runaway | **the DW SOAK LEG (§456)**: every soak epoch re-derives every building's plan; boundedness, determinism, continuity and lawfulness asserted; interiors never runaway, never re-roll the lived past | the soak findings that the tuning pass consumes beside the 300y runaway and the map leg | the soak's own gate; findings-only, never a cure in the soak tree |
 | P8 | V5 visual counsel; the watercolor lens; style waves post-soak | **the DW style waves**: render lenses for plans (ink, parchment, cutaway — the Yoshida taste target) after mechanics prove | the charm layer, last, on proven bones | owner taste |
 
 **The one law this table exists to carry:** the map program succeeded because

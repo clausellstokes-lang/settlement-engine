@@ -51,6 +51,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐ 22:10 CDT 08-22: §456 OWNER ORDER — DW program AFTER its research (not
+# post-endgame), lands before the terminal soak; the 300-year soak gains a
+# DW leg. DESIGN_DWELLINGS_PROGRAM.md amended (preamble, §9, §10, §13, §15).
 # ⭐⭐ 21:50 CDT 08-22: §455 — WEB-2 BUILT 1d93458a (pinned; migration 198 =
 # first DESTRUCTIVE; 12-gate bill). HK-3 ruled (delete WEB-1 moving-head pin +
 # validator guard). TE-HK-A dispatched (HK-1/2/3). Seats: WEB6-landing · UC3 ·

@@ -18518,3 +18518,33 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   body was already archived, the verdicts are quoted verbatim, nothing is
   lost — but from WEB-6 on the `/tmp/<lane>` prune waits for the lane's
   final report; worktree + pin prune stay at the CAS.
+
+## §456 — OWNER ORDER (in-chat, 2026-08-22 22:10 CDT): THE DWELLINGS PROGRAM RUNS AFTER ITS RESEARCH — NOT POST-ENDGAME — AND ITS OUTPUT GOES INTO THE 300-YEAR SOAK
+
+- **Owner:** "do the dwellings program after the research and it should also
+  be put into the 300 soak." RE-SEQUENCING RECORDED, superseding §437's
+  "repo-byte work stays post-endgame": once R-INST-1..6, the §452/§453
+  circulation-and-storage addendum and DWR1A's residuals are delivered and
+  taste-gated (DW-0's band sitting), the DW program proceeds as the next arc
+  — sandbox (P2) → DWELLING-SPEC (P3) → DW-PREAMBLE + compile (P4) → the
+  dark port (P5) → activation (P6) — landing by the full landing law after
+  the undercity and producer trains and BEFORE the terminal soak.
+- **THE SOAK LAW:** the 300-year soak (the diagnostic soak at
+  build-complete-dark AND the terminal soak before the signature) gains a
+  DWELLINGS LEG (DW-S): every building's plan re-derived at every soak
+  epoch; boundedness (cell/fossil/churn counts never runaway — the
+  population-runaway lesson applied to interiors), determinism, the
+  continuity arm over 300 years, the lawfulness walker on every sampled
+  plan; findings-only in the soak tree, consumed by the tuning pass beside
+  the 300y runaway and the §341 map leg. Written into
+  docs/DESIGN_DWELLINGS_PROGRAM.md (the sequence preamble, §9 DW-0's
+  dependency + a DW-S row, §10 instruments, §13 anti-scope, §15 P6b).
+- **Consequence, stated plainly for the remaining-arc table:** rows 23–27
+  of the §-table given in chat (dark-complete → walk → ONE REGEN →
+  terminal soak → tuning signature → V5/cull/scrub/push) move later by the
+  DW build's duration (rough scale one-third to one-half of the map
+  program); the endgame-tail law holds — nothing that can move an output
+  lands after the signature, so DW lands before the soak, not after. The
+  research seats keep priority for freed build seats until the six
+  tranches + the addendum are in.
+- Memory: the DW program state note gains the re-sequence.
