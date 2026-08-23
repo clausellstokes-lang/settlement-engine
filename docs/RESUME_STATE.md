@@ -51,6 +51,13 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐ ~21:05 CDT 08-22: §443 — T2R resume delivered (387a3b34; 8 of 9 reds were
+# load strays; typechecks green; packet at BLOCKED) with ONE real red: the
+# observed-shape reader walker refuses highWater.js's raw calamityHistory read.
+# RULED C-a (route via domain/display/calamityLedger, DISPLAY-LAZY inherited);
+# C-b (pulse-time-writer exemption) rides the trailing OSR mint. Lane re-curing
+# → READY → follow-on commit → HOLD. Producers land after the map stack unless
+# the slot idles.
 # ⭐⭐⭐ ~20:40 CDT 08-22: §442 — T2H LANDED (26th): run-2 green two-part,
 # CAS → 84e06412, pins + tree pruned. WEB-1 GO issued (landing seat; rebase
 # onto 84e06412; tip file web1-rebased-tip.txt; terminal web1-TERMINAL-*.log).

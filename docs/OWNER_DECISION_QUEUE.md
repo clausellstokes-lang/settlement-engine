@@ -17988,3 +17988,58 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   b10ed1a1 with file:line receipts. Seats: WEB-1 landing · TE-T2R · TE-T2Q
   · TC-UNDERCITY-R2 (cap). Queue: T2N (§433 C4) → UC-0/UC-3 builders →
   R-INST tranches.
+
+## §443 — T2R's SECOND-RED STOP RULED: THE OBSERVED-SHAPE READER WALKER REFUSES A NEW READER OF A PULSE-WRITTEN KEY; CURE C-a (ROUTE THROUGH THE BANKED calamityLedger READ) FOR THE MEMBER, C-b (A pulse-time-writer MECHANISM) DOCKETED TO THE TRAILING OSR MINT; THE NINE REDS ATTRIBUTED — EIGHT WERE LOAD STRAYS (2026-08-22 ~21:05 CDT)
+
+- **The resume (TE-T2R) delivered:** tip 387a3b34 (member 23e0bcd9 · any-cast
+  cure a6001d47 · packet 387a3b34, hooks ON), tree clean; both typecheckers
+  by name green (`173/173`, `1134/1134`); the packet MF-T2R written, walked
+  DRAFT→READY green, then set BLOCKED (J-TET2R-7: "READY except for" is not a
+  status — RATIFIED); the nine unattributed sweep reds ATTRIBUTED in both
+  trees mutexed and quiet: EIGHT pass in both (load strays of the contended
+  §408 sweep — `observedShapeSentinel`, `exportTokenCoverage`,
+  `proseFamilyContract.walker`, `readerShapeResolver`, `siteCoherenceRatchet`,
+  `postureNameCollision.walker`, `townScene3dLazy`, `townSceneLocalMatrixAudit`),
+  ONE is REAL and the member's: `tests/lint/observedShapeReaders.walker.test.js`
+  GREEN at the baseproof, RED with the member (2 arms) — `src/domain/highWater.js:229`
+  reads `s.calamityHistory`, a key only the PULSE writes (calamityKernel.js:77
+  on a strike) and the observed GENERATION corpus never carries, so the
+  reader-with-no-writer ratchet mints a NEW row at ceiling 0 and the governed
+  `--write` refuses new files by law (and is blocked at this base by the
+  schema-10 envelope staleness anyway). Reported as the second member-caused
+  red under §9.4/§P7.12 with three priced cures — the STOP discipline as
+  chartered.
+- **RULED — C-a for the member.** Channel 3 routes through
+  `src/domain/display/calamityLedger.js`'s `buildCalamityLedger(settlement)`
+  (the `townMap/changeView.js` precedent: "projected through the existing
+  dossier read model … never re-derived"). THE LAYERING QUESTION ANSWERED:
+  `src/domain/display/**` is DOMAIN-side projection, not the UI layer, so the
+  import is lawful; calamityLedger's DISPLAY-LAZY law ("imported ONLY from
+  lazy display/dossier surfaces, never from the first-paint entry closure;
+  enforced by tests/build/vendorPdfLazy.test.js") TRANSFERS to highWater.js
+  by inheritance and is written into its header and packet — its chartered
+  consumers (UC-1's sixth cause, UC-4's vertical mark; CT-4 prose; D5
+  fabric) are all dormant or lazy. Behavior-identity is the bar: m2 (the
+  channel-3 exodus mutant) must still convict against the re-routed leaf;
+  the walker's pinned literals return to base (387/1409/1995). C-c (delete
+  the channel) REFUSED. The lane re-proves, flips BLOCKED → READY, commits a
+  follow-on with hooks, holds.
+- **RULED — C-b for the estate, DOCKETED to the trailing OSR mint (§384.2):**
+  an `EXPLAINED_WRITER_EXEMPTIONS` mechanism `pulse-time-writer` for keys the
+  pulse writes that generation never observes (calamityHistory today; any
+  future pulse stamp) — a per-identity, set-growing MINT-class act that
+  re-classes the three banked readers (display/calamityLedger,
+  worldPulse/calamityKernel, worldPulse/upswingKernel) and re-reads the
+  walker's literals. The mint's attribution table gains the row. Until then
+  every new reader of a pulse-written key routes through a banked reader —
+  LAW for the undercity cars (UC-2's plague-year surge pits and UC-4's
+  flood/seal state read calamityHistory: through calamityLedger, never raw).
+- **Landing order for the producers:** after the website cars and the map
+  stack (T2J→T2M), unless the landing slot would otherwise IDLE — then a
+  ready producer takes it (the track never idles, §388). T2Q's resume is
+  still running its clean sweep.
+- **Judgments (vetoable):** J1 C-a over C-b-now (C-b is mint-class and
+  blocked at this base; C-a is a one-leaf edit with a live precedent; reverse:
+  revert the import at the mint) · J2 the lazy-inheritance law (reverse: make
+  highWater read raw under the C-b exemption once minted) · J3 producers land
+  after the map stack unless the slot idles.
