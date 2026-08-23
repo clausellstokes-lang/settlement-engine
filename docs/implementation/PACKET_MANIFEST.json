@@ -21421,6 +21421,100 @@
         [ "npm", "run", "validate:packets" ],
         [ "npm", "run", "check:tail" ]
       ]
+    },
+    {
+      "id": "MF-T2Q",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/town-cartography/MF-T2Q.md",
+      "verifiedBase": "b10ed1a1f5a0f2acd00bbfc9b5d0a41931697c3d",
+      "changeManifest": [
+        {
+          "_note": "THE READER LEAF. A pure headless leaf at the src/domain/ root (the ageBands precedent), golden-inert BY CONSTRUCTION because generation never imports it. Three typed kinds, no year ever invented. A CREATE row, not TEST — the validator asserts a TEST path exists at every status.",
+          "action": "CREATE",
+          "path": "src/domain/institutionFounding.js"
+        },
+        {
+          "_note": "THE STAMP HOST. foundingStampFrom reads the caller's calendar; appendInstitutionHistory dates all six entry sites; the two NEW-record constructions (built, founded) stamp foundedAt while the two re-activation constructions (restored, raised) preserve it and never write — the write-once law that keeps a founding-era institution from being handed an invented year. priorLifecycleCounts is UNTOUCHED, so the damping still reads `fate` and nothing else and the provenance walker's DAMPING FREEZE holds.",
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/institutionLifecycle.js"
+        },
+        {
+          "_note": "THE CALENDAR THREAD. The lifecycle seam takes no worldState, but this caller holds one on BOTH apply paths — the immediate outcome and the stored proposal re-applied ticks later through the same door with the CURRENT clock. One context read, one optional parameter, one argument. Absent clock ⇒ null ⇒ nothing dated and every pre-existing caller byte-identical.",
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/applyWorldPulse.js"
+        },
+        {
+          "_note": "ACCEPTANCE — one literal describe, seven straight-line `it` titles, no .each/runIf/nesting. Drives the REAL seam rather than the applier alone, because the seam question is whether the calendar reaches it. A CREATE row: this file does not exist before the member.",
+          "action": "CREATE",
+          "path": "tests/domain/institutionFounding.test.js"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/packets/town-cartography/MF-T2Q.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE READ. Renaming or removing it silently retires the member's whole vocabulary half; the content-train car that speaks DS-GEN-14 binds to this name.",
+          "path": "src/domain/institutionFounding.js",
+          "symbol": "export function institutionFoundingOf"
+        },
+        {
+          "_note": "THE CLOSED VOCABULARY, frozen v1. Three kinds, not two: a save pulsed before this member landed carries pulse-created institutions with no stamp, and typing those PRE_SEED would assert they have stood since the founding. Changing this list is a declared shift by definition.",
+          "path": "src/domain/institutionFounding.js",
+          "symbol": "export const INSTITUTION_FOUNDING_KINDS"
+        },
+        {
+          "_note": "THE SEAM. Its third parameter is the calendar context; a caller that drops it silently un-dates every founding it applies.",
+          "path": "src/domain/worldPulse/institutionLifecycle.js",
+          "symbol": "export function applyInstitutionLifecycleOutcome"
+        },
+        {
+          "_note": "THE STAMP READER. Named here so the never-invent rule (a missing or malformed clock yields NO date rather than a guessed one) is findable from the manifest, not only from the packet prose.",
+          "path": "src/domain/worldPulse/institutionLifecycle.js",
+          "symbol": "function foundingStampFrom"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "A pulse-built institution is dated by the calendar year it came to stand, executed through the real seam (applyWorldPulseOutcomes, not the applier in isolation), for BOTH new-record constructions: the economic `build` lane and the patron `found` lane. foundedAt reads exactly { year: 18, tick: 40 } and institutionFoundingOf reads { kind: FOUNDED, year: 18, tick: 40 }. The arm opens with a truthiness check on the built record so a silently non-landing outcome cannot make every later assertion vacuous."
+        },
+        {
+          "id": "A2",
+          "case": "THE WRITE-ONCE LAW, and the Shape-3 line made structural. (a) A record the pulse founded in year 3, let close, and re-founds in year 19 keeps foundedAt { year: 3, tick: 7 } — the original founding survives the re-founding — while the re-founding itself lands as its own history entry dated { year: 19, tick: 61 }, so the second writer is not forgotten. (b) A FOUNDING-ERA record carrying no stamp, re-founded in year 19, is NOT handed year 19 as its founding: foundedAt stays absent and only the history entry is dated. That is the given-past-fact-invented STOP, refused by construction rather than by review."
+        },
+        {
+          "id": "A3",
+          "case": "THE SEAM RULING, EXECUTED. One frozen outcome object applied at two different clocks takes the clock it was applied at: year 18 / tick 40 in the first application, year 19 / tick 61 in the second. This is the shape applyWorldPulseProposal takes — it re-applies the STORED outcome through this same door with the CURRENT worldState — so a deferred founding is dated by when it actually landed, never by when it was proposed. The outcome object itself is proved unmutated, so the date is produced at apply time and is not riding in the patch."
+        },
+        {
+          "id": "A4",
+          "case": "THE READER IS TOTAL AND ABSENCE IS THE TYPED VALUE, with the positive control FIRST per preamble §P3: a stamped record reads FOUNDED before any negative is asserted. A generation-era institution reads PRE_SEED; a legacy pulse-built record carrying createdByWorldPulseOutcomeId reads FOUNDED_UNDATED with no year invented. THE MARKER-SET CORRECTNESS PIN: a founding-era institution the pulse merely REOPENED carries _worldPulseEconomyBuilt and must still read PRE_SEED — which is why that key is excluded from the marker set. A half-written stamp reads as absence rather than being repaired, and the kind list is asserted exact."
+        },
+        {
+          "id": "A5",
+          "case": "institutionHistory entries carry the dated pair and the 24-entry ring cap does not move: a settlement holding exactly 24 prior entries still holds exactly 24 after the apply, the new entry is the dated one, and the oldest filler really was pushed out so the cap is proved a ring rather than a truncation. institutionHistory is an ENGINE INPUT and this is the exact addition tests/lint/provenanceStampSingleWriter.walker.test.js pre-authorizes in its own DAMPING FREEZE prose, because priorLifecycleCounts reads `fate` and nothing else and is untouched here."
+        },
+        {
+          "id": "A6",
+          "case": "THE DORMANCY FENCE. The generator golden hashes sha256(JSON.stringify(settlement)) WHOLE, so the leaf's golden-inertness claim IS its unreachability from generation: a scan over src/generators/** and src/data/** finds no importer of the founding leaf. Both halves carry a guard-the-guard arm — the walk is asserted non-trivial, and the import matcher is proved to fire on the exact string it hunts, so neither a broken walk nor a dead regex can pass this arm over an empty set."
+        },
+        {
+          "id": "A7",
+          "case": "THE HOUSE IDEMPOTENCE CONTRACT SURVIVES THE STAMP. Re-applying a build outcome for an institution that already stands returns the SAME settlement reference (toBe, not toEqual) even with a live calendar context in scope — a stamp must never turn an idempotent no-op into a write, which is the failure mode that would have made every re-applied proposal churn the roster."
+        }
+      ],
+      "checks": [
+        [ "npx", "vitest", "run", "tests/domain/institutionFounding.test.js" ],
+        [ "npx", "vitest", "run", "tests/property/generatorGoldenMaster.test.js" ],
+        [ "npx", "vitest", "run", "tests/domain/worldPulseSoak.test.js", "tests/domain/evaluateInstitutionLifecycle.test.js", "tests/domain/worldPulseExpansion.test.js", "tests/domain/entrepots.kernel.integration.test.js" ],
+        [ "npx", "vitest", "run", "tests/domain/institutionLifecycle.test.js", "tests/domain/moralInstitutionFounding.test.js", "tests/domain/martialMoralWF8.test.js", "tests/domain/provenance/rosterProvenance.test.js" ],
+        [ "npx", "vitest", "run", "tests/lint/provenanceStampSingleWriter.walker.test.js", "tests/lint/negativeAssertionAnchor.walker.test.js" ],
+        [ "npx", "vitest", "run", "tests/lint", "tests/build", "tests/ops" ],
+        [ "npm", "run", "validate:packets" ],
+        [ "npm", "run", "check:tail" ]
+      ]
     }
   ]
 }

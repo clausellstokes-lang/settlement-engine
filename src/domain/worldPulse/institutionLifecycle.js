@@ -853,10 +853,51 @@ export function evaluateInstitutionLifecycle(/** @type {any} */ worldState, /** 
 }
 
 // ── Outcome application ──────────────────────────────────────────────────────
-function appendInstitutionHistory(/** @type {any} */ settlement, /** @type {any} */ entry) {
+/**
+ * MF-T2Q — the dated stamp, read from the calendar the CALLER holds.
+ *
+ * This seam takes no worldState, so it cannot see the calendar itself; the applier
+ * (applyWorldPulse.js) passes `{ year, tick }` on BOTH apply paths — the immediate
+ * outcome and the stored proposal re-applied possibly ticks later — so the year a
+ * founding carries is the year it ACTUALLY came to stand, never the year it was
+ * proposed. Absent or malformed context ⇒ null ⇒ nothing is stamped and every
+ * pre-existing caller stays byte-identical. ⛔ Never invents: a missing calendar
+ * yields no date rather than a guessed one.
+ *
+ * `year` is the display calendar year, `tick` the pulse counter — the same two-clock
+ * pair calamityHistory stamps carry, and deliberately not the same clock.
+ *
+ * ⚠ TYPED, NOT `any`, DELIBERATELY. `src/domain/**` carries a monotone-DOWN any-cast
+ * ledger (tests/lint/domainAnyCastBaseline.test.js) whose only lawful cure is a real
+ * type — widening the baseline and declaring an overrun are both refused. The two
+ * typedefs below are what let this member land inside that ceiling.
+ *
+ * @typedef {{ year?: unknown, tick?: unknown } | null | undefined} FoundingCalendarContext
+ * @typedef {{ year: number, tick: number } | null} FoundingStamp
+ *
+ * @param {FoundingCalendarContext} context
+ * @returns {FoundingStamp}
+ */
+function foundingStampFrom(context) {
+  const year = Number(context?.year);
+  const tick = Number(context?.tick);
+  if (!Number.isFinite(year) || !Number.isFinite(tick)) return null;
+  if (year < 1 || tick < 0) return null;
+  return { year: Math.floor(year), tick: Math.floor(tick) };
+}
+
+/**
+ * institutionHistory is an ENGINE INPUT, not a journal: priorLifecycleCounts damps
+ * build/close probability off these entries' `fate` and NOTHING else, which is exactly
+ * why a dating key may ride along here without moving a single seeded-advance decision
+ * (the boundary is pinned structurally in
+ * tests/lint/provenanceStampSingleWriter.walker.test.js). No stamp ⇒ the entry is
+ * written unchanged.
+ */
+function appendInstitutionHistory(/** @type {any} */ settlement, /** @type {any} */ entry, /** @type {FoundingStamp} */ stamp = null) {
   return [
     ...(Array.isArray(settlement.institutionHistory) ? settlement.institutionHistory.slice(-23) : []),
-    entry,
+    stamp ? { ...entry, ...stamp } : entry,
   ].slice(-24);
 }
 
@@ -865,8 +906,16 @@ function appendInstitutionHistory(/** @type {any} */ settlement, /** @type {any}
  * no-op when nothing changes (the house contract). Self-contained: proposals
  * re-apply this from the stored outcome alone, possibly ticks later, so every
  * guard re-checks against the CURRENT settlement.
+ *
+ * MF-T2Q: `context` carries the world calendar as `{ year, tick }`. WRITE-ONCE — the
+ * two constructions that create a NEW institution stamp `foundedAt`; the two that
+ * RE-ACTIVATE an existing record (reopen, re-found) preserve whatever it already
+ * carries and never write one, because an institution's founding is its FIRST
+ * founding. The re-founding itself is a real dated event and lands, dated, in
+ * institutionHistory.
  */
-export function applyInstitutionLifecycleOutcome(/** @type {any} */ settlement, /** @type {any} */ outcome) {
+export function applyInstitutionLifecycleOutcome(/** @type {any} */ settlement, /** @type {any} */ outcome, /** @type {FoundingCalendarContext} */ context = {}) {
+  const stamp = foundingStampFrom(context);
   const patch = outcome?.institutionPatch;
   if (!settlement || !patch?.name) return settlement;
   const institutions = Array.isArray(settlement.institutions) ? settlement.institutions : [];
@@ -912,7 +961,7 @@ export function applyInstitutionLifecycleOutcome(/** @type {any} */ settlement, 
           tier: settlement.tier || null,
           outcomeId: outcome.id || null,
           reason: patch.reason || 'Rebuilt during sustained prosperity.',
-        }),
+        }, stamp),
       };
     }
     const built = {
@@ -926,6 +975,8 @@ export function applyInstitutionLifecycleOutcome(/** @type {any} */ settlement, 
       _worldPulseEconomyBuilt: true,
       createdByWorldPulseOutcomeId: outcome.id || null,
       builtReason: patch.reason || null,
+      // MF-T2Q: a NEW institution — this tick is its founding.
+      ...(stamp ? { foundedAt: stamp } : {}),
     };
     return {
       ...settlement,
@@ -937,7 +988,7 @@ export function applyInstitutionLifecycleOutcome(/** @type {any} */ settlement, 
         tier: settlement.tier || null,
         outcomeId: outcome.id || null,
         reason: patch.reason || 'Built during sustained prosperity.',
-      }),
+      }, stamp),
     };
   }
 
@@ -970,7 +1021,7 @@ export function applyInstitutionLifecycleOutcome(/** @type {any} */ settlement, 
         tier: settlement.tier || null,
         outcomeId: outcome.id || null,
         reason: patch.reason || 'Sustained economic decline.',
-      }),
+      }, stamp),
     };
   }
 
@@ -1012,7 +1063,7 @@ export function applyInstitutionLifecycleOutcome(/** @type {any} */ settlement, 
         tier: settlement.tier || null,
         outcomeId: outcome.id || null,
         reason: patch.reason || 'Abolished by the patron seat.',
-      }),
+      }, stamp),
     };
   }
 
@@ -1057,7 +1108,7 @@ export function applyInstitutionLifecycleOutcome(/** @type {any} */ settlement, 
           tier: settlement.tier || null,
           outcomeId: outcome.id || null,
           reason: patch.reason || 'Re-founded by the patron seat.',
-        }),
+        }, stamp),
       };
     }
     const founded = {
@@ -1073,6 +1124,8 @@ export function applyInstitutionLifecycleOutcome(/** @type {any} */ settlement, 
       _worldPulseFoundingSet: patch.set || null,
       foundedByWorldPulseOutcomeId: outcome.id || null,
       builtReason: patch.reason || null,
+      // MF-T2Q: a NEW institution — this tick is its founding.
+      ...(stamp ? { foundedAt: stamp } : {}),
     };
     return {
       ...settlement,
@@ -1084,7 +1137,7 @@ export function applyInstitutionLifecycleOutcome(/** @type {any} */ settlement, 
         tier: settlement.tier || null,
         outcomeId: outcome.id || null,
         reason: patch.reason || 'Founded by the patron seat.',
-      }),
+      }, stamp),
     };
   }
 

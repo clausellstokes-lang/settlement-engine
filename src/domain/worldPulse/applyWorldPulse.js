@@ -103,7 +103,24 @@ function applyFoodStockpileOutcomeToSettlement(/** @type {any} */ settlement, /*
   };
 }
 
-function applyOutcomeToSettlement(/** @type {any} */ settlement, /** @type {any} */ outcome, /** @type {any} */ saveId) {
+/**
+ * MF-T2Q: `calendarContext` is the world calendar at APPLY time. The institution
+ * lifecycle seam takes no worldState of its own, so the date a founding carries has to
+ * be handed to it from here, where the clock lives. Absent ⇒ nothing is dated and every
+ * path stays byte-identical.
+ *
+ * This parameter is a PASS-THROUGH and is deliberately typed loosely: the pair is
+ * carried RAW to institutionLifecycle's foundingStampFrom(), the one place that decides
+ * what a readable clock is. Narrowing it here would be a second spelling of that rule.
+ *
+ * ⚠ The parameter is TYPED rather than `any` on purpose: `src/domain/**` carries a
+ * monotone-DOWN any-cast ledger whose only lawful cure is a real type, so a fresh
+ * `{any}` here would red tests/lint/domainAnyCastBaseline.test.js. The three incumbent
+ * casts are left exactly as they were.
+ *
+ * @typedef {{ year?: unknown, tick?: unknown } | null | undefined} FoundingCalendarContext
+ */
+function applyOutcomeToSettlement(/** @type {any} */ settlement, /** @type {any} */ outcome, /** @type {any} */ saveId, /** @type {FoundingCalendarContext} */ calendarContext = null) {
   if (!settlement || !outcome) return settlement;
   let next = settlement;
   if (outcome.populationDeltas?.length) {
@@ -133,7 +150,7 @@ function applyOutcomeToSettlement(/** @type {any} */ settlement, /** @type {any}
     next = applySettlementLifecycleOutcomeToSettlement(next, outcome);
   }
   if (outcome.institutionPatch && String(outcome.targetSaveId) === String(saveId)) {
-    next = applyInstitutionLifecycleOutcome(next, outcome);
+    next = applyInstitutionLifecycleOutcome(next, outcome, calendarContext);
   }
   // A coup verdict (or any future power_transfer outcome) reshapes the
   // governing seat through the same domain path the CHANGE_RULING_POWER
@@ -713,7 +730,22 @@ export function applyWorldPulseOutcomes({
       const entry = settlementUpdates.get(String(saveId));
       if (!entry) continue;
       const beforeSettlement = entry.settlement;
-      const afterSettlement = applyOutcomeToSettlement(beforeSettlement, outcome, saveId);
+      // MF-T2Q — the world calendar handed to the institution lifecycle seam, which takes
+      // no worldState of its own. BOTH apply paths arrive here: the immediate outcome, and
+      // a stored proposal re-applied possibly ticks later (applyWorldPulseProposal hands us
+      // the CURRENT worldState and tick), so a founding is dated by when it really came to
+      // stand rather than when it was proposed. `year` is the display calendar year, `tick`
+      // the pulse counter — deliberately two different clocks.
+      //
+      // ⚠ The pair travels RAW and is validated in exactly ONE place: foundingStampFrom()
+      // in institutionLifecycle.js, which does the Number()/isFinite work, rejects year < 1
+      // and tick < 0, and floors both. An earlier draft of this member re-did that
+      // arithmetic here as well; duplicating a normalizer is how two spellings of one rule
+      // drift apart. Unreadable clock ⇒ that single normalizer yields null ⇒ nothing is
+      // dated, never a guessed year. `worldState` is this function's own never-reassigned
+      // parameter (`state` is the mutating one), so every iteration reads the same
+      // incoming calendar the hoisted read used to.
+      const afterSettlement = applyOutcomeToSettlement(beforeSettlement, outcome, saveId, { year: worldState?.calendar?.year, tick });
       if (!settlementChanged(beforeSettlement, afterSettlement)) continue;
       settlementUpdates.set(String(saveId), { ...entry, settlement: afterSettlement });
       if (propagationDepth > 0) {
