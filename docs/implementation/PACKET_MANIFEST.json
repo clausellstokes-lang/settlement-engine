@@ -22037,6 +22037,235 @@
      ]
     ],
     "retiredSymbols": []
-   }
+   },
+    {
+     "id": "WEB-2",
+     "status": "LANDED",
+     "packetPath": "docs/implementation/packets/website/WEB-2.md",
+     "verifiedBase": "c129593816b13640e5740603ca3e51d68ee711fc",
+     "changeManifest": [
+      {
+       "_note": "The whole member. Creates public.analytics_retention_cohorts (counts only - no actor, session or country column, the 196 PII-free-BY-SCHEMA idiom), backfills it ONCE from 038's mv_retention_cohorts, adds append_retention_cohorts(), carries the nightly job's FOURTH latest-wins redefinition with every call 039/133/134 had, re-targets report_retention() at the table behind an UNCHANGED return type (so no drop and no grant motion), and rewrites analytics_monthly_prune with two fail-closed gates: the 90-day window activates only while the cohort table is non-empty, and a research row is prunable only when 038's export_cursors receipt covers it. The order inside the file is the charter's mandatory one AND is enforced at runtime, so a prune cannot outrun the backfill. Carries a mandatory `-- @rollback:` note - it names analytics_device_links and analytics_identity_links, both on MONEY_PII_TABLES, and the walker reads the whole source including comments.",
+       "action": "CREATE",
+       "path": "supabase/migrations/198_retention_numbers.sql"
+      },
+      {
+       "_note": "A1-A8 against the REAL 038 and the REAL 198 applied in sequence into one pglite database, because the property under test is a LIFECYCLE: history accumulates, the migration applies, days pass, then a prune runs. Boundary arms sit on BOTH sides of 90d and of 400d; A5 additionally pins the row a receipt CANNOT cover (a product-tier snapshot at 401 days) so the fail-closed reading cannot be tidied into a fail-open. The grant arm carries a live POSITIVE CONTROL - a table created the same way in the same schema does pick up the simulated Supabase default grant - so an empty grant list is evidence rather than an artifact of plain Postgres. NEW FILE = a CREATE row at every packet status.",
+       "action": "CREATE",
+       "path": "tests/security/retentionNumbers.pglite.test.js"
+      },
+      {
+       "_note": "MIGRATION_TRAIN_REPO_HEAD 197 -> 198 plus a NEW REVIEWED WAVE `retention-numbers`. The previous wave's `to:` was deliberately NOT extended. This is the train's first DESTRUCTIVE wave - 196 exposed no subsystem and 197 rewrote rows, but 198 deletes - so its expectedObjects names the prune and maintenance functions alongside the table; pinning only the table would let a rehearsal read the wave as additive.",
+       "action": "MODIFY",
+       "path": "scripts/ops/migrationRehearsalCore.mjs"
+      },
+      {
+       "_note": "The wave pins and the plan figures (repoHead 198, pendingCount 77, the [from,to] list, the Array.from length, the snapshot pair, the plan-mode spawn), plus the FIVE relative plan.waves.at(-N) pins that each shift by one when a wave is appended. Adds an assertion that 198 takes `documented-manual-reversal` from its own annotation, and that its note states the deletions are NOT reversible - the distinction a wave-policy classification would flatten.",
+       "action": "TEST",
+       "path": "tests/ops/migrationRehearsal.test.js"
+      },
+      {
+       "_note": "deployRunbookFreshness derives the head basename from disk and asserts DEPLOY.md names it. ONLY the head line is touched; the exact CLAIM_RE was run before and after and this edit adds no completeness claim (2 pre-existing hits, unchanged).",
+       "action": "MODIFY",
+       "path": "docs/DEPLOY.md"
+      },
+      {
+       "_note": "architectureFreshness pins BOTH figures here - `migrations are contiguous to N` and the `head N is M ahead of P` blocker line. 197/76 -> 198/77; the production head 121 is deliberately NOT touched, because supabase/applied-head.json moves only in the same commit as the actual db push.",
+       "action": "MODIFY",
+       "path": "docs/CURRENT_STATE.md"
+      },
+      {
+       "_note": "architectureFreshness and docCounts both pin `**migrations/** (N)`. 197 -> 198.",
+       "action": "MODIFY",
+       "path": "ARCHITECTURE.md"
+      },
+      {
+       "_note": "The E-A totality contract: a NEW invariant test file owes a mutation-coverage entry. Registered with the estate's idiom for runIf-gated pglite suites, {kind: rationale, ref: pglite-executed}, which is honest here because the per-suite mutation proofs WERE executed - M1 reds A3, M2 reds A4, M3 reds A1 and M4 reds A7, each planted and then restored byte-identically (verified by cmp and sha256). Inserted by text surgery in sorted position and verified by PARSE, never by re-serialising the file; uncoveredBaseline is untouched, since a rationale entry is not counted by the shrink-only arm.",
+       "action": "REGISTER",
+       "path": "scripts/mutation-coverage-manifest.json"
+      },
+      {
+       "_note": "The packet itself, a ROW in the WEBSITE family WEB-1 founded - keep-one on the family header, keep-both on rows.",
+       "action": "CREATE",
+       "path": "docs/implementation/packets/website/WEB-2.md"
+      },
+      {
+       "_note": "THE CENSUS RE-RECORD, all five figures re-derived together with the cause stated: ONE NEW TEST FILE and nothing else (tests/security/retentionNumbers.pglite.test.js), and it PARKS - reasons SUITE_NOT_RUNNING:describe.runIf() plus one TEST_UNREGISTERED:it per arm, MEASURED at the build with a probe inside the walker's own arm (liveTitlesIn 0, liveSuiteTitlesIn 0), the same kinds as its peer operatorMessages.pglite.test.js and WEB-1's consentPersonAdjacentDefault suite. 2500/365/2135/20730/5787 -> 2501/366/2135/20730/5787 at the BUILD base 4060f690, green in ONE step at the prediction (33/33), then the walker edit REVERTED per ODQ 417 and the row carried by the packet (section 8) for the landing act. Re-derived at the landing slot c1295938 by TE-WEB2-LANDING: 2510/365/2145/20817/5802 -> 2511/366/2145/20817/5802 (the DELTA +1/+1/+0/+0/+0 crossed the rebase, never the tuple: WEB-4..WEB-7, the map stack, the producer train, UC-0 and UC-3 had re-recorded the walker under it), convicted 33/33 with TWO negative controls - the slot tuple put back reds at files (expected 2511 to be 2510) and parked alone put back at 365 reds at parked (expected 366 to be 365) - the file restored byte-identical after each. The file's ten pins are real coverage this census cannot see; do not read the unmoved titles figure as WEB-2 adding no tests. This row could join the manifest only at LANDED: MF-T2H (READY at the slot) reserves the walker path.",
+       "action": "TEST",
+       "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+      }
+     ],
+     "requiredSymbols": [
+      {
+       "path": "supabase/migrations/198_retention_numbers.sql",
+       "symbol": "create table if not exists public.analytics_retention_cohorts"
+      },
+      {
+       "path": "supabase/migrations/198_retention_numbers.sql",
+       "symbol": "alter table public.analytics_retention_cohorts enable row level security"
+      },
+      {
+       "path": "supabase/migrations/198_retention_numbers.sql",
+       "symbol": "if exists (select 1 from public.analytics_retention_cohorts) then"
+      },
+      {
+       "path": "supabase/migrations/198_retention_numbers.sql",
+       "symbol": "interval '90 days'"
+      },
+      {
+       "path": "supabase/migrations/198_retention_numbers.sql",
+       "symbol": "where name = 'research_edits'"
+      },
+      {
+       "path": "supabase/migrations/198_retention_numbers.sql",
+       "symbol": "where name = 'research_snapshots'"
+      },
+      {
+       "path": "supabase/migrations/198_retention_numbers.sql",
+       "symbol": "where consent_tier = 'research'"
+      },
+      {
+       "path": "supabase/migrations/198_retention_numbers.sql",
+       "symbol": "from public.mv_retention_cohorts"
+      },
+      {
+       "path": "supabase/migrations/198_retention_numbers.sql",
+       "symbol": "returns setof public.mv_retention_cohorts"
+      },
+      {
+       "path": "supabase/migrations/198_retention_numbers.sql",
+       "symbol": "perform public.rollup_intent_atlas_daily();"
+      },
+      {
+       "path": "supabase/migrations/198_retention_numbers.sql",
+       "symbol": "@rollback:"
+      },
+      {
+       "path": "tests/security/retentionNumbers.pglite.test.js",
+       "symbol": "A2 — the backfilled table equals the MV row-for-row (the parity proof)"
+      },
+      {
+       "path": "tests/security/retentionNumbers.pglite.test.js",
+       "symbol": "A3 — the raw window shortens to 90 days, and 89-day rows survive (both sides)"
+      },
+      {
+       "path": "tests/security/retentionNumbers.pglite.test.js",
+       "symbol": "A4 — research rows with NO covering export receipt survive the prune (fail closed)"
+      },
+      {
+       "path": "tests/security/retentionNumbers.pglite.test.js",
+       "symbol": "A6 — the cohort rows outlive the raw events they were computed from"
+      },
+      {
+       "path": "tests/security/retentionNumbers.pglite.test.js",
+       "symbol": "A7 — no prune or maintenance statement names world_sim_metrics, and the rows survive"
+      },
+      {
+       "path": "scripts/ops/migrationRehearsalCore.mjs",
+       "symbol": "id: 'retention-numbers',"
+      },
+      {
+       "path": "scripts/ops/migrationRehearsalCore.mjs",
+       "symbol": "MIGRATION_TRAIN_REPO_HEAD = 198"
+      },
+      {
+       "path": "docs/DEPLOY.md",
+       "symbol": "198_retention_numbers.sql"
+      },
+      {
+       "path": "ARCHITECTURE.md",
+       "symbol": "**migrations/** (198)"
+      },
+      {
+       "path": "docs/CURRENT_STATE.md",
+       "symbol": "migrations are contiguous to 198"
+      }
+     ],
+     "retiredSymbols": [],
+     "acceptanceCases": [
+      {
+       "id": "A1",
+       "case": "the nightly append writes exactly yesterday's (cohort_day, day_offset) rows and no others - the fail-soft actor with no link row is excluded - and a second run for the same day changes nothing; the scheduled entry point analytics_nightly_maintenance() produces the identical result"
+      },
+      {
+       "id": "A2",
+       "case": "the backfilled table equals mv_retention_cohorts row-for-row at the fixture, and the set includes the rows whose source events the 90-day window is about to destroy"
+      },
+      {
+       "id": "A3",
+       "case": "raw events older than 90 days are deleted and 89-day rows survive (boundary on both sides), while the 2-day rate-bucket rule is unchanged"
+      },
+      {
+       "id": "A4",
+       "case": "with export_cursors EMPTY, every research-plane row survives the prune however old it is - the fail-closed arm"
+      },
+      {
+       "id": "A5",
+       "case": "with a covering receipt, research rows past the 400-day ceiling are pruned and rows inside it survive; a row whose id sits ABOVE the cursor survives at 402 days, and a product-tier snapshot survives at 401 days because research.snapshots structurally excludes it"
+      },
+      {
+       "id": "A6",
+       "case": "cohort rows survive a raw prune that removed their source events, and report_retention() serves them from the durable table"
+      },
+      {
+       "id": "A7",
+       "case": "no statement in append_retention_cohorts, analytics_nightly_maintenance or analytics_monthly_prune names world_sim_metrics (sliced-body source scan, so the header's deliberate re-affirmation is not a false positive), and a 900-day-old metric row survives execution"
+      },
+      {
+       "id": "A8",
+       "case": "the migration adds no actor-keyed store - the one table it creates has exactly the four counts-only columns - so purge_analytics_for_user() stays complete and the existing deletion suites are RE-RUN rather than rewritten"
+      }
+     ],
+     "checks": [
+      [
+       "npx",
+       "vitest",
+       "run",
+       "tests/security/retentionNumbers.pglite.test.js"
+      ],
+      [
+       "npx",
+       "vitest",
+       "run",
+       "tests/docs/deployRunbookFreshness.test.js",
+       "tests/docs/architectureFreshness.test.js",
+       "tests/docs/docCounts.test.js",
+       "tests/docs/migrationRollbackDiscipline.test.js",
+       "tests/security/publicTableRlsCensus.test.js",
+       "tests/security/migrationSequenceAll.pglite.test.js",
+       "tests/lint/migrationSearchPathPin.test.js",
+       "tests/security/migrationRefIntegrity.meta.test.js",
+       "tests/lint/mutationCoverageManifest.test.js"
+      ],
+      [
+       "npx",
+       "vitest",
+       "run",
+       "tests/security/accountDeletionProcessing.pglite.test.js",
+       "tests/security/accountDeletionCleanupQueue.pglite.test.js",
+       "tests/security/ownerConfirmedPrivacyDeletes.pglite.test.js",
+       "tests/edgeFunctions/ingestActorLinks.test.js"
+      ],
+      [
+       "npx",
+       "vitest",
+       "run",
+       "tests/ops",
+       "tests/docs",
+       "tests/lint",
+       "tests/build"
+      ],
+      [
+       "npm",
+       "run",
+       "validate:packets"
+      ],
+      [
+       "npm",
+       "run",
+       "check:tail"
+      ]
+     ]
+    }
   ]
 }

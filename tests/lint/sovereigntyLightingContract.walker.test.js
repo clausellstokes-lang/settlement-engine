@@ -5779,7 +5779,45 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   that no sibling's delta was dropped by the merge; the file restored byte-identical both
     //   times. `parked` holds at 365 (the slot's figure; each member's file is ONE literal
     //   `describe` with straight-line string-literal titles, so neither parks).
-    files: 2510, parked: 365, credited: 2145, titles: 20817, suiteTitles: 5802,
+    // ── RE-RECORDED 2026-08-23 BY TE-WEB2-LANDING (WEB-2, the retention numbers), CAUSE ATTRIBUTED ──
+    // 2,500/365/2,135/20,730/5,787 → 2,501/366/2,135/20,730/5,787 at the BUILD base 4060f690
+    // (WEB-1's landing). ONE cause, and it is not a rule change — no classifier here widened or
+    // narrowed:
+    //   +1 file / +1 PARKED: tests/security/retentionNumbers.pglite.test.js, the migration-198
+    //     acceptance suite (A1–A8 against the REAL 038 and the REAL 198 applied in sequence into
+    //     one pglite database). CREDITED, TITLES and SUITE TITLES are UNCHANGED because the file
+    //     PARKS.
+    // ⚠⚠ THE PARK IS THE IDIOM, NOT A DEFECT, AND IT WAS MEASURED RATHER THAN ASSUMED (a temporary
+    //   probe inside this walker's own arm at the build, writing to a file because vitest silences
+    //   console here): the new file's park reasons are `SUITE_NOT_RUNNING:describe.runIf()` plus
+    //   one `TEST_UNREGISTERED:it` per arm — the SAME reason kinds as its peer
+    //   tests/security/operatorMessages.pglite.test.js and as WEB-1's consentPersonAdjacentDefault
+    //   suite re-recorded above. A pglite suite must gate on the migration file existing, and that
+    //   gate is exactly what this reader cannot resolve statically.
+    // ⛔ SO THIS FILE'S TEN PINS ARE REAL COVERAGE THIS CENSUS CANNOT SEE. `liveTitlesIn` returns
+    //   0 and `liveSuiteTitlesIn` returns 0 for it, measured directly. Do NOT read an unmoved
+    //   `titles` as "WEB-2 added no tests" — it added ten (A1–A8, the house-posture arm with its
+    //   live positive control, and the top-level vacuity arm), all invisible here BY CONSTRUCTION.
+    //   A future lane attributing a `titles` delta by arithmetic would mis-attribute this one.
+    // `censusAuthorization`: ODQ §359.7 (the ruling), §402 C2 (the numbers table, chair-signed),
+    // §446 (WEB-1 landed ⇒ migration 198), §455 (this member built; the twelfth migration gate).
+    // ⛔ CONVICTED AT THE BUILD, then REVERTED per §417: the walker went green in ONE step at the
+    //   predicted after-figure (33/33), the edit was reverted (`git checkout --`), and the row rode
+    //   the packet (§8) into this landing slot so the tuple is re-derived here, never carried.
+    // ⭐⭐ THE CARRY LAW, EXECUTED AT THE LANDING SLOT (TE-WEB2-LANDING, 2026-08-23; §457/§469
+    //   laws). This member was authored at base 4060f690 (after-figure 2,501/366/2,135/20,730/
+    //   5,787) and rebased onto c1295938 (the UC-0 + UC-3 stacked landing, landings 39–40). The
+    //   DELTA `+1/+1/+0/+0/+0` is what crossed. ⛔ THE BASE HAD MOVED UNDER IT: WEB-4, WEB-5,
+    //   WEB-6, WEB-7, the four-member MAP STACK, the three-member PRODUCER TRAIN, UC-0 and UC-3
+    //   re-recorded the blocks directly above, so the slot reads 2,510/365/2,145/20,817/5,802 and
+    //   the after-figure re-derives to 2,511/366/2,145/20,817/5,802 — the ONE live tuple line
+    //   below, CONVICTED BY EXECUTION at the rebased tip (33/33) with TWO negative controls: the
+    //   slot's own tuple put back reds at `files` ("expected 2511 to be 2510"), this member's +1
+    //   exactly; and `parked` alone put back at 365 reds at `parked` ("expected 366 to be 365"),
+    //   the park itself — the file restored byte-identical both times. `parked` moves 365 → 366
+    //   for the SECOND time in the website train (WEB-1's pglite suite was the first); `credited`
+    //   holds at the slot's 2,145.
+    files: 2511, parked: 366, credited: 2145, titles: 20817, suiteTitles: 5802,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

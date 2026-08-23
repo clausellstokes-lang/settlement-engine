@@ -159,6 +159,22 @@ This line records the head **on disk**, not a clearance to apply it: `195` carri
 own owner-gated, dark header (`AUTHORED, NOT DEPLOYED`), so whether it ships in a given
 cutover is the owner's call — read that file's preamble before pushing.
 
+**Read these preambles before the push, whatever the head number says.** Most
+migrations are additive and need no separate reading; these are the pending ones whose
+posture an operator has to know, and they stay listed here after they are applied
+because the fact does not expire:
+
+- `197_consent_person_adjacent_default.sql` — a **DATA** migration. It rewrites existing
+  `profiles.telemetry_consent` rows under a provenance predicate. It creates nothing, so
+  a schema diff will not show you what it did; the preamble states which rows it touches
+  and why the reversal is manual rather than scripted.
+- `198_retention_numbers.sql` — the first **DESTRUCTIVE** migration in the train. Once
+  the nightly and monthly jobs run under it, raw `analytics_events` are deleted past 90
+  days and exported research rows past 400. Both prunes fail closed, and the 90-day
+  window only activates after the cohort aggregate is backfilled — but deletion is not
+  reversible by any down script, so PITR is the only recovery. Read its preamble and its
+  `-- @rollback:` note before pushing it.
+
 Do **not** hand-count from a fixed starting migration — `db push` applies EVERY
 pending migration on top of the current schema, in order, and self-corrects
 regardless of how far behind prod is. They must land before the corresponding
