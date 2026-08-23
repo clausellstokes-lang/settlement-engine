@@ -18072,3 +18072,76 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   dir, short TMPDIR, the §417 deferred census row, the mutexed §408 sweep
   against the b10ed1a1 baseproof. Seats: WEB-1 landing · TE-T2Q ·
   TC-UNDERCITY-R2 · TE-T2N (cap).
+
+## §445 — T2Q COMPLETE AT cc9ef856 (ONE REAL DEFECT FOUND AND CURED); THE RULED UNDERCITY CHARTER RATIFIED (24/24 + THE §443 ADDENDUM) AND ITS FIRST CAR DISPATCHED; THE FIRST R-INST TRANCHE DISPATCHED; A LANDED-DARK DEFECT DOCKETED (2026-08-22 ~21:55 CDT)
+
+- **§445.1 T2Q COMPLETE:** tip **cc9ef856** (b3e84008 + one cure commit,
+  hooks ON; the §439.2 pin stays an ancestor), tree clean; PINNED at
+  refs/preserve/holding-t2q. The clean mutexed §408 sweep ran QUIET in 92 s
+  (vs the void sweep's 404/355/353 s): exactly the ONE expected interior red
+  (the §417 census row, `expected 2498 to be 2497`) plus the three banked
+  pre-existing reds text-identical at base. `observedShapeSentinel` is NOT a
+  defect: green at base AND at tip by name (36/36 in 8.09 s against a 20 s
+  budget; its probe shells an all-refs `git log -S` pickaxe whose cost
+  tracks load — the three-lane timeouts explained). **The one real red was
+  MEMBER-CAUSED and CURED:** `sizeBaseline` — `applyWorldPulse.js` grew to
+  945 > frozen 941; the member had validated the calendar TWICE (a 4-line
+  caller-side ternary duplicating `foundingStampFrom()`); the duplicate
+  deleted, 945 → 941 on the number, no baseline touched. Re-proof 8 files /
+  90 tests green incl. acceptance 7/7, any-cast ledger, generator golden;
+  `valid: 149 packets (1 READY)`; both typecheckers at ceiling after the
+  cure. **LAW BANKED (the cost of J6):** a `--no-verify` checkpoint HIDES
+  size-ratchet reds — `eslint.config.js` generates per-file `max-lines`
+  overrides from `.size-baseline.json`, so the hook would have caught 945
+  at b3e84008; every bypassed commit owes an explicit size-ratchet re-run.
+  The lane's squash request is DEFERRED to the landing act (the rebase
+  squashes the two commits into one member commit — J1). Its deferred
+  census figures are STALE against T2H's landing (sum-of-deltas
+  2500/364/2136/20736/5788 is PLAUSIBLE arithmetic; the landing re-measures).
+- **§445.2 THE RULED CHARTER RATIFIED:** TC-UNDERCITY-R2 applied all 24
+  §441 items (581 → 942 lines; edit ledger with line numbers; §311 quotes
+  byte-verified against ODQ 13107–13318; §311.2 added verbatim; C0 0;
+  CLAIM_RE 0), re-walked the §3 table at b10ed1a1 with file:line receipts
+  (founding kind → NO TYPED HOME; criminal share → CONFIRMED at
+  safetyProfile.js:619 / corruption.js:539-541; walls → HOME OWED AT UC-0;
+  the three sanitation rows CONFIRMED — 'Aqueduct' is tagged
+  `['essential','water']`, noted), argued the b10ed1a1 walk holds at
+  84e06412 (T2H's diff touches nothing the charter cites), and made three
+  vetoable refinements RATIFIED here: J-R2-1 (D-8 recorded, not cured by
+  the train), J-R2-2 (`jointVocabulary.js` minted by UC-0 so every later
+  row imports one truth), J-R2-3 (§443's pulse-written-key law folded in as
+  a tagged addendum — UC-2/UC-4 read calamityHistory through
+  `buildCalamityLedger`, never raw). Final trains: T-UC1 = MF-UC0 → MF-UC3
+  → MF-UC1 · T-UC2 = MF-UC4 alone · T-UC3 = MF-UC2 → MF-UC5.
+- **§445.3 D-8 — A LANDED-DARK DEFECT, VERIFIED BY THE CHAIR AT SOURCE:**
+  `src/domain/worldPulse/clandestineFacet.js:50` —
+  `facetOf(i, 'institutionFunction') === 'clandestine'` — queries the wrong
+  facet KIND: the catalog's three 'Underground network' rows declare
+  `facets: { clandestine: 'clandestine', subterranean: 'subterranean' }`,
+  and `FACET_INFERENCE.institutionFunction` is heals/feeds/arms/judges, so
+  `settlementHasUnderways` is ALWAYS FALSE on catalog data and the whole
+  D6 underways coupling substrate (FOOD_TRICKLE, INTERDICTION_RELIEF,
+  conspiracy ease) never fires. Its parity test passes because it tests
+  `facetOf` with the RIGHT key on a fixture, never `hasClandestineFacet`
+  against the real row — the fixture-mirrors-the-deriver vacuity class.
+  Observable today? NO: `UNDERWAYS_TUNING` defaults OFF, so the fix is
+  golden- and pulse-inert until tuning lights it. DOCKETED as **HK-1**, a
+  repair-class micro-fix car (restore the intended key; a POSITIVE pin of
+  `hasClandestineFacet` against the real catalog row; prove inertness with
+  the defaults OFF; one more line for the tuning pass's input list) at the
+  next free seat after the T-UC1 builders.
+- **§445.4 DISPATCHED:** TE-UC0 (the existence gate + the §3 field-level
+  audit + the `institutionSubstructure` facet kind + jointVocabulary.js;
+  S0 proves golden inertness of the facet rows and the reader walker at
+  base/tip) · TC-R-INST-1 (civic/administrative + defense/military — the
+  first §438 tranche; entry-by-entry over the real catalog; typed
+  closed-vocabulary proposals; taste-gated). Seats: WEB-1 landing · TE-T2N
+  · TC-R-INST-1 · TE-UC0 (cap). Queue: UC-3 → HK-1 → R-INST-2..6 → UC-1
+  (after T2R lands) → UC-4 → UC-2/UC-5 (after T2N/T2Q land).
+- **Judgments (vetoable):** J1 squash-at-landing over a lane amend (the
+  landing rebase is the one act that rewrites the member's history anyway)
+  · J2 HK-1 is REPAIR not new capability (restores a landed program's
+  intended read; owner-visible only after tuning lights the coefficients —
+  which the signature governs) · J3 R-INST-1 before UC-3 for the freed seat
+  (the owner's §438 cost-accepted research was seatless all evening; UC-3
+  takes the next seat).

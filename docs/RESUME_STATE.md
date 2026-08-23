@@ -51,6 +51,12 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐ ~21:55 CDT 08-22: §445 — T2Q COMPLETE at cc9ef856 (pinned; sizeBaseline
+# defect cured; --no-verify hides size-ratchet reds = LAW). Ruled undercity
+# charter RATIFIED (R2 24/24 + §443 addendum). D-8 VERIFIED: clandestineFacet
+# reads the wrong facet kind → underways couplings never fire (inert while
+# tuning OFF) → HK-1 micro-fix car docketed. Dispatched TE-UC0 + TC-R-INST-1.
+# Seats: WEB1-landing · T2N · R-INST-1 · UC0. Queue: UC-3 → HK-1 → R-INST-2..
 # ⭐ ~21:25 CDT 08-22: §444 — T2R COMPLETE at f65b3ff3 (READY; walker back at
 # base; pinned holding-t2r). TE-T2N dispatched at base 84e06412 (worktree
 # laneTET2N-tree, TMPDIR /tmp/t2n). Seats: WEB1-landing · T2Q · UC-R2 · T2N.
