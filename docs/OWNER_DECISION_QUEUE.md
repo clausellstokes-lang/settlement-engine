@@ -19531,3 +19531,46 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   coherence checked at the slot per §475; the title-census raise at 486).
   Seats: WEB-3 landing · TE-UC1 (cap). Holding after WEB-3: HK-A (its
   landing act carries D-HKA-1's comment fix and the §478.3 deletion).
+
+## §479 — WEB-3 LANDED (THE 42ND): MIGRATION 199 ON THE BRANCH — THE REFERRAL FUNNEL MEASURABLE; A THIRD SPECIMEN OF THE MOVING-HEAD CLASS (FIGURES, NOT FILENAMES) CURED IN-TRAIN AND RATIFIED; HK-A's GO ISSUED (2026-08-23 08:55 CDT)
+
+- **§479.1 LANDED.** TE-WEB3-LANDING: 12 of 29 paths moved at the slot,
+  every one keep-slot + re-apply (the migration-doc figures 198 → 199 with
+  WEB-2's preambles line kept; the rehearsal core/test with the 199 wave on
+  top of the 198 wave; ONE `build:edge-shared` at the first stop — the
+  three UC-0 bundles byte-identical to the slot, the analytics bundle
+  byte-identical to the holding, five metas within 105 ms); the twelve
+  gates at the rebased tree — 76 files / 1,507 tests, 0 skipped, `head =
+  199 (199 files, contiguous)`; the walker written once at the act: slot +
+  `+1/+0/+1/+9/+1` = **2512/366/2146/20826/5803** with both controls; S0
+  pre-existing by lookup; the eight-tree sweep 7/7 banked, received-list
+  diffs quoted, 0 strays; terminal 15m50s, outlasted: `TRUE_EXIT=0` +
+  `[gate-tail] exit: 0` + `free_kb_at_end=19765048`; `28868 tests, ceiling
+  11` (+14 attributed by execution in a temp slot worktree: the jsdom file
+  +9, the pglite suite 48 → 53); `STRICT DIST OK 52/438`; `valid: 165
+  packets (1 READY)`. **CAS `718e4855 → 64da7d5d`.** Pruned holding-web3,
+  the tree, /tmp/web3l. Disk 19Gi. The db-push train is now 195 / 196 /
+  197 / 198 (DESTRUCTIVE) / 199.
+- **§479.2 THE THIRD SPECIMEN, RATIFIED:** at the re-stamped tree
+  `validate:packets` was RED on WEB-2's LANDED `requiredSymbols` — three
+  rows pinning the current migration-head FIGURE (`MIGRATION_TRAIN_REPO_HEAD
+  = 198`, `migrations/** (198)`, `contiguous to 198`) that 199 must move.
+  The §455.2 class one specimen wider: FIGURES, which HK-3's planned
+  filename guard would not catch. The lane deleted the three rows inside
+  WEB-2's row span (21 → 18; the DEPLOY filename row kept for HK-A per
+  §478.3), cited it in WEB-2.md §11 and WEB-3.md §13, re-validated green —
+  J-L1 RATIFIED (the reverse re-reds the validator at any head above 198).
+  LAW: a landed packet NEVER pins the current migration head — filename
+  OR figure — on `DEPLOY.md`, `ARCHITECTURE.md`, `CURRENT_STATE.md` or the
+  rehearsal core; **HK-5** (a follow-on to HK-3's guard: refuse head-FIGURE
+  pins on those four paths, with a positive control) joins the
+  housekeeping queue after HK-4. Memory banked by the lane.
+- **§479.3 HK-A's GO ISSUED** (TE-HKA-LANDING; holding f2b2711b = 3 over
+  dffa2b97; the landing act carries the §478.3 deletion of WEB-2's
+  remaining DEPLOY row (proved by the guard before/after) and D-HKA-1's
+  comment fix with the prose-numerics ratchets re-run; HK-1's
+  `institutionLifecycle.js` hunk keep-slot + re-apply over T2Q's landed
+  MODIFY, with T2Q's acceptance re-run; expect `valid: 165 packets (0
+  READY)` after HK-2's flip). Seats: HK-A landing · TE-UC1 (cap). After
+  HK-A the holding roster is EMPTY until UC-1 builds — the landing seat
+  then takes the next built car (UC-1 → the W-C cars → UC-4 / UC-2+UC-5).

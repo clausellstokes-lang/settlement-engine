@@ -51,6 +51,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 08:55 CDT 08-23: §479 — WEB-3 LANDED (42nd): migration 199; CAS →
+# 64da7d5d. Third moving-head specimen (FIGURES) cured in-train → HK-5 queued.
+# HK-A landing GO (last holding car). Seats: HKA-landing · UC1.
 # ⭐⭐⭐ 08:05 CDT 08-23: §478 — WEB-2 LANDED (41st): migration 198 on the branch;
 # CAS → 718e4855. WEB-3 GO (199). HK-A's landing act also deletes WEB-2's
 # moving-head row (§478.3). Seats: WEB3-landing · UC1.
