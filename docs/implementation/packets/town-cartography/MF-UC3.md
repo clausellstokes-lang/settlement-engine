@@ -1,8 +1,10 @@
 # Town cartography / MF-UC3 — the undercity's STATIC components: `deriveStaticComponents` derives the caverns a settlement's GROUND gives it, licensed by the geography data's own excavation-affinity rows, anchored on its own published natural features, epoch-invariant, and lands dark
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** 1
-- **Verified base:** `claude/composite-r4` at `4060f690036c79e1c6190cb052bdb221bde93cde`
+- **Verified base:** `claude/composite-r4` at `f32c548ea720fc10ae895b0d542a837cce7d63aa`
+  ⚠⚠ **AS AUTHORED — the row above now names the LANDING SLOT (see the Landing note below); the
+  BUILD base was `4060f690` (WEB-1's landing).** The continuation that follows was written at that base:
   — WEB-1's landing (ODQ §446.1), read with `git rev-parse` at the lane's opening and re-read at
   every proof below. Every figure in this packet was executed at THIS base by the implementing
   lane TE-UC3; nothing is inherited from the charter (`draft-UNDERCITY-PLAN.md`, ruled ODQ §441,
@@ -12,6 +14,18 @@
   base (`:267-274` mountain, `:576-582` hills) — the same two rows, re-walked.
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line (J-TEWF1B-1).
+- **Landing note (TE-UCSTACK-LANDING, 2026-08-23, ODQ §472.4 — THE UNDERCITY TRAIN's FIRST TWO CARS, a lawful green prefix of T-UC1):** authored at BUILD
+  base `4060f690` as holding tip `64a4b259` (pinned `refs/preserve/holding-uc3`); landed as ONE stacked landing with its sibling
+  (MF-UC0 → MF-UC3, UC-0 first because UC-3 imports its `jointVocabulary.js`; each rebased in sequence onto the moving tip) at slot `f32c548e`
+  (the PRODUCER TRAIN's §469 follow-on, landings 36–38). Rebased implementation commits `2bd4c821 → cda3112d` (authored `4559b9bd → 64a4b259`);
+  this member is the SECOND (the LAST — its position IS the live tuple) of the two. Entered at **LANDED** directly — the §410 form, as the MAP STACK and the PRODUCER TRAIN did:
+  MF-T2H's READY reservation on the census walker stands until HK-A lands, so the §417 deferred row could only enter the manifest at a
+  terminal status, and did, at this act. Census: slot `2508 / 365 / 2143 / 20801 / 5800`; this member's position `2510 / 365 / 2145 / 20817 / 5802`; the stack's ONE live tuple
+  `2510 / 365 / 2145 / 20817 / 5802` convicted at the stack tip (33/33) with the negative controls *"the estate's file count moved — re-measure, do not re-word: expected 2510 to be 2508"* (control A, the summed delta +2)
+  and *"… expected 2510 to be 2509"* (control B, MF-UC0's position put back — MF-UC3's +1 alone, the proof that no sibling's delta was dropped by the merge).
+  Every delivered-file digest this packet cites (the hash table, the preamble `0706aad6…`, the generator-golden fixture `29c6cc8f…`) re-verified at the
+  landed tree — none moved, so no RE-HASHED table note is owed; the census note's walker digest `97d8437d…` is the BUILD-base pristine blob
+  (restoration history), and the walker at the landed tree reads `9b277324eacca30c377efb1d2caa2f9f4373ae845ed17100f661486719cc8f7a` after this act's re-record. The DORMANT CARRY of `src/domain/undercity/jointVocabulary.js` resolved to MF-UC0's ONE copy at the rebase (git dropped the identical add/add — the rebased member commit 2bd4c821 carries two files, not three; blob 44803aa7 on every side, `cmp` exit 0 both ways, sha256 f9445c98… as cited); the `CREATE` row for that path is therefore REMOVED from this packet's manifest `changeManifest` at this act (J-R2-2: UC-0 mints it; a LANDED CREATE row here would claim a path another LANDED packet created).
 - **Charter and rulings:** `draft-UNDERCITY-PLAN.md` §4 UC-3 (this member), §1 (the binding law
   quoted), §2 (the fabric-vs-engine split), §3 (the live estate and the license-home audit), §7 F4
   (the CT-4 fact contract this member produces), §8–§11. Doctrine citation: **ODQ §311** — and
@@ -82,6 +96,13 @@
 > are invisible to the census). Its authorizing decisions are **ODQ §311** (the undercity
 > doctrine), **§359.3** (the OB-6 fold), **§431** (this dispatch) and **§441** (the ruling), under
 > the charter's §4 census law. The family's stamp is **GRANTED** at ODQ §312.2b.
+> ⭐⭐ **STACKED LANDING (ODQ §472.4; §457/§469 laws) — convicted at the stack tip, never carried.** Slot tuple
+> (`claude/composite-r4` = `f32c548e`, the PRODUCER TRAIN's follow-on): `2508 / 365 / 2143 / 20801 / 5800`; this member's position in the
+> stack re-derives to `2510 / 365 / 2145 / 20817 / 5802`; the stack's ONE live tuple `2510 / 365 / 2145 / 20817 / 5802` was
+> convicted at the stack tip (33/33) with two negative controls — the slot's own tuple put back reds at `files`:
+> *"the estate's file count moved — re-measure, do not re-word: expected 2510 to be 2508"* (the summed delta +2), and
+> MF-UC0's position tuple put back reds *"… expected 2510 to be 2509"* (MF-UC3's delta alone). The DELTA `+1/+0/+1/+8/+1` crossed the
+> rebase; the authored tuples above are the BUILD-base history.
 >
 > ⛔ **THE ROW IS DEFERRED TO THE LANDING ACT (ODQ §417, the T2J shape).** The walker edit was made,
 > walked figure by figure, proved green, and then **REVERTED ON PURPOSE** at the member commit

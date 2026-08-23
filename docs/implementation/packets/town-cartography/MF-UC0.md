@@ -1,8 +1,10 @@
 # Town cartography / MF-UC0 — the UNDERGROUND EXISTENCE GATE landed engine-side: `deriveStrataExistence` (ODQ §311.1 compiled as a pure domain-root deriver), the §3 license-home audit re-executed field-level, the inference-only `institutionSubstructure` facet kind proven golden-inert, and the closed joint vocabulary minted as data for every later car
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** 1
-- **Verified base:** `claude/composite-r4` at `84e06412f6fdca91020197f2a332ba7f98642f64`
+- **Verified base:** `claude/composite-r4` at `f32c548ea720fc10ae895b0d542a837cce7d63aa`
+  ⚠⚠ **AS AUTHORED — the row above now names the LANDING SLOT (see the Landing note below); the
+  BUILD base was `84e06412` (MF-T2H's landing).** The continuation that follows was written at that base:
   — MF-T2H's landing (ODQ §442.1), read with `git rev-parse` at the lane's opening
   (2026-08-23T01:11Z) and re-read at the member tip. Every figure below was executed at THIS
   base by the implementing lane TE-UC0; nothing is inherited from the charter
@@ -10,6 +12,18 @@
   the re-derivation. ⚠ The status value above stands ALONE on its line because
   `parsePacketHeader` (`scripts/implementation-packets.mjs`) anchors the status row at
   end-of-line.
+- **Landing note (TE-UCSTACK-LANDING, 2026-08-23, ODQ §472.4 — THE UNDERCITY TRAIN's FIRST TWO CARS, a lawful green prefix of T-UC1):** authored at BUILD
+  base `84e06412` as holding tip `a5c6c4fa` (pinned `refs/preserve/holding-uc0`); landed as ONE stacked landing with its sibling
+  (MF-UC0 → MF-UC3, UC-0 first because UC-3 imports its `jointVocabulary.js`; each rebased in sequence onto the moving tip) at slot `f32c548e`
+  (the PRODUCER TRAIN's §469 follow-on, landings 36–38). Rebased implementation commits `adb2bb8e → 12a60e54` (authored `e67aacf0 → a5c6c4fa`);
+  this member is the FIRST of the two. Entered at **LANDED** directly — the §410 form, as the MAP STACK and the PRODUCER TRAIN did:
+  MF-T2H's READY reservation on the census walker stands until HK-A lands, so the §417 deferred row could only enter the manifest at a
+  terminal status, and did, at this act. Census: slot `2508 / 365 / 2143 / 20801 / 5800`; this member's position `2509 / 365 / 2144 / 20809 / 5801`; the stack's ONE live tuple
+  `2510 / 365 / 2145 / 20817 / 5802` convicted at the stack tip (33/33) with the negative controls *"the estate's file count moved — re-measure, do not re-word: expected 2510 to be 2508"* (control A, the summed delta +2)
+  and *"… expected 2510 to be 2509"* (control B, MF-UC0's position put back — MF-UC3's +1 alone, the proof that no sibling's delta was dropped by the merge).
+  Every delivered-file digest this packet cites (the hash table, the preamble `0706aad6…`, the generator-golden fixture `29c6cc8f…`) re-verified at the
+  landed tree — none moved, so no RE-HASHED table note is owed; the census note's walker digest `6fa706ac…` is the BUILD-base pristine blob
+  (restoration history), and the walker at the landed tree reads `9b277324eacca30c377efb1d2caa2f9f4373ae845ed17100f661486719cc8f7a` after this act's re-record. The jointVocabulary.js this car mints is the ONE copy on the branch: MF-UC3's identical carried blob (sha256 f9445c98…, `cmp` exit 0 both ways) resolved to it at the rebase, so the path is owned by this packet alone. The §6 mutant section's test digest `b02df4f0…` is the pre-totality-rewrite working copy (BUILD history); the committed acceptance blob is the hash table's `863cd5f9…`, which matches the landed tree.
 - **Charter and rulings:** `draft-UNDERCITY-PLAN.md` §4 UC-0 (this car), §1 (the binding law,
   quoted), §3 (the license-home audit this car re-executes), §7 F1 (this fact's shape), §8–§11
   (the raised split, deferred rows incl. D-8, execution laws, judgments). Ruled at **ODQ §441**
@@ -62,6 +76,13 @@
 > doctrine), **§359.3** (the OB-6 fold into this charter), **§431** (the train's dispatch)
 > and **§441** (the ruling whose §441.5(e) gives this block its shape), ratified at §445.2.
 > The family's stamp is **GRANTED** at ODQ §312.2b.
+> ⭐⭐ **STACKED LANDING (ODQ §472.4; §457/§469 laws) — convicted at the stack tip, never carried.** Slot tuple
+> (`claude/composite-r4` = `f32c548e`, the PRODUCER TRAIN's follow-on): `2508 / 365 / 2143 / 20801 / 5800`; this member's position in the
+> stack re-derives to `2509 / 365 / 2144 / 20809 / 5801`; the stack's ONE live tuple `2510 / 365 / 2145 / 20817 / 5802` was
+> convicted at the stack tip (33/33) with two negative controls — the slot's own tuple put back reds at `files`:
+> *"the estate's file count moved — re-measure, do not re-word: expected 2510 to be 2508"* (the summed delta +2), and
+> MF-UC0's position tuple put back reds *"… expected 2510 to be 2509"* (MF-UC3's delta alone). The DELTA `+1/+0/+1/+8/+1` crossed the
+> rebase; the authored tuples above are the BUILD-base history.
 >
 > ⛔ **THE ROW IS DEFERRED TO THE LANDING ACT (ODQ §417, the T2J/T2Q/T2R shape).** The walker
 > edit was made, proved green, and then REVERTED ON PURPOSE at the member commit (the working

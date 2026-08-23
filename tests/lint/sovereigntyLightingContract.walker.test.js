@@ -5696,7 +5696,90 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   the proof that no sibling's delta was dropped by the merge; the file restored
     //   byte-identical both times. `parked` holds at 365 (the slot's figure; every member's
     //   file is ONE literal `describe` with straight-line string-literal titles, so none parks).
-    files: 2508, parked: 365, credited: 2143, titles: 20801, suiteTitles: 5800,
+    // ── RE-RECORDED 2026-08-23 BY TE-UC0 (MF-UC0), CAUSE ATTRIBUTED ──────────────
+    // `files` 2499 → 2500, `credited` 2135 → 2136, `titles` 20,729 → 20,737,
+    // `suiteTitles` 5,787 → 5,788. `parked` is UNCHANGED at 364 (it PASSED without redding).
+    // ONE new acceptance file, tests/domain/undercityStrataExistence.test.js, credited (one
+    // literal `describe`, straight-line `it`, string-literal titles, every loop INSIDE a named
+    // test; no `.each`/`runIf`/nesting) carrying EIGHT arms —
+    //   ⭐ A1 guard-the-guard: the `institutionSubstructure` rows are LIVE against the REAL
+    //      catalog and keyed right (exact name sets per value) before any arm below runs
+    //   ⭐ A2 no qualifying seed → no sheet (a cesspit rung contributes none; total on garbage)
+    //   ⭐ A3 one modest seed → the sheet exists (the two-level reading's first level)
+    //   ⭐ A4 a facet-DECLARED custom institution counts, incl. the sanitation/drains facet
+    //   ⭐ A5 the catalog's marsh/floodplain forbiddance honoured (refused, visible, never counted)
+    //   ⭐ A6 deterministic · closed vocabularies as literals · pure · dormant (no townMap import)
+    //   ⭐ A7 G-43: remove the last qualifying institution → exists flips false
+    //   ⭐ A8 the POSITIVE KEY arm: the real 'Underground network' row resolves `subterranean`
+    //      through facetOf; a roster carrying 'Sewage system' seeds the full-web class (UC-1's read)
+    // `censusAuthorization`: ODQ §311 (the undercity doctrine), §359.3 (the OB-6 fold), §431
+    // (the train's dispatch), §441 (the ruling; §441.5(e) is this bullet's shape), ratified §445.2.
+    // ⛔ ATTRIBUTED BY THE SEQUENCED WALK, NOT BY ARITHMETIC, at THIS base. `files` redded first
+    //   ("expected 2500 to be 2499"), `parked` PASSED at 364, then `credited` ("2136 to be
+    //   2135"), `titles` ("20737 to be 20729"), `suiteTitles` ("5788 to be 5787"), then GREEN
+    //   33/33 — each figure read from its own arm's failure message, never computed; the member
+    //   adds exactly one test file and no other lane's file moved.
+    // ⭐⭐ THE CARRY LAW, EXECUTED AT THE LANDING SLOT — THE UNDERCITY TRAIN's FIRST TWO CARS
+    //   (ODQ §472.4: MF-UC0 and MF-UC3 landed as ONE stacked landing, a lawful green prefix of
+    //   T-UC1, by TE-UCSTACK-LANDING, 2026-08-23; §457/§469 laws). This member was authored at
+    //   base 84e06412 (MF-T2H's landing; after-figure 2,500/364/2,136/20,737/5,788), its walker
+    //   edit REVERTED per §417 (the T2J shape), and rebased onto f32c548e (the PRODUCER TRAIN's
+    //   §469 follow-on, landings 36–38) as the FIRST car. The DELTA `+1/+0/+1/+8/+1` is what
+    //   crossed; the tuple was RE-DERIVED at the stack tip by execution, never carried. ⛔ THE
+    //   BASE HAD MOVED UNDER IT: WEB-1, WEB-4, WEB-5, WEB-6, WEB-7, the four-member MAP STACK and
+    //   the three-member PRODUCER TRAIN re-recorded the blocks directly above, so the slot reads
+    //   2,508/365/2,143/20,801/5,800 (`parked` 365, not the authored 364 — WEB-1 parked a file;
+    //   the deltas cross, the tuples do not) and this member's POSITION in the stack re-derives
+    //   to 2,509/365/2,144/20,809/5,801. ⚠ In a stacked landing only the LAST tuple line below
+    //   is live: each position's figure is arithmetic and the SUM is convicted once at the stack
+    //   tip, with the negative control (the slot's own tuple put back) redding at `files` by
+    //   exactly the summed delta.
+    // ── RE-RECORDED 2026-08-23 BY TE-UC3 (MF-UC3), CAUSE ATTRIBUTED ──────────
+    // `files` 2500 → 2501, `credited` 2135 → 2136, `titles` 20,730 → 20,738,
+    // `suiteTitles` 5,787 → 5,788. `parked` is UNCHANGED at 365.
+    // ONE new acceptance file, tests/domain/undercityStaticComponents.test.js, credited (one
+    // literal `describe`, straight-line `it`, no `.each`/`runIf`/nesting) carrying EIGHT arms —
+    //   ⭐ guard-the-guard, then totality: the corpus is 14 REAL settlements carrying both
+    //     licensing grounds and one waterlogged licensed ground; every table re-derived from
+    //     TERRAIN_DATA here rather than from the leaf's own copy
+    //   ⭐ epoch invariance: a settlement aged three centuries derives identical caverns, and
+    //     the comment-stripped source reads no epoch key of the settlement at all
+    //   ⭐ terrain licensing over REAL settlements: caverns on exactly the two licensed grounds,
+    //     and never in the floodplain — the marsh-bearing hill thorp gets none; draining it
+    //     gives it one
+    //   ⭐ seed determinism: same seed deep-equal, clone identical, rename identical, a new
+    //     identity moves the ground
+    //   ⭐ the §311.8.1 general form: temperament STATIC, typed license, published anchor, closed
+    //     extent, surfaceJoins from the closed joint vocabulary — EMPTY where the ground names
+    //     no way in (the lawful isolated cavern, §311.6.4)
+    //   ⭐ the deriver's own validation refuses an out-of-vocabulary joint kind
+    //   ⭐ G-43: flip the terrain class and the cavern license flips with it
+    //   ⭐ refusal and version discipline: garbage yields [] without throwing; vocabularies frozen
+    // `censusAuthorization`: ODQ §311 (the undercity doctrine), §359.3 (the OB-6 fold), §431
+    // (this dispatch), §441 (the ruling, 24/24 applied and ratified at §445.2).
+    // ⛔ ATTRIBUTED BY ISOLATION, NOT BY ARITHMETIC, at THIS base. The tuple was read from the
+    //   arm's own failure message at each step ("expected 2501 to be 2500", then credited, then
+    //   titles, then suiteTitles), never computed; with the walker pinned at the after tuple,
+    //   hiding the one new file convicted `files` at 2500 — the base figure exactly. `parked`
+    //   PASSED at 365 without redding. No other lane's file moved.
+    // ⭐⭐ THE CARRY LAW, EXECUTED AT THE LANDING SLOT — THE UNDERCITY TRAIN's FIRST TWO CARS
+    //   (ODQ §472.4), car TWO. This member was authored at base 4060f690 (WEB-1's landing;
+    //   after-figure 2,501/365/2,136/20,738/5,788) as a SIBLING of MF-UC0 over an ancestor
+    //   base, not stacked on it — the two authored after-figures are two deltas over two nearby
+    //   bases, never alternatives to choose between. Rebased onto the rebased MF-UC0 tip over
+    //   f32c548e; its carried copy of `src/domain/undercity/jointVocabulary.js` (byte-identical,
+    //   sha256 f9445c98…) resolved to MF-UC0's ONE copy at the rebase (git dropped the identical
+    //   add/add; `cmp` exit 0 both ways). The DELTA `+1/+0/+1/+8/+1` is what crossed; the
+    //   resolution is the SUM OF DELTAS, never any member's tuple: slot 2,508/365/2,143/20,801/
+    //   5,800 + MF-UC0 (+1/+0/+1/+8/+1) + MF-UC3 (+1/+0/+1/+8/+1) = +2/+0/+2/+16/+2 =
+    //   2,510/365/2,145/20,817/5,802 — the ONE live tuple line below, CONVICTED BY EXECUTION at
+    //   the stack tip (33/33) with TWO negative controls: the slot's own tuple put back reds at
+    //   `files` ("expected 2510 to be 2508"), the summed delta exactly; MF-UC0's position tuple
+    //   put back reds at `files` ("expected 2510 to be 2509"), this member's own +1 — the proof
+    //   that no sibling's delta was dropped by the merge; the file restored byte-identical both
+    //   times. `parked` holds at 365 (the slot's figure; each member's file is ONE literal
+    //   `describe` with straight-line string-literal titles, so neither parks).
+    files: 2510, parked: 365, credited: 2145, titles: 20817, suiteTitles: 5802,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
