@@ -21515,6 +21515,158 @@
         [ "npm", "run", "validate:packets" ],
         [ "npm", "run", "check:tail" ]
       ]
+    },
+    {
+      "id": "MF-T2N",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/town-cartography/MF-T2N.md",
+      "verifiedBase": "84e06412f6fdca91020197f2a332ba7f98642f64",
+      "changeManifest": [
+        {
+          "_note": "THE DERIVER, Shape 1 (charter §3; ODQ §433 C2): deriveResourceSites(settlement) sites every string entry of config.nearbyResources as { resource, bearing, band, terrainAnchor, sourceKind: 'DERIVED_V1' } from stored facts alone — the seed-stable id (a rename never moves a site), the roster, config.terrainType and the native resource/terrain tables. Eight winds by a uniform hash octant (the spatialSubstrateRead.approachOctant idiom); a band picked by the seed WITHIN the set the resource's closed semantic type admits (positional/infrastructure → AT_HAND; renewable → AT_HAND|NEAR; exhaustible/magical → NEAR|DAYS_REACH; UNTYPED custom → all three); the resource's own single terrain tie outranks the settlement's terrain; the gap is typed UNANCHORED. No number, no tuning, no Date, no rng, no store; imports only import-free leaves (stablePart, resourceSemantics, resourceData, geographyData). Nothing on the generation path imports it; the golden manifest is bytewise identical; the observed-shape reader walker holds 387/1409/1995. 89 effective of 250. Cast-free.",
+          "action": "CREATE",
+          "path": "src/domain/resourceSites.js"
+        },
+        {
+          "_note": "THE ACCEPTANCE. One literal describe, six straight-line it, every arm over REAL generated settlements: guard-the-guard then totality (fourteen worlds; every roster entry sites once; every field in its vocabulary; the positional law; winds and bands spread); the determinism companion (a second world from the same seed; no Date/Math.random/Intl reachable); the §306.2 counterfactual reach (one resource swapped → band and bearing move, untouched sites do not; terrain changed → tie-less anchors follow while a single-tie resource stays; a new id moves bearings; a rename moves nothing); refusal (absent → no site; malformed → []; custom → UNTYPED; the UNANCHORED gap); golden inertness by construction (no importer under src/, no site in a fresh world's JSON, no mutation); version discipline (DERIVED_V1, exact keys and vocabularies). Census +1 / 0 / +1 / +6 / +1; the shared census row is DEFERRED to the landing act (§417 T2J shape) and rides the packet verbatim.",
+          "action": "CREATE",
+          "path": "tests/domain/resourceSites.test.js"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/packets/town-cartography/MF-T2N.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE NATIVE TABLE the leaf reads for each resource's OWN terrain tie (terrain / terrainRequired). Renaming it silently un-anchors every terrain-specific site.",
+          "path": "src/data/resourceData.js",
+          "symbol": "export const RESOURCE_DATA"
+        },
+        {
+          "_note": "THE TERRAIN VOCABULARY the anchor list is enumerated from (seven keys + UNANCHORED). A renamed or re-keyed table changes which settlement terrains are anchorable.",
+          "path": "src/data/geographyData.js",
+          "symbol": "export const TERRAIN_DATA"
+        },
+        {
+          "_note": "THE CLOSED RESOURCE-TYPE RESOLVER (key or reviewed label alias → { type }) the band law reads. Its five-value type vocabulary is the admissible-band table's key set; the acceptance asserts the two sets equal.",
+          "path": "src/domain/resourceSemantics.js",
+          "symbol": "export function resourceSemanticsFor"
+        },
+        {
+          "_note": "THE TYPE TABLE itself, pinned exhaustively by tests/domain/resourceTaxonomyClassification.test.js; a resource reclassified here moves its admissible bands, which is a declared shift of this member by construction.",
+          "path": "src/domain/resourceSemantics.js",
+          "symbol": "export const RESOURCE_SEMANTICS"
+        },
+        {
+          "_note": "THE SLUG the hash token is built from (the worldPulse slug leaf, dependency-free). A changed slug rule moves every bearing and band.",
+          "path": "src/domain/worldPulse/stablePart.js",
+          "symbol": "export function stablePart"
+        },
+        {
+          "_note": "THE ROSTER WRITE-BACK the deriver reads and the acceptance depends on: the generator's resolved nearbyResources on effectiveConfig. If the roster moves off config.nearbyResources the deriver goes dark on every world.",
+          "path": "src/generators/steps/resolveResources.js",
+          "symbol": "effectiveConfig.nearbyResources = nearbyResources;"
+        },
+        {
+          "_note": "THE PIPELINE ENTRY every acceptance arm generates its real settlements through.",
+          "path": "src/generators/generateSettlementPipeline.js",
+          "symbol": "export function generateSettlementPipeline"
+        },
+        {
+          "_note": "THE COUPLING-CENSUS SCOPE that makes a domain-root leaf census-inert (charter §1.7, confirmed at base): worldPulse and spatial only. If the scope widens to src/domain/ root, this member's zero-cost claim must be re-derived.",
+          "path": "tests/lint/couplingInclusion.walker.test.js",
+          "symbol": "const CENSUS_SCOPE_RE"
+        },
+        {
+          "_note": "THE TRANSITION-ANCHORED NEGATIVE (preamble §P3): the refusal arm routes its absence through this helper BY NAME so the anchor walker can see it.",
+          "path": "tests/helpers/anchoredNegatives.js",
+          "symbol": "export function expectPresentThenAbsent"
+        },
+        {
+          "_note": "THE SELECTION-ANCHORED NEGATIVE (preamble §P3): the version-discipline arm routes through this helper BY NAME.",
+          "path": "tests/helpers/anchoredNegatives.js",
+          "symbol": "export function expectAbsentWithAnchor"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "GUARD-THE-GUARD, THEN TOTALITY. Positive controls first: fourteen real worlds (seven terrains × two tiers) all carry non-empty rosters and the vocabularies are 8 winds / 3 bands / 8 anchors. Then for every world sites.map(resource) equals the distinct roster in order; every bearing, band and anchor is in its vocabulary; every band is in the admissible set of the resource's closed type; every positional site is AT_HAND; no real site is UNANCHORED (anchored by A4 producing it); the positional law was exercised; and the winds AND bands spread across the corpus, so a bucketing collapsed to one value reds here."
+        },
+        {
+          "id": "A2",
+          "case": "DETERMINISM COMPANION. A second world generated from the same seed after the first was derived, and a structuredClone of a third, are both deep-equal to the first derivation; the leaf's comment-stripped source contains mixedHash32 and the stablePart import (the scan is live) and matches none of Date, Math.random, Intl, performance.now (anchored)."
+        },
+        {
+          "id": "A3",
+          "case": "COUNTERFACTUAL REACH (the §306.2 input-trap law). On the plains town mf-t2n-plains (roster pinned as generated) precious_metals reads {NE, NEAR, plains}. (i) Swapping that one resource for crossroads_position reads {SW, AT_HAND, plains} — the band moved because the type moved (an unconstrained three-band pick reads NEAR for this token, measured), the bearing moved because the token moved, and the three untouched sites equal their before-records. (ii) Changing terrainType to hills moves every tie-less anchor and nothing else; on the coastal town the single-tie fishing_grounds stays coastal while the two-tie salt_flats and the tie-less ancient_ruins follow. (iii) A new id moves at least one bearing. (iv) A rename with the same id moves nothing."
+        },
+        {
+          "id": "A4",
+          "case": "REFUSAL. grazing_land is sited on the hills town and absent once the roster drops it (expectPresentThenAbsent), the count one lower; null, undefined, config:null, [], and a string roster all yield []; [42, '', 'iron_deposits', null, 'iron_deposits'] yields exactly one iron_deposits site; the custom 'Dragonglass' yields one UNTYPED site with a band in the full set and the settlement's terrain as anchor; a settlement with no terrain and a tie-less resource yields one site anchored UNANCHORED — the typed gap, never a guessed family."
+        },
+        {
+          "id": "A5",
+          "case": "GOLDEN INERTNESS BY CONSTRUCTION. The src/ importer scan is live (resourceSemantics.js has importers, including resolveResources.js) and resourceSites.js has exactly none (anchored); a fresh world's JSON never matches resourceSites|DERIVED_V1 (anchored by \"nearbyResources\" being in it); deriving leaves JSON.stringify(settlement) byte-identical."
+        },
+        {
+          "id": "A6",
+          "case": "VERSION DISCIPLINE. RESOURCE_SITE_SOURCE_KIND is 'DERIVED_V1' and every record carries it; Object.keys(site) is exactly ['resource','bearing','band','terrainAnchor','sourceKind']; the three vocabularies are asserted exact (N NE E SE S SW W NW; AT_HAND NEAR DAYS_REACH; the seven TERRAIN_DATA keys + UNANCHORED); the admissible table's keys are exactly the taxonomy's five types plus UNTYPED, each set a non-empty nearest-first subset of the bands and UNTYPED the whole set; expectAbsentWithAnchor over the record keys."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/resourceSites.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/domainAnyCastBaseline.test.js",
+          "tests/lint/observedShapeReaders.walker.test.js",
+          "tests/lint/couplingInclusion.walker.test.js",
+          "tests/domain/resourceTaxonomyClassification.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/property/generatorGoldenMaster.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint",
+          "tests/build",
+          "tests/ops"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "npm",
+          "run",
+          "validate:packets"
+        ],
+        [
+          "npm",
+          "run",
+          "check:tail"
+        ]
+      ]
     }
   ]
 }
