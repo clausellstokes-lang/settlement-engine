@@ -18933,3 +18933,21 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   → WEB-8/9 as built.
 - Cost stated plainly: the build/research side slows to one lane; the
   landing cascade's wall-clock is unchanged (it was serial by law already).
+
+- **§465.1 THE CAP INCLUDES SUB-LANES (01:30 CDT):** a roster check after
+  the stop orders found EIGHTEEN agents live — the research lanes had
+  fanned out (R-INST-3 seven sub-lanes, R-INST-4 six, R-INST-CIRC one)
+  seconds before the order landed. Under a usage-driven cap a sub-lane IS
+  a lane: the chair STOPPED all fourteen sub-lanes and R-INST-4 itself
+  (its own stop was mid-write), leaving exactly two — the map-stack
+  landing and R-INST-CIRC, ordered to continue SOLO with no further
+  fan-out. LAW while the cap stands: no research fan-out; one agent per
+  seat. R-INST-3's checkpoint is honest (dossier 23.9 KB, roster 22
+  entries / 16 families, one measured finding — St Mary's Chichester's
+  six-bay infirmary hall with its chapel and its dated decline chain —
+  three engine-gap flags: no school/university/library entry below
+  metropolis; no endowment field; `religiousCenter` one-per-settlement so
+  Cathedral XOR Multiple monasteries at city tier); R-INST-4's resume
+  point is its receipt as it stood at the kill plus whatever its six
+  sub-lanes wrote to disk (SL-AB/CD/EFG/HI/JK/LM — transcripts survive).
+  Both resume from their status maps at a free second seat.
