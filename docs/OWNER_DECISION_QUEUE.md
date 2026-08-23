@@ -20478,3 +20478,59 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   now 14,703 B; every pointer link-checked. Seats: CH compile (Opus) · DW-0
   compile (Opus). Holding: none. Next: the CH skeptic, then CH-1; UC-5 and
   MP-1 queued.
+
+## §497 — OWNER OVERRULES THE CHAIR'S R2: THE MINIMUM PROGRAM IS A TRUTH FROM THE DOSSIERS AND AN **INPUT TO ALLOCATION**, NOT A TEST APPLIED AFTER IT — R2 SUPERSEDED BY R2', SENT INTO THE LIVE DW-0 COMPILE (2026-08-23 14:59 CDT)
+
+- **§497.1 THE OWNER'S RULING (verbatim intent):** "it has to conform to the
+  truth, and the truth comes from the dossier, so it has to be there and it
+  has to be coherent if the institution exists. And there are minimums
+  required for a coherent believable institution. You can't have a one room
+  inn and if the process pre-selects a plot to be XYZ it should conform to
+  some varied configuration of the minimum number of dimensions for a
+  believable inn."
+- **§497.2 THE CHAIR CONCEDES, AND NAMES WHY R2 WAS WRONG.** §496.4's R2
+  ("refusal over repair") framed a fitting failure as an honest degradation.
+  It is not, because **EXISTENCE IS DECIDED UPSTREAM**: the catalog rolls the
+  institution (an inn is a REQUIRED row at town tier) and the binder assigns
+  it a parcel, so by placement time "there is an inn here" is already a fact
+  of the roster. Drawing a one-room shed for it does not degrade honestly —
+  it makes the MAP CONTRADICT THE ROSTER, which is precisely the quiet-lie
+  class the estate exists to eliminate. A refusal is lawful only where
+  SELECTION is still open, never at draw time. The owner is right and the
+  ruling is theirs.
+- **§497.3 R2' (the compiled replacement, sent to the live DW-0 lane):**
+  (a) **the minimum program is DATA from the dossiers, per institution per
+  tier** — a declared `programMinimum` contract member listing the cells the
+  type must have, their adjacencies and its open ground (a town inn: hall +
+  kitchen + N chambers + stabling + a yard entered by a carriage passage),
+  each row citing its source (R-INST-4's Fortune contract is a fully measured
+  minimum at 80 ft square / 12.5 ft gallery depth / 12-11-9 ft storeys;
+  Pantin's 30-50 ft frontage for the parallel-hall parti; R-INST-3's college
+  chamber four-to-a-room with 3.5-5 x 4.5-6 ft study closets; R-INST-1's
+  civic stack; R-INST-2's 6-10 ft shops); (b) **it drives WHICH PARCEL and
+  whether parcels MERGE, before any geometry is drawn** — allocation is a
+  CHOICE AMONG CANDIDATES (pick, or union adjacent wedges of one ward per R3)
+  and never a repair of a drawn shape, so the containment THEOREM survives
+  untouched: **the plot is allocated to fit the truth; the truth is never
+  trimmed to fit the plot**; (c) **"varied configuration" is the design** —
+  because the minimum is a PROGRAM (cells + adjacencies + open ground) rather
+  than a shape, many partis satisfy it (courtyard range, corner L, deep
+  double-pile, street range with a rear wing) and variety is a consequence,
+  not a decoration; a minimum must NEVER be expressed as bare area, which a
+  big empty box would satisfy while still reading wrong; (d) **a tier's
+  smaller true form is a DIFFERENT MINIMUM, not a degradation** — the
+  hamlet's wayside inn genuinely IS a room above a stable, the village
+  alehouse IS a dwelling with a brewing outshut (R-INST-4 §1.1/§1.2), so
+  `hostedIn` and `NO_BUILDING` remain first-class verdicts SELECTED BY THE
+  TIER'S TRUTH, never reached as a geometric fallback; (e) **the only lawful
+  refusal is a REPORTED CONTRADICTION** — if a ward cannot supply a
+  town-tier minimum even after lawful merging, that is an upstream defect
+  surfaced as a named, projectable finding with a receipt a DM can read,
+  never a silent shrink.
+- **§497.4 CONSEQUENCES BANKED.** The per-tier minimums themselves become an
+  OWNER BAND (§7 of the charter): they decide how grand a town inn looks, so
+  the owner sits them. The ESTATE wave gains a car that mints the program
+  table from the dossiers before the allocation car runs. R2 is recorded in
+  the charter's judgment ledger as SUPERSEDED WITH THE OWNER'S REASONING so
+  no successor re-litigates it. Seats unchanged: CH compile (Opus) · DW-0
+  compile (Opus), the latter now holding both the §496.4 rulings and R2'.
