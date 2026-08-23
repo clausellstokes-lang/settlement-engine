@@ -18295,3 +18295,29 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   fewer baselines; a burn-down target on the 1,134 strict ceiling) · the
   ship-the-train sequencing is the owner's (three db-push migrations
   pending, two more coming).
+
+## §450 — WEB-4 LANDED (THE 28TH): THE sim_address_chain REGISTRY ROW; WEB-5's GO ISSUED (2026-08-22 ~23:40 CDT)
+
+- **§450.1 WEB-4 LANDED.** TE-WEB4-LANDING: carry-proof at blob level
+  (three of fourteen paths moved at the slot); four commits carried with
+  the re-stamps amended into the LANDED commit only (J1, ratified);
+  walker = slot + `+0/+0/+0/+2/+0` → **2500/365/2135/20732/5787** convicted
+  33/33 with the negative control; manifest 150 → 151 zero drift (the
+  `verifiedBase` replace scoped to the WEB-4 row — RR-2's row shares the
+  old base sha); S0 part 1 byte-identical at the chair baseproof AND an
+  exact-slot throwaway (sha256 `c5b67844…`), part 2 baseline blob identical;
+  pre-gate sweep = the banked four files / six tests, zero strays. Terminal
+  detached, 18m49s, never killed: `TRUE_EXIT=0` + `[gate-tail] exit: 0` +
+  `free_kb_at_end=9014848`; `28763 tests, ceiling 11` (+2 = the member's two
+  arms); `STRICT DIST OK 52/433`; `valid: 151 packets (1 READY)`. Chair
+  re-read the roster, ancestry (4 over 4060f690) and exit file. **CAS
+  `4060f690 → acc466a6`.** Pruned holding-web4, both WEB-4 worktrees,
+  /tmp/web4. Disk 10Gi. One instrument lie banked by the lane: unbraced
+  `$TIP:path` is a zsh `:t` modifier → a `cmp` over two empty streams reads
+  "identical" — brace every `${sha}:path`. The lane also ran the §448
+  checkpoint law (two RESUME POINT blocks) on first order.
+- **§450.2 WEB-5 GO ISSUED** (TE-WEB5-LANDING, Fable per §447(5); holding
+  6d6572ea = 2 commits over 19b799ce, packet at terminal status; rebase onto
+  acc466a6; the lane derives its own five-figure delta from its receipt —
+  the build re-record read 20719/5785 → 20737/5789). Seats: WEB-5 landing
+  · TE-UC0 · TE-UC3 · TE-WEB2 (cap).

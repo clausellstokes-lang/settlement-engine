@@ -51,6 +51,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ ~23:40 CDT 08-22: §450 — WEB-4 LANDED (28th): CAS → acc466a6; pruned.
+# WEB-5 GO issued (web5-rebased-tip.txt; web5-TERMINAL-*). Seats: WEB5-landing
+# · UC0 · UC3 · WEB2.
 # ⭐ ~23:25 CDT 08-22: §449 — whole-product assessment delivered (4-lens recon;
 # evidence at recon-assessment-2026-08-22.txt); O-P1/O-P2/O-P3 paid-surface
 # honesty findings docketed to the owner.
