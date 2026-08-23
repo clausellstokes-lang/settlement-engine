@@ -51,6 +51,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐ ~22:30 CDT 08-22: §447 OWNER DIRECTIVE — seat model restated: Fable =
+# manager/architect/validator/survey/recon; Opus = implementation + verifier;
+# Fable takes an Opus-class task where better suited. Chair rule: builds →
+# Opus; research/compile → Fable; landings stay Fable (§343.3 test, vetoable);
+# in-flight lanes finish on their tier.
 # ⭐⭐⭐ ~22:20 CDT 08-22: §446 — WEB-1 LANDED (27th): CAS → 4060f690 (migration
 # 197 on the branch; website family founded); pin + trees pruned, 9.2Gi.
 # WEB-4 GO issued (tip file web4-rebased-tip.txt; terminal web4-TERMINAL-*).

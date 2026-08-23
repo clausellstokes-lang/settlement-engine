@@ -18189,3 +18189,32 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   at the next free seat: UC-3 → WEB-2 → WEB-3 → HK-1 → R-INST-2..6.
 - **Memory index folded (fold 8b)** to 16,713 bytes after two lanes' notes
   pushed it over the ceiling; every link resolves.
+
+## §447 — OWNER DIRECTIVE (in-chat, 2026-08-22 ~22:30 CDT): THE SEAT MODEL RESTATED — FABLE = MANAGER / ARCHITECT / VALIDATOR / SURVEY / RECON; OPUS = IMPLEMENTATION AND VERIFIER; FABLE TAKES AN OPUS-CLASS TASK WHERE IT IS DETERMINED BETTER SUITED
+
+- **Owner, verbatim in substance:** "Fable should be the manager, architect,
+  validator, survey and recon. Opus is the implementation and verifier. But
+  where it is determined that fable is better suited for a task that is
+  normally deferred to opus, make that switch." This re-affirms §291.5 and
+  the §343/§343.3 discretion; it is RECORDED as the standing seat law and
+  binds every dispatch from this row forward.
+- **THE SEAT RULE AS THE CHAIR WILL APPLY IT (vetoable in its particulars):**
+  (1) BUILD executors (members, micro-fix cars, packet authoring from a
+  ruled charter) → **Opus** by default: next dispatches UC-3, WEB-2, WEB-3,
+  HK-1, UC-1/UC-4/UC-2/UC-5. (2) RESEARCH tranches (R-INST-2..6, any DW
+  dossier work) = survey/recon → **Fable**. (3) COMPILE seats (charters,
+  rulings applied to a draft, door briefs) = architect → **Fable**.
+  (4) SKEPTIC PANELS and baseproof/attribution verification → **Opus**
+  verifiers under a Fable-written brief, unless the verification is itself
+  a design judgment (then Fable). (5) LANDING executors — the §343.3
+  appropriateness test applied: a landing mutates the branch's history
+  (the rebase, the manifest surgery, the census re-derivation — the acts
+  that have silently reverted landed cures before) and its instrument lies
+  are the program's most-bitten class; the chair DETERMINES Fable is
+  better suited and keeps landings on **Fable** (WEB-1 landed first-try
+  green on Fable tonight). The owner may veto to Opus by a word; the GO
+  brief is model-agnostic either way. (6) In-flight lanes (TE-T2N, TE-UC0
+  on Fable; TE-WEB4-LANDING on Fable; TC-R-INST-1 on Fable) COMPLETE on
+  their current tier — restarting a mid-build lane discards executed proof
+  for no gain; the directive is applied at every dispatch from here.
+- Banked to memory beside §291.5.
