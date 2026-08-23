@@ -1195,37 +1195,37 @@
   },
   {
     "path": "src/domain/worldPulse/institutionLifecycle.js",
-    "line": 764,
+    "line": 775,
     "category": "floatInterpolation",
     "snippet": "`Build chance now ${Math.round(probability * 100)}%.`"
   },
   {
     "path": "src/domain/worldPulse/institutionLifecycle.js",
-    "line": 764,
+    "line": 775,
     "category": "percentToken",
     "snippet": "`Build chance now ${Math.round(probability * 100)}%.`"
   },
   {
     "path": "src/domain/worldPulse/institutionLifecycle.js",
-    "line": 832,
+    "line": 843,
     "category": "floatInterpolation",
     "snippet": "`Economic contribution ${Math.round(target.contribution * 100)}%, impairment ${Math.round(target.impairment * 100)}%.`"
   },
   {
     "path": "src/domain/worldPulse/institutionLifecycle.js",
-    "line": 832,
+    "line": 843,
     "category": "percentToken",
     "snippet": "`Economic contribution ${Math.round(target.contribution * 100)}%, impairment ${Math.round(target.impairment * 100)}%.`"
   },
   {
     "path": "src/domain/worldPulse/institutionLifecycle.js",
-    "line": 833,
+    "line": 844,
     "category": "floatInterpolation",
     "snippet": "`Closure chance now ${Math.round(probability * 100)}%.`"
   },
   {
     "path": "src/domain/worldPulse/institutionLifecycle.js",
-    "line": 833,
+    "line": 844,
     "category": "percentToken",
     "snippet": "`Closure chance now ${Math.round(probability * 100)}%.`"
   },

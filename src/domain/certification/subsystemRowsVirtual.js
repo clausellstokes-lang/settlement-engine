@@ -1021,7 +1021,7 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
       }),
       Object.freeze({
         name: 'the_vice_signal_is_a_facet_read_never_a_name_match',
-        description: 'The criminal-underground precondition is read as an institutionNature facet equal to vice, and the skip condition as an institutionFunction facet equal to clandestine — never as a name or tag string match. A settlement whose tunnels are named anything at all is still recognised as already having them, and a renamed vice institution still signals.',
+        description: 'The criminal-underground precondition is read as an institutionNature facet equal to vice, and the skip condition as a DECLARED CLANDESTINE FACET under either governed spelling — the catalog\'s own `clandestine` facet kind, which the Underground network rows declare, or an institutionFunction facet equal to clandestine — never as a name or tag string match. Reading only the second spelling was the landed-dark defect ODQ §445.3 docketed and HK-1 cured: the skip was ALWAYS FALSE against catalog data. A settlement whose tunnels are named anything at all is still recognised as already having them, and a renamed vice institution still signals.',
         check: 'NOT expressible from a receipt: no census carries institution facets. Pinned at the reader in tests/domain/institutionLifecycle.test.js, with a renamed fixture proving the facet read rather than the name.',
       }),
       Object.freeze({

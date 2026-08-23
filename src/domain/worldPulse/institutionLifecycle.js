@@ -426,10 +426,21 @@ export function detectInstitutionGaps(/** @type {any} */ settlement, /** @type {
   // (never a name string): a 'vice'-nature institution is the criminal-underground signal;
   // skip if tunnels exist. The catalog lookup is by NAME, so pass the catalog NAME (the prior
   // 'underground_network' SLUG never matched catalogEntryByName's exact-name resolve — dead).
+  // ⛔ THE SKIP CONDITION READS BOTH GOVERNED CLANDESTINE SPELLINGS (ODQ §445.3, HK-1): the
+  // catalog's own `clandestine` facet kind — which the 'Underground network' rows this hook
+  // FOUNDS are the ones that declare — and the custom `institutionFunction: 'clandestine'`
+  // spelling. Reading `institutionFunction` alone made the skip ALWAYS FALSE against catalog
+  // data, so a lit world would have proposed tunnels at a settlement that already had them.
+  // Kept as an inline facetOf pair rather than an import of clandestineFacet.js: that module
+  // is a LAZY LEAF (zero eager bytes) and importing it here would move the chunk graph.
   if (underwaysFoundingLit && tierRankOf(tier) >= tierRankOf('village')) {
     const insts = /** @type {ReadonlyArray<unknown>} */ (Array.isArray(settlement.institutions) ? settlement.institutions : []);
     const hasVice = insts.some((i) => facetOf(/** @type {Parameters<typeof facetOf>[0]} */ (i), 'institutionNature') === 'vice');
-    const hasUnderways = insts.some((i) => facetOf(/** @type {Parameters<typeof facetOf>[0]} */ (i), 'institutionFunction') === 'clandestine');
+    const hasUnderways = insts.some((i) => {
+      const inst = /** @type {Parameters<typeof facetOf>[0]} */ (i);
+      return facetOf(inst, 'clandestine') === 'clandestine'
+        || facetOf(inst, 'institutionFunction') === 'clandestine';
+    });
     if (hasVice && !hasUnderways) {
       addGap(
         buildableCatalogEntry('Underground network', settlement, existingNames),

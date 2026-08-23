@@ -60,6 +60,13 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // They are owed a humanization wave and are named above so the debt cannot be
 // lost in the count. Ceilings are pinned to the EXACT live census rather than
 // rounded up, so the next leak of any class is red on arrival.
+// HK-1 (ODQ §445.3) — SIX PURE LINE MOVES, NO DEBT MOTION. The clandestine-facet cure adds
+// eleven lines to institutionLifecycle.js above its prose block, so the six rows that file
+// owns re-address 764 -> 775, 832 -> 843 and 833 -> 844. This is the ADDRESS-ROT shape the
+// CR-FP-2 note above already names ("88 pure line moves"), and it is re-addressed rather
+// than regenerated or deleted: path, category and snippet are byte-identical on all six,
+// the census stays at 413 against a 413 ceiling, and no other row in the file moved (the
+// whole diff is twelve lines, six -/+ pairs). No prose numeric was authored by that member.
 const REVIEWED_TOTAL_CEILING = 413;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
   floatInterpolation: 236,
