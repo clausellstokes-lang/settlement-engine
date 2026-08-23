@@ -568,6 +568,7 @@ chair's **C-2 ratification (ODQ §487.2)**. The lane moved no ref; the chair exe
 - **S0, the gates and the terminal:** the two-part S0 reading, the mutexed re-proofs, the widened
   sweep classification and the full bare `npm run check:tail` verdict lines are recorded in the
   lane receipt (`laneTEUC4-receipt.md`, "THE LANDING SLOT").
+- **§489: sixth flag-bill surface paid at the landing act** — `tests/soak-harness/coveringArrayCoverage.test.js` literals 24→25 / 81→82 / 56→57 (the covering-array flag domain); lockstep closure governed 25 / ungoverned 32 / overlap [] unchanged; the file is outside the packet's `changeManifest` by the §479.2 in-train precedent. Found by the terminal gate's `test:ratchet`, green at the slot and red at the tip with the file's blob identical at both, so the cause is this member's mint and nothing else. The chair ratified the cure at ODQ §489; the census was RE-WALKED afterwards and held at `2514/366/2148/20846/5806` (33/33) rather than being predicted to. ⭐ The arm's two LIVE summary prose figures were moved with the literals, and its EP-1 / WF-1a ancestry rows were not — the lockstep shape `git blame` shows WF-1a itself using (J-UC4L-8).
 - **Landing judgments (vetoable):** J-UC4L-1 one landing-act commit rather than three;
   J-UC4L-2 the five bundle metas restored to their committed `generatedAt` stamps rather than
   re-stamped, since the regen proved every `sourceHash` and both `.js` artifacts identical;

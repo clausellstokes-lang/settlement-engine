@@ -147,7 +147,7 @@ describe('the covering array and its constraint manifest', () => {
 
   it('the flag domain is ENUMERATED FROM THE REGISTRY, and its arithmetic closes', () => {
     const census = liveCensus();
-    // 25 normalizer-governed + 32 preset-declared-but-ungoverned + 24 engine-gated virtual.
+    // 25 normalizer-governed + 32 preset-declared-but-ungoverned + 25 engine-gated virtual.
     // ⭐ THE VIRTUAL ARM MOVED 22 → 23 AT EP-1 (2026-08-16), which mints advanceEpochEnabled
     // with its certification row in one commit. The arithmetic below is what makes that a
     // measurement rather than a bump: `union` moves in lockstep (79 → 80) and the
@@ -164,14 +164,15 @@ describe('the covering array and its constraint manifest', () => {
     // bill meets them for the first time at the terminal gate.
     expect(census.governed.length).toBe(25);
     expect(census.ungoverned.length).toBe(32);
-    expect(census.virtual.length).toBe(24);
+    // §489: MF-UC4's `undercityHighWaterEnabled` — the sixth flag-bill surface, paid at the landing act.
+    expect(census.virtual.length).toBe(25);
     expect(census.overlap).toEqual([]);
-    expect(census.union.length).toBe(81);
+    expect(census.union.length).toBe(82);
     expect(census.governed.length + census.ungoverned.length + census.virtual.length).toBe(census.union.length);
-    // 56 of 81 sit outside the normalizer's fail-closed coercion — the measured content of
+    // 57 of 82 sit outside the normalizer's fail-closed coercion — the measured content of
     // "the normalizer is NOT the oracle", and the reason the manifest had to be minted. It
     // rises with the virtual arm by construction: a virtual key is never governed.
-    expect(census.union.length - census.governed.length).toBe(56);
+    expect(census.union.length - census.governed.length).toBe(57);
     expect(census.nonBoolean.length).toBe(13);
   });
 
