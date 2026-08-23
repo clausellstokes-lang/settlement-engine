@@ -19241,3 +19241,47 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   build on Opus as the second seat frees (WEB-8 first; WEB-10's money-path
   edit remains STOP-class and builds LAST, after WEB-9b lands). Seats:
   PRODUCERS landing · TC-WEBSITE-2-R2 (cap).
+
+## §472 — THE PRODUCER TRAIN LANDED (LANDINGS 36–38: MF-T2R, MF-T2Q, MF-T2N) AFTER THE §469 IN-TRAIN CURE; EVERY UNDERCITY CAR IS NOW BUILDABLE; THE UC-0 + UC-3 STACKED LANDING GO ISSUED (2026-08-23 06:10 CDT)
+
+- **§472.1 THE §469 CURE EXECUTED:** `src/domain/highWater.js` imports the
+  kernel's one `clamp`; BEHAVIOR-IDENTICAL by the one call site (`:273
+  clamp(1 - current / peak, 0, 1)` under `peak > 0`, every input
+  finite-narrowed — the kernel clamp's non-finite arm unreachable; no
+  guard needed); leaf sha `021808ba…` → `2ff3948f…`, 104 → 104 effective;
+  m2/m3 re-planted against the new leaf and convicting on the recorded
+  arms; golden unmoved; both typecheckers at ceiling; the follow-on
+  commit with hooks ON (the hook changed nothing). **The lane's
+  correction to the chair's wording, RATIFIED as law:** a BANKED
+  set-equality ratchet cannot "go green" on this lineage
+  (`clampPrimitiveBaseline` is red by thirteen pre-existing offenders at
+  b10ed1a1 and at the slot) — the pass condition is the RECEIVED SET
+  RETURNED TO THE BASE READING (75), which it did; sweep-2 at the new tip
+  = the baseproof's seven titles byte-identical, the clamp +1 GONE.
+- **§472.2 LANDED.** Terminal at f32c548e (fired 10:45:43Z via the
+  launcher, outlasted in-turn, 14.5 min): `TRUE_EXIT=0` + `[gate-tail]
+  exit: 0` + `free_kb_at_end=17056460`; `28827 tests, ceiling 11` (+20 over
+  the map stack = the three members' titles); `STRICT DIST OK 52/438`;
+  `valid: 161 packets (1 READY)`. Chair re-read the roster, ancestry (9
+  over 421c7345), the three LANDED statuses, the cure line and the tuple
+  `2508/365/2143/20801/5800` before the CAS. **CAS `421c7345 → f32c548e`.**
+  Pruned holding-t2r/t2q/t2n, the landing tree, the three build trees,
+  /tmp/prod and the three lane TMPDIRs. Disk 18Gi.
+- **§472.3 WHAT IS NOW ON THE BRANCH:** `deriveHighWater` (the peak
+  remembered, with the §434 destroyer roster and the typed
+  `NO_PEAK_TIER_STAMP` gap), `institutionFoundingOf` (every institution's
+  founding calendar year, write-once, the three reader kinds), and
+  `deriveResourceSites` (where each resource physically sits, eight winds
+  and closed bands) — all dormant derivers, golden-inert by proof. The
+  undercity train's producer dependencies are satisfied: UC-1 and UC-4
+  (T2R) and UC-2 / UC-5 (T2N + T2Q) are BUILDABLE.
+- **§472.4 THE UC-0 + UC-3 GO (TE-UCSTACK-LANDING, Fable):** a lawful
+  green prefix of T-UC1 (UC-1 unbuilt); UC-0 first (its `jointVocabulary.js`
+  is UC-3's dependency), UC-3 onto it with the duplicate CREATE resolved
+  to ONE copy by `cmp`; the §469 received-list-diff law applied to every
+  census-class ratchet in the sweep (ruinFilterRoster's 89→90 and
+  entropyRoot's reuse are the two to watch). Seats: UC-STACK landing ·
+  TC-WEBSITE-2-R2 (cap). Second-seat queue after R2: UC-1 build (Opus) →
+  R-INST-3 (resume) → UC-4 → R-INST-4 (resume) → UC-2 → R-INST-5 → UC-5 →
+  R-INST-6 → WEB-8 → HK-4. Landing queue after UC-0/UC-3: WEB-2 → WEB-3 →
+  HK-A → (UC-1 as T-UC1's tail) → the W-C cars as built.

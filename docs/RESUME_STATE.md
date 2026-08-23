@@ -51,6 +51,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 06:10 CDT 08-23: §472 — PRODUCERS LANDED (36th–38th) after the §469 cure:
+# CAS → f32c548e; every undercity car buildable. UC-0+UC-3 stacked GO in seat.
+# Seats: UCSTACK-landing · WEBSITE-2-R2. Next seat-2: UC-1 build.
 # ⭐⭐ 06:05 CDT 08-23: §471 — WEBSITE-2 charter RULED after the skeptic (1 STOP:
 # shared-path mint → de-duplicate into WEB-8; 6 must-fixes incl. App.jsx 650
 # exact, WEB-11 = W-D, rule-A predicate, the F5 present-by-default row). R2
