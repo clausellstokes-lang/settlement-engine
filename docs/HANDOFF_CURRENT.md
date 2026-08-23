@@ -10,7 +10,7 @@ this one.**
 
 ## ⛔⛔⛔ PICKUP CARD — REWRITTEN AT EVERY LEDGER COMMIT (owner directive §448: the chair's 5-hour usage window closes often; a successor or the same chair picks up HERE in 60 seconds)
 
-**AS OF 2026-08-22 ~22:50 CDT · ledger §448 · build `claude/composite-r4` = `4060f690` (27 landings)**
+**AS OF 2026-08-22 ~23:25 CDT · ledger §449 · build `claude/composite-r4` = `4060f690` (27 landings)**
 
 FIRST ACTS ON PICKUP, IN ORDER:
 1. `git -C /Users/cstokes/Desktop/settlement-engine log -1 --oneline review-fixes-2026-07-08 claude/composite-r4` — if either moved past this card, the ODQ tail is newer than this card; read it.
@@ -31,7 +31,7 @@ LANDING ORDER: WEB-4 → WEB-5 → WEB-6 → WEB-7 → T2J → T2K → T2L → T
 BUILD QUEUE at the next free seat: WEB-3 → HK-1 (§445.3) → R-INST-2..6 (Fable) → UC-1/UC-4 (after T2R lands) → UC-2/UC-5 (after T2N+T2Q land).
 RULED CHARTERS: undercity = `draft-UNDERCITY-PLAN.md` (§441/§445); producers = `draft-PRODUCERS-PLAN.md` (§433/§434); website = `draft-WEBSITE-PLAN.md` (§402). Research delivered, owner taste-gate owed: `draft-DWR1A-CONSTRUCTION-HISTORY.md`, `draft-R-INST-1-CIVIC-DEFENSE.md`.
 STANDING LAWS FOR EVERY BRIEF: short per-lane TMPDIR (`/tmp/<lane>`) · `export GATE_MUTEX_LOCK_DIR=/tmp/settlementforge-vitest-gate.lock; export GATE_MUTEX_MAX_POLLS=480` on every vitest (§440.2) · `npm run check:tail` BARE, never under the mutex · exits captured in-shell, never `${PIPESTATUS}` · receipt stub FIRST, `RESUME POINT` block at every proof boundary and at least every 30 min (§448) · baseproof at b10ed1a1: `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/695a70c5-80ee-4ebd-b806-a8c102244d16/scratchpad/chair-baseproof-b10ed1a1` (re-create with `git worktree add --detach … b10ed1a1` + `cp -Rc` node_modules if purged) · seat model §447 (builds Opus; research/compile/landings Fable).
-OWNER DOCKET (unchanged by any lane): three db-push migrations 195/196/197 (198 coming) · tuning signature · the CT-0 taste sittings (DWR1A, R-INST-1) · R-1/R-3/R-5/R-6/R-7 (§441.8) · O-DW1 · the §436 frontage-tax wording correction · every push.
+OWNER DOCKET (unchanged by any lane): O-P1/O-P2/O-P3 paid-surface honesty (§449) · three db-push migrations 195/196/197 (198 coming) · tuning signature · the CT-0 taste sittings (DWR1A, R-INST-1) · R-1/R-3/R-5/R-6/R-7 (§441.8) · O-DW1 · the §436 frontage-tax wording correction · every push.
 
 ## ⭐⭐⭐⭐ SUCCESSION ADDENDUM — 2026-08-24 (~01:40), LEDGER THROUGH §439 — READ THIS DELTA FIRST, THEN THE §427 BLOCK BELOW
 

@@ -18249,3 +18249,49 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   card rewrite happen in one sitting; if the window closes mid-act, the
   ledger's last row names the state and the card's first act re-derives
   the refs from git, never from the card.
+
+## §449 — THE OWNER'S WHOLE-PRODUCT QUESTION ANSWERED FROM A FOUR-LENS RECON; THREE PAID-SURFACE HONESTY FINDINGS DOCKETED TO THE OWNER (2026-08-22 ~23:25 CDT)
+
+- Owner asked for the chair's thoughts on the full codebase (product, code,
+  quality, competitive landscape, monetization, expected experience). Four
+  read-only recon lenses ran over b10ed1a1 (~414k tokens, 91 tool uses);
+  the rendered evidence is preserved at the program scratchpad
+  `recon-assessment-2026-08-22.txt`. The answer was delivered in chat; the
+  verdict in one line: a real simulation engine in a generator's clothes —
+  the thesis is unique in the category, the code is unusually disciplined
+  (0 live Math.random in the kernel; 0.91 test:source; hard first-paint
+  budget), but production is 75 migrations behind the tree, the living
+  realm is paywalled and largely dark (11 subsystems off in every preset),
+  and no external user has validated anything — so the depth is a COST
+  today and becomes a moat when the map ships and a DM feels consequence
+  in a minute. Code grade B (JSDoc ceilings 173/1134/2183 any-casts; the
+  165K-line worldPulse monolith; the enforcement estate as a second
+  system; ~0 first-paint headroom). Recommendations (chat): ship the tree ·
+  one FREE advance as the thesis demo · finish the map (this arc) · fix
+  the ladder · run the uncoached cohort before more strata · consolidate
+  the enforcement estate after the cascade.
+- **OWNER DOCKET — paid-surface honesty (owner-gated, untouched by the
+  chair):** O-P1 ten of the eleven Cartographer-only map rows on the
+  pricing table carry `enforcement: 'ruled-2026-07-17'` and NO `canUse*`
+  gate exists (`src/config/entitlementLadder.js`; grep returns nothing) —
+  enforce or de-advertise, with a contract-test pin either way (rec:
+  de-advertise until the map ships, then enforce). O-P2 the Surveyor
+  commercial model contradicts itself (design doc $19.99/mo ·
+  create-checkout still defines the product · pricing page "No
+  subscription required" · entitlements concierge-only) — rec: a real tier
+  at $14.99–19.99 with a small credit allowance on top of BYOK. O-P3
+  `pricing.js` `wanderer.features.pdfExport: true` vs `tierFacts`
+  `EXPORT_MODE.free 'per_dossier'` / `TIER_GATE.free export:false` — a
+  drift the tierFacts contract test does not pin (rec: pin it; the copy
+  law is ZERO hand-typed tier facts). Also for the owner: no annual plan
+  and no price point above $5.99 (ASSESSMENT.md's "pricing undersells"
+  stands); the $5.99/30-credit bundle is PLAUSIBLY underwater on AI COGS
+  (migration 174's own finding) — the PRICING_MARGIN_SHEET it cites is
+  absent from the tree.
+- **Program-side consequences (chair's, queued after the cascade):** a
+  legibility pass naming ONE home surface after an advance
+  (`heraldCommandBrief` is still default-off — the unresolved choice is
+  visible in code) · an enforcement-estate consolidation wave (one census;
+  fewer baselines; a burn-down target on the 1,134 strict ceiling) · the
+  ship-the-train sequencing is the owner's (three db-push migrations
+  pending, two more coming).
