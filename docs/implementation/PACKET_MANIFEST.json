@@ -23289,6 +23289,150 @@
         ]
       ],
       "retiredSymbols": []
+    },
+    {
+      "id": "MF-CG1",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/town-cartography/MF-CG1.md",
+      "verifiedBase": "00e7af612d428078634d52ea37054bd00b773ca6",
+      "changeManifest": [
+        {
+          "_note": "THE CORPUS. The calibration ground built from REAL generateSettlementPipeline output: the estate's golden-master grid (6 tiers x 12 cultures x 7 terrains = 504, terrain paired with its honest route) with monsterThreat and the seed ROTATED by row index. The rotation is measured, not stylistic: the calibration quantity is a seeded draw, and at one fixed config eight seeds moved hamlet 11->20 and town 45->58 while the whole 12x7 culture-by-terrain sweep at ONE seed moved hamlet only 7->17. measureCalibrationRow drives the real pipeline and the real compiler and records THE STAGE'S OWN VERDICT plus the integers the stage's own premise message states; no eligibility rule, cap comparison or byte count is re-implemented, because a fixture that mirrored the deriver would agree with it by construction.",
+          "action": "CREATE",
+          "path": "tests/fixtures/cartographyCalibrationCorpus.js"
+        },
+        {
+          "_note": "THE FROZEN MEASUREMENT. 504 rows, produced only by the committed regeneration path (UPDATE_CARTOGRAPHY_CALIBRATION=1). At this base: 217 ok, 266 binding-cap throws, 21 TC-4 byte-band throws, zero in the other bucket, zero dark failures.",
+          "action": "CREATE",
+          "path": "tests/fixtures/cartography-calibration-corpus.json"
+        },
+        {
+          "_note": "THE SUITE. W1 the corpus is a rule and the manifest covers it EXACTLY; W2 a deterministic sample (fixed stride UNIONED with every tier's argmax row) is re-measured LIVE through the real pipeline so a frozen measurement cannot decay into a frozen fiction; W3 the IDENTITY control proves the corpus's cheap quantity against the count the TC-3b leaf states in its own premise message over 266 rows; W4 the per-tier premise-failure inventory is frozen SHRINK-ONLY with its honesty companion; W5 every cap is recorded beside the real maximum it must clear. A ratchet rather than a zero because 287 of 504 real settlements throw at this base and a red test is a disabled guard.",
+          "action": "CREATE",
+          "path": "tests/domain/townCartographyCalibration.test.js"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/packets/town-cartography/MF-CG1.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE CAP UNDER MEASUREMENT. The TC-3b binding ceiling the corpus is calibrated against; renaming it silently un-grounds W3 and W5.",
+          "path": "src/domain/townCartography/cartographyTuning.js",
+          "symbol": "MAXIMUM_INSTITUTION_BINDINGS"
+        },
+        {
+          "_note": "THE TOTAL BUILDING CAP. Both the constraint any binding-cap repair must satisfy and, times TC4_ROW_BYTES_BAND, the derived TC-4 byte band W3 reads back out of the stage own message.",
+          "path": "src/domain/townCartography/cartographyTuning.js",
+          "symbol": "MAXIMUM_CARTOGRAPHY_BUILDINGS"
+        },
+        {
+          "_note": "THE ONE AUTHORED PER-ROW BYTE NUMBER, calibrated in its own comment against 374 B/row AT THORP - the second fixture-ground defect this member measures and does not move.",
+          "path": "src/domain/townCartography/cartographyTuning.js",
+          "symbol": "TC4_ROW_BYTES_BAND"
+        },
+        {
+          "_note": "THE BAND READER. Every cap comparison in the suite goes through it rather than indexing the frozen tables directly, so a tier-clamp change cannot slip past the corpus.",
+          "path": "src/domain/townCartography/cartographyTuning.js",
+          "symbol": "export function cartographyBand"
+        },
+        {
+          "_note": "THE PREMISE THAT FIRES. compileTownParcelLayers raises the binding-cap error whose text W3 parses; its wording is the corpus only interpretation surface.",
+          "path": "src/domain/townCartography/cartographyParcels.js",
+          "symbol": "export function compileTownParcelLayers"
+        },
+        {
+          "_note": "THE SECOND PREMISE. compileTownBuildingLayers raises the TC-4 byte-band error - the failure the ratified cap rule cannot reach at any value.",
+          "path": "src/domain/townCartography/cartographyBuildings.js",
+          "symbol": "export function compileTownBuildingLayers"
+        },
+        {
+          "_note": "THE GENERATOR. The corpus is real pipeline output and nothing else; a synthetic settlement anywhere in this member would reinstate the defect it removes.",
+          "path": "src/generators/generateSettlementPipeline.js",
+          "symbol": "export function generateSettlementPipeline"
+        },
+        {
+          "_note": "THE COMPILER SEAM. The one entry point the corpus drives, dark and lit, so the corpus measures the product rather than an arrangement only a test knows how to make.",
+          "path": "src/domain/townScene/compileTownSceneManifest.js",
+          "symbol": "export function compileTownSceneManifest"
+        },
+        {
+          "_note": "THE CULTURE VOCABULARY the corpus derives its twelve cultures from rather than restating.",
+          "path": "src/domain/cultureProfiles.js",
+          "symbol": "CULTURE_PROFILE_KEYS"
+        },
+        {
+          "_note": "THE SYNTHETIC CORPUS THIS MEMBER REPLACES AS A CALIBRATION GROUND (and deliberately leaves as the geometry ground). Its TIER_INSTITUTIONS constants are why every cap read green for months.",
+          "path": "tests/fixtures/townMapFixtures.js",
+          "symbol": "V2_GOLDEN_CONFIGS"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "W1 THE CORPUS IS A RULE. The vocabulary arithmetic closes (6 x 12 x 7 = 504 = the manifest size); every row obeys the stated threat/seed/route rotation index for index; and the rotation reaches every (tier, seed) and (tier, threat) pair, which is the collapse a row count cannot see."
+        },
+        {
+          "id": "A2",
+          "case": "W1 EXACT COVERAGE. The manifest key set equals the corpus key set both ways: an unmeasured row and a stale row are the same defect wearing two faces."
+        },
+        {
+          "id": "A3",
+          "case": "W1 KNOWN CLASSES ONLY. Every recorded outcome is a declared class, the other bucket is EMPTY, and every dark compile succeeded - the claim that makes each failure a calibration defect rather than a generator bug."
+        },
+        {
+          "id": "A4",
+          "case": "W1 THE CLASSIFIER REFUSES FOREIGN WORDS. Both positive arms and one negative arm; without the negative arm A3 empty other bucket would be vacuous."
+        },
+        {
+          "id": "A5",
+          "case": "W2 THE FROZEN MEASUREMENT IS RE-MEASURED LIVE. A deterministic sample - a fixed stride UNIONED with every tier argmax row - is regenerated through the real pipeline and the real compiler and must reproduce its manifest record field for field."
+        },
+        {
+          "id": "A6",
+          "case": "W3 THE CORPUS QUANTITY IS PROVEN, NOT ASSUMED. The count the TC-3b leaf states in its own premise message equals settlement.institutions.length on all 266 binding-cap rows, with a non-vacuity floor so an empty left-hand side cannot pass; and every reported band re-derives from the tuning tables."
+        },
+        {
+          "id": "A7",
+          "case": "W4 THE INVENTORY ONLY SHRINKS, with the honesty companion that forbids a stale row, and the per-tier institution maximum pinned EXACTLY against a literal table (a manifest-derived maximum compared against a manifest-derived maximum would be one reading twice)."
+        },
+        {
+          "id": "A8",
+          "case": "W5 THE HEADROOM IS RECORDED. Each cap sits beside the real maximum, the four short tiers are an exact list, and the binding-cap-under-building-cap invariant is restated as the constraint any future repair must satisfy."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/townCartographyCalibration.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/townCartographyParcels.test.js",
+          "tests/domain/townCartographyBuildings.test.js",
+          "tests/domain/townSceneCartography.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/property/generatorGoldenMaster.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint",
+          "tests/build",
+          "tests/docs",
+          "tests/ops"
+        ]
+      ]
     }
   ]
 }

@@ -1,0 +1,5399 @@
+{
+ "city|arabic|coastal|port|civilized|cg1-seed-01": {
+  "tier": "city",
+  "institutions": 47,
+  "districts": 8,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "tc4-bytes",
+  "reported": [
+   71539,
+   70400
+  ]
+ },
+ "city|arabic|desert|road|plagued|cg1-seed-03": {
+  "tier": "city",
+  "institutions": 47,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|arabic|forest|isolated|plagued|cg1-seed-11": {
+  "tier": "city",
+  "institutions": 42,
+  "districts": 5,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|arabic|hills|road|frontier|cg1-seed-10": {
+  "tier": "city",
+  "institutions": 45,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|arabic|mountain|road|frontier|cg1-seed-02": {
+  "tier": "city",
+  "institutions": 43,
+  "districts": 5,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|arabic|plains|road|civilized|cg1-seed-09": {
+  "tier": "city",
+  "institutions": 43,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|arabic|riverside|river|safe|cg1-seed-00": {
+  "tier": "city",
+  "institutions": 47,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "tc4-bytes",
+  "reported": [
+   70800,
+   70400
+  ]
+ },
+ "city|celtic|coastal|port|frontier|cg1-seed-06": {
+  "tier": "city",
+  "institutions": 50,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "tc4-bytes",
+  "reported": [
+   71263,
+   70400
+  ]
+ },
+ "city|celtic|desert|road|safe|cg1-seed-08": {
+  "tier": "city",
+  "institutions": 52,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|celtic|forest|isolated|safe|cg1-seed-04": {
+  "tier": "city",
+  "institutions": 34,
+  "districts": 5,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|celtic|hills|road|plagued|cg1-seed-03": {
+  "tier": "city",
+  "institutions": 40,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|celtic|mountain|road|plagued|cg1-seed-07": {
+  "tier": "city",
+  "institutions": 46,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|celtic|plains|road|frontier|cg1-seed-02": {
+  "tier": "city",
+  "institutions": 49,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|celtic|riverside|river|civilized|cg1-seed-05": {
+  "tier": "city",
+  "institutions": 43,
+  "districts": 8,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|east_asian|coastal|port|frontier|cg1-seed-10": {
+  "tier": "city",
+  "institutions": 49,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "tc4-bytes",
+  "reported": [
+   71514,
+   70400
+  ]
+ },
+ "city|east_asian|desert|road|safe|cg1-seed-00": {
+  "tier": "city",
+  "institutions": 45,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|east_asian|forest|isolated|safe|cg1-seed-08": {
+  "tier": "city",
+  "institutions": 42,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|east_asian|hills|road|plagued|cg1-seed-07": {
+  "tier": "city",
+  "institutions": 51,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "tc4-bytes",
+  "reported": [
+   70558,
+   70400
+  ]
+ },
+ "city|east_asian|mountain|road|plagued|cg1-seed-11": {
+  "tier": "city",
+  "institutions": 41,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|east_asian|plains|road|frontier|cg1-seed-06": {
+  "tier": "city",
+  "institutions": 45,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "tc4-bytes",
+  "reported": [
+   71097,
+   70400
+  ]
+ },
+ "city|east_asian|riverside|river|civilized|cg1-seed-09": {
+  "tier": "city",
+  "institutions": 47,
+  "districts": 8,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|germanic|coastal|port|safe|cg1-seed-04": {
+  "tier": "city",
+  "institutions": 45,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|germanic|desert|road|frontier|cg1-seed-06": {
+  "tier": "city",
+  "institutions": 51,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "tc4-bytes",
+  "reported": [
+   71780,
+   70400
+  ]
+ },
+ "city|germanic|forest|isolated|frontier|cg1-seed-02": {
+  "tier": "city",
+  "institutions": 43,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|germanic|hills|road|civilized|cg1-seed-01": {
+  "tier": "city",
+  "institutions": 39,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|germanic|mountain|road|civilized|cg1-seed-05": {
+  "tier": "city",
+  "institutions": 39,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|germanic|plains|road|safe|cg1-seed-00": {
+  "tier": "city",
+  "institutions": 49,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "tc4-bytes",
+  "reported": [
+   70445,
+   70400
+  ]
+ },
+ "city|germanic|riverside|river|plagued|cg1-seed-03": {
+  "tier": "city",
+  "institutions": 48,
+  "districts": 8,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|greek|coastal|port|frontier|cg1-seed-02": {
+  "tier": "city",
+  "institutions": 55,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|greek|desert|road|safe|cg1-seed-04": {
+  "tier": "city",
+  "institutions": 50,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|greek|forest|isolated|safe|cg1-seed-00": {
+  "tier": "city",
+  "institutions": 42,
+  "districts": 5,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|greek|hills|road|plagued|cg1-seed-11": {
+  "tier": "city",
+  "institutions": 48,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|greek|mountain|road|plagued|cg1-seed-03": {
+  "tier": "city",
+  "institutions": 47,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|greek|plains|road|frontier|cg1-seed-10": {
+  "tier": "city",
+  "institutions": 45,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|greek|riverside|river|civilized|cg1-seed-01": {
+  "tier": "city",
+  "institutions": 45,
+  "districts": 8,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "tc4-bytes",
+  "reported": [
+   71315,
+   70400
+  ]
+ },
+ "city|latin|coastal|port|plagued|cg1-seed-11": {
+  "tier": "city",
+  "institutions": 43,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|latin|desert|road|civilized|cg1-seed-01": {
+  "tier": "city",
+  "institutions": 47,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|latin|forest|isolated|civilized|cg1-seed-09": {
+  "tier": "city",
+  "institutions": 40,
+  "districts": 5,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|latin|hills|road|safe|cg1-seed-08": {
+  "tier": "city",
+  "institutions": 46,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|latin|mountain|road|safe|cg1-seed-00": {
+  "tier": "city",
+  "institutions": 41,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|latin|plains|road|plagued|cg1-seed-07": {
+  "tier": "city",
+  "institutions": 50,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "tc4-bytes",
+  "reported": [
+   70893,
+   70400
+  ]
+ },
+ "city|latin|riverside|river|frontier|cg1-seed-10": {
+  "tier": "city",
+  "institutions": 51,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "tc4-bytes",
+  "reported": [
+   71009,
+   70400
+  ]
+ },
+ "city|mediterranean|coastal|port|civilized|cg1-seed-09": {
+  "tier": "city",
+  "institutions": 46,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|mediterranean|desert|road|plagued|cg1-seed-11": {
+  "tier": "city",
+  "institutions": 48,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "tc4-bytes",
+  "reported": [
+   70666,
+   70400
+  ]
+ },
+ "city|mediterranean|forest|isolated|plagued|cg1-seed-07": {
+  "tier": "city",
+  "institutions": 48,
+  "districts": 5,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|mediterranean|hills|road|frontier|cg1-seed-06": {
+  "tier": "city",
+  "institutions": 43,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "tc4-bytes",
+  "reported": [
+   70658,
+   70400
+  ]
+ },
+ "city|mediterranean|mountain|road|frontier|cg1-seed-10": {
+  "tier": "city",
+  "institutions": 44,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|mediterranean|plains|road|civilized|cg1-seed-05": {
+  "tier": "city",
+  "institutions": 44,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|mediterranean|riverside|river|safe|cg1-seed-08": {
+  "tier": "city",
+  "institutions": 53,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "tc4-bytes",
+  "reported": [
+   72030,
+   70400
+  ]
+ },
+ "city|mesoamerican|coastal|port|civilized|cg1-seed-05": {
+  "tier": "city",
+  "institutions": 45,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|mesoamerican|desert|road|plagued|cg1-seed-07": {
+  "tier": "city",
+  "institutions": 48,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "tc4-bytes",
+  "reported": [
+   70911,
+   70400
+  ]
+ },
+ "city|mesoamerican|forest|isolated|plagued|cg1-seed-03": {
+  "tier": "city",
+  "institutions": 38,
+  "districts": 5,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|mesoamerican|hills|road|frontier|cg1-seed-02": {
+  "tier": "city",
+  "institutions": 48,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|mesoamerican|mountain|road|frontier|cg1-seed-06": {
+  "tier": "city",
+  "institutions": 45,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "tc4-bytes",
+  "reported": [
+   70922,
+   70400
+  ]
+ },
+ "city|mesoamerican|plains|road|civilized|cg1-seed-01": {
+  "tier": "city",
+  "institutions": 41,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|mesoamerican|riverside|river|safe|cg1-seed-04": {
+  "tier": "city",
+  "institutions": 50,
+  "districts": 8,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|norse|coastal|port|safe|cg1-seed-08": {
+  "tier": "city",
+  "institutions": 54,
+  "districts": 8,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "tc4-bytes",
+  "reported": [
+   72201,
+   70400
+  ]
+ },
+ "city|norse|desert|road|frontier|cg1-seed-10": {
+  "tier": "city",
+  "institutions": 48,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|norse|forest|isolated|frontier|cg1-seed-06": {
+  "tier": "city",
+  "institutions": 38,
+  "districts": 5,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|norse|hills|road|civilized|cg1-seed-05": {
+  "tier": "city",
+  "institutions": 45,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|norse|mountain|road|civilized|cg1-seed-09": {
+  "tier": "city",
+  "institutions": 45,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|norse|plains|road|safe|cg1-seed-04": {
+  "tier": "city",
+  "institutions": 46,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|norse|riverside|river|plagued|cg1-seed-07": {
+  "tier": "city",
+  "institutions": 50,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "tc4-bytes",
+  "reported": [
+   70672,
+   70400
+  ]
+ },
+ "city|slavic|coastal|port|plagued|cg1-seed-03": {
+  "tier": "city",
+  "institutions": 44,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|slavic|desert|road|civilized|cg1-seed-05": {
+  "tier": "city",
+  "institutions": 47,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|slavic|forest|isolated|civilized|cg1-seed-01": {
+  "tier": "city",
+  "institutions": 38,
+  "districts": 5,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|slavic|hills|road|safe|cg1-seed-00": {
+  "tier": "city",
+  "institutions": 47,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|slavic|mountain|road|safe|cg1-seed-04": {
+  "tier": "city",
+  "institutions": 41,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|slavic|plains|road|plagued|cg1-seed-11": {
+  "tier": "city",
+  "institutions": 46,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|slavic|riverside|river|frontier|cg1-seed-02": {
+  "tier": "city",
+  "institutions": 50,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|south_asian|coastal|port|safe|cg1-seed-00": {
+  "tier": "city",
+  "institutions": 51,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "tc4-bytes",
+  "reported": [
+   70929,
+   70400
+  ]
+ },
+ "city|south_asian|desert|road|frontier|cg1-seed-02": {
+  "tier": "city",
+  "institutions": 50,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|south_asian|forest|isolated|frontier|cg1-seed-10": {
+  "tier": "city",
+  "institutions": 40,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|south_asian|hills|road|civilized|cg1-seed-09": {
+  "tier": "city",
+  "institutions": 44,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|south_asian|mountain|road|civilized|cg1-seed-01": {
+  "tier": "city",
+  "institutions": 37,
+  "districts": 5,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|south_asian|plains|road|safe|cg1-seed-08": {
+  "tier": "city",
+  "institutions": 51,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|south_asian|riverside|river|plagued|cg1-seed-11": {
+  "tier": "city",
+  "institutions": 42,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|steppe|coastal|port|plagued|cg1-seed-07": {
+  "tier": "city",
+  "institutions": 48,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "tc4-bytes",
+  "reported": [
+   70457,
+   70400
+  ]
+ },
+ "city|steppe|desert|road|civilized|cg1-seed-09": {
+  "tier": "city",
+  "institutions": 44,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|steppe|forest|isolated|civilized|cg1-seed-05": {
+  "tier": "city",
+  "institutions": 39,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|steppe|hills|road|safe|cg1-seed-04": {
+  "tier": "city",
+  "institutions": 47,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|steppe|mountain|road|safe|cg1-seed-08": {
+  "tier": "city",
+  "institutions": 46,
+  "districts": 6,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|steppe|plains|road|plagued|cg1-seed-03": {
+  "tier": "city",
+  "institutions": 44,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "city|steppe|riverside|river|frontier|cg1-seed-06": {
+  "tier": "city",
+  "institutions": 47,
+  "districts": 7,
+  "sceneBuildings": 176,
+  "dark": "ok",
+  "outcome": "tc4-bytes",
+  "reported": [
+   71163,
+   70400
+  ]
+ },
+ "hamlet|arabic|coastal|port|civilized|cg1-seed-01": {
+  "tier": "hamlet",
+  "institutions": 17,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   17,
+   12
+  ]
+ },
+ "hamlet|arabic|desert|road|plagued|cg1-seed-03": {
+  "tier": "hamlet",
+  "institutions": 24,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   24,
+   12
+  ]
+ },
+ "hamlet|arabic|forest|isolated|plagued|cg1-seed-11": {
+  "tier": "hamlet",
+  "institutions": 11,
+  "districts": 1,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "hamlet|arabic|hills|road|frontier|cg1-seed-10": {
+  "tier": "hamlet",
+  "institutions": 17,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   17,
+   12
+  ]
+ },
+ "hamlet|arabic|mountain|road|frontier|cg1-seed-02": {
+  "tier": "hamlet",
+  "institutions": 15,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   15,
+   12
+  ]
+ },
+ "hamlet|arabic|plains|road|civilized|cg1-seed-09": {
+  "tier": "hamlet",
+  "institutions": 16,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   16,
+   12
+  ]
+ },
+ "hamlet|arabic|riverside|river|safe|cg1-seed-00": {
+  "tier": "hamlet",
+  "institutions": 16,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   16,
+   12
+  ]
+ },
+ "hamlet|celtic|coastal|port|frontier|cg1-seed-06": {
+  "tier": "hamlet",
+  "institutions": 13,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   13,
+   12
+  ]
+ },
+ "hamlet|celtic|desert|road|safe|cg1-seed-08": {
+  "tier": "hamlet",
+  "institutions": 17,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   17,
+   12
+  ]
+ },
+ "hamlet|celtic|forest|isolated|safe|cg1-seed-04": {
+  "tier": "hamlet",
+  "institutions": 7,
+  "districts": 1,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "hamlet|celtic|hills|road|plagued|cg1-seed-03": {
+  "tier": "hamlet",
+  "institutions": 21,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   21,
+   12
+  ]
+ },
+ "hamlet|celtic|mountain|road|plagued|cg1-seed-07": {
+  "tier": "hamlet",
+  "institutions": 18,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   18,
+   12
+  ]
+ },
+ "hamlet|celtic|plains|road|frontier|cg1-seed-02": {
+  "tier": "hamlet",
+  "institutions": 17,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   17,
+   12
+  ]
+ },
+ "hamlet|celtic|riverside|river|civilized|cg1-seed-05": {
+  "tier": "hamlet",
+  "institutions": 19,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   19,
+   12
+  ]
+ },
+ "hamlet|east_asian|coastal|port|frontier|cg1-seed-10": {
+  "tier": "hamlet",
+  "institutions": 21,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   21,
+   12
+  ]
+ },
+ "hamlet|east_asian|desert|road|safe|cg1-seed-00": {
+  "tier": "hamlet",
+  "institutions": 19,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   19,
+   12
+  ]
+ },
+ "hamlet|east_asian|forest|isolated|safe|cg1-seed-08": {
+  "tier": "hamlet",
+  "institutions": 7,
+  "districts": 1,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "hamlet|east_asian|hills|road|plagued|cg1-seed-07": {
+  "tier": "hamlet",
+  "institutions": 19,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   19,
+   12
+  ]
+ },
+ "hamlet|east_asian|mountain|road|plagued|cg1-seed-11": {
+  "tier": "hamlet",
+  "institutions": 18,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   18,
+   12
+  ]
+ },
+ "hamlet|east_asian|plains|road|frontier|cg1-seed-06": {
+  "tier": "hamlet",
+  "institutions": 15,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   15,
+   12
+  ]
+ },
+ "hamlet|east_asian|riverside|river|civilized|cg1-seed-09": {
+  "tier": "hamlet",
+  "institutions": 13,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   13,
+   12
+  ]
+ },
+ "hamlet|germanic|coastal|port|safe|cg1-seed-04": {
+  "tier": "hamlet",
+  "institutions": 16,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   16,
+   12
+  ]
+ },
+ "hamlet|germanic|desert|road|frontier|cg1-seed-06": {
+  "tier": "hamlet",
+  "institutions": 13,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   13,
+   12
+  ]
+ },
+ "hamlet|germanic|forest|isolated|frontier|cg1-seed-02": {
+  "tier": "hamlet",
+  "institutions": 7,
+  "districts": 1,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "hamlet|germanic|hills|road|civilized|cg1-seed-01": {
+  "tier": "hamlet",
+  "institutions": 13,
+  "districts": 1,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   13,
+   12
+  ]
+ },
+ "hamlet|germanic|mountain|road|civilized|cg1-seed-05": {
+  "tier": "hamlet",
+  "institutions": 17,
+  "districts": 1,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   17,
+   12
+  ]
+ },
+ "hamlet|germanic|plains|road|safe|cg1-seed-00": {
+  "tier": "hamlet",
+  "institutions": 19,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   19,
+   12
+  ]
+ },
+ "hamlet|germanic|riverside|river|plagued|cg1-seed-03": {
+  "tier": "hamlet",
+  "institutions": 24,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   24,
+   12
+  ]
+ },
+ "hamlet|greek|coastal|port|frontier|cg1-seed-02": {
+  "tier": "hamlet",
+  "institutions": 20,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   20,
+   12
+  ]
+ },
+ "hamlet|greek|desert|road|safe|cg1-seed-04": {
+  "tier": "hamlet",
+  "institutions": 17,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   17,
+   12
+  ]
+ },
+ "hamlet|greek|forest|isolated|safe|cg1-seed-00": {
+  "tier": "hamlet",
+  "institutions": 8,
+  "districts": 1,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "hamlet|greek|hills|road|plagued|cg1-seed-11": {
+  "tier": "hamlet",
+  "institutions": 17,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   17,
+   12
+  ]
+ },
+ "hamlet|greek|mountain|road|plagued|cg1-seed-03": {
+  "tier": "hamlet",
+  "institutions": 18,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   18,
+   12
+  ]
+ },
+ "hamlet|greek|plains|road|frontier|cg1-seed-10": {
+  "tier": "hamlet",
+  "institutions": 18,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   18,
+   12
+  ]
+ },
+ "hamlet|greek|riverside|river|civilized|cg1-seed-01": {
+  "tier": "hamlet",
+  "institutions": 15,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   15,
+   12
+  ]
+ },
+ "hamlet|latin|coastal|port|plagued|cg1-seed-11": {
+  "tier": "hamlet",
+  "institutions": 18,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   18,
+   12
+  ]
+ },
+ "hamlet|latin|desert|road|civilized|cg1-seed-01": {
+  "tier": "hamlet",
+  "institutions": 15,
+  "districts": 1,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   15,
+   12
+  ]
+ },
+ "hamlet|latin|forest|isolated|civilized|cg1-seed-09": {
+  "tier": "hamlet",
+  "institutions": 7,
+  "districts": 1,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "hamlet|latin|hills|road|safe|cg1-seed-08": {
+  "tier": "hamlet",
+  "institutions": 13,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   13,
+   12
+  ]
+ },
+ "hamlet|latin|mountain|road|safe|cg1-seed-00": {
+  "tier": "hamlet",
+  "institutions": 18,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   18,
+   12
+  ]
+ },
+ "hamlet|latin|plains|road|plagued|cg1-seed-07": {
+  "tier": "hamlet",
+  "institutions": 19,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   19,
+   12
+  ]
+ },
+ "hamlet|latin|riverside|river|frontier|cg1-seed-10": {
+  "tier": "hamlet",
+  "institutions": 18,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   18,
+   12
+  ]
+ },
+ "hamlet|mediterranean|coastal|port|civilized|cg1-seed-09": {
+  "tier": "hamlet",
+  "institutions": 16,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   16,
+   12
+  ]
+ },
+ "hamlet|mediterranean|desert|road|plagued|cg1-seed-11": {
+  "tier": "hamlet",
+  "institutions": 18,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   18,
+   12
+  ]
+ },
+ "hamlet|mediterranean|forest|isolated|plagued|cg1-seed-07": {
+  "tier": "hamlet",
+  "institutions": 10,
+  "districts": 1,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "hamlet|mediterranean|hills|road|frontier|cg1-seed-06": {
+  "tier": "hamlet",
+  "institutions": 13,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   13,
+   12
+  ]
+ },
+ "hamlet|mediterranean|mountain|road|frontier|cg1-seed-10": {
+  "tier": "hamlet",
+  "institutions": 15,
+  "districts": 1,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   15,
+   12
+  ]
+ },
+ "hamlet|mediterranean|plains|road|civilized|cg1-seed-05": {
+  "tier": "hamlet",
+  "institutions": 18,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   18,
+   12
+  ]
+ },
+ "hamlet|mediterranean|riverside|river|safe|cg1-seed-08": {
+  "tier": "hamlet",
+  "institutions": 14,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   14,
+   12
+  ]
+ },
+ "hamlet|mesoamerican|coastal|port|civilized|cg1-seed-05": {
+  "tier": "hamlet",
+  "institutions": 19,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   19,
+   12
+  ]
+ },
+ "hamlet|mesoamerican|desert|road|plagued|cg1-seed-07": {
+  "tier": "hamlet",
+  "institutions": 22,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   22,
+   12
+  ]
+ },
+ "hamlet|mesoamerican|forest|isolated|plagued|cg1-seed-03": {
+  "tier": "hamlet",
+  "institutions": 10,
+  "districts": 1,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "hamlet|mesoamerican|hills|road|frontier|cg1-seed-02": {
+  "tier": "hamlet",
+  "institutions": 19,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   19,
+   12
+  ]
+ },
+ "hamlet|mesoamerican|mountain|road|frontier|cg1-seed-06": {
+  "tier": "hamlet",
+  "institutions": 14,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   14,
+   12
+  ]
+ },
+ "hamlet|mesoamerican|plains|road|civilized|cg1-seed-01": {
+  "tier": "hamlet",
+  "institutions": 13,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   13,
+   12
+  ]
+ },
+ "hamlet|mesoamerican|riverside|river|safe|cg1-seed-04": {
+  "tier": "hamlet",
+  "institutions": 16,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   16,
+   12
+  ]
+ },
+ "hamlet|norse|coastal|port|safe|cg1-seed-08": {
+  "tier": "hamlet",
+  "institutions": 18,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   18,
+   12
+  ]
+ },
+ "hamlet|norse|desert|road|frontier|cg1-seed-10": {
+  "tier": "hamlet",
+  "institutions": 21,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   21,
+   12
+  ]
+ },
+ "hamlet|norse|forest|isolated|frontier|cg1-seed-06": {
+  "tier": "hamlet",
+  "institutions": 7,
+  "districts": 1,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "hamlet|norse|hills|road|civilized|cg1-seed-05": {
+  "tier": "hamlet",
+  "institutions": 17,
+  "districts": 1,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   17,
+   12
+  ]
+ },
+ "hamlet|norse|mountain|road|civilized|cg1-seed-09": {
+  "tier": "hamlet",
+  "institutions": 17,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   17,
+   12
+  ]
+ },
+ "hamlet|norse|plains|road|safe|cg1-seed-04": {
+  "tier": "hamlet",
+  "institutions": 16,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   16,
+   12
+  ]
+ },
+ "hamlet|norse|riverside|river|plagued|cg1-seed-07": {
+  "tier": "hamlet",
+  "institutions": 20,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   20,
+   12
+  ]
+ },
+ "hamlet|slavic|coastal|port|plagued|cg1-seed-03": {
+  "tier": "hamlet",
+  "institutions": 24,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   24,
+   12
+  ]
+ },
+ "hamlet|slavic|desert|road|civilized|cg1-seed-05": {
+  "tier": "hamlet",
+  "institutions": 21,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   21,
+   12
+  ]
+ },
+ "hamlet|slavic|forest|isolated|civilized|cg1-seed-01": {
+  "tier": "hamlet",
+  "institutions": 7,
+  "districts": 1,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "hamlet|slavic|hills|road|safe|cg1-seed-00": {
+  "tier": "hamlet",
+  "institutions": 17,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   17,
+   12
+  ]
+ },
+ "hamlet|slavic|mountain|road|safe|cg1-seed-04": {
+  "tier": "hamlet",
+  "institutions": 13,
+  "districts": 1,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   13,
+   12
+  ]
+ },
+ "hamlet|slavic|plains|road|plagued|cg1-seed-11": {
+  "tier": "hamlet",
+  "institutions": 18,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   18,
+   12
+  ]
+ },
+ "hamlet|slavic|riverside|river|frontier|cg1-seed-02": {
+  "tier": "hamlet",
+  "institutions": 18,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   18,
+   12
+  ]
+ },
+ "hamlet|south_asian|coastal|port|safe|cg1-seed-00": {
+  "tier": "hamlet",
+  "institutions": 19,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   19,
+   12
+  ]
+ },
+ "hamlet|south_asian|desert|road|frontier|cg1-seed-02": {
+  "tier": "hamlet",
+  "institutions": 17,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   17,
+   12
+  ]
+ },
+ "hamlet|south_asian|forest|isolated|frontier|cg1-seed-10": {
+  "tier": "hamlet",
+  "institutions": 10,
+  "districts": 1,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "hamlet|south_asian|hills|road|civilized|cg1-seed-09": {
+  "tier": "hamlet",
+  "institutions": 17,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   17,
+   12
+  ]
+ },
+ "hamlet|south_asian|mountain|road|civilized|cg1-seed-01": {
+  "tier": "hamlet",
+  "institutions": 14,
+  "districts": 1,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   14,
+   12
+  ]
+ },
+ "hamlet|south_asian|plains|road|safe|cg1-seed-08": {
+  "tier": "hamlet",
+  "institutions": 12,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "hamlet|south_asian|riverside|river|plagued|cg1-seed-11": {
+  "tier": "hamlet",
+  "institutions": 17,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   17,
+   12
+  ]
+ },
+ "hamlet|steppe|coastal|port|plagued|cg1-seed-07": {
+  "tier": "hamlet",
+  "institutions": 21,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   21,
+   12
+  ]
+ },
+ "hamlet|steppe|desert|road|civilized|cg1-seed-09": {
+  "tier": "hamlet",
+  "institutions": 17,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   17,
+   12
+  ]
+ },
+ "hamlet|steppe|forest|isolated|civilized|cg1-seed-05": {
+  "tier": "hamlet",
+  "institutions": 7,
+  "districts": 1,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "hamlet|steppe|hills|road|safe|cg1-seed-04": {
+  "tier": "hamlet",
+  "institutions": 13,
+  "districts": 1,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   13,
+   12
+  ]
+ },
+ "hamlet|steppe|mountain|road|safe|cg1-seed-08": {
+  "tier": "hamlet",
+  "institutions": 14,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   14,
+   12
+  ]
+ },
+ "hamlet|steppe|plains|road|plagued|cg1-seed-03": {
+  "tier": "hamlet",
+  "institutions": 23,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   23,
+   12
+  ]
+ },
+ "hamlet|steppe|riverside|river|frontier|cg1-seed-06": {
+  "tier": "hamlet",
+  "institutions": 13,
+  "districts": 2,
+  "sceneBuildings": 30,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   13,
+   12
+  ]
+ },
+ "metropolis|arabic|coastal|port|civilized|cg1-seed-01": {
+  "tier": "metropolis",
+  "institutions": 57,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|arabic|desert|road|plagued|cg1-seed-03": {
+  "tier": "metropolis",
+  "institutions": 51,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|arabic|forest|isolated|plagued|cg1-seed-11": {
+  "tier": "metropolis",
+  "institutions": 50,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|arabic|hills|road|frontier|cg1-seed-10": {
+  "tier": "metropolis",
+  "institutions": 56,
+  "districts": 5,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|arabic|mountain|road|frontier|cg1-seed-02": {
+  "tier": "metropolis",
+  "institutions": 56,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|arabic|plains|road|civilized|cg1-seed-09": {
+  "tier": "metropolis",
+  "institutions": 53,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|arabic|riverside|river|safe|cg1-seed-00": {
+  "tier": "metropolis",
+  "institutions": 56,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|celtic|coastal|port|frontier|cg1-seed-06": {
+  "tier": "metropolis",
+  "institutions": 57,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|celtic|desert|road|safe|cg1-seed-08": {
+  "tier": "metropolis",
+  "institutions": 58,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|celtic|forest|isolated|safe|cg1-seed-04": {
+  "tier": "metropolis",
+  "institutions": 42,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|celtic|hills|road|plagued|cg1-seed-03": {
+  "tier": "metropolis",
+  "institutions": 51,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|celtic|mountain|road|plagued|cg1-seed-07": {
+  "tier": "metropolis",
+  "institutions": 46,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|celtic|plains|road|frontier|cg1-seed-02": {
+  "tier": "metropolis",
+  "institutions": 55,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|celtic|riverside|river|civilized|cg1-seed-05": {
+  "tier": "metropolis",
+  "institutions": 54,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|east_asian|coastal|port|frontier|cg1-seed-10": {
+  "tier": "metropolis",
+  "institutions": 63,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|east_asian|desert|road|safe|cg1-seed-00": {
+  "tier": "metropolis",
+  "institutions": 53,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|east_asian|forest|isolated|safe|cg1-seed-08": {
+  "tier": "metropolis",
+  "institutions": 53,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|east_asian|hills|road|plagued|cg1-seed-07": {
+  "tier": "metropolis",
+  "institutions": 53,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|east_asian|mountain|road|plagued|cg1-seed-11": {
+  "tier": "metropolis",
+  "institutions": 56,
+  "districts": 5,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|east_asian|plains|road|frontier|cg1-seed-06": {
+  "tier": "metropolis",
+  "institutions": 55,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|east_asian|riverside|river|civilized|cg1-seed-09": {
+  "tier": "metropolis",
+  "institutions": 59,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|germanic|coastal|port|safe|cg1-seed-04": {
+  "tier": "metropolis",
+  "institutions": 55,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|germanic|desert|road|frontier|cg1-seed-06": {
+  "tier": "metropolis",
+  "institutions": 57,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|germanic|forest|isolated|frontier|cg1-seed-02": {
+  "tier": "metropolis",
+  "institutions": 46,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|germanic|hills|road|civilized|cg1-seed-01": {
+  "tier": "metropolis",
+  "institutions": 50,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|germanic|mountain|road|civilized|cg1-seed-05": {
+  "tier": "metropolis",
+  "institutions": 47,
+  "districts": 5,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|germanic|plains|road|safe|cg1-seed-00": {
+  "tier": "metropolis",
+  "institutions": 52,
+  "districts": 5,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|germanic|riverside|river|plagued|cg1-seed-03": {
+  "tier": "metropolis",
+  "institutions": 53,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|greek|coastal|port|frontier|cg1-seed-02": {
+  "tier": "metropolis",
+  "institutions": 55,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|greek|desert|road|safe|cg1-seed-04": {
+  "tier": "metropolis",
+  "institutions": 54,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|greek|forest|isolated|safe|cg1-seed-00": {
+  "tier": "metropolis",
+  "institutions": 48,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|greek|hills|road|plagued|cg1-seed-11": {
+  "tier": "metropolis",
+  "institutions": 53,
+  "districts": 5,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|greek|mountain|road|plagued|cg1-seed-03": {
+  "tier": "metropolis",
+  "institutions": 50,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|greek|plains|road|frontier|cg1-seed-10": {
+  "tier": "metropolis",
+  "institutions": 55,
+  "districts": 5,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|greek|riverside|river|civilized|cg1-seed-01": {
+  "tier": "metropolis",
+  "institutions": 53,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|latin|coastal|port|plagued|cg1-seed-11": {
+  "tier": "metropolis",
+  "institutions": 57,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|latin|desert|road|civilized|cg1-seed-01": {
+  "tier": "metropolis",
+  "institutions": 50,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|latin|forest|isolated|civilized|cg1-seed-09": {
+  "tier": "metropolis",
+  "institutions": 47,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|latin|hills|road|safe|cg1-seed-08": {
+  "tier": "metropolis",
+  "institutions": 55,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|latin|mountain|road|safe|cg1-seed-00": {
+  "tier": "metropolis",
+  "institutions": 51,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|latin|plains|road|plagued|cg1-seed-07": {
+  "tier": "metropolis",
+  "institutions": 55,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|latin|riverside|river|frontier|cg1-seed-10": {
+  "tier": "metropolis",
+  "institutions": 60,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|mediterranean|coastal|port|civilized|cg1-seed-09": {
+  "tier": "metropolis",
+  "institutions": 59,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|mediterranean|desert|road|plagued|cg1-seed-11": {
+  "tier": "metropolis",
+  "institutions": 53,
+  "districts": 5,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|mediterranean|forest|isolated|plagued|cg1-seed-07": {
+  "tier": "metropolis",
+  "institutions": 50,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|mediterranean|hills|road|frontier|cg1-seed-06": {
+  "tier": "metropolis",
+  "institutions": 55,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|mediterranean|mountain|road|frontier|cg1-seed-10": {
+  "tier": "metropolis",
+  "institutions": 54,
+  "districts": 5,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|mediterranean|plains|road|civilized|cg1-seed-05": {
+  "tier": "metropolis",
+  "institutions": 45,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|mediterranean|riverside|river|safe|cg1-seed-08": {
+  "tier": "metropolis",
+  "institutions": 59,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|mesoamerican|coastal|port|civilized|cg1-seed-05": {
+  "tier": "metropolis",
+  "institutions": 51,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|mesoamerican|desert|road|plagued|cg1-seed-07": {
+  "tier": "metropolis",
+  "institutions": 49,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|mesoamerican|forest|isolated|plagued|cg1-seed-03": {
+  "tier": "metropolis",
+  "institutions": 47,
+  "districts": 5,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|mesoamerican|hills|road|frontier|cg1-seed-02": {
+  "tier": "metropolis",
+  "institutions": 56,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|mesoamerican|mountain|road|frontier|cg1-seed-06": {
+  "tier": "metropolis",
+  "institutions": 53,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|mesoamerican|plains|road|civilized|cg1-seed-01": {
+  "tier": "metropolis",
+  "institutions": 51,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|mesoamerican|riverside|river|safe|cg1-seed-04": {
+  "tier": "metropolis",
+  "institutions": 55,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|norse|coastal|port|safe|cg1-seed-08": {
+  "tier": "metropolis",
+  "institutions": 56,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|norse|desert|road|frontier|cg1-seed-10": {
+  "tier": "metropolis",
+  "institutions": 55,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|norse|forest|isolated|frontier|cg1-seed-06": {
+  "tier": "metropolis",
+  "institutions": 47,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|norse|hills|road|civilized|cg1-seed-05": {
+  "tier": "metropolis",
+  "institutions": 45,
+  "districts": 5,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|norse|mountain|road|civilized|cg1-seed-09": {
+  "tier": "metropolis",
+  "institutions": 51,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|norse|plains|road|safe|cg1-seed-04": {
+  "tier": "metropolis",
+  "institutions": 52,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|norse|riverside|river|plagued|cg1-seed-07": {
+  "tier": "metropolis",
+  "institutions": 54,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|slavic|coastal|port|plagued|cg1-seed-03": {
+  "tier": "metropolis",
+  "institutions": 58,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|slavic|desert|road|civilized|cg1-seed-05": {
+  "tier": "metropolis",
+  "institutions": 50,
+  "districts": 5,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|slavic|forest|isolated|civilized|cg1-seed-01": {
+  "tier": "metropolis",
+  "institutions": 41,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|slavic|hills|road|safe|cg1-seed-00": {
+  "tier": "metropolis",
+  "institutions": 53,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|slavic|mountain|road|safe|cg1-seed-04": {
+  "tier": "metropolis",
+  "institutions": 54,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|slavic|plains|road|plagued|cg1-seed-11": {
+  "tier": "metropolis",
+  "institutions": 54,
+  "districts": 5,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|slavic|riverside|river|frontier|cg1-seed-02": {
+  "tier": "metropolis",
+  "institutions": 58,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|south_asian|coastal|port|safe|cg1-seed-00": {
+  "tier": "metropolis",
+  "institutions": 55,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|south_asian|desert|road|frontier|cg1-seed-02": {
+  "tier": "metropolis",
+  "institutions": 59,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|south_asian|forest|isolated|frontier|cg1-seed-10": {
+  "tier": "metropolis",
+  "institutions": 51,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|south_asian|hills|road|civilized|cg1-seed-09": {
+  "tier": "metropolis",
+  "institutions": 54,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|south_asian|mountain|road|civilized|cg1-seed-01": {
+  "tier": "metropolis",
+  "institutions": 48,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|south_asian|plains|road|safe|cg1-seed-08": {
+  "tier": "metropolis",
+  "institutions": 57,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|south_asian|riverside|river|plagued|cg1-seed-11": {
+  "tier": "metropolis",
+  "institutions": 53,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|steppe|coastal|port|plagued|cg1-seed-07": {
+  "tier": "metropolis",
+  "institutions": 56,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|steppe|desert|road|civilized|cg1-seed-09": {
+  "tier": "metropolis",
+  "institutions": 51,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|steppe|forest|isolated|civilized|cg1-seed-05": {
+  "tier": "metropolis",
+  "institutions": 46,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|steppe|hills|road|safe|cg1-seed-04": {
+  "tier": "metropolis",
+  "institutions": 52,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|steppe|mountain|road|safe|cg1-seed-08": {
+  "tier": "metropolis",
+  "institutions": 56,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|steppe|plains|road|plagued|cg1-seed-03": {
+  "tier": "metropolis",
+  "institutions": 50,
+  "districts": 6,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "metropolis|steppe|riverside|river|frontier|cg1-seed-06": {
+  "tier": "metropolis",
+  "institutions": 55,
+  "districts": 7,
+  "sceneBuildings": 200,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|arabic|coastal|port|civilized|cg1-seed-01": {
+  "tier": "thorp",
+  "institutions": 9,
+  "districts": 2,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   9,
+   8
+  ]
+ },
+ "thorp|arabic|desert|road|plagued|cg1-seed-03": {
+  "tier": "thorp",
+  "institutions": 9,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   9,
+   8
+  ]
+ },
+ "thorp|arabic|forest|isolated|plagued|cg1-seed-11": {
+  "tier": "thorp",
+  "institutions": 9,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   9,
+   8
+  ]
+ },
+ "thorp|arabic|hills|road|frontier|cg1-seed-10": {
+  "tier": "thorp",
+  "institutions": 8,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|arabic|mountain|road|frontier|cg1-seed-02": {
+  "tier": "thorp",
+  "institutions": 7,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|arabic|plains|road|civilized|cg1-seed-09": {
+  "tier": "thorp",
+  "institutions": 8,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|arabic|riverside|river|safe|cg1-seed-00": {
+  "tier": "thorp",
+  "institutions": 7,
+  "districts": 2,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|celtic|coastal|port|frontier|cg1-seed-06": {
+  "tier": "thorp",
+  "institutions": 7,
+  "districts": 2,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|celtic|desert|road|safe|cg1-seed-08": {
+  "tier": "thorp",
+  "institutions": 7,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|celtic|forest|isolated|safe|cg1-seed-04": {
+  "tier": "thorp",
+  "institutions": 7,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|celtic|hills|road|plagued|cg1-seed-03": {
+  "tier": "thorp",
+  "institutions": 11,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   11,
+   8
+  ]
+ },
+ "thorp|celtic|mountain|road|plagued|cg1-seed-07": {
+  "tier": "thorp",
+  "institutions": 9,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   9,
+   8
+  ]
+ },
+ "thorp|celtic|plains|road|frontier|cg1-seed-02": {
+  "tier": "thorp",
+  "institutions": 7,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|celtic|riverside|river|civilized|cg1-seed-05": {
+  "tier": "thorp",
+  "institutions": 10,
+  "districts": 2,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   10,
+   8
+  ]
+ },
+ "thorp|east_asian|coastal|port|frontier|cg1-seed-10": {
+  "tier": "thorp",
+  "institutions": 7,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|east_asian|desert|road|safe|cg1-seed-00": {
+  "tier": "thorp",
+  "institutions": 6,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|east_asian|forest|isolated|safe|cg1-seed-08": {
+  "tier": "thorp",
+  "institutions": 6,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|east_asian|hills|road|plagued|cg1-seed-07": {
+  "tier": "thorp",
+  "institutions": 10,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   10,
+   8
+  ]
+ },
+ "thorp|east_asian|mountain|road|plagued|cg1-seed-11": {
+  "tier": "thorp",
+  "institutions": 8,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|east_asian|plains|road|frontier|cg1-seed-06": {
+  "tier": "thorp",
+  "institutions": 8,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|east_asian|riverside|river|civilized|cg1-seed-09": {
+  "tier": "thorp",
+  "institutions": 7,
+  "districts": 2,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|germanic|coastal|port|safe|cg1-seed-04": {
+  "tier": "thorp",
+  "institutions": 8,
+  "districts": 2,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|germanic|desert|road|frontier|cg1-seed-06": {
+  "tier": "thorp",
+  "institutions": 6,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|germanic|forest|isolated|frontier|cg1-seed-02": {
+  "tier": "thorp",
+  "institutions": 6,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|germanic|hills|road|civilized|cg1-seed-01": {
+  "tier": "thorp",
+  "institutions": 8,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|germanic|mountain|road|civilized|cg1-seed-05": {
+  "tier": "thorp",
+  "institutions": 8,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|germanic|plains|road|safe|cg1-seed-00": {
+  "tier": "thorp",
+  "institutions": 8,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|germanic|riverside|river|plagued|cg1-seed-03": {
+  "tier": "thorp",
+  "institutions": 10,
+  "districts": 2,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   10,
+   8
+  ]
+ },
+ "thorp|greek|coastal|port|frontier|cg1-seed-02": {
+  "tier": "thorp",
+  "institutions": 7,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|greek|desert|road|safe|cg1-seed-04": {
+  "tier": "thorp",
+  "institutions": 7,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|greek|forest|isolated|safe|cg1-seed-00": {
+  "tier": "thorp",
+  "institutions": 6,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|greek|hills|road|plagued|cg1-seed-11": {
+  "tier": "thorp",
+  "institutions": 9,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   9,
+   8
+  ]
+ },
+ "thorp|greek|mountain|road|plagued|cg1-seed-03": {
+  "tier": "thorp",
+  "institutions": 8,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|greek|plains|road|frontier|cg1-seed-10": {
+  "tier": "thorp",
+  "institutions": 8,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|greek|riverside|river|civilized|cg1-seed-01": {
+  "tier": "thorp",
+  "institutions": 8,
+  "districts": 2,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|latin|coastal|port|plagued|cg1-seed-11": {
+  "tier": "thorp",
+  "institutions": 9,
+  "districts": 2,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   9,
+   8
+  ]
+ },
+ "thorp|latin|desert|road|civilized|cg1-seed-01": {
+  "tier": "thorp",
+  "institutions": 8,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|latin|forest|isolated|civilized|cg1-seed-09": {
+  "tier": "thorp",
+  "institutions": 6,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|latin|hills|road|safe|cg1-seed-08": {
+  "tier": "thorp",
+  "institutions": 7,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|latin|mountain|road|safe|cg1-seed-00": {
+  "tier": "thorp",
+  "institutions": 6,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|latin|plains|road|plagued|cg1-seed-07": {
+  "tier": "thorp",
+  "institutions": 10,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   10,
+   8
+  ]
+ },
+ "thorp|latin|riverside|river|frontier|cg1-seed-10": {
+  "tier": "thorp",
+  "institutions": 8,
+  "districts": 2,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|mediterranean|coastal|port|civilized|cg1-seed-09": {
+  "tier": "thorp",
+  "institutions": 7,
+  "districts": 2,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|mediterranean|desert|road|plagued|cg1-seed-11": {
+  "tier": "thorp",
+  "institutions": 9,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   9,
+   8
+  ]
+ },
+ "thorp|mediterranean|forest|isolated|plagued|cg1-seed-07": {
+  "tier": "thorp",
+  "institutions": 9,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   9,
+   8
+  ]
+ },
+ "thorp|mediterranean|hills|road|frontier|cg1-seed-06": {
+  "tier": "thorp",
+  "institutions": 7,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|mediterranean|mountain|road|frontier|cg1-seed-10": {
+  "tier": "thorp",
+  "institutions": 6,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|mediterranean|plains|road|civilized|cg1-seed-05": {
+  "tier": "thorp",
+  "institutions": 10,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   10,
+   8
+  ]
+ },
+ "thorp|mediterranean|riverside|river|safe|cg1-seed-08": {
+  "tier": "thorp",
+  "institutions": 7,
+  "districts": 2,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|mesoamerican|coastal|port|civilized|cg1-seed-05": {
+  "tier": "thorp",
+  "institutions": 10,
+  "districts": 2,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   10,
+   8
+  ]
+ },
+ "thorp|mesoamerican|desert|road|plagued|cg1-seed-07": {
+  "tier": "thorp",
+  "institutions": 9,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   9,
+   8
+  ]
+ },
+ "thorp|mesoamerican|forest|isolated|plagued|cg1-seed-03": {
+  "tier": "thorp",
+  "institutions": 9,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   9,
+   8
+  ]
+ },
+ "thorp|mesoamerican|hills|road|frontier|cg1-seed-02": {
+  "tier": "thorp",
+  "institutions": 8,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|mesoamerican|mountain|road|frontier|cg1-seed-06": {
+  "tier": "thorp",
+  "institutions": 6,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|mesoamerican|plains|road|civilized|cg1-seed-01": {
+  "tier": "thorp",
+  "institutions": 9,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   9,
+   8
+  ]
+ },
+ "thorp|mesoamerican|riverside|river|safe|cg1-seed-04": {
+  "tier": "thorp",
+  "institutions": 9,
+  "districts": 2,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   9,
+   8
+  ]
+ },
+ "thorp|norse|coastal|port|safe|cg1-seed-08": {
+  "tier": "thorp",
+  "institutions": 7,
+  "districts": 2,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|norse|desert|road|frontier|cg1-seed-10": {
+  "tier": "thorp",
+  "institutions": 5,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|norse|forest|isolated|frontier|cg1-seed-06": {
+  "tier": "thorp",
+  "institutions": 6,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|norse|hills|road|civilized|cg1-seed-05": {
+  "tier": "thorp",
+  "institutions": 9,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   9,
+   8
+  ]
+ },
+ "thorp|norse|mountain|road|civilized|cg1-seed-09": {
+  "tier": "thorp",
+  "institutions": 6,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|norse|plains|road|safe|cg1-seed-04": {
+  "tier": "thorp",
+  "institutions": 9,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   9,
+   8
+  ]
+ },
+ "thorp|norse|riverside|river|plagued|cg1-seed-07": {
+  "tier": "thorp",
+  "institutions": 10,
+  "districts": 2,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   10,
+   8
+  ]
+ },
+ "thorp|slavic|coastal|port|plagued|cg1-seed-03": {
+  "tier": "thorp",
+  "institutions": 10,
+  "districts": 2,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   10,
+   8
+  ]
+ },
+ "thorp|slavic|desert|road|civilized|cg1-seed-05": {
+  "tier": "thorp",
+  "institutions": 8,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|slavic|forest|isolated|civilized|cg1-seed-01": {
+  "tier": "thorp",
+  "institutions": 6,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|slavic|hills|road|safe|cg1-seed-00": {
+  "tier": "thorp",
+  "institutions": 7,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|slavic|mountain|road|safe|cg1-seed-04": {
+  "tier": "thorp",
+  "institutions": 7,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|slavic|plains|road|plagued|cg1-seed-11": {
+  "tier": "thorp",
+  "institutions": 11,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   11,
+   8
+  ]
+ },
+ "thorp|slavic|riverside|river|frontier|cg1-seed-02": {
+  "tier": "thorp",
+  "institutions": 8,
+  "districts": 2,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|south_asian|coastal|port|safe|cg1-seed-00": {
+  "tier": "thorp",
+  "institutions": 7,
+  "districts": 2,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|south_asian|desert|road|frontier|cg1-seed-02": {
+  "tier": "thorp",
+  "institutions": 8,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|south_asian|forest|isolated|frontier|cg1-seed-10": {
+  "tier": "thorp",
+  "institutions": 6,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|south_asian|hills|road|civilized|cg1-seed-09": {
+  "tier": "thorp",
+  "institutions": 7,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|south_asian|mountain|road|civilized|cg1-seed-01": {
+  "tier": "thorp",
+  "institutions": 8,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|south_asian|plains|road|safe|cg1-seed-08": {
+  "tier": "thorp",
+  "institutions": 9,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   9,
+   8
+  ]
+ },
+ "thorp|south_asian|riverside|river|plagued|cg1-seed-11": {
+  "tier": "thorp",
+  "institutions": 9,
+  "districts": 2,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   9,
+   8
+  ]
+ },
+ "thorp|steppe|coastal|port|plagued|cg1-seed-07": {
+  "tier": "thorp",
+  "institutions": 10,
+  "districts": 2,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   10,
+   8
+  ]
+ },
+ "thorp|steppe|desert|road|civilized|cg1-seed-09": {
+  "tier": "thorp",
+  "institutions": 6,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|steppe|forest|isolated|civilized|cg1-seed-05": {
+  "tier": "thorp",
+  "institutions": 8,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|steppe|hills|road|safe|cg1-seed-04": {
+  "tier": "thorp",
+  "institutions": 7,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|steppe|mountain|road|safe|cg1-seed-08": {
+  "tier": "thorp",
+  "institutions": 7,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "thorp|steppe|plains|road|plagued|cg1-seed-03": {
+  "tier": "thorp",
+  "institutions": 11,
+  "districts": 1,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   11,
+   8
+  ]
+ },
+ "thorp|steppe|riverside|river|frontier|cg1-seed-06": {
+  "tier": "thorp",
+  "institutions": 7,
+  "districts": 2,
+  "sceneBuildings": 18,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "town|arabic|coastal|port|civilized|cg1-seed-01": {
+  "tier": "town",
+  "institutions": 49,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   49,
+   32
+  ]
+ },
+ "town|arabic|desert|road|plagued|cg1-seed-03": {
+  "tier": "town",
+  "institutions": 57,
+  "districts": 5,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   57,
+   32
+  ]
+ },
+ "town|arabic|forest|isolated|plagued|cg1-seed-11": {
+  "tier": "town",
+  "institutions": 52,
+  "districts": 5,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   52,
+   32
+  ]
+ },
+ "town|arabic|hills|road|frontier|cg1-seed-10": {
+  "tier": "town",
+  "institutions": 54,
+  "districts": 3,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   54,
+   32
+  ]
+ },
+ "town|arabic|mountain|road|frontier|cg1-seed-02": {
+  "tier": "town",
+  "institutions": 51,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   51,
+   32
+  ]
+ },
+ "town|arabic|plains|road|civilized|cg1-seed-09": {
+  "tier": "town",
+  "institutions": 55,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   55,
+   32
+  ]
+ },
+ "town|arabic|riverside|river|safe|cg1-seed-00": {
+  "tier": "town",
+  "institutions": 52,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   52,
+   32
+  ]
+ },
+ "town|celtic|coastal|port|frontier|cg1-seed-06": {
+  "tier": "town",
+  "institutions": 62,
+  "districts": 5,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   62,
+   32
+  ]
+ },
+ "town|celtic|desert|road|safe|cg1-seed-08": {
+  "tier": "town",
+  "institutions": 57,
+  "districts": 5,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   57,
+   32
+  ]
+ },
+ "town|celtic|forest|isolated|safe|cg1-seed-04": {
+  "tier": "town",
+  "institutions": 41,
+  "districts": 3,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   41,
+   32
+  ]
+ },
+ "town|celtic|hills|road|plagued|cg1-seed-03": {
+  "tier": "town",
+  "institutions": 54,
+  "districts": 5,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   54,
+   32
+  ]
+ },
+ "town|celtic|mountain|road|plagued|cg1-seed-07": {
+  "tier": "town",
+  "institutions": 49,
+  "districts": 5,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   49,
+   32
+  ]
+ },
+ "town|celtic|plains|road|frontier|cg1-seed-02": {
+  "tier": "town",
+  "institutions": 53,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   53,
+   32
+  ]
+ },
+ "town|celtic|riverside|river|civilized|cg1-seed-05": {
+  "tier": "town",
+  "institutions": 51,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   51,
+   32
+  ]
+ },
+ "town|east_asian|coastal|port|frontier|cg1-seed-10": {
+  "tier": "town",
+  "institutions": 58,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   58,
+   32
+  ]
+ },
+ "town|east_asian|desert|road|safe|cg1-seed-00": {
+  "tier": "town",
+  "institutions": 54,
+  "districts": 3,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   54,
+   32
+  ]
+ },
+ "town|east_asian|forest|isolated|safe|cg1-seed-08": {
+  "tier": "town",
+  "institutions": 50,
+  "districts": 3,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   50,
+   32
+  ]
+ },
+ "town|east_asian|hills|road|plagued|cg1-seed-07": {
+  "tier": "town",
+  "institutions": 54,
+  "districts": 5,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   54,
+   32
+  ]
+ },
+ "town|east_asian|mountain|road|plagued|cg1-seed-11": {
+  "tier": "town",
+  "institutions": 41,
+  "districts": 5,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   41,
+   32
+  ]
+ },
+ "town|east_asian|plains|road|frontier|cg1-seed-06": {
+  "tier": "town",
+  "institutions": 57,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   57,
+   32
+  ]
+ },
+ "town|east_asian|riverside|river|civilized|cg1-seed-09": {
+  "tier": "town",
+  "institutions": 54,
+  "districts": 5,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   54,
+   32
+  ]
+ },
+ "town|germanic|coastal|port|safe|cg1-seed-04": {
+  "tier": "town",
+  "institutions": 56,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   56,
+   32
+  ]
+ },
+ "town|germanic|desert|road|frontier|cg1-seed-06": {
+  "tier": "town",
+  "institutions": 55,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   55,
+   32
+  ]
+ },
+ "town|germanic|forest|isolated|frontier|cg1-seed-02": {
+  "tier": "town",
+  "institutions": 49,
+  "districts": 5,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   49,
+   32
+  ]
+ },
+ "town|germanic|hills|road|civilized|cg1-seed-01": {
+  "tier": "town",
+  "institutions": 46,
+  "districts": 3,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   46,
+   32
+  ]
+ },
+ "town|germanic|mountain|road|civilized|cg1-seed-05": {
+  "tier": "town",
+  "institutions": 46,
+  "districts": 3,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   46,
+   32
+  ]
+ },
+ "town|germanic|plains|road|safe|cg1-seed-00": {
+  "tier": "town",
+  "institutions": 52,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   52,
+   32
+  ]
+ },
+ "town|germanic|riverside|river|plagued|cg1-seed-03": {
+  "tier": "town",
+  "institutions": 56,
+  "districts": 6,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   56,
+   32
+  ]
+ },
+ "town|greek|coastal|port|frontier|cg1-seed-02": {
+  "tier": "town",
+  "institutions": 55,
+  "districts": 5,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   55,
+   32
+  ]
+ },
+ "town|greek|desert|road|safe|cg1-seed-04": {
+  "tier": "town",
+  "institutions": 57,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   57,
+   32
+  ]
+ },
+ "town|greek|forest|isolated|safe|cg1-seed-00": {
+  "tier": "town",
+  "institutions": 48,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   48,
+   32
+  ]
+ },
+ "town|greek|hills|road|plagued|cg1-seed-11": {
+  "tier": "town",
+  "institutions": 45,
+  "districts": 5,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   45,
+   32
+  ]
+ },
+ "town|greek|mountain|road|plagued|cg1-seed-03": {
+  "tier": "town",
+  "institutions": 51,
+  "districts": 5,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   51,
+   32
+  ]
+ },
+ "town|greek|plains|road|frontier|cg1-seed-10": {
+  "tier": "town",
+  "institutions": 57,
+  "districts": 3,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   57,
+   32
+  ]
+ },
+ "town|greek|riverside|river|civilized|cg1-seed-01": {
+  "tier": "town",
+  "institutions": 50,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   50,
+   32
+  ]
+ },
+ "town|latin|coastal|port|plagued|cg1-seed-11": {
+  "tier": "town",
+  "institutions": 51,
+  "districts": 6,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   51,
+   32
+  ]
+ },
+ "town|latin|desert|road|civilized|cg1-seed-01": {
+  "tier": "town",
+  "institutions": 50,
+  "districts": 3,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   50,
+   32
+  ]
+ },
+ "town|latin|forest|isolated|civilized|cg1-seed-09": {
+  "tier": "town",
+  "institutions": 46,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   46,
+   32
+  ]
+ },
+ "town|latin|hills|road|safe|cg1-seed-08": {
+  "tier": "town",
+  "institutions": 53,
+  "districts": 5,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   53,
+   32
+  ]
+ },
+ "town|latin|mountain|road|safe|cg1-seed-00": {
+  "tier": "town",
+  "institutions": 49,
+  "districts": 3,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   49,
+   32
+  ]
+ },
+ "town|latin|plains|road|plagued|cg1-seed-07": {
+  "tier": "town",
+  "institutions": 53,
+  "districts": 5,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   53,
+   32
+  ]
+ },
+ "town|latin|riverside|river|frontier|cg1-seed-10": {
+  "tier": "town",
+  "institutions": 58,
+  "districts": 3,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   58,
+   32
+  ]
+ },
+ "town|mediterranean|coastal|port|civilized|cg1-seed-09": {
+  "tier": "town",
+  "institutions": 58,
+  "districts": 6,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   58,
+   32
+  ]
+ },
+ "town|mediterranean|desert|road|plagued|cg1-seed-11": {
+  "tier": "town",
+  "institutions": 53,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   53,
+   32
+  ]
+ },
+ "town|mediterranean|forest|isolated|plagued|cg1-seed-07": {
+  "tier": "town",
+  "institutions": 55,
+  "districts": 3,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   55,
+   32
+  ]
+ },
+ "town|mediterranean|hills|road|frontier|cg1-seed-06": {
+  "tier": "town",
+  "institutions": 49,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   49,
+   32
+  ]
+ },
+ "town|mediterranean|mountain|road|frontier|cg1-seed-10": {
+  "tier": "town",
+  "institutions": 49,
+  "districts": 3,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   49,
+   32
+  ]
+ },
+ "town|mediterranean|plains|road|civilized|cg1-seed-05": {
+  "tier": "town",
+  "institutions": 54,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   54,
+   32
+  ]
+ },
+ "town|mediterranean|riverside|river|safe|cg1-seed-08": {
+  "tier": "town",
+  "institutions": 57,
+  "districts": 6,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   57,
+   32
+  ]
+ },
+ "town|mesoamerican|coastal|port|civilized|cg1-seed-05": {
+  "tier": "town",
+  "institutions": 53,
+  "districts": 5,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   53,
+   32
+  ]
+ },
+ "town|mesoamerican|desert|road|plagued|cg1-seed-07": {
+  "tier": "town",
+  "institutions": 56,
+  "districts": 5,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   56,
+   32
+  ]
+ },
+ "town|mesoamerican|forest|isolated|plagued|cg1-seed-03": {
+  "tier": "town",
+  "institutions": 51,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   51,
+   32
+  ]
+ },
+ "town|mesoamerican|hills|road|frontier|cg1-seed-02": {
+  "tier": "town",
+  "institutions": 51,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   51,
+   32
+  ]
+ },
+ "town|mesoamerican|mountain|road|frontier|cg1-seed-06": {
+  "tier": "town",
+  "institutions": 48,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   48,
+   32
+  ]
+ },
+ "town|mesoamerican|plains|road|civilized|cg1-seed-01": {
+  "tier": "town",
+  "institutions": 47,
+  "districts": 3,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   47,
+   32
+  ]
+ },
+ "town|mesoamerican|riverside|river|safe|cg1-seed-04": {
+  "tier": "town",
+  "institutions": 54,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   54,
+   32
+  ]
+ },
+ "town|norse|coastal|port|safe|cg1-seed-08": {
+  "tier": "town",
+  "institutions": 62,
+  "districts": 6,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   62,
+   32
+  ]
+ },
+ "town|norse|desert|road|frontier|cg1-seed-10": {
+  "tier": "town",
+  "institutions": 58,
+  "districts": 3,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   58,
+   32
+  ]
+ },
+ "town|norse|forest|isolated|frontier|cg1-seed-06": {
+  "tier": "town",
+  "institutions": 51,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   51,
+   32
+  ]
+ },
+ "town|norse|hills|road|civilized|cg1-seed-05": {
+  "tier": "town",
+  "institutions": 49,
+  "districts": 3,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   49,
+   32
+  ]
+ },
+ "town|norse|mountain|road|civilized|cg1-seed-09": {
+  "tier": "town",
+  "institutions": 49,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   49,
+   32
+  ]
+ },
+ "town|norse|plains|road|safe|cg1-seed-04": {
+  "tier": "town",
+  "institutions": 51,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   51,
+   32
+  ]
+ },
+ "town|norse|riverside|river|plagued|cg1-seed-07": {
+  "tier": "town",
+  "institutions": 56,
+  "districts": 5,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   56,
+   32
+  ]
+ },
+ "town|slavic|coastal|port|plagued|cg1-seed-03": {
+  "tier": "town",
+  "institutions": 58,
+  "districts": 6,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   58,
+   32
+  ]
+ },
+ "town|slavic|desert|road|civilized|cg1-seed-05": {
+  "tier": "town",
+  "institutions": 51,
+  "districts": 3,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   51,
+   32
+  ]
+ },
+ "town|slavic|forest|isolated|civilized|cg1-seed-01": {
+  "tier": "town",
+  "institutions": 38,
+  "districts": 5,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   38,
+   32
+  ]
+ },
+ "town|slavic|hills|road|safe|cg1-seed-00": {
+  "tier": "town",
+  "institutions": 49,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   49,
+   32
+  ]
+ },
+ "town|slavic|mountain|road|safe|cg1-seed-04": {
+  "tier": "town",
+  "institutions": 46,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   46,
+   32
+  ]
+ },
+ "town|slavic|plains|road|plagued|cg1-seed-11": {
+  "tier": "town",
+  "institutions": 52,
+  "districts": 5,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   52,
+   32
+  ]
+ },
+ "town|slavic|riverside|river|frontier|cg1-seed-02": {
+  "tier": "town",
+  "institutions": 54,
+  "districts": 5,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   54,
+   32
+  ]
+ },
+ "town|south_asian|coastal|port|safe|cg1-seed-00": {
+  "tier": "town",
+  "institutions": 53,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   53,
+   32
+  ]
+ },
+ "town|south_asian|desert|road|frontier|cg1-seed-02": {
+  "tier": "town",
+  "institutions": 55,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   55,
+   32
+  ]
+ },
+ "town|south_asian|forest|isolated|frontier|cg1-seed-10": {
+  "tier": "town",
+  "institutions": 55,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   55,
+   32
+  ]
+ },
+ "town|south_asian|hills|road|civilized|cg1-seed-09": {
+  "tier": "town",
+  "institutions": 54,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   54,
+   32
+  ]
+ },
+ "town|south_asian|mountain|road|civilized|cg1-seed-01": {
+  "tier": "town",
+  "institutions": 45,
+  "districts": 3,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   45,
+   32
+  ]
+ },
+ "town|south_asian|plains|road|safe|cg1-seed-08": {
+  "tier": "town",
+  "institutions": 57,
+  "districts": 5,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   57,
+   32
+  ]
+ },
+ "town|south_asian|riverside|river|plagued|cg1-seed-11": {
+  "tier": "town",
+  "institutions": 51,
+  "districts": 5,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   51,
+   32
+  ]
+ },
+ "town|steppe|coastal|port|plagued|cg1-seed-07": {
+  "tier": "town",
+  "institutions": 54,
+  "districts": 5,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   54,
+   32
+  ]
+ },
+ "town|steppe|desert|road|civilized|cg1-seed-09": {
+  "tier": "town",
+  "institutions": 55,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   55,
+   32
+  ]
+ },
+ "town|steppe|forest|isolated|civilized|cg1-seed-05": {
+  "tier": "town",
+  "institutions": 45,
+  "districts": 3,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   45,
+   32
+  ]
+ },
+ "town|steppe|hills|road|safe|cg1-seed-04": {
+  "tier": "town",
+  "institutions": 49,
+  "districts": 4,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   49,
+   32
+  ]
+ },
+ "town|steppe|mountain|road|safe|cg1-seed-08": {
+  "tier": "town",
+  "institutions": 50,
+  "districts": 5,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   50,
+   32
+  ]
+ },
+ "town|steppe|plains|road|plagued|cg1-seed-03": {
+  "tier": "town",
+  "institutions": 55,
+  "districts": 5,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   55,
+   32
+  ]
+ },
+ "town|steppe|riverside|river|frontier|cg1-seed-06": {
+  "tier": "town",
+  "institutions": 57,
+  "districts": 5,
+  "sceneBuildings": 96,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   57,
+   32
+  ]
+ },
+ "village|arabic|coastal|port|civilized|cg1-seed-01": {
+  "tier": "village",
+  "institutions": 29,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   29,
+   20
+  ]
+ },
+ "village|arabic|desert|road|plagued|cg1-seed-03": {
+  "tier": "village",
+  "institutions": 33,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   33,
+   20
+  ]
+ },
+ "village|arabic|forest|isolated|plagued|cg1-seed-11": {
+  "tier": "village",
+  "institutions": 30,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   30,
+   20
+  ]
+ },
+ "village|arabic|hills|road|frontier|cg1-seed-10": {
+  "tier": "village",
+  "institutions": 31,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   31,
+   20
+  ]
+ },
+ "village|arabic|mountain|road|frontier|cg1-seed-02": {
+  "tier": "village",
+  "institutions": 26,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   26,
+   20
+  ]
+ },
+ "village|arabic|plains|road|civilized|cg1-seed-09": {
+  "tier": "village",
+  "institutions": 33,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   33,
+   20
+  ]
+ },
+ "village|arabic|riverside|river|safe|cg1-seed-00": {
+  "tier": "village",
+  "institutions": 33,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   33,
+   20
+  ]
+ },
+ "village|celtic|coastal|port|frontier|cg1-seed-06": {
+  "tier": "village",
+  "institutions": 32,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   32,
+   20
+  ]
+ },
+ "village|celtic|desert|road|safe|cg1-seed-08": {
+  "tier": "village",
+  "institutions": 41,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   41,
+   20
+  ]
+ },
+ "village|celtic|forest|isolated|safe|cg1-seed-04": {
+  "tier": "village",
+  "institutions": 28,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   28,
+   20
+  ]
+ },
+ "village|celtic|hills|road|plagued|cg1-seed-03": {
+  "tier": "village",
+  "institutions": 31,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   31,
+   20
+  ]
+ },
+ "village|celtic|mountain|road|plagued|cg1-seed-07": {
+  "tier": "village",
+  "institutions": 35,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   35,
+   20
+  ]
+ },
+ "village|celtic|plains|road|frontier|cg1-seed-02": {
+  "tier": "village",
+  "institutions": 33,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   33,
+   20
+  ]
+ },
+ "village|celtic|riverside|river|civilized|cg1-seed-05": {
+  "tier": "village",
+  "institutions": 38,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   38,
+   20
+  ]
+ },
+ "village|east_asian|coastal|port|frontier|cg1-seed-10": {
+  "tier": "village",
+  "institutions": 32,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   32,
+   20
+  ]
+ },
+ "village|east_asian|desert|road|safe|cg1-seed-00": {
+  "tier": "village",
+  "institutions": 36,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   36,
+   20
+  ]
+ },
+ "village|east_asian|forest|isolated|safe|cg1-seed-08": {
+  "tier": "village",
+  "institutions": 29,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   29,
+   20
+  ]
+ },
+ "village|east_asian|hills|road|plagued|cg1-seed-07": {
+  "tier": "village",
+  "institutions": 36,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   36,
+   20
+  ]
+ },
+ "village|east_asian|mountain|road|plagued|cg1-seed-11": {
+  "tier": "village",
+  "institutions": 28,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   28,
+   20
+  ]
+ },
+ "village|east_asian|plains|road|frontier|cg1-seed-06": {
+  "tier": "village",
+  "institutions": 30,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   30,
+   20
+  ]
+ },
+ "village|east_asian|riverside|river|civilized|cg1-seed-09": {
+  "tier": "village",
+  "institutions": 35,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   35,
+   20
+  ]
+ },
+ "village|germanic|coastal|port|safe|cg1-seed-04": {
+  "tier": "village",
+  "institutions": 35,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   35,
+   20
+  ]
+ },
+ "village|germanic|desert|road|frontier|cg1-seed-06": {
+  "tier": "village",
+  "institutions": 36,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   36,
+   20
+  ]
+ },
+ "village|germanic|forest|isolated|frontier|cg1-seed-02": {
+  "tier": "village",
+  "institutions": 29,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   29,
+   20
+  ]
+ },
+ "village|germanic|hills|road|civilized|cg1-seed-01": {
+  "tier": "village",
+  "institutions": 24,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   24,
+   20
+  ]
+ },
+ "village|germanic|mountain|road|civilized|cg1-seed-05": {
+  "tier": "village",
+  "institutions": 25,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   25,
+   20
+  ]
+ },
+ "village|germanic|plains|road|safe|cg1-seed-00": {
+  "tier": "village",
+  "institutions": 35,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   35,
+   20
+  ]
+ },
+ "village|germanic|riverside|river|plagued|cg1-seed-03": {
+  "tier": "village",
+  "institutions": 36,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   36,
+   20
+  ]
+ },
+ "village|greek|coastal|port|frontier|cg1-seed-02": {
+  "tier": "village",
+  "institutions": 39,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   39,
+   20
+  ]
+ },
+ "village|greek|desert|road|safe|cg1-seed-04": {
+  "tier": "village",
+  "institutions": 36,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   36,
+   20
+  ]
+ },
+ "village|greek|forest|isolated|safe|cg1-seed-00": {
+  "tier": "village",
+  "institutions": 32,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   32,
+   20
+  ]
+ },
+ "village|greek|hills|road|plagued|cg1-seed-11": {
+  "tier": "village",
+  "institutions": 23,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   23,
+   20
+  ]
+ },
+ "village|greek|mountain|road|plagued|cg1-seed-03": {
+  "tier": "village",
+  "institutions": 31,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   31,
+   20
+  ]
+ },
+ "village|greek|plains|road|frontier|cg1-seed-10": {
+  "tier": "village",
+  "institutions": 35,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   35,
+   20
+  ]
+ },
+ "village|greek|riverside|river|civilized|cg1-seed-01": {
+  "tier": "village",
+  "institutions": 29,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   29,
+   20
+  ]
+ },
+ "village|latin|coastal|port|plagued|cg1-seed-11": {
+  "tier": "village",
+  "institutions": 33,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   33,
+   20
+  ]
+ },
+ "village|latin|desert|road|civilized|cg1-seed-01": {
+  "tier": "village",
+  "institutions": 28,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   28,
+   20
+  ]
+ },
+ "village|latin|forest|isolated|civilized|cg1-seed-09": {
+  "tier": "village",
+  "institutions": 34,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   34,
+   20
+  ]
+ },
+ "village|latin|hills|road|safe|cg1-seed-08": {
+  "tier": "village",
+  "institutions": 30,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   30,
+   20
+  ]
+ },
+ "village|latin|mountain|road|safe|cg1-seed-00": {
+  "tier": "village",
+  "institutions": 31,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   31,
+   20
+  ]
+ },
+ "village|latin|plains|road|plagued|cg1-seed-07": {
+  "tier": "village",
+  "institutions": 38,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   38,
+   20
+  ]
+ },
+ "village|latin|riverside|river|frontier|cg1-seed-10": {
+  "tier": "village",
+  "institutions": 35,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   35,
+   20
+  ]
+ },
+ "village|mediterranean|coastal|port|civilized|cg1-seed-09": {
+  "tier": "village",
+  "institutions": 33,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   33,
+   20
+  ]
+ },
+ "village|mediterranean|desert|road|plagued|cg1-seed-11": {
+  "tier": "village",
+  "institutions": 32,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   32,
+   20
+  ]
+ },
+ "village|mediterranean|forest|isolated|plagued|cg1-seed-07": {
+  "tier": "village",
+  "institutions": 32,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   32,
+   20
+  ]
+ },
+ "village|mediterranean|hills|road|frontier|cg1-seed-06": {
+  "tier": "village",
+  "institutions": 25,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   25,
+   20
+  ]
+ },
+ "village|mediterranean|mountain|road|frontier|cg1-seed-10": {
+  "tier": "village",
+  "institutions": 28,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   28,
+   20
+  ]
+ },
+ "village|mediterranean|plains|road|civilized|cg1-seed-05": {
+  "tier": "village",
+  "institutions": 33,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   33,
+   20
+  ]
+ },
+ "village|mediterranean|riverside|river|safe|cg1-seed-08": {
+  "tier": "village",
+  "institutions": 38,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   38,
+   20
+  ]
+ },
+ "village|mesoamerican|coastal|port|civilized|cg1-seed-05": {
+  "tier": "village",
+  "institutions": 38,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   38,
+   20
+  ]
+ },
+ "village|mesoamerican|desert|road|plagued|cg1-seed-07": {
+  "tier": "village",
+  "institutions": 36,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   36,
+   20
+  ]
+ },
+ "village|mesoamerican|forest|isolated|plagued|cg1-seed-03": {
+  "tier": "village",
+  "institutions": 30,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   30,
+   20
+  ]
+ },
+ "village|mesoamerican|hills|road|frontier|cg1-seed-02": {
+  "tier": "village",
+  "institutions": 32,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   32,
+   20
+  ]
+ },
+ "village|mesoamerican|mountain|road|frontier|cg1-seed-06": {
+  "tier": "village",
+  "institutions": 20,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "ok",
+  "reported": []
+ },
+ "village|mesoamerican|plains|road|civilized|cg1-seed-01": {
+  "tier": "village",
+  "institutions": 24,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   24,
+   20
+  ]
+ },
+ "village|mesoamerican|riverside|river|safe|cg1-seed-04": {
+  "tier": "village",
+  "institutions": 35,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   35,
+   20
+  ]
+ },
+ "village|norse|coastal|port|safe|cg1-seed-08": {
+  "tier": "village",
+  "institutions": 38,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   38,
+   20
+  ]
+ },
+ "village|norse|desert|road|frontier|cg1-seed-10": {
+  "tier": "village",
+  "institutions": 41,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   41,
+   20
+  ]
+ },
+ "village|norse|forest|isolated|frontier|cg1-seed-06": {
+  "tier": "village",
+  "institutions": 25,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   25,
+   20
+  ]
+ },
+ "village|norse|hills|road|civilized|cg1-seed-05": {
+  "tier": "village",
+  "institutions": 29,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   29,
+   20
+  ]
+ },
+ "village|norse|mountain|road|civilized|cg1-seed-09": {
+  "tier": "village",
+  "institutions": 27,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   27,
+   20
+  ]
+ },
+ "village|norse|plains|road|safe|cg1-seed-04": {
+  "tier": "village",
+  "institutions": 35,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   35,
+   20
+  ]
+ },
+ "village|norse|riverside|river|plagued|cg1-seed-07": {
+  "tier": "village",
+  "institutions": 37,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   37,
+   20
+  ]
+ },
+ "village|slavic|coastal|port|plagued|cg1-seed-03": {
+  "tier": "village",
+  "institutions": 34,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   34,
+   20
+  ]
+ },
+ "village|slavic|desert|road|civilized|cg1-seed-05": {
+  "tier": "village",
+  "institutions": 35,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   35,
+   20
+  ]
+ },
+ "village|slavic|forest|isolated|civilized|cg1-seed-01": {
+  "tier": "village",
+  "institutions": 24,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   24,
+   20
+  ]
+ },
+ "village|slavic|hills|road|safe|cg1-seed-00": {
+  "tier": "village",
+  "institutions": 30,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   30,
+   20
+  ]
+ },
+ "village|slavic|mountain|road|safe|cg1-seed-04": {
+  "tier": "village",
+  "institutions": 29,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   29,
+   20
+  ]
+ },
+ "village|slavic|plains|road|plagued|cg1-seed-11": {
+  "tier": "village",
+  "institutions": 30,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   30,
+   20
+  ]
+ },
+ "village|slavic|riverside|river|frontier|cg1-seed-02": {
+  "tier": "village",
+  "institutions": 35,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   35,
+   20
+  ]
+ },
+ "village|south_asian|coastal|port|safe|cg1-seed-00": {
+  "tier": "village",
+  "institutions": 35,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   35,
+   20
+  ]
+ },
+ "village|south_asian|desert|road|frontier|cg1-seed-02": {
+  "tier": "village",
+  "institutions": 37,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   37,
+   20
+  ]
+ },
+ "village|south_asian|forest|isolated|frontier|cg1-seed-10": {
+  "tier": "village",
+  "institutions": 29,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   29,
+   20
+  ]
+ },
+ "village|south_asian|hills|road|civilized|cg1-seed-09": {
+  "tier": "village",
+  "institutions": 28,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   28,
+   20
+  ]
+ },
+ "village|south_asian|mountain|road|civilized|cg1-seed-01": {
+  "tier": "village",
+  "institutions": 23,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   23,
+   20
+  ]
+ },
+ "village|south_asian|plains|road|safe|cg1-seed-08": {
+  "tier": "village",
+  "institutions": 35,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   35,
+   20
+  ]
+ },
+ "village|south_asian|riverside|river|plagued|cg1-seed-11": {
+  "tier": "village",
+  "institutions": 37,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   37,
+   20
+  ]
+ },
+ "village|steppe|coastal|port|plagued|cg1-seed-07": {
+  "tier": "village",
+  "institutions": 36,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   36,
+   20
+  ]
+ },
+ "village|steppe|desert|road|civilized|cg1-seed-09": {
+  "tier": "village",
+  "institutions": 39,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   39,
+   20
+  ]
+ },
+ "village|steppe|forest|isolated|civilized|cg1-seed-05": {
+  "tier": "village",
+  "institutions": 30,
+  "districts": 1,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   30,
+   20
+  ]
+ },
+ "village|steppe|hills|road|safe|cg1-seed-04": {
+  "tier": "village",
+  "institutions": 31,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   31,
+   20
+  ]
+ },
+ "village|steppe|mountain|road|safe|cg1-seed-08": {
+  "tier": "village",
+  "institutions": 32,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   32,
+   20
+  ]
+ },
+ "village|steppe|plains|road|plagued|cg1-seed-03": {
+  "tier": "village",
+  "institutions": 33,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   33,
+   20
+  ]
+ },
+ "village|steppe|riverside|river|frontier|cg1-seed-06": {
+  "tier": "village",
+  "institutions": 33,
+  "districts": 2,
+  "sceneBuildings": 54,
+  "dark": "ok",
+  "outcome": "binding-cap",
+  "reported": [
+   33,
+   20
+  ]
+ }
+}
