@@ -217,8 +217,27 @@ describe('MF-T2N — the resource location deriver', () => {
     const semanticsImporters = importersOf('resourceSemantics.js');
     expect(semanticsImporters.length).toBeGreaterThan(0);
     expect(semanticsImporters).toContain('src/generators/steps/resolveResources.js');
+    // ⭐ THE ADMISSION MAP (MF-UC2, 2026-08-23). "Nothing imports the leaf" was only ever true
+    // while no car consumed it, and the undercity train's MONOTONE components are LICENSED AND
+    // ANCHORED by these sites (§311.8.2(b): "mines/quarries at the dossier's resource sites while
+    // worked"), so the first real consumer has arrived. The claim this arm OWNS is golden
+    // inertness — that nothing on the GENERATION path reaches the leaf — and that claim is
+    // untouched. The assertion is therefore an EXACT map with a written reason per member rather
+    // than an empty list: a NEW importer still reds, and the admission cannot grow silently.
+    const ADMITTED_IMPORTERS = Object.freeze({
+      'src/domain/undercity/monotoneComponents.js':
+        'MF-UC2, the undercity MONOTONE components. The site IS the licence and the anchor of'
+        + ' every working it derives, joined by key to nativeResourceConditionRecords for the'
+        + ' ABANDONED flag exactly as this leaf\'s own header orders. It is itself a DORMANT'
+        + ' domain-root deriver with no production importer, reached only from lazy display and'
+        + ' dossier surfaces (CT-4 §7 F3), the D5 strata fabric and UC-5 — never from generation,'
+        + ' which is the whole of what keeps this arm\'s golden-inertness claim true.',
+    });
+    const admitted = Object.keys(ADMITTED_IMPORTERS).sort();
+    // Each admission carries a real reason, not a placeholder (the EXEMPT_RULE_KEYS discipline).
+    expect(admitted.filter((k) => ADMITTED_IMPORTERS[k].length < 120)).toEqual([]);
     // anchored: the positive control above proves the import regex and the walk both work.
-    expect(importersOf('resourceSites.js')).toEqual([]);
+    expect(importersOf('resourceSites.js')).toEqual(admitted);
     // The generator writes NO site: a fresh world's JSON never mentions one, and the deriver
     // leaves the settlement byte-identical — so the golden manifest cannot move.
     const s = realSettlement('forest', 'mf-t2n-forest');

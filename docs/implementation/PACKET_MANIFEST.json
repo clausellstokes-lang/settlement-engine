@@ -22391,7 +22391,7 @@
     },
    {
    "id": "MF-UC2",
-   "status": "DRAFT",
+   "status": "READY",
    "packetPath": "docs/implementation/packets/town-cartography/MF-UC2.md",
    "verifiedBase": "1b1de759155631b61659d8faff7fe69836687385",
    "changeManifest": [
@@ -22409,6 +22409,11 @@
      "_note": "THE RUIN-FILTER READER COUNT, 91 -> 92, read from the arm's OWN failure message and never computed. The leaf is a new .institutions reader in src/domain and it is COMPLIANT rather than exempt: it imports isLiveInstitution and consults it on every institution-anchored row. The disposition is the third this train has taken and the only one of its kind - the ruin state is neither filtered away nor ignored but READ AND TYPED onto the row as `abandoned`, because a MONOTONE component may not be erased by its institution's ruin while a growing one may not be credited to a flattened building. Stated in the leaf's own header so the walker's documented file-granular gap is not being used to hide a disposition.",
      "action": "TEST",
      "path": "tests/lint/ruinFilterRoster.walker.test.js"
+    },
+    {
+     "_note": "T2N's OWN DORMANCY ARM, and this member is the cause. 'golden inertness by construction' asserted that NOTHING under src/ imports resourceSites.js, which was only ever true while no car consumed it - and the undercity's MONOTONE components are LICENSED AND ANCHORED by those sites. The claim the arm OWNS is golden inertness (nothing on the GENERATION path reaches the leaf) and that claim is untouched, so the empty-list assertion becomes an EXACT ADMISSION MAP keyed by path with a written reason over 120 characters, the UC-4 cure shape: a NEW importer still reds and the admission cannot grow silently. NON-VACUITY PROVED BY EXECUTION rather than argued - perturbing the admitted path reds the map, and the restore is digest-exact. No title is added or removed, so no census figure moves.",
+     "action": "TEST",
+     "path": "tests/domain/resourceSites.test.js"
     },
     {
      "_note": "THIS PACKET.",

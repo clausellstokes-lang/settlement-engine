@@ -1,6 +1,6 @@
 # Town cartography / MF-UC2 — the undercity's MONOTONE COMPONENTS: `deriveMonotoneComponents` derives the crypts under what buries, the pit a dated year of mass death digs, the undercrofts under what stores and their smuggler subset, the workings at the dossier's own seams, and the sealed vaults under what arms and what judges — monotone by construction, abandoned but never erased, and dark
 
-- **Status:** DRAFT
+- **Status:** READY
 - **Packet version:** 1
 - **Verified base:** `claude/composite-r4` at `1b1de759155631b61659d8faff7fe69836687385`
   — the MF-UC1 landing (ODQ §484's slot), read with `git rev-parse` at the lane's opening and
@@ -84,8 +84,10 @@
   under this member**; if it lands first the count reads 167 → 168 and the census tuple below moves
   by UC-4's own delta. Neither changes this member's DELTA, which is the only figure that crosses a
   rebase (§457/§469).
-  **This packet reserves `TEST tests/lint/ruinFilterRoster.walker.test.js`** (the reader count moves
-  91 → 92; see §1.1) — MF-UC1 held that path and is LANDED, so it is free at this base. It does
+  **This packet reserves TWO `TEST` paths** — `tests/lint/ruinFilterRoster.walker.test.js` (the
+  reader count moves 91 → 92; §1.1) and `tests/domain/resourceSites.test.js` (T2N's dormancy arm,
+  §7.1). MF-UC1 held the first and is LANDED, and no packet holds the second, so both are free at
+  this base. It does
   **NOT** reserve the lighting-census path: the row rides this packet verbatim for the chair's
   landing act (§417, the T2J/UC-1 shape). It reserves no `DOC` row for
   `docs/implementation/PACKET_MANIFEST.json` (the MF-T2Q/MF-T2N/MF-UC1/MF-UC3 shape).
@@ -242,19 +244,204 @@ abandonment, never a shrink (§311.8.3: "use recedes, dug space never does").
 
 | # | instrument | PREDICTED | MEASURED |
 |---|---|---|---|
-| I1 | `generatorGoldenMaster` + fixture `29c6cc8f…` | UNMOVED bytewise | (§7) |
+| I1 | `generatorGoldenMaster` + fixture `29c6cc8f…` | UNMOVED bytewise | ✓ identical before and after; test green |
 | I2 | `observedShapeReaders.walker` (1995/1409/387/60/40) | UNMOVED | ⚠ **RED at first authoring — one NEW ceiling-0 row IN A SIBLING'S LANDED FILE; CURED**, see §5.1 |
-| I3 | `sovereigntyLightingContract.walker` (2513/366/2147/20838/5805) | INTERIOR RED by design, exactly `+1/+0/+1/+8/+1` | (§7) |
-| I4 | `negativeAssertionAnchor.walker` | UNMOVED — every negative carries its `// anchored:` line | (§7) |
-| I5 | `seedLoopTotality.walker` | UNMOVED — ceiling 0 per new test file; no `for (` header in the acceptance names a seed | (§7) |
-| I6 | `typecheck:ratchet` / `typecheck:domain:strict` | both AT CEILING (173/173, 1134/1134), exit 0 | (§7) |
-| I7 | `couplingInclusion.walker` | UNMOVED — `src/domain/undercity/**` is outside CENSUS_SCOPE_RE | (§7) |
-| I8 | `entropyRootCensus.walker` | UNMOVED — `fnv1a32` REUSED from the kernel (the UC-3 J-TEUC3-2 lesson) | (§7) |
-| I9 | `domainGeneratorsBoundary` | UNMOVED — imports `src/data/**`, `src/domain/**`, `src/kernel/**` only | (§7) |
+| I3 | `sovereigntyLightingContract.walker` (2513/366/2147/20838/5805) | INTERIOR RED by design, exactly `+1/+0/+1/+8/+1` | ✓ walked to `2514/366/2148/20846/5806`, green 33/33, all five figures convicted by execution, then REVERTED digest-exact (§9) |
+| I4 | `negativeAssertionAnchor.walker` | UNMOVED — every negative carries its `// anchored:` line | ✓ green. The MF-UC4 lesson was paid BEFORE the walker could charge for it: the three `anchored:` tokens sit on the IMMEDIATELY PRECEDING line, never on the first line of a two-line comment |
+| I5 | `seedLoopTotality.walker` | UNMOVED — ceiling 0 per new test file | ✓ green, and trivially so: the acceptance contains NO `for (` loop at all |
+| I6 | `typecheck:ratchet` / `typecheck:domain:strict` | both AT CEILING (173/173, 1134/1134), exit 0 | ✓ verbatim: `[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).` and `[domain-strict] ✓ no strict-type regressions (1134 errors, ceiling 1134).` |
+| I7 | `couplingInclusion.walker` | UNMOVED — `src/domain/undercity/**` is outside CENSUS_SCOPE_RE | ✓ green |
+| I8 | `entropyRootCensus.walker` | UNMOVED — `fnv1a32` REUSED from the kernel (the UC-3 J-TEUC3-2 lesson, taken pre-emptively) | ✓ green |
+| I9 | `domainGeneratorsBoundary` | UNMOVED — imports `src/data/**`, `src/domain/**`, `src/kernel/**` only | ✓ green |
 | I10 | `sizeBaseline` + eslint `max-lines` | UNMOVED — neither touched file carries a baseline row; leaf ≤250 | ✓ leaf **246 effective**; `institutionFounding.js` 25 → 26 |
 | I11 | `ruinFilterRoster.walker` (91 readers) | AT RISK — the leaf reads the roster | ⚠ **RED: 91 → 92.** Cured by COMPLIANCE + a re-record read from the arm's own failure message; §1.1 |
-| I12 | `validate:packets` | 166 → 167, green at DRAFT and at READY | (§7) |
-| I13 | `tests/domain/undercityColonization.test.js` (UC-4's inertia arm) | UNMOVED — it never calls this car | (§7) |
+| I14 | `resourceSites` — T2N's dormancy arm | NOT PREDICTED | ⚠ **RED, MEMBER-CAUSED, found by the widened sweep and CURED IN-MEMBER**; §7.1. The prediction table missed it, and that miss is the row's own finding: a producer's "nothing imports this leaf" arm is a claim with an expiry date, and the first consumer is the one who pays it |
+| I12 | `validate:packets` | 166 → 167, green at DRAFT and at READY | ✓ `valid: 167 packets (0 READY)` at DRAFT and `valid: 167 packets (1 READY)` at READY, exit 0 at both |
+| I13 | `tests/domain/undercityColonization.test.js` (UC-4's inertia arm) | UNMOVED — it never calls this car | ✓ PROVED BY COMPOSITION, not by argument: UC-4's landing tip `eb57f0186` is rebased onto this member's base but not yet on the branch, so a scratch worktree there took this member's CODE commit by cherry-pick (CLEAN; only `INDEX.md` conflicts, a pure meta-file overlap) and both acceptances ran together — `Test Files 4 passed (4)`, `Tests 55 passed (55)`, TRUE_EXIT 0, with UC-0's UC-4-WIDENED A6 arm and `ruinFilterRoster` at 92 green there too |
+
+---
+
+## §4 · THE ACCEPTANCE — eight arms, one literal `describe`, straight-line `it`
+
+`tests/domain/undercityMonotoneComponents.test.js`. Every arm runs over REAL generated settlements
+(`generateSettlementPipeline`, fixed seeds). The counterfactual arms change ONE stored input. Every
+vocabulary is re-derived from the LIVE estate — `TERRAIN_DATA`, `RESOURCE_SEMANTICS`, UC-0's
+`jointVocabulary`, UC-1's pinned 12-enum, UC-0's `institutionAnchorKey` — never from the leaf's own
+copy. There is **no `for` loop anywhere in the file**, so `seedLoopTotality.walker` has nothing to
+enrol, and every scanned negative carries its `// anchored:` token on the IMMEDIATELY PRECEDING
+line (the marker on the FIRST line of a two-line comment is the shape that redded MF-UC4; the
+lesson was paid here before the walker could charge for it).
+
+| # | arm | what makes it non-vacuous |
+|---|---|---|
+| A1 | G-43 — the mine moves; and the general form over a 36-world sweep | the excavation terrains are re-derived from the live `TERRAIN_DATA` affinity rows and the workable type from the live `RESOURCE_SEMANTICS` before anything is asked of the leaf; the move is `expectPresentThenAbsent` on the anchor, so a working that simply VANISHED reds rather than passes; the sweep proves all SIX kinds actually appear before pinning their well-formedness, and pins the temperament EXCLUSIVE against a vocabulary proved to offer the sibling this car refuses |
+| A2 | monotonicity over five ascending years | the anchors are pinned IDENTICAL across the five readings, so the comparison is row-for-row and not between two populations; and the span is proved to actually GROW, so "never shrinks" is a property rather than a tautology over a frozen extent |
+| A3 | abandoned, never erased | a whole-row deep equality with the flag normalized — a shrink, a move, a re-zoned row or a deletion each red; and the generated fixture's seam is ALREADY depleted, which is the receipt that the condition read is live rather than a fixture invention |
+| A4 | the surge pit | the quiet fixture is pinned to have crypts and NO pit before the stamped one is asked for; a DATELESS/BLOODLESS trail mints nothing; and the source scan for a disaster kind sits behind a pit proved minted six lines above |
+| A5 | the cellar tracks the trade, dark ⇒ 0 | three ledger states (dark, 0.6 of saturation, past saturation) with the extents pinned STRICTLY ORDERED between them; plus a ledger keyed to a DIFFERENT settlement, which proves the read is keyed rather than merely present |
+| A6 | the vault's licensed type | positive control against the real roster (the vault anchors ARE the licensed institutions' anchors, sorted-equal), a NAMED exclusion set proved non-empty (the roster's healing and feeding houses), and the posture exclusivity pinned against every other kind the same settlement produced |
+| A7 | the smuggler needs both facts | three real fixtures whose gate/waterfront status is READ through the landed accessors rather than assumed; the share refusal is `expectPresentThenAbsent` on the kind and the undercrofts are pinned to SURVIVE it, so "no smuggler" cannot pass by the cellars vanishing |
+| A8 | the PRE_SEED age rule | three spellings on ONE re-stamped roster: two must be EQUAL, a late-founded one must be STRICTLY SMALLER (so the rule discriminates rather than flattening), and the undated one must be flagged rather than dated. Mutant m9 convicts this arm ALONE |
+
+**Result: 8/8 green, exit 0**, at the shipped blob, mutexed. In the focused battery alongside every
+sibling: `Test Files 15 passed (15)`, `Tests 165 passed (165)`.
+
+---
+
+## §5 · THE MUTANTS — nine drives, nine convictions, every restore digest-exact
+
+Driven at the shipped leaf blob `fb4dc66ad0943e32c34c94772a69f06cbfc77291f011da4e634fb9cdc4216208`
+inside ONE gate-mutex hold (so ten vitest runs never contended with a sibling lane), with a clean
+control green at BOTH ends — `Tests 8 passed (8)` before and after. Every restore was
+`shasum`-compared against the pristine copy, not assumed.
+
+| # | mutant | convicted at |
+|---|---|---|
+| m1 | the working's anchor stops following its site (`site.terrainAnchor` → a constant) | A1 |
+| m2 | the age factor INVERTED, so the calendar shrinks the crypt | A2, A8 |
+| m3 | an exhausted seam ERASED instead of abandoned (`continue` on depleted) | A1, A3 |
+| m4 | the pit stops requiring DEATHS (the `deaths > 0` filter dropped) | A4 |
+| m5 | the dark trade path stops being zero (`+ 1` on the throughput) | A5 |
+| m6 | the vault licence widened to a function that HEALS | A6 |
+| m7 | the smuggler licence drops the criminal-share condition | A7 |
+| m8 | PRE_SEED stops meaning "stood since the founding" (age → 0) | A2, A8 |
+| **m9** | `FOUNDED_UNDATED`'s `understated` flag falsified | **A8 alone** |
+
+⭐ **m9 EXISTS BECAUSE THE FIRST EIGHT LEFT A GAP, AND THE GAP IS RECORDED RATHER THAN GLOSSED.**
+m2 and m8 each convict A2 **and** A8, so after eight drives neither arm was shown to carry a claim
+the other did not — both could have been one arm wearing two titles. m9 falsifies only the
+`ageUnderstated` flag: A8 reds, A2 and the other six pass, and the control is green after. A8 is
+therefore independently live, which is exactly what the PRE_SEED rule needs, because
+`FOUNDED_UNDATED` is the kind the charter does not name and the one where inventing a year is the
+lie T2Q's third kind exists to refuse.
+
+---
+
+## §6 · THE TUNING DEFAULTS AND THEIR PROVENANCE (§441.6 — PROVISIONAL / EXPOSABLE-PROVISIONAL)
+
+`MONOTONE_EXTENT_TUNING` is the ONE tuning surface: bounded, typed, frozen, owner-retunable — the
+`UNDERWAYS_TUNING` / `SEWER_DERIVATION_TUNING` precedent — and a **REGISTERED TUNING-PASS INPUT
+(charter §8 R-3)**. The tables beside it (`JOIN_BY_KIND`, `CRYPT_ZONES_OFF_FAITH`,
+`VAULT_ZONE_BY_FUNCTION`, `EXCAVATION_TERRAINS`, `MONOTONE_EXTENTS`) name which buckets, zones and
+joints are REACHABLE, never a weight — the UC-3 `EXTENTS_BY_GROUND` precedent — and are not tuning.
+
+**THE HARNESS.** A 420-settlement corpus generated at this base: 6 tiers × 2 cultures × 7 terrains
+× 5 seeds, each terrain paired with its honest trade route (UC-1's harness, re-run for this car's
+drivers). Every figure below is a LIVENESS measurement.
+
+| constant | value | the measurement that chose it |
+|---|---|---|
+| `burialSaturationPopulation` | 60,000 | the peak-population corpus is bimodal by tier (p50 975, p75 13,312, p90 58,568), so a low saturation pins the median crypt at the top bucket. Five candidates driven at asOfYear 150 across the four extents: 9,000 → 150/60/31/348 · 20,000 → 189/74/30/296 · 40,000 → 239/63/40/247 · **60,000 → 263/68/57/201** · 80,000 → 281/79/85/144. All four buckets live at every candidate; 60,000 gives the fullest middle (125 of 589 rows in the two interior buckets, against 91 at the first candidate) |
+| `smugglerShareFloor` | 0.45 | the criminal-share corpus is LUMPY (p25 0.275, p50 0.371, p75 0.500, p90 0.575). The criterion is whether BOTH licensing facts refuse somewhere: at 0.45, 191 storing settlements licensed, **34 refused by the SHARE alone and 11 by the PLACE alone**. 0.55 collapses the place condition to THREE refusals and would make the gate/waterfront fact very nearly decorative. 0.35/0.40/0.45/0.50 license the identical 191, and 0.45 is chosen over the rounder 0.50 because a large mass of the corpus reads EXACTLY 0.500 — a floor there would decide hundreds of settlements on the comparison operator alone |
+| `workingSaturationPopulation` | 6,000 | the seam driver spans 0.002 / p50 0.507 / 1.000 over 163 workings and fills all four extents (67/12/15/69) |
+| `ageSaturationYears` | 150 | the crypt driver reads 0.067 at asOfYear 10, 0.80 at 120 and 1.00 at 400 — live in the calendar, which is the only axis a monotone driver may move on |
+| `vaultRareRate` | 0.35 | 0.023 / 0.28 / 0.35 across the same three years. ⚠ At a FIXED year this driver is CONSTANT across the corpus, and that is a property of the CORPUS, not of the rule: a generated world has never been pulsed, so every institution reads PRE_SEED and every age coincides. A8 drives the separation with dated `foundedAt` stamps rather than claiming it from the sweep |
+| `tradeSaturation` | 3.0 | **NOT a free choice** — the estate's own `FABRIC_TUNING.TRADE_FLOW_SAT` (`urbanFabricKernel.js:268`), consumed so the cellar driver and the fabric's merchant deposit read one throughput scale. Measured dark ⇒ 0.00 on all 388 undercrofts; at 0.9 of saturation ⇒ 0.30; at or past it ⇒ 1.00 |
+| `surgeDeathSaturation` | 400 | ⚠ the one figure the sweep CANNOT set: a generated corpus carries no calamity stamps at all (the key is pulse-written). Set from the stamp's own loss scale and driven by A4 with dated records rather than claimed from the corpus |
+
+⭐ **THE SWEEP REFUTED THE FIRST VAULT LICENCE AND THAT IS WHY THE ROW EXISTS.** The first draft
+licensed a vault by `institutionNature` ∈ {trade, security} and measured **2,788 rows over 420
+settlements — 6.6 per settlement, 68% of every row this car emits**: a vault under every market
+stall, and a "rare" component that is the most common thing in the output. The licence was re-cut
+to `institutionFunction` ∈ {arms, judges} — the estate's typed spelling of §311.8.3's "licensed by
+its TYPE", and the doctrine's own vault/dungeon pair — measuring 472 rows, 1.12 per settlement, at
+most two of each kind, on 193 and 199 settlements respectively.
+
+**LIVENESS OF EVERY LICENCE AND CAUSE, at the shipped constants (420 settlements, 354 with rows,
+1,803 rows):** crypt 589 · vault 472 · undercroft 388 · smuggler_cellar 191 · mine 163, with 51
+ABANDONED rows and 472 SEALED. Extent spread: crypt 278/69/78/164 and mine 67/12/15/69 across the
+four buckets (four live each); undercroft and smuggler_cellar sit at the smallest bucket on the
+DARK path by construction and reach `labyrinth` and `gallery` respectively once the ledger is lit.
+No licence and no driver is decorative.
+
+---
+
+## §7 · THE §408 WIDENED SWEEP, CLASSIFIED
+
+Run ONCE at the tip, mutexed, over `tests/lint tests/build tests/docs tests/ops tests/domain
+tests/property tests/edgeFunctions tests/scripts tests/data`. `git rev-parse HEAD` and
+`git status --porcelain` were captured BEFORE and AFTER and are identical.
+
+**FIRST DRIVE** (`/tmp/uc2/sweep-final.log`, `SWEEP_TRUE_EXIT=1`, 305.76 s):
+`Test Files 7 failed | 1304 passed | 7 skipped (1318)` · `Tests 10 failed | 18465 passed |
+114 skipped (18589)`. **NO STRAY** — all ten are accounted for below, so no re-run was owed.
+
+| # | failing title | class |
+|---|---|---|
+| 1 | `sovereigntyLightingContract.walker` — THE CENSUS IS AN ASSERTION, NOT A SENTENCE | **THIS MEMBER'S ONE AUTHORIZED INTERIOR RED** — the deferred census row (charter §4, preamble §P7.12, ODQ §417). The walker's own message names the figure |
+| 2–3 | `enforcement-claims` ×2 — the @enforced-by tag arm and the PER-CLAIM naked-claim pin | BANKED (the six naked claims). `FROZEN_NAKED` names four keys in `FABLE_VALIDATION_QUEUE.md`, `GOLDEN_SHIFT_LEDGER.md` and `IN-0C.md` — none of this member's files. CLAIM_RE over all 198 lines this member ADDED to `INDEX.md` and the manifest returns ZERO, so no seventh claim landed |
+| 4 | `resourceSites` — golden inertness by construction | ⚠ **MEMBER-CAUSED. CURED IN-MEMBER**, see §7.1 |
+| 5–7 | `warCostKindPools.walker` ×3 — `war_trajectory_winning` / `war_trajectory_losing` / `trajectory_misread` | BANKED |
+| 8 | `metronomeCooldownLint` — the non-cooldown emitter set may only SHRINK | BANKED (the razingExecution metronome) |
+| 9 | `warRulingKindPools.walker` — `succession_demand_inherited` | BANKED |
+| 10 | `clampPrimitiveBaseline` — baseline exactly matches the files that still define a local clamp | BANKED. This member defines NO local clamp: it imports `clamp` from `src/kernel/math.js` |
+
+### §7.1 · The one member-caused red, and why the CLAIM had to move rather than the code
+
+`tests/domain/resourceSites.test.js`'s dormancy arm asserted
+`expect(importersOf('resourceSites.js')).toEqual([])`. That assertion was true only while T2N had
+no consumer, and **MF-UC2 is the undercity train's first**: §311.8.2(b) puts mines and quarries "at
+the dossier's resource sites", so the site IS the working's licence and anchor. Not consuming it
+would have meant re-deriving where a seam sits — the second truth the charter forbids by name.
+
+⭐ `importersOf` is a REAL import-specifier scan over `codeOnly(...)` (`from '…/resourceSites.js'`),
+not the MENTION scan that blinded UC-0's A6 until MF-UC4 exhibited the file it missed — so the
+instrument saw the edge correctly and the finding is true. The claim it OWNS, though, is GOLDEN
+INERTNESS: that nothing on the GENERATION path reaches the leaf. That claim is untouched — this
+member's leaf is itself a dormant domain-root deriver with no production importer at all.
+
+The cure is UC-4's: the empty list becomes an **EXACT ADMISSION MAP keyed by path with a written
+reason of over 120 characters**, so a NEW importer still reds and the admission cannot grow
+silently. **NON-VACUITY PROVED BY EXECUTION, not argued:** perturbing the admitted path to a name
+that does not exist REDS the map (`expected [ Array(1) ] to deeply equal [ Array(1) ]`), and the
+restore is digest-exact. No `it(` or `describe(` is added or removed, so no census figure moves.
+
+**CURE BATTERY at the cured bytes, mutexed, TRUE_EXIT 0:** `resourceSites` ·
+`undercityMonotoneComponents` · `ruinFilterRoster.walker` · `observedShapeReaders.walker` ·
+`negativeAssertionAnchor.walker` · `seedLoopTotality.walker` — `Test Files 6 passed (6)`,
+`Tests 71 passed (71)`.
+
+**SECOND DRIVE** at the final tip: see §7.2.
+
+---
+
+## §8 · DELIVERED FILES — committed-blob SHA-256
+
+| file | sha256 of the COMMITTED blob |
+|---|---|
+| `src/domain/undercity/monotoneComponents.js` | `fb4dc66ad0943e32c34c94772a69f06cbfc77291f011da4e634fb9cdc4216208` |
+| `src/domain/institutionFounding.js` | `8dc07811c5d204901074c33d27414b6ce70febf2900f96127854f0e9299f83bb` |
+| `tests/domain/undercityMonotoneComponents.test.js` | `c87b475b0741c79185ecbfd95f333f1bd12d1eb3e6a7b80e26d467bd66b28e36` |
+| `tests/lint/ruinFilterRoster.walker.test.js` | `be168427b5ab9faa3926275bbfdc1f3928af66bc8a001b6f4133ecd3e0ff4183` |
+
+Every commit ran with hooks ON, and after each one the committed blob was `shasum`-compared against
+the worktree blob: **identical at every commit**, so the pre-commit `eslint --fix` re-indexed
+nothing and every proof above ran against the committed bytes (§P3's re-prove-at-the-tip law). All
+six probe scripts survived every lint-staged stash cycle (copies in `/tmp/uc2/probes`; they are
+REMOVED from the tree at the final tip).
+
+**Ratchet baselines UNMOVED base → tip** — `git diff --name-only` reports no change to
+`scripts/.observed-shape-readers-baseline.json`, `scripts/.size-baseline.json`,
+`scripts/.test-ratchet-baseline.json`, `tests/fixtures/generator-golden-master.json`, or
+`tests/lint/sovereigntyLightingContract.walker.test.js` (REVERTED digest-exact to `261b3135…`).
+
+---
+
+## §9 · REDS AT THIS MEMBER'S TIP
+
+**ONE**, and it is the authorized one: the deferred census row in
+`tests/lint/sovereigntyLightingContract.walker.test.js`. The walker edit was made, the tuple walked
+to `2514 / 366 / 2148 / 20846 / 5806`, proved green 33/33 with the row applied, then REVERTED
+DIGEST-EXACT — the row is inserted by the chair's landing act (§417).
+
+⭐ **THE DELTA IS CONVICTED ON ALL FIVE FIGURES, not just asserted:** the unedited run named `files`
+itself (*"expected 2514 to be 2513"*), and four negative controls each put ONE figure back and
+each redded on exactly that figure — `credited` (*"expected 2148 to be 2147"*), `titles`,
+`suiteTitles`, and `parked` perturbed to 365. That last one is the receipt that `parked` is
+genuinely CHECKED and that this member's new file is CREDITED rather than parked. Every restore was
+digest-exact.
+
+No other member-caused red stands at this tip.
 
 ---
 
