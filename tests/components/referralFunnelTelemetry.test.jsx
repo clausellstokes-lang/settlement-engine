@@ -156,19 +156,28 @@ describe('WEB-3 — the referral loop emit wiring', () => {
   test('A1b: EVERY call site of the hook labels its surface, and only from the ruled enum', () => {
     // Totality, not a spot check: the emit lives in the hook, so an unlabelled
     // mount would emit `surface: undefined` and nothing else would notice.
+    // The walk is RECURSIVE over all of src/ rather than a list of the directories
+    // that happen to hold call sites today — a fixed list is the shape that turns a
+    // totality arm vacuous the first time someone adds a call site one level over.
     const files = ['src/components/PricingPage.jsx', 'src/components/PurchaseModal.jsx'];
+    const walk = (dir, out = []) => {
+      for (const d of readdirSync(join(ROOT, dir), { withFileTypes: true })) {
+        if (d.isDirectory()) walk(`${dir}/${d.name}`, out);
+        else if (/\.jsx?$/.test(d.name)) out.push(`${dir}/${d.name}`);
+      }
+      return out;
+    };
+    const scanned = walk('src');
+    // Guard-the-guard, part one: the walk really reached a realistic corpus.
+    expect(scanned.length).toBeGreaterThan(300);
     const found = [];
-    for (const rel of ['src', 'src/components', 'src/components/account', 'src/components/purchase', 'src/hooks']
-      .flatMap((dir) => readdirSync(join(ROOT, dir), { withFileTypes: true })
-        .filter((d) => d.isFile() && /\.jsx?$/.test(d.name))
-        .map((d) => `${dir}/${d.name}`))) {
-      const src = read(rel);
-      for (const m of src.matchAll(/useReferralIntent\((.*?)\)/g)) {
-        if (rel === 'src/hooks/useReferralIntent.js') continue; // the declaration itself
+    for (const rel of scanned) {
+      if (rel === 'src/hooks/useReferralIntent.js') continue; // the declaration itself
+      for (const m of read(rel).matchAll(/useReferralIntent\((.*?)\)/g)) {
         found.push({ rel, arg: m[1].trim() });
       }
     }
-    // Guard-the-guard: the scan really reaches the two known call sites.
+    // Guard-the-guard, part two: the scan really reaches the two known call sites.
     expect(found.map((f) => f.rel).sort()).toEqual(files);
     expect(found.find((f) => f.rel === 'src/components/PricingPage.jsx').arg).toBe("'pricing'");
     expect(found.find((f) => f.rel === 'src/components/PurchaseModal.jsx').arg).toBe("'purchase_modal'");

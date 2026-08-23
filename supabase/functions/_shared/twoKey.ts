@@ -102,6 +102,10 @@ export const UNGATED_ACTION_SET: ReadonlySet<string> = new Set([
   "get_regional_arcs",
   "get_regional_propagation",
   "get_npc_distribution",
+  // WEB-3 (199): the referral funnel. A read-only per-day aggregate over the
+  // referral tables — no value moves, nothing is written, so it sits with the
+  // other report_* reads rather than behind the two-key confirm.
+  "get_referral_funnel",
   "list_users",
   "get_user_summary",
   "get_user_full",

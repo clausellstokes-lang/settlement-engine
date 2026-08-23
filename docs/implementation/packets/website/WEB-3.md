@@ -103,11 +103,48 @@ Charter §13 states that none of the train's targets is in the edge bundle. At t
 that is **refuted for WEB-3**: `scripts/build-edge-shared.mjs:35` names
 `src/lib/analyticsEvents.js` as the `analyticsEventsBundle.js` entry, and
 `tests/edgeFunctions/analyticsEventsBundle.freshness.test.js` drift-guards it. The member
-therefore owes an edge-bundle regeneration, which is why the generated artifact set below
-has three members and not one. The regenerator rewrites four sibling `*.meta.json` files
-with a fresh `generatedAt` and an UNCHANGED `sourceHash`; those four were restored, because
-a provenance stamp that says a bundle was rebuilt when its source did not move is a small
-lie in a load-bearing field.
+therefore owes an edge-bundle regeneration, so this member has TWO generators and a
+SEVEN-file generated artifact set, every one committed and none hand-edited:
+
+| generator | artifacts |
+|---|---|
+| `npm run gen:analytics-dictionary` | `docs/analytics-event-dictionary.md` |
+| `npm run build:edge-shared` | `analyticsEventsBundle.js` + `analyticsEventsBundle.meta.json`, and the four sibling `*.meta.json` (aiCharter / aiGrounding / aiOutputSchema / intentAtlas) |
+
+⛔ **THE FOUR SIBLING METAS ARE PART OF THE MEMBER, AND MY FIRST INSTINCT WAS WRONG.**
+`build:edge-shared` rewrites all six bundles' `generatedAt` while leaving four
+`sourceHash` values unchanged, and I initially RESTORED those four on the reasoning that a
+provenance stamp claiming a rebuild that did not happen is a small lie. The estate
+disagrees, in writing and with a gate:
+`tests/edgeFunctions/edgeSharedBundleReproducibility.test.js` (CR-EB-2 (b)) requires **all
+bundles to share ONE build window** — `generatedAt spread is 49623.1s across the bundles —
+some were not rebuilt with the rest` — because a stale sibling is the failure that actually
+bites, and `generatedAt` records WHEN THE BUILD RAN, not whether a byte moved. Restored the
+restore: one `build:edge-shared`, all six metas committed together. Found only by the
+terminal, never by the four-tree sweep.
+
+## §5b ⛔ THE ONE STOP: THE `title=` RATCHET, RAISED AND NOT SELF-AUTHORIZED
+
+`tests/domain/guidanceRegistry.walker.test.js`'s shrink-only census reads **486 against a
+baseline of 485** at this member's tip. The cause is `<Card title="Referral funnel (intents
+→ grants)">` in `AdminTrendsPanel.jsx` — a **React component prop, not a native OS
+tooltip**, and `Card`'s ONLY heading API is that prop (`AdminTrendsCharts.jsx:37`, which
+renders it into an `<h4>`), so A7's ruled mount cannot be expressed without it.
+
+This is byte-for-byte the FP IN-1b situation the walker's own comment block records — and
+that block also records the correct executor behaviour: the implementing lane **STOPPED on
+this ratchet rather than raising it unbidden**, and the raise was authorized at CR-IN1B-8.
+So the baseline is **left at 485** and the raise is RAISED, with the same evidence IN-1b
+supplied, measured whole and never transcribed:
+
+- `countTitles()` over base `acc466a6` = **485**; over this tip = **486**.
+- Per-file delta, computed both directions across every `src/**` `.js`/`.jsx`:
+  **`src/components/admin/AdminTrendsPanel.jsx`: 15 → 16, and NOTHING else moved.**
+
+⇒ **The chair's call:** authorize `TITLE_BASELINE` 485 → 486 at the landing (with this
+per-file receipt in the walker's comment block, the house form), or rule that the funnel
+card render A7 requires is not worth the row. Until then this ONE gate row is red by
+design, and it is the member's only STOP.
 
 ## §6 · SCOPE AND BOUNDARY (the non-goals, affirmatively)
 
@@ -198,6 +235,18 @@ four target files, and a CLEAN-TREE CONTROL over the same three suites is green 
   `tests/components/referralFunnelTelemetry.test.jsx`, outside the seven `ENFORCER_DIRS`
   with a basename matching no `NAME_PATTERN` token, so **no mutation-coverage manifest row
   is owed** — measured against `tests/lint/mutationCoverage.shared.mjs`, not assumed.
+- ⛔ **THREE MEMBER-CAUSED REDS EXISTED THAT THE FOUR-TREE SWEEP COULD NOT SEE**, and all
+  three lived outside `tests/lint tests/build tests/docs tests/ops`: the `title=` census
+  (`tests/domain/**`), the admin two-key walker and the bundle-reproducibility pin (both
+  `tests/edgeFunctions/**`). WEB-1's lesson was "the sweep must include `tests/ops`"; this
+  member's is that **`tests/domain` and `tests/edgeFunctions` belong in it too** whenever a
+  member touches a UI prop or an edge function. Two were cured (below); one is the STOP.
+- ⛔ **EVERY NEW `admin-actions` CASE OWES A TWO-KEY CLASSIFICATION.**
+  `tests/edgeFunctions/adminActionTwoKeyWalker.test.js` requires the switch and
+  `_shared/twoKey.ts` to agree EXACTLY, so a new route with no classification reds — the
+  right shape, since the unclassified default for an admin action should never be "assume
+  harmless". `get_referral_funnel` is UNGATED with its reason written beside it: a
+  read-only per-day aggregate that moves no value and writes nothing.
 - ⛔ **A LANDED PACKET'S `requiredSymbols` TRAPPED THIS MEMBER, exactly as the estate's own
   law warns.** WEB-1 (LANDED) pins the literal `197_consent_person_adjacent_default.sql` in
   `docs/DEPLOY.md` — but that filename lives there ONLY as the "Current migration head"
