@@ -51,6 +51,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 22:40 CDT 08-22: §458 — WEB-6 LANDED (30th): CAS → 2b82121f. WEB-7 GO
+# issued (last website car); then the MAP STACK as one stacked landing.
+# Seats: WEB7-landing · UC3 · WEB3 · HK-A.
 # ⚠ 22:30 CDT 08-22: §457 — hold-up diagnosed: exports do not survive the
 # harness fresh shell → WEB-3 ran a ratchet under its own TMPDIR lock; legacy
 # scan serialized (no race). LAW: inline the exports on EVERY command line.

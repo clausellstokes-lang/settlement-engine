@@ -18582,3 +18582,26 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   three (J, vetoable — §454-era chat), at most two fresh build dispatches
   while a landing gate runs, batteries fired at the gate's release. The
   gate's own 20–35 minutes is the floor short of a second machine.
+
+## §458 — WEB-6 LANDED (THE 30TH): THE ANON-CEILING DISCLOSURE LIT, §320.3 CLOSED; WEB-7's GO ISSUED — THE LAST WEBSITE CAR BEFORE THE MAP STACK (2026-08-22 22:40 CDT)
+
+- **§458.1 WEB-6 LANDED.** TE-WEB6-LANDING rebased 5b0a399f onto dffa2b97
+  and — the cleanest shape yet — walked the packet to LANDED BEFORE the
+  gate, so the terminal ran at the final tip (no post-gate docs commit, no
+  carve-out). Walker = slot + `+0/+0/+0/+1/+0` → **2500/365/2135/20751/5791**
+  convicted; manifest 152 → 153 zero drift; S0 pre-existing by lookup.
+  Terminal detached: `TRUE_EXIT=0` + `[gate-tail] exit: 0` +
+  `free_kb_at_end=11989324`; `28782 tests, ceiling 11` (+1 = the one arm);
+  `STRICT DIST OK 52/433`; `valid: 153 packets (1 READY)`. The gate's
+  wall-clock (~30 min) carried ~15 minutes of the §457 wait. **CAS
+  `dffa2b97 → 2b82121f`.** Pruned holding-web6, both WEB-6 worktrees
+  (TMPDIR kept until the lane's final report per §455's lesson). Disk 13Gi.
+  §320.3 (the anon-ceiling disclosure) is CLOSED on the branch.
+- **§458.2 WEB-7 GO ISSUED** (TE-WEB7-LANDING; holding e5975829 over
+  19b799ce; the §457 inline-export law and the "no foreign ratchet mid-run
+  before firing" check in the brief; keep-one on the website family
+  header). After WEB-7: the MAP STACK as ONE stacked landing (T2J → T2K →
+  T2L → T2M, chain-rebased, one terminal at T2M's tip — the §454-era
+  ruling), then the producers stacked (T2R → T2Q → T2N), then UC-0, then
+  WEB-2/WEB-3/HK-A singly as built. Seats: WEB-7 landing · TE-UC3 ·
+  TE-WEB3 · TE-HK-A (cap).
