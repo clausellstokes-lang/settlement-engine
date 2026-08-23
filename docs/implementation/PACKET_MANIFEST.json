@@ -22390,6 +22390,203 @@
       ]
     },
    {
+   "id": "MF-UC2",
+   "status": "DRAFT",
+   "packetPath": "docs/implementation/packets/town-cartography/MF-UC2.md",
+   "verifiedBase": "1b1de759155631b61659d8faff7fe69836687385",
+   "changeManifest": [
+    {
+     "_note": "THE MONOTONE COMPONENTS (311.8.2(b) / 311.8.3), the first car of T-UC3. deriveMonotoneComponents(settlement, opts) answers what a town DUG and never filled in: crypts under what buries, the surge pit a dated year of mass death digs, undercrofts under what stores and the smuggler subset of those, workings at the dossier's own seams, and sealed vaults under what arms and what judges. MONOTONE IS STRUCTURAL, NOT HOPEFUL: no extent driver here can FALL. Burial demand reads deriveHighWater(...).population - T2R's constitutional peak, the only population reading that cannot go down - institution age grows with the calendar and nothing else, and a worked seam keeps the extent the town that dug it earned. Recession is therefore always a posture or an abandonment, never a shrink (311.8.3, use recedes and dug space never does). BURIAL DEMAND HAS NO CUMULATIVE-DEAD HOME and one is not invented: the estate records deaths only as per-tick pulse receipts (demographicsKernel folds births/deaths into the population and keeps no running total) and as dated losses on a calamity stamp, so the charter's phrase compiles as the two facts that exist. THE SURGE PIT READS DATED MASS DEATH, NEVER 'PLAGUE': calamity.js:260 is constitutional that the engine asserts no disaster kind, flavorSuggestion is never read, and calamityHistory is reached only through buildCalamityLedger (443). ONE TRUTH PER FACT, all consumed and none re-derived: T2N's deriveResourceSites (the charter-PREDICTED path CONFIRMED at src/domain/resourceSites.js), T2Q's institutionFoundingOf with the 441.5(g) PRE_SEED age rule widened to its third kind FOUNDED_UNDATED (an age floor of zero carried as ageUnderstated, never an invented year), T2R's deriveHighWater, UC-0's institutionAnchorKey and institutionSubstructure facet, UC-1's pinned district 12-enum and water-route vocabulary, UC-3's excavation-affinity constant, and corruption.js:539-542's one criminal-share reading. THE RUIN STATE IS READ AND TYPED rather than filtered or ignored: filtering would erase dug space (311.3) and ignoring would credit a flattened building with a growing excavation, so isLiveInstitution is consulted per row and the answer lands as `abandoned`. 247 effective lines against the 250-per-leaf cap, so the charter's split rule was not needed (the first draft measured 274 and was compacted, not split). Dormant: no production importer, nothing persisted, the generator golden bytewise unmoved.",
+     "action": "CREATE",
+     "path": "src/domain/undercity/monotoneComponents.js"
+    },
+    {
+     "_note": "THE ACCEPTANCE - EIGHT arms, ONE literal describe, straight-line it calls with string-literal titles and NO for-loop anywhere in the file, so the census credits it and the seed-loop walker has nothing to enrol. Every arm runs over REAL generated settlements and the counterfactual arms move ONE stored input: the terrain class (the mine moves ground), the depletion sidecar (the seam is exhausted), the calamity trail (the pit is dug), the trade ledger (the cellar grows), the founding stamp (the age rule), and the stored criminal share (the smuggler loses his licence). Every vocabulary is re-derived from the LIVE estate rather than trusted from the leaf: the excavation terrains from TERRAIN_DATA, the workable type from RESOURCE_SEMANTICS, the joint kinds and temperaments from UC-0's jointVocabulary, the zones from UC-1's pinned 12-enum, the anchor keys from UC-0's institutionAnchorKey. Nine mutants convict, controls green at both ends, every restore digest-exact.",
+     "action": "CREATE",
+     "path": "tests/domain/undercityMonotoneComponents.test.js"
+    },
+    {
+     "_note": "THE RUIN-FILTER READER COUNT, 91 -> 92, read from the arm's OWN failure message and never computed. The leaf is a new .institutions reader in src/domain and it is COMPLIANT rather than exempt: it imports isLiveInstitution and consults it on every institution-anchored row. The disposition is the third this train has taken and the only one of its kind - the ruin state is neither filtered away nor ignored but READ AND TYPED onto the row as `abandoned`, because a MONOTONE component may not be erased by its institution's ruin while a growing one may not be credited to a flattened building. Stated in the leaf's own header so the walker's documented file-granular gap is not being used to hide a disposition.",
+     "action": "TEST",
+     "path": "tests/lint/ruinFilterRoster.walker.test.js"
+    },
+    {
+     "_note": "THIS PACKET.",
+     "action": "DOC",
+     "path": "docs/implementation/packets/town-cartography/MF-UC2.md"
+    }
+   ],
+   "requiredSymbols": [
+    {
+     "_note": "THE RESOURCE SITE (T2N). WHERE the seam sits - the licence and the anchor of every working this car derives. The charter marked this path PREDICTED with no commit, ref or packet in existence; it is CONFIRMED here at exactly that path, and the export name was never predicted at all.",
+     "path": "src/domain/resourceSites.js",
+     "symbol": "export function deriveResourceSites"
+    },
+    {
+     "_note": "THE DEPLETION JOIN T2N's OWN HEADER ORDERS: 'location is not condition; join by key to resourceSemantics.nativeResourceConditionRecords'. This is the ABANDONED input, and it is the reason a worked-out seam is a fossil here rather than an absence.",
+     "path": "src/domain/resourceSemantics.js",
+     "symbol": "export function nativeResourceConditionRecords"
+    },
+    {
+     "_note": "THE FOUNDING READ (T2Q). The 441.5(g) PRE_SEED age rule stands on it: a PRE_SEED institution has stood since the founding, a FOUNDED one is measured from its own recorded year, and FOUNDED_UNDATED - the third kind the charter does not name - gets a typed age floor of zero rather than an invented year.",
+     "path": "src/domain/institutionFounding.js",
+     "symbol": "export function institutionFoundingOf"
+    },
+    {
+     "_note": "THE HIGH-WATER READER (T2R). The burial and working demand are keyed to the constitutional peak, not the standing population, because a MONOTONE extent driver that can fall is a contradiction in terms. Its DISPLAY-LAZY law (443) transfers to this leaf by inheritance.",
+     "path": "src/domain/highWater.js",
+     "symbol": "export function deriveHighWater"
+    },
+    {
+     "_note": "THE PULSE-WRITTEN KEY'S ONE APP-SIDE PROJECTION (443). calamityHistory is written only by the pulse, so a new RAW reader would mint an observed-shape row at ceiling 0. The surge pit reaches it ONLY here and reads dated records with deaths - never the flavour kind, which calamity.js:260 declares the engine never asserts.",
+     "path": "src/domain/display/calamityLedger.js",
+     "symbol": "export function buildCalamityLedger"
+    },
+    {
+     "_note": "THE ONE CRIMINAL-SHARE READING (441.3). The smuggler licence consumes readCorruptionClimate's own `crime` - the estate's single reading of safetyProfile.compound.criminalEffective with the blackMarketCapture fallback - and never re-weights it.",
+     "path": "src/domain/corruption.js",
+     "symbol": "export function readCorruptionClimate"
+    },
+    {
+     "_note": "THE WALL FACT, the accessor MF-UC0's 441.5(d) walk NAMED for exactly this purpose. A gate is a way through a wall, so this predicate resolves the smuggler subset's PLACE condition. Imported rather than restated: causalState.js is MEASURED to be already inside the entry's first-paint static closure, so consuming it re-parents nothing.",
+     "path": "src/domain/causalState.js",
+     "symbol": "export function defenseProfileHasWalls"
+    },
+    {
+     "_note": "THE RUIN PREDICATE. Consulted per row rather than used as a filter, which is what makes this leaf COMPLIANT with the ruin-filter walker while still refusing to erase a ruined institution's dug space.",
+     "path": "src/domain/institutions/institutionRoster.js",
+     "symbol": "export function isLiveInstitution"
+    },
+    {
+     "_note": "THE FACET CHOKEPOINT. The crypt and cellar licences and the vault's type all resolve through facetOf - never a name string in this file - so a custom institution declaring the facet counts exactly like a catalog row (custom-content parity, the clandestineFacet law).",
+     "path": "src/domain/spatial/cohesionWeave.js",
+     "symbol": "export function facetOf"
+    },
+    {
+     "_note": "THE CANONICAL ANCHOR KEY (441.5(k), UC-0's). Every institution-anchored row this car emits anchors by it, which is what makes the DW program's future per-building projection possible without a re-shape (the 437 carry note).",
+     "path": "src/domain/undercity/strataExistence.js",
+     "symbol": "export function institutionAnchorKey"
+    },
+    {
+     "_note": "THE CLOSED JOINT VOCABULARY (UC-0's data module, charter J-R2-2). Every church stair, burial-ground breach, cellar door, waterfront sluice, pit-head and sealed door is validated through it, so a component may lack a portal but none may carry an invented one - UC-3's law, kept.",
+     "path": "src/domain/undercity/jointVocabulary.js",
+     "symbol": "export function isJointKind"
+    },
+    {
+     "_note": "THE DISTRICT 12-ENUM, consumed from the sibling that already pinned it ordered-equal to the real DISTRICT_CATEGORIES. UC-1 refused to import districtProfile.js because it drags factionProfile/causalState/activeConditions/threatProfile behind it; this car refuses the same coupling and refuses a THIRD copy of the list as well.",
+     "path": "src/domain/undercity/sewerDerivation.js",
+     "symbol": "export const DISTRICT_COVERAGE_KEYS"
+    },
+    {
+     "_note": "THE GROUND THAT TAKES AN EXCAVATION, named once for the whole train by UC-3. This car derives the licensed terrain set from TERRAIN_DATA through this constant rather than typing terrain names, so 311.1's 'mine/quarry workings where terrain licenses them' is read from the data.",
+     "path": "src/domain/undercity/staticComponents.js",
+     "symbol": "export const EXCAVATION_AFFINITY_INSTITUTION"
+    },
+    {
+     "_note": "THE DELIVERED DERIVER. deriveMonotoneComponents is this car's whole public answer and CT-4's F3, UC-5's portal truth and D5's strata input all stand on it, so its disappearance must be detectable before any of them compile against it.",
+     "path": "src/domain/undercity/monotoneComponents.js",
+     "symbol": "export function deriveMonotoneComponents"
+    },
+    {
+     "_note": "THE ACCEPTANCE SUITE, in the MF-UC1 shape: ONE literal describe over eight straight-line arms. It is also the whole cause of this member's census move, so its deletion would move the lighting-census tuple and this row names the file that would then owe the re-measure.",
+     "path": "tests/domain/undercityMonotoneComponents.test.js",
+     "symbol": "describe('MF-UC2 — the undercity monotone components'"
+    },
+    {
+     "_note": "THE RUIN-FILTER DISPOSITION THIS CAR IS THE CAUSE OF. The MARKER is pinned and NEVER the count: a re-recorded FIGURE in requiredSymbols is refused by the estate's own law (ODQ TE-26), and that count moves the moment any sibling lands a reader.",
+     "path": "tests/lint/ruinFilterRoster.walker.test.js",
+     "symbol": "RE-MEASURED 2026-08-23 BY MF-UC2"
+    }
+   ],
+   "acceptanceCases": [
+    {
+     "id": "A1",
+     "case": "G-43, THE MINE MOVES, plus the general form over the whole corpus. Flipping the stored terrain class moves the working from mountain ground to hills with its licence intact - present-then-absent on the anchor, so a working that simply vanished would red rather than pass. The licence is guard-the-guarded against the LIVE geography (the excavation terrains re-derived from TERRAIN_DATA's own [D6 THE UNDERWAYS] affinity rows) and the workable type against the live RESOURCE_SEMANTICS. A 36-world sweep then pins every row's kind, licence, driver, extent, anchor, zone and joins against the closed vocabularies this car does not own, proves every one of the six kinds actually appears, and pins the temperament EXCLUSIVE - which is what makes UC-4's inertia arm structural rather than hopeful."
+    },
+    {
+     "id": "A2",
+     "case": "MONOTONICITY. A real metropolis walked at five ascending calendar years: every crypt's extent is non-decreasing row-for-row, the anchors are pinned identical across the five readings so the comparison is not between two different populations, and the span is proved to actually GROW - so 'never shrinks' is a property rather than a tautology over a frozen extent. The driver behind it is pinned to be the peak population and not the standing one."
+    },
+    {
+     "id": "A3",
+     "case": "ABANDONED, NEVER ERASED. Exhausting the seam through the native depletion sidecar leaves the working exactly where it was, at exactly the extent it had, with only `abandoned` flipped - proved by a whole-row deep equality with the flag normalized, so a shrink, a move or a deletion all red. The generated fixture ALREADY carries a depleted seam, which is itself the receipt that the condition read is live rather than a fixture invention, so the worked state is stated explicitly and exhaustion is one stored input away."
+    },
+    {
+     "id": "A4",
+     "case": "THE SURGE PIT. A dated year of mass death mints EXACTLY ONE pit, licensed DATED_MASS_DEATH, anchored at the codepoint-first burying institution and reaching the top extent at 600 dead against a 400 saturation. A DATELESS or BLOODLESS record mints nothing. And the engine never asserts WHICH disaster: a comment-stripped source scan pins that the leaf names no flavour, no kind and no raw pulse key."
+    },
+    {
+     "id": "A5",
+     "case": "THE CELLAR TRACKS THE TRADE, AND DARK IS HONESTLY ZERO. With no world state the quarter-trade driver reads EXACTLY 0 and every undercroft sits at the smallest extent; a ledger at 0.6 of saturation reads 0.6; at or past saturation it reads 1 and the same rows reach the largest extent, with the three extents pinned strictly ordered. A ledger keyed to a DIFFERENT settlement is still dark for this one, so the read is proved keyed rather than merely present."
+    },
+    {
+     "id": "A6",
+     "case": "THE VAULT SITS ONLY UNDER THE TYPE THAT LICENSES IT. Positive control against the real roster: the vault anchors are exactly the anchors of the institutions whose FUNCTION facet is one of the doctrine's two. The exclusion set is NAMED and proved non-empty - the roster's healing and feeding houses are real, present and vaultless. Posture SEALED and the sealed-door joint are pinned, and every OTHER kind this settlement produced is proved OPEN."
+    },
+    {
+     "id": "A7",
+     "case": "THE SMUGGLER SUBSET NEEDS BOTH FACTS. A gate alone licenses it (a walled inland town), a waterfront alone licenses it (an unwalled harbour), and neither refuses it - the open town has storing commerce and share to spare and gets no smuggler. Dropping the STORED criminal share below the floor refuses it even where the place is right, proved present-then-absent, and the cellars survive the refusal. The waterside row alone gains the sluice."
+    },
+    {
+     "id": "A8",
+     "case": "THE PRE_SEED AGE RULE, ONE RULE IN TWO SPELLINGS. A temple that has stood since the founding and a temple stamped at the first recorded year reach the SAME extent and the same driver value; a temple founded ten years ago reaches a smaller one, so the rule discriminates rather than flattening; and a pulse-founded temple with no recorded year is marked ageUnderstated rather than given a year it never had. Mutant m9 convicts this arm ALONE."
+    }
+   ],
+   "checks": [
+    [
+     "npx",
+     "vitest",
+     "run",
+     "tests/domain/undercityMonotoneComponents.test.js"
+    ],
+    [
+     "npx",
+     "vitest",
+     "run",
+     "tests/domain/institutionFounding.test.js",
+     "tests/domain/undercityStrataExistence.test.js",
+     "tests/domain/undercityStaticComponents.test.js",
+     "tests/domain/undercitySewerDerivation.test.js"
+    ],
+    [
+     "npx",
+     "vitest",
+     "run",
+     "tests/property/generatorGoldenMaster.test.js",
+     "tests/lint/observedShapeReaders.walker.test.js",
+     "tests/lint/ruinFilterRoster.walker.test.js",
+     "tests/lint/negativeAssertionAnchor.walker.test.js",
+     "tests/lint/seedLoopTotality.walker.test.js",
+     "tests/lint/entropyRootCensus.walker.test.js",
+     "tests/lint/domainAnyCastBaseline.test.js"
+    ],
+    [
+     "npx",
+     "vitest",
+     "run",
+     "tests/lint",
+     "tests/build",
+     "tests/ops"
+    ],
+    [
+     "npm",
+     "run",
+     "typecheck:ratchet"
+    ],
+    [
+     "npm",
+     "run",
+     "typecheck:domain:strict"
+    ],
+    [
+     "npm",
+     "run",
+     "validate:packets"
+    ]
+   ],
+   "retiredSymbols": []
+  },
+  {
     "id": "MF-UC1",
     "status": "LANDED",
     "packetPath": "docs/implementation/packets/town-cartography/MF-UC1.md",
