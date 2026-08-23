@@ -20587,3 +20587,129 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   estates only grow or dissolve by dated events. New owner bands: the
   prosperity threshold for acquisition, amalgamation frequency per century,
   and whether non-contiguous holdings are common or rare by culture.
+
+## §499 — OWNER: "COMPREHENSIVELY ARCHITECT THE CODE OUT AND THEN SLOT IT APPROPRIATELY INTO EVERYTHING BEFORE THE REVIEW" — DW-0's SCOPE EXTENDED TO A CODE-LEVEL ARCHITECTURE DOCUMENT, AND **THE MASTER PRE-REVIEW SEQUENCE** SET (2026-08-23 15:09 CDT)
+
+- **§499.1 THE ARCHITECTURE (sent into the live DW-0 lane as amendment 4).**
+  A SECOND deliverable `draft-DWELLINGS-ARCHITECTURE.md`, its own assembler,
+  written incrementally with a RESUME POINT per part so a successor continues
+  mid-document; separate from the charter because the charter is what the
+  OWNER sits and the chair rules, while the architecture is what a BUILDER
+  opens. Parts: **arch-0 the seams MEASURED** (every insertion point at
+  file:line across cartographySynthesis / cartographyParcels / cartographyBuildings
+  / cartographyPaint / interiorModel / interiorTemplates / interiorFootprint /
+  cohesionWeave / townScene+scene3d / institutionalCatalog / the four undercity
+  leaves / the demography layer's household identity — CONFIRMED, CORRECTED or
+  ABSENT); **arch-1 the module tree** (every new file: path, one
+  responsibility, exports, imports, estimated effective lines against the
+  ≤250 leaf cap and the ≤3-modified-file cap, with size-baseline headroom
+  checked per modified file); **arch-2 the contracts as CONCRETE SHAPES**
+  (the JSDoc typedef as it will be written, one owning module per fact:
+  `Parcel`, `Estate`, `Compound`/`CompoundMember`, `ProgramMinimum`,
+  `Building`, `Cell`, `CirculationCell`, `StorageCell`, `Fixture`, `Joint`,
+  `YardFixture`, and `hostedIn` / `NO_BUILDING` / `occupies|owns`);
+  **arch-3 the data flow end to end** (seed → catalog roll → program minimum →
+  allocation/merge → frontage-gated parti eligibility → draft → compound and
+  yard → fixtures → paint ops → projections → the halo, with what is refused
+  and what a same-seed re-run must reproduce byte-for-byte at every arrow, and
+  the SECOND pass for time advance); **arch-4 the cars** (each a packet stub in
+  PACKET_STANDARD form with changeManifest, acceptance arms and their
+  convicting mutants, census cost, the declared same-seed shift and re-record
+  list, the six-surface flag bill if any, sweep trees and §489.3 grep targets,
+  change-path de-duplication against the LIVE manifest); **arch-5 the test
+  architecture** (invariant walkers, acceptance suites, the golden surfaces
+  that move, the DW-S arms, the ratchets each wave trips); **arch-6 the risk
+  register** ordered by cost-if-wrong (the same-seed shift and its one-regen
+  deadline; the containment theorem; determinism under merge; the
+  household-identity gap; **performance — the owner's two-second build is a
+  PRODUCT CLAIM, so the added cost per settlement is measured, not assumed**;
+  the CH dependency).
+- **§499.2 ⭐ THE MASTER PRE-REVIEW SEQUENCE (the chair's slotting; this is the
+  canonical order and it goes on the pickup card).** Two lanes, one landing
+  seat (§465), everything on Opus (§484).
+  **A — IN FLIGHT NOW:** A1 the CH charter compile → its skeptic → chair rules.
+  A2 the DW-0 charter + architecture compile → its skeptic → chair rules →
+  ⭐ **THE OWNER'S BAND SITTING** (§11; the one act only the owner can do, and
+  the gate on every DW build).
+  **B — THE CATALOG AND THE CHEAP WINS:** B1 CH-1 inference honesty · B2 CH-2
+  the magic licence · B3 CH-3 the catalog-wide minTier audit + slips + HK-6 ·
+  B4 UC-5 the connectivity graph (the last undercity car) · B5 **MP-1 the
+  property-line layer + halo v1** (independent of DW — it publishes geometry
+  that already exists).
+  **C — THE MONEY PATH (independent; any free seat):** WEB-8 → WEB-9a →
+  WEB-9b → WEB-10 (STOP-class, builds last) → WEB-11.
+  **D — HOUSEKEEPING:** HK-4 · HK-5 · the sweep (the requiredSymbols rows
+  skipped at stacked landings, MF-T1X's stale prose, the S0 schema-10 mint).
+  **E — THE DW PROGRAM (gated on the band sitting AND on CH being landed):**
+  DW-1 vocabularies dark → DW-2 the geometry core → ⭐ **THE ESTATE WAVE**
+  (program minimums → allocation and merge → draft; ownership; accretion;
+  partition and dissolution; emergent courts and yards) → DW-3 fixtures and
+  the yard embellishments → DW-4 the undercity projection seam → DW-5 the
+  validator suite and continuity arms → DW-6 projections (**MP-1's layer
+  re-points here for the two-tier estate halo — the UI is built once**) →
+  DW-7 deltas, news hooks and the estate view → DW-S the soak leg.
+  **F — THE CONTENT TRAIN** (CT-4 the undercity chapter · CT-5 · WF-8), which
+  may interleave with E wherever a seat frees, but must finish before G1.
+  **G — THE CLOSERS:** G1 the ONE trailing OSR mint **after the LAST DW car**
+  (waiting is what keeps it one mint) → G2 the parity train, now covering DW's
+  spatial facts (§289).
+  **H — `/code-review ultra`** (the owner's keystroke), reviewing the dwellings
+  code as ordered at §482.
+  Then the endgame, unchanged: walk → ONE REGEN (with `founding.kind`) → the
+  300-year soak with the DW leg AND the new ownership-boundedness arm →
+  the tuning pass → the owner's signature → V5 / cull / IP scrub → push.
+- **§499.3 THE SLOTTING RULES, STATED SO THEY ARE NOT RE-DERIVED:** (1) CH
+  lands before DW-1 BUILDS — the dwellings compile must read a corrected
+  catalog; (2) MP-1 goes EARLY and is re-pointed at DW-6 rather than rebuilt;
+  (3) the estate wave sits between the geometry core and the fixtures wave —
+  that is where the owner's phase belongs, because it needs geometry and
+  precedes dressing; (4) the OSR mint waits for the last DW car or it becomes
+  two mints; (5) parity follows the mint; (6) **§482's own ordering already
+  satisfies the one-regen constraint** — because the whole DW arc lands before
+  the review and the review precedes the regen, nothing that moves output can
+  arrive after it. (7) Honest scale: this is on the order of forty to fifty
+  cars against one landing seat; the DW waves are the bulk. No lane may quote
+  a date; the sequence is the commitment, not a schedule.
+
+## §500 — OWNER: "WITH ACQUISITION ALSO COMES THE REVERSE" — SPLIT, SWAP AND DISSOLUTION TYPED; THE REMEMBERED MERGE SEAM BECOMES THE SPLIT LINE; DISSOLUTION FEEDS THE REUSE CHAIN; AND THE CONSOLIDATION RUNAWAY GETS A SOAK ARM (2026-08-23 15:09 CDT)
+
+- **§500.1 R10 — OWNERSHIP IS REVERSIBLE OVER TIME; BUILT FABRIC IS NOT.**
+  Three reverse motions, each a dated event with a cause reaching the
+  chronicle under the news address law: **SWAP/TRANSFER** (owner changes,
+  geometry unchanged — the cheap case), **SPLIT/PARTITION** (the estate
+  divides; a merged parcel may subdivide), **DISSOLUTION** (the owner ceases
+  and the holding disperses).
+- **§500.2 THE REMEMBERED MERGE SEAM IS THE SPLIT LINE.** §498's requirement
+  that a merged estate remember it was two plots pays a second time: a
+  subdivision prefers to un-merge along the seam it merged along — no
+  arbitrary cut, no new geometry, and the townscape stays legible.
+- **§500.3 WHERE A SPLIT MUST CUT BUILT FABRIC.** Lived history is immutable,
+  so a split may never un-build a range. Preferred: constrain the split line
+  to run BETWEEN structures (the seam, an alley, a range's flank). Otherwise
+  the split yields a **TYPED SHARED CONDITION** — a party wall, a range
+  standing partly on another's ground, an encroachment with a chief rent —
+  which is historically the norm rather than the exception, and is a NAMED
+  type with a receipt, never an accident of geometry.
+- **§500.4 DISSOLUTION FEEDS THE REUSE CHAIN — the research already wrote the
+  mechanism.** When an owner ceases the buildings do not vanish; they are
+  RECLASSED, dated, with a cause, through the `reclassedTo[]` field the
+  charter already carries (§494.3), and R-INST-4's fossil sequences are both
+  the evidence and the pattern (bath → brothel → tannery → dwelling; the
+  infirmary hall → eight cells with four chimneys in 1680; arena → fortress →
+  houses → quarry). DW-0 measures where a dissolving institution's holdings
+  hand off in `institutionLifecycle.js` or names the gap.
+- **§500.5 ⛔ THE CONSOLIDATION RUNAWAY, AND ITS CONTROL.** A naive
+  "prosperous households acquire" rule run 300 years converges on ONE
+  household owning the town — the population-runaway lesson (§341)
+  transposed onto ownership, invisible in a single-generation test and
+  visible only in the soak. Counter-forces compiled with historical grounding
+  (partible inheritance and partition on succession, decline and debt sale,
+  institutional dissolution, forfeiture, escheat, fire and abandonment), and
+  **DW-S gains a BOUNDEDNESS ARM ON THE OWNERSHIP DISTRIBUTION**: over 300
+  years no runaway consolidation (a single owner's share of parcels capped)
+  and no runaway fragmentation (mean holding size floored), measured per
+  epoch and reported as a tuning input beside the population runaway and the
+  map leg. The owner sits the band: acquisition strength versus partition
+  strength, per culture. Determinism arm added beside the accretion arm: the
+  same seed replayed to the same year reproduces the same holdings, and no
+  reverse motion may rewrite an earlier year's record.

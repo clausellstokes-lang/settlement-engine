@@ -51,6 +51,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 15:09 CDT 08-23: §499 MASTER PRE-REVIEW SEQUENCE set (A compiles+band sitting · B CH/UC-5/MP-1 ·
+# C money · D housekeeping · E DW incl. ESTATE wave · F content · G mint+parity · H review) + DW-0 extended to a
+# code architecture doc. §500: the reverse motions (split/swap/dissolution) + the ownership-boundedness soak arm.
 # ⭐⭐⭐ 15:02 CDT 08-23: §498 — ESTATE = OWNERSHIP SET (not adjacency); parcel vs estate split;
 # generation = assemble-then-draft once, time advance = ACCRETE (seam is a feature); two-tier halo.
 # ⭐⭐⭐ 14:59 CDT 08-23: §497 — OWNER OVERRULES R2: the minimum program is dossier TRUTH and
