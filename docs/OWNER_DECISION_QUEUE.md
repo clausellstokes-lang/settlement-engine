@@ -19285,3 +19285,37 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   R-INST-3 (resume) → UC-4 → R-INST-4 (resume) → UC-2 → R-INST-5 → UC-5 →
   R-INST-6 → WEB-8 → HK-4. Landing queue after UC-0/UC-3: WEB-2 → WEB-3 →
   HK-A → (UC-1 as T-UC1's tail) → the W-C cars as built.
+
+## §473 — THE WEBSITE-2 CHARTER RULED-AS-AMENDED (9/9 §471 ITEMS + THREE REFINEMENTS); R-INST-3 RESUMED IN THE SECOND SEAT WHILE UC-0 LANDS (2026-08-23 06:20 CDT)
+
+- **The amended charter** (`draft-WEBSITE-PLAN-2.md`, 1304 lines, 695a70c5
+  scratchpad; receipt `laneTCWEBSITE2R2-receipt.md`): de-duplicated
+  manifests — WEB-8 7 files / ~76 eff / 1 test leaf (owns pricing.js,
+  pricing.test.js, .env.example alone; lands `SURVEYOR_PLAN` at 0 credits,
+  `ANNUAL_FACTOR = 0` + `CARTOGRAPHER_ANNUAL`, the dial-aware
+  `ACTIVE_CHECKOUT_SKUS` with the two-way parity arm; strikes
+  `STRIPE_PRICE_FOUNDER_LIFETIME` from DEPLOY.md — 52 → 51 secrets) ·
+  WEB-9a 6 files / ~38 eff (gains `scripts/.size-baseline.json` as a
+  ratchet-DOWN: App.jsx 650 → 647 measured, net-zero was not the natural
+  shape) · WEB-9b unchanged · WEB-10 8 files / ~42 eff, the irreducible
+  residue being two dial flips in pricing.js serial-minted after WEB-8
+  LANDED (automatic — it builds last). Rule A executed over all 19 rows:
+  claiming 11 / parity 8 at base (the `free !== true` spelling would have
+  caught 13); at WEB-8's tip 9 claiming / 8 parity over 17. Reader floor
+  corrected (6 source readers of the webhook's index.ts, 3 of its
+  index.test.ts, none of whose tokens sit in the :3293 title;
+  create-checkout 3 + the aiSurfaceCensus tree scanner); `tests/security`
+  in WEB-10's sweep. The allowance census: 16 files, the FIFO active at
+  192:255, and the grant-RPC delivery-key arm ALSO re-minted, active at
+  178:242 (J-R2-7 refines §471's "never re-minted" — RATIFIED). Three
+  extras ratified: J-R2-5 (A7+A8 merged), J-R2-6 (WEB-10 no longer
+  replaces an arm in WEB-9b's test file — the pin is three-armed in 9b and
+  WEB-10 re-runs it), J-R2-7. CLAIM_RE 0; C0 0. **RULED-AS-AMENDED: W-C =
+  WEB-8 → WEB-9a → WEB-9b → WEB-10 (money-path, builds last); W-D = WEB-11;
+  the cars build on Opus as the second seat frees, WEB-8 first; they land
+  after HK-A.**
+- **Second seat:** UC-1 depends on UC-0's `SANITATION_LADDER` seam and
+  `jointVocabulary.js`, both in the landing seat right now — so TC-R-INST-3
+  (resume, Fable, SOLO, the CIRC-addendum spellings as its vocabulary)
+  takes the seat; UC-1 builds the moment the UC stack lands. Seats:
+  UC-STACK landing · TC-R-INST-3 (cap).
