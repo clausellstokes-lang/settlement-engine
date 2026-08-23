@@ -5605,7 +5605,98 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   restored byte-identical. ⛔ THE BASE HAD MOVED UNDER THE WHOLE STACK by the six landings
     //   MF-T2J's paragraph names (+1/+1/+0/+31/+5 between 05e7f9d5 and the slot), which is why no
     //   member's authored tuple survives: the DELTAS crossed, the tuples were re-derived.
-    files: 2505, parked: 365, credited: 2140, titles: 20781, suiteTitles: 5797,
+    // ── RE-RECORDED 2026-08-22 BY TE-T2R (MF-T2R), CAUSE ATTRIBUTED ──────────
+    // `files` 2497 → 2498, `credited` 2133 → 2134, `titles` 20,723 → 20,730,
+    // `suiteTitles` 5,785 → 5,786. `parked` is UNCHANGED at 364.
+    // ONE new acceptance file, tests/domain/highWater.test.js, credited (one literal
+    // `describe`, straight-line `it`, no `.each`/`runIf`/nesting) carrying SEVEN arms —
+    //   ⭐ guard-the-guard: the two source scans are live before any roster assertion runs
+    //   ⭐ the lived interval with a calamity strike, and its counterfactual without it
+    //   ⭐ channel 1's declared precedence: the peakTier stamp leads, the disagreement is residual
+    //   ⭐ channel 2's TWELVE-entry window, and the peak older than it that it understates
+    //   ⭐ the frozen populationHistory writer roster (nine appends, one constructor, one uncapped)
+    //   ⭐ the frozen settlement-tier writer roster (three of five modules can lower a tier)
+    //   ⭐ the §434 gap TYPED rather than silent, inventing no peak from a demoted state
+    // `censusAuthorization`: ODQ §306.4(a) (the dossier-surface batch adopted as W8
+    // prerequisites), §421(2) (the producer train's dispatch), §433 (this member's charter
+    // ruling, C1-C6 signed), §434 (the channel-1 re-ruling this file's rosters carry).
+    // ⛔ ATTRIBUTED BY ISOLATION, NOT BY ARITHMETIC, at THIS base. The tuple was read from
+    //   the arm's own failure message at each step ("expected 2498 to be 2497"), never
+    //   computed; the member adds exactly one test file and no other lane's file moved.
+    // ⭐⭐ THE CARRY LAW, EXECUTED AT THE LANDING SLOT — THE PRODUCER TRAIN (ODQ §457/§467:
+    //   MF-T2R, MF-T2Q and MF-T2N landed as ONE stacked landing by TE-PRODUCERS-LANDING,
+    //   2026-08-23). This member was authored at base b10ed1a1 (CT-3; after-figure
+    //   2,498/364/2,134/20,730/5,786), its walker edit REVERTED per §417 (the T2J shape), and
+    //   rebased onto 421c7345 (the MAP STACK landing act) as the FIRST member of the train. The
+    //   DELTA `+1/+0/+1/+7/+1` is what crossed; the tuple was RE-DERIVED at the train tip by
+    //   execution, never carried. ⛔ THE BASE HAD MOVED UNDER IT: MF-T2H, WEB-1, WEB-4, WEB-5,
+    //   WEB-6, WEB-7 and the four-member MAP STACK re-recorded the blocks directly above, so the
+    //   slot reads 2,505/365/2,140/20,781/5,797 and this member's POSITION in the train
+    //   re-derives to 2,506/365/2,141/20,788/5,798. ⚠ In a stacked landing only the LAST tuple
+    //   line below is live: each position's figure is arithmetic and the SUM is convicted once
+    //   at the train tip, with the negative control (the slot's own tuple put back) redding at
+    //   `files` by exactly the summed delta.
+    // ── RE-RECORDED 2026-08-22 BY TE-T2Q (MF-T2Q), CAUSE ATTRIBUTED ──────────
+    // `files` 2497 → 2498, `credited` 2133 → 2134, `titles` 20,723 → 20,730,
+    // `suiteTitles` 5,785 → 5,786. `parked` is UNCHANGED at 364.
+    // ONE new acceptance file, tests/domain/institutionFounding.test.js, credited (one literal
+    // `describe`, straight-line `it`, no `.each`/`runIf`/nesting) carrying SEVEN arms —
+    //   ⭐ a pulse-built institution dated by the calendar year it came to stand
+    //   ⭐ never re-dated on the re-founded path — a founding is its FIRST founding (write-once)
+    //   ⭐ a deferred outcome dated by when it LANDED, not by when it was proposed
+    //   ⭐ every institution typed (FOUNDED | FOUNDED_UNDATED | PRE_SEED); absence is the typed value
+    //   ⭐ institutionHistory entries dated without moving the 24-entry ring cap
+    //   ⭐ unreachable from generation, so the generator golden cannot move
+    //   ⭐ the already-standing no-op left a same-reference no-op
+    // `censusAuthorization`: ODQ §306.4(a) (the dossier-surface batch adopted as W8
+    // prerequisites), §421(2) (the producer train's dispatch), §433 (this member's charter
+    // ruling, C1-C6 signed).
+    // ⛔ CONVICTED AT THE MEMBER'S OWN TIP, at THIS base: the walk was read from the arm's own
+    //   failure message ("expected 2498 to be 2497") and confirmed green 33/33 with the row
+    //   applied; the member adds exactly one test file and no other lane's file moved.
+    //   (This block is the landing act's transcription of the packet's census note — MF-T2Q's
+    //   packet carries the manifest row verbatim and no walker comment of its own; J-PROD-1.)
+    // ⭐⭐ THE CARRY LAW, EXECUTED AT THE LANDING SLOT — THE PRODUCER TRAIN (ODQ §457/§467),
+    //   member TWO. This member was authored at base b10ed1a1 (CT-3; after-figure
+    //   2,498/364/2,134/20,730/5,786) as a SIBLING of MF-T2R over the same base, not stacked on
+    //   it — the two authored after-figures are two deltas over one base, never alternatives to
+    //   choose between. Its two commits (b3e84008 the member, cc9ef856 the sizeBaseline cure)
+    //   were SQUASHED into one at this landing (ODQ §445.1 J1; tree-equal by `git diff --stat`
+    //   empty) and rebased onto the rebased MF-T2R tip over 421c7345. The DELTA `+1/+0/+1/+7/+1`
+    //   is what crossed; this member's POSITION in the train re-derives to
+    //   2,507/365/2,142/20,795/5,799. Only the LAST tuple line below is live.
+    // ── RE-RECORDED 2026-08-23 BY TE-T2N (MF-T2N), CAUSE ATTRIBUTED ──────────
+    // `files` 2499 → 2500, `credited` 2135 → 2136, `titles` 20,729 → 20,735,
+    // `suiteTitles` 5,787 → 5,788. `parked` is UNCHANGED at 364.
+    // ONE new acceptance file, tests/domain/resourceSites.test.js, credited (one literal
+    // `describe`, straight-line `it`, no `.each`/`runIf`/nesting) carrying SIX arms —
+    //   ⭐ guard-the-guard, then totality: every roster entry on a real settlement sites once
+    //   ⭐ the determinism companion: two derivations at distance; no wall-clock or rng reachable
+    //   ⭐ the §306.2 counterfactual reach: one stored input moved, the site moves accordingly
+    //   ⭐ refusal: an absent resource yields no site; a malformed roster yields []
+    //   ⭐ golden inertness by construction: nothing under src/ imports the leaf; nothing stored
+    //   ⭐ version discipline: DERIVED_V1 on every record; keys and vocabularies asserted exact
+    // `censusAuthorization`: ODQ §306.4(a) (the dossier-surface batch adopted as W8
+    // prerequisites), §421(2) (the producer train's dispatch), §433 (this member's charter
+    // ruling, C1-C6 signed).
+    // ⛔ ATTRIBUTED BY ISOLATION, NOT BY ARITHMETIC, at THIS base. The tuple was read from
+    //   the arm's own failure message at each step ("expected 2500 to be 2499"), never
+    //   computed; with the walker pinned at the after tuple, hiding the one new file convicted
+    //   `files` at 2499 — the base figure exactly. No other lane's file moved.
+    // ⭐⭐ THE CARRY LAW, EXECUTED AT THE LANDING SLOT — THE PRODUCER TRAIN (ODQ §457/§467),
+    //   member THREE. This member was authored at base 84e06412 (MF-T2H's landing; after-figure
+    //   2,500/364/2,136/20,735/5,788) and rebased onto the rebased (squashed) MF-T2Q tip over
+    //   421c7345. The DELTA `+1/+0/+1/+6/+1` is what crossed; the resolution is the SUM OF
+    //   DELTAS, never any member's tuple: slot 2,505/365/2,140/20,781/5,797 + MF-T2R
+    //   (+1/+0/+1/+7/+1) + MF-T2Q (+1/+0/+1/+7/+1) + MF-T2N (+1/+0/+1/+6/+1) = +3/+0/+3/+20/+3
+    //   = 2,508/365/2,143/20,801/5,800 — the ONE live tuple line below, CONVICTED BY EXECUTION
+    //   at the train tip (33/33) with TWO negative controls: the slot's own tuple put back reds
+    //   at `files` ("expected 2508 to be 2505"), the summed delta exactly; MF-T2Q's position
+    //   tuple put back reds at `files` ("expected 2508 to be 2507"), this member's own +1 —
+    //   the proof that no sibling's delta was dropped by the merge; the file restored
+    //   byte-identical both times. `parked` holds at 365 (the slot's figure; every member's
+    //   file is ONE literal `describe` with straight-line string-literal titles, so none parks).
+    files: 2508, parked: 365, credited: 2143, titles: 20801, suiteTitles: 5800,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

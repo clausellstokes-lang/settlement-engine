@@ -1,8 +1,10 @@
 # Town cartography / MF-T2Q — the institution founding year: a dated stamp at the lifecycle seam, and a pure reader whose absence is a typed value
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** 1
-- **Verified base:** `claude/composite-r4` at `b10ed1a1f5a0f2acd00bbfc9b5d0a41931697c3d`
+- **Verified base:** `claude/composite-r4` at `421c73456c5f1cb682605169f2b32ee69014a61a`
+  ⚠⚠ **AS AUTHORED — the row above now names the LANDING SLOT (see the Landing note below); the
+  BUILD base was `b10ed1a1` (CT-3).** The continuation that follows was written at that base:
   — read with `git rev-parse` at this lane's opening, never extended from a quoted prefix
   (§381's fabricated-SHA law) and never taken from the dispatch text.
   ⚠ **THE COMPILE'S BASE HAS MOVED.** `draft-PRODUCERS-PLAN.md` was compiled at `1a437bca`; CT-3
@@ -10,6 +12,17 @@
   carried from the charter — including the census tuple, which moved by +4 titles.
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line (J-TEWF1B-1).
+- **Landing note (TE-PRODUCERS-LANDING, 2026-08-23, ODQ §457/§467 — THE PRODUCER TRAIN):** authored at BUILD
+  base `b10ed1a1` as holding tip `cc9ef856` (pinned `refs/preserve/holding-t2q`); landed as ONE stacked landing with its two
+  siblings (MF-T2R → MF-T2Q → MF-T2N, each rebased in sequence onto the moving tip) at slot `421c7345` (the MAP STACK
+  landing act, landings 32–35). Rebased implementation commits `e099e4ea (ONE squashed commit; the unsquashed replay was 9aaacdd3 → 3019397b, tree-equal)` (authored `b3e84008 → cc9ef856`);
+  this member is the SECOND of the three. The two authored commits (b3e84008 the member, cc9ef856 the sizeBaseline cure) were SQUASHED into ONE member commit at this landing per ODQ §445.1 J1 — the cure touches only a file the member commit already touched; tree-equality proved by `git diff --stat` empty. Entered at **LANDED** directly — the §410 form, as the
+  MAP STACK did: MF-T2H's READY reservation on the census walker stands until HK-A lands, so the §417 deferred row
+  could only enter the manifest at a terminal status, and did, at this act. Census: slot `2505 / 365 / 2140 / 20781 / 5797`;
+  this member's position `2507 / 365 / 2142 / 20795 / 5799`; the train's ONE live tuple `2508 / 365 / 2143 / 20801 / 5800` convicted at the
+  train tip (33/33) with the negative controls *"the estate's file count moved — re-measure, do not re-word: expected 2508 to be 2505"* (control A, the summed delta +3) and *"… expected 2508 to be 2507"* (control B, MF-T2Q's position put back — MF-T2N's +1 alone, the proof that no sibling's delta was dropped by the merge). Every digest this packet cites
+  (the delivered files, the preamble, the generator-golden fixture, the sealed port source) re-verified at the landed tree — none moved,
+  so no RE-HASHED note is owed. The two worldPulse MODIFY hosts of MF-T2Q were UNMOVED at the slot (blob-identical at b10ed1a1 and 421c7345).
 - **Depends on:** nothing. MF-T2N and MF-T2R are this train's siblings and share no production
   path with this member; the only shared path is the test census walker (see the deferral below).
 - **Family preamble:** `docs/implementation/preambles/MF-PREAMBLE.md`, SHA-256
@@ -34,6 +47,13 @@
 > Its authorizing decisions are **ODQ §306.4(a)**, **§421(2)** and the chair ruling at **§433**.
 > The family's stamp is **GRANTED** at ODQ §312.2b (eight members per engine train; this train
 > carries three).
+> ⭐⭐ **STACKED LANDING (ODQ §457/§467) — convicted at the train tip, never carried.** Slot tuple
+> (`claude/composite-r4` = `421c7345`, the MAP STACK): `2505 / 365 / 2140 / 20781 / 5797`; this member's position in the
+> train re-derives to `2507 / 365 / 2142 / 20795 / 5799`; the train's ONE live tuple `2508 / 365 / 2143 / 20801 / 5800` was
+> convicted at the train tip (33/33) with two negative controls — the slot's own tuple put back reds at `files`:
+> *"the estate's file count moved — re-measure, do not re-word: expected 2508 to be 2505"* (the summed delta +3), and
+> MF-T2Q's position tuple put back reds *"expected 2508 to be 2507"* (MF-T2N's delta alone). The DELTA `+1/+0/+1/+7/+1` crossed the
+> rebase; the authored tuples above are the BUILD-base history.
 
 > ⛔ **THE SHARED CENSUS ROW IS DEFERRED TO THE CHAIR'S LANDING ACT (§417, the T2J shape).**
 > All three members of this train add a test file, so all three owe the same census walker

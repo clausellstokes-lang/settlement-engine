@@ -21316,9 +21316,9 @@
     },
     {
       "id": "MF-T2R",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T2R.md",
-      "verifiedBase": "b10ed1a1f5a0f2acd00bbfc9b5d0a41931697c3d",
+      "verifiedBase": "421c73456c5f1cb682605169f2b32ee69014a61a",
       "changeManifest": [
         {
           "_note": "THE READER, Shape 1 (charter §2; ODQ §433 C2): deriveHighWater re-expressed from the sealed tierGrammar.js (refs/preserve/map-sandbox-w3f-sealed, SHA-256 f152d700…, re-hashed before the port) over the LANDED popToTier / POPULATION_RANGES / TIER_ORDER rather than a second tier table. Channel 1 in TWO ARMS under declared precedence (ODQ §434): the monotone peakTier stamp LEADS, the stored-tier-above-popToTier disagreement is the RESIDUAL; the §434 gap typed as NO_PEAK_TIER_STAMP with understated:true, never a guessed peak. Channel 2 declares the MEASURED twelve-entry window; channel 3 sums dated exodus READ THROUGH the existing dossier projection display/calamityLedger.js (ODQ §443 C-a — the townMap/changeView.js precedent; DISPLAY-LAZY by inheritance, first-paint consumers refused by the vendorPdfLazy byte budget), so the observed-shape reader walker holds at 387/1409/1995. Pure, total, frozen v1 (derivation HIGH_WATER_V1). 104 effective of 250. Cast-free: HighWaterInput typedef and an enumerated TIER_FLOOR map, so the any-cast ledger owes nothing.",
@@ -21337,6 +21337,11 @@
         {
           "action": "DOC",
           "path": "docs/implementation/PACKET_MANIFEST.json"
+        },
+        {
+          "_note": "THE CENSUS RE-RECORD, all five figures re-derived together with the cause stated: ONE NEW TEST FILE and nothing else (tests/domain/highWater.test.js, one literal describe, seven straight-line it). 2497/364/2133/20723/5785 -> 2498/364/2134/20730/5786 at the BUILD base b10ed1a1; the walk was read from the arm's own failure message ('expected 2498 to be 2497') and confirmed green 33/33 with the row applied, then the walker edit REVERTED per ODQ 417 (the T2J shape) and the row carried by the packet for the landing act. parked holds because every title is a string literal in one describe. censusAuthorization: ODQ 306.4(a), ODQ 421(2), ODQ 433, ODQ 434. LANDED AT THE PRODUCER-TRAIN SLOT 421c7345 (ODQ 457/467, stacked landing): slot tuple 2505/365/2140/20781/5797; this member's position in the train re-derives to 2506/365/2141/20788/5798; the train's one live tuple 2508/365/2143/20801/5800 was convicted at the train tip (33/33) with two negative controls (the slot's tuple put back reds at files: expected 2508 to be 2505; MF-T2Q's position tuple put back: expected 2508 to be 2507). The DELTA +1/+0/+1/+7/+1 crossed the rebase; the authored figures in this note are the BUILD-base history.",
+          "action": "TEST",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
         }
       ],
       "requiredSymbols": [
@@ -21424,9 +21429,9 @@
     },
     {
       "id": "MF-T2Q",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T2Q.md",
-      "verifiedBase": "b10ed1a1f5a0f2acd00bbfc9b5d0a41931697c3d",
+      "verifiedBase": "421c73456c5f1cb682605169f2b32ee69014a61a",
       "changeManifest": [
         {
           "_note": "THE READER LEAF. A pure headless leaf at the src/domain/ root (the ageBands precedent), golden-inert BY CONSTRUCTION because generation never imports it. Three typed kinds, no year ever invented. A CREATE row, not TEST — the validator asserts a TEST path exists at every status.",
@@ -21451,6 +21456,11 @@
         {
           "action": "DOC",
           "path": "docs/implementation/packets/town-cartography/MF-T2Q.md"
+        },
+        {
+          "_note": "THE CENSUS RE-RECORD — the row MF-T2Q's packet carries VERBATIM (action TEST, this path; this _note is the landing act's, J-PROD-3): ONE NEW TEST FILE and nothing else (tests/domain/institutionFounding.test.js, one literal describe, seven straight-line it). 2497/364/2133/20723/5785 -> 2498/364/2134/20730/5786 at the BUILD base b10ed1a1; convicted at the member's own tip (the walk read from the arm's own failure message, 'expected 2498 to be 2497', then green 33/33), the walker edit carried by the packet per ODQ 417 (the T2J shape). parked holds because every title is a string literal in one describe. censusAuthorization: ODQ 306.4(a), ODQ 421(2), ODQ 433. LANDED AT THE PRODUCER-TRAIN SLOT 421c7345 (ODQ 457/467, stacked landing; the member's two commits SQUASHED into one per ODQ 445.1 J1): slot tuple 2505/365/2140/20781/5797; this member's position in the train re-derives to 2507/365/2142/20795/5799; the train's one live tuple 2508/365/2143/20801/5800 was convicted at the train tip (33/33) with two negative controls (the slot's tuple put back reds at files: expected 2508 to be 2505; MF-T2Q's position tuple put back: expected 2508 to be 2507). The DELTA +1/+0/+1/+7/+1 crossed the rebase; the authored figures in this note are the BUILD-base history.",
+          "action": "TEST",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
         }
       ],
       "requiredSymbols": [
@@ -21518,9 +21528,9 @@
     },
     {
       "id": "MF-T2N",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T2N.md",
-      "verifiedBase": "84e06412f6fdca91020197f2a332ba7f98642f64",
+      "verifiedBase": "421c73456c5f1cb682605169f2b32ee69014a61a",
       "changeManifest": [
         {
           "_note": "THE DERIVER, Shape 1 (charter §3; ODQ §433 C2): deriveResourceSites(settlement) sites every string entry of config.nearbyResources as { resource, bearing, band, terrainAnchor, sourceKind: 'DERIVED_V1' } from stored facts alone — the seed-stable id (a rename never moves a site), the roster, config.terrainType and the native resource/terrain tables. Eight winds by a uniform hash octant (the spatialSubstrateRead.approachOctant idiom); a band picked by the seed WITHIN the set the resource's closed semantic type admits (positional/infrastructure → AT_HAND; renewable → AT_HAND|NEAR; exhaustible/magical → NEAR|DAYS_REACH; UNTYPED custom → all three); the resource's own single terrain tie outranks the settlement's terrain; the gap is typed UNANCHORED. No number, no tuning, no Date, no rng, no store; imports only import-free leaves (stablePart, resourceSemantics, resourceData, geographyData). Nothing on the generation path imports it; the golden manifest is bytewise identical; the observed-shape reader walker holds 387/1409/1995. 89 effective of 250. Cast-free.",
@@ -21535,6 +21545,11 @@
         {
           "action": "DOC",
           "path": "docs/implementation/packets/town-cartography/MF-T2N.md"
+        },
+        {
+          "_note": "THE CENSUS RE-RECORD, all five figures re-derived together with the cause stated: ONE NEW TEST FILE and nothing else (tests/domain/resourceSites.test.js, one literal describe, six straight-line it). 2499/364/2135/20729/5787 -> 2500/364/2136/20735/5788 at the BUILD base 84e06412; the walk was read from the arm's own failure message ('expected 2500 to be 2499') and confirmed green 33/33, attribution BY ISOLATION (hiding the one file convicted files at 2499, the base figure exactly), then the walker edit REVERTED per ODQ 417 (the T2J shape) and the row carried by the packet for the landing act. parked holds because every title is a string literal in one describe. censusAuthorization: ODQ 306.4(a), ODQ 421(2), ODQ 433. LANDED AT THE PRODUCER-TRAIN SLOT 421c7345 (ODQ 457/467, stacked landing): slot tuple 2505/365/2140/20781/5797; this member's position in the train re-derives to 2508/365/2143/20801/5800; the train's one live tuple 2508/365/2143/20801/5800 was convicted at the train tip (33/33) with two negative controls (the slot's tuple put back reds at files: expected 2508 to be 2505; MF-T2Q's position tuple put back: expected 2508 to be 2507). The DELTA +1/+0/+1/+6/+1 crossed the rebase; the authored figures in this note are the BUILD-base history.",
+          "action": "TEST",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
         }
       ],
       "requiredSymbols": [
