@@ -17589,3 +17589,27 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   burgage tax morphology, guild practice), read-only, scratchpad-only,
   owner taste-gated before any grammar work. The remaining-arc tables now
   carry DW-research as a parallel lane, not a post-launch footnote.
+
+## §438 — OWNER ORDER: THE DW RESEARCH EXPANDED TO COMPREHENSIVE PER-INSTITUTION SCOPE, INCLUDING MAGICAL INSTITUTIONS FROM FICTION AND LORE; COST EXPLICITLY ACCEPTED (2026-08-24 ~01:20)
+
+- **Owner: "the research should be comprehensive and expansive and I know
+  and accept it will cost credits… for each institution including what
+  should be in fantasy and magical institutions that you can derive from
+  fiction and lore."** The cost acceptance is RECORDED; the token-generous
+  process policy applies at full width to this research program.
+- **The expanded charter (the design doc's §8 amended):** six R-INST
+  tranches covering the product's own catalog ENTRY-BY-ENTRY — civic/
+  defense · trade-and-crafts · faith+learning · hospitality/poverty/utility
+  · MAGICAL (the fiction-and-lore leg) · criminal/underground. Each entry
+  gets its historical interior analogue AND, for the magical entries, the
+  genre's functional expectations derived from fiction and lore. THREE
+  BINDING DISCIPLINES on the lore leg: conventions-never-expression (tropes
+  and functions are research; protected text/names are never copied); the
+  deity doctrine (liturgical function, never theology); finite semantics
+  (every finding lands as typed closed vocabulary).
+- **Dispatch law:** the tranches dispatch AS SEATS FREE under the §370
+  four-lane cap (currently full: T2H-landing · T2R · T2Q · DWR1A); the
+  landing cascade retains priority for freed seats where a landing lane
+  needs one; research fills the rest. DWR1A (construction history)
+  continues unchanged as P1a; the R-INST series is P1b's per-institution
+  half, taste-gated per tranche.

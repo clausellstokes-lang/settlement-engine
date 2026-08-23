@@ -161,7 +161,28 @@ market measurably wants — repeatedly requested of Dwellings, never delivered);
 SVG/PNG export via the existing export surfaces. The estate view: the parcel's
 buildings top-down with the main plan opened — read straight from fabric data.
 
-## §8 · THE CORPUS PROGRAM (DW-R — the long pole)
+## §8 · THE CORPUS PROGRAM (DW-R — the long pole; EXPANDED per ODQ §438)
+
+**The owner's §438 order: comprehensive and expansive, per-institution, cost
+accepted — including FANTASY AND MAGICAL institutions derived from fiction
+and lore.** The research covers the product's OWN catalog entry-by-entry
+(category tranches with per-entry distinctions), each institution receiving:
+its real-world/historical interior analogue (functions, fixtures, structural
+imperatives) AND — for magical/fantasy institutions (mage towers, alchemical
+laboratories, enchanters, magical academies, teleport-circle houses, and the
+catalog's own magic entries) — the GENRE'S expectations derived from fiction
+and lore. THREE DISCIPLINES BIND THE LORE LEG: (1) conventions, never
+expression — genre tropes and functional expectations are research; any
+specific protected text/names/creatures are not copied; (2) the deity
+doctrine — temple interiors are cultural/liturgical-functional, never
+theologically specific; (3) finite semantics — every lore finding lands as
+typed closed vocabulary, the clerk composes. The tranche roster:
+R-INST-1 civic/administrative + defense/military · R-INST-2 trade, commerce
+and crafts (the largest) · R-INST-3 faith + learning · R-INST-4 hospitality,
+entertainment, poverty and utility · R-INST-5 MAGICAL/fantasy institutions
+(the fiction-and-lore leg) · R-INST-6 criminal/underground fronts (the
+undercity seam). Each tranche reads the ACTUAL catalog entries from the
+repo, researches per-entry, and delivers a taste-gated dossier.
 
 The atlas method applied to interiors: measure real historical plans into
 grammars — hall houses, longhouses, burgage plots, tenements, courtyard

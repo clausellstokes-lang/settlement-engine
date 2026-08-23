@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~01:20: DW RESEARCH EXPANDED (§438, owner order, COST ACCEPTED) —
+# six R-INST tranches (per-catalog-entry, incl. MAGICAL from fiction/lore;
+# conventions-never-expression + deity doctrine + finite semantics bind);
+# dispatch as seats free under the four-cap.
 # ⭐ ~00:50: DW INTEGRATED (§437, owner order) — research NOW (TC-DWR1A
 # dispatched: construction-history dossier), sandbox in endgame quiet
 # windows, repo-byte work post-endgame; carry-notes planted (undercity
