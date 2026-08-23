@@ -51,6 +51,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ ~22:50 CDT 08-22: §448 OWNER DIRECTIVE — 5-hour windows close often:
+# PICKUP CARD now at the TOP of HANDOFF_CURRENT.md (rewritten every commit);
+# lane checkpoint law (RESUME POINT every proof boundary / 30 min); detached
+# gates; wakeup re-armed at pickup. Seats: WEB4-landing · UC0 · UC3 · WEB2.
+# T2N BUILT 9f05fbb4 (pinned). R-INST-1 delivered (139KB dossier).
 # ⭐⭐ ~22:30 CDT 08-22: §447 OWNER DIRECTIVE — seat model restated: Fable =
 # manager/architect/validator/survey/recon; Opus = implementation + verifier;
 # Fable takes an Opus-class task where better suited. Chair rule: builds →

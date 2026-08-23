@@ -8,6 +8,31 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
+## ⛔⛔⛔ PICKUP CARD — REWRITTEN AT EVERY LEDGER COMMIT (owner directive §448: the chair's 5-hour usage window closes often; a successor or the same chair picks up HERE in 60 seconds)
+
+**AS OF 2026-08-22 ~22:50 CDT · ledger §448 · build `claude/composite-r4` = `4060f690` (27 landings)**
+
+FIRST ACTS ON PICKUP, IN ORDER:
+1. `git -C /Users/cstokes/Desktop/settlement-engine log -1 --oneline review-fixes-2026-07-08 claude/composite-r4` — if either moved past this card, the ODQ tail is newer than this card; read it.
+2. Re-arm the §388 wakeup (CronCreate `13,33,53 * * * *`, the four checks headlined IS EVERY BUILDABLE CAR BUILDING?) — it died with the session.
+3. For EVERY lane in the table below: read its receipt's LAST `RESUME POINT` / `STARTED` block, `git -C <worktree> log -3 --oneline && git -C <worktree> status --porcelain`, then re-dispatch a fresh executor that RESUMES FROM THE RECEIPT (survey-first; verify every claimed proof). Lanes die with the session; their worktrees and receipts do not.
+4. Any DETACHED GATE survives: check `<lane>-TERMINAL-*.log` for `TRUE_EXIT=` and `[gate-tail] exit:`; a header-only log with no live `gate-tail` process was killed → re-fire via `chair-detach.py` (program scratchpad). On a two-part green + disk ≥300MB: CAS per the lane's bordered tip block; prune the pin + tree.
+5. Ledger every act by the PRIVATE-INDEX method (never `git add -A`; the main worktree matches no branch).
+
+| seat | lane | worktree (6298872d scratchpad) | receipt | state at card time | on pickup |
+|---|---|---|---|---|---|
+| LANDING | TE-WEB4-LANDING | laneTEWEB4-tree | laneTEWEB4-receipt.md §"THE LANDING SLOT … slot 4060f690" | rebased onto 4060f690; sweep/terminal in progress; tip in `web4-rebased-tip.txt`; terminal log `web4-TERMINAL-<tip8>.log` + `web4-TERMINAL-exit.txt` | collect the terminal if it ran; else resume from the receipt's last step; CAS `4060f690 → <tip>` on green |
+| build | TE-UC0 (Fable) | laneTEUC0-tree | laneTEUC0-receipt.md | building MF-UC0 (existence gate + facet kind + jointVocabulary) from the ruled charter | resume from receipt; Opus allowed (§447) |
+| build | TE-UC3 (Opus) | laneTEUC3-tree | laneTEUC3-receipt.md | building MF-UC3 (static components) | resume from receipt |
+| build | TE-WEB2 (Opus) | laneTEWEB2-tree | laneTEWEB2-receipt.md | building WEB-2 (retention numbers, migration 198) | resume from receipt |
+
+COMPLETE AND PINNED (holding for landing slots): T2R `f65b3ff3` (holding-t2r) · T2Q `cc9ef856` (holding-t2q; squash at landing) · T2N `9f05fbb4` (holding-t2n) · WEB-4 `378f9276` (holding-web4, IN the landing seat) · WEB-5 `6d6572ea` · WEB-6 `5b0a399f` · WEB-7 `e5975829` · T2J `f7ba3145` · T2K `4d2d17f8` · T2L `6c920593` · T2M `faf3def4`.
+LANDING ORDER: WEB-4 → WEB-5 → WEB-6 → WEB-7 → T2J → T2K → T2L → T2M → producers (T2R → T2Q → T2N) — a ready producer takes the slot if it would otherwise idle. Every GO = the slot pattern; the executed template is laneTEWEB1-receipt.md's landing section; WEB-6/WEB-7 founded `packets/website/` differently — keep-one on the family header, keep-both on rows.
+BUILD QUEUE at the next free seat: WEB-3 → HK-1 (§445.3) → R-INST-2..6 (Fable) → UC-1/UC-4 (after T2R lands) → UC-2/UC-5 (after T2N+T2Q land).
+RULED CHARTERS: undercity = `draft-UNDERCITY-PLAN.md` (§441/§445); producers = `draft-PRODUCERS-PLAN.md` (§433/§434); website = `draft-WEBSITE-PLAN.md` (§402). Research delivered, owner taste-gate owed: `draft-DWR1A-CONSTRUCTION-HISTORY.md`, `draft-R-INST-1-CIVIC-DEFENSE.md`.
+STANDING LAWS FOR EVERY BRIEF: short per-lane TMPDIR (`/tmp/<lane>`) · `export GATE_MUTEX_LOCK_DIR=/tmp/settlementforge-vitest-gate.lock; export GATE_MUTEX_MAX_POLLS=480` on every vitest (§440.2) · `npm run check:tail` BARE, never under the mutex · exits captured in-shell, never `${PIPESTATUS}` · receipt stub FIRST, `RESUME POINT` block at every proof boundary and at least every 30 min (§448) · baseproof at b10ed1a1: `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/695a70c5-80ee-4ebd-b806-a8c102244d16/scratchpad/chair-baseproof-b10ed1a1` (re-create with `git worktree add --detach … b10ed1a1` + `cp -Rc` node_modules if purged) · seat model §447 (builds Opus; research/compile/landings Fable).
+OWNER DOCKET (unchanged by any lane): three db-push migrations 195/196/197 (198 coming) · tuning signature · the CT-0 taste sittings (DWR1A, R-INST-1) · R-1/R-3/R-5/R-6/R-7 (§441.8) · O-DW1 · the §436 frontage-tax wording correction · every push.
+
 ## ⭐⭐⭐⭐ SUCCESSION ADDENDUM — 2026-08-24 (~01:40), LEDGER THROUGH §439 — READ THIS DELTA FIRST, THEN THE §427 BLOCK BELOW
 
 The §427 block's structure stands; THIS delta supersedes its state figures:

@@ -18218,3 +18218,34 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   their current tier — restarting a mid-build lane discards executed proof
   for no gain; the directive is applied at every dispatch from here.
 - Banked to memory beside §291.5.
+
+## §448 — OWNER DIRECTIVE (in-chat, 2026-08-22 ~22:45 CDT): THE CHAIR'S 5-HOUR USAGE WINDOW WILL CLOSE OFTEN — PREPARE FOR EASY PICKUP; THE PICKUP CARD AND THE LANE CHECKPOINT LAW (2026-08-22 ~22:50 CDT)
+
+- **Owner:** "I'm likely to frequently run out of 5-hour usage so prepare for
+  that for easy pickup when the window opens." RECORDED as standing law; it
+  sharpens the seamless-resume directive into three mechanisms:
+- **§448.1 THE PICKUP CARD** — a bordered block at the TOP of
+  docs/HANDOFF_CURRENT.md, REWRITTEN IN PLACE at every ledger commit (never
+  appended): build tip · ledger § · the five first acts · the live-seat
+  table (lane, worktree, receipt, state, what to do) · the pinned/holding
+  roster with the landing order · the build queue · the ruled charters ·
+  the standing brief laws · the owner docket. A pickup reads ONE block and
+  acts; the §-rows remain the record.
+- **§448.2 THE LANE CHECKPOINT LAW** — every executor/compile/research
+  lane writes its receipt stub FIRST and appends a `RESUME POINT` block at
+  every proof boundary and at least every 30 minutes (what is proven with
+  log paths · what is in flight · the exact next command), and commits
+  verified WIP on its detached HEAD at every boundary (hooks ON; a
+  `--no-verify` checkpoint is lawful only DECLARED, and owes the
+  size-ratchet re-run per §445.1). Lanes die with the session; receipts
+  and worktrees do not. Ordered to the four live lanes now and carried in
+  every brief from here.
+- **§448.3 DETACHED INSTRUMENTS** — gates fire via the setsid launcher
+  (`chair-detach.py`, now also in the program scratchpad) so they outlive
+  the session; every terminal writes its own exit file; the pickup
+  collects by the two-part rule. The wakeup (session-scoped) is re-armed
+  as pickup act 2; monitors are re-armed on the live gate's log.
+- **§448.4 CHAIR ACTS STAY ATOMIC** — CAS + pin prune + ledger row +
+  card rewrite happen in one sitting; if the window closes mid-act, the
+  ledger's last row names the state and the card's first act re-derives
+  the refs from git, never from the card.
