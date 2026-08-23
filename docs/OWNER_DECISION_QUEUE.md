@@ -20792,3 +20792,90 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   is ratified. Nine open questions block CH-3 and re-shape CH-2. Seats: DW-0
   charter+architecture compile (Opus) · CH skeptic (Opus). Memory FOLD 12
   taken (16,061 → 15,487 B).
+
+## §502 — ⭐⭐ THE DWELLINGS CHARTER (164.5 KB) AND ITS CODE ARCHITECTURE (103.6 KB) DELIVERED `[OPUS-RUN]`: SIX REFUTATIONS JUSTIFY THE PROGRAM — **THE ENGINE HAS NO STOREYS AND THE INTERIOR IS A POINT, NOT A POLYGON**; 10 WAVES / 41 CARS / ONE FLAG / ONE DECLARED SHIFT / 18 OWNER BANDS; C1–C5 RULED; THE SKEPTIC PANEL IS IN THE SEAT (2026-08-23 15:33 CDT)
+
+- **§502.1 DELIVERED AND PRESERVED.** `draft-DWELLINGS-CHARTER.md` 164,539 B /
+  2,349 lines / 13 sections and `draft-DWELLINGS-ARCHITECTURE.md` 103,566 B /
+  1,717 lines / 8 parts, each assembled only by its own assembler; receipt
+  14,645 B with four RESUME POINTs; C0 = 0 over all 23 authored files; the
+  repo untouched (no worktree, every probe a `git show` against the base
+  blob). Preserved with the CH charter at
+  `refs/preserve/research-dossiers-2026-08-23` = **`3449e748`** (3.28 MB
+  total), both cmp byte-identical. Base `00e7af61`.
+- **§502.2 THE SIX REFUTATIONS — THE PROGRAM'S JUSTIFICATION, IN THE ENGINE'S
+  OWN WORDS.** Measured-home tally over 28 rows: **16 CONFIRMED · 5 CORRECTED
+  · 6 REFUTED · 1 PARTIAL.** The six: the interior reads a **POINT, not a
+  polygon** (`interiorFootprint.js:10` says so in its own header); the
+  entrance is **guessed from a district centroid** (`:122`), never read from a
+  street; **there is no exterior to clamp against**; **THERE ARE NO STOREYS
+  AT ALL** (`interiorModel.js:181-186`) — so DW law 9 (vertical honesty) has
+  no home in the engine today; prosperity arrives as **three buckets against
+  the map's seven**; and `ROOM_KINDS.stall` has **zero producers anywhere in
+  `src/`**. Five research claims CORRECTED (UC-2 is LANDED not holding;
+  `institutionSubstructure` is landed at base; the concealed cell is
+  **nested, not subtracted** — R-INST-6 overstated it; `evidence`/`concealed`
+  are model-level not template-level; and §495.4(a)'s "insertion, not
+  surgery" UNDERSTATES the painter's op count, which is an **IDENTITY** that
+  a new op moves — MP-1 is re-scoped accordingly).
+- **§502.3 THREE FINDINGS THE RESEARCH DID NOT PRODUCE.** (a) **a frontage
+  edge is computable from the parcel row that ships today**
+  (`cartographyParcels.js:108`) — which is what makes §497 R2′'s
+  frontage-gated parti eligibility possible at all; (b) **the intra-edge
+  merge of two same-fan wedges is EXACTLY a triangle of the same family**
+  (their outer cuts are collinear), so the ≤4-buildings packing theorem
+  survives the merge untouched — while (c) **the vertex-crossing merge is a
+  quad and does NOT**, which is the boundary condition the ESTATE wave's merge
+  rule must respect. This is the cheap-merge path the owner's estate design
+  needs, found by measurement rather than assumed.
+- **§502.4 THE SHAPE OF THE BUILD.** Vocabularies: **48 partis** (after
+  merging FIFTEEN separately-proposed partis into one `GATED_COURT_RING` — the
+  de-duplication the chair asked for, and the strongest evidence that the six
+  tranches were describing one primitive from six directions), **83 cell
+  kinds**, **81 fixture kinds**, 9 circulation classes / ~55 sub-forms / 5
+  width buckets, ~35 storage sub-forms / 6 adjacency polarities of which three
+  are PROHIBITIONS. **10 waves · 41 cars · 44 dispatchable commits** (EST-1
+  splits four ways because 11 shelf files exceed the 3-file packet law).
+  **Exactly ONE flag** (DW-7a, priced at the six-surface bill) and **exactly
+  ONE declared same-seed shift** (EST-2 + EST-3, one re-record across the
+  pair). Ledger: 334 inherited items each with its header verified, 8
+  deferrals, 10 judgments, 11 chair rulings recorded **including R2 as
+  SUPERSEDED with the owner's reasoning** so no successor re-litigates it, 5
+  open questions. All five chair amendments folded (§496 the ESTATE wave;
+  §497 R2′; §498 R8/R9; §499 the architecture; §500 R10).
+- **§502.5 THE CHAIR RULES C1–C5 (provisionally, subject to the skeptic's
+  contradiction — each recorded so the build is unblocked the moment the panel
+  reports):** **C1 RATIFIED** — DW builds on the **cartography synthesis**
+  parcel world, not the fabric first slice (the fabric produces two masses on
+  one synthetic plan; the synthesis stage has a parcel for EVERY building,
+  with the polygon, the parcel key and now the frontage edge in hand). **C2
+  RATIFIED** — the ESTATE wave lands BEFORE the ONE REGEN; this was already
+  §499.3 rule 6 and the tail order has no room for a second regeneration.
+  **C3 RATIFIED** — the merge lives in a NEW LEAF consuming
+  `cartographyParcels.js`, never inside it: one writer per fact, and the
+  theorem's own file stays untouched. **C4 RATIFIED** — `ownerRef` is an
+  institution anchor or `ANONYMOUS_FABRIC`, and **DW does not mint a
+  household** (`householdId` greps to zero rows; dwellings are anonymous by
+  design, `cartographyBuildings.js:9-10`) — this is also the product-scope
+  guard: the moment a named individual owns something the engine owes that
+  person a life story. **C5 ORDERED** — a measurement lane for the
+  per-settlement compute of re-deriving every plan runs BEFORE DW-2 lands;
+  the owner's two-second build is a PRODUCT CLAIM and arch-6's bound is
+  analytic, so the skeptic has been ordered to produce the real number now
+  rather than waiting for the dedicated lane.
+- **§502.6 THE SKEPTIC PANEL DISPATCHED (Opus)** with a ten-front attack list
+  built around the compile's own declared gap — it ran NO tests and NO
+  wall-clock probe, every claim being a read at file:line. The panel has a
+  worktree and executes: the six refutations each re-probed with a control
+  that could FAIL, the two geometry theorems tested numerically over real
+  ward geometry (a single counterexample kills the cheap merge path and must
+  reach the chair before EST-1 dispatches), the frontage-edge derivation run
+  over a full corpus for parcels yielding zero or two candidate edges, a hunt
+  for a SECOND same-seed shift and a second quietly-minted gate, the car
+  arithmetic against the 3-file and 250-line caps and the size-baseline
+  ceilings, **an audit of all 18 OWNER BANDS for any recommendation that is a
+  preference wearing a number** (an unsourced band the owner signs becomes law
+  by accident — the highest-value pass in the lane), and the measured
+  per-settlement wall-clock. Seats: CH skeptic (Opus) · DW skeptic (Opus).
+  **The owner's band sitting is the next act that is theirs, and it waits on
+  this panel.**

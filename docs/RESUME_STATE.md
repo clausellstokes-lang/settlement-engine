@@ -51,6 +51,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 15:33 CDT 08-23: §502 — DWELLINGS CHARTER (164.5 KB) + ARCHITECTURE (103.6 KB) delivered,
+# preserved 3449e748. SIX refutations (no storeys; interior is a POINT). 10 waves/41 cars/18 bands. C1-C5 ruled.
+# Both seats = skeptic panels (CH, DW). Owner band sitting waits on the DW panel.
 # ⭐⭐⭐ 15:12 CDT 08-23: §501 — CH charter compiled (86.5 KB): FOUR mis-inferences (a priest drawing
 # the tavern in 70/420), the research cure wrong twice, CH-1 zero-shift + dispatchable. Skeptic in the seat.
 # ⭐⭐⭐ 15:09 CDT 08-23: §499 MASTER PRE-REVIEW SEQUENCE set (A compiles+band sitting · B CH/UC-5/MP-1 ·
