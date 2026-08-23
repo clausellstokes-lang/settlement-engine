@@ -18693,3 +18693,32 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   HK-A's HK-2 is what flips MF-T2H to LANDED and frees the census-walker
   path for READY packets — until it lands, members enter at LANDED directly
   (the §410 form, as WEB-5/6/7 did).
+
+## §461 — WEB-7 LANDED (THE 31ST): THE WEBSITE TRAIN IS ON THE BRANCH; THE MAP STACK'S STACKED LANDING GO ISSUED (2026-08-23 00:45 CDT)
+
+- **§461.1 WEB-7 LANDED.** The resumed lane classified its contended sweep
+  title-by-title (6/6 banked, 0 strays, 0 its own), fired the terminal into
+  a quiet box (load 2.73) and outlasted it in-turn: `TRUE_EXIT=0` +
+  `[gate-tail] exit: 0` + `free_kb_at_end=13239928`; `28782 tests, ceiling 11`;
+  `STRICT DIST OK — 52 file(s), 438 test(s)` (433 + this member's five dist
+  arms); `valid: 154 packets (1 READY)`; packet already at LANDED (§410
+  form). **CAS `2b82121f → 11539636`.** Pruned holding-web7, the tree,
+  /tmp/web7 (after the lane's report). Disk 13Gi. **All five website cars
+  (WEB-1/4/5/6/7) are on the branch**; WEB-2 and WEB-3 follow as built.
+- **§461.2 THE MAP STACK GO (TE-MAPSTACK-LANDING, Fable):** measured
+  topology — chain base `05e7f9d5` (T2H's pre-rebase holding, in the object
+  store, not on the branch); T2J ⊂ T2K ⊂ T2L = 12 commits; T2M a SIBLING on
+  T2K = 5 commits; three shared hot files (walker, manifest, INDEX); six
+  landings crossed since the stack was built. The brief: carry-proof at blob
+  level over the whole union FIRST; chain rebase `--onto 11539636 05e7f9d5
+  6c920593` with the walker re-recorded per member and the manifest by
+  string surgery per row; the §419 rename executed AT T2L's POSITION; T2M
+  rebased onto the new L tip with SUM-OF-DELTAS and the §426 blessed
+  four-red window recorded (clearing at the LANDED flip); all four packets
+  re-stamped per position and entered at LANDED (§410 form; MF-T2H's
+  reservation until HK-2 lands); ONE convicted tuple with the negative
+  control; S0 two-part with the build receipts' readings quoted; a widened
+  mutexed sweep; ONE terminal, outlasted in-turn; expected 17 commits over
+  the slot and 158 packets. A red naming a member's own file is that
+  member's STOP, not the lane's to cure. Seats: MAP-STACK landing · TE-HK-A
+  · TE-WEB3 · TC-R-INST-2 (cap).
