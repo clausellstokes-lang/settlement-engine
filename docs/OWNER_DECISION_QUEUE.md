@@ -18722,3 +18722,69 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   the slot and 158 packets. A red naming a member's own file is that
   member's STOP, not the lane's to cure. Seats: MAP-STACK landing · TE-HK-A
   · TE-WEB3 · TC-R-INST-2 (cap).
+
+## §462 — R-INST-2 DELIVERED (TRADE, COMMERCE AND CRAFTS — 124 ENTRIES / 20 FAMILIES AT DEPTH, 582 KB): THE ENGLISH REGISTER HAS NO BUILDING FOR ~30 ENTRIES; TC-R-INST-CIRC DISPATCHED (2026-08-23 00:55 CDT)
+
+- **The dossier** (`draft-R-INST-2-TRADE-CRAFTS.md`, 581,595 bytes; §0–§22,
+  §Σ, ledger, method, queued sources, a verbatim receipts appendix): the
+  resumed lane transcribed rounds 1–2 from the receipt, then FANNED OUT
+  nine research sub-lanes over the remaining 18 families and merged their
+  reports verbatim with provenance and parent review notes — the first
+  research lane to use fan-out, at ~444k tokens; the owner's §438 cost
+  acceptance covers it. 20/20 families AT DEPTH; PARTIAL clauses on six
+  measured-figure gaps (B′ apothecary rooms; F kiln figures; J masons'
+  lodge; O no negation search — the search cap hit; P no measured
+  Speicher section; S Giles Appendix 6). Tally ≈ 515 CONFIRMED + 160
+  CONFIRMED-digest + 140 PLAUSIBLE; 106 sub-lane open questions + the
+  parent ledger; C0 0. Honesty note carried: a sub-lane CONFIRMED means
+  "fetched by a subagent on 2026-08-23" — P1c owes a re-verification pass
+  on every grammar-consumed figure.
+- **Load-bearing findings (sourced):** Pantin 1962–3 — shops 6–10 ft wide;
+  Tackley's Inn five shops 8–12 ft with separate solars and a 5-bay cellar
+  let as a wine tavern; the parallel-hall parti "needs a frontage of 30 to
+  50 feet" → the parti switch is a `frontageBucket` consumer and frontage is
+  a TENANCY layer · yard/sub-floor trades measured (Brill kilns 1.1–3 m
+  with 3–4.7 m stokeholes 10–30 m from the dwelling; smithy hearth 0.55 ×
+  0.50 m, anvil pit, quench pit; bell pits 0.75 m) → `ROOM_KINDS.kiln` is
+  a room kind but every excavated kiln is an outdoor/sub-floor FIXTURE ·
+  the warehouse as a VERTICAL building with a DATE GATE (pakhuis 5–8 × ~30
+  m, N identical STORE floors + external hoist; the free-standing merchant
+  warehouse only c. 1580–1600; before that the merchant's own attic).
+- **⭐ THE STRUCTURAL FINDING FOR THE GRAMMAR (owner taste-gate):** England
+  keeps the trade function DOMESTIC (in the house, at the inn, on market
+  ground) where the continent BUILDS THE INSTITUTION (statutory arcades,
+  han/fondaco/Kontor courtyards of identical cells, guild-owned plant,
+  civic stores) — so the culture weight in DW law 8 decides whether an
+  institution has a building at all, and ~30 of 124 entries (four of them
+  REQ rows) have NO BUILDING in the English register → a `NO_BUILDING`
+  outcome with a fixture set on ground/host is a required grammar
+  outcome, and a HOSTED-institution relation (seven families converge on
+  it — R-INST-1 found the same at town tier) is the single most-needed
+  engine concept.
+- **Circulation/storage (§452/§453) in this tranche:** GALLERY is the
+  richest class (the merchant's tresaunce of 1405; quay arcades; han
+  galleries — Koza Han 1491, 45.9 × 37.5 m court; the tanner's drying
+  gallery; exchange cloisters); CORRIDOR occurs ONCE (Dutch merchant
+  house, 1648); TWO classes proposed beyond §452 — a VERTICAL non-human
+  class (hoist / grain chute / sack hoist) and an EXTERIOR open walk; STORE
+  in six fixture-distinguished sub-forms; cellars with their own street
+  door let separately; adjacency PROHIBITIONS (fuel store outside the
+  smithy with no internal door; no hearth under the herb loft; larder away
+  from the scalding copper) that the contract's adjacency set cannot yet
+  express — carried into the addendum lane for convergence.
+- **Engine-gap flags (17):** `NO_BUILDING`; an exterior zoned parti with an
+  encroachment rule; an N-identical-cells generator; a `tenancy` layer +
+  `separatelyLet` cellar; HOSTED; `coveredFrontage` and water-edge frontage
+  kinds (`frontage.js` has neither); vertical circulation; sub-floor pit
+  cells; linear structures (the 316 m ropewalk); era × register gates that
+  REFUSE a parti (sawmill, glass, warehouse, corridor); REQ switches tied
+  to lordship/culture; `ROOM_KINDS` hygiene (~18 missing kinds; `stall` is
+  a fixture, `kiln` a yard structure); two catalog slips for the owner
+  (L1670 `priorityCategory: 'military'`; L1112 "MUST be downstream" — no
+  expelling ordinance found in three negation rounds).
+- **TC-R-INST-CIRC DISPATCHED** (Fable): the §452/§453 addendum over
+  R-INST-1 and DWR1A with a CONVERGENCE table reconciling all three
+  dossiers' spellings into one closed set (carrying R-INST-2's VERTICAL /
+  EXTERIOR_WALK proposals and the prohibition class). Seats: MAP-STACK
+  landing · TE-HK-A · TE-WEB3 · TC-R-INST-CIRC (cap). Research queue:
+  R-INST-3 → R-INST-4 → R-INST-5 (magical) → R-INST-6.

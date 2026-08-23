@@ -51,6 +51,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐ 00:55 CDT 08-23: §462 — R-INST-2 DELIVERED (582KB; 124 entries/20
+# families; ~30 entries have NO BUILDING in the English register → NO_BUILDING
+# + HOSTED are required grammar concepts). TC-R-INST-CIRC dispatched. Seats:
+# MAPSTACK-landing · HK-A · WEB3 · R-INST-CIRC.
 # ⭐⭐⭐ 00:45 CDT 08-23: §461 — WEB-7 LANDED (31st): CAS → 11539636; website
 # train COMPLETE. MAP STACK GO (J→K→L chain on base 05e7f9d5 + M sibling;
 # one terminal; expect 17 commits, 158 packets). Seats: MAPSTACK-landing ·
