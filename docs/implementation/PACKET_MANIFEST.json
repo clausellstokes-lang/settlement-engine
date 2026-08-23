@@ -21313,6 +21313,109 @@
         [ "npm", "run", "validate:packets" ],
         [ "npm", "run", "check:tail" ]
       ]
+    },
+    {
+      "id": "MF-T2R",
+      "status": "BLOCKED",
+      "packetPath": "docs/implementation/packets/town-cartography/MF-T2R.md",
+      "verifiedBase": "b10ed1a1f5a0f2acd00bbfc9b5d0a41931697c3d",
+      "changeManifest": [
+        {
+          "_note": "THE READER, Shape 1 (charter §2; ODQ §433 C2): deriveHighWater re-expressed from the sealed tierGrammar.js (refs/preserve/map-sandbox-w3f-sealed, SHA-256 f152d700…, re-hashed before the port) over the LANDED popToTier / POPULATION_RANGES / TIER_ORDER rather than a second tier table. Channel 1 in TWO ARMS under declared precedence (ODQ §434): the monotone peakTier stamp LEADS, the stored-tier-above-popToTier disagreement is the RESIDUAL; the §434 gap typed as NO_PEAK_TIER_STAMP with understated:true, never a guessed peak. Channel 2 declares the MEASURED twelve-entry window; channel 3 sums dated exodus. Pure, total, frozen v1 (derivation HIGH_WATER_V1). 107 effective of 250. Cast-free: HighWaterInput typedef and an enumerated TIER_FLOOR map, so the any-cast ledger owes nothing.",
+          "action": "CREATE",
+          "path": "src/domain/highWater.js"
+        },
+        {
+          "_note": "THE ACCEPTANCE AND THE TWO ROSTERS. One literal describe, seven straight-line it: guard-the-guard (the whole-directory scans are live and DESCEND); the lived interval through the engine's own forceCalamityStrike and its counterfactual without it; channel 1's precedence; channel 2's twelve-entry window understating an older peak; the frozen populationHistory writer roster (NINE appends + ONE constructor, ONE uncapped, frozen as-is per §434); the frozen settlement-tier writer roster (five modules, eighteen sites, THREE adjudicated DEMOTING — calamityKernel, settlementLifecycleFirstClass resettle, tierOutcomeApply); the §434 gap typed and inventing nothing. Census +1 / 0 / +1 / +7 / +1; the shared census row is DEFERRED to the landing act (§417 T2J shape) and rides the packet verbatim.",
+          "action": "CREATE",
+          "path": "tests/domain/highWater.test.js"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/packets/town-cartography/MF-T2R.md"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/PACKET_MANIFEST.json"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE ONE TIER TRUTH the leaf reads instead of carrying its own table (charter §5.1: a second tier table would be a second truth). Renaming it silently forks the high-water law from the rest of the app.",
+          "path": "src/data/constants.js",
+          "symbol": "export const popToTier"
+        },
+        {
+          "_note": "THE LANDED BANDS the tier floors are enumerated from (TIER_FLOOR). The declared divergence from the sealed fabric bands (§2.2) is a divergence FROM THIS TABLE's values, so it must stay the source.",
+          "path": "src/data/constants.js",
+          "symbol": "export const POPULATION_RANGES"
+        },
+        {
+          "_note": "THE RANK ORDER channel 1 compares tiers in. A re-ordered or renamed list changes which stored tier reads as 'above' its population.",
+          "path": "src/data/constants.js",
+          "symbol": "export const TIER_ORDER"
+        },
+        {
+          "_note": "THE LEADING ARM of channel 1 (ODQ §434): the monotone, write-once-upward peakTier stamp in the lifecycle kernel's PHASE A. If this write moves or is renamed, the reader's strongest evidence goes dark and the §434 gap widens to every settlement.",
+          "path": "src/domain/worldPulse/settlementLifecycleKernel.js",
+          "symbol": "peakTier: currentTier"
+        },
+        {
+          "_note": "THE STRIKE SEAM the acceptance drives for its lived interval and its counterfactual — and the FIRST of the three demoting tier writers §434 convicted. The acceptance executes the engine's own demotion rather than a hand-built fixture.",
+          "path": "src/domain/worldPulse/calamityKernel.js",
+          "symbol": "export function forceCalamityStrike"
+        },
+        {
+          "_note": "THE ANCHORED-NEGATIVE ROUTE (preamble §P3): every absence assertion in the acceptance routes through this helper BY NAME so the anchor walker can see it.",
+          "path": "tests/helpers/anchoredNegatives.js",
+          "symbol": "export function expectAbsentWithAnchor"
+        },
+        {
+          "_note": "THE COUPLING-CENSUS SCOPE that makes a domain-root leaf census-inert (charter §1.7, confirmed at base): worldPulse and spatial only. If the scope widens to src/domain/ root, this member's zero-cost claim must be re-derived.",
+          "path": "tests/lint/couplingInclusion.walker.test.js",
+          "symbol": "const CENSUS_SCOPE_RE"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "GUARD-THE-GUARD. Before any roster assertion runs: PULSE_FILES exceeds 300, the whole-directory walk provably DESCENDS (some path has more than four segments — 394 of 413 worldPulse files are top-level, so a count threshold alone would not notice a walk that stopped recursing), both source scans are non-empty, and the leaf's own vocabularies are non-empty (four channels, two gaps)."
+        },
+        {
+          "id": "A2",
+          "case": "THE LIVED INTERVAL WITH A CALAMITY STRIKE, AND ITS COUNTERFACTUAL WITHOUT IT. A real settlement of 5,100 run through the engine's own forceCalamityStrike (year 20, tick 1040, catastrophic): one dated stamp with exodus > 0; the reader reports population === current + exodus, demoted:true, DATED_LOSSES credited, and the evidence names the souls lost. The SAME run with the strike absent reads population === current, demoted:false, deficit 0, and DATED_LOSSES absent (anchored by the positive arm). A second derivation toEqual the first (determinism companion)."
+        },
+        {
+          "id": "A3",
+          "case": "CHANNEL 1 IN DECLARED PRECEDENCE (ODQ §434 ruling 1). With a peakTier stamp: PEAK_TIER_STAMP credited, demoted:true, TIER_DISAGREEMENT absent (anchored). With no stamp but a stored tier above its population: TIER_DISAGREEMENT credited, the evidence reads 'a recorded demotion', PEAK_TIER_STAMP absent (anchored). With BOTH: channels is exactly ['PEAK_TIER_STAMP'] and population is 5001, the LANDED city floor."
+        },
+        {
+          "id": "A4",
+          "case": "CHANNEL 2 DECLARES A TWELVE-ENTRY WINDOW AND UNDERSTATES A PEAK OLDER THAN IT (ODQ §434 ruling 4). RING_WINDOW_ENTRIES === 12 === RING_RETAINED_PREFIX + 1; a ring built by the engine's own [...prev.slice(-11), entry] idiom for thirty writes settles at 12; the window prose carries 'the ring settles at 12' and '11 retained plus one appended'; RING_WINDOW_SATURATED is present; the 9,000 peak that fell out of the ring is understated — population 430, demoted:false."
+        },
+        {
+          "id": "A5",
+          "case": "THE FROZEN populationHistory WRITER ROSTER (ODQ §434 ruling 3). The live whole-directory scan equals the frozen eleven rows exactly: nine appends, one constructor, and exactly one UNCAPPED append (realmVerbExecution.js), frozen as-is and owner-docketed rather than normalised."
+        },
+        {
+          "id": "A6",
+          "case": "THE FROZEN SETTLEMENT-TIER WRITER ROSTER (ODQ §434 ruling 2). The live scan minus the one argued non-settlement module (pantheon.js, a deity's standing tier) equals the frozen five {module, sites} rows (18 sites); the DEMOTING set is exactly calamityKernel.js, settlementLifecycleFirstClass.js and tierOutcomeApply.js; every argued exclusion carries a written reason. A fourth demoting writer reds on arrival."
+        },
+        {
+          "id": "A7",
+          "case": "THE §434 GAP IS TYPED, NEVER SILENT. The engine's own demoting write executed and its dated records stripped (tier 'town', popToTier 'town'): the reader reports population === current, demoted:false, NO_PEAK_TIER_STAMP in gaps, understated:true, the window naming §434, and an EMPTY evidence list — no peak invented from a demoted state. Adding the stamp flips understated to false with a higher population, anchoring the closed-vocabulary negative."
+        }
+      ],
+      "checks": [
+        [ "npx", "vitest", "run", "tests/domain/highWater.test.js" ],
+        [ "npx", "vitest", "run", "tests/lint/negativeAssertionAnchor.walker.test.js", "tests/lint/domainAnyCastBaseline.test.js" ],
+        [ "npx", "vitest", "run", "tests/property/generatorGoldenMaster.test.js" ],
+        [ "npx", "vitest", "run", "tests/lint", "tests/build", "tests/ops" ],
+        [ "npm", "run", "typecheck:ratchet" ],
+        [ "npm", "run", "typecheck:domain:strict" ],
+        [ "npm", "run", "validate:packets" ],
+        [ "npm", "run", "check:tail" ]
+      ]
     }
   ]
 }
