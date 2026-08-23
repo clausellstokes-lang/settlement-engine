@@ -19487,3 +19487,47 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   tuning-pass input (§441.6). Seats: WEB-2 landing · TE-UC1 (cap). Holding:
   WEB-3, HK-A. Second-seat queue after UC-1: R-INST-4 (resume) → UC-4 →
   R-INST-5 → UC-2 → R-INST-6 → UC-5 → WEB-8.
+
+## §478 — WEB-2 LANDED (THE 41ST): MIGRATION 198 — THE RETENTION NUMBERS, THE PROGRAM'S FIRST DESTRUCTIVE MIGRATION — IS ON THE BRANCH; WEB-3's GO ISSUED; A RAISED ROW FOR HK-A's LANDING ACT (2026-08-23 08:05 CDT)
+
+- **§478.1 LANDED.** TE-WEB2-LANDING: carry-proof found 3 of 11 moved
+  (INDEX, manifest, the mutation-coverage manifest — distinct hunks); the
+  migration-doc figures UNMOVED since WEB-1 (so no re-apply), no foreign
+  198, contiguity native; the twelve gates run mutexed at the rebased tree
+  with per-file verdicts (31 files / 415 tests, 0 skipped; `head = 198
+  (198 files, contiguous)`; publicTableRlsCensus 95; the member suite
+  10/10 under a TRUE `runIf` gate); the walker written once at the landing
+  act: slot + `+1/+1/+0/+0/+0` = **2511/366/2145/20817/5802** with both
+  controls ("expected 2511 to be 2510" / "expected 366 to be 365"); S0
+  pre-existing by lookup; sweep with `tests/security` + `tests/edgeFunctions`
+  = the banked six only, received-list diffs quoted; terminal 14m49s,
+  outlasted: `TRUE_EXIT=0` + `[gate-tail] exit: 0` +
+  `free_kb_at_end=19455352`; `28854 tests, ceiling 11` (+11 attributed: 10
+  pglite pins + 1 `it.each` row the RLS census registers for the new
+  table); `STRICT DIST OK 52/438`; `valid: 164 packets (1 READY)`. Chair
+  re-read the roster, ancestry (2 over c1295938), the LANDED status, the
+  migration tree (197, 198) and the tuple before the CAS. **CAS `c1295938
+  → 718e4855`.** Pruned holding-web2, the tree, /tmp/web2l. Disk 19Gi.
+- **§478.2 WHAT THE BRANCH NOW CARRIES:** raw analytics pruned at 90 days;
+  the retention-cohort aggregate made durable (incremental append, backfilled
+  once, parity-proved against the MV); the research plane pruned only
+  behind an export receipt (fail-closed; `export_cursors` reused; product-
+  tier snapshots not pruned — the recorded residual); `world_sim_metrics`
+  indefinite re-affirmed; the order backfill → parity → shorten enforced at
+  RUNTIME. **The owner's db-push train is now 195 / 196 / 197 / 198, with
+  198 the first DESTRUCTIVE one — DEPLOY.md's "Read these preambles before
+  the push" section names it.**
+- **§478.3 RAISED → RULED:** WEB-2's delivered `requiredSymbols` carries
+  `{ docs/DEPLOY.md, '198_retention_numbers.sql' }` — the moving-head shape
+  §455.2 ruled out of WEB-1 (HK-3). Not a live trap today (the preambles
+  section names 198 independently), but HK-3's validator guard WILL refuse
+  it at HK-A's landing. RULED: HK-A's landing act DELETES that row from
+  WEB-2's packet + manifest with the §455/§478 citation (the same chair-
+  authorized edit of a landed contract as WEB-1's) — the guard stays
+  strict; "permanently-named" exemptions are not minted.
+- **§478.4 WEB-3 GO ISSUED** (TE-WEB3-LANDING; holding da9d9c40 = 4 over
+  acc466a6; migration 199 contiguous on 198 natively; the migration-doc
+  figures keep-slot + re-apply 199; the edge-shared analytics bundles'
+  coherence checked at the slot per §475; the title-census raise at 486).
+  Seats: WEB-3 landing · TE-UC1 (cap). Holding after WEB-3: HK-A (its
+  landing act carries D-HKA-1's comment fix and the §478.3 deletion).
