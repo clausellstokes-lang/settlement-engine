@@ -166,16 +166,17 @@ export const NO_TYPED_HOME_LICENCE = 'TOLL';
  */
 export const UNDERCITY_TUNING = Object.freeze({
   weights: Object.freeze({
-    CRIMINAL_SHARE: 0.45,
-    SYNDICATE_STANDING: 0.35,
+    CRIMINAL_SHARE: 0.40,
+    SYNDICATE_STANDING: 0.40,
     ECONOMY: 0.20,
   }),
   /** at or below this share there is no undercity — the seeded sheet stands alone (§311.4). */
   presenceFloor: 0.30,
   /** the criminal share below which a smugglers' tunnel is not worth digging (§311.8.2(d)). */
   smugglerCriminalFloor: 0.35,
-  /** the fraction of colonized workings the water table can reach where the ground is waterside. */
-  floodReach: 0.34,
+  /** how many workings deep a colonization must run before the deepest cut can meet the water
+   *  table. A single bolthole is not a deep working, so waterside ground alone never floods one. */
+  floodDepth: 2,
 });
 
 /**
@@ -298,11 +299,17 @@ export function withPowerHighWater(record, observed) {
 /**
  * THE SYNDICATE STANDINGS — A.CRIMINAL faction power off the settlement's own roster, the SEPARATE
  * §311.4 input (kept distinct from the criminal SHARE, which is corruption.js's stored read).
- * ⚠ THE NORMALIZATION MIRRORS `factionCompetition.factionPower`'s finite branch (a value above 1 is
- * a 0..100 score) because the roster carries both spellings; the acceptance drives both and pins
- * them equal. Its INDEX FALLBACK is deliberately NOT mirrored: `0.72 - index * 0.16` is a contest
- * -weight prior for RANKING, and a faction carrying no power number has no measured standing, so it
- * contributes nothing to a dug extent. Ordered by anchor key, then name. Total on garbage.
+ * ⚠ THE VALUE NORMALIZATION MIRRORS `factionCompetition.factionPower`'s finite branch (a value
+ * above 1 is a 0..100 score) because the roster carries both spellings; the acceptance drives both
+ * and pins them equal. Its INDEX FALLBACK is deliberately NOT mirrored: `0.72 - index * 0.16` is a
+ * contest-weight prior for RANKING, and a faction carrying no power number has no measured
+ * standing, so it contributes nothing to a dug extent.
+ * ⛔ ITS KEY FALLBACKS ARE NOT MIRRORED EITHER, AND THAT IS A MEASUREMENT RATHER THAN A STYLE CALL.
+ * `influence`, `score`, `weight` and `label` are keys the observed generation corpus never carries
+ * on a faction (the reader-with-no-writer walker reports each as a ceiling-0 row against this
+ * file), so mirroring them would land four arms that are dead on every generated world. The
+ * competition layer's own chain is frozen debt it already carries; a new reader does not inherit it.
+ * Ordered by anchor key, then name. Total on garbage.
  * @param {{ powerStructure?: unknown }|null|undefined} settlement @returns {SyndicateRow[]}
  */
 export function syndicateStandingOf(settlement) {
@@ -312,9 +319,9 @@ export function syndicateStandingOf(settlement) {
   for (const raw of Array.isArray(rows) ? rows : []) {
     const row = recordOf(raw);
     if (factionArchetype(row) !== FACTION_ARCHETYPES.CRIMINAL) continue;
-    const power = Number(row.power ?? row.influence ?? row.score ?? row.weight);
+    const power = Number(row.power);
     const standing = Number.isFinite(power) ? clamp(power > 1 ? power / 100 : power, 0, 1) : 0;
-    const name = String(row.faction ?? row.name ?? row.label ?? '');
+    const name = String(row.faction ?? row.name ?? '');
     out.push({
       archetype: FACTION_ARCHETYPES.CRIMINAL,
       anchor: institutionAnchorKey({ name }),
@@ -459,15 +466,19 @@ export function deriveUndercity(settlement, opts = {}) {
   const terrain = resolveSettlementTerrain(s);
   const water = waterside(s, terrain);
   const ledger = buildCalamityLedger(s);
-  const floodFrom = Math.ceil(opened * (1 - UNDERCITY_TUNING.floodReach));
+  // §311.8.3, as two indices rather than a band, because both consequences land on ONE working
+  // each and a band would silently sever a whole colonization. The DEEPEST cut (the last opened)
+  // meets the water table where the ground is waterside and the working actually runs deep; a
+  // DATED collapse in the immutable record seals the cut ABOVE it — the newest one still in use.
+  const floodAt = water && opened >= UNDERCITY_TUNING.floodDepth ? opened - 1 : -1;
+  const sealAt = ledger.count > 0 ? opened - 1 - (floodAt >= 0 ? 1 : 0) : -1;
   /** @type {UndercityComponent[]} */
   const components = [];
   for (let i = 0; i < opened; i += 1) {
     const seed = ordered[i];
-    // §311.8.3: the DEEPEST workings meet the water table where the ground is waterside; a dated
-    // collapse in the immutable record SEALS the newest cut. Both SEVER the joins and keep the row.
-    const flooded = water && i >= floodFrom;
-    const sealed = !flooded && ledger.count > 0 && i === opened - 1;
+    // Both consequences SEVER the joins and KEEP the row: use recedes, dug space never does.
+    const flooded = i === floodAt;
+    const sealed = !flooded && i === sealAt;
     /** @type {WorkingState} */
     const state = flooded ? 'flooded' : sealed ? 'sealed' : 'open';
     const join = water

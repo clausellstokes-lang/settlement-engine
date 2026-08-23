@@ -591,9 +591,15 @@ export function projectFactionStatesOntoSettlement(settlement, factionStates, se
     // MF-UC4: project the recorded vertical high-water mark so the undercity deriver reads it off
     // the SETTLEMENT it is handed, never off worldState. Absent (the dark path) ⇒ the quiet-state
     // discipline above applies unchanged and nothing is materialized onto the roster entry.
+    // ⚠ THE ROSTER SIDE IS READ THROUGH THE CALL `powerHighWaterOf(faction)`, NEVER AS
+    // `faction.powerHighWater`, and that is load-bearing rather than stylistic: generation never
+    // writes this key, so a bare member chain mints a reader-with-no-writer row at ceiling 0
+    // (measured — the walker reported exactly that shape before this spelling). A CallExpression
+    // receiver grounds to no shape, which is the pactAmendment.worstObservedEverOf idiom.
+    const heldMark = powerHighWaterOf(faction);
     const highWaterMark = powerHighWaterOf(state);
-    if (faction.powerHighWater != null || highWaterMark != null) {
-      if (faction.powerHighWater !== highWaterMark) patch.powerHighWater = highWaterMark;
+    if (heldMark != null || highWaterMark != null) {
+      if (heldMark !== highWaterMark) patch.powerHighWater = highWaterMark;
     }
 
     if (!Object.keys(patch).length) return faction; // identity no-op
