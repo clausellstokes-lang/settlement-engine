@@ -18906,3 +18906,30 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
 - **Queue effect:** TC-WEBSITE-2 (compile; Fable) joins the seat queue
   ahead of R-INST-5/6; its cars build on Opus as seats free; they land
   after WEB-2/WEB-3.
+
+## §465 — OWNER ORDER (in-chat, 2026-08-23 01:15 CDT): "LIMIT THE MAX LANES TO 2 FOR NOW" — THE CAP DROPS FROM FOUR TO TWO; TWO RESEARCH LANES STOPPED AT CHECKPOINTS; THE WAKEUP RE-ARMED UNDER THE CAP
+
+- **The order** supersedes §291's four-lane cap and §370's seat law for as
+  long as it stands ("for now"). The chair's application: the LANDING
+  seat is always one of the two while any holding member exists (the
+  cascade is the critical path); the second seat takes the queue head by
+  the pickup card's order (compile > research > build, as ruled).
+- **Applied immediately:** four lanes were live (the map-stack landing ·
+  TC-R-INST-CIRC · TC-R-INST-3 · TC-R-INST-4). KEPT: the landing + R-INST-
+  CIRC (the furthest along). STOPPED at checkpoints (ordered to write
+  everything gathered into their dossiers, update their status maps,
+  append a final RESUME POINT with the exact next round, C0-scan, and end):
+  R-INST-3 (faith + learning) and R-INST-4 (hospitality / poverty /
+  utility) — both resume from their status maps when a seat frees.
+- **The wakeup re-minted** (job 807a0a6a, `13,33,53 * * * *`) with the cap in
+  its standing text (never dispatch a third; the landing seat always
+  filled; the in-flight-gate-result-survives law; the pickup-card rewrite
+  as part of ledger currency).
+- **Queue under the cap** (second seat, in order): R-INST-CIRC (live) →
+  TC-WEBSITE-2 compile (§464.2) → R-INST-3 (resume) → R-INST-4 (resume) →
+  R-INST-5 → R-INST-6 → HK-4 → the undercity builds as their producers
+  land (UC-1/UC-4 after T2R; UC-2/UC-5 after T2N+T2Q). Landing seat: the
+  map stack (live) → producers stacked → UC-0/UC-3 → WEB-2 → WEB-3 → HK-A
+  → WEB-8/9 as built.
+- Cost stated plainly: the build/research side slows to one lane; the
+  landing cascade's wall-clock is unchanged (it was serial by law already).

@@ -51,6 +51,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⛔ 01:15 CDT 08-23: §465 OWNER ORDER — LANE CAP = TWO. Kept: MAPSTACK-landing
+# + R-INST-CIRC; R-INST-3 and R-INST-4 stopped at checkpoints (resume from
+# status maps). Wakeup re-minted (job 807a0a6a) with the cap.
 # ⭐⭐⭐ 01:10 CDT 08-23: §464 OWNER GRANT RE-AFFIRMED (all decisions + emergent
 # permissions). Docket RULED: R-5 lights in tuning; R-6 no; R-7 via ONE REGEN;
 # O-P1 de-advertise→WEB-8; O-P2 Surveyor $14.99 tier→WEB-9; O-P3 pin→WEB-8;

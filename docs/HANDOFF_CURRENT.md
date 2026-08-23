@@ -14,7 +14,7 @@ this one.**
 
 FIRST ACTS ON PICKUP, IN ORDER:
 1. `git -C /Users/cstokes/Desktop/settlement-engine log -1 --oneline review-fixes-2026-07-08 claude/composite-r4` — if either moved past this card, the ODQ tail is newer than this card; read it.
-2. Re-arm the §388 wakeup (CronCreate `13,33,53 * * * *`, the four checks headlined IS EVERY BUILDABLE CAR BUILDING?) — it died with the session.
+2. Re-arm the §388 wakeup (CronCreate `13,33,53 * * * *`; the four checks; ⛔ LANE CAP = TWO per §465 — the landing seat + one) — it dies with the session.
 3. For EVERY lane in the table below: read its receipt's LAST `RESUME POINT` / `STARTED` block, `git -C <worktree> log -3 --oneline && git -C <worktree> status --porcelain`, then re-dispatch a fresh executor that RESUMES FROM THE RECEIPT (survey-first; verify every claimed proof). Lanes die with the session; their worktrees and receipts do not.
 4. Any DETACHED GATE survives: check `<lane>-TERMINAL-*.log` for `TRUE_EXIT=` and `[gate-tail] exit:`; a header-only log with no live `gate-tail` process was killed → re-fire via `chair-detach.py` (program scratchpad). On a two-part green + disk ≥300MB: CAS per the lane's bordered tip block; prune the pin + tree.
 5. Ledger every act by the PRIVATE-INDEX method (never `git add -A`; the main worktree matches no branch).
@@ -22,9 +22,9 @@ FIRST ACTS ON PICKUP, IN ORDER:
 | seat | lane | worktree (6298872d scratchpad) | receipt | state at card time | on pickup |
 |---|---|---|---|---|---|
 | LANDING | TE-MAPSTACK-LANDING (Fable) | laneMAPSTACK-tree (fresh, from faf3def4) | laneMAPSTACK-receipt.md | T2J→T2K→T2L chain rebased onto 11539636 (base 05e7f9d5), T2M onto the new L tip; four packets at LANDED; tip in `mapstack-rebased-tip.txt`; terminal `mapstack-TERMINAL-<tip8>.log` + `mapstack-TERMINAL-exit.txt` | collect the terminal if it ran; else resume from the receipt; CAS `11539636 → <final tip>` on green; prune holding-t2j/k/l/m |
-| research | TC-R-INST-3 (Fable) | — | laneTCRINST3-receipt.md · draft-R-INST-3-FAITH-LEARNING.md | faith + learning interiors (deity doctrine first) | resume from the status map |
+| STOPPED (cap) | TC-R-INST-3 | — | laneTCRINST3-receipt.md · draft-R-INST-3-FAITH-LEARNING.md | stopped at a checkpoint under §465; resume from the status map when a seat frees | resume from the status map |
 | research | TC-R-INST-CIRC (Fable) | — | laneTCRINSTCIRC-receipt.md · draft-R-INST-CIRC-ADDENDUM.md | §452/§453 circulation + storage addendum over R-INST-1 + DWR1A with a convergence table | resume from the status map |
-| research | TC-R-INST-4 (Fable) | — | laneTCRINST4-receipt.md · draft-R-INST-4-HOSPITALITY-POVERTY-UTILITY.md | hospitality / entertainment / poverty / utility interiors | resume from the status map |
+| STOPPED (cap) | TC-R-INST-4 | — | laneTCRINST4-receipt.md · draft-R-INST-4-HOSPITALITY-POVERTY-UTILITY.md | stopped at a checkpoint under §465; resume from the status map when a seat frees | resume from the status map |
 
 COMPLETE AND PINNED (holding for landing slots): WEB-3 `da9d9c40` (holding-web3; lands after WEB-2) · HK-A `f2b2711b` (holding-hka; HK-1/2/3; D-HKA-1 comment fix at its landing act) · UC-3 `64a4b259` (holding-uc3; T-UC1 #2) · WEB-2 `1d93458a` (holding-web2; migration 198, the first DESTRUCTIVE one — lands after the map stack) · UC-0 `a5c6c4fa` (holding-uc0; lands as T-UC1 #1 after the map stack) · T2R `f65b3ff3` (holding-t2r) · T2Q `cc9ef856` (holding-t2q; squash at landing) · T2N `9f05fbb4` (holding-t2n) · T2J `f7ba3145` · T2K `4d2d17f8` · T2L `6c920593` · T2M `faf3def4` (ALL FOUR in the landing seat as the stack).
 LANDING ORDER: the MAP STACK as ONE stacked landing (IN SEAT) (T2J→T2K→T2L→T2M rebased as a chain, one terminal at T2M) → the PRODUCERS as one stacked landing (T2R→T2Q→T2N) → UC-0 → WEB-2/WEB-3/HK-A singly — a ready producer takes the slot if it would otherwise idle. Every GO = the slot pattern; the executed template is laneTEWEB1-receipt.md's landing section; WEB-6/WEB-7 founded `packets/website/` differently — keep-one on the family header, keep-both on rows.
