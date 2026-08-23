@@ -51,6 +51,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 07:25 CDT 08-23: §477 — UC-0+UC-3 LANDED (39th–40th) after two in-train
+# cures: CAS → c1295938. WEB-2 landing GO (migration 198) + TE-UC1 build (Opus)
+# dispatched. Seats: WEB2-landing · UC1. Holding: WEB-3, HK-A.
 # ⭐ 07:10 CDT 08-23: §476 — R-INST-3 DELIVERED (370KB, 16/16; ~850k tokens).
 # Seat 2 HELD for UC-1 until the UC stack lands (cost judgment, vetoable).
 # Live: UCSTACK-landing only.

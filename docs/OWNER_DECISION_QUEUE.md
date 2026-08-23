@@ -19452,3 +19452,38 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   build (Opus, cheap, unblocked the moment the UC stack lands — ETA ~30
   min) rather than start a research lane into the window now; research
   resumes after UC-1. Vetoable by a word.
+
+## §477 — UC-0 + UC-3 LANDED (LANDINGS 39–40) AFTER TWO IN-TRAIN CURES: `src/domain/undercity/` IS ON THE BRANCH; WEB-2's LANDING GO AND UC-1's BUILD DISPATCHED (2026-08-23 07:25 CDT)
+
+- **§477.1 LANDED.** The §475 regen executed as rehearsed (8-file motion
+  byte-identical to the rehearsal; S0 sha unchanged; the validator's
+  action vocabulary is CREATE|DOC|MODIFY|REGISTER|TEST — the generated set
+  registered as eight `DOC` rows, WEB-3's landed form — J-UCST-5 ratified;
+  J-UCST-4 two commits, J-UCST-6 the A6 closure predicate is the whole
+  directory — ratified); sweep-3 with `tests/edgeFunctions` = the banked
+  seven + the four edge files 87/87; terminal at c1295938 (fired 12:02Z,
+  outlasted): `TRUE_EXIT=0` + `[gate-tail] exit: 0` +
+  `free_kb_at_end=18216140`; `28843 tests, ceiling 11` (+16 = the stack's
+  titles); `STRICT DIST OK 52/438`; `valid: 163 packets (1 READY)`. No
+  third class fired. Chair re-read the roster, ancestry (8 over f32c548e),
+  both LANDED statuses, the tuple `2510/365/2145/20817/5802` and the three
+  undercity files before the CAS. **CAS `f32c548e → c1295938`.** Pruned
+  holding-uc0/uc3, the landing tree, the two build trees, the three lane
+  TMPDIRs. Disk 19Gi. The two deferred rows recorded: `requiredSymbols`
+  not added at the LANDED flip (consistent with every stacked landing —
+  a housekeeping sweep item for the end of the cascade); UC-0's authored
+  INDEX prose figures left as authored.
+- **§477.2 THE LESSON OF THIS LANDING, BANKED:** two classes the builds
+  could not see (an acceptance arm pinned to the builder's own file; a
+  transitive bundle input) were found only because the cars landed
+  TOGETHER and through the terminal — the stacked landing is also the
+  program's cheapest integration test. Both laws (§474, §475) ride every
+  brief; the S0 grep of the bundle rosters costs one line.
+- **§477.3 DISPATCHED:** TE-WEB2-LANDING (migration 198; the twelve-gate
+  bill re-run at the slot; `tests/ops` + `tests/security` in its sweep) in
+  the landing seat; TE-UC1 (Opus) in the second seat — the sewer ladder +
+  wells/cisterns under the §441.1 one-truth rule and the five live causes,
+  with the seed-sweep provenance for `SEWER_DERIVATION_TUNING` as a
+  tuning-pass input (§441.6). Seats: WEB-2 landing · TE-UC1 (cap). Holding:
+  WEB-3, HK-A. Second-seat queue after UC-1: R-INST-4 (resume) → UC-4 →
+  R-INST-5 → UC-2 → R-INST-6 → UC-5 → WEB-8.
