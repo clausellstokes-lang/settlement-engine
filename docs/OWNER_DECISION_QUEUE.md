@@ -19076,3 +19076,38 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   its first law (the one lane tonight that left no resume point did so
   because it was still reading; the §448 law now says the stub precedes
   the reading). Seats: PRODUCERS landing · TC-WEBSITE-2 (cap).
+
+## §469 — THE PRODUCERS' LANDING HELD AT 3008719a ON A REAL MEMBER STOP (MF-T2R'S LOCAL `clamp` — THE BANKED-FAILURES-LIE-TWICE CLASS, AGAIN); RULED: CURE IN-TRAIN, THEN FIRE (2026-08-23 05:45 CDT)
+
+- **The STOP, correctly held:** the resumed landing passed S0 two-part (the
+  pre-existing schema-10 red by lookup; reader literals unmoved), the
+  focused battery (7 files / 66 tests; the golden `29c6cc8f…` UNMOVED at
+  slot and tip; T2Q's 941-line cure holds) and then the widened sweep
+  convicted ONE member-file red the build lane's classification had hidden:
+  `tests/lint/clampPrimitiveBaseline.test.js` reads received (76) vs
+  baseline (75), and the received-minus-baseline diff is exactly
+  `src/domain/highWater.js` — line 118 `const clamp = (n, lo, hi) => …`, a
+  NEW hand-rolled clamp in T2R's own leaf (blob identical to its holding
+  tip). T2R's build receipt had called this test "RED, identical —
+  PRE-EXISTING (isolation: member moved aside)" — **title identity, not a
+  received-list diff**: the banked-failures-lie-twice law's newest
+  specimen (a moved-aside isolation never proves the member adds nothing
+  to a CENSUS-class test; the received-list diff is the convicting
+  instrument). T2Q and T2N clear. The terminal was deliberately NOT fired
+  (J, ratified): two of the three cures move the tip and would void it.
+- **RULED — CURE IN-TRAIN (the landing lane, not a new build lane):**
+  replace line 118 with `import { clamp } from '../kernel/math.js'` (the
+  estate's one clamp), with the call sites read for finite-guarding (the
+  kernel clamp's non-finite policy differs; wrap any unguarded call site,
+  never the kernel); re-prove the member's own proofs at the edited tree
+  (clampPrimitiveBaseline back to 75, acceptance 7/7, the golden unmoved,
+  the any-cast ledger, the reader walker, the anchor walker, both
+  typecheckers) and re-plant m2/m3 so the cure made no arm inert; commit
+  as a FOLLOW-ON `fix(MF-T2R)` on top of 3008719a with hooks ON; re-stamp
+  the packet's leaf hash + effective lines; sweep once more to show the
+  red GONE; then fire the terminal at the new tip. No census motion.
+- **Law sharpened:** a build receipt's "pre-existing" verdict for a
+  CENSUS-class ratchet (received-set equality: clampPrimitive,
+  entropyRoot, the lighting walker, the any-cast ledger) is accepted only
+  with the RECEIVED-LIST DIFF quoted — "same title red at base" is not a
+  receipt. Carried into every build brief from here.

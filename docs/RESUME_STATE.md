@@ -51,6 +51,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⚠ 05:45 CDT 08-23: §469 — producers landing HELD: T2R defines a local clamp
+# (clampPrimitiveBaseline 76 vs 75; the build receipt misread it by title).
+# RULED cure-in-train (kernel clamp import) → re-proof → follow-on → terminal.
 # ⭐⭐ 05:25 CDT 08-23: §468 — SECOND WINDOW CLOSURE survived: producers landing
 # resumed at tip 3008719a (S0/sweep/terminal left); WEBSITE-2 compile
 # re-dispatched from scratch. Wakeup 807a0a6a alive. Seats: PRODUCERS-landing ·
