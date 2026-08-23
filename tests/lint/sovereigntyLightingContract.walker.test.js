@@ -6046,7 +6046,67 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   `files` ("expected 2515 to be 2514"), this member's +1 exactly; and `suiteTitles` alone
     //   put back at the slot's 5,806 reds at `suiteTitles` ("expected 5807 to be 5806"), the
     //   member's one new describe — the file restored byte-identical (cmp 0) both times.
-    files: 2515, parked: 366, credited: 2149, titles: 20854, suiteTitles: 5807,
+    // ── RE-RECORDED 2026-08-23 BY THE MF-CH1 LANDING (inference honesty — the facet
+    //   chokepoint stops reading words that are not in the catalog row it is reading),
+    //   CAUSE ATTRIBUTED ──
+    // 2,515/366/2,149/20,854/5,807 → 2,516/366/2,150/20,863/5,808 at the landing slot 00e7af61
+    // (the MF-UC2 landing — its own commit subject names it, and this lane re-read the slot ref
+    // in-shell at GO). ONE cause, and it is not a rule change — no classifier here widened or
+    // narrowed:
+    //   +1 file / +1 CREDITED / +9 titles / +1 suite title:
+    //     tests/lint/facetInferenceHonesty.walker.test.js, the member's anchoring walker — ONE
+    //     literal `describe` and NINE straight-line `it()` arms, with `.each`, `runIf`, `.skip`,
+    //     `.todo`, `.concurrent` and `skipIf` all measured at ZERO occurrences over the file, so
+    //     it is CREDITED and every title counts. `parked` does NOT move — and on the walk below
+    //     it PASSED without redding at 366, which is the receipt that the file is credited
+    //     rather than an inference from its shape.
+    //   The nine arms: A0 THE PARSE IS FAITHFUL, the table read out of the shipped source
+    //     reproduces `facetOf` on every one of the 933 catalog cells; A1 the four mis-inferring
+    //     rows stop asserting a nature and the derived interior each one draws moves to
+    //     `generic`; A2 THE ANCHORING'S OWN TRAP, both Blacksmith rows keeping `craft` AND
+    //     `institutionFunction: arms` with the wider non-regression roster unmoved; A3 the
+    //     whole-catalog differential against the pre-CH-1 table is EXACTLY the declared delta,
+    //     four cells of 933 and nothing else moved; A4 the undercity SEED GATE,
+    //     `institutionSubstructure` moving zero of the 311 rows; A5 ANCHOR DISCIPLINE, every
+    //     alternative in every FACET_INFERENCE pattern carrying a word boundary or a start
+    //     anchor; A6 no catalog row matching two rules within one facet kind, so the ordering no
+    //     longer carries a verdict by accident; A7 every DECLARED catalog facet naming a real
+    //     value, the scan proving itself live on the three rows that carry one; and A8 WHAT THE
+    //     READER ACTUALLY SEES, a village parish priest no longer drawing a tavern's common
+    //     room, kitchen and cellar.
+    //   +0 from every other path this member moves, ATTRIBUTED BY ENUMERATION AT BLOB LEVEL
+    //     rather than assumed: of the FOURTEEN paths in `00e7af612..fe88c28c7` exactly ONE sits
+    //     under `tests/`, and it is the new walker named above. The other thirteen are
+    //     `src/domain/spatial/cohesionWeave.js` (the chokepoint itself), five regenerated
+    //     edge-shared bundle artifacts and their metas, `scripts/mutation-coverage-manifest.json`
+    //     (the rationale row a new `tests/lint` file owes, which carries no test title) and the
+    //     three docs paths of the packet. `tests/lint/sovereigntyLightingContract.walker.test.js`
+    //     itself is UNMOVED across those four commits (blob 0303493ea2 at both ends), which is
+    //     what makes this row the landing act's to pay.
+    // `censusAuthorization`: ODQ §503 (the chair's ruling chartering the catalog-hygiene train),
+    // §503.3 (this walker's own commission), §484 (the dispatch, `[OPUS-RUN · FABLE-VALIDATION
+    // OWED]`) and §417 (the law that rides the row to the landing act).
+    // ⛔ CONVICTED AT THE BUILD, then REVERTED per §417: every figure was walked at the build
+    //   base 00e7af612, the edit reverted digest-exact to
+    //   811b044a8d6527d5216eec9434f097be06a5e7b0bfbed7bec79194272d9b8399, and the row rode the
+    //   packet into this landing act so the tuple is re-derived here rather than carried.
+    // ⭐⭐ THE CARRY LAW, EXECUTED AT THE LANDING SLOT (TE-CH1-LANDING, 2026-08-23; §420/§457/
+    //   §469/§480.2/§489.3). NO REBASE WAS OWED, and that is a MEASUREMENT, not an assumption:
+    //   `git merge-base 00e7af612 fe88c28c7` returns `00e7af612`, which IS the head of
+    //   `claude/composite-r4` as re-read at GO, so the member's base and the landing slot are the
+    //   same commit and the four member commits are a pure fast-forward. The tuple is therefore
+    //   re-derived over bytes identical to the ones the build measured — and it is still WALKED
+    //   rather than carried: CONVICTED BY EXECUTION at the tip (33/33, TRUE_EXIT 0) with every
+    //   figure READ FROM ITS OWN FAILURE MESSAGE in assertion order and never computed: `files`
+    //   "expected 2516 to be 2515" → `parked` PASSED UNMOVED at 366 → `credited` "expected 2150
+    //   to be 2149" → `titles` "expected 20863 to be 20854" → `suiteTitles` "expected 5808 to be
+    //   5807". The walked figures equal the packet's carried delta `+1/+0/+1/+9/+1` exactly, so
+    //   no title was swallowed by a parked file. TWO negative controls: the slot's own tuple put
+    //   back reds at `files` ("expected 2516 to be 2515"), this member's +1 exactly; and
+    //   `suiteTitles` alone put back at the slot's 5,807 reds at `suiteTitles` ("expected 5808 to
+    //   be 5807"), the member's one new describe — the file restored byte-identical (cmp 0) both
+    //   times.
+    files: 2516, parked: 366, credited: 2150, titles: 20863, suiteTitles: 5808,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

@@ -23067,7 +23067,7 @@
     },
     {
       "id": "MF-CH1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/catalog-hygiene/MF-CH1.md",
       "verifiedBase": "00e7af612d428078634d52ea37054bd00b773ca6",
       "changeManifest": [

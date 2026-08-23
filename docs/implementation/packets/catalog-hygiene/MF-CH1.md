@@ -1,6 +1,6 @@
 # Catalog hygiene / MF-CH1 — INFERENCE HONESTY: the ONE facet chokepoint stops reading words that are not there, and the proof is pinned at the DERIVED INTERIOR because the corpus digest cannot see it
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** 1
 - **Verified base:** `claude/composite-r4` at `00e7af612d428078634d52ea37054bd00b773ca6`
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
@@ -431,3 +431,93 @@ was empty throughout. A sweep log line is not a verdict; only the `×` list and 
 Both S0 walkers rode the sweep and are green in both drives: `observedShapeReaders.walker`
 (the reader literals at `:737` unmoved) and `ruinFilterRoster.walker` (the reader count still 92,
 no disposition owed — this car adds no `.institutions` reader).
+
+
+## §10 · THE LANDING SLOT (TE-CH1-LANDING, 2026-08-23 — slot `00e7af61`, the MF-UC2 landing)
+
+Landed by lane **TE-CH1-LANDING**, **`[OPUS-RUN · FABLE-VALIDATION OWED]`** (ODQ §484). The lane
+moved no ref; the chair executes the CAS `00e7af61 → this tip`.
+
+- **NO REBASE WAS OWED, and that is a measurement rather than an assumption.** The slot ref
+  `claude/composite-r4` was re-read in-shell at GO and returned
+  `00e7af612d428078634d52ea37054bd00b773ca6`; `git merge-base 00e7af612 fe88c28c7` returns that
+  same commit, so the member's BUILD base and the LANDING SLOT are one commit and the four member
+  commits (`b2a3b463d`, `c4d7d753f`, `3c4b283f2`, `fe88c28c7`) are a pure fast-forward. Nothing
+  landed under this member while it held. The `verifiedBase` rows in the manifest and in the header
+  above therefore already name the slot and needed no re-stamp — verified by reading them back
+  through `parsePacketHeader`, not by inspection.
+- **Carry-proof-by-absence at blob level, eighteen rows** (braced `${sha}:path` throughout with
+  `git rev-parse --verify --quiet`, because a BARE `git rev-parse` echoes its own argument on
+  failure and zsh reads an unbraced `$sha:path` as a history modifier). All **14** member paths are
+  blob-identical to the holding tip. **Two are CREATED by this member** — this packet and
+  `tests/lint/facetInferenceHonesty.walker.test.js` — and both read ABSENT at the slot; the other
+  twelve MOVED. Controls: `package.json` (`2b5ec2014c`) and `package-lock.json` (`1a8a80b12b`) are
+  IDENTICAL at slot and tip, so no mint trigger was crossed; a deliberately nonexistent path under
+  `tests/lint/` reads ABSENT at slot, tip and holding alike, which is what makes the two genuine
+  ABSENT readings evidence rather than a silent success; and
+  `tests/lint/sovereigntyLightingContract.walker.test.js` is UNMOVED across all four member commits
+  (`0303493ea2` at both ends), which is exactly why the census row below is the landing act's to
+  pay.
+- **§475 THE EDGE BUNDLES, RE-PROVED AT THE LANDING TREE.** `npm run build:edge-shared` was re-run
+  here and exited 0. All five `supabase/functions/_shared/*Bundle.js` artifacts regenerate
+  **byte-identical** (`cmp` 0) to the bytes the member committed — aiCharter `5735d354…`, aiGrounding
+  `ef94bd48…`, aiOutputSchema `c4dff941…`, analyticsEvents `c64ee7ef…`, intentAtlas `04427854…` —
+  and every `sourceHash` is unchanged (`d10dc5a1753bb224`, `74c1e8a2d91b00ea`, `8ac93ac85a31f5c0`,
+  `9416e4995620b37a`, `9860939aa2829e62`). The ONLY movement in any of the five metas is
+  `generatedAt`, one diff line each, so all five were restored to their committed blobs per the UC-4
+  precedent and the tree returned to a clean status. `cohesionWeave.js` sits in THREE of the five
+  input rosters (aiCharter, aiGrounding, aiOutputSchema), which is why all five metas commit as a
+  set.
+- **The census row, WALKED here rather than carried (§417/§420/§457/§469/§480.2):** the slot read
+  `2515/366/2149/20854/5807`; the delta `+1/+0/+1/+9/+1` re-derives to
+  **`2516/366/2150/20863/5808`**, each moved figure read from the arm's own failure message in
+  assertion order and never computed (`expected 2516 to be 2515` → `expected 2150 to be 2149` →
+  `expected 20863 to be 20854` → `expected 5808 to be 5807`), with the whole arm green at the end
+  (33/33, TRUE_EXIT 0). ⭐ `parked` PASSED unmoved at **366** on the iteration between `files` and
+  `credited`, which is the receipt that the new walker is CREDITED rather than an inference from its
+  shape. Two negative controls — the slot tuple back, and `suiteTitles` alone back at 5,807 — both
+  red as predicted, and the file restored `cmp` 0 each time.
+- **THE THREE CENSUSES A NEW `tests/lint` FILE OWES, all three green and all three EXECUTED.** The
+  lighting census (paid above); `tests/lint/mutationCoverageManifest.test.js` TOTALITY, which the
+  member cured in-train at `c4d7d753f` as a rationale row; and
+  `tests/lint/negativeAssertionAnchor.walker.test.js`, which does NOT red for a `tests/lint` file
+  because it is scoped to generation-facing roots — proved by running it rather than reasoned from
+  its scope. With `tests/lint/controlBytes.test.js` beside them: `Test Files 4 passed (4)` /
+  `Tests 54 passed (54)`. The authored census block carries 0 control bytes and 0 tabs (detector
+  proved live on a synthetic U+001F).
+- **The status walk — THREE places, not one (§486.2),** each read back through the validator's own
+  parser rather than by eye: the manifest row (`status` READY → LANDED; `verifiedBase` already the
+  slot sha; `requiredSymbols` **11**, every one of them a symbol or an import marker and not one of
+  them a count or a migration head), this packet's own Markdown header, and the **INDEX STATUS
+  column**, which the validator reaches through the manifest's `indexPath`.
+  `[implementation-packets] valid: 169 packets (0 READY)`. THREE non-vacuity controls: the INDEX
+  column alone put back to READY is refused with `status disagrees with index`; this header alone
+  put back is refused with `status disagrees with packet Markdown`; and the new `catalog-hygiene`
+  directory segment owes NOTHING extra, because `packetPathProblem` returns `null` for an invented
+  family directory and the only failure mode is path EXISTENCE — the validator has no family
+  concept, established against its source AND by perturbation. All three restores `cmp` 0.
+- **S0, both parts.** Part 1: the pre-existing schema-10 red is IDENTICAL here and at the chair
+  baseproof `chair-baseproof-b10ed1a1` — both streams 159 bytes, `cmp` 0, sha256
+  `c5b67844abe51226…`, with that worktree's status clean before and after and a one-byte probe
+  proving the comparison live. Part 2: the reader-walker literals
+  `{ reads: 1995, identities: 1409, files: 387, bankedReads: 60, taggedRows: 40 }` stand verbatim at
+  `:737` with the walker 27/27 green, and the OSR inventory blob
+  `scripts/.observed-shape-readers-baseline.json` (`8d91fdfa14`) is unmoved at slot, tip and
+  worktree.
+- **The re-proofs at the landing bytes, every one mutexed on the shared lock.** The §489.3 grep arm
+  re-run at its full **52 files** — the width this member's build lane widened it to from the
+  charter's 16 — together with the two `interiorFixtures` consumers and the four validator suites
+  and the ruin-filter walker: `Test Files 59 passed (59)` / `Tests 976 passed (976)`. The arm's one
+  red at the build was the deferred census row and it is gone, paid. `tests/property` +
+  `tests/edgeFunctions`: `Test Files 139 passed (139)` / `Tests 1596 passed (1596)`, with the
+  generator golden `29c6cc8f…` identical at slot, tip and after the run. `ruinFilterRoster` reads
+  **92** and its file is the same blob at slot and tip, so this car owes it no disposition. eslint
+  over the three touched JS paths exits 0 with empty output, and `--fix-dry-run` changes nothing.
+  `[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).` ·
+  `[domain-strict] ✓ no strict-type regressions (1134 errors, ceiling 1134).`
+- ⚠ **TWO VACUITY TRAPS THIS LANE WALKED INTO AND CAUGHT,** recorded because both print a reassuring
+  line: a mis-spelled test path is DROPPED by vitest, which then reports a green run over the files
+  it did find (`Test Files 3 passed (3)` where four were named) — the file-count line is the only
+  tell; and in zsh an unquoted `$FILES` holding a space-separated list does NOT word-split, so the
+  whole list arrives as ONE filter (`${=FILES}` is the fix). Cross-check the printed file count
+  against the count you passed, every time.
