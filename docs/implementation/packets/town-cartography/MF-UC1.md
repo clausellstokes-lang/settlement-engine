@@ -238,7 +238,7 @@ second read (the same optional-second-argument idiom UC-0 uses for the rung).
 | `rosterAnchors[]` | the CANONICAL institution keys (§441.5(k)) of the sanitation institutions the roster carries — CT-4's receipt for the ROSTER_FULL_WEB sentence. Empty on every other source |
 | `causes[]` | six typed rows `{ cause, weight, direction, value, contribution, home }`; `home` names the live accessor the value was read through |
 | `perQuarterCoverage` | a boolean per district-12 key, ordered by codepoint |
-| `wells[]` | `{ kind, license, anchor, extent, temperament, surfaceJoins[], sourceKind }` |
+| `wells[]` | `{ kind, license, anchor, extent, temperament, surfaceJoins[], sourceKind }`. ⚠ The well extent is scaled by the SAME high-water tier the ladder uses, not by the current one — deliberately, for two reasons: wells and cisterns are BUILT infrastructure and §311.3's inertia law ("dug is forever") applies to them exactly as it applies to a main, and a car that read the tier two different ways would carry a second truth about what tier the settlement is. The anchor is drawn from the DRAINED quarters where any drain, else from all twelve — a town with no network draws its water everywhere |
 | `temperament` | `SURFACE_COUPLED` on the ladder and on every well row (§311.8.2(c)) |
 | `surfaceJoins[]` | one `grate` join per DRAINED quarter — caused by the coverage (§311.2); EMPTY at cesspits, which is lawful |
 | `score` | 0..1, the weighted reading the derived rung stands on |
@@ -444,9 +444,19 @@ widen a baseline it did not move.**
   also the semantically right answer (§1.1) — and the reader COUNT re-recorded 90 → 91 from the
   arm's own failure message. Green.
 
-**Second sweep, at the shipped tip (the ten-instrument battery + the acceptance): `Test Files 10
-passed (10)`, `Tests 125 passed (125)`, exit 0.** The only red left standing at this member's tip
-is the deferred census row.
+**FINAL FULL SWEEP AT THE SHIPPED TIP** (`tests/lint tests/build tests/docs tests/ops tests/domain
+tests/property tests/data`, mutexed): **`Test Files 6 failed | 1261 passed | 7 skipped (1274)`,
+`Tests 8 failed | 17448 passed | 114 skipped (17570)`.** The eight are exactly:
+the six `enforcement-claims` rows (BANKED — the received list is the IDENTICAL six, re-checked
+AFTER this packet was written, and none names this member), `metronomeCooldownLint` (BANKED),
+`warCostKindPools` ×3 and `warRulingKindPools` (BANKED), `clampPrimitiveBaseline` (PRE-EXISTING,
+§7.1) and **`sovereigntyLightingContract.walker` — the ONE named interior red, mine, deferred by
+§417.** A per-block scan of every failure for the strings `undercity` / `sewerDerivation` /
+`MF-UC1` returns **0 rows in all eight**. `negativeAssertionAnchor.walker` and
+`ruinFilterRoster.walker` — the two member-caused reds the first sweep found — are GREEN.
+
+An earlier ten-instrument tip battery over the same cures read `Test Files 10 passed (10)`,
+`Tests 125 passed (125)`, exit 0.
 
 **Both typecheckers, by name, bare, captured, verbatim:**
 
