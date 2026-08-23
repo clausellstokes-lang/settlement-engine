@@ -19853,7 +19853,7 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   dial; ≤45 searches. Seats: UC-4 build (Opus) · R-INST-5 (Opus). UC-4's
   landing takes the seat when it builds.
 
-## §487 — MF-UC4 BUILT AND HOLDING `[OPUS-RUN · FABLE-VALIDATION OWED]`: THE FLAG MINTED DARK, THE PERSISTED HIGH-WATER SIGNAL RATIFIED AT ITS §359.5 REVIEW (C-2), TWO CHARTER HOMES CORRECTED BY MEASUREMENT, THE FLAG BILL IS FIVE SURFACES; UC-4's LANDING DISPATCHED (2026-08-23 11:10 CDT)
+## §487 — MF-UC4 BUILT AND HOLDING `[OPUS-RUN · FABLE-VALIDATION OWED]`: THE FLAG MINTED DARK, THE PERSISTED HIGH-WATER SIGNAL RATIFIED AT ITS §359.5 REVIEW (C-2), TWO CHARTER HOMES CORRECTED BY MEASUREMENT, THE FLAG BILL IS FIVE SURFACES; UC-4's LANDING DISPATCHED (2026-08-23 11:31 CDT by `date`; first labelled 11:10 — corrected §488)
 
 - **§487.1 HOLDING.** TE-UC4 (Opus): tip `500e65fe` = 7 over `0f3897a5`,
   porcelain empty, every blob shasum-proved at all seven commits. Pinned
@@ -19909,3 +19909,65 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   bundle byte-identity re-proved at the rebased tree, the three-place §410
   flip. Seats: UC-4 landing (Opus) · R-INST-5 (Opus). MEMORY.md fold owed
   (15.9 KB) — done this sitting.
+
+## §488 — R-INST-5 DELIVERED `[OPUS-RUN · FABLE-VALIDATION OWED]` (361 KB; 32 ENTRIES / 11 FAMILIES; 54-ITEM LEDGER): MOST OF THE MAGIC SHELF IS NOT MAGIC; SEVEN ENGINE DEFECTS READ FROM LIVE CODE; A NAMED PROPRIETARY SETTING IN SHIPPED PROSE → HK-6; UC-2 BUILD DISPATCHED (2026-08-23 11:36 CDT)
+
+- **§488.1 DELIVERED.** `draft-R-INST-5-MAGICAL.md` = 361,337 B, 18 sections,
+  assembled only by `RINST5-merge/assemble.sh`; C0 = 0 over 24 authored
+  files. Roster grep-complete: the whole Magic shelf (21/21) + Exotic (7/7)
+  + 4 Adventuring hand-offs = 32, each re-verified at its catalog line; 14
+  excluded with reason. Six families at FULL depth (A practitioner's
+  house/tower · B laboratory · E circle/grove · F high-magic infrastructure
+  · I warden/adventurers' hall · J embassy/library), five PARTIAL FOR
+  MEASUREMENT with the owed item named (C D G H K). Tally: 71 CONFIRMED ·
+  73 digest · 19 PLAUSIBLE · 26 CONVENTION · 3 GATED · 53 HOME · 14 NO
+  TYPED HOME — read honestly: eight pages opened all session, half the
+  load-bearing claims rest on digests (§M.5 says so; §L.3 names them). Web
+  acts 31 WebSearch / 14 WebFetch / 2 curl (14 searches + 44 fetches
+  unspent — the lane stopped at convergence, J-vetoable). Preserved:
+  `refs/preserve/research-dossiers-2026-08-23` → `f4f77672` (+ R-INST-5 +
+  the R-INST-4 receipt refresh), byte-identical.
+- **§488.2 THE FIVE FINDINGS CARRIED TO THE DW CHARTER (DW-0 inputs):**
+  (1) DW needs an OCCUPATION relation distinct from construction — four
+  families independently (the druid circle occupies a ring it did not build;
+  the druid–stone-circle link is Aubrey/Stukeley's invention; undead labour
+  points at an existing charnel; the planar embassy is a lent palace; a
+  resident dragon takes a ruin/cistern/void) — and NO institution may ever
+  GENERATE a landscape fossil; (2) a new practice's infrastructure starts in
+  somebody else's room — the ladder's bottom rung is always HOSTED
+  (observatory = a top room; the first signalling network ran from a
+  chamber; the resident embassy of 1455 was a lent house); (3) law 6 INVERTS
+  for a precinct: the single controlled entrance is the tranche's most
+  repeated finding (five instances, five routes) — the frontage reader must
+  accept an internal court / causeway / transport edge as the frontage
+  surface, `compound.entrances: 1` a first-class parti attribute; (4) 11 of
+  32 Magic-shelf rows are `magicLicense: NONE` — the shelf is a semantic gate
+  in three live code paths; recommend a declared per-entry `magicLicense:
+  NONE|LOW|MEDIUM|HIGH` in the four tokens `getMagicLevel` already emits,
+  with `clearSpan: EXTREME` as the structural consequence (a high-magic world
+  differs in SPANS, not in a magical room vocabulary); (5) seven engine
+  defects proved by reading live code, none fixed, all owner-gated by class:
+  G1 three unanchored-substring mis-inferences in `FACET_INFERENCE` (`/den/`
+  catches "Warden's Lodge" and "Dragon resident" → tavern; `/fort/` catches
+  "Charlatan fortune tellers" → barracks); G2 four "(high magic)" rows +
+  Dragon resident carry `minTier: 'metropolis'` while authored in the CITY
+  block; G3 a mundane chemical trade is deleted by a dead-magic world; G4 the
+  Adventurers' charter hall straddles two shelves and vanishes at magic=0 at
+  small tiers only; G5 the Great library's shelf reaches the probability
+  multiplier outside the documented UI strip; G6 Dragon resident diverges
+  between the generation gate and the UI gate; G7 a goods vocabulary leaked
+  into an institution gate. → the content/catalog train (CT-4's neighbour) or
+  a dedicated HK car at the chair's discretion; recorded here, not re-found.
+- **§488.3 HK-6 MINTED (housekeeping, after HK-5):** the catalog's `Airship
+  docking` description and two of its `institutionDescVariants.js` variants
+  say "Eberron-style" / "in the Eberron manner" — a named proprietary
+  setting in shipped prose (owner boundary: SETTING-AGNOSTIC; IP exposure
+  law). Chair sweep at `1b1de759` over `src/` for fourteen setting/publisher
+  names: exactly these THREE lines, nothing else. HK-6 = rewrite the three
+  strings setting-free (variants are golden/parity-pinned — the car re-records
+  deliberately and says so).
+- **§488.4 SEATS.** **TE-UC2 build dispatched (Opus)** `[OPUS-RUN · FABLE-
+  VALIDATION OWED]` — the monotone components (crypts · cellars · mines ·
+  vaults), the PRE_SEED age rule, UC-4's inertia contract honoured. Seats:
+  UC-4 landing (Opus) · UC-2 build (Opus). Research remaining: R-INST-6
+  (criminal) — then DW-0 starts (§482).
