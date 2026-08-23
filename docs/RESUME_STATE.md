@@ -74,6 +74,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
 # public/map/ with GPLv2+ tinymce (123 files) tracked in ledger HEAD, reaches dist/;
 # IPV-1 lane (Opus, read-only census) RUNNING → memo retro-IPV1-memo.md; disposition
 # is a chair row after it lands; owner-side legal posture per §254.5.5.
+# ⭐ ~02:10: §439.2 — T2Q checkpoint = member ESSENTIALLY COMPLETE at
+# b3e84008 (pinned holding-t2q); seam ruled sans fallback; foundedAt
+# rename ratified ([object Object] paid-surface save); goldens identical.
+# Successor: one clean gate + one stray baseproof.
 # ~01:55: §439.1 — T2H stop point CONFIRMED (succession header written;
 # gate survives inside test:ratchet). Standing rule: GOs never predict the
 # census walker untouched; disk-check before trusting any green.

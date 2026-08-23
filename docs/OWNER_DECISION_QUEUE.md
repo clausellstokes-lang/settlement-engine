@@ -17641,3 +17641,25 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   predicts the shared census walker untouched — EVERY member touches it,
   and the sum-of-deltas resolution is flagged in every GO from here.
   The gate survives detached, inside test:ratchet at the switch.
+
+- **§439.2 T2Q's CHECKPOINT — the member essentially COMPLETE at b3e84008
+  (pinned):** built at the post-CT-3 base with every figure re-derived; the
+  §0a door check PASS (no verb minted); **the seam ruling resolved WITHOUT
+  the fallback** — the stamp means the calendar year the founding was
+  APPLIED (a deferred proposal dated by when it stood), read from
+  calendar.year with the tick-is-not-weeks trap caught and recorded;
+  goldens bytewise identical so NO declared shift is owed; A1-A7 green,
+  mutants convicted by branch, census walked, packet at READY.
+  **JUDGMENTS RATIFIED IN ABSENTIA (vetoable as ever):** J1 — the
+  charter's field name `founded` is ALREADY LIVE on the PDF card as a
+  scalar EST row; an object there would have printed [object Object] on a
+  PAID SURFACE — the stamp ships as `foundedAt` (zero tree-wide
+  collisions); J3/J4 — THREE reader kinds (legacy pulse-built institutions
+  are never lied about as PRE_SEED on live saves) and the stamp is
+  WRITE-ONCE (a cathedral raised from remnant never gains an invented
+  year); the any-cast red cured by typedef, no widening. **Successor's two
+  open items, exactly as the receipt states them:** one clean gate reading
+  (the only sweep taken is void twice over — pre-cure and under load), and
+  the observedShapeSentinel timeout needs a baseproof at b10ed1a1 before
+  classification. The checkpoint discipline at its best: nothing guessed,
+  everything stated.
