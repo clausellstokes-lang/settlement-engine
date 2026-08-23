@@ -19575,7 +19575,7 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   HK-A the holding roster is EMPTY until UC-1 builds — the landing seat
   then takes the next built car (UC-1 → the W-C cars → UC-4 / UC-2+UC-5).
 
-## §480 — MF-UC1 BUILT AND HOLDING (THE SEWER LADDER + WELLS/CISTERNS): WEIGHT SET B CHOSEN BY MEASUREMENT OVER 420 SETTLEMENTS, THE FOUNDING SLOT INERT, THE CALAMITY CAUSE READ AS A DATED RECORD NOT A KIND; R-INST-4 RESUMED SOLO FROM SIX KILLED SUB-LANE TRANSCRIPTS (2026-08-23 09:20 CDT)
+## §480 — MF-UC1 BUILT AND HOLDING (THE SEWER LADDER + WELLS/CISTERNS): WEIGHT SET B CHOSEN BY MEASUREMENT OVER 420 SETTLEMENTS, THE FOUNDING SLOT INERT, THE CALAMITY CAUSE READ AS A DATED RECORD NOT A KIND; R-INST-4 RESUMED SOLO FROM SIX KILLED SUB-LANE TRANSCRIPTS (2026-08-23 09:07 CDT by `date`; first labelled 09:20 — clock-label error, corrected §481)
 
 - **§480.1 HOLDING.** TE-UC1 (Opus, §447): tip `53d7e492` = 8 commits over
   `c1295938` (= the expected base); porcelain empty; every committed blob
@@ -19630,10 +19630,33 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   leaf enrolled as a `.institutions` reader) — both banked in memory by the
   lane.
 - **§480.4 SEATS.** HK-A landing (running) · **TC-R-INST-4 (RESUME, Fable,
-  solo)** dispatched 09:15 CDT: WebSearch exhausted session-wide since
+  solo)** dispatched 09:06 CDT: WebSearch exhausted session-wide since
   06:14:48Z (ONE probe then zero), WebFetch-only; recovery by the R-INST-3
   method of record from the six killed sub-lane transcripts (AB/CD/EFG/HI/
   JK/LM, 248–567 KB each, under the session's `subagents/`) plus the
   primaries the sub-lanes saved to disk (`RINST4-*`); deliverable §2–§14 +
   §15 + §Σ + ledger + method; status map kept honest; RESUME POINTs every
   30 min. UC-1's landing (single) follows HK-A's in the landing seat.
+
+## §481 — THE OWNER ASKED WHY FABLE DRAINED SO FAST: MEASURED FROM THE TRANSCRIPTS, THREE-QUARTERS OF ALL SPEND WAS FABLE; SEAT MODEL AMENDED — LANDINGS TO OPUS, RESEARCH SUB-LANES EXPLICITLY OPUS, LANES PHASE-SPLIT AT ~150 CALLS (2026-08-23 09:30 CDT)
+
+- **§481.1 THE MEASUREMENT** (usage fields summed over this session's
+  `subagents/*.jsonl` + the chair transcript): Fable subagents 55 agents /
+  3.37M output / **1.14B context (input + cache reads)**; chair 634 turns /
+  0.99M output / 0.32B context; Opus subagents 10 / 1.12M / 0.47B. Causes in
+  size order: (1) context RE-BILLING on long lanes — a 200–350-call lane
+  replays its whole transcript every turn (R-INST-3 resume 84M; UC-0 build
+  96M; UC-stack landing 56M); (2) §447's seat rule put EVERY landing on Fable
+  (~300M over nine landings) though landings are procedural; (3) ~25 research
+  sub-lanes inherited Fable because `model` was unset (~300M of PDF text);
+  (4) UC-0 built on Fable pre-§447 (96M) + the chair's ~500K cached prefix
+  × 634 turns.
+- **§481.2 RULING (chair, vetoable, under §447's own "switch where better
+  suited" clause):** from the NEXT dispatch — landings run on **Opus** under
+  a Fable brief with chair verification (UC-1's landing first; HK-A's stays,
+  two-thirds done); every research or sweep sub-lane carries an explicit
+  `model` (Opus; Sonnet for pure fetch-and-extract) when the cap lifts;
+  lanes are phase-split at ~150 tool calls (a fresh agent with a resume
+  brief beats a 300-call transcript replay); the chair batches reads and
+  stops polling. Fable keeps: charters, rulings, skeptic briefs, compile/
+  synthesis parents, and the chair. Veto reverts to §447's table.
