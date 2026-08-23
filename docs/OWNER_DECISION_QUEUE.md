@@ -18043,3 +18043,32 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   revert the import at the mint) · J2 the lazy-inheritance law (reverse: make
   highWater read raw under the C-b exemption once minted) · J3 producers land
   after the map stack unless the slot idles.
+
+## §444 — T2R COMPLETE AT f65b3ff3 (§443 EXECUTED, READY, PINNED); TE-T2N DISPATCHED AT THE FREED SEAT (2026-08-22 ~21:25 CDT)
+
+- **§444.1 T2R:** the §443 cure executed — channel 3 reads through
+  `buildCalamityLedger(s)` (both raw reads replaced; the DISPLAY-LAZY
+  inheritance in the header; `HighWaterInput.calamityHistory` typed via the
+  ledger's own `CalStampLike[]`, no cast; 107 → 104 effective). Re-proved at
+  the cured leaf `021808ba…` in one mutexed run (5 files / 59 tests / exit
+  0): the reader walker GREEN with A1/A7 back at **387 / 1409 / 1995**
+  (`violations: 0`, `findings mentioning highWater: 0`); acceptance 7/7;
+  m1–m4 re-planted and ALL convict on the same arms (m2 still reds A2 — the
+  re-route is behavior-identical); golden manifest still `29c6cc8f…`; both
+  typecheckers at ceiling. One declared narrowing (a malformed fractional
+  exodus floors; non-object stamps uncounted) recorded at packet §2.4 /
+  J-TET2R-8 — RATIFIED. Packet BLOCKED → READY on all three surfaces,
+  `buildCalamityLedger` added to requiredSymbols, `valid: 149 packets (1
+  READY)` at the committed tip; the hook's `eslint --fix` changed nothing
+  (committed blob == the proved blob). **Tip f65b3ff3, 4 commits over
+  b10ed1a1, tree clean; PINNED at refs/preserve/holding-t2r (moved from
+  a6001d47, an ancestor — nothing lost).** HOLDING for its landing slot
+  (after the map stack unless the slot idles, §443).
+- **§444.2 TE-T2N DISPATCHED** (charter §3 of draft-PRODUCERS-PLAN, §433 C4
+  "N at the next free seat") at base 84e06412 — the first member built on
+  T2H's landing; brief carries the §443 law (prove the reads are
+  generation-written by running the reader walker at S0 and at tip), the
+  instrument-table-before-first-edit discipline (T2Q's §C), the shared lock
+  dir, short TMPDIR, the §417 deferred census row, the mutexed §408 sweep
+  against the b10ed1a1 baseproof. Seats: WEB-1 landing · TE-T2Q ·
+  TC-UNDERCITY-R2 · TE-T2N (cap).

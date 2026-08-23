@@ -51,6 +51,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐ ~21:25 CDT 08-22: §444 — T2R COMPLETE at f65b3ff3 (READY; walker back at
+# base; pinned holding-t2r). TE-T2N dispatched at base 84e06412 (worktree
+# laneTET2N-tree, TMPDIR /tmp/t2n). Seats: WEB1-landing · T2Q · UC-R2 · T2N.
 # ⭐ ~21:05 CDT 08-22: §443 — T2R resume delivered (387a3b34; 8 of 9 reds were
 # load strays; typechecks green; packet at BLOCKED) with ONE real red: the
 # observed-shape reader walker refuses highWater.js's raw calamityHistory read.
