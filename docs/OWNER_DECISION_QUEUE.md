@@ -18849,3 +18849,60 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   TC-R-INST-3 · TC-R-INST-4 (cap). The code shop is EMPTY of buildable
   cars until T2R lands (UC-1, UC-4) and T2N+T2Q land (UC-2, UC-5); HK-4
   and the R-INST-5/6 tranches fill seats as they free.
+
+## §464 — OWNER GRANT RE-AFFIRMED (in-chat, 2026-08-23 01:10 CDT): "I LEAVE ALL DECISIONS TO YOU … FOR ANY CURRENT PENDING OR FUTURELY EMERGENT PERMISSIONS, I GIVE IT" — THE PARKED DOCKET RULED UNDER IT
+
+- **The grant:** all decisions delegated; all current and emergent
+  permissions granted. RECORDED as the §291/§336 grant re-refreshed in this
+  session. Carve-outs that remain BY NATURE, not by permission — the
+  physical push/deploy and the `db push` train (the program has no remote
+  or Supabase contact by constitutional law; the chair PREPARES the train,
+  the owner executes it), external legal sign-off (TinyMCE/GPL, FMG,
+  founder-transfer), and the TUNING SIGNATURE as THE PROMISE's
+  constitutional act (the chair runs the tuning pass and DRAFTS the
+  release; the owner signs). If the owner names any of these explicitly,
+  that naming governs. Everything else on the docket is now the chair's,
+  ruled below, each vetoable by a word.
+- **§464.1 RULED — the undercity docket (§441.8):** R-5 the undercity
+  high-water flag LIGHTS in the tuning pass with the map leg (declared
+  same-seed pulse shift, soak-gated) · R-6 'Sewage system' required at
+  city: NO — the §441.1 one-truth rule keeps the roster honest as it
+  stands · R-7 a typed `founding.kind`: YES — rides the endgame's ONE
+  REGEN as a declared shift; UC-1's sixth cause wakes then · the §436
+  "frontage-tax" wording is CORRECTED to frontage-value on DWR1A's
+  evidence (the design doc's §15 P1a row says "burgage frontage taxes" —
+  amended to "frontage-value plot economics (tax causation unsupported,
+  DWR1A)").
+- **§464.2 RULED — the paid-surface honesty items (§449):** O-P1 the ten
+  unenforced Cartographer map rows are DE-ADVERTISED until the map ships
+  (the pricing table stops claiming a paywall that does not exist), with a
+  contract-test pin that every advertised Cartographer-only row has an
+  enforcement symbol; at map activation (D3b/P6) the rows return WITH
+  their gates · O-P2 Surveyor becomes a REAL TIER: $14.99/mo with a small
+  monthly credit allowance on top of BYOK, the pricing page's "No
+  subscription required" becomes "per-task credits OR the Surveyor tier",
+  create-checkout's existing surveyor product lit, the entitlement
+  provisioned by purchase not concierge · O-P3 the `pdfExport` drift
+  pinned in the tierFacts contract test (free = per-dossier). These three
+  compile as the WEBSITE TRAIN's second train — **WEB-8** (de-advertise +
+  the enforcement-symbol pin + the pdfExport pin) and **WEB-9** (the
+  Surveyor tier end-to-end) — TC-WEBSITE-2 at the next free compile seat.
+  Pricing otherwise: Cartographer HOLDS at $5.99/mo until the first cohort
+  signal, and gains an ANNUAL plan (two months free) in WEB-9; no raise
+  on zero users.
+- **§464.3 RULED — the research taste-gates:** the CT-0 sittings over
+  DWR1A, R-INST-1 and R-INST-2 (and the tranches to come) are DISCHARGED
+  by this grant as research INPUTS — the dossiers are accepted into the
+  DW corpus as written, with their own CONFIRMED/PLAUSIBLE labels and P1c
+  re-verification owed on every grammar-consumed figure; the owner's
+  taste returns at P6 (activation exhibit + veto window), which is where
+  taste is visible.
+- **§464.4 UNCHANGED:** the three pending `db push` migrations (195/196/197;
+  198/199 after their landings) — the chair prepares the train document
+  (DEPLOY.md's "read these preambles" section already names 197 DATA and
+  198 DESTRUCTIVE); the owner pushes. `/code-review ultra` at the §290
+  stop — the owner's keystroke (the chair cannot fire it). The tuning
+  signature. The cull offer. Legal.
+- **Queue effect:** TC-WEBSITE-2 (compile; Fable) joins the seat queue
+  ahead of R-INST-5/6; its cars build on Opus as seats free; they land
+  after WEB-2/WEB-3.

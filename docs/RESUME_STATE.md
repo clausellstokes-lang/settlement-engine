@@ -51,6 +51,11 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 01:10 CDT 08-23: §464 OWNER GRANT RE-AFFIRMED (all decisions + emergent
+# permissions). Docket RULED: R-5 lights in tuning; R-6 no; R-7 via ONE REGEN;
+# O-P1 de-advertise→WEB-8; O-P2 Surveyor $14.99 tier→WEB-9; O-P3 pin→WEB-8;
+# taste-gates discharged as inputs. By-nature carve-outs: push/db-push, legal,
+# tuning SIGNATURE. TC-WEBSITE-2 compile next seat.
 # ⭐⭐ 01:05 CDT 08-23: §463 — WEB-3 da9d9c40 + HK-A f2b2711b COMPLETE, pinned
 # (HK-2 frees the walker path at its landing). R-INST-3 + R-INST-4 dispatched.
 # Seats: MAPSTACK-landing · R-INST-CIRC · R-INST-3 · R-INST-4. Code shop
