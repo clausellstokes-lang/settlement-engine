@@ -817,8 +817,7 @@ describe.runIf(have)('107 referral + redeem codes — real SQL (pglite)', () => 
       expect(Object.keys(rows[0]).sort()).toEqual(
         ['bucket', 'intents_recorded', 'referrals_clawed_back', 'referrals_granted']);
       const serialized = JSON.stringify(rows);
-      // anchored: the two assertions above prove `rows` is a real, single, fully-keyed
-      // row, so an empty or reshaped result cannot make these three pass vacuously.
+      // anchored: the two assertions above prove `rows` is one real fully-keyed row, so an empty or reshaped result cannot make these three pass vacuously.
       expect(serialized).not.toContain(REFEREE);
       // anchored: same row, same reason.
       expect(serialized).not.toContain(ACCT[REFERRER]);

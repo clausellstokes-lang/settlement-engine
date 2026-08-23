@@ -61,19 +61,19 @@
   },
   {
     "path": "src/components/admin/AdminTrendsPanel.jsx",
-    "line": 253,
+    "line": 258,
     "category": "floatInterpolation",
     "snippet": "Math.round((applied / total) * 100)"
   },
   {
     "path": "src/components/admin/AdminTrendsPanel.jsx",
-    "line": 372,
+    "line": 383,
     "category": "floatInterpolation",
     "snippet": "{proposalSummary.acceptRate}"
   },
   {
     "path": "src/components/admin/AdminTrendsPanel.jsx",
-    "line": 372,
+    "line": 383,
     "category": "percentToken",
     "snippet": "{proposalSummary.acceptRate}"
   },

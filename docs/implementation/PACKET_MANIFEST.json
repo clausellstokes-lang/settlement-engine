@@ -20965,6 +20965,93 @@
      ]
     },
     {
+      "id": "WEB-3",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/website/WEB-3.md",
+      "verifiedBase": "acc466a6e6c15ea904b47c50b2b41732b516b4b1",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "src/lib/analyticsEvents.js" },
+        { "action": "MODIFY", "path": "src/hooks/useReferralIntent.js" },
+        { "action": "MODIFY", "path": "src/components/PricingPage.jsx" },
+        { "action": "MODIFY", "path": "src/components/PurchaseModal.jsx" },
+        { "action": "MODIFY", "path": "src/components/account/ReferralRedeemBlocks.jsx" },
+        { "action": "MODIFY", "path": "src/components/admin/AdminTrendsPanel.jsx" },
+        { "action": "MODIFY", "path": "supabase/functions/admin-actions/index.ts" },
+        { "action": "CREATE", "path": "supabase/migrations/199_referral_funnel_report.sql" },
+        { "action": "MODIFY", "path": "scripts/ops/migrationRehearsalCore.mjs" },
+        { "action": "DOC", "path": "docs/analytics-event-dictionary.md" },
+        { "action": "DOC", "path": "docs/METRICS_REGISTRY.md" },
+        { "action": "DOC", "path": "docs/DEPLOY.md" },
+        { "action": "DOC", "path": "docs/CURRENT_STATE.md" },
+        { "action": "DOC", "path": "ARCHITECTURE.md" },
+        { "action": "CREATE", "path": "tests/components/referralFunnelTelemetry.test.jsx" },
+        { "action": "TEST", "path": "tests/security/referralRedeem.pglite.test.js" },
+        { "action": "TEST", "path": "tests/ops/migrationRehearsal.test.js" },
+        { "action": "TEST", "path": "tests/lint/.prose-numerics-baseline.json" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/lib/analyticsEvents.js", "symbol": "REFERRAL_INTENT_RECORDED:       'referral_intent_recorded'" },
+        { "path": "src/lib/analyticsEvents.js", "symbol": "REDEEM_CODE_CHECKED:            'redeem_code_checked'" },
+        { "path": "src/hooks/useReferralIntent.js", "symbol": "export function useReferralIntent(surface)" },
+        { "path": "src/hooks/useReferralIntent.js", "symbol": "track(EVENTS.REFERRAL_INTENT_RECORDED, { surface, outcome })" },
+        { "path": "src/components/PricingPage.jsx", "symbol": "useReferralIntent('pricing')" },
+        { "path": "src/components/PurchaseModal.jsx", "symbol": "useReferralIntent('purchase_modal')" },
+        { "path": "src/components/account/ReferralRedeemBlocks.jsx", "symbol": "track(EVENTS.REDEEM_CODE_CHECKED, { outcome })" },
+        { "path": "supabase/migrations/199_referral_funnel_report.sql", "symbol": "create or replace function public.report_referral_funnel(" },
+        { "path": "supabase/migrations/199_referral_funnel_report.sql", "symbol": "grant execute on function public.report_referral_funnel(date, date) to service_role;" },
+        { "path": "supabase/functions/admin-actions/index.ts", "symbol": "case \"get_referral_funnel\":" },
+        { "path": "src/components/admin/AdminTrendsPanel.jsx", "symbol": "action: 'get_referral_funnel'" },
+        { "path": "scripts/ops/migrationRehearsalCore.mjs", "symbol": "id: 'referral-funnel-report'" },
+        { "path": "docs/METRICS_REGISTRY.md", "symbol": "## M13 — Referral funnel: intent, redemption check, and conversion" },
+        { "path": "tests/components/referralFunnelTelemetry.test.jsx", "symbol": "A8: the money path is untouched" },
+        { "path": "tests/security/referralRedeem.pglite.test.js", "symbol": "A6c: EXECUTE is service_role only" }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "The modal emits referral_intent_recorded with surface purchase_modal and the real outcome, strictly after the RPC settles, and the referrer account number appears in no payload. EVERY call site of useReferralIntent in the tree carries one of the two ruled surface values, pinned as a totality scan rather than a spot check, because the emit lives in the hook and an unlabelled mount would emit an undefined surface that nothing else would notice."
+        },
+        {
+          "id": "A2",
+          "case": "A failed intent emits outcome error and checkout completes anyway, proved with the RPC throwing AND the analytics provider throwing in the same run so that the emit is the most hostile thing in the purchase path. A server rejection reads rejected rather than error, so the two failure modes stay distinguishable in the funnel."
+        },
+        {
+          "id": "A3",
+          "case": "Redeem verdicts collapse to valid, invalid and error, with already_used folding into invalid because the ruled enum has three values and a fourth would re-widen what migration 107 deliberately collapsed. The payload KEY SET is exactly one key, outcome, and the typed code string appears in no emitted payload — the key-set form is what makes a later code field red even if no test reads its value."
+        },
+        {
+          "id": "A4",
+          "case": "Both events are dropped when essential consent is off and again under DNT, proved through the REAL track() gate rather than a mocked analytics module, because the gate these events inherit lives inside track() itself and mocking it would leave the arm asserting a mock."
+        },
+        {
+          "id": "A5",
+          "case": "EVENTS_REV is 13, both events resolve to the essential class through the derived EVENT_CLASS map, and the GENERATED dictionary carries both table rows. The dictionary pin is on the generated row rather than on prose, because a whole-document name search would pass on the prose that names the event either way."
+        },
+        {
+          "id": "A6",
+          "case": "report_referral_funnel counts intents, grants and clawbacks per day, each from its own timestamp so the intent-to-grant lag is visible; a window that excludes the fixtures returns no rows at all; the output column set carries no user id, account number or invoice id; EXECUTE is held by service_role alone with authenticated, anon and PUBLIC all revoked; and running the report leaves the referral tables unchanged."
+        },
+        {
+          "id": "A7",
+          "case": "AdminTrendsPanel renders the referral funnel card and its figures from the report's own row shape, fed through the admin-actions route, so the read layer is proved end to end on the client side rather than assumed from the SQL."
+        },
+        {
+          "id": "A8",
+          "case": "The money path is structurally untouched: supabase/functions/stripe-webhook carries no analytics import and no track() call, guarded against vacuity by first asserting the handler really is the one that owns grant_referral; and the set of migrations writing public.referrals, enumerated from the corpus rather than remembered, is exactly one file, 107_referral_redeem.sql, with the client library's only table call being a select."
+        }
+      ],
+      "checks": [
+        [ "npx", "vitest", "run", "tests/components/referralFunnelTelemetry.test.jsx", "tests/security/referralRedeem.pglite.test.js", "tests/lib/analyticsTaxonomy.test.js", "tests/lib/analytics.test.js", "tests/docs/analyticsDictionaryFreshness.test.js", "tests/edgeFunctions/analyticsEventsBundle.freshness.test.js", "tests/docs/metricsRegistry.test.js" ],
+        [ "npx", "vitest", "run", "tests/lint", "tests/build", "tests/docs", "tests/ops" ],
+        [ "npx", "eslint", "src/lib/analyticsEvents.js", "src/hooks/useReferralIntent.js", "src/components/account/ReferralRedeemBlocks.jsx", "src/components/admin/AdminTrendsPanel.jsx", "tests/components/referralFunnelTelemetry.test.jsx" ],
+        [ "npm", "run", "typecheck:ratchet" ],
+        [ "npm", "run", "typecheck:domain:strict" ],
+        [ "npm", "run", "check:observed-shape-readers" ],
+        [ "npm", "run", "validate:packets" ],
+        [ "npm", "run", "check:tail" ]
+      ]
+    },
+    {
       "id": "WEB-4",
       "status": "LANDED",
       "packetPath": "docs/implementation/packets/website/WEB-4.md",

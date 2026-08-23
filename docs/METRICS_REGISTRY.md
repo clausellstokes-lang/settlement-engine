@@ -192,6 +192,30 @@ philosophy (a claim you can't drift from) applied to the metrics layer.
 
 ---
 
+## M13 — Referral funnel: intent, redemption check, and conversion
+
+- **Question:** Of the purchasers who name a referrer or apply a redeem code, how many
+  get a record that actually lands, and how many of those intents become granted
+  referrals?
+- **Source events:** `referral_intent_recorded`, `redeem_code_checked`
+- **Denominator:** purchase sessions on which the referral field or the redeem input was
+  used at all — the client events are the only record that a reader tried, because a
+  rejected intent writes no row anywhere.
+- **Cell grid:** surface (pricing / purchase modal) × intent outcome × redeem outcome.
+- **Suppression floor:** 50 attempts per cell.
+- **Stage:** at-launch — the referral programme is live with migration 107 and the loop
+  was invisible until these two events existed.
+- **Min-n floor:** 50 attempts per cell.
+- **Method:** rate, joined against a read-side aggregate rather than a third event. The
+  CONVERSION leg deliberately has no analytics event: `public.referrals` already holds
+  the money-grade record of intent → grant → clawback, and `report_referral_funnel`
+  (migration 199) reads it per day for the admin surface. Both client events are
+  structure-only — the referrer's account number and the redeem code itself never enter
+  a payload, which is why the outcome enums are collapsed the way 107 collapses its own
+  verdict.
+
+---
+
 ## Exempt events
 
 Events that exist in `EVENTS` but do not yet power a named metric above. They are

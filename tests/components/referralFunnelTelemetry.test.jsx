@@ -149,8 +149,7 @@ describe('WEB-3 — the referral loop emit wiring', () => {
     // so an intent that never landed can never be reported as one.
     expect(mocks.calls).toEqual(['intent', 'checkout']);
     // …and the referrer's account number never leaves the client.
-    // anchored: the assertion above proves exactly one emit with a two-key payload,
-    // so this cannot pass because nothing was emitted.
+    // anchored: the equality above proves exactly one emit with a two-key payload exists, so this cannot pass on an empty collection.
     expect(JSON.stringify(emitted)).not.toContain('SF-QQQQQQQ');
   });
 
@@ -212,8 +211,7 @@ describe('WEB-3 — the referral loop emit wiring', () => {
     // contract. A code field added later reds here even if no test reads it.
     expect(Object.keys(first.props)).toEqual(['outcome']);
     expect(first.props.outcome).toBe('valid');
-    // anchored: the key-set assertion above proves a real, non-empty payload was
-    // observed, so the code's absence is a fact about it rather than about nothing.
+    // anchored: the key-set assertion above proves a real non-empty payload was observed, so the code's absence is a fact about it, not about nothing.
     expect(JSON.stringify(emitted)).not.toContain(CODE);
 
     cleanup();
@@ -285,8 +283,7 @@ describe('WEB-3 — the referral loop emit wiring', () => {
     expect(webhook).toContain('grant_referral');
     // anchored: the grant_referral assertion above proves this is the real handler.
     expect(webhook).not.toMatch(/from ['"][^'"]*analytics[^'"]*['"]/);
-    // anchored: same file, same reason — the handler is non-empty and is the one
-    // that owns the referral grant.
+    // anchored: same file, same grant_referral proof — the handler is non-empty and is the one that owns the referral grant.
     expect(webhook).not.toMatch(/\btrack\s*\(/);
 
     // The referral tables' writers: exactly one migration writes them, and 199 is
