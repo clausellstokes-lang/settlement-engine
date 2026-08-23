@@ -22564,6 +22564,244 @@
      ]
     ],
     "retiredSymbols": []
-   }
+   },
+    {
+      "id": "MF-UC4",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/town-cartography/MF-UC4.md",
+      "verifiedBase": "0f3897a56ba57201ca499651f963eb0d11b65761",
+      "changeManifest": [
+        {
+          "_note": "THE UNDERCITY EPOCH LAYER (ODQ 311.3/311.4/311.8.2(d)/311.8.3/311.8.4) as a pure domain-root deriver: deriveUndercity(settlement, { strata?, highWater? }) -> { present, colonizationShare, drivers { economy, criminalShare, syndicates[], highWater }, components[], fossils[], highWaterTier, sourceKind }. THE CRIMINAL SHARE IS CONSUMED, NEVER RE-WEIGHTED: drivers.criminalShare IS readCorruptionClimate(s).crime, corruption.js 539-542, so the undercity and the corruption layer can never disagree about how criminal a town is (441.3; the compile parallel weighting struck as J-10). The SEPARATE input is A.CRIMINAL faction standing off the settlement own power roster, the quantity the pulse actually moves. Colonization order is a typed PROXIMITY grammar over UC-0 closed seed vocabulary with a seed-keyed tie-break; the ceiling is keyed to the HIGH-WATER tier because built extent derives from the historical maximum. THE UNIVERSAL FRONT (175.1): a REAL institution by canonical key where the seed carries one, ANONYMOUS FABRIC otherwise, never a minted clickable truth. Flood and seal SEVER one working each and keep the row (use recedes, dug space never does). Fossils derive from RECESSION against the persisted mark and are structurally EMPTY on the dark path. calamityHistory is reached ONLY through buildCalamityLedger (443). 232 effective lines against the 250-per-leaf cap. This file also carries the gate, the reader and the monotone fold for the ONE persisted signal (C-2, see the packet section 2).",
+          "action": "CREATE",
+          "path": "src/domain/undercity/colonization.js"
+        },
+        {
+          "_note": "THE ACCEPTANCE - EIGHT arms, ONE literal describe, straight-line test calls with string-literal titles and no loop registration, so the census credits the file rather than parking it. The LIT arms drive the REAL ensureFactionStates over THREE advances (mint, peak, fall) with undercityHighWaterEnabled: true written LITERALLY, which is also the mechanism-lit coverage walker own credit. Every negative is anchored, every arm pins intent over a shared namespace. The first mutant drive convicted only five of eight arms on their own mutant; A3, A4 and A7 were REWRITTEN rather than the mutants replanted, and the definitive drive convicts 8/8 with clean controls green at both ends.",
+          "action": "CREATE",
+          "path": "tests/domain/undercityColonization.test.js"
+        },
+        {
+          "_note": "THE FLAG MANIFEST ROW, surface 1 of the four-surface bill (441.4, CR-WR10-C item 4): one member, undercityHighWaterEnabled, at its ALPHABETICAL position (undercity before underways), landing in the SAME commit as its first real gate read and its authored certification row. 310 -> 311 effective lines, inside the 15-line shared-file cap. This file is an input of two edge bundles, so npm run build:edge-shared rides this commit (the DOC rows below).",
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/simulationRules.js"
+        },
+        {
+          "_note": "THE AUTHORED CERTIFICATION ROW, surface 2. Written in the GR-5A monotone-memory row shape: three empty aliveness channels each carrying its own written reason (no candidate literal, no behavioural mover family this lane owns, and no per-field state channel - the containers are the faction layer own), a long other narrative naming the one gate, the one write site and the one reader, expectedTempo per_tick (the GATE cadence, not the value), three invariants and soakEvidence unobserved. 723 -> 753 effective, under the 800 layer ceiling. EXEMPT from the 15-line shared-file delta as AUTHORED DATA in a module that grows by exactly one row per flag (441.4 J4, vetoable; reversal in the packet section 8).",
+          "action": "MODIFY",
+          "path": "src/domain/certification/subsystemRowsVirtual.js"
+        },
+        {
+          "_note": "THE PULSE SEAM, and the choice is a MEASUREMENT (J-TEUC4-1). pulseKernel.js measures EXACTLY its frozen 1581-line size-baseline ceiling under a shrink-only law, so one added line reds twice and the cure is forbidden; institutionLifecycle.js has two lines of headroom; urbanFabricKernel.js is itself gated behind another flag so R-5 would light nothing. factionCompetition.js has 41 lines of headroom, sits in no edge bundle and outside the first-paint static closure, and OWNS both seams this signal needs. TWO HUNKS: the monotone fold, one gated line inside ensureFactionStates immediately before the existing mint guard (dark, the control flow is byte-for-byte what it was); and the projection of the mark onto the settlement roster beside the four projections already there, read through the CALL receiver powerHighWaterOf(faction) rather than a bare member chain so the reader-with-no-writer walker mints no row. 759 -> 767 effective.",
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/factionCompetition.js"
+        },
+        {
+          "_note": "SURFACE 3 of the flag bill, and the THREE module-scope edits this file own header prices at 141-151 (OWNER_DECISION_QUEUE 49 ruling 3, standing): the const, the VIRTUAL_RULES member at its authoring-order position, and the LANE_LEAVES entry. The lane leaf is the PURE leaf alone (undercity/colonization.js); factionCompetition.js is in the row wider module list and deliberately NOT a lane leaf, because it mints seven candidate literals of its own and tracing this lane zero-candidate claim through it would measure the whole faction layer vocabulary. ZERO new test titles, so no census figure moves for this edit.",
+          "action": "TEST",
+          "path": "tests/domain/subsystemRowsVirtual.test.js"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/packets/town-cartography/MF-UC4.md"
+        },
+        {
+          "_note": "GENERATED ARTIFACT (ODQ 475; the WEB-3 / MF-UC0 form - a DOC row, the validator has no GENERATED kind): npm run build:edge-shared ran in the member commit because src/domain/worldPulse/simulationRules.js is an input of the aiCharter and aiOutputSchema bundle rosters. SEVEN files moved: these two bundle .js files and ALL FIVE metas (three by generatedAt alone; the set is committed together). The bundle diff was proved to be EXACTLY this member rows plus the Source hash header - added lines outside the member hunk counted at 0.",
+          "action": "DOC",
+          "path": "supabase/functions/_shared/aiCharterBundle.js"
+        },
+        {
+          "action": "DOC",
+          "path": "supabase/functions/_shared/aiCharterBundle.meta.json"
+        },
+        {
+          "action": "DOC",
+          "path": "supabase/functions/_shared/aiOutputSchemaBundle.js"
+        },
+        {
+          "action": "DOC",
+          "path": "supabase/functions/_shared/aiOutputSchemaBundle.meta.json"
+        },
+        {
+          "action": "DOC",
+          "path": "supabase/functions/_shared/aiGroundingBundle.meta.json"
+        },
+        {
+          "action": "DOC",
+          "path": "supabase/functions/_shared/analyticsEventsBundle.meta.json"
+        },
+        {
+          "action": "DOC",
+          "path": "supabase/functions/_shared/intentAtlasBundle.meta.json"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE MEMBER OWN DERIVER. The second level of the 311.4 two-level reading; UC-0 owns the first and this file never re-derives it.",
+          "path": "src/domain/undercity/colonization.js",
+          "symbol": "export function deriveUndercity"
+        },
+        {
+          "_note": "THE ONE STORED CRIMINAL SHARE (441.3). Imported and consumed; the read itself is at 539-542 and yields both drivers.criminalShare (crime) and drivers.economy (prosperity) from ONE call. A parallel weighting would mint a second truth for the one driver the doctrine names.",
+          "path": "src/domain/corruption.js",
+          "symbol": "export function readCorruptionClimate"
+        },
+        {
+          "_note": "THE WALL FACT, the accessor MF-UC0 packet NAMED for this member (441.5(d)). The same fact the map draws, so the engine and the drawing can never disagree about whether a town is walled. Its whole transitive closure is 28 files with zero townMap entries and is already inside the first-paint closure, so importing it costs this leaf no new edge.",
+          "path": "src/domain/causalState.js",
+          "symbol": "export function defenseProfileHasWalls"
+        },
+        {
+          "_note": "THE CONSTITUTIONAL HIGH-WATER READER (T2R). Read ONCE; its tier keys the colonization CEILING, because built extent derives from the historical maximum and 311.3 says dug is forever.",
+          "path": "src/domain/highWater.js",
+          "symbol": "export function deriveHighWater"
+        },
+        {
+          "_note": "THE BANKED PROJECTION 443 REQUIRES. calamityHistory is a PULSE-written key and a new raw reader would mint an observed-shape row at ceiling 0; the flood/seal consequence and the fossil date both come through here and this leaf never names the key.",
+          "path": "src/domain/display/calamityLedger.js",
+          "symbol": "export function buildCalamityLedger"
+        },
+        {
+          "_note": "THE SEEDS. The second level colonizes the spaces the first level licensed; this member consumes UC-0 output and never re-derives a seed.",
+          "path": "src/domain/undercity/strataExistence.js",
+          "symbol": "export function deriveStrataExistence"
+        },
+        {
+          "_note": "THE CANONICAL ANCHOR KEY (441.5(k)) - the key every component row and every UNIVERSAL FRONT anchors by, and the key the fabric will resolve to a building at D5.",
+          "path": "src/domain/undercity/strataExistence.js",
+          "symbol": "export function institutionAnchorKey"
+        },
+        {
+          "_note": "THE CLOSED VOCABULARIES, minted by UC-0 as the train first car (J-R2-2) so no later component row hardcodes a string. This member declares DEMAND_DRIVEN and validates every join kind through isJointKind.",
+          "path": "src/domain/undercity/jointVocabulary.js",
+          "symbol": "export const TEMPERAMENTS"
+        },
+        {
+          "_note": "THE CANONICAL FACTION CLASSIFIER. The syndicate reader selects A.CRIMINAL through this detector, category first and name regex second, never a local name list.",
+          "path": "src/domain/factionArchetypes.js",
+          "symbol": "export function factionArchetype"
+        },
+        {
+          "_note": "THE WRITE SEAM. Runs from pulseKernel every advance over every settlement roster; the monotone fold is one gated line inside it, placed before the existing mint guard so a dark advance is unchanged.",
+          "path": "src/domain/worldPulse/factionCompetition.js",
+          "symbol": "export function ensureFactionStates"
+        },
+        {
+          "_note": "THE PROJECTION SEAM. Runs per settlement per advance; carries the recorded mark onto the settlement own roster so the deriver reads it off the settlement it is handed and never off worldState.",
+          "path": "src/domain/worldPulse/factionCompetition.js",
+          "symbol": "export function projectFactionStatesOntoSettlement"
+        },
+        {
+          "_note": "SURFACE 1 OF THE FLAG BILL - the manifest membership itself. Its absence would take the key out of the certification census, which is the blindness CR-WR10-C exists to end.",
+          "path": "src/domain/worldPulse/simulationRules.js",
+          "symbol": "'undercityHighWaterEnabled',"
+        },
+        {
+          "_note": "SURFACE 2 OF THE FLAG BILL - the authored certification row. engineGatedRuleKeys manifestWithoutRow arm demands one for every manifest key, and a pending entry is not a lawful substitute for a virtual key.",
+          "path": "src/domain/certification/subsystemRowsVirtual.js",
+          "symbol": "rule: 'undercityHighWaterEnabled',"
+        },
+        {
+          "_note": "SURFACE 4 OF THE FLAG BILL - the acceptance own suite title, and the census unit this member declares.",
+          "path": "tests/domain/undercityColonization.test.js",
+          "symbol": "describe('MF-UC4 — the undercity epoch layer"
+        },
+        {
+          "_note": "THE ANCHOR HELPER the acceptance routes its transition negatives through, called BY NAME on the assertion line as the walker requires - an alias or a wrapper is not recognised.",
+          "path": "tests/helpers/anchoredNegatives.js",
+          "symbol": "export function expectPresentThenAbsent"
+        },
+        {
+          "_note": "THE CORPUS SOURCE. Every acceptance arm and the whole weight sweep run over REAL settlements this pipeline generates, never a hand-built fixture, so the roster and the profile the deriver reads are the ones the generator actually writes.",
+          "path": "src/generators/generateSettlementPipeline.js",
+          "symbol": "export function generateSettlementPipeline"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "THE TWO-LEVEL READING (311.4). UC-0 SHEET stands on BOTH fixtures, so the undercity absence is an absence of the SECOND level and not of a settlement with nothing under it; then a present-then-absent transition over the component kinds proves the criminal drivers are what grew it. A settlement with the criminal economy zeroed derives an empty component list beside a twin that derives a populated one."
+        },
+        {
+          "id": "A2",
+          "case": "MONOTONE IN SYNDICATE POWER, AND ONE TRUTH FOR THE SHARE (441.3). The standing is swept 0..100 through the real deriver and the colonization share never falls; the colonized COUNT is asserted to really move across the sweep, so monotonicity is measured on a curve rather than on a flat line that would satisfy the ordering trivially. Then drivers.criminalShare is pinned EQUAL to readCorruptionClimate(...).crime on five profiles - the criminalEffective branch high and low, the blackMarketCapture branch high and low, and the unset default."
+        },
+        {
+          "id": "A3",
+          "case": "RECESSION LEAVES FOSSILS ON THE LIT PATH; THE DARK PATH SAYS SO HONESTLY (311.3, 441.4). THREE advances through the REAL ensureFactionStates - mint, peak, fall - each advance own output world fed into the next, because the fold records history SINCE LIGHTING and a two-advance drive would record only the fall. The mark projects onto the settlement, the deriver reads it as drivers.highWater, and the fossils carry the recession cause. The IDENTICAL fixture with no flag yields drivers.highWater null and an EMPTY fossil list - the honest absence, pinned beside the lit reading so it cannot go vacuous."
+        },
+        {
+          "id": "A4",
+          "case": "INERTIA - new digging never re-rolls an earlier epoch monotone components (311.3). UC-2 is not built at this base, so the arm pins against its CONTRACT SHAPE as a frozen input (charter 7 F3: kind, license, anchor by canonical key, extent, abandoned, temperament MONOTONE, surfaceJoins). The rows are byte-identical across a colonization that demonstrably GREW, with BOTH fixtures asserted PRESENT so the comparison measures growth and not arrival; and the two cars are DISJOINT BY TEMPERAMENT, every row this car produces being DEMAND_DRIVEN, which makes never re-rolls structural rather than hopeful."
+        },
+        {
+          "id": "A5",
+          "case": "FLOOD AND SEAL SEVER WITHOUT DELETING (311.8.3). Waterside ground floods the deepest working and dry ground does not, as a present-then-absent transition over the STATES, so flooded measures the water table rather than a shapeless default. The drowned row keeps its licence, its front and its anchor and loses only its joins, while the open rows still carry theirs - which is what makes an empty join list a severance. A DATED calamity, reached through buildCalamityLedger and never the raw key, seals a working on the dry fixture with the row count unchanged."
+        },
+        {
+          "id": "A6",
+          "case": "DARK-FLAG BYTE IDENTITY (441.4). Flag ABSENT and flag FALSE produce byte-identical factionStates across two advances, and the projection materializes nothing onto a roster entry that never carried the field. ANTI-VACUITY: the identical harness LIT does write the key, so the absence measures the gate and not a fold that never runs. Then the fold own laws - a lower observation never lowers the mark, a higher one raises it, and an UNMARKED record answers null rather than zero, because zero would assert the syndicate was always powerless."
+        },
+        {
+          "id": "A7",
+          "case": "THE UNIVERSAL FRONT (175.1, 311.8.4). On a real generated metropolis at least one piece is fronted by a REAL institution, asserted FIRST so the law honest half cannot stand in for its whole; every INSTITUTION front key is one the settlement own strata seeds carry, so nothing clickable is minted; every ANONYMOUS_FABRIC front names nothing; every row declares DEMAND_DRIVEN and every join kind is in the closed vocabulary. The anonymous branch is driven on a supplied anchorless seed because the generated corpus produces only anchored ones - measured at 0 of 420, not assumed."
+        },
+        {
+          "id": "A8",
+          "case": "G-43, the directional arm registered before the run (311.8.5, 441.5(c)): REMOVE THE WALL AND THE SMUGGLERS TUNNEL LOSES ITS LICENCE. One stored fact removed, one row gone as a present-then-absent transition, and the colonization itself UNMOVED with the settlement still present - a licence loss rather than a collapsed derivation. The other half of the conjunction is driven too: a walled town below the criminal-share floor digs no bypass either, with the walled twin pinned as the liveness anchor."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/undercityColonization.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/subsystemRowsVirtual.test.js",
+          "tests/lint/engineGatedRuleKeys.walker.test.js",
+          "tests/property/mechanismLitCoverage.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/property/generatorGoldenMaster.test.js",
+          "tests/lint/observedShapeReaders.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/ruinFilterRoster.walker.test.js",
+          "tests/lint/domainAnyCastBaseline.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint",
+          "tests/build",
+          "tests/ops",
+          "tests/edgeFunctions"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "npm",
+          "run",
+          "validate:packets"
+        ]
+      ],
+      "retiredSymbols": []
+    }
   ]
 }
