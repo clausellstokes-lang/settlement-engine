@@ -67,6 +67,18 @@
  *  - ONE TRUTH WITH THE TRAIN: the rung names come from UC-0's `SANITATION_LADDER`, the roster
  *    from UC-0's `sanitationRosterOf`, the anchor key from UC-0's `institutionAnchorKey`, the
  *    joint kinds from UC-0's `jointVocabulary.js`. Nothing here restates any of them.
+ *  - ⚠ THE TWO ROSTER READS TAKE DELIBERATELY DIFFERENT RUIN DISPOSITIONS, stated here rather
+ *    than left to the walker's file-granular compliance to hide:
+ *      • THE SANITATION READ IS RUIN-BLIND, ON PURPOSE. It goes through UC-0's
+ *        `sanitationRosterOf` over the RAW roster — the same read the existence gate makes,
+ *        which the ruin-filter walker exempts as "§311.1 sheet gate over the raw roster; §311.3
+ *        dug is forever (a ruined institution's seed is a fossil, not an absence)". §441.1's
+ *        one-truth rule REQUIRES it: if this car filtered and the gate did not, the two would
+ *        disagree about whether the sewer institution exists, which is the second truth the
+ *        rule exists to forbid. A flattened sewage works means NEGLECTED drains, not un-dug ones.
+ *      • THE CIVIC-CAPACITY COUNT IS RUIN-FILTERED, through `liveInstitutions`. That read is a
+ *        crediting aggregation in the walker's own sense: a burnt-out moot hall is not civic
+ *        capacity THIS year, and counting it would credit a flattened building with function.
  *  - FINITE SEMANTICS: every vocabulary is closed and frozen. The ONE tuning surface is
  *    `SEWER_DERIVATION_TUNING`; the grammar tables beside it name which buckets are REACHABLE,
  *    never a weight (the UC-3 `EXTENTS_BY_GROUND` precedent).
@@ -83,6 +95,7 @@ import { compareCodepoint } from '../deterministicSort.js';
 import { buildCalamityLedger } from '../display/calamityLedger.js';
 import { deriveHighWater } from '../highWater.js';
 import { resolveSettlementTerrain } from '../resolveTerrain.js';
+import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { facetOf } from '../spatial/cohesionWeave.js';
 import { stablePart } from '../worldPulse/stablePart.js';
 import { isJointKind } from './jointVocabulary.js';
@@ -370,8 +383,7 @@ export function sewerCauses(s, highWater) {
   const T = SEWER_DERIVATION_TUNING;
   const terrain = resolveSettlementTerrain(s);
   const config = s.config && typeof s.config === 'object' ? /** @type {Record<string, unknown>} */ (s.config) : null;
-  const rows = Array.isArray(s.institutions) ? s.institutions : [];
-  const civic = rows.filter((i) => facetOf(/** @type {{ name?: unknown }} */ (i), 'institutionNature') === 'civic').length;
+  const civic = liveInstitutions(s).filter((i) => facetOf(/** @type {{ name?: unknown }} */ (i), 'institutionNature') === 'civic').length;
   const fall = FALL_LINE_TERRAINS.includes(String(terrain)) ? 1 : 0;
   const outfall = hasOutfall(config, terrain) ? 1 : 0;
   const span = T.highWaterSaturation - T.cesspitFailurePopulation;

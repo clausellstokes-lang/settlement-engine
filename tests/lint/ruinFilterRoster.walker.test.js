@@ -352,7 +352,18 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // RE-MEASURED 2026-08-23 BY MF-UC0: 89 → 90. ONE new reader, src/domain/undercity/
     // strataExistence.js, DISPOSITIONED above as an existence-gate exemption (§311.3); read
     // from this arm's own failure message ("expected 90 to be 89"), never computed.
-    expect(readers.length).toBe(90);
+    // RE-MEASURED 2026-08-23 BY MF-UC1: 90 → 91. ONE new reader, src/domain/undercity/
+    // sewerDerivation.js, and it is COMPLIANT rather than exempt — it imports the accessor and
+    // routes its CIVIC-CAPACITY count through `liveInstitutions` (a burnt-out hall is not civic
+    // capacity this year, the crediting class this walker exists for). Its OTHER roster read is
+    // deliberately ruin-BLIND and is not a new disposition: it delegates to MF-UC0's own
+    // `sanitationRosterOf`, the read exempted two screens above, because §441.1's one-truth rule
+    // forbids the ladder and the existence gate disagreeing about whether the sewer institution
+    // exists, and §311.3's "dug is forever" makes a flattened works NEGLECTED drains, not un-dug
+    // ones. Both dispositions are stated in the leaf's own header, so the file-granular
+    // compliance this walker documents as an accepted gap is not being used to hide one.
+    // Read from this arm's own failure message ("expected 91 to be 90"), never computed.
+    expect(readers.length).toBe(91);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {

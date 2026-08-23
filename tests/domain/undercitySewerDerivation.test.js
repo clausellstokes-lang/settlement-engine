@@ -162,8 +162,8 @@ describe('MF-UC1 — the undercity sanitation ladder and its wells', () => {
     const nearBand = withoutSanitation(world('town', 'plains', 'uc1-fd-b'));
     expect(deriveSewerLadder(nearBand).rung).toBe('cesspits');
     expect(deriveSewerLadder({ ...nearBand, config: { ...nearBand.config, terrainType: 'hills', tradeRouteAccess: 'river' } }).rung).toBe('culvert');
-    // anchored: both gradient readings are pinned to exact numbers, and both rungs to exact names,
-    // in the lines above this scan.
+    // Both gradient readings are pinned to exact numbers, and both rungs to exact names, above.
+    // anchored: the live readings above prove this vocabulary scan runs against real behaviour.
     expect(WATER_ROUTE_VALUES).not.toContain('road');
   });
 
@@ -185,9 +185,9 @@ describe('MF-UC1 — the undercity sanitation ladder and its wells', () => {
     const untyped = { ...town, calamityHistory: stamps(SEWER_DERIVATION_TUNING.calamitySaturation, undefined) };
     expect(deriveSewerLadder(fire)).toEqual(after);
     expect(deriveSewerLadder(untyped)).toEqual(after);
-    // anchored: the three ladders are proven deep-equal on the two lines above, so this source scan
-    // is asserting about a file whose behaviour has already been shown kind-blind (§443 too: the
-    // pulse-written key is reached only through the banked ledger projection).
+    // The three ladders are proven deep-equal on the two lines above, so the behaviour is already
+    // shown kind-blind; §443 too — the pulse key is reached only through the banked projection.
+    // anchored: the deep-equalities above make this source scan a claim about a live file.
     expect(leafCode).not.toMatch(/flavorSuggestion|disasterFlavorLabel|calamityHistory|\bplague\b/);
   });
 
@@ -201,9 +201,9 @@ describe('MF-UC1 — the undercity sanitation ladder and its wells', () => {
     const military = free.map((s) => ({ ...s, founding: { kind: 'military', reason: 'a garrison thrown up at the ford' } }));
     expect(planned.map((s) => deriveSewerLadder(s).rung)).toEqual(free.map((s) => deriveSewerLadder(s).rung));
     expect(military.map((s) => deriveSewerLadder(s))).toEqual(free.map((s) => deriveSewerLadder(s)));
-    // anchored: the two ladder sets above are proven deep-equal to the unperturbed ones, so the
-    // leaf demonstrably reads no founding field; the scan pins that it also NAMES none — the prose
-    // `founding.reason` regex this charter refuses by name.
+    // The two ladder sets above are proven deep-equal to the unperturbed ones, so the leaf
+    // demonstrably reads no founding field; this scan pins that it also NAMES none — the prose
+    // anchored: `founding.reason` regex this charter refuses by name, over a proven-live file.
     expect(leafCode).not.toMatch(/founding\.|foundedBy|arrivalDetail|\breason\b/);
 
     // Then the typed slot itself: named, weightless, and the only weightless one.
@@ -230,6 +230,20 @@ describe('MF-UC1 — the undercity sanitation ladder and its wells', () => {
     const raiseDeltas = raise.map(([, lo, hi]) => free.map((s) => rungIndex(hi(s)) - rungIndex(lo(s))));
     expect(raiseDeltas.map((ds) => ds.filter((d) => d < 0).length)).toEqual([0, 0, 0, 0]);
     expect(raiseDeltas.map((ds) => ds.filter((d) => d > 0).length > 0)).toEqual([true, true, true, true]);
+    // ⚠ THE TWO ROSTER READS TAKE DIFFERENT RUIN DISPOSITIONS, and both are pinned rather than
+    // left to the walker's file-granular compliance. A burnt-out hall is NOT civic capacity this
+    // year (the crediting class, ruin-FILTERED); a flattened sewage works still means the drains
+    // were dug (§311.3 "dug is forever" — the ruin-BLIND read UC-0's gate is exempted for, and
+    // §441.1's one-truth rule forbids the two cars disagreeing about the institution's existence).
+    const halls = { ...withoutSanitation(world('town', 'plains', 'uc1-ruin')), institutions: [{ name: 'Town hall' }, { name: 'High court' }, { name: 'Grand assembly' }, { name: 'Elders council' }] };
+    const ruinedHalls = { ...halls, institutions: halls.institutions.map((i) => ({ ...i, status: 'ruined' })) };
+    const civicOf = (x) => sewerCauses(x, { population: 0 }).find((c) => c.cause === 'CIVIC_CAPACITY').value;
+    expect(civicOf(halls)).toBe(1);
+    expect(civicOf(ruinedHalls)).toBe(0);
+    const rosterCity = CORPUS.find((s) => sanitationRosterOf(s.institutions).length > 0);
+    const ruinedWorks = { ...rosterCity, institutions: rosterCity.institutions.map((i) => (sanitationRosterOf([i]).length ? { ...i, status: 'ruined' } : i)) };
+    expect(deriveSewerLadder(ruinedWorks).rungSource).toBe('ROSTER_FULL_WEB');
+
     // The LOWERS cause moves the other way: applying the impediment never raises, and lowers somewhere.
     const impede = (s) => ({ ...s, config: { ...s.config, terrainType: 'plains', tradeRouteAccess: 'road' } });
     const clear = (s) => ({ ...s, config: { ...s.config, terrainType: 'hills', tradeRouteAccess: 'river' } });
@@ -258,8 +272,8 @@ describe('MF-UC1 — the undercity sanitation ladder and its wells', () => {
     // Every drained quarter carries its own caused portal, and only those (§311.2).
     expect(quarterNet.surfaceJoins.map((j) => j.anchor).sort()).toEqual(drained);
     expect([...new Set(quarterNet.surfaceJoins.map((j) => j.kind))]).toEqual(['grate']);
-    // anchored: `dry` is pinned to the six organic quarters two lines above, so this scan is live —
-    // the faubourg the owner named stays uncovered while the planned quarters drain.
+    // The faubourg the owner named stays uncovered while the planned quarters drain.
+    // anchored: `dry` is pinned to the six organic quarters above, so this scan is live.
     expect(drained).not.toContain('residential');
   });
 
@@ -281,8 +295,8 @@ describe('MF-UC1 — the undercity sanitation ladder and its wells', () => {
     const reidentified = [...Array(8).keys()].map((n) => deriveSewerLadder({ ...s, id: `s_uc1_${n}` }).rung);
     expect(new Set(reidentified).size).toBeGreaterThan(0);
     expect(reidentified.every((r) => SANITATION_LADDER.indexOf(r) <= TIER_LADDER_BOUNDS.town.ceiling)).toBe(true);
-    // anchored: the eight re-identified rungs are enumerated and ceiling-checked on the two lines
-    // above, so the scan runs over a real, non-empty set.
+    // The eight re-identified rungs are enumerated and ceiling-checked on the two lines above.
+    // anchored: that enumeration proves this scan runs over a real, non-empty set.
     expect(reidentified).not.toContain('full_web');
   });
 
@@ -374,8 +388,8 @@ describe('MF-UC1 — the undercity sanitation ladder and its wells', () => {
     expect([...new Set(rows.flatMap((w) => w.surfaceJoins.map((j) => `${j.kind}|${j.anchor}`)))]).toEqual(['stair|well-house']);
     expect(rows.every((w) => DISTRICT_COVERAGE_KEYS.includes(w.anchor))).toBe(true);
     expect([...new Set(rows.map((w) => w.sourceKind))]).toEqual([SEWER_SOURCE_KIND]);
-    // anchored: the joins are pinned to the single 'stair|well-house' spelling three lines above,
-    // so this scan asserts about a set already proven non-empty and uniform.
+    // The joins are pinned to the single 'stair|well-house' spelling three lines above.
+    // anchored: that pin proves this set is already non-empty and uniform.
     expect(rows.map((w) => w.kind)).not.toContain('sewer');
   });
 });
