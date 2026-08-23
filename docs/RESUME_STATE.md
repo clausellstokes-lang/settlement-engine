@@ -51,6 +51,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐ 06:05 CDT 08-23: §471 — WEBSITE-2 charter RULED after the skeptic (1 STOP:
+# shared-path mint → de-duplicate into WEB-8; 6 must-fixes incl. App.jsx 650
+# exact, WEB-11 = W-D, rule-A predicate, the F5 present-by-default row). R2
+# applying in seat 2. Seats: PRODUCERS-landing · WEBSITE-2-R2.
 # ⭐ 05:55 CDT 08-23: §470 — WEBSITE-2 charter collected (W-C: WEB-8/9a/9b/10 +
 # WEB-11; O-P1 premise false for 4/6 rows — gate is viewerCanAuthor; Surveyor
 # server path already built; allowance 25 credits; THE ALLOWANCE TRAP). Skeptic

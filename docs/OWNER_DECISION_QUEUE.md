@@ -19175,3 +19175,69 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   the three lenses in one brief)**. Seats: PRODUCERS landing (curing) ·
   the skeptic. The charter is RULED after the pass; its cars build on
   Opus as the second seat frees, landing after HK-A.
+
+## §471 — THE WEBSITE-2 CHARTER RULED AFTER THE SKEPTIC PASS (ONE STOP, SIX MUST-FIXES, TWO NOTES; THE LOAD-BEARING FINDINGS CONFIRMED); TC-WEBSITE-2-R2 DISPATCHED TO APPLY IT (2026-08-23 06:05 CDT)
+
+- **Confirmed by the skeptic (executed):** zero commits on any charter path
+  between b10ed1a1 and 421c7345 (39 paths checked); the O-P1 correction is
+  EARNED (`viewerCanAuthor` at viewerAuthority.js:74-78, fail-closed, the
+  four consumers and four pins real); `interiors` and `v2-redraw` are
+  UNSHIPPED (InteriorView imported by nothing but comments and an artwork
+  registry; `withLayoutLawVersion` has no caller); the pdfExport flip is
+  inert to every pin; the Surveyor SERVER path is complete and Deno-pinned
+  (grant/revoke/renewal; 139:85 grants `has_surveyor_entitlement`); the
+  ALLOWANCE TRAP is real as read; the client-gap inventory is exact line
+  for line; the allowance arithmetic REPRODUCES (25 credits → 9.08× /
+  4.36×; Cartographer 30@$5.99 → 2.93× / 1.41×; annual 300 → 3.07× /
+  1.47×; PRICING_MARGIN_SHEET.md absent); the PACKET_STANDARD citations
+  verbatim; the census-mechanics premises hold.
+- **§471.1 STOP RULED (F1 — the shared-path topology):** the validator
+  reserves change paths at EVERY non-terminal status (`reservesChangePaths
+  = !TERMINAL.has(status)`, implementation-packets.mjs:543/:561-568), so
+  §9's "split promotion" (a sibling packet existing at DRAFT on a path a
+  non-terminal packet names) is unmintable. RULED: **DE-DUPLICATE the
+  shared paths** — WEB-8 ALONE owns `src/config/pricing.js`,
+  `tests/config/pricing.test.js` and `.env.example`, and lands the
+  siblings' registration-only stubs behind dials (`SURVEYOR_PLAN`,
+  `ANNUAL_FACTOR` / `CARTOGRAPHER_ANNUAL` at dial 0, `ACTIVE_CHECKOUT_SKUS`
+  incl. `premium_annual` behind the dial, with the parity arm — F8 folded
+  in); WEB-9a/9b/10 touch none of those paths. Where a path cannot be
+  de-duplicated, that car's packet is minted only after its predecessor
+  is LANDED (serial mint), stated in §9 as the validator enforces it.
+- **§471.2 MUST-FIXES RULED:** (F2) `src/App.jsx` sits at an EXACT
+  650-line ceiling pinned in BOTH directions — WEB-9a's toast extraction is
+  MANDATORY with a net-zero delta, else `scripts/.size-baseline.json`
+  joins the manifest as a ratchet-DOWN with the measured number; same for
+  WEB-11. (F3) §0's "the annual CTA lights" is STRUCK — WEB-10 ships the
+  annual SKU server-side, UNPURCHASABLE until its client half; RULED:
+  WEB-11 is a ONE-CAR train W-D dispatched the moment WEB-10 lands (the
+  un-stamped 4-cap forbids a fifth W-C car); §0, C6 and C7 say plainly
+  that §464.2's annual clause is delivered by W-C + W-D together. (F4)
+  the walker's rule A predicate is "the row CLAIMS a paywall" —
+  `row.free !== row.cartographer` — not `free !== true` (two parity rows
+  carry string `free` values); verified against all 19 rows before the
+  pin is written. (F5) WEB-10's narrowing has a victim: with
+  `STRIPE_PRICE_SURVEYOR` set and `STRIPE_PRICE_PREMIUM` unset, every live
+  Cartographer subscriber would silently stop receiving the monthly 30 —
+  RULED: the Cartographer row is PRESENT-BY-DEFAULT (an unset PREMIUM env
+  still resolves the legacy 30 for any non-Surveyor, non-annual line), a
+  Deno acceptance case for exactly that configuration, mutant M6, and the
+  owner to-do #2 reworded in BOTH directions. (F6) the money-path reader
+  floor re-derived with both path spellings (`grep -rln stripe-webhook
+  tests` = 14, not 4 — autoReloadWebhookRace, checkoutAsyncPaymentFailure,
+  moneyPathCoverageContract, moneySecurityExecutionFloor,
+  sessionGateCensus are real readers); `tests/security` JOINS WEB-10's
+  widened builder sweep; the :3293 title re-point must preserve the
+  money-path suites' required tokens. (F7) the `monthly_allowance`
+  migration census is SIXTEEN files, not two; the ACTIVE FIFO body is
+  192:255 (the latest re-mint), the idempotency sites 018:92-94 +
+  024:26-30 (never re-minted) — the conclusion (no DB grantor, no
+  migration) stands, the executor is handed the active definitions.
+  (F9) `STRIPE_PRICE_FOUNDER_LIFETIME` is STRUCK from DEPLOY.md's money
+  block in WEB-8 (+1 doc line, ODQ §118) so the two documents agree.
+- **§471.3 TC-WEBSITE-2-R2 DISPATCHED** (Fable compile, solo) to apply all
+  nine items to `draft-WEBSITE-PLAN-2.md` in place with the de-duplicated
+  manifests re-priced, then the charter is RULED-AS-AMENDED and its cars
+  build on Opus as the second seat frees (WEB-8 first; WEB-10's money-path
+  edit remains STOP-class and builds LAST, after WEB-9b lands). Seats:
+  PRODUCERS landing · TC-WEBSITE-2-R2 (cap).
