@@ -19852,3 +19852,60 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   deity doctrine transposed), magic level reported as a closed licensing
   dial; ≤45 searches. Seats: UC-4 build (Opus) · R-INST-5 (Opus). UC-4's
   landing takes the seat when it builds.
+
+## §487 — MF-UC4 BUILT AND HOLDING `[OPUS-RUN · FABLE-VALIDATION OWED]`: THE FLAG MINTED DARK, THE PERSISTED HIGH-WATER SIGNAL RATIFIED AT ITS §359.5 REVIEW (C-2), TWO CHARTER HOMES CORRECTED BY MEASUREMENT, THE FLAG BILL IS FIVE SURFACES; UC-4's LANDING DISPATCHED (2026-08-23 11:10 CDT)
+
+- **§487.1 HOLDING.** TE-UC4 (Opus): tip `500e65fe` = 7 over `0f3897a5`,
+  porcelain empty, every blob shasum-proved at all seven commits. Pinned
+  `refs/preserve/holding-uc4`. S0 twenty rows walked; two charter homes
+  WRONG and corrected by measurement (§441 J7 — third and fourth specimens):
+  the dormancy-idiom flag read lives at `src/domain/worldPulse/
+  institutionLifecycle.js:672` (the charter's `src/domain/institutionLifecycle.js`
+  does not exist at this base); corruption.js's criminal-share expression
+  spans `:539-542`. The wall accessor = `causalState.js:306
+  defenseProfileHasWalls` (UC-0's home); the toll half has NO typed home — a
+  typed inert slot (§441.2 precedent), not a STOP. Census DELTA
+  `+1/+0/+1/+8/+1` walked twice and reverted. Acceptance 8/8, mutants 8/8 —
+  the first drive convicted only five arms, three arms were REWRITTEN (not
+  the mutants replanted), and the second drive caught the lane's own
+  intermediate fix red at the pristine tree (a broken control masquerading
+  as eight convictions). Gates verbatim: 173/173 · 1134/1134 · eslint empty ·
+  golden `29c6cc8f…` unmoved · `validate:packets` 166 (1 READY) · nine-tree
+  mutexed sweep 7/7 banked by assertion-block sha, 0 strays.
+- **§487.2 C-2 RATIFIED (chair's §359.5 mechanical review, executed on the
+  holding tip):** the signal is `powerHighWater` on the FACTION STATE record
+  (`worldState.factionStates[id]`) — folded in
+  `factionCompetition.ensureFactionStates` by `withPowerHighWater`, which
+  clamps 0..1, moves UP ONLY (`held >= next` returns the SAME object — an
+  identity no-op that preserves the seam's quiet-state discipline), and is
+  evaluated ONLY when `undercityHighWaterActive(worldState)` reads the flag
+  `=== true` BY NAME; the reader `powerHighWaterOf` answers **`null` for
+  absence, never 0** ("no instrument, not no recession"); no clearer, no
+  migration, no backfill; the roster projection materializes the mark only
+  when either side holds one and reads it through a CALL receiver (zero
+  observed-shape rows). Ring-independent by construction (it lives on the
+  faction state, not a buffer). DARK by default (absent from
+  `DEFAULT_SIMULATION_RULES`; lighting it is **R-5**, the owner's tuning
+  call). This is the §359.5 shape as accepted in principle — RATIFIED as the
+  estate's persisted-signal idiom; MF-D5, if ever minted, consumes it.
+- **§487.3 THE SEAM WAS A MEASUREMENT:** `pulseKernel.js` sits at EXACTLY
+  its frozen size-baseline ceiling (1581 effective) under a shrink-only law —
+  one added line reds twice and the cure is forbidden; `institutionLifecycle.js`
+  has 2 lines of headroom; `urbanFabricKernel.js` is itself flag-gated.
+  `factionCompetition.js` (41 lines headroom, no baseline row, no edge bundle,
+  outside the first-paint closure) owns both seams. **The flag bill is FIVE
+  surfaces, not four:** manifest row (+ `build:edge-shared`, 7 files) ·
+  certification row · the three module-scope test edits · the acceptance
+  literal · **`contributionLedgerShape.test.js`'s two `toHaveLength`
+  literals** (its own comment predicts every flag wave meets them). Five
+  member-caused walker reds cured in-member, one structural: **UC-0's
+  dormancy arm was a blind MENTION scan** (`domain/undercity/` literal) that
+  could not see `'../undercity/colonization.js'` — the train's first real
+  production importer — widened to mention ∪ resolved relative-import edge
+  with non-vacuity exhibited. Four memory files banked by the lane; eleven
+  judgments + seven deferrals in the packet (vetoable).
+- **§487.4 SEATS.** **TE-UC4-LANDING dispatched (Opus)** onto `1b1de759`:
+  expected tuple `2514/366/2148/20846/5806`, `valid: 167 packets (0 READY)`,
+  bundle byte-identity re-proved at the rebased tree, the three-place §410
+  flip. Seats: UC-4 landing (Opus) · R-INST-5 (Opus). MEMORY.md fold owed
+  (15.9 KB) — done this sitting.
