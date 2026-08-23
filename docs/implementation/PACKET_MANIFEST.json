@@ -20675,7 +20675,7 @@
       "id": "WEB-7",
       "status": "LANDED",
       "packetPath": "docs/implementation/packets/website/WEB-7.md",
-      "verifiedBase": "19b799ce718d52e36a3b14a85fa9cfd5051ccf26",
+      "verifiedBase": "2b82121fccf02d978accfbc82871ca838aea1eff",
       "changeManifest": [
         {
           "_note": "Section 3.3 is reframed from 'Dual-licensed packages with no election recorded' to 'The two production-dependency elections', in the section 1.3 idiom, with an 'Our election' column resolving dompurify 3.4.12 to Apache-2.0 and rgbcolor 1.0.1 to MIT per ODQ 362.2. The section 3.1 count rows and the two section 3.2 inventory rows gain the election pointer that section 1.2 already carries for JSZip and Touch Punch; section 4.4 stops calling Apache-2.0 'one of the two options' for dompurify and names it the grant a recipient receives. The verification stamp says plainly that these rows were re-read at this base rather than carried over from 2cdb87fa. No licence body is added: Apache-2.0 already travels inside the package under 4.4 and the MIT text is already reproduced once in 4.1.",
@@ -20693,7 +20693,7 @@
           "path": "tests/build/thirdPartyNoticesPage.test.js"
         },
         {
-          "_note": "The estate lighting census re-recorded on titles and suiteTitles alone, 20719/5785 -> 20724/5786, with the attribution block naming censusAuthorization 362.2 and 402 C6 per 299.4's binding-forward rule. Derived figure by figure from the walker's own convictions; because the census is sequenced, the first red arriving at titles is the executed proof that files, parked and credited did not move.",
+          "_note": "Census re-record 2500/365/2135/20751/5791 -> 2500/365/2135/20756/5792 at the landing slot 2b82121f, the after-figure convicted by the arm's own equality with the slot tuple read back as the control (expected 20756 to be 20751). The DELTA +0/+0/+0/+5/+1 crossed the rebase, never the tuple: the authored figure (2497/364/2133/20719/5785 -> 2497/364/2133/20724/5786 at the BUILD base 19b799ce) sat on a base six landed re-records had since moved. Moves on titles and suiteTitles alone, with the attribution block naming censusAuthorization 362.2 and 402 C6 per 299.4's binding-forward rule. Derived figure by figure from the walker's own convictions; because the census is sequenced, the first red arriving at titles is the executed proof that files, parked and credited did not move.",
           "action": "MODIFY",
           "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
         }

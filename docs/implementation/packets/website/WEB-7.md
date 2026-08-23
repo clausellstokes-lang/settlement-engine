@@ -4,12 +4,19 @@
 - **Landed at:** the `web-b` train's third car, on the lane tip held for the chair's CAS.
   Built by lane TE-WEB7 on 2026-08-22. Do not redispatch.
 - **Packet version:** `1`
-- **Verified base:** `claude/composite-r4` at `19b799ce718d52e36a3b14a85fa9cfd5051ccf26`
-- **Last revalidated:** 2026-08-22 at `19b799ce718d52e36a3b14a85fa9cfd5051ccf26`
-- **Train:** `web-b`, family **WEBSITE**, member **3**. WEB-1 founded the family at §408
-  and its packet was minted on a lane tip that has not landed here, so this packet creates
-  the family directory on this base and is likewise self-contained: no `preambles/` file
-  exists for the family and none is assumed.
+- **Verified base:** `claude/composite-r4` at `2b82121fccf02d978accfbc82871ca838aea1eff`
+- **Last revalidated:** 2026-08-22 at `2b82121fccf02d978accfbc82871ca838aea1eff`
+- **Landing note:** authored at the BUILD base `19b799ce718d52e36a3b14a85fa9cfd5051ccf26` as
+  `e5975829679ecbf5e048f9f5cce34c01d7bb5ac5` (pinned at `refs/preserve/holding-web7`), rebased at the
+  landing onto `2b82121f` (WEB-6, the 30th landing) as member commit
+  `16087e2bbb81e01c50ac7c8e17fd4f8aea03a424`; the re-stamps ride the commit after it. The packet was
+  ALREADY at the terminal status when authored (the §410 form — see §7), so no status walk was owed
+  at the slot and the terminal gate fires at the re-stamped LANDED tip itself. See §8.
+- **Train:** `web-b`, family **WEBSITE**, member **3**. WEB-1 founded the family at §408.
+  At the BUILD base its packet had not yet landed, so this packet was authored creating the
+  family directory; at the landing slot the directory already holds WEB-1, WEB-4, WEB-5 and
+  WEB-6, and this file is a plain add into it (keep-one on the directory). The packet is
+  self-contained: no `preambles/` file exists for the family and none is assumed.
 - **Authorities:** `OWNER_DECISION_QUEUE.md` **§362.2** (the signature on the two
   elections, and the instruction that the notices surface records both at its next touched
   landing) · **§402 C6** (the chair's inclusion of WEB-7 in the website train) ·
@@ -125,6 +132,14 @@ arithmetic: `expected 20724 to be 20719`, then on the re-run the sequence permit
 `expected 5786 to be 5785`. Because the census is sequenced, the first red arriving at
 `titles` is itself the executed proof that `files`, `parked` and `credited` did not move.
 
+**Re-derived at the landing slot `2b82121f`.** The authored tuple `2,497/364/2,133/20,724/5,786` was a
+reading at the BUILD base and was NOT carried. Six landed re-records (H8B, MF-T2H, WEB-1, WEB-4,
+WEB-5, WEB-6) moved the slot's own tuple to `2,500/365/2,135/20,751/5,791`; this member's delta
+`+0/+0/+0/+5/+1` crossed the rebase, so the landed tuple is `2,500/365/2,135/20,756/5,792` —
+convicted by execution under the shared mutex (33/33, exit 0), with the negative control executed:
+the slot's own tuple put back reds at `titles` with *"expected 20756 to be 20751"*, by exactly this
+member's delta, and the file was restored byte-identical.
+
 ## §6 · JUDGMENTS, EACH VETOABLE
 
 - **J1** — §3.3 is REFRAMED as the elections section rather than given a new section
@@ -161,11 +176,15 @@ arithmetic: `expected 20724 to be 20719`, then on the re-run the sequence permit
   directory did not exist at this base and is created holding only this file, the manifest
   change is a single appended row, and the index change is a single row inside the existing
   table. Two siblings founded the same family in their own holding trees, so the resolution
-  at the rebase is keep-one on the directory and keep-both on the rows.
+  at the rebase is keep-one on the directory and keep-both on the rows. *At the landing
+  (§8) this is exactly what happened: the directory was the slot's, the manifest and index
+  rows were keep-both, and the walker was the slot's bytes plus this member's block.*
 
-⭐ **THE TERMINAL STATUS IS LOAD-BEARING, AND IT WAS PROVED RATHER THAN ASSUMED.** WEB-6
-holds the census-holder reservation on `sovereigntyLightingContract.walker.test.js`, and
-this member moves that same census. The validator reserves change paths at every
+⭐ **THE TERMINAL STATUS IS LOAD-BEARING, AND IT WAS PROVED RATHER THAN ASSUMED.** At the
+BUILD base WEB-6 held the census-holder reservation on
+`sovereigntyLightingContract.walker.test.js` (at the landing slot WEB-6 is LANDED and the
+READY row holding that reservation is MF-T2H's — the same collision, a different holder),
+and this member moves that same census. The validator reserves change paths at every
 NON-terminal status (`reservesChangePaths = !TERMINAL_PACKET_STATUSES.has(status)`), so a
 DRAFT or READY WEB-7 would collide with the holder. Run against a two-packet probe naming
 that one path, with the sibling held at READY:
@@ -180,3 +199,28 @@ that one path, with the sibling held at READY:
 The §410 retrospective-mint law and the census-holder rule therefore agree rather than
 conflict here: the member's work was complete before the packet existed, terminal is the
 only valid status for it, and terminal is also the only status that spares the collision.
+
+## §8 · The landing slot
+
+- **Rebase:** `git rebase --onto 2b82121f 19b799ce HEAD`, the single holding commit carried as authored. The
+  base was an ancestor of the slot (19 landings between). Carry-proof-by-absence at blob level FIRST: the
+  three predicted files moved at the slot (the census walker, `PACKET_MANIFEST.json`, `INDEX.md`) and the
+  four others (`THIRD-PARTY-NOTICES.md`, `public/third-party-notices.html`, the `tests/build/` host, this
+  packet's CREATE) had the SAME blob at base and slot — no landed sibling touched the notices surface, so
+  nothing was re-applied. No other `*notice*` test exists under `tests/docs` or `tests/lint` at the slot.
+- **Surgery:** walker = the slot's bytes + this member's block appended below WEB-6's, tuple re-derived
+  (§5); manifest = the slot's bytes + this row by string surgery from the holding commit's own insert
+  bytes, never re-serialized (deep-compare 153 → 154, ADDED=["WEB-7"], REMOVED=[], DRIFTED=[]); INDEX
+  keep-both, this row after WEB-6's in the infrastructure table (append order, where it was authored).
+- **Re-stamps:** `verifiedBase` → the slot sha in the header and the manifest row (scoped to this row's
+  span; RR-2's `19b799ce` row untouched); the authored member sha kept beside the rebased one (landing
+  note). The status was LANDED from the build (§7), so `validate:packets` was green at the rebased
+  member commit already — `valid: 154 packets (1 READY)`, the 1 READY being MF-T2H's pre-existing row.
+- **S0 at the slot:** `check-observed-shape-readers` exits 1 at the tip and at the chair's baseproof
+  `b10ed1a1` with one identical message ("detector or unscanned execution input changed since the
+  schema-10 instrument was governed") — and exited 0 at this member's BUILD base (`1996 finding(s),
+  exactly matching`, the build receipt), so the break landed between base and slot and is mint-class,
+  pre-existing, recorded not cured. The frozen baseline `scripts/.observed-shape-readers-baseline.json`
+  is the same blob at slot and tip, and none of the seven delivered files is in its inventory.
+- **Terminal:** the full bare `npm run check:tail` fires at the LANDED tip itself (the gate tip and the
+  final tip are one commit); its verdict lines are in the lane receipt and the chair's ledger row.
