@@ -51,6 +51,10 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐ 21:50 CDT 08-22: §455 — WEB-2 BUILT 1d93458a (pinned; migration 198 =
+# first DESTRUCTIVE; 12-gate bill). HK-3 ruled (delete WEB-1 moving-head pin +
+# validator guard). TE-HK-A dispatched (HK-1/2/3). Seats: WEB6-landing · UC3 ·
+# WEB3 · HK-A.
 # ⭐⭐⭐ 21:40 CDT 08-22: §454 — WEB-5 LANDED (29th): CAS → dffa2b97; pruned.
 # WEB-6 GO (DRAFT→READY→gate→LANDED). HK-2 = MF-T2H LANDED flip docketed.
 # Seats: WEB6-landing · UC3 · WEB2 · WEB3.

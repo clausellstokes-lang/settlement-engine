@@ -18455,3 +18455,66 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   aesthetics contest" is the SPEC's wording about geometry authority, not
   the product posture — the deterministic map competes on BOTH truth and
   art.
+
+## §455 — WEB-2 BUILT AT 1d93458a (THE RETENTION NUMBERS; MIGRATION 198 — THE FIRST DESTRUCTIVE ONE); A TWELFTH MIGRATION GATE FOUND; THE MOVING-HEAD PIN RULED OUT OF WEB-1 (HK-3); THE HOUSEKEEPING CAR HK-A DISPATCHED (2026-08-22 21:50 CDT)
+
+- **§455.1 WEB-2 BUILT:** tip 1d93458a (2 commits, 11 files, +1197/−18) on
+  base 4060f690, tree clean, package motion 0, PINNED at
+  refs/preserve/holding-web2. S0 two-part = the pre-existing schema-10 red
+  (sha `c5b67844…` identical at base, baseproof, tip). **`export_cursors`
+  REUSED as the receipt store — zero new shape** (one writer, the
+  analytics-export edge function; 037's research views pass the base `id`
+  through, so `id <= last_id` IS "exported"); one soundness limit honored:
+  `research.snapshots` excludes `consent_tier='product'`, so the snapshot
+  prune arm carries `consent_tier='research'` — product-tier snapshots are
+  NOT pruned (a residual, recorded, never fail-open). **Design pivot
+  ratified:** no new actor→cohort store (it would exceed the manifest,
+  force a deletion-path edit the charter forbids, and mint a new indefinite
+  person-adjacent store) — 036's `analytics_device_links`/`identity_links`
+  `created_at` already IS first-contact day, never pruned, erased by
+  `purge_analytics_for_user()`; the mandatory order (backfill → parity →
+  shorten) is enforced at RUNTIME: the 90-day branch activates only while
+  the cohort table is non-empty. A1–A8 green (boundary arms both sides of
+  90d/400d; A8 re-ran the existing deletion suites, 7 files / 69 tests);
+  M1–M4 convict (M3 reds A1's exact-set arm, not idempotence — a full
+  refresh is idempotent; charter prediction corrected by measurement);
+  census `+1/+1/+0/+0/+0` predicted exactly, the pglite park reason
+  MEASURED (`SUITE_NOT_RUNNING:describe.runIf()`), reverted per §417; sweep
+  = baseproof + the declared row, zero strays over three runs; both
+  typecheckers at ceiling; packet READY (`valid: 151 packets (2 READY)`).
+  **THE MIGRATION BILL IS TWELVE GATES, NOT TEN:** `publicTableRlsCensus`
+  (198 CREATES a table; 197 did not) + `migrationSequenceAll.pglite` joined
+  WEB-1's ten; `rollbackDiscipline` fired on `analytics_*_links`
+  (MONEY_PII_TABLES) → the `-- @rollback:` note written; 198 is the
+  program's FIRST DESTRUCTIVE migration (DEPLOY.md now carries a "Read
+  these preambles before the push" section naming 197 as DATA and 198 as
+  DESTRUCTIVE — the owner reads it before the db-push train).
+- **§455.2 RAISED → RULED (HK-3):** `validate:packets` went red on
+  `WEB-1.requiredSymbols[13]` = `{ docs/DEPLOY.md, '197_consent_person_adjacent_default.sql' }`
+  — a LANDED packet pinning the CURRENT migration-head basename, a moving
+  figure that traps every later migration member (the TE-26 law "never put
+  a re-recorded FIGURE in requiredSymbols" — bitten again, this time by a
+  DOC symbol). The lane lawfully did not edit a landed contract; it kept
+  the 197 name resolvable in the new DEPLOY.md section (which also
+  refutes the charter's §379.3 vacuity claim by measurement). RULED: delete
+  the row from WEB-1's manifest entry and packet (a chair-authorized edit
+  of a landed contract, §455 cited in the packet), and ADD A GUARD: the
+  packet validator (or its test) REFUSES a `requiredSymbols` row whose
+  symbol is a migration filename against a docs path, with a positive
+  control — structural prevention for a class that has now bitten twice.
+- **§455.3 TE-HK-A DISPATCHED (Opus):** ONE housekeeping car, THREE
+  severable commits — HK-1 the dead underways facet key (§445.3; probe the
+  defect on the real row first; inertness proven with UNDERWAYS_TUNING
+  OFF — any same-seed motion is a STOP to the owner's docket; a positive
+  pin of `hasClandestineFacet` against the real rows at three tiers; sibling
+  readers grepped) · HK-2 MF-T2H's LANDED flip with its `requiredSymbols`
+  rows (§454.3) · HK-3 above. Seats: WEB-6 landing · TE-UC3 · TE-WEB3 ·
+  TE-HK-A (cap). Build queue: R-INST-2 → R-INST-CIRC → R-INST-3..6 → UC-1/
+  UC-4 (after T2R lands) → UC-2/UC-5 (after T2N+T2Q). Landing queue:
+  WEB-6 → WEB-7 → T2J → T2K → T2L → T2M → T2R → T2Q → T2N → UC-0 → WEB-2
+  (→ WEB-3, HK-A as built).
+- **Chair lesson (the WEB-5 prune):** the lane-TMPDIR prune at the CAS
+  destroyed the per-step logs the lane's receipt was still citing; the gate
+  body was already archived, the verdicts are quoted verbatim, nothing is
+  lost — but from WEB-6 on the `/tmp/<lane>` prune waits for the lane's
+  final report; worktree + pin prune stay at the CAS.
