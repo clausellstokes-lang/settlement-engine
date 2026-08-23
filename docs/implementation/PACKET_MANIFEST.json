@@ -21682,6 +21682,173 @@
           "check:tail"
         ]
       ]
+    },
+    {
+      "id": "MF-UC0",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/town-cartography/MF-UC0.md",
+      "verifiedBase": "84e06412f6fdca91020197f2a332ba7f98642f64",
+      "changeManifest": [
+        {
+          "_note": "THE EXISTENCE GATE (ODQ §311.1) as a pure domain-root deriver: deriveStrataExistence(settlement, { sanitationRung? }) → { exists, seeds[], refused[], derivation }. Seed classes are the closed sanitation | crypt | cellar | mine | subterranean; every seed row carries class, licence, dossier home, the canonical anchor key (catalogId ?? catalog slug ?? name — `id` deliberately unread: no writer exists, D-UC0-1), the exact facet read and the terrain class as a receipt. Institutions resolve through facetOf ONLY under the catalog's OWN keys (`subterranean`; the new `institutionSubstructure`), never the precedent's wrong `institutionFunction` key (D-8). The catalog's forbiddance ('tunnels flood') is honoured through the generator's own native-resource projection and made VISIBLE in refused[]. sanitationRosterOf + SANITATION_LADDER are UC-1's one-truth reads. Ruin-AGNOSTIC by §311.3 (dug is forever) — dispositioned in the ruin-filter walker. 110 effective of 250; DORMANT (no consumer; no townMap import).",
+          "action": "CREATE",
+          "path": "src/domain/undercity/strataExistence.js"
+        },
+        {
+          "_note": "THE CLOSED JOINT VOCABULARY AS DATA (J-R2-2): JOINT_KINDS grate|stair|sealed_door|sluice|breach (§311.9.2(iii)) and TEMPERAMENTS STATIC|MONOTONE|SURFACE_COUPLED|DEMAND_DRIVEN (§311.8.2, §441.5(b)), frozen, with two membership predicates. Minted by the FIRST car so every later component row imports one truth and no car depends on UC-5 (the last). 8 effective of 20; zero-import.",
+          "action": "CREATE",
+          "path": "src/domain/undercity/jointVocabulary.js"
+        },
+        {
+          "_note": "ONE new INFERENCE-ONLY facet kind `institutionSubstructure` (crypt | cellar | sewer | mine | none) as five regex rows in FACET_INFERENCE, FIXED against the real catalog at 84e06412 by an executed probe (none 2 · sewer 1 · mine 3 · crypt 10 · cellar 9 · null 253; the 'Access to …' rows read `none` FIRST so a church 2–5 km away infers no crypt). Never a catalog `facets` key (R-2 golden shift refused). 141 → 148 effective, +7 of the ≤15 shared-file delta, measured BEFORE the edit with eslint's own Linter; zero imports added; golden-inert PROVEN (manifest bytewise 29c6cc8f… before and after).",
+          "action": "MODIFY",
+          "path": "src/domain/spatial/cohesionWeave.js"
+        },
+        {
+          "_note": "THE ACCEPTANCE — eight arms, ONE literal describe, straight-line `it`, every multi-case check TOTAL (the seed-loop walker convicted the first authoring once; cured), every scanned negative anchored. A1 is guard-the-guard: the substructure rows proved LIVE against the REAL catalog and keyed right (exact name sets per value, first-match order pinned) before any arm below can pass on nothing. A8 is the POSITIVE KEY arm §441.5(a) ordered: the real 'Underground network' row resolves `subterranean` through facetOf at all three tiers, and a roster carrying the real 'Sewage system' seeds the full-web class that UC-1 reads from the same roster.",
+          "action": "CREATE",
+          "path": "tests/domain/undercityStrataExistence.test.js"
+        },
+        {
+          "_note": "THE RUIN-FILTER DISPOSITION (J-TEUC0-8): one RUIN_AGNOSTIC_EXEMPT row for the new leaf in the walker's existence-gate section with the §311.3 reason (dug is forever — a ruined institution's seed is a fossil, never an absence), and the exact reader count RE-MEASURED 89 → 90 from the arm's own failure message. The §408 sweep's one member-caused red, cured under the walker's own prescribed shape; reversal = delete the row, route the leaf through liveInstitutions(), re-measure 89.",
+          "action": "TEST",
+          "path": "tests/lint/ruinFilterRoster.walker.test.js"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/packets/town-cartography/MF-UC0.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE FACET CHOKEPOINT this car resolves every institution through (§I — declared ?? inferred ?? null); the new `institutionSubstructure` rows live in its FACET_INFERENCE table.",
+          "path": "src/domain/spatial/cohesionWeave.js",
+          "symbol": "export function facetOf"
+        },
+        {
+          "_note": "THE ONE TERRAIN READ (config.terrainType → terrainOverride → terrain → top-level → geography); every seed row carries its class as a receipt.",
+          "path": "src/domain/resolveTerrain.js",
+          "symbol": "export function resolveSettlementTerrain"
+        },
+        {
+          "_note": "THE NATIVE-RESOURCE PROJECTION the generator refuses forbidden institutions with (assembleInstitutions.js) — the gate honours the catalog's forbiddance through the SAME list, so a custom-labelled marsh grants no native physics.",
+          "path": "src/domain/content/customContentSemanticAuthority.js",
+          "symbol": "export function nativeSemanticResourceKeys"
+        },
+        {
+          "_note": "The estate's one sanctioned string order; seeds and refusals are ordered by anchor then class through it.",
+          "path": "src/domain/deterministicSort.js",
+          "symbol": "export const compareCodepoint"
+        },
+        {
+          "_note": "The catalog's collision-checked name → stable-id index: the anchor key for unstamped legacy rows, and the key the forbiddance index is built on at load.",
+          "path": "src/data/institutionalCatalog.js",
+          "symbol": "export function catalogIdForName"
+        },
+        {
+          "_note": "THE WALLS HOME this packet NAMES for UC-4's smugglers'-tunnel licence (§441.5(d) — HOME OWED AT UC-0, discharged): reads defenseProfile.institutions.walls (defenseGenerator's name-list idiom) or the legacy hasWalls flag. Pinned here so its disappearance is detectable before UC-4 compiles.",
+          "path": "src/domain/causalState.js",
+          "symbol": "export function defenseProfileHasWalls"
+        },
+        {
+          "_note": "The anchored-negative helper the acceptance calls BY NAME (preamble §P3).",
+          "path": "tests/helpers/anchoredNegatives.js",
+          "symbol": "export function expectAbsentWithAnchor"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "GUARD-THE-GUARD. The `institutionSubstructure` rows are LIVE against the REAL catalog and KEYED RIGHT: 300+ rows walked through facetOf, the exact sorted name set per value (sewer 1 · mine 3 · crypt 10 · cellar 9 · none 2), no row outside the closed vocabulary (reported as a full list, never a first failure), the first-match order pinned ('Access to parish church' → none, 'Parish church' → crypt), a misspelled kind resolves nothing, every vocabulary non-empty — before any arm below can pass on nothing."
+        },
+        {
+          "id": "A2",
+          "case": "No qualifying seed → no sheet. A real seedless roster reads { exists: false, seeds: [], refused: [] }; a cesspit rung contributes no sheet (§311.7.1); unknown rungs do not seed; null/undefined/garbage rosters and configs never throw and never invent."
+        },
+        {
+          "id": "A3",
+          "case": "One modest seed → the sheet exists (the two-level reading's FIRST level). A thorp whose only underground is a 'Communal root cellar' reads exists:true with exactly one cellar row (anchor communal_root_cellar); a seedless roster with a derived `culvert` rung reads exactly one DERIVED_RUNG sanitation row; every rung above cesspits seeds, as one table; the result carries exactly the four contract fields."
+        },
+        {
+          "id": "A4",
+          "case": "A facet-DECLARED custom institution counts whatever its English — a `facets` map and a `facet:<kind>:<value>` tag alike; the custom sanitation/drains facet seeds `sanitation` AND appears in sanitationRosterOf (one truth with UC-1); a declared `none` overrides the crypt inference 'Temple' would earn (DECLARED over INFERRED, both readings asserted); a value outside the closed set licenses nothing — both absences anchored by present siblings."
+        },
+        {
+          "id": "A5",
+          "case": "The catalog's marsh/floodplain forbiddance is honoured and VISIBLE. The real 'Underground network' row (forbiddenResources marshlands + fertile_floodplain) is REFUSED on a native-marsh settlement (refused[0].resources === ['marshlands'], exists:false) and seeds on dry hills; a custom subterranean row with no forbiddance of its own inherits the class rule on a floodplain; a custom-LABELLED marsh (nearbyResourcesCustom) does not refuse — the native projection, as the generator; refusal is per row, so a parish church beside the refused network still seeds."
+        },
+        {
+          "id": "A6",
+          "case": "Deterministic, closed, pure and dormant. The same roster in reversed order derives toEqual and byte-identical JSON, ordered by anchor; every row's class and licence inside the closed sets (offender list, not a loop); institutionAnchorKey's four rungs incl. the renamed-stamp case (mutant m5's line); all six vocabularies as LITERALS and frozen; the membership predicates; a raw-text nondeterminism scan over both leaves with a planted positive control; the leaves import no townMap module (the import list proven non-empty first); nothing in src/ mentions domain/undercity/ except the leaf's own header."
+        },
+        {
+          "id": "A7",
+          "case": "G-43 arm, direction pre-declared: a village with 'Parish church' + 'Stone quarry' reads [crypt, mine]; remove the quarry → still exists on the crypt; remove the church → exists:false with seeds:[] while the two non-seed rows are proven still present (the flip is the SEED's, not roster size); re-add the church → true."
+        },
+        {
+          "id": "A8",
+          "case": "THE POSITIVE KEY ARM (§441.5(a) constraint 4). At village, town and city — read as ONE table — the real 'Underground network' row's facets is exactly { clandestine, subterranean }, facetOf(row, 'subterranean') === 'subterranean', facetOf(row, 'clandestine') === 'clandestine', and the gate seeds ['subterranean', 'underground_network']; 'Underground city' (metropolis) declares no facet and resolves null (pinned, never inferred). A city roster carrying the real 'Sewage system' seeds exactly the sanitation row of the full-web class (anchor sewage_system) and sanitationRosterOf returns exactly it — one truth with UC-1; 'Public bathhouse' (sanitation-tagged, a UC-1 cause) and 'Aqueduct or water system' (the water side) do NOT seed, anchored by the sewer row."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/undercityStrataExistence.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/seedLoopTotality.walker.test.js",
+          "tests/lint/ruinFilterRoster.walker.test.js",
+          "tests/lint/domainAnyCastBaseline.test.js",
+          "tests/domain/cohesionWeave.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/property/generatorGoldenMaster.test.js",
+          "tests/lint/observedShapeReaders.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint",
+          "tests/build",
+          "tests/ops"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "npm",
+          "run",
+          "validate:packets"
+        ],
+        [
+          "npm",
+          "run",
+          "check:tail"
+        ]
+      ]
     }
   ]
 }
