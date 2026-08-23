@@ -1,12 +1,20 @@
 # Website / WEB-6 — the anon-ceiling disclosure
 
-- **Status:** DRAFT
+- **Status:** LANDED
 - **Packet version:** `1`
-- **Verified base:** `claude/composite-r4` at `19b799ce718d52e36a3b14a85fa9cfd5051ccf26`
+- **Verified base:** `claude/composite-r4` at `dffa2b97b22b16ace3d54f3d4710ce2d969146a9`
+- **Landing note:** authored at the BUILD base `19b799ce718d52e36a3b14a85fa9cfd5051ccf26` as
+  `5b0a399f32e8264e2f263352b936af8a13b6794c` (pinned at `refs/preserve/holding-web6`), rebased at the
+  landing onto `dffa2b97` (WEB-5, the 29th landing) as member commit `98020b4c3b4299b7ac5fe0c5d5713e558a3d3f42`;
+  the re-stamps ride the commit after it. The packet ENTERS AT THE TERMINAL STATUS (the §410 form): at
+  this slot MF-T2H's READY row reserves `tests/lint/sovereigntyLightingContract.walker.test.js`, and the
+  validator refuses WEB-6 at DRAFT and at READY alike with *"duplicate change path across packets:
+  tests/lint/sovereigntyLightingContract.walker.test.js (MF-T2H, WEB-6)"* — both refusals executed and
+  logged, so LANDED is the only status the row can carry until the chair's CAS makes it true. See §8.
 - **Drafted by:** lane TE-WEB6, 2026-08-22, under the website train's charter (ODQ §402),
   train W-B. Member ruling: ODQ §363.1, which closes §320.3.
-- **Base note:** the base was resolved by `git rev-parse claude/composite-r4` at lane start,
-  never typed (§381.1). Every figure in this packet was re-derived at that SHA in a fresh
+- **Base note:** the BUILD base was resolved by `git rev-parse claude/composite-r4` at lane start,
+  never typed (§381.1). Every figure in §1–§7 was re-derived at that SHA (`19b799ce`) in a fresh
   detached worktree with its own `npm ci` (468 entries; `npm ls` exit 0), and the one figure
   that moves carries a separate baseproof worktree at the same SHA.
 - **Non-goals, affirmed:** HomeHero's at-cap block; HowToUse's own disclosure; any
@@ -111,6 +119,12 @@ edits the file regardless.
   - Each figure was read from the arm's own failure message, never computed.
 - A title RENAME is count-neutral by construction, which is exactly why it was measured
   rather than assumed.
+- **Re-derived at the landing slot `dffa2b97`, never carried.** The slot's walker tuple, read from
+  the slot file itself, is 2,500/365/2,135/20,750/5,791 (H8B, MF-T2H, WEB-1, WEB-4 and WEB-5 re-recorded
+  under this member while it waited). The delta `+0/+0/+0/+1/+0` is what crossed, so the landed tuple is
+  **2,500/365/2,135/20,751/5,791** — convicted green 33 of 33 under the shared mutex, with the negative
+  control (the slot's own tuple put back) red at `titles` by exactly this delta: *"expected 20751 to be
+  20750"*.
 
 ## §6 · Acceptance
 
@@ -137,3 +151,28 @@ edits the file regardless.
   one title at base, three in this tree — and passes 20 of 20 in isolation. It reds at the
   verified base in its own worktree with its own install, so it is not this member's, and
   curing it here is out of scope.
+
+## §8 · The landing slot
+
+- **Rebase:** `git rebase --onto dffa2b97 19b799ce HEAD`, the single holding commit carried as authored. The
+  base was an ancestor of the slot (17 landings between). Carry-proof-by-absence at blob level FIRST: the
+  three predicted files moved at the slot (the census walker, `PACKET_MANIFEST.json`, `INDEX.md`) and the
+  four others (`LandingBelowFold.jsx`, both test hosts, this packet's CREATE) had the SAME blob at base and
+  slot — no landed sibling touched the landing page, so nothing was re-applied.
+- **Surgery:** walker = the slot's bytes + this member's block appended below WEB-5's, tuple re-derived
+  (§5); manifest = the slot's bytes + this row by string surgery from the holding commit's own insert
+  bytes, never re-serialized (deep-compare 152 → 153, ADDED=["WEB-6"], DRIFTED=[]); INDEX keep-both, this
+  row after WEB-4's in the infrastructure table.
+- **Re-stamps:** `verifiedBase` → the slot sha in the header and the manifest row (scoped to this row's
+  span; RR-2's `19b799ce` row untouched); the authored member sha kept beside the rebased one (landing
+  note); status entered at LANDED (landing note).
+- **S0 at the slot:** `check-observed-shape-readers` exits 1 at the tip, at the chair's baseproof
+  `b10ed1a1` and at an exact-slot throwaway worktree with one identical 159-byte message ("detector or
+  unscanned execution input changed since the schema-10 instrument was governed") — and exits 0 at this
+  member's BUILD base (`1996 finding(s), exactly matching`), so the break landed between base and slot and
+  is mint-class, pre-existing, recorded not cured. Positive proof: none of the seven delivered files is in
+  the 11-file detector tree or among the 13 unscanned execution inputs; the frozen baseline blob
+  `8d91fdfa141e` is identical at slot and tip.
+- **Terminal:** the full bare `npm run check:tail` fires at the LANDED tip itself (no post-gate status
+  flip, so the gate tip and the final tip are one commit); its verdict lines are in the lane receipt and
+  the chair's ledger row.

@@ -20599,9 +20599,9 @@
     },
     {
       "id": "WEB-6",
-      "status": "DRAFT",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/website/WEB-6.md",
-      "verifiedBase": "19b799ce718d52e36a3b14a85fa9cfd5051ccf26",
+      "verifiedBase": "dffa2b97b22b16ace3d54f3d4710ce2d969146a9",
       "changeManifest": [
         {
           "action": "MODIFY",
