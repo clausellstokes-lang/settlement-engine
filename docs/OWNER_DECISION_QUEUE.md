@@ -19357,3 +19357,46 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   over a shared namespace (a directory token, a family prefix, a roster
   name) pins the INTENT with a positive control and an exclusion set,
   never `toEqual` a list that the next car of the same train must grow.
+
+## §475 — THE UC STACK'S TERMINAL RED AT 0ccd5794 ON A SECOND UC-0 CLASS: cohesionWeave.js IS AN EDGE-SHARED BUNDLE INPUT AND THE BUNDLES WERE NEVER REGENERATED; RULED: REGEN IN-TRAIN, RE-FIRE; A THIRD CLASS DROPS UC-0 FROM THE STACK (2026-08-23 06:55 CDT)
+
+- **§474 executed:** A6 → positive control + the outside-the-directory
+  closure arm; 59 tests green at the edited and committed trees; tuple
+  unchanged; the planted outside importer convicts; `fix(MF-UC0)` with
+  hooks ON (nothing changed by the hook); hash row re-stamped (241 → 242
+  effective); `valid: 163 packets (1 READY)`; sweep-2 = the baseproof's
+  seven byte-identical, A6 absent. J-UCST-4 (test + packet + manifest in
+  ONE follow-on commit, the §469 shape) RATIFIED.
+- **The terminal at 0ccd5794 (14 min, outlasted):** every step green
+  through lint, then `test:ratchet` — **6 failing tests NOT in the frozen
+  census**, ONE class: `tests/edgeFunctions/{aiCharter,aiGrounding,
+  aiOutputSchema}Bundle.freshness` ("Bundle is stale …
+  src/domain/spatial/cohesionWeave.js") + `edgeSharedBundleReproducibility`
+  ×3 ("built from content that is neither committed nor staged"). The
+  three bundle `.meta.json` rosters list `cohesionWeave.js` as a
+  TRANSITIVE INPUT; UC-0's +7 inference rows changed its hash; UC-0's
+  build never ran `npm run build:edge-shared`. The producers' hosts are in
+  no roster (why f32c548e's terminal was green); UC-3's files are not
+  inputs. Neither UC-0's build sweep nor the landing's widened sweep
+  included `tests/edgeFunctions` — the terminal found it, which is what the
+  terminal is for. The lane REHEARSED the regen and reverted: 8 files
+  move (three bundle `.js` by exactly UC-0's rows + the Source-hash header,
+  five metas coherent, two by `generatedAt` only); the four edge files
+  87/87 green; the S0 sha UNCHANGED (bundles are outside the OSR envelope).
+- **RULED — CURE IN-TRAIN:** regen → commit the generated set with hooks
+  ON (`chore(MF-UC0): re-bundle edge-shared`) → the packet's "Generated
+  artifacts: NONE" corrected to the GENERATED-row form (each artifact +
+  its generator) → validate → sweep-3 WITH `tests/edgeFunctions` → re-point
+  and re-fire the terminal. **Bound stated:** this is UC-0's SECOND
+  landing-discovered class (A6; the bundles) — both are hygiene classes
+  the build could not see and both are cured by ruling; a THIRD
+  member-caused red at this landing DROPS UC-0 from the stack (UC-3 lands
+  alone; UC-0 returns to a build seat).
+- **LAW (carried into every brief; the lane banked it as
+  `modify-host-in-edge-bundle-input-roster-owes-regen`):** any MODIFY of a
+  file listed in an edge-shared bundle's `.meta.json` input roster owes
+  `npm run build:edge-shared` in the same commit, and every builder's
+  widened sweep includes `tests/edgeFunctions` whenever it touches
+  `src/domain/spatial/**`, `src/domain/worldPulse/simulationRules.js`, or
+  any other rostered input (grep the five `.meta.json` rosters at S0 —
+  a one-line check that would have caught this at the build).

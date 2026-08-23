@@ -51,6 +51,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⚠ 06:55 CDT 08-23: §475 — UC stack terminal RED at 0ccd5794: cohesionWeave.js
+# is an edge-bundle input, bundles stale (6 reds, one class). RULED regen
+# in-train → re-fire; a THIRD UC-0 class drops UC-0 from the stack.
 # ⚠ 06:35 CDT 08-23: §474 — UC stack HELD at 006c07be: UC-0's A6 pins a text-
 # token census toEqual its own leaf (UC-3 trips it). RULED cure-in-train
 # (positive control + outsiders=[]) → follow-on → terminal.
