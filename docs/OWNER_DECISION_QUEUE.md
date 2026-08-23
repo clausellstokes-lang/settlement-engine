@@ -20318,3 +20318,69 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   outline a point. If the owner wants the halo SOONER than DW-2, the fallback
   is a parcel-only outline (the ring exists in the fabric today) with no
   members — say the word and it becomes a near-term map car.
+
+## §495 — THE OWNER'S "ONE MORE PASS" IS RIGHT, AND §494.2(b) WAS WRONG: THE CARTOGRAPHY BLOCK'S PARCEL ROWS ALREADY CARRY `polygon` — THE PROPERTY LINE IS A PUBLISH, NOT A BUILD; CHARTERED AS MAP CAR **MP-1 (THE PROPERTY-LINE LAYER)** (2026-08-23 14:33 CDT)
+
+- **§495.1 THE OWNER'S QUESTION:** "after we have done all of the current
+  steps to build a map can't we do one additional pass or layer to redraw the
+  property line lines in the vision that I just described?"
+- **§495.2 THE CORRECTION I OWE.** §494.2(b) said the parcel geometry "sits
+  deeper in the fabric" and reaches no drawn surface. That was measured on the
+  PAINTER's projection, not on the compiler's row. Re-read at `f1e4d515`:
+  `cartographyParcels.js:68-71` — **`CartographyParcelRow = { id, wardId,
+  polygon: PlanPoint[], anchor, provenance, decidedBy }`**. The parcel rows in
+  the block the UI already receives CARRY A REAL POLYGON. `cartographyPaint.js`
+  reads that row for `{id, wardId}` alone and drops the polygon on the floor.
+  The property line is therefore **a publish, not a build** — the shape is
+  computed, validated and in hand. My earlier answer understated what exists;
+  the owner's instinct was the correct one.
+- **§495.3 WHAT THE GEOMETRY GUARANTEES (all by construction, no retry loop):
+  ** parcels are centroid TRIANGLE FANS carved inside an already-validated
+  convex ward, each ward edge split into exactly three integer segments — so
+  containment, non-overlap and integer vertices are THEOREMS
+  (`cartographyParcels.js:11-20`), not checks; `footprint ⊂ parcel ⊂ ward`
+  holds (`cartographySynthesis.js:395` packs footprints INSIDE the carved
+  parcels from the same manifest, consuming TC-3b's binding receipt verbatim
+  rather than re-deriving); and a building reaches its parcel through
+  `InstitutionParcelBinding { institutionRef, anchorKey, parcelId, placement,
+  decidedBy }`. **Consequence for the owner's compound:** membership needs NO
+  new relation — two structures are the same property iff they SHARE A
+  `parcelId`. And **the yard is derivable TODAY by subtraction**: parcel
+  polygon minus building footprint IS the open ground of the property, with no
+  new stored byte (DW law 4, derive-don't-store, satisfied by construction).
+- **§495.4 CHARTERED — MAP CAR `MP-1`, THE PROPERTY-LINE LAYER (repair-class
+  publish + one UI affordance; vetoable):** (a) `cartographyPaint.js` emits a
+  `parcel` op carrying the polygon, at the correct back-to-front position
+  (over wards, under streets and buildings) — the painter's ordering law is
+  the sanctioned way to add a layer, and the component renders the sequence
+  verbatim, so this is an INSERTION, not surgery; (b) the same polygon is
+  threaded to the 2D pane beside the district polygons it already draws;
+  (c) hover and pin (the pane's existing `pinned ?? hovered` state machine)
+  draw the **property line** as a yellow border plus a low-opacity fill, the
+  district-polygon precedent for opacity, a BORDER as well as a tint so it
+  survives colour-blind and high-contrast modes, touch posture unchanged;
+  (d) the open ground (parcel minus footprint) is tinted as the yard;
+  (e) acceptance: hovering ANY member of a property highlights the WHOLE
+  property line ONCE, with no double-draw where members touch, and a building
+  whose parcel is absent from the block highlights itself alone rather than
+  guessing.
+- **§495.5 THE TWO HONEST LIMITS (write them into MP-1's packet, do not
+  paper over them):** (1) **the shape is a fan wedge, not a burgage plot** —
+  the parcels are geometric wedges of a convex ward, while DWR1A and R-INST-2
+  measured real plots as narrow-fronted deep strips (shops 6–10 ft wide; the
+  parallel-hall parti needing 30–50 ft of frontage). MP-1 draws the engine's
+  TRUE property line; making that line the RIGHT SHAPE is DW's frontage work,
+  not MP-1's. The car says so in its own packet so nobody reads the wedge as
+  the final answer. (2) **`PARCELS_PER_WARD` is a tier band** — only the
+  selected candidates enter the block, so some buildings have no parcel row;
+  MP-1 degrades honestly (highlight the building alone) and never invents a
+  boundary. (3) COURT versus YARD — an enclosed court is a TYPED member, not a
+  subtraction, and detached outbuildings do not exist yet: both stay DW-1/DW-2
+  (§494.3 item 1). When DW lands them, MP-1's layer consumes the typed members
+  INSTEAD of the subtraction — the overlay's interface is unchanged, only its
+  input source, so there is never a second truth about what a yard is.
+- **§495.6 SEQUENCE.** MP-1 does not wait for DW: it is a publish of existing
+  geometry plus a hover affordance. It enters the second-seat queue after the
+  CH cars (the catalog fixes are already compiling and CH-1 is drafted first),
+  and its landing takes a normal slot. If the owner wants it AHEAD of CH, say
+  so and it takes the next free seat instead. Seats: UC-2 landing · CH compile.
