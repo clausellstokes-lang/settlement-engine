@@ -19756,3 +19756,61 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   of every PARENT-VERIFIED / grammar-load-bearing figure. Items cleared are
   struck from the register; the register is the owner's audit surface.
   Seats: UC-1 landing (Opus) · R-INST-4 finish (Opus).
+
+## §485 — R-INST-4 DELIVERED `[OPUS-RUN · FABLE-VALIDATION OWED]` (399 KB; 13/13 FAMILIES AT DEPTH; 46-ITEM LEDGER; THE SEARCH CAP WAS NEVER HIT); THE RESEARCH DOSSIERS PRESERVED TO refs/preserve; UC-4 BUILD DISPATCHED ON OPUS (2026-08-23 10:10 CDT)
+
+- **§485.1 DELIVERED.** `draft-R-INST-4-HOSPITALITY-POVERTY-UTILITY.md` =
+  398,855 B, 20 sections (§0 · §1 · §2–§14 · §15 · §Σ · §L · §M · APPENDIX),
+  assembled only through `RINST4-merge/assemble.sh`; C0 = 0 both files.
+  Three lanes in one day: the Fable parent (05:59–06:25Z, §0/§1 + the six
+  sub-lanes killed under §465), the Fable resume (14:07–14:46Z — §2–§14, §15,
+  §Σ drafted from the six transcripts), the Opus finish (14:47–15:06Z —
+  ledger 46 items in eight buckets built by script over 210 marker
+  sentences, method, appendix, banner; two defects repaired: the §Σ law map
+  lacked LAW 4 (derive-don't-store) — written; §0.2 rows I/J/L clobbered by a
+  sed — restored from the 06:08Z checkpoint). Label tally: 124 sub-lane
+  CONFIRMED · 123 LOCAL · 88 digest · 81 PLAUSIBLE · 16 parent CONFIRMED ·
+  7 PARENT-VERIFIED; no figure §Σ hands the grammar rests on PLAUSIBLE.
+  Web acts: 91 WebSearch (ZERO refused — §466's "cap exhausted" was R-INST-3's
+  session reading, not this session's; corrected), 136 WebFetch (102 OK),
+  ≥27 curl. The three headline OPEN widths (New Inn passage; George gallery;
+  Chichester clear span) are NOT FOUND BY CONVERGENCE (four lanes, ≥10
+  queries, four vocabularies), not by a cap — §M.6.
+- **§485.2 THE FIVE FINDINGS CARRIED TO THE DW CHARTER** (DESIGN_DWELLINGS_
+  PROGRAM.md §14 inputs; applied at DW-0): (1) 14 of 40 entries are
+  NO_BUILDING or HOSTED at every tier — `hostedIn: DWELLING(householdId) |
+  EVENT_TARGET` with PERSONS capacity + RATIO/STATUTE counts on REQ rows
+  (alehouses 1:30–1:60; taverns capped 2–3; inns 1 / 2–5 / 10–20 by rank);
+  (2) the inn's COURTYARD_GALLERY_RING + gated CROSS_PASSAGE parti IS the
+  playhouse and the bear garden — one primitive with a stage fixture;
+  ERA-GRADED entry (HORSE vs COACH ~1650); its width buckets DERIVE from the
+  measured mail coach (1.8 × 2.45 m), never measured on a building — the
+  tranche's largest debt; (3) the Fortune contract (1600) + the Rose's
+  archaeology give the RING primitive its numbers (rod-module bays; cockpit
+  12 m → Hope 24 → Rose 22 → Globe 30 → amphitheatre ellipse 87–189 m; yard
+  raked 5°; ingressus 1.47 m); crowd egress + timber-collapse wear are S9
+  properties the charter lacks; (4) the infirmary-hall-with-chapel-end parti
+  and its 17th-c. cellularization (Chichester 1680: eight cells + four
+  chimneys — walls and heat arrive together) are a complete law-5 fossil
+  sequence — `reclassedTo[]` as a DATED list with named causes; `endowed` as
+  law 2's clamp exception (almshouses 500–900 years, zero renovation);
+  (5) `FACET_INFERENCE` mis-types the whole tranche (every INN → generic;
+  "Gladiatorial school" → learning; "Hireling hall" → civic) and there is NO
+  TYPED HOME for yard, gallery ring, tiring house, ward, bath sequence (36
+  verdicts) — a `hospitality`/`entertainment`/`utility` kind + ~40 ROOM/
+  FURNISHING kinds (§Σ.2 item 20); PLAUSIBLE-by-simulation over NAMES only
+  (ledger 45).
+- **§485.3 PRESERVED.** `refs/preserve/research-dossiers-2026-08-23` =
+  `3b164bde` (parent: session-receipts-2026-08-22): DWR1A · R-INST-1 · -2 · -3
+  · -4 · CIRC addendum · the six receipts · the undercity and website-2
+  charters — 14 files, 2.1 MB, R-INST-4 cmp byte-identical. Fold-on-bank
+  discharged for the whole research program; the scratchpad is no longer the
+  only copy. Remaining research: R-INST-5 (magical), R-INST-6 (criminal).
+- **§485.4 STAMP-INTEGRITY LAW (from the lane's own correction):** two of its
+  RESUME POINT headings carried ESTIMATED UTC stamps running ahead of the
+  clock; replaced with brackets and a note. Every brief now says: capture
+  `date -u` in the SAME command that appends the heading. **UC-4 build
+  dispatched on Opus** `[OPUS-RUN · FABLE-VALIDATION OWED]` (T-UC2 alone; the
+  flag-minting wave; C-2 persisted-signal shape for the chair's §359.5
+  review; four-surface bill + edge-bundle regen). Seats: UC-1 landing (Opus)
+  · UC-4 build (Opus).
