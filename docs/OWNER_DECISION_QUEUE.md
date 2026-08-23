@@ -21214,3 +21214,77 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   warning and the size ceiling and named the four durable facts instead; the
   chair banks them (§506.6). Seats: CH-1 landing (Opus) · CG-1 build (Opus).
   **The owner's sitting is READY and is now the critical path.**
+
+## §507 — MF-CH1 LANDED (THE 47TH) `[OPUS-RUN · FABLE-VALIDATION OWED]`: THE FACET CHOKEPOINT NO LONGER READS WORDS THAT ARE NOT THERE; ⛔ A SECOND UNREACHABLE TIP, PINNED THEN CASed; THE SEVEN-BANKED CORRECTION RE-PROVED THREE INDEPENDENT WAYS; MEMORY FOLD 13 (2026-08-23 18:07 CDT)
+
+- **§507.1 LANDED.** Tip `b2852ccc3` = 5 over slot `00e7af61` (the four member
+  commits plus the landing act), porcelain 0. **No rebase was owed and that
+  was PROVED, not assumed** — `git merge-base 00e7af612 fe88c28c7` returns the
+  slot itself, so the member's build base IS the landing slot and the four
+  commits are a pure fast-forward; `verifiedBase` already named the slot in
+  both places, verified by reading it back through `parsePacketHeader` rather
+  than by eye. Carry proof over 18 rows at blob level: all 14 member paths
+  byte-identical from the holding, two CREATED paths ABSENT at the slot,
+  twelve MOVED, with `package.json`/`package-lock.json` unmoved (no mint
+  trigger), the lighting walker unmoved across all four member commits (which
+  is why the census row was the lane's to pay), and a nonexistent path ABSENT
+  at all three so the two real ABSENT readings are evidence rather than silent
+  success. Manifest 168 → 169, **ADDED=["MF-CH1"], REMOVED=[], DRIFTED=[]**;
+  tip histogram LANDED 168 · SUPERSEDED 1 · **READY 0**. Terminal, all twenty
+  chain steps: `valid: 169 packets (0 READY)` · `head = 199 (199 files,
+  contiguous)` · 173/173 · 1134/1134 · `11 known failure(s) of **28905**
+  tests, ceiling 11` · `STRICT DIST OK 52/438` · `[gate-tail] exit: 0` ·
+  `TRUE_EXIT=0` · 16.0 GB free. **CAS `00e7af61 → b2852ccc`.**
+- **§507.2 ⛔ THE SECOND UNREACHABLE TIP IN ONE DAY — AND THE SHARPER FORM OF
+  THE LAW.** CH-1's BUILD tip needed a chair pin (§505.1). Its LANDING tip was
+  worse: `refs/preserve/holding-ch1` pinned the tip's **PARENT**, so the
+  landing commit's only ref was the lane worktree's detached HEAD — a `git
+  worktree remove` or a gc would have destroyed a fully-proved landing. The
+  chair pinned `refs/preserve/landing-ch1` FIRST, then CASed, then dropped
+  both pins. **LAW SHARPENED: a holding pin covers the BUILD tip and NOTHING
+  the landing act adds; the landing lane's report must lead with its tip and
+  the chair pins it before touching anything.** Banked to the disk-exhaustion
+  file as the landing-act corollary.
+- **§507.3 THE SEVEN-BANKED CORRECTION RE-PROVED, THREE INDEPENDENT WAYS.**
+  Not inherited from §505.5: (1) all five failing test files are the same blob
+  at slot, tip and the chair baseproof; (2) a temp detached worktree at the
+  clean slot runs those five and returns **the very same seven titles** (7
+  failed / 99 passed of 106); (3) all seven assertion blocks hash identically
+  at slot and tip, with **0 titles failing at the tip that do not fail at the
+  slot**. The one banked red whose INPUT this landing moves —
+  `enforcement-claims`, which scans `docs/**.md` — was settled by measurement
+  rather than by assumption: the naked list is 6 entries byte-identical at
+  slot and tip, and CLAIM_RE over both edited docs returns 0 with the regex
+  proved live. The ratchet arithmetic closes by execution at BOTH ends:
+  28,905 = 28,896 + 9, and because UC-2's gate-tail log had been purged the
+  slot figure was **re-earned** by running `check-test-ratchet.mjs` mutexed in
+  a temp worktree rather than quoted from a receipt.
+- **§507.4 THE REST.** `build:edge-shared` re-run at the landing tree even
+  though the slot had not moved (J-CH1L-2 — converting an inherited claim into
+  a measurement for thirty seconds): all five bundles cmp 0 to the member's
+  bytes, all five `sourceHash` unchanged, only `generatedAt` moving and all
+  five restored. The census walked figure-by-figure in assertion order with
+  `parked` PASSING UNMOVED at 366, both controls convicting, restores cmp 0 —
+  **and all three censuses proved by execution**, including that
+  `negativeAssertionAnchor.walker` is generation-root scoped and never reds
+  for a `tests/lint` file. The three-place flip read back through the
+  validator's OWN parsers plus three non-vacuity controls, and the invented
+  `catalog-hygiene` family segment settled BY PERTURBATION:
+  `packetPathProblem` returns null for any family dir and the only failure
+  mode is path existence. The §489.3 arm re-run at its full 52 files plus the
+  interiorFixtures consumers, the validator suites and the ruin walker — 59
+  files / 976 tests, exit 0. Sweep over ELEVEN trees (the member's ten unioned
+  with `tests/security`, J-CH1L-1): 7 failed / 21,260 passed, **0 strays**.
+- **§507.5 TWO HAZARDS BANKED BY THE LANE, BOTH ABOUT FALSE GREEN.** A
+  mis-spelled vitest path is **dropped SILENTLY** — the lane got `Test Files 3
+  passed (3)` with exit 0 where it had named four — and **zsh does not
+  word-split an unquoted `$FILES`** (`${=FILES}` is the fix); both print
+  reassuring output over a SMALLER corpus than asked for, so the printed file
+  count is cross-checked every run. Also banked: whole-suite instruments must
+  be DETACHED (a foreground `check-test-ratchet.mjs` was SIGTERMed at the
+  ten-minute ceiling). **Memory FOLD 13** taken at 16,337 B — the
+  Live-program-hazards tail folded to
+  `archive-2026-08-23-index-fold-13.md`, index now **13,487 B**, every link
+  checked. Deferred and written down: the four `voiceMechanics` banked rows
+  live in `tests/copy`, **outside every sweep tree** — a standing §489 gap
+  worth a widening. Seats: CG-1 build (Opus) · one free. Holding roster empty.

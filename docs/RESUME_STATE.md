@@ -51,6 +51,8 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 18:07 CDT 08-23: §507 — MF-CH1 LANDED (47th) CAS → b2852ccc; 169 packets / 0 READY.
+# Second unreachable tip in a day (pin covers the BUILD tip only). Seven-banked re-proved 3 ways. FOLD 13.
 # ⭐⭐⭐ 17:09 CDT 08-23: §506 — DWELLINGS CHARTER RATIFIED as amended (2f98a169). A SCALE EXISTED
 # (PLAN_UNIT_CM_BY_TIER) — concept-word grep beat two lanes. Band Zero = the MEASURABLE, ruled the slot face.
 # Identical footprints = DEFECT (CG-2). CG-1 dispatched. THE OWNER SITTING IS THE CRITICAL PATH.

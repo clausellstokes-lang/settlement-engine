@@ -10,7 +10,7 @@ this one.**
 
 ## ⛔⛔⛔ PICKUP CARD — REWRITTEN AT EVERY LEDGER COMMIT (owner directive §448: the chair's 5-hour usage window closes often; a successor or the same chair picks up HERE in 60 seconds)
 
-**AS OF 2026-08-23 17:09 CDT · ledger §506 · ⭐⭐ DW-R RESEARCH COMPLETE · ⛔ EVERY DISPATCH `model: "opus"` (§484) · build `claude/composite-r4` = `00e7af61` (46 landings; 0 READY across 168 packets; `undercityHighWaterEnabled` on the branch DARK; migrations 197/198/199 on the branch) · LANE CAP = TWO (§465)**
+**AS OF 2026-08-23 18:07 CDT · ledger §507 · ⭐⭐ DW-R RESEARCH COMPLETE · ⛔ EVERY DISPATCH `model: "opus"` (§484) · build `claude/composite-r4` = `b2852ccc` (47 landings; 0 READY across 169 packets; `undercityHighWaterEnabled` on the branch DARK; migrations 197/198/199 on the branch) · LANE CAP = TWO (§465)**
 
 FIRST ACTS ON PICKUP, IN ORDER:
 1. `git -C /Users/cstokes/Desktop/settlement-engine log -1 --oneline review-fixes-2026-07-08 claude/composite-r4` — if either moved past this card, the ODQ tail is newer than this card; read it.
@@ -21,10 +21,9 @@ FIRST ACTS ON PICKUP, IN ORDER:
 
 | seat | lane | worktree (6298872d scratchpad) | receipt | state at card time | on pickup |
 |---|---|---|---|---|---|
-| LANDING | TE-CH1-LANDING (**Opus**) `[OPUS-RUN · FABLE-VALIDATION OWED]` | laneTECH1-tree | laneTECH1-receipt.md §"THE LANDING SLOT" | landing MF-CH1 (holding `fe88c28c7`, 4 over 00e7af61); census delta +1/+0/+1/+9/+1 → `2516/366/2150/20863/5808`; THREE censuses red on the new test file; five bundle artifacts re-verified; expect `valid: 169 packets (0 READY)` | read the per-tip exit file first; on two-part green CAS to the new tip; prune holding-ch1 |
 | BUILD | TE-CG-1 (**Opus**) `[OPUS-RUN · FABLE-VALIDATION OWED]` | laneTECG1-tree | laneTECG1-receipt.md | building MF-CG1 — the cartography ground: a REAL-PIPELINE fixture corpus (the structural half) + the re-derived per-tier caps; unblocks DW-1 | ⛔ its tip may be unreachable — PIN `refs/preserve/holding-cg1` from its report BEFORE any cleanup; then its landing |
 
-COMPLETE AND PINNED (holding for landing slots): CH-1 `fe88c28c7` (IN the landing seat; holding-ch1 — ⛔ pinned by the chair because the lane's detached worktree HEAD was its only ref) — the build shop is empty of cars for the first time since §442. Next builds: CH-1 (after its charter is ruled) · UC-5 · MP-1 (§495).
+COMPLETE AND PINNED (holding for landing slots): **NONE** — CG-1 is building; ⛔ PIN ITS TIP FROM ITS REPORT BEFORE ANY CLEANUP (twice in one day a proved tip's only ref was a lane worktree's detached HEAD — §505.1, §507.2; a holding pin covers the BUILD tip and nothing the landing act adds) — the build shop is empty of cars for the first time since §442. Next builds: CH-1 (after its charter is ruled) · UC-5 · MP-1 (§495).
 ⭐⭐ CHARTERS COMPILED + PRESERVED (§501/§502 at `refs/preserve/research-dossiers-2026-08-23` = **3449e748**, 3.28 MB): the DWELLINGS charter 164.5 KB (48 partis · 83 cell kinds · 81 fixture kinds · 10 waves · 41 cars · ONE flag · ONE declared shift · 18 owner bands) + its CODE ARCHITECTURE 103.6 KB (arch-0 seams measured → arch-6 risk register) · the CATALOG-HYGIENE charter 86.5 KB (six-car train; CH-1 zero-shift). C1–C5 RULED at §502.5.
 RESEARCH COMPLETE (§493; ALL preserved at `refs/preserve/research-dossiers-2026-08-23` = **07fbed7b**, 2.9 MB; DW-0 reads R-INST-6 Sigma.2, then R-INST-5 §488.2/§1.4/§15.2, then R-INST-6 Sigma.5, then the seven ledgers; FIRST LINE OF DW-0's BRIEF: most catalog entries are NOT buildings): DWR1A · R-INST-1 · R-INST-2 · R-INST-3 (16/16) · R-INST-4 (13/13, §485) · R-INST-5 (32 entries/11 families, §488 — five charter findings + seven engine defects G1–G7) · CIRC addendum; R-INST-6 (criminal) queued — the last; DW-0 starts when it delivers (§482).
 LANDING ORDER: (empty) → the next car built takes the seat: CH-1 · UC-5 · MP-1, then the W-C cars.
