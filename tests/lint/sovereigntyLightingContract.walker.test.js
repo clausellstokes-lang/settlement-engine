@@ -5938,7 +5938,66 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   exactly; and `suiteTitles` alone put back at the slot's 5,804 reds at `suiteTitles`
     //   ("expected 5805 to be 5804"), the member's one new describe — the file restored
     //   byte-identical both times.
-    files: 2513, parked: 366, credited: 2147, titles: 20838, suiteTitles: 5805,
+    // ── RE-RECORDED 2026-08-23 BY THE MF-UC4 LANDING (the undercity epoch layer and the
+    //   `undercityHighWaterEnabled` flag mint), CAUSE ATTRIBUTED ──
+    // 2,512/366/2,146/20,830/5,804 → 2,513/366/2,147/20,838/5,805 at the BUILD base 0f3897a5
+    // (the HK-A landing, the 43rd — the same base MF-UC1 was authored on). ONE cause, and it is
+    // not a rule change — no classifier here widened or narrowed:
+    //   +1 file / +1 CREDITED / +8 titles / +1 suite title:
+    //     tests/domain/undercityColonization.test.js, the member's acceptance suite — ONE literal
+    //     `describe` and EIGHT straight-line `test()` arms, with `.each`, `runIf`, `.skip`,
+    //     `.todo` and `.concurrent` all measured at ZERO occurrences over the file, so it is
+    //     CREDITED and every title counts. `parked` does NOT move — and on the walk below it
+    //     PASSED without redding at 366, which is the receipt that the file is credited rather
+    //     than an inference from its shape.
+    //   The eight arms: A1 the two-level reading (no criminal drivers → a seeded sheet with no
+    //     undercity); A2 monotonicity in syndicate power with `criminalShare` EQUAL to
+    //     corruption.js's own crime read; A3 fossils from RECESSION on the lit path and an
+    //     honestly empty structure on the dark one; A4 inertia, so new digging never re-rolls an
+    //     earlier epoch's monotone components; A5 flood and seal SEVERING a working without
+    //     deleting its row; A6 the DARK-FLAG BYTE-IDENTITY arm, an unlit advance gaining no key
+    //     anywhere; A7 the UNIVERSAL FRONT, every colonized piece naming its surface cover; and
+    //     A8, G-43's licence law — remove the wall and the smugglers' tunnel loses its licence.
+    //   +0 from the three OTHER test files this member edits, ATTRIBUTED BY COUNTING AT BOTH ENDS
+    //     rather than assumed. tests/domain/contributionLedgerShape.test.js RENAMES its one title
+    //     ('… the triple bijection at 24' → '… at 25') for the
+    //     ENGINE_GATED_VIRTUAL_RULE_KEYS / VIRTUAL_SUBSYSTEM_ROWS 24 → 25 move: 1 describe and
+    //     8 tests at the SLOT and 1 and 8 at this tip, so the rename is title-count neutral —
+    //     the EP-1 / WF-1a precedent, and the reason a flag mint can pay that fifth surface
+    //     without moving a census figure. tests/domain/undercityStrataExistence.test.js widens
+    //     UC-0's A6 dormancy scan to the UNION of the mention and the resolved relative import
+    //     edge (1 describe / 8 tests at both ends); tests/domain/subsystemRowsVirtual.test.js
+    //     gains the flag's three module-scope assertions inside titles that already existed
+    //     (3 describes / 14 tests at both ends). Everything else the landing moves is `src`, a
+    //     generated edge-bundle artifact, or docs.
+    // `censusAuthorization`: ODQ §311 (the undercity doctrine), §359.3 (the OB-6 fold), §431
+    // (the train's dispatch), §441 (the ruling, ratified §445.2) and §484 (this member's
+    // dispatch, `[OPUS-RUN · FABLE-VALIDATION OWED]`).
+    // ⛔ CONVICTED AT THE BUILD, then REVERTED per §417: the walker edit was made and walked
+    //   figure by figure at base 0f3897a5 ("expected 2513 to be 2512", "expected 2147 to be
+    //   2146", "expected 20838 to be 20830", "expected 5805 to be 5804"), the whole arm green at
+    //   the new tuple (33/33), the edit reverted DIGEST-EXACT to
+    //   2b58ec3cf7bd1d6dad689184f6b57cd67d7495d1f86c836f73eae710074eb90f, and the row rode the
+    //   packet (§4.2) into this landing slot so the tuple is re-derived here, never carried.
+    // ⭐⭐ THE CARRY LAW, EXECUTED AT THE LANDING SLOT (TE-UC4-LANDING, 2026-08-23; §420/§457/
+    //   §469/§480.2). This member was authored at base 0f3897a5 (after-figure 2,513/366/2,147/
+    //   20,838/5,805) and rebased onto 1b1de759 (MF-UC1's landing, the 44th, which landed while
+    //   this member was still building). The DELTA `+1/+0/+1/+8/+1` is what crossed. ⛔ THE BASE
+    //   HAD MOVED UNDER IT: MF-UC1 re-recorded the block directly above with a delta of exactly
+    //   the same shape, so the slot reads 2,513/366/2,147/20,838/5,805 — numerically equal to
+    //   this member's own build after-figure, which is precisely the coincidence that makes a
+    //   CARRIED tuple look correct while silently discarding a sibling's move — and the
+    //   after-figure re-derives to 2,514/366/2,148/20,846/5,806, the ONE live tuple line below,
+    //   CONVICTED BY EXECUTION at the rebased tip (33/33) with every figure READ FROM ITS OWN
+    //   FAILURE MESSAGE in assertion order and never computed: `files` "expected 2514 to be
+    //   2513" → `parked` PASSED UNMOVED at 366 → `credited` "expected 2148 to be 2147" →
+    //   `titles` "expected 20846 to be 20838" → `suiteTitles` "expected 5806 to be 5805". The
+    //   walked figures equal the packet's carried delta exactly, so no title was swallowed by a
+    //   parked file. TWO negative controls: the slot's own tuple put back reds at `files`
+    //   ("expected 2514 to be 2513"), this member's +1 exactly; and `suiteTitles` alone put back
+    //   at the slot's 5,805 reds at `suiteTitles` ("expected 5806 to be 5805"), the member's one
+    //   new describe — the file restored byte-identical (cmp 0) both times.
+    files: 2514, parked: 366, credited: 2148, titles: 20846, suiteTitles: 5806,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

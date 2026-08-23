@@ -22567,9 +22567,9 @@
    },
     {
       "id": "MF-UC4",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-UC4.md",
-      "verifiedBase": "0f3897a56ba57201ca499651f963eb0d11b65761",
+      "verifiedBase": "1b1de759155631b61659d8faff7fe69836687385",
       "changeManifest": [
         {
           "_note": "THE UNDERCITY EPOCH LAYER (ODQ 311.3/311.4/311.8.2(d)/311.8.3/311.8.4) as a pure domain-root deriver: deriveUndercity(settlement, { strata?, highWater? }) -> { present, colonizationShare, drivers { economy, criminalShare, syndicates[], highWater }, components[], fossils[], highWaterTier, sourceKind }. THE CRIMINAL SHARE IS CONSUMED, NEVER RE-WEIGHTED: drivers.criminalShare IS readCorruptionClimate(s).crime, corruption.js 539-542, so the undercity and the corruption layer can never disagree about how criminal a town is (441.3; the compile parallel weighting struck as J-10). The SEPARATE input is A.CRIMINAL faction standing off the settlement own power roster, the quantity the pulse actually moves. Colonization order is a typed PROXIMITY grammar over UC-0 closed seed vocabulary with a seed-keyed tie-break; the ceiling is keyed to the HIGH-WATER tier because built extent derives from the historical maximum. THE UNIVERSAL FRONT (175.1): a REAL institution by canonical key where the seed carries one, ANONYMOUS FABRIC otherwise, never a minted clickable truth. Flood and seal SEVER one working each and keep the row (use recedes, dug space never does). Fossils derive from RECESSION against the persisted mark and are structurally EMPTY on the dark path. calamityHistory is reached ONLY through buildCalamityLedger (443). 232 effective lines against the 250-per-leaf cap. This file also carries the gate, the reader and the monotone fold for the ONE persisted signal (C-2, see the packet section 2).",
@@ -22725,6 +22725,31 @@
           "_note": "THE CORPUS SOURCE. Every acceptance arm and the whole weight sweep run over REAL settlements this pipeline generates, never a hand-built fixture, so the roster and the profile the deriver reads are the ones the generator actually writes.",
           "path": "src/generators/generateSettlementPipeline.js",
           "symbol": "export function generateSettlementPipeline"
+        },
+        {
+          "_note": "THE GATE PREDICATE, pinned at the LANDED flip. `undercityHighWaterActive(worldState)` is the ONE first real read of the newly minted `undercityHighWaterEnabled` key, written with the strict `=== true` idiom so an absent flag is dark rather than truthy. It is the single door the whole persisted signal stands behind: delete it and the fold below runs unconditionally, which is the one failure the four-surface bill (CR-WR10-C item 4) exists to prevent.",
+          "path": "src/domain/undercity/colonization.js",
+          "symbol": "export function undercityHighWaterActive"
+        },
+        {
+          "_note": "THE CALL-RECEIVER READ, and the reason this member mints ZERO observed-shape reader rows. `powerHighWaterOf(record)` is how the persisted mark is read everywhere — through a named function rather than a bare `record.powerHighWater` member chain, which is exactly the shape the reader-with-no-writer walker counts. Replacing the call with the member chain would mint a row against a ceiling this member claims is unmoved (S0 part 2).",
+          "path": "src/domain/undercity/colonization.js",
+          "symbol": "export function powerHighWaterOf"
+        },
+        {
+          "_note": "THE MONOTONE FOLD — `dug is forever` (ODQ §311.3) expressed as code. `withPowerHighWater(record, observed)` only ever raises the mark, so a settlement that shrinks keeps the vertical extent its history earned. This is the whole reason the signal must be PERSISTED rather than derived (§359.5), and a fold that could lower it would make the persistence pointless while every acceptance arm stayed green on a rising world.",
+          "path": "src/domain/undercity/colonization.js",
+          "symbol": "export function withPowerHighWater"
+        },
+        {
+          "_note": "THE ADMISSION MAP THIS MEMBER IS THE CAUSE OF, in UC-0's own A6 dormancy arm. This car is the first with a pulse seam, so the arm's claim moved from `nothing outside src/domain/undercity/ reaches the leaves` to an EXACT set with a written reason per member — and the widening also cured a blindness, since the old MENTION scan could not see `'../undercity/colonization.js'` at all. ⛔ The STRUCTURE is pinned, never a count: the set grows only by an authored admission, and a new importer must still red.",
+          "path": "tests/domain/undercityStrataExistence.test.js",
+          "symbol": "const ALLOWED_PRODUCTION_IMPORTERS = Object.freeze({"
+        },
+        {
+          "_note": "SURFACE 5 OF THE FLAG BILL, pinned by its MARKER rather than by either literal. `ENGINE_GATED_VIRTUAL_RULE_KEYS` and `VIRTUAL_SUBSYSTEM_ROWS` are asserted to the same length in a war-circulation suite no undercity battery would think to name, and that file's own comment predicted every flag-minting wave would meet it late. ⛔ The two LENGTHS are figures that move on the next mint and are deliberately NOT pinned (ODQ TE-26); this row names the wave instead, so deleting the record is what reds.",
+          "path": "tests/domain/contributionLedgerShape.test.js",
+          "symbol": "MF-UC4 paid the four surfaces its charter priced"
         }
       ],
       "acceptanceCases": [

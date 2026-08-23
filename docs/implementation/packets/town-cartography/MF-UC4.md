@@ -1,8 +1,11 @@
 # Town cartography / MF-UC4 — the undercity EPOCH layer: `deriveUndercity` derives who grew the undercity and what receded, and the ONE persisted signal a derivation cannot recover — the vertical high-water mark — rides an existing pulse seam behind a NEW virtual flag that is dark by default
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** 1
-- **Verified base:** `claude/composite-r4` at `0f3897a56ba57201ca499651f963eb0d11b65761`
+- **Verified base:** `claude/composite-r4` at `1b1de759155631b61659d8faff7fe69836687385`
+  ⚠⚠ **AS AUTHORED — the row above now names the LANDING SLOT (`1b1de759`, MF-UC1's landing,
+  the 44th; see §12 below); the BUILD base was `0f3897a56ba57201ca499651f963eb0d11b65761`.** The
+  continuation that follows was written at that BUILD base:
   — HK-A's landing, the 43rd, read with `git rev-parse` at the lane's opening and re-read at every
   proof below. Every figure in this packet was executed at THIS base by the implementing lane
   TE-UC4; nothing is inherited from the charter (`draft-UNDERCITY-PLAN.md`, ruled ODQ §441,
@@ -488,5 +491,89 @@ differing, 0 unmatched at the baseproof.**
 A grep of all eight FAIL lines for `MF-UC4 \| undercityColonization \| colonization \|
 factionCompetition \| contributionLedgerShape \| undercityStrataExistence \| pulseKernelLineAddress`
 returns **0**. **Classification: 7/7 banked, 1 deferred by design, 0 strays, no STOP.**
+
+---
+
+## §12 · THE LANDING SLOT (TE-UC4-LANDING, 2026-08-23 — slot `1b1de759`, MF-UC1's landing, the 44th)
+
+Landed by lane **TE-UC4-LANDING**, **`[OPUS-RUN · FABLE-VALIDATION OWED]`** (ODQ §484), on the
+chair's **C-2 ratification (ODQ §487.2)**. The lane moved no ref; the chair executes the CAS.
+
+- **Carry-proof at blob level FIRST** (braced `${sha}:path`, with non-vacuity controls; ⚠ a bare
+  `git rev-parse sha:path` ECHOES ITS ARGUMENT on failure, so an abbreviated slice prints the
+  COMMIT sha as if it were a blob — `--verify --quiet` is what makes the reading real). Of the
+  **18** member paths, **three are created by this member** (the packet, `src/domain/undercity/
+  colonization.js`, `tests/domain/undercityColonization.test.js`), **two moved** at the slot —
+  `docs/implementation/INDEX.md` (`eb0bc0776b` → `509d51b48d`) and
+  `docs/implementation/PACKET_MANIFEST.json` (`11a37fe4c5` → `5c0c41a555`) — and the other
+  **thirteen are the SAME blob at base and slot**, so no code path collided. Controls:
+  `package.json` `2b5ec2014c` and `package-lock.json` `1a8a80b12b` identical at base, slot and
+  holding (no mint trigger crossed), and a nonexistent packet path resolved ABSENT at all three.
+  `tests/lint/sovereigntyLightingContract.walker.test.js` moved at the slot (`ce7f4b94f6` →
+  `53f2aae16f`) and is base-identical in the holding (the §417 revert), so the member never
+  touched it in the rebase.
+- **§475, and this member DOES owe the regen.** `src/domain/worldPulse/simulationRules.js` is an
+  input of the `aiCharter` and `aiOutputSchema` rosters (control `cohesionWeave.js` hits 3 of the
+  five). All **133 tracked bundle inputs are UNMOVED base → slot**, so the Source-hash header was
+  predicted stable and then PROVED: `npm run build:edge-shared` re-run at the rebased tree exits 0,
+  both bundle `.js` artifacts come back **byte-identical**, and the five `.meta.json` differ in
+  **ten content lines, all ten of them `generatedAt` wall-clock stamps** — every `sourceHash`
+  unchanged (`a8ae453f07314002`, `5ccae1a97b7a9c45`, `313a31ab0e5a9aec`, `9416e4995620b37a`,
+  `9860939aa2829e62`). No drift, so no STOP; the five metas were restored to the committed bytes
+  rather than re-stamped with a fresh clock (J-UC4L-2).
+- **The rebase stopped exactly once**, at 4/7 (`0b3247b7`, the packet/manifest/index commit), on
+  exactly the two expected paths, one conflict hunk each. Commits 1–3 and 5–7 applied clean —
+  including the leaf, the seam, the flag bill and the four other test files, as their unmoved
+  blobs predicted.
+- **Surgery, keep-both, by text only.** INDEX: this row placed FIRST at the "Current packet set"
+  head, above MF-UC1 — the table is newest-first, so **no slot row moved**; `diff SLOT resolved`
+  is **+1 / −0** and that one line `cmp`s 0 (3,767 B) against the member's own authored line.
+  MANIFEST: the slot's bytes kept verbatim, the predecessor row's closing brace gaining the one
+  comma JSON requires, and this member's block appended unchanged — deep-compare **166 → 167,
+  ADDED=["MF-UC4"], REMOVED=[], DRIFTED=[]**, non-packet keys identical, and the appended block
+  byte-identical to the holding's (sha256 `52e2cfc5fc7b58c2…`, 248 lines, 21,276 B). Of the 18
+  paths, **sixteen are blob-identical to the holding** at the rebased tip; the two that differ are
+  exactly the two that moved.
+- **The status walk — THREE places, not one** (§486.2, the lesson UC-1's validator taught):
+  the manifest row (`status` READY → LANDED, `verifiedBase` → the slot sha, `requiredSymbols`
+  **16 → 21**), this packet's own Markdown header, and the **INDEX STATUS column**, which the
+  validator reaches through the manifest's `indexPath` rather than a literal path in its source.
+  The five added rows are the gate predicate `undercityHighWaterActive`, the call-receiver read
+  `powerHighWaterOf`, the monotone fold `withPowerHighWater`, UC-0's widened admission map
+  (`ALLOWED_PRODUCTION_IMPORTERS`) and the fifth flag surface's MARKER in
+  `tests/domain/contributionLedgerShape.test.js`. ⛔ Every one is a symbol or a marker and **not a
+  count**: the two `toHaveLength` figures, the roster count and the census tuple all move when a
+  sibling lands, and a re-recorded FIGURE in `requiredSymbols` is refused by the estate's own law
+  (ODQ TE-26). `deriveUndercity`, the certification row, the corruption read and
+  `ensureFactionStates` were already pinned at READY and were not duplicated.
+- **The census row, written ONCE here and re-derived by execution (§420/§457/§469/§480.2):** the
+  slot read `2513/366/2147/20838/5805`; the DELTA `+1/+0/+1/+8/+1` that crossed re-derives to
+  **`2514/366/2148/20846/5806`**, each moved figure read from the arm's own failure message in
+  assertion order and never computed (`expected 2514 to be 2513` → `expected 2148 to be 2147` →
+  `expected 20846 to be 20838` → `expected 5806 to be 5805`), the whole arm green at the end
+  (33/33). ⭐ `parked` PASSED unmoved at **366** on every iteration. The walked figures equal the
+  carried delta exactly, so nothing was swallowed by a parked file. Two negative controls (the
+  slot tuple back; `suiteTitles` alone back) both red as predicted and the file restored `cmp` 0
+  each time. ⭐ The slot's tuple happened to be NUMERICALLY EQUAL to this member's own build
+  after-figure, because MF-UC1's delta had the same shape — the exact coincidence that makes a
+  carried tuple look right while discarding a sibling's move.
+- **The other three test files this member edits move NO census figure, counted at both ends:**
+  `contributionLedgerShape` 1 describe / 8 tests at the slot and at the tip (its title is RENAMED,
+  the EP-1 / WF-1a precedent), `undercityStrataExistence` 1 / 8, `subsystemRowsVirtual` 3 / 14.
+- **The roster count re-read at the slot:** `ruinFilterRoster.walker` passes at **91** (12/12) and
+  its control at 90 convicts `expected 91 to be 90` — so UC-1's raise still holds and this member
+  owes it nothing, its leaf spelling `.institutions` **zero** times against a control file that
+  spells it twice.
+- **`validate:packets` → `[implementation-packets] valid: 167 packets (0 READY)`, exit 0.**
+- **S0, the gates and the terminal:** the two-part S0 reading, the mutexed re-proofs, the widened
+  sweep classification and the full bare `npm run check:tail` verdict lines are recorded in the
+  lane receipt (`laneTEUC4-receipt.md`, "THE LANDING SLOT").
+- **Landing judgments (vetoable):** J-UC4L-1 one landing-act commit rather than three;
+  J-UC4L-2 the five bundle metas restored to their committed `generatedAt` stamps rather than
+  re-stamped, since the regen proved every `sourceHash` and both `.js` artifacts identical;
+  J-UC4L-3 the census walker is NOT pinned in `requiredSymbols`, because §4.2 defers that row's
+  text verbatim to the landing act and a pin would turn it into an obligation the packet
+  disclaims; J-UC4L-4 the INDEX status cell flipped READY → LANDED, which the validator
+  cross-checks and is therefore required rather than cosmetic.
 
 ---
