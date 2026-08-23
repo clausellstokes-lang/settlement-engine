@@ -19971,3 +19971,48 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   vaults), the PRE_SEED age rule, UC-4's inertia contract honoured. Seats:
   UC-4 landing (Opus) · UC-2 build (Opus). Research remaining: R-INST-6
   (criminal) — then DW-0 starts (§482).
+
+## §489 — UC-4's LANDING STOPPED AT THE TERMINAL ON A SIXTH FLAG-BILL SURFACE NO LANE SWEEP CAN SEE; RULED: PAID IN-TRAIN AT THE LANDING ACT (§479.2 PRECEDENT); LAW: THE WIDENED SWEEP GAINS A GREP-DRIVEN ARM OVER ALL 37 TEST TREES (2026-08-23 12:35 CDT)
+
+- **§489.1 THE STOP.** TE-UC4-LANDING (Opus) `[OPUS-RUN · FABLE-VALIDATION
+  OWED]`: tip `eb57f018` = 8 over slot `1b1de759`, every boundary proved
+  (carry table 2 MOVED / 13 UNMOVED / 3 created; bundles re-built at the
+  rebased tree byte-identical with only ten `generatedAt` stamps moving —
+  metas restored; manifest 166 → 167 ADDED=[MF-UC4]; tuple walked
+  `2514/366/2148/20846/5806` with both controls; three-place flip; `valid:
+  167 packets (0 READY)`; S0 cmp 0; ten-tree sweep 7/7 banked + `tests/ui`
+  green) — then the bare terminal redded at step 15 on ONE test outside every
+  lane's sweep: `tests/soak-harness/coveringArrayCoverage.test.js` "the flag
+  domain is ENUMERATED FROM THE REGISTRY" `expected 25 to be 24`. Attributed
+  by execution: the file's blob `40a074e4…` is identical at slot and tip,
+  passes at the slot, fails at the tip — the new virtual key moved the
+  registry census (virtual 24 → 25, union 81 → 82, union−governed 56 → 57;
+  governed 25, ungoverned 32, overlap [], nonBoolean 13 UNCHANGED — the
+  lockstep closure that proves the key is genuinely virtual). `build` and
+  `verify:dist` run separately: both green (`STRICT DIST OK 52/438`). The
+  lane did NOT cure it (outside the packet's changeManifest; MF-UC4 is
+  terminal) and held — correctly.
+- **§489.2 RULED:** the flag bill is SIX surfaces (the file's own comment
+  names itself as this trap — "a wave that pays the rest of the flag-mint
+  bill meets them for the first time at the terminal gate"). The three
+  literals are paid IN-TRAIN at the landing act by the §479.2 precedent,
+  cited in MF-UC4.md §"landing", with the negative control (24 back → reds)
+  and the lighting walker re-run to PROVE the tuple does not move; terminal
+  re-fired; the lane holds for CAS `1b1de759 → <newtip>`. Memory: the lane
+  bannered the "five surfaces" file stale and wrote the sixth.
+- **§489.3 LAW (structural, every later brief):** `tests/` holds **37**
+  trees; the standing widened sweep covers ten (+ `tests/ui`); twenty-six —
+  `soak-harness`, `joins`, `lib`, `components`, `kernel`, `mcp`, `foundry`,
+  `simulation`, `store` and seventeen more — are seen only by `test:ratchet`
+  at step 15 of the terminal. From now the widened sweep gains a
+  **GREP-DRIVEN ARM**: `git grep -l` every exported symbol, registry key,
+  flag name and enum token the member ADDS across ALL of `tests/`, and run
+  every matching file mutexed before the terminal (the lane's own 12-file
+  grep for `ENGINE_GATED_VIRTUAL_RULE_KEYS` / `VIRTUAL_SUBSYSTEM_ROWS` would
+  have found this one). The build-lane memory already prescribed the grep;
+  it was not run tree-wide — the arm makes it mechanical.
+- **§489.4 A READING HAZARD BANKED BY THE LANE:** a bare `git rev-parse
+  sha:path` ECHOES ITS ARGUMENT on failure — three created files briefly read
+  as MOVED with plausible ids; `--verify --quiet` is what makes a blob
+  reading real. Seats: UC-4 landing (Opus, resumed with the cure) · UC-2
+  build (Opus).
