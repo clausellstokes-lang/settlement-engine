@@ -1,15 +1,26 @@
 # Town cartography / MF-T2M — architectural-history operations and deterministic fixtures: the §287.16 massing-foundation member that lands the SPEC's twelve-kind dated-operation payload grammar as a domain member of the fabric's ONE sealed-artifact grammar, and executes the §423 Shape-B strip that demotes `fabric/operations.js` from door-claimant to payload compiler
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** 1
 - **Implemented by:** lane TE-T2M, against the chair-ruled compile `draft-MF-T2M.md`
   (ODQ §426; compiled by TC-T2M under ODQ §423.1).
 - **Ruling of record:** **ODQ §423** (the domain door; Option B + the §423.1 Option-D law) as
   ruled at **ODQ §426**. This member executes consequences (1) and (2); the store side is
   UNTOUCHED — consequence (3) keeps the door verb docketed with the executor tranche.
-- **Verified base:** `claude/composite-r4` at `4d2d17f86f173686d142a97e3fd356d6b7be97e6`
-- **Base provenance:** the branch token above names the code of record and the landing branch,
-  exactly as MF-T2H, MF-T2J and MF-T2K spell it; the base OBJECT is
+- **Verified base:** `claude/composite-r4` at `115396365f4e1c251af2b2e7a71c2c6c7c0b328a`
+- **Landing note (TE-MAPSTACK-LANDING, 2026-08-23, ODQ §461.2 — THE MAP STACK):** authored at BUILD
+  base `4d2d17f8` as holding tip `faf3def4` (pinned `refs/preserve/holding-t2m`); landed as ONE stacked landing
+  with its three siblings (MF-T2J → MF-T2K → MF-T2L, then MF-T2M rebased onto the chain tip) at
+  slot `11539636` (WEB-7, the 31st landing). Rebased implementation commits `26e46608 → 03f21d5c → 4b56e2dd → 80dbf388 → 2869330f`
+  (authored `563d0e38 → 77096cc1 → f819a3e4 → 1cb04693 → faf3def4`). Entered at **LANDED** directly — the §410 form, as WEB-5/6/7 did:
+  MF-T2H's READY reservation on the census walker stands until HK-2 lands, so the §417 deferred
+  row(s) — the §1.6 Rows A and B — could only enter the manifest at a terminal status, and did, at this act. Census:
+  slot `2500 / 365 / 2135 / 20756 / 5792`; this member's position `2505 / 365 / 2140 / 20781 / 5797` (the SUM — sibling of MF-T2L, ODQ §430 ruling 1); the stack's ONE live
+  tuple `2505 / 365 / 2140 / 20781 / 5797` convicted at the stack tip (33/33) with the negative control
+  (*"the estate's file count moved — re-measure, do not re-word: expected 2505 to be 2500"*). Digests re-hashed at the landed tree: none (every cited digest still matches the landed tree).
+- **Base provenance (AS AUTHORED — the Verified base row above now names the LANDING SLOT; see the
+  Landing note above; the BUILD base was `4d2d17f8`):** the branch token names the code of record
+  and the landing branch, exactly as MF-T2H, MF-T2J and MF-T2K spell it; the BUILD base OBJECT was
   `refs/preserve/holding-t2k` —
   MF-T2K's holding tip, and it is NOT yet an ancestor of that branch, which is the whole point of
   a holding stack. ⭐ **DERIVED WITH EXECUTED EVIDENCE, not assumption:** TE-T2L had
@@ -45,6 +56,12 @@
 > **ODQ §304.4** (the D3a port charter), **ODQ §310.4** (the wave charter), **ODQ §423/§423.1**
 > (the door ruling and the structural law) and **ODQ §426** (this member's compile ruling), under
 > §299.4's binding-forward rule. Family stamp: GRANTED at **ODQ §312.2b**.
+> ⭐⭐ **STACKED LANDING (ODQ §461.2) — convicted at the stack tip, never carried.** Slot tuple
+> (`claude/composite-r4` = `11539636`, WEB-7): `2500 / 365 / 2135 / 20756 / 5792`; this member's position in the chain
+> re-derives to `2505 / 365 / 2140 / 20781 / 5797` (the SUM — sibling of MF-T2L, ODQ §430 ruling 1); the stack's ONE live tuple `2505 / 365 / 2140 / 20781 / 5797` was convicted at the
+> stack tip (33/33) with the negative control — the slot's own tuple put back reds at `files`:
+> *"the estate's file count moved — re-measure, do not re-word: expected 2505 to be 2500"* (the summed delta +5). The DELTA `+1/+0/+1/+7/+1` crossed the rebase; the
+> authored tuples above are the BUILD-base history.
 
 ---
 

@@ -20035,9 +20035,9 @@
     },
     {
       "id": "MF-T2K",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T2K.md",
-      "verifiedBase": "f7ba314505703b96097b8aba568cc80e3ec30023",
+      "verifiedBase": "115396365f4e1c251af2b2e7a71c2c6c7c0b328a",
       "changeManifest": [
         {
           "_note": "THE LEAF. SPEC 10.5's typed SupportSurfaceRef and SPEC 6.4.1's component-slot axis, as the D3a-core era slice. A design-implementation member, not a port-by-hash one: four greps over the 54 sealed fabric modules return ZERO support-registry, slot or role machinery, so there is no sandbox module to port and the sources are the volume's contract plus the landed substrate. Three central behaviours: surfaceId is DERIVED and a caller-supplied one is refused (SPEC 10.5's not-a-free-alias law); injectivity is bought by RESERVING ':' in the segment grammar rather than by a separator byte, because the derived key must pass the landed id wall which admits no C0 byte and controlBytes.test.js forbids the raw byte in source; and the slot axis is TOTAL with the no-inference law structural in BOTH directions. 182 effective lines against the ratified 200-per-leaf and 210-packet caps. Dormant: no consumer, no barrel row, nothing persisted, and the leaf is a SINK in the module graph. Imports EXACTLY foundation.js and massPart.js, which is a design constraint rather than an accident: FOUNDATION_READERS is frozen over the whole fabric directory and tracks coordinateAbi.js and solidLegality.js, so importing either would owe a roster edit inside another member's reserved file for zero behaviour.",
@@ -20053,6 +20053,16 @@
           "_note": "THE PACKET.",
           "action": "DOC",
           "path": "docs/implementation/packets/town-cartography/MF-T2K.md"
+        },
+        {
+          "_note": "THE CENSUS RE-RECORD, all five figures re-derived together with the cause stated: ONE NEW TEST FILE and nothing else. 2501/364/2137/20731/5789 -> 2502/364/2138/20737/5790 (tuples re-derived at the landing base per the carry law; the DELTA +1/0/+1/+6/+1 is what crosses a rebase). The walk was SEQUENCED and each figure read from its own arm's failure message; attribution BY ISOLATION, hiding the one file convicting the base tuple exactly at 2501. parked holds at 364 because every title is a string literal in one describe. censusAuthorization: ODQ 276, ODQ 304.4, ODQ 310.4, ODQ 417.1. LANDED AT THE MAP STACK SLOT 11539636 (ODQ 461.2, stacked landing): slot tuple 2500/365/2135/20756/5792; this member's position in the chain re-derives to 2503/365/2138/20768/5795; the stack's one live tuple 2505/365/2140/20781/5797 was convicted at the stack tip (33/33) with the negative control (the slot's tuple put back reds at files: expected 2505 to be 2500). The DELTA +1/+0/+1/+6/+1 crossed the rebase; the authored figures in this note are the BUILD-base history.",
+          "action": "TEST",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        },
+        {
+          "_note": "ONE ROSTER ROW: 'supportSurface.js' appended to CODEX_SLICE_MODULES in alphabetical position - exactly the act the walker's own failure message orders for a landed module the record does not assign ('add it to CODEX_SLICE_MODULES here and say why in the packet'). The why, from packet section 1.3: the leaf is a D3a design-implementation mint, not a sandbox module; nodeOfModule() rightly resolves it to no node and the record's 49-module lead is untouched. FOUNDATION_READERS is unmoved because the leaf imports exactly foundation.js and massPart.js, neither of which the roster tracks. The naming mismatch is ruled at ODQ 419: the row goes in per the failure message and the rename rides MF-T2L.",
+          "action": "TEST",
+          "path": "tests/lint/townMapStageManifest.walker.test.js"
         }
       ],
       "requiredSymbols": [
@@ -20157,9 +20167,9 @@
     },
     {
       "id": "MF-T2L",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T2L.md",
-      "verifiedBase": "4d2d17f86f173686d142a97e3fd356d6b7be97e6",
+      "verifiedBase": "115396365f4e1c251af2b2e7a71c2c6c7c0b328a",
       "changeManifest": [
         {
           "_note": "THE LEAF, carrying BOTH halves of ODQ 287.5's vegetation sentence in one file because the plan's law for this member is 'both or neither'. Half one is the durable mass: trunk and canopy are REAL landed solidPartQ volumes on ONE derived support key, and the SPEC 10.6 support-truth law is a structural impossibility rather than a check - the caller's supportSurfaceRef record is RE-DERIVED through MF-T2K's own constructor and refused naming both keys if it disagrees, the derived key is threaded into both solids, and neither the trunk nor the canopy input may carry a key of its own. Half two is the field plus its BEHAVIOUR: a KNOWN-COUNT record over the foundation's own canonical-rect region law, and instances regenerated from (fieldKey, instanceIndex) alone by hash32 of a VERSIONED basis folded by integer modulo, so containment holds by construction and the record carries NO id field of any kind - nonpersistence as a structural fact. R-MF-2 is answered head-on: the leaf multiplies no quanta, its only coordinate arithmetic is minX + (uint32 % widthQ), and it says so in its own docblock. Zero free parameters in the derivation, so nothing here touches the owner-signature surface. 149 effective lines against the ODQ 425-ratified 230-per-leaf and 240-packet caps. Dormant: no consumer, no barrel row, nothing persisted, and the leaf is a SINK in the module graph. Imports EXACTLY foundation.js, massPart.js, supportSurface.js and fabricRng.js - a design constraint, not an accident: FOUNDATION_READERS is frozen over the whole fabric directory and tracks coordinateAbi.js, solidLegality.js, spatialReceipt.js and stageManifest.js, so importing any of them would owe a roster edit inside another member's reserved file for zero behaviour.",
@@ -20175,6 +20185,16 @@
           "_note": "THE PACKET.",
           "action": "DOC",
           "path": "docs/implementation/packets/town-cartography/MF-T2L.md"
+        },
+        {
+          "_note": "THE CENSUS RE-RECORD, all five figures re-derived together with the cause stated: ONE NEW TEST FILE and nothing else. 2502/364/2138/20737/5790 -> 2503/364/2139/20743/5791 (tuples re-derived at the landing base per the carry law; the DELTA +1/0/+1/+6/+1 is what crosses a rebase). The walk was SEQUENCED and each figure read from its own arm's failure message; attribution BY ISOLATION, with the one file hidden convicting the base tuple exactly. parked holds at 364 because every title is a string literal in one describe. censusAuthorization: ODQ 276, ODQ 304.4, ODQ 310.4, ODQ 421, ODQ 425. LANDED AT THE MAP STACK SLOT 11539636 (ODQ 461.2, stacked landing): slot tuple 2500/365/2135/20756/5792; this member's position in the chain re-derives to 2504/365/2139/20774/5796; the stack's one live tuple 2505/365/2140/20781/5797 was convicted at the stack tip (33/33) with the negative control (the slot's tuple put back reds at files: expected 2505 to be 2500). The DELTA +1/+0/+1/+6/+1 crossed the rebase; the authored figures in this note are the BUILD-base history.",
+          "action": "TEST",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        },
+        {
+          "_note": "ONE ROSTER ROW AND THE RULED RENAME, one edit: 'vegetation.js' appended in alphabetical position (after 'supportSurface.js') to the roster formerly named CODEX_SLICE_MODULES, and that constant renamed to UNASSIGNED_LANDED_MODULES per ODQ 419.2 ('the roster rename rides MF-T2L's landing act - one honest word over a third roster'). The why for the row, from packet section 1.8: the leaf is a D3a design-implementation mint measured against the sealed tree (zero sandbox vegetation modules), so nodeOfModule() rightly resolves it to no node and the record's 49-module lead is untouched. FOUNDATION_READERS is unmoved: the leaf imports foundation.js, massPart.js, supportSurface.js and fabricRng.js, none of which that roster tracks.",
+          "action": "TEST",
+          "path": "tests/lint/townMapStageManifest.walker.test.js"
         }
       ],
       "requiredSymbols": [
@@ -20283,9 +20303,9 @@
     },
     {
       "id": "MF-T2M",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T2M.md",
-      "verifiedBase": "4d2d17f86f173686d142a97e3fd356d6b7be97e6",
+      "verifiedBase": "115396365f4e1c251af2b2e7a71c2c6c7c0b328a",
       "changeManifest": [
         {
           "_note": "THE LEAF. The GENERATION-SPEC's ArchitecturalHistoryOperation as a D3a era slice, sealed through the fabric's ONE artifact grammar with artifactKind ARCHITECTURAL_HISTORY_OPERATION - the spelling the SPEC's own CoreArtifactKind union already carries, so the member JOINS the grammar rather than minting beside it. PAYLOAD LEVEL ONLY (ODQ 423/423.1): no gate, no verb, no executor, no receipt, no store row; its artifacts are proposals until a registered store verb accepts them. Three central behaviours: artifactId is DERIVED from content and a caller-supplied artifactId or contentHash is refused BY NAME (the MF-T2K free-alias law); the one-way before-ref law is STRUCTURAL because no after-ref field exists to misuse; and the cause axis is total in two arms with the no-inference law spelled in BOTH directions with DISTINCT messages. CAUSE_UNKNOWN_REASONS is declared LOCALLY rather than imported from massPart.js, because the two SPEC four-lists are NOT byte-identical here - they differ by one member each way as sets and swap two positions - and A1 pins both facts so a deduplication cannot fuse two vocabularies the SPEC keeps distinct. 210 effective lines against the ODQ 426-carried 220-per-leaf cap. Dormant: no consumer, no barrel row, nothing persisted, a SINK in the module graph. Imports EXACTLY foundation.js and townScene/stableScene.js, neither tracked by FOUNDATION_READERS and both already inside the fabric's transitive closure, so no new module enters any import graph.",
@@ -20321,6 +20341,16 @@
           "_note": "THE PACKET.",
           "action": "DOC",
           "path": "docs/implementation/packets/town-cartography/MF-T2M.md"
+        },
+        {
+          "_note": "THE CENSUS RE-RECORD, all five figures re-derived together with the cause stated: ONE NEW TEST FILE (+1 file, +6 titles, +1 suite title) plus ONE arm added to the already-credited single-declaration walker (+1 title) — the ODQ 423.1 Option-D prevention arm, whose +7 shape was RAISED and RATIFIED at ODQ 426(3). 2502/364/2138/20737/5790 -> 2503/364/2139/20744/5791 (tuples re-derived at the landing base per the carry law; the DELTA +1/0/+1/+7/+1 is what crosses a rebase). The walk was SEQUENCED and each figure read from its own arm's failure message. ATTRIBUTED BY ISOLATION IN TWO STEPS because the motion has two sources: hiding townMapArchitecturalHistory.test.js alone read 2502/364/2138/20738/5790 GREEN (base plus only the walker arm's title), and reverting the walker arm as well read 2502/364/2138/20737/5790 GREEN (the base tuple exactly); both restores digest-exact. parked holds at 364 because every title is a string literal in one describe. censusAuthorization: ODQ 276, ODQ 304.4, ODQ 310.4, ODQ 423.1, ODQ 426. LANDED AT THE MAP STACK SLOT 11539636 (ODQ 461.2, stacked landing): slot tuple 2500/365/2135/20756/5792; this member's position in the chain re-derives to 2505/365/2140/20781/5797; the stack's one live tuple 2505/365/2140/20781/5797 was convicted at the stack tip (33/33) with the negative control (the slot's tuple put back reds at files: expected 2505 to be 2500). The DELTA +1/+0/+1/+7/+1 crossed the rebase; the authored figures in this note are the BUILD-base history.",
+          "action": "TEST",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        },
+        {
+          "_note": "ONE ROSTER ROW: 'architecturalHistory.js' appended in FIRST alphabetical position to the unassigned-landed roster (CODEX_SLICE_MODULES at this base; re-check the constant name against the post-MF-T2L walker at the landing slot — the walker's own failure message, not the constant name, is the contract). The why, from packet section 1.1: the leaf is a D3a design-implementation mint against the SPEC contract, so the sealed record measured a tree it was never in and nodeOfModule() rightly resolves it to no node; the record's 49-module lead pin and the assigned-set literal are untouched, and the accounting arithmetic pin is computed, so it self-adjusts. FOUNDATION_READERS is unmoved: the leaf imports foundation.js and townScene/stableScene.js, neither of which that roster tracks; operations.js is EDITED rather than created, is already on the roster, and reads no tracked module. RE-CHECKED AT THE LANDING SLOT as this note orders: the constant is UNASSIGNED_LANDED_MODULES (renamed by MF-T2L one position earlier in the stack); the row was re-applied against it in FIRST alphabetical position.",
+          "action": "TEST",
+          "path": "tests/lint/townMapStageManifest.walker.test.js"
         }
       ],
       "requiredSymbols": [
@@ -20420,9 +20450,9 @@
     },
     {
       "id": "MF-T2J",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-T2J.md",
-      "verifiedBase": "05e7f9d56eec119102f540e316bd8e1061f81a92",
+      "verifiedBase": "115396365f4e1c251af2b2e7a71c2c6c7c0b328a",
       "changeManifest": [
         {
           "_note": "THE LEAF. SPEC 10.14's executable S0-S23 stage manifest, ported from the sealed W3 tip as PUBLISHED DATA rather than as a self-deriving table, because 49 of the 54 modules it names do not exist in this tree. Sealed equivalence is TOTAL: 10 exported values, 5 nullary functions, topologicalNodeIds in both modes, all 25 stageOrderIndex rows and all 56 nodeOfModule rows compare with ZERO differences. Two declared divergences, neither behavioural: the header prose is rewritten because the sealed one says the table is source-derived and here it is not, and .map(Object.freeze) becomes .map((node) => Object.freeze(node)) because the bare reference erases the element type under tsconfig.domain-strict.json. 219 effective lines against the 400 cap and the 250-per-leaf cap. Dormant: no consumer, no barrel row, nothing persisted, and the leaf is a SINK in the module graph.",
@@ -20452,6 +20482,11 @@
         {
           "action": "DOC",
           "path": "docs/implementation/packets/town-cartography/MF-T2J.md"
+        },
+        {
+          "_note": "THE CENSUS RE-RECORD, all five figures re-derived together with the cause stated: TWO NEW TEST FILES and nothing else. 2499/364/2135/20725/5787 -> 2501/364/2137/20731/5789. The walk was SEQUENCED and each figure was read from its own arm's failure message; attribution is BY ISOLATION, with both files hidden convicting the base tuple exactly. parked holds at 364 because both files spell every title as a literal. censusAuthorization: ODQ 276, ODQ 304.4. LANDED AT THE MAP STACK SLOT 11539636 (ODQ 461.2, stacked landing): slot tuple 2500/365/2135/20756/5792; this member's position in the chain re-derives to 2502/365/2137/20762/5794; the stack's one live tuple 2505/365/2140/20781/5797 was convicted at the stack tip (33/33) with the negative control (the slot's tuple put back reds at files: expected 2505 to be 2500). The DELTA +2/+0/+2/+6/+2 crossed the rebase; the authored figures in this note are the BUILD-base history.",
+          "action": "TEST",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
         }
       ],
       "requiredSymbols": [

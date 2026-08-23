@@ -1,10 +1,10 @@
 # Town cartography / MF-T2J — the executable S0–S23 stage manifest, ported as a published record, with the stage-graph SCC preserved rather than repaired
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** 1
-- **Verified base:** `claude/composite-r4` at `05e7f9d56eec119102f540e316bd8e1061f81a92`
-  ⚠⚠ **READ THE NEXT FOUR LINES BEFORE TRUSTING THAT ROW.** The SHA is MF-T2H's **HOLDING
-  (unlanded)** commit, which is itself stacked on MF-T2Bf's `7d6bde7caa61af99df85640b210328745caaad2f`,
+- **Verified base:** `claude/composite-r4` at `115396365f4e1c251af2b2e7a71c2c6c7c0b328a`
+  ⚠⚠ **AS AUTHORED — the row above now names the LANDING SLOT (see the Landing note below); the
+  BUILD base was `05e7f9d5`.** That SHA is MF-T2H's **HOLDING (unlanded)** commit, which is itself stacked on MF-T2Bf's `7d6bde7caa61af99df85640b210328745caaad2f`,
   so this member is **THREE DEEP**. Neither is yet an ancestor of `claude/composite-r4`, which stood
   at `19b799ce718d52e36a3b14a85fa9cfd5051ccf26` while this member was built. The branch token names
   the branch of record this member is verified FOR and will land on; the row is **re-stamped at the
@@ -13,6 +13,16 @@
   fabricated-SHA law). Every figure below was executed at THIS base.
   ⚠ The status and verified-base values above each stand ALONE on their line because
   `parsePacketHeader` (`scripts/implementation-packets.mjs`) anchors both rows at end-of-line.
+- **Landing note (TE-MAPSTACK-LANDING, 2026-08-23, ODQ §461.2 — THE MAP STACK):** authored at BUILD
+  base `05e7f9d5` as holding tip `f7ba3145` (pinned `refs/preserve/holding-t2j`); landed as ONE stacked landing
+  with its three siblings (MF-T2J → MF-T2K → MF-T2L, then MF-T2M rebased onto the chain tip) at
+  slot `11539636` (WEB-7, the 31st landing). Rebased implementation commits `6e34c32f → 73351cf4 → 8a0ceca9 → 09a57da7`
+  (authored `ac095693 → f39fe861 → 11761f70 → f7ba3145`). Entered at **LANDED** directly — the §410 form, as WEB-5/6/7 did:
+  MF-T2H's READY reservation on the census walker stands until HK-2 lands, so the §417 deferred
+  row(s) — the §1.4 row — could only enter the manifest at a terminal status, and did, at this act. Census:
+  slot `2500 / 365 / 2135 / 20756 / 5792`; this member's position `2502 / 365 / 2137 / 20762 / 5794`; the stack's ONE live
+  tuple `2505 / 365 / 2140 / 20781 / 5797` convicted at the stack tip (33/33) with the negative control
+  (*"the estate's file count moved — re-measure, do not re-word: expected 2505 to be 2500"*). Digests re-hashed at the landed tree: `tests/lint/townMapStageManifest.walker.test.js` authored `cae279abb87c…` → landed `a481bda5f6f69019a59ba3d380b0e3e6b7109143cdddd72ec91e9d400efa2d11`; `tests/lint/sovereigntyLightingContract.walker.test.js` authored `94726e38d924…` → landed `dc2b5fa3744a31cea98b02f76ade3fa4fd1efe0fd3e5d7ffed27226cd433a710`; `scripts/mutation-coverage-manifest.json` authored `2e50630c4fc8…` → landed `071279c73be615db73ffe363e1762ff9bb32135d04057cee720d0138e3e49b75`.
 - **Depends on:** `MF-T2H` — STACKED. The dependency is real rather than tidy: this member's live
   arms derive over `fabric/fabricRng.js` and `fabric/spatialReceipt.js`, both of which MF-T2H
   creates, and its sweep plant's host is `fabricRng.js`. Verified present at this base before
@@ -45,6 +55,12 @@
 > ⭐ **NO SECOND CENSUS MOVES.** `entropyRootCensus.walker.test.js` counts hash-helper DEFINITIONS
 > under `/function (fnv1a32|hash01|hashUnit|hash32|fnv1a)/`; the new leaf declares **0** of them
 > (executed, §4 row 14), so MF-T2H's re-record to 34 stands untouched and is re-proved green here.
+> ⭐⭐ **STACKED LANDING (ODQ §461.2) — convicted at the stack tip, never carried.** Slot tuple
+> (`claude/composite-r4` = `11539636`, WEB-7): `2500 / 365 / 2135 / 20756 / 5792`; this member's position in the chain
+> re-derives to `2502 / 365 / 2137 / 20762 / 5794`; the stack's ONE live tuple `2505 / 365 / 2140 / 20781 / 5797` was convicted at the
+> stack tip (33/33) with the negative control — the slot's own tuple put back reds at `files`:
+> *"the estate's file count moved — re-measure, do not re-word: expected 2505 to be 2500"* (the summed delta +5). The DELTA `+2/+0/+2/+6/+2` crossed the rebase; the
+> authored tuples above are the BUILD-base history.
 
 > ⛔ **PORT SOURCE PROVENANCE (preamble §P1 R-MF-4).** The sandbox is not a git repository. This
 > lane read both sealed sources from the preserve ref `refs/preserve/map-sandbox-w3f-sealed`
@@ -60,16 +76,21 @@
 > | file | SHA-256 after this member, read at the COMMITTED tip with `git show HEAD:` |
 > |---|---|
 > | `src/domain/townMap/fabric/stageManifest.js` | `ad639c8e525f0db469660767fb5904825bf8d33a7b259f33de1f5d2c1c2286b2` |
-> | `tests/lint/townMapStageManifest.walker.test.js` | `cae279abb87cdc19593ba49f8916200f5912e45e7b6a47b2e51366090555e316` |
+> | `tests/lint/townMapStageManifest.walker.test.js` | `a481bda5f6f69019a59ba3d380b0e3e6b7109143cdddd72ec91e9d400efa2d11` |
 > | `tests/domain/townMapStageManifest.test.js` | `413832ff90e87941998b09f4de80bcf3363bf4bb918d510c284461f5fd5e2114` |
+>
+> ⭐ **RE-HASHED AT THE MAP STACK LANDING (slot `11539636`)** — `tests/lint/townMapStageManifest.walker.test.js`: authored `cae279abb87cdc19593ba49f8916200f5912e45e7b6a47b2e51366090555e316` → landed `a481bda5f6f69019a59ba3d380b0e3e6b7109143cdddd72ec91e9d400efa2d11` (the value now in the table above); cause: MF-T2K/MF-T2L/MF-T2M appended their roster rows and MF-T2L executed the §419.2 rename.
 >
 > **The three MODIFY hosts, at the same tip:**
 >
 > | file | SHA-256 after this member |
 > |---|---|
-> | `tests/lint/sovereigntyLightingContract.walker.test.js` | `94726e38d924e6fe7cd5a4b8c0bc5256638dd7c02b7561d5315cce09a0d69fe4` |
+> | `tests/lint/sovereigntyLightingContract.walker.test.js` | `dc2b5fa3744a31cea98b02f76ade3fa4fd1efe0fd3e5d7ffed27226cd433a710` |
 > | `scripts/mutation-sweep.sh` | `f0c680c7b1e7676e42b4cbedf2ef3d24bea65d3f6df36fdda872821e075e252b` |
-> | `scripts/mutation-coverage-manifest.json` | `2e50630c4fc8bb0145bc888554aec712cc15da35a027c0b43f40bae08527586c` |
+> | `scripts/mutation-coverage-manifest.json` | `071279c73be615db73ffe363e1762ff9bb32135d04057cee720d0138e3e49b75` |
+>
+> ⭐ **RE-HASHED AT THE MAP STACK LANDING (slot `11539636`)** — `scripts/mutation-coverage-manifest.json`: authored `2e50630c4fc8bb0145bc888554aec712cc15da35a027c0b43f40bae08527586c` → landed `071279c73be615db73ffe363e1762ff9bb32135d04057cee720d0138e3e49b75` (the value now in the table above); cause: WEB-1 (547e4d58) added one rationale row at a disjoint hunk; this member's row == authored.
+> ⭐ **RE-HASHED AT THE MAP STACK LANDING (slot `11539636`)** — `tests/lint/sovereigntyLightingContract.walker.test.js`: authored `94726e38d924e6fe7cd5a4b8c0bc5256638dd7c02b7561d5315cce09a0d69fe4` → landed `dc2b5fa3744a31cea98b02f76ade3fa4fd1efe0fd3e5d7ffed27226cd433a710` (the value now in the table above); cause: six landed siblings (H8B, WEB-1/4/5/6/7) and MF-T2K/MF-T2L/MF-T2M re-recorded below this member's block.
 >
 > ⭐ **THE DIGESTS ARE READ FROM THE COMMIT, NOT FROM THE WORKING TREE.** The pre-commit hook runs
 > `eslint --fix` on staged JS and can re-stage after a green; `stageManifest.js` and the walker

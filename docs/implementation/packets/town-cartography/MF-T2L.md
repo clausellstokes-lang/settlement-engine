@@ -1,6 +1,6 @@
 # MF-T2L — vegetation: the durable trunk/canopy mass and the deterministic nonpersistent instance field
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** 1
 - **Ruling:** implemented by lane TE-T2L against the chair ruling at ODQ §425, which took all five
   of the compile's questions as settled: both halves discharged as RECORD + DERIVATION in the one
@@ -13,9 +13,9 @@
   window. Its §P1 refutations (R-MF-2 and R-MF-4/5 govern this member), §P2 hazard dispositions,
   §P3 anchor preflight, §P4 registration template, §P5 census law, §P6 mutant hygiene, §P7 STOP set
   and §P8 capsule law bind this packet and are not restated.
-- **Verified base:** `claude/composite-r4` at `4d2d17f86f173686d142a97e3fd356d6b7be97e6`
-  ⚠⚠ **READ THE NEXT LINES BEFORE TRUSTING THAT ROW.** The SHA is MF-T2K's **HOLDING (unlanded)**
-  commit, itself stacked on MF-T2J's `f7ba314505703b96097b8aba568cc80e3ec30023`, MF-T2H's
+- **Verified base:** `claude/composite-r4` at `115396365f4e1c251af2b2e7a71c2c6c7c0b328a`
+  ⚠⚠ **AS AUTHORED — the row above now names the LANDING SLOT (see the Landing note below); the
+  BUILD base was `4d2d17f8`.** That SHA is MF-T2K's **HOLDING (unlanded)** commit, itself stacked on MF-T2J's `f7ba314505703b96097b8aba568cc80e3ec30023`, MF-T2H's
   `05e7f9d56eec119102f540e316bd8e1061f81a92` and MF-T2Bf's landed commit, so this member is **FIVE
   DEEP**. The branch token names the branch of record this member is verified FOR and will land on;
   the row is **re-stamped at the landing slot** once MF-T2H, MF-T2J and MF-T2K land and this member
@@ -25,6 +25,16 @@
   `claude/composite-r4` nor `review-fixes-2026-07-08`, so the five-deep stack is unrebased and
   unlanded and branches at `9bfae712`. ⚠ The stack is rebased at the landing slot; the census DELTA
   is what crosses, never the tuple.
+- **Landing note (TE-MAPSTACK-LANDING, 2026-08-23, ODQ §461.2 — THE MAP STACK):** authored at BUILD
+  base `4d2d17f8` as holding tip `6c920593` (pinned `refs/preserve/holding-t2l`); landed as ONE stacked landing
+  with its three siblings (MF-T2J → MF-T2K → MF-T2L, then MF-T2M rebased onto the chain tip) at
+  slot `11539636` (WEB-7, the 31st landing). Rebased implementation commits `dffcc195 → 37634d51 → 8a0cb8ed → e69cf63d`
+  (authored `1560254b → d30d8bbb → 65d6563e → 6c920593`). Entered at **LANDED** directly — the §410 form, as WEB-5/6/7 did:
+  MF-T2H's READY reservation on the census walker stands until HK-2 lands, so the §417 deferred
+  row(s) — the §1.7 Rows A and B — could only enter the manifest at a terminal status, and did, at this act. Census:
+  slot `2500 / 365 / 2135 / 20756 / 5792`; this member's position `2504 / 365 / 2139 / 20774 / 5796`; the stack's ONE live
+  tuple `2505 / 365 / 2140 / 20781 / 5797` convicted at the stack tip (33/33) with the negative control
+  (*"the estate's file count moved — re-measure, do not re-word: expected 2505 to be 2500"*). Digests re-hashed at the landed tree: `tests/lint/townMapStageManifest.walker.test.js` authored `d11ece38aa7d…` → landed `a481bda5f6f69019a59ba3d380b0e3e6b7109143cdddd72ec91e9d400efa2d11`; `tests/lint/sovereigntyLightingContract.walker.test.js` authored `9bdf53c055eb…` → landed `dc2b5fa3744a31cea98b02f76ade3fa4fd1efe0fd3e5d7ffed27226cd433a710`.
 - **Depends on:** MF-T2K (`supportSurface.js`, SHA-256 `9d0e162b…2ea7`, one commit), MF-T2E
   (`massPart.js`, `d52c19fa…e76f`, one commit) and MF-T2H (`fabricRng.js`, `4094ecb8…6e95a`, one
   commit). ⭐ This is the family's first STACKED member that consumes its predecessor's export by
@@ -45,6 +55,12 @@
 > figure read from its own arm's failure message in a sequenced walk (§6). Authorizing decisions:
 > **ODQ §276**, **ODQ §304.4**, **ODQ §310.4**, **ODQ §421** and **ODQ §425**, under §299.4's
 > binding-forward rule. The family's stamp is **GRANTED** at ODQ §312.2b.
+> ⭐⭐ **STACKED LANDING (ODQ §461.2) — convicted at the stack tip, never carried.** Slot tuple
+> (`claude/composite-r4` = `11539636`, WEB-7): `2500 / 365 / 2135 / 20756 / 5792`; this member's position in the chain
+> re-derives to `2504 / 365 / 2139 / 20774 / 5796`; the stack's ONE live tuple `2505 / 365 / 2140 / 20781 / 5797` was convicted at the
+> stack tip (33/33) with the negative control — the slot's own tuple put back reds at `files`:
+> *"the estate's file count moved — re-measure, do not re-word: expected 2505 to be 2500"* (the summed delta +5). The DELTA `+1/+0/+1/+6/+1` crossed the rebase; the
+> authored tuples above are the BUILD-base history.
 
 > ⛔ **PORT SOURCE PROVENANCE (preamble §P1 R-MF-4) — A DESIGN-IMPLEMENTATION MEMBER, MEASURED WITH
 > A LIVE INSTRUMENT.** The sealed W3 fabric holds NO vegetation machinery, and the zeros were proved
@@ -518,8 +534,11 @@ hook changed nothing under this lane.
 |---|---|
 | `src/domain/townMap/fabric/vegetation.js` | `52ab2efda906190b08ae16fc4031569b67c43a42f8900af6755ca51173838971` |
 | `tests/domain/townMapVegetation.test.js` | `b447b6c6782af03e89b675383b95c95153db64019fba6ca03ed8ee5adc4473fb` |
-| `tests/lint/townMapStageManifest.walker.test.js` | `d11ece38aa7d9257422b525dc27ce881fd56f3832d6a72c84aa4e8096eda1a17` |
-| `tests/lint/sovereigntyLightingContract.walker.test.js` | `9bdf53c055ebadb49248fee6e4508c543a6775a39d4d67d8283f715e28f588b3` |
+| `tests/lint/townMapStageManifest.walker.test.js` | `a481bda5f6f69019a59ba3d380b0e3e6b7109143cdddd72ec91e9d400efa2d11` |
+| `tests/lint/sovereigntyLightingContract.walker.test.js` | `dc2b5fa3744a31cea98b02f76ade3fa4fd1efe0fd3e5d7ffed27226cd433a710` |
+
+⭐ **RE-HASHED AT THE MAP STACK LANDING (slot `11539636`)** — `tests/lint/sovereigntyLightingContract.walker.test.js`: authored `9bdf53c055ebadb49248fee6e4508c543a6775a39d4d67d8283f715e28f588b3` → landed `dc2b5fa3744a31cea98b02f76ade3fa4fd1efe0fd3e5d7ffed27226cd433a710` (the value now in the table above); cause: six landed siblings and MF-T2M re-recorded below this member's block.
+⭐ **RE-HASHED AT THE MAP STACK LANDING (slot `11539636`)** — `tests/lint/townMapStageManifest.walker.test.js`: authored `d11ece38aa7d9257422b525dc27ce881fd56f3832d6a72c84aa4e8096eda1a17` → landed `a481bda5f6f69019a59ba3d380b0e3e6b7109143cdddd72ec91e9d400efa2d11` (the value now in the table above); cause: MF-T2M appended its roster row (re-applied against this member's renamed constant).
 
 **PINNED UNMOVED at the tip** — every consulted source still hashes to its base value:
 `supportSurface.js` `9d0e162b…2ea7` · `massPart.js` `d52c19fa…e76f` · `fabricRng.js`

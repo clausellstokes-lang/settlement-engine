@@ -7,11 +7,11 @@ no surface because this leaf performs no arithmetic on quanta at all), §P2 haza
 anchor preflight, §P3b, §P4 registration template, §P5 census law, §P6 mutant hygiene, §P7 STOP set
 and §P8 capsule law bind and are not restated.
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** 1
-- **Verified base:** `claude/composite-r4` at `f7ba314505703b96097b8aba568cc80e3ec30023`
-  ⚠⚠ **READ THE NEXT SIX LINES BEFORE TRUSTING THAT ROW.** The SHA is MF-T2J's **HOLDING
-  (unlanded)** commit, itself stacked on MF-T2H's `05e7f9d56eec119102f540e316bd8e1061f81a92` and on
+- **Verified base:** `claude/composite-r4` at `115396365f4e1c251af2b2e7a71c2c6c7c0b328a`
+  ⚠⚠ **AS AUTHORED — the row above now names the LANDING SLOT (see the Landing note below); the
+  BUILD base was `f7ba3145`.** That SHA is MF-T2J's **HOLDING (unlanded)** commit, itself stacked on MF-T2H's `05e7f9d56eec119102f540e316bd8e1061f81a92` and on
   MF-T2Bf's `7d6bde7caa61af99df85640b210328745caaad2f`, so this member is **FOUR DEEP**. The branch
   token names the branch of record this member is verified FOR and will land on; the row is
   **re-stamped at the landing slot** once MF-T2H and MF-T2J land and this member is rebased. ⭐ The
@@ -23,6 +23,16 @@ and §P8 capsule law bind and are not restated.
   at this lane's start; none was extended from a quoted prefix (§381's fabricated-SHA law).
   ⚠ The status and verified-base values above each stand ALONE on their line because
   `parsePacketHeader` (`scripts/implementation-packets.mjs`) anchors both rows at end-of-line.
+- **Landing note (TE-MAPSTACK-LANDING, 2026-08-23, ODQ §461.2 — THE MAP STACK):** authored at BUILD
+  base `f7ba3145` as holding tip `4d2d17f8` (pinned `refs/preserve/holding-t2k`); landed as ONE stacked landing
+  with its three siblings (MF-T2J → MF-T2K → MF-T2L, then MF-T2M rebased onto the chain tip) at
+  slot `11539636` (WEB-7, the 31st landing). Rebased implementation commits `565b255f → f2d71faa → 3c77111c → d910e2fc`
+  (authored `59ea7e3b → dad5a351 → 088945bf → 4d2d17f8`). Entered at **LANDED** directly — the §410 form, as WEB-5/6/7 did:
+  MF-T2H's READY reservation on the census walker stands until HK-2 lands, so the §417 deferred
+  row(s) — the §1.4 Rows A and B — could only enter the manifest at a terminal status, and did, at this act. Census:
+  slot `2500 / 365 / 2135 / 20756 / 5792`; this member's position `2503 / 365 / 2138 / 20768 / 5795`; the stack's ONE live
+  tuple `2505 / 365 / 2140 / 20781 / 5797` convicted at the stack tip (33/33) with the negative control
+  (*"the estate's file count moved — re-measure, do not re-word: expected 2505 to be 2500"*). Digests re-hashed at the landed tree: `tests/lint/townMapStageManifest.walker.test.js` authored `c2cabb6ee48c…` → landed `a481bda5f6f69019a59ba3d380b0e3e6b7109143cdddd72ec91e9d400efa2d11`; `tests/lint/sovereigntyLightingContract.walker.test.js` authored `784464018b7e…` → landed `dc2b5fa3744a31cea98b02f76ade3fa4fd1efe0fd3e5d7ffed27226cd433a710`.
 - **Chair ruling:** ODQ §419 (compile TC-T2K, dispatched at ODQ §417.1). Collision group
   `d3a-port`; positionally stacked on MF-T2J.
 - **Sealed source ref:** `refs/preserve/map-sandbox-w3f-sealed` @
@@ -38,6 +48,12 @@ and §P8 capsule law bind and are not restated.
 > from the hash after the last edit at the landing slot (the carry law). Authorizing decisions:
 > **ODQ §276**, **ODQ §304.4**, **ODQ §310.4**, **ODQ §417.1**, under §299.4's binding-forward rule.
 > The family's stamp is **GRANTED** at ODQ §312.2b.
+> ⭐⭐ **STACKED LANDING (ODQ §461.2) — convicted at the stack tip, never carried.** Slot tuple
+> (`claude/composite-r4` = `11539636`, WEB-7): `2500 / 365 / 2135 / 20756 / 5792`; this member's position in the chain
+> re-derives to `2503 / 365 / 2138 / 20768 / 5795`; the stack's ONE live tuple `2505 / 365 / 2140 / 20781 / 5797` was convicted at the
+> stack tip (33/33) with the negative control — the slot's own tuple put back reds at `files`:
+> *"the estate's file count moved — re-measure, do not re-word: expected 2505 to be 2500"* (the summed delta +5). The DELTA `+1/+0/+1/+6/+1` crossed the rebase; the
+> authored tuples above are the BUILD-base history.
 
 ---
 
@@ -396,8 +412,11 @@ detached ref, **no ref moved**, tree clean.
 |---|---|
 | `src/domain/townMap/fabric/supportSurface.js` | `9d0e162b4bb592de6e95b80be6dea356279aeea8aea2e021ee8e62815ede2ea7` |
 | `tests/domain/townMapSupportSurface.test.js` | `7c3f69680cb352411358126a230cde030744b2dc2f3a34f97799047664ee6a31` |
-| `tests/lint/townMapStageManifest.walker.test.js` | `c2cabb6ee48cd74708bef689c051b94b7e50bd23e44f1bcb4d218808b2477961` |
-| `tests/lint/sovereigntyLightingContract.walker.test.js` | `784464018b7edbd391eb6c80cb84f4f4701765bfc8ff536a57b07ce79aa9513c` |
+| `tests/lint/townMapStageManifest.walker.test.js` | `a481bda5f6f69019a59ba3d380b0e3e6b7109143cdddd72ec91e9d400efa2d11` |
+| `tests/lint/sovereigntyLightingContract.walker.test.js` | `dc2b5fa3744a31cea98b02f76ade3fa4fd1efe0fd3e5d7ffed27226cd433a710` |
+
+⭐ **RE-HASHED AT THE MAP STACK LANDING (slot `11539636`)** — `tests/lint/sovereigntyLightingContract.walker.test.js`: authored `784464018b7edbd391eb6c80cb84f4f4701765bfc8ff536a57b07ce79aa9513c` → landed `dc2b5fa3744a31cea98b02f76ade3fa4fd1efe0fd3e5d7ffed27226cd433a710` (the value now in the table above); cause: six landed siblings and MF-T2L/MF-T2M re-recorded below this member's block.
+⭐ **RE-HASHED AT THE MAP STACK LANDING (slot `11539636`)** — `tests/lint/townMapStageManifest.walker.test.js`: authored `c2cabb6ee48cd74708bef689c051b94b7e50bd23e44f1bcb4d218808b2477961` → landed `a481bda5f6f69019a59ba3d380b0e3e6b7109143cdddd72ec91e9d400efa2d11` (the value now in the table above); cause: MF-T2L/MF-T2M appended their roster rows and MF-T2L executed the §419.2 rename.
 
 **The two pinned-unmoved substrate files re-hashed at HEAD**, so "zero production files move" is a
 measurement rather than a claim: `massPart.js` `d52c19fa…e76f` and `solidLegality.js`
