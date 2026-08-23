@@ -18321,3 +18321,49 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   acc466a6; the lane derives its own five-figure delta from its receipt —
   the build re-record read 20719/5785 → 20737/5789). Seats: WEB-5 landing
   · TE-UC0 · TE-UC3 · TE-WEB2 (cap).
+
+## §451 — UC-0 BUILT AT a5c6c4fa (THE UNDERCITY TRAIN'S FIRST CAR; THE WALLS HOME FOUND; ONE MEMBER-CAUSED RED CURED BY DOCTRINE) — J-TEUC0-8 RULED, PINNED; TE-WEB3 DISPATCHED (2026-08-22 ~23:55 CDT)
+
+- **§451.1 MF-UC0 BUILT:** tip a5c6c4fa (e67aacf0 member · a5c6c4fa packet,
+  hooks ON, RESUME POINT blocks per §448) on base 84e06412, tree clean,
+  PINNED at refs/preserve/holding-uc0. The §3 audit re-executed field-level
+  with every row receipted; **the walls home FOUND** — `defenseProfileHasWalls`
+  at `causalState.js:306` over `defenseProfile.institutions.walls` (an
+  observed key; no STOP); tolls accessor owed at UC-4 (D-UC0-2). The
+  `institutionSubstructure` facet kind minted as inference rows —
+  cohesionWeave.js 141 → 148 effective (+7 of ≤15); **golden-inert PROVEN**
+  (manifest `29c6cc8f…` bytewise before/after); OSR reader walker 27/27
+  with A1/A7 at 1995/1409/387 unmoved at base and tip; both typecheckers
+  at ceiling; acceptance 8/8 (A1 guard-the-guard against the REAL catalog:
+  sewer 1 / mine 3 / crypt 10 / cellar 9 / none 2; A8 the positive key arm
+  at three tiers + the one-truth sanitation arm); mutants m1–m5 convict
+  (m5's first spelling EQUIVALENT on catalog names → property pinned,
+  re-planted as a deletion). Census `+1/0/+1/+8/+1` walked then reverted
+  (§417); the branch moved to acc466a6 during the build — the landing
+  re-measures by sum-of-deltas. Packet MF-UC0 at READY (`valid: 150 packets
+  (2 READY)`), `jointVocabulary.js` co-minted with TEMPERAMENTS.
+- **§451.2 J-TEUC0-8 RULED — no STOP:** the lane's §408 sweep found two
+  reds of its own. `seedLoopTotality.walker` over THREE bare loops in its
+  NEW test file is the AUTHORING-RATCHET class (kin to the anchor walker
+  and the U+001F scans: a lint over the lane's own test prose, not an
+  engine red) — cured by totality rewrites; `ruinFilterRoster.walker` is
+  the ONE member-caused red: the leaf reads a roster that includes RUINED
+  institutions, and the walker demands `liveInstitutions()` or an
+  exemption row. The lane chose the exemption under §311.3 "dug is
+  forever" — a ruined church's crypt is a fossil seed, never an absence —
+  and re-measured the reader count 89 → 90. The chair reads the exemption
+  as DOCTRINE-GROUNDED (the existence gate MUST count fossil seeds, else
+  UC-4's fossils have no licensor), so it is the single member-caused red
+  lawfully cured; the packet stays READY. Reversal: delete the exempt row,
+  route through `liveInstitutions()`, re-measure 89 — and UC-4 loses its
+  fossil seeds. J-TEUC0-1..7 RATIFIED (five seed classes incl. the
+  `subterranean` kin; `SANITATION_LADDER` minted here with the rung via an
+  optional second argument; `refused[]` reported beside `seeds[]`; `inst.id`
+  rung omitted — no writer exists, reading it would red the OSR walker,
+  D-UC0-1).
+- **§451.3 TE-WEB3 DISPATCHED** (Opus; the referral emit wiring, migration
+  199 behind WEB-2's 198 — the brief orders a dormant carry of 198 from
+  WEB-2's worktree for the contiguity gate, out of the delivered set, or
+  the recorded expected red). Seats: WEB-5 landing · TE-UC3 · TE-WEB2 ·
+  TE-WEB3 (cap). Build queue: HK-1 → R-INST-2..6 → UC-1/UC-4 (after T2R
+  lands) → UC-2/UC-5 (after T2N+T2Q).
