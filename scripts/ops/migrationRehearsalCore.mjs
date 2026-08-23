@@ -16,7 +16,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
 export const MIGRATION_TRAIN_BASE_HEAD = 121;
-export const MIGRATION_TRAIN_REPO_HEAD = 197;
+export const MIGRATION_TRAIN_REPO_HEAD = 198;
 
 const FORWARD_ONLY_REASON = [
   'No automatic schema rollback is admitted for this wave.',
@@ -414,6 +414,46 @@ export const MIGRATION_WAVES = Object.freeze([
     }),
     expectedObjects: Object.freeze([
       Object.freeze({ kind: 'table', name: 'public.profiles' }),
+    ]),
+  }),
+  Object.freeze({
+    id: 'retention-numbers',
+    from: 198,
+    to: 198,
+    purpose: 'The concrete retention numbers (§359.7): raw analytics_events shorten from '
+      + '400 days to 90, the retention cohorts move from a destructively-recomputed '
+      + 'materialized view to a durable append table, and the research plane gets an '
+      + 'export-then-prune ceiling gated on the export receipt. This is the train\'s '
+      + 'first wave whose risk is what it DELETES rather than what it exposes, so the '
+      + 'operator review is of the two prune gates, not of the DDL: the 90-day window '
+      + 'activates only while the cohort table is non-empty, and a research row is '
+      + 'prunable only when 038\'s export_cursors receipt covers it. Both fail closed. '
+      + 'The 038 materialized view is deliberately KEPT for one release — '
+      + 'report_retention() re-targets the table behind an unchanged return type and an '
+      + 'unchanged grant surface — so no reader breaks on deploy.',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: [
+        FORWARD_ONLY_REASON,
+        'The SHAPE half of this wave is reversible in a handful of statements and the '
+        + 'migration\'s own @rollback annotation spells them out, which is why it '
+        + 'classifies as documented-manual-reversal rather than taking the wave policy.',
+        'The DELETIONS are not reversible by any script: once a run has pruned raw events '
+        + 'past 90 days, or an exported research row past the 400-day ceiling, those rows '
+        + 'are gone and re-lengthening an interval cannot return them. PITR is the only '
+        + 'recovery, which is the ordinary posture for a destructive data act.',
+        'One combination must never be rehearsed as safe: reverting the SHAPE while '
+        + 'leaving the shortened window in place would re-establish the destructive '
+        + 'full-refresh cohort recompute over a 90-day raw history. Revert both halves or '
+        + 'neither.',
+      ].join(' '),
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({ kind: 'table', name: 'public.analytics_retention_cohorts' }),
+      Object.freeze({ kind: 'function', name: 'append_retention_cohorts' }),
+      Object.freeze({ kind: 'function', name: 'analytics_monthly_prune' }),
+      Object.freeze({ kind: 'function', name: 'analytics_nightly_maintenance' }),
+      Object.freeze({ kind: 'function', name: 'report_retention' }),
     ]),
   }),
 ]);

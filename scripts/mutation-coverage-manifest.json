@@ -1670,6 +1670,10 @@
    "kind": "rationale",
    "ref": "pglite-executed"
   },
+  "tests/security/retentionNumbers.pglite.test.js": {
+   "kind": "rationale",
+   "ref": "pglite-executed"
+  },
   "tests/security/reviewedQuarantineConflict.pglite.test.js": {
    "kind": "rationale",
    "ref": "pglite-executed"
