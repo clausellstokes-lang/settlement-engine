@@ -17546,3 +17546,25 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   producers landed + the endgame complete. The owner's conversation is the
   origin document; the §434-era research (the Watabou corpus read) is folded
   as §12. Nothing in the current arc changes.
+
+## §436 — OWNER ORDER: THE MAP PROGRAM'S BUILD PATH TRANSPOSED ONTO DW, WITH CONSTRUCTION-HISTORY RESEARCH AS ITS OWN LEG (2026-08-24 ~00:20)
+
+- **Owner: copy the modern mapmaker's path onto the Dwellings program with
+  appropriate counterparts — INCLUDING background research into how
+  dwellings, houses, and institutions were historically BUILT.** Executed as
+  the design doc's §15: the nine-phase transposition table (charter →
+  research → sandbox → spec volume → preamble+compile → dark port →
+  activation-with-exhibit → the tuning INTERIORS LEG → style waves last),
+  each phase naming its map antecedent, its DW counterpart, its deliverable,
+  and its gate. **P1a is the owner's addition made law:** construction
+  history as the causal substrate — materials by region/prosperity, the BAY
+  SYSTEM as the structural quantum under every plan, hearth/chimney
+  evolution, load-bearing logic (law 5's physical basis), stair history,
+  urban customs (party-wall law, burgage frontage taxes), guild building
+  practice — so the grammars derive from WHY buildings took their forms
+  (the mechanisms-travel law one level deeper), gated by owner
+  taste-samples per the CT-0 pattern. The sandbox-seal-port-activation
+  spine carries unchanged: research before grammar, sandbox before port,
+  seal before landing, activation last behind an exhibit — truth first,
+  charm last. ARCHITECTED-NOT-BUILT discipline and the post-endgame
+  sequencing unchanged.

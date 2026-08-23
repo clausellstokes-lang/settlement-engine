@@ -227,3 +227,33 @@ free-tier depth (how much plan is free vs DM). Q5 fixture art direction
 *Architected 2026-08-23 from the owner–chair conversation at ODQ §435; the
 conversation is this program's origin document. The ledger outranks this
 summary where they ever disagree.*
+
+---
+
+## §15 · THE BUILD PATH — the map program's method, transposed counterpart-by-counterpart (owner-ordered, ODQ §436)
+
+The map program's arc is the estate's proven method for building a
+generation system that is TRUE rather than plausible. The DW program copies
+that path exactly, each phase with its named counterpart and its gate.
+
+| # | The map program did | The DW counterpart | Produces | Gate |
+|---|---|---|---|---|
+| P0 | The charter sitting (§150-§172): scope, delegation, prove-then-cut | **DW-0 the charter sitting** over THIS document | the signed bands (§11), the ruled open questions (§14) | owner sits it |
+| P1a | — *(the map's research began at morphology; DW adds the deeper leg)* | **CONSTRUCTION-HISTORY RESEARCH: how dwellings, houses, and institutions were PHYSICALLY BUILT** — materials by region/prosperity (timber, cruck, masonry, wattle); the BAY SYSTEM (frame spans dictating room widths — the structural quantum under every historical plan); hearth-and-chimney evolution (the open hall → the stack → the parti consequences); load-bearing logic (which walls CAN move at renovation — law 5's physical basis); stairs' history (ladder→winder→spiral→grand as technology+status); urban customs (fire regs, party-wall law, burgage frontage taxes shaping narrow-deep plots); guild/institutional building practices (why a granary, temple, or bathhouse takes its form) | the CAUSAL substrate: grammars derived from WHY, not just measured WHAT — the mechanisms-travel law (the construction MECHANISM travels; the style doesn't) | owner taste-samples the dossier of findings (the CT-0 pattern) |
+| P1b | The atlas corpus: ~400 plates, the HF corpus, owner-gated | **the measured-plan corpus**: hall houses, longhouses, burgage plots, tenements, courtyard houses, temples, inns, shops, workshops — scanned/measured historical floor plans per band and culture | the parti catalog, function vocabulary, roster drafts (§8) | owner taste-gates per tranche |
+| P1c | The grain instruments (MFS1/HFM1: cell pitch, parcel density measured per band, windows re-set per analyst) | **the plan-measurement instruments**: room-size and aspect distributions, function-adjacency frequencies, storey-height ranges, bay widths — measured off the corpus per prosperity band and culture | the owner-signed bands get MEASURED priors, never invented ones | instrument receipts, re-runnable |
+| P1d | G-43 the counterfactual benchmark; G-39 refuted by PRE-REGISTERED rules | **the DW benchmark**: the generator's output distributions tested against the corpus distributions (room sizes, adjacencies, parti frequencies) with refutation rules REGISTERED BEFORE generation; a blind real-vs-generated plan panel as the taste arm | the honesty instrument that keeps the grammar from drifting stylish-but-false | pre-registration precedes any tuning of weights |
+| P2 | The sandbox: D0 kernel, D1 foundations at ZERO bytes (the ABI), W1-W3 mechanism waves, zoom findings, SW seals (5/5 worlds), the preserved ref | **the DW sandbox** (own worktree, no repo bytes): the partition/parti kernel proven over real fabric parcel polygons; **the DW ABI at zero bytes** (the plan-record and coordinate contracts frozen first); mechanism waves (partis firing, circulation totality, fixtures, undercity links); **the seal counterpart: N full settlements' ENTIRE building stock derived, forensically zoomed, sealed** | proven-in-isolation machinery + sealed evidence, preserved at a ref | SW-style gates; the seal precedes any port |
+| P3 | GENERATION-SPEC as the build sheet (the volume; §10 corrections; architected≠built) | **DWELLING-SPEC.md as the DW build sheet** (its own volume beside the corpus): the laws of §2 elaborated to buildable contracts, ODQ rulings folded, architected-vs-built ALWAYS marked | the volume the compile prices against | chair-signed; live code outranks it |
+| P4 | MF-PREAMBLE chair-signed (the stamp); the TC-D3A plan compile measuring everything (14,230 eff, per-member pricing, R-MF refutations) | **DW-PREAMBLE** (family law: the nine laws as binding refutation-style rules) + **the TC-DW plan compile**: sandbox measured, members priced, per-member census/manifest predictions | the member roster with honest prices | the compile's own executed figures |
+| P5 | The port: member-by-member, TOTAL sealed equivalence, dormancy proofs, deferred rows, the landing cascade | **the DW port**: members land DARK with sealed-equivalence discipline against the DW sandbox; the click surface stays unwired | the landed program, inert | every member's own gate; the estate's full landing law |
+| P6 | D3b — the activation wave; prove-then-cut vs legacy | **DW ACTIVATION**: the click surface lights; the exhibit gate is the owner's before/after sitting (no legacy to cut — the cut counterpart is the blind-panel benchmark passing + the owner's word) | interiors LIVE | owner exhibit + veto window |
+| P7 | The tuning pass gains the MAP LEG (§341) | **the tuning pass gains the INTERIORS LEG**: plan-lawfulness and distribution drift read at tuning checkpoints | interiors inside the world's health metrics | owner-signed tuning, as ever |
+| P8 | V5 visual counsel; the watercolor lens; style waves post-soak | **the DW style waves**: render lenses for plans (ink, parchment, cutaway — the Yoshida taste target) after mechanics prove | the charm layer, last, on proven bones | owner taste |
+
+**The one law this table exists to carry:** the map program succeeded because
+RESEARCH preceded GRAMMAR, the SANDBOX preceded the PORT, the SEAL preceded
+the LANDING, and ACTIVATION came last behind an exhibit — truth first, charm
+last. The DW program inherits that spine unchanged, and adds P1a because a
+floor plan's honesty lives one level deeper than a town plan's: in HOW the
+building could actually have been built.
