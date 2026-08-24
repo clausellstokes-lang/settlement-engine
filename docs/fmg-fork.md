@@ -139,33 +139,64 @@ public/map/
 ├── modules/         ← FMG-native, BUT patched: §3 security escaping + §4 branding (style-presets, general.js)
 ├── libs/            ← FMG-native + VENDOR-MANIFEST.json hash gate; umami.js deleted, openwidget.min.js not loaded
 ├── versioning.js, manifest.webmanifest  ← SF-branded (§4)
-├── images/, heightmaps/, styles/  ← FMG-native, unpatched
+├── heightmaps/, styles/  ← FMG-native (styles §5-patched: texture refs repointed)
+├── images/  ← FMG-native, EXCEPT images/textures/ which is now estate-authored (§5)
+├── charges/ ← FMG-native, PRUNED to the 104 CC0 files (§5)
 └── (other small files)
 ```
 
-**Removed from the vendored drop (AD-1 / ODQ §526–§529, 2026-08-24).** Two upstream
-art directories were deleted because their own embedded metadata declares terms this
-product cannot honour:
+### §5 The art removal, and the patches it forced (AD-1 / ODQ §526–§532, 2026-08-24)
 
-- `charges/` — 338 heraldic SVGs, 3,094,160 B. 336 carried an inline
-  `<metadata license="…"/>`; **179 declared CC BY-NC-SA 3.0, a non-commercial licence**,
-  and a further 48 were share-alike copyleft (CC BY-SA 2.5/3.0/4.0, GFDL 1.3, Art Libre).
-  Upstream Armoria's README says the WappenWiki renders are "available for non-commercial
-  use only", and `modules/ui/emblems-editor.js` concedes in-tree that "images may be
-  copyrighted". The FMG grant covers *outputs*, not the provenance of bundled *inputs*.
-- `images/textures/` — 23 rasters, 11,646,263 B, metadata stripped and provenance
-  recorded nowhere upstream or here.
+Two upstream art groups declared, in their own embedded metadata, terms this product
+cannot honour. The removal is **surgical, not wholesale** — the first pass deleted both
+directories entire, and the licence census then showed that would have discarded 104
+clean files for no reason.
 
-**Consequence inside the fork.** Both layers are off in every default preset
-(`modules/ui/layers.js` `getDefaultPresets()` names `toggleTexture` zero times and
-`toggleEmblems` only inside the opt-in `emblems` preset), and `sf-bridge.js` enables
-neither, so the embedded SettlementForge map is unaffected. In a **top-level** visit to
-the standalone fork the two features now fail to load their assets: `fetchCharge()` in
-the hashed core bundle requests `./charges/<name>.svg` and will throw "Cannot fetch
-charge", and the 26-option texture dropdown in `index.html` plus the `texture` keys in
-`styles/*.json` point at files that are no longer present. That degradation is deliberate
-and was priced; the alternative was continuing to redistribute non-commercial art from a
-commercial domain.
+**`charges/` — 234 of 338 deleted, 104 kept.** Every charge carries an inline
+`<metadata license="…"/>`. Removed: 179 CC BY-NC-SA 3.0 (non-commercial), 37 CC BY-SA,
+10 GFDL 1.3, 1 Free Art Licence, 4 CC BY whose credit was never carried, 1 placeholder,
+and 2 declaring nothing. **Kept: 104 CC0 1.0 files** — public domain, no attribution
+owed, commercial use unrestricted. Upstream Armoria's README says the WappenWiki
+renders are "available for non-commercial use only"; the FMG grant covers map *outputs*,
+not the provenance of bundled *inputs*.
+
+**`images/textures/` — all 23 deleted, replaced with our own.** Metadata stripped,
+provenance recorded nowhere. The directory now holds `paper-grain-light.png` and
+`paper-grain-dim.png`, copied from `public/textures/` where `scripts/gen-paper-grain.mjs`
+bakes them from a fixed seed.
+
+**Three fork patches were required, because deleting art is only safe if nothing still
+asks for it.** These are new entries in the same class as the §2–§4 inline patches, and
+a fork re-drop will revert all of them.
+
+1. **`index-*.js` — the emblem pick table pruned.** The generator selects from a weighted
+   table (`Ue`) baked into the hashed bundle. Measured against the surviving 104 charges,
+   the unpatched table made **22,285 of 40,000 draws** request a file that is not there.
+   The failure is *silent*: `fetchCharge` catches, logs "Cannot fetch charge" and returns
+   `undefined`, and `Array.join('')` drops it — so an emblem renders **incomplete rather
+   than visibly broken**, which is the worst kind of wrong. The table was pruned to the
+   charges that ship. Three categories emptied (`beastHeads`, `birds`, `fishes`) and had
+   their weight set to `0` in both `types` and `single`, following upstream's own idiom
+   (`uploaded:0` has no category object at all, which is what proves weight 0 is never
+   drawn). After the patch: 40,000 draws, zero absent requests. The `inescutcheon`
+   category was left untouched — those are shield shapes, special-cased in `getCharges`
+   and never fetched as files.
+2. **`styles/*.json` (12 files) and `modules/io/load.js` — texture refs repointed** at
+   `./images/textures/paper-grain-light.png`.
+3. **`index.html` — the texture dropdown** cut from 26 options to 3 ("No texture" plus the
+   two estate tiles).
+
+**Standing guard:** `tests/lint/shippedAssetLicence.test.js` walks every shipped asset
+directory and refuses a file whose own embedded metadata declares a non-commercial or
+share-alike licence; it also refuses a pick-table entry or a style/dropdown texture path
+that names a file which does not ship. What it cannot see is art carrying no metadata at
+all — that gap is covered by the written inventory in `THIRD-PARTY-NOTICES.md` §1.7/§6.
+
+**In-app effect: none.** `modules/ui/layers.js` `getDefaultPresets()` names `toggleTexture`
+zero times and `toggleEmblems` only inside the opt-in `emblems` preset, and `sf-bridge.js`
+enables neither. In a top-level visit to the standalone fork the emblems layer now offers
+104 lawful charges instead of 338 mostly-unlicensable ones, and the texture layer offers
+our own tiles.
 
 Bridge dependency direction (load order matters):
 ```

@@ -107,12 +107,14 @@
     </section>
 
     <h2>What this covers</h2>
-    <p>Three populations of third-party code and data reach a browser from our origins:</p>
+    <p>Four populations of third-party code and data reach a browser from our origins:</p>
     <ul>
-      <li>the vendored Fantasy Map Generator fork, served from the map origin, together with the libraries vendored inside it (section 1);</li>
+      <li>the vendored Fantasy Map Generator fork, served from the map origin, together with the libraries vendored inside it (section 1) <strong>and the art bundled inside that fork (section 1.7)</strong>;</li>
       <li>the web fonts served from the application origin (section 2);</li>
-      <li>the application&rsquo;s production dependency tree, whose modules the build may include in the shipped bundle (section 3).</li>
+      <li>the application&rsquo;s production dependency tree, whose modules the build may include in the shipped bundle (section 3);</li>
+      <li>the art and media served from the app origin &mdash; page paintings, videos, exhibit plates and generated textures (section 6).</li>
     </ul>
+    <p>The fourth population was added on 2026-08-24. Populations 1 and 4 had never been inventoried: section 1.1 booked the whole of the vendored map as MIT, which covers Azgaar&rsquo;s software and not art bundled with it, and art served from the app origin was outside the stated scope entirely. Correcting that removed two directories from the payload; section 1.7 records what and why.</p>
     <p>Development-only tooling is not distributed and is out of scope. The edge functions execute server-side and convey nothing to a browser.</p>
     <p>Section 1.4 reports TinyMCE exactly as it ships today. The disposition of that component is an open matter for the project owner and its counsel; this page reports the present state and settles nothing about it.</p>
 
@@ -234,6 +236,38 @@ Licensed under the terms of [GNU General Public License Version 2 or later](http
     <h3>1.6 openwidget</h3>
     <p>An 829-byte upstream chat-widget loader arrived with the fork. It carries no licence text. It also carries a hard-coded organisation identifier that appears nowhere else in this repository; the fork patch that disabled it records that the identifier is the upstream author&rsquo;s, so any chat opened through it would route to him rather than to us. On this branch the only reference to the file sits below an unconditional early return added by that patch, and the map origin&rsquo;s content-security policy names no third-party script host, so the widget does not load. The file is nevertheless still served, which is why it is listed. Removing it is tracked work.</p>
 
+    <h3>1.7 Art bundled inside the fork</h3>
+    <p>The fork ships images as well as code, and until 2026-08-24 this document said nothing about any of them &mdash; section 1.1 booked the whole of the vendored map as MIT, and the MIT grant reaches Azgaar&rsquo;s software, not the provenance of art he bundled from elsewhere. The principle was already stated in section 1.1&rsquo;s note about a copied-in graph utility: the permissive top-level grant does not reach material the project itself copied in from elsewhere. It is applied here too.</p>
+    <p><strong>Heightmaps (<code>public/map/heightmaps/</code>, 23 PNG + 1 text file, 1,224,885 bytes) &mdash; attribution owed, and given below.</strong> The directory documents its own method. Its 24th file, <code>import-rules.txt</code>, records that these are renders from the Tangrams Heightmapper with auto-exposure off and the elevation range set to &minus;500&hellip;2000 m. That tool&rsquo;s elevation source is Mapzen/Tilezen Terrain Tiles, which are a composite of many public elevation datasets. The composite carries no share-alike and no non-commercial term, and commercial use is permitted throughout &mdash; but several constituents require attribution, and one of them terminates automatically if it is not given. The credit is therefore:</p>
+    <blockquote>
+      <p>Elevation renders in <code>public/map/heightmaps/</code> were produced with the Tangrams Heightmapper over Mapzen/Tilezen Terrain Tiles, and are <strong>modified</strong> &mdash; rendered to greyscale at a fixed &minus;500&hellip;2000 m exposure and rescaled. Terrain Tiles are assembled from, among others: ETOPO1 (NOAA, US public domain); GMTED2010, SRTM and 3DEP (USGS, US public domain); <strong>EU-DEM, produced using Copernicus data and information funded by the European Union</strong>; <strong>&copy; Kartverket</strong> (Norway, CC BY 4.0); <strong>UK Environment Agency LIDAR, &copy; Environment Agency copyright and/or database right, Open Government Licence v3.0</strong>; <strong>Land Information New Zealand (CC BY 3.0 NZ)</strong>; <strong>&copy; Commonwealth of Australia (Geoscience Australia), CC BY 4.0</strong>; <strong>data.gv.at (CC BY 3.0 AT)</strong>; <strong>Canadian Digital Elevation Model, &copy; Department of Natural Resources Canada, Open Government Licence &ndash; Canada</strong>; INEGI (Mexico); and ArcticDEM.</p>
+    </blockquote>
+    <p>Which dataset contributed to which image depends on the render zoom, which the PNGs do not record, so the credit is given for the composite rather than per-file. The extents most likely to touch the attribution-mandatory sources are <code>europe.png</code>, <code>europe-north.png</code>, <code>iceland.png</code>, <code>britain.png</code> and <code>greenland.png</code>; the list above should not be pruned on the assumption that it is all US public domain. Neither we nor upstream previously carried this credit.</p>
+    <p><strong>A surgical removal on 2026-08-24, recorded here so neither what went nor what stayed is silent.</strong> The first pass deleted both directories wholesale; the licence census then showed that would have thrown away 104 clean files, so the removal was narrowed to exactly the material the product cannot lawfully carry.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Removed</th><th>Files</th><th>Bytes</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td><code>public/map/charges/</code> &mdash; 234 of 338</td><td>234</td><td>2,814,361</td><td><strong>179 declared CC BY-NC-SA 3.0, a non-commercial licence.</strong> 37 more CC BY-SA 2.5/3.0/4.0, 10 GFDL 1.3 and 1 Free Art Licence are share-alike copyleft, which a proprietary product cannot honour. 4 declared CC BY but the credit had never been carried. 1 carried the literal placeholder <code>licenseDescURL</code>, and 2 (<code>arbalest.svg</code>, <code>plaice.svg</code>) declared nothing at all &mdash; unlabelled is unknown, and unknown is not permission</td></tr>
+          <tr><td><code>public/map/images/textures/</code> &mdash; all 23</td><td>23</td><td>11,646,263</td><td>Metadata stripped; provenance recorded nowhere upstream or here. The terms of the likeliest origin forbid redistribution in a texture pack, modified or not, with no attribution cure</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Kept, and stated positively: the 104 CC0 charges.</strong> Every surviving file in <code>public/map/charges/</code> carries <code>license=&quot;https://creativecommons.org/publicdomain/zero/1.0&quot;</code> in its own <code>&lt;metadata&gt;</code> element &mdash; a public-domain dedication with no attribution requirement and no restriction on commercial use or redistribution. 72 name Azgaar, the fork&rsquo;s own author, as the author; 30 come from <code>commons.wikimedia.org</code>, one from <code>en.wikipedia.org</code> and one from <code>freesvg.org</code>. They are named here because a compliance document should say what it is entitled to ship, not only what it removed. <code>tests/lint/shippedAssetLicence.test.js</code> holds that line: it refuses any charge whose declared licence is anything other than CC0.</p>
+    <p><strong>Replacing the textures with our own.</strong> <code>public/map/images/textures/</code> now contains two estate-authored tiles, <code>paper-grain-light.png</code> and <code>paper-grain-dim.png</code>, copied from <code>public/textures/</code> where <code>scripts/gen-paper-grain.mjs</code> bakes them from a fixed seed. The fork&rsquo;s twelve style presets, its layer default in <code>modules/io/load.js</code> and its texture dropdown were all repointed at them.</p>
+    <p><strong>And the fork was patched so it stops asking for what it no longer has.</strong> Deleting art is only safe if nothing still requests it. The emblem generator picks from a weighted table inside its hashed bundle: measured against the surviving 104 charges, the unpatched table made <strong>22,285 of 40,000 draws</strong> request a file that is not there. The fork swallows that failure &mdash; <code>fetchCharge</code> catches, logs, and returns nothing, so an emblem renders silently incomplete rather than visibly broken. The table was pruned to the charges that ship, and the three categories it emptied (<code>beastHeads</code>, <code>birds</code>, <code>fishes</code>) had their selection weight set to zero so the generator cannot draw an empty category. After the patch, 40,000 draws request an absent file zero times.</p>
+    <p><strong>Art still bundled in the fork whose origin the record does not state.</strong> Listed because an honest inventory names its own gaps:</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Files</th><th>Bytes</th><th>What the record says</th></tr></thead>
+        <tbody>
+          <tr><td><code>images/Discord.png</code>, <code>Facebook.png</code>, <code>Pinterest.png</code>, <code>Reddit.png</code>, <code>Twitter.png</code></td><td>2,518</td><td><strong>Nothing.</strong> These reproduce third-party marks, which is a trademark question distinct from copyright. They came with the fork and link to the upstream author&rsquo;s own social pages, not ours. Removing them is tracked work</td></tr>
+          <tr><td><code>images/pattern1.png</code> &hellip; <code>pattern6.png</code>, <code>images/kiwiroo.png</code></td><td>34,980</td><td><strong>Nothing.</strong> No embedded metadata, no upstream statement</td></tr>
+          <tr><td><code>images/preview.png</code>, <code>images/icons/*</code></td><td>290,255</td><td>Rendered output of the generator itself, which the fork&rsquo;s own derivative-works clause covers. Inferred from the imagery, not stated upstream</td></tr>
+        </tbody>
+      </table>
+    </div>
+
     <h2>2. Fonts</h2>
     <p>Two font families are served from the application origin and are also embedded in exported PDFs. Both are SIL Open Font Licence families; the copyright strings below were read out of each file&rsquo;s own embedded name table.</p>
     <div class="tablewrap">
@@ -245,7 +279,15 @@ Licensed under the terms of [GNU General Public License Version 2 or later](http
         </tbody>
       </table>
     </div>
-    <p>The Nunito faces name their licence URL in the font itself; the Lora faces carry the copyright with the Reserved Font Name wording but no licence URL field. Both families are shipped unmodified: neither is renamed, and no Reserved Font Name is used on a derivative.</p>
+    <p>The Nunito faces name their licence URL in the font itself; the Lora faces carry the copyright with the Reserved Font Name wording but no licence URL field.</p>
+    <p><strong>Both families are shipped MODIFIED, and until 2026-08-24 this section said the opposite.</strong> The correction, and what it does and does not settle:</p>
+    <ul>
+      <li><strong>What was changed.</strong> Both families were re-cut in June 2026 to remove the <code>liga</code> ligature feature, because the <code>fi</code>/<code>fl</code>/<code>ff</code> ligature glyphs rendered as tofu in the exported PDF. Lora in <code>df9c94d27</code> (2026-06-07), Nunito in <code>cf9cfd3af</code> (2026-06-07). <code>src/pdf/theme.js</code> has said so in a code comment since that day. Read out of the binaries themselves: <code>Lora-Regular.ttf</code> went from 132,188 to 129,336 bytes and its GSUB feature list from <code>calt ccmp frac liga locl pnum tnum</code> to <code>calt ccmp frac locl</code>; <code>Nunito-Regular.ttf</code> went from 125,528 to 125,460 bytes and lost <code>liga</code> likewise. Glyph outlines were preserved; only the feature was dropped.</li>
+      <li><strong>What that makes them.</strong> The SIL Open Font License defines a Modified Version as any derivative made by &ldquo;adding to, deleting, or substituting &mdash; in part or in whole &mdash; any of the components of the Original Version&rdquo;. Deleting a GSUB feature is deleting a component, so both families as we ship them are Modified Versions.</li>
+      <li><strong>The Lora Reserved Font Name is an open question, docketed.</strong> <code>Lora-Regular.ttf</code> declares <code>Reserved Font Name &quot;Lora&quot;</code> in its copyright field and still presents the primary family name <code>Lora</code>, both in its own name table and in <code>Font.register({ family: 'Lora' })</code>. Clause 3 of the licence restricts use of a Reserved Font Name on a Modified Version. Renaming the modified faces is the route the licence itself provides, and it has not been done. This section states the position rather than resolving it; the disposition is an owner and counsel matter.</li>
+      <li><strong>Nunito is not affected by clause 3.</strong> It declares no Reserved Font Name, so only the accuracy of the &ldquo;unmodified&rdquo; statement was wrong there.</li>
+      <li><strong>One further consequence of the re-cut, recorded for completeness.</strong> The Lora faces carried <code>https://scripts.sil.org/OFL</code> in name ID 14 before the re-cut and do not carry it now. The licence text still reaches every recipient through <code>public/fonts/OFL.txt</code>, served beside the fonts, so nothing is withheld; but the reason Lora has &ldquo;no licence URL field&rdquo; is that our own re-cut dropped it, not that upstream omitted it.</li>
+    </ul>
     <div class="tablewrap">
       <table>
         <thead><tr><th>File</th><th>What it is</th><th>State</th></tr></thead>
@@ -476,7 +518,27 @@ PERFORMANCE OF THIS SOFTWARE.</pre>
     </ul>
 
     <h2>5. Keeping this current</h2>
-    <p>This page is maintained by hand. When a dependency is added, removed or upgraded, or when anything under the vendored map libraries or the fonts changes, this page and the repository&rsquo;s <code>THIRD-PARTY-NOTICES.md</code> are updated together in the same change; a test holds the two in agreement so the surface cannot rot silently.</p>
+    <p>This page is maintained by hand. When a dependency is added, removed or upgraded, or when anything under the vendored map libraries, the fonts, or any shipped art directory changes, this page and the repository&rsquo;s <code>THIRD-PARTY-NOTICES.md</code> are updated together in the same change; a test holds the two in agreement so the surface cannot rot silently. A second test walks every shipped asset directory and refuses a file whose own embedded metadata declares a non-commercial or share-alike licence, so the section 1.7 class cannot re-enter the payload unnoticed; what it cannot see is art that carries no metadata at all, which is why the unattributed rows in sections 1.7 and 6 are written down rather than machine-checked.</p>
+
+    <h2>6. Art and media served from the app origin</h2>
+    <p>This section was added on 2026-08-24. Until then this document&rsquo;s scope sentence named three populations of third-party material, all of them code, and the art the product serves was outside it by construction. Most of that art is the estate&rsquo;s own, but &ldquo;most&rdquo; is not an inventory, so here is the inventory &mdash; including the part of it we cannot account for.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Group</th><th>Files</th><th>Bytes</th><th>Origin</th><th>What states it</th></tr></thead>
+        <tbody>
+          <tr><td><code>landing-maps/**</code></td><td>80</td><td>68,558,483</td><td><strong>ours</strong> &mdash; procedurally generated</td><td>built by <code>scripts/generate-k*.mjs</code> and <code>scripts/generate-landing-map-plates.mjs</code> from in-repo kernels, with double-build byte-identity asserted</td></tr>
+          <tr><td><code>videos/realm-journey.mp4</code></td><td>1</td><td>20,715,193</td><td><strong>AI-generated</strong>, BytePlus ModelArk <code>dreamina-seedance-2-0</code></td><td>a C2PA manifest signed by Byteplus Pte. Ltd. is intact in the shipped file</td></tr>
+          <tr><td><code>media/journey-legs/**</code></td><td>13</td><td>44,601,456</td><td><strong>AI-generated</strong>, same upstream, then re-encoded with ffmpeg</td><td>the commit trail; the re-encode <strong>stripped the C2PA</strong>, so the shipped bytes no longer carry it</td></tr>
+          <tr><td><code>backgrounds/**</code> &mdash; the documented cohort</td><td>32</td><td>8,014,616</td><td><strong>AI-generated</strong> via Google AI through Higgsfield</td><td>the out-of-repo masters carry <code>photoshop:Credit=&quot;Made with Google AI&quot;</code>, an IPTC digital-source-type of trained algorithmic media, and a Google-signed C2PA manifest. <strong>The shipped web-optimised JPEGs carry none of that</strong> &mdash; the optimiser stripped it</td></tr>
+          <tr><td><code>backgrounds/**</code> &mdash; <strong>the undocumented cohort</strong></td><td>17 + 6 <code>.orig.jpg</code></td><td><strong>7,413,151</strong></td><td><strong>UNKNOWN</strong></td><td><strong>Nothing.</strong> They entered on 2026-06-05 with no statement in the commit, no embedded metadata, and no notice. <code>public/BACKGROUND.md</code> documents which page shows which painting and says nothing about where any of them came from</td></tr>
+          <tr><td><code>evolution/*.jpg</code></td><td>6</td><td>837,563</td><td><strong>AI-generated</strong></td><td>five of the six carry a Google credit string in the file itself; <code>village.jpg</code> carries none</td></tr>
+          <tr><td><code>textures/paper-grain-*.png</code></td><td>2</td><td>6,019</td><td><strong>ours</strong> &mdash; seeded generator</td><td><code>scripts/gen-paper-grain.mjs</code>, deterministic noise</td></tr>
+          <tr><td><code>public/</code> root &mdash; icons, OG images, sitemap, robots, and the status and notices pages</td><td>12</td><td>213,273</td><td><strong>ours</strong></td><td><code>scripts/gen-organic-logo.mjs</code> (byte-goldened) for the imagery; the rest is authored here</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>The gap this section exists to state plainly.</strong> 7,413,151 bytes of page paintings are served publicly from a commercial origin and the estate cannot say where they came from. They are display-only: no raster reaches a generated PDF, and nothing in this group enters a paid artifact. But display-only is not the same as accounted-for, and this document should not imply otherwise. Establishing their origin needs the owner&rsquo;s own records rather than an engineer&rsquo;s search, and that is where the question sits.</p>
+    <p><strong>A second gap, named because it is ours.</strong> For the AI-generated groups, this section records the generating vendor. Whether those vendors&rsquo; terms of service permit commercial use of the output, and whether the estate can assert rights in it, are separate questions this document does not answer and no lane has yet examined.</p>
 
     <footer>
       <p>Corrections and questions: <a href="mailto:support@settlementforge.com">support@settlementforge.com</a>.</p>

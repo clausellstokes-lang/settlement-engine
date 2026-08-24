@@ -396,7 +396,7 @@ async function parseLoadedData(data, mapVersion) {
         texture = viewbox
           .insert("g", "#landmass")
           .attr("id", "texture")
-          .attr("data-href", "./images/textures/plaster.jpg");
+          .attr("data-href", "./images/textures/paper-grain-light.png");
       }
       if (!emblems.size()) {
         emblems = viewbox.insert("g", "#labels").attr("id", "emblems").style("display", "none");

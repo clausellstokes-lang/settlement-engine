@@ -7,8 +7,28 @@ the licence they are offered under. The SIL Open Font License asks that its text
 accompany the fonts; that text is reproduced in full below, so this one file
 satisfies the request on its own.
 
-The fonts themselves are unmodified. Neither family is renamed, and no Reserved
-Font Name is used on a derivative.
+THE FONTS SERVED HERE ARE MODIFIED VERSIONS. Until 2026-08-24 this file said
+they were unmodified; that statement was wrong and is corrected here.
+
+Both families were re-cut in June 2026 to remove the `liga` ligature feature,
+because the fi/fl/ff ligature glyphs rendered as tofu in the exported PDF. The
+glyph outlines were preserved; only the feature was dropped. Measured from the
+binaries: Lora-Regular.ttf 132,188 -> 129,336 bytes, GSUB features
+`calt ccmp frac liga locl pnum tnum` -> `calt ccmp frac locl`;
+Nunito-Regular.ttf 125,528 -> 125,460 bytes, `liga` likewise removed. The
+licence below defines a Modified Version as any derivative made by adding to,
+deleting, or substituting any of the components of the Original Version, so
+that is what these files are.
+
+Neither family has been renamed. The Lora faces still declare Reserved Font
+Name "Lora" and still present the primary family name "Lora"; clause 3 of the
+licence below restricts a Reserved Font Name on a Modified Version, and the
+disposition of that is an open owner and counsel matter, recorded rather than
+resolved. Nunito declares no Reserved Font Name, so clause 3 does not reach it.
+
+The Lora faces carried the licence URL https://scripts.sil.org/OFL in their
+name table before the re-cut and no longer do. The full licence text is
+reproduced below, so a recipient of these fonts still receives the terms.
 
 
 THE FONTS THIS COVERS

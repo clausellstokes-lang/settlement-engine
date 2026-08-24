@@ -254,7 +254,7 @@
     "mask": "url(#land)",
     "data-x": 0,
     "data-y": 0,
-    "data-href": "./images/textures/plaster.jpg"
+    "data-href": "./images/textures/paper-grain-light.png"
   },
   "#emblems": {
     "opacity": 0.5,

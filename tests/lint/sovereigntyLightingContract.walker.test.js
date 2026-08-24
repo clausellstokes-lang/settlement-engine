@@ -6162,7 +6162,50 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // the slot's 2,150 reds at `credited` ("expected 2151 to be 2150") — the credit itself, which
     // is the second, independent proof that the new file is COUNTED rather than parked. The file
     // was restored byte-identical (cmp 0) after each control and after the probe.
-    files: 2517, parked: 366, credited: 2151, titles: 20882, suiteTitles: 5814,
+    // ── RE-RECORDED 2026-08-24 BY THE TE-IP-1 LANDING (the licence violation stopped — 257
+    //   non-commercial and copyleft art files leave the payload, the 104 CC0 charges stay, and
+    //   the class finally gets the walker the vendor manifest never had), CAUSE ATTRIBUTED ──
+    // 2,517/366/2,151/20,882/5,814 → 2,518/366/2,152/20,891/5,818 at slot 5055990a3 (the MF-CG1
+    // landing). NO REBASE WAS OWED: `git rev-parse claude/composite-r4` matched the slot card's
+    // sha exactly at dispatch and this member builds directly on it, so the walked absolutes and
+    // the member's own delta describe the same tree.
+    // ONE cause, and it is not a rule change — no classifier here widened or narrowed:
+    //   +1 file / +1 CREDITED / +9 titles / +4 suite titles:
+    //     tests/lint/shippedAssetLicence.test.js, the shipped-art licence walker — FOUR literal
+    //     suite openers and NINE straight-line arms, every title spelled as a string literal,
+    //     with `.each`, `runIf`, `.skip`, `.todo`, `.concurrent` and `skipIf` at ZERO occurrences
+    //     over the file, so it is CREDITED and every title counts. `parked` does NOT move, and on
+    //     the walk below it PASSED without redding at 366 between `files` and `credited`.
+    //   THE DELTA WAS PREDICTED STATICALLY BEFORE EACH WALK AND EACH WALK MATCHED IT. The file
+    //     was walked TWICE: first at 3 `describe(` / 7 `it(` (+3/+7), then again after the chair's
+    //     §532 amendment grew it to 4 / 9 (+4/+9). Both times the static count was taken off the
+    //     source first and the walked figures then read out of the arm's own failure messages. A
+    //     matching pair is the cheap proof that no title was SWALLOWED by a park-at-birth — the
+    //     trap the MF-CG1 block above records, where a delta of +1/+1/+0/+0/+0 closed the
+    //     arithmetic while nineteen titles vanished and nothing redded.
+    //   ⚠ AN INSTRUMENT LIED DURING THIS WALK, recorded so the next lane does not lose an hour to
+    //     it: THE FIVE CENSUS MESSAGES ARE NOT PREFIX-DISJOINT. "the CREDITED-file count moved"
+    //     contains the substring "file count moved", so any dispatch that tests the `files`
+    //     spelling first swallows the `credited` message and edits the WRONG KEY. The wrong-key
+    //     substitution then matches nothing and SILENTLY NO-OPS, so the walk re-reads the same red
+    //     forever while looking busy. Two cures: match `estate's file count moved` rather than the
+    //     ambiguous tail, and bracket every substitution with a hash of the file that ABORTS when
+    //     the bytes did not move.
+    // `censusAuthorization`: ODQ §526–§529 (the AD-1 art-and-media provenance audit and the
+    // chair's ruling that the removal proceeds as a repair) and §532 (the chair's amendment
+    // narrowing it from a directory deletion to a surgical one).
+    // WALKED, NOT CARRIED — every moved figure READ FROM ITS OWN FAILURE MESSAGE in assertion
+    // order and never computed. Second walk: `titles` "expected 20891 to be 20889" →
+    // `suiteTitles` "expected 5818 to be 5817"; `files`, `parked` and `credited` all PASSED
+    // UNMOVED, because the amendment added arms to an already-counted file rather than a file.
+    // The whole arm green at the end (Test Files 1 passed (1) / Tests 1 passed | 32 skipped (33),
+    // exit 0). The arithmetic closes: 366 + 2,152 = 2,518.
+    // TWO negative controls at the first walk, both red as predicted and both restored cmp 0:
+    // the slot's own tuple put back reds at `files` ("expected 2518 to be 2517"), this member's
+    // +1 exactly; and `credited` ALONE put back at the slot's 2,151 reds at `credited`
+    // ("expected 2152 to be 2151") — the credit itself, which is the second, independent proof
+    // that the new file is COUNTED rather than parked.
+    files: 2518, parked: 366, credited: 2152, titles: 20891, suiteTitles: 5818,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
