@@ -25635,3 +25635,26 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   collision-free) preferred where geometry is tight, tangential rows where
   already safe, and a before/after crop of one wall stretch for the owner
   to judge the effect in isolation.
+
+## §576 · THE MARKET LAW: A MARKET IS ONE GIANT STREET, FURNISHED LIKE A YARD (2026-08-24 ~12:35 CDT)
+
+- **§576.1 ⭐ OWNER DIRECTIVE:** markets seamlessly integrate into the street
+  system — open spaces that ARE the street, widened — and get filled like the
+  yard. **Historically exact:** medieval markets were street-widenings (the
+  broadened high street, the triangular green at a junction, the funnel at a
+  gate), continuous in surface with the streets, their edges defined by
+  building frontages — and furnished (stall rows, the market cross, the well,
+  the weigh-house), with permanent stalls slowly fossilizing into the island
+  building-rows old squares still show. **Triangulation-legal:** Watabou's
+  plazas are street-void-colored openings; the corpus's fora carry drawn
+  furniture.
+- **§576.2 THE RULES AS MINTED:** (i) a market/plaza shares the street VOID's
+  surface exactly — no boundary stroke, no tint seam; the void swells; (ii)
+  its dressing follows the B13 density law (lived-in, never cluttered) with
+  furniture drawn from the market's own facts; (iii) ⭐ the MARKET-INFILL
+  hook is chartered as a dated-history mechanism for the fabric program —
+  stall rows fossilizing into permanent island rows over decades is a
+  derivable, narratable process (law-5 fossils applied to commerce), left as
+  a carry-note beside the frontage-fusion and orientation-field waves.
+  Specimen demonstrates (i)+(ii) at draw level with a before/after crop of
+  the main square.
