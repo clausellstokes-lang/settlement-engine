@@ -6106,7 +6106,63 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   `suiteTitles` alone put back at the slot's 5,807 reds at `suiteTitles` ("expected 5808 to
     //   be 5807"), the member's one new describe — the file restored byte-identical (cmp 0) both
     //   times.
-    files: 2516, parked: 366, credited: 2150, titles: 20863, suiteTitles: 5808,
+    // ── RE-RECORDED 2026-08-24 BY THE MF-CG1 LANDING (the cartography ground — the town
+    //   cartography stage's per-tier premises finally get a real-pipeline calibration corpus,
+    //   and the corpus REFUTES the ratified cure), CAUSE ATTRIBUTED ──
+    // 2,516/366/2,150/20,863/5,808 → 2,517/366/2,151/20,882/5,814 at the landing slot b2852ccc
+    // (the MF-CH1 landing). ⚠ A REBASE WAS OWED HERE and that is why this row exists: the member
+    // built on 00e7af61 and `git merge-base --is-ancestor b2852ccc 74586243` returned FALSE, so
+    // the member's own walked tuple (2,515/366/2,149/20,854/5,807 → 2,516/366/2,150/20,873/5,813)
+    // describes a tree that no longer exists. It was NOT carried. The tuple below is walked again
+    // at the REBASED tree, and the two walks agree only on the DELTA, never on the absolutes.
+    // ONE cause, and it is not a rule change — no classifier here widened or narrowed:
+    //   +1 file / +1 CREDITED / +19 titles / +6 suite titles:
+    //     tests/domain/townCartographyCalibration.test.js, the member's calibration suite — SIX
+    //     literal suite openers (W0…W5) and NINETEEN straight-line evidence arms, every title
+    //     spelled as a string literal, with `.each`, `runIf`, `.skip`, `.todo`, `.concurrent` and
+    //     `skipIf` all at ZERO occurrences over the file, so it is CREDITED and every title
+    //     counts. `parked` does NOT move — and on the walk below it PASSED without redding at 366
+    //     between `files` and `credited`.
+    //   ⚠⚠ THAT RECEIPT IS NOT DECORATION HERE, AND THE FILE ALMOST DID NOT GET IT. The member's
+    //     FIRST draft registered its suites inside an `if (process.env.UPDATE_…) { … } else { … }`
+    //     at module scope. This walker PARKED THE WHOLE FILE (SUITE_UNREGISTERED /
+    //     TEST_UNREGISTERED): the walked delta read +1/+1/+0/+0/+0, all nineteen titles were
+    //     SWALLOWED, the arithmetic still closed, and NOTHING redded. A brand-new test file can
+    //     park itself AT BIRTH. The cure was straight-line registration with the re-record kept
+    //     as an opt-in ARM of W0's single test — and at this landing the credit is re-proved
+    //     DIRECTLY rather than inferred from the totals, by reading the walker's own
+    //     `parkReasonsFor` / `liveTitlesIn` / `liveSuiteTitlesIn` for that one file through a
+    //     deliberately-red probe arm: {"inTestFiles":true,"inCredited":true,"inParked":false,
+    //     "titles":19,"suiteTitles":6,"parkReasons":[]}. The walker was restored cmp 0 after it.
+    //   The nineteen arms, counted per suite opener at the landed bytes (1+6+2+3+4+3 = 19):
+    //     W0 the frozen record and the one arm that re-records it (1); W1 the corpus is a RULE
+    //     and the manifest covers it EXACTLY (6 — the vocabulary arithmetic, the selection rule
+    //     index for index, the (tier,seed) and (tier,threat) rotation coverage, key-set equality,
+    //     every row's known outcome with a succeeding dark compile, and the classifier that reads
+    //     the stage's OWN words and refuses foreign ones); W2 the frozen measurement re-measured
+    //     LIVE through the real pipeline on a fixed stride UNIONED with every tier's argmax row
+    //     (2); W3 the corpus quantity PROVEN rather than assumed (3 — the stage's reported
+    //     binding count against the settlement's own institution roster, the tier cap the tuning
+    //     table actually holds, and the DERIVED byte band rather than a second authored table);
+    //     W4 the premise-failure inventory as a SHRINK-ONLY ratchet (4 — each tier's full share,
+    //     no tier over its frozen count, the staleness honesty arm, and the frozen per-tier
+    //     institution maximum); W5 the headroom every cap actually has against real output (3).
+    // `censusAuthorization`: ODQ §484 (the lane's dispatch and this landing's), §506 (the
+    // inherited diagnosis the member refutes by measurement), §417 (the row the member DEFERRED
+    // and this landing act PAYS).
+    // WALKED, NOT CARRIED, AT THE REBASED TREE — every moved figure READ FROM ITS OWN FAILURE
+    // MESSAGE in assertion order and never computed: `files` "expected 2517 to be 2516" →
+    // `parked` PASSED UNMOVED at 366 → `credited` "expected 2151 to be 2150" → `titles` "expected
+    // 20882 to be 20863" → `suiteTitles` "expected 5814 to be 5808"; the whole arm green at the
+    // end (Test Files 1 passed (1) / Tests 1 passed | 32 skipped (33), exit 0). The arithmetic
+    // closes: 366 + 2,151 = 2,517. The walked delta +1/+0/+1/+19/+6 EQUALS the member's own
+    // walked delta at its own base exactly, so the rebase moved no title and none was swallowed.
+    // TWO negative controls, both red as predicted: the slot's own tuple put back reds at `files`
+    // ("expected 2517 to be 2516"), this member's +1 exactly; and `credited` ALONE put back at
+    // the slot's 2,150 reds at `credited` ("expected 2151 to be 2150") — the credit itself, which
+    // is the second, independent proof that the new file is COUNTED rather than parked. The file
+    // was restored byte-identical (cmp 0) after each control and after the probe.
+    files: 2517, parked: 366, credited: 2151, titles: 20882, suiteTitles: 5814,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

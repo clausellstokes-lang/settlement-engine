@@ -23292,9 +23292,9 @@
     },
     {
       "id": "MF-CG1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-CG1.md",
-      "verifiedBase": "00e7af612d428078634d52ea37054bd00b773ca6",
+      "verifiedBase": "b2852ccc3cc4753499996da6582dd672e90499d0",
       "changeManifest": [
         {
           "_note": "THE CORPUS. The calibration ground built from REAL generateSettlementPipeline output: the estate's golden-master grid (6 tiers x 12 cultures x 7 terrains = 504, terrain paired with its honest route) with monsterThreat and the seed ROTATED by row index. The rotation is measured, not stylistic: the calibration quantity is a seeded draw, and at one fixed config eight seeds moved hamlet 11->20 and town 45->58 while the whole 12x7 culture-by-terrain sweep at ONE seed moved hamlet only 7->17. measureCalibrationRow drives the real pipeline and the real compiler and records THE STAGE'S OWN VERDICT plus the integers the stage's own premise message states; no eligibility rule, cap comparison or byte count is re-implemented, because a fixture that mirrored the deriver would agree with it by construction.",

@@ -1,8 +1,11 @@
 # Town cartography / MF-CG1 — the cartography ground: the stage's premises get a real-pipeline corpus, and the corpus refutes the cure
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** 1
-- **Verified base:** `claude/composite-r4` at `00e7af612d428078634d52ea37054bd00b773ca6`
+- **Verified base:** `claude/composite-r4` at `b2852ccc3cc4753499996da6582dd672e90499d0`
+  ⚠ RE-STAMPED AT THE LANDING ACT (§410). The member was BUILT on `00e7af612d428078634d52ea37054bd00b773ca6` and a REBASE WAS
+  OWED: `git merge-base --is-ancestor b2852ccc 74586243` returned FALSE, so the holding tip was
+  rebased `--onto` this slot by lane TE-CG1-LANDING. See §10.
   ⚠ Read with `git rev-parse` at this lane's opening, never extended from a quoted prefix
   (§381's fabricated-SHA law) and never taken from the dispatch text.
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
@@ -14,9 +17,12 @@
   window.
 - **Charter:** ODQ **§484** (the lane's dispatch), **§506** (the inherited diagnosis and the
   ratified cap rule), **§503.2 / §505.4** (the measurement laws quoted in §3 below).
-- **Collision group:** none. At this base **167 of 168 registered packets are LANDED and the
-  remaining one is SUPERSEDED** (measured by execution against `PACKET_MANIFEST.json`), so no
-  packet reserves any path this member names.
+- **Collision group:** none. At the BUILD base **167 of 168 registered packets were LANDED and
+  the remaining one SUPERSEDED**; RE-MEASURED at the landing slot `b2852ccc` by execution
+  against `PACKET_MANIFEST.json`, **168 of 169 are LANDED and the remaining one is
+  SUPERSEDED** — MF-CH1 landed in the window, and its change set and this member's are
+  disjoint at blob level (§10), so no packet reserves any path this member names at either
+  end.
 - **Commit authority:** this lane commits on its own detached worktree ref. **No ref was moved.**
 - **Family:** `town-cartography`, not the dispatch's suggested `catalog-hygiene`. The validator has
   no family concept — a family is only the directory segment inside `packetPath` — and this
@@ -361,3 +367,208 @@ own §417 census red, named in advance in §6.
   ground for the geometry pins in `townCartographyParcels.test.js`, and correctly so — geometry is
   not a distribution question. Only the per-tier CEILINGS needed a real-output ground. No change
   proposed.
+
+
+## §10 · THE LANDING SLOT (TE-CG1-LANDING, 2026-08-24 — slot `b2852ccc`, the MF-CH1 landing)
+
+Landed by lane **TE-CG1-LANDING**, **`[OPUS-RUN · FABLE-VALIDATION OWED]`** (ODQ §484). The lane
+moved no ref; the chair executes the CAS `b2852ccc → this tip`.
+
+### §10.1 · A REBASE WAS OWED, and it is a measurement
+
+The member built on `00e7af612d428078634d52ea37054bd00b773ca6` and held at
+`7458624339009f43c88d936b4bc663fde7607f3c` (`refs/preserve/holding-cg1`, re-read in-shell at GO;
+that ref and the lane worktree's detached HEAD agreed, porcelain empty). The slot ref
+`claude/composite-r4` had moved to `b2852ccc3cc4753499996da6582dd672e90499d0` — MF-CH1, the 47th
+landing — and `git merge-base --is-ancestor b2852ccc 74586243` returned **FALSE** while
+`--is-ancestor 00e7af61 74586243` returned TRUE. So the holding tip was rebased
+`--onto b2852ccc 00e7af612 74586243`.
+
+**Carry-proof-by-absence at blob level, ten rows, read at all three ends** (build base · slot ·
+holding tip). ⚠ The instrument was itself proved before it was believed: a first pass used
+`git rev-parse "${SHA}:${path}"`, which ECHOES an unresolvable argument back and exits 0, so every
+row read as present. The nonexistent-path control caught it; the table below is `git rev-parse
+--verify -q`, with a path that exists at all three ends re-read as a non-vacuity probe.
+
+| path | base | slot | tip | reading |
+|---|---|---|---|---|
+| `docs/implementation/INDEX.md` | `12b5e8fa1d` | `a4e17f45fa` | `6a92251b1c` | MOVED at the slot — CH-1 landed a packet ⇒ conflict expected |
+| `docs/implementation/PACKET_MANIFEST.json` | `7bc924732f` | `87621b19f6` | `4e10c7a16d` | MOVED at the slot ⇒ conflict expected |
+| `docs/implementation/packets/town-cartography/MF-CG1.md` | ABSENT | ABSENT | `ab8b297e41` | created by this member |
+| `tests/domain/townCartographyCalibration.test.js` | ABSENT | ABSENT | `ed7fe9e327` | created by this member |
+| `tests/fixtures/cartography-calibration-corpus.json` | ABSENT | ABSENT | `210d9fa903` | created by this member |
+| `tests/fixtures/cartographyCalibrationCorpus.js` | ABSENT | ABSENT | `9bf3f8a1f1` | created by this member |
+| `tests/lint/sovereigntyLightingContract.walker.test.js` | `0303493ea2` | `95ed6be312` | `0303493ea2` | ⚠ **MOVED at the slot, tip == base** — CH-1 paid a census row into it ⇒ **the census must be RE-WALKED, never carried** |
+| `package.json` | `2b5ec2014c` | `2b5ec2014c` | `2b5ec2014c` | unmoved — **no mint trigger crossed** |
+| `package-lock.json` | `1a8a80b12b` | `1a8a80b12b` | `1a8a80b12b` | unmoved |
+| `…/NO-SUCH-FILE-CONTROL.md` | ABSENT | ABSENT | ABSENT | **the control that makes the four real ABSENT readings evidence** |
+
+The rebase stopped exactly where the table predicted and nowhere else: INDEX and the manifest,
+both resolved **keep-both**. INDEX is a ONE-LINE pure insertion over the slot's file
+(`difflib` opcodes: a single `insert` at line 1045), MF-CH1's row first and this member's second.
+The manifest was resolved by **string surgery, never re-serialized**: the slot's 169 records are a
+byte-identical prefix and this member's record block is verbatim from the holding tip. Deep
+compare against both parents: **169 → 170, ADDED `[MF-CG1]`, REMOVED `[]`, DRIFTED `[]`**, top-level
+keys and `indexPath` unchanged, slot order preserved.
+
+**The rebased change set is SIX files and ZERO `src/` bytes** — `git diff --name-only b2852ccc HEAD`
+filtered on `^src/` returns nothing, which is this member's whole premise (no tuning number moved;
+Half B was a measured STOP, re-chartered as CG-1b). The four created files are **blob-identical**
+to the holding tip (`ab8b297e41` / `ed7fe9e327` / `210d9fa903` / `9bf3f8a1f1`), and the two resolved
+files were committed at exactly the bytes written (`git hash-object` == the committed blob), so no
+hook rewrote the resolution.
+
+### §10.2 · THE CENSUS ROW — WALKED AT THE REBASED TREE, AND THE CREDIT PROVED DIRECTLY
+
+The member DEFERRED its census row under §417; this act pays it. The row could not be carried:
+the walker itself moved at the slot (row 7 above), so the member's own absolutes describe a tree
+that no longer exists.
+
+Slot `2516/366/2150/20863/5808` → tip **`2517/366/2151/20882/5814`**, delta **`+1/+0/+1/+19/+6`** —
+identical to the delta the member walked at its own base, which is the receipt that the rebase
+moved no title. Every figure was READ FROM THE ARM'S OWN FAILURE MESSAGE in assertion order and
+never computed: `files` "expected 2517 to be 2516" → `parked` **PASSED UNMOVED** at 366 →
+`credited` "expected 2151 to be 2150" → `titles` "expected 20882 to be 20863" → `suiteTitles`
+"expected 5814 to be 5808". Green at the end: `Test Files 1 passed (1)` · `Tests 1 passed |
+32 skipped (33)` · exit 0. Arithmetic closes: 366 + 2,151 = 2,517.
+
+**Two negative controls, both red as predicted, both restores `cmp` 0**: the slot's whole tuple put
+back reds at `files` ("expected 2517 to be 2516"), this member's +1 exactly; and `credited` ALONE
+put back at 2,150 reds at `credited` ("expected 2151 to be 2150").
+
+⭐ **AND THE CREDIT IS PROVED DIRECTLY, not inferred from the totals.** The member's first draft
+registered its suites inside an `if (process.env.UPDATE_…) { … } else { … }` at module scope and
+the walker PARKED THE WHOLE FILE at birth — nineteen titles swallowed, the arithmetic still
+closing, nothing red. So this act read the walker's OWN `parkReasonsFor` / `liveTitlesIn` /
+`liveSuiteTitlesIn` for that one file through a deliberately-red probe arm:
+`{"inTestFiles":true,"inCredited":true,"inParked":false,"titles":19,"suiteTitles":6,"parkReasons":[]}`.
+The walker was restored `cmp` 0 after the probe.
+
+### §10.3 · THE THREE-PLACE LANDED FLIP (§410), each place read back through the validator
+
+`[implementation-packets] valid: 170 packets (0 READY)`, exit 0.
+
+1. **The manifest row** — `status` READY → LANDED and **`verifiedBase` RE-STAMPED** from the build
+   base to the slot `b2852ccc3cc4753499996da6582dd672e90499d0` (a re-stamp CH-1 did not owe and
+   this member does). Its ten `requiredSymbols` rows were re-read and are every one a **symbol or
+   an export marker** — no count, no migration head.
+2. **This packet's Markdown header** — `Status` and `Verified base`, both parsed by
+   `parsePacketHeader`.
+3. **The INDEX STATUS column**, reached through the manifest's `indexPath`.
+
+**FOUR non-vacuity controls, each perturbing exactly one place, all restores `cmp` 0:**
+
+| control | validator |
+|---|---|
+| INDEX marker alone → READY | refused: `status disagrees with index: manifest=LANDED index=READY` |
+| packet header alone → READY | refused: `status disagrees with packet Markdown: manifest=LANDED packet=READY` |
+| manifest `verifiedBase` alone → build base | refused: `verifiedBase disagrees with packet Markdown` |
+| manifest `status` alone → READY | refused on BOTH the index and the Markdown |
+
+⚠ **A VACUITY CAUGHT AND CURED IN FLIGHT, worth banking.** The INDEX control PASSED on its first
+run. `parseIndexPacketStatuses` scans the status cell for the FIRST member of `PACKET_STATUSES`
+(order `BLOCKED, DRAFT, LANDED, READY, …`) that appears anywhere in it — and this act's first
+draft of that cell said "…and landed at slot `b2852ccc`" in prose, so the cell still read LANDED
+with the marker flipped back to READY. **A status word in the prose of a STATUS cell silently
+disables the index half of the three-place agreement.** The cell was rewritten so the bold marker
+is the only status word in it (measured: exactly one occurrence), and the control then redded.
+The row's own standing warning — "keep status words out of it" — is now a measurement, not advice.
+
+### §10.4 · S0, BOTH PARTS
+
+**Part 1.** `node scripts/check-observed-shape-readers.mjs` at this tip: exit **1**, **159 B**,
+sha256 `c5b67844abe51226f4c6862ae485dc5d9fa1e51148c70b4bd021e661f1ae0854`. The same command at the
+chair baseproof `chair-baseproof-b10ed1a1` (HEAD `b10ed1a1f5a0f2acd00bbfc9b5d0a41931697c3d`, its
+own `node_modules`, **porcelain 0 BEFORE and AFTER** — this lane wrote nothing there): exit **1**,
+**159 B**, the SAME sha256. **`cmp` exit 0.** The comparison is live, not vacuous: appending ONE
+byte to a copy makes the same `cmp` exit 1. Pre-existing, and not this member's.
+
+**Part 2.** The reader-walker literals stand VERBATIM at `tests/lint/observedShapeReaders.walker.
+test.js:737` — `{ reads: 1995, identities: 1409, files: 387, bankedReads: 60, taggedRows: 40 }` —
+with the walker green, `Test Files 1 passed (1)` · `Tests 27 passed (27)`. The OSR inventory blob
+`scripts/.observed-shape-readers-baseline.json` is `8d91fdfa14` at the slot, at this tip and in the
+worktree — unmoved.
+
+### §10.5 · THE RE-PROOFS, every vitest run mutexed on the shared lock
+
+| run | target | result |
+|---|---|---|
+| A | `tests/domain/townCartographyCalibration.test.js` | `Test Files 1 passed (1)` · **`Tests 19 passed (19)`** — the member's nineteen arms |
+| B | the cartography stage's own suites (Parcels · Buildings · townSceneCartography) | `3 passed (3)` · `59 passed (59)` |
+| C | `tests/property` | `101 passed (101)` · `643 passed (643)` |
+| D | `tests/lint/observedShapeReaders.walker.test.js` (S0 part 2) | `1 passed (1)` · `27 passed (27)` |
+| E | the §489.3 grep arm re-derived at the rebased tree, **68 files** | `68 passed (68)` · `807 passed (807)` |
+
+The generator golden `tests/fixtures/generator-golden-master.json` is blob `cd8d125ef8` at the slot,
+at this tip and in the worktree, sha256 `29c6cc8fd0573a37a8e4042b8f98db92fbe49ea36e24f61355c806f79bc9e0a8`
+before AND after the whole battery; `generatorGoldenMaster.test.js` rode runs C and E and is green
+in both, which is the direct unmoved-golden proof rather than an inference from the hash.
+
+Every run cross-checked its own file count against the paths handed to it (`PASSED_PATHS` vs the
+`Test Files` total) — a mis-spelled vitest path is dropped SILENTLY over a green exit, and a
+zsh-unsplit `$FILES` has cost an earlier lane a vacuous green.
+
+`[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173)`, exit 0.
+`[domain-strict] ✓ no strict-type regressions (1134 errors, ceiling 1134)`, exit 0.
+`eslint` over the three touched JS paths exits 0 with empty output, and `--fix-dry-run` changes
+nothing. Zero tabs and zero control bytes in the walker diff.
+
+### §10.6 · THE GREP ARM'S OWN UNION IS FIFTEEN TREES, NOT THIRTEEN — a correction by execution
+
+§8 states the widening rule ("the sweep was WIDENED BY SHAPE" to whatever trees the token union
+reaches) and then lists thirteen. Re-deriving the union at this tree from §8's own token set —
+all fourteen tokens, `git grep -l` across `tests/` — returns **72 paths in eleven trees**, of which
+68 are runnable test files. Two of those trees, **`tests/pdf` and `tests/security`**, are absent
+from §8's thirteen: `tests/pdf/townMapDocument.smoke.test.js`,
+`tests/security/townMapGalleryOptIn.test.js` and `tests/security/townScenePlayerSafe.test.js` are
+all reached by the `townMapFixtures` token, and were reached by it **at the member's own build base
+too** (verified against `00e7af612`), so this is an omission in the list rather than drift under it.
+The rule is right and the enumeration was N−2. **This landing's sweep therefore runs FIFTEEN trees**
+plus MF-CH1's eleventh item, the root-level `tests/generation.test.js` that sits outside every tree.
+§8's list is left as the member's own record; this section is the correction.
+
+### §10.7 · THE SWEEP, ONCE, AND ITS CLASSIFICATION AGAINST A RE-PROVED SEVEN
+
+The banked set was **re-proved by EXECUTION, at the SLOT** — a detached baseproof worktree at
+`b2852ccc` (`$SP/laneTECG1-slotproof`, its own linked `node_modules`, porcelain 0 before and
+after), never inherited from a commit subject or from the member's own base run:
+`Test Files 5 failed | 1 passed (6)` · `Tests 7 failed | 132 passed (139)` — **exactly seven
+titles**, the same seven §8 names:
+
+1. `tests/docs/enforcement-claims.test.js :: every completeness claim carries an @enforced-by tag with ≥1 target`
+2. `tests/domain/metronomeCooldownLint.test.js :: the non-cooldown emitter set may only SHRINK …`
+3. `tests/lint/clampPrimitiveBaseline.test.js :: baseline exactly matches the files that still define a local clamp/clamp01`
+4. `tests/lint/warCostKindPools.walker.test.js :: 'trajectory_misread' retains the five receipt-annex families verbatim`
+5. `tests/lint/warCostKindPools.walker.test.js :: 'war_trajectory_losing' …`
+6. `tests/lint/warCostKindPools.walker.test.js :: 'war_trajectory_winning' …`
+7. `tests/lint/warRulingKindPools.walker.test.js :: 'succession_demand_inherited' retains the five annex families without editorial cross-references`
+
+`tests/lint/sovereigntyLightingContract.walker.test.js` is the sixth file in that run and it
+**PASSED at the slot**, which is the control that makes this act's census row attributable rather
+than assumed — and, since this act PAYS that row, the arm is green at the tip too.
+
+**THE SWEEP, ONE DRIVE**, mutexed, over the fifteen trees plus `tests/generation.test.js` at these
+bytes: `Test Files 5 failed | 1870 passed | 8 skipped (1883)` · `Tests 7 failed | 23,685 passed |
+115 skipped (23,807)` · 792.99 s · **SWEEP_TRUE_EXIT 1**.
+
+The failing-title set is **IDENTICAL, set for set, to the seven re-proved at the slot** — compared
+mechanically (`diff` of the two sorted `×` lists returns empty), not read side by side. So:
+
+**7 failing titles − 7 re-proved banked = 0. ZERO STRAYS, and ZERO member reds** — the member's
+one authorized interior red, its deferred §417 census row, is GREEN here because this act pays it.
+`tests/lint/sovereigntyLightingContract.walker.test.js` appears in no failure list at either end:
+it PASSED at the slot baseproof and it passes here.
+
+### §10.8 · JUDGMENTS AND DEFERRALS OF THE LANDING ACT
+
+| | |
+|---|---|
+| **J-TECG1L-1** | **Decided:** resolve the manifest conflict by string surgery on the SLOT's file, splicing this member's record block verbatim from the holding tip, rather than re-serializing. **Why:** the member's own build proved a full re-serialize produces a 26k-line reformat. **Verified:** the slot's 169 records are a byte-identical prefix; deep compare says ADDED `[MF-CG1]`, REMOVED `[]`, DRIFTED `[]`. **Reversal:** re-serialize and take the reformat |
+| **J-TECG1L-2** | **Decided:** widen the sweep from §8's thirteen trees to fifteen (adding `tests/pdf` and `tests/security`) plus `tests/generation.test.js`. **Why:** §8's own widening rule, re-executed, reaches those trees through the `townMapFixtures` token, and did so at the member's build base too — the list was N−2 of its own rule. **Reversal:** run thirteen and accept an unswept 187 files. **Blast radius:** wall-clock only; the verdict is unchanged (0 strays either way, since the seven banked live in `tests/docs`, `tests/domain` and `tests/lint`) |
+| **J-TECG1L-3** | **Decided:** re-stamp the member's base-dependent header figures rather than leave them describing a tree that no longer exists — `verifiedBase` in both places (§410 requires it), and the collision-group count, RE-MEASURED at the slot as 168 of 169 LANDED with one SUPERSEDED. **Why:** a landed packet's moving-head figures are the trap the next migration inherits. **Reversal:** revert the two header lines |
+| **J-TECG1L-4** | **Decided:** correct §8's thirteen-tree enumeration in §10.6 rather than editing §8 in place. **Why:** §8 is the member's own record of what it did; the correction belongs to the act that measured it. **Reversal:** fold §10.6 into §8 |
+
+**DEFERRED, documented, not bugs to re-find.** Everything §9 defers stands unchanged — the cap
+change (Half B, re-chartered as CG-1b), the TC-4 byte band's recalibration, and the two questions
+that cannot be measured without making the gated change. This act moved no tuning number and no
+`src/` byte.
