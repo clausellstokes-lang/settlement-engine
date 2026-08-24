@@ -25234,3 +25234,49 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
 - **§565.3 THE 30-MIN WAKEUP IS ARMED** (§447 standing law; session-scoped):
   four checks — lanes alive by receipt, mutex health by lock-dir pid, verdict
   collection with chair-only pin moves, ledger checkpoint by private index.
+
+## §566 · THE PROCESS DIED AND NOTHING WAS LOST — C-19 COLLECTED, BOTH CURES RESUMED MID-BILL (2026-08-24 ~10:15 CDT)
+
+- **§566.1 THE HOST PROCESS EXITED MID-SESSION** (the browser surface wedged
+  with it); **the §559 discipline held**: both cure lanes died holding committed
+  checkpoints and receipts, and both were RESUMED from those receipts,
+  survey-first. **CH7-CURE:** Act 1 done and proved — the eight-file sidecar
+  set at `479992b6e`, the stop condition checked (analytics/intentAtlas
+  unchanged in content), and gate run #1 carried `test:ratchet` GREEN
+  (`11 known failure(s) of 29051, ceiling 11`) — **the six edge-bundle failures
+  ARE CURED**; the run redded only on four `verify:dist` TIMEOUT rows at
+  machine load 154 (two missed the 20s budget by 36ms and 446ms). A killed
+  re-run is not a verdict, so the one permitted quiet re-run remains available
+  and is launching on a quiet machine. **CH4-CURE:** bills C+D committed
+  (`6c200edff` — the any-casts are real types; the dead `power.factions`
+  alternate DELETED, not banked) and E (`ebaa0e573` — one pure line-move
+  238→373, the car's comment figures shown NOT to be debt); bill B was mid-edit
+  at death — resumed with fresh-eyes verification ordered on the uncommitted
+  walker edit before it completes.
+- **§566.2 C-19 COLLECTED — BOTH CLAIMS WERE UNDERSTATED, AND THE RECOUNT IS
+  TWICE-DERIVED.** Ruled figures: **CIRCULATION 61** (floor 59 / ceiling 62)
+  against the claimed ~55; **STORAGE 54** (floor 49 / ceiling 58) against ~35.
+  Two independent parsers agree on both integers; the first pass's 86/69
+  REPRODUCED and fully decomposed (86 = 60 sub-form tokens + 11 class names +
+  9 buckets + 6 licence rungs). All three controls fired (GALLERY 12/12 and
+  STORE 23/23 exact; boundary removal inflates to 79/61; a narrower rule drops
+  to 20/15 — the storage drop is the real trap, §2.5's brace-sets span line
+  breaks). Whole-document sweep: **exactly the five chartered claim sites, no
+  sixth.** Byte-exact edit specs delivered (`c19/claim-site-edits.md`); the
+  chair applies them at the DW sitting.
+- **§566.3 THREE C-19 FINDINGS THAT OUTRANK THE INTEGERS:** (i) ⛔ **the LADDER
+  ORPHAN** — charter L822 annotates `LADDER`"(fixture)" but no fixture roster
+  carries `ladder` (82 names searched, zero) — a chair fork (83rd fixture at
+  61, or sub-form at 62) to be ruled at the DW sitting; (ii) **ENVELOPE has
+  ZERO token occurrences in the charter** — the §558.5 vocabulary is minted law
+  with no charter text behind it yet, an authoring debt DW-1g must carry;
+  (iii) **40 cross-vocabulary name collisions** (28 chartered CELL_KINDS + 8
+  landed ROOM_KINDS + 2 PARTIS + 2 fixtures) — under the charter's own `dais`
+  lesson these want a **standing collision walker** when DW-1d/1e land.
+  Correction banked: landed JOINT_KINDS lives at
+  `src/domain/undercity/jointVocabulary.js:27`, not under `interior/`.
+- **§566.4 THE OWNER'S TWO STANDING ASKS THIS SITTING:** a Fable
+  review-and-refine pass over the DW architecture (much of it Opus-authored —
+  the §236 pattern applied to DESIGN rather than code; running as the next
+  act), and the competitor-visual verdict on the map (in progress; the browser
+  surface died with the process and is being retried).
