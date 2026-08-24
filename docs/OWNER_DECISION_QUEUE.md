@@ -22560,3 +22560,120 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   most change the conclusion: a **reverse-image search on `spain-small.jpg`
   and `pergamena-small.jpg`**, the two load-bearing unknowns, which no lane
   here can run. That is a task for a human with a browser, and it is small.
+
+## §530 — ⭐⭐ THE FIRST STACKED LANDING SINCE #40 IS IN (LANDINGS **49 + 50**, TWO CARS ONE GATE); MP-1 BUILT BUT **THE LAYER IS DARK**; THE PROVENANCE AUDIT LANDS ITS VERDICT — **179 OF 338 HERALDIC CHARGES ARE NON-COMMERCIAL AND WE HAVE BEEN SELLING SINCE APRIL** — AND TE-IP-1 IS DISPATCHED TO STOP IT (2026-08-24 23:56 CDT)
+
+- **§530.1 STACK-1 LANDED.** Tip `7009f115b` = **9 commits over `5055990a`**
+  (4 + 4 + 1 landing act), porcelain 0. Terminal green, chair-read verbatim
+  from `stack1-TERMINAL.log`: `TRUE_EXIT=0` · `[gate-tail] exit: 0` ·
+  `TREE_HEAD_AFTER` equal to the tip · `STRICT DIST OK 52/438` ·
+  `free_kb_at_end=12414796`; the lane's own quoted lines add `valid: 172
+  packets (0 READY)`, 173/173, 1134/1134 and **28,941 tests = 28,924 + 9 + 8**,
+  the gate's own figure closing the per-car attribution without a temp
+  worktree. **CAS `5055990a → 7009f115b`.** Census summed to
+  `2519/366/2153/20899/5816` — chair-verified in the frozen block at
+  `:6216`. **Two cars, one gate: the pattern §516 restored, and it worked.**
+- **§530.2 THE LOAD-BEARING QUESTION WAS ANSWERED, AND THE OBVIOUS METHOD WAS
+  REFUSED.** CH-2A re-records the golden; UC-5 proved itself against the old
+  one. UC-5's own §6 harness turned out **unreproducible** — it names "2
+  cultures × 5 seeds" and no packet, test or surviving script records WHICH.
+  **Guessing would have manufactured false movement**, so the lane ran a
+  stronger harness-independent form: the full connectivity graph over 420
+  settlements, serialized and hashed, with CH-2A present and with its three
+  production files reverted to slot blobs — **identical digest `b215ada9…`**,
+  with two liveness controls (`magicLicense` on records goes 0 → 13 of 302
+  across the flip, so the change reaches the input; a different seed moves the
+  digest, so it is not a constant). It also reproduced all four of UC-5's dark-
+  member findings **at seeds that lane never used**.
+- **§530.3 ⭐ A FIFTH CONTROL THAT COULD NOT FAIL — AND IT WAS MINE.** I
+  specified the sibling control ("remove ONE car's delta; it must convict the
+  arithmetic, not the total"). Executed, **it was vacuous**: removing either
+  car's whole delta reds at `files` before reaching `titles` and **emits an
+  identical message both ways**, so it convicts the total exactly as the
+  cruder control does. Re-run PER FIGURE it convicts distinctly (20890 versus
+  20891), and the 9/8 split is attributed by execution through the walker's
+  own `liveTitlesIn`. The stack template is corrected: **the sibling control
+  is per-figure or it is theatre.**
+- **§530.4 THREE FALSE CLAIMS CAUGHT BEFORE THEY BECAME LANDED ROWS.** Both
+  packets asserted their figures were executed "at THIS base" — falsified by
+  the re-stamp; and **CH-2A's INDEX cell claimed MF-CH2B "is minted at this
+  car's landing", which §520.5 forbids.** MF-CH2B is not landed, flipped or
+  minted — chair-verified: the manifest holds 172 entries and no MF-CH2B row
+  (its three text hits are prose inside other packets' notes). Also: **CH-2A's
+  holding receipt names a sha that is not an object**, agreeing with the real
+  tip only to 10 hex characters — the lane landed from the PINNED REF, which
+  is why the pin discipline exists. And the INDEX hazard is sharper than
+  §513.2 said: **the parser picks by `PACKET_STATUSES` ARRAY ORDER, so
+  `DRAFT`/`BLOCKED` beat `LANDED` from anywhere in the cell.**
+- **§530.5 MP-1 IS BUILT — AND THE OWNER MUST HEAR ITS LIMIT PLAINLY.** Tip
+  `fefca7f5f` (pinned `holding-mp1`), one commit over the slot, 15 files. The
+  painter emits a `parcel` op between wards and streets carrying the polygon
+  and **no paint scalar**; membership is *shares a `parcelId`*, no new
+  relation; the yard is the ring with each footprint punched out under
+  `fill-rule="evenodd"`, **so no clipping code exists anywhere**. 10/10
+  mutants convicted their own arm, zero survivors, clean-green control
+  `105 passed`. Census `+2/+0/+2/+32/+9`, both new files **credited, not
+  parked**. Three findings the charter lacked: the op-count identity cost
+  **14 pins, not 13** (the fourteenth found by the first battery, not the
+  grep); **the coordinate spaces are byte-identical so there is no transform**
+  (measured by compiling a real settlement — the same array both sides);
+  and `SettlementMapPane.jsx` had **six effective lines of headroom**, which
+  is what forced the halo into its own leaf (it finishes at 597/600 — a
+  hazard recorded for the next lane, not cured). ⚠ **THE HONEST LIMIT:
+  `townCartographyEnabled` is a virtual rule with no default entry, so the
+  plan view is BYTE-IDENTICAL for every existing world today. The layer is
+  built; lighting it is the owner's call** — and the owner called this the
+  first thing a user would see, so they hear it now rather than at the demo.
+- **§530.6 ⛔⛔ THE AUDIT'S VERDICT, AND IT IS NOT WHERE ANYONE LOOKED.**
+  `draft-AD1-PROVENANCE-AUDIT.md`, 1,000 lines. **The 338 heraldic charges are
+  SELF-DOCUMENTING: 179 carry `creativecommons.org/licenses/by-nc-sa/3.0` —
+  NON-COMMERCIAL — inside their own `<metadata>` element, and 37 more carry
+  `by-sa`** (chair-verified independently: 179 and 37 of 338, and
+  **`git grep 'charges/' -- src tests scripts` returns NOTHING**). Armoria's
+  README says "available for non-commercial use only"; **the fork concedes it
+  in our own tree** at `emblems-editor.js:502`; and
+  `settlementforge.com/map/charges/oak.svg` returns **HTTP 200 with the NC
+  term in the served bytes**. **We have been commercially distributing since
+  April.** §524 is not what condemns them — commercial distribution is, and
+  that predates it. Second exposure: the fonts were **re-cut in June to strip
+  ligatures** while three separate notices state they ship "unmodified", and
+  Lora carries a Reserved Font Name that OFL clause 3 restricts. And
+  ⛔ **`settlementforge.com/third-party-notices.html` returns HTTP 404 in
+  production** — every obligation the tree believes discharged is undischarged
+  live. Refuted in the safe direction: the **heightmaps are DOCUMENTED**
+  (`import-rules.txt` names Tangrams Heightmapper; no NC, no copyleft, but
+  mandatory attribution for EU-DEM, Kartverket and UK Environment Agency
+  OGL v3), and **no remedy forces a second regeneration** — nothing is inside
+  the deterministic derivation and there is no PDF byte golden. The real long
+  pole is **counsel turnaround**, and `DESIGN_IP_PROTECTION.md` §4 schedules
+  the counsel brief in parallel with PUSH, which is too late because counsel's
+  answer is an INPUT to the remedy.
+- **§530.7 RULED AND DISPATCHED — TE-IP-1.** Continuing to distribute NC
+  assets is the decision that needs justifying; stopping is not a judgement
+  call, so the chair ruled the removal (owner-vetoable by a word): delete
+  `public/map/charges/` and `public/map/images/textures/` (361 files, 14.7 MB;
+  both layers off by default, nothing referencing either — **re-measured by
+  the lane before deleting, and a referencing site is a STOP**), keep and
+  ATTRIBUTE the heightmaps, correct the font notices and rename the modified
+  Lora, give the notices file its first art rows (including §529.3's proved
+  CC BY credit to Solar System Scope), **get the 404'd notices page actually
+  served — proved from built `dist/`, not from config** — and add the
+  structural walker that fails when any shipped asset declares a licence the
+  product cannot honour, with a planted positive control. ⚠ **A GAP NAMED AND
+  NOT YET OWNED: nobody has checked the vendor terms of service for the
+  63 MB of AI-generated video and 8 MB of AI-generated stills the estate
+  ships** (Google AI, Higgsfield, BytePlus) as they bear on commercial use.
+  That is a separate question and it is queued, not answered.
+- **§530.8 A TENTH LYING INSTRUMENT, AND HOUSEKEEPING.** **`grep` on this
+  machine is `ugrep`**, and a pattern with several bounded repetitions fails
+  with "exceeds complexity limits" **on stderr while printing no matches** —
+  indistinguishable from a clean zero; two censuses were re-run with node.
+  Its sibling nearly cost the audit its headline: a grep for
+  `charges/[A-Za-z0-9_.-]+` returned zero because the real call is the
+  template literal `./charges/${t}.svg` — **search the directory name, not a
+  path pattern.** Chair housekeeping this sitting: **thirteen finished
+  worktrees pruned after verifying every tip was pinned (5 GB reclaimed,
+  17 GB free)**, and **the two IN-FLIGHT stack tips defensively pinned** as
+  `inflight-stack1`/`-stack2` before touching anything — the chair applying to
+  itself the law it has enforced on eight lanes. Slot-facts card re-measured
+  at `7009f115b`. Seats: STACK-2 · IP-1; two free.
