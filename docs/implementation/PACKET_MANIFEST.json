@@ -28011,6 +28011,183 @@
         ]
       ],
       "retiredSymbols": []
+    },
+    {
+      "id": "MF-CG2",
+      "status": "DRAFT",
+      "packetPath": "docs/implementation/packets/town-cartography/MF-CG2.md",
+      "verifiedBase": "79b78881ca86612ec312602c2e3dc6d06aa34df8",
+      "changeManifest": [
+        {
+          "_note": "THE CELL ADDRESS AND THE ONE LEDGER. packFootprint took a mod-4 SLOT into one medial subdivision and the layer kept TWO counters over the same parcel (flagshipsAt for round-1 institutions, occupancy for everything else); because a footprint is a PURE FUNCTION of (parcel, slot, shrink), both leaks drew buildings at IDENTICAL COORDINATES rather than crowding a parcel — 26.42% of 53,420 drawn rows over the 504-row calibration corpus, with 5,932 of 5,932 duplicate groups inside a SINGLE parcel and 4,518 parcels holding more than the four cells the theorem afforded. The medial subdivision RECURSES, so cellAt reads the index as an unbounded base-4 ADDRESS (bounded for, never a while; an address past the tree returns null rather than wrapping) and containment stays a theorem by induction. One ledger replaces two and a flagship CONSUMES its cell while staying exempt from the per-parcel band and the total cap. The footprint also gains a DRESSED form — a size step and an optional corner truncation off one sceneDigest under its own aspect key, so no second carto: label is added and TC-2 determinism scan stays green unedited — because subcells 0,1,2 of any triangle are exact TRANSLATES of one another (20,000 of 20,000 integer triangles) and a unique cell alone would leave a one-shape vocabulary. The dwelling fill free term is clamped at zero, which is load-bearing once occupancy can exceed the band.",
+          "action": "MODIFY",
+          "path": "src/domain/townCartography/cartographyBuildings.js"
+        },
+        {
+          "_note": "FOUR NEW NAMED BANDS AND ONE MOVED CALIBRATION. FOOTPRINT_FORM_VARIANTS bands the form vocabulary by tier (3/3/6/9/12/12, each a multiple of three because the size step is variant%3 and the cut slot floor(variant/3)) on the measured ground that PLAN_UNIT_CM_BY_TIER makes a thorp plan unit 10 cm to a metropolis 80 — a thorp is genuinely a dozen of the same cottage. FOOTPRINT_FORM_SHRINK_STEP is 45 permille, set so the three sizes of one class cannot cross the tightest 120-permille gap between adjacent shrink classes and make prominence a lie. FOOTPRINT_CORNER_CUT_PERMILLE is 340 and FOOTPRINT_CELL_MAX_DEPTH is 5 (1,364 cells in one parcel against a measured corpus worst case of 29). CARTOGRAPHY_CALIBRATION.MAX_BUILDING_ROW_BYTES moves 443 -> 450 because the MEASUREMENT moved: a truncated cell is a quadrilateral and a fourth plan point costs a row about seven bytes. No taste knob and no density dial moves.",
+          "action": "MODIFY",
+          "path": "src/domain/townCartography/cartographyTuning.js"
+        },
+        {
+          "_note": "THE INSTRUMENT GAINS THE DUPLICATE CENSUS. exactFootprintKey (same vertex list at the same absolute coordinates), translateFootprintKey (same shape and size, start-rotation canonical so a shape emitted from another corner is still convicted) and duplicateFootprintRows are exported so the suite consumes ONE definition and the pin cannot drift away from the recording. measureCalibrationRow records cartoDupExact and cartoDupTranslate off the DRAWN block, -1 on a row that could not draw, exactly as the two byte figures already do. Three further readings were measured and deliberately NOT recorded, with the reason stated in the file: cycle-canonical-exact was identical to exact on all 53,420 pre-fix rows, full SSS congruence adds rotation without changing what a reader sees, and area-within-1% measures the shrink ladder rather than repetition.",
+          "action": "MODIFY",
+          "path": "tests/fixtures/cartographyCalibrationCorpus.js"
+        },
+        {
+          "_note": "THE RE-RECORD, produced only by the committed regeneration path and re-run under this worktree OWN dependency tree after the shared node_modules was found to carry a 36-dep manifest against the slot 40. 504 rows; cartoDupExact 0 on every drawn row; cartoDupTranslate 109/181/72/68/51/48 permille by tier; throw census still 0 of 504; institution maxima UNCHANGED at 11/24/41/62/55/63, which is the evidence the generator did not move underneath the re-record. A SHIFT RECORD row is added to the suite header, as that file own rule requires.",
+          "action": "MODIFY",
+          "path": "tests/fixtures/cartography-calibration-corpus.json"
+        },
+        {
+          "_note": "THE PIN. FROZEN.maxBuildings shrinks to 12/25/47/114/196/261 under its own shrink-only ratchet with the honesty companion that forbids a stale row. New W8: cartoDupExact is ZERO on every drawn row with an anti-vacuity floor of 40,000 drawn buildings; each tier translate rate equals its frozen reading EXACTLY and sits under a ceiling DERIVED as ceil(reading x CARTOGRAPHY_HEADROOM_PERMILLE), the same owner-signed operator the three coupled caps use, so no number was picked to pass; a LIVE arm re-measures through the real pipeline on each tier argmax row, because the first two arms read the FROZEN record and a packer regression could not red them until somebody re-recorded; and an instrument control exercising clean, copied, copied-trio, MOVED and ROTATED blocks, where the exact reading acquits a moved shape the translate reading convicts.",
+          "action": "MODIFY",
+          "path": "tests/domain/townCartographyCalibration.test.js"
+        },
+        {
+          "_note": "THE MECHANISM CONTROL, beside the landed flagship-exemption arm: N institutions bound to ONE parcel emit N DISTINCT footprints for N = 1..12, every vertex still inside the parcel and every area positive. The same call run against the PRE-CG-2 leaf at 79b78881c emits 1->1 2->2 3->3 4->4 5->4 6->4 7->4 8->4 9->4 10->4 11->4 12->4, saturating at the wrap — so the assertion is false at the parent commit and true here, which is what makes it a control rather than a tautology. 12 is past both the four the old subdivision afforded and the three-per-parcel band, so it exercises depth 1 and depth 2 of the address tree.",
+          "action": "MODIFY",
+          "path": "tests/domain/townCartographyBuildings.test.js"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/packets/town-cartography/MF-CG2.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE FORM VOCABULARY BAND. Where the tier-scaled variety claim lives; renaming it un-grounds W8 tier-banded ceiling and the packet §3d line about where the thorp/metropolis line is drawn.",
+          "path": "src/domain/townCartography/cartographyTuning.js",
+          "symbol": "FOOTPRINT_FORM_VARIANTS"
+        },
+        {
+          "_note": "THE CELL TREE DEPTH CEILING. It exists to keep the medial descent a BOUNDED for rather than a while; an address past it packs no footprint, which is a named institution premise rather than a silent wrap.",
+          "path": "src/domain/townCartography/cartographyTuning.js",
+          "symbol": "FOOTPRINT_CELL_MAX_DEPTH"
+        },
+        {
+          "_note": "THE CEILING OPERATOR. W8 derives every duplicate ceiling as ceil(measured reading x this), reusing the owner-signed BAND 21 value rather than authoring a second headroom.",
+          "path": "src/domain/townCartography/cartographyTuning.js",
+          "symbol": "CARTOGRAPHY_HEADROOM_PERMILLE"
+        },
+        {
+          "_note": "THE CALIBRATION GROUND, whose byte input moved 443 -> 450 with the measurement. W7 pins it against the corpus manifest exactly, in both directions.",
+          "path": "src/domain/townCartography/cartographyTuning.js",
+          "symbol": "CARTOGRAPHY_CALIBRATION"
+        },
+        {
+          "_note": "THE TWO READINGS OF IDENTICAL, exported so the pin and the recording consume ONE definition. Exact is a rendering defect at any tier and its ceiling is zero; translate is legitimately tier-scaled.",
+          "path": "tests/fixtures/cartographyCalibrationCorpus.js",
+          "symbol": "duplicateFootprintRows"
+        },
+        {
+          "_note": "THE MEASUREMENT SEAM. It now records the drawn block duplicate census alongside its byte and identity figures; the LIVE W8 arm calls it directly on each tier argmax row.",
+          "path": "tests/fixtures/cartographyCalibrationCorpus.js",
+          "symbol": "measureCalibrationRow"
+        },
+        {
+          "_note": "THE LAYER ENTRY POINT whose flagship branch carried the mod-4 wrap and the second counter.",
+          "path": "src/domain/townCartography/cartographyBuildings.js",
+          "symbol": "compileTownBuildingLayers"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "THE EXACT RATE IS THE ACCEPTANCE. Over MF-CG1 committed 504-row corpus, cartoDupExact is 0 on every drawn row - against 14,112 of 53,420 rows at the base - measured through the COMMITTED instrument rather than a scratch probe, with an anti-vacuity floor of 40,000 drawn buildings so a corpus that stopped drawing cannot satisfy the zero by drawing nothing."
+        },
+        {
+          "id": "A2",
+          "case": "THE MF-CG1b CONTROL IS UNREGRESSED: the lit throw census stays 0 of 504 at every tier, the dark census stays 0, and the recorded institution maxima stay 11/24/41/62/55/63 - so the generator did not move underneath the re-record."
+        },
+        {
+          "id": "A3",
+          "case": "THE ONE LAW HOLDS: the drawn block distinct institutionRef set is unchanged on 504 of 504 rows against the base recording. A cure that lost an institution would be a worse defect than the one it cured."
+        },
+        {
+          "id": "A4",
+          "case": "THE TRANSLATE CEILING IS DERIVED, NOT PICKED: each tier rate equals its frozen reading exactly and sits under ceil(reading x CARTOGRAPHY_HEADROOM_PERMILLE), with the six evaluated ceilings pinned at 175/290/116/109/82/77 and a live arm proving the derivation is evaluated rather than transcribed."
+        },
+        {
+          "id": "A5",
+          "case": "THE MECHANISM CONTROL FAILS AT THE PARENT: N flagships bound to ONE parcel emit N distinct contained footprints for N = 1..12; the same call at 79b78881c emits at most 4, saturating from the fifth."
+        },
+        {
+          "id": "A6",
+          "case": "THE INSTRUMENT CONTROL CANNOT PASS VACUOUSLY: the census counter is exercised on a clean block (0), a copied footprint (2), a copied trio (3), a MOVED shape (exact 0, translate 2) and a ROTATED shape (exact 0, translate 2)."
+        },
+        {
+          "id": "A7",
+          "case": "THE SOURCE MUTATION CONVICTS: restoring the mod-4 wrap on the flagship cell index reds W8 LIVE arm with four of six tiers stacking again - thorp 4 of 11, hamlet 6 of 25, village 19 of 47, town 6 of 100 - and the restore is proved by digest."
+        },
+        {
+          "id": "A8",
+          "case": "CONTAINMENT SURVIVED THE CURE: the C3 arm - every emitted footprint contained, integer, positive-area, anchor inside its parcel - is green with the corner truncation and the depth-2 cells live, over the twenty-row geometry ground it has always used."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/townCartographyCalibration.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/townCartographyBuildings.test.js",
+          "tests/domain/townCartographyParcels.test.js",
+          "tests/domain/townCartographyDeterminism.test.js",
+          "tests/domain/townSceneCartography.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/townCartographyProperty.test.js",
+          "tests/domain/townCartographyPaint.test.js",
+          "tests/lib/townCartographyBlock.test.js",
+          "tests/ui/settlementMapPropertyLine.test.jsx",
+          "tests/ui/mapCartographySubTab.test.jsx"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/generatorGoldenMaster.test.js",
+          "tests/property/townCartographyDormancyGolden.test.js"
+        ],
+        [
+          "node",
+          "scripts/check-full-typecheck.mjs"
+        ],
+        [
+          "node",
+          "scripts/check-domain-strict.mjs"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/domain/townCartography/cartographyBuildings.js",
+          "src/domain/townCartography/cartographyTuning.js",
+          "tests/domain/townCartographyCalibration.test.js",
+          "tests/domain/townCartographyBuildings.test.js",
+          "tests/fixtures/cartographyCalibrationCorpus.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ]
     }
   ]
 }
