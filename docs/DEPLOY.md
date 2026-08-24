@@ -164,6 +164,17 @@ migrations are additive and need no separate reading; these are the pending ones
 posture an operator has to know, and they stay listed here after they are applied
 because the fact does not expire:
 
+- `188_reviewed_supply_chain_persistence.sql` — the one migration in the train that acts
+  **at push time**: its `DO $$` block runs during `db push` itself and quarantines every
+  legacy `custom_content_definitions` row with `category = 'supplyChains'`, deleting, per
+  owner, the pack activations, environment revisions, environments, pack versions, packs
+  and the definition itself — real users' custom content. It is a **receipted quarantine**,
+  not raw deletion: the content is serialised into `public.application_command_journal`
+  under command kind `content.reviewed-supply-chain.legacy-quarantine` before any delete,
+  and the block raises rather than proceeds if the receipt does not verify — recoverable
+  from the journal in principle, but there is no down script. Read its preamble before
+  pushing: the later migration labelled DESTRUCTIVE (198) acts only when its scheduled
+  jobs run, while this one acts during the push itself.
 - `197_consent_person_adjacent_default.sql` — a **DATA** migration. It rewrites existing
   `profiles.telemetry_consent` rows under a provenance predicate. It creates nothing, so
   a schema diff will not show you what it did; the preamble states which rows it touches
