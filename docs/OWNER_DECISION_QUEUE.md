@@ -22797,3 +22797,79 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   also dropped Lora's OFL URL from name ID 14.** That is a second OFL defect,
   not a detail. Chartered as its own car with that finding in its brief;
   scope-refusal ratified.
+
+## §533 — THE SECOND STACK LANDED (**51 + 52**): FOUR CARS THROUGH TWO GATES TONIGHT; ⛔ **THE SLOT MOVED MID-ACT AND EVERYTHING DOWNSTREAM WAS REDONE**; THE CHAIR'S OWN CARD WENT STALE AND WOULD HAVE STOPPED A LANE ON A LAWFUL LANDING; THE BANKED ELEVEN IS CONFIRMED TWICE (2026-08-24 00:56 CDT)
+
+- **§533.1 LANDED.** Tip `567030f1d` = 4 over `7009f115b`, porcelain 0.
+  Terminal green, chair-read: `TRUE_EXIT=0` · `[gate-tail] exit: 0` ·
+  `free_kb_at_end=17439296` · `STRICT DIST OK`; the lane's quoted lines add
+  **`valid: 174 packets (0 READY)`** (172 + 2 exactly), **`11 known failure(s)
+  of 28987 tests, ceiling 11`**, 173/173 and 1134/1134 unmoved, and an eslint
+  line **identical to STACK-1's at the slot**. Census `2520/366/2154/20941/5827`
+  chair-verified in the frozen block at `:6266`. **CAS `7009f115b →
+  567030f1d`. Four cars through two gates tonight instead of four** — the
+  §516 pattern, twice.
+- **§533.2 ⛔ THE SLOT MOVED MID-ACT, AND THE LANE'S LAST-SECOND RE-READ
+  CAUGHT IT.** It opened at `5055990a`, rebased both cars, flipped both
+  packets, walked the census to `2518/366/2152/20924/5825` with five controls
+  all green — and the re-read **immediately before `git commit`** returned
+  `7009f115b` with `merge-base --is-ancestor` FALSE. Everything downstream was
+  redone: chain re-rebased, flip re-applied, census re-walked. **The two walks
+  agree on the DELTA and on nothing else.** That is the whole argument for
+  walking a delta rather than carrying a tuple, demonstrated live. Two
+  consequences the brief could not have anticipated: **MF-CG1b owed a
+  `verifiedBase` re-stamp too, so the §410 flip became a FOUR-place flip**,
+  and its packet prose ("the card matched") became false and now carries a
+  dated re-stamp note; and the second rebase conflicted in `INDEX.md` as well
+  as the manifest.
+- **§533.3 ⛔⭐ MY OWN SLOT-FACTS CARD WENT STALE AND WOULD HAVE STOPPED A LANE
+  ON A LAWFUL LANDING.** The card's golden row said blob `cd8d125ef8` /
+  `29c6cc8f…`. At the true slot it is **`4bdd69f2019314836da30d216a47d16d533dcb4b`,
+  sha256 `0a2309f573fc1f4c`** — **MF-CH2A's DECLARED re-record**, exactly as
+  §520.3 priced it. So a lane obeying my own instruction *"if either golden
+  moves, STOP"* against the card would have **stopped on a lawful landing**.
+  The lane corrected the row on the live card and sharpened it: the goldens
+  live in `tests/fixtures/`, not `tests/property/` (which holds the SUITES),
+  and **the rule is now "compare the SLOT blob against YOUR TIP blob, never
+  against a card figure from an earlier slot."** ⚠ **A CARD IS A CACHE. Any
+  row a landing can legitimately move — the goldens, the tuple, the packet
+  count, the ratchet — must be re-read at the slot, and the card's value is
+  the ROWS THAT DO NOT MOVE.** The chair introduced this hazard by putting a
+  moving figure on a card; recorded as mine.
+- **§533.4 THE BANKED ELEVEN, CONFIRMED TWICE AND CLOSED.**
+  `scripts/.test-ratchet-baseline.json` **IS the roster**: 11 entries = 7
+  across the five familiar files **+ 4 in `tests/copy/voiceMechanics.test.js`**,
+  a tree no ten-tree sweep list ever held. Then confirmed by execution with a
+  whole-estate sweep (no path arguments): `Test Files 6 failed | 2506 passed |
+  8 skipped (2520)` · `Tests 11 failed | 29299 passed | 115 skipped (29425)`,
+  per-file counts exact, **title-set diff empty in BOTH directions**, an
+  invented-title control matching nothing, **zero strays** — and ⭐ **collected
+  files 2,520 equals the walked `files` figure exactly**, which is a
+  cross-instrument agreement nobody asked for. Neither car can reach the four:
+  car 2's only `src/domain` file measures `{em:0,bang:0}` at slot *and* tip
+  under the arm's own reader (live control returns `{em:1,bang:2}`), car 1
+  lives in `src/config`, and neither touches a `.jsx`. **§525.5's open
+  question is closed.**
+- **§533.5 THE CENSUS ATTRIBUTION, AND THE PARKED-FILE HAZARD EXECUTED.**
+  Delta `+1/+0/+1/+42/+11` = the sum of the two cars, attributed **per car,
+  per file, by execution**: enforcement 19/5 new, pricing 28/9 → 42/13,
+  calibration 19/6 → 28/8, and **`tierFacts.contract.test.js` PARKED 0/0 at
+  both ends — 21 tests passing while the census counts zero**, read straight
+  out of the walker's own `classify` rather than inferred. Five controls red
+  with cmp-0 restores, and **B1/B2 were deliberately shaped to red at
+  `titles`** (20941 → 20932 and → 20908) because a whole-delta sibling control
+  reds at `files` and never reaches the sum it claims to test — the §530.3
+  correction applied by a second lane without being told. Named confirmations:
+  `townCartographyBuildings.test.js` **23/23 with blob `55d7c42d27` unmoved at
+  every end — the invariant arm UNEDITED**; nine §410 non-vacuity controls;
+  S0 both parts with a one-byte liveness probe; all five committed blobs
+  sha256-identical to pre-hook bytes.
+- **§533.6 TWO MORE LYING INSTRUMENTS, BOTH CAUGHT IN FLIGHT.**
+  **`git rebase … | tail -5` reported exit 0 over a CONFLICTED rebase** — the
+  pipe's exit, not the command's, the §332.1 family with a new specimen; and
+  an unbraced `${SLOT}:tests/…` made **`:t` a zsh modifier**, yielding
+  `e3b0c44298fc1c14` — **the sha256 of the EMPTY STREAM**, a hash that looks
+  like a real answer. Both banked. Seats: IP-1 · AIMEDIA-ToS; two free.
+  Holding: MP-1 (the halo) and CH-2's full car (whose CH-2B half stays at
+  DRAFT). MP-1's landing waits to stack with IP-1 rather than take a gate
+  alone.
