@@ -393,16 +393,36 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
     // reads, never a new blind spot. THE FINDINGS INVENTORY DID NOT MOVE AT ALL — the frozen
     // per-file debt in .observed-shape-readers-baseline.json is byte-identical, so no reader
     // gained or lost a writer; only the corpus that exercises them is smaller.
+    // ── RE-RECORDED 2026-08-24 BY MF-CH2B (THE MAGIC LICENCE) ────────────────────────────
+    // 1300/8607/14586 → 1302/8656/14644. THE CORPUS GREW, and the cause is two new leaf
+    // shapes becoming OBSERVABLE rather than any reader changing. `magicLicense` was declared
+    // on 28 catalog rows by MF-CH2A, and `assembleInstitutions` spreads a catalog row onto the
+    // record — but this corpus never saw the key, because `observed-shape-corpus.mjs` builds
+    // its world with every `*Enabled` flag lit and no licensed institution reached a roster in
+    // it. MF-CH2B makes the five magic gates read the declaration instead of the display
+    // shelf, so the seven rows an author licensed `none` now appear where they belong, and the
+    // key they carry appears with them: `$.institutions[*].magicLicense` and
+    // `$.defenseProfile.institutions.magicDef[*].magicLicense`, which is exactly the +2.
+    // ⚠️ EVERY FIGURE MOVES UP, the opposite direction from the 2026-08-17 row above, and that
+    // is also the safe direction here for the reason that row gives: this ratchet exists to
+    // catch a READ with no writer, so MORE observed shapes can only resolve reads that were
+    // previously unresolvable. It can never manufacture a blind spot. THE FINDINGS INVENTORY
+    // DID NOT MOVE: `check-observed-shape-readers.mjs` returns the same 159 bytes and the same
+    // SHA-256 `c5b67844abe51226…` at this tip as at the clean base and as in the chair's
+    // baseproof worktree, so no reader gained or lost a writer.
     expect(corpus.meta).toMatchObject({
-      shapeCount: 1300,
-      originCount: 8607,
-      transitionCount: 14586,
+      shapeCount: 1302,
+      originCount: 8656,
+      transitionCount: 14644,
     });
     expect(scalarCorpus.scalarMeta).toEqual({
       canonEventLogEntries: 1,
       wizardNewsFinalEntries: 240,
-      wizardNewsAccumulatedEntries: 1567,
-      wizardNewsUnique: 272,
+      // RE-RECORDED 2026-08-24 by MF-CH2B with the three corpus-meta figures above and for
+      // the identical reason — the corpus itself grew, so the wizard-news accumulation it
+      // observes grew with it. 1567/272 -> 1577/274.
+      wizardNewsAccumulatedEntries: 1577,
+      wizardNewsUnique: 274,
       pulseHistory: 12,
       // TE36 (ODQ §271): 109 → 73, the same one cause. The regional event log carries the
       // pulse's selected outcomes, and the retired bare-decline family was 36 of them.

@@ -274,7 +274,16 @@ describe('MG-4.1 — the mundane realm, measured across every member', () => {
  * MEASURED (seed 'mg4-acceptance', small/realistic_regional/highIsland). ALL FIVE AXES the
  * envelope compares, mundane vs magical, machine-checked by the last pin in MG-4.2 against
  * this very line — see THE RECORD IS CHECKED below:
- *   RECORDED-CENSUS: members 5 vs 5 · institutions 134 vs 133 · factions 22 vs 24 · services 193 vs 189 · historyEvents 24 vs 25
+ *   RECORDED-CENSUS: members 5 vs 5 · institutions 139 vs 133 · factions 24 vs 24 · services 195 vs 189 · historyEvents 24 vs 25
+ *   ⚠️ MOVED 2026-08-24 BY MF-CH2B, THE MAGIC LICENCE — a DECLARED shift, not drift.
+ *   institutions 134 → 139, factions 22 → 24, services 193 → 195; the magical twin does
+ *   not move at all. The cause is one sentence: the five gates that decided
+ *   magic-dependence stopped reading the SHELF an author filed a row on and started
+ *   reading the row's declared `magicLicense`, so a magic-free realm keeps the entries
+ *   that need no magic — an alchemist's shop is a chemical trade and a charter hall is a
+ *   hall (R-INST-5 families B and I). The arcane census above is still EMPTY, which is
+ *   the point: the realm gained buildings, not magic. All five envelope ratios stay
+ *   inside PENDING_BANDS and three of them improve, so no band is asked to move.
  * Ratios: members 1.000 · institutions 1.008 · factions 0.917 · services 1.021 ·
  * historyEvents 0.960 — the mundane realm is at or above parity on three of five axes.
  * ⚠️ CORRECTED 2026-08-03: this block previously recorded `institutions 156 vs 158 ·

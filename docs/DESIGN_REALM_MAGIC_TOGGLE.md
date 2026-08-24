@@ -480,10 +480,22 @@ every axis for every member. The same-seed MAGICAL twin carries 4 arcane institu
 is a measurement of the world and not of an empty generator.
 
 **THE TWIN-WORLD ENVELOPE (MG-LAW-3) HOLDS, AND HOLDS WELL.** All five compared axes,
-mundane vs magical: members 5 vs 5 (1.000), institutions 134 vs 133 (1.008), factions
-22 vs 24 (0.917), services 193 vs 189 (1.021), history events 24 vs 25 (0.960). A mundane
-realm is not a thinner realm — it is at or above parity on three of the five axes, and
+mundane vs magical: members 5 vs 5 (1.000), institutions 139 vs 133 (1.045), factions
+24 vs 24 (1.000), services 195 vs 189 (1.032), history events 24 vs 25 (0.960). A mundane
+realm is not a thinner realm — it is at or above parity on four of the five axes, and
 suppression rides the substitution arms exactly as the law requires.
+
+⚠️ **THREE OF THOSE FIGURES MOVED 2026-08-24, BY MF-CH2B (THE MAGIC LICENCE), AND IT IS A
+DECLARED SHIFT RATHER THAN DRIFT.** institutions 134 → 139, factions 22 → 24, services
+193 → 195; the magical twin does not move on any axis. The cause is that the five gates
+which decided magic-dependence stopped reading the SHELF an author filed a catalog row on
+and started reading the row's declared `magicLicense`, so a magic-free realm now keeps the
+entries that need no magic at all — R-INST-5 licenses `Alchemist shop`, `Alchemist quarter`,
+`Warden's Lodge`, `Great library`, `Dragon resident` and the `Adventurers' charter hall`
+NONE, on the reading that a chemical trade and a repository of books are buildings a world
+without magic still builds. **The arcane census over the mundane realm is still EMPTY**, and
+that is the whole point of the move: the realm gained buildings, not magic. Every envelope
+ratio stays inside PENDING_BANDS and three of the five improve, so no band is asked to move.
 
 ⚠️ **THESE FIGURES WERE CORRECTED 2026-08-03, AND THE RECORD IS NOW MACHINE-CHECKED.**
 This block, and the test file's own header, previously recorded `institutions 156 vs 158,
@@ -518,6 +530,18 @@ both of its callers key strictly on catalog institution names and no catalog ins
 NAME carries the substring (verified by scan; two DESCRIPTIONS do). Recorded, not fixed:
 anchoring it moves `filterCatalogForMagic` and `filterServicesForMagic`, a live change
 outside R-BLD-5's four sites. Chair to schedule.
+
+⚠️ **NARROWED BY MF-CH2B (2026-08-24), NOT CLOSED — and the difference is worth stating,
+because the CH charter claimed a discharge this code does not make.** The 28 Magic/Exotic
+rows now declare a `magicLicense`, and `filterCatalogForMagic`, the probability gates and
+the world law all consult the declaration BEFORE the keyword list, so for those rows the
+unanchored scan is not reached at all. Two things remain true and keep the item open: the
+other 283 catalog rows still fall through to the unanchored `ARCANE_INST_KW` scan (still
+LATENT — a re-scan at that base returns mid-word matches **0** over all 311 names, as it did
+here), and `filterServicesForMagic` is still on the vocabulary outright, deliberately, since
+it is handed service names rather than catalog rows. The residual's SURFACE has shrunk from
+every catalog row to the unlicensed remainder; its ANCHORING has not changed. Still
+chair-to-schedule.
 
 **MUTANT CONTROLS, each reverted individually in source.** Projection stamp deleted →
 **9 of 20 red**; the projection's WORLD-FACT half dropped → **9 red**; MG-3a's teleport

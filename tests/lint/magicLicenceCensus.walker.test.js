@@ -228,11 +228,15 @@ describe('MF-CH2a — the magic licence is declared, single-vocabulary and inert
     for (const level of emitted) expect(normaliseMagicLicence(level)).toBe(level);
   });
 
-  it('A7 — THE NEGATIVE CLAIM: the world law still strikes all 28 at magicExists:false', () => {
-    // MF-CH2a declares the licence and routes `isArcaneInstitution` through it. It does NOT
-    // touch the world law, which still reads the SHELF off the record every call site spreads
-    // onto it — so a dead-magic world is decided exactly as it was, and no roster moves.
-    // MF-CH2b deliberately flips this arm; until then it is what makes this car inert.
+  it('A7 — the world law admits a dead-magic world EXACTLY the licence-none rows, and nothing else', () => {
+    // ⭐ THE ARM MF-CH2B FLIPPED, AND THE WHOLE POINT OF THE PAIR IN ONE ASSERTION.
+    // At MF-CH2A this read "the world law still strikes all 28" — the negative claim that made
+    // the declaration inert, with mutant M11 (making the world law licence-aware, which IS
+    // MF-CH2B) driving it red. MF-CH2B landed that mutant as the car, so the arm is re-pointed
+    // rather than deleted: the striking is no longer by SHELF, it is by DECLARED LICENCE, and
+    // the set that survives a world with no magic in it is exactly the seven rows an author
+    // licensed `none`. A row moving between these two lists is a content decision and comes
+    // back here for it.
     const law = createGenerationWorldLaw(
       { magicExists: false, priorityMagic: 0, tradeRouteAccess: 'port', terrainType: 'coastal' },
       { tradeRoute: 'port', terrainType: 'coastal' },
@@ -242,10 +246,27 @@ describe('MF-CH2a — the magic licence is declared, single-vocabulary and inert
     const allowed = SHELF_ROWS.filter(
       r => law.allowsInstitution({ category: r.category, name: r.name, ...r.def }),
     );
-    expect(allowed.map(r => `${r.tier}/${r.category}/${r.name}`)).toEqual([]);
-    // non-vacuity: the same law says YES to a mundane row, so the empty list above is a
-    // verdict and not a predicate that answers false to everything
+    expect(allowed.map(r => `${r.tier}/${r.category}/${r.name}`)).toEqual([
+      "hamlet/Magic/Adventurers' charter hall",
+      "village/Magic/Adventurers' charter hall",
+      'town/Magic/Alchemist shop',
+      "town/Magic/Warden's Lodge",
+      'city/Magic/Alchemist quarter',
+      'city/Exotic/Dragon resident',
+      'metropolis/Magic/Great library',
+    ]);
+    // DERIVED, NOT RESTATED: that list IS the licence-`none` set, computed from the catalog
+    // rather than typed twice, so the two can never drift apart silently.
+    expect(allowed.map(r => `${r.tier}/${r.category}/${r.name}`)).toEqual(
+      SHELF_ROWS.filter(r => r.def.magicLicense === 'none')
+        .map(r => `${r.tier}/${r.category}/${r.name}`),
+    );
+    // and every row licensed ABOVE `none` is still struck — 21 of the 28
+    expect(SHELF_ROWS.length - allowed.length).toBe(21);
+    // non-vacuity: the same law says YES to a mundane row, so the list above is a verdict and
+    // not a predicate that answers true to everything
     expect(law.allowsInstitution({ category: 'Defense', name: 'Citizen militia' })).toBe(true);
+    expect(law.allowsInstitution({ category: 'Magic', name: 'Academy of magic' })).toBe(false);
   });
 
   it('A8 — the customContent seam is untouched: the TAG surface still answers from the tag', () => {
