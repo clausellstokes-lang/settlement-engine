@@ -26752,3 +26752,26 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   classifier over the RECONSTRUCTED-EXTENT series with its length stated,
   and the thin-verdict band: any non-monotone shape below 3% of its
   applicable seeds fires THIN for that shape (constants tuning-class).
+
+## §623 · THE OWNER PULLS THE TWO VALIDATIONS FORWARD — FABLE REFINES THE OPUS-RUN ARCHITECTURES NOW (2026-08-25 ~00:40 CDT)
+
+- **§623.1 OWNER ORDER:** "Refine those non-Fable architectures with Fable" —
+  superseding §620.2's at-dispatch scheduling for the two marked documents.
+  **The method is the §291 retro-validation standard:** Fable-seat lanes
+  re-derive, the chair rules per section, and the markers discharge properly
+  (to a dated FABLE-VALIDATED form) rather than being quietly deleted.
+- **§623.2 THE VALIDATION SPLIT, RULED:** judgments do not decay — figures
+  do. **TE-CHVAL** (dispatched, Fable seat) re-derives the CH plan's
+  un-executed remainder (CH-3, CH-2B) AT THE CURRENT SLOT by execution, with
+  per-section RATIFIED/AMENDED/REVERSED/DECAYED verdicts — four CH cars
+  landed since the plan was written, so the absence-decays law applies in
+  force. **TE-ADVAL** (dispatched, Fable seat) re-derives the AD charter's
+  JUDGMENT LAYER now (every J-AD ruling, J-AD-5's one-geometry reasoning that
+  A5/A6 already lean on) plus **the reconciliation the charter could not have
+  done — it predates the entire register program**; its slot-stamped FIGURES
+  are inventoried, not re-measured (that re-measure stays the dispatch
+  window's, or it decays again). The chair rules on both reports; the marker
+  discharges land as new preserve-ref versions with the old refs kept as
+  provenance, per the r2 precedent.
+- **§623.3 SEATS:** four full — REG-3 (shape code) · REG-T (trajectory
+  census) · CHVAL · ADVAL.
