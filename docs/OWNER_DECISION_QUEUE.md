@@ -24337,3 +24337,69 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   other direction it found DW-0 badly **under-counted overall** — 53 across the
   corpus, not the 13 its sample implied. **A review that only ever finds MORE
   defects is not measuring, it is advocating.**
+
+## §552 · I NAMED THE WRONG AXIS — THE TEST IS GRANULARITY, NOT FIXEDNESS (2026-08-24 06:43 CDT)
+
+- **§552.1 THE FLOOR CHECK PASSED, EXACTLY AS THE STOP CONDITION REQUIRED.** The
+  vessel family carries **zero `NO TYPED HOME` flags**, the family count is
+  unchanged at **24**, and the floor's 106 → 105 move is **entirely** the base
+  losing `alembic` — not one point of it is the floor carrying vessels. Readings:
+  **A (my explicit strike) 133** · **B (the test applied consistently) 127** ·
+  as-reported 135. **Both clear 82 by a wide margin; the stop condition did not
+  trigger.**
+- **§552.2 ⛔⛔ THE TRAP THAT WOULD HAVE FAILED SILENTLY.** A naive match for the
+  vessel family caught **`cistern`** ("stored-water **vessel**") and
+  **`immersion pool`** ("bath is a heated **vessel**") — on a **prose mention of
+  the word.** Both are genuine FIXED fixtures. **Striking on that match would
+  have deleted two real fixtures and reported a number ~2 low with NO SIGNAL
+  THAT ANYTHING WAS WRONG.** The lane re-derived membership by **CONSOLIDATION
+  TARGET** — what does this row fold into — rather than by word occurrence, and
+  found the true family is 8 rows.
+  ⚠ **THIRD WORD-OCCURRENCE BITE IN ONE DAY, and the first that fails silently:**
+  `den` in "Resi*den*tial" (168 false criminal districts, §550.4) · the chair's
+  own unanchored `flue` reading 137 files where anchored it is ZERO (§551.7) ·
+  and this. **The first two produce a visibly wrong answer; this one returns a
+  slightly wrong number that looks fine.**
+- **§552.3 ⛔ I AM CORRECTING MY OWN §551.8 RULING — I NAMED THE WRONG AXIS.**
+  I ruled that *a fixture is a FIXED INSTALLATION* and struck movable bench
+  equipment. The lane's Reading B convicts that principle on three facts: **six
+  further rows fail the same test, THREE of them carrying `NO TYPED HOME`
+  flags** (so striking them refuses a home to things the research explicitly
+  flagged as homeless), **and three LANDED members — `crate`, `barrel`,
+  `ledger` — fail it too.** A principle that requires striking already-shipped
+  members is too crude. **What actually drove my ruling was GRANULARITY, not
+  fixedness:** the objection was to a family per glassware shape, not to
+  glassware existing.
+- **§552.4 THE REVISED RULE, STATED PROPERLY.** *Decided:* **the vocabulary names
+  things at the granularity a dossier reader needs; finer distinctions are
+  ATTRIBUTES, not members.** Consequences: the vessel family **collapses to ONE
+  member, `vessel`, with attributes — it is NOT struck**; **`alembic` stays in
+  the 60** as the paradigm vessel; `bier`, `touchstone`, `die/stamp`, `mould`,
+  `scrutiny urns` and `cupel tray` **all stay**, each a distinct thing at dossier
+  granularity; **no landed member is struck**, so the live-render question the
+  lane correctly refused to touch does not arise; and `RING_TABLE` remains
+  `table` + shape — unchanged, and now **for the right reason**. **One axis:
+  `table`+shape, `vessel`+kind, `furnace`+`flued`.** *Reversal:* re-split the
+  family; both itemised lists are saved. **Expected 134 with the base back at 82
+  — being MEASURED, not asserted, and the lane is told to say so if restoring one
+  member does not move the union by exactly one.**
+- **§552.5 ⭐⭐ THE LANE'S REFUSAL IS WHAT MADE THE CORRECTION POSSIBLE.** It was
+  told to strike one family. It struck exactly that family, then **offered**
+  Reading B **without taking it** — *"a further ruling, not an inference I should
+  draw for you."* **That refusal is the only reason the wrong axis surfaced
+  before it shipped.** Had it silently extended the principle it would have
+  struck six more rows and three landed members on my behalf, and my error would
+  have shipped at a larger scale wearing the authority of my own ruling. **A lane
+  that declines to generalise a chair's ruling is protecting the chair from it.**
+  Standing law.
+- **§552.6 A BOUNDARY THE LANE FLAGGED AND CORRECTLY LEFT ALONE.** `crate`,
+  `barrel` and `ledger` are movable and already ship in the landed 22. **Striking
+  landed members is a live-render change and squarely outside a read-only
+  measurement lane.** Under §552.4 they are no longer at risk — but the instinct
+  to flag rather than act is the right one and is recorded as such.
+- **§552.7 THIS IS THE SECOND RULING I HAVE REVISED TONIGHT.** §544.7 revised
+  §538.5 when CH-3 showed the bill reached a third frozen baseline; this revises
+  §551.8 when the fixture gate showed the axis cut against landed members. **Both
+  revisions were triggered by a lane doing what it was told and then reporting
+  the consequence rather than absorbing it.** Recorded because the pattern is the
+  point: **a ruling is a hypothesis until a lane has tried to execute it.**
