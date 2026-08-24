@@ -6382,7 +6382,90 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   SUITE     "the live SUITE-title count moved ...: expected 5845 to be 5840" - likewise
     //             car 1's whole suite-title delta, and it proves the LAST assertion is
     //             reachable and no earlier red is masking it.
-    files: 2524, parked: 366, credited: 2158, titles: 21002, suiteTitles: 5845,
+    // == RE-RECORDED 2026-08-24 BY THE TE-STACK-5 LANDING - TWO CARS THROUGH ONE GATE
+    //   (MF-CH3, the catalog data slips, and MF-CG2, the cartography cell address),
+    //   CAUSE ATTRIBUTED PER CAR AND PER FILE ==
+    // 2,524/366/2,158/21,002/5,845 -> 2,525/366/2,159/21,017/5,847 at the landing slot
+    // 86794b5d2 (the TE-AIP-1 + MF-CH2B stacked landing). Same law as the two rows above it:
+    // SS420 (a stack's census is a BASE plus a SUM OF DELTAS, never a carried tuple) and
+    // SS417 (the row belongs to the landing act, never to a member) - BOTH cars deferred it.
+    // ⭐ NEITHER CAR EDITS THIS FILE, so for the first time in three stacked landings no
+    //   census row died on a rebase and there was nothing to resolve here. MF-CH3 was already
+    //   sitting on the slot; MF-CG2 was built on 79b78881c and rebased --onto MF-CH3's tip
+    //   da2c7085c, and its five commits touch no tests/lint path at all. The whole row below
+    //   is the landing act's, walked at the stacked tree.
+    // TWO CAUSES, SUMMED, AND NEITHER IS A RULE CHANGE - no classifier here widened or
+    // narrowed (the file is blob-identical at the slot, at MF-CH3's tip and here):
+    //   CAR 1 (MF-CH3) +1 file / +0 parked / +1 CREDITED / +10 titles / +1 suite title:
+    //     tests/lint/catalogTierGateParity.walker.test.js - NEW. The walker that pins the
+    //       minTier reader gap J-CH-3-1 closes. CREDITED at birth: 8 titles, 1 suite, [].
+    //     tests/generators/metropolisCatalogReachable.test.js - MODIFIED, 5 titles/1 suite at
+    //       the slot and 7/1 here: +2 titles and NO suite title.
+    //     tests/domain/undercityStrataExistence.test.js and
+    //       tests/property/generatorGoldenMaster.test.js are in the car's diff and contribute
+    //       ZERO - bodies amended, no title added - which is exactly the shape a delta computed
+    //       from a file COUNT would misread.
+    //   CAR 2 (MF-CG2) +0 files / +0 parked / +0 CREDITED / +5 titles / +1 suite title:
+    //     tests/domain/townCartographyCalibration.test.js - MODIFIED, 28 titles/8 suites at
+    //       MF-CH3's tip and 32/9 here: W8 is one describe and four its. ⚠ THIS FILE IS
+    //       CREDITED, NOT PARKED. Its own docstring records a CONDITIONAL DRAFT that WOULD
+    //       have parked the whole file and swallowed every title; the shipped form does not,
+    //       so the four titles are visible and are counted here rather than assumed away.
+    //     tests/domain/townCartographyBuildings.test.js - MODIFIED, 23/5 -> 24/5: +1 title.
+    //   `parked` is the figure NEITHER car moves, and it PASSED UNMOVED at 366 on the walk.
+    // THE SPLIT IS ATTRIBUTED BY EXECUTION AT BOTH SEAMS, NOT BY ARITHMETIC. 10 + 5 = 15
+    // closes against any split of 15, so the classifier was LIFTED out of vitest (this file's
+    // lines 485-1485 with the vitest import struck, run under plain node) and driven over
+    // THREE checkouts with ONE instrument: the slot 86794b5d2 reads
+    // 2,524/366/2,158/21,002/5,845 - the published tuple above, EXACTLY, which is the lift's
+    // non-vacuity control - MF-CH3's tip da2c7085c reads 2,525/366/2,159/21,012/5,846, and the
+    // stacked tip reads the row below. So car 1 is +1/+0/+1/+10/+1 and car 2 is +0/+0/+0/+5/+1,
+    // each measured at its OWN seam and neither carried from the base it was built on.
+    // ⚠ MF-CG2's +0/+0/+0/+5/+1 was DECLARED against 79b78881c and is re-derived here against
+    // the tip it actually sits on; the two agree, but that agreement is a measurement.
+    // FIVE PER-FILE CONTROLS, each a real mutation of the tree re-read by the lift, each
+    // moving only what its car owns and each restored:
+    //   F1 DELETE catalogTierGateParity.walker.test.js -> 2,524/366/2,158/21,009/5,846.
+    //      Car 1 owns the file, the credit, 8 of its 10 titles and its suite title.
+    //   F2 metropolisCatalogReachable.test.js back to its SLOT bytes -> 21,015 titles, suite
+    //      UNMOVED at 5,847. Car 1 owns the other 2 titles and no suite title.
+    //   F3 townCartographyCalibration.test.js back to MF-CH3's bytes -> 21,013/5,846.
+    //      Car 2 owns 4 titles and its one suite title.
+    //   F4 townCartographyBuildings.test.js back to MF-CH3's bytes -> 21,016, suite UNMOVED.
+    //      Car 2 owns 1 title and no suite title.
+    //   F5 BOTH of car 2's files back to MF-CH3's bytes -> 2,525/366/2,159/21,012/5,846, which
+    //      is MF-CH3's tip reading to the digit. Removing car 2's whole test delta lands
+    //      exactly on the seam, which no arithmetic could have established.
+    // SIX NEGATIVE CONTROLS ON THE ASSERTIONS THEMSELVES, ONE PER FIGURE AND TWO ON `titles`,
+    // each substitution guarded against a no-op edit and the file restored to md5
+    // e3a077f60ae604cf2143bf5c4ea8d91a; every one exited 1 at 1 failed of 33, and the clean
+    // run before them was 33 passed of 33 at exit 0:
+    //   FILES     "the estate's file count moved - re-measure, do not re-word: expected 2525
+    //             to be 2524" - 2,524 removes CAR 1'S WHOLE FILE DELTA, and car 2 adds no file.
+    //   PARKED    "the parked-file count moved ...: expected 366 to be 367". ⭐ `parked` is the
+    //             figure NEITHER car moves, so an unmoved reading is only evidence if the arm
+    //             can red - and the figure is separately proved MEASURABLE-LIVE by a plant:
+    //             a two-title file under tests/docs whose `it`s no vitest opener resolves
+    //             (OPENER_UNRESOLVED) moved the lift to files 2,526 / parked 367, and its
+    //             removal returned every figure exactly.
+    //   CREDITED  "the credited-file count moved ...: expected 2159 to be 2158" - car 1's whole
+    //             credited delta; car 2 credits no new file.
+    //   TITLES/c2 "the live TEST-title count moved ...: expected 21017 to be 21012" - 21,012
+    //             removes CAR 2'S WHOLE TITLE DELTA while every file figure stays correct, so
+    //             the red must LAND ON `titles` and cannot be a `files` red wearing its name.
+    //   TITLES/c1 "the live TEST-title count moved ...: expected 21017 to be 21007" - likewise
+    //             CAR 1'S WHOLE TITLE DELTA. ⭐ The pair is the reason a whole-delta sibling
+    //             control is not run here: removing a car's delta across ALL figures reds at
+    //             `files`, the FIRST assertion, with the same message either way, so it
+    //             convicts the TOTAL and never the SPLIT (SS530.3, SS533.5).
+    //   SUITE     "the live SUITE-title count moved ...: expected 5847 to be 5846" - the LAST
+    //             assertion is reachable and no earlier red is masking it. ⚠ Each car
+    //             contributes exactly +1 suite title, so this substitution cannot tell them
+    //             apart; F2/F3/F4/F5 above do, by execution, and that is why they exist.
+    // The arithmetic closes: 366 + 2,159 = 2,525, and the walked delta +1/+0/+1/+15/+2 equals
+    // the sum of the two cars' separately measured deltas exactly, so the rebase moved no
+    // title and no title was swallowed.
+    files: 2525, parked: 366, credited: 2159, titles: 21017, suiteTitles: 5847,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
