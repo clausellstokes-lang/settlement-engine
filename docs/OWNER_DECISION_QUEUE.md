@@ -24547,3 +24547,112 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   **§516's stacking law applies and the two land through ONE gate.** ⚠ Both mint
   a packet on a 177 base and each will read 178 — **stacked the surface is 179
   and the manifest will conflict**; the landing re-derives by execution.
+
+## §555 · CH-4 RULED: ADOPT THE SHAPE, DO NOT DISPATCH THE BRIEF — AND NOBODY COUNTED THE 333 DELETIONS (2026-08-24 07:16 CDT)
+
+- **§555.1 THE VERDICT: SHAPE D STANDS AMENDED. ADOPT THE SHAPE; THE BRIEF DOES
+  NOT DISPATCH.** Panel of four lenses each attacked by its own refuter: **27
+  survived, 5 killed**, 8 blockers. **The shape survived every attack and in
+  places is better supported than the brief claimed.** The load-bearing mechanism
+  is intact — *a category that flickers 115/44 with the seeded institution draw
+  is a MISSING DECLARATION, not a classification problem*, and no ordering or
+  anchoring of a regex over `` `${name} ${desc} ${landmarks}` `` can reach it.
+  ⭐ **The name-keying is PROVABLY complete: 14 `quarters.push` sites, 14 plain
+  string literals, no interpolation, byte-identical back to 2026-04-13 — so a
+  declared registry covers LEGACY SAVES.** What falls is the brief: circular
+  scoreboard, five wrong downstream figures, a false dormancy claim, an
+  instrument error under `noble → government`, and an inherited authorisation.
+- **§555.2 ⭐⭐ THE FINDING NO LENS MADE, AND THE BEST OF THE NIGHT: NOBODY
+  COUNTED THE 333 DELETIONS.** `CATEGORY_TO_ARCHETYPE` maps **`residential →
+  null`, `other → null`, `industrial → 'craft'`, `craft → 'craft'`** — and the
+  folded histogram has **NO `craft` key at all (0 instances)**. **VERIFIED BY ME
+  at `districtProfile.js:132-145`.** So after Shape D: Common Residential (168) →
+  `null`, Noxious Trades (155) → craft → 0 matches → `null`, Artisan (10) →
+  `null`. **Up to 333 district cards LOSE their dominant-faction row entirely
+  while 44 gain one.** ⭐ **The entire §7.3 debate was about ADDING a line to 168
+  cards; the change is net SUBTRACTIVE by roughly two to one, and nobody had
+  executed that arithmetic.**
+- **§555.3 ⛔ MY §550.7 WAS WRONG, AND THE DIAGNOSIS IS EXACT.**
+  `factionProfile.js:128-134` `CANONICAL_TO_PROFILE` folds **`[FA.NOBLE]:
+  'government'`** and `[FA.CIVIC]: 'government'` — **VERIFIED BY ME** — and
+  `inferDominantFaction` filters that output, **so it can never SEE `noble`.**
+  Measured canonically there are **396 noble-archetype instances of 3,272, across
+  363 of 504 settlements**, every one carrying an authored `category:'noble'`;
+  the fold is exact (440 + 396 = 836). **So the brief's "0 of 504 settlements
+  carry a noble-archetype faction" and my §550.7's "mapping to a noble archetype
+  is unavailable" are `factionProfile`'s LOCAL VOCABULARY REPORTED AS A PROPERTY
+  OF THE WORLD.** A new hazard shape, and a sharp one: *a module's private
+  vocabulary read as a fact about the domain.*
+- **§555.4 RULING — TAKE ROUTE (iii): ROUTE `inferDominantFaction` THROUGH THE
+  CANONICAL DETECTOR.** *Rejected (i) keep `'government'`* — the panel's own
+  "worst world-model", printing a **City Council on 83 of 168 noble cards and the
+  seated ruler on 90**. *Rejected (ii) `'noble'`* — one token, but it yields
+  `matching.length === 0 → null`, i.e. **no row at all on 168 more cards**, and
+  with 333 deletions already in flight, deepening a subtractive change is the
+  wrong direction. *(iii) resolves 168 of 168 to "Noble Families"/"Noble Houses"
+  and the ruler on NONE* — **best world-model AND lower §519 exposure than (i)**,
+  since it stops putting the seated ruler on noble quarters. The "power-adjacent
+  read" objection is answered by §555.5. **The 333 deletions are measured and
+  addressed IN THE SAME CAR — a car that removes 333 card rows while advertising
+  168 additions is not a car anyone can review.**
+- **§555.5 THE §519 GATE I IMPLIED DOES NOT EXIST — CORRECTED.** Naming a POWER
+  on a district card is **already shipped behaviour on 931 of 1,803 cards**, with
+  the **seated ruler already named on 294** (118 of them civic), driven by
+  `CATEGORY_TO_ARCHETYPE.civic = 'government'` **in production today**. §519 rules
+  on `Estate.ownerRef` **ownership** and deliberately opens `occupies` for
+  non-power attachment. **CH-4 changes the VOLUME, not the KIND** — and gating it
+  would, for consistency, force the same gate onto the 294 cards already
+  shipping. The brief never called it a blocker and was right.
+- **§555.6 ⛔ SIX ITEMS ARE THE OWNER'S, AND TWO OF THEM ARE NEW.** (1) **The
+  declared shift itself** — §496.4 R7's subject is the **estate wave**, what it
+  declares is a **drawn-map** shift, and it is *an unratified chair ruling
+  recording a pending disclosure*. **Three of those four words fail to reach
+  CH-4. The chair cannot ratify its own pending disclosure** — precisely the
+  inherited-authorisation class §550.6 declined to take on the lane's word. **The
+  panel's answer to that question is NO.** (2) ⭐ **THE PAID SURFACE:
+  `TownMapPlate.jsx:121` prints category WORDS in the sold dossier's legend and
+  two of four PDF variants carry the plate — VERIFIED BY ME. A customer
+  re-exporting after CH-4 gets a legend reading "Criminal" where their printed
+  copy reads "Merchant."** (3) ⭐ **THE DM'S OWN WRITING: `mapEdits.annotations`
+  are authored free-text markers persisted at fixed x/y (cap 50/settlement).
+  They do NOT move when the districts do** — *the one item in the whole docket
+  that is not derived state.* (4) the urban-fabric re-pointing on lit saves.
+  (5) `military`/`foreign` reachability — NEW CAPABILITY. (6) a persisted
+  `category` key — persistence shape, which Shape D avoids and must keep avoiding.
+- **§555.7 ⛔ THE URBAN-FABRIC LAYER IS LIT, NOT DARK — BOTH THE BRIEF AND ODQ
+  §517.3 ARE FALSE AT THE SLOT.** `urbanFabricEnabled: true` is spread into
+  **dramatic_campaign, living_realm and full_simulation**, and the shipped
+  compendium says `"dormant":false`. ⭐ **The cause is a NAMING COLLISION:
+  `ONE_REGEN` is the name of the golden re-record BATCH, not a runtime gate** —
+  and a reader who met the constant took it for one. §517.3 is corrected here.
+- **§555.8 THE ONE-REGEN URGENCY WAS INFLATED, WHICH REMOVES THE LAST ARGUMENT
+  FOR RIDING R7.** **VERIFIED BY ME: `districtProfile` appears ZERO times in
+  `generateSettlementPipeline.js`** — the panel executed the full 203-module
+  closure with passing positive and negative controls. **So the settlement-record
+  digest and `generator-golden-master.json` CANNOT move; the estate's habitual
+  same-seed instrument is STRUCTURALLY BLIND here.** What CH-4 moves is the **map
+  golden family**. Missing the ONE REGEN therefore costs a **map-family
+  re-record, not a second full regen.** ⛔ **INSTRUCTION THE PACKET MUST CARRY:
+  prove the shift against the DERIVED ARTEFACT — district-category tuples and
+  `compileTownSceneManifest` output — NEVER a settlement-record hash. A digest
+  that cannot move proves nothing, and a lane that measures one will either
+  declare the shift covered or conclude the edit did nothing.**
+- **§555.9 §549.1's PARALLELISM RULE WAS TRUE OF THE FALLBACK, NOT THE
+  RECOMMENDATION — CORRECTED.** Under Shape D, CH-4 touches
+  `src/domain/districtProfile.js`, one new `tests/lint/` file and one row of
+  `.prose-numerics-baseline.json` — **disjoint at file level from CH-5 and
+  CH-6**, with no baseline contention. **Shape B2 would have created the
+  collision**, because a reorder must edit the arcane census's roster key, which
+  is CH-5/CH-6 territory. ⭐ **That asymmetry is a second, independent reason to
+  prefer D.** Order: **CH-5 + R3 land first (do not disturb the stack) → CH-4's
+  remaining measurement runs read-only in parallel → CH-4 builds after CH-5 and
+  BEFORE CH-6** (CH-6 changes what worlds contain, so CH-4's per-cell measurement
+  would need re-deriving) **→ CH-7 last**, since CH-5 also edits `npcProfile.js`.
+- **§555.10 TWO DESIGN POINTS RATIFIED.** Keep **`declared ?? inferred`** rather
+  than falling through to `'other'` — under Shape D the keyword table is
+  unreachable in production, so the choice concerns an unknown future quarter,
+  and a count-parity walker arm removes that habitat directly, which beats
+  choosing a different wrong default. And keep **`Wealthy Residential → noble`**:
+  `residential` base 1 renders the stone-townhouse quarter **poor on 168 of
+  168**, and the effect is confined to cities and metropolises (84/84), **so
+  signed band B1 is not engaged.**
