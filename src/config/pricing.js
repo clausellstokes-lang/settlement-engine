@@ -97,8 +97,9 @@ function validLiveAiCost(feature, modelPreference) {
 }
 
 // ── Surveyor (S1 + S3 + S4–S6) task-priced managed-credit costs ────────────
-// The AI control surface's task prices (design §4). PROVISIONAL — final Surveyor
-// pricing is an owner-queued decision. Kept in lockstep with the server-side
+// The AI control surface's task prices (design §4). The Surveyor SUBSCRIPTION is
+// ruled §464.2 (see SURVEYOR_PLAN below); these per-task prices are unchanged by
+// that ruling and stay owner-signed. Kept in lockstep with the server-side
 // spend_credits CASE (migrations 140 + 149 + 151) by the pricing contract test.
 const SURVEYOR_AI_COSTS = Object.freeze({
   analysis:            3,   // one analyst answer (S1)
@@ -242,7 +243,12 @@ export const TIERS = Object.freeze({
     maxSize:      'capital',              // a free account unlocks every size (anon alone is town-capped)
     features: {
       neighbourhoodSystem: false,
-      pdfExport:           true,
+      // ODQ §464.2 O-P3. The TRUTH is src/store/authSlice.js TIER_GATE.free.export
+      // === false: a free account does NOT export freely, it buys a durable
+      // per-dossier PDF right ($2.99, SINGLE_DOSSIER). This field had drifted true
+      // and, having no reader anywhere, lied silently; the tierFacts contract test
+      // now pins it to the gate so it cannot drift again.
+      pdfExport:           false,
       jsonExport:          false,
       supplyChainMap:      false,
       founderBadge:        false,
@@ -302,6 +308,84 @@ export const SINGLE_DOSSIER = Object.freeze({
   deliverables:  ['pdf'],
   requiresAccount: false,                 // can be claimed without signup
 });
+
+// ── Registrations landed DARK for the W-C train (ODQ §471.1/F1) ───────────
+// WEB-8 is the ONLY writer of this file in the paid-surface train, so the two
+// stubs its siblings need are registered HERE, behind dials, rather than each
+// car re-opening the same change path (the packet validator reserves a path at
+// every non-terminal status, which made the split unmintable). Both are
+// REGISTRATION-ONLY: nothing imports them yet, and at the dial values below
+// neither derives a sellable price or a grantable credit.
+
+/**
+ * THE SURVEYOR SUBSCRIPTION (ODQ §464.2 O-P2), landed dark.
+ *
+ * NOT a `TIERS` key, deliberately. `TIERS` keys are `profiles.tier` shapes, and
+ * Surveyor is an ENTITLEMENT (`surveyor_entitlements`, migration 139) rather
+ * than a billing tier — the same reason 139 declined to widen the tier CHECK.
+ * Keeping it outside `TIERS` is what lets `getVisibleTiers()` stay three-way and
+ * leaves every existing TIERS consumer untouched.
+ *
+ * `monthlyCredits: 0` IS A DIAL, not a price. The allowance is minted by the
+ * Stripe webhook, which does not know about this constant yet; WEB-10 flips the
+ * dial in the same commit that teaches the webhook to grant. Until then the
+ * honest reading of this row is "BYOK only, no managed allowance", and the pins
+ * written for it in tests/config/pricing.test.js assert the SHAPE and the
+ * DERIVATIONS, never the dial's value.
+ */
+export const SURVEYOR_PLAN = Object.freeze({
+  key:           'surveyor',
+  stripeProduct: 'surveyor',
+  priceCents:    1499,                    // $14.99/mo (§464.2 ruled the band $14.99–19.99 at its floor)
+  billing:       'monthly',
+  monthlyCredits: 0,                      // THE DIAL — WEB-10 sets it when the webhook can grant
+  byok:          true,
+  entitlement:   'surveyor_entitlements',
+});
+
+/**
+ * THE ANNUAL CARTOGRAPHER PLAN's price shape (§464.2 "gains an ANNUAL plan (two
+ * months free)"), landed dark at factor 0.
+ *
+ * ANNUAL_FACTOR is the number of monthly instalments an annual purchase pays.
+ * "Two months free" is therefore 10, and WEB-10 sets it; at 0 this whole object
+ * derives to a zero-priced, zero-credit plan that no surface reads and
+ * `ACTIVE_CHECKOUT_SKUS` refuses to list. Writing the plan as a DERIVATION
+ * rather than as literals is what lets the pins hold identically at both dial
+ * values, so the flip is a one-line change with no test edit behind it.
+ */
+export const ANNUAL_FACTOR = 0;
+
+export const CARTOGRAPHER_ANNUAL = Object.freeze({
+  key:           'premium_annual',
+  stripeProduct: 'premium_annual',
+  priceCents:    TIERS.cartographer.priceCents * ANNUAL_FACTOR,
+  billing:       'annual',
+  credits:       TIERS.cartographer.monthlyCredits * ANNUAL_FACTOR,
+  factor:        ANNUAL_FACTOR,
+});
+
+/**
+ * Every checkout SKU the platform currently OFFERS — the one list `.env.example`
+ * is walked against, so a sellable product can never go undocumented and an
+ * abolished one can never be documented back into existence.
+ *
+ * DERIVED, never hand-listed: the active pack keys plus the three standing
+ * products, plus `premium_annual` IF AND ONLY IF its dial is lit. That last
+ * clause is why WEB-10 needs no second edit here — flipping ANNUAL_FACTOR adds
+ * the SKU to this list, to `.env.example`'s walker and to the two-way parity
+ * scan against create-checkout's active PRICE_MAP block in one motion.
+ *
+ * ⛔ `founder_lifetime` is NOT here and must never be: create-checkout refuses
+ * it outright (ABOLISHED_PRODUCTS, ODQ §118). A chair is given, never sold.
+ */
+export const ACTIVE_CHECKOUT_SKUS = Object.freeze([
+  ...Object.keys(NEW_PACKS),
+  'premium',
+  SINGLE_DOSSIER.key,
+  SURVEYOR_PLAN.key,
+  ...(ANNUAL_FACTOR > 0 ? [CARTOGRAPHER_ANNUAL.key] : []),
+]);
 
 // ── Active-set selectors ───────────────────────────────────────────────────
 // Components and slices call these — they never reach for the raw maps.

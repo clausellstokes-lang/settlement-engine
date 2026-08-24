@@ -318,7 +318,6 @@ STRIPE_SECRET_KEY            # webhook, checkout, portal, and dossier verificati
 STRIPE_WEBHOOK_SECRET        # stripe-webhook signature verification
 STRIPE_PRICE_PREMIUM         # per the PRICE_MAP in create-checkout
 STRIPE_PRICE_SINGLE_DOSSIER
-STRIPE_PRICE_FOUNDER_LIFETIME
 STRIPE_PRICE_SURVEYOR        # ⛔ UNSET => '' => create-checkout THROWS "Price ID not
                              #   configured for surveyor" at the FIRST Surveyor purchase,
                              #   and stripe-webhook cannot match the Surveyor line item.
@@ -422,10 +421,10 @@ broadcast courier is deliberately shipping dormant as described below.
 
 ⚠ **The pin runs in ONE direction only: every CONSUMED name must be documented.**
 The reverse — every documented name must still be consumed — is a **recorded
-deferral, not an oversight**. Writing it now would couple this runbook to the
-paid-surface member landing behind it in the same train: the moment the founder
-purchase path is removed, `STRIPE_PRICE_FOUNDER_LIFETIME` becomes documented and
-unconsumed, and a bidirectional pin would red on that alone. A documented secret
+deferral, not an oversight**. The worked example was this runbook's own: with the
+founder purchase path abolished (ODQ §118) but its price id still listed above,
+`STRIPE_PRICE_FOUNDER_LIFETIME` sat documented and unconsumed. WEB-8 struck that
+line, so the name is now neither documented nor consumed. A documented secret
 nobody reads is inert; an undocumented secret nobody sets breaks a cutover.
 
 ### Activate the durable account-deletion worker

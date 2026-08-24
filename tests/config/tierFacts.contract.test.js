@@ -52,6 +52,41 @@ describe('tierFacts ↔ TIER_GATE enforcement parity', () => {
     expect(TIER_GATE.premium.export).toBe(true);
   });
 
+  // ── O-P3 (ODQ §464.2) — THE pdfExport DRIFT, PINNED ──────────────────────
+  // `TIERS.<tier>.features.pdfExport` had drifted to `true` on the WANDERER row
+  // while TIER_GATE.free.export said false and EXPORT_MODE.free said
+  // 'per_dossier'. It survived because it has NO READER: nothing in src reads
+  // `.features.pdfExport` (the only `pdfExport` token elsewhere is the unrelated
+  // i18n key `errors.pdfExportFail`), so no surface behaved wrongly and no pin
+  // could see it. A dead field that lies is still a lie the next reader inherits,
+  // and the copy law here is zero hand-typed tier facts — so the catalog row is
+  // now tied to the enforcement gate the same way tierFacts already is.
+  //
+  // The free tier does export; it BUYS a durable per-dossier right ($2.99,
+  // SINGLE_DOSSIER). `pdfExport` in this catalog means "exports freely and
+  // without limit", which is exactly TIER_GATE.<legacy>.export.
+  const PDF_EXPORT_LEGACY = /** @type {const} */ ([
+    ['wanderer', 'free'],
+    ['cartographer', 'premium'],
+    ['founder', 'premium'],
+  ]);
+
+  for (const [tier, legacy] of PDF_EXPORT_LEGACY) {
+    it(`${tier}: features.pdfExport equals TIER_GATE.${legacy}.export`, () => {
+      expect(TIERS[tier].features.pdfExport).toBe(TIER_GATE[legacy].export);
+    });
+  }
+
+  it('the drift itself is pinned: wanderer is false and the paying tiers are true', () => {
+    // Stated as literals as well as by derivation, so a future edit that flipped
+    // BOTH the catalog and the gate together would still have to argue with a
+    // written number rather than sliding through a tautology.
+    expect(TIERS.wanderer.features.pdfExport).toBe(false);
+    expect(TIERS.cartographer.features.pdfExport).toBe(true);
+    expect(TIERS.founder.features.pdfExport).toBe(true);
+    expect(TIER_GATE.free.export).toBe(false);
+  });
+
   it('anon size ceiling matches the gate (Town, not Village)', () => {
     expect(ANON_MAX_TIER).toBe(TIER_GATE.anon.maxTier);
     expect(ANON_MAX_SIZE_LABEL).toBe('Town');

@@ -12,6 +12,7 @@
 
 import { describe, it, expect, beforeEach } from 'vitest';
 import { readFileSync, readdirSync } from 'node:fs';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { resolve, join } from 'node:path';
 import {
   TIERS,
@@ -29,6 +30,10 @@ import {
   normalizeModelPreference,
   isFastModelPreference,
   _internal,
+  SURVEYOR_PLAN,
+  ANNUAL_FACTOR,
+  CARTOGRAPHER_ANNUAL,
+  ACTIVE_CHECKOUT_SKUS,
 } from '../../src/config/pricing.js';
 
 const MIG_DIR = resolve(process.cwd(), 'supabase', 'migrations');
@@ -316,6 +321,180 @@ describe('getVisibleTiers()', () => {
   it('shows all three tiers (wanderer / cartographer / founder)', () => {
     const tiers = getVisibleTiers();
     expect(tiers.map(t => t.key)).toEqual(['wanderer', 'cartographer', 'founder']);
+  });
+});
+
+// ── ODQ §464.2 / §471.1-F1 — THE SELLABLE-SKU LIST AND ITS TWO DOCUMENTS ─────
+// A SKU can go wrong in two directions and only one of them is loud. An
+// UNDOCUMENTED but consumed price id breaks a first cutover: the env is unset,
+// create-checkout resolves '' and the product is silently unpurchasable. A
+// DOCUMENTED but abolished one is quieter and worse — it instructs a deployer to
+// configure a product the platform refuses to sell (`founder_lifetime`,
+// ABOLISHED_PRODUCTS, ODQ §118). ACTIVE_CHECKOUT_SKUS is the single derived list
+// both directions are measured against.
+
+const ENV_EXAMPLE = '.env.example';
+const CREATE_CHECKOUT = 'supabase/functions/create-checkout/index.ts';
+const ENV_ACTIVE_MARKER = '# ── Stripe price ids: ACTIVE catalog';
+const ENV_LEGACY_MARKER = '# ── Stripe price ids: LEGACY';
+
+const readRepo = (rel) => readFileSync(resolve(process.cwd(), rel), 'utf-8');
+
+/** `credits_25` → `STRIPE_PRICE_CREDITS_25`, the one spelling both docs use. */
+function envNameFor(sku) {
+  return `STRIPE_PRICE_${sku.toUpperCase()}`;
+}
+
+/** The two halves of .env.example's price-id section, sliced on their markers. */
+function envBlocks() {
+  const src = readRepo(ENV_EXAMPLE);
+  const activeAt = src.indexOf(ENV_ACTIVE_MARKER);
+  const legacyAt = src.indexOf(ENV_LEGACY_MARKER);
+  // A rotted marker would silently produce empty blocks and pass every arm below.
+  expect(activeAt, `${ENV_EXAMPLE} lost its ACTIVE marker`).toBeGreaterThan(-1);
+  expect(legacyAt, `${ENV_EXAMPLE} lost its LEGACY marker`).toBeGreaterThan(activeAt);
+  return { whole: src, active: src.slice(activeAt, legacyAt), legacy: src.slice(legacyAt) };
+}
+
+/** Every STRIPE_PRICE_* name in a chunk of text. */
+function priceNames(text) {
+  return [...text.matchAll(/STRIPE_PRICE_[A-Z0-9_]+/g)].map((m) => m[0]);
+}
+
+/**
+ * The KEYS of create-checkout's ACTIVE PRICE_MAP block — the server's own view
+ * of what is sellable, read off the source between its two section comments.
+ */
+function serverActiveSkus(src = readRepo(CREATE_CHECKOUT)) {
+  const mapAt = src.indexOf('const PRICE_MAP');
+  const activeAt = src.indexOf('// ── Active catalog', mapAt);
+  const legacyAt = src.indexOf('// ── Legacy SKUs', activeAt);
+  expect(mapAt, 'create-checkout lost its PRICE_MAP').toBeGreaterThan(-1);
+  expect(activeAt, 'create-checkout lost its Active-catalog marker').toBeGreaterThan(mapAt);
+  expect(legacyAt, 'create-checkout lost its Legacy-SKUs marker').toBeGreaterThan(activeAt);
+  return [...src.slice(activeAt, legacyAt).matchAll(/^\s+(\w+):\s+Deno\.env\.get\(/gm)].map((m) => m[1]);
+}
+
+describe('ACTIVE_CHECKOUT_SKUS ↔ .env.example (the deployer-facing document)', () => {
+  it('the derived list is the active packs plus the standing products, dial-aware', () => {
+    expect([...ACTIVE_CHECKOUT_SKUS]).toEqual([
+      'credits_25', 'credits_60', 'credits_150', 'premium', 'single_dossier', 'surveyor',
+    ]);
+    // THE DIAL'S CONSEQUENCE, not the dial's value: this holds at ANNUAL_FACTOR 0
+    // and at 10, so WEB-10's flip needs no edit here.
+    expect(ACTIVE_CHECKOUT_SKUS.includes('premium_annual')).toBe(ANNUAL_FACTOR > 0);
+  });
+
+  it('every active SKU has its env name in the ACTIVE block', () => {
+    const { active } = envBlocks();
+    const missing = ACTIVE_CHECKOUT_SKUS.filter((sku) => !active.includes(envNameFor(sku)));
+    expect(missing, `${ENV_EXAMPLE}'s active block is missing: ${missing.join(', ')}`).toEqual([]);
+    // GUARD THE GUARD: an empty roster would make the filter above vacuous.
+    expect(ACTIVE_CHECKOUT_SKUS.length).toBeGreaterThanOrEqual(6);
+  });
+
+  it('the ACTIVE block names NO abolished SKU and NO legacy pack', () => {
+    const { active } = envBlocks();
+    const names = priceNames(active);
+    // The anchor is STRIPE_PRICE_PREMIUM: a name produced by the same block slice and
+    // the same regex, so a rotted marker or an emptied block reds on the anchor rather
+    // than reporting a comfortable absence from nothing.
+    const ANCHOR = 'STRIPE_PRICE_PREMIUM';
+    expectAbsentWithAnchor(names, 'STRIPE_PRICE_FOUNDER_LIFETIME', ANCHOR, 'the active block excludes abolished SKUs');
+    for (const legacyPack of ['CREDITS_5', 'CREDITS_10', 'CREDITS_15', 'CREDITS_40', 'CREDITS_50']) {
+      expectAbsentWithAnchor(names, `STRIPE_PRICE_${legacyPack}`, ANCHOR, `${legacyPack} is legacy — it belongs below the legacy marker`);
+    }
+  });
+
+  it('legacy pack names appear ONLY below the legacy marker, and nowhere else in the file', () => {
+    const { whole, legacy } = envBlocks();
+    const legacyNames = priceNames(legacy);
+    expect(legacyNames).toContain('STRIPE_PRICE_CREDITS_10');
+    expect(legacyNames).toContain('STRIPE_PRICE_CREDITS_50');
+    // Every occurrence in the whole file is accounted for by one of the two blocks.
+    const { active } = envBlocks();
+    expect(priceNames(whole).length).toBe(priceNames(active).length + legacyNames.length);
+  });
+
+  it('the abolished founder SKU is absent from the whole file', () => {
+    const { whole } = envBlocks();
+    // The anchor is the Surveyor name — the newest active SKU, produced by the same
+    // whole-file scan, so an unreadable or renamed file reds here rather than below.
+    expectAbsentWithAnchor(priceNames(whole), 'STRIPE_PRICE_FOUNDER_LIFETIME', 'STRIPE_PRICE_SURVEYOR', 'the abolished SKU is nowhere in .env.example');
+  });
+});
+
+describe('ACTIVE_CHECKOUT_SKUS ↔ create-checkout PRICE_MAP (both directions, F8)', () => {
+  it('the two active sets are equal — neither side may move alone', () => {
+    const server = serverActiveSkus();
+    expect([...server].sort()).toEqual([...ACTIVE_CHECKOUT_SKUS].sort());
+  });
+
+  it('NEGATIVE CONTROL: an extra on the SERVER side breaks the equality', () => {
+    const src = readRepo(CREATE_CHECKOUT).replace(
+      '  // ── Legacy SKUs',
+      "  premium_annual:   Deno.env.get('STRIPE_PRICE_PREMIUM_ANNUAL') || '',\n  // ── Legacy SKUs",
+    );
+    const planted = serverActiveSkus(src);
+    expect(planted).toContain('premium_annual');
+    expect([...planted].sort()).not.toEqual([...ACTIVE_CHECKOUT_SKUS].sort());
+  });
+
+  it('NEGATIVE CONTROL: an extra on the CLIENT side breaks the equality', () => {
+    const planted = [...ACTIVE_CHECKOUT_SKUS, 'premium_annual'];
+    expect([...planted].sort()).not.toEqual([...serverActiveSkus()].sort());
+  });
+});
+
+describe('SURVEYOR_PLAN — the dark registration (ODQ §464.2 O-P2, landed by WEB-8)', () => {
+  it('is $14.99 monthly, BYOK, and keyed to the entitlement table', () => {
+    expect(SURVEYOR_PLAN.priceCents).toBe(1499);
+    expect(SURVEYOR_PLAN.priceCents).toBe(Math.round(14.99 * 100));
+    expect(SURVEYOR_PLAN.billing).toBe('monthly');
+    expect(SURVEYOR_PLAN.byok).toBe(true);
+    expect(SURVEYOR_PLAN.entitlement).toBe('surveyor_entitlements');
+    expect(Object.isFrozen(SURVEYOR_PLAN)).toBe(true);
+  });
+
+  it("its stripeProduct is a key create-checkout already resolves", () => {
+    expect(SURVEYOR_PLAN.stripeProduct).toBe('surveyor');
+    expect(serverActiveSkus()).toContain(SURVEYOR_PLAN.stripeProduct);
+  });
+
+  it('it is an ENTITLEMENT, not a tier — getVisibleTiers stays three-way', () => {
+    // TIERS keys are profiles.tier shapes; migration 139 declined to widen the
+    // CHECK, so the plan lives outside TIERS and no TIERS consumer changes. The
+    // anchor is cartographer — the paying tier that must always be in both
+    // collections, so a frozen-away TIERS or an empty visible list reds on it.
+    expectAbsentWithAnchor(Object.keys(TIERS), 'surveyor', 'cartographer', 'Surveyor is an entitlement, not a TIERS key');
+    expectAbsentWithAnchor(getVisibleTiers().map((t) => t.key), 'surveyor', 'cartographer', 'Surveyor does not render as a tier');
+  });
+});
+
+describe('CARTOGRAPHER_ANNUAL — a DERIVATION, so the pins hold at either dial', () => {
+  it('price and credits are exactly ANNUAL_FACTOR times the monthly plan', () => {
+    expect(CARTOGRAPHER_ANNUAL.priceCents).toBe(ANNUAL_FACTOR * TIERS.cartographer.priceCents);
+    expect(CARTOGRAPHER_ANNUAL.credits).toBe(ANNUAL_FACTOR * TIERS.cartographer.monthlyCredits);
+    expect(CARTOGRAPHER_ANNUAL.factor).toBe(ANNUAL_FACTOR);
+    expect(CARTOGRAPHER_ANNUAL.billing).toBe('annual');
+    expect(Object.isFrozen(CARTOGRAPHER_ANNUAL)).toBe(true);
+  });
+
+  it('the derivation is proved live at the dial WEB-10 will set (two months free)', () => {
+    // Driven rather than asserted: the same arithmetic at factor 10 is what the
+    // flip produces, so this pin cannot pass by both sides being zero.
+    const AT_TEN = 10;
+    expect(AT_TEN * TIERS.cartographer.priceCents).toBe(5990);
+    expect(AT_TEN * TIERS.cartographer.monthlyCredits).toBe(300);
+    expect(AT_TEN * TIERS.cartographer.priceCents).toBe(12 * TIERS.cartographer.priceCents - 2 * TIERS.cartographer.priceCents);
+  });
+
+  it('it is not a tier and not on sale at this dial', () => {
+    expectAbsentWithAnchor(Object.keys(TIERS), 'premium_annual', 'cartographer', 'the annual plan is not a TIERS key');
+    expectAbsentWithAnchor(getVisibleTiers().map((t) => t.key), 'premium_annual', 'cartographer', 'the annual plan does not render as a tier');
+    // The anchor is the monthly premium SKU: it is derived by the same spread that
+    // would carry premium_annual once the dial lit, so an emptied list cannot pass.
+    expectAbsentWithAnchor(ACTIVE_CHECKOUT_SKUS, CARTOGRAPHER_ANNUAL.key, 'premium', 'the annual SKU is unsellable at dial 0');
   });
 });
 
