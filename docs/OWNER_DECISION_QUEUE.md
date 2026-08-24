@@ -25590,3 +25590,24 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   every judging round — the specimen beside a Watabou capture and a corpus
   plate, asked one question: does ours read as the same genre of object? The
   chair composes that side-by-side sheet at every specimen collection.
+
+## §574 · THE TRIANGULATION RULE — THE VISUAL TARGET IS A CROSS-REFERENCE OF ALL THREE (2026-08-24 ~12:00 CDT)
+
+- **§574.1 ⭐⭐ OWNER REFINEMENT TO §573.2:** "the visual should be a
+  cross-reference between the corpus and Watabou and FTG." The target formula
+  sharpens into a TRIANGULATION with each source contributing a named layer:
+  **Watabou supplies the glance grammar** (figure-ground, fused block masses,
+  street voids, the bold wall, curved ward names — the skeleton of
+  readability) · **FTG supplies the approachability conventions** (the
+  instantly-decodable category colors — water reads water, green reads
+  growth, warm reads town — and the friendly, zero-learning-cost address to
+  a general user) · **the corpus supplies the craft** (ink, wash, paper,
+  drawn detail, monuments, composition, ornament). Our engine supplies the
+  meaning beneath all three.
+- **§574.2 OPERATIONALIZED AS THE THREE-SOURCE TRACING RULE:** every visual
+  decision in the register program should trace to at least one of the three
+  references; an element traceable to NONE of them is drift and needs a
+  stated justification before it ships. And the relatability side-by-side at
+  every judging round runs against **all three** — the specimen beside a
+  Watabou capture, an FTG capture, and a corpus plate — asking whether ours
+  reads as the best member of that family rather than a fourth species.
