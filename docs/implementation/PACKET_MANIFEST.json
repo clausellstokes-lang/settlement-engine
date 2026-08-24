@@ -23289,6 +23289,264 @@
         ]
       ],
       "retiredSymbols": []
+    },
+    {
+      "id": "MF-CH2A",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/catalog-hygiene/MF-CH2A.md",
+      "verifiedBase": "b2852ccc3cc4753499996da6582dd672e90499d0",
+      "changeManifest": [
+        {
+          "_note": "THE MAGIC LICENCE, DECLARED. A per-entry `magicLicense` in the four LOWER-CASE tokens getMagicLevel already emits, on the 28 Magic/Exotic rows (Magic 21 + Exotic 7, 25 distinct names) - the charter's 32 is R-INST-5's whole verdict table, four rows of which sit on the Adventuring shelf that no magic gate reads. Values are R-INST-5 section-Sigma.3's table restricted to the gated shelves: none 7, low 5, medium 4, high 12, and the dossier's NONE 11 minus its four Adventuring hand-offs closes to 7. The field means THE WEAKEST WORLD THE ENTRY IS LICENSED FOR, which is the reading that reconciles R-INST-5's per-entry declaration with R-INST-6's three world-level cross-references - and two of those three corroborate a HIGH row on this table rather than contradicting it. MEASURED, NOT ASSUMED: the 28 are EXACTLY the set any of the six magic surfaces treats as magic; rows outside the two shelves that some magic gate nonetheless catches number ZERO.",
+          "action": "MODIFY",
+          "path": "src/data/institutionalCatalog.js"
+        },
+        {
+          "_note": "THE LADDER, at the definition site of the tokens. MAGIC_LICENCE_LEVELS, normaliseMagicLicence and magicLicenceAtLeast sit beside getMagicLevel because they are the same four strings: getMagicLevel reads a WORLD's dial, a row's magicLicense names the weakest world it is licensed for, and one comparison answers the whole question. The normaliser is tolerant on shape (case, surrounding space) and strict on vocabulary, and an unknown or absent licence answers FALSE on both sides of the ladder - a gate may not read silence as permission, which is why every gate branches on `licence !== null` before it asks. constants.js is a ZERO-IMPORT data leaf, so magicFilter (routed to the lazy generation bundle) can read the ladder without pulling the catalog into its chunk - the eager/lazy edge that made dist un-bootable in lane BT.",
+          "action": "MODIFY",
+          "path": "src/data/constants.js"
+        },
+        {
+          "_note": "THE READER, and the car's ONE behavioural edit. A sibling index MAGIC_LICENCE_BY_CATALOG_NAME is built in the loop that already builds ARCANE_BY_CATALOG_NAME, exported as institutionCatalogMagicLicence(name), and isArcaneInstitution consults it BEFORE the authored tag. Over all 311 rows the licence and the tag disagree on exactly FOUR, in BOTH directions: Alchemist shop, Alchemist quarter and Warden's Lodge are tagged arcane and licensed none, so they become MUNDANE; and Healer (divine, 1st level) was tag-MUNDANE and is licensed low, so it becomes ARCANE - which CLOSES an existing split, because the world law's own keyword list has always carried 'healer (divine'. institutionCatalogArcaneTag is DELIBERATELY left reading the tag alone: customContent.js classifies user-authored names through it, where a catalog licence has no standing over a name a player typed. NONE OF THE FOUR MOVES A ROSTER at this tip, and that is measured rather than argued - isArcaneInstitution is reached only at institutionProbability.js:302, which runs at magicExists===false, and there the world law strikes all four rows before the probability path is entered. Arm A7 pins that, and mutant M11 - making the world law licence-aware, which is literally MF-CH2B - reds it.",
+          "action": "MODIFY",
+          "path": "src/domain/arcaneInstitutionIdentity.js"
+        },
+        {
+          "_note": "The declaration walker. Nine arms, ELEVEN mutants driven against them, every mutant restored cmp-exact with a clean control green before the first and after the last. A0 is the non-vacuity floor the rest stand on: the name index is held live against the raw catalog bytes on all 311 rows before any other arm reads it. A2 was VACUOUS when first written - it counted the distribution off the frozen table beside it, a list compared with itself, and M1 moved a catalog value without reddening it; it now counts off the CATALOG. A7 is the car's NEGATIVE claim stated as a test, and it is the arm MF-CH2B deliberately flips.",
+          "action": "CREATE",
+          "path": "tests/lint/magicLicenceCensus.walker.test.js"
+        },
+        {
+          "_note": "THE SECOND CENSUS A NEW tests/lint FILE REDS. The TOTALITY arm enumerates every test file under the seven ENFORCER DIRS and tests/lint is one, so the new walker owes an entry. `uncovered` is refused twice - by the file header and by the SHRINK-ONLY arm pinning the count EXACTLY at uncoveredBaseline 198 - so the entry is a `rationale` naming the eleven mutants this lane actually drove. ATTRIBUTED BY EXECUTION: the arm is GREEN at the clean base b2852ccc3 and RED at this member's tip.",
+          "action": "MODIFY",
+          "path": "scripts/mutation-coverage-manifest.json"
+        },
+        {
+          "_note": "THE DECLARED GOLDEN RE-RECORD (ODQ 503.2 second law, priced before the first edit rather than met at a battery). 297 of 525 keys move; 0 added, 0 removed. PROVEN TO BE A KEY ADDITION AND NOTHING ELSE before re-recording: all 504 grid settlements were regenerated as OBJECTS at the clean base in a separate detached worktree and at this member, then deep-diffed with array indices collapsed - the complete census of differing path templates is TWO, both pure ADDITIONS of magicLicense (573 on $.institutions[*] over 276 rows, 350 on $.defenseProfile.institutions.magicDef[*] over 252 rows), with zero changed, zero removed, zero array-length moves and zero key-order moves. Rosters move ZERO of 2,520 across the whole magic axis. A SHIFT RECORD row is added to the test's own docstring, which its law requires.",
+          "action": "MODIFY",
+          "path": "tests/fixtures/generator-golden-master.json"
+        },
+        {
+          "_note": "The SHIFT RECORD row for the re-record above. Re-recording without adding a row is a deleted alarm, and this file's docstring says so.",
+          "action": "MODIFY",
+          "path": "tests/property/generatorGoldenMaster.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/domain/arcaneIdentity.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/arcaneClassifierCensus.walker.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lib/instantWorld/mundaneRealmAcceptance.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/domain/magicLedger.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/domain/magicProfile.test.js"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/packets/catalog-hygiene/MF-CH2A.md"
+        },
+        {
+          "action": "DOC",
+          "path": "supabase/functions/_shared/aiCharterBundle.js"
+        },
+        {
+          "action": "DOC",
+          "path": "supabase/functions/_shared/aiCharterBundle.meta.json"
+        },
+        {
+          "action": "DOC",
+          "path": "supabase/functions/_shared/aiGroundingBundle.js"
+        },
+        {
+          "action": "DOC",
+          "path": "supabase/functions/_shared/aiGroundingBundle.meta.json"
+        },
+        {
+          "action": "DOC",
+          "path": "supabase/functions/_shared/aiOutputSchemaBundle.js"
+        },
+        {
+          "action": "DOC",
+          "path": "supabase/functions/_shared/aiOutputSchemaBundle.meta.json"
+        },
+        {
+          "action": "DOC",
+          "path": "supabase/functions/_shared/analyticsEventsBundle.meta.json"
+        },
+        {
+          "action": "DOC",
+          "path": "supabase/functions/_shared/intentAtlasBundle.meta.json"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/data/constants.js",
+          "symbol": "export const MAGIC_LICENCE_LEVELS"
+        },
+        {
+          "path": "src/data/constants.js",
+          "symbol": "export const normaliseMagicLicence"
+        },
+        {
+          "path": "src/data/constants.js",
+          "symbol": "export const magicLicenceAtLeast"
+        },
+        {
+          "path": "src/data/constants.js",
+          "symbol": "export const getMagicLevel"
+        },
+        {
+          "path": "src/domain/arcaneInstitutionIdentity.js",
+          "symbol": "const MAGIC_LICENCE_BY_CATALOG_NAME = new Map();"
+        },
+        {
+          "path": "src/domain/arcaneInstitutionIdentity.js",
+          "symbol": "export function institutionCatalogMagicLicence"
+        },
+        {
+          "path": "src/domain/arcaneInstitutionIdentity.js",
+          "symbol": "export function conflictingMagicLicenceCatalogNames"
+        },
+        {
+          "path": "src/domain/arcaneInstitutionIdentity.js",
+          "symbol": "export function licensedCatalogInstitutionNames"
+        },
+        {
+          "path": "src/domain/arcaneInstitutionIdentity.js",
+          "symbol": "export function isArcaneInstitution"
+        },
+        {
+          "path": "src/domain/arcaneInstitutionIdentity.js",
+          "symbol": "export function institutionCatalogArcaneTag"
+        },
+        {
+          "path": "tests/lint/magicLicenceCensus.walker.test.js",
+          "symbol": "const DECLARED_LICENCES = Object.freeze({"
+        },
+        {
+          "path": "tests/lint/magicLicenceCensus.walker.test.js",
+          "symbol": "const LICENCE_OVERRIDES_TAG = Object.freeze({"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "Every Magic/Exotic row declares a magicLicense in the four tokens imported from constants.js, no row outside those shelves declares one, and the 28-row table is EXACT ON PURPOSE - a new arcane row arriving without a ruled licence reds this arm, which is the point. It carries its own non-vacuity floor, stated in the file as arm A0 (nine test arms against these eight cases): the name index reproduces the catalog field on all 311 rows and answers null for a name the catalog has never heard of, so A1 through A5 cannot be reading an empty or wrongly-keyed map. Convicted by M1 (a moved value), M2 (a deleted line) and M7 (null becoming 'none')."
+        },
+        {
+          "id": "A2",
+          "case": "The distribution is none 7, low 5, medium 4, high 12 = 28, COUNTED OFF THE CATALOG rather than off the frozen table beside it - it was written the other way first and mutant M1 proved that version vacuous, a list compared with itself. The arithmetic against R-INST-5 section-Sigma.3 closes in the arm: the dossier's NONE 11 minus its four Adventuring-shelf hand-offs is 7. Convicted by M1."
+        },
+        {
+          "id": "A3",
+          "case": "The licence is keyed by NAME and every repeated name agrees across its tiers, with zero conflicts - keying by name is only sound because they agree, so the agreement is pinned rather than assumed. It also writes down a DECLARED CONSEQUENCE of name-keying that would otherwise look like an accident: the town/Adventuring Adventurers' charter hall carries no field of its own and still resolves to none, because two Magic-shelf rows share its name - and R-INST-5 row 12 rules that row NONE too, so the inherited answer is the dossier's answer. Convicted by M10."
+        },
+        {
+          "id": "A4",
+          "case": "magicLicenceAtLeast is total and pure over the ladder: all sixteen ordered pairs, plus an absent, misspelled or non-string licence answering FALSE on both sides and never throwing. Silence is never permission. The normaliser is tolerant on shape and strict on vocabulary - case and surrounding space are absorbed, a token outside the ladder is refused - which is the same contract normTags and normName already use in this estate. Convicted by M3 (at-least becoming strictly-greater), M4 (the normaliser accepting anything) and M5 (a reordered ladder)."
+        },
+        {
+          "id": "A5",
+          "case": "THE LICENCE OUTRANKS THE TAG ON EXACTLY FOUR ROWS, IN BOTH DIRECTIONS, and a fifth comes back for a decision: Alchemist shop, Alchemist quarter and Warden's Lodge go arcane-to-mundane, and Healer (divine, 1st level) goes mundane-to-arcane, which closes a split that already existed because the world law's keyword list carries 'healer (divine' while the tag read mundane. R-BLD-5 ruled the tag authoritative; a licence is the same authored semantics at four rungs instead of one bit, so where both exist the licence answers. Convicted by M1, M3, M5, M6 and M9."
+        },
+        {
+          "id": "A6",
+          "case": "getMagicLevel and the licence ladder are ONE vocabulary, spelled once: the complete set of tokens getMagicLevel emits over priorities 0 to 100 equals MAGIC_LICENCE_LEVELS, and every emitted world level is itself a legal licence floor - which is what lets a gate ask whether an entry is licensed for THIS world with a single comparison. Convicted by M8."
+        },
+        {
+          "id": "A7",
+          "case": "THE NEGATIVE CLAIM, executed: the world law still strikes all 28 Magic/Exotic rows at magicExists:false, so this car changes no roster anywhere. It is what makes the declaration inert until MF-CH2B, and it also records the sharpest correction this lane made to the charter - the world law is a SHELF gate at its LIVE call shape, because every allowsInstitution call site spreads `category` onto the record it hands over, so the charter's 26 rows by unanchored substring is the keyword arm alone and the real figure is 28. Carries a mundane positive control so its empty list is a verdict rather than a predicate that answers false to everything. Convicted by M11, which is literally MF-CH2B's edit."
+        },
+        {
+          "id": "A8",
+          "case": "The customContent seam is untouched: institutionCatalogArcaneTag still answers from the TAG on all six probe rows, including the three the licence flips the other way. A player's own institution name is not a catalog row and a catalog licence has no standing over it, so that reader deliberately keeps the tag - and if a future edit routes it through the licence, this arm says so. Convicted by M9."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/magicLicenceCensus.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/controlBytes.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/arcaneIdentity.test.js",
+          "tests/lint/arcaneClassifierCensus.walker.test.js",
+          "tests/lib/instantWorld/mundaneRealmAcceptance.test.js",
+          "tests/domain/magicLedger.test.js",
+          "tests/domain/magicProfile.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint",
+          "tests/build",
+          "tests/docs",
+          "tests/ops",
+          "tests/domain",
+          "tests/property",
+          "tests/edgeFunctions",
+          "tests/scripts",
+          "tests/ui",
+          "tests/data",
+          "tests/security"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "npm",
+          "run",
+          "validate:packets"
+        ]
+      ],
+      "retiredSymbols": []
     }
   ]
 }
