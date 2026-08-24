@@ -26566,3 +26566,16 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   circuit is precisely the wall nobody can afford — the two laws together
   draw the grand crumbling ring that tells the whole story. Routed to
   REG-2 (as an in-wave arm if the timebox allows, else chartered REG-2b).
+
+- **§614.3 ⭐ OWNER COROLLARY — RECLAMATION IS INTERRUPTIBLE AND ONE-WAY:**
+  if the city limit SHRINKS away from debris that was not completely
+  repaired, the debris STAYS — frozen at whatever stage the breakdown
+  reached. Work follows the growth front in both directions: pressure
+  arrives, quarrying begins; pressure withdraws, quarrying stops
+  mid-bite; nothing ever un-reclaims. **The partial state is itself a dated
+  historical fact and the best kind of evidence:** a half-dismantled wreck
+  sitting beyond today's edge proves the city once reached it and fell back
+  — physical pentimento, legible without a single label. The film's
+  DEBRIS→RECLAMATION beat pair gains its third member: ABANDONMENT (the
+  quarrying stops, the growth front recedes, the half-eaten ruin remains at
+  the high-water mark).
