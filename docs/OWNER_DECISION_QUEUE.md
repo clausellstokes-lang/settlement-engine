@@ -22873,3 +22873,71 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   Holding: MP-1 (the halo) and CH-2's full car (whose CH-2B half stays at
   DRAFT). MP-1's landing waits to stack with IP-1 rather than take a gate
   alone.
+
+## §534 — THE LICENCE VIOLATION IS STOPPED AND THE FEATURE SURVIVES: 234 DELETED, **104 CC0 RESTORED BYTE-IDENTICAL**, AND ⭐ **THE MISSING-CHARGE FAILURE MODE WAS SILENT INCOMPLETENESS — 55.7% OF DRAWS WOULD HAVE RENDERED A WRONG COAT WITH NO ERROR AT ALL**; STACK-3 DISPATCHED (2026-08-24 01:06 CDT)
+
+- **§534.1 THE AMENDMENT WAS RIGHT AND THE LANE'S OWN CENSUS PROVED IT.** C1
+  held the wholesale deletion; C2 **restores the 104 CC0 charges byte-identical
+  to the slot blobs** — verified by blob hash and then re-read ON THE RESTORED
+  BYTES (104 of 104 declare `publicdomain/zero/1.0`, which is the check that
+  catches a restore that silently differs). **234 deleted, 2,814,361 B**; all
+  23 third-party textures gone; `public/map/images/textures/` now holds only
+  our own seeded `paper-grain` tiles. Payload **−255 files, −14,442,554 B,
+  −7.27%**. Tip `4171bfd9a` (pinned `holding-ip1`; the lane pinned both its
+  commits itself, so **for the first time tonight a tip did not depend on a
+  detached worktree HEAD** — the law has propagated).
+- **§534.2 ⭐⭐ THE FAILURE MODE I ORDERED MEASURED IS THE WORST KIND: SILENT.**
+  The lane transcribed the fork's own `fetchCharge`/`getCharges` and ran them
+  against a stubbed 404. **A missing charge makes `fetchCharge` return
+  `undefined` after catching and logging, and `join("")` drops it.** A
+  four-charge coat with two absent **rendered 2 of 4 groups**, and the string
+  "undefined" never appeared — **no broken image, no throw, nothing that
+  surfaces it.** And the frequency is not marginal: against the surviving 104,
+  a Monte Carlo over the fork's real selection semantics gave **22,285 of
+  40,000 draws (55.7%) requesting a missing file.** So the directory deletion
+  I first ruled would have left **more than half of all generated arms quietly
+  wrong**, with every test green. **This is why "measure what the feature does
+  when the asset is gone" was worth a round-trip.**
+- **§534.3 THE CURE, VERIFIED THREE WAYS.** Three fork patches, all recorded
+  in `docs/fmg-fork.md` §5: the pick table pruned (the three emptied
+  categories `beastHeads`, `birds`, `fishes` zeroed in both weight maps
+  **using upstream's own `uploaded:0` idiom** rather than a bespoke one), 12
+  style presets and the layer default repointed, the dropdown cut 26 → 3.
+  Proved by **exhaustive enumeration over the reachable set (231 violations →
+  0)**, **Monte Carlo (40,000 draws → 0)**, and `validate:map` exit 0 **with a
+  control proving a broken bundle exits 1**. Every diff hunk is one intended
+  line. ⚠ Baseline fact worth keeping: the fork 404'd on NOTHING before this
+  lane — all 43 pre-existing absences are `inescutcheon*` shield shapes that
+  are special-cased and never fetched.
+- **§534.4 A REAL BUG IN THE LANE'S OWN GUARD, FOUND BY RUNNING IT BESIDE ITS
+  NEIGHBOURS.** The new licence walker **raced `vendorManifestExactSet`'s
+  planted-and-deleted probe file and threw ENOENT** — *a licence guard
+  reporting a licence failure that was not one* — **and it passed in
+  isolation.** Fixed to swallow ENOENT only and proved deterministically
+  (plant → capture listing → delete → scan survives, with a control that
+  aborts if the probe never entered the listing). **LAW for every new guard:
+  run it WITH its neighbours, never only alone** — the estate's suites plant
+  and delete files under each other. STACK-3 is ordered to run both suites
+  together.
+- **§534.5 ONE FINDING AGAINST MY RULING, SURFACED NOT ACTED ON — AND I AM
+  DEFERRING IT, WITH THE REASON.** The 4 CC BY charges **do record authors**
+  (Jean-Paul Gibert; Yorick), so a credit line would make them compliable —
+  unlike the 179 NC files, **177 of which name nobody**. By the amendment's own
+  logic they are keepable. The lane followed the ruled keep-set rather than
+  widening it, which is correct conduct. **CHAIR RULING: DEFERRED, not
+  dropped.** Re-adding four charges invalidates the three-way verification
+  just completed (the pick table was pruned to exactly the 104 and proved over
+  40,000 draws), and the cost of redoing that exceeds the value of four
+  emblems. **Cleanly reversible** if the emblem feature ever matters more:
+  restore the four, re-prune, re-run the exhaustive and Monte Carlo arms, add
+  one notices row naming both authors. Recorded so no successor re-finds it as
+  an oversight.
+- **§534.6 STACK-3 DISPATCHED** — IP-1 then MP-1, one gate, both rebasing two
+  landings forward. Its extra burdens: prove the **payload shrink** trips no
+  ratchet (a smaller payload can still red a gate); **re-run the exhaustive
+  emblem check and `validate:map` at the stacked tip**, because a rebase over
+  two landings could disturb the fork bundle or a style preset; **run the
+  licence walker WITH `vendorManifestExactSet`**; and prove **MP-1's drawn
+  output is byte-identical** for every existing world, which is that car's
+  whole safety argument since its layer is dark. Expect `valid: 176 packets
+  (0 READY)`. Seats: STACK-3 · AIMEDIA-ToS; two free.

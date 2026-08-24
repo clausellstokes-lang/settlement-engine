@@ -51,6 +51,8 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 01:06 CDT 08-24: §534 — violation STOPPED: 234 deleted, 104 CC0 restored. A missing charge fails
+# SILENTLY (55.7% of draws would have been wrong) — pick table pruned, verified 3 ways. STACK-3 (IP-1+MP-1) dispatched.
 # ⭐⭐⭐ 00:56 CDT 08-24: §533 — SECOND STACK LANDED (51+52) CAS → 567030f1d. Slot moved MID-ACT (redone).
 # A CARD IS A CACHE: my golden row went stale and would have stopped a lane on a lawful landing. Banked 11 CLOSED.
 # ⭐⭐⭐ 00:42 CDT 08-24: §532 — 104 of 338 charges are CC0 → surgical deletion (234), keep + credit the 104.
