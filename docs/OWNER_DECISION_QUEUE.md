@@ -25513,3 +25513,40 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   program's build waves, ahead of the paint. New legibility instruments
   gain geometric arms: frontage-continuity ratio, block-closure count,
   freestanding-building fraction intramuros, landmark-form count.
+
+## §572 · MF-A1 IS RECOVERED — AND THE HUNT SURFACED A BUILD SHEET WITH NO PRESERVATION AT ALL (2026-08-24 ~11:40 CDT)
+
+- **§572.1 ⭐⭐ VERDICT: RECOVERED, ALL OF IT.** TE-A1-REC found every MF-A1
+  artifact in ONE transcript (`a244e7a3-…/subagents/agent-a098c59a46cc11f5e
+  .jsonl`): `MFA1-paint.mjs` (14,912 B, replay of 22 ops, zero ambiguous),
+  the probe, the sampler, and the lane's own 20 KB receipt — with per-file
+  provenance, a REPRODUCIBLE replay (re-running returns the same sha256), and
+  the §211 features traceable in code (tidemark rims, `a1slop`
+  mis-registration, `a1hand` waver, mass shadows, three-tone water, 8 defs
+  filters exactly). **Smoke-verified on three real w2 leaves: same-seed
+  sha-identical twice, alt-seed diverges — the negative control that makes
+  the identity a measurement.** Route denominators named in full (2,620
+  transcripts / 2.37 GB; 713 unreachable blobs / 214 MB; 16 scratchpads + 7
+  worktrees; Trash empty). ⚠ Honest boundary kept by the lane: §211's op
+  figures **cannot be re-measured** (the frozen b6 inputs are purged); the
+  +8/+12/+12 deltas are w2-based and in band, never to be quoted as §211's.
+  ⭐ Bonus finding: the module written against b6 runs UNCHANGED on w2 — the
+  integration target moved a generation and the paint still applies.
+- **§572.2 PRESERVED IMMEDIATELY — the §544 lesson applied within the hour:**
+  `refs/preserve/mf-a1-recovered-2026-08-24` = `5c524197a` (5 files). The
+  wave-nine paint-integration block is LIFTED; TE-REG-0's brief amended a
+  third time to USE the recovered `paint(svgText, manifestSeed)` as its final
+  pass and spend the reclaimed timebox on the geometry moves.
+- **§572.3 ⛔ THE FINDING THAT OUTRANKS THE RECOVERY: THE GENERATION
+  SPECIFICATION HAD NO PRESERVATION.** The map program's build sheet lives at
+  `map-corpus/docs/GENERATION-SPEC.md` — inside the GIT-IGNORED corpus dir —
+  as a single disk copy; **38 stale versions sat gc-purgeable in unreachable
+  blobs** (chair-measured: every blob >50 KB screened; the live file at
+  931,690 B is larger than all of them, so disk is latest). **PRESERVED:
+  `refs/preserve/map-corpus-docs-2026-08-24` = `d688cbc93` (92 files — the
+  spec, the atlas instruments, the registers, the historical-evidence
+  registry, README).** ⚠ Deliberately NOT preserved in the odb: the 8.4 GB
+  plate corpus and 99 MB previews — irreplaceable (the subscription is dead)
+  but too heavy for casual odb residency; **they ride the owner's standing
+  external-backup decision, and this row is the reminder that they currently
+  exist on ONE disk.**
