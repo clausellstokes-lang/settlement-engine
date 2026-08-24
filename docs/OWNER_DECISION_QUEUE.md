@@ -26500,3 +26500,23 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   both compress into the thirty seconds their beats deserve). The
   sub-century product scope binds the user's FORWARD simulation, never the
   generated backstory, which already spans centuries (the year-552 margins).
+
+## §612 · ⭐⭐⭐ THE PURPOSE LAW — VISIBLE HISTORY, AND OWNERSHIP THROUGH UNDERSTANDING (2026-08-24 ~21:20 CDT)
+
+- **§612.1 THE OWNER'S STATEMENT OF PURPOSE, banked superordinate to every
+  taste ruling:** "the main point of all of this is to show the players and
+  users the history VISUALLY, and then give them a sense of OWNERSHIP through
+  some sense of understanding that this is a REAL PLACE with a REAL HISTORY."
+  The register program, the Chronicle Reveal, the decline arcs, the DF
+  principle, and the priority inversion are all delivery mechanisms for this
+  one outcome. **The ownership ladder, as the design already builds it:**
+  the film makes the user a WITNESS (they watched it grow) → the map and
+  margins make them a READER (they can ask any stone why) → the edits make
+  them a PARTICIPANT (they build on top of real ground) → and THE PROMISE
+  makes them an OWNER (the same seed is the same world forever — a place
+  cannot be theirs if it can be regenerated out from under them; the
+  constitutional vow is what converts attachment into possession).
+- **§612.2 THE WORKING TEST THIS HANDS EVERY FUTURE DECISION:** above even
+  the §580 north star, which serves it — *does this deepen the user's sense
+  that this place is real, and theirs?* Recorded as the final tie-breaker of
+  the program.
