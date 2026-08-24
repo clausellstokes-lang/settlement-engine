@@ -24656,3 +24656,76 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   `residential` base 1 renders the stone-townhouse quarter **poor on 168 of
   168**, and the effect is confined to cities and metropolises (84/84), **so
   signed band B1 is not engaged.**
+
+## §556 · THE SIXTH STACK LANDED — 60 CARS — AND A LANDED CAR WAS WEARING A DRAFT PACKET (2026-08-24 08:15 CDT)
+
+- **§556.1 CAS EXECUTED — 60 CARS.** `510c51b76` → **`c3289244d`**, 6 commits,
+  70 files: **MF-CH5** (Shape F, ruled §541) and **AIP-2/R3** (provenance
+  metadata, the 2026-08-27 deadline car). Verified by me at the tip:
+  `ARCANE_INST_TAGS = ['arcane', 'planar', 'enchanting']` — **alchemy is out** —
+  `TRADE_INST_TAGS` present, and `npcProfile.js` spreads **both** lists so the
+  two homes cannot diverge.
+- **§556.2 GREEN, VERBATIM.** `TRUE_EXIT=0` · `[gate-tail] exit: 0` · free disk
+  **17,861,816 KB** · **`valid: 179 packets (0 READY)`** · typecheck 173/173 ·
+  domain-strict 1134/1134 · **11 known failures of 29,044, ceiling 11** ·
+  `STRICT DIST OK — 53 files / 467 tests`, the 458 → 467 exactly as declared.
+- **§556.3 ⭐⭐ MF-CH3 IS A LANDED CAR WEARING A DRAFT PACKET.** At the slot it
+  still read `DRAFT` with `verifiedBase 86794b5d2` — **two landings and 23
+  commits behind** — yet **18 CH-3 commits are ancestors of the slot**, its one
+  `CREATE` file exists there, and **18 of its 22 changeManifest rows had already
+  moved** (the four that had not are `TEST`-action rows, which name checks rather
+  than edits). **That stale reservation was the only thing blocking CH-5's
+  mint** — a DRAFT packet reserves its change paths, and
+  `TERMINAL_PACKET_STATUSES` is only `{LANDED, SUPERSEDED}`.
+- **§556.4 THE RESOLUTION WAS EXECUTED BOTH WAYS RATHER THAN ARGUED.** With
+  MF-CH5 at **DRAFT**: `TRUE_EXIT=1` and exactly **nine** `duplicate change path
+  across packets` errors, **every one `(MF-CH3, MF-CH5)`**. At **LANDED**:
+  `TRUE_EXIT=0`, `valid: 179 packets`. ⭐ **A terminal packet reserves nothing,
+  so minting CH-5 straight to LANDED dissolves the collision without touching
+  another car's record.** Packet count re-derived **at every boundary — 177 slot
+  → 178 pre-registration → 179 tip** — and the INDEX cell checked against all six
+  tokens by execution, **because `parseIndexPacketStatuses` picks by ARRAY ORDER
+  and DRAFT beats LANDED.**
+- **§556.5 I CHECKED AN AMBIGUOUS PRONOUN INSTEAD OF ASSUMING IT.** The lane's
+  body read *"I minted it at LANDED in all three places"* immediately after
+  discussing **MF-CH3's** stale DRAFT, while its judgment call 5 said MF-CH3 was
+  *"reported, not acted on"* — a flat contradiction, and flipping another car's
+  packet is a landing act on that car. **Verified at the tip: MF-CH3 is still
+  DRAFT with its stale `verifiedBase`; MF-CH5 and AIP-2 are LANDED at the slot
+  base; MF-CH2B is still absent from the manifest.** The pronoun meant CH-5's own
+  packet throughout and judgment call 5 was right. *An ambiguous antecedent in a
+  landing report is worth thirty seconds at the data.*
+- **§556.6 THE STACK IS THE EXACT SUM, AND THAT WAS PROVED.** The two cars' file
+  sets have **zero intersection**; **all 49 of R3's files are byte-identical to
+  `5efef38fa`** and **all 17 of CH-5's to `7f40d4454`**. CH-5's three commits were
+  carried **verbatim** by checking out its tip rather than rebasing, preserving
+  three of five commit identities.
+- **§556.7 THE CENSUS: A PREDICTION TESTED, NOT A TARGET REACHED.** Tuple walks
+  to **`2525/366/2159/21026/5848`**. **CH-5 = `0/0/0/0/0`** (slot copies of all
+  four test files it touches leave the tuple untouched; source diff agrees — zero
+  added or removed title lines, only two renames). **R3 = `+0/+0/+0/+9/+1`**,
+  with a **no-op guard**: the same revert with the tuple left at 21026 REDS
+  (`expected 21017 to be 21026`), so the green is not the absence of a check.
+  ⭐ **And the three figures NEITHER car moves were proved live by plants** —
+  `files` → 2526, `parked` → 367, `credited` → 2160 — each redding its own arm
+  with the walked value.
+- **§556.8 BOTH DIGESTS RE-EXECUTED AT THE STACKED TIP, ON LIVE INSTRUMENTS.**
+  CH-5: **187 changed / 0 added / 0 removed** of 525, key order identical, all
+  525 regenerated at the tip with **0 drift**. R3: 46 files, **+71,229 B on
+  52,755,638 = 0.1350%**, exact on two independent instruments. **Both proved
+  live by deliberate mutation** — one golden hex character, one register marker
+  string — *"2 failed of 32, each redding its own arm"*, both restored cmp-exact.
+- **§556.9 RULING — AIP-2's OFF-BY-ONE STAYS, RECORDED NOT EDITED.** AIP-2 §7
+  declares a per-file minimum *"between +1,489 and +1,606"*; execution reads
+  **1,488 .. 1,606**, the floor being
+  `public/media/journey-legs/bg/leg-5-town-to-city.mp4`. *Decided:* leave it.
+  *Why:* it is **machine-inert prose in another car's already-landed packet**,
+  and editing it would break **the exact-sum property that is this landing's
+  strongest evidence**. The true floor is recorded here instead. *Reversal:* a
+  one-word edit whenever that packet is next touched for a real reason.
+- **§556.10 OWED, AND NOW NAMED.** **MF-CH3 needs a three-place flip to LANDED**
+  — a landing act on TE-CH-3's car, requiring its arms certified and its base
+  re-stamped, and ⚠ **all nine paths it contests have since been moved again by
+  CH-5, so its own recorded figures are stale.** Queued, not silently fixed.
+  MF-CH2B remains a deliberate orphan (§555 line): DRAFT, absent from the
+  manifest, zero INDEX rows, byte-identical to the slot.
