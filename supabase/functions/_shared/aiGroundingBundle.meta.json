@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-24T10:07:56.461Z",
+  "generatedAt": "2026-08-24T12:23:17.860Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "7ac1e32e4f4b4aee",
+  "sourceHash": "40141c7bb3a94f13",
   "inputs": [
     "src/data/constants.js",
     "src/data/entityTags.js",
@@ -12,6 +12,7 @@
     "src/domain/activeConditions.js",
     "src/domain/aiGrounding.js",
     "src/domain/arcaneIdentity.js",
+    "src/domain/arcaneInstitutionVocabulary.js",
     "src/domain/canonStatus.js",
     "src/domain/canonicalAccessors.js",
     "src/domain/capacityModel.js",

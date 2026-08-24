@@ -62,6 +62,7 @@ describe('institutionsForPower — tag-driven footprint', () => {
     const arcane = institutionsForPower({ faction: 'Arcane Orders', category: 'magic' }, arcaneWorld);
     expect(arcane).toContain('The Silver Circle');
     expect(arcane).toContain('The Sootbottle Works');
+    // anchored: the two toContain assertions directly above run against THIS SAME `arcane` array, so it cannot have gone empty or drifted out from under this negative.
     expect(arcane).not.toContain('A quiet orchard');
   });
 

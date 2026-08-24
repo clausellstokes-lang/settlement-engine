@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-24T10:07:56.563Z",
+  "generatedAt": "2026-08-24T12:23:17.954Z",
   "entry": "src/domain/aiOutputSchema.js",
-  "sourceHash": "6e2f1253dc1d18c6",
+  "sourceHash": "f4d2986e7ffee6cf",
   "inputs": [
     "node_modules/immer/dist/immer.mjs",
     "node_modules/seedrandom/index.js",
@@ -26,6 +26,7 @@
     "src/domain/activeConditions.js",
     "src/domain/aiOutputSchema.js",
     "src/domain/arcaneIdentity.js",
+    "src/domain/arcaneInstitutionVocabulary.js",
     "src/domain/autonomy/accelerationOps.js",
     "src/domain/autonomy/signalRegistry.js",
     "src/domain/autonomy/stopConditions.js",
