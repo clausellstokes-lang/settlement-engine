@@ -10,7 +10,7 @@ this one.**
 
 ## ⛔⛔⛔ PICKUP CARD — REWRITTEN WHOLE AT EVERY LEDGER COMMIT (owner §448: a successor picks up HERE in 60 seconds)
 
-**AS OF 2026-08-24 06:16 CDT · ledger §556 · build `claude/composite-r4` = `c3289244d` (**60 cars**) · packets **179** · census `2,525/366/2,159/21,026/5,848` · ratchet **11 of 29,044** · ⛔ LANE CAP = FOUR (§508) · ⛔ every dispatch `model: "opus"` (§484) · law = `$SP/LANE-LAW.md`, slot facts = `$SP/SLOT-FACTS.md`**
+**AS OF 2026-08-24 06:16 CDT · ledger §557 · build `claude/composite-r4` = `c3289244d` (**60 cars**) · packets **179** · census `2,525/366/2,159/21,026/5,848` · ratchet **11 of 29,044** · ⛔ LANE CAP = FOUR (§508) · ⛔ every dispatch `model: "opus"` (§484) · law = `$SP/LANE-LAW.md`, slot facts = `$SP/SLOT-FACTS.md`**
 
 **⛔ THE OWNER'S #1 ITEM — nothing has deployed since 2026-07-28.** Prod at migration **121**, repo head **199**, 78 pending. ⭐ **MEASURED (§540.7–.8): the push itself deletes nothing.** 12 of the 13 destructive migrations act only inside function bodies; **198, the one labelled DESTRUCTIVE, deletes nothing at apply time** and its prune is double-gated, both fail closed. ⛔ **188 is the one that acts at push time** — it deletes users' custom supply-chain content, mitigated by a quarantine receipt written to `application_command_journal` **before** deletion. **`docs/DEPLOY.md` covers 198 and never mentions 188 — that amendment is owed and unowned.**
 
@@ -21,9 +21,16 @@ this one.**
 4. ⛔ Ref-pin every detached worktree HEAD that is NOT an ancestor of the tip **before** any cleanup. Four were pinned this pass; two lane tips were one command from unrecoverable on 08-24.
 5. ⛔ Lanes build their OWN `node_modules` with `npm ci` — **never symlink the shared one** (434 pkgs vs the slot's 468, five weeks stale; a symlinked lane yields ZERO collected tests and the SCOPE SENTINEL rightly refuses). `npm ci` installs `.husky/_`, so lane commits RUN pre-commit and `eslint --fix` **re-stages**.
 
-### SEATS — ALL FREE
-No holding awaits landing. Next: **CH-4 correction pass (read-only) → CH-4 build → CH-6 → CH-7 → the DW build waves (41 cars, gate discharged at 135) → the AD program (17)**.
-⚠ **MF-CH3 owes a three-place flip to LANDED** — a landing act on TE-CH-3's car; its nine contested paths have since moved again, so its recorded figures are stale.
+### SEATS — THREE FILLED, DISJOINT
+| seat | lane | files |
+|---|---|---|
+| BUILD | **TE-CH-4** | measure-then-build; `districtProfile.js` + one lint file + one baseline row. First job: **the 333 deletions nobody counted.** Route (iii) ruled. |
+| BUILD | **TE-CH-7** | `npcProfile.js` — the bare `den` twins at :333/:374 and the seventh arcane spelling at :334/:375 |
+| READ-ONLY | **TE-DW-PREP** | reconciles the landed charter (82 fixtures) against §553's ruled **135**; marks every catalog-derived figure PROVISIONAL until CH-6 |
+| LANDING | *free* | no holding awaits |
+
+⛔ **CH-6 is NOT dispatched on purpose** — §555.9 orders CH-4 first, because CH-6 changes what worlds contain and would decay CH-4's per-cell measurement.
+⚠ **MF-CH3 owes a three-place flip to LANDED** (a landing act on TE-CH-3's car; its nine contested paths have since moved again).
 
 ### THE QUEUE AFTER THESE FOUR
 **CH-6** (⛔ `ARCANE_INST_KW` carries a **live SHIPPED deity-doctrine violation**: a magic-free world can hold no divine healer or druid circle — §541.8) → CH-4 build → the **DW build waves** (41 cars; §482 puts the whole arc before the review) → WEB-8b → WEB-12 → the wiring wave → WEB-9a/9b/10/11 → HK-4/5/6 → housekeeping → CT-4/CT-5/WF-8 → the **AD program** (charter at `refs/preserve/ad-charter-2026-08-24`) → one trailing OSR mint → parity train → `/code-review ultra` (OWNER) → endgame.

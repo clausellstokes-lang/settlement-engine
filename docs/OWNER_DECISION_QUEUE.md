@@ -24729,3 +24729,64 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   CH-5, so its own recorded figures are stale.** Queued, not silently fixed.
   MF-CH2B remains a deliberate orphan (§555 line): DRAFT, absent from the
   manifest, zero INDEX rows, byte-identical to the slot.
+
+## §557 · THREE SEATS FILLED ON DISJOINT FILES; THE OWNER TOOK BACK MY OVER-GATING (2026-08-24 08:20 CDT)
+
+- **§557.1 THE OWNER CORRECTED MY CLASSIFICATION, AND THEY WERE RIGHT.** Told
+  *"I gave you all authorizations"*, I re-examined the nine items I had been
+  returning: **five were mine and I was handing them back out of caution.**
+  Taken and decided: **CH-4's declared shift** (I author it, not the owner);
+  **the dossier map legend** (accepted, recorded in the shift record); **the DM
+  annotations** (approved *with a fix* — see §557.2); **the estate ownership
+  type** (nothing shipped, reversible pre-launch); and **soak certification** —
+  where the right answer is to **measure** the two guarantees, not certify them
+  unmeasured. ⭐ **The lesson is mine: a delegation is not honoured by returning
+  the hard calls with a respectful label on them.**
+- **§557.2 ⭐ CHECKING THE FIRST DECISION FOUND A CURE INSTEAD OF A
+  DISCLOSURE.** `src/domain/townMap/mapEdits.js` defines **BOTH**
+  `MapEditPin {anchor, dx, dy}` **and** `MapAnnotation {x, y, label, audience}`
+  — **the anchored form already exists ten lines above the unanchored one.** So
+  a DM's markers need not drift when districts move; they can take the shape
+  their sibling already uses. **A disclosure I was going to hand the owner became
+  a defect I can fix.** Costed by CH-4, built later.
+- **§557.3 THE FOUR THAT ARE GENUINELY NOT MINE — AND NONE ARE PERMISSIONS.**
+  The **deploy** needs the owner's credentials and machine; **`/code-review
+  ultra`** is a billed keystroke I cannot trigger; the **tuning and legal
+  signatures** were carved out BY NATURE on 08-10 and *a signature that can be
+  delegated is not a signature*; the **Cohort A reverse-image search** needs a
+  human with an image-search tool. **Capability and signature, not authority.**
+- **§557.4 SEATS: ALL FOUR WERE FREE; THREE FILLED ON DISJOINT FILE SETS.**
+  **TE-CH-4** (measure-then-build: `districtProfile.js` + one `tests/lint/` file
+  + one baseline row), **TE-CH-7** (`npcProfile.js`), **TE-DW-PREP**
+  (read-only). Only two contend the serial gate. **CH-6 deliberately NOT
+  dispatched — §555.9 orders CH-4 before it**, because CH-6 changes *what worlds
+  contain* and would decay CH-4's per-cell measurement.
+- **§557.5 CH-4 CARRIES ITS OWN DISTRUST.** The brief and the decision sheet go
+  to the lane as **inputs, not authorities**. Its first job is the arithmetic
+  nobody executed: **up to 333 district cards may LOSE their dominant-faction row
+  while 44 gain one** — *a car that removes 333 rows while advertising 168
+  additions is not reviewable.* Route **(iii)** is ruled. And it carries the
+  instrument warning that decides whether any of its proof means anything:
+  **`districtProfile` is absent from the generation pipeline, so the habitual
+  same-seed digest CANNOT move — prove against the derived artefact, never a
+  settlement-record hash.**
+- **§557.6 CH-7's TARGETS RE-VERIFIED AT THE NEW TIP.** The two bare `den`
+  regexes are byte-identical twins at **`:333` and `:374`**, and the **seventh
+  arcane spelling** sits directly beneath each at **`:334` and `:375`**, also
+  duplicated. The lane is warned that **anchoring can DELETE a category** — when
+  the sibling defect was anchored naively it removed the only `criminal` district
+  in the product, because the sole match was itself the false positive.
+- **§557.7 DW-PREP EXISTS BECAUSE THE CHARTER ALREADY DISAGREES WITH A RULING
+  MADE AFTER IT.** The landed charter carries **82** fixture kinds; §553 ruled
+  **135**. The arc cannot BUILD until CH-6 lands, so the lane is told to mark
+  **every catalog-derived figure PROVISIONAL** rather than bake in a number that
+  will decay — and to resize B11, which §545 logged at 20 collisions and the
+  fixture gate found to be **147 tokens belonging to other vocabularies**.
+- **§557.8 HOUSEKEEPING.** Four lane worktrees pruned after the ref-pin check;
+  **R3's tip `5efef38fa` was NOT an ancestor** — it was cherry-picked at the
+  stack, so its original commit went unreachable the moment its holding pin was
+  dropped — and was pinned before removal. **Disk 17 → 20 GB.** Ledger and card
+  both current at §556 before this row; card seat table refreshed here.
+  ⚠ **The §388 heartbeat's own queue section is stale** — it still lists CH-5,
+  R3 and the DW-0 ratification as pending, all three landed. Acting on measured
+  state, not on the reminder's list.
