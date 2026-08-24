@@ -27,6 +27,7 @@ import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveCausalState } from './causalState.js';
 import { deriveAllActiveConditions } from './activeConditions.js';
 import { deriveAllThreatProfiles } from './threatProfile.js';
+import { factionArchetype } from './factionArchetypes.js';
 
 // ── Catalog ──────────────────────────────────────────────────────────────
 
@@ -110,17 +111,74 @@ const CATEGORY_PATTERNS = Object.freeze([
   { pattern: /noble|patrician|aristo|estate|manor|highborn/i,      category: 'noble' },
   { pattern: /civic|council|court|hall|government|chancery/i,      category: 'civic' },
   { pattern: /arcane|magic|tower|college|enclave|conclave/i,       category: 'arcane' },
-  { pattern: /slum|thieves|criminal|seedy|den|underground/i,       category: 'criminal' },
+  // `den` is ANCHORED (\bdens?\b). Unanchored it matched the SUBSTRING in
+  // "Dense timber tenements" — the Common Residential quarter's own description —
+  // and classified every common residential district in every city as `criminal`
+  // (measured: 168 of 168 city/metropolis settlements). A quarter is a criminal
+  // den, not a dense one.
+  { pattern: /slum|thieves|criminal|seedy|\bdens?\b|underground/i, category: 'criminal' },
   { pattern: /foreign|expatriate|enclave|immigrant|exotic/i,       category: 'foreign' },
   { pattern: /industrial|tannery|smelter|warehouse|dock|port/i,    category: 'industrial' },
   { pattern: /residential|commoner|tenement|homestead|district/i,  category: 'residential' },
 ]);
 
 /**
+ * DECLARED quarter categories — the registry (Shape D).
+ *
+ * WHY A REGISTRY AT ALL. `CATEGORY_PATTERNS` is a first-match-wins regex sweep
+ * over a quarter's name + desc + landmarks. The generator's fourteen quarters are
+ * fixed, authored strings, so the sweep's misfires are not hypothetical — every
+ * one below was MEASURED over a 504-settlement corpus (6 tiers x 84 seeds):
+ *
+ *   Noxious Trades Quarter  -> merchant   (164)  "Trades" hits /trade/
+ *   Shadows District        -> merchant   (168)  "hidden markets" hits /market/
+ *   Wealthy Residential     -> merchant   (168)  landmark "Merchant Estates"
+ *   Common Residential      -> criminal   (168)  "Dense" hit the unanchored /den/
+ *   Mages' Quarter          -> craft      ( 45)  a `guild` landmark beats /arcane/
+ *
+ * The criminal quarter and the common residential quarter were EXACTLY SWAPPED.
+ *
+ * The registry declares what the generator already knows. It is read as
+ * `declared ?? inferred`: the regex sweep remains the fallback for authored,
+ * imported and legacy quarters whose names are not in this table, so no saved
+ * settlement loses its classification. The generator's fourteen name literals
+ * have been byte-identical since 2026-04-13, which is exactly why a declared
+ * registry — rather than a rewrite of the generator — covers legacy saves too.
+ *
+ * TOTALITY is enforced both ways by the registry walker in
+ * tests/domain/districtProfile.test.js, which parses the generator's own
+ * `quarters.push({ name: ... })` literals: a new quarter with no row here, or a
+ * row here naming no quarter, reds.
+ *
+ * @type {Readonly<Record<string, string>>}
+ */
+export const QUARTER_CATEGORY = Object.freeze({
+  'Market Quarter':         'merchant',
+  'Religious Quarter':      'religious',
+  'Roadside Shrine':        'religious',
+  'Noxious Trades Quarter': 'industrial',
+  'Waterfront District':    'industrial',
+  'Alehouse & Common':      'residential',
+  'Fishing Landing':        'industrial',
+  "Woodcutters' Ground":    'industrial',
+  'Artisan Quarter':        'craft',
+  'Government Quarter':     'civic',
+  "Mages' Quarter":         'arcane',
+  'Shadows District':       'criminal',
+  // NOT `residential`: the residential wealth baseline is 1, which renders the
+  // stone-townhouse, private-garden quarter POOR on 168 of 168 city and
+  // metropolis settlements. `noble` is what the quarter describes.
+  'Wealthy Residential':    'noble',
+  'Common Residential':     'residential',
+});
+
+/**
  * @param {Quarter} quarter
  * @returns {string}
  */
 function inferCategory(quarter) {
+  const declared = QUARTER_CATEGORY[String(quarter.name || '')];
+  if (declared) return declared;
   const blob = `${quarter.name || ''} ${quarter.desc || ''} ${(quarter.landmarks || []).join(' ')}`;
   for (const { pattern, category } of CATEGORY_PATTERNS) {
     if (pattern.test(blob)) return category;
@@ -128,34 +186,91 @@ function inferCategory(quarter) {
   return 'other';
 }
 
-// Category → likely dominant-faction archetype.
+/**
+ * Category → dominant-faction archetypes, in PREFERENCE order, expressed in the
+ * CANONICAL faction vocabulary (domain/factionArchetypes), not factionProfile's
+ * folded one.
+ *
+ * WHY CANONICAL. `deriveFactionProfile` reports its archetype through
+ * factionProfile's local `CANONICAL_TO_PROFILE`, which folds NOBLE and CIVIC into
+ * `government`. Matching on that folded value means a district can NEVER see a
+ * noble faction — measured over the 504-settlement corpus, canonical `government`
+ * (411) + `noble` (359) = 770 = the folded `government` total exactly. A noble
+ * quarter asking for its dominant house was being handed the city council.
+ *
+ * WHY PREFERENCE LISTS. A single archetype per category silently DELETES the
+ * card's dominant-faction row whenever that archetype does not occur. Two of the
+ * shipped single values name archetypes the engine never produces at all: over
+ * 3,038 faction instances the canonical vocabulary yields ZERO `craft` and ZERO
+ * `civic`. `industrial -> 'craft'` and `craft -> 'craft'` were therefore
+ * unconditional nulls, and declaring the Noxious Trades quarter `industrial`
+ * would have removed its faction row from 164 cards while the change advertised
+ * additions. Each list ends in an archetype that actually occurs, so a row is
+ * dropped only when the settlement genuinely holds no plausible claimant.
+ *
+ * `residential` and `other` are deliberately EMPTY: no faction dominates a
+ * common residential ward, and inventing one is the fabrication this module's
+ * contributors ledger exists to prevent.
+ *
+ * @type {Readonly<Record<string, readonly string[]>>}
+ */
 const CATEGORY_TO_ARCHETYPE = Object.freeze({
-  religious:    'religious',
-  merchant:     'merchant',
-  military:     'military',
-  craft:        'craft',
-  civic:        'government',
-  arcane:       'arcane',
-  criminal:     'criminal',
-  noble:        'government',
-  foreign:      'merchant',
-  industrial:   'craft',
-  residential:  null,
-  other:        null,
+  religious:    Object.freeze(['religious']),
+  merchant:     Object.freeze(['merchant']),
+  military:     Object.freeze(['military']),
+  craft:        Object.freeze(['craft', 'merchant']),
+  civic:        Object.freeze(['government', 'civic', 'noble']),
+  arcane:       Object.freeze(['arcane']),
+  criminal:     Object.freeze(['criminal']),
+  noble:        Object.freeze(['noble', 'government']),
+  foreign:      Object.freeze(['merchant']),
+  industrial:   Object.freeze(['craft', 'merchant']),
+  residential:  Object.freeze([]),
+  other:        Object.freeze([]),
 });
+
+/**
+ * Canonical archetype for every faction the settlement carries, keyed by the id
+ * its FactionProfile will report. `deriveFactionProfile` derives that id from the
+ * same name (`faction.faction || faction.name`) through the same snakeCase, so
+ * the join is exact — measured 3,038 of 3,038 profiles joined over the corpus.
+ *
+ * @param {DistrictSettlement} settlement
+ * @returns {Map<string, string>}
+ */
+function canonicalArchetypesById(settlement) {
+  const s = /** @type {any} */ (settlement);
+  const factions = s?.powerStructure?.factions || s?.power?.factions || s?.factions || [];
+  /** @type {Map<string, string>} */
+  const out = new Map();
+  if (!Array.isArray(factions)) return out;
+  for (const f of factions) {
+    const name = typeof f === 'string' ? f : (f?.faction || f?.name);
+    if (!name) continue;
+    out.set(`faction.${snakeCase(name)}`, factionArchetype(/** @type {any} */ (f)));
+  }
+  return out;
+}
 
 /**
  * @param {string} category
  * @param {FactionProfile[]} profiles
+ * @param {Map<string, string>} canonicalById
  * @returns {FactionProfile | null}
  */
-function inferDominantFaction(category, profiles) {
-  const archetype = /** @type {Record<string, string | null>} */ (CATEGORY_TO_ARCHETYPE)[category];
-  if (!archetype) return null;
-  const matching = profiles.filter(p => p.archetype === archetype);
-  if (matching.length === 0) return null;
-  // Pick the highest-power matching faction.
-  return matching.sort((a, b) => (b.power || 0) - (a.power || 0))[0];
+function inferDominantFaction(category, profiles, canonicalById) {
+  const preferences = CATEGORY_TO_ARCHETYPE[category] || [];
+  for (const archetype of preferences) {
+    // The canonical archetype when the faction joined, else the profile's own
+    // folded value — a faction the join cannot reach keeps today's behaviour
+    // rather than silently losing its row.
+    const matching = profiles.filter(
+      p => (canonicalById.get(p.id) ?? p.archetype) === archetype,
+    );
+    // Pick the highest-power matching faction.
+    if (matching.length > 0) return matching.slice().sort((a, b) => (b.power || 0) - (a.power || 0))[0];
+  }
+  return null;
 }
 
 // Category → base wealth band (settlement prosperity nudges from there).
@@ -414,7 +529,8 @@ export function deriveDistrictProfile(quarter, settlement) {
   const category = inferCategory(quarter);
   contributors.push({ source: 'category_inference', effect: 'matched', reason: `Quarter "${quarter.name}" classified as ${category}.` });
 
-  const dominantFaction = inferDominantFaction(category, profiles);
+  const canonicalById = canonicalArchetypesById(settlement);
+  const dominantFaction = inferDominantFaction(category, profiles, canonicalById);
   const wealth = inferWealth(category, settlement, contributors);
   const safety = inferSafety(category, settlement, causal, threats, contributors);
   const institutions = inferInstitutions(quarter, settlement);
@@ -431,7 +547,18 @@ export function deriveDistrictProfile(quarter, settlement) {
     category,
     wealth,
     safety,
-    dominantFaction: dominantFaction ? { id: dominantFaction.id, name: dominantFaction.name, archetype: dominantFaction.archetype } : null,
+    // The archetype REPORTED is the one the district was matched ON. Reporting
+    // factionProfile's folded value here would have the card select a noble
+    // house for a noble quarter and then label it `government` — which
+    // explanation.js prints verbatim as "<house> (government) dominates this
+    // district."
+    dominantFaction: dominantFaction
+      ? {
+        id: dominantFaction.id,
+        name: dominantFaction.name,
+        archetype: canonicalById.get(dominantFaction.id) ?? dominantFaction.archetype,
+      }
+      : null,
     institutions,
     services,
     sensoryIdentity,
