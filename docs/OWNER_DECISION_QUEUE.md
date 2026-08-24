@@ -26520,3 +26520,21 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   the §580 north star, which serves it — *does this deepen the user's sense
   that this place is real, and theirs?* Recorded as the final tie-breaker of
   the program.
+
+## §613 · THE FILM BUILDS LAST — AND EVERY WAVE CARRIES ITS TIMELINE DATA SO IT CAN (2026-08-24 ~21:35 CDT)
+
+- **§613.1 ⭐ OWNER SEQUENCING RULING:** the Chronicle Reveal (§606–§609,
+  §611.2's film beats) builds AFTER everything map-related is complete, "so
+  that it can incorporate all of that." The film is the register arc's FINAL
+  build — it renders the finished elements through time (the approved
+  rampart rising, the fused rows spreading, the drawn forest, the decline
+  shells) and must never be built against a dress that later waves would
+  re-cut. The film taste specimen moves to the same position.
+- **§613.2 CHAIR NUANCE (vetoable), so "last" stays cheap:** the film's
+  RENDERING builds last, but its DATA is carried forward as each wave lands —
+  every register/fabric wave stamps its elements' TIMELINE ANNOTATIONS
+  (appearance epoch + accretion order + beat events) as a standing carry-note
+  in its changeManifest, the §16-style seam discipline. The film then
+  ASSEMBLES at the end from data every wave already emitted, rather than
+  re-excavating the whole fabric — "after everything" without re-opening
+  anything.
