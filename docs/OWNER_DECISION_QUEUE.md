@@ -21746,3 +21746,76 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   a cure that could not work at any value and a test file that parked its own
   nineteen titles. The lever is gates per car, and it has just been pulled
   from one-to-one back to three-to-one.
+
+## §517 — THE B8 VERDICT: THE LOOP IS BUILDABLE, ITS HOME ALREADY EXISTS AND LIGHTS WITH THE ESTATE WAVE — BUT **`noble` IS UNREACHABLE** (A THIRD SIGHTING OF THE SUBSTRING DEFECT), **HYSTERESIS DOES NOT BOUND THE RUNAWAY — GEOMETRY DOES**, AND **§500.5's SOAK ARM AS CHARTERED WOULD CERTIFY THE RUNAWAY AS CONVERGED** (2026-08-23 21:52 CDT)
+
+- **§517.1 THE VERDICT.** Expressible with a named small addition — but not the
+  one the chair expected. The demography layer ALREADY has the moving,
+  persisted, hysteretic per-class composition the loop needs; the spatial
+  layer already has real parcels AND a geometric boundedness theorem. What is
+  genuinely new is three things: per-district-INSTANCE resolution of an
+  existing per-class stock, a persisted ownership ledger the view-time
+  cartography reads but never writes, and **a displacement pool**.
+- **§517.2 ⛔ THE BLOCKER — `noble` CANNOT BE CLASSIFIED, AND IT IS THE
+  SUBSTRING DEFECT'S THIRD HOME.** Executed probes replaying
+  `districtProfile.inferCategory` over the generator's own quarter literals:
+  **0 of 10 quarters can ever classify `noble`**; the histogram is
+  `{merchant:5, criminal:1, civic:1, religious:1, arcane:1, industrial:1}`.
+  The two districts the owner's loop is ABOUT are the two most wrongly typed —
+  **Wealthy Residential → `merchant`** (landmark "Merchant Estates"; `noble`
+  matches but is tested later) and **Common Residential → `criminal`** because
+  **"Resi(DEN)tial" contains `den`**. That is §501.2's `Priest (resident)`
+  defect in a SECOND, unexamined inference table — CH-1 anchored
+  `FACET_INFERENCE`, and nobody looked at `inferCategory`. **A loop keyed on
+  "the neighbourhood gains nobles" cannot fire once until this is fixed.**
+  RULED: it joins the catalog-hygiene train as **CH-4**, and its declared
+  shift RIDES §496.4 R7's existing one rather than minting a second.
+- **§517.3 THE HOME IS BETTER THAN HOPED.**
+  `src/domain/worldPulse/urbanFabricKernel.js` (884 lines) is a persisted,
+  pulse-advanced, rng-free, interval-invariant per-district-CLASS prominence
+  ledger with a 260-week stock half-life, `TURN_MARGIN 1.15` hysteresis, a
+  dated `fabricNews('turn')` emission and a population → `residential`
+  deposit. It is dark behind `ONE_REGEN` — **the same boundary §496.4 R7 puts
+  the estate wave before. They light together**, which means the loop costs no
+  new signal at the demography layer.
+- **§517.4 ⭐ THE RUNAWAY IS REAL AND THE DAMPING IS NOT WHAT I TOLD THE
+  OWNER.** The naive loop reaches ONE owner holding the whole core by **year
+  50**, with residential stock collapsing 3.0 → 0.376 and never recovering.
+  **Hysteresis alone does NOT bound it (still 1.000) — it is a chatter
+  filter.** The **capacity cap does (0.500)**, and it is a GEOMETRIC THEOREM
+  the cartography already owns, not a tuning number: running acquisition at
+  **10× partition still lands at exactly 0.500**. **Consequence for the signed
+  sitting: B8's balance is a PACING dial, not a SAFETY dial** — the chair told
+  the owner the counter-forces were the damping, and geometry is. The signed
+  answer is unaffected; its justification is corrected.
+- **§517.5 ⛔⛔ §500.5's SOAK ARM, AS CHARTERED, IS VACUOUS — AMENDED HERE.**
+  Both the runaway and the bounded case **saturate early and then go perfectly
+  flat**, so a per-epoch DELTA arm (which is what §500.5 chartered) would
+  CERTIFY THE RUNAWAY AS CONVERGED. **The discriminating arms are the
+  SATURATION YEAR and the RESIDENTIAL FLOOR** — 0.376 versus 2.066, a 5.5×
+  separation, against only 2× on ownership share. DW-S's ownership arm is
+  re-specified accordingly. This is the second time a proposed control could
+  not fail (§503.2 was the first); the pattern is now explicit in every brief.
+- **§517.6 ONE OWNER-GATED QUESTION, NOT DECIDED.** The drafted EST-4
+  explicitly refuses a household key. The lane recommends expressing the loop
+  through **FACTION-SCOPED ownership** (`ARCHETYPE_TO_DISTRICT` already maps a
+  noble faction to `noble`), which keeps the refusal intact. **That is a
+  schema/persistence call — owner-gated by nature (§3 class) — and it is put
+  to the owner rather than ruled.**
+- **§517.7 TWO INSTRUMENT HAZARDS BANKED BY THE CHAIR** (the lane deferred
+  writing memory, correctly, under the concurrent-writer warning).
+  **(a) THE MAIN CHECKOUT IS A DIFFERENT TREE:** it sits on the ledger branch
+  and whole `src/domain` subsystems are absent from disk while present at the
+  slot — measured at `5055990a`: townCartography **0/13**, undercity **0/6**,
+  interior **0/7**, worldPulse **126/396**, spatial **26/31**, with 4,722
+  dirty paths. **A disk `grep -r src/` is a FALSE-ABSENT generator**; the lane
+  caught it only because the ledger cited a file the disk denied. Law: `git
+  grep <ref> -- src` always, never a bare disk grep, and never conclude ABSENT
+  from one. **(b) `grep -c` GOES SILENT ON BINARY:** BSD `date -u +'<long
+  prose>'` truncates at exactly 1024 bytes and emits uninitialised bytes plus
+  `0x01`, the file becomes invalid UTF-8, and `grep -c` then reports an EMPTY
+  count — **so a C0 scan LOOKS like it passed.** Four blocks of the lane's own
+  receipt were corrupted this way. Law: scan with `grep -ac` and additionally
+  decode as UTF-8. **The chair re-scanned all four ledger documents with `-ac`
+  and decoded them: 0 control bytes, all valid UTF-8 — today's record is
+  intact.**
