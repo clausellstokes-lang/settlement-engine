@@ -59,7 +59,21 @@ CH-4 → **CH-6** (⛔ a **live shipped deity-doctrine violation**: a magic-free
 
 ⛔ **EDGE-BUNDLE BILL — the count is PER-FILE.** `npcProfile.js` sits in three closures, `districtProfile.js` in one (`aiGroundingBundle`, 67 inputs). **Read `supabase/functions/_shared/<bundle>.meta.json` before budgeting.** The bill is **invisible to targeted suite runs** — only the full gate sees it. Cure: `npm run build:edge-shared`, commit all six files as a set.
 
-### ✅ COLLECTED (§564, 2026-08-24 ~09:25) — THE CH-4 GATE WAS RED: 11 ARMS OUTSIDE THE FROZEN CENSUS
+### ⭐⭐⭐ STATE AS OF §585 (2026-08-24 ~14:20) — FULL JUDGMENT DELEGATED; RUNNING TO THE SOAK
+**Slot `233c35a69` (62 cars — MF-CH7 §570 and MF-CH4 §582 both LANDED this sitting) · census
+`2525/366/2159/21049/5852` · packets 181 · ratchet 11 of 29,067.** THE REGISTER PROGRAM is the
+active build priority: `docs/DESIGN_REGISTER_PROGRAM.md` (§581 + A1 §584; skeptic panel in
+flight, findings fold as A2). Owner laws §570–§584 govern every visual call — §580 is the
+north-star tie-breaker; §583 signs 10–20s first-paint. **§585: ALL judgments are the chair's
+(incl. register taste gates, vetoably); by-nature carve-outs stand (push/deploy/cutover/tuning
+signature/legal/cull/ultra). Mandate: run to the terminal soak, then hand the owner the pen.**
+LANES (4): TE-REG0-R2 (everything-on specimen) · TE-CH-6 (deity-doctrine cure) · TE-REG-G1
+(relief substrate) · TE-DEPLOYDOC-188. Receipts in `31585ce2-…/scratchpad/receipts/`; per
+§582.2 lanes poll BOTH mutex dirs. Preserves this sitting: `mf-a1-recovered-2026-08-24` ·
+`map-corpus-docs-2026-08-24` · `research-dossiers-2026-08-24-r2` · `holding-ch7/ch4`.
+⛔ Standing exposure: the 8.4 GB plate corpus exists on ONE disk (owner backup decision).
+
+### (historical) ✅ COLLECTED (§564, 2026-08-24 ~09:25) — THE CH-4 GATE WAS RED: 11 ARMS OUTSIDE THE FROZEN CENSUS
 The verdict was collected and the log preserved at the `31585ce2-…` session scratchpad
 (`collected/gate-tail.10770.log`). No freshness/reproducibility arms — the regen took; the
 11 arms are the car's own bills, classified at **§564.2** (census stamp +16 · arcane census

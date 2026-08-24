@@ -25843,3 +25843,65 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   TE-DEPLOYDOC-188 (the parked owner-doc car, §565.2's charter, builds on
   slot `233c35a69` — dispatched, Opus). Gates serialize; per §582.2 every
   lane polls BOTH mutex dirs.
+
+## §581 · (BACKFILLED AT §586 — the authoring row the commit carried and the file lacked) THE REGISTER ARCHITECTURE IS CHAIR-AUTHORED
+
+- **§581.1** Under the owner's order — verbatim: *"okay, then with this
+  comprehensively cohesively, carefully, seamlessly, architect all of this out
+  with Fable"* — the chair authored `docs/DESIGN_REGISTER_PROGRAM.md` (commit
+  `793f2e676`): the §580 north star as tie-breaker, twelve laws, the six-layer
+  stack, the machinery map, ten waves with two-legged exits, instruments,
+  hazards, seams, owner surfaces, anti-scope. ⚠ This row was minted only in
+  the commit title at authoring time; the skeptic panel caught the phantom
+  citation (§441 J7 class) and it is backfilled here so the ledger of record
+  resolves. The panel's review and rulings are §586.
+
+## §586 · THE PANEL'S 43, RULED — AMENDMENT A2 (2026-08-24 ~14:50 CDT)
+
+- **§586.1** The six-lens panel returned **43 findings, 5 BLOCKERs, zero
+  refuted by the chair's re-derivation** — among them: REG-2's exit directed
+  structural-truth use of the corpus · `massing.js` is LIVE at HEAD, not
+  dormant · the two-legged exit's legibility leg had no instrument builder ·
+  **REG-G1's premise was false at the sealed tip** (the relief field exists;
+  `CLIFF` is the empty vocabulary under the §297.2b hold — §577.2's "scalar
+  only" was a b6-era fact that decayed silently, the absence-decays law
+  striking THIS ledger) · react-pdf carries NO Pattern/Use, so the op-cure
+  collides with the print surface and the AD charter's J-AD-5 one-geometry
+  law binds Q2. **All 43 ruled into AMENDMENT A2 of the architecture** (the
+  five cures, the exit repairs, the sequencing repairs incl. B18 struck from
+  REG-3 and REG-6 re-stated as the MF-4 lens build, the REG-P re-port wave,
+  and the §571.3 re-order exercised under §585). The live REG-G1 lane was
+  re-aimed mid-flight to the cliff-edge charter. Raw findings preserved at
+  the 31585ce2 scratchpad `panels/`.
+
+## §587 · THE SPECIMEN COLLECTED — THE CHAIR'S VERDICT UNDER THE §585 DELEGATION (2026-08-24 ~14:55 CDT)
+
+- **§587.1 TE-REG0-R2 DELIVERED THE EVERYTHING-ON SPECIMEN**, all controls
+  green (filter-rendering control CONFIRMED by md5 divergence · determinism
+  byte-identical SVG and PNG · alt-seed negative control live), measured
+  figures (city: fronting masses 609→360, mean frontage run +23.9%, 634.7
+  units of circuit struck off the fjord with 3 end-work bastions, ink ladder
+  exactly 0.5×/1×/2×), and exemplary honesty: it found FOUR defects in its
+  predecessor's artifacts (an unimported symbol, three disabled layers
+  presented as on, green water, and a rasterizer wrapper that printed OK over
+  a Chrome error page), withheld the broken dark lens rather than exhibit it,
+  and refused to fake shape families the geometry cannot type (landmarks only
+  carry `data-anchor` at the sealed tip — the fabric-wide typing is REG-3's
+  real work). Two instrument hazards banked: a duplicate XML attribute makes
+  Chrome render its error page with IDENTICAL byte lengths as the tell; and
+  `fill="none"` matches a naive fill test — only a value already a colour may
+  be re-stated.
+- **§587.2 ⭐⭐ THE CHAIR'S TASTE VERDICT (delegated, vetoable): PROCEED — the
+  specimen VALIDATES the program.** At the chair's own eyes: the wall is now
+  the page's boldest object and hands the fjord its job; fused masses read as
+  blocks and the streets as bright channels; the drawn forest sets the city
+  in a world; the water is water; the cartouche speaks human ("COMFORTABLE,
+  NOT RICH · RAISED AS A GARRISON · A DEEP INLET UNDER STEEP HILLS"). The
+  lineage reads Watabou-family; the corpus dress is emerging; the truth is
+  intact beneath. **Residuals, each already a chartered wave's job:** the
+  wall's ribbon wants REG-2's drafted masonry; the landward wall still meets
+  fabric at grid angles (regime A needs the orientation field); ordinary
+  buildings carry no type for shape families (REG-3); the market square is
+  under-stated (REG-4); village fields want the FTG green push (REG-5+A2's
+  band); mechanical stall rows (REG-4). The judging set went to the owner;
+  the owner may veto any of this with a word.

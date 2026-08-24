@@ -213,3 +213,87 @@ nothing shipped since 2026-07-28) — scheduling that pair deliberately is the d
 a beautiful sandbox and an acquisition engine. **External eyes** (showing specimens to real
 DMs/players pre-launch) is recorded as an OPTION on the owner's docket — cheap relatability
 insurance, entirely the owner's call given IP posture.
+
+---
+
+## AMENDMENT A2 · THE SKEPTIC PANEL'S 43 FINDINGS, RULED (ODQ §586, 2026-08-24)
+
+**Six lenses, 43 findings, 5 BLOCKERs — every finding re-derived by the chair and RULED. This
+amendment wins over the body and A1. Raw panel evidence: the 31585ce2 scratchpad,
+`panels/reg-arch-panel-2026-08-24.json`.**
+
+### A2.1 · The five BLOCKERs, cured
+1. **REG-2's corpus-derivation exit is struck** (structural-truth use of the corpus): regime
+   derivation fires over N GENERATED fixture settlements — a garrison/war fixture must derive
+   regime B and a long-peace/prosperity fixture regime A, counts > 0 each, coin-flip-proof by
+   fixture identity. The corpus appears only in register comparison.
+2. **`massing.js` is LIVE, not dormant** — consumed by townPanorama and the 3D scene chains at
+   HEAD. §4's row is corrected; REG-3 consumes it READ-ONLY with the shipped paths byte-frozen
+   until the owner cutover.
+3. **REG-I0 is chartered** — the instrument-construction car, first in the arc: builds the
+   legibility instruments (squint, route-trace, tier-conditioned chunking min(wards,5)–9,
+   landmark salience, role-pair contrast, frontage metrics WITH minted formulas, blind
+   silhouette-read protocol with a fresh-context reader, FTG category-color hue-band arm,
+   no-drift trace over the renderFolio op-class roster with a committed trace table) and
+   records BASELINES at the sealed `ee0db96d3` renders — including the §571.2 straddle census
+   (= 0) and outside-circuit body count (= 0), the verification the ledger ordered.
+4. **REG-G1 is re-chartered as THE CLIFF-EDGE WAVE** — the sealed fabric already carries
+   `reliefField()` (bands/steepShare/cragShare), height/slope Float64Arrays, hachure drawing,
+   and a height-sampling wall trace; §577.2's "scalar only" premise was a b6-era fact that
+   decayed by W3f (the absence-decays law, inverted). What is genuinely absent: `CLIFF` is
+   declared and EMPTY in fabricDcel.js under the §297.2b hold. REG-G1 derives cliff/impassable
+   edges from the existing field, discharges the hold, and gives walls the §577 termination.
+   EXIT: cliffEdges > 0 on a cliff fixture AND exactly 0 on a flat plain; two relief fields at
+   one seed produce DIFFERENT traces; wall-over-cliff ops = 0; dormancy byte-identical.
+   (The live lane was re-aimed mid-flight.)
+5. **The PDF pattern-vanish joins the filter-vanish** — react-pdf 4.8.1 enumerates NO Pattern
+   and NO Use/Symbol (verified by execution). §7's cure #1 does not survive the print surface;
+   Q2 is constrained by the AD charter's J-AD-5 ONE-GEOMETRY law (named as binding): baked
+   raster qualifies only if one geometry feeds every surface with PDF and thumbnail identical,
+   else a priced PDF-side geometry expansion. §234's §211.2b revision (geometry-baking for
+   expressible mechanics; filters only for irreducible grain/blur) is a decided input to Q2.
+
+### A2.2 · Exit-criteria repairs (the observability lens, all accepted)
+REG-0's exit gains: mint the metric FORMULAS, the corpus-plate subset, and the measured band
+numbers REG-1 consumes; plus the straddle/outside-circuit censuses (via REG-I0). · REG-1's
+frontage band derives from the WATABOU/FTG references (corpus corroborating only), the chosen
+constant recorded on the tuning surface. · REG-4's differential is scoped: SUB-THRESHOLD
+population growth with circuit standing ⇒ intramural infill up AND intramural-extension-
+through-wall = 0; sprawl DEFINED as untyped extramural growth; typed faubourgs lawful, counted
+separately, with a positive control at a tier crossing. B13's per-rung fixture-count band is
+minted by the chair before REG-4 opens (flagged chair's, per the B13 precedent). · REG-3's
+blind read: N and target fixed at the REG-0 round; executor = a fresh-context reader with
+labels withheld. · REG-5's band: countryside coverage at village tier within ±10 points of the
+corpus-measured 85% (chair's number, vetoable); its exit gains the same "or a §217 signed
+raise" clause as REG-6. · REG-7's parity leg re-stated per §234/§246 precedent: per-surface
+same-seed determinism + a declared per-surface capability matrix + instrument-band agreement;
+pixel identity reserved for headless Chrome alone; surface pairs enumerated; its exit also
+carries the §220 performance gate as amended by §583 (first-paint 10–20 s cached; interaction
+smoothness and export time measured at metropolis at corpus grain) and the MF-A1 hazard-3
+anchor-free-wash law and the wrap-count precondition pin (paint() reports wrap counts; any
+zero fails the wave). · REG-8 splits: cartouche language + an ENUMERATED denylist file + a
+formula-pattern arm (ratios, decimals, ALL-CAPS parentheticals) open any time; the
+legend-shrinkage leg depends on REG-3, its row integer set at the REG-8 round.
+
+### A2.3 · Sequencing repairs
+**B18 is struck from REG-3's dependencies** — its producer (DW-2b) runs after the REG arc;
+REG-3 consumes the signed band's contract SHAPE and the §494 compounds + R-INST dossiers; a
+named post-DW-2b refinement car becomes B18's exterior consumer. · **REG-6 is re-stated as the
+MF-4 LENS BUILD** (the harness's own header: the ten-role architecture belongs to train mf-c)
+— a src renderer consuming folioLenses + INK_SCALE with its real bill: new test surfaces, the
+three-census cost, op-ceiling ratchets. · **The REG RE-PORT is chartered** as wave REG-P at
+arc end: the §467-complete D3a dormant core is refreshed from the sealed sandbox before the
+§171 cutover, so the cutover never lights a stale core. · The disjoint-files parallelism claim
+is replaced by per-wave FILE MANIFESTS with a single writer for `buildFabric.js` and the
+census surfaces. · REG-5 lands before REG-7 where seats allow; REG-7's band figures re-run at
+REG-9 once all under-layers are in (stated in its exit). · **The §571.3 re-order is RULED
+under the §585 delegation**: faubourg-origin typing and intramural densification build INSIDE
+REG-4 (the chair exercises the "unless re-ordered" clause; recorded vetoably).
+
+### A2.4 · Corrections of record
+The §581 authoring row is backfilled in the ODQ (the phantom-citation class, §441 J7). ·
+§10's trichotomy home corrects to **§524.4** (parents §523.2/.3). · REG-G1's owner cost nod
+joins §9's enumeration — and under §585 the chair signs §217 raises, recorded vetoably. ·
+§7.6 gains the qlmanage reconciliation (headless Chrome stays the instrument; the MF-A1
+receipt's fidelity row is marked superseded pending a differential probe). · The wave count:
+the arc is now **REG-I0 · REG-0 · REG-G1(cliff) · REG-1..9 · REG-10 · REG-11 · REG-P**.
