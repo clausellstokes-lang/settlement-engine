@@ -139,9 +139,33 @@ public/map/
 ├── modules/         ← FMG-native, BUT patched: §3 security escaping + §4 branding (style-presets, general.js)
 ├── libs/            ← FMG-native + VENDOR-MANIFEST.json hash gate; umami.js deleted, openwidget.min.js not loaded
 ├── versioning.js, manifest.webmanifest  ← SF-branded (§4)
-├── images/, charges/, heightmaps/, styles/  ← FMG-native, unpatched
+├── images/, heightmaps/, styles/  ← FMG-native, unpatched
 └── (other small files)
 ```
+
+**Removed from the vendored drop (AD-1 / ODQ §526–§529, 2026-08-24).** Two upstream
+art directories were deleted because their own embedded metadata declares terms this
+product cannot honour:
+
+- `charges/` — 338 heraldic SVGs, 3,094,160 B. 336 carried an inline
+  `<metadata license="…"/>`; **179 declared CC BY-NC-SA 3.0, a non-commercial licence**,
+  and a further 48 were share-alike copyleft (CC BY-SA 2.5/3.0/4.0, GFDL 1.3, Art Libre).
+  Upstream Armoria's README says the WappenWiki renders are "available for non-commercial
+  use only", and `modules/ui/emblems-editor.js` concedes in-tree that "images may be
+  copyrighted". The FMG grant covers *outputs*, not the provenance of bundled *inputs*.
+- `images/textures/` — 23 rasters, 11,646,263 B, metadata stripped and provenance
+  recorded nowhere upstream or here.
+
+**Consequence inside the fork.** Both layers are off in every default preset
+(`modules/ui/layers.js` `getDefaultPresets()` names `toggleTexture` zero times and
+`toggleEmblems` only inside the opt-in `emblems` preset), and `sf-bridge.js` enables
+neither, so the embedded SettlementForge map is unaffected. In a **top-level** visit to
+the standalone fork the two features now fail to load their assets: `fetchCharge()` in
+the hashed core bundle requests `./charges/<name>.svg` and will throw "Cannot fetch
+charge", and the 26-option texture dropdown in `index.html` plus the `texture` keys in
+`styles/*.json` point at files that are no longer present. That degradation is deliberate
+and was priced; the alternative was continuing to redistribute non-commercial art from a
+commercial domain.
 
 Bridge dependency direction (load order matters):
 ```
