@@ -97,16 +97,28 @@ const DECLARED_LICENCES = Object.freeze({
 });
 
 /**
- * THE FOUR ROWS WHERE THE DECLARED LICENCE OUTRANKS THE AUTHORED TAG, and the direction each
- * one moves. R-BLD-5 ruled the tag authoritative; a licence is the same authored semantics at
- * four rungs instead of one bit, so where both exist the licence answers. A FIFTH row joining
- * this set is a real decision and comes back here for it.
+ * THE ROWS WHERE THE DECLARED LICENCE OUTRANKS THE AUTHORED TAG, and the direction each one
+ * moves. R-BLD-5 ruled the tag authoritative; a licence is the same authored semantics at four
+ * rungs instead of one bit, so where both exist the licence answers. A NEW row joining this set
+ * is a real decision and comes back here for it.
+ *
+ * ⭐ FOUR → ONE on 2026-08-24 (TE-CH-5, ODQ §541), and the shrink is the POINT of that car, not
+ * a weakening of this arm. Three of the four rows were `magicLicense: 'none'` rows carrying a
+ * literal `arcane` tag, and this walker was built to make that divergence impossible to ship
+ * quietly. TE-CH-5 removed the divergence AT THE DATA rather than ordering it by a rule: those
+ * three rows dropped the redundant `arcane` tag (`Alchemist shop` → ['alchemy'],
+ * `Alchemist quarter` → ['alchemy'], `Warden's Lodge` → ['military']), so tag and licence now
+ * AGREE on them and there is nothing left for a precedence rule to arbitrate. The tag reader
+ * was NOT routed through the licence — see A8.
+ *
+ * ⚠ THE ONE SURVIVOR MOVES THE OTHER WAY and is NOT discharged. `Healer (divine, 1st level)`
+ * is tagged mundane (`['divine','healing']`) and licensed `low`, so the licence pulls it ONTO
+ * the arcane side — meaning a magic-free world can hold no divine healer. That is a live
+ * deity-doctrine question ("faith is culture, never theological") and it is deliberately left
+ * standing here for the car that owns it.
  */
 const LICENCE_OVERRIDES_TAG = Object.freeze({
   'Healer (divine, 1st level)': { tag: 'mundane', licence: 'low', arcane: true },
-  'Alchemist shop': { tag: 'arcane', licence: 'none', arcane: false },
-  "Warden's Lodge": { tag: 'arcane', licence: 'none', arcane: false },
-  'Alchemist quarter': { tag: 'arcane', licence: 'none', arcane: false },
 });
 
 describe('MF-CH2a — the magic licence is declared, single-vocabulary and inert on the roster', () => {
@@ -205,7 +217,7 @@ describe('MF-CH2a — the magic licence is declared, single-vocabulary and inert
     expect(() => magicLicenceAtLeast(null, null)).not.toThrow();
   });
 
-  it('A5 — the licence outranks the tag on EXACTLY four rows, in both directions', () => {
+  it('A5 — the licence outranks the tag on EXACTLY one row, and it is the divine healer', () => {
     const observed = {};
     for (const { category, name, def } of ROWS) {
       const licence = institutionCatalogMagicLicence(name);
@@ -248,16 +260,31 @@ describe('MF-CH2a — the magic licence is declared, single-vocabulary and inert
     expect(law.allowsInstitution({ category: 'Defense', name: 'Citizen militia' })).toBe(true);
   });
 
-  it('A8 — the customContent seam is untouched: the TAG surface still answers from the tag', () => {
+  it('A8 — the customContent seam is untouched: the TAG surface still answers from the TAG', () => {
     // customContent.js classifies USER-authored names through institutionCatalogArcaneTag.
     // A player's name is not a catalog row and the licence has no standing over it, so that
     // reader deliberately keeps the tag. If a future edit routes the tag surface through the
-    // licence too, these four rows move and this arm says so.
-    expect(institutionCatalogArcaneTag('Alchemist shop')).toBe(ARCANE_IDENTITY.ARCANE);
-    expect(institutionCatalogArcaneTag("Warden's Lodge")).toBe(ARCANE_IDENTITY.ARCANE);
-    expect(institutionCatalogArcaneTag('Alchemist quarter')).toBe(ARCANE_IDENTITY.ARCANE);
+    // licence, these rows move and this arm says so.
+    //
+    // ⭐ THE THREE ALCHEMY/WARDEN ROWS NOW ANSWER MUNDANE — and the reason matters, because it
+    // is the opposite of the failure this arm watches for. The reader was NOT re-routed; the
+    // DATA changed. TE-CH-5 (ODQ §541) deleted the redundant `arcane` tag from three rows the
+    // estate had already licensed `none`, and moved `alchemy` out of ARCANE_INST_TAGS into the
+    // sibling TRADE_INST_TAGS because alchemy is a chemical trade and not a magic-dependence
+    // claim. So this surface still answers strictly from the tag — the tag simply no longer
+    // says arcane on a mundane row. A licence-routed reader would ALSO have moved
+    // `Healer (divine, 1st level)` to ARCANE; it is still MUNDANE below, which is the control
+    // that tells the two causes apart.
+    expect(institutionCatalogArcaneTag('Alchemist shop')).toBe(ARCANE_IDENTITY.MUNDANE);
+    expect(institutionCatalogArcaneTag("Warden's Lodge")).toBe(ARCANE_IDENTITY.MUNDANE);
+    expect(institutionCatalogArcaneTag('Alchemist quarter')).toBe(ARCANE_IDENTITY.MUNDANE);
     expect(institutionCatalogArcaneTag('Healer (divine, 1st level)')).toBe(ARCANE_IDENTITY.MUNDANE);
     expect(institutionCatalogArcaneTag('Great library')).toBe(ARCANE_IDENTITY.MUNDANE);
+    // ANCHOR: the reader still ANSWERS ARCANE for rows whose tag genuinely says so, so the
+    // three MUNDANE verdicts above are a data change and not a classifier that stopped
+    // classifying.
+    expect(institutionCatalogArcaneTag("Enchanter's shop")).toBe(ARCANE_IDENTITY.ARCANE);
+    expect(institutionCatalogArcaneTag('Planar embassy')).toBe(ARCANE_IDENTITY.ARCANE);
     expect(institutionCatalogArcaneTag('Wholly Invented Emporium')).toBe(ARCANE_IDENTITY.UNKNOWN);
   });
 });

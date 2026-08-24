@@ -24,6 +24,7 @@
  */
 
 import { institutionMatchesRegex } from './institutionClassify.js';
+import { ARCANE_INST_TAGS, TRADE_INST_TAGS } from './arcaneInstitutionVocabulary.js';
 
 // ── Category → archetype mapping ────────────────────────────────────────
 // The generator's `category` field already aligns reasonably well with
@@ -396,7 +397,15 @@ const POWER_DOMAIN_TAGS = Object.freeze({
   economy:    ['market', 'banking', 'guild', 'port', 'warehouse', 'economy'],
   craft:      ['guild', 'metalwork', 'textile', 'leather', 'timber'],
   criminal:   ['criminal', 'smuggling', 'underground'],
-  arcane:     ['arcane', 'alchemy', 'planar', 'enchanting'],
+  // POWER-DOMAIN AFFINITY IS A THIRD QUESTION, so this row is the UNION of the
+  // two authored lists, not either one of them. `ARCANE_INST_TAGS` asks "does
+  // this need magic to exist?" and `TRADE_INST_TAGS` asks "what craft is
+  // practised here?"; this row asks "which power does this institution belong
+  // to?", and an alchemist genuinely belongs to the arcane power whether or not
+  // alchemy is magic. It used to hand-type all four members — a fifth typing of
+  // a list whose leaf exists precisely to stop that drift (TE-CH-5, ODQ §541).
+  // Order is irrelevant here: the consumer below is `tags.includes(t)`.
+  arcane:     [...ARCANE_INST_TAGS, ...TRADE_INST_TAGS],
 });
 
 /** @param {string | null | undefined} category @returns {string | null} */

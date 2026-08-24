@@ -32,10 +32,62 @@
  * would be a live behaviour change dressed as a move.
  *
  * @guarded-by scripts/boot-smoke.mjs stage 1 (the chunk graph must stay acyclic).
+ *
+ * ── TWO LISTS, TWO QUESTIONS (TE-CH-5, 2026-08-24, ODQ §541) ────────────────
+ * `ARCANE_INST_TAGS` answers ONE question and must never be asked another:
+ *
+ *     "Does this institution NEED MAGIC TO EXIST?"
+ *
+ * It is a MAGIC-DEPENDENCE list. Every reader of it (the world law's
+ * `carriesExplicitMagicMetadata`, `magicFilter`'s catalog/service filters, the
+ * faction-boost eligibility filter, the authored-arcane verdict) is deciding
+ * whether a candidate may stand in a MAGIC-FREE world. A member that names a
+ * mundane craft therefore does not merely mis-label — it DELETES that craft from
+ * every magic-free world.
+ *
+ * `alchemy` was such a member. It named a chemical trade, and four independent
+ * authorities in this estate already said so, none of them consulted by the
+ * other three:
+ *   - `textAssertsFunctionalMagic('alchemy')` is FALSE, where `arcane`,
+ *     `planar` and `enchanting` are all true (domain/magicAssertionText.js);
+ *   - the `arcane` row of `INSTITUTION_KEYWORD_TAGS` carries an `enchant` stem
+ *     and no `alchem` stem at all (lib/entities.js);
+ *   - both alchemy-carrying catalog rows declare `magicLicense: 'none'`, where
+ *     the planar and enchanting rows declare `'high'`;
+ *   - `entityTags.js` files ALCHEMY in the A+ P1.6 trade block beside METALWORK,
+ *     LEATHER, TEXTILE, TIMBER and SHIPBUILDING — not in "Knowledge + magic".
+ *
+ * So `alchemy` moved to `TRADE_INST_TAGS`, which answers the OTHER question —
+ * "what craft is practised here?" — and which NO magic gate reads. The split is
+ * exactly one member wide: `planar` and `enchanting` name practices that cannot
+ * exist without magic, and both of their rows are licensed `high`.
+ *
+ * ⚠ A NEW MEMBER GOES IN THE LIST WHOSE QUESTION IT ANSWERS. If you cannot say
+ * "a world with no magic cannot contain this" without qualification, it is a
+ * trade tag. Tags that describe a craft, a material or a clientele are trade
+ * tags even when the craft is practised by mages.
+ *
+ * ⚠ THIS FILE IS NOT THE ONLY HOME OF THE FOUR-MEMBER LIST'S CONTENT.
+ * `domain/npcProfile.js`'s `POWER_DOMAIN_TAGS.arcane` needs the UNION of both
+ * lists — power-domain affinity is a third question ("which power does this
+ * institution belong to?"), and an alchemist genuinely does belong to the arcane
+ * power. It used to hand-type all four members; it now spreads both lists, so a
+ * member moved here cannot silently diverge there.
  */
 
-/** Catalog `tags:` values that mark an institution arcane. */
-export const ARCANE_INST_TAGS = ['arcane', 'planar', 'alchemy', 'enchanting'];
+/**
+ * Catalog `tags:` values that mark an institution MAGIC-DEPENDENT — it cannot
+ * exist in a world without magic. See the header: this list is a dependence
+ * claim, not a subject-matter one.
+ */
+export const ARCANE_INST_TAGS = ['arcane', 'planar', 'enchanting'];
+
+/**
+ * Catalog `tags:` values that name a MUNDANE CRAFT which the arcane vocabulary
+ * used to claim. No magic gate reads this list; it exists so the craft has a
+ * home that is not a dependence claim. See the header for why `alchemy` is here.
+ */
+export const TRADE_INST_TAGS  = ['alchemy'];
 
 /**
  * Catalog institution-name keywords that mark an institution arcane. Catalog-shaped and

@@ -1366,7 +1366,10 @@ export const institutionalCatalog = {
         forbiddenTradeRoutes: ['isolated'],
         baseChance: 0.4,
         desc: 'Potions, alchemical items. Basic healing potions (50 GP).',
-        tags: ['arcane', 'alchemy'],
+        // TE-CH-5 / ODQ §541: `arcane` removed — the row declares `magicLicense: 'none'`
+        // and `alchemy` is a TRADE tag (TRADE_INST_TAGS), so tag and licence now agree
+        // in the DATA instead of being ordered by a precedence rule.
+        tags: ['alchemy'],
         magicLicense: 'none',
         priorityCategory: 'magic',
       },
@@ -1374,7 +1377,9 @@ export const institutionalCatalog = {
         required: false,
         baseChance: 0.2,
         desc: 'A ranger station or druid waypost. They monitor the surrounding wilderness, maintain trails, and keep tabs on beast migrations. In times of crisis they serve as emergency scouts and trackers.',
-        tags: ['arcane', 'military'],
+        // TE-CH-5 / ODQ §541: `arcane` removed — a ranger station that tracks beasts and
+        // maintains trails is licensed `none` and needs no magic to exist.
+        tags: ['military'],
         magicLicense: 'none',
         priorityCategory: 'magic',
       },
@@ -1916,7 +1921,8 @@ export const institutionalCatalog = {
         forbiddenTradeRoutes: ['isolated'],
         baseChance: 0.5,
         desc: 'Multiple alchemical workshops. Guild organization.',
-        tags: ['arcane', 'alchemy'],
+        // TE-CH-5 / ODQ §541: `arcane` removed — see 'Alchemist shop'.
+        tags: ['alchemy'],
         magicLicense: 'none',
         priorityCategory: 'magic',
       },

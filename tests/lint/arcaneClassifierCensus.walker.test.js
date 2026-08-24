@@ -157,9 +157,15 @@ const alternationsOn = (line) => line.match(new RegExp(ALTERNATION_LINE.source, 
 const KNOWN_UNCONVERTED = Object.freeze({
   'src/domain/districtProfile.js:112':
     'TRUE MEMBER. District name → category: a "Tower District" or "College Row" is masonry and teaching, and reads arcane. Same shape as L10, one layer over.',
-  'src/domain/npcProfile.js:333':
+  // RE-POINTED 333 → 334 and 374 → 375 on 2026-08-24 (TE-CH-5, ODQ §541). The pattern
+  // text is byte-identical in both places; the car added ONE import at line 27
+  // (`ARCANE_INST_TAGS`/`TRADE_INST_TAGS`) and pushed both tables down a line. Address
+  // rot, not a new site — exactly the 57 → 58 case recorded below. ⚠ These two rows are
+  // a SEVENTH arcane spelling living in this file, name-based and untouched by the tag
+  // split; the split moved neither their tokens nor their verdicts.
+  'src/domain/npcProfile.js:334':
     'TRUE MEMBER. NPC workplace venue → domain; tower/college/library/laboratory decide alone.',
-  'src/domain/npcProfile.js:374':
+  'src/domain/npcProfile.js:375':
     'TRUE MEMBER. The second copy of the same table in the same file — a fork of a fork.',
   'src/domain/contradictions.js:222':
     'CONTEXTUALLY SCOPED, not the class — but only just. ARCANE_INST is selected by `p.archetype === \'arcane\'`, so it searches for an already-arcane faction\'s seat rather than deciding arcane-ness. It is entirely ambiguous tokens, though, so it will happily accept a masonry tower as an arcane order\'s home and report no contradiction. A real (small) false negative, recorded rather than fixed: the fix is the same conversion the TRUE MEMBERS need.',

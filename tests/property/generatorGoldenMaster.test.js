@@ -18,6 +18,58 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-08-24 — MF-CH5, ALCHEMY IS A TRADE (187 rows of 525 moved; 0 rows added, 0
+ *   removed, 0 ROSTERS changed). Lane TE-CH-5, the vocabulary car of the
+ *   catalog-hygiene train. Ruled at ODQ §541 as SHAPE F; a REPAIR, chair-ruled.
+ *   THE CAUSE IS ONE TAG STRING LEAVING THREE CATALOG ROWS. `ARCANE_INST_TAGS` was
+ *   answering "does this institution need magic to exist?" while carrying `alchemy`,
+ *   which names a chemical trade — so it deleted alchemists from magic-free worlds.
+ *   `alchemy` (and only `alchemy`) moved to a sibling `TRADE_INST_TAGS`, and the three
+ *   `magicLicense: 'none'` rows that carried a now-redundant `arcane` tag dropped it:
+ *   `Alchemist shop` → ['alchemy'], `Alchemist quarter` → ['alchemy'],
+ *   `Warden's Lodge` → ['military']. Tag and licence now AGREE in the data instead of
+ *   being ordered by a precedence rule. Four independent estate authorities converge on
+ *   `alchemy` alone — `textAssertsFunctionalMagic('alchemy')` is false where `arcane`,
+ *   `planar` and `enchanting` are true; the tag-backfill regex carries an `enchant` stem
+ *   and no `alchem` stem; the two alchemy rows are licensed `none` where the planar and
+ *   enchanting rows are `high`; and `entityTags.js` files ALCHEMY beside METALWORK and
+ *   LEATHER. `planar` and `enchanting` stay put.
+ *     THE SPLIT ITSELF IS FREE, MEASURED SEPARATELY. Moving `alchemy` between the two
+ *     lists with the catalog untouched moves 0 of 525 golden hashes and 0 of 2,555 sweep
+ *     hashes — because both alchemy-carrying rows also carried `arcane`. Every hash below
+ *     is bought by the three-row DATA edit, not by the vocabulary edit.
+ *     TOTALITY CONTROL: the measuring harness reproduces all 525 committed hashes at the
+ *     parent with 0 mismatches, so "187" is a count and not a sample.
+ *     THE COMPLETE PATH-TEMPLATE CENSUS IS TEN TEMPLATES IN TWO FAMILIES, with ZERO
+ *     key-order moves and zero rows added or removed. Taken over the 511-row grid at
+ *     `priorityMagic: 80`, where 235 rows move:
+ *       $.institutions[*].tags[*] / .tags.length                 192 moves / 163 rows
+ *       $.defenseProfile.institutions.magicDef[*].tags[*|.length] 150 moves / 150 rows
+ *       $.simulationTrace[*].downstreamEffects[*].{target,effect} 264 removed / 235 rows
+ *       $.simulationTrace[*].downstreamEffects[*].target changed   10 changes /  10 rows
+ *     Family one is the tag string leaving. Family two is the ONE effect it drove —
+ *     `{ target: 'magicCapacity', effect: 'reinforced' }`, emitted by `tagsToDownstream`
+ *     (`assembleInstitutions.js`), whose own docstring calls it a light heuristic and
+ *     which feeds nothing but the trace; the 10 changes are `Warden's Lodge`, whose
+ *     surviving tag re-points the effect `tag.arcane` → `tag.military`. NO capacity,
+ *     economy, magic-profile, count, name, id or rng draw moves anywhere.
+ *     WHERE IT LANDS, AND WHERE IT DOES NOT. Over 2,555 same-seed settlements (the
+ *     511-row grid × five magic cases) 409 hashes move and ZERO rosters:
+ *       magicExists:false 0 · priorityMagic:0 0 · :20 0 · :50 174 · :80 235.
+ *     A magic-free world and a low-magic world are byte-identical to before, which is
+ *     exactly the region MF-CH2B is about — the two cars do not interfere.
+ *     THE ONE BEHAVIOURAL DELTA THAT IS NOT A TAG STRING, stated because it is real even
+ *     though it ships nothing: the magic-forms ladder reads the `arcane` tag through
+ *     `institutionHasTag`, so over the ladder's own 144-settlement corpus the high-magic
+ *     half holding at least one form goes 77 → 69 of 120. `magicForms.js` has no `src/`
+ *     importer at this base (its only importers are `magicFormsPractitioner.js` and
+ *     `magicRegimeLifecycle.js`, themselves unimported), so no shipped byte moves — which
+ *     is why that delta appears in no hash above. Whoever wires K2 re-prices it then.
+ *   THE PROMISE. Institution tags are stamped at generation and persisted; no store,
+ *   migration or rehydration path re-reads `institutionalCatalog`. A saved world keeps
+ *   its stored tags and is untouched. Only NEWLY generated worlds differ — so two worlds
+ *   generated either side of this row will disagree about the same institution, which is
+ *   what THE PROMISE requires rather than a defect.
  * 2026-08-24 — MF-CH3, THE DATA SLIPS (272 rows of 525 moved; 0 rows added, 0
  *   removed). Lane TE-CH-3, catalog-hygiene car 3. Source: the packet
  *   docs/implementation/packets/catalog-hygiene/MF-CH3.md.
