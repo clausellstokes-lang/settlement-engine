@@ -25750,3 +25750,36 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   triangulation into a precedence: when two references disagree, the
   Watabou/FTG reading-grammar wins the STRUCTURE of the choice and the
   corpus wins its DRESS; and nothing ever wins against the truth beneath.
+
+## §582 · MF-CH4 LANDS AS THE 62nd CAR — AND THE GATE MUTEX HAS A SECOND LOCK DIR NOBODY POLLS (2026-08-24 ~13:40 CDT)
+
+- **§582.1 VALIDATED AND LANDED, FIRST-RUN GREEN.** TE-CH4-GATE surveyed the
+  restart-orphaned tree (zero partial edits), re-proved the predecessor's
+  claims at the committed tip (packets 181 by execution · both focused suites
+  65/65 with the per-file 33+32 split · all three line-pins re-measured), and
+  the full gate returned `TRUE_EXIT=0` + `[gate-tail] exit: 0` + **29,067
+  collected** (= slot 29,051 + the car's +16, to the digit) + 18 GiB free.
+  ⭐ The banked-11 roster was read BEFORE the verdict so the classification
+  could not be retrofitted, and its members are disjoint from the car's whole
+  surface. Full gate log preserved (`ch4-gate-session2-FULL.log`, sha-stamped)
+  against TMPDIR reaping. **Acts: `holding-ch4` created at `233c35a69` ·
+  `wip-ch4` deleted (old value asserted) · SLOT CAS `479992b6e` →
+  `233c35a69`.** New slot facts: **62 cars · census `2525/366/2159/21049/5852`
+  · packets 181 · ratchet 11 of 29,067.** The eleven-arm §564 cure program is
+  fully discharged; both catalog-hygiene cars that entered this account's
+  watch as unlandable `wip-` pins are LANDED.
+- **§582.2 ⛔ THE LANE'S FINDING, BANKED AS LAW: THE MUTEX PATH SPLITS.**
+  `scripts/gate-mutex.sh:21` defaults to `${TMPDIR:-/tmp}/settlementforge-
+  vitest-gate.lock`; a BARE `npm run check:tail` exports nothing, so its
+  internal ratchet locks `$TMPDIR/…` while LANE-LAW §2 has lanes export and
+  poll `/tmp/…` — **two dirs that do not mutually exclude.** A lane polling
+  `/tmp` reads FREE while a sibling's bare gate is mid-ratchet. A fresh member
+  of the stale-lock family where the wrong thing is the PATH, not the pid.
+  **Interim law, effective now: a lane polls BOTH dirs before launching a
+  gate.** Structural cure chartered as a housekeeping car: export
+  `GATE_MUTEX_LOCK_DIR` inside the check scripts themselves (one writer for
+  the path), so a bare invocation and a lane invocation lock the same dir.
+- **§582.3 THE JUDGMENT-CALL PATTERN WORTH NAMING:** the lane declined to run
+  `build:edge-shared` as a pre-gate probe because writing five sidecars into
+  a tree about to be gated manufactures the §559.2 in-flight-edit class —
+  the correct reading of a law against its own tempting shortcut.
