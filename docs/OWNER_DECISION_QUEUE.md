@@ -23456,3 +23456,86 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   terminated at the wrong `$$;` and truncated the body; a real parse shows the
   call present at line 167. **A range-based extractor over dollar-quoted SQL is
   another instrument that lies** — that is the fifteenth on the standing list.
+
+## §541 · CH-5 RULED — THE DEFECT IS ONE MEMBER WIDE, AND THE SEARCH FOUND A SHIPPED DEITY-DOCTRINE VIOLATION (2026-08-24 03:21 CDT)
+
+- **§541.1 THE INSTRUMENT WAS CALIBRATED BEFORE IT WAS BELIEVED.** Plain `node`
+  over a `git archive 79b78881c -- src` snapshot. **Totality control: it
+  reproduces all 525 committed golden-master hashes at the slot with ZERO
+  mismatches** — it is the real engine, not a model of it — and its liveness is
+  shown by Shape F's 187 moved rows. This is the lifted-classifier pattern done
+  right: calibrate against the slot's own committed figures, THEN read the tip.
+- **§541.2 THE BRIEF CORRECTED ME THREE TIMES.** (i) **`magicForms`' ARCANE GATE
+  does NOT read `ARCANE_INST_TAGS`** — it reads the single string `TAG.ARCANE`
+  via `institutionHasTag` (`magicForms.js:177,324`); all 20 gated names pass by
+  declared tag, 0 by keyword backfill. **The extra members are not what reds
+  it**, which was the premise I handed the lane. (ii) The licence-vs-tag
+  conflict is **FOUR rows, not three** — three is the count within the
+  `none`-licensed subset. (iii) Deleting `arcane` leaves **FIVE** names still
+  tag-arcane, not two.
+- **§541.3 RULING — SHAPE F, APPROVED.** Move **`alchemy`, and only `alchemy`**,
+  out of `ARCANE_INST_TAGS` into a sibling `TRADE_INST_TAGS`; then delete the
+  redundant `arcane` tag from the three `none`-licensed rows so **tag and licence
+  agree in the DATA rather than being ordered by a RULE**. *Why:* **the defect is
+  one member wide**, and four independent estate authorities — none of them
+  mine — converge on it: `textAssertsFunctionalMagic('alchemy')` is **false**
+  while arcane/planar/enchanting are all true; the tag-backfill regex carries
+  `enchant` but no `alchem` stem; the two alchemy rows are licensed `none` while
+  the planar and enchanting rows are `high`; and `entityTags.js` files ALCHEMY
+  beside METALWORK/LEATHER/TEXTILE. *Blast radius:* **F-i (the vocabulary split
+  alone) is FREE — 0/525 golden, 0/2555 sweep.** Full F moves **187/525 golden
+  hashes and ZERO rosters**, 409/2555 sweep hashes and zero rosters, **all in
+  pm50/pm80 and NONE in magic-free or low-magic worlds**. The pm80 census is 7
+  path templates: four are the tag string leaving, three are one
+  `magicCapacity reinforced` entry leaving a trace emitted by a function its own
+  docstring calls "a light heuristic". **No capacity, economy, roster or rng
+  number moves.**
+- **§541.4 THE PACKET'S OWN SHAPE 1 IS REJECTED, AND ITS ZERO IS AN ARTIFACT.**
+  Shape 1 (route the gate through the licence) reports "0 shipped bytes" only
+  because **`magicForms.js` has NO `src/` importer** — the closure
+  `magicForms` ← {`magicFormsPractitioner`, `magicRegimeLifecycle`} ← **{}** is
+  **test-only**. Its true semantic delta is **118 of 525** settlements, deferred
+  onto whoever wires the subsystem. It also reds two rows of the ladder's own
+  authored table, answers a *participation* question with a *dependence* field,
+  and would gate `Healer (divine, 1st level)` onto the arcane ladder. **A zero
+  that comes from dead code is not a zero; it is a deferred bill.**
+- **§541.5 REPAIR, NOT NEW CAPABILITY — AND THE PROMISE HOLDS.** No field, rung,
+  surface or behaviour is created; `tags` is an existing array, so no schema,
+  persistence-shape, migration, public-API or paid-surface change. **Institution
+  tags are stamped at generation and persisted, and no store/application/kernel
+  path re-reads the catalog** — so saved worlds are untouched and only newly
+  generated worlds differ. The one owner-facing item is the **declared golden
+  shift (187/525, 0 rosters)**, which owes a SHIFT RECORD row.
+- **§541.6 ⭐ MF-CH2B LEAVES DRAFT ON THIS RULING.** With the three rows
+  de-tagged, all six `none`-licensed names fail the ARCANE GATE, a magic-free
+  world holds `forms: []`, and the STOP arm goes green **with no worldPulse file
+  edited**. That was the whole point of holding it.
+- **§541.7 ⛔ IMPLEMENTATION IS A TWO-FILE EDIT — `npcProfile.js` HOLDS A
+  HAND-TYPED DUPLICATE.** **VERIFIED at the slot:** `src/domain/npcProfile.js`
+  carries `arcane: ['arcane', 'alchemy', 'planar', 'enchanting']` — the same four
+  members, retyped, inside the POWER-DOMAIN map (§519 territory). **A split that
+  edits only the canonical list ships a silent divergence.**
+- **§541.8 ⛔⛔ A LIVE DEITY-DOCTRINE VIOLATION IS ALREADY SHIPPED — VERIFIED AT
+  THE SLOT, NOT INHERITED.** `ARCANE_INST_KW` carries **`'healer (divine'`,
+  `'divine healer'`, `'wandering healer'`, `'druid circle'`, `'elder grove
+  council'`, `'elder grove'`**. And `Healer (divine, 1st level)` — whose own row
+  reads `tags: ['divine','healing']`, `priorityCategory: 'religion'` — is
+  licensed **`magicLicense: 'low'`**. **So a magic-free world can hold no divine
+  healer and no druid circle.** That is the engine asserting divine healing is a
+  species of magic. **THE DEITY DOCTRINE is constitutional: faith is CULTURE,
+  NEVER theological.** Repairing it is REPAIR, so it is mine — but it changes
+  what worlds contain, so it is recorded here in the owner's sightline rather
+  than folded quietly into a car.
+- **§541.9 ⛔ AND `ARCANE_INST_KW` IS THE BIGGER DEFECT.** It is now **fully
+  redundant over the catalog** — all 24 names it matches already declare a
+  licence — and it **CONTRADICTS the licence on 5** of them, against the tag
+  list's 4. **SEQUENCING RULED:** CH-5 ships Shape F first because it unblocks
+  MF-CH2B and its shift is bounded; **CH-6 then takes §541.8 and §541.9
+  together**, because both edit `arcaneInstitutionVocabulary.js` and must not
+  race. CH-5's build itself **waits for CH-3 to land** — F-ii de-tags catalog
+  rows that CH-3 is editing right now.
+- **§541.10 THE FOURTH SEAT IS DELIBERATELY LEFT EMPTY.** Cap is four and only
+  three lanes are live, but **the gate is SERIAL and three lanes are already
+  queued on it**, disk is at 13 GB and falling as each rebuilds its own ~800 MB
+  `node_modules`. A fourth build lane would add contention and disk for **zero
+  throughput gain**. Filling a seat is not the goal; draining the gate is.
