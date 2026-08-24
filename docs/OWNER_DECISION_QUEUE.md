@@ -26148,3 +26148,27 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   swept at the session-end memory pass, the HANDOFF being the authoritative
   successor surface meanwhile; (iv) CH-6b and the divine-healer content row
   are chartered queue entries, not amendments owed.
+
+## §597 · MF-CH6 LANDS AS THE 64th CAR — AND THE TAIL IS NOT THE LOG (2026-08-24 ~17:10 CDT)
+
+- **§597.1 VALIDATED AND LANDED.** The re-proof gate at the rebased tip:
+  `TRUE_EXIT=0` · `[gate-tail] exit: 0` · **29,070 collected (11 banked at
+  ceiling)** — the identical count the lane measured pre-rebase, exactly as
+  the diff-of-diffs identity control predicted · packets 182 · strict dist
+  467/53 zero-defect · disk 17 GB. **SLOT CAS `714a398b7` → `e4ed27f48` — 64
+  cars.** The catalog-hygiene train's active set is now fully landed: CH-1,
+  CH-2A, CH-4, CH-5, CH-6, CH-7 (CH-2B holds at DRAFT; CH-3 outstanding;
+  CH-6b chartered).
+- **§597.2 ⚠ BANKED FROM THE CHAIR'S OWN NEAR-FALSE-ALARM:** the `check:tail`
+  wrapper's captured stream is the TAIL ONLY (3.4 KB); the FULL log lands at
+  the `[gate-tail] full log:` path it prints (97 KB, TMPDIR — preserve it
+  before validating). A chair grepping the captured stream for the ratchet
+  count reads ABSENCE and could mis-validate in either direction. Sibling of
+  §563's gate-outlives-watcher law: the verdict's parts live in two files.
+- **§597.3 THE ARC PROCEEDS: TE-REG-1 DISPATCHED** (Opus) — the generative
+  FRONTAGE-FUSION wave, building on the newest sealed fabric tip
+  (`067a7e1f3`, the cliff wave), under A2's repaired exit: formulas from the
+  preserved REG-I0 instruments, the specimen's demonstrated values as the
+  interim floor, the formal Watabou/FTG reference band supplied by the chair
+  at the judging round, per-wave file manifest with the single-writer rule on
+  `buildFabric.js`.
