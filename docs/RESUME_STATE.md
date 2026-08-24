@@ -51,6 +51,17 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 02:34 CDT 08-24: §538 — FOUR SEATS FILLED (cap is FOUR per §508; the §388 heartbeat had been
+# steering by the REVOKED §465 cap of two for a day — re-armed). LANDING TE-STACK-4 (aip1+ch2, BOTH on
+# stale bases, each needs rebase + re-stamped delta) · COMPILE DW-0 · BUILD TE-CG-2 · BUILD TE-CH-3.
+# ⛔ 2 lane tips (4171bfd9a, fefca7f5f) were NOT ancestors of the tip — pinned refs/preserve/wt-* one
+# command before a `worktree remove` would have destroyed them. Reclaimed 2.4 GB (15→18 GB free).
+# ⭐ CH = CATALOG HYGIENE, not heraldry (my own misread, caught pre-dispatch). Charter: 029268fe5:charters/draft-CATALOG-HYGIENE-PLAN.md §3.
+# ⭐ THREE CH-3 RULINGS ISSUED (§538.5): J-CH-3-1 approved AND IT OVERTURNS MY OWN §491 FRAMING (measurement:
+# 97/420 vs 108/420 vs 0/420) · J-CH-3-2 approved, ruled against THE PROMISE (it protects LIVED HISTORY, not
+# the generator's future output) with an 81/420 declared shift · delete the 26 redundant minTier rows, own commit.
+# ⭐ Standing lane law now lives in ONE file, $SP/LANE-LAW.md — briefs cite it instead of restating 40 lines.
+
 # ⭐⭐⭐ 02:20 CDT 08-24: §537 — THIRD STACK LANDED (53+54) CAS → 79b78881c. THE LICENCE VIOLATION IS
 # OFF THE BRANCH: 255 files / 14.4 MB gone, 104 CC0 kept, payload -8.18%. Packet count 175 (IP-1 has no packet, ratified).
 # ⭐⭐⭐ 02:00 CDT 08-24: §536 — stripping STOPPED at source + guarded; C2PA hard-binds to bytes so no

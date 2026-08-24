@@ -23192,3 +23192,90 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   prod`** — the gate calls it "the normal commit→deploy window", but it has
   been open **since 2026-07-28**, and every fix above it, including tonight's
   licence removal, is sitting behind it. Seats: AIP-1 holding; three free.
+
+## §538 · THE STALE HEARTBEAT, TWO TIPS ONE COMMAND FROM GONE, AND THREE RULINGS ON CH-3 (2026-08-24 02:32 CDT)
+
+- **§538.1 THE HEARTBEAT WAS STEERING BY A REVOKED CAP.** The §388 wakeup
+  still carried **LANE CAP = TWO (§465)** — revoked by the owner at **§508
+  ("you can now go up to 4 lanes now")**. Worse, the pickup card contradicted
+  *itself*: its header said TWO while its own item 2 said **FOUR per §508**.
+  Every 20 minutes the heartbeat was ordering the chair never to dispatch a
+  third lane. Re-armed with the correct cap, the current queue, and a pointer
+  to the standing lane law. **The lesson is not the number — a recurring
+  instruction is a CACHE, and this one had been wrong for a day.**
+- **§538.2 TWO LANE TIPS WERE ONE `worktree remove` FROM UNRECOVERABLE.** Of
+  the four detached worktree HEADs left by the dead 6298872d session,
+  **`4171bfd9a` (TE-IP-1) and `fefca7f5f` (TE-MP1) were NOT ancestors of the
+  build tip** — a detached worktree HEAD was their only ref. Pinned to
+  `refs/preserve/wt-*` before any cleanup, then ~2.4 GB of spent trees
+  reclaimed (free 15 GB → 18 GB). The REF-PIN-BEFORE-CLEANUP law paid for
+  itself in one wakeup.
+- **§538.3 A FALSE ALARM I RAISED, AND THE CORRECTION.** I reported that
+  `refs/preserve/research-dossiers-2026-08-23` had been **clobbered** — the
+  card cites `07fbed7b`, the live ref reads `029268fe5`, and its subject is
+  the band sitting, not the dossiers. **That claim was wrong.** `07fbed7b` is
+  an **ancestor** of `029268fe5`; the ref simply advanced when the signed band
+  sitting was committed on top. All six research tranches and the CIRC
+  addendum survive and are reachable. Recorded because the near-miss reflex
+  was right and the conclusion was not: **an unexpected ref value means READ
+  THE ANCESTRY, not assume destruction.**
+- **§538.4 "CH" IS CATALOG HYGIENE, NOT HERALDRY — MY OWN MISREADING, CAUGHT
+  BEFORE DISPATCH.** I had CH-3 filed as a heraldic-charge car and searched
+  `public/map/charges/` for its charter. CH is the **catalog-hygiene** train
+  (CH-1 inference honesty · CH-2 the magic licence · CH-3 the data slips).
+  Had I dispatched on the wrong reading, an Opus lane would have spent hours
+  in the wrong subsystem. **Grep found me 338 SVGs and zero charters; the
+  charter was in the research bundle all along.**
+- **§538.5 THREE RULINGS ON CH-3, ONE OF WHICH OVERTURNS MY OWN §491
+  FRAMING.** The compile escalated them; delegated authority means deciding,
+  not bouncing them back.
+  - **J-CH-3-1 — APPROVED, and it corrects me.** §491 framed "the tier block
+    is the structural truth". The measurement refutes it: deleting `minTier`
+    changes **97/420** rosters, moving the rows changes **108/420** *and*
+    clobbers the city's own `Smuggling network` row — both are content
+    changes wearing a hygiene label. Teaching the UI readers the gate costs
+    **0/420**. *Decided:* close the reader gap, leave the data alone.
+    *Rejected:* my own framing. *Reversal:* revert the lookups filter; the
+    data never moved. **Recorded in the packet as the charter's one
+    substantive divergence from §491, with my name on the correction.**
+  - **J-CH-3-2 — APPROVED, and ruled explicitly against THE PROMISE.** Delete
+    `exclusiveGroup: religiousCenter` from the two city rows. *Why the
+    PROMISE permits it:* **THE PROMISE protects lived history** — a seed
+    already generated is a starting world forever and its stored institutions
+    are untouched. **It does not freeze the generator; if it did, no defect
+    in generation could ever be repaired.** Only newly generated worlds
+    differ. *Declared shift, loudly:* **81 of 420 settlements change roster,
+    ~130 institution names move**, and the mechanism is a same-seed **re-roll
+    of the whole city/metropolis roster** (the early return at
+    `assembleInstitutions.js:323` precedes the rng draw, so un-suppressing a
+    row consumes a draw and reshuffles everything downstream). Rides as its
+    **own final commit**. The lane must verify the digest lands at
+    `6127eae7…b600c18` and **STOP rather than re-record** if it does not.
+  - **The 26 redundant `minTier` rows — DELETE, in their own commit with
+    their own digest.** *Why:* J-CH-3-1 makes a `minTier` declaration
+    *meaningful* ("author here, gate there"), and 26 no-ops dilute exactly
+    the signal that ruling creates — a reader could not tell an intentional
+    gate from a slip. *Rejected:* leaving them for the walker to report,
+    which preserves a permanent 26-row false-positive class. Separate commit
+    so the two declared movements stay attributable.
+- **§538.6 AN ORDERING CONFLICT, RULED AND MITIGATED.** The catalog-hygiene
+  plan says its three cars land **"before DW-0"**; the pickup card says before
+  DW's **BUILD waves** and orders the DW-0 compile now (§482/§493.4). **Ruled
+  for the card** — DW-0 writes a document and touches no engine code — but the
+  exposure is real, because CH-3 is changing catalog data *while DW-0
+  compiles*. DW-0 was messaged with the three specific changes coming and
+  instructed to **cite every catalog-derived figure as provisional** and
+  prefer the (stable) research dossiers over live catalog state.
+- **§538.7 FOUR SEATS FILLED, AND A STRUCTURAL FIX TO BRIEFING.** Landing seat
+  **TE-STACK-4** (holding-aip1 + holding-ch2 — *both on stale bases*,
+  `567030f1d` and `70bb64f23`, so each needs a rebase and a re-stamped delta);
+  **DW-0** charter compile; **TE-CG-2** (the identical-footprint defect);
+  **TE-CH-3**. All `model: "opus"` per §484. Every brief now cites a single
+  **`LANE-LAW.md`** — slot facts, the gate incantation, the ~14 instruments
+  that lie, census and packet rules — instead of restating forty lines per
+  dispatch. **The restatement was itself a defect: a law re-typed each time is
+  a law that drifts.**
+- **§538.8 THE DEPLOY GATE IS STILL SHUT — DAY 27.** Prod sits at migration
+  **121** against repo head **199**; 78 migrations pending, **198 is
+  DESTRUCTIVE**; `applied-head.json` dated **2026-07-28**. Owner-gated by
+  nature and unchanged by anything above.
