@@ -25375,3 +25375,73 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   the same inventory: the main tree's on-disk deletions of `src/domain/townMap`
   and `src/pdf` are the owner's known dirty-control-tree state — committed
   state intact; lanes source from `git show`, as the inventory correctly did.
+
+## §570 · MF-CH7 LANDS AS THE 61st CAR, AND THE OWNER RE-AIMS THE PROGRAM AT THE CORPUS REGISTER (2026-08-24 ~11:10 CDT)
+
+- **§570.1 MF-CH7 VALIDATED AND LANDED.** The cure lane's gate: `TRUE_EXIT=0` ·
+  `[gate-tail] exit: 0` · **29,051 tests** at the ratchet (= the slot's 29,044
+  + the car's declared +7, reconciled exactly) · strict dist 467/53 zero-defect
+  · ~20 GB free at end. Chair validation re-derived ancestry (slot → three
+  commits → tip), worktree clean, refs at expected values. Run #1's four
+  timeout strays retro-confirmed as load artifacts (its own re-run reports
+  zero). **Acts: `holding-ch7` created at `479992b6e` · `wip-ch7` deleted
+  (old-value asserted) · SLOT CAS `c3289244d` → `479992b6e`.** New slot facts:
+  **61 cars · census `2525/366/2159/21033/5849` · packets 180 · ratchet 11 of
+  29,051.** Lane conduct exemplary: the eslint-scope proof that the hook could
+  not rewrite bundles, the size-ratchet check BEFORE committing, and refusing
+  the timeout-widening invitation are all receipt-recorded (K1–K7).
+- **§570.2 ⭐⭐ OWNER DIRECTIVE (verbatim intent): "we need to match the
+  beautiful picture look… reprioritize… procedurally render the maps as the
+  beautiful pictures shown in the corpus, which is the point of why we have a
+  300+ corpus."** The visual REGISTER becomes the active build priority. The
+  chair's interpretation was laid out and the owner's follow-up ("can you turn
+  everything ON and then render something for me to judge by?") converts it to
+  a SPECIMEN-FIRST program: produce the everything-on exhibit, the owner
+  judges it, the waves then build to the APPROVED target with the §216 atlas
+  instruments proving closure. *JUDGMENT: specimen-first over waves-first
+  because building five waves toward an unapproved taste target is the CT-0
+  lesson inverted — say "veto" and the waves dispatch directly.*
+- **§570.3 DISPATCHED (seats: CH4-CURE + two new = three of four):**
+  **TE-REG-0** (Opus) — the everything-on taste specimen: fresh renders at the
+  sealed W3f tip, then a deterministic post-pass applying the ink ladder,
+  seeded line waver, roof hatching, drawn countryside, paper grain/stains/
+  vignette, wash pooling, and cartouche chrome; rasterized via headless Chrome
+  with a filter-rendering CONTROL (qlmanage silently drops SVG filters);
+  BEFORE/AFTER pairs for the owner. **TE-A1-REC** (Opus) — the MF-A1 recovery:
+  transcripts (the §338.4 route) → unreachable git blobs → disk sweep, with
+  per-route denominators; verdict RECOVERED / PARTIAL / UNRECOVERABLE-hence-
+  REBUILD.
+- **§570.4 CH4-CURE RE-BASED BY ORDER.** The slot moved under it mid-cure:
+  ordered to finish bill B's commit, rebase onto `479992b6e` (expected
+  conflict: both cars regenerated aiGrounding — resolve by REGENERATING at the
+  rebased tip, never by merging generated text), then F and A derived at the
+  rebased tree by execution, fresh bundle set, packet mint LAST (181 expected),
+  one gate. Sequencing consequence recorded: DW's build start slides behind
+  the REGISTER program; the review stop and push move accordingly — the
+  owner's stated trade ("truth is the moat, but not what draws users in").
+- **§570.5 ⭐⭐ THE OWNER'S SECOND AXIS, AND THE CHAIR'S HONEST CONCESSION:
+  INTUITIVENESS.** The owner: Watabou and FTG are not only prettier — they are
+  more INTUITIVE to read than ours. **Conceded on the chair's own eyes.** The
+  w2 render's specific legibility failures, named so the program can kill
+  them: (i) weak figure-ground — buildings/parcels/streets/ground sit in one
+  tonal band, so the city reads as TEXTURE at arm's length while Watabou's
+  streets find the reader; (ii) everything speaks at one volume — roof tones,
+  parcel strokes, district tints compete with no visible ranking of what
+  matters; (iii) the WALL — the most important line in a medieval town — is
+  quieter than parcel strokes; in Watabou and the corpus it is the loudest
+  line on the page; (iv) core symbols need the legend where the corpus draws
+  them self-explaining (a ruin drawn broken, a church drawn as a church);
+  (v) marginalia and ward names share one typographic weight, blurring
+  place-vs-annotation; (vi) ⛔ the cartouche leaks ENGINE VOCABULARY to the
+  user — "FABRIC 1 : 3.8 HOUSEHOLDS (REPRESENTATIVE)", "RELIEF 1.00" — a
+  live violation of the standing LEGIBILITY law and GAME-GRADE UX doctrine
+  (translate formulas). **RULED: the REGISTER program's exit is TWO-LEGGED —
+  register (the corpus look) AND legibility (hierarchy + convention), equal
+  weight.** New instruments to build alongside the atlas set: the 200px
+  SQUINT TEST (downscaled, can a cold reader still find streets/wall/water —
+  Watabou passes, w2 fails today); a no-legend comprehension checklist; and
+  contrast-ratio floors between role pairs (street-vs-ground, wall-vs-
+  everything), extending the shipped `lensContrast()` law. TE-REG-0's brief
+  amended in flight: wall loudest, street-network contrast lifted, the squint
+  control run on the specimen, and the cartouche language translated to
+  user words.
