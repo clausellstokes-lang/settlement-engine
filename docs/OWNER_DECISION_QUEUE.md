@@ -25280,3 +25280,42 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   the §236 pattern applied to DESIGN rather than code; running as the next
   act), and the competitor-visual verdict on the map (in progress; the browser
   surface died with the process and is being retried).
+
+## §567 · THE FABLE REVIEW OF THE DW ARCHITECTURE — RATIFIED, WITH SEVEN REFINEMENTS RULED INTO AN ADDENDUM (2026-08-24 ~10:40 CDT)
+
+- **§567.1 THE SITTING, AND ITS VERDICT.** The owner ordered a Fable
+  review-and-refine of the DW architecture (its evidence body — the 237KB draft
+  charter, the 141KB architecture doc, six research tranches — was largely
+  Opus-lane-built; the DW-0 compile itself was Fable-chaired). Read in full:
+  `DW0-CHARTER-COMPILED.md` (all 1,102 lines), the frozen design narrative, the
+  DW-PREP brief, the C-19 deliverables, and the post-compile rulings §555–§566.
+  **VERDICT: the compiled charter is RATIFIED as the operative layer** — its
+  layering law, three relations, derive-don't-store with dropped-anchor deltas,
+  single-flag rule, exit-criterion discipline and re-measure-at-the-slot law
+  each re-derived and held. **The full ruling text is ADDENDUM A2, appended to
+  the compiled charter itself** so a build lane sees it where it plans.
+- **§567.2 THE FOLD-INS (A2.1):** 41→42 cars reads through every §F figure
+  (46 DW commits / 47 dispatched); C-19's ruled 61/54 replaces every "~55"/"~35"
+  — the charter's own §I C-19 recount order is DISCHARGED; catalog-train state
+  re-stamped at the slot (CH-5 LANDED; CH-4/CH-7 wip under cure; CH-6 held by
+  §555.9).
+- **§567.3 TWO FORKS RULED:** **the LADDER orphan → FIXTURE, circulation stays
+  61** (the press/aumbry law decides it; not added as a lone member — it joins
+  the C-25 gate's findings, and the fixture figure moves once). **DW-1g's
+  authoring debt** — four items owed before its dispatch (per-key adjudication
+  of the 73; §D row + §G integer criterion; ninth-vocabulary membership in the
+  pre-DW-1 gate; an architecture packet — R4's count is 25 of 42).
+- **§567.4 TWO NEW NAMED GATES:** **[PRE-DW-2b] the P1d benchmark's refutation
+  rules REGISTER before the parti weights are authored** (the G-39/G-43 lesson);
+  **DW-S1 states a PRICED compute budget and a pre-registered sampling law** —
+  a soak leg that quietly samples is the vacuity class, and one that cannot
+  finish is not a leg.
+- **§567.5 ONE NEW OWNER QUESTION (Q6):** plan stability across ENGINE
+  VERSIONS — accept (projections evolve, deltas drop visibly) vs grandfather
+  (version-pinned parti seed-path). Product promise, not code; queued for the
+  next owner sitting.
+- **§567.6 OWED CHAIR ACT, RECORDED NOT DROPPED:** the corrected re-preserve of
+  the draft charter (C-19's five claim sites at 61/54, plus C-8's
+  sixteen→eleven pushback) as a VERSIONED second ref beside `029268fe5` — old
+  ref stays provenance, new ref becomes of-record. Until it lands, A2 is the
+  figure of record.

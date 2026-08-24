@@ -1100,3 +1100,86 @@ the de-advertised `interiors` row's UNGATED-and-UNSHIPPED status ·
 `tests/docs/docCounts.test.js` pins no doc-file count, so a new `docs/*.md` adds no debt there ·
 that no `docs/DESIGN_DWELLINGS_PROGRAM.md` and no dwellings architecture doc exist at
 `79b78881c`, `claude/composite-r4` or `master`.
+
+---
+
+## ADDENDUM A2 · THE FABLE REVIEW SITTING (ODQ §567, 2026-08-24; slot `c3289244d`, 60 cars)
+
+**Owner-ordered: a Fable review-and-refine pass over the DW architecture, much of whose evidence
+body (the draft charter, the architecture doc, the six research tranches) was Opus-lane-built.
+Verdict: the compiled charter is RATIFIED as the operative layer** — the layering law (J-DW0-1),
+the three relations, derive-don't-store with dropped-anchor deltas, the single-flag rule, the
+exit-criterion discipline, and the re-measure-at-the-slot standing law were each re-derived and
+held. The rows below are the delta: what moved after this compile's base, and seven refinements.
+Where this addendum and the body disagree, the addendum wins; the ledger outranks both.
+
+### A2.1 · Figures that moved since the base (fold-in, not conflict)
+- **41 cars → 42.** §560.6/§562.6 minted **DW-1g (ENVELOPE)** and amended J-DW0-2. Commit
+  arithmetic: 45 → **46** DW commits; 46 → **47** dispatched. §F.1/§F.2/§F.4 read through this row.
+- **The §I C-19 recount this charter ordered has RUN** (TE-C19-RECOUNT, ODQ §566.2):
+  **CIRCULATION 61 (floor 59 / ceiling 62) · STORAGE 54 (floor 49 / ceiling 58)** — twice-derived
+  by independent parsers, all three controls fired, the naive 86/69 reproduced and decomposed.
+  **Every "~55"/"~35" in this document and the draft now reads 61/54; DW-1d/1e pin the INTEGERS
+  with mutants.** The draft's five claim sites move by the preserved edit spec
+  (`31585ce2` scratchpad, `c19/claim-site-edits.md`); the corrected re-preserve of the draft is a
+  chair act OWED (§567.6) — until it lands, THIS addendum is the figure of record.
+- **Catalog-train state at the slot:** CH-5 LANDED (Shape F, in the six-car stack) · CH-4 and CH-7
+  are `wip-` cars under cure (§564) · CH-6 undispatched per §555.9. EST-5's blocker CH-4 is
+  near-landing.
+
+### A2.2 · RULED — the LADDER orphan (C-19 finding i): **a ladder is a FIXTURE; circulation stays 61.**
+The vocabulary's own press/aumbry law decides it: a thing too small to be a cell is a FIXTURE of
+its host cell. A ladder occupies no floor area; it is the attached artifact serving a `HATCH` or
+trap — exactly the §453 shape. S6's stair grammar ("ladder → winder → spiral → grand") selects
+stair TYPE and may lawfully reference a fixture at its poorest rung. ⛔ **But `ladder` is NOT added
+as a lone member** — C-25 bars single-symptom adds. It joins the C-25 mechanical re-derivation's
+expected findings (charter L822's own "(fixture)" annotation is its evidence), and the fixture
+figure moves ONCE, after that gate runs.
+
+### A2.3 · RULED — DW-1g's authoring debt (C-19 finding ii)
+**ENVELOPE has ZERO token occurrences in the frozen charter** — the vocabulary is minted law
+(§558.5) with no charter text behind it. Before DW-1g dispatches it owes: **(a)** the per-key
+adjudication of the 73 BE tokens (the DW-PREP §6 count is sample-grade, flagged PARTIAL — never to
+be quoted as measured); **(b)** a §D row and a §G exit criterion — integer pinned with mutants, the
+C-19 pattern; **(c)** membership in the pre-DW-1 uniqueness/homing gate as the NINTH vocabulary;
+**(d)** an architecture packet — **R4's owed-changeManifest count is 25 of 42, not 24 of 41.**
+Ordering: DW-1g lands after DW-1b and **before DW-2b** (its `service{flue}` is the producer §560.5
+found arm 4b needs); it serializes with 1a/1b only if it touches `interiorTemplates.js`.
+
+### A2.4 · RULED — the pre-DW-1 gate consumes C-19's crosses
+Beyond §D's 20 collisions, C-19 measured **28 sub-form × chartered CELL_KINDS · 8 × landed
+ROOM_KINDS · 2 × PARTIS (`BARBICAN`, `LONGHOUSE`) · 2 × fixtures (`CHUTE`, `GATE`)**
+(`c19/cross-collisions.txt`). The gate's owning-vocabulary table covers the DEDUPED union of both
+sets; the HOMING arm's first specimen is `ladder` — a token in no vocabulary, exactly the defect
+class that arm exists for. Whether the 28 CELL crosses are deliberate design (storage-as-cell
+mirroring) is DW-1a/1e design authority: **the gate assigns owners; it does not delete members.**
+
+### A2.5 · REFINEMENT — a named [PRE-DW-2b] gate: **the P1d benchmark registers BEFORE the weights**
+§15's P1d row says pre-registration precedes any tuning of weights, but no §G row binds it.
+New gate: the DW benchmark's refutation rules (room-size / adjacency / parti-frequency
+distributions vs the corpus) are REGISTERED at a preserve ref, dated before DW-2b's dispatch.
+The G-39/G-43 lesson is the reason: a benchmark authored after the weights is a rationalization,
+not a test.
+
+### A2.6 · REFINEMENT — DW-S owes a PRICED compute budget and a pre-registered sampling law
+"Every building's plan is re-derived at every soak epoch" is unpriced: soak cells × epochs ×
+buildings × a full derivation each. DW-S1's changeManifest must state the budget and the sampling
+law explicitly — full-per-epoch, or a pre-registered deterministic sample, with the constitutional
+arms (A4/A8/A9) still specified over a stated set. A soak leg that quietly samples is the vacuity
+class; a soak leg that cannot finish is not a leg. **If full re-derivation is intractable at
+measured cost, that is a FINDING for the chair, never a silent cut.**
+
+### A2.7 · OPEN QUESTION added to §14 — **Q6: plan stability across ENGINE VERSIONS**
+§6's re-derivation triggers are all world-state triggers. An engine update that changes S1's
+snapshot shape or S2's draw re-derives every plan; anchors drop lawfully (E.1b) — but a paying
+DM's annotated tavern re-deriving into a different parti after a product update is a
+product-promise question, not a code question. The fork for the owner sitting: **accept**
+(projections may evolve; deltas drop lawfully and visibly) or **grandfather** (the parti draw's
+seed-path is version-pinned per building). Owner taste; neither is the chair's to pick silently.
+
+### A2.8 · Checked and NOT changed
+The nine founding laws · the three relations · S1–S9 · the single flag and its six-surface bill ·
+C-19's zero-tolerance lattice ruling (re-derived: integer shoelace exactness holds; one watch-item
+for DW-2b's dispatch — wall polygons must land on the same lattice or the accounting identity
+needs a third term stated) · C-20's `SURFACE_JOINT_KINDS` disjointness · C-22's split · C-25's
+gate. **All RATIFIED as compiled.**
