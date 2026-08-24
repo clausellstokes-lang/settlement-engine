@@ -27025,3 +27025,56 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   (the shipped hamlet 240→400 window, unambiguous under §57.2's repair precedent)
   is already in flight as a build-branch car with its own lifecycle trace of
   `settType` persistence.
+
+## §632 · REG-4 SEALS — THE MARKET IS A PLACE, THE FLOOR IS SIGNED, AND THE DIFFERENTIAL CONVICTS THE GROWTH MODEL (2026-08-25 ~05:50 CDT)
+
+- **§632.1 SEALED** at `refs/preserve/map-sandbox-reg4-markets` = `5cce5782d` (base = the
+  REG-3 seal). The exits, executed: tint-seam census **0 of 141 mouths / 0 of 18 fills**
+  with TWO convicting mutations each redding its own arm; hf259's shapes selected from the
+  street web (cigar 7 · carved 16), inscription invariant **0 of 1,104 vertices** outside
+  the reserved blob; V-B13 furnishing **23 of 23 voids in the §629.1 band**; the market-
+  infill fossils a CONSUMPTION of §18.4's dated record (NOT thin — 11 leaves fire, the two
+  young snapshots correctly zero) drawn with hf259's island anatomy and a dashed retreat
+  ghost; faubourg origins **129/129 buildings and every extramural region typed**, gate
+  resolution 100 % by roster replication; L-REG-30 sliver census **0 of 23,436** with the
+  disarmed control at 1,585 and a planted sliver caught on every leaf; dormancy **29/29
+  byte-identical** (the four base SHAs reproduce REG-3's receipt digit for digit);
+  determinism 29/29 × three arms; ZERO new test files. **TASTE GATE: PASS** — the before/
+  after is a hole becoming a market.
+- **§632.2 THE FLOOR IS SIGNED (chair, §604/§630, vetoable): F-C = 6 × INK.detail**, with
+  `AREA_ASPECT 1.6` and `CLAMP_MARGIN 1.001` — the only candidate this repo already ruled
+  for the exact question (J-REG3-6), where F-B would suppress ~35 % of a town's parcels
+  (a redraw, not a floor). Tuning-surface constants; `--floor=F-A|F-B` remain one flag away.
+- **§632.3 THE GROWTH-MODEL CONVICTION, RULED:** the differential (band-agnostic per the
+  chair's mid-flight instruction, with a convicting `--break` control) found the engine
+  grows OUTWARD past a standing circuit — intramural holdings FALL 1,414→883 between year
+  100 and the present while the suburb rises 64→536, **509 untyped** — and the population
+  arm cannot even hold the circuit still (enclosed area 365k→300k→349k→222k across one
+  sub-threshold band). The lane rightly stopped at measure-and-report (J-REG4-9).
+  **CHAIR'S RULING, recorded vetoably with its reasoning:** the cure is **IN SCOPE as
+  chartered repair, not a new-capability grant** — the owner's wall law is explicit
+  ("walls end districts and semi-permanently stop their growth; new districts of varying
+  origin expand from the walls' edges") and A2.2's differential was chartered as an EXIT,
+  meaning the architecture the owner ordered already specifies the conforming behaviour.
+  It changes DERIVED built form only (`builtUmbrella`/`parcels` in the dormant sandbox
+  fabric): no stored tier, no lived history, no shipped surface moves — THE PROMISE is
+  untouched, and the shift is a declared same-seed map shift in a core nothing has shipped.
+  **REG-GROW is MINTED**: architecture-first (the chair architects: intramural
+  densification pressure, typed-only extramural emission, the CIRCUIT AS A DATED
+  HISTORICAL OBJECT — vintage-pinned, as the snapshot arm already half-does), skeptic
+  panel, then the Opus build; sequenced AFTER REG-SEAM (bands first), feeding REG-T2.
+  The owner may veto the mint itself.
+- **§632.4 THE REST:** `REG_OP_CEILINGS` accepted (J-REG4-10 — measure at the signed pin
+  without moving it); **landing §628's table into `OP_CEILING_BY_TIER` rides REG-SEAM**
+  with the fixed-point re-measure (the BASE column itself moves, 4,386→4,447 measured).
+  Headroom at the signed pins with EVERY wave armed: all six tiers hold, thorp tightest at
+  32. **REG-I1 (instruments car) is chartered**: the seven i8 trace rows (REG-2's 15r,
+  REG-3's 12r/13p, REG-4's four in receipt §7) · the owed i5/i6 armed re-runs · synthetic
+  liveness controls for the unfired `triangular` and `bridgehead` branches · the §628
+  ratchet-unit review · the warehouse silhouette FIXTURE CURE (the area:0 quay extraction)
+  with fresh fixtures for the owed re-round. The five new closed vocabularies' totality
+  walker is ONE bill for three waves and lands at REG-P (endorsed as recorded). Banked as
+  law: **a Chrome shot's verdict is the PNG's existence, never the exit status**
+  (J-REG4-11 — headless Chrome outlived its own screenshot by minutes). REG-9 judging
+  inputs recorded: town-2's vacuous faubourg coverage · region-level typing reads all-road
+  by centroid · cigar retention 52–76 %.
