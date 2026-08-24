@@ -59,6 +59,16 @@ CH-4 → **CH-6** (⛔ a **live shipped deity-doctrine violation**: a magic-free
 
 ⛔ **EDGE-BUNDLE BILL — the count is PER-FILE.** `npcProfile.js` sits in three closures, `districtProfile.js` in one (`aiGroundingBundle`, 67 inputs). **Read `supabase/functions/_shared/<bundle>.meta.json` before budgeting.** The bill is **invisible to targeted suite runs** — only the full gate sees it. Cure: `npm run build:edge-shared`, commit all six files as a set.
 
+### ⛔ COLLECT THIS FIRST — A GATE WAS IN FLIGHT WHEN THE SESSION ENDED
+TE-CH-4's full gate was running at handoff and **the agent watching for it died with the session**, so nobody is holding the verdict. It is on disk:
+
+    LOG:  /var/folders/0l/_sz6gzvd11x6sthjy1jdj0_80000gp/T/gate-tail.10770.log          (gate-tail pid 10770)
+    grep -aE 'TRUE_EXIT|\[gate-tail\] exit|known failure|ceiling|STRICT DIST|valid: [0-9]+ packets' <LOG> | tail -20
+
+⚠ Read it **soon** — that is the system TMPDIR and macOS reaps it. **GREEN needs all three:** `TRUE_EXIT=0` **and** `[gate-tail] exit: 0` **and a collected-test count** — an exit code without a count is not a verdict.
+**On green:** `git update-ref refs/preserve/holding-ch4 dc49c6c4a6761abc54235792665db611338805f3 && git update-ref -d refs/preserve/wip-ch4`
+**If it reds on the freshness or reproducibility arms**, the regen did not take — re-run `npm run build:edge-shared` and commit all six sidecars as a set. **Do not widen the census with those six.**
+
 ## ⭐⭐⭐⭐ SUCCESSION ADDENDUM — 2026-08-24 (~01:40), LEDGER THROUGH §439 — READ THIS DELTA FIRST, THEN THE §427 BLOCK BELOW
 
 The §427 block's structure stands; THIS delta supersedes its state figures:

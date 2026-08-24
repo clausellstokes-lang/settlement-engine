@@ -25132,3 +25132,25 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   `holding-dw0-final` · `wip-ch4` = `dc49c6c4a` (gate in flight) · `wip-ch7` =
   `373601437` (owes its own regen, then one clean gate).** ⛔ **Nothing has
   deployed since 2026-07-28.**
+
+## §563 · THE LAST GAP: A GATE OUTLIVES THE AGENT WATCHING IT (2026-08-24 09:03 CDT)
+
+- **§563.1 ⛔ CH-4's GATE WAS STILL RUNNING WHEN THE SESSION CLOSED, AND ITS
+  WATCHER DIES WITH THE SESSION.** The lane armed a blocking watcher and would
+  have collected the verdict itself — **but an agent cannot outlive its
+  session, so the verdict would have landed in a log nobody knew the path to.**
+  Closed: the path, the pid, the collect command, the three-part green test and
+  the on-green promotion are now **in the pickup card**, which is where a
+  successor actually looks. **Log: `/var/folders/0l/_sz6gzvd11x6sthjy1jdj0_80000gp/T/gate-tail.10770.log` (pid 10770), already 30 KB and
+  filling — `gate-tail` buffers, so it completes at the end.**
+- **§563.2 THE GENERAL SHAPE, WORTH KEEPING.** *An in-flight gate's result
+  survives its lane's death — but only if somebody wrote down where to find it.*
+  The estate already knew the first half (§388's "read `*.exit` before
+  relaunching"); **the second half is the part that bites at a session boundary,
+  and it is now card-level rather than folklore.**
+- **§563.3 CH-4's FINAL POSITION IS THE RIGHT ONE.** In its own words: *"I will
+  not claim green until I can quote `TRUE_EXIT=0` and `[gate-tail] exit: 0`
+  together with a collected-test count — an exit code without a count is not a
+  verdict. If it reds on the freshness or reproducibility arms, that means the
+  regen didn't take and I'll say so verbatim rather than re-running until it
+  looks clean."* **That is the standard, stated by a lane and not by the chair.**
