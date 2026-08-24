@@ -59,7 +59,24 @@ CH-4 → **CH-6** (⛔ a **live shipped deity-doctrine violation**: a magic-free
 
 ⛔ **EDGE-BUNDLE BILL — the count is PER-FILE.** `npcProfile.js` sits in three closures, `districtProfile.js` in one (`aiGroundingBundle`, 67 inputs). **Read `supabase/functions/_shared/<bundle>.meta.json` before budgeting.** The bill is **invisible to targeted suite runs** — only the full gate sees it. Cure: `npm run build:edge-shared`, commit all six files as a set.
 
-### ⭐⭐⭐ STATE AS OF §585 (2026-08-24 ~14:20) — FULL JUDGMENT DELEGATED; RUNNING TO THE SOAK
+### ⭐⭐⭐ STATE AS OF §595 (2026-08-24 ~16:50) — THE REGISTER ARC IS LIVE AND MEASURED
+**Slot `714a398b7` (63 cars — MF-CH7 §570, MF-CH4 §582, DEPLOYDOC-188 §588 landed this
+sitting; MF-CH6 re-proof gate in flight at rebased `e4ed27f48`, lands 64th on green —
+§594).** Ledger through §595. THE REGISTER PROGRAM governs all map work:
+`docs/DESIGN_REGISTER_PROGRAM.md` + A1 + **A2 (the 43 panel findings ruled, §586)**; owner
+laws §570–§584 + §590 rampart spec + **§591 TOTALITY (weakest-element grading)** + §593
+overhead/plan-view roof standard + §580 north star. ⚠ The old "wave nine" bucket below is
+SUPERSEDED by the REG waves. **Preserves this sitting:** `mf-a1-recovered` ·
+`map-corpus-docs` · `research-dossiers-…-r2` · `map-sandbox-regg1-cliffs` (§589 sealed) ·
+`reg-instruments` (§592, baselines + the zero censuses with liveness) ·
+`reg-detail-register` (§595 — BINDING per-class anchors incl. the corpus's own spec/zoom
+instruction plates). CH-6b chartered (receipt taxonomy-read cure → licence routing);
+divine-healer content row → content train; fjord-crag + wall-regime + B13 constants → the
+tuning docket. §585 delegation stands: all judgments the chair's, vetoably; by-nature
+carve-outs survive (push/deploy/cutover/tuning signature/legal/cull/ultra); mandate runs
+to the terminal soak.
+
+### (historical) STATE AS OF §585 (2026-08-24 ~14:20) — FULL JUDGMENT DELEGATED; RUNNING TO THE SOAK
 **Slot `233c35a69` (62 cars — MF-CH7 §570 and MF-CH4 §582 both LANDED this sitting) · census
 `2525/366/2159/21049/5852` · packets 181 · ratchet 11 of 29,067.** THE REGISTER PROGRAM is the
 active build priority: `docs/DESIGN_REGISTER_PROGRAM.md` (§581 + A1 §584; skeptic panel in

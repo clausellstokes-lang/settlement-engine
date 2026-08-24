@@ -26118,3 +26118,33 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   ("L.DA VINCI") that must never be copied into a product plate.** The
   cross-class ladders (hf378 density, hf379 ruin stages) join the judging
   rounds as the tier-dress locator.
+
+## §596 · THE RECONCILIATION AUDIT — WHAT IS PROVEN JOINED, AND WHAT IS NAMED DEFERRED (2026-08-24 ~16:55 CDT)
+
+- **§596.1 THE OWNER ASKED FOR ASSURANCE; HERE IS THE EVIDENCE FORM OF IT.**
+  The reconciliation was performed ADVERSARIALLY, not assumed: the six-lens
+  panel checked the register architecture against the ledger (two phantom
+  citations found and cured), against the slot's code (massing live; the
+  relief field's true state), against the other programs (AD's J-AD-5
+  one-geometry law now binds Q2 · DW's B18 producer gap cured by striking the
+  dependency · the completed D3a port reconciled via the chartered REG-P
+  re-port · §523/§524 entitlements bound as no-growth · §482's order carried
+  as the recorded §570.4 slide) — all 43 findings ruled in A2. The
+  constitutional laws are invariants by construction: THE PROMISE in
+  L-REG-12, the deity doctrine executed in CH-6, finite semantics untouched,
+  §322.9's calibration bars preserved in L-REG-10, the §585 carve-outs
+  surviving every delegation. New directives kept resolving INTO standing
+  law rather than beside it (§571→§232/§240 · §590→§214 · §577→walls.js
+  Rule 3), which is what reconciled means.
+- **§596.2 THE LIVE GAP THE QUESTION CAUGHT, CLOSED NOW:** the pickup card
+  was three sittings stale — refreshed to §595 state in this commit, with
+  the old wave-nine bucket marked SUPERSEDED by the REG waves so nobody
+  double-charters countryside/§214/MF-A1 from the historical queue.
+- **§596.3 DEFERRED RECONCILIATIONS, NAMED SO NONE IS RE-FOUND AS A BUG:**
+  (i) Q3's final glyph-library disposition lands with REG-3's charter
+  (§593.2); (ii) the DW program's projection surfaces (DW-6) will owe a
+  DETAIL-REGISTER citation when DW builds resume — carry-note planted here;
+  (iii) the auto-memory index's map rows still speak wave-nine language —
+  swept at the session-end memory pass, the HANDOFF being the authoritative
+  successor surface meanwhile; (iv) CH-6b and the divine-healer content row
+  are chartered queue entries, not amendments owed.
