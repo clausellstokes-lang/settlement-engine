@@ -5,8 +5,9 @@
  * compiled cartography sheet, and TC-5a's paint leaf's FIRST PRODUCTION IMPORTER.
  *
  * ONE ORDERING TRUTH. `buildCartographyDrawList` emits ops in the painter's own
- * back-to-front order — wards, then arterials and lanes over them, then buildings
- * on top — sorted by raw codepoint id inside each layer. This component renders
+ * back-to-front order — wards, the PROPERTY LINES carved inside them (MP-1), then
+ * arterials and lanes over both, then buildings on top — sorted by raw codepoint id
+ * inside each layer. This component renders
  * that sequence VERBATIM and NEVER re-sorts, re-filters or recomputes it. A second
  * ordering here would be a second truth about what the sheet says; a paint-time
  * audience filter would be a second truth about what a reader may see, and
@@ -39,7 +40,9 @@
 import { useEffect, useMemo } from 'react';
 import { BORDER, CARD, FS, INK, MUTED, SP, sans } from '../../theme.js';
 import { buildCartographyDrawList } from '../../../domain/townCartography/cartographyPaint.js';
-import { resolveRoleFill, STREET_TONE_PERMILLE } from './cartographyColours.js';
+import {
+  PARCEL_LINE_ROLE, PARCEL_LINE_TONE_PERMILLE, resolveRoleFill, STREET_TONE_PERMILLE,
+} from './cartographyColours.js';
 
 /** Build sentinel — see MapTabShell's, and tests/build/mapTabShellLazy.test.js. */
 export const MAP_CARTOGRAPHY_SUBTAB_LAZY_SENTINEL = 'settlementforge:map-cartography-subtab:lazy-v1';
@@ -50,6 +53,9 @@ const PERMILLE = 1000;
 const PERMILLE_HALF = 500;
 /** A weighted lane may never round away to an invisible hairline. */
 const PEN_FLOOR_PLAN = 1;
+/** MP-1: the property line is the THINNEST mark on the sheet — a surveyor's boundary
+ *  is drawn under the fabric, never competing with the lanes that carry traffic. */
+const PARCEL_LINE_PEN_PLAN = 1;
 
 const noteStyle = {
   fontFamily: sans, fontSize: FS.sm, color: MUTED, lineHeight: 1.5, margin: 0,
@@ -88,6 +94,21 @@ function penWidthOf(widthPlan, weightPermille) {
 function elementsFor(block) {
   return buildCartographyDrawList(block).map((op) => {
     const at = `${op.op} '${op.id}'`;
+    // MP-1 THE PROPERTY LINE. A parcel op is a BOUNDARY, not a fill: it carries a ring
+    // and no paint scalar at all, exactly as a street carries no tone. Drawn as an
+    // unfilled hairline so the surveyor's sheet gains the property lines the owner
+    // asked to see (§495.1) WITHOUT repainting the ward underneath — parcels tile only
+    // the selected candidates of a ward, so a filled parcel layer would mottle the
+    // ward tone into a pattern that means nothing.
+    if (op.op === 'parcel') {
+      return {
+        key: `${op.op}:${op.id}`,
+        kind: 'boundary',
+        points: pointsOf(op.polygon, at),
+        stroke: resolveRoleFill(PARCEL_LINE_ROLE, PARCEL_LINE_TONE_PERMILLE),
+        penWidth: PARCEL_LINE_PEN_PLAN,
+      };
+    }
     if (op.op === 'street') {
       return {
         key: `${op.op}:${op.id}`,
@@ -163,6 +184,14 @@ export default function MapCartographySubTab({ block = null, planExtent = null }
         >
           {sheet.elements.map((element) => (element.kind === 'polyline' ? (
             <polyline
+              key={String(element.key)}
+              points={String(element.points)}
+              fill="none"
+              stroke={String(element.stroke)}
+              strokeWidth={Number(element.penWidth)}
+            />
+          ) : element.kind === 'boundary' ? (
+            <polygon
               key={String(element.key)}
               points={String(element.points)}
               fill="none"

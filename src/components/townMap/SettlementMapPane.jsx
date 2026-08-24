@@ -74,6 +74,11 @@ import SettlementMapLandform from './SettlementMapLandform.jsx';
 // The underlay is the illustrated lens's SINGLE art source (the same buildTownMapDrawList
 // the exports use), mounted under the interactive layers whose fills go transparent.
 import SettlementMapGrid from './SettlementMapGrid.jsx';
+// MP-1 THE PROPERTY-LINE HALO — the owner's §494 directive. A hovered or pinned building
+// lights the whole PROPERTY (boundary + yard), not the building. Another out-of-file leaf
+// for the same measured reason as the four around it: this pane is max-lines-capped and had
+// six effective lines of headroom. Self-gating on a dark cartography block ⇒ byte-identical.
+import SettlementMapPropertyLine from './SettlementMapPropertyLine.jsx';
 import SettlementMapIllustratedUnderlay from './SettlementMapIllustratedUnderlay.jsx';
 import SettlementMapAgeOverlay from './SettlementMapAgeOverlay.jsx'; // V-15 THE AGED MAP (self-gates on the shared timelapseTick; toggle-off ⇒ byte-exact)
 // IT3-c — the DM season-override control (a lazy leaf; the pane is max-lines-capped so this
@@ -111,7 +116,13 @@ const offsetXY = (x, y, p) => (p ? { x: x + p.dx, y: y + p.dy } : { x, y });
  *   audience?: 'dm'|'player'|'public',
  *   presentation?: 'plan'|'panorama'|'portrait3d'|null,
  *   onPresentationChange?: ((view: string) => void)|null,
+ *   cartography?: any,
  * }} props
+ * `cartography` (MP-1, OPTIONAL) is the compiled cartography block, threaded down by
+ * MapTabShell, which already holds it. It carries the PROPERTY LINES: a hovered or
+ * pinned building lights the parcel it stands on rather than only itself (§494). The
+ * rule behind that block is virtual and dark by default, so absent/null is the ORDINARY
+ * case and the plan is byte-identical to before — no caller outside the shell passes it.
  * `presentation` / `onPresentationChange` (TC-0, §12 / J-TC-8, OPTIONAL and absent by
  * default) hand the projection choice to the dossier Map tab's SUB-TAB SHELL. Supplied ⇒
  * the shell's strip is the only view switch (this pane's own Segmented stands down) and
@@ -130,7 +141,7 @@ export default function SettlementMapPane({
   worldState = null,
   regionalGraph = null,
   audience = 'dm',
-  presentation = null, onPresentationChange = null,
+  presentation = null, onPresentationChange = null, cartography = null,
 }) {
   const applyMapEdit = useStore(s => s.applyMapEdit);
   const desktop = useFinePointer();
@@ -585,6 +596,9 @@ export default function SettlementMapPane({
               </g>
             );
           })}
+
+          {/* ── MP-1 THE PROPERTY LINE — over the districts, under what stands on them (the painter's own parcel-op position); the same `pinned ?? hovered` machine, BUILDINGS only; free at every level (§514.1b). The leaf's header carries the rest. ── */}
+          <SettlementMapPropertyLine cartography={cartography} anchorKey={active?.kind === 'building' ? hoverKey : null} halo={C.anchorFill} />
 
           {/* ── fortifications (walls + gates; suppressed under the illustrated underlay) ─ */}
           {!illustrated && fortifications && (

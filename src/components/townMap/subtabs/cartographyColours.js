@@ -83,6 +83,27 @@ const VALUE_PREFIX = '#';
 export const STREET_TONE_PERMILLE = TONE_FLOOR_PERMILLE;
 
 /**
+ * MP-1 — THE PROPERTY LINE'S ONE INK, named here for the SAME reason the street's is:
+ * a `parcel` op is a boundary and carries no `role` and no `tonePermille`
+ * (cartographyPaint.js's parcel typedef), so a call site that wanted one would have
+ * to invent it, and two call sites would invent two.
+ *
+ * ⚠ WHY THE PAINTER WITHHOLDS THEM, so nobody "fixes" it by adding them there: the
+ * parcel layer is also the only path from a building to its ward, and the building's
+ * throw for a parcel that names a ward outside the block is reachable only because
+ * the parcel loop resolves no wards. A role on the parcel op would move that throw
+ * one layer earlier and leave a landed referential arm dead.
+ *
+ * `default` is the honest role: it is the estate's plain unclassified ink, and a
+ * property line belongs to no ward kind — it is the same mark in a noble quarter and
+ * in a tannery. The tone sits a THIRD of the way off the ink end, which is darker
+ * than any ward wash and lighter than a street, so the boundary reads under the
+ * fabric rather than competing with it.
+ */
+export const PARCEL_LINE_ROLE = 'default';
+export const PARCEL_LINE_TONE_PERMILLE = 333;
+
+/**
  * BUILD a map whose key set IS the frozen vocabulary. Both directions are checked,
  * so neither a forgotten member nor a stale key survives module load.
  * @template T

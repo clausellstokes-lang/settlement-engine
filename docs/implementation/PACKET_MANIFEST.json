@@ -24210,6 +24210,192 @@
         "validate"
        ]
       ]
+    },
+    {
+      "id": "MF-MP1",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/town-cartography/MF-MP1.md",
+      "verifiedBase": "5055990a38a281b5a5f63648c74e65c0837de7ef",
+      "changeManifest": [
+        {
+          "_note": "THE PUBLISH. One `parcel` op per parcel row, between the wards and the streets. The op carries {op, id, wardId, polygon} and NO paint scalar: a boundary, not a fill. This MOVES the leaf's length identity, which is a declared change with all fourteen of its pins named in the packet's section 6.",
+          "action": "MODIFY",
+          "path": "src/domain/townCartography/cartographyPaint.js"
+        },
+        {
+          "_note": "THE JOIN. Membership is 'shares a parcelId' (no new relation); the anchor-key lookup crosses the semanticId prefix ONCE, with a live agreement pin against a real compiled manifest; open ground is the ring plus its members as HOLES, so the even-odd fill rule performs the subtraction and no clipping exists anywhere. Total and never-throwing, deliberately unlike the painter, because a dark block is this reader's ordinary state rather than an error.",
+          "action": "CREATE",
+          "path": "src/domain/townCartography/cartographyProperty.js"
+        },
+        {
+          "_note": "THE PROPERTY LINE'S ONE INK, named once for the same reason STREET_TONE_PERMILLE is: a parcel op carries no role and no tone, so a call site that wanted one would invent it and two call sites would invent two.",
+          "action": "MODIFY",
+          "path": "src/components/townMap/subtabs/cartographyColours.js"
+        },
+        {
+          "_note": "THE SHEET RENDERS THE NEW OP as an unfilled hairline. The element count still equals the identity and the emitted order is still transcribed verbatim; a FILLED parcel layer would mottle the ward tone, because parcels tile only the selected candidates of a ward.",
+          "action": "MODIFY",
+          "path": "src/components/townMap/subtabs/MapCartographySubTab.jsx"
+        },
+        {
+          "_note": "THE HALO. Border plus a low-opacity tint so it survives colour-blind and high-contrast modes; the yard is an evenodd path; pointerEvents none throughout so it cannot steal the hover that summoned it; and it reads NO entitlement, per the owner's section 514.1b ruling that viewing and interacting are FREE at every level.",
+          "action": "CREATE",
+          "path": "src/components/townMap/SettlementMapPropertyLine.jsx"
+        },
+        {
+          "_note": "THE MOUNT, and it is THREE EFFECTIVE LINES. This file sat at 594 of its 600-line ceiling at the base and sits at 597 after; the halo is an out-of-file leaf for that measured reason, which is this file's own precedent for landform, grid, age overlay and fog. Keyed off the existing pinned-else-hovered machine, BUILDINGS only, outside every authoring gate.",
+          "action": "MODIFY",
+          "path": "src/components/townMap/SettlementMapPane.jsx"
+        },
+        {
+          "_note": "The shell already holds the compiled block for the Cartography sheet; it threads the SAME block down to the plan. No second compile and no new hook. Dark implies null implies a byte-identical plan, which is every existing world's state.",
+          "action": "MODIFY",
+          "path": "src/components/townMap/MapTabShell.jsx"
+        },
+        {
+          "_note": "EIGHT of the fourteen moved identity pins live here: the expectedLength helper, the C1 rank map and known-id set, the two C2 op-count arms whose prose said a parcel draws nothing, C6's OP_KEYS and exercised-kind set, C6's by-reference count, and C8's toneless set -- the one pin the pre-edit grep missed and the first battery caught by execution.",
+          "action": "TEST",
+          "path": "tests/domain/townCartographyPaint.test.js"
+        },
+        {
+          "_note": "The producer-consumer identity proof, moved with an anti-vacuity pin that the real block genuinely carries parcels, plus the four-kind back-to-front order.",
+          "action": "TEST",
+          "path": "tests/lib/townCartographyBlock.test.js"
+        },
+        {
+          "_note": "The rendered element count and the hand-stated tag order, plus the fixture's parcel row, which omitted the contract-required polygon the painter had been dropping. A real compiled block never could.",
+          "action": "TEST",
+          "path": "tests/ui/mapCartographySubTab.test.jsx"
+        },
+        {
+          "_note": "MP-1's domain matrix, P1-P5: the join proven against a real compiled manifest on BOTH halves, membership by shared parcelId with object identity as the statement of 'once', the absent-parcel and malformed-ring degradations each anchored by a lawful sibling, and the open ground proven to be the members' footprints VERBATIM, which is what forbids a boolean-difference implementation.",
+          "action": "TEST",
+          "path": "tests/domain/townCartographyProperty.test.js"
+        },
+        {
+          "_note": "MP-1's UI matrix, H1-H4: border AND tint, the ring stroked exactly once, the yard punched evenodd with one subpath per member, both members of a compound drawing identical paths, a different property drawing a different one, four absence paths, no pointer, and no entitlement in either the leaf or its mount. The entitlement scan strips comments, because its first cut convicted the leaf's own header for NAMING the rule it refuses.",
+          "action": "TEST",
+          "path": "tests/ui/settlementMapPropertyLine.test.jsx"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/packets/town-cartography/MF-MP1.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE PAINTER'S ENTRY POINT. The whole publish is an insertion into this function's emitted list; renaming it un-grounds every acceptance case in the packet.",
+          "path": "src/domain/townCartography/cartographyPaint.js",
+          "symbol": "buildCartographyDrawList"
+        },
+        {
+          "_note": "THE ROW THAT ALREADY CARRIED THE LINE. The section 495 correction rests on this typedef carrying polygon; if the row loses it, this member has nothing to publish.",
+          "path": "src/domain/townCartography/cartographyParcels.js",
+          "symbol": "CartographyParcelRow"
+        },
+        {
+          "_note": "THE MINTING SITE OF THE JOIN. cartographyProperty.js spells the semantic-id prefix once and P1 pins the agreement against this file's own output; a rename here is exactly the drift that pin exists to catch.",
+          "path": "src/domain/townScene/buildingProfiles.js",
+          "symbol": "semanticId"
+        },
+        {
+          "_note": "THE ROLE-TO-VALUE BINDING the property line's ink resolves through. It is the only place a cartography role becomes a value, and the parcel line must not become a second one.",
+          "path": "src/components/townMap/subtabs/cartographyColours.js",
+          "symbol": "resolveRoleFill"
+        },
+        {
+          "_note": "THE PANE'S HOVER STATE MACHINE. The halo reads hoverKey, which IS pinned-else-hovered resolved; the owner's acceptance is stated in terms of this machine and never a second one.",
+          "path": "src/components/townMap/SettlementMapPane.jsx",
+          "symbol": "hoverKey"
+        },
+        {
+          "_note": "THE BLOCK'S EXACT KEY SET. The join reads parcels and buildings off the block by name; a change to this frozen set is a change to what this member can see.",
+          "path": "src/domain/townScene/cartographyContract.js",
+          "symbol": "TOWN_CARTOGRAPHY_BLOCK_KEYS"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "the moved length identity holds exactly over the twenty-row lit corpus; ward ops precede parcel ops precede street ops precede building ops; ids ascend within each run; all FOUR op shapes are exercised with closed key sets"
+        },
+        {
+          "id": "A2",
+          "case": "a parcel op's ring is the block's own array BY REFERENCE, and both landed referential throws still fire on their own fixtures with their own distinguishing messages"
+        },
+        {
+          "id": "A3",
+          "case": "the real compiled block satisfies the moved identity, with the new parcels term proved non-zero"
+        },
+        {
+          "id": "A4",
+          "case": "the sheet emits one element per op in the leaf's own order, with the property line third and unfilled"
+        },
+        {
+          "id": "A5",
+          "case": "the join is total on BOTH halves: every manifest building's semanticId is the prefix plus its anchorKey, and every cartography institutionRef IS a manifest semanticId"
+        },
+        {
+          "id": "A6",
+          "case": "a property is exactly the rows sharing its parcelId; every member resolves to the SAME object by identity; open ground is the ring plus the members' own footprints verbatim, with no polygon algebra"
+        },
+        {
+          "id": "A7",
+          "case": "an absent parcel, a malformed ring, a dark block and a non-record each answer empty rather than throwing, every negative anchored by a lawful sibling in the same fixture"
+        },
+        {
+          "id": "A8",
+          "case": "border AND tint, the ring stroked exactly once, the yard punched evenodd, both members of a compound drawing identical paths, nothing drawn when nothing is known, pointerEvents none, and NO entitlement read in either the leaf or its mount"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/townCartographyPaint.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/townCartographyProperty.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lib/townCartographyBlock.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/ui/mapCartographySubTab.test.jsx"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/ui/settlementMapPropertyLine.test.jsx"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ],
+      "retiredSymbols": []
     }
   ]
 }

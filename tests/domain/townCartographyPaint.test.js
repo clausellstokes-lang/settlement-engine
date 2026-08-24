@@ -68,9 +68,17 @@ const blockFor = (index, audience = 'dm') => compileRow(index, audience).cartogr
 /** Every corpus row's lit block, compiled once for the whole file. */
 const CORPUS = V2_GOLDEN_CONFIGS.map((_, index) => blockFor(index));
 
-/** The identity the packet states in place of an op ceiling (§6.2). */
-const expectedLength = (block) => block.wards.length + block.streets.arterials.length
-  + block.streets.lanes.length + block.buildings.length;
+/**
+ * The identity the packet states in place of an op ceiling (§6.2).
+ *
+ * ⚠ MP-1 MOVED THIS IDENTITY and the move is DECLARED, not drift. `parcels.length`
+ * is a NEW term: the parcel layer used to emit nothing, and now emits the property
+ * line the owner's §494 directive asked for. The old identity is recorded in
+ * cartographyPaint.js's own header beside the reason. Every pin below that stated
+ * the old length moved with it, in this same change.
+ */
+const expectedLength = (block) => block.wards.length + block.parcels.length
+  + block.streets.arterials.length + block.streets.lanes.length + block.buildings.length;
 
 /** A minimal well-formed block, for the cases the corpus provably cannot reach. */
 function blockOf({ wards = [], arterials = [], lanes = [], parcels = [], buildings = [] } = {}) {
@@ -210,6 +218,7 @@ describe('TC-5a C1 — a real lit compile paints an identity-length, ordered dra
     for (const [index, block] of CORPUS.entries()) {
       const known = new Set([
         ...block.wards.map((row) => row.id),
+        ...block.parcels.map((row) => row.id),
         ...block.streets.arterials.map((row) => row.id),
         ...block.streets.lanes.map((row) => row.id),
         ...block.buildings.map((row) => row.id),
@@ -222,11 +231,12 @@ describe('TC-5a C1 — a real lit compile paints an identity-length, ordered dra
     }
   }, SLOW);
 
-  it('ward ops precede street ops precede building ops, ids ascending within each group', () => {
+  it('ward ops precede parcel ops precede street ops precede building ops, ids ascending within each group', () => {
     for (const [index, block] of CORPUS.entries()) {
       const ops = buildCartographyDrawList(block);
       const groups = ops.map((op) => op.op);
-      const rank = { ward: 0, street: 1, building: 2 };
+      // MP-1: the property line sits OVER its ward and UNDER everything built on it.
+      const rank = { ward: 0, parcel: 1, street: 2, building: 3 };
       const ranks = groups.map((name) => rank[name]);
       expect(ranks.every((value, at) => at === 0 || ranks[at - 1] <= value), `row ${index}`)
         .toBe(true);
@@ -237,6 +247,7 @@ describe('TC-5a C1 — a real lit compile paints an identity-length, ordered dra
         || classes.lastIndexOf('arterial') < classes.indexOf('lane'), `row ${index}`).toBe(true);
       for (const run of [
         ops.filter((op) => op.op === 'ward'),
+        ops.filter((op) => op.op === 'parcel'),
         ops.filter((op) => op.op === 'street' && op.classKind === 'arterial'),
         ops.filter((op) => op.op === 'street' && op.classKind === 'lane'),
         ops.filter((op) => op.op === 'building'),
@@ -275,9 +286,11 @@ describe('TC-5a C2 — absence returns a frozen empty list; malformation throws'
     delete stripped.condition;
     // The SAME block paints cleanly with the key present, so the throw below is
     // attributable to the missing key rather than to anything else in the fixture.
-    // Two ops, not three: the parcel is READ for its ward reference and DRAWN never
-    // (§11 D-6), so this length is also the standing pin on parcels painting nothing.
-    expect(buildCartographyDrawList(block)).toHaveLength(2);
+    // THREE ops, not two — MP-1's declared move. The parcel is still READ for its
+    // ward reference AND is now DRAWN as the property line, so this length is the
+    // standing pin on a parcel painting exactly ONE op: one ward, one parcel, one
+    // building. It read `2` through TC-5a, when a parcel painted nothing.
+    expect(buildCartographyDrawList(block)).toHaveLength(3);
     expect(() => buildCartographyDrawList({ ...block, buildings: [stripped] }))
       .toThrow(PREMISE_PREFIX);
   });
@@ -303,9 +316,15 @@ describe('TC-5a C2 — absence returns a frozen empty list; malformation throws'
       buildings: [buildingOf('building:a', 'parcel:a', 'sound')],
     });
     // The SAME fixture with the parcel pointed back at the real ward paints cleanly
-    // (two ops — the parcel itself draws nothing), so the throw below is attributable
-    // to the dangling wardId rather than to anything else in the block.
-    expect(buildCartographyDrawList(toneChain(500, 'sound'))).toHaveLength(2);
+    // (three ops since MP-1 — ward, property line, building), so the throw below is
+    // attributable to the dangling wardId rather than to anything else in the block.
+    //
+    // ⚠ AND THIS ARM IS STILL REACHABLE ONLY BECAUSE THE PARCEL OP CARRIES NO ROLE.
+    // Had MP-1 given a parcel op a paint role, the painter would have had to resolve
+    // `ward:nowhere` in the PARCEL loop and would throw there — one layer earlier,
+    // with a different message — leaving this building-level arm dead code that no
+    // fixture could drive. The op's shape is what keeps this case alive.
+    expect(buildCartographyDrawList(toneChain(500, 'sound'))).toHaveLength(3);
     expect(() => buildCartographyDrawList(dangling)).toThrow(PREMISE_PREFIX);
     // …and it is THIS arm, not the parcel-orphan one above: the two throws are
     // distinguishable only by their message, so pin the ward clause. A regression
@@ -453,6 +472,9 @@ describe('TC-5a C5 — determinism and purity', () => {
 describe('TC-5a C6 — geometry is copied, never derived', () => {
   const OP_KEYS = {
     ward: ['id', 'op', 'polygon', 'role', 'tonePermille'],
+    // MP-1: a boundary, so NO `role` and NO `tonePermille`. `wardId` is the reference
+    // the layer was already read for, published rather than dropped.
+    parcel: ['id', 'op', 'polygon', 'wardId'],
     street: ['classKind', 'id', 'op', 'polyline', 'role', 'weightPermille', 'widthPlan'],
     building: ['condition', 'id', 'op', 'polygon', 'role', 'tonePermille'],
   };
@@ -460,18 +482,27 @@ describe('TC-5a C6 — geometry is copied, never derived', () => {
   it('every ward and building op carries the block\'s own geometry BY REFERENCE', () => {
     for (const [index, block] of CORPUS.entries()) {
       const wardById = new Map(block.wards.map((row) => [row.id, row]));
+      const parcelById = new Map(block.parcels.map((row) => [row.id, row]));
       const buildingById = new Map(block.buildings.map((row) => [row.id, row]));
       let checked = 0;
       for (const op of buildCartographyDrawList(block)) {
         if (op.op === 'ward') {
           expect(op.polygon, `row ${index} ${op.id}`).toBe(wardById.get(op.id).polygon);
           checked += 1;
+        } else if (op.op === 'parcel') {
+          // MP-1: the property line is the compiler's OWN ring, by reference. A copy
+          // here would be the one place a boundary could silently drift off the
+          // parcel its buildings were packed inside.
+          expect(op.polygon, `row ${index} ${op.id}`).toBe(parcelById.get(op.id).polygon);
+          expect(op.wardId, `row ${index} ${op.id}`).toBe(parcelById.get(op.id).wardId);
+          checked += 1;
         } else if (op.op === 'building') {
           expect(op.polygon, `row ${index} ${op.id}`).toBe(buildingById.get(op.id).footprint);
           checked += 1;
         }
       }
-      expect(checked, `row ${index}`).toBe(block.wards.length + block.buildings.length);
+      expect(checked, `row ${index}`)
+        .toBe(block.wards.length + block.parcels.length + block.buildings.length);
     }
   }, SLOW);
 
@@ -498,8 +529,8 @@ describe('TC-5a C6 — geometry is copied, never derived', () => {
         expect(Object.isFrozen(op), `row ${index} ${op.id}`).toBe(true);
       }
     }
-    // All three op kinds were actually exercised, so no shape passed unmeasured.
-    expect([...seen].sort()).toEqual(['building', 'street', 'ward']);
+    // All FOUR op kinds were actually exercised, so no shape passed unmeasured.
+    expect([...seen].sort()).toEqual(['building', 'parcel', 'street', 'ward']);
   }, SLOW);
 });
 
@@ -544,9 +575,14 @@ describe('TC-5a C8 — the tone ladder', () => {
 
   it('every emitted tone across the corpus is an integer in 0..1000', () => {
     let toned = 0;
+    /** The two op kinds that carry NO tone, and must not be asked for one. A street's
+     *  class shows in the pen WIDTH; a parcel (MP-1) is a boundary and carries no paint
+     *  scalar at all. Both absences are pinned positively by C6's OP_KEYS, so skipping
+     *  them here cannot hide a tone that went missing from a kind that should have one. */
+    const TONELESS = new Set(['parcel', 'street']);
     for (const [index, block] of CORPUS.entries()) {
       for (const op of buildCartographyDrawList(block)) {
-        if (op.op === 'street') continue;
+        if (TONELESS.has(op.op)) continue;
         expect(Number.isInteger(op.tonePermille), `row ${index} ${op.id}`).toBe(true);
         expect(op.tonePermille >= 0 && op.tonePermille <= 1000, `row ${index} ${op.id}`)
           .toBe(true);
