@@ -4,7 +4,7 @@
   "_markers": {
     "present": "Carries provenance today. The 'require' list is pinned byte-for-byte by the walker.",
     "absent": "AI-generated, carries no provenance marking. Owed a restore (see _restorable). SHRINK-ONLY.",
-    "n/a": "Origin unrecorded. Nothing to pin and nothing owed HERE \u2014 see _cohort_a."
+    "n/a": "Origin unrecorded. Nothing to pin and nothing owed HERE — see _cohort_a."
   },
   "_restorable": {
     "restorable": "A human-readable credit: XMP photoshop:Credit, IPTC DigitalSourceType=trainedAlgorithmicMedia, the generator name and the generation date. This is a metadata write and needs no re-render.",
@@ -22,15 +22,33 @@
   },
   "_indemnity_standing_risk": "NOBODY INDEMNIFIES THE ESTATE. Higgsfield offers IP indemnification on the Enterprise plan only and the account was a paid consumer subscription; BytePlus's indemnity runs one way, toward BytePlus, and its section 7.5(c) voids protection where output was 'modified, transformed, or combined with products or services not provided by BytePlus' - which describes every file listed here. Not curable by any change in this repository; recorded so it is not re-found as a bug.",
   "_counts": {
-    "present": 6,
-    "absent": 46,
+    "present": 52,
+    "absent": 0,
     "n/a": 23,
     "total": 75
   },
   "assets": {
     "public/backgrounds/about.jpg": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/about-fireside.png",
+      "job": "e5b66e6f-8f65-41ea-b7c9-429850df18be",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "mapped_by": "pixel RMS 2.17 vs runner-up 35.53",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "e5b66e6f-8f65-41ea-b7c9-429850df18be"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/about.orig.jpg": {
       "origin": "unrecorded",
@@ -38,7 +56,25 @@
     },
     "public/backgrounds/about.webp": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/about-fireside.png",
+      "job": "e5b66e6f-8f65-41ea-b7c9-429850df18be",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "mapped_by": "pixel RMS 2.17 vs runner-up 35.53 (matched through its .jpg twin)",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "e5b66e6f-8f65-41ea-b7c9-429850df18be"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/account.jpg": {
       "origin": "unrecorded",
@@ -50,7 +86,25 @@
     },
     "public/backgrounds/city.jpg": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/city-regraded.png",
+      "job": "6e5ad398-c47f-40fa-8af1-0ee1b8258215",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "mapped_by": "pixel RMS 2.19 vs runner-up 32.07",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "6e5ad398-c47f-40fa-8af1-0ee1b8258215"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/city.orig.jpg": {
       "origin": "unrecorded",
@@ -58,11 +112,47 @@
     },
     "public/backgrounds/city.webp": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/city-regraded.png",
+      "job": "6e5ad398-c47f-40fa-8af1-0ee1b8258215",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "mapped_by": "pixel RMS 2.19 vs runner-up 32.07 (matched through its .jpg twin)",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "6e5ad398-c47f-40fa-8af1-0ee1b8258215"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/compendium.jpg": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/compendium-scriptorium-alive.png",
+      "job": "367ba1d2-82a6-43f6-b783-4f9f1c94848a",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "mapped_by": "pixel RMS 2.83 vs runner-up 59.54",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "367ba1d2-82a6-43f6-b783-4f9f1c94848a"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/compendium.orig.jpg": {
       "origin": "unrecorded",
@@ -70,7 +160,25 @@
     },
     "public/backgrounds/compendium.webp": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/compendium-scriptorium-alive.png",
+      "job": "367ba1d2-82a6-43f6-b783-4f9f1c94848a",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "mapped_by": "pixel RMS 2.83 vs runner-up 59.54 (matched through its .jpg twin)",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "367ba1d2-82a6-43f6-b783-4f9f1c94848a"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/create.jpg": {
       "origin": "unrecorded",
@@ -82,79 +190,421 @@
     },
     "public/backgrounds/dim-desk.jpg": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/dim-desk.png",
+      "job": "8c18ae5d-2072-40be-acd7-800bc412c8b2",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "mapped_by": "pixel RMS 1.72 vs runner-up 37.48",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "8c18ae5d-2072-40be-acd7-800bc412c8b2"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/dim-desk.webp": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/dim-desk.png",
+      "job": "8c18ae5d-2072-40be-acd7-800bc412c8b2",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "mapped_by": "pixel RMS 1.72 vs runner-up 37.48 (matched through its .jpg twin)",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "8c18ae5d-2072-40be-acd7-800bc412c8b2"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/evolution-1-thorp.jpg": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/evolution-1-thorp.png",
+      "job": "3d5ad072-5970-4b75-a589-6b4bd87d2c2b",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "mapped_by": "pixel RMS 2.88 vs runner-up 8.86",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "3d5ad072-5970-4b75-a589-6b4bd87d2c2b"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/evolution-1-thorp.webp": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/evolution-1-thorp.png",
+      "job": "3d5ad072-5970-4b75-a589-6b4bd87d2c2b",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "mapped_by": "pixel RMS 2.88 vs runner-up 8.86 (matched through its .jpg twin)",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "3d5ad072-5970-4b75-a589-6b4bd87d2c2b"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/evolution-2-hamlet.jpg": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/evolution-2-hamlet.png",
+      "job": "5415be9d-4843-4870-9ca6-5250720a67db",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "mapped_by": "pixel RMS 2.72 vs runner-up 9.48",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "5415be9d-4843-4870-9ca6-5250720a67db"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/evolution-2-hamlet.webp": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/evolution-2-hamlet.png",
+      "job": "5415be9d-4843-4870-9ca6-5250720a67db",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "mapped_by": "pixel RMS 2.72 vs runner-up 9.48 (matched through its .jpg twin)",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "5415be9d-4843-4870-9ca6-5250720a67db"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/evolution-3-village.jpg": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/evolution-3-village.png",
+      "job": "671cab71-394c-402f-9e9c-693447dd83e4",
+      "model": "not established",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": null,
+      "mapped_by": "pixel RMS 2.67 vs runner-up 13.53",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "671cab71-394c-402f-9e9c-693447dd83e4"
+      ],
+      "forbid": [
+        "urn:c2pa",
+        "Made with Google AI"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/evolution-3-village.webp": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/evolution-3-village.png",
+      "job": "671cab71-394c-402f-9e9c-693447dd83e4",
+      "model": "not established",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": null,
+      "mapped_by": "pixel RMS 2.67 vs runner-up 13.53 (matched through its .jpg twin)",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "671cab71-394c-402f-9e9c-693447dd83e4"
+      ],
+      "forbid": [
+        "urn:c2pa",
+        "Made with Google AI"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/evolution-4-town.jpg": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/evolution-4-town.png",
+      "job": "c4a06873-ecc2-45aa-b483-77daef5a1a48",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "mapped_by": "pixel RMS 2.71 vs runner-up 10.71",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "c4a06873-ecc2-45aa-b483-77daef5a1a48"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/evolution-4-town.webp": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/evolution-4-town.png",
+      "job": "c4a06873-ecc2-45aa-b483-77daef5a1a48",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "mapped_by": "pixel RMS 2.71 vs runner-up 10.71 (matched through its .jpg twin)",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "c4a06873-ecc2-45aa-b483-77daef5a1a48"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/evolution-5-city.jpg": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/evolution-5-city.png",
+      "job": "a61706a3-1dc3-4415-92c2-8843eff2f4ee",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "mapped_by": "pixel RMS 2.56 vs runner-up 5.24",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "a61706a3-1dc3-4415-92c2-8843eff2f4ee"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/evolution-5-city.webp": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/evolution-5-city.png",
+      "job": "a61706a3-1dc3-4415-92c2-8843eff2f4ee",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "mapped_by": "pixel RMS 2.56 vs runner-up 5.24 (matched through its .jpg twin)",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "a61706a3-1dc3-4415-92c2-8843eff2f4ee"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/evolution-6-metropolis.jpg": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/evolution-6-metropolis.png",
+      "job": "16300457-ab0b-46ac-929a-3b05fd00f8e6",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "mapped_by": "pixel RMS 2.46 vs runner-up 5.58",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "16300457-ab0b-46ac-929a-3b05fd00f8e6"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/evolution-6-metropolis.webp": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/evolution-6-metropolis.png",
+      "job": "16300457-ab0b-46ac-929a-3b05fd00f8e6",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "mapped_by": "pixel RMS 2.46 vs runner-up 5.58 (matched through its .jpg twin)",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "16300457-ab0b-46ac-929a-3b05fd00f8e6"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/export-dispatch.jpg": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/export-dispatch.png",
+      "job": "3fd76c02-1762-4550-bf60-b1fcc2ee05ef",
+      "model": "not established",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": null,
+      "mapped_by": "pixel RMS 3.92 vs runner-up 49.21",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "3fd76c02-1762-4550-bf60-b1fcc2ee05ef"
+      ],
+      "forbid": [
+        "urn:c2pa",
+        "Made with Google AI"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/export-dispatch.webp": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/export-dispatch.png",
+      "job": "3fd76c02-1762-4550-bf60-b1fcc2ee05ef",
+      "model": "not established",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": null,
+      "mapped_by": "pixel RMS 3.92 vs runner-up 49.21 (matched through its .jpg twin)",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "3fd76c02-1762-4550-bf60-b1fcc2ee05ef"
+      ],
+      "forbid": [
+        "urn:c2pa",
+        "Made with Google AI"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/founders-charter.jpg": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/founders-charter.png",
+      "job": "9d74fc5a-2777-4d38-be28-d0a6d7e43b33",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "mapped_by": "pixel RMS 3.03 vs runner-up 41.97",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "9d74fc5a-2777-4d38-be28-d0a6d7e43b33"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/founders-charter.webp": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/founders-charter.png",
+      "job": "9d74fc5a-2777-4d38-be28-d0a6d7e43b33",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "mapped_by": "pixel RMS 3.03 vs runner-up 41.97 (matched through its .jpg twin)",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "9d74fc5a-2777-4d38-be28-d0a6d7e43b33"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/gallery.jpg": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/gallery-crier-alive.png",
+      "job": "01fe11c3-486c-41c2-9532-c6a3a188fa6e",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "mapped_by": "pixel RMS 3.71 vs runner-up 52.38",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "01fe11c3-486c-41c2-9532-c6a3a188fa6e"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/gallery.orig.jpg": {
       "origin": "unrecorded",
@@ -162,7 +612,25 @@
     },
     "public/backgrounds/gallery.webp": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/gallery-crier-alive.png",
+      "job": "01fe11c3-486c-41c2-9532-c6a3a188fa6e",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "mapped_by": "pixel RMS 3.71 vs runner-up 52.38 (matched through its .jpg twin)",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "01fe11c3-486c-41c2-9532-c6a3a188fa6e"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/landing/city-1400.jpg": {
       "origin": "unrecorded",
@@ -194,11 +662,47 @@
     },
     "public/backgrounds/realm-table.jpg": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/realm-table.png",
+      "job": "e07cddd5-2880-4ebb-9b36-e05a4fc0daaf",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "mapped_by": "pixel RMS 2.23 vs runner-up 48.02",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "e07cddd5-2880-4ebb-9b36-e05a4fc0daaf"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/realm-table.webp": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/realm-table.png",
+      "job": "e07cddd5-2880-4ebb-9b36-e05a4fc0daaf",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "mapped_by": "pixel RMS 2.23 vs runner-up 48.02 (matched through its .jpg twin)",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "e07cddd5-2880-4ebb-9b36-e05a4fc0daaf"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/settlement-progression.jpg": {
       "origin": "unrecorded",
@@ -210,7 +714,25 @@
     },
     "public/backgrounds/settlements.jpg": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/settlements-mappa.png",
+      "job": "9a56f06f-7304-456f-a7a5-84a1e4b48fad",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "mapped_by": "pixel RMS 3.38 vs runner-up 49.27",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "9a56f06f-7304-456f-a7a5-84a1e4b48fad"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/settlements.orig.jpg": {
       "origin": "unrecorded",
@@ -218,7 +740,25 @@
     },
     "public/backgrounds/settlements.webp": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/settlements-mappa.png",
+      "job": "9a56f06f-7304-456f-a7a5-84a1e4b48fad",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "mapped_by": "pixel RMS 3.38 vs runner-up 49.27 (matched through its .jpg twin)",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "9a56f06f-7304-456f-a7a5-84a1e4b48fad"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/thorpe.jpg": {
       "origin": "unrecorded",
@@ -238,7 +778,25 @@
     },
     "public/backgrounds/world-map.jpg": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/world-map-crossroads.png",
+      "job": "3bb95b45-491a-478c-a3d6-ebb6b860474d",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "mapped_by": "pixel RMS 2.51 vs runner-up 47.16",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "3bb95b45-491a-478c-a3d6-ebb6b860474d"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "restored": "2026-08-24"
     },
     "public/backgrounds/world-map.orig.jpg": {
       "origin": "unrecorded",
@@ -246,7 +804,25 @@
     },
     "public/backgrounds/world-map.webp": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/world-map-crossroads.png",
+      "job": "3bb95b45-491a-478c-a3d6-ebb6b860474d",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "mapped_by": "pixel RMS 2.51 vs runner-up 47.16 (matched through its .jpg twin)",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "3bb95b45-491a-478c-a3d6-ebb6b860474d"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "restored": "2026-08-24"
     },
     "public/evolution/city.jpg": {
       "origin": "higgsfield:google-image@2026-07-18",
@@ -295,59 +871,298 @@
     },
     "public/evolution/village.jpg": {
       "origin": "higgsfield:google-image@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "references/site-plates/evolution-3-village.png",
+      "job": "671cab71-394c-402f-9e9c-693447dd83e4",
+      "model": "not established",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": null,
+      "mapped_by": "pixel RMS 5.86 vs runner-up 14.22",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "671cab71-394c-402f-9e9c-693447dd83e4"
+      ],
+      "forbid": [
+        "urn:c2pa",
+        "Made with Google AI"
+      ],
+      "restored": "2026-08-24"
     },
     "public/media/journey-legs/bg/leg-1-desk-to-thorp.mp4": {
       "origin": "higgsfield:seedance_2_0@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "videos/settlementforge-journey-scrub.mp4",
+      "model": "dreamina-seedance-2-0",
+      "agent": "BytePlus_ModelArk",
+      "generated": "2026-07-18",
+      "credit": null,
+      "mapped_by": "sha256: byte-identical to the master archive derived-legs/bg/ output",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "dreamina-seedance-2-0"
+      ],
+      "forbid": [
+        "urn:c2pa",
+        "Made with Google AI"
+      ],
+      "restored": "2026-08-24"
     },
     "public/media/journey-legs/bg/leg-2-thorp-to-hamlet.mp4": {
       "origin": "higgsfield:seedance_2_0@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "videos/settlementforge-journey-scrub.mp4",
+      "model": "dreamina-seedance-2-0",
+      "agent": "BytePlus_ModelArk",
+      "generated": "2026-07-18",
+      "credit": null,
+      "mapped_by": "sha256: byte-identical to the master archive derived-legs/bg/ output",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "dreamina-seedance-2-0"
+      ],
+      "forbid": [
+        "urn:c2pa",
+        "Made with Google AI"
+      ],
+      "restored": "2026-08-24"
     },
     "public/media/journey-legs/bg/leg-3-hamlet-to-village.mp4": {
       "origin": "higgsfield:seedance_2_0@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "videos/settlementforge-journey-scrub.mp4",
+      "model": "dreamina-seedance-2-0",
+      "agent": "BytePlus_ModelArk",
+      "generated": "2026-07-18",
+      "credit": null,
+      "mapped_by": "sha256: byte-identical to the master archive derived-legs/bg/ output",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "dreamina-seedance-2-0"
+      ],
+      "forbid": [
+        "urn:c2pa",
+        "Made with Google AI"
+      ],
+      "restored": "2026-08-24"
     },
     "public/media/journey-legs/bg/leg-4-village-to-town.mp4": {
       "origin": "higgsfield:seedance_2_0@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "videos/settlementforge-journey-scrub.mp4",
+      "model": "dreamina-seedance-2-0",
+      "agent": "BytePlus_ModelArk",
+      "generated": "2026-07-18",
+      "credit": null,
+      "mapped_by": "sha256: byte-identical to the master archive derived-legs/bg/ output",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "dreamina-seedance-2-0"
+      ],
+      "forbid": [
+        "urn:c2pa",
+        "Made with Google AI"
+      ],
+      "restored": "2026-08-24"
     },
     "public/media/journey-legs/bg/leg-5-town-to-city.mp4": {
       "origin": "higgsfield:seedance_2_0@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "videos/settlementforge-journey-scrub.mp4",
+      "model": "dreamina-seedance-2-0",
+      "agent": "BytePlus_ModelArk",
+      "generated": "2026-07-18",
+      "credit": null,
+      "mapped_by": "sha256: byte-identical to the master archive derived-legs/bg/ output",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "dreamina-seedance-2-0"
+      ],
+      "forbid": [
+        "urn:c2pa",
+        "Made with Google AI"
+      ],
+      "restored": "2026-08-24"
     },
     "public/media/journey-legs/bg/leg-6-city-to-metropolis.mp4": {
       "origin": "higgsfield:seedance_2_0@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "videos/settlementforge-journey-scrub.mp4",
+      "model": "dreamina-seedance-2-0",
+      "agent": "BytePlus_ModelArk",
+      "generated": "2026-07-18",
+      "credit": null,
+      "mapped_by": "sha256: byte-identical to the master archive derived-legs/bg/ output",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "dreamina-seedance-2-0"
+      ],
+      "forbid": [
+        "urn:c2pa",
+        "Made with Google AI"
+      ],
+      "restored": "2026-08-24"
     },
     "public/media/journey-legs/bg/still-0-desk.jpg": {
       "origin": "derived:higgsfield:seedance_2_0@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "videos/settlementforge-journey-scrub.mp4",
+      "model": "dreamina-seedance-2-0",
+      "agent": "BytePlus_ModelArk",
+      "generated": "2026-07-18",
+      "credit": null,
+      "mapped_by": "sha256: byte-identical to the master archive derived-legs/bg/ output",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "dreamina-seedance-2-0"
+      ],
+      "forbid": [
+        "urn:c2pa",
+        "Made with Google AI"
+      ],
+      "restored": "2026-08-24"
     },
     "public/media/journey-legs/bg/still-1-thorp.jpg": {
       "origin": "derived:higgsfield:seedance_2_0@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "videos/settlementforge-journey-scrub.mp4",
+      "model": "dreamina-seedance-2-0",
+      "agent": "BytePlus_ModelArk",
+      "generated": "2026-07-18",
+      "credit": null,
+      "mapped_by": "sha256: byte-identical to the master archive derived-legs/bg/ output",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "dreamina-seedance-2-0"
+      ],
+      "forbid": [
+        "urn:c2pa",
+        "Made with Google AI"
+      ],
+      "restored": "2026-08-24"
     },
     "public/media/journey-legs/bg/still-2-hamlet.jpg": {
       "origin": "derived:higgsfield:seedance_2_0@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "videos/settlementforge-journey-scrub.mp4",
+      "model": "dreamina-seedance-2-0",
+      "agent": "BytePlus_ModelArk",
+      "generated": "2026-07-18",
+      "credit": null,
+      "mapped_by": "sha256: byte-identical to the master archive derived-legs/bg/ output",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "dreamina-seedance-2-0"
+      ],
+      "forbid": [
+        "urn:c2pa",
+        "Made with Google AI"
+      ],
+      "restored": "2026-08-24"
     },
     "public/media/journey-legs/bg/still-3-village.jpg": {
       "origin": "derived:higgsfield:seedance_2_0@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "videos/settlementforge-journey-scrub.mp4",
+      "model": "dreamina-seedance-2-0",
+      "agent": "BytePlus_ModelArk",
+      "generated": "2026-07-18",
+      "credit": null,
+      "mapped_by": "sha256: byte-identical to the master archive derived-legs/bg/ output",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "dreamina-seedance-2-0"
+      ],
+      "forbid": [
+        "urn:c2pa",
+        "Made with Google AI"
+      ],
+      "restored": "2026-08-24"
     },
     "public/media/journey-legs/bg/still-4-town.jpg": {
       "origin": "derived:higgsfield:seedance_2_0@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "videos/settlementforge-journey-scrub.mp4",
+      "model": "dreamina-seedance-2-0",
+      "agent": "BytePlus_ModelArk",
+      "generated": "2026-07-18",
+      "credit": null,
+      "mapped_by": "sha256: byte-identical to the master archive derived-legs/bg/ output",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "dreamina-seedance-2-0"
+      ],
+      "forbid": [
+        "urn:c2pa",
+        "Made with Google AI"
+      ],
+      "restored": "2026-08-24"
     },
     "public/media/journey-legs/bg/still-5-city.jpg": {
       "origin": "derived:higgsfield:seedance_2_0@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "videos/settlementforge-journey-scrub.mp4",
+      "model": "dreamina-seedance-2-0",
+      "agent": "BytePlus_ModelArk",
+      "generated": "2026-07-18",
+      "credit": null,
+      "mapped_by": "sha256: byte-identical to the master archive derived-legs/bg/ output",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "dreamina-seedance-2-0"
+      ],
+      "forbid": [
+        "urn:c2pa",
+        "Made with Google AI"
+      ],
+      "restored": "2026-08-24"
     },
     "public/media/journey-legs/bg/still-6-metropolis.jpg": {
       "origin": "derived:higgsfield:seedance_2_0@2026-07-18",
-      "markers": "absent"
+      "markers": "present",
+      "master": "videos/settlementforge-journey-scrub.mp4",
+      "model": "dreamina-seedance-2-0",
+      "agent": "BytePlus_ModelArk",
+      "generated": "2026-07-18",
+      "credit": null,
+      "mapped_by": "sha256: byte-identical to the master archive derived-legs/bg/ output",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "dreamina-seedance-2-0"
+      ],
+      "forbid": [
+        "urn:c2pa",
+        "Made with Google AI"
+      ],
+      "restored": "2026-08-24"
     },
     "public/videos/realm-journey.mp4": {
       "origin": "higgsfield:seedance_2_0@2026-07-18",
@@ -363,5 +1178,11 @@
     "what it buys": "The human-readable credit, in full and first-hand: the masters are the authoritative source for the XMP photoshop:Credit, the IPTC DigitalSourceType tag, the hf-job-id and the generation date that a restore would write into the shipped derivatives. No approval-gated download is required for that work.",
     "what it does NOT buy": "A valid C2PA on anything the site serves. See _restorable. The one shipped file that carries a valid manifest, public/videos/realm-journey.mp4, carries it precisely because it was never re-encoded, and that is the whole reason re-generating the media would be a net LOSS rather than a cure.",
     "ten masters with no Google attribution": "evolution-3-village, export-dispatch, gallery-board, hamlet-standalone-alt, metropolis-standalone-alt, 05-ledger-spread, 06-lexicon-page, 12-wax-press, 13-manuscript-page, 14-arrival carry an hf-job-id and no Google marker at all. Which model produced them is NOT established, so a restore must not stamp 'Made with Google AI' onto their derivatives. Two of the ten reach production."
+  },
+  "_restore": {
+    "what": "On 2026-08-24 scripts/inject-ai-provenance.mjs wrote an XMP provenance packet into the 46 shipped AI files that carried none, adding 71,229 bytes in total. Each packet carries the IPTC DigitalSourceType trainedAlgorithmicMedia tag, the generator, the generation date, the Higgsfield job id where the master recorded one, and photoshop:Credit ONLY where the master itself carried that credit.",
+    "how": "Container-only byte surgery, never a re-encode: a JPEG APP1 segment, a WebP promoted to the extended VP8X form around its untouched VP8 chunk, and an appended MP4 uuid box. The coded bitstream is copied verbatim in all three, so the decoded pixels are identical by construction; tests/build/aiMediaProvenance.test.js decodes before and after and compares raw buffers, and each comparison carries a mutation proving it can fail.",
+    "NOT a C2PA": "Every restored file states in its own metadata that it carries a plain credit and NOT a C2PA manifest, and the \"forbid\" list on every restored row refuses the string urn:c2pa so a fabricated manifest cannot be slipped in later. The five files descending from masters with no Google attribution additionally forbid \"Made with Google AI\".",
+    "what was NOT touched": "The six rows already marked present (realm-journey.mp4 still carries a VALID C2PA and appending a box would break its hash binding) and all 23 cohort-A rows. The injector refuses by construction any row not marked \"absent\"."
   }
 }
