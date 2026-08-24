@@ -103,7 +103,7 @@
  *   shared one up to translation, and 5,932 of 5,932 duplicate groups lay inside a
  *   SINGLE parcel. The slot is now a recursive medial ADDRESS, there is one ledger,
  *   and the footprint carries a tier-banded dressed FORM. Post-fix: 0.00% exact,
- *   6.07% translate.
+ *   5.93% translate.
  *
  *   (1) `cartoBuildings` FELL at every tier, 53,420 → 44,293 over the corpus, and the
  *       frozen per-tier maxima with it (13/31/57/152/208/261 → 12/25/47/114/196/261).
@@ -228,19 +228,20 @@ const FROZEN = Object.freeze({
  * three coupled caps are derived — so no number here was chosen to make a test pass,
  * and raising a ceiling means moving a measurement and saying so.
  *
- * THE READINGS AT THE BASE THIS CURED (79b78881c, same corpus, same instrument):
- * exact 264 permille of 53,420 rows and translate 633. Per tier the translate reading
- * was 647 / 750 / 821 / 810 / 590 / 544. Every number below is an order of magnitude
- * off those, which is the evidence that the census measures the cure rather than
- * measuring nothing.
+ * THE READINGS AT THE BASE THIS CURED (79b78881c, same corpus, same instrument, and
+ * re-measured after the lane's dependency tree was rebuilt from this worktree's own
+ * lockfile): exact 264 permille of 53,420 rows and translate 633. Per tier the
+ * translate reading was 647 / 750 / 821 / 810 / 590 / 544, and the EXACT reading was
+ * 556 / 667 / 666 / 491 / 197 / 96. Every number below is an order of magnitude off
+ * those, which is the evidence that the census measures the cure rather than nothing.
  */
 const DUPLICATES = Object.freeze({
-  thorp: Object.freeze({ permille: 94 }),
-  hamlet: Object.freeze({ permille: 184 }),
-  village: Object.freeze({ permille: 88 }),
-  town: Object.freeze({ permille: 65 }),
-  city: Object.freeze({ permille: 49 }),
-  metropolis: Object.freeze({ permille: 52 }),
+  thorp: Object.freeze({ permille: 109 }),
+  hamlet: Object.freeze({ permille: 181 }),
+  village: Object.freeze({ permille: 72 }),
+  town: Object.freeze({ permille: 68 }),
+  city: Object.freeze({ permille: 51 }),
+  metropolis: Object.freeze({ permille: 48 }),
 });
 
 /**
@@ -909,10 +910,59 @@ describe('W8 the drawn corpus does not repeat itself', () => {
     expect(drift).toEqual([]);
     // The ceilings are the derivation evaluated, not a second table: a reader can
     // check every one of them by hand against DUPLICATES and the declared headroom.
-    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([151, 295, 141, 104, 79, 84]);
+    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([175, 290, 116, 109, 82, 77]);
     // And the derivation is live — a hypothetical reading derives its own ceiling.
     expect(Math.ceil((100 * CARTOGRAPHY_HEADROOM_PERMILLE) / 1000)).toBe(160);
   });
+
+  /**
+   * THE ARM THAT MAKES W8 CONVICT A SOURCE CHANGE, and the reason it exists.
+   *
+   * The two arms above read the FROZEN record, so a packer regression cannot red them
+   * until somebody re-records — the same structural gap MF-CG1's W2 exists to close for
+   * the rest of the corpus. This one re-measures LIVE, through the real pipeline, on the
+   * six rows that carry each tier's largest canonical roster. That choice is not
+   * arbitrary: over-subscription is what the old mod-4 wrap turned into stacking, so the
+   * argmax rows are exactly the rows where a regression appears FIRST. Six full pipeline
+   * generations is a second or two; the whole corpus would be ninety.
+   */
+  it('LIVE: each tier\'s argmax row re-measures at ZERO stacked buildings, and matches its record', () => {
+    const manifest = readManifest();
+    /** @type {Map<string, { key: string, value: Row }>} */
+    const argmax = new Map();
+    for (const [key, value] of Object.entries(manifest)) {
+      const best = argmax.get(value.tier);
+      if (!best || value.institutions > best.value.institutions) argmax.set(value.tier, { key, value });
+    }
+    // The selection covered the whole ladder — a tier missing here would be a silent
+    // hole in the only live arm this section has.
+    expect([...argmax.keys()].sort()).toEqual([...CARTOGRAPHY_TIERS].sort());
+    const byKey = new Map(rows.map((row) => [calibrationKeyOf(row), row]));
+    /** @type {string[]} */
+    const failures = [];
+    let measured = 0;
+    for (const [tier, { key, value }] of argmax) {
+      const source = byKey.get(key);
+      if (!source) {
+        failures.push(`${tier}: ${key} is recorded but the corpus rule does not produce it`);
+        continue;
+      }
+      const live = measureCalibrationRow(source);
+      measured += Math.max(0, live.cartoBuildings);
+      if (live.cartoDupExact !== 0) {
+        failures.push(`${tier} ${key}: ${live.cartoDupExact} of ${live.cartoBuildings} rows stacked LIVE`);
+      }
+      if (live.cartoDupTranslate !== value.cartoDupTranslate) {
+        failures.push(`${tier} ${key}: translate live ${live.cartoDupTranslate} vs recorded ${value.cartoDupTranslate}`);
+      }
+      if (live.cartoBuildings !== value.cartoBuildings) {
+        failures.push(`${tier} ${key}: drew ${live.cartoBuildings} live vs recorded ${value.cartoBuildings}`);
+      }
+    }
+    expect(failures).toEqual([]);
+    // ANTI-VACUITY: the six rows actually drew, so the zero above is a measurement.
+    expect(measured).toBeGreaterThan(600);
+  }, 300_000);
 
   it('CONVICTING CONTROL: the census instrument reds on a block that IS duplicated', () => {
     const clean = [

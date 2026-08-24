@@ -221,6 +221,12 @@ cannot drift into measuring two different things.
    loud, as `maxInstitutions` already is) **and** sits under a ceiling **derived** as
    `ceil(reading × CARTOGRAPHY_HEADROOM_PERMILLE)` — the estate's one owner-signed headroom, the
    same operator the three coupled caps use. No number here was chosen to make a test pass.
+3. **A LIVE arm, because arms 1 and 2 read the FROZEN record and a packer regression cannot red a
+   frozen number until somebody re-records it.** It re-measures through the real pipeline on the
+   six rows carrying each tier's largest canonical roster — not an arbitrary sample:
+   over-subscription is what the old wrap turned into stacking, so the argmax rows are where a
+   regression appears FIRST. Six generations cost a second or two; the corpus would cost ninety.
+   This is the arm the §8 source mutation reds.
 
 **THE CONVICTING CONTROLS.** Three, and each can fail:
 
@@ -246,13 +252,14 @@ cannot drift into measuring two different things.
 | | base `79b78881c` | this tip |
 |---|---:|---:|
 | exact duplicate rate | 26.42% | **0.00%** |
-| translate duplicate rate | 63.30% | **6.07%** |
-| congruent duplicate rate | 75.44% | 10.98% |
+| translate duplicate rate | 63.30% | **5.93%** |
+| congruent duplicate rate | 75.44% | 10.96% |
 | drawn buildings over the corpus | 53,420 | 44,293 |
 | lit throw census | 0 of 504 | **0 of 504** |
 | distinct `institutionRef` per row | — | **identical on 504 of 504** |
 
-Per tier after, translate reading, in permille: **94 / 184 / 88 / 65 / 49 / 52**.
+Per tier after, translate reading, in permille: **109 / 181 / 72 / 68 / 51 / 48**; the ceilings
+derived from them at the declared headroom are **175 / 290 / 116 / 109 / 82 / 77**.
 
 - **THE ROW COUNT FELL BY 9,127, AND THE MAP HAD 14,112 STACKED ROWS.** A flagship now consumes a
   cell from the one ledger, so a parcel that flagships over-subscribe no longer offers the same
@@ -278,6 +285,36 @@ Per tier after, translate reading, in permille: **94 / 184 / 88 / 65 / 49 / 52**
 - **ONE RE-RECORD, DELIBERATE:** `tests/fixtures/cartography-calibration-corpus.json`, through the
   committed `UPDATE_CARTOGRAPHY_CALIBRATION=1` path, with a SHIFT RECORD row added to the suite
   header before commit as that file's own rule requires.
+
+---
+
+## §5b · ⛔ THE VERIFICATION ENVIRONMENT WAS REBUILT MID-LANE, AND EVERY FIGURE HERE POSTDATES IT
+
+The lane opened by symlinking the shared `/Users/cstokes/Desktop/settlement-engine/node_modules`,
+as LANE-LAW §1 directs. That directory carries a **36-dependency** manifest against this slot's
+**40** — `three`, `pg`, `espree` and `@types/node` are slot-only — and it was rewritten twice while
+this lane was mid-run. **Every gate result taken before the rebuild is void and none is quoted
+here.** The cure, per the chair: `rm -f node_modules && npm ci --no-audit --no-fund` in this
+worktree, whose own `package.json` / `package-lock.json` are the correct pair. Exit 0, 589
+packages, all four slot-only modules resolvable, vitest back at the locked **4.1.8** from the
+shared tree's drifted 4.1.11.
+
+Two consequences are recorded rather than absorbed:
+
+1. **`npm ci` ran husky's `prepare`, so `.husky/_` now EXISTS in this worktree and `core.hooksPath`
+   is repo-level.** LANE-LAW §1's "a lane worktree silently bypasses pre-commit" is **REVERSED
+   here**: pre-commit runs `npx lint-staged` = `eslint --fix`, which RE-STAGES. Every green in §8
+   is therefore re-earned AT the committed tip, never at the pre-commit working tree.
+2. **The base measurement was re-run after the rebuild and reproduced to the digit** — 504/504
+   compiled, 53,420 buildings, exact 26.42%, translate 63.30%, every per-tier figure identical —
+   in a throwaway worktree at `79b78881c` symlinked at THIS worktree's `node_modules` (the two
+   lockfiles hash identically, proved by execution). The measurement is pure domain code and was
+   never dependency-sensitive; the TEST RESULTS were.
+
+⚠ **`node scripts/check-observed-shape-readers.mjs` is RED AT THE SLOT BASE, UNEDITED**, with the
+byte-identical message it gives at this tip (*"observed-shape detector or unscanned execution input
+changed since the schema-10 instrument was governed"*), proved in that same base worktree after the
+rebuild. It is a pre-existing base red, not a CG-2 regression, and it is the chair's to place.
 
 ---
 
@@ -307,8 +344,8 @@ user-visible copy string moves.**
 ## §7 · CENSUS
 
 > **`censusAuthorization`:** this member moves the test census by
-> **`+0 files / +0 parked / +0 credited / +4 titles / +1 suiteTitles`** — no new test FILE; the
-> calibration suite gains W8 (one `describe`, three `it`s) and the buildings suite gains one `it`
+> **`+0 files / +0 parked / +0 credited / +5 titles / +1 suiteTitles`** — no new test FILE; the
+> calibration suite gains W8 (one `describe`, four `it`s) and the buildings suite gains one `it`
 > beside the flagship-exemption arm. Measured by execution, not counted by eye.
 
 ---
@@ -354,7 +391,7 @@ user-visible copy string moves.**
    together*; it does not give the estate a building-shape vocabulary. The right cure is to inscribe
    a form derived from the canonical building's OWN footprint aspect — which would also make the
    map truer to the dossier, not merely more various — and it is the estate wave's to take.
-2. **THE `other` WARD KIND stays the worst cohort** at 19.05% translate against a 4-6% floor
+2. **THE `other` WARD KIND stays the worst cohort** at 20.10% translate against a 4-7% floor
    elsewhere. It is a fallback label; the honest fix is upstream classification, not geometry.
 3. **CITY AND METROPOLIS ARE STILL CAP-BOUND** at 208 and 261 rows (MF-CG1b's own deferral, unmoved
    by this member).
