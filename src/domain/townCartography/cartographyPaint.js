@@ -12,13 +12,33 @@
  * This leaf authors NO op ceiling. The list's length is an IDENTITY over the block's
  * own record counts:
  *
- *   ops.length === wards.length + streets.arterials.length
+ *   ops.length === wards.length + parcels.length + streets.arterials.length
  *                + streets.lanes.length + buildings.length
  *
  * A band derived from a cap can drift out of agreement with the cap; an identity over
- * the subject's own counts cannot disagree with anything. `parcels[]` emits no op — a
- * parcel is a placement SLOT, not a drawn thing — but it is still READ, because a
- * building's tone rides the ward that owns its parcel.
+ * the subject's own counts cannot disagree with anything.
+ *
+ * ⚠ MP-1 MOVED THIS IDENTITY, DELIBERATELY, AND THE OLD PROSE IS RECORDED HERE SO
+ * NOBODY READS THE MOVE AS DRIFT. Through TC-5a the term `parcels.length` was absent
+ * and this header said, in its own words, that "a parcel is a placement SLOT, not a
+ * drawn thing". That was true of a sheet with no property layer. The owner's §494
+ * directive is that a hovered building must show its PROPERTY LINE, and §495 measured
+ * that the parcel row has carried a real `polygon` since TC-3b — the line was computed,
+ * validated and then dropped on the floor here. So a parcel now emits exactly ONE op,
+ * and the identity gains exactly one term. This is a DECLARED change to an identity,
+ * not a repair of a wrong one: every pin that states the old length is moved with it.
+ *
+ * ── A PARCEL OP IS A BOUNDARY, AND CARRIES NO TONE ───────────────────────────
+ * A ward op and a building op carry `role` + `tonePermille` because they are FILLED.
+ * A parcel op is a LINE: it carries `wardId` (the reference the layer was already read
+ * for) and its ring, and no paint scalar at all — the street op's precedent, where the
+ * one ink is named once at the binding rather than derived per op.
+ *
+ * That is not only a paint decision, it is what keeps two landed referential arms
+ * alive. This layer is still read for `wardIdByParcelId`, and a building's throw when
+ * its parcel names a ward outside the block is reachable ONLY because the parcel loop
+ * itself does not resolve wards. Giving a parcel op a role would have moved that throw
+ * one layer earlier and left the building's second referential arm dead.
  *
  * ── GEOMETRY IS COPIED, NEVER RECOMPUTED ─────────────────────────────────────
  * A ward op's polygon IS the block's polygon and a building op's polygon IS the
@@ -51,11 +71,14 @@ import {
 /**
  * @typedef {{ op: 'ward', id: string, polygon: unknown, role: string,
  *   tonePermille: number }} CartographyWardOp
+ * @typedef {{ op: 'parcel', id: string, wardId: string,
+ *   polygon: unknown }} CartographyParcelOp the PROPERTY LINE (MP-1)
  * @typedef {{ op: 'street', id: string, polyline: unknown, classKind: string,
  *   widthPlan: number, weightPermille: number, role: string }} CartographyStreetOp
  * @typedef {{ op: 'building', id: string, polygon: unknown, role: string,
  *   tonePermille: number, condition: string }} CartographyBuildingOp
- * @typedef {CartographyWardOp|CartographyStreetOp|CartographyBuildingOp} CartographyDrawOp
+ * @typedef {CartographyWardOp|CartographyParcelOp|CartographyStreetOp
+ *   |CartographyBuildingOp} CartographyDrawOp
  */
 
 /** The one empty result. Absence returns this rather than null, so a caller never
@@ -133,8 +156,11 @@ function clampTone(tone) {
 }
 
 /**
- * BUILD THE DRAW LIST — painter's algorithm, back to front: wards, then the streets
- * over them (arterials before lanes), then the buildings on top.
+ * BUILD THE DRAW LIST — painter's algorithm, back to front: wards, the property lines
+ * carved inside them, then the streets over both (arterials before lanes), then the
+ * buildings on top. A parcel sits OVER its ward and UNDER everything else, which is
+ * the only position that reads: a line drawn under the ward would be invisible, and
+ * one drawn over a building would cut the roof it encloses.
  *
  * @param {unknown} cartography a compiled cartography block, or null/undefined
  * @returns {ReadonlyArray<CartographyDrawOp>} frozen ops in deterministic order
@@ -177,17 +203,30 @@ export function buildCartographyDrawList(cartography) {
     }));
   }
 
-  // Parcels draw NOTHING, but they are the only path from a building to its ward, so
-  // the layer is read for its references and for nothing else.
+  // Parcels are BOTH the property line (MP-1) and the only path from a building to
+  // its ward, so the layer is read once for its ring and its reference together.
   /** @type {Map<string, string>} */
   const wardIdByParcelId = new Map();
+  /** @type {{ id: string, wardId: string, polygon: unknown }[]} */
+  const parcels = [];
   for (const [index, raw] of parcelRows.entries()) {
     const at = `cartography.parcels[${index}]`;
     const row = requireRecord(raw, at);
-    wardIdByParcelId.set(
-      requireText(row.id, `${at}.id`),
-      requireText(row.wardId, `${at}.wardId`),
-    );
+    const parcel = {
+      id: requireText(row.id, `${at}.id`),
+      wardId: requireText(row.wardId, `${at}.wardId`),
+      polygon: requireGeometry(row.polygon, `${at}.polygon`),
+    };
+    wardIdByParcelId.set(parcel.id, parcel.wardId);
+    parcels.push(parcel);
+  }
+  for (const parcel of byId(parcels)) {
+    ops.push(Object.freeze({
+      op: /** @type {'parcel'} */ ('parcel'),
+      id: parcel.id,
+      wardId: parcel.wardId,
+      polygon: parcel.polygon,
+    }));
   }
 
   for (const [layerName, rows] of [['arterials', arterialRows], ['lanes', laneRows]]) {

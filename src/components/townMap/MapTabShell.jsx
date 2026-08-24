@@ -111,8 +111,12 @@ function MapSubTabWaiting() {
  *   regionalGraph?: any,
  *   audience?: 'dm'|'player'|'public',
  * }} props
- * The prop surface is deliberately IDENTICAL to SettlementMapPane's, so the
- * dossier's Map case swapped one mount for another with no threading change.
+ * The prop surface is deliberately IDENTICAL to SettlementMapPane's CALLER-FACING
+ * surface, so the dossier's Map case swapped one mount for another with no threading
+ * change. MP-1 adds one prop the pane accepts and no caller supplies: `cartography`,
+ * the compiled block this shell already holds. It is threaded DOWN, never up — a
+ * caller that mounts the pane directly (the gallery dossier, the library hero) passes
+ * nothing, gets null, and sees the plan it saw before.
  */
 export default function MapTabShell({
   settlement,
@@ -220,6 +224,11 @@ export default function MapTabShell({
               audience={audience}
               presentation={selected}
               onPresentationChange={handlePresentationChange}
+              // MP-1: the SAME compiled block the Cartography sheet paints, threaded to the
+              // plan so a hovered building can show its property line. The shell already
+              // holds it, so this is a prop and not a second compile. Dark ⇒ null ⇒ the
+              // plan is byte-identical to before, which is every world's default state.
+              cartography={cartography.block}
             />
           )}
         </Suspense>

@@ -75,7 +75,15 @@ vi.mock('../../src/lib/townScene/viewPolicy.js', async (importOriginal) => ({
 }));
 
 vi.mock('../../src/components/townMap/SettlementMapPane.jsx', () => ({
-  default: (props) => <div data-testid="map-pane" data-presentation={props.presentation} />,
+  // MP-1: the mock records the block the shell threads down, because the plan's
+  // property-line halo is fed by that thread and by nothing else.
+  default: (props) => (
+    <div
+      data-testid="map-pane"
+      data-presentation={props.presentation}
+      data-cartography={props.cartography ? 'block' : 'none'}
+    />
+  ),
 }));
 
 vi.mock('../../src/components/townMap/subtabs/MapPlayerSubTab.jsx', () => ({
@@ -93,7 +101,10 @@ const BLOCK = Object.freeze({
     { id: 'ward:a', kind: 'civic', polygon: [[0, 0], [400, 0], [400, 400], [0, 400]], tonePermille: 600 },
     { id: 'ward:b', kind: 'industrial', polygon: [[500, 500], [900, 500], [900, 900]], tonePermille: 300 },
   ],
-  parcels: [{ id: 'parcel:a1', wardId: 'ward:a' }],
+  // MP-1: a parcel row's `polygon` has been required by the contract since TC-3b and
+  // is now READ by the painter, because it is the PROPERTY LINE. This fixture omitted
+  // it while the painter dropped it on the floor; a real block never could.
+  parcels: [{ id: 'parcel:a1', wardId: 'ward:a', polygon: [[0, 0], [200, 0], [200, 200], [0, 200]] }],
   buildings: [
     { id: 'bldg:a1', parcelId: 'parcel:a1', footprint: [[10, 10], [60, 10], [60, 60], [10, 60]], condition: 'sound' },
   ],
@@ -179,13 +190,13 @@ describe('TC-5b-ii C1 — the main reachable behavior', () => {
     const { container } = paint();
     const ops = buildCartographyDrawList(BLOCK);
     expect(ops).toHaveLength(
-      BLOCK.wards.length + BLOCK.streets.arterials.length
+      BLOCK.wards.length + BLOCK.parcels.length + BLOCK.streets.arterials.length
       + BLOCK.streets.lanes.length + BLOCK.buildings.length,
     );
     expect(svgChildren(container)).toHaveLength(ops.length);
   });
 
-  test('wards precede streets precede buildings, in the leaf\'s own emitted order', () => {
+  test('wards precede property lines precede streets precede buildings, in the leaf\'s own emitted order', () => {
     const { container } = paint();
     const rendered = svgChildren(container)
       .map((el) => `${el.tagName.toLowerCase()}|${el.getAttribute('points')}`);
@@ -198,8 +209,28 @@ describe('TC-5b-ii C1 — the main reachable behavior', () => {
     });
     expect(rendered).toEqual(expected);
     // And stated by hand too, so a leaf that silently reordered would still red.
+    // MP-1 inserted ONE element — the property line, third, between the two wards and
+    // the two streets. The hand-stated list is the whole point of this arm, so it is
+    // restated rather than recomputed.
     expect(rendered.map((entry) => entry.split('|')[0]))
-      .toEqual(['polygon', 'polygon', 'polyline', 'polyline', 'polygon']);
+      .toEqual(['polygon', 'polygon', 'polygon', 'polyline', 'polyline', 'polygon']);
+  });
+
+  test('MP-1 — the property line is drawn UNFILLED and at the thinnest pen on the sheet', () => {
+    // A parcel op is a BOUNDARY. A filled parcel layer would repaint the ward beneath
+    // it, and because parcels tile only the SELECTED candidates of a ward that fill
+    // would mottle the ward tone into a pattern meaning nothing. Pinned here because
+    // the order arm above compares tag names alone and a filled polygon is still a
+    // polygon.
+    const { container } = paint();
+    const line = svgChildren(container)[2];
+    expect(line.tagName.toLowerCase()).toBe('polygon');
+    expect(line.getAttribute('points')).toBe('0,0 200,0 200,200 0,200');
+    expect(line.getAttribute('fill')).toBe('none');
+    expect(line.getAttribute('stroke')).not.toBe(null);
+    // The pen the component names as the boundary's own floor, and thinner here than
+    // either street in this fixture (12 and 3, pinned in the arm below).
+    expect(Number(line.getAttribute('stroke-width'))).toBe(1);
   });
 
   test('a street\'s pen width is its own widthPlan weighted by its own class', () => {
@@ -220,6 +251,24 @@ describe('TC-5b-ii C2 — absent, never present-and-disabled', () => {
     // gate decision rather than a strip that failed to render at all.
     expect(container.querySelector('[data-testid="map-pane"]')).not.toBe(null);
     expect(container.querySelector('[data-map-cartography-subtab]')).toBe(null);
+  });
+
+  test('MP-1 — the shell threads the SAME block down to the plan, so one compile feeds both', async () => {
+    // §495.4(b). The property-line halo needs the parcel rings on the PLAN, not only on
+    // the sheet, and the shell already holds the compiled block: a second compile would
+    // be a second truth about the same ground.
+    h.cartography = { status: 'ready', block: BLOCK, planExtent: PLAN_EXTENT, available: true };
+    const { container } = await mountShell();
+    expect(container.querySelector('[data-testid="map-pane"]').getAttribute('data-cartography'))
+      .toBe('block');
+  });
+
+  test('MP-1 — a DARK seam threads NOTHING, so the plan is what it always was', async () => {
+    // Anti-vacuity for the arm above, and the ordinary case besides: the cartography
+    // rule is virtual with no default entry, so every existing world takes this path.
+    const { container } = await mountShell();
+    expect(container.querySelector('[data-testid="map-pane"]').getAttribute('data-cartography'))
+      .toBe('none');
   });
 
   test('an IDLE (dark) seam is equally absent, and the leaf is never mounted', async () => {

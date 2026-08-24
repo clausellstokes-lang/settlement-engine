@@ -161,19 +161,29 @@ describe('TC-5b-i C3 — the producer and TC-5a\'s consumer provably meet', () =
     expect(ops.length).toBeGreaterThan(0);
     expect(Object.isFrozen(ops)).toBe(true);
     // TC-5a's LENGTH IDENTITY over the block's own record counts — not a band.
-    // parcels[] emits no op: a parcel is a placement SLOT, not a drawn thing.
+    // ⚠ MP-1 MOVED IT, and the move is declared rather than drift: `parcels[]` used
+    // to emit nothing ("a parcel is a placement SLOT, not a drawn thing") and now
+    // emits the PROPERTY LINE the owner's §494 directive asked to see. The producer
+    // half of this proof did not change at all — the parcel ring has been in the
+    // block since TC-3b; only the consumer stopped dropping it.
     expect(ops.length).toBe(
       block.wards.length
+      + block.parcels.length
       + block.streets.arterials.length
       + block.streets.lanes.length
       + block.buildings.length,
     );
+    // Anti-vacuity for the new term: this real block genuinely carries parcels, so
+    // the term above is load-bearing rather than an addition of zero.
+    expect(block.parcels.length).toBeGreaterThan(0);
 
-    // Painter's algorithm, back to front: every ward op precedes every street op,
-    // and every street op precedes every building op.
+    // Painter's algorithm, back to front: every ward op precedes every parcel op,
+    // every parcel op precedes every street op, and every street op precedes every
+    // building op.
     const kinds = ops.map((op) => op.op);
-    expect(new Set(kinds)).toEqual(new Set(['ward', 'street', 'building']));
-    expect(kinds.lastIndexOf('ward')).toBeLessThan(kinds.indexOf('street'));
+    expect(new Set(kinds)).toEqual(new Set(['ward', 'parcel', 'street', 'building']));
+    expect(kinds.lastIndexOf('ward')).toBeLessThan(kinds.indexOf('parcel'));
+    expect(kinds.lastIndexOf('parcel')).toBeLessThan(kinds.indexOf('street'));
     expect(kinds.lastIndexOf('street')).toBeLessThan(kinds.indexOf('building'));
   }, 120_000);
 
