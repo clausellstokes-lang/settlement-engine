@@ -59,7 +59,24 @@ CH-4 → **CH-6** (⛔ a **live shipped deity-doctrine violation**: a magic-free
 
 ⛔ **EDGE-BUNDLE BILL — the count is PER-FILE.** `npcProfile.js` sits in three closures, `districtProfile.js` in one (`aiGroundingBundle`, 67 inputs). **Read `supabase/functions/_shared/<bundle>.meta.json` before budgeting.** The bill is **invisible to targeted suite runs** — only the full gate sees it. Cure: `npm run build:edge-shared`, commit all six files as a set.
 
-### ⭐⭐⭐ STATE AS OF §595 (2026-08-24 ~16:50) — THE REGISTER ARC IS LIVE AND MEASURED
+### ⭐⭐⭐ STATE AS OF §621 (2026-08-25 ~00:15) — WALLS ON FUSION ON CLIFFS, ALL SEALED
+**Slot `714a398b7`… superseded — build branch `claude/composite-r4` = `e4ed27f48` (64 cars:
+MF-CH7 §570 · MF-CH4 §582 · DEPLOYDOC-188 §588 · MF-CH6 §597).** Ledger through **§621**.
+**THE REGISTER ARC** governs all map work: `docs/DESIGN_REGISTER_PROGRAM.md` + A1–**A6** (two
+skeptic panels ruled, §586/§618). SANDBOX SEALED THROUGH: `map-sandbox-reg1-fusion`
+(`d1b32e339`, §602) → `map-sandbox-reg2-walls` (`8890e3f3e`, §621 — regimes 22/22 by fixture,
+derived wear, 13 retained judging artifacts). Owner laws §570–§616 all integrated; **§612 the
+PURPOSE LAW is the final tie-breaker; §580 the north star; §591 totality/weakest-element.**
+The Chronicle Film program: §606–§609 + §613 (film LAST) + A6 (schema module, REG-F0 backfill,
+held beat arms). Preserves: mf-a1-recovered · map-corpus-docs · research-dossiers-r2 ·
+reg-instruments (r2 baselines at fusion tip) · reg-detail-register (BINDING) · the sandbox
+seals. ⚠ OPUS-RUN markers (§620): the CH plan (validation = CH-3 dispatch's first act) and the
+AD charter (validation = AD window's first act). §217 raises SIGNED: town 5,400 · city 6,800
+(byte-edit rides next harness touch). Chartered open: the coastal-trace declared-shift car
+(§621.2ii) · CH-6b · the i8 §15r row · REG-F0 · the just-in-time compiles (§619). §585
+delegation stands; carve-outs per §585.1 verbatim; mandate runs to the terminal soak.
+
+### (historical) STATE AS OF §595 (2026-08-24 ~16:50) — THE REGISTER ARC IS LIVE AND MEASURED
 **Slot `714a398b7` (63 cars — MF-CH7 §570, MF-CH4 §582, DEPLOYDOC-188 §588 landed this
 sitting; MF-CH6 re-proof gate in flight at rebased `e4ed27f48`, lands 64th on green —
 §594).** Ledger through §595. THE REGISTER PROGRAM governs all map work:

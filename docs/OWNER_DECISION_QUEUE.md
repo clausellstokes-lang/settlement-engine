@@ -26728,3 +26728,27 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   **(v) the reference-zoom lesson banks:** a reference's zoom level is part
   of what it says — hf261's forty-yard fill and hf103's page-scale comb are
   both true at their own distances.
+
+## §622 · THE WAKEUP CONSOLIDATES — SEATS REFILL WITH REG-3 AND REG-T (2026-08-25 ~00:20 CDT)
+
+- **§622.1** Both standing wakeups fired with stale prompts (their lanes all
+  collected); replaced with ONE current wakeup. Mutex dirs both free; 24
+  receipts all collected; ledger current; **the pickup card was 26 sections
+  stale and is refreshed to §621 state in this commit.**
+- **§622.2 DISPATCHED: TE-REG-3 (Opus)** — the shape code on the walls seal,
+  under A3's family-grammar and A6's repairs (consumes the §494 contract
+  SHAPE and the r2 dossiers, never B18 claims). **The chair sets the
+  blind-read parameters A2 deferred:** N = 24 silhouettes across 6 classes,
+  target ≥ 75% correct, fresh-context reader, chair-run. The §592
+  landmark-salience defect is the wave's named number to move: anchors must
+  beat matched decoys on every leaf. Timeline carry recorded as
+  DEFERRED-PENDING-REG-F0 (the schema module does not exist yet — A6's own
+  sequencing), with the wave's epoch/order data preserved in its receipt for
+  the backfill.
+- **§622.3 DISPATCHED: TE-REG-T (research seat)** — the trajectory census
+  under A6's minted verdict, chair-set parameters recorded before measuring:
+  N = 200 seeds stratified across all six tiers, the five arc shapes
+  {monotone · plateau · boom-bust · fade · sacked-never-recovered}, the
+  classifier over the RECONSTRUCTED-EXTENT series with its length stated,
+  and the thin-verdict band: any non-monotone shape below 3% of its
+  applicable seeds fires THIN for that shape (constants tuning-class).
