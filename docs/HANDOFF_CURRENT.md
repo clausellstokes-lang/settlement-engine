@@ -59,15 +59,18 @@ CH-4 → **CH-6** (⛔ a **live shipped deity-doctrine violation**: a magic-free
 
 ⛔ **EDGE-BUNDLE BILL — the count is PER-FILE.** `npcProfile.js` sits in three closures, `districtProfile.js` in one (`aiGroundingBundle`, 67 inputs). **Read `supabase/functions/_shared/<bundle>.meta.json` before budgeting.** The bill is **invisible to targeted suite runs** — only the full gate sees it. Cure: `npm run build:edge-shared`, commit all six files as a set.
 
-### ⛔ COLLECT THIS FIRST — A GATE WAS IN FLIGHT WHEN THE SESSION ENDED
-TE-CH-4's full gate was running at handoff and **the agent watching for it died with the session**, so nobody is holding the verdict. It is on disk:
-
-    LOG:  /var/folders/0l/_sz6gzvd11x6sthjy1jdj0_80000gp/T/gate-tail.10770.log          (gate-tail pid 10770)
-    grep -aE 'TRUE_EXIT|\[gate-tail\] exit|known failure|ceiling|STRICT DIST|valid: [0-9]+ packets' <LOG> | tail -20
-
-⚠ Read it **soon** — that is the system TMPDIR and macOS reaps it. **GREEN needs all three:** `TRUE_EXIT=0` **and** `[gate-tail] exit: 0` **and a collected-test count** — an exit code without a count is not a verdict.
-**On green:** `git update-ref refs/preserve/holding-ch4 dc49c6c4a6761abc54235792665db611338805f3 && git update-ref -d refs/preserve/wip-ch4`
-**If it reds on the freshness or reproducibility arms**, the regen did not take — re-run `npm run build:edge-shared` and commit all six sidecars as a set. **Do not widen the census with those six.**
+### ✅ COLLECTED (§564, 2026-08-24 ~09:25) — THE CH-4 GATE WAS RED: 11 ARMS OUTSIDE THE FROZEN CENSUS
+The verdict was collected and the log preserved at the `31585ce2-…` session scratchpad
+(`collected/gate-tail.10770.log`). No freshness/reproducibility arms — the regen took; the
+11 arms are the car's own bills, classified at **§564.2** (census stamp +16 · arcane census
+path:line/recorded-set · three any-casts to FIX not widen · the speculative
+`powerStructure.factions||power.factions||factions` read chain · prose-numerics humanize ·
+calibration W2/W8 declared-shift adjudication with a HARD STOP on any nonzero
+stacked-buildings count). **TWO CURE LANES DISPATCHED (§564.5): TE-CH7-CURE (bundle-set
+regen + one clean gate) and TE-CH4-CURE (the six bills, regen at final tree, mint LAST,
+gate).** Receipts: `31585ce2-…/scratchpad/receipts/laneCH7CURE-receipt.md` /
+`laneCH4CURE-receipt.md`. On a chair-validated green: move `wip-*` → `holding-*` (chair
+moves pins; lanes do not).
 
 ## ⭐⭐⭐⭐ SUCCESSION ADDENDUM — 2026-08-24 (~01:40), LEDGER THROUGH §439 — READ THIS DELTA FIRST, THEN THE §427 BLOCK BELOW
 

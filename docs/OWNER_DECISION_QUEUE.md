@@ -25154,3 +25154,59 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   verdict. If it reds on the freshness or reproducibility arms, that means the
   regen didn't take and I'll say so verbatim rather than re-running until it
   looks clean."* **That is the standard, stated by a lane and not by the chair.**
+
+## §564 · THE NEW ACCOUNT'S FIRST SITTING — THE VERDICT IS RED, AND THE RETRO-VALIDATION DEBT MEASURES TWO CARS (2026-08-24 ~09:25 CDT, Fable chair)
+
+- **§564.1 CH-4's GATE COLLECTED: RED — 11 failing tests OUTSIDE the frozen
+  census.** Log preserved out of the reapable TMPDIR into this session's
+  scratchpad (`31585ce2-…/scratchpad/collected/gate-tail.10770.log`). ⚠ The log
+  carries `[gate-tail] end:` but **no exit line and no TRUE_EXIT** — the wrapper
+  died unwritten. That softens nothing: **a red with named arms and counts is a
+  verdict; it is only a GREEN that needs all three lines.** None of the 11 is a
+  freshness/reproducibility arm — §562's regen took.
+- **§564.2 THE ELEVEN ARMS, CLASSIFIED (chair):** **(A)** the census stamp the
+  receipt itself declared outstanding — lighting `21042 vs 21026` is exactly the
+  car's +16 titles; **(B)** the arcane census's two arms — path:line keys and a
+  "new classifier" flag; cure by the walker's own recorded-set mechanics, ⛔ the
+  seventh-spelling conversion stays its own car; **(C)** the car's OWN NEW DEBT:
+  three `/** @type {any} */` casts in `canonicalArchetypesById` — the ratchet's
+  message is the law, **fix the types, never widen**; **(D)** +1 observed-shape
+  read — the three-alternate guess chain
+  `powerStructure.factions || power.factions || factions`; measure the real
+  writer, prune the dead alternates; **(E)** prose numerics — the new comments
+  are dense with figures; humanize, the measurements already live in the receipt;
+  **(F)** calibration **W2 (32 rows) / W8 (8 rows)** — the declared shift
+  reaching an instrument the receipt never enumerated; row-by-row tracing owed,
+  ⛔ **HARD STOP on any nonzero stacked-buildings count** — that would be a real
+  geometry defect, never a re-record.
+- **§564.3 THE OWNER'S DIRECTIVE THIS SESSION (retro-validate everything built
+  without Fable), MEASURED:** the retrovalidation queue is **EMPTY** (cleared
+  08-21); the marker census finds **ZERO** `Fable-unvalidated` rows after §321
+  (the last sits at ODQ line ~10617, inside the cleared §238–§274 range); the
+  last five ledger commits and last six build commits all carry
+  `Co-Authored-By: Claude Fable 5`. **RULED: the sitting scopes to the only code
+  no chair has validated end-to-end — the two `wip-` cars.** The 60 landed cars
+  were validated at their Fable-chaired landings and are not re-litigated.
+  *JUDGMENT: chose scoped retro-review over re-auditing 60 landed cars because
+  the §236 mechanism plus provenance trailers already cover them — veto and the
+  full re-audit runs.*
+- **§564.4 THE FABLE REVIEW OF THE TWO WIP DIFFS, EXECUTED.** **CH-7 RATIFIED**
+  — the 4-line anchor is exactly §559.4's measured shape; pins and split
+  controls verified in the car's own test file. **CH-4 RATIFIED AS RULED** — the
+  diff implements every §555 ruling faithfully — with three chair findings the
+  gate corroborates: the any-casts, the speculative read chain, and the missed
+  calibration instrument. ⭐ *The receipt enumerated the instruments it knew;
+  W2/W8 prove the class: the instrument you did not enumerate still sees your
+  car.*
+- **§564.5 TWO CURE LANES DISPATCHED** (Opus seats, per §447 and the owner's
+  seat directive today — Fable architects/validates/rules, Opus
+  implements/verifies): **TE-CH7-CURE** (the receipt's two acts: bundle-set
+  regen, one clean gate) and **TE-CH4-CURE** (the six bills above,
+  regen-at-final-tree, mint LAST, gate). ONE gate at a time — the mutex
+  serializes; no lane may kill a holder. **The chair moves pins on validated
+  green; lanes do not.**
+- **§564.6 CONTINUITY.** This session's scratchpad is `31585ce2-…`; lane
+  receipts land in its `receipts/`. The predecessor's `695a70c5` scratchpad
+  worktrees were found CLEAN at both pinned tips and are REUSED (`npm ci`
+  already paid). Slot unchanged at `c3289244d` (60 cars) · packets 179 · census
+  `2525/366/2159/21026/5848` · ratchet 11 of 29,044.
