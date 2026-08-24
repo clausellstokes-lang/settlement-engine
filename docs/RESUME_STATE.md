@@ -51,6 +51,15 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 06:16 CDT 08-24: §549 — FIFTH STACK COLLECTED, 58 CARS at 510c51b76 (cars 57/58 = MF-CH3 + MF-CG2).
+# Packets 177 · census 2,525/366/2,159/21,017/5,847 · ratchet 11 of 29,044. NO holding awaits landing.
+# FOUR SEATS FILLED: TE-R3 (⛔ DATED 08-27) · TE-CH-5 (Shape F, unblocks MF-CH2B from DRAFT) ·
+#   TE-CH-4-PREP (read-only; ⚠ NO CH-4 charter exists) · TE-DW-FIX (read-only pre-DW-1b gate).
+# ⛔ 17 spent worktrees pruned after ref-pinning FOUR non-ancestors (incl. CG-2's pre-rebase tip). Disk 13→19 GB.
+# ⚠⚠ I DESTROYED $PATH with a loop variable named `path` — git/tr/basename/df all vanished mid-loop and the
+#   "0 remaining worktrees" line was a FALSE ZERO from grep on empty input. My own documented hazard. Redone.
+# ⭐ DW charter LANDED on the ledger branch (129,030 B); DESIGN_DWELLINGS_PROGRAM.md now points at it.
+
 # ⭐⭐⭐ 02:34 CDT 08-24: §538 — FOUR SEATS FILLED (cap is FOUR per §508; the §388 heartbeat had been
 # steering by the REVOKED §465 cap of two for a day — re-armed). LANDING TE-STACK-4 (aip1+ch2, BOTH on
 # stale bases, each needs rebase + re-stamped delta) · COMPILE DW-0 · BUILD TE-CG-2 · BUILD TE-CH-3.

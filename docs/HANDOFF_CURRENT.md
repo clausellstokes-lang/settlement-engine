@@ -10,38 +10,36 @@ this one.**
 
 ## ⛔⛔⛔ PICKUP CARD — REWRITTEN WHOLE AT EVERY LEDGER COMMIT (owner §448: a successor picks up HERE in 60 seconds)
 
-**AS OF 2026-08-24 (refreshed 04:25)  ·  prev AS OF 2026-08-24 03:41 CDT · ledger §546 · build `claude/composite-r4` = `86794b5d2` (**56 cars landed**) · ⛔ LANE CAP = **FOUR** (§508) · ⛔ every dispatch `model: "opus"` (§484) · standing lane law = `$SP/LANE-LAW.md`, slot facts = `$SP/SLOT-FACTS.md`**
+**AS OF 2026-08-24 06:16 CDT · ledger §549 · build `claude/composite-r4` = `510c51b76` (**58 cars**) · packets **177** · census `2,525/366/2,159/21,017/5,847` · ratchet **11 of 29,044** · ⛔ LANE CAP = FOUR (§508) · ⛔ every dispatch `model: "opus"` (§484) · law = `$SP/LANE-LAW.md`, slot facts = `$SP/SLOT-FACTS.md`**
 
-**⛔ THE OWNER'S #1 ITEM: nothing has deployed since 2026-07-28.** Prod at migration **121**, repo head **199**, 78 pending. ⭐ **MEASURED THIS SESSION (§540.7–.8): the push itself deletes nothing.** 12 of the 13 destructive migrations act only inside function bodies. **198, the one labelled DESTRUCTIVE, deletes nothing at apply time** and its prune is double-gated, both fail closed. ⛔ **The one that acts at push time is 188** — it deletes users' custom supply-chain content, mitigated by a quarantine receipt written to `application_command_journal` **before** deletion. **`docs/DEPLOY.md` covers 198 well and does not mention 188 at all — that amendment is owed and unowned.**
+**⛔ THE OWNER'S #1 ITEM — nothing has deployed since 2026-07-28.** Prod at migration **121**, repo head **199**, 78 pending. ⭐ **MEASURED (§540.7–.8): the push itself deletes nothing.** 12 of the 13 destructive migrations act only inside function bodies; **198, the one labelled DESTRUCTIVE, deletes nothing at apply time** and its prune is double-gated, both fail closed. ⛔ **188 is the one that acts at push time** — it deletes users' custom supply-chain content, mitigated by a quarantine receipt written to `application_command_journal` **before** deletion. **`docs/DEPLOY.md` covers 198 and never mentions 188 — that amendment is owed and unowned.**
 
 ### FIRST ACTS ON PICKUP
 1. `git -C <repo> log -1 --oneline review-fixes-2026-07-08 claude/composite-r4` — if either moved past this card, read the ODQ tail.
-2. Read `$SP/LANE-LAW.md` (gate incantation · the ~15 instruments that lie · census/packet rules) and `$SP/SLOT-FACTS.md`.
-3. Re-arm the §388 wakeup (`13,33,53 * * * *`) — session-only, dies with the session. Cap FOUR, a sub-lane counts, briefs carry the SOLO clause.
-4. ⛔ Before ANY worktree cleanup, ref-pin every detached HEAD that is not an ancestor of the tip.
-5. ⛔ Lanes build their OWN `node_modules` with `npm ci`. **Never symlink the shared one** — it is 434 pkgs to the slot's 468 and five weeks stale (§540.2). `npm ci` also installs `.husky/_`, so lane commits now RUN pre-commit and `eslint --fix` RE-STAGES.
+2. Read `$SP/LANE-LAW.md` and `$SP/SLOT-FACTS.md`. **A card is a CACHE: re-read slot facts at every proof boundary.**
+3. Re-arm the §388 wakeup (`13,33,53 * * * *`) — session-only, dies with the session.
+4. ⛔ Ref-pin every detached worktree HEAD that is NOT an ancestor of the tip **before** any cleanup. Four were pinned this pass; two lane tips were one command from unrecoverable on 08-24.
+5. ⛔ Lanes build their OWN `node_modules` with `npm ci` — **never symlink the shared one** (434 pkgs vs the slot's 468, five weeks stale; a symlinked lane yields ZERO collected tests and the SCOPE SENTINEL rightly refuses). `npm ci` installs `.husky/_`, so lane commits RUN pre-commit and `eslint --fix` **re-stages**.
 
-### SEATS NOW
-| seat | lane | state |
+### THE FOUR SEATS — ALL FILLED, ALL OPUS
+| seat | lane | what it is |
 |---|---|---|
-| — | **DW-0 CLOSED** | charter LANDED on the ledger branch at `d2e80a44d` (129,030 B, byte-identical); final tip `8e8489bcc` pinned `holding-dw0-final`. R2 ruled. |
-| HOLDING | **TE-CG-2** | identical-footprint defect; own `npm ci` tree. ⚠ the panel notes **CG-2 × CG-1b was measured by nobody** — this lane is the first. |
-| HOLDING | **TE-CH-3** | catalog data slips; three declared digests, each to be re-derived AT the committed tip because pre-commit re-stages. |
-| free | — | deliberately empty: the gate is SERIAL and adding a lane buys contention, not throughput (§541.10). |
+| BUILD | **TE-R3** | provenance metadata into the bare files: three byte-surgery injectors (JPEG APP1, WebP VP8X, MP4 uuid), **each owing a pixel-identity control**. ⛔ **DATED: Higgsfield §5.5 binds 2026-08-27.** Cohort A (23 files) must never be swept in; a C2PA manifest is signed and cannot be re-created. |
+| BUILD | **TE-CH-5** | Shape F, ruled §541 — move `alchemy` ALONE into `TRADE_INST_TAGS`, de-tag the three `none`-licensed rows. ⛔ **TWO files**: `npcProfile.js` holds a hand-typed duplicate. **MF-CH2B leaves DRAFT on this.** |
+| READ-ONLY | **TE-CH-4-PREP** | `noble` unclassifiable — ⚠ **there is NO CH-4 charter; that phrase is all the estate wrote.** Establish the defect by measurement first. |
+| READ-ONLY | **TE-DW-FIX** | the named pre-DW-1b gate (§545.4): re-derive the fixture union mechanically. **A sampled arm is a smoke alarm, not an inventory.** Resolve `portableFurnaces`, which has ZERO occurrences in `src` yet appears in a live acceptance arm. |
 
-### ⛔ FIVE DECISIONS THAT ARE THE OWNER'S (§543.9) — none delegated
-**O1** the `interiors` ladder row's stored return cells vs signed B16b; my recommendation strikes the 2026-07-17 "one free sample interior per settlement" teaser — *paid surface*. **O2** `Estate.ownerRef`'s type — *persistence shape*, the §519-vs-§498 tension, the program's largest contract change. **O3** `PlanDelta` / `EstateEvent` / EST-5's ownership ledger — three new durable artefacts. **O4** the seven-rung prosperity ladder — *tuning signature under THE PROMISE*. **O5** certifying the DW-S soak green with determinism and lived-history immutability unmeasured.
-⭐ **O6 is DISCHARGED — do NOT re-ask.** The three viewing paywalls were ruled at §523.3 (`change-view` FREE · `map-chains` FREE · `fog-table` PAID).
+**Pins:** `holding-dw0-final` · `ad-charter-2026-08-24` (rescued from a dead session's /tmp) · four `wt-*` rescues. **No holding awaits landing.**
 
-### THE QUEUE
-DW-0 repair → chair rules R1–R7 → **CH-3 lands** → **CH-5 build** (Shape F, ruled §541: move `alchemy` alone into `TRADE_INST_TAGS`, de-tag the three `none`-licensed rows; **MF-CH2B leaves DRAFT on it**) → **CH-6** (`ARCANE_INST_KW` — ⛔ carries a **live shipped deity-doctrine violation**: a magic-free world can hold no divine healer or druid circle, §541.8) → CH-4 → **R3** (metadata into the 46 bare files; ⛔ **Higgsfield §5.5 binds 2026-08-27**) → the DW build waves (41 cars; §482 puts the whole arc before the review) → WEB-8b/12 → the wiring wave → WEB-9a/9b/10/11 → HK-4/5/6 → housekeeping → CT-4/CT-5/WF-8 → the AD program → one trailing OSR mint → parity train → `/code-review ultra` (OWNER) → endgame.
+### THE QUEUE AFTER THESE FOUR
+**CH-6** (⛔ `ARCANE_INST_KW` carries a **live SHIPPED deity-doctrine violation**: a magic-free world can hold no divine healer or druid circle — §541.8) → CH-4 build → the **DW build waves** (41 cars; §482 puts the whole arc before the review) → WEB-8b → WEB-12 → the wiring wave → WEB-9a/9b/10/11 → HK-4/5/6 → housekeeping → CT-4/CT-5/WF-8 → the **AD program** (charter at `refs/preserve/ad-charter-2026-08-24`) → one trailing OSR mint → parity train → `/code-review ultra` (OWNER) → endgame.
+
+### ⛔ FIVE DECISIONS THAT ARE THE OWNER'S (§543.9)
+**O1** the `interiors` ladder row's stored return cells vs signed B16b — my recommendation **strikes the 2026-07-17 "one free sample interior per settlement" teaser**; *paid surface*. **O2** `Estate.ownerRef`'s persisted type — *persistence shape* (the field is renamed to `heldBy`; the TYPE is still owner-gated). **O3** `PlanDelta` / `EstateEvent` / EST-5's ownership ledger. **O4** the prosperity ladder — *tuning signature under THE PROMISE*; **two rungs fall through, and `Subsistence` scores identically to `Comfortable`.** **O5** certifying the DW-S soak green with determinism and lived-history immutability unmeasured.
+⭐ **O6 is DISCHARGED — do NOT re-ask.** The three viewing paywalls were ruled at §523.3.
 
 ### ⛔ OWNER-GATED BY NATURE (§510.2)
 `supabase db push` · every push and deploy · legal sign-off · the tuning **signature** · the `/code-review ultra` keystroke.
-
-
-### ⭐ NEXT ACT
-**A two-car stack: CG-2 + CH-3.** Both are pinned and both were built on `79b78881c` while the slot is now `86794b5d2` — **each needs a rebase and a re-stamped DELTA (never the tuple)**. CG-2 is green but for its deferred census row; CH-3 is red and revising to the rng-preserving §3.2 variant (§544.7). Packet surface is **176** — do not harden 175. The DW build waves gate on the pre-DW-1b fixture re-derivation (§545.4).
 
 ## ⭐⭐⭐⭐ SUCCESSION ADDENDUM — 2026-08-24 (~01:40), LEDGER THROUGH §439 — READ THIS DELTA FIRST, THEN THE §427 BLOCK BELOW
 

@@ -24109,3 +24109,51 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   charter is on the ledger branch; the DW build waves gate on the pre-DW-1b
   fixture re-derivation (§545.4). Next: **CH-4 → CH-5 (Shape F) → CH-6 (the
   shipped deity-doctrine violation)**, then R3 before **2026-08-27**.
+
+## §549 · FOUR SEATS REFILLED, 17 WORKTREES PRUNED — AND I DESTROYED MY OWN `$PATH` (2026-08-24 06:17 CDT)
+
+- **§549.1 THE CAP WAS EMPTY; IT IS NOW FULL, ON DISJOINT FILE SETS.** No holding
+  awaited landing after §548, so all four seats were free. Filled **two builds +
+  two read-only**, so only two lanes ever contend the serial gate: **TE-R3**
+  (provenance metadata; ⛔ **dated — Higgsfield §5.5 binds 2026-08-27**),
+  **TE-CH-5** (Shape F, ruled §541, which is what lets MF-CH2B leave DRAFT),
+  **TE-CH-4-PREP** and **TE-DW-FIX** (both read-only, both gate-free).
+  ⚠ **CH-4, CH-5 and CH-6 all edit the same vocabulary and catalog files, so they
+  can never run in parallel** — CH-4 is in a seat only as a READ-ONLY
+  investigation, and CH-6 waits for CH-5 to land.
+- **§549.2 R3 IS UNBLOCKED — VERIFIED, NOT ASSUMED.** `scripts/ai-media-provenance.json`
+  is present at the slot at **16,855 B** with `_restorable`, `_cohort_a`,
+  `_not_shipped` and `_counts` keys, so AIP-1's register landed as car 55 and the
+  follow-on can start. ⚠ **My first check of this reported "register ABSENT" —
+  that was a lie produced by a bad `sed` flag (`s/^/…/B/`) consuming the
+  statement.** Re-measured with an explicit `git cat-file -e`. *A malformed
+  formatter can manufacture a negative result out of a positive one.*
+- **§549.3 ⛔⛔ I DESTROYED `$PATH` WITH A LOOP VARIABLE NAMED `path`.** `while
+  read -r path head rest` overwrote the environment: **`git`, `tr`, `basename`,
+  `df` and `awk` all became "command not found" mid-loop.** This is **my own
+  documented instrument-that-lies** and I walked straight into it. Two
+  consequences worth recording: every ancestry test silently took the ELSE branch
+  and printed **"NOT ancestor -> PIN"** for all 19 worktrees — a uniform false
+  positive — and the summary line **"remaining lane worktrees: 0"** was a **FALSE
+  ZERO**, because `grep -c` counted an empty stream after `git` had vanished.
+  **No pin was created and no worktree was removed, so nothing was damaged — but
+  the output read like a completed job.** Redone with `wt` as the variable.
+- **§549.4 FOUR NON-ANCESTORS PINNED, THEN 17 WORKTREES PRUNED.** Of 19 lane and
+  proof worktrees, four HEADs were **not** reachable from the tip and were pinned
+  first: `5941093f4`, `b13f60f33`, `8e8489bcc`, and — the one that mattered —
+  **`44b83a882`, CG-2's PRE-REBASE tip.** Its content landed via the rebase, but
+  the original commit became unreachable the moment `holding-cg2` was pruned at
+  the §548 collection. **The ref-pin rule caught it.** 17 spent trees removed
+  (the two live lanes excluded by name); **disk 13 → 19 GB.**
+- **§549.5 LEDGER CURRENCY RESTORED.** The pickup card had drifted to §546 while
+  the ledger stood at §548 — **rewritten WHOLE**, never string-patched, per the
+  §452→§482 lesson. It now carries the current slot facts, the four seats, the
+  five owner decisions with O6 marked discharged, and the two standing lane laws
+  that changed tonight (`npm ci` not symlink; the husky shim now PRESENT so
+  pre-commit runs and re-stages). RESUME_STATE hand-note added.
+- **§549.6 THE QUEUE AFTER THESE FOUR.** **CH-6** takes `ARCANE_INST_KW` and its
+  **live shipped deity-doctrine violation** — a magic-free world can hold no
+  divine healer and no druid circle (§541.8) — then CH-4's build, then the **DW
+  build waves**, which gate on TE-DW-FIX's re-derivation. The AD program's
+  charter is safe at `refs/preserve/ad-charter-2026-08-24` after being rescued
+  from a dead session's `/tmp` (§544.1).
