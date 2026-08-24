@@ -26238,3 +26238,14 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   unrecognizability. REG-3 builds between those two measurements; its
   variation ranges are owner-signature surfaces at the tuning pass where they
   shape worlds.
+
+## §601 · THE FAMILY-GRAMMAR LAW IS INTEGRATED — AMENDMENT A3 (2026-08-24 ~18:10 CDT)
+
+- **§601.1** Owner approval verbatim ("Perfect I like that — integrated, and
+  if it isn't already"): §600's family-grammar law now lives WHERE BUILD
+  LANES READ — Amendment A3 of DESIGN_REGISTER_PROGRAM.md amends L-REG-8 and
+  gives REG-3 the dual-arm exit (slot tables + gallery spread + blind
+  silhouette read), records the rampart and family-grammar approvals as
+  standing verdicts, and routes the world-shaping variation ranges to the
+  tuning surface. The ledger and the architecture now say the same thing in
+  both places a reader could look.

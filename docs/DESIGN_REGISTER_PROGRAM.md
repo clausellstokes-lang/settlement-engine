@@ -297,3 +297,24 @@ joins §9's enumeration — and under §585 the chair signs §217 raises, record
 §7.6 gains the qlmanage reconciliation (headless Chrome stays the instrument; the MF-A1
 receipt's fidelity row is marked superseded pending a differential probe). · The wave count:
 the arc is now **REG-I0 · REG-0 · REG-G1(cliff) · REG-1..9 · REG-10 · REG-11 · REG-P**.
+
+---
+
+## AMENDMENT A3 · THE FAMILY-GRAMMAR LAW — OWNER-APPROVED VARIATION (ODQ §598, §600–§601)
+
+**A3.1 · L-REG-8 is amended:** a shape family is **ANATOMY + INVARIANTS + SLOTS, never a fixed
+outline.** Pinned invariants: only what makes the class read at a glance. Every other feature is
+a SLOT rolled by the building's own seed (the standing drawVariant idiom — deterministic per
+building, different across buildings). **The world biases the dice:** prosperity buys the tower
+and transept; foundation age accretes asymmetric chapels (the faith-tenure fact); region/culture
+biases forms within the fantasy-base morphology law; parcel and orientation differentiate even
+equal rolls. Variation is biography, never noise.
+
+**A3.2 · REG-3's exit gains the dual arm:** for each family, (a) the enumerated slot table with
+its bands and world-bias rules; (b) the GALLERY spread measured across N seeds (sameness reds,
+L-REG-16); (c) the blind silhouette-read (unrecognizability reds). The wave builds BETWEEN those
+two measurements. Variation ranges that shape worlds are tuning-signature surfaces (§9).
+
+**A3.3 · Standing approvals of record:** the §590 rampart treatment is OWNER-APPROVED as drawn
+(ODQ §598 — "Yes! I like that rampart") and is REG-2's binding dress target beside hf261/hf313;
+the family-grammar mechanism is owner-approved at §600–§601 ("Perfect, I like that").
