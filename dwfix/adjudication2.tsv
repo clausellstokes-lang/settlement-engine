@@ -1,0 +1,63 @@
+a cheese/milk cross of c 1416 to which sellers of cheese	C	cross (A-head)
+a separate store outside	BR	room
+a wall painting	C	hanging (A-head)
+a water butt rung 2 the charcoal barn of a furnace site is a large volume store no pantry/buttery/larder at any rung this family's storage is fuel and stock only	C	vat
+a yarn market stone cross mentioned 1525	C	cross (A-head)
+and the parish's bier under the lychgate roof	C	bier
+burial inn gallery access to bedchambers	N	parse fragment
+charcoal store buckets firetrade	BR	room
+clamp	C	kiln -- a temporary field kiln; ROOM_KINDS.kiln is its home
+corn in the nw corner	BS	a commodity, not a fitting
+fixtures furnace	C	furnace (A-head)
+fixtures hurdle fold	BR	yard enclosure
+fixtures kiln	BR	ROOM_KINDS.kiln
+fixtures long gallery portraits	C	hanging (A-head)
+fixtures millstone pair	C	mill (A-head)
+fixtures platform	C	trestle stage
+fixtures rick	C	bone stack -> stack{material}
+fixtures spinning wheel	C	loom
+fixtures stacked long bones in rows with a walking passage between	C	bone stack
+fixtures the poultry cross	C	cross (A-head)
+fixtures timber stack	C	bone stack
+glue pot	C	cauldron
+hall only at era 1500	N	parse fragment
+hay bay	BR	storage bay
+hemp	BS	a commodity
+hopper/shoe/damsel	C	mill (A-head)
+horse walk	BR	circulation
+hurst frame	C	mill (A-head)
+hut has no room kind	N	parse fragment
+jointer	A	R-INST-2 mints it explicitly as new -- the cooper's long jointer plane on legs
+kiln	BR	ROOM_KINDS.kiln
+lambing pen buckets seasonal	BR	yard enclosure
+linen thread	BS	a commodity
+lodge hut buckets none no typed home	BR	room
+log carriage	C	mill (A-head)
+manure	BS	a commodity
+milk and fruit were ordered to keep	N	parse fragment
+pit wheel/wallower/spur wheel	C	mill (A-head)
+posts	BE	envelope
+processions	BS	an activity
+roundhouse	BR	room
+sack hoist	C	hoist (A-head)
+sails and windshaft	C	mill (A-head)
+saw frame	C	mill (A-head)
+saw pit	C	sawpit (A-head)
+seasonal	BS	a bucket
+siege	BS	a state
+skull bands	C	bone stack
+sledge	BS	movable, not a fitting
+sluice gear	C	sluice -- JOINT_KINDS member, another vocabulary
+spar store	BR	room
+states in use emptied blocked/earthed rediscovered restacked	BS	wear states
+stoke pit	C	sawpit (A-head)
+tapestries	C	hanging (A-head)
+tentering screw	C	tenter
+the church house's ground floor brew house/bakehouse with a smoke chamber	N	parse fragment
+tiller wall	A	R-INST-2 mints it explicitly as new -- the bowyer's tillering frame
+top	N	parse fragment
+trestles	C	table
+turf hut	BR	room
+wheel	C	mill (A-head)
+wool	BS	a commodity
+yarn and coal at the eastern end	BS	commodities

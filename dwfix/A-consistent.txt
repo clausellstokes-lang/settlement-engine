@@ -1,0 +1,47 @@
+awning
+barred grille
+basin
+bath
+beam
+bell
+bird trap
+bishop's throne
+book chain
+bread ovens
+chest
+cistern
+clock
+cross
+drawbar
+drawbridge
+frithstool/knocker
+fulling stocks
+furnace
+garderobe
+grindstone
+hanging
+hat pegs
+hatch
+hoist
+horse pump
+immersion pool
+instrument
+iron sheeted door
+jointer
+key board
+kiosk
+ladder
+mill
+mounting block
+nest box wall
+organ
+portcullis
+pulpit
+range targets
+reliquary
+rotating dome
+sawpit
+scales
+stocks/pillory/whipping post
+tiller wall
+travail/shoeing frame

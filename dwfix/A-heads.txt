@@ -1,0 +1,53 @@
+awning
+barred grille
+basin   [head-only]
+bath   [head-only]
+beam
+bell
+bier
+bird trap
+bishop's throne
+book chain
+bread ovens
+chest
+cistern
+clock
+cross
+die/stamp   [head-only]
+drawbar
+drawbridge
+frithstool/knocker
+fulling stocks
+furnace   [head-only]
+garderobe
+grindstone
+hanging   [head-only]
+hat pegs
+hatch
+hoist   [head-only]
+horse pump
+immersion pool
+instrument
+iron sheeted door
+key board
+kiosk
+ladder
+mill   [head-only]
+mould   [head-only]
+mounting block
+organ
+plus nest box wall
+portcullis
+pulpit
+punishment post   [head-only]
+range targets
+reinforced door   [head-only]
+reliquary
+rotating dome
+sawpit
+scales   [head-only]
+scrutiny urns
+stocks/pillory/whipping post
+touchstone
+travail/shoeing frame
+vessel   [head-only]

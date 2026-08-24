@@ -1,0 +1,418 @@
+airlockdoor	C	sealed door -> JOINT_KINDS sealed_door / door attribute
+aludel	C	vessel (A-head) -- a sublimation vessel on a bench
+ampulla stall	BR	a selling zone, not a fixture
+and for the fabric	N	parse fragment
+arbour	BR	yard structure, 2.7 yard-fixture vocabulary
+arcade front	BE	envelope
+arcade open	BE	envelope
+arcade state room	BR	room
+archive closet hosted in fixtures carrel	N	parse fragment
+armarium recess	BX	RECESS third term (2.3 declares it)
+arms	C	hanging (A-head) -- armorial panel
+as d e f c at the top grades	N	parse fragment
+ash bath	C	bath (A-head), medium=ash
+assay furnace	C	furnace (A-head), use=assay
+avenue	BR	circulation/outdoor
+awning	A	a retractable fabric cover; no member expresses it
+awning/velarium	C	awning
+balance	C	scales (A-head)
+balance beam	C	scales
+balance beams	C	scales
+balneum	C	bath (A-head), medium=water
+bank	BE	earthwork
+barber chairs and basins	C	basin (A-head) + seat
+bark mill edge runner	C	mill (A-head)
+bark stack	C	bone stack -> stack{material}
+barn porch	BR	room
+barred grille	A	grille/aperture closure; 82 has no member
+barred window	C	grille
+battlements	BE	envelope
+bay window	BE	envelope
+bay window two ways	BE	envelope
+beam	A	the tanner's fleshing beam -- a worked-on fixture
+bell	A	82 carries no bell
+bell frame	C	bell
+bell turret	BE	envelope (massing part)
+bell/clock	C	bell + clock
+bier	A	a funeral bier
+bird trap	A	NO TYPED HOME (R-INST-6)
+biribi board	C	playing table
+bishop's throne	A	a seat of state; seat row/dais do not express it
+block	C	perch -- BLOCK{falconry}
+blowpipe	C	vessel (A-head) -- bench apparatus
+board	C	display board
+board front	C	shutter counter
+bone structure	BE	envelope
+book chain	A	the chained-book fitting; a real countable library fixture
+book chest	C	chest (A-head)
+boundary stone	C	standing stone
+bounty board	C	display board
+bow chest	C	chest
+boxes	C	seat row -- theatre boxes are a seating subdivision
+bread ovens	A	oven; hearth does not express a baking oven
+bridge	BE	envelope
+broadloom	C	loom
+cage lift	C	hoist (A-head)
+cage under stair	BX	SUBDIVISION third term
+candle	C	cresset
+candles	C	cresset
+canna	C	standpipe -- Venetian water outlet
+canvas skin	BE	tent envelope
+carrel	BX	SUBDIVISION third term (a study booth)
+carrel n and collegiate court chamber closet	N	parse fragment
+cashier window/grille	C	grille
+castigatio statue	C	punishment post (A-head)
+casting furnace	C	furnace
+casting pit	C	sawpit (A-head)
+catalogue frame	C	display board
+causeway	BE	envelope
+cellar flap	C	hatch (A-head)
+centre post	BE	envelope (structural post)
+centre post/monolith	C	standing stone
+channel	C	drain
+channels/boat dock	BR	water zone
+chapel	BR	room
+chapter door	C	door -- reinforced door (A-head) not engaged; plain door
+charcoal barn	BR	room
+charging bridge	C	hoist
+chest	A	the generic lockable chest; 60 has only plate chest / money box
+chimney row	BE	envelope
+choir stalls	C	seat row
+circular stone	BE	envelope (wellhead ground)
+cistern	A	stored-water vessel; well/standpipe do not express it
+clock	A	82 carries no clock
+cloister window	BE	envelope
+coach as a yard fixture	BR	yard object
+cobbled floor	BE	envelope
+coffin rest	C	bier
+columns	BE	envelope
+conduit	C	standpipe
+conduit head	C	standpipe
+couch	C	bench
+crane	C	hoist (A-head)
+crane or hoist	C	hoist
+cross	A	the market/preaching cross; standing stone does not express a shaft on a stepped base
+crucible	C	vessel (A-head)
+cucurbit	C	vessel
+curb windlass	C	hoist
+curtain	C	hanging (A-head)
+dipping frame/moulds	C	mould (A-head)
+disguised door	C	door
+ditch	BE	earthwork
+dock	BR	water zone
+doorbell	C	bell
+double doors	C	door
+double doors field side	C	door
+drawbar	A	NO TYPED HOME; R-INST-6 flags the collision with FURNISHING_KINDS bar
+drawbridge	A	a movable span; portcullis/gate do not express it
+drawer wall	C	rack
+drug jar	C	vessel
+drum/bell	C	bell
+drying lines	C	rack
+dye tub	C	vat
+eagle ceiling	BE	envelope
+earthcover 60 cm	BE	envelope
+enclosure	BR	zone
+evidencechest	C	chest
+excluded group outside wall	BR	zone
+external stair	BE	envelope
+external stone window	BE	envelope
+false floor	BE	envelope (a concealment; R-INST-6 NO TYPED HOME)
+family tomb walled	BR	zone
+faro bank	C	playing table
+fasten penny	BS	a payment, not a fitting
+file/punch	C	die/stamp (A-head)
+fireplace great	C	hearth
+fireplace per room	C	hearth
+fireplace wall	C	hearth
+fishboards	C	shutter counter
+flagpole	C	signal mount
+flap	C	hatch
+floor tiles	BE	envelope
+font	C	basin (A-head)
+footholes	BE	envelope
+forms	C	bench
+fountain	C	standpipe
+frithstool/knocker	A	the sanctuary fitting; nothing expresses it
+fulling stocks	A	cloth-finishing plant; 82 has loom/tenter only
+furnace melting	C	furnace (A-head)
+gallery rail	BE	envelope
+gallery west	BE	envelope
+garderobe	A	a privy; 82 has no member
+gated mouth	C	gate
+gatherer box	C	money box
+glass windows	BE	envelope
+glazed windows	BE	envelope
+gobek tasi	C	masonry bed
+grain store	BR	room
+grating	C	grille
+grave markers	C	standing stone
+great beam	C	scales
+great west window	BE	envelope
+great window	BE	envelope
+grindstone	A	NO TYPED HOME; a distinct powered abrasive
+ground rise	BE	envelope
+guard portrait/banner	C	hanging
+guild doors	C	door
+gulley	C	drain
+gully	C	drain
+hammer frame	C	mill (A-head) -- power hammer
+hard floor	BE	envelope
+hat pegs	A	peg/hook rail; 82 has no member
+hatch	A	a wall/door hatch; trapdoor is a floor member
+heavy lock case door	C	reinforced door (A-head)
+hedge	BR	yard boundary
+herb garden	BR	zone
+herb garden plot	BR	zone
+high aperture	C	grille
+hiring tokens	BS	tokens, not a fitting
+hoist beam	C	hoist (A-head)
+hook	C	hat pegs (A-head)
+hooks	C	hat pegs
+horn	C	signal mount
+horncore kerb/floor	BE	envelope
+horse pump	A	a pump; well/standpipe do not express a lifting device
+horsemill	C	mill (A-head)
+image niche	BX	RECESS third term
+image tablet	C	hanging
+immersion pool	A	a sunk bathing pool; bath (A-head) is a heated vessel
+imposing stone	C	workbench
+inlaid floor	BE	envelope
+inspection aperture	C	grille
+instrument	A	a fixed instrument that sizes its own cell (R-INST-5 calls it a first-class new fixture)
+instrument chest	C	chest
+iron bound chest	C	chest
+iron chain	C	book chain
+iron door strong room	C	reinforced door
+iron ring	C	tether ring
+iron sheeted door	A	reinforced door -- the security-graded door leaf
+ironboundchest	C	chest
+jar shelving albarelli	C	rack
+jury box	BX	SUBDIVISION third term (a railed compartment)
+keeper hatch	C	hatch
+keepers fee board	C	display board
+kellerhals cellar hatch	C	hatch
+kennel row	BX	SUBDIVISION third term
+key board	A	the key rack; 82 has no member
+key set	C	key board
+kiosk	A	a free-standing booth; 82 has no member
+kitchen reredos brandreth mortar	C	hearth
+labyrinth	BE	envelope (floor inlay)
+lacus	C	basin
+ladder	A	NO TYPED HOME; a fixed ladder
+lamp furnace	C	furnace
+lantern cupola	BE	envelope
+latrine screen	C	screens
+lattice	C	grille
+laver	C	basin
+laver basins	C	basin
+lead main	BE	buried service
+leat inlet	C	drain
+ledge	C	hanging shelf
+library fire	C	hearth
+licence on wall	C	display board
+lock	C	lock-with-schedule
+locked chests	C	chest
+loft ladder	C	ladder
+loggia arcade	BE	envelope
+looking glass	C	hanging
+loops/gunloops	C	grille
+lot store	BR	room
+lych way	BR	circulation
+map or perambulation	C	display board
+marker cross	C	cross (A-head)
+marker stones/peribolos	C	standing stone
+marker tree	BR	yard
+market scales	C	scales (A-head)
+mask rule	BS	a rule, not a fitting
+mast platform	C	signal mount
+meridian line	BE	envelope (floor line)
+mortar block	C	workbench
+mould rings/strickle spindle	C	mould (A-head)
+mounting block	A	a horse block; 82 has no member
+muck cart of these	N	parse fragment
+multi lock double door	C	reinforced door
+mural quadrant	C	instrument (A-head)
+murder holes	C	grille
+nation walk markers	C	standing stone
+nemesis shrine	C	altar
+niche	BX	RECESS third term -- 2.3 declares RECESS explicitly not a fixture
+niche lockers	BX	RECESS third term
+no timber floors	BS	a prohibition, not a fitting
+notice door	C	display board
+octagon room	BR	room
+oil lamp	C	cresset
+organ	A	82 carries no organ
+oriel landing	BE	envelope
+outfall arch	BE	envelope
+overshot wheel	C	mill (A-head)
+pack opening apron	BE	envelope (a floor apron)
+painted cloths	C	hanging
+pallet	C	bed -- R-INST-6 objects that a pallet is a bed's ABSENCE; recorded
+panelling	C	hanging
+parish chest	C	chest
+paving	BE	envelope
+pay chest	C	chest
+penthouse gallery	BE	envelope
+perspective streets	BE	envelope (scenery)
+pewter moulds	C	mould (A-head)
+piccage stakes	BR	market ground marking
+pila basin ruota wheel	C	basin
+pillars	BE	envelope
+pipe bridge	BE	envelope
+piscina	C	basin (A-head)
+pit	BR	zone (the theatre pit)
+placard	C	display board
+plate ark	C	plate chest
+platform	C	trestle stage
+plug	C	brass tap
+plus inspection aperture	N	parse artefact of "plus X" list joiner
+plus nest box wall	A	nest_box_wall -- the dovecote envelope-as-furnishing (NO TYPED HOME)
+plus seal matrix	C	die/stamp (A-head)
+plus spirit tablet	C	altar -- R-INST-6 itself proposes oath_focus
+podium wall	BE	envelope
+pole frame	BE	tent envelope
+portable furnace	C	furnace (A-head) with portable=true  <<< THE DW-5d ARM
+portall	BE	envelope (a draught lobby)
+portcullis	A	82 has gate / gate-with-wicket but no portcullis
+porter hatch	C	hatch
+porter's hatch	C	hatch
+post bag	BS	movable, not a fitting
+post horn	C	signal mount
+post ring	C	standing stone
+posts on stone bases	BE	envelope
+potence	C	ladder -- the dovecote's rotating ladder
+pots	C	vessel
+pots set	C	vessel
+preaching cross	C	cross (A-head)
+proof mark target	C	die/stamp
+property wagon	BS	movable, not a fitting
+puddled clay	BE	envelope
+pulpit	A	82 has lectern but no pulpit
+punch	C	die/stamp
+rails compartments	BX	SUBDIVISION third term
+rails jury	BX	SUBDIVISION third term
+raked floor	BE	envelope
+range targets	A	a butts target; 82 has no member
+reading pulpit	C	pulpit (A-head)
+ream stacks	C	crate
+receiver	C	vessel
+register	C	ledger
+reliquary	A	a locked display shrine; 82 has no member
+rent chest	C	chest
+ritual shaft	BR	zone
+rolling mill	C	mill (A-head)
+rood group	C	altar
+roof hatch	C	hatch
+roof platform rail	BE	envelope
+rope ring	C	tether ring
+rose	BE	envelope (rose window)
+rostrum/pulpit	C	pulpit
+rotating canopy	C	rotating dome (A-head)
+rotating dome	A	the observatory's moving roof; a first-class moving fixture
+rotisserie	C	hearth
+royal arms board	C	hanging
+sacred tree	BR	yard
+sand bath	C	bath (A-head), medium=sand
+sand floor	BE	envelope
+sawpit	A	R-INST-2 explicitly mints it as a new FIXTURE
+sawpit new fixture era gated 1450	N	parse duplicate of sawpit
+scaenae frons	BE	envelope
+scaffold stage	C	trestle stage
+scaffold tiers	C	seat row
+scales	C	scales (A-head) -- R-INST-2 NO TYPED HOME
+screen	C	screens
+scrutiny urns	A	the ballot urn; 82 has no member
+seal	C	die/stamp
+searchers' seal/beam/yardwand	C	die/stamp + scales
+seat	C	garderobe (A-head) -- the latrine seat
+seld	C	kiosk (A-head) -- an insertable stall
+service hatch	C	hatch
+sextant trench	C	instrument
+shake down	C	bed -- R-INST-6 NO TYPED HOME, a temporary floor bed
+shears	C	fulling stocks (A-head) -- cloth-finishing plant
+shop board	C	shutter counter
+show window of plate	C	display board
+shrine	C	altar
+shuffleboard	C	playing table
+shuttered aperture	C	grille
+shutters	C	shutter counter
+signal bell	C	bell
+skylight stars	BE	envelope
+slit window	C	grille
+spine wall	BE	envelope
+spinning wheels	C	loom
+spring	BR	yard/water
+spring head	C	well
+squint	BX	RECESS third term
+stage	C	trestle stage
+stair	BE	envelope
+stair turret	BE	envelope
+stall board shutter pair	C	shutter counter
+stall division	BX	SUBDIVISION third term
+stall shutter pair	C	shutter counter
+stalls	C	seat row
+stands	C	rack
+statue niches	BX	RECESS third term
+steam chest	C	vat
+stepped base	C	cross (A-head)
+stocks pillory	C	punishment post (A-head)
+stocks/pillory/whipping post	A	punishment post -- the square-side punishment fitting
+stone of shame	C	punishment post
+stone ring	C	standing stone
+straw on frames	C	bed
+study closet	BX	SUBDIVISION third term
+takingindoors per floor	C	wide door
+takings box	C	money box
+tally board	C	display board
+tax chest	C	chest
+teasel frames	C	fulling stocks
+the parish's own movables kept in the house	N	parse fragment
+ticketed frame	BX	SUBDIVISION third term (the pledge stack)
+tiered seats	C	seat row
+tiled floor	BE	envelope
+tilt hammer	C	mill (A-head)
+timetable board	C	display board
+toll board	C	display board
+tollbooth	C	kiosk (A-head)
+touchstone	A	the assayer's touchstone; 82 has no member
+touchstone and needles	C	touchstone
+trail map board	C	display board
+travail/shoeing frame	A	the farrier's restraint frame; NO TYPED HOME
+treasurehouse	BR	room
+treasury door	C	reinforced door
+tresaunce gallery	BE	envelope
+tripod/focus	C	instrument
+tron	C	scales
+trophy	C	hanging
+trophy wall	C	hanging
+tub	C	vat
+type cases	C	rack
+umschau book	BS	a book, not a fitting
+vault ribbed	BE	envelope
+vaulted ceiling	BE	envelope
+ventpipe	BE	buried service
+vera da pozzo	C	well
+view opening	C	grille
+wage proclamation	BS	a proclamation, not a fitting
+wall	BE	envelope
+wall case	C	rack
+wall chain ring	C	tether ring
+wall chart	C	display board
+wall fireplace	C	hearth
+wall hanging	C	hanging (A-head)
+wall panelling gilt	C	hanging
+warping board	C	loom
+water tank	C	cistern (A-head)
+wattle screen	C	screens
+wax mark stamp	C	die/stamp
+weighbeam mealscales	C	scales
+weights chest	C	chest
+whitewash	BE	envelope finish
+wicket	C	gate-with-wicket
+winch	C	hoist (A-head)
+windlass	C	hoist
+window	BE	envelope
+window per room	BE	envelope
+windows	BE	envelope
+witness box	BX	SUBDIVISION third term
