@@ -118,12 +118,19 @@ export const CARTOGRAPHY_CALIBRATION = Object.freeze({
    * tier's fixture, and the real rows run larger, which is why four tiers overran
    * their byte band by one to three percent with the count caps removed entirely.
    *
-   * 443 is the whole corpus's worst row, and it falls at THORP — the tier whose block
+   * 450 is the whole corpus's worst row, and it falls at THORP — the tier whose block
    * carries the fewest rows to amortize the serializer's wrapper over. The per-tier
-   * readings are 443 / 436 / 430 / 402 / 399 / 388, so the spread across the ladder is
-   * eleven percent and one scalar is the honest shape for it.
+   * readings are 450 / 440 / 438 / 412 / 412 / 402, so the spread across the ladder is
+   * twelve percent and one scalar is the honest shape for it.
+   *
+   * IT MOVED 443 -> 450 AT CG-2, and the cause is stated rather than absorbed: a
+   * dressed footprint may be a CORNER-TRUNCATED cell, which is a quadrilateral, and a
+   * fourth plan point costs a row about seven bytes. Every tier moved UP by four to
+   * ten bytes and none moved down, which is exactly the signature a fourth vertex on
+   * roughly two rows in three should leave. The derived band rises with it
+   * (ceil(450 x 1.6) = 720 from 709), which only ever loosens a ceiling.
    */
-  MAX_BUILDING_ROW_BYTES: 443,
+  MAX_BUILDING_ROW_BYTES: 450,
   /** The corpus this was read from. A row count that moves invalidates the reading. */
   CORPUS_ROWS: 504,
 });
@@ -400,8 +407,13 @@ export const TOWN_CARTOGRAPHY_TUNING = Object.freeze({
       city: Object.freeze([5001, 25000]), metropolis: Object.freeze([25001, 100000]),
     }),
   }),
-  // <= 4 ALWAYS: a parcel is a triangle and its medial subdivision has exactly four
-  // subcells, so a fifth building per parcel has nowhere to stand (§6.3c's theorem).
+  // The per-parcel occupancy BAND for instances and dwellings — a density dial, not
+  // a capacity theorem. It used to read "<= 4 ALWAYS", because the packer addressed
+  // a parcel's ONE medial subdivision and a fifth building had nowhere to stand.
+  // CG-2 replaced that slot index with a recursive medial ADDRESS (cartographyBuildings.js
+  // §CELL ADDRESS), so the tree is unbounded and the four here is taste rather than
+  // arithmetic. Flagships are exempt from this band and always were; what CG-2 changed
+  // is that they now CONSUME a cell rather than silently re-using one.
   BUILDINGS_PER_PARCEL: Object.freeze({
     thorp: 1, hamlet: 2, village: 2, town: 3, city: 4, metropolis: 4,
   }),
@@ -416,6 +428,45 @@ export const TOWN_CARTOGRAPHY_TUNING = Object.freeze({
   FOOTPRINT_SHRINK_PERMILLE: Object.freeze({ large: 660, medium: 540, small: 420, dwelling: 300 }),
   FOOTPRINT_SHRINK_STEP: 160,             // the fixed 3-entry ladder: p, p−160, p−320
   FOOTPRINT_SHRINK_FLOOR: 120,
+  // ── CG-2: THE FORM VOCABULARY, AND WHY IT BANDS BY TIER ──────────────────────
+  // The four medial subcells of a triangle are TRANSLATES of one another (subcells
+  // 0,1,2) and a point reflection (subcell 3) — proved over 20,000 integer triangles,
+  // 20,000 of 20,000. So before CG-2 the footprint vocabulary of one parcel was
+  // exactly ONE triangle at four class scales, and 63.30% of all drawn buildings were
+  // a translate of another building in the same settlement.
+  //
+  // A footprint is now DRESSED from typed facts the row already carries, exactly as
+  // its height and its age already are: a size step and an optional truncated corner,
+  // both read off one `sceneDigest` of (digest, subject, instance). This is dress, not
+  // repair — no retry, no clipping, no positional jitter, and every emitted vertex is
+  // still a convex combination of the cell's own vertices, so §6.3c's containment
+  // theorem is untouched.
+  //
+  // THE BAND IS THE POINT. `PLAN_UNIT_CM_BY_TIER` makes a thorp's plan unit 10 cm and
+  // a metropolis's 80 cm: a thorp's buildings are genuinely smaller AND genuinely less
+  // varied, because a thorp is a dozen of the same cottage. So a thorp gets THREE
+  // forms (three sizes of the same triangle, no cut) and a metropolis TWELVE (three
+  // sizes x uncut-plus-three-truncations). Every value is a multiple of 3: the size
+  // step is `variant % 3` and the cut slot is `floor(variant / 3)`, so a non-multiple
+  // would silently starve one size of one cut.
+  FOOTPRINT_FORM_VARIANTS: Object.freeze({
+    thorp: 3, hamlet: 3, village: 6, town: 9, city: 12, metropolis: 12,
+  }),
+  // Permille of the class shrink per size step, applied as −1 | 0 | +1. 45 is set so
+  // the three sizes of one class stay inside their own class band: the tightest gap
+  // between adjacent FOOTPRINT_SHRINK_PERMILLE classes is 120 (540→420), so ±45 can
+  // never carry a `medium` building past a `small` one and make prominence a lie.
+  FOOTPRINT_FORM_SHRINK_STEP: 45,
+  // The corner truncation, as a permille of each of the two edges meeting at the cut
+  // corner. A third is the classic chamfer and is the largest cut that leaves the
+  // remaining trapezoid unmistakably the same building rather than a new one.
+  FOOTPRINT_CORNER_CUT_PERMILLE: 340,
+  // How deep the medial ADDRESS tree may be read. Depth d holds 4^d cells, so five
+  // depths address 1,364 buildings inside ONE parcel; the measured corpus worst case
+  // is 29, so the ceiling exists to keep the descent a bounded `for` rather than to
+  // bind anything real. An index past it packs no footprint — a dwelling is skipped
+  // and an institution is NAMED, exactly as a degenerate parcel already is.
+  FOOTPRINT_CELL_MAX_DEPTH: 5,
   HEIGHT_PLAN_CEILING: 60,                // buildingProfiles' heightPlan clamp maximum
   // The condition ladder's first-match thresholds. ORDER IS LOAD-BEARING in the
   // chain that reads them (§6.3e); these are the floors, not the order.

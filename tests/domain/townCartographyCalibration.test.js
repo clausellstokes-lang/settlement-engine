@@ -33,6 +33,9 @@
  *   W6 DERIVATION  the three coupled caps ARE the derivation rather than literals that
  *                  agree with it, `bindings <= buildings` holds for ARBITRARY inputs,
  *                  and the declared headroom clears the criterion that set it.
+ *   W8 DUPLICATES  the drawn corpus's identical-footprint census: ZERO stacked rows at
+ *                  every tier, and a tier-banded ceiling on repeated SHAPES that is
+ *                  derived from the measured reading rather than authored to pass.
  *   W7 OUTGROW     the derivation's INPUTS are exactly what this corpus reads, every
  *                  recorded row fits the caps derived from them, and the superseded
  *                  literals are shown NOT to fit — so the fit is a property of the
@@ -88,6 +91,35 @@
  *   The recorded institution maxima are UNCHANGED (11/24/41/62/55/63), which is the
  *   evidence that the generator did not move underneath this re-record.
  *
+ * 2026-08-24 — THIRD RECORD (lane TE-CG-2). ⚠ A DELIBERATE, DECLARED SAME-SEED SHIFT:
+ *   every drawn map moves, and this is the honest statement of what moved and why.
+ *
+ *   THE DEFECT. TC-4's packer took a mod-4 SLOT into one medial subdivision, and the
+ *   layer kept TWO counters over the same parcel — `flagshipsAt` for round-1
+ *   institutions, `occupancy` for everything else. A footprint is a pure function of
+ *   (parcel, slot, shrink), so both leaks drew buildings at IDENTICAL COORDINATES.
+ *   Measured over THIS corpus at 79b78881c: 26.42% of 53,420 drawn buildings shared a
+ *   footprint vertex-for-vertex with another building in the same settlement, 63.30%
+ *   shared one up to translation, and 5,932 of 5,932 duplicate groups lay inside a
+ *   SINGLE parcel. The slot is now a recursive medial ADDRESS, there is one ledger,
+ *   and the footprint carries a tier-banded dressed FORM. Post-fix: 0.00% exact,
+ *   6.07% translate.
+ *
+ *   (1) `cartoBuildings` FELL at every tier, 53,420 → 44,293 over the corpus, and the
+ *       frozen per-tier maxima with it (13/31/57/152/208/261 → 12/25/47/114/196/261).
+ *       A flagship now CONSUMES a cell from the one ledger, so a parcel that
+ *       flagships over-subscribe no longer offers the same cell to a dwelling. The
+ *       rows that stopped being drawn are rows that were being drawn on top of
+ *       another row; the map lost 9,127 rows and had 14,112 stacked ones.
+ *   (2) `cartoRowBytes` ROSE at every tier and the derivation's byte input with it,
+ *       443 → 450. A dressed footprint may be a corner-truncated cell, and a fourth
+ *       plan point costs about seven bytes a row.
+ *   (3) `cartoInstitutionRefs` is UNCHANGED on 504 of 504 rows, and that is the
+ *       control that matters: the ONE LAW says every canonical institution draws its
+ *       flagship, and it still does. `institutions` (11/24/41/62/55/63) and the
+ *       throw census (0 of 504) are likewise unmoved — MF-CG1b's cure is not
+ *       regressed and the generator did not move underneath this re-record.
+ *
  * To re-record after an INTENTIONAL change, run:
  *   UPDATE_CARTOGRAPHY_CALIBRATION=1 npx vitest run tests/domain/townCartographyCalibration.test.js
  * and add a row above before committing. Re-recording without adding a row is a
@@ -112,7 +144,10 @@ import {
   calibrationSampleKeys,
   calibrationVocabularyReceipt,
   classifyCalibrationFailure,
+  duplicateFootprintRows,
+  exactFootprintKey,
   measureCalibrationRow,
+  translateFootprintKey,
 } from '../fixtures/cartographyCalibrationCorpus.js';
 import {
   CARTOGRAPHY_CALIBRATION,
@@ -151,13 +186,72 @@ const TUNING_SOURCE = resolve(
  * would red on every deliberate cap change and say nothing the count cap does not.
  */
 const FROZEN = Object.freeze({
-  thorp: Object.freeze({ throws: 0, maxInstitutions: 11, maxBuildings: 13 }),
-  hamlet: Object.freeze({ throws: 0, maxInstitutions: 24, maxBuildings: 31 }),
-  village: Object.freeze({ throws: 0, maxInstitutions: 41, maxBuildings: 57 }),
-  town: Object.freeze({ throws: 0, maxInstitutions: 62, maxBuildings: 152 }),
-  city: Object.freeze({ throws: 0, maxInstitutions: 55, maxBuildings: 208 }),
+  thorp: Object.freeze({ throws: 0, maxInstitutions: 11, maxBuildings: 12 }),
+  hamlet: Object.freeze({ throws: 0, maxInstitutions: 24, maxBuildings: 25 }),
+  village: Object.freeze({ throws: 0, maxInstitutions: 41, maxBuildings: 47 }),
+  town: Object.freeze({ throws: 0, maxInstitutions: 62, maxBuildings: 114 }),
+  city: Object.freeze({ throws: 0, maxInstitutions: 55, maxBuildings: 196 }),
   metropolis: Object.freeze({ throws: 0, maxInstitutions: 63, maxBuildings: 261 }),
 });
+
+/**
+ * THE DUPLICATE-FOOTPRINT CENSUS — frozen, and the two readings carry DIFFERENT KINDS
+ * OF CEILING on purpose. `tests/fixtures/cartographyCalibrationCorpus.js` defines both
+ * readings and the suite consumes that ONE definition, so the pin and the recording
+ * can never drift into measuring two different things.
+ *
+ * ── WHERE THE LINE IS DRAWN, AND WHY IT IS DRAWN THERE ───────────────────────
+ * EXACT duplication — the same vertex list at the same absolute coordinates — is
+ * NEVER correct, at any tier, and its ceiling is a flat ZERO with no headroom. It is
+ * not "less variety"; it is one building standing inside another. It is invisible to
+ * a reader, it makes a canonical institution that the ONE LAW promised would appear
+ * not actually appear, and `cartographyProperty.js` subtracts member footprints from
+ * the parcel ring under an EVEN-ODD fill, so two identical holes cancel and the yard
+ * beneath a stacked pair renders as solid ground. A tier-scaled allowance for it would
+ * be an allowance for a rendering bug.
+ *
+ * TRANSLATE duplication — the same shape and size, drawn somewhere else — IS
+ * legitimately tier-scaled, and this is the honest half of the line.
+ * `PLAN_UNIT_CM_BY_TIER` (compileTownSceneManifest.js) sets a thorp's plan unit at
+ * 10 cm against a metropolis's 80: a thorp's buildings are genuinely smaller and
+ * genuinely less varied, because a thorp IS a dozen of the same cottage. So the form
+ * vocabulary bands by tier (`FOOTPRINT_FORM_VARIANTS` 3/3/6/9/12/12) and the ceiling
+ * bands with it. `hamlet` is the loosest reading in the corpus at 184 permille and
+ * that is the vocabulary doing what it was asked to: three forms over a block of
+ * seventeen buildings cannot help repeating a shape.
+ *
+ * ── THE CEILING IS DERIVED, NOT PICKED ───────────────────────────────────────
+ * `permille` below is the tier's MEASURED reading over this corpus — an exact pin, for
+ * the same reason `maxInstitutions` is one: a move in either direction is drift that
+ * must be seen. The CEILING each tier is held to is that reading carried up by the
+ * estate's one declared headroom, `CARTOGRAPHY_HEADROOM_PERMILLE`, exactly as the
+ * three coupled caps are derived — so no number here was chosen to make a test pass,
+ * and raising a ceiling means moving a measurement and saying so.
+ *
+ * THE READINGS AT THE BASE THIS CURED (79b78881c, same corpus, same instrument):
+ * exact 264 permille of 53,420 rows and translate 633. Per tier the translate reading
+ * was 647 / 750 / 821 / 810 / 590 / 544. Every number below is an order of magnitude
+ * off those, which is the evidence that the census measures the cure rather than
+ * measuring nothing.
+ */
+const DUPLICATES = Object.freeze({
+  thorp: Object.freeze({ permille: 94 }),
+  hamlet: Object.freeze({ permille: 184 }),
+  village: Object.freeze({ permille: 88 }),
+  town: Object.freeze({ permille: 65 }),
+  city: Object.freeze({ permille: 49 }),
+  metropolis: Object.freeze({ permille: 52 }),
+});
+
+/**
+ * The ceiling one tier's repeated-shape rate is held to: the measured reading at the
+ * declared headroom. Pure and total over CARTOGRAPHY_TIERS.
+ * @param {string} tier
+ * @returns {number} permille
+ */
+function duplicateCeilingPermille(tier) {
+  return Math.ceil((DUPLICATES[tier].permille * CARTOGRAPHY_HEADROOM_PERMILLE) / 1000);
+}
 
 /**
  * THE SUPERSEDED LITERALS — the three tables MF-CG1b replaced, kept because W7 uses
@@ -769,5 +863,83 @@ describe('W7 a corpus that outgrows the derived caps is LOUD', () => {
     const worstRow = Object.values(manifest)
       .reduce((best, value) => Math.max(best, value.cartoRowBytes), 0);
     expect(worstRow).toBeGreaterThan(SUPERSEDED.rowBytes);
+  });
+});
+
+describe('W8 the drawn corpus does not repeat itself', () => {
+  it('ZERO drawn buildings anywhere in the corpus stand on another building', () => {
+    const manifest = readManifest();
+    /** @type {string[]} */
+    const stacked = [];
+    let drawn = 0;
+    for (const [key, value] of Object.entries(manifest)) {
+      if (value.cartoBuildings < 0) continue;
+      drawn += value.cartoBuildings;
+      if (value.cartoDupExact !== 0) {
+        stacked.push(`${key}: ${value.cartoDupExact} of ${value.cartoBuildings} rows stacked`);
+      }
+    }
+    expect(stacked).toEqual([]);
+    // ANTI-VACUITY, and it is not decoration: `cartoDupExact` reads −1 on a row that
+    // could not draw, and a corpus that stopped drawing would satisfy the line above
+    // by drawing nothing at all. This closes the same hole W4's throw census closes.
+    expect(drawn).toBeGreaterThan(40_000);
+    expect(Object.keys(manifest).length).toBe(rows.length);
+  });
+
+  it('each tier repeats a SHAPE at exactly its frozen reading, under the derived ceiling', () => {
+    const manifest = readManifest();
+    /** @type {string[]} */
+    const drift = [];
+    for (const tier of CARTOGRAPHY_TIERS) {
+      const tierRows = rowsOfTier(manifest, tier).filter(([, value]) => value.cartoBuildings >= 0);
+      const drawn = tierRows.reduce((sum, [, value]) => sum + value.cartoBuildings, 0);
+      const repeated = tierRows.reduce((sum, [, value]) => sum + value.cartoDupTranslate, 0);
+      const permille = Math.round((1000 * repeated) / drawn);
+      const ceiling = duplicateCeilingPermille(tier);
+      if (permille !== DUPLICATES[tier].permille) {
+        drift.push(`${tier}: reads ${permille} permille, frozen at ${DUPLICATES[tier].permille}`);
+      }
+      if (permille > ceiling) drift.push(`${tier}: ${permille} permille over its ${ceiling} ceiling`);
+      if (tierRows.length !== ROWS_PER_TIER) drift.push(`${tier}: ${tierRows.length} rows drew`);
+    }
+    expect(drift).toEqual([]);
+    // The ceilings are the derivation evaluated, not a second table: a reader can
+    // check every one of them by hand against DUPLICATES and the declared headroom.
+    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([151, 295, 141, 104, 79, 84]);
+    // And the derivation is live — a hypothetical reading derives its own ceiling.
+    expect(Math.ceil((100 * CARTOGRAPHY_HEADROOM_PERMILLE) / 1000)).toBe(160);
+  });
+
+  it('CONVICTING CONTROL: the census instrument reds on a block that IS duplicated', () => {
+    const clean = [
+      { footprint: [[0, 0], [10, 0], [10, 10]] },
+      { footprint: [[0, 0], [20, 0], [20, 20]] },
+      { footprint: [[5, 5], [10, 0], [10, 10]] },
+    ];
+    // POSITIVE: three distinct footprints read zero under BOTH readings.
+    expect(duplicateFootprintRows(clean, exactFootprintKey)).toBe(0);
+    expect(duplicateFootprintRows(clean, translateFootprintKey)).toBe(0);
+    // MUTATION 1 — one footprint copied onto another row, which is exactly the shape
+    // the pre-CG-2 mod-4 wrap produced. Both readings convict, and they convict THREE
+    // rows rather than one, because a duplicate group counts every member.
+    const stacked = [clean[0], clean[1], { footprint: [[0, 0], [10, 0], [10, 10]] }];
+    expect(duplicateFootprintRows(stacked, exactFootprintKey)).toBe(2);
+    const trio = [...stacked, { footprint: [[0, 0], [10, 0], [10, 10]] }];
+    expect(duplicateFootprintRows(trio, exactFootprintKey)).toBe(3);
+    // MUTATION 2 — the same shape MOVED. The exact reading acquits it and the
+    // translate reading convicts it, which is what makes them two readings and not
+    // one written twice. This is the medial subdivision's own signature: subcells 0,
+    // 1 and 2 of any triangle are translates of one another.
+    const moved = [clean[0], clean[1], { footprint: [[100, 100], [110, 100], [110, 110]] }];
+    expect(duplicateFootprintRows(moved, exactFootprintKey)).toBe(0);
+    expect(duplicateFootprintRows(moved, translateFootprintKey)).toBe(2);
+    // MUTATION 3 — the same shape, ROTATED to start at another vertex. The translate
+    // reading still convicts, which is the property its start-rotation buys; a naive
+    // JSON key would acquit here and the census would under-report by the share of
+    // rows the packer happens to emit from a different corner.
+    const rotated = [clean[0], { footprint: [[10, 0], [10, 10], [0, 0]] }];
+    expect(duplicateFootprintRows(rotated, exactFootprintKey)).toBe(0);
+    expect(duplicateFootprintRows(rotated, translateFootprintKey)).toBe(2);
   });
 });
