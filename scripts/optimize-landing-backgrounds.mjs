@@ -14,6 +14,21 @@
  * plus world-map inside the §04 realm-map artifact card (gallery thumbs reuse
  * these same variants with varied background-position). Run via
  * `npm run optimize:landing-backgrounds`.
+ *
+ * PROVENANCE IS PRESERVED, AND THAT IS NOT OPTIONAL. sharp drops EXIF, XMP,
+ * IPTC and ICC by default, so the plain pipeline silently destroys the
+ * AI-provenance markings a generator writes into its output. See the same note
+ * in scripts/optimize-backgrounds.mjs for the clauses that make this
+ * load-bearing; `tests/build/aiMediaProvenance.test.js` fails if any sharp
+ * pipeline under scripts/ is written without `.keepMetadata()`.
+ *
+ * The five scenes below happen to source from the JUNE 2026 paintings whose
+ * origin is UNRECORDED (they are provably not Higgsfield output — the account's
+ * first transaction is 2026-07-18T17:15:55Z), so today this script has no
+ * provenance to carry. That is a fact about today's inputs, not a licence to
+ * strip: `city.jpg` and `world-map.jpg` were replaced by Higgsfield paintings on
+ * 2026-07-18 and their -1400 derivatives are stale, so the next run of this
+ * script rebuilds two of the five FROM AI SOURCES.
  */
 
 import sharp from 'sharp';
@@ -74,6 +89,8 @@ async function main() {
 
     await sharp(srcPath)
       .resize({ width: MAX_WIDTH, withoutEnlargement: true })
+      // keepMetadata(): carry EXIF/XMP/IPTC/ICC through the re-encode. See header.
+      .keepMetadata()
       .jpeg({ quality: JPEG_QUALITY, mozjpeg: true })
       .toFile(outPath);
 

@@ -29,6 +29,16 @@
  * Idempotent: a twin is rebuilt only when the source JPEG is newer than
  * the existing .webp (or the .webp is missing), so re-running is cheap and
  * safe. Run via `npm run optimize:backgrounds`.
+ *
+ * PROVENANCE IS PRESERVED, AND THAT IS NOT OPTIONAL. sharp drops EXIF, XMP,
+ * IPTC and ICC by default, so the plain pipeline silently destroys the
+ * AI-provenance markings the generators write into their output — the
+ * `Made with Google AI` credit, IPTC `DigitalSourceType=trainedAlgorithmicMedia`,
+ * and any C2PA/Content-Credentials payload. That is the act Higgsfield's Terms
+ * of Use section 5.5 prohibits from 2026-08-27 and BytePlus's section 2(e)
+ * prohibits already. `.keepMetadata()` is therefore load-bearing here, it costs
+ * roughly 5% of the output file, and `tests/build/aiMediaProvenance.test.js`
+ * fails if any sharp pipeline under scripts/ is written without it.
  */
 
 import sharp from 'sharp';
@@ -101,6 +111,8 @@ async function main() {
 
     await sharp(srcPath)
       .resize({ width: MAX_WIDTH, withoutEnlargement: true })
+      // keepMetadata(): carry EXIF/XMP/IPTC/ICC through the re-encode. See header.
+      .keepMetadata()
       .webp({ quality: WEBP_QUALITY, effort: WEBP_EFFORT })
       .toFile(outPath);
 

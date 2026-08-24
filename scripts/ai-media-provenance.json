@@ -1,0 +1,367 @@
+{
+  "_comment": "THE AI-MEDIA PROVENANCE REGISTER. Every file under the four AI-media roots is listed here with the generator that produced it and whether it still carries that generator's provenance markings. tests/build/aiMediaProvenance.test.js walks it: a file on disk that is not registered here FAILS, a registered file missing from disk FAILS, a 'present' file that loses a required marker FAILS, and the number of 'absent' rows is a SHRINK-ONLY ratchet. Adding AI media without recording its origin is therefore impossible, and metadata that survives today cannot be stripped tomorrow.",
+  "_why": "Higgsfield Terms of Use section 5.5 ('you will not remove, alter, or obscure any provenance signals or markings') binds this pre-existing account from 2026-08-27; BytePlus's section 2(e) already prohibits the same act upstream. Two tracked sharp pipelines (scripts/optimize-backgrounds.mjs and scripts/optimize-landing-backgrounds.mjs) stripped metadata by default until 2026-08-24; both now call .keepMetadata() and the source-scan arm of the walker keeps it that way.",
+  "_markers": {
+    "present": "Carries provenance today. The 'require' list is pinned byte-for-byte by the walker.",
+    "absent": "AI-generated, carries no provenance marking. Owed a restore (see _restorable). SHRINK-ONLY.",
+    "n/a": "Origin unrecorded. Nothing to pin and nothing owed HERE \u2014 see _cohort_a."
+  },
+  "_restorable": {
+    "restorable": "A human-readable credit: XMP photoshop:Credit, IPTC DigitalSourceType=trainedAlgorithmicMedia, the generator name and the generation date. This is a metadata write and needs no re-render.",
+    "NOT restorable": "The C2PA / Content Credentials manifests. They are cryptographically signed by Google LLC and by Byteplus Pte. Ltd., they cannot be re-created from nothing and MUST NOT be fabricated. AND RE-FETCHING THE ORIGINAL DOES NOT HELP: a C2PA manifest carries a hard binding over the asset's own bytes, so it validates only for the exact file it was issued for. Every shipped still is a resize or a re-encode of its master, so no shipped derivative can carry a VALID manifest however the manifest is obtained - re-attaching one would produce a manifest that fails validation, which is worse than none. A derivative can lawfully carry a NEW manifest naming the original as an ingredient, but minting one needs a C2PA signing identity the estate does not hold. A re-added credit is a CREDIT and must never be described as a restored C2PA.",
+    "unknown": "The SynthID pixel watermark in the Google-generated stills. It is designed to survive rescaling, so it may still be present in the shipped derivatives, but no detector was available to test it. A metadata write can neither restore nor damage it."
+  },
+  "_cohort_a": {
+    "what": "23 files, 7,413,151 bytes, listed below with origin 'unrecorded'. Introduced 2026-06-05 (with two later derivations), SIX WEEKS BEFORE the Higgsfield account's first transaction at 2026-07-18T17:15:55Z, so they are provably NOT Higgsfield output and NOTHING in the Higgsfield or BytePlus terms covers them.",
+    "boundary": "They are the estate's only unlicensed shipped imagery and they belong to the still-open reverse-image -search question, NOT to this register's remediation. Do not sweep them into an AI-provenance restore and do not let a disclosure notice assert an origin for them that nobody can state.",
+    "hazard": "git log --diff-filter=A LIES about cohort membership: the six *.orig.jpg files were CREATED by 5b582428c on 2026-07-18 but hold JUNE content, and six files first added by f1727ecfa on 2026-06-05 were OVERWRITTEN by 5b582428c and are now Higgsfield paintings. Derive membership from the LAST-touching commit.",
+    "stale_derivatives": "public/backgrounds/landing/city-1400.jpg and world-map-1400.jpg were built 2026-07-11 from the June paintings; their sources city.jpg and world-map.jpg were replaced by Higgsfield paintings on 2026-07-18 and never rebuilt. The next run of optimize:landing-backgrounds moves both rows from 'unrecorded' to 'higgsfield:google-image@2026-07-18'."
+  },
+  "_not_shipped": {
+    "marketing/website/public/bg.mp4": "76,303,695 bytes, the concatenation of the same six seedance_2_0 legs and the largest AI artifact the estate owns. UNTRACKED, in no deploy config (no vercel.json, no netlify.toml, no .vercel under marketing/website/), and therefore not shipping. It is outside this register only while that stays true: if any future deploy picks it up it inherits every obligation recorded here, and the disclosure work is free today and not free once a public marketing surface has launched undisclosed."
+  },
+  "_indemnity_standing_risk": "NOBODY INDEMNIFIES THE ESTATE. Higgsfield offers IP indemnification on the Enterprise plan only and the account was a paid consumer subscription; BytePlus's indemnity runs one way, toward BytePlus, and its section 7.5(c) voids protection where output was 'modified, transformed, or combined with products or services not provided by BytePlus' - which describes every file listed here. Not curable by any change in this repository; recorded so it is not re-found as a bug.",
+  "_counts": {
+    "present": 6,
+    "absent": 46,
+    "n/a": 23,
+    "total": 75
+  },
+  "assets": {
+    "public/backgrounds/about.jpg": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/about.orig.jpg": {
+      "origin": "unrecorded",
+      "markers": "n/a"
+    },
+    "public/backgrounds/about.webp": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/account.jpg": {
+      "origin": "unrecorded",
+      "markers": "n/a"
+    },
+    "public/backgrounds/account.webp": {
+      "origin": "unrecorded",
+      "markers": "n/a"
+    },
+    "public/backgrounds/city.jpg": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/city.orig.jpg": {
+      "origin": "unrecorded",
+      "markers": "n/a"
+    },
+    "public/backgrounds/city.webp": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/compendium.jpg": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/compendium.orig.jpg": {
+      "origin": "unrecorded",
+      "markers": "n/a"
+    },
+    "public/backgrounds/compendium.webp": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/create.jpg": {
+      "origin": "unrecorded",
+      "markers": "n/a"
+    },
+    "public/backgrounds/create.webp": {
+      "origin": "unrecorded",
+      "markers": "n/a"
+    },
+    "public/backgrounds/dim-desk.jpg": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/dim-desk.webp": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/evolution-1-thorp.jpg": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/evolution-1-thorp.webp": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/evolution-2-hamlet.jpg": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/evolution-2-hamlet.webp": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/evolution-3-village.jpg": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/evolution-3-village.webp": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/evolution-4-town.jpg": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/evolution-4-town.webp": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/evolution-5-city.jpg": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/evolution-5-city.webp": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/evolution-6-metropolis.jpg": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/evolution-6-metropolis.webp": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/export-dispatch.jpg": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/export-dispatch.webp": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/founders-charter.jpg": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/founders-charter.webp": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/gallery.jpg": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/gallery.orig.jpg": {
+      "origin": "unrecorded",
+      "markers": "n/a"
+    },
+    "public/backgrounds/gallery.webp": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/landing/city-1400.jpg": {
+      "origin": "unrecorded",
+      "markers": "n/a"
+    },
+    "public/backgrounds/landing/create-1400.jpg": {
+      "origin": "unrecorded",
+      "markers": "n/a"
+    },
+    "public/backgrounds/landing/thorpe-1400.jpg": {
+      "origin": "unrecorded",
+      "markers": "n/a"
+    },
+    "public/backgrounds/landing/village-1400.jpg": {
+      "origin": "unrecorded",
+      "markers": "n/a"
+    },
+    "public/backgrounds/landing/world-map-1400.jpg": {
+      "origin": "unrecorded",
+      "markers": "n/a"
+    },
+    "public/backgrounds/pricing.jpg": {
+      "origin": "unrecorded",
+      "markers": "n/a"
+    },
+    "public/backgrounds/pricing.webp": {
+      "origin": "unrecorded",
+      "markers": "n/a"
+    },
+    "public/backgrounds/realm-table.jpg": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/realm-table.webp": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/settlement-progression.jpg": {
+      "origin": "unrecorded",
+      "markers": "n/a"
+    },
+    "public/backgrounds/settlement-progression.webp": {
+      "origin": "unrecorded",
+      "markers": "n/a"
+    },
+    "public/backgrounds/settlements.jpg": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/settlements.orig.jpg": {
+      "origin": "unrecorded",
+      "markers": "n/a"
+    },
+    "public/backgrounds/settlements.webp": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/thorpe.jpg": {
+      "origin": "unrecorded",
+      "markers": "n/a"
+    },
+    "public/backgrounds/thorpe.webp": {
+      "origin": "unrecorded",
+      "markers": "n/a"
+    },
+    "public/backgrounds/village.jpg": {
+      "origin": "unrecorded",
+      "markers": "n/a"
+    },
+    "public/backgrounds/village.webp": {
+      "origin": "unrecorded",
+      "markers": "n/a"
+    },
+    "public/backgrounds/world-map.jpg": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/backgrounds/world-map.orig.jpg": {
+      "origin": "unrecorded",
+      "markers": "n/a"
+    },
+    "public/backgrounds/world-map.webp": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/evolution/city.jpg": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "present",
+      "require": [
+        "Made with Google AI",
+        "trainedAlgorithmicMedia",
+        "<x:xmpmeta"
+      ]
+    },
+    "public/evolution/hamlet.jpg": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "present",
+      "require": [
+        "Made with Google AI",
+        "trainedAlgorithmicMedia",
+        "<x:xmpmeta"
+      ]
+    },
+    "public/evolution/metropolis.jpg": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "present",
+      "require": [
+        "Made with Google AI",
+        "trainedAlgorithmicMedia",
+        "<x:xmpmeta"
+      ]
+    },
+    "public/evolution/thorp.jpg": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "present",
+      "require": [
+        "Made with Google AI",
+        "trainedAlgorithmicMedia",
+        "<x:xmpmeta"
+      ]
+    },
+    "public/evolution/town.jpg": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "present",
+      "require": [
+        "Made with Google AI",
+        "trainedAlgorithmicMedia",
+        "<x:xmpmeta"
+      ]
+    },
+    "public/evolution/village.jpg": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "absent"
+    },
+    "public/media/journey-legs/bg/leg-1-desk-to-thorp.mp4": {
+      "origin": "higgsfield:seedance_2_0@2026-07-18",
+      "markers": "absent"
+    },
+    "public/media/journey-legs/bg/leg-2-thorp-to-hamlet.mp4": {
+      "origin": "higgsfield:seedance_2_0@2026-07-18",
+      "markers": "absent"
+    },
+    "public/media/journey-legs/bg/leg-3-hamlet-to-village.mp4": {
+      "origin": "higgsfield:seedance_2_0@2026-07-18",
+      "markers": "absent"
+    },
+    "public/media/journey-legs/bg/leg-4-village-to-town.mp4": {
+      "origin": "higgsfield:seedance_2_0@2026-07-18",
+      "markers": "absent"
+    },
+    "public/media/journey-legs/bg/leg-5-town-to-city.mp4": {
+      "origin": "higgsfield:seedance_2_0@2026-07-18",
+      "markers": "absent"
+    },
+    "public/media/journey-legs/bg/leg-6-city-to-metropolis.mp4": {
+      "origin": "higgsfield:seedance_2_0@2026-07-18",
+      "markers": "absent"
+    },
+    "public/media/journey-legs/bg/still-0-desk.jpg": {
+      "origin": "derived:higgsfield:seedance_2_0@2026-07-18",
+      "markers": "absent"
+    },
+    "public/media/journey-legs/bg/still-1-thorp.jpg": {
+      "origin": "derived:higgsfield:seedance_2_0@2026-07-18",
+      "markers": "absent"
+    },
+    "public/media/journey-legs/bg/still-2-hamlet.jpg": {
+      "origin": "derived:higgsfield:seedance_2_0@2026-07-18",
+      "markers": "absent"
+    },
+    "public/media/journey-legs/bg/still-3-village.jpg": {
+      "origin": "derived:higgsfield:seedance_2_0@2026-07-18",
+      "markers": "absent"
+    },
+    "public/media/journey-legs/bg/still-4-town.jpg": {
+      "origin": "derived:higgsfield:seedance_2_0@2026-07-18",
+      "markers": "absent"
+    },
+    "public/media/journey-legs/bg/still-5-city.jpg": {
+      "origin": "derived:higgsfield:seedance_2_0@2026-07-18",
+      "markers": "absent"
+    },
+    "public/media/journey-legs/bg/still-6-metropolis.jpg": {
+      "origin": "derived:higgsfield:seedance_2_0@2026-07-18",
+      "markers": "absent"
+    },
+    "public/videos/realm-journey.mp4": {
+      "origin": "higgsfield:seedance_2_0@2026-07-18",
+      "markers": "present",
+      "require": [
+        "urn:c2pa",
+        "trainedAlgorithmicMedia"
+      ]
+    }
+  },
+  "_originals": {
+    "where": "~/Desktop/settlementforge-marketing-masters/ - out of repo, on the owner's own disk, no download and no vendor round-trip needed. Measured 2026-08-24 by raw byte scan over 82 media files: 32 carry a C2PA manifest, 25 carry the 'Made with Google AI' credit and a SynthID marker.",
+    "what it buys": "The human-readable credit, in full and first-hand: the masters are the authoritative source for the XMP photoshop:Credit, the IPTC DigitalSourceType tag, the hf-job-id and the generation date that a restore would write into the shipped derivatives. No approval-gated download is required for that work.",
+    "what it does NOT buy": "A valid C2PA on anything the site serves. See _restorable. The one shipped file that carries a valid manifest, public/videos/realm-journey.mp4, carries it precisely because it was never re-encoded, and that is the whole reason re-generating the media would be a net LOSS rather than a cure.",
+    "ten masters with no Google attribution": "evolution-3-village, export-dispatch, gallery-board, hamlet-standalone-alt, metropolis-standalone-alt, 05-ledger-spread, 06-lexicon-page, 12-wax-press, 13-manuscript-page, 14-arrival carry an hf-job-id and no Google marker at all. Which model produced them is NOT established, so a restore must not stamp 'Made with Google AI' onto their derivatives. Two of the ten reach production."
+  }
+}
