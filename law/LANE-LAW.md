@@ -86,6 +86,25 @@ An exit code with no collected-test count is NOT a verdict.
 - Any `docs/**.md` write risks naked-claim debt: it is PER-CLAIM and reds a GREEN test.
   `0 problems` also matches "30 problems" — run the exact CLAIM_RE.
 - ANY package.json byte change is a MINT TRIGGER.
+- ⛔⛔ **THE EDGE-BUNDLE BILL IS KEYED TO A TRANSITIVE IMPORT CLOSURE, NOT TO A FILE** (corrected
+  2026-08-24; the chair had written it as "editing `institutionalCatalog.js` bills three bundles",
+  which let a lane confirm it was not touching that file and budget nothing). `build-edge-shared.mjs`
+  hashes the **content of every transitive input** of three AI entry points. Measured at the slot:
+  `aiCharterBundle` **111** inputs · `aiGroundingBundle` **67** · `aiOutputSchemaBundle` **112**.
+  `src/domain/npcProfile.js` is in **all three**; `src/domain/districtProfile.js` is in
+  `aiGroundingBundle`. **`institutionalCatalog.js` is merely the famous member.**
+  ⛔ A TWO-LINE EDIT ANYWHERE IN THE CLOSURE STALES ALL THREE. Symptom: six failures outside the
+  frozen census — three `*.freshness.test.js` ("Bundle is stale") and three
+  `edgeSharedBundleReproducibility` ("built from content that is neither committed nor staged").
+  Cure: `npm run build:edge-shared`, then commit the bundle+meta pairs **as a SET**.
+  **Check membership before budgeting:** read `supabase/functions/_shared/<bundle>.meta.json`.
+  ⚠⚠ **THIS BILL IS INVISIBLE TO A TARGETED SUITE RUN** — none of the six arms lives in
+  `tests/domain` or `tests/lint`. **Only the full gate sees it.**
+- ⛔⛔ **A GOLDEN THAT NEVER EXERCISES YOUR CODE IS NOT EVIDENCE.** The map golden family stayed
+  green across a change that moved 668 rings and 332 wall-embraces — because its fixtures use **12
+  hand-authored quarter names, none of the generator's 14**, so the registry never fired. The
+  settlement digest is blind for the same structural reason. **Before citing a green golden, prove
+  its fixtures REACH the code you changed.**
 
 ## 5. Reporting
 Write a receipt at `<yourdir>-receipt.md`, updated at least every 30 minutes with a
