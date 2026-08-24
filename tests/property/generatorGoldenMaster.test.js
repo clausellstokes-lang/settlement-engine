@@ -18,6 +18,39 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-08-24 — MF-CH2B, THE MAGIC LICENCE MADE LIVE (92 rows of 525 moved; 0 keys
+ *   added, 0 removed). Lane TE-CH-2, catalog-hygiene car 2b, immediately on top of
+ *   MF-CH2A below. Source: docs/implementation/packets/catalog-hygiene/MF-CH2B.md.
+ *     THE CAUSE. The five code paths that decided whether an institution needs
+ *     magic stopped deciding it by the SHELF the catalog author filed the row on
+ *     and started reading the row's declared `magicLicense`: the magic multiplier
+ *     and the exotic scaler in institutionProbability.js, the world law in
+ *     generationContext.js, and the institutional grid in magicFilter.js (the
+ *     fourth, the direct world-fact gate, was already routed by MF-CH2A).
+ *   ⚠️ UNLIKE THE ROW BELOW, THIS ONE IS A REAL ROSTER SHIFT AND IT IS THE LARGEST
+ *   IN THE CATALOG-HYGIENE TRAIN. Over the same 2,520 settlements (504 grid × five
+ *   magic cases) 1,025 rosters change. Three numbers make it readable:
+ *     - the DEFAULT world moves 3 of 504 (`priorityMagic:50`, what an unconfigured
+ *       settlement gets), so the overwhelming majority of existing seeds do not move;
+ *     - the shift concentrates where the bug lived — 356 of 504 at `magicExists:false`
+ *       and at `priorityMagic:0`, 168 at 20, 142 at 80;
+ *     - the collateral has ONE mechanism. At assembleInstitutions.js:268 the world law
+ *       returns BEFORE the rng.chance draw at :342, so a row it newly ALLOWS consumes a
+ *       draw it used to skip and re-sequences the rest of that step. At pm20, 157 of the
+ *       168 changed rosters differ only in licensed rows; at dead magic, 355 of 356 carry
+ *       draw-sequence collateral.
+ *   WHAT A MAGIC-FREE WORLD GETS BACK, measured: `Alchemist quarter` 0 → 92,
+ *   `Great library` 0 → 84, `Warden's Lodge` 0 → 66, `Alchemist shop` 0 → 9,
+ *   `Adventurers' charter hall` 23 → 32. R-INST-5's central finding is that an
+ *   alchemist's shop is a chemical trade and a repository of books is a repository of
+ *   books; both are buildings a world without magic still builds.
+ *   THE ALTERNATIVE WAS PRICED, NOT ASSERTED: keeping the unanchored ARCANE_INST_KW veto
+ *   inside the world law costs 545 of 2,520 instead of 1,025, executed. It is refused
+ *   because it leaves the world law deciding by an unanchored substring.
+ *   THE 92 KEYS ARE A STRICT SUBSET OF MF-CH2A's 297: base → this tip moves 297, exactly
+ *   as base → MF-CH2A did, so this car moves no golden row that the declaration had not
+ *   already moved. 0a2309f573fc1f4c… -> 600cdf1859c00e7e…, key set unchanged.
+ *
  * 2026-08-24 — MF-CH2A, THE MAGIC LICENCE DECLARED (297 rows of 525 moved; 0 keys
  *   added, 0 removed). Lane TE-CH-2, catalog-hygiene car 2a. Source: the packet
  *   docs/implementation/packets/catalog-hygiene/MF-CH2A.md.
