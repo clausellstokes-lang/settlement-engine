@@ -41,8 +41,17 @@
  * they are different quantities and TC29 convicted conflating them.
  */
 
-import { polyPath, linePath, r2, cosI, sinI, TRIG_N, centroid, widestAxis, absArea }
+import { polyPath, linePath, r2, cosI, sinI, TRIG_N, centroid, widestAxis, absArea, bearingIndex }
   from '../src/domain/townMap/fabric/fabricGeometry.js';
+/** REG-4 · local aliases so the market pass reads as geometry rather than as imports. */
+const bearingIdx = bearingIndex;
+const TRIGN = TRIG_N;
+/** shortest separation between two angle indices */
+function angSep(a, b) {
+  let d = ((a - b) % TRIG_N + TRIG_N) % TRIG_N;
+  if (d > TRIG_N / 2) d = TRIG_N - d;
+  return d;
+}
 import { hashUnit } from '../src/domain/townMap/fabric/fabricRng.js';
 // ⭐⭐⭐ REG-3 · hf208's plan-view roof law and hf323's monument projection. The lens IMPORTS the
 // geometry rather than composing it (§195.0: a lens draws the polygons it is given).
@@ -597,6 +606,23 @@ export function renderFolio(fabric, opts = {}) {
   // §9.3's ration, scaled by the lens's own accent multiplier and still clamped by the tier.
   const accentBand = Math.max(0, Math.min(1.4, m.accentBand * LENS.accent));
 
+  // ── ⭐⭐⭐ REG-4 · L-REG-30, THE MINIMUM-FOOTPRINT LAW, AT ITS ONE INK-SIDE CHOKEPOINT.
+  //    `MF(key, poly)` is the ONLY place the law is applied, so a body class that forgets to
+  //    ask is a body class that keeps its sliver — visible, rather than half-applied.
+  //    ⚠ THE FABRIC IS UNTOUCHED (§630.2's own split): the verdict table is read here and the
+  //    parcel/landmark/habitation records still carry the polygons the fabric made.
+  //      keep  → the body's own polygon      fuse → null (its ink is inside its host's new hull)
+  //      clamp → the polygon scaled up       drop → null (isolated sub-minimum, not drawn)
+  const MFT = fabric.minFootprint || null;
+  const MF = MFT
+    ? (key, poly) => {
+      const v = MFT.verdicts[key];
+      if (v === undefined) return poly;                 // a class the law does not govern
+      if (v === 'fuse' || v === 'drop') return null;
+      return MFT.replace[key] || poly;
+    }
+    : (key, poly) => poly;
+
   // ⛔ THE LEAF IS PARCHMENT, NOT A GREEN MAP. MF-B1 flooded the ground at 0.52 toward the
   // greens role and MF-B1b's first ink pass kept it at 0.42, which made every leaf read as
   // an olive field with a town on it — and, worse, dropped the contrast the relief marks
@@ -1069,10 +1095,190 @@ export function renderFolio(fabric, opts = {}) {
   //    ⭐ THE SQUARE IS THE ONE PLACE THE CARRIAGEWAY WIDENS INTO A ROOM, so it is drawn
   //    AFTER the web and in the same tone: the web runs into it and stops, which is what a
   //    market place is — the void the streets organize around.
-  for (const sq of fabric.web.squares) {
-    B.add(`fill="${roadTone}" stroke="${mix(P.paper, P.ink, 0.46)}" stroke-width="${INK.road}" stroke-linejoin="round"`, polyPath(sq.polygon));
+  // ⭐⭐⭐ 8r · REG-4 · **THE MARKET IS ONE GIANT STREET** (L-REG-6). SUPERSEDES the pass above
+  //    when armed — never supplements it, so the void is painted exactly once.
+  //
+  // ⛔ WHAT THE UNARMED PASS DOES WRONG, and the FILL is not it. The square already carries the
+  //    web's own `roadTone`, so the SURFACE matched all along; what it also carries is a CLOSED
+  //    ink border at `INK.road`, painted after the web, running straight across every street
+  //    mouth. A line across a doorway makes a room out of a junction — the seam L-REG-6 forbids.
+  // ⭐ THE CURE IS hf259's OWN DRAWING: the outline is BROKEN at every mouth (its "carved square
+  //    with ENTRY GAPS"), so the void's surface and the carriageway's are one continuous ground
+  //    and the eye reads the street running in and stopping because the room is wider, not
+  //    because a line said so. The border is emitted as OPEN ARCS between the gaps.
+  const REG4 = fabric.marketRegister || null;
+  if (REG4) {
+    for (const v of REG4.voids) {
+      // the SURFACE — the same token the web is stroked in, no exception and no step
+      B.add(`fill="${roadTone}" stroke="none"`, polyPath(v.polygon));
+    }
+    B.flush('squares');
+    // the OPEN OUTLINE — arcs of the register polygon that no mouth covers
+    let arcs = '';
+    for (const v of REG4.voids) {
+      const N = v.polygon.length;
+      const covered = new Array(N).fill(false);
+      for (let i = 0; i < N; i++) {
+        const p = v.polygon[i];
+        const ang = bearingIdx(p[0] - v.center[0], p[1] - v.center[1]);
+        for (const m of v.mouths) {
+          // a doorway is as wide as its carriageway, plus a kerb either side
+          const dx = p[0] - m.x, dy = p[1] - m.y;
+          if (Math.sqrt(dx * dx + dy * dy) <= m.width * 0.85) { covered[i] = true; break; }
+          if (angSep(ang, m.ang) < TRIGN / 96) { covered[i] = true; break; }
+        }
+      }
+      let run = null;
+      for (let k = 0; k <= N; k++) {
+        const i = k % N;
+        if (!covered[i]) {
+          if (run === null) { run = `M${r2(v.polygon[i][0])} ${r2(v.polygon[i][1])}`; } else { run += `L${r2(v.polygon[i][0])} ${r2(v.polygon[i][1])}`; }
+        } else if (run !== null) { arcs += run; run = null; prims.n++; }
+        if (k === N && run !== null) { arcs += run; prims.n++; }
+      }
+    }
+    // ⭐ THE OUTLINE TAKES ITS OWN GROUP ID, and that is a classification rather than tidiness
+    //    (REG-3's J-REG3-9: "a group id is a classification"). The seam census has to be able to
+    //    ask "what ink does the VOID draw" without a street's own round-capped channel answering
+    //    for it — MEASURED: without the id, 110 of 141 mouths read as seamed because the
+    //    carriageway running INTO the doorway matched the outline's own path signature.
+    if (arcs) {
+      out.push('<g id="marketOutline">');
+      push(`<path d="${arcs}" fill="none" stroke="${mix(P.paper, P.ink, 0.46)}" stroke-width="${INK.road}" stroke-linecap="round" stroke-linejoin="round"/>`);
+      out.push('</g>');
+    }
+
+    // ── ⭐⭐ 8x · THE MARKET-INFILL FOSSILS (hf259's ENCROACHMENT ISLANDS). CONSUMED, never
+    //    invented: these are §18.4's own hardened middle rows, which the sealed leaf drew in the
+    //    SAME ink as a besieger's tent (§15b batches `stateMarks.bodies` in one path). hf259
+    //    draws them as what they are — permanent buildings that ATE THE PLACE BACK — so they
+    //    take the fabric's own building ink, a heavier front edge on the void side, and a
+    //    RETREAT LINE: the ghost of the outline the place had before they hardened.
+    if (REG4.fossils.length) {
+      out.push('<g id="marketFossils">');
+      let isl = '', ghost = '';
+      for (const f of REG4.fossils) { isl += polyPath(f.polygon); prims.n++; }
+      push(`<path d="${isl}" fill="${mix(P.paper, P.roofs, 0.30)}" stroke="${inkTone}" stroke-width="${INK.block}" stroke-linejoin="round"/>`);
+      // the retreat: a dashed ghost of the void's own outline where an island now stands on it
+      for (const v of REG4.voids) {
+        const near = REG4.fossils.filter((f) => f.host === v.key);
+        if (!near.length) continue;
+        ghost += polyPath(v.blob);
+        prims.n++;
+      }
+      if (ghost) {
+        push(`<path d="${ghost}" fill="none" stroke="${mix(roadTone, P.ink, 0.34)}" stroke-width="${INK.field}"`
+          + ` stroke-dasharray="${r2(INK.field * 4)} ${r2(INK.field * 4)}" stroke-opacity="0.5" stroke-linejoin="round"/>`);
+      }
+      out.push('</g>');
+    }
+
+    // ── ⭐⭐ 8f · THE V-B13 FURNITURE (ODQ §629.1), AS PLAN GLYPHS (hf342 is explicitly
+    //    "STRICT TOP-DOWN ORTHOGRAPHIC"; the DETAIL REGISTER's own §6 projection clause).
+    //    hf342's law on its face: *a square without its furniture fails the exit.*
+    {
+      let ink = '', fill = '', dash = '';
+      for (const v of REG4.voids) {
+        for (const f of v.fixtures) {
+          if (f.kind === 'stallRow') {
+            // §629.1 verbatim: ONE ROW OF SMALL RECTANGLES WITH ITS DASHED STALL-LINE = ONE
+            // FIXTURE. hf320 draws the market street's pitches exactly so.
+            const ca = cosI(f.row.ang), sa = sinI(f.row.ang);
+            const nx = -sa, ny = ca;
+            const step = f.row.cellW * 1.35;
+            const t0 = -(f.row.cells - 1) * step * 0.5;
+            for (let i = 0; i < f.row.cells; i++) {
+              const t = t0 + i * step;
+              const bx = f.x + ca * t, by = f.y + sa * t;
+              const hw = f.row.cellW * 0.5, hh = f.row.cellH * 0.5;
+              fill += `M${r2(bx - ca * hw - nx * hh)} ${r2(by - sa * hw - ny * hh)}`
+                + `L${r2(bx + ca * hw - nx * hh)} ${r2(by + sa * hw - ny * hh)}`
+                + `L${r2(bx + ca * hw + nx * hh)} ${r2(by + sa * hw + ny * hh)}`
+                + `L${r2(bx - ca * hw + nx * hh)} ${r2(by - sa * hw + ny * hh)}Z`;
+              prims.n++;
+            }
+            const halfL = ((f.row.cells - 1) * step) * 0.5 + f.row.cellW * 0.7;
+            dash += `M${r2(f.x - ca * halfL - nx * f.row.cellH * 0.9)} ${r2(f.y - sa * halfL - ny * f.row.cellH * 0.9)}`
+              + `L${r2(f.x + ca * halfL - nx * f.row.cellH * 0.9)} ${r2(f.y + sa * halfL - ny * f.row.cellH * 0.9)}`;
+            prims.n++;
+          } else if (f.kind === 'marketCross') {
+            // hf342: a RINGED STEP-CIRCLE — concentric rings for the steps, a cross on top.
+            for (let s = 0; s <= f.steps; s++) {
+              const r = f.r * (1 - s / (f.steps + 1));
+              ink += `M${r2(f.x - r)} ${r2(f.y)}a${r2(r)} ${r2(r)} 0 1 0 ${r2(r * 2)} 0a${r2(r)} ${r2(r)} 0 1 0 ${r2(-r * 2)} 0`;
+              prims.n++;
+            }
+            const a = f.r * 0.34;
+            ink += `M${r2(f.x - a)} ${r2(f.y)}L${r2(f.x + a)} ${r2(f.y)}M${r2(f.x)} ${r2(f.y - a)}L${r2(f.x)} ${r2(f.y + a)}`;
+            prims.n++;
+          } else if (f.kind === 'conduit') {
+            // a squared cistern with its round mouth — hf342's conduit in plan
+            fill += `M${r2(f.x - f.r)} ${r2(f.y - f.r)}L${r2(f.x + f.r)} ${r2(f.y - f.r)}L${r2(f.x + f.r)} ${r2(f.y + f.r)}L${r2(f.x - f.r)} ${r2(f.y + f.r)}Z`;
+            ink += `M${r2(f.x - f.r * 0.5)} ${r2(f.y)}a${r2(f.r * 0.5)} ${r2(f.r * 0.5)} 0 1 0 ${r2(f.r)} 0a${r2(f.r * 0.5)} ${r2(f.r * 0.5)} 0 1 0 ${r2(-f.r)} 0`;
+            prims.n += 2;
+          } else if (f.kind === 'pillory') {
+            // hf342/hf259: a post on its platform — a small filled square with a bar across
+            fill += `M${r2(f.x - f.r)} ${r2(f.y - f.r)}L${r2(f.x + f.r)} ${r2(f.y - f.r)}L${r2(f.x + f.r)} ${r2(f.y + f.r)}L${r2(f.x - f.r)} ${r2(f.y + f.r)}Z`;
+            ink += `M${r2(f.x - f.r * 1.7)} ${r2(f.y)}L${r2(f.x + f.r * 1.7)} ${r2(f.y)}`;
+            prims.n += 2;
+          } else if (f.kind === 'weighBeam') {
+            // hf342's WEIGH-HOUSE GREAT BEAM, drawn in plan: the beam with its two pans.
+            const ca = cosI(f.beam.ang), sa = sinI(f.beam.ang);
+            const h = f.beam.len * 0.5;
+            ink += `M${r2(f.x - ca * h)} ${r2(f.y - sa * h)}L${r2(f.x + ca * h)} ${r2(f.y + sa * h)}`;
+            const pr = f.beam.len * 0.15;
+            for (const s of [-1, 1]) {
+              const px2 = f.x + ca * h * s, py2 = f.y + sa * h * s;
+              ink += `M${r2(px2 - pr)} ${r2(py2)}a${r2(pr)} ${r2(pr)} 0 1 0 ${r2(pr * 2)} 0a${r2(pr)} ${r2(pr)} 0 1 0 ${r2(-pr * 2)} 0`;
+            }
+            prims.n += 3;
+          } else if (f.kind === 'trough') {
+            const ca = cosI(f.box.ang), sa = sinI(f.box.ang);
+            const nx = -sa, ny = ca, hw = f.box.w * 0.5, hh = f.box.h * 0.5;
+            fill += `M${r2(f.x - ca * hw - nx * hh)} ${r2(f.y - sa * hw - ny * hh)}`
+              + `L${r2(f.x + ca * hw - nx * hh)} ${r2(f.y + sa * hw - ny * hh)}`
+              + `L${r2(f.x + ca * hw + nx * hh)} ${r2(f.y + sa * hw + ny * hh)}`
+              + `L${r2(f.x - ca * hw + nx * hh)} ${r2(f.y - sa * hw + ny * hh)}Z`;
+            prims.n++;
+          } else if (f.kind === 'pound') {
+            // hf320's drove-road pound is OCTAGONAL and it is drawn as a pale pen, not a body.
+            let d = '';
+            for (let k = 0; k < f.sides; k++) {
+              const a = Math.round((k * TRIG_N) / f.sides);
+              d += `${k ? 'L' : 'M'}${r2(f.x + cosI(a) * f.r)} ${r2(f.y + sinI(a) * f.r)}`;
+            }
+            ink += `${d}Z`;
+            prims.n++;
+          } else if (f.kind === 'pond') {
+            // hf259's green carries its pond: water tone, bank line.
+            fill += `M${r2(f.x - f.r)} ${r2(f.y)}a${r2(f.r)} ${r2(f.r * 0.82)} 0 1 0 ${r2(f.r * 2)} 0a${r2(f.r)} ${r2(f.r * 0.82)} 0 1 0 ${r2(-f.r * 2)} 0`;
+            prims.n++;
+          } else if (f.kind === 'specimenTree') {
+            // hf344's yew as a SPECIMEN CROWN — one crown with the NW light, never a canopy mass.
+            ink += `M${r2(f.x - f.r)} ${r2(f.y)}a${r2(f.r)} ${r2(f.r)} 0 1 0 ${r2(f.r * 2)} 0a${r2(f.r)} ${r2(f.r)} 0 1 0 ${r2(-f.r * 2)} 0`;
+            prims.n++;
+          }
+        }
+      }
+      // ⭐ THE FURNITURE TAKES ITS OWN GROUP for the same reason the outline does — and for a
+      //    second one: instrument 4 reads LANDMARK anchors by group, and a market cross filed
+      //    among the landmarks would enter the salience read as a monument (REG-3's precinct
+      //    voids were caught doing exactly that and were moved to `<g id="precincts">`).
+      if (fill || ink || dash) out.push('<g id="marketFurniture">');
+      if (fill) push(`<path d="${fill}" fill="${mix(P.paper, P.ink, 0.30)}" stroke="${inkTone}" stroke-width="${INK.detail}" stroke-linejoin="round"/>`);
+      if (ink) push(`<path d="${ink}" fill="none" stroke="${inkTone}" stroke-width="${INK.detail}" stroke-linecap="round" stroke-linejoin="round"/>`);
+      if (dash) {
+        push(`<path d="${dash}" fill="none" stroke="${inkTone}" stroke-width="${INK.detail}"`
+          + ` stroke-dasharray="${r2(INK.detail * 3)} ${r2(INK.detail * 3)}" stroke-opacity="0.8" stroke-linecap="round"/>`);
+      }
+      if (fill || ink || dash) out.push('</g>');
+    }
+  } else {
+    for (const sq of fabric.web.squares) {
+      B.add(`fill="${roadTone}" stroke="${mix(P.paper, P.ink, 0.46)}" stroke-width="${INK.road}" stroke-linejoin="round"`, polyPath(sq.polygon));
+    }
+    B.flush('squares');
   }
-  B.flush('squares');
 
   // ── 9 · THE BLOCK GROUND IS GONE, AND ITS ABSENCE IS THE POINT (§181.3a).
   //    MF-B2 drew a tone under every rank run so that the gaps BETWEEN blocks would read as
@@ -1126,10 +1332,11 @@ export function renderFolio(fabric, opts = {}) {
     // the continuous built ground the reference draws it as (§181.2a).
     const merged = (fabric.lod && fabric.lod.mergedKeys) || new Set();
     for (const mass of ((fabric.lod && fabric.lod.masses) || [])) {
+      const mp = MF(mass.key, mass.polygon); if (!mp) continue;
       const mTint = CHARACTER_TINT[mass.character] == null ? 0 : CHARACTER_TINT[mass.character];
       const fill = shade(MATERIAL_TONE[mass.material] || roofTone, roofStep(mass.tone, mass.wealth) - mTint);
       if (!buckets.has(fill)) { buckets.set(fill, []); order.push(fill); }
-      buckets.get(fill).push(polyPath(mass.polygon));
+      buckets.get(fill).push(polyPath(mp));
       prims.n++;
     }
     // ⭐⭐⭐ REG-1 (L-REG-2) · THE FUSED MASSES, in the same tone buckets. A run of holdings that
@@ -1152,35 +1359,41 @@ export function renderFolio(fabric, opts = {}) {
       // wall joins; the back-house stands at the bottom of its own yard and shares no wall with
       // anything. Dropping it with the member's outline would delete a drawn family.
       if (fusedMembers && fusedMembers.has(p.key)) {
-        if (p.backHouse) {
+        const bh = p.backHouse ? MF(`${p.key}#back`, p.backHouse) : null;
+        if (bh) {
           const tint2 = CHARACTER_TINT[p.character] == null ? 0 : CHARACTER_TINT[p.character];
           const fill2 = shade(MATERIAL_TONE[p.material] || roofTone, roofStep(p.tone, p.wealth) - tint2);
           if (!buckets.has(fill2)) { buckets.set(fill2, []); order.push(fill2); }
-          buckets.get(fill2).push(polyPath(p.backHouse));
+          buckets.get(fill2).push(polyPath(bh));
           prims.n++;
         }
         continue;
       }
-      if (p.derelict) { derelict += polyPath(p.polygon); prims.n++; continue; }
+      // ⭐ REG-4 · L-REG-30's chokepoint. A fused or dropped sliver draws no outline of its
+      // own; its host already carries the new hull.
+      const mfPoly = MF(p.key, p.polygon);
+      const mfBack = p.backHouse ? MF(`${p.key}#back`, p.backHouse) : null;
+      if (!mfPoly && !mfBack) continue;
+      if (p.derelict) { if (mfPoly) { derelict += polyPath(mfPoly); prims.n++; } continue; }
       const tint = CHARACTER_TINT[p.character] == null ? 0 : CHARACTER_TINT[p.character];
       // §10.A3: the ward's material is the BASE the per-plot jitter and the character tint
       // ride on, so a slate quarter reads as slate whatever trade is on its street.
       const base = MATERIAL_TONE[p.material] || roofTone;
       const fill = shade(base, roofStep(p.tone, p.wealth) - tint);
       if (!buckets.has(fill)) { buckets.set(fill, []); order.push(fill); }
-      buckets.get(fill).push(polyPath(p.polygon));
-      prims.n++;
+      if (mfPoly) { buckets.get(fill).push(polyPath(mfPoly)); prims.n++; }
       // ⭐ THE BACK-HOUSE shares its tenement's tone bucket, so filling the blocks out to
       // the reference's density costs DOM nodes not at all and primitives one apiece.
-      if (p.backHouse) { buckets.get(fill).push(polyPath(p.backHouse)); prims.n++; }
+      if (mfBack) { buckets.get(fill).push(polyPath(mfBack)); prims.n++; }
     }
     // ⭐ §10.A3 THE SHANTY HUTS, in the same ink as the fabric and none of its order: they
     // carry no yard, no block and no rank, which is what a shanty IS.
     for (const hut of ((fabric.shanty && fabric.shanty.huts) || [])) {
+      const hp = MF(hut.key, hut.polygon); if (!hp) continue;
       const step = Math.round((hut.tone - 0.5) * 6) / 6;
       const fill = shade(MATERIAL_TONE.thatch, step * 0.15 + 0.06);
       if (!buckets.has(fill)) { buckets.set(fill, []); order.push(fill); }
-      buckets.get(fill).push(polyPath(hut.polygon));
+      buckets.get(fill).push(polyPath(hp));
       prims.n++;
     }
     out.push(`<g id="fabric" stroke="${inkTone}" stroke-width="${INK.fabric}" stroke-linejoin="round">`);
@@ -1264,7 +1477,13 @@ export function renderFolio(fabric, opts = {}) {
   //    drawn that the census has not counted.
   {
     let steads = '', faub = '', lean = '', foldYards = '', steadRidge = '';
-    for (const h of (fabric.habitation || [])) for (const poly of (h.solids || [])) { steads += polyPath(poly); prims.n++; }
+    for (const h of (fabric.habitation || [])) {
+      for (let i = 0; i < (h.solids || []).length; i++) {
+        const poly = MF(`${h.key}#${i}`, h.solids[i]);
+        if (!poly) continue;
+        steads += polyPath(poly); prims.n++;
+      }
+    }
     // ⭐⭐ REG-3 · THE FARMSTEAD'S YARD AND ITS RIDGES. The L of house and barn is already in
     //    `h.solids` (composed in the fabric and ground-clipped there); what the lens adds is the
     //    fold-yard the two ranges enclose — hf206's own subject — and the ridge that says each
@@ -1283,8 +1502,50 @@ export function renderFolio(fabric, opts = {}) {
       }
     }
     if (foldYards) push(`<path d="${foldYards}" fill="${yardTone}" fill-opacity="0.7" stroke="${inkTone}" stroke-width="${INK.yard}" stroke-opacity="0.6"/>`);
-    for (const b of ((fabric.faubourgs && fabric.faubourgs.buildings) || [])) { faub += polyPath(b.polygon); prims.n++; }
-    for (const b of ((fabric.faubourgs && fabric.faubourgs.leanTos) || [])) { lean += polyPath(b.polygon); prims.n++; }
+    for (const b of ((fabric.faubourgs && fabric.faubourgs.buildings) || [])) {
+      const poly = MF(b.key, b.polygon); if (!poly) continue;
+      faub += polyPath(poly); prims.n++;
+    }
+    for (const b of ((fabric.faubourgs && fabric.faubourgs.leanTos) || [])) {
+      const poly = MF(b.key, b.polygon); if (!poly) continue;
+      lean += polyPath(poly); prims.n++;
+    }
+    // ── ⭐⭐⭐ 11b-r · REG-4 · **THE FAUBOURG'S TYPED ORIGIN, MADE VISIBLE** (L-REG-3).
+    //    Drawn BEFORE the buildings so the district's own ground lies under its members, which
+    //    is what makes a suburb read as a DISTRICT rather than as loose houses in a field.
+    //    ⭐ THE THREE ORIGINS DRAW DIFFERENTLY, and the difference is measurable geometry
+    //    (a census reads the origin back off the ground's aspect ratio):
+    //      gate        hf311's before-the-gate KNOT — a compact ground, with the TOLL BAR drawn
+    //                  across the approach at the gate itself, which is hf311's first element.
+    //      road        hf32's RIBBON suburb — an elongated ground with a frontage thread along
+    //                  its spine, the plot grain coarsening outward.
+    //      bridgehead  a knot on the deck, with the crossing's own bar across the road.
+    if (REG4 && REG4.origins && REG4.origins.districts.length) {
+      let ground = '', bars = '', spine = '';
+      for (const d of REG4.origins.districts) {
+        if (!d.ground || d.ground.length < 3) continue;
+        ground += polyPath(d.ground); prims.n++;
+        if (d.origin === 'road') {
+          // the ribbon's spine — the frontage thread the houses stand along
+          const w = widestAxis(d.ground), c = d.center || centroid(d.ground);
+          const h = w.len * 0.42;
+          spine += `M${r2(c[0] - w.dx * h)} ${r2(c[1] - w.dy * h)}L${r2(c[0] + w.dx * h)} ${r2(c[1] + w.dy * h)}`;
+          prims.n++;
+        } else {
+          // hf311's TOLL BAR: one short bar across the way, at the knot's own head.
+          const c = d.center || centroid(d.ground);
+          const w = widestAxis(d.ground);
+          const nx = -w.dy, ny = w.dx, h = Math.max(frontage * 0.9, w.len * 0.22);
+          bars += `M${r2(c[0] - nx * h)} ${r2(c[1] - ny * h)}L${r2(c[0] + nx * h)} ${r2(c[1] + ny * h)}`;
+          prims.n++;
+        }
+      }
+      out.push('<g id="faubourgDistricts">');
+      if (ground) push(`<path d="${ground}" fill="${yardTone}" fill-opacity="0.55" stroke="${fieldInk}" stroke-width="${INK.field}" stroke-opacity="0.7" stroke-linejoin="round"/>`);
+      if (spine) push(`<path d="${spine}" fill="none" stroke="${mix(roadTone, P.ink, 0.22)}" stroke-width="${INK.yard}" stroke-linecap="round"/>`);
+      if (bars) push(`<path d="${bars}" fill="none" stroke="${P.walls}" stroke-width="${INK.landmarkMinor}" stroke-linecap="round"/>`);
+      out.push('</g>');
+    }
     if (steads) push(`<path d="${steads}" fill="${shade(MATERIAL_TONE.thatch, 0.04)}" stroke="${inkTone}" stroke-width="${INK.fabric}" stroke-linejoin="round"/>`);
     if (faub) push(`<path d="${faub}" fill="${shade(roofTone, 0.06)}" stroke="${inkTone}" stroke-width="${INK.fabric}" stroke-linejoin="round"/>`);
     // ⭐ THE LEAN-TO IS DRAWN LIGHTER THAN THE FABRIC. It is a shed against somebody else's
@@ -1537,8 +1798,11 @@ export function renderFolio(fabric, opts = {}) {
       // the shapes on the page were shapes nothing had ever measured. They are now derived
       // in institutionShapes.js, clipped by the ground law like every other footprint, and
       // arrive on the record. `archetypeShape` remains only as the pre-B5 fallback.
+      // ⭐ REG-4 · L-REG-30 §630.3/.4 — a MONUMENT CLASS never fuses INTO a neighbour; a
+      // sub-minimum one is CLAMPED UP to the floor, so a wayside chapel is drawn generously
+      // rather than deleted. `MF` returns the clamped polygon; it never returns null here.
       const sh = lm.solids
-        ? { solids: lm.solids, voids: lm.voids || [], marks: lm.marks || [] }
+        ? { solids: lm.solids.map((sp, si) => MF(`${lm.instanceKey}#${si}`, sp) || sp), voids: lm.voids || [], marks: lm.marks || [] }
         : archetypeShape(lm.monumental ? lm : { ...lm, archetype: 'ordinary' });
       const weight = lm.monumental ? INK.landmark : INK.fabric;
       // ⭐⭐⭐ REG-3 · hf323's MONUMENT PROJECTION, and it is the cure for the §592 salience

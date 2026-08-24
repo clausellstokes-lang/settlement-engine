@@ -213,6 +213,16 @@ async function main() {
   //   monument projection). Independent of `--fuse` and `--rampart`, so each wave's dormancy is
   //   provable alone — the standing rule since REG-1.
   if (process.argv.includes('--shapes')) fabricOptions.shapeCode = true;
+  // ⭐ REG-4: `--market` arms the market register (hf259's three shapes, the shared void surface,
+  //   the V-B13 furnishing and the §18.4 infill fossils) together with the faubourg-origin
+  //   typing. `--footprint` arms L-REG-30 SEPARATELY, because that arm can SUPPRESS a drawn body
+  //   and a strictly larger claim earns a dormancy proof of its own.
+  //   ⚠ `--floor=F-A|F-B|F-C` selects a measured floor candidate; absent, the module's own
+  //   PROVISIONAL_FLOOR is used and the chair signs the pin.
+  if (process.argv.includes('--market')) fabricOptions.marketRegister = true;
+  if (process.argv.includes('--footprint')) fabricOptions.minFootprint = true;
+  const floorArg = process.argv.find((a) => a.startsWith('--floor='));
+  if (floorArg) fabricOptions.footprintFloor = floorArg.slice(8);
   const manifest = [];
   for (const spec of CORPUS) {
     const { settlement, fabric } = buildOne(spec, fabricOptions);

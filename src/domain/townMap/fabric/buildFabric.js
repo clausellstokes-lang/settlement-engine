@@ -43,6 +43,11 @@ import { TOUCH_EPS } from './reservedGround.js';
 import { sweepLateBodies, sweepStateBodies } from './lateGround.js';
 import { frontInstitutions, attachSolids } from './institutionShapes.js';
 import { composeInstitution, composeFarmstead, roofFormFor, typeBody, aspectOf } from './shapeCode.js';
+// ⭐⭐ REG-4 — the market register (L-REG-6), the faubourg origins (L-REG-3) and the
+// minimum-footprint law (L-REG-30). All three are ARMED-ONLY; see stage 8c.
+import { deriveMarketRegister } from './marketRegister.js';
+import { deriveFaubourgOrigins } from './faubourgOrigin.js';
+import { applyMinFootprint, minFootprintBodies } from './minFootprint.js';
 import { waterClaims, deriveBridges, moorWaterBound, deriveWaterGates, clipFieldsToWater } from './waterWorks.js';
 import { tenurePattern, seatWorksiteHabitation, seatKeepers, buildFaubourgs, GLACIS_THRESHOLD, faubourgSeriousness } from './habitation.js';
 import { reserveCommons, enclosureRead, inCommons } from './commons.js';
@@ -1169,6 +1174,47 @@ export function buildFabric(settlement, model, options = {}) {
     };
   })() : null;
 
+  // ── ⭐⭐⭐ STAGE 8c · REG-4 · **THE MARKET REGISTER, THE FAUBOURG ORIGINS AND THE
+  //    MINIMUM-FOOTPRINT LAW** (L-REG-6 / L-REG-3 / L-REG-30).
+  //    It runs HERE, beside the fusion and the shape code, for the third time for the same
+  //    reason: every one of the three reads the bodies the leaf FINALLY DRAWS, after the ground
+  //    law, the access law and the LOD merge have had their say. ⚠ IT WRITES NOTHING BACK —
+  //    parcels, squares, landmarks and faubourg buildings are untouched, so every census sees
+  //    exactly the bodies it saw before, and the lens reads three published tables instead.
+  //    ⛔ ARMED-ONLY: unset, `marketRegister` is `null` and the leaf renders byte for byte as
+  //    the seal does.
+  const marketRegister = options.marketRegister === true ? (() => {
+    const reg = deriveMarketRegister({
+      squares: facedWeb.squares, channels: streetsWalled, tier: scale.tier,
+      seedKey: fork('marketRegister'), frontage: packed.frontage,
+      hasWater: !!(waterRel && waterRel.kind),
+      lawfulness, prosperityRank,
+      // hf320's drove road ends in a pound; the fabric's own name for that traffic is a
+      // droving route on the settlement's dossier, and where it is absent the pound is not
+      // offered rather than invented.
+      droveRoad: String((s.config && s.config.tradeRouteAccess) || '') === 'drove',
+      stateBodies: (stateMarksSwept && stateMarksSwept.bodies) || [],
+      organisms,
+    });
+    const orig = deriveFaubourgOrigins({
+      walls, buildings: drawn.faubourgBuildings, leanTos: drawn.faubourgLeanTos,
+      bridges: bridges2.bridges, frontage: packed.frontage,
+      partition: umbrellaFaced.partition,
+    });
+    return { ...reg, origins: orig };
+  })() : null;
+
+  // ⭐⭐ L-REG-30 IS ITS OWN ARM AND ITS OWN FLAG. It can SUPPRESS a drawn body, which is a
+  //    strictly larger claim than re-cutting a void, so its dormancy is provable on its own —
+  //    the standing rule since REG-1, applied at the granularity of the risk.
+  const minFootprint = options.minFootprint === true ? applyMinFootprint({
+    bodies: minFootprintBodies({ drawn, lod, seatedAll, habitation, keepers }),
+    frontage: packed.frontage,
+    // the leaf's own detail line weight, `inkScale`'s own expression (renderFolio §9.1)
+    inkDetail: Math.max(0.3, Math.min(0.8, packed.frontage * 0.055)),
+    candidate: typeof options.footprintFloor === 'string' ? options.footprintFloor : undefined,
+  }) : null;
+
   // ⭐⭐⭐ MF-ARCH · THE FABRIC IS PUBLISHED THROUGH ITS GOVERNED ACCESSORS. `walls` is no
   // longer a plain array on this literal: it is a VERIFYING GETTER onto the circuit node's
   // rings (see wallCircuit.publishCircuitRings for why the guard belongs at the ONE
@@ -1610,6 +1656,12 @@ export function buildFabric(settlement, model, options = {}) {
     // — a derived artifact with its own counts and its own reason, ABSENT (never empty) when the
     // feature is unarmed, and appended at the END so no existing key's position moves.
     ...(shapeCode ? { shapeCode } : {}),
+    // ⭐⭐⭐ REG-4 · THE MARKET REGISTER (with the faubourg origins on `.origins`) and the
+    // MINIMUM-FOOTPRINT VERDICTS, published the same way for the same reason — derived
+    // artifacts with their own counts and their own reason, ABSENT (never empty) when unarmed,
+    // appended at the END so no existing key's published position moves.
+    ...(marketRegister ? { marketRegister } : {}),
+    ...(minFootprint ? { minFootprint } : {}),
   }, wallCircuit);
 }
 
