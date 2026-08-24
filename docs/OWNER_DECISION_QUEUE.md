@@ -25550,3 +25550,43 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   but too heavy for casual odb residency; **they ride the owner's standing
   external-backup decision, and this row is the reminder that they currently
   exist on ONE disk.**
+
+## §573 · THREE OWNER LAWS: THE PRIORITY INVERSION, RELATABILITY, AND THE CORPUS-LAYOUT AMENDMENT (2026-08-24 ~11:50 CDT)
+
+- **§573.1 ⭐⭐ THE PRIORITY LAW (owner, verbatim intent):** *"information and
+  truth is the second or third priority, to be discovered and appreciated.
+  The first thing is looking beautiful and intuitive and relatable."* The
+  presentation layer's first duty is the 3-second read; the engine's truth is
+  unchanged underneath and becomes the discovery layer. This inverts
+  PRESENTATION priorities only — generation stays lawful.
+- **§573.2 ⭐⭐ THE RELATABILITY LAW (owner):** relatable means **relatable to
+  Watabou and FTG specifically** — "they are the leads in this field. We are
+  building off of their success and geometry and incorporating our own. Even
+  with all our suggestions, it shouldn't drift too far from them." The
+  register program's target formula is therefore **their conventions + the
+  corpus's craft + our meaning**, with BOUNDED drift: no novel visual
+  language. A user pre-trained by the category leads must read our map with
+  zero learning cost — relatability is a free ride on thousands of hours of
+  the user's prior map-reading, and it also buys TRUST (a map that looks like
+  the maps they know reads as a real fantasy town map; one that does not
+  reads as a data visualization, whatever its quality).
+- **§573.3 ⭐⭐ THE CORPUS-LAYOUT AMENDMENT (owner, softening the standing
+  register-only doctrine):** the corpus teaches **register AND
+  layout-legibility/composition** — the owner: its organization and layout
+  are not weaker than ours, and with their beauty and easy layout "most
+  users, if not all, WILL choose it over us." CONCEDED with the reconciliation
+  stated: as USER-FACING COMPOSITION (focal hierarchy, plaza voids giving
+  monuments breathing space, density narrative from core to edge, roads
+  converging on gates, suburbs strung outside, balanced asymmetry) the corpus
+  beats our current output and is now a TEACHER; as STRUCTURAL/HISTORICAL
+  TRUTH it remains barred (the calibration laws stand — no probabilities, no
+  geometry copying; composition lessons are derived from OUR OWN real facts,
+  which means truth FEEDS composition rather than fighting it).
+- **§573.4 INSTRUMENT CONSEQUENCES:** the legibility leg gains the 3-SECOND
+  READ arms — landmark-anchor salience (the most important buildings are the
+  highest-contrast objects on the page, with plaza voids), a route-trace test
+  (gate → center traceable at arm's length), and chunking (wall + wards
+  decompose the city into 5–9 graspable pieces); plus a RELATABILITY check at
+  every judging round — the specimen beside a Watabou capture and a corpus
+  plate, asked one question: does ours read as the same genre of object? The
+  chair composes that side-by-side sheet at every specimen collection.
