@@ -26867,3 +26867,26 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   "refine those non-Fable architectures with Fable" order is fully executed.
   Every architecture on the road to the soak is now Fable-authored or
   Fable-validated, with the receipts saying which and when.
+
+## §627 · THE EFFICIENCY SITTING — THE TOOLKIT SHIPS, AND THE REDERIVE CAR FINALLY CHARTERS (2026-08-25 ~02:30 CDT)
+
+- **§627.1** Owner asked how implementation gets faster without losing the
+  quality bar. Six levers ruled; the free ones EXECUTED in the same sitting:
+  **(i) THE BASELINE-REDERIVE CAR IS CHARTERED** (the morning's argument,
+  finally a queue row): one command re-deriving every DESCRIPTION-CLASS
+  baseline at a clean tree with a review diff, invariant-class ratchets
+  untouched — built BEFORE the DW waves open, since it discounts all 42
+  landings; **(ii) the CHAIR TOOLKIT ships** (`chair-tools/chair-commit.sh`
+  parameterized ledger commits · `seal-wave.sh` the seal ritual with its
+  checks) — thirty bespoke scripts retire; **(iii) the BRIEF LIBRARY**
+  (`briefs/` — each wave's consolidated brief as a file; dispatch and
+  restart-resume become "read your brief, read your receipt"); structured
+  verdict tables for lane finals with prose staying in receipts;
+  **(iv) the canonical PANEL script** (Workflow scriptPath + args) replaces
+  hand-written lenses; **(v) TIER STAFFING at the edges** per the standing
+  doctrine — mechanical single-file cars run one tier down with tight
+  briefs, judgment-dense builds stay Opus, noted per dispatch;
+  **(vi) the GATE-SHARDING measurement car** is chartered POST-REGISTER
+  (measure-first; it touches the instrument of record). NOT traded, by name:
+  the panels, controls-that-can-fail, per-artifact preservation, receipts —
+  each paid rent in caught defects tonight.
