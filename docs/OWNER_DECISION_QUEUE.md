@@ -25210,3 +25210,27 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   worktrees were found CLEAN at both pinned tips and are REUSED (`npm ci`
   already paid). Slot unchanged at `c3289244d` (60 cars) · packets 179 · census
   `2525/366/2159/21026/5848` · ratchet 11 of 29,044.
+
+## §565 · THE WINDOW PUT TO WORK — A THIRD LANE, A PARKED CAR, AND THE STANDING WAKEUP (2026-08-24 ~09:40 CDT, Fable chair)
+
+- **§565.1 TE-C19-RECOUNT DISPATCHED (Fable seat — research per §447).** The
+  DW-PREP brief §7 spec, verbatim: adjudicate every token in CIRCULATION §2.4 /
+  STORAGE §2.5 into sub-form vs top-level class vs width/length bucket vs
+  licence rung vs polarity; floor/ruled/ceiling with the counting rule stated;
+  three controls (accuracy · can-over-count · can-miss); denominators named;
+  cross against the seven vocabularies; deliver the five-site edit spec (L826 ·
+  L851 · L1047 · L1894 · L2992–3) — **the chair applies; the lane never touches
+  the preserve ref.** Read-only, no worktree, no gate — the cheapest lane that
+  unblocks DW-1d/1e.
+- **§565.2 THE DEPLOY.MD DEBT IS AUTHORED AND PARKED, NOT BUILT.** Measured:
+  the ledger branch's `docs/DEPLOY.md` carries **no migration guidance at all**;
+  the BUILD branch's names 197/198 and never 188 — **the operative runbook is
+  the build branch's.** The 188 row is chair-authored verbatim in
+  `dockets/DEPLOYDOC-188-CHARTER.md` (31585ce2 scratchpad) with build
+  instructions and the naked-claim warnings; the car builds on the POST-landing
+  slot. *JUDGMENT: chose deferral over a third stacked sibling on `c3289244d`
+  because the doc is pre-deploy owner material with no deploy scheduled
+  mid-session, and stack traps grow with stack size — veto and it builds now.*
+- **§565.3 THE 30-MIN WAKEUP IS ARMED** (§447 standing law; session-scoped):
+  four checks — lanes alive by receipt, mutex health by lock-dir pid, verdict
+  collection with chair-only pin moves, ledger checkpoint by private index.

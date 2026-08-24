@@ -70,7 +70,12 @@ stacked-buildings count). **TWO CURE LANES DISPATCHED (§564.5): TE-CH7-CURE (bu
 regen + one clean gate) and TE-CH4-CURE (the six bills, regen at final tree, mint LAST,
 gate).** Receipts: `31585ce2-…/scratchpad/receipts/laneCH7CURE-receipt.md` /
 `laneCH4CURE-receipt.md`. On a chair-validated green: move `wip-*` → `holding-*` (chair
-moves pins; lanes do not).
+moves pins; lanes do not). **ALSO RUNNING (§565): TE-C19-RECOUNT** (Fable seat, read-only,
+receipt `laneC19-receipt.md` — unblocks DW-1d/1e). **PARKED, AUTHORED (§565.2): the owed
+DEPLOY.md 188 amendment** — exact insertion text + build instructions at
+`31585ce2-…/scratchpad/dockets/DEPLOYDOC-188-CHARTER.md`; builds on the POST-landing slot
+(the operative runbook is the BUILD branch's DEPLOY.md; the ledger copy carries no
+migration guidance).
 
 ## ⭐⭐⭐⭐ SUCCESSION ADDENDUM — 2026-08-24 (~01:40), LEDGER THROUGH §439 — READ THIS DELTA FIRST, THEN THE §427 BLOCK BELOW
 
