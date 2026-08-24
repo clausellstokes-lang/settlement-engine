@@ -1,0 +1,285 @@
+{
+  "schemaVersion": "HEEP1-FRAME-FREEZE-RECEIPT-1.6.0",
+  "status": "FRAME_FREEZE_BLOCKED_METADATA_SHORTFALL",
+  "supersession": {
+    "ucf1_0Freeze": "SUPERSEDED_INVALID_FOR_USE",
+    "ucf1_1PriorProvisionalSlate": "INVALIDATED_BY_CLOSED_METADATA_REVALIDATION"
+  },
+  "scope": {
+    "protocolId": "HEEP-1",
+    "protocolVersion": "1.1.0",
+    "frameVersion": "UCF-1.1.0",
+    "candidateManifestSchemaVersion": "UCF-1-CANDIDATE-MANIFEST-1.3.0",
+    "quotaFeasibilitySchemaVersion": "UCF1-QUOTA-FEASIBILITY-1.4.0",
+    "selectionRuleVersion": "UCF1-SELECT-1.4.0",
+    "geographicScope": "EUROPEAN_ONLY",
+    "productRelevance": "EUROPEAN_FANTASY_CENTERED",
+    "nonEuropeanCompletionRequirement": false
+  },
+  "protocolAmendment": {
+    "fromVersion": "1.0.0",
+    "toVersion": "1.1.0",
+    "predecessorSha256": "ad2c1e027f0b3941d42c7959650ed1bf3c1e4916118ddb7234be85e32ec19c67",
+    "classification": "PRE_SOURCE_OPENING_NORMATIVE_CLARIFICATION",
+    "rationale": "CLOSE_LEAKAGE_CLUSTER_METADATA_AUTHORITY_AND_DOMAIN_RECORD_CONTRACT_AMBIGUITIES",
+    "normativeDiff": [
+      "CONNECTED_LEAKAGE_CLUSTER_IS_ATOMIC_AND_UCF11_SELECTION_REMAINS_SINGLETON_ONLY",
+      "KNOWN_SCALE_AND_AFFIRMATIVE_CONTEXT_REQUIRE_EXACT_PINNED_ITEM_LEVEL_AUTHORITY_JOINS",
+      "UCF_AMP_AND_RSLP_REQUIRE_SEPARATE_DOMAIN_EVIDENCE_RECORD_CONTRACTS"
+    ],
+    "outcomeBearingSourcesOpenedBeforeAmendment": false,
+    "holdoutExistedBeforeAmendment": false,
+    "sampleSizesQuotasStoppingRulesOrClaimBoundaryChanged": false,
+    "strictMetadataShortfallChanged": false
+  },
+  "custodyManifestMigration": {
+    "fromProtocolVersion": "1.0.0",
+    "toProtocolVersion": "1.1.0",
+    "changedManifestField": "protocolVersion",
+    "priorManifestSha256": "b78b048490a1ed39b046a5acee03d024f4865f36a0400249b4288d943fc7e85e",
+    "currentManifestSha256": "aa231558977d040f63282d5787c6f0d55fb4b6ce53528012e0dc5ea41737fb57",
+    "candidateIdentityCountBefore": 311,
+    "candidateIdentityCountAfter": 311,
+    "identityOrStratumMetadataChanged": false,
+    "sourceContentOpened": false,
+    "selectionOutcomeChanged": false
+  },
+  "laterStages": {
+    "slateFrozen": false,
+    "actionableReservesFrozen": false,
+    "holdoutAllocated": false,
+    "holdoutSealed": false,
+    "cohortsBuilt": false,
+    "sourcesOpened": false,
+    "outcomesCoded": false,
+    "deepAuditsBuilt": false
+  },
+  "frame": {
+    "constructionMode": "METADATA_ONLY",
+    "deduplicatedCandidateIdentityCount": 311,
+    "frameEligibleCandidateCount": 311,
+    "frameExcludedCandidateCount": 0,
+    "frameExcludedByClosedReason": {},
+    "selectionEligibleSingletonClusterCount": 257,
+    "excludedNonSingletonClusterUnitCount": 54,
+    "frameCountryCount": 29,
+    "frameProgramCount": 18,
+    "priorSeenCount": 23,
+    "selectionEligibleCountryCount": 29,
+    "selectionEligibleProgramCount": 16,
+    "selectionEligiblePriorSeenCount": 14,
+    "leakageClusterCount": 267,
+    "nonSingletonLeakageClusterCount": 10,
+    "equivalentEditionOrDerivativeRelationsCatalogued": 0,
+    "selectedCount": 0,
+    "reserveCount": 0
+  },
+  "selectionEligibleMetadataCounts": {
+    "scaleFunction": {
+      "SMALL_LOCAL": 12,
+      "INTERMEDIATE_REGIONAL": 5,
+      "MAJOR_METROPOLITAN": 2,
+      "UNKNOWN": 238
+    },
+    "physicalContexts": {
+      "COASTAL_ESTUARINE": 57,
+      "RIVER_CROSSING": 39,
+      "WETLAND_ENGINEERED_WATER": 18,
+      "UPLAND_CONSTRAINED": 21,
+      "OTHER_INLAND": 0
+    }
+  },
+  "validation": {
+    "protocolVersionChain": {
+      "pass": true,
+      "predecessorVersion": "1.0.0",
+      "currentVersion": "1.1.0",
+      "predecessorHashRecorded": true,
+      "amendmentRationaleAndNormativeDiffRecorded": true
+    },
+    "draft202012Schema": {
+      "pass": true,
+      "mode": "OFFLINE",
+      "protocolVersionConst": "1.1.0",
+      "selectorPinnedSchemaSha256": "6d4d7398beadc0a4a3685f85707e6ad1e108ce3d171d2638be4d598e4166d9c6",
+      "selectorPinnedSchemaDigestVerified": true,
+      "substitutedSchemaRejectedBeforeShortfallReceipt": true,
+      "unsupportedSchemaKeywordFailsClosed": true,
+      "rootCandidatePackageAndEvidenceAdditionalPropertiesClosed": true
+    },
+    "semanticManifestChecks": {
+      "pass": true,
+      "intervalMidpointToIndexPhase": true,
+      "stableIdentityNfkcCasefoldUniqueness": true,
+      "authorityItemUniqueAcrossStableTownIds": true,
+      "packageIdentityConsistency": true,
+      "packagePublisherIdentifierRightsAndRoute": true,
+      "primaryProgramMatchesPrimaryPackage": true,
+      "frameEligibilityDiscriminatedAndPinned": true,
+      "arbitraryCandidateExclusionRejected": true,
+      "priorSeenMembershipPinnedToWave1Registry": true,
+      "manifestProtocolVersionExactMatch": true,
+      "legacyProtocolVersionRejectedBeforeShortfallReceipt": true,
+      "frameConstructionInspectionField": "inspectedBeyondMetadataDuringFrameConstruction",
+      "legacyAmbiguousInspectionFieldRejected": true
+    },
+    "scaleFunctionChecks": {
+      "pass": true,
+      "completeObservedP31SetRequired": true,
+      "classToBandAllowlistPinned": true,
+      "unmappedAbsentOrMultiBandDisposition": "UNKNOWN",
+      "programScopeSynthesizedClassCanAuthorizeKnown": false,
+      "basisProseCanAuthorizeKnown": false,
+      "unknownBranchForbidsClassFields": true
+    },
+    "physicalContextChecks": {
+      "pass": true,
+      "completeAuthorityExtractPinned": true,
+      "allApplicableRulesDerived": true,
+      "closedValueToRuleAllowlistPinned": true,
+      "declaredTagsEqualAllDerivedTags": true,
+      "freeTextCanAuthorizeTag": false,
+      "landlockedCountryCanAuthorizeOtherInland": false,
+      "unknownExclusiveWhenNoRuleMatches": true
+    },
+    "leakageChecks": {
+      "pass": true,
+      "connectedComponentsValidated": true,
+      "sharedPackageRelationsValidated": 10,
+      "nonSingletonClustersExcludedFromSlateAndActionableReserves": true,
+      "legalPrefixClusterCrossingPossibleAfterExclusion": false,
+      "holdoutClusterApportionmentPerformed": false
+    },
+    "quotaPrefixes": {
+      "80": "FAIL_METADATA_SHORTFALL",
+      "90": "FAIL_METADATA_SHORTFALL",
+      "100": "FAIL_METADATA_SHORTFALL",
+      "110": "FAIL_METADATA_SHORTFALL",
+      "120": "FAIL_METADATA_SHORTFALL"
+    },
+    "exactNestedSolver": {
+      "pass": true,
+      "solverVersion": "UCF1-EXACT-NESTED-SOLVER-1.0.0",
+      "formulationSha256": "489b50874daee0682896b82c5e5b55c0d9a7ad090723eda42a7861c160be633b",
+      "stableObjective": "LEXICOGRAPHIC_MINIMUM_TIE_HASH_SEQUENCE_WITHIN_EACH_LEGAL_TRANCHE",
+      "completeEnumeration": true,
+      "soundNecessaryBoundPruningOnly": true,
+      "heuristicNodeOrTimeLimit": null,
+      "currentProofKind": "UNSAT_BY_NECESSARY_POOL_BOUND",
+      "currentUnsatCertificateVersion": "UCF1-UNSAT-CERTIFICATE-1.0.0",
+      "currentUnsatCertificateVerified": true,
+      "currentViolatedBoundCount": 20,
+      "syntheticSatisfiableNestedPrefixCase": true,
+      "syntheticReplacementTerminalBacktracking": true,
+      "syntheticCompleteEnumerationUnsatReplay": true,
+      "syntheticDeterminism": true
+    },
+    "replacementChecks": {
+      "pass": true,
+      "policyVersion": "UCF1-FULL-VECTOR-REPLACEMENT-1.0.0",
+      "authoritativeQueueScope": "PER_SELECTED_SLOT",
+      "exactPrimaryStratumRequired": true,
+      "physicalContextMinimaRevalidated": true,
+      "countryProgramPriorCapsRevalidated": true,
+      "allAffectedLegalPrefixesRevalidated": true,
+      "singletonLeakageEligibilityEnforcedBeforeQueueConstruction": true,
+      "priorSubstitutionStateRevalidatedAtExecution": true,
+      "failClosedWhenQueueExhausted": true,
+      "macroOnlyFallbackPresent": false,
+      "exactStratumOnlyFallbackActionable": false,
+      "currentQueuesSealed": false,
+      "currentDisposition": "NOT_SEALED_BECAUSE_VERIFIED_POOL_BOUND_FAILED"
+    },
+    "quotaFailureAxes": [
+      "SMALL_LOCAL",
+      "INTERMEDIATE_REGIONAL",
+      "MAJOR_METROPOLITAN",
+      "OTHER_INLAND"
+    ],
+    "samePrimaryStratumReserves": "NOT_SEALED_BECAUSE_VERIFIED_POOL_BOUND_FAILED",
+    "deterministicShortfallRerun": {
+      "pass": true,
+      "byteIdenticalPrivateArtifactCount": 5
+    },
+    "negativeSemanticCases": {
+      "pass": true,
+      "caseCount": 20,
+      "manifestProtocolVersionMismatchRejected": true,
+      "substitutedSchemaDigestRejected": true
+    },
+    "custodyNegativeCases": {
+      "pass": true,
+      "symlinkRejected": true,
+      "nonPrivateModeRejected": true,
+      "gitAncestorRejected": true
+    },
+    "contentInspectionBeyondCatalogueMetadataAbsent": true,
+    "outcomeCodingAbsent": true
+  },
+  "failureBoundary": {
+    "inventedMetadataUsedToFillQuotas": false,
+    "contentOpenedToFillMetadataQuotas": false,
+    "unsupportedProgramLevelScaleInferenceRemoved": true,
+    "unsupportedCountryLevelOtherInlandInferenceRemoved": true,
+    "nextPermittedAction": "ACQUIRE_MORE_INDEPENDENT_ITEM_LEVEL_METADATA_OR_AMEND_THE_PREREGISTERED_DESIGN_BEFORE_SELECTION"
+  },
+  "selectionInputBoundary": {
+    "ucfInputs": [
+      "macroRegion",
+      "countryCode",
+      "primaryProgramId",
+      "indexPhase",
+      "scaleFunction.band",
+      "physicalContext.tags",
+      "priorExposure"
+    ],
+    "rslpAgrarianTenurialDispersionInputs": false,
+    "ampFunctionSystemStatusSurvivalInputs": false,
+    "unfrozenChildFrameVariablesDisposition": "UNKNOWN_OR_LATER_COHORT_VARIABLE"
+  },
+  "hashes": {
+    "protocolSha256": "988ba46f92e65a7065cfe399fc96c1984a3f2dc56d3aa3410f12afb374cccd0c",
+    "selectionScriptSha256": "6f1555658d982e992f4b3fe617131affa3670591792399b740e5e0443a3da4fa",
+    "selectionSolverTestSha256": "b6e4c7068f6e19ac8206b969749926520ceb99f839d2c3653e3c506d3dd6ed9c",
+    "solverFormulationSha256": "489b50874daee0682896b82c5e5b55c0d9a7ad090723eda42a7861c160be633b",
+    "frameSchemaSha256": "6d4d7398beadc0a4a3685f85707e6ad1e108ce3d171d2638be4d598e4166d9c6",
+    "scaleClassRubricSha256": "22e71dc4ddabdeab14e72e4fc677d02ab9daff1ddd003bbe74f21342848ba091",
+    "physicalContextRubricSha256": "325a0b989c7b90a030a1cf41ff4e02d31c7fda1cd2733b722f6852a0567e1b17",
+    "metadataSourcesSha256": "679594ca391300fdd5f064360a4413ac27e740ace3679666c0114d8c4f818978",
+    "quotaFeasibilitySha256": "10bf7d0c7ed5b7223cf3c2faf08eb1b95a21160808ff581347114c32e6bbf0aa",
+    "readmeSha256": "8706cae582899a78f9a66f57ac0d12b21d7752e83fffb30c47f4573eec73a0da",
+    "frameManifestSha256": "aa231558977d040f63282d5787c6f0d55fb4b6ce53528012e0dc5ea41737fb57",
+    "selectionSeed": "fa91add1eeec56056abc8b9ed447298d9178bcf57b865ee8f3141dc29b36b17e",
+    "noSelectionMarkerSha256": "b61a8e136323ef137db51117870e2433f08999b5038fc59b145237b1e64b208a",
+    "noReserveMarkerSha256": "1c577c12eb833131ade18d5584d67f30f99a1af9cd4e40d7bd05f99f65486553",
+    "privateQuotaReportSha256": "bf1c965d6e17552ccbbe37ede249559f86eab9aebef5f360bcec7b8d0206c96b",
+    "custodyBundleSha256": "2d1ae1bf642a1c4edcdd11a1f711b640d4f27a1d18cae0b003149f0acba0cad8",
+    "authoritySnapshotSha256": "35bbb58649c6053ae39650daf438260b64938d9313316b0a04d124fdc63f9bc2",
+    "authorityP31RegistrySha256": "4eb5ad5bf8534c19dbf346f956273d837a3de84da034340880f0159bb1f609ff",
+    "physicalContextAuthorityExtractSha256": "8d9e06d302a2bcbb51b93f93f67ada702df625526d061aaab08348e1a410ea19",
+    "physicalContextEvidenceRegistrySha256": "ae65763830cc3e570dd9fe53497319a86d6ce28d3fd11e2244fdc1bed68e8e58",
+    "physicalContextValueAllowlistSha256": "9d2154a2f77ddd4ee8a99588d2ddae6990c532f44f4ba749ff2ea329b684cfe1",
+    "priorSeenRegistrySha256": "51d150a1a9df49c28eb440831f8ebc921b8a62c0167c16edf758d09ec5fc8e82",
+    "wave1RegistrySha256": "4d1c034c203c1728dbf57b874cce88097fe92907e9a95652bafc53112d9f7222",
+    "leakageClusterRegistrySha256": "05e9d953257e178cb519f711210f5edd9a65a0643500478286f0ecda973b5804",
+    "frameExclusionRegistrySha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "publicArtifacts": [
+    "README.md",
+    "select-ucf1-frame.mjs",
+    "test-ucf1-exact-solver.mjs",
+    "ucf1-frame.schema.json",
+    "ucf1-scale-class-rubric.json",
+    "ucf1-physical-context-rubric.json",
+    "ucf1-metadata-sources.json",
+    "ucf1-quota-feasibility.json",
+    "frame-freeze-receipt.json"
+  ],
+  "identityDisclosure": {
+    "candidateNamesInPublicArtifacts": 0,
+    "candidateAliasesInPublicArtifacts": 0,
+    "candidateLevelUrlsInPublicArtifacts": 0,
+    "selectedIdentitiesInPublicArtifacts": 0,
+    "holdoutAssignmentsInPublicArtifacts": 0
+  }
+}

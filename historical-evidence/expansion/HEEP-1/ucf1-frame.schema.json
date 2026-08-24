@@ -1,0 +1,450 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://settlementforge.invalid/schemas/heep-1/ucf1-frame.schema.json",
+  "title": "HEEP-1 UCF-1 metadata-only candidate frame",
+  "type": "object",
+  "required": [
+    "schemaVersion", "protocolId", "protocolVersion", "frameVersion", "capturedAt", "constructionMode", "eligibleForPrevalence", "candidateCount", "priorSeenCount", "metadataSources", "metadataSourceRegistryRef",
+    "scaleClassRubricRef", "physicalContextRubricRef", "authorityP31Registry", "authorityP31RegistrySha256",
+    "physicalContextEvidenceRegistry", "physicalContextEvidenceRegistrySha256", "physicalContextValueAllowlist", "physicalContextValueAllowlistSha256", "physicalContextAuthoritySnapshotSha256",
+    "physicalContextAuthorityExtract", "physicalContextAuthorityExtractSha256", "priorSeenRegistry", "priorSeenRegistrySha256", "frameExclusionRegistry", "frameExclusionRegistrySha256",
+    "multiTownPackageRelations", "packageEquivalenceRelations", "leakageClusters", "leakageClusterRegistrySha256", "candidates"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "UCF-1-CANDIDATE-MANIFEST-1.3.0" },
+    "protocolId": { "const": "HEEP-1" },
+    "protocolVersion": { "const": "1.1.0" },
+    "frameVersion": { "const": "UCF-1.1.0" },
+    "capturedAt": { "type": "string", "minLength": 1 },
+    "constructionMode": { "const": "METADATA_ONLY" },
+    "eligibleForPrevalence": { "const": false },
+    "candidateCount": { "type": "integer" },
+    "priorSeenCount": { "type": "integer" },
+    "metadataSources": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/metadataSource" }
+    },
+    "metadataSourceRegistryRef": { "$ref": "#/$defs/sourceRegistryRef" },
+    "scaleClassRubricRef": { "$ref": "#/$defs/scaleRubricRef" },
+    "physicalContextRubricRef": { "$ref": "#/$defs/contextRubricRef" },
+    "authorityP31Registry": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/authorityP31RegistryEntry" }
+    },
+    "authorityP31RegistrySha256": { "$ref": "#/$defs/sha256" },
+    "physicalContextEvidenceRegistry": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/contextRegistryEntry" }
+    },
+    "physicalContextEvidenceRegistrySha256": { "$ref": "#/$defs/sha256" },
+    "physicalContextValueAllowlist": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/contextValueAllowlistEntry" }
+    },
+    "physicalContextValueAllowlistSha256": { "$ref": "#/$defs/sha256" },
+    "physicalContextAuthoritySnapshotSha256": { "$ref": "#/$defs/sha256" },
+    "physicalContextAuthorityExtract": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/contextAuthorityExtractEntry" }
+    },
+    "physicalContextAuthorityExtractSha256": { "$ref": "#/$defs/sha256" },
+    "priorSeenRegistry": { "$ref": "#/$defs/priorSeenRegistry" },
+    "priorSeenRegistrySha256": { "$ref": "#/$defs/sha256" },
+    "frameExclusionRegistry": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/frameExclusionRegistryEntry" }
+    },
+    "frameExclusionRegistrySha256": { "$ref": "#/$defs/sha256" },
+    "multiTownPackageRelations": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/multiTownPackageRelation" }
+    },
+    "packageEquivalenceRelations": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/packageEquivalenceRelation" }
+    },
+    "leakageClusters": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/leakageCluster" }
+    },
+    "leakageClusterRegistrySha256": { "$ref": "#/$defs/sha256" },
+    "candidates": {
+      "type": "array",
+      "minItems": 180,
+      "items": { "$ref": "#/$defs/candidate" }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "candidate": {
+      "type": "object",
+      "required": [
+        "stableTownId", "canonicalName", "aliases", "countryCode", "macroRegion",
+        "primaryProgramId", "packages", "primaryRepresentedInterval", "indexPhase",
+        "scaleFunction", "physicalContext", "priorExposure", "inspectedBeyondMetadataDuringFrameConstruction",
+        "frameEligibility", "leakageClusterRef", "selectionEligibility"
+      ],
+      "properties": {
+        "stableTownId": { "type": "string", "minLength": 1 },
+        "canonicalName": { "type": "string", "minLength": 1 },
+        "aliases": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "countryCode": { "type": "string", "pattern": "^[A-Z]{2}$" },
+        "countryName": { "type": "string", "minLength": 1 },
+        "macroRegion": {
+          "enum": [
+            "ATLANTIC_ARCHIPELAGO", "NORDIC_BALTIC", "WESTERN_CONTINENTAL",
+            "CENTRAL_EASTERN_SOUTHEASTERN", "SOUTHERN_MEDITERRANEAN"
+          ]
+        },
+        "primaryProgramId": { "type": "string", "minLength": 1 },
+        "packages": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/package" } },
+        "primaryRepresentedInterval": {
+          "type": "object",
+          "required": ["startYear", "endYear", "basis"],
+          "properties": {
+            "startYear": { "type": ["integer", "null"] },
+            "endYear": { "type": ["integer", "null"] },
+            "basis": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "indexPhase": { "enum": ["PRE_1200", "1200_1399", "1400_1599", "1600_1799", "1800_PLUS", "UNKNOWN"] },
+        "scaleFunction": { "oneOf": [{ "$ref": "#/$defs/knownScaleFunction" }, { "$ref": "#/$defs/unknownScaleFunction" }] },
+        "physicalContext": { "oneOf": [{ "$ref": "#/$defs/knownPhysicalContext" }, { "$ref": "#/$defs/unknownPhysicalContext" }] },
+        "priorExposure": { "enum": ["PRIOR_SEEN", "NOT_PRIOR_SEEN"] },
+        "inspectedBeyondMetadataDuringFrameConstruction": { "const": false },
+        "frameEligibility": { "oneOf": [{ "$ref": "#/$defs/eligibleFrameDisposition" }, { "$ref": "#/$defs/excludedFrameDisposition" }] },
+        "leakageClusterRef": { "$ref": "#/$defs/leakageClusterRef" },
+        "selectionEligibility": { "enum": ["ELIGIBLE_SINGLETON_CLUSTER", "EXCLUDED_NON_SINGLETON_LEAKAGE_CLUSTER"] }
+        ,"authorityIdentity": { "$ref": "#/$defs/authorityIdentity" }
+      },
+      "additionalProperties": false
+    },
+    "package": {
+      "type": "object",
+      "required": [
+        "programId", "programName", "institutionalPublisher", "publicationIdentifier",
+        "metadataSourceId", "metadataUrl", "sourceTitle", "claimBearingKinds",
+        "rightsStatus", "acquisitionRoute"
+      ],
+      "properties": {
+        "programId": { "type": "string", "minLength": 1 },
+        "programName": { "type": "string", "minLength": 1 },
+        "institutionalPublisher": { "type": "string", "minLength": 1 },
+        "publicationIdentifier": { "type": "string", "minLength": 1 },
+        "metadataSourceId": { "type": "string", "minLength": 1 },
+        "metadataUrl": { "type": "string", "format": "uri" },
+        "sourceTitle": { "type": "string", "minLength": 1 },
+        "claimBearingKinds": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "rightsStatus": { "type": "string", "minLength": 1 },
+        "acquisitionRoute": { "type": "string", "minLength": 1 },
+        "multiTownPackageRelation": { "$ref": "#/$defs/multiTownPackageRelation" }
+      },
+      "additionalProperties": false
+    },
+    "authorityIdentity": {
+      "type": "object",
+      "required": ["source", "identifier", "resolution"],
+      "properties": {
+        "source": { "const": "WIKIDATA" },
+        "identifier": { "type": "string", "minLength": 1 },
+        "resolution": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "knownScaleFunction": {
+      "type": "object",
+      "required": ["status", "band", "basisCode", "rubricRef", "authority", "catalogJoin"],
+      "properties": {
+        "status": { "const": "KNOWN" },
+        "band": { "enum": ["SMALL_LOCAL", "INTERMEDIATE_REGIONAL", "MAJOR_METROPOLITAN"] },
+        "basisCode": { "const": "P31_ALLOWLIST_EXACT" },
+        "rubricRef": { "$ref": "#/$defs/scaleRubricRef" },
+        "authority": { "$ref": "#/$defs/scaleAuthority" },
+        "catalogJoin": { "$ref": "#/$defs/catalogJoin" }
+      },
+      "additionalProperties": false
+    },
+    "unknownScaleFunction": {
+      "type": "object",
+      "required": ["status", "band", "reasonCode", "rubricRef"],
+      "properties": {
+        "status": { "const": "UNKNOWN" },
+        "band": { "const": "UNKNOWN" },
+        "reasonCode": { "enum": ["ABSENT_CLASS", "UNMAPPED_CLASS", "AMBIGUOUS_CLASS", "NO_CLOSED_METADATA_EVIDENCE"] },
+        "rubricRef": { "$ref": "#/$defs/scaleRubricRef" }
+      },
+      "additionalProperties": false
+    },
+    "scaleAuthority": {
+      "type": "object",
+      "required": ["sourceId", "itemId", "propertyId", "classIds", "classKind"],
+      "properties": {
+        "sourceId": { "type": "string", "minLength": 1 },
+        "itemId": { "type": "string", "minLength": 1 },
+        "propertyId": { "const": "P31" },
+        "classIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "classKind": { "const": "WIKIDATA_P31" }
+      },
+      "additionalProperties": false
+    },
+    "knownPhysicalContext": {
+      "type": "object",
+      "required": ["status", "tags", "evidence", "rubricRef"],
+      "properties": {
+        "status": { "const": "KNOWN" },
+        "tags": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": { "enum": ["COASTAL_ESTUARINE", "RIVER_CROSSING", "WETLAND_ENGINEERED_WATER", "UPLAND_CONSTRAINED", "OTHER_INLAND"] }
+        },
+        "evidence": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/contextEvidence" } },
+        "rubricRef": { "$ref": "#/$defs/contextRubricRef" }
+      },
+      "additionalProperties": false
+    },
+    "unknownPhysicalContext": {
+      "type": "object",
+      "required": ["status", "tags", "evidence", "rubricRef", "reasonCode"],
+      "properties": {
+        "status": { "const": "UNKNOWN" },
+        "tags": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "const": "UNKNOWN" } },
+        "evidence": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/contextEvidence" } },
+        "rubricRef": { "$ref": "#/$defs/contextRubricRef" },
+        "reasonCode": { "const": "NO_CLOSED_METADATA_EVIDENCE" }
+      },
+      "additionalProperties": false
+    },
+    "contextEvidence": {
+      "type": "object",
+      "required": ["tag", "evidenceKind", "ruleId", "metadataSourceId", "catalogJoin", "registryEntryId", "rubricRef"],
+      "properties": {
+        "tag": { "enum": ["COASTAL_ESTUARINE", "RIVER_CROSSING", "WETLAND_ENGINEERED_WATER", "UPLAND_CONSTRAINED", "OTHER_INLAND"] },
+        "evidenceKind": { "enum": ["AUTHORITY_ITEM", "AUTHORITY_QUANTITY", "CATALOG_JOIN"] },
+        "ruleId": { "type": "string", "minLength": 1 },
+        "metadataSourceId": { "type": "string", "minLength": 1 },
+        "authorityItemId": { "type": "string", "minLength": 1 },
+        "catalogJoin": { "$ref": "#/$defs/catalogJoin" },
+        "registryEntryId": { "type": "string", "pattern": "^CTXE-[0-9a-f]{24}$" },
+        "rubricRef": { "$ref": "#/$defs/contextRubricRef" }
+      },
+      "additionalProperties": false
+    },
+    "contextRegistryEntry": {
+      "type": "object",
+      "required": ["registryEntryId", "sourceSnapshotSha256", "ruleId", "tag", "evidenceKind", "metadataSourceId", "catalogJoin"],
+      "properties": {
+        "registryEntryId": { "type": "string", "pattern": "^CTXE-[0-9a-f]{24}$" },
+        "sourceSnapshotSha256": { "$ref": "#/$defs/sha256" },
+        "ruleId": { "type": "string", "minLength": 1 },
+        "tag": { "enum": ["COASTAL_ESTUARINE", "RIVER_CROSSING", "WETLAND_ENGINEERED_WATER", "UPLAND_CONSTRAINED", "OTHER_INLAND"] },
+        "evidenceKind": { "enum": ["AUTHORITY_ITEM", "AUTHORITY_QUANTITY", "CATALOG_JOIN"] },
+        "metadataSourceId": { "type": "string", "minLength": 1 },
+        "catalogJoin": { "$ref": "#/$defs/catalogJoin" },
+        "authorityItemId": { "type": "string", "minLength": 1 },
+        "propertyId": { "enum": ["P31", "P206", "P706", "P2044"] },
+        "valueIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "quantity": { "$ref": "#/$defs/contextQuantity" },
+        "catalogValue": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "contextQuantity": {
+      "type": "object",
+      "required": ["value", "unitId"],
+      "properties": {
+        "value": { "type": "number" },
+        "unitId": { "const": "METRE" }
+      },
+      "additionalProperties": false
+    },
+    "contextValueAllowlistEntry": {
+      "type": "object",
+      "required": ["ruleId", "valueIds"],
+      "properties": {
+        "ruleId": { "type": "string", "minLength": 1 },
+        "valueIds": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+      },
+      "additionalProperties": false
+    },
+    "contextAuthorityExtractEntry": {
+      "type": "object",
+      "required": ["stableTownId", "authorityItemId", "p31ClassIds", "p206ObjectIds", "p706ObjectIds", "p2044Metres"],
+      "properties": {
+        "stableTownId": { "type": "string", "minLength": 1 },
+        "authorityItemId": { "type": "string", "minLength": 1 },
+        "p31ClassIds": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "p206ObjectIds": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "p706ObjectIds": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "p2044Metres": { "type": "array", "uniqueItems": true, "items": { "type": "number" } }
+      },
+      "additionalProperties": false
+    },
+    "priorSeenRegistry": {
+      "type": "object",
+      "required": ["registryId", "sourceRegistrySha256", "priorStableTownIds"],
+      "properties": {
+        "registryId": { "const": "UCF1-PRIOR-SEEN-WAVE1-1.0.0" },
+        "sourceRegistrySha256": { "$ref": "#/$defs/sha256" },
+        "priorStableTownIds": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+      },
+      "additionalProperties": false
+    },
+    "eligibilityEvidence": {
+      "type": "object",
+      "required": ["metadataSourceId", "catalogJoin"],
+      "properties": {
+        "metadataSourceId": { "type": "string", "minLength": 1 },
+        "catalogJoin": { "$ref": "#/$defs/catalogJoin" }
+      },
+      "additionalProperties": false
+    },
+    "eligibleFrameDisposition": {
+      "type": "object",
+      "required": ["status", "reasonCode", "evidence"],
+      "properties": {
+        "status": { "const": "ELIGIBLE" },
+        "reasonCode": { "const": "OFFICIAL_OR_INSTITUTIONAL_CATALOGUE_METADATA" },
+        "evidence": { "$ref": "#/$defs/eligibilityEvidence" }
+      },
+      "additionalProperties": false
+    },
+    "excludedFrameDisposition": {
+      "type": "object",
+      "required": ["status", "reasonCode", "exclusionRegistryEntryId"],
+      "properties": {
+        "status": { "const": "EXCLUDED" },
+        "reasonCode": { "enum": ["NOT_STABLE_TOWN_IDENTITY", "NON_EUROPEAN", "NO_OFFICIAL_OR_INSTITUTIONAL_METADATA", "DUPLICATE_IDENTITY"] },
+        "exclusionRegistryEntryId": { "type": "string", "pattern": "^FEX-[0-9a-f]{24}$" }
+      },
+      "additionalProperties": false
+    },
+    "frameExclusionRegistryEntry": {
+      "type": "object",
+      "required": ["registryEntryId", "stableTownId", "reasonCode", "evidence"],
+      "properties": {
+        "registryEntryId": { "type": "string", "pattern": "^FEX-[0-9a-f]{24}$" },
+        "stableTownId": { "type": "string", "minLength": 1 },
+        "reasonCode": { "enum": ["NOT_STABLE_TOWN_IDENTITY", "NON_EUROPEAN", "NO_OFFICIAL_OR_INSTITUTIONAL_METADATA", "DUPLICATE_IDENTITY"] },
+        "evidence": { "$ref": "#/$defs/eligibilityEvidence" }
+      },
+      "additionalProperties": false
+    },
+    "catalogJoin": {
+      "type": "object",
+      "required": ["programId", "publicationIdentifier", "metadataSourceId"],
+      "properties": {
+        "programId": { "type": "string", "minLength": 1 },
+        "publicationIdentifier": { "type": "string", "minLength": 1 },
+        "metadataSourceId": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "sourceRegistryRef": {
+      "type": "object",
+      "required": ["schemaVersion", "sha256"],
+      "properties": {
+        "schemaVersion": { "const": "UCF1-METADATA-SOURCES-1.0.0" },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      },
+      "additionalProperties": false
+    },
+    "scaleRubricRef": {
+      "type": "object",
+      "required": ["rubricId", "version", "sha256"],
+      "properties": {
+        "rubricId": { "const": "UCF1-SCALE-CLASS-RUBRIC" },
+        "version": { "const": "1.2.0" },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      },
+      "additionalProperties": false
+    },
+    "contextRubricRef": {
+      "type": "object",
+      "required": ["rubricId", "version", "sha256"],
+      "properties": {
+        "rubricId": { "const": "UCF1-PHYSICAL-CONTEXT-RUBRIC" },
+        "version": { "const": "1.2.0" },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      },
+      "additionalProperties": false
+    },
+    "authorityP31RegistryEntry": {
+      "type": "object",
+      "required": ["itemId", "classIds"],
+      "properties": {
+        "itemId": { "type": "string", "minLength": 1 },
+        "classIds": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+      },
+      "additionalProperties": false
+    },
+    "multiTownPackageRelation": {
+      "type": "object",
+      "required": ["relationId", "relationType", "packageIdentitySha256", "declaredUnitCount", "frozenBeforeSelection"],
+      "properties": {
+        "relationId": { "type": "string", "pattern": "^MTP-[0-9a-f]{24}$" },
+        "relationType": { "const": "CATALOGUE_PACKAGE_CONTAINS_MULTIPLE_SETTLEMENT_UNITS" },
+        "packageIdentitySha256": { "$ref": "#/$defs/sha256" },
+        "declaredUnitCount": { "type": "integer" },
+        "frozenBeforeSelection": { "const": true }
+      },
+      "additionalProperties": false
+    },
+    "packageEquivalenceRelation": {
+      "type": "object",
+      "required": ["relationId", "relationType", "leftPackageIdentitySha256", "rightPackageIdentitySha256", "frozenBeforeSelection"],
+      "properties": {
+        "relationId": { "type": "string", "pattern": "^PEQ-[0-9a-f]{24}$" },
+        "relationType": { "enum": ["EQUIVALENT_EDITION", "CATALOGUED_DERIVATIVE"] },
+        "leftPackageIdentitySha256": { "$ref": "#/$defs/sha256" },
+        "rightPackageIdentitySha256": { "$ref": "#/$defs/sha256" },
+        "frozenBeforeSelection": { "const": true }
+      },
+      "additionalProperties": false
+    },
+    "leakageCluster": {
+      "type": "object",
+      "required": ["clusterId", "membershipSha256", "memberCount", "memberStableTownIds", "relationKinds", "frozenBeforeSelection"],
+      "properties": {
+        "clusterId": { "type": "string", "pattern": "^LKG-[0-9a-f]{24}$" },
+        "membershipSha256": { "$ref": "#/$defs/sha256" },
+        "memberCount": { "type": "integer" },
+        "memberStableTownIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "relationKinds": { "type": "array", "uniqueItems": true, "items": { "enum": ["SHARED_CATALOGUE_PACKAGE", "EQUIVALENT_EDITION", "CATALOGUED_DERIVATIVE"] } },
+        "frozenBeforeSelection": { "const": true }
+      },
+      "additionalProperties": false
+    },
+    "leakageClusterRef": {
+      "type": "object",
+      "required": ["clusterId", "membershipSha256", "memberCount"],
+      "properties": {
+        "clusterId": { "type": "string", "pattern": "^LKG-[0-9a-f]{24}$" },
+        "membershipSha256": { "$ref": "#/$defs/sha256" },
+        "memberCount": { "type": "integer" }
+      },
+      "additionalProperties": false
+    },
+    "metadataSource": {
+      "type": "object",
+      "required": ["sourceId", "url", "publisher", "rights"],
+      "properties": {
+        "sourceId": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "format": "uri" },
+        "publisher": { "type": "string", "minLength": 1 },
+        "rights": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    }
+  }
+}

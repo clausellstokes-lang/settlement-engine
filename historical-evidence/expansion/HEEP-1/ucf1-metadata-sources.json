@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "UCF1-METADATA-SOURCES-1.0.0",
+  "scope": "General program and authority metadata endpoints only; no candidate-level URLs",
+  "sources": [
+    {
+      "sourceId": "UCHICAGO_EHTA",
+      "publisher": "University of Chicago Library",
+      "url": "https://www.lib.uchicago.edu/e/collections/maps/Hist_Towns_Atlas.html",
+      "rightsStatus": "RIGHTS_UNRESOLVED"
+    },
+    {
+      "sourceId": "EHTA_METHOD",
+      "publisher": "International Commission for the History of Towns",
+      "url": "https://www.historiaurbium.org/activities/historic-towns-atlases/",
+      "rightsStatus": "RIGHTS_UNRESOLVED"
+    },
+    {
+      "sourceId": "LIBRIS",
+      "publisher": "National Library of Sweden",
+      "url": "https://libris.kb.se/xsearch?query=Medeltidsstaden&format=json&n=200",
+      "rightsStatus": "RIGHTS_UNRESOLVED"
+    },
+    {
+      "sourceId": "RAA_MEDIEVAL",
+      "publisher": "Swedish National Heritage Board",
+      "url": "https://www.raa.se/nyheter/2024/02/medeltida-stader-i-sverige-nu-kan-du-lattare-lara-dig-mer/",
+      "rightsStatus": "RIGHTS_UNRESOLVED"
+    },
+    {
+      "sourceId": "NORWAY_MEDIEVAL",
+      "publisher": "Norwegian Directorate for Cultural Heritage",
+      "url": "https://www.riksantikvaren.no/veileder/forvaltning-av-middelalderbyene/",
+      "rightsStatus": "RIGHTS_UNRESOLVED"
+    },
+    {
+      "sourceId": "HE_SCHEDULE",
+      "publisher": "UK Ministry of Housing, Communities and Local Government / Historic England",
+      "url": "https://www.planning.data.gov.uk/dataset/scheduled-monument",
+      "rightsStatus": "OPEN_GOVERNMENT_LICENCE"
+    },
+    {
+      "sourceId": "UNESCO_WHC",
+      "publisher": "UNESCO World Heritage Centre",
+      "url": "https://whc.unesco.org/en/list/",
+      "rightsStatus": "RIGHTS_UNRESOLVED"
+    },
+    {
+      "sourceId": "COMMONS_BRAUN",
+      "publisher": "Wikimedia Commons catalogue; source scans held by named institutions",
+      "url": "https://commons.wikimedia.org/wiki/Category:Braun_%26_Hogenberg",
+      "rightsStatus": "ITEM_LEVEL_REVIEW_REQUIRED"
+    },
+    {
+      "sourceId": "COMMONS_MERIAN",
+      "publisher": "Wikimedia Commons catalogue; source scans held by named institutions",
+      "url": "https://commons.wikimedia.org/wiki/Category:Topographia_Germaniae",
+      "rightsStatus": "ITEM_LEVEL_REVIEW_REQUIRED"
+    },
+    {
+      "sourceId": "COMMONS_BLAEU",
+      "publisher": "Rijksmuseum / Wikimedia Commons catalogue",
+      "url": "https://commons.wikimedia.org/w/api.php",
+      "rightsStatus": "ITEM_LEVEL_REVIEW_REQUIRED"
+    },
+    {
+      "sourceId": "WIKIDATA",
+      "publisher": "Wikimedia Foundation",
+      "url": "https://query.wikidata.org/sparql",
+      "rightsStatus": "CC0_METADATA"
+    },
+    {
+      "sourceId": "UN_LANDLOCKED",
+      "publisher": "United Nations",
+      "url": "https://www.un.org/ohrlls/content/list-llldcs",
+      "rightsStatus": "FACT_METADATA_ONLY"
+    }
+  ]
+}

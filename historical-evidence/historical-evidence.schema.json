@@ -1,0 +1,356 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://settlementforge.local/schema/historical-urban-evidence-v1.json",
+  "title": "SettlementForge historical urbanism evidence registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["registryVersion", "researchWaveId", "capturedAt", "records"],
+  "properties": {
+    "registryVersion": { "const": 1 },
+    "researchWaveId": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "capturedAt": { "type": "string", "format": "date" },
+    "records": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/record" }
+    }
+  },
+  "$defs": {
+    "nonEmptyString": { "type": "string", "minLength": 1 },
+    "artifactHashRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifactId", "contentHash"],
+      "properties": {
+        "artifactId": { "$ref": "#/$defs/nonEmptyString" },
+        "contentHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "measureQ": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["valueQ", "unitId"],
+      "properties": {
+        "valueQ": { "type": "integer", "minimum": 0 },
+        "unitId": { "$ref": "#/$defs/nonEmptyString" }
+      }
+    },
+    "rights": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode"],
+          "properties": {
+            "mode": { "const": "CITATION_ONLY" },
+            "note": { "$ref": "#/$defs/nonEmptyString" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode"],
+          "properties": {
+            "mode": { "const": "FACT_METADATA_ONLY" },
+            "note": { "$ref": "#/$defs/nonEmptyString" },
+            "termsRef": { "$ref": "#/$defs/artifactHashRef" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "mode", "licenseId", "licenseUrl", "termsRef",
+            "allowedDerivativeScope", "verifiedAt"
+          ],
+          "properties": {
+            "mode": { "const": "OPEN_DERIVED_DATA" },
+            "licenseId": { "$ref": "#/$defs/nonEmptyString" },
+            "licenseUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
+            "licenseVersion": { "$ref": "#/$defs/nonEmptyString" },
+            "termsRef": { "$ref": "#/$defs/artifactHashRef" },
+            "allowedDerivativeScope": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "enum": [
+                  "MEASURED_FACTS", "DERIVED_NETWORK", "DERIVED_GEOMETRY", "SOURCE_GEOMETRY"
+                ]
+              }
+            },
+            "verifiedAt": { "type": "string", "format": "date" },
+            "note": { "$ref": "#/$defs/nonEmptyString" },
+            "geometryPayloadRef": { "$ref": "#/$defs/artifactHashRef" }
+          }
+        }
+      ]
+    },
+    "coverage": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "description", "omissions", "absenceIsEvidence"],
+          "properties": {
+            "kind": { "const": "TEXTUAL_SCOPE" },
+            "description": { "$ref": "#/$defs/nonEmptyString" },
+            "omissions": { "type": "array", "items": { "$ref": "#/$defs/nonEmptyString" } },
+            "absenceIsEvidence": { "const": false }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind", "maskRef", "purpose", "horizontalError", "omissions", "absenceIsEvidence"
+          ],
+          "properties": {
+            "kind": { "const": "SPATIAL_MASK" },
+            "maskRef": { "$ref": "#/$defs/artifactHashRef" },
+            "purpose": {
+              "enum": [
+                "FEATURE_SEARCH", "ARCHAEOLOGICAL_COVERAGE", "PLAN_COVERAGE",
+                "MEASUREMENT_ELIGIBILITY"
+              ]
+            },
+            "horizontalError": { "$ref": "#/$defs/measureQ" },
+            "omissions": { "type": "array", "items": { "$ref": "#/$defs/nonEmptyString" } },
+            "absenceIsEvidence": { "const": false }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind", "maskRef", "purpose", "horizontalError", "omissions", "absenceIsEvidence",
+            "eligibleSearchAreaRef", "containmentProofRef", "absenceJustification"
+          ],
+          "properties": {
+            "kind": { "const": "SPATIAL_MASK" },
+            "maskRef": { "$ref": "#/$defs/artifactHashRef" },
+            "purpose": {
+              "enum": [
+                "FEATURE_SEARCH", "ARCHAEOLOGICAL_COVERAGE", "PLAN_COVERAGE",
+                "MEASUREMENT_ELIGIBILITY"
+              ]
+            },
+            "horizontalError": { "$ref": "#/$defs/measureQ" },
+            "omissions": { "type": "array", "items": { "$ref": "#/$defs/nonEmptyString" } },
+            "absenceIsEvidence": { "const": true },
+            "eligibleSearchAreaRef": { "$ref": "#/$defs/artifactHashRef" },
+            "containmentProofRef": { "$ref": "#/$defs/artifactHashRef" },
+            "absenceJustification": { "$ref": "#/$defs/nonEmptyString" }
+          }
+        }
+      ]
+    },
+    "yearRange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label"],
+      "properties": {
+        "fromYear": { "type": "integer", "minimum": -10000, "maximum": 3000 },
+        "toYear": { "type": "integer", "minimum": -10000, "maximum": 3000 },
+        "label": { "$ref": "#/$defs/nonEmptyString" }
+      }
+    },
+    "certainty": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["aspect", "level", "basis"],
+      "properties": {
+        "aspect": {
+          "enum": ["EXISTENCE", "ALIGNMENT", "EXTENT", "DATE", "FUNCTION", "MATERIAL"]
+        },
+        "level": {
+          "enum": ["OBSERVED_EXISTING", "CERTAIN", "LIKELY", "HYPOTHETICAL", "UNKNOWN"]
+        },
+        "basis": { "$ref": "#/$defs/nonEmptyString" }
+      }
+    },
+    "georeference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["transform", "groundControlPointCount"],
+      "properties": {
+        "crs": { "$ref": "#/$defs/nonEmptyString" },
+        "transform": { "enum": ["AFFINE", "HELMERT", "OTHER_DECLARED"] },
+        "groundControlPointCount": { "type": "integer", "minimum": 3 },
+        "rmsError": { "type": "number", "minimum": 0 },
+        "errorUnit": { "$ref": "#/$defs/nonEmptyString" }
+      }
+    },
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "recordVersion", "recordId", "place", "representedPeriod", "source", "claim",
+        "certainty", "coverage", "allowedUses", "prohibitedUses"
+      ],
+      "properties": {
+        "recordVersion": { "const": 1 },
+        "recordId": { "type": "string", "pattern": "^HE-[A-Z0-9-]+$" },
+        "place": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "polityOrRegion", "atlasProgramId"],
+          "properties": {
+            "name": { "$ref": "#/$defs/nonEmptyString" },
+            "polityOrRegion": { "$ref": "#/$defs/nonEmptyString" },
+            "atlasProgramId": { "type": "string", "pattern": "^[a-z0-9-]+$" }
+          }
+        },
+        "representedPeriod": { "$ref": "#/$defs/yearRange" },
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "publicationId", "publisher", "url", "accessedAt", "role", "scale", "legend", "geometryLineage",
+            "planimetricQuality", "editorialState", "rights"
+          ],
+          "properties": {
+            "publicationId": { "$ref": "#/$defs/nonEmptyString" },
+            "publisher": { "$ref": "#/$defs/nonEmptyString" },
+            "url": { "type": "string", "format": "uri", "pattern": "^https://" },
+            "accessedAt": { "type": "string", "format": "date" },
+            "sourceDate": { "$ref": "#/$defs/nonEmptyString" },
+            "baseMapDate": { "$ref": "#/$defs/nonEmptyString" },
+            "role": {
+              "enum": [
+                "BASE_CADASTRE", "HISTORIC_PRIMARY_PLAN", "HISTORIC_VIEW", "ARCHAEOLOGY",
+                "WRITTEN_GAZETTEER", "INTERPRETIVE_RECONSTRUCTION", "THEMATIC_ANALYSIS"
+              ]
+            },
+            "scale": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["kind", "denominator"],
+                  "properties": {
+                    "kind": { "const": "DECLARED" },
+                    "denominator": { "type": "integer", "minimum": 1 }
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["kind", "reason"],
+                  "properties": {
+                    "kind": { "const": "NOT_APPLICABLE" },
+                    "reason": { "$ref": "#/$defs/nonEmptyString" }
+                  }
+                }
+              ]
+            },
+            "legend": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["kind", "ref"],
+                  "properties": {
+                    "kind": { "const": "DECLARED" },
+                    "ref": { "$ref": "#/$defs/nonEmptyString" }
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["kind", "reason"],
+                  "properties": {
+                    "kind": { "const": "NOT_APPLICABLE" },
+                    "reason": { "$ref": "#/$defs/nonEmptyString" }
+                  }
+                }
+              ]
+            },
+            "geometryLineage": {
+              "enum": [
+                "ORIGINAL_SOURCE", "REDRAWN_SOURCE", "GEOREFERENCED_SOURCE",
+                "INTERPRETIVE_ONLY", "NO_GEOMETRY"
+              ]
+            },
+            "planimetricQuality": {
+              "enum": [
+                "SURVEYED", "GEOREFERENCED_CORRECTED", "SCHEMATIC",
+                "OBLIQUE_OR_DISTORTED", "UNKNOWN"
+              ]
+            },
+            "editorialState": {
+              "enum": ["ORIGINAL_SOURCE_STATE", "EDITORIALLY_SUPPLEMENTED", "COMPOSITE"]
+            },
+            "georeference": { "$ref": "#/$defs/georeference" },
+            "sheetOrPage": { "$ref": "#/$defs/nonEmptyString" },
+            "rights": { "$ref": "#/$defs/rights" }
+          }
+        },
+        "claim": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["statement", "mechanismIds", "evidenceMode", "geometryStatus"],
+          "properties": {
+            "statement": { "$ref": "#/$defs/nonEmptyString" },
+            "mechanismIds": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": { "type": "string", "pattern": "^[a-z]+(?:[.-][a-z0-9]+)+$" }
+            },
+            "evidenceMode": {
+              "enum": [
+                "DIRECTLY_DEPICTED", "TEXT_ASSERTED", "SCHOLARLY_INTERPRETED", "REVIEW_INFERENCE"
+              ]
+            },
+            "geometryStatus": {
+              "enum": ["NONE", "SYMBOLIC", "APPROXIMATE", "SOURCE_MEASURED"]
+            }
+          }
+        },
+        "certainty": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/certainty" }
+        },
+        "coverage": { "$ref": "#/$defs/coverage" },
+        "corroboratingRecordIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^HE-[A-Z0-9-]+$" }
+        },
+        "cohort": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["cohortId", "inclusionRuleVersion", "eligibleForPrevalence"],
+          "properties": {
+            "cohortId": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+            "inclusionRuleVersion": { "type": "integer", "minimum": 1 },
+            "eligibleForPrevalence": { "type": "boolean" }
+          }
+        },
+        "allowedUses": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "POSSIBILITY_WITNESS", "MECHANISM_DESIGN", "COUNTEREXAMPLE",
+              "COHORT_STATISTIC", "VALIDATION_CASE"
+            ]
+          }
+        },
+        "prohibitedUses": {
+          "type": "array",
+          "minItems": 4,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE",
+              "UNREGISTERED_PREVALENCE_PRIOR"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
