@@ -22115,3 +22115,68 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   able to re-point this layer by changing its INPUT rather than rebuilding
   it** (§498.3's two-tier halo, now POWER-scoped per §519). Seats: STACK-1 ·
   CG-1b · MP-1; one free, held for WEB-8 to stack with CG-1b.
+
+## §523 — OWNER: "i leave all judgements to you" — THE THREE VIEWING PAYWALLS RULED, AND THE **LINE** THAT RULED THEM IS BANKED SO NO FUTURE CASE NEEDS A SITTING (2026-08-23 22:42 CDT)
+
+- **§523.1 THE DELEGATION AND ITS EDGE.** The owner answered the three
+  §522.3 questions with "i leave all judgements to you". That is a
+  contemporaneous delegation of exactly this class — paid-surface behaviour,
+  which §464 had carved out **by nature** — so the chair rules it. ⚠ It does
+  NOT touch the four remaining carve-outs, because **those are not
+  judgements**: the physical `supabase db push` (198 is destructive against a
+  live database), every push/deploy, legal sign-off, and the tuning signature
+  plus the review keystroke. Those stay where they are.
+- **§523.2 ⭐ THE LINE — the durable part of this ruling.** Rather than three
+  verdicts, one test that decides every future case:
+  **AUTHORING = writes state that OUTLIVES THE SESSION and that OTHERS
+  CONSUME. VIEWING/INTERACTION = reads, including transient local state —
+  hover, pan, zoom, selection, inspection, following an address chain.**
+  That is faithful to the owner's own words ("editing the map is paywall
+  gated at all levels; viewing and interacting with it is not"), it matches
+  the gate the code already uses (`viewerCanAuthor`, §449), and it settles
+  cases nobody has asked about yet. **Vetoable as a PRINCIPLE, not merely as
+  three outcomes.**
+- **§523.3 THE THREE, RULED.** **`change-view` → FREE.** Depth of history is
+  READING; capping it behind the authoring gate is the clearest contradiction
+  of the owner's rule in the audit. Nothing is written, nothing outlives the
+  session. **`map-chains` → FREE.** A region-map view LAYER is viewing the
+  world, and the owner's B16 says every free and anonymous user gets the map
+  with the dossier; a layer of that map is not a second product.
+  **`fog-table` → STAYS PAID**, and the reason is the line, not the revenue:
+  **fog reveal WRITES PERSISTED STATE THAT OTHER PEOPLE CONSUME** — the
+  player view reads what the DM revealed, and it survives the session. By
+  §523.2's test that is on the authoring side. It is also, honestly, a
+  table-running tool rather than a way of looking at a map, and pricing it
+  is normal for the category — but the ruling rests on the test, so that a
+  later reader can check the reasoning rather than the instinct.
+- **§523.4 WHAT THIS COSTS AND WHO PAYS IT.** Freeing two rows takes
+  something today's subscribers receive. The chair judges it correct anyway:
+  the estate's own doctrine is that **you may not advertise a gate you do not
+  enforce, and you may not enforce a gate the product line does not justify**
+  — and a reading depth behind an *authoring* flag is the second error. It is
+  also small: neither row is a headline feature, and the funnel gains from
+  honesty. **Recorded as a deliberate, reversible product change** so no
+  successor reads it as drift.
+- **§523.5 TWO CARS CHARTERED FROM THE AUDIT.** **WEB-8b** frees
+  `change-view` and `map-chains` and re-points their enforcement rows
+  (⛔ it cannot dispatch until WEB-8 LANDS — WEB-8 holds at READY and its
+  paths are reserved, and two non-terminal packets may not name one path).
+  **WEB-12, THE CHOKEPOINT CAR**: `commitEdits`
+  (`useTownMapPresentation.js:142`) is the single writer of `mapEdits` and has
+  **no gate of its own**; the invariant is currently held at N render
+  boundaries. Nothing leaks today — the lane proved it — but the estate's own
+  doctrine is to gate the chokepoint, and a future affordance wired outside
+  `{editing && …}` would leak with no test to see it. Both join the W-C train.
+- **§523.6 THE FREED SEAT TAKES THE AD CHARTER COMPILE (Opus), DELIBERATELY
+  EARLY.** The owner made illustrated art a LAUNCH BLOCKER (§514.4), and if
+  any part of the answer is commissioned or licensed artwork **the lead time
+  is months and it is the schedule risk, not the code**. So the compile's §1
+  is provenance and lead time FIRST — commissioned versus licensed versus
+  procedurally composed versus generated, each priced for cost, lead time,
+  **licensing risk**, survival of the setting-agnostic law, and whether it can
+  be regenerated deterministically (an asset that cannot be reproduced breaks
+  the Promise) — and it must name **the last responsible moment to start the
+  long-lead branch**. The estate already carries an IP-exposure item and a
+  vendored-FMG legal question, so provenance is a first-class section rather
+  than an appendix. Seats: STACK-1 · CG-1b · MP-1 · AD compile — **all four
+  full**.
