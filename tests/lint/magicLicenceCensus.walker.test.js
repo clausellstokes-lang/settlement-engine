@@ -72,6 +72,7 @@ import { ARCANE_IDENTITY } from '../../src/domain/arcaneIdentity.js';
 import { createGenerationWorldLaw } from '../../src/generators/generationContext.js';
 import { arcaneInstitutionNameFallback } from '../../src/domain/arcaneInstitutionIdentity.js';
 import { ARCANE_INST_KW, filterServicesForMagic } from '../../src/domain/magicFilter.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 /** Every catalog row as the generator shapes it: `{ category, name, ...entry }`. */
 function catalogRows() {
@@ -385,7 +386,10 @@ describe('MF-CH2a — the magic licence is declared, single-vocabulary and inert
     // word belongs in it — and after TE-CH-6 routed nothing through a new rule, THIS is the
     // surface where the removal is live: names the catalog does not know.
     for (const word of FAITH_WORDS_REMOVED) {
-      expect(ARCANE_INST_KW, word).not.toContain(word);
+      // ANCHORED, not bare: `'wizard'` is a sibling member of the same list, reached through
+      // the same import, so an ARCANE_INST_KW that was renamed, emptied or re-shaped fails the
+      // anchor instead of passing the exclusion. Absence alone would outlive the regression.
+      expectAbsentWithAnchor(ARCANE_INST_KW, word, 'wizard', `faith word: ${word}`);
       expect(ARCANE_INST_KW.some(kw => word.includes(kw)), `${word} via a shorter member`)
         .toBe(false);
     }
