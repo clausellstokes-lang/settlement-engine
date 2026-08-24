@@ -1,0 +1,14 @@
+{
+  "key": "town",
+  "name": "Mahabagh",
+  "tier": "town",
+  "elementCount": 286,
+  "primitiveCount": 4386,
+  "bytes": 395301,
+  "plotFrontage": 4.93,
+  "parcels": 1016,
+  "blocks": 258,
+  "population": 3502,
+  "landform": "riverside",
+  "morphology": "regularized"
+}

@@ -1,0 +1,162 @@
+{
+  "repro_city": {
+    "want": {
+      "probes": 38696,
+      "fronted": 19186,
+      "ratio": 0.4958,
+      "runs": 1709,
+      "meanRunUnits": 11.22,
+      "frontingMasses": 609
+    },
+    "got": {
+      "probes": 38696,
+      "fronted": 19186,
+      "ratio": 0.4958,
+      "runs": 1709,
+      "meanRunUnits": 11.22,
+      "p50RunUnits": 8.02,
+      "p90RunUnits": 23.96,
+      "maxRunUnits": 69.75,
+      "frontingMasses": 609
+    },
+    "same": true
+  },
+  "repro_village": {
+    "want": {
+      "probes": 3948,
+      "fronted": 2576,
+      "ratio": 0.6525,
+      "runs": 176,
+      "meanRunUnits": 14.66,
+      "frontingMasses": 68
+    },
+    "got": {
+      "probes": 3948,
+      "fronted": 2576,
+      "ratio": 0.6525,
+      "runs": 176,
+      "meanRunUnits": 14.66,
+      "p50RunUnits": 10.55,
+      "p90RunUnits": 35.04,
+      "maxRunUnits": 62.15,
+      "frontingMasses": 68
+    },
+    "same": true
+  },
+  "fusion": {
+    "base": {
+      "probes": 38706,
+      "fronted": 19208,
+      "ratio": 0.4963,
+      "runs": 1714,
+      "meanRunUnits": 11.21,
+      "p50RunUnits": 8.01,
+      "p90RunUnits": 23.94,
+      "maxRunUnits": 69.75,
+      "frontingMasses": 611
+    },
+    "fused": {
+      "probes": 38706,
+      "fronted": 19208,
+      "ratio": 0.4963,
+      "runs": 1385,
+      "meanRunUnits": 13.87,
+      "p50RunUnits": 10.03,
+      "p90RunUnits": 30.18,
+      "maxRunUnits": 69.75,
+      "frontingMasses": 362
+    }
+  },
+  "shatter": {
+    "shattered": {
+      "probes": 36063,
+      "fronted": 12102,
+      "ratio": 0.3356,
+      "runs": 2029,
+      "meanRunUnits": 5.96,
+      "p50RunUnits": 5.03,
+      "p90RunUnits": 10.16,
+      "maxRunUnits": 53.67,
+      "frontingMasses": 1085
+    },
+    "shatteredF3": {
+      "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
+      "enclosureFormed": false,
+      "floodEnclosureFormed": false,
+      "enclosedCells": 0,
+      "gateBridgeUnits": 18,
+      "circuitFromModel": false,
+      "bodiesDrawn": 1997,
+      "bodiesAttributed": 1995,
+      "intramuralBodies": 1995,
+      "solitaryBodies": 687,
+      "freestandingFraction": 0.3444,
+      "fusedComponents": 1081,
+      "bodiesPerFusedComponent": 1.87
+    },
+    "intact": {
+      "probes": 38706,
+      "fronted": 19208,
+      "ratio": 0.4963,
+      "runs": 1714,
+      "meanRunUnits": 11.21,
+      "p50RunUnits": 8.01,
+      "p90RunUnits": 23.94,
+      "maxRunUnits": 69.75,
+      "frontingMasses": 611
+    },
+    "intactF3": {
+      "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
+      "enclosureFormed": false,
+      "floodEnclosureFormed": false,
+      "enclosedCells": 0,
+      "gateBridgeUnits": 18,
+      "circuitFromModel": false,
+      "bodiesDrawn": 1997,
+      "bodiesAttributed": 1995,
+      "intramuralBodies": 1995,
+      "solitaryBodies": 136,
+      "freestandingFraction": 0.0682,
+      "fusedComponents": 394,
+      "bodiesPerFusedComponent": 5.16
+    }
+  },
+  "liveness": [
+    [
+      "reproduces REG-0 city base",
+      true
+    ],
+    [
+      "reproduces REG-0 village base",
+      true
+    ],
+    [
+      "fusion cuts the run count",
+      true
+    ],
+    [
+      "fusion lengthens the mean run",
+      true
+    ],
+    [
+      "fusion leaves the ratio near-invariant",
+      true
+    ],
+    [
+      "fuse=0 is identical to the base",
+      true
+    ],
+    [
+      "shatter raises the run count",
+      true
+    ],
+    [
+      "shatter lowers the ratio",
+      true
+    ],
+    [
+      "shatter raises the freestanding fraction",
+      true
+    ]
+  ]
+}

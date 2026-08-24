@@ -1,0 +1,422 @@
+{
+  "AFTER-city": {
+    "landmarks": {
+      "mode": "landmarks",
+      "massesFound": 93,
+      "measured": 4,
+      "fabricPx": 156613,
+      "fabricMean": 78.54,
+      "fabricSD": 28.32,
+      "groupMeanSalience": 0.422,
+      "groupFloor": 1.5,
+      "eachFloor": 1,
+      "rows": [
+        {
+          "instrument": "landmark.salience",
+          "value": 0.6694,
+          "denominator": "SD of the 156613 FABRIC px (28.32 luminance units); mass sample = 653 px at 1100²",
+          "band": ">= 1 fabric SD",
+          "pass": false,
+          "anchor": "cat:multiple_courthouses",
+          "areaUnits": 507.31,
+          "massPx": 653,
+          "massMean": 59.58,
+          "fabricMean": 78.54,
+          "fabricSD": 28.32
+        },
+        {
+          "instrument": "landmark.salience",
+          "value": 0.1012,
+          "denominator": "SD of the 156613 FABRIC px (28.32 luminance units); mass sample = 600 px at 1100²",
+          "band": ">= 1 fabric SD",
+          "pass": false,
+          "anchor": "cat:cartographer_s_guild",
+          "areaUnits": 469.51,
+          "massPx": 600,
+          "massMean": 81.4,
+          "fabricMean": 78.54,
+          "fabricSD": 28.32
+        },
+        {
+          "instrument": "landmark.salience",
+          "value": 0.3986,
+          "denominator": "SD of the 156613 FABRIC px (28.32 luminance units); mass sample = 334 px at 1100²",
+          "band": ">= 1 fabric SD",
+          "pass": false,
+          "anchor": "",
+          "areaUnits": 256.77,
+          "massPx": 334,
+          "massMean": 67.25,
+          "fabricMean": 78.54,
+          "fabricSD": 28.32
+        },
+        {
+          "instrument": "landmark.salience",
+          "value": 0.5187,
+          "denominator": "SD of the 156613 FABRIC px (28.32 luminance units); mass sample = 329 px at 1100²",
+          "band": ">= 1 fabric SD",
+          "pass": false,
+          "anchor": "",
+          "areaUnits": 250.27,
+          "massPx": 329,
+          "massMean": 63.85,
+          "fabricMean": 78.54,
+          "fabricSD": 28.32
+        }
+      ],
+      "pass": false
+    },
+    "decoys": {
+      "mode": "DECOY CONTROL",
+      "massesFound": 93,
+      "measured": 4,
+      "fabricPx": 156613,
+      "fabricMean": 78.54,
+      "fabricSD": 28.32,
+      "groupMeanSalience": 0.8085,
+      "groupFloor": 1.5,
+      "eachFloor": 1,
+      "rows": [
+        {
+          "instrument": "landmark.salience",
+          "value": 1.2707,
+          "denominator": "SD of the 156613 FABRIC px (28.32 luminance units); mass sample = 653 px at 1100²",
+          "band": ">= 1 fabric SD",
+          "pass": true,
+          "anchor": "DECOY@135,251",
+          "areaUnits": 507.31,
+          "massPx": 653,
+          "massMean": 114.52,
+          "fabricMean": 78.54,
+          "fabricSD": 28.32
+        },
+        {
+          "instrument": "landmark.salience",
+          "value": 1.8805,
+          "denominator": "SD of the 156613 FABRIC px (28.32 luminance units); mass sample = 599 px at 1100²",
+          "band": ">= 1 fabric SD",
+          "pass": true,
+          "anchor": "DECOY@267,498",
+          "areaUnits": 469.51,
+          "massPx": 599,
+          "massMean": 131.79,
+          "fabricMean": 78.54,
+          "fabricSD": 28.32
+        },
+        {
+          "instrument": "landmark.salience",
+          "value": 0.041,
+          "denominator": "SD of the 156613 FABRIC px (28.32 luminance units); mass sample = 333 px at 1100²",
+          "band": ">= 1 fabric SD",
+          "pass": false,
+          "anchor": "DECOY@604,499",
+          "areaUnits": 256.77,
+          "massPx": 333,
+          "massMean": 77.37,
+          "fabricMean": 78.54,
+          "fabricSD": 28.32
+        },
+        {
+          "instrument": "landmark.salience",
+          "value": 0.0419,
+          "denominator": "SD of the 156613 FABRIC px (28.32 luminance units); mass sample = 328 px at 1100²",
+          "band": ">= 1 fabric SD",
+          "pass": false,
+          "anchor": "DECOY@741,487",
+          "areaUnits": 250.27,
+          "massPx": 328,
+          "massMean": 77.35,
+          "fabricMean": 78.54,
+          "fabricSD": 28.32
+        }
+      ],
+      "pass": false
+    }
+  },
+  "BEFORE-city": {
+    "landmarks": {
+      "mode": "landmarks",
+      "massesFound": 93,
+      "measured": 4,
+      "fabricPx": 156613,
+      "fabricMean": 110.41,
+      "fabricSD": 37.42,
+      "groupMeanSalience": 1.0047,
+      "groupFloor": 1.5,
+      "eachFloor": 1,
+      "rows": [
+        {
+          "instrument": "landmark.salience",
+          "value": 0.8426,
+          "denominator": "SD of the 156613 FABRIC px (37.42 luminance units); mass sample = 653 px at 1100²",
+          "band": ">= 1 fabric SD",
+          "pass": false,
+          "anchor": "cat:multiple_courthouses",
+          "areaUnits": 507.31,
+          "massPx": 653,
+          "massMean": 78.88,
+          "fabricMean": 110.41,
+          "fabricSD": 37.42
+        },
+        {
+          "instrument": "landmark.salience",
+          "value": 0.2219,
+          "denominator": "SD of the 156613 FABRIC px (37.42 luminance units); mass sample = 600 px at 1100²",
+          "band": ">= 1 fabric SD",
+          "pass": false,
+          "anchor": "cat:cartographer_s_guild",
+          "areaUnits": 469.51,
+          "massPx": 600,
+          "massMean": 118.71,
+          "fabricMean": 110.41,
+          "fabricSD": 37.42
+        },
+        {
+          "instrument": "landmark.salience",
+          "value": 2.5509,
+          "denominator": "SD of the 156613 FABRIC px (37.42 luminance units); mass sample = 334 px at 1100²",
+          "band": ">= 1 fabric SD",
+          "pass": true,
+          "anchor": "",
+          "areaUnits": 256.77,
+          "massPx": 334,
+          "massMean": 205.87,
+          "fabricMean": 110.41,
+          "fabricSD": 37.42
+        },
+        {
+          "instrument": "landmark.salience",
+          "value": 0.4032,
+          "denominator": "SD of the 156613 FABRIC px (37.42 luminance units); mass sample = 329 px at 1100²",
+          "band": ">= 1 fabric SD",
+          "pass": false,
+          "anchor": "",
+          "areaUnits": 250.27,
+          "massPx": 329,
+          "massMean": 125.5,
+          "fabricMean": 110.41,
+          "fabricSD": 37.42
+        }
+      ],
+      "pass": false
+    },
+    "decoys": {
+      "mode": "DECOY CONTROL",
+      "massesFound": 93,
+      "measured": 4,
+      "fabricPx": 156613,
+      "fabricMean": 110.41,
+      "fabricSD": 37.42,
+      "groupMeanSalience": 0.7339,
+      "groupFloor": 1.5,
+      "eachFloor": 1,
+      "rows": [
+        {
+          "instrument": "landmark.salience",
+          "value": 0.9,
+          "denominator": "SD of the 156613 FABRIC px (37.42 luminance units); mass sample = 653 px at 1100²",
+          "band": ">= 1 fabric SD",
+          "pass": false,
+          "anchor": "DECOY@135,251",
+          "areaUnits": 507.31,
+          "massPx": 653,
+          "massMean": 144.09,
+          "fabricMean": 110.41,
+          "fabricSD": 37.42
+        },
+        {
+          "instrument": "landmark.salience",
+          "value": 1.2353,
+          "denominator": "SD of the 156613 FABRIC px (37.42 luminance units); mass sample = 599 px at 1100²",
+          "band": ">= 1 fabric SD",
+          "pass": true,
+          "anchor": "DECOY@267,498",
+          "areaUnits": 469.51,
+          "massPx": 599,
+          "massMean": 156.64,
+          "fabricMean": 110.41,
+          "fabricSD": 37.42
+        },
+        {
+          "instrument": "landmark.salience",
+          "value": 0.3668,
+          "denominator": "SD of the 156613 FABRIC px (37.42 luminance units); mass sample = 333 px at 1100²",
+          "band": ">= 1 fabric SD",
+          "pass": false,
+          "anchor": "DECOY@604,499",
+          "areaUnits": 256.77,
+          "massPx": 333,
+          "massMean": 124.14,
+          "fabricMean": 110.41,
+          "fabricSD": 37.42
+        },
+        {
+          "instrument": "landmark.salience",
+          "value": 0.4333,
+          "denominator": "SD of the 156613 FABRIC px (37.42 luminance units); mass sample = 328 px at 1100²",
+          "band": ">= 1 fabric SD",
+          "pass": false,
+          "anchor": "DECOY@741,487",
+          "areaUnits": 250.27,
+          "massPx": 328,
+          "massMean": 126.62,
+          "fabricMean": 110.41,
+          "fabricSD": 37.42
+        }
+      ],
+      "pass": false
+    }
+  },
+  "CTRL-loud-landmark": {
+    "landmarks": {
+      "mode": "landmarks",
+      "massesFound": 93,
+      "measured": 4,
+      "fabricPx": 156613,
+      "fabricMean": 110.32,
+      "fabricSD": 37.5,
+      "groupMeanSalience": 2.0847,
+      "groupFloor": 1.5,
+      "eachFloor": 1,
+      "rows": [
+        {
+          "instrument": "landmark.salience",
+          "value": 2.1886,
+          "denominator": "SD of the 156613 FABRIC px (37.5 luminance units); mass sample = 653 px at 1100²",
+          "band": ">= 1 fabric SD",
+          "pass": true,
+          "anchor": "cat:multiple_courthouses",
+          "areaUnits": 507.31,
+          "massPx": 653,
+          "massMean": 28.24,
+          "fabricMean": 110.32,
+          "fabricSD": 37.5
+        },
+        {
+          "instrument": "landmark.salience",
+          "value": 2.1752,
+          "denominator": "SD of the 156613 FABRIC px (37.5 luminance units); mass sample = 600 px at 1100²",
+          "band": ">= 1 fabric SD",
+          "pass": true,
+          "anchor": "cat:cartographer_s_guild",
+          "areaUnits": 469.51,
+          "massPx": 600,
+          "massMean": 28.74,
+          "fabricMean": 110.32,
+          "fabricSD": 37.5
+        },
+        {
+          "instrument": "landmark.salience",
+          "value": 1.8996,
+          "denominator": "SD of the 156613 FABRIC px (37.5 luminance units); mass sample = 334 px at 1100²",
+          "band": ">= 1 fabric SD",
+          "pass": true,
+          "anchor": "",
+          "areaUnits": 256.77,
+          "massPx": 334,
+          "massMean": 39.08,
+          "fabricMean": 110.32,
+          "fabricSD": 37.5
+        },
+        {
+          "instrument": "landmark.salience",
+          "value": 2.0755,
+          "denominator": "SD of the 156613 FABRIC px (37.5 luminance units); mass sample = 329 px at 1100²",
+          "band": ">= 1 fabric SD",
+          "pass": true,
+          "anchor": "",
+          "areaUnits": 250.27,
+          "massPx": 329,
+          "massMean": 32.48,
+          "fabricMean": 110.32,
+          "fabricSD": 37.5
+        }
+      ],
+      "pass": true
+    },
+    "decoys": {
+      "mode": "DECOY CONTROL",
+      "massesFound": 93,
+      "measured": 4,
+      "fabricPx": 156613,
+      "fabricMean": 110.32,
+      "fabricSD": 37.5,
+      "groupMeanSalience": 0.7348,
+      "groupFloor": 1.5,
+      "eachFloor": 1,
+      "rows": [
+        {
+          "instrument": "landmark.salience",
+          "value": 0.9006,
+          "denominator": "SD of the 156613 FABRIC px (37.5 luminance units); mass sample = 653 px at 1100²",
+          "band": ">= 1 fabric SD",
+          "pass": false,
+          "anchor": "DECOY@135,251",
+          "areaUnits": 507.31,
+          "massPx": 653,
+          "massMean": 144.09,
+          "fabricMean": 110.32,
+          "fabricSD": 37.5
+        },
+        {
+          "instrument": "landmark.salience",
+          "value": 1.2352,
+          "denominator": "SD of the 156613 FABRIC px (37.5 luminance units); mass sample = 599 px at 1100²",
+          "band": ">= 1 fabric SD",
+          "pass": true,
+          "anchor": "DECOY@267,498",
+          "areaUnits": 469.51,
+          "massPx": 599,
+          "massMean": 156.64,
+          "fabricMean": 110.32,
+          "fabricSD": 37.5
+        },
+        {
+          "instrument": "landmark.salience",
+          "value": 0.3685,
+          "denominator": "SD of the 156613 FABRIC px (37.5 luminance units); mass sample = 333 px at 1100²",
+          "band": ">= 1 fabric SD",
+          "pass": false,
+          "anchor": "DECOY@604,499",
+          "areaUnits": 256.77,
+          "massPx": 333,
+          "massMean": 124.14,
+          "fabricMean": 110.32,
+          "fabricSD": 37.5
+        },
+        {
+          "instrument": "landmark.salience",
+          "value": 0.4349,
+          "denominator": "SD of the 156613 FABRIC px (37.5 luminance units); mass sample = 328 px at 1100²",
+          "band": ">= 1 fabric SD",
+          "pass": false,
+          "anchor": "DECOY@741,487",
+          "areaUnits": 250.27,
+          "massPx": 328,
+          "massMean": 126.62,
+          "fabricMean": 110.32,
+          "fabricSD": 37.5
+        }
+      ],
+      "pass": false
+    }
+  },
+  "liveness": [
+    [
+      "the loud-landmark plate is detected as salient",
+      true
+    ],
+    [
+      "…and more than double its own matched decoys",
+      true
+    ],
+    [
+      "decoys never pass on any plate",
+      true
+    ],
+    [
+      "the decoy sites are all inside the urban envelope",
+      true
+    ]
+  ]
+}

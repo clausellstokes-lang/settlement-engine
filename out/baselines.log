@@ -1,0 +1,11 @@
+  plate BASE-city     squint=PASS contrast=FAIL hue=FAIL landmark=FAIL frontageRatio=0.505 runs=1758→1415
+  plate BASE-village  squint=FAIL contrast=FAIL hue=FAIL landmark=FAIL frontageRatio=0.6525 runs=176→147
+  plate BASE-town     squint=FAIL contrast=FAIL hue=FAIL landmark=FAIL frontageRatio=0.5329 runs=1533→1264
+  plate SPEC-city     squint=PASS contrast=PASS hue=PASS landmark=FAIL frontageRatio=0.505 runs=1758→1415
+  plate SPEC-village  squint=FAIL contrast=FAIL hue=FAIL landmark=FAIL frontageRatio=0.6525 runs=176→147
+  model city          route=PASS (6/6 gates, floor 3.87)  chunking=PASS (6/8 in [5,9])
+  model village       route=PASS (2/2 gates, floor 4.94)  chunking=PASS (2/2 in [2,9])
+  model town          route=PASS (2/2 gates, floor 3.06)  chunking=FAIL (2/6 in [5,9])
+
+BASELINES → /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg-instruments/out/baselines.json  (58.2 KB)
+BASELINES_DONE

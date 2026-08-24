@@ -1,0 +1,283 @@
+{
+  "leaves": [
+    {
+      "key": "city",
+      "name": "Kitaqiao",
+      "tier": "city",
+      "extentTier": "city",
+      "population": 20091,
+      "walls": 2,
+      "parcels": 1487,
+      "landmarks": 52,
+      "straddle": {
+        "walled": true,
+        "ringSource": "closedPolygon",
+        "ringVertices": 26,
+        "districts": 8,
+        "straddling": 3,
+        "worstShare": 0.0214,
+        "rows": [
+          {
+            "districtId": "district.common_residential",
+            "wallSideLabel": "intramural",
+            "samples": 36021,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 36008.79
+          },
+          {
+            "districtId": "district.common_residential~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 5100,
+            "outside": 4991,
+            "shareOutside": 0.9786,
+            "minSide": 0.0214,
+            "straddles": true,
+            "areaUnits": 5090.58
+          },
+          {
+            "districtId": "district.government_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 13681,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 13665.66
+          },
+          {
+            "districtId": "district.mages_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 125793,
+            "outside": 9,
+            "shareOutside": 0.0001,
+            "minSide": 0.0001,
+            "straddles": false,
+            "areaUnits": 125804.08
+          },
+          {
+            "districtId": "district.mages_quarter~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 8279,
+            "outside": 8192,
+            "shareOutside": 0.9895,
+            "minSide": 0.0105,
+            "straddles": true,
+            "areaUnits": 8288.05
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 4463,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 4467.29
+          },
+          {
+            "districtId": "district.shadows_district",
+            "wallSideLabel": "intramural",
+            "samples": 49646,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 49640.54
+          },
+          {
+            "districtId": "district.shadows_district~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 2887,
+            "outside": 2838,
+            "shareOutside": 0.983,
+            "minSide": 0.017,
+            "straddles": true,
+            "areaUnits": 2890.52
+          }
+        ]
+      },
+      "outsideCircuit": {
+        "walled": true,
+        "bodiesTotal": 1544,
+        "helpedForm": 1664,
+        "outside": 0,
+        "shareOutside": 0,
+        "lawfulExtramuralTotal": 45,
+        "lawfulExtramuralInsideSomeHull": 3,
+        "rings": [
+          {
+            "epoch": 2,
+            "kind": "main",
+            "form": "citywall",
+            "halfRing": true,
+            "ringSource": "closedPolygon",
+            "ringScale": 1,
+            "containmentResidualSelfReport": 0,
+            "helpedForm": 1141,
+            "outsideClosed": 0,
+            "outsideOpenPolygon": 0,
+            "shareOutside": 0,
+            "offenders": []
+          },
+          {
+            "epoch": 1,
+            "kind": "old-core",
+            "form": "citywall",
+            "halfRing": true,
+            "ringSource": "closedPolygon",
+            "ringScale": 1,
+            "containmentResidualSelfReport": 0,
+            "helpedForm": 523,
+            "outsideClosed": 0,
+            "outsideOpenPolygon": 12,
+            "shareOutside": 0,
+            "offenders": []
+          }
+        ]
+      },
+      "ms": 5269
+    },
+    {
+      "key": "village",
+      "name": "Mingguan",
+      "tier": "village",
+      "extentTier": "village",
+      "population": 512,
+      "walls": 0,
+      "parcels": 103,
+      "landmarks": 22,
+      "straddle": {
+        "walled": false,
+        "districts": 0,
+        "straddling": 0,
+        "rows": []
+      },
+      "outsideCircuit": {
+        "walled": false,
+        "bodiesTotal": 125,
+        "helpedForm": 0,
+        "outside": 0,
+        "rings": []
+      },
+      "ms": 266
+    },
+    {
+      "key": "town",
+      "name": "Mahabagh",
+      "tier": "town",
+      "extentTier": "town",
+      "population": 3502,
+      "walls": 1,
+      "parcels": 1016,
+      "landmarks": 91,
+      "straddle": {
+        "walled": true,
+        "ringSource": "closedPolygon",
+        "ringVertices": 120,
+        "districts": 6,
+        "straddling": 0,
+        "worstShare": 0.001,
+        "rows": [
+          {
+            "districtId": "district.government_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 19952,
+            "outside": 20,
+            "shareOutside": 0.001,
+            "minSide": 0.001,
+            "straddles": false,
+            "areaUnits": 19938.46
+          },
+          {
+            "districtId": "district.government_quarter~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 678,
+            "outside": 678,
+            "shareOutside": 1,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 680.45
+          },
+          {
+            "districtId": "district.market_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 52301,
+            "outside": 21,
+            "shareOutside": 0.0004,
+            "minSide": 0.0004,
+            "straddles": false,
+            "areaUnits": 52291.19
+          },
+          {
+            "districtId": "district.market_quarter~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 1799,
+            "outside": 1799,
+            "shareOutside": 1,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 1794.36
+          },
+          {
+            "districtId": "district.noxious_trades_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 3101,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 3093.27
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 2188,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 2185.72
+          }
+        ]
+      },
+      "outsideCircuit": {
+        "walled": true,
+        "bodiesTotal": 1107,
+        "helpedForm": 724,
+        "outside": 0,
+        "shareOutside": 0,
+        "lawfulExtramuralTotal": 56,
+        "lawfulExtramuralInsideSomeHull": 3,
+        "rings": [
+          {
+            "epoch": 1,
+            "kind": "main",
+            "form": "palisade",
+            "halfRing": true,
+            "ringSource": "closedPolygon",
+            "ringScale": 1,
+            "containmentResidualSelfReport": 0,
+            "helpedForm": 724,
+            "outsideClosed": 0,
+            "outsideOpenPolygon": 0,
+            "shareOutside": 0,
+            "offenders": []
+          }
+        ]
+      },
+      "ms": 1670
+    }
+  ],
+  "totals": {
+    "leaves": 3,
+    "walledLeaves": 2,
+    "straddleNumerator": 3,
+    "straddleDenominator": 14,
+    "bodiesOutsideNumerator": 0,
+    "bodiesOutsideDenominator": 2388,
+    "drawnBodiesAllLeaves": 2776
+  }
+}

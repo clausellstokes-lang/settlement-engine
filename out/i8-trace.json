@@ -1,0 +1,388 @@
+{
+  "renderFolio": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/w3f-tree/harness/renderFolio.mjs",
+  "rendererLines": 1950,
+  "opClasses": 31,
+  "tableRows": 31,
+  "emittedGroups": [
+    "yards",
+    "fabric",
+    "landmarks",
+    "legend"
+  ],
+  "flushIdsInSource": [
+    "fields",
+    "squares"
+  ],
+  "traced": 28,
+  "driftJustified": 3,
+  "untracedMisses": 0,
+  "misses": [],
+  "staleTableRows": [],
+  "byReference": {
+    "watabou": 10,
+    "ftg": 10,
+    "corpus": 25,
+    "DRIFT": 3
+  },
+  "rows": [
+    {
+      "id": "0",
+      "title": "PAPER, then THE AGED GROUND (chair directive). Flat wash patches at low",
+      "line": 694,
+      "tableName": "PAPER + the aged ground",
+      "trace": [
+        "corpus"
+      ],
+      "why": "the plate ground itself — the corpus's aged paper tone and low-value wash patches",
+      "status": "TRACED"
+    },
+    {
+      "id": "1",
+      "title": "THE OPEN FIELDS (§16) — STRIPS THAT TILE, not patches that float. Batched by",
+      "line": 725,
+      "tableName": "THE OPEN FIELDS — strips that tile",
+      "trace": [
+        "ftg",
+        "corpus"
+      ],
+      "why": "FTG draws cultivated parcels around a settlement; the corpus supplies the strip-furrow dress",
+      "status": "TRACED"
+    },
+    {
+      "id": "2",
+      "title": "TERRACE LINES on the strips that needed them (§161b's visible work in the",
+      "line": 764,
+      "tableName": "TERRACE LINES on the strips",
+      "trace": [
+        "corpus"
+      ],
+      "why": "terraced hillside plates",
+      "status": "TRACED"
+    },
+    {
+      "id": "3",
+      "title": "THE RELIEF PASS (§9.5b) — the land drawn in the era's own marks. All LINES.",
+      "line": 781,
+      "tableName": "THE RELIEF PASS",
+      "trace": [
+        "watabou",
+        "corpus"
+      ],
+      "why": "Watabou draws relief as marks rather than shading; the corpus supplies hachure grammar",
+      "status": "TRACED"
+    },
+    {
+      "id": "4",
+      "title": "TREES — batched into one path of small circles drawn as arc pairs.",
+      "line": 853,
+      "tableName": "TREES",
+      "trace": [
+        "watabou",
+        "ftg"
+      ],
+      "why": "both references draw canopy as small repeated marks",
+      "status": "TRACED"
+    },
+    {
+      "id": "4b",
+      "title": "⭐⭐ §12.3 THE WALK-SCALE RINGS, over the countryside and UNDER the town — a range",
+      "line": 863,
+      "tableName": "THE WALK-SCALE RINGS (§12.3)",
+      "trace": [
+        "DRIFT"
+      ],
+      "why": "NO reference draws a walking-time ring. It is an immersion device of ours; §12.3 owns it. Lawful under L-REG-4 only with this justification on the record, and it is a NAMED CANDIDATE for the register's first subtraction if the judging round finds it reads as an overlay rather than as plate furniture.",
+      "status": "DRIFT_JUSTIFIED"
+    },
+    {
+      "id": "4c",
+      "title": "⭐ §12.5 THE COUNTRYSIDE EVENT MARKS. A dated stone or a camp ground, in calm ink,",
+      "line": 878,
+      "tableName": "THE COUNTRYSIDE EVENT MARKS (§12.5)",
+      "trace": [
+        "DRIFT"
+      ],
+      "why": "a dated stone or camp ground marking a real event has no analogue in a fixed picture — this is the truth layer becoming ink, and it is the engine's differentiator rather than a borrowing. Register-side it must READ as period map furniture; that is the judging question, not whether it traces.",
+      "status": "DRIFT_JUSTIFIED"
+    },
+    {
+      "id": "5",
+      "title": "THE WATER BODY (§5.0b at its mode, §9.5b's \"a fjord town must LOOK like a fjord",
+      "line": 901,
+      "tableName": "THE WATER BODY",
+      "trace": [
+        "watabou",
+        "ftg",
+        "corpus"
+      ],
+      "why": "all three; the corpus supplies bank and current-stroke dress",
+      "status": "TRACED"
+    },
+    {
+      "id": "6",
+      "title": "THE URBAN GROUND (§181.3a — AND IT IS NO LONGER THE STREET TONE).",
+      "line": 929,
+      "tableName": "THE URBAN GROUND",
+      "trace": [
+        "corpus"
+      ],
+      "why": "§2.2's warm ground the town sits on — a corpus plate convention",
+      "status": "TRACED"
+    },
+    {
+      "id": "6c",
+      "title": "§250.5 · THE FILLED-DITCH GARDENS — a curving ribbon of long narrow plots",
+      "line": 969,
+      "tableName": "THE FILLED-DITCH GARDENS (§250.5)",
+      "trace": [
+        "corpus"
+      ],
+      "why": "ribbon plots over a filled ditch are a real plate fossil the corpus shows",
+      "status": "TRACED"
+    },
+    {
+      "id": "7",
+      "title": "THE STREET WEB (§181.3a) — SIX RANKS OF CARRIAGEWAY, DRAWN AS THE PALE GROUND",
+      "line": 982,
+      "tableName": "THE STREET WEB — six ranks",
+      "trace": [
+        "watabou",
+        "ftg"
+      ],
+      "why": "Watabou's street-as-negative-space is the structure; rank hierarchy is FTG's legibility grammar",
+      "status": "TRACED"
+    },
+    {
+      "id": "8",
+      "title": "SQUARES — holes in the fabric, inked (§160.2's \"the market quarter needs its hole\").",
+      "line": 1049,
+      "tableName": "SQUARES — holes in the fabric",
+      "trace": [
+        "watabou",
+        "corpus"
+      ],
+      "why": "Watabou's market hole; corpus plates draw the place as an inked void",
+      "status": "TRACED"
+    },
+    {
+      "id": "9",
+      "title": "THE BLOCK GROUND IS GONE, AND ITS ABSENCE IS THE POINT (§181.3a).",
+      "line": 1058,
+      "tableName": "THE BLOCK GROUND'S ABSENCE",
+      "trace": [
+        "watabou"
+      ],
+      "why": "the negative-space law itself — the block is not a filled shape",
+      "status": "TRACED"
+    },
+    {
+      "id": "10",
+      "title": "YARDS — open ground behind the street range, one batched path.",
+      "line": 1066,
+      "tableName": "YARDS",
+      "trace": [
+        "corpus"
+      ],
+      "why": "burgage-plot back ground on town plates",
+      "status": "TRACED"
+    },
+    {
+      "id": "11",
+      "title": "THE FABRIC — every building INKED at fabric weight (§9.1, the chair's target",
+      "line": 1096,
+      "tableName": "THE FABRIC — every building inked",
+      "trace": [
+        "watabou",
+        "ftg",
+        "corpus"
+      ],
+      "why": "all three draw buildings as inked footprints",
+      "status": "TRACED"
+    },
+    {
+      "id": "11a",
+      "title": "⭐⭐⭐ GAP-D / T-07 / T-08 · THE TWO-TIER STROKE AND THE PLOT SERIES.",
+      "line": 1147,
+      "tableName": "THE TWO-TIER STROKE + PLOT SERIES",
+      "trace": [
+        "corpus"
+      ],
+      "why": "measured off corpus plate hf40 at exactly 2:1 — the INK_SCALE ladder's origin",
+      "status": "TRACED"
+    },
+    {
+      "id": "11b",
+      "title": "⭐⭐ §16.5 THE COUNTRYSIDE'S OWN DWELLINGS and §5.0e THE FAUBOURG.",
+      "line": 1190,
+      "tableName": "COUNTRYSIDE DWELLINGS + THE FAUBOURG",
+      "trace": [
+        "ftg",
+        "corpus"
+      ],
+      "why": "FTG's outlying steadings; the corpus's extramural suburbs",
+      "status": "TRACED"
+    },
+    {
+      "id": "11c",
+      "title": "⭐⭐⭐ THE ACCESSIBLE LENS'S REAL HATCH GEOMETRY (TC29's §0.0 resolution: \"an",
+      "line": 1207,
+      "tableName": "THE ACCESSIBLE LENS'S HATCH GEOMETRY",
+      "trace": [
+        "corpus"
+      ],
+      "why": "hand-coloured plates distinguished washes by ruled hatch for a printer with no colour",
+      "status": "TRACED"
+    },
+    {
+      "id": "12",
+      "title": "ROOF-RIDGE TICKS — the interior detail line that turns a filled quad into a",
+      "line": 1272,
+      "tableName": "ROOF-RIDGE TICKS",
+      "trace": [
+        "corpus"
+      ],
+      "why": "the interior detail line that turns a filled quad into a roof on a plate",
+      "status": "TRACED"
+    },
+    {
+      "id": "13",
+      "title": "LANDMARKS — §6 archetypes at HEAVIER ink with interior detail lines (ridge",
+      "line": 1335,
+      "tableName": "LANDMARKS — §6 archetypes",
+      "trace": [
+        "watabou",
+        "ftg",
+        "corpus"
+      ],
+      "why": "all three give civic buildings a distinct larger form",
+      "status": "TRACED"
+    },
+    {
+      "id": "13b",
+      "title": "§161b THE VISIBLE WORK — the strain the §5.-1c solver recorded, drawn at",
+      "line": 1393,
+      "tableName": "THE VISIBLE WORK (§161b)",
+      "trace": [
+        "corpus"
+      ],
+      "why": "retaining walls and cuttings are drawn works on terraced plates",
+      "status": "TRACED"
+    },
+    {
+      "id": "14",
+      "title": "TERRACES — §161b's visible work, drawn INSIDE the town on the ground that",
+      "line": 1403,
+      "tableName": "TERRACES inside the town",
+      "trace": [
+        "corpus"
+      ],
+      "why": "as 13b, intramural",
+      "status": "TRACED"
+    },
+    {
+      "id": "14b",
+      "title": "⭐⭐ THE BRIDGES (§2.3, chair directive §195.1). A street that crosses the water",
+      "line": 1411,
+      "tableName": "THE BRIDGES",
+      "trace": [
+        "watabou",
+        "ftg",
+        "corpus"
+      ],
+      "why": "all three; the street continues across the water",
+      "status": "TRACED"
+    },
+    {
+      "id": "15",
+      "title": "WALLS — the heaviest ink on the page, tower dots, gate BREAKS and piers.",
+      "line": 1440,
+      "tableName": "WALLS — towers, gate breaks, piers",
+      "trace": [
+        "watabou",
+        "corpus"
+      ],
+      "why": "Watabou's circuit is the loudest stroke; §214 iconography is corpus-sourced",
+      "status": "TRACED"
+    },
+    {
+      "id": "15a",
+      "title": "§250.5 · THE FOSSILS OF A SUPERSEDED CIRCUIT. Drawn AFTER the standing wall",
+      "line": 1630,
+      "tableName": "THE FOSSILS OF A SUPERSEDED CIRCUIT",
+      "trace": [
+        "corpus"
+      ],
+      "why": "old wall lines survive as street curves on real historic plates",
+      "status": "TRACED"
+    },
+    {
+      "id": "15b",
+      "title": "⭐⭐ §10 THE STATE EXPRESSIONS, in CALM INK. Drawn after the wall because a barred",
+      "line": 1664,
+      "tableName": "THE STATE EXPRESSIONS (§10)",
+      "trace": [
+        "DRIFT"
+      ],
+      "why": "a besieger's camp, a barred gate, a lazar house beyond the last of them: these draw a settlement's CURRENT CONDITION, which a fixed picture has no way to express. The truth layer again. Justification: it is the §10 catalogue rendered in calm ink at plate weight, deliberately NOT a game overlay — the register test is whether a reader takes it for a surveyor's note.",
+      "status": "DRIFT_JUSTIFIED"
+    },
+    {
+      "id": "15c",
+      "title": "⭐⭐ §18.1 THE SANCTUARY / LIBERTY BOUND. A light dashed line round the precinct's",
+      "line": 1715,
+      "tableName": "THE SANCTUARY / LIBERTY BOUND (§18.1)",
+      "trace": [
+        "corpus"
+      ],
+      "why": "precinct and liberty bounds are drawn as dashed lines on period town plates",
+      "status": "TRACED"
+    },
+    {
+      "id": "16",
+      "title": "WARD LABELS ARE NO LONGER DRAWN HERE (§173, MF-B6). Every letter on this leaf now",
+      "line": 1751,
+      "tableName": "WARD LABELS (now spliced at §173)",
+      "trace": [
+        "ftg",
+        "corpus"
+      ],
+      "why": "FTG names its quarters; the corpus supplies curved plate lettering",
+      "status": "TRACED"
+    },
+    {
+      "id": "17",
+      "title": "THE FOLIO CHROME — cartouche + compass.",
+      "line": 1759,
+      "tableName": "THE FOLIO CHROME — cartouche + compass",
+      "trace": [
+        "corpus"
+      ],
+      "why": "plate chrome is a corpus convention outright",
+      "status": "TRACED"
+    },
+    {
+      "id": "18",
+      "title": "⭐⭐ THE IN-WORLD LEGEND (§12.7, and the chair's §195.2 disposal).",
+      "line": 1851,
+      "tableName": "THE IN-WORLD LEGEND (§12.7)",
+      "trace": [
+        "corpus"
+      ],
+      "why": "period plates carry a legend box teaching their own conventions",
+      "status": "TRACED"
+    },
+    {
+      "id": "19",
+      "title": "⭐⭐⭐ §173 THE LETTERING SPLICE — a SEPARATE STAGE OVER THE FINISHED DRAW LIST.",
+      "line": 1916,
+      "tableName": "THE LETTERING SPLICE (§173)",
+      "trace": [
+        "corpus",
+        "ftg"
+      ],
+      "why": "plate typography from the corpus; label placement discipline from FTG",
+      "status": "TRACED"
+    }
+  ],
+  "pass": true
+}
