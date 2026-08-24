@@ -51,6 +51,8 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 22:45 CDT 08-23: §524 — EXPORT is PAID, included in the existing $2.99 single_dossier (verified in
+# code; map plate already in 2 of 4 variants). The line is now a TRICHOTOMY: view free / author paid / take-away paid.
 # ⭐⭐⭐ 22:42 CDT 08-23: §523 — the paywall LINE banked (authoring = writes persisted state others consume).
 # change-view FREE, map-chains FREE, fog-table PAID. WEB-8b + WEB-12 chartered. AD charter compile dispatched.
 # ⭐⭐⭐ 22:29 CDT 08-23: §522 — WEB-8 built (19-row audit; only 2 advertised-ungated, v2-redraw INVERTED).

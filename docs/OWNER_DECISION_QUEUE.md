@@ -22180,3 +22180,53 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   vendored-FMG legal question, so provenance is a first-class section rather
   than an appendix. Seats: STACK-1 · CG-1b · MP-1 · AD compile — **all four
   full**.
+
+## §524 — OWNER RULES EXPORT: **PAID, AND INCLUDED IN THE $2.99 DOSSIER EXPORT** — VERIFIED AGAINST THE CODE, WHICH ALREADY IMPLEMENTS IT; THE PAYWALL LINE BECOMES A TRICHOTOMY (2026-08-23 22:45 CDT)
+
+- **§524.1 THE RULING.** Owner: "no! they have to pay for it but it is
+  included in their 2.99 purchase export of the dossier." So exporting the map
+  is PAID, it is **NOT a separate SKU**, and it rides the existing
+  single-dossier one-shot.
+- **§524.2 VERIFIED AGAINST THE CODE AT THE SLOT — the owner's figure and
+  shape are exactly what ships.** `SINGLE_DOSSIER` (`src/config/pricing.js:297-304`):
+  key `single_dossier`, **`priceCents: 299` / `priceLabel: '$2.99'`**,
+  `deliverables: ['pdf']`, and ⭐ **`requiresAccount: false` — claimable
+  WITHOUT signup**, which is what makes the ruling coherent with B16's
+  "every free and **anonymous** user gets the map included with the dossier":
+  an anonymous visitor can look for free and buy the take-away for $2.99
+  without an account. The entitlement row already reads
+  `export-bundle · free: '$2.99 per settlement' · cartographer: 'included' ·
+  enforcement: TIER_GATE.export` (`entitlementLadder.js:77`). **No new SKU is
+  owed and none may be minted.**
+- **§524.3 AND THE MAP IS ALREADY IN THAT PDF.** `SettlementPDF.jsx:102-180`
+  renders a **Town Map plate (§08C, "deterministic plan")**, variant-gated by
+  `inc('townMapPlate')` and self-gating on `hasDrawableMap` so a map-less
+  settlement yields a byte-identical pre-plate export. Measured across the
+  four variants: **`draft_brief` TRUE · `canon_dossier` TRUE · `timeline_packet`
+  FALSE · `campaign_state` FALSE.** The two narrative dossiers carry the map;
+  the two operational packets deliberately do not. **The ruling is therefore
+  already satisfied for the dossier proper** — what WEB-8b must do is pin it,
+  not build it.
+- **§524.4 ⭐ THE LINE BECOMES A TRICHOTOMY** (refining §523.2, and the durable
+  output again): **VIEW / INTERACT — free**: reads and transient local state
+  (hover, pan, zoom, selection, inspection, following an address chain).
+  **AUTHOR — paid**: writes state that outlives the session and that others
+  consume. **TAKE AWAY — paid**: produces a durable artifact that leaves the
+  product. The third is what the owner just ruled, and it is why export is not
+  "viewing" even though nothing is written inside the product. Vetoable as a
+  principle. It also re-confirms `fog-table` (writes state others consume) and
+  leaves `change-view` and `map-chains` free (§523.3) — the three rulings and
+  this one all fall out of one test.
+- **§524.5 WHAT THIS ADDS TO WEB-8b.** It must NOT free export; it must PIN
+  the trichotomy: an enforcement arm proving **the export gate holds** and
+  **the map plate is inside the dossier variants that claim it**, with a
+  positive control on each (plant an ungated export row → red; strip
+  `townMapPlate` from `canon_dossier` → red). ⚠ And one honest connection the
+  chair is recording rather than leaving to be discovered: `hasDrawableMap`
+  self-gates the plate, so **any settlement whose map cannot be built ships a
+  paid PDF with no map plate.** That is not a defect today (the plate uses the
+  landed townMap model, not the dark cartography stage), **but it is the exact
+  seam CG-1b and the DW projections land on** — when the cartography stage
+  becomes the plate's source, a stage that throws on 287 of 504 settlements
+  would silently sell a mapless dossier. WEB-8b's arm and DW-6's acceptance
+  both carry the pin. Recorded as **D-EXPORT-1**.
