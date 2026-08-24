@@ -26579,3 +26579,28 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   DEBRIS→RECLAMATION beat pair gains its third member: ABANDONMENT (the
   quarrying stops, the growth front recedes, the half-eaten ruin remains at
   the high-water mark).
+
+## §615 · THE CHAIR'S SECOND GAP SWEEP — FOUR CHARTERS (2026-08-24 ~22:15 CDT)
+
+- **§615.1 THE WORLD BEYOND THE PAGE:** edge roads gain their real
+  destinations — the world's actual neighboring settlements with derived
+  distances ("To <name> — N days"), in the corpus's own via-ad idiom (hf103
+  precedent). Trivial derivation, regional-scale ownership. Chartered into
+  REG-8 (words) with the composition wave dressing the exits.
+- **§615.2 THE NAMING LAYER:** streets, bridges, gates and squares gain
+  DERIVED names — Tanners Row because the tanners are there, the Water Gate
+  because it is one, the Old Bridge because a dated newer one exists — under
+  finite semantics (typed derivations, the clerk composes, never free
+  invention). A per-tier density law (a thorp names almost nothing; a
+  metropolis names its arteries) and the zoom ladder governs visibility.
+  Chartered as its own register row (REG-N), sized at the next planning
+  round; the DM-handle payoff is the §612 purpose law at street level.
+- **§615.3 THE ACCESSIBILITY HOLD:** the accessible lens (pattern-not-hue,
+  the computed contrast law) joins EVERY wave's instrument run and every
+  judging round — beauty work aimed at parchment may never silently degrade
+  the lens nobody was grading. One-line law, effective immediately; the
+  REG-I0 set gains the accessible-lens arm at its next touch.
+- **§615.4 SEASONAL DRESS:** the existing seasonOverride machinery gains its
+  register definition (winter's snow-toned roofs and bare canopy, autumn
+  fields) as a LATE wave riding after the paint — on the roster so it is
+  deferred-and-recorded, never forgotten.
