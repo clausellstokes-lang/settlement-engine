@@ -1593,7 +1593,10 @@ export function renderFolio(fabric, opts = {}) {
     const outerW = Math.max(0.35, r2(w * 0.46));
     const innerW = Math.max(0.28, r2(w * 0.32));
     if (walkD) push(`<path d="${walkD}" fill="${dress.walk ? RT.walk : RT.bank}" stroke="none" fill-rule="nonzero"/>`);
-    if (coreD) push(`<path d="${coreD}" fill="none" stroke="${RT.course}" stroke-width="${r2(Math.max(0.22, w * 0.24))}" stroke-opacity="0.62" stroke-dasharray="${r2(frontage * 0.30)} ${r2(frontage * 0.22)}" stroke-linecap="butt"/>`);
+    // ⚠ THE CORE IS RUBBLE, NOT A CENTRE LINE, AND THE FIRST DASH READ AS A ROAD. hf261's full
+    // curtain fills its band with irregular fill between two edges; a long dash down the middle
+    // reads as a carriageway. Short broken dashes at low weight read as fill.
+    if (coreD) push(`<path d="${coreD}" fill="none" stroke="${RT.course}" stroke-width="${r2(Math.max(0.18, w * 0.17))}" stroke-opacity="0.5" stroke-dasharray="${r2(frontage * 0.14)} ${r2(frontage * 0.20)}" stroke-linecap="butt"/>`);
     if (innerD) push(`<path d="${innerD}" fill="none" stroke="${P.walls}" stroke-width="${innerW}" stroke-linejoin="round" stroke-linecap="round"/>`);
     if (outerD) push(`<path d="${outerD}" fill="none" stroke="${P.walls}" stroke-width="${outerW}" stroke-linejoin="round" stroke-linecap="round"/>`);
     if (combD) push(`<path d="${combD}" fill="none" stroke="${P.walls}" stroke-width="${r2(Math.max(0.3, w * 0.34))}" stroke-dasharray="${r2(frontage * 0.13)} ${r2(frontage * 0.17)}" stroke-linecap="butt"/>`);

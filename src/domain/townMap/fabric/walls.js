@@ -720,6 +720,9 @@ export function traceWalls(args) {
         ring: c.polygon, runs: c.runs || [], runOfVertex: c.runOfVertex || [],
         runBands, gates: c.gates || [], towers: c.towers || [], towerTypes: c.towerTypes || [],
         terminalWorks: c.cliffTermini || [], halfRing: c.halfRing, form: c.form,
+        // ⭐ THE GROUND THE WORKS MUST STAND ON. Both predicates are the fabric's OWN — a second
+        // spelling of "is this water" or "is this a scarp" is the §230 family's whole shape.
+        cliffs, water,
         // The band's own stones — the SAME number the reservation was computed from, so the ink
         // and the claim cannot disagree about how thick this wall is (walls' own §5 W2 law).
         stone: band.stone, seeding, epoch: c.epoch,

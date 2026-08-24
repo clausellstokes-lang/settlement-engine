@@ -594,7 +594,11 @@ export function buildFabric(settlement, model, options = {}) {
     // disagree about the same history. It is also derived here because this is the only scope
     // that holds all four of its inputs (the stressors, the readiness, the prosperity rank and
     // the wall's own standing years).
-    rampart: options.rampart === true
+    // ⚠ AND IT IS GATED ON `hasWalls`. An unwalled settlement publishing a BAND regime is
+    // publishing a fact about a wall it does not have — the fixture run caught one doing exactly
+    // that (`reg2-garrison-9`, walled false, regime `clear`). A regime with no band is not a
+    // small untruth: it would give a census and a later wave a wall-shaped fact to read.
+    rampart: options.rampart === true && hasWalls
       ? bandRegime({
         settlement: s,
         glacisClear: faubourgSeriousness(lawfulness, prosperityRank) >= GLACIS_THRESHOLD,

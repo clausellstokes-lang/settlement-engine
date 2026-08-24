@@ -36,6 +36,8 @@
 
 import { fabricRng } from './fabricRng.js';
 import { TOWER_TYPES, quantile } from './wallRuns.js';
+import { onImpassable } from './cliffs.js';
+import { isInWater } from './waterMode.js';
 
 /* ══════════════════════════════════════════════════════════════════════════════════════════
  * §575 · THE BAND REGIME
@@ -210,9 +212,17 @@ export const RAMPART_RUNGS = Object.freeze({
     rung: 4, plate: 'hf261 THE NARROW CURTAIN', walk: true, core: false, pales: false,
     courses: 0.55, chamber: true, gate: 'block', towerScale: 1.10,
   },
+  // ⛔⛔ **THE FULL CURTAIN CARRIES NO COURSING, AND THE PLATE IS WHY.** My first spelling gave
+  // rung 5 course ticks at 0.40 and the render convicted it: 282 ticks on the city and 363 on the
+  // metropolis drew the curtain as a RUNG LADDER — the railway-track failure the §590 preview's
+  // own tick comment names — and hf261's full-curtain rung does not draw them at all. Its band is
+  // filled with a RUBBLE STIPPLE between two edges; the COURSE hatching belongs to rung 4, the
+  // narrow curtain, and even there the plate draws it in PATCHES. ⭐ THE CLASS is this file's own
+  // merlon finding a second time: **THE RUNG DECIDES THE TEXTURE, AND A TEXTURE COPIED UP THE
+  // LADDER IS A DIFFERENT WALL.** The saving is 282–363 primitives a leaf, taken by being right.
   citywall: {
     rung: 5, plate: 'hf261 THE FULL CURTAIN', walk: true, core: true, pales: false,
-    courses: 0.40, chamber: true, gate: 'twin-drum', towerScale: 1.20,
+    courses: 0, chamber: true, gate: 'twin-drum', towerScale: 1.20,
   },
 });
 
@@ -309,6 +319,28 @@ export function deriveRampartWorks(a) {
   const turns = ring.map((_, i) => turnAt(ring, i));
   const turnCut = Math.max(TURN_FLOOR_DEG, quantile(turns, TURN_QUANTILE));
 
+  // ⚠⚠ THE LOOP COUNTER IS `k`, NOT `a`, AND THE FIRST SPELLING WAS A SILENT NO-OP. Written with
+  // `for (let a = 0 …)` the ring counter SHADOWED this function's own argument object, so
+  // `a.cliffs` read a property off a number, came back `undefined`, and the whole refusal was
+  // skipped — and it LOOKED like it worked, because the census figure it was meant to move simply
+  // did not move. ⭐ THE CLASS: **A GUARD THAT SILENTLY EVALUATES TO FALSE IS INDISTINGUISHABLE
+  // FROM A GUARD THAT PASSED**, which is why the census was re-run rather than the code re-read.
+  const REFUSAL_RINGS = 8;
+  const cliffs = a.cliffs || null;
+  const water = a.water && a.water.line ? a.water : null;
+  const siteRefused = (p, r) => {
+    if (!cliffs && !water) return null;
+    for (let k = 0; k < REFUSAL_RINGS; k++) {
+      const ang = (k / REFUSAL_RINGS) * Math.PI * 2;
+      // ⚠ THE RIM AND THE BODY BOTH, because a work can straddle a narrow spit with a clear rim.
+      for (const f of [0.55, 1]) {
+        const x = p[0] + Math.cos(ang) * r * f, y = p[1] + Math.sin(ang) * r * f;
+        if (cliffs && onImpassable(cliffs, x, y)) return 'cliff';
+        if (water && isInWater(water, x, y)) return 'water';
+      }
+    }
+    return null;
+  };
   /* ── 0 · THE GATEHOUSES. hf313's PLAN vignettes, scaled by the rung. They are placed FIRST and
    *      occupy the joint field, so a circuit tower can never pile onto a gate — which is
    *      already the rule `walls.traceWalls` applies to its own tower list, restated here for
@@ -318,15 +350,29 @@ export function deriveRampartWorks(a) {
   for (const g of gates) {
     // The gatehouse's own scale: a gate was the most heavily built thing on a circuit, so its
     // block is a multiple of the stones it interrupts — never an absolute size.
-    const half = stone * (rung.gate === 'twin-drum' ? 3.1 : rung.gate === 'block' ? 2.6 : 1.9);
+    let half = stone * (rung.gate === 'twin-drum' ? 3.1 : rung.gate === 'block' ? 2.6 : 1.9);
     const depth = stone * (rung.gate === 'posts' ? 1.3 : 1.7);
+    // ⭐⭐ **A GATE CANNOT MOVE, SO IT SHRINKS.** A gate is where one particular road crosses one
+    // particular ring (`cutGates`' own law), so the pull-back that saves an end-work is not
+    // available to it — and the over-ground census caught the coastal city's twin-drum block
+    // standing with three of its eight rim points in the sea. hf313's own answer is on the plate:
+    // the WATER GATE is a narrower work with NO flanking drums. So a block whose footprint the
+    // ground will not carry is reduced toward that anatomy, step by step, and what it could not
+    // fix is reported rather than hidden.
+    let shrunk = 0;
+    while (shrunk < 4 && siteRefused([g.x, g.y], half)) { half *= 0.78; shrunk++; }
+    const gateOverhang = siteRefused([g.x, g.y], half);
     gatehouses.push({
       key: `gatehouse.${g.key}`,
       x: g.x, y: g.y, dx: g.dx, dy: g.dy,
       anatomy: rung.gate, half, depth,
       bricked: !!g.bricked,
       // hf313's twin-drum vignette: a drum at each end of the passage, each with its chamber.
-      drums: rung.gate === 'twin-drum'
+      ...(shrunk ? { shrunk } : {}),
+      ...(gateOverhang ? { overhang: gateOverhang } : {}),
+      // ⚠ A SHRUNKEN GATE LOSES ITS FLANKING DRUMS FIRST — hf313's water gate has none, and a
+      // drum outboard of a block that already will not fit is the part standing in the water.
+      drums: rung.gate === 'twin-drum' && !shrunk
         ? [1, -1].map((s) => ({ x: g.x - g.dy * half * s, y: g.y + g.dx * half * s, r: stone * 1.35 }))
         : [],
       // The portcullis: hf313 draws it as a toothed line across the passage. Only where there is
@@ -407,6 +453,38 @@ export function deriveRampartWorks(a) {
       why: 'seeded station (wallRuns.towersFor)', key: `station.E${epoch}.${i}` });
   }
 
+  /* ── ⭐⭐⭐ **A WORK'S SITE MUST HOLD THE WORK'S OWN FOOTPRINT**, and a MEASUREMENT put this
+   *    rule here. The over-ground census walked the DRAWN marks and convicted four end-works and
+   *    three sealed tower stations on the polycentric leaf: each stands with its centre on lawful
+   *    ground and a quarter of its BODY over the brink. ⭐ THE CLASS is `terminateAtCliffs`' own,
+   *    one dimension out: **A PREDICATE SAMPLED AT A POINT MEASURES THE POINT, NOT THE BODY** —
+   *    §577 puts the terminus on passable ground by construction, and a tower is not a point.
+   *
+   * ⚠ THE TWO OUTCOMES ARE DIFFERENT BY CLASS, and that difference is the rule rather than a
+   *   convenience. A TERMINUS work is PULLED BACK along its own masonry (its `t` is walls.js's
+   *   *"the direction the masonry runs from it"*) and never refused — a curtain that simply stops
+   *   presents an open end, which is the one thing §577's second half exists to forbid. Any other
+   *   work is REFUSED: the ground would not carry it, and the site's cover then falls to whatever
+   *   the spacing field seats next, which is what the coverage census is there to show. */
+  let pulled = 0, groundRefused = 0;
+  for (let i = cand.length - 1; i >= 0; i--) {
+    const q = cand[i];
+    let why = siteRefused(q.p, q.rad);
+    if (!why) continue;
+    if (q.cls === 1) {
+      // Pull back along the masonry in half-radius steps until the footprint clears.
+      for (let k = 1; k <= 4 && why; k++) {
+        const p2 = [q.p[0] + q.t[0] * q.rad * 0.5 * k, q.p[1] + q.t[1] * q.rad * 0.5 * k];
+        if (!siteRefused(p2, q.rad)) { q.p = p2; q.pulled = q.rad * 0.5 * k; why = null; pulled++; }
+      }
+      // ⚠ AND IF IT STILL WILL NOT CLEAR IT STAYS, AND SAYS SO. An end-work that cannot find
+      // ground is a fact about the ground, not a licence to leave the curtain open.
+      if (why) q.overhang = why;
+    } else {
+      cand.splice(i, 1); groundRefused++;
+    }
+  }
+
   /* ── ACCEPT IN CLASS ORDER AGAINST THE ONE FIELD. */
   const crowded = (q) => taken.some((o) => dist(o.p, q.p) < Math.max((o.rad + q.rad) * JOINT_CLEAR_K, stone * JOINT_MIN_SPAN));
   cand.sort((x, y) => x.cls - y.cls
@@ -424,6 +502,8 @@ export function deriveRampartWorks(a) {
     joints.push({
       key: q.key, x: q.p[0], y: q.p[1], dx: q.t[0], dy: q.t[1], kind, cls: q.cls,
       r: q.rad, why: q.why,
+      ...(q.pulled ? { pulledBack: Math.round(q.pulled * 100) / 100 } : {}),
+      ...(q.overhang ? { overhang: q.overhang } : {}),
       // hf261 rung 4/5: the open gorge and the ringed drum carry an interior void. A jitter so a
       // rank of works is not a rank of identical stamps — the seeded hand §214 asks for.
       chamber: rung.chamber && q.cls !== 1 ? q.rad * rng.range(0.40, 0.50) : 0,
@@ -466,11 +546,16 @@ export function deriveRampartWorks(a) {
       exceptions,
       stations: towers.length,
       runBandsSeen: (runBands || []).length,
+      pulledBack: pulled, groundRefused,
+      gatesShrunk: gatehouses.filter((g) => g.shrunk).length,
+      gatesOverhanging: gatehouses.filter((g) => g.overhang).length,
+      overhanging: joints.filter((j) => j.overhang).length,
     },
     reason: `§590 RAMPART rung ${rung.rung} (${rung.plate}); turn cut ${turnCut.toFixed(0)}°`
       + ` (floor ${TURN_FLOOR_DEG}°, ring p${Math.round(TURN_QUANTILE * 100)} ${quantile(turns, TURN_QUANTILE).toFixed(0)}°)`
       + `; ${joints.length} joint work(s) from ${cand.length} candidate(s), ${rejected} refused by the spacing field`
       + `; ${gatehouses.length} gatehouse(s) at ${rung.gate}`
-      + `; UNCOVERED — ${exceptions.turn} turn(s), ${exceptions.terminus} terminus/termini, ${exceptions.gate} gate(s)`,
+      + `; UNCOVERED — ${exceptions.turn} turn(s), ${exceptions.terminus} terminus/termini, ${exceptions.gate} gate(s)`
+      + `; GROUND — ${pulled} end-work(s) pulled back off a brink, ${groundRefused} candidate(s) refused by the ground, ${joints.filter((j) => j.overhang).length} still overhanging`,
   };
 }
