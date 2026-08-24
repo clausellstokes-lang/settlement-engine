@@ -51,6 +51,8 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 22:15 CDT 08-23: §521 — UC-5 built (undercity train COMPLETE). ⛔ `git grep` is blind to
+# UNTRACKED files — a grep arm run pre-commit reports a clean sweep. FIRST STACK since #40 dispatched (CH-2A+UC-5).
 # ⭐⭐⭐ 22:09 CDT 08-23: §520 — CHAIR ERROR: the thread-cap flag does not exist (exit 1, ZERO tests).
 # Use --pool=threads --maxWorkers=2. CH-2A READY (90a12cd1); CH-2B DRAFT — ARCANE_INST_TAGS holds `alchemy` → CH-5.
 # ⭐⭐⭐ 21:58 CDT 08-23: §519 — OWNER CORRECTS: not factions, POWERS (the seat + coup contenders,

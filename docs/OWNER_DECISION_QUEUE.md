@@ -21980,3 +21980,70 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   **3 pre-existing** and **4 the car's**, of which three are re-record/coverage
   classes and one is the STOP. ⚠ `effectReachability.coverage` is a real
   coverage LOSS (2 of 12 authored effects stop firing) and rides CH-2B.
+
+## §521 — MF-UC5 COMPLETE — THE UNDERCITY TRAIN IS BUILT END TO END; ⛔ **`git grep` IS BLIND TO UNTRACKED FILES, SO A GREP ARM RUN BEFORE COMMITTING REPORTS A CLEAN SWEEP FOR A MEMBER THAT CHANGED EVERYTHING**; THE FIRST STACKED LANDING SINCE #40 IS DISPATCHED (2026-08-23 22:15 CDT)
+
+- **§521.1 ⛔ THE INSTRUMENT FINDING, AND IT INVALIDATES A METHOD I CREATED.**
+  UC-5's §489.3 grep arm returned `<none>` for **all 35 tokens across all 37
+  test trees — including `deriveUndercityConnectivity`, which its own
+  acceptance file names** — because `git grep` **cannot see untracked files**
+  and the member had not yet committed. **Chair-reproduced independently:** an
+  untracked probe file returns 0 hits under `git grep`, 1 under `git grep
+  --untracked`, 1 under a disk grep. The arm exists precisely to catch what
+  the sweep misses; run before committing it reports a clean sweep for a
+  member that changed everything. **LAW: the grep arm uses `git grep
+  --untracked` or a disk grep, and must PROVE it can see the member's own new
+  file before its result is trusted.** Sixth silent-liar of the day; the
+  standing checklist now carries all six.
+- **§521.2 MF-UC5 IS BUILT — the undercity train is complete end to end.**
+  Tip `79c91205` (pinned; **zero refs pointed at it** — the fifth such today),
+  4 over `b2852ccc`, porcelain empty, **zero modified production files**, leaf
+  243 effective inside the 250 cap. **8/8 acceptance with EIGHT mutants each
+  convicting a DIFFERENT arm** — one-to-one, so no arm is another wearing a
+  second title (the gap UC-2 had to mint a ninth mutant to close does not
+  exist here). Census `+1/+0/+1/+8/+1`, `parked` unmoved, reverted
+  digest-exact. Typecheck 173/173 and 1134/1134. Ruin roster **92 unmoved and
+  owing nothing — the first undercity car that reads no roster at all**.
+- **§521.3 FIVE CHARTER CLAIMS CORRECTED BY EXECUTION** (§441 J7 again
+  earning itself): the leaf is 243 effective, not "~220"; §4's "vocabulary
+  rows land here as data" contradicts itself within one paragraph and J-R2-2
+  governs; **the ADJACENCY BREACH cannot be "licensed by measured PROXIMITY"
+  because no engine-side intra-settlement proximity fact exists** —
+  institutions carry no coordinates (0 hits), `districtProfile` has no
+  neighbour relation, and every drawn adjacency sits behind the forbidden
+  `townMap/**` import — so it compiles as the SHARED QUARTER; the FUNDED LINK
+  cannot carry a date because the estate records no dug-act event (it takes
+  the dated calamity rebuild, else `NO_DATED_RECORD`); and the sweep caught a
+  latent contradiction where severance moving a criminal LICENCE would delete
+  the very edge §311.9 laws 5–6 require to persist — **posture and licence are
+  now two readings**.
+- **§521.4 THE LIVENESS SWEEP, AND ONE STRUCTURAL DARK MEMBER.** Over 420
+  settlements × 3 arms: all three classes, all five causes, all three
+  postures, both characters, both refusal reasons and three of four isolation
+  reasons are LIVE. Four members are corpus-dark with their mechanism named,
+  and one is **structurally** dark: **joint `sealed_door` — only vaults
+  publish it and §311.9.2(ii) refuses every vault edge**, so it can never
+  fire. Recorded as D-UC5-1, a finding rather than a defect, and explicitly
+  **not this car's vocabulary to trim**. Also measured: exactly ONE distinct
+  dug-passage payer on the dark corpus (`Thieves' Guild`), and **603 of 1,265
+  `UNREACHED` isolations are crypts — the keeper refusal is the estate's
+  largest producer of visible isolation.**
+- **§521.5 R-INST-6's SEAM TABLE AGREES, AND ITS GAP IS DISCHARGED.** No
+  correction found. Its reading that "UC-5 is unbuilt and three seam rows
+  depend on it" is discharged — the party-wall breach is
+  `ADJACENCY_BREACH/SHARED_QUARTER_WITH_MOTIVE`, 137 edges on the dark corpus.
+  ⭐ Its reading 6 (the 0.35/0.45 floor split) is confirmed by execution, given
+  a name (`UNREACHED`), and **acceptance A7 is built on exactly that
+  fixture** — research and build meeting on the same fact from opposite
+  directions.
+- **§521.6 THE STACK IS DISPATCHED — the first since #40.** **TE-STACK-1**
+  lands **MF-CH2A then MF-UC5** through ONE gate: both are 4 over `b2852ccc`
+  and rebase onto `5055990a`; sum-of-deltas `+2/+0/+2/+17/+2` →
+  `2519/366/2153/20899/5816` with THREE controls including the sibling control
+  that must convict the ARITHMETIC and not merely the total; the three-place
+  flip per car; expect **`valid: 172 packets (0 READY)`**. **The load-bearing
+  question it must prove rather than accept: CH-2A re-records the golden and
+  UC-5 proved itself against the OLD one** — UC-5 reports reading no roster at
+  all, and the stack runs its full acceptance and liveness figures ON TOP of
+  CH-2A to prove it. MF-CH2B stays out of the stack at DRAFT. Seats: WEB-8 ·
+  CG-1b · STACK-1; one free.
