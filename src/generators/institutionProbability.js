@@ -9,7 +9,11 @@ import {
   nativeSemanticResourceKeys,
 } from '../domain/content/customContentSemanticAuthority.js';
 import { cultureInstitutionMultiplier } from '../domain/cultureProfiles.js';
-import { isArcaneInstitution } from '../domain/arcaneInstitutionIdentity.js';
+import {
+  institutionCatalogMagicLicence,
+  isArcaneInstitution,
+} from '../domain/arcaneInstitutionIdentity.js';
+import { magicLicenceAtLeast } from '../data/constants.js';
 
 const getPriorityModifiers = (tier, goodsToggles = {}) => {
   const tierGoods = GOODS_MODIFIERS_BY_TIER[tier] || {};
@@ -35,6 +39,20 @@ export const getBaseChance = (
   const cat  = category.toLowerCase();
   const inst = name.toLowerCase();
   let chance = baseChance;
+
+  // ── MF-CH2b — THE DECLARED MAGIC LICENCE, READ ONCE ──────────────────────
+  // Two gates below used to ask "is this magical?" by looking at the SHELF the
+  // catalog author filed the row on. A shelf is a display bucket: it filed
+  // `Great library` (authored `tags: ['education']`) and `Alchemist shop` (a
+  // chemical trade) beside `Planar embassy`, and then multiplied all three by the
+  // magic dial. Where a catalog row declares `magicLicense`, that declaration is
+  // now the whole answer. Where it does NOT — a custom institution, an imported
+  // roster, a direct caller passing a name the catalog never heard of — the old
+  // shelf-and-substring reading stands untouched as the fallback, which is why
+  // every non-catalog behaviour here is byte-identical.
+  const declaredLicence = institutionCatalogMagicLicence(name);
+  const licensedForMagic = declaredLicence !== null
+    && magicLicenceAtLeast(declaredLicence, 'low');
 
   // Resolve the real tier. config.settType may be the sentinel 'random'/'custom'
   // (DEFAULT_CONFIG.settType is 'random'), in which case resolveConfig has already
@@ -85,9 +103,14 @@ export const getBaseChance = (
 
   // Magic institutions scale with magic priority
   // Small tiers need higher magic priority to support arcane infrastructure
-  if (cat.includes('magic') || inst.includes('wizard') || inst.includes('mage') ||
-      inst.includes('alchemist') || inst.includes('enchant') || inst.includes('spell') ||
-      inst.includes('arcane') || inst.includes('teleportation') || inst.includes('planar')) {
+  // P1 (MF-CH2b): the declared licence decides for a catalog row; the shelf and the
+  // eight name substrings are the NON-CATALOG fallback and nothing else.
+  const magicPriorityScaled = declaredLicence !== null ? licensedForMagic : (
+    cat.includes('magic') /* @non-catalog-fallback MF-CH2 */ ||
+    inst.includes('wizard') || inst.includes('mage') ||
+    inst.includes('alchemist') || inst.includes('enchant') || inst.includes('spell') ||
+    inst.includes('arcane') || inst.includes('teleportation') || inst.includes('planar'));
+  if (magicPriorityScaled) {
     const magicMult = config.priorityMagic / 50;
     // Small settlements need magic priority well above average to sustain arcane institutions
     const tierMagicPenalty = {
@@ -173,20 +196,32 @@ export const getBaseChance = (
   // ── Magic priority gates ──────────────────────────────────────────────────
   // Institutions requiring high magic are zeroed out below the threshold
   const magPriority = config.priorityMagic ?? 50;
+  // P2 (MF-CH2b, G7's LITERAL cure — and only that). Three members of this list were
+  // GOODS vocabulary or dead letters, measured against all 311 catalog names:
+  // 'magical banking' 0 matches, 'enchanting quarter' 0, and 'magic item consignment'
+  // 0 — the last one a member of magicFilter's ARCANE_GOODS, a goods vocabulary living
+  // inside an INSTITUTION gate. All three are removed and no row's hard-zero verdict
+  // moves. ⛔ THE REST OF THIS LIST DELIBERATELY STAYS A NAME LIST. Replacing it with
+  // `magicLicenceAtLeast(name, 'high')` would remove the enchanter, the academy and the
+  // mages' district from low-magic cities — a decision about what a low-magic world
+  // CONTAINS, which is content work and not hygiene. It is split out of this car and
+  // measured for the chair in this packet's judgment ledger (J-TECH2-4).
   const hiMagicInsts = [
-    'airship', 'golem', 'undead labor', 'dream parlor', 'magical banking',
-    'message network', 'planar', 'teleportation', 'magic item consignment',
-    'enchanting quarter', 'high magic',
+    'airship', 'golem', 'undead labor', 'dream parlor',
+    'message network', 'planar', 'teleportation', 'high magic',
   ];
   if (magPriority < 66 && hiMagicInsts.some(kw => inst.includes(kw))) {
     chance *= 0;
   }
 
-  // Exotic institutions: only magic-dependent ones scale with magic
-  // Dragon resident and Underground city are geographical, not magical
-  const NON_MAGIC_EXOTICS = ['dragon resident', 'underground city'];
-  const isNonMagicExotic = NON_MAGIC_EXOTICS.some(kw => inst.includes(kw));
-  const isMagicOrExoticCategory = (cat.includes('magic') || cat === 'exotic') && !isNonMagicExotic;
+  // P3 (MF-CH2b): the exotic scaler. Same seam as P1 — the licence decides for a catalog
+  // row, the shelf is the non-catalog fallback. NON_MAGIC_EXOTICS is gone with the shelf
+  // test it existed to patch: `Dragon resident` now declares `magicLicense: 'none'` and
+  // needs no exemption, and its other member `'underground city'` was already INERT,
+  // because that row sits on the metropolis Criminal shelf where the test it exempted
+  // from never fired.
+  const isMagicOrExoticCategory = declaredLicence !== null ? licensedForMagic
+    : (cat.includes('magic') || cat === 'exotic'); // @non-catalog-fallback MF-CH2
   if (magPriority >= 66 && isMagicOrExoticCategory) {
     chance *= 1.8;
   } else if (magPriority <= 25 && isMagicOrExoticCategory) {
@@ -295,8 +330,10 @@ export const getBaseChance = (
   // probability — the leak the register recorded. `magicExists:false` is a hard world
   // fact, so it gates directly and last, after every multiplier.
   //
-  // Arcane-ness is read from the canonical detector (R-BLD-5): the catalog's authored tag
-  // where a catalog identity exists, magicFilter's keyword vocabulary as the fallback.
+  // Arcane-ness is read from the canonical detector (R-BLD-5): since MF-CH2a that detector
+  // reads the catalog row's DECLARED LICENCE first, then the authored tag, then
+  // magicFilter's keyword vocabulary as the fallback — so P4 needs no edit of its own here
+  // and the licence reaches it through the one read the whole car is built around.
   // On the resolved path this line changes NOTHING — the dial is already 0 there and the
   // chance is already 0 — which is why no same-seed generation golden moves.
   if (config.magicExists === false && isArcaneInstitution(name, category)) {

@@ -25,6 +25,11 @@ import {
 import {
   isGeneratorOwnedEntity,
 } from '../domain/generationOwnership.js';
+// MF-CH2b: the catalog's DECLARED magic licence. The adapter is the same one
+// institutionProbability already reads, so no new module edge is created here — and it
+// deliberately is NOT magicFilter, which is routed to the lazy generation bundle.
+import { institutionCatalogMagicLicence } from '../domain/arcaneInstitutionIdentity.js';
+import { magicLicenceAtLeast } from '../data/constants.js';
 // MG-3h: the assertion vocabulary and its denial clauses moved to a domain leaf so the
 // arcane-identity detector reads them too. Re-exported below — the world law's answers
 // are unchanged; only the address of the patterns moved.
@@ -84,9 +89,18 @@ function isCustomEntity(entity) {
   );
 }
 
+/**
+ * ⚠ THE TWO SHELF READS BELOW SURVIVE ON PURPOSE, AND ONLY FOR ENTITIES THE CATALOG DOES NOT
+ * KNOW. Every caller that can reach a catalog row asks `nativeInstitutionRequiresMagic`
+ * first, which answers from the declared licence and returns before this function is
+ * consulted (MF-CH2b). What is left is the custom-content branch of `allowsInstitution` and
+ * the service/secret readers, where `category: 'Magic'` is a player's own declaration about
+ * their own content and IS the authored semantics. Both are marked so the shelf-gate census
+ * can count them and refuse an unmarked one.
+ */
 function carriesExplicitMagicMetadata(entity, category = '') {
   if (!entity || typeof entity !== 'object') {
-    return String(category).trim().toLowerCase() === 'magic';
+    return String(category).trim().toLowerCase() === 'magic'; // @non-catalog-fallback MF-CH2
   }
   const semanticCategory = String(
     category || entity.category || entity.priorityCategory || '',
@@ -94,7 +108,7 @@ function carriesExplicitMagicMetadata(entity, category = '') {
   const tags = normalizedTags(entity);
   return (
     entity.magical === true
-    || semanticCategory === 'magic'
+    || semanticCategory === 'magic' // @non-catalog-fallback MF-CH2
     || tags.some(tag => (
       tag === 'magic'
       || tag === 'magical'
@@ -129,13 +143,58 @@ function generatedCandidateText(candidate) {
   ].filter(Boolean).join(' ');
 }
 
+/**
+ * P5 — THE WORLD LAW, and the path that actually decides a dead-magic world.
+ *
+ * This predicate runs at `assembleInstitutions.js:268/410/484`, `cascadePass`,
+ * `coherenceRepairPass`, `factionCorrelationPass` and `cascadeGenerator.js:180` — BEFORE any
+ * probability. Until MF-CH2b it answered from two things a row never said about itself: the
+ * SHELF (every one of those call sites spreads `category` onto the record it passes, so
+ * `carriesExplicitMagicMetadata` read `entity.category === 'magic'`), and an unanchored
+ * substring scan of the NAME over `ARCANE_INST_KW`, which struck 26 of the 311 catalog rows.
+ * That is the residual `docs/DESIGN_REALM_MAGIC_TOGGLE.md` recorded as live-but-unscheduled;
+ * routing the catalog case through the declared licence is what discharges it.
+ *
+ * A catalog row's DECLARED licence is now the whole answer. `magicLicense: 'none'` means the
+ * entry needs no functioning magic, so a dead-magic world keeps it — which is how the mundane
+ * chemical trade comes back. Everything without a declaration — custom content, an imported
+ * roster, a neighbour's invented org — falls to exactly the two tests it fell to before.
+ */
 function nativeInstitutionRequiresMagic(institution) {
   const entity = typeof institution === 'string'
     ? { name: institution }
     : (institution || {});
+  const declaredLicence = institutionCatalogMagicLicence(entity.name);
+  if (declaredLicence !== null) return magicLicenceAtLeast(declaredLicence, 'low');
   if (carriesExplicitMagicMetadata(entity)) return true;
   const name = String(entity.name || '').toLowerCase();
   return ARCANE_INST_KW.some(keyword => name.includes(keyword));
+}
+
+/**
+ * THE SIXTH SURFACE THAT READ A SHELF AS A STATEMENT ABOUT THE WORLD (found by execution,
+ * MF-CH2B). `generationCoherence.js` walks EVERY string in a finished settlement — including
+ * its TAXONOMY fields, `category`, `priorityCategory` and `tags[]` — and asks
+ * `allowsMagicClaim` about each one. `textAssertsFunctionalMagic` is a PROSE detector, so it
+ * answers yes to the bare strings `'Magic'`, `'arcane'` and `'magic'`, and the moment a
+ * magic-free world lawfully keeps a Magic-shelf row the settlement's own certification
+ * convicts it of claiming magic — for the name of the shelf it is filed on.
+ *
+ * A bucket name is not a sentence. A field whose ENTIRE value is one token from the estate's
+ * closed classification vocabulary is a filing decision, not an assertion, so it is not a
+ * claim this or any world can breach. Anything longer — a description, a rumour, a service
+ * line — is prose and is read exactly as before.
+ *
+ * ⚠️ SCOPE, stated because this predicate sits on a certification the owner reads:
+ * `allowsMagicClaim` has exactly ONE consumer in `src/` (the world-law findings in
+ * `generationCoherence.js:369`), so this narrows that certification and nothing else. The
+ * vocabulary is DERIVED from `ARCANE_INST_TAGS` rather than re-typed.
+ */
+const CLASSIFICATION_TOKENS = new Set(['magic', 'magical', ...ARCANE_INST_TAGS]);
+
+/** @param {unknown} value @returns {boolean} */
+function isBareClassificationToken(value) {
+  return CLASSIFICATION_TOKENS.has(String(value ?? '').trim().toLowerCase());
 }
 
 function normalizedPriority(config) {
@@ -324,6 +383,7 @@ export function createGenerationWorldLaw(config = {}, resolved = {}) {
     allowsGeneratedContent,
     allowsMagicClaim: candidate => (
       magicEnabled
+      || isBareClassificationToken(generatedCandidateText(candidate))
       || !textAssertsFunctionalMagic(generatedCandidateText(candidate))
     ),
     allowsMaritimeClaim: candidate => (
