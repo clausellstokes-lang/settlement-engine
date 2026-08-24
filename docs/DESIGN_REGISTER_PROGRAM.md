@@ -174,3 +174,42 @@ composition derivation (focal hierarchy weights) is chair-tunable vs owner-signe
 ---
 *Chair-authored 2026-08-24 (Fable), ODQ §581. Pending the skeptic panel; its findings and the
 chair's rulings will be folded as an amendment section, per the DW-0 compile precedent.*
+
+---
+
+## AMENDMENT A1 · THE OWNER'S ROUND — TIME BUDGET SIGNED, SIX CONCERNS INTEGRATED (ODQ §583–§584, 2026-08-24)
+
+**Layered per the estate's compile law: this amendment wins where it and the body disagree.**
+
+### A1.1 · New laws (extending §2)
+
+| # | Law | Ruling |
+|---|---|---|
+| L-REG-13 | **The time budget**: first-paint may take 10–20 s at full quality — instant parity with FTG is NOT the bar. Interaction after the paint (pan/zoom/hover/halo) stays smooth; determinism makes renders cacheable per settlement. Progressive reveal (the map drawing itself in layers before the user) is chartered as the wait's design surface | §583 |
+| L-REG-14 | **The zoom ladder**: the map is a TOOL that zooms, and all three references are fixed pictures — so the register defines per-zoom-level visibility (what ink, labels, marginalia, furniture appear/hide at each step), and the corpus dress must survive 4× inspection. Interactive affordances (hover states, the §494 halo, selection) get register-consistent treatments so the tool never breaks the plate | A1 |
+| L-REG-15 | **Village-first**: small tiers are FIRST-CLASS judging targets, not the city's sibling — at thorp/hamlet/village the DRAWN WORLD is the map (the corpus's own hamlet plate is its forest), and the first settlement a new user generates is small. Every judging round includes a small-tier specimen | A1 |
+| L-REG-16 | **The gallery test**: variety across seeds is an exit criterion — terrain, culture-dress (within EUROPEAN_FANTASY_BASE morphology law), era, and history must visibly differentiate maps, or the register has ironed the truth flat. Watabou's sameness is the named anti-goal | A1 |
+| L-REG-17 | **The used map stays in register**: DM annotations, fog-of-war, and VTT/print exports get register-consistent visual treatments — no sticky-notes-on-a-painting | A1 |
+
+### A1.2 · Wave additions and amendments (extending §5)
+
+| Wave | Content | Exit (observable) | Depends on |
+|---|---|---|---|
+| **REG-10** | THE ZOOM LADDER + INTERACTION REGISTER: per-level visibility tables; register-consistent hover/halo/selection; the cached-render + progressive-reveal pipeline (L-REG-13/14) | each zoom level's visible-element set is a declared table with a rendered proof per level; interaction smoothness at a stated frame budget on the reference machine; the reveal sequence demonstrated; cache hit = byte-identical | REG-6/7 (needs the layered render) |
+| **REG-11** | THE SHARE SURFACES: one-click beautiful export, the landing hero replaced (retiring the cnocby-era samples), share-card crops, PDF parity with REG-7's print answer | the export image passes the same two-legged instruments as the pane; the landing assets regenerate from the new pipeline; zero old-renderer images on acquisition surfaces | REG-7; the landing-asset swap is an owner-visible act |
+| **REG-0/9 amended** | every judging round includes a SMALL-TIER specimen (L-REG-15) and, from REG-6 onward, a GALLERY SHEET — N seeds side-by-side across terrain/culture/era — judged for differentiation (L-REG-16) | the gallery's measured spread (per-map palette/composition deltas) plus the owner's verdict | — |
+
+### A1.3 · Instrument additions (extending §6)
+
+The GALLERY-VARIETY instrument (render N seeds, measure palette/composition/density spread,
+flag convergence) · the INTERACTION check (pan/hover latency at the frame budget, post-paint) ·
+the ZOOM-LEVEL proofs (one render per declared ladder step).
+
+### A1.4 · Docket routing (extending §8/§9)
+
+**The deploy linkage is the strategy's critical path and is the OWNER'S docket row**: the
+register reaches no user until the fabric cutover (owner eyes) and a deploy (owner's train,
+nothing shipped since 2026-07-28) — scheduling that pair deliberately is the difference between
+a beautiful sandbox and an acquisition engine. **External eyes** (showing specimens to real
+DMs/players pre-launch) is recorded as an OPTION on the owner's docket — cheap relatability
+insurance, entirely the owner's call given IP posture.

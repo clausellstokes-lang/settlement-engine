@@ -25801,3 +25801,17 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   (geometry, then ink, then wash, like watching the artist) — turns the
   budget into theater and is chartered as a REG-7/8-adjacent option for the
   owner's judging round.
+
+## §584 · THE ARCHITECTURE TAKES THE OWNER'S ROUND — AMENDMENT A1 (2026-08-24 ~14:05 CDT)
+
+- **§584.1** The six concerns the chair surfaced and the owner ordered
+  integrated are now AMENDMENT A1 of DESIGN_REGISTER_PROGRAM.md, layered per
+  the compile law: five new laws (L-REG-13 time budget · L-REG-14 zoom
+  ladder · L-REG-15 village-first · L-REG-16 the gallery test · L-REG-17 the
+  used map stays in register), two new waves (REG-10 zoom/interaction ·
+  REG-11 share surfaces, which retires the cnocby-era landing assets), the
+  judging rounds amended to carry a small-tier specimen and a gallery sheet,
+  three new instruments, and the docket routing — the CUTOVER+DEPLOY pair
+  named as the strategy's critical path on the owner's docket, external eyes
+  recorded as an owner option. The skeptic panel (in flight) reviews the
+  amended document; its findings fold as A2 with the chair's rulings.
