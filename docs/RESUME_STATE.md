@@ -51,6 +51,8 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 21:58 CDT 08-23: §519 — OWNER CORRECTS: not factions, POWERS (the seat + coup contenders,
+# already `isPower`). Criminal fronts ride `occupies` not `owns`. RULING_POWER_CAUSES is the dated transfer driver.
 # ⭐⭐⭐ 21:55 CDT 08-23: §518 — OWNER: ownership is FACTION-scoped; household refusal stands. Sitting fully
 # closed. CG-1b dispatched (287/504 settlements cannot draw a map today). Next landing is a STACK.
 # ⭐⭐⭐ 21:52 CDT 08-23: §517 — B8 loop BUILDABLE; `noble` unreachable (substring defect 3rd home → CH-4);

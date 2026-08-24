@@ -21853,3 +21853,57 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   same-seed shift that raising the building cap causes. Seats: CH-2 · UC-5 ·
   WEB-8 · CG-1b. **Their landing will be STACKED** per §516 — the first stack
   since #40.
+
+## §519 — ⛔ OWNER CORRECTS §518: **NOT FACTIONS — POWERS.** THE ENGINE ALREADY DEFINES THEM, THEY ARE A SMALL BOUNDED SET, AND THE CORRECTION RESOLVES TWO PROBLEMS §518 WOULD HAVE CREATED (2026-08-23 21:58 CDT)
+
+- **§519.1 §518 IS SUPERSEDED** (not rewritten — it stands as the record of a
+  ruling the owner corrected within the hour). Owner: "wait no… not
+  factions… powers." The chair had mapped "not a person" to "a faction" and
+  never asked what the word meant. **Measured before re-ruling** at slot
+  `5055990a`.
+- **§519.2 WHAT THE ENGINE MEANS BY POWERS** (`src/domain/dossier/powerStrata.js:75-82`,
+  its own words): **THE POWERS = the governing faction (role `ruler`, when a
+  seat exists) followed by the coup contenders (role `contender`),
+  de-duplicated by name** — "a seat + up to three challengers", derived
+  deterministically from `powerStructure.factions` via `governingFactionOf`
+  and `coupContenders`. **THE FACTIONS = every faction in the settlement**,
+  each already flagged **`isPower`** by membership in THE POWERS. So a power
+  is not a different kind of entity — it is the SUBSET of factions that holds
+  or contests authority, and the flag already exists on every roster entry.
+- **§519.3 WHY THE OWNER'S NOUN IS THE RIGHT ONE, and §518's was not.**
+  (a) **It is bounded.** A seat plus three challengers, not the whole roster —
+  estate ownership does not smear across every guild and gang in town.
+  (b) **It matches the loop's own language.** The owner's B8 wording was "if a
+  neighbourhood gets more nobles or rich… they would merge poor plots into
+  one and reconstruct them". Nobles and the rich are POWERS. A street gang is
+  a faction and cannot consolidate burgages into an estate.
+  (c) ⭐ **It hands the loop a dated-transfer machinery that already exists.**
+  `RULING_POWER_CAUSES = ['coup','election','succession','conquest','appointment']`
+  with per-cause legitimacy seeds and stability prose, plus
+  `authorityTransferEpochFor` and `previousGovernmentLabelsOf` — **powers
+  already change hands on dated, caused events.** That is precisely the
+  acquisition/dissolution driver §498.5 and §500.1 require, and it is landed
+  rather than to be built. A succession or a conquest becomes an estate
+  transfer with a cause the chronicle can already narrate.
+- **§519.4 THE ONE TENSION, AND IT RESOLVES CLEANLY.** `coupContenders` takes
+  "the top-3 most powerful **non-governing, non-criminal**" factions
+  (`rulingPowerCoup.js:65`) — so under a strict POWERS reading a criminal
+  syndicate can NEVER own property, which contradicts R-INST-6's measured
+  finding that criminal fronts hold real premises. **RULED: the contract's
+  existing two relations carry it** — `owns` is a POWER (the seat and its
+  contenders, who consolidate and partition estates); `occupies` is anyone
+  else, criminal fronts included (§498.2 typed both when the owner defined an
+  estate as an ownership set, and R-INST-5's lent palace needed the same
+  split). Nothing new is minted; the distinction the charter already had is
+  what makes the owner's correction expressible.
+- **§519.5 IN FORCE.** `Estate.ownerRef` resolves to **a POWER** — the
+  governing seat or a contender — or `ANONYMOUS_FABRIC`; never a household,
+  never a named individual. EST-4's household refusal STANDS. The two-tier
+  hover halo highlights **a power's holdings** across the town. The
+  `isPower` flag is the existing membership test, so no new field is owed on
+  the faction roster. The signature sheet's ninth row is corrected in place
+  with both the superseded ruling and this one visible. ⚠ **Chair's lesson,
+  recorded:** when the owner uses a domain noun, read the ENGINE'S definition
+  of it before ruling — the same discipline as §506.2's "grep the engine's
+  spelling, not the concept", one level up: this time the word was the
+  owner's, not the code's, and it still had a precise home.
