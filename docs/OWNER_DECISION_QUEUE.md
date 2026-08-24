@@ -25680,3 +25680,37 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   wall-trace's ridge-following (Rule 2), and §577's terminations. **That
   charter moves up the fabric program's order accordingly** — a foundation
   with three customers is not optional.
+
+## §578 · THE SHAPE-CODE LAW: A BUILDING'S TYPE IS READABLE FROM ITS SILHOUETTE (2026-08-24 ~12:55 CDT)
+
+- **§578.1 ⭐⭐ OWNER DIRECTIVE:** building shapes need average consistency BY
+  TYPE AND FUNCTION — the footprint + the yard + a court + other elements,
+  plus roofs, composed as one meaningful gestalt; "the shapes also give
+  meaning… another reason the corpus is more effective." **MINTED as the
+  SHAPE-CODE LAW:** every institution/building class carries a SHAPE FAMILY
+  (footprint archetype + compound arrangement + roof form), seeded-varied
+  WITHIN the family, so type reads from silhouette alone — church = nave +
+  tower + churchyard; inn = courtyard plan with gate passage; warehouse =
+  long plain masses by the water; farmstead = house/barn L around a yard;
+  row housing = the fused party-wall rows themselves.
+- **§578.2 THE LAW LANDS ON MACHINERY THAT ALREADY EXISTS — three named
+  homes:** (i) the owner's own §494 COMPOUND vocabulary (main building, yard,
+  court, outbuilding, garden, well, midden) IS the "shape of it all" — this
+  law makes the compound's ARRANGEMENT type-driven; (ii) the DW program's 48
+  PARTIS are the interior half of the same fact, and signed band **B18
+  (parti↔massing emits the claim)** is the seam where interior form becomes
+  exterior silhouette — §578 is B18's exterior consumer, named; (iii) the
+  R-INST research already documents per-type structural imperatives ("why a
+  granary, temple, or bathhouse takes its form") — the shape families derive
+  from the dossiers, not from taste.
+- **§578.3 THE OWNER ASKED: "didn't we also do roof and shadow work?" YES,
+  CONFIRMED in three places:** the shipped v2 glyph library (26 type-shapes,
+  oblique elevations, fixed-NW ink-hatch shadows, `SHADOW_DIR {0.16,0.14}`,
+  one light shared with ground-dress wall shadows) · the recovered MF-A1
+  (hard mass shadows among its eight filter layers) · the corpus instruments
+  (the MFI1 roof-overlay grader in map-corpus/docs). Plus `massing.js`, a
+  dormant volumetric substrate no lens yet lights. **The shape-code wave
+  UNIFIES these rather than minting a fourth system.** Specimen: shape
+  families for the safely-inferable classes + class-varied roof hatching,
+  one crop proving a church-with-yard and an inn-court read differently
+  from housing rows.
