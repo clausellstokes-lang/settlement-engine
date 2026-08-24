@@ -26928,3 +26928,28 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   (the monument's dark value per hf266 now; hf323's white-roofed floor
   deferred to the zoom ladder, where the plan is thirty units wide instead
   of seven). Next in the arc: REG-4.
+
+## §629 · THE B13 MINT — THE MARKET'S FURNITURE BAND, CHAIR'S AND VETOABLE (2026-08-25 ~03:25 CDT)
+
+- **§629.1 THE BAND** (A2.2's pre-REG-4 obligation, flagged chair's): a **FIXTURE**
+  is one plan glyph from the closed vocabulary **V-B13 = { stall-row (one row of
+  small rectangles with its dashed stall-line = ONE fixture) · market cross
+  (ringed step-circle) · conduit/well · pillory/stocks · weigh-beam · trough ·
+  pound · pond · specimen tree }**. Encroachment islands are BUILDING-class —
+  market-infill fossils, counted separately, never fixtures. Counted per market
+  void at page register. **Per-rung band: hamlet 0 (no market void) · village 1–3
+  · town 3–7 · city 4–9 at the principal void, secondary voids at the village
+  band · metropolis 5–12 principal, secondary at the town band.** Above band is
+  clutter under weakest-element grading; below band is hf342's own law — "a
+  square without its furniture fails the exit." Grounded in hf259's three market
+  shapes, hf342's glyph anatomy, hf320's market-street stall dashes; the LOW
+  edges keep squint distance to Watabou/FTG, whose markets are nearly bare —
+  corpus wins dress, references bound restraint (§0 precedence). Recorded as a
+  tuning-surface constant; the signature round is the owner's, LAST, as ruled.
+- **§629.2 REG-4 OPENS** on base `93fa8a2ca` (the REG-3 seal): markets-as-street
+  (zero tint seams), V-B13 furnishing, faubourg-origin typing by CONSUMPTION
+  (`faubourg.kind` is 100 % covered — house/inn; J-REG3-1's law binds), the
+  A2-scoped densification differential with its tier-crossing positive control,
+  and market-infill fossils where the fabric records them — THIN reported, never
+  invented. **TE-SEAM is RE-DISPATCHED** — the first lane died with the context
+  break leaving no receipt; measuring only, the cure waits on the ruling.
