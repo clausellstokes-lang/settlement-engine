@@ -155,7 +155,20 @@ const alternationsOn = (line) => line.match(new RegExp(ALTERNATION_LINE.source, 
  * pattern re-presents itself for a decision instead of drifting on unnoticed.
  */
 const KNOWN_UNCONVERTED = Object.freeze({
-  'src/domain/districtProfile.js:112':
+  // RE-POINTED 112 → 122 on 2026-08-24 (TE-CH-4, ODQ §555). The alternation is
+  // byte-identical at both addresses, and the ten inserted lines are all ABOVE the
+  // pattern table, none inside it (diffed slot:1-111 against tip:1-121):
+  //   +1  the car's `factionArchetype` import at line 30
+  //   +9  the any-cast cure's typedefs — the `FactionLike` import-typedef block at
+  //       47-53 and the two `DistrictSettlement` faction properties at 76-77
+  // Address rot, not a new site — the same 57 → 58 and 333 → 334 case recorded below.
+  // ⚠ THE CAR DELIBERATELY DID NOT CONVERT THIS SITE. It declares `Mages' Quarter`
+  // in a name registry read BEFORE this regex sweep, which removes the misfire for
+  // the generator's own fourteen quarters but leaves the alternation deciding every
+  // authored, imported and legacy quarter — so the member is untouched, not fixed.
+  // Converting it is the separate measured wave R-BLD-5 names: 18 of 276 rows move,
+  // and a naive anchor loses `archmage`.
+  'src/domain/districtProfile.js:122':
     'TRUE MEMBER. District name → category: a "Tower District" or "College Row" is masonry and teaching, and reads arcane. Same shape as L10, one layer over.',
   // RE-POINTED 333 → 334 and 374 → 375 on 2026-08-24 (TE-CH-5, ODQ §541). The pattern
   // text is byte-identical in both places; the car added ONE import at line 27
