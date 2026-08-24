@@ -139,7 +139,27 @@ export function bothTotals(byLeaf, corpus = CORPUS) {
  *   whole exemplar corpus without forking this driver. `{}` reproduces the sealed renders byte
  *   for byte — which is the dormancy proof's own control.
  */
-export function buildOne(spec, fabricOptions = {}) {
+/**
+ * ⭐⭐ REG-3 · THE ARMED-CENSUS ARM. REG-1 threaded `fabricOptions` through this driver so a lane
+ * could arm a dormant feature over the whole corpus; the gap it left is that the REG-I0
+ * INSTRUMENTS call `buildOne(spec)` with no options at all (i10 line 233), so every census they
+ * run measures the DORMANT state and reports "unchanged" about a drawing nobody armed.
+ * ⚠ That is not a false figure — the dormant render is byte-identical to the sealed base, so the
+ * censuses genuinely are unchanged — but it is not the question a build wave has to answer.
+ * `REG_FABRIC_OPTS` lets the CALLER of a preserved instrument arm the corpus without the
+ * instrument being edited (the `reg-instruments` workspace is read-only to build lanes):
+ *     REG_FABRIC_OPTS='{"shapeCode":true}' node i10-censuses.mjs --wt=<tree> --leaves=ALL
+ * ⚠ IT IS INERT WHEN UNSET AND WHEN THE CALLER PASSES OPTIONS OF ITS OWN, so every existing
+ * invocation — including this file's own `main()` — is unchanged, and the dormancy proof still
+ * runs through the same function it always did.
+ */
+const ENV_OPTS = (() => {
+  const raw = typeof process !== 'undefined' && process.env && process.env.REG_FABRIC_OPTS;
+  if (!raw) return null;
+  try { const o = JSON.parse(raw); return o && typeof o === 'object' ? o : null; } catch { return null; }
+})();
+
+export function buildOne(spec, fabricOptions = ENV_OPTS || {}) {
   const cfg = { settType: spec.settType };
   if (spec.terrain) cfg.terrainOverride = spec.terrain;
   let settlement = generateSettlementPipeline(cfg, null, { seed: spec.seed });

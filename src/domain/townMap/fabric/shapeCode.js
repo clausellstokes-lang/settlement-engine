@@ -175,8 +175,8 @@ export const FAMILIES = Object.freeze({
       aisles:    { values: [0, 1, 2], bands: '0 at rung ≤ 1; 0–2 above', bias: 'rung + prosperity; an odd count is the ASYMMETRIC state — one aisle is a site state, R-INST-3 AISLED_1' },
       porch:     { values: ['none', 'south', 'north'], bands: 'any rung ≥ 1', bias: 'seeded; south is the corpus default (hf323 draws the porch south on the parish church)' },
       chapels:   { values: [0, 1, 2, 3], bands: '0 at rung ≤ 1; up to 3 at rung 3', bias: '⭐ AGE ACCRETES ASYMMETRIC CHAPELS (A3.1) — the count rises with foundation age and they are placed on ONE side, which is what accretion looks like' },
-      yardForm:  { values: ['none', 'walled', 'hedged'], bands: 'none only where no compound is reserved', bias: 'prosperity picks walled over hedged' },
-      graves:    { values: ['none', 'south', 'ring'], bands: 'none at rung 0', bias: 'AGE — an old foundation has a full yard; hf344/hf323 cluster them SOUTH' },
+      yardForm:  { values: ['none', 'walled', 'hedged'], gatedBy: 'compounded', bands: 'a precinct requires RESERVED ground — a void never enters the ground-law sweep, so an unreserved one lies over fabric nothing told it was coming', bias: 'prosperity picks walled over hedged' },
+      graves:    { values: ['none', 'south', 'ring'], gatedBy: 'compounded', bands: 'needs a precinct to stand in, so gated with it; none at rung 0', bias: 'AGE — an old foundation has a full yard; hf344/hf323 cluster them SOUTH' },
     }),
   }),
 
@@ -283,7 +283,12 @@ export const FAMILIES = Object.freeze({
     slots: Object.freeze({
       plan:  { values: ['rightAngle', 'parallel', 'doubleRange'], bands: 'rightAngle at any rung; parallel needs ≥ 30 ft of frontage (Pantin\'s own gate); doubleRange at rung ≥ 1', bias: 'the PARCEL\'s frontage decides which are legal; the seed picks among the legal' },
       backRange: { values: [false, true], bands: 'true at rung ≥ 1', bias: 'rung' },
-      kiln:  { values: [false, true], bands: 'true only for a works-adjacent trade', bias: 'the archetype — a kiln on a jeweller would be an invented fact' },
+      // ⚠ DARK, WITH ITS REASON — REG-2's `RUNG_DARK` precedent. `archetype: craft` is the only
+      // archetype routed to this family, and a craft is by definition NOT the works trades
+      // (`noxious`/`kiln`/`extraction`/`mill` route to `works`), so no live input can turn this
+      // slot on. It stays enumerated because the DW train's own craft rosters will supply one,
+      // and a slot deleted for being dark is a slot the next wave re-invents.
+      kiln:  { values: [false, true], dark: 'no live input — the works trades route to the `works` family', bands: 'true only for a works-adjacent trade', bias: 'the archetype — a kiln on a jeweller would be an invented fact' },
     }),
   }),
 
@@ -416,14 +421,24 @@ export function composeInstitution(lm, ctx) {
   // exactly what happened: the town's parish church came back as five fragments about five units
   // across, its pale interior entirely swallowed by its own outline, and i4 read the anchor at
   // massMean 119 against a fabric mean of 115 — the wave's own cure reading as no cure at all.
-  // ⭐ THE RULE: a compounded institution spends its true rung; an uncompounded one is composed at
-  // RUNG 0 — the family's floor form, which is what fits a plot — and takes no precinct at all.
-  // The CLASS still reads (a nave and a chancel is still a church); only the ACCRETION waits for
-  // ground to stand on.
-  // ⚠ `size >= compoundFloor` IS NOT THE TEST, and was the first one tried: the floor decides who
-  // may ASK for a compound, and `compoundPass.seated` records who GOT one.
+  // ⛔⛔ AND THE FIRST CURE WAS THE WRONG ONE, WHICH THE GALLERY CAUGHT AND THE ANCHOR PROBE
+  // CONFIRMED. Clamping an UNCOMPOUNDED institution to rung 0 throttled the whole shape code:
+  // MEASURED, only **1 of 91** institutions at town, 4 of 52 at city and 5 of 62 at metropolis
+  // are compound-seated, and NO church or inn is ever among them — so 75 churches over a
+  // twelve-seed gallery took **one** slot tuple between them, and 54 inns likewise. A variation
+  // law that produces one outcome is not a variation law.
+  // ⭐ THE DIAGNOSIS WAS ALSO SIMPLY WRONG, and `groundLaw.js` says so at its own sweep: items
+  // are keyed `!inst|…` so INSTITUTIONS SORT FIRST and are accepted before any parcel —
+  // *"the ordinary fabric gives way to the monumental, which is the historical direction of the
+  // transaction"*. A composed body is therefore NOT shredded by the law; the ordinary fabric
+  // moves round it. The real cause of the flat anchor reading was the poché stroke and the
+  // white-floor value, and both are cured at their own sites.
+  // ⭐⭐ WHAT SURVIVES OF THE FINDING IS THE **VOID**, and that half is real: a precinct is not a
+  // footprint, it never enters the sweep, and an unreserved one lies over fabric nothing told it
+  // was coming — which is exactly what the first town crop showed. So the SOLIDS spend the true
+  // rung and the VOIDS still require reserved ground.
   const compounded = !!(ctx && ctx.compounded && ctx.compounded.has(lm.instanceKey));
-  const rung = compounded ? (Number.isFinite(lm.rung) ? lm.rung : 0) : 0;
+  const rung = Number.isFinite(lm.rung) ? lm.rung : 0;
   slots.compounded = compounded;
 
   switch (family) {

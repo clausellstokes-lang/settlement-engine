@@ -1,0 +1,65 @@
+{
+  "leaf": "town",
+  "picks": {
+    "CHURCH": {
+      "x": 503,
+      "y": 447,
+      "w": 112,
+      "h": 112,
+      "key": "inst.parish_churches_2_5#2",
+      "family": "church",
+      "slots": {
+        "compounded": false,
+        "towerAt": "crossing",
+        "transept": 1,
+        "aisles": 1,
+        "porch": "south",
+        "chapels": 1,
+        "yardForm": "none",
+        "graves": "none"
+      }
+    },
+    "INN": {
+      "x": 449,
+      "y": 343,
+      "w": 84,
+      "h": 84,
+      "key": "inst.taverns_5_20#5",
+      "family": "inn",
+      "slots": {
+        "compounded": false,
+        "parti": "lPlan",
+        "passageAt": 3,
+        "yardDepth": "shallow",
+        "stable": "rear"
+      }
+    },
+    "WATERFRONT": {
+      "x": 623,
+      "y": 430,
+      "w": 169,
+      "h": 169,
+      "key": "inst.name.fishmonger#0",
+      "family": "quay",
+      "slots": {
+        "compounded": true,
+        "piers": 4,
+        "shed": true
+      }
+    },
+    "FARMSTEAD": {
+      "x": 990,
+      "y": 426,
+      "w": 43,
+      "h": 43,
+      "key": "hab|12296",
+      "family": "farmstead",
+      "slots": {
+        "barnLen": 2.6,
+        "yardSide": "right",
+        "outbuilding": 2,
+        "enclosed": true
+      }
+    }
+  }
+}

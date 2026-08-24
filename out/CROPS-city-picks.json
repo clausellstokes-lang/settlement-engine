@@ -1,0 +1,52 @@
+{
+  "leaf": "city",
+  "picks": {
+    "CHURCH": {
+      "x": 311,
+      "y": 445,
+      "w": 112,
+      "h": 112,
+      "key": "inst.parish_churches_10_30#0",
+      "family": "church",
+      "slots": {
+        "compounded": false,
+        "towerAt": "crossing",
+        "transept": 1,
+        "aisles": 2,
+        "porch": "none",
+        "chapels": 1,
+        "yardForm": "none",
+        "graves": "none"
+      }
+    },
+    "INN": {
+      "x": 413,
+      "y": 503,
+      "w": 79,
+      "h": 79,
+      "key": "inst.inns_and_taverns_district#0",
+      "family": "inn",
+      "slots": {
+        "compounded": false,
+        "parti": "galleryRing",
+        "passageAt": 1,
+        "yardDepth": "deep",
+        "stable": "rear"
+      }
+    },
+    "FARMSTEAD": {
+      "x": 43,
+      "y": -49,
+      "w": 54,
+      "h": 54,
+      "key": "hab|-4095",
+      "family": "farmstead",
+      "slots": {
+        "barnLen": 2.6,
+        "yardSide": "left",
+        "outbuilding": 0,
+        "enclosed": false
+      }
+    }
+  }
+}
