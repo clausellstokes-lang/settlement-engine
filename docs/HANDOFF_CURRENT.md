@@ -8,38 +8,36 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
-## ⛔⛔⛔ PICKUP CARD — REWRITTEN WHOLE AT EVERY LEDGER COMMIT (owner directive §448: the chair's 5-hour window closes often; a successor picks up HERE in 60 seconds)
+## ⛔⛔⛔ PICKUP CARD — REWRITTEN WHOLE AT EVERY LEDGER COMMIT (owner §448: a successor picks up HERE in 60 seconds)
 
-**AS OF 2026-08-24 02:33 CDT · ledger §538 · build `claude/composite-r4` = `79b78881c` (54 landings) · ledger `review-fixes-2026-07-08` = §538 · ⛔ LANE CAP = **FOUR** (§508, superseding §465's two — the heartbeat carried the revoked figure for a day) · ⛔ EVERY dispatch `model: "opus"` (§484; Fable is the chair only)**
+**AS OF 2026-08-24 03:41 CDT · ledger §543 · build `claude/composite-r4` = `86794b5d2` (**56 cars landed**) · ⛔ LANE CAP = **FOUR** (§508) · ⛔ every dispatch `model: "opus"` (§484) · standing lane law = `$SP/LANE-LAW.md`, slot facts = `$SP/SLOT-FACTS.md`**
 
-**THE ONE THING THE OWNER MOST NEEDS TO SEE:** ⛔ **nothing has deployed since 2026-07-28.** Prod is at migration **121**, repo head is **199**, 78 pending, **198 is DESTRUCTIVE**. Every fix on the branch — including the licence removal that took 14.4 MB of non-commercial art off it — is stranded behind that gate. It is owner-gated by nature.
+**⛔ THE OWNER'S #1 ITEM: nothing has deployed since 2026-07-28.** Prod at migration **121**, repo head **199**, 78 pending. ⭐ **MEASURED THIS SESSION (§540.7–.8): the push itself deletes nothing.** 12 of the 13 destructive migrations act only inside function bodies. **198, the one labelled DESTRUCTIVE, deletes nothing at apply time** and its prune is double-gated, both fail closed. ⛔ **The one that acts at push time is 188** — it deletes users' custom supply-chain content, mitigated by a quarantine receipt written to `application_command_journal` **before** deletion. **`docs/DEPLOY.md` covers 198 well and does not mention 188 at all — that amendment is owed and unowned.**
 
-### FIRST ACTS ON PICKUP, IN ORDER
-1. `git -C /Users/cstokes/Desktop/settlement-engine log -1 --oneline review-fixes-2026-07-08 claude/composite-r4` — if either moved past this card, the ODQ tail is newer than the card. Read the tail.
-2. Read **`$SP/LANE-LAW.md`** (session scratchpad). It is the standing lane law — slot facts, the gate incantation, the ~14 instruments that lie, census + packet rules. Briefs CITE it; never restate it.
-3. Re-arm the §388 wakeup (CronCreate `13,33,53 * * * *`) — it is session-only and dies with the session. **Cap FOUR. A sub-lane counts. Briefs carry the SOLO clause.**
-4. For every lane below: grep BOTH scratchpads (6298872d AND 695a70c5), read its receipt's last `RESUME POINT`, and resume it **mid-lane** — never restart from zero (§448).
-5. ⛔ Before ANY worktree cleanup, ref-pin every detached HEAD that is not an ancestor of the tip. On 08-24 two lane tips (`4171bfd9a`, `fefca7f5f`) were one `worktree remove` from unrecoverable.
+### FIRST ACTS ON PICKUP
+1. `git -C <repo> log -1 --oneline review-fixes-2026-07-08 claude/composite-r4` — if either moved past this card, read the ODQ tail.
+2. Read `$SP/LANE-LAW.md` (gate incantation · the ~15 instruments that lie · census/packet rules) and `$SP/SLOT-FACTS.md`.
+3. Re-arm the §388 wakeup (`13,33,53 * * * *`) — session-only, dies with the session. Cap FOUR, a sub-lane counts, briefs carry the SOLO clause.
+4. ⛔ Before ANY worktree cleanup, ref-pin every detached HEAD that is not an ancestor of the tip.
+5. ⛔ Lanes build their OWN `node_modules` with `npm ci`. **Never symlink the shared one** — it is 434 pkgs to the slot's 468 and five weeks stale (§540.2). `npm ci` also installs `.husky/_`, so lane commits now RUN pre-commit and `eslint --fix` RE-STAGES.
 
-### THE FOUR SEATS AS OF THIS CARD — ALL FILLED, ALL OPUS
-| seat | lane | worktree (695a70c5 scratchpad) | what it is |
-|---|---|---|---|
-| LANDING | **TE-STACK-4** | `laneSTACK4-tree` | stacks `holding-aip1` (08f39dba4) + `holding-ch2` (2ccb20d59) through ONE gate. ⚠ **both sit on STALE bases** (`567030f1d`, `70bb64f23`) — each needs a rebase and a re-stamped delta. Per-figure sibling controls: a whole-car control is VACUOUS here (§530.3). |
-| COMPILE | **DW-0** | `laneDW0-tree` | the dwellings charter compile (§482 — the DW arc lands before `/code-review ultra`). Reads R-INST-6 Sigma.2 → R-INST-5 §488.2/§1.4/§15.2 → R-INST-6 Sigma.5 → the seven ledgers. **Warned: CH-3 is changing catalog data underneath it; every catalog figure is provisional.** |
-| BUILD | **TE-CG-2** | `laneCG2-tree` | the identical-footprint defect (~13% of buildings share a footprint), which blocks the estate/property-line wave. Told to re-measure before fixing. Declared golden shift expected. |
-| BUILD | **TE-CH-3** | `laneCH3-tree` | catalog hygiene, "the data slips". Three chair rulings issued (ODQ §538.5) — carries a large **declared** same-seed shift: 81/420 rosters, ~130 names. |
+### SEATS NOW
+| seat | lane | state |
+|---|---|---|
+| COMPILE | **DW-0 (repair)** | resumed with the 46 KB skeptic docket at `$SP/DW0-RULING-DOCKET.md`; 14 blockers to close. Charter `7c3377cd4` (pin `holding-dw0`) is on **ZERO branches** — nothing to un-land. |
+| BUILD | **TE-CG-2** | identical-footprint defect; own `npm ci` tree. ⚠ the panel notes **CG-2 × CG-1b was measured by nobody** — this lane is the first. |
+| BUILD | **TE-CH-3** | catalog data slips; three declared digests, each to be re-derived AT the committed tip because pre-commit re-stages. |
+| free | — | deliberately empty: the gate is SERIAL and adding a lane buys contention, not throughput (§541.10). |
 
-**Holdings pinned:** `refs/preserve/holding-aip1`, `holding-ch2` (both being landed by STACK-4), plus `wt-4171bfd9a` / `wt-fefca7f5f` (rescued lane tips) and the long-lived research/receipt pins.
-**Research:** COMPLETE. All six tranches + CIRC addendum at `refs/preserve/research-dossiers-2026-08-23` (`029268fe5`; the research-complete commit `07fbed7b` is its ancestor — the ref ADVANCED, nothing was clobbered, see §538.3).
+### ⛔ FIVE DECISIONS THAT ARE THE OWNER'S (§543.9) — none delegated
+**O1** the `interiors` ladder row's stored return cells vs signed B16b; my recommendation strikes the 2026-07-17 "one free sample interior per settlement" teaser — *paid surface*. **O2** `Estate.ownerRef`'s type — *persistence shape*, the §519-vs-§498 tension, the program's largest contract change. **O3** `PlanDelta` / `EstateEvent` / EST-5's ownership ledger — three new durable artefacts. **O4** the seven-rung prosperity ladder — *tuning signature under THE PROMISE*. **O5** certifying the DW-S soak green with determinism and lived-history immutability unmeasured.
+⭐ **O6 is DISCHARGED — do NOT re-ask.** The three viewing paywalls were ruled at §523.3 (`change-view` FREE · `map-chains` FREE · `fog-table` PAID).
 
-### THE QUEUE AFTER THESE FOUR
-Landing (stack whatever holdings exist — §516: singleton landings were the dominant slowdown) → **CH-4** (`noble` unclassifiable) → **CH-5** (the `ARCANE_INST_TAGS` content call) → **DW-0 ratification** once its compile reports → **the DW build waves** (41 cars, Opus; §482 puts the whole arc before the review) → WEB-8b → WEB-12 → **R3** (metadata byte-surgery into 46 bare files) → the wiring wave → WEB-9a/9b/10/11 → HK-4/HK-5/HK-6 → the housekeeping sweep → content train CT-4/CT-5/WF-8 → **the AD program** (5 waves / 17 cars: property lines, estates, the §494 hover halo) → ONE trailing OSR mint → the parity train → `/code-review ultra` (OWNER keystroke) → endgame.
+### THE QUEUE
+DW-0 repair → chair rules R1–R7 → **CH-3 lands** → **CH-5 build** (Shape F, ruled §541: move `alchemy` alone into `TRADE_INST_TAGS`, de-tag the three `none`-licensed rows; **MF-CH2B leaves DRAFT on it**) → **CH-6** (`ARCANE_INST_KW` — ⛔ carries a **live shipped deity-doctrine violation**: a magic-free world can hold no divine healer or druid circle, §541.8) → CH-4 → **R3** (metadata into the 46 bare files; ⛔ **Higgsfield §5.5 binds 2026-08-27**) → the DW build waves (41 cars; §482 puts the whole arc before the review) → WEB-8b/12 → the wiring wave → WEB-9a/9b/10/11 → HK-4/5/6 → housekeeping → CT-4/CT-5/WF-8 → the AD program → one trailing OSR mint → parity train → `/code-review ultra` (OWNER) → endgame.
 
-### ⛔ OWNER-GATED BY NATURE — never the chair's, no matter the delegation (§510.2)
-The physical `supabase db push` · every push and deploy · legal sign-off · the tuning **signature** · the `/code-review ultra` keystroke.
-
-### OWNER ACTS OUTSTANDING
-The db push + deploy (**urgent, day 27**) · a ~10-minute reverse-image search on `spain-small.jpg` and `pergamena-small.jpg` (Cohort A, 23 files / 7.4 MB, the only unlicensed shipped imagery) · lighting `townCartographyEnabled` (MP-1's halo is on the branch but DARK) · Stripe · legal · the tuning signature.
+### ⛔ OWNER-GATED BY NATURE (§510.2)
+`supabase db push` · every push and deploy · legal sign-off · the tuning **signature** · the `/code-review ultra` keystroke.
 
 ## ⭐⭐⭐⭐ SUCCESSION ADDENDUM — 2026-08-24 (~01:40), LEDGER THROUGH §439 — READ THIS DELTA FIRST, THEN THE §427 BLOCK BELOW
 
