@@ -23953,3 +23953,77 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   variant per §544.7) — **both built on `79b78881c` and owed a rebase** — plus
   `holding-dw0-final` and the rescued `ad-charter-2026-08-24`. **The next landing
   is a two-car stack: CG-2 + CH-3.**
+
+## §547 · THE REVISED RULING BEAT ITS OWN ESTIMATE, AND A LANE CAUGHT ITSELF ONE COMMIT FROM FREEZING A BUG (2026-08-24 05:25 CDT)
+
+- **§547.1 THE RNG-PRESERVING VARIANT WAS THE RIGHT CALL, BY MEASUREMENT.**
+  §544.7 revised my §538.5 approval; the shipped result beats the ~34 I
+  predicted. `exclusiveGroupCoexists: true` on the two city rows, chance drawn
+  from `rng.fork('exclusiveCoexist::<tier>::<category>::<name>')`:
+
+  | figure | first form | shipped |
+  |---|---|---|
+  | rosters / 420 | 81 | **30** |
+  | golden rows / 525 | 144 | **22** |
+  | `Monastery or friary` injection | 21 city + 5 metro | **0 / 0** |
+  | Wizard News contract | 272→270, two baselines, an authored inert-rule reason | **2 files / 16 tests / EXIT 0** |
+
+  **The news bill did not shrink — it DISSOLVED.** No authored prose in a
+  protected substrate is touched. `Cathedral` unmoved at 26/29,
+  `Multiple monasteries` 0→12 city and 32→50 metro, settlement names zero.
+  Digest `ae67602f…`.
+- **§547.2 ⭐ THE LOAD-BEARING DESIGN CHOICE WAS NOT THE OBVIOUS ONE.** The row
+  **stays in its exclusive group** — that is what keeps `coherenceRepairPass`
+  refusing a same-group add — and only the *blocking* is lifted. The panel's
+  suggested form hard-coded the group name, so the permission had to become
+  **data**; the lane named that as a new affordance rather than burying it in a
+  diff.
+- **§547.3 ⛔⛔ THE VALIDATOR WAS TELLING PLAYERS THE OPPOSITE OF THE RULING.**
+  After the revision `structuralValidator` began reporting that a cathedral city
+  holding monasteries is **"a deliberate override — expect political tension,
+  power struggle."** That is user-facing text asserting the exact inverse of what
+  §541/§544 ruled: the coexistence is the CORRECTION, not an anomaly. It now
+  skips coexisting rows, **and that repair returned the observed-shape corpus to
+  baseline EXACTLY (1300/8607/14586, zero drift).** ⭐⭐ **In the lane's own
+  words: "I came within one commit of re-recording a frozen baseline around my
+  own bug."** The two shapes it had added were `structuralViolations` and
+  `authoredTensions` — i.e. **the bug's own output was about to be frozen as the
+  new truth.** This is the golden-re-record trap in its purest form and it was
+  caught by asking why the baseline moved instead of updating it.
+- **§547.4 THE GATE FOUND FOUR BILLS AFTER THE REVISION, NONE PREDICTED.** Beyond
+  the validator: `exclusiveCoexist` is the **fourth** `::`-embedding fork family
+  and owed a registration (chain check done — the token appears at exactly one
+  `.fork(` site in `src`); `facetInferenceHonesty` A7 went 3→5, **which is
+  MF-CH1's arm working exactly as it said it would**; and
+  `negativeAssertionAnchor` caught the lane's **own** un-anchored negative.
+  **A revision is a new car, not a smaller one** — its bills are re-derived, not
+  inherited.
+- **§547.5 THE LANE REVERSED ITS OWN JUDGMENT J-TECH3-D.** It had recorded
+  "nothing enforces `generatedAt`". **False:** `CR-EB-2 (b)` enforces a
+  600-second build window across the five sidecars. Its own account is the
+  lesson — *"I argued against a rule whose enforcement I had stopped looking for
+  one file too early."* All five sidecars now commit as a set.
+- **§547.6 ⭐⭐ A SAMPLED ARM IS A SMOKE ALARM, NOT AN INVENTORY.** The
+  cartography **sample** reported **6** drifted rows; the re-record moved **100
+  of 504**. A sampling check tells you *that* something moved and is worthless
+  for *how much*. New standing law. Second figure worth the record: **87 records
+  move against only 30 rosters**, and all 57 of the difference carry the two
+  declared rows and now carry the new key — **a key-spread, not an rng leak,
+  verified 57 of 57.** The distinction matters because an rng leak would have
+  meant the variant failed at its one job.
+- **§547.7 HOUSEKEEPING, AND THE WAIVER VINDICATED.** Rebase conflict-free;
+  `src/**` byte-identical across the slot move, so every prior digest reproduced
+  — **and the lane re-executed them rather than assuming.** Census delta carried
+  never stamped: `2524/366/2158/21002/5845 → 2525/366/2159/21012/5846`,
+  **+1/+0/+1/+10/+1**, row deferred to the landing act. Packet re-stamped in both
+  places — **the validator reds when the two disagree, and it caught the lane's
+  own mismatch.** The car is now **five** production files, not four:
+  `assembleInstitutions.js` joined with the revision, **which is precisely the
+  reason §544's ≤3-file waiver was granted** — the extra file is a consequence of
+  the ruling, not scope creep.
+- **§547.8 STACK 5 DISPATCHED.** `holding-ch3` = **`da2c7085c`** (16 commits,
+  already on the current slot) + `holding-cg2` = `44b83a882` (still on
+  `79b78881c`, owed a rebase). ⚠ **Both minted a packet on a 175 base and each
+  measured 176 independently; stacked, the surface is 177** and the manifest will
+  conflict — the landing re-derives by execution. `parked` is the figure NEITHER
+  car touches, so a parking plant is how that arm proves itself alive.
