@@ -26191,3 +26191,25 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   tower interiors, gate anatomy, crenellation ticks at rank). Recorded with
   the §585 note that this approval arrived unprompted from the owner's own
   eyes, not solicited past the delegation.
+
+## §599 · THE LANE VERIFIES THE CHAIR'S REBASE FROM THE OTHER SIDE — AND TWO INSTRUMENT LAWS FALL OUT (2026-08-24 ~17:45 CDT)
+
+- **§599.1 INDEPENDENT CORROBORATION OF THE §597 LANDING.** TE-CH-6, waking
+  to find its work rebased, verified before reacting: all five commits
+  patch-id identical pair-by-pair (with a live negative control), the three
+  stacked-landing shared artifacts intact (census tuple unmoved, packets 182
+  with MF-CH6 present, 525 golden rows with zero divergent hashes), and the
+  only tree delta the eleven DEPLOY.md lines. Its patch-id control and the
+  chair's diff-of-diffs control now agree from opposite directions. It
+  rightly left the re-gate decision to the chair — who had already run it
+  (§597.1).
+- **§599.2 ⛔ TWO LAWS BANKED FROM ITS DILIGENCE:** (i) **zsh does not
+  word-split `set -- $pair`** — the lane's first patch-id control compared
+  empty strings and printed IDENTICAL five times; a control that cannot fail
+  proved nothing until re-run under node. The vacuous-control family gains a
+  named member. (ii) **THE BANKED-FAILURE BLIND SPOT ON REBASE:** because
+  `enforcement-claims` is banked failure #5, a `docs/**.md` delta arriving in
+  a rebase could add a NEW naked claim without redding any gate — the
+  standing cure, now law: any rebase whose delta touches `docs/**.md` owes a
+  STANDALONE re-run of the claims guard at the new tree, exactly as the lane
+  performed (same six claims, none in DEPLOY.md).
