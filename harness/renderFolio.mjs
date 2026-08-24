@@ -143,8 +143,30 @@ export const FOLIO = {
 export const OP_CEILING_BY_TIER = Object.freeze({
   thorp: 1000, hamlet: 1200, village: 1800, town: 4600, city: 6400, metropolis: 9700,
 });
+/**
+ * ⭐⭐ REG-4 · `REG_OP_CEILINGS` — A MEASUREMENT-TIME OVERRIDE, AND IT EXISTS BECAUSE THE PIN
+ * BELOW IS **NOT** THE SIGNED TABLE. `OP_CEILING_BY_TIER` at this seal still holds the pre-REG-2
+ * values (town 4,600 · city 6,400 · metropolis 9,700) while ODQ §628 has SIGNED
+ * hamlet 1,400 · village 2,000 · town 9,300 · city 10,000 · metropolis 14,200 — REG-2 and REG-3
+ * each measured a raise and, correctly, did not take it.
+ *
+ * ⛔ THE CONSEQUENCE IS THAT A SPEND MEASURED AT THIS TIP IS NOT THE SPEND AT THE SIGNED
+ * CEILING, and REG-3's receipt flagged exactly this: *"two mid-pass rations price against CEIL,
+ * so the figures must be RE-MEASURED after any raise before pinning."* Measuring against the low
+ * pin makes every pass give way early and reports a total the drawing would never produce.
+ *
+ * ⭐ THE ENV ARM LETS THE LANE MEASURE THE TRUE SPEND WITHOUT MOVING THE PIN — J-REG3-10's own
+ * pattern (`REG_FABRIC_OPTS`) applied to the ceiling. ⚠ INERT WHEN UNSET: every existing
+ * invocation, including the dormancy proof, is byte-for-byte unchanged.
+ */
+const ENV_CEILINGS = (() => {
+  const raw = typeof process !== 'undefined' && process.env && process.env.REG_OP_CEILINGS;
+  if (!raw) return null;
+  try { const o = JSON.parse(raw); return o && typeof o === 'object' ? o : null; } catch { return null; }
+})();
 /** The ceiling a leaf is priced against. */
 export function opCeilingFor(tier) {
+  if (ENV_CEILINGS && Number.isFinite(ENV_CEILINGS[tier])) return ENV_CEILINGS[tier];
   return OP_CEILING_BY_TIER[tier] == null ? OP_CEILING_BY_TIER.town : OP_CEILING_BY_TIER[tier];
 }
 /** The legacy single figure, kept ONLY as the floor of the ladder so nothing reads a raise
@@ -1095,7 +1117,7 @@ export function renderFolio(fabric, opts = {}) {
   //    ⭐ THE SQUARE IS THE ONE PLACE THE CARRIAGEWAY WIDENS INTO A ROOM, so it is drawn
   //    AFTER the web and in the same tone: the web runs into it and stops, which is what a
   //    market place is — the void the streets organize around.
-  // ⭐⭐⭐ 8r · REG-4 · **THE MARKET IS ONE GIANT STREET** (L-REG-6). SUPERSEDES the pass above
+  // ── ⭐⭐⭐ 8r · REG-4 · **THE MARKET IS ONE GIANT STREET** (L-REG-6). SUPERSEDES the pass above
   //    when armed — never supplements it, so the void is painted exactly once.
   //
   // ⛔ WHAT THE UNARMED PASS DOES WRONG, and the FILL is not it. The square already carries the
@@ -1510,7 +1532,7 @@ export function renderFolio(fabric, opts = {}) {
       const poly = MF(b.key, b.polygon); if (!poly) continue;
       lean += polyPath(poly); prims.n++;
     }
-    // ── ⭐⭐⭐ 11b-r · REG-4 · **THE FAUBOURG'S TYPED ORIGIN, MADE VISIBLE** (L-REG-3).
+    // ── ⭐⭐⭐ 11r · REG-4 · **THE FAUBOURG'S TYPED ORIGIN, MADE VISIBLE** (L-REG-3).
     //    Drawn BEFORE the buildings so the district's own ground lies under its members, which
     //    is what makes a suburb read as a DISTRICT rather than as loose houses in a field.
     //    ⭐ THE THREE ORIGINS DRAW DIFFERENTLY, and the difference is measurable geometry
