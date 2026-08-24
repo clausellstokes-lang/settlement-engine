@@ -26809,3 +26809,34 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   the soak legs read one canonical series instead of three private
   reconstructions. REG-D holds for REG-T2's substrate as its fixtures'
   source of truth.
+
+## §625 · THE AD CHARTER'S VALIDATION — SEVEN OF SEVEN RATIFIED, THE MARKER DISCHARGED, AND THE THREE-PAINTER PROBLEM NAMED (2026-08-25 ~01:20 CDT)
+
+- **§625.1 RULED — the verdict is ACCEPTED wholesale.** All seven J-AD
+  judgments RATIFIED on re-derivation; three annotations adopted (J-AD-3's
+  derived-vs-persisted roof scope so REG-3 and AD cannot be mis-billed
+  against each other · J-AD-5's anchor re-points to the fabric stack at
+  cutover, and its refutation clause cuts both ways — if REG-7's
+  baked-raster branch satisfies the clause, painterly's MECHANISM refusal
+  falls by the charter's own terms while the register-ground refusal stands ·
+  J-AD-6/-7's one-writer notes). **Correction of the chair's own record
+  accepted: §620.2/A6 mis-cited the Q2 constraint's home — it is Amendment
+  A2, and the seam verification was the A5 panel's.** The marker is
+  DISCHARGED as recommended: the preserve ref advanced with the original as
+  parent, the header now reading FABLE-VALIDATED-AT-THE-JUDGMENT-LAYER with
+  figures provisional-on-dispatch, and the full verdict riding in-tree as
+  the charter's register-era amendment layer.
+- **§625.2 THE RECONCILIATION FINDINGS, ROUTED:** **R1 THE THREE-PAINTER
+  PROBLEM** — three town-scale geometry producers now exist (the live
+  townMapDraw, the dark townCartography stage where MP-1 landed, the sealed
+  fabric) and no document says which canvas AD's wave B paints on: **the AD
+  dispatch brief must rule it per car**, and the cutover plan (REG-P) gains
+  the same question as a named input. **R7** — AD's wave A was substantially
+  executed out-of-band (the IP cull landed: charges 338→104, textures 23→2;
+  the notices page grew its art/AI sections; the licence walker shipped) —
+  the residuals consolidate into the standing owner items (the
+  ASSET_MANIFEST+walker shape unbuilt · the AI-vendor ToS question · the
+  7.4 MB unknown cohort · notices 404-until-deploy). **R9** — three
+  documents now carry three glyph counts; ONE real count at dispatch, and
+  wave B holds for the register's Q3 ruling. R4/R5/R6/R10/R11 fold into the
+  AD dispatch brief's obligations list as written in the verdict's §V4.
