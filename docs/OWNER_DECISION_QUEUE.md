@@ -25733,3 +25733,20 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   geometry beneath it earns — a corpus-measured ratio applied to geometry
   the corpus doesn't have produces noise, not fidelity.** (The sibling of
   §561.2's blind-golden law, on the render side.)
+
+## §580 · ⭐⭐⭐ THE NORTH STAR — THE OWNER'S TIE-BREAKER FOR EVERY VISUAL DECISION (2026-08-24 ~13:15 CDT)
+
+- **§580.1 THE LAW, IN THE OWNER'S OWN FORMULATION (recorded as the standing
+  default whenever any visual call must be thought about):** *"it should look
+  like it was based off of Watabou and FTG but upgraded with the aesthetics
+  of the corpus, and it should read just as good or better than Watabou and
+  FTG, with the ease of reading as [good as] the corpus. All while holding
+  on to our truths."* Parsed as the resolution order every lane and every
+  judging round applies when in doubt: **LINEAGE** — the base look descends
+  recognizably from Watabou and FTG (a user should feel the family) ·
+  **UPGRADE** — the corpus supplies the aesthetic elevation over that base ·
+  **BAR** — readability ≥ Watabou/FTG, ease-of-reading at corpus grade ·
+  **INVARIANT** — the truths hold underneath, always. This sharpens §574's
+  triangulation into a precedence: when two references disagree, the
+  Watabou/FTG reading-grammar wins the STRUCTURE of the choice and the
+  corpus wins its DRESS; and nothing ever wins against the truth beneath.
