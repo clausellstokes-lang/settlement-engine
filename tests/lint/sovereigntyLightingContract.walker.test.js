@@ -6528,7 +6528,43 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   already read them back at the slot figures BY EXECUTION, which is this car's own split
     //   rather than a re-proof of the instrument.
     // The arithmetic closes: 366 + 2,159 = 2,525 still.
-    files: 2525, parked: 366, credited: 2159, titles: 21033, suiteTitles: 5849,
+    // == RE-RECORDED 2026-08-24 BY THE TE-CH-4 LANDING — ONE CAR, ONE TEST FILE ==
+    // 2,525/366/2,159/21,033/5,849 -> 2,525/366/2,159/21,049/5,852 at slot 479992b6e
+    // (the MF-CH7 landing, whose row is the block immediately above).
+    // ⚠ THIS CAR WAS REBASED ONTO THAT LANDING AND ITS ROW RE-WALKED AT THE REBASED TREE.
+    //   The pre-rebase reading of this same delta was 21,026/5,848 -> 21,042/5,851. Neither
+    //   of those numbers is stamped here and neither was carried forward by arithmetic: the
+    //   base moved under the car, so the whole tuple was re-measured against the tree it
+    //   actually ships in. The DELTA is what survived a rebase (+16/+3); the TUPLE is not.
+    // TE-CH-4 declares the generator's fourteen quarter names in a QUARTER_CATEGORY
+    // registry and routes the dominant faction on the CANONICAL archetype. Its only test
+    // file with new titles is tests/domain/districtProfile.test.js — an EXISTING, CREDITED
+    // file — so `files`, `parked` and `credited` cannot move and did not.
+    // +0 files / +0 parked / +0 credited / +16 TITLES / +3 SUITE TITLES.
+    // THE CURE TOUCHED THREE MORE TEST FILES AND NONE OF THEM MOVED A FIGURE, which is
+    // stated because "only one file changed" would otherwise be false:
+    //   tests/domain/townCartographyCalibration.test.js  32 titles / 9 suites — a ledger
+    //     row and two frozen constants; comments and constants carry no title.
+    //   tests/lint/arcaneClassifierCensus.walker.test.js  6 titles / 1 suite — one
+    //     recorded-set key re-pointed, plus its dated note.
+    //   tests/lint/proseNumerics.test.js  PARKED (0 titles, 0 suites) — a parked file
+    //     contributes nothing to either count by construction, so its added note is
+    //     invisible here even in principle.
+    // THE ATTRIBUTION IS A SINGLE-FILE CONTROL, the one shape that cannot be ambiguous,
+    // AND IT WAS RE-RUN AT THE REBASED TREE rather than inherited from the pre-rebase run.
+    // `git show 479992b6e:tests/domain/districtProfile.test.js` (6,772 bytes, md5
+    // f03be4a479b72e931ed8385dbd8c3966) restored over the car's copy (15,805 bytes, md5
+    // 2ab5bd6dfe345fa317f05d1c0cefd5a5) returns the census to the SLOT TUPLE TO THE DIGIT
+    // — 2,525/366/2,159/21,033/5,849, that file reading 17 titles / 5 suites — and the
+    // car's copy restored (md5 compared identical) returns 21,049/5,852 with that file at
+    // 33 titles / 8 suites. So the whole +16/+3 is one file's, established by removing
+    // that one file's change and reading the slot tuple back, not by arithmetic.
+    // ⚠ MEASURED BY EXECUTION, not carried: the walker's own parsing machinery
+    // (`TEST_FILES`/`parkReasonsFor`/`liveTitlesIn`/`liveSuiteTitlesIn`) was lifted out of
+    // vitest and driven under plain node, so the reading is this walker's own predicate
+    // over the live estate rather than a figure copied from a gate log.
+    // The arithmetic closes: 366 + 2,159 = 2,525 still.
+    files: 2525, parked: 366, credited: 2159, titles: 21049, suiteTitles: 5852,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
