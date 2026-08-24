@@ -24245,3 +24245,95 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   the recommended registry is placed *below* line 117. ⚠ A test keyed by
   `path:line` is a latent breakage in its own right; the panel is asked whether
   routing code around it is the answer or whether **the key is the defect.**
+
+## §551 · THE FIXTURE UNION IS 135, NOT 82 — AND THE 84% SIGNAL WAS A METHOD ARTIFACT (2026-08-24 06:39 CDT)
+
+- **§551.1 THE PRE-DW-1b GATE IS DISCHARGED, AND THE ANSWER IS RULABLE BECAUSE
+  OF ITS SENSITIVITY BAND.** The mechanical union is **135**, against a shipped
+  **82**. What makes it a ruling rather than an opinion: **floor 106 · ruled 135
+  · ceiling 563 — EVERY defensible rule exceeds 82**, so the verdict does not
+  depend on the adjudicator's judgement. Adjudication was **complete: 481 of 481
+  unmatched keys, zero unadjudicated, zero stray** — 53 genuine misses, 277
+  fairly-consolidated variants, **147 that are not fixtures at all** (envelope
+  73, room/zone 39, declared `RECESS`/`SUBDIVISION` 16, non-object 19), 14 parse
+  noise. Yield: 102 spans, 861 token instances, 713 distinct keys.
+- **§551.2 ⭐⭐ THE 84% SIGNAL WAS INFLATED BY A METHOD ARTIFACT, NOT ONLY BY
+  NOISE.** DW-0's recorded extraction rule — *"extract every backticked
+  `UPPER_SNAKE` token"* — is **blind to three of the corpus's four registers**:
+  R-INST-6 uses a **bolded** marker with **lowercase** tokens, R-INST-2 uses
+  **bare prose**, and 28 markers omit the brackets. **Run verbatim it returns 0
+  spans and 0 tokens on ALL of R-INST-6, against a hand count of 8 blocks / 75
+  tokens.** Its 363-token denominator was drawn from the one register the shipped
+  60 drew from *least*. ⚠ **§545.4's "57 of 363" is therefore superseded: it was
+  measured with an extractor that could not see most of the corpus.** The v4 rule
+  and its four dressings are the method DW-1b re-runs.
+- **§551.3 `82 = 22 + 60` STANDS AS ARITHMETIC AND FALLS AS A CLAIM.** Re-parsed:
+  §2.3 gives 60 segments, 60 distinct, zero duplicates, and `FURNISHING_KINDS` at
+  the slot is exactly 22 — **AR-7's recount holds.** What is refuted is the
+  *description* "the tranches' union, de-duplicated". **Both halves are recorded
+  so nobody re-derives the arithmetic and believes they have re-derived the
+  claim.**
+- **§551.4 ⭐ THE 60 INVENTED NOTHING — THE DEFECT IS PURELY OMISSION.** 80 of 82
+  members are asserted by some `fixtures[]` span; **present-but-not-in-any-tranche
+  is 2** (`cresset`, `tuns`) and **zero against the whole corpus**, both appearing
+  outside a fixtures block. **So no member should be REMOVED**, only added to.
+  ⭐ The lane also corrected its own first pass: it had reported 7 orphans, caused
+  by **matcher precedence** (`QUENCH_TROUGH` head-matched `trough` before
+  reaching `quench`).
+- **§551.5 RULING — 82 → 135, APPROVED as a declared figure move**, landing with
+  DW-1b's vocabulary work in the shape AR-7 used for 81→82.
+- **§551.6 RULING — THE `portableFurnaces` ARM, APPROVED AS RECOMMENDED, AND MY
+  ANCHOR UNDERSTATED IT.** **VERIFIED BY ME at the slot: `portableFurnace` 0
+  files, `flueCount` 0 files, and word-anchored `\bflues?\b` ZERO files.** The
+  arm `furnaces ≤ flues + portableFurnaces` **names three quantities and the
+  engine types none of them.** `furnace` exists in 3 files, **all prose**. The
+  diagnosis is a vocabulary crossing: R-INST-5 puts `furnace{grade}` and
+  `flueCount` in **Structural buckets** while `PORTABLE_FURNACE` sits in
+  `fixtures[]`, so the arm reached across two vocabularies. **Cure:** mint
+  `furnace` as a fixture kind carrying `flued: bool` and rewrite as
+  **`count(furnace where flued) ≤ flueCount`** — which keeps `flueCount`
+  structural and does not convict the laboratory, because Uraniborg's portable
+  furnace is `flued:false`, *the very reason the dossier calls it the one that
+  defeats the flue constraint.* §546.3's warning is confirmed: the naive
+  `furnaces ≤ flues` would red Brahe's six athanors against one flue.
+- **§551.7 ⛔⛔ AND I HIT CH-4's OWN DEFECT WHILE VERIFYING A DIFFERENT CAR.** My
+  quick check reported `flue` in **137 files**. Anchored, it is **ZERO** — the
+  137 were `influence` (121 files), `influenced` (3) and `affluent` (1).
+  **An unanchored substring match manufacturing 137 false positives is exactly
+  the `den`-in-"Resi*den*tial" defect CH-4 exists to fix (§550.4), committed by
+  the chair, in the same hour, against a different subsystem.** Recorded as
+  evidence FOR the CH-4 ruling and as a standing caution: **anchor every token
+  match, and never read an unanchored count as a presence claim.**
+- **§551.8 RULING — STRIKE THE ALEMBIC / CONDENSER-LOOP PRECEDENT.** *Decided:*
+  **a fixture is a FIXED INSTALLATION** — hearth, well, forge, loom — which is
+  what makes it a property of the ROOM rather than of whoever works there.
+  Movable bench equipment (alembic, cucurbit, aludel, receiver, drug jar) is
+  **not** a fixture kind. *Why:* the legibility argument is real — an alchemist's
+  room should read as one — but it is answered by **ATTRIBUTES, not members**:
+  `bench{distilling}`, `furnace{flued:false}`. **That is precisely the pattern
+  the lane's own finding endorses** — it showed `RING_TABLE` is `table` plus a
+  shape attribute and NOT a genuine miss, **vindicating the C-17 refusal on
+  stronger grounds than C-25 had** — and applying it consistently strikes the
+  `vessel` family. The owner's signed **B1** binds too: *"always everything is
+  bite"*, and a dossier enumerating cucurbits is past bite-sized. *Rejected:*
+  extending the precedent, which by the lane's account is what forces the
+  `vessel` family and much of the tail. *Reversal:* re-admit it; the 53 are
+  itemised. **135 is being re-derived under the struck precedent, with a STOP
+  instruction if it falls near 82 — that would mean the floor was carrying
+  vessels and my reasoning is wrong.**
+- **§551.9 ⚠ B11 IS MATERIALLY BIGGER THAN 20 COLLISIONS.** The 147 `(b)` tokens
+  are real assertions belonging to **other** vocabularies — `CELL_KINDS`,
+  STORAGE, CIRCULATION, and the declared `RECESS`/`SUBDIVISION` third terms — so
+  the cross-vocabulary uniqueness check has far more to reconcile than the 20
+  collisions §545 recorded. **Recorded as a resize of the pre-DW-1 gate, not
+  ruled.**
+- **§551.10 ⭐ THE REPORT DISAGREED WITH DW-0 IN BOTH DIRECTIONS, WHICH IS WHY IT
+  IS CREDIBLE.** It found DW-0 **over-counted** the defect on the control passage
+  (13 missing reported; 9 unexpressible needing only 3 new members, with four
+  named misses being fair variants of shipped members), **under-counted**
+  carriage (8 reported, 11 measured), counted two tokens as carried that are in
+  **neither** list (`NICHE`, explicitly declared a `RECESS`; `DRUG_JAR`, a
+  genuine miss), and wrote a "13 missing" that **named only 12**. And in the
+  other direction it found DW-0 badly **under-counted overall** — 53 across the
+  corpus, not the 13 its sample implied. **A review that only ever finds MORE
+  defects is not measuring, it is advocating.**
