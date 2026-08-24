@@ -1,6 +1,6 @@
 # AD-0 — THE ILLUSTRATED ART DIRECTION CHARTER
 
-**Lane:** TC-AD-COMPILE `[OPUS-RUN · FABLE-VALIDATION OWED]`
+**Lane:** TC-AD-COMPILE `[OPUS-RUN · FABLE-VALIDATED-AT-THE-JUDGMENT-LAYER 2026-08-25 (TE-ADVAL, ODQ §625) · FIGURES PROVISIONAL-ON-DISPATCH — see charters/ADVAL-VERDICT-2026-08-25.md]`
 **Chartered by:** ODQ §514.4 (owner band B15, signed 2026-08-23 21:32 CDT: *"abstract now
 but illustrated before launch"*), dispatched deliberately early at ODQ §523.6.
 **Slot:** `claude/composite-r4` = `5055990a38a281b5a5f63648c74e65c0837de7ef` (MF-CG1, the
