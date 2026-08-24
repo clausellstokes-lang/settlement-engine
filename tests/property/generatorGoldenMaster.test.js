@@ -40,28 +40,45 @@
  *         the eleven-string prose sweep, and R-INST-6-1's two `facets`
  *         declarations. No name, count, id or rng draw moves in this half — the
  *         corpus measurement agrees, at ROSTER_CHANGED 0 of 420.
- *     (B) THE ROSTER RE-ROLL (c4d71b4ea → tip), which is J-CH-3-2 and is a real
- *         behaviour change, chair-ruled explicitly against THE PROMISE: deleting
- *         `exclusiveGroup: 'religiousCenter'` from the two CITY religious rows.
- *         144 rows move, across 314 path templates, WITH array-length moves —
- *         `$.institutions` itself moves on 134 rows. That breadth is the declared
- *         mechanism, not a surprise: assembleInstitutions.js:323 returns BEFORE
- *         the rng.chance draw, so un-suppressing a row consumes a draw and
- *         reshuffles the whole downstream sequence for that settlement. It is a
- *         same-seed re-roll of the city/metropolis roster, scoped to that step
- *         because pipeline.js:156 forks a PRNG per step.
+ *     (B) THE COEXISTENCE, which is J-CH-3-2 and is a real behaviour change,
+ *         chair-ruled explicitly against THE PROMISE: at city, a cathedral and
+ *         monasteries may now stand together, as the metropolis block already
+ *         allowed. **22 rows move, across 65 path templates**, and all 22 are
+ *         inside the 272 half A already moved.
+ *         ⚠ THE CHAIR REVISED THIS ITEM MID-BUILD (§538.5 revised), and the
+ *         revision is the whole point of these figures. The first form simply
+ *         DELETED `exclusiveGroup: 'religiousCenter'` from the two city rows and
+ *         cost 144 golden rows / 314 templates / 81 of 420 rosters — because the
+ *         exclusivity early return precedes the `rng.chance` draw, so
+ *         un-suppressing a row makes it start consuming a draw and re-rolls the
+ *         whole settlement. That reshuffle was an ARTIFACT of where the check
+ *         sits, not the intent. The shipped form keeps the row IN its group and
+ *         draws its chance from `rng.fork('exclusiveCoexist::…')`, so the main
+ *         sequence stands where it stood and only the rosters that actually gain
+ *         the row move.
  *   THE PROMISE, as the chair ruled it: THE PROMISE protects LIVED HISTORY. A seed
  *   already generated and played is a starting world forever and its stored
  *   institutions are untouched. It does not freeze the generator's future output;
  *   if it did, no defect in generation could ever be repaired. Only newly
- *   generated worlds differ. Over the 420-settlement corpus: 81 of 420 rosters
- *   change, ~130 institution names move, and SETTLEMENT NAMES MOVE ZERO.
- *   AND THE INJECTION THE CHARTER NEVER PRICED, declared here rather than buried:
- *   freeing the exclusive group also frees a coherence-repair dependency, so the
- *   TOWN-tier `Monastery or friary` enters cities. Measured per tier, before →
- *   after: `Multiple monasteries` city 0 → 41 and metropolis 32 → 60;
- *   `Monastery or friary` city 0 → 21 and metropolis 0 → 5;
- *   `Cathedral (10,000+ only)` unmoved at 26 and 29.
+ *   generated worlds differ — and under the revised form far fewer of them do.
+ *   Over the 420-settlement corpus: **30 of 420 rosters** change (was 81), 123
+ *   distinct new institution-name strings (was 376), and SETTLEMENT NAMES ZERO.
+ *   Per tier, before → after:
+ *     Cathedral (10,000+ only)   city 26 → 26   metropolis 29 → 29   (unmoved)
+ *     Multiple monasteries       city  0 → 12   metropolis 32 → 50
+ *     Monastery or friary        city  0 →  0   metropolis  0 →  0
+ *     Great cathedral            city  0 →  0   metropolis 45 → 45   (unmoved)
+ *   THE INJECTION THE FIRST FORM CAUSED IS GONE. Deleting the group also freed a
+ *   `coherenceRepairPass` refusal, dragging the TOWN-tier `Monastery or friary`
+ *   into 21 cities and 5 metropolises — content nobody asked for. Keeping the row
+ *   in its group keeps that refusal, and the injection measures back at ZERO.
+ *   AND THE LIVE-RECONSTRUCTED WIZARD NEWS CORPUS NO LONGER MOVES AT ALL. Under
+ *   the first form it went introductions 272 → 270, cascading into two frozen
+ *   baseline JSONs, a 106-row address digest and `activeRules` 15 → 14 — which
+ *   would have required an AUTHORED written reason for a headline rewrite rule
+ *   going permanently inert, prose in a protected substrate with no UPDATE path by
+ *   design. Executed under the shipped form: both news walkers are 2 files / 16
+ *   tests / EXIT 0, and nothing in that substrate moves.
  *   TOTALITY. The base-side regeneration reproduced the OLD manifest on all 525
  *   rows (0 mismatches, key set identical), which proves this car is the ONLY
  *   source of the drift and that nothing else had crept in. Both sides were
