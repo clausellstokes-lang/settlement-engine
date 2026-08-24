@@ -22412,3 +22412,76 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   row, correctly: amending would move the tip sha and invalidate every
   committed-blob proof for a purely confirmatory run. Seats all four full:
   STACK-1 · STACK-2 · MP-1 · AD-1.
+
+## §528 — ⭐⭐ THE SOLD PDF IS CLEAN: **NO RASTER IMAGE EXISTS IN ANY GENERATED PDF, AND NO HEIGHTMAP DATA REACHES THE $2.99 DOSSIER** — BUT THREE OTHER SURFACES DO EMIT FMG TERRAIN, AND ⛔ **`Ctrl+S` DOWNLOADS THE FULL `.map` WITH THE HEIGHT ARRAY** (2026-08-24 23:44 CDT)
+
+- **§528.1 THE BIGGEST RELIEF, PROVED BY EXHAUSTIVE ABSENCE WITH A POSITIVE
+  CONTROL.** `Image` does not occur anywhere under `src/pdf/` or in any of the
+  five generator/worker files; all **42** `@react-pdf/renderer` imports were
+  enumerated and **none imports `Image`**; `toDataURL`, `data:image`, `base64`
+  and every raster extension return zero. The one `src=` in the PDF tree is a
+  document-internal anchor (`EntityRef.jsx:81`), and the only external asset
+  is **font embedding** (eight `.ttf` from `/public/fonts/`, no CDN). The jsPDF
+  lane is equally clean — zero `addImage|addSvgAsImage|html(|canvas`.
+  **Every PDF this product emits is text plus vector.** So the artifact the
+  owner just made PAID (§524) cannot carry third-party raster art at all.
+- **§528.2 AND THE TOWN-MAP PLATE IS A CLOSED PROCEDURAL LOOP.**
+  `buildTownMapModel(settlement)` takes the settlement record alone, seeds
+  from its own `_seed`, and its import graph contains **no FMG, bridge, store
+  or mapState dependency**; a grep of `src/domain/townMap/**` for
+  `fmg|heightmap|mapBridge|azgaar|burg` finds only the module's own
+  *pseudo*-elevation. The plate **cannot be reached by heightmap data.**
+- **§528.3 THE $2.99 SEAM, PROVED AT ONE LINE.**
+  `SingleDossierSuccessPage.jsx:182` is the entire claim path —
+  `generateSettlementPDF(settlement, { isAnonymous: false })` with **no
+  campaign and no `faithUnlocked`** — so `vm.liveWorld` is null and the triple
+  gate at `SettlementPDF.jsx:115-118` fails. **The sold PDF's only input is the
+  normalized settlement record.** Same for the draft and card exports.
+  Heightmap-derived data DOES reach the **premium account** dossier, but only
+  as coarse enum words (`freshness`, `distance` bands) through
+  `worldState.spatialDigest`, never as elevation numbers, and only when
+  distance-priced news is lit and the campaign canonized.
+- **§528.4 ⛔ WHERE THE REAL EXPOSURE IS, ALL THREE CONFIRMED.** (a) **The
+  realm-map PNG download** (`realmMapExport.js:63,90,124`) composites
+  `bridge.exportThumb()` — **a raster of the FMG-rendered terrain** — and
+  hands the user a PNG; signed-in only. (b) **Map-share thumbnails upload that
+  same terrain JPEG to a PUBLIC Supabase bucket** (`mapThumb.js:25-31,114-138`
+  → `imageUpload.js:192-200` → `getPublicUrl`). (c) ⛔ **THE SHARPEST: the
+  fork's native exporters are CSS-hidden but their HOTKEYS ARE LIVE.**
+  `sf-bridge.js:64` adds `sf-embedded` and `:193` hides `#optionsContainer`,
+  so the export panes are mouse-unreachable — **but `hotkeys.js:34` binds
+  `Ctrl+S → saveMap("machine")`** (plus `F6` and `Ctrl+C`), its only gate
+  (`modules.editors`) is satisfied eagerly by `editors.js`, and **the iframe
+  is deliberately NOT sandboxed** (`WorldMapStage.jsx:230`), so the download
+  proceeds. The heightmap editor's own dialog even carries a live
+  `saveMap('machine')` link. CONFIRMED at code level; only the focus/keypress
+  hop is PLAUSIBLE.
+- **§528.5 AND THE `.map` CARRIES EVERYTHING.** `save.js:120-161`: index **7**
+  is `grid.cells.h` — the per-cell height array — and index **5** is the full
+  rendered terrain SVG. That blob is persisted twice: `mapState.fmgSnapshot`
+  in the campaign store, and **uploaded to Supabase `saved_maps.map_data`
+  JSONB (~1 MB)**. ⭐ Cross-user sharing is already defended: gallery import
+  **strips the snapshot and keeps only the seed**
+  (`galleryImportMap.js:180-183`) — an importer reconstructs geography rather
+  than receiving it.
+- **§528.6 THE DOCUMENTATION GAP, NAMED.** `docs/fmg-fork.md` treats the
+  heightmaps in exactly one line — *"images/, charges/, heightmaps/, styles/ ←
+  FMG-native, unpatched"* — with **no provenance, no licence, no attribution
+  note**, while the same runbook meticulously records every stripped tracker
+  and disabled AI path. And `index-Bp79q281.js`, the bundle containing
+  `fromPrecreated`, is **NOT hash-pinned** by `VENDOR-MANIFEST.json`.
+  `mapForkSinkInventory.json` is an innerHTML ratchet only — it counts two
+  heightmap files and strips neither. **No inventory in the repo tracks the
+  23 PNGs.**
+- **§528.7 TWO ITEMS UNDETERMINED AND ONE PROCESS NOTE.** Undetermined:
+  whether the `get_gallery_map` / `list_gallery_maps` server RPCs project
+  `fmgSnapshot` into shared payloads (Postgres functions unread — **this is
+  the one that decides whether a private blob is served publicly**, and it
+  goes to TE-AD-1 to settle or escalate), and whether the unaudited bundle
+  re-exposes precreated real-world heightmap selection (the bridge's curated
+  list is procedural-only and `setTemplate` hard-rejects anything else, so
+  selection appears unreachable — PLAUSIBLE, not proven). Process: **this was
+  a SUB-LANE of TE-AD-1, which briefly put the program at five lanes against
+  a cap of four** — the chair's AD-1 brief omitted the SOLO clause every other
+  brief carries. The omission is mine; the work is excellent and is folded
+  into the audit.
