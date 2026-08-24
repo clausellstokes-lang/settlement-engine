@@ -23363,3 +23363,96 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   out.** R3 (metadata into the 46 bare files, via three byte-surgery injectors
   each owing a pixel-identity control) is the car that answers it, and it
   cannot start until AIP-1 lands.
+
+## §540 · THE GATE WAS RIGHT TO REFUSE, AND THE FAULT WAS MINE — PLUS WHAT THE DEPLOY ACTUALLY DOES (2026-08-24 03:12 CDT)
+
+- **§540.1 STACK-4's GATE IS RED, AND THE REFUSAL IS CORRECT.** `test:ratchet`'s
+  **SCOPE SENTINEL** fired: *"the gate is no longer running what it was frozen
+  to run — a pass here would be VACUOUS: 2 suite(s) FAILED WITHOUT A MEASURABLE
+  TEST."* `customContentLockOrder.postgres.test.js` → `Cannot find package
+  'pg'`; `townSceneCanvas.contract.test.jsx` → `Failed to resolve import
+  "three"`. Both collected **zero** tests. **This is the instrument working
+  exactly as designed** — a skip ceiling cannot distinguish "collected and
+  passed" from "never collected", and the sentinel can.
+- **§540.2 ⛔ ROOT CAUSE: A LAW I WROTE TONIGHT.** LANE-LAW §1 said
+  `ln -s <repo>/node_modules`. **The main worktree matches no branch**: its
+  `package.json` declares **36** deps, the SLOT's declares **40** — `three`,
+  `pg`, `@types/node`, `espree` are slot-only — and the shared `node_modules`
+  was last written **2026-07-16**. Every lane symlinking it tested slot CODE
+  against **five-week-old DEPENDENCIES**. Earlier lanes each built their own
+  (their trees were 671–867 MB of *real files*, which I saw and did not read as
+  the signal it was). **My symlink was the regression; it cost a full ~35-minute
+  gate under load 50.**
+- **§540.3 ⛔⛔ AND MY REPAIR MADE IT WORSE — TWICE. STATED PLAINLY.** I judged
+  `npm install --no-save` "low risk, shouldn't remove or rewrite existing
+  packages". **Wrong.** Run 1: `removed 43 packages, changed 132` — **while two
+  lanes were mid-gate**, voiding their in-flight results. Run 2 **deleted the
+  very packages it was adding** (`three`, `pg`, `@types/node`), because npm
+  resolves against the 36-dep worktree manifest and treats additions as
+  EXTRANEOUS. Tree went **453 → 448 → 434**. I stopped after two rather than
+  trying a third variant. **Verified afterwards:** all 36 owner-declared deps
+  present, vitest/vite/eslint/typescript/react all resolve, and both tracked
+  manifests are **byte-identical** to before I started (md5 unchanged, so **no
+  MINT TRIGGER**). The owner's environment survived — but by luck, not design.
+- **§540.4 THE FALSE GREEN THAT DELAYED THE DIAGNOSIS.** My first dependency
+  check read the **working tree's** `package.json` and reported *"declared 36,
+  present 36, MISSING 0"* — a clean bill of health for the wrong tree, directly
+  contradicting the `pg`/`three` absence I had just measured against the slot.
+  ⚠ **Read the SLOT's manifest (`git show <slot>:package.json`), never the
+  working tree's.** Banked at
+  `memory/lane-worktree-needs-its-own-node-modules.md`; LANE-LAW §1 now forbids
+  the symlink outright and mandates `npm ci` per worktree (~800 MB).
+- **§540.5 ALL THREE BUILD LANES MESSAGED; THEIR IN-FLIGHT RESULTS ARE VOID.**
+  Each told to `rm -f node_modules && npm ci` and re-gate from scratch, and told
+  explicitly **not** to try repairing the shared tree. CH-3 additionally told to
+  **re-measure all three of its declared digests** and to **STOP rather than
+  re-record** if any now disagrees. Their code findings and commits are
+  unaffected — only the verification environment was bad.
+- **§540.6 STACK-4's WORK STANDS, INDEPENDENTLY VERIFIED.** At its tip
+  **`911c8ebe1`** (pinned `refs/preserve/holding-stack4`) I confirmed myself
+  that `THIRD-PARTY-NOTICES.md` carries sections **1–7 with no duplicate
+  numbers**, that section 5 "Keeping this current" survived, and that the served
+  HTML twin carries the identical 1–7 set. ⭐ The lane had found that a
+  **conflict-free auto-merge produced two `## 6.` headings** and that **only the
+  HTML twin conflicting revealed it** — new law: after any rebase touching a
+  numbered-section document, run a heading census; **an auto-merge is not
+  evidence**. It also **narrowed my own §537 law**: the third ratchet is
+  **SCOPED**, firing only for an enforcer dir or an invariant basename, so
+  `aiMediaProvenance.test.js` owed no entry. Both banked and indexed.
+- **§540.7 ⭐⭐ THE DEPLOY, MEASURED — AND 198 IS NOT THE ONE TO WORRY ABOUT.**
+  All 78 pending migrations scanned, dollar-quoted bodies separated from
+  apply-time SQL, **with a planted-statement control proving the detector
+  fires** (a detector that cannot fire proves nothing). Result: **13 migrations
+  contain destructive verbs, but 12 of them are inside FUNCTION BODIES — they
+  run when the function is CALLED, not during `supabase db push`.** ⭐ **198,
+  the one labelled DESTRUCTIVE, deletes NOTHING at apply time**: it creates a
+  table, backfills it once (an INSERT), and *defines* the prune. Its 400→90-day
+  shortening runs on the next monthly cron and is **double-gated, both fail
+  closed** — the 90-day window activates only if the durable cohort table is
+  non-empty, and research rows are pruned only where an export receipt covers
+  them. I also verified its self-declared "fourth toucher" hazard: 198 **does**
+  carry every call its predecessors had (039 → 133 → 134 → 198), including
+  `rollup_analytics_v2_daily`. **No nightly job silently stops.**
+- **§540.8 ⛔ THE REAL APPLY-TIME RISK IS 188, WHICH NOBODY HAD FLAGGED.**
+  `188_reviewed_supply_chain_persistence.sql` runs a `DO $$` block **during the
+  push** that loops over every `custom_content_definitions` row with
+  `category = 'supplyChains'` and deletes, per owner: content pack activations,
+  environment revisions, environments, pack versions, packs, **and the
+  definition itself**. It is scoped by `owner_id` — **real users' custom
+  content.** ⭐ **Mitigating, and verified:** it is a *receipted quarantine*, not
+  raw deletion — the content is serialised into
+  `public.application_command_journal` as `receipt.result.quarantine` **before**
+  the deletes, under command kind
+  `content.reviewed-supply-chain.legacy-quarantine`, and the block **raises
+  rather than proceeds** if the receipt does not verify. So it is recoverable in
+  principle. **But the estate's own labelling calls 198 destructive and says
+  nothing about 188, and 188 is the one that acts at push time.** ⚠ My first
+  scan reported "apply-time destructive: NONE" — wrong, because it stripped
+  dollar-quoted bodies and a `DO` block *is* dollar-quoted yet *does* execute.
+  Corrected by scanning DO blocks separately.
+- **§540.9 A CORRECTION I MADE MID-INVESTIGATION.** I briefly believed 198 had
+  DROPPED `rollup_analytics_v2_daily` from the nightly maintenance chain — the
+  exact hazard 198's own header warns about. **False.** My `awk` range
+  terminated at the wrong `$$;` and truncated the body; a real parse shows the
+  call present at line 167. **A range-based extractor over dollar-quoted SQL is
+  another instrument that lies** — that is the fifteenth on the standing list.
