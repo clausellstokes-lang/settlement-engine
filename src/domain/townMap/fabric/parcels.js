@@ -376,6 +376,16 @@ export function packOrganism(args) {
 
   /** @type {Parcel[]} */ const parcels = [];
   /** @type {Array<Array<[number,number]>>} */ const blocks = [];
+  // ⭐⭐⭐ REG-1 · THE FRONTAGE-FUSION FRAME, ARMED BY THE CALLER (`options.frontageFusion`).
+  // See frontageFusion.js: the party-wall decision is ALREADY taken per boundary here, and the
+  // fuser needs three facts this loop is the only place that knows — WHICH rank run a plot
+  // belongs to, WHERE it sits in that run's cut order, and whether its left boundary was a
+  // PARTY wall. ⚠ UNARMED IT PUBLISHES NOTHING: no key is added to any parcel and no frame is
+  // emitted, so the fabric digest is character-identical. That dormancy is the proof's own
+  // mechanism, stated at its source.
+  const fuseArmed = args.frontageFusion === true;
+  /** @type {Array<{runKey:string, ax:number, ay:number, ux:number, uy:number, dir:number, frontV:number}>} */
+  const fuseFrames = [];
   /** @type {Array<{key:string, organismKey:string, line:Array<[number,number]>}>} */
   const alleys = [];
   /** §17.6: the through-passages (drawn, walkable) and the closed slots (counted only —
@@ -561,6 +571,16 @@ export function packOrganism(args) {
           // against an accreted one) and every plot in it varies inside that, then the whole
           // row is NORMALISED back onto the span so the last plot ends where the block does.
           const spanKey = `${organism.key}|${r}|${c}|${rank}|${Math.round(spanA * 8)}`;
+          // ⭐ THE RUN KEY IS THE SPAN KEY. A new span, a new rank, a new block and a new
+          // organism all mint a new key, so a fused mass can never cross one of them — the
+          // four breaks the charter asks for cost nothing because the cut already names them.
+          if (fuseArmed) {
+            fuseFrames.push({
+              runKey: spanKey, ax: organism.anchor.x, ay: organism.anchor.y, ux, uy, dir, frontV,
+            });
+          }
+          /** §17.6: the cross-alley IS the gap, so the plot after one never fuses back over it. */
+          let afterAlley = false;
           const alleyW = web.widths.crossAlley;
           let n = Math.round((spanB - spanA) / frontage);
           if (n < 1) { if (spanB - spanA >= frontage * 0.62) n = 1; else continue; }
@@ -609,6 +629,7 @@ export function packOrganism(args) {
             u += alleyW;
             alleysHere--;
             sinceAlley = 0;
+            afterAlley = true;
           }
 
           const key = parcelKey(organism.key, r * cols + c, plotIndex, rank);
@@ -817,6 +838,16 @@ export function packOrganism(args) {
           }
           parcels.push({
             key,
+            // ⭐⭐ REG-1 · WHAT THE FUSER NEEDS AND ONLY THE CUT KNOWS. `seq` is the plot's own
+            // index among the span's CANDIDATES — so a candidate the culls refused leaves a
+            // hole in the sequence and the fuser cannot bridge it — and `party` is the boundary
+            // decision `decideGap` already took for this plot's LEFT side. Present only when
+            // armed (see the frame note above).
+            ...(fuseArmed ? {
+              fuse: {
+                runKey: spanKey, seq: plotIndex - 1, party: gapCall.kind === 'party', afterAlley,
+              },
+            } : {}),
             polygon: poly,
             yard,
             backHouse,
@@ -878,6 +909,7 @@ export function packOrganism(args) {
           // The parcel remembers which block run it belongs to — the LOD merge below needs
           // to know which buildings share a block before it may fuse any of them.
           parcels[parcels.length - 1].blockRun = `${organism.key}|${r}|${c}|${rank}|${runSerial}`;
+          afterAlley = false;                        // consumed by the plot that stands beside it
           placed++;
           }
           closeRun();                                // the span ended
@@ -887,7 +919,9 @@ export function packOrganism(args) {
     }
   }
   void rng; void water; void offsetPolygonOutward;
-  return { parcels, blocks, alleys, passages, slots };
+  return fuseArmed
+    ? { parcels, blocks, alleys, passages, slots, fuseFrames }
+    : { parcels, blocks, alleys, passages, slots };
 }
 
 /**
@@ -1249,6 +1283,8 @@ export function packFabric(args) {
     /** @type {Array<any>} */ const alleys = [];
     /** @type {Array<any>} */ const passages = [];
     /** @type {Array<any>} */ const slots = [];
+    /** REG-1: the per-run frames, collected only when the caller armed the fusion. */
+    /** @type {Array<any>} */ const fuseFrames = [];
     for (const organism of ordered) {
       const got = packOrganism({
         ...args, organism, organisms: ordered, web: fr.web, forbidden: fr.forbidden,
@@ -1258,8 +1294,11 @@ export function packFabric(args) {
       for (const a of got.alleys) alleys.push(a);
       for (const a of got.passages) passages.push(a);
       for (const a of got.slots) slots.push(a);
+      for (const f of (got.fuseFrames || [])) fuseFrames.push(f);
     }
-    return { parcels, blocks, alleys, passages, slots };
+    return args.frontageFusion === true
+      ? { parcels, blocks, alleys, passages, slots, fuseFrames }
+      : { parcels, blocks, alleys, passages, slots };
   };
 
   // THREE passes, a FIXED count — never a loop to a tolerance. A convergence loop would

@@ -132,7 +132,14 @@ export function bothTotals(byLeaf, corpus = CORPUS) {
   };
 }
 
-export function buildOne(spec) {
+/**
+ * @param {any} spec
+ * @param {any} [fabricOptions]  ⭐ REG-1: the fabric's own option bag, threaded so a lane can
+ *   arm a dormant feature (`{ frontageFusion: true }`, `{ cliffTermination: true }`) over the
+ *   whole exemplar corpus without forking this driver. `{}` reproduces the sealed renders byte
+ *   for byte — which is the dormancy proof's own control.
+ */
+export function buildOne(spec, fabricOptions = {}) {
   const cfg = { settType: spec.settType };
   if (spec.terrain) cfg.terrainOverride = spec.terrain;
   let settlement = generateSettlementPipeline(cfg, null, { seed: spec.seed });
@@ -157,26 +164,30 @@ export function buildOne(spec) {
   // record and held fixed — see snapshot.js's standing rule on why a threshold derived as a
   // fraction of "now" is not a date.
   if (Number.isFinite(spec.year)) {
-    const present = buildFabric(settlement, model, {});
+    const present = buildFabric(settlement, model, { ...fabricOptions });
     const vin = present.record.get('wall-built-year', null);
     const at = settlementAtYear(settlement, spec.year);
     const fabric2 = buildFabric(at, model, {
+      ...fabricOptions,
       year: spec.year,
       wallBuiltAtAge: vin ? vin.ageAtBuild : null,
       presentAge: present.meta.settlementAge,
     });
     return { settlement: at, model, fabric: fabric2 };
   }
-  const fabric = buildFabric(settlement, model, {});
+  const fabric = buildFabric(settlement, model, { ...fabricOptions });
   return { settlement, model, fabric };
 }
 
 async function main() {
   const outDir = process.argv[2] || join(ROOT, 'out');
   mkdirSync(outDir, { recursive: true });
+  // ⭐ REG-1: `--fuse` arms the frontage fusion over the whole corpus. Absent, this driver
+  // renders the sealed leaves byte for byte — the dormancy control.
+  const fabricOptions = process.argv.includes('--fuse') ? { frontageFusion: true } : {};
   const manifest = [];
   for (const spec of CORPUS) {
-    const { settlement, fabric } = buildOne(spec);
+    const { settlement, fabric } = buildOne(spec, fabricOptions);
     const { svg, elementCount, primitiveCount } = renderFolio(fabric, { lens: 'parchment' });
     const file = `${spec.key}-${fabric.meta.tier}-parchment.svg`;
     writeFileSync(join(outDir, file), svg);

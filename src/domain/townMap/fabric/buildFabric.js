@@ -58,6 +58,7 @@ import { buildWorks } from './terraform.js';
 import { buildStreetWeb, forbiddenGround, deriveQuarterLanes, buildStreetChannels, webConnectivity, ladderWidths } from './streets.js';
 import { deriveOutlyingLanes } from './streetEdges.js';
 import { packFabric, mergeDistantMatrix, buildShantyFringe } from './parcels.js';
+import { fuseFrontages } from './frontageFusion.js';
 import { buildLandmarks, powerWeb, classify, isDispersed } from './institutions.js';
 import { seatInstitutions } from './seating.js';
 import {
@@ -429,6 +430,11 @@ export function buildFabric(settlement, model, options = {}) {
     widthsFor, forbiddenFor,
     prosperityRank, blockDepth: scale.blockDepth, morphology,
     tierScale: scale,
+    // ⭐⭐⭐ REG-1 (L-REG-2/-9) · THE FRONTAGE FUSION, ARMED BY THE CALLER. Unarmed, the packer
+    // publishes no `fuse` record and no run frame, `fusion` is ABSENT from the leaf (never
+    // empty — a consumer must not be able to mistake "not derived" for "derived and found
+    // nothing"), and every byte of the legacy fabric stands. See frontageFusion.js.
+    frontageFusion: options.frontageFusion === true,
   });
   // ⭐ FROM HERE DOWN THE WEB IS THE CALIBRATED ONE. Nothing below may read the estimate.
   const fabricWeb = packed.web;
@@ -1037,6 +1043,22 @@ export function buildFabric(settlement, model, options = {}) {
   });
   const shantyDrawn = { ...shanty, huts: drawn.huts };
   const lodDrawn = { ...lod, masses: drawn.masses };
+  // ── ⭐⭐⭐ STAGE 8 · REG-1 · **THE FRONTAGE FUSION** (L-REG-2 "geometry narrates", L-REG-9
+  //    "a stroke may carry only meaning the geometry beneath it earns").
+  //    IT RUNS LAST, OVER `drawn`, AND THAT SITING IS THE WHOLE OF ITS SAFETY: a mass fused
+  //    from a body the ground law clipped, the access law freed or the LOD merge took would be
+  //    ink over a fact that had already changed. Every earlier stage is complete here, so this
+  //    is the composition-order law obeyed rather than bent — the same reading that put the
+  //    §202 access law and the wave-eight censuses in this seam.
+  //    ⚠ IT WRITES NOTHING BACK. The parcels are untouched, so the §5 census claim, §17's
+  //    ground law and every drawn-body census still see exactly the bodies they saw before;
+  //    the fusion is an ADDITIONAL published artifact the lens reads instead of the members.
+  const fusion = options.frontageFusion === true
+    ? fuseFrontages({
+      parcels: drawn.parcels, frames: packed.fuseFrames || [],
+      merged: lod.mergedKeys, frontage: packed.frontage,
+    })
+    : null;
   const faubourgsDrawn = {
     ...faubourgs, buildings: drawn.faubourgBuildings, leanTos: drawn.faubourgLeanTos,
   };
@@ -1470,6 +1492,11 @@ export function buildFabric(settlement, model, options = {}) {
     // hash. A consumer that re-derives from `walls[].polygon` is publishing a second reading.
     wallCircuit,
     power,
+    // ⭐⭐⭐ REG-1 · THE FUSED FRONTAGES, published the way the escarpment is published — a
+    // derived artifact with its own counts and its own reason, ABSENT (never empty) when the
+    // feature is unarmed, and appended at the END of this literal so no existing key's
+    // published position moves (the §234 publication arm's own precondition).
+    ...(fusion ? { fusion } : {}),
   }, wallCircuit);
 }
 
