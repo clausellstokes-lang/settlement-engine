@@ -51,6 +51,8 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 00:42 CDT 08-24: §532 — 104 of 338 charges are CC0 → surgical deletion (234), keep + credit the 104.
+# ⛔⛔ EVERY DEPLOY BLOCKED 27 DAYS (prod migration 121 vs repo 199) — that is the whole cause of the 404. Owner-gated.
 # ⭐⭐⭐ 00:39 CDT 08-24: §531 — Textures.com terms primary-sourced: "(modified or not)", "texture pack",
 # no open-source release. Removal or nothing — but TE-IP-1 already deletes it. AI-media ToS lane dispatched.
 # ⭐⭐⭐ 23:56 CDT 08-24: §530 — FIRST STACK LANDED (49+50, one gate) CAS → 7009f115b. MP-1 built but DARK.

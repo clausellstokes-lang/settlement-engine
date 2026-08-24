@@ -22740,3 +22740,60 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   texture. **The single highest-value step in the whole IP picture remains a
   reverse-image search on `spain-small.jpg` and `pergamena-small.jpg`, which
   no lane here can run — it is a human with a browser and about ten minutes.**
+
+## §532 — ⭐ THE LICENCE CENSUS CONTAINED A BETTER REMEDY THAN THE CHAIR'S RULING: **104 OF THE 338 CHARGES ARE CC0** — SURGICAL DELETION REPLACES DIRECTORY DELETION; AND ⛔⛔ **EVERY DEPLOY HAS BEEN BLOCKED FOR 27 DAYS** (2026-08-24 00:42 CDT)
+
+- **§532.1 THE VIOLATION IS STOPPED.** TE-IP-1, tip `19cc6f606` (C1, pinned),
+  base the slot: **361 files / 14,740,423 B deleted.** The lane re-derived the
+  licence census rather than inheriting it, and the sum closes at 338: **179
+  CC BY-NC-SA · 37 by-sa · 10 GFDL · 1 Art Libre · 2 no metadata · 104 CC0.**
+  The chair's independently-verified "179 NC + 37 by-sa" is exact.
+- **§532.2 ⭐ AND THAT CENSUS OVERTURNS MY OWN RULING, IN THE GOOD DIRECTION.**
+  I ruled "delete the directory" when the only figure I had was 179
+  non-commercial. **104 are CC0 — public domain, no attribution owed, no
+  restriction on commercial use or redistribution.** Deleting those throws
+  away clean assets and breaks a feature for nothing. **REVISED: delete the
+  234** (179 NC — unusable in a paid product; 37 by-sa, 10 GFDL and 1 Art
+  Libre — copyleft, which would demand we licence the derivative work under
+  them, impossible for a proprietary product; 2 unlabelled — unknown counts as
+  unusable under §529's doctrine, never as permitted) — **and KEEP the 104
+  CC0, named in the notices with their source, which is a positive compliance
+  statement rather than merely the absence of a violation.** The textures
+  deletion stands unchanged (§531).
+- **§532.3 THE THING THE DIRECTORY DELETION LET US SKIP, NOW FACED.** The lane
+  found the reference the chair warned it to hunt — **`fetch(`./charges/${t}.svg`)`
+  in the hashed core bundle**, plus `images/textures` in `index.html` and 13
+  style JSONs — with three instruments each carrying a live positive control
+  (`map/libs` fires on 10 non-fork files, so the zeros are real). Every hit is
+  inside the vendored fork or English prose; **zero in `src/`, `tests/`,
+  `scripts/`, `api/`, build config or any manifest.** The lane proceeded and
+  recorded it as vetoable — correct, because the ruling had already priced the
+  dormant layers. But **"nothing references them" was never the true
+  statement**: the fork's own code will request files that are gone, and
+  off-by-default only means the 404 waits for a user to enable the layer.
+  Ordered: measure by execution what the picker does with a charge absent;
+  make the picker offer only what ships (with 104 surviving, deriving its list
+  from what is present is the honest fix, and if that list is inside the
+  hashed bundle, say so and propose the smallest lawful alternative); and
+  answer the same question for the 13 texture-referencing styles. **A feature
+  that 404s is a worse outcome than a feature offering fewer, lawful options.**
+- **§532.4 ⛔⛔ THE 404 HAS A CAUSE AND IT IS NOT ROUTING — NOTHING HAS SHIPPED
+  IN 27 DAYS.** The lane executed the deploy gate's **own decision function**
+  with all six CI checks stubbed green and it still returns `skip`:
+  **production sits at migration 121 while the repo head is 199**, and
+  `applied-head.json` is dated **2026-07-28**. The notices page is in `dist/`
+  and byte-identical to source — **the page and the routing are fine; the
+  deploy has been blocked for twenty-seven days.** That explains the HTTP 404
+  completely, and it means every fix in this program has been accumulating
+  behind a gate nobody was watching. **The cure is a migration and a deploy —
+  both owner-gated by nature (§510.2), and both now urgent for a reason
+  beyond the migrations themselves.**
+- **§532.5 THE LORA RENAME, CORRECTLY REFUSED AND RE-CHARTERED.** The lane
+  declined the one card item that would **move the bytes of the SOLD PDF** —
+  two byte-render tests pin them, and it touches 27 files, 8 font binaries and
+  the `og-image` edge function. It corrected the three false "shipped
+  unmodified" statements instead, **proved by pre/post blob comparison that
+  the re-cut stripped `liga`**, and found what the audit missed: **the re-cut
+  also dropped Lora's OFL URL from name ID 14.** That is a second OFL defect,
+  not a detail. Chartered as its own car with that finding in its brief;
+  scope-refusal ratified.
