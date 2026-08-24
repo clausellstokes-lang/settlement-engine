@@ -23539,3 +23539,84 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   queued on it**, disk is at 13 GB and falling as each rebuilds its own ~800 MB
   `node_modules`. A fourth build lane would add contention and disk for **zero
   throughput gain**. Filling a seat is not the goal; draining the gate is.
+
+## §542 · THE FOURTH STACK LANDED — CARS 55 AND 56, AND THE LANE CORRECTED THE CHAIR TWICE MORE (2026-08-24 03:35 CDT)
+
+- **§542.1 CAS EXECUTED.** `claude/composite-r4` **`79b78881c` → `86794b5d2`**,
+  compare-and-swap, **56 cars landed**. Two cars through one gate: **TE-AIP-1**
+  (the AI-media provenance floor) and **MF-CH2B** (the packet, held at DRAFT).
+  Eight files, three commits. Spent pins deleted (`holding-aip1`,
+  `holding-ch2`, `te-aip1-landed`, `holding-stack4`); both STACK-4 worktrees
+  ref-pin-checked (**both ancestors, nothing owed**) and pruned; disk 13 → 14 GB.
+- **§542.2 GREEN, AND IT IS A VERDICT NOT A BARE CODE.** `TRUE_EXIT=0` ·
+  `[gate-tail] exit: 0` · free disk **14,234,244 KB** · `valid: 175 packets (0
+  READY)` · typecheck 173/173 · domain-strict 1134/1134 · **`11 known failure(s)
+  of 29029 tests, ceiling 11`** — the banked eleven exactly, none of them this
+  stack's — · `STRICT DIST OK, 53 files / 458 tests, zero
+  failed/non-run/uncollected/missing/extra/duplicate`. The 29,029 collected-test
+  count is what makes it a verdict; run 1's exit code came with **zero** tests.
+- **§542.3 THE AMEND WAS MESSAGE-ONLY, AND I PROVED IT BEFORE TRUSTING IT.** The
+  gate ran at `911c8ebe1`; the lane then amended that commit's **message** to
+  record the gate, producing `86794b5d2`, which is **not a descendant** of the
+  gated commit. Verification binds to a TREE, so I compared tree objects:
+  **`3f23dd463…` on both sides**, with a control proving the comparator
+  distinguishes a known-different pair. Same tree ⇒ the green transfers. ⚠ The
+  amend **ran pre-commit** (this worktree has a husky shim since `npm ci`);
+  lint-staged reported "could not find any staged files", so nothing was
+  rewritten under the green.
+- **§542.4 ⛔ MY `three.module` INFERENCE WAS WRONG — RETRACTED.** I argued that
+  run 1's log containing **zero** `three.module` occurrences proved this box had
+  been producing a dist missing the 3D chunk. **False, and the reasoning was
+  lazy:** `check` is an `&&` chain and `test:ratchet` PRECEDES `build`, so the
+  SCOPE SENTINEL killed run 1 before any build ran — its last lifecycle line is
+  `> settlementforge@1.0.0 test:ratchet` and it produced **no dist at all**. An
+  absence in a phase that never executed proves nothing. Further: an unresolved
+  bare import is a **hard rollup resolve error**, so a build under the broken
+  tree would most likely have ERRORED rather than quietly shipping a 3D-less
+  bundle. **The correction stands against me and I had already told the owner
+  the wrong version.**
+- **§542.5 AND THE CHUNK IS GUARDED AFTER ALL.** My reading that
+  `sizeBaseline.test.js` cannot see dist is confirmed — it walks `src/`, freezes
+  per-file effective lines, 16 entries, **zero `dist/` keys**. But
+  **`tests/build/townScene3dLazy.test.js` pins the emitted artifact BY NAME**
+  (`/^three\.module-[A-Za-z0-9_-]+\.js$/`) and runs in the dist phase, which
+  reported zero non-run and zero missing across 53 files — **so that guard
+  genuinely executed and passed.** What is unenforced is only the chunk's BYTE
+  SIZE. Nothing trips; no re-record owed.
+- **§542.6 THE CENSUS, WITH CONTROLS THAT ACTUALLY ATTRIBUTE.**
+  `2523/366/2157/20982/5840 → 2524/366/2158/21002/5845`, walked ONCE at the
+  stacked tree. **TE-AIP-1 = +1 file / +0 parked / +1 credited / +20 titles / +5
+  suiteTitles**, all from one file; **MF-CH2B = zero on all five**. Checksum
+  `366 + 2158 = 2524`. Attribution is by EXECUTION: the walker's classifier
+  (lines 485–1400) lifted out of vitest and driven at the slot, at car 1's tip
+  and at the stacked tip — **calibrated, not trusted**, returning the committed
+  tuple exactly at the slot. **Five controls, each moving exactly ONE figure** so
+  a red lands where it belongs and cannot be masked, each hash-guarded against a
+  no-op edit, clean control 33/33. This answers §530.3's vacuity directly.
+- **§542.7 ⭐ PROVING A ZERO IS HARDER THAN PROVING A POSITIVE.** MF-CH2B's
+  zero-on-all-five is also exactly what a DEAD instrument returns. Proved live at
+  the tip **twice**: a 2-title/1-suite plant under `tests/docs` moved the tuple
+  to `2525/366/2159/21004/5846`, and a **parking** plant
+  (`OPENER_UNRESOLVED:it`) moved `parked` to 367 — **the one figure neither car
+  touches**. Both removed, both restorations exact. New standing law.
+- **§542.8 J1 RATIFIED — THE PACKET LANDS UNREGISTERED.** No manifest row, no
+  INDEX row; surface stays 175 / 0 READY. Two hard reasons from the validator's
+  own source: `requiredSymbols` existence is asserted at **every** status
+  (§379.2's design comment), and MF-CH2B's symbols do not exist while its car is
+  held; and a non-terminal row **reserves its change paths estate-wide**, which
+  would lock the five gate files and the generator golden away from every other
+  lane for as long as the CH-5 ruling took. The validator has no
+  orphan-packet-file arm. **Ratified — and §541 now supplies the ruling, so the
+  row is a one-file edit whenever CH-5's build lands.**
+- **§542.9 J2/J3/J4 RECORDED.** J2: the notices merge resolved by **appending as
+  section 7 and renumbering nothing**, so the slot's rewritten "Keeping this
+  current" is not regressed and the live "§1.7 and §6" cross-reference stays
+  valid; moved prose proved byte-identical modulo the section number (2,172 md /
+  2,463 html), each with a mutation probe. J3: member commit bodies left
+  unamended and **annotated in the landing commit instead** — car 1's body still
+  says "a new section 5" and cites a census walked at `567030f1d`, both now
+  wrong. J4: **MF-CH2B stays DRAFT**, held code not landed.
+- **§542.10 THE LANE DID NOT TOUCH THE SHARED TREE.** It verified `rm -f` removed
+  only the symlink, confirmed the owner's directory survived intact, and ran
+  `npm ci` in its own worktree alone — 468 packages against the shared 434. Both
+  build lanes now hold their own trees. **That discipline is the fix to §540.3.**
