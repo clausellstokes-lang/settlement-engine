@@ -26172,3 +26172,22 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   interim floor, the formal Watabou/FTG reference band supplied by the chair
   at the judging round, per-wave file manifest with the single-writer rule on
   `buildFabric.js`.
+
+## §598 · THE RAMPART IS APPROVED — THE FIRST OWNER TASTE VERDICT OF THE REGISTER ERA (2026-08-24 ~17:30 CDT)
+
+- **§598.1 TE-REG-0b COLLECTED.** The lane stalled AFTER finishing: the
+  watchdog fired during a refinement pass, but the full deliverable set
+  predates the stall — the rampart page, land and water crops, squint,
+  determinism RERUN, NOFILTER control, dormancy OFF variant, metrics.
+  Chair-validated: both determinism pairs md5-identical
+  (`2d37470e…` SVG, `ad24f13e…` PNG); the NOFILTER control diverges. The
+  §590 grammar landed as drawn: double-edge band with the toned wall-walk,
+  stone-course ticks, drum towers ringed at angle turns, square
+  towers/gatehouses astride the band, ditch dashes, one NW light.
+- **§598.2 ⭐⭐ OWNER VERDICT, VERBATIM: "Yes! I like that rampart."** The
+  first owner taste approval of the register era. **The rampart treatment is
+  now REG-2's APPROVED dress target** — the wave builds generatively to this
+  drawn precedent (plus hf261/hf313's ladder for the detail it still lacks:
+  tower interiors, gate anatomy, crenellation ticks at rank). Recorded with
+  the §585 note that this approval arrived unprompted from the owner's own
+  eyes, not solicited past the delegation.
