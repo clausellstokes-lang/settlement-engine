@@ -120,6 +120,35 @@
  *       throw census (0 of 504) are likewise unmoved — MF-CG1b's cure is not
  *       regressed and the generator did not move underneath this re-record.
  *
+ * 2026-08-24 — FOURTH RECORD (the TE-STACK-5 LANDING, MF-CG2 stacked on MF-CH3).
+ *   ⚠ NOT A NEW CARTOGRAPHY CHANGE. Not one line of `src/domain/townCartography/**` moved
+ *   between the third record and this one. This re-record exists because TWO CARS THROUGH
+ *   ONE GATE both reach this corpus, and their combined output is a THIRD value that
+ *   neither car's own recording could contain:
+ *
+ *     · MF-CH3 (catalog hygiene) frees `Multiple monasteries` and `Monastery or friary`
+ *       into city and metropolis rosters, so 25 of the 504 rows carry a larger canonical
+ *       institution set — measured, `cartoInstitutionRefs` differs from the MF-CG2-only
+ *       recording on exactly 25 rows and from the MF-CH3-tip recording on ZERO.
+ *     · MF-CG2 (the cell address) decides where those institutions are drawn.
+ *
+ *   WHAT MOVED, and it is one figure and one total:
+ *     (1) `cartoBuildings` over the corpus 44,293 → 44,322 (+29). Those 29 rows are the
+ *         flagships of the institutions MF-CH3 admitted; a flagship consumes a cell, so
+ *         each admitted institution draws exactly one more building.
+ *     (2) `DUPLICATES.city.permille` 51 → 50, and its DERIVED ceiling 82 → 80 with it.
+ *         The city tier's translate-duplicate COUNT is essentially unmoved; the tier drew
+ *         more rows, so the same repetition over a larger denominator rounds down by one
+ *         permille. The ceiling is not loosened by hand — it is `Math.ceil(50 × 1600/1000)`,
+ *         the same derivation, re-evaluated.
+ *   WHAT DID NOT MOVE, each checked rather than assumed: EXACT duplication is 0.00% at
+ *   every tier and 0 of 44,322 over the corpus (MF-CG2's cure is intact under the stack);
+ *   `FROZEN.maxBuildings` stays 12/25/47/114/196/261; `maxInstitutions` stays
+ *   11/24/41/62/55/63; the throw census stays 0 of 504; the worst `cartoRowBytes` stays
+ *   450 so the derived byte band stays 720; the other five tiers read 109/181/72/68/48
+ *   exactly as recorded; and THE ONE LAW holds — `cartoInstitutionRefs` equals
+ *   `institutions` on 504 of 504 rows.
+ *
  * To re-record after an INTENTIONAL change, run:
  *   UPDATE_CARTOGRAPHY_CALIBRATION=1 npx vitest run tests/domain/townCartographyCalibration.test.js
  * and add a row above before committing. Re-recording without adding a row is a
@@ -240,7 +269,7 @@ const DUPLICATES = Object.freeze({
   hamlet: Object.freeze({ permille: 181 }),
   village: Object.freeze({ permille: 72 }),
   town: Object.freeze({ permille: 68 }),
-  city: Object.freeze({ permille: 51 }),
+  city: Object.freeze({ permille: 50 }),
   metropolis: Object.freeze({ permille: 48 }),
 });
 
@@ -910,7 +939,7 @@ describe('W8 the drawn corpus does not repeat itself', () => {
     expect(drift).toEqual([]);
     // The ceilings are the derivation evaluated, not a second table: a reader can
     // check every one of them by hand against DUPLICATES and the declared headroom.
-    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([175, 290, 116, 109, 82, 77]);
+    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([175, 290, 116, 109, 80, 77]);
     // And the derivation is live — a hypothetical reading derives its own ceiling.
     expect(Math.ceil((100 * CARTOGRAPHY_HEADROOM_PERMILLE) / 1000)).toBe(160);
   });

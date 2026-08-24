@@ -2,10 +2,15 @@
 
 - **Status:** DRAFT
 - **Packet version:** 1
-- **Verified base:** `claude/composite-r4` at `79b78881ca86612ec312602c2e3dc6d06aa34df8`
+- **Verified base:** `claude/composite-r4` at `86794b5d2480d6bf7821aa390a82f99f4babeeca`
+  ⚠ **RE-STAMPED BY THE TE-STACK-5 LANDING (§5c).** This member was BUILT on `79b78881ca86612ec312602c2e3dc6d06aa34df8`
+  and every figure in §1–§5 was measured there. It is landing STACKED ON `MF-CH3`, whose own
+  verified base is the sha above, so the member's own commits now sit on the MF-CH3 tip
+  `da2c7085ced2891c3967e5ae21a804fdb8efd537` and the whole stack lands against the slot named here.
+  Both stamped places — this line and `PACKET_MANIFEST.json`'s `verifiedBase` — were moved
+  together, because `implementation-packets.mjs` reds when they disagree.
   ⚠ Read with `git rev-parse --verify -q` at this lane's opening, never extended from a quoted
-  prefix (§381's fabricated-SHA law) and never taken from the dispatch text. It matched the slot
-  the chair's LANE-LAW card names, so that card's shared facts are cited rather than re-derived.
+  prefix (§381's fabricated-SHA law) and never taken from the dispatch text.
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line (J-TEWF1B-1).
 - **Depends on:** `MF-CG1` (LANDED) — this member measures itself through the calibration corpus
@@ -17,9 +22,18 @@
 - **Charter:** the chair's TE-CG-2 dispatch — *"roughly 13% of drawn buildings have footprints
   identical to another building in the same settlement… it blocks the estate/property-line wave."*
   **The 13% is corrected by this member, upward** (§1).
-- **Collision group:** none. `PACKET_MANIFEST.json` at this base holds **175 packets: 174 LANDED
-  and 1 SUPERSEDED — ZERO non-terminal** (measured by execution against the manifest, not
-  remembered), so no packet reserves any path this member names. This member makes 176.
+- **Collision group:** none. `PACKET_MANIFEST.json` at the member's build base held **175 packets:
+  174 LANDED and 1 SUPERSEDED — ZERO non-terminal** (measured by execution against the manifest,
+  not remembered), so no packet reserved any path this member names.
+  ⚠ **RE-DERIVED AT THE STACKED TIP BY EXECUTION, and NEITHER car's own count was carried:**
+  `MF-CG2` and `MF-CH3` each independently measured the surface at 176 from the same 175 base, so
+  the arithmetic a stack invites is wrong by one. `npm run validate:packets` at the stacked tip
+  reads **`valid: 177 packets (0 READY)`** — 174 LANDED, 1 SUPERSEDED and the TWO DRAFTs this
+  landing carries. The two cars' change manifests remain path-disjoint: `MF-CH3` names
+  `src/data/**`, `src/generators/**`, `src/domain/display/**`, `src/domain/data/**` and
+  `supabase/functions/_shared/**`; `MF-CG2` names `src/domain/townCartography/**`. The only files
+  both touch are the shared landing surfaces — `INDEX.md`, `PACKET_MANIFEST.json` and the
+  calibration corpus — and §5c prices the last of those.
 - **Commit authority:** this lane commits on its own detached worktree ref. **No ref is moved.**
 - **⚠ THIS MEMBER MOVES `src/**` AND DECLARES A SAME-SEED SHIFT AT EVERY TIER.** §5 prices it.
 
@@ -273,17 +287,19 @@ cannot drift into measuring two different things.
 
 **Every drawn map moves at every tier.** Stated, not buried, and priced:
 
-| | base `79b78881c` | this tip |
-|---|---:|---:|
-| exact duplicate rate | 26.42% | **0.00%** |
-| translate duplicate rate | 63.30% | **5.93%** |
-| congruent duplicate rate | 75.44% | 10.96% |
-| drawn buildings over the corpus | 53,420 | 44,293 |
-| lit throw census | 0 of 504 | **0 of 504** |
-| distinct `institutionRef` per row | — | **identical on 504 of 504** |
+| | base `79b78881c` | this member ALONE | ⭐ the STACKED tip (§5c) |
+|---|---:|---:|---:|
+| exact duplicate rate | 26.42% | **0.00%** | **0.00%** |
+| translate duplicate rate | 63.30% | **5.93%** | **5.91%** |
+| congruent duplicate rate | 75.44% | 10.96% | — (not re-measured; see §5c) |
+| drawn buildings over the corpus | 53,420 | 44,293 | **44,322** |
+| lit throw census | 0 of 504 | **0 of 504** | **0 of 504** |
+| distinct `institutionRef` per row | — | **identical on 504 of 504** | **identical on 504 of 504** |
 
-Per tier after, translate reading, in permille: **109 / 181 / 72 / 68 / 51 / 48**; the ceilings
-derived from them at the declared headroom are **175 / 290 / 116 / 109 / 82 / 77**.
+Per tier after, translate reading, in permille: **109 / 181 / 72 / 68 / 51 / 48** for this member
+alone, and **109 / 181 / 72 / 68 / 50 / 48** at the stacked tip; the ceilings derived from them at
+the declared headroom are **175 / 290 / 116 / 109 / 82 / 77** and **175 / 290 / 116 / 109 / 80 / 77**
+respectively. **The city column is the ONE figure the stack moves, and §5c prices it.**
 
 - **THE ROW COUNT FELL BY 9,127, AND THE MAP HAD 14,112 STACKED ROWS.** A flagship now consumes a
   cell from the one ledger, so a parcel that flagships over-subscribe no longer offers the same
@@ -342,6 +358,63 @@ rebuild. It is a pre-existing base red, not a CG-2 regression, and it is the cha
 
 ---
 
+## §5c · ⭐ THE STACK: WHAT MOVED WHEN THIS MEMBER WAS REBASED ONTO `MF-CH3`
+
+Added by the **TE-STACK-5 landing**, which carries `MF-CH3` and `MF-CG2` through ONE gate. This
+member's five commits were rebased `--onto da2c7085c` (the MF-CH3 tip) from `79b78881c`.
+
+**THE REBASE PRESERVED THIS MEMBER'S CONTENT, PROVED BY BLOB SHA rather than by reading a diff.**
+All seven files this member owns —`MF-CG2.md` (pre-restamp), `cartographyBuildings.js`,
+`cartographyTuning.js`, `townCartographyBuildings.test.js`, `townCartographyCalibration.test.js`
+(pre-re-record), `cartographyCalibrationCorpus.js` and the corpus JSON — are **byte-identical**
+between `44b83a882` and the rebased tip. Rebase completion was proved explicitly and not from an
+exit code alone: no `rebase-merge` / `rebase-apply` under the worktree's own git-dir, an EMPTY
+`git status --porcelain`, and a `git grep` for conflict markers that returns nothing.
+
+**TWO CONFLICTS, BOTH RESOLVED SEMANTICALLY RATHER THAN TEXTUALLY.**
+
+1. **`docs/implementation/PACKET_MANIFEST.json`.** `MF-CH3` CANONICALISED the whole file
+   (`JSON.stringify(x, null, 2) + "\n"`; `\uXXXX` escapes became literal characters), so the hunk
+   merge was meaningless. Resolved by a three-way analysis of the PARSED records: base 175,
+   MF-CH3 side 176 (`+MF-CH3`), MF-CG2 side 176 (`+MF-CG2`), **zero pre-existing records altered
+   on either side and the base order preserved as a prefix by both**. The resolution is the
+   MF-CH3 side with this member's record appended, re-serialised canonically — and then
+   **re-derived by execution**: `validate:packets` reads `valid: 177 packets (0 READY)`.
+2. **`tests/fixtures/cartography-calibration-corpus.json`.** BOTH cars re-record it, so there is
+   no textual merge that means anything: MF-CH3 moves the institution counts and this member
+   moves the geometry. It was regenerated at the stacked tip through the committed
+   `UPDATE_CARTOGRAPHY_CALIBRATION=1` path — the FOURTH SHIFT RECORD row in the suite header
+   states what moved and why. **The stale-corpus state was OBSERVED before the regeneration, not
+   assumed:** the suite red at `city …cg1-seed-02: drew 163 live vs recorded 165` and
+   `metropolis …cg1-seed-10: translate live 14 vs recorded 13`.
+
+**ONE FIGURE OF THIS MEMBER'S MOVED, AND IT IS DECLARED RATHER THAN RE-RECORDED QUIETLY:**
+`DUPLICATES.city.permille` **51 → 50** and its derived ceiling **82 → 80**. `MF-CH3` admits
+`Multiple monasteries` and `Monastery or friary` into city and metropolis rosters, so 25 of the
+504 rows carry more canonical institutions and the corpus draws **+29** buildings (44,293 →
+44,322). The city tier's repetition count barely moves; the denominator grows, and the quotient
+rounds down by one permille. The ceiling is the same derivation re-evaluated — `ceil(50 × 1600 /
+1000)` — not a number relaxed to pass.
+
+**EVERYTHING ELSE THIS MEMBER CLAIMS WAS RE-CHECKED AT THE STACKED TIP AND HOLDS:** exact
+duplication **0 of 44,322** and 0.00% at every tier (the cure is intact under the stack);
+`FROZEN.maxBuildings` `12/25/47/114/196/261`; `maxInstitutions` `11/24/41/62/55/63`; the throw
+census 0 of 504; worst `cartoRowBytes` 450 so the derived byte band stays 720; the other five
+tiers exactly `109/181/72/68/48`; and THE ONE LAW — `cartoInstitutionRefs === institutions` on
+**504 of 504** rows, with `cartoInstitutionRefs` differing from the MF-CH3-tip recording on
+**ZERO** rows and from this member's own recording on exactly the **25** MF-CH3 admitted.
+
+**AND `MF-CH3`'s DECLARED DIGESTS WERE RE-EXECUTED HERE, NOT ASSUMED.** Its 420-settlement corpus
+digest reads `ae67602f44c3a27081aaa7ca0f121a667ac0652abe8c086bc7f2424eca1f65e1` at the stacked tip
+— byte-identical to the value `MF-CH3` declares — at ROSTER_CHANGED **30 of 420** and
+SETTLEMENT_NAME_CHANGED **0**. The instrument is not a cannot-fail one: run unchanged in a
+worktree at the slot `86794b5d2` it reads `MF-CH3`'s declared base
+`1cb39d7d9086dd875df32bb37e2d2965774b1d89b65967f47fd3250c1c65d25f`. So this member's geometry
+does not reach the generator, which is what §5a's "the generator's own output is upstream of it"
+asserted from the other direction.
+
+---
+
 ## §6 · EXACT CHANGE MANIFEST
 
 | Action | File | Symbol/region | Maximum delta | Coding instruction |
@@ -371,6 +444,17 @@ user-visible copy string moves.**
 > **`+0 files / +0 parked / +0 credited / +5 titles / +1 suiteTitles`** — no new test FILE; the
 > calibration suite gains W8 (one `describe`, four `it`s) and the buildings suite gains one `it`
 > beside the flagship-exemption arm. Measured by execution, not counted by eye.
+
+⭐ **RE-DERIVED AT THE NEW BASE BY THE TE-STACK-5 LANDING, and not carried.** The delta above was
+measured against `79b78881c`; a delta measured at one base is a hypothesis at another. Re-walked
+with ONE lifted classifier driven over three checkouts, the member's own seam reads
+`2525/366/2159/21012/5846` → `2525/366/2159/21017/5847` = **`+0 / +0 / +0 / +5 / +1`**, the
+declared figure exactly, attributed PER FILE: `townCartographyBuildings.test.js` 23 → **24**
+titles at 5 suite titles, and `townCartographyCalibration.test.js` 28 → **32** titles and 8 → **9**
+suite titles. ⚠ The calibration suite is **CREDITED, not PARKED**, at both ends — this file's own
+docstring records a CONDITIONAL DRAFT that would have parked, and the shipped form does not, so
+the four W8 titles are visible to the census and are counted here. The census ROW itself belongs
+to the landing act (§417) and is written once at the stacked tree, never by a member.
 
 ---
 

@@ -28016,7 +28016,7 @@
       "id": "MF-CG2",
       "status": "DRAFT",
       "packetPath": "docs/implementation/packets/town-cartography/MF-CG2.md",
-      "verifiedBase": "79b78881ca86612ec312602c2e3dc6d06aa34df8",
+      "verifiedBase": "86794b5d2480d6bf7821aa390a82f99f4babeeca",
       "changeManifest": [
         {
           "_note": "THE CELL ADDRESS AND THE ONE LEDGER. packFootprint took a mod-4 SLOT into one medial subdivision and the layer kept TWO counters over the same parcel (flagshipsAt for round-1 institutions, occupancy for everything else); because a footprint is a PURE FUNCTION of (parcel, slot, shrink), both leaks drew buildings at IDENTICAL COORDINATES rather than crowding a parcel — 26.42% of 53,420 drawn rows over the 504-row calibration corpus, with 5,932 of 5,932 duplicate groups inside a SINGLE parcel and 4,518 parcels holding more than the four cells the theorem afforded. The medial subdivision RECURSES, so cellAt reads the index as an unbounded base-4 ADDRESS (bounded for, never a while; an address past the tree returns null rather than wrapping) and containment stays a theorem by induction. One ledger replaces two and a flagship CONSUMES its cell while staying exempt from the per-parcel band and the total cap. The footprint also gains a DRESSED form — a size step and an optional corner truncation off one sceneDigest under its own aspect key, so no second carto: label is added and TC-2 determinism scan stays green unedited — because subcells 0,1,2 of any triangle are exact TRANSLATES of one another (20,000 of 20,000 integer triangles) and a unique cell alone would leave a one-shape vocabulary. The dwelling fill free term is clamped at zero, which is load-bearing once occupancy can exceed the band.",
