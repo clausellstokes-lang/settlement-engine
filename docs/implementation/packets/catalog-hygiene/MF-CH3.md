@@ -2,7 +2,7 @@
 
 - **Status:** DRAFT
 - **Packet version:** 1
-- **Verified base:** `claude/composite-r4` at `79b78881ca86612ec312602c2e3dc6d06aa34df8`
+- **Verified base:** `claude/composite-r4` at `86794b5d2480d6bf7821aa390a82f99f4babeeca`
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line (J-TEWF1B-1).
 - **Provenance:** implemented by lane **TE-CH-3**. Third and final car of the catalog-hygiene
@@ -73,8 +73,9 @@ that each declared same-seed movement is attributable to exactly one commit.
 | `916ede2d7` | §3.3 five `priorityCategory` + §3.6 two `facets` | **0** | `ad3eb015bc798ed47b6491eebb1e845faa211ade8ab0f99a61077c3eb65b5ba9` |
 | `c6e3eda51` | §3.4 + §3.5 + §3.7 — the eleven-string prose sweep | **0** | `85132b1976e4a1af98eb1519888d0960cbd5df42ed9f18c0167757cafe9a0e83` |
 | `c4d71b4ea` | §3.1 tail — the 26 redundant `minTier` | **0** | `bc5079e823b34075196733da5e827a128dcd20fdfcc2221830902e49915b8995` |
-| `1d1e8fc86` | §3.2 **J-CH-3-2** — `religiousCenter` at city | **81** | `036f620a9d09d55bd8d787526a53404a9acb059c922e2ace33b7b022152d5227` |
+| ~~`1d1e8fc86`~~ | §3.2 first form — delete `exclusiveGroup` | ~~81~~ | ~~`036f620a…`~~ **SUPERSEDED** |
 | `2a8e7f26a` | the three edge bundles that carry the catalog | — | unchanged (bundles are outputs) |
+| **`501122493`** | **§3.2 REVISED (J-CH-3-2 as re-ruled)** — the coexistence rides a side stream | **30** | `39ac163506859b2144b744d18f4a5d585ae8748cfa2e6fba85f75344db1172be` |
 
 ---
 
@@ -187,32 +188,50 @@ $.institutions[*].facets                                 84 additions /  84 rows
 exactly the car's four declared classes and nothing else. No name, count, id or rng draw moves,
 and the corpus measurement agrees at **ROSTER_CHANGED 0 of 420** for all three commits.
 
-### §4.2 · The roster re-roll — J-CH-3-2, ruled against THE PROMISE
+### §4.2 · The coexistence — J-CH-3-2, ruled against THE PROMISE and then RE-RULED
 
-`c4d71b4ea → tip`: **144 of 525** golden rows move across 314 path templates, **with**
-array-length moves — `$.institutions` itself moves on 134 rows. That breadth is the declared
-mechanism, not a surprise: `assembleInstitutions.js:323` returns BEFORE the `rng.chance` draw,
-so un-suppressing a row consumes a draw and reshuffles the whole downstream sequence for that
-settlement. It is a same-seed **re-roll of the city/metropolis roster**, scoped to that step
-because `pipeline.js:156` forks a PRNG per step.
+`c4d71b4ea → tip`: **22 of 525** golden rows move across 65 path templates, all of them
+inside the 272 half A already moved.
 
-**THE CHAIR'S RULING, quoted so it travels with the change:** THE PROMISE protects **lived
-history**. A seed already generated and played is a starting world forever and its stored
-institutions are untouched by this. THE PROMISE does not freeze the generator's future output;
-if it did, no defect in generation could ever be repaired. **Only newly generated worlds
-differ.**
+⚠⚠ **THE CHAIR REVISED THIS ITEM MID-BUILD (§538.5 revised), and the revision is the point.**
+The first form deleted `exclusiveGroup: 'religiousCenter'` from the two city rows and cost
+**81 of 420 rosters / 144 golden rows / 314 templates**. That price bought the wrong thing.
+The *intent* is that a cathedral city may also hold friaries and a nunnery — which the
+metropolis block already permits, making the city rows the inconsistency. The 81-roster
+reshuffle was an **artifact of where the exclusivity check sits**: the early return precedes
+the `rng.chance` draw, so a suppressed row consumes NO draw, and un-suppressing it makes it
+start consuming one and re-rolls every later draw in that settlement.
 
-Over the 420 corpus: **81 of 420 rosters change**, 113 records move, 376 distinct new
-institution-name strings appear, and **settlement names move ZERO**. Per tier, before → after:
+**THE SHIPPED FORM.** A row declaring `exclusiveGroupCoexists: true` stays IN its group but is
+no longer BLOCKED by it, and its chance is drawn from
+`rng.fork('exclusiveCoexist::<tier>::<category>::<name>')`. Staying in the group is the
+load-bearing half: `coherenceRepairPass` refuses a same-group dependency add, so the TOWN-tier
+`Monastery or friary` the first form dragged into 21 cities never appears. Measured:
 
 | row | city | metropolis |
 |---|---|---|
-| `Cathedral (10,000+ only)` | 26 → 26 | 29 → 29 |
-| `Multiple monasteries` | **0 → 41** | 32 → 60 |
-| **`Monastery or friary`** (a **town** row) | **0 → 21** | **0 → 5** |
-| `Major monasteries (5-10)` | 0 → 0 | 32 → 48 |
+| `Cathedral (10,000+ only)` | 26 → 26 (unmoved) | 29 → 29 (unmoved) |
+| `Multiple monasteries` | **0 → 12** | 32 → 50 |
+| **`Monastery or friary`** | **0 → 0** | **0 → 0** |
+| `Great cathedral` | 0 → 0 | 45 → 45 (unmoved) |
 
-The last row is the injection the charter never priced (§0.2 C5). It is declared, not buried.
+**ROSTER_CHANGED 30 of 420** (was 81) · 87 records · 123 distinct new name strings (was 376)
+· **settlement names 0**. 12 city + 18 metropolis = the 30, so the row the ruling is about is
+now the dominant term rather than collateral.
+
+⭐ **AND IT DISSOLVED A BILL THE CHARTER NEVER SAW.** Under the first form the
+live-reconstructed Wizard News corpus moved (`introductions` 272 → 270), cascading into two
+frozen baseline JSONs, a 106-row address digest, and `activeRules` 15 → 14 — which would have
+required an **authored** written reason for a headline rewrite rule going permanently inert,
+prose in a protected substrate with **no `UPDATE_*` path by design**. That absence was the
+codebase saying the substrate is not to be moved by a catalog repair. Executed under the
+shipped form: both news walkers are **2 files / 16 tests / EXIT 0**.
+
+⚠ **WHAT IT COSTS, NAMED:** `exclusiveGroupCoexists` is a new one-key catalog affordance and a
+new engine branch. The panel variant hard-coded the group name inside `assembleInstitutions.js`
+and was explicitly a probe, so the permission had to become data. The affordance is general and
+outlives this car: it is how the estate can un-suppress or add a catalog row **without
+re-rolling every existing seed** — THE PROMISE as a mechanism rather than a hope.
 
 **The estate's own precedent:** the metropolis block's `Great cathedral` and
 `Major monasteries (5-10)` carry **no** `exclusiveGroup`. The same pair, one tier up, already
@@ -270,8 +289,8 @@ The amended `metropolisCatalogReachable.test.js` arms are convicted by M1, M2, M
   the landing act** per §417 and the MF-CG1 / MF-CH1 precedent:
 
   ```
-  slot 79b78881c   files 2523 / parked 366 / credited 2157 / titles 20982 / suiteTitles 5840
-  this tip         files 2524 / parked 366 / credited 2158 / titles 20992 / suiteTitles 5841
+  slot 86794b5d2   files 2524 / parked 366 / credited 2158 / titles 21002 / suiteTitles 5845
+  this tip         files 2525 / parked 366 / credited 2159 / titles 21012 / suiteTitles 5846
   DELTA                  +1   /       +0   /        +1     /        +10   /            +1
   ```
 
@@ -286,10 +305,13 @@ The amended `metropolisCatalogReachable.test.js` arms are convicted by M1, M2, M
   | `tests/property/generatorGoldenMaster.test.js` | PARKED, 0 titles | PARKED, 0 titles (the SHIFT RECORD is a docstring) |
 
   8 + 2 = the +10, and the one new suite title is the new walker's. The arithmetic closes:
-  366 + 2,158 = 2,524. **Method:** the classifier was LIFTED out of vitest — walker lines
+  366 + 2,159 = 2,525. **Method:** the classifier was LIFTED out of vitest — walker lines
   485–1400 with the `vitest` import struck, run under plain node — because the gate mutex was
   held continuously by sibling lanes. Its non-vacuity is a live positive control: at the slot
-  the lift reproduces LANE-LAW's published tuple `2523 / 366 / 2157 / 20982 / 5840` exactly.
+  the lift reproduces the walker's own published tuple `2524 / 366 / 2158 / 21002 / 5845` exactly.
+  ⚠ THE DELTA IS CARRIED, NEVER THE TUPLE: the slot moved from `79b78881c` to `86794b5d2`
+  under this lane (TE-AIP-1 + MF-CH2B), which moved the absolutes by +1/+0/+1/+20/+5 and this
+  car's delta not at all. Both ends were re-walked at the NEW slot.
 
 ---
 
@@ -319,9 +341,9 @@ The amended `metropolisCatalogReachable.test.js` arms are convicted by M1, M2, M
   changing it is a living-history behaviour change. **Recorded, not fixed.**
 * **The force path's asymmetry** (§0.2 C1) — pinned by walker arm A6, deliberately not repaired.
 
-### Open calls for the chair — each with a recommendation
+### The four calls, RULED BY THE CHAIR (all four as recommended)
 
-1. **The re-homed `Priest (resident)` override.** `MF-CH1`'s own packet says the chair moved
+1. **RULED: its own car. AGREED.** **The re-homed `Priest (resident)` override.** `MF-CH1`'s own packet says the chair moved
    J-CH-1's `facets: { institutionNature: 'faith' }` to **CH-3a** at §503.3 "because it lands on
    every village record and reds `generatorGoldenMaster`", and MF-CH1's walker arm A7 says it is
    "ready for CH-3a's first declaration". It is **not in this lane's brief** and
@@ -330,15 +352,15 @@ The amended `metropolisCatalogReachable.test.js` arms are convicted by M1, M2, M
    inside a car already carrying the train's largest roster movement, muddying exactly the
    attribution the chair asked for by requiring separate commits. It is one line plus a SHIFT
    RECORD row as its own car.
-2. **The skeptic panel's rng-preserving variant B for §3.2.** A side-stream `rng.fork` delivers
+2. **RULED: TAKE THE VARIANT — the chair revised J-CH-3-2 against its own first form, and this car ships the variant (§4.2).** The recommendation below is preserved as written so the reasoning that produced the revision stays legible. **The skeptic panel's rng-preserving variant B for §3.2.** A side-stream `rng.fork` delivers
    the coexistence at **34 of 420** rosters instead of 81, with **no** `Monastery or friary`
    injection and NPC name lists moving in 5 of 140 city/metropolis settlements instead of 73.
-   **Recommendation: do NOT take it in CH-3.** The panel itself calls it a probe, not a
+   **Recommendation at the time: do NOT take it in CH-3 —** *superseded by the chair's revision; the variant IS taken, in a shippable data-driven form.* The panel itself calls it a probe, not a
    shippable design — it hard-codes `'religiousCenter'` inside `assembleInstitutions.js`, a file
    this car does not touch, and it is a NEW mechanism rather than a repair. Its value is the
    **attribution** it proves: of the 81 changed rosters, ~34 are the intended coexistence and
    ~47 are draw-sequence collateral. That is the number worth ruling against THE PROMISE.
-3. **The ≤3 production-file ceiling.** This car touches **four** — `institutionalCatalog.js`,
+3. **RULED: WAIVED for this car**, with the reason recorded: the fourth file is a CONSEQUENCE of the ruling rather than a scope expansion, and splitting would put a declared shift and its own baseline in different commits. (The shipped car is in fact FIVE production files — `assembleInstitutions.js` joined it with the revision, for the same reason.) **The ≤3 production-file ceiling.** This car touches **four** — `institutionalCatalog.js`,
    `institutionDescVariants.js`, `institutionVocabulary.js`, `lookups.js` — against
    J-CH-3-5's proposed three-way split. The chair's brief directed a **single** packet minted
    last and alone, which is what this is. **Recommendation: waive the ceiling for this car.**
@@ -346,7 +368,7 @@ The amended `metropolisCatalogReachable.test.js` arms are convicted by M1, M2, M
    (`implementation-packets.mjs` has no file-count check), and the split's stated benefit — one
    kind of shift per car — is already delivered by the five separated commits and their five
    separately measured digests.
-4. **The skeptic's two data candidates inside the `minTier` ten.** The panel recommends deleting
+4. **RULED: NEITHER. AGREED** — both are data moves, and the ruling already refused that class on measurement; consistency outweighs the individual merits. **The skeptic's two data candidates inside the `minTier` ten.** The panel recommends deleting
    the village `Smuggling network` row outright (measured dead: 0/70 at village with AND without
    its gate, and shadowed by the city row of the same name in every merged view) and ruling
    `Dragon resident` explicitly (its desc says "living in **city**", contradicting its gate;
