@@ -26369,3 +26369,26 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   and the REG-11 share clip ("watch my city grow" — the viral artifact).
   A keyframe TASTE SPECIMEN precedes the wave, per the specimen-first habit:
   one city's history as 5–6 rendered pages for the owner's judgment.
+
+## §607 · THE OWNER'S VETO EXERCISED — THE CHRONICLE REVEAL IS A FILM, NOT AN ALBUM (2026-08-24 ~20:05 CDT)
+
+- **§607.1 CORRECTION (owner): "I meant organic growth… frame by frame,
+  slowly growing through the years."** §606.2's keyframes-first ruling is
+  OVERRIDDEN — the required form is the CONTINUOUS FILM. (The §585
+  delegation's veto mechanism working exactly as designed.)
+- **§607.2 THE ENGINEERING SHAPE, RULED:** one final render, every drawn
+  element annotated with an APPEARANCE YEAR — true epoch + true accretion
+  order from the derivation, with mid-epoch years smoothly interpolated —
+  revealed along its own timeline (elements surfacing, roads drawing in,
+  walls rising curtain by curtain, district tints washing outward), with
+  TRANSFORMATION BEATS embedded where the fabric genuinely reorganizes
+  (fusion merges, stall→row infill, fire scars and their differently-grained
+  healing, high-water ghosts) and HARD YEARS shown as stillness (the plague
+  decade ticks with nothing built). Ends when the build ends (§606/§603
+  unchanged). ⚠ CANON-HONESTY CLAUSE: interpolated mid-epoch years are
+  PRESENTATION, never stamped as world facts — no mid-film element may claim
+  a date the world did not record; if construction-history research later
+  makes per-building years canonical, the film inherits them.
+- **§607.3** The film taste specimen replaces the page specimen: one city
+  growing as an actual animation for the owner's judgment. Growth plates
+  (§606.3) survive as the PRINT projection of the same timeline.
