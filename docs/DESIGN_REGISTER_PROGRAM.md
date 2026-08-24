@@ -330,3 +330,72 @@ the regenerate-search — users cycle once or twice on a map that already matche
 settlement's state, then edit; the competitive unit is time-per-satisfied-map. Interaction
 smoothness, caching, and progressive reveal unchanged from §583.2. REG-7's performance gate
 and REG-10's reveal pipeline consume the tiered numbers.
+
+---
+
+## AMENDMENT A5 · THE CHRONICLE-AND-TIME INTEGRATION (ODQ §§598–§616, compiled §617)
+
+**The comprehensive fold of the 2026-08-24 evening sittings. Layered per the compile law: A5
+wins over the body and A1–A4 where they disagree; the ledger outranks all. Pending its own
+skeptic panel; findings fold as A6.**
+
+### A5.1 · New laws (L-REG-18 … L-REG-29)
+
+| # | Law | Ruling |
+|---|---|---|
+| L-REG-18 | THE RAMPART: band + walk + courses, towers-as-joints, tier-scaled — OWNER-APPROVED as drawn (the REG-0b specimen is the dress precedent beside hf261/hf313); WEAR in three grades (kept → weathered → crumbling) derived from maintenance facts × age, never an invented number | §590, §598, §614.2 |
+| L-REG-19 | THE CHRONICLE FILM: continuous organic growth — ONE final render revealed along per-element APPEARANCE YEARS (true epoch + true accretion order; mid-epoch spacing interpolated under the CANON-HONESTY clause: presentation never stamped as world fact) | §607 |
+| L-REG-20 | THE FILM CLOCK: duration = max(30 s, actual build); STORY-PACED (beats allocated, years non-uniform); SKIPPABLE and REPLAYABLE (the replay is the share clip) | §608 |
+| L-REG-21 | THE BEAT VOCABULARY (closed, typed): BUILD · MERGE/SPLIT · DEMOLISH→REPLACE · SCAR→HEAL · SIEGE · OCCUPATION · STILLNESS · WALL-RAISING · YEAR-CARD · DEBRIS · RECLAMATION · ABANDONMENT — every beat sourced from a dated, typed world event; the RESTRAINT law: calm ink, salience from pacing never volume, no drama the world's ledger does not hold | §609, §614.3 |
+| L-REG-22 | THE DF PRINCIPLE: the depth lineage — the fourth reference, for MEANING never visuals; curated emergence under THE PROMISE, against DF's chaos and opacity | §610 |
+| L-REG-23 | THE DECLINE ARC: non-monotonic trajectories are first-class; the drawn decline vocabulary (hf379 ruin ladder, thinned fabric in the oversized high-water circuit, subdivided grandeur); the film contracts | §611 |
+| L-REG-24 | AGE–ARC COUPLING: an arc draws the span it needs; a young place earns no ruins (the coherence direction binds both ways); plateaus lawful for the old; the sub-century scope binds forward simulation only | §611.4 |
+| L-REG-25 | ⭐⭐⭐ THE PURPOSE LAW — the final tie-breaker above the north star it serves: *does this deepen the user's sense that this place is real, and theirs?* The ownership ladder: witness → reader → participant → owner, with THE PROMISE as the vow converting attachment into possession | §612 |
+| L-REG-26 | FILM-LAST + THE TIMELINE CARRY-NOTE: the film assembles AFTER all map building; **every wave from A5 forward stamps its elements' timeline annotations (appearance epoch, accretion order, beat events) in its changeManifest** so the final assembly consumes emitted data and re-opens nothing | §613 |
+| L-REG-27 | RECLAMATION BY GROWTH, INTERRUPTIBLE AND ONE-WAY: disaster remnants (crashed floating islands included) persist beyond the limits as landscape facts; the growth front's arrival triggers breakdown, its retreat freezes it mid-bite; the half-eaten ruin at the high-water mark is dated physical evidence; G-60's loss machinery gains its trigger | §614.1, §614.3 |
+| L-REG-28 | THE ACCESSIBILITY HOLD: the accessible lens joins EVERY wave's instrument run and every judging round — beauty aimed at parchment may never silently degrade the lens nobody was grading | §615.3 |
+| L-REG-29 | THE NAMING VETO + THE CAMPAIGN BOUNDARY: NO generated street/bridge/gate names (the DM's shipped annotation machinery is the naming path, owner-ruled); edge-road destination labels are CAMPAIGN-LAYER work, built after the maps, outside this program | §616.1–.2 |
+
+### A5.2 · Wave-plan updates
+
+| Wave | Change |
+|---|---|
+| REG-2 (live) | + the WEAR arm (in-wave if the timebox allows, else REG-2b), derivation measured-before-minted; the §611 synergy named (peak-vs-present lands the oversized circuit in the worst grade) |
+| **REG-T (new, research seat)** | TRAJECTORY VARIABILITY, measured before built: do generated histories produce boom-bust / plateau / fade / sacked arcs at meaningful rates, with age–arc coupling (L-REG-24) holding? If thin, mint the trajectory shapes as a small typed vocabulary (constants tuning-class). Runs any time; blocks REG-D |
+| **REG-D (new)** | THE DECLINE DRESS: the hf379 ruin ladder, thinned fabric, subdivided grandeur, DEBRIS/partial-RECLAMATION states drawn at their reached stage (L-REG-27). Depends on REG-3 (shapes) + REG-5 (drawn world) + REG-T |
+| **REG-F (new, LAST)** | THE CHRONICLE FILM: assembles from every wave's timeline annotations. EXITS (each observable): a TIMELINE-TOTALITY walker — every drawn element carries appearance data, zero orphans; each beat kind demonstrated on a fixture with its restraint check; the clock law verified on N fixtures (duration = max(30 s, build), measured); same-seed timeline byte-identical; a CANON-HONESTY scan — zero interpolated years stamped as facts; skip and replay affordances present; **the FILM TASTE SPECIMEN (one city's whole life as an actual animation) judged before the wave completes.** Growth plates (print projection) and the share clip ride as its deliverable siblings with REG-11 |
+| ALL waves | the L-REG-26 timeline carry-note is a standing changeManifest obligation from this amendment forward; the L-REG-28 accessible-lens arm joins every exit |
+| Roster | SEASONAL DRESS: late wave after paint, deferred-and-recorded (§615.4) · CAMPAIGN EDGE-LABELS: outside REG entirely (§616.1) |
+
+**Updated arc order:** REG-2 → REG-3 → REG-4 → REG-5 → REG-6 → REG-7 → REG-8 → REG-9 →
+REG-D → REG-10 → REG-11 → REG-F → REG-P (the re-port carries the whole). REG-T runs
+opportunistically before REG-D; the §217 raises are chair-signed per §604's spend-the-budget
+grant.
+
+### A5.3 · Machinery map additions (unify, never fork)
+
+| Machinery | State | Consumed by |
+|---|---|---|
+| `epochAxis.js` (rings per epoch), accretion order in the derivation | sealed | REG-F's appearance years |
+| `snapshot.js` year projection | sealed (sandbox) | REG-F prior art |
+| `stateMarks.js` calm-ink events; `immersion.js` pentimento; marginalia | sealed | L-REG-21 beats; REG-D |
+| G-60 typed LossRegion + dated recovery | ruled | L-REG-27's object; REG-D/REG-F |
+| peakTier / T2R high-water; walls.js high-water circuit | landed/sealed | REG-D; the wear synergy |
+| B8 two-way loop / EST-5 | UNBLOCKED (§611.3, CH-4 landed) | the decline dynamics' estate layer |
+| `mapEdits` annotations (deltas, persisted) | shipped | L-REG-29's naming path — nothing to build |
+| seasonOverride in mapEdits | shipped | the seasonal-dress late wave |
+
+### A5.4 · Owner and tuning surfaces (updated)
+
+Tuning-signature (world-shaping, accumulating for the soak's end): trajectory-shape constants ·
+wear thresholds · reclamation rates · the fjord-crag threshold · wall-regime constants · B13
+densities. Chair-judged under §585 (vetoable): film pacing weights · beat treatments · all
+judging rounds. Owner by nature, unchanged: cutover · deploys · the tuning signature · the
+ultra keystroke.
+
+### A5.5 · Anti-scope additions
+
+No generated proper names for streets/bridges/gates/squares (owner veto — the DM's hand is the
+namer). No campaign-layer work inside this program. No film drama beyond the world's dated
+ledger. No reclamation by timer. No wear from invented maintenance facts. The §613 film-last
+order may not be traded away for an early demo beyond the chartered taste specimen.

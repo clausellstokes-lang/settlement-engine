@@ -26624,3 +26624,18 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
 - **§616.3 THE REMAINDER STANDS UNDER THE DELEGATION:** the accessibility
   hold (§615.3, law now) and seasonal dress (§615.4, late-roster) proceed as
   chartered.
+
+## §617 · AMENDMENT A5 — THE EVENING'S SITTINGS COMPILED INTO THE ARCHITECTURE (2026-08-24 ~22:50 CDT)
+
+- **§617.1** §§598–§616 are compiled as AMENDMENT A5 of
+  DESIGN_REGISTER_PROGRAM.md to the estate's standard: twelve new laws
+  (L-REG-18…29), three new waves (REG-T trajectory research · REG-D the
+  decline dress · REG-F the Chronicle Film, LAST, with its timeline-totality
+  walker, canon-honesty scan, clock verification and the film taste
+  specimen), the standing timeline carry-note and accessible-lens obligations
+  on every wave, the machinery map extended (epochAxis, snapshot, stateMarks,
+  pentimento, LossRegion, peakTier, the unblocked B8 loop, the annotation
+  naming path), the tuning/chair/owner surfaces re-drawn, and the anti-scope
+  hardened with the owner's vetoes. The updated arc order is stated. **A
+  three-lens skeptic panel (observability · collisions · feasibility)
+  attacks A5 next; findings fold as A6 with the chair's rulings.**
