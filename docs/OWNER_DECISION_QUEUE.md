@@ -25611,3 +25611,27 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   every judging round runs against **all three** — the specimen beside a
   Watabou capture, an FTG capture, and a corpus plate — asking whether ours
   reads as the best member of that family rather than a fourth species.
+
+## §575 · THE WALL-BAND LAW: SPACE OR TANGENT, DERIVED FROM THE WORLD (2026-08-24 ~12:25 CDT)
+
+- **§575.1 ⭐ OWNER DIRECTIVE, TWO LIMBS:** buildings nearest the wall either
+  (A) align TANGENTIALLY to the wall's local curve, or (B) leave CLEAR SPACE
+  on both sides of the wall. **Both are historically true and they are
+  REGIME-DEPENDENT, which makes this another place truth feeds the visual:**
+  regime B is the military-active wall (the wall-street/intervallum kept
+  clear inside for troop movement, the cleared defensive zone outside — often
+  legally enforced); regime A is the long-peace encroachment wall (prosperity
+  pressure builds plots backing onto the circuit, and they align tangentially
+  because the wall IS their back wall). **The regime derives from the
+  settlement's own facts — readiness/war state, era since last siege,
+  prosperity pressure — never from a style dial.** Both are
+  triangulation-legal: Watabou's walls ride through negative-space halos;
+  the corpus's ring fabric flows concentrically along its circuits.
+- **§575.2 ROUTED:** the real mechanism is an ORIENTATION FIELD in the fabric
+  geometry program (building/parcel axis = blend of frontage direction and
+  wall tangent, weighted by distance to the circuit; the wall-street as the
+  seam) — minted beside the FRONTAGE-FUSION wave. The specimen lane carries
+  a draw-level demonstration with a safety rule: regime B (subtractive,
+  collision-free) preferred where geometry is tight, tangential rows where
+  already safe, and a before/after crop of one wall stretch for the owner
+  to judge the effect in isolation.
