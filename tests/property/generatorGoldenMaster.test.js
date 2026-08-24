@@ -18,6 +18,48 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-08-24 — MF-CH6, FAITH IS NOT MAGIC (30 rows of 525 moved; 0 rows added, 0 removed,
+ *   0 ROSTERS changed in ANY magic case). Lane TE-CH-6, the deity-doctrine car of the
+ *   catalog-hygiene train. Ruled at ODQ §541.8/§541.9; a REPAIR, chair-ruled.
+ *   THE CAUSE IS ONE TAG STRING AND TWO LICENCE VALUES. `ARCANE_INST_KW` — the magic-DEPENDENCE
+ *   vocabulary read from the NAME — carried six words that name FAITH ('druid circle',
+ *   'elder grove council', 'elder grove', 'healer (divine', 'divine healer', 'wandering
+ *   healer'), so the engine asserted that divine healing is a species of magic. THE DEITY
+ *   DOCTRINE is constitutional: faith is culture, never theology. The six left the list
+ *   (39 members → 33), and `Druid Circle` and `Elder Grove Council` dropped the redundant
+ *   `arcane` tag beside their `religious` one and re-licensed `low` → `none`, so tag and
+ *   licence AGREE in the data rather than being ordered by a rule — the TE-CH-5 shape.
+ *     ⚠ `Healer (divine, 1st level)` IS HELD AT `low` AND §541.8's PREMISE IS REFUTED FOR IT.
+ *     `textAssertsFunctionalMagic('Basic healing spells. Cure Wounds (10 GP).')` is TRUE, so
+ *     the entry as authored is a first-level SPELLCASTER filed under faith. The doctrine gap
+ *     it exposes is a CONTENT gap — the catalog holds no cultural divine healer — not a
+ *     licence value, and it is recorded rather than papered over.
+ *     TOTALITY CONTROL: the measuring harness reproduces all 525 committed hashes at the
+ *     parent with 0 mismatches, so "30" is a count and not a sample.
+ *     THE COMPLETE PATH-TEMPLATE CENSUS IS SIX TEMPLATES OVER ALL 30 ROWS, with zero key-order
+ *     moves and zero rows added or removed:
+ *       $.institutions[*].tags[*] changed / removed / .tags.length     30 rows each
+ *       $.institutions[*].magicLicense changed                         30 rows
+ *       $.simulationTrace[*].downstreamEffects[*] removed / .length    30 rows
+ *     The first family is the tag string leaving; the second is the licence value; the third
+ *     is the ONE effect the tag drove — `{ target: 'magicCapacity', effect: 'reinforced' }`
+ *     from `tagsToDownstream`, which feeds nothing but the trace. The 30 rows are 18 town and
+ *     12 village — exactly the tiers `Elder Grove Council` and `Druid Circle` are authored in.
+ *     NO capacity, economy, magic-profile, count, name, id or rng draw moves anywhere.
+ *     WHERE IT LANDS, AND WHERE IT DOES NOT. Over 2,625 same-seed settlements (the 525-row
+ *     grid × five magic cases) ZERO ROSTERS move in every case, and no institution's instance
+ *     count moves by one in any case: magicExists:false 0 hashes · priorityMagic:0 0 · :20 0 ·
+ *     :50 30 · :80 139. A magic-free world is BYTE-IDENTICAL to before — which is the finding
+ *     this car exists to record as much as the cure. The world law strikes the two druid rows
+ *     by the `Magic` display SHELF, not by the keyword list, so removing the words changed
+ *     what the vocabulary CLAIMS without changing what a dead-magic world CONTAINS. Freeing
+ *     them needs the shelf-reading gates, and doing that alone reds the shipped
+ *     `world_law_magic` coherence receipt on 264 of 504 magic-free settlements (0 today),
+ *     because the receipt reads the record's own `category: 'Magic'` as a magic claim. That
+ *     is a train, and it is scoped in the packet rather than half-shipped here.
+ *   THE PROMISE. Institution tags are stamped at generation and persisted; no store,
+ *   migration or rehydration path re-reads `institutionalCatalog`. A saved world keeps its
+ *   stored tags and is untouched; only newly generated worlds differ.
  * 2026-08-24 — MF-CH5, ALCHEMY IS A TRADE (187 rows of 525 moved; 0 rows added, 0
  *   removed, 0 ROSTERS changed). Lane TE-CH-5, the vocabulary car of the
  *   catalog-hygiene train. Ruled at ODQ §541 as SHAPE F; a REPAIR, chair-ruled.

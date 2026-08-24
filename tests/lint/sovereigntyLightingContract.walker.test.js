@@ -6564,7 +6564,22 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // vitest and driven under plain node, so the reading is this walker's own predicate
     // over the live estate rather than a figure copied from a gate log.
     // The arithmetic closes: 366 + 2,159 = 2,525 still.
-    files: 2525, parked: 366, credited: 2159, titles: 21049, suiteTitles: 5852,
+    // ── RE-RECORDED 2026-08-24 BY TE-CH-6 (ODQ §541.8), WITH ITS CAUSE STATED ───────
+    // 2,525/366/2,159/21,049/5,852 → 2,525/366/2,159/21,052/5,852. THE CAUSE IS THREE NEW
+    // ARMS IN TWO ALREADY-CREDITED FILES and nothing else — NO new test file, which is why
+    // files, parked and credited are all UNCHANGED, and no new `describe`, which is why
+    // suiteTitles is unchanged too.
+    // ⚠ ATTRIBUTED PER FILE BY EXECUTION, NOT BY ARITHMETIC. Restoring BOTH edited test
+    // files to the slot `233c35a69` and re-running this walker returns the tuple to
+    // 21,049 EXACTLY — so the whole +3 is this car's and none of it is inherited. Restoring
+    // only the licence walker reads 21,050, which splits the three:
+    //   tests/lint/magicLicenceCensus.walker.test.js  +2  (A9, the faith vocabulary; A10,
+    //     the measured gap between the declaration and the three gates that do not read it)
+    //   tests/domain/arcaneIdentity.test.js           +1  (MG-LAW-2's institution half —
+    //     the faction half was already pinned there, the institution half shipped broken)
+    // All three are literal titles, so door 3's reader credits them and PARKED STAYS AT 366.
+    // The arithmetic closes: 366 + 2,159 = 2,525 still.
+    files: 2525, parked: 366, credited: 2159, titles: 21052, suiteTitles: 5852,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
