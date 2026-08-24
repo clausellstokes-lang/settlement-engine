@@ -201,6 +201,84 @@ export function classifyCalibrationFailure(message) {
 }
 
 /**
+ * THE TWO READINGS OF "THE SAME FOOTPRINT", and why there are exactly two.
+ *
+ * TE-CG-2 measured the drawn corpus under five readings before choosing. Two of them
+ * are the ones that mean something different from each other:
+ *
+ *   EXACT      — the same vertex list at the same absolute coordinates. Two buildings
+ *                that read exact are not a repeated shape, they are one building
+ *                standing INSIDE another, and `cartographyProperty.js` subtracts
+ *                member footprints from the parcel ring under an EVEN-ODD fill, so a
+ *                stacked pair cancels its own hole and the yard renders as solid
+ *                ground. This is never correct at any tier and its ceiling is zero.
+ *   TRANSLATE  — the same shape and size, somewhere else. This is the reading that
+ *                means "copy-paste on the map", and it is legitimately TIER-SCALED:
+ *                `PLAN_UNIT_CM_BY_TIER` makes a thorp's plan unit 10 cm to a
+ *                metropolis's 80, and a thorp genuinely is a dozen of the same
+ *                cottage. Its ceiling therefore bands by tier.
+ *
+ * The three readings NOT recorded, and why: cycle-canonical-exact measured identically
+ * to exact on all 53,420 pre-fix rows (a duplicate always shared its vertex order too),
+ * full SSS congruence is translate plus rotation and moves the number without changing
+ * what a reader sees, and area-within-1% reads 95% pre-fix and 76% post-fix because
+ * four class shrinks over one parcel fan simply produce similar areas — it measures
+ * the shrink ladder, not repetition.
+ *
+ * Both count ROWS IN A DUPLICATE GROUP, not pairs and not groups: the question the
+ * defect asks is "how many drawn buildings look like another one", so a group of five
+ * contributes five.
+ */
+
+/** @param {unknown} footprint @returns {string} the exact reading's key */
+export function exactFootprintKey(footprint) {
+  return JSON.stringify(footprint);
+}
+
+/**
+ * The translate reading's key: vertices re-based on each starting vertex in turn, the
+ * codepoint-least spelling kept. Rotating the start is what makes it a reading of the
+ * SHAPE rather than of the array — the packer emits a cell's vertices in the parent's
+ * winding, so the same shape can arrive at two different starting corners.
+ * @param {unknown} footprint @returns {string}
+ */
+export function translateFootprintKey(footprint) {
+  const points = Array.isArray(footprint) ? footprint : [];
+  let best = '';
+  for (let start = 0; start < points.length; start++) {
+    const origin = points[start];
+    /** @type {Array<[number, number]>} */
+    const rebased = [];
+    for (let step = 0; step < points.length; step++) {
+      const point = points[(start + step) % points.length];
+      rebased.push([point[0] - origin[0], point[1] - origin[1]]);
+    }
+    const spelling = JSON.stringify(rebased);
+    if (best === '' || spelling < best) best = spelling;
+  }
+  return best;
+}
+
+/**
+ * How many of `buildings` share their footprint with at least one OTHER row of the
+ * same block, under `keyOf`. Zero for a block of one, by construction.
+ * @param {ReadonlyArray<unknown>} buildings
+ * @param {(footprint: unknown) => string} keyOf
+ * @returns {number}
+ */
+export function duplicateFootprintRows(buildings, keyOf) {
+  /** @type {Map<string, number>} */
+  const seen = new Map();
+  for (const row of buildings) {
+    const key = keyOf(record(row).footprint);
+    seen.set(key, (seen.get(key) || 0) + 1);
+  }
+  let rows = 0;
+  for (const count of seen.values()) if (count > 1) rows += count;
+  return rows;
+}
+
+/**
  * MEASURE ONE ROW through the real pipeline and the real compiler.
  *
  * The dark compile is run first and separately, because a dark failure and a lit
@@ -221,10 +299,17 @@ export function classifyCalibrationFailure(message) {
  * — 287 of 504 rows threw before the figure existed — and the packet states that
  * bootstrap rather than hiding it.
  *
+ * ── THE TWO DUPLICATE COUNTS (TE-CG-2) ──────────────────────────────────────
+ * `cartoDupExact` and `cartoDupTranslate` are the drawn block's own duplicate-footprint
+ * census under the two readings above, recorded per row so the rate is a property of
+ * the CORPUS rather than of whichever settlement a reviewer happened to open. They
+ * read −1 on a row that could not draw, for the same reason the two byte figures do.
+ *
  * @param {CalibrationRow} row
  * @returns {{ key: string, tier: string, institutions: number, districts: number,
  *   sceneBuildings: number, dark: string, outcome: string, reported: number[],
- *   cartoBuildings: number, cartoRowBytes: number, cartoInstitutionRefs: number }}
+ *   cartoBuildings: number, cartoRowBytes: number, cartoInstitutionRefs: number,
+ *   cartoDupExact: number, cartoDupTranslate: number }}
  */
 export function measureCalibrationRow(row) {
   const { _seed, ...config } = row;
@@ -250,6 +335,8 @@ export function measureCalibrationRow(row) {
   let cartoBuildings = -1;
   let cartoRowBytes = -1;
   let cartoInstitutionRefs = -1;
+  let cartoDupExact = -1;
+  let cartoDupTranslate = -1;
   try {
     const lit = compileTownSceneManifest(
       { settlement, audience: 'dm', worldState: LIT_RULES },
@@ -272,6 +359,8 @@ export function measureCalibrationRow(row) {
       cartoInstitutionRefs = new Set(
         buildings.map((row) => record(row).institutionRef).filter((ref) => typeof ref === 'string'),
       ).size;
+      cartoDupExact = duplicateFootprintRows(buildings, exactFootprintKey);
+      cartoDupTranslate = duplicateFootprintRows(buildings, translateFootprintKey);
     }
   } catch (error) {
     const classified = classifyCalibrationFailure(
@@ -293,6 +382,8 @@ export function measureCalibrationRow(row) {
     cartoBuildings,
     cartoRowBytes,
     cartoInstitutionRefs,
+    cartoDupExact,
+    cartoDupTranslate,
   };
 }
 

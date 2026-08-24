@@ -512,6 +512,73 @@ describe('TC-4 C3 — footprints pack INSIDE their parcels, in integer geometry'
     expect(cartographyBand(T.BUILDINGS_PER_PARCEL, 'town')).toBe(3);
     expect(new Set(flagships.map((row) => row.id)).size).toBe(4);
   });
+
+  /**
+   * THE CELL ADDRESS IS A BIJECTION — the mechanism control for CG-2, and the reason
+   * the duplicate-footprint census in townCartographyCalibration.test.js W8 can assert
+   * a ZERO rather than a shrinking number.
+   *
+   * An exemption from the per-parcel BAND is not an exemption from the cell ledger.
+   * Before CG-2 it was: the flagship's slot was `arrived % 4`, so the fifth
+   * institution bound to a parcel was handed the cell the first one already held, and
+   * a footprint is a pure function of (parcel, cell, shrink). THE SAME CALL, RUN
+   * AGAINST THE PRE-CG-2 LEAF AT SLOT BASE 79b78881c, EMITTED:
+   *
+   *   n:        1  2  3  4  5  6  7  8  9 10 11 12
+   *   distinct: 1  2  3  4  4  4  4  4  4  4  4  4      <- saturates at the wrap
+   *
+   * which is what makes this a control and not a tautology: the assertion below is
+   * false at the parent commit and true here. `12` is past the four the old medial
+   * subdivision afforded and past the three-per-parcel band, so the loop exercises
+   * depth 1 and depth 2 of the address tree.
+   */
+  it('CG-2: N flagships bound to ONE parcel take N DISTINCT cells, past the old mod-4 wrap', () => {
+    /** @type {string[]} */
+    const failures = [];
+    for (let n = 1; n <= 12; n++) {
+      const bindings = [];
+      const buildings = [];
+      for (let index = 0; index < n; index++) {
+        buildings.push(canonicalRow({
+          semanticId: `building:cat:probe${index}`, anchorKey: `cat:probe${index}`,
+        }));
+        bindings.push({
+          institutionRef: `building:cat:probe${index}`,
+          anchorKey: `cat:probe${index}`,
+          parcelId: 'parcel:probe',
+          placement: 'district',
+          decidedBy: 'prominence',
+        });
+      }
+      const result = compileTownBuildingLayers({
+        buildings,
+        semantics: [],
+        wards: [wardRow([[0, 0], [600, 0], [0, 600]])],
+        parcels: [parcelRow([[100, 100], [500, 100], [100, 500]])],
+        institutionBindings: bindings,
+        settlement: { population: 900, tier: 'town', economicState: { prosperity: 'Modest' } },
+        digest: 'digest:tc4-flagships',
+        tier: 'town',
+        placement: 'district',
+        fabricAccumulation01: null,
+      });
+      const flagships = result.buildings.filter((row) => row.role === 'institution');
+      const footprints = new Set(flagships.map((row) => stableSceneStringify(row.footprint)));
+      if (flagships.length !== n) failures.push(`n=${n} drew ${flagships.length} flagships`);
+      if (footprints.size !== n) failures.push(`n=${n} drew ${footprints.size} distinct footprints`);
+      // Every one of them is still INSIDE the parcel — a bijection that escaped the
+      // parcel would trade one defect for a worse one.
+      for (const row of flagships) {
+        for (const vertex of row.footprint) {
+          if (!scenePointInPolygon(vertex[0], vertex[1], [[100, 100], [500, 100], [100, 500]])) {
+            failures.push(`n=${n} ${row.id} vertex ${vertex.join(',')} escaped its parcel`);
+          }
+        }
+        if (scenePolygonArea(row.footprint) <= 0) failures.push(`n=${n} ${row.id} zero area`);
+      }
+    }
+    expect(failures).toEqual([]);
+  });
 });
 
 describe('TC-4 C4 — dwelling fill is population-led, identity-free and total', () => {
