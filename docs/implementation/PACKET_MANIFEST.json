@@ -23067,7 +23067,7 @@
     },
     {
       "id": "MF-UC5",
-      "status": "DRAFT",
+      "status": "READY",
       "packetPath": "docs/implementation/packets/town-cartography/MF-UC5.md",
       "verifiedBase": "b2852ccc3cc4753499996da6582dd672e90499d0",
       "changeManifest": [

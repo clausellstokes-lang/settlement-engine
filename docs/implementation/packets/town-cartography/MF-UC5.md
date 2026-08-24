@@ -1,6 +1,6 @@
 # Town cartography / MF-UC5 — the undercity's CONNECTIVITY GRAPH: `deriveUndercityConnectivity` joins the rows the four landed leaves publish into §311.9's graph — three connection classes and a refusal class, the stricter side's typed joint, sewers as the spine where they exist, severance that never deletes, and isolation as a first-class visible fact
 
-- **Status:** DRAFT
+- **Status:** READY
 - **Packet version:** 1
 - **Verified base:** `claude/composite-r4` at `b2852ccc3cc4753499996da6582dd672e90499d0`
   — the MF-CH1 landing (the slot `00e7af61`), read with `git rev-parse` at the lane's opening and
