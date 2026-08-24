@@ -24936,3 +24936,77 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   five items §557 took back, and the laws that changed tonight.
   ⚠ **It states plainly that a preserve ref is an ORPHAN** — `git merge-base`
   against it exits 1 — **because that fact cost six blockers in §543.**
+
+## §560 · HANDOFF CLOSED — THREE LANES STOPPED CLEAN, AND MY ENVELOPE RULING COLLIDED WITH A STANDING JUDGMENT (2026-08-24 08:49 CDT)
+
+- **§560.1 THE PRESERVE REF IS FINAL: `b81ab4b07`, 39 files** (three commits:
+  `ef15dc36c` → `32c785909` → `b81ab4b07`). Everything a successor needs and
+  cannot otherwise reach — `law/`, `dockets/`, **all 18 lane receipts**,
+  `dwfix/` — verified byte-identical by `cmp` at each step.
+- **§560.2 ⛔ A CORRECTION TO CH-7's OWN HANDOFF NOTE, CAUGHT BY CHECKING.** The
+  lane wrote *"the lock is held by PID 29027 … if a successor finds it held by a
+  dead 29027, it is safe to clear."* **Measured: 29027 was ALIVE and was NOT the
+  holder — the lock belonged to a different live gate (33979).** A stale-lock
+  rule keyed to a remembered pid **either fails to clear a genuinely stale lock
+  or clears a live one.** New law: **read the pid OUT OF THE LOCK DIR and test
+  THAT one.** ⭐ The lane's underlying judgment was right and is also now law:
+  **never kill an in-flight gate to tidy up — it may hold the mutex, and a killed
+  holder leaves a stale lock that blocks every sibling lane.** Let it drain.
+- **§560.3 CH-7 STOOD DOWN HONESTLY, WHICH IS WHY IT PINS `wip-`.** Tip
+  **`373601437`**, `holding-ch7` **verified absent and never created**. Its gate
+  **never wrote an exit line at all**, so rather than infer one it recorded
+  exactly which phases were *entered* (the `&&` chain implying prior zeros —
+  *"against the mixed tree only"*) and which were **never reached**: the tail of
+  `test:ratchet`, `build`, `verify:dist`, and the verdict. What **was** proved
+  against quiescent trees stands: `valid: 180 packets (0 READY)` with the
+  three-place flip through the shipped parser, 46/46 on the pin file, 58/58
+  across six adjacent suites, 33/33 on the lighting census with md5-guarded
+  negative controls. **One clean `npm run check:tail` at the tip promotes it.**
+- **§560.4 IT ALSO REFUSED A MERGE THAT WOULD HAVE LOOKED TIDIER.** It did **not**
+  fold the two `den` tables into one constant: the file's own header says
+  `POWER_DOMAIN_HINTS` evolves **without** a golden regen while its twin **must
+  not shift**, so merging would **couple a golden-adjacent table to a UI-only
+  one** — and *a shared constant cannot stop someone un-anchoring it anyway*, so
+  a pin was required regardless. Six mutations red it, including a **split
+  control** that reds only the `deriveNpcProfile` arms from one copy and only the
+  `institutionsFor*` arms from the other.
+- **§560.5 ⭐ RULING 4 TURNED OUT TO UNBLOCK RULING 2.** DW-PREP found that
+  **`service{flue}` in the ENVELOPE vocabulary is the producer `envelope.flueCount`
+  needs** — so §558.5's ENVELOPE ruling closes §558.4's deferred arm 4b. *Two
+  rulings made separately, and one supplies what the other was missing.*
+- **§560.6 ⛔ AND MY ENVELOPE RULING COLLIDED WITH A STANDING JUDGMENT — RULED.**
+  I ruled the ENVELOPE **vocabulary**; the **car** is a separate question, and
+  **J-DW0-2 says "41 cars stands."** The lane **recommended DW-1g and named
+  J-DW0-2 as the explicit cost rather than absorbing it** — *"so it gets amended
+  deliberately rather than discovered mid-wave."* **RULED: DW-1g is minted and
+  J-DW0-2 is amended to 42 cars.** *Why:* **41 was a COUNT, not a promise** — a
+  charter's car count describes the work, it is not a budget to defend. And
+  DW-1b is already carrying **7 arms, 113 members and records that TRIPLE**;
+  loading a third vocabulary onto it would put **three distinct failure domains
+  in one car, which is where attribution dies.** *Reversal:* fold ENVELOPE into
+  DW-1b; nothing references DW-1g yet.
+- **§560.7 TWO CORRECTIONS UPWARD, AND THE SECOND IS THE DANGEROUS SHAPE.** The
+  charter citations omitting `interior/` are **FIVE, not three** — L512, L539,
+  L568, L754, L1003 — and *all five carry line numbers, "which is what makes them
+  actionable and therefore dangerous."* And **C-19's claim sites are FIVE, not
+  two**: L826 and L851 hold the claims, L1047, L1894 and L2992–2993 repeat them
+  — **"they move together or the document holds two truths"**, the identical
+  failure mode as the four `82` sites.
+- **§560.8 C-19's FIRST PASS SAYS BOTH FIGURES ARE UNDERSTATED, THE SAME
+  DIRECTION AS 82 → 135.** **86 circulation and 69 storage** against the claimed
+  `~55` and `~35`. ⭐ It also **discharges one B11 arm for free: CIRCULATION ×
+  STORAGE collisions = 0.** Scoped to dispatch cold — exact ref, line spans, byte
+  sizes, token shape, three required controls, and the ugrep / `git grep -E`
+  instrument warnings.
+- **§560.9 THE BRIEF SAYS WHERE IT STOPS.** §0 is a **completeness map**: nine
+  sections actionable cold, **two flagged PARTIAL in place** — the ENVELOPE
+  member count (sample-grade, not per-key adjudicated) and C-19's integers
+  (first-pass signal) — **"neither should be quoted as measured."** ⭐ *A
+  document that does not say where it stops will be trusted evenly throughout,
+  and that is how the false-absence class starts.*
+- **§560.10 THE STATE A SUCCESSOR INHERITS.** Build **`c3289244d`, 60 cars** ·
+  ledger **§560** · packets **179** · census `2525/366/2159/21026/5848` · ratchet
+  11 of 29,044. Pins: **`session-scratchpad-2026-08-24` (b81ab4b07)**,
+  `ad-charter-2026-08-24`, `holding-dw0-final`, **`wip-ch7`**, plus whatever
+  TE-CH-4 lands. ⛔ **Nothing has deployed since 2026-07-28 and that remains the
+  only item degrading purely by delay.**

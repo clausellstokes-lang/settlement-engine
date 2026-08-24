@@ -10,12 +10,12 @@ this one.**
 
 ## ⛔⛔⛔ PICKUP CARD — ACCOUNT HANDOFF (2026-08-24 08:44 CDT). A SUCCESSOR ON A DIFFERENT ACCOUNT STARTS HERE.
 
-**build `claude/composite-r4` = `c3289244d` (60 cars) · ledger `review-fixes-2026-07-08` §558 · packets **179** · census `2525/366/2159/21026/5848` · ratchet **11 of 29,044***
+**build `claude/composite-r4` = `c3289244d` (60 cars) · ledger `review-fixes-2026-07-08` §560 · packets **179** · census `2525/366/2159/21026/5848` · ratchet **11 of 29,044***
 
 ### ⛔⛔ FIRST ACT — YOUR PREDECESSOR'S SCRATCHPAD IS GONE. IT IS IN GIT INSTEAD.
 Every standing law, docket and lane receipt lived under `/private/tmp/claude-502/…/695a70c5-…/scratchpad`, which **you cannot read**. All of it is preserved:
 
-    git show refs/preserve/session-scratchpad-2026-08-24   # = ef15dc36c, 37 files
+    git show refs/preserve/session-scratchpad-2026-08-24   # = b81ab4b07, 39 files
 
 - `law/LANE-LAW.md` — **read this before dispatching anything.** The gate incantation, the ~16 instruments that lie, census + packet rules. Re-stamped to this slot.
 - `law/SLOT-FACTS.md` · `law/STACK-BRIEF-TEMPLATE.md` · `law/SIGNED-BANDS-2026-08-23.md` (the owner's own words on all eight bands)
@@ -30,11 +30,11 @@ Prod at migration **121**, repo head **199**, 78 pending. ⭐ **MEASURED (§540.
 ### LANES AT HANDOFF — all told to stop at a clean point
 | lane | state | resume from |
 |---|---|---|
-| **TE-CH-7** | fix + packet committed (`373601437`); gate in flight; pinning `holding-ch7` (or `wip-ch7` if red) | `receipts/laneCH7-receipt.md` |
+| **TE-CH-7** | STOOD DOWN. Tip `373601437` pinned **`wip-ch7`** — its gate never wrote an exit line and was contaminated besides. One clean `npm run check:tail` at the tip promotes it to `holding-ch7`. | `receipts/laneCH7-receipt.md` |
 | **TE-CH-4** | measure-then-build, mid-flight; told to commit + pin `holding-ch4` / `wip-ch4` and write a cold RESUME POINT | `receipts/laneCH4-receipt.md` |
-| **TE-DW-PREP** | read-only; delivering the DW-1 dispatch brief | `dockets/laneDWPREP-BRIEF.md` |
+| **TE-DW-PREP** | DELIVERED. 11 sections; **§0 is a completeness map — 9 cold-actionable, 2 flagged PARTIAL and not to be quoted as measured.** | `dockets/laneDWPREP-BRIEF.md` |
 
-### RULINGS IN FORCE — do not re-litigate (ODQ §555, §558)
+### RULINGS IN FORCE — do not re-litigate (ODQ §555, §560)
 **CH-4:** Shape D adopted · **route (iii)** for dominant-faction · keep `declared ?? inferred` · keep `Wealthy Residential → noble` · registry **after line 117** · ⛔ **prove against the DERIVED ARTEFACT, never a settlement-record hash — `districtProfile` is absent from the generation pipeline so that digest CANNOT move.** ⛔ **First job is the arithmetic nobody executed: up to 333 cards LOSE their faction row while 44 gain one.**
 **DW:** fixture union **135** (base 82 + 53; floor 106, ceiling 549) · **branch (A)** — `FIXTURE_KINDS` becomes `{kind, attrs}` with totality + consolidation arms · **arm 4a live / 4b deferred to DW-2b** · **ENVELOPE minted as its own vocabulary** · ⭐ **DW-1 is NOT gated on CH-6 — measured, blob `3b1bf2c254ab` identical across the gap, with a live control.**
 **CH-6 is deliberately undispatched** — §555.9 orders CH-4 first.
@@ -53,6 +53,9 @@ CH-4 → **CH-6** (⛔ a **live shipped deity-doctrine violation**: a magic-free
 ⛔ **A word-occurrence match is not a membership test** — it bit three times in one day, and the third failed *silently*. ⚠ But **"anchor everything" is also wrong**: `church`, `broker` and `bank` have TRUE mid-word populations.
 ⛔ **Absence decays silently, in three directions** — filled since; promised but never landed; **and landed by a different mechanism at a different magnitude.**
 ⛔ **A figure without its denominator named is not a measurement.**
+
+⛔ **MUTEX:** read the holder pid **out of `/tmp/settlementforge-vitest-gate.lock/pid`** and test *that* one — never a remembered pid. **Never kill an in-flight gate to tidy up**; a killed holder leaves a stale lock that blocks every lane.
+⭐ **DW-1g is minted and J-DW0-2 amended to 42 cars** (§560.6) — ENVELOPE gets its own car; `service{flue}` there is the producer arm 4b needs.
 
 ## ⭐⭐⭐⭐ SUCCESSION ADDENDUM — 2026-08-24 (~01:40), LEDGER THROUGH §439 — READ THIS DELTA FIRST, THEN THE §427 BLOCK BELOW
 
