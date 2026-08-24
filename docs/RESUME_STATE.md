@@ -51,6 +51,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 21:30 CDT 08-23: §514 — THE BANDS ARE SAT. B16: view/interact free, AUTHORING paid at every
+# level (= viewerCanAuthor). B1: every tier has a minimum, none is exempt. B15: illustrated BEFORE launch (AD program).
+# B8 is a demographic LOOP, not a dial — recon dispatched.
 # ⭐⭐⭐ 21:11 CDT 08-23: §513 — MF-CG1 LANDED (48th) CAS → 5055990a; 170 packets / 0 READY.
 # `git rev-parse SHA:path` ECHOES and exits 0 — the nonexistent-path control caught it. Load 42 → 22.
 # ⭐⭐⭐ 20:45 CDT 08-23: §512 — per-lane cost measured: serial mutant drives (whole file per mutant!)

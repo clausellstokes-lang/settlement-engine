@@ -21571,3 +21571,93 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   Holding roster empty. **Next: CG-2 (the identical-footprint defect) is now
   unblocked — CG-1's corpus is the ground it needs — and CG-1b (the derived
   caps) waits only on BAND 21.**
+
+## §514 — ⭐⭐ THE OWNER SITS THE BANDS: ALL EIGHT OWNER-CLASS ROWS ANSWERED, AND TWO OF THEM ARE NOT DIALS AT ALL — B8 IS A **DEMOGRAPHIC LOOP**, B15 MOVES **ILLUSTRATED ART BEFORE LAUNCH** INTO THE ARC; B16 RESOLVES TO ONE AXIS THE CODE ALREADY HAS (2026-08-23 21:30 CDT)
+
+- **§514.1 B16 — THE MAP IS FREE; AUTHORING IS THE PAYWALL.** Owner: "full
+  plan free: every free and anonymous user, no matter how they generate a
+  settlement, gets the map included with the dossier. They are also blocked in
+  the same way everything else in the dossier is blocked, dependent on their
+  account type." **§514.1b, the refinement minutes later: "editing the map is
+  paywall gated at all levels of the map. But viewing and interacting with it
+  is not."** So the axis is **AUTHORING, not access**: viewing and interacting
+  (hover, select, inspect, pan, zoom, open a building, read a plan, follow an
+  address chain — and therefore MP-1's property-line halo) are FREE at every
+  level including anonymous; editing at ANY level — region, settlement, plot,
+  interior, annotation, export-with-edits — is PAID. ⭐ **This converges with a
+  measurement the program already made:** §449 corrected O-P1's premise by
+  finding the real gate on four of six rows is **`viewerCanAuthor`** — the code
+  already gates on whether the viewer may author, and the owner has now
+  confirmed that authoring IS the product line. Sent to the live WEB-8 lane
+  twice (the ruling, then the refinement): its table gains a VIEW-versus-AUTHOR
+  column, it must measure whether the authoring gate is applied at EVERY map
+  level (a level authoring without it is a REVENUE LEAK; a level blocking
+  viewing behind it is the opposite error), and its walker now pins **authoring
+  gated at every level, viewing gated at none**, with a positive control on
+  each half. The map is NOT a second paywall axis and no map-specific SKU may
+  be minted.
+- **§514.2 ⭐⭐ B8 IS NOT A BAND — IT IS A TWO-WAY DEMOGRAPHIC LOOP, AND IT IS
+  THE BEST IDEA IN THE SITTING.** The owner refused the percentage framing
+  outright: "it is not a percentage idea, it is dependent literally on the
+  makeup of the cities demographics." **Concentration:** where a neighbourhood
+  gains nobles or wealth they **merge poor plots and reconstruct them** as
+  estates, which **displaces** the people living there, which **pushes new
+  house-building down the chain all the way to the outskirts** — so
+  amalgamation FEEDS settlement growth and population displacement.
+  **Decline:** where a town grows poorer the rich **leave or become
+  destitute**, they **split properties to sell them**, and **the displaced
+  move further back in** — so the core re-densifies. This replaces §500.5's
+  arbitrary partition rate with a real counter-force and gives the
+  ownership-boundedness soak arm a mechanism to measure rather than a number to
+  enforce. **The chair does NOT specify it further until it is measured**:
+  **TC-B8-RECON dispatched (Opus)** into the free seat to answer five questions
+  by measurement — whether per-district wealth/class composition exists and
+  MOVES over time; whether any displacement concept exists at all or population
+  is purely aggregate; what actually drives outward growth today and whether
+  the loop can feed it; whether the coupling is lawful under one-truth, the
+  Promise and derive-don't-store, and which pulse stage could evaluate a cycle
+  deterministically; and ⛔ **what damps the loop** — hysteresis, the failure
+  modes (one household owning everything, the core hollowing out, oscillation,
+  unbounded outward growth) and the signal that detects each in the 300-year
+  soak. Verdict required in one sentence: expressible today, expressible with
+  a named small addition, or needing a new signal at the demography layer.
+- **§514.3 B1 — THE OWNER SHARPENED THE CHAIR'S RECOMMENDATION AND WAS
+  RIGHT.** I proposed the minimum program "bite from village up; below that the
+  hosted form IS the truth". Owner: "this is scaled, everything should be
+  credible but what is credible is scaled by the tier and other factors. A
+  hamlet inn may just have two rooms plus a kitchen, not a full multi-story
+  building. **But always everything is bite.**" **RULED: there is no tier at
+  which credibility is optional.** Every tier has a MINIMUM PROGRAM; some
+  minimums are simply small — two rooms and a kitchen, or one room in someone
+  else's house. The HOSTED and NO_BUILDING verdicts are therefore **programs in
+  their own right, not exemptions from the gate** — which is a cleaner
+  statement of §497 R2′(d) than the chair wrote, and it removes the seam where
+  a lane might have treated a small tier as unchecked. Sent into the charter's
+  §3 program-minimum table as a correction.
+- **§514.4 B15 — "ABSTRACT NOW BUT ILLUSTRATED BEFORE LAUNCH" IS NEW SCOPE,
+  AND IT IS RECORDED AS SUCH.** The chair recommended abstract now with
+  illustration as a later program; the owner accepts abstract now but places
+  **illustrated art BEFORE LAUNCH**. That is not a dial — it inserts a program
+  between the dwellings arc and the push, and it connects to the owner's own
+  positioning note (§454.4: "our artwork design for the maps should give it
+  something to compete against all aesthetically at a very reasonable price").
+  Chartered as **the ART DIRECTION program (AD)**, to be compiled after the DW
+  waves are specified, with its own charter covering direction, the asset
+  pipeline, licensing and the projection seam (DW-6 is where it lands). ⚠ It
+  is the first scope ADDITION to the pre-push arc since §482 and the master
+  sequence (§499.2) is amended: … DW-S → **AD** → content train → the ONE
+  trailing OSR mint → parity → `/code-review ultra` → endgame.
+- **§514.5 THE OTHER FOUR, RULED AS RECOMMENDED.** **B13** working
+  embellishment density — enough to read as lived-in, not cluttered; the
+  vocabulary is sourced, the density is the chair's and is flagged as such in
+  the sheet. **B11** occasional non-contiguous holdings, higher in ports,
+  institutions only. **B14** the 3 × 3 wear grid with the six-to-three mapping
+  written out. **B21** map headroom sufficient that towns and hamlets draw at
+  all, with margin — the value CG-1b consumes to unblock 287 of 504
+  settlements. **And the thirteen measured/sourced rows are ratified by the
+  chair** (B0 including the honest cost that our towns read 244 m across and
+  metropolises 646 m — two to three times small in absolute metres, a
+  pre-existing property of the map deferred to the massing train as D-10; B2,
+  B3, B4, B5, B6, B7, B10, B12, B17, B18; B9a culture-is-the-axis yes, B9b
+  deferred to the soak). **THE SITTING IS COMPLETE except B8, which is now a
+  measurement rather than a signature.**
