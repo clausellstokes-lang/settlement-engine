@@ -26,6 +26,14 @@ export const getTierOrder        = () => TIER_ORDER;
 export const getPopulationRanges = () => POPULATION_RANGES;
 
 /**
+ * One catalog row as every reader in this file treats it: an authored bag whose only
+ * keys these lookups care about are the tier gate and the tag list the magic filter
+ * reads. Named once so the tier filter and `filterCatalogForMagic` cannot drift apart.
+ * @typedef {{ minTier?: string, tags?: unknown[] }} CatalogRow
+ * @typedef {Record<string, Record<string, CatalogRow>>} CatalogShape
+ */
+
+/**
  * [CH-3 §3.1 / J-CH-3-1] THE TIER GATE THE GENERATOR APPLIES, MIRRORED HERE.
  *
  * A catalog row may be AUTHORED in one tier's block and GATED to a higher tier by
@@ -74,10 +82,21 @@ const effectiveTierOf = (def, blockTier) =>
  * Drop every row the tier gate refuses. Empty categories are dropped, mirroring
  * `filterCatalogForMagic`, which runs immediately after this in `selectCurrentCatalog`
  * — the two filters must not disagree about the shape they hand the grid.
+ *
+ * The types are spelled out rather than inferred: `selectCurrentCatalog` passes this
+ * result straight into `filterCatalogForMagic`, whose parameter is a
+ * `Record<string, Record<string, { tags?: unknown[] }>>`. A bare `const out = {}` here
+ * evolves to a shape TS will not accept there, which is a real typecheck regression and
+ * not a cosmetic one.
+ * @param {CatalogShape} catalog
+ * @param {string} tier
+ * @returns {CatalogShape}
  */
 const filterCatalogByTierGate = (catalog, tier) => {
+  /** @type {CatalogShape} */
   const out = {};
   for (const [category, insts] of Object.entries(catalog || {})) {
+    /** @type {Record<string, CatalogRow>} */
     const kept = {};
     for (const [name, def] of Object.entries(insts || {})) {
       if (institutionAvailableAtTier(def, tier)) kept[name] = def;
@@ -90,7 +109,9 @@ const filterCatalogByTierGate = (catalog, tier) => {
 // pipeline-5: merge a list of tier catalogs (later tiers override on name clash),
 // mirroring assembleInstitutions.mergeCatalogs so the UI lookup and the generator
 // agree about what a metropolis catalog contains.
+/** @param {string[]} tiers @returns {CatalogShape} */
 const mergeTierCatalogs = (tiers) => {
+  /** @type {CatalogShape} */
   const merged = {};
   for (const t of tiers) {
     const tierCat = institutionalCatalog[t] || {};
@@ -139,6 +160,7 @@ export const getInstitutionalCatalog = (tier) => {
  * row used to be advertised as a city row a city could never roll.
  */
 export const getFullCatalogWithTierMeta = () => {
+  /** @type {Record<string, Record<string, CatalogRow & { nativeTier: string }>>} */
   const merged = {};
   for (const t of TIER_ORDER) {
     const tierCat = institutionalCatalog[t] || {};
