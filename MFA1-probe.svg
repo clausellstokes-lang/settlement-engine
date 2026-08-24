@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" width="900" height="700">
+<defs>
+<filter id="pGrain" x="0%" y="0%" width="100%" height="100%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="n"/>
+  <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.35  0 0 0 0 0.27  0 0 0 0 0.16  0.9 0.9 0.9 0 -1.2" result="g"/>
+  <feComposite in="g" in2="SourceGraphic" operator="in" result="gi"/>
+  <feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="gi"/></feMerge>
+</filter>
+<filter id="pStain" x="-10%" y="-10%" width="120%" height="120%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="3" seed="11" result="n"/>
+  <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.45  0 0 0 0 0.33  0 0 0 0 0.18  1.4 1.4 1.4 0 -1.55" result="s"/>
+  <feComposite in="s" in2="SourceGraphic" operator="in" result="si"/>
+  <feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="si"/></feMerge>
+</filter>
+<filter id="pWaver" x="-5%" y="-5%" width="110%" height="110%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="2" seed="23" result="n"/>
+  <feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+</filter>
+<filter id="pShadow" x="-15%" y="-15%" width="130%" height="130%">
+  <feFlood flood-color="#2E2013" flood-opacity="0.35" result="f"/>
+  <feComposite in="f" in2="SourceAlpha" operator="in" result="sh"/>
+  <feOffset in="sh" dx="4" dy="4" result="osh"/>
+  <feMerge><feMergeNode in="osh"/><feMergeNode in="SourceGraphic"/></feMerge>
+</filter>
+<filter id="pBlur" x="-40%" y="-40%" width="180%" height="180%">
+  <feGaussianBlur stdDeviation="12"/>
+</filter>
+<filter id="pDrop" x="-15%" y="-15%" width="130%" height="130%">
+  <feDropShadow dx="4" dy="4" stdDeviation="0.4" flood-color="#2E2013" flood-opacity="0.5"/>
+</filter>
+<filter id="pMottle" x="0%" y="0%" width="100%" height="100%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" seed="31" result="n"/>
+  <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.20  0 0 0 0 0.15  0 0 0 0 0.08  0.8 0.8 0.8 0 -0.9" result="m"/>
+  <feComposite in="m" in2="SourceGraphic" operator="in" result="mi"/>
+  <feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="mi"/></feMerge>
+</filter>
+<pattern id="pStipple" width="7" height="7" patternUnits="userSpaceOnUse">
+  <rect width="7" height="7" fill="#7E7C58"/>
+  <circle cx="2" cy="2" r="1" fill="#4F4E33"/>
+  <circle cx="5.5" cy="5" r="0.8" fill="#4F4E33"/>
+</pattern>
+</defs>
+<rect width="900" height="700" fill="#EFDFC2"/>
+<g font-family="Georgia,serif" font-size="13" fill="#241B12">
+<!-- A: grain -->
+<rect x="30" y="40" width="160" height="120" fill="#EFDFC2" filter="url(#pGrain)"/>
+<text x="30" y="30">A feTurbulence grain</text>
+<!-- B: stain blotches -->
+<rect x="230" y="40" width="160" height="120" fill="#EFDFC2" filter="url(#pStain)"/>
+<text x="230" y="30">B low-freq stains</text>
+<!-- C: waver on a line grid -->
+<g filter="url(#pWaver)" stroke="#2B2118" stroke-width="1.2" fill="none">
+  <path d="M440 60 H 590 M440 80 H590 M440 100 H590 M440 120 H590 M440 140 H590 M460 50 V150 M490 50 V150 M520 50 V150 M550 50 V150 M580 50 V150"/>
+</g>
+<text x="430" y="30">C displacement waver</text>
+<!-- D: composite hard shadow -->
+<g filter="url(#pShadow)">
+  <rect x="650" y="60" width="70" height="50" fill="#98724F" stroke="#2B2118" stroke-width="1.5"/>
+  <rect x="740" y="80" width="50" height="60" fill="#8F6B49" stroke="#2B2118" stroke-width="1.5"/>
+</g>
+<text x="640" y="30">D offset composite shadow</text>
+<!-- E: blur vignette ring -->
+<rect x="30" y="220" width="160" height="120" fill="#EFDFC2"/>
+<rect x="38" y="228" width="144" height="104" fill="none" stroke="#5C452C" stroke-width="26" opacity="0.5" filter="url(#pBlur)"/>
+<text x="30" y="210">E blurred vignette ring</text>
+<!-- F: pattern stipple -->
+<circle cx="300" cy="280" r="48" fill="url(#pStipple)" stroke="#2B2118" stroke-width="1.4"/>
+<text x="230" y="210">F pattern fill</text>
+<!-- G: feDropShadow -->
+<g filter="url(#pDrop)">
+  <rect x="470" y="240" width="70" height="50" fill="#98724F" stroke="#2B2118" stroke-width="1.5"/>
+</g>
+<text x="430" y="210">G feDropShadow</text>
+<!-- H: mottle inside wash shape -->
+<path d="M650 240 L840 250 L830 340 L660 330 Z" fill="#C8BEA0" stroke="#8A8266" stroke-width="2.5" filter="url(#pMottle)"/>
+<text x="640" y="210">H wash mottle composite</text>
+<!-- I: pooled-edge stroke (no filter, control) -->
+<path d="M60 420 L220 430 L210 540 L70 530 Z" fill="#C8BEA0" stroke="#98906F" stroke-width="3" stroke-opacity="0.55"/>
+<text x="30" y="400">I pooled-edge stroke (control)</text>
+<!-- J: waver + shadow combined on building cluster -->
+<g filter="url(#pShadow)"><g filter="url(#pWaver)">
+  <g fill="#9A7552" stroke="#2B2118" stroke-width="1.6">
+    <rect x="300" y="430" width="46" height="30"/><rect x="356" y="424" width="30" height="42"/>
+    <rect x="300" y="474" width="34" height="40"/><rect x="348" y="480" width="52" height="28"/>
+  </g>
+</g></g>
+<text x="290" y="400">J waver+shadow nested</text>
+<!-- K: displacement on wash group (slop) -->
+<g filter="url(#pWaver)">
+  <path d="M500 430 L660 440 L650 545 L510 535 Z" fill="#BFAC8E"/>
+</g>
+<path d="M500 430 L660 440 L650 545 L510 535 Z" fill="none" stroke="#2B2118" stroke-width="1.1"/>
+<text x="490" y="400">K wash slop vs crisp ink</text>
+<!-- L: text under aging overlay -->
+<rect x="700" y="420" width="170" height="120" fill="#EFDFC2"/>
+<text x="715" y="470" font-size="16">MAHABAGH</text>
+<rect x="700" y="420" width="170" height="120" fill="#EFDFC2" opacity="0.0001"/>
+<rect x="700" y="420" width="170" height="120" fill="#8B6B44" opacity="0.10" filter="url(#pStain)"/>
+<text x="700" y="410">L text under stain overlay</text>
+</g>
+</svg>
