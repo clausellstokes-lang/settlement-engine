@@ -24790,3 +24790,84 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   ⚠ **The §388 heartbeat's own queue section is stale** — it still lists CH-5,
   R3 and the DW-0 ratification as pending, all three landed. Acting on measured
   state, not on the reminder's list.
+
+## §558 · THE LONGEST POLE IS UNBLOCKED — A MEASUREMENT REFUTED MY OWN GATE (2026-08-24 08:41 CDT)
+
+- **§558.1 ⭐⭐ DW-1 IS NOT GATED ON CH-6, AND I VERIFIED IT MYSELF.**
+  `compendiumData.generated.js` is blob **`3b1bf2c254ab` at BOTH `86794b5d2` and
+  `c3289244d`** — **byte-identical across the gap in which CH-3, CH-5 and CG-2
+  all landed** — and the **control holds**: `institutionalCatalog.js` DID move
+  over that same range, so the instrument is live rather than blind. CH-6's file
+  is not a generator input and CH-5 moved zero catalog name-keys. **§557.4's
+  extension of the CH-before-DW rule to DW-1 is WITHDRAWN.** The ordering stands
+  as programme policy; it is **not a technical constraint for DW-1**, and I will
+  not spend the programme's longest pole — **41 cars, more than everything landed
+  to date** — on a gate measurement says is not there. **DW-R2 remains genuinely
+  catalog-gated.**
+- **§558.2 ⭐ THE METHOD IS WHAT MAKES IT CREDIBLE.** The lane **flagged the
+  opposite risk first**, then let the measurement refute it, **and recorded it
+  either way**. *A lane that only reports what confirms its dispatch is not
+  measuring.* Standing law.
+- **§558.3 ⛔ MY GRANULARITY RULE HAD NO MECHANISM — BRANCH (A) RULED.** §552.4
+  ruled *"finer distinctions are ATTRIBUTES, not members."* **The charter has
+  ZERO fixture attributes**: §D lists five *joint* attributes and `cell.approach`
+  and no fixture ones, and DW-1b's chartered deliverable is
+  `fixtureVocabulary.js` with a *"frozen+unique"* acceptance arm — **an array of
+  strings, which cannot carry `flued: bool`.** *Decided:* **`FIXTURE_KINDS`
+  becomes `{ kind, attrs }`**, with a **totality arm** (every head declares its
+  domain) and a **consolidation arm** (every folded spelling maps to its head).
+  *Why:* under the cheap branch **nothing records that `vessel` was meant to
+  absorb `crucible`, so a later author re-adds it and the consolidation silently
+  unwinds** — the *cure-that-did-not-travel* class, which has bitten **three
+  times today**. The charter's own §G rule closes it: a criterion must name what
+  it counts. **The arm-count and census cost IS the enforcement.**
+- **§558.4 ⛔⛔ THE ARM REWRITE WAS MY ERROR, AND THE SHAPE OF IT MATTERS.** At
+  §551.6 **I verified `flueCount` has ZERO occurrences across `src` myself — and
+  then approved a rewrite that USES `flueCount`.** The cure **swaps one undefined
+  symbol for another** and leaves the arm exactly as unexecutable as before. *I
+  read the zero and failed to apply it to my own remedy.* **RULED: the 4a/4b
+  split** — **4a** (totality + *"unflued furnaces EXIST"*) lands live at DW-1b
+  with a convicting mutant that sets every `flued` true; **4b** (the `≤
+  flueCount` inequality) defers to DW-2b **with a named home**. **Five arms and a
+  named smaller blocker beats four arms and an open hold.** §546.3's trap still
+  stands: the naive `furnaces ≤ flues` convicts the best-attested laboratory in
+  the corpus.
+- **§558.5 THE ENVELOPE GETS ITS OWN VOCABULARY — RULED, BECAUSE NO MEASUREMENT
+  CAN CLOSE IT.** 73 of the 147 describe a **surface no charter vocabulary owns
+  anywhere**, corroborated independently by R10 being uncarried and by
+  `flueCount` having no producer. *Decided:* **ENVELOPE is minted as its own
+  named vocabulary, not folded.** *Why:* 73 tokens cannot fold without collision
+  — `cistern` already goes three-way and `stair` collides four ways — and folding
+  a **surface** concept into a room or fixture vocabulary is **the exact category
+  error that left `ARCANE_INST_TAGS` a TRADE vocabulary doing a MAGIC-DEPENDENCE
+  job** (§541). *Reversal:* fold later; nothing references it yet.
+- **§558.6 ⛔ MY B11 RESIZE WAS WRONG BY 92, IN THE OPPOSITE DIRECTION.** §551.9
+  recorded *"147 tokens belonging to other vocabularies."* Measured: **only 55
+  do** (39 BR + 16 RECESS/SUBDIVISION, and **DW-1b already owns both**), **73 are
+  ENVELOPE**, and **19 belong in no vocabulary at all.** ⭐ **The 53 cost B11
+  exactly ONE new collision — `cistern`, becoming three-way — and ZERO against
+  landed `ROOM_KINDS`, `FURNISHING_KINDS` or `JOINT_KINDS`.** True cost: **20 →
+  36 names across 8 vocabularies in TWO arms** (uniqueness *and* homing — *the
+  same defect class from opposite sides, and one arm cannot see both*). **A
+  resize that corrects DOWNWARD is worth more than one that inflates.**
+- **§558.7 ⭐⭐ A THIRD DECAY DIRECTION, AND IT IS MINE.** §B's *"81 of 420
+  settlements / ~130 names"* measures **30 of 420 / 123 names** — and **the
+  mechanism changed entirely**: `exclusiveGroup` was **never deleted**
+  (`religiousCenter` still 7 occurrences, unchanged); CH-3 shipped a
+  forked-stream `exclusiveGroupCoexists` flag instead. **Beyond §543/§545's two
+  directions — absence-since-filled and promise-not-landed — this is: A
+  PREDICTION THAT LANDED BY A DIFFERENT MECHANISM AT A DIFFERENT MAGNITUDE, so
+  the words are still there and still wrong.** ⛔ **This one is mine: §544.7's
+  revision to the rng-preserving variant is exactly WHY the mechanism changed,
+  and the charter recorded the pre-revision prediction.** *A revised ruling
+  decays every document that quoted the ruling it replaced.*
+- **§558.8 THE REAL BLOCKER, AND IT IS CHEAP.** Not CH-6 — **C-19's sub-form
+  recount**, ruled but never executed: **`~55` and `~35` are not integers**, and
+  they block **DW-1d and DW-1e**. Scoped as its own lane. Two budget corrections
+  banked: **DW-1b is a 7-arm car, not 4** (wave census 30 → 33), and its `+6 eff`
+  estimate was sized for 60 members rather than 113.
+- **§558.9 RECORD REPAIRS IN FLIGHT.** LANE-LAW re-stamped by me to slot
+  `c3289244d`, tuple `2525/366/2159/21026/5848`, packets 179 — ⚠ **it had gone
+  stale twice in one night, and a lane caught it both times.** Three charter path
+  citations omit the `interior/` directory and **hand a lane a false absence**;
+  being corrected rather than re-found.
