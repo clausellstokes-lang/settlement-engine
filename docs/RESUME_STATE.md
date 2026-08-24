@@ -51,6 +51,8 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 23:24 CDT 08-24: §527 — CG-1b gate GREEN (97/97). 9th liar: a compound ending in grep INVERTS
+# a green result (grep exits 1 on no match). An exit code alone is never a verdict, in either direction.
 # ⭐⭐⭐ 23:18 CDT 08-24: §526 — AD charter refutes its premise: illustrated is ALREADY LIVE and free, no
 # long-lead branch. ⛔⛔ 176 MB of shipped art has NO provenance record and §524 means we SELL it → TE-AD-1 auditing.
 # `git grep -E` ignores \b (8th silent liar).

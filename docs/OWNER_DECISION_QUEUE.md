@@ -22374,3 +22374,41 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   a grep-heavy licence hunt where a false negative is the expensive direction.
   Four durable facts named by the lane and banked here by the chair rather
   than written into a shared index at its ceiling (§506.5 precedent).
+
+## §527 — CG-1b's CONFIRMATORY GATE IS **GREEN**, AND THE "FAILURE" WAS THE NINTH LYING INSTRUMENT: **A COMPOUND THAT ENDS IN `grep` INVERTS A GREEN RESULT** (2026-08-24 23:24 CDT)
+
+- **§527.1 GREEN.** `Test Files 6 passed (6)` · `Tests 97 passed (97)` · 19.70s
+  · `FINAL2_TRUE_EXIT=0` at the committed tip `7af8c3d0`, covering the
+  calibration suite, Buildings, Parcels, townSceneCartography and **both
+  goldens**. Separately at the tip: typecheck 173/173 and 1134/1134,
+  `171 packets (1 READY)`, eslint 0 bytes, OSR unmoved at `c5b67844…`.
+  §525.7's "queued, not skipped" is discharged — the gate ran and passed.
+- **§527.2 ⭐ THE NINTH SILENT LIAR, AND IT INVERTS THE SIGN.** The run was
+  reported as **failed with exit 1**. It did not fail: the compound's last
+  statement was `grep -E "^\s+× "` — *print the failing titles* — and because
+  the run was **green the grep matched nothing and exited 1**, which became
+  the compound's exit. **Chair-reproduced in one line just now:** piping
+  "all passed" into that grep yields exit 1. So a perfect result was
+  published as a failure, and the only reason it was not believed is that the
+  lane read the collected counts instead of the exit. **LAW, appended to "a
+  captured exit from the wrong instrument is not a receipt": never end a
+  command whose exit you intend to read with `grep`, `diff` or `cmp` — those
+  exit non-zero on the GOOD outcome — and always quote the collected file and
+  test counts beside any exit code.** This is the mirror image of §520.1
+  (which exited 1 over zero collected tests): together they mean **an exit
+  code alone is never a verdict in either direction.**
+- **§527.3 A NEAR-MISS OF MY OWN, DECLARED.** The chair's ledger-commit
+  chains have twice begun with `LC_ALL=C grep -ac … && …` — and `grep -c`
+  exits 1 when the count is ZERO, i.e. when the file is CLEAN. That is the
+  same fault: it silently skipped a commit at §493.6, was caught, and the C0
+  scan now runs as its own statement. Recorded so the pattern is understood as
+  a family rather than three separate accidents.
+- **§527.4 NOTHING ELSE CHANGES.** The member's substance is as recorded at
+  §525 (287 of 504 → 0 of 504; the headroom derived at 1.6000 and the
+  convergence probe refusing to certify; no golden moved; the invariant arm
+  green unedited; ten mutants one-to-one). The banked-set-of-eleven question
+  and the memory fold are already discharged (§525.5, §525.6 — the index is
+  now 12,644 B). The lane declined to amend its commit to add a confirmatory
+  row, correctly: amending would move the tip sha and invalidate every
+  committed-blob proof for a purely confirmatory run. Seats all four full:
+  STACK-1 · STACK-2 · MP-1 · AD-1.
