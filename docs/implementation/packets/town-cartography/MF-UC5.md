@@ -403,13 +403,134 @@ than reasoned: A1 pins every edge end's anchor against `deriveMonotoneComponents
 
 ## §8 · THE §408 WIDENED SWEEP, CLASSIFIED
 
-_(filled at the tip — see the receipt.)_
+Run **ONCE** at the member's tip `5eac65478`, mutexed and CAPPED
+(`--pool=threads --maxWorkers=2`, the chair's §511 throttle), over the ten trees MF-CH1's
+landing used: `tests/lint tests/build tests/docs tests/ops tests/domain tests/property
+tests/edgeFunctions tests/scripts tests/ui tests/data`. `git rev-parse HEAD` and
+`git status --porcelain` were captured BEFORE and AFTER and are identical — the tip did not move
+and the tree stayed clean.
+
+`Test Files 6 failed | 1479 passed | 7 skipped (1492)` · `Tests 8 failed | 19528 passed |
+114 skipped (19650)` · 730.08 s · **SWEEP_TRUE_EXIT 1**.
+
+⚠⚠ **THE FIRST DRIVE OF THIS SWEEP WAS A NOTHING-RAN WEARING A RED, AND THE LOG SAID SO.** The
+throttle's flag as issued — `--poolOptions.threads.maxThreads=2 --poolOptions.threads.minThreads=1`
+— is **not a vitest 4.1.8 CLI option**: `npx vitest run` dies at argument parsing with
+`CACError: Unknown option \`--poolOptions\`` and exits NON-ZERO having collected nothing (a
+1,502-byte log, zero tests). `npx vitest run --help` lists `--pool <pool>` and
+`--maxWorkers <workers>`; `poolOptions.*` is a config-file key. This is the §420 instrument-lie
+class exactly, and it is reported to the chair because it reaches every lane the throttle reached.
+The figures above are from the re-run with the working spelling.
+
+| # | failing title | class |
+|---|---|---|
+| 1 | `sovereigntyLightingContract.walker` — THE CENSUS IS AN ASSERTION, NOT A SENTENCE | **THIS MEMBER'S ONE AUTHORIZED INTERIOR RED** — the deferred census row (charter §4, preamble §P7.12, ODQ §417) |
+| 2 | `enforcement-claims` — every completeness claim carries an `@enforced-by` tag | BANKED |
+| 3 | `metronomeCooldownLint` — the non-cooldown emitter set may only SHRINK | BANKED |
+| 4 | `clampPrimitiveBaseline` — baseline exactly matches the files that still define a local clamp | BANKED |
+| 5–7 | `warCostKindPools.walker` ×3 — `war_trajectory_winning` / `war_trajectory_losing` / `trajectory_misread` | BANKED |
+| 8 | `warRulingKindPools.walker` — `succession_demand_inherited` | BANKED |
+
+**SEVEN BANKED plus ONE AUTHORIZED. NO STRAY**, so no re-run was owed and no §432 escalation is
+open. ⭐ Note what is NOT here: MF-UC2's landing saw a SECOND `enforcement-claims` title (the
+PER-CLAIM naked-claim pin) go red when a member added a claim. This member's docs add none, and the
+single title above is the one the chair's set already carries.
+
+**The count is cited, not re-derived** (chair throttle, ODQ §511): the banked set is SEVEN,
+chair-verified by execution twice today — **ODQ §507.3** at slot `00e7af61` with the assertion
+blocks character-identical at both ends and a clean-slot worktree returning the same seven titles,
+and **ODQ §509.1** again at `b2852ccc`, which is this member's own build base. A baseproof worktree
+of this lane's own was created and then STOPPED and REMOVED before it acquired the mutex; it held
+no commit (it was detached at the branch tip), so no ref was lost.
+
+**§469, discharged by INPUT PROVENANCE and by measurement.** The five banked test FILES are
+**byte-IDENTICAL** between this tip and the chair's baseproof worktree `chair-baseproof-b10ed1a1`
+(whose `git status --porcelain` is empty, re-read here), so their assertion blocks cannot differ for
+anything this member did:
+
+| banked file | sha256, this tip and the chair baseproof |
+|---|---|
+| `tests/docs/enforcement-claims.test.js` | `1b7a84c7a322a698…` |
+| `tests/domain/metronomeCooldownLint.test.js` | `1345b194a8d8e5a6…` |
+| `tests/lint/clampPrimitiveBaseline.test.js` | `3b985ae49530f06a…` |
+| `tests/lint/warCostKindPools.walker.test.js` | `683ca9600d08b3af…` |
+| `tests/lint/warRulingKindPools.walker.test.js` | `40c7ae469fa2d717…` |
+
+Two are checked further because a bare file-identity argument would not reach them.
+`clampPrimitiveBaseline` scans `src/**` for LOCAL clamp definitions and this member's leaf defines
+none — it does not even import one (`grep -cE 'function clamp\|const clamp *=' ` → 0, and
+`Math.min(Math.max` → 0). `enforcement-claims` scans `docs/**.md`, which this member DOES move —
+settled by measurement rather than by argument: **CLAIM_RE counts 0 over the whole packet, 0 over
+every line this member adds under `docs/`, and 0 over every line it adds under `src/`** (the claim
+corpus includes source comments — MF-UC2's landing paid for that lesson).
+
+### §8.1 · The §489.3 grep-driven arm, and the arm widened BY SHAPE
+
+**THE GREP.** Every symbol, constant and vocabulary token this member adds was grepped across
+**all 37 `tests/` trees** — 35 tokens, from `deriveUndercityConnectivity` and the six exported
+vocabularies down to individual enum values (`ADJACENCY_BREACH`, `CONTRABAND_ROUTE`,
+`NO_PUBLISHED_JOINT`, `NOT_A_DUG_ACT`, `sewer_network`, `archipelago`, …). **The union of hits is
+ONE file: this member's own acceptance.** No existing test in the estate names any of them.
+⚠⚠ **AND THE INSTRUMENT HAD TO BE FIXED BEFORE IT MEANT ANYTHING.** The first pass used
+`git grep -l -F`, which returned `<none>` for **every single token** — including
+`deriveUndercityConnectivity`, which the member's own test file names — because `git grep` does not
+search UNTRACKED files and the acceptance was not yet committed. A grep arm that cannot see the
+member's own file reports a clean sweep for a member that changed everything. Re-run with
+`grep -rlF` over `tests/`, with an invented token as the control returning **0 files**.
+
+**THE ARM WIDENED BY SHAPE.** Because this member adds a `src/domain/**` file, the arm was widened
+structurally: every test OUTSIDE the sweep's ten trees that reads `src/**` from disk and mentions
+`src/domain` — **58 files**, enumerated by execution rather than from remembered names — plus
+`tests/soak-harness/coveringArrayCoverage.test.js`, the one out-of-tree file that mentions the
+undercity family at all. **59 files in one mutexed capped run:** `Test Files 1 failed | 57 passed |
+1 skipped (59)` · `Tests 4 failed | 828 passed | 1 skipped (833)` · 61.52 s.
+
+The one red is `tests/copy/voiceMechanics.test.js` — the §489 shape exactly, a `src/data` +
+`src/domain` string-literal debt ratchet in a tree no sweep covers. **It is BANKED and this member
+did not move it**, proved three ways rather than argued: all four of its failing titles are entries
+in `scripts/.test-ratchet-baseline.json` (executed lookup, 4 of its 11); the E2 total reads
+**1468**, the exact figure MF-UC2's landing recorded, so it has not grown; and
+`src/domain/undercity/connectivity.js` **does not appear anywhere in the arm's own per-file diff
+list** (`grep -c 'undercity/connectivity'` over the log → 0) while
+`src/domain/undercity/monotoneComponents.js` — UC-2's one em-dash — does. This member's added
+string literals are ALL_CAPS_UNDERSCORE vocabulary values and carry neither an em-dash nor a bang.
 
 ---
 
 ## §9 · DELIVERED FILES — committed-blob SHA-256
 
-_(filled at the tip.)_
+| file | action | sha256 of the COMMITTED blob | effective lines |
+|---|---|---|---|
+| `src/domain/undercity/connectivity.js` | CREATE | `c1d86689d3ee3f3b20324c965938cd5d2555db3ed5bd20f65aae51f8041bd82f` | **243** (cap 250) |
+| `tests/domain/undercityConnectivity.test.js` | CREATE | `86ae3f11fc22255ebb2c1eece54e89eee8b9686c5cf7ade45bcf7a0aa3c12503` | 228 |
+| `docs/implementation/packets/town-cartography/MF-UC5.md` | DOC | this packet | — |
+| `docs/implementation/INDEX.md` | (shared meta) | +1 line, −0 | — |
+| `docs/implementation/PACKET_MANIFEST.json` | (shared meta) | +199 lines, −0 | — |
+
+⭐ **ZERO MODIFIED PRODUCTION FILES.** The whole wave is two CREATEs and the two shared meta files
+every member moves, well inside the ≤400-effective wave cap (**243 effective production lines**),
+the ≤250-per-leaf cap and the ≤3-modified-production-files cap — which this member does not
+approach, because it modifies none.
+
+Every commit ran with hooks ON, and after each one the committed blob was `shasum`-compared against
+the worktree blob: **identical at every commit**, so the pre-commit `eslint --fix` re-indexed
+nothing and every proof above ran against the committed bytes (§P3's re-prove-at-the-tip law). The
+post-commit survival check ran after each commit against a refreshed baseline file; no untracked
+file vanished.
+
+⚠ The manifest entry was inserted **surgically as text**, not by re-serialising the file: a
+whole-file `json.dumps` round-trip is NOT byte-stable against this manifest and produced a
+9,214-insertion / 5,656-deletion diff on the first attempt. Re-serialising the LAST ENTRY ALONE and
+re-indenting it by four spaces reproduces the file's own bytes exactly (verified against the live
+file before writing), so the entry was spliced in immediately BEFORE the last row: `git diff --stat`
+reads **+199 / −0**, MF-CH1's block is untouched, and the closing-brace seam UC-4 once had to
+hand-surge is never approached.
+
+**Ratchet baselines UNMOVED base → tip** — `git diff --name-only b2852ccc3 HEAD` reports no change
+to `scripts/.observed-shape-readers-baseline.json`, `scripts/.size-baseline.json`,
+`scripts/.test-ratchet-baseline.json`, `tests/fixtures/generator-golden-master.json`, or
+`tests/lint/sovereigntyLightingContract.walker.test.js` (REVERTED digest-exact to
+`49488f215f11379177768f48bcee0654d61f1bb734f0aa7c988be26714572770`).
 
 ---
 
