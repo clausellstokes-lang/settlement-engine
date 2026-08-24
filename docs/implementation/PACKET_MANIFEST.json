@@ -28767,6 +28767,124 @@
           "validate"
         ]
       ]
+    },
+    {
+      "id": "MF-CH7",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/catalog-hygiene/MF-CH7.md",
+      "verifiedBase": "c3289244d58b7259205d80594856e8e0cc520817",
+      "changeManifest": [
+        {
+          "_note": "THE DEFECT AND THE CURE. `criminal: /tavern|den|gang|black\\s+market/i` was spelled TWICE in this file, byte-identically — once in CATEGORY_INSTITUTION_HINTS (which decides an NPC's institutionLink) and once in POWER_DOMAIN_HINTS (the UI power tab). Bare `den` is a SUBSTRING test and matched 4 of the 276 catalog names that are criminal in no reading: Resident smith (part-time), Priest (resident), Warden's Lodge, Dragon resident. Both rows are now word-anchored across all four alternates. ⛔ THE EDIT IS TWO ONE-LINE REPLACEMENTS AND THE LINE COUNT IS UNCHANGED (675 -> 675) ON PURPOSE: arcaneClassifierCensus keys KNOWN_UNCONVERTED by path:line and holds npcProfile.js:334 and :375 — the arcane rows directly beneath each edited line. Keeping the count fixed means no re-point is owed and this car never edits the walker file that also holds TE-CH-4's districtProfile.js:112 key.",
+          "action": "MODIFY",
+          "path": "src/domain/npcProfile.js"
+        },
+        {
+          "_note": "THE PIN, and nothing previously held it: the two copies of the criminal vocabulary must stay byte-identical AND anchored, which is the thing whose absence let an earlier car's identical cure fail to travel here. Seven titles appended to an EXISTING CREDITED file, so no new-test-file ratchet is incurred. Every arm is an EXACT SET driven from the live catalog — no negative matcher, so the file's frozen negativeAssertionAnchor count of 3 is untouched and no arm can pass by the collection having emptied. Six deliberate mutations red it, including the SPLIT control: reverting only the first copy reds the deriveNpcProfile arms and only the second reds the institutionsFor* arms.",
+          "action": "MODIFY",
+          "path": "tests/domain/npcProfile.test.js"
+        },
+        {
+          "_note": "THE LIGHTING CENSUS, re-recorded with its cause: +0 files / +0 parked / +0 credited / +7 TITLES / +1 SUITE TITLE, 2,525/366/2,159/21,026/5,848 -> 2,525/366/2,159/21,033/5,849. Attribution is a SINGLE-FILE control (the slot's test file restored over the car's, tuple at the slot reading, 33 passed of 33 at exit 0), which also proves files/parked/credited unmoved by execution rather than by argument. Two negative controls, one per moved figure, each md5-guarded and restored.",
+          "action": "MODIFY",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        },
+        {
+          "_note": "The packet itself.",
+          "action": "CREATE",
+          "path": "docs/implementation/packets/catalog-hygiene/MF-CH7.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "The archetype-keyed table whose criminal row decides an NPC's institutionLink. Renaming it un-grounds the half of the pin that binds the golden-adjacent copy.",
+          "path": "src/domain/npcProfile.js",
+          "symbol": "CATEGORY_INSTITUTION_HINTS"
+        },
+        {
+          "_note": "The UI-only power-tab table holding the SECOND copy of the same criminal row. It is named here because the whole point of the car is that the two copies are pinned together; if this one is renamed away the divergence pin loses its subject.",
+          "path": "src/domain/npcProfile.js",
+          "symbol": "POWER_DOMAIN_HINTS"
+        },
+        {
+          "_note": "The consumer the anchored-set and power-footprint arms drive. Renaming it takes the only executed guard on the second copy with it.",
+          "path": "src/domain/npcProfile.js",
+          "symbol": "institutionsForCategory"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "LIVENESS CONTROL: the catalog the whole measurement runs over is the live one — 276 unique institution names, asserted, and cutting the helper to one tier reds three arms."
+        },
+        {
+          "id": "A2",
+          "case": "THE DEFECT, MEASURED BOTH WAYS over those 276 names: the criminal row matches 10 bare and 6 word-anchored. The 4 removed are exactly Resident smith (part-time), Priest (resident), Warden’s Lodge and Dragon resident, and 0 are gained."
+        },
+        {
+          "id": "A3",
+          "case": "THE OTHER THREE ALTERNATES ARE FREE: tavern, gang and black market each match the identical set bare and anchored (0 dropped, 0 gained), so the row is uniformly a word test at no behavioural cost."
+        },
+        {
+          "id": "A4",
+          "case": "WHAT IT RENDERED AS: on a two-institution settlement in catalog order (Religious precedes Criminal, and inferInstitutionLink takes the FIRST match) a criminal NPC resolved institution.priest_resident before and resolves institution.gambling_den after."
+        },
+        {
+          "id": "A5",
+          "case": "THE TERM SURVIVES THE ANCHOR: Gambling den still reaches criminal through \\bdens?\\b, so the alternation is not dead. Deleting the alternate outright reds 5 arms of 46, including the liveness arm written for exactly that question."
+        },
+        {
+          "id": "A6",
+          "case": "⚠ ANCHORING IS NOT UNIFORMLY SAFE, censused over both tables: church (3 Parish churches rows), broker (Pawnbroker) and bank (Banking houses/district) all match MID-WORD and are TRUE positives a word anchor would delete. den is the only alternate whose mid-word population is entirely false."
+        },
+        {
+          "id": "A7",
+          "case": "THE SPLIT CONTROL: reverting only CATEGORY_INSTITUTION_HINTS reds the three deriveNpcProfile arms; reverting only POWER_DOMAIN_HINTS reds the three institutionsFor* arms; reverting both reds five. Each copy is independently bound, so a cure landing in one and not the other now reds by name."
+        },
+        {
+          "id": "A8",
+          "case": "THE SEVENTH ARCANE SPELLING IS PRICED AND REFUSED: routing npcProfile.js:334/:375 through isArcaneInstitution moves 18 of 276 rows (4 lost, 14 gained, including Healer (divine, 1st level), which is CH-6’s parked question under DEITY DOCTRINE). Not free, so it stays unconverted and keeps its census rows; its own mid-word population over the catalog is ZERO."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/npcProfile.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/arcaneClassifierCensus.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/domain/institutionsForCategory.test.js",
+          "tests/domain/institutionsForPower.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/domain/npcProfile.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ]
     }
   ]
 }
