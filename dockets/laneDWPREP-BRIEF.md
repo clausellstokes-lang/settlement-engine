@@ -1,530 +1,610 @@
-# TE-DW-PREP — DISPATCH BRIEF FOR DW-1
+# TE-DW-PREP — FINAL DW-1 DISPATCH BRIEF
 
-**Lane TE-DW-PREP (read-only prep). Chair: Fable 5.**
+**Lane TE-DW-PREP (read-only prep). Chair: Fable 5. Written 2026-08-24, session ending — successor handoff.**
 **Slot measured: `claude/composite-r4` = `c3289244d58b7259205d80594856e8e0cc520817` (60 cars, packets 179).**
-**Charter under reconciliation: `review-fixes-2026-07-08:docs/DW0-CHARTER-COMPILED.md`, 129,030 B / 1,102 lines.**
-**Zero repo writes. No vitest, no `npm run check*`, no worktree, no packet, no commit.**
-
-> ### THE FRAME
-> The charter declares its own base as **`79b78881ca86612ec312602c2e3dc6d06aa34df8` (54 landings)**.
-> `git rev-list --count 79b78881c..c3289244d` = **32 commits**. Both `79b78881c` and `510c51b76`
-> are ancestors of the slot (`--is-ancestor`, status not string). **Six of those 32 commits are
-> cars the charter files as OUTSTANDING.** Every figure below was re-derived at `c3289244d`;
-> where mine differs from the charter's I say so, **in both directions**.
+**Charter reconciled: `review-fixes-2026-07-08:docs/DW0-CHARTER-COMPILED.md`, 129,030 B / 1,102 lines.**
+**Zero repo writes at any point. No vitest, no `npm run check*`, no worktree, no packet, no commit, no pin.**
 
 ---
 
-## §1 · THE 53 — HOW THEY LAND, AND WHICH CARS OWN THEM
+## ⛔ §0 · WHERE THIS DOCUMENT STOPS — read this before trusting any section
+
+A successor reading a document that does not say where it stops will trust all of it equally.
+That is how the false-absence class starts. So:
+
+| Section | State | What a successor can do with it |
+|---|---|---|
+| §1 the 53 → charter mapping, owning cars, the four `82` sites | **COMPLETE** | act on it |
+| §2 Branch (A) record map, totality + consolidation arms, DW-1b's corrected budget | **COMPLETE** | act on it |
+| §3 the 4a/4b arm split, 4b's home at DW-2b | **COMPLETE** | act on it |
+| §4 §F.0 refresh, decayed figures | **COMPLETE** | act on it |
+| §5 DW-1 dispatch — cars, file set, 15 exit criteria, census | **COMPLETE** | act on it |
+| §6 ENVELOPE vocabulary | ⚠ **COSTED, NOT ADJUDICATED** — member estimate is mine at sample grade, floor/ruled/ceiling given. **The exact member count needs the fixture gate's method run over the envelope spans.** Do not quote my 20 as a measured figure. | dispatch the gate; do not build to the number |
+| §7 C-19 sub-form recount lane | **SCOPED + FIRST-PASS MEASURED.** ⚠ The two integers I print are a **SIGNAL, not the ruled figures** — same discipline the chair imposed on the fixture gate's 84%. | dispatch the lane cold from this text |
+| §8 B11 resize | **COMPLETE** | act on it |
+| §9 the `interior/` path citations | **COMPLETE** — named by line | correct them |
+| §10 the 17 disagreements | **COMPLETE** | act on it |
+
+**Nothing in this brief is half-folded.** All four of the chair's rulings (record map · 4a/4b split ·
+no CH-6 gate · ENVELOPE its own vocabulary) are folded in. The only sub-measured item is the
+ENVELOPE **member count** (§6) and the C-19 **integers** (§7), both flagged in place.
+
+**Companion files a successor needs, same directory:** `laneDWPREP-receipt.md` (the lane's audit
+trail), `dwfix/FINAL-A.txt` (the 53, ⚠ no terminal newline — use `grep -c .`, `wc -l` says 52),
+`dwfix/adjudication.tsv` + `dwfix/adjudication2.tsv` (the 481 rows), `laneDWFIX-receipt.md`.
+
+---
+
+## §1 · THE 53 — MAPPING, OWNING CARS, AND THE FOUR SITES THAT MOVE
 
 ### 1.1 The arithmetic, independently reproduced (denominators named)
 
-I recomputed the fixture gate's whole tally from its own TSVs rather than inheriting it.
+Recomputed from the gate's own TSVs, not inherited.
 
 | Figure | Value | Denominator |
 |---|---|---|
-| adjudication ROWS | **481** | the NONE set (keys matching no member at exact / head-noun / any-word level) |
-| — (a) genuine miss, ROWS | **43** | of 481 |
-| — (b) belongs elsewhere, ROWS | **147** | of 481 |
-| — (c) fairly consolidated, ROWS | **277** | of 481 |
-| — (n) parse noise, ROWS | **14** | of 481 |
-| **(a) genuine miss, MEMBERS** | **53** | 43 A rows **+ 10 family heads that are not rows at all** |
-| `FINAL-A.txt` | **53** | graphic lines (`grep -c .`); `wc -l` reports 52 — no terminal newline, confirmed this lane |
-| **THE UNION** | **135** | 22 landed `FURNISHING_KINDS` + **113** add-list members (was 60) |
+| adjudication ROWS | **481** | the NONE set |
+| (a) genuine miss, ROWS | **43** | of 481 |
+| (b) belongs elsewhere, ROWS | **147** | of 481 |
+| (c) fairly consolidated, ROWS | **277** | of 481 |
+| (n) parse noise, ROWS | **14** | of 481 |
+| **(a) genuine miss, MEMBERS** | **53** | 43 A rows **+ 10 family heads that are not rows** |
+| **THE UNION** | **135** | 22 landed `FURNISHING_KINDS` + **113** add-list (was 60) |
 
-`43 + 147 + 277 + 14 = 481` ✓ · `43 + 10 = 53` ✓ · `53 = FINAL-A.txt` ✓ · `22 + 113 = 135` ✓
-**Every figure in the fixture gate's receipt is CONFIRMED by independent recomputation. 135 stands.**
+`43+147+277+14 = 481` ✓ · `43+10 = 53` ✓ · `53 = FINAL-A.txt` ✓ · `22+113 = 135` ✓
+**Every gate figure CONFIRMED by independent recomputation. 135 stands.**
 
-The ten head-only members — the ones that are members without being rows, because no tranche ever
-writes them as a bare token: **basin · bath · die/stamp · furnace · hanging · hoist · mill · mould ·
-scales · vessel**.
+The ten head-only members (members that are not rows, because no tranche writes them as a bare
+token): **basin · bath · die/stamp · furnace · hanging · hoist · mill · mould · scales · vessel**.
 
-### 1.2 Where the 53 land in the charter's structure
+### 1.2 ⭐ THE FOUR SITES CARRYING `82` — all move to `135` together
 
-**One owning car: `DW-1b`.** The charter is unambiguous — §H G8 absorbs the fixture gap into
-"DW-1b (fixtures 22 → 82)", and §I C-25 rules the re-derivation "a named pre-DW-1b gate, and its
-EXECUTION belongs to DW-1b's dispatch". All 53 are `FIXTURE_KINDS` members and DW-1b mints every one.
+A partial edit leaves two truths in one document. **Move all four or none.**
 
-**Four charter sites carry the number and must move together** (a partial edit leaves two truths):
-
-| # | Site | Reads today | Must read |
+| # | Charter site | Reads today | Must read |
 |---|---|---|---|
-| 1 | §D taxonomy table, FIXTURE KINDS row | `**82**, ⚠ pending one open item` · `22 + 60` | `135` · `22 + 113` |
-| 2 | §G DW-1 EXIT | `48 partis · 83 cells · **82 fixtures** · 9 circulation classes` | `… · 135 fixtures · …` |
-| 3 | §H G8 disposition | `DW-1b (fixtures 22 → 82)` | `DW-1b (fixtures 22 → 135)` |
-| 4 | §I C-25 | `treat 82 as PROVISIONAL until it runs` | **the gate HAS run — discharge the provisional flag** |
+| **1** | **§D taxonomy table, FIXTURE KINDS row** (charter L570) | `**82**, ⚠ pending one open item` · `22 + 60` | `**135**` · `22 + 113` |
+| **2** | **§G DW-1 EXIT** (charter L107) | `48 partis · 83 cells · **82 fixtures** · 9 circulation classes` | `… · **135 fixtures** · …` |
+| **3** | **§H G8 disposition** (charter L210) | `DW-1b (fixtures 22 → 82)` | `DW-1b (fixtures 22 → **135**)` |
+| **4** | **§I C-25** (charter L79) | `treat 82 as PROVISIONAL until it runs` | **the gate HAS run — DISCHARGE the flag** |
 
-§I C-14 ("82. The 81 is the pre-amendment figure") and §I C-17 ("do NOT add `ring table` alone and
-restate 22 + 61 = 83") both stand as correct history and are now superseded by the gate's result.
-C-17's refusal was vindicated: `ring table` folds into `table`+shape under the granularity rule and
-never was a member of its own.
+§I C-14 ("82; the 81 is pre-amendment") and §I C-17 ("do NOT add `ring table` alone and restate
+`22 + 61 = 83`") both stand as correct history, now superseded. **C-17's refusal was vindicated:**
+`ring table` folds into `table`+shape under the granularity rule and never was a member of its own.
 
-### 1.3 The 53 by seam obligation — which OTHER cars owe an arm
+### 1.3 Owning car, and the seam obligations
 
-These are **overlapping lenses over one set of 53**, not a partition. Distinct union = **23 of 53**;
-the remaining **30** are clean single-vocabulary adds that create no obligation outside DW-1b.
+**One owning car: `DW-1b`.** §H G8 absorbs the fixture gap into DW-1b; §I C-25 rules the
+re-derivation's execution belongs to DW-1b's dispatch. All 53 are `FIXTURE_KINDS` members.
 
-| Lens | N | Members | The car that owes something, and what |
+**Overlapping lenses over one set of 53** — not a partition. Distinct union **23 of 53**; the other
+**30** are clean single-vocabulary adds creating no obligation outside DW-1b.
+
+| Lens | N | Members | Car that owes an arm, and what |
 |---|---|---|---|
-| **L1 · heads that need an ATTRIBUTE DOMAIN** | **10** | basin · bath · die/stamp · furnace · hanging · hoist · mill · mould · scales · vessel | ⛔ **DW-1b — and the charter does not budget it.** See §1.4. |
-| **L2 · joint-closure family** | **6** | barred grille · drawbar · drawbridge · hatch · iron sheeted door · portcullis | **DW-1d** owes an agreement arm that a fixture-closure and a joint attribute do not both encode one closure. `hatch` is the sharp one: `cell.approach: HATCH_ONLY` already exists in §D as a DW-1a/1d concept. |
-| **L3 · a paired CELL kind G8 also asks for** | **5** (4 new) | furnace · bread ovens · sawpit · garderobe · immersion pool | **DW-1a** owes the B11 ownership declaration. G8's own missing-cell list names "a **furnace room**" while the 53 supply `furnace` the fixture — two vocabularies, one name, and B11's rule says the charter states which OWNS it. Same for `bread ovens` vs landed `ROOM_KINDS.kiln`, and `sawpit` vs the `pit` the adjudication routes to a zone. |
-| **L4 · the DW-5d unblocker** | **1** | furnace | **DW-5d** — see §2. |
-| **L5 · B11's only new collision** | **1** | cistern | **DW-1e** — already a CELL × STORAGE collision in the known 20; becomes **three-way**. |
-| **L6 · storage seam** | **2** | chest · key board | **DW-1e** — lockable-store fixtures against `StorageCell` and the six polarities. |
-| **clean adds, no seam** | **30** | the remainder | DW-1b only. |
+| **L1 heads needing an ATTRIBUTE DOMAIN** | **10** | basin · bath · die/stamp · furnace · hanging · hoist · mill · mould · scales · vessel | **DW-1b** — the record map, §2 |
+| **L2 joint-closure family** | **6** | barred grille · drawbar · drawbridge · hatch · iron sheeted door · portcullis | **DW-1d** — an agreement arm that a fixture-closure and a joint attribute do not both encode one closure. `hatch` is sharpest: `cell.approach: HATCH_ONLY` already exists in §D |
+| **L3 a paired CELL kind G8 also asks for** | **5** (4 new) | furnace · bread ovens · sawpit · garderobe · immersion pool | **DW-1a** — B11 ownership declarations. G8's missing-cell list names "a **furnace room**" while the 53 supply `furnace` the fixture. Same for `bread ovens` vs landed `ROOM_KINDS.kiln`, `sawpit` vs the `pit` routed to a zone |
+| **L4 the DW-5d unblocker** | **1** | furnace | **DW-5d** — §3 |
+| **L5 B11's only new collision** | **1** | cistern | **DW-1e** — already CELL × STORAGE in the known 20; becomes **three-way** |
+| **L6 storage seam** | **2** | chest · key board | **DW-1e** — lockable-store fixtures vs `StorageCell` + the six polarities |
+| **clean adds** | **30** | remainder | DW-1b only |
 
-### 1.4 ⛔ THE ONE STRUCTURAL CONSEQUENCE THE CHARTER CANNOT ABSORB AS WRITTEN
-
-The revised granularity rule is `table`+shape, `vessel`+kind, `furnace`+`flued`. **Every one of those
-is a member PLUS AN ATTRIBUTE. The charter has no fixture-attribute mechanism anywhere.**
-
-Measured: §D lists five *joint* attributes (`severable`, `schedule`, `refused`, `mandatoryOpen`,
-`OBJECT_ONLY`) and `cell.approach`. It lists **zero** fixture attributes. The only fixture attribute
-in the whole charter is DW-3a's wear **grade**, and that is a different car in a later wave.
-
-The architecture confirms the shape: DW-1b creates `fixtureVocabulary.js` and its acceptance arm 1 is
-*"frozen+unique"* — **an array of strings**. An array of strings cannot carry `flued: bool`.
-
-**Consequence, stated plainly:** the ten L1 heads cannot land as bare members. Without a declared
-attribute domain per head, nothing records that `vessel` was supposed to absorb `aludel`, `blowpipe`,
-`crucible`, `cucurbit`, `drug jar`, `pots`, `pots set` and `receiver` — so a later author re-adds
-`crucible` as its own member and the consolidation silently unwinds. **The consolidation is
-unenforceable unless DW-1b's deliverable shape changes from `string[]` to a record map.**
-
-That is a contract change, not an addition, and it is the largest single consequence of the 53.
-**It is the chair's call, and I have not taken it.** The two branches:
-
-- **(A) Record map now.** `FIXTURE_KINDS` becomes `{ kind, attrs: {...} }`. DW-1b gains a totality
-  arm (every head declares its domain) and a consolidation arm (every folded spelling maps to its
-  head). Cost: DW-1b's arm count rises from 4, and its census delta with it (§4.4).
-- **(B) Land 53 bare members now, attributes in DW-3a.** Cheaper at DW-1b; leaves the ten heads
-  meaningless for one wave, and DW-5d's arm 4 stays held for two more waves rather than one.
-
-I recommend **(A)**, because (B) ships ten members that name nothing a reader can distinguish, and
-the charter's own §G rule is that a criterion must name what it counts.
+⚠ **Two substring hazards, not set collisions:** `grep "bar"` matches landed `barrel` **and** new
+`drawbar` **and** new `barred grille`. R-INST-6 flagged `drawbar`/`bar` independently. **This is the
+`dais` trap** — the charter already records that a bare `grep "'dais'"` arm "would be red forever and
+would then be widened until it proved nothing". Every arm matches the member spelling, never the bare
+substring.
 
 ---
 
-## §2 · THE `portableFurnaces` ARM — THE REWRITE'S SHAPE, AND WHERE THE RULING BREAKS
+## §2 · RULING 1 FOLDED — BRANCH (A), THE RECORD MAP
 
-### 2.1 The engine facts, re-measured at the slot
+**Chair ruled: `FIXTURE_KINDS` becomes `{ kind, attrs: {...} }`, DW-1b gains a totality arm and a
+consolidation arm, and the arm-count/census cost is accepted because that cost IS the enforcement.**
 
-Walked all **2,185** tracked files under `src/` at `c3289244d` with **node**, word-anchored — not
-`git grep -E`, which does not honour `\b`, and not `grep`, which is ugrep here and prints a
-complexity error rather than zero on a bounded-repetition pattern.
+### 2.1 Why the array could not carry the rule
+
+The granularity rule is *"finer distinctions are ATTRIBUTES, not members"* — `table`+shape,
+`vessel`+kind, `furnace`+`flued`. **Measured: the charter has ZERO fixture attributes.** §D lists five
+*joint* attributes (`severable`, `schedule`, `refused`, `mandatoryOpen`, `OBJECT_ONLY`) and
+`cell.approach`. The only fixture attribute anywhere is DW-3a's wear **grade** — a different car, a
+later wave. The architecture confirms the shape: DW-1b creates `fixtureVocabulary.js` with acceptance
+arm 1 *"frozen+unique"* — **an array of strings, which cannot carry `flued: bool`.**
+
+### 2.2 The shape
+
+```js
+export const FIXTURE_KINDS = Object.freeze([
+  Object.freeze({ kind: 'vessel',  attrs: Object.freeze({ kind: ['aludel','blowpipe','crucible',
+      'cucurbit','drug jar','pots','pots set','receiver'] }) }),
+  Object.freeze({ kind: 'furnace', attrs: Object.freeze({ flued: 'bool' }) }),
+  Object.freeze({ kind: 'table',   attrs: Object.freeze({ shape: ['ring','trestle','long', …] }) }),
+  …                                          // 135 records total
+]);
+export const FIXTURE_FOLD = Object.freeze({   // every folded spelling -> its head
+  crucible: 'vessel', aludel: 'vessel', 'ring table': 'table', …
+});
+```
+
+### 2.3 DW-1b's two new arms
+
+| Arm | Assertion | Convicting mutant |
+|---|---|---|
+| **TOTALITY** | every one of the **10** head members declares a non-empty `attrs` domain; every non-head declares `attrs: {}` | delete one head's domain → reds |
+| **CONSOLIDATION** | every key in `FIXTURE_FOLD` resolves to a `kind` present in `FIXTURE_KINDS`, and **no folded spelling is itself a `kind`** | re-add `crucible` as its own member → reds. **This is the arm that stops the consolidation silently unwinding** |
+
+The consolidation arm is the *cure-that-did-not-travel* guard: without it a later author re-adds
+`crucible` and nothing records that `vessel` was meant to absorb it.
+
+### 2.4 ⛔ DW-1b's corrected budget
+
+Chartered: **4 arms / +4 titles** (frozen+unique · every template `furnish` member is a member ·
+`RECESS_STATES` is exactly `OPEN|BLOCKED` · the count is 82).
+
+| Arm | Source |
+|---|---|
+| 1 frozen + unique | chartered |
+| 2 every template `furnish` member is a `FIXTURE_KINDS` member | chartered |
+| 3 `RECESS_STATES` is exactly `OPEN\|BLOCKED` | chartered |
+| 4 **the count is 135** (was 82) | §1.2 |
+| 5 **TOTALITY** | ⭐ ruling 1 |
+| 6 **CONSOLIDATION** | ⭐ ruling 1 |
+| 7 **furnace arm 4a** (totality + unflued-EXISTS) | ⭐ ruling 2, §3 |
+
+**DW-1b is a 7-arm car, not 4. Census delta +7, not +4. Wave total 30 → 33** (`1a +6 · 1b +7 ·
+1c +5 · 1d +5 · 1e +5 · 1f +5`).
+
+⚠ **The `+6 eff` estimate on `interiorTemplates.js` was sized for 60 added members and is wrong at
+113** — and the record map changes each entry from a string to an object, so the line count roughly
+triples rather than doubles. **Re-cut the estimate; do not inherit it.**
+
+### 2.5 Three mechanical bills, banked, invisible to the arm count
+
+- **A new test file reds THREE ratchets** — the two censuses **plus** `mutationCoverageManifest`'s
+  E-A TOTALITY arm. **DW-1 creates six new test files.**
+- **A template-literal `it()` title inflates the census by its PARTS.** With 135 records the pull
+  toward ``it(`${kind} is frozen`)`` is strong and the delta will not close.
+- **`test.each()` / loop-registered titles are INVISIBLE to the census** — check `credited`, not
+  `titles`, or a real addition reads as zero.
+
+---
+
+## §3 · RULING 2 FOLDED — THE 4a/4b ARM SPLIT
+
+**Chair ruled: take the split. `flueCount` was verified 0 at §551.6 and the rewrite used it anyway.**
+
+### 3.1 The engine facts, re-measured at the slot
+
+Walked all **2,185** tracked `src/` files at `c3289244d` with **node**, word-anchored — not
+`git grep -E` (does not honour `\b`), not `grep` (ugrep here; prints a complexity error, not zero).
 
 | Symbol | Occurrences | Files | Denominator |
 |---|---|---|---|
 | `portableFurnace(s)` | **0** | 0 | 2,185 src files |
 | `flueCount` | **0** | 0 | 2,185 src files |
 | `\bflues?\b` | **0** | 0 | 2,185 src files |
-| `\bfurnaces?\b` | **7** | 3 | 2,185 src files — `institutionDescVariants.js`, `institutionalCatalog.js`, `institutionVocabulary.js`, **all prose** |
+| `\bfurnaces?\b` | **7** | 3 | `institutionDescVariants.js`, `institutionalCatalog.js`, `institutionVocabulary.js` — **all prose** |
 
-**The lane's independent measurement CONFIRMS the fixture gate's and the brief's: the arm names three
-quantities and the engine types none of them.**
+### 3.2 The split, as ruled
 
-### 2.2 ⛔ THE RULING AS GIVEN DOES NOT EXECUTE — reported, not routed around
-
-Ruled: *mint `furnace` as a fixture kind carrying `flued: bool` and rewrite the arm as
-`count(furnace where flued) ≤ flueCount`.* Taking it apart term by term:
+**ARM 4a — LIVE at DW-1b** (arm 7 of §2.4). No envelope dependency.
 
 ```
-count( furnace where flued )  ≤  flueCount
-       ^^^^^^^      ^^^^^        ^^^^^^^^^
-       (1) SUPPLIED (2) NEEDS    (3) ⛔ STILL UNDEFINED —
-       by the 53    a fixture-   nothing in the 53 supplies it,
-       ✓            attribute    and nothing in src types it
-                    map (§1.4)
+(i)  TOTALITY : ∀ f where f.kind === 'furnace' :  f.attrs.flued ∈ {true, false}
+(ii) EXISTENCE: count(f where f.kind === 'furnace' && f.attrs.flued === false) > 0
 ```
 
-1. **`furnace` — discharged.** It is member #21 of the 53 and DW-1b mints it. ✓
-2. **`flued` — half-discharged.** It requires the record-map contract change of §1.4, which is not
-   chartered. Executable under branch (A), not under (B).
-3. **`flueCount` — NOT discharged. The rewrite replaces one undefined symbol with a different
-   undefined symbol.** `flue` is not among the 53; `\bflues?\b` is 0 of 2,185 src files. **The arm as
-   rewritten is exactly as unexecutable as the arm it replaces.**
+Clause (ii) is the finding itself. Boerhaave's room *"only had one chimney, whereas he wanted to
+perform various chemical experiments simultaneously"* — the portable furnace exists **precisely to
+defeat the flue constraint**; R-INST-5 calls it "the one measured fixture in the family".
+⛔ **§546.3's trap stands: the naive `furnaces ≤ flues` would convict the best-attested laboratory in
+the corpus.** Arm 4a convicts that same error from the other side and convicts nothing that is true.
 
-**Where `flueCount` would have to come from, and why that is the real blocker.** A flue count is a
-property of the **envelope** — chimneys and stacks on a building. The fixture gate's own (b) set puts
-`chimney row` in the **ENVELOPE** class, and the envelope is a surface **no charter vocabulary owns
-at all** (§5.2, 73 tokens). So `flueCount` is blocked on the same gap.
+**Convicting mutants:** set every `flued` to `true` → (ii) reds. Set one to a non-boolean → (i) reds.
+Both cheap, both real. *A control that cannot fail proves nothing.*
 
-### 2.3 The shape I recommend — offered, not taken
-
-**Split the arm into the part DW-1 can prove and the part the envelope owes.**
-
-**Arm 4a — the VOCABULARY assertion. Executable at DW-1b under branch (A), no envelope dependency:**
-
-```
-(i)  TOTALITY : ∀ f ∈ fixtures where f.kind === 'furnace' :  f.attrs.flued ∈ {true, false}
-(ii) EXISTENCE: count(f where f.kind === 'furnace' && f.attrs.flued === false) > 0  over the corpus
-```
-
-Clause (ii) is what actually encodes the finding. Boerhaave's room *"only had one chimney, whereas he
-wanted to perform various chemical experiments simultaneously"* — **the portable furnace exists
-precisely to defeat the flue constraint**, and R-INST-5 calls it "the one measured fixture in the
-family". An arm that asserts unflued furnaces EXIST convicts the same error `furnaces ≤ flues` would
-have caused, from the other side, and it convicts nothing that is true.
-
-**Convicting mutant (a control that cannot fail proves nothing):** set every `flued` to `true` and
-(ii) reds. Set one to a non-boolean and (i) reds. Both mutants are cheap and both are real.
-
-**Arm 4b — the GEOMETRIC inequality. Deferred with a NAMED home, not HELD with none:**
+**ARM 4b — DEFERRED to DW-2b with a NAMED home.**
 
 ```
 count(furnace where flued) ≤ envelope.flueCount
 ```
 
-goes to **DW-2b** (the vertical partition — the car that already owns storeys and the envelope
-accounting), blocked on the envelope gaining a flue count.
+**Home: DW-2b** — the vertical partition, the car that already owns storeys and the envelope area
+accounting. **Blocker: `envelope.flueCount` has no producer**, and that is the ENVELOPE gap (§6) —
+the gate's own (b) set files `chimney row` under ENVELOPE.
 
-**Why this is better than the status quo.** DW-5d currently ships four arms with arm 4 HELD and its
-blocker stated as *"the vocabulary does not contain `portable furnace`"*. Under the recommendation
-DW-5d ships **five** arms, arm 4a live with a convicting mutant, and the one genuinely blocked half
-carries a named owner and a named precondition instead of an open hold. **That is a strictly smaller
-blocker than the one the charter records, and it is the reason to say the ruling breaks rather than
-absorb it.**
+**Net:** DW-5d ships **five** arms (four live + 4b deferred with an owner) instead of four live and
+one open hold. **A named smaller blocker beats an open hold.**
 
 ---
 
-## §3 · §F.0 REFRESHED AT `c3289244d` — WHICH ROWS MOVED
+## §4 · §F.0 REFRESHED AT `c3289244d`
 
-### 3.1 The table, re-measured row by row
+### 4.1 Rows that MOVED
 
-Ancestry tested per-sha with `--is-ancestor` (a status, which cannot echo a false positive the way a
-bare `git rev-parse` can). Sizes with `git cat-file -s` on a **braced** `${SHA}:path`.
-
-| Car | Charter row at `79b78881c` | Measured at `c3289244d` | Verdict |
-|---|---|---|---|
-| **CG-1** | LANDED `d78011665` | ancestor ✓ | **HOLDS** |
-| **CG-1b** | LANDED `3e9d2d888` | ancestor ✓ | **HOLDS** |
-| **CH-1** | LANDED `b2852ccc3`, narrower than the draft said | ancestor ✓ · `\binteriorKind\b` = **0 of 2,185 src files** | **HOLDS** — C-24's correction survives re-measurement |
-| **CH-2A** | LANDED `17fe89763` | ancestor ✓ | **HOLDS** |
-| **UC-5** | LANDED `f4df874ce`, `connectivity.js` = 28,261 B | ancestor ✓ · **28,261 B** exact | **HOLDS** |
-| **MP-1** | LANDED `9e5059cec`, `cartographyProperty.js` = 9,141 B | ancestor ✓ · **9,141 B** exact | **HOLDS** |
-| **CH-2** | HALF — CH-2B at DRAFT | `MF-CH2B` present in the manifest, not LANDED | **HOLDS** |
-| **CH-4** | OUTSTANDING | `CATEGORY_PATTERNS` unchanged at `districtProfile.js:105-117`; criminal's `/den/` still tests before residential | **HOLDS** |
-| **CH-6** | OUTSTANDING | `ARCANE_INST_KW` still carries `'healer (divine'`, `'divine healer'`, `'warden'`, `'great library'` — the deity-doctrine violation is live | **HOLDS** |
-| ⛔ **CG-2** | **OUTSTANDING** — *"`MF-CG2` has no landing at any ref"* | **DECAYED.** `MF-CG2` exists (DRAFT) and **four TE-CG-2 code commits are ancestors**; `TC4_ROW_BYTES_BAND` is no longer the authored `400` but `DERIVED_CAPS.rowBytes` (`cartographyTuning.js:495`); `cartographyBuildings.js` +224 lines | ⛔ **MOVED** |
-| ⛔ **CH-3** | **OUTSTANDING** — "in flight" | **DECAYED.** **Fourteen CH-3 commits are ancestors.** `minTier` declarations in `institutionalCatalog.js`: **36 → 10 = exactly −26** | ⛔ **MOVED — the §3.1 prediction EXECUTED** |
-| ⛔ **CH-5** | **OUTSTANDING** — "chair §541: ships Shape F" | **DECAYED.** `MF-CH5` = **LANDED**. `ARCANE_INST_TAGS = ['arcane', 'planar', 'enchanting']` — **`alchemy` is gone**, moved to a sibling `TRADE_INST_TAGS` imported by `institutionalCatalog.js`, `arcaneInstitutionVocabulary.js`, `npcProfile.js` | ⛔ **MOVED — LANDED. §H's G3 is DISCHARGED at the slot.** |
-
-### 3.2 ⛔ The decayed "Today:" integer — and it decayed in a direction nobody predicted
-
-**§B's headline row is wrong in both its mechanism and its magnitude.**
-
-The charter: *"`exclusiveGroup: 'religiousCenter'` deleted from the two **city** rows | re-rolls the
-whole city/metropolis institutional roster — **81 of 420 settlements change, ~130 institution names
-move**"*, and builds the entire PROVISIONAL-ON-CH3 clause on it.
-
-Measured at the slot, and in CH-3's own landed commit body (`501122493`):
-
-| | Charter (predicted) | Landed (measured) |
+| Car | Charter row at `79b78881c` | Measured at `c3289244d` |
 |---|---|---|
-| mechanism | delete `exclusiveGroup` from two city rows | ⛔ **NOT deleted.** `religiousCenter` is still **7 occurrences** in the catalog, unchanged from `79b78881c`. A forked-stream `exclusiveGroupCoexists: true` flag was used instead, drawn from `rng.fork('exclusiveCoexist::…')` so the main sequence does not shift |
+| ⛔ **CH-3** | **OUTSTANDING**, "in flight" | **LANDED** — 14 commits are ancestors; `minTier` declarations in `institutionalCatalog.js` **36 → 10 = exactly −26** |
+| ⛔ **CH-5** | **OUTSTANDING** | **LANDED** — `MF-CH5` = LANDED; `ARCANE_INST_TAGS = ['arcane','planar','enchanting']`, **`alchemy` gone** to a sibling `TRADE_INST_TAGS`. **§H's G3 is DISCHARGED at the slot** |
+| ⛔ **CG-2** | **OUTSTANDING** — *"`MF-CG2` has no landing at any ref"* | **code LANDED**, packet DRAFT — 4 TE-CG-2 commits are ancestors; `TC4_ROW_BYTES_BAND` is now `DERIVED_CAPS.rowBytes` (`cartographyTuning.js:495`), not the authored `400` |
+
+### 4.2 Rows that HOLD (re-measured, not inherited)
+
+CG-1 `d78011665` ✓ · CG-1b `3e9d2d888` ✓ · CH-1 `b2852ccc3` ✓ (`\binteriorKind\b` = **0 of 2,185
+src files** — C-24's correction survives) · CH-2A `17fe89763` ✓ · UC-5 `f4df874ce`,
+`connectivity.js` = **28,261 B** exact ✓ · MP-1 `9e5059cec`, `cartographyProperty.js` = **9,141 B**
+exact ✓ · CH-2B not landed ✓ · CH-4 `CATEGORY_PATTERNS` unchanged, criminal's `/den/` still tests
+before residential ✓ · CH-6 `ARCANE_INST_KW` still carries `'healer (divine'`, `'divine healer'`,
+`'warden'`, `'great library'` — the deity-doctrine violation is live ✓.
+
+Ancestry by `--is-ancestor` (a status, which cannot echo a false positive the way a bare
+`git rev-parse` can). Sizes by `git cat-file -s` on a **braced** `${SHA}:path`.
+
+### 4.3 ⛔ The decayed integer — a THIRD decay direction
+
+**§B's headline row is wrong in mechanism AND magnitude.**
+
+| | Charter predicted | Landed (measured, and in CH-3's own commit `501122493`) |
+|---|---|---|
+| mechanism | delete `exclusiveGroup` from two city rows | ⛔ **never deleted** — `religiousCenter` still **7 occurrences**, unchanged. A forked-stream `exclusiveGroupCoexists: true` drawn from `rng.fork('exclusiveCoexist::…')` was used instead, so the main sequence does not shift |
 | settlements changed | **81 of 420** | ⛔ **30 of 420** |
-| institution names moved | **~130** | ⛔ **123 distinct new name strings** |
+| names moved | **~130** | ⛔ **123** distinct new name strings |
 | records | — | 87 (was 113 under the deletion form) |
 
-The chair revised J-CH-3-2 on the measurement: the 81-roster reshuffle was *"an ARTIFACT of where the
-exclusivity check sits"*, and the deletion also freed `coherenceRepairPass`'s refusal, dragging a
-TOWN-tier `Monastery or friary` into 21 cities and 5 metropolises — a content change nobody asked for.
+§A names two decay directions — an absence since filled (UC-5), a presence that never arrived (CH-1).
+**This is a third: a prediction that landed by a different mechanism at a different magnitude.**
+Chair owns it: §544.7's revision to the rng-preserving variant is why the mechanism changed, and the
+charter recorded the pre-revision prediction.
 
-**This is the decay class §A was written for, in its third form.** §A names two directions — an
-absence since filled (UC-5) and a presence that never arrived (CH-1). This is a third: **a prediction
-that landed by a different mechanism at a different magnitude.** The number did not vanish and did not
-fail to arrive; it was superseded by a better ruling. Nothing signalled it either.
+### 4.4 Consequential rows
 
-### 3.3 Consequential rows that move with the above
+- **§B's PROVISIONAL-ON-CH3 clause — premise gone.** CH-3 landed. Every item on its "exhaustive list"
+  is now measurable at the slot. **Re-head it PROVISIONAL-ON-CH6 and re-scope** (CH-4, CH-6 remain).
+- **§F.2 "46 commits dispatched"** → **45** if the chair rules CG-2 done.
+- **§F.4's `CH-3 · CH-5 · CH-6 · WEB-8b`** → **`CH-6 · WEB-8b`**.
+- **§F.0's instrument note holds:** `029268fe5` is still an orphan — ground truth for RESEARCH,
+  never for ENGINE STATE.
+- ✅ **`LANE-LAW.md` re-stamped by the chair** (`21026/5848`, packets 179, slot `c3289244d`). Closed.
 
-- **§B's PROVISIONAL-ON-CH3 clause — its premise is gone.** CH-3 has landed. Every item on its
-  "exhaustive list" (DW-R2's row count and denominator, the per-shelf B2 split, the DW-S soak corpus,
-  DW-1's consumption of CH-1/CH-2) is now **measurable at the slot rather than provisional**. The
-  clause should be re-headed *PROVISIONAL-ON-CH6* and re-scoped, not deleted — CH-4 and CH-6 remain.
-- **§F.2 "What a build lane actually dispatches: 46 commits"** — CG-2's code has landed; only its
-  packet flip remains. If the chair rules CG-2 done, **45**.
-- **§F.4's line `CH-3 · CH-5 · CH-6 · WEB-8b`** → **`CH-6 · WEB-8b`**.
-- **§F.0's own instrument note** still holds: `git merge-base 029268fe5 c3289244d` — the research
-  bundle remains an orphan and remains ground truth for RESEARCH, never for ENGINE STATE.
-- ⚠ **`LANE-LAW.md` itself is stale** and lanes read it: its census tuple says
-  `titles 21017 / suiteTitles 5847`; measured at the slot the live row is
-  **`files: 2525, parked: 366, credited: 2159, titles: 21026, suiteTitles: 5848`**
-  (`sovereigntyLightingContract.walker.test.js:6499`). Files, parked and credited are unchanged —
-  the +9 titles / +1 suiteTitle landed in existing files, which is why no census file count moved.
+### 4.5 Rows that did NOT decay — reported because a review that only finds defects is advocating
 
-### 3.4 Rows that did NOT decay — reported because a review that only finds defects is advocating
-
-Every one re-measured at `c3289244d`, not inherited:
-
-`ROOM_KINDS` = **28** at `interiorTemplates.js:35`, containing **both `stall` and `dais`** ✓ ·
-`FURNISHING_KINDS` = **22** at `:50` ✓ · `INTERIOR_KINDS` = **8** at `:29` ✓ ·
-`interiorKindOf` at `:172` ✓ · `interiorTemplates.js` = **10,471 B** ✓ ·
-`compendiumData.generated.js:409` `roomKinds` = 28 incl. both ✓ ·
-`CatalogHubs.jsx:66` renders `Room kinds: ${facets.roomKinds.length}` ✓ ·
-`testRatchet.test.js:181` `CEILING = 17` with **11** banked entries ✓ (4 of them in
-`tests/copy/voiceMechanics.test.js`) · `VIEWING_PAYWALLS_PENDING_514` length **3** at
-`entitlementLadder.js:135-139` ✓ · `JOINT_KINDS` = **5** (`grate · stair · sealed_door · sluice ·
-breach`) ✓ · `constants.js` = 4,725 B ✓.
-
-⚠ **But three path citations in the charter are wrong and will hand a lane a false absence.** The
-charter writes `interiorTemplates.js:35`, `interiorModel.js:79-87` and `interiorEdits.js` with no
-directory. The real paths at the slot are **`src/domain/interior/…`**, not `src/domain/…`. A lane
-grepping the charter's literal path gets zero hits and reads it as decay. This is the same instrument
-class §A exists to guard.
+`ROOM_KINDS` = **28** at `:35` incl. **both `stall` and `dais`** · `FURNISHING_KINDS` = **22** at
+`:50` · `INTERIOR_KINDS` = **8** at `:29` · `interiorKindOf` at `:172` · `interiorTemplates.js` =
+**10,471 B** · `compendiumData.generated.js:409` `roomKinds` = 28 incl. both ·
+`CatalogHubs.jsx:66` renders `Room kinds: ${facets.roomKinds.length}` · `testRatchet.test.js:181`
+`CEILING = 17` with **11** banked entries (4 in `tests/copy/voiceMechanics.test.js`) ·
+`VIEWING_PAYWALLS_PENDING_514` = **3** at `entitlementLadder.js:135-139` · `JOINT_KINDS` = **5**
+(`grate · stair · sealed_door · sluice · breach`) · `constants.js` = 4,725 B.
 
 ---
 
-## §4 · DW-1 — THE DISPATCH BRIEF
+## §5 · THE DW-1 DISPATCH
 
-### 4.1 Cars, order, and dependencies
+### 5.1 Cars and order
 
-**6 cars, INERT** (they land frozen arrays and a membership walker; no producer reads the new members).
+**6 cars, INERT** (frozen vocabularies + a membership walker; no producer reads the new members).
+⚠ **7 cars if the chair mints DW-1g for ENVELOPE — see §6.3.**
 
 ```
-[PRE-DW-1] B11 cross-vocabulary uniqueness check     — RESIZED, see §5
-[PRE-DW-1b] C-25 fixture re-derivation gate          — ⭐ RUN AND DISCHARGED (union 135)
-[PRE-DW-1d/1e] C-19 sub-form recount                 — ⛔ NEVER RUN, see §4.5
+[PRE-DW-1]   B11 cross-vocabulary uniqueness check   — RESIZED, §8
+[PRE-DW-1b]  C-25 fixture re-derivation gate         — ⭐ RUN AND DISCHARGED (union 135)
+[PRE-DW-1d/1e] C-19 sub-form recount                 — ⛔ NEVER RUN, §7 — BLOCKS 1d AND 1e
 
-DW-1a  ──►  DW-1b            SERIALIZE (charter D6: both touch interiorTemplates.js)
+DW-1a  ──►  DW-1b                    SERIALIZE (D6: both touch interiorTemplates.js)
 DW-1c, DW-1d, DW-1e  ──►  DW-1f      (charter §F.4)
 ```
 
-⚠ **Charter/architecture divergence on DW-1f.** Architecture `:1568` puts `DW-1c, DW-1d, DW-1e, DW-1f`
-all in parallel ("no shared file"); charter §F.4 serializes DW-1f after the other three. **The charter
-is the ruled layer and governs** — but the divergence is unrecorded in §I's conflict list and should
-be, or a lane reading the architecture dispatches four in parallel.
+⚠ **Unlogged charter/architecture divergence.** Architecture `:1568` puts `DW-1c, DW-1d, DW-1e, DW-1f`
+all parallel ("no shared file"); charter §F.4 serializes DW-1f after the other three. **The charter is
+the ruled layer and governs**, but the divergence is **absent from §I's conflict list** and should be
+added, or a lane reading the architecture dispatches four in parallel.
 
-**Dependencies at the slot:** DW-1a's architecture row requires *"CH-1 LANDED and CG-1, CG-2 LANDED"*.
-Measured: CH-1 ✓, CG-1 ✓, CG-2's **code** ✓ (packet at DRAFT). **DW-1a's stated preconditions are met
-except for CG-2's packet flip.**
+**Preconditions at the slot:** DW-1a's architecture row requires *"CH-1 LANDED and CG-1, CG-2
+LANDED"*. Measured: CH-1 ✓, CG-1 ✓, CG-2 **code** ✓ (packet DRAFT). **All met except CG-2's packet
+flip.**
 
-### 4.2 File set
+### 5.2 File set
 
 | Car | changeManifest | New test file |
 |---|---|---|
-| **DW-1a** | `CREATE src/domain/dwellings/vocabulary/cellVocabulary.js` (+120 eff) · `MODIFY src/domain/interior/interiorTemplates.js` — `ROOM_KINDS` re-points at `CELL_KINDS`, retire **both** `'stall'` and `'dais'`, `FURNISHING_KINDS.dais` STAYS · **+ `INTERIOR_KINDS` folds in here (charter C-22 ruling)** · **+ the regenerated `src/domain/compendium/generated/compendiumData.generated.js` and `npm run gen:compendium-data`** | `tests/domain/dwellingsCellVocabulary.test.js` |
-| **DW-1b** | `CREATE …/vocabulary/fixtureVocabulary.js` (+120 eff) · `MODIFY interiorTemplates.js` (`FURNISHING_KINDS`) · **+ the regenerated compendium artifact** | `tests/domain/dwellingsFixtureVocabulary.test.js` |
-| **DW-1c** | `CREATE …/vocabulary/partiCatalog.js` (+160 eff) | `tests/domain/dwellingsPartiCatalog.test.js` |
-| **DW-1d** | `CREATE …/vocabulary/circulationVocabulary.js` (+190 eff) · **+ `SURFACE_JOINT_KINDS` (charter C-20 ruling)** | its test |
+| **DW-1a** | `CREATE src/domain/dwellings/vocabulary/cellVocabulary.js` (+120 eff) · `MODIFY src/domain/interior/interiorTemplates.js` — `ROOM_KINDS` re-points at `CELL_KINDS`, retire **both** `'stall'` and `'dais'`, `FURNISHING_KINDS.dais` STAYS · **+ `INTERIOR_KINDS` folds in (C-22)** · **+ regenerated `src/domain/compendium/generated/compendiumData.generated.js` and `npm run gen:compendium-data`** | `tests/domain/dwellingsCellVocabulary.test.js` |
+| **DW-1b** | `CREATE …/vocabulary/fixtureVocabulary.js` — ⭐ **the `{kind, attrs}` record map + `FIXTURE_FOLD`** · `MODIFY interiorTemplates.js` (`FURNISHING_KINDS`) · **+ regenerated compendium artifact** · ⚠ **eff estimate re-cut, not inherited** | `tests/domain/dwellingsFixtureVocabulary.test.js` |
+| **DW-1c** | `CREATE …/vocabulary/partiCatalog.js` (+160 eff) | its test |
+| **DW-1d** | `CREATE …/vocabulary/circulationVocabulary.js` (+190 eff) · **+ `SURFACE_JOINT_KINDS` (C-20)** | its test |
 | **DW-1e** | `CREATE …/vocabulary/storageVocabulary.js` (+180 eff) | its test |
 | **DW-1f** | `CREATE …/vocabulary/relations.js` (+100 eff) | its test |
+| **DW-1g?** | `CREATE …/vocabulary/envelopeVocabulary.js` — ⭐ **if the chair mints it, §6.3** | its test |
 
-⚠ **DW-1b's `+6 eff` budget on `interiorTemplates.js` was sized for 60 added members. At 113 it is
-wrong**; the array roughly doubles. The estimate should be re-cut, not inherited.
+### 5.3 The 15 exit criteria — which MOVE under the four rulings
 
-### 4.3 Exit criteria — integers and differentials only
-
-| # | Criterion | Value | Status |
+| # | Criterion | Value | Moved by |
 |---|---|---|---|
-| E1 | `CELL_KINDS` count, **all three intermediates** | `28 − 2 + 57 = **83**` | **FIRM** |
-| E2 | `FIXTURE_KINDS` count | ⛔ **135** = `22 + 113` (was 82) | **PROVISIONAL — chair ratification** |
-| E3 | `PARTIS` count | **48** | **FIRM** |
-| E4 | circulation **classes** | **9** | **FIRM** |
-| E5 | circulation **sub-forms** | ⛔ **no integer exists** ("~55") | **PROVISIONAL — gate never run** |
-| E6 | storage **sub-forms** | ⛔ **no integer exists** ("~35") | **PROVISIONAL — gate never run** |
-| E7 | storage polarities / prohibitions | **6 / 3** | **FIRM** |
-| E8 | `RELATION_KINDS` | exactly `owns\|occupies\|hostedIn\|NO_BUILDING` (4) | **PROVISIONAL — owner-gated O2/R1** |
-| E9 | `NO_BUILDING_REASONS` | **6** members | **FIRM** |
-| E10 | producers of `room('stall'` / `room('dais'` under `src/` | **0** | **FIRM** — already 0 at the slot |
-| E11 | `FURNISHING_KINDS.dais` survives | present, 2 live producers | **FIRM** |
-| E12 | regenerated `roomKinds` | **83**, containing **neither** `stall` nor `dais` | **FIRM** |
-| E13 | public Compendium card | `Room kinds: 28` → `Room kinds: 83` | **FIRM — declared shift** |
-| E14 | banked-failure ratchet | unchanged at **11** of `CEILING = 17` | **FIRM** |
-| E15 | census delta, attributed **per test file** | `1a +6 · 1b +4 · 1c +5 · 1d +5 · 1e +5 · 1f +5 = **30**` | ⛔ **DW-1b's +4 is now WRONG — see §4.4** |
+| E1 | `CELL_KINDS`, **all three intermediates** | `28 − 2 + 57 = **83**` | — FIRM |
+| **E2** | `FIXTURE_KINDS` count | ⛔ **135** = `22 + 113` (was 82) | **ruling 1** |
+| **E2b** | ⭐ **NEW — every member is a `{kind, attrs}` record; 10 heads carry a non-empty domain** | totality | **ruling 1** |
+| **E2c** | ⭐ **NEW — `FIXTURE_FOLD` totality; no folded spelling is itself a `kind`** | consolidation | **ruling 1** |
+| E3 | `PARTIS` | **48** | — FIRM |
+| E4 | circulation **classes** | **9** | — FIRM |
+| **E5** | circulation **sub-forms** | ⛔ **no integer exists** ("~55") | **§7 — blocks DW-1d** |
+| **E6** | storage **sub-forms** | ⛔ **no integer exists** ("~35") | **§7 — blocks DW-1e** |
+| E7 | storage polarities / prohibitions | **6 / 3** | — FIRM |
+| E8 | `RELATION_KINDS` | exactly `owns\|occupies\|hostedIn\|NO_BUILDING` | **owner-gated O2/R1** |
+| E9 | `NO_BUILDING_REASONS` | **6** | — FIRM |
+| E10 | producers of `room('stall'` / `room('dais'` under `src/` | **0** | — FIRM, already 0 |
+| E11 | `FURNISHING_KINDS.dais` survives | present, 2 live producers | — FIRM |
+| E12 | regenerated `roomKinds` | **83**, containing **neither** `stall` nor `dais` | — FIRM |
+| E13 | public Compendium card | `Room kinds: 28` → **`Room kinds: 83`** | — FIRM, **declared shift** |
+| E14 | banked-failure ratchet | unchanged at **11** of `CEILING = 17` | — FIRM |
+| **E15** | census delta, attributed **per test file** | ⛔ `1a +6 · **1b +7** · 1c +5 · 1d +5 · 1e +5 · 1f +5 = **33**` (was 30) | **ruling 1** |
+| **E16** | ⭐ **NEW — ENVELOPE member count** | ⚠ **estimate only, §6** | **ruling 4** |
 
-**The differential that matters most (E12/E13):** the charter is right and the architecture is wrong.
-The architecture says DW-1a and DW-1b carry **"DECLARED SHIFT: NONE"**. Measured at the slot,
-`scripts/generate-compendium-data.mjs:59` imports `INTERIOR_KINDS, ROOM_KINDS, FURNISHING_KINDS` and
-`:603` emits `roomKinds: [...ROOM_KINDS]`, and `tests/docs/compendiumDataFreshness.test.js` asserts
-the committed artifact is **byte-identical to a fresh generation**. **DW-1a and DW-1b move a shipped
-public count and a shipped public enumerable.** The wave declares the shift; the architecture's
-"NONE" must not be inherited.
+**E12/E13 — the charter is right and the architecture is wrong.** Architecture says DW-1a/1b carry
+**"DECLARED SHIFT: NONE"**. Measured: `scripts/generate-compendium-data.mjs:59` imports
+`INTERIOR_KINDS, ROOM_KINDS, FURNISHING_KINDS`; `:603` emits `roomKinds: [...ROOM_KINDS]`;
+`tests/docs/compendiumDataFreshness.test.js` asserts the artifact is **byte-identical to a fresh
+generation**. **DW-1a/1b move a shipped public count and enumerable. Do not inherit "NONE".**
 
-### 4.4 ⛔ DW-1b's census budget no longer closes
+### 5.4 ⭐ RULING 3 FOLDED — DW-1 IS NOT GATED ON CH-6
 
-The charter ruled the architecture's `6/4/5/5/5/5 = 30`, *"where each figure equals that car's
-declared acceptance-arm count"*. DW-1b's four arms are: frozen+unique · every template `furnish`
-member is a `FIXTURE_KINDS` member · `RECESS_STATES` is exactly `OPEN|BLOCKED` · the count is 82.
-
-Under the union, DW-1b needs at minimum **three more**: the count arm moves 82 → 135, plus an
-attribute-**totality** arm and a **consolidation** arm (§1.4), plus arm 4a of the furnace rewrite (§2.3).
-**DW-1b is a 7-arm car, not a 4-arm car, and its census delta is +7, not +4.** Wave total **30 → 33**.
-
-Three further mechanical bills, each banked and each invisible to the arm count:
-- **A new test file reds THREE ratchets**, not two — the two censuses plus `mutationCoverageManifest`'s
-  E-A TOTALITY arm. DW-1 creates **six** new test files.
-- **A template-literal `it()` title inflates the census by its PARTS.** With 113 fixture members the
-  temptation to write `it(\`\${kind} is frozen\`)` is high and the delta will not close.
-- **`test.each()` / loop-registered titles are INVISIBLE to the census** — check `credited`, not
-  `titles`, or a real addition reads as zero.
-
-### 4.5 ⛔ Which figures are PROVISIONAL — and the answer is not the one the dispatch assumed
-
-The dispatch's premise is that DW cannot build because *"CH-6 changes what worlds contain, so any
-catalog-derived figure taken now would decay."* **I tested that and it does not hold for DW-1.**
-
-**Measured, decisively:**
+**Measured, three instruments, with a working control:**
 
 | Test | Result |
 |---|---|
-| Did the generated compendium artifact move across the 32-commit gap in which **CH-3, CH-5 and CG-2 all landed**? | ⛔ **NO.** Blob `3b1bf2c254abd4cb33db47e97e64e2ee8ae85d7c`, **98,359 B**, byte-identical at `79b78881c` and at `c3289244d`. |
-| Does CH-6's chartered file (`arcaneInstitutionVocabulary.js`, holding `ARCANE_INST_KW`) feed the generator? | **NO — 0 imports.** |
-| Did CH-5 change the catalog's tier/category/**name** key set — the only catalog surface the generator reads? | **NO — 0 name-key differences.** |
+| Did `compendiumData.generated.js` move across the 32-commit gap in which **CH-3, CH-5 and CG-2 all landed**? | ⛔ **NO** — blob `3b1bf2c254abd4cb33db47e97e64e2ee8ae85d7c`, **98,359 B**, identical at both ends; absent from `git diff --name-only`; absent from `git log -- <path>` |
+| **CONTROL** — can those instruments show a change? | ✅ **YES** — all three report `src/data/institutionalCatalog.js` as moved over the **same** range. The instrument is live, not blind |
+| Does CH-6's file (`arcaneInstitutionVocabulary.js`) feed the generator? | **NO — 0 imports** |
+| Did CH-5 change the catalog's tier/category/**name** key set (the only catalog surface the generator reads)? | **NO — 0 name-key differences** |
 
-**Therefore: DW-1's five vocabulary counts are properties of frozen arrays derived from a frozen
-research corpus at `029268fe5`, which cannot move. None of them is catalog-derived. CH-6 as chartered
-cannot move any figure DW-1 states.** DW-1 is dispatchable ahead of CH-6 **on measurement**.
+**DW-1's counts are properties of frozen arrays from a frozen corpus at `029268fe5`, which cannot
+move. No DW-1 figure is CH-6-derived.** The CH-before-DW ordering **stands as programme policy but is
+not a technical constraint for DW-1**. **DW-R2 remains genuinely catalog-gated** and keeps the
+dependency.
 
-I flagged the opposite risk first — that CH-6 and DW-1a/1b would collide on the same byte-pinned
-generated artifact — and the measurement **refuted it**. Recording the refutation because an
-unrefuted speculation is worth less than a tested one.
-
-**The ordering rule still stands as POLICY.** The chair ruled for the pickup card at C-13 ("all CH
-cars land before DW's BUILD waves"). Nothing here asks to overturn that. **What it does say is that
-for DW-1 specifically the rule is a programme choice, not a technical constraint** — and the car that
-genuinely is catalog-gated is **DW-R2**, whose row set is keyed to "every catalog row that can fire at
-a tier". The ordering rule earns its keep at DW-R, not at DW-1.
-
-**The DW-1 figures that ARE provisional, with the real dependency named:**
+**The four DW-1 figures that ARE provisional, with the real dependency named:**
 
 | Figure | Provisional on | Not on |
 |---|---|---|
-| **E2 — 135 fixtures** | the chair ratifying the gate's result into the charter's four sites (§1.2). Until then a lane reading the charter builds **82**. | CH-6 |
-| **E5 / E6 — circulation and storage sub-forms** | ⛔ **C-19's mechanical recount, which has never been run.** The charter RULED it ("recount `~55` and `~35` mechanically and pin both as integers with mutants") and no lane has. **These two integers do not exist.** DW-1d and DW-1e cannot state an exit criterion. | CH-6 |
-| **E8 / DW-1f's contract and its +5** | ⛔ **owner-gated O2/R1** — §C.7 orders `occupies`' sizing re-read and the charter itself marks the budget "provisional on R1". | CH-6 |
-| **E15 — the wave census delta** | §4.4's re-count, and the L1 attribute ruling of §1.4. | CH-6 |
-| everything else (E1, E3, E4, E7, E9–E14) | **nothing — FIRM at the slot.** | — |
-
-**⭐ The single most useful thing this brief can hand the chair: C-19's sub-form recount is the exact
-sibling of the fixture gate that just ran, it is ruled, it is unrun, and it blocks two of DW-1's six
-cars.** It should be the next prep lane, and it is cheap — the same extraction method the fixture gate
-already proved, pointed at §2.4 and §2.5 instead of §2.3.
+| E2 — 135 | the chair's edit landing in the four sites of §1.2. Until then a lane reading the charter builds **82** | CH-6 |
+| E5 / E6 — sub-forms | ⛔ **C-19's recount, ruled and never run (§7)** | CH-6 |
+| E8 / DW-1f's +5 | ⛔ **owner-gated O2/R1** — §C.7 orders `occupies`' sizing re-read | CH-6 |
+| E16 — ENVELOPE | the ENVELOPE gate (§6) | CH-6 |
 
 ---
 
-## §5 · B11 RESIZED — AND IT IS A DIFFERENT SHAPE, NOT JUST A BIGGER NUMBER
+## §6 · RULING 4 FOLDED — ENVELOPE AS ITS OWN VOCABULARY
 
-### 5.1 What B11 is chartered as
+**Chair ruled: ENVELOPE is minted as its own named vocabulary, not folded into an existing one.**
+Reasoning of record: 73 tokens is too many to fold without collision (`cistern` already three-way,
+`stair` colliding four ways), and folding a **surface** concept into a room or fixture vocabulary is
+the category error that left `ARCANE_INST_TAGS` a **trade** vocabulary doing a **magic-dependence**
+job (§541). Reversal: fold it later; nothing else references it yet.
 
-A cross-vocabulary uniqueness check across **five** vocabularies — {PARTIS, CELL_KINDS, CIRCULATION
-sub-forms, STORAGE sub-forms, FIXTURE_KINDS} — with **20** measured name collisions (15 CELL × STORAGE,
-5 CELL × CIRCULATION), each assigned an owning vocabulary. It gates **all of DW-1**.
+### 6.1 ⚠ COSTED AT SAMPLE GRADE — NOT ADJUDICATED
 
-### 5.2 ⛔ My measurement disagrees with the dispatch's framing — the 147 are not one class
+**I consolidated the 73 by head noun and by hand. The fixture gate adjudicated all 481 keys
+individually with integrity checks; I did not repeat that for the envelope.** Treat the member count
+as an **estimate with a stated range**, exactly as the chair required of the fixture gate's 84%.
 
-The dispatch states the gate found *"147 tokens belonging to OTHER vocabularies (`CELL_KINDS`, STORAGE,
-CIRCULATION, declared `RECESS`/`SUBDIVISION`)"*. **Adjudicated by class, only 55 of the 147 fit that
-description.** Denominator: the 147 (b) rows of the 481-key NONE set.
+Mechanical first pass: **73 tokens → 51 distinct last-word heads**; 10 heads carry >1 token
+(covering 32 tokens), 41 heads are singletons.
 
-| Class | N | What it actually is |
+| | Value | Basis |
 |---|---|---|
-| **BR** | **39** | belongs to another **existing** DW vocabulary — room, yard/zone, circulation, storage bay, water zone. ✓ the dispatch's description |
-| **BX** | **16** | declared **RECESS / SUBDIVISION** third terms. ✓ the dispatch's description |
-| ⛔ **BE** | **73** | **ENVELOPE** — floors, windows, walls, vaults, ceilings, stairs, chimney rows, earthworks, buried services. **No charter vocabulary owns this surface.** |
-| **BS** | **19** | not a fitting in **any** vocabulary — commodities (`wool`, `hemp`, `manure`), activities (`processions`), states (`siege`), movables (`sledge`, `post bag`), a payment, a rule, a prohibition. |
+| **CEILING** | **73** | every token its own member |
+| **RULED (estimate)** | **~20** | consolidation below |
+| **FLOOR** | **~18** | maximal consolidation |
+| **routed OUT** | **~4 tokens** | `stair`, `footholes`, `portall`, `oriel landing` → **DW-1d circulation** |
 
-`39 + 16 + 73 + 19 = 147` ✓. **The "other vocabularies" class is 55, not 147 — the framing over-counts
-it by 92.** And the 92 split into the two most interesting findings in the set.
+**The ~20 consolidated members** (each a head + attribute domain, per the granularity rule):
+`floor`{material, treatment, inlay} — absorbs 12 tokens · `window`{form, glazing, orientation} —
+absorbs 13 · `wall`{role, finish} — 4 · `parapet` · `ceiling`{vaulted, ribbed, painted} — 3 ·
+`cupola` · `turret`{use} — 2 · `gallery`{position} — 4 · `rail` — 2 · `arcade`{form} — 3 ·
+`post`{material, base} — 5 · `frame` · `skin` · `bridge` — 2 · `causeway` · `earthwork`{form} — 3 ·
+`service`{kind: water\|vent\|outfall\|**flue**} — 4 · `scenery` — 2 · `ground_setting` ·
+`false floor` (a concealment void, R-INST-6 NO TYPED HOME — **not** a `floor` variant).
 
-### 5.3 The three corrections that change what the gate must DO
+⭐ **`service{flue}` is where `flueCount` comes from.** `chimney row` sits in this family, and a count
+of `service where kind === 'flue'` **is** `envelope.flueCount`. **That closes arm 4b's blocker with a
+named producer** (§3.2) — the ENVELOPE vocabulary is what unblocks the furnace inequality.
 
-**(i) 16 of the 147 are already owned — B11 is cheaper here than stated.** The architecture titles
-DW-1b *"fixtures, `RECESS`, `SUBDIVISION`"* and its acceptance arm 3 is *"`RECESS_STATES` is exactly
-`OPEN|BLOCKED`"*. **The RECESS/SUBDIVISION vocabularies already have a chartered car.** B11's *name set*
-omits them; its *owner* does not. The gate must cross them; nobody needs to mint them.
+### 6.2 Why this is a real gap, not an extraction artefact — two independent confirmations
 
-**(ii) 73 of the 147 name a surface the DW program has no vocabulary for — B11 is more expensive here
-than stated, and this is the larger finding.** The ENVELOPE is touched by three signed bands (B5 walls
-→ separation → duplication, B7 storey heights, B12 party walls) and by DW-2b's whole geometry, but
-**no vocabulary owns floors, apertures, roofs or wall finishes**. Two independent confirmations that
-this is a real gap and not an extraction artefact:
 - **R10 is UNCARRIED.** §H.2 records `apertureUse: LIGHT|VENT|PROCESS_LOOP` and `lightDemand` as
-  0/0 in both frozen sources, routed to DW-1a "whose row is cell kinds", and marked **"Owed."**
-  The 73 BE rows are largely the aperture surface R10 asked for.
-- **`flueCount` (§2.2) is an envelope quantity with no producer.** The arm the chair tried to repair
-  is blocked on precisely this gap.
+  **0/0 in both frozen sources**, routed to DW-1a "whose row is cell kinds", and marked **"Owed."**
+  The 73 BE tokens are largely the aperture surface R10 asked for.
+- **`flueCount` has no producer** (§3.1) — the arm the chair tried to repair is blocked on precisely
+  this gap.
 
-**(iii) `JOINT_KINDS` is not in B11's crossed set, and it collides.** Measured over the 147:
-`stair`, `external stair`, `stair turret`, `cage under stair` — **4 tokens against the landed
-`JOINT_KINDS` member `stair`**, an exact match on the bare token. **Eleven more collide with landed
-`ROOM_KINDS`**: `store` ×5, `kiln` ×2, `stall` ×2, `main`, `study` — and `clamp` from the (c) set is
-routed to `ROOM_KINDS.kiln` as well. B11 crosses five vocabularies and **JOINT_KINDS is a sixth that
-is landed, closed, and already in conflict.**
+Three signed bands touch the envelope with no vocabulary owning it: **B5** (walls → separation →
+duplication), **B7** (storey heights descend), **B12** (party walls).
 
-### 5.4 ⭐ The 53 cost B11 almost nothing — the good-news direction
+### 6.3 ⛔ THE CAR QUESTION — a J-DW0-2 amendment, and it is the chair's
 
-Crossed mechanically, denominator 53:
+The chair ruled the **vocabulary**; the **car** is a separate call. **J-DW0-2 says "No new DW wave and
+no new DW car. 10 waves / 41 cars stands."** Minting DW-1g breaks it.
 
-| Cross | Collisions |
+| Option | Cost | Verdict |
+|---|---|---|
+| **(a) DW-1g inside DW-1** | wave 6 → **7 cars**, programme 41 → **42**; **amends J-DW0-2** | ⭐ **RECOMMENDED** — a surface vocabulary inside a fixture car repeats the exact category error the chair just ruled against, and DW-1b is already 4 → 7 arms |
+| (b) fold into DW-1d | no car cost; but envelope ≠ circulation | rejected — same category error |
+| (c) fold into DW-1b | no car cost; DW-1b would own 5 vocabularies and ~10 arms | rejected — DW-1b is already the heaviest car |
+| (d) charter outside DW's 41, like AD/CG | preserves 41; adds a train | viable alternative if J-DW0-2 is to be held |
+
+**I have not taken this.** (a) is recommended; **J-DW0-2 is named as the explicit cost** so the chair
+amends it deliberately rather than discovering it.
+
+### 6.4 What the ENVELOPE gate must do (dispatchable)
+
+Same method as the fixture gate: extract every envelope token from the tranches' own blocks, adjudicate
+each into (a) genuine member / (b) another vocabulary / (c) fairly consolidated, run the three controls
+(accuracy on a hand-counted passage; can-OVER-count; can-MISS), and report floor/ruled/ceiling.
+**Derive family membership by CONSOLIDATION TARGET, never by word occurrence** — the standing law the
+`cistern`/`immersion pool` near-miss produced.
+
+---
+
+## §7 · C-19's SUB-FORM RECOUNT — SCOPED AS ITS OWN LANE
+
+**Dispatchable cold from this section.** The cheapest high-value next lane: it is ruled, unrun, and
+**blocks two of DW-1's six cars.**
+
+### 7.1 The gate
+
+C-19 (chair, 2026-08-24): *"Recount `~55` and `~35` mechanically and pin both as integers with
+mutants."* **No lane has run it. The two integers do not exist.** DW-1d and DW-1e cannot state an
+exit criterion (E5, E6).
+
+### 7.2 Exact inputs
+
+| | |
 |---|---|
-| 53 × landed `ROOM_KINDS` (28) | **0** |
-| 53 × landed `FURNISHING_KINDS` (22) | **0** |
-| 53 × landed `JOINT_KINDS` (5) | **0** |
-| 53 × B11's known 20 | **1** — `cistern` |
+| **Source** | `refs/preserve/research-dossiers-2026-08-23` = `029268fe579b2cbd64e9941b66e77639133f072e`, path `charters/draft-DWELLINGS-CHARTER.md` (237,547 B / 3,070 lines) — ⚠ **ORPHAN ref: ground truth for RESEARCH, never for ENGINE STATE** |
+| **CIRCULATION span** | **§2.4, lines 809–848** (3,827 B). Claim at **L826**: *"9 top-level classes; ~55 sub-forms"* |
+| **STORAGE span** | **§2.5, lines 849–885** (3,004 B). Claim at **L851**: *"~35 sub-forms (CIRC §4.4)"* |
+| **Other sites carrying the claims** | **L1047** (`subForm, // §2.4's ~55`), **L1894**, **L2992–2993**. **All must move together** — same discipline as §1.2's four `82` sites |
+| **Token shape** | backticked `UPPER_SNAKE`, `·`-separated, nested inside `{...}`; a few carry `/` alternates (`TRESAUNCE/ALURE`, `RAW/PRODUCT`) |
 
-**Adding 53 fixture members costs B11 exactly ONE new collision, not 53.** `cistern` is already a
-CELL × STORAGE collision in the known 20 and becomes **three-way** (CELL × STORAGE × FIXTURE). It is
-a deliberate member — the fixture gate's Checkpoint 3 records that a naive vessel-family sweep nearly
-struck it on a prose mention of "stored-water vessel", and it survived by being re-derived by
-consolidation target rather than word occurrence.
+### 7.3 ⚠ FIRST-PASS SIGNAL — not the ruled figures
 
-⚠ **Two substring hazards, which are not set collisions but will make a naive arm vacuous:**
-`grep "bar"` matches landed `barrel` **and** new `drawbar` **and** new `barred grille`. R-INST-6
-flagged the `drawbar`/`bar` collision independently. **This is the `dais` trap exactly** — the charter
-already records that a bare `grep "'dais'"` arm "would be red forever and would then be widened until
-it proved nothing". Every B11 arm must match the member spelling, never the bare substring.
+Ran the naive extraction this lane. **This is a SIGNAL, not an answer** — the same caution the chair
+imposed on the fixture gate's 84%.
 
-### 5.5 What the resized gate costs
+| | Claim | Naive distinct | Minus classes/buckets/polarities | Signal |
+|---|---|---|---|---|
+| CIRCULATION | ~55 | **86** | ~**60** (less 9 classes, 2 alias halves, 5 width, 4 length, 6 licence rungs) | ⛔ **understated** |
+| STORAGE | ~35 | **69** | ~**52** (less ~10 top-level classes, 7 polarity terms) | ⛔ **understated** |
+
+**Both claims are understated, the same direction as the fixture list's 82 → 135.** The lane's job is
+to turn the signal into a ruled figure by adjudicating each token.
+
+⭐ **One B11 arm is already discharged by this pass: CIRCULATION × STORAGE collisions = 0.**
+
+### 7.4 The lane's obligations
+
+1. Adjudicate every token: **sub-form** vs **top-level class** vs **width/length bucket** vs
+   **licence rung** vs **polarity**. The naive count conflates all five.
+2. Report **floor / ruled / ceiling** with a stated rule, as the fixture gate did.
+3. Run **three controls**: accuracy (hand-count one class, match it); can-OVER-count (remove a
+   terminator, see it inflate); can-MISS (run a deliberately narrower rule, see it drop).
+4. **Name the denominator on every count.**
+5. Cross the two sets against each other and against `CELL_KINDS`, `FIXTURE_KINDS`, `PARTIS`,
+   `JOINT_KINDS`, `RECESS`, `SUBDIVISION`, **ENVELOPE** — feeding §8's resized B11.
+6. Move **all five** claim sites together (L826, L851, L1047, L1894, L2992–2993).
+7. ⚠ `\b` is not honoured by `git grep -E`; `grep` here is ugrep and fails silently on bounded
+   repetition. **Use node.**
+
+**Estimated cost: one read-only lane, no worktree, no gate** — the same shape as TE-DW-FIX.
+
+---
+
+## §8 · B11 RESIZED
+
+### 8.1 The (b) 147 by class — the framing corrected DOWNWARD
+
+Chair's §551.9 said 147 tokens belong to other vocabularies. **Measured, only 55 do.**
+
+| Class | N | What it is |
+|---|---|---|
+| **BR** | **39** | another **existing** DW vocabulary — room, yard/zone, circulation, storage bay, water zone ✓ |
+| **BX** | **16** | declared **RECESS / SUBDIVISION** ✓ — ⭐ **and DW-1b already owns both** (architecture titles it *"fixtures, `RECESS`, `SUBDIVISION`"*) |
+| ⛔ **BE** | **73** | **ENVELOPE** — no charter vocabulary owned it; **now ruled its own (§6)** |
+| **BS** | **19** | not a fitting in **any** vocabulary — commodities, activities, states, movables |
+
+`39+16+73+19 = 147` ✓. **The "other vocabularies" class is 55, not 147 — over-counted by 92.**
+
+### 8.2 ⭐ The 53 cost B11 exactly ONE collision
+
+| Cross | Collisions | Denominator |
+|---|---|---|
+| 53 × landed `ROOM_KINDS` (28) | **0** | 53 |
+| 53 × landed `FURNISHING_KINDS` (22) | **0** | 53 |
+| 53 × landed `JOINT_KINDS` (5) | **0** | 53 |
+| 53 × B11's known 20 | **1** — `cistern` | 53 |
+
+`cistern` becomes **three-way** (CELL × STORAGE × FIXTURE). It is a deliberate member: the gate's
+Checkpoint 3 records a naive vessel-family sweep nearly striking it on the prose "stored-water vessel",
+and it survived by consolidation-target derivation.
+
+### 8.3 `JOINT_KINDS` is missing from B11's crossed set, and it collides
+
+Measured over the 147: `stair`, `external stair`, `stair turret`, `cage under stair` — **4 tokens
+against the landed `JOINT_KINDS` member `stair`**, exact match on the bare token. **Eleven more collide
+with landed `ROOM_KINDS`**: `store` ×5, `kiln` ×2, `stall` ×2, `main`, `study` (plus `clamp` from the
+(c) set routed to `ROOM_KINDS.kiln`).
+
+### 8.4 The resized cost
 
 | | Chartered | Resized |
 |---|---|---|
-| vocabularies crossed | **5** | **8** — add `JOINT_KINDS` (landed, closed, already colliding), `RECESS`, `SUBDIVISION` |
-| name collisions to assign an owner | **20** | **21** (`+cistern`, now three-way) **+ 15** landed-vocabulary collisions inside the 147 (`stair` ×4, `store` ×5, `kiln` ×2, `stall` ×2, `main`, `study`) = **36** |
-| arms | one uniqueness arm | **two** — uniqueness (a name in two vocabularies) **and homing** (a token in none). They are the same defect class from opposite sides and one arm cannot see both. |
-| substring-hazard arms | not chartered | **2** (`bar`-family), on the `dais`-trap discipline |
-| ⛔ blocked-on | — | **a chair ruling on the ENVELOPE**: 73 tokens want a vocabulary that does not exist. Mint it, route it to the massing train with D-10, or record the deferral in §K with a reason. **It cannot be assigned an owning vocabulary because there is no vocabulary to assign.** |
+| vocabularies crossed | **5** | **9** — add `JOINT_KINDS` (landed, closed, already colliding), `RECESS`, `SUBDIVISION`, **`ENVELOPE`** |
+| names to assign an owner | **20** | **21** (`+cistern`, three-way) **+ 15** landed collisions in the 147 (`stair` ×4, `store` ×5, `kiln` ×2, `stall` ×2, `main`, `study`) = **36** |
+| arms | one uniqueness arm | **two — uniqueness** (a name in two vocabularies) **and homing** (a token in none). Same defect class from opposite sides; one arm cannot see both |
+| substring-hazard arms | not chartered | **2** (`bar` family), on the `dais`-trap discipline |
+| blocked-on | — | ✅ **CLEARED by ruling 4** — the ENVELOPE now has a vocabulary to be assigned to |
 
-**The honest cost statement.** B11 does not go from 20 to 147. It goes from *one arm over 20 names in
-5 vocabularies* to **two arms over 36 names in 8 vocabularies, plus one open chair ruling that no
-amount of measurement can close.** The gate is roughly twice the work; the ENVELOPE ruling is the
-long pole, and it is a decision, not a measurement.
+**Honest statement: B11 does not go 20 → 147. It goes from one arm over 20 names in 5 vocabularies to
+two arms over 36 names in 9 vocabularies.** Roughly twice the work, and **ruling 4 removed the one
+part no measurement could close.**
 
 ---
 
-## §6 · EVERY PLACE MY MEASUREMENT DISAGREES WITH THE CHARTER OR THE DISPATCH
+## §9 · THE `interior/` PATH CITATIONS — NAMED BY LINE, SO THEY ARE CORRECTED NOT RE-FOUND
+
+Real paths at the slot are **`src/domain/interior/…`**. The charter writes them without the
+directory. A lane grepping the literal path gets **zero hits and reads it as decay** — the exact
+instrument class §A exists to guard.
+
+**Line-numbered citations (actionable, therefore dangerous) — FIVE, not three:**
+
+| Charter line | Reads | Correct |
+|---|---|---|
+| **L512** | `interiorModel.js:83-86` | `src/domain/interior/interiorModel.js:83-86` |
+| **L539** | `interiorModel.js:79-87` · `PROSPERITY_TIERS` (`src/data/constants.js:92`) ✓ | `src/domain/interior/interiorModel.js:79-87` |
+| **L568** | `interiorTemplates.js:140` and `:166` | `src/domain/interior/interiorTemplates.js:140`, `:166` |
+| **L754** | `interiorTemplates.js:35` … `:50` (D6) | `src/domain/interior/interiorTemplates.js:35`, `:50` |
+| **L1003** | `interiorTemplates.js:29` … `:172` (C-22) | `src/domain/interior/interiorTemplates.js:29`, `:172` |
+
+**Bare mentions, no line number (lower risk, fix while there):** L661, L772, L1084.
+**Already correct:** L658 writes `src/domain/interior/interiorEdits.js` in full.
+
+---
+
+## §10 · THE 17 DISAGREEMENTS — BOTH DIRECTIONS
 
 | # | Source | Says | Measured at `c3289244d` | Direction |
 |---|---|---|---|---|
 | 1 | charter §F.0 | CH-3 **OUTSTANDING** | **LANDED** — 14 commits, `minTier` 36 → 10 | charter understates progress |
-| 2 | charter §F.0 | CH-5 **OUTSTANDING** | **LANDED** — `MF-CH5` LANDED, `alchemy` out of `ARCANE_INST_TAGS`; **G3 discharged** | charter understates progress |
-| 3 | charter §F.0 | CG-2 "has no landing at any ref" | code **LANDED**, packet DRAFT; `TC4_ROW_BYTES_BAND` now derived | charter understates progress |
-| 4 | charter §B | `exclusiveGroup` **deleted**; **81 of 420**; **~130** names | **not deleted** (7 occurrences unchanged); **30 of 420**; **123** names | charter **overstates** the blast radius |
+| 2 | charter §F.0 | CH-5 **OUTSTANDING** | **LANDED**; `alchemy` out; **G3 discharged** | charter understates progress |
+| 3 | charter §F.0 | CG-2 "no landing at any ref" | code **LANDED**, packet DRAFT | charter understates progress |
+| 4 | charter §B | `exclusiveGroup` **deleted**; **81/420**; **~130** | **not deleted** (7 occurrences); **30/420**; **123** | charter **overstates** blast radius |
 | 5 | charter §D/§G/§H/§I | fixtures **82** | **135** | charter understates |
-| 6 | charter §I C-25 | "treat 82 as PROVISIONAL until it runs" | the gate **has run** | discharged |
-| 7 | charter §G DW-5d | rewrite to `count(furnace where flued) ≤ flueCount` | ⛔ `flueCount` is **0 of 2,185 src files** — still unexecutable | **the ruling breaks; reported, not routed around** |
-| 8 | charter §G / architecture | DW-1b acceptance **4 arms / +4 titles** | **7 arms / +7**; wave 30 → **33** | charter understates |
-| 9 | architecture | DW-1a/1b **"DECLARED SHIFT: NONE"** | they move a byte-pinned public artifact — **charter's B10 correction is right** | architecture wrong, charter right |
-| 10 | architecture `:1568` | DW-1c/1d/1e/**1f** parallel | charter §F.4 serializes 1f — divergence **unrecorded in §I** | unlogged conflict |
-| 11 | charter paths | `interiorTemplates.js` / `interiorModel.js` / `interiorEdits.js` | real paths are `src/domain/**interior/**…` | false-absence hazard |
-| 12 | dispatch | 147 tokens belong to **other vocabularies** | only **55** do; **73** are ENVELOPE (no vocabulary exists) and **19** belong nowhere | dispatch **overstates** by 92 |
-| 13 | dispatch | resize B11 by the 147 | the 53 add exactly **1** collision; the resize is 20 → **36** names across **8** vocabularies, in **2** arms | **cheaper in names, dearer in shape** |
-| 14 | dispatch | DW-1 can't build — CH-6 moves catalog-derived figures | ⛔ **REFUTED.** The generated artifact is **byte-identical** across a 32-commit gap in which CH-3, CH-5 and CG-2 all landed; CH-6's file is **not a generator input**; CH-5 moved **0** name keys. **No DW-1 figure is CH-6-derived.** | **dispatch premise does not hold for DW-1** |
-| 15 | dispatch / my own first hypothesis | CH-6 and DW-1a/1b would collide on the compendium artifact | **REFUTED by the same measurement.** Recorded because a tested refutation beats an untested worry. | my hypothesis wrong |
-| 16 | `LANE-LAW.md` | census `titles 21017 / suiteTitles 5847` | **21026 / 5848** at the slot | lane law stale |
-| 17 | charter §I | 25 conflicts, C-21 closed | C-17 and C-25 are now **discharged** by the gate; the DW-1f parallelism divergence (#10) is **unlogged** | ledger drift |
+| 6 | charter §I C-25 | "PROVISIONAL until it runs" | the gate **has run** | discharged |
+| 7 | chair §552.4 | attributes carry the finer distinctions | ⛔ **no fixture-attribute mechanism exists** | **rule was unimplementable — ruling 1 fixes it** |
+| 8 | chair §551.6 → the rewrite | `count(furnace where flued) ≤ flueCount` | ⛔ `flueCount` = **0 of 2,185 src files** | **ruling broke; ruling 2 fixes it** |
+| 9 | charter / architecture | DW-1b **4 arms / +4** | **7 arms / +7**; wave 30 → **33** | charter understates |
+| 10 | architecture | DW-1a/1b **"DECLARED SHIFT: NONE"** | they move a byte-pinned public artifact | architecture wrong, **charter right** |
+| 11 | architecture `:1568` | DW-1c/1d/1e/**1f** parallel | charter §F.4 serializes 1f — **unlogged in §I** | unlogged conflict |
+| 12 | charter paths | `interiorTemplates.js` etc. | `src/domain/**interior/**…` — **5 line-numbered sites** | false-absence hazard |
+| 13 | chair §551.9 | 147 belong to other vocabularies | only **55**; 73 ENVELOPE, 19 nowhere | **chair over-counted by 92** |
+| 14 | dispatch | resize B11 by the 147 | 53 add **1**; resize is 20 → **36** across **9** vocabularies in **2** arms | cheaper in names, dearer in shape |
+| 15 | dispatch premise | DW-1 gated on CH-6 | ⛔ **REFUTED** — artifact byte-identical across the gap; CH-6's file not a generator input; CH-5 moved 0 name keys; **control fires** | **premise withdrawn by the chair** |
+| 16 | my own first hypothesis | CH-6 and DW-1a/1b collide on the compendium artifact | **REFUTED by the same measurement** | **my hypothesis wrong — recorded** |
+| 17 | draft L826 / L851 | `~55` circulation, `~35` storage sub-forms | naive distinct **86** / **69** — both **understated** ⚠ signal, not ruled | draft understates |
+
+✅ **Closed since first report:** `LANE-LAW.md`'s stale census tuple — re-stamped by the chair to
+`21026/5848`, packets 179, slot `c3289244d`.
 
 ---
 
-## §7 · WHAT I DID NOT DO
+## §11 · WHAT I DID NOT DO
 
-1. **No repo writes, no worktree, no vitest, no `npm run check*`, no packet, no commit, no pin.**
-   Two build lanes are live and the gate is serial.
-2. **I did not amend the charter.** The four sites carrying `82` (§1.2) are named, not edited.
-3. **I did not take the L1 attribute ruling (§1.4).** Two branches costed, one recommended.
-4. **I did not extend the granularity rule further.** The fixture gate's Reading B (striking `bier`,
-   `touchstone`, `die/stamp`, `mould`, `scrutiny urns`) was offered and refused by the chair;
-   I have not revived it.
-5. **I did not rule on the ENVELOPE.** 73 tokens want a vocabulary that does not exist; minting one,
-   routing it to the massing train, or deferring it in §K is a chair decision, not a measurement.
-6. **I did not re-run the fixture gate.** I re-derived its arithmetic from its own artifacts and
-   confirmed every figure; the extraction itself I did not repeat.
+1. **No repo writes, no worktree, no vitest, no `npm run check*`, no packet, no commit, no pin, no push.**
+2. **I did not amend the charter.** All sites named by line, none edited.
+3. **I did not adjudicate the ENVELOPE** (§6.1) — costed at sample grade with a stated range.
+4. **I did not rule the ENVELOPE's CAR** (§6.3) — (a) recommended, J-DW0-2 named as the explicit cost.
+5. **I did not rule C-19's integers** (§7.3) — first-pass signal only, marked as such.
+6. **I did not extend the granularity rule further.** The gate's Reading B (striking `bier`,
+   `touchstone`, `die/stamp`, `mould`, `scrutiny urns`) was offered and refused by the chair; not revived.
+7. **I did not re-run the fixture gate** — re-derived its arithmetic from its own artifacts and
+   confirmed every figure.

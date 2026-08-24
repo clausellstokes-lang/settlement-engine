@@ -43,6 +43,24 @@ correct it. Check which regime you are in: `ls -d .husky/_`.
 ⛔ NEVER wrap `npm run check*` in gate-mutex — it self-deadlocks (exit 3 = mutex gave up, NOT a red).
    Run `npm run check:tail` BARE, fresh shell, `; echo TRUE_EXIT=$?`.
 ⛔ `--poolOptions.threads.*` DOES NOT EXIST in vitest 4.1.8 — it exits 1 with ZERO tests collected.
+⚠ **NEVER KEY A STALE-LOCK RULE TO A REMEMBERED PID.** Read the pid **out of the lock dir** and
+test *that* one: `P=$(cat /tmp/settlementforge-vitest-gate.lock/pid); ps -p "$P"`. Observed
+2026-08-24: a lane reported "the lock is held by PID 29027" — 29027 was alive but was **not** the
+holder; the lock belonged to a different live gate. A rule keyed to the wrong pid either fails to
+clear a genuinely stale lock or clears a live one. ⛔ And **never kill an in-flight gate to tidy
+up** — it may hold the mutex, and a killed holder leaves a stale lock that blocks every sibling
+lane. Let it drain.
+
+⛔⛔ **THE GATE READS THE WORKING TREE, NOT A COMMIT (added 2026-08-24, TE-CH-7).** Any edit made
+while a gate is IN FLIGHT splits the run across two trees — the early validators see the old one,
+`test:ratchet`/`build`/`verify:dist` see the new. The result is neither a pass nor a fail but a
+**verdict about a tree that never existed**. Launch a gate only when the tree is FINAL, or re-run
+after the last edit. This is the sibling of the re-staging law: pre-commit's `eslint --fix` rewrites
+bytes AFTER you measured them; this rewrites the tree WHILE you measure it. **Both yield a green
+that describes bytes you did not ship.**
+⚠ **A contaminated green is not a green** — pin such a tip as `wip-*`, never `holding-*`, so nobody
+downstream reads it as landable.
+
 GREEN means all three: `TRUE_EXIT=0` AND `[gate-tail] exit: 0` AND free disk >= 300 MB at end.
 An exit code with no collected-test count is NOT a verdict.
 

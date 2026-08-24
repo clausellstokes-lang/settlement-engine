@@ -88,3 +88,43 @@ input; CH-5 moved 0 catalog name-keys.
 ## RESUME POINT
 DONE: everything. Lane complete, standing down.
 NEXT: nothing. Chair reads `laneDWPREP-BRIEF.md`; §6 is the disagreement table, §4.5 the dispatch call.
+
+## CHECKPOINT 4 — FINAL. Chair's four rulings folded. Session ending; successor handoff.
+
+DELIVERABLE ON DISK: `laneDWPREP-BRIEF.md` — **read its §0 first, it states where the document stops.**
+
+### The four rulings, all folded
+1. **RECORD MAP (branch A)** — `FIXTURE_KINDS` becomes `{kind, attrs}` + `FIXTURE_FOLD`. Two new arms:
+   TOTALITY (10 heads declare a domain) and CONSOLIDATION (no folded spelling is itself a kind;
+   mutant = re-add `crucible`). ⛔ **DW-1b = 7 arms / +7 titles; wave census 30 -> 33; the `+6 eff`
+   estimate was sized for 60 members, not 113 — and records triple, not double. RE-CUT IT.** → brief §2
+2. **4a/4b SPLIT** — 4a live at DW-1b (totality + unflued-EXISTS; mutant = set every `flued` true).
+   4b (`<= envelope.flueCount`) deferred to **DW-2b** with a named home. → brief §3
+3. **NO CH-6 GATE for DW-1** — 3 instruments + a live control. → brief §5.4
+4. **ENVELOPE its own vocabulary** — costed ~20 members (floor 18 / ruled ~20 / ceiling 73),
+   ⚠ SAMPLE GRADE not adjudicated. ⭐ `service{flue}` is the producer that unblocks arm 4b.
+   ⛔ The CAR is a separate call: DW-1g recommended, **J-DW0-2 ("41 cars stands") is the cost.** → brief §6
+
+### The four `82` sites that must move TOGETHER to `135`
+charter L570 (§D taxonomy row) · L107 (§G DW-1 EXIT) · L210 (§H G8) · L79 (§I C-25, discharge the flag)
+
+### The five `interior/` citations to correct (NOT three — line-numbered ones are the dangerous set)
+L512 · L539 · L568 · L754 · L1003 → all need `src/domain/interior/…`.
+Bare mentions, lower risk: L661, L772, L1084. Already correct: L658.
+
+### C-19 lane, dispatchable cold → brief §7
+Source `029268fe5:charters/draft-DWELLINGS-CHARTER.md`. CIRC **L809-848** (claim ~55 at L826);
+STOR **L849-885** (claim ~35 at L851). Five claim sites move together: L826, L851, L1047, L1894,
+L2992-2993. ⚠ FIRST-PASS SIGNAL ONLY: naive distinct **86** circ / **69** stor — both understated,
+same direction as 82->135. ⭐ CIRC x STOR collisions = **0**, one B11 arm already discharged.
+Use node — `git grep -E` ignores `\b` and ugrep fails silently on bounded repetition.
+
+### Record findings
+✅ LANE-LAW re-stamped by the chair (21026/5848, packets 179, slot c3289244d) — CLOSED.
+⚠ Unlogged conflict: architecture `:1568` puts DW-1f parallel, charter §F.4 serializes it. §I has no row.
+
+## RESUME POINT — LANE COMPLETE, STANDING DOWN
+DONE: everything. Four rulings folded, brief written to disk, receipt closed.
+NEXT: nothing from me. Successor reads `laneDWPREP-BRIEF.md` §0 (completeness map), then §7 to
+dispatch the C-19 lane and §6.3 for the one open chair call (the ENVELOPE car vs J-DW0-2).
+ZERO repo writes at any point in this lane.
