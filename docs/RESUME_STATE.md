@@ -51,6 +51,8 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 02:00 CDT 08-24: §536 — stripping STOPPED at source + guarded; C2PA hard-binds to bytes so no
+# derivative can carry one. ⛔⛔ lane worktrees have NO husky shim — every worktree commit bypassed pre-commit.
 # ⭐⭐⭐ 01:09 CDT 08-24: §535 — AI media CLEAR (one paid account, terms Wayback-verified at generation).
 # ⛔ provenance clause binds 08-27 (3 days) → TE-AIP-1 fixing the pipeline. Only Cohort A (7.4 MB) remains unlicensed.
 # ⭐⭐⭐ 01:06 CDT 08-24: §534 — violation STOPPED: 234 deleted, 104 CC0 restored. A missing charge fails

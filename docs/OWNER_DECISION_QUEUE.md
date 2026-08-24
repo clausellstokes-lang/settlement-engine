@@ -23022,3 +23022,95 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   Service Specific Terms; Higgsfield's pricing page) **as unread, with the
   failed positive control shown, rather than as findings** — which is the
   standard the chair has been asking for all night, met without being asked.
+
+## §536 — THE STRIPPING WAS **LIVE** AND IS NOW STOPPED AT SOURCE; ⭐ THE CHAIR'S "APPROVAL-GATED DOWNLOAD" PREMISE WAS WRONG AND THE LANE'S REPLACEMENT ARGUMENT IS BETTER; ⛔ **A LANE WORKTREE HAS NO HUSKY SHIM — EVERY WORKTREE COMMIT ALL PROGRAM LONG HAS SILENTLY BYPASSED PRE-COMMIT** (2026-08-24 02:00 CDT)
+
+- **§536.1 THE READING HELD, AND THE PIPELINE WAS INDEED STILL STRIPPING.**
+  `scripts/optimize-backgrounds.mjs` and `scripts/optimize-landing-backgrounds.mjs`
+  are both tracked `sharp` pipelines with **no metadata keep**, measured on a
+  real credited file (`public/evolution/city.jpg`): both produced `-BARE-`,
+  and `.keepMetadata()` preserved credit + IPTC + XMP + EXIF at **+5.1% WebP /
+  +5.6% JPEG**. Refuted in the good direction: **there is no ffmpeg anywhere
+  in the repo** — every hit is a "no ffmpeg on this machine" disclaimer and
+  `encode-legs.sh` is not in the tree or its history, so the video strip path
+  is out-of-repo and not live here. Tip `08f39dba4` (pinned), **based on the
+  current slot — no rebase owed**.
+- **§536.2 ⭐ MY PREMISE WAS WRONG, AND THE LANE'S REPLACEMENT ARGUMENT IS
+  STRONGER THAN THE ONE I GAVE IT.** I said re-fetching originals was
+  approval-gated. **They are on local disk** at
+  `~/Desktop/settlementforge-marketing-masters/` — 82 media files, **32
+  carrying a C2PA manifest and 25 the Google credit plus a SynthID marker** —
+  so the human-readable credit is recoverable first-hand with no vendor
+  round-trip. **But that does not make the MANIFEST recoverable, and the real
+  reason is better than mine:** a C2PA manifest **hard-binds to the bytes it
+  was issued for**, so **no resized derivative can carry a valid manifest
+  however it is obtained** — re-attaching one yields a manifest that FAILS
+  VALIDATION, which is worse than none. A derivative may lawfully carry a new
+  *ingredient* manifest, but minting one needs a signing identity the estate
+  does not hold. ⭐ And the clinching evidence is in our own tree:
+  **`realm-journey.mp4` has a valid manifest precisely because it was never
+  re-encoded.** That is a proof by surviving instance, and it settles the
+  question the chair had only hedged.
+- **§536.3 WHAT LANDED, AND HOW IT WAS PROVED.** `.keepMetadata()` in both
+  pipelines — proved by **lifecycle round-trip rather than by reading**: a
+  credited file planted at the optimizer's input, both optimizers run, and the
+  credit, IPTC tag and XMP verified **through into both the `.webp` twin and
+  the `-1400.jpg` landing variant**, budgets held, working tree restored
+  digest-exact. A provenance register for all **75** files under the four AI
+  roots (6 carrying markings, 46 AI-and-bare, 23 origin `unrecorded`) with the
+  restorable/gone determination, the cohort-A boundary, the `bg.mp4` note and
+  the indemnity risk as pinned prose. A **20-test guard** that refuses an
+  unregistered file under a media root, refuses a marked file that loses its
+  marker, holds the bare count as a **shrink-only ratchet**, and requires
+  every `sharp` script to be declared with re-encoders keeping metadata —
+  **four live mutations each convicting exactly its own arm** against a
+  clean-green control. ⭐ **The roster arm earned itself on its first run** by
+  catching `scripts/gen-organic-logo.mjs`, which imports sharp **dynamically**
+  and which the lane's own `from 'sharp'` census had missed. Notices section 5
+  in both the `.md` and the served `.html`, naming generator, model and date,
+  **hedging cohort A without asserting an origin**, and stating why a manifest
+  cannot come back. **Payload +2,362 B, all of it the notices page; `git diff`
+  over all four media roots is EMPTY — not one pixel or container byte moved**
+  (chair-verified: the only `public/` path in the diff is the notices page).
+- **§536.4 COHORT A IS ENUMERATED FOR THE FIRST TIME — AND DERIVING IT EXPOSED
+  A LYING INSTRUMENT.** Its membership "was never enumerated anywhere" until
+  now. **`git log --diff-filter=A` reports the ADDING commit**, so six
+  `*.orig.jpg` created 2026-07-18 with June content, and six files added
+  2026-06-05 then *overwritten* by a later commit, **both land in the wrong
+  cohort**. Membership must come from the **last-touching** commit. Also
+  recorded: `landing/city-1400.jpg` and `world-map-1400.jpg` are stale
+  derivatives of June sources whose parents are now Higgsfield paintings, so
+  **the next optimizer run migrates two rows across the licence boundary** —
+  a moving boundary, now watched by the register.
+- **§536.5 THE DEFERRAL, WITH A CONSTRAINT I WOULD NOT HAVE THOUGHT OF.** R3 —
+  writing metadata into the 46 bare files — is deferred to its own car: it
+  needs three byte-surgery injectors (JPEG APP1, WebP VP8X, MP4 uuid box),
+  each owing a pixel-identity control. **JUDGMENT RATIFIED:** ship the floor
+  plus the notice now, because **the notice discharges disclosure for all 52
+  immediately while a restore is worthless until the pipelines stop
+  stripping** — and byte surgery on shipped MP4s deserves its own controls.
+  ⚠ And the constraint the lane added unprompted: **a restore must not stamp
+  "Made with Google AI" onto the ten plates carrying only an `hf-job-id`,
+  because which model made those is not established.** Refusing to assert an
+  unestablished fact, in a car whose whole purpose is provenance.
+- **§536.6 ⛔⛔ THE FINDING WITH THE WIDEST REACH: A LANE WORKTREE HAS NO HUSKY
+  SHIM, SO `git commit` THERE BYPASSES PRE-COMMIT SILENTLY AND SAYS NOTHING.**
+  Chair-verified independently: `core.hooksPath` is `.husky/_`, the main
+  checkout has it, **the lane worktree does not**. So **every worktree commit
+  this program has made — fifty-plus landings' worth — ran with no
+  pre-commit**, and the standing law "prove every committed blob's sha256
+  equals the measured bytes" was confirming that nothing changed **because the
+  hook was never running**, not because it ran and behaved. The safety net was
+  the lanes' own explicit `eslint` and `--fix --dry-run` runs all along. **Not
+  a crisis — but every "hooks ON" claim in fifty receipts is technically
+  false, and the mitigation must now be stated as what it actually is.** The
+  lane proved its own commits by hand (`npx lint-staged --diff`, exit 0, no
+  re-stage). Standing law amended: **a lane runs lint-staged explicitly and
+  says so; it may not claim hook coverage it does not have.**
+- **§536.7 ONE MORE CENSUS TRAP.** **A template-literal `it()` title inflates
+  the census by its parts** — 19 tests walked as **+21 titles** — the mirror
+  of the loop-registered-title hazard, and invisible because the file stays
+  credited either way. Both titles were made static and the delta fell to
+  exact (`+1/+0/+1/+20/+5`). Battery at the tip: 47 files / 377 tests,
+  `TRUE_EXIT=0`; eslint 0. Seats: STACK-3 · AIP-1 holding; the memory index is
+  at 15,383 B and a fold is owed before the next entry.
