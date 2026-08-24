@@ -26249,3 +26249,34 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   standing verdicts, and routes the world-shaping variation ranges to the
   tuning surface. The ledger and the architecture now say the same thing in
   both places a reader could look.
+
+## §602 · REG-1 SEALS — THE WAVE PASSED BY REFUTING ITS OWN FLOOR (2026-08-24 ~18:40 CDT)
+
+- **§602.1 ⭐⭐ RULED: PASS, WITH THE CHARTERED FLOOR RE-BASED — the floor was
+  the chair's measurement artifact, not the wave's failure.** The specimen's
+  +23.9%/−41% turns out to be a morphological CLOSE applied to a raster mask
+  — it bridged the very slots and packing wedges the charter forbids fusing,
+  and the instrument grid could not even resolve the 0.035-unit party gap
+  (proved by varying only the grid, with the rule recorded before measuring).
+  The wave's honest achievement: the party-gap residual closed EXACTLY where
+  `decideGap` already ruled `party` — §571.4's finding cured at the line that
+  caused it — **2,460 fused masses over 6,804 plots · +3.8% mean run · −5.3%
+  fronting masses at the resolving grid · `squint.street` UP ON EVERY LEAF
+  (+9.7% city, +10.6% town, +4.7% village, +13.9% metropolis) · zero
+  standalone blockFront ops, executed · EVERY leaf's op count FALLS (tightest
+  headroom 16 → 88) · censuses 0/0 armed and dormant · dormancy 29/29
+  byte-identical · determinism 29/29 · mutations live with a monotone
+  un-fusion ladder returning the dormant figures to the digit.** Two
+  self-caught defects banked (the zero-tolerance penetration census cured by
+  the law's own PENETRATION_EPS; per-strip front edges merged on extent).
+  **SEALED: `refs/preserve/map-sandbox-reg1-fusion` = `d1b32e339`.**
+- **§602.2 INSTRUMENT REPAIRS OWED TO REG-I0 (named, not silent):** F3's
+  numerator counts drawn subpaths and INVERTS on generative fusion — it must
+  count masses; i6 adopts the party-gap-resolving grid with the lane's
+  pre-recorded rule. The three wrong-way arms (i4 village group mean −6.1%,
+  i5/i1 water −1.4…−3.6%) are handed to REG-3/REG-6 as named inputs, no
+  verdict changed. ⚠ The lane's visual-gate CROPS were not retained on disk —
+  the taste verdict rests on the squint instrument and the already-approved
+  specimen direction; the next judging round re-renders pages from this
+  sealed tip, and the retention rule is now explicit: **judging artifacts are
+  deliverables, never scratch.**
