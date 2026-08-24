@@ -21705,3 +21705,44 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   last undercity car) · WEB-8 (paywall honesty, now holding both B16 rulings)
   · TC-B8-RECON (the displacement loop). Holding roster empty; the next free
   seat takes CG-1b, then CG-2.
+
+## §516 — "WHY IS IMPLEMENTATION SLOWER THAN BEFORE": IT IS, AND THE DOMINANT CAUSE IS THE CHAIR'S — **THE LAST STACKED LANDING WAS #40; LANDINGS 41–48 WERE EIGHT SINGLETONS IN EIGHT GATES** (2026-08-23 21:50 CDT)
+
+- **§516.1 THE FACT.** Landings **32–40 were NINE cars in THREE gates** (the
+  map stack 32–35, the producer train 36–38, UC-0+UC-3 39–40). Landings
+  **41–48 were EIGHT cars in EIGHT gates** — WEB-2, WEB-3, HK-A, UC-1, UC-4,
+  UC-2, CH-1, CG-1, every one a singleton with its own landing lane, its own
+  sweep and its own terminal. At ~80–100 minutes per landing lane that is
+  roughly ten hours where three stacks would have been about four. **The
+  chair stopped stacking after §477 and never noticed.** No lane did anything
+  wrong; the scheduling regressed.
+- **§516.2 THREE REAL SECONDARY CAUSES, none of them the dominant one.**
+  (a) **The procedure per landing grew** — carry-proof at blob level, bundle
+  re-verification, the three-place flip with four non-vacuity controls, the
+  grep arm from ten trees to fifteen, the credited-not-parked check, per-tip
+  exit files. Every layer was added because something bit us, and the sum is
+  a much longer march. (b) **The gate itself got slower**: the suite grew
+  28,748 → 28,924 tests, the sweep from eleven trees to fifteen, and wall time
+  from ~450 s to ~790 s at the new two-thread cap. (c) **The cars got harder**
+  — an early car was one registry row; a recent one is a leaf plus eight arms,
+  nine mutants and five charter corrections.
+- **§516.3 THE FIX, SET AS MACHINERY RATHER THAN INTENTION.** A standing
+  **STACKED-LANDING BRIEF** is written (`695a70c5/scratchpad/STACK-BRIEF-TEMPLATE.md`)
+  so a stack is a template to fill, not a decision to remember: the lawfulness
+  test (disjoint change paths against the LIVE manifest, each car
+  independently proved and pinned), the chain rebase with a carry table per
+  hop, **the census as a SUM OF DELTAS with a sibling control that convicts
+  the arithmetic and not merely the total** (§420), the three-place flip per
+  car, and **ONE sweep and ONE terminal for the whole stack — which is the
+  entire point**. It also carries the §481 turn-split that went unenforced,
+  the thread cap, and the instruction to cite the slot-facts card instead of
+  re-deriving. **The next stack is pre-planned: CH-2 · UC-5 · WEB-8**, disjoint
+  by construction (the catalog and its gate paths · `src/domain/undercity/` ·
+  pricing and `.env.example`), dispatched as ONE lane the moment all three
+  report holding — 170 → 173 packets through a single gate.
+- **§516.4 HONEST ABOUT WHAT WILL NOT SPEED UP.** Stacking cuts gates, not
+  proof. A car still needs its S0, its arms, its convicting mutants and its
+  classification; that is the work that caught a priest rendering as a tavern,
+  a cure that could not work at any value and a test file that parked its own
+  nineteen titles. The lever is gates per car, and it has just been pulled
+  from one-to-one back to three-to-one.

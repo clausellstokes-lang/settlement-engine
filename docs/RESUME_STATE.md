@@ -51,6 +51,8 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 21:50 CDT 08-23: §516 — the slowdown is REAL and the cause is the chair: last stack was #40,
+# landings 41-48 were 8 singletons in 8 gates. Standing stack template written; next stack CH-2+UC-5+WEB-8.
 # ⭐⭐⭐ 21:33 CDT 08-23: §515 — THE BANDS ARE SIGNED AND CLOSED (instrument 029268fe, owner verbatim).
 # §11 band half discharged; TUNING SIGNATURE still outstanding. CG-1b unblocked NOW; DW-1 after CH+CG-2.
 # ⭐⭐⭐ 21:30 CDT 08-23: §514 — THE BANDS ARE SAT. B16: view/interact free, AUTHORING paid at every
