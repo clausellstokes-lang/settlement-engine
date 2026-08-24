@@ -26676,3 +26676,55 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   DW R4 gate (25 changeManifests owed before their waves) stands as the same
   law inside that program. Each just-in-time compile gets its own skeptic
   pass, per the standard.
+
+## §620 · THE AUTHORSHIP ANSWER — TWO ARCHITECTURES CARRY THE OPUS-RUN MARKER (2026-08-24 ~23:55 CDT)
+
+- **§620.1** Owner asked whether anything on the road is architected NOT by
+  Fable. **VERIFIED FROM THE DOCUMENTS' OWN HEADERS:** two charters carry the
+  explicit `[OPUS-RUN · FABLE-VALIDATION OWED]` marker — **the
+  CATALOG-HYGIENE PLAN** (TC-CH-COMPILE) and **THE AD CHARTER**
+  (TC-AD-COMPILE, 17 cars). The DW compile pair carries NO marker (the §236
+  marking convention is binding, so unmarked = Fable-seat; the ruling layer
+  is stamped "Chair: Fable 5" and was §567-reviewed); today's register
+  architecture is chair-authored throughout.
+- **§620.2 THE DEBTS, SCOPED HONESTLY:** the CH plan's content has since
+  been largely RE-DERIVED through Fable-validated landings (CH-1/2A/4/5/6/7
+  all landed with measurement; the DW-0 compile re-measured its CH-3 rows
+  and corrected two of its errors) — the residual Fable validation is owed
+  on the **CH-3 and CH-2B sections, as the MANDATORY FIRST ACT of CH-3's
+  dispatch**. The AD charter has been consumed only at its seam (the A5
+  panel verified J-AD-5 against its text); its **full Fable validation is
+  the MANDATORY FIRST ACT of the AD program's dispatch window** — the §619
+  just-in-time law applied to validation as to compilation.
+
+## §621 · REG-2 SEALS — THE WALL IS DERIVED, THE WEAR IS REAL, AND A SEALED TRACE DEFECT SURFACES (2026-08-25 ~00:05 CDT)
+
+- **§621.1 VALIDATED AND SEALED** at `refs/preserve/map-sandbox-reg2-walls` =
+  `8890e3f3e`. The exits, executed: regime derivation **22/22 by fixture
+  identity** (clear 11 / tangent 11, p = 2.4e-7) · joint coverage **0
+  uncovered over 17 rings** · the wall loudest on **all 12 walled leaves,
+  both arms** (3.21–4.88 against the 3.00 floor) · censuses 0/0/0 ·
+  dormancy + determinism 29/29 byte-identical (with the lane catching its
+  own earlier vacuous 3-file pass) · five mutations each redding their arm ·
+  **13 judging artifacts RETAINED per §602's law** and the set sent to the
+  owner. ⭐ **The §614.2 wear arm was built IN-WAVE and DERIVED, not
+  stubbed** — `exposure × (1 − upkeep)` off highWater.deficit, prosperity
+  and the military read — and the §611 synergy CONFIRMED by measurement:
+  the demoted high-water leaf reads the highest wear of its tier; siege
+  `kept` where its twin plague reads `weathered`; the arm is op-NEGATIVE.
+- **§621.2 RULINGS:** **(i) the two §217 raises are SIGNED under §604**
+  (town 4,600 → **5,400** · city 6,400 → **6,800**; metropolis holds;
+  render time three orders inside the §603 envelope) — the byte-edit rides
+  the next sandbox wave's touch of the harness; vetoable. **(ii) THE
+  COASTAL-TRACE DEFECT IS CHARTERED** as its own small fabric car: rule 3's
+  half-ring filter is a DISTANCE where `isInWater` is the law, sailing one
+  curtain across its own harbour in the sealed base; the lane rightly cured
+  the INK (wetEdges published as not-wall, refused-ground ink 0.78 → 0.07)
+  and refused the TRACE — the re-aim is a corpus-wide declared shift and now
+  has its charter. **(iii) the i8 trace-table row** for the new §15r op
+  class commits at the instruments' next touch (the text is in the receipt;
+  the lane rightly refused to game the ratchet). **(iv) tower-density
+  fillers correctly NOT built** — a tuning-signature surface; ratified.
+  **(v) the reference-zoom lesson banks:** a reference's zoom level is part
+  of what it says — hf261's forty-yard fill and hf103's page-scale comb are
+  both true at their own distances.
