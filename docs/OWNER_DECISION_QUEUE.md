@@ -26054,3 +26054,40 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   the standard for how buildings are drawn; the oblique glyphs survive at
   most as an accessory lens. Q3's final disposition lands with REG-3's
   charter, citing this row.
+
+## §594 · CH-6 COLLECTED — THE VIOLATION DECOMPOSES INTO A CURE, A KNOWN RECEIPT DEFECT, AND A CONTENT GAP (2026-08-24 ~16:25 CDT)
+
+- **§594.1 THE MEASUREMENT THAT RE-FRAMES IT** (totality control: the lifted
+  harness reproduces all 525 golden hashes, 0 mismatches): the magic arm
+  strikes 28 of 311 rows at `magicExists:false`, and **the keyword list
+  decides exactly ONE of them on its own** (`Dragon resident`). The faith
+  cohort is OVER-DETERMINED — shelf + tag + keyword + declared licence — so
+  removing the six faith keywords frees nothing by itself. **The cure as
+  shipped:** the vocabulary drops its six faith words (39→33, doctrine in the
+  header), and `Druid Circle` + `Elder Grove Council` lose the redundant
+  `arcane` tag and move `low` → `none` — the two rows that are genuinely
+  cultural. Declared shifts executed: golden 30 of 525 field-level (the two
+  rows' tiers exactly), zero roster/instance moves over 2,625 settlements,
+  census +3 attributed per file by restoration, eight sidecars as one set,
+  packets 182. Gate 1's one red was the lane's own un-anchored negative
+  assertion — paid at the instrument's lawful anchor path with the
+  emptied-collection mutant proving the bare form would have lied.
+- **§594.2 RULINGS.** **J1 RATIFIED — the gate half was rightly built, swept,
+  and REVERTED:** routing the world law through the declared licence frees
+  real content (Druid Circle 0→36, Healer 0→48, Elder Grove 0→17) but reds
+  the shipped `world_law_magic` receipt on 264 of 504 magic-free settlements,
+  because the receipt reads the record's own `category: 'Magic'` taxonomy
+  field as a magic claim — the BANKED coherence-receipt defect, now with a
+  measured consequence. **CHARTERED as CH-6b** (two cars, in order: cure the
+  receipt's taxonomy read, then route the licence), queued behind the REG
+  priority. **J2 ACCEPTED — §541.8's premise is REFUTED for the Healer:** the
+  row as authored casts Cure Wounds for 10 GP; holding `low` is correct, and
+  the deity-doctrine gap is a CONTENT GAP — the catalog holds no cultural
+  divine healer — **routed to the content train** as a chartered row. J3/J4
+  ratified. Six sibling sites scoped out by name in the packet stand as the
+  next catalog-hygiene menu.
+- **§594.3 THE LANDING MECHANICS.** The slot moved beneath the lane (the docs
+  car, §588), so the chair rebased the five commits onto `714a398b7` —
+  conflict-free, tree clean, and the **diff-of-diffs control reads REBASE
+  CARRIES IDENTICAL CONTENT**. The re-proof gate runs at the rebased tip
+  `e4ed27f48`; on a chair-validated green, MF-CH6 lands as the 64th car.
