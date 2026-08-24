@@ -330,7 +330,7 @@ const CATEGORY_INSTITUTION_HINTS = Object.freeze({
   religious:  /temple|shrine|church|abbey|cathedral|monastery|chapel/i,
   merchant:   /market|guild|hall|broker|exchange|warehouse|bank|docks/i,
   craft:      /smithy|forge|workshop|carpenter|tannery|brewery/i,
-  criminal:   /tavern|den|gang|black\s+market/i,
+  criminal:   /\btaverns?\b|\bdens?\b|\bgangs?\b|\bblack\s+markets?\b/i, // WORD-ANCHORED, and TWINNED with the criminal row in the other hint table: bare `den` matched Resi-den-t / War-den-s. Both copies are pinned byte-equal in tests/domain/npcProfile.test.js.
   arcane:     /mage|wizard|college|alchemist|library|laboratory|tower|sanctum/i,
 });
 
@@ -371,7 +371,7 @@ const POWER_DOMAIN_HINTS = Object.freeze({
   religious:  /temple|shrine|church|abbey|cathedral|monastery|chapel/i,
   economy:    /market|guild|hall|broker|exchange|warehouse|bank|docks/i,
   craft:      /smithy|forge|workshop|carpenter|tannery|brewery|guild|hall/i,
-  criminal:   /tavern|den|gang|black\s+market/i,
+  criminal:   /\btaverns?\b|\bdens?\b|\bgangs?\b|\bblack\s+markets?\b/i, // WORD-ANCHORED, and TWINNED with the criminal row in the other hint table: bare `den` matched Resi-den-t / War-den-s. Both copies are pinned byte-equal in tests/domain/npcProfile.test.js.
   arcane:     /mage|wizard|college|alchemist|library|laboratory|tower|sanctum/i,
 });
 

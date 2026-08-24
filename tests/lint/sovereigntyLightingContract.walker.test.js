@@ -6496,7 +6496,39 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // The arithmetic closes: 366 + 2,159 = 2,525 still, and the whole walked delta +0/+0/+0/
     // +9/+1 is one file's, established by removing that one file's change and reading the
     // slot tuple back exactly.
-    files: 2525, parked: 366, credited: 2159, titles: 21026, suiteTitles: 5848,
+    // == RE-RECORDED 2026-08-24 BY THE TE-CH-7 LANDING — ONE CAR, ONE EXISTING TEST FILE ==
+    // 2,525/366/2,159/21,026/5,848 -> 2,525/366/2,159/21,033/5,849 at slot c3289244d.
+    // TE-CH-7 word-anchors the criminal institution name vocabulary in src/domain/npcProfile.js
+    // (bare `den` read 'Resident'/'Warden' as criminal, so a criminal NPC's institutionLink
+    // could resolve to a parish priest). Its ONLY test-file change is a pin block appended to
+    // tests/domain/npcProfile.test.js — an EXISTING, CREDITED file — so `files`, `parked` and
+    // `credited` cannot move and did not.
+    // +0 files / +0 parked / +0 credited / +7 TITLES / +1 SUITE TITLE.
+    // ⚠ PARKED IS UNCHANGED AT 366, and it is earned rather than lucky: all seven new titles
+    //   are spelled as string literals — no template literal (which would double-count by its
+    //   PARTS) and no `test.each`/`for…of` generating tests. The block's two loops both run
+    //   INSIDE a single named test, which is the SP-D idiom this census keeps re-teaching.
+    // THE ATTRIBUTION IS A SINGLE-FILE CONTROL, the one shape that cannot be ambiguous.
+    //   `git show {slot}:tests/domain/npcProfile.test.js` (19,977 bytes, printed before use;
+    //   blob 846df16b2) restored over the car's copy, with the tuple still at the SLOT reading,
+    //   ran 33 passed of 33 at exit 0 — reverting THIS CAR'S WHOLE TEST DELTA lands on the slot
+    //   tuple to the digit, and no other figure moved with it. The car's file was restored
+    //   afterwards and compared IDENTICAL (md5 d3a171376e74dd107676572fe544be81).
+    //   ⭐ That control also proves `files`/`parked`/`credited` unmoved BY EXECUTION rather than
+    //   by argument: those three assertions precede `titles`, and they passed at the slot
+    //   figures while the car's SOURCE edit was still applied — a source edit cannot move a
+    //   test census, and here that is measured rather than assumed.
+    // TWO NEGATIVE CONTROLS, ONE PER MOVED FIGURE, each substitution guarded against a no-op
+    // edit by md5 and the file restored to 68e0317721d0482beb1a15f7a951dd40:
+    //   TITLES  "the live TEST-title count moved ...: expected 21033 to be 21032" — 1 failed
+    //           of 33, exit 1.
+    //   SUITE   "the live SUITE-title count moved ...: expected 5849 to be 5848" — likewise,
+    //           and it proves the LAST assertion is reachable and no earlier red masks it.
+    //   ⭐ The unmoved figures take no substitution control here: the single-file revert above
+    //   already read them back at the slot figures BY EXECUTION, which is this car's own split
+    //   rather than a re-proof of the instrument.
+    // The arithmetic closes: 366 + 2,159 = 2,525 still.
+    files: 2525, parked: 366, credited: 2159, titles: 21033, suiteTitles: 5849,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
