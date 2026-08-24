@@ -2126,7 +2126,6 @@ export const institutionalCatalog = {
     Adventuring: {
       "Multiple adventurers' guilds": {
         required: false,
-        minTier: 'city',
         baseChance: 0.7,
         desc: 'Competing organizations.',
         tags: [],
@@ -2274,7 +2273,6 @@ export const institutionalCatalog = {
     Crafts: {
       'Craft guilds (100-150+)': {
         required: false,
-        minTier: 'metropolis',
         baseChance: 0.7,
         desc: 'Over a hundred distinct craft specializations. A guild for every conceivable trade.',
         tags: ['guild'],
@@ -2284,7 +2282,6 @@ export const institutionalCatalog = {
     Government: {
       'Palace/government complex': {
         required: false,
-        minTier: 'metropolis',
         baseChance: 0.75,
         desc: 'Seat of metropolitan or state government: palace, ministries, audience halls, administrative bureaux.',
         tags: ['civic', 'legal'],
@@ -2292,7 +2289,6 @@ export const institutionalCatalog = {
       },
       'Multiple court buildings': {
         required: false,
-        minTier: 'metropolis',
         baseChance: 0.65,
         desc: 'Specialized courts (commercial, criminal, appellate, ecclesiastical) operating simultaneously.',
         tags: ['legal', 'civic'],
@@ -2302,7 +2298,6 @@ export const institutionalCatalog = {
     Defense: {
       'Massive walls and fortifications': {
         required: false,
-        minTier: 'metropolis',
         exclusiveGroup: 'defenseLevel',
         baseChance: 0.5,
         desc: 'Layered wall systems: outer wall, inner wall, citadel ring. Multiple garrison zones and gatehouses.',
@@ -2311,7 +2306,6 @@ export const institutionalCatalog = {
       },
       'Multiple garrisons': {
         required: false,
-        minTier: 'metropolis',
         baseChance: 0.75,
         desc: 'Garrison forces distributed across quarters. No single barracks can secure a metropolis.',
         tags: ['military', 'defense'],
@@ -2321,7 +2315,6 @@ export const institutionalCatalog = {
     Religious: {
       'Parish churches (50-100+)': {
         required: false,
-        minTier: 'metropolis',
         baseChance: 0.8,
         desc: 'Hundreds of parish churches across all districts. The faith is woven into every neighbourhood.',
         tags: ['religious', 'church'],
@@ -2329,7 +2322,6 @@ export const institutionalCatalog = {
       },
       'Great cathedral': {
         required: false,
-        minTier: 'metropolis',
         baseChance: 0.6,
         desc: 'Metropolitan cathedral. Seat of the highest regional religious authority. Pilgrimage destination.',
         tags: ['religious', 'church'],
@@ -2337,7 +2329,6 @@ export const institutionalCatalog = {
       },
       'Major monasteries (5-10)': {
         required: false,
-        minTier: 'metropolis',
         baseChance: 0.55,
         desc: 'Five to ten major monastic houses: scholarly, contemplative, and charitable functions at scale.',
         tags: ['religious', 'monastery'],
@@ -2345,7 +2336,6 @@ export const institutionalCatalog = {
       },
       'Hospital network': {
         required: false,
-        minTier: 'metropolis',
         baseChance: 0.55,
         desc: 'Multiple hospitals and infirmaries across districts. Organized medical care at population scale.',
         tags: ['healing', 'religious'],
@@ -2355,7 +2345,6 @@ export const institutionalCatalog = {
     Magic: {
       'Academy of magic': {
         required: false,
-        minTier: 'metropolis',
         baseChance: 0.4,
         desc: 'Formal institution of arcane learning. Full curriculum, research facilities, visiting scholars.',
         tags: ['arcane', 'education'],
@@ -2364,7 +2353,6 @@ export const institutionalCatalog = {
       },
       "Mages' district": {
         required: false,
-        minTier: 'metropolis',
         baseChance: 0.45,
         desc: 'Quarter inhabited by arcane practitioners: towers, workshops, libraries, reagent merchants.',
         tags: ['arcane'],
@@ -2373,7 +2361,6 @@ export const institutionalCatalog = {
       },
       'Great library': {
         required: false,
-        minTier: 'metropolis',
         baseChance: 0.4,
         desc: 'Largest repository of knowledge in the region: thousands of volumes, map archives, historical records.',
         tags: ['education', 'education'],
@@ -2382,7 +2369,6 @@ export const institutionalCatalog = {
       },
       'Planar embassy': {
         required: false,
-        minTier: 'metropolis',
         baseChance: 0.15,
         desc: 'Formal diplomatic mission from a planar power. Trade, information, occasional intervention.',
         tags: ['arcane', 'planar', 'exotic'],
@@ -2393,7 +2379,6 @@ export const institutionalCatalog = {
     Criminal: {
       "Thieves' guild (powerful)": {
         required: false,
-        minTier: 'metropolis',
         exclusiveGroup: 'criminalPower',
         baseChance: 0.55,
         desc: 'Dominant criminal syndicate. Tolerated because the alternative (gang war) is worse.',
@@ -2402,7 +2387,6 @@ export const institutionalCatalog = {
       },
       'Black market bazaar': {
         required: false,
-        minTier: 'metropolis',
         baseChance: 0.45,
         desc: 'Permanent underground market: contraband, forged documents, illegal services.',
         tags: ['criminal', 'underground'],
@@ -2411,7 +2395,6 @@ export const institutionalCatalog = {
       },
       'Underground city': {
         required: false,
-        minTier: 'metropolis',
         baseChance: 0.25,
         desc: 'Extensive tunnels and catacombs repurposed as criminal and refugee sanctuary.',
         tags: ['criminal', 'underground'],
@@ -2420,7 +2403,6 @@ export const institutionalCatalog = {
       },
       "Assassins' guild": {
         required: false,
-        minTier: 'metropolis',
         baseChance: 0.2,
         desc: 'Professional contract killing. Operates through cutouts, never acknowledged officially.',
         tags: ['criminal'],
@@ -2430,7 +2412,6 @@ export const institutionalCatalog = {
     Economy: {
       'Daily markets': {
         required: false,
-        minTier: 'metropolis',
         baseChance: 0,
         exclusiveGroup: 'marketScale',
         desc: 'Superseded at metropolis scale.',
@@ -2439,7 +2420,6 @@ export const institutionalCatalog = {
       },
       'District markets (5-10)': {
         required: false,
-        minTier: 'metropolis',
         baseChance: 0.8,
         exclusiveGroup: 'marketScale',
         desc: 'Five to ten permanent specialized market districts: grain, livestock, cloth, metals, exotica.',
@@ -2448,7 +2428,6 @@ export const institutionalCatalog = {
       },
       'Merchant guilds (50-100+)': {
         required: false,
-        minTier: 'metropolis',
         baseChance: 0.7,
         desc: 'Dozens of merchant guilds representing every major trade good and route. A formal guild parliament.',
         tags: ['guild', 'trade'],
@@ -2456,7 +2435,6 @@ export const institutionalCatalog = {
       },
       'Banking district': {
         required: false,
-        minTier: 'metropolis',
         baseChance: 0.65,
         desc: 'Consolidated financial quarter: international banking, letters of credit, currency speculation at scale.',
         tags: ['banking', 'trade'],
@@ -2464,7 +2442,6 @@ export const institutionalCatalog = {
       },
       'International trade center': {
         required: false,
-        minTier: 'metropolis',
         baseChance: 0.55,
         desc: 'Hub for international merchant representatives, trade arbitration, and commodity exchange.',
         tags: ['trade', 'market'],
@@ -2472,7 +2449,6 @@ export const institutionalCatalog = {
       },
       'State granary complex': {
         required: false,
-        minTier: 'metropolis',
         baseChance: 0.7,
         desc: 'State-administered granary network holding strategic reserves.',
         tags: ['essential', 'food'],
@@ -2482,7 +2458,6 @@ export const institutionalCatalog = {
     Infrastructure: {
       'Massive prison': {
         required: false,
-        minTier: 'metropolis',
         baseChance: 0.5,
         desc: 'State prison complex: political prisoners, debtors, convicted criminals held separately.',
         tags: ['civic'],
@@ -2490,7 +2465,6 @@ export const institutionalCatalog = {
       },
       'Advanced water infrastructure': {
         required: false,
-        minTier: 'metropolis',
         baseChance: 0.6,
         desc: 'Multiple aqueducts, cisterns, and distributed fountains. City-wide water management at scale.',
         tags: ['essential', 'water'],
