@@ -26890,3 +26890,41 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   (measure-first; it touches the instrument of record). NOT traded, by name:
   the panels, controls-that-can-fail, per-artifact preservation, receipts —
   each paid rent in caught defects tonight.
+
+## §628 · REG-3 SEALS — THE SILHOUETTES SPEAK AT 82%, AND THE ONE MUTE CLASS HAS A DEFECTIVE FIXTURE (2026-08-25 ~03:00 CDT)
+
+- **§628.1 THE BLIND READ, EXECUTED BY A FRESH-CONTEXT READER, SCORED BY THE
+  SHEET'S OWN FORMULA:** passFraction **18/22 = 81.8%** against the 75%
+  target — **PASS**; cannotTellRate an honest 2/24. The validity gate's
+  finding is a diagnosis, not a void: **both decoy false-positives and three
+  of the four wrong rows involve one class — warehouse — and the answer key
+  itself shows the quay-family fixtures rendered at AREA ZERO** (the
+  silhouette extractor missed that family's draw class). **RULED: the round
+  is VALID for five of six classes; the WAREHOUSE class is
+  UNPROVEN-BY-DEFECTIVE-FIXTURE**, carved out by name, owed a re-round after
+  the fixture cure — never counted as passing. The remaining genuine
+  confusion (one church read as craft) is recorded as REG-10 zoom-ladder
+  input.
+- **§628.2 SEALED** at `refs/preserve/map-sandbox-reg3-shapes` = `93fa8a2ca`
+  (the new seal ritual's first run). The wave's own numbers: **§592
+  REVERSED — anchors beat decoys 12 of 12** (from 5 of 12), band-pass 10 of
+  12 from zero; gallery spread proves the family grammar (church 36 distinct
+  tuples; the un-fused mutation collapses it to 2); censuses 0 at a LARGER
+  armed population; dormancy/determinism 29/29; typing derived 100% from
+  fields the fabric already published — nothing guess-typed.
+- **§628.3 RULINGS:** **(i) the lettering-floor save BANKS AS LAW** — the
+  §173 splice was the one pass reserving nothing for itself and armed maps
+  were silently losing every place-name (67→7 text elements); every ration
+  pass now reserves its own floor; **(ii) the diagonal roof-tick cure is
+  FORWARD-ONLY** — the shipped §12 defect (widestAxis returns the diameter)
+  is cured in the armed path; no back-application, preserving the dormancy
+  proof, and the legacy path dies at cutover regardless; **(iii) the §217
+  raises are SIGNED at the measured values** (hamlet 1,400 · village 2,000 ·
+  town 9,300 · city 10,000 · metropolis 14,200) — AND **the ratchet-unit
+  review is chartered**: primitives rose 72% where DOM nodes rose 4–50% and
+  render time not at all, so the op count no longer tracks cost;
+  DOM-nodes-and-render-time are the candidate units at the instruments' next
+  touch, which also owes the two i8 trace rows; **(iv) J-REG3-2 RATIFIED**
+  (the monument's dark value per hf266 now; hf323's white-roofed floor
+  deferred to the zoom ladder, where the plan is thirty units wide instead
+  of seven). Next in the arc: REG-4.
