@@ -189,6 +189,10 @@ async function main() {
   const fabricOptions = {};
   if (process.argv.includes('--fuse')) fabricOptions.frontageFusion = true;
   if (process.argv.includes('--rampart')) fabricOptions.rampart = true;
+  // ⭐ REG-3: `--shapes` arms the shape code (families, slot rolls, the hf208 roof plan, hf323's
+  //   monument projection). Independent of `--fuse` and `--rampart`, so each wave's dormancy is
+  //   provable alone — the standing rule since REG-1.
+  if (process.argv.includes('--shapes')) fabricOptions.shapeCode = true;
   const manifest = [];
   for (const spec of CORPUS) {
     const { settlement, fabric } = buildOne(spec, fabricOptions);

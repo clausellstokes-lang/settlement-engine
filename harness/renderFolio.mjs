@@ -44,6 +44,9 @@
 import { polyPath, linePath, r2, cosI, sinI, TRIG_N, centroid, widestAxis, absArea }
   from '../src/domain/townMap/fabric/fabricGeometry.js';
 import { hashUnit } from '../src/domain/townMap/fabric/fabricRng.js';
+// ⭐⭐⭐ REG-3 · hf208's plan-view roof law and hf323's monument projection. The lens IMPORTS the
+// geometry rather than composing it (§195.0: a lens draws the polygons it is given).
+import { roofPlan, roofDetailFor, breadthOf } from '../src/domain/townMap/fabric/shapeCode.js';
 import { resolveLens, lensAllows, HATCH } from '../src/domain/townMap/fabric/folioLenses.js';
 import { scaleBarFor } from '../src/domain/townMap/fabric/measure.js';
 import { letteringFragment, spliceLettering } from '../src/domain/townMap/fabric/lettering.js';
@@ -1260,8 +1263,26 @@ export function renderFolio(fabric, opts = {}) {
   //    all three went through the ground law (see buildFabric stage 6f), so nothing here is
   //    drawn that the census has not counted.
   {
-    let steads = '', faub = '', lean = '';
+    let steads = '', faub = '', lean = '', foldYards = '', steadRidge = '';
     for (const h of (fabric.habitation || [])) for (const poly of (h.solids || [])) { steads += polyPath(poly); prims.n++; }
+    // ⭐⭐ REG-3 · THE FARMSTEAD'S YARD AND ITS RIDGES. The L of house and barn is already in
+    //    `h.solids` (composed in the fabric and ground-clipped there); what the lens adds is the
+    //    fold-yard the two ranges enclose — hf206's own subject — and the ridge that says each
+    //    range is a roof. ⚠ ARMED ONLY; `shapeVoids` is absent on an unarmed leaf.
+    for (const h of (fabric.habitation || [])) {
+      for (const v of (h.shapeVoids || [])) { foldYards += polyPath(v); prims.n++; }
+      for (const mk of (h.shapeMarks || [])) {
+        if (mk.kind !== 'ridge') continue;
+        // ⚠ SAME RESOLUTION AS §13's: the mark names its solid's INDEX, and `h.solids` is the
+        // list the ground law clipped, so a range the law cut takes its ridge with it.
+        const host = mk.solid != null ? (h.solids || [])[mk.solid] : mk.poly;
+        if (!host || host.length < 3) continue;
+        const c = centroid(host), w = widestAxis(host), hh = w.len * 0.38;
+        steadRidge += `M${r2(c[0] - w.dx * hh)} ${r2(c[1] - w.dy * hh)}L${r2(c[0] + w.dx * hh)} ${r2(c[1] + w.dy * hh)}`;
+        prims.n++;
+      }
+    }
+    if (foldYards) push(`<path d="${foldYards}" fill="${yardTone}" fill-opacity="0.7" stroke="${inkTone}" stroke-width="${INK.yard}" stroke-opacity="0.6"/>`);
     for (const b of ((fabric.faubourgs && fabric.faubourgs.buildings) || [])) { faub += polyPath(b.polygon); prims.n++; }
     for (const b of ((fabric.faubourgs && fabric.faubourgs.leanTos) || [])) { lean += polyPath(b.polygon); prims.n++; }
     if (steads) push(`<path d="${steads}" fill="${shade(MATERIAL_TONE.thatch, 0.04)}" stroke="${inkTone}" stroke-width="${INK.fabric}" stroke-linejoin="round"/>`);
@@ -1269,6 +1290,7 @@ export function renderFolio(fabric, opts = {}) {
     // ⭐ THE LEAN-TO IS DRAWN LIGHTER THAN THE FABRIC. It is a shed against somebody else's
     // wall, not a house — and the value difference is the §5.0e tell doing its work in ink.
     if (lean) push(`<path d="${lean}" fill="${mix(P.paper, P.roofs, 0.55)}" stroke="${inkTone}" stroke-width="${INK.yard}" stroke-linejoin="round"/>`);
+    if (steadRidge) push(`<path d="${steadRidge}" fill="none" stroke="${inkTone}" stroke-width="${INK.detail}" stroke-opacity="0.58" stroke-linecap="round"/>`);
   }
 
   // ── 11c · ⭐⭐⭐ THE ACCESSIBLE LENS'S REAL HATCH GEOMETRY (TC29's §0.0 resolution: "an
@@ -1336,10 +1358,96 @@ export function renderFolio(fabric, opts = {}) {
     for (const [style, ds] of byStyle) push(`<path d="${ds.join('')}" ${style}/>`);
   }
 
+  // ── 12r · ⭐⭐⭐ **THE PLAN-VIEW ROOF LAW (hf208-spec-roof-ticks, the REQUIRED-DETAIL ANCHOR).**
+  //    Armed only. It SUPERSEDES §12 rather than adding to it — the ridge tick below is the same
+  //    accent done crudely, and REG-3's §217 pre-measure named this subtraction before a line of
+  //    ornament was written, because REG-2's armed spend leaves 37 ops at town and 21 at city.
+  //
+  //    hf208's ten clauses, drawn: the outline IS the eaves line (§11 already draws it); GABLE is
+  //    one ridge down the long axis OVERSHOOTING both ends; HIP stops the ridge short and crosses
+  //    four hip lines at the corners; CAT-SLIDE offsets the ridge and steps the eaves; CROSS-GABLE
+  //    meets two ridges in a T; LEAN-TO takes one eaves tick against the parent wall; and the SE
+  //    plane takes ONE VALUE STEP darker — the plate's own "with the hand" row against its own
+  //    "without the hand" anti-exemplar. ⚠ NO DORMER: the DETAIL REGISTER records that no
+  //    plan-view dormer convention exists on any viewed anchor, so none is invented.
+  //
+  //    ⭐ THE GRAIN FOLLOWS THE BUILDING, NOT THE LEFTOVER BUDGET (REG-2 J-REG2-8, by name).
+  //    `roofDetailFor` reads the body's own drawn width in frontages; hf378's ladder is the
+  //    authority — roofs never drop out, but a three-unit body at city density cannot carry a
+  //    four-line hip set and the corpus draws it with its ridge alone.
+  const SHAPE = fabric.shapeCode || null;
+  if (SHAPE && accentBand > 0.25 && !patterned) {
+    const lodKeys = (fabric.lod && fabric.lod.mergedKeys) || new Set();
+    let ridges = '', hips = '', planeD = '', chimD = '';
+    const fusedMembers2 = (fabric.fusion && fabric.fusion.memberKeys) || null;
+    /** one body's roof, whatever list it came out of. */
+    const roofOne = (poly, key, wealth) => {
+      const w = widestAxis(poly);
+      const lenF = w.len / frontage;
+      const detail = roofDetailFor(lenF, breadthOf(poly), INK.detail);
+      if (!detail) return;
+      const form = SHAPE.roofForm[key] || 'gable';
+      const R = roofPlan(poly, form, detail);
+      for (let i = 0; i < R.marks.length; i++) {
+        const mk = R.marks[i];
+        const d = `M${r2(mk.a[0])} ${r2(mk.a[1])}L${r2(mk.b[0])} ${r2(mk.b[1])}`;
+        if (i === 0) ridges += d; else hips += d;
+        prims.n++;
+      }
+      for (const pl of R.planes) { planeD += polyPath(pl.poly); prims.n++; }
+      // hf208 clause 9 · THE CHIMNEY is a small square astride the ridge, drawn only on a house
+      // sound and large enough to carry one — hf379's LIVED-IN stage, and hf90/hf3 draw it on
+      // the houses that read. `wealth` is the fabric's own 100 %-covered field; a hovel gets no
+      // chimney and that absence is a reading, not a saving.
+      // ⚠ THE SIZE TEST IS THE SAME ONE THE REST OF THE PASS USES, and it is why the chimney is
+      // gated on LENGTH rather than on detail alone: MEASURED at town the chimney was 400 of the
+      // pass's 2,511 ops — 16 % — drawn at frontage×0.16 on bodies whose median length is 1.68
+      // frontages, i.e. a mark a tenth the size of the body carrying it.
+      if (detail >= 2 && lenF >= 2.0 && (wealth === 'wealthy' || wealth === 'opulent')) {
+        const c = centroid(poly), k = frontage * 0.16;
+        const t = (hashUnit(`${m.seed}|chim|${key}`) - 0.5) * w.len * 0.5;
+        const cx = c[0] + w.dx * t, cy = c[1] + w.dy * t;
+        chimD += `M${r2(cx - k)} ${r2(cy - k)}L${r2(cx + k)} ${r2(cy - k)}L${r2(cx + k)} ${r2(cy + k)}L${r2(cx - k)} ${r2(cy + k)}Z`;
+        prims.n++;
+      }
+    };
+    for (const p of fabric.parcels) {
+      if (lodKeys.has(p.key) || p.derelict) continue;
+      // ⭐ A FUSED MEMBER'S ROOF IS DRAWN ON THE MASS, NOT ON THE MEMBER. §11a does not draw the
+      // member's outline at all once REG-1 is armed, so a ridge inside it would be a mark with no
+      // body under it — and drawing the mass instead is a NET SAVING, because fusion replaces k
+      // members with one body (REG-1 measured city 2,045 → 1,717 drawn bodies).
+      if (fusedMembers2 && fusedMembers2.has(p.key)) continue;
+      roofOne(p.polygon, p.key, p.wealth);
+    }
+    // ⭐ A FUSED MASS IS ONE CONTINUOUS ROOF AND TAKES A RIDGE — that is what a party-walled
+    // range IS, and hf378 draws exactly this at small-town density. ⛔ IT TAKES NO HIP SET AND NO
+    // PLANE: hf208's law is per BUILDING, and a hip run across a whole terrace asserts one
+    // enormous roof over a dozen holdings. ⚠ Bitten and cured — the first spelling handed the
+    // full plan to fused AND LOD masses and the town crop came back with long diagonals crossing
+    // whole blocks. THE LOD MASS TAKES NOTHING AT ALL: it is a BLOCK of many holdings drawn as
+    // one ground, not a roof, and §11a already gives it its own unit lines.
+    for (const mass of ((fabric.fusion && fabric.fusion.masses) || [])) {
+      const w2 = widestAxis(mass.polygon);
+      if (w2.len / frontage < 0.75) continue;
+      const R2 = roofPlan(mass.polygon, 'gable', 1);
+      for (const mk of R2.marks) { ridges += `M${r2(mk.a[0])} ${r2(mk.a[1])}L${r2(mk.b[0])} ${r2(mk.b[1])}`; prims.n++; }
+    }
+    // THE SE PLANE FIRST, under the marks — one value step, never a gradient (hf208 clause 4).
+    if (planeD) push(`<path d="${planeD}" fill="${shade(roofTone, -0.085)}" fill-opacity="0.55" stroke="none"/>`);
+    if (ridges) push(`<path d="${ridges}" fill="none" stroke="${inkTone}" stroke-width="${INK.detail}" stroke-opacity="0.62" stroke-linecap="round"/>`);
+    // ⚠ THE HIPS ARE LIGHTER THAN THE RIDGE AND THAT IS THE PLATE'S OWN HIERARCHY: on hf208 the
+    // ridge is the heaviest mark on every panel and the hip lines are secondary strokes that
+    // cross at the corners. Drawing them at one weight makes a hipped roof read as a lattice.
+    if (hips) push(`<path d="${hips}" fill="none" stroke="${inkTone}" stroke-width="${INK.detail}" stroke-opacity="0.40" stroke-linecap="round"/>`);
+    if (chimD) push(`<path d="${chimD}" fill="${mix(P.paper, P.ink, 0.55)}" stroke="${inkTone}" stroke-width="${INK.detail}"/>`);
+  }
+
   // ── 12 · ROOF-RIDGE TICKS — the interior detail line that turns a filled quad into a
   //    drawn building. Hard-rationed, one batched path.
   //    ⚠ ZERO ON A PATTERN LENS (see 11c): the hatch has taken over the job and paid for it.
-  if (accentBand > 0.25 && !patterned) {
+  //    ⚠ ZERO WHEN §12r IS ARMED — superseded, never doubled.
+  if (!SHAPE && accentBand > 0.25 && !patterned) {
     // Rationed by SIZE and by the tier's accent band — the ridge is the interior line that
     // turns a filled quad into a drawn building, and a big roof is where it reads. The
     // small end of the fabric carries its ink on its outline alone, which is also what the
@@ -1402,6 +1510,24 @@ export function renderFolio(fabric, opts = {}) {
   // ── 13 · LANDMARKS — §6 archetypes at HEAVIER ink with interior detail lines (ridge
   //    lines, bay divisions, yard walls). These stay individual elements on purpose: each
   //    carries `data-anchor`, and the truth layer hit-tests them.
+  // ── 13p · ⭐⭐ THE PRECINCT VOIDS — hf323's bounded open ground round every rung above the
+  //    shrine. They are drawn in THEIR OWN GROUP, BEFORE the landmarks, and both facts are load-
+  //    bearing. BEFORE, because a precinct is the ground a church stands ON and painting it after
+  //    erases the church. IN THEIR OWN GROUP, because a churchyard is GROUND and not a landmark
+  //    body — and the instrument set proves it matters: with the voids inside `<g id="landmarks">`
+  //    REG-I0's instrument 4 read a 275-unit pale churchyard as one of `town-2`'s four ANCHORS,
+  //    which dragged the leaf's group salience to 0.83 against decoys at 0.84 while every other
+  //    walled leaf passed. ⭐ THE CLASS: **a group id is a classification, and a role given to the
+  //    wrong group is measured as the wrong thing.**
+  if (SHAPE) {
+    let pre = '';
+    for (const lm of fabric.landmarks) {
+      if (!(lm.shapeFamily === 'church' || lm.shapeFamily === 'hall')) continue;
+      for (const v of (lm.voids || [])) { pre += polyPath(v); prims.n++; }
+    }
+    if (pre) push(`<g id="precincts"><path d="${pre}" fill="${yardTone}" fill-opacity="0.8" stroke="${inkTone}" stroke-width="${INK.landmarkMinor}" stroke-opacity="0.85"/></g>`);
+  }
+
   out.push('<g id="landmarks">');
   {
     let ridges = '', bays = '', yards = '';
@@ -1415,16 +1541,91 @@ export function renderFolio(fabric, opts = {}) {
         ? { solids: lm.solids, voids: lm.voids || [], marks: lm.marks || [] }
         : archetypeShape(lm.monumental ? lm : { ...lm, archetype: 'ordinary' });
       const weight = lm.monumental ? INK.landmark : INK.fabric;
-      const fill = lm.monumental
-        ? mix(roofTone, P.ink, lm.prominent ? 0.52 : 0.34)
-        : shade(roofTone, (hashUnit(`${lm.instanceKey}|tone`) - 0.5) * 0.15);
+      // ⭐⭐⭐ REG-3 · hf323's MONUMENT PROJECTION, and it is the cure for the §592 salience
+      // finding. The DETAIL REGISTER §7 states the rule: *"a monument from above is a WALL-PLAN,
+      // not a roof — thick wall poché… interior floors WHITE when roofed, HATCHED when
+      // unroofed… the deliberate contrast against the roof-plan fabric around it."*
+      // ⛔ THE SHIPPED FILL RAN THE OTHER WAY. `mix(roofTone, P.ink, 0.34–0.52)` puts the
+      // monument DARKER than the fabric, toward the ink — and MEASURED at the sealed tip
+      // (i4, 18 leaves) the anchors beat their matched decoys on only 10 of 18 leaves, with
+      // BASE-town's parish church reading mass-mean 107.57 against a fabric mean of 107.91:
+      // **a difference of one third of one luminance unit.** A body the exact value of what
+      // surrounds it is not an anchor, whatever its outline.
+      // ⚠ THE POCHÉ IS THE STROKE, NOT A SECOND BODY: one heavy outline round a pale floor is
+      // hf323's own drawing and costs no extra primitive.
+      // ⭐ THE WALL-PLAN CLASSES ARE THE CORPUS'S OWN, NOT A BUDGET FLAG'S. DETAIL-REGISTER §7
+      // ("MONUMENTS — how great buildings are individually rendered") is exemplified by churches,
+      // cathedral closes, castle baileys and curtains: the ECCLESIASTICAL and CIVIC/MILITARY
+      // families. A parish church is a monument in the corpus's sense whether or not it cleared
+      // this leaf's monumental budget, so the projection follows the FAMILY.
+      const poche = SHAPE && (lm.shapeFamily === 'church' || lm.shapeFamily === 'hall');
+      // ⛔⛔ AND THE VALUE IS hf266's, NOT hf323's, BECAUSE THE ZOOM DECIDES WHICH PLATE SPEAKS —
+      // J-REG2-4's law again (*"a reference's zoom is part of what it says"*), and this lane paid
+      // to learn it. hf323 draws a WHITE roofed floor inside a thick poché, and that is right at
+      // ITS register: its cathedral plan is thirty-odd units across. MEASURED at ours, a parish
+      // church is SEVEN units across and its parts are ~40 sq units apiece, so a poché at hf323's
+      // relative thickness covers about 44 % of the body and the pale interior never reaches the
+      // reader: i4 read the "cured" anchors at massMean 132–142 against a fabric mean of 115,
+      // WORSE than the sealed base, while decoys sitting partly on pale street ground read 160
+      // and 181. **A white floor you cannot see is not a white floor.**
+      // ⭐ hf266-zoom-cathedral-close IS THE PLATE FOR OUR REGISTER — a monument-in-a-town, drawn
+      // as a DARK body against tan town fabric beyond its close wall — and §9.7's own value-step
+      // law says how far: a clear step, not a nudge. The GEOMETRY stays hf323's (plan complexity
+      // carries rank, which is the finding this wave exists for); only the VALUE follows the
+      // plate drawn at the scale we draw at. hf323's white floor is DEFERRED to the zoom ladder
+      // (REG-10), where a building-zoom register is exactly what gets built.
+      const fill = poche
+        // ⭐⭐ ONE VALUE FOR EVERY MONUMENT, AND `prominent` BUYS NOTHING HERE — which is this
+        // wave's own headline finding applied to its own ink. hf323's law is that **complexity of
+        // PLAN carries rank**; a second tint step for prominence would carry rank in TONE beside
+        // it, which is the tone-hierarchy §571.4's third cure exists to replace. MEASURED, the
+        // two-step version split the corpus in half: prominent bodies read massMean 54 (Δ 1.57,
+        // pass) and non-prominent ones 89–94 (Δ 0.42–0.57, fail) on the SAME leaf, so the tint
+        // step — not the geometry — was deciding which anchors a reader found.
+        ? mix(roofTone, P.ink, 0.74)
+        : lm.monumental
+          ? mix(roofTone, P.ink, lm.prominent ? 0.52 : 0.34)
+          : shade(roofTone, (hashUnit(`${lm.instanceKey}|tone`) - 0.5) * 0.15);
+      // ⛔ THE POCHÉ IS A FRACTION OF ITS BODY, NOT A FIXED MULTIPLE, AND MEASUREMENT FORCED IT.
+      // A flat `INK.landmark * 1.9` is 3.0 view units at town — and the parts it draws are five
+      // to eight units across, so the outline ATE the pale interior and i4 read the cured anchor
+      // at massMean 119 against a fabric mean of 115. hf323's poché is thick RELATIVE to its
+      // building (a wall about a fifth of a small plan's width); expressed as a constant it is a
+      // wall the size of the church. ⚠ §42/§43 VALUE: 0.22 of the body's own breadth, floored at
+      // the landmark rung so a poché is never lighter than the ordinary landmark weight it
+      // replaces. UNSOAKED; rides the tuning signature.
+      const pocheW = (poly) => Math.max(INK.landmark, Math.min(INK.landmark * 1.9, breadthOf(poly) * 0.22));
+      // ⭐⭐ THE FORECOURT VOID FIRST, AND THE ORDER IS THE WHOLE OF ITS CORRECTNESS. hf323 draws
+      // every rung above the shrine standing INSIDE a bounded precinct, so the precinct is
+      // ground the body stands on — painted after the body it would erase the church. ⚠ Bitten:
+      // the first spelling drew it in the void loop below the solids and the town's parish
+      // church vanished under its own churchyard.
       for (const p of sh.solids) {
-        push(`<path d="${polyPath(p)}" fill="${fill}" stroke="${inkTone}" stroke-width="${weight}" stroke-linejoin="round" data-anchor="${esc(lm.anchorKey)}"/>`);
+        const wt = poche ? pocheW(p) : weight;
+        push(`<path d="${polyPath(p)}" fill="${fill}" stroke="${inkTone}" stroke-width="${r2(wt)}" stroke-linejoin="round" data-anchor="${esc(lm.anchorKey)}"/>`);
         prims.n++;
       }
-      if (!lm.monumental) continue;
-      for (const v of sh.voids) { push(`<path d="${polyPath(v)}" fill="${roadTone}" stroke="${inkTone}" stroke-width="${INK.landmarkMinor}"/>`); prims.n++; }
-      for (const mk of sh.marks) {
+      // ⚠ THE MARKS FOLLOW THE SAME RULE AS THE BODY. Armed, a shape family's interior detail
+      // is what makes the class read (hf323's ladder is DETAIL, not size), so a body that got a
+      // family gets its marks; unarmed, the monumental gate stands exactly as it did.
+      if (!lm.monumental && !(SHAPE && lm.shapeFamily)) continue;
+      if (!poche) {
+        for (const v of sh.voids) { push(`<path d="${polyPath(v)}" fill="${roadTone}" stroke="${inkTone}" stroke-width="${INK.landmarkMinor}"/>`); prims.n++; }
+      }
+      for (let mk of sh.marks) {
+        // ⭐⭐ A MARK RESOLVES THROUGH ITS SOLID'S INDEX, NOT THROUGH A POLYGON IT CARRIES.
+        // ⛔ THE DEFECT THIS CLOSES IS institutionShapes.js's OWN NAMED CLASS, arriving one
+        // surface further out: a mark that carries its own copy of a body is geometry the ground
+        // law never touched, so when `enforceGround` clipped a church's nave between two
+        // burgages the bay ladder went on spanning the UNCLIPPED nave and drew a rake of ticks
+        // across the fabric. MEASURED by eye on the first town crop and cured here: the mark
+        // reads `sh.solids[mk.solid]`, which IS the clipped body, and a solid the law emptied
+        // takes its marks with it.
+        if (mk.solid != null) {
+          const host = sh.solids[mk.solid];
+          if (!host || host.length < 3) continue;
+          mk = { ...mk, poly: host };
+        }
         if (mk.kind === 'ridge') {
           const c = centroid(mk.poly), w = widestAxis(mk.poly), h = w.len * 0.36;
           ridges += `M${r2(c[0] - w.dx * h)} ${r2(c[1] - w.dy * h)}L${r2(c[0] + w.dx * h)} ${r2(c[1] + w.dy * h)}`;
@@ -1448,6 +1649,53 @@ export function renderFolio(fabric, opts = {}) {
         } else if (mk.kind === 'pit') {
           push(`<circle cx="${r2(mk.x)}" cy="${r2(mk.y)}" r="${r2(mk.r)}" fill="${mix(P.paper, P.ink, 0.34)}" stroke="${inkTone}" stroke-width="${INK.detail}"/>`);
           prims.n++;
+        } else if (mk.kind === 'graves') {
+          // ⭐ hf344/hf323 · GRAVES CLUSTER SOUTH OF THE CHURCH, as tilted tiny rectangles. The
+          // side is a SLOT the building's own age biased; the count rises with the age too, and
+          // both come off the record rather than off a dial.
+          const c = centroid(mk.poly), w = widestAxis(mk.poly), px2 = -w.dy, py2 = w.dx;
+          const g = frontage * 0.16;
+          for (let i = 0; i < mk.n; i++) {
+            const u = hashUnit(`${lm.instanceKey}|grave|${i}`);
+            const v = hashUnit(`${lm.instanceKey}|graveV|${i}`);
+            const t = (u - 0.5) * w.len * 0.72;
+            // SOUTH is +y in view space; `ring` scatters both sides, `south` holds one.
+            const sgn = mk.side === 'ring' ? (v < 0.5 ? -1 : 1) : (py2 >= 0 ? 1 : -1);
+            const off2 = (0.55 + v * 0.40) * sgn;
+            const gx = c[0] + w.dx * t + px2 * off2 * (w.len * 0.30);
+            const gy = c[1] + w.dy * t + py2 * off2 * (w.len * 0.30);
+            bays += `M${r2(gx - g)} ${r2(gy - g * 0.5)}L${r2(gx + g)} ${r2(gy - g * 0.5)}L${r2(gx + g)} ${r2(gy + g * 0.5)}L${r2(gx - g)} ${r2(gy + g * 0.5)}Z`;
+            prims.n++;
+          }
+        } else if (mk.kind === 'arcade') {
+          // ⭐ hf266/hf323 · THE OPEN GROUND FLOOR IS DRAWN AS A ROW OF COLUMN DOTS. R-INST-1
+          // makes the arcade the civic parti's one load-bearing feature, and the corpus draws an
+          // arcade exactly this way — never as a line.
+          const c = centroid(mk.poly), w = widestAxis(mk.poly), px2 = -w.dy, py2 = w.dx;
+          let cross = 0;
+          for (const q of mk.poly) { const d2 = Math.abs((q[0] - c[0]) * px2 + (q[1] - c[1]) * py2); if (d2 > cross) cross = d2; }
+          const rr = frontage * 0.13;
+          for (const sgn of (mk.both ? [1, -1] : [1])) {
+            for (let i = 0; i < mk.n; i++) {
+              const t = ((i + 0.5) / mk.n - 0.5) * w.len * 0.86;
+              const ax = c[0] + w.dx * t + px2 * cross * 0.82 * sgn;
+              const ay = c[1] + w.dy * t + py2 * cross * 0.82 * sgn;
+              bays += `M${r2(ax - rr)} ${r2(ay)}A${r2(rr)} ${r2(rr)} 0 1 0 ${r2(ax + rr)} ${r2(ay)}A${r2(rr)} ${r2(rr)} 0 1 0 ${r2(ax - rr)} ${r2(ay)}Z`;
+              prims.n++;
+            }
+          }
+        } else if (mk.kind === 'passage') {
+          // ⭐ R-INST-4 §1.2 · THE GATE PASSAGE. The bay is ALREADY A GAP in the street range
+          // (the solids skip it), so what is drawn here is the two jambs — the passage read as
+          // an opening rather than as a doorway glyph.
+          const c = centroid(mk.poly), w = widestAxis(mk.poly), px2 = -w.dy, py2 = w.dx;
+          let cross = 0;
+          for (const q of mk.poly) { const d2 = Math.abs((q[0] - c[0]) * px2 + (q[1] - c[1]) * py2); if (d2 > cross) cross = d2; }
+          for (const sgn of [1, -1]) {
+            const jx = c[0] + w.dx * w.len * 0.5 * sgn, jy = c[1] + w.dy * w.len * 0.5 * sgn;
+            yards += `M${r2(jx - px2 * cross)} ${r2(jy - py2 * cross)}L${r2(jx + px2 * cross)} ${r2(jy + py2 * cross)}`;
+            prims.n++;
+          }
         }
       }
     }
@@ -2422,7 +2670,23 @@ export function renderFolio(fabric, opts = {}) {
     reserved,
     // §12: chrome is not exempt from the ration law. The splice spends what the draw pass
     // left and no more — and because it runs LAST, the budget it has is known exactly.
-    budget: Math.max(0, CEIL - prims.n),
+    //
+    // ⛔⛔ **THE NAMES HAD NO FLOOR, AND THE PASS THAT MUST NEVER GIVE WAY WAS THE ONLY ONE
+    // RESERVING NOTHING FOR ITSELF.** §12's own ration law says an ACCENT gives way and a
+    // BUILDING, a STREET — and now a NAME — never does, and every earlier pass honours it by
+    // subtracting `estimateLetteringOps` from its own budget. The splice then took
+    // `CEIL - prims.n` with no reserve of its own, so the instant ANY pass carried a leaf past
+    // the ceiling the expression clamped to zero and the leaf lost EVERY WARD LABEL, EVERY
+    // MARGINAL NOTE AND EVERY EVENT CAPTION — the exact outcome the priority exists to forbid,
+    // arriving silently and only on the leaves that were already the hardest to read.
+    // ⚠ MEASURED AT REG-3, WHICH IS HOW IT WAS FOUND: armed, `town` fell from 67 `<text>`
+    // elements to 7, `city` 83 → 7 and `metropolis` 84 → 7; `village`, which stays under its
+    // ceiling, was untouched at 50 → 50. The defect is LATENT AT THE SEALED TIP — REG-2's
+    // +594 stopped just short of it — and it would have fired on the first wave that did not.
+    // ⭐ THE CURE IS THE LAW, WRITTEN DOWN: the letters' own estimated cost is their FLOOR. A
+    // pass that overruns the ceiling now shows as an overrun in the primitive count, which is
+    // what a ratchet is for, instead of paying for itself with the map's place-names.
+    budget: Math.max(estimateLetteringOps(fabric, m, LENS), CEIL - prims.n),
     allowNotes: lensAllows(LENS.id, 'marginalia'),
   });
   prims.n += lettering.ops;

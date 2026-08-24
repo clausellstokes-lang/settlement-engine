@@ -293,13 +293,31 @@ export function archetypeSolids(lm) {
  * @param {Array<any>} landmarks
  * @returns {{ bodies:number, solids:number, maxReachOfSize:number, reason:string }}
  */
-export function attachSolids(landmarks) {
+export function attachSolids(landmarks, shape = null) {
   let solids = 0, maxReach = 0;
   for (const lm of landmarks) {
-    const sh = archetypeSolids(lm.monumental ? lm : { ...lm, archetype: ordinaryArchetype(lm) });
+    // ⭐⭐⭐ REG-3 (L-REG-8 as amended by A3) · THE SHAPE CODE. When armed, the body is composed
+    // from the family's ANATOMY + INVARIANTS + SLOTS instead of from the one fixed arrangement
+    // below, and the composition is recorded on the landmark so the census, the lens and the
+    // silhouette fixture all read ONE shape. ABSENT when unarmed, so every legacy byte stands.
+    // ⛔⛔ AND IT FIRES FOR EVERY INSTITUTION, NOT ONLY THE MONUMENTAL ONES, BECAUSE THE FIRST
+    // SPELLING GATED ON `monumental` AND MEASUREMENT REFUTED IT. `monumental` is a BUDGET FLAG
+    // (`i < scale.monumentalBudget`), not a fact about the building: at town **only 11 of 91**
+    // institutions carry it, and the town's own PARISH CHURCH is not among them — so it fell
+    // through `ordinaryArchetype` to a featureless 1.15 × 0.95 block, and the wave's church
+    // family never fired on the one leaf its silhouette read is about.
+    // ⭐ hf323 SETTLES IT: its ladder starts BELOW any budget — a field chapel and a chapel of
+    // ease are drawn as churches, smaller and simpler, not as blocks. The RUNG governs the
+    // composition, so a rung-0 church is still barely more geometry than the block it replaces
+    // and the §5 silhouette budget is respected where it actually speaks (visual WEIGHT), while
+    // the CLASS becomes readable — which is this wave's charter.
+    const sh = shape
+      ? shape.composeInstitution(lm, shape.ctx)
+      : archetypeSolids(lm.monumental ? lm : { ...lm, archetype: ordinaryArchetype(lm) });
     lm.solids = sh.solids;
     lm.voids = sh.voids;
     lm.marks = sh.marks;
+    if (sh.family) { lm.shapeFamily = sh.family; lm.shapeSlots = sh.slots; lm.shapeMembers = sh.members; }
     solids += sh.solids.length;
     for (const poly of sh.solids) {
       for (const p of poly) {

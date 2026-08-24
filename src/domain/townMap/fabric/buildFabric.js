@@ -42,6 +42,7 @@ import { claimClipper, enforceGround, overlapping } from './groundLaw.js';
 import { TOUCH_EPS } from './reservedGround.js';
 import { sweepLateBodies, sweepStateBodies } from './lateGround.js';
 import { frontInstitutions, attachSolids } from './institutionShapes.js';
+import { composeInstitution, composeFarmstead, roofFormFor, typeBody, aspectOf } from './shapeCode.js';
 import { waterClaims, deriveBridges, moorWaterBound, deriveWaterGates, clipFieldsToWater } from './waterWorks.js';
 import { tenurePattern, seatWorksiteHabitation, seatKeepers, buildFaubourgs, GLACIS_THRESHOLD, faubourgSeriousness } from './habitation.js';
 import { reserveCommons, enclosureRead, inCommons } from './commons.js';
@@ -555,7 +556,14 @@ export function buildFabric(settlement, model, options = {}) {
   // preference and gives way. It runs AFTER the fronting pass on purpose — the absolute is
   // the last word, so it can never be overwritten by the preference.
   const moored = moorWaterBound({ landmarks: seatedAll, rel: waterRel });
-  const bodies = attachSolids(seatedAll);
+  // ⭐⭐⭐ REG-3 (L-REG-8 / A3) · THE SHAPE CODE HANDLE. `null` when the feature is not armed, and
+  // `attachSolids` then composes exactly what it composed before, byte for byte. The context is
+  // the WORLD'S THUMB on every slot roll: the settlement's own prosperity and age, and nothing
+  // this file had to invent. See shapeCode.js for why each is admissible.
+  const shapeHandle = options.shapeCode === true
+    ? { composeInstitution, ctx: { seed: seeding.seed, prosperityRank, age: Number.isFinite(options.year) ? options.year : presentYear(s), waterside: !!(waterRel && waterRel.mode && waterRel.mode !== 'dry'), compoundR: COMPOUND_R, compounded: new Set(compoundPass.seated.map((l) => l.instanceKey)) } }
+    : null;
+  const bodies = attachSolids(seatedAll, shapeHandle);
 
   // ── STAGE 5 · THE CIRCUIT — ⭐⭐⭐ MOVED AHEAD OF THE GROUND LAW (§200) ───────────
   // ⛔⛔ IT USED TO RUN AFTER, AND THAT ORDER WAS THE OWNER'S BUG. The wall was traced at
@@ -924,6 +932,20 @@ export function buildFabric(settlement, model, options = {}) {
     },
     seeding,
   });
+  // ⭐⭐ REG-3 · THE FARMSTEAD FAMILY. `habitation.kind` is ALREADY TYPED at 100 % coverage
+  // (farmstead 491 · grange 13 · cottage 92 · shelter 18, measured over 614 dwellings), so this
+  // is a CONSUMPTION of the fabric's own record, not a new classification. The composed body
+  // replaces `dwelling.solids` BEFORE stage 6f's second ground-law pass, so the L and its yard
+  // are clipped like every other footprint — §195.0's own rule, and the reason this line is
+  // here rather than in the lens.
+  if (shapeHandle) {
+    for (const d of habitation.dwellings) {
+      if (d.kind !== 'farmstead' && d.kind !== 'grange') continue;
+      const fs2 = composeFarmstead(d, { seed: seeding.seed, prosperityRank });
+      d.solids = fs2.solids; d.shapeVoids = fs2.voids; d.shapeMarks = fs2.marks;
+      d.shapeFamily = fs2.family; d.shapeSlots = fs2.slots; d.shapeMembers = fs2.members;
+    }
+  }
   const keepers = seatKeepers({
     landmarks: seatedAll, frontage: packed.frontage, water: waterRel,
     inTown: (x, y) => {
@@ -1107,6 +1129,45 @@ export function buildFabric(settlement, model, options = {}) {
   const faubourgsDrawn = {
     ...faubourgs, buildings: drawn.faubourgBuildings, leanTos: drawn.faubourgLeanTos,
   };
+  // ── ⭐⭐⭐ STAGE 8b · REG-3 · **THE SHAPE CODE'S ORDINARY ARM.**
+  //    It runs beside the fusion and for the same reason: the ROOF FORM is a fact about the body
+  //    the leaf finally DRAWS, so it is read off `drawn.parcels` after the ground law, the access
+  //    law and the LOD merge have all had their say. It writes nothing back — the parcels are
+  //    untouched, so every census sees the bodies it saw before — and it publishes a keyed table
+  //    the lens reads. ⚠ The form is READ OFF THE BUILDING'S OWN FACTS (`wing`, `gable`,
+  //    `backHouse`), never rolled free; see shapeCode.roofFormFor.
+  const shapeCode = shapeHandle ? (() => {
+    /** @type {Record<string,string>} */ const roofForm = {};
+    /** @type {Record<string,number>} */ const formCount = {};
+    /** @type {Record<string,number>} */ const typeCount = {};
+    for (const p of drawn.parcels) {
+      const f = roofFormFor(p, String(seed), aspectOf(p.polygon));
+      roofForm[p.key] = f;
+      formCount[f] = (formCount[f] || 0) + 1;
+      const t = typeBody(p, 'parcel').type;
+      typeCount[t] = (typeCount[t] || 0) + 1;
+    }
+    for (const lm of seatedAll) {
+      const t = lm.shapeFamily || typeBody(lm, 'landmark').type;
+      typeCount[t] = (typeCount[t] || 0) + 1;
+    }
+    for (const d of habitation.dwellings.concat(keepers.dwellings)) {
+      const t = d.shapeFamily || typeBody(d, 'habitation').type;
+      typeCount[t] = (typeCount[t] || 0) + 1;
+    }
+    for (const b of drawn.faubourgBuildings) {
+      const t = typeBody(b, 'faubourg').type;
+      typeCount[t] = (typeCount[t] || 0) + 1;
+    }
+    const typed = Object.values(typeCount).reduce((a, b) => a + b, 0);
+    return {
+      roofForm, formCount, typeCount, typed,
+      families: seatedAll.filter((l) => l.shapeFamily).length,
+      reason: `REG-3: ${typed} drawn bodies carry a family, derived from fields the fabric already`
+        + ` publishes (parcel.character, landmark.archetype, habitation.kind, faubourg.kind) —`
+        + ` ${Object.keys(typeCount).sort().map((k) => `${k} ${typeCount[k]}`).join(', ')}`,
+    };
+  })() : null;
 
   // ⭐⭐⭐ MF-ARCH · THE FABRIC IS PUBLISHED THROUGH ITS GOVERNED ACCESSORS. `walls` is no
   // longer a plain array on this literal: it is a VERIFYING GETTER onto the circuit node's
@@ -1545,6 +1606,10 @@ export function buildFabric(settlement, model, options = {}) {
     // feature is unarmed, and appended at the END of this literal so no existing key's
     // published position moves (the §234 publication arm's own precondition).
     ...(fusion ? { fusion } : {}),
+    // ⭐⭐⭐ REG-3 · THE SHAPE CODE, published the way the fusion and the escarpment are published
+    // — a derived artifact with its own counts and its own reason, ABSENT (never empty) when the
+    // feature is unarmed, and appended at the END so no existing key's position moves.
+    ...(shapeCode ? { shapeCode } : {}),
   }, wallCircuit);
 }
 
