@@ -21466,3 +21466,55 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   landings. **The lever is machine efficiency and batching, NOT lowering the
   proof bar** — and the cap stays at four, because the contention is curable
   and the parallel reading, writing and compiling is real gain.
+
+## §512 — "WHAT IS TAKING SO LONG **IN THE LANES**": THE PER-LANE BREAKDOWN, MEASURED — SERIAL MUTANT DRIVES AND A RE-DERIVED S0 ARE THE TWO BIGGEST SELF-INFLICTED COSTS; A **SLOT-FACTS CARD** NOW REPLACES THE RE-DERIVATION (2026-08-23 20:45 CDT)
+
+- **§512.1 THE SHAPE OF A LANE, MEASURED.** From the completed lanes' own
+  receipts and usage records: **100 to 324 tool calls per lane at 17–46
+  seconds average**, 350k–650k subagent tokens, RESUME POINTs every 5–10
+  minutes with occasional 29-minute gaps. Wall-clocks: CG-1 build 2h02m ·
+  UC-2 landing 1h37m · UC-2 build 1h32m · CH-1 landing 1h19m · CH-1 build
+  56m. **Nothing inside a lane parallelizes** — S0, edit, acceptance,
+  mutants, sweep, packet are strictly serial because each depends on the
+  last.
+- **§512.2 WHERE THE TIME ACTUALLY GOES, LARGEST FIRST.** (1) **The serial
+  mutant drives.** Eight or nine mutants, each a patch → battery → conviction
+  check → restore → digest-exact verify: ~36 discrete steps with a test run
+  in each, and **the lanes have been running the WHOLE ACCEPTANCE FILE per
+  mutant when a mutant only needs the ARM it should convict** — nine times
+  the work the proof requires. (2) **The widened sweep**: ~1,600 files /
+  ~21,000 tests, ~450 s uncontended and 15–25 minutes contended, and several
+  lanes ran it TWICE. (3) **The S0 re-derivation**: every lane independently
+  re-measures the same six slot facts — the census tuple, the ruin count, the
+  reader-walker literals, the golden sha, the OSR pre-existing red and the
+  banked failing set — all of which are the SAME for every lane at one slot,
+  and one of which (the banked set) costs a whole baseproof worktree plus a
+  run. (4) **`npm ci` per worktree**, 2–3 minutes × four lanes. (5) **The
+  terminal**, 15–20 minutes and strictly one at a time. (6) **Model
+  generation** — 350k–650k tokens per lane of reasoning, plus receipts of
+  7–60 KB and packets of 300–400 lines; that is a real fraction of the wall
+  clock and not machine-bound at all.
+- **§512.3 THE CURES SET NOW.** ⭐ **A SLOT-FACTS CARD**
+  (`695a70c5/scratchpad/SLOT-FACTS.md`, written this sitting for slot
+  `b2852ccc`) publishes all six facts, chair-measured by READING the
+  committed blobs rather than running the suites, with the rule that **lanes
+  CITE and never re-derive**, and that the card is VOID the moment the slot
+  moves — a lane's first act is to compare `git rev-parse
+  claude/composite-r4` against the card's sha and stop extrapolating if it
+  differs. ⭐ **A mutant drives the ARM it should convict, not the whole
+  file** — the full file runs ONCE at the end. Both join §511.3's four laws
+  (capped threads, cite-the-banked-set, no double sweep, stack the landings)
+  in every brief from here.
+- **§512.4 WHAT IS NOT CURABLE BY SCHEDULING, STATED HONESTLY.** A lane that
+  measures every claim, drives a convicting mutant per arm, restores
+  digest-exact, classifies every red by assertion-block sha and writes a
+  resumable receipt is going to take on the order of an hour. That is the
+  price of the discipline that today caught a priest rendering as a tavern in
+  150 of 504 settlements, two proved tips reachable only from a scratch
+  directory, a capacity theorem false on 156 of 426 checks, a cure that
+  cannot work at any value, and a new test file that parked its own nineteen
+  titles while the arithmetic closed. **The remaining lever is machine
+  efficiency and batching; the proof bar does not move.** Live lanes have
+  already adopted the thread cap — UC-5's receipt reads "capped sweep +
+  widened battery running" — and the two nearest completion (UC-5, WEB-8)
+  are past their mutant phase.
