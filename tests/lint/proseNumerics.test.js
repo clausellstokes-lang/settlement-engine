@@ -67,6 +67,16 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // than regenerated or deleted: path, category and snippet are byte-identical on all six,
 // the census stays at 413 against a 413 ceiling, and no other row in the file moved (the
 // whole diff is twelve lines, six -/+ pairs). No prose numeric was authored by that member.
+// TE-CH-4 (ODQ §555) — ONE PURE LINE MOVE, NO DEBT MOTION. The district-profile registry car
+// inserts the QUARTER_CATEGORY table, the canonical-routing preference lists and their
+// rationale above districtProfile.js's prose block, so the single row that file owns
+// re-addresses 238 -> 373. Same shape as CR-FP-2's "88 pure line moves" and HK-1's six above:
+// path, category and snippet are byte-identical, the census stays at 413 against a 413
+// ceiling, and districtProfile.js owns no other row that could have moved with it.
+// ⚠ The car's added COMMENTS are dense with measured figures ("168 of 168", 3,038 factions,
+// a 504-settlement corpus). None of them is debt and none is in this baseline: the detector
+// reads numerics that FLOW INTO A PROSE KEY, not numbers written in comments. Humanizing
+// them would have removed reviewable evidence to satisfy an instrument that never saw it.
 const REVIEWED_TOTAL_CEILING = 413;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
   floatInterpolation: 236,

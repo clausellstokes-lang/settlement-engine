@@ -937,7 +937,7 @@
   },
   {
     "path": "src/domain/districtProfile.js",
-    "line": 238,
+    "line": 373,
     "category": "floatInterpolation",
     "snippet": "`High criminal opportunity (${crimScore}) drags safety down.`"
   },
