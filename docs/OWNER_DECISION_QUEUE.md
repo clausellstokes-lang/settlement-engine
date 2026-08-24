@@ -21288,3 +21288,127 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   checked. Deferred and written down: the four `voiceMechanics` banked rows
   live in `tests/copy`, **outside every sweep tree** — a standing §489 gap
   worth a widening. Seats: CG-1 build (Opus) · one free. Holding roster empty.
+
+## §508 — OWNER: "you can now go up to 4 lanes now" — THE CAP DOUBLES; THREE DISJOINT-FILE LANES DISPATCHED AT ONCE (2026-08-23 19:13 CDT)
+
+- **§508.1 THE DIRECTIVE.** §465's two-lane cap is lifted to **FOUR**. A
+  sub-lane still counts as a lane (§465.1), so a lane that fans out spends the
+  cap for everyone; every dispatch remains SOLO unless the chair says
+  otherwise.
+- **§508.2 THE CHAIR'S PARALLELISM RULE (the constraint the cap does not
+  lift):** the gate is SERIAL — one mutex, one box — so four lanes means **at
+  most ONE landing/terminal at a time plus three builds**, and the builds are
+  chosen for DISJOINT FILE SETS or the validator's change-path reservation
+  refuses them (two non-terminal packets may not reserve one path). Every
+  brief now sets `GATE_MUTEX_MAX_POLLS=960` (double the old ceiling) because
+  four lanes contending for one mutex will otherwise hit the give-up exit 3,
+  which is not a red; and every brief carries the disk check FIRST, since four
+  worktrees plus their `node_modules` is the machine-wide ENOSPC hazard (§403).
+- **§508.3 DISPATCHED (all Opus, all disjoint):** **TE-CH-2** (the magic
+  licence — owns `institutionalCatalog.js` and the five gate paths; carries
+  the §503 rulings that the shelf-as-gate paths are FIVE not three, that G6 is
+  refuted and G5 half-refuted, that G4's charter hall is the one real
+  divergence, that the row count is 28 not 32, and that the car WILL red the
+  golden master because a catalog-row key addition is spread onto the record —
+  a declared shift, priced and re-recorded, not a surprise) · **TE-UC5** (the
+  connectivity graph — the LAST undercity car; owns `src/domain/undercity/`;
+  must agree with or correct R-INST-6's §Σ.5 seam table, and owns the
+  smugglers'-tunnel EDGE arm as a consequence, never a second cause) ·
+  **TE-WEB-8** (paywall honesty — owns `pricing.js`, its test and
+  `.env.example`; ordered to re-derive advertised-versus-gated for EVERY
+  capability row rather than the two the charter names, because §449 already
+  found O-P1's premise false for four of six, and to STOP rather than ship if
+  de-advertising would remove something a paying customer currently receives).
+  CH-3/CH-3a is deliberately NOT dispatched beside CH-2 — both want the
+  catalog, and the reservation would refuse the second.
+
+## §509 — CG-1: HALF A SHIPPED AND HALF B IS A **STOP** — THE RATIFIED CAP RULE CANNOT CURE THE THROW AT ANY VALUE, AND THE REAL RATE IS **287 OF 504**; THE CHAIR RE-CHARTERS THE CURE AS DERIVED CAPS WITH AN OWNER-SET HEADROOM (2026-08-23 19:13 CDT)
+
+- **§509.1 HALF A SHIPPED — the structural half, and it is pure gain.** A
+  real-pipeline calibration corpus over the golden-master grid (6 tiers × 12
+  cultures × 7 terrains = 504) with **`monsterThreat` and the SEED rotated by
+  row index** — a choice the lane MEASURED rather than styled: at one fixed
+  config eight seeds moved hamlet 11 → 20 and town 45 → 58, while the entire
+  culture × terrain sweep at ONE seed moved hamlet only 7 → 17. **The proof it
+  mattered: the single-seed grid reports thorp 0 of 84 failures; seeded, 28 of
+  84.** A whole tier the old ground called clean is not. Change set: SIX files,
+  purely additive, **ZERO `src/` bytes** (chair-verified). New suite 19/19,
+  final gate 81/81 across 5 files, typecheck 173/173 and 1134/1134, golden
+  unmoved, `generatorGoldenMaster` green, OSR cmp 0 against the baseproof,
+  census DELTA `+1/+0/+1/+19/+6` convicted 33/33 with the walker restored
+  digest-exact, grep arm widened from ten trees to **thirteen** (reaching
+  `tests/design`, `tests/hooks`, `tests/lib`), sweep 21,576 passed / 8 failed =
+  the re-proved seven plus its own declared census row, **zero strays**. Its
+  landing is dispatched (a rebase IS owed — its base predates CH-1's landing).
+- **§509.2 THE STOP, AND WHY IT IS CORRECT.** The lane set
+  `MAXIMUM_INSTITUTION_BINDINGS` to `100000` at every tier — the cap
+  unreachable by construction — and **61 of 504 settlements STILL THROW**, all
+  on a SECOND, independent premise: `the TC-4 layer measures N bytes against
+  the <tier> band`, i.e. `MAXIMUM_CARTOGRAPHY_BUILDINGS × TC4_ROW_BYTES_BAND`
+  (hamlet +3.09%, village +1.83%, town +3.26%, city +1.15% over). So
+  **`32/48 → 0/48` is unreachable by the ratified rule at ANY value.** Second
+  stop: `townCartographyBuildings.test.js` asserts
+  `MAXIMUM_INSTITUTION_BINDINGS[t] <= MAXIMUM_CARTOGRAPHY_BUILDINGS[t]` =
+  `{12,24,48,96,176,240}`, and the amendment's `{18,30,59,92,77,96}` violates
+  it at thorp, hamlet and village — as does the rule applied to the lane's own
+  maxima. The probe was reverted byte-exact before anything was authored, and
+  **no tuning number was moved.** ⭐ And the two samples disagree in BOTH
+  directions (amendment `{12,20,39,61,51,64}` implied vs measured
+  `{11,24,41,62,55,63}`) — **which is itself the finding: a sampled maximum is
+  not a ceiling, and `ceil(sample × 1.5)` inherits its sample's luck.**
+- **§509.3 THE TRUE SCALE OF THE DEFECT.** Throw rate **287 of 504 (57%)**,
+  not 32 of 48 — and by tier: **town 84 of 84, village 83 of 84, hamlet 71 of
+  84** fail to compile a map at all, while city fails 21 (on bytes) and
+  metropolis 0. **The stage effectively cannot draw the small and middle
+  settlements that are most of the product.** Dark compile is 504/504 clean
+  and `MAXIMUM_WARDS` and the orphan premises never fire — the inherited
+  diagnosis is confirmed on those points.
+- **§509.4 RULED — CG-1b, AND WHY THE CAPS STOP BEING LITERALS.** A real cure
+  needs THREE numbers moved together: the binding caps, `MAXIMUM_CARTOGRAPHY_
+  BUILDINGS` (thorp/hamlet/village must rise — **and that changes DRAWN
+  OUTPUT**, not a premise), and the derived byte band. Patching three magic
+  numbers to fit today's corpus would inherit the same luck that produced the
+  originals. **So CG-1b builds the MACHINERY, not the values:** the caps become
+  **derived from the calibration corpus with a single declared HEADROOM
+  parameter**, the byte band derives from the building cap rather than standing
+  beside it, and the invariant `bindings <= buildings` is preserved by
+  construction instead of by an assertion that the cure violates. CG-1b lands
+  with the CURRENT values preserved — **zero same-seed shift** — so the
+  machinery is provable on its own; the headroom VALUE then becomes a one-line
+  declared change. **The headroom factor is added to the owner's sitting as
+  BAND 21 — "how much room above the measured worst case a small settlement's
+  map is allowed"** — because the value decides how dense a hamlet's map looks
+  and whether the 1–3% byte overrun clears. Whether raising the building cap
+  alone clears that overrun **cannot be measured without making the gated
+  change** — deferred, written into the packet, and a one-command measurement
+  once the band is signed.
+- **§509.5 TWO HAZARDS BANKED BY THE LANE, BOTH ABOUT SILENT SUCCESS.**
+  (1) **A brand-new test file can PARK ITSELF AT BIRTH:** the lane's first
+  draft copied `generatorGoldenMaster`'s shape (registration inside an
+  `if (process.env…)` block at module scope), the walker parked all 19 titles,
+  the walked delta `+1/+1/+0/+0/+0` closed arithmetically, and **nothing
+  redded** — cured by straight-line registration with the re-record as an
+  opt-in arm. Every later brief must verify titles are CREDITED, not merely
+  that the arithmetic closes. (2) **`JSON.stringify(obj, keysArray, n)` reads
+  its second argument as an ALLOW-LIST at every level** — the first capture
+  wrote 504 rows of `{}`, and the lane's independent scratch probe shared the
+  bug, so that "two-instrument cross-check" was VACUOUS; only the suite's own
+  outcome arm caught it.
+
+## §510 — OWNER RE-AFFIRMS THE BLANKET GRANT ("all permissions required now and in the future to those that pop up"): RECORDED, WITH THE FOUR CARVE-OUTS THAT SURVIVE BY NATURE (2026-08-23 19:13 CDT)
+
+- **§510.1 THE GRANT.** Third affirmation (§464, §447's refresh, now this).
+  Every decision inside the work is the chair's, and no lane pauses for a
+  permission the owner would have granted. Recorded so no successor asks again.
+- **§510.2 THE FOUR THAT SURVIVE BY NATURE — not by policy, and not
+  re-litigated:** (1) **the physical `supabase db push`** of migrations
+  195–199, because 198 is DESTRUCTIVE against a live database and an
+  irreversible outward action takes a contemporaneous confirmation, not a
+  standing one; (2) **every push/deploy of the branch**, for the same reason;
+  (3) **legal sign-off** (TinyMCE/GPL, the vendored FMG, founder transfers) —
+  a legal judgment is not delegable to a chair; (4) **the tuning SIGNATURE**
+  and **the `/code-review ultra` keystroke** — the first is the owner's
+  artistic signature by definition, the second the chair cannot physically
+  fire. **Everything else proceeds without asking**, including the whole
+  40-plus-car remaining arc, every declared same-seed shift, every golden
+  re-record, and every charter ruling.
