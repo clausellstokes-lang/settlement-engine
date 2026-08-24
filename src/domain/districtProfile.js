@@ -44,6 +44,13 @@ const SAFETY_BANDS = Object.freeze(['lawless', 'unsafe', 'watched', 'orderly', '
 
 /** @typedef {import('./factionProfile.js').FactionProfile} FactionProfile */
 /** @typedef {import('./threatProfile.js').ThreatProfile} ThreatProfile */
+/**
+ * The raw faction record, imported from the module this file joins against rather
+ * than re-declared here: `canonicalArchetypesById` keys its map by the id
+ * `deriveFactionProfile` will mint, so the two must read one contract, not two
+ * that agree today.
+ * @typedef {import('./factionProfile.js').FactionLike} FactionLike
+ */
 
 /**
  * @typedef {Object} Quarter
@@ -66,6 +73,8 @@ const SAFETY_BANDS = Object.freeze(['lawless', 'unsafe', 'watched', 'orderly', '
  * @property {{ prosperity?: any, [key: string]: unknown }} [economicState]
  * @property {unknown} [institutions]
  * @property {{ quarters?: Quarter[] }} [spatialLayout]
+ * @property {{ factions?: FactionLike[] }|null} [powerStructure]
+ * @property {FactionLike[]} [factions]
  */
 
 /**
@@ -233,21 +242,32 @@ const CATEGORY_TO_ARCHETYPE = Object.freeze({
  * Canonical archetype for every faction the settlement carries, keyed by the id
  * its FactionProfile will report. `deriveFactionProfile` derives that id from the
  * same name (`faction.faction || faction.name`) through the same snakeCase, so
- * the join is exact — measured 3,038 of 3,038 profiles joined over the corpus.
+ * the join is exact — measured over the corpus, every faction profile joined.
+ *
+ * THE READ IS THE TWO SHAPES A WRITER ACTUALLY PRODUCES, and no more.
+ * `deriveAllFactionProfiles` reads a THIRD alternate between these two —
+ * `settlement.power?.factions` — and this function deliberately does not. The
+ * reader-with-no-writer ratchet's executed corpus observes no `power` key on a
+ * settlement in any seed, so that arm is dead: it is banked as pre-existing debt
+ * where it already lives, and copying it here would have added a fresh row to a
+ * shrink-only inventory. Dropping it is behaviour-identical for the same reason
+ * it is dead — nothing ever writes the key it reads.
  *
  * @param {DistrictSettlement} settlement
  * @returns {Map<string, string>}
  */
 function canonicalArchetypesById(settlement) {
-  const s = /** @type {any} */ (settlement);
-  const factions = s?.powerStructure?.factions || s?.power?.factions || s?.factions || [];
+  const factions = settlement?.powerStructure?.factions || settlement?.factions || [];
   /** @type {Map<string, string>} */
   const out = new Map();
   if (!Array.isArray(factions)) return out;
   for (const f of factions) {
+    // The bare-string arm is load-bearing: a settlement's TOP-LEVEL `factions`
+    // is a different record type from `powerStructure.factions` and may hold
+    // plain names. `factionArchetype` accepts either.
     const name = typeof f === 'string' ? f : (f?.faction || f?.name);
     if (!name) continue;
-    out.set(`faction.${snakeCase(name)}`, factionArchetype(/** @type {any} */ (f)));
+    out.set(`faction.${snakeCase(name)}`, factionArchetype(f));
   }
   return out;
 }
