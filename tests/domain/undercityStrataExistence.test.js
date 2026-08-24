@@ -327,8 +327,44 @@ describe('MF-UC0 — the underground existence gate, the substructure facet, and
     ]);
     // The metropolis roster is the city catalog merged with the metropolis block
     // (assembleInstitutions.js mergeCatalogs), so 'Underground city' seeds by the same declared key
-    // only if it declares one — it does not today, and this pin says so rather than inferring it.
-    expect(facetOf(real('metropolis', 'Criminal', 'Underground city'), SUBTERRANEAN_FACET_KIND)).toBeNull();
+    // only if it declares one.
+    //
+    // ── AMENDED BY CH-3 §3.6 (R-INST-6-1), a declared contract change ────────────────────
+    // This line used to read `.toBeNull()` and said "it does not today, and this pin says so
+    // rather than inferring it". That was true and correct to pin — and it was pinning a
+    // DEFECT: `Underground city` and `Black market bazaar` are explicitly subterranean in
+    // their own prose and carry tags:['criminal','underground'], yet seeded the sheet zero
+    // times. CH-3 declares the facet their prose already asserts. Measured: 0 of 420 rosters
+    // change and 0 interior kinds change; the corpus digest moves, because
+    // assembleInstitutions spreads the row onto the record — exactly what the catalog's own
+    // comment at :879 predicted.
+    //
+    // ⚠ THE ONE-KEY FORM IS DELIBERATE AND IS PINNED BELOW. The three `Underground network`
+    // siblings declare BOTH `clandestine` and `subterranean`. Copying that shape here would
+    // NOT be the same act: `clandestine` is read by domain/worldPulse/clandestineFacet.js,
+    // whose settlementHasUnderways drives live D6 couplings in supplyKernel (the smuggling
+    // reach bonus), foodStockpile and settlementLifecycleFirstClass. Declaring it would
+    // ACTIVATE engine couplings rather than declare an existing truth, and it prices
+    // differently — at the charter's own base the one-key form reproduces the priced digest
+    // `a542cc2e…` while the two-key form yields `5ceac443…`. Whether these rows should also
+    // be clandestine is an undercity-train question (§5 anti-scope 8), deliberately deferred
+    // and guarded here so it cannot arrive by a tidy-up.
+    const nowDeclaring = [
+      ['Underground city', 'underground_city'],
+      ['Black market bazaar', 'black_market_bazaar'],
+    ].map(([name, anchor]) => {
+      const row = real('metropolis', 'Criminal', name);
+      return [
+        name,
+        facetOf(row, SUBTERRANEAN_FACET_KIND),
+        facetOf(row, 'clandestine'),
+        deriveStrataExistence({ institutions: [row], config: DRY }).seeds.map((s) => [s.class, s.anchor]),
+      ];
+    });
+    expect(nowDeclaring).toEqual([
+      ['Underground city', 'subterranean', null, [['subterranean', 'underground_city']]],
+      ['Black market bazaar', 'subterranean', null, [['subterranean', 'black_market_bazaar']]],
+    ]);
     // ONE TRUTH WITH UC-1 (§441.1): the sanitation seed and UC-1's FULL WEB rung read the SAME
     // roster institution — the city block's 'Sewage system' (rolled at city and metropolis).
     const sewer = real('city', 'Infrastructure', 'Sewage system');

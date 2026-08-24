@@ -18,6 +18,62 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-08-24 — MF-CH3, THE DATA SLIPS (272 rows of 525 moved; 0 rows added, 0
+ *   removed). Lane TE-CH-3, catalog-hygiene car 3. Source: the packet
+ *   docs/implementation/packets/catalog-hygiene/MF-CH3.md.
+ *   TWO CAUSES, DELIBERATELY KEPT SEPARABLE, and they are of DIFFERENT KINDS. The
+ *   car's five data/prose commits were ordered so that everything with a zero
+ *   roster shift lands before the one item with a real one, and the census below
+ *   is taken at that seam as well as end to end.
+ *     (A) THE ZERO-ROSTER HALF (base → c4d71b4ea): 272 of 525 rows move and the
+ *         complete census of differing path-templates is SEVEN, with ZERO array
+ *         length moves and ZERO key-order moves:
+ *           $.institutions[*].minTier                          1,410 removals / 168 rows
+ *           $.defenseProfile.institutions.charter[*].minTier      168 removals / 168 rows
+ *           $.defenseProfile.institutions.magicDef[*].minTier     138 removals /  82 rows
+ *           $.defenseProfile.institutions.garrison[*].minTier      84 removals /  84 rows
+ *           $.institutions[*].priorityCategory                   181 changes  / 109 rows
+ *           $.institutions[*].desc                               104 changes  / 104 rows
+ *           $.institutions[*].facets                              84 additions /  84 rows
+ *         Those are EXACTLY the car's four declared classes and nothing else: the
+ *         26 no-op `minTier` deletions, the five `priorityCategory` corrections,
+ *         the eleven-string prose sweep, and R-INST-6-1's two `facets`
+ *         declarations. No name, count, id or rng draw moves in this half — the
+ *         corpus measurement agrees, at ROSTER_CHANGED 0 of 420.
+ *     (B) THE ROSTER RE-ROLL (c4d71b4ea → tip), which is J-CH-3-2 and is a real
+ *         behaviour change, chair-ruled explicitly against THE PROMISE: deleting
+ *         `exclusiveGroup: 'religiousCenter'` from the two CITY religious rows.
+ *         144 rows move, across 314 path templates, WITH array-length moves —
+ *         `$.institutions` itself moves on 134 rows. That breadth is the declared
+ *         mechanism, not a surprise: assembleInstitutions.js:323 returns BEFORE
+ *         the rng.chance draw, so un-suppressing a row consumes a draw and
+ *         reshuffles the whole downstream sequence for that settlement. It is a
+ *         same-seed re-roll of the city/metropolis roster, scoped to that step
+ *         because pipeline.js:156 forks a PRNG per step.
+ *   THE PROMISE, as the chair ruled it: THE PROMISE protects LIVED HISTORY. A seed
+ *   already generated and played is a starting world forever and its stored
+ *   institutions are untouched. It does not freeze the generator's future output;
+ *   if it did, no defect in generation could ever be repaired. Only newly
+ *   generated worlds differ. Over the 420-settlement corpus: 81 of 420 rosters
+ *   change, ~130 institution names move, and SETTLEMENT NAMES MOVE ZERO.
+ *   AND THE INJECTION THE CHARTER NEVER PRICED, declared here rather than buried:
+ *   freeing the exclusive group also frees a coherence-repair dependency, so the
+ *   TOWN-tier `Monastery or friary` enters cities. Measured per tier, before →
+ *   after: `Multiple monasteries` city 0 → 41 and metropolis 32 → 60;
+ *   `Monastery or friary` city 0 → 21 and metropolis 0 → 5;
+ *   `Cathedral (10,000+ only)` unmoved at 26 and 29.
+ *   TOTALITY. The base-side regeneration reproduced the OLD manifest on all 525
+ *   rows (0 mismatches, key set identical), which proves this car is the ONLY
+ *   source of the drift and that nothing else had crept in. Both sides were
+ *   regenerated as OBJECTS from COMMITTED BYTES — a separate detached worktree
+ *   with its OWN `npm ci` node_modules — and deep-diffed field by field with array
+ *   indices collapsed to [*].
+ *   ⚠️ THE DEPENDENCY TREE. Every figure here was re-measured after `npm ci` in
+ *   both trees. An earlier pass symlinked the MAIN worktree's node_modules, which
+ *   declares 36 dependencies against the slot's 40; all five of the car's corpus
+ *   digests reproduce byte-identically before and after the reinstall, but they
+ *   are quoted from the post-reinstall run.
+ *
  * 2026-08-24 — MF-CH2A, THE MAGIC LICENCE DECLARED (297 rows of 525 moved; 0 keys
  *   added, 0 removed). Lane TE-CH-2, catalog-hygiene car 2a. Source: the packet
  *   docs/implementation/packets/catalog-hygiene/MF-CH2A.md.
