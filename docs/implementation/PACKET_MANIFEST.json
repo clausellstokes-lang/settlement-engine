@@ -28188,6 +28188,391 @@
           "validate"
         ]
       ]
+    },
+    {
+      "id": "AIP-2",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/infrastructure/AIP-2.md",
+      "verifiedBase": "510c51b766a4ef329a697d61f3006e23d4fb2325",
+      "changeManifest": [
+        {
+          "_note": "THE INJECTOR. Three container-only injectors (JPEG APP1, WebP VP8X, MP4 uuid) plus the deterministic XMP builder. Uses NO image library on purpose: re-encoding is the act that destroyed this metadata and would also destroy any surviving SynthID watermark. Refuses by construction any register row not marked \"absent\", which is what keeps the signed C2PA bearer and all 23 cohort-A files out of reach.",
+          "action": "CREATE",
+          "path": "scripts/inject-ai-provenance.mjs"
+        },
+        {
+          "_note": "THE ROSTER OF RECORD. 46 rows flip absent -> present and gain `require`, `forbid`, `master`, `job`, `model`, `agent`, `credit`, `mapped_by` and `restored`. `_counts` moves 6/46/23 -> 52/0/23 and a `_restore` section records what was written, how, and what could not be. `forbid` is new and load-bearing: it refuses `urn:c2pa` on every restored row and `Made with Google AI` on the five whose masters never carried it.",
+          "action": "MODIFY",
+          "path": "scripts/ai-media-provenance.json"
+        },
+        {
+          "_note": "THE GATE. UNMARKED_CEILING 46 -> 0; the present-set arm generalised from six pinned paths to a count plus the six survivors; new arms for `forbid`, for the five no-Google files, for cohort-A non-contamination, for pixel identity per injector with a convicting mutation each, for the injector rails, for idempotence, and for round-trip byte identity. The stripped-file CONTROL is re-planted onto cohort A because its old plant now legitimately carries markers. +9 titles, +1 suite title.",
+          "action": "TEST",
+          "path": "tests/build/aiMediaProvenance.test.js"
+        },
+        {
+          "_note": "THE CENSUS ROW, taken by this car. 2,525/366/2,159/21,017/5,847 -> 2,525/366/2,159/21,026/5,848, attributed by a single-file revert that lands on the slot tuple to the digit, with a negative control on each moved figure. Comment-only edit: it adds no title of its own.",
+          "action": "TEST",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        },
+        {
+          "_note": "JPEG gains an XMP APP1 carrying the IPTC source-type tag and the `Made with Google AI` credit its master carried.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/about.jpg"
+        },
+        {
+          "_note": "WebP promoted to the extended VP8X form around its byte-identical VP8 chunk, plus an `XMP ` chunk. Decoded pixels proved identical.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/about.webp"
+        },
+        {
+          "_note": "JPEG gains an XMP APP1 carrying the IPTC source-type tag and the `Made with Google AI` credit its master carried.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/city.jpg"
+        },
+        {
+          "_note": "WebP promoted to the extended VP8X form around its byte-identical VP8 chunk, plus an `XMP ` chunk. Decoded pixels proved identical.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/city.webp"
+        },
+        {
+          "_note": "JPEG gains an XMP APP1 carrying the IPTC source-type tag and the `Made with Google AI` credit its master carried.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/compendium.jpg"
+        },
+        {
+          "_note": "WebP promoted to the extended VP8X form around its byte-identical VP8 chunk, plus an `XMP ` chunk. Decoded pixels proved identical.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/compendium.webp"
+        },
+        {
+          "_note": "JPEG gains an XMP APP1 carrying the IPTC source-type tag and the `Made with Google AI` credit its master carried.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/dim-desk.jpg"
+        },
+        {
+          "_note": "WebP promoted to the extended VP8X form around its byte-identical VP8 chunk, plus an `XMP ` chunk. Decoded pixels proved identical.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/dim-desk.webp"
+        },
+        {
+          "_note": "JPEG gains an XMP APP1 carrying the IPTC source-type tag and the `Made with Google AI` credit its master carried.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/evolution-1-thorp.jpg"
+        },
+        {
+          "_note": "WebP promoted to the extended VP8X form around its byte-identical VP8 chunk, plus an `XMP ` chunk. Decoded pixels proved identical.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/evolution-1-thorp.webp"
+        },
+        {
+          "_note": "JPEG gains an XMP APP1 carrying the IPTC source-type tag and the `Made with Google AI` credit its master carried.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/evolution-2-hamlet.jpg"
+        },
+        {
+          "_note": "WebP promoted to the extended VP8X form around its byte-identical VP8 chunk, plus an `XMP ` chunk. Decoded pixels proved identical.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/evolution-2-hamlet.webp"
+        },
+        {
+          "_note": "JPEG gains an XMP APP1 with the source-type tag and the Higgsfield job id, model recorded \"not established\". FORBIDS the Google credit: its master never carried one.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/evolution-3-village.jpg"
+        },
+        {
+          "_note": "WebP promoted to the extended VP8X form around its byte-identical VP8 chunk, plus an `XMP ` chunk. Decoded pixels proved identical.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/evolution-3-village.webp"
+        },
+        {
+          "_note": "JPEG gains an XMP APP1 carrying the IPTC source-type tag and the `Made with Google AI` credit its master carried.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/evolution-4-town.jpg"
+        },
+        {
+          "_note": "WebP promoted to the extended VP8X form around its byte-identical VP8 chunk, plus an `XMP ` chunk. Decoded pixels proved identical.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/evolution-4-town.webp"
+        },
+        {
+          "_note": "JPEG gains an XMP APP1 carrying the IPTC source-type tag and the `Made with Google AI` credit its master carried.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/evolution-5-city.jpg"
+        },
+        {
+          "_note": "WebP promoted to the extended VP8X form around its byte-identical VP8 chunk, plus an `XMP ` chunk. Decoded pixels proved identical.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/evolution-5-city.webp"
+        },
+        {
+          "_note": "JPEG gains an XMP APP1 carrying the IPTC source-type tag and the `Made with Google AI` credit its master carried.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/evolution-6-metropolis.jpg"
+        },
+        {
+          "_note": "WebP promoted to the extended VP8X form around its byte-identical VP8 chunk, plus an `XMP ` chunk. Decoded pixels proved identical.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/evolution-6-metropolis.webp"
+        },
+        {
+          "_note": "JPEG gains an XMP APP1 with the source-type tag and the Higgsfield job id, model recorded \"not established\". FORBIDS the Google credit: its master never carried one.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/export-dispatch.jpg"
+        },
+        {
+          "_note": "WebP promoted to the extended VP8X form around its byte-identical VP8 chunk, plus an `XMP ` chunk. Decoded pixels proved identical.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/export-dispatch.webp"
+        },
+        {
+          "_note": "JPEG gains an XMP APP1 carrying the IPTC source-type tag and the `Made with Google AI` credit its master carried.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/founders-charter.jpg"
+        },
+        {
+          "_note": "WebP promoted to the extended VP8X form around its byte-identical VP8 chunk, plus an `XMP ` chunk. Decoded pixels proved identical.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/founders-charter.webp"
+        },
+        {
+          "_note": "JPEG gains an XMP APP1 carrying the IPTC source-type tag and the `Made with Google AI` credit its master carried.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/gallery.jpg"
+        },
+        {
+          "_note": "WebP promoted to the extended VP8X form around its byte-identical VP8 chunk, plus an `XMP ` chunk. Decoded pixels proved identical.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/gallery.webp"
+        },
+        {
+          "_note": "JPEG gains an XMP APP1 carrying the IPTC source-type tag and the `Made with Google AI` credit its master carried.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/realm-table.jpg"
+        },
+        {
+          "_note": "WebP promoted to the extended VP8X form around its byte-identical VP8 chunk, plus an `XMP ` chunk. Decoded pixels proved identical.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/realm-table.webp"
+        },
+        {
+          "_note": "JPEG gains an XMP APP1 carrying the IPTC source-type tag and the `Made with Google AI` credit its master carried.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/settlements.jpg"
+        },
+        {
+          "_note": "WebP promoted to the extended VP8X form around its byte-identical VP8 chunk, plus an `XMP ` chunk. Decoded pixels proved identical.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/settlements.webp"
+        },
+        {
+          "_note": "JPEG gains an XMP APP1 carrying the IPTC source-type tag and the `Made with Google AI` credit its master carried.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/world-map.jpg"
+        },
+        {
+          "_note": "WebP promoted to the extended VP8X form around its byte-identical VP8 chunk, plus an `XMP ` chunk. Decoded pixels proved identical.",
+          "action": "MODIFY",
+          "path": "public/backgrounds/world-map.webp"
+        },
+        {
+          "_note": "JPEG gains an XMP APP1 with the source-type tag and the Higgsfield job id, model recorded \"not established\". FORBIDS the Google credit: its master never carried one.",
+          "action": "MODIFY",
+          "path": "public/evolution/village.jpg"
+        },
+        {
+          "_note": "MP4 gains a trailing `uuid` XMP box; ftyp/moov/free/mdat keep their bytes AND their offsets, so no sample table moves.",
+          "action": "MODIFY",
+          "path": "public/media/journey-legs/bg/leg-1-desk-to-thorp.mp4"
+        },
+        {
+          "_note": "MP4 gains a trailing `uuid` XMP box; ftyp/moov/free/mdat keep their bytes AND their offsets, so no sample table moves.",
+          "action": "MODIFY",
+          "path": "public/media/journey-legs/bg/leg-2-thorp-to-hamlet.mp4"
+        },
+        {
+          "_note": "MP4 gains a trailing `uuid` XMP box; ftyp/moov/free/mdat keep their bytes AND their offsets, so no sample table moves.",
+          "action": "MODIFY",
+          "path": "public/media/journey-legs/bg/leg-3-hamlet-to-village.mp4"
+        },
+        {
+          "_note": "MP4 gains a trailing `uuid` XMP box; ftyp/moov/free/mdat keep their bytes AND their offsets, so no sample table moves.",
+          "action": "MODIFY",
+          "path": "public/media/journey-legs/bg/leg-4-village-to-town.mp4"
+        },
+        {
+          "_note": "MP4 gains a trailing `uuid` XMP box; ftyp/moov/free/mdat keep their bytes AND their offsets, so no sample table moves.",
+          "action": "MODIFY",
+          "path": "public/media/journey-legs/bg/leg-5-town-to-city.mp4"
+        },
+        {
+          "_note": "MP4 gains a trailing `uuid` XMP box; ftyp/moov/free/mdat keep their bytes AND their offsets, so no sample table moves.",
+          "action": "MODIFY",
+          "path": "public/media/journey-legs/bg/leg-6-city-to-metropolis.mp4"
+        },
+        {
+          "_note": "Seedance-derived still: XMP APP1 added alongside the existing Exif APP1. Credit names BytePlus_ModelArk / dreamina-seedance-2-0, never Google.",
+          "action": "MODIFY",
+          "path": "public/media/journey-legs/bg/still-0-desk.jpg"
+        },
+        {
+          "_note": "Seedance-derived still: XMP APP1 added alongside the existing Exif APP1. Credit names BytePlus_ModelArk / dreamina-seedance-2-0, never Google.",
+          "action": "MODIFY",
+          "path": "public/media/journey-legs/bg/still-1-thorp.jpg"
+        },
+        {
+          "_note": "Seedance-derived still: XMP APP1 added alongside the existing Exif APP1. Credit names BytePlus_ModelArk / dreamina-seedance-2-0, never Google.",
+          "action": "MODIFY",
+          "path": "public/media/journey-legs/bg/still-2-hamlet.jpg"
+        },
+        {
+          "_note": "Seedance-derived still: XMP APP1 added alongside the existing Exif APP1. Credit names BytePlus_ModelArk / dreamina-seedance-2-0, never Google.",
+          "action": "MODIFY",
+          "path": "public/media/journey-legs/bg/still-3-village.jpg"
+        },
+        {
+          "_note": "Seedance-derived still: XMP APP1 added alongside the existing Exif APP1. Credit names BytePlus_ModelArk / dreamina-seedance-2-0, never Google.",
+          "action": "MODIFY",
+          "path": "public/media/journey-legs/bg/still-4-town.jpg"
+        },
+        {
+          "_note": "Seedance-derived still: XMP APP1 added alongside the existing Exif APP1. Credit names BytePlus_ModelArk / dreamina-seedance-2-0, never Google.",
+          "action": "MODIFY",
+          "path": "public/media/journey-legs/bg/still-5-city.jpg"
+        },
+        {
+          "_note": "Seedance-derived still: XMP APP1 added alongside the existing Exif APP1. Credit names BytePlus_ModelArk / dreamina-seedance-2-0, never Google.",
+          "action": "MODIFY",
+          "path": "public/media/journey-legs/bg/still-6-metropolis.jpg"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "The deterministic XMP builder. Same register row in, same bytes out — which is what makes the round-trip byte-identity arm possible at all.",
+          "path": "scripts/inject-ai-provenance.mjs",
+          "symbol": "buildXmpPacket"
+        },
+        {
+          "_note": "Injector 1. Splices an XMP APP1 after the JFIF/Exif prologue; renaming it un-grounds §3 item 1 and the JPEG pixel arm.",
+          "path": "scripts/inject-ai-provenance.mjs",
+          "symbol": "injectJpegXmp"
+        },
+        {
+          "_note": "Injector 2. Promotes a simple WebP to VP8X around an untouched VP8 chunk; §3 item 2 and the WebP pixel arm name it.",
+          "path": "scripts/inject-ai-provenance.mjs",
+          "symbol": "injectWebpXmp"
+        },
+        {
+          "_note": "Injector 3. Appends the XMP uuid box so every prior box keeps its offset; §3 item 3 and the MP4 offset arm name it.",
+          "path": "scripts/inject-ai-provenance.mjs",
+          "symbol": "injectMp4Xmp"
+        },
+        {
+          "_note": "THE RAIL. The one place that decides a file may be written, and the one that throws on any row not marked \"absent\". The cohort-A and C2PA-bearer refusals are assertions about this function.",
+          "path": "scripts/inject-ai-provenance.mjs",
+          "symbol": "injectFile"
+        },
+        {
+          "_note": "The roster the runner opens. The gate asserts it is now EMPTY, which is how \"nothing is left owing\" is a measurement rather than a claim.",
+          "path": "scripts/inject-ai-provenance.mjs",
+          "symbol": "injectableRows"
+        },
+        {
+          "_note": "Reads canvas dimensions out of the coded bitstream rather than guessing them; the WebP arm pins the VP8X canvas against the decoder, because a wrong canvas silently crops the image in viewers.",
+          "path": "scripts/inject-ai-provenance.mjs",
+          "symbol": "webpCanvas"
+        },
+        {
+          "_note": "The box walker that refuses a chain not ending at EOF. Both the MP4 arm and the mdat identity proof are built on it.",
+          "path": "scripts/inject-ai-provenance.mjs",
+          "symbol": "mp4Boxes"
+        },
+        {
+          "_note": "The shrink-only ratchet, now 0. Raising it is the regression the whole file exists to refuse.",
+          "path": "tests/build/aiMediaProvenance.test.js",
+          "symbol": "UNMARKED_CEILING"
+        },
+        {
+          "_note": "The six files the restore must NOT have touched, named so a future sweep cannot quietly include the one valid C2PA the estate still holds.",
+          "path": "tests/build/aiMediaProvenance.test.js",
+          "symbol": "SURVIVED_UNTOUCHED"
+        },
+        {
+          "_note": "Every AI file the estate ships: 6 survivors + 46 restored.",
+          "path": "tests/build/aiMediaProvenance.test.js",
+          "symbol": "PRESENT_COUNT"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "The register and the tree agree completely: 75 files on disk under the four media roots, 75 register rows, zero unregistered and zero ghosts."
+        },
+        {
+          "id": "A2",
+          "case": "Every one of the 46 formerly bare files carries an XMP packet with the IPTC trainedAlgorithmicMedia source-type tag, and the unmarked ratchet reads 0."
+        },
+        {
+          "id": "A3",
+          "case": "Each of the three injectors leaves the decoded content bit-identical, and each identity probe is shown to fail on a deliberate mutation of the coded data."
+        },
+        {
+          "id": "A4",
+          "case": "Re-injecting into a stripped copy reproduces the shipped bytes exactly, for one file per container."
+        },
+        {
+          "id": "A5",
+          "case": "No restored file carries urn:c2pa, and the five files whose masters carried no Google marker do not carry the Google credit."
+        },
+        {
+          "id": "A6",
+          "case": "No AI marking reached any of the 23 cohort-A files, measured on the files themselves, and none of them records a restore."
+        },
+        {
+          "id": "A7",
+          "case": "The injector throws rather than writing to any register row not marked absent, including the one file still carrying a valid C2PA manifest."
+        },
+        {
+          "id": "A8",
+          "case": "The census reads 2,525/366/2,159/21,026/5,848, and reverting this car's single test file returns it exactly to the slot tuple."
+        }
+      ],
+      "checks": [
+        [
+          "node",
+          "scripts/inject-ai-provenance.mjs",
+          "--check"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/build/aiMediaProvenance.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/build/pageBackgroundsAssets.test.js"
+        ],
+        [
+          "npm",
+          "run",
+          "check"
+        ]
+      ]
     }
   ]
 }
