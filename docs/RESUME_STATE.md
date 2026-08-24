@@ -51,6 +51,8 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 00:39 CDT 08-24: §531 — Textures.com terms primary-sourced: "(modified or not)", "texture pack",
+# no open-source release. Removal or nothing — but TE-IP-1 already deletes it. AI-media ToS lane dispatched.
 # ⭐⭐⭐ 23:56 CDT 08-24: §530 — FIRST STACK LANDED (49+50, one gate) CAS → 7009f115b. MP-1 built but DARK.
 # ⛔ 179/338 charges are NON-COMMERCIAL and served live since April → TE-IP-1 deleting. notices page is 404 in prod.
 # ⭐⭐⭐ 23:45 CDT 08-24: §529 — FMG conveys NO rights to bundled rasters. 4 proved CC BY (credit line),

@@ -22677,3 +22677,66 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   `inflight-stack1`/`-stack2` before touching anything — the chair applying to
   itself the law it has enforced on eight lanes. Slot-facts card re-measured
   at `7009f115b`. Seats: STACK-2 · IP-1; two free.
+
+## §531 — THE TEXTURES.COM TERMS, PRIMARY-SOURCED, CORRECT §529.5 IN THE DANGEROUS DIRECTION: **"(modified or not)", "in a texture pack", AND A BAN ON OPEN-SOURCE RELEASE** — SO IF ANY FAMILY-A FILE CAME FROM THERE, AZGAAR'S OWN MIT REDISTRIBUTION WAS ALREADY A BREACH AND OURS INHERITS IT; THE REMEDY ALREADY IN FLIGHT COVERS IT (2026-08-24 00:39 CDT)
+
+- **§531.1 THE CORRECTION, AND HOW IT WAS EARNED.** §529.5 priced
+  Textures.com from search snippets and said bundling was permitted "with
+  customised 3D assets" — **that understated the position**. The lane
+  recovered the actual Terms PDF, which renders text as **hex glyph IDs from a
+  subset font** (which is why ordinary extraction returned nothing), decoded it
+  via the standard glyph-order mapping and verified the decode against known
+  words. Article 6.3, revision `Rev3-21`, fetched 2026-08-23 — and
+  **cross-checked against `Rev3-8` of December 2020, where clauses (a), (b)
+  and (g) are WORD-FOR-WORD IDENTICAL**, so the same terms were in force when
+  Azgaar sourced these images in 2019 and 2021. That cross-check is what turns
+  a current-terms reading into a claim about the past.
+- **§531.2 THE FOUR CLAUSES THAT CHANGE THE RISK SHAPE.** *"6.3 You are not
+  permitted to: (a) sell or distribute any Content **(modified or not)** by
+  themselves or **in a texture pack** …; (g) **bundle Content with software
+  such as paint programs, plugins, 3D engines, 3D programs** …; (i) use the
+  Content in connection with deep learning, machine learning …; (k) **release
+  the Content or derivative products with Content under Open Source
+  Licences**"*. Consequences: **(1) "(modified or not)" means the
+  recompression and downscaling these files underwent buys nothing**; (2) an
+  `images/textures/` folder shipped with the product **IS a texture pack** on
+  the plain reading; (3) a map generator shipping textures is squarely the
+  "bundle with 3D engines" shape; and ⭐ **(4) FMG is MIT — so if any Family A
+  file came from Textures.com, upstream's own redistribution was already a
+  breach, and ours inherits it.** The only bundling permission (6.2(c)) is
+  narrow — 3D models with modified textures plus a mandated notice — and does
+  not reach a web app shipping a texture folder.
+- **§531.3 WHAT IT CHANGES AND WHAT IT DOES NOT.** For Textures.com **there is
+  no attribution fix: it is removal or nothing.** So the Family A
+  identification gap got more expensive — it previously spanned "free" to
+  "needs a credit"; it now spans **"free" to "must be removed."** What it does
+  NOT change: **Family A remains UNKNOWN.** No evidence places any file at
+  Textures.com; the 626×417 and uniform-2000px fingerprints point at Freepik
+  if anywhere. This is a **conditional risk that sharpened, not a finding** —
+  and the lane said so rather than dressing it as one.
+- **§531.4 ⭐ THE REMEDY ALREADY IN FLIGHT COVERS IT, WHICH IS THE POINT OF
+  HAVING RULED IT EARLY.** TE-IP-1 is deleting `public/map/images/textures/`
+  and `public/map/charges/` tonight. Under §529.6's recommendation — wire up
+  the estate's own byte-deterministic baked texture library (37 files, 11
+  materials × 6 weathering states, **zero importers**) and delete the
+  third-party rasters — this sharpened Textures.com exposure needs **no new
+  action**: the removal that was right when the risk spanned "free to credit"
+  is the same removal that is right now it spans "free to forbidden". **A
+  remedy chosen for the worst plausible case does not have to be revisited
+  when the case gets worse.** Family B (the four planetary textures, proved
+  CC BY) is unaffected and still gets a credit line rather than a deletion.
+- **§531.5 THE LAST UNOWNED IP QUESTION IS DISPATCHED.** **TC-AIMEDIA-TOS**
+  (Opus, read-only): the ~63 MB of AI-generated video and ~8 MB of stills the
+  estate ships, against the vendors' actual terms — output ownership,
+  **whether commercial use depends on the plan tier held AT GENERATION TIME**,
+  attribution or AI-disclosure obligations, redistribution-in-a-product bans,
+  indemnity and its carve-outs — each quoted from primary text with its
+  revision and fetch date, or marked unsourced. Plus the selling question
+  traced in code (the audit proved no raster enters a generated PDF; the lane
+  verifies rather than inherits it, and checks the OG-image and share-card
+  paths), and one sourced paragraph on the human-authorship question — which
+  bears not on what we may USE but on **what we can defend as OURS**, and
+  therefore on the hero video and identity stills rather than on incidental
+  texture. **The single highest-value step in the whole IP picture remains a
+  reverse-image search on `spain-small.jpg` and `pergamena-small.jpg`, which
+  no lane here can run — it is a human with a browser and about ten minutes.**
