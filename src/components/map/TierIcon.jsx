@@ -1,3 +1,4 @@
+import { popToTier } from '../../data/constants.js';
 import { swatch } from '../theme.js';
 /**
  * TierIcon — pure SVG glyph for a settlement placement.
@@ -21,20 +22,21 @@ import { swatch } from '../theme.js';
  * is a separate capability the owner has not commissioned.
  */
 
-const TIER_FROM_POP = (pop = 0) => {
-  if (pop <= 60)        return 'thorp';
-  if (pop <= 240)       return 'hamlet';
-  if (pop <= 900)       return 'village';
-  if (pop <= 5000)      return 'town';
-  if (pop <= 25000)     return 'city';
-  return 'metropolis';
-};
-
 export function tierFor(settlement) {
   if (!settlement) return 'village';
   const t = (settlement.tier || settlement.settType || '').toLowerCase();
   if (['thorp','hamlet','village','town','city','metropolis'].includes(t)) return t;
-  return TIER_FROM_POP(settlement.population);
+  // ⛔ SINGLE SPELLING: classify through the landed `popToTier`, never an inline
+  // chain. This file carried its own copy with hamlet capped at 240 against
+  // POPULATION_RANGES' 400, so pops 241-400 drew a village dot while the dossier,
+  // wizard, compendium and engine all said hamlet (TE-SEAM §3, window 241-400).
+  // The `?? 0` is LOAD-BEARING and not decoration: the deleted chain defaulted
+  // its parameter to 0, but `popToTier(undefined)` falls through every `<=`
+  // comparison and returns 'metropolis' — so a placement with no population
+  // (PlacementsLayer passes a bare `{ population: p.population }`) would draw a
+  // metropolis crown instead of the thorp dot the old default produced.
+  // @guarded-by tests/data/popToTierBoundary.test.js — the producer-equality block.
+  return popToTier(settlement.population ?? 0);
 }
 
 const STROKE  = swatch['#1C1409'];

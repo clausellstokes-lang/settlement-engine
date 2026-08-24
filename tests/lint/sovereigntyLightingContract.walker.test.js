@@ -6579,7 +6579,31 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //     the faction half was already pinned there, the institution half shipped broken)
     // All three are literal titles, so door 3's reader credits them and PARKED STAYS AT 366.
     // The arithmetic closes: 366 + 2,159 = 2,525 still.
-    files: 2525, parked: 366, credited: 2159, titles: 21052, suiteTitles: 5852,
+    // ── RE-RECORDED 2026-08-24 BY TE-SEAM-B (the hamlet-boundary seam cure) ─────────
+    // 2,525/366/2,159/21,052/5,852 → 2,525/366/2,159/21,059/5,854. THE CAUSE IS SEVEN NEW
+    // ARMS AND TWO NEW `describe`s IN ONE ALREADY-CREDITED FILE and nothing else:
+    // tests/data/popToTierBoundary.test.js gained the producer-equality block (5 arms) and
+    // the structural single-spelling block (2 arms). NO new test file, which is why files,
+    // parked and credited are all UNCHANGED; the two new `describe`s are exactly the +2 on
+    // suiteTitles.
+    // ⚠ ALL FIVE RE-DERIVED BY EXECUTION, per this block's own standing warning that the
+    // figures are asserted IN SEQUENCE so a red on `titles` never evaluates `suiteTitles`.
+    // A one-line probe printing the five computed values was planted in this file, run, and
+    // removed (the file restored byte-identically, `diff` clean):
+    //   PROBE5 {"files":2525,"parked":366,"credited":2159,"titles":21059,"suiteTitles":5854}
+    // ⚠ THE BASE WAS PROVED UNDRIFTED RATHER THAN ASSUMED. Restoring ONLY this car's test
+    // file to the slot `e4ed27f48` — the two src cures left in place, since a src edit adds
+    // no title — and re-running this walker passes all 33 arms, i.e. the base tuple is the
+    // frozen 2,525/366/2,159/21,052/5,852 EXACTLY. So the whole +7/+2 is this car's and none
+    // of it is inherited from a concurrent lane.
+    // ⚠⚠ PARKED STAYING AT 366 WAS EARNED, NOT LUCK — the SP-D idiom bit this car once.
+    // The structural block's FIRST draft spelled its two arms as `test.each(FILES)` over a
+    // NON-LITERAL table; measured, that PARKED THE WHOLE FILE (366 → 367) and RED this
+    // walker, which is how the gate caught it. The two arms are now spelled out one by one
+    // with literal titles and the file is credited again. Same failure, same cure, as the
+    // pactKernelMount draft recorded above.
+    // The arithmetic closes: 366 + 2,159 = 2,525 still.
+    files: 2525, parked: 366, credited: 2159, titles: 21059, suiteTitles: 5854,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

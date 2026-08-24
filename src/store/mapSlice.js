@@ -16,6 +16,12 @@
 import { deepClone } from '../domain/clone.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { isCanonSave } from '../domain/campaign/canon.js';
+// The landed tier classifier. `data/constants.js` is a ZERO-IMPORT pure-data leaf
+// already inside the eager first-paint closure (generators/lookups.js and
+// components/HomeHero.jsx both import it statically), so this edge adds no module
+// to that closure and drags nothing behind it — unlike the two dynamic imports
+// below, which exist to keep genuinely heavy chunks out of first paint.
+import { popToTier } from '../data/constants.js';
 // The campaign-write persistence chokepoint (campaignSlice's own idiom, and
 // already in the eager closure through it) — the autoplacement Herald record is a
 // campaign write, so it persists the way every other campaign write does.
@@ -815,15 +821,15 @@ export const createMapSlice = (set, get) => ({
   burgToConfig: (burg) => {
     if (!burg) return null;
     const pop = burg.population || 500;
-    let settType;
-    if (pop <= 60)        settType = 'thorp';
-    else if (pop <= 240)  settType = 'hamlet';
-    else if (pop <= 900)  settType = 'village';
-    else if (pop <= 5000) settType = 'town';
-    else if (pop <= 25000) settType = 'city';
-    else                  settType = 'metropolis';
+    // ⛔ SINGLE SPELLING: classify through the landed `popToTier`, never an inline
+    // chain. This function carried its own copy with hamlet capped at 240 against
+    // POPULATION_RANGES' 400, so a burg of 241-400 souls was handed to the wizard
+    // as a `village` config while every other surface called it a hamlet
+    // (TE-SEAM §3, window 241-400). `pop` is already defaulted above, so no
+    // undefined can reach the classifier here.
+    // @guarded-by tests/data/popToTierBoundary.test.js — the producer-equality block.
     return {
-      settType,
+      settType: popToTier(pop),
       population: pop,
       tradeRouteAccess: burg.port ? 'port' : 'road',
       customName: burg.name || '',
