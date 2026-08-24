@@ -26303,3 +26303,18 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   generation (a small settlement) keeps the snappy feel while only the giants
   spend the full allowance. REG-7's §220 performance row and REG-10's
   reveal pipeline adopt the tiered budget.
+
+## §604 · THE BUDGET IS FOR SPENDING — DETAIL FILLS THE ENVELOPE (2026-08-24 ~19:15 CDT)
+
+- **§604.1 ⭐ OWNER GRANT:** "feel free to use more budget to make more
+  details as much as reasonably possible with performance expectations."
+  **RULED into the program: the §603 tiered time envelope is a resource to
+  SPEND on detail, not a ceiling to stay far beneath.** Waves aim detail
+  density at the DETAIL REGISTER's required corpus grain up to the envelope
+  and the interaction-smoothness floor — never at the minimal ceiling.
+  Consequences: §217 op-ceiling raises become EXPECTED-AND-PLANNED (the
+  chair measures, then signs under §585, each recorded vetoably) rather than
+  exceptional; the binding floors are unchanged — determinism, dormancy,
+  instrument verdicts, small tiers snappy, per-tier render TIME measured at
+  every wave. TE-REG-2's live brief amended accordingly (measure-and-flag,
+  never abandon an arm the envelope can afford).
