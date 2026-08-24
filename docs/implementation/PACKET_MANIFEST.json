@@ -23066,6 +23066,205 @@
       "retiredSymbols": []
     },
     {
+      "id": "MF-UC5",
+      "status": "DRAFT",
+      "packetPath": "docs/implementation/packets/town-cartography/MF-UC5.md",
+      "verifiedBase": "b2852ccc3cc4753499996da6582dd672e90499d0",
+      "changeManifest": [
+        {
+          "_note": "THE CONNECTIVITY GRAPH (311.9), car 2 of 2 of T-UC3 and the LAST car of the undercity train. deriveUndercityConnectivity(settlement, opts) joins the rows UC-1, UC-2, UC-3 and UC-4 already publish into the graph the boundary law describes: three connection classes plus the refusal class, the security gradient with the stricter side's TYPED JOINT, sewers as the spine where they exist else an ARCHIPELAGO, severance that severs without deleting, links that persist, and isolation as a first-class visible fact. THIS CAR DERIVES NO COMPONENT AND INVENTS NO PORTAL: every node is a published row and every edge's joint is a surfaceJoins[] entry one of the four producers wrote, so where no endpoint published a portal no edge is emitted (one producer per join). THE MOTIVE LAW IS ENFORCED BY THE PAYER RATHER THAN BY A COMMENT: 311.6.4 says a linking passage is a dug act with a cause and a payer and never an assumed corridor, so the two DUG classes are refused outright when no payer resolves to a canonical institution key, and sparsity is structural. THE REFUSAL CLASS IS VISIBLE: a vault connects to nothing by default (311.8.3 - a breach into one is a HEIST EVENT, an event and not a derived edge) and keepers resist a sewer-crypt join, and both refusals are RECORDED naming the pair they refused. THE DATE OF A DUG ACT IS REPORTED AND NEVER INVENTED: the estate records no dug-act event, so the date is the calamity the town rebuilt after where one exists and a typed absence otherwise. THE POSTURE AND THE CRIMINAL LICENCE ARE TWO SEPARATE READINGS, which is what makes sever-never-delete true: if severance moved the licence, sealing a working would un-license its breach and DELETE the edge. 243 effective lines against the 250-per-leaf cap. No tuning surface, no draw, no hash root, no roster read, and no write of any kind; the generator golden is bytewise unmoved.",
+          "action": "CREATE",
+          "path": "src/domain/undercity/connectivity.js"
+        },
+        {
+          "_note": "THE ACCEPTANCE - EIGHT arms, ONE literal describe, straight-line it calls with string-literal titles and NO for-loop anywhere in the file, so the census credits it and the seed-loop walker has nothing to enrol. Every arm runs over REAL generated settlements and the counterfactual arms move ONE stored input: the walls the defence profile carries (the tunnel's link loses its motive), one component's own recession state (sever and restore), the M6d trade ledger (the works extension), and the calamity trail (the dated dug act). Every vocabulary is pinned against the PRODUCERS rather than this car's copy - UC-0's jointVocabulary, UC-1's own perQuarterCoverage and rungSource, UC-2's own rows and anchors. Eight mutants convict ONE-TO-ONE: no two mutants convict the same arm, so no arm is another arm wearing a second title. Controls green at both ends, every restore digest-exact.",
+          "action": "CREATE",
+          "path": "tests/domain/undercityConnectivity.test.js"
+        },
+        {
+          "_note": "THIS PACKET.",
+          "action": "DOC",
+          "path": "docs/implementation/packets/town-cartography/MF-UC5.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE SANITATION LADDER (UC-1). The rung decides the graph's CHARACTER, the coverage map decides which quarters the spine reaches, and rosterAnchors is the canonical-institution-key receipt the roster rule stands on. Consumed through its own opts seam and never re-derived.",
+          "path": "src/domain/undercity/sewerDerivation.js",
+          "symbol": "export function deriveSewerLadder"
+        },
+        {
+          "_note": "THE MONOTONE COMPONENTS (UC-2). The crypts, surge pits, undercrofts, smuggler cellars, workings and sealed vaults, with the anchor, the zone, the posture and the surfaceJoins this graph joins by. It is also where UC-4's colonised seed gets its QUARTER: the seed carries no zone, so this car reads the zone UC-2 published for the same anchor rather than inventing one.",
+          "path": "src/domain/undercity/monotoneComponents.js",
+          "symbol": "export function deriveMonotoneComponents"
+        },
+        {
+          "_note": "THE STATIC COMPONENTS (UC-3). Caverns are TERRAIN-anchored and zone-less, so no pairing rule reaches them and they are lawfully isolated (311.6.4) - which is exactly what the honesty contract wants said out loud.",
+          "path": "src/domain/undercity/staticComponents.js",
+          "symbol": "export function deriveStaticComponents"
+        },
+        {
+          "_note": "THE EPOCH LAYER (UC-4). The colonised seeds with their UNIVERSAL FRONT, the smugglers' tunnel whose licence loss this car registers as an EDGE consequence (441.5(c)), the recession state that severs without deleting, and the syndicate standings that pay for a dug criminal passage.",
+          "path": "src/domain/undercity/colonization.js",
+          "symbol": "export function deriveUndercity"
+        },
+        {
+          "_note": "THE EXISTENCE GATE (UC-0), derived HERE with UC-1's rung and handed to UC-4 through UC-4's own opts.strata - the whole of seam D-UC0-3, which no earlier car could close because UC-0 lands first and UC-4 derives no ladder.",
+          "path": "src/domain/undercity/strataExistence.js",
+          "symbol": "export function deriveStrataExistence"
+        },
+        {
+          "_note": "311.7.1 AS A PREDICATE, and the one truth this car's CHARACTER stands on: cesspits contribute no sheet, culvert and above do. The spine node exists exactly where this returns true, so the character can never disagree with UC-1's rung.",
+          "path": "src/domain/undercity/strataExistence.js",
+          "symbol": "export function sanitationRungSeeds"
+        },
+        {
+          "_note": "THE CLOSED JOINT VOCABULARY (UC-0's data module, charter J-R2-2). This car is the vocabulary's LAW but not its home: it imports the membership test and declares no joint list of its own, so a joint no producer published can never reach an edge.",
+          "path": "src/domain/undercity/jointVocabulary.js",
+          "symbol": "export function isJointKind"
+        },
+        {
+          "_note": "THE HIGH-WATER READER (T2R), read ONCE here and handed to the three consumers that key to it, so a caller pays for one derivation rather than three. Its DISPLAY-LAZY law (443) transfers to this leaf by inheritance.",
+          "path": "src/domain/highWater.js",
+          "symbol": "export function deriveHighWater"
+        },
+        {
+          "_note": "THE PULSE-WRITTEN KEY'S ONE APP-SIDE PROJECTION (443). A funded link's DATE is the dated calamity the town rebuilt after - UC-1's own CALAMITY_REBUILD register - and it is reached ONLY here. This file never names the raw key.",
+          "path": "src/domain/display/calamityLedger.js",
+          "symbol": "export function buildCalamityLedger"
+        },
+        {
+          "_note": "THE DELIVERED DERIVER. It is CT-4's F6, the DW program's law-7 projection input (the 437 carry note) and D5's route truth, so its disappearance must be detectable before any of them compile against it.",
+          "path": "src/domain/undercity/connectivity.js",
+          "symbol": "export function deriveUndercityConnectivity"
+        },
+        {
+          "_note": "THE THREE CONNECTION CLASSES (311.9.2(i)), pinned as a SYMBOL and never as a count - a re-recorded FIGURE in requiredSymbols is refused by the estate's own law (ODQ TE-26).",
+          "path": "src/domain/undercity/connectivity.js",
+          "symbol": "export const CONNECTION_CLASSES"
+        },
+        {
+          "_note": "THE FIVE TYPED CAUSES, one per lawful pairing rule. The pin holds the vocabulary's EXISTENCE at one address so a later consumer cannot grow a sixth silently.",
+          "path": "src/domain/undercity/connectivity.js",
+          "symbol": "export const EDGE_CAUSES"
+        },
+        {
+          "_note": "THE MOTIVE GRAMMAR - one motive per cause, which is what makes 311.9's law 2 structural: no edge exists without naming why it was worth digging.",
+          "path": "src/domain/undercity/connectivity.js",
+          "symbol": "export const MOTIVE_BY_CAUSE"
+        },
+        {
+          "_note": "THE FOUR HONEST REASONS A NODE ENDS WITH NO EDGE (311.9.2(vii)'s honesty contract as data). REFUSED, SEVERED, NO_PUBLISHED_JOINT and UNREACHED are the difference between an omission and a decision.",
+          "path": "src/domain/undercity/connectivity.js",
+          "symbol": "export const ISOLATION_REASONS"
+        },
+        {
+          "_note": "THE REFUSAL CLASS, recorded rather than silent: VAULT_REFUSAL and KEEPER_REFUSAL. A refusal that leaves no row is indistinguishable from a derivation that never ran.",
+          "path": "src/domain/undercity/connectivity.js",
+          "symbol": "export const REFUSAL_REASONS"
+        },
+        {
+          "_note": "THE SPINE'S NODE KEY - one sanitation node per settlement, anchored to no building. Pinned because the spine is the only node whose key is a constant rather than a composition, and every spine-side rule reads it.",
+          "path": "src/domain/undercity/connectivity.js",
+          "symbol": "export const SPINE_KEY"
+        },
+        {
+          "_note": "THE ACCEPTANCE SUITE, in the MF-UC1/MF-UC2 shape: ONE literal describe over eight straight-line arms. It is also the whole cause of this member's census move, so its deletion would move the lighting-census tuple and this row names the file that would then owe the re-measure.",
+          "path": "tests/domain/undercityConnectivity.test.js",
+          "symbol": "describe('MF-UC5 — the undercity connectivity graph'"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "THE THREE CLASSES OVER A REAL CORPUS, AND THE STRICTER SIDE DECIDES THE JOINT. Eight generated settlements are pinned to produce all three classes, more than one joint kind and more than two causes BEFORE any well-formedness claim is made. The joint check is by KEY and not by count: the published set is recomputed from the graph's own endpoint nodes, so a joint this car invented reds even when it is a lawful vocabulary member. The cross-posture population is counted and required non-empty before the stricter-side rule is applied to it. Every edge end that names an anchor is pinned against deriveMonotoneComponents's own anchor set, never a literal."
+        },
+        {
+          "id": "A2",
+          "case": "THE VAULT CONNECTS TO NOTHING BY DEFAULT, AND THE REFUSAL IS RECORDED. The vault rows are re-read from UC-2 direct and pinned to carry posture SEALED and a sealed_door joint, so the exclusion is measured against a live producer; expectAbsentWithAnchor anchors it on a sibling that DOES join; every vault carries a VAULT_REFUSAL row and an isolation typed REFUSED. The sealed_door liveness finding is pinned in the same arm, one line below the proof that the kind is published at component level."
+        },
+        {
+          "id": "A3",
+          "case": "THE SEWERS ARE THE SPINE WHERE THEY EXIST, AND THE KEEPERS REFUSE THE CRYPT. Every spine edge is checked against UC-1's OWN perQuarterCoverage rather than a list this car keeps, and the crypts are first pinned to sit in a DRAINED quarter - so the refusal is a decision and not an accident of coverage. Anchored on an OPEN sibling in a drained quarter the spine does reach."
+        },
+        {
+          "id": "A4",
+          "case": "ARCHIPELAGO OR SPINE FOLLOWS UC-1'S RUNG AND NOTHING ELSE. The rung is read from deriveSewerLadder itself at both ends, so the arm cannot pass on this car's copy; expectPresentThenAbsent on the spine node key makes it a transition; and the archipelago is pinned to still HAVE nodes, all isolated, so 'no spine' cannot pass on a graph that merely failed to build."
+        },
+        {
+          "id": "A5",
+          "case": "REMOVE THE WALL AND THE TUNNEL'S LINK LOSES ITS MOTIVE - the CONSEQUENCE of UC-4's licence loss and never a second cause. The wall predicate is read through the landed accessor at both ends and the fixture is WATERSIDE on purpose: UC-2's smuggler cellar is licensed by the waterfront and survives the razing, so the disappearance of every CONTRABAND_ROUTE is measured against a peer pinned to survive with its own edges."
+        },
+        {
+          "id": "A6",
+          "case": "SEVER, NEVER DELETE, AND THE LINK PERSISTS. Sealing ONE colonised working in UC-4's own stored spelling leaves the edge pair list identical in order and content - an added or deleted edge reds - and flips exactly the edges touching it to not-live with the producer's own severance cause and the SEALED posture. Passing the unsealed result back restores the graph by whole-object deep equality, so a stateful leak reds."
+        },
+        {
+          "id": "A7",
+          "case": "ISOLATION IS A FIRST-CLASS VISIBLE FACT, AND IT SAYS WHY. The isolation set is reconciled ARITHMETICALLY against the unjoined node set rather than spot-checked. The fixture is the measured 0.35/0.45 tuning-band composition R-INST-6's UC seam table named: a bypass with nobody to serve, reported UNREACHED. Marking that one component sealed in UC-4's own spelling re-reports the same node as SEVERED - the cause rather than the symptom - with its neighbours pinned unmoved."
+        },
+        {
+          "id": "A8",
+          "case": "A DUG LINK CARRIES A PAYER, A MOTIVE AND A DATE THE RECORD ACTUALLY HOLDS. The dated and undated readings are the SAME settlement one stored trail apart, and the date is pinned to the trail's own last year rather than to a constant. The WORKS_EXTENSION is present-then-absent across the lit and dark M6d ledger, its payer is pinned equal to the working's own canonical key, and the working is pinned to sit in a quarter UC-1 does NOT drain."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/undercityConnectivity.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/undercityStrataExistence.test.js",
+          "tests/domain/undercityStaticComponents.test.js",
+          "tests/domain/undercitySewerDerivation.test.js",
+          "tests/domain/undercityMonotoneComponents.test.js",
+          "tests/domain/undercityColonization.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/property/generatorGoldenMaster.test.js",
+          "tests/lint/observedShapeReaders.walker.test.js",
+          "tests/lint/ruinFilterRoster.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/seedLoopTotality.walker.test.js",
+          "tests/lint/entropyRootCensus.walker.test.js",
+          "tests/lint/couplingInclusion.walker.test.js",
+          "tests/lint/sizeBaseline.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/lint",
+          "tests/build",
+          "tests/ops"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "npm",
+          "run",
+          "validate:packets"
+        ]
+      ],
+      "retiredSymbols": []
+    },
+    {
       "id": "MF-CH1",
       "status": "LANDED",
       "packetPath": "docs/implementation/packets/catalog-hygiene/MF-CH1.md",
