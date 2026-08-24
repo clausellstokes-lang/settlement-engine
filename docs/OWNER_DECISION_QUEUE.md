@@ -25089,3 +25089,46 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   regen) · **`wip-ch7` = `373601437`** (owes `npm run build:edge-shared`, the
   bundle+meta pairs committed as a set, then one clean gate). **Both are `wip-`
   and neither is landable as it stands — which is exactly what the pin says.**
+
+## §562 · HANDOFF CLOSED — THE BUNDLE COUNT IS PER-FILE, AND A LANE FIXED ITS OWN PIN (2026-08-24 09:00 CDT)
+
+- **§562.1 MY CORRECTED LAW WAS STILL IMPRECISE, AND CH-4 SHARPENED IT.** §561.1
+  said a closure edit *"stales all three."* **The count is PER-FILE, not a
+  constant.** `npcProfile.js` sits in **three** closures and staled three;
+  `districtProfile.js` sits in **exactly one** — `aiGroundingBundle`, 67 inputs —
+  and staled one. `aiCharterBundle` (111), `aiOutputSchemaBundle` (112),
+  `analyticsEventsBundle` (2) and `intentAtlasBundle` (2) do not carry it.
+  **Never assume three: read `supabase/functions/_shared/<bundle>.meta.json`.**
+  The lane verified the mechanism rather than taking my word — `aiGrounding.js:62`
+  imports `deriveAllDistricts` — which is why the refinement exists at all.
+- **§562.2 ⭐ AND IT CONFIRMED THE INVISIBILITY POINT AGAINST ITS OWN WORK.**
+  *"Every focused green I banked earlier — 33/33 on the district suite, 138/138
+  across the map goldens and category consumers — ran in `tests/domain` and
+  `tests/property`, so none of them could have seen this bill. I would have
+  carried a stale bundle into the gate."* **Two independent lanes reached the
+  same conclusion from opposite directions in the same hour.**
+- **§562.3 THE REGEN, DONE PROPERLY.** `npm run build:edge-shared` exit 0 on a
+  quiescent tree. **Only `aiGroundingBundle.js` moved in content** — its meta
+  `sourceHash` `40141c7bb3a94f13` → `a5aebd5a14b6d0bf`. ⚠ **The other four metas
+  carry a `generatedAt`-only change because the builder rewrites all five
+  sidecars every run** — and all six files were committed **together anyway,
+  precisely so no meta describes content that is neither committed nor staged.**
+- **§562.4 ⭐ THE LANE CORRECTED ITS OWN PIN, WHICH IS THE HABIT WORTH KEEPING.**
+  `refs/preserve/wip-ch4` was re-pointed from the **pre-regen** `f3d02f62c` to
+  **`dc49c6c4a`** ("CH-4: the edge-bundle regen the districtProfile edit
+  billed"), verified by me to descend from the slot. **A pin left at a
+  known-incomplete tip would have handed a successor a tree that reds for a
+  reason already diagnosed.** It stays `wip-` until the gate returns green.
+- **§562.5 THE GATE WAS LAUNCHED HONESTLY.** BARE, fresh shell, **zero dirty
+  files at launch**, scratch harness moved out of the worktree and the receipt
+  living in the scratchpad — **so the run sees exactly the committed tip**. That
+  is §559.2's law applied by a lane that had watched a sibling get bitten by it
+  an hour earlier. The verdict will land after this session; **the successor
+  collects it and, on green, moves the pin to `holding-ch4`.**
+- **§562.6 FINAL STATE FOR THE SUCCESSOR.** Build **`c3289244d`, 60 cars** ·
+  ledger **§562** · packets 179 · census `2525/366/2159/21026/5848` · ratchet 11
+  of 29,044. **Pins: `session-scratchpad-2026-08-24` = `05b822dbc` (39 files —
+  law, dockets, all 18 receipts, dwfix) · `ad-charter-2026-08-24` ·
+  `holding-dw0-final` · `wip-ch4` = `dc49c6c4a` (gate in flight) · `wip-ch7` =
+  `373601437` (owes its own regen, then one clean gate).** ⛔ **Nothing has
+  deployed since 2026-07-28.**
