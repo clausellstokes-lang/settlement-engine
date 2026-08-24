@@ -45,6 +45,7 @@
  */
 
 import { absArea } from './fabricGeometry.js';
+import { PENETRATION_EPS } from './reservedGround.js';
 
 /**
  * How close two projected coordinates must be to count as the same line, in view units.
@@ -197,7 +198,66 @@ export function fuseFrontages(a) {
     ? `${counts.groups} party-walled masses over ${counts.fusedParcels} of ${eligible} drawn plots `
       + `in ${runs.size} rank runs (module ${Math.round(a.frontage * 100) / 100}u); largest ${counts.largestGroup}`
     : `no run reached two party-walled plots (${eligible} drawn plots in ${runs.size} rank runs)`;
-  return { masses, memberKeys, suppressPlotKeys, counts, reason };
+  // ⭐ THE FRAMES ARE CARRIED OUT so a census, a mutation probe or a later wave can re-derive
+  //   this fusion from the published leaf alone — one small record per rank run, and without it
+  //   the only way to argue with a mass is to re-run the packer.
+  return { masses, memberKeys, suppressPlotKeys, counts, reason, frames: a.frames || [] };
+}
+
+/**
+ * ⭐⭐ THE LAW'S OWN QUESTION, ASKED OF THE NEW ARTIFACT: does any fused mass stand in a claim?
+ *
+ * §17's ground law clips every footprint out of the street, the water and the wall band, and a
+ * mass is built only from bodies that survived it — closing a party residual that lies strictly
+ * BETWEEN two accepted plots. So the answer must be 0 by construction, and a check that can only
+ * ever return 0 is worth nothing unless something can make it fire. The three chartered
+ * mutations are exactly what makes it fire: fuse across a block lane and the STREET count goes
+ * positive; fuse across the circuit and the CIRCUIT count does.
+ *
+ * @param {Array<any>} masses
+ * @param {Array<{line:Array<[number,number]>, width:number, kind?:string}>} claims
+ * ⚠⚠ THE EPSILON IS THE ESTATE'S OWN CENSUS EPSILON AND THE FIRST SPELLING HAD NONE — it read
+ * **4,980 penetrations on the lawful leaf at worst depth 0.000**. §17.4 puts the front wall ON
+ * the street line, so a facade sits at exactly `width/2` and float error drops half the samples
+ * a nanometre inside. `reservedGround.PENETRATION_EPS` is the one home for this and says why in
+ * as many words: *"a census stricter than the constraint it audits convicts every legal
+ * abutment."* ⭐ THE CLASS: **a census of a law must borrow the LAW's tolerance, never mint its
+ * own** — and a guard reading thousands on a clean leaf is announcing its own tolerance bug, not
+ * a finding.
+ *
+ * @param {(x:number,y:number,line:Array<[number,number]>)=>number} distTo
+ * @param {number} [step] sampling pitch along each mass edge, in view units
+ * @param {number} [eps]  the abutment tolerance; the law's own by default
+ */
+export function claimPenetration(masses, claims, distTo, step = 0.5, eps = PENETRATION_EPS) {
+  const out = { samples: 0, inClaim: 0, byKind: {}, worstUnits: 0, masses: 0 };
+  for (const m of masses) {
+    let hit = false;
+    const ring = m.polygon;
+    for (let i = 0; i < ring.length; i++) {
+      const [x0, y0] = ring[i], [x1, y1] = ring[(i + 1) % ring.length];
+      const L = Math.hypot(x1 - x0, y1 - y0);
+      const n = Math.max(1, Math.ceil(L / step));
+      for (let s = 0; s <= n; s++) {
+        const t = s / n, px = x0 + (x1 - x0) * t, py = y0 + (y1 - y0) * t;
+        out.samples++;
+        for (const c of claims) {
+          if (!c || !c.line || c.line.length < 2) continue;
+          const d = distTo(px, py, c.line);
+          const half = (c.width || 0) / 2 - eps;
+          if (d < half) {
+            out.inClaim++; hit = true;
+            const kind = String(c.kind || 'street');
+            out.byKind[kind] = (out.byKind[kind] || 0) + 1;
+            if (half - d > out.worstUnits) out.worstUnits = Math.round((half - d) * 1000) / 1000;
+            break;
+          }
+        }
+      }
+    }
+    if (hit) out.masses++;
+  }
+  return out;
 }
 
 /** Emit one fused mass from a group of ≥2 party-walled members. */
@@ -245,8 +305,23 @@ function emit(fr, runKey, group, masses, memberKeys, suppressPlotKeys, counts) {
 
   // ── THE STREET-FACING EDGE, marked. Only the runs ALONG the frontage are street face; the
   //    vertical steps between two setbacks are side walls and must not carry the 2× weight.
+  // ⚠ MERGED ON THE FRONT ALONE, and the first spelling merged on BOTH extents — which cost
+  //   ops and told a small lie at the same time. The strips split wherever the BACK steps (a
+  //   rear wing, a deeper plot) while the facades stay flush, so the street wall was emitted as
+  //   a chain of abutting segments: at city that is 630 primitives where 253 say the same
+  //   thing, and `stroke-linecap="square"` gives every internal joint a pair of overshoots on a
+  //   line whose whole point is that it is CONTINUOUS. A continuous wall is one segment.
   /** @type {Array<Array<[number,number]>>} */ const frontEdge = [];
-  for (const s of S) frontEdge.push([unproject(fr, s.uA, frontOf(s)), unproject(fr, s.uB, frontOf(s))]);
+  let runFv = null;
+  for (const s of S) {
+    const fv = frontOf(s);
+    if (runFv != null && Math.abs(runFv - fv) <= EPS) {
+      frontEdge[frontEdge.length - 1][1] = unproject(fr, s.uB, fv);
+      continue;
+    }
+    frontEdge.push([unproject(fr, s.uA, fv), unproject(fr, s.uB, fv)]);
+    runFv = fv;
+  }
 
   // ── THE INTERIOR PARTY WALLS, over the depth the two neighbours actually share.
   /** @type {Array<Array<[number,number]>>} */ const partyLines = [];
