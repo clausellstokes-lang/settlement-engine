@@ -21907,3 +21907,76 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   of it before ruling — the same discipline as §506.2's "grep the engine's
   spelling, not the concept", one level up: this time the word was the
   owner's, not the code's, and it still had a precise home.
+
+## §520 — ⛔ THE CHAIR SHIPPED A FLAG THAT DOES NOT EXIST TO FOUR LANES; MF-CH2A IS READY AND MF-CH2B STOPS AT DRAFT ON A FINDING THE CAR CANNOT CURE — **`ARCANE_INST_TAGS` IS A TRADE VOCABULARY DOING A MAGIC-DEPENDENCE JOB** (2026-08-23 22:09 CDT)
+
+- **§520.1 ⛔ MY ERROR, CORRECTED TO EVERY LANE.** The §511.3 thread cap I
+  issued — `--poolOptions.threads.maxThreads=2 --poolOptions.threads.minThreads=1`
+  — **does not exist in vitest 4.1.8**. It raises `CACError: Unknown option`
+  and **exits 1 with ZERO tests collected**. CH-2 lost two chain relaunches
+  before catching it; the chair reproduced the exit-1 independently before
+  writing this. **This is the §507.5 false-signal family with the sign
+  flipped: not a silent pass over less work, but a silent FAILURE over none**
+  — and the shape a lane most easily misreads as a red in its own member.
+  Correction sent to UC-5, WEB-8 and CG-1b (CG-1b's brief carried it in
+  writing, and its whole acceptance is a THROW RATE, which is exactly the
+  claim a zero-collection exit 1 would counterfeit). **The working cap is
+  `--pool=threads --maxWorkers=2`.** New standing rule: **an exit code with no
+  collected-test count is not a verdict** — cross-check the printed file and
+  test counts on every run.
+- **§520.2 PINNED FIRST.** Both tips had no ref but the lane's detached
+  worktree HEAD — the fourth time today. `refs/preserve/holding-ch2` =
+  `2ccb20d5` (8 over `b2852ccc`) and `refs/preserve/holding-ch2a` =
+  `90a12cd1` (4 over, and an ancestor of the lane tip — **independently
+  landable**, verified).
+- **§520.3 MF-CH2A IS READY.** Three production files: the ladder beside
+  `getMagicLevel` in `constants.js`, `magicLicense` on the **28** Magic/Exotic
+  rows, and the reader in `arcaneInstitutionIdentity.js`. **The 28 are exactly
+  the live surface** — rows outside the two shelves that any of the six magic
+  surfaces treats as magic: **ZERO, measured.** Distribution `none 7 / low 5 /
+  medium 4 / high 12`. The R-INST-6 cross-check ordered at §508.3 was executed:
+  zero name overlap, and its three `magicLicense` references are WORLD-level,
+  two of them corroborating HIGH rows — reconciled by adopting **"the weakest
+  world the entry is licensed for"**, which is what stops a later author
+  putting a world dial in a catalog row. Declared shift: rosters **0 of
+  2,520**, record hashes 657, golden **297 of 525** re-recorded deliberately
+  (`29c6cc8f…` → `0a2309f5…`) — and proved a key ADDITION and nothing else
+  FIRST, by a whole-corpus path-template diff returning exactly two templates,
+  both additions, zero changed/removed/reordered. 9 arms, **11 mutants**, and
+  **M1 caught arm A2 counting a list against itself**. Census `+1/+0/+1/+9/+1`,
+  `parked` unmoved at 366.
+- **§520.4 FOUR CHARTER FIGURES CORRECTED BY EXECUTION.** P5 is a SHELF gate
+  at its live call shape (every `allowsInstitution` site spreads `category`
+  onto the record), so it strikes all **28**, not the 26 the keyword arm
+  names. **G4 is REFUTED at row level** — the 23 halls at `magicExists:false`
+  are the town/**Adventuring** row the grid also offers, so UI and world law
+  already agreed on every Magic/Exotic row; B4 is re-cut to "they STILL agree
+  after both stop reading the shelf". The charter's 361-of-2,100 is not
+  reproducible as stated. The denominator is **504**.
+- **§520.5 ⭐ THE STOP, AND IT IS A CONTENT CALL NOT A HYGIENE ONE.**
+  MF-CH2B's own acceptance is green, but `tests/domain/magicForms.test.js` —
+  *a `none`-magic world holds NO magic form* — fails with
+  `forms: ['practitioner']`, because `classifyMagicForm` opens with an ARCANE
+  GATE reading the authored **TAG**, which the car deliberately left alone so
+  `customContent`'s user-name surface would not move. Licence and tag now
+  disagree in production. **The conflict is exactly three rows, and the
+  obvious data fix DOES NOT WORK — measured:** deleting `arcane` from
+  `Alchemist shop`/`Alchemist quarter` leaves both ARCANE, because
+  **`alchemy` is itself a member of `ARCANE_INST_TAGS`**. ⭐ **That list is a
+  TRADE vocabulary doing a MAGIC-DEPENDENCE job — the deepest thing this lane
+  found**, and it is why an alchemist cannot exist in a world without magic.
+  Three lawful shapes are written out in the packet §0.0; the lane recommends
+  routing the arcane gate through the licence (one worldPulse file) and
+  correctly refused to make the call. **CHAIR RULING: MF-CH2B holds at DRAFT.
+  MF-CH2A lands on its own** (it is an ancestor and independently landable),
+  and the arcane-gate routing is chartered as **CH-5**, a CONTENT car, after
+  the chair has read the three shapes.
+- **§520.6 ALSO CURED, AND ALSO A SUBSTRING STORY.** A **sixth** shelf-as-gate
+  surface: `generationCoherence.js` walks a settlement's TAXONOMY fields and
+  asks a PROSE detector about them, so the bare strings `'Magic'`/`'arcane'`
+  convicted `world_law_magic` on 2 of 5 mundane members. Cured inside a file
+  the car owns; golden unmoved. Sweep 13 failed of 22,344 over 1,725 files:
+  7 banked (cited, not re-derived — the §512 law working), 1 deferred census,
+  **3 pre-existing** and **4 the car's**, of which three are re-record/coverage
+  classes and one is the STOP. ⚠ `effectReachability.coverage` is a real
+  coverage LOSS (2 of 12 authored effects stop firing) and rides CH-2B.
