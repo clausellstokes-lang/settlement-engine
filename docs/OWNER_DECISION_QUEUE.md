@@ -26775,3 +26775,37 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   provenance, per the r2 precedent.
 - **§623.3 SEATS:** four full — REG-3 (shape code) · REG-T (trajectory
   census) · CHVAL · ADVAL.
+
+## §624 · THE TRAJECTORY CENSUS — ALL FOUR SHAPES THIN, AND A TWO-TRUTHS BAND SEAM SURFACES (2026-08-25 ~01:00 CDT)
+
+- **§624.1 COLLECTED, pre-registered and controlled** (accuracy 15/15 ·
+  liveness diverged on demand · shape-reachability plants 5/5, so the zeros
+  are corpus facts, not classifier blindness · T2R cross-agreement 8/8 with
+  its shared-source limit stated · one pre-registration gap recorded as a
+  timestamped amendment, not silently patched). **THE CENSUS: 192 of 200
+  monotone growth; PLATEAU 0, BOOM-BUST 0, FADE 5, SACKED 3 — every
+  non-monotone shape fires THIN.** Recovery and plateau are structurally
+  inexpressible at head (populationHistory is ABSENT on every record;
+  countPeaks executes to 0 everywhere; the linear-to-peak law admits no flat
+  tail). The 8-seed ceiling is parameter-independent.
+- **§624.2 ⛔ THE DEFECT THE CENSUS TRIPPED OVER — TWO TRUTHS ABOUT WHAT A
+  CITY IS:** `constants.js` bands city at 5,001–25,000 / metropolis at
+  25,001–100,000 while the fabric bands 8,001–40,000 / 40,001–200,000; **all
+  8 generated declines are accidents of that seam** (a 5,983-soul "city"
+  demotes only because the vocabularies disagree). The reader-two-truths
+  class, live. **TE-SEAM DISPATCHED (Opus, the free seat): measure-first —
+  every reader of each band vocabulary, which is canonical by usage, and the
+  full blast radius of an alignment (tier re-assignments, goldens, censuses)
+  — REPORT ONLY; the fix decision follows the measurement** (it would be a
+  major declared shift and could zero the accidental declines).
+- **§624.3 RULED — THE TRAJECTORY SHAPES GET MINTED (the THIN branch, taken):**
+  a typed generative mechanism (REG-T2, chartered; dispatches after the seam
+  verdict) producing real arcs — plateau, boom-bust, fade, sacked — coupled
+  through the lane's identified natural seam: **the dated, severity-graded
+  loss events already on every record.** Built DORMANT with rates flagged
+  PROVISIONAL (the constants are tuning-class — the owner signs values at
+  the tuning pass); the mint also materializes the reconstructed-extent
+  series as a pure derivation (derive-don't-store) so the film, REG-D and
+  the soak legs read one canonical series instead of three private
+  reconstructions. REG-D holds for REG-T2's substrate as its fixtures'
+  source of truth.
