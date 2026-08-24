@@ -26639,3 +26639,22 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   hardened with the owner's vetoes. The updated arc order is stated. **A
   three-lens skeptic panel (observability · collisions · feasibility)
   attacks A5 next; findings fold as A6 with the chair's rulings.**
+
+## §618 · THE A5 PANEL RULED AS A6 — THE FILM BECOMES BUILDABLE (2026-08-24 ~23:20 CDT)
+
+- **§618.1** Two blockers, thirteen majors, seven minors — none refuted; all
+  ruled into AMENDMENT A6. The blockers were the ones that mattered: the
+  timeline carry-note pointed at a surface that is a PATH ROSTER, not a data
+  home (the annotation schema is now minted as its own module with a
+  transient-element channel and a provenance bit), and the pre-A5 fabric
+  never emitted per-element data at all (REG-F0, the backfill car, is
+  chartered; A5.3's epochAxis overstatement corrected). Every unexecutable
+  exit gained its denominator, band, and failing control; the held-arm idiom
+  covers the beat kinds whose producers do not exist yet; REG-10 loses the
+  reveal to REG-F; L-REG-27 now MINTS dated recovery operations so the
+  reclamation trigger, G-60, and the beat law agree; **the film taste
+  specimen's judge is the OWNER by the ledger's own later ruling**; and the
+  naming veto's hidden cost is surfaced honestly — a shipped generator
+  already emits landmark names on paid surfaces, and **whether the veto
+  extends to them is queued as an owner question, not auto-executed.**
+  Raw findings preserved beside the first panel's.

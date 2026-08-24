@@ -399,3 +399,85 @@ No generated proper names for streets/bridges/gates/squares (owner veto — the 
 namer). No campaign-layer work inside this program. No film drama beyond the world's dated
 ledger. No reclamation by timer. No wear from invented maintenance facts. The §613 film-last
 order may not be traded away for an early demo beyond the chartered taste specimen.
+
+---
+
+## AMENDMENT A6 · THE A5 PANEL'S FINDINGS, RULED (ODQ §618; raw findings preserved in the 31585ce2 scratchpad `panels/`)
+
+**Two blockers, thirteen majors, seven minors — none refuted. A6 wins over A5 where they
+disagree. The load-bearing corrections:**
+
+### A6.1 · The timeline architecture, rebuilt honestly (cures both BLOCKERs)
+- **THE ANNOTATION SCHEMA IS MINTED AS ITS OWN MODULE** (a named fabric-side surface whose PATH
+  each wave's changeManifest reserves — the manifest carries the obligation's file, never the
+  data): per-element `{appearanceEpoch, withinEpochOrder, disappearanceYear?, provenance:
+  'recorded'|'interpolated', beatEvents[]}` **plus a TRANSIENT-ELEMENT CHANNEL** for beat
+  pre-states (the demolished predecessor's outline, the pre-merge pair, the unhealed scar, the
+  siege camp) — the A5 schema had appearance only and could not draw six of the twelve beats.
+- **REG-F0 IS CHARTERED — the backfill car**: the pre-A5 fabric never emitted per-element
+  timeline data (epochAxis exposes ring epochs only; the derivation's loop order is never
+  emitted — A5.3's row is CORRECTED accordingly). REG-F0 instruments the base element producers
+  (bodies, parcels, streets, districts, wall runs) to emit epoch + within-epoch order, with a
+  per-wave WALKER arm and a planted-omission control that reds at each wave's own exit.
+- **The totality walker is SCOPED by the op-class roster** (i8's committed 31 classes): classes
+  owing timeline data enumerated, timeless dress (paint, chrome, lettering, legend) exempt by
+  name; a planted orphan moves the count by exactly one (the proven-zero law applied).
+- **The canon-honesty scan gets its population and its control**: the provenance bit above,
+  the fact-surface set enumerated (year cards, marginalia, dossier text), and a planted
+  interpolated-year-on-a-year-card that must red.
+
+### A6.2 · Wave exits repaired
+- **REG-D's exit chartered**: a decline fixture whose drawn ruin-stage counts match its derived
+  trajectory (counts > 0) · a young-fixture negative control (zero ruins — L-REG-24's coherence
+  direction) · the reclamation LIFECYCLE pin (advance the front, retreat it, assert the stage
+  frozen and monotone) · standard instrument/dormancy/determinism arms. REG-D binds to LANDED
+  mechanisms only (peakTier/T2R, B6 shedding, the wear grid, pentimento); **the B8/EST-5 row is
+  re-marked CHARTERED-POST-ARC** (its persistence artifacts are owner-gated O2/O3 and its
+  producer runs in the DW train — the B18 precedent applied), with a named post-EST-5
+  refinement car.
+- **REG-T's verdict minted**: the arc classifier runs over the RECONSTRUCTED-EXTENT series
+  (the only year-indexed series sourceable at head — stated in the exit with its length), with
+  chair-set N, tier strata, and per-shape minimum-rate bands recorded before measuring; a
+  two-point peak/present record may not masquerade as an arc census.
+- **The wear arm gets the regime-cure differential**: a funded/young fixture derives KEPT and a
+  destitute/old fixture derives CRUMBLING, counts > 0 each, thresholds on the tuning surface;
+  L-REG-18 is REWORDED per §614.2's actual rule — measured facts first; a fact minted after
+  measurement finds none is lawful, tuning-class, and recorded, never silent.
+- **The accessible-lens arm is CHARTERED NOW** (which instruments re-run under the lens,
+  baselines = their readings at the current sealed tip, a degradation band, one broken-plate
+  control) — and L-REG-28 binds each wave FROM THE ARM'S LANDING, so no live wave is
+  retroactively red.
+- **REG-F's beat exits gain the BEAT-OCCURRENCE CENSUS** over N generated, unplanted
+  settlements — and the empty production sources are named rather than hidden: **SCAR→HEAL is
+  HELD on the absent event-log-at-head; DEBRIS/RECLAMATION/ABANDONMENT are HELD on the G-60
+  machinery being built** (the DW-5d held-arm idiom: a held arm is recorded with its blocker,
+  never counted as passing). The clock verification gains N, a tolerance, the reference
+  machine, and one under-30s + one over-30s fixture; the restraint check is minted as an
+  instrument (i7-style alarm-hue census + animated-element-fraction ceiling, with a
+  deliberately-shouting fixture that reds).
+- **REG-F's honest bill stated** (the A2.3 precedent): playback runtime + story-pacing
+  allocator + twelve beat treatments + skip/replay UI + the clip-export mechanism + new test
+  surfaces and the three-census landing cost. REG-F is a BUILD, not an assembly.
+- **REG-10 is re-scoped**: the reveal arm is STRUCK (REG-F is the sole owner of
+  reveal/playback per §606.3/§613); REG-10 keeps the zoom ladder, interaction register, and
+  the cache substrate consuming the timeline annotations — and its exit declares the OVERLAP
+  CONTRACT (what plays while what computes) before REG-F consumes the clock numbers.
+
+### A6.3 · Law reconciliations
+- **L-REG-27 amended to satisfy G-60 and L-REG-21 at once**: growth-front contact and
+  withdrawal MINT dated `RECLAMATION_START` / `RECLAMATION_HALT` recovery operations into the
+  LossRegion stream — the trigger creates the dated event; the event drives the map, the film
+  beats, and the monotonicity pin. No automatic healing; no beat without a source event.
+- **The film taste specimen's judge is THE OWNER** — §606.3/§607.3 post-date the §585 grant and
+  the ledger outranks the delegation sweep; REG-F's exit names the owner's verdict explicitly,
+  and A5.4's "all judging rounds" is scoped to exclude it.
+- **The year-canonicalization inheritance** (§607.2) is a DECLARED one-time same-seed shift on
+  the replay/share surface, owner-gated at its arrival — recorded in L-REG-19.
+- **The carve-out list restates §585.1 verbatim**: every push and deploy · the fabric cutover ·
+  the tuning signature · legal · the cull · `/code-review ultra`.
+- **The naming veto's real residuals recorded**: (i) "costs zero" is STRUCK — a shipped
+  generator already emits landmark names ("Tannery Row", "Dyer's Bridge") on the overview,
+  summary and SOLD-PDF surfaces, coupled to CH-4's category inference; **whether the veto
+  extends to these existing surfaces is AN OWNER QUESTION, queued — not auto-removed**; (ii)
+  the DM-annotation path persists labels but renders them as point pins, not street-following
+  lettering — L-REG-17's register-consistent annotation dress is the veto's surviving work.
