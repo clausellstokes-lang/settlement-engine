@@ -25445,3 +25445,71 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   amended in flight: wall loudest, street-network contrast lifted, the squint
   control run on the specimen, and the cartouche language translated to
   user words.
+
+## §571 · THE OWNER RE-STATES THE WALL LAW FROM THE RENDER — AND THE RENDER PREDATES HIS OWN CURE (2026-08-24 ~11:25 CDT)
+
+- **§571.1 THE OBSERVATION AND THE VERDICT.** The owner, from the w2 renders:
+  walls are drawn OVER districts; a wall should END the districts it encloses,
+  semi-permanently stop their growth, and new districts of varying origin
+  should expand from its edges. **He is right — and it is ALREADY HIS OWN LAW,
+  ruled twice:** `districtPartition.js` carries §232 verbatim in substance
+  (*"inside and outside the walls are COMPLETELY DIFFERENT DISTRICTS… a
+  district touching it CLIPS at it… extramural faubourgs form their OWN
+  districts, never an intramural district's extension"*) cured as a
+  DERIVATION-level theorem (the circuit band is removed from district space
+  before tracing, so a straddling district cannot be constructed); and
+  `epochAxis.js` carries §240 (*core → circuit → ring → circuit → ring,
+  acyclic; the ring count derived from tier thresholds, never a knob*). The
+  cures' own measured befores: **14 of 46 walled-leaf districts straddled
+  their wall (worst 26.8% of a government quarter outside its own circuit)**
+  and **1,331 of 19,563 drawn bodies stood outside the circuit their own
+  fabric helped form** — both cured at the sealed W3f tip.
+- **§571.2 WHY THE OWNER SAW THE DEFECT ANYWAY:** the w2 exemplars he was
+  shown are dated 2026-08-17 11:59 — they PREDATE the B8b/MF-ARCH cures that
+  sealed into W3f. And the SHIPPED map's wall is convicted by the fabric's own
+  header (SEAM W-1): the landed `fortifications.walls` octagon *"fitted to an
+  accreted plan cuts straight through the fabric"* — byte-frozen on the legacy
+  path until the cutover. **VERIFICATION ORDERED, not asserted:** TE-REG-0's
+  fresh base renders at `ee0db96d3` are the exhibit; the chair will check the
+  straddle census reads ZERO in its output before telling the owner the cure
+  holds.
+- **§571.3 THE GENUINELY NEW HALF OF TODAY'S STATEMENT, MINTED AS TWO FABRIC
+  CHARTER ROWS** (build after REG unless the owner re-orders): **(a)
+  FAUBOURG-ORIGIN VOCABULARY** — "new districts of VARYING ORIGIN" upgrades
+  extramural growth from generic outgrowth to a typed cause per faubourg
+  (noxious trades pushed outside the gate · market suburb on the approach
+  road · poverty overspill · river/port landing · religious/pilgrim road),
+  drawn from the settlement's own economy and history, feeding both character
+  and the §214 iconography; **(b) INTRAMURAL DENSIFICATION** — while a
+  circuit stands and population grows below the next tier threshold, growth
+  must express as infill/subdivision INSIDE (the historical scarcity
+  mechanic), never as sprawl through the wall; verify the derivation does
+  this rather than assuming. ⚠ One licensed-exception row alongside:
+  headroom circuits lawfully enclose open ground (the corpus's own outer
+  rings hold fields), and the HIGH-WATER LAW already covers the decline case
+  (a shrunken city keeps the circuit its peak built).
+- **§571.4 ⭐⭐ THE OWNER'S GEOMETRIC-LEGIBILITY VERDICT, AND THE CHAIR'S HONEST
+  ANSWER TO "WHAT DOES OUR MAP SAY?"** The owner: in the references, geometry
+  ALONE narrates — blocks read as blocks, buildings have legible shapes,
+  streets are organized, everything seamlessly integrated. The chair's honest
+  read of our w2 geometry: **it says "here is a survey of parcels with
+  buildings sampled into them" — it itemizes; it does not narrate.** The
+  mechanism, named: (i) buildings are FREESTANDING rectangles with gaps to
+  every neighbour, so the eye cannot aggregate them into blocks; (ii) because
+  blocks never form, the street void has ragged edges and the network does
+  not pop; (iii) three stacked geometric vocabularies (district tint, parcel
+  outline, building rect) share no edges — the references' fabric is a
+  TILING where lot edge = block edge = street edge, mutually defining.
+  **The three geometric moves that close it: FRONTAGE FUSION (buildings
+  party-walled into continuous street-edge masses; gaps only where they mean
+  something), BLOCK-AS-UNIT rendering (heavy block perimeter, light interior
+  party lines — the harness's INK_SCALE already names exactly these roles),
+  and a LANDMARK FORM grammar (importance read from compound footprint +
+  forecourt void, not tone).** REG-0's brief amended a second time to
+  approximate all three at draw level and to MEASURE the frontage-continuity
+  ratio before/after. **The real cure is generative, minted as the fabric
+  wave FRONTAGE-FUSION** — geometry, not paint — and under the owner's
+  "geometry is my biggest takeaway" it ranks FIRST among the register
+  program's build waves, ahead of the paint. New legibility instruments
+  gain geometric arms: frontage-continuity ratio, block-closure count,
+  freestanding-building fraction intramuros, landmark-form count.
