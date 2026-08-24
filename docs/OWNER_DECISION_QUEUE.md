@@ -24403,3 +24403,75 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   revisions were triggered by a lane doing what it was told and then reporting
   the consequence rather than absorbing it.** Recorded because the pattern is the
   point: **a ruling is a hypothesis until a lane has tried to execute it.**
+
+## §553 · 135 CONFIRMED — TWO DENOMINATORS, AND THE VOCABULARY MUST NAME WHAT THE RESEARCH HAD NO WORD FOR (2026-08-24 06:50 CDT)
+
+- **§553.1 THE GATE IS DISCHARGED AND THE NUMBER IS RULED: 135.** Base **82** ·
+  genuine misses **53 members / 43 rows** · union **135** · sensitivity **floor
+  106 · ruled 135 · ceiling 549** · **zero landed members touched** · no
+  collapses taken. **That is DW-1b's input.**
+- **§553.2 ⭐⭐ THE TWO FIGURES WERE BOTH RIGHT, AND THE MECHANISM IS THE FINDING.**
+  `(a)` read **43** in one cell and **53** in another. Not an error — **two
+  denominators, never labelled.** ROWS = 43 adjudication keys categorised `A`,
+  which sums with (c) 277 + (b) 147 + noise 14 to exactly **481**. MEMBERS = those
+  43 **plus TEN FAMILY HEADS THAT ARE NOT ROWS AT ALL.** ⭐ **No tranche ever
+  spells `vessel`, `bath`, `furnace`, `hanging`, `basin`, `mill`, `hoist`,
+  `mould`, `die/stamp` or `scales` as a standalone fixture name** — they appear
+  only as `CUCURBIT`, `BALNEUM`, `LAMP_FURNACE`, `MARKET_SCALES`. **A head that
+  is never spelled cannot be a key, so it is a member without being a row.**
+  **That is the true shape of the defect: the vocabulary must add a name the
+  research never had a word for.** The ten absorb 3·6·3·4·3·3·14·5·3·2 rows
+  respectively.
+- **§553.3 HOW IT SURFACED — ARITHMETIC THAT DID NOT CLOSE.** Report 1 stated
+  "481 of 481, zero unadjudicated" and then a table summing to **491**. The
+  integrity claim was true and always a ROW claim; **exactly one cell carried a
+  member count into a row table.** Report 2's Reading A (43/269/155/14) was
+  correct for the vessel-struck state — `(a)` rows stayed 43 because all eight
+  moved rows were `C` rows and `vessel` is head-only, so striking it removes a
+  MEMBER without removing an `A` ROW. Report 3 was correct for the nothing-struck
+  state. **Three internally-correct tables, one unlabelled denominator, and the
+  only thing that gave it away was a sum that did not close.**
+- **§553.4 ⛔ MY "FOURTH FIGURE" WAS MY OWN INSTRUMENT, NOT THEIR DATA.** I
+  counted the itemised list at **52** and treated it as a fourth conflicting
+  number. **`wc -l` counts NEWLINES, not lines**, and the file's last byte is
+  `l` — no terminal newline — so it undercounts by one. Verified by me:
+  `grep -c .` = **53**, `awk 'END{print NR}'` = **53**, `vessel` present as the
+  final row. **The lane's figure was right and my instrument was wrong.** Use
+  `grep -c .` or `awk END{NR}`; check `tail -c 1 | od -c` before disputing a
+  total.
+- **§553.5 THE CEILING, RECONCILED.** 563 counted all 481 unmatched keys as
+  candidate members; **549 excludes the 14 parse-noise rows.** The definition
+  changed between scripts and was not stated. **549 is correct** — parse noise is
+  not a candidate member.
+- **§553.6 ⭐ A DEFECT DISCLOSED *BECAUSE* IT MOVES NO FIGURE.** The lane found a
+  real flaw in its own adjudication while checking: the row `scales` names
+  **itself** as its head and should have been classified `A`. Written correctly:
+  explicit `A` rows 43→44, head-only 10→9, **member total unchanged at 53, row
+  total unchanged at 481.** It reported rather than patched, in its words so *"you
+  should see the flaw rather than a tidied file."* **A silent patch would have
+  left the next reader unable to tell a swept list from a lucky one.**
+- **§553.7 ⭐⭐ THE LAW: A FIGURE WITHOUT ITS DENOMINATOR NAMED IS NOT A
+  MEASUREMENT.** The lane's own statement of it is the keeper — *"I reported a
+  member count and a row count in the same table for three consecutive reports
+  without ever labelling the denominator."* **When two counts of "the same thing"
+  disagree, the first hypothesis is TWO DIFFERENT DENOMINATORS, not an error —
+  but name which, at the data, before recording either.** Banked with the
+  `wc -l` and disclosure laws.
+- **§553.8 THE COLLAPSES: NONE TAKEN, AND THE SWEEP IS WHY.** `grindstone` →
+  `mill` merges a tool with a building-scale installation; `beam` → `workbench`
+  merges a tanner's distinctive fixture with a generic one; `immersion pool` →
+  `bath` was the only arguable one. **Refused: legibility beats tidiness in a
+  vocabulary whose whole job is letting a reader picture the room.** What makes
+  the recommendation to stop trustworthy is that the lane verified the
+  genuinely-similar pairs are already correctly separate — `basin`/`cistern`
+  ("used at" vs "drawn from"), `grille`/`hatch` ("seen through" vs "passed
+  through"), `portcullis`/`drawbridge` (different axes) — **so the list was swept,
+  not spot-checked.**
+- **§553.9 AND MY §551.8 STRIKE WAS A DETOUR, NOT A DISCOVERY.** The revised rule
+  (§552.4) turned out to **be** the family-head discipline the original
+  adjudication had already applied — *"each real gap gets one entry, its
+  spellings fold in"* IS *"finer distinctions are attributes, not members."*
+  **That is why the correction reproduces 135 exactly rather than landing
+  somewhere new, and why no re-adjudication was needed — only verification.**
+  Recorded plainly: the strike cost two round-trips and moved the final figure by
+  nothing.
