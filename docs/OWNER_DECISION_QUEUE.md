@@ -23620,3 +23620,97 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   only the symlink, confirmed the owner's directory survived intact, and ran
   `npm ci` in its own worktree alone — 468 packages against the shared 434. Both
   build lanes now hold their own trees. **That discipline is the fix to §540.3.**
+
+## §543 · THE SKEPTIC PANEL SAVED THE DW PROGRAM — THE CHARTER WOULD HAVE PINNED A FALSEHOOD WITH A TEST (2026-08-24 03:40 CDT)
+
+- **§543.1 THE PANEL, AND WHY IT WAS MANDATORY.** §441 J7 requires a skeptic
+  panel before any charter ruling. Six perspective-diverse lenses (owner-signature
+  fidelity · engine grounding at the slot · internal consistency and arithmetic ·
+  dependency and scope · research fidelity · omission hunt), **each attacked by
+  its own refuter defaulting to REFUTED**, then synthesised. **14 findings
+  KILLED, 47 survived**, merged to **14 blockers / 7 chair rulings / 6
+  owner-gated items / 18 amendments**. Read-only by construction — no gate
+  contention with three live lanes. Docket at
+  `scratchpad/DW0-RULING-DOCKET.md` (46,527 chars).
+- **§543.2 ⭐ THE REFUTERS DID REAL WORK, INCLUDING ON THEMSELVES.** One killed
+  finding cited `src/domain/simulationRules.js` — **which does not exist at the
+  slot**; the module is at `src/domain/worldPulse/simulationRules.js`. **The
+  panel caught a phantom home inside its own evidence** — the exact §441 J7
+  hazard it was convened to hunt. Others were killed as category errors,
+  double-counts, or the charter faithfully reflecting a defect in the SOURCE.
+  A panel whose refuters kill nothing is a rubber stamp; this one killed 14.
+- **§543.3 ⛔⛔ THE ROOT CAUSE, AND IT IS PARTLY MY DISPATCH.** Six of the
+  fourteen blockers share one cause: **the charter declares base `79b78881c` but
+  reconciles against `029268fe5`, which is an ORPHAN — `git merge-base 029268fe5
+  79b78881c` exits 1 with no output. VERIFIED BY ME.** A preserve pin of authored
+  documents is on no branch and is an ancestor of nothing. **My brief told DW-0 to
+  read the frozen bundle and never told it to reconcile against the slot.** Six
+  cars landed in between and the charter knows of none — **all six verified by me
+  as ancestors of the slot**: CG-1 `d78011665`, CG-1b `3e9d2d888`, CH-1
+  `b2852ccc3`, CH-2A `17fe89763`, UC-5 `f4df874ce`, MP-1 `9e5059cec`.
+- **§543.4 ⛔⛔ THE WORST ONE: THE CHARTER WOULD HAVE SHIPPED A FALSE STATEMENT
+  AND PINNED IT GREEN.** `src/domain/undercity/connectivity.js` is **28,261 B at
+  the slot — VERIFIED**. The charter asserts **three times, in the present
+  tense**, that it "does not exist at any ref", calls that a *Standing fact*, and
+  charters DW-4b to carry an **honesty clause plus an acceptance arm that greps
+  for it**. That is a literal falsehood written into every generated plan and
+  **held true by a passing test**. Strike all three; delete the clause and its
+  arm; re-disposition E7 against the shipped `CONNECTION_CLASSES`; and re-home
+  D-6, because **UC-5 was the undercity train's last car, so the train it was
+  deferred to has no remaining vehicle.**
+- **§543.5 TWO MORE THAT WOULD HAVE COST REAL WORK.** **MP-1 landed inside the
+  charter's own base commit and is named ZERO times** — `cartographyProperty.js`
+  (9,141 B, VERIFIED), mounted at `SettlementMapPane.jsx:601`, whose header
+  already states the DW integration contract verbatim; DW-6d must be re-cut as
+  its **consumer**, not its producer. And **`PlanDelta` carries one of the three
+  laws its shipped sibling `interiorEdits.js` carries** — the missing one is
+  EDITS-DELTA (pin on a stable id; re-apply what resolves; **drop danglers, never
+  throw, never ghost**). As chartered it keys on an undefined `path` while DW-S
+  re-derives every plan at every soak epoch: **that silently corrupts a paying
+  user''s authored map.**
+- **§543.6 ⭐⭐ THE NEW STANDING LAW — ABSENCE DECAYS SILENTLY.** *An absence
+  claim inherited from a frozen dossier is RE-MEASURED at the slot.* A "does not
+  exist" becomes false the moment someone creates the thing and **nothing
+  signals it** — no conflict, no red, no diff. Presence claims fail loudly when a
+  file moves; absence claims just quietly become lies. Adopted as a compile rule
+  and banked at `memory/absence-decays-silently-reconcile-frozen-dossiers.md`.
+  **Sibling law, same file: a charter whose input list omits the ODQ re-opens
+  questions the chair already ruled** (see §543.8).
+- **§543.7 NOTHING NEEDS UN-LANDING — VERIFIED.** `7c3377cd4` is contained in
+  **zero branches** and `docs/DW0-CHARTER-COMPILED.md` is MISS at the ledger
+  branch, at master and at the slot. **Holding the landing for the panel was the
+  right call**; every blocker can be fixed before the document exists anywhere.
+  DW-0 resumed with the full docket. **R2 (where the charter lands) is therefore
+  still open and is mine.**
+- **§543.8 ⭐ O6 — THE PANEL TOLD ME NOT TO BOTHER THE OWNER, AND IT IS RIGHT.**
+  The charter carries the three viewing paywalls as unresolved at §C.4, §J-DW0-6
+  and §K.6. **I already ruled all three at §523.3 — `change-view` FREE,
+  `map-chains` FREE, `fog-table` PAID — about four hours before the compile
+  committed.** The charter cites §523/§524 for the export trichotomy and then
+  treats the paywalls as open: **a partial read, and its AMENDMENT RECORD''s
+  input list never names the ODQ at all.** Struck from the open list; not going
+  back to the owner.
+- **§543.9 ⛔ FIVE ITEMS THAT ARE GENUINELY THE OWNER''S.** **O1** the `interiors`
+  ladder row''s stored return cells (`free: ''1 sample per settlement''`,
+  `cartographer: true`, `axis: ''viewing''`) versus signed B16b''s viewing-free —
+  *paid surface*; my recommendation is to return the row as
+  `{axis:''viewing'', free:true, cartographer:true, enforcement:''parity''}`, and
+  **that strikes the 2026-07-17 "one free sample interior per settlement"
+  teaser**, which the owner must be told in those words. **O2** `Estate.ownerRef`''s
+  type — *persistence shape*, the §519-vs-§498 tension, the single largest
+  contract change in the program. **O3** `PlanDelta`, `EstateEvent` and EST-5''s
+  persisted ownership ledger — three new durable artefacts, one user-authored on
+  a paid surface. **O4** the seven-rung prosperity ladder — a **tuning signature
+  under THE PROMISE**, and tuning is last. **O5** certifying the DW-S soak leg
+  green with same-seed determinism and lived-history immutability **unmeasured**.
+- **§543.10 THE PANEL''S OWN COVERAGE NOTE, STATED NOT BURIED.** **Nothing was
+  executed against the engine** — every runtime claim is read off shipped source.
+  Every corpus integer is unverified by execution; the arithmetic *relations* were
+  confirmed against shipped carve constants (`PARCEL_EDGE_DIVISIONS = 3` ⇒ 528×2 =
+  1,056, ×3 = 3,168, ×4 = 4,224) **but the underlying measurements were not.**
+  Named gaps: **CG-2 × CG-1b is unmeasured by anyone** — CG-1b moved the caps and
+  whether 183/369/2,839 still hold was checked by no lens and no prior train
+  (**my live CG-2 lane is already instructed to re-derive it**); and **the six
+  R-INST tranches plus DWR1A, 2.2 MB, were not walked in full** — the largest
+  untested body under the charter, which the charter''s own amendment record also
+  did not re-derive.
