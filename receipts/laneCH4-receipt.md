@@ -1,9 +1,11 @@
 # TE-CH-4 RECEIPT — STOPPED AT CHECKPOINT (chair recall, 2026-08-24)
 
 ## THE TIP
-**Commit `f3d02f62c4ba8f331747ad343d816e51fae6745b`** (detached, parent = slot
-`c3289244d58b7259205d80594856e8e0cc520817`).
-**Pinned at `refs/preserve/wip-ch4`** (WIP, not holding — the FULL gate was never run).
+**Commit `dc49c6c4a6761abc54235792665db611338805f3`** (detached; parent
+`f3d02f62c4ba8f331747ad343d816e51fae6745b`, grandparent = slot
+`c3289244d58b7259205d80594856e8e0cc520817`). TWO commits:
+  f3d02f62c  the registry + anchored den + canonical routing (2 files)
+  dc49c6c4a  the edge-bundle regen that edit billed (6 sidecars)
 Two files changed, 358 insertions, 23 deletions:
 `src/domain/districtProfile.js`, `tests/domain/districtProfile.test.js`.
 NO new test file. NO CAS. NO push. NO pin deleted. `npcProfile.js` untouched (CH-7's).
@@ -31,8 +33,43 @@ The three map goldens re-proved alone, tree clean at the tip:
      Test Files  3 passed (3)
           Tests  16 passed (16)
 
-⛔ **`npm run check:tail` (the FULL gate) was NEVER RUN.** That is the single
-outstanding proof. Do not claim this car is green.
+## ⭐ THE EDGE-BUNDLE BILL — CHAIR'S CORRECTED LAW, VERIFIED AT THE SLOT
+
+The bill is keyed to the **TRANSITIVE IMPORT CLOSURE** of five AI entry points,
+NOT to a file. `build-edge-shared.mjs` hashes the content of every transitive
+input. **It reaches me and I owed a regen:**
+`src/domain/aiGrounding.js:62` imports `deriveAllDistricts` from districtProfile,
+and `aiGroundingBundle.meta.json` lists `src/domain/districtProfile.js` among its
+**67 inputs**. Verified by execution, not taken on trust.
+
+**MEASURED SCOPE — ONE closure of five bills this car, not three:**
+
+| bundle | inputs | bills CH-4? |
+|---|---|---|
+| aiGroundingBundle | 67 | **YES** |
+| aiCharterBundle | 111 | no |
+| aiOutputSchemaBundle | 112 | no |
+| analyticsEventsBundle | 2 | no |
+| intentAtlasBundle | 2 | no |
+
+(CH-7's `npcProfile.js` staled three; mine stales one. The count is per-closure.)
+
+Regen: `npm run build:edge-shared` → BUILD_EXIT=0 on a QUIESCENT tree.
+Only `aiGroundingBundle.js` moved in content; its meta `sourceHash`
+**40141c7bb3a94f13 → a5aebd5a14b6d0bf**. The other four metas carry ONLY a
+`generatedAt` change (the builder rewrites all five sidecars every run). All
+five committed together as a SET, so no meta describes content that is neither
+committed nor staged — the exact `edgeSharedBundleReproducibility` arm that reds
+when they are split.
+
+⚠ This bill is **INVISIBLE to a targeted suite run** — the freshness and
+reproducibility arms live outside `tests/domain` and `tests/lint`, so every
+focused green I banked earlier could not have seen it. Only the full gate can.
+
+## FULL GATE
+Launched BARE (never wrapped in gate-mutex — that self-deadlocks and exit 3 is
+the mutex giving up, not a red), fresh shell, tree quiescent at launch (0 dirty),
+nothing editing the tree during the run. See the verdict block below.
 
 ## CENSUS DELTA (carry the DELTA, never the tuple)
     files       +0     (no new test file — deliberate, see JUDGMENT 1)

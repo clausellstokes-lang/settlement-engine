@@ -93,7 +93,12 @@ An exit code with no collected-test count is NOT a verdict.
   `aiCharterBundle` **111** inputs · `aiGroundingBundle` **67** · `aiOutputSchemaBundle` **112**.
   `src/domain/npcProfile.js` is in **all three**; `src/domain/districtProfile.js` is in
   `aiGroundingBundle`. **`institutionalCatalog.js` is merely the famous member.**
-  ⛔ A TWO-LINE EDIT ANYWHERE IN THE CLOSURE STALES ALL THREE. Symptom: six failures outside the
+  ⛔ A TWO-LINE EDIT ANYWHERE IN A CLOSURE STALES **THAT** CLOSURE — **and the count is PER-FILE,
+  not a constant.** `npcProfile.js` sits in three closures and staled three; `districtProfile.js`
+  sits in **one** (`aiGroundingBundle`) and staled one. **Never assume "three".** ⚠ Note also that
+  the builder **rewrites all five sidecars every run**, so four of them will show a `generatedAt`-only
+  change — commit all six files together anyway, precisely so no meta describes content that is
+  neither committed nor staged. Symptom: six failures outside the
   frozen census — three `*.freshness.test.js` ("Bundle is stale") and three
   `edgeSharedBundleReproducibility` ("built from content that is neither committed nor staged").
   Cure: `npm run build:edge-shared`, then commit the bundle+meta pairs **as a SET**.
