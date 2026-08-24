@@ -25929,3 +25929,39 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   wording, and amending after the green would void the green for one word —
   the correction rides the next DEPLOY.md touch. **J3 (no census row)
   proved by the gate itself.**
+
+## §589 · THE CLIFF-EDGE WAVE SEALS — AND FJORDS, IT TURNS OUT, HAVE NO CLIFFS YET (2026-08-24 ~15:25 CDT)
+
+- **§589.1 TE-REG-G1 VALIDATED AND SEALED** at
+  `refs/preserve/map-sandbox-regg1-cliffs` = `067a7e1f3` (three checkpoints on
+  the sealed W3f base; the shipped repo carries no lane bytes). The design is
+  the lawful shape: a CLIFF is the boundary of the crag cell set, derived
+  beside the substrate, consuming `groundRefusal.REFUSAL.crag` so the law and
+  the picture agree; no new threshold, no new random namespace, derived never
+  stored. **Exits, all executed:** 25 flat leaves carry 0 edges/0 ops while
+  10 cliff leaves carry 35–116 · wall-over-cliff ops **257 → 0** · the
+  consumption differential proves the trace READS the field · dormancy
+  byte-identical on all six leaves against a pristine worktree · determinism
+  double-run · five mutation controls · 15/15 pins. ⭐ The lane had
+  independently measured the false premise before the re-charter arrived and
+  had built nothing needing deletion.
+- **§589.2 RULED — J-REGG1-4 RATIFIED:** the escarpment joins the declared
+  `substrateKey` rather than minting a new `WALL_CIRCUIT_INPUTS` row, because
+  a new row moves EVERY circuit's `inputsHash` estate-wide on a dormant wave
+  (the mint-trigger avalanche class) while the join keeps `assertCircuitFresh`
+  honest. Correct on both grounds.
+- **§589.3 ⭐ THE FINDING FOR THE TUNING DOCKET: FJORD TERRAIN CANNOT PRODUCE
+  A CLIFF.** The fjord family's height field saturates while its steepest cell
+  (0.0256) sits below `REFUSAL.crag` (0.030) — the ramp damping eats the
+  gradient — so §577's termination fires on hills and mountains and NOT on
+  the family that wants it most. The lane correctly refused to fix it: both
+  cures are world-shaping constants. **Queued as a tuning-pass input beside
+  the 300y runaway, the map leg and G-43; owner signs.**
+- **§589.4 TWO OWED FOLLOW-UPS, RECORDED:** the §217 terminus/end-work op
+  exposure is UNMEASURED (a mountain circuit doubles its tower fixtures armed)
+  — named as a REG-2 pre-measure; and the stage-manifest lint walker was
+  pinned but not walked (needs the vitest runner) — PLAUSIBLE only, rides the
+  port's gate. Five self-found defect classes are in the lane's receipt; the
+  sharpest banks as law: **sampled refinement converges on its own artifacts —
+  answer an exactly-answerable question with the same grid traversal the law
+  uses, and share it with the instrument that grades it.**
