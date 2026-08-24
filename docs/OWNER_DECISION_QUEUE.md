@@ -27078,3 +27078,40 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   (J-REG4-11 — headless Chrome outlived its own screenshot by minutes). REG-9 judging
   inputs recorded: town-2's vacuous faubourg coverage · region-level typing reads all-road
   by centroid · cigar retention 52–76 %.
+
+## §633 · THE SEAL CORRECTION, THE 65TH CAR, AND TWO DISPOSITIONS (2026-08-25 ~06:15 CDT)
+
+- **§633.1 CORRECTION OF RECORD (self-caught):** §632.1 declared REG-4's seal at
+  `5cce5782d`, but the seal ritual ABORTED on 30 untracked judging artifacts while the
+  ledger commit had already gone out — the §597.2 sequencing class, one act over. Cured:
+  the artifacts (crops, pages, squints, the picks record) are preserved by a chair commit
+  and **the REG-4 seal is `refs/preserve/map-sandbox-reg4-markets` = `7fba086d5`**
+  (= `5cce5782d` + the artifact commit; the wave's code tip is unchanged). BANKED: **the
+  seal executes BEFORE the ledger commit that declares it** — a declaration is written
+  after its act, never in the same breath.
+- **§633.2 TE-SEAM-B LANDED — the 65th car. Slot `e4ed27f48` → `73f5dfc02`** (ancestry
+  verified, CAS'd). Both realm-map inline chains now call the landed `popToTier`; the
+  retired chains' `(pop = 0)` default masked a live hazard the lane caught before it
+  shipped — `popToTier(undefined)` falls through every ≤ and returns METROPOLIS, so a
+  naive swap would have drawn a metropolis crown where a thorp dot belonged (`?? 0`
+  carried, test-pinned). Blast radius proved by 0..120000 sweep: exactly the 160
+  populations 241–400 flip village→hamlet. Full gate GREEN at run 2 (29,077 tests, known
+  failures 11 of ceiling 11, strict-dist 53/467; run 1's red was the lane's own walker
+  parking, settled by negative control); committed blobs SHA-matched to the gated bytes;
+  census tuple re-derived by execution `2,525/366/2,159/21,059/5,854` with the base
+  proved undrifted. **DECLARED SHIFT:** same-seed realm-map icons and derived `settType`
+  flip in the 241–400 window — 47.1 % of the hamlet band's integers, and the fixture
+  corpus samples it 0/47, which is WHY the seam lived. No stored tier moves. Lifecycle
+  traced: `settType` is never persisted; the anticipated migration does not exist.
+- **§633.3 DISPOSITIONS:** (i) `burgToConfig` is DEAD CODE (zero callers) — kept
+  corrected; deletion is a public-shape call and joins the dead-code disposition sweep.
+  (ii) ⚠ **cached gallery covers bake the rendered glyph into a public-bucket JPEG that
+  is never invalidated** — covers published pre-cure keep the old dot forever; a
+  COVER-REFRESH car joins the catalog residue (owner-visible: public-bucket content).
+  The trap is banked with it: the dependency runs through the CLONED DOM, not through
+  data — grepping the thumbnailer for `tier` finds nothing. (iii) The lane's five
+  proposed memory rows await the chair's next memory pass. **REG-SEAM and REG-I1
+  dispatch now** — REG-SEAM on the corrected REG-4 seal with §631.3's scope plus the
+  `OP_CEILING_BY_TIER` §628 landing and a seam-window liveness probe (a zero corpus
+  delta must be proved live, fourth-stack law); REG-I1 on the instruments workspace with
+  §632.4's debts.

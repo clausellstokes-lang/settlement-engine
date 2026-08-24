@@ -59,7 +59,25 @@ CH-4 → **CH-6** (⛔ a **live shipped deity-doctrine violation**: a magic-free
 
 ⛔ **EDGE-BUNDLE BILL — the count is PER-FILE.** `npcProfile.js` sits in three closures, `districtProfile.js` in one (`aiGroundingBundle`, 67 inputs). **Read `supabase/functions/_shared/<bundle>.meta.json` before budgeting.** The bill is **invisible to targeted suite runs** — only the full gate sees it. Cure: `npm run build:edge-shared`, commit all six files as a set.
 
-### ⭐⭐⭐ STATE AS OF §631 (2026-08-25 ~04:35) — REG-3 SEALED AT 82 %, THE BAND-SEAM RULED, THREE LANES LIVE
+### ⭐⭐⭐ STATE AS OF §633 (2026-08-25 ~06:15) — SLOT 73f5dfc02 (65 CARS), REG-4 SEALED, REG-SEAM + REG-I1 IN FLIGHT
+Ledger through **§633**. **SLOT MOVED: `claude/composite-r4` = `73f5dfc02` (65 cars — TE-SEAM-B
+landed §633.2: realm-map tier chains → landed popToTier; declared shift window 241–400; census
+tuple now `2,525/366/2,159/21,059/5,854`).** **REG-4 SEALED** = `map-sandbox-reg4-markets` @
+`7fba086d5` (§632: seam 0/141 + convicting mutations · V-B13 23/23 · fossils consumed from §18.4 ·
+faubourgs 129/129 typed · sliver census 0/23,436 · dormancy+determinism 29/29 · F-C floor SIGNED ·
+taste gate PASS; ⚠ the seal is 7fba086d5 NOT §632.1's 5cce5782d — §633.1's correction).
+**§632.3: REG-GROW MINTED (vetoable)** — the differential convicts the engine (509 untyped
+extramural bodies past a standing circuit; intramural falls 1,414→883 while the suburb rises);
+ruled CHARTERED REPAIR under the owner's wall law; architecture-first, after REG-SEAM, feeds
+REG-T2. **IN FLIGHT: REG-SEAM** (base 7fba086d5 — §631.3 band reconcile + OP_CEILING §628 landing
++ seam-window liveness probe; receipt → laneREGSEAM-receipt.md) and **REG-I1** (instrument debts
+§632.4: seven i8 rows · i5/i6 armed re-runs · triangular/bridgehead liveness · ratchet-unit
+review · warehouse fixture cure; receipt → laneREGI1-receipt.md). Open dispositions: COVER-REFRESH
+car (public-bucket covers never invalidated) · burgToConfig deletion → dead-code sweep. Arc:
+REG-SEAM → REG-GROW arch → REG-T2 → REG-5→9 → D → 10 → 11 → F0 → F → P; then catalog residue →
+DW 42 → AD 17 → OSR → parity → ultra (OWNER) → walk + ONE regen → soaks → STOP at tuning.
+
+### (historical) STATE AS OF §631 (2026-08-25 ~04:35) — REG-3 SEALED AT 82 %, THE BAND-SEAM RULED, THREE LANES LIVE
 Ledger through **§631**. **REG-3 SEALED**: `map-sandbox-reg3-shapes` =
 `93fa8a2ca` (§628 — blind silhouettes **18/22 = 81.8 % PASS**, warehouse class carved out as
 UNPROVEN-BY-DEFECTIVE-FIXTURE — quay fixtures rendered area:0, re-round owed after fixture
