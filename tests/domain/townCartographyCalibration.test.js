@@ -149,6 +149,43 @@
  *   exactly as recorded; and THE ONE LAW holds — `cartoInstitutionRefs` equals
  *   `institutions` on 504 of 504 rows.
  *
+ * 2026-08-24 — FIFTH RECORD (TE-CH-4, the district-profile registry; ODQ §555).
+ *   ⚠ NOT A CARTOGRAPHY CHANGE. Not one line of `src/domain/townMap/**` or
+ *   `src/domain/townCartography/**` moved. This re-record exists because the car
+ *   re-classifies DISTRICTS, and a district's category decides its ring and its
+ *   wall-embrace, which moves the centroid every building is placed around.
+ *
+ *   WHY IT IS THE DECLARED SHIFT AND NOT A DEFECT — the per-field signature says so.
+ *   Over the 52-row W2 sample, 32 rows drift and ONLY the two drawn-geometry fields
+ *   move: `cartoBuildings` 28 and `cartoRowBytes` 28. Every other recorded field is
+ *   unmoved on every sampled row — `institutions` 0, `districts` 0, `sceneBuildings` 0,
+ *   `dark` 0, `outcome` 0, `reported` 0, and `cartoInstitutionRefs` 0. So the generator
+ *   did not move underneath this re-record, the district COUNT did not change (only
+ *   which category each district is), no row newly throws, and THE ONE LAW still holds:
+ *   every canonical institution draws its flagship.
+ *
+ *   ⛔ THE STACKING CHECK WAS RUN BEFORE ANYTHING WAS RE-RECORDED, because a re-record
+ *   over a geometry regression is the one thing this manifest must never absorb.
+ *   `cartoDupExact` measured LIVE at all six argmax rows reads 0, against 0 recorded —
+ *   zero drawn buildings stand on another anywhere. MF-CG2's cure is intact under this
+ *   car, and all eight W8 failures were record mismatches, not stacked geometry.
+ *
+ *   WHAT MOVED:
+ *     (1) `FROZEN.maxBuildings` — village 47 → 46, town 114 → 116, city 196 → 203.
+ *         thorp (12), hamlet (25) and metropolis (261) are unmoved. The arm is EXACT in
+ *         both directions ("drew 46 < frozen 47 — lower it"), so village is lowered
+ *         rather than left as slack.
+ *     (2) `DUPLICATES.permille` — thorp 109 → 124, village 72 → 66, town 68 → 65,
+ *         city 50 → 51, metropolis 53. hamlet (181) is unmoved. Shapes repeat at a
+ *         different rate because the parcels they are drawn into moved, not because the
+ *         packer changed.
+ *     (3) The derived ceilings with them, 175/290/116/109/80/77 → 199/290/106/104/82/85.
+ *         NOT loosened by hand — each is `Math.ceil(permille × 1600/1000)`, the same
+ *         derivation re-evaluated, and two of the six went DOWN.
+ *   WHAT DID NOT MOVE, each checked rather than assumed: `maxInstitutions` stays
+ *   11/24/41/62/55/63; the throw census stays 0 of 504; and W2's live re-measure and
+ *   W8's live argmax arm both pass against the new record.
+ *
  * To re-record after an INTENTIONAL change, run:
  *   UPDATE_CARTOGRAPHY_CALIBRATION=1 npx vitest run tests/domain/townCartographyCalibration.test.js
  * and add a row above before committing. Re-recording without adding a row is a
@@ -217,9 +254,9 @@ const TUNING_SOURCE = resolve(
 const FROZEN = Object.freeze({
   thorp: Object.freeze({ throws: 0, maxInstitutions: 11, maxBuildings: 12 }),
   hamlet: Object.freeze({ throws: 0, maxInstitutions: 24, maxBuildings: 25 }),
-  village: Object.freeze({ throws: 0, maxInstitutions: 41, maxBuildings: 47 }),
-  town: Object.freeze({ throws: 0, maxInstitutions: 62, maxBuildings: 114 }),
-  city: Object.freeze({ throws: 0, maxInstitutions: 55, maxBuildings: 196 }),
+  village: Object.freeze({ throws: 0, maxInstitutions: 41, maxBuildings: 46 }),
+  town: Object.freeze({ throws: 0, maxInstitutions: 62, maxBuildings: 116 }),
+  city: Object.freeze({ throws: 0, maxInstitutions: 55, maxBuildings: 203 }),
   metropolis: Object.freeze({ throws: 0, maxInstitutions: 63, maxBuildings: 261 }),
 });
 
@@ -265,12 +302,12 @@ const FROZEN = Object.freeze({
  * those, which is the evidence that the census measures the cure rather than nothing.
  */
 const DUPLICATES = Object.freeze({
-  thorp: Object.freeze({ permille: 109 }),
+  thorp: Object.freeze({ permille: 124 }),
   hamlet: Object.freeze({ permille: 181 }),
-  village: Object.freeze({ permille: 72 }),
-  town: Object.freeze({ permille: 68 }),
-  city: Object.freeze({ permille: 50 }),
-  metropolis: Object.freeze({ permille: 48 }),
+  village: Object.freeze({ permille: 66 }),
+  town: Object.freeze({ permille: 65 }),
+  city: Object.freeze({ permille: 51 }),
+  metropolis: Object.freeze({ permille: 53 }),
 });
 
 /**
@@ -939,7 +976,7 @@ describe('W8 the drawn corpus does not repeat itself', () => {
     expect(drift).toEqual([]);
     // The ceilings are the derivation evaluated, not a second table: a reader can
     // check every one of them by hand against DUPLICATES and the declared headroom.
-    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([175, 290, 116, 109, 80, 77]);
+    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([199, 290, 106, 104, 82, 85]);
     // And the derivation is live — a hypothetical reading derives its own ceiling.
     expect(Math.ceil((100 * CARTOGRAPHY_HEADROOM_PERMILLE) / 1000)).toBe(160);
   });

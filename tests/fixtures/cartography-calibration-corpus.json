@@ -8,10 +8,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 196,
-  "cartoRowBytes": 399,
+  "cartoRowBytes": 395,
   "cartoInstitutionRefs": 47,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 4
  },
  "city|arabic|desert|road|plagued|cg1-seed-03": {
   "tier": "city",
@@ -21,11 +21,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 155,
-  "cartoRowBytes": 402,
+  "cartoBuildings": 145,
+  "cartoRowBytes": 396,
   "cartoInstitutionRefs": 47,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 10
  },
  "city|arabic|forest|isolated|plagued|cg1-seed-11": {
   "tier": "city",
@@ -35,11 +35,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 130,
-  "cartoRowBytes": 397,
+  "cartoBuildings": 129,
+  "cartoRowBytes": 407,
   "cartoInstitutionRefs": 42,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 5
+  "cartoDupTranslate": 4
  },
  "city|arabic|hills|road|frontier|cg1-seed-10": {
   "tier": "city",
@@ -49,11 +49,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 162,
-  "cartoRowBytes": 391,
+  "cartoBuildings": 166,
+  "cartoRowBytes": 400,
   "cartoInstitutionRefs": 45,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 16
  },
  "city|arabic|mountain|road|frontier|cg1-seed-02": {
   "tier": "city",
@@ -63,11 +63,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 162,
+  "cartoBuildings": 131,
   "cartoRowBytes": 402,
   "cartoInstitutionRefs": 43,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 4
  },
  "city|arabic|plains|road|civilized|cg1-seed-09": {
   "tier": "city",
@@ -77,11 +77,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 162,
-  "cartoRowBytes": 403,
+  "cartoBuildings": 141,
+  "cartoRowBytes": 399,
   "cartoInstitutionRefs": 43,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 14
+  "cartoDupTranslate": 2
  },
  "city|arabic|riverside|river|safe|cg1-seed-00": {
   "tier": "city",
@@ -91,11 +91,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 165,
-  "cartoRowBytes": 408,
+  "cartoBuildings": 162,
+  "cartoRowBytes": 405,
   "cartoInstitutionRefs": 48,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 4
  },
  "city|celtic|coastal|port|frontier|cg1-seed-06": {
   "tier": "city",
@@ -105,11 +105,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 162,
-  "cartoRowBytes": 408,
+  "cartoBuildings": 193,
+  "cartoRowBytes": 397,
   "cartoInstitutionRefs": 51,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 10
  },
  "city|celtic|desert|road|safe|cg1-seed-08": {
   "tier": "city",
@@ -119,11 +119,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 166,
-  "cartoRowBytes": 394,
+  "cartoBuildings": 201,
+  "cartoRowBytes": 398,
   "cartoInstitutionRefs": 52,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 8
  },
  "city|celtic|forest|isolated|safe|cg1-seed-04": {
   "tier": "city",
@@ -133,11 +133,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 119,
-  "cartoRowBytes": 396,
+  "cartoBuildings": 118,
+  "cartoRowBytes": 399,
   "cartoInstitutionRefs": 34,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 6
  },
  "city|celtic|hills|road|plagued|cg1-seed-03": {
   "tier": "city",
@@ -147,11 +147,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 142,
-  "cartoRowBytes": 405,
+  "cartoBuildings": 129,
+  "cartoRowBytes": 400,
   "cartoInstitutionRefs": 40,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 6
  },
  "city|celtic|mountain|road|plagued|cg1-seed-07": {
   "tier": "city",
@@ -161,11 +161,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 163,
-  "cartoRowBytes": 405,
+  "cartoBuildings": 165,
+  "cartoRowBytes": 396,
   "cartoInstitutionRefs": 46,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 2
  },
  "city|celtic|plains|road|frontier|cg1-seed-02": {
   "tier": "city",
@@ -175,11 +175,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 166,
-  "cartoRowBytes": 403,
+  "cartoBuildings": 165,
+  "cartoRowBytes": 394,
   "cartoInstitutionRefs": 49,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 16
+  "cartoDupTranslate": 2
  },
  "city|celtic|riverside|river|civilized|cg1-seed-05": {
   "tier": "city",
@@ -189,11 +189,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 169,
-  "cartoRowBytes": 403,
+  "cartoBuildings": 174,
+  "cartoRowBytes": 398,
   "cartoInstitutionRefs": 43,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 16
+  "cartoDupTranslate": 6
  },
  "city|east_asian|coastal|port|frontier|cg1-seed-10": {
   "tier": "city",
@@ -204,10 +204,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 194,
-  "cartoRowBytes": 397,
+  "cartoRowBytes": 395,
   "cartoInstitutionRefs": 49,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 2
  },
  "city|east_asian|desert|road|safe|cg1-seed-00": {
   "tier": "city",
@@ -217,8 +217,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 151,
-  "cartoRowBytes": 391,
+  "cartoBuildings": 149,
+  "cartoRowBytes": 399,
   "cartoInstitutionRefs": 46,
   "cartoDupExact": 0,
   "cartoDupTranslate": 12
@@ -231,11 +231,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 134,
-  "cartoRowBytes": 404,
+  "cartoBuildings": 162,
+  "cartoRowBytes": 405,
   "cartoInstitutionRefs": 42,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 8
  },
  "city|east_asian|hills|road|plagued|cg1-seed-07": {
   "tier": "city",
@@ -245,11 +245,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 166,
-  "cartoRowBytes": 406,
+  "cartoBuildings": 169,
+  "cartoRowBytes": 396,
   "cartoInstitutionRefs": 51,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 4
  },
  "city|east_asian|mountain|road|plagued|cg1-seed-11": {
   "tier": "city",
@@ -259,11 +259,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 165,
-  "cartoRowBytes": 388,
+  "cartoBuildings": 162,
+  "cartoRowBytes": 399,
   "cartoInstitutionRefs": 45,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 12
  },
  "city|east_asian|plains|road|frontier|cg1-seed-06": {
   "tier": "city",
@@ -274,10 +274,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 161,
-  "cartoRowBytes": 408,
+  "cartoRowBytes": 400,
   "cartoInstitutionRefs": 47,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 12
+  "cartoDupTranslate": 14
  },
  "city|east_asian|riverside|river|civilized|cg1-seed-09": {
   "tier": "city",
@@ -287,11 +287,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 180,
-  "cartoRowBytes": 399,
+  "cartoBuildings": 179,
+  "cartoRowBytes": 394,
   "cartoInstitutionRefs": 47,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 18
  },
  "city|germanic|coastal|port|safe|cg1-seed-04": {
   "tier": "city",
@@ -301,11 +301,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 151,
-  "cartoRowBytes": 407,
+  "cartoBuildings": 182,
+  "cartoRowBytes": 394,
   "cartoInstitutionRefs": 46,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 12
  },
  "city|germanic|desert|road|frontier|cg1-seed-06": {
   "tier": "city",
@@ -315,11 +315,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 162,
-  "cartoRowBytes": 410,
+  "cartoBuildings": 192,
+  "cartoRowBytes": 396,
   "cartoInstitutionRefs": 51,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 10
  },
  "city|germanic|forest|isolated|frontier|cg1-seed-02": {
   "tier": "city",
@@ -329,11 +329,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 131,
-  "cartoRowBytes": 394,
+  "cartoBuildings": 160,
+  "cartoRowBytes": 390,
   "cartoInstitutionRefs": 43,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 4
  },
  "city|germanic|hills|road|civilized|cg1-seed-01": {
   "tier": "city",
@@ -343,11 +343,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 158,
-  "cartoRowBytes": 388,
+  "cartoBuildings": 189,
+  "cartoRowBytes": 392,
   "cartoInstitutionRefs": 39,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 8
  },
  "city|germanic|mountain|road|civilized|cg1-seed-05": {
   "tier": "city",
@@ -357,11 +357,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 155,
-  "cartoRowBytes": 405,
+  "cartoBuildings": 149,
+  "cartoRowBytes": 398,
   "cartoInstitutionRefs": 39,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 8
  },
  "city|germanic|plains|road|safe|cg1-seed-00": {
   "tier": "city",
@@ -371,11 +371,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 164,
-  "cartoRowBytes": 407,
+  "cartoBuildings": 154,
+  "cartoRowBytes": 400,
   "cartoInstitutionRefs": 50,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 9
+  "cartoDupTranslate": 8
  },
  "city|germanic|riverside|river|plagued|cg1-seed-03": {
   "tier": "city",
@@ -385,11 +385,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 173,
-  "cartoRowBytes": 398,
+  "cartoBuildings": 179,
+  "cartoRowBytes": 396,
   "cartoInstitutionRefs": 48,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 14
  },
  "city|greek|coastal|port|frontier|cg1-seed-02": {
   "tier": "city",
@@ -399,11 +399,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 163,
-  "cartoRowBytes": 406,
+  "cartoBuildings": 194,
+  "cartoRowBytes": 393,
   "cartoInstitutionRefs": 55,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 7
  },
  "city|greek|desert|road|safe|cg1-seed-04": {
   "tier": "city",
@@ -414,10 +414,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 163,
-  "cartoRowBytes": 403,
+  "cartoRowBytes": 392,
   "cartoInstitutionRefs": 50,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 8
  },
  "city|greek|forest|isolated|safe|cg1-seed-00": {
   "tier": "city",
@@ -427,11 +427,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 130,
-  "cartoRowBytes": 398,
+  "cartoBuildings": 129,
+  "cartoRowBytes": 404,
   "cartoInstitutionRefs": 42,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 0
  },
  "city|greek|hills|road|plagued|cg1-seed-11": {
   "tier": "city",
@@ -441,11 +441,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 165,
-  "cartoRowBytes": 388,
+  "cartoBuildings": 164,
+  "cartoRowBytes": 397,
   "cartoInstitutionRefs": 50,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 12
+  "cartoDupTranslate": 6
  },
  "city|greek|mountain|road|plagued|cg1-seed-03": {
   "tier": "city",
@@ -455,11 +455,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 155,
-  "cartoRowBytes": 404,
+  "cartoBuildings": 143,
+  "cartoRowBytes": 397,
   "cartoInstitutionRefs": 47,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 2
  },
  "city|greek|plains|road|frontier|cg1-seed-10": {
   "tier": "city",
@@ -469,11 +469,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 162,
-  "cartoRowBytes": 389,
+  "cartoBuildings": 166,
+  "cartoRowBytes": 399,
   "cartoInstitutionRefs": 45,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 12
  },
  "city|greek|riverside|river|civilized|cg1-seed-01": {
   "tier": "city",
@@ -483,11 +483,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 175,
-  "cartoRowBytes": 402,
+  "cartoBuildings": 183,
+  "cartoRowBytes": 399,
   "cartoInstitutionRefs": 45,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 14
+  "cartoDupTranslate": 12
  },
  "city|latin|coastal|port|plagued|cg1-seed-11": {
   "tier": "city",
@@ -497,11 +497,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 163,
-  "cartoRowBytes": 405,
+  "cartoBuildings": 191,
+  "cartoRowBytes": 395,
   "cartoInstitutionRefs": 43,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 18
  },
  "city|latin|desert|road|civilized|cg1-seed-01": {
   "tier": "city",
@@ -511,11 +511,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 164,
-  "cartoRowBytes": 387,
+  "cartoBuildings": 162,
+  "cartoRowBytes": 396,
   "cartoInstitutionRefs": 47,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 9
+  "cartoDupTranslate": 8
  },
  "city|latin|forest|isolated|civilized|cg1-seed-09": {
   "tier": "city",
@@ -525,11 +525,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 119,
-  "cartoRowBytes": 393,
+  "cartoBuildings": 121,
+  "cartoRowBytes": 404,
   "cartoInstitutionRefs": 40,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 4
  },
  "city|latin|hills|road|safe|cg1-seed-08": {
   "tier": "city",
@@ -539,11 +539,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 167,
-  "cartoRowBytes": 391,
+  "cartoBuildings": 194,
+  "cartoRowBytes": 396,
   "cartoInstitutionRefs": 46,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 16
  },
  "city|latin|mountain|road|safe|cg1-seed-00": {
   "tier": "city",
@@ -553,11 +553,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 150,
-  "cartoRowBytes": 393,
+  "cartoBuildings": 152,
+  "cartoRowBytes": 400,
   "cartoInstitutionRefs": 42,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 2
  },
  "city|latin|plains|road|plagued|cg1-seed-07": {
   "tier": "city",
@@ -567,11 +567,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 164,
-  "cartoRowBytes": 406,
+  "cartoBuildings": 196,
+  "cartoRowBytes": 393,
   "cartoInstitutionRefs": 50,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 8
  },
  "city|latin|riverside|river|frontier|cg1-seed-10": {
   "tier": "city",
@@ -581,11 +581,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 162,
-  "cartoRowBytes": 409,
+  "cartoBuildings": 166,
+  "cartoRowBytes": 403,
   "cartoInstitutionRefs": 51,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 14
+  "cartoDupTranslate": 4
  },
  "city|mediterranean|coastal|port|civilized|cg1-seed-09": {
   "tier": "city",
@@ -595,11 +595,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 185,
-  "cartoRowBytes": 396,
+  "cartoBuildings": 180,
+  "cartoRowBytes": 395,
   "cartoInstitutionRefs": 46,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 4
  },
  "city|mediterranean|desert|road|plagued|cg1-seed-11": {
   "tier": "city",
@@ -610,10 +610,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 165,
-  "cartoRowBytes": 390,
+  "cartoRowBytes": 396,
   "cartoInstitutionRefs": 51,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 10
  },
  "city|mediterranean|forest|isolated|plagued|cg1-seed-07": {
   "tier": "city",
@@ -623,11 +623,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 134,
-  "cartoRowBytes": 396,
+  "cartoBuildings": 133,
+  "cartoRowBytes": 405,
   "cartoInstitutionRefs": 48,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 13
  },
  "city|mediterranean|hills|road|frontier|cg1-seed-06": {
   "tier": "city",
@@ -637,11 +637,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 164,
-  "cartoRowBytes": 406,
+  "cartoBuildings": 161,
+  "cartoRowBytes": 399,
   "cartoInstitutionRefs": 44,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 10
  },
  "city|mediterranean|mountain|road|frontier|cg1-seed-10": {
   "tier": "city",
@@ -651,11 +651,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 163,
-  "cartoRowBytes": 390,
+  "cartoBuildings": 161,
+  "cartoRowBytes": 400,
   "cartoInstitutionRefs": 44,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 16
+  "cartoDupTranslate": 10
  },
  "city|mediterranean|plains|road|civilized|cg1-seed-05": {
   "tier": "city",
@@ -665,11 +665,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 163,
-  "cartoRowBytes": 403,
+  "cartoBuildings": 164,
+  "cartoRowBytes": 394,
   "cartoInstitutionRefs": 44,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 14
+  "cartoDupTranslate": 4
  },
  "city|mediterranean|riverside|river|safe|cg1-seed-08": {
   "tier": "city",
@@ -679,11 +679,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 168,
-  "cartoRowBytes": 410,
+  "cartoBuildings": 197,
+  "cartoRowBytes": 397,
   "cartoInstitutionRefs": 53,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 17
  },
  "city|mesoamerican|coastal|port|civilized|cg1-seed-05": {
   "tier": "city",
@@ -693,11 +693,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 193,
-  "cartoRowBytes": 394,
+  "cartoBuildings": 195,
+  "cartoRowBytes": 393,
   "cartoInstitutionRefs": 47,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 4
  },
  "city|mesoamerican|desert|road|plagued|cg1-seed-07": {
   "tier": "city",
@@ -707,11 +707,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 164,
-  "cartoRowBytes": 405,
+  "cartoBuildings": 195,
+  "cartoRowBytes": 392,
   "cartoInstitutionRefs": 48,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 10
  },
  "city|mesoamerican|forest|isolated|plagued|cg1-seed-03": {
   "tier": "city",
@@ -721,11 +721,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 126,
-  "cartoRowBytes": 390,
+  "cartoBuildings": 127,
+  "cartoRowBytes": 403,
   "cartoInstitutionRefs": 39,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 8
  },
  "city|mesoamerican|hills|road|frontier|cg1-seed-02": {
   "tier": "city",
@@ -735,8 +735,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 165,
-  "cartoRowBytes": 404,
+  "cartoBuildings": 166,
+  "cartoRowBytes": 395,
   "cartoInstitutionRefs": 48,
   "cartoDupExact": 0,
   "cartoDupTranslate": 10
@@ -749,11 +749,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 163,
-  "cartoRowBytes": 408,
+  "cartoBuildings": 164,
+  "cartoRowBytes": 399,
   "cartoInstitutionRefs": 46,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 4
  },
  "city|mesoamerican|plains|road|civilized|cg1-seed-01": {
   "tier": "city",
@@ -763,11 +763,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 160,
-  "cartoRowBytes": 387,
+  "cartoBuildings": 158,
+  "cartoRowBytes": 397,
   "cartoInstitutionRefs": 41,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 14
  },
  "city|mesoamerican|riverside|river|safe|cg1-seed-04": {
   "tier": "city",
@@ -777,11 +777,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 147,
-  "cartoRowBytes": 410,
+  "cartoBuildings": 180,
+  "cartoRowBytes": 395,
   "cartoInstitutionRefs": 50,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 12
  },
  "city|norse|coastal|port|safe|cg1-seed-08": {
   "tier": "city",
@@ -791,11 +791,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 167,
-  "cartoRowBytes": 410,
+  "cartoBuildings": 198,
+  "cartoRowBytes": 398,
   "cartoInstitutionRefs": 54,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 12
  },
  "city|norse|desert|road|frontier|cg1-seed-10": {
   "tier": "city",
@@ -805,11 +805,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 151,
-  "cartoRowBytes": 398,
+  "cartoBuildings": 181,
+  "cartoRowBytes": 401,
   "cartoInstitutionRefs": 48,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 7
+  "cartoDupTranslate": 6
  },
  "city|norse|forest|isolated|frontier|cg1-seed-06": {
   "tier": "city",
@@ -819,11 +819,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 132,
-  "cartoRowBytes": 397,
+  "cartoBuildings": 133,
+  "cartoRowBytes": 398,
   "cartoInstitutionRefs": 38,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 6
  },
  "city|norse|hills|road|civilized|cg1-seed-05": {
   "tier": "city",
@@ -834,7 +834,7 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 165,
-  "cartoRowBytes": 403,
+  "cartoRowBytes": 395,
   "cartoInstitutionRefs": 45,
   "cartoDupExact": 0,
   "cartoDupTranslate": 10
@@ -847,11 +847,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 163,
-  "cartoRowBytes": 404,
+  "cartoBuildings": 196,
+  "cartoRowBytes": 391,
   "cartoInstitutionRefs": 45,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 21
  },
  "city|norse|plains|road|safe|cg1-seed-04": {
   "tier": "city",
@@ -861,11 +861,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 160,
-  "cartoRowBytes": 404,
+  "cartoBuildings": 157,
+  "cartoRowBytes": 394,
   "cartoInstitutionRefs": 46,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 12
  },
  "city|norse|riverside|river|plagued|cg1-seed-07": {
   "tier": "city",
@@ -875,11 +875,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 168,
-  "cartoRowBytes": 406,
+  "cartoBuildings": 190,
+  "cartoRowBytes": 395,
   "cartoInstitutionRefs": 50,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 12
  },
  "city|slavic|coastal|port|plagued|cg1-seed-03": {
   "tier": "city",
@@ -889,11 +889,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 173,
-  "cartoRowBytes": 396,
+  "cartoBuildings": 172,
+  "cartoRowBytes": 395,
   "cartoInstitutionRefs": 44,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 16
  },
  "city|slavic|desert|road|civilized|cg1-seed-05": {
   "tier": "city",
@@ -903,11 +903,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 163,
-  "cartoRowBytes": 405,
+  "cartoBuildings": 164,
+  "cartoRowBytes": 396,
   "cartoInstitutionRefs": 47,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 10
  },
  "city|slavic|forest|isolated|civilized|cg1-seed-01": {
   "tier": "city",
@@ -917,11 +917,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 133,
-  "cartoRowBytes": 397,
+  "cartoBuildings": 130,
+  "cartoRowBytes": 409,
   "cartoInstitutionRefs": 40,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 4
  },
  "city|slavic|hills|road|safe|cg1-seed-00": {
   "tier": "city",
@@ -931,11 +931,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 165,
-  "cartoRowBytes": 406,
+  "cartoBuildings": 157,
+  "cartoRowBytes": 401,
   "cartoInstitutionRefs": 48,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 6
  },
  "city|slavic|mountain|road|safe|cg1-seed-04": {
   "tier": "city",
@@ -946,10 +946,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 159,
-  "cartoRowBytes": 385,
+  "cartoRowBytes": 386,
   "cartoInstitutionRefs": 41,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 12
  },
  "city|slavic|plains|road|plagued|cg1-seed-11": {
   "tier": "city",
@@ -959,11 +959,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 163,
-  "cartoRowBytes": 407,
+  "cartoBuildings": 164,
+  "cartoRowBytes": 399,
   "cartoInstitutionRefs": 46,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 8
  },
  "city|slavic|riverside|river|frontier|cg1-seed-02": {
   "tier": "city",
@@ -973,11 +973,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 162,
-  "cartoRowBytes": 405,
+  "cartoBuildings": 192,
+  "cartoRowBytes": 392,
   "cartoInstitutionRefs": 50,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 12
  },
  "city|south_asian|coastal|port|safe|cg1-seed-00": {
   "tier": "city",
@@ -987,11 +987,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 196,
-  "cartoRowBytes": 396,
+  "cartoBuildings": 197,
+  "cartoRowBytes": 393,
   "cartoInstitutionRefs": 51,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 18
  },
  "city|south_asian|desert|road|frontier|cg1-seed-02": {
   "tier": "city",
@@ -1001,11 +1001,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 161,
-  "cartoRowBytes": 387,
+  "cartoBuildings": 193,
+  "cartoRowBytes": 394,
   "cartoInstitutionRefs": 50,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 11
+  "cartoDupTranslate": 8
  },
  "city|south_asian|forest|isolated|frontier|cg1-seed-10": {
   "tier": "city",
@@ -1015,11 +1015,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 133,
-  "cartoRowBytes": 398,
+  "cartoBuildings": 160,
+  "cartoRowBytes": 392,
   "cartoInstitutionRefs": 40,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 3
  },
  "city|south_asian|hills|road|civilized|cg1-seed-09": {
   "tier": "city",
@@ -1029,8 +1029,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 155,
-  "cartoRowBytes": 403,
+  "cartoBuildings": 142,
+  "cartoRowBytes": 400,
   "cartoInstitutionRefs": 44,
   "cartoDupExact": 0,
   "cartoDupTranslate": 10
@@ -1043,11 +1043,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 132,
-  "cartoRowBytes": 399,
+  "cartoBuildings": 130,
+  "cartoRowBytes": 410,
   "cartoInstitutionRefs": 37,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 6
  },
  "city|south_asian|plains|road|safe|cg1-seed-08": {
   "tier": "city",
@@ -1057,11 +1057,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 175,
-  "cartoRowBytes": 394,
+  "cartoBuildings": 199,
+  "cartoRowBytes": 397,
   "cartoInstitutionRefs": 51,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 12
  },
  "city|south_asian|riverside|river|plagued|cg1-seed-11": {
   "tier": "city",
@@ -1071,11 +1071,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 194,
-  "cartoRowBytes": 394,
+  "cartoBuildings": 195,
+  "cartoRowBytes": 393,
   "cartoInstitutionRefs": 42,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 14
+  "cartoDupTranslate": 18
  },
  "city|steppe|coastal|port|plagued|cg1-seed-07": {
   "tier": "city",
@@ -1085,11 +1085,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 166,
-  "cartoRowBytes": 406,
+  "cartoBuildings": 196,
+  "cartoRowBytes": 393,
   "cartoInstitutionRefs": 48,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 4
  },
  "city|steppe|desert|road|civilized|cg1-seed-09": {
   "tier": "city",
@@ -1099,11 +1099,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 154,
-  "cartoRowBytes": 403,
+  "cartoBuildings": 145,
+  "cartoRowBytes": 400,
   "cartoInstitutionRefs": 44,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 13
+  "cartoDupTranslate": 2
  },
  "city|steppe|forest|isolated|civilized|cg1-seed-05": {
   "tier": "city",
@@ -1113,11 +1113,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 133,
-  "cartoRowBytes": 395,
+  "cartoBuildings": 161,
+  "cartoRowBytes": 391,
   "cartoInstitutionRefs": 40,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 6
  },
  "city|steppe|hills|road|safe|cg1-seed-04": {
   "tier": "city",
@@ -1127,11 +1127,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 166,
-  "cartoRowBytes": 402,
+  "cartoBuildings": 159,
+  "cartoRowBytes": 393,
   "cartoInstitutionRefs": 47,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 6
  },
  "city|steppe|mountain|road|safe|cg1-seed-08": {
   "tier": "city",
@@ -1141,8 +1141,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 166,
-  "cartoRowBytes": 393,
+  "cartoBuildings": 163,
+  "cartoRowBytes": 398,
   "cartoInstitutionRefs": 46,
   "cartoDupExact": 0,
   "cartoDupTranslate": 12
@@ -1155,11 +1155,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 160,
-  "cartoRowBytes": 401,
+  "cartoBuildings": 181,
+  "cartoRowBytes": 392,
   "cartoInstitutionRefs": 44,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 6
  },
  "city|steppe|riverside|river|frontier|cg1-seed-06": {
   "tier": "city",
@@ -1169,11 +1169,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 164,
-  "cartoRowBytes": 407,
+  "cartoBuildings": 203,
+  "cartoRowBytes": 395,
   "cartoInstitutionRefs": 47,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 10
  },
  "hamlet|arabic|coastal|port|civilized|cg1-seed-01": {
   "tier": "hamlet",
@@ -1201,7 +1201,7 @@
   "cartoRowBytes": 414,
   "cartoInstitutionRefs": 24,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 4
  },
  "hamlet|arabic|forest|isolated|plagued|cg1-seed-11": {
   "tier": "hamlet",
@@ -1229,7 +1229,7 @@
   "cartoRowBytes": 413,
   "cartoInstitutionRefs": 17,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 4
  },
  "hamlet|arabic|mountain|road|frontier|cg1-seed-02": {
   "tier": "hamlet",
@@ -1243,7 +1243,7 @@
   "cartoRowBytes": 418,
   "cartoInstitutionRefs": 15,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 4
  },
  "hamlet|arabic|plains|road|civilized|cg1-seed-09": {
   "tier": "hamlet",
@@ -1253,11 +1253,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 18,
+  "cartoBuildings": 17,
   "cartoRowBytes": 416,
   "cartoInstitutionRefs": 16,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 3
+  "cartoDupTranslate": 2
  },
  "hamlet|arabic|riverside|river|safe|cg1-seed-00": {
   "tier": "hamlet",
@@ -1271,7 +1271,7 @@
   "cartoRowBytes": 417,
   "cartoInstitutionRefs": 16,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 3
+  "cartoDupTranslate": 6
  },
  "hamlet|celtic|coastal|port|frontier|cg1-seed-06": {
   "tier": "hamlet",
@@ -1281,11 +1281,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 16,
-  "cartoRowBytes": 412,
+  "cartoBuildings": 15,
+  "cartoRowBytes": 411,
   "cartoInstitutionRefs": 13,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 3
+  "cartoDupTranslate": 2
  },
  "hamlet|celtic|desert|road|safe|cg1-seed-08": {
   "tier": "hamlet",
@@ -1299,7 +1299,7 @@
   "cartoRowBytes": 410,
   "cartoInstitutionRefs": 17,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 4
  },
  "hamlet|celtic|forest|isolated|safe|cg1-seed-04": {
   "tier": "hamlet",
@@ -1355,7 +1355,7 @@
   "cartoRowBytes": 416,
   "cartoInstitutionRefs": 17,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 2
  },
  "hamlet|celtic|riverside|river|civilized|cg1-seed-05": {
   "tier": "hamlet",
@@ -1383,7 +1383,7 @@
   "cartoRowBytes": 413,
   "cartoInstitutionRefs": 21,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 6
  },
  "hamlet|east_asian|desert|road|safe|cg1-seed-00": {
   "tier": "hamlet",
@@ -1397,7 +1397,7 @@
   "cartoRowBytes": 414,
   "cartoInstitutionRefs": 19,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 0
  },
  "hamlet|east_asian|forest|isolated|safe|cg1-seed-08": {
   "tier": "hamlet",
@@ -1425,7 +1425,7 @@
   "cartoRowBytes": 418,
   "cartoInstitutionRefs": 19,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 7
+  "cartoDupTranslate": 2
  },
  "hamlet|east_asian|mountain|road|plagued|cg1-seed-11": {
   "tier": "hamlet",
@@ -1439,7 +1439,7 @@
   "cartoRowBytes": 414,
   "cartoInstitutionRefs": 18,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 5
  },
  "hamlet|east_asian|plains|road|frontier|cg1-seed-06": {
   "tier": "hamlet",
@@ -1453,7 +1453,7 @@
   "cartoRowBytes": 412,
   "cartoInstitutionRefs": 15,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 0
  },
  "hamlet|east_asian|riverside|river|civilized|cg1-seed-09": {
   "tier": "hamlet",
@@ -1467,7 +1467,7 @@
   "cartoRowBytes": 415,
   "cartoInstitutionRefs": 13,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 0
  },
  "hamlet|germanic|coastal|port|safe|cg1-seed-04": {
   "tier": "hamlet",
@@ -1477,11 +1477,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 17,
+  "cartoBuildings": 18,
   "cartoRowBytes": 416,
   "cartoInstitutionRefs": 16,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 6
  },
  "hamlet|germanic|desert|road|frontier|cg1-seed-06": {
   "tier": "hamlet",
@@ -1495,7 +1495,7 @@
   "cartoRowBytes": 410,
   "cartoInstitutionRefs": 13,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 2
  },
  "hamlet|germanic|forest|isolated|frontier|cg1-seed-02": {
   "tier": "hamlet",
@@ -1551,7 +1551,7 @@
   "cartoRowBytes": 416,
   "cartoInstitutionRefs": 19,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 12
  },
  "hamlet|germanic|riverside|river|plagued|cg1-seed-03": {
   "tier": "hamlet",
@@ -1575,11 +1575,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 22,
+  "cartoBuildings": 21,
   "cartoRowBytes": 415,
   "cartoInstitutionRefs": 20,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 4
  },
  "hamlet|greek|desert|road|safe|cg1-seed-04": {
   "tier": "hamlet",
@@ -1593,7 +1593,7 @@
   "cartoRowBytes": 413,
   "cartoInstitutionRefs": 17,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 2
  },
  "hamlet|greek|forest|isolated|safe|cg1-seed-00": {
   "tier": "hamlet",
@@ -1621,7 +1621,7 @@
   "cartoRowBytes": 414,
   "cartoInstitutionRefs": 17,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 6
  },
  "hamlet|greek|mountain|road|plagued|cg1-seed-03": {
   "tier": "hamlet",
@@ -1635,7 +1635,7 @@
   "cartoRowBytes": 418,
   "cartoInstitutionRefs": 18,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 6
  },
  "hamlet|greek|plains|road|frontier|cg1-seed-10": {
   "tier": "hamlet",
@@ -1649,7 +1649,7 @@
   "cartoRowBytes": 412,
   "cartoInstitutionRefs": 18,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 9
+  "cartoDupTranslate": 4
  },
  "hamlet|greek|riverside|river|civilized|cg1-seed-01": {
   "tier": "hamlet",
@@ -1659,11 +1659,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 17,
+  "cartoBuildings": 19,
   "cartoRowBytes": 412,
   "cartoInstitutionRefs": 15,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 4
  },
  "hamlet|latin|coastal|port|plagued|cg1-seed-11": {
   "tier": "hamlet",
@@ -1677,7 +1677,7 @@
   "cartoRowBytes": 413,
   "cartoInstitutionRefs": 18,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 6
  },
  "hamlet|latin|desert|road|civilized|cg1-seed-01": {
   "tier": "hamlet",
@@ -1715,11 +1715,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 15,
-  "cartoRowBytes": 411,
+  "cartoBuildings": 17,
+  "cartoRowBytes": 412,
   "cartoInstitutionRefs": 13,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 6
  },
  "hamlet|latin|mountain|road|safe|cg1-seed-00": {
   "tier": "hamlet",
@@ -1733,7 +1733,7 @@
   "cartoRowBytes": 417,
   "cartoInstitutionRefs": 18,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 5
+  "cartoDupTranslate": 0
  },
  "hamlet|latin|plains|road|plagued|cg1-seed-07": {
   "tier": "hamlet",
@@ -1757,11 +1757,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 20,
+  "cartoBuildings": 22,
   "cartoRowBytes": 413,
   "cartoInstitutionRefs": 18,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 7
+  "cartoDupTranslate": 2
  },
  "hamlet|mediterranean|coastal|port|civilized|cg1-seed-09": {
   "tier": "hamlet",
@@ -1775,7 +1775,7 @@
   "cartoRowBytes": 416,
   "cartoInstitutionRefs": 16,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 6
  },
  "hamlet|mediterranean|desert|road|plagued|cg1-seed-11": {
   "tier": "hamlet",
@@ -1789,7 +1789,7 @@
   "cartoRowBytes": 410,
   "cartoInstitutionRefs": 18,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 7
  },
  "hamlet|mediterranean|forest|isolated|plagued|cg1-seed-07": {
   "tier": "hamlet",
@@ -1817,7 +1817,7 @@
   "cartoRowBytes": 412,
   "cartoInstitutionRefs": 13,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 4
  },
  "hamlet|mediterranean|mountain|road|frontier|cg1-seed-10": {
   "tier": "hamlet",
@@ -1841,11 +1841,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 19,
+  "cartoBuildings": 21,
   "cartoRowBytes": 416,
   "cartoInstitutionRefs": 18,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 2
  },
  "hamlet|mediterranean|riverside|river|safe|cg1-seed-08": {
   "tier": "hamlet",
@@ -1869,11 +1869,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 20,
+  "cartoBuildings": 22,
   "cartoRowBytes": 416,
   "cartoInstitutionRefs": 19,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 6
  },
  "hamlet|mesoamerican|desert|road|plagued|cg1-seed-07": {
   "tier": "hamlet",
@@ -1883,11 +1883,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 23,
+  "cartoBuildings": 24,
   "cartoRowBytes": 415,
   "cartoInstitutionRefs": 22,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 8
  },
  "hamlet|mesoamerican|forest|isolated|plagued|cg1-seed-03": {
   "tier": "hamlet",
@@ -1915,7 +1915,7 @@
   "cartoRowBytes": 417,
   "cartoInstitutionRefs": 19,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 7
+  "cartoDupTranslate": 2
  },
  "hamlet|mesoamerican|mountain|road|frontier|cg1-seed-06": {
   "tier": "hamlet",
@@ -1925,8 +1925,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 16,
-  "cartoRowBytes": 412,
+  "cartoBuildings": 17,
+  "cartoRowBytes": 413,
   "cartoInstitutionRefs": 14,
   "cartoDupExact": 0,
   "cartoDupTranslate": 2
@@ -1943,7 +1943,7 @@
   "cartoRowBytes": 410,
   "cartoInstitutionRefs": 13,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 6
  },
  "hamlet|mesoamerican|riverside|river|safe|cg1-seed-04": {
   "tier": "hamlet",
@@ -1957,7 +1957,7 @@
   "cartoRowBytes": 416,
   "cartoInstitutionRefs": 16,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 0
  },
  "hamlet|norse|coastal|port|safe|cg1-seed-08": {
   "tier": "hamlet",
@@ -1971,7 +1971,7 @@
   "cartoRowBytes": 412,
   "cartoInstitutionRefs": 18,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 4
  },
  "hamlet|norse|desert|road|frontier|cg1-seed-10": {
   "tier": "hamlet",
@@ -1981,11 +1981,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 23,
-  "cartoRowBytes": 410,
+  "cartoBuildings": 24,
+  "cartoRowBytes": 411,
   "cartoInstitutionRefs": 21,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 4
  },
  "hamlet|norse|forest|isolated|frontier|cg1-seed-06": {
   "tier": "hamlet",
@@ -2027,7 +2027,7 @@
   "cartoRowBytes": 416,
   "cartoInstitutionRefs": 17,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 5
+  "cartoDupTranslate": 4
  },
  "hamlet|norse|plains|road|safe|cg1-seed-04": {
   "tier": "hamlet",
@@ -2037,11 +2037,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 17,
+  "cartoBuildings": 18,
   "cartoRowBytes": 416,
   "cartoInstitutionRefs": 16,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 0
  },
  "hamlet|norse|riverside|river|plagued|cg1-seed-07": {
   "tier": "hamlet",
@@ -2055,7 +2055,7 @@
   "cartoRowBytes": 417,
   "cartoInstitutionRefs": 20,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 4
  },
  "hamlet|slavic|coastal|port|plagued|cg1-seed-03": {
   "tier": "hamlet",
@@ -2069,7 +2069,7 @@
   "cartoRowBytes": 417,
   "cartoInstitutionRefs": 24,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 11
  },
  "hamlet|slavic|desert|road|civilized|cg1-seed-05": {
   "tier": "hamlet",
@@ -2107,11 +2107,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 20,
+  "cartoBuildings": 18,
   "cartoRowBytes": 417,
   "cartoInstitutionRefs": 17,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 6
  },
  "hamlet|slavic|mountain|road|safe|cg1-seed-04": {
   "tier": "hamlet",
@@ -2139,7 +2139,7 @@
   "cartoRowBytes": 412,
   "cartoInstitutionRefs": 18,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 5
  },
  "hamlet|slavic|riverside|river|frontier|cg1-seed-02": {
   "tier": "hamlet",
@@ -2153,7 +2153,7 @@
   "cartoRowBytes": 414,
   "cartoInstitutionRefs": 18,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 0
  },
  "hamlet|south_asian|coastal|port|safe|cg1-seed-00": {
   "tier": "hamlet",
@@ -2167,7 +2167,7 @@
   "cartoRowBytes": 418,
   "cartoInstitutionRefs": 19,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 6
  },
  "hamlet|south_asian|desert|road|frontier|cg1-seed-02": {
   "tier": "hamlet",
@@ -2181,7 +2181,7 @@
   "cartoRowBytes": 413,
   "cartoInstitutionRefs": 17,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 4
  },
  "hamlet|south_asian|forest|isolated|frontier|cg1-seed-10": {
   "tier": "hamlet",
@@ -2233,7 +2233,7 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 14,
+  "cartoBuildings": 15,
   "cartoRowBytes": 412,
   "cartoInstitutionRefs": 12,
   "cartoDupExact": 0,
@@ -2251,7 +2251,7 @@
   "cartoRowBytes": 414,
   "cartoInstitutionRefs": 17,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 0
  },
  "hamlet|steppe|coastal|port|plagued|cg1-seed-07": {
   "tier": "hamlet",
@@ -2261,11 +2261,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 22,
+  "cartoBuildings": 24,
   "cartoRowBytes": 417,
   "cartoInstitutionRefs": 21,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 6
  },
  "hamlet|steppe|desert|road|civilized|cg1-seed-09": {
   "tier": "hamlet",
@@ -2279,7 +2279,7 @@
   "cartoRowBytes": 413,
   "cartoInstitutionRefs": 17,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 0
  },
  "hamlet|steppe|forest|isolated|civilized|cg1-seed-05": {
   "tier": "hamlet",
@@ -2321,7 +2321,7 @@
   "cartoRowBytes": 414,
   "cartoInstitutionRefs": 14,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 3
  },
  "hamlet|steppe|plains|road|plagued|cg1-seed-03": {
   "tier": "hamlet",
@@ -2331,11 +2331,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 25,
-  "cartoRowBytes": 416,
+  "cartoBuildings": 24,
+  "cartoRowBytes": 415,
   "cartoInstitutionRefs": 23,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 14
+  "cartoDupTranslate": 5
  },
  "hamlet|steppe|riverside|river|frontier|cg1-seed-06": {
   "tier": "hamlet",
@@ -2349,7 +2349,7 @@
   "cartoRowBytes": 413,
   "cartoInstitutionRefs": 13,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 2
  },
  "metropolis|arabic|coastal|port|civilized|cg1-seed-01": {
   "tier": "metropolis",
@@ -2363,7 +2363,7 @@
   "cartoRowBytes": 376,
   "cartoInstitutionRefs": 57,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 22
+  "cartoDupTranslate": 8
  },
  "metropolis|arabic|desert|road|plagued|cg1-seed-03": {
   "tier": "metropolis",
@@ -2377,7 +2377,7 @@
   "cartoRowBytes": 376,
   "cartoInstitutionRefs": 51,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 4
  },
  "metropolis|arabic|forest|isolated|plagued|cg1-seed-11": {
   "tier": "metropolis",
@@ -2387,11 +2387,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 198,
-  "cartoRowBytes": 389,
+  "cartoBuildings": 242,
+  "cartoRowBytes": 380,
   "cartoInstitutionRefs": 50,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 14
  },
  "metropolis|arabic|hills|road|frontier|cg1-seed-10": {
   "tier": "metropolis",
@@ -2401,11 +2401,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 201,
+  "cartoBuildings": 197,
   "cartoRowBytes": 390,
   "cartoInstitutionRefs": 56,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 0
  },
  "metropolis|arabic|mountain|road|frontier|cg1-seed-02": {
   "tier": "metropolis",
@@ -2415,11 +2415,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 222,
-  "cartoRowBytes": 376,
+  "cartoBuildings": 261,
+  "cartoRowBytes": 371,
   "cartoInstitutionRefs": 56,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 14
+  "cartoDupTranslate": 22
  },
  "metropolis|arabic|plains|road|civilized|cg1-seed-09": {
   "tier": "metropolis",
@@ -2429,11 +2429,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 185,
-  "cartoRowBytes": 383,
+  "cartoBuildings": 196,
+  "cartoRowBytes": 382,
   "cartoInstitutionRefs": 53,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 6
  },
  "metropolis|arabic|riverside|river|safe|cg1-seed-00": {
   "tier": "metropolis",
@@ -2443,11 +2443,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 261,
-  "cartoRowBytes": 390,
+  "cartoBuildings": 259,
+  "cartoRowBytes": 391,
   "cartoInstitutionRefs": 56,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 14
+  "cartoDupTranslate": 16
  },
  "metropolis|celtic|coastal|port|frontier|cg1-seed-06": {
   "tier": "metropolis",
@@ -2458,10 +2458,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 261,
-  "cartoRowBytes": 391,
+  "cartoRowBytes": 392,
   "cartoInstitutionRefs": 57,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 12
+  "cartoDupTranslate": 6
  },
  "metropolis|celtic|desert|road|safe|cg1-seed-08": {
   "tier": "metropolis",
@@ -2471,11 +2471,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 218,
-  "cartoRowBytes": 385,
+  "cartoBuildings": 219,
+  "cartoRowBytes": 386,
   "cartoInstitutionRefs": 58,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 16
  },
  "metropolis|celtic|forest|isolated|safe|cg1-seed-04": {
   "tier": "metropolis",
@@ -2485,8 +2485,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 175,
-  "cartoRowBytes": 375,
+  "cartoBuildings": 261,
+  "cartoRowBytes": 363,
   "cartoInstitutionRefs": 42,
   "cartoDupExact": 0,
   "cartoDupTranslate": 12
@@ -2500,10 +2500,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 187,
-  "cartoRowBytes": 387,
+  "cartoRowBytes": 385,
   "cartoInstitutionRefs": 51,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 10
  },
  "metropolis|celtic|mountain|road|plagued|cg1-seed-07": {
   "tier": "metropolis",
@@ -2513,11 +2513,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 210,
-  "cartoRowBytes": 379,
+  "cartoBuildings": 208,
+  "cartoRowBytes": 381,
   "cartoInstitutionRefs": 48,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 12
+  "cartoDupTranslate": 18
  },
  "metropolis|celtic|plains|road|frontier|cg1-seed-02": {
   "tier": "metropolis",
@@ -2527,11 +2527,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 222,
-  "cartoRowBytes": 377,
+  "cartoBuildings": 221,
+  "cartoRowBytes": 379,
   "cartoInstitutionRefs": 55,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 14
  },
  "metropolis|celtic|riverside|river|civilized|cg1-seed-05": {
   "tier": "metropolis",
@@ -2541,11 +2541,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 258,
-  "cartoRowBytes": 387,
+  "cartoBuildings": 259,
+  "cartoRowBytes": 385,
   "cartoInstitutionRefs": 56,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 20
+  "cartoDupTranslate": 18
  },
  "metropolis|east_asian|coastal|port|frontier|cg1-seed-10": {
   "tier": "metropolis",
@@ -2556,10 +2556,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 261,
-  "cartoRowBytes": 380,
+  "cartoRowBytes": 381,
   "cartoInstitutionRefs": 63,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 14
+  "cartoDupTranslate": 11
  },
  "metropolis|east_asian|desert|road|safe|cg1-seed-00": {
   "tier": "metropolis",
@@ -2569,8 +2569,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 226,
-  "cartoRowBytes": 374,
+  "cartoBuildings": 220,
+  "cartoRowBytes": 377,
   "cartoInstitutionRefs": 53,
   "cartoDupExact": 0,
   "cartoDupTranslate": 18
@@ -2583,11 +2583,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 197,
-  "cartoRowBytes": 379,
+  "cartoBuildings": 241,
+  "cartoRowBytes": 373,
   "cartoInstitutionRefs": 53,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 6
  },
  "metropolis|east_asian|hills|road|plagued|cg1-seed-07": {
   "tier": "metropolis",
@@ -2597,8 +2597,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 211,
-  "cartoRowBytes": 382,
+  "cartoBuildings": 210,
+  "cartoRowBytes": 381,
   "cartoInstitutionRefs": 55,
   "cartoDupExact": 0,
   "cartoDupTranslate": 6
@@ -2611,8 +2611,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 200,
-  "cartoRowBytes": 386,
+  "cartoBuildings": 199,
+  "cartoRowBytes": 387,
   "cartoInstitutionRefs": 56,
   "cartoDupExact": 0,
   "cartoDupTranslate": 6
@@ -2625,11 +2625,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 235,
+  "cartoBuildings": 228,
   "cartoRowBytes": 381,
   "cartoInstitutionRefs": 55,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 17
+  "cartoDupTranslate": 12
  },
  "metropolis|east_asian|riverside|river|civilized|cg1-seed-09": {
   "tier": "metropolis",
@@ -2639,11 +2639,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 254,
-  "cartoRowBytes": 374,
+  "cartoBuildings": 251,
+  "cartoRowBytes": 377,
   "cartoInstitutionRefs": 59,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 19
+  "cartoDupTranslate": 26
  },
  "metropolis|germanic|coastal|port|safe|cg1-seed-04": {
   "tier": "metropolis",
@@ -2653,11 +2653,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 261,
-  "cartoRowBytes": 371,
+  "cartoBuildings": 258,
+  "cartoRowBytes": 372,
   "cartoInstitutionRefs": 55,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 16
  },
  "metropolis|germanic|desert|road|frontier|cg1-seed-06": {
   "tier": "metropolis",
@@ -2668,7 +2668,7 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 234,
-  "cartoRowBytes": 381,
+  "cartoRowBytes": 380,
   "cartoInstitutionRefs": 57,
   "cartoDupExact": 0,
   "cartoDupTranslate": 12
@@ -2681,11 +2681,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 161,
-  "cartoRowBytes": 390,
+  "cartoBuildings": 206,
+  "cartoRowBytes": 379,
   "cartoInstitutionRefs": 46,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 10
  },
  "metropolis|germanic|hills|road|civilized|cg1-seed-01": {
   "tier": "metropolis",
@@ -2695,11 +2695,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 245,
-  "cartoRowBytes": 372,
+  "cartoBuildings": 232,
+  "cartoRowBytes": 374,
   "cartoInstitutionRefs": 50,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 12
+  "cartoDupTranslate": 22
  },
  "metropolis|germanic|mountain|road|civilized|cg1-seed-05": {
   "tier": "metropolis",
@@ -2723,8 +2723,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 200,
-  "cartoRowBytes": 381,
+  "cartoBuildings": 197,
+  "cartoRowBytes": 382,
   "cartoInstitutionRefs": 52,
   "cartoDupExact": 0,
   "cartoDupTranslate": 8
@@ -2737,11 +2737,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 248,
-  "cartoRowBytes": 382,
+  "cartoBuildings": 252,
+  "cartoRowBytes": 383,
   "cartoInstitutionRefs": 53,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 9
+  "cartoDupTranslate": 16
  },
  "metropolis|greek|coastal|port|frontier|cg1-seed-02": {
   "tier": "metropolis",
@@ -2751,11 +2751,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 261,
-  "cartoRowBytes": 375,
+  "cartoBuildings": 258,
+  "cartoRowBytes": 374,
   "cartoInstitutionRefs": 55,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 12
  },
  "metropolis|greek|desert|road|safe|cg1-seed-04": {
   "tier": "metropolis",
@@ -2766,10 +2766,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 213,
-  "cartoRowBytes": 379,
+  "cartoRowBytes": 378,
   "cartoInstitutionRefs": 54,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 13
  },
  "metropolis|greek|forest|isolated|safe|cg1-seed-00": {
   "tier": "metropolis",
@@ -2779,8 +2779,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 189,
-  "cartoRowBytes": 374,
+  "cartoBuildings": 237,
+  "cartoRowBytes": 369,
   "cartoInstitutionRefs": 48,
   "cartoDupExact": 0,
   "cartoDupTranslate": 8
@@ -2793,11 +2793,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 196,
-  "cartoRowBytes": 386,
+  "cartoBuildings": 193,
+  "cartoRowBytes": 387,
   "cartoInstitutionRefs": 53,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 4
  },
  "metropolis|greek|mountain|road|plagued|cg1-seed-03": {
   "tier": "metropolis",
@@ -2807,11 +2807,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 187,
+  "cartoBuildings": 188,
   "cartoRowBytes": 378,
   "cartoInstitutionRefs": 50,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 10
  },
  "metropolis|greek|plains|road|frontier|cg1-seed-10": {
   "tier": "metropolis",
@@ -2821,11 +2821,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 199,
-  "cartoRowBytes": 386,
+  "cartoBuildings": 200,
+  "cartoRowBytes": 385,
   "cartoInstitutionRefs": 55,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 5
+  "cartoDupTranslate": 10
  },
  "metropolis|greek|riverside|river|civilized|cg1-seed-01": {
   "tier": "metropolis",
@@ -2836,10 +2836,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 261,
-  "cartoRowBytes": 374,
+  "cartoRowBytes": 375,
   "cartoInstitutionRefs": 53,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 13
+  "cartoDupTranslate": 8
  },
  "metropolis|latin|coastal|port|plagued|cg1-seed-11": {
   "tier": "metropolis",
@@ -2853,7 +2853,7 @@
   "cartoRowBytes": 376,
   "cartoInstitutionRefs": 57,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 12
  },
  "metropolis|latin|desert|road|civilized|cg1-seed-01": {
   "tier": "metropolis",
@@ -2863,11 +2863,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 244,
-  "cartoRowBytes": 373,
+  "cartoBuildings": 233,
+  "cartoRowBytes": 374,
   "cartoInstitutionRefs": 50,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 12
  },
  "metropolis|latin|forest|isolated|civilized|cg1-seed-09": {
   "tier": "metropolis",
@@ -2877,11 +2877,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 188,
-  "cartoRowBytes": 373,
+  "cartoBuildings": 233,
+  "cartoRowBytes": 367,
   "cartoInstitutionRefs": 47,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 12
+  "cartoDupTranslate": 23
  },
  "metropolis|latin|hills|road|safe|cg1-seed-08": {
   "tier": "metropolis",
@@ -2891,11 +2891,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 217,
-  "cartoRowBytes": 383,
+  "cartoBuildings": 215,
+  "cartoRowBytes": 385,
   "cartoInstitutionRefs": 55,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 13
  },
  "metropolis|latin|mountain|road|safe|cg1-seed-00": {
   "tier": "metropolis",
@@ -2905,11 +2905,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 223,
+  "cartoBuildings": 220,
   "cartoRowBytes": 375,
   "cartoInstitutionRefs": 51,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 12
+  "cartoDupTranslate": 11
  },
  "metropolis|latin|plains|road|plagued|cg1-seed-07": {
   "tier": "metropolis",
@@ -2919,11 +2919,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 212,
-  "cartoRowBytes": 384,
+  "cartoBuildings": 213,
+  "cartoRowBytes": 382,
   "cartoInstitutionRefs": 57,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 13
  },
  "metropolis|latin|riverside|river|frontier|cg1-seed-10": {
   "tier": "metropolis",
@@ -2937,7 +2937,7 @@
   "cartoRowBytes": 395,
   "cartoInstitutionRefs": 60,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 9
  },
  "metropolis|mediterranean|coastal|port|civilized|cg1-seed-09": {
   "tier": "metropolis",
@@ -2951,7 +2951,7 @@
   "cartoRowBytes": 374,
   "cartoInstitutionRefs": 59,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 22
+  "cartoDupTranslate": 14
  },
  "metropolis|mediterranean|desert|road|plagued|cg1-seed-11": {
   "tier": "metropolis",
@@ -2961,11 +2961,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 200,
-  "cartoRowBytes": 384,
+  "cartoBuildings": 194,
+  "cartoRowBytes": 386,
   "cartoInstitutionRefs": 53,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 12
  },
  "metropolis|mediterranean|forest|isolated|plagued|cg1-seed-07": {
   "tier": "metropolis",
@@ -2975,11 +2975,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 200,
-  "cartoRowBytes": 386,
+  "cartoBuildings": 243,
+  "cartoRowBytes": 378,
   "cartoInstitutionRefs": 50,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 18
+  "cartoDupTranslate": 10
  },
  "metropolis|mediterranean|hills|road|frontier|cg1-seed-06": {
   "tier": "metropolis",
@@ -2989,11 +2989,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 234,
-  "cartoRowBytes": 378,
+  "cartoBuildings": 232,
+  "cartoRowBytes": 380,
   "cartoInstitutionRefs": 55,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 13
+  "cartoDupTranslate": 18
  },
  "metropolis|mediterranean|mountain|road|frontier|cg1-seed-10": {
   "tier": "metropolis",
@@ -3003,11 +3003,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 200,
-  "cartoRowBytes": 401,
+  "cartoBuildings": 199,
+  "cartoRowBytes": 400,
   "cartoInstitutionRefs": 54,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 11
  },
  "metropolis|mediterranean|plains|road|civilized|cg1-seed-05": {
   "tier": "metropolis",
@@ -3018,10 +3018,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 202,
-  "cartoRowBytes": 379,
+  "cartoRowBytes": 380,
   "cartoInstitutionRefs": 45,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 16
+  "cartoDupTranslate": 8
  },
  "metropolis|mediterranean|riverside|river|safe|cg1-seed-08": {
   "tier": "metropolis",
@@ -3032,10 +3032,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 261,
-  "cartoRowBytes": 378,
+  "cartoRowBytes": 380,
   "cartoInstitutionRefs": 59,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 14
+  "cartoDupTranslate": 17
  },
  "metropolis|mesoamerican|coastal|port|civilized|cg1-seed-05": {
   "tier": "metropolis",
@@ -3045,11 +3045,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 259,
-  "cartoRowBytes": 372,
+  "cartoBuildings": 257,
+  "cartoRowBytes": 374,
   "cartoInstitutionRefs": 51,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 14
+  "cartoDupTranslate": 6
  },
  "metropolis|mesoamerican|desert|road|plagued|cg1-seed-07": {
   "tier": "metropolis",
@@ -3059,8 +3059,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 210,
-  "cartoRowBytes": 382,
+  "cartoBuildings": 212,
+  "cartoRowBytes": 380,
   "cartoInstitutionRefs": 51,
   "cartoDupExact": 0,
   "cartoDupTranslate": 8
@@ -3073,11 +3073,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 186,
-  "cartoRowBytes": 375,
+  "cartoBuildings": 185,
+  "cartoRowBytes": 377,
   "cartoInstitutionRefs": 47,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 11
  },
  "metropolis|mesoamerican|hills|road|frontier|cg1-seed-02": {
   "tier": "metropolis",
@@ -3087,11 +3087,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 224,
+  "cartoBuildings": 225,
   "cartoRowBytes": 377,
   "cartoInstitutionRefs": 56,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 10
  },
  "metropolis|mesoamerican|mountain|road|frontier|cg1-seed-06": {
   "tier": "metropolis",
@@ -3101,8 +3101,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 216,
-  "cartoRowBytes": 384,
+  "cartoBuildings": 217,
+  "cartoRowBytes": 382,
   "cartoInstitutionRefs": 53,
   "cartoDupExact": 0,
   "cartoDupTranslate": 12
@@ -3115,11 +3115,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 219,
-  "cartoRowBytes": 391,
+  "cartoBuildings": 213,
+  "cartoRowBytes": 390,
   "cartoInstitutionRefs": 51,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 18
  },
  "metropolis|mesoamerican|riverside|river|safe|cg1-seed-04": {
   "tier": "metropolis",
@@ -3130,10 +3130,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 261,
-  "cartoRowBytes": 374,
+  "cartoRowBytes": 375,
   "cartoInstitutionRefs": 58,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 22
+  "cartoDupTranslate": 13
  },
  "metropolis|norse|coastal|port|safe|cg1-seed-08": {
   "tier": "metropolis",
@@ -3147,7 +3147,7 @@
   "cartoRowBytes": 379,
   "cartoInstitutionRefs": 58,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 18
+  "cartoDupTranslate": 12
  },
  "metropolis|norse|desert|road|frontier|cg1-seed-10": {
   "tier": "metropolis",
@@ -3157,11 +3157,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 215,
-  "cartoRowBytes": 385,
+  "cartoBuildings": 216,
+  "cartoRowBytes": 383,
   "cartoInstitutionRefs": 55,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 4
  },
  "metropolis|norse|forest|isolated|frontier|cg1-seed-06": {
   "tier": "metropolis",
@@ -3171,11 +3171,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 197,
-  "cartoRowBytes": 389,
+  "cartoBuildings": 244,
+  "cartoRowBytes": 380,
   "cartoInstitutionRefs": 47,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 22
  },
  "metropolis|norse|hills|road|civilized|cg1-seed-05": {
   "tier": "metropolis",
@@ -3189,7 +3189,7 @@
   "cartoRowBytes": 384,
   "cartoInstitutionRefs": 45,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 15
+  "cartoDupTranslate": 10
  },
  "metropolis|norse|mountain|road|civilized|cg1-seed-09": {
   "tier": "metropolis",
@@ -3199,11 +3199,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 197,
-  "cartoRowBytes": 380,
+  "cartoBuildings": 195,
+  "cartoRowBytes": 381,
   "cartoInstitutionRefs": 51,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 18
+  "cartoDupTranslate": 10
  },
  "metropolis|norse|plains|road|safe|cg1-seed-04": {
   "tier": "metropolis",
@@ -3213,11 +3213,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 213,
+  "cartoBuildings": 216,
   "cartoRowBytes": 377,
   "cartoInstitutionRefs": 52,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 16
+  "cartoDupTranslate": 8
  },
  "metropolis|norse|riverside|river|plagued|cg1-seed-07": {
   "tier": "metropolis",
@@ -3228,10 +3228,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 261,
-  "cartoRowBytes": 392,
+  "cartoRowBytes": 391,
   "cartoInstitutionRefs": 56,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 12
+  "cartoDupTranslate": 13
  },
  "metropolis|slavic|coastal|port|plagued|cg1-seed-03": {
   "tier": "metropolis",
@@ -3241,11 +3241,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 254,
-  "cartoRowBytes": 372,
+  "cartoBuildings": 255,
+  "cartoRowBytes": 373,
   "cartoInstitutionRefs": 58,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 12
  },
  "metropolis|slavic|desert|road|civilized|cg1-seed-05": {
   "tier": "metropolis",
@@ -3259,7 +3259,7 @@
   "cartoRowBytes": 384,
   "cartoInstitutionRefs": 50,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 12
  },
  "metropolis|slavic|forest|isolated|civilized|cg1-seed-01": {
   "tier": "metropolis",
@@ -3269,8 +3269,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 183,
-  "cartoRowBytes": 379,
+  "cartoBuildings": 219,
+  "cartoRowBytes": 374,
   "cartoInstitutionRefs": 41,
   "cartoDupExact": 0,
   "cartoDupTranslate": 10
@@ -3283,11 +3283,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 222,
-  "cartoRowBytes": 375,
+  "cartoBuildings": 223,
+  "cartoRowBytes": 374,
   "cartoInstitutionRefs": 53,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 14
+  "cartoDupTranslate": 15
  },
  "metropolis|slavic|mountain|road|safe|cg1-seed-04": {
   "tier": "metropolis",
@@ -3297,11 +3297,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 236,
-  "cartoRowBytes": 374,
+  "cartoBuildings": 237,
+  "cartoRowBytes": 375,
   "cartoInstitutionRefs": 54,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 8
  },
  "metropolis|slavic|plains|road|plagued|cg1-seed-11": {
   "tier": "metropolis",
@@ -3311,11 +3311,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 196,
-  "cartoRowBytes": 387,
+  "cartoBuildings": 193,
+  "cartoRowBytes": 388,
   "cartoInstitutionRefs": 54,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 6
  },
  "metropolis|slavic|riverside|river|frontier|cg1-seed-02": {
   "tier": "metropolis",
@@ -3325,11 +3325,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 257,
-  "cartoRowBytes": 373,
+  "cartoBuildings": 256,
+  "cartoRowBytes": 374,
   "cartoInstitutionRefs": 58,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 17
+  "cartoDupTranslate": 18
  },
  "metropolis|south_asian|coastal|port|safe|cg1-seed-00": {
   "tier": "metropolis",
@@ -3339,11 +3339,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 241,
-  "cartoRowBytes": 391,
+  "cartoBuildings": 238,
+  "cartoRowBytes": 392,
   "cartoInstitutionRefs": 55,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 16
  },
  "metropolis|south_asian|desert|road|frontier|cg1-seed-02": {
   "tier": "metropolis",
@@ -3353,8 +3353,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 222,
-  "cartoRowBytes": 381,
+  "cartoBuildings": 221,
+  "cartoRowBytes": 380,
   "cartoInstitutionRefs": 59,
   "cartoDupExact": 0,
   "cartoDupTranslate": 10
@@ -3367,8 +3367,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 195,
-  "cartoRowBytes": 376,
+  "cartoBuildings": 246,
+  "cartoRowBytes": 370,
   "cartoInstitutionRefs": 51,
   "cartoDupExact": 0,
   "cartoDupTranslate": 8
@@ -3381,11 +3381,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 196,
+  "cartoBuildings": 192,
   "cartoRowBytes": 380,
   "cartoInstitutionRefs": 54,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 18
+  "cartoDupTranslate": 12
  },
  "metropolis|south_asian|mountain|road|civilized|cg1-seed-01": {
   "tier": "metropolis",
@@ -3395,11 +3395,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 233,
-  "cartoRowBytes": 374,
+  "cartoBuildings": 242,
+  "cartoRowBytes": 373,
   "cartoInstitutionRefs": 48,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 12
  },
  "metropolis|south_asian|plains|road|safe|cg1-seed-08": {
   "tier": "metropolis",
@@ -3409,11 +3409,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 216,
+  "cartoBuildings": 218,
   "cartoRowBytes": 386,
   "cartoInstitutionRefs": 57,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 12
+  "cartoDupTranslate": 10
  },
  "metropolis|south_asian|riverside|river|plagued|cg1-seed-11": {
   "tier": "metropolis",
@@ -3423,11 +3423,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 246,
+  "cartoBuildings": 242,
   "cartoRowBytes": 394,
   "cartoInstitutionRefs": 53,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 14
  },
  "metropolis|steppe|coastal|port|plagued|cg1-seed-07": {
   "tier": "metropolis",
@@ -3441,7 +3441,7 @@
   "cartoRowBytes": 376,
   "cartoInstitutionRefs": 56,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 14
+  "cartoDupTranslate": 16
  },
  "metropolis|steppe|desert|road|civilized|cg1-seed-09": {
   "tier": "metropolis",
@@ -3451,11 +3451,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 193,
-  "cartoRowBytes": 380,
+  "cartoBuildings": 196,
+  "cartoRowBytes": 381,
   "cartoInstitutionRefs": 51,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 16
  },
  "metropolis|steppe|forest|isolated|civilized|cg1-seed-05": {
   "tier": "metropolis",
@@ -3465,11 +3465,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 168,
-  "cartoRowBytes": 392,
+  "cartoBuildings": 216,
+  "cartoRowBytes": 381,
   "cartoInstitutionRefs": 46,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 8
  },
  "metropolis|steppe|hills|road|safe|cg1-seed-04": {
   "tier": "metropolis",
@@ -3479,11 +3479,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 218,
+  "cartoBuildings": 210,
   "cartoRowBytes": 379,
   "cartoInstitutionRefs": 52,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 12
  },
  "metropolis|steppe|mountain|road|safe|cg1-seed-08": {
   "tier": "metropolis",
@@ -3493,11 +3493,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 215,
-  "cartoRowBytes": 385,
+  "cartoBuildings": 218,
+  "cartoRowBytes": 386,
   "cartoInstitutionRefs": 56,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 10
  },
  "metropolis|steppe|plains|road|plagued|cg1-seed-03": {
   "tier": "metropolis",
@@ -3507,11 +3507,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 179,
-  "cartoRowBytes": 378,
+  "cartoBuildings": 176,
+  "cartoRowBytes": 379,
   "cartoInstitutionRefs": 50,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 2
  },
  "metropolis|steppe|riverside|river|frontier|cg1-seed-06": {
   "tier": "metropolis",
@@ -3522,10 +3522,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 261,
-  "cartoRowBytes": 375,
+  "cartoRowBytes": 374,
   "cartoInstitutionRefs": 55,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 30
  },
  "thorp|arabic|coastal|port|civilized|cg1-seed-01": {
   "tier": "thorp",
@@ -3535,8 +3535,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 11,
-  "cartoRowBytes": 417,
+  "cartoBuildings": 9,
+  "cartoRowBytes": 434,
   "cartoInstitutionRefs": 9,
   "cartoDupExact": 0,
   "cartoDupTranslate": 2
@@ -3620,7 +3620,7 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 8,
-  "cartoRowBytes": 419,
+  "cartoRowBytes": 422,
   "cartoInstitutionRefs": 7,
   "cartoDupExact": 0,
   "cartoDupTranslate": 0
@@ -3633,8 +3633,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 8,
-  "cartoRowBytes": 419,
+  "cartoBuildings": 7,
+  "cartoRowBytes": 441,
   "cartoInstitutionRefs": 7,
   "cartoDupExact": 0,
   "cartoDupTranslate": 0
@@ -3718,7 +3718,7 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 11,
-  "cartoRowBytes": 419,
+  "cartoRowBytes": 438,
   "cartoInstitutionRefs": 10,
   "cartoDupExact": 0,
   "cartoDupTranslate": 2
@@ -3732,10 +3732,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 7,
-  "cartoRowBytes": 427,
+  "cartoRowBytes": 426,
   "cartoInstitutionRefs": 7,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 0
  },
  "thorp|east_asian|desert|road|safe|cg1-seed-00": {
   "tier": "thorp",
@@ -3815,8 +3815,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 8,
-  "cartoRowBytes": 420,
+  "cartoBuildings": 7,
+  "cartoRowBytes": 449,
   "cartoInstitutionRefs": 7,
   "cartoDupExact": 0,
   "cartoDupTranslate": 0
@@ -3829,11 +3829,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 10,
-  "cartoRowBytes": 418,
+  "cartoBuildings": 9,
+  "cartoRowBytes": 435,
   "cartoInstitutionRefs": 8,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 0
  },
  "thorp|germanic|desert|road|frontier|cg1-seed-06": {
   "tier": "thorp",
@@ -3914,10 +3914,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 11,
-  "cartoRowBytes": 418,
+  "cartoRowBytes": 429,
   "cartoInstitutionRefs": 10,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 2
  },
  "thorp|greek|coastal|port|frontier|cg1-seed-02": {
   "tier": "thorp",
@@ -3931,7 +3931,7 @@
   "cartoRowBytes": 420,
   "cartoInstitutionRefs": 7,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 2
  },
  "thorp|greek|desert|road|safe|cg1-seed-04": {
   "tier": "thorp",
@@ -4012,7 +4012,7 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 9,
-  "cartoRowBytes": 419,
+  "cartoRowBytes": 424,
   "cartoInstitutionRefs": 8,
   "cartoDupExact": 0,
   "cartoDupTranslate": 0
@@ -4026,10 +4026,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 10,
-  "cartoRowBytes": 414,
+  "cartoRowBytes": 416,
   "cartoInstitutionRefs": 9,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 2
  },
  "thorp|latin|desert|road|civilized|cg1-seed-01": {
   "tier": "thorp",
@@ -4110,10 +4110,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 9,
-  "cartoRowBytes": 420,
+  "cartoRowBytes": 427,
   "cartoInstitutionRefs": 8,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 2
  },
  "thorp|mediterranean|coastal|port|civilized|cg1-seed-09": {
   "tier": "thorp",
@@ -4123,11 +4123,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 8,
-  "cartoRowBytes": 420,
+  "cartoBuildings": 7,
+  "cartoRowBytes": 449,
   "cartoInstitutionRefs": 7,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 2
  },
  "thorp|mediterranean|desert|road|plagued|cg1-seed-11": {
   "tier": "thorp",
@@ -4207,11 +4207,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 8,
-  "cartoRowBytes": 420,
+  "cartoBuildings": 9,
+  "cartoRowBytes": 424,
   "cartoInstitutionRefs": 7,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 4
  },
  "thorp|mesoamerican|coastal|port|civilized|cg1-seed-05": {
   "tier": "thorp",
@@ -4221,11 +4221,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 11,
-  "cartoRowBytes": 419,
+  "cartoBuildings": 12,
+  "cartoRowBytes": 430,
   "cartoInstitutionRefs": 10,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 4
  },
  "thorp|mesoamerican|desert|road|plagued|cg1-seed-07": {
   "tier": "thorp",
@@ -4306,10 +4306,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 10,
-  "cartoRowBytes": 420,
+  "cartoRowBytes": 429,
   "cartoInstitutionRefs": 9,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 0
  },
  "thorp|norse|coastal|port|safe|cg1-seed-08": {
   "tier": "thorp",
@@ -4319,11 +4319,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 8,
-  "cartoRowBytes": 420,
+  "cartoBuildings": 7,
+  "cartoRowBytes": 438,
   "cartoInstitutionRefs": 7,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 2
  },
  "thorp|norse|desert|road|frontier|cg1-seed-10": {
   "tier": "thorp",
@@ -4404,7 +4404,7 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 11,
-  "cartoRowBytes": 417,
+  "cartoRowBytes": 432,
   "cartoInstitutionRefs": 10,
   "cartoDupExact": 0,
   "cartoDupTranslate": 2
@@ -4417,8 +4417,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 11,
-  "cartoRowBytes": 418,
+  "cartoBuildings": 10,
+  "cartoRowBytes": 431,
   "cartoInstitutionRefs": 10,
   "cartoDupExact": 0,
   "cartoDupTranslate": 0
@@ -4502,10 +4502,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 9,
-  "cartoRowBytes": 414,
+  "cartoRowBytes": 433,
   "cartoInstitutionRefs": 8,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 2
  },
  "thorp|south_asian|coastal|port|safe|cg1-seed-00": {
   "tier": "thorp",
@@ -4516,10 +4516,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 8,
-  "cartoRowBytes": 419,
+  "cartoRowBytes": 422,
   "cartoInstitutionRefs": 7,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 0
  },
  "thorp|south_asian|desert|road|frontier|cg1-seed-02": {
   "tier": "thorp",
@@ -4600,7 +4600,7 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 10,
-  "cartoRowBytes": 414,
+  "cartoRowBytes": 416,
   "cartoInstitutionRefs": 9,
   "cartoDupExact": 0,
   "cartoDupTranslate": 2
@@ -4614,10 +4614,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 11,
-  "cartoRowBytes": 417,
+  "cartoRowBytes": 432,
   "cartoInstitutionRefs": 10,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 2
  },
  "thorp|steppe|desert|road|civilized|cg1-seed-09": {
   "tier": "thorp",
@@ -4697,8 +4697,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 8,
-  "cartoRowBytes": 419,
+  "cartoBuildings": 7,
+  "cartoRowBytes": 441,
   "cartoInstitutionRefs": 7,
   "cartoDupExact": 0,
   "cartoDupTranslate": 0
@@ -4711,7 +4711,7 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 89,
+  "cartoBuildings": 90,
   "cartoRowBytes": 407,
   "cartoInstitutionRefs": 49,
   "cartoDupExact": 0,
@@ -4725,11 +4725,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 86,
-  "cartoRowBytes": 401,
+  "cartoBuildings": 98,
+  "cartoRowBytes": 404,
   "cartoInstitutionRefs": 57,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 10
  },
  "town|arabic|forest|isolated|plagued|cg1-seed-11": {
   "tier": "town",
@@ -4739,11 +4739,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 80,
-  "cartoRowBytes": 404,
+  "cartoBuildings": 92,
+  "cartoRowBytes": 405,
   "cartoInstitutionRefs": 52,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 6
  },
  "town|arabic|hills|road|frontier|cg1-seed-10": {
   "tier": "town",
@@ -4753,11 +4753,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 82,
-  "cartoRowBytes": 410,
+  "cartoBuildings": 80,
+  "cartoRowBytes": 417,
   "cartoInstitutionRefs": 54,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 8
  },
  "town|arabic|mountain|road|frontier|cg1-seed-02": {
   "tier": "town",
@@ -4767,11 +4767,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 79,
-  "cartoRowBytes": 404,
+  "cartoBuildings": 91,
+  "cartoRowBytes": 407,
   "cartoInstitutionRefs": 51,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 14
  },
  "town|arabic|plains|road|civilized|cg1-seed-09": {
   "tier": "town",
@@ -4781,11 +4781,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 78,
-  "cartoRowBytes": 406,
+  "cartoBuildings": 91,
+  "cartoRowBytes": 410,
   "cartoInstitutionRefs": 55,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 6
  },
  "town|arabic|riverside|river|safe|cg1-seed-00": {
   "tier": "town",
@@ -4795,11 +4795,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 87,
-  "cartoRowBytes": 409,
+  "cartoBuildings": 93,
+  "cartoRowBytes": 408,
   "cartoInstitutionRefs": 52,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 4
  },
  "town|celtic|coastal|port|frontier|cg1-seed-06": {
   "tier": "town",
@@ -4809,11 +4809,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 100,
+  "cartoBuildings": 98,
   "cartoRowBytes": 408,
   "cartoInstitutionRefs": 62,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 2
  },
  "town|celtic|desert|road|safe|cg1-seed-08": {
   "tier": "town",
@@ -4823,11 +4823,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 101,
-  "cartoRowBytes": 393,
+  "cartoBuildings": 116,
+  "cartoRowBytes": 397,
   "cartoInstitutionRefs": 57,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 9
  },
  "town|celtic|forest|isolated|safe|cg1-seed-04": {
   "tier": "town",
@@ -4837,11 +4837,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 64,
-  "cartoRowBytes": 406,
+  "cartoBuildings": 71,
+  "cartoRowBytes": 415,
   "cartoInstitutionRefs": 41,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 8
  },
  "town|celtic|hills|road|plagued|cg1-seed-03": {
   "tier": "town",
@@ -4851,11 +4851,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 85,
-  "cartoRowBytes": 399,
+  "cartoBuildings": 94,
+  "cartoRowBytes": 404,
   "cartoInstitutionRefs": 54,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 6
  },
  "town|celtic|mountain|road|plagued|cg1-seed-07": {
   "tier": "town",
@@ -4865,8 +4865,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 84,
-  "cartoRowBytes": 396,
+  "cartoBuildings": 94,
+  "cartoRowBytes": 402,
   "cartoInstitutionRefs": 49,
   "cartoDupExact": 0,
   "cartoDupTranslate": 6
@@ -4879,11 +4879,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 80,
-  "cartoRowBytes": 404,
+  "cartoBuildings": 90,
+  "cartoRowBytes": 406,
   "cartoInstitutionRefs": 53,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 4
  },
  "town|celtic|riverside|river|civilized|cg1-seed-05": {
   "tier": "town",
@@ -4893,11 +4893,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 92,
-  "cartoRowBytes": 407,
+  "cartoBuildings": 93,
+  "cartoRowBytes": 409,
   "cartoInstitutionRefs": 51,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 4
  },
  "town|east_asian|coastal|port|frontier|cg1-seed-10": {
   "tier": "town",
@@ -4908,10 +4908,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 99,
-  "cartoRowBytes": 408,
+  "cartoRowBytes": 411,
   "cartoInstitutionRefs": 58,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 0
  },
  "town|east_asian|desert|road|safe|cg1-seed-00": {
   "tier": "town",
@@ -4921,11 +4921,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 81,
-  "cartoRowBytes": 408,
+  "cartoBuildings": 79,
+  "cartoRowBytes": 417,
   "cartoInstitutionRefs": 54,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 4
  },
  "town|east_asian|forest|isolated|safe|cg1-seed-08": {
   "tier": "town",
@@ -4935,11 +4935,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 82,
-  "cartoRowBytes": 405,
+  "cartoBuildings": 78,
+  "cartoRowBytes": 414,
   "cartoInstitutionRefs": 50,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 8
  },
  "town|east_asian|hills|road|plagued|cg1-seed-07": {
   "tier": "town",
@@ -4949,11 +4949,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 86,
-  "cartoRowBytes": 399,
+  "cartoBuildings": 96,
+  "cartoRowBytes": 403,
   "cartoInstitutionRefs": 54,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 6
  },
  "town|east_asian|mountain|road|plagued|cg1-seed-11": {
   "tier": "town",
@@ -4963,11 +4963,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 69,
-  "cartoRowBytes": 402,
+  "cartoBuildings": 82,
+  "cartoRowBytes": 404,
   "cartoInstitutionRefs": 41,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 2
  },
  "town|east_asian|plains|road|frontier|cg1-seed-06": {
   "tier": "town",
@@ -4977,11 +4977,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 79,
-  "cartoRowBytes": 409,
+  "cartoBuildings": 87,
+  "cartoRowBytes": 412,
   "cartoInstitutionRefs": 57,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 0
  },
  "town|east_asian|riverside|river|civilized|cg1-seed-09": {
   "tier": "town",
@@ -4991,11 +4991,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 88,
-  "cartoRowBytes": 408,
+  "cartoBuildings": 89,
+  "cartoRowBytes": 409,
   "cartoInstitutionRefs": 54,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 2
  },
  "town|germanic|coastal|port|safe|cg1-seed-04": {
   "tier": "town",
@@ -5005,8 +5005,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 98,
-  "cartoRowBytes": 405,
+  "cartoBuildings": 96,
+  "cartoRowBytes": 404,
   "cartoInstitutionRefs": 56,
   "cartoDupExact": 0,
   "cartoDupTranslate": 8
@@ -5019,11 +5019,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 78,
-  "cartoRowBytes": 408,
+  "cartoBuildings": 88,
+  "cartoRowBytes": 412,
   "cartoInstitutionRefs": 55,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 6
  },
  "town|germanic|forest|isolated|frontier|cg1-seed-02": {
   "tier": "town",
@@ -5033,11 +5033,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 68,
+  "cartoBuildings": 81,
   "cartoRowBytes": 408,
   "cartoInstitutionRefs": 49,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 6
  },
  "town|germanic|hills|road|civilized|cg1-seed-01": {
   "tier": "town",
@@ -5047,11 +5047,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 76,
-  "cartoRowBytes": 404,
+  "cartoBuildings": 74,
+  "cartoRowBytes": 415,
   "cartoInstitutionRefs": 46,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 4
  },
  "town|germanic|mountain|road|civilized|cg1-seed-05": {
   "tier": "town",
@@ -5061,11 +5061,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 81,
-  "cartoRowBytes": 403,
+  "cartoBuildings": 74,
+  "cartoRowBytes": 414,
   "cartoInstitutionRefs": 46,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 14
+  "cartoDupTranslate": 8
  },
  "town|germanic|plains|road|safe|cg1-seed-00": {
   "tier": "town",
@@ -5075,11 +5075,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 77,
-  "cartoRowBytes": 406,
+  "cartoBuildings": 88,
+  "cartoRowBytes": 409,
   "cartoInstitutionRefs": 52,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 8
  },
  "town|germanic|riverside|river|plagued|cg1-seed-03": {
   "tier": "town",
@@ -5089,11 +5089,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 95,
+  "cartoBuildings": 97,
   "cartoRowBytes": 404,
   "cartoInstitutionRefs": 56,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 2
  },
  "town|greek|coastal|port|frontier|cg1-seed-02": {
   "tier": "town",
@@ -5103,11 +5103,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 93,
-  "cartoRowBytes": 406,
+  "cartoBuildings": 95,
+  "cartoRowBytes": 408,
   "cartoInstitutionRefs": 55,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 8
  },
  "town|greek|desert|road|safe|cg1-seed-04": {
   "tier": "town",
@@ -5117,11 +5117,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 81,
-  "cartoRowBytes": 407,
+  "cartoBuildings": 94,
+  "cartoRowBytes": 410,
   "cartoInstitutionRefs": 57,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 13
  },
  "town|greek|forest|isolated|safe|cg1-seed-00": {
   "tier": "town",
@@ -5131,8 +5131,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 89,
-  "cartoRowBytes": 394,
+  "cartoBuildings": 84,
+  "cartoRowBytes": 405,
   "cartoInstitutionRefs": 48,
   "cartoDupExact": 0,
   "cartoDupTranslate": 2
@@ -5145,11 +5145,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 71,
-  "cartoRowBytes": 401,
+  "cartoBuildings": 81,
+  "cartoRowBytes": 405,
   "cartoInstitutionRefs": 45,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 12
  },
  "town|greek|mountain|road|plagued|cg1-seed-03": {
   "tier": "town",
@@ -5159,11 +5159,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 83,
-  "cartoRowBytes": 399,
+  "cartoBuildings": 93,
+  "cartoRowBytes": 403,
   "cartoInstitutionRefs": 51,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 6
  },
  "town|greek|plains|road|frontier|cg1-seed-10": {
   "tier": "town",
@@ -5174,10 +5174,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 84,
-  "cartoRowBytes": 410,
+  "cartoRowBytes": 418,
   "cartoInstitutionRefs": 57,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 4
  },
  "town|greek|riverside|river|civilized|cg1-seed-01": {
   "tier": "town",
@@ -5187,11 +5187,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 88,
-  "cartoRowBytes": 410,
+  "cartoBuildings": 91,
+  "cartoRowBytes": 406,
   "cartoInstitutionRefs": 50,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 6
  },
  "town|latin|coastal|port|plagued|cg1-seed-11": {
   "tier": "town",
@@ -5201,8 +5201,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 90,
-  "cartoRowBytes": 405,
+  "cartoBuildings": 88,
+  "cartoRowBytes": 407,
   "cartoInstitutionRefs": 51,
   "cartoDupExact": 0,
   "cartoDupTranslate": 4
@@ -5215,11 +5215,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 80,
-  "cartoRowBytes": 404,
+  "cartoBuildings": 77,
+  "cartoRowBytes": 416,
   "cartoInstitutionRefs": 50,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 2
  },
  "town|latin|forest|isolated|civilized|cg1-seed-09": {
   "tier": "town",
@@ -5229,11 +5229,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 74,
-  "cartoRowBytes": 400,
+  "cartoBuildings": 83,
+  "cartoRowBytes": 405,
   "cartoInstitutionRefs": 46,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 4
  },
  "town|latin|hills|road|safe|cg1-seed-08": {
   "tier": "town",
@@ -5243,11 +5243,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 96,
-  "cartoRowBytes": 393,
+  "cartoBuildings": 110,
+  "cartoRowBytes": 398,
   "cartoInstitutionRefs": 53,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 8
  },
  "town|latin|mountain|road|safe|cg1-seed-00": {
   "tier": "town",
@@ -5257,11 +5257,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 79,
-  "cartoRowBytes": 405,
+  "cartoBuildings": 74,
+  "cartoRowBytes": 415,
   "cartoInstitutionRefs": 49,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 6
  },
  "town|latin|plains|road|plagued|cg1-seed-07": {
   "tier": "town",
@@ -5271,11 +5271,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 87,
-  "cartoRowBytes": 399,
+  "cartoBuildings": 97,
+  "cartoRowBytes": 401,
   "cartoInstitutionRefs": 53,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 6
  },
  "town|latin|riverside|river|frontier|cg1-seed-10": {
   "tier": "town",
@@ -5285,11 +5285,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 86,
-  "cartoRowBytes": 409,
+  "cartoBuildings": 81,
+  "cartoRowBytes": 419,
   "cartoInstitutionRefs": 58,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 9
+  "cartoDupTranslate": 6
  },
  "town|mediterranean|coastal|port|civilized|cg1-seed-09": {
   "tier": "town",
@@ -5300,10 +5300,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 97,
-  "cartoRowBytes": 403,
+  "cartoRowBytes": 404,
   "cartoInstitutionRefs": 58,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 10
  },
  "town|mediterranean|desert|road|plagued|cg1-seed-11": {
   "tier": "town",
@@ -5313,11 +5313,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 91,
-  "cartoRowBytes": 398,
+  "cartoBuildings": 87,
+  "cartoRowBytes": 406,
   "cartoInstitutionRefs": 53,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 14
+  "cartoDupTranslate": 16
  },
  "town|mediterranean|forest|isolated|plagued|cg1-seed-07": {
   "tier": "town",
@@ -5327,11 +5327,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 89,
-  "cartoRowBytes": 404,
+  "cartoBuildings": 79,
+  "cartoRowBytes": 415,
   "cartoInstitutionRefs": 55,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 4
  },
  "town|mediterranean|hills|road|frontier|cg1-seed-06": {
   "tier": "town",
@@ -5341,11 +5341,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 73,
-  "cartoRowBytes": 407,
+  "cartoBuildings": 82,
+  "cartoRowBytes": 411,
   "cartoInstitutionRefs": 49,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 2
  },
  "town|mediterranean|mountain|road|frontier|cg1-seed-10": {
   "tier": "town",
@@ -5355,11 +5355,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 77,
-  "cartoRowBytes": 405,
+  "cartoBuildings": 78,
+  "cartoRowBytes": 412,
   "cartoInstitutionRefs": 49,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 2
  },
  "town|mediterranean|plains|road|civilized|cg1-seed-05": {
   "tier": "town",
@@ -5369,11 +5369,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 82,
-  "cartoRowBytes": 404,
+  "cartoBuildings": 95,
+  "cartoRowBytes": 408,
   "cartoInstitutionRefs": 54,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 8
  },
  "town|mediterranean|riverside|river|safe|cg1-seed-08": {
   "tier": "town",
@@ -5383,11 +5383,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 112,
-  "cartoRowBytes": 398,
+  "cartoBuildings": 110,
+  "cartoRowBytes": 399,
   "cartoInstitutionRefs": 57,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 9
  },
  "town|mesoamerican|coastal|port|civilized|cg1-seed-05": {
   "tier": "town",
@@ -5397,11 +5397,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 88,
-  "cartoRowBytes": 407,
+  "cartoBuildings": 90,
+  "cartoRowBytes": 408,
   "cartoInstitutionRefs": 53,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 13
+  "cartoDupTranslate": 8
  },
  "town|mesoamerican|desert|road|plagued|cg1-seed-07": {
   "tier": "town",
@@ -5411,11 +5411,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 90,
-  "cartoRowBytes": 398,
+  "cartoBuildings": 103,
+  "cartoRowBytes": 403,
   "cartoInstitutionRefs": 56,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 12
+  "cartoDupTranslate": 6
  },
  "town|mesoamerican|forest|isolated|plagued|cg1-seed-03": {
   "tier": "town",
@@ -5425,11 +5425,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 80,
-  "cartoRowBytes": 400,
+  "cartoBuildings": 92,
+  "cartoRowBytes": 405,
   "cartoInstitutionRefs": 51,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 4
  },
  "town|mesoamerican|hills|road|frontier|cg1-seed-02": {
   "tier": "town",
@@ -5439,8 +5439,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 78,
-  "cartoRowBytes": 404,
+  "cartoBuildings": 89,
+  "cartoRowBytes": 407,
   "cartoInstitutionRefs": 51,
   "cartoDupExact": 0,
   "cartoDupTranslate": 4
@@ -5453,11 +5453,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 70,
-  "cartoRowBytes": 408,
+  "cartoBuildings": 83,
+  "cartoRowBytes": 412,
   "cartoInstitutionRefs": 48,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 6
  },
  "town|mesoamerican|plains|road|civilized|cg1-seed-01": {
   "tier": "town",
@@ -5467,11 +5467,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 75,
-  "cartoRowBytes": 408,
+  "cartoBuildings": 72,
+  "cartoRowBytes": 415,
   "cartoInstitutionRefs": 47,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 2
  },
  "town|mesoamerican|riverside|river|safe|cg1-seed-04": {
   "tier": "town",
@@ -5481,11 +5481,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 95,
-  "cartoRowBytes": 405,
+  "cartoBuildings": 96,
+  "cartoRowBytes": 404,
   "cartoInstitutionRefs": 54,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 6
  },
  "town|norse|coastal|port|safe|cg1-seed-08": {
   "tier": "town",
@@ -5495,11 +5495,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 114,
-  "cartoRowBytes": 399,
+  "cartoBuildings": 113,
+  "cartoRowBytes": 397,
   "cartoInstitutionRefs": 62,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 6
  },
  "town|norse|desert|road|frontier|cg1-seed-10": {
   "tier": "town",
@@ -5509,11 +5509,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 87,
-  "cartoRowBytes": 408,
+  "cartoBuildings": 83,
+  "cartoRowBytes": 418,
   "cartoInstitutionRefs": 58,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 19
+  "cartoDupTranslate": 8
  },
  "town|norse|forest|isolated|frontier|cg1-seed-06": {
   "tier": "town",
@@ -5523,11 +5523,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 80,
-  "cartoRowBytes": 406,
+  "cartoBuildings": 92,
+  "cartoRowBytes": 408,
   "cartoInstitutionRefs": 51,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 6
  },
  "town|norse|hills|road|civilized|cg1-seed-05": {
   "tier": "town",
@@ -5537,11 +5537,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 79,
-  "cartoRowBytes": 403,
+  "cartoBuildings": 75,
+  "cartoRowBytes": 414,
   "cartoInstitutionRefs": 49,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 7
  },
  "town|norse|mountain|road|civilized|cg1-seed-09": {
   "tier": "town",
@@ -5551,11 +5551,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 73,
-  "cartoRowBytes": 406,
+  "cartoBuildings": 80,
+  "cartoRowBytes": 409,
   "cartoInstitutionRefs": 49,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 5
+  "cartoDupTranslate": 8
  },
  "town|norse|plains|road|safe|cg1-seed-04": {
   "tier": "town",
@@ -5565,11 +5565,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 75,
-  "cartoRowBytes": 404,
+  "cartoBuildings": 87,
+  "cartoRowBytes": 408,
   "cartoInstitutionRefs": 51,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 6
  },
  "town|norse|riverside|river|plagued|cg1-seed-07": {
   "tier": "town",
@@ -5579,11 +5579,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 108,
+  "cartoBuildings": 110,
   "cartoRowBytes": 397,
   "cartoInstitutionRefs": 56,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 12
+  "cartoDupTranslate": 6
  },
  "town|slavic|coastal|port|plagued|cg1-seed-03": {
   "tier": "town",
@@ -5594,10 +5594,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 98,
-  "cartoRowBytes": 405,
+  "cartoRowBytes": 404,
   "cartoInstitutionRefs": 58,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 8
  },
  "town|slavic|desert|road|civilized|cg1-seed-05": {
   "tier": "town",
@@ -5607,11 +5607,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 83,
-  "cartoRowBytes": 403,
+  "cartoBuildings": 80,
+  "cartoRowBytes": 413,
   "cartoInstitutionRefs": 51,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 2
  },
  "town|slavic|forest|isolated|civilized|cg1-seed-01": {
   "tier": "town",
@@ -5621,11 +5621,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 66,
-  "cartoRowBytes": 396,
+  "cartoBuildings": 82,
+  "cartoRowBytes": 399,
   "cartoInstitutionRefs": 38,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 10
  },
  "town|slavic|hills|road|safe|cg1-seed-00": {
   "tier": "town",
@@ -5635,8 +5635,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 73,
-  "cartoRowBytes": 404,
+  "cartoBuildings": 83,
+  "cartoRowBytes": 409,
   "cartoInstitutionRefs": 49,
   "cartoDupExact": 0,
   "cartoDupTranslate": 6
@@ -5649,11 +5649,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 69,
-  "cartoRowBytes": 402,
+  "cartoBuildings": 87,
+  "cartoRowBytes": 409,
   "cartoInstitutionRefs": 46,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 5
+  "cartoDupTranslate": 4
  },
  "town|slavic|plains|road|plagued|cg1-seed-11": {
   "tier": "town",
@@ -5663,11 +5663,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 79,
-  "cartoRowBytes": 403,
+  "cartoBuildings": 88,
+  "cartoRowBytes": 408,
   "cartoInstitutionRefs": 52,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 2
  },
  "town|slavic|riverside|river|frontier|cg1-seed-02": {
   "tier": "town",
@@ -5677,11 +5677,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 94,
-  "cartoRowBytes": 407,
+  "cartoBuildings": 92,
+  "cartoRowBytes": 406,
   "cartoInstitutionRefs": 54,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 6
  },
  "town|south_asian|coastal|port|safe|cg1-seed-00": {
   "tier": "town",
@@ -5691,7 +5691,7 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 96,
+  "cartoBuildings": 93,
   "cartoRowBytes": 407,
   "cartoInstitutionRefs": 53,
   "cartoDupExact": 0,
@@ -5705,11 +5705,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 82,
-  "cartoRowBytes": 403,
+  "cartoBuildings": 98,
+  "cartoRowBytes": 407,
   "cartoInstitutionRefs": 55,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 10
  },
  "town|south_asian|forest|isolated|frontier|cg1-seed-10": {
   "tier": "town",
@@ -5719,11 +5719,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 82,
-  "cartoRowBytes": 404,
+  "cartoBuildings": 93,
+  "cartoRowBytes": 407,
   "cartoInstitutionRefs": 55,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 2
  },
  "town|south_asian|hills|road|civilized|cg1-seed-09": {
   "tier": "town",
@@ -5733,11 +5733,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 75,
-  "cartoRowBytes": 405,
+  "cartoBuildings": 88,
+  "cartoRowBytes": 409,
   "cartoInstitutionRefs": 54,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 4
  },
  "town|south_asian|mountain|road|civilized|cg1-seed-01": {
   "tier": "town",
@@ -5747,11 +5747,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 75,
-  "cartoRowBytes": 406,
+  "cartoBuildings": 69,
+  "cartoRowBytes": 419,
   "cartoInstitutionRefs": 45,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 10
+  "cartoDupTranslate": 2
  },
  "town|south_asian|plains|road|safe|cg1-seed-08": {
   "tier": "town",
@@ -5761,11 +5761,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 101,
-  "cartoRowBytes": 392,
+  "cartoBuildings": 112,
+  "cartoRowBytes": 398,
   "cartoInstitutionRefs": 57,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 4
  },
  "town|south_asian|riverside|river|plagued|cg1-seed-11": {
   "tier": "town",
@@ -5779,7 +5779,7 @@
   "cartoRowBytes": 394,
   "cartoInstitutionRefs": 51,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 10
  },
  "town|steppe|coastal|port|plagued|cg1-seed-07": {
   "tier": "town",
@@ -5789,11 +5789,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 83,
+  "cartoBuildings": 87,
   "cartoRowBytes": 412,
   "cartoInstitutionRefs": 54,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 10
  },
  "town|steppe|desert|road|civilized|cg1-seed-09": {
   "tier": "town",
@@ -5803,11 +5803,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 77,
-  "cartoRowBytes": 407,
+  "cartoBuildings": 87,
+  "cartoRowBytes": 410,
   "cartoInstitutionRefs": 55,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 14
+  "cartoDupTranslate": 2
  },
  "town|steppe|forest|isolated|civilized|cg1-seed-05": {
   "tier": "town",
@@ -5817,11 +5817,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 78,
-  "cartoRowBytes": 401,
+  "cartoBuildings": 70,
+  "cartoRowBytes": 413,
   "cartoInstitutionRefs": 45,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 6
+  "cartoDupTranslate": 2
  },
  "town|steppe|hills|road|safe|cg1-seed-04": {
   "tier": "town",
@@ -5831,8 +5831,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 72,
-  "cartoRowBytes": 405,
+  "cartoBuildings": 85,
+  "cartoRowBytes": 408,
   "cartoInstitutionRefs": 49,
   "cartoDupExact": 0,
   "cartoDupTranslate": 4
@@ -5845,11 +5845,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 93,
-  "cartoRowBytes": 390,
+  "cartoBuildings": 105,
+  "cartoRowBytes": 398,
   "cartoInstitutionRefs": 50,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 7
  },
  "town|steppe|plains|road|plagued|cg1-seed-03": {
   "tier": "town",
@@ -5859,8 +5859,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 85,
-  "cartoRowBytes": 401,
+  "cartoBuildings": 96,
+  "cartoRowBytes": 405,
   "cartoInstitutionRefs": 55,
   "cartoDupExact": 0,
   "cartoDupTranslate": 4
@@ -5873,11 +5873,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 90,
+  "cartoBuildings": 91,
   "cartoRowBytes": 411,
   "cartoInstitutionRefs": 57,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 6
  },
  "village|arabic|coastal|port|civilized|cg1-seed-01": {
   "tier": "village",
@@ -5944,7 +5944,7 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 32,
-  "cartoRowBytes": 417,
+  "cartoRowBytes": 423,
   "cartoInstitutionRefs": 26,
   "cartoDupExact": 0,
   "cartoDupTranslate": 2
@@ -5957,11 +5957,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 39,
-  "cartoRowBytes": 418,
+  "cartoBuildings": 37,
+  "cartoRowBytes": 424,
   "cartoInstitutionRefs": 33,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 0
  },
  "village|arabic|riverside|river|safe|cg1-seed-00": {
   "tier": "village",
@@ -5971,8 +5971,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 39,
-  "cartoRowBytes": 417,
+  "cartoBuildings": 40,
+  "cartoRowBytes": 425,
   "cartoInstitutionRefs": 33,
   "cartoDupExact": 0,
   "cartoDupTranslate": 2
@@ -5999,11 +5999,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 47,
-  "cartoRowBytes": 420,
+  "cartoBuildings": 46,
+  "cartoRowBytes": 424,
   "cartoInstitutionRefs": 41,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 0
  },
  "village|celtic|forest|isolated|safe|cg1-seed-04": {
   "tier": "village",
@@ -6014,10 +6014,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 34,
-  "cartoRowBytes": 415,
+  "cartoRowBytes": 417,
   "cartoInstitutionRefs": 28,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 2
  },
  "village|celtic|hills|road|plagued|cg1-seed-03": {
   "tier": "village",
@@ -6027,8 +6027,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 38,
-  "cartoRowBytes": 415,
+  "cartoBuildings": 36,
+  "cartoRowBytes": 425,
   "cartoInstitutionRefs": 31,
   "cartoDupExact": 0,
   "cartoDupTranslate": 2
@@ -6056,7 +6056,7 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 38,
-  "cartoRowBytes": 422,
+  "cartoRowBytes": 426,
   "cartoInstitutionRefs": 33,
   "cartoDupExact": 0,
   "cartoDupTranslate": 0
@@ -6083,8 +6083,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 38,
-  "cartoRowBytes": 418,
+  "cartoBuildings": 36,
+  "cartoRowBytes": 424,
   "cartoInstitutionRefs": 32,
   "cartoDupExact": 0,
   "cartoDupTranslate": 2
@@ -6098,10 +6098,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 41,
-  "cartoRowBytes": 421,
+  "cartoRowBytes": 425,
   "cartoInstitutionRefs": 36,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 4
  },
  "village|east_asian|forest|isolated|safe|cg1-seed-08": {
   "tier": "village",
@@ -6111,8 +6111,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 35,
-  "cartoRowBytes": 416,
+  "cartoBuildings": 33,
+  "cartoRowBytes": 426,
   "cartoInstitutionRefs": 29,
   "cartoDupExact": 0,
   "cartoDupTranslate": 2
@@ -6167,8 +6167,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 40,
-  "cartoRowBytes": 421,
+  "cartoBuildings": 39,
+  "cartoRowBytes": 425,
   "cartoInstitutionRefs": 35,
   "cartoDupExact": 0,
   "cartoDupTranslate": 0
@@ -6196,10 +6196,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 41,
-  "cartoRowBytes": 420,
+  "cartoRowBytes": 422,
   "cartoInstitutionRefs": 36,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 0
  },
  "village|germanic|forest|isolated|frontier|cg1-seed-02": {
   "tier": "village",
@@ -6209,11 +6209,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 36,
-  "cartoRowBytes": 418,
+  "cartoBuildings": 35,
+  "cartoRowBytes": 423,
   "cartoInstitutionRefs": 29,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 3
  },
  "village|germanic|hills|road|civilized|cg1-seed-01": {
   "tier": "village",
@@ -6252,10 +6252,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 41,
-  "cartoRowBytes": 421,
+  "cartoRowBytes": 424,
   "cartoInstitutionRefs": 35,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 4
  },
  "village|germanic|riverside|river|plagued|cg1-seed-03": {
   "tier": "village",
@@ -6265,11 +6265,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 42,
-  "cartoRowBytes": 419,
+  "cartoBuildings": 41,
+  "cartoRowBytes": 426,
   "cartoInstitutionRefs": 36,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 0
  },
  "village|greek|coastal|port|frontier|cg1-seed-02": {
   "tier": "village",
@@ -6294,10 +6294,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 41,
-  "cartoRowBytes": 416,
+  "cartoRowBytes": 417,
   "cartoInstitutionRefs": 36,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 7
+  "cartoDupTranslate": 8
  },
  "village|greek|forest|isolated|safe|cg1-seed-00": {
   "tier": "village",
@@ -6308,10 +6308,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 38,
-  "cartoRowBytes": 420,
+  "cartoRowBytes": 426,
   "cartoInstitutionRefs": 32,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 2
  },
  "village|greek|hills|road|plagued|cg1-seed-11": {
   "tier": "village",
@@ -6336,10 +6336,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 37,
-  "cartoRowBytes": 417,
+  "cartoRowBytes": 424,
   "cartoInstitutionRefs": 31,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 0
  },
  "village|greek|plains|road|frontier|cg1-seed-10": {
   "tier": "village",
@@ -6349,11 +6349,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 40,
-  "cartoRowBytes": 421,
+  "cartoBuildings": 41,
+  "cartoRowBytes": 419,
   "cartoInstitutionRefs": 35,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 3
  },
  "village|greek|riverside|river|civilized|cg1-seed-01": {
   "tier": "village",
@@ -6363,8 +6363,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 35,
-  "cartoRowBytes": 416,
+  "cartoBuildings": 34,
+  "cartoRowBytes": 420,
   "cartoInstitutionRefs": 29,
   "cartoDupExact": 0,
   "cartoDupTranslate": 2
@@ -6405,11 +6405,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 38,
-  "cartoRowBytes": 420,
+  "cartoBuildings": 40,
+  "cartoRowBytes": 422,
   "cartoInstitutionRefs": 34,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 0
  },
  "village|latin|hills|road|safe|cg1-seed-08": {
   "tier": "village",
@@ -6419,11 +6419,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 37,
-  "cartoRowBytes": 416,
+  "cartoBuildings": 34,
+  "cartoRowBytes": 427,
   "cartoInstitutionRefs": 30,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 0
  },
  "village|latin|mountain|road|safe|cg1-seed-00": {
   "tier": "village",
@@ -6447,11 +6447,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 44,
-  "cartoRowBytes": 421,
+  "cartoBuildings": 43,
+  "cartoRowBytes": 427,
   "cartoInstitutionRefs": 38,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 4
  },
  "village|latin|riverside|river|frontier|cg1-seed-10": {
   "tier": "village",
@@ -6461,8 +6461,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 40,
-  "cartoRowBytes": 420,
+  "cartoBuildings": 39,
+  "cartoRowBytes": 426,
   "cartoInstitutionRefs": 35,
   "cartoDupExact": 0,
   "cartoDupTranslate": 0
@@ -6489,11 +6489,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 37,
-  "cartoRowBytes": 420,
+  "cartoBuildings": 38,
+  "cartoRowBytes": 427,
   "cartoInstitutionRefs": 32,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 0
  },
  "village|mediterranean|forest|isolated|plagued|cg1-seed-07": {
   "tier": "village",
@@ -6503,8 +6503,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 36,
-  "cartoRowBytes": 422,
+  "cartoBuildings": 37,
+  "cartoRowBytes": 426,
   "cartoInstitutionRefs": 32,
   "cartoDupExact": 0,
   "cartoDupTranslate": 2
@@ -6559,11 +6559,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 44,
-  "cartoRowBytes": 419,
+  "cartoBuildings": 42,
+  "cartoRowBytes": 425,
   "cartoInstitutionRefs": 38,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 5
+  "cartoDupTranslate": 0
  },
  "village|mesoamerican|coastal|port|civilized|cg1-seed-05": {
   "tier": "village",
@@ -6587,8 +6587,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 42,
-  "cartoRowBytes": 419,
+  "cartoBuildings": 41,
+  "cartoRowBytes": 426,
   "cartoInstitutionRefs": 36,
   "cartoDupExact": 0,
   "cartoDupTranslate": 2
@@ -6601,11 +6601,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 38,
-  "cartoRowBytes": 419,
+  "cartoBuildings": 35,
+  "cartoRowBytes": 425,
   "cartoInstitutionRefs": 30,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 8
+  "cartoDupTranslate": 0
  },
  "village|mesoamerican|hills|road|frontier|cg1-seed-02": {
   "tier": "village",
@@ -6616,10 +6616,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 37,
-  "cartoRowBytes": 422,
+  "cartoRowBytes": 425,
   "cartoInstitutionRefs": 32,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 2
  },
  "village|mesoamerican|mountain|road|frontier|cg1-seed-06": {
   "tier": "village",
@@ -6644,10 +6644,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 31,
-  "cartoRowBytes": 410,
+  "cartoRowBytes": 417,
   "cartoInstitutionRefs": 24,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 2
  },
  "village|mesoamerican|riverside|river|safe|cg1-seed-04": {
   "tier": "village",
@@ -6657,11 +6657,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 41,
-  "cartoRowBytes": 416,
+  "cartoBuildings": 39,
+  "cartoRowBytes": 423,
   "cartoInstitutionRefs": 35,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 4
  },
  "village|norse|coastal|port|safe|cg1-seed-08": {
   "tier": "village",
@@ -6685,11 +6685,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 47,
-  "cartoRowBytes": 419,
+  "cartoBuildings": 46,
+  "cartoRowBytes": 421,
   "cartoInstitutionRefs": 41,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 2
  },
  "village|norse|forest|isolated|frontier|cg1-seed-06": {
   "tier": "village",
@@ -6741,8 +6741,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 40,
-  "cartoRowBytes": 417,
+  "cartoBuildings": 39,
+  "cartoRowBytes": 421,
   "cartoInstitutionRefs": 35,
   "cartoDupExact": 0,
   "cartoDupTranslate": 2
@@ -6755,11 +6755,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 44,
-  "cartoRowBytes": 418,
+  "cartoBuildings": 41,
+  "cartoRowBytes": 428,
   "cartoInstitutionRefs": 37,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 9
+  "cartoDupTranslate": 0
  },
  "village|slavic|coastal|port|plagued|cg1-seed-03": {
   "tier": "village",
@@ -6769,8 +6769,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 39,
-  "cartoRowBytes": 422,
+  "cartoBuildings": 38,
+  "cartoRowBytes": 425,
   "cartoInstitutionRefs": 34,
   "cartoDupExact": 0,
   "cartoDupTranslate": 2
@@ -6783,8 +6783,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 40,
-  "cartoRowBytes": 420,
+  "cartoBuildings": 39,
+  "cartoRowBytes": 423,
   "cartoInstitutionRefs": 35,
   "cartoDupExact": 0,
   "cartoDupTranslate": 2
@@ -6797,8 +6797,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 30,
-  "cartoRowBytes": 412,
+  "cartoBuildings": 29,
+  "cartoRowBytes": 416,
   "cartoInstitutionRefs": 24,
   "cartoDupExact": 0,
   "cartoDupTranslate": 0
@@ -6811,8 +6811,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 36,
-  "cartoRowBytes": 420,
+  "cartoBuildings": 34,
+  "cartoRowBytes": 426,
   "cartoInstitutionRefs": 30,
   "cartoDupExact": 0,
   "cartoDupTranslate": 2
@@ -6839,8 +6839,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 34,
-  "cartoRowBytes": 422,
+  "cartoBuildings": 36,
+  "cartoRowBytes": 425,
   "cartoInstitutionRefs": 30,
   "cartoDupExact": 0,
   "cartoDupTranslate": 2
@@ -6868,10 +6868,10 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 41,
-  "cartoRowBytes": 419,
+  "cartoRowBytes": 425,
   "cartoInstitutionRefs": 35,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 0
  },
  "village|south_asian|desert|road|frontier|cg1-seed-02": {
   "tier": "village",
@@ -6881,8 +6881,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 41,
-  "cartoRowBytes": 423,
+  "cartoBuildings": 42,
+  "cartoRowBytes": 426,
   "cartoInstitutionRefs": 37,
   "cartoDupExact": 0,
   "cartoDupTranslate": 0
@@ -6896,7 +6896,7 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 35,
-  "cartoRowBytes": 420,
+  "cartoRowBytes": 421,
   "cartoInstitutionRefs": 29,
   "cartoDupExact": 0,
   "cartoDupTranslate": 0
@@ -6937,11 +6937,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 41,
-  "cartoRowBytes": 419,
+  "cartoBuildings": 40,
+  "cartoRowBytes": 424,
   "cartoInstitutionRefs": 35,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 4
  },
  "village|south_asian|riverside|river|plagued|cg1-seed-11": {
   "tier": "village",
@@ -6951,11 +6951,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 41,
-  "cartoRowBytes": 420,
+  "cartoBuildings": 42,
+  "cartoRowBytes": 425,
   "cartoInstitutionRefs": 37,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 4
  },
  "village|steppe|coastal|port|plagued|cg1-seed-07": {
   "tier": "village",
@@ -6983,7 +6983,7 @@
   "cartoRowBytes": 422,
   "cartoInstitutionRefs": 39,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 4
  },
  "village|steppe|forest|isolated|civilized|cg1-seed-05": {
   "tier": "village",
@@ -7007,11 +7007,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 36,
-  "cartoRowBytes": 417,
+  "cartoBuildings": 35,
+  "cartoRowBytes": 423,
   "cartoInstitutionRefs": 31,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 2
  },
  "village|steppe|mountain|road|safe|cg1-seed-08": {
   "tier": "village",
@@ -7021,11 +7021,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 38,
-  "cartoRowBytes": 416,
+  "cartoBuildings": 37,
+  "cartoRowBytes": 426,
   "cartoInstitutionRefs": 32,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 0
  },
  "village|steppe|plains|road|plagued|cg1-seed-03": {
   "tier": "village",
@@ -7036,7 +7036,7 @@
   "outcome": "ok",
   "reported": [],
   "cartoBuildings": 39,
-  "cartoRowBytes": 417,
+  "cartoRowBytes": 424,
   "cartoInstitutionRefs": 33,
   "cartoDupExact": 0,
   "cartoDupTranslate": 2
@@ -7049,10 +7049,10 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 39,
-  "cartoRowBytes": 420,
+  "cartoBuildings": 38,
+  "cartoRowBytes": 421,
   "cartoInstitutionRefs": 33,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 0
  }
 }
