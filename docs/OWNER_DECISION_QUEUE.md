@@ -25905,3 +25905,27 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   under-stated (REG-4); village fields want the FTG green push (REG-5+A2's
   band); mechanical stall rows (REG-4). The judging set went to the owner;
   the owner may veto any of this with a word.
+
+## §588 · THE DEPLOY RUNBOOK LEARNS ABOUT 188 — THE PICKUP CARD'S OWED AMENDMENT IS DISCHARGED (2026-08-24 ~15:10 CDT)
+
+- **§588.1 TE-DEPLOYDOC-188 VALIDATED AND LANDED — the 63rd car** (SLOT CAS
+  `233c35a69` → `714a398b7`). One hunk, +11/−0, byte-identical to the
+  chair-authored charter text and proved so THREE times (pre-commit, at the
+  committed tip, post-gate); claim-scan clean with live controls; full gate
+  green in one bare run with both mutex dirs polled free first. ⭐ **The
+  pickup card's owner-item debt — "docs/DEPLOY.md covers 198 and never
+  mentions 188 — that amendment is owed" — is DISCHARGED:** the runbook now
+  names the one migration that acts at push time, its receipted-quarantine
+  mitigation, and its no-down-script recovery posture, before the owner's
+  next push.
+- **§588.2 RULINGS ON THE LANE'S CALLS:** **J1 RATIFIED and banked as
+  precedent — a DOCS-ONLY car lands unpacketed** (decided by execution:
+  validate exits 0; no packet reserves the path; era precedent splits by
+  kind — TE-R3/TE-STACK-5 landed unpacketed, every minting car changed
+  shipped code). **J2's imprecision is QUEUED, not amended:** "the pack
+  activations" should read "the environment activations"
+  (`content_environment_activations` is the first table struck); the lane
+  rightly obeyed the no-reword rule, the imprecision matches §540.8's own
+  wording, and amending after the green would void the green for one word —
+  the correction rides the next DEPLOY.md touch. **J3 (no census row)
+  proved by the gate itself.**
