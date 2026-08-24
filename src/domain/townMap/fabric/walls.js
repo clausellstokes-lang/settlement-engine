@@ -43,7 +43,7 @@ import { sampleAt } from './substrate.js';
 import { boundEpoch, densify } from './epochAxis.js';
 import { cosI, sinI, TRIG_N } from './trigTable.js';
 import { deriveRuns, runBand, laneLineFor } from './wallRuns.js';
-import { segmentCrossings, onImpassable } from './cliffs.js';
+import { segmentCrossings, segmentTouchesImpassable } from './cliffs.js';
 
 /**
  * WALL FORMS. `facets` is how many straight runs the circuit is built in — a stone
@@ -630,7 +630,7 @@ export function traceWalls(args) {
         + `${cliffCut ? `; SEGMENTED (§577) — ${cliffCut.segments} cliff crossing(s) terminated the`
           + ` curtain, ${cliffCut.dropped} vertex/vertices stood on impassable relief and were`
           + ` surrendered to it, ${terminalWorks.length} end-work(s) raised`
-          + `${cliffCut.fallbacks ? `; ${cliffCut.fallbacks} terminus/termini fell back to the segment midpoint (no traced edge crossed)` : ''}` : ''}`
+          + `; ${terminalWorks.filter((t) => t.via === 'edge').length} terminus/termini placed by the drawn escarpment, ${terminalWorks.filter((t) => t.via === 'mask').length} by its cell mask (the two halves of one artifact — see cliffs.segmentTouchesImpassable)` : ''}`
         + `${cliffRead && cliffRead.refused ? `; §577 ${cliffRead.refused}` : ''}`
         + `${gates.filter((g) => g.bricked).length ? `; ${gates.filter((g) => g.bricked).length} gate(s) bricked under the demotion grammar` : ''}`,
     });
@@ -779,7 +779,10 @@ export function terminateAtCliffs(ring, cliffs) {
   let cut = 0;
   for (let i = 0; i < F; i++) {
     const a = fine[i].p, b = fine[(i + 1) % F].p;
-    bad[i] = onImpassable(cliffs, (a[0] + b[0]) / 2, (a[1] + b[1]) / 2);
+    // ⭐ EXACT, NOT SAMPLED — see `cliffs.segmentTouchesImpassable` for the three rounds of
+    // sampled refinement that converged on 5 and stopped, and for why a tolerance would have
+    // been a number fitted to this corpus.
+    bad[i] = segmentTouchesImpassable(cliffs, a[0], a[1], b[0], b[1]);
     if (bad[i]) cut++;
   }
   // ⭐ NOTHING TO DO IS THE COMMON CASE AND IT RETURNS `null`, NOT AN EMPTY RESULT — so a walled
@@ -815,23 +818,45 @@ export function terminateAtCliffs(ring, cliffs) {
 
   /** One terminus record. `at` is where the curtain stops or resumes; `toward` gives its facing —
    *  the direction the masonry runs from it, which is what an end-work is oriented by. */
+  // ⭐⭐ **A TERMINUS NAMES ITS ESCARPMENT WHICHEVER HALF OF THE ARTIFACT PLACED IT**, and the
+  // two halves are both legitimate rather than a good case and a bad one:
+  //   `via: 'edge'` — the curtain met the DRAWN escarpment line, so the terminus is an analytic
+  //                   crossing and carries that edge's own key and kind.
+  //   `via: 'mask'` — the cell traversal condemned the piece without the smoothed line being
+  //                   crossed, which happens wherever corner-cutting has pulled the drawn line
+  //                   inside the cells it bounds. The GROUND is the authority on where a wall may
+  //                   stand, so this is the correct stop; the edge is then named by proximity.
+  // ⚠⚠ THE FIELD WAS FIRST CALLED `fallback`, AND THE NAME BECAME A LIE THE MOMENT THE TEST
+  // BECAME EXACT: MEASURED, mask-derived termini went from 4 of ~400 to roughly HALF of them, so
+  // a reader taking `fallback` at face value would have read the primary mechanism as a defect
+  // rate. `fallback` is kept as an alias for the same boolean because a receipt already quotes
+  // it, and `via` is what a consumer should read. ⭐ THE CLASS: **A FIELD NAMED FOR ITS RARITY
+  // BECOMES MISINFORMATION WHEN THE MECHANISM CHANGES.**
+  const nearestEdge = (at) => {
+    let best = null, bd = Infinity;
+    for (const e of cliffs.edges) {
+      const d = distToPolyline(at[0], at[1], e.line);
+      if (d < bd) { bd = d; best = e; }
+    }
+    // ⚠ BOUNDED. An edge two cells away is not the edge this wall stopped at; naming it anyway
+    // would put a confident attribution on a coincidence.
+    return best && bd <= cliffs.cell * 2 ? best : null;
+  };
   const terminus = (node, at, toward) => {
     const dx0 = toward[0] - at[0], dy0 = toward[1] - at[1];
     const l = Math.sqrt(dx0 * dx0 + dy0 * dy0) || 1;
-    const edge = node && node.edge ? node.edge : null;
-    if (!edge) fallbacks++;
+    const onEdge = node && node.edge ? node.edge : null;
+    if (!onEdge) fallbacks++;
+    const edge = onEdge || nearestEdge(at);
     return {
       x: at[0], y: at[1], dx: dx0 / l, dy: dy0 / l,
       // ⚠ THE KEY IS THE ESCARPMENT EDGE PLUS THE TERMINUS' OWN POSITION, never an ordinal —
       // SW-1d again. Two termini on one edge are two facts and must not share a key.
-      key: `${edge ? edge.key : 'cliff.mask'}@${Math.round(at[0])},${Math.round(at[1])}`,
-      edge: edge ? edge.key : 'cliff.mask',
+      key: `${edge ? edge.key : 'cliff.unnamed'}@${Math.round(at[0])},${Math.round(at[1])}`,
+      edge: edge ? edge.key : 'cliff.unnamed',
       kind: edge ? edge.kind : 'brink',
-      // ⚠ A FALLBACK TERMINUS IS ONE THE DRAWN EDGE DID NOT PLACE — the MASK's own boundary, at
-      // the fine walk's resolution, because the smoothed line and the cells it bounds differ by
-      // up to half a cell (see the note above). Counted, never hidden: a terminus set that was
-      // ALL fallbacks would be a consumer that never read the drawn geometry at all.
-      fallback: !edge,
+      via: onEdge ? 'edge' : 'mask',
+      fallback: !onEdge,
     };
   };
   const nodeAt = (fi) => (fine[fi].at >= 0 ? path[fine[fi].at] : null);

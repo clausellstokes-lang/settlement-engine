@@ -403,6 +403,66 @@ export function onImpassable(cliffs, x, y) {
   return cliffs.mask[j * n + i] === 1;
 }
 
+/**
+ * ⭐⭐⭐ **DOES THIS SEGMENT TOUCH IMPASSABLE GROUND AT ALL? — EXACT, NOT SAMPLED.**
+ *
+ * ⛔⛔ THIS FUNCTION EXISTS BECAUSE SAMPLING COULD NOT CLOSE, AND THE FAILURE WAS INSTRUCTIVE.
+ * The §577 cut and its instrument both began by stepping a line and testing points. Three rounds
+ * of refinement took the corpus from **257 over-cliff drawn segments to 209 to 12 to 6 to 5** and
+ * then stopped, and attribution (`probeAttr.mjs`) found every survivor to be the same shape: the
+ * FIRST piece of a chain, one lone sample deep. Two mechanisms, both sub-cell:
+ *   • a masked patch NARROWER THAN THE SAMPLE PITCH, caught by the instrument's phase and missed
+ *     by the law's — two samplers at the same pitch and different phase disagree forever;
+ *   • a crossing at t ≈ 1e-12, i.e. an endpoint TOUCH counted as an interior crossing, which
+ *     convicts a terminus for being exactly where §577 requires it to be.
+ * ⭐ THE CLASS, and it is the one worth banking: **TWO SAMPLED APPROXIMATIONS OF ONE PREDICATE
+ * CONVERGE ON EACH OTHER BUT NEVER MEET; A TOLERANCE ADDED TO CLOSE THE GAP IS A NUMBER FITTED TO
+ * THE CORPUS.** The mask is a set of CELLS and a segment either enters one or it does not — the
+ * question was exactly answerable all along, and answering it exactly removes both mechanisms and
+ * the tolerance with them.
+ *
+ * ⚠ ONE WRITER FOR BOTH SIDES. The law (`walls.terminateAtCliffs`) and the instrument that grades
+ * it call THIS function, for the same reason `relief.js` imports `REFUSAL.standingWater` rather
+ * than re-spelling it: the law and the measurement of the law must be about the same ground.
+ *
+ * Amanatides & Woo grid traversal — every cell the segment passes through, in order. Integer
+ * stepping plus `+ - * /`; no trig, no tolerance, no epsilon anywhere.
+ *
+ * @param {{mask:Uint8Array, n:number, cell:number}} cliffs
+ * @param {number} ax @param {number} ay @param {number} bx @param {number} by
+ * @returns {boolean}
+ */
+export function segmentTouchesImpassable(cliffs, ax, ay, bx, by) {
+  if (!cliffs || !cliffs.mask) return false;
+  const n = cliffs.n, cell = cliffs.cell;
+  const hit = (i, j) => i >= 0 && j >= 0 && i < n && j < n && cliffs.mask[j * n + i] === 1;
+  let x = Math.floor(ax / cell), y = Math.floor(ay / cell);
+  const ex = Math.floor(bx / cell), ey = Math.floor(by / cell);
+  const dx = bx - ax, dy = by - ay;
+  const stepX = dx > 0 ? 1 : dx < 0 ? -1 : 0;
+  const stepY = dy > 0 ? 1 : dy < 0 ? -1 : 0;
+  const adx = dx < 0 ? -dx : dx, ady = dy < 0 ? -dy : dy;
+  const dtX = adx > 0 ? cell / adx : Infinity;
+  const dtY = ady > 0 ? cell / ady : Infinity;
+  let tX = adx > 0 ? (stepX > 0 ? ((x + 1) * cell - ax) : (ax - x * cell)) / adx : Infinity;
+  let tY = ady > 0 ? (stepY > 0 ? ((y + 1) * cell - ay) : (ay - y * cell)) / ady : Infinity;
+  // ⚠ THE GUARD IS A TERMINATION PROOF, NOT A BUDGET: a straight segment inside a square grid
+  // crosses at most 2n cell boundaries, so a walk that exceeds it has lost its invariant and
+  // must stop rather than spin. It has never fired on this corpus.
+  for (let guard = 0; guard <= 4 * n + 8; guard++) {
+    if (hit(x, y)) return true;
+    if (x === ex && y === ey) return false;
+    if (tX < tY) {
+      if (tX > 1) return hit(ex, ey);
+      tX += dtX; x += stepX;
+    } else {
+      if (tY > 1) return hit(ex, ey);
+      tY += dtY; y += stepY;
+    }
+  }
+  return false;
+}
+
 /** Round to one place — the key's own quantum. Exact in IEEE for the magnitudes involved. */
 function round1(v) { return Math.round(v * 10) / 10; }
 
