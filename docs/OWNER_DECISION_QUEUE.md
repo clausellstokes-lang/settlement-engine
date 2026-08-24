@@ -26978,3 +26978,50 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   holds: nothing below the floor is ever drawn; but a hermitage, a bothy, a
   wayside chapel standing alone IS its site, and an empty site is a worse lie
   than a slightly generous glyph.
+
+## §631 · THE BAND-SEAM RULING — R1(ii) ADOPTED; THE RECONCILE RESTORES §155, IT DOES NOT RE-BAND (2026-08-25 ~04:30 CDT)
+
+- **§631.1 THE MEASURE (TE-SEAM, all CONFIRMED by executed demonstration):** four
+  classifier sites in three value-families. The seal's `tierGrammar.tierForPopulation`
+  steps at 8000/40000 against the landed `popToTier`'s 5000/25000 — and
+  `deriveHighWater` reads the engine's CORRECT city stamp as a recorded demotion,
+  invents a peak (8001/40001) the settlement never had, and fires wear, ×0.55
+  circuit retention, and §12.8 ghost fabric on HEALTHY settlements: §161g's elegy
+  instrument inverted. The seal's own artifacts contradict the drift twice
+  (`tierGrammar.js:510` claims popToTier equivalence; `compile.js:115` publishes
+  provenance naming popToTier). Truth B is sandbox-only — it ships exactly when the
+  D3a port lands. Classified **MACHINERY**. Receipt: laneTESEAM-receipt.md.
+- **§631.2 SKEPTIC PANEL, three lenses, 3/3 NOT REFUTED (§441 J7 satisfied), the
+  decisive find:** ODQ **§155.1's banked MF-R1 conviction** — "tier bands match
+  POPULATION_RANGES exactly" — already binds; the owner's SIGNED-BANDS file holds
+  dwellings bands only, no population tiers, no 8000/40000 anywhere. Arithmetic
+  lens: the reconcile is degenerate-free, interpolation monotone 1..100000, false
+  demotions vanish while real ones persist (stored-city pop 3000 stays demoted,
+  history-peak cases unchanged). Test lens: the seal suite is **237/237 GREEN
+  unmodified under the reconciled table**, with a live negative control (a
+  sabotaged band reds 2 tests); zero goldens, zero fixtures in the seam windows.
+- **§631.3 RULED: R1(a)(ii) ADOPTED** — `TIER_PROFILE.pop` reconciles to
+  POPULATION_RANGES exactly (town [901,5000] · city [5001,25000] · metropolis
+  [25001,**100000**] — the 200000 ceiling goes with it; the wizard's 500000 custom
+  cap is a UI allowance with a distinct role and stands; grading above 100000
+  clamps monotonically at bandPosition 1, acceptable, declared). R2 rejected (it
+  blinds the demotion signal), R3 rejected (a genuine re-band is TUNING-SIGNATURE
+  work and never rides the register arc). **The cure car is REG-SEAM**, stacked
+  immediately after REG-4 seals, before REG-5, scope per the panel: the 3-value
+  table edit · the :510 and §161f-quoting comment repairs · the `compile.js:115`
+  provenance string · deletion of the vestigial identical-branch conditional at
+  `tierScale():661-663` · the producer-equality both-ways guard landed as ADDED
+  CASES in an existing fabric test file (never a new file) · the §110.3
+  declared-shift table quoted in the cure car's own re-record commit · a re-run of
+  the panel's differential at the ACTUAL stack tip (REG-4 may have added tests) ·
+  the one-hour PDF/prerender trace from PLAUSIBLE to CONFIRMED. **The D3a port
+  (REG-P) gains a gate check: `tierForPopulation ≡ popToTier` by execution.**
+- **§631.4 CONSEQUENCES:** REG-T2 (trajectory mint) is UNBLOCKED and builds on
+  REG-SEAM's seal — decline instrumentation must measure against cured bands; §624.2's
+  eight "generated declines" were accidents of this seam and re-measure after the
+  cure. The pre-existing grainRoofs dip at tier seams (1478→1238, BUILD_OUT fill
+  steps, same magnitude both tables) is RELOCATED not created — recorded as a
+  REG-9 judging candidate against §161f's near-identical-frames prose. TE-SEAM-B
+  (the shipped hamlet 240→400 window, unambiguous under §57.2's repair precedent)
+  is already in flight as a build-branch car with its own lifecycle trace of
+  `settType` persistence.

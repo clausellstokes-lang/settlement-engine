@@ -59,8 +59,8 @@ CH-4 → **CH-6** (⛔ a **live shipped deity-doctrine violation**: a magic-free
 
 ⛔ **EDGE-BUNDLE BILL — the count is PER-FILE.** `npcProfile.js` sits in three closures, `districtProfile.js` in one (`aiGroundingBundle`, 67 inputs). **Read `supabase/functions/_shared/<bundle>.meta.json` before budgeting.** The bill is **invisible to targeted suite runs** — only the full gate sees it. Cure: `npm run build:edge-shared`, commit all six files as a set.
 
-### ⭐⭐⭐ STATE AS OF §630 (2026-08-25 ~03:40) — REG-3 SEALED AT 82 %, REG-4 + TE-SEAM IN FLIGHT
-Ledger through **§630** (tip `61e41dfa8`). **REG-3 SEALED**: `map-sandbox-reg3-shapes` =
+### ⭐⭐⭐ STATE AS OF §631 (2026-08-25 ~04:35) — REG-3 SEALED AT 82 %, THE BAND-SEAM RULED, THREE LANES LIVE
+Ledger through **§631**. **REG-3 SEALED**: `map-sandbox-reg3-shapes` =
 `93fa8a2ca` (§628 — blind silhouettes **18/22 = 81.8 % PASS**, warehouse class carved out as
 UNPROVEN-BY-DEFECTIVE-FIXTURE — quay fixtures rendered area:0, re-round owed after fixture
 cure; §592 salience REVERSED 12/12; lettering-floor save BANKED as law; §217 raises SIGNED:
@@ -74,11 +74,18 @@ L-REG-30, the MINIMUM-FOOTPRINT LAW (owner, verbatim in the ODQ)**: no small one
 blocks — sub-minimum fuses into a neighbor or goes undrawn; §630.4 sole-structure/landmark
 clamp; monuments absorb, never absorbed; ink-side only; program doc Amendment **A7**; home
 REG-4. **IN FLIGHT: lane REG-4** (Opus — markets/faubourgs/densification/L-REG-30, base
-`93fa8a2ca`, receipt → laneREG4-receipt.md) and **lane TE-SEAM** (Fable, measure-only —
-band-seam two-truths, re-dispatched after the first died with a context break; receipt →
-laneTESEAM-receipt.md). A successor: collect those receipts FIRST (§448 — resume MID-LANE
-from the receipt, never restart). Arc after REG-4: REG-5 → 6 → 7 → 8 → 9 → D (needs REG-T2
-mint, waits on the seam verdict) → 10 → 11 → F0 → F (owner judges specimen) → P; then the
+`93fa8a2ca`, receipt → laneREG4-receipt.md; mid-flight instruction sent: band-agnostic
+fixtures, no hard-coded tier boundaries) and **lane TE-SEAM-B** (Opus — the shipped hamlet
+240→400 window, build-branch car at slot `e4ed27f48`, receipt → laneSEAMB-receipt.md; the
+chair CASes on green). **TE-SEAM DELIVERED AND RULED (§631)**: the seal's tier table
+(8000/40000 vs landed 5000/25000) is DRIFT that INVERTS the elegy instrument (healthy
+cities render demoted); skeptic panel 3/3 not-refuted — §155.1's banked conviction already
+requires bands to match POPULATION_RANGES; **R1(ii) ADOPTED — the REG-SEAM car is
+chartered and stacks immediately after REG-4 seals, before REG-5** (scope itemized §631.3;
+REG-P gains the `tierForPopulation ≡ popToTier` execution gate); **REG-T2 UNBLOCKED**,
+builds on REG-SEAM's seal. A successor: collect in-flight receipts FIRST (§448 — resume
+MID-LANE from the receipt, never restart). Arc after REG-4: **REG-SEAM → REG-T2** →
+REG-5 → 6 → 7 → 8 → 9 → D → 10 → 11 → F0 → F (owner judges specimen) → P; then the
 catalog residue (CH-3 → MF-CH3 flip → CH-2B → CH-6b → divine-healer row) → DW 42 → AD 17 →
 OSR → parity → ultra (OWNER) → walk + ONE regen → soaks → STOP at tuning.
 
