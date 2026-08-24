@@ -24475,3 +24475,75 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   somewhere new, and why no re-adjudication was needed — only verification.**
   Recorded plainly: the strike cost two round-trips and moved the final figure by
   nothing.
+
+## §554 · THE DEADLINE CAR IS BUILT AND GREEN — AND A CREDIT WAS NEARLY SPRAYED ONTO THE WRONG FILES (2026-08-24 07:05 CDT)
+
+- **§554.1 R3 IS GREEN AND HELD FOR A STACK.** `refs/preserve/holding-r3` =
+  **`5efef38fa`**, 2 commits, 53 files. `TRUE_EXIT=0` · `[gate-tail] exit: 0` ·
+  free disk 18,428 MB · **11 known failures of 29,044, ceiling 11** ·
+  `STRICT DIST OK — 53 files / 467 tests, zero
+  failed/non-run/uncollected/missing/extra/duplicate` · packets **178**, AIP-2
+  stamped LANDED in all three places. ⛔ **This is the car that answers
+  Higgsfield §5.5, which binds 2026-08-27.**
+- **§554.2 THE COUNT WAS RE-DERIVED, NOT INHERITED — AND 46 HELD.** Four media
+  roots walked, all 75 files byte-scanned for five literal markers: **75 on disk,
+  75 register rows, 0 unregistered, 0 ghosts**, 6 marked, 69 bare = **46 AI files
+  + 23 cohort A.** *The register and the tree agree exactly; there was nothing to
+  reconcile.* Container split **jpg 24 / webp 16 / mp4 6** — which is precisely
+  why three injectors were needed rather than one.
+- **§554.3 NO IMAGE LIBRARY, BECAUSE RE-ENCODING IS THE ORIGINAL SIN.** Each
+  injector edits the container and copies the coded bitstream verbatim — JPEG
+  APP1 after the JFIF/Exif prologue, WebP VP8X promoted around an untouched
+  `VP8 ` chunk, MP4 uuid **appended so offsets survive**. Re-encoding would also
+  have destroyed any surviving SynthID. **All 46 decode bit-identical**, proved
+  by decoded-raw sha256 (plus payload byte-equality and canvas agreement for
+  WebP, and prior-box identity plus `mdat` sha for MP4). **Six mutations M1–M6
+  each red their intended arm**, green before and after, and **ffmpeg
+  corroborated out of band** — leg 1 decodes to an identical 121-frame rgb24
+  stream, and differently when mutated. Payload **+71,229 B of 52,755,638 =
+  0.135%**, verified by me. Ratchet **46 → 0** — ⭐ *"at zero it becomes a floor,
+  not a budget."*
+- **§554.4 ⭐⭐ THE GOOGLE CREDIT WAS NEARLY SPRAYED ONTO THE WRONG FILES.** Master
+  descent was settled by **pixel RMS, not filename** — and the measurement caught
+  an ambiguity **a filename map would have got BACKWARDS**: `gallery.jpg`
+  descends from `gallery-crier-alive` (Google), **not** `gallery-board`. Five
+  shipped files descend from the two un-attributed masters and now record the
+  model as **"not established"** — including `public/evolution/village.jpg`,
+  **which explains why it was the one evolution still lacking the credit its
+  siblings kept.** *A provenance credit asserted from a filename is a guess
+  wearing a fact's clothes.*
+- **§554.5 CREDITING IS NOT RESTORING, AND THE FILES NOW SAY SO THEMSELVES.**
+  **Nothing got a C2PA manifest back** — a signed manifest cannot be
+  re-created. All 46 carry a plain **XMP credit that states that fact in its own
+  metadata**, and **every restored row now FORBIDS `urn:c2pa`** so no later pass
+  can quietly claim otherwise. The one valid manifest (`realm-journey.mp4`) and
+  all five other survivors are **byte-identical to the slot, verified by hash**.
+- **§554.6 ⛔ COHORT A UNTOUCHED — VERIFIED BY ME.** All 23 files byte-identical
+  to the slot; **zero cohort-A files appear in the diff.** They remain the only
+  unlicensed shipped imagery and still owe the owner a ~10-minute reverse-image
+  search.
+- **§554.7 TWO CORRECTIONS TO ITS OWN INHERITED FIGURES.** The census delta is
+  **+9, not +8** — its hand reading of the base said 21 titles where there were
+  20, **caught by execution, which is exactly the hazard the row exists to
+  catch**; attributed by a single-file revert landing on the slot tuple to the
+  digit, with a negative control on each moved figure. And the **source ratchet
+  legitimately did NOT move**: `SOURCE_TEST_EXCLUDE = 'tests/build/**'`, so its
+  titles land in the strict-dist phase instead — **458 → 467, measured by
+  reverting to slot bytes, not inferred**, with three instruments agreeing on +9.
+- **§554.8 FIVE JUDGMENT CALLS, ALL RATIFIED.** Extended the existing test file
+  rather than adding one — **which avoids the three-ratchet stack and is
+  topically exact**. Kept `sharp` out of the injector, **so it stays off the
+  SHARP_SCRIPTS roster honestly** and the decode-based control lives in the test
+  where a control belongs. Declared **all 50 paths** in the changeManifest, the
+  estate's largest (prior high 29) — *"an undeclared path is an unreserved
+  one."* Date-only credit for the video legs, because per-leg C2PA timestamps
+  differ and the shipped legs are cuts of a concatenation, **so no per-leg time
+  can be honestly assigned.** And re-planted the gate's CONTROL onto cohort A,
+  because its old plant now legitimately carries markers.
+- **§554.9 HELD FOR A STACK, NOT LANDED ALONE.** CH-5 is live and close — full
+  mutation battery passed (M1–M4 plus two clean runs), golden pin proved live by
+  execution before its re-record, gate next. File sets are **disjoint** (R3:
+  media + scripts + `tests/build`; CH-5: `src/domain` + `src/data` + packets), so
+  **§516's stacking law applies and the two land through ONE gate.** ⚠ Both mint
+  a packet on a 177 base and each will read 178 — **stacked the surface is 179
+  and the manifest will conflict**; the landing re-derives by execution.
