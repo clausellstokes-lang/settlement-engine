@@ -25658,3 +25658,25 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   a carry-note beside the frontage-fusion and orientation-field waves.
   Specimen demonstrates (i)+(ii) at draw level with a before/after crop of
   the main square.
+
+## §577 · THE SEGMENTED-CIRCUIT LAW: WALLS TERMINATE AT WATER AND CLIFFS (2026-08-24 ~12:45 CDT)
+
+- **§577.1 ⭐ OWNER DIRECTIVE (both limbs, "same with cliffs"):** walls never
+  cross water or mountains — the circuit STOPS at a self-defending feature
+  and resumes on the far side where enclosure is needed. **The WATER half is
+  already the sealed fabric's own Rule 3** (walls.js: "WATER AS A FLANK — a
+  bankside town closes a HALF-RING against the river. The water is the fourth
+  wall… the single most-missed real-world rule and why so many generated maps
+  look wrong on a river") — so any wall-over-water in a render is a DEFECT
+  against standing law, and the specimen cures it at draw level (clip at the
+  bank, cap each terminus with a tower or water-gate work, no wall stroke on
+  the defended waterfront).
+- **§577.2 THE CLIFF half is MINTED NEW — and it is the relief substrate's
+  THIRD customer.** Terrain termination (the circuit butts into impassable
+  relief and hands its job to the rock, junction works at the meeting point —
+  the Edinburgh/Salzburg pattern) requires knowing where cliffs ARE, and the
+  engine carries only a scalar relief today. The relief-field investment now
+  has three named consumers: §214's blocked terrain-iconography arm, the
+  wall-trace's ridge-following (Rule 2), and §577's terminations. **That
+  charter moves up the fabric program's order accordingly** — a foundation
+  with three customers is not optional.
