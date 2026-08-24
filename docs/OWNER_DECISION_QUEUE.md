@@ -25988,3 +25988,50 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   existing specimen (band + walk + towers-as-joints + ditch, on the city
   page) so the owner judges the wall style BEFORE REG-2 builds it
   generatively — the specimen-first habit applied to a single element.
+
+## §591 · THE TOTALITY-AND-COHERENCE LAW: EVERYTHING READS AS ITSELF, AND THE PAGE IS GRADED BY ITS WEAKEST ELEMENT (2026-08-24 ~15:55 CDT)
+
+- **§591.1 ⭐⭐ OWNER DIRECTIVE:** "Streets need to look like streets,
+  institutions need to look like some variation of that institution, their
+  yards and neighborhoods need to look like what they should be. And this
+  should be coherent and cohesive throughout the map at every single stage."
+  **MINTED as the register program's TOTALITY LAW, generalizing §578 and
+  §590:** (i) EVERY drawn element class reads as what it is — no class is
+  exempt, and the corpus DETAIL REGISTER (the survey in flight, TE-REG-DR)
+  defines "required" per class, per the owner's same-sitting ruling that the
+  corpus's detail level is required, not aspirational; (ii) **COHERENCE: a
+  page is graded by its WEAKEST element class, never its average** — no wave
+  ships a page where corpus-grade walls sit beside diagram-grade streets;
+  (iii) "at every single stage" binds across ALL tiers (village-first,
+  L-REG-15), all zoom-ladder levels (L-REG-14), and all eras. The judging
+  rounds and the §6 instruments adopt weakest-element grading.
+- **§591.2** The directive's institutions clause is already QUANTIFIED as the
+  live defect: REG-I0's landmark-salience instrument measures decoy buildings
+  BEATING the real anchors on every sealed plate (§592) — the number REG-3
+  exists to move.
+
+## §592 · REG-I0 COLLECTED — THE INSTRUMENTS ARE LIVE, AND THE ORDERED CENSUSES READ ZERO WITH PROOF THE ZERO IS ALIVE (2026-08-24 ~16:00 CDT)
+
+- **§592.1 VALIDATED.** Ten instruments, nine control batteries all LIVE,
+  baselines at the sealed tip for city/village/town + the specimen, full-run
+  determinism md5-identical, preserved at
+  **`refs/preserve/reg-instruments-2026-08-24`**. ⭐⭐ **The §571.2 owed
+  verification is DISCHARGED WITH EXECUTED ZEROS:** straddle **0 of 79**
+  district regions on 12 walled leaves (pre-cure 14 of 46) · outside-circuit
+  bodies **0 of 15,326** (pre-cure 1,331 of 19,563) · §240.1 hull containment
+  0 — each zero proved ALIVE four ways (pre-cure code reads straddlers; a
+  planted straddler reads +1 exactly; shrunken rings strand 4; core-ring-only
+  strands 791). **The owner's wall law holds at the sealed tip, by
+  measurement.**
+- **§592.2 FINDINGS ACCEPTED:** the charter's squint polarity REFUTED
+  honestly (the sealed base already passes at 200px; the true deltas live in
+  the contrast and hue arms) · **landmark salience FAILS everywhere, decoys
+  beat anchors** (BASE-town 0.574 vs 1.035) — §591.2's number · the sealed
+  base's water is measurably achromatic and the specimen's re-statement cures
+  it · three DRIFT op classes carry written justifications (the truth layer
+  becoming ink — lawful) · the drawn circuit never closes in ink, so
+  intramuros derives from the model polygon (recorded for every consumer).
+  One arm deferred with its cure named (canopy hue awaits REG-5's role).
+  Four instrument defects self-caught and annotated — the effect-size,
+  winding-rule, resolution-mismatch and circular-mean classes are banked in
+  INSTRUMENTS.md.
