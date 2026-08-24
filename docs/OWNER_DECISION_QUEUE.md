@@ -26953,3 +26953,28 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   and market-infill fossils where the fabric records them — THIN reported, never
   invented. **TE-SEAM is RE-DISPATCHED** — the first lane died with the context
   break leaving no receipt; measuring only, the cure waits on the ruling.
+
+## §630 · OWNER DIRECTIVE — THE MINIMUM-FOOTPRINT LAW (2026-08-25, mid-turn)
+
+- **§630.1 THE DIRECTIVE, verbatim intent:** "make it so that a building has a
+  minimum dimension or size otherwise it is not to be built or combined into a
+  bigger structure with an adjacent building. No small one room blocks."
+- **§630.2 MINTED AS L-REG-30:** every drawn building meets a minimum footprint
+  (both a minimum short-axis dimension AND a minimum area); a sub-minimum
+  building with a drawable neighbor **FUSES into it**; an isolated sub-minimum
+  building is **NOT DRAWN**. The floors are measured from the corpus's smallest
+  legible building glyph at page register and from the references' row-block
+  practice — the lane measures, the chair signs, tuning-surface constants.
+  **The truth is untouched:** the building exists in the fabric (L0); the law
+  binds the ink (L1 legibility geometry), exactly the six-layer stack's split —
+  suppression and fusion are render-side, THE PROMISE holds underneath.
+- **§630.3 HOME = REG-4** (the wave now opening; densification and infill are
+  where slivers are emitted) — added to its charter; the silhouette classes of
+  REG-3 must not regress (fusion may not weld a church to its neighbor: monument
+  classes are EXEMPT from fusion-as-absorber, they may only absorb).
+- **§630.4 CHAIR'S REFINEMENT (vetoable):** the not-drawn arm never vanishes a
+  building that is a site's SOLE structure or a typed landmark — those render
+  AT the floor (clamped up to the minimum) instead. The directive's spirit
+  holds: nothing below the floor is ever drawn; but a hermitage, a bothy, a
+  wayside chapel standing alone IS its site, and an empty site is a worse lie
+  than a slightly generous glyph.

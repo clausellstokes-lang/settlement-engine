@@ -481,3 +481,12 @@ disagree. The load-bearing corrections:**
   extends to these existing surfaces is AN OWNER QUESTION, queued — not auto-removed**; (ii)
   the DM-annotation path persists labels but renders them as point pins, not street-following
   lettering — L-REG-17's register-consistent annotation dress is the veto's surviving work.
+
+## Amendment A7 — the minimum-footprint law (owner, §630)
+
+| Law | Statement | Source |
+|---|---|---|
+| L-REG-30 | No small one-room blocks: a drawn building meets a minimum short-axis dimension AND minimum area; sub-minimum with a drawable neighbor fuses into it; isolated sub-minimum is not drawn. Ink-side only (L1) — the fabric building survives untouched. Monument classes never fuse INTO a neighbor (they may absorb). Floors measured by the lane, signed by the chair, tuning-surface constants. | §630 |
+
+Home: REG-4. Exit gains: a sliver census (armed corpus, zero sub-minimum drawn buildings,
+with a planted-sliver liveness control) and a REG-3 silhouette non-regression spot-check.
