@@ -54,7 +54,7 @@ for (const spec of CORPUS) {
     const cliffs = deriveCliffs(fabric.sub || fabric.substrate || null);
     const pitch = cliffs && cliffs.cell ? cliffs.cell * 0.5 : 2;
     const drawn = circuitDrawnRuns(fabric.wallCircuit);
-    let overW = 0, overC = 0, marks = 0, samples = 0;
+    let overW = 0, overC = 0, marks = 0, samples = 0, massW = 0, massC = 0;
     const convicted = [];
     const wgs = fabric.walls.flatMap((r) => (r.waterGates || []).map((g) => ({ x: g.x, y: g.y, span: g.span })));
     // ⭐ THE ONE LAWFUL CROSSING, AND IT IS THE RULE'S OWN ACT RATHER THAN A TOLERANCE. §161m.3:
@@ -67,7 +67,33 @@ for (const spec of CORPUS) {
       cx /= ring.polygon.length; cy /= ring.polygon.length;
       const R = ring.rampart;
       const pieces = drawn.filter((r) => r.ring === ring);
-      for (const pc of pieces) {
+      // ⭐ THE CENSUS MEASURES WHAT IS **DRAWN**. When the rampart is armed the lens splits each
+      //   drawn piece at `rampart.wetEdges` (§161m.3: where the water is the wall there is no wall
+      //   to draw), so a census that walked the unsplit piece would convict ink nobody emits — the
+      //   §441 J7 shape, a figure measured against the wrong artifact.
+      const wet = new Set((R && R.wetEdges) || []);
+      const nearestEdge = (p) => {
+        let bi = 0, bd = Infinity;
+        for (let i = 0; i < ring.polygon.length; i++) {
+          const a = ring.polygon[i], b = ring.polygon[(i + 1) % ring.polygon.length];
+          const dx = b[0] - a[0], dy = b[1] - a[1]; const dd = dx * dx + dy * dy;
+          let tt = dd === 0 ? 0 : ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / dd;
+          tt = tt < 0 ? 0 : tt > 1 ? 1 : tt;
+          const qx = a[0] + dx * tt, qy = a[1] + dy * tt;
+          const d = (p[0] - qx) ** 2 + (p[1] - qy) ** 2;
+          if (d < bd) { bd = d; bi = i; }
+        }
+        return bi;
+      };
+      const split = (line) => {
+        if (!wet.size) return [line];
+        const o = []; let cur = [];
+        for (const p of line) { if (wet.has(nearestEdge(p))) { if (cur.length >= 2) o.push(cur); cur = []; } else cur.push(p); }
+        if (cur.length >= 2) o.push(cur);
+        return o;
+      };
+      const drawnPieces = pieces.flatMap((pc) => split(pc.line).map((L) => ({ ...pc, line: L })));
+      for (const pc of drawnPieces) {
         // the drawn mark's own extent: the band's two faces when armed, the centreline when not
         const lines = [];
         if (R) {
@@ -89,6 +115,7 @@ for (const spec of CORPUS) {
           if (cliffs && onImpassable(cliffs, x, y)) nc++;
         });
         marks++;
+        massW += nw / n; massC += nc / n;
         if (nw) { overW++; convicted.push({ cls: 'band', what: 'water', share: +(nw / n).toFixed(3), n, lic }); }
         if (nc) { overC++; convicted.push({ cls: 'band', what: 'cliff', share: +(nc / n).toFixed(3), n }); }
       }
@@ -107,6 +134,7 @@ for (const spec of CORPUS) {
           }
         }
         marks++;
+        massW += nw / n; massC += nc / n;
         if (nw) { overW++; convicted.push({ cls: 'joint', what: 'water', share: +(nw / n).toFixed(3), n, kind: j.kind || 'tower', cl: j.cls }); }
         if (nc) { overC++; convicted.push({ cls: 'joint', what: 'cliff', share: +(nc / n).toFixed(3), n, kind: j.kind || 'tower', cl: j.cls }); }
       }
@@ -122,12 +150,14 @@ for (const spec of CORPUS) {
           if (cliffs && onImpassable(cliffs, x, y)) nc++;
         }
         marks++;
+        massW += nw / n; massC += nc / n;
         if (nw) { overW++; convicted.push({ cls: 'gatehouse', what: 'water', share: +(nw / n).toFixed(3), n }); }
         if (nc) { overC++; convicted.push({ cls: 'gatehouse', what: 'cliff', share: +(nc / n).toFixed(3), n }); }
       }
     }
     rows.push({ leaf: spec.key, arm: tag, marks, samples, overWater: overW, overCliff: overC,
-      cliffEdges: cliffs ? cliffs.edges.length : 0, convicted });
+      cliffEdges: cliffs ? cliffs.edges.length : 0, convicted,
+      massW: +massW.toFixed(3), massC: +massC.toFixed(3) });
   }
 }
 const h = ['leaf', 'arm', 'marks', 'samples', 'overWater', 'overCliff', 'cliffEdges'];
@@ -136,5 +166,13 @@ for (const r of rows) console.log(h.map((k) => r[k]).join('\t'));
 const sum = (arm, k) => rows.filter((r) => r.arm === arm).reduce((n, r) => n + r[k], 0);
 console.log(`\nBASE  : over-water ${sum('BASE', 'overWater')} · over-cliff ${sum('BASE', 'overCliff')} over ${sum('BASE', 'marks')} marks`);
 console.log(`ARMED : over-water ${sum('ARMED', 'overWater')} · over-cliff ${sum('ARMED', 'overCliff')} over ${sum('ARMED', 'marks')} marks`);
+// ⭐ THE MARK COUNT IS THE EXIT'S UNIT AND IT IS BLIND TO SEVERITY — mutation M5 proved it: with the
+// water cut disarmed the SAME 9 marks are convicted, one of them at 33 % of its length instead of
+// 2 %. So the OP-EQUIVALENT rides beside it: the summed share, i.e. how many whole marks' worth of
+// ink stands on refused ground. ⭐ THE CLASS: **A COUNT OF OFFENDING OBJECTS CANNOT SEE AN OBJECT
+// OFFENDING MORE.**
+console.log(`OP-EQUIVALENT (summed share, i.e. whole marks' worth of ink on refused ground):`);
+console.log(`  BASE  water ${sum('BASE', 'massW').toFixed(2)} · cliff ${sum('BASE', 'massC').toFixed(2)}`);
+console.log(`  ARMED water ${sum('ARMED', 'massW').toFixed(2)} · cliff ${sum('ARMED', 'massC').toFixed(2)}`);
 console.log('\nEVERY CONVICTED MARK, with the SHARE of its own samples on refused ground:');
 for (const r of rows) for (const c of r.convicted) console.log(`  ${r.leaf.padEnd(12)} ${r.arm.padEnd(6)} ${c.what} ${c.cls}${c.kind ? '/' + c.kind + '(cls' + c.cl + ')' : ''} share=${c.share} of ${c.n} samples`);

@@ -22,14 +22,22 @@
  *      candidate class rather than replacing them: it moves nothing about HOW MANY towers a
  *      wall has, and adds only the STRUCTURAL joints the charter names.
  *
- * ⛔⛔ **THE MERLON COMB IS NOT A STONE FEATURE AT THIS REGISTER, AND THE PLATE SAYS SO.** The
- * §590 preview took its comb from hf314 — a wall-HEAD close-up, drawn at a zoom where individual
- * merlons are legible. hf261, the REQUIRED-DETAIL ANCHOR for walls at CITY-PLAN zoom, shows a
- * comb on exactly ONE rung: the palisade, where the comb is the tops of the pales. Its three
- * masonry rungs read as a BAND WITH TOWERS and carry no comb at all. ⭐ THE CLASS: **A FEATURE
- * BORROWED FROM A CLOSER ZOOM IS A DIFFERENT DRAWING, NOT MORE OF THE SAME ONE** — and copying
- * it down costs ~845 marks a leaf (the §217 pre-measure) for a mark the reference does not make.
- * So the comb rides the PALISADE rung only, as the pale line, and costs one mark per run.
+ * ⭐⭐⭐ **THE COMB AND THE BAND FILL COME FROM DIFFERENT PLATES, AND THE ONE THAT GOVERNS IS THE
+ * ONE DRAWN AT OUR REGISTER.** This was got wrong once and the correction is worth the paragraph.
+ *
+ * hf261 — the REQUIRED-DETAIL ANCHOR — draws its five rungs at FORTY-YARD zoom: at that scale its
+ * full curtain shows a rubble-filled band and NO comb, because individual merlons would be legible
+ * and the plate chose to show the fill instead. Reading that as "masonry carries no comb" and
+ * cutting the comb was the first spelling here, and **hf103-metropolis-rings refutes it**: a whole
+ * metropolis on one plate — OUR register exactly — draws `MURUS SECUNDUS` as a band with a FINE
+ * COMB of crenel ticks along its outer face, running the entire circuit, at a pitch of roughly a
+ * third of a percent of the plate width. The comb is what makes a band read as a WALL at a glance.
+ *
+ * ⭐ THE CLASS: **A REFERENCE'S ZOOM IS PART OF WHAT IT SAYS.** hf261 governs the RUNG LADDER
+ * (which works a wall of each kind carries); hf103 governs the GRAIN at whole-town scale. Where
+ * they appear to disagree they are answering different questions. So: the comb rides EVERY rung
+ * (pales on the palisade, crenels on the masonry) at hf103's own fine pitch, and the band's
+ * interior stays plain except where the rung's own plate shows a texture.
  *
  * PURITY: pure functions of the circuit. No Date, no Math.random, no runtime trig, no draws.
  */
@@ -178,6 +186,72 @@ export function regimeLane(run, regime, runHasGate) {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════════════════
+ * §614.2 · RAMPART WEAR
+ * ════════════════════════════════════════════════════════════════════════════════════════ */
+
+/**
+ * ⭐⭐⭐ **THE WEAR GRADE — DERIVED, BECAUSE THE FACTS TURNED OUT TO EXIST.**
+ *
+ * The house law is measure-before-minting: check what maintenance facts the base carries, derive
+ * from THOSE, and never invent an upkeep field. The check was made, and three real facts answer it:
+ *
+ *   1. **THE BURDEN** — `tierScale.highWater.deficit`. §161f/§161g's own reading: a demoted
+ *      settlement keeps the circuit its PEAK built, and the deficit is exactly how much more wall
+ *      it has than souls to keep it. `cutGates` already spends this fact ("a high-water circuit
+ *      with a shrunken population cannot man every gate it once did") — wear is the same fact
+ *      applied to the stones between the gates. ⭐ This is the §611 synergy asked for, and it is
+ *      structural rather than tuned: a declined city's oversized circuit lands in the worst grade
+ *      BECAUSE its peak-vs-present ratio is what the term reads.
+ *   2. **THE MEANS** — the prosperity rank, the same 0..5 `faubourgSeriousness` reads.
+ *   3. **THE ATTENTION** — the §575 military read, already derived above. A manned wall is a
+ *      maintained wall; that is not a metaphor, it is what a garrison's masons were for.
+ *
+ * …and the EXPOSURE is the wall's own standing years, which `bandRegime` already reads.
+ *
+ * ⭐ THE SHAPE IS **EXPOSURE × (1 − UPKEEP)**, NOT A SUM. A new wall cannot be crumbling however
+ * poor its town, and a well-kept ancient wall is not a ruin — those are multiplicative facts, and
+ * a sum would let poverty alone convict a wall built last year.
+ * ⚠ WHERE THE VINTAGE IS UNKNOWN THE EXPOSURE IS 0 and the grade is `kept`: understated rather
+ * than invented, the same rule `bandRegime` applies to the same missing date.
+ */
+export const WEAR_GRADES = Object.freeze(['kept', 'weathered', 'crumbling']);
+/** ⚠ §42/§43 VALUES, ARGUED, UNSOAKED — they ride the tuning signature (§9). Two long peaces is
+ *  the span over which an unmaintained curtain goes from sound to visibly failing. */
+export const WEAR_FULL_YEARS = 240;
+export const WEAR_CUTS = Object.freeze({ weathered: 0.28, crumbling: 0.55 });
+
+/**
+ * @param {Object} a
+ * @param {number|null} a.wallStoodYears
+ * @param {number} a.prosperityRank
+ * @param {number} a.military      the §575 military read, 0..1
+ * @param {number} a.deficit       `tierScale.highWater.deficit`, 0 when the town never declined
+ * @returns {{grade:string, wear:number, exposure:number, upkeep:number, inputs:object, reason:string}}
+ */
+export function wearGrade(a) {
+  const c = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
+  const exposure = Number.isFinite(a.wallStoodYears) && a.wallStoodYears > 0
+    ? c(a.wallStoodYears / WEAR_FULL_YEARS) : 0;
+  const prosperity = c(Number(a.prosperityRank) / 5);
+  const deficit = c(Number(a.deficit) || 0);
+  const upkeep = c(prosperity * 0.45 + c(Number(a.military)) * 0.35 + (1 - deficit) * 0.20);
+  const wear = exposure * (1 - upkeep);
+  const grade = wear >= WEAR_CUTS.crumbling ? 'crumbling'
+    : wear >= WEAR_CUTS.weathered ? 'weathered' : 'kept';
+  return {
+    grade,
+    wear: Math.round(wear * 1000) / 1000,
+    exposure: Math.round(exposure * 1000) / 1000,
+    upkeep: Math.round(upkeep * 1000) / 1000,
+    inputs: { prosperity: Math.round(prosperity * 1000) / 1000, military: Math.round(c(Number(a.military)) * 1000) / 1000, deficit: Math.round(deficit * 1000) / 1000 },
+    reason: `§614.2 WEAR = ${grade.toUpperCase()} (${wear.toFixed(2)}) — exposure ${exposure.toFixed(2)}`
+      + ` (${a.wallStoodYears == null ? 'vintage UNKNOWN, no exposure claimed' : `${Math.round(a.wallStoodYears)}y of ${WEAR_FULL_YEARS}`})`
+      + ` × (1 − upkeep ${upkeep.toFixed(2)}: purse ${prosperity.toFixed(2)}, garrison attention ${c(Number(a.military)).toFixed(2)},`
+      + ` high-water burden ${deficit.toFixed(2)})`,
+  };
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════════════════
  * hf261 · THE RUNG LADDER
  * ════════════════════════════════════════════════════════════════════════════════════════ */
 
@@ -201,30 +275,47 @@ export function regimeLane(run, regime, runHasGate) {
  */
 export const RAMPART_RUNGS = Object.freeze({
   palisade: {
-    rung: 2, plate: 'hf261 PALISADE ON BANK', walk: false, core: false, pales: true,
-    courses: 0, chamber: false, gate: 'posts', towerScale: 1.00,
+    rung: 2, plate: 'hf261 PALISADE ON BANK', walk: false, core: false,
+    comb: 'pales', texture: 'none', stairs: false, wedge: false,
+    chamber: false, gate: 'posts', gatePit: false, gateStair: false, towerScale: 1.00,
   },
   bank: {
-    rung: 3, plate: 'hf261 BANK & DITCH REVETTED', walk: true, core: false, pales: false,
-    courses: 0.35, chamber: false, gate: 'posts', towerScale: 1.05,
+    rung: 3, plate: 'hf261 BANK & DITCH REVETTED', walk: true, core: false,
+    comb: 'crenel', texture: 'revet', stairs: false, wedge: false,
+    chamber: false, gate: 'posts', gatePit: true, gateStair: false, towerScale: 1.05,
   },
   stone: {
-    rung: 4, plate: 'hf261 THE NARROW CURTAIN', walk: true, core: false, pales: false,
-    courses: 0.55, chamber: true, gate: 'block', towerScale: 1.10,
+    rung: 4, plate: 'hf261 THE NARROW CURTAIN', walk: true, core: false,
+    comb: 'crenel', texture: 'course', stairs: true, wedge: false,
+    chamber: true, gate: 'block', gatePit: true, gateStair: true, towerScale: 1.10,
   },
-  // ⛔⛔ **THE FULL CURTAIN CARRIES NO COURSING, AND THE PLATE IS WHY.** My first spelling gave
-  // rung 5 course ticks at 0.40 and the render convicted it: 282 ticks on the city and 363 on the
-  // metropolis drew the curtain as a RUNG LADDER — the railway-track failure the §590 preview's
-  // own tick comment names — and hf261's full-curtain rung does not draw them at all. Its band is
-  // filled with a RUBBLE STIPPLE between two edges; the COURSE hatching belongs to rung 4, the
-  // narrow curtain, and even there the plate draws it in PATCHES. ⭐ THE CLASS is this file's own
-  // merlon finding a second time: **THE RUNG DECIDES THE TEXTURE, AND A TEXTURE COPIED UP THE
-  // LADDER IS A DIFFERENT WALL.** The saving is 282–363 primitives a leaf, taken by being right.
   citywall: {
-    rung: 5, plate: 'hf261 THE FULL CURTAIN', walk: true, core: true, pales: false,
-    courses: 0, chamber: true, gate: 'twin-drum', towerScale: 1.20,
+    // ⚠ `core: false` — hf103's own MURUS SECUNDUS carries a PLAIN band interior with the comb on
+    //   its outer face; hf261's rubble fill is that band seen at forty-yard zoom. The same
+    //   register rule that RESTORED the comb REMOVES the fill: our plate is hf103's.
+    rung: 5, plate: 'hf261 THE FULL CURTAIN + hf103 MURUS SECUNDUS', walk: true, core: false,
+    comb: 'crenel', texture: 'none', stairs: true, wedge: true,
+    chamber: true, gate: 'twin-drum', gatePit: true, gateStair: false, towerScale: 1.20,
   },
 });
+
+/**
+ * ⭐⭐ **THE COMB'S PITCH, MEASURED OFF hf103 RATHER THAN CHOSEN.** On that plate the crenel ticks
+ * run at roughly 0.33 % of the plate width. Our page is 1,000 units, so the pitch is ~3.3 units at
+ * city scale — which is 0.53 of that leaf's own drawn frontage (6.24). Expressing it in FRONTAGES
+ * rather than in units is what makes it survive the tier ladder: a thorp's module is six times a
+ * metropolis's, and a comb pitched in absolute units would be a fringe of hair on one and a row of
+ * fence posts on the other.
+ * ⚠ §42/§43 VALUE, MEASURED-OFF-PLATE, UNSOAKED — it rides the tuning signature.
+ */
+export const COMB_PITCH_FRONTAGES = 0.55;
+/** The band texture's pitch, in frontages. hf261 rung 4 draws coursing in PATCHES, not as a
+ *  continuous ladder — the patch share is the third figure. */
+export const TEXTURE_PITCH_FRONTAGES = 1.15;
+export const TEXTURE_PATCH_SHARE = 0.62;
+/** hf261 rung 4 / hf314: the wall-stair flights on the INNER face, and they are rare — a stair
+ *  every ~9 frontages, not a ladder. */
+export const STAIR_PITCH_FRONTAGES = 9;
 
 /** ⭐ THE RULED-DARK RUNG, recorded rather than silent (§270.1). */
 export const RUNG_DARK = Object.freeze({
@@ -378,6 +469,8 @@ export function deriveRampartWorks(a) {
       // The portcullis: hf313 draws it as a toothed line across the passage. Only where there is
       // a gatehouse to hang it in — a pair of timber posts never carried one.
       portcullis: rung.gate !== 'posts' && !g.bricked,
+      pit: rung.gatePit && !shrunk,
+      stair: rung.gateStair,
       plate: 'hf313 ' + (rung.gate === 'twin-drum' ? 'twin drum towers with portcullis'
         : rung.gate === 'block' ? 'plain square tower over highway' : 'simple timber arch in earthwork palisade'),
     });
@@ -419,6 +512,56 @@ export function deriveRampartWorks(a) {
     }
   }
 
+  /* ── ⭐⭐⭐ **§161m.3, DRAWN: WHERE THE WATER IS THE WALL, THERE IS NO WALL TO DRAW.**
+   *
+   * ⛔⛔ THE DEFECT, MEASURED AND THEN SEEN. Rule 3 drops the ring vertices the river defends by a
+   * DISTANCE (`distToPolyline > water.width * 1.1`) and then CLOSES the polygon across the gap —
+   * so on a coast, where the "line" is a traced shoreline and the body is a bay, the chord sails
+   * over open water. The over-ground census convicted it at 32.9 % of one drawn curtain piece on
+   * the coastal city, in the SEALED base as much as here; the rampart merely made it visible,
+   * because a bold band across a harbour is a thing a reader sees at a glance and a hairline is not.
+   * ⭐ THE CLASS IS THIS FILE’S NEIGHBOUR’S: **AN EXEMPTION EXPRESSED AS A TOLERANCE IS A SECOND
+   * SPELLING OF THE RULE IT EXCUSES** — walls.js says exactly that of the water flank, and the
+   * filter is the same rule spelled as a distance. The honest test is `isInWater`, the fabric’s own.
+   *
+   * ⚠⚠ AND THE CURE IS INK, NOT TRACE, DELIBERATELY. Re-aiming rule 3’s filter would move the ring
+   * on every bankside and coastal leaf — and with it the band, the district partition, the
+   * containment residuals and every census that reads them. walls.js refused exactly that inside a
+   * micro-wave once already (*"re-aiming the search is a trace-behaviour change that would move
+   * leaves this wave’s declared shift has not measured"*). So the RING is untouched, its claims
+   * and its partition are untouched, and what changes is that the CURTAIN is not drawn over open
+   * water — which is the same contract §577 already publishes for the scarp (`cliffChordEdges`:
+   * *"the polygon EDGES that are NOT wall"*). One rule, two impassable facts, one expression.
+   */
+  const wetEdge = new Array(ring.length).fill(false);
+  if (water) {
+    const pitch = Math.max(0.75, stone * 0.75);
+    for (let i = 0; i < ring.length; i++) {
+      const p0 = ring[i], p1 = ring[(i + 1) % ring.length];
+      const L = Math.hypot(p1[0] - p0[0], p1[1] - p0[1]);
+      const steps = Math.max(2, Math.ceil(L / pitch));
+      let wet = 0;
+      for (let k = 0; k <= steps; k++) {
+        const f = k / steps;
+        if (isInWater(water, p0[0] + (p1[0] - p0[0]) * f, p0[1] + (p1[1] - p0[1]) * f)) wet++;
+      }
+      // ⚠ A MAJORITY, NOT A TOUCH. A facet that clips a bank for one sample is a wall on the
+      //   waterfront (which is lawful and is what a quay wall IS); a facet mostly in the water is
+      //   a wall in the water. The cut is at the half so the two readings cannot both apply.
+      wetEdge[i] = wet > steps / 2;
+    }
+  }
+  // …and an END-WORK stands at every transition, because a curtain that simply STOPS presents an
+  // open end — §577’s second half, owed to the water exactly as it is owed to the scarp.
+  for (let i = 0; i < ring.length; i++) {
+    const prev = wetEdge[(i - 1 + ring.length) % ring.length];
+    if (prev === wetEdge[i]) continue;
+    const nb = ring[(wetEdge[i] ? (i - 1 + ring.length) : (i + 1)) % ring.length];
+    const L = Math.hypot(nb[0] - ring[i][0], nb[1] - ring[i][1]) || 1;
+    cand.push({ p: ring[i], t: [(nb[0] - ring[i][0]) / L, (nb[1] - ring[i][1]) / L], cls: 1,
+      kind: 'angle', rad: stone * 1.45, why: '§161m.3 the water is the wall here — the curtain ends',
+      key: `waterBrink.E${epoch}.v${i}` });
+  }
   // class 2 · THE ANGLE TURNS. ⚠ Within the class the SHARPEST corner wins its site: the §590
   // preview measured a 12° seam claiming ground and pushing a 40° corner off the wall.
   for (let i = 0; i < ring.length; i++) {
@@ -466,20 +609,32 @@ export function deriveRampartWorks(a) {
    *   presents an open end, which is the one thing §577's second half exists to forbid. Any other
    *   work is REFUSED: the ground would not carry it, and the site's cover then falls to whatever
    *   the spacing field seats next, which is what the coverage census is there to show. */
-  let pulled = 0, groundRefused = 0;
+  let pulled = 0, groundRefused = 0, drowned = 0;
   for (let i = cand.length - 1; i >= 0; i--) {
     const q = cand[i];
     let why = siteRefused(q.p, q.rad);
     if (!why) continue;
     if (q.cls === 1) {
       // Pull back along the masonry in half-radius steps until the footprint clears.
-      for (let k = 1; k <= 4 && why; k++) {
+      // ⚠ THE RANGE IS TWELVE HALF-RADII, NOT FOUR, AND A MEASUREMENT SET IT. A coastal city’s
+      //   circuit has 43 facets over 2,841 units — 66 units a facet — so a terminus that lands
+      //   inside a bay needs to walk a real distance to find the bank, and four half-radii moved
+      //   it 15 % of one facet. MEASURED before: the water end-work came back with 24 of 24
+      //   samples submerged; after: it clears.
+      for (let k = 1; k <= 12 && why; k++) {
         const p2 = [q.p[0] + q.t[0] * q.rad * 0.5 * k, q.p[1] + q.t[1] * q.rad * 0.5 * k];
         if (!siteRefused(p2, q.rad)) { q.p = p2; q.pulled = q.rad * 0.5 * k; why = null; pulled++; }
       }
-      // ⚠ AND IF IT STILL WILL NOT CLEAR IT STAYS, AND SAYS SO. An end-work that cannot find
-      // ground is a fact about the ground, not a licence to leave the curtain open.
-      if (why) q.overhang = why;
+      // ⛔⛔ **AND IF IT STILL WILL NOT CLEAR, IT IS DROPPED — MY FIRST RULING HERE WAS WRONG AND
+      // THE CENSUS SAID SO.** I first wrote that an end-work which cannot find ground STAYS,
+      // reasoning that an open end is worse than an overhang. MEASURED on the coastal city: the
+      // work came back with **24 of 24 samples in the sea** — a tower drawn floating in a harbour,
+      // which is not a lesser evil than an open end, it is a worse one.
+      // ⭐ AND THE ARGUMENT WAS WRONG AT ITS ROOT, not merely in its balance: where the ground is
+      // water, THE WATER IS THE WALL (§161m.3) — so there is no open end to close, because there
+      // is no curtain there to leave open. hf313 draws exactly this: its WATER GATE is the one
+      // anatomy on the plate with NO flanking drums. A site the ground refuses is not a site.
+      if (why) { cand.splice(i, 1); drowned++; }
     } else {
       cand.splice(i, 1); groundRefused++;
     }
@@ -535,6 +690,7 @@ export function deriveRampartWorks(a) {
 
   return {
     rung,
+    wetEdges: wetEdge.map((v, i) => (v ? i : -1)).filter((i) => i >= 0),
     turnCut: Math.round(turnCut * 10) / 10,
     joints,
     gatehouses,
@@ -546,7 +702,7 @@ export function deriveRampartWorks(a) {
       exceptions,
       stations: towers.length,
       runBandsSeen: (runBands || []).length,
-      pulledBack: pulled, groundRefused,
+      pulledBack: pulled, groundRefused, terminiDrowned: drowned,
       gatesShrunk: gatehouses.filter((g) => g.shrunk).length,
       gatesOverhanging: gatehouses.filter((g) => g.overhang).length,
       overhanging: joints.filter((j) => j.overhang).length,
@@ -556,6 +712,6 @@ export function deriveRampartWorks(a) {
       + `; ${joints.length} joint work(s) from ${cand.length} candidate(s), ${rejected} refused by the spacing field`
       + `; ${gatehouses.length} gatehouse(s) at ${rung.gate}`
       + `; UNCOVERED — ${exceptions.turn} turn(s), ${exceptions.terminus} terminus/termini, ${exceptions.gate} gate(s)`
-      + `; GROUND — ${pulled} end-work(s) pulled back off a brink, ${groundRefused} candidate(s) refused by the ground, ${joints.filter((j) => j.overhang).length} still overhanging`,
+      + `; GROUND — ${pulled} end-work(s) pulled back onto firm ground, ${groundRefused} candidate(s) refused by the ground, ${drowned} terminus/termini dropped because the water is the wall there`,
   };
 }

@@ -48,6 +48,8 @@ import { resolveLens, lensAllows, HATCH } from '../src/domain/townMap/fabric/fol
 import { scaleBarFor } from '../src/domain/townMap/fabric/measure.js';
 import { letteringFragment, spliceLettering } from '../src/domain/townMap/fabric/lettering.js';
 import { circuitDrawnRuns } from '../src/domain/townMap/fabric/wallCircuit.js';
+import { COMB_PITCH_FRONTAGES, TEXTURE_PITCH_FRONTAGES, TEXTURE_PATCH_SHARE, STAIR_PITCH_FRONTAGES }
+  from '../src/domain/townMap/fabric/rampartWorks.js';
 
 /** THE TEN ROLES, in the warm folio palette (§9.7 as amended).
  * ⭐ ROOFS ARE MUCH DARKER THAN MF-B1's. The binding sub-law says roads are the palest role
@@ -1566,14 +1568,50 @@ export function renderFolio(fabric, opts = {}) {
     }
     return outL;
   };
-  const rampartSpend = { bands: 0, joints: 0, gates: 0, ticks: 0, tickPitch: 0, tickRung: 0 };
+  const rampartSpend = { bands: 0, joints: 0, gates: 0, ticks: 0, comb: 0, stairs: 0, texture: 0, wedges: 0, gateDetail: 0, wear: 0 };
 
   function drawRampart(ring, owned, w, cx, cy) {
     const R = ring.rampart, dress = R.dress;
+    const grade = (R.wear && R.wear.grade) || 'kept';
+    // §614.2 · how much of the comb has gone. A weathered parapet loses about a fifth of its
+    // merlons; a crumbling one nearer two fifths. ⚠ SEEDED per tooth, so the gaps are the same
+    // gaps forever (THE PROMISE) and a wall does not shed different stones on every render.
+    const wearDrop = grade === 'crumbling' ? 0.38 : grade === 'weathered' ? 0.20 : 0;
+    let rubble = '';
     const half = R.bandHalfOfRun || [];
     let walkD = '', outerD = '', innerD = '', combD = '', coreD = '';
     /** @type {Array<{line:Array<[number,number]>, h:number}>} */ const spines = [];
-    for (const o of owned) {
+    /* ⭐ §161m.3 · THE DRAWN PIECE IS SPLIT AT THE WATER. `rampart.wetEdges` names the ring edges
+     * the water defends; a drawn point sitting on one of them is not on a wall, so the curtain
+     * stops there and resumes beyond. The ring, the band claim and every census see the closed
+     * circuit exactly as before — this is the ink contract only. */
+    const wet = new Set(R.wetEdges || []);
+    const dryChains = (line) => {
+      if (!wet.size) return [line];
+      const onWet = (p) => {
+        let bi = 0, bd = Infinity;
+        for (let i = 0; i < ring.polygon.length; i++) {
+          const a = ring.polygon[i], b = ring.polygon[(i + 1) % ring.polygon.length];
+          const dx = b[0] - a[0], dy = b[1] - a[1];
+          const dd = dx * dx + dy * dy;
+          let t = dd === 0 ? 0 : ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / dd;
+          t = t < 0 ? 0 : t > 1 ? 1 : t;
+          const qx = a[0] + dx * t, qy = a[1] + dy * t;
+          const d = (p[0] - qx) * (p[0] - qx) + (p[1] - qy) * (p[1] - qy);
+          if (d < bd) { bd = d; bi = i; }
+        }
+        return wet.has(bi);
+      };
+      const outC = []; let cur = [];
+      for (const p of line) {
+        if (onWet(p)) { if (cur.length >= 2) outC.push(cur); cur = []; } else cur.push(p);
+      }
+      if (cur.length >= 2) outC.push(cur);
+      return outC;
+    };
+    const ownedDry = [];
+    for (const o of owned) for (const c of dryChains(o.line)) ownedDry.push({ ...o, line: c });
+    for (const o of ownedDry) {
       const h = Math.max(0.30, (half[o.j] == null ? w * 0.5 : half[o.j]));
       const A = offsetOpen(o.line, h, cx, cy);
       const B = offsetOpen(o.line, -h, cx, cy);
@@ -1581,17 +1619,40 @@ export function renderFolio(fabric, opts = {}) {
       outerD += linePath(A);
       innerD += linePath(B);
       prims.n += 3; rampartSpend.bands += 3;
-      spines.push({ line: o.line, h });
-      // hf261 rung 2 · THE PALE COMB, and it rides the PALISADE alone. The plate shows a comb on
-      // exactly one rung — the tops of the pales — and its three masonry rungs carry none.
-      // ⭐ ONE DASHED PATH, NOT ONE MARK PER TOOTH: the §217 pre-measure priced a per-tooth comb
-      // at ~845 marks a leaf against 74 of headroom on the tightest walled leaf.
-      if (dress.pales) { combD += linePath(offsetOpen(o.line, h * 1.55, cx, cy)); prims.n++; rampartSpend.bands++; }
+      // ⭐ THE LAW'S OWN OUTER LIMIT for this run (see walls.js `inkHalfOfRun`).
+      const cap = (R.inkHalfOfRun && R.inkHalfOfRun[o.j] != null) ? R.inkHalfOfRun[o.j] : h;
+      spines.push({ line: o.line, h, j: o.j, cap });
       // hf261 rung 5 · THE RUBBLE CORE, read at plan scale as a broken line down the walk.
       if (dress.core) { coreD += linePath(o.line); prims.n++; rampartSpend.bands++; }
     }
-    const outerW = Math.max(0.35, r2(w * 0.46));
-    const innerW = Math.max(0.28, r2(w * 0.32));
+    // ⛔⛔ **THE EDGE WEIGHTS ARE A TWO-SIDED CONSTRAINT AND BOTH SIDES WERE MEASURED.**
+    //
+    // Too THICK and the edge eats the band it defines: at 0.46w the outer edge is 47 % of the whole
+    // band width, two such edges leave no walk to see, and every tooth of the comb drawn inside them
+    // vanishes — MEASURED at the 17× zoom, where 823 comb ticks were emitted and NONE was visible.
+    // ⭐ **A MARK DRAWN INSIDE ANOTHER MARK'S STROKE IS NOT DRAWN.**
+    //
+    // Too THIN and the wall stops being the loudest thing on the page. Dropping to 0.28w/0.19w put
+    // roughly 69 % of the base's ink per unit of curtain on the page, and REG-I0's role-pair
+    // contrast instrument convicted it: `wall:all` fell **7.75 → 3.14** at the town, **5.77 → 2.44**
+    // at the polycentric town and **7.57 → 2.91** at year-100 — three leaves BELOW the 3.00 floor,
+    // a regression the wave's own exit forbids. ⭐ THE CLASS: **A LINE SPLIT IN TWO IS NOT THE SAME
+    // WEIGHT SPREAD OUT — thin strokes anti-alias to a lighter mean, so halving a stroke costs more
+    // than half its darkness.**
+    //
+    // The settled pair restores the ink budget (outer + inner + comb ≈ 0.9 × the base's single
+    // stroke) and the comb moves INWARD to clear the outer edge's inner face rather than the edge
+    // thinning to clear the comb. The outer face stays the heavier of the two — hf314's bold
+    // fighting face, hf103's combed `MURUS SECUNDUS`.
+    //
+    // ⭐⭐ AND THE **COMB'S** WEIGHT IS PART OF THE SAME BUDGET, WHICH IS NOT OBVIOUS. Seven hundred
+    // thin ticks are a large population of heavily anti-aliased pixels, and they enter the wall
+    // role's own mean: at 0.32w the town's `wall:all` sat at 3.03 against a 3.00 floor — a margin a
+    // rounding change would eat, which is the §217 header's own recorded lesson about pins. Taking
+    // the comb to 0.40w buys the margin back AND draws the merlons the way hf103 draws them, so the
+    // legibility fix and the register fix are the same edit.
+    const outerW = Math.max(0.34, r2(w * 0.42));
+    const innerW = Math.max(0.26, r2(w * 0.26));
     if (walkD) push(`<path d="${walkD}" fill="${dress.walk ? RT.walk : RT.bank}" stroke="none" fill-rule="nonzero"/>`);
     // ⚠ THE CORE IS RUBBLE, NOT A CENTRE LINE, AND THE FIRST DASH READ AS A ROAD. hf261's full
     // curtain fills its band with irregular fill between two edges; a long dash down the middle
@@ -1599,16 +1660,169 @@ export function renderFolio(fabric, opts = {}) {
     if (coreD) push(`<path d="${coreD}" fill="none" stroke="${RT.course}" stroke-width="${r2(Math.max(0.18, w * 0.17))}" stroke-opacity="0.5" stroke-dasharray="${r2(frontage * 0.14)} ${r2(frontage * 0.20)}" stroke-linecap="butt"/>`);
     if (innerD) push(`<path d="${innerD}" fill="none" stroke="${P.walls}" stroke-width="${innerW}" stroke-linejoin="round" stroke-linecap="round"/>`);
     if (outerD) push(`<path d="${outerD}" fill="none" stroke="${P.walls}" stroke-width="${outerW}" stroke-linejoin="round" stroke-linecap="round"/>`);
-    if (combD) push(`<path d="${combD}" fill="none" stroke="${P.walls}" stroke-width="${r2(Math.max(0.3, w * 0.34))}" stroke-dasharray="${r2(frontage * 0.13)} ${r2(frontage * 0.17)}" stroke-linecap="butt"/>`);
+    /* ── ⭐⭐⭐ THE COMB, PER TOOTH, AT hf103's OWN GRAIN (ODQ §604: the REQUIRED corpus detail,
+     *    not the minimal one). `pales` are the tops of a timber palisade and stand PROUD of the
+     *    bank; `crenel` are merlons on a masonry outer face and are the tooth-and-gap of the
+     *    parapet itself, so they start INSIDE the band's outer edge and finish just outside it.
+     * ⚠ SEEDED, NEVER REGULAR (§214; ATLAS banned prior #7): both the tooth length and its
+     *    station carry a bounded hand, so the comb reads as masonry rather than as a machined rack. */
+    if (dress.comb !== 'none') {
+      const pitch = frontage * COMB_PITCH_FRONTAGES;
+      const pale = dress.comb === 'pales';
+      for (const sp of spines) {
+        let acc = 0;
+        for (let i = 0; i + 1 < sp.line.length; i++) {
+          const [x0, y0] = sp.line[i], [x1, y1] = sp.line[i + 1];
+          const L = Math.hypot(x1 - x0, y1 - y0); if (L < 1e-9) continue;
+          let nx = -(y1 - y0) / L, ny = (x1 - x0) / L;
+          // outward, away from the ring's own centre
+          const mx = (x0 + x1) / 2, my = (y0 + y1) / 2;
+          if ((mx - cx) * nx + (my - cy) * ny < 0) { nx = -nx; ny = -ny; }
+          let t = pitch - acc;
+          while (t < L) {
+            const k = `${ring.epoch}|comb|${rampartSpend.comb}`;
+            // ⭐ §614.2 · WEAR, AND ITS FIRST EXPRESSION IS **SUBTRACTION**. A weathered parapet is
+            //   not a decorated one: merlons drop out, and the ones that stand are uneven. Calm
+            //   register — the wall still reads as a wall, it reads as a wall nobody has repointed.
+            if (wearDrop > 0 && hashUnit(`${k}|gone`) < wearDrop) { rampartSpend.comb++; t += pitch; continue; }
+            const tt = Math.max(0.05, Math.min(L - 0.05, t + (hashUnit(k) - 0.5) * pitch * 0.22));
+            const px = x0 + (x1 - x0) * (tt / L), py = y0 + (y1 - y0) * (tt / L);
+            // The tooth runs from inside the walk out to the band's own limit — NEVER past it.
+            const a0 = sp.h * (pale ? 0.02 : 0.14);
+            const reach = Math.max(sp.h, sp.cap);
+            const a1 = Math.min(reach, sp.h * (pale ? 1.45 : 0.97))
+              * (0.90 + hashUnit(`${k}|l`) * 0.20)
+              * (wearDrop > 0 ? (1 - wearDrop * 0.5 * hashUnit(`${k}|short`)) : 1);
+            combD += `M${r2(px + nx * a0)} ${r2(py + ny * a0)}L${r2(px + nx * a1)} ${r2(py + ny * a1)}`;
+            rampartSpend.comb++; prims.n++;
+            t += pitch;
+          }
+          acc = (L - (t - pitch)) % pitch;
+        }
+      }
+    }
+    if (combD) push(`<path d="${combD}" fill="none" stroke="${P.walls}" stroke-width="${r2(Math.max(0.30, w * (dress.comb === 'pales' ? 0.38 : 0.40)))}" stroke-linecap="butt"/>`);
+
+    /* ── hf261 rungs 3–4 · THE BAND'S OWN TEXTURE, AND IT IS DRAWN IN PATCHES. The plate's narrow
+     *    curtain shows coursing over part of its length and plain band over the rest — a
+     *    continuous ladder is the railway-track failure. The patch decision is SEEDED per station,
+     *    so the same wall is coursed in the same places forever. */
+    if (dress.texture !== 'none') {
+      const pitch = frontage * TEXTURE_PITCH_FRONTAGES;
+      let tex = '';
+      for (const sp of spines) {
+        let acc = 0;
+        for (let i = 0; i + 1 < sp.line.length; i++) {
+          const [x0, y0] = sp.line[i], [x1, y1] = sp.line[i + 1];
+          const L = Math.hypot(x1 - x0, y1 - y0); if (L < 1e-9) continue;
+          const nx = -(y1 - y0) / L, ny = (x1 - x0) / L;
+          let t = pitch - acc;
+          while (t < L) {
+            const k = `${ring.epoch}|tex|${rampartSpend.texture}`;
+            rampartSpend.texture++;
+            // the PATCH gate — hf261 draws coursing over stretches, not everywhere
+            if (hashUnit(`${k}|patch`) < TEXTURE_PATCH_SHARE) {
+              const tt = t + (hashUnit(k) - 0.5) * pitch * 0.3;
+              const px = x0 + (x1 - x0) * (Math.max(0.05, Math.min(L - 0.05, tt)) / L);
+              const py = y0 + (y1 - y0) * (Math.max(0.05, Math.min(L - 0.05, tt)) / L);
+              const e = sp.h * (dress.texture === 'revet' ? 0.92 : 0.78);
+              tex += `M${r2(px - nx * e)} ${r2(py - ny * e)}L${r2(px + nx * e)} ${r2(py + ny * e)}`;
+              rampartSpend.ticks++; prims.n++;
+            }
+            t += pitch;
+          }
+          acc = (L - (t - pitch)) % pitch;
+        }
+      }
+      if (tex) push(`<path d="${tex}" fill="none" stroke="${RT.course}" stroke-width="${r2(Math.max(0.18, w * 0.20))}" stroke-opacity="0.7" stroke-linecap="round"/>`);
+    }
+
+    /* ── hf261 rung 4 / hf314 · THE WALL STAIRS, on the INNER face and RARE. A flight every nine
+     *    frontages: the plate draws a handful round a whole circuit, not a ladder. */
+    if (dress.stairs) {
+      const pitch = frontage * STAIR_PITCH_FRONTAGES;
+      let st = '';
+      for (const sp of spines) {
+        let acc = 0;
+        for (let i = 0; i + 1 < sp.line.length; i++) {
+          const [x0, y0] = sp.line[i], [x1, y1] = sp.line[i + 1];
+          const L = Math.hypot(x1 - x0, y1 - y0); if (L < 1e-9) continue;
+          let nx = -(y1 - y0) / L, ny = (x1 - x0) / L;
+          const mx = (x0 + x1) / 2, my = (y0 + y1) / 2;
+          if ((mx - cx) * nx + (my - cy) * ny > 0) { nx = -nx; ny = -ny; }   // INWARD
+          const tx = (x1 - x0) / L, ty = (y1 - y0) / L;
+          let t = pitch - acc;
+          while (t < L) {
+            const px = x0 + (x1 - x0) * (t / L), py = y0 + (y1 - y0) * (t / L);
+            for (let r = 0; r < 4; r++) {
+              const o = r * sp.h * 0.78;
+              st += `M${r2(px + tx * o)} ${r2(py + ty * o)}L${r2(px + tx * o + nx * sp.h * 1.15)} ${r2(py + ty * o + ny * sp.h * 1.15)}`;
+            }
+            rampartSpend.stairs += 4; prims.n += 4;
+            t += pitch;
+          }
+          acc = (L - (t - pitch)) % pitch;
+        }
+      }
+      if (st) push(`<path d="${st}" fill="none" stroke="${RT.course}" stroke-width="${r2(Math.max(0.16, w * 0.16))}" stroke-opacity="0.72" stroke-linecap="butt"/>`);
+    }
+
+    /* ── ⭐⭐⭐ §614.2 · THE WEAR MARKS. Three grades, and the register is CALM: a wall in trouble
+     *    is drawn by what is MISSING and by one or two quiet incidents, never as spectacle. The
+     *    grade is the fabric's (`rampart.wear.grade`); the lens only draws it.
+     *      kept       — nothing here fires.
+     *      weathered  — the comb thins and unevens (above), and ONE stretch carries a PATCH: a
+     *                   short double-hatched panel across the band where somebody made it good.
+     *      crumbling  — plus ONE roofless tower (its ring survives, its floor is hatched — hf323's
+     *                   own rule that an unroofed ruin is hatched, not filled) and ONE collapsed
+     *                   stretch drawn as a rubble line instead of two edges (hf123's quarried
+     *                   stretch, hf379's later rungs). */
+    if (grade !== 'kept' && spines.length) {
+      let scar = '';
+      const pick = (salt, n) => Math.floor(hashUnit(`${ring.epoch}|wear|${salt}`) * n);
+      const sp = spines[pick('patch', spines.length)];
+      const seg = Math.max(0, Math.min(sp.line.length - 2, pick('patchAt', Math.max(1, sp.line.length - 1))));
+      const [x0, y0] = sp.line[seg], [x1, y1] = sp.line[seg + 1];
+      const L = Math.hypot(x1 - x0, y1 - y0) || 1;
+      const nx = -(y1 - y0) / L, ny = (x1 - x0) / L, tx = (x1 - x0) / L, ty = (y1 - y0) / L;
+      const px = x0 + tx * L * 0.5, py = y0 + ty * L * 0.5;
+      const span = Math.min(L * 0.4, frontage * 1.5);
+      // the patch: a panel outlined across the band, cross-hatched — made good, and it shows.
+      for (const sgn of [-1, 1]) {
+        scar += `M${r2(px + tx * span * sgn - nx * sp.h)} ${r2(py + ty * span * sgn - ny * sp.h)}`
+          + `L${r2(px + tx * span * sgn + nx * sp.h)} ${r2(py + ty * span * sgn + ny * sp.h)}`;
+        prims.n++; rampartSpend.wear++;
+      }
+      for (let q = 1; q <= 3; q++) {
+        const f = (q / 4 - 0.5) * 2 * span;
+        scar += `M${r2(px + tx * f - nx * sp.h * 0.8)} ${r2(py + ty * f - ny * sp.h * 0.8)}`
+          + `L${r2(px + tx * (f + span * 0.28) + nx * sp.h * 0.8)} ${r2(py + ty * (f + span * 0.28) + ny * sp.h * 0.8)}`;
+        prims.n++; rampartSpend.wear++;
+      }
+      if (grade === 'crumbling') {
+        // THE COLLAPSED STRETCH — the band's two edges give way to a broken rubble line.
+        const sp2 = spines[pick('fall', spines.length)];
+        const s2 = Math.max(0, Math.min(sp2.line.length - 2, pick('fallAt', Math.max(1, sp2.line.length - 1))));
+        rubble += `M${r2(sp2.line[s2][0])} ${r2(sp2.line[s2][1])}L${r2(sp2.line[s2 + 1][0])} ${r2(sp2.line[s2 + 1][1])}`;
+        prims.n++; rampartSpend.wear++;
+      }
+      if (scar) push(`<path d="${scar}" fill="none" stroke="${RT.course}" stroke-width="${r2(Math.max(0.18, w * 0.22))}" stroke-opacity="0.85" stroke-linecap="butt"/>`);
+    }
 
     /* ── THE JOINT WORKS. hf315's plan shapes; the KINDS are the run chain's, unchanged. */
-    let body = '', rings = '', chamber = '';
+    let body = '', rings = '', chamber = '', ruinHatch = '';
+    const roofless = grade === 'crumbling' && R.joints.length
+      ? R.joints[Math.floor(hashUnit(`${ring.epoch}|wear|roofless`) * R.joints.length)].key : null;
     for (const j of R.joints) {
+      // ⭐ hf323's RULE, applied to a tower: roofed = white interior, unroofed ruin = HATCHED.
+      //   A roofless tower keeps its ring and loses its fill; the hatch is what says ruin.
+      const isRuin = j.key === roofless;
       const rr = j.r;
       if (j.kind === 'square' || j.kind === 'angle') {
         const q = [[-rr, -rr * 0.86], [rr, -rr * 0.86], [rr, rr * 0.86], [-rr, rr * 0.86]]
           .map(([x, y]) => [j.x + x * j.dx - y * j.dy, j.y + x * j.dy + y * j.dx]);
-        body += polyPath(q); rings += polyPath(q);
+        if (!isRuin) body += polyPath(q);
+        rings += polyPath(q);
       } else if (j.kind === 'beaked') {
         const ux = j.x - cx, uy = j.y - cy; const L = Math.hypot(ux, uy) || 1;
         const px = ux / L, py = uy / L;
@@ -1622,19 +1836,36 @@ export function renderFolio(fabric, opts = {}) {
           + `A${r2(rr)} ${r2(rr)} 0 0 1 ${r2(j.x + py * rr)} ${r2(j.y - px * rr)}Z`;
         body += arc; rings += arc;
       } else {
-        body += `M${r2(j.x - rr)} ${r2(j.y)}a${r2(rr)} ${r2(rr)} 0 1 0 ${r2(rr * 2)} 0a${r2(rr)} ${r2(rr)} 0 1 0 ${r2(-rr * 2)} 0Z`;
+        if (!isRuin) body += `M${r2(j.x - rr)} ${r2(j.y)}a${r2(rr)} ${r2(rr)} 0 1 0 ${r2(rr * 2)} 0a${r2(rr)} ${r2(rr)} 0 1 0 ${r2(-rr * 2)} 0Z`;
         rings += `M${r2(j.x - rr)} ${r2(j.y)}a${r2(rr)} ${r2(rr)} 0 1 0 ${r2(rr * 2)} 0a${r2(rr)} ${r2(rr)} 0 1 0 ${r2(-rr * 2)} 0Z`;
       }
       prims.n += 2; rampartSpend.joints += 2;
+      if (isRuin) {
+        for (let q = -2; q <= 2; q++) {
+          const f = q * rr * 0.42;
+          ruinHatch += `M${r2(j.x + f - rr * 0.7)} ${r2(j.y - rr * 0.7)}L${r2(j.x + f + rr * 0.7)} ${r2(j.y + rr * 0.7)}`;
+          prims.n++; rampartSpend.wear++;
+        }
+        continue;
+      }
       if (j.chamber > 0.18) {
         const c = j.chamber;
         chamber += `M${r2(j.x - c)} ${r2(j.y)}a${r2(c)} ${r2(c)} 0 1 0 ${r2(c * 2)} 0a${r2(c)} ${r2(c)} 0 1 0 ${r2(-c * 2)} 0Z`;
         prims.n++; rampartSpend.joints++;
+        // ⭐ hf110 · THE INTERNAL SPIRAL WEDGE. A drum tower’s plan carries its own stair, and it
+        //   is the one mark that says INTERIOR rather than solid bump. Only on drums big enough to
+        //   hold it — a wedge inside a one-unit circle is a smudge.
+        if (dress.wedge && (j.kind === 'drum' || j.kind === 'open-backed-D') && c > frontage * 0.16) {
+          const a0 = hashUnit(`${j.key}|spiral`) * Math.PI * 2;
+          chamber += `M${r2(j.x)} ${r2(j.y)}L${r2(j.x + Math.cos(a0) * c)} ${r2(j.y + Math.sin(a0) * c)}`
+            + `A${r2(c)} ${r2(c)} 0 0 1 ${r2(j.x + Math.cos(a0 + 2.1) * c)} ${r2(j.y + Math.sin(a0 + 2.1) * c)}Z`;
+          prims.n++; rampartSpend.wedges++;
+        }
       }
     }
 
     /* ── THE GATEHOUSES. hf313's PLAN vignettes, at the rung the form earns. */
-    let bars = '';
+    let bars = '', pit = '';
     for (const g of R.gatehouses) {
       const nx = -g.dy, ny = g.dx;
       const q = [[-g.depth, -g.half], [g.depth, -g.half], [g.depth, g.half], [-g.depth, g.half]]
@@ -1655,64 +1886,51 @@ export function renderFolio(fabric, opts = {}) {
           .map(([x, y]) => [g.x + x * g.dx + y * nx, g.y + x * g.dy + y * ny]);
         chamber += polyPath(pq); prims.n++; rampartSpend.gates++;
       }
-      // hf313 · THE PORTCULLIS, drawn as a toothed line across the passage — ONE dashed mark.
+      // ⭐ hf313 · THE PORTCULLIS, DRAWN TOOTH BY TOOTH (ODQ §604’s required grain). The plate
+      //   draws the grid’s own teeth hanging in the passage; a dash pattern reads as a fence.
       if (g.portcullis) {
-        bars += `M${r2(g.x - nx * g.half * 0.42)} ${r2(g.y - ny * g.half * 0.42)}L${r2(g.x + nx * g.half * 0.42)} ${r2(g.y + ny * g.half * 0.42)}`;
-        prims.n++; rampartSpend.gates++;
+        const span = g.half * 0.42;
+        const teeth = Math.max(4, Math.min(14, Math.round(span * 2 / Math.max(0.5, frontage * 0.17))));
+        for (let k = 0; k <= teeth; k++) {
+          const f = (k / teeth - 0.5) * 2 * span;
+          const bx = g.x + nx * f, by = g.y + ny * f;
+          bars += `M${r2(bx - g.dx * g.depth * 0.30)} ${r2(by - g.dy * g.depth * 0.30)}L${r2(bx + g.dx * g.depth * 0.30)} ${r2(by + g.dy * g.depth * 0.30)}`;
+          prims.n++; rampartSpend.gateDetail++;
+        }
+      }
+      // ⭐ hf313 · THE DRAWBRIDGE PIT — a dashed rectangle OUTSIDE the block, on the field side.
+      //   ⚠ Suppressed on a bricked gate: a walled-up gate has no bridge to lift.
+      if (g.pit && !g.bricked) {
+        const o = g.depth * 1.55, pw = g.half * 0.62, pd = g.depth * 0.85;
+        const q = [[-pd, -pw], [pd, -pw], [pd, pw], [-pd, pw]]
+          .map(([x, y]) => [g.x + (x + o) * g.dx + y * nx, g.y + (x + o) * g.dy + y * ny]);
+        pit += polyPath(q); prims.n++; rampartSpend.gateDetail++;
+      }
+      // ⭐ hf313 · THE CORNER SPIRAL STAIR of the square tower over the highway.
+      if (g.stair) {
+        const sx = g.x + g.dx * g.depth * 0.55 + nx * g.half * 0.62;
+        const sy = g.y + g.dy * g.depth * 0.55 + ny * g.half * 0.62;
+        const r = Math.min(g.depth, g.half) * 0.34;
+        chamber += `M${r2(sx - r)} ${r2(sy)}a${r2(r)} ${r2(r)} 0 1 0 ${r2(r * 2)} 0a${r2(r)} ${r2(r)} 0 1 0 ${r2(-r * 2)} 0Z`
+          + `M${r2(sx)} ${r2(sy)}L${r2(sx + r)} ${r2(sy)}`;
+        prims.n += 2; rampartSpend.gateDetail += 2;
       }
     }
     if (body) push(`<path d="${body}" fill="${RT.tower}" stroke="none" fill-rule="nonzero"/>`);
     if (rings) push(`<path d="${rings}" fill="none" stroke="${P.walls}" stroke-width="${Math.max(0.35, r2(w * 0.46))}" stroke-linejoin="round"/>`);
+    if (ruinHatch) push(`<path d="${ruinHatch}" fill="none" stroke="${RT.course}" stroke-width="${r2(Math.max(0.16, w * 0.18))}" stroke-opacity="0.9" stroke-linecap="butt"/>`);
+    if (rubble) push(`<path d="${rubble}" fill="none" stroke="${P.walls}" stroke-width="${r2(Math.max(0.3, w * 0.34))}" stroke-opacity="0.9" stroke-dasharray="${r2(frontage * 0.10)} ${r2(frontage * 0.13)}" stroke-linecap="round"/>`);
     if (chamber) push(`<path d="${chamber}" fill="none" stroke="${RT.course}" stroke-width="${r2(Math.max(0.20, w * 0.22))}" stroke-opacity="0.85" stroke-linejoin="round"/>`);
+    if (pit) push(`<path d="${pit}" fill="none" stroke="${P.walls}" stroke-width="${r2(Math.max(0.22, w * 0.24))}" stroke-dasharray="${r2(frontage * 0.22)} ${r2(frontage * 0.20)}" stroke-linejoin="round"/>`);
     if (bars) push(`<path d="${bars}" fill="none" stroke="${P.walls}" stroke-width="${r2(Math.max(0.28, w * 0.30))}" stroke-dasharray="${r2(frontage * 0.10)} ${r2(frontage * 0.10)}" stroke-linecap="butt"/>`);
 
-    /* ── ⛔⛔ THE COURSE TICKS ARE **RATIONED**, AND THE §217 PRE-MEASURE IS WHY.
-     * hf261 draws course ticks across the band at its narrow-curtain rung — in PATCHES, never
-     * as a continuous ladder — and at the §590 preview's own 3.0-unit pitch that is 732 marks on
-     * a town leaf against 214 of headroom (777 against 74 on `town-2`). The exit's clause is to
-     * STOP the arm and report, so the arm draws only from budget that actually exists: the pitch
-     * starts at the leaf's own drawn module and COARSENS until the bill fits, and a leaf with no
-     * room draws none. ⭐ It is the ration law the accessible hatch and the roof ridges already
-     * live under — *an ACCENT gives way, never a building or a street* — and no ceiling is
-     * spent, because a ratchet raise is the chair's.
-     * ⚠ THE RATION IS DETERMINISTIC: `prims.n` at this point is a pure function of the fabric,
-     * so the same seed draws the same ticks forever (THE PROMISE, L-REG-12). */
-    if (dress.courses > 0) {
-      const budget = Math.max(0, CEIL - prims.n - RAMPART_TAIL_RESERVE - estimateLetteringOps(fabric, m, LENS));
-      let total = 0;
-      for (const s of spines) for (let i = 0; i + 1 < s.line.length; i++) total += Math.hypot(s.line[i + 1][0] - s.line[i][0], s.line[i + 1][1] - s.line[i][1]);
-      let pitch = frontage * 1.6, rung = 0;
-      while (rung < 4 && total / pitch > budget) { pitch *= 2; rung++; }
-      const want = Math.floor(total / pitch);
-      rampartSpend.tickPitch = Math.round(pitch * 100) / 100;
-      rampartSpend.tickRung = rung;
-      if (want >= 6 && want <= budget) {
-        let ticks = '';
-        for (const s of spines) {
-          let acc = 0;
-          for (let i = 0; i + 1 < s.line.length; i++) {
-            const [x0, y0] = s.line[i], [x1, y1] = s.line[i + 1];
-            const L = Math.hypot(x1 - x0, y1 - y0); if (L < 1e-9) continue;
-            const nx = -(y1 - y0) / L, ny = (x1 - x0) / L;
-            let t = pitch - acc;
-            while (t < L) {
-              // ⚠ SEEDED, NOT REGULAR. §214 bans even spacing by name and ATLAS's banned prior
-              // #7 makes a perfectly regular rung ladder the strongest "generated" tell there is.
-              const k = `${ring.epoch}|course|${rampartSpend.ticks}`;
-              const off = (hashUnit(k) - 0.5) * pitch * 0.30;
-              const tt = Math.max(0.1, Math.min(L - 0.1, t + off));
-              const px = x0 + (x1 - x0) * (tt / L), py = y0 + (y1 - y0) * (tt / L);
-              const e = s.h * (0.72 + hashUnit(`${k}|len`) * 0.30);
-              ticks += `M${r2(px - nx * e)} ${r2(py - ny * e)}L${r2(px + nx * e)} ${r2(py + ny * e)}`;
-              rampartSpend.ticks++; prims.n++;
-              t += pitch;
-            }
-            acc = (L - (t - pitch)) % pitch;
-          }
-        }
-        if (ticks) push(`<path d="${ticks}" fill="none" stroke="${RT.course}" stroke-width="${r2(Math.max(0.18, w * 0.20))}" stroke-opacity="${dress.courses}" stroke-linecap="round"/>`);
-      }
-    }
+    /* ⭐ THE §217 RATION IS GONE, AND THE CHAIR'S §604 AMENDMENT IS WHY. The first spelling
+     * rationed the band texture against the leaf's remaining budget and coarsened it until the
+     * bill fit — which made the SAME wall draw differently in different lenses (`highwater`
+     * parchment drew 0 ticks and `highwater` vtt drew 72, measured). The owner's grant is to
+     * SPEND on detail and let the chair sign the ceiling raise, so the arms above draw at the
+     * plate's own grain unconditionally and the bill is REPORTED. A drawing that changes with the
+     * budget left over from the rest of the page is not a drawing of a wall. */
   }
 
   for (const ring of fabric.walls) {
@@ -1885,7 +2103,7 @@ export function renderFolio(fabric, opts = {}) {
       }
       push(`<path d="${ad}" fill="none" stroke="${P.walls}" stroke-width="${r2(w * 1.15)}" stroke-linecap="round"/>`);
       if (wg.grated) {
-        let bars = '';
+        let bars = '', pit = '';
         for (let i = 1; i <= 4; i++) {
           const t = (i / 5 - 0.5) * 2 * half;
           const bx = wg.x + wg.dx * t, by = wg.y + wg.dy * t;

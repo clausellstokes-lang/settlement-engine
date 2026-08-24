@@ -70,7 +70,22 @@ import { wallMeta } from './wallRuns.js';
 // ⭐ ODQ §575/§590 · the band regime is derived here (the only scope holding all four inputs);
 // `wallForm`/`WALL_FORMS` supply the masonry-investment term the regime's military read uses.
 import { wallForm, WALL_FORMS } from './walls.js';
-import { bandRegime } from './rampartWorks.js';
+import { bandRegime, wearGrade } from './rampartWorks.js';
+
+/** ⭐ §575 + §614.2 · the band regime and the wear grade, derived together because the wear read
+ *  CONSUMES the regime's military term (a manned wall is a maintained wall) and both read the same
+ *  settlement facts. One call site, one record, so a consumer can never see one without the other. */
+function withWear(regimeArgs, prosperityRank, scale) {
+  const reg = bandRegime(regimeArgs);
+  const wear = wearGrade({
+    wallStoodYears: regimeArgs.wallStoodYears,
+    prosperityRank,
+    military: reg.military,
+    // §161f/§161g's own figure: how much more circuit this settlement has than souls to keep it.
+    deficit: scale.highWater && scale.highWater.demoted ? scale.highWater.deficit : 0,
+  });
+  return { ...reg, wear };
+}
 import { compoundDiscs, compoundGround } from './compoundGround.js';
 import { partitionAtTheWall } from './districtPartition.js';
 import { censusLeaf } from './leafCensus.js';
@@ -599,7 +614,7 @@ export function buildFabric(settlement, model, options = {}) {
     // that (`reg2-garrison-9`, walled false, regime `clear`). A regime with no band is not a
     // small untruth: it would give a census and a later wave a wall-shaped fact to read.
     rampart: options.rampart === true && hasWalls
-      ? bandRegime({
+      ? withWear({
         settlement: s,
         glacisClear: faubourgSeriousness(lawfulness, prosperityRank) >= GLACIS_THRESHOLD,
         prosperityRank,
@@ -611,7 +626,7 @@ export function buildFabric(settlement, model, options = {}) {
           ? Math.max(0, (Number.isFinite(options.presentAge) ? options.presentAge : presentYear(s))
             - wallStanding.vintage.ageAtBuild)
           : null,
-      })
+      }, prosperityRank, scale)
       : null,
     // ⭐⭐⭐ ODQ §577 · THE ESCARPMENT THE CIRCUIT TERMINATES AT. `null` when the feature is not
     // armed, and `circuitInputsFrom` then produces character-identical input text — the dormancy

@@ -727,21 +727,45 @@ export function traceWalls(args) {
         // and the claim cannot disagree about how thick this wall is (walls' own §5 W2 law).
         stone: band.stone, seeding, epoch: c.epoch,
       });
+      // ⭐ §614.2 · THE WEAR GRADE, AND AN OLD CORE IS ONE GRADE WORSE BY CONSTRUCTION. A
+      // superseded circuit is not the wall the town mans; §250.5's fossil law says the old thing
+      // BECOMES the new thing, and a ring the demotion has not yet reached is the in-between state
+      // — still standing, no longer maintained. ⚠ It only ever worsens: nothing here can make a
+      // ring read better-kept than the settlement's own upkeep earned.
+      const wearOrder = ['kept', 'weathered', 'crumbling'];
+      const baseWear = (rampart.wear && rampart.wear.grade) || 'kept';
+      const grade = c.kind === 'old-core'
+        ? wearOrder[Math.min(wearOrder.length - 1, wearOrder.indexOf(baseWear) + 1)]
+        : baseWear;
       c.rampart = {
         regime: rampart.regime,
+        wear: { ...(rampart.wear || {}), grade, ringGrade: grade, settlementGrade: baseWear },
         rung: works.rung.rung,
         plate: works.rung.plate,
         dress: works.rung,
         turnCut: works.turnCut,
         joints: works.joints,
+        // §161m.3 · the ring edges the water defends — published as NOT-WALL, exactly as §577
+        // publishes `cliffChordEdges`. The ring itself is unchanged.
+        wetEdges: works.wetEdges,
         gatehouses: works.gatehouses,
         // ⭐ THE BAND'S HALF-WIDTH **PER RUN**, published so the lens offsets the drawn line by a
         // number it never computes itself. One rule, one home — the §230 family's own cure.
         bandHalfOfRun: runBands.map((b) => b.stone / 2),
+        // ⭐⭐⭐ **THE OUTER LIMIT OF ANY RAMPART MARK, AND IT IS §200’s OWN NUMBER.** `wallBand`
+        // guarantees containment on EACH FACE by flooring the side at `inkHalf` (MF-B8b: *a
+        // reservation wider than the stroke can still be offset from it; containment is a
+        // two-sided claim*). So a mark may reach `inkHalf` from the line and not one unit more —
+        // and a merlon tick standing proud of the stones is exactly the mark that would break it.
+        // ⚠ MEASURED at the coastal city, whose town keeps no glacis: the outer reservation is
+        // `sideFloor` = 0.05 units beyond the stones. A comb drawn 1.4 units proud would have put
+        // ink 1.35 units onto ground no law reserved — the §200 defect, re-created by ornament.
+        inkHalfOfRun: runBands.map((b) => b.inkHalf),
         laneDropped,
         stats: works.stats,
       };
       c.reason += `; ${works.reason}`
+        + `; ${(rampart.wear || {}).reason || ''}${c.kind === 'old-core' && grade !== baseWear ? ` — and ONE GRADE WORSE because this is a superseded circuit nobody mans: ${grade.toUpperCase()}` : ''}`
         + (laneDropped ? `; §575 ${rampart.regime.toUpperCase()} — ${laneDropped} run(s) gave up the wall-side lane to the fabric` : `; §575 ${rampart.regime.toUpperCase()} — every lane-carrying run keeps its intervallum`);
     }
   }
