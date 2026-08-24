@@ -26342,3 +26342,30 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   a log is an exit status that outlives the run."* The stale log is renamed
   per its recommendation (a chair act — outside the lane's grant, inside the
   chair's). The re-staging law's family gains its logging member.
+
+## §606 · ⭐⭐ THE CHRONICLE REVEAL — THE OWNER'S GROWTH-MOVIE PROPOSAL, CHARTERED (2026-08-24 ~19:50 CDT)
+
+- **§606.1 THE PROPOSAL (owner):** the map's load IS the settlement's history
+  replaying — terrain, first buildings, neighborhoods growing, walks becoming
+  roads, houses combining and splitting, walls raised, historical events
+  showing their effects, "until we get to where it is… it ends when it's done
+  building." The dossier and map are the end state; the user visually follows
+  the town's existence.
+- **§606.2 CHARTERED — and the chair's finding is that THE ENGINE ALREADY
+  COMPUTES ALL OF IT:** §240's epoch axis grows the town sequentially by
+  construction; `snapshot.js` renders year projections; events are dated;
+  pentimento, fossils, market infill, faubourg origins and wall regimes are
+  all era-carried. **The Chronicle Reveal = the derivation made visible.**
+  Ruled first form: **KEYFRAMES, not film** — the town at each epoch and
+  major event as turning pages with dated title cards, full register dress —
+  deterministic by construction, tier-aligned with §603's budget (a thorp has
+  two beats; a metropolis fills its allowance with saga), and "ends when the
+  build ends" by construction. Honest build cost named: intermediate-state
+  rendering at register grade + event-effect marks between frames (the typed
+  loss-region machinery is the ruled home).
+- **§606.3 PLACEMENT:** the centerpiece of REG-10 (superseding the plain
+  progressive reveal), with two sibling deliverables — the DOSSIER GROWTH
+  PLATES page (4–6 small maps at the town's great moments; print-compatible)
+  and the REG-11 share clip ("watch my city grow" — the viral artifact).
+  A keyframe TASTE SPECIMEN precedes the wave, per the specimen-first habit:
+  one city's history as 5–6 rendered pages for the owner's judgment.
