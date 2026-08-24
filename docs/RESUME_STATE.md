@@ -51,6 +51,8 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 01:09 CDT 08-24: §535 — AI media CLEAR (one paid account, terms Wayback-verified at generation).
+# ⛔ provenance clause binds 08-27 (3 days) → TE-AIP-1 fixing the pipeline. Only Cohort A (7.4 MB) remains unlicensed.
 # ⭐⭐⭐ 01:06 CDT 08-24: §534 — violation STOPPED: 234 deleted, 104 CC0 restored. A missing charge fails
 # SILENTLY (55.7% of draws would have been wrong) — pick table pruned, verified 3 ways. STACK-3 (IP-1+MP-1) dispatched.
 # ⭐⭐⭐ 00:56 CDT 08-24: §533 — SECOND STACK LANDED (51+52) CAS → 567030f1d. Slot moved MID-ACT (redone).

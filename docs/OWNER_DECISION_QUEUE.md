@@ -22941,3 +22941,84 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   output is byte-identical** for every existing world, which is that car's
   whole safety argument since its layer is dark. Expect `valid: 176 packets
   (0 READY)`. Seats: STACK-3 · AIMEDIA-ToS; two free.
+
+## §535 — ⭐⭐ THE AI MEDIA IS **CLEAR**: ALL 52 FILES CAME FROM ONE **PAID** ACCOUNT AND THE TERMS GRANT UNRESTRICTED COMMERCIAL USE — BUT A NEW PROVENANCE CLAUSE BINDS IN **THREE DAYS**, AND COHORT A IS NOW THE ESTATE'S ONLY UNLICENSED SHIPPED IMAGERY (2026-08-24 01:09 CDT)
+
+- **§535.1 THE VERDICT.** All **52 AI-generated files, 74,168,828 B**, were
+  generated on **ONE paid Higgsfield account on 2026-07-18**, and its Terms
+  grant **unrestricted commercial use with no tier condition, no attribution
+  duty and no prohibition on shipping the output inside a product**.
+  Commercial use is **CLEAR**. The two-vendor picture in the earlier audit was
+  wrong in the direction that simplifies everything: the account's own
+  generation history returns all six journey legs under model `seedance_2_0`,
+  so **BytePlus and Google are upstream model providers whose terms bind
+  Higgsfield, not the estate**.
+- **§535.2 THE TIER QUESTION — WHICH IS WHY IT NEEDED ASKING.** Commercial
+  rights often turn on the plan held **at generation time**, and the account
+  **is on the free tier today**. Settled by transaction record: the account's
+  **first-ever transaction is `Subscription Credits +3000, grant,
+  2026-07-18T17:15:55Z` — twenty minutes before the first generation** — with
+  `Subscription Cancelled` on 2026-08-18. **Paid throughout the generation
+  window.** And the clause was verified **at generation time, not merely
+  today**: Wayback snapshot `20260717130346`, the day before, reads *"The
+  Company does not claim ownership of any of your Inputs or Outputs, and nor
+  does it restrict the use of Outputs for commercial use."* The current text
+  says the same and adds survival past cancellation. Higgsfield's own help
+  centre answers both questions directly: commercial use restricted to paid
+  plans — **No**; credit required — **No**. That is the §531 discipline
+  (prove the terms were in force when the act occurred) applied a second time,
+  by a different lane, unprompted.
+- **§535.3 ⛔ THE THREE-DAY CLOCK.** **mozjpeg stripped the Google C2PA, the
+  SynthID marker and the "Made with Google AI" credit from all 32 page
+  paintings; ffmpeg stripped the BytePlus C2PA from all six video legs.** No
+  clause forbade that in July — but **Higgsfield's NEW §5.5 ("you will not
+  remove, alter, or obscure any provenance signals or markings") binds this
+  pre-existing account from 2026-08-27**, three days out. **CHAIR'S READING,
+  and the lane is invited to refute it:** the ACT of stripping predates the
+  clause, so the exposure is not a breach but (a) the grey area of continuing
+  to distribute stripped files after the date and (b) **the pipeline that
+  strips is still live** — a restored credit on today's 46 files is worthless
+  if tomorrow's build strips the next one. **TE-AIP-1 dispatched**, ordered to
+  fix the pipeline FIRST with a planted-file positive control, then restore
+  only what is genuinely restorable — ⚠ **a C2PA manifest is cryptographically
+  signed and CANNOT be re-created; the lane must never present a re-added
+  human-readable credit as a restored signature** — and then add the
+  AI-disclosure line. Re-fetching originals is approval-gated: **report what
+  it would take, download nothing.**
+- **§535.4 NOBODY INDEMNIFIES THE ESTATE.** Higgsfield's indemnity is
+  Enterprise-plan only; BytePlus's runs one way and **§7.5(c) voids protection
+  where output was "modified, transformed, or combined with products or
+  services not provided by BytePlus" — which describes every shipped file.**
+  Not actionable by a lane; recorded as a standing risk row for the owner's
+  counsel brief.
+- **§535.5 ⭐ THE PICTURE NARROWS TO ONE COHORT.** **Cohort A — 23 files,
+  7,413,151 B — was introduced 2026-06-05, SIX WEEKS BEFORE the Higgsfield
+  account's first transaction**, so it is provably not Higgsfield output.
+  **It is now the estate's ONLY unlicensed shipped imagery**, and it is
+  exactly the set the reverse-image search would settle. What was "176 MB of
+  unknown provenance" at §526 is now: the AI media CLEAR, the heraldic charges
+  resolved by deletion and restoration (§534), the textures deleted (§531),
+  the heightmaps documented and owed attribution (§530.6), the fonts corrected
+  — **and 7.4 MB in one cohort, awaiting ten minutes with a browser.**
+  ⚠ Corrections banked: the "~8 MB of stills" figure **understates by 42%**
+  (true 11,347,088 B); and `marketing/website/public/bg.mp4` (76,303,695 B) is
+  **untracked, in no deploy config, and not shipping** — larger than anything
+  in `public/`, and it inherits every obligation here the day a deploy picks
+  it up.
+- **§535.6 COPYRIGHTABILITY, AND WHY IT DOES NOT BITE.** Sourced to the US
+  Copyright Office's *Part 2: Copyrightability* (January 2025, fetched and
+  text-extracted): purely AI-generated frames are unlikely to attract
+  copyright the estate can assert. **It does not matter here — no AI asset
+  carries the brand.** The mark, the OG card and the 80 landing plates are all
+  estate-authored. That is the right answer to a question that could easily
+  have become a distraction.
+- **§535.7 TWO MORE INSTRUMENTS, AND A DISCIPLINE NOTE.** **`public/evolution/`
+  and `public/videos/` do not exist on disk in the main checkout** — a
+  disk-based inventory silently under-counts by **21.5 MB**, so reading blobs
+  from the object store was mandatory (the §517.7 hazard, second specimen and
+  a costlier one). And **a `curl` without `--compressed` returns gzip bytes
+  that scan as a clean zero for every marker** until refetched. The lane also
+  reported **two documents it could not read** (BytePlus's JS-rendered
+  Service Specific Terms; Higgsfield's pricing page) **as unread, with the
+  failed positive control shown, rather than as findings** — which is the
+  standard the chair has been asking for all night, met without being asked.
