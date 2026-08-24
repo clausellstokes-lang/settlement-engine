@@ -28885,6 +28885,177 @@
           "validate"
         ]
       ]
+    },
+    {
+      "id": "MF-CH4",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/catalog-hygiene/MF-CH4.md",
+      "verifiedBase": "479992b6e02926f1d375a82ca6f47183b9693667",
+      "changeManifest": [
+        {
+          "_note": "THE DEFECT AND THE CURE. A first-match-wins regex sweep classified quarters without ever being shown the generator's own fourteen authored names, and the unanchored `den` alternate is a SUBSTRING test that matched the Common Residential quarter's own description \"Dense timber tenements\" — so over a 504-settlement corpus the criminal quarter and the common residential quarter were EXACTLY SWAPPED on 168 of 168 cities and metropolises, with three further misfires (Noxious Trades and Wealthy Residential read merchant; Mages' Quarter read craft on 45 of 148). Adds `QUARTER_CATEGORY`, a DECLARED registry read as `declared ?? inferred` so the regex remains the fallback for authored, imported and legacy quarters and no saved settlement loses its classification. Anchors `den` to `\\bdens?\\b`. Reshapes `CATEGORY_TO_ARCHETYPE` from a single archetype into canonical PREFERENCE LISTS, because two of the shipped single values named archetypes the engine NEVER PRODUCES (over 3,038 faction instances the canonical vocabulary yields no `craft` and no `civic`), which would have deleted the dominant-faction row from 332 cards against 45 gained. Moves matching onto the canonical archetype — factionProfile folds NOBLE and CIVIC into `government`, so a noble quarter could never see its own house — and reports the archetype it MATCHED ON, because explanation.js prints it verbatim and was labelling a noble house \"(government)\".",
+          "action": "MODIFY",
+          "path": "src/domain/districtProfile.js"
+        },
+        {
+          "_note": "THE PIN. Sixteen titles and three suites appended to an EXISTING CREDITED file, so no new-test-file ratchet is incurred (a new test file reds three). Includes a REGISTRY WALKER that parses the generator's own `quarters.push({ name: ... })` literals and pins the registry BOTH ways — a new quarter with no row, or a row naming no quarter, reds — plus an interpolation pin, because a template-literal name would go silently invisible to the walker. Eleven deliberate mutations red it; TWO WERE VACUOUS ON FIRST RUN AND WERE REBUILT (the `den` pin used a DECLARED name, so the registry short-circuited the regex it meant to test; the routing pin asserted only non-null, which both routes satisfy).",
+          "action": "MODIFY",
+          "path": "tests/domain/districtProfile.test.js"
+        },
+        {
+          "_note": "THE LIGHTING CENSUS, re-recorded with its cause: +0 files / +0 parked / +0 credited / +16 TITLES / +3 SUITE TITLES, 2,525/366/2,159/21,033/5,849 -> 2,525/366/2,159/21,049/5,852. RE-WALKED AT THE REBASED TREE, not carried: the pre-rebase reading of this same delta was 21,042/5,851 and is stamped nowhere. Attribution is a SINGLE-FILE control re-run at this base — the slot's tests/domain/districtProfile.test.js (6,772 bytes, md5 f03be4a479b72e931ed8385dbd8c3966) restored returns the census to the slot tuple to the digit, and the car's copy restored md5-identical returns the new one. Two negative controls, one per moved figure, each md5-guarded against a no-op edit. The rebase conflict on this file was resolved on RECORDS — CH-7's ledger block kept verbatim, this car's appended — and to a syntactically VALID file first, because conflict markers would have made the walker PARSE-park its own census file.",
+          "action": "MODIFY",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        },
+        {
+          "_note": "ADDRESS ROT, NOT A NEW SITE. `KNOWN_UNCONVERTED` is keyed by `path:line` deliberately, so a moved pattern re-presents itself for a decision. The arcane alternation in districtProfile.js moved 112 -> 122 and is BYTE-IDENTICAL at both addresses (compared blob to blob); the ten inserted lines all sit ABOVE the pattern table and none inside it (+1 the car's import, +9 the any-cast cure's typedefs, established by diffing slot:1-111 against tip:1-121). Re-pointed with a dated note, exactly as this file already records for 57 -> 58 and 333 -> 334. NOTHING WAS WEAKENED: no token list, predicate, exemption or ALLOWED entry was touched. The spelling is deliberately NOT converted — that is a separate measured car under R-BLD-5 — and the note now records why the site survives the car that touched its file.",
+          "action": "MODIFY",
+          "path": "tests/lint/arcaneClassifierCensus.walker.test.js"
+        },
+        {
+          "_note": "ONE PURE LINE MOVE. The single row districtProfile.js owns re-addresses 238 -> 373 with path, category and snippet BYTE-IDENTICAL; the census stays at 413 against a 413 ceiling and no ceiling was touched. Re-addressed rather than regenerated, per this test's own recorded precedents CR-FP-2 (\"88 pure line moves\") and HK-1. A negative control perturbing the row by one line returns the instrument to red. ⚠ The car's dense new COMMENT figures are NOT debt and could not be: the detector reads numerics that FLOW INTO A PROSE KEY, not integers in comments — measured, not argued.",
+          "action": "MODIFY",
+          "path": "tests/lint/.prose-numerics-baseline.json"
+        },
+        {
+          "_note": "The dated re-addressing note for the row above, written into the test's own ledger of line moves beside CR-FP-2 and HK-1, plus the measured statement that the car's comment figures are outside this census by construction. Comments carry no test title, so this file's census contribution is unchanged (it is PARKED, contributing 0 titles and 0 suites, so it cannot contribute even in principle).",
+          "action": "MODIFY",
+          "path": "tests/lint/proseNumerics.test.js"
+        },
+        {
+          "_note": "THE DECLARED SHIFT REACHING A FROZEN MEASUREMENT. A district's category decides its ring and its wall-embrace, which moves the centroid every building is placed around, so the drawn corpus moves: 380 of 504 rows change. ⛔ THE STACKING CHECK WAS RUN FIRST, BEFORE THE UPDATE FLAG WAS EVER SET, because a re-record over a stacked-geometry regression is the one thing this manifest must never absorb: `cartoDupExact` reads 0 at all six argmax tiers LIVE and totals 0 of 45,868 over the re-recorded corpus. The per-field signature proves the cause — only cartoBuildings (281), cartoRowBytes (299) and cartoDupTranslate (321) move, while institutions, districts, sceneBuildings, dark, outcome, reported and cartoInstitutionRefs move on NO row, so the generator did not move underneath the re-record and THE ONE LAW still holds. Re-measured AFTER the rebase onto MF-CH7 and drifted on 0 of 52 sampled rows, which is the evidence that the two cars are independent on this surface.",
+          "action": "MODIFY",
+          "path": "tests/fixtures/cartography-calibration-corpus.json"
+        },
+        {
+          "_note": "THE FIFTH RECORD ledger row this file's header requires (\"re-recording without adding a row is a deleted alarm\"), plus the two constants the re-record forced, each RE-DERIVED rather than loosened. FROZEN.maxBuildings village 47 -> 46 (LOWERED — the arm is exact in BOTH directions, and a ceiling with slack in it is a disabled ceiling), town 114 -> 116, city 196 -> 203. DUPLICATES.permille thorp 109 -> 124, village 72 -> 66, town 68 -> 65, city 50 -> 51, metropolis 48 -> 53, with the derived ceilings following 175/290/116/109/80/77 -> 199/290/106/104/82/85 — each `Math.ceil(permille x 1600/1000)` re-evaluated, and TWO OF THE SIX WENT DOWN, which a loosening cannot do. Checked and unmoved: maxInstitutions 11/24/41/62/55/63, the throw census 0 of 504, worst cartoRowBytes 450 so the derived byte band stays 720.",
+          "action": "MODIFY",
+          "path": "tests/domain/townCartographyCalibration.test.js"
+        },
+        {
+          "_note": "THE EDGE-BUNDLE BILL, TAKEN AT THE REBASED TIP. `src/domain/districtProfile.js` is among this bundle's 67 transitive inputs and is in NO other closure — the count is PER-FILE, not a constant. This is the only bundle whose CONTENT moves. Regenerated at the tip rather than merged, per the stacked-landing law: two cars that both re-record the same generated artifact make a THIRD value that neither car's own recording could contain.",
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiGroundingBundle.js"
+        },
+        {
+          "_note": "Its sidecar, a5aebd5a14b6d0bf -> da8645a94469428c. Committed in the SAME SET as the bundle it describes: a split leaves a meta describing content that is neither committed nor staged, which is the exact arm `edgeSharedBundleReproducibility` reds on.",
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiGroundingBundle.meta.json"
+        },
+        {
+          "_note": "sourceHash 295fd77cf76dc76b -> 9ae9af16d8bd128b with the bundle CONTENT byte-identical to the slot (checked, not assumed). A meta hashes its transitive INPUTS, and `npcProfile.js` — the file MF-CH7 changed — is in this closure; taking this car's side of the artifact during the rebase left the hash describing PRE-CH7 source. The regen at the tip corrects the provenance. This car does not otherwise reach this bundle.",
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiCharterBundle.meta.json"
+        },
+        {
+          "_note": "sourceHash f4d2986e7ffee6cf -> 3a19ea2f38727d41, same cause and same correction as aiCharterBundle above, with its bundle content likewise byte-identical to the slot.",
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiOutputSchemaBundle.meta.json"
+        },
+        {
+          "_note": "A `generatedAt`-only change: the builder rewrites all five sidecars every run. Declared and committed with the set so that no meta in the tree describes content that is neither committed nor staged.",
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/analyticsEventsBundle.meta.json"
+        },
+        {
+          "_note": "A `generatedAt`-only change, same cause as analyticsEventsBundle above.",
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/intentAtlasBundle.meta.json"
+        },
+        {
+          "_note": "This packet. An undeclared path is an unreserved path, so every file the car touches is named above.",
+          "action": "CREATE",
+          "path": "docs/implementation/packets/catalog-hygiene/MF-CH4.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "The declared registry itself. It is the whole cure: deleting or renaming it returns classification to the regex sweep that had the criminal and common residential quarters swapped. Exported so the walker in tests/domain/districtProfile.test.js can pin it against the generator's own name literals BOTH ways.",
+          "symbol": "QUARTER_CATEGORY",
+          "path": "src/domain/districtProfile.js"
+        },
+        {
+          "_note": "The canonical detector this car routes dominant-faction matching through, instead of factionProfile's folded vocabulary. Un-importing it re-folds NOBLE and CIVIC into `government` and a noble quarter can never see its own house again.",
+          "symbol": "factionArchetype",
+          "path": "src/domain/factionArchetypes.js"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "THE SWAP IS CURED: the Common Residential quarter no longer classifies `criminal` via the unanchored `den` substring, and the Shadows District classifies `criminal` rather than `merchant`. Pinned with an UNDECLARED quarter name carrying the same description, because a declared name short-circuits the very regex under test — the vacuity that killed the first version of this pin."
+        },
+        {
+          "id": "A2",
+          "case": "THE REGISTRY IS TOTAL BOTH WAYS: a walker parses the generator's own `quarters.push({ name: ... })` literals; a generated quarter with no registry row, or a registry row naming no generated quarter, reds. An interpolation pin reds a template-literal name, which would otherwise go invisible to the parser."
+        },
+        {
+          "id": "A3",
+          "case": "READ ORDER IS `declared ?? inferred`: an authored or imported quarter whose name is not in the registry still classifies through the regex sweep, so no saved settlement loses its classification."
+        },
+        {
+          "id": "A4",
+          "case": "CANONICAL ROUTING SELECTS AND REPORTS THE SAME ARCHETYPE: a noble-ruled settlement's Government Quarter resolves to the house rather than the council, and the reported archetype is the one matched on. Pinned against a deliberately HIGHER-POWER council, so the folded path and the canonical path return different factions."
+        },
+        {
+          "id": "A5",
+          "case": "NO INSTRUMENT WAS WIDENED: the domain any-cast count returns to its baseline figure exactly, the reader-with-no-writer inventory returns to its frozen reads and identities, the prose-numerics census stays at 413 against a 413 ceiling, and both typecheck ratchets sit unmoved at their ceilings."
+        },
+        {
+          "id": "A6",
+          "case": "THE CARTOGRAPHY RE-RECORD IS A DECLARED SHIFT AND NOT A GEOMETRY DEFECT: `cartoDupExact` is 0 at every tier live and 0 over the whole corpus, and the only fields that move are the drawn-geometry ones."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/districtProfile.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/townCartographyCalibration.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/arcaneClassifierCensus.walker.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/domainAnyCastBaseline.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/proseNumerics.test.js"
+        ]
+      ]
     }
   ]
 }
