@@ -25341,3 +25341,37 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   (`read_page`/`get_page_text`) keep working. Competitor captures banked:
   Watabou's signature register (two shots) and FTG's hero render + full feature
   text. The chair's aesthetic verdict lands with the render-pipeline inventory.
+
+## §569 · THE VISUAL SURVEY CLOSES — THE SANDBOX ALREADY OUTDRAWS ONE COMPETITOR, AND A VALIDATED PAINT PASS IS MISSING FROM EVERY REACHABLE LOCATION (2026-08-24 ~10:55 CDT)
+
+- **§569.1 THE CHAIR LOOKED, NOT JUST READ.** Five exemplars rendered to PNG
+  (`qlmanage`) and examined at the chair's own eyes beside the competitor
+  captures: the MF-fabric w2 renders (`migration-parchment` — Kitaqiao, city ·
+  `metropolis-darkFantasy` — Warmgrund · `village-parchment`) and the shipped
+  renderer's `cnocby.parchment.v2on`/`.massing`. Copies of the look set in the
+  `31585ce2` scratchpad `look/`.
+- **§569.2 THE VERDICT, COMPRESSED** (full prose in the sitting's report to the
+  owner): the SHIPPED plate is below both competitors on map-aesthetics at
+  building scale — a tasteful diagram, not a town plan. The SANDBOX (MF fabric,
+  the generator of record awaiting cutover) is **already ahead of Fantasy Town
+  Generator outright** and trades blows with Watabou: it wins on information
+  design (cartouche facts, legend, dated marginalia, pentimento — a category
+  neither competitor has) and loses on ink discipline (busier, multi-tone,
+  survey-plate register vs Watabou's two-tone engraving elegance). The queued
+  waves — INK_SCALE frontage-ratio stroke ladder, §214 iconography, MF-A1
+  paint, countryside primitives — are precisely aimed at the gap, and the atlas
+  DISTANCE instruments exist to prove closure rather than assert it.
+- **§569.3 ⛔ THE FINDING THAT OUTRANKS THE VERDICT: MF-A1's CODE IS GONE FROM
+  EVERY REACHABLE LOCATION.** §211 records the paint pass as chair-verified
+  (grain, stains, vignette, tidemark rims, wash mis-registration, seeded line
+  waver — deterministic, +6–10 ops/leaf, in budget). Measured this sitting: the
+  `a244e7a3` scratchpad's `mf-proto/aesthetic/`, `src/`, `det-A/`, `det-B/`
+  dirs **exist but are EMPTY**; the modules are not in
+  `refs/preserve/map-sandbox-w3f-sealed`, not in shipped `src/`. **The §544
+  loss class, already realized.** Recovery routes, in order: the dead sessions'
+  `subagents/*.jsonl` transcripts (the §338.4 route of record), else rebuild
+  from §211's own acceptance figures. **Queued as a named recovery item; the
+  wave-nine MF-A1 integration is BLOCKED until it lands.** ⚠ Sibling fact from
+  the same inventory: the main tree's on-disk deletions of `src/domain/townMap`
+  and `src/pdf` are the owner's known dirty-control-tree state — committed
+  state intact; lanes source from `git show`, as the inventory correctly did.
