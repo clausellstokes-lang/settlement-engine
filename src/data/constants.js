@@ -40,6 +40,48 @@ export const getMagicLevel = (priority = 50) =>
   : priority <= 65  ? 'medium'
   : 'high';
 
+// ── THE MAGIC LICENCE LADDER (MF-CH2a) ───────────────────────────────────────
+// `getMagicLevel` reads a WORLD's magic dial and returns one of four tokens. A
+// catalog institution's `magicLicense` is the OTHER half of the same vocabulary:
+// the WEAKEST world this entry is licensed for. 'none' means the entry needs no
+// functioning magic at all — an alchemist's shop is a chemical trade, and a
+// charter hall is a hall. The two halves meet at `magicLicenceAtLeast`, so the
+// four tokens are spelled exactly once, here, and every gate imports them.
+//
+// The ladder is deliberately keyed on the SAME strings getMagicLevel emits and
+// is lower-case for that reason; a licence value that is not one of them is not
+// a weaker licence, it is an authoring error, and `normaliseMagicLicence`
+// returns null so a walker can see it.
+
+/** The four magic-level tokens, weakest first. Index IS the rank. */
+export const MAGIC_LICENCE_LEVELS = Object.freeze(['none', 'low', 'medium', 'high']);
+
+/**
+ * Normalise an authored licence to one of MAGIC_LICENCE_LEVELS.
+ * @param {unknown} value
+ * @returns {string|null} the token, or null when the value is absent/unknown
+ */
+export const normaliseMagicLicence = (value) => {
+  if (typeof value !== 'string') return null;
+  const token = value.trim().toLowerCase();
+  return MAGIC_LICENCE_LEVELS.includes(token) ? token : null;
+};
+
+/**
+ * Does `licence` sit at or above `floor` on the ladder? An absent or unknown
+ * licence answers false — the caller decides what to do with "I do not know",
+ * and no gate may read silence as permission.
+ * @param {unknown} licence
+ * @param {unknown} floor
+ * @returns {boolean}
+ */
+export const magicLicenceAtLeast = (licence, floor) => {
+  const a = normaliseMagicLicence(licence);
+  const b = normaliseMagicLicence(floor);
+  if (a === null || b === null) return false;
+  return MAGIC_LICENCE_LEVELS.indexOf(a) >= MAGIC_LICENCE_LEVELS.indexOf(b);
+};
+
 // Canonical prosperity tiers — the vocabulary economicGenerator emits. ('Subsistence'
 // is an internal base label remapped to Struggling/Poor before emission; it is kept
 // here for tolerance toward legacy or hand-written saves.) Consumers

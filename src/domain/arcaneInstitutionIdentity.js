@@ -21,6 +21,7 @@
  */
 
 import { institutionalCatalog } from '../data/institutionalCatalog.js';
+import { magicLicenceAtLeast, normaliseMagicLicence } from '../data/constants.js';
 // The VOCABULARY leaf, not magicFilter.js itself. Same two lists (magicFilter
 // re-exports them), but magicFilter is routed to the LAZY generation bundle while this
 // adapter sits in EAGER engine-core — importing it from here pointed an eager chunk at a
@@ -59,11 +60,37 @@ const ARCANE_BY_CATALOG_NAME = new Map();
 /** @type {Set<string>} */
 const CONFLICTS = new Set();
 
+/**
+ * THE DECLARED MAGIC LICENCE, indexed the same way (MF-CH2a). A catalog row may
+ * declare `magicLicense` — the weakest world the entry is licensed for, in the
+ * four tokens `getMagicLevel` emits. Where a row declares one it is the whole
+ * answer to "does this need magic?"; where none is declared the tag/name rules
+ * below still decide, unchanged. That is `declared ?? inferred`, the same shape
+ * `facetOf` uses for facets, and it is why the tag stays authoritative for the
+ * 283 rows that carry no licence.
+ *
+ * Names repeat across tiers, so a name whose tiers declare DIFFERENT licences
+ * is an authoring defect; the index keeps the first reading and
+ * `conflictingMagicLicenceCatalogNames()` exposes any disagreement for a pin.
+ * @type {Map<string, string>}
+ */
+const MAGIC_LICENCE_BY_CATALOG_NAME = new Map();
+/** @type {Set<string>} */
+const LICENCE_CONFLICTS = new Set();
+
 for (const tiers of Object.values(institutionalCatalog || {})) {
   for (const insts of Object.values(tiers || {})) {
     for (const [name, def] of Object.entries(insts || {})) {
       const key = normName(name);
       if (!key) continue;
+      const licence = normaliseMagicLicence(def?.magicLicense);
+      if (licence !== null) {
+        if (MAGIC_LICENCE_BY_CATALOG_NAME.has(key)) {
+          if (MAGIC_LICENCE_BY_CATALOG_NAME.get(key) !== licence) LICENCE_CONFLICTS.add(key);
+        } else {
+          MAGIC_LICENCE_BY_CATALOG_NAME.set(key, licence);
+        }
+      }
       const arcane = tagsAreArcane(normTags(def?.tags)) || def?.magical === true;
       if (ARCANE_BY_CATALOG_NAME.has(key)) {
         if (ARCANE_BY_CATALOG_NAME.get(key) !== arcane) CONFLICTS.add(key);
@@ -88,6 +115,28 @@ export function institutionCatalogArcaneTag(name) {
   return ARCANE_BY_CATALOG_NAME.get(key)
     ? ARCANE_IDENTITY.ARCANE
     : ARCANE_IDENTITY.MUNDANE;
+}
+
+/**
+ * The DECLARED licence for a catalog institution NAME, or null when the catalog does not
+ * know the name or the row declares none. Pure; never throws.
+ * @param {unknown} name
+ * @returns {string|null} one of MAGIC_LICENCE_LEVELS, or null
+ */
+export function institutionCatalogMagicLicence(name) {
+  const key = normName(name);
+  if (!key) return null;
+  return MAGIC_LICENCE_BY_CATALOG_NAME.get(key) ?? null;
+}
+
+/** Catalog names whose tiers declare different licences — must stay empty. */
+export function conflictingMagicLicenceCatalogNames() {
+  return [...LICENCE_CONFLICTS];
+}
+
+/** Every catalog institution name that declares a licence — for the census walker. */
+export function licensedCatalogInstitutionNames() {
+  return [...MAGIC_LICENCE_BY_CATALOG_NAME.keys()];
 }
 
 /**
@@ -140,8 +189,24 @@ export function arcaneInstitutionNameFallback(name) {
 }
 
 /**
- * Is this INSTITUTION arcane? Catalog tag first; then any tag/metadata the caller's own
- * record carries; then the name fallback.
+ * Is this INSTITUTION arcane? DECLARED LICENCE first (MF-CH2a); then the catalog tag; then
+ * any tag/metadata the caller's own record carries; then the name fallback.
+ *
+ * ⚠️ THE LICENCE OUTRANKS THE TAG, AND ONLY HERE. R-BLD-5 ruled "the tag is the authored
+ * semantics, the bucket is a shelf". A declared `magicLicense` is a STRICTLY MORE PRECISE
+ * statement of the same authored semantics — four rungs instead of a boolean — so where an
+ * author declared one it answers the question and the tag does not. Measured over all 311
+ * rows, exactly FOUR say the two apart, and they move in BOTH directions:
+ *   `Alchemist shop` · `Alchemist quarter` · `Warden's Lodge` — tagged `arcane`, licensed
+ *     `none`, so now MUNDANE: a chemical trade and a forest-law lodge are buildings a
+ *     magic-free world still builds (R-INST-5 families B and I);
+ *   `Healer (divine, 1st level)` — tags `divine`/`healing` are not on ARCANE_INST_TAGS so the
+ *     tag read MUNDANE, licensed `low`, so now ARCANE. This one closes an existing split: the
+ *     world law's own keyword list already carries 'healer (divine', so the two surfaces
+ *     disagreed about the same row before the licence arrived.
+ * `institutionCatalogArcaneTag` itself is DELIBERATELY left reading the tag alone —
+ * customContent.js classifies user-authored names through it, where the licence has no
+ * standing over a name a player typed.
  *
  * @param {string|{name?:string,label?:string,tags?:unknown,category?:unknown,magical?:boolean}|null|undefined} institution
  * @param {unknown} [category]  the catalog bucket, when the caller has it separately
@@ -150,6 +215,8 @@ export function arcaneInstitutionNameFallback(name) {
 export function isArcaneInstitution(institution, category) {
   const entity = typeof institution === 'string' ? { name: institution } : (institution || {});
   const name = entity.name || entity.label || '';
+  const licence = institutionCatalogMagicLicence(name);
+  if (licence !== null) return magicLicenceAtLeast(licence, 'low');
   const tag = institutionCatalogArcaneTag(name);
   if (tag !== ARCANE_IDENTITY.UNKNOWN) return tag === ARCANE_IDENTITY.ARCANE;
 
@@ -159,7 +226,7 @@ export function isArcaneInstitution(institution, category) {
   if (ownTags.length && tagsAreArcane(ownTags)) return true;
   if (entity.magical === true) return true;
   const bucket = String(category ?? entity.category ?? '').trim().toLowerCase();
-  if (bucket === 'magic') return true;
+  if (bucket === 'magic') return true; // @non-catalog-fallback MF-CH2
 
   return arcaneInstitutionNameFallback(name);
 }

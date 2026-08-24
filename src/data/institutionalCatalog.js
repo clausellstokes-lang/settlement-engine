@@ -305,6 +305,7 @@ export const institutionalCatalog = {
         baseChance: 0.2,
         desc: 'Occasional visits. 1st level spells only.',
         tags: ['arcane'],
+        magicLicense: 'low',
         priorityCategory: 'magic',
       },
       "Adventurers' charter hall": {
@@ -312,6 +313,7 @@ export const institutionalCatalog = {
         baseChance: 0.12,
         desc: "A rough hall operating under a regional adventurers' charter. Posts bounties, shelters monster hunters, and coordinates local defense when the garrison cannot. Common on dangerous frontiers.",
         tags: ['military', 'adventuring'],
+        magicLicense: 'none',
         priorityCategory: 'military',
       },
     },
@@ -807,6 +809,7 @@ export const institutionalCatalog = {
         exclusiveGroup: 'magicalAuthority',
         desc: 'Low-level resident caster. 1st-3rd level spells.',
         tags: ['arcane'],
+        magicLicense: 'low',
         priorityCategory: 'magic',
       },
       'Druid Circle': {
@@ -814,6 +817,7 @@ export const institutionalCatalog = {
         baseChance: 0.2,
         desc: 'A circle of druids tied to the land. They regulate the seasons, mediate disputes with wild creatures, and know which streams run clean. More common in forested or isolated settlements, but they adapt. Some circles tend city gardens or hidden urban groves.',
         tags: ['arcane', 'religious'],
+        magicLicense: 'low',
         priorityCategory: 'magic',
       },
       "Adventurers' charter hall": {
@@ -821,6 +825,7 @@ export const institutionalCatalog = {
         baseChance: 0.2,
         desc: 'A licensed charter hall providing bounties, monster-hunting coordination, and emergency armed response for the surrounding territory. More common in frontier regions.',
         tags: ['military', 'adventuring'],
+        magicLicense: 'none',
         priorityCategory: 'military',
       },
       'Healer (divine, 1st level)': {
@@ -828,6 +833,7 @@ export const institutionalCatalog = {
         baseChance: 0.4,
         desc: 'Basic healing spells. Cure Wounds (10 GP).',
         tags: ['divine', 'healing'],
+        magicLicense: 'low',
         priorityCategory: 'religion',
       },
     },
@@ -1344,6 +1350,7 @@ export const institutionalCatalog = {
         exclusiveGroup: 'magicalAuthority',
         desc: 'Individual wizard residence. 1,000+ population viable.',
         tags: ['arcane'],
+        magicLicense: 'medium',
         priorityCategory: 'magic',
       },
       'Elder Grove Council': {
@@ -1351,6 +1358,7 @@ export const institutionalCatalog = {
         baseChance: 0.15,
         desc: "A council of senior druids who govern their circle's relationship with the city. They may maintain a hidden grove beneath the streets, mediate between urban expansion and wild places, or serve as ecological advisors to the ruling authority. Found in cities that have made peace with nature magic.",
         tags: ['arcane', 'religious'],
+        magicLicense: 'low',
         priorityCategory: 'military',
       },
       'Alchemist shop': {
@@ -1359,6 +1367,7 @@ export const institutionalCatalog = {
         baseChance: 0.4,
         desc: 'Potions, alchemical items. Basic healing potions (50 GP).',
         tags: ['arcane', 'alchemy'],
+        magicLicense: 'none',
         priorityCategory: 'magic',
       },
       "Warden's Lodge": {
@@ -1366,6 +1375,7 @@ export const institutionalCatalog = {
         baseChance: 0.2,
         desc: 'A ranger station or druid waypost. They monitor the surrounding wilderness, maintain trails, and keep tabs on beast migrations. In times of crisis they serve as emergency scouts and trackers.',
         tags: ['arcane', 'military'],
+        magicLicense: 'none',
         priorityCategory: 'magic',
       },
       'Teleportation circle': {
@@ -1373,6 +1383,7 @@ export const institutionalCatalog = {
         baseChance: 0.08,
         desc: 'Rare permanent circle. Extremely expensive to construct and maintain. Requires magical expertise beyond typical town resources.',
         tags: ['arcane', 'exotic'],
+        magicLicense: 'high',
         priorityCategory: 'magic',
       },
     },
@@ -1886,6 +1897,7 @@ export const institutionalCatalog = {
         exclusiveGroup: 'magicalAuthority',
         desc: 'High-level spellcaster residence. Multiple towers possible.',
         tags: ['arcane'],
+        magicLicense: 'medium',
         priorityCategory: 'magic',
       },
       "Mages' guild": {
@@ -1894,6 +1906,7 @@ export const institutionalCatalog = {
         baseChance: 0.3,
         desc: 'Organization of magic users. 2,000-5,000 population for chapter.',
         tags: ['arcane', 'guild'],
+        magicLicense: 'medium',
         priorityCategory: 'magic',
       },
       'Alchemist quarter': {
@@ -1902,6 +1915,7 @@ export const institutionalCatalog = {
         baseChance: 0.5,
         desc: 'Multiple alchemical workshops. Guild organization.',
         tags: ['arcane', 'alchemy'],
+        magicLicense: 'none',
         priorityCategory: 'magic',
       },
       "Enchanter's shop": {
@@ -1910,6 +1924,7 @@ export const institutionalCatalog = {
         baseChance: 0.4,
         desc: 'Magic item creation. 5,000+ population typically.',
         tags: ['arcane', 'enchanting'],
+        magicLicense: 'high',
         priorityCategory: 'magic',
       },
       'Scroll scribe': {
@@ -1918,6 +1933,7 @@ export const institutionalCatalog = {
         baseChance: 0.5,
         desc: 'Spell scrolls for sale. 25 GP (cantrip) to 500+ GP (3rd level).',
         tags: ['arcane'],
+        magicLicense: 'medium',
         priorityCategory: 'magic',
       },
       'Teleportation circle': {
@@ -1926,6 +1942,7 @@ export const institutionalCatalog = {
         baseChance: 0.15,
         desc: 'Permanent teleportation circle. Access is controlled and expensive to maintain. Transformative infrastructure for any settlement lucky enough to have one.',
         tags: ['arcane', 'exotic'],
+        magicLicense: 'high',
         priorityCategory: 'magic',
       },
     },
@@ -2144,6 +2161,7 @@ export const institutionalCatalog = {
         baseChance: 0.3,
         desc: 'Goods from other planes of existence.',
         tags: ['planar', 'trade'],
+        magicLicense: 'high',
         priorityCategory: 'exotic',
       },
       'Dragon resident': {
@@ -2152,6 +2170,7 @@ export const institutionalCatalog = {
         baseChance: 0.1,
         desc: 'Ancient wyrm living in city.',
         tags: [],
+        magicLicense: 'none',
         priorityCategory: 'exotic',
       },
       'Golem workforce': {
@@ -2159,6 +2178,7 @@ export const institutionalCatalog = {
         baseChance: 0.2,
         desc: 'Constructed servants if magic permits.',
         tags: ['arcane'],
+        magicLicense: 'high',
         priorityCategory: 'exotic',
       },
       'Undead labor': {
@@ -2166,6 +2186,7 @@ export const institutionalCatalog = {
         baseChance: 0.1,
         desc: 'Animated corpses working. Controversial.',
         tags: ['arcane'],
+        magicLicense: 'high',
         priorityCategory: 'exotic',
       },
       'Dream parlors (high magic)': {
@@ -2174,6 +2195,7 @@ export const institutionalCatalog = {
         baseChance: 0.2,
         desc: '5th level Dream spell experiences. Lucid shared dreams, communication.',
         tags: ['arcane', 'exotic'],
+        magicLicense: 'high',
         priorityCategory: 'exotic',
       },
       'Airship docking (high magic)': {
@@ -2182,6 +2204,7 @@ export const institutionalCatalog = {
         baseChance: 0.1,
         desc: 'Mooring towers with magical weather protection. Eberron-style.',
         tags: ['arcane', 'exotic'],
+        magicLicense: 'high',
         priorityCategory: 'exotic',
       },
       'Message network (high magic)': {
@@ -2190,6 +2213,7 @@ export const institutionalCatalog = {
         baseChance: 0.3,
         desc: 'Sending Stones network or Speaking Stones. 250-10,000 GP per station.',
         tags: ['arcane', 'exotic'],
+        magicLicense: 'high',
         priorityCategory: 'exotic',
       },
     },
@@ -2335,6 +2359,7 @@ export const institutionalCatalog = {
         baseChance: 0.4,
         desc: 'Formal institution of arcane learning. Full curriculum, research facilities, visiting scholars.',
         tags: ['arcane', 'education'],
+        magicLicense: 'high',
         priorityCategory: 'exotic',
       },
       "Mages' district": {
@@ -2343,6 +2368,7 @@ export const institutionalCatalog = {
         baseChance: 0.45,
         desc: 'Quarter inhabited by arcane practitioners: towers, workshops, libraries, reagent merchants.',
         tags: ['arcane'],
+        magicLicense: 'high',
         priorityCategory: 'exotic',
       },
       'Great library': {
@@ -2351,6 +2377,7 @@ export const institutionalCatalog = {
         baseChance: 0.4,
         desc: 'Largest repository of knowledge in the region: thousands of volumes, map archives, historical records.',
         tags: ['education', 'education'],
+        magicLicense: 'none',
         priorityCategory: 'exotic',
       },
       'Planar embassy': {
@@ -2359,6 +2386,7 @@ export const institutionalCatalog = {
         baseChance: 0.15,
         desc: 'Formal diplomatic mission from a planar power. Trade, information, occasional intervention.',
         tags: ['arcane', 'planar', 'exotic'],
+        magicLicense: 'high',
         priorityCategory: 'exotic',
       },
     },
