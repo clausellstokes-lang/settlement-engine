@@ -23114,3 +23114,81 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   exact (`+1/+0/+1/+20/+5`). Battery at the tip: 47 files / 377 tests,
   `TRUE_EXIT=0`; eslint 0. Seats: STACK-3 · AIP-1 holding; the memory index is
   at 15,383 B and a fold is owed before the next entry.
+
+## §537 — ⭐⭐ THE THIRD STACK LANDED (**53 + 54**): **THE LICENCE VIOLATION IS OFF THE BRANCH** — 255 FILES AND 14.4 MB GONE, THE 104 CC0 CHARGES KEPT, THE PAYLOAD DOWN 8.18%; AND A LANE CORRECTED A SIBLING'S OVERCLAIM BY HASH (2026-08-24 02:20 CDT)
+
+- **§537.1 LANDED.** Tip `79b78881c` = 4 over `567030f1d`. Terminal green,
+  chair-read verbatim: `TRUE_EXIT=0` · `[gate-tail] exit: 0` ·
+  `free_kb_at_end=16310216` · **`valid: 175 packets (0 READY)`** ·
+  **`11 known failure(s) of 29029 tests, ceiling 11`** · 173/173 · 1134/1134 ·
+  `140 vendored libs match the supply-chain manifest` · `head = 199
+  contiguous` · `STRICT DIST OK 52/438`. **CAS `567030f1d → 79b78881c`.**
+  Chair-verified at the tip: **`public/` is 567 files / 162,057,173 B** (from
+  822 / 176,499,727), **`public/map/charges/` holds exactly 104**, and
+  `public/map/images/textures/` holds **2** — our own seeded tiles.
+  **−255 files, −14,442,554 B, −8.18% of the shipped payload and −58% of
+  `public/map/`.** The build ran over the smaller payload and STRICT DIST
+  passed with zero missing or extra rows — the shrink was measured, not
+  assumed.
+- **§537.2 ⭐ A LANE CORRECTED A SIBLING'S OVERCLAIM, BY HASH.** IP-1's commit
+  body says its exhaustive arm found **"231 violations"**. Measured at the
+  same bundle blob (`31372168ae`, identical at car 1's base and at the slot)
+  against the same kept 104 charges, the arm's own semantics give **225**;
+  widening to zero-weight names gives 233. **231 reproduces under no
+  reading** — and the same commit body's Monte-Carlo line already says "225
+  distinct names", so it was internally inconsistent. The landing corrects it
+  by hash rather than carrying a wrong figure into a LANDED row. That is the
+  §530.4 discipline (three false claims caught before they became landed
+  rows) exercised again, one car later, without being asked.
+- **§537.3 A NEW INVARIANT TEST FILE TRIPS A *THIRD* RATCHET, AND NO BUILD
+  LANE CAN SEE IT.** `mutationCoverageManifest.test.js`'s E-A TOTALITY arm
+  reds on a new invariant file — the member ran its own file and its siblings
+  green and saw nothing. Cured with a `rationale` entry (never `uncovered`;
+  `uncoveredBaseline` untouched at 198) on the manifest's own
+  executed-controls precedent, amended into the landing act. **Standing rule:
+  a new test file owes THREE censuses, and a new INVARIANT file owes the
+  mutation-coverage manifest as well.** Banked and indexed.
+- **§537.4 THE PROOFS WORTH KEEPING.** **Disjointness stronger than
+  predicted:** `comm -12` over the two path lists is **empty** — car 1 never
+  touches INDEX or the manifest at all (it carries no packet), 279 + 15 = 294
+  paths. **Carry** blob-level with a nonexistent-path control exiting 1 on
+  both sides: hop 1 gave 22 identical, **257 absent-on-both** (234 charges +
+  23 textures), and one deliberate mismatch — the census tuple, which
+  conflicted and was resolved to the slot side with a one-byte probe proving
+  the cmp live. **Census** `2520/366/2154/20941/5827 → 2523/366/2157/20982/5840`,
+  every figure from the arm's own message, split attributed **by execution**
+  through the walker's own readers at both tip and slot (car 1 `+1/+0/+1/+9/+4`,
+  car 2 `+2/+0/+2/+32/+9` — the brief's figure re-verified, not inherited),
+  six controls all landing on `titles`/`suiteTitles` and never on `files`,
+  and ⭐ **the sweep collected 2,523 files, equalling the walked figure
+  exactly.** **The emblem feature:** exhaustive 0 at the tip, and planting the
+  slot's own unpatched bundle back returns 225 and exits 1; Monte Carlo **0
+  absent of 38,628 draws** at the tip against **18,514 absent across 225
+  names** unpatched. **The race, run together:** `shippedAssetLicence` +
+  `vendorManifestExactSet` in ONE invocation, 11 passed, exit 0 — **with the
+  sibling's plant messages in the same log body, so the collision genuinely
+  occurred during the run** rather than being assumed away. **MP-1's dark
+  plan proved byte-identical by DIFFERENTIAL, not assertion:** an identical
+  probe at slot and tip over 108 rows (the golden corpus × 3 audiences), cmp
+  identical, **36 distinct digests so the probe reads real output**, and a
+  mutant that empties the leaf moves all 108. Honest limit stated: jsdom is
+  not a fine pointer, so the 54 "hovered" rows duplicate the plain ones and
+  add nothing.
+- **§537.5 THE PACKET COUNT IS 175, NOT THE 176 I PREDICTED — AND THE
+  JUDGMENT IS RATIFIED.** TE-IP-1 carries **no packet**: the manifest holds
+  zero TE-prefixed ids and its charter is an ODQ audit ruling (§526–§529,
+  §532) rather than a packet. The lane chose to land at 175 over **authoring a
+  ~470-line planning document after the work was done**, on the reasoning
+  that **minting later at LANDED is free (a terminal packet reserves no path)
+  while unwinding a fabricated one is not.** RATIFIED — a packet written
+  retrospectively to satisfy a count is a fiction, and this estate does not
+  keep those.
+- **§537.6 WHAT THE ESTATE LOOKS LIKE NOW.** **Fifty-four landings; the
+  non-commercial charges, the third-party textures and the stripping pipeline
+  are all off the branch or fixed; the notices page has its first art rows;
+  the property-line halo is landed (dark).** ⛔ And the terminal printed the
+  thing the owner most needs to see, in its own words: **`PENDING DEPLOY: prod
+  applied head=121 … is behind repo head=199. 78 migration(s) not yet in
+  prod`** — the gate calls it "the normal commit→deploy window", but it has
+  been open **since 2026-07-28**, and every fix above it, including tonight's
+  licence removal, is sitting behind it. Seats: AIP-1 holding; three free.

@@ -10,7 +10,7 @@ this one.**
 
 ## ⛔⛔⛔ PICKUP CARD — REWRITTEN AT EVERY LEDGER COMMIT (owner directive §448: the chair's 5-hour usage window closes often; a successor or the same chair picks up HERE in 60 seconds)
 
-**AS OF 2026-08-24 02:00 CDT · ledger §536 · ⭐⭐ DW-R RESEARCH COMPLETE · ⛔ EVERY DISPATCH `model: "opus"` (§484) · build `claude/composite-r4` = `567030f1d` (52 landings; FOUR cars through TWO gates tonight; the first STACK since #40 landed two cars in one gate; 0 READY across 170 packets; `undercityHighWaterEnabled` on the branch DARK; migrations 197/198/199 on the branch) · LANE CAP = TWO (§465)**
+**AS OF 2026-08-24 02:20 CDT · ledger §537 · ⭐⭐ DW-R RESEARCH COMPLETE · ⛔ EVERY DISPATCH `model: "opus"` (§484) · build `claude/composite-r4` = `79b78881c` (54 landings; THE LICENCE VIOLATION IS OFF THE BRANCH — payload −14.4 MB / −8.18%; FOUR cars through TWO gates tonight; the first STACK since #40 landed two cars in one gate; 0 READY across 170 packets; `undercityHighWaterEnabled` on the branch DARK; migrations 197/198/199 on the branch) · LANE CAP = TWO (§465)**
 
 FIRST ACTS ON PICKUP, IN ORDER:
 1. `git -C /Users/cstokes/Desktop/settlement-engine log -1 --oneline review-fixes-2026-07-08 claude/composite-r4` — if either moved past this card, the ODQ tail is newer than this card; read it.
