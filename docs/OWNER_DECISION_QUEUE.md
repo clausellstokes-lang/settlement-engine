@@ -21819,3 +21819,37 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   decode as UTF-8. **The chair re-scanned all four ledger documents with `-ac`
   and decoded them: 0 control bytes, all valid UTF-8 — today's record is
   intact.**
+
+## §518 — OWNER SIGNS THE SCHEMA CALL: **OWNERSHIP IS FACTION-SCOPED**; THE HOUSEHOLD REFUSAL STANDS; CG-1b DISPATCHED (2026-08-23 21:55 CDT)
+
+- **§518.1 SIGNED.** Owner: "yes, do that with factions." The `Estate.ownerRef`
+  resolves to a **FACTION** (or `ANONYMOUS_FABRIC`), never a household and
+  never a named individual. EST-4's explicit refusal of a household key
+  **STANDS** — this ruling keeps it intact rather than working around it, which
+  is why it was the recommendation. `ARCHETYPE_TO_DISTRICT` already maps a
+  noble faction to the `noble` district class, so the owner's loop ("the
+  neighbourhood gains nobles") expresses as faction presence and prominence
+  without minting a person the engine would then owe a life story
+  (product-scope law: world-only, never a named character's fate).
+  This discharges the last open question from the band sitting; it is a
+  SCHEMA/persistence decision (§3 owner-gated class) and is now owner-signed.
+- **§518.2 WHAT IT SETTLES DOWNSTREAM.** The `Estate` contract's `ownerRef`
+  type is fixed; the ownership ledger §517.1 named as newly-needed is
+  faction-keyed; the two-tier hover halo (§498.3) highlights **a faction's
+  holdings**, which is a better DM tool than a household's would have been
+  (hover a merchant house, see that faction's reach across the town); and the
+  displacement pool stays anonymous fabric, which is what the demography layer
+  already models. To be folded into the charter's §3 contracts and the ESTATE
+  wave's EST-4 by the next amendment pass, and into `SIGNED-BANDS-2026-08-23.md`
+  as its ninth owner row.
+- **§518.3 CG-1b DISPATCHED (Opus)** into the freed seat — the highest-value
+  unblock in the program: **287 of 504 settlements cannot draw a map today**
+  (town 84/84, village 83/84, hamlet 71/84). Its brief is deliberately SHORT
+  (§512/§516: my briefs were themselves a cost) — it cites the slot-facts card
+  instead of restating the shared facts, carries BAND 21 as signed so it ships
+  machinery AND value, derives all three numbers together from CG-1's landed
+  corpus with the `bindings <= buildings` invariant preserved BY CONSTRUCTION,
+  proves the throw rate 287 → 0 rather than proving numbers, and declares the
+  same-seed shift that raising the building cap causes. Seats: CH-2 · UC-5 ·
+  WEB-8 · CG-1b. **Their landing will be STACKED** per §516 — the first stack
+  since #40.
