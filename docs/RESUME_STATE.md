@@ -51,6 +51,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 23:16 CDT 08-24: §525 — CG-1b BUILT: 287/504 → 0/504, every settlement can draw a map.
+# Ratchet 11 RECONCILED = 7 swept + 4 in tests/copy (never swept). MEMORY went over 17KB → FOLD 14 (12,644 B).
+# STACK-2 (WEB-8 + CG-1b) dispatched.
 # ⭐⭐⭐ 22:45 CDT 08-23: §524 — EXPORT is PAID, included in the existing $2.99 single_dossier (verified in
 # code; map plate already in 2 of 4 variants). The line is now a TRICHOTOMY: view free / author paid / take-away paid.
 # ⭐⭐⭐ 22:42 CDT 08-23: §523 — the paywall LINE banked (authoring = writes persisted state others consume).

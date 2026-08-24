@@ -22230,3 +22230,72 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   becomes the plate's source, a stage that throws on 287 of 504 settlements
   would silently sell a mapless dossier. WEB-8b's arm and DW-6's acceptance
   both carry the pin. Recorded as **D-EXPORT-1**.
+
+## §525 — ⭐⭐ MF-CG1b BUILT: **287 OF 504 → 0 OF 504** — EVERY SETTLEMENT CAN DRAW A MAP; THE CONVERGENCE PROBE REFUSED TO CERTIFY, WHICH IS WHY THE HEADROOM EXISTS; **THE RATCHET'S ELEVEN IS RECONCILED AT LAST (7 SWEPT + 4 NEVER SWEPT)**; MEMORY WENT OVER ITS HARD LIMIT AND WAS FOLDED (2026-08-24 23:16 CDT)
+
+- **§525.1 THE BLOCKER IS GONE.** Tip `7af8c3d0` (pinned — on no branch, the
+  seventh such today). The three coupled caps stop being literals: one declared
+  `CARTOGRAPHY_HEADROOM_PERMILLE = 1600` (BAND 21, §515), one frozen measured
+  `CARTOGRAPHY_CALIBRATION`, and a pure `deriveCartographyCaps()` returning all
+  three. `MAXIMUM_INSTITUTION_BINDINGS` `{8,12,20,32,64,96}` → `{18,39,66,100,88,101}`;
+  `MAXIMUM_CARTOGRAPHY_BUILDINGS` `{12,24,48,96,176,240}` → `{26,55,98,164,208,261}`;
+  `TC4_ROW_BYTES_BAND` 400 → 709. **Lit throw rate 287 of 504 → 0 of 504.**
+  `bindings <= buildings` now holds **by arithmetic**, and
+  `townCartographyBuildings.test.js` — including the invariant arm the earlier
+  proposed numbers violated — is green **UNEDITED**.
+- **§525.2 ⭐ THE PROBE REFUSED TO CERTIFY, AND THAT IS THE POINT.** The
+  headroom was DERIVED, not chosen: the criterion is the largest factor by
+  which a demonstrably smaller version of this corpus under-measures its own
+  maximum — **1.6000 at hamlet** (one seed's slice reads 15 where the corpus
+  reads 24). And the convergence probe, which could have said "converged",
+  **did not**: the twelve-seed growth curve was **still rising at the eleventh
+  seed** (metropolis 59 → 63), the jackknife costs up to **8.33%** of a tier's
+  maximum, and three tiers reach their maximum on exactly one seed. **The
+  corpus maximum is a reading, not a ceiling** — the §509.2 lesson, now
+  measured a second way and made structural.
+- **§525.3 THE DECLARED SHIFT, PRICED HONESTLY.** 287 rows go from no map to a
+  map; 101 are byte-identical; **116 draw denser and every one is city or
+  metropolis** (mean +25.1 / +17.1 rows); **0 lost a map**. Every small- and
+  middle-tier row that already drew is unchanged — *a truncation cap that never
+  bit cannot change what it never truncated.* **A hamlet goes 13 of 84 → 84 of
+  84 drawing, mean 14.6 → 23.0 rows.** ⭐ **No golden moved** (`cd8d125ef8` /
+  `29c6cc8f…`, dormancy `ec65a235…`). Ten mutants each convict exactly their
+  own arm; census `+0/+0/+0/+9/+2`, `parked` and `credited` both unmoved.
+- **§525.4 A FOURTH CONTROL THAT COULD NOT FAIL, CAUGHT BY THE LANE ITSELF.**
+  Its first version of the anti-regression arm was
+  `expect(table).toEqual(derived)` — which **cannot distinguish a derivation
+  from a literal that happens to agree today**, i.e. it could not fail on the
+  only regression the member exists to prevent. Replaced with a source scan
+  and proved by mutant M1. That is four today (§503.2's blind digest, §517.5's
+  delta arm, §520.3's list counted against itself, and this) — **the standing
+  brief now requires every control to state what makes it capable of
+  failing.**
+- **§525.5 ⭐⭐ THE RATCHET'S ELEVEN IS RECONCILED — a number quoted in every
+  terminal today and never once explained.** CG-1b ran **all 2,517 test files
+  (29,371 tests)** rather than the ten-tree list and found twelve failures: the
+  seven banked, its own declared census row, and **FOUR pre-existing in
+  `tests/copy/voiceMechanics.test.js` — a tree NO grep arm or sweep has ever
+  covered** (MF-CG1's sweep saw 1,883 of 2,517 files). All four attributed by
+  execution: with `src/**` restored byte-identical to the slot the same four
+  titles fail, and the sorted-set diff is empty. **7 + 4 = 11 = the
+  `test-ratchet`'s standing `11 known failure(s)`.** The slot-facts card's
+  "banked = SEVEN" is therefore SEVEN-WITHIN-THE-SWEPT-TREES, and TE-STACK-2
+  is ordered to sweep ALL files and either confirm or correct the arithmetic
+  before it goes on the card.
+- **§525.6 MEMORY WENT OVER ITS HARD LIMIT.** `MEMORY.md` reached **17,684 B**
+  against the ~17KB ceiling at which the TAIL GOES INVISIBLE FIRST — 16,685 B
+  when the lane opened, so concurrent writers pushed it over. **The lane
+  correctly refused to fold it** (restructuring a shared index while another
+  lane writes is the collision its own header warns about) and reported
+  instead. The chair folded: **FOLD 14**, the hazards tail to
+  `archive-2026-08-24-index-fold-14.md`, index **17,684 → 12,644 B**, every
+  link checked, a pre-fold snapshot preserved.
+- **§525.7 STATE.** **TE-STACK-2 dispatched** — WEB-8 + CG-1b through one gate,
+  the second stack of the night, with the all-files sweep and the banked-set
+  reconciliation as standing orders. Seats: STACK-1 · STACK-2 · MP-1 · AD
+  compile — full. Holdings: CH-2 (full car), CH-2A and UC-5 (in STACK-1), WEB-8
+  and CG-1b (in STACK-2). **CG-1b's confirmatory gate at its own tip was
+  QUEUED, not skipped and not failed** — a sibling held the mutex 17+ minutes
+  with waiters behind; every non-doc committed blob is byte-identical to what
+  the full sweep ran on, and the four possible readers of the one post-sweep
+  doc change were re-run at the final bytes. The stack's terminal supersedes it.
