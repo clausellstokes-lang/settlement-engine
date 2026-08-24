@@ -23714,3 +23714,116 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   R-INST tranches plus DWR1A, 2.2 MB, were not walked in full** — the largest
   untested body under the charter, which the charter''s own amendment record also
   did not re-derive.
+
+## §544 · A CHARTER RESCUED FROM /tmp, THE 13% WAS 26.42%, AND I REVISED MY OWN §538.5 RULING (2026-08-24 04:13 CDT)
+
+- **§544.1 ⛔⛔ THE AD CHARTER EXISTED IN NO GIT OBJECT — RESCUED.** DW-0's
+  repair raised C-21 and it was real: **`draft-AD-CHARTER.md` was reachable from
+  no branch and no preserve pin.** It existed ONLY at the **dead** 6298872d
+  session's scratchpad under `/private/tmp`, which is reaped without warning.
+  The AD program — property lines, estates, the §494 hover halo — would have
+  lost its 122,346-byte contract **with no signal at all**. Now at
+  **`refs/preserve/ad-charter-2026-08-24` = `f23e7978e`**, proved byte-identical
+  with `cmp`. ⚠ **THE GENERAL LAW: a compile lane's output lives in a scratchpad
+  until someone pins it. Pin at the moment of delivery, not at the landing** —
+  the DW-0 charter itself sat unpinned for ~40 minutes tonight for the same
+  reason. Repaired charter now at `refs/preserve/holding-dw0-repaired`
+  (`96e021b0b`).
+- **§544.2 DW-0 CLOSED 14 OF 14 BLOCKERS, 0 DISPUTED — AND FOUND THE PANEL
+  UNDERSTATED TWICE.** B10's cited path was wrong (the artifact is
+  `src/domain/compendium/generated/compendiumData.generated.js`, not
+  `src/data/`) — **the panel carried a phantom home of its own**, the third
+  tonight. B11 is **20 collisions, not 15**: 15 cell×storage including a
+  `muniment` the panel missed, plus 5 cell×circulation, with the docket's
+  `porch` misfiled. ⭐ And it caught **a phantom AND a miss in its own ESTATE
+  lit-file fence** — one named file does not reference the flag, one that does
+  was omitted, **and the count 8 survived by coincidence.** It also softened a
+  "ninth file is a STOP" rule it had wrongly hardened from what the draft called
+  a plausible reading — a rule that would have fired on a lawful landing.
+- **§544.3 TWO DW RULINGS ISSUED.** **R1 APPROVED — estate membership rides an
+  ANCHOR, not `owns`.** §519's relation rule stands verbatim; the anchor is the
+  mechanism that makes §498's "institution **or individual**" buildable without
+  widening who may own. Decisive: **the literal reading makes all three of the
+  owner's own §498.2 worked examples unbuildable and caps estates at four per
+  settlement** — a reading that makes the author's own examples impossible is
+  the wrong reading of the author's intent. `ownerRef`'s persisted TYPE stays
+  owner-gated (O2). **RENAME APPROVED AND MANDATORY — VERIFIED BY ME:**
+  `ownerRef` occurs in **17 src and 11 test files** at the slot and already means
+  *the paying account that owns a saved record*
+  (`ownerRef: { accountId }`, `canonEventApply.js:171`). A DW field of that name
+  would collide world-fiction with **billing** inside one record.
+- **§544.4 ⭐⭐ CG-2: THE 13% WAS WRONG, AND LOW. THE REAL FIGURE IS 26.42%.**
+  Over **504 settlements / 53,420 buildings** through the real pipeline:
+  **exact (vertex-for-vertex) 26.42%**, translate 63.30%, congruent 75.44%,
+  area-within-1% 95.08%. **Concentrated at the SMALL tiers** (55.63 / 66.67 /
+  66.64 / 49.05 / 19.74 / 9.61 thorp→metropolis) — *the opposite* of the
+  "a hamlet is legitimately less varied" prior I put in the brief. ⛔ **No
+  derivation of the 13% exists anywhere in the repo** and it could not be
+  reproduced under any reading. **Inherited figures are hypotheses; this one was
+  wrong by a factor of two.**
+- **§544.5 THE MECHANISM, AND IT WAS NOT COSMETIC.** `packFootprint` took a
+  **mod-4 slot** (a wrap) and the layer kept **two counters** over one parcel.
+  A footprint being a pure function of (parcel, slot, shrink), both leaks drew
+  buildings at **identical coordinates**: **5,932 of 5,932** duplicate groups lay
+  inside a single parcel, **zero** spanned two; 4,518 parcels held more than the
+  four cells the theorem affords, worst **29**; and the group census —
+  **1,772 flagship-only + 4,160 flagship+other + 0 other-only** — maps **1:1**
+  onto the two defects. ⛔ **Downstream this is a visible rendering bug:
+  `cartographyProperty.js` subtracts footprints under EVEN-ODD fill, so two
+  identical holes CANCEL and the yard renders solid** — i.e. it was corrupting
+  MP-1's property halo. **All three mechanisms I proposed in the brief were
+  disproved** (no exhausted catalogue, no reused rng stream, quantisation not
+  causal).
+- **§544.6 THE CURE AND ITS CONTROL.** Recursive medial cell address (bounded,
+  null rather than wrap), one ledger, and a tier-banded dressed form —
+  **exact 26.42% → 0.00%, translate 63.30% → 5.93%**, CG-1b unregressed (throw
+  census still 0/504) and **the ONE LAW holds: `cartoInstitutionRefs` identical
+  on 504/504.** The pin's ceilings are **derived** as reading ×
+  `CARTOGRAPHY_HEADROOM_PERMILLE`, reusing the owner-signed operator rather than
+  a number picked to pass, plus a LIVE argmax arm because frozen arms cannot red
+  on a source change. Mutation reds **exactly one arm, 55 of 56 passing**. ⭐ **It
+  also corrected itself:** it predicted the mechanism control would red; it did
+  not, because the dressed form is a second *probabilistic* barrier — packet
+  rewritten to say so. Holding `refs/preserve/holding-cg2` = **`44b83a882`**;
+  packet MF-CG2 minted, surface now **176**.
+- **§544.7 ⭐⭐ I REVISED MY OWN §538.5 RULING ON CH-3.** I approved deleting
+  `exclusiveGroup: religiousCenter` and accepted the 81/420 re-roll as its
+  price. CH-3 then showed what that price buys: `buildObservedCorpus` runs the
+  pipeline and world pulse **live**, so the re-roll reaches **a third frozen
+  baseline the charter and the panel both missed** (`Wizard News introductions
+  drifted: expected 272, got 270`, thrown in `beforeAll`, skipping all 16 tests —
+  which is why it presents as the SCOPE SENTINEL plus *skipped grew 17 > ceiling
+  1*). Paying it would have required rewriting **`activeRules` 15→14, a headline
+  rewrite rule losing its last occurrence — authored prose in a protected
+  substrate with NO `UPDATE_*` path by design.** **RULING REVISED: take the
+  rng-preserving variant** (81 → ~34 rosters). *Why:* the intent is that a
+  cathedral city may also hold friaries and a nunnery; **the whole-roster
+  reshuffle is an artifact of WHERE the check sits — the early return precedes
+  the draw — not part of the intent. I ruled on a side effect as though it were
+  the substance.** Under THE PROMISE a smaller declared shift is strictly better,
+  and the absence of an `UPDATE_*` path is the substrate saying it is not meant
+  to be moved by a catalog repair.
+- **§544.8 CH-3 REFUTED THE EASY EXCUSE, AND HELD THE LINE I ASKED FOR.** It
+  proved by differential that its red is **its own** — both suites are
+  `2 passed / 16 passed / EXIT 0` at the slot base and red at its tip — rather
+  than reaching for the environment red STACK-4 had just documented. And when my
+  target digest `6127eae7…` failed to reproduce, **it stopped instead of
+  re-recording**, then proved the figure at `00e7af612` where I had measured it
+  (81/113/0, exact). **My figure was sound; its base was stale, because MF-CH1
+  and MF-CH2A landed after the charter was written** — the same decay class as
+  §543's orphan ref. Four further calls ruled: `Priest (resident)` gets its own
+  car · the ≤3-file ceiling is WAIVED with reason · `Smuggling network` and
+  `Dragon resident` both refused as data moves.
+- **§544.9 ⚠⚠ A NEW INSTRUMENT THAT LIES — SHARED TMPDIR PATHS COLLIDE ACROSS
+  LANES.** `gate-tail.sh` writes to `${TMPDIR}/gate-tail.$$.log` and **every lane
+  shares one TMPDIR**, so "take the newest log" silently hands you **another
+  lane's gate output** — it happened to CG-2 twice. `test-ratchet-last-red.json`
+  is the same trap and had already been overwritten by a sibling. **Identify both
+  by grepping for your own worktree path, never by mtime**; use the per-run
+  `test-ratchet-<id>/results.json`. (My own reads were PID-addressed and were
+  therefore safe, but only by luck of habit.) Sixteenth on the standing list.
+- **§544.10 A PRE-EXISTING RED THAT NEEDS A HOME.**
+  `check-observed-shape-readers.mjs` is **red at the slot base, unedited,
+  byte-identical message**, proved by CG-2 in a throwaway base worktree after the
+  dependency rebuild. Not any car's. **Unowned and now recorded rather than
+  re-found.**
