@@ -1,7 +1,7 @@
 {
   "base": {
-    "renderFolio": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/w3f-tree/harness/renderFolio.mjs",
-    "rendererLines": 1950,
+    "renderFolio": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/laneREG1-tree/harness/renderFolio.mjs",
+    "rendererLines": 2001,
     "opClasses": 31,
     "tableRows": 31,
     "emittedGroups": [
@@ -203,7 +203,7 @@
       {
         "id": "11a",
         "title": "⭐⭐⭐ GAP-D / T-07 / T-08 · THE TWO-TIER STROKE AND THE PLOT SERIES.",
-        "line": 1147,
+        "line": 1174,
         "tableName": "THE TWO-TIER STROKE + PLOT SERIES",
         "trace": [
           "corpus"
@@ -214,7 +214,7 @@
       {
         "id": "11b",
         "title": "⭐⭐ §16.5 THE COUNTRYSIDE'S OWN DWELLINGS and §5.0e THE FAUBOURG.",
-        "line": 1190,
+        "line": 1241,
         "tableName": "COUNTRYSIDE DWELLINGS + THE FAUBOURG",
         "trace": [
           "ftg",
@@ -226,7 +226,7 @@
       {
         "id": "11c",
         "title": "⭐⭐⭐ THE ACCESSIBLE LENS'S REAL HATCH GEOMETRY (TC29's §0.0 resolution: \"an",
-        "line": 1207,
+        "line": 1258,
         "tableName": "THE ACCESSIBLE LENS'S HATCH GEOMETRY",
         "trace": [
           "corpus"
@@ -237,7 +237,7 @@
       {
         "id": "12",
         "title": "ROOF-RIDGE TICKS — the interior detail line that turns a filled quad into a",
-        "line": 1272,
+        "line": 1323,
         "tableName": "ROOF-RIDGE TICKS",
         "trace": [
           "corpus"
@@ -248,7 +248,7 @@
       {
         "id": "13",
         "title": "LANDMARKS — §6 archetypes at HEAVIER ink with interior detail lines (ridge",
-        "line": 1335,
+        "line": 1386,
         "tableName": "LANDMARKS — §6 archetypes",
         "trace": [
           "watabou",
@@ -261,7 +261,7 @@
       {
         "id": "13b",
         "title": "§161b THE VISIBLE WORK — the strain the §5.-1c solver recorded, drawn at",
-        "line": 1393,
+        "line": 1444,
         "tableName": "THE VISIBLE WORK (§161b)",
         "trace": [
           "corpus"
@@ -272,7 +272,7 @@
       {
         "id": "14",
         "title": "TERRACES — §161b's visible work, drawn INSIDE the town on the ground that",
-        "line": 1403,
+        "line": 1454,
         "tableName": "TERRACES inside the town",
         "trace": [
           "corpus"
@@ -283,7 +283,7 @@
       {
         "id": "14b",
         "title": "⭐⭐ THE BRIDGES (§2.3, chair directive §195.1). A street that crosses the water",
-        "line": 1411,
+        "line": 1462,
         "tableName": "THE BRIDGES",
         "trace": [
           "watabou",
@@ -296,7 +296,7 @@
       {
         "id": "15",
         "title": "WALLS — the heaviest ink on the page, tower dots, gate BREAKS and piers.",
-        "line": 1440,
+        "line": 1491,
         "tableName": "WALLS — towers, gate breaks, piers",
         "trace": [
           "watabou",
@@ -308,7 +308,7 @@
       {
         "id": "15a",
         "title": "§250.5 · THE FOSSILS OF A SUPERSEDED CIRCUIT. Drawn AFTER the standing wall",
-        "line": 1630,
+        "line": 1681,
         "tableName": "THE FOSSILS OF A SUPERSEDED CIRCUIT",
         "trace": [
           "corpus"
@@ -319,7 +319,7 @@
       {
         "id": "15b",
         "title": "⭐⭐ §10 THE STATE EXPRESSIONS, in CALM INK. Drawn after the wall because a barred",
-        "line": 1664,
+        "line": 1715,
         "tableName": "THE STATE EXPRESSIONS (§10)",
         "trace": [
           "DRIFT"
@@ -330,7 +330,7 @@
       {
         "id": "15c",
         "title": "⭐⭐ §18.1 THE SANCTUARY / LIBERTY BOUND. A light dashed line round the precinct's",
-        "line": 1715,
+        "line": 1766,
         "tableName": "THE SANCTUARY / LIBERTY BOUND (§18.1)",
         "trace": [
           "corpus"
@@ -341,7 +341,7 @@
       {
         "id": "16",
         "title": "WARD LABELS ARE NO LONGER DRAWN HERE (§173, MF-B6). Every letter on this leaf now",
-        "line": 1751,
+        "line": 1802,
         "tableName": "WARD LABELS (now spliced at §173)",
         "trace": [
           "ftg",
@@ -353,7 +353,7 @@
       {
         "id": "17",
         "title": "THE FOLIO CHROME — cartouche + compass.",
-        "line": 1759,
+        "line": 1810,
         "tableName": "THE FOLIO CHROME — cartouche + compass",
         "trace": [
           "corpus"
@@ -364,7 +364,7 @@
       {
         "id": "18",
         "title": "⭐⭐ THE IN-WORLD LEGEND (§12.7, and the chair's §195.2 disposal).",
-        "line": 1851,
+        "line": 1902,
         "tableName": "THE IN-WORLD LEGEND (§12.7)",
         "trace": [
           "corpus"
@@ -375,7 +375,7 @@
       {
         "id": "19",
         "title": "⭐⭐⭐ §173 THE LETTERING SPLICE — a SEPARATE STAGE OVER THE FINISHED DRAW LIST.",
-        "line": 1916,
+        "line": 1967,
         "tableName": "THE LETTERING SPLICE (§173)",
         "trace": [
           "corpus",
@@ -389,7 +389,7 @@
   },
   "planted": {
     "renderFolio": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg-instruments/out/.renderFolio-PLANTED.mjs",
-    "rendererLines": 1952,
+    "rendererLines": 2003,
     "opClasses": 32,
     "tableRows": 31,
     "emittedGroups": [
@@ -597,7 +597,7 @@
       {
         "id": "11a",
         "title": "⭐⭐⭐ GAP-D / T-07 / T-08 · THE TWO-TIER STROKE AND THE PLOT SERIES.",
-        "line": 1147,
+        "line": 1174,
         "tableName": "THE TWO-TIER STROKE + PLOT SERIES",
         "trace": [
           "corpus"
@@ -608,7 +608,7 @@
       {
         "id": "11b",
         "title": "⭐⭐ §16.5 THE COUNTRYSIDE'S OWN DWELLINGS and §5.0e THE FAUBOURG.",
-        "line": 1190,
+        "line": 1241,
         "tableName": "COUNTRYSIDE DWELLINGS + THE FAUBOURG",
         "trace": [
           "ftg",
@@ -620,7 +620,7 @@
       {
         "id": "11c",
         "title": "⭐⭐⭐ THE ACCESSIBLE LENS'S REAL HATCH GEOMETRY (TC29's §0.0 resolution: \"an",
-        "line": 1207,
+        "line": 1258,
         "tableName": "THE ACCESSIBLE LENS'S HATCH GEOMETRY",
         "trace": [
           "corpus"
@@ -631,7 +631,7 @@
       {
         "id": "12",
         "title": "ROOF-RIDGE TICKS — the interior detail line that turns a filled quad into a",
-        "line": 1272,
+        "line": 1323,
         "tableName": "ROOF-RIDGE TICKS",
         "trace": [
           "corpus"
@@ -642,7 +642,7 @@
       {
         "id": "13",
         "title": "LANDMARKS — §6 archetypes at HEAVIER ink with interior detail lines (ridge",
-        "line": 1335,
+        "line": 1386,
         "tableName": "LANDMARKS — §6 archetypes",
         "trace": [
           "watabou",
@@ -655,7 +655,7 @@
       {
         "id": "13b",
         "title": "§161b THE VISIBLE WORK — the strain the §5.-1c solver recorded, drawn at",
-        "line": 1393,
+        "line": 1444,
         "tableName": "THE VISIBLE WORK (§161b)",
         "trace": [
           "corpus"
@@ -666,7 +666,7 @@
       {
         "id": "14",
         "title": "TERRACES — §161b's visible work, drawn INSIDE the town on the ground that",
-        "line": 1403,
+        "line": 1454,
         "tableName": "TERRACES inside the town",
         "trace": [
           "corpus"
@@ -677,7 +677,7 @@
       {
         "id": "14b",
         "title": "⭐⭐ THE BRIDGES (§2.3, chair directive §195.1). A street that crosses the water",
-        "line": 1411,
+        "line": 1462,
         "tableName": "THE BRIDGES",
         "trace": [
           "watabou",
@@ -690,7 +690,7 @@
       {
         "id": "15",
         "title": "WALLS — the heaviest ink on the page, tower dots, gate BREAKS and piers.",
-        "line": 1440,
+        "line": 1491,
         "tableName": "WALLS — towers, gate breaks, piers",
         "trace": [
           "watabou",
@@ -702,7 +702,7 @@
       {
         "id": "15a",
         "title": "§250.5 · THE FOSSILS OF A SUPERSEDED CIRCUIT. Drawn AFTER the standing wall",
-        "line": 1630,
+        "line": 1681,
         "tableName": "THE FOSSILS OF A SUPERSEDED CIRCUIT",
         "trace": [
           "corpus"
@@ -713,7 +713,7 @@
       {
         "id": "15b",
         "title": "⭐⭐ §10 THE STATE EXPRESSIONS, in CALM INK. Drawn after the wall because a barred",
-        "line": 1664,
+        "line": 1715,
         "tableName": "THE STATE EXPRESSIONS (§10)",
         "trace": [
           "DRIFT"
@@ -724,7 +724,7 @@
       {
         "id": "15c",
         "title": "⭐⭐ §18.1 THE SANCTUARY / LIBERTY BOUND. A light dashed line round the precinct's",
-        "line": 1715,
+        "line": 1766,
         "tableName": "THE SANCTUARY / LIBERTY BOUND (§18.1)",
         "trace": [
           "corpus"
@@ -735,7 +735,7 @@
       {
         "id": "16",
         "title": "WARD LABELS ARE NO LONGER DRAWN HERE (§173, MF-B6). Every letter on this leaf now",
-        "line": 1751,
+        "line": 1802,
         "tableName": "WARD LABELS (now spliced at §173)",
         "trace": [
           "ftg",
@@ -747,7 +747,7 @@
       {
         "id": "17",
         "title": "THE FOLIO CHROME — cartouche + compass.",
-        "line": 1759,
+        "line": 1810,
         "tableName": "THE FOLIO CHROME — cartouche + compass",
         "trace": [
           "corpus"
@@ -758,7 +758,7 @@
       {
         "id": "18",
         "title": "⭐⭐ THE IN-WORLD LEGEND (§12.7, and the chair's §195.2 disposal).",
-        "line": 1851,
+        "line": 1902,
         "tableName": "THE IN-WORLD LEGEND (§12.7)",
         "trace": [
           "corpus"
@@ -769,7 +769,7 @@
       {
         "id": "19",
         "title": "⭐⭐⭐ §173 THE LETTERING SPLICE — a SEPARATE STAGE OVER THE FINISHED DRAW LIST.",
-        "line": 1916,
+        "line": 1967,
         "tableName": "THE LETTERING SPLICE (§173)",
         "trace": [
           "corpus",
@@ -781,7 +781,7 @@
       {
         "id": "99z",
         "title": "⭐ A PLANTED OP CLASS THAT NOBODY TRACED",
-        "line": 1951,
+        "line": 2002,
         "status": "UNTRACED",
         "trace": null,
         "why": null
@@ -791,7 +791,7 @@
   },
   "trimmed": {
     "renderFolio": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg-instruments/out/.renderFolio-TRIMMED.mjs",
-    "rendererLines": 1950,
+    "rendererLines": 2001,
     "opClasses": 30,
     "tableRows": 31,
     "emittedGroups": [
@@ -995,7 +995,7 @@
       {
         "id": "11a",
         "title": "⭐⭐⭐ GAP-D / T-07 / T-08 · THE TWO-TIER STROKE AND THE PLOT SERIES.",
-        "line": 1147,
+        "line": 1174,
         "tableName": "THE TWO-TIER STROKE + PLOT SERIES",
         "trace": [
           "corpus"
@@ -1006,7 +1006,7 @@
       {
         "id": "11b",
         "title": "⭐⭐ §16.5 THE COUNTRYSIDE'S OWN DWELLINGS and §5.0e THE FAUBOURG.",
-        "line": 1190,
+        "line": 1241,
         "tableName": "COUNTRYSIDE DWELLINGS + THE FAUBOURG",
         "trace": [
           "ftg",
@@ -1018,7 +1018,7 @@
       {
         "id": "11c",
         "title": "⭐⭐⭐ THE ACCESSIBLE LENS'S REAL HATCH GEOMETRY (TC29's §0.0 resolution: \"an",
-        "line": 1207,
+        "line": 1258,
         "tableName": "THE ACCESSIBLE LENS'S HATCH GEOMETRY",
         "trace": [
           "corpus"
@@ -1029,7 +1029,7 @@
       {
         "id": "12",
         "title": "ROOF-RIDGE TICKS — the interior detail line that turns a filled quad into a",
-        "line": 1272,
+        "line": 1323,
         "tableName": "ROOF-RIDGE TICKS",
         "trace": [
           "corpus"
@@ -1040,7 +1040,7 @@
       {
         "id": "13",
         "title": "LANDMARKS — §6 archetypes at HEAVIER ink with interior detail lines (ridge",
-        "line": 1335,
+        "line": 1386,
         "tableName": "LANDMARKS — §6 archetypes",
         "trace": [
           "watabou",
@@ -1053,7 +1053,7 @@
       {
         "id": "13b",
         "title": "§161b THE VISIBLE WORK — the strain the §5.-1c solver recorded, drawn at",
-        "line": 1393,
+        "line": 1444,
         "tableName": "THE VISIBLE WORK (§161b)",
         "trace": [
           "corpus"
@@ -1064,7 +1064,7 @@
       {
         "id": "14",
         "title": "TERRACES — §161b's visible work, drawn INSIDE the town on the ground that",
-        "line": 1403,
+        "line": 1454,
         "tableName": "TERRACES inside the town",
         "trace": [
           "corpus"
@@ -1075,7 +1075,7 @@
       {
         "id": "14b",
         "title": "⭐⭐ THE BRIDGES (§2.3, chair directive §195.1). A street that crosses the water",
-        "line": 1411,
+        "line": 1462,
         "tableName": "THE BRIDGES",
         "trace": [
           "watabou",
@@ -1088,7 +1088,7 @@
       {
         "id": "15",
         "title": "WALLS — the heaviest ink on the page, tower dots, gate BREAKS and piers.",
-        "line": 1440,
+        "line": 1491,
         "tableName": "WALLS — towers, gate breaks, piers",
         "trace": [
           "watabou",
@@ -1100,7 +1100,7 @@
       {
         "id": "15a",
         "title": "§250.5 · THE FOSSILS OF A SUPERSEDED CIRCUIT. Drawn AFTER the standing wall",
-        "line": 1630,
+        "line": 1681,
         "tableName": "THE FOSSILS OF A SUPERSEDED CIRCUIT",
         "trace": [
           "corpus"
@@ -1111,7 +1111,7 @@
       {
         "id": "15b",
         "title": "⭐⭐ §10 THE STATE EXPRESSIONS, in CALM INK. Drawn after the wall because a barred",
-        "line": 1664,
+        "line": 1715,
         "tableName": "THE STATE EXPRESSIONS (§10)",
         "trace": [
           "DRIFT"
@@ -1122,7 +1122,7 @@
       {
         "id": "16",
         "title": "WARD LABELS ARE NO LONGER DRAWN HERE (§173, MF-B6). Every letter on this leaf now",
-        "line": 1751,
+        "line": 1802,
         "tableName": "WARD LABELS (now spliced at §173)",
         "trace": [
           "ftg",
@@ -1134,7 +1134,7 @@
       {
         "id": "17",
         "title": "THE FOLIO CHROME — cartouche + compass.",
-        "line": 1759,
+        "line": 1810,
         "tableName": "THE FOLIO CHROME — cartouche + compass",
         "trace": [
           "corpus"
@@ -1145,7 +1145,7 @@
       {
         "id": "18",
         "title": "⭐⭐ THE IN-WORLD LEGEND (§12.7, and the chair's §195.2 disposal).",
-        "line": 1851,
+        "line": 1902,
         "tableName": "THE IN-WORLD LEGEND (§12.7)",
         "trace": [
           "corpus"
@@ -1156,7 +1156,7 @@
       {
         "id": "19",
         "title": "⭐⭐⭐ §173 THE LETTERING SPLICE — a SEPARATE STAGE OVER THE FINISHED DRAW LIST.",
-        "line": 1916,
+        "line": 1967,
         "tableName": "THE LETTERING SPLICE (§173)",
         "trace": [
           "corpus",

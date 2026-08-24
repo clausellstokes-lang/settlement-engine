@@ -1,17 +1,40 @@
 {
-  "lane": "TE-REG-I0",
-  "charter": "docs/DESIGN_REGISTER_PROGRAM.md A2.1 item 3 (REG-I0), A2.2, §6, A1.3",
-  "sealedRef": "ee0db96d3",
-  "worktree": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/w3f-tree",
+  "lane": "TE-REG-I0b (re-record; the set was minted by TE-REG-I0)",
+  "charter": "docs/DESIGN_REGISTER_PROGRAM.md A2.1 item 3 (REG-I0), A2.2, §6, A1.3 · ODQ §602.2 (the two i6 repairs)",
+  "sealedRef": "d1b32e339",
+  "sealedRefFull": "refs/preserve/map-sandbox-reg1-fusion — d1b32e339fdcdc8cf4647d71db980bce3d2f51d1",
+  "priorSealedRef": "ee0db96d3",
+  "priorBaselines": "out/baselines-ee0db96d3.json — the pre-repair file, kept verbatim, never overwritten",
+  "worktree": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/laneREG1-tree",
   "generated": "deterministic — no Date, no Math.random anywhere in the instrument set",
   "note": "Every row carries its DENOMINATOR in words. A figure without its denominator is not a measurement.",
+  "dormancy": "At d1b32e339 the fusion feature is DORMANT. REG-1 §6: the unarmed render is byte-identical to ee0db96d3 on 29 of 29 artifacts, and renders/base/city-city-parchment.svg is sha256:3449ace03d809add — REG-0's own base plate. The BASELINE is therefore still the dormant render; what moved between this file and the prior one is the INSTRUMENT.",
+  "repairs": [
+    {
+      "id": "R1",
+      "instrument": "i6 · F3",
+      "was": "freestandingFraction = SOLITARY / INTRAMURAL BODIES (bodies alone in their closed-mask component, over drawn building subpaths)",
+      "now": "freestandingDensity = MASSES / INTRAMURAL BUILDING-INK AREA, per 1,000 sq view units",
+      "why": "F3 rose on the fusion tip (city 0.0652 → 0.0818). The ordered fix — count masses in the numerator — is a NO-OP: a body alone in its component IS a component holding one body, measured 133 = 133 at city and 140 = 140 at the tip. The inversion is in the DENOMINATOR: drawn subpaths are not conserved under generative fusion (city 2,045 → 1,717, −16.0 %), while the ink is (building fill 117,452 → 117,885 sq units, +0.37 %).",
+      "alsoChanged": "F3 no longer reads through close(built, FUSE_R) — the radius REG-1 §4 showed bridges slots and packing wedges the charter says must remain — and it measures a new building-only mask, so no F1/F2 figure moves.",
+      "supersededFigureKeptAt": "i6Corpus.rows[].{base,armed}.supersededFraction, labelled, for reconciliation only"
+    },
+    {
+      "id": "R2",
+      "instrument": "i6 · the grid",
+      "was": "a fixed 1400 grid — cell 0.714 u",
+      "now": "the leaf's own party-gap-resolving N: partyGap = plotFrontage × 0.035; N = smallest multiple of 200 with cell ≤ partyGap, capped at 6400 (REG-1 §4b, recorded before measuring)",
+      "why": "Every party gap in the corpus is smaller than one 1400 cell (city 0.219 u, village 0.481 u), so the base plate arrived already fused BY RASTERISATION and the instrument could not see the defect it exists to measure.",
+      "alsoChanged": "--reg0compat PINS 1400 so REG-0's published figures still reproduce exactly; --grid= still overrides; --circuit=<json> was added so the CLI can supply the model circuit the instrument already documents as PREFERRED."
+    }
+  ],
   "plates": [
     {
       "plate": "BASE-city",
       "tier": "city",
       "kind": "BASE",
       "note": null,
-      "svg": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/out/base-city-city-parchment.svg",
+      "svg": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg-instruments/renders/base/city-city-parchment.svg",
       "png": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/png/BEFORE-city.png",
       "raster": "2200x2200",
       "i1_squint": {
@@ -376,48 +399,16 @@
         "pass": false
       },
       "i6_frontage": {
-        "geometrySvg": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/out/base-city-city-parchment.svg",
-        "asDrawn": {
-          "fuseRadiusUnits": 1.25,
-          "base": {
-            "probes": 38906,
-            "fronted": 19648,
-            "ratio": 0.505,
-            "runs": 1758,
-            "meanRunUnits": 11.17,
-            "p50RunUnits": 8.01,
-            "p90RunUnits": 23.94,
-            "maxRunUnits": 69.75,
-            "frontingMasses": 620
-          },
-          "fused": {
-            "probes": 38906,
-            "fronted": 19648,
-            "ratio": 0.505,
-            "runs": 1415,
-            "meanRunUnits": 13.88,
-            "p50RunUnits": 10.06,
-            "p90RunUnits": 30.18,
-            "maxRunUnits": 69.75,
-            "frontingMasses": 362
-          },
-          "freestanding": {
-            "scope": "intramuros (the model's own walls[].closedPolygon)",
-            "enclosureFormed": true,
-            "floodEnclosureFormed": false,
-            "enclosedCells": 0,
-            "gateBridgeUnits": 18,
-            "circuitFromModel": true,
-            "bodiesDrawn": 2045,
-            "bodiesAttributed": 2043,
-            "intramuralBodies": 1888,
-            "solitaryBodies": 123,
-            "freestandingFraction": 0.0651,
-            "fusedComponents": 392,
-            "bodiesPerFusedComponent": 5.29
-          }
-        },
+        "geometrySvg": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg-instruments/renders/base/city-city-parchment.svg",
         "reg0Compat": {
+          "grid": 1400,
+          "gridReport": {
+            "grid": 1400,
+            "cellUnits": 0.7143,
+            "partyGapUnits": 0.2188,
+            "resolvesPartyGap": false,
+            "rule": "N = smallest multiple of 200 with cell ≤ frontage × 0.035, capped at 6400 (REG-1 §4b, recorded before measuring)"
+          },
           "wallbandUnits": 7.19,
           "buildingsClearedByWallband": 50,
           "base": {
@@ -431,7 +422,7 @@
             "maxRunUnits": 69.75,
             "frontingMasses": 609
           },
-          "note": "REG-0's own REGIME-B strike re-applied so its published base figures reproduce exactly"
+          "note": "REG-0's own REGIME-B strike re-applied at REG-0's own 1400 grid so its published base figures reproduce exactly. ⚠ This grid does NOT resolve the leaf's party gap — see repairs.R2 — and is a reproduction anchor, not a measurement."
         }
       }
     },
@@ -440,7 +431,7 @@
       "tier": "village",
       "kind": "BASE",
       "note": null,
-      "svg": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/out/base-village-village-parchment.svg",
+      "svg": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg-instruments/renders/base/village-village-parchment.svg",
       "png": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/png/BEFORE-village.png",
       "raster": "2200x2200",
       "i1_squint": {
@@ -774,48 +765,16 @@
         "pass": true
       },
       "i6_frontage": {
-        "geometrySvg": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/out/base-village-village-parchment.svg",
-        "asDrawn": {
-          "fuseRadiusUnits": 2.4,
-          "base": {
-            "probes": 3948,
-            "fronted": 2576,
-            "ratio": 0.6525,
-            "runs": 176,
-            "meanRunUnits": 14.66,
-            "p50RunUnits": 10.55,
-            "p90RunUnits": 35.04,
-            "maxRunUnits": 62.15,
-            "frontingMasses": 68
-          },
-          "fused": {
-            "probes": 3948,
-            "fronted": 2577,
-            "ratio": 0.6527,
-            "runs": 147,
-            "meanRunUnits": 17.56,
-            "p50RunUnits": 12.12,
-            "p90RunUnits": 46.17,
-            "maxRunUnits": 63.94,
-            "frontingMasses": 45
-          },
-          "freestanding": {
-            "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
-            "enclosureFormed": false,
-            "floodEnclosureFormed": false,
-            "enclosedCells": 0,
-            "gateBridgeUnits": 18,
-            "circuitFromModel": false,
-            "bodiesDrawn": 139,
-            "bodiesAttributed": 139,
-            "intramuralBodies": 139,
-            "solitaryBodies": 23,
-            "freestandingFraction": 0.1655,
-            "fusedComponents": 49,
-            "bodiesPerFusedComponent": 2.9
-          }
-        },
+        "geometrySvg": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg-instruments/renders/base/village-village-parchment.svg",
         "reg0Compat": {
+          "grid": 1400,
+          "gridReport": {
+            "grid": 1400,
+            "cellUnits": 0.7143,
+            "partyGapUnits": 0.4813,
+            "resolvesPartyGap": false,
+            "rule": "N = smallest multiple of 200 with cell ≤ frontage × 0.035, capped at 6400 (REG-1 §4b, recorded before measuring)"
+          },
           "wallbandUnits": 15.81,
           "buildingsClearedByWallband": 0,
           "base": {
@@ -829,7 +788,7 @@
             "maxRunUnits": 62.15,
             "frontingMasses": 68
           },
-          "note": "REG-0's own REGIME-B strike re-applied so its published base figures reproduce exactly"
+          "note": "REG-0's own REGIME-B strike re-applied at REG-0's own 1400 grid so its published base figures reproduce exactly. ⚠ This grid does NOT resolve the leaf's party gap — see repairs.R2 — and is a reproduction anchor, not a measurement."
         }
       }
     },
@@ -838,7 +797,7 @@
       "tier": "town",
       "kind": "BASE",
       "note": null,
-      "svg": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg-instruments/renders/base-town-town-parchment.svg",
+      "svg": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg-instruments/renders/base/town-town-parchment.svg",
       "png": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg-instruments/png/BASE-town.png",
       "raster": "2200x2200",
       "i1_squint": {
@@ -1205,48 +1164,16 @@
         "pass": false
       },
       "i6_frontage": {
-        "geometrySvg": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg-instruments/renders/base-town-town-parchment.svg",
-        "asDrawn": {
-          "fuseRadiusUnits": 0.99,
-          "base": {
-            "probes": 30235,
-            "fronted": 16113,
-            "ratio": 0.5329,
-            "runs": 1533,
-            "meanRunUnits": 10.55,
-            "p50RunUnits": 7.99,
-            "p90RunUnits": 22.3,
-            "maxRunUnits": 54.09,
-            "frontingMasses": 549
-          },
-          "fused": {
-            "probes": 30235,
-            "fronted": 16113,
-            "ratio": 0.5329,
-            "runs": 1264,
-            "meanRunUnits": 12.79,
-            "p50RunUnits": 9.97,
-            "p90RunUnits": 27.02,
-            "maxRunUnits": 54.09,
-            "frontingMasses": 363
-          },
-          "freestanding": {
-            "scope": "intramuros (the model's own walls[].closedPolygon)",
-            "enclosureFormed": true,
-            "floodEnclosureFormed": false,
-            "enclosedCells": 0,
-            "gateBridgeUnits": 18,
-            "circuitFromModel": true,
-            "bodiesDrawn": 1436,
-            "bodiesAttributed": 1436,
-            "intramuralBodies": 1373,
-            "solitaryBodies": 185,
-            "freestandingFraction": 0.1347,
-            "fusedComponents": 407,
-            "bodiesPerFusedComponent": 3.71
-          }
-        },
+        "geometrySvg": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg-instruments/renders/base/town-town-parchment.svg",
         "reg0Compat": {
+          "grid": 1400,
+          "gridReport": {
+            "grid": 1400,
+            "cellUnits": 0.7143,
+            "partyGapUnits": 0.1726,
+            "resolvesPartyGap": false,
+            "rule": "N = smallest multiple of 200 with cell ≤ frontage × 0.035, capped at 6400 (REG-1 §4b, recorded before measuring)"
+          },
           "wallbandUnits": 5.67,
           "buildingsClearedByWallband": 35,
           "base": {
@@ -1260,7 +1187,7 @@
             "maxRunUnits": 54.09,
             "frontingMasses": 530
           },
-          "note": "REG-0's own REGIME-B strike re-applied so its published base figures reproduce exactly"
+          "note": "REG-0's own REGIME-B strike re-applied at REG-0's own 1400 grid so its published base figures reproduce exactly. ⚠ This grid does NOT resolve the leaf's party gap — see repairs.R2 — and is a reproduction anchor, not a measurement."
         }
       }
     },
@@ -1269,7 +1196,7 @@
       "tier": "city",
       "kind": "SPEC",
       "note": "REG-0 specimen. PIXEL instruments probe the BASE geometry (same probes, only the picture differs); the GEOMETRY instrument i6 reads the SPECIMEN svg.",
-      "svg": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/out/base-city-city-parchment.svg",
+      "svg": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg-instruments/renders/base/city-city-parchment.svg",
       "png": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/png/AFTER-city.png",
       "raster": "2200x2200",
       "i1_squint": {
@@ -1635,47 +1562,15 @@
       },
       "i6_frontage": {
         "geometrySvg": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/out/spec-city.svg",
-        "asDrawn": {
-          "fuseRadiusUnits": 1.25,
-          "base": {
-            "probes": 39010,
-            "fronted": 20434,
-            "ratio": 0.5238,
-            "runs": 1823,
-            "meanRunUnits": 11.21,
-            "p50RunUnits": 8.01,
-            "p90RunUnits": 24.01,
-            "maxRunUnits": 69.66,
-            "frontingMasses": 613
-          },
-          "fused": {
-            "probes": 39010,
-            "fronted": 20434,
-            "ratio": 0.5238,
-            "runs": 1461,
-            "meanRunUnits": 13.98,
-            "p50RunUnits": 10.06,
-            "p90RunUnits": 32.07,
-            "maxRunUnits": 69.69,
-            "frontingMasses": 362
-          },
-          "freestanding": {
-            "scope": "intramuros (the model's own walls[].closedPolygon)",
-            "enclosureFormed": true,
-            "floodEnclosureFormed": false,
-            "enclosedCells": 0,
-            "gateBridgeUnits": 18,
-            "circuitFromModel": true,
-            "bodiesDrawn": 1990,
-            "bodiesAttributed": 1988,
-            "intramuralBodies": 1867,
-            "solitaryBodies": 128,
-            "freestandingFraction": 0.0686,
-            "fusedComponents": 393,
-            "bodiesPerFusedComponent": 5.22
-          }
-        },
         "reg0Compat": {
+          "grid": 1400,
+          "gridReport": {
+            "grid": 1400,
+            "cellUnits": 0.7143,
+            "partyGapUnits": 0.2188,
+            "resolvesPartyGap": false,
+            "rule": "N = smallest multiple of 200 with cell ≤ frontage × 0.035, capped at 6400 (REG-1 §4b, recorded before measuring)"
+          },
           "wallbandUnits": 7.19,
           "buildingsClearedByWallband": 0,
           "base": {
@@ -1689,7 +1584,67 @@
             "maxRunUnits": 69.66,
             "frontingMasses": 613
           },
-          "note": "REG-0's own REGIME-B strike re-applied so its published base figures reproduce exactly"
+          "note": "REG-0's own REGIME-B strike re-applied at REG-0's own 1400 grid so its published base figures reproduce exactly. ⚠ This grid does NOT resolve the leaf's party gap — see repairs.R2 — and is a reproduction anchor, not a measurement."
+        },
+        "asDrawn": {
+          "grid": 4600,
+          "gridReport": {
+            "grid": 4600,
+            "cellUnits": 0.2174,
+            "partyGapUnits": 0.2188,
+            "resolvesPartyGap": true,
+            "rule": "N = smallest multiple of 200 with cell ≤ frontage × 0.035, capped at 6400 (REG-1 §4b, recorded before measuring)"
+          },
+          "fuseRadiusUnits": 1.25,
+          "base": {
+            "probes": 38901,
+            "fronted": 21051,
+            "ratio": 0.5411,
+            "runs": 2064,
+            "meanRunUnits": 10.2,
+            "p50RunUnits": 7.96,
+            "p90RunUnits": 21.13,
+            "maxRunUnits": 69.66,
+            "frontingMasses": 797
+          },
+          "fused": {
+            "probes": 38901,
+            "fronted": 21051,
+            "ratio": 0.5411,
+            "runs": 1431,
+            "meanRunUnits": 14.71,
+            "p50RunUnits": 11.02,
+            "p90RunUnits": 33.95,
+            "maxRunUnits": 69.69,
+            "frontingMasses": 368
+          },
+          "freestanding": {
+            "scope": "intramuros (the model's own walls[].closedPolygon)",
+            "enclosureFormed": true,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": true,
+            "masses": 981,
+            "intramuralInkAreaUnits2": 117743.15,
+            "freestandingDensity": 8.3317,
+            "meanMassFootprintUnits2": 120.02,
+            "largestMassFootprintUnits2": 1826.28,
+            "denominator": "117743.15 sq view units of building ink in intramuros (the model's own walls[].closedPolygon), carrying 981 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 1990,
+            "bodiesAttributed": 1986,
+            "intramuralBodies": 1865,
+            "bodiesPerMass": 1.9,
+            "supersededFraction": {
+              "solitaryBodies": 128,
+              "intramuralBodies": 1865,
+              "freestandingFraction": 0.0686,
+              "fusedComponents": 401,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          },
+          "note": "the REG-0 SPECIMEN svg, read at the resolved grid — a judging exhibit beside the baseline, never the baseline"
         }
       }
     },
@@ -1698,7 +1653,7 @@
       "tier": "village",
       "kind": "SPEC",
       "note": "REG-0 specimen; i6 reads the SPECIMEN svg",
-      "svg": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/out/base-village-village-parchment.svg",
+      "svg": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg-instruments/renders/base/village-village-parchment.svg",
       "png": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/png/AFTER-village.png",
       "raster": "2200x2200",
       "i1_squint": {
@@ -2033,47 +1988,15 @@
       },
       "i6_frontage": {
         "geometrySvg": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/out/spec-village.svg",
-        "asDrawn": {
-          "fuseRadiusUnits": 2.4,
-          "base": {
-            "probes": 4076,
-            "fronted": 2636,
-            "ratio": 0.6467,
-            "runs": 204,
-            "meanRunUnits": 12.86,
-            "p50RunUnits": 8.88,
-            "p90RunUnits": 32.12,
-            "maxRunUnits": 61.89,
-            "frontingMasses": 69
-          },
-          "fused": {
-            "probes": 4076,
-            "fronted": 2641,
-            "ratio": 0.6479,
-            "runs": 173,
-            "meanRunUnits": 15.2,
-            "p50RunUnits": 10.79,
-            "p90RunUnits": 38.9,
-            "maxRunUnits": 63.23,
-            "frontingMasses": 46
-          },
-          "freestanding": {
-            "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
-            "enclosureFormed": false,
-            "floodEnclosureFormed": false,
-            "enclosedCells": 0,
-            "gateBridgeUnits": 18,
-            "circuitFromModel": false,
-            "bodiesDrawn": 139,
-            "bodiesAttributed": 139,
-            "intramuralBodies": 139,
-            "solitaryBodies": 23,
-            "freestandingFraction": 0.1655,
-            "fusedComponents": 48,
-            "bodiesPerFusedComponent": 2.9
-          }
-        },
         "reg0Compat": {
+          "grid": 1400,
+          "gridReport": {
+            "grid": 1400,
+            "cellUnits": 0.7143,
+            "partyGapUnits": 0.4813,
+            "resolvesPartyGap": false,
+            "rule": "N = smallest multiple of 200 with cell ≤ frontage × 0.035, capped at 6400 (REG-1 §4b, recorded before measuring)"
+          },
           "wallbandUnits": 15.81,
           "buildingsClearedByWallband": 0,
           "base": {
@@ -2087,167 +2010,2484 @@
             "maxRunUnits": 61.89,
             "frontingMasses": 69
           },
-          "note": "REG-0's own REGIME-B strike re-applied so its published base figures reproduce exactly"
+          "note": "REG-0's own REGIME-B strike re-applied at REG-0's own 1400 grid so its published base figures reproduce exactly. ⚠ This grid does NOT resolve the leaf's party gap — see repairs.R2 — and is a reproduction anchor, not a measurement."
+        },
+        "asDrawn": {
+          "grid": 2200,
+          "gridReport": {
+            "grid": 2200,
+            "cellUnits": 0.4545,
+            "partyGapUnits": 0.4813,
+            "resolvesPartyGap": true,
+            "rule": "N = smallest multiple of 200 with cell ≤ frontage × 0.035, capped at 6400 (REG-1 §4b, recorded before measuring)"
+          },
+          "fuseRadiusUnits": 2.4,
+          "base": {
+            "probes": 4094,
+            "fronted": 2679,
+            "ratio": 0.6544,
+            "runs": 208,
+            "meanRunUnits": 12.82,
+            "p50RunUnits": 8.98,
+            "p90RunUnits": 32.12,
+            "maxRunUnits": 56.85,
+            "frontingMasses": 71
+          },
+          "fused": {
+            "probes": 4094,
+            "fronted": 2679,
+            "ratio": 0.6544,
+            "runs": 175,
+            "meanRunUnits": 15.24,
+            "p50RunUnits": 10.61,
+            "p90RunUnits": 38.9,
+            "maxRunUnits": 64.14,
+            "frontingMasses": 47
+          },
+          "freestanding": {
+            "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
+            "enclosureFormed": false,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": false,
+            "masses": 101,
+            "intramuralInkAreaUnits2": 10151.03,
+            "freestandingDensity": 9.9497,
+            "meanMassFootprintUnits2": 100.51,
+            "largestMassFootprintUnits2": 412.19,
+            "denominator": "10151.03 sq view units of building ink in urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named), carrying 101 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 139,
+            "bodiesAttributed": 139,
+            "intramuralBodies": 139,
+            "bodiesPerMass": 1.38,
+            "supersededFraction": {
+              "solitaryBodies": 23,
+              "intramuralBodies": 139,
+              "freestandingFraction": 0.1655,
+              "fusedComponents": 50,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          },
+          "note": "the REG-0 SPECIMEN svg, read at the resolved grid — a judging exhibit beside the baseline, never the baseline"
         }
       }
     }
   ],
+  "i6Corpus": {
+    "subject": "every exemplar leaf, DORMANT (baseline) vs ARMED (differential), at the leaf's own party-gap-resolving grid",
+    "gridRule": "partyGap = plotFrontage × 0.035; N = smallest multiple of 200 with cell ≤ partyGap, capped at 6400 (REG-1 §4b, recorded before measuring). No leaf reaches the cap.",
+    "f3Formula": "freestandingDensity = MASSES / INTRAMURAL BUILDING-INK AREA, per 1,000 sq view units. NUMERATOR: connected components of the drawn building+landmark fill, each placed intramuros by its own centroid. DENOMINATOR: the square view units of that ink inside the circuit, printed on every row as `denominator`.",
+    "readingRule": "`base` IS the baseline; `armed` is the differential. A NEGATIVE freestandingDensityPct is the cure working. `supersededFraction` is the pre-repair figure and INVERTS — it is recorded only so the two baseline files reconcile.",
+    "rows": [
+      {
+        "leaf": "thorp",
+        "tier": "thorp",
+        "frontage": 26,
+        "grid": 1200,
+        "gridReport": {
+          "grid": 1200,
+          "cellUnits": 0.8333,
+          "partyGapUnits": 0.91,
+          "resolvesPartyGap": true,
+          "rule": "N = smallest multiple of 200 with cell ≤ frontage × 0.035, capped at 6400 (REG-1 §4b, recorded before measuring)"
+        },
+        "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
+        "circuitFromModel": false,
+        "base": {
+          "F1F2": {
+            "probes": 583,
+            "fronted": 478,
+            "ratio": 0.8199,
+            "runs": 20,
+            "meanRunUnits": 24.1,
+            "p50RunUnits": 27.35,
+            "p90RunUnits": 38.13,
+            "maxRunUnits": 46.82,
+            "frontingMasses": 5
+          },
+          "F1F2_maskFused": {
+            "probes": 583,
+            "fronted": 478,
+            "ratio": 0.8199,
+            "runs": 20,
+            "meanRunUnits": 24.1,
+            "p50RunUnits": 27.35,
+            "p90RunUnits": 38.13,
+            "maxRunUnits": 46.82,
+            "frontingMasses": 5
+          },
+          "F3": {
+            "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
+            "enclosureFormed": false,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": false,
+            "masses": 6,
+            "intramuralInkAreaUnits2": 2094.44,
+            "freestandingDensity": 2.8647,
+            "meanMassFootprintUnits2": 349.07,
+            "largestMassFootprintUnits2": 531.25,
+            "denominator": "2094.44 sq view units of building ink in urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named), carrying 6 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 8,
+            "bodiesAttributed": 8,
+            "intramuralBodies": 8,
+            "bodiesPerMass": 1.33,
+            "supersededFraction": {
+              "solitaryBodies": 2,
+              "intramuralBodies": 8,
+              "freestandingFraction": 0.25,
+              "fusedComponents": 5,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "armed": {
+          "F1F2": {
+            "probes": 583,
+            "fronted": 478,
+            "ratio": 0.8199,
+            "runs": 20,
+            "meanRunUnits": 24.1,
+            "p50RunUnits": 27.35,
+            "p90RunUnits": 38.13,
+            "maxRunUnits": 46.82,
+            "frontingMasses": 5
+          },
+          "F1F2_maskFused": {
+            "probes": 583,
+            "fronted": 478,
+            "ratio": 0.8199,
+            "runs": 20,
+            "meanRunUnits": 24.1,
+            "p50RunUnits": 27.35,
+            "p90RunUnits": 38.13,
+            "maxRunUnits": 46.82,
+            "frontingMasses": 5
+          },
+          "F3": {
+            "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
+            "enclosureFormed": false,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": false,
+            "masses": 6,
+            "intramuralInkAreaUnits2": 2094.44,
+            "freestandingDensity": 2.8647,
+            "meanMassFootprintUnits2": 349.07,
+            "largestMassFootprintUnits2": 531.25,
+            "denominator": "2094.44 sq view units of building ink in urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named), carrying 6 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 8,
+            "bodiesAttributed": 8,
+            "intramuralBodies": 8,
+            "bodiesPerMass": 1.33,
+            "supersededFraction": {
+              "solitaryBodies": 2,
+              "intramuralBodies": 8,
+              "freestandingFraction": 0.25,
+              "fusedComponents": 5,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "delta": {
+          "freestandingDensityPct": 0,
+          "massesPct": 0,
+          "inkAreaPct": 0,
+          "drawnBodiesPct": 0,
+          "meanRunPct": 0,
+          "frontingMassesPct": 0,
+          "supersededFractionPct": 0
+        }
+      },
+      {
+        "leaf": "hamlet",
+        "tier": "hamlet",
+        "frontage": 13.64,
+        "grid": 2200,
+        "gridReport": {
+          "grid": 2200,
+          "cellUnits": 0.4545,
+          "partyGapUnits": 0.4774,
+          "resolvesPartyGap": true,
+          "rule": "N = smallest multiple of 200 with cell ≤ frontage × 0.035, capped at 6400 (REG-1 §4b, recorded before measuring)"
+        },
+        "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
+        "circuitFromModel": false,
+        "base": {
+          "F1F2": {
+            "probes": 2298,
+            "fronted": 1312,
+            "ratio": 0.5709,
+            "runs": 94,
+            "meanRunUnits": 13.98,
+            "p50RunUnits": 14.96,
+            "p90RunUnits": 23.58,
+            "maxRunUnits": 34.07,
+            "frontingMasses": 35
+          },
+          "F1F2_maskFused": {
+            "probes": 2298,
+            "fronted": 1314,
+            "ratio": 0.5718,
+            "runs": 80,
+            "meanRunUnits": 16.45,
+            "p50RunUnits": 16.68,
+            "p90RunUnits": 28.8,
+            "maxRunUnits": 40.08,
+            "frontingMasses": 23
+          },
+          "F3": {
+            "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
+            "enclosureFormed": false,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": false,
+            "masses": 44,
+            "intramuralInkAreaUnits2": 4803.51,
+            "freestandingDensity": 9.16,
+            "meanMassFootprintUnits2": 109.17,
+            "largestMassFootprintUnits2": 313.02,
+            "denominator": "4803.51 sq view units of building ink in urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named), carrying 44 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 52,
+            "bodiesAttributed": 52,
+            "intramuralBodies": 52,
+            "bodiesPerMass": 1.18,
+            "supersededFraction": {
+              "solitaryBodies": 7,
+              "intramuralBodies": 52,
+              "freestandingFraction": 0.1346,
+              "fusedComponents": 23,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "armed": {
+          "F1F2": {
+            "probes": 2298,
+            "fronted": 1312,
+            "ratio": 0.5709,
+            "runs": 94,
+            "meanRunUnits": 13.98,
+            "p50RunUnits": 14.96,
+            "p90RunUnits": 23.58,
+            "maxRunUnits": 34.07,
+            "frontingMasses": 35
+          },
+          "F1F2_maskFused": {
+            "probes": 2298,
+            "fronted": 1314,
+            "ratio": 0.5718,
+            "runs": 80,
+            "meanRunUnits": 16.45,
+            "p50RunUnits": 16.68,
+            "p90RunUnits": 28.8,
+            "maxRunUnits": 40.08,
+            "frontingMasses": 23
+          },
+          "F3": {
+            "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
+            "enclosureFormed": false,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": false,
+            "masses": 43,
+            "intramuralInkAreaUnits2": 4814.46,
+            "freestandingDensity": 8.9314,
+            "meanMassFootprintUnits2": 111.96,
+            "largestMassFootprintUnits2": 316.53,
+            "denominator": "4814.46 sq view units of building ink in urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named), carrying 43 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 45,
+            "bodiesAttributed": 45,
+            "intramuralBodies": 45,
+            "bodiesPerMass": 1.05,
+            "supersededFraction": {
+              "solitaryBodies": 11,
+              "intramuralBodies": 45,
+              "freestandingFraction": 0.2444,
+              "fusedComponents": 23,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "delta": {
+          "freestandingDensityPct": -2.5,
+          "massesPct": -2.3,
+          "inkAreaPct": 0.2,
+          "drawnBodiesPct": -13.5,
+          "meanRunPct": 0,
+          "frontingMassesPct": 0,
+          "supersededFractionPct": 81.6
+        }
+      },
+      {
+        "leaf": "village",
+        "tier": "village",
+        "frontage": 13.75,
+        "grid": 2200,
+        "gridReport": {
+          "grid": 2200,
+          "cellUnits": 0.4545,
+          "partyGapUnits": 0.4813,
+          "resolvesPartyGap": true,
+          "rule": "N = smallest multiple of 200 with cell ≤ frontage × 0.035, capped at 6400 (REG-1 §4b, recorded before measuring)"
+        },
+        "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
+        "circuitFromModel": false,
+        "base": {
+          "F1F2": {
+            "probes": 3952,
+            "fronted": 2615,
+            "ratio": 0.6617,
+            "runs": 174,
+            "meanRunUnits": 15.05,
+            "p50RunUnits": 11.21,
+            "p90RunUnits": 34.74,
+            "maxRunUnits": 57.04,
+            "frontingMasses": 73
+          },
+          "F1F2_maskFused": {
+            "probes": 3952,
+            "fronted": 2615,
+            "ratio": 0.6617,
+            "runs": 136,
+            "meanRunUnits": 19.26,
+            "p50RunUnits": 14.06,
+            "p90RunUnits": 46.95,
+            "maxRunUnits": 64.23,
+            "frontingMasses": 45
+          },
+          "F3": {
+            "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
+            "enclosureFormed": false,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": false,
+            "masses": 101,
+            "intramuralInkAreaUnits2": 10151.03,
+            "freestandingDensity": 9.9497,
+            "meanMassFootprintUnits2": 100.51,
+            "largestMassFootprintUnits2": 412.19,
+            "denominator": "10151.03 sq view units of building ink in urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named), carrying 101 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 139,
+            "bodiesAttributed": 139,
+            "intramuralBodies": 139,
+            "bodiesPerMass": 1.38,
+            "supersededFraction": {
+              "solitaryBodies": 23,
+              "intramuralBodies": 139,
+              "freestandingFraction": 0.1655,
+              "fusedComponents": 48,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "armed": {
+          "F1F2": {
+            "probes": 3953,
+            "fronted": 2615,
+            "ratio": 0.6615,
+            "runs": 168,
+            "meanRunUnits": 15.59,
+            "p50RunUnits": 11.21,
+            "p90RunUnits": 39.03,
+            "maxRunUnits": 62.15,
+            "frontingMasses": 70
+          },
+          "F1F2_maskFused": {
+            "probes": 3953,
+            "fronted": 2615,
+            "ratio": 0.6615,
+            "runs": 136,
+            "meanRunUnits": 19.26,
+            "p50RunUnits": 14.06,
+            "p90RunUnits": 46.95,
+            "maxRunUnits": 64.23,
+            "frontingMasses": 45
+          },
+          "F3": {
+            "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
+            "enclosureFormed": false,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": false,
+            "masses": 98,
+            "intramuralInkAreaUnits2": 10213.22,
+            "freestandingDensity": 9.5954,
+            "meanMassFootprintUnits2": 104.22,
+            "largestMassFootprintUnits2": 506.4,
+            "denominator": "10213.22 sq view units of building ink in urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named), carrying 98 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 107,
+            "bodiesAttributed": 107,
+            "intramuralBodies": 107,
+            "bodiesPerMass": 1.09,
+            "supersededFraction": {
+              "solitaryBodies": 24,
+              "intramuralBodies": 107,
+              "freestandingFraction": 0.2243,
+              "fusedComponents": 48,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "delta": {
+          "freestandingDensityPct": -3.6,
+          "massesPct": -3,
+          "inkAreaPct": 0.6,
+          "drawnBodiesPct": -23,
+          "meanRunPct": 3.6,
+          "frontingMassesPct": -4.1,
+          "supersededFractionPct": 35.5
+        }
+      },
+      {
+        "leaf": "town",
+        "tier": "town",
+        "frontage": 4.93,
+        "grid": 5800,
+        "gridReport": {
+          "grid": 5800,
+          "cellUnits": 0.1724,
+          "partyGapUnits": 0.1726,
+          "resolvesPartyGap": true,
+          "rule": "N = smallest multiple of 200 with cell ≤ frontage × 0.035, capped at 6400 (REG-1 §4b, recorded before measuring)"
+        },
+        "scope": "intramuros (the model's own walls[].closedPolygon)",
+        "circuitFromModel": true,
+        "base": {
+          "F1F2": {
+            "probes": 30243,
+            "fronted": 16713,
+            "ratio": 0.5526,
+            "runs": 1574,
+            "meanRunUnits": 10.65,
+            "p50RunUnits": 8.02,
+            "p90RunUnits": 22.03,
+            "maxRunUnits": 54.09,
+            "frontingMasses": 598
+          },
+          "F1F2_maskFused": {
+            "probes": 30243,
+            "fronted": 16713,
+            "ratio": 0.5526,
+            "runs": 1233,
+            "meanRunUnits": 13.6,
+            "p50RunUnits": 10.92,
+            "p90RunUnits": 28.09,
+            "maxRunUnits": 54.09,
+            "frontingMasses": 359
+          },
+          "F3": {
+            "scope": "intramuros (the model's own walls[].closedPolygon)",
+            "enclosureFormed": true,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": true,
+            "masses": 770,
+            "intramuralInkAreaUnits2": 65829.19,
+            "freestandingDensity": 11.6969,
+            "meanMassFootprintUnits2": 85.49,
+            "largestMassFootprintUnits2": 1247.44,
+            "denominator": "65829.19 sq view units of building ink in intramuros (the model's own walls[].closedPolygon), carrying 770 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 1436,
+            "bodiesAttributed": 1435,
+            "intramuralBodies": 1373,
+            "bodiesPerMass": 1.78,
+            "supersededFraction": {
+              "solitaryBodies": 176,
+              "intramuralBodies": 1373,
+              "freestandingFraction": 0.1282,
+              "fusedComponents": 406,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "armed": {
+          "F1F2": {
+            "probes": 30244,
+            "fronted": 16713,
+            "ratio": 0.5526,
+            "runs": 1562,
+            "meanRunUnits": 10.73,
+            "p50RunUnits": 8.04,
+            "p90RunUnits": 22.04,
+            "maxRunUnits": 54.09,
+            "frontingMasses": 589
+          },
+          "F1F2_maskFused": {
+            "probes": 30244,
+            "fronted": 16713,
+            "ratio": 0.5526,
+            "runs": 1230,
+            "meanRunUnits": 13.63,
+            "p50RunUnits": 10.93,
+            "p90RunUnits": 28.87,
+            "maxRunUnits": 54.09,
+            "frontingMasses": 358
+          },
+          "F3": {
+            "scope": "intramuros (the model's own walls[].closedPolygon)",
+            "enclosureFormed": true,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": true,
+            "masses": 754,
+            "intramuralInkAreaUnits2": 66062.22,
+            "freestandingDensity": 11.4135,
+            "meanMassFootprintUnits2": 87.62,
+            "largestMassFootprintUnits2": 1247.44,
+            "denominator": "66062.22 sq view units of building ink in intramuros (the model's own walls[].closedPolygon), carrying 754 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 1158,
+            "bodiesAttributed": 1151,
+            "intramuralBodies": 1098,
+            "bodiesPerMass": 1.46,
+            "supersededFraction": {
+              "solitaryBodies": 191,
+              "intramuralBodies": 1098,
+              "freestandingFraction": 0.174,
+              "fusedComponents": 404,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "delta": {
+          "freestandingDensityPct": -2.4,
+          "massesPct": -2.1,
+          "inkAreaPct": 0.4,
+          "drawnBodiesPct": -20,
+          "meanRunPct": 0.8,
+          "frontingMassesPct": -1.5,
+          "supersededFractionPct": 35.7
+        }
+      },
+      {
+        "leaf": "town-2",
+        "tier": "town",
+        "frontage": 6.92,
+        "grid": 4200,
+        "gridReport": {
+          "grid": 4200,
+          "cellUnits": 0.2381,
+          "partyGapUnits": 0.2422,
+          "resolvesPartyGap": true,
+          "rule": "N = smallest multiple of 200 with cell ≤ frontage × 0.035, capped at 6400 (REG-1 §4b, recorded before measuring)"
+        },
+        "scope": "intramuros (the model's own walls[].closedPolygon)",
+        "circuitFromModel": true,
+        "base": {
+          "F1F2": {
+            "probes": 19993,
+            "fronted": 11792,
+            "ratio": 0.5898,
+            "runs": 997,
+            "meanRunUnits": 11.85,
+            "p50RunUnits": 9.03,
+            "p90RunUnits": 24.03,
+            "maxRunUnits": 57.2,
+            "frontingMasses": 485
+          },
+          "F1F2_maskFused": {
+            "probes": 19993,
+            "fronted": 11793,
+            "ratio": 0.5899,
+            "runs": 697,
+            "meanRunUnits": 16.96,
+            "p50RunUnits": 14.03,
+            "p90RunUnits": 36.06,
+            "maxRunUnits": 76.94,
+            "frontingMasses": 218
+          },
+          "F3": {
+            "scope": "intramuros (the model's own walls[].closedPolygon)",
+            "enclosureFormed": true,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": true,
+            "masses": 701,
+            "intramuralInkAreaUnits2": 98313.66,
+            "freestandingDensity": 7.1302,
+            "meanMassFootprintUnits2": 140.25,
+            "largestMassFootprintUnits2": 1766.55,
+            "denominator": "98313.66 sq view units of building ink in intramuros (the model's own walls[].closedPolygon), carrying 701 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 1506,
+            "bodiesAttributed": 1505,
+            "intramuralBodies": 1390,
+            "bodiesPerMass": 1.98,
+            "supersededFraction": {
+              "solitaryBodies": 76,
+              "intramuralBodies": 1390,
+              "freestandingFraction": 0.0547,
+              "fusedComponents": 257,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "armed": {
+          "F1F2": {
+            "probes": 19993,
+            "fronted": 11792,
+            "ratio": 0.5898,
+            "runs": 993,
+            "meanRunUnits": 11.9,
+            "p50RunUnits": 9.03,
+            "p90RunUnits": 24.07,
+            "maxRunUnits": 57.2,
+            "frontingMasses": 482
+          },
+          "F1F2_maskFused": {
+            "probes": 19993,
+            "fronted": 11793,
+            "ratio": 0.5899,
+            "runs": 694,
+            "meanRunUnits": 17.03,
+            "p50RunUnits": 14.03,
+            "p90RunUnits": 36.79,
+            "maxRunUnits": 76.94,
+            "frontingMasses": 216
+          },
+          "F3": {
+            "scope": "intramuros (the model's own walls[].closedPolygon)",
+            "enclosureFormed": true,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": true,
+            "masses": 696,
+            "intramuralInkAreaUnits2": 98584.24,
+            "freestandingDensity": 7.06,
+            "meanMassFootprintUnits2": 141.64,
+            "largestMassFootprintUnits2": 1773.02,
+            "denominator": "98584.24 sq view units of building ink in intramuros (the model's own walls[].closedPolygon), carrying 696 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 1244,
+            "bodiesAttributed": 1243,
+            "intramuralBodies": 1149,
+            "bodiesPerMass": 1.65,
+            "supersededFraction": {
+              "solitaryBodies": 75,
+              "intramuralBodies": 1149,
+              "freestandingFraction": 0.0653,
+              "fusedComponents": 256,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "delta": {
+          "freestandingDensityPct": -1,
+          "massesPct": -0.7,
+          "inkAreaPct": 0.3,
+          "drawnBodiesPct": -17.3,
+          "meanRunPct": 0.4,
+          "frontingMassesPct": -0.6,
+          "supersededFractionPct": 19.4
+        }
+      },
+      {
+        "leaf": "city",
+        "tier": "city",
+        "frontage": 6.25,
+        "grid": 4600,
+        "gridReport": {
+          "grid": 4600,
+          "cellUnits": 0.2174,
+          "partyGapUnits": 0.2188,
+          "resolvesPartyGap": true,
+          "rule": "N = smallest multiple of 200 with cell ≤ frontage × 0.035, capped at 6400 (REG-1 §4b, recorded before measuring)"
+        },
+        "scope": "intramuros (the model's own walls[].closedPolygon)",
+        "circuitFromModel": true,
+        "base": {
+          "F1F2": {
+            "probes": 38700,
+            "fronted": 20421,
+            "ratio": 0.5277,
+            "runs": 1978,
+            "meanRunUnits": 10.32,
+            "p50RunUnits": 8,
+            "p90RunUnits": 20.97,
+            "maxRunUnits": 68.75,
+            "frontingMasses": 813
+          },
+          "F1F2_maskFused": {
+            "probes": 38700,
+            "fronted": 20421,
+            "ratio": 0.5277,
+            "runs": 1349,
+            "meanRunUnits": 15.14,
+            "p50RunUnits": 11.98,
+            "p90RunUnits": 33.1,
+            "maxRunUnits": 69.75,
+            "frontingMasses": 367
+          },
+          "F3": {
+            "scope": "intramuros (the model's own walls[].closedPolygon)",
+            "enclosureFormed": true,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": true,
+            "masses": 988,
+            "intramuralInkAreaUnits2": 119172.21,
+            "freestandingDensity": 8.2905,
+            "meanMassFootprintUnits2": 120.62,
+            "largestMassFootprintUnits2": 1826.28,
+            "denominator": "119172.21 sq view units of building ink in intramuros (the model's own walls[].closedPolygon), carrying 988 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 2045,
+            "bodiesAttributed": 2041,
+            "intramuralBodies": 1886,
+            "bodiesPerMass": 1.91,
+            "supersededFraction": {
+              "solitaryBodies": 123,
+              "intramuralBodies": 1886,
+              "freestandingFraction": 0.0652,
+              "fusedComponents": 399,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "armed": {
+          "F1F2": {
+            "probes": 38699,
+            "fronted": 20335,
+            "ratio": 0.5255,
+            "runs": 1899,
+            "meanRunUnits": 10.71,
+            "p50RunUnits": 8.01,
+            "p90RunUnits": 22.83,
+            "maxRunUnits": 68.75,
+            "frontingMasses": 770
+          },
+          "F1F2_maskFused": {
+            "probes": 38699,
+            "fronted": 20335,
+            "ratio": 0.5255,
+            "runs": 1343,
+            "meanRunUnits": 15.14,
+            "p50RunUnits": 11.96,
+            "p90RunUnits": 33.97,
+            "maxRunUnits": 69.75,
+            "frontingMasses": 365
+          },
+          "F3": {
+            "scope": "intramuros (the model's own walls[].closedPolygon)",
+            "enclosureFormed": true,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": true,
+            "masses": 946,
+            "intramuralInkAreaUnits2": 119347.54,
+            "freestandingDensity": 7.9264,
+            "meanMassFootprintUnits2": 126.16,
+            "largestMassFootprintUnits2": 1826.28,
+            "denominator": "119347.54 sq view units of building ink in intramuros (the model's own walls[].closedPolygon), carrying 946 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 1717,
+            "bodiesAttributed": 1711,
+            "intramuralBodies": 1587,
+            "bodiesPerMass": 1.68,
+            "supersededFraction": {
+              "solitaryBodies": 128,
+              "intramuralBodies": 1587,
+              "freestandingFraction": 0.0807,
+              "fusedComponents": 397,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "delta": {
+          "freestandingDensityPct": -4.4,
+          "massesPct": -4.3,
+          "inkAreaPct": 0.1,
+          "drawnBodiesPct": -15.9,
+          "meanRunPct": 3.8,
+          "frontingMassesPct": -5.3,
+          "supersededFractionPct": 23.8
+        }
+      },
+      {
+        "leaf": "metropolis",
+        "tier": "metropolis",
+        "frontage": 5.54,
+        "grid": 5200,
+        "gridReport": {
+          "grid": 5200,
+          "cellUnits": 0.1923,
+          "partyGapUnits": 0.1939,
+          "resolvesPartyGap": true,
+          "rule": "N = smallest multiple of 200 with cell ≤ frontage × 0.035, capped at 6400 (REG-1 §4b, recorded before measuring)"
+        },
+        "scope": "intramuros (the model's own walls[].closedPolygon)",
+        "circuitFromModel": true,
+        "base": {
+          "F1F2": {
+            "probes": 45691,
+            "fronted": 25314,
+            "ratio": 0.554,
+            "runs": 2619,
+            "meanRunUnits": 9.66,
+            "p50RunUnits": 7.01,
+            "p90RunUnits": 19.05,
+            "maxRunUnits": 62.19,
+            "frontingMasses": 1190
+          },
+          "F1F2_maskFused": {
+            "probes": 45691,
+            "fronted": 25314,
+            "ratio": 0.554,
+            "runs": 1685,
+            "meanRunUnits": 15.01,
+            "p50RunUnits": 11.74,
+            "p90RunUnits": 30.77,
+            "maxRunUnits": 73.99,
+            "frontingMasses": 560
+          },
+          "F3": {
+            "scope": "intramuros (the model's own walls[].closedPolygon)",
+            "enclosureFormed": true,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": true,
+            "masses": 1598,
+            "intramuralInkAreaUnits2": 150502.88,
+            "freestandingDensity": 10.6177,
+            "meanMassFootprintUnits2": 94.18,
+            "largestMassFootprintUnits2": 1197.56,
+            "denominator": "150502.88 sq view units of building ink in intramuros (the model's own walls[].closedPolygon), carrying 1598 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 3060,
+            "bodiesAttributed": 3044,
+            "intramuralBodies": 3011,
+            "bodiesPerMass": 1.88,
+            "supersededFraction": {
+              "solitaryBodies": 199,
+              "intramuralBodies": 3011,
+              "freestandingFraction": 0.0661,
+              "fusedComponents": 654,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "armed": {
+          "F1F2": {
+            "probes": 45691,
+            "fronted": 25314,
+            "ratio": 0.554,
+            "runs": 2589,
+            "meanRunUnits": 9.77,
+            "p50RunUnits": 7.02,
+            "p90RunUnits": 19.2,
+            "maxRunUnits": 62.19,
+            "frontingMasses": 1174
+          },
+          "F1F2_maskFused": {
+            "probes": 45691,
+            "fronted": 25314,
+            "ratio": 0.554,
+            "runs": 1685,
+            "meanRunUnits": 15.01,
+            "p50RunUnits": 11.74,
+            "p90RunUnits": 30.77,
+            "maxRunUnits": 73.99,
+            "frontingMasses": 560
+          },
+          "F3": {
+            "scope": "intramuros (the model's own walls[].closedPolygon)",
+            "enclosureFormed": true,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": true,
+            "masses": 1574,
+            "intramuralInkAreaUnits2": 150881.1,
+            "freestandingDensity": 10.4321,
+            "meanMassFootprintUnits2": 95.86,
+            "largestMassFootprintUnits2": 1197.56,
+            "denominator": "150881.1 sq view units of building ink in intramuros (the model's own walls[].closedPolygon), carrying 1574 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 2534,
+            "bodiesAttributed": 2518,
+            "intramuralBodies": 2488,
+            "bodiesPerMass": 1.58,
+            "supersededFraction": {
+              "solitaryBodies": 206,
+              "intramuralBodies": 2488,
+              "freestandingFraction": 0.0828,
+              "fusedComponents": 652,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "delta": {
+          "freestandingDensityPct": -1.7,
+          "massesPct": -1.5,
+          "inkAreaPct": 0.3,
+          "drawnBodiesPct": -17.4,
+          "meanRunPct": 1.1,
+          "frontingMassesPct": -1.3,
+          "supersededFractionPct": 25.3
+        }
+      },
+      {
+        "leaf": "polycentric",
+        "tier": "town",
+        "frontage": 4.7,
+        "grid": 6200,
+        "gridReport": {
+          "grid": 6200,
+          "cellUnits": 0.1613,
+          "partyGapUnits": 0.1645,
+          "resolvesPartyGap": true,
+          "rule": "N = smallest multiple of 200 with cell ≤ frontage × 0.035, capped at 6400 (REG-1 §4b, recorded before measuring)"
+        },
+        "scope": "intramuros (the model's own walls[].closedPolygon)",
+        "circuitFromModel": true,
+        "base": {
+          "F1F2": {
+            "probes": 25566,
+            "fronted": 14689,
+            "ratio": 0.5746,
+            "runs": 1501,
+            "meanRunUnits": 9.82,
+            "p50RunUnits": 7.91,
+            "p90RunUnits": 19.86,
+            "maxRunUnits": 52.22,
+            "frontingMasses": 626
+          },
+          "F1F2_maskFused": {
+            "probes": 25566,
+            "fronted": 14689,
+            "ratio": 0.5746,
+            "runs": 1207,
+            "meanRunUnits": 12.21,
+            "p50RunUnits": 9.96,
+            "p90RunUnits": 25.94,
+            "maxRunUnits": 53.23,
+            "frontingMasses": 414
+          },
+          "F3": {
+            "scope": "intramuros (the model's own walls[].closedPolygon)",
+            "enclosureFormed": true,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": true,
+            "masses": 779,
+            "intramuralInkAreaUnits2": 49166.52,
+            "freestandingDensity": 15.8441,
+            "meanMassFootprintUnits2": 63.11,
+            "largestMassFootprintUnits2": 961.86,
+            "denominator": "49166.52 sq view units of building ink in intramuros (the model's own walls[].closedPolygon), carrying 779 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 1345,
+            "bodiesAttributed": 1343,
+            "intramuralBodies": 1258,
+            "bodiesPerMass": 1.61,
+            "supersededFraction": {
+              "solitaryBodies": 228,
+              "intramuralBodies": 1258,
+              "freestandingFraction": 0.1812,
+              "fusedComponents": 480,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "armed": {
+          "F1F2": {
+            "probes": 25566,
+            "fronted": 14689,
+            "ratio": 0.5746,
+            "runs": 1483,
+            "meanRunUnits": 9.94,
+            "p50RunUnits": 7.97,
+            "p90RunUnits": 20.01,
+            "maxRunUnits": 52.22,
+            "frontingMasses": 613
+          },
+          "F1F2_maskFused": {
+            "probes": 25566,
+            "fronted": 14689,
+            "ratio": 0.5746,
+            "runs": 1205,
+            "meanRunUnits": 12.23,
+            "p50RunUnits": 9.98,
+            "p90RunUnits": 25.94,
+            "maxRunUnits": 53.23,
+            "frontingMasses": 413
+          },
+          "F3": {
+            "scope": "intramuros (the model's own walls[].closedPolygon)",
+            "enclosureFormed": true,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": true,
+            "masses": 757,
+            "intramuralInkAreaUnits2": 49334.83,
+            "freestandingDensity": 15.3441,
+            "meanMassFootprintUnits2": 65.17,
+            "largestMassFootprintUnits2": 961.86,
+            "denominator": "49334.83 sq view units of building ink in intramuros (the model's own walls[].closedPolygon), carrying 757 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 1102,
+            "bodiesAttributed": 1094,
+            "intramuralBodies": 1022,
+            "bodiesPerMass": 1.35,
+            "supersededFraction": {
+              "solitaryBodies": 249,
+              "intramuralBodies": 1022,
+              "freestandingFraction": 0.2436,
+              "fusedComponents": 479,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "delta": {
+          "freestandingDensityPct": -3.2,
+          "massesPct": -2.8,
+          "inkAreaPct": 0.3,
+          "drawnBodiesPct": -18.8,
+          "meanRunPct": 1.2,
+          "frontingMassesPct": -2.1,
+          "supersededFractionPct": 34.4
+        }
+      },
+      {
+        "leaf": "highwater",
+        "tier": "town",
+        "frontage": 5.32,
+        "grid": 5400,
+        "gridReport": {
+          "grid": 5400,
+          "cellUnits": 0.1852,
+          "partyGapUnits": 0.1862,
+          "resolvesPartyGap": true,
+          "rule": "N = smallest multiple of 200 with cell ≤ frontage × 0.035, capped at 6400 (REG-1 §4b, recorded before measuring)"
+        },
+        "scope": "intramuros (the model's own walls[].closedPolygon)",
+        "circuitFromModel": true,
+        "base": {
+          "F1F2": {
+            "probes": 33041,
+            "fronted": 18508,
+            "ratio": 0.5602,
+            "runs": 1496,
+            "meanRunUnits": 12.39,
+            "p50RunUnits": 9.03,
+            "p90RunUnits": 26.88,
+            "maxRunUnits": 50.17,
+            "frontingMasses": 577
+          },
+          "F1F2_maskFused": {
+            "probes": 33041,
+            "fronted": 18508,
+            "ratio": 0.5602,
+            "runs": 1144,
+            "meanRunUnits": 16.2,
+            "p50RunUnits": 12.1,
+            "p90RunUnits": 34.11,
+            "maxRunUnits": 59.99,
+            "frontingMasses": 331
+          },
+          "F3": {
+            "scope": "intramuros (the model's own walls[].closedPolygon)",
+            "enclosureFormed": true,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": true,
+            "masses": 727,
+            "intramuralInkAreaUnits2": 95820.27,
+            "freestandingDensity": 7.5871,
+            "meanMassFootprintUnits2": 131.8,
+            "largestMassFootprintUnits2": 1315.98,
+            "denominator": "95820.27 sq view units of building ink in intramuros (the model's own walls[].closedPolygon), carrying 727 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 1527,
+            "bodiesAttributed": 1527,
+            "intramuralBodies": 1525,
+            "bodiesPerMass": 2.1,
+            "supersededFraction": {
+              "solitaryBodies": 143,
+              "intramuralBodies": 1525,
+              "freestandingFraction": 0.0938,
+              "fusedComponents": 357,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "armed": {
+          "F1F2": {
+            "probes": 33041,
+            "fronted": 18508,
+            "ratio": 0.5602,
+            "runs": 1495,
+            "meanRunUnits": 12.4,
+            "p50RunUnits": 9.03,
+            "p90RunUnits": 26.88,
+            "maxRunUnits": 50.17,
+            "frontingMasses": 575
+          },
+          "F1F2_maskFused": {
+            "probes": 33041,
+            "fronted": 18508,
+            "ratio": 0.5602,
+            "runs": 1144,
+            "meanRunUnits": 16.2,
+            "p50RunUnits": 12.1,
+            "p90RunUnits": 34.11,
+            "maxRunUnits": 59.99,
+            "frontingMasses": 331
+          },
+          "F3": {
+            "scope": "intramuros (the model's own walls[].closedPolygon)",
+            "enclosureFormed": true,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": true,
+            "masses": 721,
+            "intramuralInkAreaUnits2": 96146.91,
+            "freestandingDensity": 7.4989,
+            "meanMassFootprintUnits2": 133.35,
+            "largestMassFootprintUnits2": 1319.72,
+            "denominator": "96146.91 sq view units of building ink in intramuros (the model's own walls[].closedPolygon), carrying 721 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 1205,
+            "bodiesAttributed": 1197,
+            "intramuralBodies": 1195,
+            "bodiesPerMass": 1.66,
+            "supersededFraction": {
+              "solitaryBodies": 150,
+              "intramuralBodies": 1195,
+              "freestandingFraction": 0.1255,
+              "fusedComponents": 357,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "delta": {
+          "freestandingDensityPct": -1.2,
+          "massesPct": -0.8,
+          "inkAreaPct": 0.3,
+          "drawnBodiesPct": -21.6,
+          "meanRunPct": 0.1,
+          "frontingMassesPct": -0.3,
+          "supersededFractionPct": 33.8
+        }
+      },
+      {
+        "leaf": "mountain",
+        "tier": "village",
+        "frontage": 12,
+        "grid": 2400,
+        "gridReport": {
+          "grid": 2400,
+          "cellUnits": 0.4167,
+          "partyGapUnits": 0.42,
+          "resolvesPartyGap": true,
+          "rule": "N = smallest multiple of 200 with cell ≤ frontage × 0.035, capped at 6400 (REG-1 §4b, recorded before measuring)"
+        },
+        "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
+        "circuitFromModel": false,
+        "base": {
+          "F1F2": {
+            "probes": 2532,
+            "fronted": 2052,
+            "ratio": 0.8104,
+            "runs": 113,
+            "meanRunUnits": 18.15,
+            "p50RunUnits": 12,
+            "p90RunUnits": 36.13,
+            "maxRunUnits": 50.19,
+            "frontingMasses": 37
+          },
+          "F1F2_maskFused": {
+            "probes": 2532,
+            "fronted": 2054,
+            "ratio": 0.8112,
+            "runs": 83,
+            "meanRunUnits": 24.73,
+            "p50RunUnits": 14.11,
+            "p90RunUnits": 80.3,
+            "maxRunUnits": 86.32,
+            "frontingMasses": 11
+          },
+          "F3": {
+            "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
+            "enclosureFormed": false,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": false,
+            "masses": 66,
+            "intramuralInkAreaUnits2": 7339.76,
+            "freestandingDensity": 8.9921,
+            "meanMassFootprintUnits2": 111.21,
+            "largestMassFootprintUnits2": 706.25,
+            "denominator": "7339.76 sq view units of building ink in urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named), carrying 66 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 98,
+            "bodiesAttributed": 98,
+            "intramuralBodies": 98,
+            "bodiesPerMass": 1.48,
+            "supersededFraction": {
+              "solitaryBodies": 9,
+              "intramuralBodies": 98,
+              "freestandingFraction": 0.0918,
+              "fusedComponents": 12,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "armed": {
+          "F1F2": {
+            "probes": 2532,
+            "fronted": 2052,
+            "ratio": 0.8104,
+            "runs": 113,
+            "meanRunUnits": 18.15,
+            "p50RunUnits": 12,
+            "p90RunUnits": 36.13,
+            "maxRunUnits": 50.19,
+            "frontingMasses": 37
+          },
+          "F1F2_maskFused": {
+            "probes": 2532,
+            "fronted": 2054,
+            "ratio": 0.8112,
+            "runs": 83,
+            "meanRunUnits": 24.73,
+            "p50RunUnits": 14.11,
+            "p90RunUnits": 80.3,
+            "maxRunUnits": 86.32,
+            "frontingMasses": 11
+          },
+          "F3": {
+            "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
+            "enclosureFormed": false,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": false,
+            "masses": 63,
+            "intramuralInkAreaUnits2": 7406.08,
+            "freestandingDensity": 8.5065,
+            "meanMassFootprintUnits2": 117.56,
+            "largestMassFootprintUnits2": 712.33,
+            "denominator": "7406.08 sq view units of building ink in urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named), carrying 63 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 77,
+            "bodiesAttributed": 77,
+            "intramuralBodies": 77,
+            "bodiesPerMass": 1.22,
+            "supersededFraction": {
+              "solitaryBodies": 9,
+              "intramuralBodies": 77,
+              "freestandingFraction": 0.1169,
+              "fusedComponents": 12,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "delta": {
+          "freestandingDensityPct": -5.4,
+          "massesPct": -4.5,
+          "inkAreaPct": 0.9,
+          "drawnBodiesPct": -21.4,
+          "meanRunPct": 0,
+          "frontingMassesPct": 0,
+          "supersededFractionPct": 27.3
+        }
+      },
+      {
+        "leaf": "fjord",
+        "tier": "town",
+        "frontage": 4.82,
+        "grid": 6000,
+        "gridReport": {
+          "grid": 6000,
+          "cellUnits": 0.1667,
+          "partyGapUnits": 0.1687,
+          "resolvesPartyGap": true,
+          "rule": "N = smallest multiple of 200 with cell ≤ frontage × 0.035, capped at 6400 (REG-1 §4b, recorded before measuring)"
+        },
+        "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
+        "circuitFromModel": false,
+        "base": {
+          "F1F2": {
+            "probes": 30069,
+            "fronted": 15986,
+            "ratio": 0.5316,
+            "runs": 1502,
+            "meanRunUnits": 10.66,
+            "p50RunUnits": 8.02,
+            "p90RunUnits": 22.08,
+            "maxRunUnits": 53.81,
+            "frontingMasses": 624
+          },
+          "F1F2_maskFused": {
+            "probes": 30069,
+            "fronted": 15986,
+            "ratio": 0.5316,
+            "runs": 1172,
+            "meanRunUnits": 13.67,
+            "p50RunUnits": 10.95,
+            "p90RunUnits": 28.91,
+            "maxRunUnits": 99.65,
+            "frontingMasses": 389
+          },
+          "F3": {
+            "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
+            "enclosureFormed": false,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": false,
+            "masses": 834,
+            "intramuralInkAreaUnits2": 73372.44,
+            "freestandingDensity": 11.3667,
+            "meanMassFootprintUnits2": 87.98,
+            "largestMassFootprintUnits2": 1142.08,
+            "denominator": "73372.44 sq view units of building ink in urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named), carrying 834 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 1458,
+            "bodiesAttributed": 1458,
+            "intramuralBodies": 1458,
+            "bodiesPerMass": 1.75,
+            "supersededFraction": {
+              "solitaryBodies": 215,
+              "intramuralBodies": 1458,
+              "freestandingFraction": 0.1475,
+              "fusedComponents": 436,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "armed": {
+          "F1F2": {
+            "probes": 30069,
+            "fronted": 15987,
+            "ratio": 0.5317,
+            "runs": 1477,
+            "meanRunUnits": 10.85,
+            "p50RunUnits": 8.09,
+            "p90RunUnits": 22.19,
+            "maxRunUnits": 53.81,
+            "frontingMasses": 610
+          },
+          "F1F2_maskFused": {
+            "probes": 30069,
+            "fronted": 15987,
+            "ratio": 0.5317,
+            "runs": 1172,
+            "meanRunUnits": 13.67,
+            "p50RunUnits": 10.95,
+            "p90RunUnits": 28.91,
+            "maxRunUnits": 99.65,
+            "frontingMasses": 389
+          },
+          "F3": {
+            "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
+            "enclosureFormed": false,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": false,
+            "masses": 818,
+            "intramuralInkAreaUnits2": 73559.06,
+            "freestandingDensity": 11.1203,
+            "meanMassFootprintUnits2": 89.93,
+            "largestMassFootprintUnits2": 1143.33,
+            "denominator": "73559.06 sq view units of building ink in urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named), carrying 818 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 1187,
+            "bodiesAttributed": 1171,
+            "intramuralBodies": 1171,
+            "bodiesPerMass": 1.43,
+            "supersededFraction": {
+              "solitaryBodies": 233,
+              "intramuralBodies": 1171,
+              "freestandingFraction": 0.199,
+              "fusedComponents": 435,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "delta": {
+          "freestandingDensityPct": -2.2,
+          "massesPct": -1.9,
+          "inkAreaPct": 0.3,
+          "drawnBodiesPct": -19.7,
+          "meanRunPct": 1.8,
+          "frontingMassesPct": -2.2,
+          "supersededFractionPct": 34.9
+        }
+      },
+      {
+        "leaf": "siege",
+        "tier": "town",
+        "frontage": 4.93,
+        "grid": 5800,
+        "gridReport": {
+          "grid": 5800,
+          "cellUnits": 0.1724,
+          "partyGapUnits": 0.1726,
+          "resolvesPartyGap": true,
+          "rule": "N = smallest multiple of 200 with cell ≤ frontage × 0.035, capped at 6400 (REG-1 §4b, recorded before measuring)"
+        },
+        "scope": "intramuros (the model's own walls[].closedPolygon)",
+        "circuitFromModel": true,
+        "base": {
+          "F1F2": {
+            "probes": 30243,
+            "fronted": 16713,
+            "ratio": 0.5526,
+            "runs": 1574,
+            "meanRunUnits": 10.65,
+            "p50RunUnits": 8.02,
+            "p90RunUnits": 22.03,
+            "maxRunUnits": 54.09,
+            "frontingMasses": 598
+          },
+          "F1F2_maskFused": {
+            "probes": 30243,
+            "fronted": 16713,
+            "ratio": 0.5526,
+            "runs": 1233,
+            "meanRunUnits": 13.6,
+            "p50RunUnits": 10.92,
+            "p90RunUnits": 28.09,
+            "maxRunUnits": 54.09,
+            "frontingMasses": 359
+          },
+          "F3": {
+            "scope": "intramuros (the model's own walls[].closedPolygon)",
+            "enclosureFormed": true,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": true,
+            "masses": 770,
+            "intramuralInkAreaUnits2": 65829.19,
+            "freestandingDensity": 11.6969,
+            "meanMassFootprintUnits2": 85.49,
+            "largestMassFootprintUnits2": 1247.44,
+            "denominator": "65829.19 sq view units of building ink in intramuros (the model's own walls[].closedPolygon), carrying 770 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 1436,
+            "bodiesAttributed": 1435,
+            "intramuralBodies": 1373,
+            "bodiesPerMass": 1.78,
+            "supersededFraction": {
+              "solitaryBodies": 176,
+              "intramuralBodies": 1373,
+              "freestandingFraction": 0.1282,
+              "fusedComponents": 406,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "armed": {
+          "F1F2": {
+            "probes": 30244,
+            "fronted": 16713,
+            "ratio": 0.5526,
+            "runs": 1562,
+            "meanRunUnits": 10.73,
+            "p50RunUnits": 8.04,
+            "p90RunUnits": 22.04,
+            "maxRunUnits": 54.09,
+            "frontingMasses": 589
+          },
+          "F1F2_maskFused": {
+            "probes": 30244,
+            "fronted": 16713,
+            "ratio": 0.5526,
+            "runs": 1230,
+            "meanRunUnits": 13.63,
+            "p50RunUnits": 10.93,
+            "p90RunUnits": 28.87,
+            "maxRunUnits": 54.09,
+            "frontingMasses": 358
+          },
+          "F3": {
+            "scope": "intramuros (the model's own walls[].closedPolygon)",
+            "enclosureFormed": true,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": true,
+            "masses": 754,
+            "intramuralInkAreaUnits2": 66062.22,
+            "freestandingDensity": 11.4135,
+            "meanMassFootprintUnits2": 87.62,
+            "largestMassFootprintUnits2": 1247.44,
+            "denominator": "66062.22 sq view units of building ink in intramuros (the model's own walls[].closedPolygon), carrying 754 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 1158,
+            "bodiesAttributed": 1151,
+            "intramuralBodies": 1098,
+            "bodiesPerMass": 1.46,
+            "supersededFraction": {
+              "solitaryBodies": 191,
+              "intramuralBodies": 1098,
+              "freestandingFraction": 0.174,
+              "fusedComponents": 404,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "delta": {
+          "freestandingDensityPct": -2.4,
+          "massesPct": -2.1,
+          "inkAreaPct": 0.4,
+          "drawnBodiesPct": -20,
+          "meanRunPct": 0.8,
+          "frontingMassesPct": -1.5,
+          "supersededFractionPct": 35.7
+        }
+      },
+      {
+        "leaf": "plague",
+        "tier": "town",
+        "frontage": 4.93,
+        "grid": 5800,
+        "gridReport": {
+          "grid": 5800,
+          "cellUnits": 0.1724,
+          "partyGapUnits": 0.1726,
+          "resolvesPartyGap": true,
+          "rule": "N = smallest multiple of 200 with cell ≤ frontage × 0.035, capped at 6400 (REG-1 §4b, recorded before measuring)"
+        },
+        "scope": "intramuros (the model's own walls[].closedPolygon)",
+        "circuitFromModel": true,
+        "base": {
+          "F1F2": {
+            "probes": 30243,
+            "fronted": 16713,
+            "ratio": 0.5526,
+            "runs": 1574,
+            "meanRunUnits": 10.65,
+            "p50RunUnits": 8.02,
+            "p90RunUnits": 22.03,
+            "maxRunUnits": 54.09,
+            "frontingMasses": 598
+          },
+          "F1F2_maskFused": {
+            "probes": 30243,
+            "fronted": 16713,
+            "ratio": 0.5526,
+            "runs": 1233,
+            "meanRunUnits": 13.6,
+            "p50RunUnits": 10.92,
+            "p90RunUnits": 28.09,
+            "maxRunUnits": 54.09,
+            "frontingMasses": 359
+          },
+          "F3": {
+            "scope": "intramuros (the model's own walls[].closedPolygon)",
+            "enclosureFormed": true,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": true,
+            "masses": 770,
+            "intramuralInkAreaUnits2": 65829.19,
+            "freestandingDensity": 11.6969,
+            "meanMassFootprintUnits2": 85.49,
+            "largestMassFootprintUnits2": 1247.44,
+            "denominator": "65829.19 sq view units of building ink in intramuros (the model's own walls[].closedPolygon), carrying 770 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 1436,
+            "bodiesAttributed": 1435,
+            "intramuralBodies": 1373,
+            "bodiesPerMass": 1.78,
+            "supersededFraction": {
+              "solitaryBodies": 176,
+              "intramuralBodies": 1373,
+              "freestandingFraction": 0.1282,
+              "fusedComponents": 406,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "armed": {
+          "F1F2": {
+            "probes": 30244,
+            "fronted": 16713,
+            "ratio": 0.5526,
+            "runs": 1562,
+            "meanRunUnits": 10.73,
+            "p50RunUnits": 8.04,
+            "p90RunUnits": 22.04,
+            "maxRunUnits": 54.09,
+            "frontingMasses": 589
+          },
+          "F1F2_maskFused": {
+            "probes": 30244,
+            "fronted": 16713,
+            "ratio": 0.5526,
+            "runs": 1230,
+            "meanRunUnits": 13.63,
+            "p50RunUnits": 10.93,
+            "p90RunUnits": 28.87,
+            "maxRunUnits": 54.09,
+            "frontingMasses": 358
+          },
+          "F3": {
+            "scope": "intramuros (the model's own walls[].closedPolygon)",
+            "enclosureFormed": true,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": true,
+            "masses": 754,
+            "intramuralInkAreaUnits2": 66062.22,
+            "freestandingDensity": 11.4135,
+            "meanMassFootprintUnits2": 87.62,
+            "largestMassFootprintUnits2": 1247.44,
+            "denominator": "66062.22 sq view units of building ink in intramuros (the model's own walls[].closedPolygon), carrying 754 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 1158,
+            "bodiesAttributed": 1151,
+            "intramuralBodies": 1098,
+            "bodiesPerMass": 1.46,
+            "supersededFraction": {
+              "solitaryBodies": 191,
+              "intramuralBodies": 1098,
+              "freestandingFraction": 0.174,
+              "fusedComponents": 404,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "delta": {
+          "freestandingDensityPct": -2.4,
+          "massesPct": -2.1,
+          "inkAreaPct": 0.4,
+          "drawnBodiesPct": -20,
+          "meanRunPct": 0.8,
+          "frontingMassesPct": -1.5,
+          "supersededFractionPct": 35.7
+        }
+      },
+      {
+        "leaf": "famine",
+        "tier": "town",
+        "frontage": 4.93,
+        "grid": 5800,
+        "gridReport": {
+          "grid": 5800,
+          "cellUnits": 0.1724,
+          "partyGapUnits": 0.1726,
+          "resolvesPartyGap": true,
+          "rule": "N = smallest multiple of 200 with cell ≤ frontage × 0.035, capped at 6400 (REG-1 §4b, recorded before measuring)"
+        },
+        "scope": "intramuros (the model's own walls[].closedPolygon)",
+        "circuitFromModel": true,
+        "base": {
+          "F1F2": {
+            "probes": 30243,
+            "fronted": 16713,
+            "ratio": 0.5526,
+            "runs": 1574,
+            "meanRunUnits": 10.65,
+            "p50RunUnits": 8.02,
+            "p90RunUnits": 22.03,
+            "maxRunUnits": 54.09,
+            "frontingMasses": 598
+          },
+          "F1F2_maskFused": {
+            "probes": 30243,
+            "fronted": 16713,
+            "ratio": 0.5526,
+            "runs": 1233,
+            "meanRunUnits": 13.6,
+            "p50RunUnits": 10.92,
+            "p90RunUnits": 28.09,
+            "maxRunUnits": 54.09,
+            "frontingMasses": 359
+          },
+          "F3": {
+            "scope": "intramuros (the model's own walls[].closedPolygon)",
+            "enclosureFormed": true,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": true,
+            "masses": 770,
+            "intramuralInkAreaUnits2": 65829.19,
+            "freestandingDensity": 11.6969,
+            "meanMassFootprintUnits2": 85.49,
+            "largestMassFootprintUnits2": 1247.44,
+            "denominator": "65829.19 sq view units of building ink in intramuros (the model's own walls[].closedPolygon), carrying 770 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 1436,
+            "bodiesAttributed": 1435,
+            "intramuralBodies": 1373,
+            "bodiesPerMass": 1.78,
+            "supersededFraction": {
+              "solitaryBodies": 176,
+              "intramuralBodies": 1373,
+              "freestandingFraction": 0.1282,
+              "fusedComponents": 406,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "armed": {
+          "F1F2": {
+            "probes": 30244,
+            "fronted": 16713,
+            "ratio": 0.5526,
+            "runs": 1562,
+            "meanRunUnits": 10.73,
+            "p50RunUnits": 8.04,
+            "p90RunUnits": 22.04,
+            "maxRunUnits": 54.09,
+            "frontingMasses": 589
+          },
+          "F1F2_maskFused": {
+            "probes": 30244,
+            "fronted": 16713,
+            "ratio": 0.5526,
+            "runs": 1230,
+            "meanRunUnits": 13.63,
+            "p50RunUnits": 10.93,
+            "p90RunUnits": 28.87,
+            "maxRunUnits": 54.09,
+            "frontingMasses": 358
+          },
+          "F3": {
+            "scope": "intramuros (the model's own walls[].closedPolygon)",
+            "enclosureFormed": true,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": true,
+            "masses": 754,
+            "intramuralInkAreaUnits2": 66062.22,
+            "freestandingDensity": 11.4135,
+            "meanMassFootprintUnits2": 87.62,
+            "largestMassFootprintUnits2": 1247.44,
+            "denominator": "66062.22 sq view units of building ink in intramuros (the model's own walls[].closedPolygon), carrying 754 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 1158,
+            "bodiesAttributed": 1151,
+            "intramuralBodies": 1098,
+            "bodiesPerMass": 1.46,
+            "supersededFraction": {
+              "solitaryBodies": 191,
+              "intramuralBodies": 1098,
+              "freestandingFraction": 0.174,
+              "fusedComponents": 404,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "delta": {
+          "freestandingDensityPct": -2.4,
+          "massesPct": -2.1,
+          "inkAreaPct": 0.4,
+          "drawnBodiesPct": -20,
+          "meanRunPct": 0.8,
+          "frontingMassesPct": -1.5,
+          "supersededFractionPct": 35.7
+        }
+      },
+      {
+        "leaf": "migration",
+        "tier": "city",
+        "frontage": 6.25,
+        "grid": 4600,
+        "gridReport": {
+          "grid": 4600,
+          "cellUnits": 0.2174,
+          "partyGapUnits": 0.2188,
+          "resolvesPartyGap": true,
+          "rule": "N = smallest multiple of 200 with cell ≤ frontage × 0.035, capped at 6400 (REG-1 §4b, recorded before measuring)"
+        },
+        "scope": "intramuros (the model's own walls[].closedPolygon)",
+        "circuitFromModel": true,
+        "base": {
+          "F1F2": {
+            "probes": 38700,
+            "fronted": 20421,
+            "ratio": 0.5277,
+            "runs": 1978,
+            "meanRunUnits": 10.32,
+            "p50RunUnits": 8,
+            "p90RunUnits": 20.97,
+            "maxRunUnits": 68.75,
+            "frontingMasses": 813
+          },
+          "F1F2_maskFused": {
+            "probes": 38700,
+            "fronted": 20421,
+            "ratio": 0.5277,
+            "runs": 1349,
+            "meanRunUnits": 15.14,
+            "p50RunUnits": 11.98,
+            "p90RunUnits": 33.1,
+            "maxRunUnits": 69.75,
+            "frontingMasses": 367
+          },
+          "F3": {
+            "scope": "intramuros (the model's own walls[].closedPolygon)",
+            "enclosureFormed": true,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": true,
+            "masses": 988,
+            "intramuralInkAreaUnits2": 119172.21,
+            "freestandingDensity": 8.2905,
+            "meanMassFootprintUnits2": 120.62,
+            "largestMassFootprintUnits2": 1826.28,
+            "denominator": "119172.21 sq view units of building ink in intramuros (the model's own walls[].closedPolygon), carrying 988 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 2045,
+            "bodiesAttributed": 2041,
+            "intramuralBodies": 1886,
+            "bodiesPerMass": 1.91,
+            "supersededFraction": {
+              "solitaryBodies": 123,
+              "intramuralBodies": 1886,
+              "freestandingFraction": 0.0652,
+              "fusedComponents": 399,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "armed": {
+          "F1F2": {
+            "probes": 38699,
+            "fronted": 20335,
+            "ratio": 0.5255,
+            "runs": 1899,
+            "meanRunUnits": 10.71,
+            "p50RunUnits": 8.01,
+            "p90RunUnits": 22.83,
+            "maxRunUnits": 68.75,
+            "frontingMasses": 770
+          },
+          "F1F2_maskFused": {
+            "probes": 38699,
+            "fronted": 20335,
+            "ratio": 0.5255,
+            "runs": 1343,
+            "meanRunUnits": 15.14,
+            "p50RunUnits": 11.96,
+            "p90RunUnits": 33.97,
+            "maxRunUnits": 69.75,
+            "frontingMasses": 365
+          },
+          "F3": {
+            "scope": "intramuros (the model's own walls[].closedPolygon)",
+            "enclosureFormed": true,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": true,
+            "masses": 946,
+            "intramuralInkAreaUnits2": 119347.54,
+            "freestandingDensity": 7.9264,
+            "meanMassFootprintUnits2": 126.16,
+            "largestMassFootprintUnits2": 1826.28,
+            "denominator": "119347.54 sq view units of building ink in intramuros (the model's own walls[].closedPolygon), carrying 946 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 1717,
+            "bodiesAttributed": 1711,
+            "intramuralBodies": 1587,
+            "bodiesPerMass": 1.68,
+            "supersededFraction": {
+              "solitaryBodies": 128,
+              "intramuralBodies": 1587,
+              "freestandingFraction": 0.0807,
+              "fusedComponents": 397,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "delta": {
+          "freestandingDensityPct": -4.4,
+          "massesPct": -4.3,
+          "inkAreaPct": 0.1,
+          "drawnBodiesPct": -15.9,
+          "meanRunPct": 3.8,
+          "frontingMassesPct": -5.3,
+          "supersededFractionPct": 23.8
+        }
+      },
+      {
+        "leaf": "year-018",
+        "tier": "town",
+        "frontage": 4.93,
+        "grid": 5800,
+        "gridReport": {
+          "grid": 5800,
+          "cellUnits": 0.1724,
+          "partyGapUnits": 0.1726,
+          "resolvesPartyGap": true,
+          "rule": "N = smallest multiple of 200 with cell ≤ frontage × 0.035, capped at 6400 (REG-1 §4b, recorded before measuring)"
+        },
+        "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
+        "circuitFromModel": false,
+        "base": {
+          "F1F2": {
+            "probes": 29577,
+            "fronted": 16721,
+            "ratio": 0.5653,
+            "runs": 1546,
+            "meanRunUnits": 10.85,
+            "p50RunUnits": 8.08,
+            "p90RunUnits": 22.3,
+            "maxRunUnits": 54.09,
+            "frontingMasses": 601
+          },
+          "F1F2_maskFused": {
+            "probes": 29577,
+            "fronted": 16721,
+            "ratio": 0.5653,
+            "runs": 1188,
+            "meanRunUnits": 14.12,
+            "p50RunUnits": 11.05,
+            "p90RunUnits": 29.1,
+            "maxRunUnits": 54.09,
+            "frontingMasses": 354
+          },
+          "F3": {
+            "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
+            "enclosureFormed": false,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": false,
+            "masses": 840,
+            "intramuralInkAreaUnits2": 72261.56,
+            "freestandingDensity": 11.6244,
+            "meanMassFootprintUnits2": 86.03,
+            "largestMassFootprintUnits2": 1247.44,
+            "denominator": "72261.56 sq view units of building ink in urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named), carrying 840 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 1501,
+            "bodiesAttributed": 1501,
+            "intramuralBodies": 1501,
+            "bodiesPerMass": 1.79,
+            "supersededFraction": {
+              "solitaryBodies": 184,
+              "intramuralBodies": 1501,
+              "freestandingFraction": 0.1226,
+              "fusedComponents": 401,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "armed": {
+          "F1F2": {
+            "probes": 29578,
+            "fronted": 16721,
+            "ratio": 0.5653,
+            "runs": 1539,
+            "meanRunUnits": 10.9,
+            "p50RunUnits": 8.13,
+            "p90RunUnits": 22.56,
+            "maxRunUnits": 54.09,
+            "frontingMasses": 594
+          },
+          "F1F2_maskFused": {
+            "probes": 29578,
+            "fronted": 16721,
+            "ratio": 0.5653,
+            "runs": 1188,
+            "meanRunUnits": 14.12,
+            "p50RunUnits": 11.05,
+            "p90RunUnits": 29.1,
+            "maxRunUnits": 54.09,
+            "frontingMasses": 354
+          },
+          "F3": {
+            "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
+            "enclosureFormed": false,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": false,
+            "masses": 825,
+            "intramuralInkAreaUnits2": 72511.56,
+            "freestandingDensity": 11.3775,
+            "meanMassFootprintUnits2": 87.89,
+            "largestMassFootprintUnits2": 1247.44,
+            "denominator": "72511.56 sq view units of building ink in urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named), carrying 825 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 1200,
+            "bodiesAttributed": 1194,
+            "intramuralBodies": 1194,
+            "bodiesPerMass": 1.45,
+            "supersededFraction": {
+              "solitaryBodies": 199,
+              "intramuralBodies": 1194,
+              "freestandingFraction": 0.1667,
+              "fusedComponents": 401,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "delta": {
+          "freestandingDensityPct": -2.1,
+          "massesPct": -1.8,
+          "inkAreaPct": 0.3,
+          "drawnBodiesPct": -20.5,
+          "meanRunPct": 0.5,
+          "frontingMassesPct": -1.2,
+          "supersededFractionPct": 36
+        }
+      },
+      {
+        "leaf": "year-100",
+        "tier": "town",
+        "frontage": 4.93,
+        "grid": 5800,
+        "gridReport": {
+          "grid": 5800,
+          "cellUnits": 0.1724,
+          "partyGapUnits": 0.1726,
+          "resolvesPartyGap": true,
+          "rule": "N = smallest multiple of 200 with cell ≤ frontage × 0.035, capped at 6400 (REG-1 §4b, recorded before measuring)"
+        },
+        "scope": "intramuros (the model's own walls[].closedPolygon)",
+        "circuitFromModel": true,
+        "base": {
+          "F1F2": {
+            "probes": 29577,
+            "fronted": 16721,
+            "ratio": 0.5653,
+            "runs": 1546,
+            "meanRunUnits": 10.85,
+            "p50RunUnits": 8.08,
+            "p90RunUnits": 22.3,
+            "maxRunUnits": 54.09,
+            "frontingMasses": 601
+          },
+          "F1F2_maskFused": {
+            "probes": 29577,
+            "fronted": 16721,
+            "ratio": 0.5653,
+            "runs": 1188,
+            "meanRunUnits": 14.12,
+            "p50RunUnits": 11.05,
+            "p90RunUnits": 29.1,
+            "maxRunUnits": 54.09,
+            "frontingMasses": 354
+          },
+          "F3": {
+            "scope": "intramuros (the model's own walls[].closedPolygon)",
+            "enclosureFormed": true,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": true,
+            "masses": 840,
+            "intramuralInkAreaUnits2": 72252.94,
+            "freestandingDensity": 11.6258,
+            "meanMassFootprintUnits2": 86.02,
+            "largestMassFootprintUnits2": 1247.44,
+            "denominator": "72252.94 sq view units of building ink in intramuros (the model's own walls[].closedPolygon), carrying 840 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 1501,
+            "bodiesAttributed": 1501,
+            "intramuralBodies": 1501,
+            "bodiesPerMass": 1.79,
+            "supersededFraction": {
+              "solitaryBodies": 184,
+              "intramuralBodies": 1501,
+              "freestandingFraction": 0.1226,
+              "fusedComponents": 401,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "armed": {
+          "F1F2": {
+            "probes": 29578,
+            "fronted": 16721,
+            "ratio": 0.5653,
+            "runs": 1539,
+            "meanRunUnits": 10.9,
+            "p50RunUnits": 8.13,
+            "p90RunUnits": 22.56,
+            "maxRunUnits": 54.09,
+            "frontingMasses": 594
+          },
+          "F1F2_maskFused": {
+            "probes": 29578,
+            "fronted": 16721,
+            "ratio": 0.5653,
+            "runs": 1188,
+            "meanRunUnits": 14.12,
+            "p50RunUnits": 11.05,
+            "p90RunUnits": 29.1,
+            "maxRunUnits": 54.09,
+            "frontingMasses": 354
+          },
+          "F3": {
+            "scope": "intramuros (the model's own walls[].closedPolygon)",
+            "enclosureFormed": true,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": true,
+            "masses": 825,
+            "intramuralInkAreaUnits2": 72502.94,
+            "freestandingDensity": 11.3788,
+            "meanMassFootprintUnits2": 87.88,
+            "largestMassFootprintUnits2": 1247.44,
+            "denominator": "72502.94 sq view units of building ink in intramuros (the model's own walls[].closedPolygon), carrying 825 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 1200,
+            "bodiesAttributed": 1194,
+            "intramuralBodies": 1194,
+            "bodiesPerMass": 1.45,
+            "supersededFraction": {
+              "solitaryBodies": 199,
+              "intramuralBodies": 1194,
+              "freestandingFraction": 0.1667,
+              "fusedComponents": 401,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "delta": {
+          "freestandingDensityPct": -2.1,
+          "massesPct": -1.8,
+          "inkAreaPct": 0.3,
+          "drawnBodiesPct": -20.5,
+          "meanRunPct": 0.5,
+          "frontingMassesPct": -1.2,
+          "supersededFractionPct": 36
+        }
+      },
+      {
+        "leaf": "crossing",
+        "tier": "town",
+        "frontage": 5.29,
+        "grid": 5600,
+        "gridReport": {
+          "grid": 5600,
+          "cellUnits": 0.1786,
+          "partyGapUnits": 0.1852,
+          "resolvesPartyGap": true,
+          "rule": "N = smallest multiple of 200 with cell ≤ frontage × 0.035, capped at 6400 (REG-1 §4b, recorded before measuring)"
+        },
+        "scope": "intramuros (the model's own walls[].closedPolygon)",
+        "circuitFromModel": true,
+        "base": {
+          "F1F2": {
+            "probes": 33307,
+            "fronted": 17530,
+            "ratio": 0.5263,
+            "runs": 1556,
+            "meanRunUnits": 11.29,
+            "p50RunUnits": 8.53,
+            "p90RunUnits": 23.95,
+            "maxRunUnits": 58.04,
+            "frontingMasses": 647
+          },
+          "F1F2_maskFused": {
+            "probes": 33307,
+            "fronted": 17530,
+            "ratio": 0.5263,
+            "runs": 1224,
+            "meanRunUnits": 14.35,
+            "p50RunUnits": 11.01,
+            "p90RunUnits": 31.05,
+            "maxRunUnits": 60.04,
+            "frontingMasses": 402
+          },
+          "F3": {
+            "scope": "intramuros (the model's own walls[].closedPolygon)",
+            "enclosureFormed": true,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": true,
+            "masses": 772,
+            "intramuralInkAreaUnits2": 76924.52,
+            "freestandingDensity": 10.0358,
+            "meanMassFootprintUnits2": 99.64,
+            "largestMassFootprintUnits2": 1455.68,
+            "denominator": "76924.52 sq view units of building ink in intramuros (the model's own walls[].closedPolygon), carrying 772 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 1499,
+            "bodiesAttributed": 1496,
+            "intramuralBodies": 1337,
+            "bodiesPerMass": 1.73,
+            "supersededFraction": {
+              "solitaryBodies": 175,
+              "intramuralBodies": 1337,
+              "freestandingFraction": 0.1309,
+              "fusedComponents": 451,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "armed": {
+          "F1F2": {
+            "probes": 33307,
+            "fronted": 17531,
+            "ratio": 0.5263,
+            "runs": 1535,
+            "meanRunUnits": 11.44,
+            "p50RunUnits": 8.82,
+            "p90RunUnits": 24.97,
+            "maxRunUnits": 58.04,
+            "frontingMasses": 633
+          },
+          "F1F2_maskFused": {
+            "probes": 33307,
+            "fronted": 17531,
+            "ratio": 0.5263,
+            "runs": 1224,
+            "meanRunUnits": 14.35,
+            "p50RunUnits": 11.01,
+            "p90RunUnits": 31.05,
+            "maxRunUnits": 60.04,
+            "frontingMasses": 402
+          },
+          "F3": {
+            "scope": "intramuros (the model's own walls[].closedPolygon)",
+            "enclosureFormed": true,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": true,
+            "masses": 750,
+            "intramuralInkAreaUnits2": 77181.54,
+            "freestandingDensity": 9.7173,
+            "meanMassFootprintUnits2": 102.91,
+            "largestMassFootprintUnits2": 1456.63,
+            "denominator": "77181.54 sq view units of building ink in intramuros (the model's own walls[].closedPolygon), carrying 750 connected masses",
+            "inkMeasured": "building + landmark fill as drawn",
+            "bodiesDrawn": 1192,
+            "bodiesAttributed": 1177,
+            "intramuralBodies": 1035,
+            "bodiesPerMass": 1.38,
+            "supersededFraction": {
+              "solitaryBodies": 195,
+              "intramuralBodies": 1035,
+              "freestandingFraction": 0.1884,
+              "fusedComponents": 451,
+              "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+            }
+          }
+        },
+        "delta": {
+          "freestandingDensityPct": -3.2,
+          "massesPct": -2.8,
+          "inkAreaPct": 0.3,
+          "drawnBodiesPct": -22.6,
+          "meanRunPct": 1.3,
+          "frontingMassesPct": -2.2,
+          "supersededFractionPct": 43.9
+        }
+      }
+    ]
+  },
   "model": [
     {
-      "leaf": "city",
-      "name": "Kitaqiao",
-      "tier": "city",
-      "population": 20091,
+      "leaf": "thorp",
+      "name": "Dar-al-kala",
+      "tier": "thorp",
+      "population": 27,
       "i2_routeTrace": {
         "applicable": true,
         "heart": "square.heart",
         "heartAt": [
-          432.29,
-          526.04
+          421.88,
+          567.71
         ],
-        "floorUnits": 3.87,
+        "floorUnits": 8.87,
         "floorSource": "the leaf's own web.widths.blockLane",
-        "voidCells": 181598,
-        "gatesTotal": 6,
+        "voidCells": 38665,
+        "gatesTotal": 2,
         "gatesBricked": 0,
-        "reachable": 6,
-        "passing": 6,
-        "subjectsWere": "circuit gates",
+        "reachable": 2,
+        "passing": 2,
+        "subjectsWere": "road entries (unwalled leaf)",
         "rows": [
           {
-            "gate": "gate.E2.road.high.corridor.0~frame.0",
+            "gate": "approach:road.high.corridor.0~frame.0",
             "bricked": false,
-            "ringKind": "main",
+            "ringKind": "no circuit — road entry, snapped to the first drawn point along the road",
             "reachable": true,
-            "bottleneckWidthUnits": 16,
-            "pathLengthUnits": 541.3,
-            "straightLineUnits": 500.41,
-            "detourRatio": 1.0817,
+            "bottleneckWidthUnits": 19.66,
+            "pathLengthUnits": 611.55,
+            "straightLineUnits": 586.94,
+            "detourRatio": 1.0419,
             "pass": true
           },
           {
-            "gate": "gate.E2.road.approach.corridor.1~frame.1",
+            "gate": "approach:road.approach.corridor.1~frame.1",
             "bricked": false,
-            "ringKind": "main",
+            "ringKind": "no circuit — road entry, snapped to the first drawn point along the road",
             "reachable": true,
-            "bottleneckWidthUnits": 10,
-            "pathLengthUnits": 486.23,
-            "straightLineUnits": 382.32,
-            "detourRatio": 1.2718,
-            "pass": true
-          },
-          {
-            "gate": "gate.E2.road.approach.corridor.2~frame.2",
-            "bricked": false,
-            "ringKind": "main",
-            "reachable": true,
-            "bottleneckWidthUnits": 10,
-            "pathLengthUnits": 410.95,
-            "straightLineUnits": 343.22,
-            "detourRatio": 1.1973,
-            "pass": true
-          },
-          {
-            "gate": "gate.E1.road.high.corridor.0~frame.0",
-            "bricked": false,
-            "ringKind": "old-core",
-            "reachable": true,
-            "bottleneckWidthUnits": 16,
-            "pathLengthUnits": 454.16,
-            "straightLineUnits": 419.96,
-            "detourRatio": 1.0815,
-            "pass": true
-          },
-          {
-            "gate": "gate.E1.road.approach.corridor.1~frame.1",
-            "bricked": false,
-            "ringKind": "old-core",
-            "reachable": true,
-            "bottleneckWidthUnits": 10,
-            "pathLengthUnits": 659.76,
-            "straightLineUnits": 272.12,
-            "detourRatio": 2.4245,
-            "pass": true
-          },
-          {
-            "gate": "gate.E1.road.approach.nucleus.0~spur.1",
-            "bricked": false,
-            "ringKind": "old-core",
-            "reachable": true,
-            "bottleneckWidthUnits": 10.49,
-            "pathLengthUnits": 55.94,
-            "straightLineUnits": 52.64,
-            "detourRatio": 1.0627,
+            "bottleneckWidthUnits": 9.66,
+            "pathLengthUnits": 642.39,
+            "straightLineUnits": 602.43,
+            "detourRatio": 1.0663,
             "pass": true
           }
         ],
         "pass": true
       },
       "i3_chunking": {
-        "tier": "city",
-        "extentTier": "city",
-        "population": 20091,
-        "wallPresent": true,
-        "rings": 2,
-        "totalRegions": 8,
+        "tier": "thorp",
+        "extentTier": "thorp",
+        "population": 27,
+        "wallPresent": false,
+        "rings": 0,
+        "totalRegions": 1,
         "areaFloor": 5000,
-        "legibleWards": 6,
-        "chunks": 7,
+        "legibleWards": 1,
+        "chunks": 1,
         "band": [
-          5,
+          1,
           9
         ],
-        "bandSource": "[min(totalRegions=8, 5), 9]",
+        "bandSource": "[min(totalRegions=1, 5), 9]",
         "pass": true,
         "verdictRow": {
           "instrument": "chunking.legibleWards",
-          "value": 6,
-          "denominator": "8 district regions in fabric.umbrella.partition, area floor 5000 sq units",
-          "band": "5..9",
+          "value": 1,
+          "denominator": "1 district regions in fabric.umbrella.partition, area floor 5000 sq units",
+          "band": "1..9",
           "pass": true,
-          "wallPresent": true,
-          "chunks": 7
+          "wallPresent": false,
+          "chunks": 1
         },
         "regions": [
           {
-            "districtId": "district.mages_quarter",
-            "wallSide": "intramural",
-            "area": 125804.08
+            "districtId": "district.religious_quarter",
+            "wallSide": null,
+            "area": 9384.72
+          }
+        ]
+      }
+    },
+    {
+      "leaf": "hamlet",
+      "name": "Sundfoss",
+      "tier": "hamlet",
+      "population": 220,
+      "i2_routeTrace": {
+        "applicable": true,
+        "heart": "square.heart",
+        "heartAt": [
+          453.13,
+          276.04
+        ],
+        "floorUnits": 4.65,
+        "floorSource": "the leaf's own web.widths.blockLane",
+        "voidCells": 42567,
+        "gatesTotal": 3,
+        "gatesBricked": 0,
+        "reachable": 3,
+        "passing": 3,
+        "subjectsWere": "road entries (unwalled leaf)",
+        "rows": [
+          {
+            "gate": "approach:road.high.corridor.0~frame.0",
+            "bricked": false,
+            "ringKind": "no circuit — road entry, snapped to the first drawn point along the road",
+            "reachable": true,
+            "bottleneckWidthUnits": 4.83,
+            "pathLengthUnits": 624.04,
+            "straightLineUnits": 572.46,
+            "detourRatio": 1.0901,
+            "pass": true
           },
           {
-            "districtId": "district.shadows_district",
-            "wallSide": "intramural",
-            "area": 49640.54
+            "gate": "approach:road.approach.nucleus.0~spur.0",
+            "bricked": false,
+            "ringKind": "no circuit — road entry, snapped to the first drawn point along the road",
+            "reachable": true,
+            "bottleneckWidthUnits": 68.91,
+            "pathLengthUnits": 0,
+            "straightLineUnits": 0,
+            "detourRatio": null,
+            "pass": true
           },
           {
-            "districtId": "district.common_residential",
-            "wallSide": "intramural",
-            "area": 36008.79
-          },
+            "gate": "approach:road.approach.corridor.1~frame.1",
+            "bricked": false,
+            "ringKind": "no circuit — road entry, snapped to the first drawn point along the road",
+            "reachable": true,
+            "bottleneckWidthUnits": 5.66,
+            "pathLengthUnits": 528.39,
+            "straightLineUnits": 493.8,
+            "detourRatio": 1.07,
+            "pass": true
+          }
+        ],
+        "pass": true
+      },
+      "i3_chunking": {
+        "tier": "hamlet",
+        "extentTier": "hamlet",
+        "population": 220,
+        "wallPresent": false,
+        "rings": 0,
+        "totalRegions": 2,
+        "areaFloor": 5000,
+        "legibleWards": 1,
+        "chunks": 1,
+        "band": [
+          2,
+          9
+        ],
+        "bandSource": "[min(totalRegions=2, 5), 9]",
+        "pass": false,
+        "verdictRow": {
+          "instrument": "chunking.legibleWards",
+          "value": 1,
+          "denominator": "2 district regions in fabric.umbrella.partition, area floor 5000 sq units",
+          "band": "2..9",
+          "pass": false,
+          "wallPresent": false,
+          "chunks": 1
+        },
+        "regions": [
           {
-            "districtId": "district.government_quarter",
-            "wallSide": "intramural",
-            "area": 13665.66
-          },
-          {
-            "districtId": "district.mages_quarter~faubourg",
-            "wallSide": "extramural",
-            "area": 8288.05
-          },
-          {
-            "districtId": "district.common_residential~faubourg",
-            "wallSide": "extramural",
-            "area": 5090.58
+            "districtId": "district.alehouse_common",
+            "wallSide": null,
+            "area": 11144.49
           },
           {
             "districtId": "district.religious_quarter",
-            "wallSide": "intramural",
-            "area": 4467.29
-          },
-          {
-            "districtId": "district.shadows_district~faubourg",
-            "wallSide": "extramural",
-            "area": 2890.52
+            "wallSide": null,
+            "area": 3525.74
           }
         ]
       }
@@ -2438,6 +4678,1637 @@
             "districtId": "district.government_quarter~faubourg",
             "wallSide": "extramural",
             "area": 680.45
+          }
+        ]
+      }
+    },
+    {
+      "leaf": "town-2",
+      "name": "Baigou",
+      "tier": "town",
+      "population": 2497,
+      "i2_routeTrace": {
+        "applicable": true,
+        "heart": "square.heart",
+        "heartAt": [
+          526.04,
+          369.79
+        ],
+        "floorUnits": 4.29,
+        "floorSource": "the leaf's own web.widths.blockLane",
+        "voidCells": 118832,
+        "gatesTotal": 2,
+        "gatesBricked": 0,
+        "reachable": 2,
+        "passing": 2,
+        "subjectsWere": "circuit gates",
+        "rows": [
+          {
+            "gate": "gate.E1.road.high.corridor.0~frame.0",
+            "bricked": false,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 18,
+            "pathLengthUnits": 288.54,
+            "straightLineUnits": 268.7,
+            "detourRatio": 1.0738,
+            "pass": true
+          },
+          {
+            "gate": "gate.E1.road.approach.corridor.1~frame.1",
+            "bricked": false,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 11.31,
+            "pathLengthUnits": 512,
+            "straightLineUnits": 469.11,
+            "detourRatio": 1.0914,
+            "pass": true
+          }
+        ],
+        "pass": true
+      },
+      "i3_chunking": {
+        "tier": "town",
+        "extentTier": "town",
+        "population": 2497,
+        "wallPresent": true,
+        "rings": 1,
+        "totalRegions": 7,
+        "areaFloor": 5000,
+        "legibleWards": 3,
+        "chunks": 4,
+        "band": [
+          5,
+          9
+        ],
+        "bandSource": "[min(totalRegions=7, 5), 9]",
+        "pass": false,
+        "verdictRow": {
+          "instrument": "chunking.legibleWards",
+          "value": 3,
+          "denominator": "7 district regions in fabric.umbrella.partition, area floor 5000 sq units",
+          "band": "5..9",
+          "pass": false,
+          "wallPresent": true,
+          "chunks": 4
+        },
+        "regions": [
+          {
+            "districtId": "district.market_quarter",
+            "wallSide": "intramural",
+            "area": 96391.18
+          },
+          {
+            "districtId": "district.government_quarter",
+            "wallSide": "intramural",
+            "area": 16163.29
+          },
+          {
+            "districtId": "district.market_quarter~faubourg",
+            "wallSide": "extramural",
+            "area": 5041.76
+          },
+          {
+            "districtId": "district.noxious_trades_quarter",
+            "wallSide": "intramural",
+            "area": 3402.21
+          },
+          {
+            "districtId": "district.government_quarter~faubourg",
+            "wallSide": "extramural",
+            "area": 2243.7
+          },
+          {
+            "districtId": "district.mages_quarter",
+            "wallSide": "intramural",
+            "area": 2108.92
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSide": "intramural",
+            "area": 415.12
+          }
+        ]
+      }
+    },
+    {
+      "leaf": "city",
+      "name": "Kitaqiao",
+      "tier": "city",
+      "population": 20091,
+      "i2_routeTrace": {
+        "applicable": true,
+        "heart": "square.heart",
+        "heartAt": [
+          432.29,
+          526.04
+        ],
+        "floorUnits": 3.87,
+        "floorSource": "the leaf's own web.widths.blockLane",
+        "voidCells": 181598,
+        "gatesTotal": 6,
+        "gatesBricked": 0,
+        "reachable": 6,
+        "passing": 6,
+        "subjectsWere": "circuit gates",
+        "rows": [
+          {
+            "gate": "gate.E2.road.high.corridor.0~frame.0",
+            "bricked": false,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 16,
+            "pathLengthUnits": 541.3,
+            "straightLineUnits": 500.41,
+            "detourRatio": 1.0817,
+            "pass": true
+          },
+          {
+            "gate": "gate.E2.road.approach.corridor.1~frame.1",
+            "bricked": false,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 10,
+            "pathLengthUnits": 486.23,
+            "straightLineUnits": 382.32,
+            "detourRatio": 1.2718,
+            "pass": true
+          },
+          {
+            "gate": "gate.E2.road.approach.corridor.2~frame.2",
+            "bricked": false,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 10,
+            "pathLengthUnits": 410.95,
+            "straightLineUnits": 343.22,
+            "detourRatio": 1.1973,
+            "pass": true
+          },
+          {
+            "gate": "gate.E1.road.high.corridor.0~frame.0",
+            "bricked": false,
+            "ringKind": "old-core",
+            "reachable": true,
+            "bottleneckWidthUnits": 16,
+            "pathLengthUnits": 454.16,
+            "straightLineUnits": 419.96,
+            "detourRatio": 1.0815,
+            "pass": true
+          },
+          {
+            "gate": "gate.E1.road.approach.corridor.1~frame.1",
+            "bricked": false,
+            "ringKind": "old-core",
+            "reachable": true,
+            "bottleneckWidthUnits": 10,
+            "pathLengthUnits": 659.76,
+            "straightLineUnits": 272.12,
+            "detourRatio": 2.4245,
+            "pass": true
+          },
+          {
+            "gate": "gate.E1.road.approach.nucleus.0~spur.1",
+            "bricked": false,
+            "ringKind": "old-core",
+            "reachable": true,
+            "bottleneckWidthUnits": 10.49,
+            "pathLengthUnits": 55.94,
+            "straightLineUnits": 52.64,
+            "detourRatio": 1.0627,
+            "pass": true
+          }
+        ],
+        "pass": true
+      },
+      "i3_chunking": {
+        "tier": "city",
+        "extentTier": "city",
+        "population": 20091,
+        "wallPresent": true,
+        "rings": 2,
+        "totalRegions": 8,
+        "areaFloor": 5000,
+        "legibleWards": 6,
+        "chunks": 7,
+        "band": [
+          5,
+          9
+        ],
+        "bandSource": "[min(totalRegions=8, 5), 9]",
+        "pass": true,
+        "verdictRow": {
+          "instrument": "chunking.legibleWards",
+          "value": 6,
+          "denominator": "8 district regions in fabric.umbrella.partition, area floor 5000 sq units",
+          "band": "5..9",
+          "pass": true,
+          "wallPresent": true,
+          "chunks": 7
+        },
+        "regions": [
+          {
+            "districtId": "district.mages_quarter",
+            "wallSide": "intramural",
+            "area": 125804.08
+          },
+          {
+            "districtId": "district.shadows_district",
+            "wallSide": "intramural",
+            "area": 49640.54
+          },
+          {
+            "districtId": "district.common_residential",
+            "wallSide": "intramural",
+            "area": 36008.79
+          },
+          {
+            "districtId": "district.government_quarter",
+            "wallSide": "intramural",
+            "area": 13665.66
+          },
+          {
+            "districtId": "district.mages_quarter~faubourg",
+            "wallSide": "extramural",
+            "area": 8288.05
+          },
+          {
+            "districtId": "district.common_residential~faubourg",
+            "wallSide": "extramural",
+            "area": 5090.58
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSide": "intramural",
+            "area": 4467.29
+          },
+          {
+            "districtId": "district.shadows_district~faubourg",
+            "wallSide": "extramural",
+            "area": 2890.52
+          }
+        ]
+      }
+    },
+    {
+      "leaf": "metropolis",
+      "name": "Warmgrund",
+      "tier": "metropolis",
+      "population": 71325,
+      "i2_routeTrace": {
+        "applicable": true,
+        "heart": "square.heart",
+        "heartAt": [
+          578.13,
+          598.96
+        ],
+        "floorUnits": 3.44,
+        "floorSource": "the leaf's own web.widths.blockLane",
+        "voidCells": 188453,
+        "gatesTotal": 5,
+        "gatesBricked": 0,
+        "reachable": 5,
+        "passing": 4,
+        "subjectsWere": "circuit gates",
+        "rows": [
+          {
+            "gate": "gate.E2.road.high.corridor.0~frame.0",
+            "bricked": false,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 2,
+            "pathLengthUnits": 456.09,
+            "straightLineUnits": 424.46,
+            "detourRatio": 1.0745,
+            "pass": false
+          },
+          {
+            "gate": "gate.E2.road.approach.corridor.1~frame.1",
+            "bricked": false,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 8,
+            "pathLengthUnits": 382.02,
+            "straightLineUnits": 357.79,
+            "detourRatio": 1.0677,
+            "pass": true
+          },
+          {
+            "gate": "gate.E1.road.high.corridor.0~frame.0",
+            "bricked": false,
+            "ringKind": "old-core",
+            "reachable": true,
+            "bottleneckWidthUnits": 8,
+            "pathLengthUnits": 314.78,
+            "straightLineUnits": 267.24,
+            "detourRatio": 1.1779,
+            "pass": true
+          },
+          {
+            "gate": "gate.E1.road.approach.corridor.1~frame.1",
+            "bricked": false,
+            "ringKind": "old-core",
+            "reachable": true,
+            "bottleneckWidthUnits": 8,
+            "pathLengthUnits": 287.64,
+            "straightLineUnits": 268.81,
+            "detourRatio": 1.0701,
+            "pass": true
+          },
+          {
+            "gate": "gate.E0.road.approach.corridor.1~frame.1",
+            "bricked": false,
+            "ringKind": "old-core",
+            "reachable": true,
+            "bottleneckWidthUnits": 8,
+            "pathLengthUnits": 234.57,
+            "straightLineUnits": 217.32,
+            "detourRatio": 1.0794,
+            "pass": true
+          }
+        ],
+        "pass": false
+      },
+      "i3_chunking": {
+        "tier": "metropolis",
+        "extentTier": "metropolis",
+        "population": 71325,
+        "wallPresent": true,
+        "rings": 3,
+        "totalRegions": 9,
+        "areaFloor": 5000,
+        "legibleWards": 6,
+        "chunks": 7,
+        "band": [
+          5,
+          9
+        ],
+        "bandSource": "[min(totalRegions=9, 5), 9]",
+        "pass": true,
+        "verdictRow": {
+          "instrument": "chunking.legibleWards",
+          "value": 6,
+          "denominator": "9 district regions in fabric.umbrella.partition, area floor 5000 sq units",
+          "band": "5..9",
+          "pass": true,
+          "wallPresent": true,
+          "chunks": 7
+        },
+        "regions": [
+          {
+            "districtId": "district.common_residential",
+            "wallSide": "intramural",
+            "area": 186747.06
+          },
+          {
+            "districtId": "district.shadows_district",
+            "wallSide": "intramural",
+            "area": 91984.15
+          },
+          {
+            "districtId": "district.government_quarter",
+            "wallSide": "intramural",
+            "area": 47430.17
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSide": "intramural",
+            "area": 13277.3
+          },
+          {
+            "districtId": "district.mages_quarter",
+            "wallSide": "intramural",
+            "area": 12110.5
+          },
+          {
+            "districtId": "district.wealthy_residential",
+            "wallSide": "intramural",
+            "area": 9839.17
+          },
+          {
+            "districtId": "district.common_residential~faubourg",
+            "wallSide": "extramural",
+            "area": 736.96
+          },
+          {
+            "districtId": "district.wealthy_residential~faubourg",
+            "wallSide": "extramural",
+            "area": 135.22
+          },
+          {
+            "districtId": "district.government_quarter~faubourg",
+            "wallSide": "extramural",
+            "area": 34.17
+          }
+        ]
+      }
+    },
+    {
+      "leaf": "polycentric",
+      "name": "Strathgarth",
+      "tier": "town",
+      "population": 3334,
+      "i2_routeTrace": {
+        "applicable": true,
+        "heart": "square.heart",
+        "heartAt": [
+          442.71,
+          463.54
+        ],
+        "floorUnits": 2.91,
+        "floorSource": "the leaf's own web.widths.blockLane",
+        "voidCells": 93869,
+        "gatesTotal": 1,
+        "gatesBricked": 0,
+        "reachable": 1,
+        "passing": 1,
+        "subjectsWere": "circuit gates",
+        "rows": [
+          {
+            "gate": "gate.E1.road.high.corridor.0~frame.0",
+            "bricked": false,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 12.49,
+            "pathLengthUnits": 147.48,
+            "straightLineUnits": 138.42,
+            "detourRatio": 1.0654,
+            "pass": true
+          }
+        ],
+        "pass": true
+      },
+      "i3_chunking": {
+        "tier": "town",
+        "extentTier": "town",
+        "population": 3334,
+        "wallPresent": true,
+        "rings": 1,
+        "totalRegions": 8,
+        "areaFloor": 5000,
+        "legibleWards": 4,
+        "chunks": 5,
+        "band": [
+          5,
+          9
+        ],
+        "bandSource": "[min(totalRegions=8, 5), 9]",
+        "pass": false,
+        "verdictRow": {
+          "instrument": "chunking.legibleWards",
+          "value": 4,
+          "denominator": "8 district regions in fabric.umbrella.partition, area floor 5000 sq units",
+          "band": "5..9",
+          "pass": false,
+          "wallPresent": true,
+          "chunks": 5
+        },
+        "regions": [
+          {
+            "districtId": "district.market_quarter",
+            "wallSide": "intramural",
+            "area": 80230.21
+          },
+          {
+            "districtId": "district.noxious_trades_quarter",
+            "wallSide": "intramural",
+            "area": 21585.7
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSide": "intramural",
+            "area": 13403.9
+          },
+          {
+            "districtId": "district.mages_quarter",
+            "wallSide": "intramural",
+            "area": 6339.77
+          },
+          {
+            "districtId": "district.noxious_trades_quarter~faubourg",
+            "wallSide": "extramural",
+            "area": 1626.44
+          },
+          {
+            "districtId": "district.market_quarter~faubourg",
+            "wallSide": "extramural",
+            "area": 1540.4
+          },
+          {
+            "districtId": "district.religious_quarter~faubourg",
+            "wallSide": "extramural",
+            "area": 1119.05
+          },
+          {
+            "districtId": "district.mages_quarter~faubourg",
+            "wallSide": "extramural",
+            "area": 102.31
+          }
+        ]
+      }
+    },
+    {
+      "leaf": "highwater",
+      "name": "Mahabagh",
+      "tier": "town",
+      "population": 3502,
+      "i2_routeTrace": {
+        "applicable": true,
+        "heart": "square.heart",
+        "heartAt": [
+          661.46,
+          526.04
+        ],
+        "floorUnits": 3.3,
+        "floorSource": "the leaf's own web.widths.blockLane",
+        "voidCells": 132592,
+        "gatesTotal": 4,
+        "gatesBricked": 2,
+        "reachable": 2,
+        "passing": 2,
+        "subjectsWere": "circuit gates",
+        "rows": [
+          {
+            "gate": "gate.E3.road.high.corridor.0~frame.0",
+            "bricked": false,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 14.14,
+            "pathLengthUnits": 202.21,
+            "straightLineUnits": 179.18,
+            "detourRatio": 1.1285,
+            "pass": true
+          },
+          {
+            "gate": "gate.E3.road.approach.corridor.1~frame.1",
+            "bricked": true,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 8.49,
+            "pathLengthUnits": 447.53,
+            "straightLineUnits": 343.65,
+            "detourRatio": 1.3023,
+            "pass": true
+          },
+          {
+            "gate": "gate.E2.road.high.corridor.0~frame.0",
+            "bricked": true,
+            "ringKind": "old-core",
+            "reachable": true,
+            "bottleneckWidthUnits": 14.14,
+            "pathLengthUnits": 59.31,
+            "straightLineUnits": 56.19,
+            "detourRatio": 1.0555,
+            "pass": true
+          },
+          {
+            "gate": "gate.E2.road.approach.corridor.1~frame.1",
+            "bricked": false,
+            "ringKind": "old-core",
+            "reachable": true,
+            "bottleneckWidthUnits": 10,
+            "pathLengthUnits": 354.07,
+            "straightLineUnits": 275.75,
+            "detourRatio": 1.284,
+            "pass": true
+          }
+        ],
+        "pass": true
+      },
+      "i3_chunking": {
+        "tier": "town",
+        "extentTier": "city",
+        "population": 3502,
+        "wallPresent": true,
+        "rings": 2,
+        "totalRegions": 4,
+        "areaFloor": 5000,
+        "legibleWards": 4,
+        "chunks": 5,
+        "band": [
+          4,
+          9
+        ],
+        "bandSource": "[min(totalRegions=4, 5), 9]",
+        "pass": true,
+        "verdictRow": {
+          "instrument": "chunking.legibleWards",
+          "value": 4,
+          "denominator": "4 district regions in fabric.umbrella.partition, area floor 5000 sq units",
+          "band": "4..9",
+          "pass": true,
+          "wallPresent": true,
+          "chunks": 5
+        },
+        "regions": [
+          {
+            "districtId": "district.market_quarter",
+            "wallSide": "intramural",
+            "area": 171710.82
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSide": "intramural",
+            "area": 14400.85
+          },
+          {
+            "districtId": "district.government_quarter",
+            "wallSide": "intramural",
+            "area": 8746.43
+          },
+          {
+            "districtId": "district.noxious_trades_quarter",
+            "wallSide": "intramural",
+            "area": 5870.27
+          }
+        ]
+      }
+    },
+    {
+      "leaf": "mountain",
+      "name": "Mingguan",
+      "tier": "village",
+      "population": 512,
+      "i2_routeTrace": {
+        "applicable": true,
+        "heart": "square.heart",
+        "heartAt": [
+          640.63,
+          484.38
+        ],
+        "floorUnits": 4.32,
+        "floorSource": "the leaf's own web.widths.blockLane",
+        "voidCells": 44126,
+        "gatesTotal": 2,
+        "gatesBricked": 0,
+        "reachable": 2,
+        "passing": 2,
+        "subjectsWere": "road entries (unwalled leaf)",
+        "rows": [
+          {
+            "gate": "approach:road.high.corridor.0~frame.0",
+            "bricked": false,
+            "ringKind": "no circuit — road entry, snapped to the first drawn point along the road",
+            "reachable": true,
+            "bottleneckWidthUnits": 13.31,
+            "pathLengthUnits": 658.27,
+            "straightLineUnits": 637.72,
+            "detourRatio": 1.0322,
+            "pass": true
+          },
+          {
+            "gate": "approach:road.approach.corridor.1~frame.1",
+            "bricked": false,
+            "ringKind": "no circuit — road entry, snapped to the first drawn point along the road",
+            "reachable": true,
+            "bottleneckWidthUnits": 8,
+            "pathLengthUnits": 456.68,
+            "straightLineUnits": 434.87,
+            "detourRatio": 1.0502,
+            "pass": true
+          }
+        ],
+        "pass": true
+      },
+      "i3_chunking": {
+        "tier": "village",
+        "extentTier": "village",
+        "population": 512,
+        "wallPresent": false,
+        "rings": 0,
+        "totalRegions": 1,
+        "areaFloor": 5000,
+        "legibleWards": 1,
+        "chunks": 1,
+        "band": [
+          1,
+          9
+        ],
+        "bandSource": "[min(totalRegions=1, 5), 9]",
+        "pass": true,
+        "verdictRow": {
+          "instrument": "chunking.legibleWards",
+          "value": 1,
+          "denominator": "1 district regions in fabric.umbrella.partition, area floor 5000 sq units",
+          "band": "1..9",
+          "pass": true,
+          "wallPresent": false,
+          "chunks": 1
+        },
+        "regions": [
+          {
+            "districtId": "district.religious_quarter",
+            "wallSide": null,
+            "area": 28582.72
+          }
+        ]
+      }
+    },
+    {
+      "leaf": "fjord",
+      "name": "Beiyuan",
+      "tier": "town",
+      "population": 3140,
+      "i2_routeTrace": {
+        "applicable": true,
+        "heart": "square.heart",
+        "heartAt": [
+          484.38,
+          671.88
+        ],
+        "floorUnits": 2.99,
+        "floorSource": "the leaf's own web.widths.blockLane",
+        "voidCells": 109111,
+        "gatesTotal": 4,
+        "gatesBricked": 0,
+        "reachable": 4,
+        "passing": 4,
+        "subjectsWere": "road entries (unwalled leaf)",
+        "rows": [
+          {
+            "gate": "approach:road.high.corridor.0~frame.0",
+            "bricked": false,
+            "ringKind": "no circuit — road entry, snapped to the first drawn point along the road",
+            "reachable": true,
+            "bottleneckWidthUnits": 7.66,
+            "pathLengthUnits": 537.55,
+            "straightLineUnits": 519.3,
+            "detourRatio": 1.0351,
+            "pass": true
+          },
+          {
+            "gate": "approach:road.approach.corridor.1~frame.1",
+            "bricked": false,
+            "ringKind": "no circuit — road entry, snapped to the first drawn point along the road",
+            "reachable": true,
+            "bottleneckWidthUnits": 6.83,
+            "pathLengthUnits": 535.78,
+            "straightLineUnits": 502.91,
+            "detourRatio": 1.0654,
+            "pass": true
+          },
+          {
+            "gate": "approach:road.approach.corridor.2~frame.2",
+            "bricked": false,
+            "ringKind": "no circuit — road entry, snapped to the first drawn point along the road",
+            "reachable": true,
+            "bottleneckWidthUnits": 7.66,
+            "pathLengthUnits": 1071.24,
+            "straightLineUnits": 686.87,
+            "detourRatio": 1.5596,
+            "pass": true
+          },
+          {
+            "gate": "approach:road.approach.nucleus.0~spur.2",
+            "bricked": false,
+            "ringKind": "no circuit — road entry, snapped to the first drawn point along the road",
+            "reachable": true,
+            "bottleneckWidthUnits": 68,
+            "pathLengthUnits": 0,
+            "straightLineUnits": 0,
+            "detourRatio": null,
+            "pass": true
+          }
+        ],
+        "pass": true
+      },
+      "i3_chunking": {
+        "tier": "town",
+        "extentTier": "town",
+        "population": 3140,
+        "wallPresent": false,
+        "rings": 0,
+        "totalRegions": 3,
+        "areaFloor": 5000,
+        "legibleWards": 3,
+        "chunks": 3,
+        "band": [
+          3,
+          9
+        ],
+        "bandSource": "[min(totalRegions=3, 5), 9]",
+        "pass": true,
+        "verdictRow": {
+          "instrument": "chunking.legibleWards",
+          "value": 3,
+          "denominator": "3 district regions in fabric.umbrella.partition, area floor 5000 sq units",
+          "band": "3..9",
+          "pass": true,
+          "wallPresent": false,
+          "chunks": 3
+        },
+        "regions": [
+          {
+            "districtId": "district.market_quarter",
+            "wallSide": null,
+            "area": 131585.31
+          },
+          {
+            "districtId": "district.noxious_trades_quarter",
+            "wallSide": null,
+            "area": 17490.69
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSide": null,
+            "area": 12199.99
+          }
+        ]
+      }
+    },
+    {
+      "leaf": "siege",
+      "name": "Mahabagh",
+      "tier": "town",
+      "population": 3502,
+      "i2_routeTrace": {
+        "applicable": true,
+        "heart": "square.heart",
+        "heartAt": [
+          588.54,
+          484.38
+        ],
+        "floorUnits": 3.06,
+        "floorSource": "the leaf's own web.widths.blockLane",
+        "voidCells": 103797,
+        "gatesTotal": 2,
+        "gatesBricked": 0,
+        "reachable": 2,
+        "passing": 2,
+        "subjectsWere": "circuit gates",
+        "rows": [
+          {
+            "gate": "gate.E1.road.high.corridor.0~frame.0",
+            "bricked": false,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 11.31,
+            "pathLengthUnits": 259.3,
+            "straightLineUnits": 219.8,
+            "detourRatio": 1.1797,
+            "pass": true
+          },
+          {
+            "gate": "gate.E1.road.approach.corridor.1~frame.1",
+            "bricked": false,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 7.66,
+            "pathLengthUnits": 671.38,
+            "straightLineUnits": 445.84,
+            "detourRatio": 1.5059,
+            "pass": true
+          }
+        ],
+        "pass": true
+      },
+      "i3_chunking": {
+        "tier": "town",
+        "extentTier": "town",
+        "population": 3502,
+        "wallPresent": true,
+        "rings": 1,
+        "totalRegions": 6,
+        "areaFloor": 5000,
+        "legibleWards": 2,
+        "chunks": 3,
+        "band": [
+          5,
+          9
+        ],
+        "bandSource": "[min(totalRegions=6, 5), 9]",
+        "pass": false,
+        "verdictRow": {
+          "instrument": "chunking.legibleWards",
+          "value": 2,
+          "denominator": "6 district regions in fabric.umbrella.partition, area floor 5000 sq units",
+          "band": "5..9",
+          "pass": false,
+          "wallPresent": true,
+          "chunks": 3
+        },
+        "regions": [
+          {
+            "districtId": "district.market_quarter",
+            "wallSide": "intramural",
+            "area": 52291.19
+          },
+          {
+            "districtId": "district.government_quarter",
+            "wallSide": "intramural",
+            "area": 19938.46
+          },
+          {
+            "districtId": "district.noxious_trades_quarter",
+            "wallSide": "intramural",
+            "area": 3093.27
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSide": "intramural",
+            "area": 2185.72
+          },
+          {
+            "districtId": "district.market_quarter~faubourg",
+            "wallSide": "extramural",
+            "area": 1794.36
+          },
+          {
+            "districtId": "district.government_quarter~faubourg",
+            "wallSide": "extramural",
+            "area": 680.45
+          }
+        ]
+      }
+    },
+    {
+      "leaf": "plague",
+      "name": "Mahabagh",
+      "tier": "town",
+      "population": 3502,
+      "i2_routeTrace": {
+        "applicable": true,
+        "heart": "square.heart",
+        "heartAt": [
+          588.54,
+          484.38
+        ],
+        "floorUnits": 3.06,
+        "floorSource": "the leaf's own web.widths.blockLane",
+        "voidCells": 103797,
+        "gatesTotal": 2,
+        "gatesBricked": 0,
+        "reachable": 2,
+        "passing": 2,
+        "subjectsWere": "circuit gates",
+        "rows": [
+          {
+            "gate": "gate.E1.road.high.corridor.0~frame.0",
+            "bricked": false,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 11.31,
+            "pathLengthUnits": 259.3,
+            "straightLineUnits": 219.8,
+            "detourRatio": 1.1797,
+            "pass": true
+          },
+          {
+            "gate": "gate.E1.road.approach.corridor.1~frame.1",
+            "bricked": false,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 7.66,
+            "pathLengthUnits": 671.38,
+            "straightLineUnits": 445.84,
+            "detourRatio": 1.5059,
+            "pass": true
+          }
+        ],
+        "pass": true
+      },
+      "i3_chunking": {
+        "tier": "town",
+        "extentTier": "town",
+        "population": 3502,
+        "wallPresent": true,
+        "rings": 1,
+        "totalRegions": 6,
+        "areaFloor": 5000,
+        "legibleWards": 2,
+        "chunks": 3,
+        "band": [
+          5,
+          9
+        ],
+        "bandSource": "[min(totalRegions=6, 5), 9]",
+        "pass": false,
+        "verdictRow": {
+          "instrument": "chunking.legibleWards",
+          "value": 2,
+          "denominator": "6 district regions in fabric.umbrella.partition, area floor 5000 sq units",
+          "band": "5..9",
+          "pass": false,
+          "wallPresent": true,
+          "chunks": 3
+        },
+        "regions": [
+          {
+            "districtId": "district.market_quarter",
+            "wallSide": "intramural",
+            "area": 52291.19
+          },
+          {
+            "districtId": "district.government_quarter",
+            "wallSide": "intramural",
+            "area": 19938.46
+          },
+          {
+            "districtId": "district.noxious_trades_quarter",
+            "wallSide": "intramural",
+            "area": 3093.27
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSide": "intramural",
+            "area": 2185.72
+          },
+          {
+            "districtId": "district.market_quarter~faubourg",
+            "wallSide": "extramural",
+            "area": 1794.36
+          },
+          {
+            "districtId": "district.government_quarter~faubourg",
+            "wallSide": "extramural",
+            "area": 680.45
+          }
+        ]
+      }
+    },
+    {
+      "leaf": "famine",
+      "name": "Mahabagh",
+      "tier": "town",
+      "population": 3502,
+      "i2_routeTrace": {
+        "applicable": true,
+        "heart": "square.heart",
+        "heartAt": [
+          588.54,
+          484.38
+        ],
+        "floorUnits": 3.06,
+        "floorSource": "the leaf's own web.widths.blockLane",
+        "voidCells": 103797,
+        "gatesTotal": 2,
+        "gatesBricked": 0,
+        "reachable": 2,
+        "passing": 2,
+        "subjectsWere": "circuit gates",
+        "rows": [
+          {
+            "gate": "gate.E1.road.high.corridor.0~frame.0",
+            "bricked": false,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 11.31,
+            "pathLengthUnits": 259.3,
+            "straightLineUnits": 219.8,
+            "detourRatio": 1.1797,
+            "pass": true
+          },
+          {
+            "gate": "gate.E1.road.approach.corridor.1~frame.1",
+            "bricked": false,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 7.66,
+            "pathLengthUnits": 671.38,
+            "straightLineUnits": 445.84,
+            "detourRatio": 1.5059,
+            "pass": true
+          }
+        ],
+        "pass": true
+      },
+      "i3_chunking": {
+        "tier": "town",
+        "extentTier": "town",
+        "population": 3502,
+        "wallPresent": true,
+        "rings": 1,
+        "totalRegions": 6,
+        "areaFloor": 5000,
+        "legibleWards": 2,
+        "chunks": 3,
+        "band": [
+          5,
+          9
+        ],
+        "bandSource": "[min(totalRegions=6, 5), 9]",
+        "pass": false,
+        "verdictRow": {
+          "instrument": "chunking.legibleWards",
+          "value": 2,
+          "denominator": "6 district regions in fabric.umbrella.partition, area floor 5000 sq units",
+          "band": "5..9",
+          "pass": false,
+          "wallPresent": true,
+          "chunks": 3
+        },
+        "regions": [
+          {
+            "districtId": "district.market_quarter",
+            "wallSide": "intramural",
+            "area": 52291.19
+          },
+          {
+            "districtId": "district.government_quarter",
+            "wallSide": "intramural",
+            "area": 19938.46
+          },
+          {
+            "districtId": "district.noxious_trades_quarter",
+            "wallSide": "intramural",
+            "area": 3093.27
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSide": "intramural",
+            "area": 2185.72
+          },
+          {
+            "districtId": "district.market_quarter~faubourg",
+            "wallSide": "extramural",
+            "area": 1794.36
+          },
+          {
+            "districtId": "district.government_quarter~faubourg",
+            "wallSide": "extramural",
+            "area": 680.45
+          }
+        ]
+      }
+    },
+    {
+      "leaf": "migration",
+      "name": "Kitaqiao",
+      "tier": "city",
+      "population": 20091,
+      "i2_routeTrace": {
+        "applicable": true,
+        "heart": "square.heart",
+        "heartAt": [
+          432.29,
+          526.04
+        ],
+        "floorUnits": 3.87,
+        "floorSource": "the leaf's own web.widths.blockLane",
+        "voidCells": 181598,
+        "gatesTotal": 6,
+        "gatesBricked": 0,
+        "reachable": 6,
+        "passing": 6,
+        "subjectsWere": "circuit gates",
+        "rows": [
+          {
+            "gate": "gate.E2.road.high.corridor.0~frame.0",
+            "bricked": false,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 16,
+            "pathLengthUnits": 541.3,
+            "straightLineUnits": 500.41,
+            "detourRatio": 1.0817,
+            "pass": true
+          },
+          {
+            "gate": "gate.E2.road.approach.corridor.1~frame.1",
+            "bricked": false,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 10,
+            "pathLengthUnits": 486.23,
+            "straightLineUnits": 382.32,
+            "detourRatio": 1.2718,
+            "pass": true
+          },
+          {
+            "gate": "gate.E2.road.approach.corridor.2~frame.2",
+            "bricked": false,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 10,
+            "pathLengthUnits": 410.95,
+            "straightLineUnits": 343.22,
+            "detourRatio": 1.1973,
+            "pass": true
+          },
+          {
+            "gate": "gate.E1.road.high.corridor.0~frame.0",
+            "bricked": false,
+            "ringKind": "old-core",
+            "reachable": true,
+            "bottleneckWidthUnits": 16,
+            "pathLengthUnits": 454.16,
+            "straightLineUnits": 419.96,
+            "detourRatio": 1.0815,
+            "pass": true
+          },
+          {
+            "gate": "gate.E1.road.approach.corridor.1~frame.1",
+            "bricked": false,
+            "ringKind": "old-core",
+            "reachable": true,
+            "bottleneckWidthUnits": 10,
+            "pathLengthUnits": 659.76,
+            "straightLineUnits": 272.12,
+            "detourRatio": 2.4245,
+            "pass": true
+          },
+          {
+            "gate": "gate.E1.road.approach.nucleus.0~spur.1",
+            "bricked": false,
+            "ringKind": "old-core",
+            "reachable": true,
+            "bottleneckWidthUnits": 10.49,
+            "pathLengthUnits": 55.94,
+            "straightLineUnits": 52.64,
+            "detourRatio": 1.0627,
+            "pass": true
+          }
+        ],
+        "pass": true
+      },
+      "i3_chunking": {
+        "tier": "city",
+        "extentTier": "city",
+        "population": 20091,
+        "wallPresent": true,
+        "rings": 2,
+        "totalRegions": 8,
+        "areaFloor": 5000,
+        "legibleWards": 6,
+        "chunks": 7,
+        "band": [
+          5,
+          9
+        ],
+        "bandSource": "[min(totalRegions=8, 5), 9]",
+        "pass": true,
+        "verdictRow": {
+          "instrument": "chunking.legibleWards",
+          "value": 6,
+          "denominator": "8 district regions in fabric.umbrella.partition, area floor 5000 sq units",
+          "band": "5..9",
+          "pass": true,
+          "wallPresent": true,
+          "chunks": 7
+        },
+        "regions": [
+          {
+            "districtId": "district.mages_quarter",
+            "wallSide": "intramural",
+            "area": 125804.08
+          },
+          {
+            "districtId": "district.shadows_district",
+            "wallSide": "intramural",
+            "area": 49640.54
+          },
+          {
+            "districtId": "district.common_residential",
+            "wallSide": "intramural",
+            "area": 36008.79
+          },
+          {
+            "districtId": "district.government_quarter",
+            "wallSide": "intramural",
+            "area": 13665.66
+          },
+          {
+            "districtId": "district.mages_quarter~faubourg",
+            "wallSide": "extramural",
+            "area": 8288.05
+          },
+          {
+            "districtId": "district.common_residential~faubourg",
+            "wallSide": "extramural",
+            "area": 5090.58
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSide": "intramural",
+            "area": 4467.29
+          },
+          {
+            "districtId": "district.shadows_district~faubourg",
+            "wallSide": "extramural",
+            "area": 2890.52
+          }
+        ]
+      }
+    },
+    {
+      "leaf": "year-018",
+      "name": "Mahabagh",
+      "tier": "town",
+      "population": 3502,
+      "i2_routeTrace": {
+        "applicable": true,
+        "heart": "square.heart",
+        "heartAt": [
+          588.54,
+          484.38
+        ],
+        "floorUnits": 3.06,
+        "floorSource": "the leaf's own web.widths.blockLane",
+        "voidCells": 100312,
+        "gatesTotal": 3,
+        "gatesBricked": 0,
+        "reachable": 3,
+        "passing": 3,
+        "subjectsWere": "road entries (unwalled leaf)",
+        "rows": [
+          {
+            "gate": "approach:road.high.corridor.0~frame.0",
+            "bricked": false,
+            "ringKind": "no circuit — road entry, snapped to the first drawn point along the road",
+            "reachable": true,
+            "bottleneckWidthUnits": 7.66,
+            "pathLengthUnits": 560.87,
+            "straightLineUnits": 523.57,
+            "detourRatio": 1.0713,
+            "pass": true
+          },
+          {
+            "gate": "approach:road.approach.corridor.1~frame.1",
+            "bricked": false,
+            "ringKind": "no circuit — road entry, snapped to the first drawn point along the road",
+            "reachable": true,
+            "bottleneckWidthUnits": 4.83,
+            "pathLengthUnits": 921.84,
+            "straightLineUnits": 673.89,
+            "detourRatio": 1.3679,
+            "pass": true
+          },
+          {
+            "gate": "approach:road.approach.nucleus.0~spur.1",
+            "bricked": false,
+            "ringKind": "no circuit — road entry, snapped to the first drawn point along the road",
+            "reachable": true,
+            "bottleneckWidthUnits": 70.71,
+            "pathLengthUnits": 0,
+            "straightLineUnits": 0,
+            "detourRatio": null,
+            "pass": true
+          }
+        ],
+        "pass": true
+      },
+      "i3_chunking": {
+        "tier": "town",
+        "extentTier": "town",
+        "population": 3502,
+        "wallPresent": false,
+        "rings": 0,
+        "totalRegions": 4,
+        "areaFloor": 5000,
+        "legibleWards": 2,
+        "chunks": 2,
+        "band": [
+          4,
+          9
+        ],
+        "bandSource": "[min(totalRegions=4, 5), 9]",
+        "pass": false,
+        "verdictRow": {
+          "instrument": "chunking.legibleWards",
+          "value": 2,
+          "denominator": "4 district regions in fabric.umbrella.partition, area floor 5000 sq units",
+          "band": "4..9",
+          "pass": false,
+          "wallPresent": false,
+          "chunks": 2
+        },
+        "regions": [
+          {
+            "districtId": "district.market_quarter",
+            "wallSide": null,
+            "area": 58096.97
+          },
+          {
+            "districtId": "district.government_quarter",
+            "wallSide": null,
+            "area": 21758.91
+          },
+          {
+            "districtId": "district.noxious_trades_quarter",
+            "wallSide": null,
+            "area": 3096.14
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSide": null,
+            "area": 2025.5
+          }
+        ]
+      }
+    },
+    {
+      "leaf": "year-100",
+      "name": "Mahabagh",
+      "tier": "town",
+      "population": 3502,
+      "i2_routeTrace": {
+        "applicable": true,
+        "heart": "square.heart",
+        "heartAt": [
+          588.54,
+          484.38
+        ],
+        "floorUnits": 3.06,
+        "floorSource": "the leaf's own web.widths.blockLane",
+        "voidCells": 105140,
+        "gatesTotal": 2,
+        "gatesBricked": 0,
+        "reachable": 2,
+        "passing": 2,
+        "subjectsWere": "circuit gates",
+        "rows": [
+          {
+            "gate": "gate.E2.road.high.corridor.0~frame.0",
+            "bricked": false,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 11.31,
+            "pathLengthUnits": 326.87,
+            "straightLineUnits": 283.47,
+            "detourRatio": 1.1531,
+            "pass": true
+          },
+          {
+            "gate": "gate.E2.road.approach.corridor.1~frame.1",
+            "bricked": false,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 7.66,
+            "pathLengthUnits": 706.42,
+            "straightLineUnits": 476.62,
+            "detourRatio": 1.4821,
+            "pass": true
+          }
+        ],
+        "pass": true
+      },
+      "i3_chunking": {
+        "tier": "town",
+        "extentTier": "town",
+        "population": 3502,
+        "wallPresent": true,
+        "rings": 1,
+        "totalRegions": 4,
+        "areaFloor": 5000,
+        "legibleWards": 2,
+        "chunks": 3,
+        "band": [
+          4,
+          9
+        ],
+        "bandSource": "[min(totalRegions=4, 5), 9]",
+        "pass": false,
+        "verdictRow": {
+          "instrument": "chunking.legibleWards",
+          "value": 2,
+          "denominator": "4 district regions in fabric.umbrella.partition, area floor 5000 sq units",
+          "band": "4..9",
+          "pass": false,
+          "wallPresent": true,
+          "chunks": 3
+        },
+        "regions": [
+          {
+            "districtId": "district.market_quarter",
+            "wallSide": "intramural",
+            "area": 57979.29
+          },
+          {
+            "districtId": "district.government_quarter",
+            "wallSide": "intramural",
+            "area": 21767.91
+          },
+          {
+            "districtId": "district.noxious_trades_quarter",
+            "wallSide": "intramural",
+            "area": 3093.27
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSide": "intramural",
+            "area": 2185.72
+          }
+        ]
+      }
+    },
+    {
+      "leaf": "crossing",
+      "name": "Mahabagh",
+      "tier": "town",
+      "population": 3502,
+      "i2_routeTrace": {
+        "applicable": true,
+        "heart": "square.heart",
+        "heartAt": [
+          567.71,
+          515.63
+        ],
+        "floorUnits": 3.28,
+        "floorSource": "the leaf's own web.widths.blockLane",
+        "voidCells": 124633,
+        "gatesTotal": 3,
+        "gatesBricked": 0,
+        "reachable": 3,
+        "passing": 3,
+        "subjectsWere": "circuit gates",
+        "rows": [
+          {
+            "gate": "gate.E1.road.high.corridor.0~frame.0",
+            "bricked": false,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 14.14,
+            "pathLengthUnits": 152.99,
+            "straightLineUnits": 140.3,
+            "detourRatio": 1.0905,
+            "pass": true
+          },
+          {
+            "gate": "gate.E1.road.approach.corridor.1~frame.1",
+            "bricked": false,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 8,
+            "pathLengthUnits": 327.26,
+            "straightLineUnits": 231.54,
+            "detourRatio": 1.4134,
+            "pass": true
+          },
+          {
+            "gate": "gate.E1.road.approach.corridor.2~frame.2",
+            "bricked": false,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 8,
+            "pathLengthUnits": 584.37,
+            "straightLineUnits": 441.47,
+            "detourRatio": 1.3237,
+            "pass": true
+          }
+        ],
+        "pass": true
+      },
+      "i3_chunking": {
+        "tier": "town",
+        "extentTier": "town",
+        "population": 3502,
+        "wallPresent": true,
+        "rings": 1,
+        "totalRegions": 7,
+        "areaFloor": 5000,
+        "legibleWards": 4,
+        "chunks": 5,
+        "band": [
+          5,
+          9
+        ],
+        "bandSource": "[min(totalRegions=7, 5), 9]",
+        "pass": false,
+        "verdictRow": {
+          "instrument": "chunking.legibleWards",
+          "value": 4,
+          "denominator": "7 district regions in fabric.umbrella.partition, area floor 5000 sq units",
+          "band": "5..9",
+          "pass": false,
+          "wallPresent": true,
+          "chunks": 5
+        },
+        "regions": [
+          {
+            "districtId": "district.market_quarter",
+            "wallSide": "intramural",
+            "area": 121712.77
+          },
+          {
+            "districtId": "district.market_quarter~faubourg",
+            "wallSide": "extramural",
+            "area": 9617.07
+          },
+          {
+            "districtId": "district.government_quarter",
+            "wallSide": "intramural",
+            "area": 7903.79
+          },
+          {
+            "districtId": "district.noxious_trades_quarter",
+            "wallSide": "intramural",
+            "area": 5654.76
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSide": "intramural",
+            "area": 3814.5
+          },
+          {
+            "districtId": "district.noxious_trades_quarter~faubourg",
+            "wallSide": "extramural",
+            "area": 1196.61
+          },
+          {
+            "districtId": "district.government_quarter~faubourg",
+            "wallSide": "extramural",
+            "area": 367.33
           }
         ]
       }
@@ -2688,8 +6559,8 @@
     ]
   },
   "noDriftTrace": {
-    "renderFolio": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/w3f-tree/harness/renderFolio.mjs",
-    "rendererLines": 1950,
+    "renderFolio": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/laneREG1-tree/harness/renderFolio.mjs",
+    "rendererLines": 2001,
     "opClasses": 31,
     "tableRows": 31,
     "emittedGroups": [
@@ -2891,7 +6762,7 @@
       {
         "id": "11a",
         "title": "⭐⭐⭐ GAP-D / T-07 / T-08 · THE TWO-TIER STROKE AND THE PLOT SERIES.",
-        "line": 1147,
+        "line": 1174,
         "tableName": "THE TWO-TIER STROKE + PLOT SERIES",
         "trace": [
           "corpus"
@@ -2902,7 +6773,7 @@
       {
         "id": "11b",
         "title": "⭐⭐ §16.5 THE COUNTRYSIDE'S OWN DWELLINGS and §5.0e THE FAUBOURG.",
-        "line": 1190,
+        "line": 1241,
         "tableName": "COUNTRYSIDE DWELLINGS + THE FAUBOURG",
         "trace": [
           "ftg",
@@ -2914,7 +6785,7 @@
       {
         "id": "11c",
         "title": "⭐⭐⭐ THE ACCESSIBLE LENS'S REAL HATCH GEOMETRY (TC29's §0.0 resolution: \"an",
-        "line": 1207,
+        "line": 1258,
         "tableName": "THE ACCESSIBLE LENS'S HATCH GEOMETRY",
         "trace": [
           "corpus"
@@ -2925,7 +6796,7 @@
       {
         "id": "12",
         "title": "ROOF-RIDGE TICKS — the interior detail line that turns a filled quad into a",
-        "line": 1272,
+        "line": 1323,
         "tableName": "ROOF-RIDGE TICKS",
         "trace": [
           "corpus"
@@ -2936,7 +6807,7 @@
       {
         "id": "13",
         "title": "LANDMARKS — §6 archetypes at HEAVIER ink with interior detail lines (ridge",
-        "line": 1335,
+        "line": 1386,
         "tableName": "LANDMARKS — §6 archetypes",
         "trace": [
           "watabou",
@@ -2949,7 +6820,7 @@
       {
         "id": "13b",
         "title": "§161b THE VISIBLE WORK — the strain the §5.-1c solver recorded, drawn at",
-        "line": 1393,
+        "line": 1444,
         "tableName": "THE VISIBLE WORK (§161b)",
         "trace": [
           "corpus"
@@ -2960,7 +6831,7 @@
       {
         "id": "14",
         "title": "TERRACES — §161b's visible work, drawn INSIDE the town on the ground that",
-        "line": 1403,
+        "line": 1454,
         "tableName": "TERRACES inside the town",
         "trace": [
           "corpus"
@@ -2971,7 +6842,7 @@
       {
         "id": "14b",
         "title": "⭐⭐ THE BRIDGES (§2.3, chair directive §195.1). A street that crosses the water",
-        "line": 1411,
+        "line": 1462,
         "tableName": "THE BRIDGES",
         "trace": [
           "watabou",
@@ -2984,7 +6855,7 @@
       {
         "id": "15",
         "title": "WALLS — the heaviest ink on the page, tower dots, gate BREAKS and piers.",
-        "line": 1440,
+        "line": 1491,
         "tableName": "WALLS — towers, gate breaks, piers",
         "trace": [
           "watabou",
@@ -2996,7 +6867,7 @@
       {
         "id": "15a",
         "title": "§250.5 · THE FOSSILS OF A SUPERSEDED CIRCUIT. Drawn AFTER the standing wall",
-        "line": 1630,
+        "line": 1681,
         "tableName": "THE FOSSILS OF A SUPERSEDED CIRCUIT",
         "trace": [
           "corpus"
@@ -3007,7 +6878,7 @@
       {
         "id": "15b",
         "title": "⭐⭐ §10 THE STATE EXPRESSIONS, in CALM INK. Drawn after the wall because a barred",
-        "line": 1664,
+        "line": 1715,
         "tableName": "THE STATE EXPRESSIONS (§10)",
         "trace": [
           "DRIFT"
@@ -3018,7 +6889,7 @@
       {
         "id": "15c",
         "title": "⭐⭐ §18.1 THE SANCTUARY / LIBERTY BOUND. A light dashed line round the precinct's",
-        "line": 1715,
+        "line": 1766,
         "tableName": "THE SANCTUARY / LIBERTY BOUND (§18.1)",
         "trace": [
           "corpus"
@@ -3029,7 +6900,7 @@
       {
         "id": "16",
         "title": "WARD LABELS ARE NO LONGER DRAWN HERE (§173, MF-B6). Every letter on this leaf now",
-        "line": 1751,
+        "line": 1802,
         "tableName": "WARD LABELS (now spliced at §173)",
         "trace": [
           "ftg",
@@ -3041,7 +6912,7 @@
       {
         "id": "17",
         "title": "THE FOLIO CHROME — cartouche + compass.",
-        "line": 1759,
+        "line": 1810,
         "tableName": "THE FOLIO CHROME — cartouche + compass",
         "trace": [
           "corpus"
@@ -3052,7 +6923,7 @@
       {
         "id": "18",
         "title": "⭐⭐ THE IN-WORLD LEGEND (§12.7, and the chair's §195.2 disposal).",
-        "line": 1851,
+        "line": 1902,
         "tableName": "THE IN-WORLD LEGEND (§12.7)",
         "trace": [
           "corpus"
@@ -3063,7 +6934,7 @@
       {
         "id": "19",
         "title": "⭐⭐⭐ §173 THE LETTERING SPLICE — a SEPARATE STAGE OVER THE FINISHED DRAW LIST.",
-        "line": 1916,
+        "line": 1967,
         "tableName": "THE LETTERING SPLICE (§173)",
         "trace": [
           "corpus",

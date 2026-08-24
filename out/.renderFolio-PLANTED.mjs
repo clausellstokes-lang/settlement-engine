@@ -1113,8 +1113,35 @@ export function renderFolio(fabric, opts = {}) {
       buckets.get(fill).push(polyPath(mass.polygon));
       prims.n++;
     }
+    // ⭐⭐⭐ REG-1 (L-REG-2) · THE FUSED MASSES, in the same tone buckets. A run of holdings that
+    // the packer's own boundary decision called PARTY-WALLED is drawn as ONE BODY — which is
+    // what a party wall means — and its members' separate outlines are not drawn at all. See
+    // fabric/frontageFusion.js; ABSENT when the feature is unarmed, so this loop runs zero times
+    // and every legacy byte stands.
+    const fused = fabric.fusion || null;
+    const fusedMembers = fused ? fused.memberKeys : null;
+    for (const mass of ((fused && fused.masses) || [])) {
+      const mTint = CHARACTER_TINT[mass.character] == null ? 0 : CHARACTER_TINT[mass.character];
+      const fill = shade(MATERIAL_TONE[mass.material] || roofTone, roofStep(mass.tone, mass.wealth) - mTint);
+      if (!buckets.has(fill)) { buckets.set(fill, []); order.push(fill); }
+      buckets.get(fill).push(polyPath(mass.polygon));
+      prims.n++;
+    }
     for (const p of fabric.parcels) {
       if (merged.has(p.key)) continue;
+      // ⚠ THE BACK-HOUSE OF A FUSED MEMBER STILL DRAWS. The mass is the STREET RANGE the party
+      // wall joins; the back-house stands at the bottom of its own yard and shares no wall with
+      // anything. Dropping it with the member's outline would delete a drawn family.
+      if (fusedMembers && fusedMembers.has(p.key)) {
+        if (p.backHouse) {
+          const tint2 = CHARACTER_TINT[p.character] == null ? 0 : CHARACTER_TINT[p.character];
+          const fill2 = shade(MATERIAL_TONE[p.material] || roofTone, roofStep(p.tone, p.wealth) - tint2);
+          if (!buckets.has(fill2)) { buckets.set(fill2, []); order.push(fill2); }
+          buckets.get(fill2).push(polyPath(p.backHouse));
+          prims.n++;
+        }
+        continue;
+      }
       if (p.derelict) { derelict += polyPath(p.polygon); prims.n++; continue; }
       const tint = CHARACTER_TINT[p.character] == null ? 0 : CHARACTER_TINT[p.character];
       // §10.A3: the ward's material is the BASE the per-plot jitter and the character tint
@@ -1163,9 +1190,15 @@ export function renderFolio(fabric, opts = {}) {
   //   BLOCK BACK (2×)   the back lane the tofts run to, which is what closes the block.
   {
     const merged = (fabric.lod && fabric.lod.mergedKeys) || new Set();
+    const fused = fabric.fusion || null;
+    const noTick = fused ? fused.suppressPlotKeys : null;
     let plotD = '';
     for (const p of fabric.parcels) {
       if (merged.has(p.key) || !p.plotLine) continue;
+      // ⭐ REG-1: inside a fused mass the boundary is a PARTY WALL, and it is drawn as one at
+      //   the ladder's own 0.5× rung below. The FIRST member's line is the group's outer
+      //   boundary — a real gap — and stays a plot tick, so nothing is drawn twice.
+      if (noTick && noTick.has(p.key)) continue;
       plotD += linePath(p.plotLine); prims.n++;
     }
     // The LOD masses keep their unit lines: a mass is a block of holdings, not a slab.
@@ -1175,10 +1208,28 @@ export function renderFolio(fabric, opts = {}) {
     if (plotD) {
       push(`<path d="${plotD}" fill="none" stroke="${inkTone}" stroke-width="${INK.plotTick}" stroke-opacity="0.72" stroke-linecap="round"/>`);
     }
+    // ⭐⭐ REG-1 · THE INTERIOR PARTY WALL, at §2.3.2's 0.5× rung, ON THE SHARED WALL ITSELF —
+    //    the rung `INK_SCALE.party` has been declared since the ladder landed and had no
+    //    geometry under it until the masses existed.
+    if (fused) {
+      let partyD = '';
+      for (const mass of fused.masses) for (const l of mass.partyLines) { partyD += linePath(l); prims.n++; }
+      if (partyD) push(`<path d="${partyD}" fill="none" stroke="${inkTone}" stroke-width="${INK.party}" stroke-opacity="0.85" stroke-linecap="butt"/>`);
+    }
     let frontD = '', backD = '';
     for (const b of (fabric.blocks || [])) {
-      if (b.front && b.front.length === 2) { frontD += linePath(b.front); prims.n++; }
+      // ⭐⭐⭐ L-REG-9 · THE STANDALONE BLOCKFRONT BAR IS NOT DRAWN WHEN THE MASSES EXIST.
+      //   *"A stroke may carry only meaning the geometry beneath it earns"* (§579, the floating
+      //   front-bars precedent): a 2× continuous frontage line drawn over a rank of separate
+      //   quads asserts a wall the geometry does not have, and REG-0 measured it being swept
+      //   into role `wall` and rendered 1.85× LOUDER than the circuit it was not. The weight is
+      //   RE-HOMED below onto the fused mass's own street face, which is a real edge of a real
+      //   body. Unfused geometry keeps the legacy bar exactly as it was.
+      if (!fused && b.front && b.front.length === 2) { frontD += linePath(b.front); prims.n++; }
       if (b.backLine && b.backLine.length === 2) { backD += linePath(b.backLine); prims.n++; }
+    }
+    if (fused) {
+      for (const mass of fused.masses) for (const seg of mass.frontEdge) { frontD += linePath(seg); prims.n++; }
     }
     if (frontD) push(`<path d="${frontD}" fill="none" stroke="${inkTone}" stroke-width="${INK.block}" stroke-linecap="square"/>`);
     // ⚠ THE BACK LINE IS LIGHTER THAN THE FRONT AND THAT IS NOT A COMPROMISE. A block's front

@@ -2,7 +2,13 @@
 
 **Charter:** `docs/DESIGN_REGISTER_PROGRAM.md` — A2.1 item 3 (REG-I0, chartered first in the arc),
 A2.2 (exit-criteria repairs), §6 (the two-legged exit), A1.3 (instrument additions).
-**Subject:** the sealed fabric at `ee0db96d3` and the renders `harness/renderFolio.mjs` emits from it.
+**ODQ §602.2** ordered two repairs to i6 after REG-1 §11.1 measured them; both landed with lane
+TE-REG-I0b and are written up below under **THE TWO ORDERED REPAIRS TO i6**.
+**Subject:** the sealed fabric at **`d1b32e339`** (`refs/preserve/map-sandbox-reg1-fusion`) and the
+renders `harness/renderFolio.mjs` emits from it. Fusion is DORMANT at that tip, and REG-1 §6
+proved the unarmed render byte-identical to the prior seal `ee0db96d3` on 29 of 29 artifacts — so
+the BASELINE is still that same drawing, now read through a repaired instrument. The ARMED render
+is recorded beside it as a differential, never as the baseline.
 **Sandbox-only.** No repo bytes. Every script is plain `node`, no dependencies, no network, and
 contains no `Date` and no `Math.random` — same input, same digits, forever.
 
@@ -29,7 +35,7 @@ contains no `Date` and no `Math.random` — same input, same digits, forever.
 | 3 | **CHUNKING** `i3-chunking.mjs` | legibleWards = \|{district regions with area ≥ 5,000 sq units}\|; chunks = legibleWards + (wall ? 1 : 0) | `fabric.umbrella.partition` — the region count is printed beside every verdict | **[min(totalRegions, 5) … 9]** — Miller's ceiling fixed, the floor TIER-CONDITIONED so a thorp is not convicted for being small (L-REG-15) | 30 synthetic regions fail high; all-dust fails low and still prints its denominator; a one-region leaf passes on [1,9] |
 | 4 | **LANDMARK SALIENCE** `i4-landmark-salience.mjs` | Glass's Δ of the top-4 landmark masses' luminance vs the fabric population | the FABRIC pixel population's SD, in luminance units | each mass ≥ **1.0**, group mean ≥ **1.5** fabric SD *(chair's, vetoable)* | **DECOYS** — the same four shapes translated onto urban fabric, measured by identical code; plus a POSITIVE `loud-landmark` plate the instrument must detect |
 | 5 | **ROLE-PAIR CONTRAST** `i5-role-contrast.mjs` | WCAG ratio of the mean measured sRGB of each role — `folioLenses.luminance()`'s own formula applied to pixels instead of to the palette | the darker role's WCAG-adjusted luminance; both pixel counts on the row | street:ground ≥ **2.10** (§9.7's own "three value steps ≈ 1.28³"), wall:all ≥ **3.00**, water:ground ≥ **1.35** *(the last two chair's, vetoable)* | each broken plate drives its own pair below floor; every row also prints what `lensContrast()` would have PREDICTED from the palette, and the gap |
-| 6 | **FRONTAGE** `i6-frontage.mjs` | F1 ratio = fronted/probes · F2 runs, meanRun, p50, p90, max · F3 freestanding = solitary/intramural bodies | F1: street-flank probes inside the urban envelope · F2: the run count · F3: bodies inside the circuit (`closedPolygon`, or a named fallback) | REG-1 sets the target band; this lane records the baseline | reproduces REG-0's published city AND village figures exactly; `--fuse=0` returns identically to the base; `--shatter=0.35` manufactures the §571.4 defect and every figure moves the right way |
+| 6 | **FRONTAGE** `i6-frontage.mjs` | F1 ratio = fronted/probes · F2 runs, meanRun, p50, p90, max · **F3 freestandingDensity = MASSES / INTRAMURAL BUILDING-INK AREA**, per 1,000 sq view units (`meanMassFootprint` is the same figure read the other way up) | F1: street-flank probes inside the urban envelope · F2: the run count · **F3: the SQUARE VIEW UNITS of building ink inside the circuit** (`closedPolygon`, or a named fallback) — the mass count is printed beside it on every row | REG-1 sets the target band; this lane records the baseline | reproduces REG-0's published city AND village figures exactly at the PINNED legacy grid; `--fuse=0` returns identically to the base; `--shatter=0.35` manufactures the §571.4 defect and every figure moves the right way; **F3's own arm** — closing the building ink must cut the mass count and the density and raise the mean footprint; **the grid arm** — 1400 must NOT resolve the leaf's party gap, the resolved N must, and the base's own figures must MOVE between them |
 | 7 | **FTG COLOUR** `i7-ftg-colour.mjs` | conformance = saturated role px inside the category band / saturated role px; descriptor = the count-weighted modal 10° hue bin | the SATURATED role population — grey pixels are excluded from BOTH sides and reported as `greyShare` | water **185–265°**, field **35–70°**, town **0–60°**; conformance ≥ **0.60**; grey share ≤ **0.50** *(chair's, vetoable)* | `grey-water` drives water out of band and moves nothing else; the base plate is correctly reported ACHROMATIC rather than mis-hued |
 | 8 | **NO-DRIFT TRACE** `i8-nodrift-trace.mjs` | roster re-derived from renderFolio's own numbered section headers, checked against the committed trace table | 31 op classes; an untraced class is a countable miss | **0 untraced misses, 0 stale rows**; every DRIFT row must carry a written justification | a planted section raises the miss count by exactly one; a removed section is reported as a STALE table row |
 | 9 | **BLIND SILHOUETTE** *(protocol, below)* | pass fraction of class-from-silhouette reads | N fixtures × 1 fresh-context reader | fixed at the REG-0 round (A2.2) | the DECOY sheet and the two refusal outcomes |
@@ -76,6 +82,89 @@ shapes will recur in every later wave that measures a drawing.
 Three further breaks were **the controls being wrong, not the instruments** — a sever disc that
 left snappable corners, a "wilderness" gate sited by eye onto a road, a straddler planted on a
 bounding box rather than on the circuit's own claim line. Each is annotated at its site.
+
+---
+
+## THE TWO ORDERED REPAIRS TO i6 (ODQ §602.2, after REG-1 §11.1)
+
+REG-1 measured the sealed fusion tip through this set and reported two i6 defects it was not
+granted the standing to fix. The chair ordered both. Both are recorded here in full because each
+carries a class that will recur in every later wave that measures a drawing.
+
+### R1 · F3 INVERTED ON GENERATIVE FUSION, AND THE OBVIOUS FIX IS A NO-OP
+
+F3 was `SOLITARY / INTRAMURAL BODIES` — bodies alone in their component of the closed mask, over
+drawn building subpaths. On the fusion tip it **rose** (city 0.0652 → 0.0818) on a drawing whose
+blocks had just been formed. The order was to *"re-define the numerator to count MASSES"*, and
+the first thing measurement showed is that **the numerator was already counting masses**:
+
+> A body alone in its component *is* a component holding exactly one body — the same integer by
+> construction. MEASURED at city: `solitaryBodies` = **133** and the count of single-body
+> components = **133** (tip: **140** and **140**). Re-labelling the numerator moves nothing.
+
+⭐ **THE INVERSION IS IN THE DENOMINATOR, AND THE CLASS IS GENERAL: a population of DRAWN UNITS is
+not conserved under generative fusion, so no fraction over it can measure fusion.** Replacing k
+members with one mass deletes k−1 subpaths — city **2,045 → 1,717 bodies, −16.0 %** — so any
+per-body fraction rises whether or not the drawing improved. Every candidate that kept a
+unit-count denominator inverted the same way when measured (masses/bodies 0.488 → 0.556;
+masses/blocks 2.501 → 2.403 only because *both* halves fell).
+
+What fusion does **not** move is the ink. Measured at city: building fill **117,452 → 117,885 sq
+units, +0.37 %** (the party-gap slivers it swallows); the whole built mask 142,863 → 142,794,
+−0.05 %. **Area is the conserved denominator; a count of units is not.** So:
+
+```
+freestandingDensity = MASSES / INTRAMURAL BUILDING-INK AREA        (per 1,000 sq view units)
+  MASSES       one connected component of the drawn building+landmark fill — one connected
+               FUSED UNIT, whatever number of holdings it holds and however it came to be fused.
+               Each mass is placed intramuros by ITS OWN centroid, so it is counted once and
+               lands where its bulk is.
+  DENOMINATOR  the square view units of that same ink inside the circuit, named on every row.
+```
+
+Two further consequences, both improvements the order did not ask for and both stated:
+
+- **F3 no longer reads through the closing radius.** The old SOLITARY test was taken in
+  `close(built, FUSE_R)` — a 1.25-unit close at city, which REG-1 §4 measured spanning ≤ 2.5 u
+  and therefore bridging SLOTS (1.00 u) and PACKING WEDGES (1.35 u), gaps `decideGap` gave a
+  reason and the charter says must remain. F3 now reads the ink **as drawn**.
+- **F3 measures BUILDING ink, not `built`.** `built` carries YARDS because REG-0's probes front
+  on a yard wall as readily as on a roof, and F1/F2 are lifted verbatim; but a filled toft glues
+  neighbouring roofs into one component through ground that is not built at all. `bodyInk` is a
+  new, separate mask — **no F1/F2 figure moves.**
+
+⚠ `supersededFraction` carries the old reading on every row, labelled, so the pre-repair
+baselines can be reconciled. **It is not a verdict figure.**
+
+### R2 · THE GRID COULD NOT RESOLVE THE GAP THE INSTRUMENT EXISTS TO MEASURE
+
+`PLOT_SHAPE.partyGap = 0.035` frontages is the residual between two party-walled holdings — the
+exact gap §571.4 is about. At the recorded grid 1400 the cell is **0.714 u** while the city's
+party gap is **0.219 u** and the village's **0.481 u**: *every party gap in the corpus is smaller
+than one cell*, so the base plate arrives already fused BY RASTERISATION and the instrument
+reports a cure with nothing left to do. REG-1 proved it by moving only this knob (village,
+everything else held): 1400 and 2000 both returned base and fused identical at 176/14.66/68, and
+the delta appeared at 2800 — the moment the cell fell below the gap.
+
+**THE RULE, recorded by REG-1 §4b before any figure was measured through it, adopted verbatim as
+the DEFAULT:**
+
+```
+partyGap = plotFrontage × 0.035                    ← the law's own value
+N        = the smallest multiple of 200 whose cell 1000/N is ≤ partyGap, capped at 6400
+```
+
+City 4600 · village 2200 · town 5800 · metropolis 5200 · polycentric 6200 · thorp 1200. **No
+corpus leaf reaches the cap.** `--grid=` still overrides; `--reg0compat` **pins 1400**, because
+REG-0's published figures were measured through that cell and a compatibility mode that quietly
+re-gridded would report "REPRODUCED" while differing.
+
+⭐ THE CLASS, and it is instrument 1's own class one turn out: **a mask metric cannot see a defect
+finer than its cell, and a base that looks fused at grid N is a base measured at grid N.** The
+tell is that the BASE's own figures move with the grid.
+
+⚠ A base still partly fused by rasterisation makes any base→tip Δ a **lower bound**, which is why
+the resolved grid is the default rather than an option.
 
 ---
 
@@ -145,7 +234,11 @@ node i2-route-trace.mjs --wt=<worktree> --leaf=city            # or --controls
 node i3-chunking.mjs    --wt=<worktree> --leaves=ALL           # or --controls
 node i4-landmark-salience.mjs --base= --png= [--decoy]         # or --controls
 node i5-role-contrast.mjs     --base= --png=                   # or --controls
-node i6-frontage.mjs --svg= --frontage= [--reg0compat]         # or --controls
+node i6-frontage.mjs --svg= --frontage= [--circuit=<poly.json>] # or --controls
+     # ⭐ the grid DEFAULTS to the leaf's own party-gap-resolving N (R2). --grid=<N> overrides;
+     #   --reg0compat PINS 1400 and re-applies REG-0's wall-band strike.
+     # ⭐ --circuit takes the MODEL's own walls[].closedPolygon as a JSON [[x,y],…]; without it
+     #   F3 falls back to the flood, then to the urban envelope, and NAMES which it used.
 node i7-ftg-colour.mjs --base= --png=                          # or --controls
 node i8-nodrift-trace.mjs --wt=<worktree>                      # or --controls
 node i10-censuses.mjs --wt=<worktree> --leaves=ALL             # or --controls
@@ -153,6 +246,44 @@ node i10-censuses.mjs --wt=<worktree> --leaves=ALL             # or --controls
 node mk-controls.mjs <base.svg> <outDir>     # regenerate the deliberately-broken plates
 node run-baselines.mjs                       # → out/baselines.json
 ```
+
+### THE BASELINE FILES, AND WHY THERE ARE TWO
+
+| file | tip | instrument | note |
+|---|---|---|---|
+| `out/baselines-ee0db96d3.json` | `ee0db96d3` | **pre-repair** i6 | the original record, kept verbatim. **Never overwritten** — a baseline edited in place is not a baseline. |
+| `out/baselines.json` | **`d1b32e339`** | **post-repair** i6 (R1 + R2) | the live baseline. `i6Corpus.rows[]` covers **every exemplar leaf**, dormant vs armed. |
+| `out/baselines-d1b32e339.log` | `d1b32e339` | post-repair | the console record of the run that wrote the file above. |
+| ⛔ `out/baselines.log` | — | — | **STALE AND MISLEADING — DO NOT COMPARE AGAINST IT.** See the warning below. |
+
+> ⛔⛔ **THE STALE LOG THAT CONVICTS AN INNOCENT LANE.** `out/baselines.log` is timestamped
+> **12:42:02**, but `i1-squint.mjs` (12:44:51), `i5-role-contrast.mjs` (12:45:05) and
+> `i7-ftg-colour.mjs` (12:45:57) were all edited AFTER it, and `baselines.json` was written at
+> 12:46. **The log therefore describes code that no longer existed when the baseline was
+> recorded.** It reports `squint=FAIL` for BASE-village, BASE-town and SPEC-village; the recorded
+> JSON — both the old file and the new one — says **PASS** for all three. A later lane diffing its
+> own run against that log would conclude it had broken three instruments it never touched. The
+> bytes are left untouched because they are history; the name is the false claim.
+> ⭐ **THE CLASS, and it is this programme's own standing law arriving in a new costume: an exit
+> status captured before the last edit is a status about different code — and a LOG is an exit
+> status that outlives the run.** Compare artifact to artifact, never artifact to log.
+
+⚠ **THE DRAWING DID NOT MOVE BETWEEN THEM; THE INSTRUMENT DID.** At `d1b32e339` fusion is
+DORMANT and REG-1 §6 proved the unarmed render byte-identical to `ee0db96d3` on 29 of 29
+artifacts. Verified by diffing the two files: the pixel instruments (i1/i4/i5/i7) are
+**identical on all 25 blocks**, `i6.reg0Compat` is identical on all 5 plates, i2/i3 are identical
+on the three leaves the old file carried, and the censuses are identical. The only untouched
+figure that moved is `noDriftTrace`'s LINE NUMBERS (+51, REG-1's own additions to `renderFolio`) —
+the op-class roster, `traced=28`, `untracedMisses=0` and `staleTableRows=[]` all stand.
+
+⚠ The BASE plates' old `i6.asDrawn` block (read at 1400) has **no successor at that grid** — it
+was deliberately removed rather than kept beside the resolved-grid reading, because two different
+grids under one instrument's name is the confusion R2 exists to end. The 1400 anchor survives as
+`i6.reg0Compat`, and the old file holds the removed block verbatim.
+
+⚠ **The pixel instruments still cover only the plates that have rasters** (city, village, town,
+and the two REG-0 specimens). i6, i2, i3 and i10 cover all 18. Rasters for the armed corpus exist
+only in the REG-1 lane's scratchpad and were not re-shot here; REG-1 §5 holds those readings.
 
 Rasters go through `reg0/shoot.sh`'s discipline (headless Chrome, width/height stripped,
 absolute `file://`, byte floor). **qlmanage is not an instrument — it drops SVG filters** (§7.6).
@@ -169,3 +300,16 @@ Written down so the next wave does not re-derive the gaps.
 - **Gallery variety, interaction latency, zoom-level proofs** (A1.3) — chartered, not built here.
 - **Determinism double-runs** — REG-0's own control B covers the render path; this set is pure by
   construction and has no seeded state of its own to double-run.
+- **HOLDINGS, as a population.** F3 now counts MASSES over INK AREA and never needs a holding
+  count — but no instrument in this set can tell a fused range of k holdings from one large
+  building **by ink alone**. Three routes were measured and rejected during R1, recorded so the
+  next wave does not re-derive them: (a) counting the drawn party lines is EXACT — the tip emits
+  exactly 320 of them at city, matching the fabric's own published `partyLines` — but a purely
+  geometric "a stroke that cuts a filled body" predicate over-collects, returning **540 such
+  strokes on the un-fused base** (roof ridges, plot ticks, back lines), so the count is only
+  recoverable by reading `stroke-linecap`/`stroke-opacity`, i.e. by keying on one renderer's
+  convention; (b) inferring holdings from mass AREA fails because the base's own building areas
+  already run to 9× their median on 18 bodies at city, so no threshold separates a large
+  building from a small terrace; (c) taking holdings from the MODEL works and has precedent
+  (`circuitPoly`), but makes F3 unable to judge a drawing on its own. **If a later wave needs the
+  holdings population, (c) is the honest route and it must be NAMED on the row.**

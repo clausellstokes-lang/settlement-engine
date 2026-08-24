@@ -45,39 +45,39 @@
   },
   "fusion": {
     "base": {
-      "probes": 38706,
-      "fronted": 19208,
-      "ratio": 0.4963,
-      "runs": 1714,
-      "meanRunUnits": 11.21,
-      "p50RunUnits": 8.01,
-      "p90RunUnits": 23.94,
-      "maxRunUnits": 69.75,
-      "frontingMasses": 611
+      "probes": 38499,
+      "fronted": 19971,
+      "ratio": 0.5187,
+      "runs": 1934,
+      "meanRunUnits": 10.32,
+      "p50RunUnits": 8,
+      "p90RunUnits": 20.97,
+      "maxRunUnits": 68.75,
+      "frontingMasses": 799
     },
     "fused": {
-      "probes": 38706,
-      "fronted": 19208,
-      "ratio": 0.4963,
-      "runs": 1385,
-      "meanRunUnits": 13.87,
-      "p50RunUnits": 10.03,
-      "p90RunUnits": 30.18,
+      "probes": 38499,
+      "fronted": 19971,
+      "ratio": 0.5187,
+      "runs": 1327,
+      "meanRunUnits": 15.05,
+      "p50RunUnits": 11.91,
+      "p90RunUnits": 33.04,
       "maxRunUnits": 69.75,
-      "frontingMasses": 362
+      "frontingMasses": 368
     }
   },
   "shatter": {
     "shattered": {
-      "probes": 36063,
-      "fronted": 12102,
-      "ratio": 0.3356,
-      "runs": 2029,
-      "meanRunUnits": 5.96,
-      "p50RunUnits": 5.03,
-      "p90RunUnits": 10.16,
+      "probes": 35356,
+      "fronted": 13357,
+      "ratio": 0.3778,
+      "runs": 2051,
+      "meanRunUnits": 6.51,
+      "p50RunUnits": 6,
+      "p90RunUnits": 10.91,
       "maxRunUnits": 53.67,
-      "frontingMasses": 1085
+      "frontingMasses": 1136
     },
     "shatteredF3": {
       "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
@@ -86,24 +86,35 @@
       "enclosedCells": 0,
       "gateBridgeUnits": 18,
       "circuitFromModel": false,
-      "bodiesDrawn": 1997,
-      "bodiesAttributed": 1995,
-      "intramuralBodies": 1995,
-      "solitaryBodies": 687,
-      "freestandingFraction": 0.3444,
-      "fusedComponents": 1081,
-      "bodiesPerFusedComponent": 1.87
+      "masses": 1982,
+      "intramuralInkAreaUnits2": 56536.81,
+      "freestandingDensity": 35.0568,
+      "meanMassFootprintUnits2": 28.53,
+      "largestMassFootprintUnits2": 572.4,
+      "denominator": "56536.81 sq view units of building ink in urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named), carrying 1982 connected masses",
+      "inkMeasured": "building + landmark fill as drawn",
+      "bodiesDrawn": 1998,
+      "bodiesAttributed": 1997,
+      "intramuralBodies": 1997,
+      "bodiesPerMass": 1.01,
+      "supersededFraction": {
+        "solitaryBodies": 713,
+        "intramuralBodies": 1997,
+        "freestandingFraction": 0.357,
+        "fusedComponents": 1118,
+        "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+      }
     },
     "intact": {
-      "probes": 38706,
-      "fronted": 19208,
-      "ratio": 0.4963,
-      "runs": 1714,
-      "meanRunUnits": 11.21,
-      "p50RunUnits": 8.01,
-      "p90RunUnits": 23.94,
-      "maxRunUnits": 69.75,
-      "frontingMasses": 611
+      "probes": 38499,
+      "fronted": 19971,
+      "ratio": 0.5187,
+      "runs": 1934,
+      "meanRunUnits": 10.32,
+      "p50RunUnits": 8,
+      "p90RunUnits": 20.97,
+      "maxRunUnits": 68.75,
+      "frontingMasses": 799
     },
     "intactF3": {
       "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
@@ -112,13 +123,125 @@
       "enclosedCells": 0,
       "gateBridgeUnits": 18,
       "circuitFromModel": false,
-      "bodiesDrawn": 1997,
-      "bodiesAttributed": 1995,
-      "intramuralBodies": 1995,
-      "solitaryBodies": 136,
-      "freestandingFraction": 0.0682,
-      "fusedComponents": 394,
-      "bodiesPerFusedComponent": 5.16
+      "masses": 1043,
+      "intramuralInkAreaUnits2": 124153.97,
+      "freestandingDensity": 8.4009,
+      "meanMassFootprintUnits2": 119.04,
+      "largestMassFootprintUnits2": 1826.28,
+      "denominator": "124153.97 sq view units of building ink in urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named), carrying 1043 connected masses",
+      "inkMeasured": "building + landmark fill as drawn",
+      "bodiesDrawn": 1998,
+      "bodiesAttributed": 1994,
+      "intramuralBodies": 1994,
+      "bodiesPerMass": 1.91,
+      "supersededFraction": {
+        "solitaryBodies": 138,
+        "intramuralBodies": 1994,
+        "freestandingFraction": 0.0692,
+        "fusedComponents": 401,
+        "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+      }
+    }
+  },
+  "f3Fusion": {
+    "asDrawn": {
+      "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
+      "enclosureFormed": false,
+      "floodEnclosureFormed": false,
+      "enclosedCells": 0,
+      "gateBridgeUnits": 18,
+      "circuitFromModel": false,
+      "masses": 1043,
+      "intramuralInkAreaUnits2": 124153.97,
+      "freestandingDensity": 8.4009,
+      "meanMassFootprintUnits2": 119.04,
+      "largestMassFootprintUnits2": 1826.28,
+      "denominator": "124153.97 sq view units of building ink in urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named), carrying 1043 connected masses",
+      "inkMeasured": "building + landmark fill as drawn",
+      "bodiesDrawn": 1998,
+      "bodiesAttributed": 1994,
+      "intramuralBodies": 1994,
+      "bodiesPerMass": 1.91,
+      "supersededFraction": {
+        "solitaryBodies": 138,
+        "intramuralBodies": 1994,
+        "freestandingFraction": 0.0692,
+        "fusedComponents": 401,
+        "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+      }
+    },
+    "inkFused": {
+      "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
+      "enclosureFormed": false,
+      "floodEnclosureFormed": false,
+      "enclosedCells": 0,
+      "gateBridgeUnits": 18,
+      "circuitFromModel": false,
+      "masses": 440,
+      "intramuralInkAreaUnits2": 132872.35,
+      "freestandingDensity": 3.3114,
+      "meanMassFootprintUnits2": 301.98,
+      "largestMassFootprintUnits2": 2466.97,
+      "denominator": "132872.35 sq view units of building ink in urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named), carrying 440 connected masses",
+      "inkMeasured": "OVERRIDE (control)",
+      "bodiesDrawn": 1998,
+      "bodiesAttributed": 1994,
+      "intramuralBodies": 1994,
+      "bodiesPerMass": 4.53,
+      "supersededFraction": {
+        "solitaryBodies": 138,
+        "intramuralBodies": 1994,
+        "freestandingFraction": 0.0692,
+        "fusedComponents": 401,
+        "note": "SUPERSEDED (§602.2): a drawn-subpath denominator is not conserved under generative fusion, so this figure RISES when blocks form. Recorded for reconciliation with the pre-repair baselines only."
+      }
+    },
+    "closeRadiusUnits": 1.25
+  },
+  "grid": {
+    "legacy": {
+      "grid": 1400,
+      "cellUnits": 0.7143,
+      "partyGapUnits": 0.2188,
+      "resolvesPartyGap": false,
+      "rule": "N = smallest multiple of 200 with cell ≤ frontage × 0.035, capped at 6400 (REG-1 §4b, recorded before measuring)",
+      "base": {
+        "probes": 38706,
+        "fronted": 19208,
+        "ratio": 0.4963,
+        "runs": 1714,
+        "meanRunUnits": 11.21,
+        "p50RunUnits": 8.01,
+        "p90RunUnits": 23.94,
+        "maxRunUnits": 69.75,
+        "frontingMasses": 611
+      }
+    },
+    "resolved": {
+      "grid": 4600,
+      "cellUnits": 0.2174,
+      "partyGapUnits": 0.2188,
+      "resolvesPartyGap": true,
+      "rule": "N = smallest multiple of 200 with cell ≤ frontage × 0.035, capped at 6400 (REG-1 §4b, recorded before measuring)",
+      "base": {
+        "probes": 38499,
+        "fronted": 19971,
+        "ratio": 0.5187,
+        "runs": 1934,
+        "meanRunUnits": 10.32,
+        "p50RunUnits": 8,
+        "p90RunUnits": 20.97,
+        "maxRunUnits": 68.75,
+        "frontingMasses": 799
+      }
+    },
+    "resolvedGridByLeaf": {
+      "thorp": 1200,
+      "hamlet": 2200,
+      "village": 2200,
+      "town": 5800,
+      "city": 4600,
+      "metropolis": 5200
     }
   },
   "liveness": [
@@ -155,7 +278,31 @@
       true
     ],
     [
-      "shatter raises the freestanding fraction",
+      "shatter raises the freestanding DENSITY",
+      true
+    ],
+    [
+      "F3: fusing the ink cuts the mass count",
+      true
+    ],
+    [
+      "F3: fusing the ink cuts the density",
+      true
+    ],
+    [
+      "F3: fusing the ink raises the mean mass footprint",
+      true
+    ],
+    [
+      "GRID: the recorded 1400 does NOT resolve the city party gap",
+      true
+    ],
+    [
+      "GRID: the resolved N DOES resolve it",
+      true
+    ],
+    [
+      "GRID: the base's own figures MOVE between the two grids (the knob is live)",
       true
     ]
   ]
