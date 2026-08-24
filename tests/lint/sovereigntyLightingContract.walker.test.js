@@ -6324,7 +6324,65 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //      move, which is the only way "unmoved" is evidence rather than silence.
     //   D  `suiteTitles` ALONE minus one reds at `suiteTitles`, so the LAST assertion is
     //      reachable and no earlier red is masking it.
-    files: 2523, parked: 366, credited: 2157, titles: 20982, suiteTitles: 5840,
+    // == RE-RECORDED 2026-08-24 BY THE TE-STACK-4 LANDING - TWO CARS THROUGH ONE GATE
+    //   (TE-AIP-1, the AI-media provenance floor, and MF-CH2B, the packet held at DRAFT),
+    //   CAUSE ATTRIBUTED PER CAR AND PER FILE ==
+    // 2,523/366/2,157/20,982/5,840 -> 2,524/366/2,158/21,002/5,845 at the landing slot
+    // 79b78881c (the TE-IP-1 + MF-MP1 stacked landing). Same law as the row above it:
+    // SS420 (a stack's census is a BASE plus a SUM OF DELTAS, never a carried tuple) and
+    // SS417 (the row belongs to the landing act, never to a member).
+    // BOTH CARS WERE REBASED, AND CAR 1'S OWN CENSUS ROW DIED ON THE REBASE - the second
+    //   time in two landings, so it is now the expected shape rather than a surprise. Car 1
+    //   built on 567030f1d and car 2 on 70bb64f23; car 1's holding carried a tuple line of
+    //   its own (2,521/366/2,155/20,961/5,832, walked at 567030f1d). It CONFLICTED and was
+    //   resolved to the SLOT side - dropped, not merged - and the resolved file was proved
+    //   cmp 0 against the slot blob with a one-byte probe proving the cmp was live. After
+    //   that resolution NEITHER CAR EDITS THIS FILE and the whole row below is the landing
+    //   act's, walked ONCE at the stacked tree.
+    // TWO CAUSES, SUMMED, AND NEITHER IS A RULE CHANGE - no classifier here widened or
+    // narrowed:
+    //   CAR 1 (TE-AIP-1) +1 file / +1 CREDITED / +20 titles / +5 suite titles, from ONE file:
+    //     tests/build/aiMediaProvenance.test.js - the AI-media provenance floor, the guard
+    //       that stops sharp's default metadata strip from taking the C2PA, the SynthID
+    //       marker and the "Made with Google AI" credit off the next re-encode. CREDITED at
+    //       birth: 20 titles, 5 suite titles, parkReasons [].
+    //   CAR 2 (MF-CH2B) +0 / +0 / +0 / +0 / +0 - the packet document alone, held at DRAFT.
+    // ⭐ CAR 2's ZERO IS MEASURED, NOT ASSUMED, WHICH IS THE WHOLE POINT OF A PER-CAR SPLIT.
+    //   Its diff names exactly one path, docs/implementation/packets/catalog-hygiene/
+    //   MF-CH2B.md, which is not under tests/ and so cannot be seen by TEST_FILES. That
+    //   argument is a prediction; the measurement is that this walker's own
+    //   parkReasonsFor / liveTitlesIn / liveSuiteTitlesIn were driven over the whole corpus
+    //   at car 1's tip 7d93a93db AND at the stacked tip e6102e1e0 and returned IDENTICAL
+    //   rows on all five figures and on every one of the 2,524 files. ⚠ An identical pair of
+    //   readings is exactly what a DEAD instrument also returns, so the instrument was
+    //   proved live twice at the stacked tip: planting one two-title/one-suite test file
+    //   under tests/docs moved the tuple to 2,525/366/2,159/21,004/5,846, and planting a
+    //   file that PARKS (an `it` with no vitest opener, reason OPENER_UNRESOLVED:it) moved
+    //   `parked` to 367 - the figure that does not move for either car. Both plants were
+    //   removed and both restorations returned the tuple exactly.
+    // The arithmetic closes: 366 + 2,158 = 2,524, and the walked delta +1/+0/+1/+20/+5
+    // equals the sum of the two cars' attributed deltas exactly, so the two rebases moved no
+    // title and no title was swallowed.
+    // FIVE negative controls, ONE PER FIGURE, all red as predicted, each substitution
+    // guarded by a file hash that ABORTS on a no-op edit, and the file restored cmp 0 with
+    // the same md5 at the end. Each moves exactly ONE figure so the red must land on that
+    // figure and cannot be masked by an earlier assertion; the clean control ran first and
+    // was 33 passed of 33, exit 0:
+    //   FILES     "the estate's file count moved - re-measure, do not re-word: expected 2524
+    //             to be 2523".
+    //   PARKED    "the parked-file count moved ...: expected 366 to be 365" - the arm is live
+    //             on the figure that did NOT move, which is the only way "unmoved" is
+    //             evidence rather than silence.
+    //   CREDITED  "the credited-file count moved ...: expected 2158 to be 2157".
+    //   TITLES    "the live TEST-title count moved ...: expected 21002 to be 20982". ⭐ 20,982
+    //             is the SLOT figure, so this control removes CAR 1'S WHOLE TITLE DELTA while
+    //             every file figure stays correct - a sibling control that removes a car's
+    //             whole delta across all figures reds at `files`, the FIRST assertion, and
+    //             never reaches the sum it claims to test (SS530.3, SS533.5).
+    //   SUITE     "the live SUITE-title count moved ...: expected 5845 to be 5840" - likewise
+    //             car 1's whole suite-title delta, and it proves the LAST assertion is
+    //             reachable and no earlier red is masking it.
+    files: 2524, parked: 366, credited: 2158, titles: 21002, suiteTitles: 5845,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
