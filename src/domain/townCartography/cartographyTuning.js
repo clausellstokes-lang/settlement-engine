@@ -54,6 +54,135 @@ export function cartographyTierIndex(tier) {
   return index >= 0 ? index : CARTOGRAPHY_TIERS.indexOf('village');
 }
 
+/**
+ * ── THE DECLARED HEADROOM (BAND 21, owner-signed 2026-08-23) ─────────────────
+ *
+ * How much room above the MEASURED WORST CASE a settlement's map is allowed. One
+ * number, declared once, driving every cap that has to admit real generator output.
+ *
+ * It exists because the alternative was measured and found to be the defect. The
+ * three caps below used to be three hand-authored tables, each calibrated against a
+ * twenty-row synthetic fixture whose institution counts were written down as
+ * constants — so no row could exceed a cap, every cap looked green, and 287 of the
+ * 504 real settlements in tests/fixtures/cartographyCalibrationCorpus.js could not
+ * draw a map at all. Re-authoring three numbers to fit that corpus would have
+ * inherited exactly the luck that produced the originals; deriving them from it
+ * behind ONE declared parameter does not.
+ *
+ * ── THE VALUE IS MEASURED, AND THE CRITERION IS STATED ───────────────────────
+ * THE RULE: the headroom is at least the largest factor by which a demonstrably
+ * SMALLER version of this same corpus under-measures its own maximum. That is the
+ * one thing the corpus can honestly say about how far short of a true ceiling it
+ * might fall, and it is exactly the lesson of the two earlier samples that disagreed
+ * in both directions — a sampled maximum is not a ceiling.
+ *
+ * MEASURED over the 504-row corpus: each of the twelve seed slices is a corpus of the
+ * same shape and one twelfth the size, and the worst of them under-measures its
+ * tier's maximum by a factor of 1.6000 (`hamlet`: one seed's slice reads 15 canonical
+ * institutions where the whole corpus reads 24). The other five tiers read 1.3750,
+ * 1.4138, 1.2400, 1.1702 and 1.1667, and the per-row byte figure moves far less
+ * (worst 1.0658). So 1600 permille, which is that number to the permille.
+ *
+ * ⚠ AND THE CORPUS IS NOT CONVERGED, which is why the rule is a floor and not a
+ * decoration: the twelve-seed growth curve was still RISING at the eleventh seed
+ * (`metropolis` 59 → 63), and deleting any single seed costs up to 8.33% of a tier's
+ * maximum (`hamlet` 24 → 22). Three tiers reach their maximum on exactly one seed.
+ * `tests/domain/townCartographyCalibration.test.js` W6 re-measures the ratio from the
+ * manifest on every run and reds if this number ever falls below it.
+ *
+ * Permille, matching DWELLING_HEIGHT_PERMILLE and FOOTPRINT_SHRINK_PERMILLE.
+ */
+export const CARTOGRAPHY_HEADROOM_PERMILLE = 1600;
+
+/**
+ * THE CALIBRATION GROUND — the measured worst cases the caps are DERIVED FROM.
+ *
+ * Every number here is a reading of what the REAL pipeline produces over the 504-row
+ * calibration corpus, never a target and never a taste choice. They are frozen in
+ * source so the derivation is a pure function a reader can evaluate by hand, and the
+ * calibration suite re-measures them against the corpus manifest on every run: a
+ * generator that starts producing more than one of these reds rather than silently
+ * outgrowing the caps derived from it.
+ *
+ * @see tests/domain/townCartographyCalibration.test.js — the suite that owns them
+ */
+export const CARTOGRAPHY_CALIBRATION = Object.freeze({
+  /** The largest canonical institution roster the pipeline produced, per tier. */
+  MAX_INSTITUTIONS: Object.freeze({
+    thorp: 11, hamlet: 24, village: 41, town: 62, city: 55, metropolis: 63,
+  }),
+  /**
+   * The largest UTF-8 bytes-per-emitted-row the TC-4 layer produced, over every tier.
+   * This is the number the old authored `TC4_ROW_BYTES_BAND: 400` guessed at — it was
+   * calibrated "against a measured worst case of 374 B/row at THORP", the smallest
+   * tier's fixture, and the real rows run larger, which is why four tiers overran
+   * their byte band by one to three percent with the count caps removed entirely.
+   *
+   * 443 is the whole corpus's worst row, and it falls at THORP — the tier whose block
+   * carries the fewest rows to amortize the serializer's wrapper over. The per-tier
+   * readings are 443 / 436 / 430 / 402 / 399 / 388, so the spread across the ladder is
+   * eleven percent and one scalar is the honest shape for it.
+   */
+  MAX_BUILDING_ROW_BYTES: 443,
+  /** The corpus this was read from. A row count that moves invalidates the reading. */
+  CORPUS_ROWS: 504,
+});
+
+/**
+ * THE DWELLING TARGET, hoisted out of the tuning table because the building cap is
+ * derived FROM it. Authored INTENT — how many dwellings a tier's map wants to draw —
+ * and deliberately NOT headroomed: the headroom above belongs to measured worst
+ * cases, and multiplying an intent by a safety factor is a category error.
+ * @type {Readonly<Record<string, number>>}
+ */
+const DWELLING_TARGET = Object.freeze({
+  thorp: 8, hamlet: 16, village: 32, town: 64, city: 120, metropolis: 160,
+});
+
+/**
+ * DERIVE THE THREE COUPLED CAPS from one calibration and one headroom.
+ *
+ * Pure, total over CARTOGRAPHY_TIERS, and exported so a test can drive it with a
+ * hypothetical calibration instead of only reading the one table below — which is
+ * what makes this machinery rather than three re-authored literals.
+ *
+ * THE INVARIANT IS STRUCTURAL, NOT ASSERTED. Every bound institution draws a
+ * FLAGSHIP, and cartographyBuildings.js exempts flagships from the total cap (a
+ * canonical institution always appears, or the map forks from the dossier). A
+ * binding cap above the building cap therefore promises more flagships than the
+ * layer may emit and blows the derived byte budget by construction. Adding a
+ * positive dwelling target to the binding cap makes `bindings <= buildings` true by
+ * arithmetic; no value of the calibration or the headroom can violate it.
+ *
+ * @param {{ MAX_INSTITUTIONS: Readonly<Record<string, number>>,
+ *   MAX_BUILDING_ROW_BYTES: number }} calibration the measured worst cases
+ * @param {number} headroomPermille the declared room above them
+ * @returns {Readonly<{ bindings: Readonly<Record<string, number>>,
+ *   buildings: Readonly<Record<string, number>>, rowBytes: number }>}
+ */
+export function deriveCartographyCaps(calibration, headroomPermille) {
+  /** @param {number} measured @returns {number} */
+  const withHeadroom = (measured) => Math.ceil((measured * headroomPermille) / 1000);
+  /** @type {Record<string, number>} */
+  const bindings = {};
+  /** @type {Record<string, number>} */
+  const buildings = {};
+  for (const tier of CARTOGRAPHY_TIERS) {
+    bindings[tier] = withHeadroom(calibration.MAX_INSTITUTIONS[tier]);
+    buildings[tier] = bindings[tier] + DWELLING_TARGET[tier];
+  }
+  return Object.freeze({
+    bindings: Object.freeze(bindings),
+    buildings: Object.freeze(buildings),
+    rowBytes: withHeadroom(calibration.MAX_BUILDING_ROW_BYTES),
+  });
+}
+
+/** The caps in force: the derivation above, evaluated once at the declared inputs. */
+const DERIVED_CAPS = deriveCartographyCaps(
+  CARTOGRAPHY_CALIBRATION, CARTOGRAPHY_HEADROOM_PERMILLE,
+);
+
 export const TOWN_CARTOGRAPHY_TUNING = Object.freeze({
   // ── A-10 LAYER 1: STATE DECIDES ORDER VS CHAOS ──────────────────────────────
   // The weights the morphology reading composes. Each is signed against a term
@@ -225,9 +354,10 @@ export const TOWN_CARTOGRAPHY_TUNING = Object.freeze({
   // them one town may emit. Exceeding it is a premise error for the same reason the
   // ward cap is: a silently dropped institution would make the map disagree with
   // the dossier.
-  MAXIMUM_INSTITUTION_BINDINGS: Object.freeze({
-    thorp: 8, hamlet: 12, village: 20, town: 32, city: 64, metropolis: 96,
-  }),
+  // DERIVED — ceil(the measured worst-case institution roster x the declared
+  // headroom). Never re-authored by hand: a tier that outgrows it is a reading that
+  // moved, and the reading lives in CARTOGRAPHY_CALIBRATION above.
+  MAXIMUM_INSTITUTION_BINDINGS: DERIVED_CAPS.bindings,
   // A-8 PROMINENCE, in plan-space AREA of the canonical building footprint. A large
   // institution may choose only from the ward's largest third, a medium one from
   // the largest two thirds, and anything smaller from all of them.
@@ -275,12 +405,11 @@ export const TOWN_CARTOGRAPHY_TUNING = Object.freeze({
   BUILDINGS_PER_PARCEL: Object.freeze({
     thorp: 1, hamlet: 2, village: 2, town: 3, city: 4, metropolis: 4,
   }),
-  MAXIMUM_CARTOGRAPHY_BUILDINGS: Object.freeze({
-    thorp: 12, hamlet: 24, village: 48, town: 96, city: 176, metropolis: 240,
-  }),
-  DWELLING_TARGET: Object.freeze({
-    thorp: 8, hamlet: 16, village: 32, town: 64, city: 120, metropolis: 160,
-  }),
+  // DERIVED — the binding cap plus the tier's dwelling target. This is a TRUNCATION
+  // cap on instances and dwellings (flagships are exempt), so it is the number that
+  // decides how dense a drawn map is, and raising it changes drawn output.
+  MAXIMUM_CARTOGRAPHY_BUILDINGS: DERIVED_CAPS.buildings,
+  DWELLING_TARGET,
   DWELLING_HEIGHT_PERMILLE: Object.freeze({
     thorp: 100, hamlet: 120, village: 140, town: 180, city: 220, metropolis: 260,
   }),
@@ -302,11 +431,17 @@ export const TOWN_CARTOGRAPHY_TUNING = Object.freeze({
   // sat BELOW what their own count caps must produce, so no row at those tiers could
   // ever fit. The budget is therefore DERIVED — MAXIMUM_CARTOGRAPHY_BUILDINGS[tier]
   // times this — which makes band-versus-cap consistency definitional instead of a
-  // pin somebody has to remember to write. This is the one authored number: the
-  // per-row UTF-8 ceiling, against a measured worst case of 374 B/row at thorp. The
-  // identity slug caps at 90 characters, so observed ids are already near-worst.
-  // It still fires exactly when it should — per-row bloat beyond 400 B.
-  TC4_ROW_BYTES_BAND: 400,
+  // pin somebody has to remember to write.
+  //
+  // AND SO IS THE PER-ROW BAND NOW. It used to be the one authored number here, set
+  // to 400 against "a measured worst case of 374 B/row at thorp" — the smallest tier
+  // of a synthetic fixture. Real rows at the middle tiers run larger, so four tiers
+  // overran this budget by one to three percent even with the count caps removed
+  // entirely: a second calibration hiding inside a derivation. It is now
+  // ceil(the measured worst-case bytes-per-row x the declared headroom), so the
+  // budget is derived end to end and still fires exactly when it should — per-row
+  // bloat past everything the real corpus has ever produced, with the margin B21 set.
+  TC4_ROW_BYTES_BAND: DERIVED_CAPS.rowBytes,
 });
 
 const T = TOWN_CARTOGRAPHY_TUNING;

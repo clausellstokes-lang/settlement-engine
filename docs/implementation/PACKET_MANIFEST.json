@@ -24054,6 +24054,162 @@
         ]
       ],
       "retiredSymbols": []
+    },
+    {
+      "id": "MF-CG1b",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/town-cartography/MF-CG1b.md",
+      "verifiedBase": "5055990a38a281b5a5f63648c74e65c0837de7ef",
+      "changeManifest": [
+        {
+          "_note": "THE DERIVATION. Three hand-authored cap tables become the output of one pure total function of ONE measured calibration and ONE declared headroom (BAND 21, owner-signed at ODQ 515). bindings[t] = ceil(measured roster maximum x headroom); buildings[t] = bindings[t] + DWELLING_TARGET[t], which makes bindings <= buildings true by arithmetic rather than by an assertion every hand-authored candidate violated; rowBytes = ceil(measured worst bytes-per-row x headroom), which removes the last authored number from inside a derivation CR-TC4-BAND-1 had already made definitional. DWELLING_TARGET is hoisted to module scope because the building cap is derived from it, and it is deliberately NOT headroomed: the headroom belongs to measured worst cases, and multiplying an authored intent by a safety factor is a category error. The tuning module keeps its zero-imports-by-design property.",
+          "action": "MODIFY",
+          "path": "src/domain/townCartography/cartographyTuning.js"
+        },
+        {
+          "_note": "THE INSTRUMENT GAINS THE THREE LIT FIGURES it could not record while 287 of 504 rows threw before the figures existed: cartoBuildings and cartoRowBytes off the DRAWN block, serialized with the stage's OWN stableSceneStringify, and cartoInstitutionRefs, the distinct institutionRef set the block carries. The last of these is the rebuilt IDENTITY control: the old one read the binding count out of a THROWN premise message and would have gone vacuous the moment the caps admitted the roster, while this one reads the binder's output and covers all 504 rows.",
+          "action": "MODIFY",
+          "path": "tests/fixtures/cartographyCalibrationCorpus.js"
+        },
+        {
+          "_note": "THE RE-RECORD, produced only by the committed regeneration path. 504 rows; outcome census ok 504, binding-cap 0, tc4-bytes 0, other 0; dark failures 0; institution maxima UNCHANGED at 11/24/41/62/55/63, which is the evidence the generator did not move underneath the re-record. A SHIFT RECORD row is added to the suite header, as that file's own rule requires.",
+          "action": "MODIFY",
+          "path": "tests/fixtures/cartography-calibration-corpus.json"
+        },
+        {
+          "_note": "THE SUITE. W4's inventory ratchet goes to ZERO at every tier and now guards the repair instead of recording the debt; W3's identity control is rebuilt off the drawn block; W5's short-cap list empties and gains an arm requiring each cap to clear its maximum BY THE DECLARED HEADROOM rather than barely; W6 pins that the three tables ARE the derivation (by value AND by a SOURCE SCAN, because toEqual cannot tell derived from a literal that agrees), that bindings <= buildings holds over hostile arbitrary inputs including an INVERTED ladder, and that the headroom clears the criterion that set it, re-derived live from the manifest; W7 pins the derivation's inputs to the corpus exactly, pins every recorded row under the derived caps, and carries the FALSIFIER that re-derives MF-CG1's own 266-row binding-cap census from the superseded literals.",
+          "action": "MODIFY",
+          "path": "tests/domain/townCartographyCalibration.test.js"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/implementation/packets/town-cartography/MF-CG1b.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE DECLARED HEADROOM. BAND 21's value lives here and nowhere else; renaming it un-grounds the whole derivation and W6's criterion arm.",
+          "path": "src/domain/townCartography/cartographyTuning.js",
+          "symbol": "CARTOGRAPHY_HEADROOM_PERMILLE"
+        },
+        {
+          "_note": "THE CALIBRATION GROUND. The measured worst cases the caps are derived FROM; W7 pins them against the corpus manifest exactly, in both directions.",
+          "path": "src/domain/townCartography/cartographyTuning.js",
+          "symbol": "CARTOGRAPHY_CALIBRATION"
+        },
+        {
+          "_note": "THE DERIVATION ITSELF, exported so a test can drive it with hypothetical calibrations instead of only reading the one table in force — which is what makes this machinery rather than three re-authored literals.",
+          "path": "src/domain/townCartography/cartographyTuning.js",
+          "symbol": "deriveCartographyCaps"
+        },
+        {
+          "_note": "THE TC-3b BINDING CEILING, now the derivation's output. Its cap is what refused 266 of 504 real settlements at the base.",
+          "path": "src/domain/townCartography/cartographyTuning.js",
+          "symbol": "MAXIMUM_INSTITUTION_BINDINGS"
+        },
+        {
+          "_note": "THE TOTAL BUILDING CAP, now the derivation's output. It TRUNCATES rather than throws and flagships are exempt from it, which is why bindings must never exceed it and why raising it changes DRAWN OUTPUT.",
+          "path": "src/domain/townCartography/cartographyTuning.js",
+          "symbol": "MAXIMUM_CARTOGRAPHY_BUILDINGS"
+        },
+        {
+          "_note": "THE PER-ROW BYTE BAND, the last authored number inside the derived TC-4 budget and now derived itself. Its old value of 400 was calibrated against a 374 B/row worst case at thorp; the real corpus's worst row is 443 B.",
+          "path": "src/domain/townCartography/cartographyTuning.js",
+          "symbol": "TC4_ROW_BYTES_BAND"
+        },
+        {
+          "_note": "THE CORPUS'S MEASUREMENT SEAM. It records the stage's own verdict and, now, the stage's own drawn block; the derivation's byte input is read from it.",
+          "path": "tests/fixtures/cartographyCalibrationCorpus.js",
+          "symbol": "measureCalibrationRow"
+        }
+      ],
+      "acceptanceCases": [
+       {
+        "id": "A1",
+        "case": "THE THROW RATE IS THE ACCEPTANCE. Over MF-CG1's committed 504-row corpus the lit cartography compile throws 0 of 504 at the shipped values - outcome census ok 504, dark failures 0 - against 287 of 504 at the base, measured through the COMMITTED instrument rather than a scratch probe. Anything other than 0 is a STOP with the measured residue."
+       },
+       {
+        "id": "A2",
+        "case": "W6 THE THREE TABLES IN FORCE ARE THE DERIVATION, key for key and integer for integer, and the derivation is total over the tier ladder so no tier can fall out of it and read undefined into a comparison that would silently pass."
+       },
+       {
+        "id": "A3",
+        "case": "W6 SOURCE SCAN: the three cap fields are ASSIGNED from DERIVED_CAPS in the tuning module's own source, with an anti-vacuity anchor on a field this member did not touch. A value comparison cannot tell a derivation from a literal that happens to agree today, which is the only regression this member exists to prevent, so the scan is the arm that can see it."
+       },
+       {
+        "id": "A4",
+        "case": "W6 bindings <= buildings HOLDS FOR ARBITRARY CALIBRATIONS AND HEADROOMS - seven headrooms from 0 to 100000 permille by five roster shapes including all-zero, all-999 and an INVERTED ladder where the smallest tier carries the largest roster, with an anti-vacuity arm proving the sweep produced seven different cap sets. Every hand-authored candidate violated this invariant; the derivation cannot."
+       },
+       {
+        "id": "A5",
+        "case": "W6 THE DECLARED HEADROOM CLEARS THE CRITERION THAT SET IT, re-derived live from the manifest rather than quoted from a comment: the largest factor by which a single-seed slice of this corpus under-measures its own tier maximum, measured 1.6000 at hamlet. A non-vacuity arm requires every seed to actually appear in each tier's slice map."
+       },
+       {
+        "id": "A6",
+        "case": "W7 THE DERIVATION'S INPUTS ARE EXACTLY WHAT THIS CORPUS READS - per-tier institution maxima and the global worst bytes-per-row, exact in both directions - AND every recorded row fits under the caps derived from them, count and bytes, against the same product the stage computes at the line that raises the byte premise. This is the arm that reds if a future corpus outgrows the derived caps."
+       },
+       {
+        "id": "A7",
+        "case": "W7 THE FALSIFIER: this same corpus does NOT fit the SUPERSEDED literals. The old binding caps refuse 266 of the recorded rosters, split thorp 28 hamlet 71 village 83 town 84 - re-deriving MF-CG1's own binding-cap census from roster counts alone - and the old per-row band of 400 is below the corpus's real worst row of 443."
+       },
+       {
+        "id": "A8",
+        "case": "W3 THE IDENTITY CONTROL SURVIVES THE CURE AND IS STRONGER FOR IT - the drawn block's distinct institutionRef set equals the settlement's roster on all 504 rows, replacing a control that could only read rows which FAILED and would have gone vacuous the moment they stopped failing - and W4's inventory ratchet is a ZERO at every tier with its honesty companion and a drawn-block bound, while the blast radius is green UNEDITED across 19 files of cartography consumers with both goldens included."
+       }
+      ],
+      "checks": [
+       [
+        "npx",
+        "vitest",
+        "run",
+        "--pool=threads",
+        "--maxWorkers=2",
+        "tests/domain/townCartographyCalibration.test.js"
+       ],
+       [
+        "npx",
+        "vitest",
+        "run",
+        "--pool=threads",
+        "--maxWorkers=2",
+        "tests/domain/townCartographyBuildings.test.js",
+        "tests/domain/townCartographyParcels.test.js",
+        "tests/domain/townSceneCartography.test.js"
+       ],
+       [
+        "npx",
+        "vitest",
+        "run",
+        "--pool=threads",
+        "--maxWorkers=2",
+        "tests/property/generatorGoldenMaster.test.js",
+        "tests/property/townCartographyDormancyGolden.test.js"
+       ],
+       [
+        "node",
+        "scripts/check-full-typecheck.mjs"
+       ],
+       [
+        "node",
+        "scripts/check-domain-strict.mjs"
+       ],
+       [
+        "npx",
+        "eslint",
+        "src/domain/townCartography/cartographyTuning.js",
+        "tests/domain/townCartographyCalibration.test.js",
+        "tests/fixtures/cartographyCalibrationCorpus.js"
+       ],
+       [
+        "node",
+        "scripts/check-observed-shape-readers.mjs"
+       ],
+       [
+        "node",
+        "scripts/implementation-packets.mjs",
+        "validate"
+       ]
+      ]
     }
   ]
 }

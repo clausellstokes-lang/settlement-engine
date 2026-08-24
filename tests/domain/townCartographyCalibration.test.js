@@ -21,22 +21,30 @@
  *   W2 LIVE        a deterministic sample is RE-MEASURED live against the real
  *                  pipeline and must reproduce its manifest rows exactly, so a frozen
  *                  measurement cannot silently decay into a frozen fiction.
- *   W3 IDENTITY    the stage's own reported binding count equals the settlement's own
- *                  institution roster size — two numbers produced by different code,
- *                  compared, so the corpus's cheap quantity is PROVEN rather than
- *                  assumed to stand for the expensive one.
+ *   W3 IDENTITY    the DRAWN block's own distinct institution refs equal the
+ *                  settlement's institution roster size — two numbers produced by
+ *                  different code, compared, so the corpus's cheap quantity is PROVEN
+ *                  rather than assumed to stand for the expensive one.
  *   W4 RATCHET     the per-tier premise-failure inventory is frozen and SHRINK-ONLY,
  *                  with the honesty companion that forbids a stale row.
  *   W5 HEADROOM    each cap is reported beside the maximum the real pipeline actually
  *                  produces, and the shortfall is named rather than left to be
  *                  rediscovered.
+ *   W6 DERIVATION  the three coupled caps ARE the derivation rather than literals that
+ *                  agree with it, `bindings <= buildings` holds for ARBITRARY inputs,
+ *                  and the declared headroom clears the criterion that set it.
+ *   W7 OUTGROW     the derivation's INPUTS are exactly what this corpus reads, every
+ *                  recorded row fits the caps derived from them, and the superseded
+ *                  literals are shown NOT to fit — so the fit is a property of the
+ *                  derivation and not of any arrangement of numbers.
  *
- * ── WHY W4 IS A RATCHET AND NOT A ZERO ───────────────────────────────────────
- * At the base this suite was written against, 287 of 504 real settlements raise a
- * cartography premise error. A test asserting zero would be RED, and a red test is a
- * disabled guard that this estate's census cannot absorb. The frozen inventory makes
- * the debt visible, attributed per tier, and impossible to grow — which is what a
- * ratchet is for. Lowering a number as the ground is repaired is the ONLY legal edit.
+ * ── W4 IS NOW A ZERO, AND THAT IS THE POINT ──────────────────────────────────
+ * When this suite was written, 287 of 504 real settlements raised a cartography
+ * premise error and W4 was a shrink-only ratchet because a test asserting zero would
+ * have been RED — a disabled guard. MF-CG1b repaired the ground the ratchet was
+ * measuring: the inventory is 0 at every tier, the ratchet still only shrinks, and it
+ * now guards the repair instead of recording the debt. A tier that grows past 0 means
+ * a change made real settlements unable to draw a map again.
  *
  * ── WHY EVERY SUITE AND TEST IS REGISTERED STRAIGHT-LINE ─────────────────────
  * The re-record path is an opt-in ARM of W0's single test, not a conditional
@@ -59,6 +67,26 @@
  *   `binding-cap` and 21 `tc4-bytes` — and zero in the `other` bucket. No tuning
  *   number was moved by the recording lane: the numbers below are the measured state
  *   of the estate, not a target this suite helped anyone reach.
+ *
+ * 2026-08-24 — SECOND RECORD (lane TE-CG-1b, packet MF-CG1b). ⚠⚠ A DELIBERATE,
+ *   DECLARED SAME-SEED SHIFT, and the largest thing in this file's history. The three
+ *   coupled caps stopped being literals: `MAXIMUM_INSTITUTION_BINDINGS`,
+ *   `MAXIMUM_CARTOGRAPHY_BUILDINGS` and `TC4_ROW_BYTES_BAND` are now derived from the
+ *   maxima THIS corpus measures, behind the single owner-signed headroom
+ *   `CARTOGRAPHY_HEADROOM_PERMILLE` (ODQ §515, BAND 21). **The lit throw census moves
+ *   287 → 0 of 504.** Two consequences are honest to state rather than bury:
+ *
+ *   (1) THE DRAWN OUTPUT MOVED at every tier, because the total building cap is a
+ *       TRUNCATION cap and it rose from `{12,24,48,96,176,240}` to
+ *       `{26,55,98,164,208,261}`. Same seed, same config, denser map. That is the
+ *       cure, not a side effect: a hamlet that drew nothing now draws.
+ *   (2) THE OLD IDENTITY CONTROL DIED WITH THE THROWS. W3 used to read the binding
+ *       count out of a THROWN premise message, and there are no more thrown messages.
+ *       It is replaced by a strictly stronger reading — the DRAWN block's own distinct
+ *       `institutionRef` set, which is the binder's output rather than its complaint.
+ *
+ *   The recorded institution maxima are UNCHANGED (11/24/41/62/55/63), which is the
+ *   evidence that the generator did not move underneath this re-record.
  *
  * To re-record after an INTENTIONAL change, run:
  *   UPDATE_CARTOGRAPHY_CALIBRATION=1 npx vitest run tests/domain/townCartographyCalibration.test.js
@@ -87,36 +115,64 @@ import {
   measureCalibrationRow,
 } from '../fixtures/cartographyCalibrationCorpus.js';
 import {
+  CARTOGRAPHY_CALIBRATION,
+  CARTOGRAPHY_HEADROOM_PERMILLE,
   CARTOGRAPHY_TIERS,
   TOWN_CARTOGRAPHY_TUNING,
   cartographyBand,
+  deriveCartographyCaps,
 } from '../../src/domain/townCartography/cartographyTuning.js';
 
 const T = TOWN_CARTOGRAPHY_TUNING;
 const MANIFEST = resolve(process.cwd(), 'tests', 'fixtures', 'cartography-calibration-corpus.json');
+/** The tuning module's own source, read by W6's single-writer scan. */
+const TUNING_SOURCE = resolve(
+  process.cwd(), 'src', 'domain', 'townCartography', 'cartographyTuning.js',
+);
 
 /**
- * THE FROZEN INVENTORY — measured 2026-08-23 at 00e7af61, hand-audited against the
- * capture output. SHRINK-ONLY.
+ * THE FROZEN INVENTORY — re-measured 2026-08-24 at the MF-CG1b tip. SHRINK-ONLY.
  *
  * `throws` is the number of the tier's 84 corpus rows on which the lit cartography
- * compile raises a premise error. To lower one: repair the premise that fires, re-record
- * the manifest, and lower the number here. NEVER raise a number — a tier that grows past
- * its frozen count means a change made the ground WORSE, which is the whole event this
- * ratchet exists to make loud.
+ * compile raises a premise error. It was `28 / 71 / 83 / 84 / 21 / 0` when this file
+ * landed and it is ZERO everywhere now. NEVER raise a number — a tier that grows past
+ * its frozen count means a change made real settlements unable to draw a map again,
+ * which is the whole event this ratchet exists to make loud.
  *
  * `maxInstitutions` is the largest canonical institution roster the real pipeline
  * produced at that tier over this corpus. It is an EXACT pin, not a ceiling: it measures
  * the GENERATOR, so a move in either direction is generator drift that must be seen and
- * explained, never silently absorbed.
+ * explained, never silently absorbed. It is ALSO the derivation's own input — the same
+ * six numbers appear in `CARTOGRAPHY_CALIBRATION.MAX_INSTITUTIONS`, and W7 pins the two
+ * readings against each other so the caps can never drift away from their ground.
+ *
+ * `maxBuildings` is the largest block the TC-4 layer actually DREW at that tier. It is
+ * a bound rather than an exact pin: it is a function of the caps, so pinning it exactly
+ * would red on every deliberate cap change and say nothing the count cap does not.
  */
 const FROZEN = Object.freeze({
-  thorp: Object.freeze({ throws: 28, maxInstitutions: 11 }),
-  hamlet: Object.freeze({ throws: 71, maxInstitutions: 24 }),
-  village: Object.freeze({ throws: 83, maxInstitutions: 41 }),
-  town: Object.freeze({ throws: 84, maxInstitutions: 62 }),
-  city: Object.freeze({ throws: 21, maxInstitutions: 55 }),
-  metropolis: Object.freeze({ throws: 0, maxInstitutions: 63 }),
+  thorp: Object.freeze({ throws: 0, maxInstitutions: 11, maxBuildings: 13 }),
+  hamlet: Object.freeze({ throws: 0, maxInstitutions: 24, maxBuildings: 31 }),
+  village: Object.freeze({ throws: 0, maxInstitutions: 41, maxBuildings: 57 }),
+  town: Object.freeze({ throws: 0, maxInstitutions: 62, maxBuildings: 152 }),
+  city: Object.freeze({ throws: 0, maxInstitutions: 55, maxBuildings: 208 }),
+  metropolis: Object.freeze({ throws: 0, maxInstitutions: 63, maxBuildings: 261 }),
+});
+
+/**
+ * THE SUPERSEDED LITERALS — the three tables MF-CG1b replaced, kept because W7 uses
+ * them as its FALSIFIER. Without them "the corpus fits the caps" is a claim with no
+ * demonstrated alternative; with them it is a claim that 266 of these very rows did
+ * NOT fit the arrangement of numbers that stood here for months.
+ */
+const SUPERSEDED = Object.freeze({
+  bindings: Object.freeze({
+    thorp: 8, hamlet: 12, village: 20, town: 32, city: 64, metropolis: 96,
+  }),
+  buildings: Object.freeze({
+    thorp: 12, hamlet: 24, village: 48, town: 96, city: 176, metropolis: 240,
+  }),
+  rowBytes: 400,
 });
 
 /** Rows per tier in the corpus — cultures x terrains, closed by the receipt in W1. */
@@ -126,7 +182,8 @@ const rows = calibrationRows();
 
 /**
  * @typedef {{ tier: string, institutions: number, districts: number,
- *   sceneBuildings: number, dark: string, outcome: string, reported: number[] }} Row
+ *   sceneBuildings: number, dark: string, outcome: string, reported: number[],
+ *   cartoBuildings: number, cartoRowBytes: number, cartoInstitutionRefs: number }} Row
  */
 
 /** Read the frozen measurement. Per test, never once at module scope — see the header.
@@ -163,6 +220,9 @@ describe('W0 the frozen record, and the one arm that re-records it', () => {
           dark: measured.dark,
           outcome: measured.outcome,
           reported: measured.reported,
+          cartoBuildings: measured.cartoBuildings,
+          cartoRowBytes: measured.cartoRowBytes,
+          cartoInstitutionRefs: measured.cartoInstitutionRefs,
         };
       }
       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
@@ -304,7 +364,10 @@ describe('W2 the frozen measurement is re-measured live', () => {
         || measured.sceneBuildings !== frozen.sceneBuildings
         || measured.dark !== frozen.dark
         || measured.outcome !== frozen.outcome
-        || measured.reported.join(',') !== frozen.reported.join(',')) {
+        || measured.reported.join(',') !== frozen.reported.join(',')
+        || measured.cartoBuildings !== frozen.cartoBuildings
+        || measured.cartoRowBytes !== frozen.cartoRowBytes
+        || measured.cartoInstitutionRefs !== frozen.cartoInstitutionRefs) {
         drift.push(`${key}: recorded ${JSON.stringify(frozen)} measured ${JSON.stringify({
           institutions: measured.institutions,
           districts: measured.districts,
@@ -312,6 +375,9 @@ describe('W2 the frozen measurement is re-measured live', () => {
           dark: measured.dark,
           outcome: measured.outcome,
           reported: measured.reported,
+          cartoBuildings: measured.cartoBuildings,
+          cartoRowBytes: measured.cartoRowBytes,
+          cartoInstitutionRefs: measured.cartoInstitutionRefs,
         })}`);
       }
     }
@@ -320,47 +386,66 @@ describe('W2 the frozen measurement is re-measured live', () => {
 });
 
 describe('W3 the corpus quantity is proven, not assumed', () => {
-  it('the stage\'s reported binding count equals the settlement\'s institution roster', () => {
-    // TWO independently produced numbers: the left one is parsed out of the premise
-    // message the TC-3b leaf itself raises, the right one is the length of the roster
-    // the pipeline wrote long before any compile. Their agreement is what licenses the
-    // rest of this suite to reason about `institutions` as the calibration quantity —
-    // and their disagreement, if the binder's eligibility rule ever narrows, is
-    // exactly the event that must not pass silently.
-    const capRows = Object.entries(readManifest())
-      .filter(([, value]) => value.outcome === 'binding-cap');
+  it('the DRAWN block\'s distinct institution refs equal the settlement\'s roster', () => {
+    // TWO independently produced numbers: the left one is the set of `institutionRef`
+    // values on the rows cartographyBuildings.js actually emitted — the TC-3b binder's
+    // OUTPUT, arrived at through parcel carving, prominence grading and footprint
+    // packing — and the right one is the length of the roster the pipeline wrote long
+    // before any compile. Their agreement is what licenses the rest of this suite to
+    // reason about `institutions` as the calibration quantity, and their disagreement,
+    // if the binder's eligibility rule ever narrows, is exactly the event that must not
+    // pass silently.
+    //
+    // ⚠ THIS CONTROL WAS REBUILT BY MF-CG1b AND IS STRONGER THAN THE ONE IT REPLACED.
+    // The original read the binding count out of a THROWN premise message, so it could
+    // only see the 266 rows that FAILED — and the moment the caps admitted the roster
+    // it would have had nothing left to read and would have gone vacuously empty. This
+    // one reads the drawn block, so it covers all 504 rows and gets STRONGER as the
+    // ground is repaired rather than weaker.
+    const drawn = Object.entries(readManifest())
+      .filter(([, value]) => value.cartoBuildings > 0);
     // Non-vacuity: an empty left-hand side would make the filter below prove nothing.
-    expect(capRows.length).toBeGreaterThan(200);
-    const disagreements = capRows
-      .filter(([, value]) => value.reported[0] !== value.institutions)
-      .map(([key, value]) => `${key}: stage ${value.reported[0]} roster ${value.institutions}`);
+    expect(drawn.length).toBe(rows.length);
+    const disagreements = drawn
+      .filter(([, value]) => value.cartoInstitutionRefs !== value.institutions)
+      .map(([key, value]) => (
+        `${key}: drew ${value.cartoInstitutionRefs} refs, roster ${value.institutions}`
+      ));
     expect(disagreements).toEqual([]);
   });
 
-  it('every binding-cap row reports the tier cap the tuning table actually holds', () => {
-    const wrong = Object.entries(readManifest())
-      .filter(([, value]) => value.outcome === 'binding-cap')
-      .filter(([, value]) => (
-        value.reported[1] !== cartographyBand(T.MAXIMUM_INSTITUTION_BINDINGS, value.tier)
-      ))
-      .map(([key, value]) => `${key}: reported ${value.reported[1]}`);
-    expect(wrong).toEqual([]);
+  it('every row records a real drawn measurement, never the −1 of a row that threw', () => {
+    // The two lit figures are −1 by construction when the compile throws, and −1 is a
+    // number that sails through a `<=` bound. This is the arm that stops a silent
+    // regression to "nothing drew, so nothing exceeded anything".
+    const missing = Object.entries(readManifest())
+      .filter(([, value]) => !(value.cartoBuildings > 0)
+        || !(value.cartoRowBytes > 0)
+        || !(value.cartoInstitutionRefs >= 0))
+      .map(([key, value]) => (
+        `${key}: buildings ${value.cartoBuildings} rowBytes ${value.cartoRowBytes} `
+        + `refs ${value.cartoInstitutionRefs}`
+      ));
+    expect(missing).toEqual([]);
   });
 
-  it('every tc4-bytes row reports the DERIVED band, not a second authored table', () => {
-    // The TC-4 band is documented as derived — MAXIMUM_CARTOGRAPHY_BUILDINGS x the
-    // per-row byte band. Reading that derivation back out of the stage's own message
-    // is what proves the documentation is still true of the code.
-    const byteRows = Object.entries(readManifest())
-      .filter(([, value]) => value.outcome === 'tc4-bytes');
-    expect(byteRows.length).toBeGreaterThan(0);
-    const wrong = byteRows
-      .filter(([, value]) => (
-        value.reported[1]
-        !== cartographyBand(T.MAXIMUM_CARTOGRAPHY_BUILDINGS, value.tier) * T.TC4_ROW_BYTES_BAND
-      ))
-      .map(([key, value]) => `${key}: reported band ${value.reported[1]}`);
-    expect(wrong).toEqual([]);
+  it('the classifier can still read the DERIVED band out of the stage\'s own words', () => {
+    // The stage no longer refuses any row in this corpus, so the two premise messages
+    // are no longer sampled live. They are still the corpus's only interpretation step,
+    // so the classifier is exercised against messages built FROM the caps in force: if
+    // the band's derivation and the message's wording ever drift apart, this reds while
+    // the corpus itself has nothing to say.
+    const tier = 'city';
+    const band = cartographyBand(T.MAXIMUM_CARTOGRAPHY_BUILDINGS, tier) * T.TC4_ROW_BYTES_BAND;
+    const cap = cartographyBand(T.MAXIMUM_INSTITUTION_BINDINGS, tier);
+    expect(classifyCalibrationFailure(
+      `townCartography TC-3 premise: the TC-4 layer measures ${band + 1} bytes `
+      + `against the ${tier} band of ${band}`,
+    )).toEqual({ outcome: 'tc4-bytes', reported: [band + 1, band] });
+    expect(classifyCalibrationFailure(
+      `townCartography TC-3 premise: ${cap + 1} institution bindings exceed the `
+      + `${tier} cap of ${cap}`,
+    )).toEqual({ outcome: 'binding-cap', reported: [cap + 1, cap] });
   });
 });
 
@@ -424,15 +509,38 @@ describe('W4 the premise-failure inventory only shrinks', () => {
       CARTOGRAPHY_TIERS.map((tier) => [tier, FROZEN[tier].maxInstitutions]),
     ));
   });
+
+  it('no tier DRAWS more than its frozen block, so density cannot creep', () => {
+    // A BOUND, not an exact pin, and deliberately so: the drawn block is a function of
+    // the caps, and pinning it exactly would red on every deliberate cap change while
+    // saying nothing the cap does not already say. As a bound it catches the case the
+    // cap cannot — output growing under a FIXED cap, which would mean the layer started
+    // emitting rows it did not emit before. Raising a cap on purpose reds this too, and
+    // that is correct: a deliberate density change owes a deliberate re-record.
+    const manifest = readManifest();
+    /** @type {string[]} */
+    const grown = [];
+    for (const tier of CARTOGRAPHY_TIERS) {
+      const drew = rowsOfTier(manifest, tier)
+        .reduce((best, [, value]) => Math.max(best, value.cartoBuildings), 0);
+      if (drew > FROZEN[tier].maxBuildings) {
+        grown.push(`${tier}: drew ${drew} > frozen ${FROZEN[tier].maxBuildings}`);
+      }
+      // And the frozen figure is not stale either — the pair is what keeps it honest.
+      if (drew < FROZEN[tier].maxBuildings) {
+        grown.push(`${tier}: drew ${drew} < frozen ${FROZEN[tier].maxBuildings} — lower it`);
+      }
+    }
+    expect(grown).toEqual([]);
+  });
 });
 
 describe('W5 the headroom every cap actually has against real output', () => {
-  it('reports each binding cap beside the maximum the real pipeline produces', () => {
-    // NOT an assertion that the caps are adequate — at this base four of them are not,
-    // which is what W4's inventory records. This pin fixes the RELATIONSHIP so that a
-    // later lane raising a cap cannot claim headroom it did not measure: the moment a
-    // cap clears its tier's real maximum, this list shrinks and the expectation below
-    // must be edited deliberately.
+  it('NO tier\'s binding cap falls short of the maximum the real pipeline produces', () => {
+    // This list held FOUR entries when the file landed — thorp, hamlet, village and
+    // town, every one of them a tier that could not draw. It is empty now, and it is
+    // spelled as a LIST rather than a per-tier assertion so a regression names the tier
+    // and both numbers in its own failure message instead of saying "false".
     /** @type {string[]} */
     const short = [];
     for (const tier of CARTOGRAPHY_TIERS) {
@@ -441,33 +549,225 @@ describe('W5 the headroom every cap actually has against real output', () => {
         short.push(`${tier}: cap ${cap} < measured max ${FROZEN[tier].maxInstitutions}`);
       }
     }
-    expect(short).toEqual([
-      'thorp: cap 8 < measured max 11',
-      'hamlet: cap 12 < measured max 24',
-      'village: cap 20 < measured max 41',
-      'town: cap 32 < measured max 62',
-    ]);
+    expect(short).toEqual([]);
   });
 
-  it('records that city and metropolis clear their measured maxima', () => {
-    // The complement of the list above, spelled out so the two halves cannot both be
-    // wrong in the same direction without one of them reddening. FOUR of six tiers are
-    // short and only these two are not, which is the measurement that makes the caps a
-    // ladder-wide calibration question rather than a one-tier nudge.
-    for (const tier of ['city', 'metropolis']) {
-      expect(cartographyBand(T.MAXIMUM_INSTITUTION_BINDINGS, tier), tier)
-        .toBeGreaterThanOrEqual(FROZEN[tier].maxInstitutions);
+  it('every tier clears its measured maximum BY THE DECLARED HEADROOM, not barely', () => {
+    // The complement of the list above, and strictly stronger than it: clearing the
+    // maximum by one is not what BAND 21 signed. Each cap must be at least the measured
+    // maximum times the declared headroom, which is the same arithmetic the derivation
+    // performs — read back from the OTHER end, off the frozen inventory rather than off
+    // the calibration table, so a calibration that silently drifted from the corpus
+    // cannot satisfy both sides.
+    /** @type {string[]} */
+    const thin = [];
+    for (const tier of CARTOGRAPHY_TIERS) {
+      const cap = cartographyBand(T.MAXIMUM_INSTITUTION_BINDINGS, tier);
+      const owed = Math.ceil((FROZEN[tier].maxInstitutions * CARTOGRAPHY_HEADROOM_PERMILLE) / 1000);
+      if (cap < owed) thin.push(`${tier}: cap ${cap} < ${owed} owed at the declared headroom`);
     }
+    expect(thin).toEqual([]);
   });
 
   it('the binding cap never exceeds the total building cap, at every tier', () => {
     // The invariant tests/domain/townCartographyBuildings.test.js also holds, restated
     // here because it is the CONSTRAINT any repair of the caps above must satisfy: a
     // flagship is drawn for every bound institution, so a binding cap over the total
-    // building cap promises more flagships than the layer may ever emit.
+    // building cap promises more flagships than the layer may ever emit. W6 proves it
+    // holds by CONSTRUCTION; this one proves it holds of the tables actually in force.
     for (const tier of CARTOGRAPHY_TIERS) {
       expect(cartographyBand(T.MAXIMUM_INSTITUTION_BINDINGS, tier), tier)
         .toBeLessThanOrEqual(cartographyBand(T.MAXIMUM_CARTOGRAPHY_BUILDINGS, tier));
     }
+  });
+});
+
+describe('W6 the caps ARE the derivation, and the invariant is structural', () => {
+  it('all three tables in force are exactly what the derivation returns', () => {
+    // The point of MF-CG1b. If this reds, somebody re-authored a cap as a literal that
+    // happens to agree today, and the machinery is decoration.
+    const derived = deriveCartographyCaps(CARTOGRAPHY_CALIBRATION, CARTOGRAPHY_HEADROOM_PERMILLE);
+    expect(T.MAXIMUM_INSTITUTION_BINDINGS).toEqual(derived.bindings);
+    expect(T.MAXIMUM_CARTOGRAPHY_BUILDINGS).toEqual(derived.buildings);
+    expect(T.TC4_ROW_BYTES_BAND).toBe(derived.rowBytes);
+    // Total over the ladder, so no tier can fall out of the derivation and read
+    // `undefined` — which `<=` would silently pass.
+    for (const tier of CARTOGRAPHY_TIERS) {
+      expect(Number.isInteger(derived.bindings[tier]), tier).toBe(true);
+      expect(Number.isInteger(derived.buildings[tier]), tier).toBe(true);
+    }
+    expect(Object.keys(derived.bindings).sort()).toEqual([...CARTOGRAPHY_TIERS].sort());
+    expect(Object.keys(derived.buildings).sort()).toEqual([...CARTOGRAPHY_TIERS].sort());
+  });
+
+  it('SOURCE SCAN: the three cap fields are ASSIGNED from the derivation, not authored', () => {
+    // The arm above compares VALUES, and a literal table that happens to agree with the
+    // derivation today would sail straight through it — which is exactly the regression
+    // this member exists to prevent. Only a source scan can tell "derived" from "equal".
+    // This is the estate's single-writer-by-source-scan shape, applied to three fields.
+    const source = readFileSync(TUNING_SOURCE, 'utf8');
+    /** @type {string[]} */
+    const authored = [];
+    for (const field of [
+      'MAXIMUM_INSTITUTION_BINDINGS', 'MAXIMUM_CARTOGRAPHY_BUILDINGS', 'TC4_ROW_BYTES_BAND',
+    ]) {
+      const assignment = new RegExp(`^\\s*${field}:\\s*(.+?),\\s*$`, 'm').exec(source);
+      if (!assignment) authored.push(`${field}: no single-line assignment found at all`);
+      else if (!/^DERIVED_CAPS\.[A-Za-z]+$/.test(assignment[1])) {
+        authored.push(`${field} is assigned \`${assignment[1]}\`, not a DERIVED_CAPS field`);
+      }
+    }
+    expect(authored).toEqual([]);
+    // And DERIVED_CAPS itself is the derivation evaluated at the declared inputs, once.
+    expect(source).toContain(
+      'const DERIVED_CAPS = deriveCartographyCaps(\n  CARTOGRAPHY_CALIBRATION, CARTOGRAPHY_HEADROOM_PERMILLE,\n);',
+    );
+    // ANTI-VACUITY: the scan really read the tuning module and not an empty string. The
+    // anchor is a field this member did NOT touch, so a file that lost its cap tables
+    // entirely reds above rather than passing here.
+    expect(source).toMatch(/^\s*MAXIMUM_WARDS: Object\.freeze\(\{$/m);
+    expect(source.length).toBeGreaterThan(5000);
+  });
+
+  it('bindings <= buildings holds for ARBITRARY calibrations and headrooms', () => {
+    // THE STRUCTURAL CLAIM, and the reason the cure does not have to violate the
+    // invariant the way every hand-authored candidate did. The old tables satisfied it
+    // by luck and an assertion; this derivation satisfies it by arithmetic, so the
+    // proof is a sweep over hostile inputs rather than a reading of one table.
+    const headrooms = [0, 1, 500, 1000, 1600, 4000, 100_000];
+    const institutionSets = [
+      { thorp: 0, hamlet: 0, village: 0, town: 0, city: 0, metropolis: 0 },
+      { thorp: 1, hamlet: 1, village: 1, town: 1, city: 1, metropolis: 1 },
+      { thorp: 999, hamlet: 999, village: 999, town: 999, city: 999, metropolis: 999 },
+      // Inverted: the smallest tier carrying the largest roster, which is the shape a
+      // per-tier hand-authored table gets wrong and a derivation cannot.
+      { thorp: 900, hamlet: 700, village: 500, town: 300, city: 100, metropolis: 1 },
+      CARTOGRAPHY_CALIBRATION.MAX_INSTITUTIONS,
+    ];
+    /** @type {string[]} */
+    const violations = [];
+    for (const headroom of headrooms) {
+      for (const MAX_INSTITUTIONS of institutionSets) {
+        const caps = deriveCartographyCaps({ MAX_INSTITUTIONS, MAX_BUILDING_ROW_BYTES: 443 }, headroom);
+        for (const tier of CARTOGRAPHY_TIERS) {
+          if (caps.bindings[tier] > caps.buildings[tier]) {
+            violations.push(`h=${headroom} ${tier}: ${caps.bindings[tier]} > ${caps.buildings[tier]}`);
+          }
+        }
+      }
+    }
+    expect(violations).toEqual([]);
+    // ANTI-VACUITY: the sweep really ran, and it really varied the caps it produced.
+    const spread = new Set(headrooms.map((headroom) => deriveCartographyCaps(
+      CARTOGRAPHY_CALIBRATION, headroom,
+    ).bindings.town));
+    expect(spread.size).toBe(headrooms.length);
+  });
+
+  it('the declared headroom clears the CRITERION that set it, measured live', () => {
+    // THE HEADROOM'S OWN JUSTIFICATION, re-derived from the manifest on every run
+    // rather than quoted from a comment. Each of the twelve seed slices is a corpus of
+    // the same shape and one twelfth the size; the factor by which the worst of them
+    // under-measures its tier's maximum is the sharpest honest statement this corpus
+    // can make about how far short of a true ceiling it might fall. The headroom must
+    // be at least that. It reds if a re-record ever makes the corpus less stable.
+    const manifest = readManifest();
+    let worst = 0;
+    /** @type {string} */
+    let worstAt = '';
+    for (const tier of CARTOGRAPHY_TIERS) {
+      const tierRows = rowsOfTier(manifest, tier);
+      /** @type {Map<string, number>} */
+      const perSeed = new Map();
+      for (const [key, value] of tierRows) {
+        const seed = key.split('|')[5];
+        perSeed.set(seed, Math.max(perSeed.get(seed) ?? 0, value.institutions));
+      }
+      // Non-vacuity: every seed must actually appear, or the minimum below is taken
+      // over a set the rotation never filled and the ratio is meaningless.
+      expect(perSeed.size, tier).toBe(CALIBRATION_SEEDS.length);
+      const full = Math.max(...perSeed.values());
+      const ratio = full / Math.min(...perSeed.values());
+      if (ratio > worst) {
+        worst = ratio;
+        worstAt = `${tier} (${Math.min(...perSeed.values())} -> ${full})`;
+      }
+    }
+    expect(worst, 'the seed slices agree suspiciously well — is the rotation live?')
+      .toBeGreaterThan(1);
+    expect(
+      CARTOGRAPHY_HEADROOM_PERMILLE / 1000,
+      `the worst single-seed slice under-measures by ${worst.toFixed(4)} at ${worstAt}, `
+      + 'which is more room than the declared headroom leaves. Raise '
+      + 'CARTOGRAPHY_HEADROOM_PERMILLE deliberately, or explain why this corpus is now '
+      + 'a ceiling when it was not.',
+    ).toBeGreaterThanOrEqual(worst);
+  });
+});
+
+describe('W7 a corpus that outgrows the derived caps is LOUD', () => {
+  it('the derivation\'s institution input is exactly what this corpus reads', () => {
+    // The caps are only as good as the reading behind them, so the reading is pinned
+    // to the corpus and not to a memory of it. EXACT in both directions: a calibration
+    // above the corpus is unearned headroom, one below it is a cap that will bite.
+    const manifest = readManifest();
+    /** @type {Record<string, number>} */
+    const measured = {};
+    for (const tier of CARTOGRAPHY_TIERS) {
+      measured[tier] = rowsOfTier(manifest, tier)
+        .reduce((best, [, value]) => Math.max(best, value.institutions), 0);
+    }
+    expect(measured).toEqual({ ...CARTOGRAPHY_CALIBRATION.MAX_INSTITUTIONS });
+  });
+
+  it('the derivation\'s byte input is exactly the corpus\'s worst drawn row', () => {
+    const worst = Object.values(readManifest())
+      .reduce((best, value) => Math.max(best, value.cartoRowBytes), 0);
+    expect(worst).toBe(CARTOGRAPHY_CALIBRATION.MAX_BUILDING_ROW_BYTES);
+    expect(CARTOGRAPHY_CALIBRATION.CORPUS_ROWS).toBe(rows.length);
+  });
+
+  it('every recorded row fits under the caps derived from those inputs', () => {
+    // Count AND bytes, per row, against the real derived budget — the same product the
+    // stage computes at the line that raises the byte premise.
+    const manifest = readManifest();
+    /** @type {string[]} */
+    const over = [];
+    for (const [key, value] of Object.entries(manifest)) {
+      const countCap = cartographyBand(T.MAXIMUM_CARTOGRAPHY_BUILDINGS, value.tier);
+      if (value.cartoBuildings > countCap) {
+        over.push(`${key}: drew ${value.cartoBuildings} > cap ${countCap}`);
+      }
+      if (value.cartoBuildings * value.cartoRowBytes > countCap * T.TC4_ROW_BYTES_BAND) {
+        over.push(`${key}: ${value.cartoBuildings} x ${value.cartoRowBytes} B over `
+          + `the ${value.tier} budget ${countCap * T.TC4_ROW_BYTES_BAND}`);
+      }
+    }
+    expect(over).toEqual([]);
+  });
+
+  it('THE FALSIFIER: this same corpus does NOT fit the SUPERSEDED literals', () => {
+    // Without this, "the corpus fits the caps" is a claim with no demonstrated
+    // alternative and the three arms above could be passing on a corpus that fits
+    // anything. The superseded binding caps are the arrangement of numbers that stood
+    // in this file for months, and the roster counts are generator-driven — cap
+    // independent — so the count they refuse is reproducible from the recorded rows.
+    const manifest = readManifest();
+    /** @type {Record<string, number>} */
+    const refused = {};
+    for (const value of Object.values(manifest)) {
+      if (value.institutions > SUPERSEDED.bindings[value.tier]) {
+        refused[value.tier] = (refused[value.tier] ?? 0) + 1;
+      }
+    }
+    // The 266 binding-cap throws MF-CG1 recorded at 00e7af61, re-derived here from the
+    // roster counts alone. The four tiers are the four that could not draw.
+    expect(refused).toEqual({ thorp: 28, hamlet: 71, village: 83, town: 84 });
+    expect(Object.values(refused).reduce((sum, count) => sum + count, 0)).toBe(266);
+    // And the superseded per-row byte band is below what the corpus really produces,
+    // which is the second premise the cap change alone could never have reached.
+    const worstRow = Object.values(manifest)
+      .reduce((best, value) => Math.max(best, value.cartoRowBytes), 0);
+    expect(worstRow).toBeGreaterThan(SUPERSEDED.rowBytes);
   });
 });

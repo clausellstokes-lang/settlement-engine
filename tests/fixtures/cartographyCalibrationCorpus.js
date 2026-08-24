@@ -66,7 +66,7 @@
  */
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { compileTownSceneManifest } from '../../src/domain/townScene/index.js';
+import { compileTownSceneManifest, stableSceneStringify } from '../../src/domain/townScene/index.js';
 import { CARTOGRAPHY_TIERS } from '../../src/domain/townCartography/cartographyTuning.js';
 import { CULTURE_PROFILE_KEYS } from '../../src/domain/cultureProfiles.js';
 import { NAMING_DATA } from '../../src/data/namingData.js';
@@ -208,9 +208,23 @@ export function classifyCalibrationFailure(message) {
  * lit is the cartography stage refusing the base manifest. Folding them together would
  * let a base-level regression wear the cartography stage's name.
  *
+ * ── THE TWO LIT FIGURES, AND WHY THEY ARE −1 ON A THROW ──────────────────────
+ * `cartoBuildings` and `cartoRowBytes` are the TC-4 layer's own emitted row count and
+ * its own UTF-8 size, read off the block the stage produced and serialized with the
+ * stage's OWN `stableSceneStringify` — the same function cartographyBuildings.js
+ * measures itself with at the line that raises the byte premise. They are the
+ * calibration input `CARTOGRAPHY_CALIBRATION.MAX_BUILDING_ROW_BYTES` derives from.
+ *
+ * They read −1 when the lit compile threw, and that is not a gap to paper over: a
+ * settlement that could not draw has no drawn size. It is also why the byte
+ * calibration could not be taken at the base this corpus was first recorded against
+ * — 287 of 504 rows threw before the figure existed — and the packet states that
+ * bootstrap rather than hiding it.
+ *
  * @param {CalibrationRow} row
  * @returns {{ key: string, tier: string, institutions: number, districts: number,
- *   sceneBuildings: number, dark: string, outcome: string, reported: number[] }}
+ *   sceneBuildings: number, dark: string, outcome: string, reported: number[],
+ *   cartoBuildings: number, cartoRowBytes: number, cartoInstitutionRefs: number }}
  */
 export function measureCalibrationRow(row) {
   const { _seed, ...config } = row;
@@ -233,11 +247,32 @@ export function measureCalibrationRow(row) {
   let outcome = 'ok';
   /** @type {number[]} */
   let reported = [];
+  let cartoBuildings = -1;
+  let cartoRowBytes = -1;
+  let cartoInstitutionRefs = -1;
   try {
-    compileTownSceneManifest(
+    const lit = compileTownSceneManifest(
       { settlement, audience: 'dm', worldState: LIT_RULES },
       { namingPools: NAMING_DATA },
     );
+    const buildings = record(record(lit).cartography).buildings;
+    if (Array.isArray(buildings) && buildings.length > 0) {
+      cartoBuildings = buildings.length;
+      const bytes = new TextEncoder().encode(stableSceneStringify({ buildings })).byteLength;
+      // Per ROW, rounded UP: the band the derivation reads is a per-row ceiling, and a
+      // ceiling that rounded down would be one byte short of the row it measured.
+      cartoRowBytes = Math.ceil(bytes / buildings.length);
+      // THE IDENTITY QUANTITY, and it is the one the suite's W3 control turns on. Every
+      // bound institution draws a FLAGSHIP unconditionally, so the number of DISTINCT
+      // institutionRefs the drawn block carries is the binding count — produced by
+      // cartographyParcels.js's binder, entirely independently of the roster length the
+      // pipeline wrote. Recorded on every row that draws, so the control survives the
+      // cure: the old control read the binding count out of a THROWN premise message,
+      // which stops existing the moment the caps admit the roster.
+      cartoInstitutionRefs = new Set(
+        buildings.map((row) => record(row).institutionRef).filter((ref) => typeof ref === 'string'),
+      ).size;
+    }
   } catch (error) {
     const classified = classifyCalibrationFailure(
       error instanceof Error ? error.message : String(error),
@@ -255,7 +290,17 @@ export function measureCalibrationRow(row) {
     dark,
     outcome,
     reported,
+    cartoBuildings,
+    cartoRowBytes,
+    cartoInstitutionRefs,
   };
+}
+
+/** @param {unknown} value @returns {Record<string, unknown>} */
+function record(value) {
+  return value && typeof value === 'object' && !Array.isArray(value)
+    ? /** @type {Record<string, unknown>} */ (value)
+    : {};
 }
 
 /** The stride the committed sample uses. Frozen: changing it changes what CI proves. */
