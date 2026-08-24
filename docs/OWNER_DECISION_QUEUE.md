@@ -26487,3 +26487,16 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
 - **§611.3 ⭐ UNBLOCK NOTED:** EST-5 (the B8 estate loop) was BLOCKED on
   CH-4 — landed this sitting (§582). The blocker is discharged; EST-5
   re-enters the queue at its chartered position.
+
+- **§611.4 ⭐ OWNER COROLLARY — HISTORY SPAN IS TRAJECTORY-COUPLED:** "it
+  depends on how long a place has existed, and if we have these growths and
+  declines, that should extend the history." Minted: a settlement's
+  generated AGE varies, and an arc with reversals DRAWS THE SPAN IT NEEDS —
+  a fallen city carries the centuries that raised it; a young thorp carries
+  none and its map may show no ruins it never had time to earn (the
+  coherence direction of the same law); long plateaus are lawful for old
+  places. Founding age joins the trajectory vocabulary's variability; §608's
+  film clock is UNAFFECTED (story-paced — nine centuries or ninety years
+  both compress into the thirty seconds their beats deserve). The
+  sub-century product scope binds the user's FORWARD simulation, never the
+  generated backstory, which already spans centuries (the year-552 margins).
