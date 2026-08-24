@@ -26840,3 +26840,30 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   documents now carry three glyph counts; ONE real count at dispatch, and
   wave B holds for the register's Q3 ruling. R4/R5/R6/R10/R11 fold into the
   AD dispatch brief's obligations list as written in the verdict's §V4.
+
+## §626 · THE CH VALIDATION LANDS — BOTH OPUS-RUN MARKERS ARE NOW DISCHARGED, AND A DANGLING TREE IS PINNED (2026-08-25 ~01:45 CDT)
+
+- **§626.1 ⛔ THE URGENT FIND, EXECUTED FIRST:** the CH-2B build tree survived
+  only as DANGLING COMMITS (tip `2ccb20d59`, zero refs, gc-exposed) — **pinned
+  as `refs/preserve/ch2b-build-2026-08-25`** within minutes of the report.
+  The §544 class, caught before the loss for the second time this account.
+- **§626.2 RULED — the verdict ACCEPTED; the marker DISCHARGED with its
+  reversals named in the discharge text itself** (the honest form): CH-3's
+  sections largely RATIFIED BY EXECUTION at the current slot, with the
+  36/26/10 split recorded as DECAYED-BY-ITS-OWN-CURE; **three REVERSALS
+  against the plan**: H12's force-require claim, H8's discharge claim, and —
+  the sharpest — **H16/G4's headline "one measured generation-versus-UI
+  divergence" was wrong at the plan's own base** (all 94 dead-world hall
+  instances are the town/Adventuring row; independently converging with
+  §520.4). One correction upward: five world-law call sites, not three.
+  CH-2B's five gates RATIFIED as still-live at exact lines; its strike
+  census AMENDED to 28. **MF-CH2B's own packet marker is explicitly NOT
+  discharged** — every figure in it is stale six catalog-moves later, its
+  re-derivation is the dispatch's first act, and it can mint only after
+  MF-CH3 lands (shared fixtures). The discharge landed as research-dossiers
+  r3 with r2 as parent and the full verdict in-tree.
+- **§626.3 THE §620 DEBT IS CLOSED:** both `[OPUS-RUN]` architectures are now
+  FABLE-VALIDATED with dated, evidence-backed discharges — the owner's
+  "refine those non-Fable architectures with Fable" order is fully executed.
+  Every architecture on the road to the soak is now Fable-authored or
+  Fable-validated, with the receipts saying which and when.
