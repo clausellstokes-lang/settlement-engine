@@ -25319,3 +25319,25 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   sixteen→eleven pushback) as a VERSIONED second ref beside `029268fe5` — old
   ref stays provenance, new ref becomes of-record. Until it lands, A2 is the
   figure of record.
+
+## §568 · THE R2 REF IS MINTED, AND BOTH CURES ARE BACK IN MOTION (2026-08-24 ~10:45 CDT)
+
+- **§568.1 §567.6 IS DISCHARGED — `refs/preserve/research-dossiers-2026-08-24-r2`
+  = `b718e0e3f`**, parented on `029268fe5` so provenance is one `git log` away.
+  Diff is exactly the intent: six charter lines (61/54 under the
+  LADDER-is-a-fixture ruling) + R-INST-6's law-3 sentence (Sixteen→Eleven,
+  C-8). Residual `~55`/`~35` claim-shaped occurrences at r2: **zero, verified
+  by grep.** The r2 ref is of-record; `029268fe5` stays citable as what the
+  research said on its day.
+- **§568.2 LANE STATE AT THIS CHECKPOINT.** CH7-CURE's permitted quiet re-run
+  holds the gate mutex (pid read from the lock dir, not remembered). CH4-CURE
+  resumed survey-first and its fresh-eyes pass on the killed session's
+  uncommitted walker edit **corrected an attribution before committing** — the
+  §559.5 stop-point discipline paying out a second time in one morning. Bill B
+  ready to commit; F, A, regen, mint, gate remain; it holds for the mutex.
+- **§568.3 THE VISUAL SURVEY'S INSTRUMENT NOTE.** The in-app browser pane
+  de-composites when unattended: the first screenshot after each `preview_start`
+  succeeds and later frame-dependent actions time out, while DOM reads
+  (`read_page`/`get_page_text`) keep working. Competitor captures banked:
+  Watabou's signature register (two shots) and FTG's hero render + full feature
+  text. The chair's aesthetic verdict lands with the render-pipeline inventory.
