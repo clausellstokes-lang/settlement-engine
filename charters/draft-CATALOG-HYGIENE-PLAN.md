@@ -1,4 +1,4 @@
-# THE CATALOG-HYGIENE TRAIN (CH) — charter, compiled by TC-CH-COMPILE `[OPUS-RUN · FABLE-VALIDATION OWED]`
+# THE CATALOG-HYGIENE TRAIN (CH) — charter, compiled by TC-CH-COMPILE `[OPUS-RUN · FABLE-VALIDATED 2026-08-25 (TE-CHVAL, ODQ §626) — REVERSED: H12 force-require, H16/G4 the divergence headline, H8's discharge claim; DECAYED: the 36/26/10 split (cured by its own ruled commit); MF-CH2B's own packet marker NOT discharged — its re-derivation is the dispatch's first act. See charters/CHVAL-VERDICT-2026-08-25.md]`
 
 Chartered at ODQ §491, authorized §492, compiled against the brief at
 `$SP/CH-charter-compile-brief.md` and its three amendments. Three repair cars — **CH-1
