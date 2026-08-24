@@ -25965,3 +25965,26 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   sharpest banks as law: **sampled refinement converges on its own artifacts —
   answer an exactly-answerable question with the same grid traversal the law
   uses, and share it with the instrument that grades it.**
+
+## §590 · THE RAMPART SPECIFICATION — §214's WALL ARM GAINS ITS DRAWING GRAMMAR (2026-08-24 ~15:40 CDT)
+
+- **§590.1 ⭐ OWNER DIRECTIVE:** "the wall needs to look like a wall like the
+  buildings' roofs need to look like roofs — a stone rampart viewable from
+  the top down with various towers, connecting joints." This is the §214 wall
+  arm ("walls must draw as double-line masonry bands with seeded-irregular
+  tower spacing…"), now SPECIFIED as top-down drawing grammar, minted as
+  REG-2's render spec:
+  **(i) THE RAMPART IS A BAND, NOT A STROKE** — two parallel drawn edges (the
+  wall's thickness) with the wall-walk surface between them, stone-course
+  ticks/hatching at corpus dress; the specimen's single heavy ribbon is
+  hereby the named defect this replaces.
+  **(ii) TOWERS ARE THE JOINTS** — curtain segments run tower-to-tower
+  (walls.js Rule 5's own law made visible): every angle turn, gate, and
+  terminus lands ON a tower/end-work; a seeded mixed vocabulary (drum ·
+  square · gatehouse pair · corner bastion), tier-scaled.
+  **(iii) ROOFS READ AS ROOFS** — reaffirmed; the pitch/hatch grammar rides
+  REG-3/REG-6 as chartered.
+- **§590.2 DISPATCHED: TE-REG-0b**, a draw-level rampart preview on the
+  existing specimen (band + walk + towers-as-joints + ditch, on the city
+  page) so the owner judges the wall style BEFORE REG-2 builds it
+  generatively — the specimen-first habit applied to a single element.
