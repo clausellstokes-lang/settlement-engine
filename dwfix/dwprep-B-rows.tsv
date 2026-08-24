@@ -1,0 +1,147 @@
+ampulla stall	BR	a selling zone, not a fixture
+arbour	BR	yard structure, 2.7 yard-fixture vocabulary
+arcade front	BE	envelope
+arcade open	BE	envelope
+arcade state room	BR	room
+armarium recess	BX	RECESS third term (2.3 declares it)
+avenue	BR	circulation/outdoor
+bank	BE	earthwork
+barn porch	BR	room
+battlements	BE	envelope
+bay window	BE	envelope
+bay window two ways	BE	envelope
+bell turret	BE	envelope (massing part)
+bone structure	BE	envelope
+bridge	BE	envelope
+cage under stair	BX	SUBDIVISION third term
+canvas skin	BE	tent envelope
+carrel	BX	SUBDIVISION third term (a study booth)
+causeway	BE	envelope
+centre post	BE	envelope (structural post)
+channels/boat dock	BR	water zone
+chapel	BR	room
+charcoal barn	BR	room
+chimney row	BE	envelope
+circular stone	BE	envelope (wellhead ground)
+cloister window	BE	envelope
+coach as a yard fixture	BR	yard object
+cobbled floor	BE	envelope
+columns	BE	envelope
+ditch	BE	earthwork
+dock	BR	water zone
+eagle ceiling	BE	envelope
+earthcover 60 cm	BE	envelope
+enclosure	BR	zone
+excluded group outside wall	BR	zone
+external stair	BE	envelope
+external stone window	BE	envelope
+false floor	BE	envelope (a concealment; R-INST-6 NO TYPED HOME)
+family tomb walled	BR	zone
+fasten penny	BS	a payment, not a fitting
+floor tiles	BE	envelope
+footholes	BE	envelope
+gallery rail	BE	envelope
+gallery west	BE	envelope
+glass windows	BE	envelope
+glazed windows	BE	envelope
+grain store	BR	room
+great west window	BE	envelope
+great window	BE	envelope
+ground rise	BE	envelope
+hard floor	BE	envelope
+hedge	BR	yard boundary
+herb garden	BR	zone
+herb garden plot	BR	zone
+hiring tokens	BS	tokens, not a fitting
+horncore kerb/floor	BE	envelope
+image niche	BX	RECESS third term
+inlaid floor	BE	envelope
+jury box	BX	SUBDIVISION third term (a railed compartment)
+kennel row	BX	SUBDIVISION third term
+labyrinth	BE	envelope (floor inlay)
+lantern cupola	BE	envelope
+lead main	BE	buried service
+loggia arcade	BE	envelope
+lot store	BR	room
+lych way	BR	circulation
+marker tree	BR	yard
+mask rule	BS	a rule, not a fitting
+meridian line	BE	envelope (floor line)
+niche	BX	RECESS third term -- 2.3 declares RECESS explicitly not a fixture
+niche lockers	BX	RECESS third term
+no timber floors	BS	a prohibition, not a fitting
+octagon room	BR	room
+oriel landing	BE	envelope
+outfall arch	BE	envelope
+pack opening apron	BE	envelope (a floor apron)
+paving	BE	envelope
+penthouse gallery	BE	envelope
+perspective streets	BE	envelope (scenery)
+piccage stakes	BR	market ground marking
+pillars	BE	envelope
+pipe bridge	BE	envelope
+pit	BR	zone (the theatre pit)
+podium wall	BE	envelope
+pole frame	BE	tent envelope
+portall	BE	envelope (a draught lobby)
+post bag	BS	movable, not a fitting
+posts on stone bases	BE	envelope
+property wagon	BS	movable, not a fitting
+puddled clay	BE	envelope
+rails compartments	BX	SUBDIVISION third term
+rails jury	BX	SUBDIVISION third term
+raked floor	BE	envelope
+ritual shaft	BR	zone
+roof platform rail	BE	envelope
+rose	BE	envelope (rose window)
+sacred tree	BR	yard
+sand floor	BE	envelope
+scaenae frons	BE	envelope
+skylight stars	BE	envelope
+spine wall	BE	envelope
+spring	BR	yard/water
+squint	BX	RECESS third term
+stair	BE	envelope
+stair turret	BE	envelope
+stall division	BX	SUBDIVISION third term
+statue niches	BX	RECESS third term
+study closet	BX	SUBDIVISION third term
+ticketed frame	BX	SUBDIVISION third term (the pledge stack)
+tiled floor	BE	envelope
+treasurehouse	BR	room
+tresaunce gallery	BE	envelope
+umschau book	BS	a book, not a fitting
+vault ribbed	BE	envelope
+vaulted ceiling	BE	envelope
+ventpipe	BE	buried service
+wage proclamation	BS	a proclamation, not a fitting
+wall	BE	envelope
+whitewash	BE	envelope finish
+window	BE	envelope
+window per room	BE	envelope
+windows	BE	envelope
+witness box	BX	SUBDIVISION third term
+a separate store outside	BR	room
+charcoal store buckets firetrade	BR	room
+corn in the nw corner	BS	a commodity, not a fitting
+fixtures hurdle fold	BR	yard enclosure
+fixtures kiln	BR	ROOM_KINDS.kiln
+hay bay	BR	storage bay
+hemp	BS	a commodity
+horse walk	BR	circulation
+kiln	BR	ROOM_KINDS.kiln
+lambing pen buckets seasonal	BR	yard enclosure
+linen thread	BS	a commodity
+lodge hut buckets none no typed home	BR	room
+manure	BS	a commodity
+posts	BE	envelope
+processions	BS	an activity
+roundhouse	BR	room
+seasonal	BS	a bucket
+siege	BS	a state
+sledge	BS	movable, not a fitting
+spar store	BR	room
+states in use emptied blocked/earthed rediscovered restacked	BS	wear states
+turf hut	BR	room
+wool	BS	a commodity
+yarn and coal at the eastern end	BS	commodities
