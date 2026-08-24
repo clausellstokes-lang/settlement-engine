@@ -51,6 +51,19 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐⭐ 08:45 CDT 08-24: §559 — ACCOUNT HANDOFF. ⛔ THE SCRATCHPAD IS GONE FOR A SUCCESSOR; IT IS IN GIT:
+#   refs/preserve/session-scratchpad-2026-08-24 = ef15dc36c (37 files: law/ dockets/ receipts/ dwfix/).
+#   READ law/LANE-LAW.md BEFORE DISPATCHING ANYTHING. 18 lane receipts under receipts/ — resume MID-LANE.
+# BUILD c3289244d = 60 cars · ledger §559 · packets 179 · census 2525/366/2159/21026/5848 · ratchet 11/29,044.
+# LANES STOPPED CLEAN: TE-CH-7 (tip 373601437, pins wip-ch7 — ⛔ its gate is CONTAMINATED, see below) ·
+#   TE-CH-4 (measure-then-build, mid-flight, pins holding-ch4/wip-ch4) · TE-DW-PREP (read-only brief).
+# ⛔⛔ NEW LAW: THE GATE READS THE WORKING TREE, NOT A COMMIT. An edit during a run splits it across two
+#   trees and yields a verdict about a tree that never existed. A contaminated green is NOT a green —
+#   pin such a tip `wip-*`, never `holding-*`.
+# ⭐ DW-1 is NOT gated on CH-6 (measured: compendium blob 3b1bf2c254ab identical across the gap, control live).
+# ⭐ §557: the owner said "I gave you all authorizations" — five items taken back; four remain theirs BY
+#   NATURE and none is a permission (deploy credentials, the billed review keystroke, two signatures, a human search).
+
 # ⭐⭐⭐ 06:16 CDT 08-24: §549 — FIFTH STACK COLLECTED, 58 CARS at 510c51b76 (cars 57/58 = MF-CH3 + MF-CG2).
 # Packets 177 · census 2,525/366/2,159/21,017/5,847 · ratchet 11 of 29,044. NO holding awaits landing.
 # FOUR SEATS FILLED: TE-R3 (⛔ DATED 08-27) · TE-CH-5 (Shape F, unblocks MF-CH2B from DRAFT) ·

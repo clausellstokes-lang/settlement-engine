@@ -24871,3 +24871,68 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   stale twice in one night, and a lane caught it both times.** Three charter path
   citations omit the `interior/` directory and **hand a lane a false absence**;
   being corrected rather than re-found.
+
+## §559 · ACCOUNT HANDOFF — THE SCRATCHPAD IS IN GIT, AND A GATE THAT READS A TREE THAT NEVER EXISTED (2026-08-24 08:45 CDT)
+
+- **§559.1 ⛔⛔ THE ONE ACT THAT MATTERED: THE SCRATCHPAD IS PRESERVED.** The
+  owner is switching accounts. **Every standing law, docket and lane receipt
+  lived only under `/private/tmp/…/695a70c5-…/scratchpad` — which a successor on
+  another account CANNOT READ and which is reaped without warning.** Preserved
+  at **`refs/preserve/session-scratchpad-2026-08-24` = `ef15dc36c`, 37 files**,
+  spot-verified byte-identical with `cmp`: `law/` (LANE-LAW, SLOT-FACTS, the
+  stacked-landing template, the owner's signed bands), `dockets/` (the CH-4
+  decision sheet + brief, CH-5 brief, DW-0 skeptic docket, DW-1 prep brief, AD-1
+  provenance audit), **`receipts/` — all 18 lane receipts, the artifacts a lane
+  is resumed MID-LANE from (§448)** — and `dwfix/` (the itemised 53, both
+  readings, the adjudication TSVs behind the ruled 135). Regenerable JSON,
+  `node_modules` and duplicate copies of already-preserved charters deliberately
+  excluded. ⭐ **This is the §544.1 lesson applied before the loss instead of
+  after it:** the AD charter was rescued from a *dead* session's `/tmp` by luck.
+- **§559.2 ⛔⛔ A NEW INSTRUMENT LAW, AND IT IS THE SHARPEST OF THE NIGHT: THE
+  GATE READS THE WORKING TREE, NOT A COMMIT.** TE-CH-7 launched its gate at
+  `335b25049`, then wrote its packet mint **into the same working tree while the
+  run was in flight** — so the early validators read a **pre-mint** tree while
+  `test:ratchet`/`build`/`verify:dist` read the final one. **The result is
+  neither a pass nor a fail but a VERDICT ABOUT A TREE THAT NEVER EXISTED.**
+  ⭐ **The lane found this against its own car and reported it unprompted**,
+  when a silent green would have been accepted. *It is the sibling of the
+  re-staging law: pre-commit's `eslint --fix` rewrites bytes AFTER you measured
+  them; this rewrites the tree WHILE you measure it. Both yield a green that
+  describes bytes you did not ship.* Added to LANE-LAW.
+- **§559.3 RULED — A CONTAMINATED GREEN IS NOT A GREEN.** CH-7 pins as
+  **`wip-ch7`, NOT `holding-ch7`**, whatever its monitor reports, with the gate
+  lines recorded **labelled ADVISORY**. *Why:* a successor finding a `holding-`
+  pin would reasonably conclude the car is landable. **The car itself is not in
+  question** — the fix, the 7-title pin, the census re-record and the separately
+  and cleanly proved packet half (`valid: 180 packets (0 READY)` at the final
+  tree, three-place flip checked through the shipped parser) all stand. What is
+  missing is **one clean `npm run check:tail` at tip `373601437`**, which is the
+  exact next command in its RESUME POINT. **New pin convention: `wip-*` means
+  committed and preserved but NOT provably green.**
+- **§559.4 ⭐ AND CH-7 REFUSED THE OBVIOUS GENERALISATION.** *"Anchor
+  everything" is the WRONG rule here.* A census of every alternate found **four
+  mid-word matchers, three of them TRUE positives a word anchor would DELETE** —
+  `church` reaching the `Parish churches (…)` rows via the `-es` plural, `broker`
+  reaching `Pawnbroker`, `bank` reaching `Banking houses`. **`den` was the only
+  alternate whose mid-word population was entirely false.** After the cure `den`
+  still survives as a live term (`Gambling den`), so this is **not** the CH-4
+  category-deletion case — and the pin asserts that directly so the alternation
+  cannot later be trimmed as dead. Two more recorded rather than swept in: the
+  **seventh arcane spelling is NOT free** (18 of 276 rows move; a naive anchor
+  loses `archmage`), and **the identical bare `den` also sits unclaimed at
+  `src/domain/customContent.js:114`**, where `The Gardens of Sela`, `Maidens
+  Rest` and `Warden of the Wood` classify criminal today.
+- **§559.5 THE THREE LANES WERE STOPPED, NOT KILLED.** Each was told to commit,
+  pin (`holding-*` if provably green, **`wip-*` otherwise**), and write a RESUME
+  POINT that works **cold, on another machine, with no memory of this
+  conversation** — tip sha, what is done, what remains, and the exact next
+  command. **A stop point is a resume point or it is a loss.**
+- **§559.6 THE PICKUP CARD IS REWRITTEN FOR A DIFFERENT ACCOUNT.** It now leads
+  with the preserve ref rather than the slot, because **a successor who cannot
+  read `LANE-LAW.md` will re-learn the ~16 instruments that lie by being bitten
+  by them.** It carries: the deploy measurement, the lane table with resume
+  paths, every ruling in force so none is re-litigated, the queue, the **four
+  by-nature carve-outs** with the note that *none of them is a permission*, the
+  five items §557 took back, and the laws that changed tonight.
+  ⚠ **It states plainly that a preserve ref is an ORPHAN** — `git merge-base`
+  against it exits 1 — **because that fact cost six blockers in §543.**

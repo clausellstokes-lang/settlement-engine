@@ -8,39 +8,51 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
-## ⛔⛔⛔ PICKUP CARD — REWRITTEN WHOLE AT EVERY LEDGER COMMIT (owner §448: a successor picks up HERE in 60 seconds)
+## ⛔⛔⛔ PICKUP CARD — ACCOUNT HANDOFF (2026-08-24 08:44 CDT). A SUCCESSOR ON A DIFFERENT ACCOUNT STARTS HERE.
 
-**AS OF 2026-08-24 06:16 CDT · ledger §557 · build `claude/composite-r4` = `c3289244d` (**60 cars**) · packets **179** · census `2,525/366/2,159/21,026/5,848` · ratchet **11 of 29,044** · ⛔ LANE CAP = FOUR (§508) · ⛔ every dispatch `model: "opus"` (§484) · law = `$SP/LANE-LAW.md`, slot facts = `$SP/SLOT-FACTS.md`**
+**build `claude/composite-r4` = `c3289244d` (60 cars) · ledger `review-fixes-2026-07-08` §558 · packets **179** · census `2525/366/2159/21026/5848` · ratchet **11 of 29,044***
 
-**⛔ THE OWNER'S #1 ITEM — nothing has deployed since 2026-07-28.** Prod at migration **121**, repo head **199**, 78 pending. ⭐ **MEASURED (§540.7–.8): the push itself deletes nothing.** 12 of the 13 destructive migrations act only inside function bodies; **198, the one labelled DESTRUCTIVE, deletes nothing at apply time** and its prune is double-gated, both fail closed. ⛔ **188 is the one that acts at push time** — it deletes users' custom supply-chain content, mitigated by a quarantine receipt written to `application_command_journal` **before** deletion. **`docs/DEPLOY.md` covers 198 and never mentions 188 — that amendment is owed and unowned.**
+### ⛔⛔ FIRST ACT — YOUR PREDECESSOR'S SCRATCHPAD IS GONE. IT IS IN GIT INSTEAD.
+Every standing law, docket and lane receipt lived under `/private/tmp/claude-502/…/695a70c5-…/scratchpad`, which **you cannot read**. All of it is preserved:
 
-### FIRST ACTS ON PICKUP
-1. `git -C <repo> log -1 --oneline review-fixes-2026-07-08 claude/composite-r4` — if either moved past this card, read the ODQ tail.
-2. Read `$SP/LANE-LAW.md` and `$SP/SLOT-FACTS.md`. **A card is a CACHE: re-read slot facts at every proof boundary.**
-3. Re-arm the §388 wakeup (`13,33,53 * * * *`) — session-only, dies with the session.
-4. ⛔ Ref-pin every detached worktree HEAD that is NOT an ancestor of the tip **before** any cleanup. Four were pinned this pass; two lane tips were one command from unrecoverable on 08-24.
-5. ⛔ Lanes build their OWN `node_modules` with `npm ci` — **never symlink the shared one** (434 pkgs vs the slot's 468, five weeks stale; a symlinked lane yields ZERO collected tests and the SCOPE SENTINEL rightly refuses). `npm ci` installs `.husky/_`, so lane commits RUN pre-commit and `eslint --fix` **re-stages**.
+    git show refs/preserve/session-scratchpad-2026-08-24   # = ef15dc36c, 37 files
 
-### SEATS — THREE FILLED, DISJOINT
-| seat | lane | files |
+- `law/LANE-LAW.md` — **read this before dispatching anything.** The gate incantation, the ~16 instruments that lie, census + packet rules. Re-stamped to this slot.
+- `law/SLOT-FACTS.md` · `law/STACK-BRIEF-TEMPLATE.md` · `law/SIGNED-BANDS-2026-08-23.md` (the owner's own words on all eight bands)
+- `dockets/` — the CH-4 decision sheet + brief, CH-5 brief, DW-0 skeptic docket, DW-1 prep brief, AD-1 provenance audit
+- `receipts/` — **18 lane receipts. A lane is resumed MID-LANE from its receipt, never restarted (§448).**
+- `dwfix/` — the itemised 53, both readings, the adjudication TSVs behind the ruled 135
+⚠ **A preserve ref is an ORPHAN — not an ancestor of anything.** `git merge-base` against it exits 1. That is normal; read it by sha.
+
+### ⛔ THE OWNER'S #1 ITEM — 28 DAYS
+Prod at migration **121**, repo head **199**, 78 pending. ⭐ **MEASURED (§540.7–.8): the push itself deletes nothing.** 12 of 13 destructive migrations act only inside function bodies; **198, the one labelled DESTRUCTIVE, deletes nothing at apply time** (its prune is double-gated, both fail closed). ⛔ **188 is the one that acts at push time** — it deletes users' custom supply-chain content, mitigated by a quarantine receipt written **before** deletion. **`docs/DEPLOY.md` covers 198 and never mentions 188 — that amendment is owed.**
+
+### LANES AT HANDOFF — all told to stop at a clean point
+| lane | state | resume from |
 |---|---|---|
-| BUILD | **TE-CH-4** | measure-then-build; `districtProfile.js` + one lint file + one baseline row. First job: **the 333 deletions nobody counted.** Route (iii) ruled. |
-| BUILD | **TE-CH-7** | `npcProfile.js` — the bare `den` twins at :333/:374 and the seventh arcane spelling at :334/:375 |
-| READ-ONLY | **TE-DW-PREP** | reconciles the landed charter (82 fixtures) against §553's ruled **135**; marks every catalog-derived figure PROVISIONAL until CH-6 |
-| LANDING | *free* | no holding awaits |
+| **TE-CH-7** | fix + packet committed (`373601437`); gate in flight; pinning `holding-ch7` (or `wip-ch7` if red) | `receipts/laneCH7-receipt.md` |
+| **TE-CH-4** | measure-then-build, mid-flight; told to commit + pin `holding-ch4` / `wip-ch4` and write a cold RESUME POINT | `receipts/laneCH4-receipt.md` |
+| **TE-DW-PREP** | read-only; delivering the DW-1 dispatch brief | `dockets/laneDWPREP-BRIEF.md` |
 
-⛔ **CH-6 is NOT dispatched on purpose** — §555.9 orders CH-4 first, because CH-6 changes what worlds contain and would decay CH-4's per-cell measurement.
-⚠ **MF-CH3 owes a three-place flip to LANDED** (a landing act on TE-CH-3's car; its nine contested paths have since moved again).
+### RULINGS IN FORCE — do not re-litigate (ODQ §555, §558)
+**CH-4:** Shape D adopted · **route (iii)** for dominant-faction · keep `declared ?? inferred` · keep `Wealthy Residential → noble` · registry **after line 117** · ⛔ **prove against the DERIVED ARTEFACT, never a settlement-record hash — `districtProfile` is absent from the generation pipeline so that digest CANNOT move.** ⛔ **First job is the arithmetic nobody executed: up to 333 cards LOSE their faction row while 44 gain one.**
+**DW:** fixture union **135** (base 82 + 53; floor 106, ceiling 549) · **branch (A)** — `FIXTURE_KINDS` becomes `{kind, attrs}` with totality + consolidation arms · **arm 4a live / 4b deferred to DW-2b** · **ENVELOPE minted as its own vocabulary** · ⭐ **DW-1 is NOT gated on CH-6 — measured, blob `3b1bf2c254ab` identical across the gap, with a live control.**
+**CH-6 is deliberately undispatched** — §555.9 orders CH-4 first.
 
-### THE QUEUE AFTER THESE FOUR
-**CH-6** (⛔ `ARCANE_INST_KW` carries a **live SHIPPED deity-doctrine violation**: a magic-free world can hold no divine healer or druid circle — §541.8) → CH-4 build → the **DW build waves** (41 cars; §482 puts the whole arc before the review) → WEB-8b → WEB-12 → the wiring wave → WEB-9a/9b/10/11 → HK-4/5/6 → housekeeping → CT-4/CT-5/WF-8 → the **AD program** (charter at `refs/preserve/ad-charter-2026-08-24`) → one trailing OSR mint → parity train → `/code-review ultra` (OWNER) → endgame.
+### THE QUEUE
+CH-4 → **CH-6** (⛔ a **live shipped deity-doctrine violation**: a magic-free world can hold no divine healer or druid circle) → CH-7 land → **DW build waves (41 cars — more than everything landed to date)** → **C-19's sub-form recount** (cheapest high-value lane; `~55`/`~35` are not integers and block DW-1d/1e) → WEB-8b/12 → wiring wave → WEB-9a–11 → HK-4/5/6 → housekeeping → CT-4/CT-5/WF-8 → **AD program (17 cars; charter at `refs/preserve/ad-charter-2026-08-24`)** → OSR mint → parity → `/code-review ultra` (OWNER) → endgame.
+⚠ **MF-CH3 owes a three-place flip to LANDED** — a landing act on TE-CH-3's car; its nine contested paths have since moved again.
 
-### ⛔ FIVE DECISIONS THAT ARE THE OWNER'S (§543.9)
-**O1** the `interiors` ladder row's stored return cells vs signed B16b — my recommendation **strikes the 2026-07-17 "one free sample interior per settlement" teaser**; *paid surface*. **O2** `Estate.ownerRef`'s persisted type — *persistence shape* (the field is renamed to `heldBy`; the TYPE is still owner-gated). **O3** `PlanDelta` / `EstateEvent` / EST-5's ownership ledger. **O4** the prosperity ladder — *tuning signature under THE PROMISE*; **two rungs fall through, and `Subsistence` scores identically to `Comfortable`.** **O5** certifying the DW-S soak green with determinism and lived-history immutability unmeasured.
-⭐ **O6 is DISCHARGED — do NOT re-ask.** The three viewing paywalls were ruled at §523.3.
+### ⛔ FOUR THINGS ARE THE OWNER'S BY NATURE — and none is a permission
+`supabase db push` and every deploy (their credentials) · `/code-review ultra` (a billed keystroke) · **legal sign-off and the tuning signature** (*a signature that can be delegated is not a signature*) · the Cohort A reverse-image search (needs a human).
+⭐ **§510 grants everything else, and §557 records that the predecessor had been over-gating.** Decided and no longer the owner's: CH-4's declared shift · the dossier legend · the DM annotations · the estate ownership type · soak certification (**measure**, do not certify blind).
+⚠ Still owed to the owner as *disclosure*: the **17 July "one free sample interior" teaser** — verify it was ever published before treating it as a public promise.
 
-### ⛔ OWNER-GATED BY NATURE (§510.2)
-`supabase db push` · every push and deploy · legal sign-off · the tuning **signature** · the `/code-review ultra` keystroke.
+### LAWS THAT CHANGED TONIGHT — check `law/LANE-LAW.md`, these bit repeatedly
+⛔ Lanes build their **own** `node_modules` with `npm ci`; **never symlink** the shared one (434 pkgs vs the slot's 468). `npm ci` installs `.husky/_`, so lane commits **RUN pre-commit** and `eslint --fix` **re-stages** — re-prove at the committed tip.
+⛔ **A word-occurrence match is not a membership test** — it bit three times in one day, and the third failed *silently*. ⚠ But **"anchor everything" is also wrong**: `church`, `broker` and `bank` have TRUE mid-word populations.
+⛔ **Absence decays silently, in three directions** — filled since; promised but never landed; **and landed by a different mechanism at a different magnitude.**
+⛔ **A figure without its denominator named is not a measurement.**
 
 ## ⭐⭐⭐⭐ SUCCESSION ADDENDUM — 2026-08-24 (~01:40), LEDGER THROUGH §439 — READ THIS DELTA FIRST, THEN THE §427 BLOCK BELOW
 
