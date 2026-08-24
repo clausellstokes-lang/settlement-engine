@@ -29056,6 +29056,187 @@
           "tests/lint/proseNumerics.test.js"
         ]
       ]
+    },
+    {
+      "id": "MF-CH6",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/catalog-hygiene/MF-CH6.md",
+      "verifiedBase": "233c35a69ccb67bb3ce2612427ad918a42fc4af8",
+      "changeManifest": [
+        {
+          "_note": "THE DEFECT AND THE CURE. `ARCANE_INST_KW` answers \"does this institution NEED MAGIC TO EXIST?\" from the NAME, and it carried six words that name FAITH: 'druid circle', 'elder grove council', 'elder grove', 'healer (divine', 'divine healer', 'wandering healer'. THE DEITY DOCTRINE is constitutional — faith is culture, never theology — so the engine was asserting that divine healing is a species of magic. The six leave, 39 members -> 33. MEASURED, TWO of them ('divine healer', 'wandering healer') matched NO catalog row at all (0 of 276 names), so the only names they ever struck were the ones a PLAYER typed, through arcaneInstitutionNameFallback and through filterServicesForMagic, which calls isArcaneInst(name,'',[]) with neither category nor tags and where this list is therefore the sole decider. That surface is cured outright. The header records the doctrine, where the six were live, and the over-determination measurement.",
+          "action": "MODIFY",
+          "path": "src/domain/arcaneInstitutionVocabulary.js"
+        },
+        {
+          "_note": "THE DATA, at the data rather than by a rule (the TE-CH-5 shape). `Druid Circle` and `Elder Grove Council` drop the redundant `arcane` tag beside their `religious` one and re-licence low -> none, so tag and licence agree. ⛔ `Healer (divine, 1st level)` IS HELD AT `low` AND §541.8's PREMISE IS REFUTED FOR THAT ROW: textAssertsFunctionalMagic('Basic healing spells. Cure Wounds (10 GP).') is TRUE, so the entry as authored is a first-level SPELLCASTER the catalog files under faith, and a world where spells do not work genuinely cannot hold it. The doctrine gap it exposes is a CONTENT gap — the catalog holds no cultural divine healer at all — which is a new row and the owner's call, not a licence value. The reason is recorded beside the value in the file.",
+          "action": "MODIFY",
+          "path": "src/data/institutionalCatalog.js"
+        },
+        {
+          "_note": "THE PINS. Two new arms appended to an already-credited file: A9 (no faith word is a member, and the free-text/services surface answers MUNDANE for four authored faith names, with three live positive controls in the other direction) and A10 (THE MEASURED GAP — the declaration is honest on all three of its own readers while the world law still strikes both rows BY THE SHELF, with a moved-shelf control that keeps a genuinely magic-dependent row struck by its tag). A7's negative claim gains the attribution that explains why it still holds: the keyword list decides exactly one of the 28 rows on its own. The declared table, its distribution (7/5/4/12 -> 9/3/4/12) and the dossier cross-check arithmetic are re-recorded with the two moved rows named as data.",
+          "action": "MODIFY",
+          "path": "tests/lint/magicLicenceCensus.walker.test.js"
+        },
+        {
+          "_note": "MG-LAW-2's INSTITUTION HALF, which shipped broken. The faction half ('no authored religious faction is ever read arcane') was already pinned in this file; the institution half was not, and `Druid Circle` was pinned in the arm ABOVE as an authored-arcane catalog name. That verdict MOVED, so it is pinned in both places: the row leaves the authored-arcane list (replaced by `Mages' guild`, which is not a coverage loss because the row is no longer authored arcane) and arrives in a new arm that asserts the faith reading. `Healer (divine, 1st level)` is deliberately NOT in the new arm's list, and the omission is a verdict with its reason stated inline.",
+          "action": "MODIFY",
+          "path": "tests/domain/arcaneIdentity.test.js"
+        },
+        {
+          "_note": "THE DECLARED SHIFT. 30 of 525 golden rows move, 0 added, 0 removed, and the SHIFT RECORD row carries the whole account. TOTALITY CONTROL: the harness reproduces all 525 committed hashes at the parent with 0 mismatches. The complete path-template census is SIX templates over all 30 rows, every one field-level — the tag string leaving, the licence value, and the single { target: 'magicCapacity', effect: 'reinforced' } trace entry that tag drove. The 30 rows are 18 town and 12 village, exactly the tiers the two rows are authored in. Over 2,625 same-seed settlements (525 x five magic cases) ZERO rosters move in every case and no instance count moves by one: magicExists:false 0 hashes, pm0 0, pm20 0, pm50 30, pm80 139.",
+          "action": "MODIFY",
+          "path": "tests/property/generatorGoldenMaster.test.js"
+        },
+        {
+          "_note": "The re-recorded manifest itself, 30 rows of 525.",
+          "action": "MODIFY",
+          "path": "tests/fixtures/generator-golden-master.json"
+        },
+        {
+          "_note": "THE LIGHTING CENSUS, re-recorded with its cause: +0 files / +0 parked / +0 credited / +3 TITLES / +0 SUITE TITLES, 2,525/366/2,159/21,049/5,852 -> 2,525/366/2,159/21,052/5,852. ATTRIBUTED PER FILE BY EXECUTION, not arithmetic: restoring BOTH edited test files to the slot returns the tuple to 21,049 exactly (33 passed of 33), and restoring only the licence walker reads 21,050 — so +2 is magicLicenceCensus.walker.test.js and +1 is arcaneIdentity.test.js. No new test file and no new describe, which is why four of the five figures are unmoved.",
+          "action": "MODIFY",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        },
+        {
+          "_note": "THE EDGE-SHARED REGEN, billed by BOTH source files and checked BY EXECUTION over each meta's own inputs list rather than assumed: institutionalCatalog.js and arcaneInstitutionVocabulary.js are each in aiCharterBundle (111 inputs), aiGroundingBundle (67) and aiOutputSchemaBundle (112), and in neither analyticsEvents nor intentAtlas (2 inputs each). Three bundles move by CONTENT (sourceHash 9ae9af16d8bd128b -> 035c4a701245e93c, da8645a94469428c -> 3c80dbb93f7508f8, 3a19ea2f38727d41 -> de5c18058f732c10); the builder rewrites all five sidecars every run, so the other two carry a verified generatedAt-only delta. All eight committed as ONE SET.",
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiCharterBundle.js"
+        },
+        {
+          "_note": "The charter bundle's sidecar.",
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiCharterBundle.meta.json"
+        },
+        {
+          "_note": "The grounding bundle, second of the three closures both source files sit in.",
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiGroundingBundle.js"
+        },
+        {
+          "_note": "The grounding bundle's sidecar.",
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiGroundingBundle.meta.json"
+        },
+        {
+          "_note": "The output-schema bundle, third of the three closures.",
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiOutputSchemaBundle.js"
+        },
+        {
+          "_note": "The output-schema bundle's sidecar.",
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiOutputSchemaBundle.meta.json"
+        },
+        {
+          "_note": "generatedAt-only: this bundle holds neither source file (2 inputs), and the builder rewrites every sidecar each run. Committed with the set so no meta describes content that is neither committed nor staged.",
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/analyticsEventsBundle.meta.json"
+        },
+        {
+          "_note": "generatedAt-only, same reason as analyticsEvents.",
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/intentAtlasBundle.meta.json"
+        },
+        {
+          "_note": "The packet itself.",
+          "action": "CREATE",
+          "path": "docs/implementation/packets/catalog-hygiene/MF-CH6.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "The magic-DEPENDENCE keyword vocabulary this car empties of faith. Renaming it un-grounds A9, which asserts membership directly, and takes the header rule with it.",
+          "path": "src/domain/arcaneInstitutionVocabulary.js",
+          "symbol": "ARCANE_INST_KW"
+        },
+        {
+          "_note": "The free-text fallback that runs the vocabulary as an anchored alternation. It is the surface where two of the six removed words were the SOLE decider, and A9 drives it in both directions.",
+          "path": "src/domain/arcaneInstitutionIdentity.js",
+          "symbol": "arcaneInstitutionNameFallback"
+        },
+        {
+          "_note": "The world law factory A7 and A10 drive. A10's whole claim is about what this predicate still decides BY THE SHELF after the keywords left, so renaming it removes the only executed statement of the remaining gap.",
+          "path": "src/generators/generationContext.js",
+          "symbol": "createGenerationWorldLaw"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "THE DOCTRINE, AT THE VOCABULARY: none of the six faith words is a member of ARCANE_INST_KW, and none is reachable through a shorter member. 39 members -> 33. Re-adding 'druid circle' reds two arms."
+        },
+        {
+          "id": "A2",
+          "case": "THE SURFACE THEY WERE LIVE ON: 'Wandering healer', 'Divine healer of the pass', 'Druid circle of the north' and 'Elder grove council' all answer MUNDANE through arcaneInstitutionNameFallback AND survive filterServicesForMagic at magicExists:false. Non-vacuity in the other direction: 'Wizard tower of Zzz', 'The Teleportation circle' and 'Golem foundry' still answer arcane and are still stripped."
+        },
+        {
+          "id": "A3",
+          "case": "THE DATA AGREES WITH ITSELF: Druid Circle and Elder Grove Council read MUNDANE on the TAG surface without that reader being routed through the licence, and both declare magicLicense 'none'. Restoring either tag reds four arms including MG-LAW-2's institution half."
+        },
+        {
+          "id": "A4",
+          "case": "THE DISTRIBUTION MOVES BY EXACTLY TWO ROWS, counted off the catalog and never off the frozen table: none/low/medium/high 7/5/4/12 -> 9/3/4/12, the two named as data, and R-INST-5's own whole-table figure of 11 still reachable by adding its four Adventuring hand-offs and subtracting the two rows the estate overruled it on."
+        },
+        {
+          "id": "A5",
+          "case": "⛔ THE ONE-ROW ATTRIBUTION, and the reason this car does not claim more: at magicExists:false the world law strikes all 28 licensed rows and ARCANE_INST_KW decides EXACTLY ONE of them on its own (Dragon resident), asserted as an exact list. Dropping 'dragon resident' and 'dragon' from the vocabulary reds it."
+        },
+        {
+          "id": "A6",
+          "case": "THE MEASURED GAP, PINNED: for both re-licensed rows the declaration is honest on all three of its own readers (licence 'none', tag MUNDANE, isArcaneInstitution false) while the world law STILL strikes them — and moving only the shelf frees them, which is what attributes the strike to the display bucket. Control: a genuinely magic-dependent row moved to the same shelf is still struck, by its tag."
+        },
+        {
+          "id": "A7",
+          "case": "⛔ §541.8's PREMISE REFUTED FOR ONE ROW: Healer (divine, 1st level) is held at 'low' because textAssertsFunctionalMagic('Basic healing spells. Cure Wounds (10 GP).') is TRUE — the entry as authored is a spellcaster filed under faith. Its tag/licence disagreement therefore REMAINS the licence walker's single recorded override, with the account beside it, and the doctrine gap is recorded as a CONTENT gap (the catalog has no cultural divine healer) rather than closed by a value."
+        },
+        {
+          "id": "A8",
+          "case": "⛔ THE GATE HALF IS PRICED AND REFUSED, MEASURED THREE WAYS: routing the world law, institutionProbability's multiplier/scaler and magicFilter through the declared licence frees the rows (Druid Circle 0 -> 36, Healer 0 -> 48, Elder Grove 0 -> 17 at magicExists:false) but puts Magic-SHELF rows into magic-free worlds, where the shipped world_law_magic receipt convicts the record's own taxonomy fields: 264 of 504 magic-free settlements FAIL against 0 at the slot and 0 as shipped. Reverted and scoped as a train, per PACKET_STANDARD's smallest-split rule."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/magicLicenceCensus.walker.test.js",
+          "tests/domain/arcaneIdentity.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lib/instantWorld",
+          "tests/generators/deadMagicLeaks.test.js",
+          "tests/domain/magicForms.test.js",
+          "tests/domain/institutionsForPower.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/generatorGoldenMaster.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/domain/arcaneInstitutionVocabulary.js",
+          "src/data/institutionalCatalog.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ]
     }
   ]
 }
