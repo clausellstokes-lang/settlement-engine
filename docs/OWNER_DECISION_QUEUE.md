@@ -26318,3 +26318,27 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   instrument verdicts, small tiers snappy, per-tier render TIME measured at
   every wave. TE-REG-2's live brief amended accordingly (measure-and-flag,
   never abandon an arm the envelope can afford).
+
+## §605 · THE INSTRUMENT REPAIRS LAND — AND THE INVERSION WAS IN THE DENOMINATOR ALL ALONG (2026-08-24 ~19:30 CDT)
+
+- **§605.1 VALIDATED AND RE-PRESERVED** (the reg-instruments ref advanced with
+  parent kept). The chartered repair was a NO-OP as worded — the numerator
+  already counted masses — and the lane found the true defect: **per-body
+  fractions invert under fusion because bodies are not conserved; the INK is**
+  (building fill +0.37% while bodies fell 16%). Five unit-count candidates
+  all inverted; **F3 ships as a DENSITY — masses per 1,000 sq units of
+  intramural building ink** — improving on all 17 fusing leaves with the
+  un-fuse ladder returning to the dormant base to the digit. The grid rule
+  adopted verbatim from REG-1's pre-recorded form, reproducing its published
+  table to the digit, with `--reg0compat` pinned. Baselines re-recorded at
+  the fusion tip over all 18 leaves; the prior file preserved; censuses
+  identical zeros. **J-I0B-2 RATIFIED**: no true fraction exists over a
+  conserved denominator without a holdings population — density is the
+  lawful form. ⚠ F3's BAND is now owed (the units changed) — set at REG-2's
+  collection from its leaves.
+- **§605.2 ⛔ THE LAW ITS SURPRISE BANKED:** a baselines LOG claiming three
+  FAILs predated edits to the very instruments it described — *"an exit
+  status captured before the last edit is a status about different code, and
+  a log is an exit status that outlives the run."* The stale log is renamed
+  per its recommendation (a chair act — outside the lane's grant, inside the
+  chair's). The re-staging law's family gains its logging member.
