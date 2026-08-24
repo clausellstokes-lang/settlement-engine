@@ -26459,3 +26459,31 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   curated emergence over chaos — typed vocabularies, bounded scope, and THE
   PROMISE's same-seed-forever, which DF never vows and a DM's campaign
   requires.
+
+## §611 · THE DECLINE ARC — RISE AND FALL AS FIRST-CLASS HISTORY, MAP, AND FILM (2026-08-24 ~21:05 CDT)
+
+- **§611.1 ⭐ OWNER RULING:** growth AND decline as variable phases — "a plot
+  of land that turned into a city that downgraded into a town," shown in the
+  maps and the history, ruins and all — "we already have all of the
+  mechanisms." **The chair's inventory CONFIRMS the assertion:** peakTier vs
+  present (T2R; decline-made-spatial), the walls.js HIGH-WATER LAW (a
+  shrunken city keeps its peak circuit), pentimento ghosts, B8's dispersal
+  limb (owner-ruled), the B6 shedding order, the wear grid, derelict marks,
+  the hf379 ruin-stages plate in the binding detail register, typed loss
+  regions with dated recovery. The mechanisms exist; the ruling orders them
+  to PERFORM TOGETHER.
+- **§611.2 CHARTERED, three wirings:** (i) **TRAJECTORY VARIABILITY,
+  measured before built** — verify the generated histories produce
+  non-monotonic tier arcs (boom-bust, plateau, fade, sacked-never-recovered)
+  at meaningful rates; if thin, mint the trajectory shapes as a small typed
+  vocabulary (constants tuning-class, owner-signed); (ii) **THE DRAWN
+  DECLINE VOCABULARY** joins the register waves — the hf379 ruin ladder,
+  thinned fabric inside the oversized circuit, subdivided grandeur,
+  half-empty outer rings of shells; (iii) **THE FILM CONTRACTS** — §609's
+  beat set gains DECLINE (shells spreading outward-in, ghost extents
+  lingering, the wall standing over ground it once protected). All three
+  under the standing laws: derived never stored, calm-ink restraint, no
+  drama the world's ledger does not hold.
+- **§611.3 ⭐ UNBLOCK NOTED:** EST-5 (the B8 estate loop) was BLOCKED on
+  CH-4 — landed this sitting (§582). The blocker is discharged; EST-5
+  re-enters the queue at its chartered position.
