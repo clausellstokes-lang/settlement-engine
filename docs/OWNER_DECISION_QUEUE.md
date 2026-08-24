@@ -25714,3 +25714,22 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   families for the safely-inferable classes + class-varied roof hatching,
   one crop proving a church-with-yard and an inn-court read differently
   from housing rows.
+
+## §579 · THE FLOATING FRONT-BARS DIE — A CORPUS-TRUE WEIGHT APPLIED TO UNFUSED GEOMETRY IS NOISE (2026-08-24 ~13:05 CDT)
+
+- **§579.1 THE OWNER'S CROP, DIAGNOSED AT THE SOURCE:** the heavy black bars
+  along block sides are the harness's **"BLOCK FRONT (2×)"** strokes
+  (`renderFolio.mjs:1160` — "the continuous frontage — the heavy line the
+  whole rank shares"), whose weight was measured off corpus plate hf40 at
+  exactly 2× the fronting edge. **The intent is corpus-true; the execution
+  is broken by the unfused geometry:** drawn as a standalone line along the
+  rank's frontage while the buildings behind it are freestanding confetti,
+  the stroke decouples from any built face and reads as arbitrary bars —
+  engine reasoning leaking into the picture as meaningless ink. The owner:
+  "get rid of them, they break immersion." **RULED — removed as a separate
+  element; the 2× weight SURVIVES as the stroke of the fused mass's own
+  street face**, existing only where built mass exists, nothing across gaps.
+  ⭐ The general law this banks: **a stroke may carry only meaning the
+  geometry beneath it earns — a corpus-measured ratio applied to geometry
+  the corpus doesn't have produces noise, not fidelity.** (The sibling of
+  §561.2's blind-golden law, on the render side.)
