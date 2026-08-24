@@ -26604,3 +26604,23 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   register definition (winter's snow-toned roofs and bare canopy, autumn
   fields) as a LATE wave riding after the paint — on the roster so it is
   deferred-and-recorded, never forgotten.
+
+## §616 · THE OWNER RULES ON THE SWEEP — ONE RE-SCOPED, ONE STRUCK, TWO STAND (2026-08-24 ~22:30 CDT)
+
+- **§616.1 EDGE-ROAD DESTINATIONS (§615.1): RE-SCOPED TO CAMPAIGN TIME.**
+  The owner: destination labels happen "after we put them into a campaign,
+  and then their orientation with each other, as well as the orientation of
+  the routes to each other, will be incorporated into the map — but this is
+  after we build the maps first." STRUCK from REG-8; chartered instead as a
+  CAMPAIGN-LAYER row — when settlements enter a campaign, their mutual
+  orientation and inter-routes flow into each map's edge roads. Consumes
+  finished maps; builds after them.
+- **§616.2 THE NAMING LAYER (§615.2): VETOED — NO GENERATED NAMES.** The
+  owner: "maybe the DM wants to have more control over those." REG-N is
+  struck entirely. The DM-control path ALREADY EXISTS and is the ruling's
+  own answer: the shipped mapEdits annotation machinery is where street,
+  bridge and gate names come from — the DM's hand, on the DM's map, persisted
+  as deltas. Nothing to build; the veto costs zero.
+- **§616.3 THE REMAINDER STANDS UNDER THE DELEGATION:** the accessibility
+  hold (§615.3, law now) and seasonal dress (§615.4, late-roster) proceed as
+  chartered.
