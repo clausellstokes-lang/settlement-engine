@@ -1,14 +1,21 @@
 # Town cartography / MF-CG1b — the derived caps: three magic numbers become one measurement and one declared headroom, and 287 of 504 settlements draw a map
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** 1
-- **Verified base:** `claude/composite-r4` at `5055990a38a281b5a5f63648c74e65c0837de7ef`
+- **Verified base:** `claude/composite-r4` at `7009f115bc8fda7a19bd3408893ca08351294a18`
   ⚠ Read with `git rev-parse` at this lane's opening, never extended from a quoted prefix
   (§381's fabricated-SHA law) and never taken from the dispatch text. The lane's FIRST act was to
   compare it against the slot the chair's SLOT-FACTS card was measured at; it matched, so the
   card's shared facts are cited below rather than re-derived (ODQ §512).
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line (J-TEWF1B-1).
+  ⛔ RE-STAMPED BY THE TE-STACK-2 LANDING (2026-08-24). The two sentences above describe the
+  BUILD lane, and they were true then: the member built on `5055990a` and the SLOT-FACTS card
+  matched. They no longer describe the base recorded on the line above. The slot moved TWICE
+  under the landing act — to `7009f115` (the MF-CH2A + MF-UC5 stacked landing) — so this member
+  was rebased onto car 1 of a two-car stack and its `verifiedBase` re-stamped in BOTH places.
+  The card's shared facts cited below were RE-READ at `7009f115`, not carried; two of them had
+  moved (the census tuple, and `generator-golden-master.json`, which MF-CH2A re-recorded).
 - **Depends on:** `MF-CG1` (LANDED) — this member consumes the calibration corpus that member
   built, and could not exist without it.
 - **Family preamble:** `docs/implementation/preambles/MF-PREAMBLE.md`, SHA-256

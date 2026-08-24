@@ -6213,7 +6213,57 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //   `titles` 20,890 (CH-2A's nine out) → "expected 20899 to be 20890"
     //   `titles` 20,891 (UC-5's eight out) → "expected 20899 to be 20891"
     //   `suiteTitles` 5,815 (one car's +1) → "expected 5816 to be 5815"
-    files: 2519, parked: 366, credited: 2153, titles: 20899, suiteTitles: 5816,
+    // == RE-RECORDED 2026-08-24 BY THE TE-STACK-2 LANDING - TWO CARS THROUGH ONE GATE
+    //   (MF-WEB8, paywall honesty, and MF-CG1b, the derived cartography caps), CAUSE
+    //   ATTRIBUTED PER CAR AND PER FILE ==
+    // 2,519/366/2,153/20,899/5,816 -> 2,520/366/2,154/20,941/5,827 at the landing slot
+    // 7009f115b (the MF-CH2A + MF-UC5 stacked landing). `censusAuthorization`: ODQ §516 (the
+    // stacked-landing charter), §420 (a stack's census is a SUM OF DELTAS and never a tuple),
+    // §417 (the row rides the member into the landing act), §464.2/§471/§473 (car 1) and
+    // §509.4/§515 (car 2).
+    // ⚠⚠ THE SLOT MOVED WHILE THIS LANE WAS BUILDING, AND THAT IS WHY THIS ROW EXISTS TWICE
+    //   OVER. Car 1 built on b2852ccc, where THIS FILE reads blob 95ed6be312. Car 2 built on
+    //   5055990a. By the time the act reached its census the slot was 7009f115b and this file
+    //   read baa2674da3 — so BOTH cars' own tuples describe trees that no longer exist, and the
+    //   first draft of this very row (walked at 5055990a to 2,518/366/2,152/20,924/5,825) was
+    //   thrown away and walked again here. NEITHER CAR EDITS THIS FILE. The whole row is the
+    //   landing act's, walked ONCE over the stacked tree, and the two walks agree on the DELTA
+    //   and on nothing else — which is the entire content of the carry law.
+    // TWO CAUSES, SUMMED, AND NEITHER IS A RULE CHANGE - no classifier here widened or narrowed:
+    //   CAR 1 (MF-WEB8) +1 file / +1 CREDITED / +33 titles / +9 suite titles, from TWO files:
+    //     tests/config/entitlementLadder.enforcement.test.js - the NEW enforcement walker, which
+    //       resolves every advertised ladder row against the symbol that actually gates it.
+    //       CREDITED at birth: 19 titles, 5 suite titles, parkReasons [].
+    //     tests/config/pricing.test.js - 28/9 at the slot, 42/13 at the tip: +14 / +4.
+    //     ⚠⚠ AND A THIRD FILE THE CENSUS CANNOT SEE. tests/config/tierFacts.contract.test.js
+    //       gains FOUR arms in this car and contributes ZERO. It is PARKED at the slot and
+    //       PARKED at the tip for the same reasons (TEST_UNREGISTERED:it x10,
+    //       SUITE_NOT_STRAIGHT_LINE:describe x2), so its titles are SWALLOWED and the arithmetic
+    //       still closes. `parked` is UNMOVED at 366 - and that is read DIRECTLY out of this
+    //       walker's own `classify` for that one file, never inferred from the totals, because a
+    //       parked file's real coverage is exactly what a census cannot count.
+    //   CAR 2 (MF-CG1b) +0 / +0 / +9 titles / +2 suite titles, from ONE file:
+    //     tests/domain/townCartographyCalibration.test.js - 19/6 at the slot, 28/8 at the tip.
+    // WALKED, NEVER COMPUTED, at the stacked tree, every figure READ FROM ITS OWN FAILURE
+    // MESSAGE in assertion order: `files` "expected 2520 to be 2519" -> `parked` PASSED UNMOVED
+    // at 366 -> `credited` "expected 2154 to be 2153" -> `titles` "expected 20941 to be 20899"
+    // -> `suiteTitles` "expected 5827 to be 5816"; green at the end (33 passed of 33, exit 0).
+    // The arithmetic closes: 366 + 2,154 = 2,520. The walked delta +1/+0/+1/+42/+11 equals the
+    // SUM of the two cars' independently walked deltas (+1/+0/+1/+33/+9 and +0/+0/+0/+9/+2)
+    // exactly, so the two rebases moved no title and no title was swallowed.
+    // FIVE negative controls, all red as predicted, each restore cmp 0:
+    //   A  the whole SLOT tuple back reds at `files` ("expected 2520 to be 2519").
+    //   B1 SIBLING - car 2's delta alone removed from `titles`/`suiteTitles` while the file
+    //      figures stay correct, so the red must LAND ON `titles`: "expected 20941 to be 20932".
+    //   B2 SIBLING - car 1's title delta alone removed, likewise: "expected 20941 to be 20908".
+    //      ⭐ B1 and B2 are the arithmetic's own convictions. A sibling control that removes a
+    //      car's WHOLE delta reds at `files`, the FIRST assertion, and never reaches the title
+    //      sum at all - it would prove only that something moved.
+    //   C  `parked` ALONE at 365 reds at `parked` - the arm is live on the figure that did NOT
+    //      move, which is the only way "unmoved" is evidence rather than silence.
+    //   D  `suiteTitles` ALONE minus one reds at `suiteTitles`, so the LAST assertion is
+    //      reachable and no earlier red is masking it.
+    files: 2520, parked: 366, credited: 2154, titles: 20941, suiteTitles: 5827,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

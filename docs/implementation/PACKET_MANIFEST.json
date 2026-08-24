@@ -23893,9 +23893,9 @@
     },
     {
       "id": "WEB-8",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/website/WEB-8.md",
-      "verifiedBase": "b2852ccc3cc4753499996da6582dd672e90499d0",
+      "verifiedBase": "7009f115bc8fda7a19bd3408893ca08351294a18",
       "changeManifest": [
         {
           "action": "MODIFY",
@@ -24057,9 +24057,9 @@
     },
     {
       "id": "MF-CG1b",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-CG1b.md",
-      "verifiedBase": "5055990a38a281b5a5f63648c74e65c0837de7ef",
+      "verifiedBase": "7009f115bc8fda7a19bd3408893ca08351294a18",
       "changeManifest": [
         {
           "_note": "THE DERIVATION. Three hand-authored cap tables become the output of one pure total function of ONE measured calibration and ONE declared headroom (BAND 21, owner-signed at ODQ 515). bindings[t] = ceil(measured roster maximum x headroom); buildings[t] = bindings[t] + DWELLING_TARGET[t], which makes bindings <= buildings true by arithmetic rather than by an assertion every hand-authored candidate violated; rowBytes = ceil(measured worst bytes-per-row x headroom), which removes the last authored number from inside a derivation CR-TC4-BAND-1 had already made definitional. DWELLING_TARGET is hoisted to module scope because the building cap is derived from it, and it is deliberately NOT headroomed: the headroom belongs to measured worst cases, and multiplying an authored intent by a safety factor is a category error. The tuning module keeps its zero-imports-by-design property.",

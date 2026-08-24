@@ -1,6 +1,6 @@
 # Website / WEB-8 — paywall honesty: the ladder stops claiming gates that are not there (member 1 of `W-C`)
 
-- **Status:** READY
+- **Status:** LANDED
 - **Built by:** lane TE-WEB-8 on 2026-08-23, `[OPUS-RUN · FABLE-VALIDATION OWED]`. The member
   is commit `200d7e549407323c3a405c4f224f071deb848703` on base
   `b2852ccc3cc4753499996da6582dd672e90499d0`; this packet is the commit after it. All seven
@@ -8,8 +8,8 @@
   readings — the pre-commit `eslint --fix` re-stage changed nothing, and the untracked packet
   survived the hook's stash cycle. Held at the lane tip for the chair; do not redispatch.
 - **Packet version:** `1`
-- **Verified base:** `claude/composite-r4` at `b2852ccc3cc4753499996da6582dd672e90499d0`
-- **Last revalidated:** 2026-08-23 at `b2852ccc3cc4753499996da6582dd672e90499d0`
+- **Verified base:** `claude/composite-r4` at `7009f115bc8fda7a19bd3408893ca08351294a18`
+- **Last revalidated:** 2026-08-24 at `7009f115bc8fda7a19bd3408893ca08351294a18` (the TE-STACK-2 act)
 - **Train:** `W-C` (paid-surface honesty), family **website** — un-stamped, so the train
   holds the four-member cap. Car 1 of 4: WEB-8 → WEB-9a → WEB-9b → WEB-10.
 - **Owner authority:** `OWNER_DECISION_QUEUE.md` **§464.2** (O-P1 de-advertise with a
