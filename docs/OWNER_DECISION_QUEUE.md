@@ -26658,3 +26658,21 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   already emits landmark names on paid surfaces, and **whether the veto
   extends to them is queued as an owner question, not auto-executed.**
   Raw findings preserved beside the first panel's.
+
+## §619 · THE ARCHITECTURE AUDIT TO THE SOAK — NO ORPHANS, FOUR JUST-IN-TIME COMPILES (2026-08-24 ~23:40 CDT)
+
+- **§619.1** Owner asked whether anything on the road to the soak is
+  unarchitected. AUDITED: everything carries at least its charter row; fully
+  compiled with exits are the register arc (A1–A6), the DW program (+§567),
+  AD's 17, CH-3, the OSR mint, the three-leg soak, and the endgame tail.
+  **FOUR surfaces are DELIBERATELY thin, each owed its compile AT ITS
+  DISPATCH WINDOW** (the absence-decays law makes early compiles rot — the
+  UC-5 and REG-G1 lessons): (1) the WEBSITE train (re-measure + recompile;
+  its draft predates months of landings); (2) THE PARITY TRAIN (law §289
+  exists; its car-level compile waits for the DW facts that are its
+  denominator); (3) the small tails HK-4/5/6 · CT-4/CT-5 · WF-8 · MF-CH3's
+  flip (fresh packet briefs at dispatch); (4) CH-6b + the divine-healer row
+  (today's two-line charters, briefed at the catalog train's return). The
+  DW R4 gate (25 changeManifests owed before their waves) stands as the same
+  law inside that program. Each just-in-time compile gets its own skeptic
+  pass, per the standard.
