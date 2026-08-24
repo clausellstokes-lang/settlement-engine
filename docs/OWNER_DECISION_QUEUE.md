@@ -26538,3 +26538,31 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   ASSEMBLES at the end from data every wave already emitted, rather than
   re-excavating the whole fabric — "after everything" without re-opening
   anything.
+
+## §614 · TWO LAWS: RECLAMATION BY GROWTH, AND THE RAMPART THAT SHOWS ITS AGE (2026-08-24 ~21:50 CDT)
+
+- **§614.1 ⭐⭐ THE RECLAMATION LAW (owner):** disaster remnants — a crashed
+  floating island included — are repaired ONLY when the urban fabric reaches
+  them. Debris outside the limits STAYS, a permanent landscape fact, until
+  the city grows toward it, needs the room, touches it — and then begins
+  breaking it down. **Recovery is a function of urban pressure, never of
+  time.** Historically exact (ruins were quarries; old walls became house
+  foundations) and mechanically clean: it gives G-60's typed
+  LossRegion-plus-dated-recovery machinery its missing TRIGGER — growth
+  contact + need — and it hands the product persistent out-of-town ruins,
+  which for a D&D world are adventure sites the history wrote for free. The
+  film gains the beat pair DEBRIS (persists across eras, untouched) →
+  RECLAMATION (the growth front arrives and eats it), joining §609's closed
+  set. Routed to the fabric/history programs beside §611's trajectory work;
+  all constants tuning-class.
+- **§614.2 ⭐ THE RAMPART WEAR LAW (owner):** the wall shows SUBTLE wear as a
+  function of funding/maintenance AND age — "if it gets bad." Graded (three
+  steps per the B14 wear-grid idiom: kept → weathered → crumbling), drawn in
+  the calm register: irregular course ticks, a patched breach, a roofless
+  tower, a collapsed stretch as a rubble line — never spectacle. Derivation
+  order per house law: MEASURE what maintenance facts exist
+  (readiness/defense budgets/prosperity) before minting any new one. ⭐ The
+  synergy with §611 is the payoff: the declined city's oversized high-water
+  circuit is precisely the wall nobody can afford — the two laws together
+  draw the grand crumbling ring that tells the whole story. Routed to
+  REG-2 (as an in-wave arm if the timebox allows, else chartered REG-2b).
