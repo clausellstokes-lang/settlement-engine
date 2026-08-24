@@ -89,7 +89,12 @@ export const PUBLIC_ORDER_INVERSIONS = Object.freeze([
   { edge: 'S6>S2', importer: 'relief.js', imported: 'umbrella.js',
     reason: 'the relief pass reads the settlement EXTENT to size its own field; extent is a '
       + 'roster fact (population and tier), not a district fact, so the read is of a scalar the '
-      + 'umbrella happens to own rather than of S6 geometry' },
+      + 'umbrella happens to own rather than of S6 geometry. ⚠ ⟦§297.2b⟧ `cliffs.js` RIDES THIS '
+      + 'SAME EDGE and is named here so the second importer is not a silent one: it takes '
+      + '`traceMask` — a pure raster-boundary chainer that touches no district and no organism, '
+      + 'and which lives in umbrella.js only because the umbrella was the first thing to need it. '
+      + 'The EDGE SET is unchanged, so this is not a third inversion; a second importer of one '
+      + 'declared backward edge is what it is' },
   { edge: 'S13>S6', importer: 'districtPartition.js', imported: 'wallCircuit.js',
     reason: 'the partition asks the circuit for its rings so a quarter boundary can stop at the '
       + 'curtain; §200 MOVED the circuit AHEAD of the ground law in the assembly, so at run time '
@@ -127,7 +132,17 @@ export const GENERATION_NODES = Object.freeze([
     allowedImports: ['../../foundingKind.js'],
     randomNamespaces: ['*|g'],
     statefulForkSites: 0 },
-  { nodeId: 'S2', modules: ['groundRefusal.js', 'measure.js', 'relief.js', 'substrate.js', 'terraform.js'],
+  // ⚠ ⟦§297.2b · TE-REG-G1⟧ `cliffs.js` JOINS S2 AND NOT `FOUNDATIONS`, WHICH IS THE WHOLE SHAPE
+  //   OF THE DISCHARGE. `fabricDcel.js` held `CLIFF_EDGE` empty because *"inventing one from a
+  //   raster threshold would be a new derivation wearing a foundation's name"* — so the derivation
+  //   lives HERE, beside the substrate field it reads and the refusal law it consumes, and the
+  //   foundation reads the published line the way it already reads `fabric.water.line`.
+  //   ⚠ IT MINTS NO RANDOM NAMESPACE. The escarpment is de-staircased by corner-cutting alone
+  //   (no seeded displacement — see `cliffs.js`'s no-wobble ruling), so this row's
+  //   `randomNamespaces` and `statefulForkSites` are unchanged and honestly so.
+  //   ⚠ ITS `umbrella.js` IMPORT RIDES THE **ALREADY-DECLARED** `S6>S2` INVERSION — the same
+  //   backward edge `relief.js` carries, not a third one. See PUBLIC_ORDER_INVERSIONS.
+  { nodeId: 'S2', modules: ['cliffs.js', 'groundRefusal.js', 'measure.js', 'relief.js', 'substrate.js', 'terraform.js'],
     allowedImports: ['fabricGeometry.js', 'fabricRng.js', 'trigTable.js', 'umbrella.js'],
     randomNamespaces: ['*|*', '*|ang', '*|a|*', '*|ca|*|*', '*|cr|*|*', '*|hr|*|*', '*|i0', '*|jx|*|*', '*|jy|*|*', '*|m*', '*|ph1', '*|ph2', '*|pri|*|*', '*|ramp|edge', '*|resource|*|site', '*|r|*', '*|valley|across', '*|valley|bearing'],
     statefulForkSites: 0 },
@@ -163,8 +178,11 @@ export const GENERATION_NODES = Object.freeze([
   //   service's re-aimed search takes its eight bearings from the fabric's ONE home for an angle;
   //   the purity law forbids runtime trig outright, so a neighbourhood search cannot be spelled
   //   any other way. It is a PRIMITIVES edge S11 and S14 already carry — no new node pair.
+  // ⚠ ⟦§297.2b / ODQ §577⟧ `cliffs.js` IS NEW ON THIS NODE. The segmented circuit terminates at
+  //   the escarpment, so the trace consumes the boundary and its crossing read. It is an `S2>S13`
+  //   edge the node pair already carries (`substrate.js`, `groundRefusal.js`) — no new node pair.
   { nodeId: 'S13', modules: ['wallCircuit.js', 'wallRuns.js', 'walls.js'],
-    allowedImports: ['builtUmbrella.js', 'epochAxis.js', 'fabricGeometry.js', 'fabricRng.js', 'groundRefusal.js', 'reservedGround.js', 'snapshot.js', 'substrate.js', 'trigTable.js'],
+    allowedImports: ['builtUmbrella.js', 'cliffs.js', 'epochAxis.js', 'fabricGeometry.js', 'fabricRng.js', 'groundRefusal.js', 'reservedGround.js', 'snapshot.js', 'substrate.js', 'trigTable.js'],
     randomNamespaces: ['wall.epoch.*', 'wall.epoch.*.*'],
     statefulForkSites: 2 },
   { nodeId: 'S14', modules: ['circuitDemotion.js'],
@@ -208,7 +226,7 @@ export const GENERATION_NODES = Object.freeze([
     randomNamespaces: [],
     statefulForkSites: 0 },
   { nodeId: 'ASSEMBLY', modules: ['buildFabric.js', 'publication.js'],
-    allowedImports: ['builtUmbrella.js', 'circuitDemotion.js', 'commons.js', 'compile.js', 'compoundGround.js', 'districtPartition.js', 'fabricGeometry.js', 'fabricRng.js', 'fields.js', 'groundLaw.js', 'groundRefusal.js', 'habitation.js', 'immersion.js', 'institutionShapes.js', 'institutions.js', 'lateGround.js', 'leafCensus.js', 'lineage.js', 'measure.js', 'morphology.js', 'organismFields.js', 'organisms.js', 'parcels.js', 'relief.js', 'reservedGround.js', 'routes.js', 'seating.js', 'snapshot.js', 'stateMarks.js', 'streetEdges.js', 'streets.js', 'substrate.js', 'suitability.js', 'terraform.js', 'tierGrammar.js', 'umbrella.js', 'wallCircuit.js', 'wallRuns.js', 'waterMode.js', 'waterWorks.js'],
+    allowedImports: ['builtUmbrella.js', 'circuitDemotion.js', 'cliffs.js', 'commons.js', 'compile.js', 'compoundGround.js', 'districtPartition.js', 'fabricGeometry.js', 'fabricRng.js', 'fields.js', 'groundLaw.js', 'groundRefusal.js', 'habitation.js', 'immersion.js', 'institutionShapes.js', 'institutions.js', 'lateGround.js', 'leafCensus.js', 'lineage.js', 'measure.js', 'morphology.js', 'organismFields.js', 'organisms.js', 'parcels.js', 'relief.js', 'reservedGround.js', 'routes.js', 'seating.js', 'snapshot.js', 'stateMarks.js', 'streetEdges.js', 'streets.js', 'substrate.js', 'suitability.js', 'terraform.js', 'tierGrammar.js', 'umbrella.js', 'wallCircuit.js', 'wallRuns.js', 'waterMode.js', 'waterWorks.js'],
     randomNamespaces: [],
     statefulForkSites: 0 },
 ].map(Object.freeze));

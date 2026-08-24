@@ -43,6 +43,7 @@ import { sampleAt } from './substrate.js';
 import { boundEpoch, densify } from './epochAxis.js';
 import { cosI, sinI, TRIG_N } from './trigTable.js';
 import { deriveRuns, runBand, laneLineFor } from './wallRuns.js';
+import { segmentCrossings, onImpassable } from './cliffs.js';
 
 /**
  * WALL FORMS. `facets` is how many straight runs the circuit is built in — a stone
@@ -244,6 +245,9 @@ export function traceWalls(args) {
     hasWalls, settlement, umbrella, tierScale: scale, sub, water, web, seeding,
   } = args;
   if (!hasWalls || !umbrella.components.length) return [];
+  // ⭐ ODQ §577 · THE ESCARPMENT, OR `null` WHEN THE FEATURE IS NOT ARMED. Every §577 branch
+  // below is guarded on it, so an unarmed build runs the byte-identical legacy trace.
+  const cliffs = args.cliffs && args.cliffs.edges && args.cliffs.edges.length ? args.cliffs : null;
 
   const { form, source } = wallForm(settlement, scale.extentTier);
   const spec = WALL_FORMS[form] || WALL_FORMS.palisade;
@@ -373,10 +377,47 @@ export function traceWalls(args) {
     //    fourth wall — nobody paid to wall the side the river already defended.
     const halfRing = water.mode === 'bankside' && water.line != null;
     /** @type {Array<[number,number]>} */
-    const traced = halfRing
+    const watered = halfRing
       ? ring.filter(([x, y]) => distToPolyline(x, y, water.line) > water.width * 1.1)
       : ring;
-    if (traced.length < 3) continue;
+    if (watered.length < 3) continue;
+
+    // ── ⭐⭐⭐ 3b · ODQ §577 · **THE SEGMENTED CIRCUIT: THE WALL TERMINATES AT THE CLIFF, AND AN
+    //    END-WORK STANDS AT EACH TERMINUS.**
+    //
+    // ⭐ IT IS RULE 3 AGAIN, ON THE OTHER IMPASSABLE FACT. "Nobody paid to wall the side the
+    // river already defended" is §161m.3; §205.3 says the same of relief in its own words —
+    // *"a cliff flank needs NO wall — drawing one is the violation"* — and `wallRuns` has
+    // carried the `terrain-surrender` policy for it since CX-13 (no towers, a parapet, no ditch,
+    // no lane). What was missing was the TERMINATION: the run policy could thin a curtain that
+    // crossed a scarp, but nothing could stop the curtain and start it again beyond, because
+    // nothing in the fabric published where the scarp's EDGE was. `cliffs.js` publishes it.
+    //
+    // ⭐⭐ THE TERMINUS COMES FROM THE ESCARPMENT'S OWN GEOMETRY, NOT FROM THE DROPPED VERTEX.
+    // That distinction is the whole difference between consuming a boundary and consuming a
+    // flag: the wall stops exactly where its line MEETS the brink, so moving the relief field
+    // moves the terminus — which is the differential a value-ignoring read cannot produce.
+    // ⚠ THE FALLBACK IS COUNTED RATHER THAN HIDDEN. Corner-cutting can pull a traced edge just
+    // inside the cell it bounds, so a boundary segment can fail to cross it; the midpoint stands
+    // in, and `cliffFallbacks` reports how often — a terminus set that was ALL fallbacks would
+    // be a read that never touched the edge geometry, and the figure is what makes that visible.
+    // ⚠ THE REFUSAL IS SEPARATED FROM THE CUT AND CARRIED, not folded into a null. A circuit
+    // that hit the §577 floor took the LEGACY path byte for byte — which is what we want — but a
+    // reader who saw only "no cut" could not tell that from "no cliff", and those are different
+    // facts about a town. The refusal rides the reason string.
+    //
+    // ⛔⛔ **AND THE CUT RUNS AFTER THE NESTING, WHICH IS A CORRECTION MEASUREMENT FORCED.** My
+    // first spelling cut the ring and THEN handed it to `nestAround` — and `nestAround` MOVES
+    // vertices (its arm 1 pushes a facet outward past a superseded ring's poking vertex), so a
+    // wall the cut had lifted off a scarp could be pushed straight back onto one. MEASURED over
+    // 35 leaves: **12 drawn segments still over impassable relief**, with 4 of the 10 cliff
+    // leaves clean and 6 carrying 1–5 — the multi-epoch ones. ⭐ THE CLASS IS ALREADY WRITTEN IN
+    // THIS FILE, forty lines up, about `boundEpoch`: *"the closure runs LAST because every step
+    // above it can lose ground"*. **A GEOMETRIC GUARANTEE HOLDS ONLY IF NOTHING MOVES THE
+    // GEOMETRY AFTER IT.**
+    // ⚠ The nesting is UNTOUCHED and still receives a CLOSED ring: §301.5's law is about two
+    //   polygons, and handing it a segmented one would be asking it a question it cannot answer.
+    if (watered.length < 3) continue;
     // ── ⭐⭐⭐ §301.5 · **THE RING-NESTING LAW.** A superseded circuit lies strictly inside its
     //    successor. The list is OUTERMOST FIRST, so the ring already pushed is this one's
     //    successor — the only pair the law is about. See `fabricGeometry.nestInside` for the
@@ -388,7 +429,13 @@ export function traceWalls(args) {
     // The ring traced immediately before this one is the epoch this one SUPERSEDES — the only
     // pair the nesting law is about. It does not move; this one goes round it.
     const superseded = circuits.length ? circuits[circuits.length - 1].polygon : null;
-    const nested = superseded ? nestAround(traced, superseded) : traced;
+    /** The circuit as it would stand if the cliff were not the fourth wall — closed, nested,
+     *  and the subject of both the §577 cut below and the containment exemption further down. */
+    const nestedFull = superseded ? nestAround(watered, superseded) : watered;
+    const cliffRead = cliffs ? terminateAtCliffs(nestedFull, cliffs) : null;
+    const cliffCut = cliffRead && !cliffRead.refused ? cliffRead : null;
+    const nested = cliffCut ? cliffCut.ring : nestedFull;
+    if (nested.length < 3) continue;
 
     // ⭐⭐⭐ THE CIRCUIT REPORTS ITS OWN CONTAINMENT RESIDUAL, measured HERE because this is the
     // only scope that holds both the epoch's hull and the half-ring predicate. A point of the
@@ -404,6 +451,13 @@ export function traceWalls(args) {
     for (const p of dense) {
       if (pointInRing(nested, p[0], p[1])) continue;
       if (halfRing && pointInRing(ring, p[0], p[1])) continue;
+      // ⭐⭐ §577: A POINT THE CLIFF TERMINATION DROPPED IS **DEFENDED**, NOT ABANDONED — the
+      // scarp is the wall there, exactly as the river is at a half-ring. ⚠ AND THE EXEMPTION IS
+      // THE FILTER'S OWN ACT, NEVER A DISTANCE, for the reason stated eight lines above about
+      // the water: **AN EXEMPTION EXPRESSED AS A TOLERANCE IS A SECOND SPELLING OF THE RULE IT
+      // EXCUSES.** The honest test is the rule itself — the un-terminated circuit contained this
+      // point and only the cliff cut dropped it.
+      if (cliffCut && pointInRing(nestedFull, p[0], p[1])) continue;
       residual++;
     }
 
@@ -436,6 +490,11 @@ export function traceWalls(args) {
       // circuit is traced, which is what keeps the chain acyclic and the seam intact.
       priorRing: li + 1 < list.length ? list[li + 1].body : null,
       halfRing,
+      // ⭐⭐ §577 · WHICH VERTICES ARE CLIFF TERMINI. They index `nested`, and the indices survive
+      // `nestAround` because it MOVES vertices in place and never adds or removes one (see its
+      // `next = cur.slice()`). A run classifier that could not see them would type the parapet at
+      // the brink as `new-cutting` and tower it — the §205.3 violation the whole rule forbids.
+      cliffTerminalIdx: cliffCut ? cliffCut.terminalIdx : null,
       form,
       spec,
       seeding,
@@ -468,6 +527,26 @@ export function traceWalls(args) {
         towers.push(/** @type {[number,number]} */ ([t.x, t.y]));
         towerTypes.push(t.kind);
       }
+    }
+    // ── ⭐⭐⭐ 5b · §577 · THE END-WORK AT EACH TERMINUS. "Tower/gate works at each terminus" is
+    //    the rule's second half and it is not decoration: a curtain that simply STOPS presents an
+    //    open end to anyone who can reach the brink, so every real segmented circuit closed its
+    //    ends with a work. The kind is `angle` — `wallRuns.TOWER_TYPES`' own member for a tower
+    //    that is a fact about a JUNCTION rather than a spacing — because a terminus is exactly
+    //    that: the junction of masonry and ground.
+    // ⚠ IT RE-USES THE EXISTING TOWER VOCABULARY RATHER THAN MINTING A TENTH KIND, which
+    //    `wallRuns`' totality walker would red for, and rightly: a new tower type is a ruling.
+    // ⚠ AND IT OBEYS THE GATE RULE ABOVE — a terminus that lands on a gate takes no second work.
+    const terminalWorks = [];
+    for (const t of (cliffCut ? cliffCut.termini : [])) {
+      let atGate = false;
+      for (const g of gates) {
+        if (Math.sqrt((t.x - g.x) * (t.x - g.x) + (t.y - g.y) * (t.y - g.y)) < gateR) { atGate = true; break; }
+      }
+      if (atGate) continue;
+      towers.push(/** @type {[number,number]} */ ([t.x, t.y]));
+      towerTypes.push('angle');
+      terminalWorks.push({ ...t, key: `cliffEnd.E${e.index}.${t.key}`, work: 'angle' });
     }
 
     // ── 6 THE DITCH, where the ground allows and the tier affords it.
@@ -508,13 +587,51 @@ export function traceWalls(args) {
       // 8 to 77 units from the centreline, and a DISTANCE exemption would have had to be tuned
       // to fit them. ⭐ THE CLASS again: **AN EXEMPTION EXPRESSED AS A TOLERANCE IS A SECOND
       // SPELLING OF THE RULE IT EXCUSES** — so the census gets the rule itself.
-      closedPolygon: halfRing ? ring : nested,
+      // ⭐⭐ AND THE SAME PUBLICATION FOR THE CLIFF, FOR THE SAME REASON: a census must be able
+      // to tell "the wall never reached here" from "the scarp defends here", and a distance
+      // exemption would have to be tuned to fit. `closedPolygon` is the circuit as it would
+      // stand if neither the river NOR the cliff were the fourth wall.
+      closedPolygon: halfRing ? ring : (cliffCut ? nestedFull : nested),
+      // ⭐⭐⭐ §577 · THE TERMINI AND THEIR END-WORKS, PUBLISHED ON THE RING. A consumer asking
+      // "where does this circuit stop, and why" gets the point, the escarpment edge it stopped
+      // at, and whether the point came from the edge's own geometry or from the counted fallback.
+      //
+      // ⛔⛔ THEY ARE SPREAD CONDITIONALLY, AND THE FIRST SPELLING WAS A **MEASURED** DORMANCY
+      // LEAK. Written as four unconditional keys (`cliffTermini: cliffCut ? x : []`, and three
+      // zeros beside it), every circuit in the estate gained four properties whether or not the
+      // feature was armed — and the flag-off fabric digest MOVED on all six proof fixtures
+      // against the sealed base, including `plains`, which has no crag cell anywhere. The wall's
+      // own `contentHash` stayed identical, which is exactly why it was nearly invisible:
+      // `ringsText` does not serialize these fields, so the node's staleness detector was blind
+      // to a change every consumer of the fabric object could see.
+      // ⭐ THE CLASS, and it is worth the paragraph because a default value LOOKS like dormancy:
+      // **AN ABSENT FEATURE THAT STILL PUBLISHES ITS ZERO IS NOT DORMANT.** `[]` and `0` are
+      // values, and a published value is a byte. The dormant circuit carries no cliff key at all.
+      ...(cliffCut ? {
+        cliffTermini: terminalWorks,
+        // ⭐⭐⭐ §577's OWN INK CONTRACT: the polygon EDGES that are NOT wall. The ring stays
+        // CLOSED because everything downstream of it — `pointInRing`, the §200 band, §232's
+        // district partition, the nesting law — is written for a closed ring, and opening it
+        // would be a far larger change than the rule asks for. What §577 actually rules is that
+        // the CURTAIN stops: so the chord across the scarp is published as not-wall and
+        // `wallCircuit.circuitDrawnRuns` breaks the drawn line there, exactly as it already
+        // breaks it at an open gate. ⚠ Indices into `polygon`; edge i is polygon[i]→polygon[i+1].
+        cliffChordEdges: cliffCut.chordEdges,
+        cliffSegments: cliffCut.segments,
+        cliffDropped: cliffCut.dropped,
+        cliffFallbacks: cliffCut.fallbacks,
+      } : {}),
       reason: `${form} circuit (${source}); EPOCH ${e.index} of ${list.length}, traced against`
         + ` its own fabric at ${(e.extent * 100).toFixed(0)}% of today's extent; margin`
         + ` ${margin.toFixed(1)} units on the ${scale.extentTier} high-water extent`
         + `${e.extent < 0.995 ? '; VINTAGE — the fabric beyond this ring was built AFTER it (§15.7)' : '; vintage unknown or contemporary — traced on today\'s fabric, UNDERSTATED rather than invented'}`
         + `; BOUNDED — ${bound.pushed} facet(s) held out (worst ${bound.worst.toFixed(2)}u), ${residual} epoch point(s) left outside (§240.1)`
         + `${halfRing ? '; HALF-RING — the river is the fourth wall' : ''}`
+        + `${cliffCut ? `; SEGMENTED (§577) — ${cliffCut.segments} cliff crossing(s) terminated the`
+          + ` curtain, ${cliffCut.dropped} vertex/vertices stood on impassable relief and were`
+          + ` surrendered to it, ${terminalWorks.length} end-work(s) raised`
+          + `${cliffCut.fallbacks ? `; ${cliffCut.fallbacks} terminus/termini fell back to the segment midpoint (no traced edge crossed)` : ''}` : ''}`
+        + `${cliffRead && cliffRead.refused ? `; §577 ${cliffRead.refused}` : ''}`
         + `${gates.filter((g) => g.bricked).length ? `; ${gates.filter((g) => g.bricked).length} gate(s) bricked under the demotion grammar` : ''}`,
     });
   }
@@ -566,6 +683,209 @@ export function traceWalls(args) {
   //   `rings[0]` is the working circuit, and every consumer in the tree reads it that way.
   circuits.reverse();
   return circuits;
+}
+
+/**
+ * ⭐⭐⭐ ODQ §577 · **TERMINATE A CIRCUIT AT ITS CLIFF CROSSINGS.** Rule 3's mechanism, applied to
+ * the other impassable fact.
+ *
+ * THE THREE ACTS, and each is the water flank's own act one law over:
+ *  1. DROP the vertices standing on impassable relief. `cliffs.onImpassable` is the predicate,
+ *     and it is the SAME cell set the escarpment edges were traced from — so a vertex is never
+ *     dropped for a cliff that has no boundary to terminate on.
+ *  2. TERMINATE at the crossing. Where the wall's own line meets the escarpment, that point is
+ *     the end of the curtain. It comes from `cliffCrossing` — the edge's geometry — so the
+ *     terminus MOVES when the relief moves.
+ *  3. RESUME beyond. The walk continues on the far side, which is what makes this a SEGMENTED
+ *     circuit rather than a shortened one.
+ *
+ * ⛔⛔ AND IT REFUSES RATHER THAN EMPTIES. A circuit whose vertices are almost all on impassable
+ * ground is a TRACE DEFECT, not a segmented wall: dropping them would leave two or three points
+ * and every downstream reader (`pointInRing`, the band, the run chain) would be operating on a
+ * sliver. ⭐ THE CLASS this estate has paid for repeatedly: **A FILTER WITH NO FLOOR PRODUCES AN
+ * ARTIFACT NO CONSUMER DECLARED** — the bricked-gate roll is the same shape (`cutGates`' own
+ * note). So the floor is explicit and the refusal is reported, never silent.
+ *
+ * ⚠ THE RING IS CLOSED, so a run of impassable vertices can straddle index 0. The walk therefore
+ * ROTATES to a passable vertex first — the same reason `wallRuns.deriveRuns` starts its coalesce
+ * at the first type CHANGE. Without it the run containing index 0 is cut in two and the circuit
+ * reports a terminus pair it does not have.
+ *
+ * @param {Array<[number,number]>} ring the circuit as the water flank left it
+ * @param {{edges:Array<any>, mask:Uint8Array, n:number, cell:number}} cliffs
+ * @returns {{ ring:Array<[number,number]>, termini:Array<any>, terminalIdx:number[],
+ *   segments:number, dropped:number, fallbacks:number, refused:string|null }|null}
+ */
+export function terminateAtCliffs(ring, cliffs) {
+  const n = ring.length;
+  if (!cliffs || n < 4) return null;
+
+  // ── 1 · THE AUGMENTED PATH: every ring vertex, PLUS every escarpment crossing on every facet.
+  //
+  // ⛔⛔ A VERTEX-ONLY TEST WAS THE **CENTRE-TEST DEFECT ONE SURFACE OUT**, and it was measured
+  // before it was cured. Testing only `onImpassable(vertex)` cut a 20-facet circuit against a
+  // 96² raster whose escarpment is a LACE of 18–37 regions: MEASURED over 35 leaves, the
+  // terminated circuits still put **209 drawn segments across impassable relief** (down from 257
+  // — an 18% cure that reads like a working one). ⭐ `groundRefusal.bodyRefusal`'s header states
+  // the general form for the OTHER consumer of this same law: *"a thin body crossing a refused
+  // cell without putting a vertex or a cell centre in it is still caught"* — step 3, the one a
+  // naive rasterizer omits. A facet crossing a scarp between its ends is exactly that body.
+  // **THE CLASS: A PREDICATE SAMPLED AT VERTICES MEASURES THE VERTICES, NOT THE LINE.**
+  //
+  // ⚠ The crossings enter as PATH NODES rather than as a flag, because a crossing is where the
+  // curtain may lawfully stop: the terminus is a point on the drawn escarpment, not near one.
+  /** @type {Array<{p:[number,number], edge:any, vertex:boolean}>} */ const path = [];
+  for (let i = 0; i < n; i++) {
+    const a = ring[i], b = ring[(i + 1) % n];
+    path.push({ p: a, edge: null, vertex: true });
+    for (const x of segmentCrossings(cliffs, a[0], a[1], b[0], b[1])) {
+      path.push({ p: x.point, edge: x.edge, vertex: false });
+    }
+  }
+  const m = path.length;
+  if (m < 4) return null;
+
+  // ── 2 · THE FINE WALK — CLASSIFY AT THE SUBSTRATE'S OWN CELL PITCH, NOT AT THE NODES.
+  //
+  // ⛔⛔ AND THE MIDPOINT-PER-NODE-SEGMENT TEST WAS **STILL** WRONG, BY A MEASURED SIX. With
+  // crossings inserted and midpoints classified, 35 leaves came back with 257 → 6 over-cliff
+  // drawn segments and 4 fallback termini — a 97.7% cure that stubbornly would not close.
+  // ⭐ THE CAUSE IS A DISAGREEMENT BETWEEN TWO HALVES OF ONE ARTIFACT, and naming it is the
+  // finding: `cliffs.edges` is CORNER-CUT (`CLIFF.smooth`), which pulls the drawn line up to half
+  // a cell INSIDE the cells it bounds, while `cliffs.mask` is those cells exactly. So a facet can
+  // clip a masked corner **without crossing the smoothed polyline at all** — no crossing node is
+  // inserted, the node-segment midpoint reads passable, and the piece is drawn over the scarp.
+  // ⭐⭐ THE CURE IS THE SAME WALK `bodyRefusal` ALREADY PRESCRIBES: step the line at the CELL
+  // PITCH and let any impassable sample condemn its piece. The fine walk is used for
+  // CLASSIFICATION ONLY — the emitted ring keeps the circuit's own vertices plus two boundary
+  // points per segment — so the wall's facet count, its run chain and its tower spacing are
+  // untouched by the resolution of the test. **A TEST'S RESOLUTION AND AN ARTIFACT'S RESOLUTION
+  // ARE DIFFERENT QUESTIONS**, and conflating them is how a correct test becomes a 300-vertex wall.
+  const PITCH = cliffs.cell * 0.5;
+  /** @type {Array<{p:[number,number], at:number}>} */ const fine = [];
+  for (let i = 0; i < m; i++) {
+    const a = path[i].p, b = path[(i + 1) % m].p;
+    fine.push({ p: a, at: i });
+    const dx = b[0] - a[0], dy = b[1] - a[1];
+    const len = Math.sqrt(dx * dx + dy * dy);
+    const steps = Math.max(1, Math.ceil(len / PITCH));
+    for (let k = 1; k < steps; k++) {
+      const t = k / steps;
+      fine.push({ p: /** @type {[number,number]} */ ([a[0] + dx * t, a[1] + dy * t]), at: -1 });
+    }
+  }
+  const F = fine.length;
+  /** @type {boolean[]} */ const bad = new Array(F);
+  let cut = 0;
+  for (let i = 0; i < F; i++) {
+    const a = fine[i].p, b = fine[(i + 1) % F].p;
+    bad[i] = onImpassable(cliffs, (a[0] + b[0]) / 2, (a[1] + b[1]) / 2);
+    if (bad[i]) cut++;
+  }
+  // ⭐ NOTHING TO DO IS THE COMMON CASE AND IT RETURNS `null`, NOT AN EMPTY RESULT — so a walled
+  // leaf whose circuit never meets a scarp takes the byte-identical legacy path even with the
+  // feature armed. The dormancy is therefore two-layered: unarmed, and armed-but-untouched.
+  if (cut === 0) return null;
+  // THE FLOOR. A circuit almost entirely on impassable ground is a TRACE DEFECT, not a segmented
+  // wall; cutting it would leave a sliver every downstream reader is unprepared for. ⭐ THE CLASS
+  // this estate has paid for repeatedly (`cutGates`' bricked-gate roll is the same shape):
+  // **A FILTER WITH NO FLOOR PRODUCES AN ARTIFACT NO CONSUMER DECLARED.** Reported, never silent.
+  if (F - cut < 8) {
+    return {
+      ring, termini: [], terminalIdx: [], chordEdges: [], segments: 0, dropped: 0, fallbacks: 0,
+      refused: `REFUSED — ${cut} of ${F} sampled circuit pieces stand on impassable relief; a wall`
+        + ' almost entirely on a scarp is a trace defect, not a segmented circuit, so the'
+        + ' termination is NOT applied and the fact is recorded (§577 floor)',
+    };
+  }
+
+  // ⚠ ROTATE TO A CHAIN START — a passable piece whose PREDECESSOR is impassable. Starting at
+  // merely "the first passable one" splits the chain straddling index 0 in two, and the circuit
+  // then reports a terminus pair the ground never put there (`wallRuns.deriveRuns` coalesces from
+  // the first type CHANGE for the identical reason).
+  let z = -1;
+  for (let i = 0; i < F; i++) if (!bad[i] && bad[(i - 1 + F) % F]) { z = i; break; }
+  if (z < 0) return null;
+
+  /** @type {Array<[number,number]>} */ const out = [];
+  /** @type {Array<any>} */ const termini = [];
+  /** @type {number[]} */ const terminalIdx = [];
+  /** @type {number[]} */ const chordEdges = [];
+  let segments = 0, fallbacks = 0, kept = 0;
+
+  /** One terminus record. `at` is where the curtain stops or resumes; `toward` gives its facing —
+   *  the direction the masonry runs from it, which is what an end-work is oriented by. */
+  const terminus = (node, at, toward) => {
+    const dx0 = toward[0] - at[0], dy0 = toward[1] - at[1];
+    const l = Math.sqrt(dx0 * dx0 + dy0 * dy0) || 1;
+    const edge = node && node.edge ? node.edge : null;
+    if (!edge) fallbacks++;
+    return {
+      x: at[0], y: at[1], dx: dx0 / l, dy: dy0 / l,
+      // ⚠ THE KEY IS THE ESCARPMENT EDGE PLUS THE TERMINUS' OWN POSITION, never an ordinal —
+      // SW-1d again. Two termini on one edge are two facts and must not share a key.
+      key: `${edge ? edge.key : 'cliff.mask'}@${Math.round(at[0])},${Math.round(at[1])}`,
+      edge: edge ? edge.key : 'cliff.mask',
+      kind: edge ? edge.kind : 'brink',
+      // ⚠ A FALLBACK TERMINUS IS ONE THE DRAWN EDGE DID NOT PLACE — the MASK's own boundary, at
+      // the fine walk's resolution, because the smoothed line and the cells it bounds differ by
+      // up to half a cell (see the note above). Counted, never hidden: a terminus set that was
+      // ALL fallbacks would be a consumer that never read the drawn geometry at all.
+      fallback: !edge,
+    };
+  };
+  const nodeAt = (fi) => (fine[fi].at >= 0 ? path[fine[fi].at] : null);
+
+  // ── 3 · WALK THE CHAINS OF PASSABLE GROUND. A chain covering fine pieces s…e is emitted as its
+  //    START boundary, the circuit's OWN vertices strictly inside it, and its END boundary.
+  let q = 0;
+  while (q < F) {
+    if (bad[(z + q) % F]) { q++; continue; }
+    const s = q;
+    let e = q;
+    while (e + 1 < F && !bad[(z + e + 1) % F]) e++;
+    const si = (z + s) % F, ei = (z + e + 1) % F;
+    const p0 = fine[si].p, p1 = fine[ei].p;
+    const inner = [];
+    for (let t = s + 1; t <= e; t++) {
+      const fi = (z + t) % F;
+      if (fine[fi].at >= 0) { inner.push(fine[fi].p); kept++; }
+    }
+    // ⚠ A CHAIN WITH NO ROOM IS NOT A RUN OF WALL. Two boundary points a hair apart would add a
+    // degenerate facet and a pair of end-works to a piece of ground no masonry stands on.
+    const span = Math.sqrt((p1[0] - p0[0]) * (p1[0] - p0[0]) + (p1[1] - p0[1]) * (p1[1] - p0[1]));
+    if (!inner.length && span < PITCH) { q = e + 1; continue; }
+    terminalIdx.push(out.length);
+    termini.push(terminus(nodeAt(si), p0, inner.length ? inner[0] : p1));
+    out.push(p0);
+    for (const p of inner) out.push(p);
+    terminalIdx.push(out.length);
+    termini.push(terminus(nodeAt(ei), p1, out[out.length - 1]));
+    out.push(p1);
+    // THE CHORD: the edge leaving this chain's last point spans ground the wall surrendered.
+    chordEdges.push(out.length - 1);
+    segments++;
+    q = e + 1;
+  }
+  if (out.length < 4) {
+    return {
+      ring, termini: [], terminalIdx: [], chordEdges: [], segments: 0, dropped: 0, fallbacks: 0,
+      refused: `REFUSED — the cut left only ${out.length} point(s); see the §577 floor`,
+    };
+  }
+
+  return {
+    ring: out,
+    termini,
+    terminalIdx,
+    chordEdges,
+    segments,
+    // ⚠ `dropped` COUNTS THE CIRCUIT'S OWN VERTICES, not the fine samples — the fine walk is a
+    // test resolution and reporting it as a wall figure would inflate every receipt tenfold.
+    dropped: n - kept,
+    fallbacks,
+    refused: null,
+  };
 }
 
 /**

@@ -137,6 +137,9 @@ export const THREAT_SPARSE = 0.62;    // and a sparse run this share
 export function runFacts(a) {
   const { ring, hull, sub, water, seats, margin, roads, priorRing } = a;
   const n = ring.length;
+  // ⭐ §577 · WHICH VERTICES ARE CLIFF TERMINI. A Set, because the classifier asks per vertex and
+  // a linear scan over the index list would make the read quadratic on a metropolis ring.
+  const termini = new Set(a.cliffTerminalIdx || []);
   /** @type {Array<Object>} */ const out = [];
   for (let i = 0; i < n; i++) {
     const p = ring[i];
@@ -154,6 +157,12 @@ export function runFacts(a) {
       turn: Math.abs((ux * vy - uy * vx) / (lu * lv)),
       grade: sub ? absoluteGrade(sub, p[0], p[1]) : 0,
       refused: sub ? !!refusalAt(sub, p[0], p[1]) : false,
+      // ⭐⭐ §577 · THIS VERTEX IS WHERE THE CURTAIN STOPS AT A SCARP. It is a fact about the
+      // CIRCUIT (the cliff cut put it here), not about the ground under it — which is why it is a
+      // column of its own rather than another slope reading: the terminus sits on PASSABLE ground
+      // by construction (the impassable vertices were dropped), so `refused` is false there and
+      // the classifier would otherwise type the parapet at the brink as open-ground new cutting.
+      terminus: termini.has(i),
       waterD: water && water.line ? distToPolyline(p[0], p[1], water.line) : Infinity,
       hullD: hull && hull.length ? distToRing(hull, p[0], p[1]) : Infinity,
       seatD: nearestSeatD(seats, p[0], p[1], 'monumental'),
@@ -194,7 +203,10 @@ export function deriveRuns(a) {
     seeding, epoch, threat, frontage, laneWidth,
   } = a;
   if (!ring || ring.length < 3) return { runs: [], reason: 'no ring to segment', counts: {} };
-  const facts = runFacts({ ring, hull, sub, water, seats, margin, roads, priorRing });
+  const facts = runFacts({
+    ring, hull, sub, water, seats, margin, roads, priorRing,
+    cliffTerminalIdx: a.cliffTerminalIdx || null,
+  });
   const n = facts.length;
 
   // ── THE PER-LEAF CUTS. Every one is a QUANTILE OF THIS RING'S OWN READING, never an
@@ -245,7 +257,15 @@ export function deriveRuns(a) {
     // 2 · TERRAIN SURRENDER. The ground the FABRIC refuses is the ground that defends itself —
     //     one predicate, shared with §5 W1 exit 2's mask, so the wall and the houses cannot
     //     disagree about where the crag is.
-    if (f.refused) { type[k] = 'terrain-surrender'; continue; }
+    //     ⭐⭐ AND §577's TERMINUS JOINS THE SAME CLAUSE RATHER THAN MINTING A TENTH TYPE. The
+    //     closed set of nine is a ruling (`RUN_TYPES`, walked by `tests/lint/wallRuns.walker`),
+    //     and `terrain-surrender` already SAYS what a terminus is: *"the ground defends itself —
+    //     a scarp … the wall thins to a parapet and carries NO towers (§205.3)"*. A wall that
+    //     stops at a brink is the maximal case of exactly that, not a new kind of wall.
+    //     ⚠ THE END-WORK IS NOT A CONTRADICTION OF `towers: 'none'`. This policy governs the
+    //     towers a RUN spaces along itself; §577's end-work is a fact about the JUNCTION and is
+    //     raised by `traceWalls` at the terminus point, which is why the two do not collide.
+    if (f.refused || f.terminus) { type[k] = 'terrain-surrender'; continue; }
     // 3 · NOTCH — a monumental precinct within one working margin of the line, WITH the trace
     //     bending for it. A seat that is merely near is not a notch; a seat the wall turns
     //     around is.

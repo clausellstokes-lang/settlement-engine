@@ -155,7 +155,27 @@ export function circuitInputsFrom(a) {
     highWater: a.tierScale.highWater
       ? { demoted: !!a.tierScale.highWater.demoted, deficit: a.tierScale.highWater.deficit }
       : null,
-    substrateKey: a.sub.key || `${a.sub.n}x${a.sub.cell}`,
+    // ⭐⭐⭐ ODQ §577 · **THE ESCARPMENT JOINS THE SUBSTRATE'S OWN KEY RATHER THAN TAKING A ROW
+    // OF ITS OWN, AND THE REASON IS `inputsText`'S MECHANISM RATHER THAN TIDINESS.**
+    //
+    // ⛔ `inputsText` walks `WALL_CIRCUIT_INPUTS` — the frozen LIST — and writes `k=∅` for a key
+    // whose value is null. So adding `'cliffs'` to the list would append `cliffs=∅` to the input
+    // text of **every leaf in the estate**, moving every circuit's `inputsHash` on a wave whose
+    // feature is DORMANT. A dormant feature that moves a hash is not dormant, and "byte-frozen
+    // with the flag off" would become a claim about geometry only.
+    //
+    // ⭐ AND THE FOLD IS THE HONEST HOME, NOT A HIDING PLACE. This key's own docstring
+    // (`substrate.js`) says it is *"over the substrate's own DERIVED SHAPE … what MAKE this
+    // ground this ground"* — and a published escarpment is exactly that: a reading of this
+    // substrate's height field, derived by `cliffs.deriveCliffs` from the ground law's own
+    // `REFUSAL.crag`. It is not a second fact smuggled into the first; it is the same fact at a
+    // higher resolution.
+    // ⚠⚠ IT MUST BE HERE AND NOT NOWHERE. `assertCircuitFresh` verifies a ring set against this
+    // hash, so if arming the feature left the input text unchanged, a consumer could verify an
+    // UNTERMINATED ring set against the inputs of a TERMINATED one and be told it was fresh —
+    // §303.6's "a declared input whose value was a constant" defect, arriving as a stale read.
+    substrateKey: (a.sub.key || `${a.sub.n}x${a.sub.cell}`)
+      + (a.cliffs ? `|${a.cliffs.key}` : ''),
     waterMode: a.water.mode,
     waterLine: a.water.line,
     waterWidth: a.water.width,
@@ -293,6 +313,12 @@ export function deriveWallCircuit(inputs, raw) {
     // ⭐ THE RUN CHAIN'S CAUSES COME FROM THE **DECLARED** INPUT, never from the raw handle —
     // so the seats the classifier read are exactly the seats the node's hash covers.
     institutionSeats: inputs.institutionSeats,
+    // ⭐⭐ ODQ §577 · THE ESCARPMENT. It rides the RAW handle because it is GRID-SCALE geometry
+    // (the same reason `sub` does) and its identity — not its coordinates — is what the declared
+    // `substrateKey` carries. ⚠ The pairing is load-bearing: a cliff set the input hash does not
+    // name would be B8b §11.3's own seam, *"a handle that gains a fact of its own escapes the
+    // hash silently"*, which is why the key is folded above rather than left out.
+    cliffs: raw.cliffs || null,
   });
   const gateRadius = inputs.builtRadius * GATE_RADIUS_SHARE;
   const node = {
@@ -500,11 +526,61 @@ export function circuitDrawnRuns(node) {
   /** @type {Array<{kind:string, weightKind:string, line:Array<[number,number]>, ring:any}>} */
   const out = [];
   for (const ring of node.rings) {
-    for (const line of splitAtGates(ring.polygon, ring.gates, node.gateRadius)) {
-      out.push({ kind: ring.kind, weightKind: ring.kind === 'old-core' ? 'wallOld' : 'wall', line, ring });
+    // ⭐⭐⭐ ODQ §577 · **THE CHORD ACROSS A SCARP IS NOT WALL, SO IT IS NOT DRAWN.**
+    //
+    // ⛔ THE RING MUST STAY CLOSED — `pointInRing`, the §200 band, §232's partition and the
+    // nesting law all read it as a polygon — so a terminated circuit still carries the edge that
+    // spans the ground it surrendered. That edge is EXACTLY the defect `wallRuns`' own header
+    // measured for the water flank: *"the half-ring's water flank was CLOSED WITH A STRAIGHT
+    // CHORD that the lens stroked as wall … a 102.8-unit segment against a median of 18.8"*.
+    // ⭐ SO THE CIRCUIT PUBLISHES WHICH EDGES ARE NOT WALL, AND THE ONE SPLITTER BREAKS THERE —
+    // the same act it already performs at an open gate, for the same reason: the ink stops where
+    // the masonry does. §577's *"terminates at cliffs"* is a statement about the curtain, and
+    // this is where the curtain becomes a line.
+    // ⚠ AN UN-TERMINATED RING TAKES THE CLOSED PATH UNCHANGED, byte for byte.
+    const chords = ring.cliffChordEdges;
+    const chains = chords && chords.length ? openChainsExcluding(ring.polygon, chords) : null;
+    if (!chains) {
+      for (const line of splitAtGates(ring.polygon, ring.gates, node.gateRadius)) {
+        out.push({ kind: ring.kind, weightKind: ring.kind === 'old-core' ? 'wallOld' : 'wall', line, ring });
+      }
+      continue;
+    }
+    for (const chain of chains) {
+      // ⚠ `closed: false` — see splitAtGates' own note on the phantom closing segment an open
+      // run grows when a closed-ring helper is handed one.
+      for (const line of splitAtGates(chain, ring.gates, node.gateRadius, false)) {
+        out.push({ kind: ring.kind, weightKind: ring.kind === 'old-core' ? 'wallOld' : 'wall', line, ring });
+      }
     }
   }
   return out;
+}
+
+/**
+ * ⭐ CUT A CLOSED RING INTO OPEN CHAINS AT THE EDGES A CALLER NAMES. `cutStarts[k] = i` removes
+ * the edge `poly[i] → poly[i+1]`; what survives are the chains between the cuts.
+ * ⚠ THE WALK STARTS AFTER A CUT, so the chain containing vertex 0 is not split in two — the same
+ * rotation rule `wallRuns.deriveRuns` and `walls.terminateAtCliffs` both state for themselves.
+ * @param {Array<[number,number]>} poly @param {number[]} cutStarts
+ * @returns {Array<Array<[number,number]>>}
+ */
+export function openChainsExcluding(poly, cutStarts) {
+  const n = poly.length;
+  const cut = new Set(cutStarts.map((i) => ((i % n) + n) % n));
+  if (!cut.size || cut.size >= n) return [];
+  let z = 0;
+  while (z < n && !cut.has((z - 1 + n) % n)) z++;
+  if (z >= n) z = 0;
+  /** @type {Array<Array<[number,number]>>} */ const chains = [];
+  /** @type {Array<[number,number]>} */ let chain = [];
+  for (let k = 0; k < n; k++) {
+    const i = (z + k) % n;
+    chain.push(poly[i]);
+    if (cut.has(i)) { if (chain.length > 1) chains.push(chain); chain = []; }
+  }
+  if (chain.length > 1) chains.push(chain);
+  return chains;
 }
 
 /**

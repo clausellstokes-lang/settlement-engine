@@ -46,6 +46,7 @@ import { waterClaims, deriveBridges, moorWaterBound, deriveWaterGates, clipField
 import { tenurePattern, seatWorksiteHabitation, seatKeepers, buildFaubourgs, GLACIS_THRESHOLD, faubourgSeriousness } from './habitation.js';
 import { reserveCommons, enclosureRead, inCommons } from './commons.js';
 import { buildRelief, waterStrokes } from './relief.js';
+import { deriveCliffs } from './cliffs.js';
 import { buildFields } from './fields.js';
 import { deriveMeasure } from './measure.js';
 import { buildImmersion } from './immersion.js';
@@ -159,6 +160,23 @@ export function buildFabric(settlement, model, options = {}) {
   const sub = buildSubstrate(s, terrain, seeding, {
     waterKind: model && model.frame && model.frame.water ? model.frame.water.kind : null,
   });
+
+  // ── ⭐⭐⭐ §297.2b / ODQ §577 · THE ESCARPMENT BOUNDARY, ARMED BY THE CALLER.
+  //
+  // `fabricDcel.js` declares `CLIFF_EDGE` and holds it EMPTY because *"the substrate carries
+  // crag CELLS, not an escarpment boundary"*. `cliffs.deriveCliffs` is that boundary, derived
+  // in the DOMAIN from the ground law's own `REFUSAL.crag` — so the foundation consumes a line
+  // the domain published, exactly as it already consumes `water.line`, and derives nothing.
+  //
+  // ⚠⚠ IT IS ARMED, AND THE DORMANCY IS THE POINT. §577's circuit termination changes wall
+  // geometry on every leaf that carries a scarp, and the map programme's cutover is the owner's
+  // single gate. Unarmed, this whole feature is INVISIBLE — no derivation runs, no key is
+  // published, the wall's declared-input text is character-identical and every byte of the
+  // legacy trace stands. Armed, the geometry moves and says so.
+  // ⭐ DERIVED, NEVER STORED (§161 LAYER ZERO, THE PROMISE): a reading of the substrate the
+  // substrate can always re-take. Nothing here is persisted and nothing enters a settlement's
+  // identity.
+  const cliffs = options.cliffTermination === true ? deriveCliffs(sub) : null;
 
   // The watercourse: siteGenesis (through the landed model) decides WHETHER; the
   // substrate decides WHERE (the one-decider rule). A river runs in the drainage the
@@ -559,6 +577,10 @@ export function buildFabric(settlement, model, options = {}) {
     seeding, record, settlement: s, part: inverted.part, orgs: organisms, key: fork('built|wall'),
     bodyMask: inverted.bodyMask, wallCloseR: inverted.wallCloseR,
     glacisClear: faubourgSeriousness(lawfulness, prosperityRank) >= GLACIS_THRESHOLD,
+    // ⭐⭐⭐ ODQ §577 · THE ESCARPMENT THE CIRCUIT TERMINATES AT. `null` when the feature is not
+    // armed, and `circuitInputsFrom` then produces character-identical input text — the dormancy
+    // proof's own mechanism, stated at its source.
+    cliffs,
     // ⭐⭐ §5 W2 · THE RUN CHAIN'S CAUSES. `seated` is compiled to a DECLARED input
     // (`institutionSeatsOf`) rather than read as a handle, so a seat that moved without
     // changing the count moves the circuit's hash — B8b §11.3's named seam, closed.
@@ -1400,6 +1422,12 @@ export function buildFabric(settlement, model, options = {}) {
     // ⚠ It is a REPORT, not a law surface: nothing in the pipeline reads it back.
     waterCensus: closing.water,
     relief: reliefDrawn,
+    // ⭐⭐⭐ §297.2b · THE ESCARPMENT, PUBLISHED THE WAY THE WATER IS PUBLISHED — a domain line
+    // with two sides, a length and two ENDS, which is precisely the artifact `fabricDcel.js`
+    // held `CLIFF_EDGE` empty for. ⚠ ABSENT (not empty) when the feature is unarmed, so a
+    // consumer cannot mistake "not derived" for "derived and found nothing": `cliffs.reason`
+    // is what says "this ground is passable everywhere".
+    ...(cliffs ? { cliffs } : {}),
     terraform,
     fields,
     outlyingLanes: outlying.lanes,

@@ -110,9 +110,33 @@ export const ARRANGEMENT_QUANTUM_LADDER = Object.freeze([1000, 5000, 25000]);
 /** The finest rung — what an arrangement uses when nothing forces it coarser. */
 export const ARRANGEMENT_QUANTUM = ARRANGEMENT_QUANTUM_LADDER[0];
 
-/** The boundary roles §10.15 enumerates. `CLIFF` is declared and EMPTY in this era — the
- *  substrate carries crag CELLS, not an escarpment boundary, and inventing one from a raster
- *  threshold would be a new derivation wearing a foundation's name. */
+/**
+ * The boundary roles §10.15 enumerates.
+ *
+ * ⭐⭐⭐ ⟦§297.2b · TE-REG-G1⟧ **`CLIFF_EDGE` IS NO LONGER EMPTY, AND THE HOLD IS DISCHARGED THE
+ * WAY IT ASKED TO BE.** What stood here read:
+ *
+ *   *"`CLIFF` is declared and EMPTY in this era — the substrate carries crag CELLS, not an
+ *    escarpment boundary, and inventing one from a raster threshold would be a new derivation
+ *    wearing a foundation's name."*
+ *
+ * Both halves are answered, and neither by relaxing anything:
+ *
+ *  1. **THE ESCARPMENT BOUNDARY NOW EXISTS.** `cliffs.js` (S2, beside the substrate whose field
+ *     it reads) turns the crag CELL set into lines with two sides, a length, a kind — BRINK or
+ *     FOOT, which side of the fall it is — and two ENDS. That is the artifact whose absence the
+ *     hold named.
+ *  2. **THIS MODULE STILL DERIVES NOTHING.** It reads `fabric.cliffs.edges` exactly as it reads
+ *     `fabric.water.line` — a boundary the DOMAIN published — and only quantizes and nodes it.
+ *     `FOUNDATIONS` stays outbound-edge-free: there is no import of `cliffs.js` here, and the
+ *     hold's actual objection (a foundation thresholding a raster) never arises.
+ *  3. **AND NO THRESHOLD WAS INVENTED.** `cliffs.js` imports `groundRefusal.REFUSAL.crag`, which
+ *     has been the estate's one definition of impassable relief — with its own measured
+ *     rationale — since §5 W1 exit 2. One writer, consumed twice.
+ *
+ * ⚠ THE HOLD ON **BLOCK FACES** IS UNTOUCHED AND DELIBERATELY SO — see `deriveBlockFaces`. This
+ * discharges the arrangement's role, which is the water edge's own disposition, one role over.
+ */
 export const BOUNDARY_ROLES = Object.freeze(['STREET_RIGHT_OF_WAY', 'WALL_FACE', 'WATER_EDGE',
   'CLIFF_EDGE']);
 
@@ -139,7 +163,10 @@ const halfPlane = (dx, dy) => (dy > 0 || (dy === 0 && dx >= 0) ? 0 : 1);
  * @param {{ streets?:boolean, walls?:boolean, water?:boolean, ranks?:string[] }} [opts]
  */
 export function buildBoundaryArrangement(fabric, opts = {}) {
-  const want = { streets: true, walls: true, water: true, ...opts };
+  // ⭐ `cliffs` DEFAULTS ON, EXACTLY AS `water` DOES, AND THE DORMANCY IS THE DATA'S. A fabric
+  // built without the §577 arming carries no `cliffs` key at all, so this admits nothing and
+  // `cliffEdges` counts zero — byte-identical to the era before, with no flag in this module.
+  const want = { streets: true, walls: true, water: true, cliffs: true, ...opts };
   /** @type {{a:number[],b:number[],role:string,sourceId:string}[]} */
   const raw = [];
   const push = (p, q, role, sourceId) => {
@@ -180,6 +207,16 @@ export function buildBoundaryArrangement(fabric, opts = {}) {
       pushLine(offsetLine(w.line, -half), 'WATER_EDGE', 'water|R', false);
     } else pushLine(w.line, 'WATER_EDGE', 'water', false);
   }
+  // ⭐⭐⭐ ⟦§297.2b⟧ THE ESCARPMENT EDGES — the discharge, in four lines, because the domain did
+  // the work. ⚠ AN ESCARPMENT IS A SINGLE LINE, NOT AN OFFSET PAIR, and that is the one place it
+  // differs from the water: a river's boundary is its two BANKS (the channel between them is not
+  // land), while a cliff IS the boundary — the fall itself has no width in plan. Offsetting it
+  // would invent two escarpments where the ground has one.
+  if (want.cliffs && fabric.cliffs && Array.isArray(fabric.cliffs.edges)) {
+    for (const edge of fabric.cliffs.edges) {
+      pushLine(edge.line, 'CLIFF_EDGE', edge.key, false);
+    }
+  }
 
   // ⭐⭐ THE LADDER IS WALKED, NOT GUESSED. The first rung that nodes to ZERO wins; if none does,
   // the FINEST attempt is kept — a coarser arrangement that is still not planar buys nothing and
@@ -203,7 +240,13 @@ export function buildBoundaryArrangement(fabric, opts = {}) {
     splitCount: noded.splits,
     duplicatesDropped: noded.duplicates,
     roles: BOUNDARY_ROLES,
-    cliffEdges: 0,
+    // ⭐⭐ ⟦§297.2b⟧ **COUNTED, NOT CONSTANT.** This row was the literal `0` the hold left behind —
+    // a published figure that could never move, which is the same "declared input whose value was
+    // a constant" defect §303.6 found twice in `wallCircuit`. It is now the noded truth: how many
+    // arrangement boundaries this leaf's escarpments actually contributed, AFTER splitting, so a
+    // reader can tell an un-armed leaf (0) from a flat one (0 with `cliffs` present and empty)
+    // from a mountain (many) by asking the fabric as well as this count.
+    cliffEdges: noded.segments.filter((s) => s.role === 'CLIFF_EDGE').length,
   });
 }
 
@@ -506,8 +549,15 @@ export function faceRing(dcel, face) {
  * @returns {{blocks:Array<any>, arrangement:any, dcel:any, waterExcluded:true, reason:string}}
  */
 export function deriveBlockFaces(fabric, opts = {}) {
+  // ⚠⚠ `cliffs: false` HERE IS THE §297.2b HOLD **KEPT**, NOT AN OVERSIGHT, and it is the water
+  // edge's own disposition taken exactly. §297.2(b) ratifies block termination for wall/street
+  // and holds it for water AND cliff — and the cliff half of that hold is about a FACE closed by
+  // an escarpment, which is a block whose boundary the programme still has not defined (does the
+  // ground below a brink belong to the block above it?). The ARRANGEMENT's role is discharged
+  // (see BOUNDARY_ROLES); the BLOCK-FACE question is a separate ruling and is left to the wave
+  // that answers it for water. Excluded BY THE RULING, and the exclusion travels in the result.
   const arrangement = buildBoundaryArrangement(fabric, {
-    streets: true, walls: true, water: false, ...opts,
+    streets: true, walls: true, water: false, cliffs: false, ...opts,
   });
   const dcel = derivePlanarDcel(arrangement);
   // ⚠ THE ROLE IS ON THE HALF-EDGE'S OWN `boundaryRef` RECORD, not looked up by id. The codex
