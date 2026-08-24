@@ -1,0 +1,103 @@
+{
+  "leaf": "town",
+  "frontage": 4.928694435668861,
+  "boxes": {
+    "MARKET": {
+      "x": 479.35719509457965,
+      "y": 375.190528427913,
+      "w": 218.368943144174,
+      "h": 218.368943144174,
+      "why": "principal void 'square.heart' (carved) at 2.4 × reach"
+    },
+    "FAUBOURG": {
+      "x": 129.07291153166682,
+      "y": 76.99094837744137,
+      "w": 142.88953881606912,
+      "h": 142.88953881606912,
+      "why": "district '0@239,208|road' origin=road, 6 members, aspect 3.03"
+    },
+    "QUARTER": {
+      "x": 180,
+      "y": 540,
+      "w": 90,
+      "h": 90,
+      "why": "densest 90×90 window — 44 drawn bodies"
+    },
+    "FUSED": {
+      "x": 389.9767359993267,
+      "y": 366.67649227543075,
+      "w": 69.00172209936406,
+      "h": 69.00172209936406,
+      "why": "host 'org.district.market_quarter/p.146.1.1' absorbed 3 sub-minimum neighbour(s)"
+    }
+  },
+  "voids": [
+    {
+      "key": "square.heart",
+      "shape": "carved",
+      "mouths": 3,
+      "fixtures": [
+        "stallRow",
+        "marketCross",
+        "conduit",
+        "pillory",
+        "weighBeam",
+        "trough",
+        "stallRow"
+      ],
+      "band": [
+        3,
+        7
+      ],
+      "reason": "hf259 carved square: 2 major of 3 mouths — no opposed through-route carrying half the carriageway"
+    }
+  ],
+  "fossils": [
+    {
+      "key": "colonize.0",
+      "cite": "§18.4 age 191 ≥ 128 at order 0.51"
+    },
+    {
+      "key": "colonize.1",
+      "cite": "§18.4 age 191 ≥ 128 at order 0.51"
+    }
+  ],
+  "districts": [
+    {
+      "key": "0@239,208|gate",
+      "origin": "gate",
+      "members": 3,
+      "aspect": 1.9,
+      "region": false
+    },
+    {
+      "key": "0@239,208|road",
+      "origin": "road",
+      "members": 6,
+      "aspect": 3.03,
+      "region": false
+    },
+    {
+      "key": "district.government_quarter~faubourg",
+      "origin": "road",
+      "members": 0,
+      "aspect": 1.61,
+      "region": true
+    },
+    {
+      "key": "district.market_quarter~faubourg",
+      "origin": "road",
+      "members": 0,
+      "aspect": 4.02,
+      "region": true
+    }
+  ],
+  "minFootprint": {
+    "tested": 1544,
+    "sub": 103,
+    "fused": 94,
+    "clamped": 4,
+    "dropped": 5,
+    "kept": 1441
+  }
+}
