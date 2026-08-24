@@ -23890,6 +23890,170 @@
         ]
       ],
       "retiredSymbols": []
+    },
+    {
+      "id": "WEB-8",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/website/WEB-8.md",
+      "verifiedBase": "b2852ccc3cc4753499996da6582dd672e90499d0",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/config/entitlementLadder.js"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/config/pricing.js"
+        },
+        {
+          "action": "DOC",
+          "path": ".env.example"
+        },
+        {
+          "action": "DOC",
+          "path": "docs/DEPLOY.md"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/config/entitlementLadder.enforcement.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/config/tierFacts.contract.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/config/pricing.test.js"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/lint/sovereigntyLightingContract.walker.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/config/entitlementLadder.js",
+          "symbol": "export const DEFERRED_LADDER_ROWS = Object.freeze(["
+        },
+        {
+          "path": "src/config/entitlementLadder.js",
+          "symbol": "export const VIEWING_PAYWALLS_PENDING_514 = Object.freeze(["
+        },
+        {
+          "path": "src/config/entitlementLadder.js",
+          "symbol": "id: 'map-editing',     free: false, cartographer: true, axis: 'authoring', enforcement: 'viewerCanAuthor'"
+        },
+        {
+          "path": "src/config/entitlementLadder.js",
+          "symbol": "id: 'change-view',     free: 'latest change only', cartographer: true, axis: 'viewing', enforcement: 'viewerCanAuthor'"
+        },
+        {
+          "path": "src/config/pricing.js",
+          "symbol": "export const SURVEYOR_PLAN = Object.freeze({"
+        },
+        {
+          "path": "src/config/pricing.js",
+          "symbol": "export const ANNUAL_FACTOR = 0;"
+        },
+        {
+          "path": "src/config/pricing.js",
+          "symbol": "export const CARTOGRAPHER_ANNUAL = Object.freeze({"
+        },
+        {
+          "path": "src/config/pricing.js",
+          "symbol": "export const ACTIVE_CHECKOUT_SKUS = Object.freeze(["
+        },
+        {
+          "path": "tests/config/entitlementLadder.enforcement.test.js",
+          "symbol": "const claims = (row) => row.free !== row.cartographer;"
+        },
+        {
+          "path": "tests/config/entitlementLadder.enforcement.test.js",
+          "symbol": "const RESOLVERS = Object.freeze({"
+        },
+        {
+          "path": "tests/config/pricing.test.js",
+          "symbol": "function serverActiveSkus(src = readRepo(CREATE_CHECKOUT)) {"
+        },
+        {
+          "path": "tests/config/tierFacts.contract.test.js",
+          "symbol": "const PDF_EXPORT_LEGACY = /** @type {const} */ (["
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "Walker rules A and B, the two halves of one predicate. A: every ladder row that CLAIMS a paywall (free !== cartographer) names an enforcement symbol that RESOLVES to free-refused premium-granted when the symbol is DRIVEN against the real TIER_GATE or viewerCanAuthor rather than grepped; the claiming set is the nine rows saves, custom-content, living-realm, map-chains, map-editing, dm-pins, change-view, fog-table and export-bundle and the parity set the eight remaining, both memberships asserted and both asserted non-empty so no arm passes on an empty walk. B: every non-claiming row carries a parity-class marker and none names a resolver; every row marked parity has literally equal true cells; and NO row carries the retired ruled-2026-07-17 value, read off row.enforcement rather than off source text because the config file's own header explains the retired marker and a source scan would match its prose while a live row still carried it, with the emptiness anchored on the same array proven fully populated."
+        },
+        {
+          "id": "A3",
+          "case": "Walker rule C: interiors and v2-redraw are present in DEFERRED_LADDER_ROWS with a returnsAt of map activation D3b/P6 and a written reason, are absent from ENTITLEMENT_LADDER with the absence anchored on the same list containing dm-pins, keep their band4.rows display labels in the copy registry, and the RENDERED pricing page contains neither Building interiors nor The v2 map redraw while containing the DM pins label in the same render."
+        },
+        {
+          "id": "A4",
+          "case": "Walker rule D: the change-view free cell is the honest qualifier latest change only rather than false, and SettlementMapNotes.jsx declares FREE_CHANGE_DEPTH as 1, proved by source scan with the negative control that the same scan is false against a planted value of 2."
+        },
+        {
+          "id": "A5",
+          "case": "The O-P3 pin: TIERS.tier.features.pdfExport equals TIER_GATE.legacy.export for wanderer against free, cartographer against premium and founder against premium, and the literals are stated as well as derived so a future edit cannot restore the drift by moving both sides together into a tautology."
+        },
+        {
+          "id": "A6",
+          "case": "The .env.example walker in three classes: the ACTIVE block names STRIPE_PRICE_KEY for every key in ACTIVE_CHECKOUT_SKUS; it names no abolished SKU and no legacy pack, anchored on a live positive name; legacy names appear only below the legacy marker; the two blocks account for every price-id occurrence in the file; and both markers are asserted present so a rot cannot produce an empty slice that passes."
+        },
+        {
+          "id": "A7",
+          "case": "The two-way source scan: ACTIVE_CHECKOUT_SKUS equals the key set of create-checkout's ACTIVE PRICE_MAP block in both directions, with a planted extra on each side as a negative control and the block markers asserted present. Re-runs stay green: the existing ladder walker in pricingPageBands, illustratedLensFree, and the four gate suites dmPinsTierGate, fogTierGate, changeViewDepthGate and settlementMapPaneEdit."
+        },
+        {
+          "id": "A8",
+          "case": "The dark registrations: SURVEYOR_PLAN is 1499 cents monthly BYOK keyed to surveyor_entitlements, frozen, its stripeProduct a key create-checkout already resolves, and it is neither a TIERS key nor in getVisibleTiers; CARTOGRAPHER_ANNUAL's price and credits equal ANNUAL_FACTOR times the monthly plan's with the same arithmetic driven live at factor ten, and ACTIVE_CHECKOUT_SKUS includes premium_annual if and only if ANNUAL_FACTOR is above zero, so every pin holds at both dial values."
+        },
+        {
+          "id": "A9",
+          "case": "The owner's AUTHORING axis, ODQ 514.1b, both halves with a positive control on each. Rule E: every ladder row declares an axis of viewing, authoring or account; the three-way split is the measured one with each membership asserted in GROUP order so a row silently moving groups reds; and every authoring row both claims a paywall and resolves its enforcement symbol, so authoring is never given away free. Rule F: no viewing row claims a paywall except the three ids carried in VIEWING_PAYWALLS_PENDING_514, and that ledger is pinned exactly equal to the measured claiming-viewing set in order with a written reason on each entry, so it can neither grow silently nor go stale. Positive controls: a planted free-authoring row is driven through rule E's own predicate and caught, and a planted paywalled-viewing row outside the ledger is caught with the ledger proved not to be a mute button. Both deferred rows carry an axis so their return at map activation is classified."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/config/entitlementLadder.enforcement.test.js",
+          "tests/config/pricing.test.js",
+          "tests/config/tierFacts.contract.test.js",
+          "tests/config/illustratedLensFree.test.js",
+          "tests/ui/pricingPageBands.test.jsx",
+          "tests/ui/pricingPageVariant.test.jsx",
+          "tests/components/dmPinsTierGate.test.jsx",
+          "tests/components/fogTierGate.test.jsx",
+          "tests/components/changeViewDepthGate.test.jsx",
+          "tests/ui/settlementMapPaneEdit.test.jsx",
+          "tests/docs/deployRunbookFreshness.test.js",
+          "tests/docs/docCounts.test.js",
+          "tests/security/committedSecretsScan.test.js",
+          "tests/edgeFunctions/contracts.test.js",
+          "tests/lint/premiumGateSingleSource.test.js"
+        ],
+        [
+          "node",
+          "scripts/check-full-typecheck.mjs"
+        ],
+        [
+          "node",
+          "scripts/check-domain-strict.mjs"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/config/entitlementLadder.js",
+          "src/config/pricing.js",
+          "tests/config/entitlementLadder.enforcement.test.js",
+          "tests/config/pricing.test.js",
+          "tests/config/tierFacts.contract.test.js"
+        ]
+      ],
+      "retiredSymbols": []
     }
   ]
 }
