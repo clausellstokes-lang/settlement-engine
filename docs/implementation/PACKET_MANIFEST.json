@@ -23067,9 +23067,9 @@
     },
     {
       "id": "MF-UC5",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-UC5.md",
-      "verifiedBase": "b2852ccc3cc4753499996da6582dd672e90499d0",
+      "verifiedBase": "5055990a38a281b5a5f63648c74e65c0837de7ef",
       "changeManifest": [
         {
           "_note": "THE CONNECTIVITY GRAPH (311.9), car 2 of 2 of T-UC3 and the LAST car of the undercity train. deriveUndercityConnectivity(settlement, opts) joins the rows UC-1, UC-2, UC-3 and UC-4 already publish into the graph the boundary law describes: three connection classes plus the refusal class, the security gradient with the stricter side's TYPED JOINT, sewers as the spine where they exist else an ARCHIPELAGO, severance that severs without deleting, links that persist, and isolation as a first-class visible fact. THIS CAR DERIVES NO COMPONENT AND INVENTS NO PORTAL: every node is a published row and every edge's joint is a surfaceJoins[] entry one of the four producers wrote, so where no endpoint published a portal no edge is emitted (one producer per join). THE MOTIVE LAW IS ENFORCED BY THE PAYER RATHER THAN BY A COMMENT: 311.6.4 says a linking passage is a dug act with a cause and a payer and never an assumed corridor, so the two DUG classes are refused outright when no payer resolves to a canonical institution key, and sparsity is structural. THE REFUSAL CLASS IS VISIBLE: a vault connects to nothing by default (311.8.3 - a breach into one is a HEIST EVENT, an event and not a derived edge) and keepers resist a sewer-crypt join, and both refusals are RECORDED naming the pair they refused. THE DATE OF A DUG ACT IS REPORTED AND NEVER INVENTED: the estate records no dug-act event, so the date is the calamity the town rebuilt after where one exists and a typed absence otherwise. THE POSTURE AND THE CRIMINAL LICENCE ARE TWO SEPARATE READINGS, which is what makes sever-never-delete true: if severance moved the licence, sealing a working would un-license its breach and DELETE the edge. 243 effective lines against the 250-per-leaf cap. No tuning surface, no draw, no hash root, no roster read, and no write of any kind; the generator golden is bytewise unmoved.",
@@ -23635,9 +23635,9 @@
     },
     {
       "id": "MF-CH2A",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/catalog-hygiene/MF-CH2A.md",
-      "verifiedBase": "b2852ccc3cc4753499996da6582dd672e90499d0",
+      "verifiedBase": "5055990a38a281b5a5f63648c74e65c0837de7ef",
       "changeManifest": [
         {
           "_note": "THE MAGIC LICENCE, DECLARED. A per-entry `magicLicense` in the four LOWER-CASE tokens getMagicLevel already emits, on the 28 Magic/Exotic rows (Magic 21 + Exotic 7, 25 distinct names) - the charter's 32 is R-INST-5's whole verdict table, four rows of which sit on the Adventuring shelf that no magic gate reads. Values are R-INST-5 section-Sigma.3's table restricted to the gated shelves: none 7, low 5, medium 4, high 12, and the dossier's NONE 11 minus its four Adventuring hand-offs closes to 7. The field means THE WEAKEST WORLD THE ENTRY IS LICENSED FOR, which is the reading that reconciles R-INST-5's per-entry declaration with R-INST-6's three world-level cross-references - and two of those three corroborate a HIGH row on this table rather than contradicting it. MEASURED, NOT ASSUMED: the 28 are EXACTLY the set any of the six magic surfaces treats as magic; rows outside the two shelves that some magic gate nonetheless catches number ZERO.",

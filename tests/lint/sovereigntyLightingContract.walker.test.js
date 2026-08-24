@@ -6162,7 +6162,58 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // the slot's 2,150 reds at `credited` ("expected 2151 to be 2150") — the credit itself, which
     // is the second, independent proof that the new file is COUNTED rather than parked. The file
     // was restored byte-identical (cmp 0) after each control and after the probe.
-    files: 2517, parked: 366, credited: 2151, titles: 20882, suiteTitles: 5814,
+    // ── RE-RECORDED 2026-08-24 BY THE MF-CH2A + MF-UC5 STACKED LANDING (the magic licence's
+    //   declaration half, and the undercity's connectivity graph — the last car of that train),
+    //   CAUSE ATTRIBUTED PER CAR ──
+    // 2,517/366/2,151/20,882/5,814 → 2,519/366/2,153/20,899/5,816 at the landing slot 5055990a
+    // (the MF-CG1 landing). ⚠⚠ THIS ROW IS A SUM OF TWO DELTAS AND MUST NEVER BE READ AS ONE
+    // MEMBER'S TUPLE (ODQ §420). It is the FIRST STACKED LANDING SINCE #40: two members through
+    // ONE gate, lawful because their change paths are disjoint (the only shared paths are
+    // docs/implementation/INDEX.md and PACKET_MANIFEST.json — this walker is in NEITHER member's
+    // diff, because BOTH deferred their row under §417 and this act pays both at once).
+    // A REBASE WAS OWED BY BOTH. Each built on b2852ccc and each held a tuple describing a tree
+    // that no longer exists; neither was carried. The tuple below is walked at the STACKED tree.
+    // TWO causes, one per car, and NEITHER is a rule change — no classifier here widened:
+    //   +1 file / +1 CREDITED / +9 titles / +1 suite title:
+    //     tests/lint/magicLicenceCensus.walker.test.js — MF-CH2A's declaration walker. ONE literal
+    //     suite opener and NINE straight-line arms.
+    //   +1 file / +1 CREDITED / +8 titles / +1 suite title:
+    //     tests/domain/undercityConnectivity.test.js — MF-UC5's acceptance. ONE literal describe
+    //     over EIGHT straight-line arms, the MF-UC1/MF-UC2 shape.
+    //   `parked` does NOT move, and on the walk below it PASSED UNMOVED at 366 at EVERY step.
+    // ⭐ THE SPLIT IS ATTRIBUTED BY EXECUTION, NOT BY ARITHMETIC. 9 + 8 = 17 would close against
+    //   any 9/8 split, and a file that PARKS ITSELF AT BIRTH still closes the arithmetic while
+    //   swallowing its titles (the trap MF-CG1's landing documents one row above). So this
+    //   walker's OWN parkReasonsFor / liveTitlesIn / liveSuiteTitlesIn were read for each new file
+    //   through a deliberately-red probe arm, and both came back CREDITED and UNPARKED:
+    //     magicLicenceCensus.walker.test.js  {"inTestFiles":true,"inCredited":true,"titles":9,
+    //                                         "suiteTitles":1,"parkReasons":[]}
+    //     undercityConnectivity.test.js      {"inTestFiles":true,"inCredited":true,"titles":8,
+    //                                         "suiteTitles":1,"parkReasons":[]}
+    //   The walker was restored cmp 0 after the probe.
+    // `censusAuthorization`: ODQ §484 (both lanes' dispatch), §516 (the stacking law this act is
+    // the first to execute), §420 (sum-of-deltas), §417 (the two rows the members DEFERRED and
+    // this landing act PAYS), §503.2 (MF-CH2A's declared golden re-record) and §520.5 (MF-CH2B is
+    // held by the chair and is NOT in this stack).
+    // WALKED, NOT CARRIED, AT THE STACKED TREE — every moved figure READ FROM ITS OWN FAILURE
+    // MESSAGE in assertion order and never computed: `files` "expected 2519 to be 2517" → `parked`
+    // PASSED UNMOVED at 366 → `credited` "expected 2153 to be 2151" → `titles` "expected 20899 to
+    // be 20882" → `suiteTitles` "expected 5816 to be 5814"; the whole file green at the end (Test
+    // Files 1 passed (1) / Tests 33 passed (33), exit 0). The arithmetic closes: 366 + 2,153 = 2,519.
+    // SEVEN negative controls, every one red, every restore cmp 0:
+    //   the slot's whole tuple back      → `files` "expected 2519 to be 2517"
+    //   `parked` ALONE back at 365       → `parked` "expected 366 to be 365"
+    //   MF-CH2A's whole delta removed    → `files` "expected 2519 to be 2518"
+    //   MF-UC5's whole delta removed     → `files` "expected 2519 to be 2518"
+    // ⚠⚠ THOSE LAST TWO ARE VACUOUS AS ARITHMETIC CONVICTIONS AND THE PAIR IS KEPT HERE AS THE
+    //   WARNING. Removing ONE car's whole delta reds at `files` BEFORE the arm ever reaches
+    //   `titles`, and BOTH directions emit the IDENTICAL message — so a sibling control of that
+    //   shape convicts the TOTAL and says nothing about the SPLIT. Re-run holding every other
+    //   figure correct so the arm REACHES the figure under test, they convict DISTINCTLY:
+    //   `titles` 20,890 (CH-2A's nine out) → "expected 20899 to be 20890"
+    //   `titles` 20,891 (UC-5's eight out) → "expected 20899 to be 20891"
+    //   `suiteTitles` 5,815 (one car's +1) → "expected 5816 to be 5815"
+    files: 2519, parked: 366, credited: 2153, titles: 20899, suiteTitles: 5816,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

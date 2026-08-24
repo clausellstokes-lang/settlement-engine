@@ -1,8 +1,8 @@
 # Catalog hygiene / MF-CH2A — THE MAGIC LICENCE, DECLARED: 28 arcane rows stop being classified by the shelf an author filed them on, and the four tokens the magic dial already emits become one vocabulary
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** 1
-- **Verified base:** `claude/composite-r4` at `b2852ccc3cc4753499996da6582dd672e90499d0`
+- **Verified base:** `claude/composite-r4` at `5055990a38a281b5a5f63648c74e65c0837de7ef`
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line (J-TEWF1B-1).
 - **Provenance:** implemented by lane **TE-CH-2**, **`[OPUS-RUN · FABLE-VALIDATION OWED]`**
@@ -10,7 +10,10 @@
   **serial pair** — `MF-CH2B` makes the five gates read what this car declares.
 - **Charter and rulings:** `draft-CATALOG-HYGIENE-PLAN.md` §2 (CH-2), as re-shaped by the CH
   skeptic panel and the chair at **ODQ §501.4, §503.2 and §505**. Everything below is
-  re-derived at THIS base by this lane. Where a charter figure is carried it says so and names
+  re-derived by this lane at its BUILD base `b2852ccc3cc4753499996da6582dd672e90499d0`, which is
+  what every figure below was executed at; the **Verified base** above was RE-STAMPED to the
+  landing slot `5055990a` by lane TE-STACK-1 at the act (§410), which re-based this member and
+  carry-proved every one of its blobs identical. Where a charter figure is carried it says so and names
   the re-derivation; **four charter/panel figures are CORRECTED here by execution** (§0.2).
 
 ---
@@ -462,3 +465,92 @@ own member. Every battery here and every `checks` row in the manifest uses
 * **D-5.** `magicLicense` now rides onto every settlement record (573 + 350 key additions) and
   **nothing downstream reads it**. It is not stripped in `assembleInstitutions`, because
   special-casing the spread is precisely the kind of divergence this train exists to remove.
+
+---
+
+## §8 · THE LANDING SLOT (TE-STACK-1, 2026-08-24 — slot `5055990a`, the MF-CG1 landing; CAR 1 of 2)
+
+**THIS IS THE FIRST STACKED LANDING SINCE #40.** Landings 41–48 were eight singletons in eight
+gates (ODQ §516). This member and `MF-UC5` land through ONE gate, in one act, because their change
+paths are disjoint: `comm -12` over the two members' path lists returns exactly
+`docs/implementation/INDEX.md` and `docs/implementation/PACKET_MANIFEST.json` and nothing else.
+The lighting census walker is in NEITHER member's diff — both deferred their row under §417 — so
+the overlap is a strict subset of what the stack law allows.
+
+**A REBASE WAS OWED AND WAS PERFORMED.** This member built on `b2852ccc` (the MF-CH1 landing) and
+held at `90a12cd1b09278319c38324280d3fadc118006a3`; the slot ref had moved to `5055990a` (MF-CG1,
+the 48th landing). `git rebase --onto 5055990a b2852ccc 90a12cd1` — the packet commit CONFLICTED in
+`INDEX.md` and `PACKET_MANIFEST.json`, both keep-both appends against CG-1's own rows. Resolved by
+taking the slot side (proved equal to the slot blobs `edc9dfb8f1` and `08f7e1bd48`, not assumed) and
+splicing this member's row and entry back programmatically; the spliced manifest entry deep-equals
+the holding blob's, and all 170 slot entries are preserved in order.
+
+**CARRY-PROOF AT BLOB LEVEL.** Every one of this member's SIXTEEN non-shared paths is
+blob-identical at the stacked tip to its holding: the packet, `scripts/mutation-coverage-manifest.json`,
+the three production files, the eight edge artifacts, the golden fixture, the declaration walker and
+`tests/property/generatorGoldenMaster.test.js`. Only `INDEX.md` and the manifest moved. The
+instrument was controlled, not trusted: `git rev-parse "${sha}:${path}"` ECHOES an unresolvable
+argument and exits 0, so every reading used `--verify -q` and a nonexistent path was read at every
+hop and returned ABSENT. `package.json` `2b5ec2014c` and `package-lock.json` `1a8a80b12b` are
+identical at slot and tip, so NO MINT TRIGGER was crossed.
+
+**⚠ THE HOLDING RECEIPT NAMED A SHA THAT DOES NOT EXIST.** `laneTECH2-receipt.md`'s FINAL STATE line
+gives this member's tip as `90a12cd1b0dc47b1b3fbf24bfd47ef27b9c39e30`; `git rev-parse --verify -q`
+REFUSES that object. The real tip is `90a12cd1b09278319c38324280d3fadc118006a3`. The two agree to ten
+hex characters, which is why a short-sha eye-check would have passed it — a transcription error, not
+a collision, and the landing used the pinned ref rather than the receipt's prose.
+
+**THE §410 THREE-PLACE FLIP**, each place read back through the validator's own parser: the manifest
+row (`status` READY → LANDED and `verifiedBase` RE-STAMPED to the slot), this packet's Markdown
+header, and the INDEX STATUS column reached through the manifest's `indexPath`. Twelve
+`requiredSymbols` rows, every one a symbol or an export marker — no count, no figure, no migration
+head — so nothing in them needed re-stamping and the validator asserts them status-blind.
+`[implementation-packets] valid: 172 packets (0 READY)`, exit 0. FOUR non-vacuity controls on this
+member, each with its own distinct refusal and each restore `cmp` 0: the manifest status back to
+READY ("status disagrees with index" AND "with packet Markdown"), the Markdown header back
+("disagrees with packet Markdown"), the INDEX marker back ("disagrees with index"), and
+`verifiedBase` back to the build base ("verifiedBase disagrees with packet Markdown").
+
+**⚠ THE INDEX-CELL HAZARD IS SHARPER THAN §513.2 STATES.** `parseIndexPacketStatuses` does not take
+the first status word by POSITION in the cell — it iterates `PACKET_STATUSES` in the ARRAY's own
+order, `['BLOCKED','DRAFT','LANDED','READY','STALE','SUPERSEDED']`, and returns the first member
+found ANYWHERE in the cell. So a stray `READY` in prose cannot beat `LANDED`, but a stray `DRAFT` or
+`BLOCKED` silently WOULD. This cell was written so the bold marker is the only status word in it,
+and both cells were verified by EXECUTING the parser.
+
+**TWO CLAIMS THIS ACT FALSIFIED AND CORRECTED RATHER THAN CARRIED.** (i) §0's "everything below is
+re-derived at THIS base by this lane" became false the moment `verifiedBase` was re-stamped; it now
+names the BUILD base `b2852ccc` explicitly and says the header was re-stamped at the act. (ii) The
+INDEX cell said `MF-CH2B` "is minted at this car's landing" — it is NOT. Under ODQ §520.5 the
+sibling is held by the chair, is not minted here, and has no manifest entry, no INDEX row and no
+packet file at this tip; the token appears in six files as PROSE only. A LANDED row must not carry a
+promise the act did not keep.
+
+**THE GOLDEN RE-RECORD IS THIS STACK'S ONE DECLARED SAME-SEED SHIFT, AND IT IS THIS CAR'S ALONE.**
+`tests/fixtures/generator-golden-master.json` moves from blob `cd8d125ef8` / sha256 `29c6cc8f…` at
+the slot to blob `4bdd69f201` / sha256
+`0a2309f573fc1f4cd6377d1ee1d370bf87226887810d8f5cdcb15282cbebabc7` at the tip — 297 of 525 fixtures,
+caused by a catalog-row key spreading onto the record (§503.2), with the deep path-template diff
+showing TWO templates and both pure ADDITIONS of `magicLicense`. Stated here because a same-seed
+movement is never allowed to ride silently.
+
+**THE CENSUS IS A SUM OF DELTAS, NEVER A TUPLE (§420).** Slot `2517/366/2151/20882/5814` → tip
+`2519/366/2153/20899/5816`, of which this car's share is `+1/+0/+1/+9/+1`. Every figure was READ FROM
+THE ARM'S OWN FAILURE MESSAGE in assertion order and never computed. This car's `+9` titles and `+1`
+suite title are attributed BY EXECUTION, not by arithmetic: a deliberately-red probe arm read the
+walker's own `parkReasonsFor` / `liveTitlesIn` / `liveSuiteTitlesIn` for
+`tests/lint/magicLicenceCensus.walker.test.js` and returned
+`{"inTestFiles":true,"inCredited":true,"titles":9,"suiteTitles":1,"parkReasons":[]}` — so the file is
+COUNTED rather than parked, and the split against `MF-UC5`'s eight is measured rather than assumed.
+The walker was restored `cmp` 0 after the probe.
+
+**THE GATES AT THE STACKED TIP.** `[typecheck-ratchet] OK — no type regressions (173 error(s),
+ceiling 173)`. `[domain-strict] ✓ no strict-type regressions (1134 errors, ceiling 1134)`. eslint over
+the touched JS exits 0 with empty output, and `--fix-dry-run` changes nothing. `build:edge-shared`
+exits 0 and every one of the five `sourceHash` values is UNCHANGED, so this member's committed
+bundles are still correct at the slot; only `generatedAt` churned and that churn was reverted rather
+than committed. S0 part 1: `check-observed-shape-readers` exit 1, 159 B, sha256 `c5b67844abe51226…`,
+`cmp` 0 against `chair-baseproof-b10ed1a1` (its porcelain empty before and after), with a one-byte
+probe making the same `cmp` exit non-zero — so the comparison is live and the red is pre-existing.
+CLAIM_RE counts 0 over every line this act adds, with the regex proved live on a positive control;
+the C0 control-character scan reads 0 on all four touched documents with its own live probe.

@@ -1,11 +1,15 @@
 # Town cartography / MF-UC5 — the undercity's CONNECTIVITY GRAPH: `deriveUndercityConnectivity` joins the rows the four landed leaves publish into §311.9's graph — three connection classes and a refusal class, the stricter side's typed joint, sewers as the spine where they exist, severance that never deletes, and isolation as a first-class visible fact
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** 1
-- **Verified base:** `claude/composite-r4` at `b2852ccc3cc4753499996da6582dd672e90499d0`
-  — the MF-CH1 landing (the slot `00e7af61`), read with `git rev-parse` at the lane's opening and
-  re-read at every proof below. Every figure in this packet was executed at THIS base by the
-  implementing lane TE-UC5; nothing is inherited from the charter
+- **Verified base:** `claude/composite-r4` at `5055990a38a281b5a5f63648c74e65c0837de7ef`
+  — the MF-CG1 landing, RE-STAMPED at the landing act by lane TE-STACK-1 (§410). This member was
+  BUILT at `b2852ccc3cc4753499996da6582dd672e90499d0` (the MF-CH1 landing, the slot `00e7af61`),
+  read with `git rev-parse` at the lane's opening and re-read at every proof below, and EVERY
+  FIGURE IN THIS PACKET WAS EXECUTED AT THAT BUILD BASE by the implementing lane TE-UC5. The
+  landing lane re-based this member onto `5055990a`, carry-proved every member blob identical,
+  and re-proved the acceptance and the liveness figures at the STACKED tree on top of MF-CH2A;
+  nothing is inherited from the charter
   (`draft-UNDERCITY-PLAN.md`, ruled ODQ §441, ratified §445.2) except where a row says so and names
   the re-derivation. ⚠ The charter states no census tuple on purpose (§441.5(e)); it is re-derived
   here. ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
@@ -589,3 +593,87 @@ re-run at the cured bytes and every later proof in this packet ran after the cur
 | J-TEUC5-7 | **On an equal-posture pair the joint is the CODEPOINT-FIRST kind the two ends publish** | §311.9.2(iii) rules the STRICTER side and is silent on a tie. The estate's one sanctioned tie-break is `compareCodepoint`, and the alternative — the producer's roster order — would let an accident of generation decide a portal. Refused: inventing a strictness order over the joint kinds (that is a second vocabulary); taking the `from` side (that is the codepoint order of the KEY, one level removed from the thing being chosen) |
 | J-TEUC5-8 | **The keeper refusal reads `crypt` only, not `surge_pit`** | §311.9.2(ii) names crypts. A surge pit is a different component with a different licence and no keeper, and it is the row that makes the `breach` joint reachable at all. Recorded as D-UC5-6 so the chair can widen it by a word |
 | J-TEUC5-9 | **The delivered shape carries four keys beyond charter §7 F6** (`nodes`, `spineDegree`, `refusals`, `sourceKind`) | F6's row is the INTERFACE and additions are lawful (§7 term 2, the MF-UC2 precedent). Each addition is load-bearing for the honesty contract: an isolation is meaningless without the node list it is drawn from, a refusal is invisible unless written down, and `character` without `spineDegree` cannot distinguish a spine from a main with nothing on it |
+
+---
+
+## §13 · THE LANDING SLOT (TE-STACK-1, 2026-08-24 — slot `5055990a`, the MF-CG1 landing; CAR 2 of 2)
+
+**THE LAST CAR OF THE UNDERCITY TRAIN LANDS STACKED ON `MF-CH2A`**, through ONE gate — the first
+stacked landing since #40 (ODQ §516). The two members' change paths are disjoint: the only shared
+paths are `docs/implementation/INDEX.md` and `docs/implementation/PACKET_MANIFEST.json`. This
+member's three created paths are absent from CH-2A's diff entirely, and CH-2A's sixteen are absent
+from this one's.
+
+**A REBASE WAS OWED AND WAS PERFORMED, TWICE OVER.** This member built on `b2852ccc` and held at
+`79c91205904d3122f61074bb0d05f04955ad8222`. It was rebased not onto the bare slot but onto CAR 1's
+own rebased tip: `git rebase --onto <car1> b2852ccc 79c91205`. That hop reported NO conflict, which
+is exactly the shape a silent bad merge wears, so it was verified rather than believed: removing the
+two new manifest entries from the stacked manifest leaves EXACTLY the slot's 170 entries in order,
+byte for byte. This member's entry sits at array index 168 rather than at the end — git placed it
+where it sat relative to `b2852ccc` — which is harmless and is recorded so no later reader treats
+array position as meaningful. Carry-proof at blob level: all three created paths
+(`src/domain/undercity/connectivity.js` `322c1815fb`, `tests/domain/undercityConnectivity.test.js`
+`26b53c493b`, this packet `c184547e46`) are blob-identical at the stacked tip to their holding, with
+`--verify -q` and a nonexistent-path control ABSENT at every hop.
+
+**⭐ THE QUESTION THIS STACK EXISTS TO ANSWER: DOES CAR 1 MOVE ANYTHING THIS CAR DERIVES?** This
+member was built and proved against the OLD golden, and CAR 1 adds a `magicLicense` key to 28 catalog
+rows that then spreads onto every institution record. The charter claim — that this leaf reads no
+roster — was NOT accepted on the strength of a `grep` count. It was measured.
+
+⚠ This member's §6 harness could not be reproduced faithfully: §6 names "6 tiers × 2 cultures × 7
+terrains × 5 seeds" but NO packet, test or surviving script records WHICH two cultures or WHICH five
+seeds, and the implementing lane's sweep script did not survive. Guessing the seed set would have
+manufactured a false movement. The question was therefore answered in a STRICTLY STRONGER,
+harness-independent form — a DIFFERENTIAL at one fixed corpus:
+
+> A 420-settlement corpus (6 tiers × {germanic, latin} × 7 terrains × 5 seeds, each terrain paired
+> with its honest `TERRAIN_ROUTE`, generated by `generateSettlementPipeline(cfg, null, { seed,
+> customContent: {} })`), `deriveUndercityConnectivity(s)` on every row, the FULL graph serialised
+> with sorted keys and hashed. With CAR 1 PRESENT and with CAR 1's three production files put back to
+> their SLOT blobs, the digest is the SAME:
+> `b215ada9387d5175946fbe2f323697c36c6aab2a431f67aba00fe62de83a8b03`.
+
+Every node, edge, connection class, cause, typed joint, posture, `live` flag, `dateSource`, isolation
+reason and refusal reason is IDENTICAL for all 420 settlements. **Not one figure of this member's
+moves.** And the differential is proved NON-VACUOUS in both directions: with CAR 1 reverted, 0 of 302
+institution records carry `magicLicense`; with CAR 1 present, 13 of 302 do — so the key demonstrably
+reaches the generated record — while the roster SIZE is 302 either way, which independently
+reproduces CAR 1's own "rosters 0 of 2,520" finding; and the same harness under a different seed
+MOVES the digest, so it is not a constant. The three files were restored to the tip `cmp` 0.
+
+**A BONUS CORROBORATION ON A CORPUS THIS LANE NEVER USED.** That same sweep independently reproduces
+all four of §6's dark-member findings at seeds the implementing lane did not run: `WORKS_EXTENSION`
+0, joint `breach` 0, joint `sealed_door` 0, isolation `SEVERED` 0 and `dateSource:
+DATED_CALAMITY_REBUILD` 0. Arm-A totals at these seeds: 420 rows, 2,977 nodes, 1,574 edges, 1,718
+isolations, 190 settlements with at least one edge — different absolutes from §6's 3,102 / 1,587 /
+1,801 / 203, as different seeds require, with the SHAPE of the vocabulary unchanged.
+
+**THE ACCEPTANCE RE-PROVED ON TOP OF CAR 1**, which is the whole point of running it here rather than
+trusting the build: `Test Files 1 passed (1)` / `Tests 8 passed (8)`, exit 0. All eight arms green
+against the NEW golden and the NEW catalog.
+
+**THE §410 THREE-PLACE FLIP**, with `verifiedBase` re-stamped from the build base to the slot in both
+the manifest row and this packet's header, and the INDEX STATUS cell reached through `indexPath`.
+FOUR non-vacuity controls on this member, each with its own distinct refusal, each restore `cmp` 0.
+`[implementation-packets] valid: 172 packets (0 READY)`, exit 0 — the member's own receipt predicted
+171 for itself alone; in the stack it is 172. The seventeen `requiredSymbols` rows are all symbol
+pins and needed no re-stamp.
+
+**⚠ ONE CLAIM THIS ACT FALSIFIED AND CORRECTED.** §0's verified-base note said "Every figure in this
+packet was executed at THIS base" and named `b2852ccc` as the MF-CH1 landing. Re-stamping the header
+to `5055990a` made both halves false. The note now states the BUILD base explicitly, says the figures
+were executed THERE, and records that the landing lane re-based and re-proved on top of CAR 1.
+
+**THE CENSUS, AS A SUM OF DELTAS (§420).** Slot `2517/366/2151/20882/5814` → tip
+`2519/366/2153/20899/5816`; this car's share is `+1/+0/+1/+8/+1`. Every figure read from the arm's
+own failure message in assertion order; `parked` PASSED UNMOVED at 366 at every step. This car's `+8`
+titles are attributed BY EXECUTION through the walker's own helpers —
+`tests/domain/undercityConnectivity.test.js` returns
+`{"inTestFiles":true,"inCredited":true,"titles":8,"suiteTitles":1,"parkReasons":[]}` — so the file is
+credited rather than parked, and its eight are distinguished from CAR 1's nine by measurement.
+⚠ The two obvious sibling controls (each car's whole delta removed) were run FIRST and were VACUOUS
+AS ARITHMETIC CONVICTIONS: both redded at `files` before the arm ever reached `titles`, emitting the
+IDENTICAL message. They were re-run holding every other figure correct so the arm REACHES `titles`,
+and only then did they convict distinctly — `expected 20899 to be 20890` for CAR 1's nine against
+`expected 20899 to be 20891` for this car's eight.
