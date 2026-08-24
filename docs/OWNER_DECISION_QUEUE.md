@@ -26443,3 +26443,19 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   viewer feels the moment because the film breathes, not because it flashes.
   Every beat derives from a dated, typed event the world actually records;
   the film may never invent drama the ledger of the world does not hold.
+
+## §610 · THE LINEAGE NAMED — THE DWARF FORTRESS PRINCIPLE (2026-08-24 ~20:50 CDT)
+
+- **§610.1 OWNER FRAMING, banked as the program's DEPTH LINEAGE:** "we are
+  treating this like Dwarf Fortress builds a map." Ruled precisely: **DF is
+  the fourth reference — for MEANING, never for visuals** (the §574 visual
+  triangulation stands untouched). The mapping of record: Legends mode ↔ the
+  dossier and margin notes · worldgen-watching ↔ the Chronicle Reveal ·
+  ruins-as-residue ↔ fossils and pentimento. **The lesson that binds:** DF
+  proved people love places whose every detail has a cause, AND proved what
+  two decades of illegibility costs — §573's priority inversion is the
+  refusal of that fate: DF's depth, wrapped in the leads' readability,
+  wearing the corpus's beauty. **The differences that keep us honest:**
+  curated emergence over chaos — typed vocabularies, bounded scope, and THE
+  PROMISE's same-seed-forever, which DF never vows and a DM's campaign
+  requires.
