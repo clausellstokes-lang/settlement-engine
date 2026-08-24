@@ -26413,3 +26413,33 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   cached-render law means a revisit needs no film at all) and **REPLAYABLE**
   (a "watch its history" control on every settlement — which is also
   precisely the REG-11 share surface: the replay is the clip).
+
+## §609 · THE FILM'S BEAT VOCABULARY — DESTRUCTION, REBUILDING, AND THE STRESSOR EVENTS, SALIENT BUT CALM (2026-08-24 ~20:35 CDT)
+
+- **§609.1 ⭐ OWNER DIRECTIVE:** the film needs animation for tear-downs and
+  rebuilds, and for historical events/stressors that change the town (siege,
+  occupation) — "it doesn't have to be much, but those points should come
+  across salient."
+- **§609.2 CHARTERED AS A CLOSED BEAT VOCABULARY** (finite semantics — beat
+  kinds are a typed set, each sourced from machinery the engine already
+  carries): **BUILD** (surface/draw-in) · **MERGE/SPLIT** (old outlines
+  linger as ghosts beneath the new mass) · **DEMOLISH→REPLACE** (grey to
+  roofless-shell outline, dissolve, the successor draws in over the ghost) ·
+  **SCAR→HEAL** (the typed loss region greys and clears; rebuilds return
+  with different street grain — the §607 fire beat) · **SIEGE** (camp marks
+  beyond the gates, the ditch emphasized, growth stilled, the wall carrying
+  its scar after) · **OCCUPATION** (a banner mark at gate and keep, the
+  town's tint cooled for the span, growth character changed) ·
+  **STILLNESS** (plague/famine — the years tick, nothing builds) ·
+  **WALL-RAISING** (curtain by curtain, tower by tower — already ruled) ·
+  **THE YEAR CARD** (the dated title naming each event in the marginalia's
+  own words).
+- **§609.3 THE RESTRAINT LAW, inherited from the fabric's own stateMarks
+  doctrine ("nothing is red, nothing is animated, nothing shouts") and
+  amended for film:** every beat stays in the calm-ink register — minimal
+  motion, no alarm colors, no spectacle. **SALIENCE COMES FROM PACING, NOT
+  VOLUME** (§608.2): the event gets its pause, its card, and one small drawn
+  consequence that persists — the scar, the banner, the ghost — so the
+  viewer feels the moment because the film breathes, not because it flashes.
+  Every beat derives from a dated, typed event the world actually records;
+  the film may never invent drama the ledger of the world does not hold.
