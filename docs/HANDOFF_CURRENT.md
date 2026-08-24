@@ -10,7 +10,7 @@ this one.**
 
 ## ⛔⛔⛔ PICKUP CARD — REWRITTEN AT EVERY LEDGER COMMIT (owner directive §448: the chair's 5-hour usage window closes often; a successor or the same chair picks up HERE in 60 seconds)
 
-**AS OF 2026-08-23 20:45 CDT · ledger §512 · ⭐⭐ DW-R RESEARCH COMPLETE · ⛔ EVERY DISPATCH `model: "opus"` (§484) · build `claude/composite-r4` = `b2852ccc` (47 landings; 0 READY across 169 packets; `undercityHighWaterEnabled` on the branch DARK; migrations 197/198/199 on the branch) · LANE CAP = TWO (§465)**
+**AS OF 2026-08-23 21:11 CDT · ledger §513 · ⭐⭐ DW-R RESEARCH COMPLETE · ⛔ EVERY DISPATCH `model: "opus"` (§484) · build `claude/composite-r4` = `5055990a` (48 landings; 0 READY across 170 packets; `undercityHighWaterEnabled` on the branch DARK; migrations 197/198/199 on the branch) · LANE CAP = TWO (§465)**
 
 FIRST ACTS ON PICKUP, IN ORDER:
 1. `git -C /Users/cstokes/Desktop/settlement-engine log -1 --oneline review-fixes-2026-07-08 claude/composite-r4` — if either moved past this card, the ODQ tail is newer than this card; read it.
@@ -21,7 +21,6 @@ FIRST ACTS ON PICKUP, IN ORDER:
 
 | seat | lane | worktree (6298872d scratchpad) | receipt | state at card time | on pickup |
 |---|---|---|---|---|---|
-| LANDING | TE-CG1-LANDING (**Opus**) `[OPUS-RUN]` | laneTECG1-tree | laneTECG1-receipt.md | landing MF-CG1 Half A (the 504-row real-pipeline corpus; SIX files, ZERO src bytes); a rebase IS owed onto b2852ccc; expect `valid: 170 packets (0 READY)` | ⛔ pin its tip from its report BEFORE cleanup; CAS on two-part green |
 | BUILD | TE-CH-2 (**Opus**) `[OPUS-RUN]` | laneTECH2-tree | laneTECH2-receipt.md | the magic licence: 28 rows, FIVE gate paths, a declared golden re-record | pin holding-ch2 |
 | BUILD | TE-UC5 (**Opus**) `[OPUS-RUN]` | laneTEUC5-tree | laneTEUC5-receipt.md | the connectivity graph — the LAST undercity car | pin holding-uc5 |
 | BUILD | TE-WEB-8 (**Opus**) `[OPUS-RUN]` | laneTEWEB8-tree | laneTEWEB8-receipt.md | paywall honesty; re-derive advertised-vs-gated for EVERY row | pin holding-web8 |

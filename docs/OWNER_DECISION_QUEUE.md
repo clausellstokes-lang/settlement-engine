@@ -21518,3 +21518,56 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   already adopted the thread cap — UC-5's receipt reads "capped sweep +
   widened battery running" — and the two nearest completion (UC-5, WEB-8)
   are past their mutant phase.
+
+## §513 — MF-CG1 LANDED (THE 48TH) `[OPUS-RUN]`: THE CARTOGRAPHY STAGE FINALLY HAS A REAL-PIPELINE GROUND; **THE INSTRUMENT LIED FIRST AND THE CONTROL CAUGHT IT**; THE THREAD CAP WORKS (LOAD 42 → 22); THE SLOT-FACTS CARD RE-MEASURED (2026-08-23 21:11 CDT)
+
+- **§513.1 LANDED.** Tip `5055990a` = 2 over slot `b2852ccc`, porcelain 0,
+  **ZERO `src/` bytes** (chair-verified). The rebase was owed and taken
+  (`--onto b2852ccc 00e7af612 74586243`), two predicted conflicts, both
+  keep-both; the four created blobs byte-identical to the holding. Manifest
+  169 → 170, **ADDED `[MF-CG1]`, REMOVED `[]`, DRIFTED `[]`**. Census walked
+  at the rebased tree: `2516/366/2150/20863/5808` + `+1/+0/+1/+19/+6` =
+  **`2517/366/2151/20882/5814`**, every figure from the arm's own message,
+  `parked` PASSING UNMOVED at 366, `366 + 2151 = 2517`, both controls
+  convicting, restores cmp 0. Terminal: `valid: 170 packets (0 READY)` ·
+  `head = 199` · 173/173 · 1134/1134 · `11 known failure(s) of **28924**
+  tests, ceiling 11` · `STRICT DIST OK` · `[gate-tail] exit: 0` ·
+  `TRUE_EXIT=0` · 13.0 GB free. The +19 attributed BY EXECUTION against
+  28,905 measured in a temp worktree at the slot. Sweep 1,883 files / 23,807
+  tests: **7 failed = the re-proved seven, 0 strays, 0 member reds.** **CAS
+  `b2852ccc → 5055990a`.** Pruned both pins, the tree and /tmp/cg1l.
+- **§513.2 ⭐ THE INSTRUMENT LIED FIRST, AND THE CONTROL IS WHY WE KNOW.**
+  `git rev-parse "${SHA}:${path}"` **ECHOES an unresolvable argument and exits
+  0** — the lane's first carry table read EVERY row as present, including the
+  deliberately nonexistent control. **That control is the only reason the
+  table was not believed.** Re-read with `--verify -q` plus a positive
+  non-vacuity probe. Two more silent liars banked by the same lane: an INDEX
+  status cell whose PROSE contains a status word satisfies
+  `parseIndexPacketStatuses` — the lane's first flip control PASSED because
+  the cell said "landed at slot" in prose while the marker read READY, so the
+  bold marker must be the ONLY status word in the cell; and a zsh `while read
+  … path` loop destroyed `$PATH` mid-verification (the §486.2 hazard, second
+  sighting). All four are now in the slot-facts card as a standing checklist.
+- **§513.3 THE LANE CORRECTED ITS OWN PREDECESSOR'S ENUMERATION.** Re-deriving
+  the member's OWN token set returned 72 paths across ELEVEN trees, and
+  **`tests/pdf` and `tests/security` are reached by the `townMapFixtures`
+  token and were absent from the member's stated thirteen** — not drift, but
+  N−2 of its own rule, true at the build base too. Swept fifteen trees plus
+  `tests/generation.test.js`. This is the §489.3 grep arm doing exactly what
+  it was created for, one level up: auditing the enumeration rather than
+  trusting it.
+- **§513.4 THE THROTTLE WORKS, MEASURED.** Load averages fell from
+  **21.04 / 34.26 / 42.81** at §511 to **5.68 / 15.19 / 21.92** after the
+  two-thread cap reached the live lanes — the one-minute figure down roughly
+  four-fold. The sweep at 2 threads costs ~790 s against ~450 s uncontended,
+  which is the correct trade: four lanes each paying 1.75× beats four lanes
+  each paying 3–5× while starving each other.
+- **§513.5 THE SLOT-FACTS CARD RE-MEASURED** for `5055990a` per its own
+  void-on-move rule — now carrying the tuple, the ruin count, the banked
+  seven, 170 packets, the 28,924 ratchet base, the migration head, both
+  typecheck ceilings, the OSR red, the golden blob, the measured sweep cost,
+  the six throughput laws and the four silent-liar instruments as a
+  checklist. Seats: CH-2 · UC-5 · WEB-8 building (Opus); **one free.**
+  Holding roster empty. **Next: CG-2 (the identical-footprint defect) is now
+  unblocked — CG-1's corpus is the ground it needs — and CG-1b (the derived
+  caps) waits only on BAND 21.**

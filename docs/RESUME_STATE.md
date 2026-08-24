@@ -51,6 +51,8 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 21:11 CDT 08-23: §513 — MF-CG1 LANDED (48th) CAS → 5055990a; 170 packets / 0 READY.
+# `git rev-parse SHA:path` ECHOES and exits 0 — the nonexistent-path control caught it. Load 42 → 22.
 # ⭐⭐⭐ 20:45 CDT 08-23: §512 — per-lane cost measured: serial mutant drives (whole file per mutant!)
 # + S0 re-derivation are the self-inflicted halves. SLOT-FACTS card published; mutants now drive one ARM.
 # ⭐⭐⭐ 20:18 CDT 08-23: §511 — THE BOX IS THE BOTTLENECK (8 cores, load 42, 7 mutex waiters).
