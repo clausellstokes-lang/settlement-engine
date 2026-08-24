@@ -3460,7 +3460,7 @@ already exist (corruption, the watch, the power structure, the syndicate standin
 
 **Law 3 — THE FLOOR IS EXISTENCE.** Every family in this tranche has a floor of ZERO CELLS, and
 the tranche's contribution is that **a zero-cell floor is a legitimate, expressible state, not a
-generation failure.** Sixteen of the 28 rows are NO_BUILDING at every tier they exist at (see
+generation failure.** Eleven of the 28 rows are NO_BUILDING at every tier they exist at (see
 §Σ.4). The engine cannot currently say this — an institution always resolves to a template and
 draws a box — and that is the tranche's engine gap E1. *Recommendation:* `NO_BUILDING` becomes a
 first-class verdict on the requirement roster, and the interior model returns a typed absence

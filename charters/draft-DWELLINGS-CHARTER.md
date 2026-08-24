@@ -823,7 +823,7 @@ both proposed by R-INST-2 and given civic/defence/dwelling members by CIRC):
 | **`VERTICAL`** *(NEW)* | `HOIST` · `CHUTE` · `SHAFT` · `HATCH` · `WINDLASS` | non-human circulation; placed by law 9; an exterior consequence (the taking-in door column, the well-house) |
 | **`EXTERIOR_WALK`** *(NEW)* | `COURT_RING` · `YARD` · `PARADE/MUSTER` · `WALL_WALK` · `PALISADE_WALK` · `RANGE/LINEAR` · `STREET` · `ROAD` · `GROUND` | a typed CARRIER, not a map fact — the fabric owns its geometry, DW owns its JOINTS |
 
-**Count: 9 top-level classes; ~55 sub-forms** (CIRC reported ~45 and this
+**Count: 9 top-level classes; 61 sub-forms** (CIRC reported ~45 and this
 charter adds the playhouse ring, the box tier, the ingressus, and the four
 `THROUGH_ROOM` specialisations R-INST-4 found).
 
@@ -848,7 +848,7 @@ houses licence it by their own program) · `ELITE_LATE` (long gallery
 
 ### §2.5 · STORAGE CLASSES (§453 + the CIRC addendum's fill)
 
-The §453 top level SURVIVES. ~35 sub-forms (CIRC §4.4), summarised:
+The §453 top level SURVIVES. 54 sub-forms (CIRC §4.4), summarised:
 `CLOSET{MUNIMENT · TREASURE/PLATE · GARDEROBE · CHAMBER · STUDY · PLATE_SAFE ·
 LINEN · OBSERVATION}` · `PANTRY`+`BUTTERY`{the PAIR, `SERVICE_DOORS{2|3}`,
 `DISPENCE`, `BUTLER'S`, `COOK'S`} · `LARDER{ANNEXED_TO_KITCHEN (medieval) ·
@@ -1044,7 +1044,7 @@ Cell {
 
 CirculationCell extends Cell {
   class,                       // §2.4's 9
-  subForm,                     // §2.4's ~55
+  subForm,                     // §2.4's 61
   licence: { grade, era, institutionKinds[] },
   widthBucket, lengthBucket,   // §2.4's measured buckets
   enclosure?, level?, functions[], walkable?,
@@ -1891,7 +1891,7 @@ table under it.
 ### §5.2 · DW-1 — vocabularies and rosters, dark (6 cars)
 
 §2 counts 83 cell kinds, **82** fixture kinds (⛔ amended from 81, §Σ AR-7), 48
-partis, 9 circulation classes with ~55 sub-forms, ~35 storage sub-forms and 6
+partis, 9 circulation classes with 61 sub-forms, 54 storage sub-forms and 6
 adjacency polarities. That is far too much for one car, and §0.4 shows the
 constraint is the packet law, not eslint. Split by CONSUMER, so each car's blast
 radius is one reader set:
@@ -2989,8 +2989,8 @@ eight test files do; DW-7a is the single LIGHT car and mints the program's
 the one surface with no gate to inherit). Vocabularies: **48 partis** (after
 merging fifteen proposals into one `GATED_COURT_RING`), **83 cell kinds** (28 − 2
 dead + 57 new — both intermediates corrected, the total unchanged), **82 fixture
-kinds** (was 81), **9 circulation classes** with ~55 sub-forms and five measured
-width buckets, **~35 storage sub-forms** with six adjacency polarities of which
+kinds** (was 81), **9 circulation classes** with 61 sub-forms and five measured
+width buckets, **54 storage sub-forms** with six adjacency polarities of which
 three are prohibitions.
 
 **The same-seed shifts — ⛔ there are now TWO on that surface, not one.** CG-1 and
