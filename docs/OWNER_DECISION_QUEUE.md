@@ -23279,3 +23279,87 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   **121** against repo head **199**; 78 migrations pending, **198 is
   DESTRUCTIVE**; `applied-head.json` dated **2026-07-28**. Owner-gated by
   nature and unchanged by anything above.
+
+## §539 · DW-0 DELIVERED, AND IT CORRECTED MY DISPATCH IN TWO PLACES (2026-08-24 02:53 CDT)
+
+- **§539.1 THE ARTEFACT.** `docs/DW0-CHARTER-COMPILED.md`, **716 lines / 71,864 B**,
+  committed detached at **`7c3377cd4`** and immediately **pinned to
+  `refs/preserve/holding-dw0`** — it was a detached worktree HEAD, the exact
+  shape that was one command from destroying two tips earlier tonight (§538.2).
+  Zero engine bytes, no packet, census delta zero.
+- **§539.2 IT IS A RULED LAYER, NOT A REWRITE — J-DW0-1 RATIFIED.** Restating
+  237 KB of measured evidence would have created **a second truth about every
+  figure six research lanes produced**. The frozen draft stays citable at
+  `029268fe5`. Correct instinct, and the same reasoning that ratified landing
+  at 175 packets rather than authoring a retrospective one (§537.5).
+- **§539.3 ⛔ MY BRIEF MISLOCATED THE CHARTER — CORRECT BYTES, WRONG HOME.** I
+  told the lane to read `docs/DESIGN_DWELLINGS_PROGRAM.md` "~237 KB" with an
+  architecture doc "~141 KB" beside it. **CONFIRMED FALSE.** The real
+  `docs/DESIGN_DWELLINGS_PROGRAM.md` is **31,733 B on the ledger branch and
+  ABSENT at the build slot and on master**; 237,547 B and 141,659 B are the
+  sizes of `029268fe5:charters/draft-DWELLINGS-{CHARTER,ARCHITECTURE}.md` in
+  the research bundle. **This is a third instance of §441 J7 ("a charter's
+  CONFIRMED home is a hypothesis") and I authored it.** The figures were real;
+  the homes were invented. ⚠ Successors: the DW design record lives on the
+  LEDGER branch and at the research pin — **not at the build slot.**
+- **§539.4 ⛔ I SAID SEVEN G-DEFECTS; THERE ARE EIGHT, AND THE EIGHTH IS THE
+  ONLY ONE THAT IS DW's.** My brief said "the seven G-defects G1–G7".
+  **CONFIRMED FALSE:** R-INST-5 carries **G1–G8**, and G8 has a real body
+  ("THE INTERIOR VOCABULARY CANNOT EXPRESS THIS TRANCHE",
+  `draft-R-INST-5-MAGICAL.md:3870`). The dossier's own header says six, so the
+  source is inconsistent three ways. The charter dispositions all eight and
+  finds **exactly one — G8 — belongs to DW**; the other seven go to CH or the
+  content train. **A lane obeying me literally would have dispositioned every
+  defect away and never noticed it had been handed its own wave.** The lane
+  caught it. This is the second time tonight a lane corrected the chair by
+  measurement (§537.2, §538.5 J-CH-3-1).
+- **§539.5 R-INST-6 CONTRADICTS ITSELF, CONFIRMED AT THE BYTES.** Line 3463:
+  "**Sixteen** of the 28 rows are NO_BUILDING at every tier". Line 3706:
+  "HOSTED 13 … **NO_BUILDING 11**" — enumerated by row number. The charter
+  recommends taking **eleven**, on the ground that an enumeration you can count
+  beats a prose figure. Provisionally ruled **for eleven**, pending the panel;
+  ⚠ 13 + 11 = **24, not 28**, so four rows are unaccounted and the panel is
+  tasked with the full accounting. **The dossier itself should be corrected, or
+  a later reader re-imports sixteen.**
+- **§539.6 THE PAYWALL CONFLICT — THE DRAFT WOULD HAVE SHIPPED A GATE THE OWNER
+  DID NOT SIGN.** The frozen draft's B16 recommended a "secrets premium", a
+  **content-depth** paywall. The owner signed **B16b putting the paywall on the
+  AUTHORING axis**, viewing and interacting free at all levels. Incompatible.
+  The estate had already found this independently: `entitlementLadder.js:135`
+  exports **`VIEWING_PAYWALLS_PENDING_514`** — three viewing-axis rows still
+  claiming a paywall — guarded shrink-only by
+  `tests/config/entitlementLadder.enforcement.test.js`. **CONFIRMED, both the
+  export and the guard.** DW's obligation is the negative one: **do not add a
+  fourth.** Discharging the existing three is **OWNER-GATED** (paid surface).
+- **§539.7 §519 vs §498 — A TENSION I HAVE NOT RESOLVED, AND WILL NOT GUESS.**
+  §519 makes ownership **POWER-scoped** (THE POWERS = a ruler seat plus at most
+  three coup contenders), which makes `occupies` the **common** relation and
+  `owns` rare — the inverse of the draft, and it resizes DW-1f and EST-4. But
+  §498 defines an estate as buildings belonging to "one singular institution
+  **or individual**". An individual owner under a power-scoped schema is not
+  obviously expressible, and product scope forbids narrating a named
+  character's fate. **Put to the skeptic panel to attack; flagged to the owner
+  because it grazes persistence shape.**
+- **§539.8 THE SKEPTIC PANEL IS RUNNING — §441 J7 REQUIRES IT BEFORE ANY
+  CHARTER RULING.** Six perspective-diverse lenses (owner-signature fidelity ·
+  engine grounding at the slot · internal consistency and arithmetic ·
+  dependency and scope · research fidelity · omission hunt), each attacked by
+  its own refuter defaulting to REFUTED, then synthesised into a ranked ruling
+  docket. **Read-only by construction** — no worktrees, no gate — so it does
+  not contend the serial mutex three live build lanes are queued on.
+- **§539.9 SEATS AND WHAT IS ACTUALLY BLOCKING.** DW-0's seat freed; **CH-4 and
+  CH-5 were NOT dispatched into it** because both are catalog cars that would
+  collide with CH-3's live edits, and the disjoint-file-set rule exists for
+  exactly that. **R3 is blocked behind AIP-1** — it writes into the register
+  AIP-1 introduces, and AIP-1 is mid-landing in STACK-4. Seat filled instead
+  with **TE-CH-5-PREP**, read-only, preparing the ruling that lets MF-CH2B's
+  packet leave DRAFT. ⚠ **The real bottleneck is not seats — it is the SERIAL
+  GATE.** Four lanes queue on one mutex; the owner's cap of four buys nothing
+  further while the gate is the constraint, so gate-free work is the right
+  filler.
+- **§539.10 ⛔ A DATED EXTERNAL DEADLINE, RE-SURFACED.** Higgsfield's new §5.5
+  ("you will not remove, alter, or obscure any provenance signals or
+  markings") **binds this pre-existing account from 2026-08-27 — three days
+  out.** R3 (metadata into the 46 bare files, via three byte-surgery injectors
+  each owing a pixel-identity control) is the car that answers it, and it
+  cannot start until AIP-1 lands.
