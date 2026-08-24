@@ -67,6 +67,10 @@ import {
 } from './wallCircuit.js';
 import { demoteCircuits, reserveFossils, sitedDemotion } from './circuitDemotion.js';
 import { wallMeta } from './wallRuns.js';
+// ⭐ ODQ §575/§590 · the band regime is derived here (the only scope holding all four inputs);
+// `wallForm`/`WALL_FORMS` supply the masonry-investment term the regime's military read uses.
+import { wallForm, WALL_FORMS } from './walls.js';
+import { bandRegime } from './rampartWorks.js';
 import { compoundDiscs, compoundGround } from './compoundGround.js';
 import { partitionAtTheWall } from './districtPartition.js';
 import { censusLeaf } from './leafCensus.js';
@@ -583,6 +587,28 @@ export function buildFabric(settlement, model, options = {}) {
     seeding, record, settlement: s, part: inverted.part, orgs: organisms, key: fork('built|wall'),
     bodyMask: inverted.bodyMask, wallCloseR: inverted.wallCloseR,
     glacisClear: faubourgSeriousness(lawfulness, prosperityRank) >= GLACIS_THRESHOLD,
+    // ⭐⭐⭐ ODQ §575/§590 · **THE BAND REGIME, DERIVED ONCE FOR THE SETTLEMENT.** `null` when the
+    // feature is not armed, and `circuitInputsFrom` then produces character-identical input text.
+    // ⚠ IT IS DERIVED HERE AND NOT PER RING: a regime is a fact about the TOWN — its war, its
+    // peace, its purse — and deriving it inside the ring loop would let a city's two circuits
+    // disagree about the same history. It is also derived here because this is the only scope
+    // that holds all four of its inputs (the stressors, the readiness, the prosperity rank and
+    // the wall's own standing years).
+    rampart: options.rampart === true
+      ? bandRegime({
+        settlement: s,
+        glacisClear: faubourgSeriousness(lawfulness, prosperityRank) >= GLACIS_THRESHOLD,
+        prosperityRank,
+        formWeight: (WALL_FORMS[wallForm(s, scale.extentTier).form] || WALL_FORMS.palisade).weight,
+        // ⚠ THE YEARS THE WALL HAS STOOD, or `null` where the vintage is unrecorded. `bandRegime`
+        // then claims NO peace from an unknown date — understated rather than invented, which is
+        // the same rule `traceWalls`' own vintage clause states.
+        wallStoodYears: wallStanding.vintage && Number.isFinite(wallStanding.vintage.ageAtBuild)
+          ? Math.max(0, (Number.isFinite(options.presentAge) ? options.presentAge : presentYear(s))
+            - wallStanding.vintage.ageAtBuild)
+          : null,
+      })
+      : null,
     // ⭐⭐⭐ ODQ §577 · THE ESCARPMENT THE CIRCUIT TERMINATES AT. `null` when the feature is not
     // armed, and `circuitInputsFrom` then produces character-identical input text — the dormancy
     // proof's own mechanism, stated at its source.
@@ -1316,6 +1342,9 @@ export function buildFabric(settlement, model, options = {}) {
       precinctReason: precincts.reason,
       glacisClear: faubourgs.glacisClear,
       faubourgReason: faubourgs.reason,
+      // ⭐⭐⭐ ODQ §575 · THE BAND REGIME. ⚠ SPREAD CONDITIONALLY — an absent feature that still
+      // publishes its zero is not dormant (§577's own row, and the measured leak behind it).
+      ...(wallHandles.rampart ? { bandRegime: wallHandles.rampart } : {}),
       // §11 THE SNAPSHOT AXIS, measured rather than asserted.
       snapshotYear: Number.isFinite(options.year) ? options.year : presentYear(s),
       settlementAge: presentYear(s),

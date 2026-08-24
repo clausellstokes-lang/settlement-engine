@@ -187,7 +187,21 @@ export function circuitInputsFrom(a) {
     // ⛔ IT USED TO BE `null` ON EVERY LEAF — a declared input whose value was a constant, which
     // is a hash column that can never move and therefore a declaration that never declared
     // anything. The form decides the facets, the tower interval, the smoothing and the ditch.
-    wallForm: wallForm(a.settlement, a.tierScale.extentTier).form,
+    // ⭐⭐⭐ ODQ §575/§590 · **THE BAND REGIME JOINS THE FORM ROW RATHER THAN TAKING ONE OF ITS
+    // OWN, AND THE REASON IS `inputsText`'S MECHANISM — the SAME reason §577's escarpment folded
+    // into `substrateKey`, recorded there at length.** `inputsText` walks the FROZEN list and
+    // writes `k=∅` for a null, so a new `'bandRegime'` key would append `bandRegime=∅` to the
+    // input text of **every leaf in the estate** and move every circuit's `inputsHash` on a wave
+    // whose feature is DORMANT. A dormant feature that moves a hash is not dormant.
+    // ⭐ AND THE FOLD IS THE HONEST HOME. This row's own docstring says the form *"decides the
+    // facets, the tower interval, the smoothing and the ditch"* — it is the row that answers
+    // WHAT KIND OF WALL THIS IS. A clear-band rampart and a tangential one are different walls:
+    // they reserve different ground, carry different lanes and are drawn at different rungs.
+    // ⚠⚠ IT MUST BE HERE AND NOT NOWHERE. `assertCircuitFresh` verifies a ring set against this
+    // hash, so if arming the regime left the input text unchanged a consumer could verify a
+    // CLEAR ring set against the inputs of a TANGENT one and be told it was fresh.
+    wallForm: wallForm(a.settlement, a.tierScale.extentTier).form
+      + (a.rampart && a.rampart.regime ? `|${a.rampart.regime}` : ''),
     vintage: a.vintage ? { ageAtBuild: a.vintage.ageAtBuild, year: a.vintage.year } : null,
     seed: a.seeding.seed,
     variant: a.seeding.variant,
@@ -319,6 +333,10 @@ export function deriveWallCircuit(inputs, raw) {
     // name would be B8b §11.3's own seam, *"a handle that gains a fact of its own escapes the
     // hash silently"*, which is why the key is folded above rather than left out.
     cliffs: raw.cliffs || null,
+    // ⭐⭐⭐ ODQ §590/§598 · THE RAMPART AND ITS §575 REGIME. It rides the RAW handle for the same
+    // reason the escarpment does — it is a DERIVED READING whose identity, not whose value, is
+    // what the declared inputs must carry — and its identity is folded into `wallForm` above.
+    rampart: raw.rampart || null,
   });
   const gateRadius = inputs.builtRadius * GATE_RADIUS_SHARE;
   const node = {

@@ -150,6 +150,20 @@ export const OP_CEILING = 2200;
 const TAIL_RESERVE = 440;
 
 /**
+ * ⭐⭐ REG-2 · **THE TAIL RESERVE AS SEEN FROM §15, WHICH IS A DIFFERENT NUMBER AND HAD TO BE
+ * MEASURED.** `TAIL_RESERVE` (440) is what stages 11c and 12 must hold back for everything after
+ * THEM, and that list includes the wall itself. The rampart's own course ration sits at §15, by
+ * which point the landmarks, terraces and bridges are already spent — so reserving 440 again
+ * would double-count them and starve the arm on every leaf.
+ * ⚠ MEASURED at this base over all ten walled leaves × six lenses: the cost of everything the
+ * pass emits AFTER the wall section (the §250.5 fossils, the §10 state marks, the §18.1 precinct
+ * bounds, the chrome, the legend) tops out at 96 primitives. 140 is the next round figure above
+ * it, and the §173 lettering is subtracted separately at the call site because it has its own
+ * estimator. ⚠ It is a RESERVE, never an allowance: a leaf that cannot afford ticks draws none.
+ */
+const RAMPART_TAIL_RESERVE = 140;
+
+/**
  * ⭐⭐⭐ THE WEIGHT LADDER IS THE §2.3.2 MEASURED TABLE (MF-S1), NOT A SET OF PREFERENCES.
  *
  * MF-S1 measured stroke widths on twelve reference plates normalised to a 5056 px leaf and
@@ -1507,6 +1521,197 @@ export function renderFolio(fabric, opts = {}) {
   //    ⚠ A ring the demotion did NOT reach still draws as a wall, so a leaf whose fossil ladder
   //    is absent degrades to the old picture rather than to an invisible one.
   const demotedEpochs = new Set(((fabric.demotion && fabric.demotion.ringStreets) || []).map((r) => r.epoch));
+  const wallEntryOps = prims.n;
+
+  /* ── ⭐⭐⭐ REG-2 · **THE RAMPART'S INK** (ODQ §590/§598; hf261 · hf313 · hf315).
+   *
+   * ⭐ THE ONE THING THIS FUNCTION IS NOT ALLOWED TO DO IS DECIDE ANYTHING. Every width, every
+   * position and every kind below comes off `ring.rampart`, which the fabric derived; the lens
+   * supplies TONE and WEIGHT and nothing else. That is the §230 family's own cure applied to a
+   * new mark: the band is drawn at `bandHalfOfRun[j]`, which is `runBands[j].stone / 2` — the
+   * SAME number §200's reservation was computed from — so the ink can never cover ground the
+   * law did not reserve, by construction rather than by a check.
+   *
+   * ⛔⛔ **THE EDGES ARE FRACTIONS OF THE OLD STROKE, AND MEASUREMENT FORCED IT.** `wallBand`'s
+   * own law is that the stones are AT LEAST the ink — "the lightest form's band EQUALS its
+   * stroke" — so at the sealed numbers (town stone 2.07 against ink 2.48; city 3.33 against
+   * 3.43) two edges drawn at the curtain's own weight would sit ON TOP of each other and the
+   * band would read as one fat line. ⭐ THE CLASS: **A RESERVATION SIZED TO CONTAIN A STROKE IS
+   * NOT WIDE ENOUGH TO DRAW THAT STROKE TWICE.** The outer face keeps the heavier weight (it is
+   * hf314's bold fighting face) and the inner parapet the lighter, and the toned walk between
+   * them carries the mass the single stroke used to carry alone.
+   */
+  const RT = {
+    walk: mix(P.paper, P.walls, 0.26),   // hf261 rungs 4–5: the wall-walk surface
+    bank: mix(P.paper, P.walls, 0.19),   // rungs 2–3: earth is paler than masonry
+    tower: mix(P.paper, P.walls, 0.34),  // hf315's tower masonry, a shade solider
+    course: mix(P.paper, P.walls, 0.62), // the coursing / chamber line — texture, not ink
+  };
+  /** Offset an OPEN polyline outward from the ring's own centre by `dOut`. */
+  const offsetOpen = (line, dOut, cx, cy) => {
+    const n = line.length; const outL = [];
+    for (let i = 0; i < n; i++) {
+      const a = line[Math.max(0, i - 1)], b = line[i], c = line[Math.min(n - 1, i + 1)];
+      let nx = 0, ny = 0;
+      for (const [p, q] of [[a, b], [b, c]]) {
+        const ex = q[0] - p[0], ey = q[1] - p[1]; const L = Math.hypot(ex, ey);
+        if (L < 1e-9) continue;
+        nx += -ey / L; ny += ex / L;
+      }
+      let L = Math.hypot(nx, ny);
+      if (L < 1e-9) { nx = 1; ny = 0; L = 1; }
+      nx /= L; ny /= L;
+      if ((b[0] - cx) * nx + (b[1] - cy) * ny < 0) { nx = -nx; ny = -ny; }
+      outL.push([b[0] + nx * dOut, b[1] + ny * dOut]);
+    }
+    return outL;
+  };
+  const rampartSpend = { bands: 0, joints: 0, gates: 0, ticks: 0, tickPitch: 0, tickRung: 0 };
+
+  function drawRampart(ring, owned, w, cx, cy) {
+    const R = ring.rampart, dress = R.dress;
+    const half = R.bandHalfOfRun || [];
+    let walkD = '', outerD = '', innerD = '', combD = '', coreD = '';
+    /** @type {Array<{line:Array<[number,number]>, h:number}>} */ const spines = [];
+    for (const o of owned) {
+      const h = Math.max(0.30, (half[o.j] == null ? w * 0.5 : half[o.j]));
+      const A = offsetOpen(o.line, h, cx, cy);
+      const B = offsetOpen(o.line, -h, cx, cy);
+      walkD += polyPath(A.concat(B.slice().reverse()));
+      outerD += linePath(A);
+      innerD += linePath(B);
+      prims.n += 3; rampartSpend.bands += 3;
+      spines.push({ line: o.line, h });
+      // hf261 rung 2 · THE PALE COMB, and it rides the PALISADE alone. The plate shows a comb on
+      // exactly one rung — the tops of the pales — and its three masonry rungs carry none.
+      // ⭐ ONE DASHED PATH, NOT ONE MARK PER TOOTH: the §217 pre-measure priced a per-tooth comb
+      // at ~845 marks a leaf against 74 of headroom on the tightest walled leaf.
+      if (dress.pales) { combD += linePath(offsetOpen(o.line, h * 1.55, cx, cy)); prims.n++; rampartSpend.bands++; }
+      // hf261 rung 5 · THE RUBBLE CORE, read at plan scale as a broken line down the walk.
+      if (dress.core) { coreD += linePath(o.line); prims.n++; rampartSpend.bands++; }
+    }
+    const outerW = Math.max(0.35, r2(w * 0.46));
+    const innerW = Math.max(0.28, r2(w * 0.32));
+    if (walkD) push(`<path d="${walkD}" fill="${dress.walk ? RT.walk : RT.bank}" stroke="none" fill-rule="nonzero"/>`);
+    if (coreD) push(`<path d="${coreD}" fill="none" stroke="${RT.course}" stroke-width="${r2(Math.max(0.22, w * 0.24))}" stroke-opacity="0.62" stroke-dasharray="${r2(frontage * 0.30)} ${r2(frontage * 0.22)}" stroke-linecap="butt"/>`);
+    if (innerD) push(`<path d="${innerD}" fill="none" stroke="${P.walls}" stroke-width="${innerW}" stroke-linejoin="round" stroke-linecap="round"/>`);
+    if (outerD) push(`<path d="${outerD}" fill="none" stroke="${P.walls}" stroke-width="${outerW}" stroke-linejoin="round" stroke-linecap="round"/>`);
+    if (combD) push(`<path d="${combD}" fill="none" stroke="${P.walls}" stroke-width="${r2(Math.max(0.3, w * 0.34))}" stroke-dasharray="${r2(frontage * 0.13)} ${r2(frontage * 0.17)}" stroke-linecap="butt"/>`);
+
+    /* ── THE JOINT WORKS. hf315's plan shapes; the KINDS are the run chain's, unchanged. */
+    let body = '', rings = '', chamber = '';
+    for (const j of R.joints) {
+      const rr = j.r;
+      if (j.kind === 'square' || j.kind === 'angle') {
+        const q = [[-rr, -rr * 0.86], [rr, -rr * 0.86], [rr, rr * 0.86], [-rr, rr * 0.86]]
+          .map(([x, y]) => [j.x + x * j.dx - y * j.dy, j.y + x * j.dy + y * j.dx]);
+        body += polyPath(q); rings += polyPath(q);
+      } else if (j.kind === 'beaked') {
+        const ux = j.x - cx, uy = j.y - cy; const L = Math.hypot(ux, uy) || 1;
+        const px = ux / L, py = uy / L;
+        const q = [[j.x + px * rr * 1.9, j.y + py * rr * 1.9], [j.x - py * rr, j.y + px * rr],
+          [j.x - px * rr, j.y - py * rr], [j.x + py * rr, j.y - px * rr]];
+        body += polyPath(q); rings += polyPath(q);
+      } else if (j.kind === 'open-backed-D') {
+        const ux = j.x - cx, uy = j.y - cy; const L = Math.hypot(ux, uy) || 1;
+        const px = ux / L, py = uy / L;
+        const arc = `M${r2(j.x - py * rr)} ${r2(j.y + px * rr)}`
+          + `A${r2(rr)} ${r2(rr)} 0 0 1 ${r2(j.x + py * rr)} ${r2(j.y - px * rr)}Z`;
+        body += arc; rings += arc;
+      } else {
+        body += `M${r2(j.x - rr)} ${r2(j.y)}a${r2(rr)} ${r2(rr)} 0 1 0 ${r2(rr * 2)} 0a${r2(rr)} ${r2(rr)} 0 1 0 ${r2(-rr * 2)} 0Z`;
+        rings += `M${r2(j.x - rr)} ${r2(j.y)}a${r2(rr)} ${r2(rr)} 0 1 0 ${r2(rr * 2)} 0a${r2(rr)} ${r2(rr)} 0 1 0 ${r2(-rr * 2)} 0Z`;
+      }
+      prims.n += 2; rampartSpend.joints += 2;
+      if (j.chamber > 0.18) {
+        const c = j.chamber;
+        chamber += `M${r2(j.x - c)} ${r2(j.y)}a${r2(c)} ${r2(c)} 0 1 0 ${r2(c * 2)} 0a${r2(c)} ${r2(c)} 0 1 0 ${r2(-c * 2)} 0Z`;
+        prims.n++; rampartSpend.joints++;
+      }
+    }
+
+    /* ── THE GATEHOUSES. hf313's PLAN vignettes, at the rung the form earns. */
+    let bars = '';
+    for (const g of R.gatehouses) {
+      const nx = -g.dy, ny = g.dx;
+      const q = [[-g.depth, -g.half], [g.depth, -g.half], [g.depth, g.half], [-g.depth, g.half]]
+        .map(([x, y]) => [g.x + x * g.dx + y * nx, g.y + x * g.dy + y * ny]);
+      body += polyPath(q); rings += polyPath(q);
+      prims.n += 2; rampartSpend.gates += 2;
+      for (const dr of g.drums) {
+        body += `M${r2(dr.x - dr.r)} ${r2(dr.y)}a${r2(dr.r)} ${r2(dr.r)} 0 1 0 ${r2(dr.r * 2)} 0a${r2(dr.r)} ${r2(dr.r)} 0 1 0 ${r2(-dr.r * 2)} 0Z`;
+        rings += `M${r2(dr.x - dr.r)} ${r2(dr.y)}a${r2(dr.r)} ${r2(dr.r)} 0 1 0 ${r2(dr.r * 2)} 0a${r2(dr.r)} ${r2(dr.r)} 0 1 0 ${r2(-dr.r * 2)} 0Z`;
+        const c = dr.r * 0.44;
+        chamber += `M${r2(dr.x - c)} ${r2(dr.y)}a${r2(c)} ${r2(c)} 0 1 0 ${r2(c * 2)} 0a${r2(c)} ${r2(c)} 0 1 0 ${r2(-c * 2)} 0Z`;
+        prims.n += 3; rampartSpend.gates += 3;
+      }
+      // hf313 · THE PASSAGE: paper where the road runs through, chamber-lined at the stone rungs.
+      if (g.anatomy !== 'posts') {
+        const pq = [[-g.depth * 0.52, -g.half * 0.40], [g.depth * 0.52, -g.half * 0.40],
+          [g.depth * 0.52, g.half * 0.40], [-g.depth * 0.52, g.half * 0.40]]
+          .map(([x, y]) => [g.x + x * g.dx + y * nx, g.y + x * g.dy + y * ny]);
+        chamber += polyPath(pq); prims.n++; rampartSpend.gates++;
+      }
+      // hf313 · THE PORTCULLIS, drawn as a toothed line across the passage — ONE dashed mark.
+      if (g.portcullis) {
+        bars += `M${r2(g.x - nx * g.half * 0.42)} ${r2(g.y - ny * g.half * 0.42)}L${r2(g.x + nx * g.half * 0.42)} ${r2(g.y + ny * g.half * 0.42)}`;
+        prims.n++; rampartSpend.gates++;
+      }
+    }
+    if (body) push(`<path d="${body}" fill="${RT.tower}" stroke="none" fill-rule="nonzero"/>`);
+    if (rings) push(`<path d="${rings}" fill="none" stroke="${P.walls}" stroke-width="${Math.max(0.35, r2(w * 0.46))}" stroke-linejoin="round"/>`);
+    if (chamber) push(`<path d="${chamber}" fill="none" stroke="${RT.course}" stroke-width="${r2(Math.max(0.20, w * 0.22))}" stroke-opacity="0.85" stroke-linejoin="round"/>`);
+    if (bars) push(`<path d="${bars}" fill="none" stroke="${P.walls}" stroke-width="${r2(Math.max(0.28, w * 0.30))}" stroke-dasharray="${r2(frontage * 0.10)} ${r2(frontage * 0.10)}" stroke-linecap="butt"/>`);
+
+    /* ── ⛔⛔ THE COURSE TICKS ARE **RATIONED**, AND THE §217 PRE-MEASURE IS WHY.
+     * hf261 draws course ticks across the band at its narrow-curtain rung — in PATCHES, never
+     * as a continuous ladder — and at the §590 preview's own 3.0-unit pitch that is 732 marks on
+     * a town leaf against 214 of headroom (777 against 74 on `town-2`). The exit's clause is to
+     * STOP the arm and report, so the arm draws only from budget that actually exists: the pitch
+     * starts at the leaf's own drawn module and COARSENS until the bill fits, and a leaf with no
+     * room draws none. ⭐ It is the ration law the accessible hatch and the roof ridges already
+     * live under — *an ACCENT gives way, never a building or a street* — and no ceiling is
+     * spent, because a ratchet raise is the chair's.
+     * ⚠ THE RATION IS DETERMINISTIC: `prims.n` at this point is a pure function of the fabric,
+     * so the same seed draws the same ticks forever (THE PROMISE, L-REG-12). */
+    if (dress.courses > 0) {
+      const budget = Math.max(0, CEIL - prims.n - RAMPART_TAIL_RESERVE - estimateLetteringOps(fabric, m, LENS));
+      let total = 0;
+      for (const s of spines) for (let i = 0; i + 1 < s.line.length; i++) total += Math.hypot(s.line[i + 1][0] - s.line[i][0], s.line[i + 1][1] - s.line[i][1]);
+      let pitch = frontage * 1.6, rung = 0;
+      while (rung < 4 && total / pitch > budget) { pitch *= 2; rung++; }
+      const want = Math.floor(total / pitch);
+      rampartSpend.tickPitch = Math.round(pitch * 100) / 100;
+      rampartSpend.tickRung = rung;
+      if (want >= 6 && want <= budget) {
+        let ticks = '';
+        for (const s of spines) {
+          let acc = 0;
+          for (let i = 0; i + 1 < s.line.length; i++) {
+            const [x0, y0] = s.line[i], [x1, y1] = s.line[i + 1];
+            const L = Math.hypot(x1 - x0, y1 - y0); if (L < 1e-9) continue;
+            const nx = -(y1 - y0) / L, ny = (x1 - x0) / L;
+            let t = pitch - acc;
+            while (t < L) {
+              // ⚠ SEEDED, NOT REGULAR. §214 bans even spacing by name and ATLAS's banned prior
+              // #7 makes a perfectly regular rung ladder the strongest "generated" tell there is.
+              const k = `${ring.epoch}|course|${rampartSpend.ticks}`;
+              const off = (hashUnit(k) - 0.5) * pitch * 0.30;
+              const tt = Math.max(0.1, Math.min(L - 0.1, t + off));
+              const px = x0 + (x1 - x0) * (tt / L), py = y0 + (y1 - y0) * (tt / L);
+              const e = s.h * (0.72 + hashUnit(`${k}|len`) * 0.30);
+              ticks += `M${r2(px - nx * e)} ${r2(py - ny * e)}L${r2(px + nx * e)} ${r2(py + ny * e)}`;
+              rampartSpend.ticks++; prims.n++;
+              t += pitch;
+            }
+            acc = (L - (t - pitch)) % pitch;
+          }
+        }
+        if (ticks) push(`<path d="${ticks}" fill="none" stroke="${RT.course}" stroke-width="${r2(Math.max(0.18, w * 0.20))}" stroke-opacity="${dress.courses}" stroke-linecap="round"/>`);
+      }
+    }
+  }
+
   for (const ring of fabric.walls) {
     if (ring.kind === 'old-core' && demotedEpochs.has(ring.epoch)) continue;
     const w = ring.kind === 'old-core' ? INK.wallOld : INK.wall;
@@ -1526,6 +1731,9 @@ export function renderFolio(fabric, opts = {}) {
     // ⚠ ONE PATH PER DISTINCT THICKNESS, not one per run: the batching is what keeps a
     //    thirty-five-run metropolis inside its §217 op ceiling.
     /** @type {Map<number, string>} */ const byWeight = new Map();
+    /** ⭐ REG-2: the drawn pieces WITH the typed run that owns each — the same nearest-vertex
+     *  read the ink, the ditch and the claim already share, computed once instead of twice. */
+    /** @type {Array<{line:Array<[number,number]>, j:number, run:any}>} */ const owned = [];
     if (ring.runs && ring.runs.length && ring.runOfVertex) {
       for (const r of drawnRuns.filter((x) => x.ring === ring)) {
         // Which typed run owns this drawn piece: the nearest ring vertex to its midpoint.
@@ -1536,14 +1744,17 @@ export function renderFolio(fabric, opts = {}) {
           const dd = (p[0] - mid[0]) * (p[0] - mid[0]) + (p[1] - mid[1]) * (p[1] - mid[1]);
           if (dd < bd) { bd = dd; bi = i; }
         }
-        const run = ring.runs[ring.runOfVertex[bi]] || ring.runs[0];
+        const j = ring.runOfVertex[bi];
+        const run = ring.runs[j] || ring.runs[0];
+        owned.push({ line: r.line, j, run });
+        if (ring.rampart) continue;   // the rampart strokes a BAND, not a line — see §15r
         const ww = r2(w * (run.thickness == null ? 1 : run.thickness));
         byWeight.set(ww, (byWeight.get(ww) || '') + linePath(r.line));
         prims.n++;
       }
     }
     let d = '';
-    if (!byWeight.size) for (const r of runs) { d += linePath(r); prims.n++; }
+    if (!byWeight.size && !ring.rampart) for (const r of runs) { d += linePath(r); prims.n++; }
     // ⛔ THE DITCH IS A FACT ABOUT THE WALL, SO IT ENDS WHERE THE WALL ENDS (chair directive
     // §195.2). The b4 leaf drew the ditch as a CLOSED dashed loop while the circuit itself
     // was a half-ring against the river — a dashed arc sailing round open countryside where
@@ -1577,7 +1788,11 @@ export function renderFolio(fabric, opts = {}) {
     for (const ww of [...byWeight.keys()].sort((a, b) => a - b)) {
       push(`<path d="${byWeight.get(ww)}" fill="none" stroke="${P.walls}" stroke-width="${ww}" stroke-linecap="round" stroke-linejoin="round"/>`);
     }
+    // ── ⭐⭐⭐ 15r · **THE RAMPART (ODQ §590/§598, owner-approved as drawn).** Armed only; with
+    //    the feature off not one line below runs and the legacy curtain above is byte-identical.
+    if (ring.rampart) { drawRampart(ring, owned, w, cx0, cy0); }
     {
+      if (ring.rampart) { /* the joints replaced the tower marks — see drawRampart */ } else {
       // ⭐⭐ **A TOWER IS A TYPE, NOT A REPEAT** (§1.1.13b). hf315 draws ten genuinely different
       //    towers and the open-backed D and the beaked tower are FUNCTIONAL choices: the beak
       //    presents an angle to the shot that is coming, the D is open at the back because the
@@ -1618,6 +1833,7 @@ export function renderFolio(fabric, opts = {}) {
       for (const k of ['drum', 'square', 'open-backed-D', 'beaked', 'angle']) {
         if (paths[k]) push(`<path d="${paths[k]}" fill="${P.walls}" stroke="none"/>`);
       }
+      }
     }
     // ⭐⭐ THE GATEHOUSE (chair directive §195.4): "the road passes through a STRUCTURE, not a
     //    gap in a line." The b4 gate was two stub dashes either side of a break, which reads
@@ -1625,7 +1841,7 @@ export function renderFolio(fabric, opts = {}) {
     //    tower pair with a passage between them (§161m.4) — so it is drawn as one: two solid
     //    piers flanking the road, and the passage between them left as paper.
     let bd = '';
-    {
+    if (!ring.rampart) {
       let piers = '';
       for (const g of ring.gates) {
         const nx = -g.dy, ny = g.dx, o = m.builtRadius * 0.045;
@@ -1677,6 +1893,8 @@ export function renderFolio(fabric, opts = {}) {
       }
     }
   }
+
+  const wallExitOps = prims.n;
 
   // ── ⭐⭐⭐ 15a · §250.5 · THE FOSSILS OF A SUPERSEDED CIRCUIT. Drawn AFTER the standing wall
   //    because that is the reading order: this is what the wall the town outgrew has become.
@@ -1996,5 +2214,9 @@ export function renderFolio(fabric, opts = {}) {
     primitiveCount: prims.n,
     opCount: els,
     lettering: lettering.reason,
+    // ⭐ REG-2 · THE WALL SECTION'S OWN BILL, published so the §217 table is measured rather
+    // than estimated: where the pass stood when §15 opened, what the rampart spent, and what
+    // the tail after §15 actually cost (which is what `RAMPART_TAIL_RESERVE` is set from).
+    wallOps: { entry: wallEntryOps, spend: { ...rampartSpend }, exit: wallExitOps },
   };
 }

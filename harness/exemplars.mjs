@@ -184,7 +184,11 @@ async function main() {
   mkdirSync(outDir, { recursive: true });
   // ⭐ REG-1: `--fuse` arms the frontage fusion over the whole corpus. Absent, this driver
   // renders the sealed leaves byte for byte — the dormancy control.
-  const fabricOptions = process.argv.includes('--fuse') ? { frontageFusion: true } : {};
+  // ⭐ REG-2: `--rampart` arms the §590 rampart grammar and the §575 band regime. Independent of
+  //   `--fuse`, so each wave's dormancy can be proved on its own.
+  const fabricOptions = {};
+  if (process.argv.includes('--fuse')) fabricOptions.frontageFusion = true;
+  if (process.argv.includes('--rampart')) fabricOptions.rampart = true;
   const manifest = [];
   for (const spec of CORPUS) {
     const { settlement, fabric } = buildOne(spec, fabricOptions);

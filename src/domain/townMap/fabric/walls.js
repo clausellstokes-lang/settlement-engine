@@ -44,6 +44,10 @@ import { boundEpoch, densify } from './epochAxis.js';
 import { cosI, sinI, TRIG_N } from './trigTable.js';
 import { deriveRuns, runBand, laneLineFor } from './wallRuns.js';
 import { segmentCrossings, segmentTouchesImpassable } from './cliffs.js';
+// ⭐ ODQ §590/§598 · THE RAMPART GRAMMAR AND THE §575 BAND REGIME. Both are guarded on
+// `args.rampart`, so an unarmed build runs the byte-identical legacy trace — the same
+// two-layered dormancy §577's cliff arm established one wave down.
+import { deriveRampartWorks, regimeLane } from './rampartWorks.js';
 
 /**
  * WALL FORMS. `facets` is how many straight runs the circuit is built in — a stone
@@ -248,6 +252,11 @@ export function traceWalls(args) {
   // ⭐ ODQ §577 · THE ESCARPMENT, OR `null` WHEN THE FEATURE IS NOT ARMED. Every §577 branch
   // below is guarded on it, so an unarmed build runs the byte-identical legacy trace.
   const cliffs = args.cliffs && args.cliffs.edges && args.cliffs.edges.length ? args.cliffs : null;
+  // ⭐⭐ ODQ §590/§598 · THE RAMPART, OR `null` WHEN THE FEATURE IS NOT ARMED. It carries the
+  // §575 regime the caller derived once for the whole settlement — derived THERE and not here,
+  // because a regime is a fact about the TOWN (its war, its peace, its purse) and deriving it
+  // per ring would let a city's two circuits disagree about the same history.
+  const rampart = args.rampart && args.rampart.regime ? args.rampart : null;
 
   const { form, source } = wallForm(settlement, scale.extentTier);
   const spec = WALL_FORMS[form] || WALL_FORMS.palisade;
@@ -659,10 +668,32 @@ export function traceWalls(args) {
     //    whole-ring band did, never more.
     /** @type {Array<any>} */ const runBands = [];
     /** @type {Array<any>} */ const laneLines = [];
-    for (const run of (c.runs || [])) {
-      const rb = runBand(band, run);
+    // ⭐⭐⭐ §575 · THE REGIME'S ONE EFFECT ON GROUND, AND IT ONLY EVER FREES (rampartWorks'
+    // `regimeLane`). ⚠ THE RUN IS **COPIED**, NEVER MUTATED: `run.lane` is read by exactly two
+    // functions (`runBand` and `laneLineFor` — measured across src, harness and tests), so a
+    // local copy at those two call sites is the whole rule, and the published run object stays
+    // the fact the run chain derived. Mutating it would put the regime inside `ringsText`'s
+    // run column by a side door, on a wave whose dormancy claim is byte-identity.
+    const gatedRuns = new Set();
+    if (rampart) {
+      for (const g of (c.gates || [])) {
+        let bi = 0, bd = Infinity;
+        for (let i = 0; i < c.polygon.length; i++) {
+          const d = (c.polygon[i][0] - g.x) ** 2 + (c.polygon[i][1] - g.y) ** 2;
+          if (d < bd) { bd = d; bi = i; }
+        }
+        gatedRuns.add(c.runOfVertex[bi]);
+      }
+    }
+    let laneDropped = 0;
+    for (let j = 0; j < (c.runs || []).length; j++) {
+      const run = c.runs[j];
+      const eff = rampart ? regimeLane(run, rampart.regime, gatedRuns.has(j)) : { lane: run.lane, changed: false };
+      if (eff.changed) laneDropped++;
+      const view = eff.changed ? { ...run, lane: eff.lane } : run;
+      const rb = runBand(band, view);
       runBands.push(rb);
-      const line = laneLineFor(run, c.polygon, rb);
+      const line = laneLineFor(view, c.polygon, rb);
       if (line) laneLines.push({ key: `wallLane.${c.kind}.${run.key}`, run: run.type, width: rb.inner, line });
     }
     c.runBands = runBands;
@@ -677,6 +708,39 @@ export function traceWalls(args) {
       + `${glacisClear ? '' : ' — NO GLACIS: this wall foot carries lean-tos (§5.0e.3), which abut the stones lawfully'})`
       + `; PER RUN — ${c.laneRuns} run(s) carry the wall-side street, ${c.abuttedRuns} abut the inner face lawfully`
       + `; ${c.runReason}`;
+
+    // ── ⭐⭐⭐ ODQ §590/§598 · **THE RAMPART WORKS.** Derived HERE and not in the trace loop
+    //    because a band is a fact about the STONES, and the stones' thickness (`runBands[j].stone`)
+    //    is only known once §200's band pass has run — which is this scope and no other.
+    // ⚠⚠ THEY ARE SPREAD CONDITIONALLY, for the reason §577's own termini row records at length:
+    //    **AN ABSENT FEATURE THAT STILL PUBLISHES ITS ZERO IS NOT DORMANT.** `[]` and `0` are
+    //    values, and a published value is a byte. The dormant circuit carries no rampart key.
+    if (rampart) {
+      const works = deriveRampartWorks({
+        ring: c.polygon, runs: c.runs || [], runOfVertex: c.runOfVertex || [],
+        runBands, gates: c.gates || [], towers: c.towers || [], towerTypes: c.towerTypes || [],
+        terminalWorks: c.cliffTermini || [], halfRing: c.halfRing, form: c.form,
+        // The band's own stones — the SAME number the reservation was computed from, so the ink
+        // and the claim cannot disagree about how thick this wall is (walls' own §5 W2 law).
+        stone: band.stone, seeding, epoch: c.epoch,
+      });
+      c.rampart = {
+        regime: rampart.regime,
+        rung: works.rung.rung,
+        plate: works.rung.plate,
+        dress: works.rung,
+        turnCut: works.turnCut,
+        joints: works.joints,
+        gatehouses: works.gatehouses,
+        // ⭐ THE BAND'S HALF-WIDTH **PER RUN**, published so the lens offsets the drawn line by a
+        // number it never computes itself. One rule, one home — the §230 family's own cure.
+        bandHalfOfRun: runBands.map((b) => b.stone / 2),
+        laneDropped,
+        stats: works.stats,
+      };
+      c.reason += `; ${works.reason}`
+        + (laneDropped ? `; §575 ${rampart.regime.toUpperCase()} — ${laneDropped} run(s) gave up the wall-side lane to the fabric` : `; §575 ${rampart.regime.toUpperCase()} — every lane-carrying run keeps its intervallum`);
+    }
   }
 
   // ⚠ BACK TO OUTERMOST FIRST. The walk is inside-out for the nesting law; the CONTRACT is
