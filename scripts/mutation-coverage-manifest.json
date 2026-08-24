@@ -936,6 +936,11 @@
   "tests/lint/ruinFilterRoster.walker.test.js": {
    "kind": "uncovered"
   },
+  "tests/lint/shippedAssetLicence.test.js": {
+   "kind": "rationale",
+   "rationale": "TE-IP-1's shipped-art licence walker (AD-1, ODQ SS526-SS529/SS532): no file under public/ may DECLARE, in its own embedded metadata, a non-commercial or share-alike licence this product cannot honour. ITS CATCHING POWER IS EXECUTED IN THE TEST BODY RATHER THAN CLAIMED, which is what makes a planted sweep regression redundant here. Four control arms plant the real corpus's own shapes and require conviction one by one - by-nc-sa and by-sa and GFDL in attribute position (tier 1), and a PNG tEXt chunk carrying the bare token with NO attribute, which only tier 2 can see and which is therefore the arm proving tier 2 is live independently of tier 1. A mirror arm requires ACQUITTAL of CC0, of CC BY, and of licence PROSE - the case that would have made the walker unusable, because public/third-party-notices.html names by-nc-sa in the very section that records this finding. A fourth arm writes a clean file and a dirty file into a real temp directory and requires the WALK, not just the scanner, to convict exactly the dirty one end to end. A fifth requires the walk to reach 300+ real files and two named nested directories, so a scanner pointed at nothing cannot pass. A planted sweep mutation would add nothing those five do not already prove, and would have to mutate a shipped BINARY asset under public/ to do it.",
+   "kindNote": "rationale rather than a planted sweep mutation, on the test-ratchet-controls precedent in this manifest: a guard whose conviction is demonstrated in-process by planted inputs is already mutation-proved, and a plant here would additionally require a MUTATED_FILES row naming a binary art file that `git checkout --` would then revert."
+  },
   "tests/lint/sizeBaseline.test.js": {
    "kind": "mutation",
    "label": "size-ratchet/App.jsx grows past frozen ceiling"

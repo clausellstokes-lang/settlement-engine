@@ -24213,9 +24213,9 @@
     },
     {
       "id": "MF-MP1",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/MF-MP1.md",
-      "verifiedBase": "5055990a38a281b5a5f63648c74e65c0837de7ef",
+      "verifiedBase": "567030f1d379947b9580a91613b6f09294f51ec0",
       "changeManifest": [
         {
           "_note": "THE PUBLISH. One `parcel` op per parcel row, between the wards and the streets. The op carries {op, id, wardId, polygon} and NO paint scalar: a boundary, not a fill. This MOVES the leaf's length identity, which is a declared change with all fourteen of its pins named in the packet's section 6.",

@@ -6263,7 +6263,68 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     //      move, which is the only way "unmoved" is evidence rather than silence.
     //   D  `suiteTitles` ALONE minus one reds at `suiteTitles`, so the LAST assertion is
     //      reachable and no earlier red is masking it.
-    files: 2520, parked: 366, credited: 2154, titles: 20941, suiteTitles: 5827,
+    // == RE-RECORDED 2026-08-24 BY THE TE-STACK-3 LANDING - TWO CARS THROUGH ONE GATE
+    //   (TE-IP-1, the shipped-art licence removal, and MF-MP1, the property-line layer),
+    //   CAUSE ATTRIBUTED PER CAR AND PER FILE ==
+    // 2,520/366/2,154/20,941/5,827 -> 2,523/366/2,157/20,982/5,840 at the landing slot
+    // 567030f1d (the MF-WEB8 + MF-CG1b stacked landing). `censusAuthorization`: ODQ SS516 (the
+    // stacked-landing charter), SS420 (a stack's census is a SUM OF DELTAS and never a tuple),
+    // SS417 (the row car 2 deferred and this act pays), SS526-SS529 and SS532 (car 1's charter:
+    // the AD-1 art-and-media provenance audit and the chair's amendment narrowing the removal
+    // from a directory deletion to a surgical one), and SS494/SS495/SS502.2/SS514.1b (car 2).
+    // BOTH CARS WERE REBASED, AND CAR 1 CARRIED NO CENSUS ROW ACROSS THE REBASE. Both built on
+    //   5055990a; two landings intervened (7009f115b, then 567030f1d). Car 1's holding DID hold
+    //   a tuple line of its own (2,518/366/2,152/20,891/5,818, walked at 5055990a), and that one
+    //   line was the ONLY functional edit it made to this file. It CONFLICTED on the rebase and
+    //   was resolved to the SLOT side -- dropped, not merged -- because the row belongs to the
+    //   landing act and never to a member (SS417). The resolved file was proved cmp 0 against the
+    //   slot blob, with a one-byte probe proving the cmp was live. After that resolution NEITHER
+    //   CAR EDITS THIS FILE, and the whole row below is the landing act's, walked ONCE at the
+    //   stacked tree.
+    // TWO CAUSES, SUMMED, AND NEITHER IS A RULE CHANGE - no classifier here widened or narrowed:
+    //   CAR 1 (TE-IP-1) +1 file / +1 CREDITED / +9 titles / +4 suite titles, from ONE file:
+    //     tests/lint/shippedAssetLicence.test.js - the shipped-art licence walker, the missing
+    //       half of the fork's supply chain (the libs manifest asks whether these are the bytes
+    //       we vetted; this asks whether those bytes forbid what we do with them). CREDITED at
+    //       birth: 9 titles, 4 suite titles, parkReasons [].
+    //   CAR 2 (MF-MP1) +2 files / +2 CREDITED / +32 titles / +9 suite titles, from THREE files:
+    //     tests/domain/townCartographyProperty.test.js - NEW. 16 titles, 5 suite titles, [].
+    //     tests/ui/settlementMapPropertyLine.test.jsx - NEW. 13 titles, 4 suite titles, [].
+    //     tests/ui/mapCartographySubTab.test.jsx - MODIFIED, 25/7 at the slot and 28/7 here:
+    //       +3 titles and NO suite title. Its two siblings in the car's diff,
+    //       townCartographyPaint.test.js and townCartographyBlock.test.js, read 35/7 and 13/5 at
+    //       BOTH ends and contribute ZERO - the car moved arms inside them without adding a
+    //       title, which is exactly the shape a delta computed from a file COUNT would misread.
+    //   `parked` does NOT move, and on the walk below it PASSED UNMOVED at 366 between `files`
+    //   and `credited`.
+    // THE SPLIT IS ATTRIBUTED BY EXECUTION, NOT BY ARITHMETIC. 9 + 32 = 41 closes against any
+    //   9/32 split, and a file that PARKS ITSELF AT BIRTH closes the arithmetic while swallowing
+    //   its titles. So this walker's OWN parkReasonsFor / liveTitlesIn / liveSuiteTitlesIn were
+    //   read for all six files through a deliberately-red probe arm, at the STACKED TIP and
+    //   again at the SLOT in a separate worktree, and the three new files came back
+    //   inCredited=true with parkReasons []. Both walkers were restored cmp 0 after the probe.
+    // WALKED, NEVER COMPUTED, at the stacked tree, every figure READ FROM ITS OWN FAILURE
+    // MESSAGE in assertion order: `files` "expected 2523 to be 2520" -> `parked` PASSED UNMOVED
+    // at 366 -> `credited` "expected 2157 to be 2154" -> `titles` "expected 20982 to be 20941"
+    // -> `suiteTitles` "expected 5840 to be 5827"; green at the end (33 passed of 33, exit 0).
+    // The arithmetic closes: 366 + 2,157 = 2,523. The walked delta +3/+0/+3/+41/+13 equals the
+    // SUM of the two cars' per-file attributed deltas (+1/+0/+1/+9/+4 and +2/+0/+2/+32/+9)
+    // exactly, so the two rebases moved no title and no title was swallowed.
+    // SIX negative controls, all red as predicted, each substitution guarded by a file hash that
+    // ABORTS on a no-op edit, and the file restored cmp 0 at the end:
+    //   A  the whole SLOT tuple back reds at `files` ("expected 2523 to be 2520").
+    //   B1 SIBLING - car 1's TITLE delta alone removed while every file figure stays correct, so
+    //      the red must LAND ON `titles`: "expected 20982 to be 20973".
+    //   B2 SIBLING - car 2's title delta alone removed, likewise: "expected 20982 to be 20950".
+    //   B3 SIBLING - car 1's SUITE-title delta alone removed: "expected 5840 to be 5836".
+    //      B1, B2 and B3 are the arithmetic's own convictions. A sibling control that removes a
+    //      car's WHOLE delta reds at `files`, the FIRST assertion, and never reaches the sum it
+    //      claims to test - it would prove only that something moved (SS530.3, SS533.5).
+    //   C  `parked` ALONE at 365 reds at `parked` - the arm is live on the figure that did NOT
+    //      move, which is the only way "unmoved" is evidence rather than silence.
+    //   D  `suiteTitles` ALONE minus one reds at `suiteTitles`, so the LAST assertion is
+    //      reachable and no earlier red is masking it.
+    files: 2523, parked: 366, credited: 2157, titles: 20982, suiteTitles: 5840,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

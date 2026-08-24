@@ -1,17 +1,22 @@
 # Town cartography / MF-MP1 — the property-line layer: the parcel ring was computed, validated and dropped on the floor, and a hovered building now shows the ground it stands on
 
-- **Status:** READY
+- **Status:** LANDED
 - **Packet version:** 1
-- **Verified base:** `claude/composite-r4` at `5055990a38a281b5a5f63648c74e65c0837de7ef`
+- **Verified base:** `claude/composite-r4` at `567030f1d379947b9580a91613b6f09294f51ec0`
   ⚠ Read with `git rev-parse` at this lane's opening, never extended from a quoted prefix
   (§381's fabricated-SHA law) and never taken from the dispatch text. It matched the slot
   card's stamp exactly, which is this lane's first recorded act.
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line (J-TEWF1B-1).
-  ⚠ This member is BUILT, not landed. The three-place flip to the terminal status (§410) —
-  this header, `PACKET_MANIFEST.json`, and the index row — belongs to the landing act, which
-  also re-stamps the verified base if a rebase is owed. The census row rides this packet to
-  that act (§417) and §10 carries it.
+  ⛔ RE-STAMPED BY THE TE-STACK-3 LANDING (2026-08-24). The two sentences above describe the
+  BUILD lane and they were true then: the member built on `5055990a38a281b5a5f63648c74e65c0837de7ef` and the
+  slot card matched at that moment. They no longer describe the base on the line above. The
+  slot moved TWICE under this member — to `7009f115` (MF-CH2A + MF-UC5) and then to
+  `567030f1` (MF-WEB8 + MF-CG1b) — so a REBASE WAS OWED, was performed onto car 1 of a
+  two-car stack, and the verified base is re-stamped here and in `PACKET_MANIFEST.json`.
+  The §410 flip is executed in this act across all four places (this header, the verified
+  base, the manifest row and the index cell), and the §417 census row this member deferred
+  is PAID in the same act, walked at the stacked tree as a SUM OF DELTAS with car 1 (§420).
 - **Depends on:** nothing. TC-3b's parcel ring, TC-5a's painter and TC-5b-ii's mount are all
   LANDED at this base; this member consumes them and builds no new geometry.
 - **Family preamble:** `docs/implementation/preambles/MF-PREAMBLE.md`, SHA-256
