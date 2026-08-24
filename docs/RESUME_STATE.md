@@ -51,6 +51,8 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 21:33 CDT 08-23: §515 — THE BANDS ARE SIGNED AND CLOSED (instrument 029268fe, owner verbatim).
+# §11 band half discharged; TUNING SIGNATURE still outstanding. CG-1b unblocked NOW; DW-1 after CH+CG-2.
 # ⭐⭐⭐ 21:30 CDT 08-23: §514 — THE BANDS ARE SAT. B16: view/interact free, AUTHORING paid at every
 # level (= viewerCanAuthor). B1: every tier has a minimum, none is exempt. B15: illustrated BEFORE launch (AD program).
 # B8 is a demographic LOOP, not a dial — recon dispatched.

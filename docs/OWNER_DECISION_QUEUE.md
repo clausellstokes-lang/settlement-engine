@@ -21661,3 +21661,47 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   B3, B4, B5, B6, B7, B10, B12, B17, B18; B9a culture-is-the-axis yes, B9b
   deferred to the soak). **THE SITTING IS COMPLETE except B8, which is now a
   measurement rather than a signature.**
+
+## §515 — ⭐⭐ "THEN THOSE ARE MY ANSWERS" — THE BAND SITTING IS **SIGNED AND CLOSED**; THE SIGNATURE IS AN INSTRUMENT OF RECORD IN GIT; DW-1's OWNER GATE IS DISCHARGED (2026-08-23 21:33 CDT)
+
+- **§515.1 SIGNED.** The owner ratified all eight owner-class rows with
+  "then those are my answers". The chair wrote the signature as its OWN
+  instrument rather than editing the charter — `SIGNED-BANDS-2026-08-23.md`,
+  4,989 B, carrying **the owner's verbatim words for every row beside the
+  ruling now in force**, the thirteen measured/sourced rows the chair
+  ratified under the same signature, the honest cost disclosed at B0, and
+  what it unblocks. Preserved at
+  `refs/preserve/research-dossiers-2026-08-23` = **`029268fe`**, cmp
+  byte-identical. Signed against charter 237,547 B + architecture 141,659 B
+  (ratified §506) at build slot `5055990a` (48 landings). **The charter's own
+  provenance chain is untouched** — the charter proposed, the owner signed,
+  and the signature is a separate document; a successor reads both.
+- **§515.2 WHAT IS AND IS NOT DISCHARGED.** DESIGN_DWELLINGS_PROGRAM.md §11's
+  **band-signing half is DISCHARGED**. ⚠ The **TUNING SIGNATURE IS NOT** — it
+  remains outstanding, belongs to the endgame's tuning pass, and no lane may
+  read this signature as covering it. Nor does it cover the other three
+  by-nature carve-outs (§510.2): the physical db push, every push/deploy, and
+  legal sign-off.
+- **§515.3 WHAT IT UNBLOCKS, IMMEDIATELY.** **CG-1b may build now** — B21 is
+  set, and it is the car that unblocks 287 of 504 settlements from being
+  unable to draw a map at all. **DW-1 may build** once CH-2/CH-3 and CG-2
+  land (the catalog must be corrected before the dwellings compile reads it —
+  §491/§499.3 rule 1). **The ESTATE wave awaits the B8 recon verdict**, which
+  is a measurement and not a signature. **The AD program is chartered but not
+  compiled** — it compiles after the DW waves are specified.
+- **§515.4 THE THREE ANSWERS THAT CHANGED THE PROGRAM RATHER THAN TUNING
+  IT**, restated so no successor mistakes them for dial settings: **B16/B16b**
+  collapses the paid surface to ONE axis the code already has (`viewerCanAuthor`
+  — authoring paid at every level, viewing and interaction free at every
+  level, anonymous included); **B1** removes the exempt tier the chair had
+  proposed, making HOSTED and NO_BUILDING programs rather than escapes and
+  closing a seam a builder could have walked through; **B15** inserts a
+  program (AD, illustrated art) into the pre-push arc — the first scope
+  addition since §482, amending the master sequence to … DW-S → **AD** →
+  content train → the ONE trailing OSR mint → parity → `/code-review ultra` →
+  endgame. **B8** is the fourth and largest, but it is under measurement
+  rather than in force.
+- **§515.5 SEATS, ALL FOUR OCCUPIED.** CH-2 (the magic licence) · UC-5 (the
+  last undercity car) · WEB-8 (paywall honesty, now holding both B16 rulings)
+  · TC-B8-RECON (the displacement loop). Holding roster empty; the next free
+  seat takes CG-1b, then CG-2.
