@@ -23827,3 +23827,73 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   byte-identical message**, proved by CG-2 in a throwaway base worktree after the
   dependency rebuild. Not any car's. **Unowned and now recorded rather than
   re-found.**
+
+## §545 · THE DECAY RUNS BOTH WAYS, AND A LANE OUT-REASONED ME ON ITS OWN CHARTER (2026-08-24 04:21 CDT)
+
+- **§545.1 FOUR RULINGS, AND I ACCEPTED A PUSHBACK AGAINST MY OWN LEANING.** I
+  had leaned DW-1a for D-6's new home. **DW-0 pushed back and it was right, and
+  I verified why at the slot:** `jointVocabulary.js` lives at
+  `src/domain/undercity/` and **all six consumers are undercity files.** Putting
+  a *sky aperture* into a module whose header calls it an underground-portal
+  vocabulary would make six consumers handle two members **no undercity producer
+  will ever emit** — and make a DW car a writer inside a closed train's data
+  module. **RULED: DW-1d mints `SURFACE_JOINT_KINDS` (`roof_aperture`,
+  `water_landing`), imports the undercity five unchanged, disjointness arm.**
+  DW-1d not DW-1a because a joint is a circulation primitive and DW-1a owns
+  `CELL_KINDS`. The lane's formulation is now charter text: **"two enums with an
+  asserted disjointness aren't two truths; one enum spanning two strata with no
+  producer for half of it is."**
+- **§545.2 C-19 RULED: REQUIRE THE LATTICE, TOLERANCE ZERO.** Both available
+  precedents mean something else — `withinWard`'s `≤ 1` is *point containment*
+  and `SURFACE_DEPTH_TOLERANCE_CM = 600` is a **3-D depth band** — so borrowing
+  either imports a number with a foreign meaning. Parcel vertices are already
+  integer lattice points and an integer polygon's shoelace is an exact integer,
+  so the accounting closes with **no epsilon at all**. Charter text: **"a
+  tolerance is a place for drift to hide."** The lane's own fallback is
+  explicitly REFUSED — if DW-2b cannot place vertices on the lattice that is a
+  finding to bring me, not an epsilon to spend.
+- **§545.3 C-22 RULED: SPLIT, AND HALF GOES BACK TO CH.** `INTERIOR_KINDS` is at
+  `interiorTemplates.js:29`, the file DW-1a and DW-1b already modify, so the
+  vocabulary folds into DW-1a. But **`Warden's Lodge` cannot be fixed by a
+  vocabulary**: its kind is mis-*derived* from its name and the only per-entry
+  channel is a golden-shifting catalog `facets` key. **J-CH-1's hand-back is
+  therefore HALF-EXECUTABLE by DW** — DW supplies the kind, it cannot declare
+  that a row takes it. The other half routes to the CH train, which already owns
+  catalog rows and already carries declared shifts.
+- **§545.4 ⛔ C-17/C-25 RULED: DO NOT ADD `ring table` — AND AN ACCEPTANCE ARM
+  NAMES A FIXTURE THAT DOES NOT EXIST.** The 60-fixture list claims to be "the
+  tranches' union, de-duplicated" and is not: **8 of 21 carried** on the
+  best-sourced passage, 57 of 363 on a broader sweep. **VERIFIED BY ME, and it
+  is the non-arguable part: `portableFurnaces` has ZERO occurrences anywhere in
+  `src`, while the charter's DW-5d exit arm (line 815) reads `furnaces ≤ flues +
+  portableFurnaces`.** An arm naming a member the vocabulary does not contain
+  **can never mean what it says**. Fixed now; the mechanical re-derivation of the
+  60 becomes a **named pre-DW-1b gate**, with 82 provisional. ⭐ The lane flagged
+  its 84% as *a signal, not 306 defects*, because it had **sampled rather than
+  adjudicated** — restraint I explicitly refused to upgrade into false precision.
+- **§545.5 ⭐⭐ THE DECAY LAW IS AMENDED — IT RUNS IN BOTH DIRECTIONS.** §543.6
+  named only *absence since filled* (UC-5: asserted absent three times, **28,261
+  B at the slot**). C-24 is the **mirror**: the dossier said CH-1 *would* add a
+  per-entry `interiorKind` override; **CH-1 landed without it — zero occurrences
+  in `institutionalCatalog.js`, VERIFIED — and its landing touched four files,
+  three of them docs.** A promise restated as an accomplishment decays exactly as
+  silently as an absence since filled. ⭐ **The lane's own root cause is better
+  than my rule was: a frozen dossier is ground truth for RESEARCH and never for
+  ENGINE STATE.** Both directions and that sentence are now in
+  `memory/absence-decays-silently-reconcile-frozen-dossiers.md`.
+- **§545.6 THE RECORD IS THREE FINDINGS, NOT THREE FAILURES.** DW-0 volunteered
+  that all three of its passes restated inherited claims without measuring them,
+  and named the cause precisely. Worth recording against the self-criticism:
+  **it found all three itself, and the skeptic panel had already passed over two
+  of them** — `interiorKind` and the fixture union were missed by six lenses and
+  their refuters. **A compile that keeps re-auditing its own inherited claims
+  across three passes is working correctly; the failure mode is the one that
+  stops looking.** Rulings committed at `93b47f619`; gate unchanged at 39/40 with
+  only the banked red and zero citations of its own file.
+- **§545.7 STATE.** Build `86794b5d2` (56 cars). Holdings: `holding-cg2`
+  (`44b83a882`, GREEN but for the deferred census row, needs rebase — built on
+  `79b78881c`), `holding-ch3` (`6ef434822`, **RED, revising to the
+  rng-preserving variant per §544.7**, also needs rebase),
+  `holding-dw0-repaired`, plus the rescued `ad-charter-2026-08-24`. Packet
+  surface **176**. **R2 — where the compiled charter lands — remains mine and
+  unexercised; the charter is still on no branch.**
