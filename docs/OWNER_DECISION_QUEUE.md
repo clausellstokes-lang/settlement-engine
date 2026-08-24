@@ -24027,3 +24027,85 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   measured 176 independently; stacked, the surface is 177** and the manifest will
   conflict — the landing re-derives by execution. `parked` is the figure NEITHER
   car touches, so a parking plant is how that arm proves itself alive.
+
+## §548 · THE FIFTH STACK LANDED — CARS 57 AND 58 — AND A TRAP THAT RETURNED A *PLAUSIBLE* WRONG ANSWER (2026-08-24 06:10 CDT)
+
+- **§548.1 CAS EXECUTED — 58 CARS.** `claude/composite-r4`
+  **`86794b5d2` → `510c51b76`**, 23 commits: **MF-CH3** (the catalog data slips,
+  with the rng-preserving §3.2 variant) and **MF-CG2** (the identical-footprint
+  cure), two cars through **one** gate. Verified at the new tip myself:
+  `exclusiveGroupCoexists` present, `minTier` keys **36 → 10** (exactly the 26
+  no-ops removed per §538.5), charges still 104. Spent pins pruned; two remain.
+- **§548.2 GREEN, VERBATIM.** `TRUE_EXIT=0` · `[gate-tail] exit: 0` · free disk
+  **13,279 MB** · `valid: 177 packets (0 READY)` · typecheck 173/173 ·
+  domain-strict 1134/1134 · **`11 known failure(s) of 29044 tests, ceiling 11`**
+  · `STRICT DIST OK — 53 files / 458 tests, zero
+  failed/non-run/uncollected/missing/extra/duplicate`. ⭐ **29,044 against the
+  slot's 29,029 is +15, which is EXACTLY the title delta** — an independent
+  cross-check of the census by a figure the census does not produce.
+- **§548.3 THE CENSUS, AND CONTROLS THAT ACTUALLY ATTRIBUTE.**
+  `2,524/366/2,158/21,002/5,845 → 2,525/366/2,159/21,017/5,847`. CH-3
+  `+1/+0/+1/+10/+1`; CG-2 `+0/+0/+0/+5/+1` — **declared against `79b78881c` and
+  re-derived against the tip it actually sits on; the two agree, and that
+  agreement is itself a measurement.** `366 + 2,159 = 2,525`. **Six negative
+  controls (two on `titles`), five per-file attribution controls**, each guarded
+  against a no-op edit and each restored to md5 `e3a077f6…`. Both CG-2 files at
+  CH-3's bytes land on the seam **to the digit**. ⭐ `parked` — the figure
+  neither car moves — was proved measurable-live by a parking plant.
+- **§548.4 THE PACKET COUNT WAS RE-DERIVED, NOT CARRIED.** Both cars minted on a
+  175 base and **each independently measured 176**; stacked, the true surface is
+  **177 (174 LANDED / 1 SUPERSEDED / 2 DRAFT)** — confirmed by me at the tip. The
+  disagreement control reds verbatim (`MF-CG2 verifiedBase disagrees with packet
+  Markdown: manifest=79b78881c… packet=86794b5d2…`, exit 1) and its restore
+  exits 0. ⭐ The manifest conflict was resolved **semantically, not textually**:
+  MF-CH3 canonicalised the whole file so the hunk merge was meaningless, and a
+  three-way analysis of the *parsed records* proved neither car altered a
+  pre-existing record.
+- **§548.5 DIGESTS RE-EXECUTED WITH A POSITIVE CONTROL.** CH-3's corpus digest
+  `ae67602f…` reproduces byte-identically at ROSTER_CHANGED **30 of 420** and
+  SETTLEMENT_NAME_CHANGED **0**; MF-CG2's preamble SHA-256 `0706aad6…`
+  reproduces. ⭐ **And the same instrument at the slot reads CH-3's declared BASE
+  digest `1cb39d7d…` — so it is not a cannot-fail instrument.** Rebase
+  preservation proved by blob sha: **all seven CG-2-owned files byte-identical**
+  between `44b83a882` and the rebased tip, with completion proved explicitly
+  rather than from a piped exit code.
+- **§548.6 ⚠ RATIFIED — A DECLARED FIGURE OF MF-CG2 MOVED, AND THE MOVE IS
+  CORRECT.** `DUPLICATES.city.permille` **51 → 50**, derived ceiling **82 → 80**.
+  **Cause measured, not guessed:** MF-CH3 admits `Multiple monasteries` and
+  `Monastery or friary` into city/metropolis rosters, so 25 of 504 rows carry
+  more institutions, the corpus draws **+29** buildings (44,293 → 44,322), and
+  the same city repetition over a larger denominator rounds down one permille.
+  **RATIFIED because the ceiling is `ceil(50 × 1600/1000)` — the same derivation
+  RE-EVALUATED, not a number relaxed to pass** — and because this is the
+  anticipated two-car interaction rather than rebase corruption. The lane
+  declared it in four places (shift record, packet §5c, INDEX row, commit body)
+  so it stays reversible. Everything else holds: **exact duplication 0 of
+  44,322 at every tier**, `FROZEN.maxBuildings`/`maxInstitutions` unmoved, throw
+  census 0 of 504, and **THE ONE LAW at 504 of 504 with `cartoInstitutionRefs`
+  differing from MF-CH3's own recording on ZERO rows.**
+- **§548.7 ⛔⛔ THE WORST INSTRUMENT OF THE NIGHT: IT RETURNED A *PLAUSIBLE*
+  WRONG ANSWER.** Unbraced `git show "$SLOT:tests/x.test.js" > x` — **zsh ate
+  `:t` as the tail modifier**, git errored to *stderr*, and the redirect left an
+  **EMPTY FILE**. **Three per-file controls then silently measured "file
+  emptied" and produced numbers that read exactly like real attributions.**
+  Caught only by re-running braced and printing byte counts; the figures in
+  §548.3 are the braced ones. ⚠ **I hit the same `:s`/`:t` modifier trap myself
+  earlier tonight, but mine ERRORED VISIBLY — this one did not.** That is the
+  escalation worth recording: **the same defect is far more dangerous inside a
+  redirect than inside a pipeline, because the failure becomes DATA.** Always
+  brace `${SHA}:path`, and print a byte count before trusting a file you just
+  extracted.
+- **§548.8 THE MEMORY INDEX HAS CONCURRENT WRITERS, AND ONE LANDED
+  UNANNOUNCED.** `MEMORY.md` grew **+581 B** between my measurement and the
+  landing's — a lane added its own hazard row. Good content, wrong hand. Folded
+  two discharged rows to `08-24 FOLD 15b` (hook check first: **one hook, cohort
+  A's "23 files", was INDEX-ONLY and is carried explicitly into the archive**)
+  and added the structural guard the header lacked: **lanes write their topic
+  file and report the row to the chair; they do not write the index.** 16,706 →
+  16,513 B against a ~17 KB hard ceiling — **a deeper fold is still owed.**
+- **§548.9 STATE.** Build **`510c51b76`, 58 cars**; packets **177**; census
+  `2,525/366/2,159/21,017/5,847`; ratchet 11 of 29,044. Pins: `holding-dw0-final`
+  and the rescued `ad-charter-2026-08-24`. **No holdings await landing.** The DW
+  charter is on the ledger branch; the DW build waves gate on the pre-DW-1b
+  fixture re-derivation (§545.4). Next: **CH-4 → CH-5 (Shape F) → CH-6 (the
+  shipped deity-doctrine violation)**, then R3 before **2026-08-27**.
