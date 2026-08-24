@@ -1,6 +1,6 @@
-import { buildSubstrate, measuredRelief, reliefField } from './src/domain/townMap/fabric/substrate.js';
-import { buildableMask } from './src/domain/townMap/fabric/groundRefusal.js';
-import { makeWalledFixture } from './tests/fixtures/townMapFixtures.js';
+import { buildSubstrate, measuredRelief, reliefField } from '../../src/domain/townMap/fabric/substrate.js';
+import { buildableMask } from '../../src/domain/townMap/fabric/groundRefusal.js';
+import { makeWalledFixture } from '../../tests/fixtures/townMapFixtures.js';
 const cases = [
   ['fjord', 'mountain', 'port'], ['mountain','mountain','moderate'], ['hills','hills','moderate'],
   ['coastal','coastal','moderate'], ['plains','plains','moderate'],

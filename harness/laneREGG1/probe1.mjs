@@ -1,6 +1,6 @@
-import { buildSubstrate } from './src/domain/townMap/fabric/substrate.js';
-import { deriveCliffs } from './src/domain/townMap/fabric/cliffs.js';
-import { makeWalledFixture } from './tests/fixtures/townMapFixtures.js';
+import { buildSubstrate } from '../../src/domain/townMap/fabric/substrate.js';
+import { deriveCliffs } from '../../src/domain/townMap/fabric/cliffs.js';
+import { makeWalledFixture } from '../../tests/fixtures/townMapFixtures.js';
 
 const rows = [];
 for (const terrain of ['plains','riverside','forest','desert','hills','mountain','coastal']) {

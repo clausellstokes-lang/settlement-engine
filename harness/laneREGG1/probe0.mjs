@@ -1,8 +1,8 @@
-import { buildFabric } from './src/domain/townMap/fabric/buildFabric.js';
-import { buildTownMapModel } from './src/domain/townMap/townMapModel.js';
-import { makeTownFixture, makeWalledFixture } from './tests/fixtures/townMapFixtures.js';
-import { buildSubstrate } from './src/domain/townMap/fabric/substrate.js';
-import { buildableMask, REFUSAL } from './src/domain/townMap/fabric/groundRefusal.js';
+import { buildFabric } from '../../src/domain/townMap/fabric/buildFabric.js';
+import { buildTownMapModel } from '../../src/domain/townMap/townMapModel.js';
+import { makeTownFixture, makeWalledFixture } from '../../tests/fixtures/townMapFixtures.js';
+import { buildSubstrate } from '../../src/domain/townMap/fabric/substrate.js';
+import { buildableMask, REFUSAL } from '../../src/domain/townMap/fabric/groundRefusal.js';
 
 const build = (s) => buildFabric(s, buildTownMapModel(s, null), {});
 for (const [name, terrain] of [['plains','plains'],['riverside','riverside'],['hills','hills'],['mountain','mountain']]) {

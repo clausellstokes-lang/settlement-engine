@@ -1,6 +1,6 @@
-import { buildFabric } from './src/domain/townMap/fabric/buildFabric.js';
-import { buildTownMapModel } from './src/domain/townMap/townMapModel.js';
-import { makeWalledFixture } from './tests/fixtures/townMapFixtures.js';
+import { buildFabric } from '../../src/domain/townMap/fabric/buildFabric.js';
+import { buildTownMapModel } from '../../src/domain/townMap/townMapModel.js';
+import { makeWalledFixture } from '../../tests/fixtures/townMapFixtures.js';
 
 const build = (s, opts) => buildFabric(s, buildTownMapModel(s, null), opts);
 for (const terrain of ['plains','hills','mountain']) {

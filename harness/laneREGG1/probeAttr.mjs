@@ -1,8 +1,8 @@
-import { buildFabric } from './src/domain/townMap/fabric/buildFabric.js';
-import { buildTownMapModel } from './src/domain/townMap/townMapModel.js';
-import { makeWalledFixture } from './tests/fixtures/townMapFixtures.js';
-import { circuitDrawnRuns } from './src/domain/townMap/fabric/wallCircuit.js';
-import { onImpassable, segmentCrossings } from './src/domain/townMap/fabric/cliffs.js';
+import { buildFabric } from '../../src/domain/townMap/fabric/buildFabric.js';
+import { buildTownMapModel } from '../../src/domain/townMap/townMapModel.js';
+import { makeWalledFixture } from '../../tests/fixtures/townMapFixtures.js';
+import { circuitDrawnRuns } from '../../src/domain/townMap/fabric/wallCircuit.js';
+import { onImpassable, segmentCrossings } from '../../src/domain/townMap/fabric/cliffs.js';
 
 for (const [terrain, seed] of [['hills','sw-a'],['hills','sw-b'],['mountain','sw-a'],['mountain','sw-b'],['mountain','sw-c']]) {
   const s = makeWalledFixture({ _seed: `${seed}-${terrain}`, config: { terrainType: terrain, tradeRouteAccess: 'moderate' } });

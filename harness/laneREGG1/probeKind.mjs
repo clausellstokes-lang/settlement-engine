@@ -1,6 +1,6 @@
-import { buildSubstrate, sampleAt } from './src/domain/townMap/fabric/substrate.js';
-import { deriveCliffs, CLIFF } from './src/domain/townMap/fabric/cliffs.js';
-import { makeWalledFixture } from './tests/fixtures/townMapFixtures.js';
+import { buildSubstrate, sampleAt } from '../../src/domain/townMap/fabric/substrate.js';
+import { deriveCliffs, CLIFF } from '../../src/domain/townMap/fabric/cliffs.js';
+import { makeWalledFixture } from '../../tests/fixtures/townMapFixtures.js';
 const fx=(seed,t)=>makeWalledFixture({_seed:seed,config:{terrainType:t,tradeRouteAccess:'moderate'}});
 for (const t of ['hills','mountain']) {
   const sub = buildSubstrate(fx(`kind-${t}`,t), t, {seed:`kind-${t}`}, {});

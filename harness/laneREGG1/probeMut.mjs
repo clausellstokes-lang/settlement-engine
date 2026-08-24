@@ -1,11 +1,11 @@
 /** probeMut.mjs — TE-REG-G1's convicting mutations + the consumption differential. */
 import { createHash } from 'node:crypto';
-import { buildFabric } from './src/domain/townMap/fabric/buildFabric.js';
-import { buildTownMapModel } from './src/domain/townMap/townMapModel.js';
-import { buildSubstrate } from './src/domain/townMap/fabric/substrate.js';
-import { deriveCliffs, cliffCrossing, onImpassable, CLIFF } from './src/domain/townMap/fabric/cliffs.js';
-import { terminateAtCliffs } from './src/domain/townMap/fabric/walls.js';
-import { makeWalledFixture } from './tests/fixtures/townMapFixtures.js';
+import { buildFabric } from '../../src/domain/townMap/fabric/buildFabric.js';
+import { buildTownMapModel } from '../../src/domain/townMap/townMapModel.js';
+import { buildSubstrate } from '../../src/domain/townMap/fabric/substrate.js';
+import { deriveCliffs, cliffCrossing, onImpassable, CLIFF } from '../../src/domain/townMap/fabric/cliffs.js';
+import { terminateAtCliffs } from '../../src/domain/townMap/fabric/walls.js';
+import { makeWalledFixture } from '../../tests/fixtures/townMapFixtures.js';
 
 const sha = (o) => createHash('sha256').update(JSON.stringify(o)).digest('hex').slice(0, 16);
 const fixture = (seed, terrain, access = 'moderate') =>
