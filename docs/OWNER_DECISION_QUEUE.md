@@ -25783,3 +25783,21 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   `build:edge-shared` as a pre-gate probe because writing five sidecars into
   a tree about to be gated manufactures the §559.2 in-flight-edit class —
   the correct reading of a law against its own tempting shortcut.
+
+## §583 · THE OWNER SIGNS THE TIME BUDGET: 10–20 SECONDS IS FINE IF THE QUALITY JUSTIFIES IT (2026-08-24 ~13:55 CDT)
+
+- **§583.1 ⭐ OWNER RULING:** "10-20 seconds for a map is just fine if the
+  quality is justified." The register program's FIRST-PAINT budget is
+  10–20 s at full quality — instant-generation parity with FTG is explicitly
+  NOT the bar. This materially relaxes the op-ceiling pressure on REG-5/6/7
+  (drawn countryside, ink, paint) and §7's budget hazard.
+- **§583.2 THE CHAIR'S TWO EDGES ON THE RULING, so it is not over-read:**
+  (i) the budget is GENERATION/first-render — INTERACTION after the paint
+  (pan, zoom, hover, the halo) still owes smoothness; a map may take 15 s to
+  draw once and must never jank thereafter; determinism makes this cheap —
+  same seed, same map, rendered once and CACHED, so the 10–20 s is paid per
+  settlement, not per view. (ii) ⭐ the wait itself is a design surface:
+  PROGRESSIVE REVEAL — the map drawing itself in layers before the user
+  (geometry, then ink, then wash, like watching the artist) — turns the
+  budget into theater and is chartered as a REG-7/8-adjacent option for the
+  owner's judging round.
