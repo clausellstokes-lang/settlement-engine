@@ -1676,14 +1676,14 @@ export const institutionalCatalog = {
         baseChance: 0.4,
         desc: 'State or noble-chartered coin production. Standardises currency across the region. Significant ongoing revenue via seigniorage.',
         tags: ['banking', 'guild'],
-        priorityCategory: 'military',
+        priorityCategory: 'economy',
       },
       'Auction house': {
         required: false,
         baseChance: 0.35,
         desc: "Formal venue for selling high-value goods: estates, ships, livestock, art, and occasionally persons. Charges buyer's and seller's premiums.",
         tags: ['market', 'guild'],
-        priorityCategory: 'military',
+        priorityCategory: 'economy',
       },
       "Harbour master's office": {
         required: false,
@@ -1691,14 +1691,14 @@ export const institutionalCatalog = {
         tradeRouteRequired: ['port', 'river'],
         desc: 'Regulates harbour and river-port traffic, collects anchorage fees, assigns berths, and enforces port law. Navigable-water cities only.',
         tags: ['law_enforcement', 'port'],
-        priorityCategory: 'military',
+        priorityCategory: 'economy',
       },
       "Furrier's district": {
         required: false,
         baseChance: 0.35,
         desc: 'Fur processors, traders, and retailers concentrated in one area. High-value trade. Quality furs are luxury goods.',
         tags: ['trade', 'guild'],
-        priorityCategory: 'military',
+        priorityCategory: 'economy',
       },
       // [W-I INFORMATION BROKERAGES] I1 (design §3). The city keeps BOTH legal forms in the
       // catalog on purpose: the minor house can still roll here, and the existing
@@ -1987,7 +1987,7 @@ export const institutionalCatalog = {
         baseChance: 0.25,
         desc: 'An individual or small cell operating beneath the assassins guild threshold. Accepts contracts through criminal intermediaries. Less reliable but deniable.',
         tags: ['guild', 'military'],
-        priorityCategory: 'military',
+        priorityCategory: 'criminal',
       },
       'Front businesses': {
         required: false,
@@ -2407,6 +2407,7 @@ export const institutionalCatalog = {
         desc: 'Permanent underground market: contraband, forged documents, illegal services.',
         tags: ['criminal', 'underground'],
         priorityCategory: 'criminal',
+        facets: { subterranean: 'subterranean' },
       },
       'Underground city': {
         required: false,
@@ -2415,6 +2416,7 @@ export const institutionalCatalog = {
         desc: 'Extensive tunnels and catacombs repurposed as criminal and refugee sanctuary.',
         tags: ['criminal', 'underground'],
         priorityCategory: 'criminal',
+        facets: { subterranean: 'subterranean' },
       },
       "Assassins' guild": {
         required: false,
