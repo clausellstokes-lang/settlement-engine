@@ -10,7 +10,7 @@ this one.**
 
 ## ⛔⛔⛔ PICKUP CARD — REWRITTEN WHOLE AT EVERY LEDGER COMMIT (owner §448: a successor picks up HERE in 60 seconds)
 
-**AS OF 2026-08-24 03:41 CDT · ledger §543 · build `claude/composite-r4` = `86794b5d2` (**56 cars landed**) · ⛔ LANE CAP = **FOUR** (§508) · ⛔ every dispatch `model: "opus"` (§484) · standing lane law = `$SP/LANE-LAW.md`, slot facts = `$SP/SLOT-FACTS.md`**
+**AS OF 2026-08-24 (refreshed 04:25)  ·  prev AS OF 2026-08-24 03:41 CDT · ledger §546 · build `claude/composite-r4` = `86794b5d2` (**56 cars landed**) · ⛔ LANE CAP = **FOUR** (§508) · ⛔ every dispatch `model: "opus"` (§484) · standing lane law = `$SP/LANE-LAW.md`, slot facts = `$SP/SLOT-FACTS.md`**
 
 **⛔ THE OWNER'S #1 ITEM: nothing has deployed since 2026-07-28.** Prod at migration **121**, repo head **199**, 78 pending. ⭐ **MEASURED THIS SESSION (§540.7–.8): the push itself deletes nothing.** 12 of the 13 destructive migrations act only inside function bodies. **198, the one labelled DESTRUCTIVE, deletes nothing at apply time** and its prune is double-gated, both fail closed. ⛔ **The one that acts at push time is 188** — it deletes users' custom supply-chain content, mitigated by a quarantine receipt written to `application_command_journal` **before** deletion. **`docs/DEPLOY.md` covers 198 well and does not mention 188 at all — that amendment is owed and unowned.**
 
@@ -24,9 +24,9 @@ this one.**
 ### SEATS NOW
 | seat | lane | state |
 |---|---|---|
-| COMPILE | **DW-0 (repair)** | resumed with the 46 KB skeptic docket at `$SP/DW0-RULING-DOCKET.md`; 14 blockers to close. Charter `7c3377cd4` (pin `holding-dw0`) is on **ZERO branches** — nothing to un-land. |
-| BUILD | **TE-CG-2** | identical-footprint defect; own `npm ci` tree. ⚠ the panel notes **CG-2 × CG-1b was measured by nobody** — this lane is the first. |
-| BUILD | **TE-CH-3** | catalog data slips; three declared digests, each to be re-derived AT the committed tip because pre-commit re-stages. |
+| — | **DW-0 CLOSED** | charter LANDED on the ledger branch at `d2e80a44d` (129,030 B, byte-identical); final tip `8e8489bcc` pinned `holding-dw0-final`. R2 ruled. |
+| HOLDING | **TE-CG-2** | identical-footprint defect; own `npm ci` tree. ⚠ the panel notes **CG-2 × CG-1b was measured by nobody** — this lane is the first. |
+| HOLDING | **TE-CH-3** | catalog data slips; three declared digests, each to be re-derived AT the committed tip because pre-commit re-stages. |
 | free | — | deliberately empty: the gate is SERIAL and adding a lane buys contention, not throughput (§541.10). |
 
 ### ⛔ FIVE DECISIONS THAT ARE THE OWNER'S (§543.9) — none delegated
@@ -38,6 +38,10 @@ DW-0 repair → chair rules R1–R7 → **CH-3 lands** → **CH-5 build** (Shape
 
 ### ⛔ OWNER-GATED BY NATURE (§510.2)
 `supabase db push` · every push and deploy · legal sign-off · the tuning **signature** · the `/code-review ultra` keystroke.
+
+
+### ⭐ NEXT ACT
+**A two-car stack: CG-2 + CH-3.** Both are pinned and both were built on `79b78881c` while the slot is now `86794b5d2` — **each needs a rebase and a re-stamped DELTA (never the tuple)**. CG-2 is green but for its deferred census row; CH-3 is red and revising to the rng-preserving §3.2 variant (§544.7). Packet surface is **176** — do not harden 175. The DW build waves gate on the pre-DW-1b fixture re-derivation (§545.4).
 
 ## ⭐⭐⭐⭐ SUCCESSION ADDENDUM — 2026-08-24 (~01:40), LEDGER THROUGH §439 — READ THIS DELTA FIRST, THEN THE §427 BLOCK BELOW
 

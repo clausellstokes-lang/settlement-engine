@@ -23897,3 +23897,59 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   `holding-dw0-repaired`, plus the rescued `ad-charter-2026-08-24`. Packet
   surface **176**. **R2 — where the compiled charter lands — remains mine and
   unexercised; the charter is still on no branch.**
+
+## §546 · R2 RULED AND EXECUTED — THE CHARTER HAS A HOME, AND A BROKEN ARM WAS HELD RATHER THAN "FIXED" (2026-08-24 04:25 CDT)
+
+- **§546.1 R2 RULED: THE COMPILED CHARTER LANDS ON THE LEDGER BRANCH.**
+  `docs/DW0-CHARTER-COMPILED.md`, **1,102 lines / 129,030 B**, from DW-0's fourth
+  pass `8e8489bcc` (pinned `refs/preserve/holding-dw0-final`), landed at
+  `d2e80a44d` and **proved byte-identical** to the lane tip. *Why the ledger and
+  not the build branch:* the estate's design record already lives there and
+  nowhere else; **it is a REAL branch, so it cannot decay the way the orphan
+  preserve ref did and generate the same six blockers a second time** (§543.3);
+  and it keeps the build branch code-only, so lane worktrees do not carry 129 KB
+  of design document. Build lanes cite
+  `review-fixes-2026-07-08:docs/DW0-CHARTER-COMPILED.md`. *Reversal:* delete the
+  file; the pin survives.
+- **§546.2 THE TWO-TRUTHS PROBLEM CLOSED IN THE SAME COMMIT.**
+  `DESIGN_DWELLINGS_PROGRAM.md` (31,733 B) gains a **SUPERSEDED FOR PLANNING**
+  header naming the compiled charter as operative, saying plainly that where the
+  two disagree the charter wins, and **naming the three of its own claims
+  measured false at the slot** — UC-5's asserted absence, CH-1's promised
+  `interiorKind` override, and the 60-fixture "union". Three artefacts existed
+  (frozen draft, old design doc, compiled charter); now exactly one is operative
+  and the other two say so.
+- **§546.3 ⭐⭐ THE BROKEN ARM WAS HELD, NOT REPAIRED — AND THE OBVIOUS FIX WOULD
+  HAVE INVERTED THE FINDING.** DW-5d's exit arm reads
+  `furnaces ≤ flues + portableFurnaces` while `portableFurnaces` has **zero
+  occurrences in `src`** (§545.4). The obvious repair — drop the term to
+  `furnaces ≤ flues` — **would convict the best-attested laboratory in the
+  corpus**: Boerhaave's room had ONE chimney and ran simultaneous processes
+  *precisely because portable furnaces defeat the flue constraint.* The arm is
+  **HELD with the trap recorded beside it**; DW-5d ships four live arms and eight
+  required results until the gate delivers the fixture. ⚠ **A broken constraint
+  is not always repaired by deleting the term you cannot resolve — sometimes that
+  term is the whole finding.** New standing caution.
+- **§546.4 DW-0 CLOSED, AND THE NUMBERS ARE CLEAN.** Four passes
+  (`7c3377cd4` → `96e021b0b` → `93b47f619` → `8e8489bcc`). **Census delta ZERO
+  across all four; engine bytes zero throughout; no packet, no push.** Gate
+  unchanged and re-proved at the tip: 39 of 40, the banked `enforcement-claims`
+  red only, **zero citations of its own document**, `git diff HEAD` empty, tip
+  bytes equal worktree bytes, C-1..C-25 all resolving with nothing dangling. It
+  also verified "not landed" correctly rather than conveniently — noting that
+  `git branch --contains` returned only `* (no branch)`, **the detached-HEAD
+  marker, which it checked rather than counting as a hit.**
+- **§546.5 ⭐ THE DOCTRINE DW-0 LEAVES BEHIND, IN ITS OWN WORDS.** Offered the
+  reframing that its three inherited-claim misses were findings rather than
+  failures, it drew the better lesson itself: *"the useful lesson is not BE MORE
+  CAREFUL WITH DOSSIERS but KEEP RE-AUDITING INHERITED CLAIMS AFTER YOU THINK YOU
+  ARE DONE — which is precisely what produced C-24 and C-25, on the fourth pass,
+  while answering questions about something else."* **Both of those were found
+  while the lane was answering unrelated questions, and both had been passed over
+  by a six-lens panel and its refuters.** Recorded as method, not as apology.
+- **§546.6 STATE.** Build `86794b5d2` (56 cars) · ledger through §546 · packets
+  **176**. Holdings: `holding-cg2` (`44b83a882`, green but for the deferred
+  census row), `holding-ch3` (`6ef434822`, red, revising to the rng-preserving
+  variant per §544.7) — **both built on `79b78881c` and owed a rebase** — plus
+  `holding-dw0-final` and the rescued `ad-charter-2026-08-24`. **The next landing
+  is a two-car stack: CG-2 + CH-3.**
