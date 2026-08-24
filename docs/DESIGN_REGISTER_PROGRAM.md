@@ -318,3 +318,15 @@ two measurements. Variation ranges that shape worlds are tuning-signature surfac
 **A3.3 · Standing approvals of record:** the §590 rampart treatment is OWNER-APPROVED as drawn
 (ODQ §598 — "Yes! I like that rampart") and is REG-2's binding dress target beside hf261/hf313;
 the family-grammar mechanism is owner-approved at §600–§601 ("Perfect, I like that").
+
+---
+
+## AMENDMENT A4 · THE TIME BUDGET, FINAL FORM (ODQ §603)
+
+**L-REG-13 is amended:** draft budget **20–30 s fine · 45 s worrisome · 60 s hard max,
+extremely rare** — TIERED: small tiers land in single-digit seconds; the upper allowance is
+city/metropolis territory. Rationale of record (the CYCLING THESIS, §603.2): truth collapses
+the regenerate-search — users cycle once or twice on a map that already matches the
+settlement's state, then edit; the competitive unit is time-per-satisfied-map. Interaction
+smoothness, caching, and progressive reveal unchanged from §583.2. REG-7's performance gate
+and REG-10's reveal pipeline consume the tiered numbers.

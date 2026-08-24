@@ -26280,3 +26280,26 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   specimen direction; the next judging round re-renders pages from this
   sealed tip, and the retention rule is now explicit: **judging artifacts are
   deliverables, never scratch.**
+
+## §603 · THE TIME BUDGET SHARPENED — AND THE CYCLING THESIS RECORDED AS PRODUCT LAW (2026-08-24 ~19:00 CDT)
+
+- **§603.1 ⭐⭐ OWNER RULING, superseding §583.1's numbers:** the settlement-map
+  DRAFT budget is **20–30 seconds, fine; 45 seconds, worrisome; 60 seconds,
+  the hard maximum and extremely rare.** The §583.2 edges stand unchanged
+  (generation-side only; interaction smooth; cached per settlement;
+  progressive reveal as the wait's design surface).
+- **§603.2 ⭐⭐ THE CYCLING THESIS, in the owner's reasoning, recorded because
+  it re-prices the whole speed axis:** competitors need instant regeneration
+  BECAUSE their maps carry no truth — the user cycles twenty times searching
+  for something the generator doesn't know about; ours derives from the
+  settlement's actual state, so the first map already matches what the user
+  is looking for — **they cycle once or twice, then EDIT on top.** The
+  competitive unit is time-per-SATISFIED-map, not time-per-map — and on that
+  metric 30 seconds beats 2-seconds-times-twenty. Instant regeneration is a
+  symptom of meaninglessness, not a feature to chase.
+- **§603.3 CHAIR REFINEMENT (vetoable): THE BUDGET SCALES WITH TIER.** A
+  thorp or village should still land in single-digit seconds; the 30–60 s
+  allowance is city/metropolis territory. Encoded so the common first
+  generation (a small settlement) keeps the snappy feel while only the giants
+  spend the full allowance. REG-7's §220 performance row and REG-10's
+  reveal pipeline adopt the tiered budget.
