@@ -22299,3 +22299,78 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   with waiters behind; every non-doc committed blob is byte-identical to what
   the full sweep ran on, and the four possible readers of the one post-sweep
   doc change were re-run at the final bytes. The stack's terminal supersedes it.
+
+## §526 — ⭐⭐ THE AD CHARTER REFUTES ITS OWN PREMISE: **AN ILLUSTRATED PROGRAM ALREADY EXISTS, IS LANDED AND IS FREE** — SO THERE IS NO LONG-LEAD ART BRANCH; ⛔⛔ **BUT 176 MB OF SHIPPED ART HAS NO PROVENANCE RECORD, AND §524 MEANS WE NOW SELL IT** (2026-08-24 23:18 CDT)
+
+- **§526.1 THE PREMISE WAS WRONG, AND MEASUREMENT KILLED IT.** The chair
+  dispatched this compile expecting commissioned artwork with a months-long
+  lead time. **THE ILLUSTRATED TOWN (IT-1..IT-5) is already landed and LIVE**:
+  a sixth lens (`townMapStyles.js:74`) that is **FREE and visible to every
+  viewer** (the switcher renders unconditionally at
+  `SettlementMapEditControls.jsx:79`; `LENS_COUNT = 5` excludes it), 27 glyph
+  kinds in 15,837 B, a genre-door registry (`registerGlyphSet`), a 33 KB
+  ground-dress layer, a season portrait, and an AI re-skin WALL that permits
+  selection and forbids authoring — all reaching pane, SVG, PNG, PDF,
+  thumbnail and token raster through ONE geometry source
+  (`buildTownMapDrawList`). **Recommendation: build the rest on the estate's
+  own procedural primitives and BUY NOTHING THAT SHIPS — there is no
+  long-lead artwork branch at all.** Deliverable
+  `draft-AD-CHARTER.md`, 122,346 B / 1,377 lines, sha256 `e4ddb509…`, 5 waves
+  / 17 cars, **2 declared shifts and ZERO flags minted**, a 9-row sitting
+  sheet with provenance as row zero, provenance of the assembly proved by
+  copy-aside + re-run + cmp with a one-byte perturbation control.
+- **§526.2 THE HIGHEST-CRAFT ART MACHINERY THE ESTATE OWNS IS WIRED TO
+  NOTHING.** `src/domain/townMap/arch/` — **37 files, 331,627 B**, an
+  architectural grammar with an **11-material × 6-weathering byte-deterministic
+  baked texture library**, 19 tests and a lazy pin — has **ZERO importers
+  anywhere in `src`**. Meanwhile what IS abstract is exactly band B15's
+  subject: `interiorDraw.js:80` draws *"a small square per typed piece"* for
+  all 22 furnishing kinds, the 3D diorama is flat semantic albedo, and
+  `cartographyPaint.js` — the DW-6 seam — is colour-free role-and-tone ops
+  with no glyph path at all. **The art program is largely a WIRING job over
+  landed craft, not a commissioning job.**
+- **§526.3 ⛔⛔ THE REAL RISK, AND IT IS THE OWNER'S BY NATURE (§510.2 legal).**
+  `public/` ships **176,499,727 B** — including **11,646,263 B of FMG textures
+  (23 files)**, **3,094,160 B of heraldic charges (338 SVGs)**, **23
+  real-world heightmap PNGs**, **15.4 MB of page paintings whose painter is
+  recorded NOWHERE**, and **62.8 MB of video** — while
+  `THIRD-PARTY-NOTICES.md`, 521 rigorous lines, **covers code, fonts and npm
+  ONLY**: measured in the document itself, `texture` 0 hits, `heightmap` 0,
+  `heraldr` 0, `.png/.jpg/.svg/.mp4` 0, `artwork` 0. The FMG grant is broad
+  MIT **but is only as strong as upstream's own rights in the art it
+  bundles**, and nobody has ever checked. This is a THIRD and far larger IP
+  exposure beside the two documents already docketed.
+- **§526.4 ⭐ AND §524 CHANGED ITS CATEGORY WHILE THE COMPILE WAS RUNNING.**
+  Export is now **PAID** inside the $2.99 dossier with `requiresAccount:
+  false`, so the estate does not merely *ship* bundled art — **it SELLS
+  artifacts that may contain it.** The lane folded the ruling in mid-flight
+  and drew the sharp consequence: **licensed asset packs move from awkward to
+  UNBUYABLE**, because the Unity Asset Store EULA FAQ (fetched 2026-08-24)
+  holds that a product is not "incorporated" if *"designed to allow your end
+  users to extract or download assets separately"* — which is precisely a
+  downloadable PDF. **Buying art is not a remedy; it is the same problem with
+  an invoice.**
+- **§526.5 THE AUDIT IS DISPATCHED NOW, NOT AT ITS DEADLINE.** **TE-AD-1**
+  (Opus, read-only, commits nothing, competes with no build seat): a complete
+  inventory of every shipped asset reconciled against the 176 MB; provenance
+  per group classified **DOCUMENTED / INFERRED / UNKNOWN** with the evidence
+  named and *an inference from a directory name counted as UNKNOWN*; **the
+  selling question traced in code per group** (display-only versus embedded in
+  a sold PDF/PNG/token/Foundry bundle); the heightmaps treated as their own
+  regime (national mapping agencies, SRTM/ASTER, OpenTopography — several
+  carry attribution or non-commercial terms); the 15.4 MB of unattributed
+  paintings chased through `git log --follow` rather than guessed, **with
+  "the record is silent" accepted as a finding**; a priced remedy menu; and
+  the deadline argued rather than inherited. **The charter's claimed last
+  responsible moment is before the ONE trailing OSR mint (G1)** — because a
+  finding that lands after the single regeneration cannot be acted on without
+  a second one.
+- **§526.6 AN EIGHTH INSTRUMENT THAT LIES, AND IT NEARLY COST THE HEADLINE.**
+  **`git grep -E` does not honour `\b`** — an anchored `'\bIT-[0-9]'` search
+  returned ZERO against a case that should have matched; re-run without it, it
+  returned the entire ILLUSTRATED TOWN program this charter is built on. **A
+  negative grep with no positive control would have lost the finding
+  outright.** Added to the standing checklist and to TE-AD-1's brief, which is
+  a grep-heavy licence hunt where a false negative is the expensive direction.
+  Four durable facts named by the lane and banked here by the chair rather
+  than written into a shared index at its ceiling (§506.5 precedent).

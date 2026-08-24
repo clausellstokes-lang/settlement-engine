@@ -51,6 +51,9 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 23:18 CDT 08-24: §526 — AD charter refutes its premise: illustrated is ALREADY LIVE and free, no
+# long-lead branch. ⛔⛔ 176 MB of shipped art has NO provenance record and §524 means we SELL it → TE-AD-1 auditing.
+# `git grep -E` ignores \b (8th silent liar).
 # ⭐⭐⭐ 23:16 CDT 08-24: §525 — CG-1b BUILT: 287/504 → 0/504, every settlement can draw a map.
 # Ratchet 11 RECONCILED = 7 swept + 4 in tests/copy (never swept). MEMORY went over 17KB → FOLD 14 (12,644 B).
 # STACK-2 (WEB-8 + CG-1b) dispatched.
