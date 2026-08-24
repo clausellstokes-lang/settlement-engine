@@ -26035,3 +26035,22 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   Four instrument defects self-caught and annotated — the effect-size,
   winding-rule, resolution-mismatch and circular-mean classes are banked in
   INSTRUMENTS.md.
+
+## §593 · THE OVERHEAD CLARIFICATION — THE PLAN-VIEW ROOF GRAMMAR IS THE STANDARD, AND Q3 TILTS (2026-08-24 ~16:10 CDT)
+
+- **§593.1 OWNER CONFIRMATION SHARPENED INTO A RULING:** the corpus plates
+  with detailed rooftops and setting-establishing details are the required
+  drawing examples **specifically for the overhead bird's view**. The DETAIL
+  REGISTER therefore captures, per element class, the PROJECTION the
+  exemplars use and how the detail reads from directly above — for roofs:
+  ridge and hip lines drawn in plan, two-tone plane shading under the one NW
+  light, chimneys as dots — as the translation guide for our top-down
+  geometry. Setting-establishing details (yard clutter, racks, graves, boats,
+  stalls) are REQUIRED per §591, never decorative. Survey lane amended in
+  flight.
+- **§593.2 THE CONSEQUENCE: architecture Q3 TILTS.** The shipped 26-glyph
+  library draws OBLIQUE ELEVATIONS — a different projection from the corpus's
+  plan-with-depth roof grammar. Under this ruling the plan-view grammar is
+  the standard for how buildings are drawn; the oblique glyphs survive at
+  most as an accessory lens. Q3's final disposition lands with REG-3's
+  charter, citing this row.
