@@ -26392,3 +26392,24 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
 - **§607.3** The film taste specimen replaces the page specimen: one city
   growing as an actual animation for the owner's judgment. Growth plates
   (§606.3) survive as the PRINT projection of the same timeline.
+
+## §608 · THE FILM'S CLOCK: THIRTY SECONDS, STRETCHED TO OR EXTENDED BY THE BUILD (2026-08-24 ~20:20 CDT)
+
+- **§608.1 ⭐ OWNER RULING:** the Chronicle Reveal's TARGET DURATION is **30
+  seconds at every tier**. Build times vary (milliseconds for a thorp,
+  10–20 s for a city) — so the film's law is
+  **duration = max(30 s, actual build time)**: a build that finishes early
+  plays its story out to the deliberate 30-second experience; a build that
+  genuinely needs longer (the metropolis under §603's allowance) extends the
+  film to match, and it always "ends when it's done building."
+- **§608.2 THE PACING CONSEQUENCE:** the film is STORY-PACED, not
+  compute-paced — years do not tick uniformly; the reveal allocates its 30
+  seconds across the town's beats (founding slow and intimate, boom years
+  quick and dense, the disaster given its dread, the stillness its weight).
+  A thorp's two beats breathe; a metropolis' saga compresses. The §603
+  compute budget hides entirely beneath the film.
+- **§608.3 CHAIR ADDITIONS (vetoable):** the film is **SKIPPABLE** (a
+  skip-to-map affordance, so 30 s is an offer, never a toll — the §603.2
+  cached-render law means a revisit needs no film at all) and **REPLAYABLE**
+  (a "watch its history" control on every settlement — which is also
+  precisely the REG-11 share surface: the replay is the clip).
