@@ -51,6 +51,8 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 23:45 CDT 08-24: §529 — FMG conveys NO rights to bundled rasters. 4 proved CC BY (credit line),
+# 3 highest-risk Earth photos, 16 unknown (metadata destroyed). RECOMMEND: wire the estate's own baked textures, delete the rest.
 # ⭐⭐⭐ 23:44 CDT 08-24: §528 — the SOLD PDF IS CLEAN (text+vector only; no heightmap reaches $2.99).
 # Exposure is the realm PNG, the public thumbnail bucket, and Ctrl+S downloading the full .map (height array).
 # ⭐⭐⭐ 23:24 CDT 08-24: §527 — CG-1b gate GREEN (97/97). 9th liar: a compound ending in grep INVERTS

@@ -22485,3 +22485,78 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   a cap of four** — the chair's AD-1 brief omitted the SOLO clause every other
   brief carries. The omission is mine; the work is excellent and is folded
   into the audit.
+
+## §529 — ⛔ THE TEXTURE FORENSICS: **FMG's MIT LICENCE CONVEYS NO RIGHTS TO THE BUNDLED RASTERS** — 4 FILES PROVED CC BY (A CREDIT LINE AWAY), 3 ARE THE HIGH RISK, 16 UNKNOWN WITH THEIR METADATA DESTROYED; AND THE ESTATE ALREADY OWNS THE REPLACEMENT (2026-08-24 23:45 CDT)
+
+- **§529.1 THE LEGAL PREMISE IS SETTLED, AND IT IS THE BAD DIRECTION.** FMG's
+  `LICENSE` is MIT over **"the Software"**, and its derivative-works clause
+  covers *"created maps, map images, screenshots, videos"* — **OUTPUTS, not
+  bundled input assets** (fetched 2026-08-23). The project's Dependencies wiki
+  credits **only JavaScript libraries**; no image, texture or photo
+  attribution exists anywhere in it, and a search of its issues and PRs for
+  texture licensing returns zero. **Azgaar did not author these images and
+  does not license them to us.** The §526.3 caveat — "the FMG grant is only as
+  strong as upstream's own rights" — is now answered: upstream asserts none.
+- **§529.2 THE EVIDENCE WAS DESTROYED BEFORE IT REACHED US.** All 23 JPEGs
+  carry a bare JFIF header, re-encoded progressive — **no EXIF, XMP, IPTC or
+  comment**. The chain was traced anyway: PR #1017 (merged 2023-11-19) moved
+  the textures from hotlinks to a local folder, and the prior URLs were
+  Azgaar's own WordPress library. Those originals are still live, still
+  higher-quality — **and equally stripped** (empty EXIF IFDs, a generic HP
+  sRGB profile, `CREATOR: gd-jpeg` from WordPress's resizer). **The chain
+  dead-ends at Azgaar.**
+- **§529.3 ⭐ FAMILY B — FOUR FILES, PROVED, AND A CREDIT LINE FROM CLEAN.**
+  `mars` and `mercury` (big and small) are **PIXEL-IDENTICAL** to Solar System
+  Scope's published 2K textures — zero differing subpixels after decoding to
+  RGB — with the repo copies recompressed (mean |Δ| 2.66 / 2.88) and the small
+  variants downscaled. **The negative control is the proof that matters:**
+  mars-small against SSS *Mercury* reads 59.33 and mercury-small against SSS
+  *Mars* 59.27 — a **13× separation**, so the low deltas mean something.
+  Licence, verbatim: *"Distributed under Attribution 4.0 International
+  license: You may use, adapt, and share these textures for any purpose, even
+  commercially."* **Commercial redistribution is PERMITTED**; CC BY 4.0 wants
+  credit, a licence link and a note that changes were made — and our copies
+  ARE modified. **Attribution is currently absent: a live compliance gap, and
+  the cheapest possible fix.**
+- **§529.4 ⛔ FAMILY C — THREE FILES, THE HIGHEST RISK, AND RESEARCH CANNOT
+  RETIRE IT.** Three genuine true-colour Earth-observation photographs (Iran's
+  folded ridges and salt desert; Mauritanian dune fields; Spanish valleys with
+  reservoirs and cumulus), all exactly 1460×900 — one collection, one export
+  size. **No match found** in NASA Earth Observatory, USGS Earth as Art, NASA
+  Visible Earth or ESA/Copernicus, and 1460×900 is not a standard export for
+  any of them. The bracket is what decides it: **NASA imagery is generally not
+  copyrighted and USGS-produced data is public domain — fine; but Google
+  Earth/Maps imagery "may not be used for any commercial or promotional
+  purposes" and the brand guidelines explicitly prohibit using it as
+  BACKGROUNDS OR TEXTURES** — a flat prohibition no attribution can cure.
+  Between "free" and "forbidden" with no way to tell, **this trio is a
+  replacement candidate, not a clearance candidate.**
+- **§529.5 FAMILY A — SIXTEEN FILES, UNKNOWN, WITH TWO FINGERPRINTS.**
+  `pergamena-small.jpg` is **626×417** and 626 px is Freepik's free-tier
+  preview width; the whole 2021/10 batch is uniformly **2000 px on the long
+  edge**, consistent with one stock site's standard free download. Both
+  PLAUSIBLE only. One candidate genuinely REFUTED (Subtle Patterns /
+  Transparent Textures supply small tileable CSS patterns, not 2000 px
+  photographs). The terms spread is the point: **Unsplash and Pexels permit
+  commercial use and bundling — clear; Freepik's free tier makes attribution
+  mandatory and restricts redistribution; Textures.com forbids redistribution
+  outright.** ⚠ The Textures.com terms come from search snippets rather than a
+  primary fetch and must be re-verified before anyone relies on them.
+- **§529.6 ⭐⭐ THE CHAIR'S RECOMMENDATION, JOINING TWO LANES' FINDINGS.**
+  §526.2 measured that `src/domain/townMap/arch/` is **37 files and 331,627 B
+  of byte-deterministic baked texture machinery across 11 materials × 6
+  weathering states, fully tested — with ZERO importers.** So the cheapest
+  safe path is not clearance and not purchase: **wire up the craft the estate
+  already owns and delete the third-party rasters entirely.** That retires
+  Family A and Family C at once, removes ~11.6 MB from the payload, makes the
+  textures deterministic (which the Promise wants anyway), and leaves only
+  Family B — which is genuinely free and gets a credit line rather than a
+  deletion. **Recommended, not decided: the legal call is the owner's by
+  nature (§510.2).**
+- **§529.7 TWO SIDE FINDINGS AND WHAT WOULD SETTLE THE REST.** `index.html`
+  offers `stone-small.jpg` and `stone-big.jpg`, **neither of which exists in
+  the vendored folder** — two broken dropdown options — and references
+  `soiled-paper-vertical.jpg` where the file on disk is `.png`. What would
+  most change the conclusion: a **reverse-image search on `spain-small.jpg`
+  and `pergamena-small.jpg`**, the two load-bearing unknowns, which no lane
+  here can run. That is a task for a human with a browser, and it is small.
