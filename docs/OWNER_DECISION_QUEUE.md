@@ -25815,3 +25815,31 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   named as the strategy's critical path on the owner's docket, external eyes
   recorded as an owner option. The skeptic panel (in flight) reviews the
   amended document; its findings fold as A2 with the chair's rulings.
+
+## §585 · ⭐⭐⭐ THE FULL-JUDGMENT GRANT AND THE ORDER: CONTINUE TO THE SOAK (2026-08-24 ~14:15 CDT)
+
+- **§585.1 OWNER, VERBATIM INTENT:** "I leave all judgments to you now. Please
+  continue all the way to the soak." **The chair's reading, recorded
+  vetoably:** all judgment calls — including the register program's TASTE
+  GATES, which were §9 owner-signature surfaces — are now the chair's, judged
+  under the §580 north star and the instrument set, every verdict recorded
+  vetoably in this ledger. The mandate runs the whole remaining arc UP TO AND
+  INCLUDING launching the terminal soak, then stops at the owner's signature
+  line. **The by-nature carve-outs SURVIVE this as they survive every
+  delegation** (§510/§557 precedent): every push and deploy · the fabric
+  CUTOVER (paid-surface behavior — what shipping users see) · the tuning
+  SIGNATURE at the soak's end · legal · the cull · `/code-review ultra`.
+- **§585.2 THE ROAD TO THE SOAK, AS THE CHAIR WILL RUN IT:** A2 (panel
+  rulings) → REG waves sandbox-first with chair-judged rounds (small-tier +
+  gallery per A1) → CH-6 (unblocked by CH-4's landing; §555.9 satisfied) →
+  the DW build waves (42 cars, the §567 addendum governing) → WEB/HK/CT/AD
+  trains per the standing queue → the trailing OSR mint → parity → the §290
+  review stop (the ultra keystroke stays the owner's) → the walk + ONE regen
+  → **the diagnostic and terminal soaks WITH the DW leg and the map leg** —
+  and there the chair stops and hands the owner the pen.
+- **§585.3 SEATS FILLED THIS SITTING (cap 4):** TE-REG0-R2 (specimen,
+  running) · TE-CH-6 (the live deity-doctrine violation — dispatched, Opus) ·
+  TE-REG-G1 (the relief substrate, three customers — dispatched, Opus) ·
+  TE-DEPLOYDOC-188 (the parked owner-doc car, §565.2's charter, builds on
+  slot `233c35a69` — dispatched, Opus). Gates serialize; per §582.2 every
+  lane polls BOTH mutex dirs.
