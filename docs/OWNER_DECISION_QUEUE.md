@@ -24157,3 +24157,91 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   build waves**, which gate on TE-DW-FIX's re-derivation. The AD program's
   charter is safe at `refs/preserve/ad-charter-2026-08-24` after being rescued
   from a dead session's `/tmp` (§544.1).
+
+## §550 · CH-4 IS FOUR TIMES ITS DESCRIPTION — AND A LANE CAUGHT MY LANE-LAW STALE (2026-08-24 06:35 CDT)
+
+- **§550.1 ⛔ A LANE CAUGHT THE CHAIR'S OWN STANDING LAW STALE.**
+  `LANE-LAW.md` — the file every dispatch is told to read first — still named
+  **`79b78881c` (54 landings)** as SLOT BASE while the live slot was
+  **`510c51b76` (58 cars)**, two landings behind, with the census tuple, packet
+  count and ratchet all stale beside it. **Every brief I wrote carried the
+  correct slot explicitly, so no lane built on the wrong base — but a lane that
+  trusted the law file over its brief would have.** Fixed, and the header now
+  says in its own text that **it is a CACHE and `SLOT-FACTS.md` is what gets
+  re-read at every proof boundary.** Both live lanes messaged. ⚠ *The standing
+  law file is itself subject to the decay law (§543.6/§545.5); nothing is exempt
+  because it is the thing that warns about decay.*
+- **§550.2 ⚠ A MALFORMED FORMATTER MANUFACTURED A FALSE NEGATIVE.** My first
+  check of R3's readiness printed **"register ABSENT"** — produced by a bad
+  `sed` flag (`s/^/…/B/`) that consumed the statement, not by any absence. The
+  register is present at the slot at **16,855 B**. *A formatter can turn a
+  positive into a negative; re-measure with an explicit existence test.*
+- **§550.3 ⭐⭐ CH-4's GROUND TRUTH: THE DEFECT IS FOUR TIMES ITS ONE-LINE
+  DESCRIPTION.** The estate had written exactly one phrase — *"`noble`
+  unclassifiable"* — and no charter. Measured over **1,803 quarters across 504
+  settlements**: **`noble`, `military`, `residential` AND `foreign` are all
+  ZERO** — four unreachable categories, not one — and **712 of 1,803 (39.5%)
+  carry a demonstrably wrong category.**
+- **§550.4 THE MECHANISM IS VISIBLE IN ELEVEN LINES, AND I VERIFIED IT MYSELF.**
+  `CATEGORY_PATTERNS` (`src/domain/districtProfile.js:105-117`) is
+  **first-match-wins over an ordered list**. `criminal` sits at **line 112 with a
+  bare, unanchored `den`**; `residential` sits at **115**. So **"Resi*den*tial"
+  matches CRIMINAL before it can ever reach its own pattern — 168 instances.**
+  Consequences measured by the lane and consistent with the source I read:
+  **the only `criminal` district in the product is a false positive**, while the
+  real one, `Shadows District`, reads *merchant* on `market` inside "hidden
+  markets"; **the only `craft` district is also a false positive**, while
+  `Artisan Quarter` reads *merchant* on `trade` inside "learning trades"; and
+  `Noxious Trades Quarter` reads *merchant* on its own name.
+- **§550.5 ⭐ THE FINDING THAT DECIDES THE SHAPE.** `Mages' Quarter` is not one
+  verdict but **115 arcane / 44 craft**, split by whether the seeded institution
+  draw happened to put a guild in its landmarks. **A category that FLICKERS WITH
+  THE ROSTER cannot be repaired by any pattern table**, however ordered or
+  anchored — which is why the recommendation is a declared registry read as
+  `declared ?? inferred` rather than a better regex. Eight variants were
+  measured: **anchor-only DELETES the criminal category**; reorder-only regresses
+  `Market Quarter` on 39 of 95 and sends `Wealthy Residential` to *criminal* via
+  "gar*den*s"; name-first scores 58.2%, **below base**.
+- **§550.6 THE BLAST RADIUS REACHES SAVED WORLDS' DRAWN MAPS.** 736 cells move,
+  10 of 12 categories reached, no residual — but downstream: **544 wealth-band
+  moves, 726 safety-band moves, 692 map-ring moves, 332 quarters LOSE
+  WALL-EMBRACE, and 303 of 504 settlements change where an institution class
+  lands.** Fog reveal sets are claimed to survive because district ids key on
+  name. **The lane says §496.4 R7 already declares this shift and §517.2 rules
+  CH-4 rides it, with the inherited constraint that CH-4 must land BEFORE THE
+  ONE REGEN.** ⚠ **I am not ruling on that claim from the lane's word** — it is
+  exactly the "inherited authorisation" class, and a panel is verifying the two
+  ODQ rows actually authorise THIS change rather than a narrower one.
+- **§550.7 ⚠ A §519 CONSEQUENCE THE LANE FLAGGED AGAINST ITSELF.**
+  `CATEGORY_TO_ARCHETYPE.noble = 'government'` — so **lighting `noble` puts a
+  government faction, often the ruler, on the dominant-faction line of 168
+  district cards**, and mapping to a noble archetype instead is unavailable
+  because **noble-archetype factions are 0 of 504.** Whether that is correct
+  world-modelling or an artifact of a lookup table with nothing better to offer
+  is the panel's second lens. Two other riders are **NOT** the chair's: a
+  `category` key on the persisted quarter record would be **owner-gated
+  persistence shape** (the recommendation avoids it), and making `military` and
+  `foreign` reachable is **NEW CAPABILITY**, because the generator authors no
+  such quarter.
+- **§550.8 ⛔⛔ CH-7 CHARTERED — CH-1's `den` CURE DID NOT TRAVEL, AND A CRIMINAL
+  NPC CAN LINK TO A PARISH PRIEST.** **VERIFIED AT THE SLOT BY ME:**
+  `src/domain/npcProfile.js:332` and `:373` both carry
+  `criminal: /tavern|den|gang|black\s+market/i` — **the same bare `den` CH-1
+  anchored elsewhere** — matched against institution NAMES, with **4 mid-word
+  false positives over 276 catalog names**: `Resident smith (part-time)`,
+  `Priest (resident)`, `Warden's Lodge`, `Dragon resident` — **the identical four
+  rows CH-1 anchored.** So a criminal NPC's `institutionLink` can resolve to a
+  parish priest. ⭐ **This is the third distinct instance tonight of a cure that
+  did not travel to a duplicate of its own vocabulary** (the others being
+  `npcProfile.js`'s hand-typed copy of `ARCANE_INST_TAGS`, §541.7, and the
+  compendium's `roomKinds`). **`npcProfile.js` is now a named suspect file: any
+  vocabulary appearing there is presumed duplicated until measured.**
+- **§550.9 RECORDED, NOT FIXED.** Six of twelve faction archetypes are never
+  produced (0 of 3,272 instances), so `noble` is unreachable in **three** places
+  rather than one; `Roadside Shrine` and `Woodcutters' Ground` fire **zero**
+  times in 504; and `arcaneClassifierCensus.walker.test.js` keys
+  `KNOWN_UNCONVERTED` by **`path:line`** with `districtProfile.js:112` a live
+  row — **so any edit above line 112 rots the key**, which is the concrete reason
+  the recommended registry is placed *below* line 117. ⚠ A test keyed by
+  `path:line` is a latent breakage in its own right; the panel is asked whether
+  routing code around it is the answer or whether **the key is the defect.**
