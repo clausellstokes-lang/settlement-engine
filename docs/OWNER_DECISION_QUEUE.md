@@ -22047,3 +22047,71 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   all, and the stack runs its full acceptance and liveness figures ON TOP of
   CH-2A to prove it. MF-CH2B stays out of the stack at DRAFT. Seats: WEB-8 ·
   CG-1b · STACK-1; one free.
+
+## §522 — MF-WEB8 BUILT AND HOLDING: THE FULL 19-ROW PAYWALL AUDIT — **ONLY TWO ROWS ARE ADVERTISED-BUT-UNGATED AND ONE IS INVERTED**; ⛔ **THREE VIEWING ROWS STILL CLAIM A PAYWALL AGAINST §514.1b — OWNER'S CALL**; MP-1 DISPATCHED (2026-08-23 22:29 CDT)
+
+- **§522.1 PINNED FIRST** (the sixth today): `refs/preserve/holding-web8` =
+  **`20066dd87`**, 2 over `b2852ccc`, porcelain 0, ten committed blobs
+  sha256-proved and **the untracked packet survived the hook's stash cycle**.
+- **§522.2 THE AUDIT, ALL 19 ROWS, MEASURED.** The chair ordered every
+  capability row measured rather than the two the charter named — §449 had
+  already found O-P1's premise false for four of six. Result: **BOTH gated and
+  advertised (correct, unchanged):** saves, custom-content, living-realm,
+  map-chains, export-bundle, plus map-editing, dm-pins, change-view and
+  fog-table — **the last four gated by `viewerCanAuthor`, NOT the `canUse*`
+  the earlier hunt assumed**. **Parity, true today:** every-size,
+  gallery-viewing, same-engine, map-view, provenance-hover, all-lenses,
+  panorama, surveyor-stages. **ADVERTISED but NEITHER gated nor shipped —
+  exactly two:** `interiors` (InteriorView has **zero product importers**; the
+  "one sample" allowance does not exist) and `v2-redraw`, which is
+  **INVERTED** — `newSettlementMapEdits()` stamps layout law 2 **tier-blind at
+  four create sites**, so free users already get v2. **Nothing de-advertised
+  removes anything a paying customer receives — measured, not assumed.**
+- **§522.3 ⛔ THREE STOP-CLASS FINDINGS FOR THE OWNER, REPORTED AND NOT
+  SHIPPED.** Under §514.1b the lane added a viewing/authoring/account axis and
+  swept every map level. **Zero authoring rows are free — no revenue leak**;
+  every affordance rides `editing`/`canEdit`, the 3-D plot inspector included.
+  But **THREE VIEWING rows still claim a paywall**, which contradicts the
+  owner's ruling that viewing and interacting are free at every level:
+  **`map-chains`** (a region-map view LAYER), **`change-view`** (history
+  READING depth capped by the authoring gate) and **`fog-table`**. Paid-surface
+  behaviour is owner-gated by nature (§464), so they are carried in a pinned
+  `VIEWING_PAYWALLS_PENDING_514` ledger, unchanged, **and put to the owner**:
+  freeing them removes something paying customers receive today, which is
+  precisely the class the chair may not decide.
+- **§522.4 A STRUCTURAL FINDING WORTH ITS OWN CAR.** `commitEdits`
+  (`useTownMapPresentation.js:142`) is the **single writer** of `mapEdits` and
+  **has no gate of its own** — the paywall invariant is held at N render
+  boundaries instead of at the chokepoint. **Nothing leaks today**, and the
+  lane proved it; but a future car wiring an affordance outside the
+  `{editing && …}` guard leaks silently and **no test would see it**. The cure
+  is the estate's own doctrine (gate the chokepoint, not the callers);
+  chartered as a follow-on so it is not smuggled into a hygiene car.
+- **§522.5 THE PROOFS.** Walker rules A–F with a **positive control that
+  plants a divergent row and watches it red** (`planted-x … claims a paywall
+  no symbol enforces`), and rules E and F each carrying their own control (a
+  planted free-authoring row; a planted paywalled-viewing row) — so the
+  owner's axis is pinned in both directions. 8/8 mutants after a clean-green
+  control. 185 files / 2,223 tests: **1 banked + the declared census row, zero
+  strays**; the `enforcement-claims` naked list byte-identical at base and tip
+  (6 entries) — settled by measurement because the car moved its input.
+  173/173 and 1134/1134 verbatim. Census DELTA `+1/+0/+1/+33/+9`, attributed
+  by reverting one file at a time — ⚠ **`tierFacts.contract.test.js` is
+  PARKED, so its four new arms are census-invisible** (the parked-file law
+  biting again). Two charter line numbers corrected. The lane hit the §520.1
+  flag independently, **diagnosed it before classifying anything**, and
+  refused to classify a battery that died mid-run on a V8 trap — re-running
+  narrowed instead. One member-caused red found and cured: twelve un-anchored
+  negatives that **neither the config battery nor the grep arm could see** —
+  worth a law of its own.
+- **§522.6 MP-1 DISPATCHED (Opus)** into a freed seat — **the owner's own
+  feature and the first thing in this program a user will SEE**: the parcel op
+  emitted at the correct back-to-front position, the polygon threaded to the
+  2D pane, hover and pin drawing a yellow border plus low-opacity fill through
+  the existing `pinned ?? hovered` machine, the yard derived as parcel minus
+  footprint, and — per §514.1b — **no gate on it, because it is interaction**.
+  Its three honest limits go INTO the packet: the shape is a fan wedge until
+  DW's frontage work, court-versus-yard needs DW-1/DW-2, and **DW-6 must be
+  able to re-point this layer by changing its INPUT rather than rebuilding
+  it** (§498.3's two-tier halo, now POWER-scoped per §519). Seats: STACK-1 ·
+  CG-1b · MP-1; one free, held for WEB-8 to stack with CG-1b.

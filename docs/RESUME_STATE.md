@@ -51,6 +51,8 @@ a8f91fb9 2026-08-17 Land and expose the P4 repair; fire RS-4 at the cured tip (�
      dispatch and every phase boundary: what is in flight, who owns which dirty file,
      and what the next action is. This is the ONLY part a script cannot know. -->
 
+# ⭐⭐⭐ 22:29 CDT 08-23: §522 — WEB-8 built (19-row audit; only 2 advertised-ungated, v2-redraw INVERTED).
+# ⛔ 3 VIEWING rows still paywalled vs §514.1b → OWNER. MP-1 (the halo) dispatched.
 # ⭐⭐⭐ 22:15 CDT 08-23: §521 — UC-5 built (undercity train COMPLETE). ⛔ `git grep` is blind to
 # UNTRACKED files — a grep arm run pre-commit reports a clean sweep. FIRST STACK since #40 dispatched (CH-2A+UC-5).
 # ⭐⭐⭐ 22:09 CDT 08-23: §520 — CHAIR ERROR: the thread-cap flag does not exist (exit 1, ZERO tests).
