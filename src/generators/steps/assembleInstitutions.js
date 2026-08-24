@@ -320,7 +320,34 @@ registerStep('assembleInstitutions', {
         });
 
       } else if (!forceExclude && catEnabled && (toggle.allow ?? true)) {
-        if (inst.exclusiveGroup && exclusiveGroups[inst.exclusiveGroup]) return;
+        // [CH-3 §3.2, J-CH-3-2 as REVISED by the chair] THE COEXISTENCE AFFORDANCE, AND WHY
+        // IT DRAWS FROM A SIDE STREAM.
+        //
+        // This early return precedes the `rng.chance` draw below, so a suppressed row
+        // consumes NO draw. That makes un-suppressing a row far more expensive than it
+        // looks: the row starts consuming a draw, every later draw in the settlement
+        // shifts, and the whole roster re-rolls. Measured for the two city religious
+        // rows: deleting their `exclusiveGroup` outright moves 81 of 420 rosters, of
+        // which only ~34 are the intended coexistence and ~47 are draw-sequence
+        // collateral — and it also drags a TOWN-tier `Monastery or friary` into 21
+        // cities, because `coherenceRepairPass` may then add a same-group dependency it
+        // was previously refused.
+        //
+        // A row that declares `exclusiveGroupCoexists` stays IN its group — so the
+        // repair pass still refuses the same-group add, and no out-of-tier row is
+        // injected — but the group no longer BLOCKS it. Its chance is drawn from a
+        // stream forked off this step's PRNG, so the main sequence stands exactly where
+        // it stood when the row was suppressed, and the only rosters that move are the
+        // ones that actually gain the row.
+        //
+        // The fork label is prefixed and fully qualified because `fork('a::b')` and
+        // `fork('a').fork('b')` derive the SAME stream (see kernel/prng.js) — nothing
+        // else forks `exclusiveCoexist`, so no silent correlation is reachable.
+        let drawRng = rng;
+        if (inst.exclusiveGroup && exclusiveGroups[inst.exclusiveGroup]) {
+          if (!inst.exclusiveGroupCoexists) return;
+          drawRng = rng.fork(`exclusiveCoexist::${tier}::${category}::${name}`);
+        }
         if (inst.exclusionConditions?.some(ex => institutions.some(i => i.name === ex))) return;
 
         if (inst.tradeRouteRequired) {
@@ -350,8 +377,13 @@ registerStep('assembleInstitutions', {
           tier,
         );
 
-        if (rng.chance(baseChance * resourceMult)) {
-          if (inst.exclusiveGroup) exclusiveGroups[inst.exclusiveGroup] = name;
+        if (drawRng.chance(baseChance * resourceMult)) {
+          // A coexisting row does NOT take the group over: the holder stays whoever won
+          // it first, so a third member of the same group is blocked exactly as it was
+          // before this affordance existed.
+          if (inst.exclusiveGroup && !exclusiveGroups[inst.exclusiveGroup]) {
+            exclusiveGroups[inst.exclusiveGroup] = name;
+          }
           institutions.push({ category, name, ...inst, source: 'generated' });
 
           // Trace: the most informative case — the engine actually
