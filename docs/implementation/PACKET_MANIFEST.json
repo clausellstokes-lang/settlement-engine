@@ -28573,6 +28573,200 @@
           "check"
         ]
       ]
+    },
+    {
+      "id": "MF-CH5",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/catalog-hygiene/MF-CH5.md",
+      "verifiedBase": "510c51b766a4ef329a697d61f3006e23d4fb2325",
+      "changeManifest": [
+        {
+          "_note": "THE SPLIT. `ARCANE_INST_TAGS` answers 'does this need magic to exist?' and was carrying `alchemy`, a chemical trade — so it deleted alchemists from every magic-free world. `alchemy` and only `alchemy` moves to a sibling `TRADE_INST_TAGS` in the same zero-import leaf; `planar` and `enchanting` name practices that cannot exist without magic and both of their rows are licensed `high`, so they stay. The header states which question each list answers and the rule a NEW member is filed by.",
+          "action": "MODIFY",
+          "path": "src/domain/arcaneInstitutionVocabulary.js"
+        },
+        {
+          "_note": "THE SECOND HOME OF THE SAME LIST, and the thing a vocabulary split gets wrong. POWER_DOMAIN_TAGS.arcane hand-typed all four members — a fifth typing of a list whose zero-import leaf exists to stop that drift. Power-domain affinity is a THIRD question and an alchemist belongs to the arcane power either way, so the row keeps all four members but now SPREADS both lists. Order-independent: the consumer is `tags.includes(t)`.",
+          "action": "MODIFY",
+          "path": "src/domain/npcProfile.js"
+        },
+        {
+          "_note": "THE DATA. The three `magicLicense: 'none'` rows drop the now-redundant `arcane` tag — `Alchemist shop` and `Alchemist quarter` to ['alchemy'], `Warden's Lodge` to ['military'] — so tag and licence AGREE at the data level instead of being ordered by a precedence rule. Tag-vs-licence divergences over the 276 catalog names go 4 to 1. This is the half that buys the golden shift; the vocabulary half is free.",
+          "action": "MODIFY",
+          "path": "src/data/institutionalCatalog.js"
+        },
+        {
+          "_note": "A5's divergence roster shrinks 4 to 1 and A8's three names answer MUNDANE. That walker was built to make this statement mandatory, so re-stating it is the walker succeeding. A8 GAINS AN ANCHOR — `Enchanter's shop` and `Planar embassy` still answer ARCANE, and `Healer (divine, 1st level)` is still MUNDANE — which is what tells 'the data changed' apart from 'the reader was re-routed through the licence'. The reader was NOT re-routed.",
+          "action": "MODIFY",
+          "path": "tests/lint/magicLicenceCensus.walker.test.js"
+        },
+        {
+          "_note": "ADDRESS ROT ONLY. This car's one added import line pushed npcProfile.js's two arcane NAME tables from :333/:374 to :334/:375. The pattern text is byte-identical and both sites stay recorded UNCONVERTED — the same form as the `factionRoles.js:57 -> 58` re-point already in this file. Deleting the rows would have re-presented a live pattern as new.",
+          "action": "MODIFY",
+          "path": "tests/lint/arcaneClassifierCensus.walker.test.js"
+        },
+        {
+          "_note": "THE NEW PIN, and nothing previously held it: POWER_DOMAIN_TAGS.arcane must be the UNION of both lists. Added to an existing `it()` so no census title moves. BOTH of the pin's rows sit OUTSIDE the arcane NAME hint (/mage|wizard|college|alchemist|library|laboratory|tower|sanctum/i) and carry no factionSource, so only the TAG path can reach them — otherwise the pin would pass with either spread deleted.",
+          "action": "MODIFY",
+          "path": "tests/domain/institutionsForPower.test.js"
+        },
+        {
+          "_note": "THE SHIFT RECORD row for the declared re-record: 187 of 525, 0 added, 0 removed, 0 rosters, the complete ten-template census, the five-case sweep, the TOTALITY control, and THE PROMISE as it applies.",
+          "action": "MODIFY",
+          "path": "tests/property/generatorGoldenMaster.test.js"
+        },
+        {
+          "_note": "THE DECLARED RE-RECORD. 525 rows in and out, CHANGED 187, added 0, removed 0, key order identical, cross-checked against an independently computed manifest at 0 mismatches.",
+          "action": "MODIFY",
+          "path": "tests/fixtures/generator-golden-master.json"
+        },
+        {
+          "_note": "THE EDGE BUNDLE THAT CARRIES THE CATALOG. `institutionalCatalog.js` is a bundle input, so a three-row tag edit makes it stale; rebuilt with `npm run build:edge-shared` AT THE COMMITTED TREE, which is the state edgeSharedBundleReproducibility measures. All five sidecars commit as a set even where only `generatedAt` moved - CH-3 proved by gate that splitting them is a red.",
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiCharterBundle.js"
+        },
+        {
+          "_note": "THE EDGE BUNDLE THAT CARRIES THE CATALOG. `institutionalCatalog.js` is a bundle input, so a three-row tag edit makes it stale; rebuilt with `npm run build:edge-shared` AT THE COMMITTED TREE, which is the state edgeSharedBundleReproducibility measures. All five sidecars commit as a set even where only `generatedAt` moved - CH-3 proved by gate that splitting them is a red.",
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiCharterBundle.meta.json"
+        },
+        {
+          "_note": "THE EDGE BUNDLE THAT CARRIES THE CATALOG. `institutionalCatalog.js` is a bundle input, so a three-row tag edit makes it stale; rebuilt with `npm run build:edge-shared` AT THE COMMITTED TREE, which is the state edgeSharedBundleReproducibility measures. All five sidecars commit as a set even where only `generatedAt` moved - CH-3 proved by gate that splitting them is a red.",
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiGroundingBundle.js"
+        },
+        {
+          "_note": "THE EDGE BUNDLE THAT CARRIES THE CATALOG. `institutionalCatalog.js` is a bundle input, so a three-row tag edit makes it stale; rebuilt with `npm run build:edge-shared` AT THE COMMITTED TREE, which is the state edgeSharedBundleReproducibility measures. All five sidecars commit as a set even where only `generatedAt` moved - CH-3 proved by gate that splitting them is a red.",
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiGroundingBundle.meta.json"
+        },
+        {
+          "_note": "THE EDGE BUNDLE THAT CARRIES THE CATALOG. `institutionalCatalog.js` is a bundle input, so a three-row tag edit makes it stale; rebuilt with `npm run build:edge-shared` AT THE COMMITTED TREE, which is the state edgeSharedBundleReproducibility measures. All five sidecars commit as a set even where only `generatedAt` moved - CH-3 proved by gate that splitting them is a red.",
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiOutputSchemaBundle.js"
+        },
+        {
+          "_note": "THE EDGE BUNDLE THAT CARRIES THE CATALOG. `institutionalCatalog.js` is a bundle input, so a three-row tag edit makes it stale; rebuilt with `npm run build:edge-shared` AT THE COMMITTED TREE, which is the state edgeSharedBundleReproducibility measures. All five sidecars commit as a set even where only `generatedAt` moved - CH-3 proved by gate that splitting them is a red.",
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiOutputSchemaBundle.meta.json"
+        },
+        {
+          "_note": "THE EDGE BUNDLE THAT CARRIES THE CATALOG. `institutionalCatalog.js` is a bundle input, so a three-row tag edit makes it stale; rebuilt with `npm run build:edge-shared` AT THE COMMITTED TREE, which is the state edgeSharedBundleReproducibility measures. All five sidecars commit as a set even where only `generatedAt` moved - CH-3 proved by gate that splitting them is a red.",
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/analyticsEventsBundle.meta.json"
+        },
+        {
+          "_note": "THE EDGE BUNDLE THAT CARRIES THE CATALOG. `institutionalCatalog.js` is a bundle input, so a three-row tag edit makes it stale; rebuilt with `npm run build:edge-shared` AT THE COMMITTED TREE, which is the state edgeSharedBundleReproducibility measures. All five sidecars commit as a set even where only `generatedAt` moved - CH-3 proved by gate that splitting them is a red.",
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/intentAtlasBundle.meta.json"
+        },
+        {
+          "_note": "The packet record.",
+          "action": "CREATE",
+          "path": "docs/implementation/packets/catalog-hygiene/MF-CH5.md"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "The new sibling list. Renaming it un-grounds the whole ruling: it is the home the magic-dependence list moved `alchemy` OUT of, and the header's rule for filing a new member points at it by name.",
+          "path": "src/domain/arcaneInstitutionVocabulary.js",
+          "symbol": "TRADE_INST_TAGS"
+        },
+        {
+          "_note": "The magic-dependence list itself, now three members. Every reader of it decides whether a candidate may stand in a magic-free world.",
+          "path": "src/domain/arcaneInstitutionVocabulary.js",
+          "symbol": "ARCANE_INST_TAGS"
+        },
+        {
+          "_note": "The consumer the union pin drives; if this is renamed the only guard on POWER_DOMAIN_TAGS.arcane goes with it.",
+          "path": "src/domain/npcProfile.js",
+          "symbol": "institutionsForPower"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "TOTALITY CONTROL: the measuring harness regenerates all 525 committed generator-golden-master hashes at the verified base with 0 mismatches, which is what licenses every count below as a census rather than a sample."
+        },
+        {
+          "id": "A2",
+          "case": "THE VOCABULARY HALF IS FREE, PRICED SEPARATELY: moving `alchemy` from ARCANE_INST_TAGS to TRADE_INST_TAGS with the catalog untouched moves 0 of 525 golden hashes and 0 of 2,555 sweep hashes, in all five magic cases. Both alchemy-carrying rows also carried `arcane`, so no verdict moves."
+        },
+        {
+          "id": "A3",
+          "case": "THE DECLARED SHIFT: the whole car moves 187 of 525 golden hashes and ZERO rosters. The re-recorded fixture is 525 rows with 0 added and 0 removed, key order identical, cross-checked against an independently computed manifest at 0 mismatches."
+        },
+        {
+          "id": "A4",
+          "case": "WHERE IT LANDS: over 511 grid rows times five magic cases, 409 hashes move and 0 rosters — magicExists:false 0, priorityMagic:0 0, priorityMagic:20 0, priorityMagic:50 174, priorityMagic:80 235. A magic-free and a low-magic world are byte-identical to before, which is the region MF-CH2B is about."
+        },
+        {
+          "id": "A5",
+          "case": "THE COMPLETE PATH-TEMPLATE CENSUS at priorityMagic:80 is ten templates in two families, with 0 key-order moves and 0 rows added or removed: the tag string leaving $.institutions[*].tags and $.defenseProfile.institutions.magicDef[*].tags, and the one `magicCapacity/reinforced` trace effect it drove out of $.simulationTrace[*].downstreamEffects, ten of whose targets re-point tag.arcane to tag.military. No capacity, economy, magic-profile, count, name, id or rng draw moves."
+        },
+        {
+          "id": "A6",
+          "case": "THE CATALOG VERDICTS: ARCANE_INST_TAGS carriers go 21 to 18, the magicForms ARCANE GATE population 20 to 17, all six magicLicense:'none' names now fail that gate where three passed, and tag-vs-licence divergences go 4 to 1 — the survivor being `Healer (divine, 1st level)`, which moves the other way and is deliberately left for the deity-doctrine car."
+        },
+        {
+          "id": "A7",
+          "case": "THE UNION IS PINNED: POWER_DOMAIN_TAGS.arcane is the spread of both lists, and the pin's two rows sit outside the arcane NAME hint and carry no factionSource so only the TAG path can reach them. Dropping either spread reds it."
+        },
+        {
+          "id": "A8",
+          "case": "EVERY PIN IS PROVED LIVE BY A DELIBERATE MUTATION, each verified applied and each restored cmp-exact, with a clean control green before the first and after the last: alchemy back in ARCANE_INST_TAGS reds A5 and A8 of the licence census; the `arcane` tag back on Alchemist shop reds the same two; one added line reds both arcaneClassifierCensus arms; dropping the TRADE spread reds the union pin. The golden fixture's own pin was proved live by execution rather than by a plant."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/magicLicenceCensus.walker.test.js",
+          "tests/lint/arcaneClassifierCensus.walker.test.js",
+          "tests/domain/institutionsForPower.test.js",
+          "tests/domain/arcaneIdentity.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/generatorGoldenMaster.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/magicForms.test.js",
+          "tests/lint/facetInferenceHonesty.walker.test.js"
+        ],
+        [
+          "node",
+          "scripts/check-full-typecheck.mjs"
+        ],
+        [
+          "node",
+          "scripts/check-domain-strict.mjs"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/domain/arcaneInstitutionVocabulary.js",
+          "src/domain/npcProfile.js",
+          "src/data/institutionalCatalog.js"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ]
     }
   ]
 }

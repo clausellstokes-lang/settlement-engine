@@ -1,6 +1,6 @@
 # Catalog hygiene / MF-CH5 — ALCHEMY IS A TRADE: the magic-dependence list stops carrying a craft, the three rows that disagreed with their own licence stop disagreeing, and the hand-typed fifth copy of the list is derived
 
-- **Status:** DRAFT
+- **Status:** LANDED
 - **Packet version:** 1
 - **Verified base:** `claude/composite-r4` at `510c51b766a4ef329a697d61f3006e23d4fb2325`
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
