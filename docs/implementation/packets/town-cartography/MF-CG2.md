@@ -240,8 +240,32 @@ cannot drift into measuring two different things.
   area positive. **RUN AGAINST THE PRE-CG-2 LEAF AT `79b78881c`, THE SAME CALL EMITTED
   `1→1 2→2 3→3 4→4 5→4 6→4 7→4 8→4 9→4 10→4 11→4 12→4`** — it saturates at the wrap. The assertion
   is false at the parent commit and true here, which is what makes it a control.
-- **The source mutation** (§8): the one-line restoration of `% 4` in the shipped leaf, run against
-  the pin, with the red captured verbatim and the restore proved by digest.
+- **The source mutation**: the one-line restoration of `% 4` on the flagship's cell index, run
+  against the pin. It reds **exactly one arm — W8's LIVE arm — and nothing else**: 55 of 56 tests
+  in the two suites still pass. Four of six tiers stack again the moment the wrap returns:
+
+  ```
+   FAIL  W8 the drawn corpus does not repeat itself > LIVE: each tier's argmax row re-measures
+         at ZERO stacked buildings, and matches its record
+  AssertionError: expected [ …(8) ] to deeply equal []
+  +   "hamlet hamlet|arabic|desert|road|plagued|cg1-seed-03: 6 of 25 rows stacked LIVE",
+  +   "hamlet hamlet|arabic|desert|road|plagued|cg1-seed-03: translate live 11 vs recorded 6",
+  +   "thorp thorp|celtic|hills|road|plagued|cg1-seed-03: 4 of 11 rows stacked LIVE",
+  +   "thorp thorp|celtic|hills|road|plagued|cg1-seed-03: translate live 6 vs recorded 2",
+  +   "town town|celtic|coastal|port|frontier|cg1-seed-06: 6 of 100 rows stacked LIVE",
+  +   "town town|celtic|coastal|port|frontier|cg1-seed-06: translate live 6 vs recorded 0",
+  +   "village village|celtic|desert|road|safe|cg1-seed-08: 19 of 47 rows stacked LIVE",
+  +   "village village|celtic|desert|road|safe|cg1-seed-08: translate live 20 vs recorded 8",
+  ```
+
+  ⚠ **AND THE MUTATION TAUGHT SOMETHING THE LANE DID NOT EXPECT, so it is recorded rather than
+  smoothed over.** The mechanism control did NOT red under it, and the reason is that the form
+  dress is a SECOND, INDEPENDENT barrier: two flagships handed the same cell still draw different
+  footprints whenever their form variants differ, because `formOf` reads the anchor key. That is a
+  real defence, but a PROBABILISTIC one — roughly a one-in-`variants` chance of collision per pair
+  — which is precisely why the address fix is the load-bearing one and why the corpus-wide LIVE
+  arm, not the crafted probe, is what convicts. The mechanism control still fails at the PARENT
+  commit, where no form dress existed; §8 A5 and A7 state the two facts separately.
 
 ---
 
@@ -360,7 +384,7 @@ user-visible copy string moves.**
 | A4 | **THE TRANSLATE CEILING IS DERIVED, NOT PICKED:** each tier's rate equals its frozen reading exactly and sits under `ceil(reading × CARTOGRAPHY_HEADROOM_PERMILLE)`, with the six evaluated ceilings pinned and a live arm proving the derivation is evaluated rather than transcribed. |
 | A5 | **THE MECHANISM CONTROL FAILS AT THE PARENT:** N flagships bound to ONE parcel emit N distinct contained footprints for N = 1…12; the same call at `79b78881c` emits at most 4. |
 | A6 | **THE INSTRUMENT CONTROL CANNOT PASS VACUOUSLY:** the census counter is exercised on a clean block (0), a copied footprint (2), a copied trio (3), a MOVED shape (exact 0, translate 2) and a ROTATED shape (exact 0, translate 2). |
-| A7 | **THE SOURCE MUTATION CONVICTS:** restoring `% 4` on the flagship's cell index reds W8's exact-zero arm and the mechanism control, and nothing else; the restore is proved by digest. |
+| A7 | **THE SOURCE MUTATION CONVICTS, AND CONVICTS PRECISELY:** restoring `% 4` on the flagship's cell index reds **exactly one arm, W8's LIVE arm** — 55 of 56 tests in the two suites still pass — with thorp 4 of 11, hamlet 6 of 25, village 19 of 47 and town 6 of 100 rows stacking again. It does NOT red the mechanism control, because the form dress is an independent probabilistic barrier on a crafted six-institution probe; that is measured and stated rather than assumed away. The restore is proved by digest (`bba1f24c…`) and `git status` is clean against the committed tip. |
 | A8 | **CONTAINMENT SURVIVED THE CURE:** `townCartographyBuildings.test.js` C3 — every emitted footprint contained, integer, positive-area, anchor inside — is green with the corner truncation and the depth-2 cells live, over the twenty-row geometry ground it has always used. |
 
 ---
