@@ -26213,3 +26213,28 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   standing cure, now law: any rebase whose delta touches `docs/**.md` owes a
   STANDALONE re-run of the claims guard at the new tree, exactly as the lane
   performed (same six claims, none in DEPLOY.md).
+
+## §600 · SHAPE FAMILIES ARE GRAMMARS, NOT STAMPS — THE VARIATION CLARIFICATION (2026-08-24 ~18:00 CDT)
+
+- **§600.1 ⭐ OWNER CLARIFICATION TO §578:** shape families must carry
+  VARIATION — "not every single church needs to look like the exact same
+  church" — and pure geometric determination is suspected of working against
+  it. **RULED as the family-grammar law, amending REG-3's charter:** a family
+  is ANATOMY + INVARIANTS + SLOTS, never a fixed outline. Pinned: only what
+  makes the class read at a glance (the church's long axis, dominant mass,
+  yard). Varied: every slot (tower presence/position, transepts, apse,
+  proportions-within-bands, yard side), rolled by the building's OWN seed via
+  the standing drawVariant idiom — deterministic per building, different
+  across buildings; determinism ≠ uniformity.
+- **§600.2 THE WORLD BIASES THE DICE (variation as biography):** prosperity
+  buys the tower and transept; foundation age accretes asymmetric chapels
+  (the faith-tenure fact already drives this in the DW design); region/
+  culture biases forms within the fantasy-base morphology law; parcel,
+  orientation and the drawn layer (waver, hatch, wear) differentiate even
+  equal rolls. Precedent: the DW partis' weighted-draw-inside-signed-ranges,
+  carried to exteriors through signed band B18.
+- **§600.3 THE TENSION IS INSTRUMENTED, NOT TASTED:** the gallery test
+  (L-REG-16) reds on sameness; the blind silhouette-read reds on
+  unrecognizability. REG-3 builds between those two measurements; its
+  variation ranges are owner-signature surfaces at the tuning pass where they
+  shape worlds.
