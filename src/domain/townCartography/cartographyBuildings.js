@@ -37,13 +37,15 @@
  * parcel ring under an EVEN-ODD fill, so two identical holes cancel and the yard
  * under a stacked pair renders as solid ground.
  *
- * So the slot became an ADDRESS. Index 0..3 are the four depth-1 subcells — exactly
- * the old geometry, which is why a parcel holding four or fewer buildings did not
- * move — 4..19 the sixteen depth-2 cells, 20..83 the sixty-four depth-3 cells, and so
- * on to FOOTPRINT_CELL_MAX_DEPTH. There is ONE ledger now, and a flagship consumes a
- * cell from it. A flagship is still exempt from the per-parcel BAND and from the
- * total cap — a canonical institution always appears — but exemption from a band was
- * never a licence to be issued a cell another building already holds.
+ * So the slot became an ADDRESS. Index 0..3 are the four depth-1 subcells — the same
+ * four cells the old packer had — 4..19 the sixteen depth-2 cells, 20..83 the
+ * sixty-four depth-3 cells, and so on to FOOTPRINT_CELL_MAX_DEPTH. (The CELL at 0..3
+ * is unchanged; the FOOTPRINT drawn in it is not, because the form dress below moves
+ * every row. This wave shifts same-seed output at every tier and the calibration
+ * suite's shift record states exactly what moved.) There is ONE ledger now, and a
+ * flagship consumes a cell from it. A flagship is still exempt from the per-parcel
+ * BAND and from the total cap — a canonical institution always appears — but exemption
+ * from a band was never a licence to be issued a cell another building already holds.
  *
  * ── THE FORM IS DRESS, LIKE THE HEIGHT AND THE AGE (CG-2) ────────────────────
  * A unique cell fixes WHERE a building stands, not WHAT SHAPE it is: subcells 0, 1
@@ -187,7 +189,7 @@ function medialSubcells(triangle) {
 
 /**
  * THE CELL AT ADDRESS `index`. Depth d holds 4^d cells and starts at (4^d − 4)/3, so
- * 0..3 are the depth-1 subcells (byte-identical to the pre-CG-2 slots), 4..19 depth 2,
+ * 0..3 are the depth-1 subcells the pre-CG-2 slots named, 4..19 depth 2,
  * 20..83 depth 3. The descent is a BOUNDED `for` over FOOTPRINT_CELL_MAX_DEPTH, never
  * a `while`: an address past the tree returns null rather than wrapping, because
  * wrapping is precisely the defect this replaced.

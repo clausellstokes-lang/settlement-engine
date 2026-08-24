@@ -277,7 +277,8 @@ const rows = calibrationRows();
 /**
  * @typedef {{ tier: string, institutions: number, districts: number,
  *   sceneBuildings: number, dark: string, outcome: string, reported: number[],
- *   cartoBuildings: number, cartoRowBytes: number, cartoInstitutionRefs: number }} Row
+ *   cartoBuildings: number, cartoRowBytes: number, cartoInstitutionRefs: number,
+ *   cartoDupExact: number, cartoDupTranslate: number }} Row
  */
 
 /** Read the frozen measurement. Per test, never once at module scope — see the header.
@@ -317,6 +318,8 @@ describe('W0 the frozen record, and the one arm that re-records it', () => {
           cartoBuildings: measured.cartoBuildings,
           cartoRowBytes: measured.cartoRowBytes,
           cartoInstitutionRefs: measured.cartoInstitutionRefs,
+          cartoDupExact: measured.cartoDupExact,
+          cartoDupTranslate: measured.cartoDupTranslate,
         };
       }
       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
