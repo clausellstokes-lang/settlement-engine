@@ -1758,7 +1758,6 @@ export const institutionalCatalog = {
       'Cathedral (10,000+ only)': {
         required: false,
         baseChance: 0.3,
-        exclusiveGroup: 'religiousCenter',
         desc: "Bishop's seat. Requires 10,000+ population minimum. Defines major city status.",
         tags: ['religious', 'church'],
         priorityCategory: 'religion',
@@ -1766,7 +1765,6 @@ export const institutionalCatalog = {
       'Multiple monasteries': {
         required: false,
         baseChance: 0.6,
-        exclusiveGroup: 'religiousCenter',
         desc: 'Different religious orders.',
         tags: ['religious', 'monastery'],
         priorityCategory: 'religion',
