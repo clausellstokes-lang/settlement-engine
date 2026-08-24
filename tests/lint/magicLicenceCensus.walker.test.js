@@ -16,6 +16,36 @@
  * 657 are the `magicLicense` key itself being spread onto the record by `assembleInstitutions`
  * (ODQ §503.2's second law). That is a DECLARED golden re-record, not a behaviour change.
  *
+ * ── MF-CH6 — THE FAITH WORDS LEAVE, AND THE KEYWORD LIST WAS NEVER WHAT DECIDED (ODQ §541.8) ──
+ * ODQ §541.8 recorded a shipped deity-doctrine violation: `ARCANE_INST_KW` carried
+ * `'druid circle'`, `'elder grove council'`, `'elder grove'`, `'healer (divine'`,
+ * `'divine healer'` and `'wandering healer'`, so the engine asserted that divine healing is
+ * a species of magic. THE DEITY DOCTRINE is constitutional here — faith is CULTURE, never
+ * theology — and the words are gone. But the measurement that mattered was the SECOND one:
+ *
+ *   at `magicExists:false` the world law strikes all 28 licensed rows, and THE KEYWORD LIST
+ *   ALONE DECIDES EXACTLY ONE OF THEM (`Dragon resident`). Every other row — the two druid
+ *   rows among them — is over-determined: struck two, three or four ways over by the `Magic`
+ *   SHELF inside `carriesExplicitMagicMetadata`, by an `arcane` TAG, by this keyword list and
+ *   by the declared licence itself. Deleting a keyword from an over-determined gate frees
+ *   nothing, and A7 below is that fact as a test.
+ *
+ * So this car cures the two halves it CAN cure completely, and pins the rest as a measured
+ * gap rather than a half-flipped gate:
+ *   · THE FREE-TEXT HALF, which is the only half the six words ever decided alone — two of
+ *     them (`'divine healer'`, `'wandering healer'`) matched NO catalog row at all, so the
+ *     only names they ever struck were the ones a player typed.
+ *   · THE DECLARATION, at the data: `Druid Circle` and `Elder Grove Council` drop the
+ *     redundant `arcane` tag beside their `religious` one and re-licence `low` → `none`.
+ *
+ * ⚠ `Healer (divine, 1st level)` IS DELIBERATELY HELD AT `low`, AND THE PREMISE IS REFUTED
+ * FOR THAT ROW. Executed against the estate's own prose detector,
+ * `textAssertsFunctionalMagic('Basic healing spells. Cure Wounds (10 GP).')` is TRUE: the
+ * entry as authored is a first-level SPELLCASTER filed under faith, not a cultural healer
+ * wrongly convicted. The doctrine gap it exposes is real but it is a CONTENT gap — the
+ * catalog holds no cultural divine healer for a magic-free world to keep — and filling it is
+ * new content, not a licence flip. A5 keeps its one override for exactly that reason.
+ *
  * ⚠ THE 28-ROW TABLE BELOW IS EXACT ON PURPOSE. A new Magic or Exotic row that arrives
  * without a licence, or with a licence nobody ruled, reds A1 — which is the point: an arcane
  * institution's magic dependence is an authoring decision, and the estate has just spent a
@@ -40,6 +70,8 @@ import {
 } from '../../src/domain/arcaneInstitutionIdentity.js';
 import { ARCANE_IDENTITY } from '../../src/domain/arcaneIdentity.js';
 import { createGenerationWorldLaw } from '../../src/generators/generationContext.js';
+import { arcaneInstitutionNameFallback } from '../../src/domain/arcaneInstitutionIdentity.js';
+import { ARCANE_INST_KW, filterServicesForMagic } from '../../src/domain/magicFilter.js';
 
 /** Every catalog row as the generator shapes it: `{ category, name, ...entry }`. */
 function catalogRows() {
@@ -63,17 +95,24 @@ const SHELF_ROWS = ROWS.filter(r => r.category === 'Magic' || r.category === 'Ex
  * at town, `Charlatan fortune tellers`, `Beast trainers`, `Multiple adventurers' guilds`) sit
  * on the Adventuring shelf, which no magic gate reads, so they carry a verdict but no field.
  * 32 − 4 = 28, and the four excluded verdicts are all NONE, which is why the distribution
- * below reads 7/5/4/12 against the dossier's own 11/5/4/12.
+ * below read 7/5/4/12 against the dossier's own 11/5/4/12 when the field was declared.
+ *
+ * ⭐ IT NOW READS 9/3/4/12. TE-CH-6 moved TWO rows from `low` to `none` — `Druid Circle` and
+ * `Elder Grove Council`, the deity-doctrine pair — and moved nothing else. The dossier ruled
+ * both `low`; it was answering how MAGICAL the entry reads, and the field asks something
+ * narrower, whether the entry can stand at all in a world without functioning magic. A circle
+ * of druids who "regulate the seasons, mediate disputes with wild creatures, and know which
+ * streams run clean" can. See DEITY_DOCTRINE_RELICENSED.
  */
 const DECLARED_LICENCES = Object.freeze({
   "hamlet|Magic|Traveling hedge wizard": 'low',
   "hamlet|Magic|Adventurers' charter hall": 'none',
   "village|Magic|Hedge wizard": 'low',
-  "village|Magic|Druid Circle": 'low',
+  "village|Magic|Druid Circle": 'none',
   "village|Magic|Adventurers' charter hall": 'none',
   "village|Magic|Healer (divine, 1st level)": 'low',
   "town|Magic|Wizard's tower": 'medium',
-  "town|Magic|Elder Grove Council": 'low',
+  "town|Magic|Elder Grove Council": 'none',
   "town|Magic|Alchemist shop": 'none',
   "town|Magic|Warden's Lodge": 'none',
   "town|Magic|Teleportation circle": 'high',
@@ -116,10 +155,37 @@ const DECLARED_LICENCES = Object.freeze({
  * the arcane side — meaning a magic-free world can hold no divine healer. That is a live
  * deity-doctrine question ("faith is culture, never theological") and it is deliberately left
  * standing here for the car that owns it.
+ *
+ * ⭐ TE-CH-6 OWNED IT AND LEFT IT STANDING ANYWAY, WHICH IS A VERDICT AND NOT A DEFERRAL.
+ * The row's own authored prose asserts functional magic — the estate's shared detector says
+ * `textAssertsFunctionalMagic('Basic healing spells. Cure Wounds (10 GP).') === true` — so
+ * the entry is a first-level SPELLCASTER filed on a faith shelf. The licence is honest about
+ * it and dropping it to `none` would put a Cure Wounds caster in a world with no spells.
+ * The doctrine gap is that the catalog holds no CULTURAL divine healer at all; that is a
+ * content gap and a new row, not a value in this table. Recorded in ODQ, not swallowed here.
  */
 const LICENCE_OVERRIDES_TAG = Object.freeze({
   'Healer (divine, 1st level)': { tag: 'mundane', licence: 'low', arcane: true },
 });
+
+/**
+ * THE TWO ROWS THE DEITY DOCTRINE RE-LICENSED (TE-CH-6, ODQ §541.8). Named as data so A2's
+ * distribution attributes its own movement, and so a successor reading `none` on a druid
+ * circle finds the reason beside the value instead of in a commit message.
+ */
+const DEITY_DOCTRINE_RELICENSED = Object.freeze(['Druid Circle', 'Elder Grove Council']);
+
+/**
+ * The six words that left `ARCANE_INST_KW` with them. A magic-dependence list is no place for
+ * faith: every reader of it is deciding whether a candidate may stand in a MAGIC-FREE world,
+ * so a faith word there does not mis-label an institution, it DELETES that faith from every
+ * such world. Two of the six matched no catalog row at all, so the only names they ever
+ * decided were the ones a player typed.
+ */
+const FAITH_WORDS_REMOVED = Object.freeze([
+  'druid circle', 'elder grove council', 'elder grove',
+  'healer (divine', 'divine healer', 'wandering healer',
+]);
 
 describe('MF-CH2a — the magic licence is declared, single-vocabulary and inert on the roster', () => {
   it('A0 (non-vacuity floor) — the name index reproduces the catalog field on every row', () => {
@@ -165,10 +231,18 @@ describe('MF-CH2a — the magic licence is declared, single-vocabulary and inert
       const licence = normaliseMagicLicence(def.magicLicense);
       if (licence !== null) dist[licence] += 1;
     }
-    expect(dist).toEqual({ none: 7, low: 5, medium: 4, high: 12 });
+    expect(dist).toEqual({ none: 9, low: 3, medium: 4, high: 12 });
     expect(dist.none + dist.low + dist.medium + dist.high).toBe(SHELF_ROWS.length);
-    // the dossier's whole-table figure, minus the four Adventuring hand-offs it also ruled NONE
-    expect(dist.none + 4).toBe(11);
+    // 7 → 9 and 5 → 3 on 2026-08-24 (TE-CH-6, ODQ §541.8). ATTRIBUTED, not absorbed: exactly
+    // these two rows moved, each is named, and the arm reds if a third joins them quietly.
+    expect(DEITY_DOCTRINE_RELICENSED.length).toBe(2);
+    for (const name of DEITY_DOCTRINE_RELICENSED) {
+      expect(institutionCatalogMagicLicence(name), name).toBe('none');
+    }
+    // The dossier's own whole-table figure stays reachable, which is what keeps this arm a
+    // cross-check against R-INST-5 rather than a number copied back off the catalog: add its
+    // four Adventuring hand-offs, subtract the rows the estate overruled it on.
+    expect(dist.none + 4 - DEITY_DOCTRINE_RELICENSED.length).toBe(11);
   });
 
   it('A3 — the licence is keyed by NAME, and every repeated name agrees across its tiers', () => {
@@ -258,6 +332,16 @@ describe('MF-CH2a — the magic licence is declared, single-vocabulary and inert
     // non-vacuity: the same law says YES to a mundane row, so the empty list above is a
     // verdict and not a predicate that answers false to everything
     expect(law.allowsInstitution({ category: 'Defense', name: 'Citizen militia' })).toBe(true);
+    // ⭐ AND THE ARM STILL HOLDS AFTER TE-CH-6 REMOVED SIX KEYWORDS, which is the finding that
+    // car exists to record: the empty list above is NOT held up by the keyword list. Each row
+    // is struck by the SHELF or the TAG as well, so the list decides exactly one of the 28 on
+    // its own. A successor who plans to free a row by editing the vocabulary should read this.
+    const decidedByKeywordAlone = SHELF_ROWS.filter((r) => {
+      const entity = { category: r.category, name: r.name, ...r.def };
+      return !law.allowsInstitution(entity)
+        && law.allowsInstitution({ ...entity, name: 'Zzz Placeholder' });
+    });
+    expect(decidedByKeywordAlone.map(r => r.name)).toEqual(['Dragon resident']);
   });
 
   it('A8 — the customContent seam is untouched: the TAG surface still answers from the TAG', () => {
@@ -286,5 +370,68 @@ describe('MF-CH2a — the magic licence is declared, single-vocabulary and inert
     expect(institutionCatalogArcaneTag("Enchanter's shop")).toBe(ARCANE_IDENTITY.ARCANE);
     expect(institutionCatalogArcaneTag('Planar embassy')).toBe(ARCANE_IDENTITY.ARCANE);
     expect(institutionCatalogArcaneTag('Wholly Invented Emporium')).toBe(ARCANE_IDENTITY.UNKNOWN);
+    // TE-CH-6's own data change, on the same surface and for the same reason: the two druid
+    // rows dropped a redundant `arcane` tag beside their `religious` one, so the TAG reader
+    // answers MUNDANE without ever being routed through the licence.
+    expect(institutionCatalogArcaneTag('Druid Circle')).toBe(ARCANE_IDENTITY.MUNDANE);
+    expect(institutionCatalogArcaneTag('Elder Grove Council')).toBe(ARCANE_IDENTITY.MUNDANE);
+  });
+
+  // ── TE-CH-6 · THE FAITH WORDS (ODQ §541.8) ────────────────────────────────────────────
+
+  it('A9 — the magic-dependence vocabulary names no faith, and free text is where that bites', () => {
+    // A magic-dependence list answers "can this stand in a world without magic?", and every
+    // reader of it deletes what it names from such a world. Faith is culture here, so no faith
+    // word belongs in it — and after TE-CH-6 routed nothing through a new rule, THIS is the
+    // surface where the removal is live: names the catalog does not know.
+    for (const word of FAITH_WORDS_REMOVED) {
+      expect(ARCANE_INST_KW, word).not.toContain(word);
+      expect(ARCANE_INST_KW.some(kw => word.includes(kw)), `${word} via a shorter member`)
+        .toBe(false);
+    }
+    for (const authored of ['Wandering healer', 'Divine healer of the pass',
+      'Druid circle of the north', 'Elder grove council']) {
+      expect(arcaneInstitutionNameFallback(authored), `fallback: ${authored}`).toBe(false);
+      expect(filterServicesForMagic({ [authored]: { x: 1 } }, { magicExists: false }),
+        `services: ${authored}`).toEqual({ [authored]: { x: 1 } });
+    }
+    // NON-VACUITY, both surfaces: the vocabulary still convicts what it was authored for, so
+    // the verdicts above are a membership change and not a classifier that stopped answering.
+    for (const authored of ['Wizard tower of Zzz', 'The Teleportation circle', 'Golem foundry']) {
+      expect(arcaneInstitutionNameFallback(authored), `fallback: ${authored}`).toBe(true);
+      expect(filterServicesForMagic({ [authored]: { x: 1 } }, { magicExists: false }),
+        `services: ${authored}`).toEqual({});
+    }
+  });
+
+  it('A10 — THE MEASURED GAP: the declaration is read by ONE gate of four, and the shelf still decides', () => {
+    // The car this walker guards declared the licence and wired it into `isArcaneInstitution`.
+    // Three gates never learned it, and TE-CH-6 measured what that costs rather than flipping
+    // them: freeing the rows in the gates alone puts `Magic`-shelf institutions into magic-free
+    // worlds, and the shipped `world_law_magic` coherence receipt convicts the record's own
+    // taxonomy fields — 264 of 504 magic-free settlements, against 0 today. The remaining cure
+    // is therefore the gates AND the receipt's vocabulary AND two rows of authored prose, which
+    // is a train and not this car. This arm is that gap, pinned, so it cannot be mistaken for
+    // an oversight and cannot be "fixed" halfway without a red.
+    const law = createGenerationWorldLaw({ magicExists: false, priorityMagic: 0 }, {});
+    for (const name of DEITY_DOCTRINE_RELICENSED) {
+      const row = ROWS.find(r => r.name === name);
+      const entity = { category: row.category, name: row.name, ...row.def };
+      // the DECLARATION is now honest on all three of its own readers …
+      expect(normaliseMagicLicence(row.def.magicLicense), `${name}: licence`).toBe('none');
+      expect(institutionCatalogArcaneTag(name), `${name}: tag`).toBe(ARCANE_IDENTITY.MUNDANE);
+      expect(isArcaneInstitution(entity, row.category), `${name}: identity`).toBe(false);
+      // … and the world law still strikes it, on the SHELF, with the keyword gone.
+      expect(law.allowsInstitution(entity), `${name}: world law still strikes`).toBe(false);
+      expect(law.allowsInstitution({ ...entity, category: 'Religious' }),
+        `${name}: and the shelf is what does it`).toBe(true);
+    }
+    // THE CONTROL THAT MAKES THE GAP ATTRIBUTABLE: move the shelf on a genuinely
+    // magic-dependent row and it is STILL struck, by its tag. The line above is the shelf
+    // deciding, not a predicate that answers whatever it is handed last.
+    const tower = ROWS.find(r => r.tier === 'city' && r.name === "Wizard's tower");
+    expect(law.allowsInstitution({
+      category: 'Religious', name: tower.name, ...tower.def,
+    })).toBe(false);
   });
 });

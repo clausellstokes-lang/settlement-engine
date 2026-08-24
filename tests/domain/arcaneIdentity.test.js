@@ -354,9 +354,47 @@ describe('L12 LEAK — customContent reads the canonical band, not a raw string'
     expect(classifyCustomInstitution({ name: 'Bardic college' }).inferredCategory)
       .not.toBe('arcane');
     // …and the authored-arcane catalog names still claim it.
-    for (const name of ["Wizard's tower", 'Druid Circle', 'Teleportation circle']) {
+    // ⭐ `Druid Circle` LEFT THIS LIST on 2026-08-24 (TE-CH-6, ODQ §541.8) and its replacement
+    // is `Mages' guild`. It is not a coverage loss: the row is no longer authored arcane. Its
+    // `arcane` tag was redundant beside `religious` and contradicted its own licence, and THE
+    // DEITY DOCTRINE is constitutional here — faith is culture, never theology, so a circle of
+    // druids is a religious institution that a magic-free world still holds. The row moved to
+    // the arm below, where the same surface is asked the same question and must answer
+    // `religious`. A verdict that MOVED is pinned in both places or it is not pinned at all.
+    for (const name of ["Wizard's tower", "Mages' guild", 'Teleportation circle']) {
       expect(classifyCustomInstitution({ name }).inferredCategory, name).toBe('arcane');
     }
+  });
+
+  it('MG-LAW-2 for INSTITUTIONS: a faith institution is not read arcane (TE-CH-6, ODQ §541.8)', () => {
+    // The faction half of this law is pinned below; this is the institution half, and it was
+    // shipped BROKEN — `ARCANE_INST_KW` carried 'druid circle', 'elder grove', 'healer (divine'
+    // and three siblings, so the engine asserted that divine healing is a species of magic.
+    for (const name of ['Druid Circle', 'Elder Grove Council']) {
+      expect(institutionCatalogArcaneTag(name), name).toBe(ARCANE_IDENTITY.MUNDANE);
+      expect(classifyCustomInstitution({ name }).inferredCategory, name).not.toBe('arcane');
+    }
+    // ⚠ `Healer (divine, 1st level)` IS NOT IN THAT LIST, and the omission is a verdict. Its
+    // authored desc — 'Basic healing spells. Cure Wounds (10 GP).' — asserts functional magic
+    // by the estate's own detector, so the row is a spellcaster filed under faith rather than
+    // a faith institution wrongly convicted. Its tag still reads MUNDANE and its licence still
+    // reads `low`; the two disagree, and that disagreement is pinned in
+    // tests/lint/magicLicenceCensus.walker.test.js (A5) with the whole account.
+    expect(institutionCatalogArcaneTag('Healer (divine, 1st level)'))
+      .toBe(ARCANE_IDENTITY.MUNDANE);
+    // and a DM's own faith naming, which is where the magic-dependence vocabulary was live
+    // over free text: 'wandering healer' and 'divine healer' matched NO catalog row at all, so
+    // the only names they ever decided were the ones a player typed.
+    for (const name of ['Wandering healer', 'Divine healer of the pass']) {
+      expect(classifyCustomInstitution({ name }).inferredCategory, name).not.toBe('arcane');
+    }
+    // ⚠ MEASURED AND DELIBERATELY NOT PINNED HERE: a DM's "Circle of the Elder Grove" still
+    // reads arcane, and NOT through the vocabulary this car owns. `customContent.js` keeps its
+    // OWN authored pattern for user-typed names — R-BLD-5 gave it one deliberately — and that
+    // pattern's arcane row carries the ambiguous token `circle`. It is the W-K2 mixed-alternation
+    // class, already recorded with a reason in tests/lint/arcaneClassifierCensus.walker.test.js's
+    // ALLOWED map; converting it moves every user-authored classification and is not this car's
+    // ruling. Recorded so a successor finds a known exemption rather than a new bug.
   });
 
   it('NO-DRIFT: the DM\'s own naming is still sovereign (MG-LAW-4)', () => {

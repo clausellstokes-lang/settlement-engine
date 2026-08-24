@@ -816,8 +816,8 @@ export const institutionalCatalog = {
         required: false,
         baseChance: 0.2,
         desc: 'A circle of druids tied to the land. They regulate the seasons, mediate disputes with wild creatures, and know which streams run clean. More common in forested or isolated settlements, but they adapt. Some circles tend city gardens or hidden urban groves.',
-        tags: ['arcane', 'religious'],
-        magicLicense: 'low',
+        tags: ['religious'],
+        magicLicense: 'none',
         priorityCategory: 'magic',
       },
       "Adventurers' charter hall": {
@@ -831,6 +831,18 @@ export const institutionalCatalog = {
       'Healer (divine, 1st level)': {
         required: false,
         baseChance: 0.4,
+        // ⚠ LICENCE HELD AT `low` BY MEASUREMENT, NOT BY OMISSION (TE-CH-6, ODQ §541.8).
+        // §541.8 named this row as the shipped deity-doctrine violation. Executed against the
+        // estate's own prose detector the premise does not hold FOR THIS ROW:
+        // `textAssertsFunctionalMagic('Basic healing spells. Cure Wounds (10 GP).')` is TRUE,
+        // so the entry as authored is a first-level SPELLCASTER the catalog files under faith,
+        // not a cultural healer the engine wrongly convicts. A world where spells do not work
+        // genuinely cannot hold it, and `low` says exactly that.
+        // THE DOCTRINE GAP IS REAL AND IT IS A CONTENT GAP: the catalog holds no CULTURAL
+        // divine healer for a magic-free world to keep. Filling it is a new row and the
+        // owner's call; re-licensing this one while its own prose says Cure Wounds would ship
+        // a contradiction rather than cure one. The disagreement between this row's mundane
+        // TAG and its `low` licence is pinned in tests/lint/magicLicenceCensus.walker.test.js.
         desc: 'Basic healing spells. Cure Wounds (10 GP).',
         tags: ['divine', 'healing'],
         magicLicense: 'low',
@@ -1357,8 +1369,8 @@ export const institutionalCatalog = {
         required: false,
         baseChance: 0.15,
         desc: "A council of senior druids who govern their circle's relationship with the city. They may maintain a hidden grove beneath the streets, mediate between urban expansion and wild places, or serve as ecological advisors to the ruling authority. Found in cities that have made peace with nature magic.",
-        tags: ['arcane', 'religious'],
-        magicLicense: 'low',
+        tags: ['religious'],
+        magicLicense: 'none',
         priorityCategory: 'military',
       },
       'Alchemist shop': {

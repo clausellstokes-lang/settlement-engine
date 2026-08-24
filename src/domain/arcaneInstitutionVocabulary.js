@@ -67,6 +67,32 @@
  * trade tag. Tags that describe a craft, a material or a clientele are trade
  * tags even when the craft is practised by mages.
  *
+ * ── FAITH IS CULTURE, NEVER A SPECIES OF MAGIC (TE-CH-6, 2026-08-24, ODQ §541.8) ──
+ * `ARCANE_INST_KW` answers the same question `ARCANE_INST_TAGS` does — "does this
+ * institution NEED MAGIC TO EXIST?" — from the NAME rather than the tag, and it
+ * was carrying six words that name FAITH: `'druid circle'`, `'elder grove
+ * council'`, `'elder grove'`, `'healer (divine'`, `'divine healer'` and
+ * `'wandering healer'`. THE DEITY DOCTRINE is constitutional in this estate:
+ * faith is CULTURE, never theology. A world whose magic does not function still
+ * holds its druid circles and its healers — they are what a people believes and
+ * how it organises around that belief, not a spell effect.
+ *
+ * WHERE THE SIX WERE ACTUALLY LIVE, MEASURED RATHER THAN ASSUMED. Two of them
+ * (`'divine healer'`, `'wandering healer'`) matched NO catalog row at all — 0 of
+ * 276 names — so the only names they ever struck were the ones a PLAYER typed,
+ * through the free-text fallback and `filterServicesForMagic`. The other four
+ * matched `Druid Circle` and `Elder Grove Council`, whose rows are authored
+ * `tags: ['religious']`, and `Healer (divine, 1st level)`.
+ *
+ * ⚠⚠ AND THE KEYWORDS WERE NOT WHAT DECIDED THOSE ROWS. Measured through the live
+ * world law at `magicExists:false`, the 28 licensed catalog rows are struck and
+ * THIS LIST DECIDES EXACTLY ONE OF THEM ON ITS OWN (`Dragon resident`). Every
+ * other row is over-determined — by the `Magic` display SHELF inside
+ * `carriesExplicitMagicMetadata`, by an `arcane` TAG, and by the declared
+ * `magicLicense` itself. Removing a keyword from an over-determined gate frees
+ * nothing, and a successor who plans to free a row by editing this list should
+ * read tests/lint/magicLicenceCensus.walker.test.js A7 and A10 first.
+ *
  * ⚠ THIS FILE IS NOT THE ONLY HOME OF THE FOUR-MEMBER LIST'S CONTENT.
  * `domain/npcProfile.js`'s `POWER_DOMAIN_TAGS.arcane` needs the UNION of both
  * lists — power-domain affinity is a third question ("which power does this
@@ -94,6 +120,11 @@ export const TRADE_INST_TAGS  = ['alchemy'];
  * deliberately broad ('dragon', 'undead', 'warden', 'great library' all mean what the
  * catalog says they mean); see arcaneInstitutionIdentity.js for why a surface classifying
  * USER-authored names must not reach for this list.
+ *
+ * ⚠ NO WORD THAT NAMES FAITH IS A MEMBER. See the header: this is a magic-DEPENDENCE list,
+ * so a faith word in it does not mis-label an institution, it deletes that faith from every
+ * magic-free world — including the free text a player typed, which is the surface where this
+ * list is the only decider.
  */
 export const ARCANE_INST_KW   = [
   'wizard', 'mage', 'alchemist', 'enchant', 'spell', 'arcane',
@@ -101,9 +132,7 @@ export const ARCANE_INST_KW   = [
   'teleportation', 'planar', 'dream parlor', 'airship',
   'message network', 'academy of magic',
   "mages' guild", "mages' district", 'alchemist quarter', 'enchanter',
-  'druid circle', 'elder grove council', 'elder grove',
   'hedge wizard', 'traveling hedge wizard', 'warden',
-  'healer (divine', 'wandering healer', 'divine healer',
   'alchemist shop', 'teleportation circle', 'planar embassy', 'great library',
   'golem', 'undead labor', 'undead', 'skeletal',
   'dragon resident', 'dragon',
