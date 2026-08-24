@@ -63,8 +63,8 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "An entirely clandestine trade in persons, carried across jurisdictions beyond the reach of law. It appears only where no legal slave market exists to absorb the traffic. Separate logistics, safe houses, and corrupted border infrastructure hold it together.",
   ],
   "city|Criminal|Kidnapping ring": [
-    "It seizes free persons and slips them into slavery on forged provenance papers. Where a legal market stands it borrows that infrastructure; where none does, it works alone.",
-    "Free persons are taken and passed into slavery through counterfeit provenance documents. It leans on the legal market's apparatus wherever one exists, and runs its own where it does not.",
+    "It seizes free persons and slips them into slavery on forged provenance papers. No lawful market stands here to absorb them, so it keeps its own holding and its own routes.",
+    "Free persons are taken and passed into slavery through counterfeit provenance documents. With no lawful market to lean on, it moves them through its own apparatus.",
   ],
   "city|Criminal|Rookery": [
     "Message birds kept above a city yard by people who declare nothing. The word arrives unsigned and moves faster than the watch.",
@@ -239,8 +239,8 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Standing venues for the stage.",
   ],
   "city|Exotic|Airship docking (high magic)": [
-    "Mooring towers, warded against the weather by magic. Eberron-style.",
-    "Towers to moor airships, with magical protection from the elements, in the Eberron manner.",
+    "Mooring towers, warded against the weather by magic.",
+    "Towers to moor airships, with magical protection from the elements.",
   ],
   "city|Exotic|Dragon resident": [
     "An ancient wyrm that dwells within the city.",
@@ -775,8 +775,8 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Multiple vats, trained hands from the guild. A proper tannery whose leather is good enough for footwear, armour, and saddlery.",
   ],
   "town|Crafts|Tanners": [
-    "Leather-making. Kept downstream and downwind, always.",
-    "The making of leather. It must sit downwind and downstream of everything else.",
+    "Leather-making. Kept downstream and downwind wherever the ground allows.",
+    "The making of leather. Sited downwind and downstream of the rest where a town can manage it.",
   ],
   "town|Crafts|Town crier": [
     "The official voice, reading proclamations, market prices, and news at set hours in the market square. Town or guild pays his wage.",
