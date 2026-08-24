@@ -26091,3 +26091,30 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   conflict-free, tree clean, and the **diff-of-diffs control reads REBASE
   CARRIES IDENTICAL CONTENT**. The re-proof gate runs at the rebased tip
   `e4ed27f48`; on a chair-validated green, MF-CH6 lands as the 64th car.
+
+## §595 · THE DETAIL REGISTER LANDS — THE CORPUS CONTAINED ITS OWN INSTRUCTION MANUAL (2026-08-24 ~16:45 CDT)
+
+- **§595.1 COLLECTED, VALIDATED, PRESERVED** at
+  `refs/preserve/reg-detail-register-2026-08-24`. The corpus's spec/zoom/study
+  plates — the §218-era close-ups minted before the freeze — turn out to be a
+  drawn instruction layer, and the survey viewed it near-exhaustively (zoom
+  18/22, spec 14/17, study 5/6; 60 of 313 total with the 253 triaged out by a
+  named filename rule and tier spot-checks). **The register is now BINDING per
+  §591: each REG wave's dress exit cites its per-class anchors** — hf261's
+  wall ladder, hf313's six gate anatomies, hf208's roof law (ridge/hip lines,
+  two-tone planes darker SE, chimney squares astride the ridge, and the
+  measured verdict that NO dormer convention exists in-corpus), hf114's
+  canopy study, hf321's twelve boundary strokes, hf377's twelve waters,
+  hf320's eleven way types, hf323's church ladder, hf376's four relief
+  systems, hf378's tier density ladder — with hf303's legend masterplate as
+  the base glyph dictionary. The projection doctrine is written: STRICT PLAN
+  default, NW light / SE shadow, three licensed departures.
+- **§595.2 THREE LAWS BANKED FROM THE SURVEY:** (i) **anti-exemplars are part
+  of the register** — hf61 is HARD-BANNED (gibberish marginalia), hf51's VTT
+  flatness is never dress; (ii) ⛔ **the lettering law: copy the GRAMMAR,
+  re-set the WORDS** — small italic labels garble intermittently across the
+  corpus (an AI-image artifact) and drawn scale numerals are never to be
+  trusted or copied; (iii) ⛔ **IP hygiene: hf34 carries a real-name credit
+  ("L.DA VINCI") that must never be copied into a product plate.** The
+  cross-class ladders (hf378 density, hf379 ruin stages) join the judging
+  rounds as the tier-dress locator.
