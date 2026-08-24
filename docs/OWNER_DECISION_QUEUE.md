@@ -25010,3 +25010,82 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   `ad-charter-2026-08-24`, `holding-dw0-final`, **`wip-ch7`**, plus whatever
   TE-CH-4 lands. ⛔ **Nothing has deployed since 2026-07-28 and that remains the
   only item degrading purely by delay.**
+
+## §561 · BOTH LANES DOWN — AND THE LAST TWO FINDINGS ARE CORRECTIONS TO ME (2026-08-24 08:57 CDT)
+
+- **§561.1 ⛔⛔ MY EDGE-BUNDLE LAW WAS WRONG, AND IT COST A GATE.** I briefed
+  lanes that *"editing `institutionalCatalog.js` bills three edge bundles."*
+  **The bill is keyed to the TRANSITIVE IMPORT CLOSURE of three AI entry points,
+  not to a file.** TE-CH-7 read my framing, correctly confirmed it was not
+  touching that file, budgeted nothing — **and its gate landed `TRUE_EXIT=1` with
+  six failures outside the frozen census**: three `*.freshness.test.js`
+  (*"Bundle is stale"*) and three `edgeSharedBundleReproducibility`
+  (*"built from content that is neither committed nor staged"*). **VERIFIED BY
+  ME at the slot:** `aiCharterBundle` **111** inputs, `aiGroundingBundle` **67**,
+  `aiOutputSchemaBundle` **112**; `npcProfile.js` is in **all three** and
+  `districtProfile.js` is in `aiGroundingBundle`. `build-edge-shared.mjs` hashes
+  the **content** of every transitive input, so **a two-line edit anywhere in the
+  closure stales all three.** ⚠⚠ **And the bill is INVISIBLE to a targeted suite
+  run** — none of the six arms lives in `tests/domain` or `tests/lint`, so
+  careful adjacent-suite work cannot surface it. **Only the full gate can.**
+- **§561.2 ⛔⛔ AND THE GOLDENS I NAMED AS THE PROOF ARE BLIND TOO.** §555.8
+  instructed that *"what CH-4 moves is the map golden family."* **False.** All
+  three stay green **across a change that moves 668 rings and 332
+  wall-embraces** — because their fixtures use **12 hand-authored quarter names,
+  NONE of the generator's 14**, so the registry never fires. **They are blind for
+  the same structural reason as the settlement digest, which I had already
+  named.** ⭐ **New law: a golden that never exercises your code is not evidence
+  — prove its fixtures REACH the change before citing its green.** Only the
+  504-settlement differential sees this car.
+- **§561.3 THE 333 DELETIONS, MEASURED — RIGHT MAGNITUDE, WRONG NUMBERS.**
+  Baseline **1,423** rows; Shape D on the shipped map = **1,136**, **NET −287**
+  (332 lost / 45 gained). Root cause: **the map names archetypes the engine never
+  produces** — across 3,038 faction instances the canonical vocabulary yields
+  **zero `craft` and zero `civic`**, so `industrial → craft` was an unconditional
+  null. ⛔ **And naive route (iii) adds a SECOND regression nobody anticipated:
+  matching canonical `government` alone drops the Government Quarter's row on 93
+  of 216.** The lane's cure — canonical *preference lists* — lands at **NET
+  −123** (168 lost, 45 gained, 340 renamed, 915 unchanged), and ⭐ **the one
+  surviving deletion class is EARNED: those 168 rows existed only because
+  unanchored `den` matched "DENSE timber tenements."**
+- **§561.4 THE UNDERLYING DEFECT IS WORSE THAN BRIEFED — THE TWO QUARTERS WERE
+  EXACTLY SWAPPED.** `Shadows District` — the criminal quarter — read
+  **`merchant` on 168 of 168** via "hidden markets", while the common residential
+  quarter read **criminal**. *The product had them the wrong way round.*
+- **§561.5 FIVE FIGURE CORRECTIONS, ONE OF THEM AGAINST THE LANE'S OWN
+  ESTIMATE.** Wealth **515** — *not its own 629 estimate; the band clamp absorbs
+  114, and executing caught it* · safety **713** · rings **668** ·
+  wall-embrace **332** · ⭐ **institution-class placement does not move at all**
+  (`townLayoutV2.js:704` reads the **institution's** fields, not the district's;
+  only position moves). Fabric join direction: **FEWER, 1,571 → 1,276 (−295)**.
+  Registry is **14**, name-block sha byte-identical across all six commits back
+  to 2026-04-13, **only 10 of 14 ever appearing in-corpus**. Canonical noble
+  **359 across 348/504** (the panel said 396/363), fold verified exactly:
+  government 411 + noble 359 = 770.
+- **§561.6 ⭐ TWO OF ELEVEN MUTATIONS CAME BACK VACUOUS AND WERE REBUILT.** The
+  `den` pin used a **declared** name, so the registry short-circuited the very
+  regex it was testing; the route-(iii) pin asserted only non-null, **which both
+  routes satisfy.** All eleven convict now. *A control that passes for the wrong
+  reason is the failure this estate has caught five times today.*
+- **§561.7 ⛔ I WAS WRONG ABOUT THE DM ANNOTATIONS AND TOLD THE OWNER SO.** I
+  reported the anchored form sat *"ten lines above"* the unanchored one and that
+  this made it **a fix rather than a disclosure**. Measured: **the two typedefs
+  are 2 lines apart**, the schema keys are cheap — **but `readAnnotations` is
+  pure over `edits` alone, and the canonical `(y,x,label)` sort would become
+  model-dependent, breaking byte-stability.** And **`mapEdits.js:93-95` calls the
+  coordinate form DELIBERATE.** ⛔ **So it is owner-gated design, not a bug fix,
+  and my §557.2 claim is withdrawn.**
+- **§561.8 TWO JUDGMENT CALLS RATIFIED.** The walker stays **in the existing test
+  file** rather than a new `tests/lint/*.walker.test.js` — enforcement is
+  identical and a new file would red **three** ratchets. And
+  `dominantFaction.archetype` now reports the **canonical** value, because
+  otherwise `explanation.js:1073` prints **"&lt;noble house&gt; (government)"** to a
+  paying user.
+- **§561.9 FINAL HANDOFF STATE.** Build **`c3289244d`, 60 cars** · ledger
+  **§561** · packets 179 · census `2525/366/2159/21026/5848`. Pins:
+  **`session-scratchpad-2026-08-24` = `3ac714092` (39 files)** ·
+  `ad-charter-2026-08-24` · `holding-dw0-final` · **`wip-ch4` = `f3d02f62c`**
+  (verified to descend from the slot; owes `check:tail` **and** an edge-bundle
+  regen) · **`wip-ch7` = `373601437`** (owes `npm run build:edge-shared`, the
+  bundle+meta pairs committed as a set, then one clean gate). **Both are `wip-`
+  and neither is landable as it stands — which is exactly what the pin says.**
