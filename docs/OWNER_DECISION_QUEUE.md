@@ -21412,3 +21412,57 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   fire. **Everything else proceeds without asking**, including the whole
   40-plus-car remaining arc, every declared same-seed shift, every golden
   re-record, and every charter ruling.
+
+## §511 — "WHAT'S TAKING SO LONG": MEASURED — **THE BOX, NOT THE LANES.** LOAD 21/34/42 ON 8 CORES, NINE VITEST WORKERS, SEVEN MUTEX WAITERS; RAISING THE CAP TO FOUR MULTIPLIED CONTENTION RATHER THAN THROUGHPUT. FOUR STANDING CURES SET (2026-08-23 20:18 CDT)
+
+- **§511.1 THE MEASUREMENT** (taken live, not estimated): `hw.ncpu 8`,
+  `hw.physicalcpu 8`; load averages **21.04 / 34.26 / 42.81**; **nine** vitest
+  worker processes at 60–83% CPU each; **seven** `gate-mutex.sh --run` waiters
+  queued, six at ~6 minutes and one at **13:26**; one whole-suite
+  `check-test-ratchet.mjs` holding the box for 5:52; disk down to 12 GB with
+  three lane worktrees live. Lane wall-clocks today for comparison: CG-1 build
+  **2h02m**, UC-2 landing **1h37m**, UC-2 build **1h32m**, CH-1 landing
+  **1h19m**, CH-1 build **56m**, the DW-0 compile **42m**, its amendment
+  **55m**.
+- **§511.2 THE DIAGNOSIS, PLAINLY.** The gate is SERIAL by design — one mutex,
+  one box — so lanes parallelize only their non-gate work. Every brief then
+  orders a widened sweep of ~21,000 tests across ~1,600 files (~450 s
+  uncontended), so four lanes means four sweeps QUEUED plus CPU thrash when
+  they do run. **The fourth lane did not add throughput; it added a waiter.**
+  Three further costs, all self-inflicted and all fixable: uncapped vitest
+  takes the whole machine per lane; every lane re-proves the SAME banked
+  failing set from scratch in its own baseproof worktree (four times today,
+  identical answer each time, ~15 contended minutes each); and a landing
+  re-runs the build's sweep even when the slot has not moved (CH-1's landing
+  did exactly this for a pure fast-forward).
+- **§511.3 FOUR STANDING CURES — law for every brief from here.**
+  (1) **CAP THE WORKERS:** every `npx vitest run` carries `--pool=threads
+  --poolOptions.threads.maxThreads=2 --poolOptions.threads.minThreads=1`, so
+  four lanes × 2 threads equals the machine instead of five times it. Sent to
+  all three live build lanes to take effect at their next battery, explicitly
+  NOT mid-run. (2) **THE BANKED SET IS CITED, NOT RE-DERIVED:** it is SEVEN,
+  chair-verified by execution at two different slots (§507.3 at `00e7af61`
+  with assertion blocks character-identical at both ends and a clean-slot
+  worktree returning the same seven titles; §509.1 again at `b2852ccc`); lanes
+  cite the ruling and still classify THEIR OWN reds by assertion-block sha,
+  which is the cheap half. (3) **NO DOUBLE SWEEP:** when the slot has not
+  moved under a landing, it re-uses the build's drive and runs only the
+  terminal, saying so affirmatively. (4) **⭐ STACK THE LANDINGS** — the
+  single largest lever and a proven pattern (the map stack landed FOUR cars
+  under one gate, the producers THREE): at ~60 cars remaining, one gate each
+  is ~60 terminals at 15–20 minutes; stacked in threes it is ~20. The chair
+  will stack every landing where the cars' change paths are disjoint and the
+  census deltas can be summed with two negative controls (§420's
+  sum-of-deltas law).
+- **§511.4 THE HONEST TRADE-OFF, RECORDED SO IT IS NOT RE-LITIGATED.** Most of
+  the elapsed time is not waste — it is the verification discipline that today
+  alone caught a parish priest rendering as a tavern in 150 of 504
+  settlements, two fully-proved tips whose only ref was a scratch directory, a
+  capacity "theorem" that fails on 156 of 426 checks, a merge theorem that
+  cannot pass as written, a cure that cannot work at any value, a corpus
+  digest structurally blind to the change it was cited as proving, and a
+  brand-new test file that parked itself at birth while its arithmetic closed.
+  Four of today's lane-hours produced no landed car and prevented four wrong
+  landings. **The lever is machine efficiency and batching, NOT lowering the
+  proof bar** — and the cap stays at four, because the contention is curable
+  and the parallel reading, writing and compiling is real gain.
