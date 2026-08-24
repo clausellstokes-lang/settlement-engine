@@ -807,9 +807,21 @@ export const checkStructuralValidity = (institutions, config = {}) => {
 
   // ── Exclusivity conflicts (by-design) ───────────────────────────────────────
   // Two institutions in the same exclusive group both present — flag but don't block.
+  // [CH-3 §3.2] A row that declares `exclusiveGroupCoexists` is AUTHORED to stand beside its
+  // group-mates, so its presence is not an override and must not be reported as one. Without
+  // this the reader tells a player that a cathedral city holding monasteries is "a deliberate
+  // override — expect political tension, power struggle", when R-INST-3 and the ruling behind
+  // this affordance say the opposite: it is the ORDINARY case (Chester, Norwich, London), and
+  // the metropolis block has always allowed the same pair. The engine may not describe the
+  // normal case as a contradiction.
+  //
+  // The row keeps its `exclusiveGroup` on purpose — that is what keeps `coherenceRepairPass`
+  // refusing a same-group dependency add, and so keeps a town-tier religious house out of
+  // cities — so this reader is the one place that has to know the difference between "in a
+  // group" and "blocked by it".
   const exclusiveGroupMap = {};
   (institutions || []).forEach(inst => {
-    if (!inst.exclusiveGroup) return;
+    if (!inst.exclusiveGroup || inst.exclusiveGroupCoexists) return;
     if (!exclusiveGroupMap[inst.exclusiveGroup]) exclusiveGroupMap[inst.exclusiveGroup] = [];
     exclusiveGroupMap[inst.exclusiveGroup].push(inst.name);
   });

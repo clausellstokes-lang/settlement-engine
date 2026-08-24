@@ -42,6 +42,7 @@ import {
   getInstitutionsForTier,
 } from '../../src/generators/lookups.js';
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { TIER_ORDER } from '../../src/data/constants.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -211,7 +212,12 @@ describe('[CH-3 §3.1] catalog tier-gate parity: the UI reader and the generator
       expect({ t: String(t), names: sorted(namesOf(getInstitutionalCatalog(t))) })
         .toEqual({ t: String(t), names: village });
     }
-    // and the village row the gate refuses is absent from all of them
-    expect(village).not.toContain('Smuggling network');
+    // …and the village row the gate refuses is absent from all of them. ANCHORED, because a
+    // bare absence is true both when the row is correctly gated out and when the collection
+    // drifted out from under the test: `Underground network` is its own shelf-sibling on
+    // village/Criminal and travels the identical code path, so it vanishes under exactly the
+    // drift that would make this negative vacuous.
+    expectAbsentWithAnchor(village, 'Smuggling network', 'Underground network',
+      'the village Smuggling network row is gated to city, so the village view must refuse it');
   });
 });

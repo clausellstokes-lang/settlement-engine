@@ -341,15 +341,23 @@ describe('§I FACET INFERENCE HONESTY — the anchoring walker (CH-1, ODQ §503.
     ]);
   });
 
-  it('A7 · every DECLARED catalog facet names a real value, and the scan proves itself live on the three rows that carry one', () => {
+  it('A7 · every DECLARED catalog facet names a real value, and the scan proves itself live on the five rows that carry one', () => {
     // Today no catalog row declares a kind that FACET_INFERENCE also infers, so the value
     // check would be empty on its own — stated rather than hidden. The scan is held live by
-    // the three `Underground network` rows (clandestine / subterranean) and by a synthetic
-    // negative, so it is ready for CH-3a's first `institutionNature` declaration.
+    // the rows that DO carry a `facets` map and by a synthetic negative.
+    // ── COUNT MOVED 3 → 5 BY CH-3 §3.6 (R-INST-6-1), which is this arm working as designed.
+    // MF-CH1 wrote this arm "ready for CH-3a's first declaration"; CH-3 made it, declaring
+    // `subterranean` on the metropolis `Underground city` and `Black market bazaar` rows,
+    // which are explicitly subterranean in their own prose and seeded the undercity sheet
+    // zero times before. So the five are the three `Underground network` rows (clandestine +
+    // subterranean) plus those two (subterranean only — the one-key form is deliberate;
+    // `clandestine` drives live D6 couplings and is a separately priced question).
+    // Neither new declaration names a kind FACET_INFERENCE infers, so the value check below
+    // is still exercised only by the synthetic negative, exactly as before.
     const declared = CATALOG_ROWS
       .filter((row) => row.inst.facets && typeof row.inst.facets === 'object')
       .map((row) => ({ at: row.at, facets: row.inst.facets }));
-    expect(declared.length, 'the declared-facet scan found nothing — it is no longer live').toBe(3);
+    expect(declared.length, 'the declared-facet scan found nothing — it is no longer live').toBe(5);
     const VALUES_BY_KIND = Object.fromEntries(Object.entries(LIVE_TABLE)
       .map(([kind, rowsForKind]) => [kind, rowsForKind.map((r) => r.value)]));
     const check = (facets, at) => Object.entries(facets)

@@ -56,6 +56,16 @@
  *         draws its chance from `rng.fork('exclusiveCoexist::…')`, so the main
  *         sequence stands where it stood and only the rosters that actually gain
  *         the row move.
+ *         ⚠ ONE READER HAD TO LEARN THE DIFFERENCE between "in an exclusive group"
+ *         and "blocked by it", and the gate is what found it: with the rows kept in
+ *         their group, `structuralValidator` began reporting the pair as an
+ *         `exclusivity_conflict` — telling a player that a cathedral city holding
+ *         monasteries is "a deliberate override, expect political tension", which is
+ *         the exact opposite of the ruling. It skips rows declaring
+ *         `exclusiveGroupCoexists` now. That repair also returned the
+ *         observed-shape corpus to baseline EXACTLY (1300/8607/14586, zero shapes
+ *         added or removed), where the un-repaired form had added the
+ *         `structuralViolations` and `authoredTensions` shapes.
  *   THE PROMISE, as the chair ruled it: THE PROMISE protects LIVED HISTORY. A seed
  *   already generated and played is a starting world forever and its stored
  *   institutions are untouched. It does not freeze the generator's future output;

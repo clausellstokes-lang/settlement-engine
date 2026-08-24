@@ -57,6 +57,17 @@ const EMBEDDED_DELIMITER_FAMILIES = Object.freeze({
   'deity-stance': ['src/domain/worldPulse/deityStanceLane.js'],
   'fidelity': ['src/domain/worldPulse/fidelityNoise.js'],
   'religion-contest': ['src/domain/worldPulse/religiousContest.js'],
+  // CH-3 §3.2 (J-CH-3-2 as revised). `exclusiveCoexist::<tier>::<category>::<name>`, forked
+  // off the assembleInstitutions step PRNG so that un-suppressing a coexisting exclusive-group
+  // row does not consume a MAIN-sequence draw and re-roll the settlement.
+  // THE CHAIN CHECK THIS ROW REQUIRES, DONE BEFORE ADDING IT: the full derived string is
+  // `<seed>::assembleInstitutions::exclusiveCoexist::<tier>::<category>::<name>`. A collision
+  // needs some other composition to derive the same string, i.e. a fork chain whose segments
+  // spell `exclusiveCoexist` at that position. Measured over every `.fork(` site in `src`:
+  // the token `exclusiveCoexist` appears at exactly ONE of them — this family's own — so no
+  // chain, and no root segment, can reach the same seed. Added after that check, never to
+  // silence the test.
+  'exclusiveCoexist': ['src/generators/steps/assembleInstitutions.js'],
 });
 
 /**

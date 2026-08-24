@@ -75,7 +75,7 @@ that each declared same-seed movement is attributable to exactly one commit.
 | `c4d71b4ea` | §3.1 tail — the 26 redundant `minTier` | **0** | `bc5079e823b34075196733da5e827a128dcd20fdfcc2221830902e49915b8995` |
 | ~~`1d1e8fc86`~~ | §3.2 first form — delete `exclusiveGroup` | ~~81~~ | ~~`036f620a…`~~ **SUPERSEDED** |
 | `2a8e7f26a` | the three edge bundles that carry the catalog | — | unchanged (bundles are outputs) |
-| **`501122493`** | **§3.2 REVISED (J-CH-3-2 as re-ruled)** — the coexistence rides a side stream | **30** | `39ac163506859b2144b744d18f4a5d585ae8748cfa2e6fba85f75344db1172be` |
+| **`501122493`** | **§3.2 REVISED (J-CH-3-2 as re-ruled)** — the coexistence rides a side stream | **30** | `ae67602f44c3a27081aaa7ca0f121a667ac0652abe8c086bc7f2424eca1f65e1` |
 
 ---
 
