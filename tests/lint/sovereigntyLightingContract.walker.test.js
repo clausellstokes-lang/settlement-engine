@@ -6465,7 +6465,38 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // The arithmetic closes: 366 + 2,159 = 2,525, and the walked delta +1/+0/+1/+15/+2 equals
     // the sum of the two cars' separately measured deltas exactly, so the rebase moved no
     // title and no title was swallowed.
-    files: 2525, parked: 366, credited: 2159, titles: 21017, suiteTitles: 5847,
+    // == RE-RECORDED 2026-08-24 BY THE TE-R3 LANDING — ONE CAR, ONE TEST FILE ==
+    // 2,525/366/2,159/21,017/5,847 -> 2,525/366/2,159/21,026/5,848 at slot 510c51b76
+    // (the TE-STACK-5 landing, whose row is the block immediately above). TE-R3 writes the
+    // AI-provenance credit back into the 46 shipped files that carried none, and its ONLY
+    // test-file change is tests/build/aiMediaProvenance.test.js — an EXISTING, CREDITED file,
+    // so `files`, `parked` and `credited` cannot move and did not.
+    // +0 files / +0 parked / +0 credited / +9 TITLES / +1 SUITE TITLE.
+    // ⚠ THE DELTA IS NINE, AND NINE IS NOT WHAT THE TEST COUNT SUGGESTED. The car's runtime
+    //   count went 20 -> 29, which is +9; an earlier hand reading of the base said 21 and
+    //   would have recorded +8. The figure below is the WALKED one and the miscount was
+    //   caught by execution, which is the whole reason this row is asserted (SS530.3: a
+    //   census delta is attributed per test file, never computed from a test count).
+    // THE ATTRIBUTION IS A SINGLE-FILE CONTROL, WHICH IS THE ONE SHAPE THAT CANNOT BE
+    // AMBIGUOUS. `git show <slot>:tests/build/aiMediaProvenance.test.js` (20,791 bytes,
+    // byte-count printed before use) restored over the car's copy, with the tuple pinned back
+    // to the slot reading, ran 33 passed of 33 at exit 0 — so reverting THIS CAR'S WHOLE TEST
+    // DELTA lands on the slot tuple to the digit, and no other figure moved with it. The car
+    // was restored afterwards and compared IDENTICAL.
+    // TWO NEGATIVE CONTROLS, ONE PER MOVED FIGURE, each substitution guarded against a no-op
+    // edit by md5 and the file restored to dde3ab003321488afb1ee6eb08eae71a:
+    //   TITLES  "the live TEST-title count moved ...: expected 21026 to be 21025" — 1 failed
+    //           of 33, exit 1.
+    //   SUITE   "the live SUITE-title count moved ...: expected 5848 to be 5847" — likewise,
+    //           and it proves the LAST assertion is reachable and no earlier red masks it.
+    //   ⭐ The unmoved figures are NOT given substitution controls here and that is deliberate:
+    //   the block above already proved `files`, `parked` and `credited` live at this same base
+    //   with the same instrument, and re-planting them would re-prove the instrument rather
+    //   than this car. What this car owes is its own split, and the single-file revert IS it.
+    // The arithmetic closes: 366 + 2,159 = 2,525 still, and the whole walked delta +0/+0/+0/
+    // +9/+1 is one file's, established by removing that one file's change and reading the
+    // slot tuple back exactly.
+    files: 2525, parked: 366, credited: 2159, titles: 21026, suiteTitles: 5848,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
