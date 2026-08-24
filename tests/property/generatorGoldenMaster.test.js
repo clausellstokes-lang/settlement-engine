@@ -18,6 +18,37 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-08-24 — MF-CH2A, THE MAGIC LICENCE DECLARED (297 rows of 525 moved; 0 keys
+ *   added, 0 removed). Lane TE-CH-2, catalog-hygiene car 2a. Source: the packet
+ *   docs/implementation/packets/catalog-hygiene/MF-CH2A.md.
+ *     THE CAUSE, IN ONE SENTENCE. A declared `magicLicense` was added to the 28
+ *     Magic/Exotic rows of src/data/institutionalCatalog.js, and
+ *     `assembleInstitutions` SPREADS a catalog row onto the settlement record
+ *     (`institutions.push({ category, name, ...inst })`), so a new row key becomes
+ *     a new record key wherever that institution is selected. This is the second
+ *     law of ODQ §503.2, and the move was PRICED BEFORE THE FIRST EDIT rather than
+ *     met at a battery.
+ *   PROVEN TO BE A KEY ADDITION AND NOTHING ELSE BEFORE RE-RECORDING. All 504
+ *   settlements of the tier × culture × terrain grid were regenerated as OBJECTS
+ *   from the working trees on both sides — a separate detached worktree at the
+ *   clean base b2852ccc3 with its own node_modules and TMPDIR, and this member —
+ *   and deep-diffed field by field with array indices collapsed to [*]. The
+ *   complete census of differing path-templates is TWO, and both are ADDITIONS:
+ *     $.institutions[*].magicLicense                          573 added / 276 rows
+ *     $.defenseProfile.institutions.magicDef[*].magicLicense   350 added / 252 rows
+ *   Zero changed, zero removed, zero array-length moves, zero key-order moves. No
+ *   name, count, id or rng draw moved.
+ *   AND THE ROSTERS DO NOT MOVE AT ALL: over 2,520 settlements (the 504 grid × the
+ *   five magic cases magicExists:false / priorityMagic 0, 20, 50, 80) the set of
+ *   institutions in every single settlement is unchanged. 657 record hashes move;
+ *   0 rosters do. The 297 golden keys are the 276 grid rows above plus 21 of the
+ *   corpus's one-dimension sweep rows.
+ *   ⚠️ THE COMPANION CAR MOVES THIS FIXTURE AGAIN, AND FOR A DIFFERENT REASON.
+ *   MF-CH2B makes the five gates READ the licence, which is a real roster shift
+ *   (measured 1,025 of the same 2,520, concentrated in magic-free and low-magic
+ *   worlds; 3 of 504 at the default dial). That is a second, separately declared
+ *   re-record with its own row here — not this one, and not to be conflated with it.
+ *
  * 2026-08-03 — LANE MD, A ONE-BODY AMENDMENT INSIDE LANE RR'S WINDOW (1 row of
  *   525 moved). Chair-ruled as an amendment to the still-open RR window rather
  *   than a new disclosure event, and executed under that window's own recipe.
