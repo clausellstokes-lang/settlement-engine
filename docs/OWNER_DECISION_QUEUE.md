@@ -27761,3 +27761,24 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   honest geometry, measured corpus distance has closed; every failure has been a
   substrate betrayal. The assembled end state remains §580's cross-reference —
   Watabou's readability, the corpus's dress, the truth underneath.
+
+## §654 · OWNER'S FULL STOP — REVIEW, ANALYZE, AND FIX BEFORE ANY FORWARD MOTION (2026-08-25 ~18:30 CDT)
+
+- **§654.1 THE ORDER, verbatim intent:** stop; comprehensively review the current map
+  and the progress already made against the explicit goals; before continuing forward
+  and complicating everything, review, analyze, and FIX everything impeding or broken
+  against those goals.
+- **§654.2 EXECUTED:** REG-GROW-A ordered to STAND DOWN at a clean checkpoint (the
+  zero-growth diagnosis may complete — it is review-class; the ledger build does NOT
+  start; resume-block in its receipt per §448). NO new cars dispatch. The REG-6 paint
+  architecture (§653) is POSTPONED behind the review. **THE REVIEW CHARTERS:** object =
+  the register path at the newest seal (`map-sandbox-bridge-rivers` = `9de729021`),
+  ALL waves armed; the goals = §580's north star · §612's purpose law · §591 totality ·
+  every owner visual law · the §583 budget. Six lenses: the north-star glance
+  (gestalt-first, §649.3) · the totality sweep (every law vs every leaf) · truth
+  integrity (the full instrument suite re-run STACKED) · corpus distance (the detail
+  register's plates) · performance and budgets (honest current cost) · the HALF-STATE
+  INVENTORY (everything deferred/held/THIN across §§628–653 and the wave receipts).
+  A consolidation pass ranks findings BROKEN (violates a standing law now) / IMPEDING
+  (blocks the goal path) / COSMETIC-LATER, each with its fix. **Fixing follows the
+  review's delivery — repair-class only until the owner releases the arc.**
