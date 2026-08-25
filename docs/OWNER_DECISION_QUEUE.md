@@ -28298,3 +28298,19 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
 - **§675.3** Verifier pass in flight over the amended set (cross-contradiction hunt);
   on its green, every future dispatch brief cites §675 + the amended documents and
   NOTHING pre-spine without its amendment.
+
+## §676 · THE CODE STUDY COLLECTS — THE MATHEMATICS LANDS AS SPINE A2 (2026-08-26 ~07:15 CDT)
+
+- **§676.1** R-WATABOU-CODE delivered (26 files read, firewall ATTESTED — ideas only,
+  no expression; dossier draft-R-WATABOU-CODE.md). The five principles and their
+  homes: the STOP-RULE subdivision + CUT-TIME EDGE TYPING (P1's mechanism — SPINE A2.1,
+  and the profound bit: subdivision and aggregation become inverses of one law) · the
+  ORGANIC GUARD as decision statistics, never spectral noise (P5 closed — the
+  reference has ZERO coordinate jitter; SPINE A2.2 makes post-hoc jitter an i8
+  conviction) · derived-wrap GATE MINTING for history-silent walls (SPINE A2.3) · the
+  QUOTA-DECK/SCORER decomposition with slum-as-overflow (noted A2.4 for the future
+  seating car — poverty as emergence, the deck from OUR ledger). The study's verdict
+  on our design: nearly everything structural was already ruled identically from
+  observed behavior — §656's premise validated; the reference's one deep lack (no
+  time, no water) is the spine's reason to exist. **SPINE-1 receives the A2.1
+  addendum mid-flight** (better before it cuts plots the pre-study way).

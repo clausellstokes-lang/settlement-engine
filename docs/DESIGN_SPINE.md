@@ -243,3 +243,36 @@ read the band face, never re-derive) and the arm declaration covers ALL TEN arms
 L-REG-5's regime inputs (readiness/era/prosperity) join §2 (M8). SPINE-1's exits
 regain the WAY×WALL crossing half (M9 — SPINE-1 builds gates, so it proves them).
 m3 banked: packed.blocks are lane-padded quads — never partition faces.
+
+---
+
+# AMENDMENT A2 — THE MATHEMATICS ADOPTED (§676; ideas from the §673 code study, expression firewall attested in laneRWCODE-receipt.md)
+
+## A2.1 · THE STOP-RULE SUBDIVISION (P1's mechanism — adopted). Plot generation inside
+a block face is a recursive guillotine cut that HALTS when a piece's area falls below
+a threshold drawn per ward from a floor area scaled by 2^(±2·chaos). The size band is
+therefore MANUFACTURED by the halt condition — the §6 page-budget census becomes a
+VERIFIER of the mechanism, never a legislator against it. **Cut-time edge typing:**
+while pieces are coarse, cuts open gap edges (typed WAY at lane rank); below a
+stochastic area bar, cuts are gapless (typed party BOUND) — so party-wall runs are
+GENERATED, and A1.2's stage-1 dissolve is the exact inverse of the cut that made
+them: subdivision and aggregation are ONE law.
+## A2.2 · THE ORGANIC GUARD METRICS (P5 closed). The reference contains ZERO
+coordinate noise; its order/irregularity balance is entirely DECISION statistics —
+relaxation privileged to the center, seeded spirals, jittered cut choices, and a
+junction weld that manufactures T-dominance. The guard therefore measures: roundness
+gradient center→edge · junction-degree mix (T vs X share) · cut-angle variance by
+recursion depth — and NEVER spectral/jitter metrics. "Never post-hoc jitter" (§3b)
+is enforceable: any coordinate-noise op class in i8's roster inside the constructor
+is a conviction.
+## A2.3 · DERIVED-WRAP GATE MINTING (the §3c history-silent case). Gate candidates =
+wrap vertices where ≥2 interior pieces meet; spacing by cycle decimation (choose one,
+suppress neighbors); every gate carries a GATE-ROAD GUARANTEE (split the outer piece
+if no outgoing corridor exists); street-reachability is a rejection gate. Recorded
+history always wins where it speaks.
+## A2.4 · THE QUOTA-DECK / SCORER DECOMPOSITION (noted for the future seating car,
+not SPINE scope): ward-mix as a quota deck with SLUM-AS-OVERFLOW (poverty as
+emergence — aligned with our wealth truth, which supplies the deck from the ledger)
+separated from per-type location scorers (the §640 weights). The four-dial ward
+dress tuple (lot floor · two chaos dials · emptiness) is the wealth-legibility
+mechanism the rich/poor laws asked for.
