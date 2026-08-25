@@ -534,3 +534,44 @@ REG-GROW-B lands its ledger.
 Home: REG-H, beside the mosaic. Exits: per-tier area census against the band with a
 planted over-cultivated control; the self-sufficiency ratio reported per settlement.
 Frame-correct under REG-GROW: extent reads the ledger's population per epoch.
+
+## Amendment A12 — the conformance block compiled, the law table extended, the arc restated (§647)
+
+**This amendment compiles what §§639–646 minted in the ledger into the program's own pages.
+Where an ODQ section carries more detail, it governs; this is the finding aid.**
+
+### A12.1 · New laws (numbered here; full text at their ODQ homes)
+| Law | Statement (short) | Source |
+|---|---|---|
+| L-REG-33 | Cultivated land scales with tier: subsistence (extent ∝ population) → trade (extent decelerates, near-ring intensity rises) | §644, A11 |
+| L-REG-34 | LEGEND AGREEMENT: every legend row has ≥1 locatable instance; every drawn glyph class is taught; planted-orphan control | §646.1i |
+| L-REG-35 | EVENT ADDRESS: every dated event label sits at its addressable place (road/gate/seat/wall), never open water or empty field | §646.1iii |
+| L-REG-36 | RUINS NEED ADDRESSES: a decay-state body on high-pressure ground traces to an anchoring event or does not stand | §646.1ii |
+| (candidate) | QUARTER-NAME-EARNED: a named quarter's geometry visibly earns its name — REG-9 ratifies or strikes | §646.1iv |
+| (census) | TANGENTIAL-OR-CLEAR at the wall: §575's law gains its own census (buildings near the wall tangential or clear; no footprint crosses) | §645.2 |
+
+### A12.2 · The conformance block, one charter row per car
+| Car | Scope (compiled) | Grounding / gates | Exits (headline) |
+|---|---|---|---|
+| **REG-ROUTE** | Water is an ABSOLUTE corridor refusal; landings terminate corridors (ferry/quay glyph); a gate at EVERY wall crossing or the way is severed; the weaving coast road; stranded zero-mouth fragments (honeycombs lawful, §640.2); grade response + crag avoidance; map-edge gates; opens by DIAGNOSING the black bars; approach-road presence (§646) | Internal-contradiction class — ungated (§640.3) | crossing census (every crossing gated), corridor-water census, fragment census, all with planted controls |
+| **REG-DEF** | Gate breach vs gatehouse width; tower rhythm with bowshot logic; keep/citadel for military foundings (Kitaqiao's cartouche says garrison, §645-era read); siege-camp standoff per R-MORPH's Corfe band (camps ≥~400 m) | R-MORPH §6 at weights grade (one-site caveat) | rhythm census; keep-presence census on military foundings |
+| **REG-WATER** | Upstream/downstream as WEIGHTS (dossier: intramural tanners lawful); water-draw contamination weighted-real; mills adopt R-INST-2 §11 (waterPower enum incl. wind/horse, era gates, mills NOT universal) + PRESENCE clause (a 20k city has mills, §646.2); conduit/well ternary; the RIVER-UPHILL drainage defect (own measure first); townLayoutV2.js:209 name-match residual | §640.2 weights-not-walls | siting-weight census; mill-presence census; drainage measure |
+| **REG-SITE** | Institution siting as PULLS AND DRAWS (§640.2): hospitals edge-or-gate; fairs hall-or-field; noxious edge/water pull, intramural lawful; town hall DRAWN; market institutions unified with the drawn square; coaching inns on approaches; graveyard/churchyard PRESENCE census (§646.2); toll bridges need water | Dossier-confirmed rows; §638.2 satisfied | per-institution pull censuses; presence censuses |
+| **REG-H** | The hinterland mosaic (meadow/pasture/common/waste/orchards — the surface `fields.js` promises and never publishes, §641.2); floodplain-meadow INVERSION (R-MORPH: never ploughed, most valuable); field lanes + farm tracks; tenure consistency (Elton); L-REG-33 sizing law with per-tier area census; grazed-common ≠ dense canopy (§646.2); frame-correct via the growth ledger | R-MORPH §1 payload-grade — GATE OPEN (§642.2) | mosaic-share census per tier; area-band census + over-cultivation control; self-sufficiency ratio reported |
+| **REG-TERR** | In-town slope expression (terrace/stair/contour streets — weights grade, gradients unminted per R-MORPH §4 flag); relief expression SHEET-WIDE (a steep-hills cartouche with zero relief marks, §646.2); the open-water stroke tangle cure | R-MORPH §4 digest-grade | slope-response census on relief≥band leaves |
+| **REG-BRIDGE** (in flight) | River-profile mint → fords drawn (wide reaches) → narrows re-siting + bent approaches → floating decks + angle outliers (excess predicate) → carto:bridge disposition | §641.5; L-REG-31/32 | see the lane brief; two independent instruments must agree |
+| **REG-GROW A/B** | docs/DESIGN_REG_GROW.md + its A1 (the ledger/frame split; no invented history; T2 rides A) | §643 | the differential passes; snapshot divergence; totality walker |
+
+### A12.3 · The arc, restated once (supersedes §370's order)
+REG-BRIDGE (in flight) → REG-GROW-A → REG-GROW-B → REG-ROUTE → REG-DEF → REG-WATER →
+REG-SITE → REG-H → REG-TERR → REG-6 → REG-7 → REG-8 (+L-REG-34/35 censuses) → REG-9
+(judging AFTER conformance; quarter-name candidate ruled; third warehouse round already
+owed) → REG-D (ledger-founded, A10) → REG-10 → REG-11 → REG-F0 → REG-F (owner judges
+the film specimen) → REG-P (the port; totality walker bill; tierForPopulation ≡
+popToTier gate). Side obligations ride their owners (TE-WSEAM measure · COVER-REFRESH ·
+dead-code sweep · the §646 dress rows in REG-6/7).
+
+### A12.4 · The signed-constants register
+Every chair-signed constant now lives in **docs/SIGNED_CONSTANTS.md** — one sheet,
+three statuses (CHAIR-SIGNED vetoable · OWNER-SIGNED · UNMINTED-PENDING), maintained at
+every signature; it is the tuning pass's walking sheet.

@@ -27583,3 +27583,26 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   west/east clash with no plat story (REG-GROW-B's origin typing must mark WHICH part
   is the plat) · early-clustered event years (a canon-honesty question for the film's
   scan; measure event-year distributions at REG-F0).
+
+## §647 · THE COMPILE — EVERYTHING LEDGER-ONLY GETS ITS COMPILED HOME (owner's order, 2026-08-25 ~15:40 CDT)
+
+- **§647.1** The owner asked whether everything not yet compiled should be; the answer
+  was YES and the sweep found three gaps, all closed this entry: (i) the CONFORMANCE
+  BLOCK had no compiled charters — the program doc gains **Amendment A12** (one charter
+  row per car: ROUTE/DEF/WATER/SITE/H/TERR + BRIDGE + GROW pointers, each with scope,
+  grounding, gates, and headline exits compiled from §§639–646; the arc restated once,
+  superseding §370's stale order); (ii) the owner's-catch mints were unnumbered — the
+  law table extends: **L-REG-34 legend agreement · L-REG-35 event address · L-REG-36
+  ruins need addresses**; the quarter-name-earned row stays a CANDIDATE for REG-9; the
+  tangential-or-clear census records as §575's instrument, not a new law; (iii) the
+  signed constants lived scattered across a dozen sections — **docs/SIGNED_CONSTANTS.md
+  is minted as the tuning surface's walking sheet** (op ceilings · byte ceilings + the
+  coupling law · every band and floor · nine UNMINTED-PENDING rows named so nothing
+  silently defaults · the owner-signed stratum). **STANDING ORDER: a signing that skips
+  the sheet is incomplete** — every future signature updates it in the same act.
+- **§647.2** Residue honestly named: the two lane memory topic files still await the
+  next index-fold pass (unchanged); the R-MORPH dossier awaits the owner's taste gate
+  (consumption stays weights-grade meanwhile); REG-GROW-A's brief will compile from
+  DESIGN_REG_GROW.md + A1 at dispatch (nothing to pre-compile); the audit register and
+  contest JSONs are preserved at `session-work-2026-08-25` and their rulings ARE the
+  compile (§§639–641). Nothing else known-uncompiled remains.
