@@ -27529,3 +27529,25 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   must read the GROWTH LEDGER's population at each frame once REG-GROW lands — a
   young town's fields are a village's fields; the two cars coordinate through the
   ledger, not through the present.
+
+## §645 · CORRECTION OF RECORD — THE WALL DOES NOT END EVERY DISTRICT, AND THE TANGENTIAL CENSUS MINTS (owner's catch, 2026-08-25 ~14:40 CDT)
+
+- **§645.1 THE CORRECTION:** the chair's Kitaqiao read credited "the wall genuinely ends
+  the districts." The owner re-checked and is RIGHT: the upper-left corner and top-left
+  run carry fabric CONTINUOUS across the wall line (same grain both sides), and the
+  bottom-right coastal strip runs straight through the curtain to the shore — walls
+  drawn OVER districts, the §575-era complaint alive on the shipped painter. The audit's
+  own rows on this leaf corroborate (the coast road weaves the wall line six times;
+  lanes penetrate in bulk). The chair's error class is banked: **set-pieces anchor a
+  glance; §591's totality law grades the weakest element — "ends districts MOSTLY" is
+  a FAIL.**
+- **§645.2 THE INSTRUMENT GAP CLOSED:** i10's straddle census counts DISTRICT REGIONS
+  astride the circuit and can read zero while buildings still cross or crowd the line.
+  **MINTED: the TANGENTIAL-OR-CLEAR census** — every building within reach of the wall
+  is tangential to its curve OR has clear ground both sides (§575's law verbatim), and
+  NO body's footprint crosses the line; zeros valid only with a planted-violation
+  control. Joins the instrument suite at its next touch and REG-9's judging round;
+  REG-ROUTE owns the ungated street crossings; the fabric-across-the-wall is
+  REG-GROW's circuit-law conviction wearing ink; the coastal strip re-emerges as a
+  TYPED shore faubourg after both. Until this census runs green with its control, the
+  wall-ends-districts claim is not to be asserted from eyes alone.
