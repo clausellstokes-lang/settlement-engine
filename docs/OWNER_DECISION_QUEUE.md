@@ -28035,3 +28035,28 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   instrument") — the row self-retires at REG-6's re-cut; **J-CARINST-4** — the §240.1
   ride-along control, load-bearing on its first run. Non-grabs recorded to their
   owners (bridgeAngles header · i10's verdict-less census path).
+
+## §663 · THE DISSECTION'S SECOND HAUL — A WHOLE CITY IS SEVEN HUNDRED POLYGONS AND THREE CONSTANTS (2026-08-26 ~00:15 CDT)
+
+- **§663.1 THE MODEL, CAPTURED WHOLE** (the app's own JSON export, intercepted before
+  download; census at dissect/mfcg-everrise-census.json): a full MFCG city is a
+  GeoJSON FeatureCollection of **THIRTEEN groups** — values · earth · roads · walls ·
+  rivers · planks · buildings · prisms · squares · greens · fields · trees ·
+  districts — and the `values` header is THREE style constants (roadWidth 8 ·
+  towerRadius 7.6 · wallThickness 7.6). The whole page: **616 buildings (68 % plain
+  quads, mean 4.6 vertices, areas tightly banded p25 172 → p75 296 with rare 2,900
+  great halls) · FOUR roads · TWO wall polygons (25-vertex circuit!) · 8 named
+  districts · 41 fields · one square · one keep — ~700 polygons total.** Buildings
+  carry ZERO per-building semantics — one MultiPolygon.
+- **§663.2 THE READING (for the study and the spine decision):** the reference's
+  visual richness is GEOMETRY QUALITY under EXTREME data restraint — the beauty is in
+  the packing, the wrap, and the negative space, not in data depth. Our armed pages
+  carry 25–30 k drawn bodies and dozens of tones to read WORSE at a glance. The
+  lesson is not less truth — the truth layer is our moat and stays — it is that **the
+  PAGE is a disciplined projection: a few hundred shapes, a handful of constants,
+  everything else earned by geometry.** The i12/audit defect families and this census
+  point at the same spine: partition-first, views-only paint, and a projection budget
+  measured in hundreds of polygons at page register, with the deeper truth surfacing
+  at zoom (our register ladder's own design, §467-era, now with its reference-grade
+  quantification). Next dissection sessions: seed sweep for variance · village +
+  dwelling generators · FTG's one shot behind its rig.
