@@ -178,7 +178,14 @@ export function circuitInputsFrom(a) {
       + (a.cliffs ? `|${a.cliffs.key}` : ''),
     waterMode: a.water.mode,
     waterLine: a.water.line,
-    waterWidth: a.water.width,
+    // ⭐⭐ REG-BRIDGE · THE COLUMN CARRIES THE PROFILE WHERE THERE IS ONE, and it does so by
+    // WIDENING THE VALUE rather than by adding a key — the roster is FROZEN, and `inputsText`
+    // writes `k=∅` across the whole frozen list, so a new key would move every leaf's
+    // `inputsHash`. Unarmed the value is the same number it always was; armed it becomes a
+    // three-figure string, which is exactly the freshness signal the note above demands.
+    waterWidth: a.water.widthProfile
+      ? `${a.water.width}|${a.water.widthProfile.min}|${a.water.widthProfile.max}`
+      : a.water.width,
     // §200: the band is derived in FRONTAGES (the drawn module every other width uses) and its
     // outer face is the §5.0e.3 seriousness dial the faubourg law already reads, so the glacis
     // and the wall-foot tell can never disagree about the same town.

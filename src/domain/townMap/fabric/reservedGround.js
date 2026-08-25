@@ -380,16 +380,27 @@ export function ringNearestIndex(poly) {
   return { nearest, exhaustive, segments: n, nodes: used, indexed: true };
 }
 
-/** Flatten a claim list ({line, width}) into the segment set the predicate consumes. */
+/**
+ * Flatten a claim list ({line, width}) into the segment set the predicate consumes.
+ *
+ * ⭐⭐ REG-BRIDGE · A CLAIM MAY CARRY A **PROFILE**. `widths` is a per-VERTEX width aligned to
+ * `line`; where it is present each segment takes the mean of its two ends, so a tapering river
+ * reserves the ground it actually covers. ⚠ THE INDEX WAS ALREADY READY FOR THIS — `claimIndex`
+ * sizes its cell from `maxHalf` and grows each segment's box by *that segment's* own half — so
+ * the exactness claim ("a segment whose bucket the query does not touch cannot be within `half`
+ * of it") survives a variable half without a word of it changing.
+ * ⛔ Absent `widths`, every segment takes `c.width / 2` exactly as it always has.
+ */
 export function claimSegments(claims) {
   /** @type {Array<{ax:number,ay:number,bx:number,by:number,half:number,key:string}>} */
   const segs = [];
   for (const c of claims) {
     const half = c.width / 2;
+    const ws = Array.isArray(c.widths) && c.widths.length === c.line.length ? c.widths : null;
     for (let i = 0; i + 1 < c.line.length; i++) {
       segs.push({
         ax: c.line[i][0], ay: c.line[i][1], bx: c.line[i + 1][0], by: c.line[i + 1][1],
-        half, key: c.key || 'claim',
+        half: ws ? (ws[i] + ws[i + 1]) / 4 : half, key: c.key || 'claim',
       });
     }
   }

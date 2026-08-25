@@ -228,6 +228,18 @@ async function main() {
   // ⭐ REG-5: `--vquay` arms the V-QUAY dress leg (ODQ §636.2). It DEPENDS on `--quay`:
   //   an undrawn quay is never furnished, so the dress leg cannot paper over the geometry.
   if (process.argv.includes('--vquay')) fabricOptions.quayRegister = true;
+  // ⭐⭐⭐ REG-BRIDGE (ODQ §641.5). THREE arms, each dormancy-provable alone, because each
+  //   changes a different thing and a reader must be able to see which one moved a figure:
+  //   `--river`  the WIDTH PROFILE as fabric truth (waterMode) + the variable-width water body
+  //              + the ford's wide-reach mirror. This is the one everything else reads.
+  //   `--deck`   L-REG-31/32: the deck spans the ACTUAL crossing, sites at the local NARROWS,
+  //              and the approach road KINKS at the bridgehead. Live without `--river` (it
+  //              cures the two floating decks and the four angles against a constant width);
+  //              with it, the narrows become real and the siting law becomes measurable.
+  //   `--ford`   the ford GLYPH — 17 records that have never been drawn.
+  if (process.argv.includes('--river')) fabricOptions.riverProfile = true;
+  if (process.argv.includes('--deck')) fabricOptions.deckLaw = true;
+  if (process.argv.includes('--ford')) fabricOptions.fordRegister = true;
   const floorArg = process.argv.find((a) => a.startsWith('--floor='));
   if (floorArg) fabricOptions.footprintFloor = floorArg.slice(8);
   const manifest = [];

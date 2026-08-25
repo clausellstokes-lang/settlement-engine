@@ -1033,8 +1033,69 @@ export function renderFolio(fabric, opts = {}) {
   //    of it. The two halves are the same decision seen from either end.
   const paintRiver = () => {
     if (!fabric.water.line || fabric.water.kind !== 'river') return;
+    // ⭐⭐⭐ REG-BRIDGE · A TAPERING RIVER CANNOT BE A STROKE. `stroke-width` is one number for a
+    // whole path, so as long as the channel was ink laid down by a stroke it was a constant-
+    // width channel BY CONSTRUCTION — the drawing could not have tapered even if the fabric had
+    // said it should. Where a profile exists the channel becomes a BODY: the two banks, offset
+    // from the centreline by the LOCAL half-width, closed into one ring.
+    // ⛔ `fill-rule="nonzero"` IS LOAD-BEARING, not a default copied out of habit. An offset of
+    // half a channel width on the inside of a tight meander can fold back on itself; under
+    // even-odd that fold punches a HOLE in the river, under nonzero it is filled as the union,
+    // which is what a river is. The failure mode is a white bite out of the water at exactly
+    // the bends the meander law exists to produce.
+    // ⛔ AND THE BANKS ARE DECIMATED, because bytes are the binding gate at town and above
+    // (§641.4: town's whole margin is 4,638 B). Two full-resolution banks would cost ~2× the
+    // stroke's own path data; keeping a station only where the bank actually turns, changes
+    // width, or has run far enough, costs LESS than the single stroke it replaces.
+    if (fabric.water.widthProfile) { paintRiverBody(); return; }
     push(`<path d="${linePath(fabric.water.line)}" fill="none" stroke="${waterDeep}" stroke-width="${r2(fabric.water.width)}" stroke-linecap="round" stroke-linejoin="round"/>`);
     push(`<path d="${linePath(fabric.water.line)}" fill="none" stroke="${waterBank}" stroke-width="${INK.river}" stroke-linecap="round" stroke-linejoin="round"/>`);
+    prims.n += 2;
+  };
+
+  /**
+   * THE DRAWN CHANNEL AS A BODY. The thin bank line down the centre is unchanged — it is a
+   * thalweg mark, not a bank, and it reads the same over a tapering channel as over a level one.
+   */
+  const paintRiverBody = () => {
+    const line = fabric.water.line, prof = fabric.water.widthProfile;
+    const n = line.length;
+    const W0 = fabric.water.width;
+    // the local tangent, windowed one station either side — a single segment on this line is a
+    // sub-width detail (the census measured mean spacing at 0.31 x the river's own width)
+    const tangent = (i) => {
+      const a = line[Math.max(0, i - 1)], b = line[Math.min(n - 1, i + 1)];
+      let tx = b[0] - a[0], ty = b[1] - a[1];
+      const l = Math.sqrt(tx * tx + ty * ty);
+      return l > 1e-9 ? [tx / l, ty / l] : [1, 0];
+    };
+    // ── the adaptive keep: a station earns a place on the bank only if the bank has actually
+    //    done something since the last one — turned, changed width, or simply run far enough.
+    const KEEP_TURN = 0.9976;               // ~4 degrees, as a dot product: no runtime trig
+    const KEEP_DW = W0 * 0.04;
+    const KEEP_RUN = W0 * 1.2;
+    /** @type {number[]} */ const keep = [0];
+    let lt = tangent(0), lw = prof.w[0], lx = line[0][0], ly = line[0][1];
+    for (let i = 1; i < n - 1; i++) {
+      const t = tangent(i);
+      const run = Math.sqrt((line[i][0] - lx) ** 2 + (line[i][1] - ly) ** 2);
+      if (t[0] * lt[0] + t[1] * lt[1] < KEEP_TURN
+        || Math.abs(prof.w[i] - lw) > KEEP_DW || run > KEEP_RUN) {
+        keep.push(i); lt = t; lw = prof.w[i]; lx = line[i][0]; ly = line[i][1];
+      }
+    }
+    keep.push(n - 1);
+    /** @type {Array<[number,number]>} */ const left = [];
+    /** @type {Array<[number,number]>} */ const right = [];
+    for (const i of keep) {
+      const [tx, ty] = tangent(i);
+      const h = prof.w[i] / 2;
+      left.push([line[i][0] - ty * h, line[i][1] + tx * h]);
+      right.push([line[i][0] + ty * h, line[i][1] - tx * h]);
+    }
+    const ring = left.concat(right.reverse());
+    push(`<path d="${polyPath(ring)}" fill="${waterDeep}" fill-rule="nonzero" stroke="none"/>`);
+    push(`<path d="${linePath(line)}" fill="none" stroke="${waterBank}" stroke-width="${INK.river}" stroke-linecap="round" stroke-linejoin="round"/>`);
     prims.n += 2;
   };
 
@@ -2126,7 +2187,13 @@ export function renderFolio(fabric, opts = {}) {
   for (const br of (fabric.bridges || [])) {
     const dx = cosI(br.along), dy = sinI(br.along);
     const nx = -dy, ny = dx;
-    const half = Math.max(br.span * 0.85, br.width * 0.9);
+    // ⭐⭐⭐ REG-BRIDGE · THE DECK'S LENGTH IS THE FABRIC'S TO DECIDE, NOT THE LENS'S. The old
+    // line derived a length from two WIDTHS, so the deck was a fixed ~1.7× the nominal river
+    // whatever crossing it faced — and two decks in the shipped corpus therefore floated in
+    // mid-channel, touching neither bank. Where the deck law has run, `reach` is the half-length
+    // measured from the crossing the deck actually has to make; absent it, the old arithmetic
+    // stands byte for byte.
+    const half = br.reach != null ? br.reach : Math.max(br.span * 0.85, br.width * 0.9);
     const w2 = br.width * 0.5;
     const deck = [
       [br.x - dx * half - nx * w2, br.y - dy * half - ny * w2],
@@ -2146,6 +2213,60 @@ export function renderFolio(fabric, opts = {}) {
       prims.n++;
     }
     push(`<path d="${d}" fill="none" stroke="${inkTone}" stroke-width="${INK.landmarkMinor}" stroke-linecap="round"/>`);
+  }
+
+  // ── 14c · ⭐⭐⭐ REG-BRIDGE · THE FORDS (§637.2's mirror law, ODQ §641.5).
+  //
+  // ⛔ SEVENTEEN FORD RECORDS HAVE EXISTED SINCE `routes.js` WAS WRITTEN AND NOT ONE HAS EVER
+  //    BEEN DRAWN. This is the pass that ends that. Armed-only: absent `fabric.fordRegister` the
+  //    loop does not run and the leaf is byte-identical.
+  //
+  // ⭐ THE GLYPH IS PLAN-VIEW AND MINIMAL-INK, and it is the OPPOSITE MARK to the deck above by
+  //    design — that opposition is the legibility gift §637.2 names. A deck is a SOLID with two
+  //    hard parapets; a ford is an ABSENCE with two DASHED margins and a stippled bed. A reader
+  //    who sees a solid at a pinch reads BRIDGE; dashes at a broad reach read FORD, with no
+  //    legend needed.
+  // ⚠ ANCHORING, STATED HONESTLY: the dashed-margin idiom is the plate convention this file
+  //    already uses for a bound that is crossed rather than built (the sanctuary bound, the wall
+  //    ditch, the market's fossil outline), and the transverse bed ticks are `pierDeckEdge`'s
+  //    pile row turned across the way. There is NO ford plate in the detail register — so this
+  //    is reported **THIN** rather than cited, exactly as V-QUAY's header requires of a member
+  //    with no anchor, and it is flagged for the chair's taste gate.
+  const FORDS = (fabric.fordRegister && fabric.fordRegister.fords) || [];
+  if (FORDS.length) {
+    let margins = '', bed = '';
+    for (const fd of FORDS) {
+      const dx = cosI(fd.along), dy = sinI(fd.along);
+      const nx = -dy, ny = dx;
+      const half = (fd.wet || fd.span) * 0.5 + fd.width * 0.35;   // out onto both banks
+      const w2 = fd.width * 0.5;
+      for (const side of [-1, 1]) {
+        const ax = fd.x - dx * half + nx * w2 * side, ay = fd.y - dy * half + ny * w2 * side;
+        const bx = fd.x + dx * half + nx * w2 * side, by = fd.y + dy * half + ny * w2 * side;
+        margins += `M${r2(ax)} ${r2(ay)}L${r2(bx)} ${r2(by)}`;
+        prims.n++;
+      }
+      // the bed: three bars across the way, inside the wet part only
+      for (const t of [-0.28, 0, 0.28]) {
+        const px = fd.x + dx * (fd.wet || fd.span) * t, py = fd.y + dy * (fd.wet || fd.span) * t;
+        bed += `M${r2(px - nx * w2 * 0.72)} ${r2(py - ny * w2 * 0.72)}`
+          + `L${r2(px + nx * w2 * 0.72)} ${r2(py + ny * w2 * 0.72)}`;
+        prims.n++;
+      }
+    }
+    let g = '';
+    if (margins) {
+      g += `<path d="${margins}" fill="none" stroke="${inkTone}" stroke-width="${INK.landmarkMinor}"`
+        + ` stroke-dasharray="${r2(INK.detail * 4)} ${r2(INK.detail * 3)}" stroke-linecap="round" opacity="0.85"/>`;
+    }
+    if (bed) {
+      g += `<path d="${bed}" fill="none" stroke="${waterBank}" stroke-width="${INK.detail}" stroke-linecap="round" opacity="0.8"/>`;
+    }
+    // ⭐ ITS OWN GROUP ID, because a group id is a CLASSIFICATION in this corpus and not
+    //   tidiness — instrument 4 reads salience by group, and ink filed at the SVG root falls to
+    //   the classifier's chrome rule. (⚠ The BRIDGES above are still at root and therefore still
+    //   mis-filed; that is a REG-3-owned classification question, recorded rather than grabbed.)
+    if (g) push(`<g id="fords">${g}</g>`);
   }
 
   // ── 15 · WALLS — the heaviest ink on the page, tower dots, gate BREAKS and piers.

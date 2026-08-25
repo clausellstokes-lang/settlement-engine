@@ -45,18 +45,29 @@ const axisSep = (a, b) => { const d = Math.abs(norm180(a) - norm180(b)); return 
  * bridge. The naive form made a 19-bridge census take longer than the whole test suite.
  */
 function wetProbe(rel) {
-  const CELL = Math.max(8, rel.width * 2);
+  /**
+   * ⭐⭐ REG-BRIDGE · THE PROBE READS THE **PROFILE** WHERE THERE IS ONE. This function's own
+   * header declares the wet set to be *"exactly what `renderFolio.mjs` strokes"* — so the moment
+   * the drawing tapers and this does not, every `shortestCrossing`, every deviation and every
+   * `excess` in the census is measured against a channel that is not on the page. ⛔ The bucket
+   * grid must be sized and grown from the **MAX** local half or its exactness fails silently at
+   * the wide reaches; the per-segment half is the mean of the segment's two ends, which is the
+   * same spelling `claimSegments` uses so the instrument and the ground law agree.
+   */
+  const prof = rel.widthProfile && rel.widthProfile.w.length === rel.line.length ? rel.widthProfile : null;
+  const maxW = prof ? prof.max : rel.width;
+  const halfOf = (i) => (prof ? (prof.w[i] + prof.w[i + 1]) / 4 : rel.width / 2);
+  const CELL = Math.max(8, maxW * 2);
   /** @type {Map<string, number[]>} */ const grid = new Map();
   const put = (gx, gy, i) => { const k = `${gx}|${gy}`; const b = grid.get(k); if (b) b.push(i); else grid.set(k, [i]); };
   for (let i = 0; i + 1 < rel.line.length; i++) {
     const [ax, ay] = rel.line[i], [bx, by] = rel.line[i + 1];
-    const x0 = Math.min(ax, bx) - rel.width, x1 = Math.max(ax, bx) + rel.width;
-    const y0 = Math.min(ay, by) - rel.width, y1 = Math.max(ay, by) + rel.width;
+    const x0 = Math.min(ax, bx) - maxW, x1 = Math.max(ax, bx) + maxW;
+    const y0 = Math.min(ay, by) - maxW, y1 = Math.max(ay, by) + maxW;
     for (let gx = Math.floor(x0 / CELL); gx <= Math.floor(x1 / CELL); gx++) {
       for (let gy = Math.floor(y0 / CELL); gy <= Math.floor(y1 / CELL); gy++) put(gx, gy, i);
     }
   }
-  const half = rel.width / 2, half2 = half * half;
   return (x, y) => {
     const b = grid.get(`${Math.floor(x / CELL)}|${Math.floor(y / CELL)}`);
     if (!b) return false;
@@ -65,7 +76,8 @@ function wetProbe(rel) {
       const dx = bx - ax, dy = by - ay, L2 = dx * dx + dy * dy;
       const t = L2 ? Math.max(0, Math.min(1, ((x - ax) * dx + (y - ay) * dy) / L2)) : 0;
       const ex = x - (ax + dx * t), ey = y - (ay + dy * t);
-      if (ex * ex + ey * ey <= half2) return true;
+      const h = halfOf(i);
+      if (ex * ex + ey * ey <= h * h) return true;
     }
     return false;
   };
@@ -78,7 +90,12 @@ function wetProbe(rel) {
 export function shortestCrossing(rel, x, y, stepDeg = 0.25) {
   const wet = rel.__wet || (rel.__wet = wetProbe(rel));
   if (!wet(x, y)) return null;
-  const reach = rel.width * 12, step = Math.max(0.05, rel.width / 60);
+  // ⛔ THE RADIAL STEP TAKES THE **MIN** OF THE PROFILE. The docstring below records that this
+  //    step sets the instrument's ANGULAR resolution; a step scaled by a nominal width is too
+  //    coarse at the narrows, which is precisely where the siting law now puts the bridges.
+  const minW = rel.widthProfile ? rel.widthProfile.min : rel.width;
+  const reach = (rel.widthProfile ? rel.widthProfile.max : rel.width) * 12;
+  const step = Math.max(0.05, minW / 60);
   /**
    * ⛔⛔ THE RADIAL STEP, NOT THE ANGULAR STEP, SETS THIS INSTRUMENT'S ANGULAR RESOLUTION — and
    * getting that wrong INVERTED the census. Crossing length across a channel goes as
@@ -122,6 +139,41 @@ export function shortestCrossing(rel, x, y, stepDeg = 0.25) {
     if (len != null && len < best.len) best = { len, deg: aa };
   }
   return best;
+}
+
+/**
+ * ⭐⭐ THE CROSSING ALONG ONE GIVEN BEARING, off the SAME wet set `shortestCrossing` scans.
+ *
+ * ⛔⛔ IT IS EXPORTED BECAUSE A SECOND SPELLING OF "THE WATER" PRODUCED A PHANTOM DEFECT, and the
+ * number was plausible enough to have been believed. REG-BRIDGE's deck census first measured
+ * "the water actually crossed" with `isInWater` — the LAW's predicate, `d < 0.62 w` — against a
+ * shortest crossing measured on the DRAWN set, `d <= 0.5 w`, and every deck in the corpus scored
+ * `excess = 1.22`, uniformly, including decks whose deviation from the normal was 0.0°. The
+ * ratio was not a defect: it is 0.62 / 0.5 = 1.24, the two predicates' own quotient.
+ * ⭐ THE CLASS: **a ratio between two measurements taken against two different definitions of
+ * the same object is a constant wearing a finding's clothes** — and it convicts uniformly, which
+ * is exactly what a real corpus-wide defect looks like.
+ */
+export function crossingOnBearing(rel, x, y, deg) {
+  const wet = rel.__wet || (rel.__wet = wetProbe(rel));
+  if (!wet(x, y)) return null;
+  const minW = rel.widthProfile ? rel.widthProfile.min : rel.width;
+  const reach = (rel.widthProfile ? rel.widthProfile.max : rel.width) * 12;
+  const step = Math.max(0.05, minW / 60);
+  const r = (deg * Math.PI) / 180, ux = Math.cos(r), uy = Math.sin(r);
+  const edge = (sx, sy) => {
+    let lo = 0, hi = step;
+    while (hi < reach && wet(x + sx * hi, y + sy * hi)) { lo = hi; hi += step; }
+    if (hi >= reach) return null;
+    for (let i = 0; i < 40 && hi - lo > 1e-4; i++) {
+      const m = (lo + hi) / 2;
+      if (wet(x + sx * m, y + sy * m)) lo = m; else hi = m;
+    }
+    return lo;
+  };
+  const f = edge(ux, uy); if (f == null) return null;
+  const b = edge(-ux, -uy); if (b == null) return null;
+  return f + b;
 }
 
 export function census(fabricOptions = {}, mutate = null) {

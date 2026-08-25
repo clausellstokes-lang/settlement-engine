@@ -27,7 +27,7 @@ import {
   segSegClosest, claimSegments, claimIndex, deepestPenetration, latticeAreaShare, bbox as polyBox,
 } from './reservedGround.js';
 import { compareKeys } from './lineage.js';
-import { isInWater } from './waterMode.js';
+import { isInWater, stationAt } from './waterMode.js';
 import { ownerAt } from './organismFields.js';
 import { repairAccess, accessCensus, circuitPermeability, collectAccessBodies, streetSeeds } from './accessLaw.js';
 import { circuitClaims } from './wallCircuit.js';
@@ -151,7 +151,11 @@ export function waterRightOfWay(args) {
   // which is wider than `half`, and the old `wet` test unioned the two. Named once here rather
   // than left implicit in a boolean OR, so the area-true arm can be given the SAME threshold —
   // comparing two predicates means varying ONE thing.
+  // ⭐⭐ REG-BRIDGE · THE REACH IS LOCAL WHERE THE RIVER TAPERS, and it must stay the SAME
+  // threshold `isInWater` uses or the census and the law disagree about the same channel —
+  // which is the MF-W0 class this constant was named for in the first place.
   const reach = (rel.width || 0) * 0.62;
+  const reachAt = rel.widthProfile ? (x, y) => stationAt(rel, x, y).w * 0.62 : null;
   const decks = bridges || [];
   const gates = waterGates || [];
   /** @type {Array<any>} */ const violations = [];
@@ -231,7 +235,12 @@ export function waterRightOfWay(args) {
   // feature-law freeze (§234.4) is in force, and MF-B7's §202 flood is the standing warning
   // that a census blocking on more than its law names manufactures false positives the next
   // lane will "cure". The number is measured, recorded, and left for wave nine to rule on.
-  const wetSegs = claimSegments([{ line: rel.line, width: (rel.width || 0) * 1.24, key: 'water.reach' }]);
+  // ⭐ REG-BRIDGE · the census's own claim band is 2 x 0.62, so it takes the profile scaled by
+  //   the same factor — one reading of the channel, two consumers, never two spellings.
+  const wetSegs = claimSegments([{
+    line: rel.line, width: (rel.width || 0) * 1.24, key: 'water.reach',
+    ...(rel.widthProfile ? { widths: rel.widthProfile.w.map((w) => w * 1.24) } : {}),
+  }]);
   const wetIdx = claimIndex(wetSegs);
   for (const lm of (landmarks || [])) {
     for (let i = 0; i < (lm.solids || []).length; i++) {
@@ -244,10 +253,15 @@ export function waterRightOfWay(args) {
       // test below is legitimate because `latticeAreaShare` weights it BY AREA at cell
       // centres — the area-truth comes from the lattice, never from the sample.
       const bb = polyBox(poly);
-      const pitch = Math.max(0.25, Math.min((rel.width || 1) * 0.5,
+      // ⛔ A SAMPLING PITCH TAKES THE **MIN** OF THE PROFILE: a pitch set by the widest reach
+      //    is too coarse to resolve the narrowest, and the whole point of a lattice share is
+      //    that a body's dry ground cannot hide between samples.
+      const pitchW = rel.widthProfile ? rel.widthProfile.min : (rel.width || 1);
+      const pitch = Math.max(0.25, Math.min(pitchW * 0.5,
         Math.max(bb.x1 - bb.x0, bb.y1 - bb.y0) / 4));
       const dry = latticeAreaShare(poly, pitch,
-        (x, y) => (distToPolyline(x, y, rel.line) < reach || isInWater(rel, x, y) ? 1 : 0), 0);
+        (x, y) => (distToPolyline(x, y, rel.line) < (reachAt ? reachAt(x, y) : reach)
+          || isInWater(rel, x, y) ? 1 : 0), 0);
       const rooted = dry.share > 0;
       // ⛔⛔ §262.2(d) · THE FALLBACK THAT NEVER FELL BACK. This read
       // `String(lm.archetype || lm.anchorKey || '')`, and **every landmark has an archetype** —

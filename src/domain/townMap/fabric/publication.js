@@ -50,11 +50,21 @@ import { contentHash } from './wallCircuit.js';
 /** Verified-once, per published value — the `wallCircuit` idiom, one surface out. */
 const VERIFIED = new WeakSet();
 
-/** The water relation's identity: its mode, kind, width, bank side, centreline and body. */
+/** The water relation's identity: its mode, kind, width, bank side, centreline and body.
+ *
+ * ⭐⭐ REG-BRIDGE · AND ITS WIDTH **PROFILE**, WHERE IT HAS ONE. A governed surface that
+ * digested a tapering river as one nominal scalar would report a mutated profile as CLEAN —
+ * the precise blindness `governSurface` exists to refuse. ⛔ THE TERM IS APPENDED ONLY WHEN A
+ * PROFILE EXISTS, so an unarmed relation serializes to the same string it always did and
+ * `townMapD1Foundations`' 6-dp pin is untouched. Every width is quantized through the same
+ * `q6` the scalar uses — a digest with its own rounding is a second spelling. */
 export function waterText(r) {
   if (!r) return '∅';
-  return [r.mode, r.kind, q6(r.width || 0), String(r.bankSide),
+  const base = [r.mode, r.kind, q6(r.width || 0), String(r.bankSide),
     topoText(r.line || []), topoText(r.body || [])].join('#');
+  const p = r.widthProfile;
+  if (!p || !Array.isArray(p.w)) return base;
+  return `${base}#w${p.w.length}:${p.w.map((x) => q6(x)).join(',')}`;
 }
 
 /**

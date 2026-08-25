@@ -65,6 +65,7 @@ import { shoreContour } from './relief.js';
  */
 export function deriveWatercourse(a) {
   const { modelWater, sub, seeding, builtRadius, meanderKey } = a;
+  const withProfile = a.withProfile === true;
   const seed = seeding.seed, variant = seeding.variant;
   // ⭐ §5 W1 EXIT 6 · THE WORKED WATERFRONT. The settlement's own seat and reach, so the
   // detail scale of both the sea and the channel can be damped where the town works them.
@@ -90,7 +91,16 @@ export function deriveWatercourse(a) {
     const line = trace.length >= 4
       ? meanderChannel(sub, trace, meanderKey, { width, worked })
       : meanderChannel(sub, (modelWater.path || []).map((p) => [p[0], p[1]]), meanderKey, { width, worked });
-    return { kind: 'river', line, width, worked, workedReach: line.workedReach || null };
+    // ⭐⭐⭐ REG-BRIDGE · THE WIDTH PROFILE (ODQ §641.5). See `deriveWidthProfile` for why it is a
+    // READING of the ground rather than a minted taper, and why the channel's own GEOMETRY is
+    // computed first and never fed the profile: `meanderChannel` takes `width` to set its
+    // wavelength and amplitude, so a profile handed to it would move every meander on every
+    // river leaf and make the taper unattributable. The line is fixed; the profile dresses it.
+    const widthProfile = withProfile ? deriveWidthProfile(sub, line, width) : null;
+    return {
+      kind: 'river', line, width, worked, workedReach: line.workedReach || null,
+      ...(widthProfile ? { widthProfile } : {}),
+    };
   }
   if (modelWater && modelWater.kind === 'coast') {
     // ⭐⭐ THE SEA IS A CONTOUR OF THE GROUND, NOT A RULED EDGE (§9.5b, relief.js's header).
@@ -129,6 +139,265 @@ export function deriveWatercourse(a) {
     return { kind: 'coast', line: chaikin(pts, 3, false), body: null, width: 10 };
   }
   return null;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════════════════
+ * ⭐⭐⭐ REG-BRIDGE · THE RIVER WIDTH PROFILE (owner §637 / chair §641.5)
+ *
+ * ⛔⛔ WHAT THIS EXISTS TO END, MEASURED BY REG-5: **the river had *A* width, not a width
+ * profile.** One scalar per leaf (`7 + builtRadius * 0.030`), a constant-width stroke, and
+ * therefore `span/narrows = 1.000–1.059 for every bridge in the corpus` — **every point of the
+ * channel was a local narrows, so L-REG-32's siting law was not measurable at all.** A
+ * constant-width river is also a generator's tell: the reference plates taper, and so does
+ * every river that has ever existed.
+ *
+ * ⭐⭐ IT IS A READING OF THE GROUND, NOT A MINTED TAPER — the same doctrine `waterBearing`
+ * states two functions down, and for the same reason. A taper minted from a hash would be a
+ * seed-permanent world fact under THE PROMISE; a taper READ from the heightfield the river
+ * already drains cannot contradict a later truth, because if the ground changes the reading
+ * changes with it. **NOTHING HERE HASHES.** There is no `fabricRng`, no `hashUnit` and no new
+ * random namespace — the variation is entirely the valley's own, which is why this derivation
+ * owes neither of the two key registries (`stageManifest` S4 namespaces / the walker's
+ * hand-minted inventory).
+ *
+ * THE THREE TERMS, each a named argument rather than a fudge factor:
+ *
+ *   ACCUMULATION  a river carries more water downstream than up, so it is wider downstream.
+ *                 The substrate's own `flow` field IS that discharge. ⚠ THE RAW SAMPLE IS NOT
+ *                 MONOTONE — MEASURED, it rises head→mouth on only 56–67 % of sampled steps,
+ *                 because the DRAWN channel is the meandered line and wanders off the D8 trunk
+ *                 the accumulation was computed on, and because both tails are run out past the
+ *                 basin to the frame edge. **Discharge physically never decreases downstream**,
+ *                 so the taper reads the RUNNING MAXIMUM head→mouth — the envelope the physics
+ *                 guarantees — and not the noisy sample. `drainageTrace` returns headwater →
+ *                 mouth in reading order, which is what makes "downstream" a fact here and not
+ *                 a convention.
+ *   CONFINEMENT   where the ground rises on both banks the valley pinches and the channel is
+ *                 narrow; where it opens the river spreads. **This is the term that MAKES the
+ *                 narrows a bridge can be sited at**, and it puts them where high ground is —
+ *                 which is where a real crossing and a real crossing-town went.
+ *   BEND          the outside of a meander is the cut bank; a bend is wider than a straight.
+ *                 Read as the turn of the tangent across a ~1.5-width arc window.
+ *
+ * ⚠⚠ THE MEAN IS PRESERVED, AND THAT IS A DELIBERATE CHOICE. The profile is normalized so its
+ * arc-weighted mean equals the nominal width exactly. A profile that also INFLATED the river
+ * would move the water claim's area, the ground law's refusals, the field clip and the op/byte
+ * spend — and the declared shift would then be "the river got bigger" tangled with "the river
+ * got a shape". Preserving the mean makes this mint a REDISTRIBUTION, and every figure that
+ * moves, moves because of the shape.
+ *
+ * ⚠ THE CHANNEL'S GEOMETRY IS COMPUTED FIRST AND IS NEVER FED THE PROFILE. `meanderChannel`
+ * takes `width` to set its wavelength and amplitude; handing it a profile would move every
+ * meander on every river leaf and make the taper unattributable.
+ *
+ * PURITY: `+ − × ÷ √` and a numeric sort. No Date, no Math.random, no runtime trig, no hash.
+ * ═══════════════════════════════════════════════════════════════════════════════════════════ */
+
+/**
+ * ⭐ THE TUNING SURFACE — PROPOSED-WITH-RATIONALE, the chair signs. Every row is dimensionless
+ * (a fraction of the nominal width or of a range-normalized signal), so the table does not
+ * change meaning between a thorp's brook and a metropolis's trunk river.
+ *
+ *  taper   the accumulation amplitude, ± about the mean. 0.34 makes the mouth ~2× the head
+ *          before the other terms — the visible half of the mint, and the half the reference
+ *          grammar (Watabou/FTG) shows most plainly.
+ *  pinch   how far a fully confined valley narrows the channel. Bounded well under `taper` so a
+ *          narrows is a LOCAL event on a downstream trend, not a competing trend of its own.
+ *  bend    the cut-bank widening. Smallest of the three: a bend is a detail, not a régime.
+ *  window  the arc window, in nominal widths, over which the tangent, the curvature and the
+ *          bank samples are taken. Below ~1 width it reads polyline sampling noise.
+ *  smooth  passes of a 1-2-1 kernel along arclength. A width that jitters vertex-to-vertex is
+ *          noise wearing a river's clothes.
+ *  lo/hi   hard bounds as a fraction of the nominal. `lo` keeps a headwater drawable at page
+ *          register; `hi` keeps a mouth from swallowing its own banks.
+ * ⚠ UNSOAKED; rides the tuning signature.
+ */
+export const RIVER_PROFILE = Object.freeze({
+  taper: 0.34,
+  pinch: 0.22,
+  bend: 0.16,
+  window: 1.5,
+  smooth: 3,
+  lo: 0.72,
+  hi: 1.55,
+});
+
+/** A robust 0..1 normalization: the 5th–95th percentile range, clamped. A single outlier
+ *  vertex must not squash a whole leaf's signal into one bucket. */
+function rangeNorm(v) {
+  const s = v.slice().sort((a, b) => a - b);
+  const at = (p) => s[Math.min(s.length - 1, Math.max(0, Math.round(p * (s.length - 1))))];
+  const lo = at(0.05), hi = at(0.95);
+  const span = hi - lo;
+  if (!(span > 1e-12)) return v.map(() => 0.5);      // a dead signal contributes nothing
+  return v.map((x) => {
+    const t = (x - lo) / span;
+    return t < 0 ? 0 : t > 1 ? 1 : t;
+  });
+}
+
+/**
+ * THE PROFILE ITSELF. Returns per-vertex widths aligned to `line`, with the arclength they sit
+ * on and the leaf's own min/mean/max — the figures the liveness census reads.
+ *
+ * @param {import('./substrate.js').Substrate} sub
+ * @param {Array<[number,number]>} line   the DRAWN channel, headwater → mouth
+ * @param {number} W0                     the nominal width this leaf would have had
+ * @returns {{ w:number[], s:number[], min:number, mean:number, max:number, ratio:number,
+ *   nominal:number, reason:string } | null}
+ */
+export function deriveWidthProfile(sub, line, W0) {
+  const n = Array.isArray(line) ? line.length : 0;
+  if (!sub || n < 8 || !(W0 > 0)) return null;
+
+  // ── arclength, the profile's own parameter (the meander's is the same one).
+  const s = [0];
+  for (let i = 1; i < n; i++) {
+    const dx = line[i][0] - line[i - 1][0], dy = line[i][1] - line[i - 1][1];
+    s.push(s[i - 1] + Math.sqrt(dx * dx + dy * dy));
+  }
+  const total = s[n - 1];
+  if (!(total > W0)) return null;
+
+  const win = W0 * RIVER_PROFILE.window;
+  const acc = new Array(n), conf = new Array(n), curv = new Array(n);
+  for (let i = 0; i < n; i++) {
+    // the window's two shoulders, taken on ARCLENGTH so a dense stretch and a sparse one get
+    // the same physical window
+    let a = i, b = i;
+    while (a > 0 && s[i] - s[a] < win) a--;
+    while (b < n - 1 && s[b] - s[i] < win) b++;
+    const px = line[i][0], py = line[i][1];
+
+    acc[i] = sampleAt(sub, sub.flow, px, py);
+
+    // the window's chord is the local tangent; its perpendicular is the bank direction
+    let tx = line[b][0] - line[a][0], ty = line[b][1] - line[a][1];
+    const tl = Math.sqrt(tx * tx + ty * ty);
+    if (tl > 1e-9) { tx /= tl; ty /= tl; } else { tx = 1; ty = 0; }
+    const nx = -ty, ny = tx;
+    const h0 = sampleAt(sub, sub.height, px, py);
+    const hA = sampleAt(sub, sub.height, px + nx * win, py + ny * win);
+    const hB = sampleAt(sub, sub.height, px - nx * win, py - ny * win);
+    conf[i] = ((hA - h0) + (hB - h0)) / 2;
+
+    // the turn of the tangent across the window — 0 straight, 2 at a reversal
+    let ux = px - line[a][0], uy = py - line[a][1];
+    let vx = line[b][0] - px, vy = line[b][1] - py;
+    const ul = Math.sqrt(ux * ux + uy * uy) || 1, vl = Math.sqrt(vx * vx + vy * vy) || 1;
+    ux /= ul; uy /= ul; vx /= vl; vy /= vl;
+    let dot = ux * vx + uy * vy;
+    if (dot > 1) dot = 1; else if (dot < -1) dot = -1;
+    curv[i] = 1 - dot;
+  }
+
+  // ⭐ THE ACCUMULATION ENVELOPE. Discharge never falls downstream; the sample does, because the
+  // drawn channel leaves the trunk the flow model was computed on. The running maximum is the
+  // physics, and it is what a taper is entitled to read.
+  for (let i = 1; i < n; i++) if (acc[i] < acc[i - 1]) acc[i] = acc[i - 1];
+
+  const A = rangeNorm(acc), C = rangeNorm(conf), K = rangeNorm(curv);
+  const f = new Array(n);
+  for (let i = 0; i < n; i++) {
+    f[i] = (1 + RIVER_PROFILE.taper * (A[i] - 0.5) * 2)
+      * (1 - RIVER_PROFILE.pinch * C[i])
+      * (1 + RIVER_PROFILE.bend * K[i]);
+  }
+
+  // ── smooth along arclength: 1-2-1, ends held. A jittering width is noise, not a river.
+  for (let p = 0; p < RIVER_PROFILE.smooth; p++) {
+    const g = f.slice();
+    for (let i = 1; i < n - 1; i++) f[i] = (g[i - 1] + 2 * g[i] + g[i + 1]) / 4;
+  }
+
+  // ── arc-weighted mean → 1, then the hard bounds. Two passes, because clamping moves the mean
+  //    and a normalization that is not re-checked is a bound nobody enforced.
+  const wgt = new Array(n);
+  for (let i = 0; i < n; i++) {
+    const back = i > 0 ? s[i] - s[i - 1] : 0;
+    const fwd = i < n - 1 ? s[i + 1] - s[i] : 0;
+    wgt[i] = (back + fwd) / 2;
+  }
+  const wsum = wgt.reduce((t, x) => t + x, 0) || 1;
+  for (let pass = 0; pass < 2; pass++) {
+    let m = 0;
+    for (let i = 0; i < n; i++) m += f[i] * wgt[i];
+    m /= wsum;
+    if (!(m > 1e-9)) break;
+    for (let i = 0; i < n; i++) {
+      let x = f[i] / m;
+      if (x < RIVER_PROFILE.lo) x = RIVER_PROFILE.lo;
+      else if (x > RIVER_PROFILE.hi) x = RIVER_PROFILE.hi;
+      f[i] = x;
+    }
+  }
+
+  const w = new Array(n);
+  let min = Infinity, max = -Infinity, mean = 0;
+  for (let i = 0; i < n; i++) {
+    w[i] = W0 * f[i];
+    if (w[i] < min) min = w[i];
+    if (w[i] > max) max = w[i];
+    mean += w[i] * wgt[i];
+  }
+  mean /= wsum;
+  return {
+    w, s, min, mean, max,
+    ratio: max / min,
+    nominal: W0,
+    reason: `river width profile: ${min.toFixed(2)} … ${max.toFixed(2)} about a nominal ${W0.toFixed(2)}`
+      + ` (${(max / min).toFixed(3)}× head-to-mouth spread, arc-mean ${mean.toFixed(2)});`
+      + ' READ from the substrate — accumulation envelope, valley confinement, meander bend —'
+      + ' and never hashed, so it cannot become a seed-permanent world fact',
+  };
+}
+
+/**
+ * ⭐⭐ THE ONE LOCAL-WIDTH SPELLING. Every consumer that asks a question ABOUT A PLACE on the
+ * water — is this point wet, how far does the deck reach, how wide is the claim here — asks it
+ * here, and every consumer that asks a LEAF-SCALE question (how far apart may two bridges
+ * stand, how big a grid cell) keeps reading `rel.width`, which is unchanged and still nominal.
+ *
+ * ⛔ THE DISTANCE AND THE WIDTH COME FROM ONE WALK. `isInWater` runs hundreds of thousands of
+ * times on a river leaf; asking for the nearest station twice would double the fabric's single
+ * hottest predicate.
+ *
+ * @param {any} rel a water relationship (or a raw watercourse — both carry `line`/`width`)
+ * @param {number} x @param {number} y
+ * @returns {{ d:number, w:number }} distance to the centreline, and the LOCAL width there
+ */
+export function stationAt(rel, x, y) {
+  const line = rel && rel.line;
+  const W0 = (rel && rel.width) || 0;
+  if (!line || line.length < 2) return { d: Infinity, w: W0 };
+  const prof = rel.widthProfile;
+  let best = Infinity, bi = 0, bt = 0;
+  for (let i = 0; i + 1 < line.length; i++) {
+    const ax = line[i][0], ay = line[i][1];
+    const dx = line[i + 1][0] - ax, dy = line[i + 1][1] - ay;
+    const L = dx * dx + dy * dy;
+    let t = L > 0 ? ((x - ax) * dx + (y - ay) * dy) / L : 0;
+    if (t < 0) t = 0; else if (t > 1) t = 1;
+    const ex = x - (ax + dx * t), ey = y - (ay + dy * t);
+    const d = ex * ex + ey * ey;
+    if (d < best) { best = d; bi = i; bt = t; }
+  }
+  const d = Math.sqrt(best);
+  if (!prof || !prof.w || prof.w.length !== line.length) return { d, w: W0 };
+  return { d, w: prof.w[bi] + (prof.w[bi + 1] - prof.w[bi]) * bt };
+}
+
+/** The river's LOCAL width at (x,y) — the nominal width where no profile has been derived. */
+export function widthAt(rel, x, y) {
+  if (!rel || !rel.widthProfile) return (rel && rel.width) || 0;
+  return stationAt(rel, x, y).w;
+}
+
+/** The local width at a VERTEX INDEX of the channel, for consumers walking the line itself. */
+export function widthAtIndex(rel, i) {
+  const prof = rel && rel.widthProfile;
+  if (!prof || !prof.w || i < 0 || i >= prof.w.length) return (rel && rel.width) || 0;
+  return prof.w[i];
 }
 
 /**
@@ -333,6 +602,12 @@ export function deriveWaterMode(water, nucleus, settlement, sub, seeding) {
     detail: water.detail || null,
     worked: water.worked || null,
     workedReach: water.workedReach || null,
+    // ⭐⭐ REG-BRIDGE · THE PROFILE RIDES THE WHITELIST. The header above this object states the
+    // class in terms — *a rebuild-into-a-new-object is a whitelist, and a row nobody added to
+    // the whitelist reads as a feature that was never built* — and the width profile is exactly
+    // the shape of row that got dropped last time. ⛔ ABSENT, never `null`-with-a-key, so an
+    // unarmed relationship is the same object it always was.
+    ...(water.widthProfile ? { widthProfile: water.widthProfile } : {}),
   } : { coarse: null, scales: null, detail: null, worked: null, workedReach: null };
   const population = Number.isFinite(settlement?.population) ? Number(settlement.population) : 0;
   const access = String(settlement?.config?.tradeRouteAccess || '').toLowerCase();
@@ -530,7 +805,15 @@ export function isInWater(rel, x, y) {
     }
     return isFarBankRaw(rel, x, y);
   }
-  return distToPolyline(x, y, rel.line) < rel.width * 0.62;
+  // ⭐⭐ REG-BRIDGE · THE WET TEST IS ASKED AT THE LOCAL WIDTH once a profile exists.
+  // ⛔ THE UNARMED SPELLING IS LEFT EXACTLY AS IT WAS, on purpose. `stationAt` computes the same
+  // distance by the same formula, but "the same formula" is not "the same bits" once an
+  // accumulation order differs, and this predicate decides where every parcel in the corpus may
+  // stand. Branching on the profile's PRESENCE makes dormancy true by construction rather than
+  // true by a float comparison nobody can inspect.
+  if (!rel.widthProfile) return distToPolyline(x, y, rel.line) < rel.width * 0.62;
+  const st = stationAt(rel, x, y);
+  return st.d < st.w * 0.62;
 }
 
 /** Even-odd point-in-ring, local (the sea body is emphatically not convex). */

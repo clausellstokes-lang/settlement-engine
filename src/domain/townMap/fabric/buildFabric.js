@@ -48,7 +48,7 @@ import { composeInstitution, composeFarmstead, roofFormFor, typeBody, aspectOf }
 import { deriveMarketRegister } from './marketRegister.js';
 import { deriveFaubourgOrigins } from './faubourgOrigin.js';
 import { applyMinFootprint, minFootprintBodies } from './minFootprint.js';
-import { waterClaims, deriveBridges, moorWaterBound, deriveWaterGates, clipFieldsToWater, deriveQuayRegister } from './waterWorks.js';
+import { waterClaims, deriveBridges, moorWaterBound, deriveWaterGates, clipFieldsToWater, deriveQuayRegister, deriveFords } from './waterWorks.js';
 import { tenurePattern, seatWorksiteHabitation, seatKeepers, buildFaubourgs, GLACIS_THRESHOLD, faubourgSeriousness } from './habitation.js';
 import { reserveCommons, enclosureRead, inCommons } from './commons.js';
 import { buildRelief, waterStrokes } from './relief.js';
@@ -224,6 +224,10 @@ export function buildFabric(settlement, model, options = {}) {
     modelWater: model && model.frame ? model.frame.water : null,
     sub, seeding, builtRadius: scale.builtRadius, meanderKey: fork('meander'),
     worked: seat,
+    // ⭐⭐⭐ REG-BRIDGE · THE RIVER WIDTH PROFILE (ODQ §641.5), armed-only. Absent, the
+    // watercourse is the object it has always been and the whole corpus is byte-identical —
+    // the profile is spread in conditionally, never set to null, so no key's position moves.
+    withProfile: options.riverProfile === true,
   });
 
   // ── STAGE 0b · THE REGIONAL ROUTE SKELETON (§15.2) ─────────────────────────
@@ -1011,8 +1015,23 @@ export function buildFabric(settlement, model, options = {}) {
   // FINAL circuit — see waterWorks.js for why the water had to become a claim first.
   const bridges2 = deriveBridges({
     rel: waterRel, channels: streetsWalled, frontage: packed.frontage,
+    // ⭐⭐⭐ REG-BRIDGE (ODQ §641.5 / A9) · L-REG-31/32, armed-only.
+    deckLaw: options.deckLaw === true,
+    // ⭐ J-REG5-BR-1, ratified §641.2: the corridor half-length is 3 × the MEDIAN BLOCK
+    //   DIMENSION, and "dimension" is √area — the spelling that reproduces REG-5's own
+    //   26.80 / 28.43 / 29.81 to the centimetre. A bbox side gives 37.8 and is a different law.
+    corridor: options.deckLaw === true ? medianBlockDimension(packed.blocks) * 3 : 0,
   });
   const waterGates = deriveWaterGates({ walls, rel: waterRel, seeding, extent: scale.builtRadius });
+  // ⭐⭐⭐ REG-BRIDGE · THE FORD REGISTER (§637.2's mirror), armed-only and derived HERE — after
+  //    the decks, because a ford is refused wherever a bridge already carries the crossing, and
+  //    after the street web, because a ford's glyph takes the ROAD's width and bearing.
+  const fordRegister = options.fordRegister === true
+    ? deriveFords({
+      rel: waterRel, crossings: routes.crossings, channels: streetsWalled,
+      bridges: bridges2.bridges, frontage: packed.frontage,
+    })
+    : null;
   // ⭐⭐ V-QUAY (ODQ §636.2) · ARMED-ONLY, and derived HERE — after `enforceGround` has decided
   //    which quays still have piers. Furnishing a quay the ground law ate would hang bollards
   //    in the water beside an absent shed, which is the dress leg papering over the geometry.
@@ -1677,6 +1696,9 @@ export function buildFabric(settlement, model, options = {}) {
     // appended at the END so no existing key's published position moves.
     ...(marketRegister ? { marketRegister } : {}),
     ...(quayRegister ? { quayRegister } : {}),
+    // ⭐⭐⭐ REG-BRIDGE · the drawn fords, published the way every armed artifact is: ABSENT
+    // (never empty) when the arm is off, appended at the END so no existing key's position moves.
+    ...(fordRegister ? { fordRegister } : {}),
     ...(minFootprint ? { minFootprint } : {}),
   }, wallCircuit);
 }
@@ -1690,6 +1712,29 @@ function countBy(list) {
 
 /** Even-odd point-in-ring — the sea body is emphatically not convex. */
 function pointInRing(poly, x, y) { return pointInPolygon(x, y, poly); }
+
+/**
+ * ⭐ REG-BRIDGE · THE STREET WEB'S OWN SCALE, as J-REG5-BR-1 defines it: the median block
+ * DIMENSION, where a block's dimension is √(its area). ⚠ NOT a bbox side and NOT a median
+ * street SEGMENT length — the latter measures 1.23–6.41 units on this corpus, which is polyline
+ * sampling density wearing a street's name, and REG-5 recorded it as a primitive not to use.
+ */
+function medianBlockDimension(blocks) {
+  const dims = [];
+  for (const b of (blocks || [])) {
+    const p = b && b.polygon;
+    if (!p || p.length < 3) continue;
+    let a = 0;
+    for (let i = 0; i < p.length; i++) {
+      const q = p[i], r = p[(i + 1) % p.length];
+      a += q[0] * r[1] - r[0] * q[1];
+    }
+    dims.push(Math.sqrt(Math.abs(a) / 2));
+  }
+  if (!dims.length) return 0;
+  dims.sort((x, y) => x - y);
+  return dims[Math.floor(dims.length / 2)];
+}
 
 /** Sort helper re-exported for consumers that must iterate the fabric deterministically. */
 export { compareKeys };
