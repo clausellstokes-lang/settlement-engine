@@ -316,13 +316,58 @@ export const PLOT_PACKING = Object.freeze({ thorp: 0.143, hamlet: 0.22, village:
  *      cottages "RELIGIOUS QUARTER" is a tier lie.
  * @type {Readonly<Record<string, any>>}
  */
+/**
+ * ⛔⛔ REG-SEAM · **THE `pop` COLUMN IS NOT THIS FILE'S TO CHOOSE — IT IS THE ENGINE'S TABLE,
+ * SPELLED LOCALLY** (ODQ §631.3, R1(a)(ii) adopted; §155.1's banked MF-R1 conviction, "tier
+ * bands match POPULATION_RANGES exactly", already bound).
+ *
+ * ⛔ THE DEFECT, AS MEASURED (TE-SEAM). This column carried town ≤ 8,000 / city ≤ 40,000 /
+ * metropolis ≤ 200,000 against the landed `POPULATION_RANGES`' 5,000 / 25,000 / 100,000, so
+ * `tierForPopulation` and the engine's `popToTier` returned DIFFERENT TIERS for the 18,000
+ * populations in the windows **5,001–8,000** and **25,001–40,000**. Two consequences, and the
+ * second is the one that inverts a charter instrument:
+ *   1. A healthy 6,500-soul CITY was banded as a TOWN by the fabric — town square, blockDepth
+ *      2, town organism band, town accent — while the dossier, the wizard, the compendium and
+ *      the realm map all called it a city.
+ *   2. ⛔ **THE ELEGY FIRED ON HEALTHY SETTLEMENTS.** `deriveHighWater`'s step 1 reads a stored
+ *      tier outranking the derived one as a RECORDED DEMOTION and takes the stored tier's band
+ *      FLOOR as the peak. With the bands forked, an engine-stamped city holding 6,500 souls
+ *      derived as a 'town', so the deriver asserted a peak of 8,001 the settlement NEVER HELD,
+ *      reported `demoted=true` at deficit 0.1876, and handed that deficit to the wear grade,
+ *      to ×0.55 circuit retention and to §12.8's ghost fabric. §161g's elegy exists to honour
+ *      REAL demotions; the seam made it fire on growth.
+ *
+ * ⭐ THE COLUMN IS A MIRROR, AND A MIRROR MAY NOT HOLD ITS OWN OPINION. The fabric deliberately
+ * does NOT import the generation-side `src/data/constants.js` (a render-time projection must
+ * not reach into generation — the same bounded-closure law that made `cartographyTuning`'s
+ * `MULTIPLICITY.POPULATION_SPAN` a local copy), so the values are spelled here and the
+ * EQUIVALENCE IS GUARDED BY TEST instead: `townMapFabricBuildOut.test.js`'s
+ * "§631.3 THE BAND SEAM" arm asserts `tierForPopulation ≡ popToTier` across every boundary and
+ * a 120,000-wide sweep, BOTH WAYS against `POPULATION_RANGES`. ⚠ A future edit to either table
+ * alone reds that arm; that is the whole point of it.
+ *
+ * ⚠ THE ONE DELIBERATE DIFFERENCE, PINNED SO IT CANNOT WIDEN: `thorp.pop[0]` is **1**, not
+ * `POPULATION_RANGES.thorp.min`'s 8. The engine's 8 is the smallest settlement the GENERATOR
+ * emits; this 1 is the floor `bandPosition` interpolates from, and it must stay below the
+ * smallest population the fabric can ever be handed or a 5-soul leaf grades at band position 0.
+ * The two numbers answer different questions and only the CEILINGS are the classifier. The
+ * guard asserts every ceiling and every floor except this one, and pins this one by name.
+ *
+ * ⚠⚠ DECLARED SHIFT (§110.3), one-time, cause stated: same-seed fabric moves for populations in
+ * 5,001–8,000 and 25,001–40,000 (tier morphology corrects, the false demotion dressing
+ * disappears) and a GENUINE demotion's step-1 floor drops from 8,001 to 5,001 (city) and from
+ * 40,001 to 25,001 (metropolis), so a real elegy renders slightly smaller. The metropolis
+ * ceiling of 100,000 replaces 200,000; grading above 100,000 clamps monotonically at
+ * bandPosition 1 — acceptable and declared (§631.3). The wizard's 500,000 custom-population cap
+ * is a UI allowance with a distinct role and is untouched.
+ */
 export const TIER_PROFILE = Object.freeze({
   thorp:      { pop: [1, 60],       footprint: [0.014, 0.030], organisms: [1, 1],  nuclei: 1, monumental: 1,  accentBand: 1.00, blockDepth: 1, census1to1: true,  wardLabels: false, square: 'well' },
   hamlet:     { pop: [61, 400],     footprint: [0.045, 0.095], organisms: [2, 2],  nuclei: 1, monumental: 2,  accentBand: 1.00, blockDepth: 1, census1to1: true,  wardLabels: false, square: 'green' },
   village:    { pop: [401, 900],    footprint: [0.105, 0.175], organisms: [1, 2],  nuclei: 1, monumental: 4,  accentBand: 0.92, blockDepth: 2, census1to1: true,  wardLabels: true,  square: 'green' },
-  town:       { pop: [901, 8000],   footprint: [0.210, 0.360], organisms: [4, 6],  nuclei: 2, monumental: 11, accentBand: 0.78, blockDepth: 2, census1to1: false, wardLabels: true,  square: 'market' },
-  city:       { pop: [8001, 40000], footprint: [0.390, 0.540], organisms: [7, 9],  nuclei: 3, monumental: 18, accentBand: 0.58, blockDepth: 3, census1to1: false, wardLabels: true,  square: 'market-plural' },
-  metropolis: { pop: [40001, 200000], footprint: [0.580, 0.720], organisms: [7, 9], nuclei: 3, monumental: 26, accentBand: 0.44, blockDepth: 3, census1to1: false, wardLabels: true,  square: 'market-plural' },
+  town:       { pop: [901, 5000],   footprint: [0.210, 0.360], organisms: [4, 6],  nuclei: 2, monumental: 11, accentBand: 0.78, blockDepth: 2, census1to1: false, wardLabels: true,  square: 'market' },
+  city:       { pop: [5001, 25000], footprint: [0.390, 0.540], organisms: [7, 9],  nuclei: 3, monumental: 18, accentBand: 0.58, blockDepth: 3, census1to1: false, wardLabels: true,  square: 'market-plural' },
+  metropolis: { pop: [25001, 100000], footprint: [0.580, 0.720], organisms: [7, 9], nuclei: 3, monumental: 26, accentBand: 0.44, blockDepth: 3, census1to1: false, wardLabels: true,  square: 'market-plural' },
 });
 
 /**
@@ -454,6 +499,14 @@ export const GRAIN_VALIDATED = Object.freeze({
  * town and a 5,001-soul city wear near-identical frames"). The seam takes the MEAN of the two
  * bands' facing endpoints, so the curve is continuous, monotone, and never leaves the union
  * of the two bands it joins.
+ *
+ * ⭐ REG-SEAM VERIFIED (§631.3): this quotation of §161f names **5,000 / 5,001** as the
+ * town→city boundary, and that is now the boundary `TIER_PROFILE` actually carries. It was
+ * quoted correctly the whole time the table stepped at 8,000 — the file's own prose kept
+ * remembering the landed band its table had abandoned, which is a second self-contradiction on
+ * top of `tierForPopulation`'s docblock and is why the drift classified as a DEFECT and not as
+ * a signed re-band. No edit was needed here; the sentence is recorded as CHECKED so a later
+ * reader does not "helpfully" update it to a fork's numbers.
  * @type {ReadonlyArray<number>}
  */
 export const GRAIN_SEAMS = Object.freeze((() => {
@@ -507,9 +560,19 @@ export function grainRoofs(cells, tier) {
   return Math.max(150, Math.round(n));
 }
 
-/** The tier a population falls in — the local spelling of the landed popToTier, kept
- * here so the fabric layer can compare a STORED tier against a DERIVED one without
- * importing a generation-side module into a render-time projection.
+/**
+ * The tier a population falls in — **the local spelling of the landed `popToTier`**, kept here
+ * so the fabric layer can compare a STORED tier against a DERIVED one without importing a
+ * generation-side module into a render-time projection.
+ *
+ * ⭐ REG-SEAM (§631.3): **THAT SENTENCE IS NOW TRUE, AND IT WAS FALSE WHEN IT WAS WRITTEN.**
+ * The claim of equivalence stood in this docblock while `TIER_PROFILE.pop` stepped at
+ * 8,000/40,000 against `popToTier`'s 5,000/25,000 — the file asserting a contract its own
+ * table broke, which is what made the drift a DEFECT rather than a signed re-band. The table
+ * is reconciled; the claim is restored; and because a comment cannot enforce itself, the
+ * equivalence is now pinned by execution in `townMapFabricBuildOut.test.js`'s
+ * "§631.3 THE BAND SEAM" arm — boundary cases plus a 120,000-population sweep, both ways.
+ * ⚠ If you change either table, that arm reds. Do not repair the comment; repair the table.
  * @param {number} population @returns {string} */
 export function tierForPopulation(population) {
   const p = Number.isFinite(population) ? Number(population) : 0;
@@ -523,8 +586,11 @@ export function tierForPopulation(population) {
 /**
  * WHERE IN ITS BAND a population sits, 0..1. This is §161f's whole mechanism: every
  * continuous quantity below is `lo + (hi − lo) × bandPosition`. The position is taken on
- * a SQUARE-ROOT scale because population bands are geometric (a town spans 900→8,000)
+ * a SQUARE-ROOT scale because population bands are geometric (a town spans 901→5,000)
  * and a linear read would leave four fifths of every band crowded at the bottom.
+ * ⚠ REG-SEAM: the example was `900→8,000` and it was quoting the pre-reconcile band. The
+ * ARGUMENT is unchanged — the reconciled town band still spans 5.5×, and city and metropolis
+ * 5× and 4× — so the square-root read is if anything better justified at the landed widths.
  * @param {number} population @param {string} tier @returns {number}
  */
 export function bandPosition(population, tier) {
@@ -658,9 +724,18 @@ export function deriveHighWater(settlement) {
 export function tierScale(settlement) {
   const current = Number.isFinite(settlement?.population) ? Number(settlement.population) : 0;
   const highWater = deriveHighWater(settlement);
-  const occupancyTier = typeof settlement?.tier === 'string' && TIER_PROFILE[settlement.tier]
-    ? tierForPopulation(current)                         // occupancy always follows souls
-    : tierForPopulation(current);
+  // ⭐ OCCUPANCY ALWAYS FOLLOWS SOULS — one read, unconditionally.
+  // ⚠ REG-SEAM (§631.3) DELETED A VESTIGIAL CONDITIONAL HERE, and the deletion is recorded
+  // because the branch was a FOSSIL OF A REJECTED CURE, not dead tidying. It read
+  // `typeof settlement.tier === 'string' && TIER_PROFILE[settlement.tier] ? X : X` — a test on
+  // the STORED tier whose two arms were the IDENTICAL expression, i.e. somebody started
+  // wiring occupancy to the stored tier (TE-SEAM's option R2) and stopped without removing the
+  // scaffolding. R2 is REJECTED and must stay rejected: the stored tier vs the derived tier IS
+  // the demotion signal `deriveHighWater` step 1 reads, so an occupancy tier that deferred to
+  // the stored one would make the two always agree and blind §161g's elegy instrument
+  // permanently. An identical-branch conditional is an invitation to "finish" exactly that,
+  // and it is removed so the invitation is gone.
+  const occupancyTier = tierForPopulation(current);
   const extentTier = highWater.tier;
   const prof = TIER_PROFILE[extentTier] || TIER_PROFILE.village;
 
