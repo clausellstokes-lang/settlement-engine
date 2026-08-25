@@ -205,8 +205,29 @@ export function buildableMask(sub) {
  * @param {Array<[number,number]>} poly
  * @returns {{ clause:'crag'|'standing-water', x:number, y:number, grade:number }|null}
  */
-export function bodyRefusal(sub, poly) {
+/**
+ * ⭐⭐⭐ REG-QUAY (ODQ §635.4) · **THE WATERFRONT EXEMPTION — one law moored what another erased.**
+ *
+ * `moorWaterBound` pulls a quay's anchor onto the water ON PURPOSE and aims its piers across
+ * the shoreline, because *"a quay answers to the water, not to a street"* (§161m). This function
+ * then convicted the result for standing in standing water. Two shipped laws in direct
+ * contradiction, and the ruling is that an internal contradiction is MACHINERY repair.
+ *
+ * ⛔ THE EXEMPTION IS THE `standing-water` CLAUSE ONLY, AND NEVER `crag`. A pier may stand in
+ * the water — that is what a pier is for — but nothing may stand on a cliff, and a quay is not
+ * a licence to ignore the ground. The clause set stays the closed `REFUSAL_CLAUSES` pair; this
+ * only says which member a moored body is answerable to.
+ *
+ * ⚠ `exempt` IS AN EXPLICIT ARGUMENT AND NOT A FIELD ON THE BODY. A polygon does not know it is
+ * a quay; its OWNER does. Reading a flag off the geometry would put a truth about the
+ * institution inside the ground law, which is exactly the coupling `bodyRefusal`'s own
+ * parameter list — `(sub, poly)` and nothing else — was written to prevent.
+ */
+export const WATERFRONT_EXEMPT_CLAUSES = Object.freeze(['standing-water']);
+
+export function bodyRefusal(sub, poly, exempt = null) {
   if (!poly || poly.length < 3) return null;
+  const skip = exempt && exempt.length ? new Set(exempt) : null;
   // ⚠ OUTSIDE THE FRAME THERE IS NO GROUND TO REFUSE, and this is the estate's own rule
   // rather than a convenience: `meanderChannel` already states it — *"Outside the frame there
   // is no drawn ground to climb"* — and the leaf is a WINDOW on the world (§2.3's continuity
@@ -216,6 +237,9 @@ export function bodyRefusal(sub, poly) {
   const hit = (x, y) => {
     if (x < 0 || y < 0 || x > VIEW || y > VIEW) return null;
     const c = refusalAt(sub, x, y);
+    // ⭐ REG-QUAY: an exempt clause is not a refusal FOR THIS BODY. The clause is still derived
+    //   and still reported for every other body — the ground has not changed, the question has.
+    if (c && skip && skip.has(c)) return null;
     return c ? { clause: c, x, y, grade: absoluteGrade(sub, x, y) } : null;
   };
   // 1 · the vertices.

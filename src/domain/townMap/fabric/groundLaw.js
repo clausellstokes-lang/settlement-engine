@@ -59,7 +59,7 @@
  */
 
 import { absArea, centroid, properCross } from './fabricGeometry.js';
-import { bodyRefusal } from './groundRefusal.js';
+import { bodyRefusal, WATERFRONT_EXEMPT_CLAUSES } from './groundRefusal.js';
 import { compareKeys } from './lineage.js';
 import { TOUCH_EPS, claimIndex, claimSegments, deepestPenetration, kerbHalfPlane, segToPolyDist } from './reservedGround.js';
 
@@ -366,7 +366,7 @@ function clipAgainstNeighbour(poly, other) {
  * @returns {{poly:number[][], rung:string}|null}
  */
 function demoteBody(a) {
-  const { original, area0, frontage, segs, segIdx, accepted, accIdx, sub } = a;
+  const { original, area0, frontage, segs, segIdx, accepted, accIdx, sub, exempt } = a;
   const legal = (p) => {
     if (!p || p.length < 3) return false;
     if (deepestClaim(p, segs, segIdx) > TOUCH_EPS) return false;
@@ -374,7 +374,7 @@ function demoteBody(a) {
     // machinery for a body that OVERHANGS a crag: it pulls in from its own edges until it
     // stands on ground that carries it, which is what a builder does. A body that clears at
     // no inset is dropped — §17.3's second verb, on a refusal the clip cannot cut away.
-    if (sub && bodyRefusal(sub, p)) return false;
+    if (sub && bodyRefusal(sub, p, exempt)) return false;
     for (const ai of accIdx.near(bbox(p))) {
       const other = accepted[ai];
       if (other && overlapping(p, other.poly)) return false;
@@ -427,6 +427,40 @@ export function enforceGround(args) {
   //    order is canonical, so which of several claims clips a body first is stable.
   const segs = claimSegments(channels);
   const segIdx = claimIndex(segs);
+
+  /**
+   * ⭐⭐⭐ REG-QUAY (ODQ §635.4) · **THE WATERFRONT SET — the claims a MOORED body answers to.**
+   *
+   * ⛔⛔ AND THE RULING'S NAMED MECHANISM IS THE MINORITY CAUSE. §635.4 pinned the defect on
+   * `bodyRefusal`, and that clause is real — but measured over 162 composed piers, the
+   * disposition is `bodyRefusal/standing-water` **5** · `bodyRefusal/crag` **6** · **clipped to
+   * nothing by the water CLAIM 93** · **clipped below the area floor 34**. **127 of 162 (78 %)
+   * die at step 1's right-of-way clip, not at step 3d.** The reason `bodyRefusal` mostly misses
+   * is worth banking: it reads `sub.wet`, the substrate's hydrology, which is a DIFFERENT
+   * SURFACE from the drawn watercourse — measured pier-centroid wetness on the river leaf runs
+   * 0.070–0.153 against a 0.64 limit. So a body can be standing in the drawn river and read as
+   * bone dry to the ground law.
+   *
+   * Curing only the clause the ruling names would therefore have rescued about one pier in
+   * fourteen and reported a fix. The contradiction is the same contradiction — one law moors
+   * what another erases — so the exemption is applied wherever the water erases a moored body.
+   *
+   * ⛔ IT IS THE WATER'S CLAIM AND NOTHING ELSE. A moored body still gives way to every street,
+   * every wall circuit, every party line and every crag: `water.channel` and `water.shore` are
+   * the only keys withdrawn. A quay may stand in the river; it may not stand in the high street.
+   */
+  const isWaterClaim = (s) => s.key === 'water.channel' || s.key === 'water.shore';
+  const waterfront = args.waterfront === true;
+  const drySegs = waterfront ? segs.filter((s) => !isWaterClaim(s)) : segs;
+  const dryIdx = (waterfront && drySegs.length !== segs.length) ? claimIndex(drySegs) : segIdx;
+  /**
+   * A body is MOORED when its owner carries `moorWaterBound`'s own stamp. That stamp was
+   * write-only until now — nothing between `waterWorks.js` writing it and this line read it —
+   * which is exactly how the contradiction survived: the intent was recorded and never
+   * consulted. `owner` was already on the enrolment record and already unused.
+   */
+  const mooredItem = (it) => waterfront && it.kind === 'institution' && it.owner && it.owner.fronts === 'water';
+  let waterfrontExempt = 0, waterfrontClauseExempt = 0;
 
   // ── PRE-PASS · ⭐⭐ THE LOD GIVES WAY (§17 + §181.2a reconciled).
   //
@@ -531,8 +565,15 @@ export function enforceGround(args) {
     const area0 = absArea(original);
     let poly = original;
 
+    // ⭐ REG-QUAY · which claim set and which refusal clauses THIS body answers to.
+    const moored = mooredItem(it);
+    if (moored) waterfrontExempt++;
+    const mySegs = moored ? drySegs : segs;
+    const myIdx = moored ? dryIdx : segIdx;
+    const myExempt = moored ? WATERFRONT_EXEMPT_CLAUSES : null;
+
     // 1 · THE RIGHT OF WAY. A footprint may not stand in a carriageway.
-    const rw = clipOutOfStreets(poly, segs, segIdx);
+    const rw = clipOutOfStreets(poly, mySegs, myIdx);
     if (rw.clips) { poly = rw.poly; streetClips += rw.clips; }
 
     // 2 · THE PARTY LINE. A footprint may not stand in another footprint.
@@ -576,7 +617,7 @@ export function enforceGround(args) {
       }
     }
     if (clean && poly.length >= 3) {
-      const rv = clipOutOfStreets(poly, segs, segIdx);
+      const rv = clipOutOfStreets(poly, mySegs, myIdx);
       if (rv.clips) { poly = rv.poly; streetClips += rv.clips; }
       // One more look: if the street re-clip re-introduced an overlap, the footprint goes.
       if (poly.length >= 3) {
@@ -589,7 +630,7 @@ export function enforceGround(args) {
     }
     // 3c · ⭐⭐⭐ AND THE RIGHT OF WAY IS RE-ASKED (§200). See deepestClaim's header for the
     //      measured survivor this catches and for the class it belongs to.
-    if (clean && poly.length >= 3 && deepestClaim(poly, segs, segIdx) > TOUCH_EPS) clean = false;
+    if (clean && poly.length >= 3 && deepestClaim(poly, mySegs, myIdx) > TOUCH_EPS) clean = false;
     // 3d · ⭐⭐⭐ §5 W1 EXIT 2 · AND THE GROUND IS ASKED, **OF THE BODY'S AREA**.
     //      ⛔ THE PROPOSAL-TIME REFUSAL IS A POINT TEST AND THIS LAW IS ABOUT A BODY — which
     //      is §17.4's own root cause arriving one layer down. MEASURED before this line:
@@ -598,7 +639,12 @@ export function enforceGround(args) {
     //      1.3–2.35 frontages deep and its corners reach a cell the centre never touched.
     //      ⭐ THE CLASS, for the third time in this file: **A POINT TEST CANNOT ENFORCE AN
     //      AREA LAW**, and the cure is always to ask the question of the body.
-    if (clean && poly.length >= 3 && refusedGround && bodyRefusal(refusedGround, poly)) clean = false;
+    if (clean && poly.length >= 3 && refusedGround && bodyRefusal(refusedGround, poly, myExempt)) clean = false;
+    // ⭐ THE COUNTER IS THE COUNTERFACTUAL, NOT THE POPULATION. Ticking once per moored body
+    //   would report how many quays there are, which is a number the census already has;
+    //   what a reader needs is how many the exemption actually SAVED — so the unexempted
+    //   question is re-asked, and only a body that WOULD have been refused is counted.
+    if (moored && clean && poly.length >= 3 && refusedGround && bodyRefusal(refusedGround, poly)) waterfrontClauseExempt++;
 
     // 4 · ⭐⭐⭐ EXHAUSTED OR UNRESOLVED? **DEMOTED FIRST, DROPPED ONLY IF THE GROUND CARRIES
     //     NOTHING** — §17.3's own verb, unbuilt until now. See RUNGS's header.
@@ -607,7 +653,7 @@ export function enforceGround(args) {
     if (!ok && it.kind !== 'mass') {
       const dem = demoteBody({
         poly: clean ? poly : original, original, area0, clean, frontage,
-        segs, segIdx, accepted, accIdx, sub: refusedGround,
+        segs: mySegs, segIdx: myIdx, accepted, accIdx, sub: refusedGround, exempt: myExempt,
       });
       if (dem) { poly = dem.poly; rung = dem.rung; ok = true; demoted++; demotedBy[dem.rung] = (demotedBy[dem.rung] || 0) + 1; }
     }
@@ -674,6 +720,12 @@ export function enforceGround(args) {
     backHousesLost,
     instPartsLost,
     instBodiesEmptied,
+    // ⭐ REG-QUAY's own census surface, published whether the arm is on or off — an
+    //   unarmed leaf reports 0/0 and a reader can tell 'no quays' from 'arm dormant'
+    //   by `waterfront` beside them.
+    waterfront,
+    waterfrontExempt,
+    waterfrontClauseExempt,
     reason: `§17 + §17.4 enforced on ${items.length} footprints (${instPartsLost} institution`
       + ` components clipped away, ${instBodiesEmptied} bodies left empty): ${streetClips} clipped to a kerb line`
       + ` (facades land ON the street), ${partyClips} clipped to a party line (the overprint becomes`
@@ -682,7 +734,12 @@ export function enforceGround(args) {
       + ` — §17.3's own verb, so ground the packer cut is BUILT rather than blank;`
       + ` ${dropped} exhausted below the ${Math.round(AREA_FLOOR * 100)}% floor and dropped`
       + ` (${dwellingsLost} dwellings, ${backHousesLost} outbuildings);`
-      + ` ${lodGaveWay} LOD masses gave way to ${lodRestored} standing buildings they would have covered`,
+      + ` ${lodGaveWay} LOD masses gave way to ${lodRestored} standing buildings they would have covered`
+      + (waterfront
+        ? `; REG-QUAY: ${waterfrontExempt} moored bodies answered the DRY claim set`
+          + ` (the water's own right-of-way withdrawn, streets/circuit/party line unchanged),`
+          + ` of which ${waterfrontClauseExempt} would have been refused as standing water`
+        : ''),
   };
 }
 

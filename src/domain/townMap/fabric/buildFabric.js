@@ -48,7 +48,7 @@ import { composeInstitution, composeFarmstead, roofFormFor, typeBody, aspectOf }
 import { deriveMarketRegister } from './marketRegister.js';
 import { deriveFaubourgOrigins } from './faubourgOrigin.js';
 import { applyMinFootprint, minFootprintBodies } from './minFootprint.js';
-import { waterClaims, deriveBridges, moorWaterBound, deriveWaterGates, clipFieldsToWater } from './waterWorks.js';
+import { waterClaims, deriveBridges, moorWaterBound, deriveWaterGates, clipFieldsToWater, deriveQuayRegister } from './waterWorks.js';
 import { tenurePattern, seatWorksiteHabitation, seatKeepers, buildFaubourgs, GLACIS_THRESHOLD, faubourgSeriousness } from './habitation.js';
 import { reserveCommons, enclosureRead, inCommons } from './commons.js';
 import { buildRelief, waterStrokes } from './relief.js';
@@ -747,6 +747,10 @@ export function buildFabric(settlement, model, options = {}) {
     preAccepted: reservation.ground,
     // §5 W1 exit 2: the ground is a claim like any other, and it is asked of the BODY.
     sub,
+    // ⭐⭐ REG-QUAY (ODQ §635.4) · ARMED-ONLY. Unset, the pass behaves exactly as it did and
+    //   the leaf renders byte for byte as the sealed base — the contradiction stays visible
+    //   rather than being cured invisibly inside a content wave.
+    waterfront: options.waterfrontExemption === true,
   });
   // ⭐⭐⭐ THE VERSION AXIS AGAIN, AND HERE IT IS THE §230 DIVERGENCE MADE VISIBLE. "The parcels
   // as CUT" and "the parcels as CLIPPED BY THE LAW" are two artifacts; while they shared the
@@ -1009,6 +1013,12 @@ export function buildFabric(settlement, model, options = {}) {
     rel: waterRel, channels: streetsWalled, frontage: packed.frontage,
   });
   const waterGates = deriveWaterGates({ walls, rel: waterRel, seeding, extent: scale.builtRadius });
+  // ⭐⭐ V-QUAY (ODQ §636.2) · ARMED-ONLY, and derived HERE — after `enforceGround` has decided
+  //    which quays still have piers. Furnishing a quay the ground law ate would hang bollards
+  //    in the water beside an absent shed, which is the dress leg papering over the geometry.
+  const quayRegister = options.quayRegister === true
+    ? deriveQuayRegister({ landmarks: seating.seated, rel: waterRel, seedKey: fork('quayRegister'), frontage: packed.frontage, tier: scale.extentTier })
+    : null;
 
   const centre = organismCentroid(organisms);
   const outline = umbrellaFaced.components[0] || [];
@@ -1385,6 +1395,11 @@ export function buildFabric(settlement, model, options = {}) {
       groundLawInstitutionBodies: ground.instBodiesEmptied,
       groundLawDemoted: ground.demoted,
       groundLawDemotedBy: ground.demotedBy,
+      // ⭐⭐ REG-QUAY (ODQ §635.4) — published on EVERY leaf, armed or not, so a reader can
+      //   tell 'this leaf has no quay' from 'the arm is dormant' without guessing.
+      groundLawWaterfront: ground.waterfront === true,
+      groundLawWaterfrontExempt: ground.waterfrontExempt || 0,
+      groundLawWaterfrontClauseSaved: ground.waterfrontClauseExempt || 0,
       // ⭐⭐⭐ §202 / §201 B / §161m.4 — the access law's own record.
       accessRepair: access.reason,
       accessShrunk: access.shrunk,
@@ -1661,6 +1676,7 @@ export function buildFabric(settlement, model, options = {}) {
     // artifacts with their own counts and their own reason, ABSENT (never empty) when unarmed,
     // appended at the END so no existing key's published position moves.
     ...(marketRegister ? { marketRegister } : {}),
+    ...(quayRegister ? { quayRegister } : {}),
     ...(minFootprint ? { minFootprint } : {}),
   }, wallCircuit);
 }

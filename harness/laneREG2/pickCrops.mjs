@@ -1,12 +1,13 @@
 /** pickCrops.mjs <leaf> — print crop boxes for the judging round: a land wall stretch with a
  *  gate, a water/terminus stretch, and a joint-dense corner. Chosen by a STATED RULE. */
-import { CORPUS, buildOne } from '../exemplars.mjs';
+import { CORPUS, buildOne } from '../instruments/leaf.mjs';
+// ⭐ ODQ §634.3 — the crop-box helper and the rule-first discipline now live in the kit.
+import { box } from '../instruments/crops.mjs';
 const leaf = process.argv[2] || 'city';
 const spec = CORPUS.find((s) => s.key === leaf);
 const { fabric } = buildOne(spec, { rampart: true });
 const ring = fabric.walls[0];
 const R = ring.rampart;
-const box = (cx, cy, s) => `${Math.round(cx - s / 2)} ${Math.round(cy - s / 2)} ${s} ${s}`;
 // RULE 1 — the LAND wall crop: centred on the gatehouse whose run is NOT a water termination,
 // at 150 units (about two curtain bays at city scale).
 const landGate = R.gatehouses[0];

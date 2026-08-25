@@ -26,7 +26,8 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, '..', '..');
-const { CORPUS, buildOne } = await import(join(ROOT, 'harness/exemplars.mjs'));
+// ⭐ ODQ §634.3 — leaf resolution comes from the shared kit, not a per-wave re-import.
+const { CORPUS, buildOne } = await import(join(ROOT, 'harness/instruments/leaf.mjs'));
 const { renderFolio } = await import(join(ROOT, 'harness/renderFolio.mjs'));
 
 const arg = (k, d) => { const h = process.argv.find((a) => a.startsWith(`--${k}=`)); return h ? h.slice(k.length + 3) : d; };

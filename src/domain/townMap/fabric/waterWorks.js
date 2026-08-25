@@ -699,3 +699,112 @@ export function clipFieldsToWater(args) {
       + ' a furlong stops at the water, and its seams no longer run under the channel',
   };
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════════════════════
+ * ⭐⭐⭐ V-QUAY · THE WATERFRONT DETAIL REGISTER (chair-minted, ODQ §636.2)
+ *
+ * WHY IT EXISTS, MEASURED: the warehouse blind re-round scored 33 %, and the reader's notes
+ * localize the failure exactly — *quay warehouses with no quay furniture read as farmsteads*.
+ * The ONE correct call was carried by "bollard/barrel circles ranged along the shed's road face"
+ * plus a hoist and a loading way. A quay is not identified by its shed; it is identified by the
+ * WORKING GEAR on its apron, and the corpus draws that gear in plan.
+ *
+ * ⭐ THE VOCABULARY IS CLOSED AND EVERY MEMBER IS ANCHORED IN THE DETAIL REGISTER — no anatomy
+ * is invented here, and where an anchor were absent the member would be reported THIN rather
+ * than guessed:
+ *   `bollardRow`    hf322's *"ashlar quay with bollards"* + hf133's mooring swing circles.
+ *                   ⭐ ONE ROW IS ONE FIXTURE (§636.2 verbatim), exactly as V-B13's stall row is.
+ *   `hoist`         hf122's *"treadwheel cranes with dashed swing arcs"* — a wheel-and-jib PLAN
+ *                   with its dashed arc, never an elevation.
+ *   `pierDeckEdge`  hf322's *"timber jetty on pile dots"* — the deck edge with its pile dots.
+ *   `goodsStack`    hf122's *"countable cargo — barrels with stave lines, crates, jars, timber"*.
+ * ⛔ PROJECTION: hf122 titles itself a PLAN study and hf265 reads "HULLS FROM ABOVE". Every glyph
+ * below is strict top-down orthographic; there is no elevation anywhere in this vocabulary.
+ *
+ * ⛔ IT FURNISHES ONLY A QUAY THAT IS ACTUALLY DRAWN. A landmark whose piers the ground law ate
+ * has no apron to furnish, and hanging bollards in the water beside an absent shed would be the
+ * dress leg papering over the geometric one. REG-QUAY's exemption comes first, by construction.
+ * ═══════════════════════════════════════════════════════════════════════════════════════════ */
+
+/** the closed vocabulary — a fifth kind cannot appear without this list changing */
+export const V_QUAY_KINDS = Object.freeze(['bollardRow', 'hoist', 'pierDeckEdge', 'goodsStack']);
+
+/** the provisional band, chair-minted §636.2: 2–5 fixtures per drawn quay at page register */
+export const V_QUAY_BAND = Object.freeze([2, 5]);
+
+/**
+ * The candidate ladder. Order is precedence, not preference: the bollard row is what MAKES a
+ * quay read as a quay (the blind reader's own evidence), so it is always first and a two-fixture
+ * quay always has it.
+ */
+function quayCandidates({ rank, tier, kind }) {
+  const out = [];
+  out.push({ kind: 'bollardRow', why: 'hf322: the ashlar quay is read by its bollards — the blind round\'s own discriminator' });
+  out.push({ kind: 'pierDeckEdge', why: 'hf322: the timber jetty on its pile dots gives the apron an edge' });
+  if (rank >= 1) out.push({ kind: 'goodsStack', why: 'hf122: countable cargo — a working quay has goods standing on it' });
+  if (rank >= 2 || tier === 'city' || tier === 'metropolis') out.push({ kind: 'hoist', why: 'hf122: the treadwheel crane with its dashed swing arc' });
+  if (rank >= 3) out.push({ kind: 'goodsStack', why: 'hf122: a busier quay lays a second cargo set, not a bigger one' });
+  if (kind === 'river') out.push({ kind: 'bollardRow', why: 'hf133: a river berth takes a second row along the upstream face' });
+  return out;
+}
+
+/**
+ * ⭐ THE APRON is the strip of the quay's own ground between the shed and the water — the band
+ * the gear stands on. It is derived from the landmark's OWN anchor and rotation (both already set
+ * by `moorWaterBound`), never re-derived from the water, so the furniture cannot drift away from
+ * the building it belongs to.
+ */
+export function deriveQuayRegister(a) {
+  const { landmarks = [], rel = null, seedKey = 'q', frontage = 6, tier = 'town' } = a;
+  /** @type {Array<any>} */ const quays = [];
+  if (!rel || !rel.line) return { quays, reason: 'no water on this leaf: no quay register' };
+  const ordered = landmarks.filter((lm) => lm && lm.archetype === 'port' && lm.fronts === 'water')
+    .slice().sort((p, q) => compareKeys(String(p.anchorKey || p.instanceKey), String(q.anchorKey || q.instanceKey)));
+  for (const lm of ordered) {
+    const solids = Array.isArray(lm.solids) ? lm.solids.filter((s) => s && s.length >= 3) : [];
+    if (!solids.length) continue;                       // ⛔ an undrawn quay is not furnished
+    const key = String(lm.anchorKey || lm.instanceKey);
+    const rank = Number.isFinite(lm.rung) ? lm.rung : 0;
+    const cands = quayCandidates({ rank, tier, kind: rel.kind });
+    const [lo, hi] = V_QUAY_BAND;
+    const n = Math.min(cands.length, lo + Math.floor(hashUnit(`${seedKey}|vquay|${key}`) * (hi - lo + 1)));
+    // the apron axis is the pier's own long axis; the gear ranges ALONG the water, i.e. across it
+    const ang = ((lm.rot || 0) % TRIG_N + TRIG_N) % TRIG_N;
+    const ax = cosI(ang), ay = sinI(ang);               // toward the water
+    const bx = -ay, by = ax;                            // along the bank
+    const s = Math.max(frontage * 0.9, (lm.size || frontage) * 0.55);
+    /** @type {Array<any>} */ const fixtures = [];
+    for (let i = 0; i < n; i++) {
+      const c = cands[i];
+      const u = hashUnit(`${seedKey}|vquay|${key}|${i}|u`) - 0.5;
+      const v = hashUnit(`${seedKey}|vquay|${key}|${i}|v`);
+      const px = lm.x + bx * u * s * 1.7 + ax * (0.35 + v * 0.5) * s;
+      const py = lm.y + by * u * s * 1.7 + ay * (0.35 + v * 0.5) * s;
+      const f = { kind: c.kind, why: c.why, x: px, y: py, ang, s: s * 0.5, key: `${key}|vq${i}` };
+      if (c.kind === 'bollardRow') {
+        f.count = 3 + Math.floor(hashUnit(`${seedKey}|vquay|${key}|${i}|n`) * 3);   // 3–5 bollards
+        f.step = Math.max(1.4, frontage * 0.34);
+        f.r = Math.max(0.5, frontage * 0.11);
+      } else if (c.kind === 'goodsStack') {
+        f.count = 3 + Math.floor(hashUnit(`${seedKey}|vquay|${key}|${i}|n`) * 4);   // 3–6 barrels
+        f.r = Math.max(0.6, frontage * 0.15);
+      } else if (c.kind === 'hoist') {
+        f.r = Math.max(1.1, frontage * 0.30);
+        f.jib = Math.max(2.2, frontage * 0.72);
+      } else if (c.kind === 'pierDeckEdge') {
+        f.len = Math.max(4, s * 1.2);
+        f.piles = 4 + Math.floor(hashUnit(`${seedKey}|vquay|${key}|${i}|n`) * 3);   // 4–6 pile dots
+      }
+      fixtures.push(f);
+    }
+    quays.push({ key, x: lm.x, y: lm.y, rank, fixtures, band: [lo, hi], target: n });
+  }
+  const total = quays.reduce((t, q) => t + q.fixtures.length, 0);
+  const inBand = quays.filter((q) => q.fixtures.length >= V_QUAY_BAND[0] && q.fixtures.length <= V_QUAY_BAND[1]).length;
+  return {
+    quays, total, inBand,
+    reason: `${quays.length} drawn quays furnished with ${total} V-QUAY fixtures`
+      + ` (${inBand} inside the ${V_QUAY_BAND[0]}–${V_QUAY_BAND[1]} band); the vocabulary is closed at`
+      + ` ${V_QUAY_KINDS.join(', ')} and every member cites hf322/hf122/hf133`,
+  };
+}

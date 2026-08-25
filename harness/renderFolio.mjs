@@ -164,8 +164,23 @@ export const FOLIO = {
  * more must do what §217 asks: try efficiency first, measure at the fixed point, record the
  * cause, move the pinned figure — never spend headroom silently.
  */
+/**
+ * ⭐⭐ REG-5 · **CITY 10,000 → 10,100, THE §217 RAISE SIGNED AT ODQ §635.2.**
+ *
+ * REG-SEAM's band reconcile moved 26 of 29 artifacts (`bandPosition` is √((p−lo)/(hi−lo)), so
+ * narrowing the town band moves every leaf already inside it) and the all-waves-armed register
+ * spend came out at **10,008 against the §628-signed 10,000** — eight primitives over, every one
+ * of them attributable digit-for-digit to the pre-cure control. The chair signed the raise under
+ * §604 rather than let a lane spend headroom or tune a drawing to fit; ~1 % margin. All other
+ * tiers hold at the §628 figures and are untouched here.
+ *
+ * ⚠ THE FIXED-POINT CAVEAT APPLIES TO THIS ROW TOO — two mid-pass rations spend against `CEIL`,
+ * so the city column's own maximum moves when this pin moves. REG-5 measured the shift on the
+ * UNARMED corpus and recorded it as a DECLARED one rather than letting it ride inside an armed
+ * reading; see the lane receipt's opening-act section.
+ */
 export const OP_CEILING_BY_TIER = Object.freeze({
-  thorp: 1000, hamlet: 1400, village: 2000, town: 9300, city: 10000, metropolis: 14200,
+  thorp: 1000, hamlet: 1400, village: 2000, town: 9300, city: 10100, metropolis: 14200,
 });
 /**
  * ⭐⭐ REG-4 · `REG_OP_CEILINGS` — A MEASUREMENT-TIME OVERRIDE.
@@ -2020,6 +2035,71 @@ export function renderFolio(fabric, opts = {}) {
     if (bays) push(`<path d="${bays}" fill="none" stroke="${mix(P.ink, P.paper, 0.35)}" stroke-width="${INK.detail}"/>`);
   }
   out.push('</g>');
+
+  // ── 12x · ⭐⭐⭐ V-QUAY · THE WATERFRONT DETAIL REGISTER (chair-minted, ODQ §636.2).
+  //
+  // The blind re-round scored 33 % and its reader said why in one line: a quay warehouse with no
+  // quay furniture reads as a FARMSTEAD. The shed is not the tell; the working gear on the apron
+  // is. So the gear is drawn — in plan, from a closed vocabulary, every member citing the detail
+  // register's own waterfront plates.
+  //
+  // ⭐ ITS OWN `<g id>`, and that is a classification rather than tidiness (REG-3's J-REG3-9,
+  //   restated by REG-4's J-REG4-7). Filed among `landmarks` a bollard row would enter
+  //   instrument 4's salience read as a MONUMENT; filed at root it would fall to the classifier's
+  //   `rect|circle → chrome` rule, which is the defect REG-5's opening act had to cure.
+  // ⛔ STRICT TOP-DOWN. hf122 titles itself a PLAN study; the crane is a wheel-and-jib plan with
+  //   its dashed swing arc, never an elevation.
+  if (fabric.quayRegister && fabric.quayRegister.quays.length) {
+    let ink = '', fill = '', dash = '';
+    for (const q of fabric.quayRegister.quays) {
+      for (const f of q.fixtures) {
+        const ca = cosI(f.ang), sa = sinI(f.ang);
+        const nx = -sa, ny = ca;
+        if (f.kind === 'bollardRow') {
+          // hf322's bollards + hf133's mooring circles: a RANGED ROW of small discs. ONE ROW IS
+          // ONE FIXTURE (§636.2), exactly as V-B13's stall row is one fixture.
+          for (let i = 0; i < f.count; i++) {
+            const t = (i - (f.count - 1) / 2) * f.step;
+            const x = f.x + nx * t, y = f.y + ny * t;
+            fill += `M${r2(x - f.r)} ${r2(y)}a${r2(f.r)} ${r2(f.r)} 0 1 0 ${r2(f.r * 2)} 0a${r2(f.r)} ${r2(f.r)} 0 1 0 ${r2(-f.r * 2)} 0`;
+            prims.n++;
+          }
+        } else if (f.kind === 'goodsStack') {
+          // hf122's countable cargo: barrels with their stave line, laid in a countable set.
+          for (let i = 0; i < f.count; i++) {
+            const t = (i % 3 - 1) * f.r * 2.3, u = Math.floor(i / 3) * f.r * 2.3;
+            const x = f.x + nx * t + ca * u, y = f.y + ny * t + sa * u;
+            ink += `M${r2(x - f.r)} ${r2(y)}a${r2(f.r)} ${r2(f.r)} 0 1 0 ${r2(f.r * 2)} 0a${r2(f.r)} ${r2(f.r)} 0 1 0 ${r2(-f.r * 2)} 0`;
+            ink += `M${r2(x - f.r)} ${r2(y)}L${r2(x + f.r)} ${r2(y)}`;   // the stave line
+            prims.n++;
+          }
+        } else if (f.kind === 'hoist') {
+          // hf122's treadwheel crane: the wheel in plan, the jib, and the DASHED SWING ARC.
+          ink += `M${r2(f.x - f.r)} ${r2(f.y)}a${r2(f.r)} ${r2(f.r)} 0 1 0 ${r2(f.r * 2)} 0a${r2(f.r)} ${r2(f.r)} 0 1 0 ${r2(-f.r * 2)} 0`;
+          ink += `M${r2(f.x)} ${r2(f.y)}L${r2(f.x + ca * f.jib)} ${r2(f.y + sa * f.jib)}`;
+          dash += `M${r2(f.x + ca * f.jib)} ${r2(f.y + sa * f.jib)}`
+            + `A${r2(f.jib)} ${r2(f.jib)} 0 0 1 ${r2(f.x + nx * f.jib)} ${r2(f.y + ny * f.jib)}`;
+          prims.n += 3;
+        } else if (f.kind === 'pierDeckEdge') {
+          // hf322's timber jetty: the deck edge on its PILE DOTS.
+          const h = f.len / 2;
+          ink += `M${r2(f.x - nx * h)} ${r2(f.y - ny * h)}L${r2(f.x + nx * h)} ${r2(f.y + ny * h)}`;
+          for (let i = 0; i < f.piles; i++) {
+            const t = (i - (f.piles - 1) / 2) * (f.len / f.piles);
+            const x = f.x + nx * t + ca * INK.detail * 1.6, y = f.y + ny * t + sa * INK.detail * 1.6;
+            fill += `M${r2(x - INK.detail)} ${r2(y)}a${r2(INK.detail)} ${r2(INK.detail)} 0 1 0 ${r2(INK.detail * 2)} 0a${r2(INK.detail)} ${r2(INK.detail)} 0 1 0 ${r2(-INK.detail * 2)} 0`;
+            prims.n++;
+          }
+          prims.n++;
+        }
+      }
+    }
+    if (fill || ink || dash) out.push('<g id="quayFurniture">');
+    if (fill) push(`<path d="${fill}" fill="${mix(P.paper, P.ink, 0.42)}" stroke="${inkTone}" stroke-width="${INK.detail}" stroke-linejoin="round"/>`);
+    if (ink) push(`<path d="${ink}" fill="none" stroke="${inkTone}" stroke-width="${INK.detail}" stroke-linecap="round" stroke-linejoin="round"/>`);
+    if (dash) push(`<path d="${dash}" fill="none" stroke="${inkTone}" stroke-width="${INK.detail}" stroke-dasharray="${r2(INK.detail * 3)} ${r2(INK.detail * 3)}" stroke-opacity="0.7" stroke-linecap="round"/>`);
+    if (fill || ink || dash) out.push('</g>');
+  }
 
   // ── 13b · §161b THE VISIBLE WORK — the strain the §5.-1c solver recorded, drawn at
   //    last, in LINES and on the ground that demanded each one (see terraform.js).

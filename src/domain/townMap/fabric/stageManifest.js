@@ -162,17 +162,17 @@ export const GENERATION_NODES = Object.freeze([
     allowedImports: ['epochAxis.js', 'fabricGeometry.js', 'fabricRng.js', 'groundRefusal.js', 'lineage.js', 'reservedGround.js', 'substrate.js', 'suitability.js', 'wallCircuit.js', 'waterMode.js'],
     randomNamespaces: ['*|*', '*|common|slot|*', '*|dither', '*|grain|y*', '*|matrix', '*|r', '*|reach', 'commons'],
     statefulForkSites: 3 },
-  { nodeId: 'S7', modules: ['routes.js', 'streetEdges.js', 'streets.js'],
+  { nodeId: 'S7', modules: ['marketRegister.js', 'routes.js', 'streetEdges.js', 'streets.js'],
     allowedImports: ['fabricGeometry.js', 'fabricRng.js', 'lineage.js', 'substrate.js', 'waterMode.js'],
-    randomNamespaces: ['*|across', '*|approach|*', '*|bearing', '*|jit', '*|outlane|*', 'corridor.*', 'square.*', 'square.heart'],
+    randomNamespaces: ['*|*|a', '*|across', '*|approach|*', '*|b13|*', '*|bearing', '*|jit', '*|outlane|*', 'corridor.*', 'square.*', 'square.heart'],
     statefulForkSites: 6 },
-  { nodeId: 'S10', modules: ['parcels.js'],
-    allowedImports: ['fabricGeometry.js', 'fabricRng.js', 'groundRefusal.js', 'lineage.js', 'organismFields.js', 'substrate.js', 'tierGrammar.js'],
+  { nodeId: 'S10', modules: ['frontageFusion.js', 'parcels.js'],
+    allowedImports: ['fabricGeometry.js', 'fabricRng.js', 'groundRefusal.js', 'lineage.js', 'organismFields.js', 'reservedGround.js', 'substrate.js', 'tierGrammar.js'],
     randomNamespaces: ['*/pack', '*|a', '*|alley|*|*|*', '*|amp', '*|back', '*|backd', '*|d', '*|dwelling-guarantee', '*|g', '*|gap', '*|gapthru', '*|h', '*|l', '*|mat', '*|row|*', '*|s', '*|sb', '*|t', '*|t2', '*|w', '*|wing', '*|wingside', '*|w|*', '*|x', '*|y'],
     statefulForkSites: 1 },
-  { nodeId: 'S11', modules: ['institutionShapes.js'],
+  { nodeId: 'S11', modules: ['institutionShapes.js', 'shapeCode.js'],
     allowedImports: ['fabricGeometry.js', 'fabricRng.js', 'lineage.js', 'trigTable.js'],
-    randomNamespaces: ['*|front|*'],
+    randomNamespaces: ['*|front|*', '*|roof|*'],
     statefulForkSites: 0 },
   // ⚠ ⟦§301.6⟧ `trigTable.js` IS NEW ON THIS NODE and the walker required the row. The terrain
   //   service's re-aimed search takes its eight bearings from the fabric's ONE home for an angle;
@@ -181,15 +181,15 @@ export const GENERATION_NODES = Object.freeze([
   // ⚠ ⟦§297.2b / ODQ §577⟧ `cliffs.js` IS NEW ON THIS NODE. The segmented circuit terminates at
   //   the escarpment, so the trace consumes the boundary and its crossing read. It is an `S2>S13`
   //   edge the node pair already carries (`substrate.js`, `groundRefusal.js`) — no new node pair.
-  { nodeId: 'S13', modules: ['wallCircuit.js', 'wallRuns.js', 'walls.js'],
-    allowedImports: ['builtUmbrella.js', 'cliffs.js', 'epochAxis.js', 'fabricGeometry.js', 'fabricRng.js', 'groundRefusal.js', 'reservedGround.js', 'snapshot.js', 'substrate.js', 'trigTable.js'],
-    randomNamespaces: ['wall.epoch.*', 'wall.epoch.*.*'],
-    statefulForkSites: 2 },
+  { nodeId: 'S13', modules: ['rampartWorks.js', 'wallCircuit.js', 'wallRuns.js', 'walls.js'],
+    allowedImports: ['builtUmbrella.js', 'cliffs.js', 'epochAxis.js', 'fabricGeometry.js', 'fabricRng.js', 'groundRefusal.js', 'reservedGround.js', 'snapshot.js', 'substrate.js', 'trigTable.js', 'waterMode.js'],
+    randomNamespaces: ['rampart.E*', 'wall.epoch.*', 'wall.epoch.*.*'],
+    statefulForkSites: 3 },
   { nodeId: 'S14', modules: ['circuitDemotion.js'],
     allowedImports: ['fabricGeometry.js', 'fabricRng.js', 'groundRefusal.js', 'trigTable.js', 'wallCircuit.js'],
     randomNamespaces: ['wall.demote.*'],
     statefulForkSites: 1 },
-  { nodeId: 'S15', modules: ['habitation.js'],
+  { nodeId: 'S15', modules: ['faubourgOrigin.js', 'habitation.js'],
     allowedImports: ['commons.js', 'fabricGeometry.js', 'fabricRng.js', 'lineage.js', 'trigTable.js', 'waterMode.js'],
     randomNamespaces: ['*|d', '*|faub|*', '*|hab|*', '*|i', '*|keeper|*', '*|landing|*', '*|landing|*|*|a', '*|landing|*|*|r', '*|o', '*|s', '*|stead|*|a', '*|t', '*|tenure', '*|tone', '*|w'],
     statefulForkSites: 0 },
@@ -209,7 +209,7 @@ export const GENERATION_NODES = Object.freeze([
     allowedImports: ['fabricGeometry.js', 'fabricRng.js', '../../../data/stressTypes.js', '../../canonicalAccessors.js'],
     randomNamespaces: ['*|barricade', '*|camp|*|x', '*|camp|*|y', '*|siege|*'],
     statefulForkSites: 0 },
-  { nodeId: 'S20', modules: ['accessLaw.js', 'compoundGround.js', 'groundLaw.js', 'lateGround.js'],
+  { nodeId: 'S20', modules: ['accessLaw.js', 'compoundGround.js', 'groundLaw.js', 'lateGround.js', 'minFootprint.js'],
     allowedImports: ['fabricGeometry.js', 'groundRefusal.js', 'lineage.js', 'reservedGround.js'],
     randomNamespaces: [],
     statefulForkSites: 0 },
@@ -226,7 +226,7 @@ export const GENERATION_NODES = Object.freeze([
     randomNamespaces: [],
     statefulForkSites: 0 },
   { nodeId: 'ASSEMBLY', modules: ['buildFabric.js', 'publication.js'],
-    allowedImports: ['builtUmbrella.js', 'circuitDemotion.js', 'cliffs.js', 'commons.js', 'compile.js', 'compoundGround.js', 'districtPartition.js', 'fabricGeometry.js', 'fabricRng.js', 'fields.js', 'groundLaw.js', 'groundRefusal.js', 'habitation.js', 'immersion.js', 'institutionShapes.js', 'institutions.js', 'lateGround.js', 'leafCensus.js', 'lineage.js', 'measure.js', 'morphology.js', 'organismFields.js', 'organisms.js', 'parcels.js', 'relief.js', 'reservedGround.js', 'routes.js', 'seating.js', 'snapshot.js', 'stateMarks.js', 'streetEdges.js', 'streets.js', 'substrate.js', 'suitability.js', 'terraform.js', 'tierGrammar.js', 'umbrella.js', 'wallCircuit.js', 'wallRuns.js', 'waterMode.js', 'waterWorks.js'],
+    allowedImports: ['builtUmbrella.js', 'circuitDemotion.js', 'cliffs.js', 'commons.js', 'compile.js', 'compoundGround.js', 'districtPartition.js', 'fabricGeometry.js', 'fabricRng.js', 'faubourgOrigin.js', 'fields.js', 'frontageFusion.js', 'groundLaw.js', 'groundRefusal.js', 'habitation.js', 'immersion.js', 'institutionShapes.js', 'institutions.js', 'lateGround.js', 'leafCensus.js', 'lineage.js', 'marketRegister.js', 'measure.js', 'minFootprint.js', 'morphology.js', 'organismFields.js', 'organisms.js', 'parcels.js', 'rampartWorks.js', 'relief.js', 'reservedGround.js', 'routes.js', 'seating.js', 'shapeCode.js', 'snapshot.js', 'stateMarks.js', 'streetEdges.js', 'streets.js', 'substrate.js', 'suitability.js', 'terraform.js', 'tierGrammar.js', 'umbrella.js', 'wallCircuit.js', 'wallRuns.js', 'walls.js', 'waterMode.js', 'waterWorks.js'],
     randomNamespaces: [],
     statefulForkSites: 0 },
 ].map(Object.freeze));
@@ -243,7 +243,7 @@ export const NODE_EDGES = Object.freeze([
   'S15>ASSEMBLY', 'S16>ASSEMBLY', 'S17>ASSEMBLY', 'S17>S21', 'S18>ASSEMBLY', 'S19>ASSEMBLY',
   'S20>ASSEMBLY', 'S20>S21', 'S21>ASSEMBLY', 'S22>ASSEMBLY', 'S2>ASSEMBLY', 'S2>S10', 'S2>S13', 'S2>S14',
   'S2>S16', 'S2>S18', 'S2>S20', 'S2>S22', 'S2>S3', 'S2>S4', 'S2>S6', 'S2>S7', 'S3>ASSEMBLY', 'S3>S6',
-  'S4>ASSEMBLY', 'S4>S15', 'S4>S16', 'S4>S17', 'S4>S21', 'S4>S6', 'S4>S7', 'S5>S13', 'S5>S6',
+  'S4>ASSEMBLY', 'S4>S13', 'S4>S15', 'S4>S16', 'S4>S17', 'S4>S21', 'S4>S6', 'S4>S7', 'S5>S13', 'S5>S6',
   'S6>ASSEMBLY', 'S6>S10', 'S6>S13', 'S6>S15', 'S6>S16', 'S6>S2', 'S6>S21', 'S7>ASSEMBLY'
 ]);
 

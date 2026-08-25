@@ -22,7 +22,8 @@ import { execFileSync } from 'node:child_process';
  * `execFileSync` waiting on it forever and four more Chromes queued behind it. Every shot is
  * therefore bounded, and the PNG's existence — never the exit status — is the verdict.
  */
-const SHOT_MS = 45000;
+// ⭐ ODQ §634.3 — J-REG4-11's bound is the kit's now; this constant is its re-export.
+import { SHOT_MS } from '../instruments/crops.mjs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 const HERE = dirname(fileURLToPath(import.meta.url));

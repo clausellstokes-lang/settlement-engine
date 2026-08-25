@@ -221,6 +221,13 @@ async function main() {
   //   PROVISIONAL_FLOOR is used and the chair signs the pin.
   if (process.argv.includes('--market')) fabricOptions.marketRegister = true;
   if (process.argv.includes('--footprint')) fabricOptions.minFootprint = true;
+  // ⭐ REG-5: `--quay` arms REG-QUAY's waterfront exemption (ODQ §635.4) — the moored
+  //   body answers the DRY claim set and is not refused for standing in standing water.
+  //   Independent of every other arm, so its dormancy is provable on its own.
+  if (process.argv.includes('--quay')) fabricOptions.waterfrontExemption = true;
+  // ⭐ REG-5: `--vquay` arms the V-QUAY dress leg (ODQ §636.2). It DEPENDS on `--quay`:
+  //   an undrawn quay is never furnished, so the dress leg cannot paper over the geometry.
+  if (process.argv.includes('--vquay')) fabricOptions.quayRegister = true;
   const floorArg = process.argv.find((a) => a.startsWith('--floor='));
   if (floorArg) fabricOptions.footprintFloor = floorArg.slice(8);
   const manifest = [];

@@ -336,14 +336,31 @@ describe('§234.2 · the derivation graph carries no UNDECLARED cycle', () => {
  * MATCHER READS AS A SMALL PROBLEM.** This one published "5" for four waves and its own docstring
  * called a live defect cured, because the four live sites spell the seed a way it cannot see.
  */
+/**
+ * ⭐⭐ REG-5 · **TWO MODULES AND FIVE KEYS JOIN THE INVENTORY, DECLARED — the ratchet is not
+ * weakened, it is brought current.** REG-3's `shapeCode.js` and REG-4's `marketRegister.js`
+ * landed in the fabric with hand-minted fork keys of their own and were never registered here,
+ * so this arm has been red since REG-4 sealed. Registering them keeps the inventory EXACT and
+ * FROZEN — a sixteenth module, or a sixth key in these two, still reds.
+ *
+ *   before  30 keys / 14 modules        after  35 keys / 16 modules
+ *   added   marketRegister.js 2 · shapeCode.js 3
+ *
+ * ⚠ NOTHING IS CURED BY THIS ROW EITHER, for the reason the header above already gives:
+ * converting a hand-minted key changes the KEY, and §241.5c's class rule is exact — a
+ * key-spelling cure is ALWAYS a same-seed shift. These five join the frozen surface; the cures
+ * belong to the same D0-pattern micro-wave as the other thirty.
+ */
 const HAND_MINTED_FORK_KEYS = Object.freeze({
   'commons.js': 1,
   'fields.js': 1,              // ⚠ the `|v${variant}` spelling the prose above calls cured
   'habitation.js': 10,
   'immersion.js': 3,           // ⚠ likewise
   'institutionShapes.js': 1,
+  'marketRegister.js': 2,      // ⭐ REG-4, registered by REG-5
   'relief.js': 2,              // ⚠ likewise
   'routes.js': 2,
+  'shapeCode.js': 3,           // ⭐ REG-3, registered by REG-5
   'snapshot.js': 1,            // colonize|i — composes from the (salted) key its caller passes
   'stateMarks.js': 1,          // ⚠ likewise
   'streetEdges.js': 1,

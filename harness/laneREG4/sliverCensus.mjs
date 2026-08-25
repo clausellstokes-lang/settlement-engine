@@ -22,7 +22,8 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, '..', '..');
-const { CORPUS, buildOne } = await import(join(ROOT, 'harness/exemplars.mjs'));
+// ⭐ ODQ §634.3 — leaf resolution comes from the shared kit, not a per-wave re-import.
+const { CORPUS, buildOne } = await import(join(ROOT, 'harness/instruments/leaf.mjs'));
 const MFm = await import(join(ROOT, 'src/domain/townMap/fabric/minFootprint.js'));
 const { absArea } = await import(join(ROOT, 'src/domain/townMap/fabric/fabricGeometry.js'));
 

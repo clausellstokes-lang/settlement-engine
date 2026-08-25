@@ -160,9 +160,18 @@ describe('§287.8 / §10.14 · the S0–S23 manifest is CHECKED against source, 
       expect(d.forks[n.nodeId], `${n.nodeId} fork-site drift`).toBe(n.statefulForkSites);
       total += n.statefulForkSites;
     }
-    // ⭐ THE WHOLE-FABRIC FIGURE, PINNED WHERE IT MEANS SOMETHING: seventeen stateful streams.
+    // ⭐ THE WHOLE-FABRIC FIGURE, PINNED WHERE IT MEANS SOMETHING: eighteen stateful streams.
     // Everything else the fabric draws is a pure string hash with no stream at all.
-    expect(total).toBe(17);
+    //
+    // ⭐⭐ REG-5 · **17 → 18, AND THE EIGHTEENTH IS NOT NEW CODE.** REG-2's `rampartWorks.js`
+    // has carried one `fabricRng(` since it landed; it was invisible to this pin because the
+    // module was never assigned to a node, and `derive()` skips an unassigned file outright
+    // (`if (!node) continue;`). Registering the six REG-1..4 modules made the fabric's real
+    // stream count visible, and one of them has a stream. **The pin moves because the census
+    // got honest, not because a wave opened a stream** — the other five modules mint pure
+    // string hashes and contribute zero, which is itself worth the sentence: five new fabric
+    // modules across four waves and exactly one stateful stream between them.
+    expect(total).toBe(18);
   });
 
   it('5 · NODE_EDGES equals the derived cross-node edge set', () => {
