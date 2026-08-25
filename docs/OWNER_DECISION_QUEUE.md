@@ -28958,3 +28958,105 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   gate moves, and DRESS-1b proceeds unaffected. Recorded because the *reason* a comparison
   was struck is worth as much as the striking, and a successor otherwise re-imports the
   wrong competitor from an old note.
+
+## §690 · THE INSTRUMENT-ESTATE RECON LANDS AFTER THE HALT — AND IT NAMES A BLOCKER UNDER DRESS-1b (2026-08-26 ~19:20 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+**⛔ CAPTURE-ONLY ENTRY. The owner halted all work ("stop everything right now i'm about
+to leave from internet access"). Nothing below is dispatched, cured, or ruled — a
+read-only recon that was still in flight at the halt returned afterwards, and this entry
+exists so its findings survive the session instead of evaporating. THE HALT STANDS.**
+Honest note: when the halt was reported, the chair said "nothing is running." That was
+wrong — this lane was live and the chair had lost track of it. Nothing was at risk (it is
+read-only), but the statement was inaccurate when made.
+
+- **§690.1 ⛔⛔ THE BLOCKER — THE DRESS INK IS INVISIBLE TO THE CLASSIFIER, AND WORSE THAN
+  INVISIBLE.** DRESS-1 emits **30 literal `dress-*` groups** (`DRESS_GROUPS`,
+  `partitionDress.js:70`, on the seal only — not on mainline). **NONE of the 30 ids appears
+  in `lib/classify.mjs`'s `GROUP_ROLE` or `CHROME_GROUPS`.** Read straight off the
+  classifier's ladder: **(i)** `drawingGroup()` returns `null` for every dress element, so
+  the group table is a **no-op** for the entire dress; **(ii)** every dress `<rect>` and
+  `<circle>` falls through to `rect|circle → chrome`; **(iii) worse — `drawingGroup()` is
+  also the GUARD on the chrome-zone plant**, so every dress `<rect>` with `width < 900` and
+  every `<circle>` with `r < 60` **plants a padded exclusion box** (rect +6u, circle +22u),
+  and any path lying wholly inside one is convicted `chrome` by a point test that runs
+  **before** everything else. This is **verbatim the REG-5-documented flood** — *"zones
+  10 → 74, and `landmarks` lost 121 of 240 elements to chrome"* — one lane later, with a
+  **30-id roster instead of 4**.
+- **§690.2 THE CONSEQUENCE THAT BLOCKS PA.5, DERIVED:** `mk-controls.mjs` dispatches on
+  `rec.role`, i.e. on `classify()`'s output — **a role the classifier cannot name cannot be
+  planted.** PA.5 requires *per-role planted controls, each moving exactly one role, before
+  any baseline is believed.* **For dress roles that requirement is currently
+  UNSATISFIABLE**, which means **DRESS-1b's exit 3 (i1/i6/i7 declared baselines) cannot
+  honestly be met until §690.1 is settled** — any figure recorded first would be taken
+  through a classifier that calls the dress chrome. This supersedes the brief's ordering:
+  the classifier question comes **before** the re-records, not after.
+- **§690.3 THE RULING THAT IS OWED AND IS NOT MADE HERE.** `INSTRUMENTS.md` already prices
+  the cure and assigns it: *"The cure is two lines (add the ids; move the `rect|circle` rule
+  after the group tests) and it **moves the role masks on every plate, and therefore every
+  recorded i1/i5/i7 baseline** … **That is a chair decision.**"* It is a **declared-shift
+  decision across every pixel baseline**, and it is left **UNRULED** because the owner
+  halted work. It is the first thing a resuming chair decides, and it may also bear on
+  DRESS-1's 61.1 % gestalt round — untested, stated as a hypothesis, not a finding.
+- **§690.4 FOUR STATE FACTS THAT WOULD HAVE BITTEN A RE-RECORD.** **(i)**
+  `out/baselines.json` at `79c02a0ea` is **byte-identical to
+  `out/baselines-d1b32e339-PRE-REG5-CLASSIFIER-CURE.json`** (both sha256 `160677aca…`) while
+  `lib/classify.mjs` at that same commit **does carry the REG-5 cure** — so the "live
+  baseline" records **pre-cure** i1/i4/i5/i7 figures and must be read as such. **(ii)**
+  `INSTRUMENTS.md` **has not caught up with its own code**: its closing section still poses
+  the cure as pending though `classify.mjs` applied it, and the commit message claiming
+  "all declarations current" is wrong about this file. **(iii) There is no i1 or i7 corpus
+  driver at all** — i5 has `regI1-i5contrast.mjs` and i6 has `regI1-i6corpus.mjs`; i1 and
+  i7 have only the single-plate CLI, so DRESS-1b's exit 3 includes **writing two drivers**,
+  which the brief did not budget. **(iv)** there is **no `i9-*.mjs`** — instrument 9 (blind
+  silhouette) is a written protocol only.
+- **§690.5 FIVE OPERATIONAL HAZARDS, RECORDED SO NOBODY RE-LEARNS THEM.** **(a) `i5` is the
+  ONLY instrument that sets a non-zero exit code**; i1/i6/i7 exit 0 regardless and publish
+  their verdict as a **stdout sentinel** (`I1_PASS`/`I1_FAIL`, `I6_DONE`, `I7_PASS`) — so
+  `&&`-chaining them is **blind**, exactly the class §9's law 4 names. **(b)** every
+  instrument **hardcodes absolute scratchpad paths under session
+  `31585ce2-…`** (`HERE`, `R0`); `--out=`/`--json=` are overridable, `HERE` is not.
+  **(c)** flags are `--flag=value` **only** — the space-separated form is unsupported
+  everywhere and silently takes the default. **(d)** i6's subprocess scratch file is the
+  **fixed path `/tmp/.rb-i6.json`** (and `/tmp/.regI1-i6.json`), so **two concurrent runs
+  clobber each other** — a contended-sweep hazard with a new face. **(e)** there is **no
+  `--arm`/`--plant`/`--role` flag anywhere: "arming" is which render directory you point
+  at**, planting is `--shatter=` (i6 only) or the four pre-built `ctrl/CTRL-*.svg` plates.
+  Also: the pixel instruments' default inputs (`reg0/png/{BEFORE,AFTER}-city.png`) live
+  **outside** the preserved ref and are on disk only.
+
+## §691 · THE HALT LIFTS AND THE CLASSIFIER QUESTION IS RULED — THE DRESS GETS ITS ROLES, AND THE SHIFT IS DECLARED TWICE (2026-08-26 ~19:35 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+- **§691.1 THE HALT IS LIFTED** (owner, in chat: *"continue"*). §690's capture stands as
+  written; the ruling it deliberately withheld is made here, and DRESS-1b re-dispatches
+  with the ordering §690.2 corrected.
+- **§691.2 RULED — `GROUP_ROLE` GAINS THE DRESS IDS.** The decision `INSTRUMENTS.md`
+  assigns to the chair is taken, and the reason is that **the alternative is not neutrality
+  but active corruption**: the dress is not merely unnamed, its `<rect>`s and `<circle>`s
+  **plant chrome exclusion zones that convict legitimate ink** (§690.1(iii)). A classifier
+  that mislabels the very thing under test cannot ground a baseline, and PA.5's per-role
+  planted controls are **unsatisfiable** while `mk-controls.mjs` has no role to dispatch on.
+  Leaving it would not preserve the old numbers; it would keep producing new wrong ones.
+- **§691.3 HOW — DERIVED, NOT BLANKET.** Each `dress-*` id maps to **the role it actually
+  draws**, derived from `partitionDress.js`'s own emission with the evidence quoted, and
+  reported as a single J-call carrying the full 30-row table. `chrome` is assigned **only**
+  where a mark is genuinely plate furniture. A blanket mapping would trade one wrong answer
+  for another that is merely quieter.
+- **§691.4 THE SHIFT IS DECLARED — AND IT IS TWO SHIFTS, NOT ONE.** The two-baseline law
+  binds: the pre-cure file is kept **verbatim and never overwritten**, the post-cure
+  baseline is a **new file**, and the delta is published beside it. ⚠ **AND THE CURRENT
+  "LIVE" BASELINE IS ALREADY STALE** (§690.4(i)): `out/baselines.json` is byte-identical to
+  the PRE-REG5 snapshot while the classifier already carries the REG-5 cure, so a shift is
+  **already latent and unrecorded** in the file the estate calls live. The re-record
+  therefore publishes **TWO deltas — pre-REG5 → post-REG5, and post-REG5 → post-dress** —
+  and never lets the second silently absorb the first.
+- **§691.5 THE ORDER, CORRECTED IN THE BRIEF:** the classifier cure and its **per-role
+  planted controls come FIRST**; i1/i6/i7 re-record only after a control convicts on each
+  role it will read. **i1 and i7 have no corpus driver at all** (§690.4(iii)) — writing two
+  is now **budgeted in the brief** rather than discovered inside it.
+- **§691.6 `INSTRUMENTS.md` IS AMENDED IN THE SAME ACT** (§690.4(ii)). A declaration
+  document that lags its own code is how a lane comes to trust a floor that moved — the
+  same class as §688.3(i)'s mislabelled headroom, one document over.
+- **§691.7 NOT RULED, DELIBERATELY:** whether the classifier collision bears on DRESS-1's
+  61.1 % gestalt round stays a **hypothesis**. DRESS-1b may test it, but the gestalt cure is
+  judged on its own diagnosis (INK vs KEY, §688.2), never explained away by an instrument
+  defect — the two must not be allowed to launder each other.

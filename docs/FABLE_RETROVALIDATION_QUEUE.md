@@ -226,6 +226,19 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§690 · The instrument-estate recon, captured after the halt · SEAT: Opus 5.**
+*What was judged:* only the decision to **capture rather than act** — the owner halted work
+and the classifier ruling §690.3 names is deliberately LEFT UNRULED. Also judged: that the
+classifier question now **precedes** DRESS-1b's re-records rather than following them.
+*What Fable re-derives:* whether extending `GROUP_ROLE` with the 30 `dress-*` ids is the
+right cure or a papering-over — it moves **every recorded i1/i5/i7 pixel baseline**, so it
+is a declared shift across the whole instrument estate and deserves a second seat's eyes
+before it is taken. Also whether §690.3's hypothesis (that the classifier collision bears
+on DRESS-1's 61.1 % gestalt round) is worth testing or is a distraction.
+*Receipts:* ODQ §690 · `refs/preserve/reg-instruments-2026-08-26-r4` = `79c02a0ea` ·
+`INSTRUMENTS.md`'s own closing section, which prices the cure and assigns it to the chair.
+*Priority:* **P2** (it foreclosed nothing — but the ruling it defers is P1 when taken).
+
 **§689 · The competitive-set correction · SEAT: Opus 5.**
 *What was judged:* the chair's refinement of the owner's own positioning — that
 "convenience" is the entry argument and coherence-from-truth plus time are the moat — and
