@@ -28375,3 +28375,31 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   is COMPLETE: 155 rows ruled · six documents amended and adversarially verified ·
   eight ledger rulings · and three chair defects caught by the estate's own
   machinery — which is the machinery working, recorded without flinching.
+
+## §679 · THE DEVLOG SWEEP CLOSES THE STUDY — 45 TASTE LAWS ROUTED, AND THE LEADER'S OPEN WOUND IS OUR PROMISE (2026-08-26 ~09:00 CDT)
+
+- **§679.1 COLLECTED** (39 pages fetched; 45 laws in draft-R-DEVLOG.md organized by
+  consuming layer; the §668.2 PARTIAL is CLOSED — the study now spans all five
+  layers: code, data, runtime, interface, reasoning). The headline laws and their
+  homes: **"a nice looking map, not an accurate model" — composition beats accuracy,
+  in the author's own words, twice** (REG-9's root rubric) · **stop at the emergent
+  reading** (the motte-and-bailey from two cheap parts; the sharpest restraint quote
+  — L-REG-21) · **detail budgets are per-register, proven by the author's own two
+  tools** (numbering wrong at 3,000 houses and right at 30; "villages need their own
+  separator" four years before he built it — our register split validated at the
+  source) · **the DEFAULT-OFF law** (every density-raiser in eight years shipped
+  disabled; the default view is the readable minimum — binds the dress re-base and
+  the film's calm) · the words layer gains a complete LABEL DOCTRINE.
+- **§679.2 THE MARKETING FIND, routed to the owner's docket (F1):** the market
+  leader's saved cities CHANGE UNDER UPDATES with no revert — the author's own reply:
+  "that happens sometimes with new updates." **THE PROMISE — a seed is a starting
+  world forever — is the direct, provable answer to the category's known open wound**;
+  owner-visible for the marketing doctrine, never engine work.
+- **§679.3 CAVEATS BANKED:** Patreon is closed to tooling three ways (no bypass
+  attempted) — the modern era's deep rationale is titled-but-unreachable; every
+  devlog row is CONFIRMED-digest grade (spot-check before any public citation); and
+  **E12**: the open-source code is the 2017 (0.4.x) era — the code study's "what"
+  describes 2017 and the live captures + this dossier are the record of everything
+  the shipped tool grew beyond it. The whole reference-study estate (three dossiers,
+  all receipts, the six censuses, both inventories, the review consolidation) is
+  PRESERVED at `refs/preserve/reference-study-2026-08-26`.
