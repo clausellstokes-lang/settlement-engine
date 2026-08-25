@@ -226,6 +226,22 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§693 · The three parallel sweeps; the P0 verdict; six strikes · SEAT: Opus 5.**
+*What was judged:* the verdict that the completed sitting is **partly poisoned rather than
+wholesale** (two discharges poisoned, the ratifications weakened not voided); the six
+STRIKES, each by measurement, which **shrink** this register — including striking my own
+§687.5 provenance claim for §12 and §16; the ruling that §287–§290 get **ruled rather than
+resolved** (their provenance is structurally unrecoverable per §291.3); and the 10 %/50 %
+scoping.
+*What Fable re-derives:* **(a)** whether "weakened, not voided" is the right call on the
+ratifications — the sweep tested §298.1(b) for restatement-vs-re-derivation and **ran that
+check on nothing else**, so the generalization is one datum wide. **(b)** whether the six
+strikes are sound, since striking removes work from your own future queue and is therefore
+the self-serving direction. **(c)** the largest unexamined body, **§440–§684 (245 sections)**,
+filed P3 on trailer evidence alone with no sweep having read it.
+*Receipts:* ODQ §693 · `docs/PROVENANCE_MAP.tsv` · the three sweeps' journal.
+*Priority:* **P1** on (a) and (c); P2 on (b).
+
 **§692 · DRESS-1b collected, sealed and ruled; the gestalt gate escalated · SEAT: Opus 5.**
 *What was judged:* twelve J-DRESS1B calls RATIFIED; the 30-row classifier mapping accepted
 as derived-from-emission; the lane's own improvement (11→12) accepted as **variance and

@@ -29172,3 +29172,95 @@ read-only), but the statement was inaccurate when made.
   that L-REG-34's legend census PASSES because it checks a bijection, not legibility** —
   a census whose predicate is weaker than its name, which is the §688.7 class one document
   over.
+
+## §693 · THE THREE PARALLEL SWEEPS LAND — THE SITTING IS PARTLY POISONED, THE BLANKET SENTENCES ARE THE REAL EXPOSURE, AND THE REGISTER SHRINKS (2026-08-27 ~01:40 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+Three read-only sweeps ran beside DRESS-1b (file-disjoint, gate-free — the only parallelism
+PA.10 permits). Nothing was edited, staged, or moved by any of them.
+
+- **§693.1 THE P0 VERDICT: PARTLY POISONED — IN EXACTLY ONE BOUNDED, TESTABLE PLACE.** The
+  sitting divides cleanly. §292 and §295 cite no unattributed section at all (**verified as
+  clean, not merely unreported** — the sweep ran that as a negative control). §293, §294,
+  §296, §297 and §298 all rule on §287/§290 ground, and **§298 alone cites §287 six times**
+  — but only **two** are true discharges: **§298.1(b) MOOT and §298.1(d) VOID, both resting
+  on §287.10 alone.** The rest are ratifications that largely carry their own evidence:
+  **weakened by their ground, not voided by it.** ⛔ **§287.10's factual premise — "all
+  images were previously viewed/measured" — occurs EXACTLY ONCE in 29,062 ledger lines,
+  inside §287.10 itself, and §298.1(b) RESTATES it rather than re-deriving it.** Sharper
+  than §687.4 knew: **the ruling §298 killed had itself ordered the Fable sitting to
+  re-validate those very taste calls** (§242, at :8703 — "with Fable re-validating the taste
+  calls on holdout members specifically at the retrovalidation sitting"). **The ordered
+  Fable work was cancelled rather than performed.**
+- **§693.2 ⛔ A SECOND P0, LARGER IN FORWARD CONSEQUENCE — AND IT IS THE GROUND UNDER THE
+  MAP WE ARE BUILDING NOW.** **§299 (FABLE-TEXT) admitted the codex first-map slice into the
+  program** — 13 packets, 18 fabric modules, 62 files, **+14,767 lines** — as "the app-side
+  fabric home the repaired sandbox fabric ports into", and **every criterion it judged
+  against is UNKNOWN**: the no-fifth-authority law is §287.9's, the port-target shape is
+  §287.9's, the release-blocking clearance cites §290.2/§290.4, and all three D1 obligations
+  are defined by §287.5, §288/§288.8 and §287.7. **§299.4 additionally RETROACTIVELY
+  AUTHORIZED 13 census re-records (+86 titles across 24 files) that it had just named "an
+  AUTHORITY breach."** ⛔ **And the recursion is in the record's own words: §296.2 calls the
+  slice "FABLE-UNVALIDATED NON-LEDGER WORK — exactly the class this sitting exists to
+  review" — and the sitting then reviewed it against §287–§290, which are themselves
+  unattributed.**
+- **§693.3 ⛔⛔ THE STRUCTURAL FINDING IS WORSE THAN THE POISON: THREE BLANKET CLEARANCE
+  SENTENCES.** Each asserts more than any executed pass covered — **§237.2's "Rows §1-§237
+  are Fable-validated"** (already refuted at the register's §6.1) · **FABLE_VALIDATION_QUEUE
+  :7359's "Everything ABOVE this line is FABLE-VALIDATED"** · **F-SURVEY-1's title claim to
+  have "CLEARED THE OPUS/CODEX-ERA DEBT" on a survey of 30 sections.** ⭐ **The sweep tested
+  the second and it happens to be TRUE — which is precisely the point: nobody had measured
+  it either way, and a sentence that is true BY LUCK reads identically to one that is
+  false.** This is the §685 rule's deepest justification, arrived at independently: the
+  danger was never Opus work, it was **unmeasured confidence**.
+- **§693.4 §287–§290's PROVENANCE CAN NEVER BE RECOVERED — THE LEDGER SAYS SO ITSELF.**
+  §291.3 records that one commit landed all four, so **the trailer channel is structurally
+  blind for them** and no in-repo instrument can ever speak to their seat. They do not get
+  resolved; they get **RULED**. That is why the sweep's second-ranked act is a four-section
+  sitting rather than more measurement.
+- **§693.5 ⭐ THE REGISTER SHRINKS — SIX STRIKES, EACH BY MEASUREMENT.** Striking honestly is
+  worth as much as listing, and these were all found by executing rather than re-reading.
+  **(i) THE "INVISIBLE BLOCK" P0 IS STRUCK OUTRIGHT — the block is FABLE, not Opus**,
+  removing **22 sections** from the owed surface. **(ii) §687.5's PROVENANCE CLAIM for §12
+  and §16 is STRUCK — not their substance**: I promoted three items as "all UNKNOWN
+  provenance" and the instrument says otherwise for two of them. My own entry, corrected by
+  the instrument I built. **(iii) §355 and the two protocols built on it** (§357's
+  reclassification, §358.2's multi-run classification) — the varying-cast contamination
+  hypothesis was refuted inside its own instrument. **(iv) §338.1's minKeys cure path** —
+  killed by measurement (8→7 clears ZERO additional rows estate-wide). **(v) §370's
+  four-lane cap** — superseded twice, by §465 and §647.1. **(vi) §414's recovery diagnosis**
+  — both counts wrong, and the lane refuted the chair before acting.
+- **§693.6 THREE ITEMS ARE THE OWNER'S, NOT FABLE'S — AND THEY ARE ONE SHAPE.** **§22, §336
+  and §362** are each *a chair converting one owner sentence into standing authority under a
+  carve-out list the chair drew itself*, and all three are UNKNOWN. §22 is already
+  registered P0; **§336 and §362 join it, and §336's reading confirms or unwinds five landed
+  WEB cars in one paragraph.** A Fable seat cannot settle these — **only the owner can say
+  what their own sentence meant.** → OWNER DOCKET.
+- **§693.7 TWO LIVE PRODUCT FINDINGS, MEASURED AT THE TIP.** **(i) F1: a DM-facing surface
+  prints a raw engine token** — the headline key in `relationshipRuleHelpers.js` — recorded
+  2026-08-04 by lane WR-9, **owner-gated because closing it moves same-seed hashes**, and
+  **still live 21 days later**. → OWNER DOCKET (close, or defer explicitly with the shift
+  declared). **(ii) TWO HOLES IN THE SIGNATURE SURFACE:** SIGNED_CONSTANTS carries **ZERO
+  rows** for `BOUNDARY_EPS_Q` (§328.4) and its named sibling — so **the register's P3
+  stratum, whose whole safety argument is "the owner's tuning signature walks this same
+  sheet," does not reach them.** A safety net with a hole in it is worse than none, because
+  it is trusted. → the sheet gains both rows before the tuning pass.
+- **§693.8 THE SCOPED PASS IS NOW BUYABLE.** A **10 % pass ≈ one Fable window** (the four
+  ranked acts plus one instrument run) buys **every place where something reported CLOSED is
+  not closed**: the §287.10 premise **measured rather than re-judged** — which simultaneously
+  settles §242's 53-plate roster and whether §287.15's sealed-set gate is over-scoped, and
+  therefore whether probability and culture-conditioned constants are still legitimately
+  blocked · §287–§290 **ruled**, the ground under the port target this map programme is
+  building on right now · §336/§362 **read by the owner** · the locks contradiction ruled
+  **wire-or-retire** (the two records disagree about DISPOSITION, and **neither disposition
+  was ever executed** — a fifteen-minute ruling, not an investigation). **Total: about
+  thirteen sections, two executable checks, one owner reading — and it REMOVES 22 sections
+  rather than adding any.**
+- **§693.9 WHAT THE SWEEPS DID NOT COVER, NAMED SO IT IS NOT MISTAKEN FOR CLEAN.**
+  **§440–§684 as a body — 245 sections, the single largest unexamined surface**, filed P3
+  "recovered-not-marked" on **trailer evidence alone**; no sweep read it. The **sealed
+  namespaces** `refs/trains/*` (31) and `refs/preserved/*` (3), which any sweep scoped to
+  `refs/preserve/` misses entirely. **SILENT RE-DERIVATIONS** — every strike above was found
+  by explicit supersession language, so a later section that solved the same problem
+  *without citing the earlier one* is invisible to this method. The **document estate
+  outside the two queues**. And **whether the sitting's ratifications independently carry
+  themselves** — that check was run on §298.1(b) and on nothing else.

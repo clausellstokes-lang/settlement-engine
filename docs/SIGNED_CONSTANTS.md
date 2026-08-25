@@ -79,6 +79,14 @@ deliberately). No time gate (wall-clock spread is noise, §635.3).
 | Mosaic share bands (meadow/pasture/waste per tier) | R-MORPH §1 consumption + REG-H's measure | REG-H |
 | Ring-census age-monotonicity tolerance | REG-GROW-B's measure | REG-GROW |
 
+## ⛔ HOLES IN THIS SHEET, FOUND §693.7(ii) — the P3 safety net did not reach them
+The retrovalidation register places minted constants at P3 on the explicit ground that
+"the owner's tuning signature walks this same sheet, last." **Measured: this sheet carried
+ZERO rows for `BOUNDARY_EPS_Q` (§328.4) and its named sibling** — so those constants were
+never on the page the argument depends on. **A safety net with a hole in it is worse than
+none, because it is trusted.** Both are listed here as UNMINTED-PENDING-ON-SHEET and must
+carry their measured values and basis before the tuning pass reads this page.
+
 ## OWNER-SIGNED (standing, untouched by this program)
 The dwellings bands B0–B21 and the POWERS schema (law/SIGNED-BANDS-2026-08-23.md) ·
 THE PROMISE and every constitutional law above this sheet. The TUNING SIGNATURE
