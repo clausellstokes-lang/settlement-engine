@@ -1,0 +1,1167 @@
+/**
+ * domain/townMap/fabric/partitionConstruct.js — ⭐⭐⭐ SPINE-1 · DESIGN_SPINE §3a–§3d under
+ * **Amendment A1.4** · **THE EPOCH FOLD: THE LEDGER'S HISTORY BECOMES ONE PLANAR SUBDIVISION.**
+ *
+ * A1.4 rules the shape of this file in one sentence: *"the ledger remains the pure DATA pre-stage;
+ * the PARTITION CONSTRUCTOR is a single-shot stage that FOLDS the ledger's epochs inside one build
+ * (one construction per build; a frame = the same fold on the truncated ledger — prefix closure
+ * preserved because the fold is append-only)."* So there is exactly one entry point, it runs once,
+ * and it walks `ledger.epochs` in order appending into ONE arrangement (A1.6).
+ *
+ * THE FOUR ACTS, in the order §3 gives them:
+ *   3a FOUNDING     — the frame in the typed form its origin demands
+ *   3b ACCRETION    — plan units added at the frontier; **the way network GROWS as the gaps**
+ *   3c THE WALL     — the wrap traced from piece enclosure, facet-resampled, inserted, gates minted
+ *   3d UNDER A WRAP — infill first, then TYPED extramural emission stamped at emission
+ *
+ * ⭐⭐⭐ **A2.1 SUPERSEDES THE PLAN-UNIT SPELLING: THE ADDING RULE IS ONE RECURSION.**
+ * The first build of this file made an R-MORPH "atomic street block" the piece-adding quantum —
+ * a patch, a way, two plot series. Amendment A2.1 (§676) replaces it with the STOP-RULE GUILLOTINE
+ * (`subdivide` below): one recursion whose COARSE cuts open gaps (the way network) and whose FINE
+ * cuts are gapless (party walls), halting on a per-piece area threshold. It is strictly better on
+ * this lane's own measurements — the patch spelling left 5,943 geometric refusals and 13 proper
+ * crossings on the town leaf; the recursion cuts inside bounded faces and does neither — and it
+ * makes A1.2's aggregation the exact inverse of the cut that generated the run.
+ *
+ * ⭐⭐ **THE ORGANIC GUARD, AND A2.2 CLOSES IT.**
+ * §3b says irregularity *"is a property of the PIECE-ADDING rule per origin type … never a
+ * post-hoc jitter"*, and the panel's morphology lens measured what happens when a rule satisfies
+ * that sentence and still combs: at the seal `parcels.js:404-413` lays rows×cols with its own
+ * "ROW JITTER" INSIDE the piece-adding loop under ONE `grainAngle` per organism, and the shipped
+ * organic and regularized leaves are statistically the same fabric (median nearest-neighbour axial
+ * difference 0.03° both; an engine-comb control measures 0.00°, a grown plan-unit quilt 2.29°, an
+ * i.i.d. post-hoc jitter 17.28°). The separating property is **ORIENTATION-DOMAIN STRUCTURE** —
+ * domain granularity well below ward size, within-domain drift small but nonzero, between-domain
+ * diversity high. So the quantum here is R-MORPH's *atomic street-block*: **one way + its two plot
+ * series + their back lanes**, each unit drawing its OWN bearing and module, with a small drift
+ * INSIDE the unit. A comb cannot be rebuilt from it because no two units share a bearing.
+ * A2.2 rules the metrics: roundness gradient centre→edge · junction-degree mix (T vs X share) ·
+ * **cut-angle variance BY RECURSION DEPTH** — and never spectral or jitter metrics. All three are
+ * decision statistics, and this constructor moves no vertex after placing it, so *"never post-hoc
+ * jitter"* (§3b) is enforceable rather than aspirational: a coordinate-noise op class inside this
+ * file is a conviction. ⚠ THE CENSUS ITSELF IS REPORTED, NOT MINTED AS AN EXIT — A1's exit set does
+ * not carry it and adding one is the chair's call.
+ *
+ * ⚠ WATER, EXACTLY AS FAR AS A1.5 GOES AND NO FURTHER. §3e is SPINE-2's. Here the watercourse is a
+ * **REFUSAL MASK**: no way, plot or wrap facet is minted inside the wet band, refusals are COUNTED,
+ * and the frontier vertices a unit stopped at carry `bank`. That is A1.5's *"corridors terminate at
+ * bank/frontier nodes by the partition's own construction"* — and it makes §1's *"no WAY edge
+ * spans WATER"* zero BY CONSTRUCTION with a plantable control. The `WATER` face class and the
+ * `CROSSING` edge type are RESERVED and minted zero; SPINE-2 fills them.
+ *
+ * PURITY: pure. Every draw is `keyedRandom`, which is a string hash with no stream — this module
+ * opens NO `fabricRng` fork, so the fabric's pinned stateful-stream total does not move.
+ */
+
+import { keyedRandom } from './fabricRng.js';
+import { convexHull, resampleClosed } from './fabricGeometry.js';
+import { annotate, beatEvent } from './growthAnnotation.js';
+import {
+  addVertex, chordInFace, createArrangement, cutFaceByLine, cutWay, faceArea, faceCentroid,
+  faceRing, insertRing, liveFaces, locateFace, mintPiece, seedRegion, WAY_RANKS,
+} from './partitionArrangement.js';
+
+export const PARTITION_SCHEMA_VERSION = 1;
+
+/**
+ * ⭐⭐ THE ORIGIN TYPES, and the enum is R-MORPH's two-level typology carried WHOLE rather than
+ * §2's lossy three-slot version. The panel's morphology lens convicted the collapse by name:
+ * `POLYFOCAL` and `DISPERSED_HAMLET_SCATTER` were dropped outright and three distinct forms were
+ * bundled into one "linear/green/row" slot.
+ * ⚠ **TYPED BY R-MORPH, WEIGHTED BY NOBODY.** R-MORPH's own labelling discipline says it *"mints
+ * no probabilities"*, so the doc's "weights grade until fetched-CONFIRMED" over-promised. These are
+ * a CLOSED ENUM the caller selects from; SPINE-1 mints no prevalence prior and no weight table.
+ */
+export const ORIGIN_FORMS = Object.freeze(['NUCLEATED_CROSSROADS', 'ROW_SINGLE', 'ROW_DOUBLE_FACING',
+  'GREEN_VILLAGE', 'STREET_VILLAGE', 'POLYFOCAL', 'DISPERSED_HAMLET_SCATTER']);
+
+/** The planned modes, likewise R-MORPH's. `COMPOSITE` is recovered per-act across epochs. */
+export const PLAN_MODES = Object.freeze(['PLANTED_GRID', 'PLANTED_SPINE', 'ORGANIC_PLAN_UNIT_QUILT',
+  'COMPOSITE']);
+
+/** The way widths, by rank, as a multiple of the settlement's road width. */
+export const RANK_WIDTH = Object.freeze({ artery: 1.0, street: 0.72, lane: 0.5, path: 0.34 });
+
+/**
+ * ⭐⭐ **A2.1's TWO STRUCTURAL CONSTANTS.**
+ * `LOT_FLOOR_RATIO` converts an epoch's plot BUDGET into the recursion's floor area: the ground a
+ * lot finally occupies is bigger than area÷count because the gaps (the way network) are cut out of
+ * the same ground. ⚠ MEASURED, not guessed — see the receipt's floor-calibration row.
+ * `SUBDIVIDE_DEPTH_CAP` is a refusal, not a tuning dial: a recursion that has not halted in this
+ * many levels has a degenerate face and the census should see the piece rather than a stack blow.
+ */
+export const LOT_FLOOR_RATIO = 1.75;
+export const SUBDIVIDE_DEPTH_CAP = 24;
+
+/**
+ * ⭐⭐⭐ **THE LOT FLOOR, IN ROAD-WIDTH² — A1.2's BAND, MADE GENERATIVE.** A1.2 pins the page band
+ * at **2.7–4.6 rw²** (the reference's own, under road-width normalisation). A2.1 says the band is
+ * MANUFACTURED by the halt condition, so the floor is spelled in the band's own unit and the
+ * census becomes a VERIFIER of the mechanism rather than a legislator against it.
+ * ⚠ PROPOSED; calibrated by measurement (see the receipt's band row), rides the tuning signature.
+ */
+export const LOT_FLOOR_RW2 = 0.9;
+
+/**
+ * ⭐⭐⭐ **THE MASS TARGET — WHERE A1.2's BAND IS ACTUALLY MANUFACTURED, and it is the GAP BAR, not
+ * the lot floor.** A party run ends where a GAP cut stopped happening, so the run's area is the
+ * area at which the gap bar last failed — which means the PAGE MASS's size band is a property of
+ * the gap bar and of nothing else. The first spelling used the reference's own heavy-tailed bar
+ * (`area > aMin/(u₁·u₂)`) and the page came back with a band ratio of 2.2–3.9 against the
+ * reference's measured 1.71; a bar drawn about the band centre with the ward's size chaos puts the
+ * masses where A1.2 pins them, and the §6 page census then VERIFIES the mechanism (A2.1) instead of
+ * arguing with it.
+ * ⚠ PROPOSED; rides the chair's signature and the owner's tuning re-signature.
+ */
+export const MASS_TARGET_RW2 = 3.6;
+
+/**
+ * ⭐ DENSIFICATION UNDER A STANDING WRAP. §3d's infill genuinely makes SMALLER tenure than open
+ * accretion — that is what densification IS — so the floor scales down rather than being abandoned.
+ * ⚠ PROPOSED; rides the tuning signature.
+ */
+export const INFILL_FLOOR_SCALE = 0.62;
+
+const DEG = Math.PI / 180;
+
+/**
+ * ⛔⛔ **EVERY DRAW CALLS `keyedRandom` DIRECTLY, WITH ITS MECHANIC ID AS A LITERAL, AND THAT IS A
+ * REGISTRY REQUIREMENT RATHER THAN A STYLE.** The stage-manifest walker derives a node's
+ * `randomNamespaces` from the string LITERALS passed to `keyedRandom`/`hashUnit`/`fabricRng` **at
+ * the call site**. A local `draw(seed, key, mechanic, i)` helper hides every one of them: the
+ * literal is an argument to `draw`, the walker sees only a variable, and the node registers ZERO
+ * namespaces while minting ten. That is the silent half of the class REG-5 banked — *a new
+ * key-minting derivation owes both registries* — and the version of it that no walker convicts,
+ * because a derived empty set matches a declared empty set perfectly.
+ *
+ * ⚠ `keyedRandom` is a pure string hash with NO stream, so this module opens no `fabricRng` fork
+ * and the fabric's pinned stateful-stream total does not move.
+ */
+
+/** Facet a ring to a form's own economy — the turn distribution is a property of the FORM. */
+function facetRing(ring, facets) {
+  const n = Math.max(6, Math.round(facets));
+  return resampleClosed(ring, n);
+}
+
+/** Is a world point inside the watercourse's wet band? The construction refusal mask. */
+function inWater(input, x, y, pad) {
+  const w = input.water;
+  if (!w || !w.line || w.line.length < 2) return false;
+  const half = (w.width || 0) / 2 + (w.pad || 0) + (pad || 0);
+  if (!(half > 0)) return false;
+  let best = Infinity;
+  for (let i = 0; i + 1 < w.line.length; i++) {
+    const [ax, ay] = w.line[i]; const [bx, by] = w.line[i + 1];
+    const dx = bx - ax; const dy = by - ay;
+    const L2 = dx * dx + dy * dy;
+    let t = L2 > 0 ? ((x - ax) * dx + (y - ay) * dy) / L2 : 0;
+    t = t < 0 ? 0 : (t > 1 ? 1 : t);
+    const px = ax + dx * t; const py = ay + dy * t;
+    const d = Math.hypot(x - px, y - py);
+    if (d < best) best = d;
+  }
+  return best <= half;
+}
+
+/** Does the segment a→b touch the wet band anywhere? Sampled at the arrangement's own resolution. */
+function segTouchesWater(input, a, b, pad) {
+  if (!input.water || !input.water.line) return false;
+  const L = Math.hypot(b[0] - a[0], b[1] - a[1]);
+  const n = Math.max(2, Math.ceil(L / 0.5));
+  for (let i = 0; i <= n; i++) {
+    const t = i / n;
+    if (inWater(input, a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, pad)) return true;
+  }
+  return false;
+}
+
+/**
+ * A ring of `n` facets around a centre — the founding extent's own outline.
+ * ⛔⛔ **NO WOBBLE. A2.2 FORBIDS COORDINATE NOISE IN THE CONSTRUCTOR** and the first spelling of
+ * this function carried exactly the banned thing: a per-facet radius jitter on a circle. The
+ * reference contains ZERO coordinate noise; its irregularity is entirely decision statistics. The
+ * extent is a clean polygon and every irregularity a reader sees comes from what is CUT inside it.
+ */
+function discRing(cx, cy, r, n) {
+  const out = [];
+  for (let i = 0; i < n; i++) {
+    const a = (i / n) * Math.PI * 2;
+    out.push([cx + Math.cos(a) * r, cy + Math.sin(a) * r]);
+  }
+  return out;
+}
+
+/**
+ * ⭐⭐⭐ **THE FOLD.** One construction per build; epochs APPEND.
+ * ⚠ NAMED `buildSettledPartition` AND NOT `buildPartition`: `organismFields.js` has exported a
+ * `buildPartition` since the organism era and the assembly imports it. Two exports with one name in
+ * one importer is a syntax error, and the near-miss is worse — a reader who greps `buildPartition`
+ * finds the organism grid.
+ *
+ * @param {Object} input
+ * @param {string} input.seed
+ * @param {any}    input.ledger        a `growthLedger` artifact — the pure data pre-stage
+ * @param {{cx:number,cy:number,radius:number}} input.extent
+ * @param {string} input.originForm    one of ORIGIN_FORMS
+ * @param {string} [input.planMode]    one of PLAN_MODES
+ * @param {number} input.roadWidth     the settlement's own road width (the rw of A1.2's rw² band)
+ * @param {number} input.bodyTarget    the REPRESENTATIVE body count the substrate holds (A1.1)
+ * @param {{line:Array<number[]>,width:number,pad?:number}|null} [input.water]
+ * @param {{facets:number,width:number}|null} [input.wallForm]
+ * @param {number} [input.epochCap]    fold at most this many epochs (the perf harness's dial)
+ */
+export function buildSettledPartition(input) {
+  const seed = String(input.seed || 'partition-seedless');
+  const ledger = input.ledger;
+  const epochs = (ledger && ledger.epochs) || [];
+  const arr = createArrangement();
+  const state = {
+    arr,
+    seed,
+    input,
+    /** @type {Record<string, any>} */ annotations: {},
+    /** @type {Array<any>} */ wraps: [],
+    /** @type {Array<any>} */ gates: [],
+    /** @type {Array<any>} */ units: [],
+    /** @type {Array<any>} */ emissions: [],
+    /** @type {Array<any>} */ quarters: [],
+    waterRefusals: 0,
+    gateEconomyRefusals: 0,
+    sprawlRefusals: 0,
+    lastYear: 0,
+    plots: 0,
+    epoch: 0,
+    order: 0,
+    rootWard: -1,
+    rootFace: -1,
+    /** @type {Array<{face:number,at:number[],bearing:number}>} */ wayIndex: [],
+    /** ⭐ A2.1's CUT RECORD. `runs` mints party-run ids at gapless cuts; `blockOfRun` is the BLOCK
+     *  piece a run belongs to, so A1.2's stage-1 dissolve READS the run rather than re-finding it. */
+    runs: 0,
+    blocks: 0,
+    develops: 0,
+    /** @type {Map<string,number>} */ blockOfRun: new Map(),
+    laneWidth: (input.roadWidth || 5) * RANK_WIDTH.lane,
+  };
+
+  const cap = Number.isFinite(input.epochCap) ? Math.min(input.epochCap, epochs.length) : epochs.length;
+  for (let k = 0; k < cap; k++) {
+    state.epoch = k;
+    state.order = 0;
+    const ep = epochs[k];
+    state.lastYear = ep.year;
+    // ⭐⭐ ONE BUDGET PER EPOCH, SPENT ONCE. The ledger's population at K, scaled to the
+    // REPRESENTATIVE substrate (A1.1), minus what the partition already holds. Accretion, infill
+    // and emission all draw on THIS number — the first spelling gave infill its own budget and the
+    // town leaf grew 530 bodies out of a 1,197-body settlement in seven plan units, because infill
+    // was spending the same souls accretion had already spent.
+    let budget = Math.max(0, epochTarget(state, ep) - state.plots);
+    if (k === 0) budget = foundingFrame(state, ep, budget);
+    else if (state.wraps.length) {
+      // ⭐ §3d · UNDER A STANDING WRAP THERE IS NO FREE ACCRETION. Growth is INFILL, and only then
+      // does a TYPED act put souls outside — never untyped sprawl.
+      const share = ep.plotSetDelta > 0 ? (ep.intramuralDelta || 0) / ep.plotSetDelta : 1;
+      budget -= infill(state, ep, Math.round(budget * share));
+      for (const em of (ep.emissions || [])) budget -= emit(state, ep, em, budget);
+    } else budget -= accrete(state, ep, budget);
+    for (const ce of (ep.circuitEvents || [])) raiseWrap(state, ep, ce);
+    for (const qm of (ep.quarterMints || [])) mintQuarter(state, ep, qm);
+    reconcileTenure(state, ep);
+    void budget;
+  }
+
+  sweepGateEconomy(state);
+  return publish(state, cap);
+}
+
+/**
+ * ⭐⭐ §3a · THE FOUNDING FRAME. The site becomes the initial frame **in the typed form its origin
+ * demands** — a nucleated cluster at a crossing, a row along one way, a planned plat when the
+ * history holds a dated founding act.
+ *
+ * ⚠ THE ROOT FACE IS SEEDED AT THE **FINAL** EXTENT AND CONSUMED FORWARD. That is what makes the
+ * fold append-only: no epoch ever re-cuts the outline, so a frozen wrap and an emitted delta stay
+ * exactly where the epoch that made them put them (A1.6 / §3g's prefix closure).
+ */
+function foundingFrame(state, ep, budget) {
+  const { arr, seed, input } = state;
+  const ex = input.extent;
+  const outline = discRing(ex.cx, ex.cy, ex.radius, 24);
+  state.rootFace = seedRegion(arr, outline, {
+    faceClass: 'FIELD', edgeType: 'BOUND', frontier: true, key: 'extent',
+  });
+  state.rootWard = mintPiece(arr, 'WARD', -1, null, {
+    name: null, epoch: 0, reason: 'the founding ward — name-rights are EARNED at a tier threshold',
+  });
+  stamp(state, `ward.${state.rootWard}`, 'FOUNDING', ep, 'history.founding.age');
+
+  const bearing = keyedRandom(seed, 'founding', 'bearing', 0) * 360;
+  const form = input.originForm || 'NUCLEATED_CROSSROADS';
+  const rw = input.roadWidth || 5;
+  // ⭐ THE FRAME'S BEARING IS RE-DRAWN UNTIL THE SITE ACCEPTS IT. A settlement on a river has its
+  // spine ALONG the water, not across it — so a refused bearing is re-drawn rather than dropped,
+  // and the site therefore SHAPES the founding frame instead of merely vetoing it.
+  for (let attempt = 0; attempt < 12; attempt++) {
+    const b = bearing + attempt * 15;
+    const spines = foundingSpines(form, [ex.cx, ex.cy], b, ep.builtRadius || ex.radius * 0.3);
+    let laid = 0;
+    for (const [i, sp] of spines.entries()) {
+      const host = locateFace(arr, sp.at[0], sp.at[1]);
+      if (host < 0) continue;
+      if (layWay(state, host, sp.at, sp.dir, rw * RANK_WIDTH.artery, 'artery', `found.${i}`, ep)) laid++;
+    }
+    if (laid) break;
+  }
+  // ⭐ THE FOUNDING VOID. A market/green is a piece whose EMPTINESS is the point (§1) — it is cut
+  // as ground at the frame's own crossing, never furnished here (the vocabulary is REG-4's).
+  const voidAt = [ex.cx, ex.cy];
+  const vf = locateFace(arr, voidAt[0], voidAt[1]);
+  if (vf >= 0 && arr.faces[vf].cls !== 'WAY' && !inWater(input, voidAt[0], voidAt[1])) {
+    const side = Math.max(rw * 2.2, Math.sqrt(faceArea(arr, vf)) * 0.34);
+    const cut = carveVoid(state, vf, voidAt, side, form === 'GREEN_VILLAGE' ? 'green' : 'market', ep);
+    if (cut < 0) state.waterRefusals += 0;
+  }
+  // the founding epoch's own plot budget, spent by the same recursion every later epoch uses
+  return Math.max(0, budget - accrete(state, ep, budget));
+}
+
+/**
+ * ⭐⭐ **THE EPOCH'S TENURE RECONCILIATION.** A face can be split by an act that is not a
+ * subdivision — the wrap's ring insertion cuts straight through whatever it crosses — and the new
+ * half inherits its parent's CLASS but deliberately not its PIECE (see `splitFaceChain`'s guard, and
+ * the reason: one piece owning two faces would make A1.2's identity bijection false at the
+ * substrate). So at the close of every epoch each piece-less piece face is given its own tenure,
+ * under the sibling's block, and STAMPED.
+ * ⛔ THIS IS A REPAIR STEP AND IT IS NAMED AS ONE. The containment census counted 11 piece-less plot
+ * faces on the town leaf before it existed; leaving them to be swept up silently at publication is
+ * exactly the write-that-survives-one-path class this estate keeps paying for.
+ */
+function reconcileTenure(state, ep) {
+  const { arr } = state;
+  for (const f of liveFaces(arr)) {
+    if (f.piece >= 0) continue;
+    if (f.cls === 'PLOT') {
+      const block = neighbourBlock(state, f.id);
+      const pid = mintPiece(arr, 'PLOT', f.id, block, { reconciled: true });
+      state.plots++;
+      stamp(state, `plot.${pid}`, 'INFILL', ep,
+        `tenure reconciled at the close of epoch ${state.epoch} — the piece was split by an act`
+        + ' that was not a subdivision');
+    } else if (f.cls === 'VOID' && !state.annotations[`void.${f.id}`]) {
+      stamp(state, `void.${f.id}`, 'INFILL', ep, `a void left by an epoch-${state.epoch} act`);
+    } else if (f.cls === 'WAY' && !state.annotations[`way.${f.id}`] && !state.annotations[`gate.${f.id}`]) {
+      stamp(state, `way.${f.id}`, 'INFILL', ep, `a way face split by an epoch-${state.epoch} act`);
+    } else if (f.cls === 'WALLBAND' && !state.annotations[`wallband.${f.id}`]) {
+      stamp(state, `wallband.${f.id}`, 'CIRCUIT_RAISED', ep,
+        `band ground split by an epoch-${state.epoch} act`);
+    }
+  }
+}
+
+/** The BLOCK piece of a neighbouring plot, or a fresh one under the root ward. */
+function neighbourBlock(state, fid) {
+  const { arr } = state;
+  let h = arr.faces[fid].he;
+  const start = h;
+  let guard = 0;
+  do {
+    const he = arr.halfEdges[h];
+    const nb = arr.faces[arr.halfEdges[he.twin].face];
+    if (nb && nb.piece >= 0 && arr.pieces[nb.piece].cls === 'PLOT') {
+      return arr.pieces[nb.piece].parent;
+    }
+    h = he.next;
+    if (++guard > 4096) break;
+  } while (h !== start);
+  return mintPiece(arr, 'BLOCK', -1, state.rootWard, { reconciled: true });
+}
+
+/** The founding spines each origin form demands. Typed, closed, and no weights are minted. */
+function foundingSpines(form, at, bearing, r) {
+  const b = bearing * DEG;
+  const u = [Math.cos(b), Math.sin(b)];
+  const v = [-u[1], u[0]];
+  switch (form) {
+    case 'ROW_SINGLE':
+    case 'STREET_VILLAGE':
+      return [{ at, dir: u }];
+    case 'ROW_DOUBLE_FACING':
+      return [{ at, dir: u }];
+    case 'GREEN_VILLAGE':
+      return [{ at, dir: u }, { at: [at[0] + v[0] * r * 0.6, at[1] + v[1] * r * 0.6], dir: u }];
+    case 'POLYFOCAL':
+      return [
+        { at: [at[0] - u[0] * r * 0.45, at[1] - u[1] * r * 0.45], dir: v },
+        { at: [at[0] + u[0] * r * 0.45, at[1] + u[1] * r * 0.45], dir: v },
+        { at, dir: u },
+      ];
+    case 'DISPERSED_HAMLET_SCATTER':
+      return [{ at, dir: u }];
+    case 'NUCLEATED_CROSSROADS':
+    default:
+      return [{ at, dir: u }, { at, dir: v }];
+  }
+}
+
+/** Cut a square-ish VOID out of a face — the market/green whose emptiness is the point. */
+function carveVoid(state, fid, at, side, kind, ep) {
+  const { arr } = state;
+  const half = side / 2;
+  let cur = fid;
+  const dirs = [[1, 0], [0, 1]];
+  for (const d of dirs) {
+    for (const s of [1, -1]) {
+      const p = [at[0] - d[1] * 0 + d[0] * 0, at[1]];
+      const off = [at[0] + (-d[1]) * 0, at[1]];
+      void p; void off;
+      const q = [at[0] + d[0] * 0 + (-d[1]) * s * half, at[1] + d[1] * 0 + d[0] * s * half];
+      const res = cutFaceByLine(arr, cur, q, d, { type: 'BOUND', key: `void.${kind}` });
+      if (!res) return -1;
+      const keep = res.faces.find((f) => {
+        const c = faceCentroid(arr, f);
+        return Math.abs(c[0] - at[0]) <= half + 1e-6 && Math.abs(c[1] - at[1]) <= half + 1e-6;
+      });
+      cur = keep === undefined ? res.faces[0] : keep;
+    }
+  }
+  arr.faces[cur].cls = 'VOID';
+  arr.faces[cur].attrs = { ...arr.faces[cur].attrs, voidKind: kind };
+  const pid = mintPiece(arr, 'BLOCK', cur, state.rootWard, { voidKind: kind });
+  void pid;
+  stamp(state, `void.${cur}`, 'FOUNDING', ep, `the founding ${kind} at the frame's crossing`);
+  return cur;
+}
+
+/** Lay one way through a face, refusing the watercourse. Returns the way face or -1. */
+function layWay(state, fid, at, dir, width, rank, key, ep) {
+  const { arr, input } = state;
+  // ⛔⛔ THE WATER TEST IS ON THE **CHORD**, NOT ON THE EXTENT DIAMETER. Testing a full-diameter
+  // segment refuses every line through a riverside town — measured: the town leaf's founding
+  // arteries were all refused and it drew ZERO plots. The chord is the ground the cut will
+  // actually make into a way, so it is the ground §1's "no WAY edge spans WATER" is about.
+  const chord = chordInFace(arr, fid, at, dir);
+  if (!chord) { state.waterRefusals += 0; return null; }
+  // ⚠⚠ **THE PAD IS THE WAY'S OWN HALF-WIDTH, AND WITHOUT IT THE INVARIANT FAILS ON REAL LEAVES.**
+  // A way is a GAP WITH WIDTH (§1): testing only its centreline lets the kerbs dip into the
+  // watercourse while the centreline stays dry. Measured before the pad: 1, 4 and 1 way faces with
+  // a ring vertex inside the wet band on town-2, highwater and year-100 — three of eighteen leaves
+  // reding a structural invariant on a technicality that was really a missing half-width.
+  if (segTouchesWater(input, chord[0], chord[1], width / 2)) { state.waterRefusals++; return null; }
+  // ⭐⭐ **A1.3's GATE ECONOMY, ENFORCED AT CUT TIME.** *"Gates mint for major ways at the raise;
+  // thereafter a way may NOT cross the band ungated — later ways dead-end at the band, divert to a
+  // gate, or a recorded act mints a postern."* A chord that would cross a STANDING band is refused
+  // here rather than cut and then convicted by the census; the refusal is counted so the number a
+  // reader sees is the number of times the economy actually bound.
+  if (chordCrossesStandingBand(state, chord)) { state.gateEconomyRefusals++; return null; }
+  const res = cutWay(arr, fid, at, dir, width, { rank, key });
+  if (!res) return null;
+  stamp(state, `way.${res.way}`, state.wraps.length ? 'INFILL' : 'FOUNDING', ep,
+    `the ${rank} laid as the gap between the pieces added at epoch ${state.epoch}`);
+  state.wayIndex.push({ face: res.way, at: faceCentroid(arr, res.way), bearing: Math.atan2(dir[1], dir[0]) / DEG });
+  return res;
+}
+
+/**
+ * ⭐⭐⭐ §3b · ACCRETION, BY PLAN UNIT. The budget for the epoch is the ledger's own plot-set
+ * delta scaled to the REPRESENTATIVE substrate (A1.1) — this module mints no sizing law of its
+ * own, `tierScale` remains the sole sizer, and `bodyTarget` arrives from the caller who read it.
+ */
+function accrete(state, ep, want) {
+  const { arr } = state;
+  const before = state.plots;
+  let budget = Math.max(0, want);
+  let attempts = 0;
+  while (budget > 0 && attempts < ACCRETION_HOST_CAP) {
+    attempts++;
+    const host = pickHost(state, ep);
+    if (host < 0) break;
+    const made = developGround(state, host, ep, budget, 1);
+    if (made <= 0) { arr.faces[host].attrs = { ...arr.faces[host].attrs, exhausted: true }; continue; }
+    budget -= made;
+  }
+  return state.plots - before;
+}
+
+/** How many open faces one epoch may take before it stops looking. A refusal, not a dial. */
+export const ACCRETION_HOST_CAP = 64;
+
+/** The REPRESENTATIVE body count this epoch's population implies. `tierScale` remains the sole
+ *  sizer; `bodyTarget` is the count the caller read from it, and this only shares it out by year. */
+function epochTarget(state, ep) {
+  const led = state.input.ledger;
+  const finalPop = Math.max(1, led.epochs[led.epochs.length - 1].population);
+  return Math.round((state.input.bodyTarget || 0) * (ep.population / finalPop));
+}
+
+/**
+ * The host for the next plan unit: the largest live FIELD face inside this epoch's built radius
+ * that is not exhausted and not in the water. ⚠ ORDER IS BY (area desc, faceId asc) — a total,
+ * data-only order, so the construction cannot depend on iteration order.
+ */
+function pickHost(state, ep) {
+  const { arr, input } = state;
+  const R = ep.builtRadius || input.extent.radius;
+  const cx = input.extent.cx; const cy = input.extent.cy;
+  let best = -1; let bestA = 0;
+  for (const f of liveFaces(arr)) {
+    if (f.cls !== 'FIELD') continue;
+    if (f.attrs && f.attrs.exhausted) continue;
+    // ⭐⭐ THE REACH TEST IS ON THE FACE'S **NEAREST POINT**, NOT ITS CENTROID, and the difference
+    // is the whole of accretion. The first spelling tested the centroid: one way across the seeded
+    // disc leaves two flanks whose centroids sit far outside a young epoch's built radius, so the
+    // town found no host at all after its second plan unit and grew the other 1,073 bodies by
+    // bisecting plots. A face is reachable when the settlement's ground TOUCHES it.
+    if (nearestRingDistance(arr, f.id, cx, cy) > R) continue;
+    const c = faceCentroid(arr, f.id);
+    if (inWater(input, c[0], c[1])) continue;
+    // ⛔ NO WAY MAY CROSS A STANDING BAND (A1.3's gate economy). A host inside the band's ground
+    // is refused outright rather than cut and then repaired.
+    if (f.attrs && f.attrs.inBand) continue;
+    const a = faceArea(arr, f.id);
+    if (a > bestA || (a === bestA && best >= 0 && f.id < best)) { bestA = a; best = f.id; }
+  }
+  return bestA > 0 ? best : -1;
+}
+
+/**
+ * ⭐⭐⭐ **ONE PLAN UNIT** — R-MORPH's atomic street-block, and the piece-adding QUANTUM.
+ * A unit draws its OWN bearing and its OWN frontage module; the plots inside it drift by a few
+ * degrees and a third of a module. Two units never share a bearing, which is the property that
+ * makes the fabric a quilt rather than a comb.
+ *
+ * @returns {number} plots added
+ */
+function developGround(state, host, ep, budget, floorScale, intramuralOnly) {
+  const { arr } = state;
+  if (budget <= 0) return 0;
+  const area = faceArea(arr, host);
+  if (!(area > 0)) return 0;
+  const ward = wardDials(state, host);
+  // ⭐⭐ **THE FLOOR IS THE BAND, AND THE BUDGET IS THE GROUND.** The stop threshold is spelled in
+  // road-width² so the size band is manufactured (A2.1); the ledger's plot budget then decides how
+  // much GROUND is developed, not how big a lot is.
+  // ⛔ THE FIRST SPELLING DERIVED THE FLOOR FROM area÷budget AND IT WAS MEASURABLY WRONG: with the
+  // whole extent as the host, the town's lots came out at ~330 u² against a reference band of
+  // 69–118 u² — a threefold miss, and the page census would have been arguing with the mechanism
+  // instead of checking it.
+  const rw = state.input.roadWidth || 5;
+  const aMin = LOT_FLOOR_RW2 * rw * rw * (floorScale || 1);
+  const wantArea = budget * aMin * LOT_FLOOR_RATIO;
+  const patch = area > wantArea * 1.6 ? carveDevelopmentPatch(state, host, wantArea) : host;
+  if (patch < 0) return 0;
+  const box = {
+    made: 0, budget, aMin, gapBar: MASS_TARGET_RW2 * rw * rw * (floorScale || 1), ward, ep,
+    intramuralOnly: !!intramuralOnly,
+  };
+  subdivide(state, patch, box, 0, true, `d${state.develops++}`);
+  return box.made;
+}
+
+/**
+ * ⭐⭐ CARVE THE EPOCH'S DEVELOPMENT PATCH out of open ground: halve the host toward the frontier
+ * until the piece is about the size the budget asks for. ⚠ THIS IS WHAT KEEPS GROWTH FROM BEING
+ * LOPSIDED — a depth-first recursion over the whole extent would build one corner of the settlement
+ * completely and leave the rest as field, because the budget cuts the recursion off mid-descent.
+ */
+function carveDevelopmentPatch(state, host, wantArea) {
+  const { arr, input } = state;
+  const seat = frontierSeat(state, host, input.roadWidth || 5, 0);
+  let cur = host;
+  for (let guard = 0; guard < 14; guard++) {
+    if (faceArea(arr, cur) <= wantArea * 1.6) break;
+    const e = longestRingEdge(faceRing(arr, cur));
+    if (!e) break;
+    const mid = [(e.a[0] + e.b[0]) / 2, (e.a[1] + e.b[1]) / 2];
+    const ex = e.b[0] - e.a[0]; const ey = e.b[1] - e.a[1];
+    const L = Math.hypot(ex, ey) || 1;
+    const res = cutFaceByLine(arr, cur, mid, [-ey / L, ex / L],
+      { type: 'BOUND', key: `patch${state.develops}.${guard}` });
+    if (!res) break;
+    const keep = nearestFaceIn(state, res.faces, seat);
+    if (keep < 0) break;
+    cur = keep;
+  }
+  return arr.faces[cur] && arr.faces[cur].cls === 'FIELD' ? cur : -1;
+}
+
+/**
+ * ⭐⭐⭐ **A2.1 · THE STOP-RULE GUILLOTINE.** One recursion makes the whole fabric: coarse cuts open
+ * GAPS (typed `WAY` at lane rank — the way network is what the gaps are), fine cuts are GAPLESS
+ * (typed party `BOUND`), and the recursion HALTS when a piece falls under a threshold drawn per
+ * piece from the ward's floor scaled by `2^(4·chaosSize·(u−0.5))`.
+ *
+ * ⭐⭐ **SUBDIVISION AND AGGREGATION ARE ONE LAW, WRITTEN FROM OPPOSITE ENDS.** A1.2's stage-1
+ * dissolve says *"generalize REG-1's fusion as a face-set DISSOLVE of interior party BOUND edges
+ * along a run"*. Because the edge TYPE is minted at cut time, a party run is exactly the set of
+ * faces a gapless sub-recursion produced — the view does not have to REDISCOVER runs, it reads the
+ * cut record. `partitionView.js` consumes `arr.cutRuns`.
+ *
+ * ⚠ **THE ANGLE DEVIATION IS SUPPRESSED AT THE FINEST SCALE** and that one line carries most of the
+ * gestalt: chaos belongs to the street pattern, never to the house rectangle. Under 4× the stop
+ * area the cut is exactly perpendicular to the longest edge, so the lots the eye actually reads are
+ * clean quads even in a chaotic ward. A2.2's guard measures precisely this — cut-angle variance BY
+ * RECURSION DEPTH — and it is a decision statistic, never coordinate noise: no vertex is ever moved
+ * after it is placed.
+ */
+function subdivide(state, fid, box, depth, allowGap, key) {
+  const { arr, seed } = state;
+  if (box.made >= box.budget || depth > SUBDIVIDE_DEPTH_CAP) { return; }
+  const area = faceArea(arr, fid);
+  const ward = box.ward;
+  // THE HALT: a per-piece threshold, lognormal-ish about the ward's floor.
+  const stopArea = box.aMin * Math.pow(2, 4 * ward.chaosSize * (keyedRandom(seed, key, 'stop', 0) - 0.5));
+  if (area < stopArea) { emitLot(state, fid, box, key); return; }
+
+  const ring = faceRing(arr, fid);
+  const e = longestRingEdge(ring);
+  if (!e) { emitLot(state, fid, box, key); return; }
+  const tCut = 0.5 + (keyedRandom(seed, key, 'cut', 0) - 0.5) * 0.8 * ward.chaosGrid;
+  const at = [e.a[0] + (e.b[0] - e.a[0]) * tCut, e.a[1] + (e.b[1] - e.a[1]) * tCut];
+  // ⚠ SUPPRESSED under 4× the stop area — see the header.
+  const phi = area < stopArea * 4 ? 0
+    : (keyedRandom(seed, key, 'cut', 1) - 0.5) * (Math.PI / 6) * ward.chaosGrid;
+  const ex = e.b[0] - e.a[0]; const ey = e.b[1] - e.a[1];
+  const L = Math.hypot(ex, ey) || 1;
+  const nx = -ey / L; const ny = ex / L;
+  const dir = [nx * Math.cos(phi) - ny * Math.sin(phi), nx * Math.sin(phi) + ny * Math.cos(phi)];
+  if (inWater(state.input, at[0], at[1])) { state.waterRefusals++; emitLot(state, fid, box, key); return; }
+
+  let kids = null;
+  // ⚠ A GAP IS ONLY ATTEMPTED WHEN THE PIECE CAN HOLD ONE. Asking for a carriageway inside a face
+  // barely wider than the lane costs a refusal every time and always falls through to the gapless
+  // cut anyway — 228 of them on the town leaf before this guard.
+  if (allowGap && area > Math.pow(state.laneWidth * 4, 2)) {
+    const cut = layWay(state, fid, at, dir, state.laneWidth, depth <= 1 ? 'street' : 'lane', key, box.ep);
+    if (cut) {
+      kids = cut.flanks;
+      // ⭐⭐ A GAP **ENDS** A PARTY RUN AND STARTS A BLOCK. The two sides of an alley are different
+      // built masses (so A1.2's stage-1 dissolve stops at the gap) and each side is a new BLOCK —
+      // the ground between ways, which is what stage-2 chunking is allowed to group runs within.
+      for (const k of kids) {
+        arr.faces[k].attrs = { ...arr.faces[k].attrs, run: null, block: `b${state.blocks++}` };
+      }
+    }
+  }
+  if (!kids) {
+    const res = cutFaceByLine(arr, fid, at, dir, { type: 'BOUND', key: `${key}.b` });
+    if (!res) { emitLot(state, fid, box, key); return; }
+    kids = res.faces;
+    // ⭐ THE PARTY RUN, RECORDED AT THE CUT. Both children belong to the run their parent belongs
+    // to; a fresh run id is minted when the parent had none.
+    const run = arr.faces[fid].attrs.run || `r${state.runs++}`;
+    for (const k of kids) arr.faces[k].attrs = { ...arr.faces[k].attrs, run };
+  }
+  for (const [i, k] of kids.entries()) {
+    if (box.made >= box.budget) break;
+    // ⭐⭐ GAPS ONLY ABOVE THE MASS TARGET. Below it the cuts go gapless and the piece becomes ONE
+    // party run — so this line is what puts the page mass inside A1.2's band.
+    const bar = box.gapBar * Math.pow(2, 2 * ward.chaosSize * (keyedRandom(seed, `${key}.${i}`, 'gapbar', 0) - 0.5));
+    const childGap = faceArea(arr, k) > bar;
+    subdivide(state, k, box, depth + 1, childGap, `${key}.${i}`);
+  }
+}
+
+/** The recursion's leaf: a tenure piece, or — at the ward's emptiness rate — a VOID. */
+function emitLot(state, fid, box, key) {
+  const { arr, seed } = state;
+  if (arr.faces[fid].cls !== 'FIELD' && arr.faces[fid].cls !== 'BLOCK') return;
+  // ⛔⛔ **§3d's LAW, ENFORCED AT THE LEAF: UNDER A STANDING WRAP, INFILL STAYS INSIDE IT.**
+  // *"growth is infill … then TYPED extramural emission ONLY"* — never untyped sprawl. A large open
+  // face whose CENTROID is intramural can still reach past the band, and the recursion would then
+  // put lots outside a standing circuit with no act behind them. Measured before this guard: 19, 2,
+  // 4 and 10 untyped extramural lots on the town, city, metropolis and year-100 leaves — which is
+  // exactly REG-4's `sprawl` predicate, non-zero.
+  if (box.intramuralOnly) {
+    const c = faceCentroid(arr, fid);
+    const wrap = state.wraps[state.wraps.length - 1];
+    if (wrap && !inRing(wrap.outer, c)) { state.sprawlRefusals++; return; }
+  }
+  if (keyedRandom(seed, key, 'empty', 0) < box.ward.emptiness) {
+    arr.faces[fid].cls = 'VOID';
+    arr.faces[fid].attrs = { ...arr.faces[fid].attrs, voidKind: 'court' };
+    stamp(state, `void.${fid}`, state.wraps.length ? 'INFILL' : 'FOUNDING', box.ep,
+      `a courtyard left unbuilt at the ward's emptiness rate`);
+    return;
+  }
+  // ⭐⭐ EVERY LEAF BELONGS TO A RUN — a lot with no party neighbour is a run of ONE. Leaving
+  // singletons out of the record makes the run census read 1 on a town of a thousand lots and
+  // gives A1.2's dissolve nothing to consume for most of the page.
+  const run = arr.faces[fid].attrs.run || `r${state.runs++}`;
+  const block = arr.faces[fid].attrs.block || `b${state.blocks++}`;
+  arr.faces[fid].attrs = { ...arr.faces[fid].attrs, run, block };
+  let blockPiece = state.blockOfRun.get(block);
+  if (blockPiece === undefined) {
+    blockPiece = mintPiece(arr, 'BLOCK', -1, state.rootWard, { block });
+    state.blockOfRun.set(block, blockPiece);
+  }
+  const pid = mintPiece(arr, 'PLOT', fid, blockPiece, { run, block });
+  arr.faces[fid].cls = 'PLOT';
+  state.plots++;
+  box.made++;
+  stamp(state, `plot.${pid}`, state.wraps.length ? 'INFILL' : 'FOUNDING', box.ep,
+    `epoch ${state.epoch} subdivision, stop-rule leaf`);
+}
+
+/** The longest edge of a ring — the guillotine's own axis. */
+function longestRingEdge(ring) {
+  let best = null; let bl = -1;
+  for (let i = 0; i < ring.length; i++) {
+    const a = ring[i]; const b = ring[(i + 1) % ring.length];
+    const L = Math.hypot(b[0] - a[0], b[1] - a[1]);
+    if (L > bl) { bl = L; best = { a, b, length: L }; }
+  }
+  return best;
+}
+
+/**
+ * ⭐⭐ THE WARD'S FOUR DIALS — A2.1's dress-parameter tuple, sourced from what SPINE-1 actually
+ * holds. ⚠ WARD **KIND** IS NOT A SPINE-1 INPUT: A1.5 keeps institution seating its own car, so the
+ * kind-by-kind table (craftsmen · merchant · patriciate · slum · administration · military) is
+ * NOT minted here. What is minted is the morphology-sourced base, with the u²-skewed draw that
+ * gives in-band variety. The kind table is CAR-SEATING's to add on top.
+ */
+function wardDials(state, fid) {
+  const { seed, input } = state;
+  const key = `ward.${arr_faceWard(state, fid)}`;
+  const u = keyedRandom(seed, key, 'ward', 0);
+  const base = input.planMode === 'PLANTED_GRID' ? 0.12
+    : (input.planMode === 'COMPOSITE' ? 0.34 : 0.58);
+  return {
+    chaosGrid: base + 0.3 * u * u,
+    chaosSize: 0.3 + 0.5 * keyedRandom(seed, key, 'ward', 1),
+    // ⚠ 3–15 %, not the reference's 3–25 %: our leaves are TENURE pieces with a lifecycle, and an
+    // emptiness that high turned a third of the metropolis into courtyards (1,164 of 3,348).
+    emptiness: 0.03 + 0.12 * keyedRandom(seed, key, 'ward', 2),
+  };
+}
+
+/** Which ward a face belongs to — the root until quarters are minted. */
+function arr_faceWard(state, fid) {
+  const p = state.arr.faces[fid].piece;
+  return p >= 0 ? p : state.rootWard;
+}
+
+/**
+ * The bearing of the nearest way to a point, in degrees, or null — the T-junction bias's input.
+ * ⚠ READ FROM THE INDEX THE CUT ITSELF WROTE. Re-deriving a way's bearing from its face ring is
+ * both slower and less true: the ring is the CARRIAGEWAY, whose longest edge after later cuts need
+ * not be the way's own axis.
+ */
+function nearestWayBearing(state, p) {
+  let best = null; let bd = Infinity;
+  for (const w of state.wayIndex) {
+    const d = Math.hypot(w.at[0] - p[0], w.at[1] - p[1]);
+    if (d < bd) { bd = d; best = w.bearing; }
+  }
+  return best;
+}
+
+/**
+ * The distance from (cx,cy) to the nearest point of a face's boundary — **segments, not vertices.**
+ * ⛔⛔ THE VERTEX-ONLY SPELLING WAS A SILENT ZERO. A founding way cut clean across the seeded disc
+ * leaves two flanks whose only vertices are on the RIM: the kerb runs rim to rim and passes through
+ * the settlement centre, but no vertex is near it. The village leaf therefore reported every open
+ * face as out of reach of an 88-unit built radius and drew **zero plots with zero refusals** — the
+ * worst shape of failure, because nothing at all complains.
+ */
+function nearestRingDistance(arr, fid, cx, cy) {
+  const ring = faceRing(arr, fid);
+  let best = Infinity;
+  for (let i = 0; i < ring.length; i++) {
+    const a = ring[i]; const b = ring[(i + 1) % ring.length];
+    const ex = b[0] - a[0]; const ey = b[1] - a[1];
+    const L2 = ex * ex + ey * ey;
+    let s = L2 > 0 ? ((cx - a[0]) * ex + (cy - a[1]) * ey) / L2 : 0;
+    s = s < 0 ? 0 : (s > 1 ? 1 : s);
+    const d = Math.hypot(cx - (a[0] + ex * s), cy - (a[1] + ey * s));
+    if (d < best) best = d;
+  }
+  return best;
+}
+
+/** Where a plan unit sits inside its host: the ring point nearest the core, pulled inward. */
+function frontierSeat(state, fid, rw, minPull) {
+  const { arr, input } = state;
+  const cx = input.extent.cx; const cy = input.extent.cy;
+  const ring = faceRing(arr, fid);
+  let seat = ring[0]; let bd = Infinity;
+  for (const p of ring) {
+    const d = Math.hypot(p[0] - cx, p[1] - cy);
+    if (d < bd) { bd = d; seat = p; }
+  }
+  const cc = faceCentroid(arr, fid);
+  const dx = cc[0] - seat[0]; const dy = cc[1] - seat[1];
+  const L = Math.hypot(dx, dy) || 1;
+  const pull = Math.min(L * 0.6, Math.max(rw * 2.4, minPull || 0));
+  return [seat[0] + (dx / L) * pull, seat[1] + (dy / L) * pull];
+}
+
+/** The face in `list` whose centroid is nearest `p`, or -1. */
+function nearestFaceIn(state, list, p) {
+  const { arr } = state;
+  let best = -1; let bd = Infinity;
+  for (const f of list) {
+    if (!arr.faces[f] || !arr.faces[f].alive) continue;
+    const c = faceCentroid(arr, f);
+    const d = Math.hypot(c[0] - p[0], c[1] - p[1]);
+    if (d < bd) { bd = d; best = f; }
+  }
+  return best;
+}
+
+/**
+ * ⭐⭐⭐ §3c · **THE WALL EVENT**, under A1.3. The wrap's trace is derived from the PIECE ENCLOSURE
+ * and then **RESAMPLED TO THE FORM'S FACET ECONOMY**; the band is a THIN FACE; gates mint for major
+ * ways at the raise and the gate economy binds every later way.
+ *
+ * ⚠ THE TRACE IS A NEW EDGE CYCLE, NOT A WALK ALONG PIECE EDGES, AND THE PANEL MEASURED WHY. A
+ * trace literally following the boundaries of a 1,016–2,290-parcel town carries hundreds-to-
+ * thousands of fabric-determined vertices; the reference's own main circuits carry 25 and 37, ours
+ * 43–120, and REG-2's tower rhythm keys on the ring's own p75 turn quantile. Inserting the ring
+ * makes it coincident with face boundaries — §1's *"a WALL edge coincides with face boundaries
+ * only"* becomes true because inserting the ring CREATES those boundaries.
+ */
+function raiseWrap(state, ep, ce) {
+  const { arr, input } = state;
+  const form = input.wallForm || { facets: 26, width: (input.roadWidth || 5) * 0.42 };
+  // (1) THE PIECE ENCLOSURE — the hull of the built pieces' own vertices, which is what makes the
+  //     chord across a bay lawful: circuit economy is a property of the enclosure, not of a face.
+  const pts = [];
+  for (const f of liveFaces(arr)) {
+    // ⚠ **PIECES ONLY, NEVER WAYS.** §3c says the wrap encloses the BUILT faces; a way face is a
+    // gap, and including one puts the enclosure wherever that gap happens to reach.
+    if (f.cls !== 'PLOT' && f.cls !== 'VOID' && f.cls !== 'BLOCK') continue;
+    const c = faceCentroid(arr, f.id);
+    if (Math.hypot(c[0] - input.extent.cx, c[1] - input.extent.cy) > ce.frozenRadius) continue;
+    for (const p of faceRing(arr, f.id)) pts.push(p);
+  }
+  if (pts.length < 8) return;
+  const hull = convexHull(pts);
+  if (!hull || hull.length < 4) return;
+  // (2) FACET-RESAMPLE to the form's economy, then hold the trace INSIDE the seeded extent.
+  // ⚠ A wrap point outside the extent has no face to be inserted into and the whole ring is lost —
+  // the clamp is COUNTED so a reader can tell a wrap that fitted from one that was held.
+  const rim = input.extent.radius * 0.9;
+  let clamped = 0;
+  const hold = (ring) => ring.map(([x, y]) => {
+    const dx = x - input.extent.cx; const dy = y - input.extent.cy;
+    const L = Math.hypot(dx, dy);
+    if (L <= rim) return [x, y];
+    clamped++;
+    return [input.extent.cx + (dx / L) * rim, input.extent.cy + (dy / L) * rim];
+  });
+  const outer = hold(facetRing(hull, form.facets));
+  const inner = hold(facetRing(shrinkRing(outer, form.width, input.extent), form.facets));
+  const idx = state.wraps.length;
+  const oIns = insertRing(arr, outer, { type: 'WALL', key: `wrap.E${idx}.out`, attrs: { wrap: idx, side: 'outer' } });
+  const iIns = insertRing(arr, inner, { type: 'WALL', key: `wrap.E${idx}.in`, attrs: { wrap: idx, side: 'inner' } });
+  // (3) THE BAND IS A THIN FACE (A1.3): every face between the two rings becomes WALLBAND ground,
+  //     except a MAJOR way's carriageway, which becomes a GATE.
+  const band = [];
+  const gates = [];
+  for (const f of liveFaces(arr)) {
+    const c = faceCentroid(arr, f.id);
+    if (!inRing(outer, c) || inRing(inner, c)) continue;
+    if (f.cls === 'WAY' && (f.attrs.rank === 'artery' || f.attrs.rank === 'street')) {
+      f.attrs = { ...f.attrs, gate: true, wrap: idx };
+      gates.push(f.id);
+      stamp(state, `gate.${f.id}`, 'CIRCUIT_RAISED', ep,
+        `a ${f.attrs.rank} crossed the wrap at its raise in year ${ce.year}`);
+      continue;
+    }
+    // ⚠ A MINOR WAY IS **SEVERED**, NOT GATED — A1.3's gate economy: gates are few and expensive.
+    const wasWay = f.cls === 'WAY';
+    f.cls = 'WALLBAND';
+    f.attrs = { ...f.attrs, wrap: idx, inBand: true, severed: wasWay };
+    band.push(f.id);
+    // ⚠ A RE-CLASSED FACE OWES A **FRESH** ANNOTATION. Its old key names a class it no longer is,
+    // so the A6.1 walker would count it as an orphan — 41 of them on the town leaf before this.
+    stamp(state, `wallband.${f.id}`, 'CIRCUIT_RAISED', ep,
+      wasWay ? `a minor way severed at the raise of year ${ce.year} — the gate economy is few and`
+        + ' expensive' : `the band's own ground, reserved at the raise of year ${ce.year}`);
+  }
+  // ⛔ §202's NO-OPENING FLOOR: a circuit with no opening is not a circuit. If the economy left
+  //    none, the widest crossing way is forced open — recorded, never silent.
+  let forced = null;
+  if (!gates.length && band.length) {
+    let widest = -1; let wa = 0;
+    for (const fid of band) {
+      const a = faceArea(arr, fid);
+      if (a > wa) { wa = a; widest = fid; }
+    }
+    if (widest >= 0) {
+      arr.faces[widest].cls = 'WAY';
+      arr.faces[widest].attrs = { ...arr.faces[widest].attrs, gate: true, forced: true, rank: 'street' };
+      gates.push(widest);
+      forced = widest;
+      stamp(state, `gate.${widest}`, 'CIRCUIT_RAISED', ep, '§202: a circuit with no opening is not a circuit');
+    }
+  }
+  const wrap = Object.freeze({
+    index: idx,
+    epoch: state.epoch,
+    /** ⛔ THE YEAR IS REQUIRED BY THE SCHEMA — A1.3's vintage honesty. A wrap with no year cannot
+     *  be minted here, which is the §11.11 stamp defect excluded structurally. */
+    year: ce.year,
+    provenance: ce.provenance,
+    frozenRadius: ce.frozenRadius,
+    facets: form.facets,
+    bandWidth: form.width,
+    outer: Object.freeze(outer.map((p) => Object.freeze(p.slice()))),
+    inner: Object.freeze(inner.map((p) => Object.freeze(p.slice()))),
+    gates: Object.freeze(gates.slice()),
+    bandFaces: Object.freeze(band.slice()),
+    forcedGate: forced,
+    clampedFacets: clamped,
+    insertion: Object.freeze({
+      outerSegments: oIns.segments, outerRetyped: oIns.retyped, outerRefused: oIns.refused,
+      innerSegments: iIns.segments, innerRetyped: iIns.retyped, innerRefused: iIns.refused,
+    }),
+    reason: `the circuit recorded at year ${ce.year} (${ce.provenance}), traced from the piece`
+      + ` enclosure at frozen radius ${ce.frozenRadius.toFixed(3)} and resampled to the form's`
+      + ` ${form.facets}-facet economy; ${gates.length} gate(s) minted for major ways at the raise`,
+  });
+  state.wraps.push(wrap);
+  state.gates.push(...gates);
+  stamp(state, `wall.E${idx}`, 'CIRCUIT_RAISED', ep, `wall-built-year (${ce.provenance})`);
+}
+
+/**
+ * ⭐⭐ **THE GATE ECONOMY'S CLOSING SWEEP.** Every way face that ends up in a standing band's own
+ * annulus is either a GATE or it is not a way at all. The raise handles the ways that existed when
+ * it happened and `layWay` refuses new ones — but a way face can also arrive in the annulus by
+ * being SPLIT by a later wrap's insertion, which is neither of those paths. One sweep at the end of
+ * the fold closes the class, and it is a construction act with its own stamp rather than a census
+ * exemption. ⚠ MEASURED: one such face on the metropolis leaf, and it was the last ungated crossing.
+ */
+function sweepGateEconomy(state) {
+  const { arr } = state;
+  if (!state.wraps.length) return;
+  for (const f of liveFaces(arr)) {
+    if (f.cls !== 'WAY' || (f.attrs && f.attrs.gate)) continue;
+    const c = faceCentroid(arr, f.id);
+    const w = state.wraps.find((x) => inRing(x.outer, c) && !inRing(x.inner, c));
+    if (!w) continue;
+    const rank = (f.attrs && f.attrs.rank) || 'lane';
+    if (rank === 'artery' || rank === 'street') {
+      f.attrs = { ...f.attrs, gate: true, wrap: w.index, sweptOpen: true };
+      state.gates.push(f.id);
+      stamp(state, `gate.${f.id}`, 'CIRCUIT_RAISED', null,
+        `a ${rank} found crossing the band of year ${w.year} after the raise — gated by the sweep`);
+    } else {
+      f.cls = 'WALLBAND';
+      f.attrs = { ...f.attrs, wrap: w.index, inBand: true, severed: true };
+      stamp(state, `wallband.${f.id}`, 'CIRCUIT_RAISED', null,
+        `a ${rank} severed at the band of year ${w.year} — the gate economy is few and expensive`);
+    }
+  }
+}
+
+/** Shrink a ring toward the extent centre by `d` world units — the band's inner edge. */
+function shrinkRing(ring, d, extent) {
+  return ring.map(([x, y]) => {
+    const dx = x - extent.cx; const dy = y - extent.cy;
+    const L = Math.hypot(dx, dy) || 1;
+    const s = Math.max(0.02, (L - d) / L);
+    return [extent.cx + dx * s, extent.cy + dy * s];
+  });
+}
+
+/** Would this chord cross a standing wrap's band ground? Sampled at the band's own width. */
+function chordCrossesStandingBand(state, chord) {
+  if (!state.wraps.length) return false;
+  const L = Math.hypot(chord[1][0] - chord[0][0], chord[1][1] - chord[0][1]);
+  const n = Math.max(2, Math.ceil(L / 1.0));
+  for (const w of state.wraps) {
+    for (let i = 0; i <= n; i++) {
+      const t = i / n;
+      const p = [chord[0][0] + (chord[1][0] - chord[0][0]) * t,
+        chord[0][1] + (chord[1][1] - chord[0][1]) * t];
+      if (inRing(w.outer, p) && !inRing(w.inner, p)) return true;
+    }
+  }
+  return false;
+}
+
+/** Even-odd point-in-ring in world units. */
+function inRing(ring, p) {
+  let inside = false;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const [xi, yi] = ring[i]; const [xj, yj] = ring[j];
+    if ((yi > p[1]) !== (yj > p[1])
+      && p[0] < ((xj - xi) * (p[1] - yi)) / (yj - yi) + xi) inside = !inside;
+  }
+  return inside;
+}
+
+/**
+ * ⭐⭐ §3d · UNDER A STANDING WRAP the growth is INFILL — plot subdivision and court infill inside
+ * the standing ring, before any soul settles outside it.
+ */
+function infill(state, ep, want) {
+  const { arr, input } = state;
+  const wrap = state.wraps[state.wraps.length - 1];
+  const before = state.plots;
+  if (want <= 0) return 0;
+  // ⭐⭐ §3d's ORDER, AND IT IS NOT ARBITRARY: **court infill first, plot subdivision after.** Open
+  // intramural ground takes the same stop-rule recursion at a FINER floor — which is where an old
+  // town's back-court lanes come from — and only when the wrap holds no open ground does growth
+  // start dividing tenure.
+  const open = liveFaces(arr)
+    .filter((f) => f.cls === 'FIELD' && !(f.attrs && f.attrs.inBand)
+      && inRing(wrap.inner, faceCentroid(arr, f.id)))
+    .sort((a, b) => faceArea(arr, b.id) - faceArea(arr, a.id) || a.id - b.id);
+  for (const f of open) {
+    if (state.plots - before >= want) break;
+    const c0 = faceCentroid(arr, f.id);
+    if (inWater(input, c0[0], c0[1])) { state.waterRefusals++; continue; }
+    developGround(state, f.id, ep, want - (state.plots - before), 1, true);
+  }
+  // Then tenure subdivision, largest plots first — the same recursion at a finer floor.
+  const hosts = liveFaces(arr)
+    .filter((f) => f.cls === 'PLOT' && inRing(wrap.inner, faceCentroid(arr, f.id)))
+    .sort((a, b) => faceArea(arr, b.id) - faceArea(arr, a.id) || a.id - b.id);
+  for (const f of hosts) {
+    if (state.plots - before >= want) break;
+    const c = faceCentroid(arr, f.id);
+    if (inWater(input, c[0], c[1])) { state.waterRefusals++; continue; }
+    // ⚠ THE SAME RECURSION, AT A DENSIFIED FLOOR — never an ad-hoc threshold. The first spelling
+    // used `area ÷ 3` here, which is not a floor at all: it makes lots relative to whatever it was
+    // handed, and on the town leaf (where most epochs are under a standing wrap) it drove the
+    // median plot to 0.73 rw² against a 3.6 rw² floor the census would then have argued with.
+    arr.faces[f.id].cls = 'FIELD';
+    state.plots--;
+    developGround(state, f.id, ep, Math.min(4, want - (state.plots - before)), INFILL_FLOOR_SCALE, true);
+  }
+  return state.plots - before;
+}
+
+/** Souls per drawn body — the representative ratio the caller's `bodyTarget` implies (A1.1). */
+function denom(state) {
+  const led = state.input.ledger;
+  const finalPop = led.epochs[led.epochs.length - 1].population;
+  return Math.max(1, finalPop / Math.max(1, state.input.bodyTarget || 1));
+}
+
+/**
+ * ⭐⭐ §3d · **TYPED EXTRAMURAL EMISSION, STAMPED AT EMISSION.** The ledger already typed the act
+ * (`emit.origin`); the constructor places it at the matching anchor — a gate first, then a road,
+ * then the frontier — and the READER verifies (A1.5's generator-writes/reader-checks direction).
+ */
+function emit(state, ep, act, budget) {
+  const { arr, input } = state;
+  const wrap = state.wraps[state.wraps.length - 1];
+  const anchor = emissionAnchor(state, wrap, act);
+  if (!anchor) return 0;
+  const host = locateFace(arr, anchor.at[0], anchor.at[1]);
+  if (host < 0 || arr.faces[host].cls !== 'FIELD') return 0;
+  const before = state.plots;
+  const souls = Math.max(1, Math.min(Math.max(0, budget), Math.round(act.souls / denom(state))));
+  developGround(state, host, ep, souls, 1);
+  const rec = Object.freeze({
+    key: act.key,
+    epoch: state.epoch,
+    year: act.year,
+    souls: act.souls,
+    origin: act.origin,
+    anchorKind: anchor.kind,
+    at: Object.freeze(anchor.at.slice()),
+    plots: state.plots - before,
+    /** ⭐ THE STAMP IS THE KERNEL'S; `deriveFaubourgOrigins` is the VERIFIER (A1.5). */
+    stampedBy: 'partitionConstruct.emit',
+    reason: `${act.souls} souls settled extramurally, typed '${act.origin}', anchored at the`
+      + ` ${anchor.kind} the standing circuit of year ${wrap.year} left them`,
+  });
+  state.emissions.push(rec);
+  stamp(state, `emit.${rec.key}`, 'FAUBOURG_EMITTED', ep, act.reason || 'a saturated circuit');
+  return state.plots - before;
+}
+
+/** Where a typed emission lands: gate → road → frontier, the estate's own resolution order. */
+function emissionAnchor(state, wrap, act) {
+  const { arr, input } = state;
+  const out = (fid, kind) => {
+    const c = faceCentroid(arr, fid);
+    const dx = c[0] - input.extent.cx; const dy = c[1] - input.extent.cy;
+    const L = Math.hypot(dx, dy) || 1;
+    const reach = (input.roadWidth || 5) * 3.2;
+    return { kind, at: [c[0] + (dx / L) * reach, c[1] + (dy / L) * reach] };
+  };
+  if (act.origin === 'gate' || act.origin === 'road' || !act.origin) {
+    if (wrap.gates.length) return out(wrap.gates[state.emissions.length % wrap.gates.length], 'gate');
+  }
+  const ways = liveFaces(arr).filter((f) => f.cls === 'WAY');
+  if (ways.length) return out(ways[state.emissions.length % ways.length].id, 'road');
+  return null;
+}
+
+/** ⭐ §3f-GROW · QUARTER MINTING — a named quarter is EARNED at a tier threshold. */
+function mintQuarter(state, ep, qm) {
+  const { arr } = state;
+  const pid = mintPiece(arr, 'WARD', -1, state.rootWard, {
+    tier: qm.tier, year: qm.year, earned: true, reason: qm.reason,
+  });
+  state.quarters.push({ piece: pid, tier: qm.tier, year: qm.year, epoch: state.epoch });
+  stamp(state, `ward.${pid}`, 'QUARTER_MINT', ep, `tier threshold '${qm.tier}' crossed`);
+}
+
+/** ⭐⭐⭐ A6.1 EMISSION, AT CREATION (A1.7's M3 — SPINE-1 owns it, not SPINE-2). */
+function stamp(state, key, beat, ep, sourceEvent) {
+  // ⚠ A NULL EPOCH IS THE CLOSING SWEEP'S, and it stamps `derived-frozen` rather than borrowing the
+  // last epoch's provenance: the act happened at the fold's end, not in a year the ledger records.
+  const prov = ep && ep.provenance ? ep.provenance : (ep === null ? 'derived-frozen' : 'interpolated');
+  const year = ep ? ep.year : state.lastYear;
+  state.annotations[key] = annotate({
+    appearanceEpoch: state.epoch,
+    withinEpochOrder: state.order++,
+    provenance: prov,
+    beatEvents: [beatEvent(beat, year, sourceEvent, prov)],
+  });
+}
+
+/** Publish the partition. Frozen, counted, and every figure a reader can re-derive. */
+function publish(state, foldedEpochs) {
+  const { arr } = state;
+  const byClass = {};
+  for (const f of liveFaces(arr)) byClass[f.cls] = (byClass[f.cls] || 0) + 1;
+  const byEdge = {};
+  for (const e of arr.edges) byEdge[e.type] = (byEdge[e.type] || 0) + 1;
+  return Object.freeze({
+    artifactKind: 'SETTLED_GROUND_PARTITION',
+    schemaVersion: PARTITION_SCHEMA_VERSION,
+    arrangement: arr,
+    faceCounts: Object.freeze(byClass),
+    edgeCounts: Object.freeze(byEdge),
+    wraps: Object.freeze(state.wraps.slice()),
+    gates: Object.freeze(state.gates.slice()),
+    /** ⭐ A2.1's CUT RECORD, published so A1.2's dissolve can READ the runs the cuts generated
+     *  instead of re-discovering them. One row per party run: its BLOCK piece and its member
+     *  faces, in cut order. */
+    blocks: Object.freeze([...state.blockOfRun.entries()].sort((a, b) => (a[0] < b[0] ? -1 : 1))
+      .map(([block, piece]) => Object.freeze({ block, piece }))),
+    runCount: state.runs,
+    emissions: Object.freeze(state.emissions.slice()),
+    quarters: Object.freeze(state.quarters.slice()),
+    annotations: Object.freeze({ ...state.annotations }),
+    plots: state.plots,
+    foldedEpochs,
+    waterRefusals: state.waterRefusals,
+    gateEconomyRefusals: state.gateEconomyRefusals,
+    sprawlRefusals: state.sprawlRefusals,
+    refusals: Object.freeze(arr.refusals.slice()),
+    ranks: WAY_RANKS,
+    reason: `${state.plots} plot(s) folded from`
+      + ` ${foldedEpochs} ledger epoch(s) in ${state.runs} party run(s) across`
+      + ` ${state.blockOfRun.size} block(s);`
+      + ` ${state.wraps.length} wrap(s) with`
+      + ` ${state.gates.length} gate(s); ${state.emissions.length} typed emission(s);`
+      + ` ${state.waterRefusals} act(s) refused by the watercourse,`
+      + ` ${state.gateEconomyRefusals} by the gate economy,`
+      + ` ${state.sprawlRefusals} by §3d's no-untyped-sprawl law;`
+      + ` ${arr.refusals.length} geometric refusal(s)`,
+  });
+}
+
+/** Re-exported so a caller can add a vertex to a published partition's arrangement in a probe. */
+export { addVertex };

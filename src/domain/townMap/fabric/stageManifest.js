@@ -70,12 +70,16 @@ export const FOUNDATION_NODE = 'FOUNDATIONS';
 /**
  * ⛔⛔ THE STAGES WITH NO MODULE AT ALL — the holes, published as data so a reader cannot mistake
  * silence for coverage. SPEC §1.0 grades S1 NOT BUILT, S8 PARTIAL (§239.1 unbuilt), S9 NOT BUILT
- * (*"the #1 ranked gap in both studies"*) and S12 PARTIAL. **S1, S8, S9 and S12 own no module in
- * this tree**, and the manifest says so in the field rather than by omitting a row. Frontage (S9)
+ * (*"the #1 ranked gap in both studies"*) and S12 PARTIAL.
+ *
+ * ⭐⭐⭐ ⟦SPINE-1 · §670⟧ **S8 HAS LEFT THIS ROSTER.** DESIGN_SPINE's partition is §239.1's hole
+ * built: planar faces DERIVED rather than cut, with the half-edge topology SPEC §10.15 names as
+ * their objectively stronger owner. **S1, S9 and S12 own no module in this tree**, and the manifest
+ * says so in the field rather than by omitting a row. Frontage (S9)
  * is exactly what §287.8 says D1 may NOT prove — *"D1 proves face/adjacency/point-location only;
  * frontage/parcel equivalence waits for fresh W3"* — so its absence here is the ordered state.
  */
-export const UNBUILT_STAGES = Object.freeze(['S1', 'S8', 'S9', 'S12']);
+export const UNBUILT_STAGES = Object.freeze(['S1', 'S9', 'S12']);
 
 /**
  * ⚠⚠ THE TWO EDGES WHERE THE PUBLIC ORDER AND THE REAL DEPENDENCY ORDER DISAGREE, ENUMERATED AND
@@ -183,6 +187,23 @@ export const GENERATION_NODES = Object.freeze([
     allowedImports: ['fabricGeometry.js', 'fabricRng.js', 'lineage.js', 'substrate.js', 'waterMode.js'],
     randomNamespaces: ['*|*|a', '*|across', '*|approach|*', '*|b13|*', '*|bearing', '*|jit', '*|outlane|*', 'corridor.*', 'square.*', 'square.heart'],
     statefulForkSites: 6 },
+  // ⭐⭐⭐ ⟦SPINE-1 · ODQ §669/§670⟧ **S8 IS NO LONGER AN EMPTY STAGE, AND THAT IS THE POINT.**
+  //   `UNBUILT_STAGES` published S8 as owning no module because §239.1's planar faces were CUT by
+  //   the packer rather than DERIVED — the manifest's own words. DESIGN_SPINE's partition is
+  //   exactly that stage built: a planar subdivision whose faces ARE the blocks and plots, with a
+  //   maintained half-edge topology and point location (SPEC §10.15's *"a DCEL is the objectively
+  //   stronger owner for S8/S9 planar faces, holes, adjacency, frontage and parcel boundaries"*).
+  //   ⚠ IT IS FLAG-DORMANT, NOT ABSENT. `buildFabric` imports it and calls it only under
+  //   `options.partition === true`, so the edge `S8>ASSEMBLY` is REAL and declared — which is why
+  //   these modules are NOT on `FOUNDATIONS`, whose whole law is having no outbound edge.
+  //   ⚠ AND THEY IMPORT NO FOUNDATION. `coordinateAbi.js`'s quantum is spelled locally in
+  //   `partitionArrangement.js` and pinned equal by test, precisely so arm 10 stays green.
+  { nodeId: 'S8', modules: ['partitionArrangement.js', 'partitionCensus.js', 'partitionConstruct.js', 'partitionView.js'],
+    allowedImports: ['fabricGeometry.js', 'fabricRng.js', 'growthAnnotation.js'],
+    // ⭐ SIX MECHANIC IDS, ALL `keyedRandom` — pure string hashes with no stream, which is why
+    //   `statefulForkSites` stays 0 and the fabric's pinned total of 18 does not move.
+    randomNamespaces: ['bearing', 'cut', 'empty', 'gapbar', 'stop', 'ward'],
+    statefulForkSites: 0 },
   { nodeId: 'S10', modules: ['frontageFusion.js', 'parcels.js'],
     allowedImports: ['fabricGeometry.js', 'fabricRng.js', 'groundRefusal.js', 'lineage.js', 'organismFields.js', 'reservedGround.js', 'substrate.js', 'tierGrammar.js'],
     randomNamespaces: ['*/pack', '*|a', '*|alley|*|*|*', '*|amp', '*|back', '*|backd', '*|d', '*|dwelling-guarantee', '*|g', '*|gap', '*|gapthru', '*|h', '*|l', '*|mat', '*|row|*', '*|s', '*|sb', '*|t', '*|t2', '*|w', '*|wing', '*|wingside', '*|w|*', '*|x', '*|y'],
@@ -246,7 +267,7 @@ export const GENERATION_NODES = Object.freeze([
     randomNamespaces: [],
     statefulForkSites: 0 },
   { nodeId: 'ASSEMBLY', modules: ['buildFabric.js', 'publication.js'],
-    allowedImports: ['builtUmbrella.js', 'circuitDemotion.js', 'cliffs.js', 'commons.js', 'compile.js', 'compoundGround.js', 'districtPartition.js', 'fabricGeometry.js', 'fabricRng.js', 'faubourgOrigin.js', 'fields.js', 'frontageFusion.js', 'groundLaw.js', 'groundRefusal.js', 'habitation.js', 'immersion.js', 'institutionShapes.js', 'institutions.js', 'lateGround.js', 'leafCensus.js', 'lineage.js', 'marketRegister.js', 'measure.js', 'minFootprint.js', 'morphology.js', 'organismFields.js', 'organisms.js', 'parcels.js', 'rampartWorks.js', 'relief.js', 'reservedGround.js', 'routes.js', 'seating.js', 'shapeCode.js', 'snapshot.js', 'stateMarks.js', 'streetEdges.js', 'streets.js', 'substrate.js', 'suitability.js', 'terraform.js', 'tierGrammar.js', 'umbrella.js', 'wallCircuit.js', 'wallRuns.js', 'walls.js', 'waterMode.js', 'waterWorks.js'],
+    allowedImports: ['builtUmbrella.js', 'circuitDemotion.js', 'cliffs.js', 'commons.js', 'compile.js', 'compoundGround.js', 'districtPartition.js', 'fabricGeometry.js', 'fabricRng.js', 'faubourgOrigin.js', 'fields.js', 'frontageFusion.js', 'groundLaw.js', 'groundRefusal.js', 'growthLedger.js', 'habitation.js', 'immersion.js', 'institutionShapes.js', 'institutions.js', 'lateGround.js', 'leafCensus.js', 'lineage.js', 'marketRegister.js', 'measure.js', 'minFootprint.js', 'morphology.js', 'organismFields.js', 'organisms.js', 'parcels.js', 'partitionConstruct.js', 'partitionView.js', 'rampartWorks.js', 'relief.js', 'reservedGround.js', 'routes.js', 'seating.js', 'shapeCode.js', 'snapshot.js', 'stateMarks.js', 'streetEdges.js', 'streets.js', 'substrate.js', 'suitability.js', 'terraform.js', 'tierGrammar.js', 'umbrella.js', 'wallCircuit.js', 'wallRuns.js', 'walls.js', 'waterMode.js', 'waterWorks.js'],
     randomNamespaces: [],
     statefulForkSites: 0 },
 ].map(Object.freeze));
@@ -264,7 +285,11 @@ export const NODE_EDGES = Object.freeze([
   'S20>ASSEMBLY', 'S20>S21', 'S21>ASSEMBLY', 'S22>ASSEMBLY', 'S2>ASSEMBLY', 'S2>S10', 'S2>S13', 'S2>S14',
   'S2>S16', 'S2>S18', 'S2>S20', 'S2>S22', 'S2>S3', 'S2>S4', 'S2>S6', 'S2>S7', 'S3>ASSEMBLY', 'S3>S6',
   'S4>ASSEMBLY', 'S4>S13', 'S4>S15', 'S4>S16', 'S4>S17', 'S4>S21', 'S4>S6', 'S4>S7', 'S5>S13', 'S5>S6',
-  'S6>ASSEMBLY', 'S6>S10', 'S6>S13', 'S6>S15', 'S6>S16', 'S6>S2', 'S6>S21', 'S7>ASSEMBLY'
+  'S6>ASSEMBLY', 'S6>S10', 'S6>S13', 'S6>S15', 'S6>S16', 'S6>S2', 'S6>S21', 'S7>ASSEMBLY',
+  // ⭐ SPINE-1's THREE, and all three run FORWARD: the partition reads the primitives and the S0
+  //   pre-stages, and the assembly reads the partition. No new inversion, so `STAGE_GRAPH_SCC` is
+  //   unchanged and arm 7's roster still names the whole feedback set.
+  'PRIMITIVES>S8', 'S0>S8', 'S8>ASSEMBLY'
 ]);
 
 /** The ABSENT §10.14 fields, named rather than stubbed. A consumer that needs one must build

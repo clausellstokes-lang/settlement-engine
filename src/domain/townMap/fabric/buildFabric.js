@@ -96,6 +96,12 @@ import { compoundDiscs, compoundGround } from './compoundGround.js';
 import { partitionAtTheWall } from './districtPartition.js';
 import { censusLeaf } from './leafCensus.js';
 import { governFabricSurfaces } from './publication.js';
+// ⭐⭐⭐ SPINE-1 · the partition. ⚠ DORMANT: nothing below runs unless `options.partition === true`,
+// and the artifact is ABSENT (never empty) when it does not — the same publication discipline the
+// fusion, shape-code, market and quay registers already ride.
+import { buildGrowthLedger } from './growthLedger.js';
+import { buildSettledPartition } from './partitionConstruct.js';
+import { projectPage } from './partitionView.js';
 
 /** The engine's own prosperity vocabulary — never FTG's squalid→aristocratic (§8.2). */
 const PROSPERITY_RANK = Object.freeze({
@@ -1255,6 +1261,50 @@ export function buildFabric(settlement, model, options = {}) {
   //   ⚠ `channels` is DECLINED and the reason is a number: two of its three true reads are off
   //   `leafCensus.js`'s synthetic `accessFabric`, which no publication guard can reach.
   const governed = governFabricSurfaces({ water: waterRel, parcels: drawn.parcels });
+
+  /**
+   * ⭐⭐⭐ **SPINE-1 · THE PARTITION, FOLDED ONCE, BEHIND ITS OWN FLAG.**
+   *
+   * A1.4: *"the PARTITION CONSTRUCTOR is a single-shot stage that FOLDS the ledger's epochs inside
+   * one build (one construction per build)."* This is that one call, and it is the last thing the
+   * assembly does — it reads published truth and hands nothing back to any stage.
+   *
+   * ⚠ **THE INPUTS ARE TRUTH THE FABRIC ALREADY HOLDS** (§2: *"truth only, consumed never
+   * invented"*): `tierScale`'s extent and road widths, the morphology selector's founding kind, the
+   * §648 water line, the model's own `hasWalls`, and the REPRESENTATIVE body count the packer drew
+   * (A1.1 — `tierScale` remains the sole sizer; the partition mints no sizing law).
+   * ⚠ `bodyTarget` READS `drawn.parcels.length` AND NOT `s.population ÷ household`: A1.1 rules the
+   * substrate REPRESENTATIVE above the census tiers, so the partition holds what the map holds.
+   */
+  const spinePartition = options.partition === true ? (() => {
+    const rw = (packed.widths && packed.widths.organism) || scale.builtRadius * 0.016 || 5;
+    const input = {
+      seed: String(seed),
+      ledger: buildGrowthLedger(s, model, { wallBuiltAtAge: options.wallBuiltAtAge }),
+      extent: { cx: centre.x, cy: centre.y, radius: scale.builtRadius * 1.45 },
+      originForm: (umbrella.polycentric || nuclei.length > 1) ? 'POLYFOCAL'
+        : (scale.tier === 'thorp' || scale.tier === 'hamlet' || scale.tier === 'village'
+          ? 'STREET_VILLAGE' : 'NUCLEATED_CROSSROADS'),
+      planMode: morphology.band === 'planned' ? 'PLANTED_GRID'
+        : (morphology.band === 'regularized' ? 'COMPOSITE' : 'ORGANIC_PLAN_UNIT_QUILT'),
+      roadWidth: rw,
+      bodyTarget: drawn.parcels.length,
+      water: waterRel && waterRel.line && waterRel.line.length > 1
+        ? { line: waterRel.line, width: waterRel.width } : null,
+      wallForm: hasWalls ? { facets: 26, width: rw * 0.42 } : null,
+    };
+    const built = buildSettledPartition(input);
+    return Object.freeze({
+      ...built,
+      page: projectPage(built, { roadWidth: rw }),
+      inputEcho: Object.freeze({
+        originForm: input.originForm, planMode: input.planMode, roadWidth: rw,
+        bodyTarget: input.bodyTarget, extent: input.extent, walled: !!input.wallForm,
+        watered: !!input.water,
+      }),
+    });
+  })() : null;
+
   return publishCircuitRings({
     meta: {
       seed: String(seed),
@@ -1700,6 +1750,10 @@ export function buildFabric(settlement, model, options = {}) {
     // (never empty) when the arm is off, appended at the END so no existing key's position moves.
     ...(fordRegister ? { fordRegister } : {}),
     ...(minFootprint ? { minFootprint } : {}),
+    // ⭐⭐⭐ SPINE-1 · THE PARTITION, published the way every armed artifact is: ABSENT (never
+    // empty) when the arm is off, appended at the END so no existing key's published position
+    // moves — the §234 publication arm's own precondition, and the dormancy proof's.
+    ...(spinePartition ? { spinePartition } : {}),
   }, wallCircuit);
 }
 
