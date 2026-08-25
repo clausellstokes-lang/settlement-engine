@@ -5,6 +5,9 @@ urban-design convention; seven verifiers re-executed every claim's evidence and 
 coverage against the estate's existing laws and charters. **49 findings, 49 verified real,
 0 refuted. Coverage: 16 NEW · 32 PARTIAL · 1 COVERED.** Every row below carries executed
 evidence — a probe output, a file:line, or a viewed artifact — never reasoning alone.
+**Provenance (§685):** seat **RECOVERED as Fable 5** from the commit trailer of the single
+commit that landed this file (the §685.5(ii) route) — recovered, not text-marked at the
+time. The finder and verifier agents beneath it were Opus lanes, as every lane was.
 The dossier contest (ODQ §638) runs against this register next; conventions surviving only
 as training-prior do not become law without sourced grounding or the owner's signature.
 

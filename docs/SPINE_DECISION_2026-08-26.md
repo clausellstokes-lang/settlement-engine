@@ -4,6 +4,10 @@
 held map-code fix: one decision, stated plainly, with its evidence, its plan, and its
 costs. Nothing below builds until you say go.**
 
+**Provenance (§685):** seat **RECOVERED as Fable 5** from the commit trailers of both
+commits touching this file (the §685.5(ii) route) — recovered, not text-marked at the
+time.
+
 ## 1 · The decision being asked
 
 Rebuild the map builder's *skeleton* on the model you named (§656): the settlement as

@@ -7,6 +7,14 @@ UNMINTED-PENDING (named, awaiting its measure or source). Maintained at every
 signature — a signing that skips this sheet is incomplete (the §110.3 spirit: the
 table IS the declaration).**
 
+**Provenance (§685):** chair-authored; seat **RECOVERED as Fable 5** from the commit
+trailers of all 7 commits that have touched this file — the §685.5(ii) route, validated
+at the §238–§274 boundary. *Recovered, not text-marked at the time*: the sheet attributed
+its rows to ledger §§, and §685.5's audit measured that route failing (none of the six
+cited headers carries a seat). Every row added from §685 forward carries its seat in the
+commit that lands it, and any row minted under an Opus chair is P3 in the retrovalidation
+queue — second-netted by the owner's own tuning signature, which walks this same page.
+
 ## Op ceilings (primitives, per tier) — CHAIR-SIGNED §628 + §635.2
 | tier | ceiling | note |
 |---|---|---|

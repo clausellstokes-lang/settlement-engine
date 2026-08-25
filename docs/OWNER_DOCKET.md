@@ -3,6 +3,9 @@
 Every owner-gated or owner-informational item, one place. The chair adds rows with
 their §; the owner strikes rows as ruled. Nothing here blocks the arc unless marked.
 
+**Provenance (§685):** seat **RECOVERED as Fable 5** for every row landed before §685;
+rows added from §685 forward are Opus-chaired and carry their seat in the landing commit.
+
 ## DECISIONS AWAITING THE OWNER
 - Marketing/website 432-file set: name its home branch (pinned safe at tree-triage-pin-2026-08-25; §659.3).
 - The 33 staged docs/DESIGN_FP_ARCH_* edits (2026-08-17): yours or strike (§659.3).

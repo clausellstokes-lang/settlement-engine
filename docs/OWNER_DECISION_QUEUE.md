@@ -28640,3 +28640,91 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   index was folded to make room (16,459 → 14,521 B, the three stacked-landing rows
   preserved **verbatim** at `archive-2026-08-26-index-fold-16`, PA.10 having struck the
   parallel clause that made them daily).
+
+## §686 · GROW-FOLD SEALS — THE RAISE PRECEDES ITS GROWTH, MEASUREMENT FORCED A SECOND CURE, AND C1'S MAGNITUDE IS RE-BASED (2026-08-26 ~15:20 CDT; SEAT: Opus 5 — Fable-unvalidated, the first collection under §685)
+
+- **§686.1 SEALED** at `refs/preserve/map-sandbox-gfold-order` = **`56ee43dad`** (base
+  `82fb8bbfb`, ancestry verified, `growa-ledger` unmoved; two commits, no ref moved by the
+  lane). Exits: gate **17 files / 384 passed, EXIT 0** — the exact base figure · census
+  **18/18** with all **10 planted controls convicting** · differential **13/13 walled
+  PASS** (`--break` convicts 11/13 — the two exceptions print identically at the base
+  tree — and a new `--plant-sprawl=N` convicts 4/4) · dormancy **29/29** and determinism
+  **29/29** byte-identical · walker 69/69, 93/93 edges, ARM 6 AGREE · perf 0 of 6 over
+  budget.
+- **§686.2 THE ORDERING LANDED — AND THE MECHANISM WAS NARROWER THAN §684.3 NAMED:** the
+  growth branch chose on `state.wraps.length`, so an epoch raising its **first** wall took
+  `accrete` and **was never asked for its emissions** — **12 of 132 corpus acts dropped,
+  every one at a raise epoch.** Now **132/132 acts draw, 16/16 raise-epoch acts, 0
+  refusals, wraps unchanged at 17.** Epoch 0 deliberately keeps its raise after
+  `foundingFrame` (the hull has no pieces before it and the event would be lost silently);
+  measured, 0 of 18 leaves carry an epoch-0 circuit event.
+- **§686.3 J-GFOLD-2 RATIFIED — THE SECOND CURE WAS RIGHT TO BUILD.** The ordering alone
+  measured metropolis **2,500 against a pre-defect 2,633: measurement convicted the named
+  cure**, and the lane built past its brief's first naming rather than reporting a green
+  it did not have. Attribution put the whole deficit in two tail emission acts (drawing 2
+  and 8 where the base drew 66 and 87) and ruled out a budget gate (no act drew ≤ 1 plot,
+  0 refusals). **THE ROOT: two host-choosers spelling one law two ways** — `frontierHost`
+  took the **first** face on the ray while `pickHost` takes the **largest**; at the
+  metropolis's last epoch the first-hit walk handed three of five gates faces of **25, 14
+  and 92 u²** while the same rays held **85,493 / 47,771 / 110,445**. `frontierHost` now
+  uses `pickHost`'s own order. **No constant moved.** This is the owner's fix philosophy
+  executed — the cause, not the patch — and it is the second time this program has found
+  one law spelled two ways inside one module.
+  **THE RESTORATION, MEASURED: metropolis 2,633 → 2,748** — clearing the pre-defect 2,633,
+  clearing §684.3's quoted 2,650, and sitting **1,050 above the 1,698** the defective
+  placement cost. Corpus total **18,697 → 19,525**, and **no leaf fell**. Two chokepoint
+  fixes forced by an E9 gate red (a PLOT the band swallows stops being counted and retires
+  its stale key; `emitLot` retires a re-developed face's previous tenure) took stray
+  annotations **14,136 → 722** corpus-wide (metropolis 13,240 → 40) **with the test
+  untouched**.
+- **§686.4 J-GFOLD-3 RATIFIED**: `ledgerDifferential`'s sprawl arm now credits a §3e moored
+  quay. The city's four "untyped" plots are exactly `mintQuays`' four faces; the gap was
+  latent (zero extramural quays anywhere at the base); the arm gained a planted control in
+  the same edit and still convicts. An instrument correction made *with* its control is
+  the shape we want.
+- **§686.5 C1'S EVIDENCE ROW RE-BASED — §655.3 CLOSES, WITH THE CORRECTION DECLARED.** The
+  old instrument re-run at this tip **reproduces GROW-A §2.6 exactly** (intramural 1,647 →
+  955, extramural 71 → 688) and then prints why that was never a differential: **the
+  year-100 leaf's wall encloses 315,703 u² against the present leaf's 197,853 — 1.60× on
+  one settlement, one seed, one vintage year.** On the frozen-circuit instrument (one
+  circuit per vintage, across all years): town yr 49 → 191 (R 237.90, 50,480 u², unmoved)
+  reads intramural **242 → 787**, extramural **60 → 405**; the year-100 leaf yr 26 → 100
+  (R 262.98, unmoved) reads intramural **255 → 817**, extramural **52 → 416**.
+  ⛔ **DIRECTION SURVIVES, MAGNITUDE RE-BASED: intramural does NOT fall — it rises
+  monotonically on both leaves. The published "fall" was the ladder collapsing between two
+  different circuits, not a fact about the world.** What survives is the **share**:
+  extramural takes **38.8 % and 39.3 %** of growth — two independent leaves within half a
+  point of each other, landing on the **39 %** §2.6 named as the real fact (367 of 405 and
+  369 of 416 of extramural stock typed). A prior published figure is hereby corrected in
+  the open; nothing downstream consumed the struck magnitude (C1's direction is what the
+  charter carried).
+- **§686.6 HONEST REDS AND WATCHES, CARRIED FORWARD, NOT SMOOTHED:**
+  **(i)** the **metropolis constructor went 470 → 853 ms (+94 %)** — 34 % of the signed
+  2,500 ms budget where it used 19 %. Attributed cleanly (every leaf that moved is a leaf
+  whose emissions now draw; the three with no emissions do not move). **ACCEPTED, not
+  optimised** — optimising is a perf act with its own risk to the drawing — and it becomes
+  a **WATCH ROW ON DRESS-1**, which lands ink on top of this.
+  **(ii)** two band ratios moved the **wrong way** — polycentric 1.87 → 2.09 and year-100
+  1.85 → 1.93 (its refusals 21 → 25) — **with no constant touched**. The headline is still
+  green (walled median **1.87 → 1.71, exactly the reference invariant**), but the two
+  outliers are **named for the tuning pass**, not smoothed away now.
+  **(iii)** the armed corpus render is **byte-identical base → tip, and the lane correctly
+  refused to call that a win**: `renderFolio.mjs` holds no reference to
+  `spinePartition`/`projectPage`/`partitionView`, so the partition is still pre-cutover and
+  this fold-order change is **invisible in the shipped drawing** — which is also why
+  determinism was proven on the census rather than the folio.
+  **(iv) DEFERRED AND DOCUMENTED** (recorded so they are not re-found as bugs):
+  `declineEpoch`'s stray keys (484 of highwater's 507 — the bulk of the 722 residue, a
+  two-line edit in a module this car does not own) · the `plots`-vs-PLOT-face drift, now
+  −3…−8 from ring-insertion splits, which needs a **re-baseline rather than a patch** ·
+  E9's plant still keyed on "the first `plot.*` key" · GROW-A's `waterRefusals += 0`
+  deferral, untouched.
+- **§686.7 THE SUBSTRATE IS FINISHED — AND DRESS-1 OPENS.** The partition exists, grows,
+  walls in the right order, restores every plot the defect cost, and its band emerged at
+  the reference invariant **with zero constants moved**. **DRESS-1 dispatches** per
+  DESIGN_SPINE_COMPLETION §1 as amended: the **wall successor-publication contract is its
+  opening act** (PA.2) · the ford draws per **hf264** (PA.3) · wear at the chair-signed
+  weights-grade provisionals (PA.4) · the **wall:all watch row** re-measured FIRST (PA.10)
+  · the gestalt gate's **≥ 80 % blind-key** mechanics (PA.7) · the ROUTE residue and the
+  §650.2 clip census in its exits (PA.1) · plus §686.6(i)'s perf watch. Seat: Opus,
+  marked, enrolled at the queue's §686 row.

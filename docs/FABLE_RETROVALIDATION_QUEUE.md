@@ -88,7 +88,16 @@ empty because it covered its whole surface; a scoped pass cannot inherit that se
 the document estate, each verdict attacked by a skeptic. See ODQ §685.5 for the findings
 and their evidence.*
 
-<!-- AUDIT-SEEDED ROWS FOLLOW -->
+| era | status | measured | P |
+|---|---|---|---|
+| **§1–§237** | MIXED | 254 of 258 headers text-unmarked. §237.2's "Rows §1-§237 are Fable-validated" is a **blanket declaration, not a finding** — and §236.1 disagrees with it on the boundary (§235 vs §237). 36 ledger commits (§1–§16, the product launch tail) carry an **Opus 4.8** trailer, refuting the blanket outright. | P4 for the shipped launch tail (long superseded); **P2** for the era's constitutional laws |
+| **§238–§274** | ✅ **DISCHARGED** | 36 sections properly marked; all 30 entries ruled at §293–§298 (2026-08-21). No action. | — |
+| **§275–§290** | **OWED** | §275/§276 are explicitly Fable-chaired. **§287–§290 (2026-08-20) carry no attribution of any kind**, and the sitting's coverage stops at §274. | P2 |
+| **§291–§321** | MIXED | 30 of 31 sections carry in-text "chair: FABLE". **§311 is unmarked — and it is the undercity design of record**, not a mechanical row. | P2 |
+| **§322–§439** | ⛔ **THE DARK WINDOW** | **~118 sections with NEITHER a text mark NOR a commit trailer** — the seat-model era whose own §447 fixed the seat model it then failed to record. The largest genuinely-owed surface in the program. | **P1/P2 by content** |
+| **§440–§684** | **RECOVERED-NOT-MARKED** | Seat recovered as **Fable 5** from commit trailers (492 Fable · 39 Opus · 174 none across the 705 commits touching the ledger file; the instrument validated 26/28 at the §238–§274 boundary). Owner decides at the pass whether recovery discharges the mark. | P3 |
+| **the document estate** | REPAIRED IN PART | The *architecture* tier named its seat (DESIGN_SPINE, _COMPLETION, _REG_GROW, _REGISTER_PROGRAM); the **decision, evidence and signature tier did not** — SIGNED_CONSTANTS (the sheet the owner signs LAST), SPINE_DECISION, CONVENTION_AUDIT and OWNER_DOCKET were silent, and SIGNED_CONSTANTS' attribute-by-§-pointer route **fails** (none of its six cited headers carries a seat). All four now carry a recovered-provenance stamp (§686 act). | P2 |
+| **non-doc surfaces** | ⛔ **UNRECOVERABLE** | 43 preserve seals name lanes and §§ but **never a seat**; only **11 of 316** lane receipts carry a seat line; INSTRUMENTS.md contains zero seat words. ⚠ **SCOPE HAZARD: `refs/trains/*` (31 refs) and `refs/preserved/*` (3) are a second, older sealed namespace that a sweep scoped to `refs/preserve/` misses entirely.** | P4, but the scope hazard is P2 for any future sweep |
 
 ### 6.2 · STRATUM 1 — the forward arc (pre-authored; each wave's chair appends specifics)
 
@@ -130,3 +139,20 @@ things first.
 cannot prove from inside which model executed this entry, so it is marked **Opus** — the
 conservative side, because a false *Fable* mark is a false green, while a false *Opus*
 mark costs only one re-derivation.
+
+**§686 · GROW-FOLD collected, sealed and ruled · 2026-08-26 · SEAT: Opus 5.**
+*What was judged:* **J-GFOLD-2 ratified** — the lane built a *second* cure after
+measurement convicted the one its brief named, which is a scope judgment as much as a
+technical one; **J-GFOLD-3 ratified** — an instrument amendment landed with its own
+planted control; the **+94 % constructor cost ACCEPTED rather than optimised**; the two
+wrong-way band outliers **named for tuning rather than cured**; and **C1's magnitude
+declared re-based**, closing §655.3.
+*What Fable re-derives:* (a) whether accepting 19 % → 34 % of the perf budget was right at
+the exact moment DRESS-1 begins laying ink on top, or whether the optimisation belonged
+here; (b) whether the frozen-circuit instrument is the right re-basing for C1, or whether
+a *share* statistic quietly replaced the claim the charter actually needed; (c) whether
+J-GFOLD-2 exceeded its brief in a way that should have escalated rather than proceeded.
+*Receipts:* `refs/preserve/map-sandbox-gfold-order` = `56ee43dad` · the lane receipt
+`laneGFOLD-receipt.md` · ODQ §686.
+*Priority:* **P2** — the host-chooser law and the corrected C1 record both foreclose
+options; item (a) is P3.
