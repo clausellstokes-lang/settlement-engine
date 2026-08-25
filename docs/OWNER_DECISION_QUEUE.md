@@ -28217,3 +28217,20 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   HAND** (architecture is the Fable seat's): one reconciliation amendment per
   document, ruled from the inventory, then a verifier pass for cross-contradictions
   before any lane consumes the amended set.
+
+## §672 · SCOPE EXTENSION — THE RECONCILIATION RUNS TO THE SOAK (owner, 2026-08-26 ~05:25 CDT)
+
+- **§672.1** The owner extends §671's reconciliation to EVERYTHING pending up to the
+  soak: beyond the map architectures, the sweep now covers the DWELLINGS program (42
+  cars — their exterior anchors were parcels and now anchor partition PLOTS; the
+  identity ladder's struck "interiors" clause meets DW's actual mint), the AD program
+  (17 cars — its dispatch brief opens with the three-painter ruling, a world the
+  spine + cutover retirements supersede), the catalog residue (CH-3 · MF-CH3 flip ·
+  CH-2B · CH-6b · divine-healer), OSR mint and the parity compile (surfaces now
+  include partition-rendered ones), the WEB/HK/CT/WF tails, and the ENDGAME TAIL
+  itself — the walk + ONE regen's scope must absorb the cutover-readiness gates
+  (tierForPopulation ≡ popToTier · the §652 three-clause check · the partition
+  censuses) since the regen happens at a tree whose map core changed. A second
+  three-reader inventory wave is in flight over exactly that set; same schema, same
+  discipline (verbatim quotes, positive CLEAN lists); the amendments remain the
+  chair's hand with verifiers before consumption.
