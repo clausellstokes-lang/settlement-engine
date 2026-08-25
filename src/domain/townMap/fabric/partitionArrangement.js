@@ -894,27 +894,27 @@ export function chordInFace(arr, fid, p, d) {
  */
 export function cutFaceByLine(arr, fid, p, d, edgeSpec) {
   const hits = boundaryCrossings(arr, fid, p, d);
-  if (hits.length < 2) return refuse(arr, 'cutFaceByLine', 'the line misses the face', { fid });
+  if (hits.length < 2) return refuse(arr, 'cutFaceByLine', 'the line misses the face', { fid, key: edgeSpec && edgeSpec.key });
   let lo = -1;
   for (let i = 0; i + 1 < hits.length; i++) {
     const mx = (hits[i].at[0] + hits[i + 1].at[0]) / 2;
     const my = (hits[i].at[1] + hits[i + 1].at[1]) / 2;
     if (pointInRingInt(faceRingInt(arr, fid), qOf(mx), qOf(my)) === true) { lo = i; break; }
   }
-  if (lo < 0) return refuse(arr, 'cutFaceByLine', 'no bracketing pair lies inside the face', { fid });
+  if (lo < 0) return refuse(arr, 'cutFaceByLine', 'no bracketing pair lies inside the face', { fid, key: edgeSpec && edgeSpec.key });
   const A = hits[lo]; const B = hits[lo + 1];
   // ⛔ A CHORD SHORTER THAN THE DEGENERACY FLOOR IS REFUSED. Two cut points a quantum apart make
   // two vertices the grid cannot tell apart, and the near-collinear edges they leave behind are
   // what a planarity sweep reads as a crossing — six of them on the town leaf, every one from a
   // sliver an operation was happy to make.
   if (Math.hypot(B.at[0] - A.at[0], B.at[1] - A.at[1]) < CHORD_FLOOR) {
-    return refuse(arr, 'cutFaceByLine', 'the chord is below the degeneracy floor', { fid });
+    return refuse(arr, 'cutFaceByLine', 'the chord is below the degeneracy floor', { fid, key: edgeSpec && edgeSpec.key });
   }
   const va = A.vertex != null ? A.vertex : splitEdge(arr, A.edgeId, A.at[0], A.at[1]);
   const vb = B.vertex != null ? B.vertex : splitEdge(arr, B.edgeId, B.at[0], B.at[1]);
-  if (va < 0 || vb < 0) return refuse(arr, 'cutFaceByLine', 'a cut point already carries a vertex', { fid });
+  if (va < 0 || vb < 0) return refuse(arr, 'cutFaceByLine', 'a cut point already carries a vertex', { fid, key: edgeSpec && edgeSpec.key });
   const res = splitFaceChain(arr, fid, va, vb, [], edgeSpec);
-  if (!res.ok) return refuse(arr, 'cutFaceByLine', res.reason, { fid });
+  if (!res.ok) return refuse(arr, 'cutFaceByLine', res.reason, { fid, key: edgeSpec && edgeSpec.key });
   return res;
 }
 
@@ -1019,23 +1019,48 @@ export function cutWay(arr, fid, p, d, width, spec = {}) {
   // degenerate pair the planarity sweep convicted.
   const cL = chordInFace(arr, fid, [p[0] + nx * half, p[1] + ny * half], d);
   const cR = chordInFace(arr, fid, [p[0] - nx * half, p[1] - ny * half], d);
-  if (!cL || !cR) return refuse(arr, 'cutWay', 'one of the two kerb lines misses the face', { fid });
+  if (!cL || !cR) return refuse(arr, 'cutWay', 'one of the two kerb lines misses the face', { fid, key: spec.key });
   if (Math.hypot(cL[1][0] - cL[0][0], cL[1][1] - cL[0][1]) < CHORD_FLOOR
     || Math.hypot(cR[1][0] - cR[0][0], cR[1][1] - cR[0][1]) < CHORD_FLOOR) {
-    return refuse(arr, 'cutWay', 'a kerb chord is below the degeneracy floor', { fid });
+    return refuse(arr, 'cutWay', 'a kerb chord is below the degeneracy floor', { fid, key: spec.key });
+  }
+  // ⭐⭐⭐ **THE CARRIAGEWAY'S OWN INTERIOR POINT, AND IT IS WHY THE ATOMICITY CLAIM ABOVE WAS HALF
+  // TRUE (GROW-A-RESUME, ODQ §681.3).** The two chord midpoints sit ON the two kerb lines at
+  // perpendicular offsets +half and −half, so THEIR midpoint sits at offset exactly 0 — on the way's
+  // own centreline, strictly between the kerbs — and both chord midpoints are `true`-inside by
+  // `chordInFace`'s own bracketing test. The caller's `p`, by contrast, is routinely a point the
+  // subdivision took ON the face's boundary (`subdivide` cuts at a parameter along the longest ring
+  // EDGE), where `pointInRingInt` answers `null` — neither in nor out — and the probes below then
+  // fail on a rounding coin-flip rather than on geometry.
+  //
+  // ⛔⛔ **AND THE FAILURE WAS NOT FREE: IT LEFT A STRAY HALF-WAY BEHIND.** `first` has already cut
+  // the left kerb by the time `target` is probed, and `second` has cut BOTH by the time the
+  // carriageway is probed — so each such refusal mutated the arrangement and then returned null.
+  // MEASURED over the 18-leaf corpus before this cure: **4,377 `second kerb line left both faces`
+  // + 1,315 `carriageway face could not be identified` = 5,692 stray kerb cuts**, and the caller's
+  // fall-through to a gapless cut then refused **5,692** times with *"the line misses the face"* —
+  // the same number, because the face it was handed had been split under it. Those two classes are
+  // ONE defect counted twice, and they were 97.3 % of every geometric refusal in the estate.
+  const mid = (c) => [(c[0][0] + c[1][0]) / 2, (c[0][1] + c[1][1]) / 2];
+  const mL = mid(cL); const mR = mid(cR);
+  const pm = [(mL[0] + mR[0]) / 2, (mL[1] + mR[1]) / 2];
+  // ⭐ THE PRE-CHECK RESTORES REAL ATOMICITY: a carriageway centre the ORIGINAL face does not
+  // strictly contain (a re-entrant face whose two kerb chords straddle a notch) is refused HERE,
+  // before one edge is cut, instead of halfway through.
+  const probe = pointInRingInt(faceRingInt(arr, fid), qOf(pm[0]), qOf(pm[1])) === true ? pm : p;
+  if (probe === p && pointInRingInt(faceRingInt(arr, fid), qOf(p[0]), qOf(p[1])) !== true) {
+    return refuse(arr, 'cutWay', 'the carriageway centre is not strictly inside the face', { fid, key: spec.key });
   }
   const first = cutFaceByLine(arr, fid, [p[0] + nx * half, p[1] + ny * half], d, kerb);
   if (!first) return null;
   // the side that still contains the second kerb line
-  // ⚠ THE PROBE IS THE WAY'S OWN CENTRELINE POINT, not a point a hair inside the second kerb: the
-  // latter sits ON the line about to be cut, where a point-in-ring test has no honest answer.
-  const target = first.faces.find((f) => pointInRingInt(faceRingInt(arr, f), qOf(p[0]), qOf(p[1])) === true);
-  if (target === undefined) return refuse(arr, 'cutWay', 'the second kerb line left both faces', { fid });
+  const target = first.faces.find((f) => pointInRingInt(faceRingInt(arr, f), qOf(probe[0]), qOf(probe[1])) === true);
+  if (target === undefined) return refuse(arr, 'cutWay', 'the second kerb line left both faces', { fid, key: spec.key });
   const second = cutFaceByLine(arr, target, [p[0] - nx * half, p[1] - ny * half], d,
     { ...kerb, key: spec.key ? `${spec.key}|R` : undefined });
   if (!second) return null;
-  const way = second.faces.find((f) => pointInRingInt(faceRingInt(arr, f), qOf(p[0]), qOf(p[1])) === true);
-  if (way === undefined) return refuse(arr, 'cutWay', 'the carriageway face could not be identified', { fid });
+  const way = second.faces.find((f) => pointInRingInt(faceRingInt(arr, f), qOf(probe[0]), qOf(probe[1])) === true);
+  if (way === undefined) return refuse(arr, 'cutWay', 'the carriageway face could not be identified', { fid, key: spec.key });
   arr.faces[way].cls = 'WAY';
   arr.faces[way].attrs = { ...arr.faces[way].attrs, rank, wayKey: spec.key || null, width: half * 2 };
   const flanks = [...first.faces, ...second.faces].filter((f) => f !== way);

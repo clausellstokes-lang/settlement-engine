@@ -11,6 +11,8 @@ const { generateSettlementPipeline } = await import(join(ROOT, 'src/generators/g
 const { buildTownMapModel } = await import(join(ROOT, 'src/domain/townMap/townMapModel.js'));
 const { buildFabric } = await import(join(ROOT, 'src/domain/townMap/fabric/buildFabric.js'));
 const { settlementAtYear } = await import(join(ROOT, 'src/domain/townMap/fabric/snapshot.js'));
+/** ⭐ GROW-A-RESUME · the frame projection and its year→epoch lookup, for the C3 cartouche exit. */
+const { buildGrowthLedger, frameAtEpoch, epochAtYear } = await import(join(ROOT, 'src/domain/townMap/fabric/growthLedger.js'));
 const { renderFolio } = await import(join(HERE, 'renderFolio.mjs'));
 
 export const CORPUS = [
@@ -186,7 +188,21 @@ export function buildOne(spec, fabricOptions = ENV_OPTS || {}) {
   if (Number.isFinite(spec.year)) {
     const present = buildFabric(settlement, model, { ...fabricOptions });
     const vin = present.record.get('wall-built-year', null);
-    const at = settlementAtYear(settlement, spec.year);
+    // ⭐⭐⭐ **C3's USER-VISIBLE EXIT: THE FRAME GETS ITS OWN POPULATION** (A1.5's last clause —
+    // *"the frame's cartouche prints the frame's population, not the present's"*).
+    // ⛔⛔ `settlementAtYear` RE-ISSUES THE EVENT HORIZON AND NEVER THE SIZE — population is held
+    // constant across snapshots BY DECLARATION (snapshot.js:23-30) — and `tierScale`, the sole
+    // sizer every growth stage funnels through, reads no year at all. MEASURED at the pre-spine
+    // base: the town's years 0, 18, 100, 154 and 191 all draw the SAME 1,232 plots with the SAME
+    // geometry. `frameAtEpoch` hands the frame the ledger's population at its own epoch and a
+    // stored tier carrying the peak so far, so the sizer sizes it and every stage follows for free.
+    // ⚠ FLAG-GATED: dormant, this is `settlementAtYear` exactly as it was at the seal.
+    const frameLedger = fabricOptions.partition === true
+      ? buildGrowthLedger(settlement, model, { wallBuiltAtAge: vin ? vin.ageAtBuild : null })
+      : null;
+    const at = frameLedger
+      ? frameAtEpoch(settlement, frameLedger, epochAtYear(frameLedger, spec.year))
+      : settlementAtYear(settlement, spec.year);
     const fabric2 = buildFabric(at, model, {
       ...fabricOptions,
       year: spec.year,
@@ -237,6 +253,13 @@ async function main() {
   //              cures the two floating decks and the four angles against a constant width);
   //              with it, the narrows become real and the siting law becomes measurable.
   //   `--ford`   the ford GLYPH — 17 records that have never been drawn.
+  // ⭐⭐⭐ SPINE/GROW (ODQ §680–§683). `--partition` arms the PLANAR PARTITION and, with it, the
+  //   growth ledger every seam A1.5 charters reads: §18.4's infill clock, the population-peak count
+  //   and the frame's own souls. **ONE FLAG FAMILY** — DESIGN_REG_GROW A2 folds `growReplay` into
+  //   `REG_FABRIC_OPTS.partition`, so there is exactly one dial and one dormancy proof.
+  //   ⚠ ADDED BY GROW-A-RESUME: the partition sealed at §681 had NO corpus arm at all, so every
+  //   census over the whole corpus measured the DORMANT drawing — the §660 I1 lesson, again.
+  if (process.argv.includes('--partition')) fabricOptions.partition = true;
   if (process.argv.includes('--river')) fabricOptions.riverProfile = true;
   if (process.argv.includes('--deck')) fabricOptions.deckLaw = true;
   if (process.argv.includes('--ford')) fabricOptions.fordRegister = true;

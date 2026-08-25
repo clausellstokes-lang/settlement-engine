@@ -146,34 +146,112 @@ function facetRing(ring, facets) {
   return resampleClosed(ring, n);
 }
 
+/**
+ * ⭐⭐⭐ **THE WATERCOURSE INDEX — GROW-A's OPENING PERF ACT (ODQ §681.4), AND THE MEASUREMENT MOVED
+ * THE TARGET.** §681.4 assigns the fjord's +15.6 % (3,169.6 ms against the town's 532.1 ms) to *"the
+ * predicted `chordInFace` bbox pre-filter"*. **THAT PREDICTION IS REFUTED BY EXECUTION.** A V8 CPU
+ * profile of the fjord's own build (`--cpu-prof`, warm, this seal) reads:
+ *
+ * ```
+ * inWater            self  5,468.8 ms   70.1 % of 7,800.9 ms sampled
+ * segTouchesWater    self      5.2 ms   incl  1,055.7 ms
+ * chordInFace        self      1.5 ms   incl      4.6 ms   ← 0.06 %
+ * boundaryCrossings  self      5.4 ms   incl      5.4 ms
+ * ```
+ *
+ * A pre-filter on a 4.6 ms path cannot cure a 2.6-second overrun. The cost is the REFUSAL MASK: a
+ * LINEAR scan of the whole watercourse polyline per query, and the fjord's coast carries **556
+ * points** against a river leaf's 290 — while `segTouchesWater` asks the question once per half unit
+ * of every candidate chord. The town pays it 290-fold, the fjord 556-fold, and the metropolis (which
+ * has **no water at all**) does not pay it, which is why the biggest leaf is the third fastest.
+ *
+ * ⭐⭐ THE CURE IS AN INDEX, NOT A TOLERANCE, AND IT IS **EXACT**. Segments are bucketed by bbox into
+ * a uniform grid; a query scans only the cells its own `[x±half, y±half]` box touches. If a segment
+ * lies within `half` of the point, its closest point `q` is inside BOTH the segment's bbox and the
+ * query box, so `q`'s cell is indexed for that segment and is scanned — no segment within tolerance
+ * can be missed. The per-segment arithmetic is untouched, so the boolean is bit-identical to the
+ * linear scan's `best <= half`; the whole-line bbox is a strictly conservative early-out on top.
+ * ⚠ The index rides `state`, never a module-level cache: this file stays pure, and a second leaf in
+ * the same process cannot read the first leaf's river.
+ */
+const WATER_INDEX_CELLS = 48;
+
+/** Build the watercourse's bucket grid once per fold. Null where the leaf carries no channel. */
+function buildWaterIndex(water) {
+  const w = water;
+  if (!w || !w.line || w.line.length < 2) return null;
+  let lox = Infinity; let loy = Infinity; let hix = -Infinity; let hiy = -Infinity;
+  for (const p of w.line) {
+    if (p[0] < lox) lox = p[0]; if (p[0] > hix) hix = p[0];
+    if (p[1] < loy) loy = p[1]; if (p[1] > hiy) hiy = p[1];
+  }
+  const span = Math.max(hix - lox, hiy - loy, 1);
+  // A cell no smaller than the channel's own width: a query box is then a handful of buckets rather
+  // than a second linear scan wearing a grid's clothes.
+  const cell = Math.max(span / WATER_INDEX_CELLS, Math.max(1, w.width || 1));
+  /** @type {Map<string, number[]>} */ const buckets = new Map();
+  for (let i = 0; i + 1 < w.line.length; i++) {
+    const [ax, ay] = w.line[i]; const [bx, by] = w.line[i + 1];
+    const gx0 = Math.floor(Math.min(ax, bx) / cell); const gx1 = Math.floor(Math.max(ax, bx) / cell);
+    const gy0 = Math.floor(Math.min(ay, by) / cell); const gy1 = Math.floor(Math.max(ay, by) / cell);
+    for (let gy = gy0; gy <= gy1; gy++) {
+      for (let gx = gx0; gx <= gx1; gx++) {
+        const k = `${gx}|${gy}`;
+        const b = buckets.get(k);
+        if (b) b.push(i); else buckets.set(k, [i]);
+      }
+    }
+  }
+  return { cell, lox, loy, hix, hiy, buckets, segments: w.line.length - 1 };
+}
+
 /** Is a world point inside the watercourse's wet band? The construction refusal mask. */
-function inWater(input, x, y, pad) {
-  const w = input.water;
+function inWater(state, x, y, pad) {
+  const w = state.input.water;
   if (!w || !w.line || w.line.length < 2) return false;
   const half = (w.width || 0) / 2 + (w.pad || 0) + (pad || 0);
   if (!(half > 0)) return false;
-  let best = Infinity;
-  for (let i = 0; i + 1 < w.line.length; i++) {
-    const [ax, ay] = w.line[i]; const [bx, by] = w.line[i + 1];
-    const dx = bx - ax; const dy = by - ay;
-    const L2 = dx * dx + dy * dy;
-    let t = L2 > 0 ? ((x - ax) * dx + (y - ay) * dy) / L2 : 0;
-    t = t < 0 ? 0 : (t > 1 ? 1 : t);
-    const px = ax + dx * t; const py = ay + dy * t;
-    const d = Math.hypot(x - px, y - py);
-    if (d < best) best = d;
+  const ix = state.waterIndex;
+  if (!ix) return false;
+  // (1) THE WHOLE-LINE BBOX — the early-out that answers most of a settlement's ground at once.
+  if (x < ix.lox - half || x > ix.hix + half || y < ix.loy - half || y > ix.hiy + half) return false;
+  // (2) ONLY THE CELLS THE QUERY BOX TOUCHES, with the linear scan's own per-segment arithmetic.
+  const gx0 = Math.floor((x - half) / ix.cell); const gx1 = Math.floor((x + half) / ix.cell);
+  const gy0 = Math.floor((y - half) / ix.cell); const gy1 = Math.floor((y + half) / ix.cell);
+  for (let gy = gy0; gy <= gy1; gy++) {
+    for (let gx = gx0; gx <= gx1; gx++) {
+      const b = ix.buckets.get(`${gx}|${gy}`);
+      if (!b) continue;
+      for (const i of b) {
+        const [ax, ay] = w.line[i]; const [bx, by] = w.line[i + 1];
+        const dx = bx - ax; const dy = by - ay;
+        const L2 = dx * dx + dy * dy;
+        let t = L2 > 0 ? ((x - ax) * dx + (y - ay) * dy) / L2 : 0;
+        t = t < 0 ? 0 : (t > 1 ? 1 : t);
+        const px = ax + dx * t; const py = ay + dy * t;
+        if (Math.hypot(x - px, y - py) <= half) return true;
+      }
+    }
   }
-  return best <= half;
+  return false;
 }
 
 /** Does the segment a→b touch the wet band anywhere? Sampled at the arrangement's own resolution. */
-function segTouchesWater(input, a, b, pad) {
-  if (!input.water || !input.water.line) return false;
+function segTouchesWater(state, a, b, pad) {
+  const w = state.input.water;
+  if (!w || !w.line) return false;
+  const ix = state.waterIndex;
+  if (!ix) return false;
+  const half = (w.width || 0) / 2 + (w.pad || 0) + (pad || 0);
+  // ⭐ THE SEGMENT'S OWN BBOX AGAINST THE CHANNEL'S — a chord that cannot reach the water at any
+  //   parameter is answered without sampling it at all. Conservative, so no touch is missed.
+  if (half > 0 && (Math.max(a[0], b[0]) < ix.lox - half || Math.min(a[0], b[0]) > ix.hix + half
+    || Math.max(a[1], b[1]) < ix.loy - half || Math.min(a[1], b[1]) > ix.hiy + half)) return false;
   const L = Math.hypot(b[0] - a[0], b[1] - a[1]);
   const n = Math.max(2, Math.ceil(L / 0.5));
   for (let i = 0; i <= n; i++) {
     const t = i / n;
-    if (inWater(input, a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, pad)) return true;
+    if (inWater(state, a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, pad)) return true;
   }
   return false;
 }
@@ -231,6 +309,7 @@ export function buildSettledPartition(input) {
     waterRefusals: 0,
     gateEconomyRefusals: 0,
     sprawlRefusals: 0,
+    emissionRefusals: 0,
     lastYear: 0,
     plots: 0,
     epoch: 0,
@@ -252,6 +331,9 @@ export function buildSettledPartition(input) {
     /** @type {any} */ waterCut: null,
     /** @type {Array<number[]>|null} */ waterRing: null,
     /** @type {Array<any>|null} */ waterStations: null,
+    /** ⭐ THE REFUSAL MASK'S INDEX, built ONCE per fold — see `buildWaterIndex`. It rides the state
+     *  rather than a module cache so the file stays pure and no leaf can read another leaf's river. */
+    waterIndex: buildWaterIndex(input.water),
     crossingRefusals: 0,
     quayRefusals: 0,
     /** ⭐ A6.1's STAMP, PUBLISHED ON THE STATE so §3e's and §3f's modules mint through the SAME
@@ -286,6 +368,12 @@ export function buildSettledPartition(input) {
     // So: the ledger's own population direction picks the half, and the SIZE of each is the
     // distance between what the ledger asks for and what the partition holds — never a rate.
     const rising = k === 0 || ep.population >= epochs[k - 1].population;
+    /** ⭐⭐⭐ **§3f · A RECORDED DISASTER BURNS WHETHER OR NOT THE POPULATION FELL** (A1.4, ODQ §683):
+     *  *"born at a RECORDED disaster (monotone seeds included: 192/200 seeds carry dated disasters
+     *  with no trajectory fall — debris never keys to falling population)"*. Before the ledger's
+     *  channel was filled, the ONLY birth condition here was a falling epoch, so every monotone
+     *  world's fires and floods left no mark on its ground at all. */
+    const recordedLosses = (ep.lossRegions || []).filter((L) => L.provenance === 'recorded');
     const target = epochTarget(state, ep);
     if (state.losses.length) {
       reclaimEpoch(state, ep, ep.year - prevYear, rising ? Math.max(0, target - state.plots) : 0);
@@ -295,7 +383,9 @@ export function buildSettledPartition(input) {
     else if (!rising) {
       // ⭐⭐ **§3f · PIECES EMPTY → ABANDON.** Exactly as many pieces as the ledger's own fall no
       // longer holds souls for — the partition is brought TO the record, never past it.
-      declineEpoch(state, ep, Math.max(0, state.plots - target));
+      // ⚠ …OR AS MANY AS THE RECORD'S OWN DATED DISASTERS ASK FOR, WHICHEVER IS GREATER: a recorded
+      //   great fire is not allowed to go undrawn because the population happened to fall by less.
+      declineEpoch(state, ep, Math.max(recordedLosses.length, Math.max(0, state.plots - target)));
     } else if (state.wraps.length) {
       // ⭐ §3d · UNDER A STANDING WRAP THERE IS NO FREE ACCRETION. Growth is INFILL, and only then
       // does a TYPED act put souls outside — never untyped sprawl.
@@ -303,7 +393,22 @@ export function buildSettledPartition(input) {
       budget -= infill(state, ep, Math.round(budget * share));
       for (const em of (ep.emissions || [])) budget -= emit(state, ep, em, budget);
     } else budget -= accrete(state, ep, budget);
+    // ⭐⭐ THE RISING EPOCH'S OWN DISASTERS, AFTER its growth — the fire takes ground the settlement
+    //    has, which includes what it built this epoch. In a FALLING epoch the branch above already
+    //    consumed them, so this cannot double-birth.
+    if (rising && recordedLosses.length) declineEpoch(state, ep, recordedLosses.length);
     for (const ce of (ep.circuitEvents || [])) raiseWrap(state, ep, ce);
+    // ⚠⚠ **DELIBERATELY DEFERRED, DOCUMENTED, NOT A BUG TO RE-FIND (GROW-A-RESUME).** The growth
+    // branch above places souls OUTSIDE only when a wrap already stands, and this epoch's wrap is
+    // raised on the line above — so a ledger emission act dated to the RAISE YEAR is skipped, one
+    // per walled leaf (the rosters read 9 of 10 · 6 of 7 · 29 of 30 · 12 of 13). Placing it here,
+    // after the raise, was BUILT AND MEASURED and is not kept: it draws every act (30 of 30) and
+    // costs the metropolis **2,650 → 1,698 plots**, because a one-soul emission at a raise epoch
+    // whose budget is already spent still carves a development patch out of the open frontier and
+    // `pickHost`'s largest-face order never recovers the ground. The act is worth one faubourg; the
+    // cost is a third of the settlement. **The right cure is the ORDERING — the wrap's raise moving
+    // ahead of the epoch's growth — and that changes what the enclosure hull sees, so it is a
+    // geometry decision for the chair, not a fix to smuggle into this act.**
     for (const qm of (ep.quarterMints || [])) mintQuarter(state, ep, qm);
     // ⭐⭐ **§3e · THE CROSSINGS AND THE QUAYS ARE EPOCH ACTS.** A ford is as old as the site; a
     // bridge is a public work a settlement grows into (`CROSSING_BUDGET.popFloor`), so it is minted
@@ -373,7 +478,7 @@ function foundingFrame(state, ep, budget) {
   // as ground at the frame's own crossing, never furnished here (the vocabulary is REG-4's).
   const voidAt = [ex.cx, ex.cy];
   const vf = locateFace(arr, voidAt[0], voidAt[1]);
-  if (vf >= 0 && arr.faces[vf].cls !== 'WAY' && !inWater(input, voidAt[0], voidAt[1])) {
+  if (vf >= 0 && arr.faces[vf].cls !== 'WAY' && !inWater(state, voidAt[0], voidAt[1])) {
     const side = Math.max(rw * 2.2, Math.sqrt(faceArea(arr, vf)) * 0.34);
     const cut = carveVoid(state, vf, voidAt, side, form === 'GREEN_VILLAGE' ? 'green' : 'market', ep);
     if (cut < 0) state.waterRefusals += 0;
@@ -513,7 +618,22 @@ function layWay(state, fid, at, dir, width, rank, key, ep) {
   // watercourse while the centreline stays dry. Measured before the pad: 1, 4 and 1 way faces with
   // a ring vertex inside the wet band on town-2, highwater and year-100 — three of eighteen leaves
   // reding a structural invariant on a technicality that was really a missing half-width.
-  if (segTouchesWater(input, chord[0], chord[1], width / 2)) { state.waterRefusals++; return null; }
+  if (segTouchesWater(state, chord[0], chord[1], width / 2)) { state.waterRefusals++; return null; }
+  // ⛔⛔ **AND THE KERBS ARE TESTED AS THEMSELVES, BECAUSE THE PAD IS NOT THE WHOLE ANSWER
+  // (GROW-A-RESUME).** `cutWay` cuts TWO chords at ±width/2, and each is bracketed by ITS OWN pair
+  // of boundary crossings — a kerb can therefore run further than the centreline chord does and
+  // reach ground the padded centreline test never looked at. ⚠ MEASURED: with the carriageway-probe
+  // cure landing ways that used to be refused, the `year-018` leaf came back E1 RED with exactly
+  // **one** way face carrying a ring vertex inside the wet band (face 531 at 367.6, 635.0) while
+  // planarity, coverage, containment and the wall arms were all clean. The pad answers for the
+  // kerb's OFFSET; only the kerb's own chord answers for its EXTENT.
+  const kl = Math.hypot(dir[0], dir[1]) || 1;
+  const kn = [-dir[1] / kl, dir[0] / kl];
+  const kh = Math.max(width, 2 / 1000) / 2;
+  for (const s of [1, -1]) {
+    const kerb = chordInFace(arr, fid, [at[0] + kn[0] * s * kh, at[1] + kn[1] * s * kh], dir);
+    if (kerb && segTouchesWater(state, kerb[0], kerb[1], 0)) { state.waterRefusals++; return null; }
+  }
   // ⭐⭐ **A1.3's GATE ECONOMY, ENFORCED AT CUT TIME.** *"Gates mint for major ways at the raise;
   // thereafter a way may NOT cross the band ungated — later ways dead-end at the band, divert to a
   // gate, or a recorded act mints a postern."* A chord that would cross a STANDING band is refused
@@ -580,7 +700,7 @@ function pickHost(state, ep) {
     // bisecting plots. A face is reachable when the settlement's ground TOUCHES it.
     if (nearestRingDistance(arr, f.id, cx, cy) > R) continue;
     const c = faceCentroid(arr, f.id);
-    if (inWater(input, c[0], c[1])) continue;
+    if (inWater(state, c[0], c[1])) continue;
     // ⛔ NO WAY MAY CROSS A STANDING BAND (A1.3's gate economy). A host inside the band's ground
     // is refused outright rather than cut and then repaired.
     if (f.attrs && f.attrs.inBand) continue;
@@ -596,9 +716,17 @@ function pickHost(state, ep) {
  * degrees and a third of a module. Two units never share a bearing, which is the property that
  * makes the fabric a quilt rather than a comb.
  *
+ * ⭐⭐ **`noGap` IS §3d's OWN SENTENCE, NOT A DIAL** (GROW-A-RESUME). *"Growth is infill — plot
+ * subdivision and court infill"*: subdividing an existing TENURE piece makes a party wall, never a
+ * new lane through somebody's holding. The distinction was invisible while the gap cut refused on a
+ * rounding coin-flip; the moment the refusal cure made those cuts land, the metropolis started
+ * spending its densification budget cutting CARRIAGEWAYS inside single plots — ground that then
+ * holds nobody — and its plot count fell away from the ledger's own target. Court infill on OPEN
+ * intramural ground still lays gaps: a back-court lane is exactly what that act is for.
+ *
  * @returns {number} plots added
  */
-function developGround(state, host, ep, budget, floorScale, intramuralOnly) {
+function developGround(state, host, ep, budget, floorScale, intramuralOnly, noGap) {
   const { arr } = state;
   if (budget <= 0) return 0;
   const area = faceArea(arr, host);
@@ -620,7 +748,7 @@ function developGround(state, host, ep, budget, floorScale, intramuralOnly) {
     made: 0, budget, aMin, gapBar: MASS_TARGET_RW2 * rw * rw * (floorScale || 1), ward, ep,
     intramuralOnly: !!intramuralOnly,
   };
-  subdivide(state, patch, box, 0, true, `d${state.develops++}`);
+  subdivide(state, patch, box, 0, !noGap, `d${state.develops++}`);
   return box.made;
 }
 
@@ -691,7 +819,7 @@ function subdivide(state, fid, box, depth, allowGap, key) {
   const L = Math.hypot(ex, ey) || 1;
   const nx = -ey / L; const ny = ex / L;
   const dir = [nx * Math.cos(phi) - ny * Math.sin(phi), nx * Math.sin(phi) + ny * Math.cos(phi)];
-  if (inWater(state.input, at[0], at[1])) { state.waterRefusals++; emitLot(state, fid, box, key); return; }
+  if (inWater(state, at[0], at[1])) { state.waterRefusals++; emitLot(state, fid, box, key); return; }
 
   let kids = null;
   // ⚠ A GAP IS ONLY ATTEMPTED WHEN THE PIECE CAN HOLD ONE. Asking for a carriageway inside a face
@@ -1044,7 +1172,7 @@ export const GATE_SPACING_FACETS = 5;
 function mintDerivedGates(state, ep, ce, w) {
   const { arr } = state;
   const out = {
-    candidates: 0, chosen: 0, suppressed: 0, roadsplit: 0, unreachable: 0,
+    candidates: 0, chosen: 0, suppressed: 0, roadsplit: 0, unreachable: 0, wet: 0,
     provenance: ce.provenance,
   };
   // ── (1) CANDIDATES · a band face where ≥ 2 interior PIECES meet its inner side ───────────────
@@ -1068,6 +1196,16 @@ function mintDerivedGates(state, ep, ce, w) {
       if (++guard > 100000) break;
     } while (h !== start);
     if (pieces >= 2) {
+      // ⛔⛔ **A DERIVED GATE IS A WAY, SO §1's "NO WAY EDGE SPANS WATER" BINDS IT — AND IT DID NOT
+      // (GROW-A-RESUME).** `mintDerivedGates` re-classes BAND ground to `WAY`, a path `layWay` never
+      // touches, so the watercourse refusal that guards every other way had no say here. A1.3's
+      // S2-M1 already gives the wall's meeting with water its own class — a WATER GATE on the water
+      // face — so a derived STREET gate on wet band ground is a second, unlawful spelling of it.
+      // ⚠ MEASURED: `year-018` E1 RED on exactly one face — 531, `derivedGate: true`, a ring vertex
+      // 7.94 units from a channel centreline of half-width 8.356 — with planarity, coverage,
+      // containment, no-vertex-on-edge and both wall arms clean. The test is on the face's RING,
+      // which is the geometry the census reads.
+      if (faceRing(arr, fid).some((p) => inWater(state, p[0], p[1]))) { out.wet++; continue; }
       cands.push({ fid, pieces, outerWay, at: faceCentroid(arr, fid) });
     }
   }
@@ -1242,7 +1380,7 @@ function infill(state, ep, want) {
   for (const f of open) {
     if (state.plots - before >= want) break;
     const c0 = faceCentroid(arr, f.id);
-    if (inWater(input, c0[0], c0[1])) { state.waterRefusals++; continue; }
+    if (inWater(state, c0[0], c0[1])) { state.waterRefusals++; continue; }
     developGround(state, f.id, ep, want - (state.plots - before), 1, true);
   }
   // Then tenure subdivision, largest plots first — the same recursion at a finer floor.
@@ -1252,14 +1390,35 @@ function infill(state, ep, want) {
   for (const f of hosts) {
     if (state.plots - before >= want) break;
     const c = faceCentroid(arr, f.id);
-    if (inWater(input, c[0], c[1])) { state.waterRefusals++; continue; }
+    if (inWater(state, c[0], c[1])) { state.waterRefusals++; continue; }
     // ⚠ THE SAME RECURSION, AT A DENSIFIED FLOOR — never an ad-hoc threshold. The first spelling
     // used `area ÷ 3` here, which is not a floor at all: it makes lots relative to whatever it was
     // handed, and on the town leaf (where most epochs are under a standing wrap) it drove the
     // median plot to 0.73 rw² against a 3.6 rw² floor the census would then have argued with.
+    //
+    // ⛔⛔ **AND THE DE-CLASS MUST BE UNDONE WHEN THE DENSIFICATION YIELDS NOTHING —
+    // GROW-A-RESUME.** Densification opens a standing plot back into FIELD so the recursion can
+    // re-cut it. When the recursion then emits nothing — most often because `emitLot`'s draw came in
+    // under the ward's EMPTINESS rate and made a courtyard instead — the plot is simply GONE; and
+    // because the loop's progress test (`state.plots - before >= want`) is a NET count, a
+    // break-even host never advances it, so the loop grinds through the ENTIRE intramural plot
+    // roster and applies a 3–15 % destruction rate to every plot, EVERY EPOCH. ⚠ MEASURED the
+    // moment the refusal cure below made gap cuts start succeeding (so each host yielded one lot
+    // instead of several): the metropolis's courtyards went **178 → 624** and its plots
+    // **2,669 → 174** — the partition SHRANK for twenty straight epochs while the ledger's
+    // population tripled. **A host that cannot be densified keeps its tenure** — that is what
+    // infill means — and the courtyard's stray annotation goes back with it.
+    const wasAttrs = arr.faces[f.id].attrs;
     arr.faces[f.id].cls = 'FIELD';
     state.plots--;
-    developGround(state, f.id, ep, Math.min(4, want - (state.plots - before)), INFILL_FLOOR_SCALE, true);
+    const made = developGround(state, f.id, ep, Math.min(4, want - (state.plots - before)),
+      INFILL_FLOOR_SCALE, true, true);
+    if (made <= 0) {
+      arr.faces[f.id].cls = 'PLOT';
+      arr.faces[f.id].attrs = wasAttrs;
+      delete state.annotations[`void.${f.id}`];
+      state.plots++;
+    }
   }
   return state.plots - before;
 }
@@ -1279,10 +1438,22 @@ function denom(state) {
 function emit(state, ep, act, budget) {
   const { arr, input } = state;
   const wrap = state.wraps[state.wraps.length - 1];
+  // ⭐⭐⭐ **"GATE FIRST, THEN A ROAD, THEN THE FRONTIER" — AND TWO OF THE THREE WERE MISSING
+  // (GROW-A-RESUME).** The header has said all three since SPINE-1. What the code did was take ONE
+  // anchor — `wrap.gates[state.emissions.length % wrap.gates.length]` — and the first face
+  // `locateFace` happened to return there; if that face was a PLOT, a WALLBAND or the ring's own
+  // ground, the whole typed act returned **0 with nothing counted**.
+  // ⛔⛔ AND THE ROTATION WAS KEYED ON **SUCCESSES**, so a blocked gate blocked FOREVER: every
+  // refused act re-picked the same index and failed for the same reason. MEASURED: `town-2` drew
+  // **0 of its 7** typed emission acts, all six reachable ones refused at one gate; the metropolis
+  // drew 6 of 30 and the town 1 of 10. Those are the souls §3d says must leave a saturated circuit,
+  // and dropping them is why a settlement whose ledger triples could not grow — the room was
+  // outside and the act to use it was being discarded, silently.
+  // ⭐ NOW: every gate is tried, then every way, each with the FRONTIER walk behind it, and a
+  // genuine failure — no open ground anywhere — is COUNTED as `emissionRefusals`.
   const anchor = emissionAnchor(state, wrap, act);
-  if (!anchor) return 0;
-  const host = locateFace(arr, anchor.at[0], anchor.at[1]);
-  if (host < 0 || arr.faces[host].cls !== 'FIELD') return 0;
+  if (!anchor) { state.emissionRefusals++; return 0; }
+  const host = anchor.host;
   const before = state.plots;
   const souls = Math.max(1, Math.min(Math.max(0, budget), Math.round(act.souls / denom(state))));
   developGround(state, host, ep, souls, 1);
@@ -1305,21 +1476,71 @@ function emit(state, ep, act, budget) {
   return state.plots - before;
 }
 
-/** Where a typed emission lands: gate → road → frontier, the estate's own resolution order. */
+/**
+ * ⭐⭐ **THE FRONTIER LEG.** From the anchor, step outward along the ray from the settlement centre
+ * until the ground under foot is an open FIELD face that is not band ground and not wet. The walk is
+ * bounded by the seeded extent, so it terminates; a walk that finds nothing returns −1 and the
+ * caller counts the refusal rather than losing the act.
+ * ⚠ THE STEP IS THE ROAD WIDTH, so the search grain is the settlement's own, not a constant.
+ */
+function frontierHost(state, at) {
+  const { arr, input } = state;
+  const rw = input.roadWidth || 5;
+  const cx = input.extent.cx; const cy = input.extent.cy;
+  const dx = at[0] - cx; const dy = at[1] - cy;
+  const L = Math.hypot(dx, dy) || 1;
+  const ux = dx / L; const uy = dy / L;
+  const reach = Math.max(0, input.extent.radius * 0.98 - L);
+  for (let s = 0; s <= reach; s += rw) {
+    const p = [at[0] + ux * s, at[1] + uy * s];
+    if (inWater(state, p[0], p[1])) continue;
+    const f = locateFace(arr, p[0], p[1]);
+    if (f < 0) continue;
+    const face = arr.faces[f];
+    if (face.cls !== 'FIELD') continue;
+    // ⚠ `inBand` IS THE WALL'S OWN GROUND AND IS REFUSED; `exhausted` IS **NOT** CHECKED, AND THE
+    //   DISTINCTION IS MEASURED. `exhausted` is `accrete`'s own bookkeeping — *"this host produced
+    //   nothing at the budget I offered"* — not a property of the ground. Refusing it here made the
+    //   `town-2` leaf drop **6 of its 7** typed emission acts, because open country an early epoch
+    //   had probed at a small budget was permanently closed to every later faubourg.
+    if (face.attrs && face.attrs.inBand) continue;
+    return f;
+  }
+  return -1;
+}
+
+/**
+ * Where a typed emission lands: **gate → road → frontier**, the estate's own resolution order, and
+ * every candidate is tried until one has open ground behind it.
+ * ⚠ THE ROTATION OFFSET IS THE NUMBER OF ACTS ATTEMPTED, NOT SUCCEEDED — so a blocked gate is
+ * stepped past instead of re-chosen. It exists for VARIETY (successive faubourgs prefer different
+ * gates), never for reachability, which is the frontier walk's job.
+ * @returns {{kind:string, at:number[], host:number}|null}
+ */
 function emissionAnchor(state, wrap, act) {
   const { arr, input } = state;
+  const reach = (input.roadWidth || 5) * 3.2;
   const out = (fid, kind) => {
     const c = faceCentroid(arr, fid);
     const dx = c[0] - input.extent.cx; const dy = c[1] - input.extent.cy;
     const L = Math.hypot(dx, dy) || 1;
-    const reach = (input.roadWidth || 5) * 3.2;
-    return { kind, at: [c[0] + (dx / L) * reach, c[1] + (dy / L) * reach] };
+    const at = [c[0] + (dx / L) * reach, c[1] + (dy / L) * reach];
+    const host = frontierHost(state, at);
+    return host < 0 ? null : { kind, at, host };
   };
+  /** @type {Array<[number[], string]>} */ const tiers = [];
   if (act.origin === 'gate' || act.origin === 'road' || !act.origin) {
-    if (wrap.gates.length) return out(wrap.gates[state.emissions.length % wrap.gates.length], 'gate');
+    tiers.push([wrap.gates.slice(), 'gate']);
   }
-  const ways = liveFaces(arr).filter((f) => f.cls === 'WAY');
-  if (ways.length) return out(ways[state.emissions.length % ways.length].id, 'road');
+  tiers.push([liveFaces(arr).filter((f) => f.cls === 'WAY').map((f) => f.id), 'road']);
+  const spin = state.emissions.length + state.emissionRefusals;
+  for (const [ids, kind] of tiers) {
+    if (!ids.length) continue;
+    for (let i = 0; i < ids.length; i++) {
+      const hit = out(ids[(spin + i) % ids.length], kind);
+      if (hit) return hit;
+    }
+  }
   return null;
 }
 
@@ -1388,6 +1609,7 @@ function publish(state, foldedEpochs) {
     waterRefusals: state.waterRefusals,
     gateEconomyRefusals: state.gateEconomyRefusals,
     sprawlRefusals: state.sprawlRefusals,
+    emissionRefusals: state.emissionRefusals,
     refusals: Object.freeze(arr.refusals.slice()),
     ranks: WAY_RANKS,
     reason: `${state.plots} plot(s) folded from`
@@ -1401,7 +1623,8 @@ function publish(state, foldedEpochs) {
       + ` ${state.losses.length} LossRegion(s);`
       + ` ${state.waterRefusals} act(s) refused by the watercourse,`
       + ` ${state.gateEconomyRefusals} by the gate economy,`
-      + ` ${state.sprawlRefusals} by §3d's no-untyped-sprawl law;`
+      + ` ${state.sprawlRefusals} by §3d's no-untyped-sprawl law,`
+      + ` ${state.emissionRefusals} typed emission act(s) that found no open ground;`
       + ` ${arr.refusals.length} geometric refusal(s)`,
   });
 }

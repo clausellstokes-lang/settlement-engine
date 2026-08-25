@@ -99,7 +99,7 @@ import { governFabricSurfaces } from './publication.js';
 // ⭐⭐⭐ SPINE-1 · the partition. ⚠ DORMANT: nothing below runs unless `options.partition === true`,
 // and the artifact is ABSENT (never empty) when it does not — the same publication discipline the
 // fusion, shape-code, market and quay registers already ride.
-import { buildGrowthLedger } from './growthLedger.js';
+import { buildGrowthLedger, colonizationFromLedger, peaksFromLedger } from './growthLedger.js';
 import { buildSettledPartition } from './partitionConstruct.js';
 import { projectPage } from './partitionView.js';
 
@@ -179,6 +179,18 @@ export function buildFabric(settlement, model, options = {}) {
   // constraints, and every stage below reads THE RECORD rather than the raw dossier again.
   // See compile.js for the four-module `tradeRouteAccess` read this removes.
   const record = compileSpatialRecord(s, model, { routeLedger: options.routeLedger || null });
+  /**
+   * ⭐⭐⭐ **THE GROWTH LEDGER, BUILT ONCE AND READ BY EVERY SEAM A1.5 NAMES** (GROW-A-RESUME).
+   * It was constructed inline inside the partition block, consumed by the constructor and thrown
+   * away — so the three conversions A1.5 charters (`marketColonization` as a ledger CONSUMER,
+   * compile.js's population-peaks, the frame's own souls) had nothing to read, and a second
+   * `buildGrowthLedger` call would have been a second trajectory beside the drawn one.
+   * ⚠ IT IS PURE DATA AND IT IS FLAG-GATED: `null` when the partition is dormant, so every reader
+   * below falls back to exactly the arithmetic it used at the seal.
+   */
+  const growLedger = options.partition === true
+    ? buildGrowthLedger(s, model, { wallBuiltAtAge: options.wallBuiltAtAge })
+    : null;
   const morphology = selectMorphology(s, options);
   // THE LAWFULNESS DIAL (§161m.2): the same civic-order read the morphology selector
   // uses, so a town's street plan and its supply chains tell the SAME story about how
@@ -1056,7 +1068,11 @@ export function buildFabric(settlement, model, options = {}) {
   const metaSoFar = {
     tier: scale.tier, extentTier: scale.extentTier, builtRadius: scale.builtRadius,
     plotFrontage: packed.frontage, centre, relief: measuredRelief(sub), hasWalls,
-    waterMode: waterRel.mode, populationPeaks: record.get('population-peaks', 0),
+    // ⭐⭐ **A1.5 · compile.js READS THE CURVE FOR population-peaks.** `countPeaks` runs over
+    // `populationHistory`, which is ABSENT on every generated record, so the signal is
+    // STRUCTURALLY 0 at head — measured, not supposed. The ledger carries a real series.
+    waterMode: waterRel.mode,
+    populationPeaks: growLedger ? peaksFromLedger(growLedger) : record.get('population-peaks', 0),
   };
   const immersion = buildImmersion({
     fabric: {
@@ -1068,9 +1084,17 @@ export function buildFabric(settlement, model, options = {}) {
   // ── STAGE 7b · ⭐⭐ §18.4 MARKET COLONIZATION — the middle rows, as a §11 DRIFT FORM. The
   // rows are FILLED BODIES and they join the §195.0 census in the same commit that draws
   // them: they ride the third ground-law pass below with the §10 state bodies.
+  // ⭐⭐⭐ **A1.5 · §18.4 BECOMES A LEDGER CONSUMER — ONE INFILL CLOCK.** *"marketColonization
+  // becomes a ledger CONSUMER (one infill clock; the kernel's capacity accounting excludes the
+  // square)"*. The clock it replaces is `age × min(0.95, 0.42 + order·0.50)` — a fraction of NOW,
+  // stamped by the caller so a snapshot would not slide it. The ledger's saturation is a fact about
+  // the fabric inside the circuit, not a birthday, so the year the rows harden is derived from the
+  // same numbers the walls are: ONE process, ONE clock. ⚠ DORMANT ⇒ the sealed arithmetic, untouched.
+  const ledgerColony = growLedger ? colonizationFromLedger(growLedger, lawfulness) : null;
   const colonize = marketColonization({
     squares: facedWeb.squares,
     channels: streetsWalled,
+    ...(ledgerColony ? { ledgerYear: ledgerColony.colonised ? ledgerColony.atYear : null, ledgerReason: ledgerColony.reason } : {}),
     // ⛔ THE SAME CLASS AS THE WALL VINTAGE, ONE STAGE LATER: a threshold expressed as a
     // SHARE OF THE SETTLEMENT'S LIFE is a fraction of *now*, so under a snapshot it slides
     // with the year and the market is colonised at every age including its first. The
@@ -1280,7 +1304,7 @@ export function buildFabric(settlement, model, options = {}) {
     const rw = (packed.widths && packed.widths.organism) || scale.builtRadius * 0.016 || 5;
     const input = {
       seed: String(seed),
-      ledger: buildGrowthLedger(s, model, { wallBuiltAtAge: options.wallBuiltAtAge }),
+      ledger: growLedger,
       extent: { cx: centre.x, cy: centre.y, radius: scale.builtRadius * 1.45 },
       originForm: (umbrella.polycentric || nuclei.length > 1) ? 'POLYFOCAL'
         : (scale.tier === 'thorp' || scale.tier === 'hamlet' || scale.tier === 'village'
@@ -1307,6 +1331,10 @@ export function buildFabric(settlement, model, options = {}) {
     const built = buildSettledPartition(input);
     return Object.freeze({
       ...built,
+      /** ⭐ THE LEDGER IS PUBLISHED WITH THE PARTITION IT FOLDED. A consumer that reads a drawn
+       *  epoch must be able to read the row it came from; an unpublished pre-stage is a derivation
+       *  nobody downstream can check. Flag-gated with its own artifact, so dormancy is unchanged. */
+      ledger: growLedger,
       page: projectPage(built, { roadWidth: rw }),
       inputEcho: Object.freeze({
         originForm: input.originForm, planMode: input.planMode, roadWidth: rw,
@@ -1608,7 +1636,7 @@ export function buildFabric(settlement, model, options = {}) {
       routeReason: routes.reason,
       constraintsDefaulted: record.defaulted,
       wallVintage: record.get('wall-built-year', null),
-      populationPeaks: record.get('population-peaks', 0),
+      populationPeaks: growLedger ? peaksFromLedger(growLedger) : record.get('population-peaks', 0),
       foodEconomy: record.get('food-economy', 'tillage'),
       fieldFurlongs: fields.furlongs,
       fieldParcels: fields.parcels.length,

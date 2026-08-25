@@ -36,6 +36,21 @@ const { tierForPopulation } = await import(join(ROOT, 'src/domain/townMap/fabric
 const { pointInPolygon, centroid, offsetPolygonOutward } = await import(join(ROOT, 'src/domain/townMap/fabric/fabricGeometry.js'));
 const { pointIn } = await import(join(ROOT, 'src/domain/townMap/fabric/epochAxis.js'));
 
+/**
+ * REG-3's ARMING CONVENTION, applied to this instrument (GROW-A-RESUME, ODQ §683).
+ * This differential imports buildFabric DIRECTLY and hard-coded its option bag, so
+ * REG_FABRIC_OPTS could not reach it and E1 could only ever be run against a DORMANT
+ * kernel -- the exact shape of the I1 lesson (a census that measures the unarmed drawing
+ * and reports "unchanged" about something nobody armed).
+ * INERT WHEN UNSET: absent the env var this is the empty object and every existing
+ * invocation is character-identical.
+ */
+const ENV_OPTS = (() => {
+  const raw = typeof process !== 'undefined' && process.env && process.env.REG_FABRIC_OPTS;
+  if (!raw) return {};
+  try { const o = JSON.parse(raw); return o && typeof o === 'object' ? o : {}; } catch { return {}; }
+})();
+
 const arg = (k, d) => { const h = process.argv.find((a) => a.startsWith(`--${k}=`)); return h ? h.slice(k.length + 3) : d; };
 const leafKey = arg('leaf', 'town');
 const RUNGS = Number(arg('rungs', '4'));
@@ -160,7 +175,7 @@ function buildAt(population, tier) {
   // trip the §161f DEMOTION path and measure a different settlement entirely.
   s.tier = tier;
   const model = buildTownMapModel(s, null);
-  return buildFabric(s, model, { marketRegister: true });
+  return buildFabric(s, model, { ...ENV_OPTS, marketRegister: true });
 }
 
 /* ── THE LADDER ────────────────────────────────────────────────────────────── */
@@ -254,7 +269,7 @@ process.stdout.write(`\nVERDICT: ${standing && mono && noThrough && noSprawl && 
   const srows = [];
   for (const k of ladder) {
     const sp = CORPUS.find((c) => c.key === k);
-    const f = buildOne(sp, { marketRegister: true }).fabric;
+    const f = buildOne(sp, { ...ENV_OPTS, marketRegister: true }).fabric;
     const m = measure(f);
     srows.push({ leaf: k, year: sp.year ?? 'present', pop: f.meta.population, rings: m.rings,
       intramuralInfill: m.holdings, notHeld: m.notHeld, throughWall: m.through,

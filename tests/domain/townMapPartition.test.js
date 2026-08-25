@@ -380,3 +380,127 @@ describe('§6 · dormancy is a property of the flag, not of the caller', () => {
     expect(src.split('buildSettledPartition(').length - 1).toBe(1);
   });
 });
+
+/* ══════════════════════════════════════════════════════════════════════════════════════════
+ * ⭐⭐⭐ GROW-A-RESUME (ODQ §683) · THE LEDGER'S OWN LAWS, EACH WITH ITS PLANTED CONTROL
+ * ════════════════════════════════════════════════════════════════════════════════════════ */
+
+describe('§7 · the growth ledger drives the fold, and every law it asserts convicts', () => {
+  it('⭐ A1.4 · a LossRegion is born at a RECORDED event and at nothing else — zero events, zero ruins', async () => {
+    const { assertLossRegionsRecorded } = await import('../../src/domain/townMap/fabric/growthLedger.js');
+    const clean = {
+      epochs: [{ index: 0, year: 0, lossRegions: [] }],
+      lossRegions: [],
+      trajectory: { anchors: [] },
+    };
+    // ⛔ AN EMPTY CHANNEL IS A CORRECT ANSWER, NOT A GAP: a record that speaks no dated disaster
+    //    carries no ruins, and the law must NOT convict that.
+    expect(assertLossRegionsRecorded(clean)).toEqual([]);
+
+    const recorded = {
+      trajectory: { anchors: [{ year: 40, templateType: 'great_fire', severity: 'catastrophic', weight: 3 }] },
+      lossRegions: [
+        { key: 'loss.E2.0', bornYear: 40, kind: 'great_fire', provenance: 'recorded' },
+        { key: 'loss.E2.1', bornYear: 40, kind: 'great_fire', provenance: 'recorded' },
+      ],
+      epochs: [{ index: 0, year: 0, lossRegions: [] },
+        { index: 1, year: 20, lossRegions: [] },
+        { index: 2, year: 40, lossRegions: [{}, {}] }],
+    };
+    expect(assertLossRegionsRecorded(recorded)).toEqual([]);
+  });
+
+  it('⛔ CONTROL · a FABRICATED ruin is convicted three ways — undated, untyped, and interpolated', async () => {
+    const { assertLossRegionsRecorded } = await import('../../src/domain/townMap/fabric/growthLedger.js');
+    const forged = {
+      trajectory: { anchors: [{ year: 40, templateType: 'great_fire', severity: 'major', weight: 2 }] },
+      lossRegions: [{ key: 'loss.X', bornYear: 999, kind: 'invented_calamity', provenance: 'interpolated' }],
+      epochs: [{ index: 0, year: 0, lossRegions: [{}] }],
+    };
+    const bad = assertLossRegionsRecorded(forged);
+    // a year the record never speaks · a kind no anchor carries · a provenance that cites nothing
+    expect(bad.length).toBeGreaterThanOrEqual(3);
+    expect(bad.join(' ')).toContain('999');
+    expect(bad.join(' ')).toContain('interpolated');
+  });
+
+  it('⛔ CONTROL · a ruin with ZERO dated anchors on the record is a fabricated disaster', async () => {
+    const { assertLossRegionsRecorded } = await import('../../src/domain/townMap/fabric/growthLedger.js');
+    const invented = {
+      trajectory: { anchors: [] },
+      lossRegions: [{ key: 'loss.X', bornYear: 10, kind: 'plague_years', provenance: 'recorded' }],
+      epochs: [{ index: 0, year: 0, lossRegions: [{}] }],
+    };
+    expect(assertLossRegionsRecorded(invented).length).toBeGreaterThan(0);
+  });
+
+  it('⭐ A1.3 S2-M4 · a circuit event with NO YEAR is convicted — the §11.11 stamp defect, structurally excluded', async () => {
+    const { assertCircuitLaw } = await import('../../src/domain/townMap/fabric/growthLedger.js');
+    const ok = {
+      circuitEvents: [{ index: 0, epoch: 1, year: 49, frozenRadius: 100, provenance: 'derived-frozen' }],
+      epochs: [{ index: 0, builtRadius: 40 }, { index: 1, builtRadius: 100 }],
+      emissions: [],
+    };
+    expect(assertCircuitLaw(ok)).toEqual([]);
+    // ⛔ THE PLANT: the exact shape `wallStandingFor` used to hand `deriveEpochs` — an age, no year.
+    const undated = { ...ok, circuitEvents: [{ ...ok.circuitEvents[0], year: undefined }] };
+    const bad = assertCircuitLaw(undated);
+    expect(bad.length).toBeGreaterThan(0);
+    expect(bad.join(' ')).toContain('carries no year');
+    // ⛔ AND THE PROVENANCE PLANT: a circuit is recorded or derived-frozen, never interpolated.
+    const guessed = { ...ok, circuitEvents: [{ ...ok.circuitEvents[0], provenance: 'interpolated' }] };
+    expect(assertCircuitLaw(guessed).join(' ')).toContain('interpolated');
+  });
+
+  it('⭐ every ledger EMISSION act the fold can reach is DRAWN — the roster is not a wish list', () => {
+    const input = fixtureInput();
+    const P = buildSettledPartition(input);
+    const asked = input.ledger.epochs.reduce((n, e) => n + (e.emissions || []).length, 0);
+    // the fixture's one act is dated AFTER its circuit raise, so the fold can place it
+    expect(asked).toBe(1);
+    expect(P.emissions.length).toBe(asked);
+    // ⛔ AND A REFUSAL IS COUNTED RATHER THAN LOST — the silent-zero class, closed.
+    expect(P.emissionRefusals).toBe(0);
+    expect(typeof P.emissionRefusals).toBe('number');
+  });
+
+  it('⭐ the watercourse REFUSAL MASK is live — a dry leaf refuses nothing, a wet one refuses', () => {
+    const dry = buildSettledPartition(fixtureInput());
+    expect(dry.waterRefusals).toBe(0);
+    // ⛔ THE PLANT: a channel straight through the settlement's heart.
+    const wet = buildSettledPartition(fixtureInput({
+      water: { line: [[-200, 0], [-100, 4], [0, 0], [100, -4], [200, 0]], width: 24, kind: 'river' },
+    }));
+    expect(wet.waterRefusals).toBeGreaterThan(0);
+    // the index answers the same question as the linear scan did: the mask still bites, and the
+    // partition it produces is still lawful
+    expect(properCrossings(wet.arrangement).length).toBe(0);
+  });
+
+  it('⭐ `cutWay` is ATOMIC: a refused way leaves NO stray kerb behind', () => {
+    const arr = createArrangement();
+    const root = seedRegion(arr, [[0, 0], [100, 0], [100, 100], [0, 100]], {});
+    const edgesBefore = arr.edges.length;
+    const facesBefore = arr.faces.filter((f) => f.alive).length;
+    // ⛔ THE PLANT: a centreline OUTSIDE the face entirely — the carriageway can never be found.
+    const refused = cutWay(arr, root, [500, 500], [1, 0], 6, { rank: 'lane', key: 'X' });
+    expect(refused).toBeNull();
+    // ⭐⭐ THE POINT OF THE CASE: the arrangement is UNTOUCHED. Before the cure, a probe failure
+    //    could happen AFTER the left kerb had been cut, leaving a half-way in the fabric that the
+    //    caller's fall-through then cut across.
+    expect(arr.edges.length).toBe(edgesBefore);
+    expect(arr.faces.filter((f) => f.alive).length).toBe(facesBefore);
+    expect(arr.refusals.length).toBeGreaterThan(0);
+    // and the refusal names the act, so a census can attribute it
+    expect(arr.refusals[arr.refusals.length - 1].detail.key).toBe('X');
+  });
+
+  it('⭐ every geometric refusal carries the ACT KEY that caused it — attribution by cause', () => {
+    const arr = createArrangement();
+    const root = seedRegion(arr, [[0, 0], [60, 0], [60, 60], [0, 60]], {});
+    cutFaceByLine(arr, root, [500, 500], [0, 1], { type: 'BOUND', key: 'probe.b' });
+    expect(arr.refusals.length).toBe(1);
+    expect(arr.refusals[0].where).toBe('cutFaceByLine');
+    expect(arr.refusals[0].detail.key).toBe('probe.b');
+  });
+});

@@ -118,9 +118,17 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const rows = leaves.map((k) => timeLeaf(k, samples));
   let red = 0;
   for (const r of rows) {
-    const capBuild = r.tier === 'metropolis' ? PERF_BUDGET.constructorMsMetropolis : null;
+    // ⛔⛔ **THE BUDGET USED TO BIND ON ONE TIER AND PRINT GREEN ON EVERY OTHER.** Spelled
+    // `r.tier === 'metropolis' ? … : null`, a `town`-tier leaf had NO cap at all — and the fjord
+    // came back **`build 3169.6 ms … WITHIN BUDGET`**, 27 % over the metropolis budget it was never
+    // measured against, on an instrument whose whole job is to say so. That is §681.2's own class
+    // (*"a planted control had died and was still printing"*) arriving in the perf harness.
+    // ⭐ THE CURE MINTS NO CONSTANT: the metropolis is the LARGEST leaf, so its signed budget is a
+    // valid upper bound for every smaller one. A tier-by-tier table would be four new numbers this
+    // lane measured rather than chose, so it is not minted here.
+    const capBuild = PERF_BUDGET.constructorMsMetropolis;
     const capPage = PERF_BUDGET.pageBaselineMsCity * PERF_BUDGET.pageMultiple;
-    const bOk = capBuild === null || r.buildMedian <= capBuild;
+    const bOk = r.buildMedian <= capBuild;
     const pOk = r.pageMedian <= capPage;
     if (!bOk || !pOk) red++;
     console.log(`${r.key.padEnd(12)} ${r.tier.padEnd(11)} build ${String(r.buildMedian).padStart(8)} ms  [${r.buildMs.join(', ')}]`

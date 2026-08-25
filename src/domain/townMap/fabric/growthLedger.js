@@ -43,9 +43,13 @@
  * chair signs and the owner re-signs at the tuning pass. §110.3's declared-shift discipline
  * covers BOTH shifts — this kernel's landing, and any later owner-signed constant change.
  *
- * ⚠ THE `LossRegion` CHANNEL IS **RESERVED AND EMPTY** (A1.4). Car B builds the state machine;
- * car A reserves the SHAPE so B never re-shapes the ledger. `LOSS_REGION_SCHEMA` states the
- * fields and `lossRegions` is `[]` on every ledger this car mints — proved, not promised.
+ * ⭐⭐ THE `LossRegion` CHANNEL IS **FILLED FROM THE RECORD** (A1.4; ODQ §683). Car A reserved the
+ * shape *"so car B never re-shapes the ledger"*; car B was dissolved into the spine (DESIGN_REG_GROW
+ * A2), so the filling is this file's. **A region is born at a RECORDED, DATED, SEVERITY-GRADED loss
+ * event and at nothing else** — A1.4 verbatim, *"monotone seeds included … debris never keys to
+ * falling population"* — so a rising ledger with a great fire on its record carries ruins, and a
+ * ledger whose record speaks no dated event carries none. ⛔ AN EMPTY CHANNEL IS THEREFORE A CORRECT
+ * ANSWER, NOT A GAP, and `assertLossRegionsRecorded` states that law rather than pinning a zero.
  *
  * PURITY: pure arithmetic over the record. No Date, no Math.random, no runtime trig, no I/O,
  * no geometry. The ledger is data; the pipeline draws it.
@@ -393,6 +397,22 @@ export function frameAtEpoch(settlement, ledger, K) {
   return projected;
 }
 
+/**
+ * ⭐⭐ **WHICH EPOCH IS YEAR Y?** The last band whose year has arrived — the same reading
+ * `settlementAtYear` takes when it keeps events with `at <= Y`, so a frame at year Y shows the town
+ * as it stood at the close of the band containing Y and never a band it has not reached.
+ * ⚠ ONE HOME. Every consumer that turns a YEAR into a FRAME asks here; two spellings of this
+ * lookup would let the film and the folio disagree about which year a frame is.
+ */
+export function epochAtYear(ledger, year) {
+  const eps = (ledger && ledger.epochs) || [];
+  if (!eps.length) return 0;
+  if (!Number.isFinite(year)) return eps.length - 1;
+  let k = 0;
+  for (let i = 0; i < eps.length; i++) if (eps[i].year <= year) k = i;
+  return k;
+}
+
 /** The built radius a population implies, through the fabric's OWN sizer — never re-derived. */
 function radiusAt(settlement, population, peak) {
   const probe = { ...settlement, population, tier: tierForPopulation(peak) };
@@ -506,6 +526,7 @@ export function buildGrowthLedger(settlement, model, options = {}) {
   /** @type {Array<any>} */ const circuitEvents = [];
   /** @type {Array<any>} */ const emissions = [];
   /** @type {Array<any>} */ const quarterMints = [];
+  /** @type {Array<any>} */ const lossRegions = [];
   /** @type {Record<string, any>} */ const annotations = {};
   let peakSoFar = 0;
   let walledTiersSeen = 0;
@@ -627,10 +648,57 @@ export function buildGrowthLedger(settlement, model, options = {}) {
       });
     }
 
+    // ── ⭐⭐⭐ A1.4 · **THE LossRegion CHANNEL, FILLED FROM THE RECORD** (ODQ §683). Car A reserved
+    //    the shape and pinned it empty *"so car B never re-shapes the ledger"*; car B was dissolved
+    //    into the spine (A2), so the filling is this lane's. **The birth condition is a RECORDED,
+    //    DATED, SEVERITY-GRADED loss event and nothing else** — A1.4 verbatim: *"born at a RECORDED
+    //    disaster (monotone seeds included: 192/200 seeds carry dated disasters with no trajectory
+    //    fall — debris never keys to falling population)"*. So a rising ledger with a great fire on
+    //    its record carries ruins, and a falling ledger with no dated event carries none.
+    //    ⛔ ZERO RECORDED EVENTS ⇒ AN EMPTY CHANNEL, AND THAT IS CORRECT, NOT A GAP. The ledger may
+    //    not invent a disaster to give the dress something to draw (A1.2's law, one layer down).
+    const yearFrom = k === 0 ? 0 : years[k - 1];
+    /** @type {Array<any>} */ const epochLosses = [];
+    for (const a of traj.anchors) {
+      if (!(k === 0 ? a.year <= year : (a.year > yearFrom && a.year <= year))) continue;
+      // ⚠ THE COUNT IS THE **SEVERITY WEIGHT**, IN PIECES, and it is REG-T §3's own pre-registered
+      //   weight re-used rather than a second scale invented beside it (minor 1 · major 2 ·
+      //   catastrophic 3). A count proportional to the settlement's size would be a RATE this lane
+      //   has not measured, and minting one here would be exactly the class A1.2 forbids.
+      for (let n = 0; n < a.weight; n++) {
+        const region = Object.freeze({
+          key: `loss.E${k}.${lossRegions.length}`,
+          bornEpoch: k,
+          bornYear: a.year,
+          sourceEvent: `${a.templateType}@${a.year} (${a.severity}${a.military ? ', military' : ''})`,
+          severity: a.severity,
+          /** ⭐ THE KIND IS THE RECORD'S OWN TEMPLATE — typed by the history, never by this file. */
+          kind: a.templateType,
+          state: 'INTACT',
+          stageClock: 0,
+          pressureClock: 0,
+          /** ⚠ NULL BY DESIGN: the ledger holds NO GEOMETRY (its purity clause). The partition
+           *  constructor binds each region to a face at the epoch it folds. */
+          footprint: null,
+          contactEpochs: Object.freeze([]),
+          ops: 0,
+          provenance: 'recorded',
+        });
+        lossRegions.push(region);
+        epochLosses.push(region);
+      }
+      annotations[`loss.${a.templateType}@${a.year}`] = annotate({
+        appearanceEpoch: k,
+        withinEpochOrder: 0,
+        provenance: 'recorded',
+        beatEvents: [beatEvent('ABANDONMENT', a.year, `${a.templateType} (${a.severity})`, 'recorded')],
+      });
+    }
+
     epochs.push(Object.freeze({
       index: k,
       year,
-      yearFrom: k === 0 ? 0 : years[k - 1],
+      yearFrom,
       population,
       peakSoFar,
       extentTier,
@@ -644,8 +712,8 @@ export function buildGrowthLedger(settlement, model, options = {}) {
       circuitEvents: Object.freeze(raised),
       emissions: Object.freeze(epochEmissions.slice()),
       quarterMints: Object.freeze(quarterMints.filter((q) => q.epoch === k)),
-      /** ⚠ RESERVED (A1.4) — car B fills it; car A proves it empty. */
-      lossRegions: Object.freeze([]),
+      /** ⭐ A1.4 · the RECORDED disasters this epoch carries, each one dated and severity-graded. */
+      lossRegions: Object.freeze(epochLosses),
       provenance,
       saturation: saturationShare,
       capacity,
@@ -674,8 +742,9 @@ export function buildGrowthLedger(settlement, model, options = {}) {
     circuitEvents: Object.freeze(circuitEvents),
     emissions: Object.freeze(emissions),
     quarterMints: Object.freeze(quarterMints),
-    /** ⛔ RESERVED AND EMPTY on every car-A ledger. Pinned, not promised. */
-    lossRegions: Object.freeze([]),
+    /** ⭐ A1.4 · every RECORDED, dated, severity-graded loss the record speaks. Empty where the
+     *  record speaks none — which is correct, not a gap. */
+    lossRegions: Object.freeze(lossRegions),
     lossRegionSchema: LOSS_REGION_SCHEMA,
     annotations: Object.freeze(annotations),
     tuning: Object.freeze({
@@ -974,6 +1043,22 @@ export function assertCircuitLaw(ledger) {
     }
   }
   for (const e of ledger.circuitEvents) {
+    // ⛔⛔ **A1.3's S2-M4 · VINTAGE HONESTY, MADE STRUCTURAL** (GROW-A-RESUME). *"The wall event's
+    // year comes from the ledger's recorded/derived-frozen value with provenance — the §11.11 stamp
+    // defect (a vintage with no year) is structurally excluded by the schema requiring the year
+    // field."* The defect this closes is measured in this receipt's §2.4: `wallStandingFor` built a
+    // stamped vintage as `{ ageAtBuild, source }` with NO `year`, and `epochAxis.deriveEpochs` gates
+    // on `dated = vintage.ageAtBuild && vintage.year` — so the stamp meant to CURE the
+    // fraction-of-now hazard silently collapsed the epoch ladder to ONE circuit at today's extent,
+    // and every snapshot leaf in the corpus was drawn against a ladder the present leaf did not use.
+    // A ledger circuit event that reached a consumer without a year could do it again; it cannot
+    // now, because the assertion is the schema.
+    if (!Number.isFinite(e.year)) {
+      bad.push(`circuit E${e.index} carries no year — the §11.11 stamped-vintage class (A1.3 S2-M4)`);
+    }
+    if (e.provenance !== 'recorded' && e.provenance !== 'derived-frozen') {
+      bad.push(`circuit E${e.index} is stamped '${e.provenance}' — a circuit is recorded or derived-frozen, never interpolated`);
+    }
     const at = ledger.epochs[e.epoch];
     if (!at) { bad.push(`circuit E${e.index} cites epoch ${e.epoch}, which the ledger does not carry`); continue; }
     if (Math.abs(at.builtRadius - e.frozenRadius) > 1e-9) {
@@ -990,9 +1075,49 @@ export function assertCircuitLaw(ledger) {
   return bad;
 }
 
-/** ⛔ CAR A MINTS NO LossRegion. Asserted, not promised (A1.4's reservation). */
-export function assertLossRegionsReserved(ledger) {
-  const n = (ledger.lossRegions || []).length
-    + ledger.epochs.reduce((a, e) => a + (e.lossRegions || []).length, 0);
-  return n === 0 ? [] : [`car A minted ${n} LossRegion(s) — the channel is RESERVED for car B (A1.4)`];
+/**
+ * ⭐⭐⭐ **EVERY LossRegion CITES A RECORDED, DATED EVENT — AND ZERO EVENTS MEANS ZERO REGIONS.**
+ * (A1.4 / ODQ §683.) This replaces the reservation pin `assertLossRegionsReserved`, which asserted
+ * the channel was EMPTY. That pin was right while car B was unbuilt and is wrong now: a pin that
+ * says "there are none" cannot tell a correct absence from a broken filler, which is precisely the
+ * shape of zero this estate keeps paying for. The law it is replaced with is the one A1.2 states
+ * one layer up — **no invented history** — expressed on the debris channel:
+ *   (i)   every region's `bornYear` is a year the record actually speaks;
+ *   (ii)  every region's (`bornYear`, `kind`) pair matches a RECORDED anchor's (year, templateType).
+ *         ⚠ THE FIRST SPELLING CHECKED THE KIND AGAINST `LOSS_TEMPLATES` AND CONVICTED FOUR REAL
+ *         LEAVES: `isLossAnchor` admits an event by its CATEGORY as well as by its template, so a
+ *         genuine `occupation_infiltration` disaster typed `infiltration_fear` is a lawful anchor
+ *         whose template is simply not on the template list. Matching the region to its own anchor
+ *         asks the question that actually matters — *does this ruin cite an event the record
+ *         speaks?* — instead of re-litigating the roster in a second place;
+ *   (iii) every region is stamped `recorded` — an `interpolated` ruin is a fabricated disaster;
+ *   (iv)  ZERO dated loss anchors ⇒ ZERO regions;
+ *   (v)   the epoch rows and the top-level roster hold the same regions (append-only agreement).
+ */
+export function assertLossRegionsRecorded(ledger) {
+  /** @type {string[]} */ const bad = [];
+  const top = ledger.lossRegions || [];
+  const anchors = ledger.trajectory.anchors || [];
+  const anchorYears = new Set(anchors.map((a) => a.year));
+  const known = new Set(anchors.map((a) => `${a.year}|${a.templateType}`));
+  if (!anchors.length && top.length) {
+    bad.push(`the ledger carries ${top.length} LossRegion(s) with ZERO dated loss anchors on the`
+      + ' record — a fabricated disaster (A1.4: born at a RECORDED disaster and at nothing else)');
+  }
+  for (const L of top) {
+    if (!anchorYears.has(L.bornYear)) {
+      bad.push(`LossRegion ${L.key} is dated to year ${L.bornYear}, which carries no recorded loss anchor`);
+    }
+    if (!known.has(`${L.bornYear}|${L.kind}`)) {
+      bad.push(`LossRegion ${L.key} cites '${L.kind}' in year ${L.bornYear}, which matches no recorded loss anchor`);
+    }
+    if (L.provenance !== 'recorded') {
+      bad.push(`LossRegion ${L.key} is stamped '${L.provenance}' — a ruin that cites no source event may not be drawn`);
+    }
+  }
+  const inEpochs = ledger.epochs.reduce((a, e) => a + (e.lossRegions || []).length, 0);
+  if (inEpochs !== top.length) {
+    bad.push(`the epoch rows hold ${inEpochs} LossRegion(s) against the roster's ${top.length}`);
+  }
+  return bad;
 }

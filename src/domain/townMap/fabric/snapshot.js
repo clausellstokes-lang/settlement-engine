@@ -181,7 +181,10 @@ export const COLONIZE = Object.freeze({
   rowShare: 0.24,
 });
 
-export function marketColonization({ squares, channels, year, age, lawfulness, frontage, tier, seedKey, hashUnit }) {
+export function marketColonization({
+  squares, channels, year, age, lawfulness, frontage, tier, seedKey, hashUnit,
+  ledgerYear, ledgerReason,
+}) {
   const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
   if (TIERS.indexOf(String(tier)) < 3) {
     return { rows: [], reason: '§18.4: below town there is no market PLACE to colonise — a green or a cross is not a square' };
@@ -190,13 +193,29 @@ export function marketColonization({ squares, channels, year, age, lawfulness, f
     return { rows: [], reason: '§18.4: no market place on this leaf' };
   }
   const order = Number.isFinite(lawfulness) ? Math.max(0, Math.min(1, lawfulness)) : 0.5;
-  const threshold = age * Math.min(0.95, COLONIZE.baseShare + order * COLONIZE.orderResist);
   const Y = Number.isFinite(year) ? year : age;
+  // ⭐⭐⭐ **A1.5 · THE LEDGER IS THE INFILL CLOCK WHERE ONE IS SUPPLIED** (GROW-A-RESUME).
+  // *"§18.4's marketColonization becomes a ledger CONSUMER (one infill clock; the kernel's capacity
+  // accounting excludes the square)."* The share-of-life gate below is the SECOND clock the panel's
+  // M4 convicted: two writers deciding one process, and one of them a fraction of NOW that a
+  // snapshot slides — the caller has to stamp a present-day age just to stop it moving. When the
+  // caller hands a ledger verdict, that verdict IS the answer, and it is derived from the same
+  // saturation the walls are: the rows harden in the year the fabric inside the circuit actually
+  // ran out of room.
+  // ⚠ A NULL `ledgerYear` IS A POSITIVE ANSWER ("this leaf never colonised"), not a missing one, so
+  // the arm keys on whether the caller passed the pair at all — never on the year's truthiness.
+  const fromLedger = ledgerReason !== undefined;
+  const threshold = fromLedger
+    ? (Number.isFinite(ledgerYear) ? ledgerYear : Infinity)
+    : age * Math.min(0.95, COLONIZE.baseShare + order * COLONIZE.orderResist);
   if (Y < threshold) {
     return {
       rows: [],
-      reason: `§18.4: the market place is still open at year ${Math.round(Y)} — an order of `
-        + `${order.toFixed(2)} holds the middle rows off until year ${Math.round(threshold)}`,
+      reason: fromLedger
+        ? `§18.4 via the GROWTH LEDGER: the market place is still open at year ${Math.round(Y)}`
+          + ` — ${ledgerReason}`
+        : `§18.4: the market place is still open at year ${Math.round(Y)} — an order of `
+          + `${order.toFixed(2)} holds the middle rows off until year ${Math.round(threshold)}`,
     };
   }
   const sq = squares[0];
