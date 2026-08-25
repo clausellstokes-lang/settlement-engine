@@ -617,8 +617,8 @@ face; wall termination = the WALL×WATER invariant with water gates/termini). §
 density-abstraction question is ANSWERED by A1.2's two-stage aggregation.
 ### A13.4 · KEEP-BUT-ANNOTATE (the honest class): every clause so marked in the
 inventory carries the reading "true as written; its measurement basis re-verifies on
-the partition at the wave that consumes it" — the twelve SIGNED_CONSTANTS rows carry
-the same note in that file.
+the partition at the wave that consumes it" — the SIGNED_CONSTANTS rows the corrected
+RE-VERIFY block names (nine; that file governs the list) carry the same note.
 
 ## Amendment A14 — VERIFIER CORRECTIONS TO A13 (§677; the red verdicts ruled)
 
@@ -646,8 +646,8 @@ the pulls/draws land as the POST-SPINE SEATING CAR shaped by SPINE A2.4 (quota d
 from the ledger + §640 scorers). **REG-H** — the mosaic + L-REG-33's DRESS half =
 re-base content on FIELD faces; the SIZING half = the constructor per epoch (this is
 also A11's split, named). **REG-TERR** — both halves = re-base rows on partition
-views. All five ride THE DRESS RE-BASE's slot in A13.1's arc; none is a standalone
-wave anymore.
+views. Four ride THE DRESS RE-BASE's slot in A13.1's arc; REG-SITE's content rides
+the post-spine SEATING CAR as stated; none is a standalone wave anymore.
 ### A14.5 · FILM + DECLINE ANNOTATIONS: **L-REG-19's reveal mechanism = the
 truncated-fold frames** (SPINE A1.4; the "ONE final render revealed along appearance
 years" sentence describes the EFFECT, the fold is the mechanism). **The L-REG-27

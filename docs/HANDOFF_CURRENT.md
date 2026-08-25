@@ -73,7 +73,8 @@ REG-T2. **IN FLIGHT: REG-SEAM** (base 7fba086d5 — §631.3 band reconcile + OP_
 + seam-window liveness probe; receipt → laneREGSEAM-receipt.md) and **REG-I1** (instrument debts
 §632.4: seven i8 rows · i5/i6 armed re-runs · triangular/bridgehead liveness · ratchet-unit
 review · warehouse fixture cure; receipt → laneREGI1-receipt.md). Open dispositions: COVER-REFRESH
-car (public-bucket covers never invalidated) · burgToConfig deletion → dead-code sweep. Arc:
+car (public-bucket covers never invalidated) · burgToConfig deletion → dead-code sweep. ⚠ ARC SUPERSEDED — A13.1/§675/§677 govern the released arc (F0 = legacy sweep only per A14.1;
+the OSR mint anchors per §677.2(vii)). Historical spelling kept for the record: Arc:
 REG-SEAM → REG-GROW arch → REG-T2 → REG-5→9 → D → 10 → 11 → F0 → F → P; then catalog residue →
 DW 42 → AD 17 → OSR → parity → ultra (OWNER) → walk + ONE regen → soaks → STOP at tuning.
 
