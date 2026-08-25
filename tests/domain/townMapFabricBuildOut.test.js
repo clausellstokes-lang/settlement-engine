@@ -18,7 +18,14 @@ import { buildFabric } from '../../src/domain/townMap/fabric/buildFabric.js';
 import { buildTownMapModel } from '../../src/domain/townMap/townMapModel.js';
 import { tierScale, AVG_HOUSEHOLD, PLOT_MODULE, BUILD_OUT, buildOutRung,
   GRAIN_BAND, GRAIN_SEAMS, GRAIN_VALIDATED, grainCellsAcross, tierForPopulation, TIERS,
+  TIER_PROFILE, deriveHighWater,
 } from '../../src/domain/townMap/fabric/tierGrammar.js';
+// ⚠ REG-SEAM: the ONLY import of a generation-side module in this file, and it is deliberate.
+// The fabric may not import `constants.js` (a render-time projection must not reach into
+// generation — the bounded-closure law), so the two tables are spelled twice on purpose and the
+// EQUIVALENCE has to be proved from outside both. A test is outside both. See the
+// "§631.3 THE BAND SEAM" describe at the foot of this file.
+import { POPULATION_RANGES, popToTier, TIER_ORDER } from '../../src/data/constants.js';
 import { compileSpatialRecord, countPeaks, CONSTRAINT_KINDS } from '../../src/domain/townMap/fabric/compile.js';
 import { buildRouteSkeleton, corridorPull } from '../../src/domain/townMap/fabric/routes.js';
 import { buildSubstrate } from '../../src/domain/townMap/fabric/substrate.js';
@@ -2071,5 +2078,179 @@ describe('§17.3 THE DEMOTION ARM — the repair pass DEMOTES before it removes'
     }
     // And the drop path still fires: the arm did not simply absorb every refusal.
     expect(f.meta.groundLawDropped).toBeGreaterThan(0);
+  });
+});
+
+describe('§631.3 THE BAND SEAM — producer equality both ways against the landed POPULATION_RANGES', () => {
+  // ⛔⛔ WHY THIS ARM EXISTS, AND WHY IT IS AN EQUALITY RATHER THAN A VALUE PIN.
+  //
+  // `TIER_PROFILE.pop` is a LOCAL SPELLING of the engine's `POPULATION_RANGES`. It is spelled
+  // twice on purpose: the fabric is a render-time projection and may not import a
+  // generation-side module (the same bounded-closure law that made `cartographyTuning`'s
+  // `MULTIPLICITY.POPULATION_SPAN` a copy — and that copy has carried a both-ways mirror pin
+  // since MF-R1). This file had NO such pin, and the cost was measured:
+  //
+  //   the fabric's table drifted to town ≤ 8,000 / city ≤ 40,000 / metropolis ≤ 200,000 against
+  //   the landed 5,000 / 25,000 / 100,000, and NOTHING WENT RED — because the seal's whole test
+  //   suite used `tierForPopulation` as its own oracle. 18,000 populations classified two ways;
+  //   a healthy 6,500-soul city was drawn as a town; and `deriveHighWater` read the engine's
+  //   CORRECT city stamp as a demotion, invented a peak of 8,001 the settlement never held, and
+  //   fired §161g's ELEGY — wear, ×0.55 circuit retention, §12.8 ghost fabric — on a settlement
+  //   that had only ever grown. The instrument built to mourn real losses mourned growth.
+  //
+  // ⭐ THE LESSON THE SHAPE ENCODES: a value pin ("town maxes at 5,000") would have been just
+  // another third place to spell the same number, drifting on its own schedule. The only pin
+  // that cannot drift is one that RE-DERIVES both sides and refuses any disagreement — which is
+  // why every arm below compares the two producers rather than either against a literal.
+  const BOUNDARY_CASES = [
+    60, 61, 240, 241, 400, 401, 900, 901, 5000, 5001,
+    8000, 8001, 25000, 25001, 40000, 40001, 100000,
+  ];
+
+  it('the two CLASSIFIERS agree on every boundary case, including the four old fork points', () => {
+    // ⚠ 8,000 / 8,001 / 40,000 / 40,001 are in this list BECAUSE THEY ARE THE OLD FORK'S OWN
+    // STEPS. They are the populations at which the drifted table changed its answer, so they are
+    // exactly where a reversion would show first, and a boundary list that omitted them would be
+    // a list chosen to pass.
+    for (const p of BOUNDARY_CASES) {
+      expect(`${p}:${tierForPopulation(p)}`).toBe(`${p}:${popToTier(p)}`);
+    }
+  });
+
+  it('the two CLASSIFIERS agree across a 120,000-population SWEEP — zero disagreements', () => {
+    // ⛔ THE SWEEP IS THE ARM THAT CANNOT BE SATISFIED BY LUCK. A boundary list proves the
+    // endpoints; only an exhaustive walk proves there is no window in between. The pre-cure
+    // measurement over this exact range was 18,000 disagreements in two contiguous windows
+    // (5,001–8,000 and 25,001–40,000), so this assertion has a known non-zero reading and is
+    // not a vacuous zero.
+    const disagreements = [];
+    for (let p = 1; p <= 120000; p++) {
+      if (tierForPopulation(p) !== popToTier(p)) {
+        disagreements.push(p);
+        if (disagreements.length > 5) break;
+      }
+    }
+    expect(disagreements).toEqual([]);
+  });
+
+  it('the two TABLES cover the same tiers, BOTH WAYS — neither may hold a tier the other lacks', () => {
+    expect(Object.keys(TIER_PROFILE).sort()).toEqual(Object.keys(POPULATION_RANGES).sort());
+    expect(TIERS).toEqual(TIER_ORDER);
+    // ⭐ ORDER TOO, not just membership: the classifier walks TIERS low-to-high and returns the
+    // first band whose ceiling the population is under, so a reordered TIERS silently re-bands
+    // the world while every ceiling still "matches".
+    for (let i = 0; i + 1 < TIERS.length; i++) {
+      expect(TIER_PROFILE[TIERS[i]].pop[1]).toBeLessThan(TIER_PROFILE[TIERS[i + 1]].pop[1]);
+    }
+  });
+
+  it('every band CEILING matches POPULATION_RANGES.max exactly, and every FLOOR matches min — with one PINNED exception', () => {
+    // ⭐ THE CEILINGS ARE THE CLASSIFIER: `tierForPopulation` and `popToTier` both test `p <= max`,
+    // so a ceiling disagreement IS a classification disagreement. Every one is asserted.
+    for (const t of TIERS) {
+      expect(`${t}.max=${TIER_PROFILE[t].pop[1]}`).toBe(`${t}.max=${POPULATION_RANGES[t].max}`);
+    }
+    // ⚠ THE FLOORS ARE NOT THE CLASSIFIER — they are `bandPosition`'s interpolation origin and
+    // `deriveHighWater`'s step-1 peak. They must still match, because a floor disagreement moves
+    // every graded quantity in the band and moves the peak a demotion is measured against.
+    // ⛔ THE ONE DELIBERATE EXCEPTION, PINNED BY NAME SO IT CANNOT WIDEN INTO A SECOND FORK:
+    // `thorp.pop[0]` is 1 where `POPULATION_RANGES.thorp.min` is 8. The 8 is the smallest
+    // settlement the GENERATOR emits; the 1 is the floor the fabric interpolates from, and it
+    // must sit at or below the smallest population the fabric can ever be handed or a 5-soul
+    // leaf grades at band position 0. Two numbers, two questions.
+    expect(TIER_PROFILE.thorp.pop[0]).toBe(1);
+    expect(POPULATION_RANGES.thorp.min).toBe(8);
+    for (const t of TIERS.filter((x) => x !== 'thorp')) {
+      expect(`${t}.min=${TIER_PROFILE[t].pop[0]}`).toBe(`${t}.min=${POPULATION_RANGES[t].min}`);
+    }
+    // ⭐ AND THE BANDS MUST TILE WITHOUT GAP OR OVERLAP, which is the property that makes
+    // "ceilings match" sufficient: each floor is its predecessor's ceiling plus one.
+    for (let i = 0; i + 1 < TIERS.length; i++) {
+      expect(TIER_PROFILE[TIERS[i + 1]].pop[0]).toBe(TIER_PROFILE[TIERS[i]].pop[1] + 1);
+    }
+  });
+
+  it('COUNTERFACTUAL: the comparison CONVICTS a forked table — the arms are not vacuous', () => {
+    // ⛔⛔ THE ARMS ABOVE COMPARE A FROZEN TABLE AGAINST A FROZEN TABLE, so on their own they
+    // could pass because the comparison is broken rather than because the tables agree — the
+    // exact vacuity this suite's own header warns about. `TIER_PROFILE` is `Object.freeze`d and
+    // cannot be sabotaged in place, so the counterfactual re-runs the SAME logic over a mutated
+    // COPY and requires it to red. This is the negative control for every arm above.
+    const forked = { ...TIER_PROFILE, town: { ...TIER_PROFILE.town, pop: [901, 8000] } };
+    const forkedClassifier = (population) => {
+      const p = Number.isFinite(population) ? Number(population) : 0;
+      for (const t of TIERS) if (p <= forked[t].pop[1]) return t;
+      return 'metropolis';
+    };
+    // The old fork's own window must be caught, and caught at its first population.
+    expect(forkedClassifier(5001)).toBe('town');
+    expect(popToTier(5001)).toBe('city');
+    const caught = [];
+    for (let p = 1; p <= 120000 && caught.length < 3; p++) {
+      if (forkedClassifier(p) !== popToTier(p)) caught.push(p);
+    }
+    expect(caught).toEqual([5001, 5002, 5003]);
+    // And the ceiling arm convicts it too.
+    expect(forked.town.pop[1]).not.toBe(POPULATION_RANGES.town.max);
+  });
+
+  it('THE CONSEQUENCE ARM — the elegy fires on REAL demotions and NOT on healthy growth', () => {
+    // ⛔ THE TABLE EQUALITY ALONE IS NOT ENOUGH, because the defect that mattered was not the
+    // table — it was what `deriveHighWater` DID with it. A future edit could restore the fork
+    // inside the deriver (e.g. by resurrecting the rejected R2 cure, wiring occupancy to the
+    // stored tier) and every arm above would still pass. So the consequence is pinned directly.
+
+    // (1) HEALTHY, INSIDE THE OLD SEAM WINDOWS. An engine-stamped city holding 6,500 souls and
+    // an engine-stamped metropolis holding 30,000 have never shrunk. Pre-cure these reported
+    // demoted=true at deficit 0.1876 and 0.2500, against invented peaks of 8,001 and 40,001.
+    for (const [tier, population] of [['city', 6500], ['metropolis', 30000]]) {
+      const hw = deriveHighWater({ population, tier });
+      // ⭐ THE PEAK IS THE PRESENT POPULATION — i.e. nothing was invented.
+      expect(`${tier}@${population} peak=${hw.population}`).toBe(`${tier}@${population} peak=${population}`);
+      expect(hw.demoted).toBe(false);
+      expect(hw.deficit).toBe(0);
+      expect(hw.evidence).toEqual([]);
+    }
+
+    // (2) A GENUINE DEMOTION STILL FIRES. A stored 'city' holding 3,000 souls is a demotion
+    // under BOTH tables — 3,000 is a town population either way — so the instrument must still
+    // see it. ⚠ ITS DEFICIT SHRANK 0.6250 → 0.4001 and that is the DECLARED shift, not a loss:
+    // the peak it is measured against is the city band's FLOOR, which moved 8,001 → 5,001. The
+    // elegy is smaller because the claim behind it got honest, not because the arm went blind.
+    const real = deriveHighWater({ population: 3000, tier: 'city' });
+    expect(real.demoted).toBe(true);
+    expect(real.population).toBe(POPULATION_RANGES.city.min);
+    expect(Number(real.deficit.toFixed(4))).toBe(0.4001);
+    expect(real.evidence.length).toBeGreaterThan(0);
+
+    // (3) THE HISTORY PATH IS UNTOUCHED. A ring-buffer peak is a measured population, not a band
+    // floor, so no band edit may move it.
+    const hist = deriveHighWater({
+      population: 4000, tier: 'town',
+      populationHistory: [{ population: 4000 }, { population: 12000 }, { population: 9000 }],
+    });
+    expect(hist.population).toBe(12000);
+    expect(hist.demoted).toBe(true);
+
+    // (4) NEGATIVE CONTROL: a healthy town is not demoted, so "demoted" is not simply always true.
+    expect(deriveHighWater({ population: 4900, tier: 'town' }).demoted).toBe(false);
+  });
+
+  it('OCCUPANCY FOLLOWS SOULS UNCONDITIONALLY — the rejected R2 cure cannot creep back in', () => {
+    // ⛔ REG-SEAM deleted a vestigial conditional in `tierScale` whose two branches were the
+    // IDENTICAL expression — scaffolding left behind by a half-started attempt to wire occupancy
+    // to the STORED tier (TE-SEAM's option R2). R2 is rejected: the stored tier disagreeing with
+    // the derived one IS the demotion signal, so an occupancy tier that deferred to the stored
+    // one would make them always agree and blind §161g permanently. This pin makes that
+    // regression red: the occupancy tier must ignore the stored tier entirely.
+    const pop = 3000;
+    expect(tierScale({ population: pop, tier: 'city' }).tier).toBe(tierForPopulation(pop));
+    expect(tierScale({ population: pop, tier: 'city' }).tier).toBe('town');
+    expect(tierScale({ population: pop }).tier).toBe('town');
+    expect(tierScale({ population: pop, tier: 'metropolis' }).tier).toBe('town');
+    // ⭐ AND THE EXTENT TIER STILL DOES read the stored tier's demotion — the two must not be
+    // conflated in the other direction either.
+    expect(tierScale({ population: pop, tier: 'city' }).extentTier).toBe('city');
+    expect(tierScale({ population: pop }).extentTier).toBe('town');
   });
 });
