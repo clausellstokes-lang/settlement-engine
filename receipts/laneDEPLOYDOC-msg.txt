@@ -1,0 +1,61 @@
+TE-DEPLOYDOC-188: the runbook names the one migration that acts at push time
+
+docs/DEPLOY.md's "read these preambles before the push" list documented 197 and 198 and
+never mentioned 188 — and 188 is the only migration in the train whose work happens
+DURING `db push` itself. The estate's own labelling made that inversion worse: it calls
+198 the DESTRUCTIVE one, and 198 deletes nothing at apply time (its prunes wait for the
+scheduled jobs), while 188's `do $$` block quarantines every legacy
+`custom_content_definitions` row with `category = 'supplyChains'` as the push runs —
+real users' custom content. An operator who read the list top to bottom would brace for
+the wrong migration.
+
+ONE hunk, ONE file, +11/-0, inserted before the 197 row so the list keeps lexical order.
+The text is the chair's, transcribed BYTE-IDENTICALLY from the charter (ODQ §565) and
+not reworded: `EXACT_MATCH true` against the charter's own fence.
+
+WHY THE FACTS ARE THE FACTS — corroborated against the migration, not the charter:
+`188_reviewed_supply_chain_persistence.sql` (120,312 B) carries the `do $$` block, the
+`category = 'supplyChains'` loop, the journal kind
+`content.reviewed-supply-chain.legacy-quarantine`, a `raise exception 'legacy reviewed
+supply-chain quarantine conflict'` that fires when the receipt does not verify, and an
+`@rollback:` note reading "Forward-fix only after first use". Its deletes run in exactly
+the order the row states: content_environment_activations, content_environment_revisions,
+content_environments, content_pack_versions, content_packs, custom_content_definitions.
+
+THE NAKED-CLAIM DISCIPLINE, WITH A LIVE INSTRUMENT. Any `docs/**.md` write risks
+naked-claim debt PER CLAIM, so `CLAIM_RE` was EXTRACTED from
+tests/docs/enforcement-claims.test.js rather than retyped and run over the edit:
+
+  INSERTED_MATCHES = 0
+  FILE_MATCHES     = 2, both pre-existing and both already tagged (DEPLOY.md:155 with its
+                     @enforced-by on 156; the second at :308 -> :319, moved as a block)
+
+CONTROLS, because a scanner that cannot fail proves nothing: a planted "machine-enforced
+… 0 problems" line matches, a planted "fails the gate" line matches, ordinary prose does
+not. The insertion sits at 167, below the only claim above it, so no claim/tag pair was
+pushed out of its +/-3-line window.
+
+  tests/docs/deployRunbookFreshness.test.js + tests/docs/enforcement-claims.test.js
+  Test Files  1 failed | 1 passed (2) · Tests  1 failed | 32 passed (33)
+
+The single failure is banked entry #5 of the eleven in scripts/.test-ratchet-baseline.json
+("every completeness claim carries an @enforced-by tag with >=1 target"), whose six naked
+claims live in FABLE_VALIDATION_QUEUE, GOLDEN_SHIFT_LEDGER and IN-0C — none in DEPLOY.md.
+The per-claim pin that exists precisely so a SEVENTH cannot hide inside the sixth PASSED.
+That pass, not the banked red, is this car's evidence.
+
+NO PACKET, DECIDED BY EXECUTION: `npm run validate:packets` exits 0 with the edit present
+(181 packets, 0 READY); no non-terminal packet reserves docs/DEPLOY.md (the two DRAFTs are
+MF-CH3 and MF-CG2); PACKET_STANDARD scopes a packet to a not-yet-built subsystem slice and
+prices no obligation for prose; and the era's own precedent is split by kind — TE-R3 and
+TE-STACK-5 landed unpacketed, while every minting car (MF-CH4/CH5/CH7, MF-CG2, AIP-2)
+changed shipped code. Recorded for veto rather than assumed.
+
+ONE THING I DID NOT TOUCH: the row says "the pack activations", but the first table the
+block deletes is `content_environment_activations` — one row per owner pointing at the
+active environment revision, an ENVIRONMENT activation. The charter forbids rewording the
+mitigation facts, so it stands as authored and the correction goes to the chair.
+
+No test file, title or suite title moves, so the census tuple does not move.
+
+Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>

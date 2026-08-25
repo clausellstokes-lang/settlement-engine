@@ -1,0 +1,9 @@
+{"seed":"1111 (Grimfall Wall, size 40, coast+river+greens+shantytown, all features)",
+ "buildings":{"n":6481,"meanVerts":4.3,"area":{"p25":161,"p50":212,"p75":275,"max":5744},
+   "finding":"the size band is INVARIANT across scale — 10x the buildings, same p25-p75 band as the size-25 city"},
+ "roads":3,"walls":[{"verts":37},{"verts":5}],
+ "rivers":[{"type":"LineString","pts":21,"width":65.9,"finding":"ONE polyline, ONE width — city-scale MFCG river is constant-width; our width profile is justified-by-truth divergence, not emulation"}],
+ "planks":{"n":13,"shape":"2-point LineString, width 4.8 each",
+   "finding":"THE BRIDGES ARE TYPED 2-POINT EDGES named planks — §651's roads-converge-banks/crossing-as-own-edge is the reference's literal data model"},
+ "greens":2,"trees":0,"fields":0,"prisms":1,"squares":1,"earthVerts":93,
+ "districts":["Long Point","Docks District","Castle","The Slums","Oak Side","Purplebridge","Iron Wharf"]}

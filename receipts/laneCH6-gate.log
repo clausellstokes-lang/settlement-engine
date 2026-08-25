@@ -1,0 +1,46 @@
+
+> settlementforge@1.0.0 check:tail
+> sh scripts/gate-tail.sh npm run check
+
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/laneCH6-tree/src/domain/corruptionLeash.js
+  69:35  warning  'settlement' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+  69:47  warning  'worldState' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/laneCH6-tree/src/domain/rulingPower.js
+  29:10  warning  'clamp01' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/laneCH6-tree/src/domain/townCartography/cartographySkeleton.js
+  62:10  warning  'ordinal' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/laneCH6-tree/src/domain/worldPulse/warCoalitionNews.js
+  111:35  warning  Unnecessary escape character: \[  no-useless-escape
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/laneCH6-tree/src/domain/worldPulse/warRulingsNews.js
+  107:35  warning  Unnecessary escape character: \[  no-useless-escape
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/laneCH6-tree/src/pdf/sections/Cover.jsx
+  17:20  warning  'num' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+✖ 29 problems (0 errors, 29 warnings)
+
+
+> settlementforge@1.0.0 test:ratchet
+> sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs
+
+gate-mutex: acquired atomic lock as PID 39875 after 0 poll(s).
+[test-ratchet] TEST REGRESSIONS (fix them; do not widen the census):
+  1 failing test(s) NOT in the frozen census:
+    tests/lint/negativeAssertionAnchor.walker.test.js :: negative-assertion anchor walker (habitat removal) no NEW un-anchored negative assertion anywhere in the test corpus
+      ASSERTION · ran 11ms against a 20000ms budget (vite.config.js testTimeout) — a real verdict — read the message
+      msg: AssertionError: expected [ Array(1) ] to deeply equal []
+
+  machine at this run: load 38.92/45.98/40.21 over 8 core(s)
+  full runner report: /var/folders/0l/_sz6gzvd11x6sthjy1jdj0_80000gp/T/test-ratchet-rdQCUO/results.json
+  stable copy of it:  /var/folders/0l/_sz6gzvd11x6sthjy1jdj0_80000gp/T/test-ratchet-last-red.json
+
+Frozen census is 11 failing test(s), measured at 4deb4f026644cba500b0efc1e051fdea2ff96041.
+Run `npm run test` for the unfiltered reporter output.
+[gate-tail] end: 12:43  up 20 days,  2:15, 1 user, load averages: 38.92 45.98 40.21
+[gate-tail] full log: /var/folders/0l/_sz6gzvd11x6sthjy1jdj0_80000gp/T//gate-tail.39101.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

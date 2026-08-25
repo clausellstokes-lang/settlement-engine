@@ -1,0 +1,10 @@
+{"seed":"928625810 (Everrise Gate, size 25, walls+citadel+plaza+temple, no river/coast)",
+ "values":{"roadWidth":8,"towerRadius":7.6,"wallThickness":7.6,"version":"0.11.5"},
+ "featureGroups":["values","earth","roads","walls","rivers","planks","buildings","prisms","squares","greens","fields","trees","districts"],
+ "buildings":{"n":616,"verts":{"min":4,"max":10,"mean":4.6,"hist":{"4":419,"5":106,"6":58,"7":15,"8":11,"9":4,"10":3}},
+   "area":{"min":46.1,"p25":171.9,"p50":225.5,"p75":295.8,"max":2922.6},"semantics":"NONE — one MultiPolygon, zero per-building metadata"},
+ "districts":[{"name":"Three Halls","area":134031},{"name":"Military District","area":52461},{"name":"Fencrest Gate","area":39388},{"name":"Dragonhill Pass","area":43530},{"name":"Mistfall Garden","area":6312},{"name":"Ale Court","area":14224},{"name":"Northern Slums","area":22205},{"name":"Low Point","area":37564}],
+ "roads":[{"pts":15,"len":1886},{"pts":14,"len":1666},{"pts":14,"len":1622},{"pts":2,"len":95}],
+ "walls":[{"verts":25,"perimeter":1817},{"verts":6,"perimeter":451}],
+ "fields":{"n":41,"meanArea":5040},"squares":{"n":1,"area":3462},"prisms":{"n":1,"area":119},"earthVerts":59,
+ "totalPolygonsApprox":700}

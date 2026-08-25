@@ -1,0 +1,8 @@
+{"settlement":"North Tsodjanvault (Town ~4000, Coastal explicit, rivers+forests+farms+walled, Medieval europe layout)",
+ "created":"2026-08-25T07:27:36Z via the single daily temporary-settlement shot",
+ "architecture":{
+   "generation":"FULLY CLIENT-SIDE — zero API calls across the whole creation; EIGHT parallel buildingGeometryWorker Web Workers; Three.js render pages",
+   "storage":"NO IndexedDB; localStorage carries only TEMP_SETTLEMENT_ID + timestamp — the settlement appears to REGENERATE from stored parameters (derivation-not-storage; the daily limit is a cookie, not a server bill)",
+   "configModel":"form field names expose the parameter tree: landscapeParameters.{rivers,fertileLand,forests,mines,quarries,reserveAreaForNaturalLandscape}; layoutParameters.stages.stages[N].placeWallAfter — LAYOUT AS SEQUENTIAL GROWTH STAGES WITH THE WALL AS A DATED EVENT BETWEEN STAGES; farm-crop closed vocabulary (Flax Grain Cotton Hops Grape Sheep Cattle Pigs Bees); road-entry patterns (dead-end through-road N-way); build-order (most-populous / lower-to-upper / upper-to-lower); D&D lifestyle ladder; religion/race packs"},
+ "visual":"coastal river-mouth town, bridge at the mouth, field boundaries faint around — long render tail (Rendering map... spinner well after workers)",
+ "next":["in-page model access (React fiber / worker messages)","simulate-time observation","building/person entity schema"]}

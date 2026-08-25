@@ -1,0 +1,763 @@
+{
+ "waves": [
+  {
+   "rows": [
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A12.3, line 566",
+     "quote": "REG-BRIDGE (in flight) \u2192 REG-GROW-A \u2192 REG-GROW-B \u2192 REG-ROUTE \u2192 REG-DEF \u2192 REG-WATER \u2192",
+     "whyStale": "\u00a7669.2's RELEASED SEQUENCE replaces this order wholesale: SPINE-1 \u2192 SPINE-2 \u2192 REG-GROW-A resumes on the partition \u2192 the dress re-base (REG-6 absorbing surviving held cars) \u2192 registers/zoom \u2192 judging \u2192 decline \u2192 film \u2192 port. REG-ROUTE is no longer a standalone car in the arc (A1.5: subsumed, residue re-chartered as a post-spine dress car); GROW-B's quarter/ring/form content is restored INTO spine construction (A1.7 M4), so it is not a distinct arc leg before the conformance cars.",
+     "disposition": "SUPERSEDE-BY-NAME"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A12.2 REG-ROUTE row, line 556",
+     "quote": "Water is an ABSOLUTE corridor refusal; landings terminate corridors (ferry/quay glyph); a gate at EVERY wall crossing or the way is severed",
+     "whyStale": "A1.5 / \u00a7670.1(v): the corridor water-refusal cure is ABSORBED into spine \u00a73a (corridors terminate at bank/frontier nodes by construction); the gate rule is spine \u00a73c + A1.3 S2-M3 gate economy; the exits column's crossing census and corridor-water census are now spine \u00a76 exits (SPINE-1 M9 proves WAY\u00d7WALL; SPINE-2 proves WAY\u00d7WATER). Only 'grade response, crag avoidance, fragments' survives, re-chartered as a post-spine dress car \u2014 a lane building this row as chartered would rebuild spine construction.",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A12.2 REG-BRIDGE row, line 562",
+     "quote": "River-profile mint \u2192 fords drawn (wide reaches) \u2192 narrows re-siting + bent approaches \u2192 floating decks + angle outliers (excess predicate) \u2192 carto:bridge disposition",
+     "whyStale": "Spine \u00a73e re-bases crossings as typed CROSSING edges built in SPINE-2 (bridge at admissible narrows with the 75\u00b0 kink law, ford at the wide reach, ferry per corridor); spine \u00a75 already rules 'carto:bridge' RETIRES AT CUTOVER, so its 'disposition' leg is decided; the ford glyph re-cut survives only as a held car absorbed by the REG-6 dress re-base (spine \u00a77). The arc's 'in flight' framing and this leg sequence no longer describe the build.",
+     "disposition": "SUPERSEDE-BY-NAME"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A12.2 REG-GROW A/B row, line 563 (exits column)",
+     "quote": "the differential passes; snapshot divergence; totality walker",
+     "whyStale": "A1.7 M3: A6.1 emission + the totality walker move INTO SPINE-1; the REG-4 differential and snapshot-divergence-via-truncation are spine \u00a76 exits owned by SPINE-1/2. Scope column also stale by implication: GROW-A resumes AFTER SPINE-2 on the partition (\u00a7669.2, spine \u00a77), and GROW-B's quarter minting is a construction step with the ring and form censuses joining spine \u00a76 (A1.7 M4); A1.4 further supersedes-by-name the narrow 'buildFabric stays byte-wise as-is' reading of GROW A1.1 that this row points at.",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "Amendment A10, lines 525\u2013526",
+     "quote": "Sequenced after REG-GROW-B lands its ledger.",
+     "whyStale": "\u00a7669.2 + spine \u00a73f/\u00a77: decline is a spine construction step (pieces empty \u2192 abandon \u2192 LossRegion) landing in SPINE-2, and LOSSREGION is a partition face class (spine \u00a71); REG-D's substrate is therefore the partition's LOSSREGION faces produced by the A1.4 epoch fold, not a GROW-B-landed ledger surface, and its arc slot is the 'decline' leg after judging in the released sequence. A10's input row ('the GROWTH LEDGER's emitted decline/debris states') needs re-pointing through the constructor: the ledger stays pure data (A1.4), the fold makes the faces REG-D dresses.",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "Amendment A11, line 534",
+     "quote": "Home: REG-H, beside the mosaic.",
+     "whyStale": "Spine \u00a71 makes FIELD a partition face class 'under L-REG-33's sizing' \u2014 the sizing/extent half of the law is now spine-construction executed by the partition constructor; REG-H retains only the dress half (mosaic types, tenure, lanes) plus the area-band census. The single-home claim splits.",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "Amendment A11, line 536",
+     "quote": "Frame-correct under REG-GROW: extent reads the ledger's population per epoch.",
+     "whyStale": "A1.4 / \u00a7670.1(iv): the constructor is a single-shot EPOCH FOLD and a frame is the same fold on the truncated ledger \u2014 per-epoch cultivated extent falls out of the fold's FIELD faces, not out of REG-H reading the ledger. The sentence's intent survives; its mechanism ('under REG-GROW', REG-H as the reader) is superseded.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A12.2 REG-DEF row, line 557",
+     "quote": "Gate breach vs gatehouse width; tower rhythm with bowshot logic",
+     "whyStale": "A1.3 / \u00a7670.1(iii): WALL is a THIN FACE and gates MINT in construction (\u00a73c, gate economy S2-M3) \u2014 gate existence/placement is spine-construction; REG-DEF keeps only the dress (gatehouse form, tower rhythm) riding the band face via REG-2's surviving contract (runBands/inkHalf consume the band face's geometry). Scope column must separate the two.",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A12.2 REG-WATER row, line 558",
+     "quote": "the RIVER-UPHILL drainage defect (own measure first); townLayoutV2.js:209 name-match residual",
+     "whyStale": "Spine \u00a72 makes the \u00a7648 width profile 'the single authority for banks' and \u00a71 makes WATER a bank-bounded face \u2014 water-adjacency siting re-bases to partition WATER faces/BANK edges, and the drainage defect's habitat sits in machinery the spine replaces/re-bases; the siting-weight censuses become pulls over partition faces. (Caveat: townLayoutV2.js is NOT in spine \u00a75's replace/retire list \u2014 that residual may genuinely survive; annotate rather than delete it.)",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A12.2 REG-SITE row, line 559",
+     "quote": "hospitals edge-or-gate; fairs hall-or-field; noxious edge/water pull, intramural lawful; town hall DRAWN; market institutions unified with the drawn square",
+     "whyStale": "'The drawn square' is now a VOID face \u2014 spine \u00a75 REPLACES the deriveSquares blobs; 'edge-or-gate' addresses are now partition edges and construction-minted gates (\u00a73c/A1.3). The pulls-and-draws law itself stands (A1.5 keeps CAR-SEATING separate, unchanged), but every address in the scope column must re-express on partition faces/edges.",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A12.2 REG-H row, line 560",
+     "quote": "the surface `fields.js` promises and never publishes, \u00a7641.2); ... frame-correct via the growth ledger",
+     "whyStale": "FIELD pieces now exist as partition faces sized in construction under L-REG-33 (spine \u00a71) \u2014 the 'never publishes' diagnosis is cured structurally by the spine, not by REG-H; 'frame-correct via the growth ledger' re-routes through the A1.4 epoch fold. REG-H keeps the mosaic dress, inversion, tenure, lanes, and the area/mosaic censuses.",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A12.2 REG-TERR row, line 561",
+     "quote": "In-town slope expression (terrace/stair/contour streets \u2014 weights grade",
+     "whyStale": "Spine \u00a74: 'Streets are GROUND \u2014 the gap rendered as shared surface, never a stroke... no street object to stroke'; slope response of ways is a property of the piece-adding rule per origin type (\u00a73b) \u2014 construction, not dress. REG-TERR keeps sheet-wide relief expression and the stroke-tangle cure as dress; 'contour streets' as a drawable object class is gone.",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A12.3, line 567",
+     "quote": "REG-8 (+L-REG-34/35 censuses)",
+     "whyStale": "A1.7 M7: 'L-REG-34's legend census homes in the page view's exit' \u2014 i.e. SPINE-1's page view, not REG-8; L-REG-35 marks now ride partition faces/edges (spine \u00a74). Covered by the A12.3 supersession above but worth naming so a lane doesn't home the legend census in REG-8.",
+     "disposition": "SUPERSEDE-BY-NAME"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A12.1 table, '(census) TANGENTIAL-OR-CLEAR' row, line ~551",
+     "quote": "\u00a7575's law gains its own census (buildings near the wall tangential or clear; no footprint crosses)",
+     "whyStale": "Spine \u00a76: 'i12 tangential-or-clear \u2192 0 BY CONSTRUCTION, planted-violation control still must red', and A1.3 re-bases what it measures \u2014 pieces conforming to the WALL band FACE (abut or clear). The census survives but its subject and expected value changed from a conformance sweep to a by-construction zero with a live control.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A12.1 table, L-REG-34 row, line ~547",
+     "quote": "LEGEND AGREEMENT: every legend row has \u22651 locatable instance",
+     "whyStale": "Law text stands; only its census HOME moved \u2014 A1.7 M7 homes it in the page view's exit (SPINE-1), superseding the A12.3 placement in REG-8. Annotate the home, keep the law.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    }
+   ],
+   "clean": [
+    "A12.1 L-REG-33 statement (both the A11 table and the A12.1 row) \u2014 carried forward verbatim by spine \u00a71 (FIELD 'under L-REG-33's sizing'); the law itself is not superseded, only its home/mechanism (see A11 rows).",
+    "A12.1 L-REG-35 statement \u2014 spine \u00a74 cites it by name ('Scenario/history marks ride faces and edges they address (L-REG-35)'); the law survives re-based, text intact.",
+    "A12.1 L-REG-36 statement (ruins need addresses) \u2014 consistent with spine \u00a73f decline and the LOSSREGION face class; no spine/\u00a7670 clause touches it.",
+    "A12.1 '(candidate) QUARTER-NAME-EARNED' row \u2014 REG-9 judging survives in \u00a7669.2's released sequence ('judging' leg); nothing supersedes the candidate's ratify-or-strike path.",
+    "A12.4 signed-constants register (docs/SIGNED_CONSTANTS.md, three statuses) \u2014 no spine or \u00a7670 ruling touches the register or its maintenance rule.",
+    "A10's dress-only clause ('it draws reached states, it never invents them') \u2014 fully consistent with A1.4 (ledger stays pure data) and spine \u00a73f; only A10's sequencing and input-surface wording are stale (row filed).",
+    "A11's exits sentence (per-tier area census against the band, planted over-cultivated control, self-sufficiency ratio reported) \u2014 these instruments carry unchanged in substance; nothing in body/A1/\u00a7670 re-homes or alters them.",
+    "A12.2 REG-DEF grounding/exits columns (R-MORPH \u00a76 weights grade; rhythm census; keep-presence census) \u2014 dress-side instruments, untouched by the spine; only the scope column splits (row filed).",
+    "A12.2 REG-SITE grounding column ('Dossier-confirmed rows; \u00a7638.2 satisfied') and the seating boundary \u2014 A1.5 explicitly HOLDS CAR-SEATING as its own car, matching this row's silence on seating weights.",
+    "A12.2 header caveat ('Where an ODQ section carries more detail, it governs') \u2014 itself the correct deference rule; \u00a7\u00a7669\u2013670 govern via exactly this clause."
+   ],
+   "notes": "Method: read DESIGN_SPINE.md whole (body + Amendment A1), extracted ODQ \u00a7\u00a7669\u2013670 by awk line range (28153\u201328400) from the 2MB file, and read Amendments A10\u2013A12 whole via awk. Line numbers cited are current working-tree lines (A10 at 520, A11 at 528, A12 at 538; A12.2 rows 556\u2013563; A12.3 at 566\u2013567). Pattern across the five re-based cars (DEF/WATER/SITE/H/TERR): each row SURVIVES as a dress car in the released sequence's dress-re-base/registers leg, but every scope column mixes items the spine now BUILDS (gates, squares-as-VOID, FIELD sizing, corridor termination, way geometry) with genuine dress (rhythm, mosaic types, relief marks, pulls) \u2014 the rewrite work is separating those two, per \u00a7670.1(v)'s pattern for ROUTE. One genuine open residual flagged: townLayoutV2.js:209 is not in spine \u00a75's replace/retire list, so that REG-WATER scope item may survive as-is \u2014 annotate, do not delete. No new architecture proposed; dispositions only."
+  },
+  {
+   "rows": [
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A5.1 L-REG-19 (line 347)",
+     "quote": "continuous organic growth \u2014 ONE final render revealed along per-element APPEARANCE YEARS",
+     "whyStale": "SPINE \u00a73g supersedes the mechanism: \"the film replays deltas; a frame is the partition truncated at epoch K (prefix-closure)\", and A1.4 makes the constructor an epoch FOLD whose frame is the same fold on the truncated ledger. The canon-honesty clause survives; the one-final-render-reveal mechanism does not.",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A5.1 L-REG-27 (line 355)",
+     "quote": "G-60's loss machinery gains its trigger",
+     "whyStale": "SPINE \u00a71 makes LOSSREGION a face class carrying \"the decline state machine, per REG-GROW A1.4\", and \u00a77 puts \u00a73f decline in SPINE-2. The trigger law's object is now a partition face, not the standalone G-60 machinery.",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A5.2 REG-D row (line 365)",
+     "quote": "Depends on REG-3 (shapes) + REG-5 (drawn world) + REG-T",
+     "whyStale": "\u00a7669.2's released sequence (SPINE-1 \u2192 SPINE-2 \u2192 REG-GROW-A \u2192 dress re-base \u2192 registers/zoom \u2192 judging \u2192 decline \u2192 film \u2192 port) replaces this dependency row; the decline dress now also depends on SPINE-2's \u00a73f LOSSREGION faces as its substrate.",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A5.2 REG-F row (line 366)",
+     "quote": "a TIMELINE-TOTALITY walker \u2014 every drawn element carries appearance data, zero orphans",
+     "whyStale": "Spine A1.7 M3 rules \"A6.1 emission moves INTO SPINE-1 \u2026 the totality walker rides with it\", and SPINE \u00a77 lists the totality walker among SPINE-2's exits. The walker's home is no longer a REG-F exit; REG-F only consumes its green.",
+     "disposition": "SUPERSEDE-BY-NAME"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A5.2 REG-F row (line 366)",
+     "quote": "Growth plates (print projection) and the share clip ride as its deliverable siblings with REG-11",
+     "whyStale": "A growth plate is now structurally \"the partition truncated at epoch K\" (SPINE \u00a73g prefix closure), not a projection of the reveal render; and \u00a7669.2 re-homes film at the tail (\u2026 decline \u2192 film \u2192 the port), not beside REG-11.",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A5.2 'Updated arc order' (lines 370\u2013373)",
+     "quote": "Updated arc order: REG-2 \u2192 REG-3 \u2192 REG-4 \u2192 REG-5 \u2192 REG-6 \u2192 REG-7 \u2192 REG-8 \u2192 REG-9 \u2192 REG-D \u2192 REG-10 \u2192 REG-11 \u2192 REG-F \u2192 REG-P",
+     "whyStale": "\u00a7669.2 THE RELEASED SEQUENCE and SPINE \u00a77's cars (SPINE-1 \u2192 SPINE-2 \u2192 GROW-A resumes \u2192 dress re-base absorbing surviving held cars) supersede this order; a lane building against it would sequence dress waves before the partition exists.",
+     "disposition": "SUPERSEDE-BY-NAME"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A5.3 machinery table (line 379)",
+     "quote": "`epochAxis.js` (rings per epoch), accretion order in the derivation | sealed | REG-F's appearance years",
+     "whyStale": "Already corrected once by A6.1 (epochAxis exposes ring epochs only); now doubly superseded \u2014 appearance years are partition-native emission (SPINE \u00a73g), and A1.7 M5 homes epochAxis in the wall-family ledger: \"extend or read the band face, never re-derive\".",
+     "disposition": "SUPERSEDE-BY-NAME"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A5.3 machinery table (line 382)",
+     "quote": "G-60 typed LossRegion + dated recovery | ruled | L-REG-27's object; REG-D/REG-F",
+     "whyStale": "LOSSREGION is now a partition face class (SPINE \u00a71) built in SPINE-2 (\u00a73f, \u00a77); the ruled G-60 content folds into the face's state machine rather than standing as separate consumed machinery.",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A6.1 REG-F0 charter (lines 417\u2013421)",
+     "quote": "REG-F0 instruments the base element producers (bodies, parcels, streets, districts, wall runs) to emit epoch + within-epoch order",
+     "whyStale": "SPINE \u00a75 REPLACES streets.js web derivation and parcels.js packing, and A1.7 M3 moves A6.1 emission INTO SPINE-1 \u2014 the partition emits the schema at construction (\u00a73g). Instrumenting producers slated for replacement is dead work; the backfill car's charter is superseded (any residue is at most the legacy corpus while dormant, which the dormancy exit keeps byte-identical anyway).",
+     "disposition": "SUPERSEDE-BY-NAME"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A6.1 walker scoping (lines 422\u2013424)",
+     "quote": "The totality walker is SCOPED by the op-class roster (i8's committed 31 classes)",
+     "whyStale": "The walker now rides SPINE-1/2 over the partition's own element universe \u2014 \u00a71's face/edge taxonomy plus CLIFF (A1.7 M1). The enumerate-classes/exempt-timeless-dress/planted-orphan law survives; the 31-op-class roster is the legacy render's basis and must re-enumerate on faces and edges.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A6.2 REG-D exit (lines 433\u2013435)",
+     "quote": "REG-D binds to LANDED mechanisms only (peakTier/T2R, B6 shedding, the wear grid, pentimento)",
+     "whyStale": "After SPINE-2 the decline dress draws LOSSREGION faces at their reached state-machine stage (\u00a73f); the landed-mechanisms-only clause was a pre-spine guard and would steer a lane to build decline dress against legacy mechanisms instead of the partition faces.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A6.2 REG-T verdict (lines 438\u2013441)",
+     "quote": "the RECONSTRUCTED-EXTENT series (the only year-indexed series sourceable at head \u2014 stated in the exit with its length)",
+     "whyStale": "Once SPINE-1's per-epoch fold and emission land, a true year-indexed series exists (\u00a73g deltas per epoch); the \"only \u2026 sourceable at head\" parenthetical decays and REG-T run post-spine should classify over the partition's own epoch series.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A6.2 REG-F beat census (lines 450\u2013453)",
+     "quote": "SCAR\u2192HEAL is HELD on the absent event-log-at-head; DEBRIS/RECLAMATION/ABANDONMENT are HELD on the G-60 machinery being built",
+     "whyStale": "SPINE-2 builds \u00a73f decline plus \u00a73g emission (beatEvents in the schema); the held arms' blockers re-point to SPINE-2's landing \u2014 left as written, a lane could either keep them held past their cure or build G-60 standalone.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A6.3 L-REG-27 amendment (lines 467\u2013470)",
+     "quote": "MINT dated `RECLAMATION_START` / `RECLAMATION_HALT` recovery operations into the LossRegion stream",
+     "whyStale": "The no-beat-without-a-source-event law carries intact, but the stream's home is now the LOSSREGION face's state machine (SPINE \u00a71/\u00a73f \"per REG-GROW A1.4\") built in SPINE-2 \u2014 the minted events land on the face, and the film reads them via \u00a73g's beatEvents.",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "docs/SIGNED_CONSTANTS.md",
+     "locator": "Op ceilings table + coupling note (lines 10\u201335)",
+     "quote": "city | 10,100 | \u00a7635.2 raise (measured 10,008 at reconciled bands) \u2026 Mint from the ARMED arm only \u2026 the ratchet renders the six lenses",
+     "whyStale": "Values were priced on the renderer SPINE \u00a75 replaces (streets.js/parcels.js/deriveSquares painting) and the ARMED-arm mint rule names parcel-era arm paths that retire at cutover (--fuse/--shapes/--market/--footprint re-target partition faces). Ceilings still gate the legacy corpus while dormant (dormancy exit: OFF \u21d2 byte-identical); at cutover the primitive basis re-measures on the partition views, whose budget the spine anchors to the reference's own per-tier counts (A1.2).",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/SIGNED_CONSTANTS.md",
+     "locator": "Register bands table, B13 row (line 40)",
+     "quote": "B13 market-furniture band (per void, per rung)",
+     "whyStale": "\"Void\" was a deriveSquares blob \u2014 machinery SPINE \u00a75 replaces. VOID is now a face class (\u00a71) and \u00a74 draws \"void furniture at B13/V-QUAY bands\" \u2014 the band values are consumed by the spine, but the per-void unit re-defines as per VOID face and must re-verify there.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/SIGNED_CONSTANTS.md",
+     "locator": "Register bands table, V-QUAY row (line 42)",
+     "quote": "V-QUAY band (per drawn quay) | 2\u20135",
+     "whyStale": "SPINE \u00a73e makes quays water-edge pieces with moored sub-pieces (the \u00a7635.4 exemption \"becomes unnecessary\"); the 2\u20135 band carries but \"per drawn quay\" must re-verify as per quay FACE on the partition.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/SIGNED_CONSTANTS.md",
+     "locator": "Register bands table, L-REG-30 row (line 44)",
+     "quote": "L-REG-30 floor | F-C = 6 \u00d7 INK.detail \u00b7 AREA_ASPECT 1.6 \u00b7 CLAMP_MARGIN 1.001",
+     "whyStale": "Spine \u00a74 generalizes L-REG-30 (monuments never aggregate), but the floor was measured against parcel-era fabric; the surrounding unit is now the party-run mass pinned in road-width\u00b2 space (A1.2, 2.7\u20134.6 rw\u00b2) \u2014 the INK.detail-based floor must re-verify against rw\u00b2-space masses.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/SIGNED_CONSTANTS.md",
+     "locator": "Register bands table, bridge-angle row (line 45)",
+     "quote": "L-REG-31 bridge-angle band | \u00b115\u00b0 of the local normal (provisional; measured refinement allowed)",
+     "whyStale": "CROSSING is now a typed edge joining two bank nodes with banks derived solely from the \u00a7648 profile (SPINE \u00a71/\u00a73e); the provisional value survives but its \"local normal\" is measured on partition bank geometry, so the allowed refinement re-bases there.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/SIGNED_CONSTANTS.md",
+     "locator": "Register bands table, corridor row (line 46)",
+     "quote": "Bridge corridor half-length | C = 3 \u00d7 median block dimension (sweep-proven insensitive)",
+     "whyStale": "\"Block\" now names a BLOCK face in the partition taxonomy (SPINE \u00a71); the median block dimension and the sweep-proven-insensitive claim were measured on parcels.js-era blocks and must re-verify on partition BLOCK faces.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/SIGNED_CONSTANTS.md",
+     "locator": "Register bands table, conformance row (line 47)",
+     "quote": "Bridge conformance predicate | excess = crossed \u00f7 shortest: conforming \u2264 1.086 \u00b7 defect \u2265 1.302",
+     "whyStale": "The excess ratios were measured over the streets.js web SPINE \u00a75 replaces; ways are now gaps between faces (\u00a71) and crossings typed edges (\u00a73e), so the route-length basis re-measures on way-edge routing over the partition.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/SIGNED_CONSTANTS.md",
+     "locator": "Register bands table, countryside row (line 51)",
+     "quote": "Countryside coverage band (village tier) | 85 % \u00b1 10 points",
+     "whyStale": "Outside land is now FIELD faces under L-REG-33's sizing (SPINE \u00a71); the band value carries but coverage must re-measure as union-of-FIELD-faces over the partition rather than the legacy countryside painter's output.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/SIGNED_CONSTANTS.md",
+     "locator": "UNMINTED-PENDING table, ring-census row (line 67)",
+     "quote": "Ring-census age-monotonicity tolerance | REG-GROW-B's measure | REG-GROW",
+     "whyStale": "Spine A1.7 M4 restores GROW-B's content INTO the spine itself \u2014 quarter minting is a construction step and \"the ring census and form census join \u00a76\" \u2014 so the constant's home/blocked-on column no longer points at a GROW-B wave; its measure comes from the spine's own ring census.",
+     "disposition": "RETARGET-TO-PARTITION"
+    }
+   ],
+   "clean": [
+    "SIGNED_CONSTANTS: Byte ceilings \u00a7641.4 table \u2014 SPINE \u00a76 binds to them verbatim (\"bytes at \u00a7641.4 ceilings \u2014 first wave where BYTES bind by design\"); the values are the spine's own gate, no re-verification owed",
+    "SIGNED_CONSTANTS: River profile taper 0.34 / pinch 0.22 \u2014 SPINE \u00a72 consumes the \u00a7648 profile unchanged as \"the single authority for banks\"",
+    "SIGNED_CONSTANTS: Bridge kink budget 75\u00b0 \u2014 SPINE \u00a73e names \"the 75\u00b0 kink law (\u00a7648)\" verbatim",
+    "SIGNED_CONSTANTS: Silhouette blind-read target \u226575% \u2014 SPINE \u00a76 keeps gestalt gates with fresh-eyes blind reads",
+    "SIGNED_CONSTANTS: Trajectory THIN band <3% \u2014 a rate threshold, machinery-independent (though see REG-T series row for the classifier's input)",
+    "SIGNED_CONSTANTS: Siege standoff bands \u2014 R-MORPH dress morphology, untouched by the partition",
+    "SIGNED_CONSTANTS UNMINTED: L-REG-33 acres-per-capita (SPINE \u00a71 reaffirms FIELD \"under L-REG-33's sizing\") \u00b7 Intramural saturation threshold (SPINE \u00a73d cites \"GROW-A's measured constant\") \u00b7 T2 curve params (GROW-A resumes per \u00a77) \u00b7 terracing/slope REG-TERR rows \u00b7 wear thresholds (tuning, LAST) \u2014 homes and blockers all still valid",
+    "SIGNED_CONSTANTS: header, coupling-law's Buffer.byteLength pin, and OWNER-SIGNED section \u2014 consistent with the spine and the ruled tail order",
+    "REG A5.1 L-REG-18 (rampart/WEAR) \u2014 A1.3 preserves REG-2's dress contract on the band face's geometry",
+    "REG A5.1 L-REG-20 (film clock), L-REG-21 (beat vocabulary \u2014 \u00a73g emits beatEvents), L-REG-22, L-REG-23/24 (decline-arc laws \u2014 \u00a73f implements them), L-REG-25 (purpose law), L-REG-28 (A1.7 M2 adopts the accessible arm as a standing checklist item), L-REG-29 (naming veto)",
+    "REG A5.1 L-REG-26 \u2014 explicitly reaffirmed: A1.7 M3 \"L-REG-26 binds every wave; the totality walker rides with it\"",
+    "REG A6.1 annotation schema module + transient channel \u2014 SPINE \u00a73g emits \"A6.1's schema verbatim\"; the schema itself is the spine's own contract",
+    "REG A6.1 canon-honesty scan \u2014 the provenance bit survives verbatim in \u00a73g's emitted schema; population/control unchanged",
+    "REG A5.3 rows: snapshot.js (SPINE \u00a72 consumes snapshot's dated events; \u00a76 keeps the snapshot-divergence exit), stateMarks/immersion/marginalia, mapEdits annotations, seasonOverride \u2014 all dress vocabularies/paths SPINE \u00a75 consumes unchanged",
+    "REG A5.4 tuning surfaces + A5.5 anti-scope \u2014 film-last order preserved by \u00a7669.2's tail (\u2026 decline \u2192 film \u2192 the port); carve-outs unchanged",
+    "REG A6.2 REG-10 re-scope (reveal struck, zoom ladder + overlap contract kept) \u2014 consistent with \u00a7669.2's registers/zoom-before-film order and A1.1's identity ladder",
+    "REG A6.2 accessible-lens arm charter and wear regime-cure differential \u2014 A1.7 M2 adopts the arm; the wear differential's fixtures are fabric-agnostic (baselines naturally re-pin at the then-sealed tip)",
+    "REG A6.3: film-taste judge = OWNER, year-canonicalization declared shift, carve-out restatement, naming-veto residuals \u2014 all untouched by the spine"
+   ],
+   "notes": "Authority read first: DESIGN_SPINE.md body + Amendment A1 in full, and ODQ \u00a7669\u2013\u00a7670 extracted by line-window under node (headings located at lines 28153/28169 of the 1.9MB file; never whole-read). Scope discipline: only A5 (lines 336\u2013401) and A6 (lines 405\u2013484) of DESIGN_REGISTER_PROGRAM.md plus all of SIGNED_CONSTANTS.md were classified. Two out-of-scope stale sightings for whoever owns the other partitions: (1) A12.3's restated arc (lines 563\u2013570) carries \\\"REG-F0 \u2192 REG-F\\\" and homes the totality-walker bill at REG-P \u2014 same staleness family as my rows 4/6/9; (2) Amendment A9 (line 517) references the \\\"street web\\\" for the wall:all watch row. The REG-F0 supersession is the sharpest lane hazard in my slice: a lane could burn a car instrumenting streets.js/parcels.js producers that SPINE \u00a75 retires, for emission SPINE-1 already owns. On SIGNED_CONSTANTS, no row's VALUE is refuted by the spine \u2014 every stale row is a measurement-basis retarget (per-void/per-quay units, block-dimension medians, street-web route ratios, parcel-era floors, legacy-renderer op counts), which is why KEEP-BUT-ANNOTATE dominates there; the one genuine re-home is the ring-census tolerance whose GROW-B blocker dissolved into the spine's own \u00a76 census (A1.7 M4). All dispositions are classifications only; no architecture proposed."
+  },
+  {
+   "rows": [
+    {
+     "doc": "docs/DESIGN_REG_GROW.md",
+     "locator": "Amendment A1.1, lines 170\u2013171",
+     "quote": "the kernel is a PRE-STAGE that produces a GROWTH LEDGER; buildFabric stays single-shot.",
+     "whyStale": "SPINE A1.4 / ODQ \u00a7670.1(iv): the ledger-stays-pure-data half STANDS, but the narrow 'buildFabric stays single-shot' byte-wise reading is superseded BY NAME \u2014 the consumer is now the PARTITION CONSTRUCTOR, a single-shot EPOCH FOLD (one construction per build).",
+     "disposition": "SUPERSEDE-BY-NAME"
+    },
+    {
+     "doc": "docs/DESIGN_REG_GROW.md",
+     "locator": "Amendment A1.1, lines 172\u2013175",
+     "quote": "The existing single-shot pipeline (lawClaims built ONCE, circuit ahead of the ground law \u2014 the banked composition laws stand untouched) consumes the ledger's FINAL state as a declared input.",
+     "whyStale": "SPINE \u00a75 REPLACES the defect-bearing core that pipeline is (streets.js web derivation, parcels.js packing, builtUmbrella/wallCircuit extent, deriveSquares, road-band painting); SPINE A1.4 re-states the law as 'lawClaims built once from the FINAL partition'. A lane building 'the existing pipeline consumes the ledger' builds against retired machinery.",
+     "disposition": "SUPERSEDE-BY-NAME"
+    },
+    {
+     "doc": "docs/DESIGN_REG_GROW.md",
+     "locator": "Amendment A1.1, lines 176\u2013178",
+     "quote": "An intermediate frame is the SAME single-shot pipeline run on the ledger truncated at epoch K",
+     "whyStale": "SPINE A1.4: 'a frame = the same fold on the truncated ledger' \u2014 same prefix-closure logic, new machine (the fold, not the legacy pipeline). Truncation-frames survive; the executor named does not.",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "docs/DESIGN_REG_GROW.md",
+     "locator": "Amendment A1.1, lines 183\u2013185",
+     "quote": "the final frame \u2264 1.3\u00d7 today's measured build (city 1.29 s); film frames ~1.2\u20131.5 s each",
+     "whyStale": "SPINE A1.6 (S4-M1) supersedes the figure and the protocol: page frame \u2264 1.5\u00d7 the PINNED WARM city baseline (1.29 s), constructor \u2264 2.5 s metropolis warm, measured by a perf harness with a PINNED protocol (warm process, three samples, per tier) that lands IN SPINE-1. The 1.3\u00d7-of-today's-build figure is dead.",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "docs/DESIGN_REG_GROW.md",
+     "locator": "\u00a75 Performance envelope, lines 110\u2013112",
+     "quote": "the final frame must cost no more than ~1.5\u00d7 today's single-pass build (measured exit, not asserted)",
+     "whyStale": "Same multiplier, wrong base and no protocol: SPINE A1.6 pins the base (warm city baseline 1.29 s) and the protocol, and gives the exit an OWNING instrument and car (SPINE-1). \u00a76.8's 'against \u00a75's envelope' therefore points at a superseded envelope.",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "docs/DESIGN_REG_GROW.md",
+     "locator": "\u00a75, lines 112\u2013114",
+     "quote": "the fallback is chartered ahead of need: replay the GEOMETRY at full fidelity but band the epochs coarser for sub-town tiers",
+     "whyStale": "SPINE A1.6 refuted the naive cost model by measurement (batch per-epoch re-noding 1\u20132 orders over budget; one-shot noding of 108k segs ~1.5 s) \u2014 the constructor is INCREMENTAL, one maintained arrangement, epochs APPEND. The fallback's premise (per-epoch full-cost replay) no longer exists; ~40 banded epochs itself survives as the priced multiplier.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REG_GROW.md",
+     "locator": "Amendment A1.3, lines 208\u2013210",
+     "quote": "Car A carries the per-wave totality walker with its planted-omission control (A6.1's own law \u2014 not deferred to car B)",
+     "whyStale": "ODQ \u00a7670.1(vii) / SPINE A1.7 M3: A6.1 emission AND the totality walker move INTO SPINE-1 (spine body \u00a77 listed the walker under SPINE-2; A1 wins \u2014 SPINE-1). Neither is a GROW-A deliverable any more; GROW-A's ledger feeds them.",
+     "disposition": "SUPERSEDE-BY-NAME"
+    },
+    {
+     "doc": "docs/DESIGN_REG_GROW.md",
+     "locator": "\u00a73g, lines 94\u201396",
+     "quote": "emits {appearanceEpoch, accretionOrder, originType, provenance: recorded|interpolated} into the changeManifest",
+     "whyStale": "Doubly stale: GROW A1.3 already replaced it with A6.1's verbatim schema ({appearanceEpoch, withinEpochOrder, disappearanceYear?, provenance, beatEvents[]} + transient channel, three-value provenance \u2014 'the two-value enum was schema starvation'), and SPINE \u00a73g/A1.7 M3 re-homes the emission on partition faces/edges inside SPINE-1. A lane pattern-matching this field list mints the wrong schema in the wrong car.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REG_GROW.md",
+     "locator": "\u00a77 build plan, lines 142\u2013144",
+     "quote": "REG-GROW-A: the diagnosis (\u00a76.9) \u00b7 the epoch loop + circuit law + intramural infill + typed emission (3a/3b) \u00b7 timeline emission (3g) \u00b7 exits 1/2/5/6/8",
+     "whyStale": "\u00a7669.2's released sequence is SPINE-1 \u2192 SPINE-2 \u2192 GROW-A-resumes (ledger integration ON the partition). The geometry half (infill, typed emission, wall event) is SPINE-1's \u00a73c\u20133d; timeline emission is SPINE-1's (A1.7 M3); exit 2 (snapshot divergence) sits in SPINE-2's exit row; exit 8 (performance) is owned by SPINE-1's pinned harness; the differential (exit 1) is a SPINE-1 exit. What resumes as GROW-A is the pure-data ledger stage \u2014 the car row must be re-cut to that scope.",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "docs/DESIGN_REG_GROW.md",
+     "locator": "\u00a77, lines 145\u2013147",
+     "quote": "REG-GROW-B: origin-typed accretion + ring truth + decline replay + quarter minting (3c\u20133f) \u00b7 exits 3/4/7 \u00b7 R-MORPH-gated form census wiring",
+     "whyStale": "SPINE A1.7 M4 (\u00a7670.1(vii)): 'GROW-B's content is restored' INTO the spine \u2014 quarter minting is a construction step consuming ledger tier-threshold events; ring census and form census join SPINE \u00a76; exit 7 (totality walker) moved to SPINE-1 (M3); origin-typed accretion is spine \u00a73a\u20133b; decline is spine \u00a73f with LOSSREGION as a partition face class. The car-B charter as written has no remaining exclusive content \u2014 a lane must not staff it from this row.",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "docs/DESIGN_REG_GROW.md",
+     "locator": "\u00a77, line 148",
+     "quote": "Then the conformance block (REG-ROUTE onward) builds on grown parcels, per \u00a7639.3.",
+     "whyStale": "SPINE A1.5 (\u00a7670.1(v)): REG-ROUTE is SUBSUMED \u2014 the corridor water-refusal cure is absorbed into spine \u00a73a, its residue (grade response, crag avoidance, fragments) re-charters as a post-spine dress car. And 'grown parcels' is parcel-era substrate: parcels.js packing is REPLACED (spine \u00a75); everything downstream builds on partition faces. The sequence itself is now \u00a7669.2's.",
+     "disposition": "SUPERSEDE-BY-NAME"
+    },
+    {
+     "doc": "docs/DESIGN_REG_GROW.md",
+     "locator": "\u00a73b circuit law, lines 65\u201366",
+     "quote": "the extent NEVER re-derives from the built umbrella once raised (C2 dies)",
+     "whyStale": "The LAW stands; the machinery named is retired \u2014 builtUmbrella/wallCircuit extent derivation is in spine \u00a75's REPLACES list. Structurally the wall is now a THIN FACE (spine A1.3): trace derived from piece enclosure, facet-resampled to the form's economy, frozen at raise; the wall family (walls.js/wallRuns/circuitDemotion/districtPartition/epochAxis) must 'extend or read the band face, never re-derive' (A1.7 M5).",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REG_GROW.md",
+     "locator": "\u00a73b, lines 68\u201371",
+     "quote": "typed extramural emission only (faubourg at gate / road ribbon / bridgehead, consuming the existing `faubourg.kind` machinery, REG-4's geometry)",
+     "whyStale": "Spine \u00a73d re-states the law on the partition: typed extramural emission at gates/roads/bridgeheads is PIECE ADDITION at frontier edges, stamped at emission with the reader as verifier. The `faubourg.kind` type vocabulary carries; 'the existing machinery' (parcel-era geometry path) does not, and the gate economy now binds (A1.3 S2-M3: a later way may NOT cross the band ungated \u2014 dead-end, divert, or recorded postern).",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "docs/DESIGN_REG_GROW.md",
+     "locator": "\u00a76.6 dormancy, lines 130\u2013131",
+     "quote": "the kernel is flag-gated (`REG_FABRIC_OPTS.growReplay`); flag OFF \u21d2 29/29 byte-identical exemplars at the base seal",
+     "whyStale": "The spine's dormancy flag is `REG_FABRIC_OPTS.partition` (spine \u00a76, \u00a7670.2) and SPINE-1's base is 'the newest seal'. When GROW-A resumes ON the partition, the flag relationship (growReplay under/alongside partition) and the exemplar count are inherited figures that must be re-measured at the slot \u2014 absence/figures decay (standing law).",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REG_GROW.md",
+     "locator": "\u00a76.3 ring census, lines 122\u2013124",
+     "quote": "Ring census: age monotone from center within tolerance on organic-origin settlements; planned foundations exempt BY TYPE",
+     "whyStale": "Content survives verbatim but the exit's HOME moved: SPINE A1.7 M4 \u2014 'the ring census and form census join \u00a76' of the spine. It is no longer a REG-GROW-B-gated exit.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REG_GROW.md",
+     "locator": "\u00a76.4 form census, lines 125\u2013127",
+     "quote": "reported against R-MORPH's bands once sourced (until then: reported, not gated)",
+     "whyStale": "Stale on two axes: the census joined spine \u00a76 (A1.7 M4), and the 'once sourced' wait is over \u2014 GROW A1.6 records R-MORPH's dossier as DELIVERED at weights grade, and spine \u00a72 grounds origin weights 'R-MORPH-grounded, weights grade until fetched-CONFIRMED'. A lane reading the body's \u00a73c/\u00a76.4 wait-state ('waits for the sourced dossier', line 80) would idle a census that is now buildable at weights grade.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REG_GROW.md",
+     "locator": "\u00a76.7, lines 132\u2013133",
+     "quote": "Timeline totality: zero drawn elements without appearance data at the armed tip (the L-REG-26 walker, brought forward from REG-F's exit)",
+     "whyStale": "The walker's home is now SPINE-1, riding with A6.1 emission (SPINE A1.7 M3, \u00a7670.1(vii)). The exit still must pass; it is no longer GROW's to build.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REG_GROW.md",
+     "locator": "\u00a76.8, line 134",
+     "quote": "Performance: replay wall-time per tier, three samples, against \u00a75's envelope",
+     "whyStale": "SPINE A1.6 S4-M1: the performance exit 'gains an OWNING instrument and car' \u2014 the pinned-protocol harness (warm process, three samples, per tier) lands in SPINE-1, and the budgets are A1.6's (constructor \u2264 2.5 s metropolis warm; page frame \u2264 1.5\u00d7 pinned warm city baseline), not \u00a75's envelope.",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "docs/DESIGN_REG_GROW.md",
+     "locator": "\u00a76.9, lines 135\u2013138",
+     "quote": "The zero-growth DIAGNOSIS (opening act, before any build): establish exactly why year-018 \u2261 year-100 today (which stage discards the year\u2026)",
+     "whyStale": "Spine \u00a75 records the diagnosis as ALREADY BANKED \u2014 'the ledger kernel (GROW-A's two S0 modules slot in; its diagnosis is this design's premise)'. And the stages it interrogates are the defect-bearing core the spine replaces at cutover; the mechanism-cure duty is discharged structurally by the epoch fold. Do not re-run it as an opening act.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REG_GROW.md",
+     "locator": "\u00a71 REG-F0 rescope, lines 40\u201342",
+     "quote": "F0 shrinks to the pre-GROW legacy layers (chrome, relief, water) and the walker that proves totality",
+     "whyStale": "The totality walker is SPINE-1's (A1.7 M3) \u2014 not F0's residue. Relief and water re-base in the dress re-base wave (spine \u00a77: relief grammar, road/water layering among surviving held cars), so F0's residual scope needs re-cutting against the spine sequence.",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "docs/DESIGN_REG_GROW.md",
+     "locator": "Amendment A1.5, lines 227\u2013231",
+     "quote": "`epochAxis`'s deriveEpochs becomes a READER of ledger circuit events (one wall authority\u2026)",
+     "whyStale": "SPINE A1.7 M5 completes the wall-family ledger BY NAME: walls.js/wallRuns/circuitDemotion/districtPartition/epochAxis each 'extend or read the band face, never re-derive'. The single wall authority is now the partition's WALL band face (A1.3 thin-face ruling); circuit events remain ledger data read through it. The OUTGROWN_SHARE raise heuristic and the \u22644-epoch render-vocabulary clauses carry.",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "docs/DESIGN_REG_GROW.md",
+     "locator": "Amendment A1.5, lines 231\u2013233",
+     "quote": "\u00a718.4's marketColonization becomes a ledger CONSUMER (one infill clock; the kernel's capacity accounting excludes the square)",
+     "whyStale": "Infill is now spine \u00a73d construction on partition faces and the square is a VOID face (spine \u00a71). The one-infill-clock law carries, but the consumer contract must be read against the partition substrate, not parcel-era geometry \u2014 and whether \u00a718.4's code path survives cutover is a spine-car question, not settled by this row.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REG_GROW.md",
+     "locator": "Amendment A1.4, lines 211\u2013225",
+     "quote": "a LossRegion object with its own state machine \u2026 later epochs' field mesh and ways REACT to the footprint",
+     "whyStale": "The ruling SURVIVES \u2014 spine \u00a71 cites it ('LOSSREGION (a piece with the decline state machine, per REG-GROW A1.4)') \u2014 but the object is now a partition FACE CLASS: contact tests run against the growth-front's frontier edges, 'field mesh' is FIELD faces, 'ways' are WAY edges (gaps, never drawn objects), and decline/emission geometry lands in SPINE-2 (spine \u00a77).",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "docs/DESIGN_REG_GROW.md",
+     "locator": "\u00a75, lines 114\u2013115",
+     "quote": "The film replays from the emitted manifest, never re-runs the kernel.",
+     "whyStale": "Half-superseded: the kernel (ledger) is indeed never re-run, but frames are not manifest-replays \u2014 SPINE A1.4: 'a frame = the same fold on the truncated ledger', each frame one lawful construction, rendered on demand (GROW A1.1 already moved this way). A film lane building a manifest-replay renderer builds the wrong machine.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REG_GROW.md",
+     "locator": "Amendment A1.1, lines 185\u2013187",
+     "quote": "the panel found city already at 10,008/10,000 pre-kernel \u2014 \u00a7635.2's 10,100 absorbs it; the kernel measures again",
+     "whyStale": "Budget authority moved: SPINE A1.2 anchors page budgets to the REFERENCE'S OWN PER-TIER COUNTS in rw\u00b2 space with the identity BIJECTION, and spine \u00a76 makes bytes bind at \u00a7641.4 ceilings by design ('hundreds of shapes' was a town-scale figure, corrected). The 10,100 op pin belongs to the legacy painter surface retiring at cutover; re-measurement happens under the spine's page-budget census, not this exit.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    }
+   ],
+   "clean": [
+    "\u00a70 convictions table C1\u2013C9 and the diagnosis paragraph \u2014 historical evidence record; spine \u00a75 cites GROW's diagnosis as its own premise. Clean.",
+    "\u00a72 truth boundary \u2014 immutable inputs, T2-curve-where-silent, canon honesty, no stored-field writes; consumed unchanged by spine \u00a72 (population/tier via tierScale, dated events, trajectory). Clean.",
+    "\u00a73a trajectory step \u2014 pure ledger data, untouched by the spine. Clean.",
+    "\u00a73d ring-truth PRINCIPLE (accretion order IS age; rings emerge, not drawn) \u2014 restated by spine \u00a73b construction; only the census's home moved (rowed separately). Principle clean.",
+    "\u00a73f quarter-minting LAW (labels earned at tier thresholds, never pre-assigned; film beat for free) \u2014 carried verbatim into spine construction per A1.7 M4; only the car assignment moved (rowed under \u00a77). Law clean.",
+    "\u00a74 non-goals \u2014 still accurate for the ledger pre-stage: no engine changes, no stored writes, no name generation, no siting logic (spine A1.5 confirms CAR-SEATING stays its own car), REG-H hinterland mosaic still outside the kernel (FIELD faces are the CONSTRUCTOR'S, not the ledger's). Clean.",
+    "\u00a75 outer budget (\u00a7583's 20\u201330 s cached city / 60 s max) and the ~40-band ceiling \u2014 spine A1.6 prices exactly ~40 banded epochs as the multiplier. Clean.",
+    "\u00a76.1 REG-4 differential exit content (circuit stands, infill up, through-wall 0, sprawl 0, --break fails) \u2014 spine \u00a76 carries it verbatim as a SPINE-1 exit; still must pass. Clean.",
+    "\u00a76.2 snapshot-divergence census content incl. the planted-growth-epoch control \u2014 spine \u00a76 carries it verbatim ('snapshot divergence via truncation (planted growth epoch)'); now in SPINE-2's exit row. Content clean.",
+    "\u00a76.5 determinism exit \u2014 matches spine \u00a76 (same seed, byte-identical, manifest included, double-run). Clean.",
+    "\u00a78 panel questions P1\u2013P5 \u2014 historical; all answered in GROW A1 and re-answered where relevant by spine A1. Clean.",
+    "A1.1 snapshot/inertia supersession (settlementAtYear, population-held-constant, snapshotYears retired by ledger truncation, pins retire with a declared shift) \u2014 preserved by spine \u00a73g/A1.4 prefix-closure. Clean.",
+    "A1.2 trajectory law in full \u2014 constrained interpolant, deriveHighWater as sole peak deriver, monotone-where-no-events, T2 mint rides car A, three-value provenance (recorded/interpolated/derived-frozen matches spine's provenance usage incl. derived-frozen wall raises in spine \u00a73c). Clean.",
+    "A1.4 banding rules (event-dense bands, monotone band-splitting cap) \u2014 data-side ledger law; spine A1.6's incremental constructor consumes banded epochs unchanged. Clean.",
+    "A1.5 faubourg-origins row (stamped AT EMISSION, deriveFaubourgOrigins the VERIFIER, disagreement a census red) \u2014 spine \u00a73d cites it approvingly ('stamped at emission with the reader as verifier (A1.5)'). Clean.",
+    "A1.5 compile.js population-peaks row (\u00a7161g consumers see the real peak count) \u2014 data-side. Clean.",
+    "A1.5 cartouche/population at frame leaves (frame's cartouche prints the frame's population) \u2014 survives; note the SEPARATE \u00a7181.2a LOD-ratio re-home to the page register (spine A1.2 S5-M2) is a different cartouche concern and does not touch this exit. Clean.",
+    "A1.5 unwalled-fabric clause ('founding frame constituted at epoch 0 from site + roads; the circuit law binds only where a circuit exists') \u2014 spine \u00a73a is this clause verbatim. Clean.",
+    "A1.6 accessible-lens arm on both cars' exits + the \u00a7110.3 two-shift declared-shift discipline \u2014 spine A1.7 M2 generalizes the accessible arm to a standing checklist item; consistent, not conflicting. Clean."
+   ],
+   "notes": "Authority read first: docs/DESIGN_SPINE.md body + Amendment A1 (A1 wins) in full, and ODQ \u00a7\u00a7669\u2013670 extracted verbatim via node (lines 28152 ff. of docs/OWNER_DECISION_QUEUE.md; never whole-read). Direct answers to the charter's focus questions: (1) \u00a7670 A1.7 moves INTO SPINE-1: A6.1 emission + the per-wave totality walker (M3; spine body \u00a77 lists the walker under SPINE-2 but A1 wins). Quarter minting becomes a CONSTRUCTION step consuming ledger tier-threshold events (M4) \u2014 spine-side, car assignment per the spine's own \u00a77 split, not GROW-B's. Ring census + form census join SPINE \u00a76 (M4) \u2014 exits still must pass but are no longer GROW-gated. (2) The A1.4-spine ruling's named target is GROW A1.1's 'buildFabric stays single-shot' clause and its two satellites (existing-pipeline-consumes, same-single-shot-pipeline-frame) \u2014 all three rowed. (3) \u00a75's envelope is superseded by spine A1.6's pinned protocol/figures; GROW A1.1's 1.3\u00d7 figure likewise. (4) \u00a76 exits now homed in spine cars: 1 (SPINE-1), 2 (SPINE-2), 3/4 (spine \u00a76 via M4), 7 (SPINE-1 via M3), 8 (SPINE-1 harness); 5/6 remain but 6's flag/base figures decayed. (5) A1.5 seams: epochAxis retargets to the wall BAND FACE per A1.7 M5; marketColonization and faubourg rows annotated/clean as rowed. Caveat: whether REG_FABRIC_OPTS.growReplay merges into .partition when GROW-A resumes is a chair call not yet ruled anywhere I read \u2014 flagged in the dormancy row, no architecture proposed. All quotes verified verbatim against /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_REG_GROW.md at its current working-tree state (17,374 B, 249 lines)."
+  },
+  {
+   "rows": [
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "\u00a73 L0 row (lines 53\u201355)",
+     "quote": "parcels, streets-as-negative-space, wall circuits as district partitions, epochs/rings, water claims, commons",
+     "whyStale": "Spine \u00a75 REPLACES parcels.js packing, streets.js web derivation, and builtUmbrella/wallCircuit extent derivation; truth geometry is now the partition (WARD/BLOCK/PLOT faces + typed WAY/WALL/BANK/CROSSING/BOUND(+CLIFF, A1.7 M1) edges).",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "\u00a73 L1 row (lines 56\u201361)",
+     "quote": "frontage fusion into party-walled block masses \u00b7 block-as-unit stroke hierarchy \u2026 circuit terminations at water/cliff \u00b7 faubourg-origin typing \u00b7 intramural densification",
+     "whyStale": "Spine A1.2 stage-1 generalizes REG-1's fusion as a face-set DISSOLVE of interior party BOUND edges (organic guard and aggregation are ONE law); market voids are VOID faces, terminations are A1.3's WALL\u00d7WATER invariant, faubourg typing and densification are \u00a73d construction \u2014 these are no longer L1 'generative geometry' builds.",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "\u00a74 machinery table, walls row (line 78)",
+     "quote": "L0/L1 \u2014 the wall program extends, never re-derives",
+     "whyStale": "Spine A1.3: the wrap's trace derives from piece enclosure then facet-resamples (only walls.js's facet law carries); A1.7 M5 inverts the direction \u2014 walls.js/wallRuns/circuitDemotion/districtPartition/epochAxis 'extend or read the band face, never re-derive'; wallCircuit extent derivation is in spine \u00a75's REPLACES list.",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "\u00a75 wave table, REG-6 row (line 103)",
+     "quote": "INK AS RENDER LAW: INK_SCALE promotion + waver + hatching \u2026 REG-1..3 (needs fused geometry)",
+     "whyStale": "Doubly superseded: \u00a7653.2 upgraded REG-6 to THE PAINT REBUILD; spine \u00a77/\u00a7669.2 re-base it again as the dress re-base after GROW-A resumes on the partition, absorbing the surviving held cars (scenario weight \u00b7 port atlas \u00b7 relief grammar \u00b7 fabric ink \u00b7 ford glyph re-cut \u00b7 road/water layering); 'fused geometry' is now partition party-run masses.",
+     "disposition": "SUPERSEDE-BY-NAME"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A2.3, second bullet (lines 283\u2013284)",
+     "quote": "REG-6 is re-stated as the MF-4 LENS BUILD",
+     "whyStale": "\u00a7653.2 by name: 'from \"the MF-4 lens build\" to THE PAINT REBUILD'; then spine \u00a77's dress re-base supersedes even that framing \u2014 the rebuild now sits on partition faces and absorbs the held cars.",
+     "disposition": "SUPERSEDE-BY-NAME"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "\u00a75 wave table, REG-7 row (line 104)",
+     "quote": "PAINT INTEGRATION: MF-A1 into the pipeline; the browser-parity and PDF answers",
+     "whyStale": "\u00a7653.2 moves the MF-A1 L4 integration into the REG-6 paint rebuild's spec inputs and rules 'REG-7 remains the print projection' \u2014 the row's headline content migrated; only the print-projection/parity leg remains REG-7's.",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A12.3 arc, REG-8 entry (line 567)",
+     "quote": "REG-8 (+L-REG-34/35 censuses)",
+     "whyStale": "Spine A1.7 M7: L-REG-34's legend census homes in the PAGE VIEW's exit (SPINE-1), not REG-8; L-REG-35 marks ride faces/edges in the spine's view law (\u00a74). REG-8 keeps cartouche/denylist work only.",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "\u00a75 wave table, REG-9 row (line 106)",
+     "quote": "COMPOSITION & THE JUDGING LOOP: derived focal hierarchy, breathing space, density narrative; then \u00a7216 rounds",
+     "whyStale": "Content survives but \u00a7669.2 re-slots judging after 'dress re-base \u2192 registers/zoom', and spine \u00a76 orders gestalt gates at PAGE SCALE FIRST (\u00a7660) with fresh-eyes blind reads; the 'all above' dependency now means the spine sequence.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A12.3 (lines 565\u2013572)",
+     "quote": "REG-BRIDGE (in flight) \u2192 REG-GROW-A \u2192 REG-GROW-B \u2192 REG-ROUTE \u2192 REG-DEF \u2192 REG-WATER \u2192 REG-SITE \u2192 REG-H \u2192 REG-TERR \u2192 REG-6",
+     "whyStale": "\u00a7669.2's released sequence supersedes this order (SPINE-1 \u2192 SPINE-2 \u2192 REG-GROW-A \u2192 dress re-base \u2192 registers/zoom \u2192 judging \u2192 decline \u2192 film \u2192 the port); REG-GROW-B dissolves into spine construction (A1.7 M4: quarter minting is a construction step, ring/form censuses join spine \u00a76); REG-ROUTE is subsumed (A1.5). A12.3 said it 'supersedes \u00a7370's order' \u2014 \u00a7670/\u00a7669.2 now supersede A12.3 the same way.",
+     "disposition": "SUPERSEDE-BY-NAME"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A12.2 REG-ROUTE row (line 556)",
+     "quote": "Water is an ABSOLUTE corridor refusal; landings terminate corridors \u2026 opens by DIAGNOSING the black bars",
+     "whyStale": "Spine A1.5: the corridor water-refusal cure is ABSORBED into \u00a73a (corridors terminate at bank/frontier nodes by construction) \u2014 'REG-ROUTE's row is thereby subsumed'; its residue (grade response, crag avoidance, fragments) re-charters as a post-spine dress car; the crossing/gate census is now spine \u00a76's exit.",
+     "disposition": "SUPERSEDE-BY-NAME"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A12.2 REG-BRIDGE row (line 562)",
+     "quote": "narrows re-siting + bent approaches \u2192 floating decks + angle outliers (excess predicate) \u2192 carto:bridge disposition",
+     "whyStale": "SPINE-2 builds crossings as typed edges (spine \u00a73e: bridge at the admissible narrows, 75\u00b0 kink law, ford at the wide reach, ferry); carto:bridge RETIRES at cutover (spine \u00a75); the ford glyph re-cut survives only as a dress-re-base held car; \u00a7653.2 already folded REG-BRIDGE-B's crossing-ink scope into the rebuild.",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "Amendment A9 (lines 515\u2013518)",
+     "quote": "REG-BRIDGE is the cure car: after REG-5, before REG-6; it moves the street web",
+     "whyStale": "There is no street web to move \u2014 a way is a GAP between faces with no existence apart from its flanking faces (spine \u00a71, \u00a7650 enforced structurally); crossing construction and re-siting are SPINE-2's; the sequencing clause is dead with A12.3's order. L-REG-32 itself carries (restated via \u00a7648 in spine \u00a73e).",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "Amendment A8 (lines 505\u2013506)",
+     "quote": "REG-QUAY (the \u00a7635.4 waterfront exemption for moored bodies, drawn-quay census + planted control)",
+     "whyStale": "Spine \u00a73e: quays are water-edge pieces with moored sub-pieces \u2014 'the \u00a7635.4 exemption becomes unnecessary \u2014 a moored piece is a lawful face, not a refused body'. The deliverable's premise is dissolved; SPINE-2 owns quays.",
+     "disposition": "SUPERSEDE-BY-NAME"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A12.2 REG-GROW A/B row (line 563)",
+     "quote": "docs/DESIGN_REG_GROW.md + its A1 (the ledger/frame split; no invented history; T2 rides A)",
+     "whyStale": "Spine A1.4 refines the split by name \u2014 the ledger stays pure data, the PARTITION CONSTRUCTOR is a single-shot epoch fold, and the narrow 'buildFabric stays byte-wise as-is' reading is 'SUPERSEDED by name'; A1.7 M4 restores GROW-B's content as spine construction steps + \u00a76 censuses, so B is no longer a separate wave for a lane to open.",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "Amendment A10 (line 526)",
+     "quote": "Sequenced after REG-GROW-B lands its ledger",
+     "whyStale": "REG-GROW-B dissolved into spine construction (A1.7 M4); the growth ledger is GROW-A's pure-data pre-stage resuming ON the partition (spine A1.4, \u00a7669.2), and \u00a7669.2 slots decline after judging. A10's substance (REG-D draws the ledger's reached states; LossRegion per REG-GROW A1.4) is confirmed by spine \u00a71/\u00a73f \u2014 only the dependency sentence is stale.",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A6.1, REG-F0 bullet (lines 417\u2013422)",
+     "quote": "REG-F0 instruments the base element producers (bodies, parcels, streets, districts, wall runs) to emit epoch + within-epoch order",
+     "whyStale": "Spine A1.7 M3 moves A6.1 emission INTO SPINE-1 with the totality walker riding; spine \u00a73g has every face and edge emit the A6.1 schema verbatim natively \u2014 the producers REG-F0 would instrument are the very machinery spine \u00a75 replaces. A backfill car against parcels/streets producers would instrument dead code.",
+     "disposition": "SUPERSEDE-BY-NAME"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "\u00a711 Q1 (lines 168\u2013169)",
+     "quote": "density abstraction (Watabou's out) vs LOD massing (`massing.js`) at the top tier",
+     "whyStale": "Answered by spine A1.1/A1.2: the substrate is REPRESENTATIVE (~4.3k bodies at metropolis), aggregation exists only above the census tiers, the page unit is the PARTY-RUN MASS via the two-stage dissolve, there is ONE aggregator after cutover and the \u00a7181.2a LOD merge retires. Q1 is closed, not open.",
+     "disposition": "SUPERSEDE-BY-NAME"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "\u00a72 law table, L-REG-2 (line 36)",
+     "quote": "Geometry narrates: fused frontages, block-as-unit, landmark forms \u2014 ranked FIRST among builds",
+     "whyStale": "The law's intent carries, but 'fused frontages' is now A1.2's BOUND-edge face-set dissolve (fusion and aggregation are ONE law), and the 'ranked FIRST among builds' clause is REG-1-era history \u2014 the ranking now belongs to SPINE-1.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "\u00a72 law table, L-REG-3 (line 37)",
+     "quote": "The wall is a district partition; core\u2192circuit\u2192ring; faubourgs are their own districts with typed ORIGINS",
+     "whyStale": "Spine \u00a71/A1.3: WALL is a THIN FACE and 'walls end districts BY DEFINITION' \u2014 the district-partition property is by construction, not a theorem the wall program maintains; faubourg origin typing is \u00a73d's typed extramural emission stamped at emission (A1.5-GROW).",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "\u00a72 law table, L-REG-6 (line 40)",
+     "quote": "A market is one giant street: shared void surface, no seam, furnished at B13 density",
+     "whyStale": "Spine \u00a71/\u00a74: a market is a VOID face furnished by its vocabulary, and streets are ground with no street object to seam against \u2014 seam-freedom holds by construction; the B13 furnishing band carries (spine \u00a74 names B13/V-QUAY bands).",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "\u00a72 law table, L-REG-7 (line 41)",
+     "quote": "walls terminate at water (fabric Rule 3) and cliffs (new; relief-substrate consumer #3), tower/gate works at each terminus",
+     "whyStale": "'fabric Rule 3' is walls.js-era machinery the spine replaces; the law re-grounds on A1.3's WALL\u00d7WATER invariant (S2-M1/M2: a wall face terminates at a bank with a WATER GATE or TERMINUS WORK from the sealed vocabulary; the half-ring's fourth side IS the bank) and CLIFF is a live edge type (A1.7 M1), not 'new'.",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "\u00a77.1 (lines 125\u2013126)",
+     "quote": "the cures are `<defs>/<pattern>/<use>` reuse and (if needed) \u00a7217 owner-signed ceiling raises",
+     "whyStale": "The page budget's primary cure is now structural: spine \u00a76's page-shape census in the reference band + \u00a7641.4 byte ceilings \u2014 'first wave where BYTES bind by design' \u2014 with budgets anchored to the reference's own per-tier counts (A1.2); defs-reuse is a residual dress tactic, not the cure. (A2.4 had already moved \u00a7217 signatures to the chair.)",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A1.2 wave table, REG-10 row (line 198)",
+     "quote": "REG-6/7 (needs the layered render)",
+     "whyStale": "The zoom ladder re-bases on the spine's zoom registers (\u00a74) with the identity ladder ending at the representative plot + household roster as data \u2014 'then interiors' STRUCK (A1.1 m1); the dependency is now the dress re-base of \u00a7669.2 ('registers/zoom' slot), and the cache substrate consumes spine \u00a73g emission.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A1.2 wave table, REG-11 row (line 199)",
+     "quote": "the landing assets regenerate from the new pipeline",
+     "whyStale": "'The new pipeline' is now the partition's page view + the dress re-base, not the REG-6/7 pipeline this row was written against; its REG-7 dependency now means the print projection only (\u00a7653.2). Content otherwise survives (rides with REG-F's share-clip siblings per A5.2).",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A2.3, REG-P bullet (lines 285\u2013287)",
+     "quote": "the \u00a7467-complete D3a dormant core is refreshed from the sealed sandbox before the \u00a7171 cutover",
+     "whyStale": "\u00a7669.2 keeps the port at arc end, but spine \u00a75 RETIRES 'the legacy port path' at cutover \u2014 whether the D3a-dormant-core refresh mechanism survives the partition cutover needs the chair's re-charter before any lane builds REG-P against this text (flag, not a ruling).",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "\u00a710 (lines 162\u2013163)",
+     "quote": "No fifth map system \u2014 every wave lands inside the fabric/harness/lens machinery of \u00a74",
+     "whyStale": "The \u00a7669-released partition replaces part of \u00a74's machinery table (spine \u00a75's replaces/consumes/retires ledger); read literally this anti-scope clause convicts the spine itself. It must be annotated to read against spine \u00a75, with the partition as the fabric's new core.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A12.2 REG-DEF/REG-WATER/REG-SITE/REG-TERR rows (lines 557\u2013561)",
+     "quote": "townLayoutV2.js:209 name-match residual",
+     "whyStale": "These cars' content (weights, pulls, presence censuses) is not superseded, but their substrate re-bases to partition faces, their sequencing died with A12.3's order (they are unnamed in \u00a7669.2 \u2014 re-slotting is the chair's), REG-TERR's 'relief expression SHEET-WIDE' overlaps the dress re-base's 'relief grammar' held car, and legacy-path residuals like townLayoutV2.js die with the retired v1/v2 paths at cutover (spine \u00a75).",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A12.2 REG-H row (line 560)",
+     "quote": "the surface `fields.js` promises and never publishes, \u00a7641.2",
+     "whyStale": "Spine \u00a71 mints FIELD as a face class ('outside pieces under L-REG-33's sizing') \u2014 the hinterland mosaic draws on FIELD partition faces, frame-correct via spine \u00a72's per-epoch population inputs, not on a fields.js surface; the per-tier area censuses carry.",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "Amendment A4 (lines 331\u2013332)",
+     "quote": "REG-7's performance gate and REG-10's reveal pipeline consume the tiered numbers",
+     "whyStale": "The perf exit now has an OWNING instrument and car IN SPINE-1 (A1.6: pinned warm-process protocol, constructor \u2264 2.5 s metropolis, page frame \u2264 1.5\u00d7 the pinned warm city baseline 1.29 s) \u2014 A4's tiered user-surface numbers still bind but are measured on that harness; and REG-10's reveal arm was already STRUCK by A6.2 (REG-F owns reveal), so half the consumer list is dead.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A3.1 (line 310)",
+     "quote": "parcel and orientation differentiate even equal rolls",
+     "whyStale": "'Parcel' is now the partition's PLOT face (parcels.js packing is replaced, spine \u00a75); the family grammar itself carries and binds at the spine's zoom registers \u2014 'plot-level with yards and the shape families' (spine \u00a74) \u2014 with the `--shapes` sealed arm re-targeting partition faces.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A5.1 law table, L-REG-19 (line 347)",
+     "quote": "ONE final render revealed along per-element APPEARANCE YEARS",
+     "whyStale": "The film's mechanism re-bases: spine \u00a73g \u2014 'the film replays deltas; a frame is the partition truncated at epoch K (prefix-closure)' per A1.4's fold \u2014 reveal-of-one-final-render vs truncated-fold frames must be reconciled at REG-F's re-charter; the law's canon-honesty clause and clock law carry.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/DESIGN_REGISTER_PROGRAM.md",
+     "locator": "A5.1 law table, L-REG-26 (line 354)",
+     "quote": "stamps its elements' timeline annotations (appearance epoch, accretion order, beat events) in its changeManifest",
+     "whyStale": "Spine A1.7 M3: 'A6.1 emission moves INTO SPINE-1 \u2014 L-REG-26 binds every wave; the totality walker rides with it' \u2014 emission is now structural in every face/edge (\u00a73g), so the per-wave changeManifest carry-note becomes a pointer at the partition's native emission, not a per-wave stamping obligation on renderer elements.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    }
+   ],
+   "clean": [
+    "\u00a70 north star and \u00a71 thesis \u2014 the spine explicitly serves both (\u00a7669.1 coherence assurance); no stale machinery.",
+    "\u00a72 laws L-REG-1, L-REG-4, L-REG-5 (statement; its readiness/era/prosperity inputs additionally join spine \u00a72 per A1.7 M8), L-REG-8 (as A3-amended), L-REG-9, L-REG-10, L-REG-11, L-REG-12 \u2014 statements reference no replaced machinery; several are consumed by name in the spine.",
+    "\u00a75 rows REG-0, REG-G1, REG-1, REG-2, REG-3, REG-4, REG-5 \u2014 historical record of landed/sealed waves; spine \u00a75 states their sealed arms' LAWS and instruments carry (--fuse/--shapes/--market/--footprint re-target partition faces); REG-4's densification differential is carried verbatim as spine \u00a76's 'REG-4 differential'.",
+    "\u00a75 sequencing notes (lines 108\u2013110) \u2014 cutover owner-gated and legacy paths byte-frozen until it: consistent with spine \u00a75's retire-at-cutover.",
+    "\u00a76 instruments \u2014 the two-legged discipline, atlas DISTANCE set, and legibility instruments carry (spine \u00a76 keeps determinism, gestalt gates, blind reads; the sealed arms' instruments carry per spine \u00a75).",
+    "\u00a77.2 PDF filter-vanish, \u00a77.3 browser parity, \u00a77.5 last-mile calibration, \u00a77.6 rasterizer honesty \u2014 untouched; \u00a7653.2 confirms REG-7 remains the print projection.",
+    "\u00a78 seams: DW/B18 (A2.3's strike stands), Undercity via DW law 7, News/marginalia address law, deferred D-10 and \u00a7290 rows \u2014 no spine contact. (One flag in notes on the DW-6/cartographyPaint seam.)",
+    "\u00a79 owner-signature surfaces \u2014 cutover, deploys, tuning signature unchanged (\u00a7669.1, A6.3 carve-out list).",
+    "A1.1 laws L-REG-13 (as A4-amended), L-REG-14, L-REG-15, L-REG-16, L-REG-17; A1.3 instrument additions; A1.4 docket routing \u2014 clean.",
+    "A2.1 blockers 1 (REG-2 fixture derivation), 2 (massing.js live \u2014 still true; REG-3 consumed it read-only), 4 (REG-G1 cliff wave \u2014 landed; spine A1.7 M1 confirms CLIFF 'live fabric at the seal'), 5 (PDF pattern-vanish); A2.2 exit repairs; A2.4 corrections of record \u2014 historical/landed, no live charter against the spine.",
+    "A3.2 dual-arm exit and A3.3 standing approvals \u2014 the rampart approval carries by name (spine \u00a74: 'the wrap with its rampart dress').",
+    "A5.1 laws L-REG-20, L-REG-21, L-REG-22, L-REG-23, L-REG-24, L-REG-25, L-REG-27, L-REG-28 (also joins spine \u00a76 via A1.7 M2's accessible-lens arm), L-REG-29; A5.4; A5.5 \u2014 clean.",
+    "A6.1 annotation schema \u2014 carried VERBATIM into spine \u00a73g ({appearanceEpoch, withinEpochOrder, disappearanceYear?, provenance, beatEvents[]} + the transient channel); canon-honesty scan clauses clean.",
+    "A6.2 REG-D exit charter, REG-T verdict mint, wear-arm differential, accessible-lens arm charter, REG-F beat-occurrence census and honest bill, REG-10 reveal-strike \u2014 all consistent with the spine (REG-10 re-scope anticipated the split the spine keeps).",
+    "A6.3 law reconciliations (RECLAMATION events, film judge = owner, year-canonicalization shift, carve-out restatement, naming-veto residuals) \u2014 clean.",
+    "A7 L-REG-30 statement \u2014 generalized by name in spine \u00a74 ('monuments always drawn at their own register \u2014 L-REG-30's absorb-never-absorbed, generalized').",
+    "A8 L-REG-31 and A9 L-REG-32 statements \u2014 restated by the spine via the \u00a7648 narrows/kink/ford law (spine \u00a73e); only their car/sequencing clauses are stale (rows filed).",
+    "A11/A12.1 L-REG-33 (consumed by name: FIELD faces 'under L-REG-33's sizing', spine \u00a71), L-REG-35 (consumed by name, spine \u00a74), L-REG-36, the quarter-name-earned candidate (quarter minting itself now a spine construction step, A1.7 M4; REG-9 still ratifies the name-earning), and the tangential-or-clear census (carried as spine \u00a76's i12 \u2014 now 0 BY CONSTRUCTION with the planted-violation control).",
+    "A12.4 signed-constants register \u2014 clean; the spine's chair-signed constants (rw\u00b2 band, budgets) belong on the same sheet."
+   ],
+   "notes": "Authority read first: docs/DESIGN_SPINE.md in full (body + A1), ODQ \u00a7\u00a7669\u2013670 via node slicing (never whole-read), plus \u00a7653 and \u00a7657 for the REG-6 lineage and the held-car roster the spine's \u00a77 dress-re-base list resolves against (held cars from \u00a7657.2: WALLS/WATERCLIP/FABRIC-INK/FRAME/SCENARIO/PORT/SEATING/BUDGET-ratchet/REG6-CHARTER; spine rules FRAME absorbed, SEATING stays its own car, survivors listed in \u00a77, 'most of the rest dissolved by construction'). All pattern checks run with node string scans, not grep (ugrep hazard). Three flags below the row threshold: (1) \u00a78's 'the art-direction slot at the DW-6/cartographyPaint seam is unchanged' \u2014 spine \u00a75 retires 'the legacy painters' at cutover; whether cartographyPaint is among them needs a code-side check before AD work resumes; (2) A5.3's epochAxis row was already A6.1-corrected and now also reads through A1.7 M5 (epochAxis reads the band face) \u2014 low risk since A6.1 wins internally; (3) A6.1's totality-walker scoping 'by the op-class roster (i8's committed 31 classes)' \u2014 the walker moves into SPINE-1/2 over partition emission (A1.7 M3), so the renderer op-class roster no longer enumerates the population; the exemption principle carries. REG-11's absence from \u00a7669.2's coarse sequence was NOT treated as supersession (it rides with REG-F's share-clip siblings per A5.2). Dispositions only \u2014 no new architecture proposed."
+  }
+ ]
+}

@@ -1,0 +1,46 @@
+
+> settlementforge@1.0.0 check:tail
+> sh scripts/gate-tail.sh npm run check
+
+dist/assets/compendiumData.generated-Pc7xJhNQ.js                   89.75 kB │ gzip:  23.50 kB
+dist/assets/beliefMap-CW4GdGwb.js                                  97.73 kB │ gzip:  31.14 kB
+dist/assets/realmManifest-CHglQzgJ.js                             100.70 kB │ gzip:  32.97 kB
+dist/assets/AdminPanel-bm2dzBhN.js                                101.53 kB │ gzip:  27.30 kB
+dist/assets/GenerateWizard-Uj7CtrrM.js                            103.79 kB │ gzip:  30.79 kB
+dist/assets/index-CV62bZrY.js                                     105.56 kB │ gzip:  29.80 kB
+dist/assets/data-BdaRFecl.js                                      112.13 kB │ gzip:  33.07 kB
+dist/assets/engine-core-CAC6tIqk.js                               114.30 kB │ gzip:  36.21 kB
+dist/assets/npcLadderState-DLfWHZhK.js                            119.79 kB │ gzip:  38.18 kB
+dist/assets/AccountPage-DypoVONF.js                               123.35 kB │ gzip:  34.36 kB
+dist/assets/settlementLifecycleFirstClass-BtX-rPhE.js             141.69 kB │ gzip:  48.50 kB
+dist/assets/CompendiumPanel-CVu-dG0H.js                           154.34 kB │ gzip:  45.34 kB
+dist/assets/realmItemReadModel-B2r0QWnq.js                        156.32 kB │ gzip:  48.23 kB
+dist/assets/index.es-XjL1Xusr.js                                  158.94 kB │ gzip:  53.09 kB
+dist/assets/SettlementPDF-eCQD1SzS.js                             161.92 kB │ gzip:  37.90 kB
+dist/assets/vendor-react-1ny_Qquz.js                              193.16 kB │ gzip:  60.55 kB
+dist/assets/vendor-html2canvas-DXEQVQnt.js                        201.04 kB │ gzip:  47.43 kB
+dist/assets/applyWorldPulse-Dr4s-leO.js                           242.70 kB │ gzip:  82.06 kB
+dist/assets/grammarNews-uqjBORIe.js                               252.20 kB │ gzip:  85.39 kB
+dist/assets/SettlementsPanel-BH9AppmY.js                          256.41 kB │ gzip:  77.19 kB
+dist/assets/npcComponents-6IHNi2Ax.js                             278.28 kB │ gzip:  74.06 kB
+dist/assets/advanceInterval-BmS_4Dwt.js                           478.47 kB │ gzip: 157.36 kB
+dist/assets/data-lazy-CGwNye0i.js                                 501.97 kB │ gzip: 160.77 kB
+dist/assets/index-B8lp4Ekq.js                                     570.41 kB │ gzip: 180.52 kB
+dist/assets/engine-DOxsrarG.js                                    666.12 kB │ gzip: 218.00 kB
+dist/assets/three.module-PDSP0dbZ.js                              734.33 kB │ gzip: 189.46 kB
+dist/assets/vendor-pdf-DJU7O_vq.js                              1,852.07 kB │ gzip: 616.88 kB
+✓ built in 18.52s
+
+> settlementforge@1.0.0 postbuild
+> node scripts/prerender-routes.mjs
+
+[prerender] wrote 314 static route documents (13 views + 15 gallery hubs + 286 compendium entries) under dist/
+
+> settlementforge@1.0.0 verify:dist
+> sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs --verify-dist
+
+gate-mutex: acquired atomic lock as PID 27405 after 0 poll(s).
+[test-ratchet] STRICT DIST OK — 53 discovered/reported file(s), 467 test(s), zero failed/non-run/uncollected/missing/extra/duplicate rows.
+[gate-tail] end: 13:02  up 20 days,  2:33, 1 user, load averages: 17.53 30.39 35.63
+[gate-tail] full log: /var/folders/0l/_sz6gzvd11x6sthjy1jdj0_80000gp/T//gate-tail.86220.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

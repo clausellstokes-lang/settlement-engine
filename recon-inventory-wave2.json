@@ -1,0 +1,484 @@
+{
+ "waves": [
+  {
+   "rows": [
+    {
+     "doc": "docs/HANDOFF_CURRENT.md",
+     "locator": "line 43 (\u00a7THE QUEUE, pickup card \u00a7562)",
+     "quote": "WEB-8b/12 \u2192 wiring wave \u2192 WEB-9a\u201311 \u2192 HK-4/5/6 \u2192 housekeeping \u2192 CT-4/CT-5/WF-8 \u2192 **AD program (17 cars; charter at `refs/preserve/ad-charter-2026-08-24`)** \u2192 OSR mint \u2192 parity \u2192 `/code-review ultra` (OWNER) \u2192 endgame.",
+     "whyStale": "Written 2026-08-24, before \u00a7657.2 (map-code cars HELD), \u00a7669.2 (the released sequence: SPINE-1 \u2192 SPINE-2 \u2192 GROW-A resumes \u2192 dress re-base \u2192 registers/zoom \u2192 judging \u2192 decline \u2192 film \u2192 port), and \u00a7672.1. It routes straight to 'endgame' with no spine arc interleaved, and every named train it feeds (AD's three-painter opening, OSR/parity over now-partition-rendered surfaces, the endgame itself) is under the \u00a7671/\u00a7672 reconciliation. A lane dispatched off this line would sequence against a dead arc.",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "docs/HANDOFF_CURRENT.md",
+     "locator": "lines 76\u201378 (tail of the \u2b50\u2b50\u2b50 STATE AS OF \u00a7633 block)",
+     "quote": "Arc: REG-SEAM \u2192 REG-GROW arch \u2192 REG-T2 \u2192 REG-5\u21929 \u2192 D \u2192 10 \u2192 11 \u2192 F0 \u2192 F \u2192 P; then catalog residue \u2192 DW 42 \u2192 AD 17 \u2192 OSR \u2192 parity \u2192 ultra (OWNER) \u2192 walk + ONE regen \u2192 soaks \u2192 STOP at tuning.",
+     "whyStale": "The same block's later text records SPINE-1 IN FLIGHT, but this arc line was never redrawn: REG-SEAM/REG-5 are SEALED, REG-6 was upgraded to the paint rebuild (\u00a7653.2) and is now the dress re-base (spine \u00a77), every map-code car was HELD (\u00a7657.2), and \u00a7669.2 names the replacement sequence. The terminus 'walk + ONE regen \u2192 soaks' also predates \u00a7672.1's scope order (cutover-readiness gates absorbed into the walk + regen).",
+     "disposition": "SUPERSEDE-BY-NAME"
+    },
+    {
+     "doc": "docs/HANDOFF_CURRENT.md",
+     "locator": "lines 332\u2013335 (\u00a7427 override block, '3 \u00b7 AFTER THE CASCADE')",
+     "quote": "\u2192 ENDGAME: walk + ONE regen \u2192 terminal soak WITH the DW leg \u2192 TUNING WITH THE MAP LEG (\u00a7341; owner signs) \u2192 V5 waves \u2192 cull \u2192 IP scrub (two docs leave the repo) \u2192 push.",
+     "whyStale": "Inside an already-superseded historical override, but it is the only place the handoff spells the endgame tail in detail, and it predates \u00a7672.1: the walk + ONE regen must now also absorb tierForPopulation \u2261 popToTier, the \u00a7652 three-clause check per REG-P, and the partition censuses, because the regen executes at a tree whose map core changed; the \u00a7341 map leg it cites retargets to partition surfaces.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/OWNER_DECISION_QUEUE.md",
+     "locator": "line 144, \u00a71 row T5 (THE ONE REGEN signature)",
+     "quote": "**T5. THE ONE REGEN signature** \u2014 the single flag-lighting batch: seven flags in DEFAULT_SIMULATION_RULES \u00b7 letter humanizer \u00b7 pressureModel raw.reasons \u00b7 em-dash sweep + C2-Q1/Q2 \u00b7 re-record ALL golden families ONCE \u00b7 declared-shift row.",
+     "whyStale": "The regen's scope statement enumerates only flag-lighting content. \u00a7672.1 rules that 'the walk + ONE regen's scope must absorb the cutover-readiness gates (tierForPopulation \u2261 popToTier \u00b7 the \u00a7652 three-clause check \u00b7 the partition censuses) since the regen happens at a tree whose map core changed.' The 're-record ALL golden families ONCE' clause now includes the map golden family moving for a spine-cutover cause, which the declared-shift row must name. T6 (THE WALK) carries the same annotation \u2014 the finished-site walk is over partition-rendered maps.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/OWNER_DECISION_QUEUE.md",
+     "locator": "lines 14408\u201314418, \u00a7341.1 (the tuning pass's map leg)",
+     "quote": "for each candidate tuning, sample the fabric map at checkpoints across the timeline (at minimum early / mid / late / year-300) and require: (a) FOOTPRINT COHERENCE \u2026 (c) INSTRUMENT RANGE \u2014 the corpus grain/register kernels (MF-S1/HF-M1 machinery) stay in-band on the sampled plates",
+     "whyStale": "The certified surface is no longer 'the fabric map' as chartered: checkpoints across the timeline are now partition frames obtained by ledger truncation (spine \u00a73g prefix closure / A1.4 epoch fold), footprint coherence is exactly the spine's snapshot-divergence-via-truncation exit, and the instrument set the leg must hold in-band now includes the spine \u00a76 exits (page-budget census, identity bijection, crossing census, WSEAM ratchet, tangential-by-construction) plus the A1.6 perf protocol \u2014 not just the MF-S1/HF-M1 grain kernels, which survive only as dress-side instruments.",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "docs/OWNER_DECISION_QUEUE.md",
+     "locator": "lines 14419\u201314423, \u00a7341.2",
+     "quote": "by tuning time the fabric map derives from any world year, and every instrument the map leg needs already exists (the corpus gate, the grain kernels, G-43); the amendment wires them into the tuning harness rather than inventing new ones.",
+     "whyStale": "'Every instrument already exists' is false after the spine: the partition censuses, the cutover-readiness gates (tierForPopulation \u2261 popToTier, the \u00a7652 three-clause check per REG-P), and the perf harness are NEW instruments minted in SPINE-1/2 and the cutover, and \u00a7672.1 orders them into the walk + regen scope; the tuning-harness preparation charter must enumerate them rather than inherit this sentence.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/OWNER_DECISION_QUEUE.md",
+     "locator": "lines 25835\u201325838, \u00a7585.2 (the road to the soak)",
+     "quote": "\u2192 WEB/HK/CT/AD trains per the standing queue \u2192 the trailing OSR mint \u2192 parity \u2192 the \u00a7290 review stop (the ultra keystroke stays the owner's) \u2192 the walk + ONE regen \u2192 **the diagnostic and terminal soaks WITH the DW leg and the map leg**",
+     "whyStale": "'Per the standing queue' points at the pre-spine \u00a7562 queue, and the road's middle omits the released \u00a7669.2 sequence entirely; the soaks' map leg stands as a certification duty but its content retargets per the \u00a7341 rows above \u2014 the soak certifies partition-rendered surfaces at a post-cutover tree.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/OWNER_DECISION_QUEUE.md",
+     "locator": "lines 22220\u201322232, \u00a7524.5 (WEB-8b's added arm / D-EXPORT-1)",
+     "quote": "when the cartography stage becomes the plate's source, a stage that throws on 287 of 504 settlements would silently sell a mapless dossier. WEB-8b's arm and DW-6's acceptance both carry the pin.",
+     "whyStale": "Doubly stale: (a) the 287-of-504 throw rate was cured at \u00a7525 (0 of 504), so the quantitative premise is history; (b) the plate's anticipated future source is no longer the townCartography 'dark cartography stage' \u2014 after the spine, the plate's source at cutover is the partition page register (spine \u00a74 / A1.2), so D-EXPORT-1's hasDrawableMap pin re-homes beside the cutover-readiness gates and must be re-proven at the partition view. WEB-8b's own arms (export gate holds, plate inside the claiming variants, positive controls) remain correct as written.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/OWNER_DECISION_QUEUE.md",
+     "locator": "lines 22163\u201322171, \u00a7523.5 (WEB-12, the chokepoint car)",
+     "quote": "**WEB-12, THE CHOKEPOINT CAR**: `commitEdits` (`useTownMapPresentation.js:142`) is the single writer of `mapEdits` and has **no gate of its own**; the invariant is currently held at N render boundaries.",
+     "whyStale": "The charter anchors on the shipped townMap presentation module, which the dress re-base / \u00a7171 cutover replaces (spine \u00a75 retires the legacy painters; paint becomes a pure function of the graph). The car is still correct to build pre-cutover, but its gate must pin the invariant at the WRITER in a form that survives \u2014 or is explicitly re-proven against \u2014 the partition view, or the test dies silently with the module at cutover.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/OWNER_DECISION_QUEUE.md",
+     "locator": "lines 27108\u201327113, \u00a7633.3(ii) (the COVER-REFRESH car)",
+     "quote": "cached gallery covers bake the rendered glyph into a public-bucket JPEG that is never invalidated** \u2014 covers published pre-cure keep the old dot forever; a COVER-REFRESH car joins the catalog residue (owner-visible: public-bucket content).",
+     "whyStale": "Sequencing, not substance: a one-shot re-bake landed before the dress re-base/cutover would bake soon-to-be-superseded map renders into never-invalidated public JPEGs \u2014 recreating the exact defect class the car exists to cure, at wholesale scale (the spine changes every rendered map). The car's charter must either land invalidation machinery (cure the 'never invalidated' mechanism) or slot its re-bake AFTER the cutover; the same constraint binds any WEB row that screenshots or prerenders maps into durable public artifacts before the cutover.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/OWNER_DECISION_QUEUE.md",
+     "locator": "lines 26479\u201326483, \u00a7611.2(ii) (the wiring wave's second wiring)",
+     "quote": "(ii) **THE DRAWN DECLINE VOCABULARY** joins the register waves \u2014 the hf379 ruin ladder, thinned fabric inside the oversized circuit, subdivided grandeur, half-empty outer rings of shells;",
+     "whyStale": "'Joins the register waves' targets the retired REG-5\u21929 arc. Decline's STRUCTURE is now the spine's own: \u00a73f (pieces empty \u2192 abandon \u2192 LossRegion per the \u00a7643.3 state machine) with LOSSREGION a first-class face and the wall a frozen thin face (A1.3) \u2014 'thinned fabric inside the oversized circuit' is literally pieces emptying inside the standing band face. The DRESS half (ruin ladder ink, shells) re-homes in the dress re-base reading LossRegion faces, per \u00a7669.2's '\u2026 \u2192 judging \u2192 decline \u2192 film \u2026' slot.",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "docs/OWNER_DECISION_QUEUE.md",
+     "locator": "lines 26483\u201326486, \u00a7611.2(iii) (the wiring wave's third wiring)",
+     "quote": "(iii) **THE FILM CONTRACTS** \u2014 \u00a7609's beat set gains DECLINE (shells spreading outward-in, ghost extents lingering, the wall standing over ground it once protected).",
+     "whyStale": "The beat-set amendment stands, but its substrate moved: A6.1 emission (with the totality walker) moved INTO SPINE-1 (A1.7 M3), and the film replays partition deltas \u2014 a frame is the partition truncated at epoch K (\u00a73g). The DECLINE beats therefore ride beatEvents[] on faces/edges of the partition, not the pre-spine fabric emission the charter assumed.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/OWNER_DECISION_QUEUE.md",
+     "locator": "lines 15096\u201315099, \u00a7361.2 (CT-5's slotting clause)",
+     "quote": "CT-5 runs before the endgame's V5 sitting (prose describes mechanisms and facts, not tuned magnitudes \u2014 safe pre-tuning; the \u00a7341 map leg judges maps, not prose).",
+     "whyStale": "CT-5's own scope (register harmonization of prose) is untouched by the spine, but the clause leans on the \u00a7341 map leg as chartered \u2014 which retargets to partition frames and spine instruments per the rows above; a CT-5 lane should not read this parenthetical as a current description of the map leg.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/OWNER_DECISION_QUEUE.md",
+     "locator": "lines 15080\u201315082, \u00a7361.1 (CT-1b, adjacent in the same charter text)",
+     "quote": "**CT-1b** MORPHOLOGY, fabric-derived: ward shapes, block grain, frontage \u2014 the facts only the new map engine mints; slots AFTER the parity train",
+     "whyStale": "Flagged though outside my assigned four CT/WF rows because it shares the charter block: 'ward shapes, block grain, frontage' are now literally the partition's WARD/BLOCK/PLOT faces and their A6.1 emission \u2014 CT-1b's fact source is the partition, its slot gates on SPINE-2/cutover (when those faces exist and emit), and 'fabric-derived' names the superseded substrate.",
+     "disposition": "RETARGET-TO-PARTITION"
+    }
+   ],
+   "clean": [
+    "ODQ \u00a71 header tail-order line (lines 132\u2013138): the 07-19 order is already correctly annotated in place \u2014 '\u26d4 SUPERSEDED ON THE TAIL ORDER \u2014 \u00a73h (08-06) re-ruled it: THE WALK and THE ONE REGEN precede the terminal soak, and TUNING IS LAST' \u2014 no further action; the \u00a73h order itself survives the spine (only the walk+regen SCOPE grew, per \u00a7672.1).",
+    "ODQ \u00a71 T3 (the soak row): names CERT-30/CENTURY-100/CENTURY-300 + soak:release profiles only \u2014 no map-surface certification clause to retarget; the map certification lives in \u00a7341/\u00a7585.2, handled above.",
+    "WEB-9a / WEB-9b / WEB-10 / WEB-11 charters (ODQ ~lines 19128\u201319315, the W-C/W-D rulings): pricing page, toast extraction, the STOP-class webhook money-path edit, the annual plan \u2014 no map, painter, screenshot, or prerender surface; W-C order (WEB-8 \u2192 9a \u2192 9b \u2192 10, money-path last) unchanged by the spine. CLEAN.",
+    "HK-4 (ODQ \u00a7463.3, D-HKA-2): the un-ratcheted razingExecution.js E4-2a emitter \u2014 pure test-machinery housekeeping, no map surface. CLEAN.",
+    "HK-5 (ODQ \u00a7479.2): the head-FIGURE pin guard on DEPLOY/ARCHITECTURE/CURRENT_STATE/rehearsal-core paths with positive control \u2014 no spine interaction. CLEAN.",
+    "HK-6 (ODQ \u00a7488.3): rewrite three 'Eberron' strings setting-free, declared golden/parity re-record \u2014 no map surface. CLEAN.",
+    "WF-8 shrink-back car (ODQ \u00a7400): DS-FTH-3 doc shrink ('abandoned' removed until a producer lands), key-by-key golden proof, producer door open \u2014 no spine interaction. CLEAN.",
+    "CT-4 (ODQ \u00a7361.1): the undercity causal story in prose, slotted after the undercity train \u2014 the \u00a7311 undercity doctrine is not superseded by the spine (the partition covers settled GROUND; undercity temperaments/graph untouched). CLEAN.",
+    "Wiring wave item (i), \u00a7611.2(i) trajectory variability, and \u00a7611.4 founding-age corollary: data-level measurement over generated histories \u2014 the spine CONSUMES the growth ledger's population/tier/dated events unchanged (\u00a72 inputs), so the measurement charter stands; if anything the ledger makes the measurement easier. CLEAN.",
+    "ODQ \u00a7523.1\u2013\u00a7523.4 and \u00a7524.1\u2013\u00a7524.4 (the free/paid rulings and the VIEW/AUTHOR/TAKE-AWAY trichotomy): product law, painter-independent; the trichotomy survives any map core. CLEAN.",
+    "docs/HANDOFF_CURRENT.md historical blocks (\u00a7631, \u00a7621, \u00a7595, \u00a7585, \u00a7564, \u00a7427-and-below): explicitly labeled '(historical)'/superseded-in-place; their stale arc lines are lawful as history. The \u00a7631 block's four-candidate/townCartography law (line ~455\u2013459 region, 'do not create a fifth map or extend townCartography') is consistent with the spine \u2014 the partition IS the fabric authority's successor, and \u00a7659 ruled the townCartography deletions a stale disk, not damage. CLEAN as history."
+   ],
+   "notes": "Method: DESIGN_SPINE.md read whole (body + A1); ODQ \u00a7\u00a7628\u2013672 headings enumerated and \u00a7\u00a7341, 361, 400, 463, 479, 488, 497-region, 523\u2013525, 585, 611, 633, 652\u2013653, 657, 669\u2013672 read via node slices (never whole-read); handoff read to line 517 plus a grep of its tail (lines 518\u2013678 are pre-\u00a7289 history with no live endgame rows). The current session scratchpad's receipts/ dir is EMPTY and the preserved scratchpad (refs/preserve/session-scratchpad-2026-08-24 = 05b822dbc) carries only CH/DW/AD dockets \u2014 all WEB-8b/12, wiring-wave, HK, CT/WF charter text lives in the ODQ; docs/RESUME_STATE.md mentions the same rows only as act-log history, not buildable charter text. Identification note: the QUEUE's 'wiring wave' resolves to \u00a7611.2's three chartered wirings (no other 'wiring wave' exists in the ODQ). Headline answers to the tasking's focus questions: (1) YES \u2014 the walk + ONE regen's scope statements (T5/T6, the handoff endgame rows, \u00a7585.2) all predate the spine; \u00a7672.1 is the controlling ruling and names exactly what the scope must absorb (tierForPopulation \u2261 popToTier, the \u00a7652 three-clause check per REG-P, the partition censuses); the map golden family re-records at the regen with the spine cutover as the declared cause. (2) Soak rows: only \u00a7341/\u00a7585.2 certify map surfaces; both retarget to partition frames + spine \u00a76 exits. (3) WEB rows: WEB-8b's D-EXPORT-1 seam and the COVER-REFRESH car are the two map-artifact rows; both keep-but-annotate for cutover sequencing; WEB-9a\u201311 are clean. (4) townCartography/legacy-painter liveness: \u00a7524.5 is the one pending row still naming the cartography stage as a future live source \u2014 annotated above; no HK/CT/WF row names a legacy painter as live."
+  },
+  {
+   "rows": [
+    {
+     "doc": "docs/DESIGN_DWELLINGS_PROGRAM.md",
+     "locator": "\u00a73 canonical-inputs table, line 129 (Map fabric row)",
+     "quote": "| Map fabric | parcel polygon, frontage, massing volumes, party walls, support surfaces | laws 6 & 9; stairs anchored where geometry allows; no TARDIS rooms |",
+     "whyStale": "\u00a7672.1 rules DW's exterior anchors 'were parcels and now anchor partition PLOTS'. The supplier is now the spine's partition: PLOT faces carry 'the building mass and yard' (SPINE \u00a71), party walls are typed BOUND edges (SPINE \u00a71 edge taxonomy), and frontage is the plot's WAY edge by construction (SPINE \u00a73b: 'plot-by-plot along way-edges').",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "docs/DESIGN_DWELLINGS_PROGRAM.md",
+     "locator": "\u00a72 law 6, lines 91\u201393",
+     "quote": "**FRONTAGE FROM THE PARCEL.** Orientation is READ off the parcel's own street-frontage data, never guessed",
+     "whyStale": "The law's principle (read, never guess) survives, but its source object changes: under the partition a plot's frontage IS its WAY edge (SPINE \u00a73b), and streets are 'GROUND \u2014 the gap rendered as shared surface' (SPINE \u00a74), so 'the parcel's own street-frontage data' \u2014 a townCartography wedge attribute \u2014 no longer exists as named. The charter's measured cure for the wedge defect (B0's subcell face) is also mooted: partition plots front ways structurally.",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "docs/DESIGN_DWELLINGS_PROGRAM.md",
+     "locator": "\u00a79 wave table, line 307 (DW-2 row)",
+     "quote": "| DW-2 | the geometry core: vertical partition + parti placement + circulation over parcel polygons | D3b live; DW-1 |",
+     "whyStale": "Two supersessions: 'parcel polygons' \u2192 partition PLOT faces (\u00a7672.1); and the dependency 'D3b live' names the old fabric activation wave, which is absent from \u00a7669.2's released sequence (SPINE-1 \u2192 SPINE-2 \u2192 REG-GROW-A \u2192 dress re-base \u2192 registers/zoom \u2192 judging \u2192 decline \u2192 film \u2192 port). DW-2's geometry precondition is now the partition substrate (SPINE-1/2 landed), not D3b.",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "docs/DESIGN_DWELLINGS_PROGRAM.md",
+     "locator": "\u00a79 wave table, line 311 (DW-6 row)",
+     "quote": "projections: pane, tiers, PDF, Foundry-walls, **the parcel ring + compound member polygons for the map's property-line halo (\u00a7494)** | DW-2..5",
+     "whyStale": "'The parcel ring' is a townCartography wedge boundary. Under the spine the tenure object is the PLOT face itself ('a tenure piece', SPINE \u00a71), so the property-line ring is the plot/estate face boundary in the partition, and the halo must be painted under the \u00a7652 three-clause contract on the partition views, not via a cartographyPaint op (the legacy painters 'RETIRE AT CUTOVER', SPINE \u00a75).",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "docs/DESIGN_DWELLINGS_PROGRAM.md",
+     "locator": "\u00a7494 header block, lines 42\u201345",
+     "quote": "DW-6 projects the parcel ring and the member polygons to the drawn surfaces so the map can outline a property. The owner's hover requirement (a yellow halo/border on the whole property line, members included, on hover and on pin) is a MAP car that consumes DW-6's projection \u2014 ODQ \u00a7494.",
+     "whyStale": "The \u00a7494 owner requirement stands, but 'the drawn surfaces' are now the spine's page/zoom registers (SPINE \u00a74), and the consuming MAP car is no longer MP-1-on-cartographyPaint (see charter H25/\u00a78.4 rows) \u2014 it re-homes in the post-cutover view stack. The compound/member data contract itself is untouched.",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "docs/DESIGN_DWELLINGS_PROGRAM.md",
+     "locator": "\u00a76, line 243",
+     "quote": "physical restructure (post-D3b massing edits)",
+     "whyStale": "D3b is the pre-spine fabric activation wave, not in \u00a7669.2's released sequence. The re-derivation trigger survives as 'physical restructure of the plot's building mass' \u2014 the massing now lives on partition PLOT faces and moves via ledger-epoch construction (SPINE \u00a73) or the future editing surface.",
+     "disposition": "SUPERSEDE-BY-NAME"
+    },
+    {
+     "doc": "docs/DESIGN_DWELLINGS_PROGRAM.md",
+     "locator": "\u00a716 carry-note 2, lines 406\u2013409",
+     "quote": "**The D3A/fabric plan**: law 9's exterior-consequences seam (a parti as a named massing part) is carried beside the tierGrammar note \u2014 the D5 strata wave designs part-naming so DW can later bind interiors to named parts without a massing re-shape.",
+     "whyStale": "The D3A/fabric plan and the D5 strata wave are pre-spine machinery; the released arc replaces that train (SPINE \u00a75 replaces the parcels.js/builtUmbrella substrate; \u00a7669.2 sequence has no D3A/D5). The named-part consumer for a parti's exterior consequence is now the spine's zoom registers / the REG-6 dress re-base ('plot-level with yards and the shape families', SPINE \u00a74; \u00a77 'the dress re-base').",
+     "disposition": "SUPERSEDE-BY-NAME"
+    },
+    {
+     "doc": "docs/DESIGN_DWELLINGS_PROGRAM.md",
+     "locator": "\u00a715 build-path table, P2 row, line 382",
+     "quote": "the partition/parti kernel proven over real fabric parcel polygons",
+     "whyStale": "The DW sandbox's ground truth is no longer 'fabric parcel polygons' \u2014 it is partition PLOT faces emitted by SPINE-1/2 (\u00a7672.1). Note the word collision: 'partition' in this row means the vertical storey partition, not the spine's planar partition; the reconciliation amendment should disambiguate.",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "docs/DESIGN_DWELLINGS_PROGRAM.md",
+     "locator": "\u00a77, lines 256\u2013257",
+     "quote": "The estate view: the parcel's buildings top-down with the main plan opened \u2014 read straight from fabric data.",
+     "whyStale": "'Fabric data' and 'the parcel' both retarget: the estate view reads the partition's plot/estate faces and their member building masses (SPINE \u00a71/\u00a74). The projection concept survives unchanged.",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "dwcharter-r2.md (scratchpad 31585ce2)",
+     "locator": "\u00a70.3 world table, line 149, verdict column",
+     "quote": "| **(B) The CARTOGRAPHY SYNTHESIS stage** (`src/domain/townCartography/*`) | Wards \u2192 centroid triangle fans \u2192 parcels with `polygon` \u2192 footprints packed by medial subdivision \u2026 | **BUILD ON THIS.** |",
+     "whyStale": "The charter's foundational world-choice is superseded by \u00a7672.1: DW's exterior anchors 'now anchor partition PLOTS'. The partition is 'one structure under everything drawn' (SPINE title); by DW's queue position (after the spine arc completes \u2014 HANDOFF \u00a7633 arc) townCartography's wedge world is at/past cutover retirement. The choice's REASONING survives as precedent (there is still no second candidate \u2014 the partition simply replaces (B) as the only world).",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "dwcharter-r2.md (scratchpad 31585ce2)",
+     "locator": "\u00a70.7 (lines 322\u2013347) + \u00a75.0\u2032 CG train (lines 1766\u20131876) + \u00a75.0 CG row (line 1733)",
+     "quote": "**The gate, stated plainly: `CG-1` and `CG-2` LAND BEFORE `DW-1` OPENS.**",
+     "whyStale": "CG-1 re-derives the cartography stage's per-tier premise bands and CG-2 fixes its flagship subcell double-occupancy \u2014 both are repairs to the townCartography stage the partition supersedes and whose painter retires at cutover (SPINE \u00a75). Building them first would spend two cars repairing dead code. Their LAWS carry (a real-pipeline fixture corpus, never fixture-calibrated bands \u2014 H31's class; explicit occupancy accounting \u2014 H29's class) as acceptance requirements on the partition constructor and the DW allocator instead.",
+     "disposition": "RETIRE-SECTION"
+    },
+    {
+     "doc": "dwcharter-r2.md (scratchpad 31585ce2)",
+     "locator": "\u00a70 H25 (line 127) + \u00a75.4 MP-1 addition 1 (lines 1989\u20131996) + deferral D-2 (line 2708)",
+     "quote": "MP-1 (and DW-6 after it) must move that identity and every test that pins it.",
+     "whyStale": "The op-count identity lives in `cartographyPaint.js:15-17` \u2014 a legacy painter ruled 'RETIRES AT CUTOVER' (SPINE \u00a75). Neither MP-1 nor DW-6 owes an edit to a retiring identity; the property-line layer becomes a partition-view concern under the \u00a7652 three-clause contract, and D-2's deferral dissolves with it.",
+     "disposition": "RETIRE-SECTION"
+    },
+    {
+     "doc": "dwcharter-r2.md (scratchpad 31585ce2)",
+     "locator": "\u00a75.4 the ESTATE wave (lines 1941\u20132003), incl. the declared-shift block",
+     "quote": "EST-2a, EST-2b and EST-3 together **change the drawn map of every existing settlement** \u2026 the shift is real and it is confined to the LIT surfaces \u2026 inside `townCartographyEnabled`, which no user has lit",
+     "whyStale": "The estate wave's entire landing surface (compileTownCartography, the townCartographyEnabled gate, the eight lit test files, the two declared re-record acts with the CG train) is the retiring stage. Estates, merges (EST-2a), allocation (EST-2b), drafts (EST-3), ownership (EST-4), accretion (EST-5) re-express on partition PLOT faces: a merge is a face-set union under the partition's planarity/containment invariants, an allocation binds a building mass to a plot face, and the dark-posture/shift declaration must be re-derived against the partition's own dormancy flag (`REG_FABRIC_OPTS.partition`, SPINE \u00a76) rather than townCartographyEnabled. The wave's CONTRACTS (\u00a7496/\u00a7498/\u00a7500 rulings, Estate/CompoundMember, R2\u2032 select-then-union-before-drawing) survive.",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "dwcharter-r2.md (scratchpad 31585ce2)",
+     "locator": "\u00a75.3 DW-2a row, line 1929",
+     "quote": "Read the wedge's outer edge (\u00a70 H19) AND the medial subcell's own face, which is half of it; the BUCKET is computed from the subcell face \u2026 the outer edge is a ward boundary and only 14.8% of them are near a street",
+     "whyStale": "The frontage reader's whole input geometry (fan wedge, ward-boundary outer edge, medial subcell face) is the cartography stage's. Under the partition a plot's frontage is its WAY edge by construction (SPINE \u00a73b) and the 14.8%-near-a-street defect cannot occur (a plot is ADDED along a way). DW-2a re-specifies as a reader of the plot face's WAY-edge(s) with the same bucket/kind/status output contract, and OPEN_SHOPFRONT/GATE_PASSAGE derive from typed WAY edges directly.",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "dwcharter-r2.md (scratchpad 31585ce2)",
+     "locator": "\u00a77 B0 (lines 2199\u20132278) and B3 (lines 2317ff)",
+     "quote": "**What you are signing, in one sentence:** *the engine's existing per-tier scale stands, and a building's frontage is the face of its own slot \u2014 half the plot's outer edge \u2014 not the whole edge.*",
+     "whyStale": "B0's second (and 'real') question is answered by geometry that will not exist: 'half the plot's outer edge' is the medial-subcell face of the cartography wedge. On partition plots the frontage measurable is the plot's WAY edge, and B0's four-way measurement (84/42/26/14 ft) plus B3's five bucket boundaries must be RE-MEASURED on partition output before the owner signs. B0's Question 1 (adopt the engine scale, no second truth) survives in principle but must reconcile with SPINE \u00a72's 'tierScale, the sole sizer' \u2014 one sizer, not PLAN_UNIT_CM_BY_TIER as an independent second truth.",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "dwcharter-r2.md (scratchpad 31585ce2)",
+     "locator": "\u00a70.3 honest-cost paragraphs (lines ~190\u2013206) + \u00a78.6 first bullet (lines 2610\u20132612) + deferral D-1",
+     "quote": "Making the parcel the RIGHT SHAPE. \u00a70.3 chooses the cartography wedge as DW's parcel world and states the compromise; turning wedges into narrow-deep burgage strips is a fabric re-shape.",
+     "whyStale": "The charter's self-declared 'largest single fidelity compromise' (frontage buckets 'measured on a shape the historical record never produced') is CURED by the spine: organic accretion adds plots along way-edges with T-junction bias (SPINE \u00a73b), producing street-fronting plots natively \u2014 the narrow-deep shape is the piece-adding rule's product, not a deferred fabric re-shape. D-1 dissolves; the section rewrites from 'compromise accepted' to 'cured by substrate'.",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "dwcharter-r2.md (scratchpad 31585ce2)",
+     "locator": "\u00a77 B18 (lines 2488\u20132496) + signing-sheet row B18 (line 2532)",
+     "quote": "DW-2b emits the CLAIM (this parti wants a named part); the massing side consumes it later. Building it inside DW would fork the massing.",
+     "whyStale": "The claim-emission ruling stands, but the NAMED CONSUMER ('the massing side' = the D5 strata wave, per \u00a78.6) is superseded machinery: \u00a7669.2's released sequence contains no D5 wave. The consumer is now a REG car in the spine's view stack \u2014 the dress re-base (REG-6) / the zoom registers, where 'the shape families' and building dress are drawn (SPINE \u00a74, \u00a77). The reconciliation amendment must name that REG consumer so DW-2b's claim contract has a live counterpart.",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "dwcharter-r2.md (scratchpad 31585ce2)",
+     "locator": "\u00a78.6 (lines 2609\u20132622) + \u00a78.5 smugglers'-tunnel bullet (line 2605) + Q-B (line 2936) + D-10 (line 2716)",
+     "quote": "(\u00a77 B18). DW emits the claim; D5 consumes it. \u2026 the map's D5 strata wave should draw it, not DW. \u2026 **the chair**, with the D5 strata wave",
+     "whyStale": "Every 'FABRIC / D5 strata train' hand-off names a train the released arc dissolved. The seam-partners re-name: exterior geometry ownership \u2192 the partition (faces/edges are the spine's); massing part-naming and the smugglers'-tunnel drawing \u2192 the dress re-base / zoom registers; Q-B's heightPermille-vs-storey-count question and D-10's absolute-scale deferral re-home with the spine's view/massing owner. The SEAM PRINCIPLE (DW owns joints, never exterior geometry) is clean and carries verbatim.",
+     "disposition": "SUPERSEDE-BY-NAME"
+    },
+    {
+     "doc": "dwcharter-r2.md (scratchpad 31585ce2)",
+     "locator": "\u00a78.4 (lines 2587\u20132595) + \u00a75.4 'MP-1 IS THIS WAVE'S MAP-SIDE CONSUMER' (lines 1983\u20131988)",
+     "quote": "when the ESTATE wave lands, MP-1's overlay switches its INPUT from `parcel-polygon-minus-footprints` to the typed estates, courts and members, and its interface does not change.",
+     "whyStale": "MP-1 (\u00a7495) publishes the property line 'from what exists TODAY' \u2014 the cartography parcel polygon on the retiring painter. Whether MP-1 still ships pre-DW at all is a sequencing question the spine reopens (the surface it paints on retires at cutover, and DW now lands after the spine arc); the never-built-twice principle and the two-tier halo (R8c) survive, re-homed on partition plot/estate faces under the \u00a7652 contract.",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "dwcharter-r2.md (scratchpad 31585ce2)",
+     "locator": "\u00a75.8 DW-6d + DW-6e rows and the Q2 ruling (lines 2045\u20132052)",
+     "quote": "the estate view is DW-6e, not a fabric deliverable \u2014 it reads the cartography block, which is DW's chosen parcel world (\u00a70.3), and putting it in the fabric would fork the two.",
+     "whyStale": "The Q2 ruling's conclusion (estate view is DW's, not the map train's) stands; its stated ground ('it reads the cartography block') is superseded \u2014 it reads the partition's plot/estate faces. DW-6d's 'surface MP-1's overlay switches onto' likewise retargets (see \u00a78.4 row).",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "dwcharter-r2.md (scratchpad 31585ce2)",
+     "locator": "\u00a75.0 wave table + totals (lines 1730\u20131755) and \u00a75.10 ordering rule 1",
+     "quote": "**Total: 41 DW cars, 45 dispatchable commits.** \u2026 **The arc a build lane actually dispatches is 47 commits.**",
+     "whyStale": "Three staleness sources: (1) \u00a7562.6 amended J-DW0-2 to 42 cars (DW-1g ENVELOPE minted \u2014 HANDOFF RULINGS: 'DW-1g is minted and J-DW0-2 amended to 42 cars'; the r2 charter predates it); (2) the CG-1/CG-2 rows retire with the cartography stage, changing the dispatched-arc count; (3) DW-1's dependency 'CH-1/2/3 **and CG-1/CG-2** landed' and DW-2's 'the cartography stage' rewire to the spine substrate. Also note the charter's own internal 45-vs-44 commit discrepancy (line 1746 vs line 2982/AR-9) \u2014 pre-existing, flagged for the same amendment.",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "dwcharter-r2.md (scratchpad 31585ce2)",
+     "locator": "\u00a77 signing sheet, Sequencing row (line ~2523) + \u00a75.4 'THE SEQUENCING CONSTRAINT THE OWNER MUST SEE'",
+     "quote": "**The ESTATE wave lands BEFORE the one regen** \u2014 and CG-1/CG-2 land before anything of DW's",
+     "whyStale": "First half stands and is strengthened by \u00a7672.1 (the ONE regen 'happens at a tree whose map core changed' and must absorb the cutover-readiness gates \u2014 the estate wave's map-moving shift folds into that same regen scope). Second half retires with the CG train. The declared-shift bookkeeping ('TWO one-time shifts on that surface') collapses to one act on partition surfaces.",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "dwcharter-r2.md (scratchpad 31585ce2)",
+     "locator": "\u00a70.2 engine-home table + \u00a70.4 headroom table (lines 94\u2013253) + H21/H29/H31 rows",
+     "quote": "`src/domain/townCartography/cartographyTuning.js` | 143 | 361 | 800 | **657** | where owner bands would land",
+     "whyStale": "The measured facts are honest at their slot, but the build-surface conclusions drawn from them ('where owner bands would land', DW-2 landing beside interiorModel.js in the cartography world, the townCartographyEnabled gate inheritance at \u00a70.5/AR-3) point at the retiring stage. Owner bands land in the partition-era vocabulary/tuning home; the measurements stay as evidence with a dated 'measured pre-spine' annotation. Includes the AR-3 one-flag posture: the inherited gate argument must be re-made against `REG_FABRIC_OPTS.partition`.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "dwcharter-r2.md (scratchpad 31585ce2)",
+     "locator": "\u00a77 bands B8 / B11 / B12 (lines 2380\u20132435)",
+     "quote": "B8 | When plots merge | S+**T** | From `prosperous` up (sourced); **5\u201315% of plots over 300 y, on the longest frontages**",
+     "whyStale": "The band SEMANTICS (merge rates, non-contiguous holdings, party-wall commonness) are substrate-independent and clean, but their MECHANISMS retarget: a plot merge is a partition face operation under planarity/containment; a party wall is a typed BOUND edge (SPINE \u00a71); 'the longest frontages' re-measures on WAY edges. Sign the rates; re-home the machinery.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    }
+   ],
+   "clean": [
+    "DESIGN_DWELLINGS_PROGRAM \u00a71 THESIS \u2014 click-derived interiors ('on first click, a floor plan'); survives A1.1 intact because DW never claimed a zoom register (see notes on the identity ladder)",
+    "DESIGN_DWELLINGS_PROGRAM \u00a72 laws 1\u20135, 7, 8 (law 6 retargeted, law 9's D5 seam renamed elsewhere); the nine-law core is substrate-independent",
+    "DESIGN_DWELLINGS_PROGRAM \u00a74 derivation pipeline S1\u2013S9 incl. the \u00a7452 circulation and \u00a7453 storage class sets",
+    "DESIGN_DWELLINGS_PROGRAM \u00a75 data contracts (RequirementRoster, Function, CirculationCell, StorageCell, Parti, FloorPlan, PlanDelta, secrecy tiers)",
+    "DESIGN_DWELLINGS_PROGRAM \u00a76 determinism & change (except the one 'post-D3b' trigger name), \u00a78 the corpus program DW-R, \u00a710 instruments, \u00a711 owner-signature surfaces, \u00a712 market posture, \u00a713 anti-scope, \u00a714 open questions",
+    "DESIGN_DWELLINGS_PROGRAM \u00a715 rows P0, P1a\u2013P1d, P3\u2013P8 (P2's 'fabric parcel polygons' retargeted); the truth-first spine of the build path carries unchanged",
+    "DESIGN_DWELLINGS_PROGRAM \u00a716 carry-notes 1 (undercity graph addressability), 3 (tuning leg-extensibility), 4 (research-lane surfaces); header sequencing \u00a7456/\u00a7482/\u00a7494 rulings still in force per the HANDOFF queue (DW 42 before AD 17 \u2192 OSR \u2192 parity \u2192 ultra \u2192 regen \u2192 soak)",
+    "dwcharter-r2 THE FIRST LINE ('MOST CATALOG ENTRIES ARE NOT BUILDINGS') and the three relations hostedIn / NO_BUILDING / occupies (\u00a73.3) \u2014 untouched by the spine",
+    "dwcharter-r2 \u00a71 the nine laws re-stated against the research; \u00a71.2 the three not-yet-laws",
+    "dwcharter-r2 \u00a72 closed vocabularies (\u00a72.1 partis, \u00a72.2 cell kinds, \u00a72.3 fixtures incl. the ruled 135 union, \u00a72.4 circulation, \u00a72.5 storage, \u00a72.7 yard-fixture vocabulary as vocabulary, \u00a72.8 undercity joints)",
+    "dwcharter-r2 \u00a73 contracts incl. programMinimum (R2\u2032) and the Parcel/Estate SPLIT as a data shape (\u00a73.4 \u2014 the shape survives; only its geometry source retargets); \u00a73.5 court-vs-yard; \u00a73.6 refusals",
+    "dwcharter-r2 \u00a74 the derivation pipeline incl. \u00a74.2 allocation-preserves-the-theorem reasoning pattern, \u00a74.4 the second subordinate entrance, \u00a74.5 time-advance, \u00a74.6 the counter-force",
+    "dwcharter-r2 \u00a75.1 DW-R; \u00a75.2 DW-1 car contents (deps rewire only); DW-2b/2c/2d/2e contents; \u00a75.5 DW-3; \u00a75.6 DW-4 (undercity seam \u2014 spine does not touch the undercity); \u00a75.7 DW-5; DW-6a/6b/6c; \u00a75.9 DW-7 (7a activation posture, 7b strict no-op, 7c news, 7d endowment stream)",
+    "dwcharter-r2 \u00a76 DW-S soak leg incl. A7 consolidation-runaway control \u2014 the \u00a7456 soak law stands",
+    "dwcharter-r2 \u00a77 bands B1, B2, B4, B5, B6, B7, B9, B10, B13, B14, B15, B16, B17 \u2014 semantics and recommendations substrate-independent (B13's yard-dress DRAWN surface retargets with EST-6, but the density band itself is clean)",
+    "dwcharter-r2 \u00a78.1\u20138.3 anti-scope, \u00a78.5 undercity ownership rows (except the D5 smugglers'-tunnel sentence), \u00a78.7 tuning ownership",
+    "dwcharter-r2 \u00a70.6 the CH dependency \u2014 CH-1/2/3 remain in the queue's catalog residue, unaffected by the spine"
+   ],
+   "notes": "SOURCES: DESIGN_SPINE.md body+A1 at HEAD; ODQ \u00a7\u00a7669\u2013672 read at docs/OWNER_DECISION_QUEUE.md lines 28153\u201328260 (\u00a7672.1 is the operative DW order: 'their exterior anchors were parcels and now anchor partition PLOTS; the identity ladder's struck \\\"interiors\\\" clause meets DW's actual mint'); HANDOFF_CURRENT \u00a7633 STATE block + RULINGS (\u00a7555/\u00a7562). Charter path: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/dwcharter-r2.md; program doc at /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_DWELLINGS_PROGRAM.md (present at HEAD, no preserve-ref read needed). THE FOUR FOCUS ANSWERS: (1) Rows now anchoring PARTITION PLOTS: DW-2a frontage reader, DW-2c parti placement's envelope, the whole ESTATE wave EST-1..EST-6, DW-6d parcel ring, DW-6e estate view, MP-1's overlay seam, program-doc \u00a73 Map-fabric row, and bands B0/B3 (re-measure) + B8/B11/B12 (mechanism only). CG-1/CG-2 retire rather than retarget \u2014 they repair the superseded stage; their defect CLASSES (fixture-calibrated bands, unaccounted occupancy) become acceptance arms on the partition constructor/allocator. (2) B18/DW-2b's named consumer: the charter names 'the massing side'/'the D5 strata wave' \u2014 no REG consumer exists in the text; under \u00a7669.2 the live counterpart is the dress re-base (REG-6)/zoom-register program, and the reconciliation amendment must name it so DW-2b's claim contract lands against real machinery. (3) The identity ladder: DW does NOT mint a zoom-interior register \u2014 it mints interiors as a CLICK-derived, never-persisted projection (program \u00a71/\u00a77; charter DW-6a/DW-7a). So A1.1's strike stands as written, and the spine's identity ladder should gain a DW POINTER at its terminus: 'representative plot + household roster as data; interiors arrive via the DW program's on-click derivation (DW-6a, activated DW-7a)' \u2014 a spine-side A-amendment (chair's hand per \u00a7671.2), not a DW-doc edit. The dwellings dress-at-zoom consumers (EST-6 yard embellishments, B13 density) re-home in the spine's zoom registers ('plot-level with yards', SPINE \u00a74); note the B13 name collision \u2014 the map program's V-B13 void-glyph band (\u00a7629) is a DIFFERENT B13 from the DW charter's B13 yard-embellishment band; the amendment should rename one reference to prevent a lane cross-reading. (4) Legacy painters/townCartography: every hit is inventoried above \u2014 \u00a70.2/\u00a70.3/\u00a70.4 (build-on-B and its tables), \u00a70.5/AR-3 townCartographyEnabled gate inheritance, \u00a70.7+\u00a75.0\u2032 CG train, \u00a75.0 posture rows, \u00a75.4 estate-wave landing surface + H25 op-count identity in cartographyPaint.js, \u00a78.4 MP-1, DW-6d/6e. The program doc itself never names townCartography (its stale references are 'map fabric'/'D3b'/'D5'/'parcel'). RESIDUAL RISK for the amendment author: the charter's measured evidence corpus (H1\u2013H31, the 1,098-parcel frontage measurements, the 20.6%/36.5% over-cap rates) all describes the retiring substrate \u2014 mark it 'measured pre-spine, evidence only' wholesale rather than row-by-row, and require B0/B3 re-measurement on SPINE-2 output as a DW-0-resit input before the owner signs those two bands."
+  },
+  {
+   "rows": [
+    {
+     "doc": "charters/draft-AD-CHARTER.md @ refs/preserve/ad-charter-2026-08-24",
+     "locator": "\u00a70.1, the headline invariant (charter lines 83\u201399)",
+     "quote": "`buildTownMapDrawList` (`src/domain/townMap/townMapDraw.js`, 27,761 B; the glyph branch imports at `:51-52`) is **the ONE geometry source**, and it feeds every 2D surface",
+     "whyStale": "Spine \u00a75 retires the legacy painters at cutover and \u00a74's page/zoom views of the partition become the geometry source, with A1.2 ruling ONE aggregator after cutover. The one-geometry LAW carries (ADVAL V1.1 already ordered the re-anchor); the named anchor is a module with a scheduled demolition. The successor is now named: the partition page-view draw list.",
+     "disposition": "SUPERSEDE-BY-NAME"
+    },
+    {
+     "doc": "charters/draft-AD-CHARTER.md @ refs/preserve/ad-charter-2026-08-24",
+     "locator": "\u00a70.2 table, row 'The DW-6 cartography surface'",
+     "quote": "There is **no glyph path here at all.** This stack is a different, parallel painter from the live `townMapDraw` one",
+     "whyStale": "The three-painter world is dissolved: spine \u00a75 retires the legacy painters and carto:bridge (\u00a7648: never drawn, dies at cutover). cartographyPaint's ward/street/building ops re-express as partition faces under \u00a74's views; the DW-6 cartography surface ceases to exist as an AD canvas.",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "charters/draft-AD-CHARTER.md @ refs/preserve/ad-charter-2026-08-24",
+     "locator": "\u00a70.4 seam row 'The painter's length identity' (also \u00a76 row 'Add an op to cartographyPaint.js')",
+     "quote": "`cartographyPaint.js:15-17` asserts `ops.length === wards + arterials + lanes + buildings` \u2026 MP-1 pays that cost once for `parcel`; DW-6d pays it again for `estate`/`member`. **AD adds NO op to this painter** (\u00a76)",
+     "whyStale": "The length-identity seam lives on a painter that dies at cutover; DW-6d's estate/member identity payments will never be made there \u2014 estates and members become partition faces (plot \u2282 block \u2282 ward, BOUND edges). The refusal survives vacuously; the seam row misleads a lane into budgeting an identity edit that no longer exists.",
+     "disposition": "RETIRE-SECTION"
+    },
+    {
+     "doc": "charters/draft-AD-CHARTER.md @ refs/preserve/ad-charter-2026-08-24",
+     "locator": "\u00a70.4 seam row 'The property-line layer' (also \u00a76 row 'Rebuild MP-1's property-line layer')",
+     "quote": "MP-1 draws the parcel polygon, hover/pin halo and the yard as parcel-minus-footprint. \u00a7522.6 binds DW-6 to **re-point it by changing its INPUT, never rebuilding it**",
+     "whyStale": "Spine \u00a75 REPLACES parcels.js packing: the tenure piece is the PLOT face and the property line is its BOUND edge. The re-point-by-input law survives, but the input becomes the partition, and MP-1's layer rides a retiring painter (\u00a7672.1: DW exterior anchors 'were parcels and now anchor partition PLOTS').",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "charters/draft-AD-CHARTER.md @ refs/preserve/ad-charter-2026-08-24",
+     "locator": "\u00a75.1 wave table row AD-4b + \u00a75.2 AD-4b acceptance (7)",
+     "quote": "**AD-4b** THE YARD MOTIF LIBRARY | **NO \u2014 needs MP-1 landed** | There is no drawn yard until MP-1 emits the parcel op and tints parcel-minus-footprint (\u00a7495.4d) \u2026 (7) the parcel-minus-footprint input is **read, never recomputed** (MP-1's interface unchanged, \u00a7522.6)",
+     "whyStale": "Post-cutover the drawn yard is the PLOT face minus the building mass, emitted by the partition's zoom registers (spine \u00a74). AD-4b's gate re-homes behind SPINE-1/2 and the dress re-base (spine \u00a77), not MP-1; the read-never-recompute clause re-anchors to the plot face's geometry.",
+     "disposition": "RETARGET-TO-PARTITION"
+    },
+    {
+     "doc": "charters/draft-AD-CHARTER.md @ refs/preserve/ad-charter-2026-08-24",
+     "locator": "\u00a71.5 Clock 2 tail diagram (also \u00a77 row A1 'The deadline it must not reach')",
+     "quote": "\u2026 DW-S -> AD -> content train -> G1 the ONE trailing OSR mint -> G2 parity -> H /code-review ultra -> walk -> ONE REGEN -> the 300-year soak -> the tuning pass -> the owner's signature -> V5 / cull / IP SCRUB -> PUSH",
+     "whyStale": "\u00a7669.2's released sequence interposes SPINE-1 \u2192 SPINE-2 \u2192 REG-GROW-A \u2192 the dress re-base \u2192 registers/zoom \u2192 judging \u2192 decline \u2192 film \u2192 the port, and \u00a7672.1 orders the walk + ONE regen to absorb the cutover-readiness gates (tierForPopulation \u2261 popToTier, the \u00a7652 three-clause check, the partition censuses). ADVAL V1.2 had separately discharged G1 as the provenance driver (AD-1 executed; nothing inside the deterministic derivation).",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "charters/draft-AD-CHARTER.md @ refs/preserve/ad-charter-2026-08-24",
+     "locator": "\u00a75.3 ordering rule 1",
+     "quote": "\u26d4 **AD-1 runs before the ONE TRAILING OSR MINT (G1).** \u00a71.5 derives it. A provenance finding that arrives after the one regen cannot be acted on without a second one.",
+     "whyStale": "A discharged conditional: AD-1 ran (\u00a7530.6) and resolved the antecedent false \u2014 no remedy forces a second regeneration; the binding clock is counsel turnaround (ADVAL V1.2). And G1's anchor 'after the last DW car' is itself superseded by the spine arc, since shift-bearing map cars (cutover, dress re-base) now land after DW.",
+     "disposition": "SUPERSEDE-BY-NAME"
+    },
+    {
+     "doc": "charters/draft-AD-CHARTER.md @ refs/preserve/ad-charter-2026-08-24",
+     "locator": "\u00a72.4 row 'The PDF'",
+     "quote": "Nothing new required. The illustrated lens already prints, because it is ops, not pixels \u2026 `renderTownMapOp` is a five-op mapping and AD adds no sixth op",
+     "whyStale": "True only pre-cutover. After cutover the town plate prints from the partition's page view (spine \u00a74's page register with the signed byte ceilings; the print-path re-base is REG-7's car per ADVAL V1.1), and the five-op mapping is a legacy-path figure. D-EXPORT-1's seam note survives and transfers.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "charters/draft-AD-CHARTER.md @ refs/preserve/ad-charter-2026-08-24",
+     "locator": "\u00a70.5 'WHAT AN ABSTRACT MAP IS COMPOSED OF RIGHT NOW'",
+     "quote": "roads and skeleton streets as stroked polylines; district polygons with a tint and an accent; fortification wall rings and gate marks; **buildings as rectangles** with a category colour",
+     "whyStale": "The recorded before-state is doubly superseded as a build target: \u00a7650/spine \u00a74 make streets GROUND (no street object to stroke, structurally), A1.2 makes the page unit the party-run mass, and A1.3 makes WALL a thin face. The section stays valid as a historical measurement only \u2014 a lane must not read it as the surface AD elevates.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "charters/draft-AD-CHARTER.md @ refs/preserve/ad-charter-2026-08-24",
+     "locator": "\u00a73.2 the rule box after the seam (J-AD-1's home)",
+     "quote": "The name-regex waterfall stays exactly where it is \u2014 resolving *institution buildings* on the town map, where there is no enum to key on \u2014 and never grows a second job",
+     "whyStale": "J-AD-1's law carries unchanged, but the waterfall's home (glyphAssign on the legacy townMap) retires at cutover, and spine \u00a72 consumes 'institution roster + the \u00a7640 seating weights' \u2014 institution identity reaches the partition typed, so the 'no enum to key on' premise ends with the legacy path. A1.5 holds CAR-SEATING as its own car.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "charters/draft-AD-CHARTER.md @ refs/preserve/ad-charter-2026-08-24",
+     "locator": "\u00a78.2 Q-AD-5 + \u00a78.4 D-AD-4",
+     "quote": "`DEFAULT_STYLE_ID = 'parchment'` is pinned by the `parchment === legacy bytes` golden, and moving it is a shift across every surface at once",
+     "whyStale": "ADVAL R2 ruled this superseded-in-substance \u2014 the default look changes via the cutover, not via `DEFAULT_STYLE_ID` \u2014 and \u00a7669/\u00a7670 hardened it: the partition ships dormant behind `REG_FABRIC_OPTS.partition` (OFF \u21d2 byte-identical corpus, spine \u00a76) and the legacy paths retire at cutover, ending the golden's rationale at that moment.",
+     "disposition": "SUPERSEDE-BY-NAME"
+    },
+    {
+     "doc": "charters/ADVAL-VERDICT-2026-08-25.md @ refs/preserve/ad-charter-2026-08-24",
+     "locator": "\u00a7V2 R1 (the three-painter problem), the finding's closing obligation",
+     "quote": "**The dispatch brief must rule, per car: does wave B (a) land pre-cutover against the legacy stacks and get carried by REG-P's re-port, or (b) re-point at the fabric stack's shape-code/glyph layer (which is REG Q3's territory \u2014 see R9)?**",
+     "whyStale": "The spine ruled it above the brief: \u00a75 retires the legacy painters and carto:bridge, and the fabric stack itself re-founds on the partition. Wave B's canvas is the partition's page/zoom views after the dress re-base (spine \u00a77) \u2014 neither (a) nor (b) as written. The carried obligation is discharged by the spine, not re-ruled per car.",
+     "disposition": "SUPERSEDE-BY-NAME"
+    },
+    {
+     "doc": "charters/ADVAL-VERDICT-2026-08-25.md @ refs/preserve/ad-charter-2026-08-24",
+     "locator": "\u00a7V2 R9 (the glyph-population trichotomy), the recommendation",
+     "quote": "**Recommendation: AD wave B does not dispatch before Q3 rules** (or its brief carries both branches priced)",
+     "whyStale": "Q3's substrate question is structurally answered by A1.1/A1.2: census tiers (thorp\u2013village) draw EVERY building, aggregation exists only above them, and the page unit is the party-run mass carrying member unit-lines (no hollow block-wash). The glyph libraries survive as dress vocabulary (spine \u00a75 CONSUMES 'every dress vocabulary and its constants'); the gate re-homes as 'after the dress re-base (the REG-6 paint rebuild)'. The glyph-count settlement (26 vs 27) remains owed at dispatch.",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "charters/ADVAL-VERDICT-2026-08-25.md @ refs/preserve/ad-charter-2026-08-24",
+     "locator": "\u00a7V2 R12 (sequencing reality)",
+     "quote": "The arc order at HEAD: REG arc (REG-2 sealed \u00a7621; REG-3/REG-T dispatched \u00a7622) \u2192 DW \u2192 AD at the DW-6 seam \u2192 G1 \u2192 regen \u2192 soak \u2192 tuning \u2192 push.",
+     "whyStale": "\u00a7669.2 released a different arc (SPINE-1 \u2192 SPINE-2 \u2192 REG-GROW-A resumes \u2192 the dress re-base \u2192 registers/zoom \u2192 judging \u2192 decline \u2192 film \u2192 the port), and the DW-6/cartographyPaint seam AD was to land at retires at cutover. AD's slot is now at/after the dress re-base.",
+     "disposition": "SUPERSEDE-BY-NAME"
+    },
+    {
+     "doc": "charters/ADVAL-VERDICT-2026-08-25.md @ refs/preserve/ad-charter-2026-08-24",
+     "locator": "\u00a7V1.2 first row (the five-wave structure verdict)",
+     "quote": "**AD-4b's MP-1 gate is now satisfied** (\u00a7530.5 \u2014 the painter emits a `parcel` op; confirmed present at tip `e4ed27f48` in `cartographyPaint.js`, though the layer is dark: `townCartographyEnabled` has no default entry)",
+     "whyStale": "Satisfaction of a gate on a retiring painter no longer opens AD-4b: the yard surface re-homes on partition PLOT faces, and the townCartography tree was among the \u00a7659-triaged stale-disk deletions. The dependency-logic ratification stands; this satisfied-gate clause must not be read as wave B's green light.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "charters/ADVAL-VERDICT-2026-08-25.md @ refs/preserve/ad-charter-2026-08-24",
+     "locator": "\u00a7V1.1 Annotation 1 (J-AD-5 re-anchoring)",
+     "quote": "The LAW transfers \u2014 one geometry source feeding pane, exports, PDF, thumbnail \u2014 but its named anchor becomes the fabric stack's draw list at that moment.",
+     "whyStale": "Direction correct, successor now more specific: the anchor becomes the partition page-view's draw list under A1.2's single-aggregator ruling \u2014 not the pre-spine fabric sandbox stack. The generalized restatement ('one geometry source per surface family, whatever module embodies it at the tip') survives verbatim.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "scratchpad 31585ce2/CH6-charter.md (= draft-CATALOG-HYGIENE-PLAN, preserve 029268fe5; identical text in chval/plan-at-preserve.md and chplan-discharge.md)",
+     "locator": "\u00a73.3, the live-consequence paragraph and shift line",
+     "quote": "Downstream, the town-map district assignment moves for those five rows wherever they appear.",
+     "whyStale": "The consequence's consumer (`institutionAssignment.js:71-83` CATEGORY_AFFINITY on the legacy townMap) retires at cutover. The catalog-side priorityCategory honesty stands and is already merged; the durable consumer is the \u00a7640 seating-weight surface the spine consumes (A1.5: institution seating remains its own held car). The pending MF-CH3 landing-act flip must not cite legacy district movement as the lasting declared-shift consequence.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "scratchpad 31585ce2/CH6-charter.md \u00a73.4 (same clause in chval/MF-CH3-at-slot.md \u00a73.4 and chval/laneCHVAL-verdicts.md \u00a71 row \u00a73.4)",
+     "locator": "\u00a73.4, the reader-gap proof",
+     "quote": "the word `tannery` in the layout regex already matches the name, so the rule survives the rewrite untouched",
+     "whyStale": "`townLayoutV2.js:209` is the \u00a7640-named NAME-match residual on a layout path spine \u00a75 replaces (streets.js/parcels.js core). Pre-cutover the claim is true; post-cutover the noxious/downwind siting weight must re-home in the partition's piece-adding weights (REG-SITE/REG-WATER re-chartered as WEIGHTS AND VARIETIES, \u00a7640). The regex is not the durable home of the placement weight and no CH car may cure into it.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    },
+    {
+     "doc": "docs/HANDOFF_CURRENT.md",
+     "locator": "line 43 (PICKUP CARD, THE QUEUE)",
+     "quote": "\u2192 **AD program (17 cars; charter at `refs/preserve/ad-charter-2026-08-24`)** \u2192 OSR mint \u2192 parity \u2192 `/code-review ultra` (OWNER) \u2192 endgame.",
+     "whyStale": "Omits the released spine arc (\u00a7669.2) that now precedes these closers, and \u00a7672.1 re-scopes both closers: the parity compile's surfaces now include partition-rendered ones, and the walk + ONE regen absorbs the cutover-readiness gates because the regen happens at a tree whose map core changed.",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "docs/HANDOFF_CURRENT.md",
+     "locator": "lines 77\u201378 (STATE AS OF \u00a7633, closing arc line)",
+     "quote": "Arc: REG-SEAM \u2192 REG-GROW arch \u2192 REG-T2 \u2192 REG-5\u21929 \u2192 D \u2192 10 \u2192 11 \u2192 F0 \u2192 F \u2192 P; then catalog residue \u2192 DW 42 \u2192 AD 17 \u2192 OSR \u2192 parity \u2192 ultra (OWNER) \u2192 walk + ONE regen \u2192 soaks \u2192 STOP at tuning.",
+     "whyStale": "The REG-numbered map arc was re-founded at \u00a7653 (REG-6 upgraded to the paint rebuild) and then superseded wholesale by \u00a7669.2's spine sequence; the same block's own tail already records SPINE-1 IN FLIGHT, so this arc line contradicts its own paragraph. The closers' scope moved per \u00a7672.1.",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "docs/HANDOFF_CURRENT.md",
+     "locator": "lines 330\u2013335 (\u00a73 AFTER THE CASCADE, the G1/G2 rows)",
+     "quote": "\u2192 the ONE trailing OSR mint after the last DW car \u2192 parity train (DW facts included)** \u2192 the \u00a7290 review stop",
+     "whyStale": "'After the last DW car' is no longer the last shift-bearing point \u2014 the spine arc, dress re-base and cutover land after DW in the released sequence, so a mint anchored there would be followed by regenerating map cars (violating \u00a7384.2's one-mint rationale). And the parity train's denominator extends beyond 'DW facts included': \u00a7672.1 names partition-rendered surfaces explicitly.",
+     "disposition": "REWRITE"
+    },
+    {
+     "doc": "docs/HANDOFF_CURRENT.md",
+     "locator": "lines 528\u2013539 (\u00a7289 BUILT-IN/CUSTOM PARITY OWNER LAW)",
+     "quote": "Built-in and custom forms of one semantic type run identical placement, support/solid, persistence, privacy, render and export tests.",
+     "whyStale": "The LAW is not superseded \u2014 but the just-in-time parity compile (\u00a7619.1: 'its car-level compile waits for the DW facts that are its denominator') must now enumerate partition-rendered surfaces in its capability matrix per \u00a7672.1: the page register, zoom registers, film frames, and partition-fed exports/PDF, each under per-surface same-seed determinism. The handoff row nowhere says so.",
+     "disposition": "KEEP-BUT-ANNOTATE"
+    }
+   ],
+   "clean": [
+    "AD charter \u00a71.0\u2013\u00a71.4 (the four options priced, the five asset tests, the recommendation, the notices machinery \u00a74.4): spine-clean in law; wave A substantially executed out-of-band per ADVAL R7, whose delta list (manifest machinery, AI-vendor ToS, the 7.4 MB cohort, the served-404 proof) remains the live wave-A scope.",
+    "AD charter \u00a72.1 (hand-drawn cartographic register, line-before-colour, one NW light), \u00a72.2 (the expressible vocabulary and wear ladder), \u00a72.3 (B13/B14 translations), \u00a72.6 (legibility/game-grade-UX/accessibility): unaffected \u2014 spine \u00a75 CONSUMES every dress vocabulary and its constants unchanged, and REG-3's one-light exit and L-REG-9 enforce the same laws.",
+    "AD charter \u00a73 (asset architecture entire: motif-as-frozen-literal \u00a73.1, the enum-addressing rule \u00a73.2's law half / J-AD-1, the honest fallback \u00a73.3, the determinism rule \u00a73.4, the genre door \u00a73.5): clean in law; motifs are dress vocabulary and survive the substrate change.",
+    "AD charter \u00a74.1\u2013\u00a74.3 and \u00a74.5 (authoring, review gates, budgets, build/run split): spine-clean; figures decay on ADVAL \u00a7V3's schedule, which is a dispatch-window matter, not a spine one.",
+    "AD charter wave A (AD-1/2/3), wave C (AD-5a\u2013e \u2014 the interior plan plane is DW surface the town partition does not touch; A1.1's struck 'interiors' clause concerns the MAP's zoom ladder, not DW-6a's plan pane), wave D (AD-6a/6b/6c \u2014 the 3D branch is untouched by the 2D partition, and \u00a72.5's two-consumers material law carries), wave E (AD-7 after DW-7a).",
+    "AD charter \u00a75.3 rules 2 and 3 (AD-5e before the ONE REGEN; AD-7 after DW-7a), \u00a75.4 shifts 1\u20134 as declared, and the zero-flag posture J-AD-2.",
+    "AD charter \u00a76 anti-scope: every row except the two painter-anchored rows ('Add an op to cartographyPaint.js', 'Rebuild MP-1's property-line layer') remains in force verbatim \u2014 including no ROOF_FORMS enum, no line_of_sight decoration, no storey before DW-2b/Q-B, no flag, no lens/SKU, no font, the trichotomy, no AI-authored geometry, no setting names, no signed-band re-opening, no tuning-signature answer.",
+    "AD charter \u00a77 sitting sheet rows A0, A2\u2013A8 and \u00a78 judgments J-AD-1..J-AD-7 as ADVAL ratified them (J-AD-3 with the persisted-store-only scope clarification; J-AD-5 with the re-anchor annotation).",
+    "ADVAL \u00a7V1 (all seven judgment verdicts), \u00a7V1.1 Annotation 2 (the refutation clause cutting both ways), \u00a7V1.2 rows for the storey refusal, the tuning-signature refusal, the anti-scope table, and the five asset tests; \u00a7V2 R2 (positioning superseded / mechanism ratified \u2014 already correctly stated), R5 (per-car timeline disposition \u2014 now REINFORCED, since A1.7 moves A6.1 emission + the totality walker into SPINE-1), R6 (two wear systems, one-writer B13 seam), R7 (wave-A execution record), R8, R10 (accessible lens \u2014 reinforced by A1.7 M2), R11 (REG-11 stamping), \u00a7V3 (figure inventory), \u00a7V4 (marker recommendation).",
+    "CH residue: CH6-charter.md/chplan-discharge.md \u00a7\u00a71\u20132 (inference honesty, the magic licence), \u00a73.1, \u00a73.2, \u00a73.5\u2013\u00a73.8, \u00a74 (train order, serial-mint law, gate/census mechanics); chval/MF-CH2B-at-slot.md in full (catalog-side; its STOP is the magicForms arcane-gate matter, not a map matter); chval/MF-CH3-at-slot.md except the two map-reader-anchored clauses (\u00a73.3 consequence, \u00a73.4 reader claims); chval/laneCHVAL-verdicts.md except its \u00a73.4 row.",
+    "HANDOFF_CURRENT.md line 63 STATE paragraph tail (correctly records \u00a7669/\u00a7670, DESIGN_SPINE written, SPINE-1 IN FLIGHT, then SPINE-2 \u2192 GROW-A \u2192 dress re-base); the blocks marked '(historical)' are already superseded by their own labels; \u00a7289/\u00a7290 law text stands as law."
+   ],
+   "notes": "Method: DESIGN_SPINE.md read whole (body + A1); ODQ \u00a7\u00a7669\u2013672 extracted by node (never whole-read; \u00a7\u00a7628\u2013668 headers scanned for the intervening rulings \u2014 \u00a7640, \u00a7648 carto:bridge, \u00a7650\u2013653, \u00a7656, \u00a7659 I21 triage cited where load-bearing); the AD charter (1,378 lines) and ADVAL verdict read whole via braced git show at the preserve ref; CH residue read from the 31585ce2 scratchpad (CH6-charter.md is byte-identical to chval/plan-at-preserve.md \u2014 it is the CH train charter, not a CH-6-specific doc; chplan-discharge.md is the same text plus the TE-CHVAL validation marker); handoff read whole. Complex patterns run under node per the ugrep law. Three cross-cutting points for the chair's amendment: (1) ADVAL predates the spine by one day, and its three carried obligations that the spine itself now discharges are R1 (the per-car painter ruling \u2014 answered: the partition's views are the canvas), R9 (the Q3 gate \u2014 re-homed behind the dress re-base), and R12 (the arc) \u2014 the AD reconciliation amendment should fold the spine ruling as the ANSWER to those obligations rather than re-ruling them per car; everything else in ADVAL transfers and R5 is strengthened (A6.1 emission now lands in SPINE-1, so AD cars' timeline-disposition rows have a live schema to bind to at dispatch). (2) On 'OSR mint rows referencing map schema': no row in the handoff queue directly names map schema under OSR \u2014 the only OSR-schema row ('OSR schema-8 re-governance, BASE_STATE stamps blocked', line 639) sits in an already-superseded historical block; the mint's real spine exposure is its anchor ('after the last DW car') plus \u00a7672.1's regen-scope extension \u2014 the mint must slot after the LAST shift-bearing car of the whole released sequence, and its trigger inventory should be re-checked at dispatch for partition-emitted generated artifacts (A6.1 emission files, if any land as governed leaves). (3) The CH residue is almost entirely spine-clean; its only exposure is two legacy map readers cited as reader-gap proofs/live consequences (townLayoutV2.js:209, institutionAssignment.js CATEGORY_AFFINITY), both annotate-only since the catalog-side fixes are merged and correct \u2014 the annotation exists so the MF-CH3 flip's landing act and any CH-6b/CH-2B dispatch do not cite or cure into retiring machinery. No REWRITE row here changes a signed constant; every disposition is quote-anchored for the chair's one-amendment-per-document hand per \u00a7671.2."
+  }
+ ]
+}

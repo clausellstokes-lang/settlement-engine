@@ -1,0 +1,575 @@
+{
+ "lists": [
+  {
+   "lens": "northstar-glance",
+   "grade": "Core-ladder silhouettes are genuinely Watabou-competitive (town PASSes outright; thorp, hamlet, year-018/100 read), but \u00a7591 totality fails today: the four history leaves are visually the base map (2-26 changed elements of ~1089), the flagship metropolis reads unfinished, ports and high relief don't read, and relict walls float as law-breaking slashes.",
+   "findings": [
+    {
+     "title": "Relict wall circuits render as bare floating slashes mid-fabric \u2014 wall law violated in armed output",
+     "severity": "BROKEN",
+     "evidence": "Viewed city/metropolis/highwater 1400px renders: heavy straight black bars from nowhere to nowhere inside fabric (city Mages' Quarter ~760-800,280-390 and Common Residential ~100-140,555-680; metropolis ~670-810,265 and ~300,790-840; highwater x3 incl ~855-925,608). Zoom crop review654/zoom/city-slash.png confirms a bare stroke: no double line, no posts, no endpoints, ends on no district edge \u2014 reads as a rendering scar at any magnification. Owner law: walls end districts + tangential-or-clear; these do neither.",
+     "fixShape": "Give demoted/relict rings a real dressed style (old-wall double line with ends anchored on gates or district edges) or suppress fragments below a coherence threshold; lives in the wall/ring band renderer on the register path."
+    },
+    {
+     "title": "History/scenario leaves are visually indistinguishable from their base map \u2014 the \u00a7612 product doesn't reach the page",
+     "severity": "IMPEDING",
+     "evidence": "Executed structural diff (tr '>' '\\n' | diff, element-lines of ~1089): town vs siege 26, vs plague 4, vs famine 2; city vs migration 2 (contrast town vs year-100: 237). Famine's entire premise is ONE path of ~8px stall rects (SVG x444-469 y615-624); plague is one lazar-house quad + two 3-stroke gate bars; migration is a few 3px watch-fire circles. Viewed all four at 1400px: premises unfindable by eye.",
+     "fixShape": "Scenario overlays need glance-weight marks scaled to the page (camp footprint with tents, siege line, barred-gate emphasis at every gate, emptied-market treatment), not hairline glyph seasoning; in the scenario overlay layer. Must land before more waves stack on the scenario system."
+    },
+    {
+     "title": "Metropolis value hierarchy collapses \u2014 ~60% of the flagship leaf reads as un-inked ghost fabric",
+     "severity": "IMPEDING",
+     "evidence": "Viewed metropolis-metropolis-parchment at 1400px: center/south fabric is near-paper-value pale blocks against a saturated brown N arc \u2014 reads as pencil underlay or ruins on a 'Comfortable, 71,325 souls' page. 320px squint inverts hierarchy: the map reads as a dense crescent around a pale VOID, the void being the strongest shape.",
+     "fixShape": "Density/tier-aware inking floor so representative fabric never falls to paper value \u2014 raise minimum roof fill contrast in the fabric styling constants; verify at squint size."
+    },
+    {
+     "title": "Ports don't read on either port leaf \u2014 no quay, no legible piers, fjord fabric retreats from the water",
+     "severity": "IMPEDING",
+     "evidence": "city declared 'coast, port, plural squares'; fjord declared 'mountain + ocean + port' (manifest.json). Zoom crop review654/zoom/city-harbor.png: one small black pier-blob plus rows of outlined tan squares floating in the water \u2014 confetti even zoomed, no quay line. fjord 1400px: a broad empty strand separates ALL fabric from the waterline; no waterfront street; squint reads 'town avoiding the sea'.",
+     "fixShape": "Waterfront treatment in the water-interface stage: hard quay line where fabric meets harbor water, pier geometry with real visual weight, and a shore-hugging waterfront street that pulls fabric to the water on port leaves."
+    },
+    {
+     "title": "High-relief terrain dress reads as pen noise; scribble-mesh/zigzag glyphs read as errors",
+     "severity": "IMPEDING",
+     "evidence": "Viewed town-2/fjord (relief 1.00) and mountain-village (0.66): terrain is stochastic scratch/claw/twig-star ticks with no ridge, valley, or terrace structure \u2014 mountain-village's declared 'terraced siting' is invisible, left 60% of that leaf reads as blank scrub. Separate artifact family confirmed: crosshatch mesh floating in hamlet fields (~1050-1100,290-430), mountain NW (~560-660,370-470), zigzag on town/crossing/siege (~370-420) \u2014 all read as pen tests.",
+     "fixShape": "Replace scattered ticks with structured relief (ridge-following hachure runs, form-line chains, terrace steps at the site) in the terrain dress layer; redesign or suppress the mesh/zigzag glyphs. Note for the truth lens: the zigzag cluster also appears on year-018, before the year-19/155 events it sits beside on the base leaf."
+    },
+    {
+     "title": "Organic/low-density fabric is mush \u2014 \u00a7650 negative-space streets only read in regularized grids",
+     "severity": "IMPEDING",
+     "evidence": "Viewed village core (buildings/yards/plots merge into one pale texture, internal streets invisible), polycentric (worst: pale plots + pale buildings + sage yards read as crumbled texture), highwater (moth-eaten throughout, MARKET QUARTER zone unreadable), town W-bank. Contrast: town-2's W grid and town's SE grid, where streets-as-negative-space genuinely work.",
+     "fixShape": "Figure-ground strengthening in fabric styling: separate street ground tone from plot ground tone and enforce a roof-value floor so built mass reads dark against street voids in organic fabric too."
+    },
+    {
+     "title": "Wall-around-wasteland halves break whole-leaf gestalt on town-2 and polycentric",
+     "severity": "IMPEDING",
+     "evidence": "Viewed town-2 1400px + 320px: the E wall section (~860,650 to ~820,1000) wanders through near-empty tan ground; squint reads 'half a map' \u2014 dense left, wasteland right; the NE wall/river/gate tangle (~745,535) resolves to an ink blob. polycentric: hairline enclosure loops a big empty SE bulge (~700-830,780-1100). Unlike highwater, no premise (greens/commons dress) signals the emptiness is deliberate.",
+     "fixShape": "Either fill in-wall emptiness with the highwater treatment (commons/greens/close dress that says 'deliberately open') or let the circuit hug the built extent when no high-water story demands the larger ring; in circuit extent selection."
+    },
+    {
+     "title": "Ambiguous glyph vocabulary: water-gate ink blobs, unexplained diamonds/spiral-targets, bald-disc greens, confetti boats",
+     "severity": "COSMETIC-LATER",
+     "evidence": "Viewed highwater (~1180,650 water gate reads as a black caterpillar), town SW (~290,1010), thorp center (4 dark diamonds + black shield-blob ~470,810 + spiral-target), village/hamlet fork greens render as bald cream discs reading as erasures.",
+     "fixShape": "Glyph redesign pass: lighten water gates to match line weight, draw greens with the legend's common-ground fill, add the diamond/spiral marks to the legend or drop them."
+    },
+    {
+     "title": "Label and framing nits: duplicate MARKET QUARTER on 3 leaves, corner-pasted field swatches, bottom-heavy crossing, hairline year-100 wall",
+     "severity": "COSMETIC-LATER",
+     "evidence": "Viewed town-2, crossing, polycentric: MARKET QUARTER printed twice far apart on each \u2014 reads as a labeling bug. town-2/fjord: green field patchwork appears only as abrupt swatches in map corners. crossing: town crammed into bottom ~55%, vast empty N. year-100: the leaf's premise wall is a hairline that under-sells 'the wall stands'.",
+     "fixShape": "Label dedupe/merge for split quarters, extent-aware field dressing so patchwork feathers out rather than starting at corners, premise-aware frame centering and wall weight."
+    }
+   ]
+  },
+  {
+   "lens": "totality-sweep",
+   "grade": "Totality fails \u00a7591 today: the base fabric, roofs, streets-as-negative-space, legends and temporal variants are genuinely strong (several set-pieces are textbook), but six leaves carry wall-law violations, the flagship town family ships a road wash crossing the river beside its bridge, and two leaves are clipped by their own frame \u2014 the weakest elements are law-level, not taste-level.",
+   "findings": [
+    {
+     "title": "Road wash crosses the river beside the bridge deck (town family)",
+     "severity": "BROKEN",
+     "evidence": "Viewed crops/t3d-wash-over-water.png (town leaf, svg ~615-650 x 495-540): the main NW-SE road wash continues across the blue as a plain band west of the 3-panel deck, erasing the dark bank line; no ford dashes (intentional fords carry dashed flank lines per bridge-crops/CROP-crossing-FORD-AFTER reference, and the town SVG contains 0 'ford' strings \u2014 counted with node). Replicates at the same river bend on siege/plague/famine/year-018/year-100 (same base geometry, eyeballed at full view on each). Negative control: highwater's bridge (crops/h2-bridge.png) is textbook \u00a7651 \u2014 road converges on banks, only the deck spans \u2014 proving the correct form exists at this seal.",
+     "fixShape": "Clip the road-wash polygon at the water body wherever a deck crossing exists, so the wash converges on the deck ends instead of flooding the channel; likely in the road-wash/bridge composition step of the register path that \u00a7651 already governs."
+    },
+    {
+     "title": "Walls fail as boundaries: street grids and roads cross unbroken, ungated walls",
+     "severity": "BROKEN",
+     "evidence": "Viewed crops/t7-south-context.png (town southern circuit, svg y~850-930): the MARKET QUARTER orthogonal grid continues south across the wall at >=4 aligned street crossings with the wall line unbroken and zero gate glyphs on the whole stretch (manifest gates=2, both elsewhere); buildings flank the continued streets to the frame edge. Same shape confirmed at crossing south wall (crops/c4-south-wall.png, >=2 ungated washes crossing at svg ~(455,970) and ~(523,980)), town-2 north arc (crops/b3-north-gate.png, roads die blindly at the wall aligned inside/outside, no gate on the arc), and polycentric NW (crops/p1-nw-entry.png, main road crosses the unbroken wall at svg ~(360,328); the leaf's single gate is SE). Engine physicalViolations=0 on town \u2014 the counter is blind to this class.",
+     "fixShape": "The wall generator must either cull/reorganize fabric and streets at the ring (walls end districts) or mint a gate at every surviving street crossing; needs a crossing census of streets vs wall rings at build time, in the wall/circuit stage of the register path."
+    },
+    {
+     "title": "Wall circuits truncate mid-field / short of the shore, leaving open flanks",
+     "severity": "BROKEN",
+     "evidence": "Viewed crops/c1-wallend-north.png (crossing): the north wall arc dead-ends at a square terminal tower in open field at svg~(505,522), ~18u short of the river, ditch dashes continuing alone, with a street and building row passing around the terminus; the same leaf's west side shows the correct pattern (wall \u2192 tower \u2192 barred water gate at the channel, crops/c3-west-water.png). Viewed crops/z4-sea-terminus.png (city): SW outer wall stops ~12-19u short of the shore and the coastal road passes ungated around the open end, while the west circuit reaches the sea correctly.",
+     "fixShape": "Wall termination rule: an open ring must terminate at a water gate on the channel or at the shoreline, never in open ground; extend the terminal segment to the water polygon (or close the ring) in the circuit builder."
+    },
+    {
+     "title": "Corrupted crossing instrument: gate stamp repeated ~8x into a solid black mass (town-2)",
+     "severity": "BROKEN",
+     "evidence": "Viewed crops/b1-river-gate.png (town-2, svg ~525-545 x 370-395): where the giant market street crosses the wall, the barred-gate/water-gate stamp is repeated ~8 times overlapping into a ~30x30u solid black caterpillar sitting on dry ground (the river is ~25u west); wall segments stop at the blob and it reads as a black knot even at full view. Mild cousin: crossing's west water gate renders as 6 oversized bars marching diagonally down a ~8u channel (crops/c3-west-water.png). Correct single-stamp form exists on the same leaf (crops/b2-south-watergate.png).",
+     "fixShape": "Bound the crossing-glyph stamp count/extent to the actual crossing width and to the presence of water at the crossing point; in the gate/water-gate glyph placement code (L-REG-31/32 territory). Mechanism attribution (stamp-along-path repetition) is PLAUSIBLE \u2014 the visual defect is CONFIRMED."
+    },
+    {
+     "title": "Polycentric ships physicalViolations=1 against the engine's own must-be-0 invariant",
+     "severity": "BROKEN",
+     "evidence": "manifest.json polycentric entry: \"physicalViolations\": 1. Tree at the seal: src/domain/townMap/fabric/seating.js:122 declares \"physicalViolations  must be 0 at every chaos level\"; line 329-331 shows the counter increments when a PHYSICAL_SITE institution finds no candidate satisfying its absolute physical constraint and is seated at its district anchor anyway (leaf manifest shows \"strain on ore\", consistent with an extraction landmark).",
+     "fixShape": "Either the MF-W1b probe chain still misses this leaf's ore-disc ground (extend the probe set / widen the frame-edge margin at seating.js's candidate loop) or the leaf must re-derive; a gate asserting physicalViolations===0 across the 18-leaf register set would make the class unshippable."
+    },
+    {
+     "title": "Settlement exceeds the map frame: metropolis south wall + 2 gates and fjord fabric are clipped at delivery",
+     "severity": "IMPEDING",
+     "evidence": "Extended-viewBox renders (content beyond the 0-1000 canvas is drawn but cut in the delivered map): crops/m1-south-beyond.png shows the metropolis southern wall continuing past y=1000 with TWO drum gates at svg~(437-452,1027-1047) and ~(563-586,990-1005) plus a ribbon suburb to svg y~1260 \u2014 the crown-tier leaf's wall ring is cut by the frame and 2 of its 5 gates are invisible. crops/f1-beyond-sw.png shows fjord buildings straddling y=1000 (svg 973-1100), sliced mid-shape at the frame. Negative controls: city (crops/z6-beyond-west.png) and highwater east (crops/h1-east-beyond.png) close comfortably inside the canvas.",
+     "fixShape": "Camera/extent fit pass per leaf: frame the drawn extent (wall ring + fabric hull + margin) before rendering, instead of a fixed viewport; must land before more growth waves stack or every large leaf will clip."
+    },
+    {
+     "title": "Arc-label kerning garbles district names; accessible-lens label pileup",
+     "severity": "COSMETIC-LATER",
+     "evidence": "Viewed full renders: metropolis and city (all lenses incl. city-city-accessible.svg) render \"COMMON RESIDENTIAL\" as \"CCMYON/COMYON RESIDENTIAL\" \u2014 the arc-text letter placement overlaps C/O and M/M at these curvatures. On city-accessible the four event lines at top-left additionally pile over dense fabric and each other.",
+     "fixShape": "Fix arc-label glyph advance (kerning along path) and give event labels a collision/nudge pass when the settlement occupies the label corner; renderer label module."
+    }
+   ]
+  },
+  {
+   "lens": "truth-integrity",
+   "grade": "Every wave census re-executes green at the seal with live controls and the gate reproduces (15/318, dormancy 29/29, determinism byte-stable) \u2014 but the instrument suite reds twice (i8: two untraced op classes; i10: a dead liveness control) and the review's shared exhibit is proven one wave short of all-armed.",
+   "findings": [
+    {
+     "title": "i8 no-drift ratchet REDS at the seal: V-QUAY (12x) and FORDS (14c) sections are untraced",
+     "severity": "BROKEN",
+     "evidence": "Executed `node i8-nodrift-trace.mjs --wt=<laneBRIDGE-tree>`: \"traced=35 driftJustified=3 UNTRACED MISSES=2 staleRows=0\" over \"40 op classes\", prints I8_FAIL; the two miss rows are 12x \"V-QUAY \u00b7 THE WATERFRONT DETAIL REGISTER\" and 14c \"REG-BRIDGE \u00b7 THE FORDS\" with trace \"\u2014\". `--controls` prints \"BROKEN the base roster is fully traced\" / I8_CONTROLS BROKEN. Node scan of receipts/laneREG5-receipt.md and receipts/laneBRIDGE-receipt.md for /i8|no-?drift|trace table/: 0 hits in both \u2014 a dropped obligation, not a recorded deferral.",
+     "fixShape": "Add the two trace rows (with reference values or written DRIFT justifications) to the committed TRACE table in reg-instruments/i8-nodrift-trace.mjs \u2014 the exact REG-I1 \"TABLE ONLY, misses 7\u21920\" precedent; chair-signed since the instruments workspace is read-only to lanes."
+    },
+    {
+     "title": "The review's shared render is NOT all-armed \u2014 it is the 8-arm set, missing --quay --vquay",
+     "severity": "IMPEDING",
+     "evidence": "Executed: two 10-flag renders are byte-identical to each other (diff -r, exit 0) but differ from review654/out in 16 files; a render with exactly `--fuse --rampart --shapes --market --footprint --river --deck --ford` is BYTE-IDENTICAL to review654/out (diff -r exit 0, 0 lines). The exhibit lacks <g id=\"quayFurniture\"> and the moored fishmonger bodies on town/town-2/crossing, and groundLawDropped is higher on every river leaf (town 242 vs 238) \u2014 waterfrontExemption unarmed.",
+     "fixShape": "Re-render review654/out with the full 10-flag set (deterministic \u2014 proven byte-stable) and re-judge the 16 affected leaves (all river leaves incl. the six town lenses), or re-declare the exhibit's flag set before any lens verdicts bank."
+    },
+    {
+     "title": "i10 controls suite BROKEN: the rings-x0.95 liveness control (B1) is dead at this seal",
+     "severity": "IMPEDING",
+     "evidence": "Executed `node i10-censuses.mjs --wt=<tree> --controls`: \"B1 rings\u00d70.95 outside=0/1832\" flagged \"BROKEN \u2026 (the ring operand is live)\" \u2192 \"I10_CONTROLS BROKEN\"; receipts/laneREGI0-receipt.md:39-40 recorded \"rings\u00d70.95 strands 4 bodies\". B2 still live (\"only the epoch-1 ring: outside=787/1832\", recorded 791), and the armed censuses hold their ordered zeros (A: 0 of 87; B: 0 of 17669).",
+     "fixShape": "Mint a live ring-operand control in reg-instruments/i10-censuses.mjs (larger shrink or a body planted at the ring edge) or re-record B1's expectation with rationale \u2014 before any later wave has to interpret a standing BROKEN it did not cause."
+    },
+    {
+     "title": "Instrument verdicts are stdout-only: i8, i5, and i10 print FAIL/BROKEN yet exit 0",
+     "severity": "COSMETIC-LATER",
+     "evidence": "Executed: i8 prints \"I8_FAIL\" then EXIT=0; i5 on the armed city plate prints \"I5_FAIL\" then EXIT=0; i10 controls print \"I10_CONTROLS BROKEN\" then EXIT=0 (all captured in review654/ti-logs/).",
+     "fixShape": "Set process.exitCode = 1 on the FAIL/BROKEN paths in the three instrument mains in reg-instruments/, so an exit-code-reading or &&-chained caller cannot read a red as green."
+    },
+    {
+     "title": "Instrument hygiene: stale bridgeAngles label and an uncontrolled zero in i10's \u00a7240.1 row",
+     "severity": "COSMETIC-LATER",
+     "evidence": "Executed output: bridgeAngles report header still says \"(unarmed; armed is byte-identical on bridge records)\" \u2014 false since the --deck arm moves bridge records (deckCensus shows 17 re-sited decks); i10's \"\u00a7240.1 hull vertices outside own ring = 0\" has no planted control in the controls suite \u2014 an unverified zero by the review's own rule.",
+     "fixShape": "One-line label fix in harness/laneREG5/bridgeAngles.mjs; add a planted hull-vertex control (or annotate the row as diagnostic-only) in i10-censuses.mjs."
+    }
+   ]
+  },
+  {
+   "lens": "corpus-distance",
+   "grade": "Squint-distance is north-star-competitive, but at the register's own reading distance the drawing hand is missing: streets/markets genuinely close; walls/gates mid; roofs, monuments/churchyards, approaches/countryside far; waterfront farthest (zero shore anatomy on two port settlements).",
+   "findings": [
+    {
+     "title": "Waterfront class absent: port settlements have no shore anatomy and boats are plain rectangles",
+     "severity": "BROKEN",
+     "evidence": "Viewed z-city-shore.png (viewBox 200,560,200x200 of city-city-parchment.svg): shore is a bare tint edge \u2014 none of hf322's eleven shore-ladder steps (no quay, jetty, mole, hard, slipway, crane, cargo, net racks); the 'port' renders as ~12 plain rotated rectangles floating in the sea in two rows (no hull shape, deck plan, masts, or swing circles per hf265); the shoreline water-gate glyph is an unreadable black lump. Same on fjord leaf (port fact, 2-3 tiny glyphs on the cove). Water surface everywhere is one flat fill + one thalweg line \u2014 zero of hf377's twelve textures; no mill/weir/ford drawn on the riverside town asserting 'mill'.",
+     "fixShape": "A waterfront pass in the register path: shore-edge ladder primitives (quay line+bollards, pile-dot jetty, slipway), hull glyph roster with swing circles, and the hf377 water-texture set (recession lines, stipple bars, current arrows); bind port/landing/mill dossier facts to drawn furniture the way the market square already binds stalls."
+    },
+    {
+     "title": "Roof law absent from fabric \u2014 the corpus's own 'without the hand' anti-exemplar row",
+     "severity": "BROKEN",
+     "evidence": "z-town-roofs.png (viewBox 215,570,80x80, ~17px/unit): buildings are flat-tinted footprints \u2014 no hip lines, two-tone plane shading, chimney squares, jetty dashes, or SE eaves shadow. SVG family isolate (fam-0.3_0.62 overlay) proves ridges exist as 667 faint segments (median 9.2u, max 52.6u) that overshoot eaves and cross open ground, for a roofTarget of 1291; hf208 is the register's #1 fabric law and names this exact look its anti-exemplar.",
+     "fixShape": "Roof-grammar pass in the fabric renderer: clip ridges to eaves, add hip lines for hipped ends, one-step two-tone plane tint (NW light/SE dark) plus SE eaves shadow tick, chimney squares astride ridges; drop or plot-bound the overshooting segments."
+    },
+    {
+     "title": "Stray grain-line family crosses streets, buildings, the river, and the sea",
+     "severity": "BROKEN",
+     "evidence": "SVG path inventory of town-town-parchment.svg: family stroke #2B2118, width 0.25, opacity 0.72 \u2014 814 subpaths of uniform ~25u length; fam-0.25_0.72 overlay render shows them running across streets, through buildings, and over the river; on fjord-town-parchment the same family lays a faint lattice across the open SEA (viewed at 1400px). Corresponds to no corpus mark (hf120 plot-series lines are dashed, per-plot, bounded).",
+     "fixShape": "Bound these strokes to their parcels (clip to plot polygons, exclude water/street/building masks) or dash them per hf120; a one-layer clipping fix in the renderer where the family is emitted."
+    },
+    {
+     "title": "Monuments are silhouette blobs \u2014 plan-complexity rank ladder and churchyard anatomy absent",
+     "severity": "IMPEDING",
+     "evidence": "z-town-religious.png: great church = solid dark rounded-rect mass, no wall-plan poch\u00e9, aisles, porch, or cloister (hf323's rule that plan complexity carries rank); churchyard has plain grey circle trees and zero of hf344's items (no south-clustered graves, lych gate, yew, chest tombs, desire-path shortcuts). z-city-civic.png: civic monuments are unidentifiable dark arrow/lump shapes with scratch hatching. Projection is inverted vs corpus: fabric flat while landmark buildings get hip facets (corpus: fabric roofed, monuments wall-plan).",
+     "fixShape": "Monument renderer switches to wall-plan mode (poch\u00e9 outline, buttress ticks, column-dot arcades, white-when-roofed/hatched-when-ruin interiors) with rank-scaled plan complexity; churchyard sub-pass adds grave ticks south of the nave, lych gate, and specimen-tree crown."
+    },
+    {
+     "title": "Wall dress drawn-but-wrong: railway-band circuit, unseated gates, black-bar water gates, naked ring remnants",
+     "severity": "IMPEDING",
+     "evidence": "z-town-gateNE.png: band = symmetric double line with square tick ladder (reads as railway; no rubble-fill/coursing per hf261/hf315), gate = bare rounded rectangle floating in a gap \u2014 band stops short on both sides, no portcullis dashes or flanking anatomy (hf313); ditch = plain dashed line (corpus: radiating hachure). z-town-watergate.png: water gate = 6-7 fat rounded black bars across the river \u2014 the heaviest ink on the plate, no chain boom/winch. City/metropolis inner-ring remnants confirmed in SVG as bare strokes (path 'M73.26 399.14L91.61 488.53M566.74 281.49L542.94 197.89', width 2.47) with no anatomy and no legend row.",
+     "fixShape": "Wall-band pass: asymmetric band (merlon ticks outer edge only, fill texture between edges), seat gates into the band, portcullis dash pairs, chain-boom water gate, hachured ditch; render old-ring remnants as quarried band stretches with a legend row instead of naked strokes."
+    },
+    {
+     "title": "Countryside/approach furniture layer ~empty: boundary alphabet 1/12, no forests anywhere, gate anatomy 0/12, terrain marks never assemble into landforms",
+     "severity": "IMPEDING",
+     "evidence": "z-town-fields.png + village/hamlet/thorp/mountain full plates: every field boundary on every leaf is the same thin bare line (hf321's null case; hedges/walls/ditches/pales undrawn); furrow strips are faint hairlines on a minority of village parcels; NO forest masses exist on any of the 18 leaves (hf114 class absent \u2014 trees are dot tokens); no windmills, pounds, milestones, wayside crosses, toll bars, or cart queues at any gate (hf311); the noxious-trades belt is correctly sited downstream but carries no discharge plume or smoke \u2014 the label does the ink's work (hf267 inverted). Mountain-village relief 0.66 renders as scattered twig scribbles; hachures are connected zigzags, not graded radial strokes (hf112); at 200px squint the mountain terrain vanishes.",
+     "fixShape": "Countryside grammar wave: the hf321 boundary-stroke alphabet keyed to enclosure/tenure data, forest canopy masses as interlocked crown outlines, a small approach-furniture kit (pound, windmill, wayside cross, toll bar) placed from existing dossier facts, and hachure re-grammar (short radial strokes graded by slope, crag heavy-top line)."
+    },
+    {
+     "title": "Street surface and civic-process furniture missing \u2014 every way type renders as the same flat cream ribbon",
+     "severity": "IMPEDING",
+     "evidence": "All town/city zooms: streets are untextured negative space (correct under \u00a7650) but hf320's eleven way types collapse to one \u2014 no cobble stipple, slab grid, ruts, kerb/gutter anywhere; z-city-civic + z-town-market show stall rows + ringed cross + conduit present, but no weigh-beam, shambles/blood channel, fish stones, pillory, or fire-hook shed as drawn glyphs; inn-yard anatomy (hf341) absent. The register's exit rule: 'a square without its furniture fails the exit.'",
+     "fixShape": "Additive furniture/texture pass on the existing square+street skeleton: per-rank street surface textures within the negative-space envelope, and a civic-glyph kit placed at the market from settlement rank (the stall-row placer already proves the mechanism)."
+    },
+    {
+     "title": "Density ladder wobbles at the top: metropolis core reads emptier than its periphery; city fabric stays detached-blob",
+     "severity": "COSMETIC-LATER",
+     "evidence": "metropolis-metropolis-parchment 1400px view: broad pale voids and scattered monuments in the center while the NE grid is dense \u2014 hf378's ladder (party-wall at small town, courts-in-fabric at city, frontage never loosening inward) inverts in the middle; city fabric (z-city-wallbar) is detached blobs with white halos rather than continuous frontage rows.",
+     "fixShape": "Tune the core-density/frontage-continuity term at city+ tiers so interior blocks close ranks before peripheral ones; likely a parameter/ordering fix in block packing rather than new drawing vocabulary."
+    },
+    {
+     "title": "Bridges are bare decks: no cutwaters, flood arches, or bank-works at any crossing",
+     "severity": "COSMETIC-LATER",
+     "evidence": "z-town-bridge.png and z-town-landing.png: both town bridges are plain 3-bay white decks with heavy side lines; hf263's anatomy (cutwater triangles, dashed flood arches running into the meadow, abutments) absent; crossing-town 1400px shows the through-river bridge in the same schematic register (streets do continue across it, and a bridgehead market with pavilion glyphs exists \u2014 good content).",
+     "fixShape": "Bridge glyph upgrade in the crossing renderer: cutwater triangles per pier, abutment splays, optional dashed flood arches \u2014 small vocabulary addition to an already-working placement system."
+    }
+   ]
+  },
+  {
+   "lens": "performance-budget",
+   "grade": "\u00a7583 PASS with ~12x headroom (worst tier 4.6 s cold / ~1.1 s warm vs 60 s max; whole 18-leaf corpus 18.8 s) and all six tiers hold the signed pins \u2014 but four cells sit under 1% margin, the shared render under review is not the armed state, and no in-tree instrument reds on a bust.",
+   "findings": [
+    {
+     "title": "The review's shared render is the 9-arm output \u2014 both REG-5 quay arms are off, so every eyes-lens judged river waterfronts missing armed ink",
+     "severity": "IMPEDING",
+     "evidence": "Executed at the seal: rebuilding town/city/fjord/crossing with waterfrontExemption+quayRegister OFF reproduces review654/out byte-exactly (town 7110 prims/539,560 B, fjord 6766/535,453, crossing 7124/556,133); with all 10 arms, ten river-town leaves differ (town 7136/541,911, +26 prims/+2,351 B \u2014 the leave-one-out deltas \u221221/\u22121,623 quayRegister and \u22125/\u2212728 waterfrontExemption sum to the exact diff). Full table: review654/performance-budget.md \u00a7R0.",
+     "fixShape": "Re-render the shared corpus with all ten arms (node harness/exemplars.mjs <out> --fuse --rampart --shapes --market --footprint --quay --vquay --river --deck --ford) and re-check the ten river-town leaves in the eyes lenses; the true armed corpus is already at /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/44d62321-a15e-46a1-ac9b-693c595fa7d9/scratchpad/perf/out-armed. Note the quay arms measure zero delta on the coastal city \u2014 the port city gets no ink from REG-5's waterfront wave (half-state for Lens 6)."
+    },
+    {
+     "title": "Four pin cells sit under 1% margin with the \u00a7653 paint arc queued \u2014 trending to bust by construction, and nothing in the sandbox reds on a bust",
+     "severity": "IMPEDING",
+     "evidence": "Executed 18-leaf x 6-lens armed census (stable across two runs): town bytes 558,368/560,000 (crossing/watercolor, 0.29%); city ops 10,020/10,100 (migration, 0.79%; runner-up city 10,016); city bytes 676,473/680,000 (0.52%); metropolis bytes 821,784/830,000 (0.99%). git grep shows Buffer.byteLength consumed only by exemplars.mjs manifest reporting \u2014 no test or instrument enforces the \u00a7641.4 byte ceilings (the primary ratchet unit) or reds on op exceedance in the tree.",
+     "fixShape": "Before any paint/growth wave lands: per \u00a7648.3 each new arm owes a byte re-measure, and at these margins the town byte and city op pins need chair-signed \u00a7217/\u00a7604 raises first (or measured savings); build the byte/op ratchet instrument the sheet describes (render six lenses, pin Buffer.byteLength per tier) so a stacked wave cannot bust a 0.29% margin silently."
+    },
+    {
+     "title": "SIGNED_CONSTANTS tier-setter drift: town byte row and the \u00a7635.2 city op figure are stale",
+     "severity": "COSMETIC-LATER",
+     "evidence": "Measured armed setters vs /Users/cstokes/Desktop/settlement-engine/docs/SIGNED_CONSTANTS.md: town byte row still names polycentric/parchment and the \u00a7648.3 prose quotes margin 1,859 B \u2014 that is crossing/PARCHMENT (558,141); the true setter is crossing/watercolor at 558,368, margin 1,632 B. City \u00a7635.2 'measured 10,008' is now 10,020 (+12 landed with REG-BRIDGE). All other setters match the sheet exactly, thorp's 32-op headroom to the unit.",
+     "fixShape": "Refresh the two rows at the next signing act: town tier-setter = crossing/watercolor 1,632 B; city op spend = 10,020 (margin 80). One-line edits to docs/SIGNED_CONSTANTS.md in the main repo, chair-signed."
+    }
+   ]
+  },
+  {
+   "lens": "halfstate-inventory",
+   "grade": "The program's deferral discipline is largely sound \u2014 most half-states are documented, homed, and verified discharged \u2014 but the sweep finds 2 BROKEN states live in the armed output, 6 IMPEDING items (three of them silently dropped or never-dispatched obligations), and 4 deferrals whose nominated home sealed without them and now have no owner.",
+   "findings": [
+    {
+     "title": "Deck reads as a road crossing \u2014 street is a positive object over water (\u00a7650/\u00a7651 owner laws violated at the seal)",
+     "severity": "BROKEN",
+     "evidence": "Rendered crossing-town-parchment.svg via quicklook and viewed the PNG: the pale road band runs unbroken across the river at the central crossing, deck as outline strokes on the wash. Ledger chain: \u00a7649.1 owner catch \u2192 \u00a7650.2/\u00a7651.2 laws \u2192 \u00a7653.2 folds REG-BRIDGE-B into the REG-6 paint rebuild \u2192 \u00a7654.2 postpones it. Cure exists only as a postponed charter.",
+     "fixShape": "Implement \u00a7651.2's topology form (road edges never span water; crossing is a typed BRIDGE/FORD edge; \u00a7650.2 clip census as regression net) \u2014 already fully architected inside the postponed REG-6 paint-rebuild charter; it is the rebuild's first constitutional clause."
+    },
+    {
+     "title": "Zero growth at every year \u2014 armed year-leaves draw a false history (violates \u00a7612 purpose law)",
+     "severity": "BROKEN",
+     "evidence": "laneGROWA-receipt \u00a72.1: executed probes show parcels=1232, geom digest 9f7f4b73d600 IDENTICAL at years 0/18/100/154/191; only the wall ring moves. Mechanism located (settlementAtYear re-issues events never size; tierScale reads no year). laneGROWA-tree verified present at exactly the resume tip 51684eb9e.",
+     "fixShape": "Resume REG-GROW-A when the owner releases the arc: kernel is built, wiring unstarted, resume block valid; the chair must first rule the \u00a72.6 open question (see separate row)."
+    },
+    {
+     "title": "Third warehouse blind round owed since REG-5 sealed \u2014 never run",
+     "severity": "IMPEDING",
+     "evidence": "\u00a7636.2 orders it 'follows REG-5's seal'; REG-5 sealed \u00a7641/\u00a7642 (a303815ae); no ledger entry \u00a7642\u2013654 and no round-3 artifacts anywhere (only round-2 W01\u2013W06 PNGs, Aug 24 19:20\u201324). Class stands at MEASURED FAIL 33.3% with V-QUAY built specifically to cure it.",
+     "fixShape": "Chair renders fresh fixtures at the current seal (V-QUAY now armed) and runs the blind read with a fresh-context reader; result reported beside rounds 1\u20132 per the REGI1 supersession rule."
+    },
+    {
+     "title": "Two riders chartered onto REG-BRIDGE dropped: wall:all contrast watch-row re-measure and bridgehead-faubourg re-measure",
+     "severity": "IMPEDING",
+     "evidence": "\u00a7637.3: 'the wall:all watch row and the bridgehead re-measure ride with it [REG-BRIDGE]'. laneBRIDGE-receipt.md (853 lines): 0 occurrences of 'wall:all'/'contrast'/'faubourg', exactly 1 'bridgehead' (quoting law text); \u00a7648 records neither. Watch row last answered at REG-5 (\u00a710.4), a pre-BRIDGE tip; REG-BRIDGE widened river paint near walls (wallCircuit waterWidth value, receipt \u00a710).",
+     "fixShape": "Run both at this seal now: the wall:all contrast measure (floor 3.00, was 4.27 at town) and a bridgehead-typed faubourg census before/after re-siting \u2014 both instruments exist; an afternoon, not a wave."
+    },
+    {
+     "title": "Tangential-or-clear census (\u00a7645.2) minted, not built \u2014 the wall law is unverifiable by instrument",
+     "severity": "IMPEDING",
+     "evidence": "grep of seal tree (harness/, tests/) and instrument suite (reg-instruments/i1\u2013i11, regI1-*): no tangential census; sole match is a \u00a7575-referencing comment in harness/laneREG4/densification.mjs:94. \u00a7645.2's embargo: the wall-ends-districts claim may not be asserted from eyes alone until it runs green with its control.",
+     "fixShape": "Build the census (buildings within reach of the wall: tangential to its curve OR clear both sides; no footprint crosses the line; planted-violation control) into the instrument suite and run it at this seal \u2014 it is one of the review's own yardstick laws."
+    },
+    {
+     "title": "TE-WSEAM chartered (\u00a7641.2), never dispatched \u2014 the two-water-truths seam is unmeasured",
+     "severity": "IMPEDING",
+     "evidence": "\u00a7641.2 charters it measure-only (sub.wet vs drawn watercourse divergence; who else consumes sub.wet). receipts dir ls: no laneWSEAM/laneTEWSEAM receipt exists. This seam class already erased 4/12 quays invisibly (\u00a7635.4), and J-REG5-3's ratified exemption was coupled to this measure.",
+     "fixShape": "Dispatch the measure-only lane (or fold into the review's truth-integrity lens) before the paint rebuild stacks on water surfaces."
+    },
+    {
+     "title": "REG-GROW-A resume blocked on an unruled chair question (\u00a72.6)",
+     "severity": "IMPEDING",
+     "evidence": "laneGROWA-receipt \u00a75: 'C1's evidence row is measuring two different circuits, so the mint's headline magnitude for outward growth is not supported by the instrument that produced it' + whether the stamped-vintage ladder collapse (\u00a72.4) is cured or superseded \u2014 explicitly left to the chair; nothing in \u00a7\u00a7649\u2013654 rules it.",
+     "fixShape": "One chair ruling (amend C1's row, and cure-vs-supersede for \u00a72.4) recorded in the ledger before the wiring resumes."
+    },
+    {
+     "title": "Main checkout dirty: 3,374 unstaged deletions + 1,267 modifications incl. all of src/domain/townCartography/ \u2014 flagged 'someone should look', unresolved",
+     "severity": "IMPEDING",
+     "evidence": "laneBRIDGE \u00a79.10 (21:56) + this session's git status snapshot (~22:20+): D on README.md, CLAUDE.md, AGENTS.md, api/ files, dozens of docs/. Persisting across sessions. No receipt claims it as deliberate.",
+     "fixShape": "Triage before any shared-tree commit or landing: identify the sibling operation or purge that owns it; if none, the uncommitted state is at risk and needs preservation-first handling (REF-PIN before any cleanup, per standing memory)."
+    },
+    {
+     "title": "Ford glyph HELD \u2014 THIN, no detail-register plate; re-cut rides the postponed REG-6 dress pass",
+     "severity": "COSMETIC-LATER",
+     "evidence": "\u00a7648.1 'FORD GLYPH HELD' (lane's THIN flag confirmed by eye \u2014 unanchored blob-chain); laneBRIDGE \u00a74.6/\u00a79: no ford plate exists in the detail register, reported THIN rather than cited. Drawn today on town-2.",
+     "fixShape": "Re-cut in REG-6's dress pass as chartered (road narrows through the water + transverse ripple dashes, reference-bound)."
+    },
+    {
+     "title": "works family gallery-band miss (0.612 vs 0.60) chartered to REG-5, never received \u2014 dropped thread, needs re-homing",
+     "severity": "COSMETIC-LATER",
+     "evidence": "laneREG3 \u00a76.5 assigns the cure (hf340 leat/pond chain, hf264 washing slabs) to 'REG-5's drawn world'; laneREG5-receipt has 0 occurrences of leat/washing/hf340/hf264 and REG-5's charter never listed it; no re-measure since REG-3.",
+     "fixShape": "Re-home to a charter that exists (REG-WATER's mill/water-furniture arm or the paint rebuild's dress backlog) with one ledger line; re-measure the band on arrival."
+    },
+    {
+     "title": "moorWaterBound centreline anchor + three residual undrawn fish_market quays \u2014 nominated to 'the L-REG-32 car', which sealed without them",
+     "severity": "COSMETIC-LATER",
+     "evidence": "laneREG5 \u00a712.2\u201312.3 ('the cure car must fix this or a rescued quay floats mid-river'; anchor 3.15 units off-centre of a 16.71-unit channel); laneBRIDGE-receipt: 0 mentions of moorWaterBound or fish_market (its mooring-probe touch was width-reading only).",
+     "fixShape": "Re-home both (paint rebuild or a small REG-QUAY-B rider); the anchor fix carries a declared same-seed quay-geometry shift on river leaves."
+    },
+    {
+     "title": "GRAIN_BAND seam-window re-measure bill unpaid and unassigned",
+     "severity": "COSMETIC-LATER",
+     "evidence": "laneREGSEAM \u00a711.2: the 10-seeds/tier measure predates the band reconcile, so the curve's shape in 5,001\u20138,000 and 25,001\u201340,000 windows rests on old tier grading; 'not paid here and not this car's scope'; 0 GRAIN_BAND hits in later receipts. Monotonicity pin still passes.",
+     "fixShape": "Assign a receiving car (REG-GROW-B or the paint rebuild's re-baseline) and re-measure the two seam windows at the reconciled bands."
+    },
+    {
+     "title": "Bridges emitted at SVG root with no group id \u2014 salience classifier files decks as chrome",
+     "severity": "COSMETIC-LATER",
+     "evidence": "laneBRIDGE \u00a79.4 (fords take a group; bridges do not; fixing moves a REG-3 baseline).",
+     "fixShape": "Add the group id during the paint rebuild's declared re-baseline, when REG-3 baselines re-record anyway."
+    },
+    {
+     "title": "riverClaimWidth/riverDrawnWidth coherence pair blind to the width profile",
+     "severity": "COSMETIC-LATER",
+     "evidence": "laneBRIDGE \u00a79.5: both report nominal; min/median/max digest named as the honest replacement.",
+     "fixShape": "Replace the meta pair with the profile digest in the next wave that touches buildFabric meta."
+    },
+    {
+     "title": "SIGNED_CONSTANTS.md UNMINTED-PENDING table broken by a stray blank line (8 rows; \u00a7647's ninth graduated legitimately)",
+     "severity": "COSMETIC-LATER",
+     "evidence": "docs/SIGNED_CONSTANTS.md:60 blank line splits the table so rows 2\u20138 render outside it; git log -p shows the ninth row (river-profile taper) removed at \u00a7648 when taper/pinch signed \u2014 the blank line is that edit's artifact.",
+     "fixShape": "Delete the blank line; the walking sheet's integrity matters at the owner's tuning pass ('named so nothing silently defaults')."
+    },
+    {
+     "title": "marketRegister.js:280 prints '\u2265 70\u00b0' for a 60\u00b0 threshold \u2014 self-contradicting reason string, live at the seal",
+     "severity": "COSMETIC-LATER",
+     "evidence": "Read at laneBRIDGE-tree/src/domain/townMap/fabric/marketRegister.js:278\u2013281: reason emits 'smallest separation ${\u2026}\u00b0 \u2265 70\u00b0'; REGI1 \u00a76.3 reported it, no wave touched it.",
+     "fixShape": "One-byte message-text fix in any wave that next touches marketRegister.js (no behavior change)."
+    },
+    {
+     "title": "COVER-REFRESH car undispatched \u2014 public-bucket gallery covers keep the pre-cure glyph forever",
+     "severity": "COSMETIC-LATER",
+     "evidence": "\u00a7633.3(ii): covers published pre-TE-SEAM-B bake the old dot into a never-invalidated JPEG; the dependency runs through the cloned DOM (grep for 'tier' in the thumbnailer finds nothing). Still in the catalog-residue queue.",
+     "fixShape": "Dispatch the small cover-refresh car against the public bucket; owner-visible shipped surface, so it reports to the owner on completion."
+    },
+    {
+     "title": "City water:ground hue failure stands with no named cure home",
+     "severity": "COSMETIC-LATER",
+     "evidence": "REGI1 \u00a72.2/\u00a76.4: corrected classification widens the existing failure 1.3168\u21921.1246; water is read by HUE (i7's band the real test); REG-5's baseline re-records confirmed 0/55 rows moved so the failure persists as known.",
+     "fixShape": "Record it explicitly in the paint rebuild's spec inputs (water dress + shore strokes) so the rebuild's exit includes an i7 water:ground pass."
+    },
+    {
+     "title": "R-MORPH dossier awaits the owner's taste gate \u2014 blocks exact-constant minting for REG-H",
+     "severity": "COSMETIC-LATER",
+     "evidence": "\u00a7642.2/\u00a7647.2: consumption capped at weights-grade; SIGNED_CONSTANTS UNMINTED-PENDING pins L-REG-33 acres-per-capita and the mosaic bands on it.",
+     "fixShape": "Surface as a pending owner action in the review delivery; nothing else to build."
+    },
+    {
+     "title": "\u00a7624.2's eight 'generated declines' re-measure rides the stood-down GROW car A",
+     "severity": "COSMETIC-LATER",
+     "evidence": "Chain intact: \u00a7631.4 (owed after seam cure) \u2192 \u00a7643.2 (T2 rides car A) \u2192 \u00a7654.2 (stand-down). Documented but will not self-execute.",
+     "fixShape": "No action now; verify the re-measure appears in GROW-A's exits when it resumes."
+    },
+    {
+     "title": "REG-4's seam-census raster arm implemented, never run",
+     "severity": "COSMETIC-LATER",
+     "evidence": "laneREG4 \u00a76.6 (--raster; Chrome hang ate the window); no later receipt runs it. Corroboration-only \u2014 geometric arms are exact and mutation-convicted.",
+     "fixShape": "Run once with quicklook-tier rendering during the review's truth-integrity pass, or strike it from the instrument roster deliberately."
+    },
+    {
+     "title": "Sandbox manifest declares 3 deps absent from node_modules (three, @types/node, pg)",
+     "severity": "COSMETIC-LATER",
+     "evidence": "laneREG5 \u00a712.7; none imported by fabric or lint suites; recorded, not cured.",
+     "fixShape": "Prune the three entries from the sandbox package.json in a wave that already trips the package.json mint trigger (never alone \u2014 any byte change is a mint trigger)."
+    },
+    {
+     "title": "Legacy-path non-cure bank all assumes the REG-P cutover \u2014 keep it attached to REG-P's charter",
+     "severity": "COSMETIC-LATER",
+     "evidence": "\u00a7628.3(ii) roof-tick forward-only \u00b7 \u00a7635.4 legacy port quay erasure \u00b7 \u00a7648.3 carto:bridge disposition (never drew a pixel \u2014 laneBRIDGE \u00a76.1 confirmed) \u00b7 \u00a7646.2 wall-wear reach; plus laneBRIDGE \u00a76.3's flagged owner-gated pre-cutover win at sceneTerrainNetwork.js:358 (the bridge family users see, which would consume a width profile naturally).",
+     "fixShape": "Compile the bank into REG-P's A12 charter row so cutover discharges it wholesale; put the sceneTerrainNetwork win to the owner as a yes/no."
+    },
+    {
+     "title": "Healthy deferral banks \u2014 documented and homed, nothing to fix now (recorded so the consolidation pass does not re-find them)",
+     "severity": "COSMETIC-LATER",
+     "evidence": "Full roster in halfstate-inventory.md R24: REG-9 judging inputs (5), REG-8 word laws (L-REG-34/35 \u2014 the armed town leaf's legend today advertises 'WATER GATE, BARRED', the \u00a7646 example, confirmed in town-town-parchment.svg), REG-D L-REG-36, REG-10 zoom items, REG-P bills (totality walker, tier-equivalence gate, three-clause check), REG-H core (fields.js publishes no pasture/wood/waste \u2014 monoculture CONFIRMED \u00a7641.3), REG-F0 timeline carry, ai.tier seam (needs a one-line does-it-matter ruling), chair-side preflight lint, memory bookkeeping (2 topic files + 5 rows awaiting the next fold).",
+     "fixShape": "No fixes; the consolidation pass should cite this roster as the verified-deferred set and rule only the ai.tier one-liner."
+    }
+   ]
+  }
+ ],
+ "consolidated": {
+  "broken": [
+   "B1 \u00b7 Road wash crosses the water beside the deck (\u00a7650/\u00a7651) \u2014 town + siege/plague/famine/year-018/year-100 at the bend west of the 3-panel deck, and crossing's central crossing: the pale band runs unbroken over the river with the bank line erased, 0 'ford' strings in the SVG (crops/t3d-wash-over-water.png; highwater's bridge is the correct-form negative control).",
+   "B2 \u00b7 Streets and roads cross unbroken, ungated walls (walls-end-districts + every-crossing-gated) \u2014 town S circuit: \u22654 aligned street crossings, 0 gates on the stretch (crops/t7-south-context.png; replicates siege/plague/famine); crossing S \u22652; town-2 N arc; polycentric NW \u2014 and engine physicalViolations=0 is blind to the class.",
+   "B3 \u00b7 Wall circuits truncate in open ground \u2014 crossing N arc dead-ends at a terminal tower ~18u short of the river with a street passing around it (crops/c1-wallend-north.png); city SW outer wall stops ~12\u201319u short of the shore with the coastal road passing ungated around the open flank.",
+   "B4 \u00b7 Relict/demoted wall rings render as bare floating slashes mid-fabric (city \u00d72, metropolis \u00d72, highwater \u00d73) \u2014 SVG bare strokes (e.g. 'M73.26 399.14L91.61 488.53\u2026', width 2.47) with no anatomy, no endpoints on any district edge, no legend row; confirmed a bare stroke at every magnification (zoom/city-slash.png).",
+   "B5 \u00b7 Corrupted crossing instrument (town-2) \u2014 the barred-gate stamp repeats ~8\u00d7 into a ~30\u00d730u solid black caterpillar ON DRY GROUND where the market street crosses the wall (crops/b1-river-gate.png; river ~25u west); mild cousin: crossing's W water gate as 6 oversized bars down an ~8u channel; correct single-stamp form exists on the same leaf.",
+   "B6 \u00b7 Polycentric ships physicalViolations=1 against seating.js:122's own 'must be 0 at every chaos level' \u2014 a PHYSICAL_SITE institution seated at its district anchor with its absolute constraint unsatisfied (manifest 'strain on ore').",
+   "B7 \u00b7 Overhead roof law absent from fabric (town zooms, all fabric) \u2014 flat-tinted footprints with no hips/two-tone planes/chimneys/eaves shadow; the 667 ridge segments are faint and OVERSHOOT eaves (max 52.6u, crossing open ground) against a roofTarget of 1291 \u2014 hf208's named anti-exemplar ('without the hand').",
+   "B8 \u00b7 Year leaves draw a false history (\u00a7612) \u2014 parcel geometry digest 9f7f4b73d600 IDENTICAL at years 0/18/100/154/191 (1232 parcels; only the wall ring moves), executed probe in laneGROWA \u00a72.1; the cure (REG-GROW-A) stood down at \u00a7654.2.",
+   "B9 \u00b7 i8 no-drift ratchet REDS at the seal \u2014 UNTRACED MISSES=2 (12x V-QUAY, 14c REG-BRIDGE FORDS), prints I8_FAIL; 0 mentions of i8/trace in either landing receipt: a dropped obligation, not a recorded deferral."
+  ],
+  "impeding": [
+   "I1 \u00b7 The shared exhibit review654/out is the 8-arm render, NOT all-armed \u2014 byte-identical to a no --quay/--vquay run; the true 10-arm render differs in 16 files (all river leaves + all six town lenses; quayFurniture and moored bodies missing) \u2014 every eyes verdict on river waterfronts judged a state one wave short.",
+   "I2 \u00b7 Scenario leaves are visually their base map \u2014 element-line diffs of ~1089: famine 2, migration 2, plague 4, siege 26 (control: year-100 differs by 237); the premises are unfindable at 1400px.",
+   "I3 \u00b7 Metropolis flagship value collapse \u2014 ~60% of fabric at near-paper value against the saturated N arc; the 320px squint inverts to a dense crescent around a pale void; hf378's density ladder inverts (core emptier than periphery).",
+   "I4 \u00b7 Organic/low-density fabric is mush (village core, polycentric, highwater, town W-bank) \u2014 buildings/yards/plots merge into one pale texture; \u00a7650 negative-space streets read only in regularized grids.",
+   "I5 \u00b7 Ports don't read on either port leaf EVEN ARMED \u2014 the quay arms measure zero delta on the coastal city (decomposition proof): no quay line, ~12 plain-rectangle boat confetti, 0 of hf322's eleven shore steps; fjord fabric holds an empty strand off the water ('town avoiding the sea' at squint).",
+   "I6 \u00b7 Terrain/relief dress reads as pen noise \u2014 town-2/fjord (relief 1.00) and mountain-village (0.66, 'terraced siting' invisible) are scratch/twig ticks assembling into no ridge/valley/terrace; scribble-mesh/zigzag glyphs read as errors (hamlet NE, mountain NW, town/crossing) \u2014 and the zigzag cluster is already present on year-018, BEFORE the year-19/155 events it sits beside.",
+   "I7 \u00b7 Stray grain-line family (stroke 0.25/opacity 0.72, 814 subpaths \u00d7 ~25u) crosses streets, buildings, the river, and the open sea (fjord NE water lattice) \u2014 corresponds to no corpus mark.",
+   "I8 \u00b7 Wall-around-wasteland \u2014 town-2's E wall wanders through near-empty ground (squint reads 'half a map') and polycentric's hairline loops an empty SE bulge; no premise dress signals deliberate openness (contrast highwater's commons treatment).",
+   "I9 \u00b7 Settlement exceeds the frame \u2014 metropolis S wall + 2 of its 5 gates + a ribbon suburb are drawn beyond y=1000 and clipped from the delivered crown-tier map; fjord buildings sliced mid-shape (extended-viewBox proofs; city/highwater close inside canvas as negative controls).",
+   "I10 \u00b7 Wall dress drawn-but-wrong at reading distance \u2014 symmetric tick-ladder band reads as railway (no rubble fill/coursing), gates float unseated in band gaps with no portcullis/flanking anatomy, ditch is plain dashes not radiating hachure.",
+   "I11 \u00b7 Monuments are silhouette blobs \u2014 no wall-plan poch\u00e9/aisles/cloister (hf323's plan-complexity rank ladder), churchyards 0 of hf344's items, city civic monuments unidentifiable; projection inverted vs corpus (fabric flat, monuments faceted).",
+   "I12 \u00b7 Street surface + civic-process furniture missing \u2014 hf320's eleven way types collapse to one flat cream ribbon; no weigh-beam/shambles/pillory/fire-hooks at squares; the register's own exit rule: 'a square without its furniture fails the exit.'",
+   "I13 \u00b7 Countryside/approach layer ~empty \u2014 boundary alphabet 1 of 12 stroke types everywhere, NO forest masses on any of the 18 leaves, gate approach furniture 0/12, the noxious belt carried by its label not its ink.",
+   "I14 \u00b7 Four pin cells under 1% margin with no enforcement \u2014 town bytes 0.29% (1,632 B), city ops 0.79% (80), city bytes 0.52%, metro bytes 0.99%; nothing in the tree reds on byte or op exceedance, so the queued \u00a7653 paint arc trends to bust silently by construction.",
+   "I15 \u00b7 i10 controls B1 dead \u2014 rings\u00d70.95 strands 0/1832 (REG-I0 recorded 4); suite prints I10_CONTROLS BROKEN; a sub-5% ring regression is now invisible (census B survives on B2 alone).",
+   "I16 \u00b7 Third warehouse blind round owed since REG-5 sealed (\u00a7636.2), never run \u2014 class stands at MEASURED FAIL 33.3% with V-QUAY built specifically to cure it; no round-3 artifacts exist.",
+   "I17 \u00b7 REG-BRIDGE's chartered riders dropped (\u00a7637.3) \u2014 the bridgehead-faubourg re-measure never ran (0 hits in the 853-line receipt); the wall:all watch row was re-executed BY THIS REVIEW (4.2663, floor 3.00 holds; headroom 7.29\u21924.65\u21924.27) and needs only ledger-recording.",
+   "I18 \u00b7 Tangential-or-clear census (\u00a7645.2) minted, never built \u2014 sole tree match is a comment in densification.mjs:94; its own embargo bars asserting walls-end-districts from eyes alone, so one of the review's yardstick laws is instrument-unverifiable.",
+   "I19 \u00b7 TE-WSEAM (\u00a7641.2) never dispatched \u2014 sub.wet vs drawn-watercourse divergence unmeasured; this seam class already erased 4/12 quays invisibly and J-REG5-3's exemption was ratified coupled to the measure.",
+   "I20 \u00b7 REG-GROW-A resume blocked on an unruled chair question \u2014 laneGROWA \u00a72.6: C1's evidence row measures two different circuits, and \u00a72.4's stamped-vintage collapse needs a cure-vs-supersede ruling; nothing in \u00a7\u00a7649\u2013654 rules either.",
+   "I21 \u00b7 The main checkout carries 3,374 unstaged deletions + 1,267 modifications incl. ALL of src/domain/townCartography/ \u2014 unclaimed by any receipt, persisting across sessions; no shared-tree commit or landing is safe until triaged."
+  ],
+  "cosmetic": [
+   "C1 \u00b7 Ambiguous glyph vocabulary (highwater/thorp/hamlet/village) \u2014 water-gate ink caterpillars, unexplained diamonds/spiral-targets, bald cream-disc greens reading as erasures; glyph redesign + legend rows.",
+   "C2 \u00b7 Label/framing nits \u2014 MARKET QUARTER printed twice on town-2/crossing/polycentric; green-field patchwork pasted only into corners (town-2, fjord); crossing bottom-heavy (empty top ~45%); year-100's premise wall a hairline.",
+   "C3 \u00b7 Arc-label kerning garbles COMMON\u2192CCMYON/COMYON (city + metropolis, all lenses); accessible-lens event labels pile over dense fabric.",
+   "C4 \u00b7 i8/i5/i10 print FAIL/BROKEN yet exit 0 \u2014 stdout-only verdicts; an &&-chained caller reads red as green; set process.exitCode on the FAIL paths.",
+   "C5 \u00b7 Instrument hygiene \u2014 bridgeAngles header still says '(armed is byte-identical on bridge records)', false since --deck re-sites 17 decks; i10's \u00a7240.1 hull-vertex zero has no planted control (unverified zero).",
+   "C6 \u00b7 SIGNED_CONSTANTS drift \u2014 town byte tier-setter row names polycentric/parchment (true setter: crossing/watercolor, margin 1,632 B), \u00a7635.2 city op figure 10,008 is now 10,020, and a stray blank line at line 60 splits the UNMINTED-PENDING table (rows 2\u20138 fall out).",
+   "C7 \u00b7 Bridge/ford dress thin \u2014 bare 3-bay decks with no cutwaters/flood arches/abutments (hf263); ford glyph HELD as THIN with no detail-register plate; both chartered into REG-6's dress pass.",
+   "C8 \u00b7 Orphaned deferrals needing a named receiving car \u2014 works gallery-band miss (0.612 vs 0.60, chartered to REG-5 which never received it); moorWaterBound centreline anchor (3.15u off-centre of a 16.71u channel) + 3 undrawn fish_market quays (nominated to the sealed L-REG-32 car); GRAIN_BAND seam-window re-measure (unassigned).",
+   "C9 \u00b7 Bridges emitted at SVG root with no group id (salience classifier files decks as chrome) + riverClaimWidth/riverDrawnWidth pair blind to the width profile \u2014 both ride the paint rebuild's declared re-baseline.",
+   "C10 \u00b7 marketRegister.js:280 prints '\u2265 70\u00b0' for a 60\u00b0 threshold \u2014 self-contradicting reason string, message-text-only fix.",
+   "C11 \u00b7 COVER-REFRESH car undispatched \u2014 public-bucket gallery covers bake the pre-TE-SEAM-B glyph into never-invalidated JPEGs (owner-visible shipped surface).",
+   "C12 \u00b7 City water:ground hue failure stands (1.2762 vs floor 1.35, improved from 1.1246; street:ground 1.9118 vs 2.1 likewise) \u2014 the recorded pre-existing REG-0 charter-row state; record explicitly in REG-6's spec inputs so its exit includes the i7 water pass.",
+   "C13 \u00b7 R-MORPH dossier awaits the owner's taste gate \u2014 blocks L-REG-33 acres-per-capita and mosaic-band minting; surface as pending owner action.",
+   "C14 \u00b7 \u00a7624.2's eight 'generated declines' re-measure rides the stood-down GROW car A \u2014 chain documented and intact; verify it appears in GROW-A's exits at resume.",
+   "C15 \u00b7 REG-4's seam-census raster arm implemented, never run \u2014 corroboration-only (geometric arms are exact and mutation-convicted); run once or strike deliberately.",
+   "C16 \u00b7 Sandbox package.json declares 3 deps absent from node_modules (three, @types/node, pg) \u2014 prune only inside a wave already tripping the package.json mint trigger, never alone.",
+   "C17 \u00b7 Legacy-path non-cure bank (roof-tick forward-only, legacy port quay erasure, carto:bridge disposition, wall-wear reach) \u2014 compile into REG-P's charter row so cutover discharges it wholesale; put the sceneTerrainNetwork.js:358 pre-cutover win to the owner as a yes/no.",
+   "C18 \u00b7 The healthy verified-deferred roster (halfstate R24: REG-9 judging inputs, REG-8 word laws, REG-D/REG-10/REG-P/REG-H/REG-F0 banks, chair-side lint, memory bookkeeping) stands as documented \u2014 only the narrative-export ai.tier one-line does-it-matter ruling is owed."
+  ],
+  "fixPlan": [
+   {
+    "order": 1,
+    "car": "CAR-EXHIBIT",
+    "scope": "Review process only \u2014 republish review654/out from the true 10-arm render (determinism proven byte-stable; the armed corpus already exists at perf/out-armed) and re-judge the 16 changed files (10 river leaves incl. all six town lenses); re-qualify the Lens-1/2/4 river-waterfront verdicts before any visual finding banks.",
+    "covers": [
+     "I1"
+    ]
+   },
+   {
+    "order": 2,
+    "car": "CAR-TREE-TRIAGE",
+    "scope": "Main repo working tree, no product code \u2014 identify the sibling operation or purge that owns the 3,374 deletions + 1,267 modifications; REF-PIN before any cleanup per standing memory; no shared-tree commit or landing until closed.",
+    "covers": [
+     "I21"
+    ]
+   },
+   {
+    "order": 3,
+    "car": "CAR-INSTRUMENTS",
+    "scope": "reg-instruments/ (chair-signed; workspace read-only to lanes) \u2014 add i8's two trace rows (12x V-QUAY, 14c FORDS) to the TRACE table per the REG-I1 'TABLE ONLY' precedent; re-mint a live i10 B1 ring-operand control (larger shrink or planted edge body); build the \u00a7645.2 tangential-or-clear census with its planted-violation control (becomes CAR-WALLS' exit instrument); ride-alongs: process.exitCode on FAIL paths (C4), bridgeAngles label + \u00a7240.1 control (C5).",
+    "covers": [
+     "B9",
+     "I15",
+     "I18",
+     "C4",
+     "C5"
+    ]
+   },
+   {
+    "order": 4,
+    "car": "CAR-MEASURES",
+    "scope": "Chair-side measure runs, an afternoon, no product code \u2014 warehouse blind round 3 on CAR-EXHIBIT's armed fixtures with a fresh-context reader (reported beside rounds 1\u20132); the bridgehead-faubourg census before/after re-siting; ledger-record the wall:all 4.2663 figure this review executed; dispatch TE-WSEAM measure-only (sub.wet vs drawn watercourse) before the paint rebuild stacks on water.",
+    "covers": [
+     "I16",
+     "I17",
+     "I19"
+    ]
+   },
+   {
+    "order": 5,
+    "car": "CAR-BUDGET",
+    "scope": "New ratchet instrument + docs/SIGNED_CONSTANTS.md (chair-signed) \u2014 build the byte/op ratchet the sheet describes (render six lenses, pin Buffer.byteLength per tier, red on exceedance); chair-sign \u00a7217/\u00a7604 raises or measured savings for the four <1% cells (town bytes, city ops, city bytes, metro bytes) BEFORE any ink-adding car lands; refresh the stale setter rows and delete the table-splitting blank line (C6) in the same signing act.",
+    "covers": [
+     "I14",
+     "C6"
+    ]
+   },
+   {
+    "order": 6,
+    "car": "CAR-SEATING",
+    "scope": "src/domain/townMap/fabric/seating.js \u2014 extend the PHYSICAL_SITE probe chain / frame-edge margin so polycentric's ore landmark seats legally (or the leaf re-derives); add a register-set gate asserting physicalViolations===0 across all 18 leaves so the class is unshippable.",
+    "covers": [
+     "B6"
+    ]
+   },
+   {
+    "order": 7,
+    "car": "CAR-WALLS",
+    "scope": "Wall/circuit builder + gate/water-gate glyph placement (one car, one code band) \u2014 build-time census of street\u00d7ring crossings that mints a gate at every surviving crossing or culls/reorganizes fabric at the ring; termination rule: an open ring ends at a water gate or the shoreline, never in open ground; relict rings get a dressed old-wall style anchored on gates/district edges or are suppressed below a coherence threshold; bound crossing-stamp count/extent to actual crossing width and water presence; circuit extent hugs built fabric absent a high-water premise (else commons dress). Exit: tangential-or-clear census (CAR-INSTRUMENTS) green + crossing census zero.",
+    "covers": [
+     "B2",
+     "B3",
+     "B4",
+     "B5",
+     "I8"
+    ]
+   },
+   {
+    "order": 8,
+    "car": "CAR-WATERCLIP",
+    "scope": "Road-wash/bridge composition step of the register path \u2014 clip road-wash polygons at water bodies wherever a deck crossing exists so washes converge on deck ends; ford dashes only at typed fords. Interim repair-class fix; \u00a7651.2's typed BRIDGE/FORD-edge topology form completes in REG-6 as its first constitutional clause.",
+    "covers": [
+     "B1"
+    ]
+   },
+   {
+    "order": 9,
+    "car": "CAR-FABRIC-INK",
+    "scope": "Fabric styling constants + renderer emit \u2014 roof-value floor so built mass never falls to paper value (verify at squint); separate street ground tone from plot ground tone; clip ridge segments to eaves/plot bounds (kills the overshoot half of the roof-law break); clip the 0.25/0.72 grain-line family to parcels with water/street/building exclusion masks; suppress or redesign the scribble-mesh/zigzag artifact glyphs (also settles the year-018 anachronism question by removal).",
+    "covers": [
+     "B7",
+     "I3",
+     "I4",
+     "I6",
+     "I7"
+    ]
+   },
+   {
+    "order": 10,
+    "car": "CAR-FRAME",
+    "scope": "Camera/extent fit in the render path \u2014 frame each leaf to its drawn extent (wall ring + fabric hull + margin) before rendering instead of the fixed viewport; also cures the bottom-heavy crossing composition (C2 part).",
+    "covers": [
+     "I9"
+    ]
+   },
+   {
+    "order": 11,
+    "car": "CAR-SCENARIO",
+    "scope": "Scenario overlay layer \u2014 scale the existing mark classes to glance weight: camp footprint with tents, siege/circumvallation line, barred-gate emphasis at every gate, emptied-market treatment; no new mark classes, weight/extent repair only. Must land before more waves stack on the scenario system.",
+    "covers": [
+     "I2"
+    ]
+   },
+   {
+    "order": 12,
+    "car": "CAR-PORT",
+    "scope": "Quay/waterfront register siting predicate + shore interface (REG-5's existing machinery) \u2014 extend the quay register to fire on coastal/harbor banks (today provably zero delta on the port city): hard quay line where fabric meets harbor water, pier geometry with real weight, shore-hugging waterfront street pulling fabric to the water; half-state repair of REG-5's own motivating class (feeds the warehouse blind round).",
+    "covers": [
+     "I5"
+    ]
+   },
+   {
+    "order": 13,
+    "car": "CAR-GROW",
+    "scope": "Chair ruling now + owner-gated resume \u2014 chair rules laneGROWA \u00a72.6 (amend C1's two-circuits evidence row; cure-vs-supersede for \u00a72.4) recorded in the ledger immediately; resume the built kernel's wiring in laneGROWA-tree (verified at resume tip 51684eb9e) when the owner releases the arc; \u00a7624.2's declines re-measure (C14) rides its exits.",
+    "covers": [
+     "B8",
+     "I20"
+    ]
+   },
+   {
+    "order": 14,
+    "car": "CAR-REG6-CHARTER",
+    "scope": "The already-postponed REG-6 paint rebuild's charter (paperwork now, capability rides the chartered arc \u2014 no new capability minted here) \u2014 amend its spec inputs with the vocabulary rows and release it: full roof grammar completing B7, relief/hachure re-grammar completing I6, wall-band dress + gate seating (I10), monument wall-plan mode + churchyard anatomy (I11), street surfaces + civic-process furniture (I12), countryside boundary alphabet/forest masses/approach kit (I13); record the water:ground hue failure (C12) and the bridge/ford dress (C7) in its exit so the rebuild owes an i7 water pass.",
+    "covers": [
+     "I10",
+     "I11",
+     "I12",
+     "I13",
+     "B7",
+     "I6",
+     "C7",
+     "C12"
+    ]
+   }
+  ]
+ }
+}
