@@ -27257,3 +27257,29 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   **The CURE is its own car, REG-BRIDGE, chartered now** — sequenced after REG-5 on the
   measure's findings, before REG-6 (it moves the street web: the wall:all watch row and
   the bridgehead re-measure ride with it). Program doc gains **A9**.
+
+## §638 · THE DOSSIER CONTEST — THE AUDIT'S CONVENTIONS MUST FACE THE ESTATE'S OWN RESEARCH (owner, 2026-08-25 ~09:20 CDT)
+
+- **§638.1 THE ORDER:** the convention-violation audit's findings are CONTESTED against the
+  estate's European-grounded research corpus (the R-INST-1..6 + DWR1A dossiers at
+  `refs/preserve/research-dossiers-2026-08-24-r2`, morphology `EUROPEAN_FANTASY_BASE`,
+  with their CONFIRMED / CONFIRMED-digest / PLAUSIBLE labeling discipline). When the
+  register lands, a CONTEST PASS runs every confirmed violation's convention claim
+  against the dossier corpus and stamps it **DOSSIER-CONFIRMED** (a sourced dossier
+  claim supports it, cited), **DOSSIER-SILENT** (the corpus does not speak), or
+  **DOSSIER-CONTRADICTS** (a sourced claim cuts against it — the dossier wins and the
+  finding is demoted or re-framed).
+- **§638.2 THE LAW EXTENDS:** the dossier program's own discipline — *a PLAUSIBLE figure
+  may not be consumed until verified* — now binds the register: **a cure driven by a
+  convention that survives only as training-prior (DOSSIER-SILENT) does not become law
+  without either sourced grounding or the owner's taste signature.** L-REG-31/32 face
+  the same contest as everything else.
+- **§638.3 R-MORPH PRE-CHARTERED:** the R-INST corpus is INSTITUTION-scoped (what
+  buildings are); town-PLAN morphology (siting, street systems, plot series, growth
+  phases — the Conzen town-plan-analysis school and the European historic-towns-atlas
+  literature) is expected DOSSIER-SILENT territory. If the contest confirms that gap,
+  **R-MORPH opens as a sourced research tranche in the R-INST pattern** (read-only lane,
+  labeling discipline, owner taste-gates the dossier) so the register's conventions
+  stand on citations, not on the chair's priors. ⚠ Banked in passing: the `${sha}:path`
+  zsh hazard bit AGAIN this sitting as `"$R:research/…"` → the `:r` MODIFIER ate the
+  path — braces ALWAYS, `"${R}:research/…"`.
