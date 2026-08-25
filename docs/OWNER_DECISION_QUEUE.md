@@ -27146,3 +27146,66 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   tools) — a successor recovers it by sha even after scratchpad death. Doctrine
   re-affirmed, nothing new to build: sandbox-first stays protected (no early
   landings), the convicting-mutation rule stays in every brief.
+
+## §635 · TWO WAVES COLLECT, THE QUAY CONTRADICTION IS RULED, AND THE BRIDGE LAW MINTS (2026-08-25 ~07:45 CDT)
+
+- **§635.1 REG-SEAM SEALED** at `refs/preserve/map-sandbox-regseam-bands` = `6cd4b19ef`
+  (seal ran BEFORE this declaration, per §633.1's law). The classifier sweep went
+  **18,000 disagreements → 0** over 1..120,000; the liveness probe shows the invented
+  peaks (8001/40001) vanishing with demoted true→false while a REAL demotion still fires
+  at the panel's exact figures; the convicting mutation redded 5 of 7 arms with
+  byte-identical restore. **The predicted near-zero corpus delta was WRONG in mechanism
+  and the honest reading stands: 26 of 29 artifacts move** — `bandPosition` is
+  √((p−lo)/(hi−lo)), so narrowing the town band moves every leaf already inside it; the
+  adopted R1(a)(ii) note priced exactly this and the §110.3 table rides the wave's own
+  commit. §631.2's "237/237" corrected at the stack tip: 311/3 pre-existing (REG-4's
+  walker bills), cured tip 318/315/3 — +7 tests, +0 files, +0 new failures. Prerender
+  ruled NOT-APPLICABLE and PDF CONFIRMED stored-tier at `viewModel.js:263`. ⛔ BANKED:
+  **zsh does not word-split an unquoted `$var` — a 29/29 "armed" determinism pass had
+  rendered the unarmed corpus four times**; every arm now carries a differs-from-unarmed
+  liveness control.
+- **§635.2 THE §217 RAISE, SIGNED (chair, §604): city 10,000 → 10,100** — the all-armed
+  register spend measures 10,008 at the reconciled bands (attributable digit-for-digit
+  to the pre-cure control); ~1 % margin, byte-edit rides REG-5's opening act. All other
+  tiers hold.
+- **§635.3 REG-I1 COLLECTED**: i8 **7 untraced → 0** with a three-row convicting control;
+  i5 zero verdict regressions ⚠ over a PARTIALLY MISCLASSIFIED population — `classify.mjs`
+  cannot see REG-4's four group ids and `rect|circle → chrome` runs first, so 64 furniture
+  circles counted as plate chrome; **the cure + i1/i5/i7 baseline re-records (declared) +
+  an i5 re-verify are REG-5's opening act**. i6/F3 falls on 17 of 18 leaves (−0.1 % to
+  −43.9 %) with the cure's own signature — a DECLARED instrument-baseline shift, baselines
+  not silently rewritten. Branch liveness **13/13**: `triangular` fires at the TRUE
+  boundary 60.117° (integer trig indices — the constant is 1024/6), `bridgehead` fires on
+  a deck. **RATCHET-UNIT SIGNED: BYTES primary** — DOM nodes SATURATE (517/514/502 across
+  town/city/metropolis while primitives run 7,291→11,291) — **and NO time gate** (a
+  deterministic renderer whose wall-clock spread is 1.3–68.5 % noise); byte ceilings mint
+  at REG-5's measure. ⚠ WATCH ROW for every later wave: `wall:all` contrast headroom fell
+  7.75→4.27 (town) against floor 3.00 — any wave that softens the circuit re-measures it
+  FIRST.
+- **§635.4 THE QUAY RULING — §628.1's premise is REFUTED and corrected:** the warehouse
+  silhouette failure was never the extractor. **`moorWaterBound` moors quay piers across
+  the water ON PURPOSE; `bodyRefusal` then wipes them as standing-water refusals with no
+  waterfront exemption; `demoteBody`'s centroid-shrink cannot rescue a body whose job is
+  to straddle the shoreline.** Four of twelve quays over 24 seeds are NOT DRAWN AT ALL;
+  the legacy `port` path carries the same defect; no census would have shown it. **RULED
+  (the §632.3 framework, vetoably): an internal contradiction — one law moors what
+  another erases — is MACHINERY repair, not new capability. REG-QUAY is a named REG-5
+  deliverable**: a waterfront exemption for moored bodies in `bodyRefusal`, with a
+  drawn-quay census and a planted control. The legacy path is DELIBERATELY not cured — it
+  dies at the cutover (documented, not a bug to re-find). The extractor's four own
+  defects (no ink floor, no crop verification, swallowed raster failures, silent
+  under-delivery) are cured regardless — each would blank-fixture any thin class. The
+  warehouse re-round (4/4 fixtures, areas verified > 0) is IN FLIGHT with a fresh blind
+  reader.
+- **§635.5 OWNER LAW, MINTED AS L-REG-31 (mid-turn): bridges cross perpendicular.** A
+  bridge deck aligns to the normal of the river's LOCAL tangent within a tolerance band
+  (±15°, chair's provisional, measured refinement allowed); the APPROACH ROAD kinks at
+  the bridgehead to meet the square crossing — the deck is never skewed to save the road
+  a bend; fords are exempt (a ford follows its road). This is both the references' own
+  grammar and period practice (shortest span, strongest against current). Home = REG-5:
+  measure every corpus deck angle, cure outliers, census + planted control. Program doc
+  gains **A8**. **Preserves this sitting:** `chair-tools-2026-08-25` = `3d4ec5065` ·
+  `session-work-2026-08-25` = `fbe934770` (234 files — every receipt + the instruments
+  workspace + the re-round fixtures; the first attempt preserved an EMPTY tree off a
+  zsh glob abort and was caught by the count assertion — the §493.6 class, re-bitten
+  and re-cured). Two lane-authored memory topic files await the next index-fold pass.

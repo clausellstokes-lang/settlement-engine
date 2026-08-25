@@ -490,3 +490,18 @@ disagree. The load-bearing corrections:**
 
 Home: REG-4. Exit gains: a sliver census (armed corpus, zero sub-minimum drawn buildings,
 with a planted-sliver liveness control) and a REG-3 silhouette non-regression spot-check.
+
+## Amendment A8 — the bridge law and REG-5's enlarged charter (§635)
+
+| Law | Statement | Source |
+|---|---|---|
+| L-REG-31 | A bridge deck aligns to the normal of the river's local tangent within ±15° (chair's provisional band); the approach road kinks at the bridgehead — the deck is never skewed to save the road a bend; fords exempt. | §635.5 |
+
+REG-5's charter now opens with the maintenance acts (§634.3 kit consolidation ·
+`classify.mjs` group-id cure + i1/i5/i7 baseline re-records declared + i5 re-verify ·
+the city 10,100 ceiling byte-edit · registering REG-4's three fabric modules with the
+stageManifest/derivationGraph walkers) and carries three named deliverables beside the
+countryside band: **L-REG-31 bridge alignment** (measure, cure, census + planted
+control), **REG-QUAY** (the §635.4 waterfront exemption for moored bodies, drawn-quay
+census + planted control), and the **byte-ceiling mint** for the signed ratchet unit.
+The wall:all watch row (§635.3) binds: re-measure BEFORE any circuit-softening change.
