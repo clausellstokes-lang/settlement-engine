@@ -48,6 +48,19 @@ if grep -q '^Seat: Opus 5 — Fable-unvalidated$' "$MSGFILE"; then
     echo "  Add a mapping ending in docs/FABLE_RETROVALIDATION_QUEUE.md to this call (§685.4)."
     exit 1
   fi
+  # PRESENCE IS NOT A ROW (§688.7): the first spelling of this gate checked only that the
+  # queue file rode along, so an unchanged file satisfied it — and the chair walked through
+  # that gap on its own commit. The blob must actually DIFFER from the parent's.
+  for PAIR in "$@"; do
+    case "${PAIR#*:}" in docs/FABLE_RETROVALIDATION_QUEUE.md) QSRC="${PAIR%%:*}" ;; esac
+  done
+  QNEW=$(git -C "$REPO" hash-object "$QSRC")
+  QOLD=$(git -C "$REPO" rev-parse "refs/heads/review-fixes-2026-07-08:docs/FABLE_RETROVALIDATION_QUEUE.md" 2>/dev/null || echo none)
+  if [ "$QNEW" = "$QOLD" ]; then
+    echo "ABORT: the retrovalidation queue is UNCHANGED — presence is not a row."
+    echo "  An Opus-seat act owes a row naming what Fable re-derives (§685.4/§688.7)."
+    exit 1
+  fi
 fi
 
 # --- THE SUBJECT-ANCHOR GATE (§687.9) ---
