@@ -226,6 +226,27 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§695 · The gestalt gate RULED under the owner's returned judgment · SEAT: Opus 5.**
+⛔ **THE SINGLE MOST IMPORTANT ROW IN THIS QUEUE.**
+*What was judged:* the owner said *"I leave everything to your best judgment"*, and the chair
+used it to **amend a gate that had just failed twice** — `tier` collected-but-ungraded, `arc`
+moved to REG-D. Also judged: the limits of that grant (the by-nature carve-outs do **not**
+move), and the safeguard that the pass is **re-earned by a fresh round, never re-scored**.
+*What Fable re-derives:* **the whole of it, adversarially.** A chair with authority to amend
+a gate amended the gate that was failing, in the direction that makes the failure disappear —
+that is the most self-serving act available in this programme, and the chair said so in
+§695.2 before making it. Specifically: **(a)** are the three grounds genuinely independent of
+the score, or reverse-engineered from it? The fitted-page/non-monotonic argument and the
+inter-reader spread are the load-bearing ones — **test them, do not read them**. **(b)** was
+moving `arc` to REG-D a principled relocation or a quiet deletion with a forwarding address?
+**(c)** did the round-3 safeguard actually hold — was the fresh round genuinely fresh, and
+did anyone re-score old data anywhere? **(d)** is §695.7's law ("a gate can fail by asking
+too little OR by asking the impossible") sound, or does it license amending any gate that
+proves inconvenient?
+*Receipts:* ODQ §695 · DESIGN_SPINE_COMPLETION PA.7 as amended · the DRESS-1/1b receipts
+carrying both rounds' raw answers · round 3's own receipt when it lands.
+*Priority:* **P1**, and it should be the FIRST taste row a Fable seat reads.
+
 **§694 · SPINE-3 dispatched; the scope judgment; the gate-name generalization · SEAT: Opus 5.**
 *What was judged:* that the owner's gestalt pause blocks the **taste** arc but not the
 **substrate**, so a constructor car runs now; the two hard exclusions (the band's width,

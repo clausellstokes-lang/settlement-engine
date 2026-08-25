@@ -29304,3 +29304,65 @@ PA.10 permits). Nothing was edited, staged, or moved by any of them.
 - **§694.5 THE HANDOFF STATE BLOCK IS REFRESHED** to §694 (it stood at §689 through four
   ledger entries — refreshed here per §233, riding this judgment-bearing act under §689's
   mechanical-acts rule rather than minting a hollow commit of its own).
+
+## §695 · THE OWNER RETURNS THE JUDGMENT, AND THE GESTALT GATE IS RULED — THE KEY IS AMENDED, AND THE PASS MUST BE RE-EARNED RATHER THAN RE-SCORED (2026-08-27 ~02:30 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+- **§695.1 THE GRANT (owner, in chat): *"I leave everything to your best judgment."*** Read
+  precisely, and its limits recorded before its licence is used. **IT COVERS** the PA.7
+  gestalt escalation — that clause is **chair-authored process**, not a constitutional gate,
+  so the owner may hand it back and has. **IT DOES NOT COVER, and is not treated as
+  covering, the BY-NATURE carve-outs:** every push and deploy · the cutover flag · **the
+  tuning signature** · legal · the cull · `/code-review ultra` · the film specimen verdict.
+  *A signature that can be delegated is not a signature* (§585's own words), and a general
+  grant does not convert a by-nature gate — it would have to name one.
+- **§695.2 ⛔ THE HAZARD IN THIS RULING, NAMED BEFORE IT IS MADE.** The gate failed twice;
+  the chair now has authority to amend the gate; and amending it in the obvious direction
+  makes the failure disappear. **That is the single most self-serving act available in this
+  programme today.** Every safeguard below exists because of that, and the ruling should be
+  read as constrained by them rather than as a free hand.
+- **§695.3 RULED — `tier` LEAVES THE GRADED KEY, ON GROUNDS INDEPENDENT OF THE SCORE.** The
+  page is **fitted to the settlement**, so a hamlet and a metropolis both fill the sheet, and
+  the only magnitude proxy available **is not monotonic — it inverts on 20.8 % of cross-tier
+  pairs**, with the city drawn sparser than ten towns. A reader asked to name the tier bin is
+  being asked to read something **the drawing does not encode** — and the reference base does
+  not encode it either (§663: a whole city page is ~700 polygons and the size band **never
+  moves with scale**; that is watabou's deliberate design, not an accident we should
+  out-perform). The corroboration that did **not** come from the lane: **inter-reader
+  agreement is 100 %/100 % on the structural fields and 77.8 %/83.3 % on tier/arc** —
+  *readers disagreeing with each other* is the signature of a bad question, not a bad map.
+  **`tier` stays COLLECTED but UNGRADED**, so that if the drawing ever does begin to encode
+  it we will see it in the data rather than having deleted the question.
+- **§695.4 RULED — `arc` is NOT DROPPED; IT MOVES TO REG-D, WHERE ITS DRESS WILL EXIST.**
+  It scored one positive case in eighteen because **the decline dress has not been built** —
+  §5's own EXITS place the gestalt-on-decline test in REG-D. Grading a field whose ink does
+  not yet exist is grading a promise. **Moving a test to where the thing it tests is built is
+  not weakening the gate; deleting it would be.** REG-D inherits it as a named exit.
+- **§695.5 ⛔⛔ THE SAFEGUARD THAT MAKES THIS DEFENSIBLE: THE PASS IS RE-EARNED, NEVER
+  RE-SCORED.** Round 2's data is **NOT** re-graded under the amended key. Re-scoring old
+  answers against a new rule is precisely how a gate is laundered, and it would hand DRESS-1
+  a 100 % it never ran for. **A THIRD ROUND RUNS: fresh reader context, amended key, plates
+  blinded and shuffled (J-DRESS1B-10's method, kept).** The bar stays **≥ 80 %**, the hard
+  clause stays **zero wrong-class reads on walled/open and port/river/dry**, and **the
+  amended gate may still fail** — which is the whole point of running it. If it does, that is
+  a genuine ink finding at last, because the two contested fields will no longer be in the way.
+- **§695.6 WHAT IS NOT CHANGED, SO THE AMENDMENT CANNOT SPREAD.** The bar is **not** lowered.
+  The hard clause is **not** relaxed. The reader protocol is unchanged. **PA.7's escalation
+  clause itself stands** — if round 3 and a round 4 disagree, that returns to the owner
+  exactly as before, and this ruling explicitly does **not** consume that future escalation.
+  And the key remains **machine-derived from ledger truth** (J-DRESS1B-11), so no chair can
+  hand-fit it to a render.
+- **§695.7 THE STANDING GENERALIZATION, EARNED FOUR TIMES NOW.** §694.3 named three gates
+  whose predicate was weaker than their name. This is the fourth face of the same family and
+  the most dangerous, because here **the gate's predicate was STRONGER than the drawing could
+  ever satisfy** — it asked for a fact the medium does not carry. **A gate can fail by asking
+  too little OR by asking the impossible, and only measuring the question against the medium
+  tells you which.** Banked as a law for every future gate this programme writes.
+- **§695.8 THE BAND FIX IS CHARTERED, NOT INJECTED.** The under-width wall band (5 of 17
+  wraps, worst 0.212 of declared) is now within the chair's grant as a **repair with a
+  declared shift** — but **SPINE-3 keeps its hard exclusion**: changing a running lane's
+  stated boundaries mid-flight is how briefs rot. It becomes **its own car after SPINE-3
+  seals**, its shift declared, and the row stays on the owner docket as **INFORMATIONAL**
+  rather than blocking, since it moves every band in the corpus and the tuning pass must see
+  it. ⚠ **The three grant readings (§22, §336, §362) stay the owner's** notwithstanding this
+  grant: a chair re-reading its own prior reading of the owner's sentences is **circular by
+  construction**, and no amount of delegated judgment fixes that.

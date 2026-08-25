@@ -229,7 +229,20 @@ authored BLIND from ledger truth before the render (per leaf: tier bin ·
 walled/open · port/river/dry · declined/grown); a fresh-context reader's answers
 match the key on **≥80 % of leaves** with ZERO wrong-class reads on the key's
 load-bearing fields; crops carry concrete keys (§649.2-class); two consecutive
-disagreeing rounds ESCALATE to the owner. **WHO CLOSES (S4-M6, corrected BY NAME):
+disagreeing rounds ESCALATE to the owner.
+⛔ **AMENDED §695 — the escalation fired, the owner returned the judgment, and the key is
+amended on grounds INDEPENDENT of the score.** **`tier` is COLLECTED BUT UNGRADED**: the page
+is *fitted* to the settlement, so the only magnitude proxy is non-monotonic and **inverts on
+20.8 % of cross-tier pairs**, and the reference base does not encode tier either (§663 — the
+size band never moves with scale). **`arc` MOVES TO REG-D as a named exit** rather than being
+dropped: its dress does not exist yet, and grading a field whose ink is unbuilt is grading a
+promise. **GRADED FIELDS ARE THEREFORE walled/open AND port/river/dry.** The **≥80 % bar and
+the zero-wrong-class hard clause are UNCHANGED**, and **this escalation clause SURVIVES
+INTACT** — two further disagreeing rounds return to the owner exactly as before.
+⛔⛔ **THE PASS IS RE-EARNED, NEVER RE-SCORED.** Prior rounds' answers are **not** re-graded
+under the amended key. A **fresh round** runs — new reader context, amended key, plates
+blinded and shuffled — **and it may still fail.** Re-scoring old data against a new rule is
+how a gate gets laundered, and it would hand the wave a pass it never ran for. **WHO CLOSES (S4-M6, corrected BY NAME):
 A5.4 stands — the CHAIR closes judging rounds under §585, vetoably; the OWNER closes
 the film specimen and every escalation.** The body's "owner's eyes close each round"
 is superseded.
