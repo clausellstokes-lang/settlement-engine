@@ -70,3 +70,13 @@ deliberately). No time gate (wall-clock spread is noise, §635.3).
 The dwellings bands B0–B21 and the POWERS schema (law/SIGNED-BANDS-2026-08-23.md) ·
 THE PROMISE and every constitutional law above this sheet. The TUNING SIGNATURE
 itself is the owner's and is LAST — this sheet exists so that pass walks one page.
+
+## RE-VERIFY-ON-PARTITION (added §675)
+The following rows keep their SIGNED VALUES; their measurement basis re-verifies on
+the partition at the first wave that consumes each (declared shifts if they move,
+never silent): the op-ceiling table (priced on the pre-spine renderer) · the byte
+table and its tier-setters · B13 (per VOID face now) · V-QUAY (per quay face) · the
+L-REG-30 floor (INK.detail basis) · L-REG-31 ±15° · the corridor half-length · the
+bridge conformance predicate · the countryside coverage band · the ring-census
+tolerance row (now a spine §6 exit) · taper/pinch (bank derivation unchanged —
+verify only) · the kink budget.

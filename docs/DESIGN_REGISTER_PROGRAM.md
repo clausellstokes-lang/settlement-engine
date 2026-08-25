@@ -575,3 +575,47 @@ dead-code sweep · the §646 dress rows in REG-6/7).
 Every chair-signed constant now lives in **docs/SIGNED_CONSTANTS.md** — one sheet,
 three statuses (CHAIR-SIGNED vetoable · OWNER-SIGNED · UNMINTED-PENDING), maintained at
 every signature; it is the tuning pass's walking sheet.
+
+## Amendment A13 — THE SPINE RECONCILIATION (§675; supersedes stale clauses BY NAME)
+
+**Authority: DESIGN_SPINE.md body+A1 and ODQ §§669–672. Where any earlier section of
+this document conflicts with A13, A13 wins. Inventory: recon-inventory-wave1/2.json
+(155 rows, 66+39 clean sections); this amendment rules them.**
+
+### A13.1 · THE ONE ARC ORDER (supersedes §370, A5.2's order, and A12.3 — all BY NAME)
+SPINE-1 → SPINE-2 → REG-GROW-A resumes (ledger on the partition) → THE DRESS RE-BASE
+(the §653 paint rebuild absorbing the surviving held cars: scenario weight · port
+atlas · relief grammar · fabric ink · ford glyph re-cut · road/water layering ·
+REG-ROUTE's residue: grade response, crag avoidance, fragments) → registers/zoom
+(REG-10-class) → words (REG-8, reduced: cartouche language + denylist; L-REG-34 homes
+in the page view, L-REG-35 in the view law) → judging (REG-9, gestalt-first at page
+scale) → decline dress (REG-D on ledger/LossRegion states) → REG-11 share → REG-F0
+(rescoped: totality walker + any pre-partition legacy layer still alive) → REG-F (the
+film; owner judges the specimen) → REG-P (the port: the §652 three-clause check ·
+tierForPopulation ≡ popToTier · the vocabulary totality walker · the cutover that
+retires the legacy painters, carto:bridge, the legacy port path).
+### A13.2 · WAVE-TABLE SUPERSESSIONS: **REG-QUAY is DISSOLVED** (A8's row — a moored
+piece is a lawful face; SPINE-2 owns quays). **REG-ROUTE is SUBSUMED** (A12.2 row —
+water refusal is spine §3a construction; residue to the dress re-base). **REG-GROW-B
+is DISSOLVED into spine construction** (quarter minting = a construction step; ring +
+form censuses = spine §6 exits). **REG-BRIDGE's remaining scope is SPINE-2's** (A9's
+sequencing clause is dead; L-REG-31/32 carry as construction laws). **REG-6 = the
+dress re-base** (its third and final statement; "MF-4 lens build" and "INK AS RENDER
+LAW … needs fused geometry" both superseded). **REG-7 = print projection + parity
+only** (MF-A1 L4 integration moved to the dress re-base). **A10's dependency
+sentence** reads: REG-D consumes the ledger's reached states, sequenced per A13.1.
+**REG-F0's charter** reads: the A6.1 emission is partition-native in SPINE-1; F0 is
+the totality walker + legacy-layer sweep only.
+### A13.3 · LAYER/LAW RETARGETS: §3's L0/L1 rows read "the PARTITION (faces
+WARD/BLOCK/PLOT + VOID/FIELD/WATER/LOSSREGION; typed edges WAY/WALL-band/BANK/
+CROSSING/BOUND/CLIFF) built per ledger epoch" — parcels/streets-web/wallCircuit
+derivations are replaced per spine §5. §4's walls row reads: "the wall FAMILY extends
+or reads the BAND FACE, never re-derives" (A1.3/A1.7-M5). The law table stands with
+these annotations: L-REG-2/3/6/7's STATEMENTS now bind partition objects (fused
+frontages = party-run dissolve; district partition = ward faces; market void = VOID
+face; wall termination = the WALL×WATER invariant with water gates/termini). §11 Q1's
+density-abstraction question is ANSWERED by A1.2's two-stage aggregation.
+### A13.4 · KEEP-BUT-ANNOTATE (the honest class): every clause so marked in the
+inventory carries the reading "true as written; its measurement basis re-verifies on
+the partition at the wave that consumes it" — the twelve SIGNED_CONSTANTS rows carry
+the same note in that file.

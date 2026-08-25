@@ -246,3 +246,24 @@ grades). The L-REG-28 accessible-lens arm joins BOTH cars' exits (the A5.2 all-w
 row — the body's §6 omitted it). The §110.3 declared-shift discipline covers BOTH
 shifts: the kernel landing, and any later owner-signed T2/tuning constant change
 (second shift, declared at signature time — never silent).
+
+---
+
+# AMENDMENT A2 — THE SPINE RECONCILIATION (§675)
+
+**DESIGN_SPINE body+A1 is the authority; where this document's body or A1 conflicts,
+the spine wins.** By name: A1.1's "buildFabric stays single-shot [byte-wise]" and "the
+existing single-shot pipeline … stand untouched" clauses are SUPERSEDED by SPINE
+A1.4's EPOCH FOLD (the ledger stays pure data; the partition constructor folds its
+epochs in one single-shot stage; frames = the fold on the truncated ledger). The car
+plan reads: **GROW-A RESUMES ON THE PARTITION** (its S0 ledger modules + the T2
+constrained-interpolant mint + the seam conversions that survive: §18.4 as ledger
+consumer, compile.js peaks, the frame cartouche); **GROW-B IS DISSOLVED** — origin-
+typed accretion, ring truth, quarter minting and decline replay are SPINE construction
+steps (spine §3b/3d/3f), and the ring/form censuses are spine §6 exits. Exits 1/2/5
+re-home to SPINE-1 where its charter already carries them; the dormancy flag family is
+ONE (`REG_FABRIC_OPTS.partition` — `growReplay` folds into it); §5's performance
+envelope is superseded by the spine's pinned protocol (A1.6). §1's REG-F0 rescope
+aligns to A13.2's statement. The word "partition" in DW-program contexts means the
+STOREY partition — in this program and the spine it means the PLANAR partition;
+documents must disambiguate on contact.

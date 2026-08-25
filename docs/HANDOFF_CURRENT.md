@@ -40,7 +40,7 @@ Prod at migration **121**, repo head **199**, 78 pending. ⭐ **MEASURED (§540.
 **CH-6 is deliberately undispatched** — §555.9 orders CH-4 first.
 
 ### THE QUEUE
-CH-4 → **CH-6** (⛔ a **live shipped deity-doctrine violation**: a magic-free world can hold no divine healer or druid circle) → CH-7 land → **DW build waves (41 cars — more than everything landed to date)** → **C-19's sub-form recount** (cheapest high-value lane; `~55`/`~35` are not integers and block DW-1d/1e) → WEB-8b/12 → wiring wave → WEB-9a–11 → HK-4/5/6 → housekeeping → CT-4/CT-5/WF-8 → **AD program (17 cars; charter at `refs/preserve/ad-charter-2026-08-24`)** → OSR mint → parity → `/code-review ultra` (OWNER) → endgame.
+⚠ THIS QUEUE PREDATES THE SPINE — §675/A13.1 governs the released arc; entries here re-derive at dispatch. CH-4 → **CH-6** (⛔ a **live shipped deity-doctrine violation**: a magic-free world can hold no divine healer or druid circle) → CH-7 land → **DW build waves (41 cars — more than everything landed to date)** → **C-19's sub-form recount** (cheapest high-value lane; `~55`/`~35` are not integers and block DW-1d/1e) → WEB-8b/12 → wiring wave → WEB-9a–11 → HK-4/5/6 → housekeeping → CT-4/CT-5/WF-8 → **AD program (17 cars; charter at `refs/preserve/ad-charter-2026-08-24`)** → OSR mint → parity → `/code-review ultra` (OWNER) → endgame.
 ⚠ **MF-CH3 owes a three-place flip to LANDED** — a landing act on TE-CH-3's car; its nine contested paths have since moved again.
 
 ### ⛔ FOUR THINGS ARE THE OWNER'S BY NATURE — and none is a permission

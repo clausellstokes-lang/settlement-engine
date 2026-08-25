@@ -28266,3 +28266,35 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   class). **Amendment authoring HOLDS until wave two** (DW/AD/endgame, in flight) so
   the reconciliation is written ONCE across everything to the soak — then the
   verifier pass, then §675 lands the amended set.
+
+## §675 · THE RECONCILIATION LANDS — 155 ROWS RULED, FOUR DOCUMENTS AMENDED, THE AD/ENDGAME RULINGS RECORDED (2026-08-26 ~06:50 CDT)
+
+- **§675.1 THE AMENDED SET** (verifiers dispatched before any lane consumes it):
+  **A13** to DESIGN_REGISTER_PROGRAM (the ONE arc order superseding all four
+  spellings by name · REG-QUAY dissolved · REG-ROUTE subsumed · REG-GROW-B dissolved
+  · REG-6 = the dress re-base, final statement · REG-7 = print/parity only · REG-F0
+  rescoped · the L0/L1/walls retargets · the KEEP-BUT-ANNOTATE reading) · **A2** to
+  DESIGN_REG_GROW (the epoch-fold supersessions by name · GROW-A resumes on the
+  partition · GROW-B dissolved · one flag family · the storey-vs-planar partition
+  disambiguation) · the **RE-VERIFY-ON-PARTITION** block in SIGNED_CONSTANTS (twelve
+  rows keep values, bases re-verify at first consumption) · the **DW reconciliation
+  amendment** (plots-not-parcels with law 6's principle intact · the §494 halo
+  re-homed post-cutover · **CG-1/CG-2 RETIRED AS CARS with their laws carried as
+  acceptance requirements** · D3A/D3b/D5 superseded · the car count re-derives at
+  dispatch). The handoff's pre-spine queue and arc lines are ANNOTATED as historical.
+- **§675.2 THE AD + ENDGAME RULINGS (preserve refs cannot be amended; this entry IS
+  their amendment, and the AD dispatch brief is authored fresh from it):** the AD
+  charter's three-painter invariant, the cartographyPaint length-identity seam, and
+  the parchment===legacy byte-pin all describe a world that RETIRES AT CUTOVER — AD
+  wave-B cars re-anchor to the partition view stack; AD-4b's MP-1 gate re-expresses
+  as "the plot-face halo lands in the post-cutover views"; ADVAL's R1/R9/R12
+  recommendations are satisfied by this entry. **The ENDGAME TAIL re-states:** the
+  walk + ONE regen absorb the cutover-readiness gates (tierForPopulation ≡ popToTier
+  · the §652 three-clause check · the partition censuses · the vocabulary totality
+  walker); the ONE trailing OSR mint and the parity train (whose surface matrix now
+  includes partition-rendered surfaces) follow the last content car exactly as ruled;
+  TUNING REMAINS LAST and remains the owner's signature. §289 built-in/custom parity
+  is UNTOUCHED by all of this (annotated clean).
+- **§675.3** Verifier pass in flight over the amended set (cross-contradiction hunt);
+  on its green, every future dispatch brief cites §675 + the amended documents and
+  NOTHING pre-spine without its amendment.

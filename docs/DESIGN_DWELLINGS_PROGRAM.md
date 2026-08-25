@@ -1,16 +1,3 @@
-> ## ⛔ SUPERSEDED FOR PLANNING — READ `docs/DW0-CHARTER-COMPILED.md` FIRST
->
-> **As of 2026-08-24 the operative DW planning document is `docs/DW0-CHARTER-COMPILED.md`**
-> (1,102 lines / 129,030 B, ledger branch), the DW-0 compile: the owner's signed bands become
-> rulings and every wave carries an observable exit criterion. It survived a six-lens adversarial
-> skeptic panel (14 blockers closed) and four compile passes.
->
-> **This file remains the frozen design narrative and is still citable**, but where the two
-> disagree, the compiled charter wins. Do not plan a car from this file alone. ⚠ Three of this
-> document's inherited claims were measured FALSE at the slot (ODQ §543–§545): UC-5's asserted
-> absence, CH-1's promised `interiorKind` override, and the 60-fixture "union". **A frozen
-> dossier is ground truth for RESEARCH and never for ENGINE STATE.**
-
 # DESIGN — THE DWELLINGS PROGRAM (DW): interior floor plans as a projection of the world
 
 **STATUS: ARCHITECTED, NOT BUILT.** Owner-ordered at ODQ §435 (2026-08-23); origin
@@ -425,3 +412,25 @@ building could actually have been built.
    attaches later without re-architecture.
 4. **The research lanes** (TC-DWR*) write ONLY to the scratchpad/ledger-doc
    surfaces; their dossiers are owner taste-gated before any grammar work.
+
+## RECONCILIATION AMENDMENT — THE SPINE (§675)
+
+**DESIGN_SPINE body+A1 and ODQ §§669–675 are the authority.** (1) TERMS: in this
+program "partition" means the VERTICAL STOREY partition; the spine's PLANAR partition
+is always so qualified. (2) ANCHORS: every "parcel polygon / parcel ring / fabric
+parcel" reads **PLANAR-PARTITION PLOT FACE** (its frontage IS its WAY edge; party
+walls are BOUND edges; law 6's read-never-guess principle binds unchanged against the
+plot's way-edge). DW-2's geometry precondition is the partition substrate (SPINE-1/2
+landed), not D3b; §6's re-derivation trigger reads "physical restructure of the
+plot's building mass". (3) THE §494 HALO: DW-6 projects the PLOT/ESTATE face
+boundary; the hover-halo map car re-homes in the post-cutover view stack under the
+§652 contract (the cartographyPaint op-identity is a retiring painter's — no DW/MP
+car owes it an edit). (4) **CG-1 and CG-2 ARE RETIRED AS CARS** (they repaired the
+superseded cartography stage); their LAWS carry as acceptance requirements on the
+partition constructor and the DW allocator: real-pipeline fixture corpora, never
+fixture-calibrated bands (H31's class); explicit occupancy accounting (H29's class).
+(5) D3A/D3b/D5 machinery references are superseded; the named-part seam (B18) lands
+as: DW emits the claim; the SPINE's zoom registers / dress re-base consume it.
+(6) The charter's car count and order (41 cars; ESTATE-before-the-regen; CG-gate)
+RE-DERIVE at DW dispatch time against A13.1's arc — the §675 dispatch brief is
+authored fresh from this amendment, never from the r2 charter's stale rows alone.
