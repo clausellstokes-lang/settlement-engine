@@ -27904,3 +27904,36 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   first · INSTRUMENTS · MEASURES incl. the 10-arm re-exhibit and TE-WSEAM); the
   dissection continues (JSON model export across seeds · the village and dwelling
   generators · FTG with its recording rig BEFORE its one daily shot).
+
+## §659 · THE TRIAGE VERDICT — A STALE DISK, NOT A DISASTER; AND THE ARCHIVES WERE ONE CLEAN FROM OBLIVION (2026-08-25 ~21:45 CDT)
+
+- **§659.1 THE VERDICT: ORPHANED-BY-ARITHMETIC, no act and no actor.** The main
+  checkout's terrifying status is the estate's own commit method compounding: 972 of
+  2,227 reflog entries are plumbing (commit-tree/update-ref) that never touch the
+  working tree; the disk froze ≈2026-07-15 and the branch kept advancing. Proof class:
+  matching all 1,267 "modified" blobs against one commit per day peaks at 2026-07-15
+  with **1,113 exact matches (87.8 %)**; every sampled "deletion" was ADDED to the
+  branch after the freeze (townCartography has zero disk trace and is live authored
+  code at HEAD). All four damage hypotheses refuted. The tree was byte-identical
+  before/after the lane (md5-proven); the chair's ledger method is safe BY
+  CONSTRUCTION (the .git/index mtime has not moved since 08-17).
+- **§659.2 ⛔⛔ THE OUTRANKING FIND, CURED THIS ENTRY:** **922 untracked files
+  (94.6 MB) existed on disk ALONE — 823 of them `docs/archive/`, the ledger's own fold
+  archives — in NO branch, tag, or remote.** One `git clean -fdx` from total loss.
+  Pinned byte-identically (refs/preserve/tree-triage-pin-2026-08-25 = `937889b26`),
+  and **the 823 archive files are now COMMITTED to the ledger branch**
+  (`acaf6510b`, pure additions, BUILD-LOG.md kept at HEAD's version) — the home the
+  handoff always claimed for them, restored in fact. BANKED: **a fold that writes an
+  archive file must land it in the SAME private-index commit as the index edit that
+  points to it** — the pointer without the blob was this near-loss's mechanism.
+- **§659.3 REMAINING DISPOSITIONS:** `marketing/website/` (432 files, 0 at HEAD) stays
+  PINNED, home undecided — OWNER DOCKET (a public-surface content set; the chair does
+  not guess its branch). The 33 genuinely-staged `docs/DESIGN_FP_ARCH_*` edits
+  (2026-08-17) stay untouched in the real index — OWNER DOCKET (someone staged them
+  deliberately). The stale-disk repair itself (sync the checkout to HEAD) is DEFERRED
+  until both dockets clear — the disk is safe now that everything on it is pinned,
+  and a sync before the dockets would be motion without need. The memory row
+  `main-checkout-is-a-different-tree-false-absent.md` is CORRECTED in place (the
+  branch has 2,106 src files; the DISK has 977 — it described the disk, not the
+  branch). The §657.2 danger list stands for every session: no default-index commit,
+  no add -A, no clean, no checkout-switch from the main checkout.
