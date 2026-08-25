@@ -86,9 +86,36 @@ export function hierarchyOf(g, w, h) {
     }
   }
   const mc = med(core); const mr = med(ring);
-  if (mc == null || mr == null) return { core: mc, ring: mr, ratio: null, holds: false, inkPx: n };
+  if (mc == null || mr == null) return { core: mc, ring: mr, ratio: null, holds: false, tied: false, inkPx: n };
   const ratio = mc > mr ? (mc + 0.05) / (mr + 0.05) : (mr + 0.05) / (mc + 0.05);
-  return { core: mc, ring: mr, ratio, holds: mc < mr, inkPx: n };
+  /**
+   * ⛔⛔ **DRESS-1b · A TIE IS NOT AN INVERSION, AND THE OLD PREDICATE `holds: mc < mr` SCORED IT
+   * AS ONE.** DRESS-1 reported `village` and `mountain` as INDETERMINATE while this function
+   * printed them "⛔ INVERTED — this is review I3". The receipt was right and the instrument was
+   * wrong, and the mechanism is exact: both medians land on **`T.field` = `#989c74`,
+   * L = 0.3171** — the FIELD FILL (⚠ not the grain, which is L 0.1572; DRESS-1's own note names
+   * the wrong tone). `0.3171 < 0.3171` is false, so equality fell through to INVERTED.
+   *
+   * ⛔ **THE CONTROL THAT MAKES THIS UNARGUABLE IS THE `town` LEAF ITSELF.** Swept across
+   * resolutions on the same plate set:
+   * ```
+   *            320 px      480 px      640 px      1000 px
+   *   village  1.0000 ⛔   1.0118 ok   1.0092 ok   1.0000 ⛔
+   *   mountain 1.0000 ⛔   1.0118 ok   1.0000 ⛔   1.0000 ⛔
+   *   town     1.0126 ok   1.0125 ok   1.0125 ok   1.0000 ⛔   ← convicts a leaf nobody doubts
+   * ```
+   * The verdict is NOT MONOTONIC in resolution and at 1000 px it convicts the `town`, whose value
+   * census passes 5/5 pairs on 6 of 6 lenses. Every "inversion" is the identical `ratio 1.0000` —
+   * the signature this file's own header already names as *"a measurement of nothing"*, one
+   * spelling later.
+   *
+   * ⚠⚠ **AND THIS CHANGE MOVES A VERDICT IN THE INK'S FAVOUR, WHICH IS DECLARED RATHER THAN
+   * QUIETLY TAKEN.** `TIED` is a kinder reading than `INVERTED`. It is made anyway, and the reason
+   * is independent of who it favours: the predicate demonstrably convicts a correct drawing. A tie
+   * is `UNRESOLVED` — it is neither a pass nor a fail, and it is reported as neither.
+   */
+  const tied = Math.abs(mc - mr) < 1e-9;
+  return { core: mc, ring: mr, ratio, holds: !tied && mc < mr, tied, inkPx: n };
 }
 
 /**
@@ -136,6 +163,7 @@ function hierarchyAt(g, w, h, cx, cy, R) {
 const files = readdirSync(src).filter((f) => f.endsWith('.png'))
   .filter((f) => !only || only.some((k) => f.startsWith(`${k}-`)));
 let red = 0;
+let tied = 0;
 const seen = new Set();
 for (const f of files) {
   const { g, w, h } = await squintGrid(join(src, f), px);
@@ -159,11 +187,11 @@ for (const f of files) {
     } catch (e) { console.log(`${''.padEnd(26)}   truth-centred arm unavailable: ${e.message}`); }
   }
   seen.add(`${v.core}|${v.ring}`);
-  if (!v.holds) red++;
+  if (v.tied) tied++; else if (!v.holds) red++;
   console.log(`${f.replace(/-parchment\.png$/, '').padEnd(26)} ${w}×${h}`
     + `  core ${v.core == null ? 'n/a' : v.core.toFixed(4)}  ring ${v.ring == null ? 'n/a' : v.ring.toFixed(4)}`
     + `  ratio ${v.ratio == null ? 'n/a' : v.ratio.toFixed(4)}  ink ${String(v.inkPx).padStart(5)} px`
-    + `  ${v.holds ? 'HOLDS (core darker)' : '⛔ INVERTED — this is review I3'}`);
+    + `  ${v.holds ? 'HOLDS (core darker)' : (v.tied ? '⚠ TIED — UNRESOLVED, both medians on T.field; neither a pass nor a fail' : '⛔ INVERTED — this is review I3')}`);
 }
 
 // ⛔ THE LIVENESS ARM. Six leaves agreeing to four decimals is what the DEAD first spelling
@@ -186,5 +214,7 @@ console.log(`\nLIVENESS · distinct (core,ring) readings across ${files.length} 
   console.log(`  PLANT · a flat page, no ink     → ${hierarchyOf(flat, N, N).holds ? '⛔ HOLDS (dead)' : 'INVERTED/n-a (convicts)'}`);
 }
 
-console.log(`\nSQUINT ${red ? `⛔ ${red} of ${files.length} leaf/leaves INVERTED` : `the hierarchy holds on all ${files.length} leaves`}`);
+console.log(`\nSQUINT ${red ? `⛔ ${red} of ${files.length} leaf/leaves INVERTED` : `0 of ${files.length} INVERTED`}`
+  + `${tied ? ` · ⚠ ${tied} TIED (UNRESOLVED — both medians on T.field; a tie is not an inversion)` : ''}`
+  + `${!red && !tied ? ` — the hierarchy holds on all ${files.length}` : ''}`);
 process.exitCode = red ? 1 : 0;
