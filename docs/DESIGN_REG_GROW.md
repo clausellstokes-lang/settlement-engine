@@ -260,8 +260,8 @@ plan reads: **GROW-A RESUMES ON THE PARTITION** (its S0 ledger modules + the T2
 constrained-interpolant mint + the seam conversions that survive: §18.4 as ledger
 consumer, compile.js peaks, the frame cartouche); **GROW-B IS DISSOLVED** — origin-
 typed accretion, ring truth, quarter minting and decline replay are SPINE construction
-steps (spine §3b/3d/3f), and the ring/form censuses are spine §6 exits. Exits 1/2/5
-re-home to SPINE-1 where its charter already carries them; the dormancy flag family is
+steps (spine §3b/3d/3f), and the ring/form censuses are spine §6 exits. Exits re-home
+per A2b (superseded here by name: 1 and 5 to SPINE-1, 2 to SPINE-2); the dormancy flag family is
 ONE (`REG_FABRIC_OPTS.partition` — `growReplay` folds into it); §5's performance
 envelope is superseded by the spine's pinned protocol (A1.6). §1's REG-F0 rescope
 aligns to A13.2's statement. The word "partition" in DW-program contexts means the

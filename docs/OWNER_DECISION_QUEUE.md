@@ -28356,3 +28356,22 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   the ESTATE wave's dark posture re-derives against `REG_FABRIC_OPTS.partition`.
   **A focused re-verify runs on the correction set; on ITS green, §675.3's standing
   order takes effect.**
+
+## §678 · THE RE-VERIFY: 30 OF 30 CLOSED — THE LAST TWO REDS WERE THE CHAIR'S OWN, AND THE CURE IS NOW STRUCTURAL (2026-08-26 ~08:35 CDT)
+
+- **§678.1 TWO CORRECTIONS OF RECORD, both the same class:** (i) §677.1 claimed the
+  handoff's arc line annotated — the replace ran UNASSERTED and missed silently;
+  landed for real in `5b43fd6cb` (grep-first, asserted). (ii) The §678 first-attempt
+  script then ABORTED on a wrapped-anchor assert — and the commit ran anyway, so
+  `5b43fd6cb`'s message references an entry the ledger did not yet contain (this
+  entry). **BANKED STRUCTURALLY: every chair patch asserts its anchor, and the
+  ledger commit is `&&`-CHAINED to the patch script's success — a failed act can no
+  longer produce a successful claim.** This block's own commit is the law's first
+  execution. The GROW wording residue is fixed with the correct wrapped anchor.
+- **§678.2 THE RECONCILIATION IS GREEN.** All 30 first-pass reds closed (29 by the
+  re-verifier's quoted walk, the 30th by §678.1i). **§675.3's STANDING ORDER TAKES
+  EFFECT: every future dispatch brief cites §675/§677/§678 and the amended documents;
+  nothing pre-spine is consumed without its amendment.** The §671/§672 reconciliation
+  is COMPLETE: 155 rows ruled · six documents amended and adversarially verified ·
+  eight ledger rulings · and three chair defects caught by the estate's own
+  machinery — which is the machinery working, recorded without flinching.
