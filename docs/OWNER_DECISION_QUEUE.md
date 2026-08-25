@@ -27937,3 +27937,45 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   branch has 2,106 src files; the DISK has 977 — it described the disk, not the
   branch). The §657.2 danger list stands for every session: no default-index commit,
   no add -A, no clean, no checkout-switch from the main checkout.
+
+## §660 · CAR-MEASURES COLLECTS — THE PORT IS AN ATLAS GAP, THE QUAY ARMS REGRESSED THE RIVERS, AND 97 % OF THE DRAWN RIVER IS "DRY" (2026-08-25 ~22:20 CDT)
+
+- **§660.1 THE HONEST EXHIBIT (I1 cured):** 10-arm render proven (8-arm base
+  re-derived byte-identical first); 16 files change, 13 identical. **The re-verdict
+  worsens in both directions:** (i) **city and migration: ZERO delta — the port
+  failure is an ATLAS/ROSTER GAP**: both city leaves carry 110 `cat:` anchors and not
+  one maritime category (no harbour, fishery, shipwright, salt, ferry, customs) — a
+  declared port with seaShare 0.27 has no waterside institution for any quay machinery
+  to serve. No quay-arm work can touch it. **CAR-PORT-ATLAS charters** (catalog
+  content + siting; spine-independent; joins the held set's dispatch order at its
+  front). (ii) **fjord's quayFurniture is an 8×8-px clump inland of the waterline** —
+  I5 stands. (iii) ⛔ **the quay arms REGRESSED the river towns**: moored
+  fishmonger/fish-market bodies render as four heavy parallel bars across the river
+  that read as the legend's own "WATER GATE, BARRED" glyph — town PASS→WEAK-PASS,
+  highwater WEAK-PASS→WEAK. **The §648 quay taste PASS is corrected a THIRD time**
+  (the crop zoom flattered what the page contradicts — §649.3's gestalt order now
+  extends: taste gates judge AT PAGE SCALE first, crops second). The glyph collision
+  is map-code and HELD per §657.2.
+- **§660.2 WAREHOUSE ROUND 3 READY AND SHARPENED:** fixtures re-cut at the CURRENT
+  seal (the shipped set predated both quay arms); extractor C2 controls LIVE; the A/B
+  is itself a finding — the quay arms rescue exactly ONE of four ground-law-wiped
+  quay bodies. The ARMED set is dispatched to a fresh blind reader (this entry).
+- **§660.3 BRIDGEHEAD FIRES — AND REG-4's ZERO HAD ALREADY DECAYED:** under 10 arms,
+  2 faubourg buildings (highwater) + 1 extramural region (crossing) type `bridgehead`;
+  re-run with REG-4's OWN arms the count is 4, not 0 — the recorded zero decayed
+  before REG-BRIDGE existed (the absence law's third direction, biting a RECEIPT
+  figure). REG-4's "every extramural region types road" is refuted with it. The
+  planted-on-deck control DISCHARGES §632.4's owed bridgehead liveness debt.
+- **§660.4 TE-WSEAM RULES — MACHINERY:** corpus agreement inside the drawn river is
+  **2.63 %** — 97.4 % of the area a reader sees as river is scored buildable dry
+  ground (worst highwater 0.27 %); the mirror class (refused-as-water with no water
+  drawn) is measured in the receipt. **J-REG5-3's CORRECTION OF RECORD:** the ratified
+  waterfront exemption clause NEVER FIRES (saves zero of 30,027 bodies) — the quays
+  draw because of an upstream claim-clip effect under a different name; the
+  ratification stands as to EFFECT, its named mechanism was wrong. **RULED NOW
+  (non-gated):** the agreement RATCHET builds (CAR-INSTRUMENTS addendum, this entry)
+  and the exemption's doc scope is corrected at the next map-code touch. **HELD for
+  the spine decision, flagged owner-adjacent:** cure (1) the drawn-channel refusal
+  clause (a new clause costs a 7th path or gate STEP 2) vs cure (2) the
+  marsh-precedent weld (changes every river's drawn shape) — the spine re-founding
+  likely subsumes both, which is exactly why they wait.
