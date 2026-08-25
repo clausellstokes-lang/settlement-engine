@@ -27209,3 +27209,25 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   workspace + the re-round fixtures; the first attempt preserved an EMPTY tree off a
   zsh glob abort and was caught by the count assertion — the §493.6 class, re-bitten
   and re-cured). Two lane-authored memory topic files await the next index-fold pass.
+
+## §636 · THE WAREHOUSE RE-ROUND — VALID, AND THE CLASS HONESTLY FAILS AT 33 % (2026-08-25 ~08:20 CDT)
+
+- **§636.1 THE SCORE** (fresh blind reader, key read after): real fixtures W01/W04/W05/W06,
+  decoys W02/W03. Answers: farmstead · CT · CT · **warehouse** · farmstead · CT.
+  **passFraction 1/3 = 33.3 % against 75 % — FAIL.** cannotTell on real 1/4. Decoy false
+  positives **0/2 — the round is VALID** (the first round's two decoy FPs are gone with
+  the fixture cure). §628.1's status updates a second time: UNPROVEN-BY-DEFECTIVE-FIXTURE
+  → **MEASURED FAIL**; the five-class 81.8 % PASS stands untouched beside it.
+- **§636.2 THE DIAGNOSIS IS IN THE READER'S OWN NOTES:** the one correct call (W04) was
+  carried by SITE FURNITURE — "bollard/barrel circles ranged along the shed's road face,"
+  a hoist blob, a loading way with a turning head. The two misses read as FARMSTEADS: a
+  riverside L-range with outbuildings and a track is a farm unless the water's edge says
+  QUAY. Footprint-plus-yard-plus-context carried every correct-feeling call; bare
+  silhouette carried none — which is the family-grammar law (A3) telling us the quay
+  family's SLOTS are empty. **RULED: V-QUAY MINTS** (chair's, vetoable, corpus-refined):
+  a closed quay-furniture vocabulary — bollard row (one fixture per row) · hoist/crane ·
+  pier-deck edge · stacked-goods/barrels — at a provisional band of **2–5 fixtures per
+  drawn quay** at page register, built on REG-4's furnishing machinery. **Home = REG-5's
+  REG-QUAY deliverable** (mid-flight addendum — same module ground, same census); the
+  lane binds to the detail register's waterfront anchors where they exist and reports
+  THIN where they do not. A THIRD warehouse round follows REG-5's seal.
