@@ -28149,3 +28149,19 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   the honest PARTIAL on the devlog word-sweep (died with the lane; nothing in the
   decision depends on it). The §656.3 charter is thereby DISCHARGED on its re-scoped
   terms. Still awaiting: THE OWNER'S SPINE ANSWER.
+
+## §669 · THE OWNER SAYS GO — THE SPINE IS RELEASED (2026-08-26, owner's word verbatim: "Go")
+
+- **§669.1** The §654 stop CONVERTS into the SPINE plan (SPINE_DECISION_2026-08-26.md
+  §5) as the released arc, per the owner's confirmations sought in §7 of that doc and
+  the coherence assurance given (organic growth, dossier truth, THE PROMISE, every
+  visual law — the fit stated goal-by-goal on the record before the word). The cutover
+  and every push remain the owner's, unchanged. The §668 clean-room discipline binds
+  every spine hand: observation-derived spec only, no GPL code read or ported.
+- **§669.2 THE RELEASED SEQUENCE:** SPINE-ARCH (chair, now) → five-skeptic panel →
+  SPINE-1 (partition + construction + view skeleton, dormant-flagged) → SPINE-2
+  (water/crossings/quays + A6.1 emission) → REG-GROW-A resumes on the partition →
+  the dress re-base (the REG-6 paint rebuild absorbing the surviving held cars) →
+  registers/zoom → judging → decline → film → the port. Exits and proofs per the
+  decision doc; every wave sealed, every zero controlled, gestalt-first taste gates
+  with the owner's eyes as final judge.
