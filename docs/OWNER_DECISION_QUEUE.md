@@ -27606,3 +27606,45 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   DESIGN_REG_GROW.md + A1 at dispatch (nothing to pre-compile); the audit register and
   contest JSONs are preserved at `session-work-2026-08-25` and their rulings ARE the
   compile (§§639–641). Nothing else known-uncompiled remains.
+
+## §648 · REG-BRIDGE SEALS — THE RIVER TAPERS, THE DECKS LAND, AND THE FORD WAS THE BRIDGE ALL ALONG (2026-08-25 ~16:20 CDT)
+
+- **§648.1 SEALED** at `refs/preserve/map-sandbox-bridge-rivers` = `9de729021` (seal ran
+  first; this entry commits under --require-ref). Exits all CONFIRMED: angle **18/18**
+  in ±15° · endpoint clearance **18/18 dry both ends** · excess 18/18 ≤ 1.086 · siting
+  18/18 at admissible narrows · profile liveness 9/9 river leaves at spread
+  **1.909–2.100** (vs 1.06 meander-only) · dormancy 29/29 at the committed tip ·
+  walkers 318/318 · zero new test files · every op AND byte ceiling holds — the wave is
+  a NET SAVING (−26,053 B, −1,332 primitives). TASTE: **DECK PASS** (abutted spans,
+  square crossing, the taper visible). **FORD GLYPH HELD** — the lane's own THIN flag
+  confirmed by eye (an unanchored blob-chain); the ARM seals dormant-provable, the
+  GLYPH re-cuts once in REG-6's dress pass bound to period convention (road narrows
+  through the water + transverse ripple dashes; no ring, no dot-chain).
+- **§648.2 RULINGS:** **J-BR-7 RATIFIED** — the kink budget re-derived at 75° (the 35°
+  value INVERTED L-REG-31: it traded the deck's squareness for the road's convenience;
+  the law says the deck wins and the road bends; the sweep's non-monotone curve is the
+  receipt's proof it had to be derived, not chosen). **The taper design RATIFIED AND
+  PRAISED**: the profile is READ from the heightfield's discharge accumulation (running
+  maximum downstream), never hash-minted — a hash taper would be an invented
+  seed-permanent fact; a read taper is ground truth expressing itself (§643.2's
+  no-invented-history law, applied by the lane unprompted). **CONSTANTS SIGNED (chair,
+  vetoable): `taper 0.34` · `pinch 0.22`** — SIGNED_CONSTANTS.md updated in this act.
+  **THE FORD/BRIDGE IDENTITY BANKED**: all 17 ford records sit at distance 0.00 on the
+  bridges' own channels — a ford and a bridge are two readings of ONE crossing; 15 are
+  lawfully exempt as already decked, 2 draw, and the leaf that shows a ford is
+  `town-2`, the riverside town that never earned a bridge — §637.2's legibility gift
+  arriving by itself.
+- **§648.3 CORRECTIONS + COUPLING:** **§641.5's carto:bridge premise is REFUTED and
+  corrected** — the id never leaves its own producer and NO carto:bridge feature has
+  ever been drawn; the family users actually see is a THIRD one
+  (`buildSceneWaterInfrastructure`, which already derives deck from river width).
+  DISPOSITION ACCEPTED: carto:bridge dies at the cutover, disposition banked.
+  **The §641.4 coupling law GENERALIZES: a new ARM owes a byte re-measure** — this wave
+  moved the town byte tier-setter (margin 4,638 → 1,859 B, nothing over); the ceilings
+  stand. **The road-over-water layering defect** (streets stage 11 draw over the
+  watercourse from 6a, capping how much any bridge reads as a bridge — visible in the
+  taste crop) is pre-existing, recorded not grabbed, and ASSIGNED TO REG-6 beside the
+  ford re-cut. Three instrument-defect classes banked from the receipt (a ratio over
+  two definitions of one wet set · a denominator that vanishes at the accept
+  configuration · an identity resolved after a move). **REG-GROW-A DISPATCHES NOW** on
+  this seal (arc §639.3/A12.3).

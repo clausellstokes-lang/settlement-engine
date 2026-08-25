@@ -28,7 +28,8 @@ table IS the declaration).**
 | metropolis | 830,000 | metropolis/watercolor |
 
 U = 10,000 bytes. ⛔ THE COUPLING LAW: an op-ceiling raise owes a byte re-measure in
-the same act. ⛔ Mint from the ARMED arm only. Pin `Buffer.byteLength`, never
+the same act — GENERALIZED §648.3: a NEW ARM owes one too (the town tier-setter moved
+polycentric→crossing, margin 4,638→1,859 B, under a standing ceiling). ⛔ Mint from the ARMED arm only. Pin `Buffer.byteLength`, never
 `.length`; the ratchet renders the six lenses, never reads the artifact directory.
 At town+ the byte gate binds FIRST (that is what BYTES-primary means — §641.4 signed
 deliberately). No time gate (wall-clock spread is noise, §635.3).
@@ -44,6 +45,9 @@ deliberately). No time gate (wall-clock spread is noise, §635.3).
 | L-REG-31 bridge-angle band | ±15° of the local normal (provisional; measured refinement allowed) | §635.5 |
 | Bridge corridor half-length | C = 3 × median block dimension (sweep-proven insensitive) | §641.2 / J-REG5-BR-1 |
 | Bridge conformance predicate | excess = crossed ÷ shortest: conforming ≤ 1.086 · defect ≥ 1.302 | §641.5 |
+| River profile: `taper` | 0.34 (accumulation amplitude; profile READ from the heightfield, never hash-minted) | §648.2 |
+| River profile: `pinch` | 0.22 (confined-valley narrowing; deliberately under `taper` so a narrows is a local event) | §648.2 |
+| Bridge kink budget | 75° (refuses only a road doubling back — J-BR-7; 35° inverted the law) | §648.2 |
 | Countryside coverage band (village tier) | 85 % ± 10 points | A2.2 (chair's number, vetoable) |
 | Silhouette blind-read target | ≥ 75 % passFraction, decoy-FP as validity gate | §622.2 |
 | Trajectory THIN band | < 3 % of applicable seeds per shape | REG-T charter (chair) |
@@ -53,7 +57,7 @@ deliberately). No time gate (wall-clock spread is noise, §635.3).
 | constant | blocked on | home |
 |---|---|---|
 | L-REG-33 acres-per-capita (subsistence tiers) | fetched-CONFIRMED source or owner signature (Elton anchor is the candidate) | REG-H |
-| River-profile taper constants | REG-BRIDGE's proposal (in flight) — chair signs on its receipt | REG-BRIDGE |
+
 | Intramural saturation threshold | REG-GROW-A's measure | REG-GROW |
 | T2 trajectory-curve parameters | REG-GROW-A mint; OWNER signs at the tuning pass (a §643.2 constrained interpolant, never an author) | REG-GROW / tuning |
 | Terracing gradient figures | R-MORPH §4 internally inconsistent — left unminted by the dossier's own flag | REG-TERR |
