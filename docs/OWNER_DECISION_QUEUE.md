@@ -28435,3 +28435,43 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   proposed values as PROVISIONAL-NOT-YET-IN-BAND** (SIGNED_CONSTANTS row added);
   the tightening — per-ward thresholds measured toward the 1.71 invariant — is
   SPINE-2's, and the owner re-signs at tuning. **SPINE-2 DISPATCHES** on this seal.
+
+## §681 · SPINE-2 SEALS AT 18/18 — THE QUANTUM CURED WITH A CORRECTION, AND THE BAND REFUSAL RATIFIED (2026-08-26 ~11:00 CDT)
+
+- **§681.1 SEALED** at `refs/preserve/map-sandbox-spine2-water` = `3542e5a65` (seal
+  before declaration; this entry commits under --require-ref). Gate **376/376** ·
+  walkers 74/74 · manifest 69/69+93/93 · dormancy 29/29 · determinism 29/29 armed ·
+  metropolis constructor **340.5 ms** — all re-proven AT the committed tip. Water is
+  ground (WATER faces on BANK edges via a split-only primitive that structurally
+  CANNOT hold a river wrong — two opposite refusals prove it), crossings typed, quays
+  moored as lawful faces, decline's two clocks as two functions that cannot see each
+  other's input, A2.3's three rules built (gates 1–6 → 3–19 per leaf), A6.1 on every
+  new family, 8 planted controls live.
+- **§681.2 THE E1 CURE — WITH A CORRECTION OF SPINE-1's RECORD:** the vertex was NOT
+  "exactly on" the older edge — exact integer arithmetic puts it **0.132 quanta off**
+  (the prescribed exact on-segment test was built FIRST and measured returning zero
+  while the crossings stood — the §638-class discipline applied to our own receipt).
+  The true cure: the half-quantum SNAP BOUND enforced at mint over an append-only
+  spatial index, swept 0.2/0.35/0.5/1.0 and pinned on a flat at 1 quantum (declared
+  cost: the town wrap moves 25 facets and 3 gates). **RATIFIED.** Four self-caught
+  defects banked — sharpest: a centreline-smoothed bank drifted 0.28–17.15 u from its
+  channel (**the TE-WSEAM two-truths class REBUILT in new code and caught by the
+  ratchet discipline**), and a SPINE-1 planted control had died and was still
+  printing (re-pointed — the liveness law biting its own machinery).
+- **§681.3 THE BAND RULING — THE LANE'S REFUSAL RATIFIED AND SIGNED:** instructed to
+  tighten constants toward p75/p25 ≈ 1.71, the lane DERIVED that the gap-bar's ratio
+  is structurally capped at 1.74 — the observed 1.94–5.42 spread cannot come from the
+  constants — and MEASURED the true driver: construction **refusals per plot**
+  (r = 0.874). Tuning constants would have made the numbers look right while the
+  cause stood. **SIGNED: the band lever RE-NAMES to refusals/plot with target
+  ≤ 0.255** (delivers 1.71; the metropolis sits at 0.302/1.94); SIGNED_CONSTANTS
+  updated; **the refusal-reduction work is ASSIGNED TO GROW-A's RESUME** (refusals
+  arise in construction — the resume owns the constructor next), with the band census
+  watching and the owner re-signing at tuning.
+- **§681.4 THINS ASSIGNED:** the fjord's +15.6 % (3,189 ms — the predicted
+  `chordInFace` bbox pre-filter) rides GROW-A's resume as an opening perf act; the
+  `riverProfile` arm is DORMANT in the exemplar runs (every station 16.71) so the
+  narrows/ford discrimination is built-but-unexercisable — **standing order: every
+  future armed run includes `--river`** (the full-arm law, the §660 I1 lesson made
+  permanent). **GROW-A RESUMES NOW** on this seal, mid-lane per §448 from its own
+  resume block.

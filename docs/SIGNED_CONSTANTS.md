@@ -56,7 +56,7 @@ deliberately). No time gate (wall-clock spread is noise, §635.3).
 ## PROVISIONAL — SIGNED BUT NOT YET IN BAND (§680.3)
 | constant | state | source |
 |---|---|---|
-| Stop-rule subdivision: per-ward halt thresholds + gap bar | lane-proposed values signed PROVISIONAL; measured spread 1.38–5.91 p75/p25 (20–35 % in band) vs the reference invariant ≈ 1.71 — TIGHTENING IS SPINE-2's; owner re-signs at tuning | §680.3 / SPINE A2.1 |
+| Stop-rule subdivision: per-ward halt thresholds + gap bar | values stand; SPINE-2 DERIVED the gap-bar ratio structurally capped at 1.74 — the spread's driver is CONSTRUCTION REFUSALS PER PLOT (r=0.874). **The lever re-names: refusals/plot ≤ 0.255 (delivers the 1.71 invariant)** — reduction assigned to GROW-A's resume; owner re-signs at tuning | §681.3 |
 
 ## UNMINTED-PENDING (named so nothing silently defaults)
 | constant | blocked on | home |
