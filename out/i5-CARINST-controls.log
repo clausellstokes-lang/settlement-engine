@@ -1,0 +1,42 @@
+
+── AFTER-city
+   contrast.street:ground   measured=2.7582   declared=4.675    Δ=-1.9169   PASS (floor >= 2.1)
+   contrast.wall:all        measured=4.9379   declared=8.3016   Δ=-3.3638   PASS (floor >= 3)
+   contrast.water:ground    measured=1.7892   declared=1.6416   Δ=0.1475    PASS (floor >= 1.35)
+   PLATE: PASS
+
+── BEFORE-city
+   contrast.street:ground   measured=1.8818   declared=4.675    Δ=-2.7932   FAIL (floor >= 2.1)
+   contrast.wall:all        measured=7.2925   declared=8.3016   Δ=-1.0092   PASS (floor >= 3)
+   contrast.water:ground    measured=1.3168   declared=1.6416   Δ=-0.3249   FAIL (floor >= 1.35)
+   PLATE: FAIL
+
+── CTRL-flat-street
+   contrast.street:ground   measured=1.1802   declared=4.675    Δ=-3.4948   FAIL (floor >= 2.1)
+   contrast.wall:all        measured=6.3997   declared=8.3016   Δ=-1.9019   PASS (floor >= 3)
+   contrast.water:ground    measured=1.3308   declared=1.6416   Δ=-0.3108   FAIL (floor >= 1.35)
+   PLATE: FAIL
+
+── CTRL-flat-wall
+   contrast.street:ground   measured=1.9237   declared=4.675    Δ=-2.7513   FAIL (floor >= 2.1)
+   contrast.wall:all        measured=1.4547   declared=8.3016   Δ=-6.847    FAIL (floor >= 3)
+   contrast.water:ground    measured=1.327    declared=1.6416   Δ=-0.3147   FAIL (floor >= 1.35)
+   PLATE: FAIL
+
+── CTRL-grey-water
+   contrast.street:ground   measured=1.8818   declared=4.675    Δ=-2.7933   FAIL (floor >= 2.1)
+   contrast.wall:all        measured=7.269    declared=8.3016   Δ=-1.0326   PASS (floor >= 3)
+   contrast.water:ground    measured=1.2985   declared=1.6416   Δ=-0.3431   FAIL (floor >= 1.35)
+   PLATE: FAIL
+
+── LIVENESS
+   ok     flat-street drives street:ground below floor
+   ok     flat-street leaves wall:all above floor
+   ok     flat-wall drives wall:all below floor
+   ok     flat-wall leaves street:ground where it was
+   ok     grey-water leaves the VALUE pair essentially unmoved (it is a HUE break — i7 catches it)
+   ok     the water value floor has a real failing plate (BEFORE-city)
+   ok     the charter's polarity holds here: BEFORE fails, AFTER passes
+   ok     every row reports the declared-vs-measured gap
+
+I5_CONTROLS LIVE

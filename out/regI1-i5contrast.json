@@ -1,0 +1,580 @@
+{
+  "lane": "TE-REG-I1",
+  "subject": "i5 role-pair contrast, BASE (unarmed) vs ALL FIVE WAVE FLAGS ARMED, both at the REG-4 seal 7fba086d5",
+  "protocol": "each arm reads ITS OWN svg (masks) and ITS OWN png (colour); exact filenames, no globs",
+  "squareRoleNote": "the `square` element census is a DIAGNOSTIC with no floor — i5 has no square pair and none has been signed",
+  "rows": [
+    {
+      "leaf": "town",
+      "tier": "town",
+      "base": {
+        "grid": "1100x1100",
+        "maskN": 2200,
+        "rows": [
+          {
+            "instrument": "contrast.street:ground",
+            "value": 1.7529,
+            "denominator": "WCAG-adjusted luminance of the darker role (ground); 112225 street px vs 219338 ground px at 1100×1100",
+            "band": ">= 2.1",
+            "pass": false,
+            "measuredRatio": 1.7529,
+            "declaredByLensContrast": 4.675,
+            "delta": -2.9222,
+            "streetRGB": [
+              219,
+              210,
+              190
+            ],
+            "groundRGB": [
+              171,
+              158,
+              136
+            ],
+            "streetPx": 112225,
+            "groundPx": 219338,
+            "applicable": true,
+            "status": "MEASURED"
+          },
+          {
+            "instrument": "contrast.wall:all",
+            "value": 7.7536,
+            "denominator": "WCAG-adjusted luminance of the darker role (all); 6884 wall px vs 1210000 all px at 1100×1100",
+            "band": ">= 3",
+            "pass": true,
+            "measuredRatio": 7.7536,
+            "declaredByLensContrast": 8.3016,
+            "delta": -0.5481,
+            "wallRGB": [
+              49,
+              40,
+              29
+            ],
+            "allRGB": [
+              198,
+              189,
+              163
+            ],
+            "wallPx": 6884,
+            "allPx": 1210000,
+            "applicable": true,
+            "status": "MEASURED"
+          },
+          {
+            "instrument": "contrast.water:ground",
+            "value": 1.5164,
+            "denominator": "WCAG-adjusted luminance of the darker role (ground); 60 water px vs 219338 ground px at 1100×1100",
+            "band": ">= 1.35",
+            "pass": true,
+            "measuredRatio": 1.5164,
+            "declaredByLensContrast": 1.6416,
+            "delta": -0.1252,
+            "waterRGB": [
+              203,
+              197,
+              173
+            ],
+            "groundRGB": [
+              171,
+              158,
+              136
+            ],
+            "waterPx": 60,
+            "groundPx": 219338,
+            "applicable": true,
+            "status": "MEASURED"
+          }
+        ],
+        "applicableArms": 3,
+        "notApplicable": [],
+        "pass": false
+      },
+      "armed": {
+        "grid": "1100x1100",
+        "maskN": 2200,
+        "rows": [
+          {
+            "instrument": "contrast.street:ground",
+            "value": 1.8548,
+            "denominator": "WCAG-adjusted luminance of the darker role (ground); 112125 street px vs 215098 ground px at 1100×1100",
+            "band": ">= 2.1",
+            "pass": false,
+            "measuredRatio": 1.8548,
+            "declaredByLensContrast": 4.675,
+            "delta": -2.8203,
+            "streetRGB": [
+              224,
+              215,
+              194
+            ],
+            "groundRGB": [
+              171,
+              157,
+              135
+            ],
+            "streetPx": 112125,
+            "groundPx": 215098,
+            "applicable": true,
+            "status": "MEASURED"
+          },
+          {
+            "instrument": "contrast.wall:all",
+            "value": 4.2681,
+            "denominator": "WCAG-adjusted luminance of the darker role (all); 6028 wall px vs 1210000 all px at 1100×1100",
+            "band": ">= 3",
+            "pass": true,
+            "measuredRatio": 4.2681,
+            "declaredByLensContrast": 8.3016,
+            "delta": -4.0336,
+            "wallRGB": [
+              89,
+              79,
+              65
+            ],
+            "allRGB": [
+              198,
+              189,
+              162
+            ],
+            "wallPx": 6028,
+            "allPx": 1210000,
+            "applicable": true,
+            "status": "MEASURED"
+          },
+          {
+            "instrument": "contrast.water:ground",
+            "value": 1.5291,
+            "denominator": "WCAG-adjusted luminance of the darker role (ground); 60 water px vs 215098 ground px at 1100×1100",
+            "band": ">= 1.35",
+            "pass": true,
+            "measuredRatio": 1.5291,
+            "declaredByLensContrast": 1.6416,
+            "delta": -0.1125,
+            "waterRGB": [
+              203,
+              197,
+              173
+            ],
+            "groundRGB": [
+              171,
+              157,
+              135
+            ],
+            "waterPx": 60,
+            "groundPx": 215098,
+            "applicable": true,
+            "status": "MEASURED"
+          }
+        ],
+        "applicableArms": 3,
+        "notApplicable": [],
+        "pass": false
+      },
+      "censusBase": {
+        "text": 68,
+        "paper": 1,
+        "ground": 15,
+        "detail": 28,
+        "field": 6,
+        "street": 9,
+        "water": 1,
+        "chrome": 28,
+        "square": 1,
+        "yard": 1,
+        "building": 76,
+        "blockfront": 1,
+        "landmark": 114,
+        "wall": 5
+      },
+      "censusArmed": {
+        "text": 61,
+        "paper": 1,
+        "ground": 20,
+        "detail": 41,
+        "field": 6,
+        "street": 9,
+        "water": 1,
+        "chrome": 123,
+        "square": 1,
+        "yard": 1,
+        "building": 77,
+        "blockfront": 1,
+        "wall": 8,
+        "landmark": 165
+      }
+    },
+    {
+      "leaf": "city",
+      "tier": "city",
+      "base": {
+        "grid": "1100x1100",
+        "maskN": 2200,
+        "rows": [
+          {
+            "instrument": "contrast.street:ground",
+            "value": 1.8818,
+            "denominator": "WCAG-adjusted luminance of the darker role (ground); 196902 street px vs 338007 ground px at 1100×1100",
+            "band": ">= 2.1",
+            "pass": false,
+            "measuredRatio": 1.8818,
+            "declaredByLensContrast": 4.675,
+            "delta": -2.7932,
+            "streetRGB": [
+              217,
+              208,
+              188
+            ],
+            "groundRGB": [
+              166,
+              150,
+              125
+            ],
+            "streetPx": 196902,
+            "groundPx": 338007,
+            "applicable": true,
+            "status": "MEASURED"
+          },
+          {
+            "instrument": "contrast.wall:all",
+            "value": 7.2925,
+            "denominator": "WCAG-adjusted luminance of the darker role (all); 8178 wall px vs 1210000 all px at 1100×1100",
+            "band": ">= 3",
+            "pass": true,
+            "measuredRatio": 7.2925,
+            "declaredByLensContrast": 8.3016,
+            "delta": -1.0092,
+            "wallRGB": [
+              47,
+              37,
+              27
+            ],
+            "allRGB": [
+              189,
+              181,
+              160
+            ],
+            "wallPx": 8178,
+            "allPx": 1210000,
+            "applicable": true,
+            "status": "MEASURED"
+          },
+          {
+            "instrument": "contrast.water:ground",
+            "value": 1.3168,
+            "denominator": "WCAG-adjusted luminance of the darker role (ground); 302960 water px vs 338007 ground px at 1100×1100",
+            "band": ">= 1.35",
+            "pass": false,
+            "measuredRatio": 1.3168,
+            "declaredByLensContrast": 1.6416,
+            "delta": -0.3249,
+            "waterRGB": [
+              174,
+              176,
+              168
+            ],
+            "groundRGB": [
+              166,
+              150,
+              125
+            ],
+            "waterPx": 302960,
+            "groundPx": 338007,
+            "applicable": true,
+            "status": "MEASURED"
+          }
+        ],
+        "applicableArms": 3,
+        "notApplicable": [],
+        "pass": false
+      },
+      "armed": {
+        "grid": "1100x1100",
+        "maskN": 2200,
+        "rows": [
+          {
+            "instrument": "contrast.street:ground",
+            "value": 1.727,
+            "denominator": "WCAG-adjusted luminance of the darker role (ground); 196822 street px vs 335914 ground px at 1100×1100",
+            "band": ">= 2.1",
+            "pass": false,
+            "measuredRatio": 1.727,
+            "declaredByLensContrast": 4.675,
+            "delta": -2.9481,
+            "streetRGB": [
+              219,
+              211,
+              188
+            ],
+            "groundRGB": [
+              174,
+              159,
+              133
+            ],
+            "streetPx": 196822,
+            "groundPx": 335914,
+            "applicable": true,
+            "status": "MEASURED"
+          },
+          {
+            "instrument": "contrast.wall:all",
+            "value": 4.6529,
+            "denominator": "WCAG-adjusted luminance of the darker role (all); 6662 wall px vs 1210000 all px at 1100×1100",
+            "band": ">= 3",
+            "pass": true,
+            "measuredRatio": 4.6529,
+            "declaredByLensContrast": 8.3016,
+            "delta": -3.6488,
+            "wallRGB": [
+              79,
+              70,
+              56
+            ],
+            "allRGB": [
+              191,
+              183,
+              162
+            ],
+            "wallPx": 6662,
+            "allPx": 1210000,
+            "applicable": true,
+            "status": "MEASURED"
+          },
+          {
+            "instrument": "contrast.water:ground",
+            "value": 1.1246,
+            "denominator": "WCAG-adjusted luminance of the darker role (ground); 303216 water px vs 335914 ground px at 1100×1100",
+            "band": ">= 1.35",
+            "pass": false,
+            "measuredRatio": 1.1246,
+            "declaredByLensContrast": 1.6416,
+            "delta": -0.5171,
+            "waterRGB": [
+              168,
+              172,
+              166
+            ],
+            "groundRGB": [
+              174,
+              159,
+              133
+            ],
+            "waterPx": 303216,
+            "groundPx": 335914,
+            "applicable": true,
+            "status": "MEASURED"
+          }
+        ],
+        "applicableArms": 3,
+        "notApplicable": [],
+        "pass": false
+      },
+      "censusBase": {
+        "text": 84,
+        "paper": 1,
+        "ground": 15,
+        "detail": 25,
+        "field": 6,
+        "street": 10,
+        "water": 3,
+        "chrome": 34,
+        "square": 1,
+        "yard": 1,
+        "building": 175,
+        "blockfront": 1,
+        "landmark": 94,
+        "wall": 7
+      },
+      "censusArmed": {
+        "text": 78,
+        "paper": 1,
+        "ground": 22,
+        "detail": 40,
+        "field": 6,
+        "street": 10,
+        "water": 3,
+        "chrome": 37,
+        "square": 1,
+        "yard": 1,
+        "building": 169,
+        "blockfront": 1,
+        "wall": 12,
+        "landmark": 133
+      }
+    },
+    {
+      "leaf": "village",
+      "tier": "village",
+      "base": {
+        "grid": "1100x1100",
+        "maskN": 2200,
+        "rows": [
+          {
+            "instrument": "contrast.street:ground",
+            "value": 1.9003,
+            "denominator": "WCAG-adjusted luminance of the darker role (ground); 83306 street px vs 39372 ground px at 1100×1100",
+            "band": ">= 2.1",
+            "pass": false,
+            "measuredRatio": 1.9003,
+            "declaredByLensContrast": 4.675,
+            "delta": -2.7748,
+            "streetRGB": [
+              220,
+              211,
+              190
+            ],
+            "groundRGB": [
+              164,
+              152,
+              129
+            ],
+            "streetPx": 83306,
+            "groundPx": 39372,
+            "applicable": true,
+            "status": "MEASURED"
+          },
+          {
+            "instrument": "contrast.wall:all",
+            "value": null,
+            "denominator": "0 wall px vs 1210000 all px",
+            "band": ">= 3",
+            "pass": null,
+            "applicable": false,
+            "status": "NOT APPLICABLE — this leaf draws no wall"
+          },
+          {
+            "instrument": "contrast.water:ground",
+            "value": null,
+            "denominator": "0 water px vs 39372 ground px",
+            "band": ">= 1.35",
+            "pass": null,
+            "applicable": false,
+            "status": "NOT APPLICABLE — this leaf draws no water"
+          }
+        ],
+        "applicableArms": 1,
+        "notApplicable": [
+          "contrast.wall:all",
+          "contrast.water:ground"
+        ],
+        "pass": false
+      },
+      "armed": {
+        "grid": "1100x1100",
+        "maskN": 2200,
+        "rows": [
+          {
+            "instrument": "contrast.street:ground",
+            "value": 1.964,
+            "denominator": "WCAG-adjusted luminance of the darker role (ground); 83306 street px vs 36947 ground px at 1100×1100",
+            "band": ">= 2.1",
+            "pass": false,
+            "measuredRatio": 1.964,
+            "declaredByLensContrast": 4.675,
+            "delta": -2.711,
+            "streetRGB": [
+              221,
+              213,
+              192
+            ],
+            "groundRGB": [
+              163,
+              151,
+              128
+            ],
+            "streetPx": 83306,
+            "groundPx": 36947,
+            "applicable": true,
+            "status": "MEASURED"
+          },
+          {
+            "instrument": "contrast.wall:all",
+            "value": null,
+            "denominator": "0 wall px vs 1210000 all px",
+            "band": ">= 3",
+            "pass": null,
+            "applicable": false,
+            "status": "NOT APPLICABLE — this leaf draws no wall"
+          },
+          {
+            "instrument": "contrast.water:ground",
+            "value": null,
+            "denominator": "0 water px vs 36947 ground px",
+            "band": ">= 1.35",
+            "pass": null,
+            "applicable": false,
+            "status": "NOT APPLICABLE — this leaf draws no water"
+          }
+        ],
+        "applicableArms": 1,
+        "notApplicable": [
+          "contrast.wall:all",
+          "contrast.water:ground"
+        ],
+        "pass": false
+      },
+      "censusBase": {
+        "text": 51,
+        "paper": 1,
+        "ground": 8,
+        "detail": 22,
+        "field": 6,
+        "street": 8,
+        "chrome": 22,
+        "square": 1,
+        "yard": 1,
+        "building": 46,
+        "blockfront": 1,
+        "landmark": 22
+      },
+      "censusArmed": {
+        "text": 51,
+        "paper": 1,
+        "ground": 11,
+        "detail": 29,
+        "field": 6,
+        "street": 8,
+        "chrome": 67,
+        "square": 1,
+        "yard": 1,
+        "building": 32,
+        "blockfront": 1,
+        "landmark": 19
+      }
+    }
+  ],
+  "regressions": [],
+  "squareShifts": [
+    {
+      "leaf": "town",
+      "square": {
+        "base": 1,
+        "armed": 1
+      },
+      "detail": {
+        "base": 28,
+        "armed": 41
+      }
+    },
+    {
+      "leaf": "city",
+      "square": {
+        "base": 1,
+        "armed": 1
+      },
+      "detail": {
+        "base": 25,
+        "armed": 40
+      }
+    },
+    {
+      "leaf": "village",
+      "square": {
+        "base": 1,
+        "armed": 1
+      },
+      "detail": {
+        "base": 22,
+        "armed": 29
+      }
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "grid": [
+    {
+      "reachMult": 0.5,
+      "bandDeg": 10,
+      "c1": 237,
+      "c2": 231
+    },
+    {
+      "reachMult": 0.5,
+      "bandDeg": 15,
+      "c1": 237,
+      "c2": 218
+    },
+    {
+      "reachMult": 0.5,
+      "bandDeg": 20,
+      "c1": 237,
+      "c2": 195
+    },
+    {
+      "reachMult": 0.5,
+      "bandDeg": 30,
+      "c1": 237,
+      "c2": 139
+    },
+    {
+      "reachMult": 1,
+      "bandDeg": 10,
+      "c1": 237,
+      "c2": 743
+    },
+    {
+      "reachMult": 1,
+      "bandDeg": 15,
+      "c1": 237,
+      "c2": 688
+    },
+    {
+      "reachMult": 1,
+      "bandDeg": 20,
+      "c1": 237,
+      "c2": 623
+    },
+    {
+      "reachMult": 1,
+      "bandDeg": 30,
+      "c1": 237,
+      "c2": 486
+    },
+    {
+      "reachMult": 1.5,
+      "bandDeg": 10,
+      "c1": 237,
+      "c2": 1372
+    },
+    {
+      "reachMult": 1.5,
+      "bandDeg": 15,
+      "c1": 237,
+      "c2": 1279
+    },
+    {
+      "reachMult": 1.5,
+      "bandDeg": 20,
+      "c1": 237,
+      "c2": 1162
+    },
+    {
+      "reachMult": 1.5,
+      "bandDeg": 30,
+      "c1": 237,
+      "c2": 896
+    },
+    {
+      "reachMult": 2,
+      "bandDeg": 10,
+      "c1": 237,
+      "c2": 1979
+    },
+    {
+      "reachMult": 2,
+      "bandDeg": 15,
+      "c1": 237,
+      "c2": 1853
+    },
+    {
+      "reachMult": 2,
+      "bandDeg": 20,
+      "c1": 237,
+      "c2": 1701
+    },
+    {
+      "reachMult": 2,
+      "bandDeg": 30,
+      "c1": 237,
+      "c2": 1338
+    }
+  ],
+  "leaves": [
+    "thorp",
+    "hamlet",
+    "village",
+    "town",
+    "town-2",
+    "city",
+    "metropolis",
+    "polycentric",
+    "highwater",
+    "mountain",
+    "fjord",
+    "siege",
+    "plague",
+    "famine",
+    "migration",
+    "year-018",
+    "year-100",
+    "crossing"
+  ]
+}

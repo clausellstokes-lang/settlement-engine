@@ -1,0 +1,20 @@
+P0 baseline (town-2/main)  withinReach=234  C1 crossing=35  C2 violations=138  (lawfulA=32 lawfulB=15 exempt=14)
+   thresholds: reach=18.6646 (2.6978 frontages)  clearIn=10.1011  clearOut=13.5604  plotDepth=5.1042  frontage=6.9186
+P1 body laid ACROSS the line   C1 crossing=36 (baseline 35)
+P2 PERPENDICULAR in the clear zone  C2 violations=139 (baseline 138)  planted-body verdict=VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL  d=5.0505 Δ=90
+P3 the SAME body turned TANGENTIAL  C2 violations=138 (baseline 138)  lawfulA=33 (baseline 32)  planted-body verdict=LAWFUL_A_TANGENTIAL Δ=0
+P4 perpendicular FAR outside reach  C1=35 C2 violations=138 withinReach=234 (baseline 234)
+P5 axis derivation   a 20×4 rect at 0.3 rad → ang=0.3 aspect=5  |  turned 90° → Δ=90°
+P6 stretch coupling   victim org.district.mages_quarter/p.11.2.0 (d=13.2706, seg 13) was LAWFUL_B_CLEAR → now VIOLATION_STRETCH_NOT_CLEAR   lawfulB 15→14, violations 138→139
+
+── LIVENESS · a zero is what a DEAD instrument returns (§645.2: "zeros valid only with a planted-violation control")
+   ok     P1 C1 counts a footprint laid across the wall, exactly one more
+   ok     P2 C2 convicts a perpendicular body standing in the clear zone, with the clear-zone verdict
+   ok     P3 the instrument ACQUITS the same body turned tangential (limb A is real, not a rubber stamp)
+   ok     P4 a body beyond REACH changes nothing — the census is bounded, not indiscriminate
+   ok     P5 bodyAxis recovers a known long axis (±0.5°) and its aspect
+   ok     P5 bodyAxis separates two rectangles turned 90° apart
+   ok     P5 a SQUARE is reported as having no usable axis (aspect < the exemption floor)
+   ok     P6 limb B is a property of the STRETCH — an intruder in the clear zone convicts an acquitted neighbour on that stretch
+
+I12_CONTROLS LIVE

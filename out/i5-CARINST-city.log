@@ -1,0 +1,84 @@
+{
+  "base": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/review654/ti-logs/render-all-1/city-city-parchment.svg",
+  "png": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/review654/ti-logs/i5-city-armed.png",
+  "grid": "1100x1100",
+  "maskN": 2200,
+  "rows": [
+    {
+      "instrument": "contrast.street:ground",
+      "value": 1.9118,
+      "denominator": "WCAG-adjusted luminance of the darker role (ground); 174442 street px vs 308850 ground px at 1100×1100",
+      "band": ">= 2.1",
+      "pass": false,
+      "measuredRatio": 1.9118,
+      "declaredByLensContrast": 4.675,
+      "delta": -2.7632,
+      "streetRGB": [
+        222,
+        214,
+        193
+      ],
+      "groundRGB": [
+        170,
+        153,
+        128
+      ],
+      "streetPx": 174442,
+      "groundPx": 308850,
+      "applicable": true,
+      "status": "MEASURED"
+    },
+    {
+      "instrument": "contrast.wall:all",
+      "value": 4.2663,
+      "denominator": "WCAG-adjusted luminance of the darker role (all); 6337 wall px vs 1210000 all px at 1100×1100",
+      "band": ">= 3",
+      "pass": true,
+      "measuredRatio": 4.2663,
+      "declaredByLensContrast": 8.3016,
+      "delta": -4.0353,
+      "wallRGB": [
+        87,
+        77,
+        63
+      ],
+      "allRGB": [
+        193,
+        185,
+        164
+      ],
+      "wallPx": 6337,
+      "allPx": 1210000,
+      "applicable": true,
+      "status": "MEASURED"
+    },
+    {
+      "instrument": "contrast.water:ground",
+      "value": 1.2762,
+      "denominator": "WCAG-adjusted luminance of the darker role (ground); 306571 water px vs 308850 ground px at 1100×1100",
+      "band": ">= 1.35",
+      "pass": false,
+      "measuredRatio": 1.2762,
+      "declaredByLensContrast": 1.6416,
+      "delta": -0.3654,
+      "waterRGB": [
+        174,
+        177,
+        169
+      ],
+      "groundRGB": [
+        170,
+        153,
+        128
+      ],
+      "waterPx": 306571,
+      "groundPx": 308850,
+      "applicable": true,
+      "status": "MEASURED"
+    }
+  ],
+  "applicableArms": 3,
+  "notApplicable": [],
+  "pass": false
+}
+I5_FAIL

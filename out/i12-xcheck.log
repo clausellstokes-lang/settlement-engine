@@ -1,0 +1,6 @@
+── LINE-DEFINITION CROSS-CHECK · scoring circuits only, never merged
+  definition              C1 crossing  C2 violations  within reach
+  drawn-OPEN  (primary)           237            688          1621
+  drawn-CLOSED                    238            692          1626
+  claimLine-OPEN                  225            718          1608
+I12_XCHECK_DONE

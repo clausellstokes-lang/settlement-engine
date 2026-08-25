@@ -1,0 +1,13 @@
+BASE      opClasses=40 traced=36 driftJustified=4 misses=0 stale=0
+PLANTED   opClasses=41 misses=1  [{"id":"99z","title":"⭐ A PLANTED OP CLASS THAT NOBODY TRACED","status":"UNTRACED"}]
+TRIMMED   opClasses=39 stale=["15c"]
+
+── LIVENESS
+   ok     the base roster is fully traced
+   ok     no stale table rows on the base
+   ok     a planted op class raises the miss count by exactly one
+   ok     a removed section is reported as a STALE table row
+   ok     every DRIFT row carries a written justification
+   ok     the roster is bigger than the emitted group set (groups are NOT the roster)
+
+I8_CONTROLS LIVE

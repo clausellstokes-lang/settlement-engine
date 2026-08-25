@@ -1,0 +1,453 @@
+{
+  "plates": [
+    {
+      "name": "AFTER-city",
+      "png": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/png/AFTER-city.png",
+      "grid": "1100x1100",
+      "maskN": 2200,
+      "rows": [
+        {
+          "instrument": "contrast.street:ground",
+          "value": 2.7582,
+          "denominator": "WCAG-adjusted luminance of the darker role (ground); 196902 street px vs 338007 ground px at 1100×1100",
+          "band": ">= 2.1",
+          "pass": true,
+          "measuredRatio": 2.7582,
+          "declaredByLensContrast": 4.675,
+          "delta": -1.9169,
+          "streetRGB": [
+            195,
+            187,
+            170
+          ],
+          "groundRGB": [
+            127,
+            104,
+            80
+          ],
+          "streetPx": 196902,
+          "groundPx": 338007,
+          "applicable": true,
+          "status": "MEASURED"
+        },
+        {
+          "instrument": "contrast.wall:all",
+          "value": 4.9379,
+          "denominator": "WCAG-adjusted luminance of the darker role (all); 8178 wall px vs 1210000 all px at 1100×1100",
+          "band": ">= 3",
+          "pass": true,
+          "measuredRatio": 4.9379,
+          "declaredByLensContrast": 8.3016,
+          "delta": -3.3638,
+          "wallRGB": [
+            42,
+            34,
+            25
+          ],
+          "allRGB": [
+            153,
+            144,
+            123
+          ],
+          "wallPx": 8178,
+          "allPx": 1210000,
+          "applicable": true,
+          "status": "MEASURED"
+        },
+        {
+          "instrument": "contrast.water:ground",
+          "value": 1.7892,
+          "denominator": "WCAG-adjusted luminance of the darker role (ground); 302960 water px vs 338007 ground px at 1100×1100",
+          "band": ">= 1.35",
+          "pass": true,
+          "measuredRatio": 1.7892,
+          "declaredByLensContrast": 1.6416,
+          "delta": 0.1475,
+          "waterRGB": [
+            141,
+            153,
+            150
+          ],
+          "groundRGB": [
+            127,
+            104,
+            80
+          ],
+          "waterPx": 302960,
+          "groundPx": 338007,
+          "applicable": true,
+          "status": "MEASURED"
+        }
+      ],
+      "applicableArms": 3,
+      "notApplicable": [],
+      "pass": true
+    },
+    {
+      "name": "BEFORE-city",
+      "png": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/png/BEFORE-city.png",
+      "grid": "1100x1100",
+      "maskN": 2200,
+      "rows": [
+        {
+          "instrument": "contrast.street:ground",
+          "value": 1.8818,
+          "denominator": "WCAG-adjusted luminance of the darker role (ground); 196902 street px vs 338007 ground px at 1100×1100",
+          "band": ">= 2.1",
+          "pass": false,
+          "measuredRatio": 1.8818,
+          "declaredByLensContrast": 4.675,
+          "delta": -2.7932,
+          "streetRGB": [
+            217,
+            208,
+            188
+          ],
+          "groundRGB": [
+            166,
+            150,
+            125
+          ],
+          "streetPx": 196902,
+          "groundPx": 338007,
+          "applicable": true,
+          "status": "MEASURED"
+        },
+        {
+          "instrument": "contrast.wall:all",
+          "value": 7.2925,
+          "denominator": "WCAG-adjusted luminance of the darker role (all); 8178 wall px vs 1210000 all px at 1100×1100",
+          "band": ">= 3",
+          "pass": true,
+          "measuredRatio": 7.2925,
+          "declaredByLensContrast": 8.3016,
+          "delta": -1.0092,
+          "wallRGB": [
+            47,
+            37,
+            27
+          ],
+          "allRGB": [
+            189,
+            181,
+            160
+          ],
+          "wallPx": 8178,
+          "allPx": 1210000,
+          "applicable": true,
+          "status": "MEASURED"
+        },
+        {
+          "instrument": "contrast.water:ground",
+          "value": 1.3168,
+          "denominator": "WCAG-adjusted luminance of the darker role (ground); 302960 water px vs 338007 ground px at 1100×1100",
+          "band": ">= 1.35",
+          "pass": false,
+          "measuredRatio": 1.3168,
+          "declaredByLensContrast": 1.6416,
+          "delta": -0.3249,
+          "waterRGB": [
+            174,
+            176,
+            168
+          ],
+          "groundRGB": [
+            166,
+            150,
+            125
+          ],
+          "waterPx": 302960,
+          "groundPx": 338007,
+          "applicable": true,
+          "status": "MEASURED"
+        }
+      ],
+      "applicableArms": 3,
+      "notApplicable": [],
+      "pass": false
+    },
+    {
+      "name": "CTRL-flat-street",
+      "png": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg-instruments/png/CTRL-flat-street.png",
+      "grid": "1100x1100",
+      "maskN": 2200,
+      "rows": [
+        {
+          "instrument": "contrast.street:ground",
+          "value": 1.1802,
+          "denominator": "WCAG-adjusted luminance of the darker role (ground); 196902 street px vs 338007 ground px at 1100×1100",
+          "band": ">= 2.1",
+          "pass": false,
+          "measuredRatio": 1.1802,
+          "declaredByLensContrast": 4.675,
+          "delta": -3.4948,
+          "streetRGB": [
+            157,
+            134,
+            108
+          ],
+          "groundRGB": [
+            165,
+            149,
+            124
+          ],
+          "streetPx": 196902,
+          "groundPx": 338007,
+          "applicable": true,
+          "status": "MEASURED"
+        },
+        {
+          "instrument": "contrast.wall:all",
+          "value": 6.3997,
+          "denominator": "WCAG-adjusted luminance of the darker role (all); 8178 wall px vs 1210000 all px at 1100×1100",
+          "band": ">= 3",
+          "pass": true,
+          "measuredRatio": 6.3997,
+          "declaredByLensContrast": 8.3016,
+          "delta": -1.9019,
+          "wallRGB": [
+            46,
+            37,
+            27
+          ],
+          "allRGB": [
+            179,
+            168,
+            146
+          ],
+          "wallPx": 8178,
+          "allPx": 1210000,
+          "applicable": true,
+          "status": "MEASURED"
+        },
+        {
+          "instrument": "contrast.water:ground",
+          "value": 1.3308,
+          "denominator": "WCAG-adjusted luminance of the darker role (ground); 302960 water px vs 338007 ground px at 1100×1100",
+          "band": ">= 1.35",
+          "pass": false,
+          "measuredRatio": 1.3308,
+          "declaredByLensContrast": 1.6416,
+          "delta": -0.3108,
+          "waterRGB": [
+            173,
+            176,
+            168
+          ],
+          "groundRGB": [
+            165,
+            149,
+            124
+          ],
+          "waterPx": 302960,
+          "groundPx": 338007,
+          "applicable": true,
+          "status": "MEASURED"
+        }
+      ],
+      "applicableArms": 3,
+      "notApplicable": [],
+      "pass": false
+    },
+    {
+      "name": "CTRL-flat-wall",
+      "png": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg-instruments/png/CTRL-flat-wall.png",
+      "grid": "1100x1100",
+      "maskN": 2200,
+      "rows": [
+        {
+          "instrument": "contrast.street:ground",
+          "value": 1.9237,
+          "denominator": "WCAG-adjusted luminance of the darker role (ground); 196902 street px vs 338007 ground px at 1100×1100",
+          "band": ">= 2.1",
+          "pass": false,
+          "measuredRatio": 1.9237,
+          "declaredByLensContrast": 4.675,
+          "delta": -2.7513,
+          "streetRGB": [
+            219,
+            210,
+            190
+          ],
+          "groundRGB": [
+            166,
+            150,
+            126
+          ],
+          "streetPx": 196902,
+          "groundPx": 338007,
+          "applicable": true,
+          "status": "MEASURED"
+        },
+        {
+          "instrument": "contrast.wall:all",
+          "value": 1.4547,
+          "denominator": "WCAG-adjusted luminance of the darker role (all); 8178 wall px vs 1210000 all px at 1100×1100",
+          "band": ">= 3",
+          "pass": false,
+          "measuredRatio": 1.4547,
+          "declaredByLensContrast": 8.3016,
+          "delta": -6.847,
+          "wallRGB": [
+            161,
+            150,
+            127
+          ],
+          "allRGB": [
+            190,
+            182,
+            162
+          ],
+          "wallPx": 8178,
+          "allPx": 1210000,
+          "applicable": true,
+          "status": "MEASURED"
+        },
+        {
+          "instrument": "contrast.water:ground",
+          "value": 1.327,
+          "denominator": "WCAG-adjusted luminance of the darker role (ground); 302960 water px vs 338007 ground px at 1100×1100",
+          "band": ">= 1.35",
+          "pass": false,
+          "measuredRatio": 1.327,
+          "declaredByLensContrast": 1.6416,
+          "delta": -0.3147,
+          "waterRGB": [
+            174,
+            177,
+            169
+          ],
+          "groundRGB": [
+            166,
+            150,
+            126
+          ],
+          "waterPx": 302960,
+          "groundPx": 338007,
+          "applicable": true,
+          "status": "MEASURED"
+        }
+      ],
+      "applicableArms": 3,
+      "notApplicable": [],
+      "pass": false
+    },
+    {
+      "name": "CTRL-grey-water",
+      "png": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg-instruments/png/CTRL-grey-water.png",
+      "grid": "1100x1100",
+      "maskN": 2200,
+      "rows": [
+        {
+          "instrument": "contrast.street:ground",
+          "value": 1.8818,
+          "denominator": "WCAG-adjusted luminance of the darker role (ground); 196902 street px vs 338007 ground px at 1100×1100",
+          "band": ">= 2.1",
+          "pass": false,
+          "measuredRatio": 1.8818,
+          "declaredByLensContrast": 4.675,
+          "delta": -2.7933,
+          "streetRGB": [
+            217,
+            208,
+            188
+          ],
+          "groundRGB": [
+            166,
+            150,
+            125
+          ],
+          "streetPx": 196902,
+          "groundPx": 338007,
+          "applicable": true,
+          "status": "MEASURED"
+        },
+        {
+          "instrument": "contrast.wall:all",
+          "value": 7.269,
+          "denominator": "WCAG-adjusted luminance of the darker role (all); 8178 wall px vs 1210000 all px at 1100×1100",
+          "band": ">= 3",
+          "pass": true,
+          "measuredRatio": 7.269,
+          "declaredByLensContrast": 8.3016,
+          "delta": -1.0326,
+          "wallRGB": [
+            47,
+            37,
+            27
+          ],
+          "allRGB": [
+            189,
+            181,
+            153
+          ],
+          "wallPx": 8178,
+          "allPx": 1210000,
+          "applicable": true,
+          "status": "MEASURED"
+        },
+        {
+          "instrument": "contrast.water:ground",
+          "value": 1.2985,
+          "denominator": "WCAG-adjusted luminance of the darker role (ground); 302960 water px vs 338007 ground px at 1100×1100",
+          "band": ">= 1.35",
+          "pass": false,
+          "measuredRatio": 1.2985,
+          "declaredByLensContrast": 1.6416,
+          "delta": -0.3431,
+          "waterRGB": [
+            176,
+            176,
+            140
+          ],
+          "groundRGB": [
+            166,
+            150,
+            125
+          ],
+          "waterPx": 302960,
+          "groundPx": 338007,
+          "applicable": true,
+          "status": "MEASURED"
+        }
+      ],
+      "applicableArms": 3,
+      "notApplicable": [],
+      "pass": false
+    }
+  ],
+  "liveness": [
+    [
+      "flat-street drives street:ground below floor",
+      true
+    ],
+    [
+      "flat-street leaves wall:all above floor",
+      true
+    ],
+    [
+      "flat-wall drives wall:all below floor",
+      true
+    ],
+    [
+      "flat-wall leaves street:ground where it was",
+      true
+    ],
+    [
+      "grey-water leaves the VALUE pair essentially unmoved (it is a HUE break — i7 catches it)",
+      true
+    ],
+    [
+      "the water value floor has a real failing plate (BEFORE-city)",
+      true
+    ],
+    [
+      "the charter's polarity holds here: BEFORE fails, AFTER passes",
+      true
+    ],
+    [
+      "every row reports the declared-vs-measured gap",
+      true
+    ]
+  ]
+}

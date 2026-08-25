@@ -1,0 +1,285 @@
+{
+  "P": {
+    "applicable": true,
+    "heart": "square.heart",
+    "heartAt": [
+      432.29,
+      526.04
+    ],
+    "floorUnits": 3.87,
+    "floorSource": "the leaf's own web.widths.blockLane",
+    "voidCells": 181598,
+    "gatesTotal": 6,
+    "gatesBricked": 0,
+    "reachable": 6,
+    "passing": 6,
+    "subjectsWere": "circuit gates",
+    "rows": [
+      {
+        "gate": "gate.E2.road.high.corridor.0~frame.0",
+        "bricked": false,
+        "ringKind": "main",
+        "reachable": true,
+        "bottleneckWidthUnits": 16,
+        "pathLengthUnits": 541.3,
+        "straightLineUnits": 500.41,
+        "detourRatio": 1.0817,
+        "pass": true
+      },
+      {
+        "gate": "gate.E2.road.approach.corridor.1~frame.1",
+        "bricked": false,
+        "ringKind": "main",
+        "reachable": true,
+        "bottleneckWidthUnits": 10,
+        "pathLengthUnits": 486.23,
+        "straightLineUnits": 382.32,
+        "detourRatio": 1.2718,
+        "pass": true
+      },
+      {
+        "gate": "gate.E2.road.approach.corridor.2~frame.2",
+        "bricked": false,
+        "ringKind": "main",
+        "reachable": true,
+        "bottleneckWidthUnits": 10,
+        "pathLengthUnits": 410.95,
+        "straightLineUnits": 343.22,
+        "detourRatio": 1.1973,
+        "pass": true
+      },
+      {
+        "gate": "gate.E1.road.high.corridor.0~frame.0",
+        "bricked": false,
+        "ringKind": "old-core",
+        "reachable": true,
+        "bottleneckWidthUnits": 16,
+        "pathLengthUnits": 454.16,
+        "straightLineUnits": 419.96,
+        "detourRatio": 1.0815,
+        "pass": true
+      },
+      {
+        "gate": "gate.E1.road.approach.corridor.1~frame.1",
+        "bricked": false,
+        "ringKind": "old-core",
+        "reachable": true,
+        "bottleneckWidthUnits": 10,
+        "pathLengthUnits": 659.76,
+        "straightLineUnits": 272.12,
+        "detourRatio": 2.4245,
+        "pass": true
+      },
+      {
+        "gate": "gate.E1.road.approach.nucleus.0~spur.1",
+        "bricked": false,
+        "ringKind": "old-core",
+        "reachable": true,
+        "bottleneckWidthUnits": 10.49,
+        "pathLengthUnits": 55.94,
+        "straightLineUnits": 52.64,
+        "detourRatio": 1.0627,
+        "pass": true
+      }
+    ],
+    "pass": true
+  },
+  "S": {
+    "applicable": true,
+    "heart": "square.heart",
+    "heartAt": [
+      432.29,
+      526.04
+    ],
+    "floorUnits": 3.87,
+    "floorSource": "the leaf's own web.widths.blockLane",
+    "voidCells": 174422,
+    "gatesTotal": 6,
+    "gatesBricked": 0,
+    "reachable": 1,
+    "passing": 1,
+    "subjectsWere": "circuit gates",
+    "rows": [
+      {
+        "gate": "gate.E2.road.high.corridor.0~frame.0",
+        "bricked": false,
+        "reachable": false,
+        "reason": "DISCONNECTED — no path through the street void at any width"
+      },
+      {
+        "gate": "gate.E2.road.approach.corridor.1~frame.1",
+        "bricked": false,
+        "reachable": false,
+        "reason": "DISCONNECTED — no path through the street void at any width"
+      },
+      {
+        "gate": "gate.E2.road.approach.corridor.2~frame.2",
+        "bricked": false,
+        "reachable": false,
+        "reason": "DISCONNECTED — no path through the street void at any width"
+      },
+      {
+        "gate": "gate.E1.road.high.corridor.0~frame.0",
+        "bricked": false,
+        "reachable": false,
+        "reason": "DISCONNECTED — no path through the street void at any width"
+      },
+      {
+        "gate": "gate.E1.road.approach.corridor.1~frame.1",
+        "bricked": false,
+        "reachable": false,
+        "reason": "DISCONNECTED — no path through the street void at any width"
+      },
+      {
+        "gate": "gate.E1.road.approach.nucleus.0~spur.1",
+        "bricked": false,
+        "ringKind": "old-core",
+        "reachable": true,
+        "bottleneckWidthUnits": 10.49,
+        "pathLengthUnits": 55.94,
+        "straightLineUnits": 52.64,
+        "detourRatio": 1.0627,
+        "pass": true
+      }
+    ],
+    "pass": false
+  },
+  "F": {
+    "applicable": true,
+    "heart": "square.heart",
+    "heartAt": [
+      432.29,
+      526.04
+    ],
+    "floorUnits": 50,
+    "floorSource": "CLI --floor",
+    "voidCells": 181598,
+    "gatesTotal": 6,
+    "gatesBricked": 0,
+    "reachable": 6,
+    "passing": 0,
+    "subjectsWere": "circuit gates",
+    "rows": [
+      {
+        "gate": "gate.E2.road.high.corridor.0~frame.0",
+        "bricked": false,
+        "ringKind": "main",
+        "reachable": true,
+        "bottleneckWidthUnits": 16,
+        "pathLengthUnits": 541.3,
+        "straightLineUnits": 500.41,
+        "detourRatio": 1.0817,
+        "pass": false
+      },
+      {
+        "gate": "gate.E2.road.approach.corridor.1~frame.1",
+        "bricked": false,
+        "ringKind": "main",
+        "reachable": true,
+        "bottleneckWidthUnits": 10,
+        "pathLengthUnits": 486.23,
+        "straightLineUnits": 382.32,
+        "detourRatio": 1.2718,
+        "pass": false
+      },
+      {
+        "gate": "gate.E2.road.approach.corridor.2~frame.2",
+        "bricked": false,
+        "ringKind": "main",
+        "reachable": true,
+        "bottleneckWidthUnits": 10,
+        "pathLengthUnits": 410.95,
+        "straightLineUnits": 343.22,
+        "detourRatio": 1.1973,
+        "pass": false
+      },
+      {
+        "gate": "gate.E1.road.high.corridor.0~frame.0",
+        "bricked": false,
+        "ringKind": "old-core",
+        "reachable": true,
+        "bottleneckWidthUnits": 16,
+        "pathLengthUnits": 454.16,
+        "straightLineUnits": 419.96,
+        "detourRatio": 1.0815,
+        "pass": false
+      },
+      {
+        "gate": "gate.E1.road.approach.corridor.1~frame.1",
+        "bricked": false,
+        "ringKind": "old-core",
+        "reachable": true,
+        "bottleneckWidthUnits": 10,
+        "pathLengthUnits": 659.76,
+        "straightLineUnits": 272.12,
+        "detourRatio": 2.4245,
+        "pass": false
+      },
+      {
+        "gate": "gate.E1.road.approach.nucleus.0~spur.1",
+        "bricked": false,
+        "ringKind": "old-core",
+        "reachable": true,
+        "bottleneckWidthUnits": 10.49,
+        "pathLengthUnits": 55.94,
+        "straightLineUnits": 52.64,
+        "detourRatio": 1.0627,
+        "pass": false
+      }
+    ],
+    "pass": false
+  },
+  "Wd": {
+    "applicable": true,
+    "heart": "square.heart",
+    "heartAt": [
+      432.29,
+      526.04
+    ],
+    "floorUnits": 3.87,
+    "floorSource": "the leaf's own web.widths.blockLane",
+    "voidCells": 181598,
+    "gatesTotal": 2,
+    "gatesBricked": 0,
+    "reachable": 0,
+    "passing": 0,
+    "subjectsWere": "circuit gates",
+    "rows": [
+      {
+        "gate": "CONTROL.gate_in_the_wilderness@1000,115",
+        "bricked": false,
+        "reachable": false,
+        "reason": "gate is not within 40 units of any street void"
+      },
+      {
+        "gate": "CONTROL.gate_in_the_wilderness@1000,115",
+        "bricked": false,
+        "reachable": false,
+        "reason": "gate is not within 40 units of any street void"
+      }
+    ],
+    "pass": false
+  },
+  "liveness": [
+    [
+      "the real city routes every live gate to its heart",
+      true
+    ],
+    [
+      "ring-severing disconnects every gate OUTSIDE the cut",
+      true
+    ],
+    [
+      "…and leaves the gate INSIDE the cut still routed",
+      true
+    ],
+    [
+      "an absurd floor fails every gate WITHOUT losing the measurement",
+      true
+    ],
+    [
+      "a gate in an empty corner is unreachable",
+      true
+    ]
+  ]
+}

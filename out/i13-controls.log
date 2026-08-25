@@ -1,0 +1,19 @@
+C0 baseline (recorded measurement, sha 543616f65777…)  I13_PASS  fails=0 shifts=0
+C1 town-2 agreement 22.58 → 11.00   I13_FAIL  fails=4: CORPUS agreement inside the drawn river (%) | CORPUS ⛔ DRAWN∧¬SUB (u²) | town-2 · agreement (%) | town-2 · ⛔ DRAWN∧¬SUB (u²)
+C2 mirror class ×1.5 corpus-wide     I13_FAIL  measured subNotDrawn=75666.6 (ceiling 50444)
+C3 highwater dropped from the run    I13_FAIL  missing=["highwater"]
+C4 agreement improved corpus-wide    I13_PASS  shifts=20 fails=0
+C5 grid 400 → 200                    I13_FAIL  configOk=false
+C6 on-disk perturb → exit=1, verdict=I13_FAIL; restored sha 543616f65777… BYTE-IDENTICAL ✓
+
+── LIVENESS
+   ok     C0 the recorded measurement satisfies its own pins
+   ok     C1 a HALVED agreement on ONE leaf reds the ratchet (per-leaf pins are load-bearing)
+   ok     C2 a GROWING mirror class reds the ratchet
+   ok     C3 a leaf that silently stops being measured cannot read as clean
+   ok     C4 an IMPROVEMENT passes but is surfaced as a DECLARED SHIFT with re-pin values
+   ok     C5 a changed grid/limit is not comparable and reds rather than passing
+   ok     C6 a perturbed measurement file makes the process EXIT NON-ZERO (an &&-chain cannot read it green)
+   ok     C6 the measurement file is restored byte-identically
+
+I13_CONTROLS LIVE

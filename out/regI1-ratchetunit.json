@@ -1,0 +1,1347 @@
+{
+  "lane": "TE-REG-I1",
+  "worktree": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/laneREG4-tree",
+  "samples": 3,
+  "note": "ONE warm-up render per (leaf, arm) is taken and DISCARDED before the samples; ms is the MEDIAN of the samples",
+  "signedCeilings": {
+    "thorp": 1000,
+    "hamlet": 1400,
+    "village": 2000,
+    "town": 9300,
+    "city": 10000,
+    "metropolis": 14200
+  },
+  "rows": [
+    {
+      "leaf": "thorp",
+      "tier": "thorp",
+      "BASE": {
+        "prim": 904,
+        "nodes": 64,
+        "dom": 73,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 6,
+          "path": 47,
+          "g": 8,
+          "circle": 3,
+          "text": 9
+        },
+        "bytes": 118623,
+        "ms": [
+          3.34,
+          2.89,
+          2.51
+        ],
+        "msMin": 2.51,
+        "msMed": 2.89,
+        "msMax": 3.34,
+        "msSpreadPct": 28.8
+      },
+      "ALL": {
+        "prim": 968,
+        "nodes": 69,
+        "dom": 79,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 6,
+          "path": 51,
+          "g": 9,
+          "circle": 4,
+          "text": 9
+        },
+        "bytes": 122784,
+        "ms": [
+          2.87,
+          2.78,
+          3
+        ],
+        "msMin": 2.78,
+        "msMed": 2.87,
+        "msMax": 3,
+        "msSpreadPct": 7.9
+      },
+      "ceiling": 1000,
+      "delta": {
+        "primPct": 7.1,
+        "nodesPct": 7.8,
+        "domPct": 8.2,
+        "bytesPct": 3.5,
+        "msPct": -0.7
+      },
+      "ratios": {
+        "primPerNodeBase": 14.13,
+        "primPerNodeAll": 14.03,
+        "msPer1kPrimAll": 2.96,
+        "msPer100NodesAll": 4.16,
+        "domMinusNodesAll": 10,
+        "domMinusNodesBase": 9,
+        "ceilingHeadroomPrim": 32
+      }
+    },
+    {
+      "leaf": "hamlet",
+      "tier": "hamlet",
+      "BASE": {
+        "prim": 1126,
+        "nodes": 87,
+        "dom": 100,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 7,
+          "path": 68,
+          "g": 9,
+          "circle": 4,
+          "text": 12
+        },
+        "bytes": 133337,
+        "ms": [
+          3.17,
+          3.16,
+          3.17
+        ],
+        "msMin": 3.16,
+        "msMed": 3.17,
+        "msMax": 3.17,
+        "msSpreadPct": 0.3
+      },
+      "ALL": {
+        "prim": 1252,
+        "nodes": 91,
+        "dom": 104,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 3,
+          "path": 73,
+          "g": 9,
+          "circle": 9,
+          "text": 10
+        },
+        "bytes": 140489,
+        "ms": [
+          3.53,
+          3.5,
+          3.93
+        ],
+        "msMin": 3.5,
+        "msMed": 3.53,
+        "msMax": 3.93,
+        "msSpreadPct": 12.1
+      },
+      "ceiling": 1400,
+      "delta": {
+        "primPct": 11.2,
+        "nodesPct": 4.6,
+        "domPct": 4,
+        "bytesPct": 5.4,
+        "msPct": 11.4
+      },
+      "ratios": {
+        "primPerNodeBase": 12.94,
+        "primPerNodeAll": 13.76,
+        "msPer1kPrimAll": 2.82,
+        "msPer100NodesAll": 3.88,
+        "domMinusNodesAll": 13,
+        "domMinusNodesBase": 13,
+        "ceilingHeadroomPrim": 148
+      }
+    },
+    {
+      "leaf": "village",
+      "tier": "village",
+      "BASE": {
+        "prim": 1226,
+        "nodes": 135,
+        "dom": 188,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 8,
+          "path": 114,
+          "g": 12,
+          "circle": 4,
+          "text": 50
+        },
+        "bytes": 152350,
+        "ms": [
+          3.68,
+          3.65,
+          3.77
+        ],
+        "msMin": 3.65,
+        "msMed": 3.68,
+        "msMax": 3.77,
+        "msSpreadPct": 3.1
+      },
+      "ALL": {
+        "prim": 1431,
+        "nodes": 171,
+        "dom": 226,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 8,
+          "path": 125,
+          "g": 14,
+          "circle": 29,
+          "text": 50
+        },
+        "bytes": 166291,
+        "ms": [
+          3.96,
+          4.1,
+          3.88
+        ],
+        "msMin": 3.88,
+        "msMed": 3.96,
+        "msMax": 4.1,
+        "msSpreadPct": 5.6
+      },
+      "ceiling": 2000,
+      "delta": {
+        "primPct": 16.7,
+        "nodesPct": 26.7,
+        "domPct": 20.2,
+        "bytesPct": 9.2,
+        "msPct": 7.6
+      },
+      "ratios": {
+        "primPerNodeBase": 9.08,
+        "primPerNodeAll": 8.37,
+        "msPer1kPrimAll": 2.77,
+        "msPer100NodesAll": 2.32,
+        "domMinusNodesAll": 55,
+        "domMinusNodesBase": 53,
+        "ceilingHeadroomPrim": 569
+      }
+    },
+    {
+      "leaf": "town",
+      "tier": "town",
+      "BASE": {
+        "prim": 4386,
+        "nodes": 286,
+        "dom": 353,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 8,
+          "path": 263,
+          "g": 12,
+          "circle": 3,
+          "text": 67
+        },
+        "bytes": 395283,
+        "ms": [
+          12.87,
+          14.31,
+          12.46
+        ],
+        "msMin": 12.46,
+        "msMed": 12.87,
+        "msMax": 14.31,
+        "msSpreadPct": 14.4
+      },
+      "ALL": {
+        "prim": 6563,
+        "nodes": 444,
+        "dom": 514,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 3,
+          "path": 369,
+          "g": 15,
+          "circle": 67,
+          "text": 60
+        },
+        "bytes": 508034,
+        "ms": [
+          15.72,
+          15.32,
+          15.5
+        ],
+        "msMin": 15.32,
+        "msMed": 15.5,
+        "msMax": 15.72,
+        "msSpreadPct": 2.5
+      },
+      "ceiling": 9300,
+      "delta": {
+        "primPct": 49.6,
+        "nodesPct": 55.2,
+        "domPct": 45.6,
+        "bytesPct": 28.5,
+        "msPct": 20.4
+      },
+      "ratios": {
+        "primPerNodeBase": 15.34,
+        "primPerNodeAll": 14.78,
+        "msPer1kPrimAll": 2.36,
+        "msPer100NodesAll": 3.49,
+        "domMinusNodesAll": 70,
+        "domMinusNodesBase": 67,
+        "ceilingHeadroomPrim": 2737
+      }
+    },
+    {
+      "leaf": "town-2",
+      "tier": "town",
+      "BASE": {
+        "prim": 4526,
+        "nodes": 254,
+        "dom": 331,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 8,
+          "path": 229,
+          "g": 13,
+          "circle": 4,
+          "text": 77
+        },
+        "bytes": 403497,
+        "ms": [
+          11.57,
+          12.24,
+          11.96
+        ],
+        "msMin": 11.57,
+        "msMed": 11.96,
+        "msMax": 12.24,
+        "msSpreadPct": 5.6
+      },
+      "ALL": {
+        "prim": 6753,
+        "nodes": 418,
+        "dom": 498,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 3,
+          "path": 330,
+          "g": 16,
+          "circle": 78,
+          "text": 71
+        },
+        "bytes": 520827,
+        "ms": [
+          15.55,
+          15.91,
+          16.11
+        ],
+        "msMin": 15.55,
+        "msMed": 15.91,
+        "msMax": 16.11,
+        "msSpreadPct": 3.5
+      },
+      "ceiling": 9300,
+      "delta": {
+        "primPct": 49.2,
+        "nodesPct": 64.6,
+        "domPct": 50.5,
+        "bytesPct": 29.1,
+        "msPct": 33
+      },
+      "ratios": {
+        "primPerNodeBase": 17.82,
+        "primPerNodeAll": 16.16,
+        "msPer1kPrimAll": 2.36,
+        "msPer100NodesAll": 3.81,
+        "domMinusNodesAll": 80,
+        "domMinusNodesBase": 77,
+        "ceilingHeadroomPrim": 2547
+      }
+    },
+    {
+      "leaf": "city",
+      "tier": "city",
+      "BASE": {
+        "prim": 5799,
+        "nodes": 369,
+        "dom": 456,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 8,
+          "path": 347,
+          "g": 14,
+          "circle": 4,
+          "text": 83
+        },
+        "bytes": 481268,
+        "ms": [
+          14.47,
+          14.34,
+          12.99
+        ],
+        "msMin": 12.99,
+        "msMed": 14.34,
+        "msMax": 14.47,
+        "msSpreadPct": 10.3
+      },
+      "ALL": {
+        "prim": 8173,
+        "nodes": 422,
+        "dom": 513,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 3,
+          "path": 407,
+          "g": 18,
+          "circle": 8,
+          "text": 77
+        },
+        "bytes": 600342,
+        "ms": [
+          19.61,
+          20.82,
+          21.26
+        ],
+        "msMin": 19.61,
+        "msMed": 20.82,
+        "msMax": 21.26,
+        "msSpreadPct": 7.9
+      },
+      "ceiling": 10000,
+      "delta": {
+        "primPct": 40.9,
+        "nodesPct": 14.4,
+        "domPct": 12.5,
+        "bytesPct": 24.7,
+        "msPct": 45.2
+      },
+      "ratios": {
+        "primPerNodeBase": 15.72,
+        "primPerNodeAll": 19.37,
+        "msPer1kPrimAll": 2.55,
+        "msPer100NodesAll": 4.93,
+        "domMinusNodesAll": 91,
+        "domMinusNodesBase": 87,
+        "ceilingHeadroomPrim": 1827
+      }
+    },
+    {
+      "leaf": "metropolis",
+      "tier": "metropolis",
+      "BASE": {
+        "prim": 7985,
+        "nodes": 346,
+        "dom": 433,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 8,
+          "path": 322,
+          "g": 14,
+          "circle": 5,
+          "text": 84
+        },
+        "bytes": 555710,
+        "ms": [
+          17.02,
+          16.63,
+          17.09
+        ],
+        "msMin": 16.63,
+        "msMed": 17.02,
+        "msMax": 17.09,
+        "msSpreadPct": 2.7
+      },
+      "ALL": {
+        "prim": 11291,
+        "nodes": 411,
+        "dom": 502,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 3,
+          "path": 388,
+          "g": 18,
+          "circle": 14,
+          "text": 79
+        },
+        "bytes": 708613,
+        "ms": [
+          22.67,
+          22.88,
+          22.44
+        ],
+        "msMin": 22.44,
+        "msMed": 22.67,
+        "msMax": 22.88,
+        "msSpreadPct": 1.9
+      },
+      "ceiling": 14200,
+      "delta": {
+        "primPct": 41.4,
+        "nodesPct": 18.8,
+        "domPct": 15.9,
+        "bytesPct": 27.5,
+        "msPct": 33.2
+      },
+      "ratios": {
+        "primPerNodeBase": 23.08,
+        "primPerNodeAll": 27.47,
+        "msPer1kPrimAll": 2.01,
+        "msPer100NodesAll": 5.52,
+        "domMinusNodesAll": 91,
+        "domMinusNodesBase": 87,
+        "ceilingHeadroomPrim": 2909
+      }
+    },
+    {
+      "leaf": "polycentric",
+      "tier": "town",
+      "BASE": {
+        "prim": 4378,
+        "nodes": 265,
+        "dom": 345,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 8,
+          "path": 242,
+          "g": 14,
+          "circle": 4,
+          "text": 77
+        },
+        "bytes": 394467,
+        "ms": [
+          11.59,
+          10.71,
+          13.67
+        ],
+        "msMin": 10.71,
+        "msMed": 11.59,
+        "msMax": 13.67,
+        "msSpreadPct": 25.6
+      },
+      "ALL": {
+        "prim": 6573,
+        "nodes": 400,
+        "dom": 483,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 3,
+          "path": 331,
+          "g": 17,
+          "circle": 60,
+          "text": 72
+        },
+        "bytes": 501703,
+        "ms": [
+          13.59,
+          13.55,
+          12.75
+        ],
+        "msMin": 12.75,
+        "msMed": 13.55,
+        "msMax": 13.59,
+        "msSpreadPct": 6.2
+      },
+      "ceiling": 9300,
+      "delta": {
+        "primPct": 50.1,
+        "nodesPct": 50.9,
+        "domPct": 40,
+        "bytesPct": 27.2,
+        "msPct": 16.9
+      },
+      "ratios": {
+        "primPerNodeBase": 16.52,
+        "primPerNodeAll": 16.43,
+        "msPer1kPrimAll": 2.06,
+        "msPer100NodesAll": 3.39,
+        "domMinusNodesAll": 83,
+        "domMinusNodesBase": 80,
+        "ceilingHeadroomPrim": 2727
+      }
+    },
+    {
+      "leaf": "highwater",
+      "tier": "town",
+      "BASE": {
+        "prim": 4451,
+        "nodes": 270,
+        "dom": 317,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 8,
+          "path": 247,
+          "g": 12,
+          "circle": 3,
+          "text": 47
+        },
+        "bytes": 405922,
+        "ms": [
+          10.3,
+          10.57,
+          10.37
+        ],
+        "msMin": 10.3,
+        "msMed": 10.37,
+        "msMax": 10.57,
+        "msSpreadPct": 2.5
+      },
+      "ALL": {
+        "prim": 7291,
+        "nodes": 442,
+        "dom": 492,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 3,
+          "path": 366,
+          "g": 15,
+          "circle": 68,
+          "text": 40
+        },
+        "bytes": 538220,
+        "ms": [
+          17.76,
+          15.48,
+          15.38
+        ],
+        "msMin": 15.38,
+        "msMed": 15.48,
+        "msMax": 17.76,
+        "msSpreadPct": 15.4
+      },
+      "ceiling": 9300,
+      "delta": {
+        "primPct": 63.8,
+        "nodesPct": 63.7,
+        "domPct": 55.2,
+        "bytesPct": 32.6,
+        "msPct": 49.3
+      },
+      "ratios": {
+        "primPerNodeBase": 16.49,
+        "primPerNodeAll": 16.5,
+        "msPer1kPrimAll": 2.12,
+        "msPer100NodesAll": 3.5,
+        "domMinusNodesAll": 50,
+        "domMinusNodesBase": 47,
+        "ceilingHeadroomPrim": 2009
+      }
+    },
+    {
+      "leaf": "mountain",
+      "tier": "village",
+      "BASE": {
+        "prim": 1529,
+        "nodes": 104,
+        "dom": 136,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 7,
+          "path": 85,
+          "g": 11,
+          "circle": 4,
+          "text": 29
+        },
+        "bytes": 165702,
+        "ms": [
+          3.77,
+          3.55,
+          3.43
+        ],
+        "msMin": 3.43,
+        "msMed": 3.55,
+        "msMax": 3.77,
+        "msSpreadPct": 9.4
+      },
+      "ALL": {
+        "prim": 1764,
+        "nodes": 140,
+        "dom": 174,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 7,
+          "path": 102,
+          "g": 13,
+          "circle": 23,
+          "text": 29
+        },
+        "bytes": 179852,
+        "ms": [
+          4.3,
+          4.23,
+          4.21
+        ],
+        "msMin": 4.21,
+        "msMed": 4.23,
+        "msMax": 4.3,
+        "msSpreadPct": 2.1
+      },
+      "ceiling": 2000,
+      "delta": {
+        "primPct": 15.4,
+        "nodesPct": 34.6,
+        "domPct": 27.9,
+        "bytesPct": 8.5,
+        "msPct": 19.2
+      },
+      "ratios": {
+        "primPerNodeBase": 14.7,
+        "primPerNodeAll": 12.6,
+        "msPer1kPrimAll": 2.4,
+        "msPer100NodesAll": 3.02,
+        "domMinusNodesAll": 34,
+        "domMinusNodesBase": 32,
+        "ceilingHeadroomPrim": 236
+      }
+    },
+    {
+      "leaf": "fjord",
+      "tier": "town",
+      "BASE": {
+        "prim": 4584,
+        "nodes": 220,
+        "dom": 270,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 8,
+          "path": 200,
+          "g": 12,
+          "circle": 3,
+          "text": 47
+        },
+        "bytes": 409158,
+        "ms": [
+          9.86,
+          11.07,
+          9.61
+        ],
+        "msMin": 9.61,
+        "msMed": 9.86,
+        "msMax": 11.07,
+        "msSpreadPct": 14.8
+      },
+      "ALL": {
+        "prim": 6199,
+        "nodes": 354,
+        "dom": 406,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 3,
+          "path": 306,
+          "g": 14,
+          "circle": 39,
+          "text": 44
+        },
+        "bytes": 493023,
+        "ms": [
+          14.78,
+          15.18,
+          14.76
+        ],
+        "msMin": 14.76,
+        "msMed": 14.78,
+        "msMax": 15.18,
+        "msSpreadPct": 2.8
+      },
+      "ceiling": 9300,
+      "delta": {
+        "primPct": 35.2,
+        "nodesPct": 60.9,
+        "domPct": 50.4,
+        "bytesPct": 20.5,
+        "msPct": 49.9
+      },
+      "ratios": {
+        "primPerNodeBase": 20.84,
+        "primPerNodeAll": 17.51,
+        "msPer1kPrimAll": 2.38,
+        "msPer100NodesAll": 4.18,
+        "domMinusNodesAll": 52,
+        "domMinusNodesBase": 50,
+        "ceilingHeadroomPrim": 3101
+      }
+    },
+    {
+      "leaf": "siege",
+      "tier": "town",
+      "BASE": {
+        "prim": 4396,
+        "nodes": 287,
+        "dom": 354,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 8,
+          "path": 264,
+          "g": 12,
+          "circle": 3,
+          "text": 67
+        },
+        "bytes": 394100,
+        "ms": [
+          11.8,
+          11.5,
+          10.76
+        ],
+        "msMin": 10.76,
+        "msMed": 11.5,
+        "msMax": 11.8,
+        "msSpreadPct": 9
+      },
+      "ALL": {
+        "prim": 6547,
+        "nodes": 444,
+        "dom": 514,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 3,
+          "path": 369,
+          "g": 15,
+          "circle": 67,
+          "text": 60
+        },
+        "bytes": 503538,
+        "ms": [
+          15.58,
+          15.13,
+          16.12
+        ],
+        "msMin": 15.13,
+        "msMed": 15.58,
+        "msMax": 16.12,
+        "msSpreadPct": 6.4
+      },
+      "ceiling": 9300,
+      "delta": {
+        "primPct": 48.9,
+        "nodesPct": 54.7,
+        "domPct": 45.2,
+        "bytesPct": 27.8,
+        "msPct": 35.5
+      },
+      "ratios": {
+        "primPerNodeBase": 15.32,
+        "primPerNodeAll": 14.75,
+        "msPer1kPrimAll": 2.38,
+        "msPer100NodesAll": 3.51,
+        "domMinusNodesAll": 70,
+        "domMinusNodesBase": 67,
+        "ceilingHeadroomPrim": 2753
+      }
+    },
+    {
+      "leaf": "plague",
+      "tier": "town",
+      "BASE": {
+        "prim": 4393,
+        "nodes": 287,
+        "dom": 354,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 8,
+          "path": 264,
+          "g": 12,
+          "circle": 3,
+          "text": 67
+        },
+        "bytes": 395589,
+        "ms": [
+          10.63,
+          10.45,
+          10.27
+        ],
+        "msMin": 10.27,
+        "msMed": 10.45,
+        "msMax": 10.63,
+        "msSpreadPct": 3.4
+      },
+      "ALL": {
+        "prim": 6570,
+        "nodes": 445,
+        "dom": 515,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 3,
+          "path": 370,
+          "g": 15,
+          "circle": 67,
+          "text": 60
+        },
+        "bytes": 508340,
+        "ms": [
+          16.74,
+          15.68,
+          16.87
+        ],
+        "msMin": 15.68,
+        "msMed": 16.74,
+        "msMax": 16.87,
+        "msSpreadPct": 7.1
+      },
+      "ceiling": 9300,
+      "delta": {
+        "primPct": 49.6,
+        "nodesPct": 55.1,
+        "domPct": 45.5,
+        "bytesPct": 28.5,
+        "msPct": 60.2
+      },
+      "ratios": {
+        "primPerNodeBase": 15.31,
+        "primPerNodeAll": 14.76,
+        "msPer1kPrimAll": 2.55,
+        "msPer100NodesAll": 3.76,
+        "domMinusNodesAll": 70,
+        "domMinusNodesBase": 67,
+        "ceilingHeadroomPrim": 2730
+      }
+    },
+    {
+      "leaf": "famine",
+      "tier": "town",
+      "BASE": {
+        "prim": 4392,
+        "nodes": 287,
+        "dom": 354,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 8,
+          "path": 264,
+          "g": 12,
+          "circle": 3,
+          "text": 67
+        },
+        "bytes": 395732,
+        "ms": [
+          12.05,
+          14.43,
+          11.81
+        ],
+        "msMin": 11.81,
+        "msMed": 12.05,
+        "msMax": 14.43,
+        "msSpreadPct": 21.7
+      },
+      "ALL": {
+        "prim": 6569,
+        "nodes": 445,
+        "dom": 515,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 3,
+          "path": 370,
+          "g": 15,
+          "circle": 67,
+          "text": 60
+        },
+        "bytes": 508483,
+        "ms": [
+          14.05,
+          14.26,
+          13.84
+        ],
+        "msMin": 13.84,
+        "msMed": 14.05,
+        "msMax": 14.26,
+        "msSpreadPct": 3
+      },
+      "ceiling": 9300,
+      "delta": {
+        "primPct": 49.6,
+        "nodesPct": 55.1,
+        "domPct": 45.5,
+        "bytesPct": 28.5,
+        "msPct": 16.6
+      },
+      "ratios": {
+        "primPerNodeBase": 15.3,
+        "primPerNodeAll": 14.76,
+        "msPer1kPrimAll": 2.14,
+        "msPer100NodesAll": 3.16,
+        "domMinusNodesAll": 70,
+        "domMinusNodesBase": 67,
+        "ceilingHeadroomPrim": 2731
+      }
+    },
+    {
+      "leaf": "migration",
+      "tier": "city",
+      "BASE": {
+        "prim": 5803,
+        "nodes": 370,
+        "dom": 457,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 8,
+          "path": 348,
+          "g": 14,
+          "circle": 4,
+          "text": 83
+        },
+        "bytes": 481697,
+        "ms": [
+          14.59,
+          14.1,
+          15.32
+        ],
+        "msMin": 14.1,
+        "msMed": 14.59,
+        "msMax": 15.32,
+        "msSpreadPct": 8.4
+      },
+      "ALL": {
+        "prim": 8177,
+        "nodes": 423,
+        "dom": 514,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 3,
+          "path": 408,
+          "g": 18,
+          "circle": 8,
+          "text": 77
+        },
+        "bytes": 600771,
+        "ms": [
+          18.64,
+          18.13,
+          17.96
+        ],
+        "msMin": 17.96,
+        "msMed": 18.13,
+        "msMax": 18.64,
+        "msSpreadPct": 3.8
+      },
+      "ceiling": 10000,
+      "delta": {
+        "primPct": 40.9,
+        "nodesPct": 14.3,
+        "domPct": 12.5,
+        "bytesPct": 24.7,
+        "msPct": 24.3
+      },
+      "ratios": {
+        "primPerNodeBase": 15.68,
+        "primPerNodeAll": 19.33,
+        "msPer1kPrimAll": 2.22,
+        "msPer100NodesAll": 4.29,
+        "domMinusNodesAll": 91,
+        "domMinusNodesBase": 87,
+        "ceilingHeadroomPrim": 1823
+      }
+    },
+    {
+      "leaf": "year-018",
+      "tier": "town",
+      "BASE": {
+        "prim": 4340,
+        "nodes": 269,
+        "dom": 329,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 8,
+          "path": 246,
+          "g": 11,
+          "circle": 3,
+          "text": 61
+        },
+        "bytes": 389167,
+        "ms": [
+          11.24,
+          11.26,
+          10.24
+        ],
+        "msMin": 10.24,
+        "msMed": 11.24,
+        "msMax": 11.26,
+        "msSpreadPct": 9.1
+      },
+      "ALL": {
+        "prim": 5930,
+        "nodes": 423,
+        "dom": 484,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 3,
+          "path": 345,
+          "g": 12,
+          "circle": 67,
+          "text": 57
+        },
+        "bytes": 475903,
+        "ms": [
+          14.51,
+          14.67,
+          13.62
+        ],
+        "msMin": 13.62,
+        "msMed": 14.51,
+        "msMax": 14.67,
+        "msSpreadPct": 7.2
+      },
+      "ceiling": 9300,
+      "delta": {
+        "primPct": 36.6,
+        "nodesPct": 57.2,
+        "domPct": 47.1,
+        "bytesPct": 22.3,
+        "msPct": 29.1
+      },
+      "ratios": {
+        "primPerNodeBase": 16.13,
+        "primPerNodeAll": 14.02,
+        "msPer1kPrimAll": 2.45,
+        "msPer100NodesAll": 3.43,
+        "domMinusNodesAll": 61,
+        "domMinusNodesBase": 60,
+        "ceilingHeadroomPrim": 3370
+      }
+    },
+    {
+      "leaf": "year-100",
+      "tier": "town",
+      "BASE": {
+        "prim": 4388,
+        "nodes": 284,
+        "dom": 349,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 8,
+          "path": 260,
+          "g": 12,
+          "circle": 3,
+          "text": 66
+        },
+        "bytes": 397011,
+        "ms": [
+          11.81,
+          9.81,
+          10.32
+        ],
+        "msMin": 9.81,
+        "msMed": 10.32,
+        "msMax": 11.81,
+        "msSpreadPct": 19.3
+      },
+      "ALL": {
+        "prim": 6789,
+        "nodes": 440,
+        "dom": 507,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 3,
+          "path": 364,
+          "g": 14,
+          "circle": 67,
+          "text": 59
+        },
+        "bytes": 513192,
+        "ms": [
+          14.56,
+          14.45,
+          13.01
+        ],
+        "msMin": 13.01,
+        "msMed": 14.45,
+        "msMax": 14.56,
+        "msSpreadPct": 10.7
+      },
+      "ceiling": 9300,
+      "delta": {
+        "primPct": 54.7,
+        "nodesPct": 54.9,
+        "domPct": 45.3,
+        "bytesPct": 29.3,
+        "msPct": 40
+      },
+      "ratios": {
+        "primPerNodeBase": 15.45,
+        "primPerNodeAll": 15.43,
+        "msPer1kPrimAll": 2.13,
+        "msPer100NodesAll": 3.28,
+        "domMinusNodesAll": 67,
+        "domMinusNodesBase": 65,
+        "ceilingHeadroomPrim": 2511
+      }
+    },
+    {
+      "leaf": "crossing",
+      "tier": "town",
+      "BASE": {
+        "prim": 4421,
+        "nodes": 274,
+        "dom": 358,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 8,
+          "path": 251,
+          "g": 14,
+          "circle": 3,
+          "text": 82
+        },
+        "bytes": 417666,
+        "ms": [
+          9.99,
+          10.12,
+          9.79
+        ],
+        "msMin": 9.79,
+        "msMed": 9.99,
+        "msMax": 10.12,
+        "msSpreadPct": 3.3
+      },
+      "ALL": {
+        "prim": 6827,
+        "nodes": 430,
+        "dom": 517,
+        "byTag": {
+          "svg": 1,
+          "title": 1,
+          "rect": 3,
+          "path": 355,
+          "g": 17,
+          "circle": 67,
+          "text": 75
+        },
+        "bytes": 546116,
+        "ms": [
+          13.58,
+          13.75,
+          13.44
+        ],
+        "msMin": 13.44,
+        "msMed": 13.58,
+        "msMax": 13.75,
+        "msSpreadPct": 2.2
+      },
+      "ceiling": 9300,
+      "delta": {
+        "primPct": 54.4,
+        "nodesPct": 56.9,
+        "domPct": 44.4,
+        "bytesPct": 30.8,
+        "msPct": 35.9
+      },
+      "ratios": {
+        "primPerNodeBase": 16.14,
+        "primPerNodeAll": 15.88,
+        "msPer1kPrimAll": 1.99,
+        "msPer100NodesAll": 3.16,
+        "domMinusNodesAll": 87,
+        "domMinusNodesBase": 84,
+        "ceilingHeadroomPrim": 2473
+      }
+    }
+  ],
+  "perTier": {
+    "thorp": {
+      "ceiling": 1000,
+      "prim": 968,
+      "nodes": 69,
+      "dom": 79,
+      "ms": 2.87,
+      "bytes": 122784,
+      "primLeaf": "thorp",
+      "nodeLeaf": "thorp",
+      "domLeaf": "thorp",
+      "msLeaf": "thorp"
+    },
+    "hamlet": {
+      "ceiling": 1400,
+      "prim": 1252,
+      "nodes": 91,
+      "dom": 104,
+      "ms": 3.53,
+      "bytes": 140489,
+      "primLeaf": "hamlet",
+      "nodeLeaf": "hamlet",
+      "domLeaf": "hamlet",
+      "msLeaf": "hamlet"
+    },
+    "village": {
+      "ceiling": 2000,
+      "prim": 1764,
+      "nodes": 171,
+      "dom": 226,
+      "ms": 4.23,
+      "bytes": 179852,
+      "primLeaf": "mountain",
+      "nodeLeaf": "village",
+      "domLeaf": "village",
+      "msLeaf": "mountain"
+    },
+    "town": {
+      "ceiling": 9300,
+      "prim": 7291,
+      "nodes": 445,
+      "dom": 517,
+      "ms": 16.74,
+      "bytes": 546116,
+      "primLeaf": "highwater",
+      "nodeLeaf": "plague",
+      "domLeaf": "crossing",
+      "msLeaf": "plague"
+    },
+    "city": {
+      "ceiling": 10000,
+      "prim": 8177,
+      "nodes": 423,
+      "dom": 514,
+      "ms": 20.82,
+      "bytes": 600771,
+      "primLeaf": "migration",
+      "nodeLeaf": "migration",
+      "domLeaf": "migration",
+      "msLeaf": "city"
+    },
+    "metropolis": {
+      "ceiling": 14200,
+      "prim": 11291,
+      "nodes": 411,
+      "dom": 502,
+      "ms": 22.67,
+      "bytes": 708613,
+      "primLeaf": "metropolis",
+      "nodeLeaf": "metropolis",
+      "domLeaf": "metropolis",
+      "msLeaf": "metropolis"
+    }
+  },
+  "correlations": {
+    "levels": {
+      "primNodes": 0.9,
+      "primMs": 0.98,
+      "nodesMs": 0.91,
+      "nodesBytes": 0.94,
+      "primBytes": 0.99
+    },
+    "deltas": {
+      "primNodes": 0.72,
+      "primMs": 0.65,
+      "nodesMs": 0.52
+    }
+  },
+  "determinismBreaks": []
+}

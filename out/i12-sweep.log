@@ -1,0 +1,8 @@
+── SENSITIVITY GRID · C1 crossing / C2 violations, over reach × tangency band
+  reach×  band 10°      band 15°      band 20°      band 30°      
+  0.5     237/231       237/218       237/195       237/139       
+  1       237/743       237/688       237/623       237/486       
+  1.5     237/1372      237/1279      237/1162      237/896       
+  2       237/1979      237/1853      237/1701      237/1338      
+I12_SWEEP_DONE
+SWEEP_EXIT=0

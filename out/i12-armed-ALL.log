@@ -1,0 +1,25 @@
+── THE TANGENTIAL-OR-CLEAR CENSUS (§645.2 · §575.1) · band=15°  reach×1  line=drawn
+  leaf         wall       reach   nearW  CROSS  VIOL   lawA  lawB  exmpt  tangShare in|out
+  town         main       14.2327 188    23     87     20    27    31     0.1837|0.0877
+  town-2       main       18.6646 234    35     138    32    15    14     0.1705|0.1461
+  city         main       9.4578  129    37     37     22    14    19     0.2281|0.3061
+  city         old-core*  5.505   42     0      0      17    17    8      0.5882|0.4118
+  metropolis   main       8.647   25     6      6      5     4     4      0     |0.3846
+  metropolis   old-core*  4.9386  74     0      0      29    30    15     0.5484|0.4286
+  metropolis   old-core*  4.9386  35     0      0      5     25    5      0.1579|0.1818
+  polycentric  main       9.245   157    10     23     32    64    28     0.22  |0.2857
+  highwater    main       15.5895 3      0      1      0     1     1      0     |null
+  highwater    old-core*  6.6208  20     0      0      12    4     4      0.5714|0.8889
+  siege        main       14.2327 187    23     86     20    27    31     0.1959|0.0862
+  plague       main       14.2327 188    23     87     20    27    31     0.1837|0.0877
+  famine       main       14.2327 188    23     87     20    27    31     0.1837|0.0877
+  migration    main       9.4578  129    37     37     22    14    19     0.2281|0.3061
+  migration    old-core*  5.505   42     0      0      17    17    8      0.5882|0.4118
+  year-100     main       14.2552 2      0      1      0     0     1      null  |0
+  crossing     main       16.4716 191    20     98     19    26    28     0.131 |0.1067
+
+C1 · FOOTPRINTS CROSSING THE WALL LINE   = 237   (scoring circuits: 12 on 18 leaves)
+C2 · TANGENT-OR-CLEAR VIOLATIONS         = 688 of 1621 bodies within reach  (lawful A tangential 212 · lawful B clear 246 · exempt no-axis 238)
+      relict (old-core, NON-SCORING per §250.5): crossing=0 violations=0
+I12_FAIL
+EXIT=1
