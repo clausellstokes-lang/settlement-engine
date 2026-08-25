@@ -27842,3 +27842,43 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   concretely for the fabric — what survives, what re-founds. Labeling discipline per
   R-INST. The dossier lands beside the §654 review's consolidation and BOTH feed the
   fix plan; the owner taste-gates the dossier.
+
+## §657 · THE §654 REVIEW COLLECTS — 9 BROKEN / 21 IMPEDING, A 14-CAR PLAN, AND THE SEQUENCING RULING (2026-08-25 ~20:30 CDT)
+
+- **§657.1 COLLECTED** (six lenses + consolidator, 7/7, full record at
+  review654/CONSOLIDATED.json + the six lens notes): headline grades — the core
+  ladder is "genuinely Watabou-competitive at squint" and several set-pieces are
+  textbook, but **§591 TOTALITY FAILS TODAY**: relict walls float as bare slashes
+  (B4), road wash still crosses water beside the decks on six leaves (B1), streets
+  cross ungated walls in bulk (B2), circuits truncate in open ground (B3), the
+  overhead roof law is absent from fabric with ridge overshoot (B7), the year leaves
+  draw a false history (B8, §655's diagnosis), i8 REDS with two dropped trace rows
+  (B9 — a dropped obligation, not a deferral), a seating law violates its own
+  must-be-zero (B6), and a corrupted gate stamp prints a black caterpillar on dry
+  ground (B5). ⚠ TWO PROCESS FINDINGS BIND THE REVIEW ITSELF: **I1 — the chair's
+  shared exhibit was the 8-ARM render (no --quay/--vquay), so every eyes verdict on
+  river/waterfront leaves carries that caveat and re-judges on the true 10-arm
+  render**; **I21 — the MAIN CHECKOUT carries 3,374 unstaged deletions + 1,267
+  modifications including ALL of townCartography/, unclaimed by any receipt — REF-PIN
+  then triage before ANY shared-tree commit or landing.**
+- **§657.2 THE SEQUENCING RULING (the §654 stop + §656 base law composed):** the fix
+  plan SPLITS. **START NOW (repair/process class, invariant under any re-basing):**
+  CAR-EXHIBIT (re-render 10-arm, re-judge the 16 changed files) · CAR-TREE-TRIAGE
+  (I21, REF-PIN first) · CAR-INSTRUMENTS (i8 rows, i10 B1 control re-mint, the
+  §645.2 tangential census BUILT) · CAR-MEASURES (warehouse round 3 · bridgehead
+  re-measure · wall:all ledger row · TE-WSEAM dispatch) · CAR-GROW's CHAIR RULING
+  (C1's evidence row AMENDS to the measured direction — 0.369 median extramural
+  share, magnitude struck; the stamped-vintage defect is SUPERSEDED by the ledger
+  reader per A1.5, with a guard test at the ledger car so the collapse class cannot
+  recur). **HELD BEHIND THE §656 STUDY + THE LIVE DISSECTION:** every map-code car
+  (WALLS · WATERCLIP · FABRIC-INK · FRAME · SCENARIO · PORT · SEATING · BUDGET's
+  ratchet · REG6-CHARTER) — partition-first re-basing may replace their common cause;
+  patching the stroke-stack first would spend the budget twice.
+- **§657.3 THE STUDY RE-SCOPES:** the R-WATABOU lane died at a SESSION LIMIT
+  mid-sweep (partials on disk). The owner's addendum folds in: RUN the generators —
+  watabou.github.io (city/village/dwelling; client-side, unlimited seeds: instrument,
+  export, diff, profile) and FTG's temporary settlement (**ONE PER DAY — the
+  recording program stands up FIRST**: network capture to establish server-vs-local,
+  console + JS hooks, then the single generation). The chair runs the dissection in
+  the browser pane directly; findings land beside the §656 dossier and unlock the
+  held cars.
