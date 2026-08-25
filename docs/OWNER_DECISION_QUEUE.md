@@ -28074,3 +28074,20 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   the study never mislabels it emulation. Docks District and Iron Wharf name the
   waterfront wards our port leaves lack the institutions to earn (§660.1's atlas gap,
   seen from the reference's side).
+
+## §665 · THE VILLAGE GENERATOR'S MODEL — THE GROWTH FRONTIER IS EXPORTED DATA (2026-08-26 ~01:20 CDT)
+
+- **§665.1** Third capture (Village Generator v1.6.6, St Ald pop 1,600; census at
+  dissect/vg-stald-census.json): 252 buildings · **267 trees as MULTIPOINTS** (the
+  crowns are pure paint — geometry carries position, paint carries character) ·
+  **73 road LineStrings where the city carried FOUR** — the road representation
+  SCALES WITH REGISTER: arterials-only at city scale, the full lane web at village
+  scale, which is our register ladder's projection discipline observed from the
+  reference's side · the village river is an AREA polygon · and **`extendable`: 8
+  MultiPoints — THE GROWTH FRONTIER AS FIRST-CLASS EXPORTED DATA.** Even the one-shot
+  village generator marks where the village would grow next — REG-GROW's frontier
+  concept is in the reference's own export schema. (Planks empty despite drawn
+  bridges — VG likely derives crossings at paint from road∩water; recorded UNCERTAIN,
+  for the study to settle.) The config surface here is a TAG VOCABULARY
+  (district,river,grove,no-square,isolated) — closed tags, not knobs: finite
+  semantics as UI.
