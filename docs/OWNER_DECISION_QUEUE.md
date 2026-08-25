@@ -28475,3 +28475,24 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   future armed run includes `--river`** (the full-arm law, the §660 I1 lesson made
   permanent). **GROW-A RESUMES NOW** on this seal, mid-lane per §448 from its own
   resume block.
+
+## §682 · THE SUCCESSION ARCHITECTURE — EVERY REMAINING WAVE TO THE PORT, PRE-RULED FOR AN OPUS ESTATE (owner's order, 2026-08-26 ~11:40 CDT)
+
+- **§682.1** The owner, anticipating the Fable seat's exhaustion, ordered the
+  remaining spine comprehensively architected now. **docs/DESIGN_SPINE_COMPLETION.md
+  is WRITTEN**: the DRESS RE-BASE as two cars with every survivor row, binding
+  reference, and exit named (the largest unarchitected piece, closed) · registers/
+  zoom · words with the R-DEVLOG label doctrine · JUDGING with its rubric PRE-RULED
+  (§679's constitution + §591 + §580) and its owned rulings listed · decline dress ·
+  share/legacy-sweep/THE FILM (the owner's specimen gate unchanged) · THE PORT with
+  every readiness gate compiled and the retirements enumerated · the SEATING car in
+  A2.4's shape · the sequencing · and **§9's SUCCESSION PROTOCOL: the chair
+  discipline distilled to twelve laws + the owner-gated list + the escalation list**
+  — so an Opus chair inherits judgment as law rather than as style. The five-skeptic
+  panel dispatches on it NOW, while the Fable seat can still rule its findings; its
+  amendment completes the document.
+- **§682.2** Standing note for any successor reading this entry first: the authority
+  chain is DESIGN_SPINE(+A1/A2/addendum) → §675/§677/§678 + A13/A14 →
+  DESIGN_SPINE_COMPLETION(+its panel amendment); the pickup card is
+  docs/HANDOFF_CURRENT.md's state block; the standing orders §675.3/§678.2 bind
+  every dispatch brief.
