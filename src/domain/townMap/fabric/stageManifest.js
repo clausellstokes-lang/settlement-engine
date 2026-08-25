@@ -128,7 +128,24 @@ export const GENERATION_NODES = Object.freeze([
     allowedImports: ['fabricGeometry.js', 'fabricRng.js'],
     randomNamespaces: ['f0:*', 'f1:*', 'f2:*', 'f3:*'],
     statefulForkSites: 0 },
-  { nodeId: 'S0', modules: ['compile.js', 'fabricRng.js', 'lineage.js', 'morphology.js', 'snapshot.js', 'tierGrammar.js'],
+  // ⚠ ⟦REG-GROW-A⟧ `growthAnnotation.js` AND `growthLedger.js` JOIN **S0**, AND THE ASSIGNMENT IS
+  //   THE ARGUMENT. The growth kernel is a PRE-STAGE producing PURE DATA (DESIGN_REG_GROW A1.1):
+  //   roster and record math with no geometry, which is exactly S0's character — it sits beside
+  //   `compile.js` (the spatial record), `snapshot.js` (the year projection it supersedes) and
+  //   `tierGrammar.js` (the sizer it hands a frame's population to).
+  //   ⭐ AND THE ASSIGNMENT COSTS NO EDGE. Both import S0 members only, so every import is
+  //   INTRA-node: `allowedImports` is unchanged and `NODE_EDGES` gains nothing.
+  //   ⛔⛔ THE ONE IMPORT THIS NODE MAY NOT TAKE, RECORDED SO A LATER LANE DOES NOT TRY IT:
+  //   `epochAxis.js` (S5). `growthLedger` needs the circuit thresholds and `OUTGROWN_SHARE`, and
+  //   importing them would create an **S5>S0 backward edge — a THIRD public-order inversion**,
+  //   which `PUBLIC_ORDER_INVERSIONS` refuses at the door. The values are therefore spelled
+  //   locally (`WALLED_TIERS`, `OUTGROWN_SHARE_LOCAL`) and pinned equal by test, and the traffic
+  //   runs the LAWFUL way instead: `deriveEpochs` becomes a READER of the ledger (A1.5), which is
+  //   the already-declared forward edge `S0>S5`.
+  //   ⚠ NEITHER MINTS A RANDOM NAMESPACE. The kernel is pure arithmetic over the record — no
+  //   seeded draw anywhere — so this row's `randomNamespaces` and `statefulForkSites` are
+  //   unchanged and honestly so.
+  { nodeId: 'S0', modules: ['compile.js', 'fabricRng.js', 'growthAnnotation.js', 'growthLedger.js', 'lineage.js', 'morphology.js', 'snapshot.js', 'tierGrammar.js'],
     allowedImports: ['../../foundingKind.js'],
     randomNamespaces: ['*|g'],
     statefulForkSites: 0 },
