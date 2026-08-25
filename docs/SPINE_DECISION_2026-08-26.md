@@ -104,3 +104,17 @@ One word on the direction — **go / hold / modify** — and two standing confir
 go: (a) the §654 stop converts into the spine plan above as the released arc; (b) the
 cutover and every push remain yours, unchanged. Everything else is within the standing
 delegation and will be recorded vetoably as always.
+
+## 8 · Licensing note (added §668, before your decision)
+
+TownGeneratorOS is **GPL-3.0** (verified from the repository). That changes nothing
+about the plan's substance and everything about its discipline: we do **not** read or
+port that repository's code — deriving from GPL source would encumber the product.
+Everything in this package already comes from the clean route: **observed behavior and
+exported data of the live applications** (class names, JSON models, censuses — facts,
+not expression) plus our own prior laws, and the partition/Voronoi-ward/streets-as-edges
+IDEAS are decades-old published procgen techniques, unencumbered. The spine will be an
+independent implementation from an ideas-level spec. The residual question — formal
+comfort that the boundary is adequate — joins your standing LEGAL docket; my
+conservative ruling (observation-only, no code reading by anyone who writes spine code)
+binds meanwhile.

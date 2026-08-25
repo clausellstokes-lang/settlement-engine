@@ -28131,3 +28131,21 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   simulate-time passes (the temporary settlement lives ~24 h) · the dwelling
   generator capture · the R-WATABOU dossier formalization from the six census files
   in dissect/.
+
+## §668 · THE LICENSE LANDS — GPL-3.0, THE DISCIPLINE HARDENS, THE DOSSIER FORMALIZES (2026-08-26 ~02:50 CDT)
+
+- **§668.1** TownGeneratorOS is **GPL-3.0** (CONFIRMED by fetch — the chartered first
+  act, finally discharged). RULING: **no one reads or ports that repository's code**;
+  §656.3's line-by-line repo clause is STRUCK as unnecessary and unsafe. The study
+  stands entirely on the OBSERVATIONAL route already executed — live-app behavior,
+  exported data, bundle-visible class names are facts, not protected expression — and
+  the partition/ward/streets-as-edges IDEAS are decades-old published procgen
+  techniques. The spine implements independently from an ideas-level spec. **Formal
+  comfort joins the owner's LEGAL docket** (by-nature carve-out); the conservative
+  discipline binds meanwhile. SPINE_DECISION gains §8 so the owner decides with the
+  license in view.
+- **§668.2** **draft-R-WATABOU.md FORMALIZED** (scratchpad research/; owner taste-gates)
+  from the six captures: the observed architecture, the convicted-vs-justified mapping,
+  the honest PARTIAL on the devlog word-sweep (died with the lane; nothing in the
+  decision depends on it). The §656.3 charter is thereby DISCHARGED on its re-scoped
+  terms. Still awaiting: THE OWNER'S SPINE ANSWER.
