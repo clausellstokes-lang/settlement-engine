@@ -27717,3 +27717,21 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   net (a planted water-spanning road edge must red at BOTH layers). REG-ROUTE's
   water-refusal row restates in the same vocabulary: corridors terminate at bank
   nodes (a landing IS a bank node with a ferry/quay edge or nothing).
+
+## §652 · THE TOPOLOGY–PAINT CONTRACT, NAMED (owner's question, 2026-08-25 ~17:50 CDT)
+
+- **§652.1** The owner asked why topology and paint are separated to this extent.
+  ANSWERED ON THE RECORD: half DELIBERATE (truth upstream of ink is what makes THE
+  PROMISE enforceable — re-dressing never shifts worlds, instruments convict drawings
+  against facts, the film replays one truth), half DRIFT (paint accumulated decisions
+  of its own — the street stroke with independent extent, the constant-width river,
+  the unread ford — each a shortcut standing in for an underived projection; every
+  §645–§651 catch is paint ASSERTING what topology never said or IGNORING what it did).
+- **§652.2 THE CONTRACT (three clauses, the port's completion criterion):**
+  (1) every drawn mark cites a topological fact (§8.2's law, enforced by i8 per
+  op-class); (2) every fact has exactly one drawing owner (§643's one-owner-per-seam);
+  (3) **no drawing primitive holds geometry the graph does not** (§650/§651's clause —
+  the wash ends because the edge ends). At the §171 cutover, paint must be a PURE
+  FUNCTION of the graph plus the closed dress vocabularies — STYLE is the only freedom
+  paint retains. **REG-P's review gains the three-clause check beside the
+  tierForPopulation ≡ popToTier gate.**
