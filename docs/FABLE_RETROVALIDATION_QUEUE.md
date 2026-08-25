@@ -226,6 +226,21 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§694 · SPINE-3 dispatched; the scope judgment; the gate-name generalization · SEAT: Opus 5.**
+*What was judged:* that the owner's gestalt pause blocks the **taste** arc but not the
+**substrate**, so a constructor car runs now; the two hard exclusions (the band's width,
+which is the owner's signature, and all dress ink); and the generalization drawn from three
+instances in one sitting — *a gate's name is a claim, and the claim must be measured against
+the predicate, not the intention.*
+*What Fable re-derives:* **(a)** whether running SPINE-3 during an owner-gated pause is
+right, or whether an escalation should freeze everything downstream of it — the chair
+reasoned from §684.3's precedent, which is a *convenient* precedent for continuing to work,
+and that is worth a second look. **(b)** whether the three-instance generalization is sound
+or is pattern-matching across cases that only rhyme (a coupling gate, a contract test and a
+legend census are not obviously one family).
+*Receipts:* ODQ §694 · `$SP/briefs/SPINE3-BRIEF.md` · the two dress receipts' §DEFER lists.
+*Priority:* **P2** on (a) — it governs how future escalations behave; P3 on (b).
+
 **§693 · The three parallel sweeps; the P0 verdict; six strikes · SEAT: Opus 5.**
 *What was judged:* the verdict that the completed sitting is **partly poisoned rather than
 wholesale** (two discharges poisoned, the ratifications weakened not voided); the six

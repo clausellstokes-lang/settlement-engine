@@ -29264,3 +29264,43 @@ PA.10 permits). Nothing was edited, staged, or moved by any of them.
   *without citing the earlier one* is invisible to this method. The **document estate
   outside the two queues**. And **whether the sitting's ratifications independently carry
   themselves** — that check was run on §298.1(b) and on nothing else.
+
+## §694 · SPINE-3 DISPATCHED — THE INK CONVICTED THE SUBSTRATE, SO THE SUBSTRATE IS REPAIRED BEFORE ANYTHING ELSE IS LAID ON IT (2026-08-27 ~02:10 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+- **§694.1 THE SCOPE JUDGMENT, WHICH IS THE ONLY REAL DECISION HERE.** The dress arc is
+  paused on the owner (PA.7's gestalt escalation, §692.4) — but **that pause is on a taste
+  question, not on the substrate**, and §692.9 had already chartered these defects to a
+  constructor car. The programme's own precedent governs: §684.3 landed a short constructor
+  car **before** DRESS-1 on the ground that *the substrate must be right before it is inked*.
+  The same reasoning holds one wave later, with better evidence — the defects were found
+  **by** the ink. SPINE-3 therefore runs now, on `map-sandbox-dress1b-round2` = `6e33a0637`.
+- **§694.2 WHAT IT CARRIES:** the **wall drawn across open water** on `city` and `migration`
+  — the class the partition exists to make unrepresentable, which **surfaced through ink
+  because no census was asking** · the **`metropolis` E1 needle** (min-area rect 711 × 31,
+  aspect 22.79) and its **gap-blind `convexHull`**, with the DRESS-1b ring-sanity census
+  gaining a needle predicate so it cannot recur silently · ⛔ **the lost run-type signal —
+  0 of the 83 runs the legacy classifier finds** · **the grade mechanism** (the heightfield
+  never reaches the constructor: route it or strike the claim) · **three wall-raise years at
+  one site** · and the landlocked figure corrected to **25 on 6 distinct partitions, not 31**.
+- **§694.3 THE SHARPEST ITEM IS A CONTRACT, NOT A MODULE.** PA.2's contract test **passed**
+  while the successor publication carried **none** of the legacy producer's 83 runs, because
+  it asserted *"the REG-2 dress renders unchanged"* — **strictly weaker than "the publication
+  carries what the legacy producer carried."** The brief therefore orders the predicate
+  strengthened, not merely the signal restored. **This is the third appearance of one class
+  in this sitting** — §688.7's coupling gate that checked presence instead of a row, and
+  L-REG-34's legend census that checks a bijection instead of legibility, are the other two.
+  ⭐ **The generalization is now worth stating as a standing test: a gate's name is a claim,
+  and the claim must be measured against the predicate, not against the intention.** Every
+  one of the three passed while the thing it was named for was false.
+- **§694.4 TWO HARD EXCLUSIONS, BOTH RECORDED IN THE BRIEF AS STOP-AND-REPORT.**
+  **(i) THE WALL BAND'S WIDTH IS FORBIDDEN TO THIS CAR** — under-width on 5 of 17 wraps
+  (worst 0.212 of declared, `shrinkRing` displacing radially), and **the fix moves every
+  band in the corpus, so it is the owner's signature**, already on their docket. If a repair
+  would move band width as a side effect the lane STOPS rather than proceeding.
+  **(ii) THE GESTALT KEY, THE READER PROTOCOL AND ALL DRESS INK ARE FORBIDDEN** — a
+  constructor car must not be able to unblock, or appear to unblock, a decision that is the
+  owner's. **L-REG-34's legend predicate is real, chartered, and deliberately left to the
+  dress arc** for the same reason.
+- **§694.5 THE HANDOFF STATE BLOCK IS REFRESHED** to §694 (it stood at §689 through four
+  ledger entries — refreshed here per §233, riding this judgment-bearing act under §689's
+  mechanical-acts rule rather than minting a hollow commit of its own).
