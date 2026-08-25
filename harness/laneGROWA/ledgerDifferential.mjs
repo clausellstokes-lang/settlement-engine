@@ -19,16 +19,34 @@
  * prefix-closure rests on — so no population is written down here and no rung is invented. A2.2's
  * band-agnostic rule from REG-4 carries: not one boundary population appears in this file.
  *
- * THE FOUR MEASURED QUANTITIES, each a predicate over the partition's own PLOT faces:
+ * THE FIVE MEASURED QUANTITIES, each a predicate over the partition's own PLOT faces:
  *   frozenRadius    the standing wrap's extent — MUST NOT MOVE once raised (C2)
  *   intramural      a plot whose centroid is inside the standing wrap's inner ring
  *   typedFaubourg   a plot the constructor recorded against a ledger EMISSION act — lawful, apart
+ *   mooredQuay      a plot the constructor recorded against a §3e QUAY act — lawful, apart
  *   sprawl          extramural and NOT covered by a typed act — the thing that must be zero
+ *
+ * ⭐⭐ **WHY A QUAY IS COUNTED APART (GFOLD, §684.3).** A moored quay piece (`partitionWater.
+ * mintQuays`) is a PLOT face the constructor mints on the water, outside the circuit by
+ * construction — A1.3 S2-M1 says the wall TERMINATES at the bank and does not dam the channel, so
+ * a waterfront work can never be enclosed. It is a TYPED act with its own published record
+ * (`P.quays`), exactly as a faubourg is. Crediting it is therefore the same sentence the arm
+ * already speaks about emissions, not a widening of it, and the attribution is by EXACT FACE ID
+ * from that record — the arm cannot credit a face no quay act minted.
+ * ⚠ THE GAP WAS LATENT, NOT NEW: at the GROW-A seal no corpus leaf put a quay outside its circuit
+ * (town 1 · year-100 3, all intramural; the fjord's 1 sits on a leaf with no circuit at all), so
+ * the arm passed 13/13 without the case ever arising. Once the raise moved ahead of the epoch's
+ * growth the `city`/`migration` fixture reached its waterfront and minted 4, and the arm convicted
+ * them as sprawl — MEASURED as exactly the 4 faces in `P.quays`, at rung 9, and nothing else.
  *
  * `--break` holds the ledger's population CONSTANT across every epoch. The rising arm must then
  * fail; a differential that passes on a flat ledger is measuring nothing.
+ * `--plant-sprawl=N` mints N UNTYPED extramural plots per walled rung out of open frontier field —
+ * the sprawl arm's own liveness control, and the reason the quay credit above can be trusted: an
+ * arm that credits too much is indistinguishable from an arm that measures nothing unless a
+ * planted violation still convicts it.
  *
- * Usage: node harness/laneGROWA/ledgerDifferential.mjs [--leaf=town] [--break]
+ * Usage: node harness/laneGROWA/ledgerDifferential.mjs [--leaf=town] [--break] [--plant-sprawl=N]
  */
 import { CORPUS, buildOne } from '../exemplars.mjs';
 import { buildSettledPartition } from '../../src/domain/townMap/fabric/partitionConstruct.js';
@@ -40,6 +58,10 @@ const arg = (n, d) => {
   return hit ? hit.slice(n.length + 3) : d;
 };
 const BREAK = process.argv.includes('--break');
+/** ⛔ THE SPRAWL ARM'S PLANTED VIOLATION: N more untyped extramural plots at EVERY rung, so the
+ *  arm sees a per-rung DELTA it cannot attribute. A flat plant would be invisible to a differential
+ *  — the same vacuity `--break` exists to prevent one arm up. */
+const PLANT = Math.max(0, Number(arg('plant-sprawl', '0')) || 0);
 
 const key = arg('leaf', 'town');
 const spec = CORPUS.find((s) => s.key === key);
@@ -86,6 +108,16 @@ function measure(P) {
     if (!wrap || !inRing(wrap.outer, faceCentroid(arr, f.id))) extra++;
   }
   const typed = P.emissions.reduce((n, e) => n + e.plots, 0);
+  // ⭐ THE §3e CREDIT, BY EXACT FACE ID and counted with the SAME predicate the extramural column
+  //   uses, so the two can never disagree about one face: a quay's PLOT face that lies outside the
+  //   circuit is a typed act's ground, not sprawl.
+  let quay = 0;
+  for (const q of P.quays) {
+    const f = arr.faces[q.face];
+    if (!f || !f.alive || f.cls !== 'PLOT') continue;
+    if (wrap && inRing(wrap.outer, faceCentroid(arr, q.face))) continue;
+    quay++;
+  }
   return {
     plots: P.plots,
     rings: P.wraps.length,
@@ -93,28 +125,55 @@ function measure(P) {
     intramural: intra,
     extramural: extra,
     typedFaubourg: typed,
+    mooredQuay: quay,
     /** ⛔ THE PREDICATE THAT MUST BE ZERO: extramural ground no typed act paid for. */
-    sprawl: Math.max(0, extra - typed),
+    sprawl: Math.max(0, extra - typed - quay),
     sprawlRefusals: P.sprawlRefusals,
     emissionRefusals: P.emissionRefusals,
   };
 }
 
+/** ⛔ THE PLANT. Open frontier FIELD becomes PLOT with NO emission act and NO quay record behind
+ *  it — untyped extramural ground, which is precisely what the arm must refuse. Returns how many
+ *  it managed to plant, so a rung that could not host the violation says so instead of passing. */
+function plantSprawl(P, n) {
+  const arr = P.arrangement;
+  const wrap = P.wraps.length ? P.wraps[P.wraps.length - 1] : null;
+  if (!wrap || n <= 0) return 0;
+  let made = 0;
+  for (const f of liveFaces(arr)) {
+    if (made >= n) break;
+    if (f.cls !== 'FIELD') continue;
+    if (f.attrs && f.attrs.inBand) continue;
+    if (inRing(wrap.outer, faceCentroid(arr, f.id))) continue;
+    f.cls = 'PLOT';
+    made++;
+  }
+  return made;
+}
+
 const nEpochs = input.ledger.epochs.length;
 const rungs = [];
+let planted = 0;
 for (let k = 1; k <= nEpochs; k++) {
   const P = buildSettledPartition({ ...input, epochCap: k });
+  // ⚠ THE PLANT GROWS WITH THE RUNG. A constant plant is invisible to a DELTA predicate — the arm
+  //   would read zero untyped growth and pass, which is the vacuity `--break` already guards one
+  //   arm against and this guards the other.
+  if (PLANT) planted += plantSprawl(P, PLANT * k);
   rungs.push({ k, year: input.ledger.epochs[k - 1].year, pop: input.ledger.epochs[k - 1].population, ...measure(P) });
 }
+if (PLANT) console.log(`⛔ PLANTED SPRAWL: ${PLANT} untyped extramural plot(s) per rung`
+  + ` (${planted} planted in total) — the arm MUST convict`);
 
 console.log(`LEAF ${key}${BREAK ? '  ⛔ --break (population HELD CONSTANT)' : ''}`
   + ` · ${nEpochs} ledger epoch(s) · ${input.ledger.trajectory.shape}`);
-console.log('rung  year   pop     rings  frozenR    intramural  extramural  typedFaubourg  SPRAWL');
+console.log('rung  year   pop     rings  frozenR    intramural  extramural  typedFaubourg  quay  SPRAWL');
 for (const r of rungs) {
   console.log(`${String(r.k).padStart(4)} ${String(r.year).padStart(5)} ${String(r.pop).padStart(7)}`
     + `   ${String(r.rings).padStart(3)}   ${r.frozenRadius === null ? '    —   ' : r.frozenRadius.toFixed(2).padStart(8)}`
     + `    ${String(r.intramural).padStart(8)}    ${String(r.extramural).padStart(8)}`
-    + `       ${String(r.typedFaubourg).padStart(6)}  ${String(r.sprawl).padStart(6)}`);
+    + `       ${String(r.typedFaubourg).padStart(6)}${String(r.mooredQuay).padStart(6)}  ${String(r.sprawl).padStart(6)}`);
 }
 
 // ── THE ARMS ────────────────────────────────────────────────────────────────────────────────
@@ -169,7 +228,7 @@ for (let i = 1; i < rungs.length; i++) {
   const a = rungs[i - 1]; const b = rungs[i];
   if (!(a.rings > 0) || b.rings !== a.rings) continue;   // no standing wrap, or a NEW ring was raised
   const grew = b.extramural - a.extramural;
-  const paid = b.typedFaubourg - a.typedFaubourg;
+  const paid = (b.typedFaubourg - a.typedFaubourg) + (b.mooredQuay - a.mooredQuay);
   const untyped = Math.max(0, grew - paid);
   if (untyped > 0) { sprawl += untyped; sprawlRungs.push(`rung ${b.k} (+${grew} extramural, ${paid} typed)`); }
 }

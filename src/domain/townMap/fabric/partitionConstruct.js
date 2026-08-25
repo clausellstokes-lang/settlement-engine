@@ -379,8 +379,34 @@ export function buildSettledPartition(input) {
       reclaimEpoch(state, ep, ep.year - prevYear, rising ? Math.max(0, target - state.plots) : 0);
     }
     let budget = Math.max(0, target - state.plots);
-    if (k === 0) budget = foundingFrame(state, ep, budget);
-    else if (!rising) {
+    // ⭐⭐⭐ **§684.3 · THE RAISE PRECEDES ITS EPOCH'S GROWTH.** A wall is built around what EXISTS,
+    // and that epoch's growth then ANSWERS it — infill inside the new band, typed emission outside.
+    // The wrap is therefore computed and frozen HERE, before one accretion or infill act of this
+    // epoch runs, and the growth branch below reads `state.wraps.length` with this epoch's circuit
+    // already standing.
+    // ⛔⛔ **THIS IS THE ROOT CURE OF J-GROWA-12, AND THE ROOT IS THE ORDER, NOT THE EMISSION.**
+    // While the raise ran AFTER the growth, an epoch that raised its FIRST wall took the `accrete`
+    // branch (no wrap stood when the branch was chosen), so that epoch's ledger emission acts were
+    // never asked for — one act dropped per walled leaf, MEASURED as 12 of 132 corpus-wide, every
+    // one of them at a raise epoch. Asking for them where they used to be — after the raise, with
+    // the epoch's budget already spent by accretion — was BUILT AND MEASURED by GROW-A and cost the
+    // metropolis 2,650 → 1,698 plots: a one-soul emission at a spent-budget epoch still carved a
+    // development patch out of the open frontier, and `pickHost`'s largest-face order never
+    // recovered the ground. Under this order that state cannot arise: at a walled epoch `accrete`
+    // does not run at all, so the emission never competes with it for the largest face, and the
+    // budget the emission draws on is the epoch's own, unspent.
+    // ⚠ **EPOCH 0 IS THE ONE EXCEPTION AND IT IS STRUCTURAL, NOT A CARVE-OUT.** `raiseWrap` traces
+    // the hull of the BUILT PIECES; before `foundingFrame` seeds the root face there are no faces at
+    // all, so a raise here would fall through the `pts.length < 8` floor and the circuit event would
+    // be LOST SILENTLY. The founding frame runs first and the raise follows it within the same
+    // epoch — still ahead of every later epoch's growth. MEASURED: **0 of 18 corpus leaves carry a
+    // circuit event at epoch 0** (earliest is the metropolis at epoch 6), so this branch changes no
+    // leaf's drawing today; it exists so a record that does date a founding wall cannot lose it.
+    if (k > 0) for (const ce of (ep.circuitEvents || [])) raiseWrap(state, ep, ce);
+    if (k === 0) {
+      budget = foundingFrame(state, ep, budget);
+      for (const ce of (ep.circuitEvents || [])) raiseWrap(state, ep, ce);
+    } else if (!rising) {
       // ⭐⭐ **§3f · PIECES EMPTY → ABANDON.** Exactly as many pieces as the ledger's own fall no
       // longer holds souls for — the partition is brought TO the record, never past it.
       // ⚠ …OR AS MANY AS THE RECORD'S OWN DATED DISASTERS ASK FOR, WHICHEVER IS GREATER: a recorded
@@ -397,18 +423,8 @@ export function buildSettledPartition(input) {
     //    has, which includes what it built this epoch. In a FALLING epoch the branch above already
     //    consumed them, so this cannot double-birth.
     if (rising && recordedLosses.length) declineEpoch(state, ep, recordedLosses.length);
-    for (const ce of (ep.circuitEvents || [])) raiseWrap(state, ep, ce);
-    // ⚠⚠ **DELIBERATELY DEFERRED, DOCUMENTED, NOT A BUG TO RE-FIND (GROW-A-RESUME).** The growth
-    // branch above places souls OUTSIDE only when a wrap already stands, and this epoch's wrap is
-    // raised on the line above — so a ledger emission act dated to the RAISE YEAR is skipped, one
-    // per walled leaf (the rosters read 9 of 10 · 6 of 7 · 29 of 30 · 12 of 13). Placing it here,
-    // after the raise, was BUILT AND MEASURED and is not kept: it draws every act (30 of 30) and
-    // costs the metropolis **2,650 → 1,698 plots**, because a one-soul emission at a raise epoch
-    // whose budget is already spent still carves a development patch out of the open frontier and
-    // `pickHost`'s largest-face order never recovers the ground. The act is worth one faubourg; the
-    // cost is a third of the settlement. **The right cure is the ORDERING — the wrap's raise moving
-    // ahead of the epoch's growth — and that changes what the enclosure hull sees, so it is a
-    // geometry decision for the chair, not a fix to smuggle into this act.**
+    // ⚠ THE RAISE USED TO STAND HERE, AFTER THE GROWTH. §684.3 moved it ahead of the growth branch
+    //   above; J-GROWA-12's dropped act is cured there and the reason is written at the new site.
     for (const qm of (ep.quarterMints || [])) mintQuarter(state, ep, qm);
     // ⭐⭐ **§3e · THE CROSSINGS AND THE QUAYS ARE EPOCH ACTS.** A ford is as old as the site; a
     // bridge is a public work a settlement grows into (`CROSSING_BUDGET.popFloor`), so it is minted
@@ -889,6 +905,20 @@ function emitLot(state, fid, box, key) {
     blockPiece = mintPiece(arr, 'BLOCK', -1, state.rootWard, { block });
     state.blockOfRun.set(block, blockPiece);
   }
+  // ⭐⭐⭐ **THE FACE'S PREVIOUS TENURE IS RETIRED HERE, AT THE ONE POINT A FACE BECOMES A PLOT
+  // UNDER A NEW PIECE (GFOLD, §684.3).** Infill de-classes a standing plot to FIELD so the
+  // recursion can re-cut it, and reclamation hands a ruin back as FIELD; when the recursion then
+  // emits a lot on that ground the face gets a NEW piece, and its old `plot.<piece>` key is left
+  // asserting that a piece which owns no drawing is a plot with a founding beat.
+  // ⛔⛔ THE CENSUS CANNOT SEE THIS: `walkTotality` walks the DRAWN roster and never asks whether an
+  // annotation still has a drawing behind it, so a stray is neither an orphan nor an `unknown`.
+  // MEASURED over the 18-leaf corpus at the GROW-A seal: **14,136 stray annotations, 13,240 of them
+  // on the metropolis alone** — its published annotation map was 16,586 entries for a 2,633-plot
+  // settlement. The retirement is placed HERE rather than at the two callers because this is the
+  // chokepoint every re-development flows through; a per-caller fix is the shape that leaves the
+  // third caller broken.
+  const prior = arr.faces[fid].piece;
+  if (prior >= 0) delete state.annotations[`plot.${prior}`];
   const pid = mintPiece(arr, 'PLOT', fid, blockPiece, { run, block });
   arr.faces[fid].cls = 'PLOT';
   state.plots++;
@@ -1083,6 +1113,24 @@ function raiseWrap(state, ep, ce) {
     }
     // ⚠ A MINOR WAY IS **SEVERED**, NOT GATED — A1.3's gate economy: gates are few and expensive.
     const wasWay = f.cls === 'WAY';
+    // ⭐⭐⭐ **WHAT THE BAND SWALLOWS STOPS BEING COUNTED, AND ITS OLD KEY STOPS BEING TRUE (GFOLD,
+    // §684.3).** The ring is inserted through whatever it crosses, so a PLOT inside the annulus
+    // becomes WALLBAND ground. Two bookkeeping halves were missing and the raise moving ahead of
+    // the epoch's growth is what surfaced them, because the band now closes around the settlement's
+    // OLDEST pieces instead of around a frontier that epoch had just built:
+    //   (1) `state.plots` was never decremented, so the published count drifted ABOVE the live PLOT
+    //       faces — MEASURED at the seal as +205 over the corpus, on 13 of 13 walled leaves and on
+    //       NONE of the 5 unwalled ones, which is how the cause was identified.
+    //   (2) the face kept its `plot.<piece>` annotation — a sentence asserting that a piece which
+    //       is now wall is a plot with a founding beat. ⛔ AND IT IS INVISIBLE TO THE CENSUS:
+    //       `walkTotality` walks the DRAWN roster and never asks whether an annotation still has a
+    //       drawing behind it, so a stray is never an orphan and never an `unknown`. The only
+    //       instrument in the estate that can trip over one is E9's plant, and it did.
+    // The line below already said the law — *"a re-classed face owes a FRESH annotation; its old key
+    // names a class it no longer is"* — and stamped the fresh key without retiring the stale one.
+    if (f.cls === 'PLOT') { state.plots--; delete state.annotations[`plot.${f.piece}`]; }
+    else if (f.cls === 'VOID') delete state.annotations[`void.${f.id}`];
+    else if (wasWay) delete state.annotations[`way.${f.id}`];
     f.cls = 'WALLBAND';
     f.attrs = { ...f.attrs, wrap: idx, inBand: true, severed: wasWay };
     band.push(f.id);
@@ -1478,10 +1526,27 @@ function emit(state, ep, act, budget) {
 
 /**
  * ⭐⭐ **THE FRONTIER LEG.** From the anchor, step outward along the ray from the settlement centre
- * until the ground under foot is an open FIELD face that is not band ground and not wet. The walk is
- * bounded by the seeded extent, so it terminates; a walk that finds nothing returns −1 and the
- * caller counts the refusal rather than losing the act.
+ * over open FIELD ground that is not band ground and not wet. The walk is bounded by the seeded
+ * extent, so it terminates; a walk that finds nothing returns −1 and the caller counts the refusal
+ * rather than losing the act.
  * ⚠ THE STEP IS THE ROAD WIDTH, so the search grain is the settlement's own, not a constant.
+ *
+ * ⭐⭐⭐ **THE ORDER IS `pickHost`'s OWN — (area desc, faceId asc) — AND THAT IS THE SECOND HALF OF
+ * THE J-GROWA-12 CURE (§684.3).** The walk used to return the FIRST open face it stepped onto, so
+ * the estate carried TWO host-choosers spelling ONE law two different ways: accretion took the
+ * LARGEST reachable open face, emission took whichever one the ray happened to touch first. That
+ * difference is what let a small act permanently throttle a large one. `developGround` carves a
+ * patch sized to the act (`carveDevelopmentPatch` halves the host toward its frontier until the
+ * piece is about the size the budget asks for), so a **2-plot act leaves the frontier it stood on
+ * cut into slivers**, and the next act's first-hit walk lands on one of them.
+ * ⛔⛔ MEASURED AT THE METROPOLIS'S LAST EPOCH, with the raise already moved ahead of the growth:
+ * 133 open FIELD faces stood outside the wrap holding 1,227,216 u², the largest 180,310 u² — and
+ * the first-hit walk handed three of the five gates faces of **25, 14 and 92 u²** while the LARGEST
+ * face on the SAME RAY measured 85,493, 47,771 and 110,445. An 87-plot act wants 3,819 u²; a 25 u²
+ * sliver holds one lot. The corpus's 30 metropolis acts asked for 1,105 plots and drew 637.
+ * ⚠ THE WALK STILL STOPS AT THE EXTENT AND STILL PREFERS THE RAY — only the tie between the faces
+ * the ray actually crosses is broken by ground rather than by arrival, so a faubourg still lands on
+ * the gate's own side of the settlement. No threshold and no constant is minted here.
  */
 function frontierHost(state, at) {
   const { arr, input } = state;
@@ -1491,6 +1556,7 @@ function frontierHost(state, at) {
   const L = Math.hypot(dx, dy) || 1;
   const ux = dx / L; const uy = dy / L;
   const reach = Math.max(0, input.extent.radius * 0.98 - L);
+  let best = -1; let bestA = 0;
   for (let s = 0; s <= reach; s += rw) {
     const p = [at[0] + ux * s, at[1] + uy * s];
     if (inWater(state, p[0], p[1])) continue;
@@ -1504,9 +1570,10 @@ function frontierHost(state, at) {
     //   `town-2` leaf drop **6 of its 7** typed emission acts, because open country an early epoch
     //   had probed at a small budget was permanently closed to every later faubourg.
     if (face.attrs && face.attrs.inBand) continue;
-    return f;
+    const a = faceArea(arr, f);
+    if (a > bestA || (a === bestA && best >= 0 && f < best)) { bestA = a; best = f; }
   }
-  return -1;
+  return bestA > 0 ? best : -1;
 }
 
 /**
