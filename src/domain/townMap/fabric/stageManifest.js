@@ -199,7 +199,10 @@ export const GENERATION_NODES = Object.freeze([
     statefulForkSites: 1 },
   { nodeId: 'S17', modules: ['waterWorks.js'],
     allowedImports: ['fabricGeometry.js', 'fabricRng.js', 'lineage.js', 'reservedGround.js', 'trigTable.js', 'waterMode.js'],
-    randomNamespaces: ['*|watergate|*|*'],
+    // ⭐ REG-5 · V-QUAY's four key spellings join S17 with the deriver that mints them
+    //   (ODQ §636.2). They are pure `hashUnit` string hashes — no stream — so
+    //   `statefulForkSites` is unchanged and honestly so.
+    randomNamespaces: ['*|vquay|*', '*|vquay|*|*|n', '*|vquay|*|*|u', '*|vquay|*|*|v', '*|watergate|*|*'],
     statefulForkSites: 0 },
   { nodeId: 'S18', modules: ['fields.js'],
     allowedImports: ['fabricGeometry.js', 'fabricRng.js', 'groundRefusal.js', 'substrate.js'],

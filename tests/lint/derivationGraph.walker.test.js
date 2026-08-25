@@ -367,7 +367,12 @@ const HAND_MINTED_FORK_KEYS = Object.freeze({
   'streets.js': 1,
   'substrate.js': 4,           // valley|bearing, valley|across, ramp|edge, resource|…|site
   'terraform.js': 1,
-  'waterWorks.js': 1,
+  // ⭐ REG-5 · 1 → 7. V-QUAY's deriver (ODQ §636.2) mints six more `${seedKey}|…` keys in
+  //   this file — the fixture count, the two placement coordinates and the three per-kind
+  //   counts. DECLARED, not absorbed: the inventory stays EXACT and an eighth still reds.
+  //   Nothing is cured; a key-spelling cure is always a same-seed shift (§241.5c) and these
+  //   six join the same frozen surface as the other thirty-four.
+  'waterWorks.js': 7,
 });
 
 describe('§234 · randomness is keyed, and a new hand-minted fork key cannot appear quietly', () => {
