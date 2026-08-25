@@ -28091,3 +28091,23 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   for the study to settle.) The config surface here is a TAG VOCABULARY
   (district,river,grove,no-square,isolated) — closed tags, not knobs: finite
   semantics as UI.
+
+## §666 · THE FTG SHOT FIRED — FULLY LOCAL, STAGED-GROWTH CONFIG, AND DERIVATION-NOT-STORAGE (2026-08-26 ~01:50 CDT)
+
+- **§666.1 THE RIG PAID:** the single daily temporary settlement ("North Tsodjanvault",
+  town ~4,000, coastal, rivers+forests+farms+walled) was created behind the recording
+  rig and the architecture question is ANSWERED: **generation is fully client-side —
+  zero API calls end to end; EIGHT parallel buildingGeometryWorker Web Workers;
+  Three.js pages** — and storage is localStorage's settlement-ID + timestamp ONLY (no
+  IndexedDB): the temporary settlement appears to REGENERATE from stored parameters.
+  **FTG's daily limit is a cookie, not a server bill — and their storage model is
+  derivation-not-storage, THE PROMISE's own shape.**
+- **§666.2 THE CONFIG TREE IS A CONFESSION:** the form's internal field names expose
+  `layoutParameters.stages.stages[N].placeWallAfter` — **FTG models layout as
+  SEQUENTIAL GROWTH STAGES with the wall as a dated event between stages** (their
+  Ringed preset = stages each walled) — the circuit law and staged growth, in the
+  competitor's parameter tree. Plus: a closed farm-crop vocabulary (Flax…Bees),
+  road-entry patterns (dead-end / through-road / N-way), build-order strategies, the
+  D&D lifestyle ladder, and landscape toggles incl. mines/quarries/reserve-natural.
+  Findings at dissect/ftg-one-shot-findings.json; the settlement lives 24 h for the
+  deeper entity-schema and simulate-time passes.
