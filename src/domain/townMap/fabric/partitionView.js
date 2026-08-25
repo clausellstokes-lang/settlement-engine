@@ -147,8 +147,22 @@ export function projectPage(partition, opts = {}) {
   const voids = [];
   const band = [];
   const fields = [];
+  /** ⭐⭐ SPINE-2 · §3e's and §3f's own page rosters. A face class the page does not carry is a
+   *  face class the page silently drops, which is the 44/56/139-dwelling defect by another door. */
+  const water = [];
+  const loss = [];
   for (const f of liveFaces(arr)) {
-    if (f.cls === 'WAY') {
+    if (f.cls === 'WATER') {
+      water.push({
+        face: f.id, kind: (f.attrs && f.attrs.waterKind) || 'river',
+        waterGate: !!(f.attrs && f.attrs.waterGate), ring: ringOf(arr, f.id, keep),
+      });
+    } else if (f.cls === 'LOSSREGION') {
+      loss.push({
+        face: f.id, key: f.attrs && f.attrs.loss, state: (f.attrs && f.attrs.lossState) || 'INTACT',
+        ring: ringOf(arr, f.id, keep),
+      });
+    } else if (f.cls === 'WAY') {
       ways.push({
         face: f.id, rank: (f.attrs && f.attrs.rank) || 'lane', gate: !!(f.attrs && f.attrs.gate),
         ring: ringOf(arr, f.id, keep),
@@ -165,6 +179,15 @@ export function projectPage(partition, opts = {}) {
 
   // ── E8 · THE IDENTITY BIJECTION, BOTH DIRECTIONS, AT THE END ────────────────────────────────
   const identity = bijection(plots, masses);
+  // ⭐⭐⭐ **SPINE-2 · E8 EXTENDED OVER THE NEW FACE CLASSES.** A1.2's law is *"every truth plot is
+  // drawn-as-itself XOR owned by exactly one drawn mass, BOTH DIRECTIONS"*, and §3e/§3f add three
+  // families of truth face the original bijection cannot see: `WATER`, `LOSSREGION`, and the
+  // moored quay pieces (which ARE plots and ride the mass census already). A page that carried
+  // masses faithfully and silently dropped the river would pass E8 as SPINE-1 spelled it.
+  const identityExtended = classBijection(arr, {
+    WATER: water.map((x) => x.face),
+    LOSSREGION: loss.map((x) => x.face),
+  });
 
   // ── the page budget census, in the band's own unit ──────────────────────────────────────────
   const budget = pageBudget(masses, ways, voids, band, fields, rw2);
@@ -180,17 +203,29 @@ export function projectPage(partition, opts = {}) {
     ways: Object.freeze(ways),
     voids: Object.freeze(voids),
     band: Object.freeze(band),
+    /** ⭐⭐ SPINE-2 · §3e's and §3f's own page rosters, carried so the extended bijection has
+     *  something to be a bijection ONTO. */
+    water: Object.freeze(water),
+    loss: Object.freeze(loss),
+    crossings: Object.freeze((partition.crossings || []).map((c) => Object.freeze({
+      kind: c.kind, at: c.at, station: c.station, localWidth: c.localWidth,
+    }))),
+    quays: Object.freeze(partition.quays || []),
     gates: Object.freeze(gates),
     fields: Object.freeze(fields),
     wraps: partition.wraps,
     neverAggregate: NEVER_AGGREGATE,
     layers: PAGE_LAYERS,
     identity,
+    identityExtended,
     budget,
     reason: `${masses.length} page mass(es) over ${runs.length} party run(s) and ${plots.length}`
       + ` truth plot(s); ${ways.length} way face(s), ${voids.length} void(s), ${band.length} band`
       + ` face(s), ${gates.length} gate(s); identity ${identity.ok ? 'BIJECTIVE' : 'BROKEN'}`
-      + ` (${identity.orphans.length} orphan(s), ${identity.doubles.length} double(s))`,
+      + ` (${identity.orphans.length} orphan(s), ${identity.doubles.length} double(s));`
+      + ` ${water.length} water face(s), ${loss.length} loss region(s),`
+      + ` ${(partition.crossings || []).length} crossing(s), ${(partition.quays || []).length}`
+      + ` quay(s) — extended identity ${identityExtended.ok ? 'BIJECTIVE' : 'BROKEN'}`,
   });
 }
 
@@ -403,6 +438,35 @@ function bijection(plots, masses) {
     reason: `${owner.size}/${plots.length} truth plot(s) owned by exactly one drawn mass;`
       + ` ${orphans.length} orphan(s) (drawn nowhere), ${doubles.length} double(s) (owned twice),`
       + ` ${phantom.length} phantom(s) (owned but not truth)`,
+  };
+}
+
+/**
+ * ⭐⭐⭐ **E8, EXTENDED · EVERY TRUTH FACE OF A DRAWN CLASS IS DRAWN EXACTLY ONCE.** The plot half
+ * is `bijection` above; this is the same law over the classes §3e and §3f added, and it is a
+ * bijection in both directions for the same reason: a roster that is a SUBSET of truth drops faces
+ * silently, and one that is a SUPERSET draws faces the partition does not hold.
+ */
+function classBijection(arr, rosters) {
+  const missing = [];
+  const phantom = [];
+  const counts = {};
+  for (const [cls, drawn] of Object.entries(rosters)) {
+    const truth = liveFaces(arr).filter((f) => f.cls === cls).map((f) => f.id);
+    const drawnSet = new Set(drawn);
+    counts[cls] = { truth: truth.length, drawn: drawn.length };
+    for (const id of truth) if (!drawnSet.has(id)) missing.push({ cls, face: id });
+    const truthSet = new Set(truth);
+    for (const id of drawn) if (!truthSet.has(id)) phantom.push({ cls, face: id });
+    if (drawn.length !== new Set(drawn).size) phantom.push({ cls, why: 'a face drawn twice' });
+  }
+  return {
+    counts,
+    missing,
+    phantom,
+    ok: missing.length === 0 && phantom.length === 0,
+    reason: Object.entries(counts).map(([c, v]) => `${c} ${v.drawn}/${v.truth}`).join(' · ')
+      + ` — ${missing.length} truth face(s) drawn nowhere, ${phantom.length} drawn but not truth`,
   };
 }
 

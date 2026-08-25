@@ -18,13 +18,34 @@
 
 import {
   EDGE_TYPES, FACE_CLASSES, RESERVED_EDGE_TYPES, RESERVED_FACE_CLASSES,
-  faceArea, faceCentroid, faceRing, liveFaces, properCrossings,
+  faceArea, faceCentroid, faceRing, liveFaces, properCrossings, vertexOnEdgeViolations,
 } from './partitionArrangement.js';
 import { walkTotality } from './growthAnnotation.js';
 
-/** The owing classes for A6.1's walker, over the PARTITION's own element families. */
+/**
+ * The owing classes for A6.1's walker, over the PARTITION's own element families.
+ * ⭐⭐ SPINE-2 ADDS THREE — `water`, `crossing`, `loss` — and adding them is not a formality: a
+ * class the walker does not own is a class whose faces can go unannotated with the walker green,
+ * which is the silent half of L-REG-26 and exactly what a totality census exists to make loud.
+ */
 export const PARTITION_OWING_CLASSES = Object.freeze(['plot', 'void', 'way', 'wallband', 'gate',
-  'wall', 'ward']);
+  'wall', 'ward', 'water', 'crossing', 'loss']);
+
+/**
+ * ⭐⭐⭐ THE BANK-AGREEMENT BAR, as a multiple of the channel's NOMINAL half-width — and it is
+ * **`RIVER_PROFILE.hi`, the §648 profile's OWN ceiling on how wide a reach may get**, not a number
+ * chosen to make an arm green. The claim it makes is exact: *no bank vertex lies further from the
+ * drawn channel than the widest half-width the profile is permitted to produce there.* A bank
+ * beyond it is on some other river.
+ * ⚠ MEASURED AGAINST BOTH SIDES. It convicts the centreline-smoothed bank this car built first
+ * (worst 17.153 = **2.05×** nominal on the town) and clears the tangent-smoothed one that replaced
+ * it (worst 11.543 = 1.38× on the siege leaf, chord-across-a-meander between two stations). Spelled
+ * at 1.25 it also convicted the CURED geometry, which is how the difference between a bar and a
+ * fitted constant gets settled — by asking what law the number comes from.
+ * ⚠ SPELLED LOCALLY rather than imported: `RIVER_PROFILE` lives in `waterMode.js`, and the census
+ * is on S8 with no need of that node. Pinned equal by test.
+ */
+export const BANK_AGREEMENT_BAR = 1.55;
 
 /**
  * ⭐⭐⭐ **E1 · THE SIX INVARIANTS OF §1.** Returns one row per arm with its violations and the
@@ -72,16 +93,29 @@ export function censusInvariants(partition, input = {}) {
 
   // 5 · NO WAY FACE SPANS WATER (§1 / A1.5). Structural: the constructor refuses a way whose chord
   //     touches the wet band, so this is 0 BY CONSTRUCTION — and measured anyway.
+  // ⛔⛔ **AND THE BAND IS ONE-SIDED ON A COAST, WHICH IS `waterMode`'s OWN RULING AND NOT A
+  //     RELAXATION.** *"The shore is an EDGE, not a division"* — a coast has water on exactly one
+  //     side of its line, the side away from `bankSide`. Measured with the band taken symmetrically:
+  //     the city convicted on ONE way face whose vertex sat **3.43 units on the LANDWARD side** of
+  //     its shore, which is a quayside street and not a road in the sea. A river genuinely has water
+  //     on both sides and is tested on both.
   const wet = [];
   if (input.water && input.water.line && input.water.line.length > 1) {
     const half = (input.water.width || 0) / 2;
+    const coast = input.water.kind === 'coast';
+    // ⚠ **THE LAND SIDE IS MEASURED FROM THE PARTITION'S OWN PIECES, NOT READ OFF `bankSide`.** The
+    //   relationship's sign is `deriveWaterMode`'s convention and this census has no business
+    //   assuming it matches the one `sideOfPolyline` computes — a mismatched convention would
+    //   exempt exactly the wrong half of the shore and read as green. The settlement's own plots
+    //   are on the land by definition, so their majority side IS the land side, measured here.
+    const side = coast ? majoritySide(arr, faces, input.water.line) : 0;
     for (const f of faces) {
       if (f.cls !== 'WAY') continue;
       for (const p of faceRing(arr, f.id)) {
-        if (distToPolyline(p[0], p[1], input.water.line) <= half) {
-          wet.push({ face: f.id, at: p });
-          break;
-        }
+        if (distToPolyline(p[0], p[1], input.water.line) > half) continue;
+        if (coast && sideOfPolyline(p[0], p[1], input.water.line) === side) continue;
+        wet.push({ face: f.id, at: p });
+        break;
       }
     }
   }
@@ -98,8 +132,16 @@ export function censusInvariants(partition, input = {}) {
     if (h.face === t.face) strayWall.push({ edge: e.id, key: e.key, why: 'the wall edge bounds one face on both sides' });
   }
 
+  // 7 · ⭐⭐⭐ **SPINE-2 · NO VERTEX ON AN EDGE'S INTERIOR — E1's STRUCTURAL CAUSE, MEASURED IN ITS
+  //     OWN RIGHT.** Planarity can read 0 while this reads nonzero: a vertex sitting on an edge is
+  //     one operation away from a crossing and is invisible to a proper-crossing predicate, which
+  //     is exactly how the metropolis's 2 crossings survived SPINE-1's whole guard set. Arming the
+  //     cure without this arm would leave the fix provable only by the symptom it removes.
+  const onEdge = vertexOnEdgeViolations(arr, 32);
+
   const arms = [
     { arm: 'planarity', walked: arr.edges.length, violations: crossings },
+    { arm: 'no-vertex-on-edge', walked: arr.verts.length, violations: onEdge },
     { arm: 'coverage-euler', walked: F, violations: euler === 2 ? [] : [{ V, E, F, euler, want: 2 }] },
     { arm: 'edge-totality', walked: arr.edges.length, violations: untyped },
     { arm: 'face-totality', walked: faces.length, violations: unclassed },
@@ -240,8 +282,14 @@ export function censusTotality(partition) {
     else if (f.cls === 'VOID') drawn.push({ key: `void.${f.id}`, klass: 'void' });
     else if (f.cls === 'WAY') drawn.push({ key: (f.attrs && f.attrs.gate) ? `gate.${f.id}` : `way.${f.id}`, klass: (f.attrs && f.attrs.gate) ? 'gate' : 'way' });
     else if (f.cls === 'WALLBAND') drawn.push({ key: `wallband.${f.id}`, klass: 'wallband' });
+    else if (f.cls === 'WATER') drawn.push({ key: `water.${f.id}`, klass: 'water' });
+    else if (f.cls === 'LOSSREGION') drawn.push({ key: `loss.${f.id}`, klass: 'loss' });
   }
   for (const w of (partition.wraps || [])) drawn.push({ key: `wall.E${w.index}`, klass: 'wall' });
+  // ⭐⭐ SPINE-2 · A CROSSING IS A DRAWN ELEMENT AND OWES ITS OWN ANNOTATION. It is keyed by its
+  //   ORDINAL and not by a face, because a crossing is an EDGE — the one drawn family in this
+  //   partition that is not a face, and the family a face-only walker would silently miss.
+  for (const [i] of (partition.crossings || []).entries()) drawn.push({ key: `crossing.${i}`, klass: 'crossing' });
   for (const p of arr.pieces) if (p.cls === 'WARD') drawn.push({ key: `ward.${p.id}`, klass: 'ward' });
   const walk = walkTotality({
     drawn,
@@ -249,6 +297,261 @@ export function censusTotality(partition) {
     owing: PARTITION_OWING_CLASSES,
   });
   return { ...walk, drawnRoster: drawn.length, ok: walk.orphans.length === 0 };
+}
+
+/**
+ * ⭐⭐⭐ **E12 · SPINE-2 · THE WATER CENSUS — §3e's THREE STRUCTURAL CLAIMS, EACH WITH ITS OWN ARM.**
+ * The charter's exit reads: *"every WAY×WATER terminates at a bank node; every CROSSING edge joins
+ * two bank nodes"* — and the third arm is the one that stops the other two being vacuous.
+ *
+ *  bank-bounded      every `WATER` face's boundary is `BANK`, `CROSSING`, or the arrangement's own
+ *                    FRONTIER rim — and the rim share is COUNTED rather than exempted, because a
+ *                    water face bounded mostly by rim is a channel that barely entered the extent
+ *                    and a reader is entitled to know which it is.
+ *  crossing-endpoints  every `CROSSING` edge joins two BANK NODES — a bank node being a vertex
+ *                    incident to at least one `BANK` edge. A crossing that landed on open ground
+ *                    would be a deck to nowhere, and this is the arm that says so.
+ *  way-in-water      no `WAY` face has a ring vertex strictly inside the water body. §1's own
+ *                    invariant, now provable from the FACES: a way is cut inside one bank's ground
+ *                    and a chord inside a face cannot reach across a face that is not it. The
+ *                    `no-way-spans-water` arm above asks the same question of the drawn CHANNEL;
+ *                    this one asks it of the water FACES, and the two agreeing is the point.
+ *  ⛔ **LIVENESS — THE HALF THAT MAKES A ZERO MEAN SOMETHING.** A leaf that HAS a watercourse must
+ *  mint water faces and bank edges; a leaf that has none must mint neither. Without this the whole
+ *  census is satisfied by a partition that simply never cut any water, which is precisely the shape
+ *  the reserved-class census took when `WATER` was reserved — and precisely why that census could
+ *  not survive the class being built.
+ */
+export function censusWater(partition, input = {}) {
+  const arr = partition.arrangement;
+  const faces = liveFaces(arr);
+  const waterFaces = faces.filter((f) => f.cls === 'WATER');
+  const bankEdges = arr.edges.filter((e) => e.type === 'BANK');
+  const crossEdges = arr.edges.filter((e) => e.type === 'CROSSING');
+
+  // a BANK NODE is a vertex incident to at least one BANK edge — the structural definition
+  const bankNode = new Set();
+  for (const e of bankEdges) {
+    const h = arr.halfEdges[e.he];
+    bankNode.add(h.origin);
+    bankNode.add(arr.halfEdges[h.twin].origin);
+  }
+
+  // ⛔⛔ **THE BOUNDARY ARM, RESTATED AFTER MEASUREMENT — AND THE FIRST SPELLING WAS A CENSUS THAT
+  // WOULD HAVE CONVICTED THE DESIGN.** Asking *"is every WATER boundary edge BANK or CROSSING"*
+  // reds on two things the laws EXPLICITLY allow: a `WALL` edge where a wrap meets the water (A1.3's
+  // S2-M1 rules exactly that lawful — *"a wall face terminates at a bank with a WATER GATE or
+  // TERMINUS WORK; the half-ring is a lawful wall face whose fourth side IS the bank"*), and a quay's
+  // own landward chord, which §3e mints on purpose. Measured on the town: 14 such edges, every one
+  // of them a wrap facet or a `quay.*` chord.
+  // The invariant with teeth is the one §1 actually states: **NO `WAY` EDGE MAY BOUND WATER.** A way
+  // that reaches the water terminates AT a bank node, so the edge between them is the bank's. Every
+  // other type is counted by name, so the zero is never bought by the roster being permissive.
+  const wayOnWater = [];
+  const boundaryByType = {};
+  for (const f of waterFaces) {
+    let h = f.he; const start = h; let guard = 0;
+    do {
+      const he = arr.halfEdges[h];
+      const e = arr.edges[he.edge];
+      boundaryByType[e.type] = (boundaryByType[e.type] || 0) + 1;
+      if (e.type === 'WAY') {
+        wayOnWater.push({ face: f.id, edge: e.id, key: e.key, rank: e.rank });
+      }
+      h = he.next;
+      if (++guard > 100000) break;
+    } while (h !== start);
+  }
+  const rimSegments = boundaryByType.BOUND || 0;
+
+  // ⭐⭐ **A BANK SEPARATES GROUND FROM THE WATER SIDE — THAT IS WHAT A BANK IS.** Every `BANK` edge
+  // must have the water side on exactly one of its two faces. Two wet sides is a bank inside the
+  // body; two dry sides is a bank that has drifted off its own river.
+  //
+  // ⛔⛔ **AND "THE WATER SIDE" INCLUDES A MOORED PIECE, WHICH IS §3e's OWN RULING AND NOT A
+  // LOOSENING.** *"A moored piece is a lawful face, not a refused body."* Spelled as `cls ===
+  // 'WATER'` alone, this arm convicted every quay frontage in the corpus — 26 edges on the town, at
+  // left stations 20–22, 26–28, 32–34 and right 12–14, which is EXACTLY the quay stride
+  // (`runStations` 3, step 6). The bank there does separate ground from water; the water simply has
+  // a deck on it. The arm was wrong and the geometry was right, and the way that was settled was by
+  // reading the station indices rather than by loosening until it went green.
+  const wetSide = (f) => !!f && (f.cls === 'WATER' || (f.attrs && f.attrs.moored === true));
+  const strayBank = [];
+  for (const e of bankEdges) {
+    const h = arr.halfEdges[e.he];
+    const fa = arr.faces[h.face]; const fb = arr.faces[arr.halfEdges[h.twin].face];
+    const wa = wetSide(fa); const wb = wetSide(fb);
+    if (wa === wb) {
+      strayBank.push({
+        edge: e.id, key: e.key, sides: [fa && fa.cls, fb && fb.cls],
+        why: wa ? 'a BANK edge with the water side on both faces'
+          : 'a BANK edge with the water side on neither face',
+      });
+    }
+  }
+
+  const strayCrossing = [];
+  for (const e of crossEdges) {
+    const h = arr.halfEdges[e.he];
+    const a = h.origin; const b = arr.halfEdges[h.twin].origin;
+    if (!bankNode.has(a) || !bankNode.has(b)) {
+      strayCrossing.push({ edge: e.id, key: e.key, a, b, why: 'a CROSSING edge whose end is not a bank node' });
+    }
+  }
+
+  const ring = partition.water && partition.water.ring;
+  const wayInWater = [];
+  if (ring && ring.length > 2) {
+    for (const f of faces) {
+      if (f.cls !== 'WAY') continue;
+      for (const p of faceRing(arr, f.id)) {
+        if (inRingWorld(ring, p)) { wayInWater.push({ face: f.id, at: p }); break; }
+      }
+    }
+  }
+
+  // ⭐⭐⭐ **THE BANK-AGREEMENT ARM — SPINE-2's OWN WSEAM, AND THE ONE ARM THAT PROVES "ONE WATER
+  // TRUTH" RATHER THAN ASSERTING IT.** Every vertex of every `BANK` edge must lie within the local
+  // half-width of the DRAWN channel, because that is where a bank is. TE-WSEAM measured what
+  // happens when two surfaces both answer *"is this water"* and nothing makes them agree: **2.63 %
+  // agreement corpus-wide**. This car came within one census of rebuilding that defect — a
+  // centreline-smoothed bank sat between 0.28 and 17.15 units from the town's drawn channel against
+  // a half-width of 8.36 — and this arm is what would have caught it every time.
+  // ⚠ THE BAR IS 1.25× THE NOMINAL HALF-WIDTH, not the half-width itself: an armed §648 profile
+  // widens a reach to `RIVER_PROFILE.hi = 1.55` of nominal, so a bar at exactly the nominal would
+  // convict a lawful profiled bank. 1.25 sits between the two and is stated, not tuned.
+  const bankAgreement = [];
+  let bankMaxD = 0;
+  let bankFrontier = 0;
+  if (input.water && input.water.line && input.water.line.length > 1) {
+    const nominalHalf = (input.water.width || 0) / 2;
+    const bar = nominalHalf * BANK_AGREEMENT_BAR;
+    const seen = new Set();
+    for (const e of bankEdges) {
+      const h = arr.halfEdges[e.he];
+      for (const v of [h.origin, arr.halfEdges[h.twin].origin]) {
+        if (seen.has(v)) continue;
+        seen.add(v);
+        // ⚠ A FRONTIER VERTEX IS WHERE THE BANK LEAVES THE MAP, NOT WHERE IT LEAVES THE RIVER.
+        //   The bank chain is extended past the extent so it genuinely crosses the ground it
+        //   divides (`cutFaceByChain` requires it), and the crossing it makes with the extent's own
+        //   rim lands on that extension. Measured on the city's shore: 3 such vertices at 55, 62
+        //   and 209 units — every one of them a rim crossing and none of them a bank that drifted.
+        //   They are EXCLUDED and COUNTED, never quietly dropped.
+        if (arr.verts[v].frontier) { bankFrontier++; continue; }
+        const p = [arr.verts[v].x / arr.quantumPerUnit, arr.verts[v].y / arr.quantumPerUnit];
+        const d = distToPolyline(p[0], p[1], input.water.line);
+        if (d > bankMaxD) bankMaxD = d;
+        if (d > bar) bankAgreement.push({ vertex: v, at: p, d, bar, key: e.key });
+      }
+    }
+  }
+
+  const hasChannel = !!(input.water && input.water.line && input.water.line.length > 1);
+  const liveness = [];
+  const cut = partition.water && partition.water.cut;
+  const cutRan = !!(cut && cut.stations >= 1);
+  if (hasChannel && cutRan && (waterFaces.length === 0 || bankEdges.length === 0)) {
+    liveness.push({ why: 'the channel was cut and left no water face or no bank edge' });
+  }
+  if (!hasChannel && (waterFaces.length > 0 || bankEdges.length > 0)) {
+    liveness.push({ why: 'a dry leaf minted water faces or bank edges' });
+  }
+
+  const kinds = {};
+  for (const c of (partition.crossings || [])) kinds[c.kind] = (kinds[c.kind] || 0) + 1;
+
+  return {
+    waterFaces: waterFaces.length,
+    bankEdges: bankEdges.length,
+    bankNodes: bankNode.size,
+    crossingEdges: crossEdges.length,
+    crossings: (partition.crossings || []).length,
+    crossingKinds: kinds,
+    quays: (partition.quays || []).length,
+    moored: faces.filter((f) => f.cls === 'PLOT' && f.attrs && f.attrs.moored).length,
+    boundaryByType,
+    rimSegments,
+    wayOnWater,
+    strayBank,
+    bankAgreement,
+    bankFrontier,
+    bankMaxD,
+    strayCrossing,
+    /** ⚠ REPORTED, NOT AN EXIT. The nominal ribbon extends past the extent so a way near the end
+     *  can lie inside the POLYGON while the water FACES stop short of it; the exit is
+     *  `wayOnWater`, which asks the same question of the faces the partition actually holds. */
+    wayInWater,
+    liveness,
+    hasChannel,
+    ok: wayOnWater.length === 0 && strayBank.length === 0 && strayCrossing.length === 0
+      && bankAgreement.length === 0 && liveness.length === 0,
+    reason: `${waterFaces.length} water face(s) over ${bankEdges.length} bank edge(s) and`
+      + ` ${bankNode.size} bank node(s); ${crossEdges.length} CROSSING edge(s) in`
+      + ` ${(partition.crossings || []).length} crossing(s)`
+      + ` (${Object.entries(kinds).map(([k, v]) => `${v} ${k}`).join(', ') || 'none'});`
+      + ` ${(partition.quays || []).length} quay(s); water boundary`
+      + ` {${Object.entries(boundaryByType).map(([k, v]) => `${k} ${v}`).join(' ') || 'none'}};`
+      + ` ${wayOnWater.length} WAY edge(s) bounding water, ${strayBank.length} bank(s) not`
+      + ` separating, ${bankAgreement.length} bank vertex(es) off the drawn channel`
+      + ` (worst ${bankMaxD.toFixed(3)} against a bar of`
+      + ` ${(((input.water && input.water.width) || 0) / 2 * BANK_AGREEMENT_BAR).toFixed(3)}),`
+      + ` ${strayCrossing.length} crossing(s) off a bank node, ${liveness.length}`
+      + ` liveness failure(s) (${wayInWater.length} way face(s) inside the nominal ribbon, reported)`,
+  };
+}
+
+/**
+ * ⭐⭐⭐ **E13 · SPINE-2 · THE DECLINE CENSUS — §3f's STATE MACHINE, AND THE CLOCKS PROVED APART.**
+ * Every LossRegion carries `LOSS_REGION_SCHEMA`'s own field roster and a state from its own list;
+ * every one that ever moved carries the beat that moved it. ⛔ THE ARM THAT MATTERS is
+ * `clock-conflation`: a region whose `pressureClock` moved without a RECLAMATION beat, or whose
+ * `stageClock` exceeds the elapsed years since its birth, is a clock that has been fed from the
+ * wrong side — the single defect §643.3 exists to forbid, and the one that would be invisible in
+ * the drawing.
+ */
+export function censusDecline(partition) {
+  const arr = partition.arrangement;
+  const losses = (partition.losses && partition.losses.regions) || [];
+  const states = (partition.losses && partition.losses.schema && partition.losses.schema.states) || [];
+  const fields = (partition.losses && partition.losses.schema && partition.losses.schema.fields) || [];
+  const badShape = [];
+  const badState = [];
+  const conflation = [];
+  const present = new Date(0);
+  void present;
+  for (const L of losses) {
+    for (const f of fields) if (!(f in L)) badShape.push({ key: L.key, missing: f });
+    if (states.indexOf(L.state) < 0) badState.push({ key: L.key, state: L.state });
+    // a pressure clock that moved owes a contact epoch; a contact that never happened cannot spend
+    if (L.pressureClock > 0 && !L.contactEpochs.length) {
+      conflation.push({ key: L.key, why: 'pressureClock moved with no contact epoch — pressure fed from time' });
+    }
+    if (L.pressureClock === 0 && L.state === 'RECLAIMED') {
+      conflation.push({ key: L.key, why: 'RECLAIMED with a pressure clock of zero — recovery fed from time' });
+    }
+    if (L.stageClock < 0) conflation.push({ key: L.key, why: 'a negative stage clock' });
+  }
+  // every LOSSREGION face must be a published region, and every unreclaimed region a live face
+  const faceKeys = new Set(liveFaces(arr).filter((f) => f.cls === 'LOSSREGION').map((f) => f.id));
+  const orphanFace = [...faceKeys].filter((id) => !losses.some((L) => L.footprint === id));
+  const byState = {};
+  for (const L of losses) byState[L.state] = (byState[L.state] || 0) + 1;
+  return {
+    regions: losses.length,
+    faces: faceKeys.size,
+    byState,
+    badShape,
+    badState,
+    conflation,
+    orphanFace,
+    ok: badShape.length === 0 && badState.length === 0 && conflation.length === 0
+      && orphanFace.length === 0,
+    reason: `${losses.length} LossRegion(s) over ${faceKeys.size} face(s):`
+      + ` ${states.map((s) => `${byState[s] || 0} ${s}`).join(' · ')};`
+      + ` ${badShape.length} schema-shape failure(s), ${badState.length} off-roster state(s),`
+      + ` ${conflation.length} clock conflation(s), ${orphanFace.length} face(s) with no region`,
+  };
 }
 
 /**
@@ -334,6 +637,32 @@ function inRingWorld(ring, p) {
   return inside;
 }
 
+/** The side of the line the settlement's own PLOT pieces are on — the land, by definition. */
+function majoritySide(arr, faces, line) {
+  let s = 0;
+  for (const f of faces) {
+    if (f.cls !== 'PLOT') continue;
+    const c = faceCentroid(arr, f.id);
+    s += sideOfPolyline(c[0], c[1], line);
+  }
+  return s >= 0 ? 1 : -1;
+}
+
+/** Which side of a polyline a point lies on: +1 or −1, read at the NEAREST segment. */
+function sideOfPolyline(x, y, line) {
+  let best = Infinity; let s = 1;
+  for (let i = 0; i + 1 < line.length; i++) {
+    const [ax, ay] = line[i]; const [bx, by] = line[i + 1];
+    const dx = bx - ax; const dy = by - ay;
+    const L2 = dx * dx + dy * dy;
+    let t = L2 > 0 ? ((x - ax) * dx + (y - ay) * dy) / L2 : 0;
+    t = t < 0 ? 0 : (t > 1 ? 1 : t);
+    const d = Math.hypot(x - (ax + dx * t), y - (ay + dy * t));
+    if (d < best) { best = d; s = (dx * (y - ay) - dy * (x - ax)) >= 0 ? 1 : -1; }
+  }
+  return s;
+}
+
 /** Point-to-polyline distance — the water census's only geometry. */
 function distToPolyline(x, y, line) {
   let best = Infinity;
@@ -359,6 +688,8 @@ export function censusPartition(partition, input = {}) {
   const reserved = censusReserved(partition);
   const totality = censusTotality(partition);
   const morphology = censusMorphology(partition);
+  const water = censusWater(partition, input);
+  const decline = censusDecline(partition);
   return {
     invariants,
     tangential,
@@ -366,9 +697,13 @@ export function censusPartition(partition, input = {}) {
     reserved,
     totality,
     morphology,
-    ok: invariants.ok && tangential.ok && crossings.ok && reserved.ok && totality.ok,
+    water,
+    decline,
+    ok: invariants.ok && tangential.ok && crossings.ok && reserved.ok && totality.ok
+      && water.ok && decline.ok,
     reason: `E1 ${invariants.ok ? 'green' : 'RED'} · E2 ${tangential.ok ? 'green' : 'RED'}`
       + ` · E3 ${crossings.ok ? 'green' : 'RED'} · reserved ${reserved.ok ? 'green' : 'RED'}`
-      + ` · E9 ${totality.ok ? 'green' : 'RED'} (${totality.annotated}/${totality.owed})`,
+      + ` · E9 ${totality.ok ? 'green' : 'RED'} (${totality.annotated}/${totality.owed})`
+      + ` · E12 water ${water.ok ? 'green' : 'RED'} · E13 decline ${decline.ok ? 'green' : 'RED'}`,
   };
 }

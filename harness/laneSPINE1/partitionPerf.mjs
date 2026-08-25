@@ -58,8 +58,22 @@ export function partitionInputs(settlement, model, fabric) {
       : (m.morphology === 'regularized' ? 'COMPOSITE' : 'ORGANIC_PLAN_UNIT_QUILT'),
     roadWidth: rw,
     bodyTarget: fabric.parcels.length,
+    // ⭐⭐ SPINE-2 · THE WHOLE WATER RELATIONSHIP, CARRIED ACROSS BY NAME. §3e's banks read
+    // `stationAt`, whose local width comes from `widthProfile`; the bank SIDE and the water KIND
+    // decide whether the body has two banks or one. ⛔ A REBUILD-INTO-A-NEW-OBJECT IS A WHITELIST
+    // (`deriveWaterMode`'s own recorded lesson: `scales`/`coarse`/`detail`/`worked` were silently
+    // dropped on their first run and the census printed an EMPTY section with nothing failing), so
+    // every row §3e consumes is listed here and the census prints what it got.
     water: fabric.water && fabric.water.line && fabric.water.line.length > 1
-      ? { line: fabric.water.line, width: fabric.water.width } : null,
+      ? {
+        line: fabric.water.line,
+        width: fabric.water.width,
+        kind: fabric.water.kind || 'river',
+        mode: fabric.water.mode || null,
+        bankSide: fabric.water.bankSide,
+        crossing: fabric.water.crossing || null,
+        ...(fabric.water.widthProfile ? { widthProfile: fabric.water.widthProfile } : {}),
+      } : null,
     wallForm: model.meta.hasWalls ? { facets: 26, width: rw * 0.42 } : null,
   };
 }

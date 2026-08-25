@@ -60,6 +60,8 @@ import {
   addVertex, chordInFace, createArrangement, cutFaceByLine, cutWay, faceArea, faceCentroid,
   faceRing, insertRing, liveFaces, locateFace, mintPiece, seedRegion, WAY_RANKS,
 } from './partitionArrangement.js';
+import { CROSSING_LAW, cutWatercourse, mintCrossings, mintQuays } from './partitionWater.js';
+import { declineEpoch, publishLosses, reclaimEpoch } from './partitionDecline.js';
 
 export const PARTITION_SCHEMA_VERSION = 1;
 
@@ -243,9 +245,24 @@ export function buildSettledPartition(input) {
     develops: 0,
     /** @type {Map<string,number>} */ blockOfRun: new Map(),
     laneWidth: (input.roadWidth || 5) * RANK_WIDTH.lane,
+    /** ⭐⭐ SPINE-2 · §3e's and §3f's own records. */
+    /** @type {Array<any>} */ crossings: [],
+    /** @type {Array<any>} */ quays: [],
+    /** @type {Array<any>} */ losses: [],
+    /** @type {any} */ waterCut: null,
+    /** @type {Array<number[]>|null} */ waterRing: null,
+    /** @type {Array<any>|null} */ waterStations: null,
+    crossingRefusals: 0,
+    quayRefusals: 0,
+    /** ⭐ A6.1's STAMP, PUBLISHED ON THE STATE so §3e's and §3f's modules mint through the SAME
+     *  annotation home the fold does. A second `annotate` call site elsewhere would be a second
+     *  emission vocabulary, which is the class L-REG-26 binds every wave against. */
+    stamp: null,
   };
+  state.stamp = (key, beat, epoch, sourceEvent) => stamp(state, key, beat, epoch, sourceEvent);
 
   const cap = Number.isFinite(input.epochCap) ? Math.min(input.epochCap, epochs.length) : epochs.length;
+  let prevYear = 0;
   for (let k = 0; k < cap; k++) {
     state.epoch = k;
     state.order = 0;
@@ -256,9 +273,30 @@ export function buildSettledPartition(input) {
     // and emission all draw on THIS number — the first spelling gave infill its own budget and the
     // town leaf grew 530 bodies out of a 1,197-body settlement in seven plan units, because infill
     // was spending the same souls accretion had already spent.
-    let budget = Math.max(0, epochTarget(state, ep) - state.plots);
+    // ⭐⭐⭐ **§3f · THE LEDGER'S DIRECTION DECIDES WHICH HALF OF THE MACHINE RUNS.**
+    // ⛔⛔ TWO SPELLINGS WERE MEASURABLY WRONG BEFORE THIS ONE, AND BOTH ARE WORTH THE LINES:
+    //  (1) keying decline on `epochTarget − plots < 0` — the stop-rule recursion routinely finishes
+    //      an epoch a few plots over budget, so the TOWN leaf minted 4 LossRegions out of a
+    //      monotonically RISING ledger. The map invented a history the record does not hold, which
+    //      is the one thing §3f may never do.
+    //  (2) letting the recovery clock spend in a FALLING epoch — abandonment and the re-target then
+    //      fight each other every epoch and the highwater leaf minted 483 regions for 238 faces,
+    //      243 of them reclaimed in the middle of a collapse. Recovery is PRESSURE-driven, and a
+    //      shrinking settlement has none.
+    // So: the ledger's own population direction picks the half, and the SIZE of each is the
+    // distance between what the ledger asks for and what the partition holds — never a rate.
+    const rising = k === 0 || ep.population >= epochs[k - 1].population;
+    const target = epochTarget(state, ep);
+    if (state.losses.length) {
+      reclaimEpoch(state, ep, ep.year - prevYear, rising ? Math.max(0, target - state.plots) : 0);
+    }
+    let budget = Math.max(0, target - state.plots);
     if (k === 0) budget = foundingFrame(state, ep, budget);
-    else if (state.wraps.length) {
+    else if (!rising) {
+      // ⭐⭐ **§3f · PIECES EMPTY → ABANDON.** Exactly as many pieces as the ledger's own fall no
+      // longer holds souls for — the partition is brought TO the record, never past it.
+      declineEpoch(state, ep, Math.max(0, state.plots - target));
+    } else if (state.wraps.length) {
       // ⭐ §3d · UNDER A STANDING WRAP THERE IS NO FREE ACCRETION. Growth is INFILL, and only then
       // does a TYPED act put souls outside — never untyped sprawl.
       const share = ep.plotSetDelta > 0 ? (ep.intramuralDelta || 0) / ep.plotSetDelta : 1;
@@ -267,7 +305,17 @@ export function buildSettledPartition(input) {
     } else budget -= accrete(state, ep, budget);
     for (const ce of (ep.circuitEvents || [])) raiseWrap(state, ep, ce);
     for (const qm of (ep.quarterMints || [])) mintQuarter(state, ep, qm);
+    // ⭐⭐ **§3e · THE CROSSINGS AND THE QUAYS ARE EPOCH ACTS.** A ford is as old as the site; a
+    // bridge is a public work a settlement grows into (`CROSSING_BUDGET.popFloor`), so it is minted
+    // at the FIRST epoch whose population can pay for it and never re-minted. The quays follow the
+    // waterfront the settlement has actually built, which is why they are asked every epoch and
+    // answer only where the ground says yes.
+    if (state.waterStations && state.crossings.length < CROSSING_LAW.maxPerLeaf) {
+      state.crossings.push(...mintCrossings(state, ep, ep.population));
+    }
+    if (state.waterStations) state.quays.push(...mintQuays(state, ep));
     reconcileTenure(state, ep);
+    prevYear = ep.year;
     void budget;
   }
 
@@ -295,6 +343,14 @@ function foundingFrame(state, ep, budget) {
     name: null, epoch: 0, reason: 'the founding ward — name-rights are EARNED at a tier threshold',
   });
   stamp(state, `ward.${state.rootWard}`, 'FOUNDING', ep, 'history.founding.age');
+
+  // ⭐⭐⭐ **§3e · THE WATER IS CUT BEFORE ONE WAY IS LAID, BECAUSE THE RIVER IS OLDER THAN THE
+  // TOWN.** Once the channel is a WATER face bounded by BANK edges, §1's *"no WAY edge spans
+  // WATER"* stops being a rule the constructor must remember and becomes a consequence of the
+  // substrate: every later act is a chord inside ONE bank's ground, and a chord inside a face
+  // cannot reach across a face that is not it. The refusal mask stays anyway — it answers for the
+  // marsh wetness beyond the drawn channel, which is `sub.wet`'s question and not the channel's.
+  state.waterCut = cutWatercourse(state, ep);
 
   const bearing = keyedRandom(seed, 'founding', 'bearing', 0) * 360;
   const form = input.originForm || 'NUCLEATED_CROSSROADS';
@@ -355,6 +411,16 @@ function reconcileTenure(state, ep) {
     } else if (f.cls === 'WALLBAND' && !state.annotations[`wallband.${f.id}`]) {
       stamp(state, `wallband.${f.id}`, 'CIRCUIT_RAISED', ep,
         `band ground split by an epoch-${state.epoch} act`);
+    } else if (f.cls === 'WATER' && !state.annotations[`water.${f.id}`]) {
+      // ⭐⭐ SPINE-2 · A WATER FACE SPLIT BY A LATER ACT OWES A FRESH ANNOTATION FOR THE SAME
+      //   REASON A RE-CLASSED BAND FACE DOES: its parent's key names a face it no longer is, and
+      //   A6.1's walker counts the new half as an orphan. A wrap crossing the river and a bridge
+      //   both do exactly this split.
+      stamp(state, `water.${f.id}`, 'INFILL', ep,
+        `water ground split by an epoch-${state.epoch} act — a crossing, a quay or a wrap`);
+    } else if (f.cls === 'LOSSREGION' && !state.annotations[`loss.${f.id}`]) {
+      stamp(state, `loss.${f.id}`, 'ABANDONMENT', ep,
+        `abandoned ground split by an epoch-${state.epoch} act`);
     }
   }
 }
@@ -860,9 +926,26 @@ function raiseWrap(state, ep, ce) {
   //     except a MAJOR way's carriageway, which becomes a GATE.
   const band = [];
   const gates = [];
+  const waterGates = [];
   for (const f of liveFaces(arr)) {
     const c = faceCentroid(arr, f.id);
     if (!inRing(outer, c) || inRing(inner, c)) continue;
+    // ⛔⛔ **A1.3's S2-M1 · THE WALL TERMINATES AT THE BANK; IT DOES NOT CROSS THE WATER.**
+    // *"WALL×WATER gains its invariant + law: a wall face terminates at a bank with a WATER GATE or
+    // TERMINUS WORK … the half-ring is a lawful wall face whose fourth side IS the bank."*
+    // ⚠ MEASURED BEFORE THIS GUARD, AND IT IS WHY THE GUARD EXISTS: the band loop took EVERY face
+    // in the annulus, so the stretch of river inside the band became WALLBAND ground — a wall built
+    // across a river. `censusWater`'s bank-separates arm convicted it as 32 bank edges with dry
+    // ground on both sides on the `crossing` leaf, and the water body lost 819 u² of its area
+    // between the raise and the fold's end. The water face is LEFT AS WATER and carries the gate.
+    if (f.cls === 'WATER') {
+      f.attrs = { ...f.attrs, waterGate: true, wrap: idx };
+      waterGates.push(f.id);
+      stamp(state, `water.${f.id}`, 'CIRCUIT_RAISED', ep,
+        `the wrap of year ${ce.year} reached the water here — a WATER GATE, because a wall`
+        + ' terminates at its bank (A1.3 S2-M1) and does not dam the channel');
+      continue;
+    }
     if (f.cls === 'WAY' && (f.attrs.rank === 'artery' || f.attrs.rank === 'street')) {
       f.attrs = { ...f.attrs, gate: true, wrap: idx };
       gates.push(f.id);
@@ -898,8 +981,17 @@ function raiseWrap(state, ep, ce) {
       stamp(state, `gate.${widest}`, 'CIRCUIT_RAISED', ep, '§202: a circuit with no opening is not a circuit');
     }
   }
+  // ⭐⭐⭐ **A2.3 · DERIVED-WRAP GATE MINTING — THE §3c HISTORY-SILENT CASE, AND ONLY THAT CASE.**
+  // A2.3's last sentence is the whole rule: *"Recorded history always wins where it speaks."* So
+  // this runs only where the circuit event's own provenance says the record did NOT name the raise;
+  // where it did, the gates above are the history's and nothing here touches them.
+  const derived = ce.provenance !== 'recorded'
+    ? mintDerivedGates(state, ep, ce, { idx, outer, inner, band, gates })
+    : { candidates: 0, chosen: 0, suppressed: 0, roadsplit: 0, unreachable: 0, provenance: 'recorded' };
+
   const wrap = Object.freeze({
     index: idx,
+    a23: Object.freeze(derived),
     epoch: state.epoch,
     /** ⛔ THE YEAR IS REQUIRED BY THE SCHEMA — A1.3's vintage honesty. A wrap with no year cannot
      *  be minted here, which is the §11.11 stamp defect excluded structurally. */
@@ -911,6 +1003,9 @@ function raiseWrap(state, ep, ce) {
     outer: Object.freeze(outer.map((p) => Object.freeze(p.slice()))),
     inner: Object.freeze(inner.map((p) => Object.freeze(p.slice()))),
     gates: Object.freeze(gates.slice()),
+    /** ⭐ A1.3 S2-M1's own class, published so a reader can tell a circuit that MET water from one
+     *  that never did — and so the dress car has the roster hf313's water gate needs. */
+    waterGates: Object.freeze(waterGates.slice()),
     bandFaces: Object.freeze(band.slice()),
     forcedGate: forced,
     clampedFacets: clamped,
@@ -925,6 +1020,138 @@ function raiseWrap(state, ep, ce) {
   state.wraps.push(wrap);
   state.gates.push(...gates);
   stamp(state, `wall.E${idx}`, 'CIRCUIT_RAISED', ep, `wall-built-year (${ce.provenance})`);
+}
+
+/**
+ * ⭐⭐ **A2.3's GATE SPACING, IN RING ARC-LENGTH.** A gate every `GATE_SPACING_FACETS` facets of the
+ * wrap's own economy. It is spelled in FACETS rather than in units because the facet economy is
+ * already the form's own scale (A1.3: *"the turn distribution is a property of the FORM"*), so a
+ * 26-facet citywall and a 30-facet palisade space their gates by the same rule at their own sizes.
+ * ⚠ PROPOSED; rides the tuning signature.
+ */
+export const GATE_SPACING_FACETS = 5;
+
+/**
+ * ⭐⭐⭐ **A2.3 · THE THREE RULES SPINE-1 DEFERRED, BUILT.** Verbatim: *"Gate candidates = wrap
+ * vertices where ≥2 interior pieces meet; spacing by cycle decimation (choose one, suppress
+ * neighbours); every gate carries a GATE-ROAD GUARANTEE (split the outer piece if no outgoing
+ * corridor exists); street-reachability is a rejection gate."*
+ *
+ * Each of the three is a separate loop below and each publishes its own count, because a
+ * decimation that suppressed everything and a reachability test that rejected everything both
+ * produce the same zero as a wrap that simply had no candidates.
+ */
+function mintDerivedGates(state, ep, ce, w) {
+  const { arr } = state;
+  const out = {
+    candidates: 0, chosen: 0, suppressed: 0, roadsplit: 0, unreachable: 0,
+    provenance: ce.provenance,
+  };
+  // ── (1) CANDIDATES · a band face where ≥ 2 interior PIECES meet its inner side ───────────────
+  const cands = [];
+  for (const fid of w.band) {
+    const f = arr.faces[fid];
+    if (!f || !f.alive || f.cls !== 'WALLBAND') continue;
+    let pieces = 0;
+    let outerWay = false;
+    let h = f.he; const start = h; let guard = 0;
+    do {
+      const he = arr.halfEdges[h];
+      const nb = arr.faces[arr.halfEdges[he.twin].face];
+      if (nb && nb.alive) {
+        const c = faceCentroid(arr, nb.id);
+        const isIn = inRing(w.inner, c);
+        if (isIn && (nb.cls === 'PLOT' || nb.cls === 'VOID' || nb.cls === 'BLOCK')) pieces++;
+        if (!isIn && nb.cls === 'WAY') outerWay = true;
+      }
+      h = he.next;
+      if (++guard > 100000) break;
+    } while (h !== start);
+    if (pieces >= 2) {
+      cands.push({ fid, pieces, outerWay, at: faceCentroid(arr, fid) });
+    }
+  }
+  out.candidates = cands.length;
+  if (!cands.length) return out;
+
+  // ── (2) CYCLE DECIMATION · choose one, suppress its neighbours ───────────────────────────────
+  // ⚠ THE CYCLE IS THE WRAP'S OWN RING, so candidates are ordered by ANGLE about the extent centre
+  //   rather than by face id — a decimation over insertion order would space gates by the order the
+  //   constructor happened to cut faces, which is not a cycle at all.
+  const cx = state.input.extent.cx; const cy = state.input.extent.cy;
+  cands.sort((a, b) => Math.atan2(a.at[1] - cy, a.at[0] - cx) - Math.atan2(b.at[1] - cy, b.at[0] - cx));
+  const arc = (2 * Math.PI) / Math.max(1, w.outer.length);
+  const minSep = arc * GATE_SPACING_FACETS;
+  const chosen = [];
+  let lastAng = -Infinity;
+  for (const c of cands) {
+    const ang = Math.atan2(c.at[1] - cy, c.at[0] - cx) + Math.PI;
+    if (ang - lastAng < minSep) { out.suppressed++; continue; }
+    // ── (3) STREET-REACHABILITY · a rejection gate, and it is a REJECTION and not a preference ──
+    // A gate that opens onto ground no way reaches is a hole in a wall. The test is structural: is
+    // any WAY face reachable from the candidate's inner side without leaving the wrap?
+    if (!reachesStreet(state, c.fid, w.inner)) { out.unreachable++; continue; }
+    lastAng = ang;
+    chosen.push(c);
+  }
+
+  for (const c of chosen) {
+    const f = arr.faces[c.fid];
+    if (!f || !f.alive || f.cls !== 'WALLBAND') continue;
+    f.cls = 'WAY';
+    f.attrs = { ...f.attrs, gate: true, wrap: w.idx, rank: 'street', derivedGate: true, inBand: true };
+    w.gates.push(c.fid);
+    state.gates.push(c.fid);
+    out.chosen++;
+    stamp(state, `gate.${c.fid}`, 'CIRCUIT_RAISED', ep,
+      `A2.3 derived-wrap gate: ${c.pieces} interior pieces meet the band here and the raise of year`
+      + ` ${ce.year} carries no recorded gate — chosen by cycle decimation at ${GATE_SPACING_FACETS}`
+      + ' facets, and the street-reachability test passed');
+    // ── (4) THE GATE-ROAD GUARANTEE · split the outer piece when no corridor leaves ─────────────
+    if (!c.outerWay) {
+      const dx = c.at[0] - cx; const dy = c.at[1] - cy;
+      const L = Math.hypot(dx, dy) || 1;
+      const beyond = [c.at[0] + (dx / L) * (state.input.roadWidth || 5) * 2.5,
+        c.at[1] + (dy / L) * (state.input.roadWidth || 5) * 2.5];
+      const host = locateFace(arr, beyond[0], beyond[1]);
+      if (host >= 0 && (arr.faces[host].cls === 'FIELD' || arr.faces[host].cls === 'PLOT')) {
+        const was = arr.faces[host].cls;
+        if (was === 'PLOT') arr.faces[host].cls = 'FIELD';
+        const road = layWay(state, host, beyond, [dx / L, dy / L],
+          (state.input.roadWidth || 5) * RANK_WIDTH.street, 'street', `gateroad.${c.fid}`, ep);
+        if (road) out.roadsplit++;
+        else if (was === 'PLOT') arr.faces[host].cls = was;
+      }
+    }
+  }
+  return out;
+}
+
+/** Is any WAY face reachable from this band face's INNER side? A2.3's rejection gate. */
+function reachesStreet(state, fid, innerRing) {
+  const { arr } = state;
+  const seen = new Set([fid]);
+  const queue = [fid];
+  let guard = 0;
+  while (queue.length && guard++ < 400) {
+    const cur = queue.shift();
+    let h = arr.faces[cur].he; const start = h; let g2 = 0;
+    do {
+      const he = arr.halfEdges[h];
+      const nb = arr.faces[arr.halfEdges[he.twin].face];
+      if (nb && nb.alive && nb.cls !== 'OUTER' && !seen.has(nb.id)) {
+        const c = faceCentroid(arr, nb.id);
+        if (inRing(innerRing, c)) {
+          if (nb.cls === 'WAY') return true;
+          seen.add(nb.id);
+          queue.push(nb.id);
+        }
+      }
+      h = he.next;
+      if (++g2 > 100000) break;
+    } while (h !== start);
+  }
+  return false;
 }
 
 /**
@@ -1143,6 +1370,18 @@ function publish(state, foldedEpochs) {
     runCount: state.runs,
     emissions: Object.freeze(state.emissions.slice()),
     quarters: Object.freeze(state.quarters.slice()),
+    /** ⭐⭐ SPINE-2 · §3e's own record: what the water cut, what it crossed, what moored on it. */
+    water: Object.freeze({
+      cut: state.waterCut ? Object.freeze({ ...state.waterCut, faces: Object.freeze(state.waterCut.faces.slice()) }) : null,
+      ring: state.waterRing ? Object.freeze(state.waterRing.map((p) => Object.freeze(p.slice()))) : null,
+      stations: state.waterStations ? state.waterStations.length : 0,
+      crossingRefusals: state.crossingRefusals,
+      quayRefusals: state.quayRefusals,
+    }),
+    crossings: Object.freeze(state.crossings.slice()),
+    quays: Object.freeze(state.quays.slice()),
+    /** ⭐⭐ SPINE-2 · §3f's own record, under GROW-A's reserved schema. */
+    losses: publishLosses(state),
     annotations: Object.freeze({ ...state.annotations }),
     plots: state.plots,
     foldedEpochs,
@@ -1156,6 +1395,10 @@ function publish(state, foldedEpochs) {
       + ` ${state.blockOfRun.size} block(s);`
       + ` ${state.wraps.length} wrap(s) with`
       + ` ${state.gates.length} gate(s); ${state.emissions.length} typed emission(s);`
+      + ` ${(byClass.WATER || 0)} water face(s) over ${state.waterStations ? state.waterStations.length : 0}`
+      + ` bank station(s) with ${state.crossings.length} typed crossing(s)`
+      + ` (${state.crossings.map((c) => c.kind).join(', ') || 'none'}) and ${state.quays.length} quay(s);`
+      + ` ${state.losses.length} LossRegion(s);`
       + ` ${state.waterRefusals} act(s) refused by the watercourse,`
       + ` ${state.gateEconomyRefusals} by the gate economy,`
       + ` ${state.sprawlRefusals} by §3d's no-untyped-sprawl law;`

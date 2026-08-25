@@ -1289,8 +1289,19 @@ export function buildFabric(settlement, model, options = {}) {
         : (morphology.band === 'regularized' ? 'COMPOSITE' : 'ORGANIC_PLAN_UNIT_QUILT'),
       roadWidth: rw,
       bodyTarget: drawn.parcels.length,
+      // ⭐⭐ SPINE-2 · §3e READS THE WHOLE RELATIONSHIP, CARRIED ACROSS BY NAME (see
+      // `partitionWater.js`'s header on why the profile is the single authority for banks and why
+      // this file hands it over rather than letting the partition measure its own).
       water: waterRel && waterRel.line && waterRel.line.length > 1
-        ? { line: waterRel.line, width: waterRel.width } : null,
+        ? {
+          line: waterRel.line,
+          width: waterRel.width,
+          kind: waterRel.kind || 'river',
+          mode: waterRel.mode || null,
+          bankSide: waterRel.bankSide,
+          crossing: waterRel.crossing || null,
+          ...(waterRel.widthProfile ? { widthProfile: waterRel.widthProfile } : {}),
+        } : null,
       wallForm: hasWalls ? { facets: 26, width: rw * 0.42 } : null,
     };
     const built = buildSettledPartition(input);

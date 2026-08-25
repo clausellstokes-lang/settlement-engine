@@ -213,19 +213,34 @@ describe('§3 · the epoch fold, and every §6 zero with its control', () => {
     expect(censusCrossings(P).ungated.length).toBe(0);
   });
 
-  it('the RESERVED classes are minted ZERO — SPINE-2 and decline still own their vocabulary', () => {
+  // ⚠⚠ **SUPERSEDED BY SPINE-2, AND RE-POINTED RATHER THAN DELETED.** SPINE-1 asserted that
+  // `WATER`, `LOSSREGION` and `CROSSING` were minted ZERO, with a planted `WATER` face as its
+  // control. §3e and §3f BUILD all three, so the reservation is DISCHARGED and that plant now
+  // convicts nothing. Deleting the case would leave the estate with one fewer instrument and no
+  // record of why; what it asserts instead is the discharge itself, plus the arm that took over the
+  // job — an OFF-ROSTER class must still convict. See `townMapPartitionWater.test.js` for the
+  // liveness half (a leaf WITH water must mint some; a dry leaf must mint none).
+  it('the reservation is DISCHARGED, and the roster arm took over its control', () => {
     const r = censusReserved(P);
     expect(r.faces).toEqual([]);
     expect(r.edges).toEqual([]);
-    expect(RESERVED_FACE_CLASSES.every((c) => FACE_CLASSES.includes(c))).toBe(true);
-    expect(RESERVED_EDGE_TYPES.every((t) => EDGE_TYPES.includes(t))).toBe(true);
-    // ⛔ CONTROL: the census sees a reserved class when one is minted.
+    expect(RESERVED_FACE_CLASSES.length).toBe(0);
+    expect(RESERVED_EDGE_TYPES.length).toBe(0);
+    // the classes it used to hold are in the roster, and they are MINTED now
+    for (const c of ['WATER', 'LOSSREGION']) expect(FACE_CLASSES).toContain(c);
+    for (const t of ['CROSSING', 'BANK']) expect(EDGE_TYPES).toContain(t);
+    // ⛔ CONTROL: an OFF-ROSTER class still convicts, and the mutation is restored in `finally`
+    // so a failing expectation cannot leak it into the next case — which is exactly how this
+    // supersession first presented, as TWO gate failures with one cause.
     const arr = P.arrangement;
     const f = liveFaces(arr)[0];
     const kept = f.cls;
-    f.cls = 'WATER';
-    expect(censusReserved(P).faces.length).toBe(1);
-    f.cls = kept;
+    try {
+      f.cls = 'MARSH';
+      const arm = censusInvariants(P, {}).arms.find((a) => a.arm === 'face-totality');
+      expect(arm.violations.length).toBe(1);
+    } finally { f.cls = kept; }
+    expect(censusInvariants(P, {}).arms.find((a) => a.arm === 'face-totality').violations.length).toBe(0);
   });
 
   it('E9 · A6.1 totality is 100 %, and a planted omission moves the orphan count by ONE', () => {

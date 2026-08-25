@@ -99,8 +99,16 @@ export const FACE_CLASSES = Object.freeze(['WARD', 'BLOCK', 'PLOT', 'VOID', 'FIE
 /** The face classes that are PIECES — the hierarchy §1 orders (`plot ⊂ block ⊂ ward`). */
 export const PIECE_CLASSES = Object.freeze(['WARD', 'BLOCK', 'PLOT']);
 
-/** Face classes reserved by name for later cars, which SPINE-1 must mint zero of. */
-export const RESERVED_FACE_CLASSES = Object.freeze(['WATER', 'LOSSREGION']);
+/**
+ * Face classes reserved by name for later cars, which the current wave must mint zero of.
+ * ⭐⭐ **SPINE-2 EMPTIES THIS LIST, AND AN EMPTY RESERVATION CENSUS IS A VACUOUS ONE.** `WATER` is
+ * §3e's and `LOSSREGION` is §3f's, and both land in this car — so the reservation stops being the
+ * instrument and `censusWater`'s LIVENESS half takes over the job: a leaf WITH a watercourse must
+ * mint water faces and bank edges, a leaf WITHOUT one must mint none, and the roster arm
+ * (`face-totality`) still convicts any class outside `FACE_CLASSES`. The list stays, spelled empty,
+ * because the next car to reserve a class needs somewhere to write it.
+ */
+export const RESERVED_FACE_CLASSES = Object.freeze([]);
 
 /**
  * ⭐⭐⭐ THE EDGE TYPES, TOTAL (§1 + A1.7's CLIFF). Every edge carries exactly one.
@@ -108,11 +116,24 @@ export const RESERVED_FACE_CLASSES = Object.freeze(['WATER', 'LOSSREGION']);
  */
 export const EDGE_TYPES = Object.freeze(['WAY', 'WALL', 'BANK', 'CROSSING', 'BOUND', 'CLIFF']);
 
-/** Edge types reserved by name for SPINE-2. */
-export const RESERVED_EDGE_TYPES = Object.freeze(['CROSSING']);
+/** Edge types reserved by name for a later car. ⭐ SPINE-2 mints `CROSSING`, so the reservation is
+ *  discharged and `censusWater`'s bank-node arm is what proves the type is used LAWFULLY. */
+export const RESERVED_EDGE_TYPES = Object.freeze([]);
 
 /** The way ranks §1 declares, coarse→fine. */
 export const WAY_RANKS = Object.freeze(['artery', 'street', 'lane', 'path']);
+
+/**
+ * ⭐⭐⭐ **SPINE-2 · THE SPATIAL INDEX'S CELL, IN QUANTA.** A uniform bucket grid over the quantum
+ * plane. It is sized ONCE — from the seeded extent's own bbox, so a leaf's cells are a fixed
+ * fraction of its own ground rather than a constant somebody chose for a town and a metropolis
+ * inherited. `SPATIAL_CELLS_PER_SPAN` is the count along the longer axis; the floor keeps a
+ * degenerate seed from asking for a cell of nothing.
+ */
+export const SPATIAL_CELLS_PER_SPAN = 256;
+export const SPATIAL_CELL_FLOOR = 64;
+/** The cell a bare `createArrangement` gets when nothing seeded it — 2 world units. */
+export const SPATIAL_CELL_DEFAULT = 2000;
 
 const qOf = (v) => Math.round(v * PARTITION_QUANTUM_PER_UNIT);
 const wOf = (q) => q / PARTITION_QUANTUM_PER_UNIT;
@@ -197,7 +218,191 @@ export function createArrangement() {
     ops: 0,
     firstBreak: null,
     /** @type {Array<any>|null} */ trace: null,
+    /**
+     * ⭐⭐⭐ **SPINE-2 · THE SPATIAL INDEX — APPEND-ONLY, AND THAT IS WHY IT IS EXACT.**
+     * `edges` maps a cell key to the edge ids whose BBOX touches that cell; `verts` the same for
+     * vertices. Nothing is ever REMOVED, and nothing needs to be: `splitEdge` only ever SHRINKS an
+     * edge's bbox (va→vm ⊂ va→vb), so the parent's existing entries stay a superset of the cells it
+     * now needs, and the new half is indexed fresh. `retypeEdge` moves no geometry. A query re-reads
+     * the edge's LIVE endpoints, so a stale-broad entry costs a predicate and never a wrong answer.
+     * ⚠ THE INDEX IS THE OPPOSITE OF A NODER'S: it answers *"what is already here"* so an operation
+     * can REFUSE, never *"what crosses what"* so a repair can run.
+     */
+    grid: { cell: 0, edges: new Map(), verts: new Map(), indexed: 0 },
   };
+}
+
+/** The index's cell size, fixed at first use and never changed afterwards. */
+function gridCell(arr) {
+  if (!arr.grid.cell) arr.grid.cell = SPATIAL_CELL_DEFAULT;
+  return arr.grid.cell;
+}
+
+/** Size the index from a seeded ring's own bbox. Called BEFORE the ring's edges exist. */
+function gridSizeFrom(arr, ptsInt) {
+  if (arr.grid.cell) return;
+  let lox = Infinity; let loy = Infinity; let hix = -Infinity; let hiy = -Infinity;
+  for (const p of ptsInt) {
+    if (p[0] < lox) lox = p[0]; if (p[0] > hix) hix = p[0];
+    if (p[1] < loy) loy = p[1]; if (p[1] > hiy) hiy = p[1];
+  }
+  const span = Math.max(hix - lox, hiy - loy);
+  arr.grid.cell = Math.max(SPATIAL_CELL_FLOOR,
+    Math.round(span / SPATIAL_CELLS_PER_SPAN)) || SPATIAL_CELL_DEFAULT;
+}
+
+function bucketPush(map, k, id) {
+  const b = map.get(k);
+  if (b) b.push(id); else map.set(k, [id]);
+}
+
+/** Index one edge over every cell its bbox touches. */
+function indexEdge(arr, eid) {
+  const cell = gridCell(arr);
+  const e = arr.edges[eid];
+  if (!e) return;
+  const h = arr.halfEdges[e.he];
+  const a = arr.verts[h.origin]; const b = arr.verts[arr.halfEdges[h.twin].origin];
+  if (!a || !b) return;
+  const lox = Math.floor(Math.min(a.x, b.x) / cell); const hix = Math.floor(Math.max(a.x, b.x) / cell);
+  const loy = Math.floor(Math.min(a.y, b.y) / cell); const hiy = Math.floor(Math.max(a.y, b.y) / cell);
+  for (let gy = loy; gy <= hiy; gy++) for (let gx = lox; gx <= hix; gx++) bucketPush(arr.grid.edges, `${gx}|${gy}`, eid);
+  arr.grid.indexed++;
+}
+
+/** Index one vertex in its own cell. */
+function indexVertex(arr, vid) {
+  const cell = gridCell(arr);
+  const v = arr.verts[vid];
+  bucketPush(arr.grid.verts, `${Math.floor(v.x / cell)}|${Math.floor(v.y / cell)}`, vid);
+}
+
+/**
+ * ⭐⭐⭐ **THE GRAZE TOLERANCE, IN QUANTA — AND IT IS THE HALF-QUANTUM THIS FILE ALREADY PROMISES,
+ * NOT A NEW DIAL.** The header's snap contract is *"the boundary bends by at most half a quantum"*.
+ * So a candidate vertex within half a quantum of a foreign edge is a vertex that ROUNDING ALONE
+ * could have put on that edge — it is inside the one guarantee the whole split-only regime rests
+ * on, and refusing it is enforcing that contract rather than adding a tolerance beside it.
+ *
+ * ⚠ **MEASURED, AND THE FIRST VALUE WAS WRONG BY THE USUAL ROUTE — IT WAS DOING ANOTHER CLAUSE'S
+ * JOB.** Spelled at 1 quantum (the "each side may move a half, so a pair needs a whole" reading) it
+ * cured the metropolis and CHARGED FOR IT: the town's outer wrap fell from 25 inserted facets to 4
+ * and its circuit from 4 gates to 1. Swept at 0.2 / 0.35 / 0.5 the metropolis is green at every one
+ * and **the town comes back byte-identical to the seal** (1,076 plots · 517 masses · 2,745 shapes ·
+ * band 3.06 · 4 gates · 822 refusals). 0.35 and 0.5 read identically, so this constant sits on a
+ * FLAT of its own curve rather than on a single reading of a slope. The defect it must catch
+ * measures **0.132 quanta**, a quarter of the bound.
+ */
+export const PARTITION_GRAZE_QUANTA = 0.5;
+
+/**
+ * ⭐⭐⭐ **THE E1 CURE'S PREDICATE (ODQ §680.2).** Is the grid point (qx,qy) within
+ * `PARTITION_GRAZE_QUANTA` of any edge other than `exclude` — that edge's own endpoints aside?
+ *
+ * ⛔⛔ **THE MECHANISM, RE-MEASURED — AND SPINE-1's ACCOUNT OF IT WAS WRONG IN THE ONE WAY THAT
+ * DECIDES THE CURE.** Its receipt §6.1 records the metropolis's shared vertex (287218, 750520) as
+ * lying *"exactly on `wrap.E2.in.0`'s line (t = 0.9075, verified by arithmetic)"* and concludes
+ * the cure is an exact on-segment test. Executed in exact integer arithmetic at this seal, the
+ * orientation determinant is **−3,796 over a 28,694-quantum edge = 0.132 quanta off the line**, and
+ * the other end of the offending edge is **+0.140 quanta off on the OTHER side**. It is not an
+ * incidence: it is a 2.3-unit wall edge running ALONGSIDE another wrap's edge a seventh of a
+ * quantum away and crossing it at a razor angle. An exact `onSegmentInt` guard finds NOTHING there
+ * — built first, and measured returning 0 while the 2 crossings stood.
+ *
+ * So the cure is the TOLERANCE the snap guarantee already implies, applied at MINT time: a vertex
+ * closer than one quantum to a foreign edge is a vertex the arrangement cannot represent, and it is
+ * refused rather than placed. `properCrossings` cannot see the condition beforehand (two edges
+ * 0.13 quanta apart do not yet cross) and `globalSweep` cannot either (a graze is not a crossing),
+ * which is why every guard SPINE-1 owned passed this through.
+ *
+ * @returns {number} the offending edge id, or -1
+ */
+export function edgeInteriorAt(arr, qx, qy, exclude) {
+  const cell = gridCell(arr);
+  const gx = Math.floor(qx / cell); const gy = Math.floor(qy / cell);
+  // ⚠ THE 3×3 NEIGHBOURHOOD, NOT THE ONE CELL. A point a quantum inside its own cell's edge is
+  // within tolerance of an edge indexed only next door; querying one bucket would make the guard
+  // silently position-dependent, which is the worst kind of intermittent.
+  for (let dy = -1; dy <= 1; dy++) {
+    for (let dx = -1; dx <= 1; dx++) {
+      const b = arr.grid.edges.get(`${gx + dx}|${gy + dy}`);
+      if (!b) continue;
+      for (const eid of b) {
+        if (eid === exclude) continue;
+        const e = arr.edges[eid];
+        if (!e) continue;
+        const h = arr.halfEdges[e.he];
+        const a = arr.verts[h.origin]; const c = arr.verts[arr.halfEdges[h.twin].origin];
+        if ((a.x === qx && a.y === qy) || (c.x === qx && c.y === qy)) continue;
+        if (segDistQ(a.x, a.y, c.x, c.y, qx, qy) <= PARTITION_GRAZE_QUANTA) return eid;
+      }
+    }
+  }
+  return -1;
+}
+
+/**
+ * Point-to-segment distance in QUANTA. ⚠ THE PERPENDICULAR HALF IS COMPUTED FROM THE ORIENTATION
+ * DETERMINANT, WHICH IS EXACT (see the header on why plain Numbers suffice on this grid); only the
+ * final division by the length is floating-point, and it is a comparison against a threshold
+ * rather than a topological decision, so no predicate depends on its last bit.
+ */
+function segDistQ(ax, ay, bx, by, px, py) {
+  const ex = bx - ax; const ey = by - ay;
+  const L2 = ex * ex + ey * ey;
+  if (L2 === 0) return Math.hypot(px - ax, py - ay);
+  const t = ((px - ax) * ex + (py - ay) * ey) / L2;
+  if (t <= 0) return Math.hypot(px - ax, py - ay);
+  if (t >= 1) return Math.hypot(px - bx, py - by);
+  return Math.abs(ex * (py - ay) - ey * (px - ax)) / Math.sqrt(L2);
+}
+
+/**
+ * ⭐⭐ THE SAME LAW FROM THE OTHER SIDE: does an EXISTING vertex graze the segment p→q? A new edge
+ * drawn within a quantum of a vertex is the mirror of a new vertex within a quantum of an edge, and
+ * `properCrossings` is blind to it for the identical reason (a graze is not a crossing).
+ * @returns {number} the offending vertex id, or -1
+ */
+export function vertexOnSegment(arr, px, py, qx, qy, skipA, skipB) {
+  const cell = gridCell(arr);
+  const lox = Math.floor(Math.min(px, qx) / cell) - 1; const hix = Math.floor(Math.max(px, qx) / cell) + 1;
+  const loy = Math.floor(Math.min(py, qy) / cell) - 1; const hiy = Math.floor(Math.max(py, qy) / cell) + 1;
+  for (let gy = loy; gy <= hiy; gy++) {
+    for (let gx = lox; gx <= hix; gx++) {
+      const b = arr.grid.verts.get(`${gx}|${gy}`);
+      if (!b) continue;
+      for (const vid of b) {
+        if (vid === skipA || vid === skipB) continue;
+        const v = arr.verts[vid];
+        if ((v.x === px && v.y === py) || (v.x === qx && v.y === qy)) continue;
+        if (segDistQ(px, py, qx, qy, v.x, v.y) <= PARTITION_GRAZE_QUANTA) return vid;
+      }
+    }
+  }
+  return -1;
+}
+
+/**
+ * ⭐⭐⭐ **THE INVARIANT THE CURE MAKES TRUE, MEASURED INDEPENDENTLY OF IT.** Every vertex that
+ * comes within a quantum of a foreign edge — which must be EMPTY. §6's law is *"every zero with a
+ * live control"*, and this zero is the STRUCTURAL CAUSE behind E1's planarity zero: a partition can
+ * be free of proper crossings and still carry this degeneracy, one operation away from a crossing —
+ * which is exactly the state SPINE-1's metropolis was in at cap 25 before it convicted at cap 30.
+ * Reporting it separately is what stops the cure being provable only by the symptom it removes.
+ */
+export function vertexOnEdgeViolations(arr, limit = 32) {
+  const out = [];
+  for (let vid = 0; vid < arr.verts.length; vid++) {
+    const v = arr.verts[vid];
+    const eid = edgeInteriorAt(arr, v.x, v.y, -1);
+    if (eid >= 0) {
+      out.push({
+        vertex: vid, at: [v.x, v.y], edge: eid, key: arr.edges[eid].key, type: arr.edges[eid].type,
+      });
+      if (out.length >= limit) return out;
+    }
+  }
+  return out;
 }
 
 /** Add (or find) a vertex at world coordinates. Dedupe is on the QUANTIZED key. */
@@ -209,6 +414,7 @@ export function addVertex(arr, x, y) {
   const id = arr.verts.length;
   arr.verts.push({ x: qx, y: qy, frontier: false });
   arr.vertexKey.set(k, id);
+  indexVertex(arr, id);
   return id;
 }
 
@@ -301,6 +507,8 @@ function newHalfEdgePair(arr, va, vb, edgeSpec) {
     frontier: !!(edgeSpec && edgeSpec.frontier),
     attrs: (edgeSpec && edgeSpec.attrs) || {},
   });
+  // ⭐ THE ONE CHOKEPOINT EVERY EDGE PASSES THROUGH, so the index cannot go stale by omission.
+  indexEdge(arr, eid);
   return [h0, h1];
 }
 
@@ -315,6 +523,9 @@ function newHalfEdgePair(arr, va, vb, edgeSpec) {
  */
 export function seedRegion(arr, ring, spec = {}) {
   if (!ring || ring.length < 3) throw new Error('partitionArrangement: seedRegion needs >= 3 points');
+  // ⭐ SIZE THE INDEX FROM THE SEEDED EXTENT, BEFORE ONE EDGE EXISTS — a cell is a fixed fraction
+  // of THIS leaf's ground, never a constant a town's scale chose and a metropolis inherited.
+  gridSizeFrom(arr, ring.map((p) => [qOf(p[0]), qOf(p[1])]));
   const vids = [];
   for (const p of ring) {
     const v = addVertex(arr, p[0], p[1]);
@@ -382,6 +593,14 @@ export function splitEdge(arr, edgeId, x, y) {
   if (t < 0 || t > 1) return -1;
   const px = ax + ex * t; const py = ay + ey * t;
   if (Math.hypot(qx - px, qy - py) > 1) return -1;
+  // ⛔⛔ **THE E1 CURE (SPINE-2, ODQ §680.2): A NEW VERTEX MAY NOT LAND ON ANOTHER EDGE'S
+  // INTERIOR.** See `edgeInteriorAt` for the measured mechanism. The refusal is the whole cure —
+  // "split that edge too" is the tempting alternative and it is the WELD this file already refuses
+  // twice: the point would become a vertex of a face cycle that knows nothing about the chain the
+  // caller is about to splice, which is precisely the identification `splitEdge`'s first guard and
+  // `splitFaceChain`'s check (e) exist to forbid. A partition with a counted refusal is honest; a
+  // partition welded to itself reports Euler −3 with every operation claiming success.
+  if (edgeInteriorAt(arr, qx, qy, edgeId) >= 0) return -1;
   const vm = addVertex(arr, x, y);
   if (vm === va || vm === vb) return vm;
 
@@ -541,6 +760,27 @@ export function splitFaceChain(arr, fid, va, vb, interior, edgeSpec, opts) {
     if (arr.vertexKey.get(`${m[0]},${m[1]}`) !== undefined) {
       return { ok: false, reason: 'an interior chain point lands on an existing vertex' };
     }
+    // ⛔⛔ **THE E1 CURE'S SECOND HALF (SPINE-2).** A fresh interior vertex that lands on an
+    // existing edge's INTERIOR is the same degeneracy `splitEdge` now refuses, reached by the
+    // other door. Checks (b)/(d) ask about CROSSINGS and a touch is not a crossing.
+    if (edgeInteriorAt(arr, m[0], m[1], -1) >= 0) {
+      return { ok: false, reason: 'an interior chain point lands on an existing edge' };
+    }
+  }
+  // ⛔⛔ (f) **AND THE MIRROR: NO CHAIN SEGMENT MAY PASS THROUGH AN EXISTING VERTEX.** A new edge
+  // drawn through a vertex leaves that vertex on an edge's interior, which is the identical
+  // structural break arriving from the opposite side, and `properCrossings` is blind to it for the
+  // identical reason. ⚠ OPT-IN with the global sweep, because it is an O(cells) scan and the
+  // subdivision recursion cuts strictly inside one face whose cycle already lists every vertex on
+  // its boundary — where check (b) is the complete answer.
+  if (opts && opts.globalSweep) {
+    for (let i = 0; i + 1 < chain.length; i++) {
+      const sa = i === 0 ? va : -1;
+      const sb = i + 2 === chain.length ? vb : -1;
+      if (vertexOnSegment(arr, chain[i][0], chain[i][1], chain[i + 1][0], chain[i + 1][1], sa, sb) >= 0) {
+        return { ok: false, reason: 'the chain passes through an existing vertex' };
+      }
+    }
   }
 
   // ── every check passed; from here the arrangement mutates ──────────────────────────────────
@@ -676,6 +916,84 @@ export function cutFaceByLine(arr, fid, p, d, edgeSpec) {
   const res = splitFaceChain(arr, fid, va, vb, [], edgeSpec);
   if (!res.ok) return refuse(arr, 'cutFaceByLine', res.reason, { fid });
   return res;
+}
+
+/**
+ * ⭐⭐⭐ **SPINE-2 · CUT A FACE BY AN OPEN POLYLINE** — `cutFaceByLine`'s meandering sibling, and the
+ * primitive §3e's banks are written in terms of.
+ *
+ * ⛔⛔ **WHY THIS EXISTS AND `insertRing` DOES NOT ANSWER FOR IT — MEASURED, NOT REASONED.** A river
+ * ribbon is not a ring the arrangement can swallow. Built first as a closed water polygon handed to
+ * `insertRing`, the result on the town leaf was **0 segments, 40 refusals, 40 breaks, and not one
+ * bank edge**, and the cause is structural in two ways at once: a ring whose points lie OUTSIDE the
+ * seeded extent starts its walk in the OUTER face (`faceAcross` of the rim crossing IS the
+ * unbounded face) and every step reports *"the ring left the arrangement"*; and a ring pulled fully
+ * INSIDE the extent trips the opposite refusal — *"the whole ring lies inside one face — nothing to
+ * enclose"* — because a DCEL with no inner-boundary record cannot hold an island. A watercourse is
+ * neither an island nor a wrap: **it is a strip that divides its ground, which is exactly what
+ * `cutWay` already makes with two straight kerbs.** This is that cut with a polyline for a kerb.
+ *
+ * The chain must ENTER and LEAVE the face. Points outside are clipped and COUNTED — a meander that
+ * wanders past the rim and returns is a real thing a real channel does, and the count is how a
+ * reader learns it happened rather than inferring it from a bank that looks short.
+ *
+ * @returns {{faces:number[], edges:number[], clipped:number}|null} null on refusal (counted)
+ */
+export function cutFaceByChain(arr, fid, pts, edgeSpec) {
+  const ring = faceRingInt(arr, fid);
+  const inside = pts.map((p) => pointInRingInt(ring, qOf(p[0]), qOf(p[1])) === true);
+  let a = inside.indexOf(true);
+  let b = inside.lastIndexOf(true);
+  if (a < 0) return refuse(arr, 'cutFaceByChain', 'the chain never enters the face', { fid });
+  // ⚠ THE CHAIN MUST HAVE A POINT OUTSIDE ON EACH SIDE, or it is an island and this is the wrong
+  //   operation for it — said as a refusal rather than discovered as a broken walk.
+  if (a === 0 || b === pts.length - 1) {
+    return refuse(arr, 'cutFaceByChain', 'the chain does not cross the face boundary at both ends', { fid });
+  }
+  const clipped = (b - a + 1) - inside.slice(a, b + 1).filter(Boolean).length;
+  const enter = segmentBoundaryHit(arr, fid, pts[a - 1], pts[a]);
+  const exit = segmentBoundaryHit(arr, fid, pts[b + 1], pts[b]);
+  if (!enter || !exit) return refuse(arr, 'cutFaceByChain', 'the entry or exit crossing was not found', { fid });
+  const va = enter.vertex != null ? enter.vertex : splitEdge(arr, enter.edgeId, enter.at[0], enter.at[1]);
+  if (va < 0) return refuse(arr, 'cutFaceByChain', 'the entry point is refused', { fid });
+  const vb = exit.vertex != null ? exit.vertex : splitEdge(arr, exit.edgeId, exit.at[0], exit.at[1]);
+  if (vb < 0) return refuse(arr, 'cutFaceByChain', 'the exit point is refused', { fid });
+  if (va === vb) return refuse(arr, 'cutFaceByChain', 'the entry and exit collapsed to one vertex', { fid });
+  // only the points genuinely inside, re-read against the face's own ring after the two splits
+  const ring2 = faceRingInt(arr, fid);
+  const interior = [];
+  for (let i = a; i <= b; i++) {
+    if (pointInRingInt(ring2, qOf(pts[i][0]), qOf(pts[i][1])) === true) interior.push(pts[i]);
+  }
+  const res = splitFaceChain(arr, fid, va, vb, interior, edgeSpec, { globalSweep: true });
+  if (!res.ok) return refuse(arr, 'cutFaceByChain', res.reason, { fid });
+  return { ...res, clipped };
+}
+
+/** Where does the segment p→q cross face `fid`'s boundary? The crossing NEAREST q. */
+function segmentBoundaryHit(arr, fid, p, q) {
+  const dx = q[0] - p[0]; const dy = q[1] - p[1];
+  const L = Math.hypot(dx, dy);
+  if (!(L > 0)) return null;
+  const ux = dx / L; const uy = dy / L;
+  let best = null;
+  for (const h of faceHalfEdges(arr, fid)) {
+    const he = arr.halfEdges[h];
+    const A = arr.verts[he.origin]; const B = arr.verts[arr.halfEdges[he.next].origin];
+    const ax = wOf(A.x); const ay = wOf(A.y); const ex = wOf(B.x) - ax; const ey = wOf(B.y) - ay;
+    const den = ux * ey - uy * ex;
+    if (Math.abs(den) < 1e-12) continue;
+    const s = ((ax - p[0]) * uy - (ay - p[1]) * ux) / den;
+    if (s < -1e-9 || s > 1 + 1e-9) continue;
+    const at = [ax + ex * s, ay + ey * s];
+    const t = (at[0] - p[0]) * ux + (at[1] - p[1]) * uy;
+    if (t < -1e-9 || t > L + 1e-9) continue;
+    let vertex = null;
+    if (s <= 1e-6) vertex = he.origin;
+    else if (s >= 1 - 1e-6) vertex = arr.halfEdges[he.next].origin;
+    if (!best || t > best.t) best = { t, at, vertex, edgeId: he.edge, halfEdge: h };
+  }
+  return best;
 }
 
 /**

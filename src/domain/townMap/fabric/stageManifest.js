@@ -198,8 +198,14 @@ export const GENERATION_NODES = Object.freeze([
   //   these modules are NOT on `FOUNDATIONS`, whose whole law is having no outbound edge.
   //   ⚠ AND THEY IMPORT NO FOUNDATION. `coordinateAbi.js`'s quantum is spelled locally in
   //   `partitionArrangement.js` and pinned equal by test, precisely so arm 10 stays green.
-  { nodeId: 'S8', modules: ['partitionArrangement.js', 'partitionCensus.js', 'partitionConstruct.js', 'partitionView.js'],
-    allowedImports: ['fabricGeometry.js', 'fabricRng.js', 'growthAnnotation.js'],
+  // ⭐⭐ ⟦SPINE-2 · ODQ §680⟧ TWO MORE MODULES AND TWO MORE ALLOWED IMPORTS, both FORWARD.
+  //   `partitionWater.js` reads `waterMode.js` (S4) because §2 makes the §648 width profile the
+  //   SINGLE authority for banks and `stationAt` is its one home — a local re-derivation would be
+  //   the second water truth TE-WSEAM measured at 2.63 % agreement. `partitionDecline.js` reads
+  //   `growthLedger.js` (S0) for `LOSS_REGION_SCHEMA`, which GROW-A reserved precisely so car B
+  //   would not re-shape it. S4 and S0 both precede S8, so no inversion is created.
+  { nodeId: 'S8', modules: ['partitionArrangement.js', 'partitionCensus.js', 'partitionConstruct.js', 'partitionDecline.js', 'partitionView.js', 'partitionWater.js'],
+    allowedImports: ['fabricGeometry.js', 'fabricRng.js', 'growthAnnotation.js', 'growthLedger.js', 'waterMode.js'],
     // ⭐ SIX MECHANIC IDS, ALL `keyedRandom` — pure string hashes with no stream, which is why
     //   `statefulForkSites` stays 0 and the fabric's pinned total of 18 does not move.
     randomNamespaces: ['bearing', 'cut', 'empty', 'gapbar', 'stop', 'ward'],
@@ -284,7 +290,7 @@ export const NODE_EDGES = Object.freeze([
   'S15>ASSEMBLY', 'S16>ASSEMBLY', 'S17>ASSEMBLY', 'S17>S21', 'S18>ASSEMBLY', 'S19>ASSEMBLY',
   'S20>ASSEMBLY', 'S20>S21', 'S21>ASSEMBLY', 'S22>ASSEMBLY', 'S2>ASSEMBLY', 'S2>S10', 'S2>S13', 'S2>S14',
   'S2>S16', 'S2>S18', 'S2>S20', 'S2>S22', 'S2>S3', 'S2>S4', 'S2>S6', 'S2>S7', 'S3>ASSEMBLY', 'S3>S6',
-  'S4>ASSEMBLY', 'S4>S13', 'S4>S15', 'S4>S16', 'S4>S17', 'S4>S21', 'S4>S6', 'S4>S7', 'S5>S13', 'S5>S6',
+  'S4>ASSEMBLY', 'S4>S13', 'S4>S15', 'S4>S16', 'S4>S17', 'S4>S21', 'S4>S6', 'S4>S7', 'S4>S8', 'S5>S13', 'S5>S6',
   'S6>ASSEMBLY', 'S6>S10', 'S6>S13', 'S6>S15', 'S6>S16', 'S6>S2', 'S6>S21', 'S7>ASSEMBLY',
   // ⭐ SPINE-1's THREE, and all three run FORWARD: the partition reads the primitives and the S0
   //   pre-stages, and the assembly reads the partition. No new inversion, so `STAGE_GRAPH_SCC` is
