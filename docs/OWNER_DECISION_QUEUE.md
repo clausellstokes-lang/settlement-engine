@@ -27735,3 +27735,29 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   FUNCTION of the graph plus the closed dress vocabularies — STYLE is the only freedom
   paint retains. **REG-P's review gains the three-clause check beside the
   tierForPopulation ≡ popToTier gate.**
+
+## §653 · THE OWNER'S QUESTION RULED — PAINT REBUILDS COMPREHENSIVELY AT THE SPINE, KEEPS ITS PROVEN WORDS (2026-08-25 ~18:05 CDT)
+
+- **§653.1 THE ASSESSMENT:** yes — the paint layer needs comprehensive rework, with
+  precision about what that means. KEEP (proven at taste gates and blind reads): the
+  dress VOCABULARIES — roof law, shape families (82 %), V-B13, V-QUAY, the rampart,
+  the fossils, the detail-register bindings. REBUILD: the SUBSTRATE — streets as
+  enforced negative space (§650/§651), water as bodies with banked shore dress, the
+  ground without patch seams, the layering discipline, relief expression, the state
+  marks' ink differentiation, the shoreline. Six waves of catches all convict the
+  composition engine, never the vocabulary: every fix has fought the renderer instead
+  of instructing it.
+- **§653.2 REG-6 UPGRADES (vetoable): from "the MF-4 lens build" to THE PAINT
+  REBUILD** — chair-authored architecture first (the DESIGN_REG_GROW discipline:
+  write, five-skeptic panel, then build), constitution = §652's three-clause contract,
+  the six vocabularies carried intact, spec inputs = the full dress backlog (street
+  surface · water dress + shore strokes · ford glyph re-cut · seamless ground ·
+  relief expression · z-discipline · wear reach · the recovered MF-A1 L4 paint pass
+  integrated). REG-BRIDGE-B's crossing-ink scope FOLDS INTO the rebuild's
+  architecture (no separate car — its exits ride along, including the fresh-eyes
+  bridge read and the clip census). REG-7 remains the print projection. The paint
+  architecture is the chair's next desk item beside the in-flight GROW-A collection.
+- **§653.3 CONFIDENCE, stated honestly:** everywhere the vocabulary already sits on
+  honest geometry, measured corpus distance has closed; every failure has been a
+  substrate betrayal. The assembled end state remains §580's cross-reference —
+  Watabou's readability, the corpus's dress, the truth underneath.
