@@ -28111,3 +28111,23 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   D&D lifestyle ladder, and landscape toggles incl. mines/quarries/reserve-natural.
   Findings at dissect/ftg-one-shot-findings.json; the settlement lives 24 h for the
   deeper entity-schema and simulate-time passes.
+
+## §667 · THE SPINE DECISION PACKAGE GOES TO THE OWNER (2026-08-26 ~02:20 CDT)
+
+- **§667.1** The §654 stop's terminal deliverable is compiled and delivered:
+  **docs/SPINE_DECISION_2026-08-26.md** — the one decision (re-found the map builder
+  on the partition-first base per §656), its measured evidence (the week's censuses +
+  all six dissection captures), what the spine concretely is for our code, what
+  survives (most of the estate — truth, vocabularies, ledger, instruments, film,
+  every signed constant), the five-step plan if released (SPINE-ARCH with a
+  five-skeptic panel first · SPINE-1 partition/streets/wall · SPINE-2 crossings/banks
+  · GROW-A resumes on it · the held cars re-base into the paint rebuild), and the
+  costs named honestly (the fabric geometry core is REPLACED; same-seed shifts arm
+  dormant; some REG-1..5 sandbox geometry retires young while its laws and
+  instruments all survive). **The ask: go / hold / modify.** The stop holds until the
+  owner answers; the cutover and every push remain the owner's regardless.
+- **§667.2** The handoff's next-acts line updates to: AWAITING THE OWNER'S SPINE
+  ANSWER; available meanwhile without prejudice: the FTG entity-schema and
+  simulate-time passes (the temporary settlement lives ~24 h) · the dwelling
+  generator capture · the R-WATABOU dossier formalization from the six census files
+  in dissect/.
