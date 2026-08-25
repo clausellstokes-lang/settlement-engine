@@ -28001,3 +28001,37 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   paint rebuild.** Sheet note banked for it: the closed class list needs a bin for a
   pier/quay GROUP (the reader's nearest-class call on W02 was right for the wrong
   structural reason).
+
+## §662 · CAR-INSTRUMENTS COLLECTS — THE TANGENTIAL CENSUS SPEAKS: 237 CROSSINGS, 42 % IN VIOLATION (2026-08-25 ~23:30 CDT)
+
+- **§662.1 ALL FIVE GREEN** (receipt laneCARINST-receipt.md; workspace preserved at
+  `refs/preserve/reg-instruments-2026-08-25-r3`): i8 2→0 with convicting control ·
+  i10's B1 control RE-MINTED AS DERIVED (the hand constant 0.95 sat on the flat of a
+  smooth strand curve whose true knee is s* = 0.92478; the J-BR-7 derive-don't-choose
+  precedent now binds controls too; cause attribution honestly PLAUSIBLE — no
+  REG-I0-era tree survives) · the §645.2 census BUILT (i12) · exit codes fixed on
+  seven FAIL paths (⚠ declared: i5 city now exits 1 on its recorded pre-existing
+  floor failures — the fix working) · the WSEAM ratchet pinned (⚠ the chair's
+  addendum had CROSSED the two figures — mirror class 50,444 u², DRAWN∧¬SUB
+  208,644 u²; settled by an identity that closes to the decimal).
+- **§662.2 THE TANGENTIAL VERDICT — §645 IN NUMBERS, NO ZERO TO EXPLAIN:**
+  **C1 = 237 footprints CROSSING wall lines** (8 circuits; threshold-free, stable at
+  every sensitivity cell) · **C2 = 688 of 1,621 bodies within reach in violation
+  (42.4 %)** — the most generous corner still convicts 139. Town's circuit: 23
+  crossings, 18 on the south run — the fabric crosses exactly where the review's eyes
+  saw the streets cross; polycentric has ONE gate on 2,304 u. The i10-vs-i12 gap is
+  proven from both sides (0/87 REGIONS vs 688/1,621 BODIES on the same fabric — the
+  §645.2 blind spot, closed). §645.1's "same grain both sides" CONFIRMED numerically
+  (inside/outside tangential shares agree and are LOW everywhere; median Δ to the
+  wall's tangent 32–46°). ⭐ The elegant corroboration: **the RELICT old-core rings
+  read 0 crossings with the corpus's HIGHEST tangential shares (0.588)** — the
+  superseded circuits obey §575 and the standing ones do not: buildings placed after
+  a wall's day ignore it, which is the growth conviction wearing its clearest face
+  yet. **These figures are the fix plan's wall-family spec** (CAR-WALLS/REG-ROUTE own
+  streets and gates; i12 counts bodies — scope stated, not blurred).
+- **§662.3 J-ROWS RATIFIED**, two named: **J-CARINST-1** — the ford row enters i8 as
+  DRIFT-JUSTIFIED, not corpus (its strokes are corpus strokes but no plate draws a
+  ford in role; "blessing it corpus is how drift launders itself past this
+  instrument") — the row self-retires at REG-6's re-cut; **J-CARINST-4** — the §240.1
+  ride-along control, load-bearing on its first run. Non-grabs recorded to their
+  owners (bridgeAngles header · i10's verdict-less census path).
