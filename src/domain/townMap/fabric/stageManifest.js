@@ -225,9 +225,23 @@ export const GENERATION_NODES = Object.freeze([
   // ⚠ ⟦§297.2b / ODQ §577⟧ `cliffs.js` IS NEW ON THIS NODE. The segmented circuit terminates at
   //   the escarpment, so the trace consumes the boundary and its crossing read. It is an `S2>S13`
   //   edge the node pair already carries (`substrate.js`, `groundRefusal.js`) — no new node pair.
-  { nodeId: 'S13', modules: ['rampartWorks.js', 'wallCircuit.js', 'wallRuns.js', 'walls.js'],
-    allowedImports: ['builtUmbrella.js', 'cliffs.js', 'epochAxis.js', 'fabricGeometry.js', 'fabricRng.js', 'groundRefusal.js', 'reservedGround.js', 'snapshot.js', 'substrate.js', 'trigTable.js', 'waterMode.js'],
-    randomNamespaces: ['rampart.E*', 'wall.epoch.*', 'wall.epoch.*.*'],
+  // ⭐⭐⭐ ⟦DRESS-1 · ODQ §686.7⟧ **`wallPublication.js` JOINS S13, AND THE ORDER ARM IS WHAT PUT IT
+  //   HERE.** PA.2's successor publication derives the wall surface ONCE — off the WALLBAND faces
+  //   and the wrap's own ledger facts — so the dress consumes rather than re-derives (the estate
+  //   has twice found one law spelled two ways inside one module, §686.3's own words; this is the
+  //   structural refusal of a third).
+  //   ⛔ IT WAS FIRST ASSIGNED TO S8, WITH THE PARTITION, AND THE WALKER CONVICTED THE CHOICE: an
+  //   S8 module reading `wallRuns`/`walls`/`rampartWorks` derives the BACKWARD edge `S13>S8`, a new
+  //   PUBLIC ORDER INVERSION. The right reading of that red is not a declared exception — it is
+  //   that **this module is wall machinery that happens to read the partition, not partition
+  //   machinery that happens to read walls.** On S13 its one cross-node read is
+  //   `partitionArrangement.js` (S8), and `S8>S13` runs FORWARD. No inversion is created and S8's
+  //   own row is untouched.
+  //   ⭐ `statefulForkSites` STAYS 3: the publication draws with `keyedRandom` (pure string hashes,
+  //   no stream), so the fabric's pinned total of 18 does not move to admit it.
+  { nodeId: 'S13', modules: ['rampartWorks.js', 'wallCircuit.js', 'wallPublication.js', 'wallRuns.js', 'walls.js'],
+    allowedImports: ['builtUmbrella.js', 'cliffs.js', 'epochAxis.js', 'fabricGeometry.js', 'fabricRng.js', 'groundRefusal.js', 'partitionArrangement.js', 'reservedGround.js', 'snapshot.js', 'substrate.js', 'trigTable.js', 'waterMode.js'],
+    randomNamespaces: ['kind', 'rampart.E*', 'thin', 'wall.epoch.*', 'wall.epoch.*.*'],
     statefulForkSites: 3 },
   { nodeId: 'S14', modules: ['circuitDemotion.js'],
     allowedImports: ['fabricGeometry.js', 'fabricRng.js', 'groundRefusal.js', 'trigTable.js', 'wallCircuit.js'],
@@ -264,8 +278,16 @@ export const GENERATION_NODES = Object.freeze([
     allowedImports: ['accessLaw.js', 'fabricGeometry.js', 'lineage.js', 'organismFields.js', 'reservedGround.js', 'wallCircuit.js', 'waterMode.js', 'waterWorks.js'],
     randomNamespaces: [],
     statefulForkSites: 0 },
-  { nodeId: 'S22', modules: ['folioLenses.js', 'immersion.js'],
-    allowedImports: ['fabricGeometry.js', 'fabricRng.js', 'measure.js'],
+  // ⭐⭐⭐ ⟦DRESS-1 · ODQ §686.7⟧ **`partitionDress.js` JOINS S22 — THE INK BELONGS WITH THE LENS.**
+  //   DESIGN_SPINE §4: *"views read the partition plus closed dress vocabularies, and nothing
+  //   else."* The dress is exactly that view, and `folioLenses.js` — the closed vocabulary it reads
+  //   — is already this node. Assigned to S8 it derived the backward edges `S17>S8` and `S22>S8`;
+  //   here its reads of `waterWorks.js` (S17, `V_QUAY_BAND`) and `rampartWorks.js` (S13, the signed
+  //   comb/texture/stair pitches) both run FORWARD, and the lens table is a same-node read.
+  //   ⚠ It takes NO partition module: the dress consumes a PAGE FRAME and a WALL PUBLICATION as
+  //   plain data, which is why the ink can be judged without the constructor being in scope.
+  { nodeId: 'S22', modules: ['folioLenses.js', 'immersion.js', 'partitionDress.js'],
+    allowedImports: ['fabricGeometry.js', 'fabricRng.js', 'measure.js', 'rampartWorks.js', 'waterWorks.js'],
     randomNamespaces: ['*|*|road', '*|*|side', '*|field', '*|h', '*|keep', '*|w'],
     statefulForkSites: 0 },
   { nodeId: 'S23', modules: ['lettering.js'],
@@ -295,7 +317,13 @@ export const NODE_EDGES = Object.freeze([
   // ⭐ SPINE-1's THREE, and all three run FORWARD: the partition reads the primitives and the S0
   //   pre-stages, and the assembly reads the partition. No new inversion, so `STAGE_GRAPH_SCC` is
   //   unchanged and arm 7's roster still names the whole feedback set.
-  'PRIMITIVES>S8', 'S0>S8', 'S8>ASSEMBLY'
+  'PRIMITIVES>S8', 'S0>S8', 'S8>ASSEMBLY',
+  // ⭐⭐ ⟦DRESS-1 · §686.7⟧ THREE MORE, AND ALL THREE RUN **FORWARD** — which is the whole reason
+  //   the publication sits on S13 and the dress on S22 rather than both on S8. Assigning them to
+  //   the partition node derived `S13>S8`, `S17>S8`, `S22>S8`: three NEW public-order inversions
+  //   in a dress car. `PUBLIC_ORDER_INVERSIONS` and `STAGE_GRAPH_SCC` are untouched by the
+  //   assignment that actually landed.
+  'S8>S13', 'S13>S22', 'S17>S22'
 ]);
 
 /** The ABSENT §10.14 fields, named rather than stubbed. A consumer that needs one must build
@@ -335,9 +363,26 @@ export const GENERATION_MANIFEST = Object.freeze({
  * two named module imports with written reasons, rather than being a diffuse tangle. A third
  * inversion, or a component this roster does not name, REDS.
  */
+/**
+ * ⭐⭐⭐ ⟦DRESS-1 · §686.7⟧ **THE COMPONENT GAINS S8, AND THE GAIN IS DECLARED RATHER THAN ROUTED
+ * AROUND.** `wallPublication.js` (S13) reads `partitionArrangement.js` (S8) — it must, because it
+ * publishes the wall surface off the WALLBAND faces themselves — and S13 already reads
+ * `waterMode.js` (S4), which already reaches S8. So `S8>S13` closes a loop and the partition joins
+ * the feedback set: five stages become six.
+ *
+ * ⚠ **THE ALTERNATIVE WAS AVAILABLE AND WAS REFUSED ON PURPOSE.** Handing the publication an
+ * injected reader (`{facesOf, ringOf, centroidOf}`) the way `partitionDress` takes `ringOfFace`
+ * would have kept the roster at five — by making a real, direct dependency INVISIBLE to the very
+ * graph this manifest exists to expose. A smaller roster bought with a hidden edge is the wrong
+ * trade in a file whose stated law is *"moves zero bytes as a GRAPH FACT"*.
+ *
+ * ⭐ **AND NO THIRD INVERSION IS CREATED.** `closedBy` is unchanged: cutting `S13>S6` and `S6>S2`
+ * — and nothing else — still leaves a DAG with a unique order, which arm 7 proves separately from
+ * this roster. The component grew; its explanation did not.
+ */
 export const STAGE_GRAPH_SCC = Object.freeze([
   Object.freeze({
-    members: Object.freeze(['S13', 'S2', 'S3', 'S4', 'S6']),
+    members: Object.freeze(['S13', 'S2', 'S3', 'S4', 'S6', 'S8']),
     closedBy: Object.freeze(['S13>S6', 'S6>S2']),
   }),
 ]);

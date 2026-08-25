@@ -131,12 +131,14 @@ export function projectPage(partition, opts = {}) {
         cur.faces.push(...r.faces);
         cur.members.push(r.run);
         cur.ridges.push(r.ridge);
+        cur.runRings.push(r.ring);
         cur.area += r.area;
         continue;
       }
       if (cur) masses.push(finishMass(arr, cur, keep, rw2));
       cur = {
-        block, faces: r.faces.slice(), members: [r.run], ridges: [r.ridge], area: r.area,
+        block, faces: r.faces.slice(), members: [r.run], ridges: [r.ridge],
+        runRings: [r.ring], area: r.area,
       };
     }
     if (cur) masses.push(finishMass(arr, cur, keep, rw2));
@@ -378,6 +380,17 @@ function finishMass(arr, cur, keep, rw2) {
     unitLines: Object.freeze(unitLines(arr, cur.faces, keep)),
     /** ⭐ RIDGES RIDE THE RUN, NOT THE CHUNK — a chunk boundary never breaks a continuous ridge. */
     ridges: Object.freeze(cur.ridges.filter(Boolean)),
+    /**
+     * ⭐⭐ **DRESS-1 / PA.6 · THE RUN'S OWN DISSOLVED FOOTPRINT, PUBLISHED BESIDE ITS RIDGE AND
+     * INDEX-PAIRED WITH IT.** PA.6 rules that a ridge clips to *"the run's own dissolved footprint,
+     * NEVER the chunk"*, and review B7's defect is exactly a ridge overshooting its eaves (max
+     * 52.6 u, crossing open ground). The chunk ring was the only footprint a dress could reach
+     * from here, so the law was unenforceable at the consumer; the run rings were already computed
+     * in stage 1 and were simply not carried. Nothing is re-derived and no count moves — `ridges`,
+     * `unitLines` and `members` are untouched, so `pageBudget` reads exactly what it read before.
+     */
+    runRings: Object.freeze(cur.runRings.map((r) => Object.freeze(r))),
+    ridgeOfRun: Object.freeze(cur.ridges.slice()),
   });
 }
 
