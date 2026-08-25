@@ -226,6 +226,27 @@ degeneracy should have STOPPED the wave rather than chartered a census.
 (52,693 B) · ODQ §688.
 *Priority:* **P1** on (a), P2 on (b) and (c).
 
+**§692 · DRESS-1b collected, sealed and ruled; the gestalt gate escalated · SEAT: Opus 5.**
+*What was judged:* twelve J-DRESS1B calls RATIFIED; the 30-row classifier mapping accepted
+as derived-from-emission; the lane's own improvement (11→12) accepted as **variance and
+disclaimed**; two corrections to the chair's own record; and the ruling that the gestalt
+question **goes to the owner rather than to a round 3**.
+*What Fable re-derives:* ⛔ **(a) THE SAME P1 AS §688, NOW SHARPER — read the eighteen
+plates cold and answer the tier question independently.** The lane diagnosed `tier` and
+`arc` as KEY defects; that is the self-serving direction for a lane grading its own round,
+and the only outside evidence is the inter-reader spread (100 %/100 % structural vs
+77.8 %/83.3 % on tier/arc). A second seat's uncontaminated read is the one thing that
+settles it, and no control inside the wave can substitute. **(b)** the arguable mapping rows
+— `dress-ditch`→wall, `dress-relict`→wall, `dress-quays`→ground, `dress-accessible`→building
+— each of which moves what an instrument reads. **(c)** whether ratifying **J-DRESS1B-6** was
+right: a squint tie resolved to UNRESOLVED **moves a verdict in the ink's own favour**, and
+the lane disclosed exactly that — is disclosure sufficient, or should a tie have failed?
+*Receipts:* `refs/preserve/map-sandbox-dress1b-round2` = `6e33a0637` ·
+`refs/preserve/reg-instruments-2026-08-27-r5` = `4c3ffe515` · `laneDRESS1B-receipt.md`
+(815 lines) · ODQ §692.
+*Priority:* **P1** on (a) — it is the arc's central taste question and it is now twice
+unresolved; P2 on (b) and (c).
+
 **§690 · The instrument-estate recon, captured after the halt · SEAT: Opus 5.**
 *What was judged:* only the decision to **capture rather than act** — the owner halted work
 and the classifier ruling §690.3 names is deliberately LEFT UNRULED. Also judged: that the

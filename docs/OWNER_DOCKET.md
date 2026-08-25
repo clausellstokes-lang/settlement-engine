@@ -7,6 +7,8 @@ their §; the owner strikes rows as ruled. Nothing here blocks the arc unless ma
 rows added from §685 forward are Opus-chaired and carry their seat in the landing commit.
 
 ## DECISIONS AWAITING THE OWNER
+- ⛔⛔ **THE GESTALT GATE (§692.4) — PA.7's escalation clause has fired.** Two consecutive disagreeing rounds (61.1 %, then 66.7 % against the ≥80 % bar) while the HARD clause passed perfectly both times (walled 18/18, water 18/18, zero wrong-class reads). The lane diagnoses `tier` and `arc` as KEY defects, not ink defects, and did not edit the key. **Your call, three options, in §692.5.** No round 3 runs until you rule.
+- ⛔ **A DECLARED SHIFT AWAITING YOUR SIGNATURE (§692.9(i)): the wall band is systematically UNDER-WIDTH on elongated rings** — 5 of 17 wraps, worst 0.212 of declared, because `shrinkRing` displaces radially. **The fix moves every band in the corpus.**
 - Marketing/website 432-file set: name its home branch (pinned safe at tree-triage-pin-2026-08-25; §659.3).
 - The 33 staged docs/DESIGN_FP_ARCH_* edits (2026-08-17): yours or strike (§659.3).
 - Formal GPL clean-room comfort via counsel (§668/§673 — the conservative discipline binds meanwhile).

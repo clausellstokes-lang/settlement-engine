@@ -29060,3 +29060,115 @@ read-only), but the statement was inaccurate when made.
   61.1 % gestalt round stays a **hypothesis**. DRESS-1b may test it, but the gestalt cure is
   judged on its own diagnosis (INK vs KEY, §688.2), never explained away by an instrument
   defect — the two must not be allowed to launder each other.
+
+## §692 · DRESS-1b SEALS — THE CLASSIFIER IS CURED, THE HARD CLAUSE HOLDS TWICE, AND THE GESTALT GATE ESCALATES TO THE OWNER (2026-08-27 ~01:10 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+- **§692.1 SEALED** at `refs/preserve/map-sandbox-dress1b-round2` = **`6e33a0637`** (base
+  `ad2b8d399` verified ancestor; one commit; `git diff HEAD` empty; no ref moved by the
+  lane). The instrument workspace is sealed **beside** it at
+  `refs/preserve/reg-instruments-2026-08-27-r5` = **`4c3ffe515`** (224 files; the eight
+  changed/new present; **`i1-squint.mjs`, `i5-role-contrast.mjs` and `mk-controls.mjs`
+  byte-identical to r4** — the untouched trio verified, not assumed).
+  **Gate 19 files / 425 tests, EXIT 0 at the committed tip** · partition census **18/18
+  GREEN** · dormancy **29/29** and determinism **18/18** byte-identical, **with the
+  dormancy diff shown to convict a one-byte plant** · byte pins **0 of 6 over**
+  (metropolis 707,719 / 830,000).
+- **§692.2 THE CLASSIFIER CURE IS MET, AND ITS SECOND DELTA IS AN HONEST ZERO.** Every
+  group is single-valued on all 18 plates, **`chrome` is absent from every census**, and
+  the viewBox count went 0 → 18 accepted. The 30-row mapping was **derived from emission,
+  not assigned by name** (§691.3), and lands **`chrome` on zero rows**: building 9 · wall 8
+  · water 4 · field 2 · detail 2 · ground 2 · paper/street/square/yard 1 each. Both shifts
+  declared per §691.4: **Δ1 (pre-REG5 → post-REG5) = 113 of 5,242**; **Δ2 (post-REG5 →
+  post-dress) = 0 of 5,242.** ⭐ That zero is not a null result and must not be read as one:
+  the existing plates carry **no dress groups at all**, so the cure could not move them —
+  its whole value is **prospective**, making dress plates readable *at all*. Recording a
+  zero with its reason is the difference between a measurement and a shrug.
+- **§692.3 §691.7 HELD — THE TWO DID NOT LAUNDER EACH OTHER.** The hypothesis that the
+  classifier collision moved DRESS-1's round 1 is **REFUTED BY PATH**: `lib/classify.mjs`
+  appears **nowhere in the gestalt pipeline**. The lane proved the independence rather than
+  asserting it, which is exactly what §691.7 asked for and the opposite of what a lane
+  under pressure usually does.
+- **§692.4 ⛔⛔ THE GESTALT GATE ESCALATES TO THE OWNER — PA.7's CLAUSE FIRES.** **Round 2:
+  12 of 18 = 66.7 %**, against the ≥ 80 % bar, after round 1's 61.1 %. **Two consecutive
+  disagreeing rounds.** Under PA.7 that is **the owner's call, not the chair's**, and no
+  round 3 runs until they make it. Three facts belong to that decision:
+  **(i) THE HARD CLAUSE IS MET TWICE, PERFECTLY** — walled **18/18**, water **18/18**,
+  **zero wrong-class reads on the load-bearing fields**, both rounds. *The map does not lie
+  about what kind of place it is.*
+  **(ii) THE SCORE'S RISE IS DISCLAIMED BY THE LANE ITSELF** — 11 → 12 with **zero ink
+  change**, against an **unchanged key**, with round 2's plates **blinded and shuffled**
+  where round 1's were not. The lane called that variance and claimed no credit, which is
+  the reading the chair adopts.
+  **(iii) THE DIAGNOSIS, WRITTEN BEFORE ANY INK MOVED AND NOT REVISED:** `tier` and `arc`
+  are **KEY DEFECTS**; **no ink defect was diagnosed at all.** The key was **not edited to
+  pass** (J-DRESS1B-4) — the lane declared and stopped, exactly as §688.2 required.
+- **§692.5 THE EVIDENCE UNDER THAT DIAGNOSIS, AND THE ONE REASON TO DISTRUST IT.** For
+  `tier`: the only page-scale magnitude proxy a **fitted** sheet offers is **not monotonic
+  and is inverted on 20.8 % of cross-tier pairs** — the city is drawn sparser than ten
+  towns, because the page fits itself to the settlement. For `arc`: **one positive case in
+  eighteen**, and §5's own EXITS place the gestalt-on-decline test in **REG-D**, whose
+  dress does not exist yet. ⭐ **THE INDEPENDENT CORROBORATION:** inter-reader agreement is
+  **100 % / 100 % on the two structural fields and 77.8 % / 83.3 % on tier/arc** — *readers
+  disagree with each other on exactly those two*, which is the signature of a bad question
+  rather than a bad drawing; and round 1's one-directional tier bias **reversed**.
+  ⚠ **THE REASON TO DISTRUST IT, STATED PLAINLY BECAUSE IT IS THE CHAIR'S JOB TO STATE IT:**
+  a lane that graded its own round has diagnosed the *grader* rather than its own work,
+  which is the self-serving direction. The inter-reader figures are the strongest evidence
+  against that reading **because they came from outside the lane** — but they do not erase
+  the structural conflict, and that conflict is precisely why PA.7 sends this to the owner.
+- **§692.6 TWO CORRECTIONS TO MY OWN RECORD, ONE OF THEM A STRIKE I SHOULD NOT HAVE MADE.**
+  **(i) §688.3(iii)'s strike was made against the wrong quantity.** I struck the reader's
+  "30:1 aspect" claim as refuted at 1.9 — but that measured the **axis-aligned box** while
+  the claim was about the **shape**. The wrap-sanity census, built and run with **8/8
+  controls**, finds metropolis E1 is **not self-folded** (crossings 0, cancel ratio 1.00,
+  ring area equal to its own hull area to 1e-6) — it is a **genuine convex NEEDLE, min-area
+  rectangle 711 × 31, aspect 22.79**. **The reader was right and my strike was wrong**; the
+  §690.1 "degenerate" framing was right about the defect and wrong about its mechanism.
+  **(ii) §688.5(iii) is REFUTED as stated:** `terrain-surrender` **fires 5 times** on the
+  legacy producer, so it is not unfirable. ⛔ **And the real finding is worse than the one I
+  recorded: the successor publication produces 0 of the 83 runs the legacy classifier
+  finds** (crest / notch / terrain-surrender / detour-to-work). **That is a LOST SIGNAL, and
+  it convicts a doc-comment DRESS-1 itself wrote** — PA.2's contract test proved the *dress
+  renders unchanged*, which is a weaker claim than *the publication carries what the legacy
+  producer carried*. **CHARTERED** against the wall contract, not against this lane.
+  Also corrected by measurement: §690.1's flood is **worse than predicted on 4 leaves and
+  absent on 14**; DRESS-1's tier tally is **13/18, not 14/18**; its squint tie tone is the
+  **field fill, not the grain**; and its grade claim's mechanism is wrong — **the
+  heightfield never reaches the constructor**.
+- **§692.7 THE REMAINING EXITS, AND THE ONE NAMED RED.** Squint indeterminates **RESOLVED —
+  as an instrument defect**: 16 HOLD, 0 INVERTED, 2 TIED at 320 px. **i1/i6/i7 declared
+  baselines MET** with i6's arm pinned `partition:UNARMED` (§688.3(ii) discharged), carrying
+  **one honest red: `town-2` i1 wall 0.905 against the 1.00 floor** — quoted, not smoothed.
+  Route/cliff re-measured with three corrections, including that **the landlocked figure was
+  counting duplicates: 25 on 6 distinct partitions, not 31.**
+  ⭐ **PA.5's CONTROL GATE PAID FOR ITSELF THREE TIMES OVER, AGAINST THE LANE'S OWN WORK:**
+  it caught a **mask/image frame mismatch** in which **48.9 % of the sampled frame was blank
+  canvas** (the street plant moved i1's mean 183.33 → 183.08) — *that would have published a
+  corpus-wide table of nonsense as a baseline* — plus **two of the lane's own controls
+  repainting a role INTO the hue band under test**, and a squareness tolerance that refused
+  a legitimate plate. **Every one was caught before a baseline was believed**, which is the
+  entire reason the "no zero without a live control" law exists.
+- **§692.8 ALL TWELVE J-DRESS1B CALLS RATIFIED.** Named for the record: **J-4** (round 2 run
+  against the **unchanged** key; key defects declared, not edited) · **J-6** (a squint tie
+  resolved to UNRESOLVED and **declared as moving a verdict in the ink's own favour** — the
+  disclosure is what makes it acceptable) · **J-10** (round 2 **blinded and shuffled**,
+  correcting round 1's method mid-programme) · **J-11** (i6's arm pinned) · **J-12**
+  (instrument arm re-shot, reader plates **proved pixel-identical** rather than assumed) ·
+  **J-8** (two dead controls **fixed, not left**). **J-7**: no test file added — the port's
+  three-ratchet bill does not grow this wave.
+- **§692.9 ⛔ TWO ITEMS GO TO THE OWNER'S DOCKET, AND ONE IS A SIGNATURE.**
+  **(i) A DECLARED SHIFT AWAITING THE OWNER: the wall band is systematically UNDER-WIDTH on
+  elongated rings** — **5 of 17 wraps, the worst at 0.212 of its declared width** — because
+  `shrinkRing` displaces radially. **Fixing it moves every band in the corpus**, so it is a
+  declared shift the owner signs, not a repair a lane takes.
+  **(ii) ⛔ A WALL IS DRAWN ACROSS OPEN WATER on `city` and `migration`.** That is exactly
+  the class the partition was built to make unrepresentable, surfaced by ink rather than by
+  a census — informational to the owner, chartered to a constructor car.
+  Deferred with rationale (16 rows in the receipt's §DEFER), constructor-owned unless said
+  otherwise: E1's needle and its **gap-blind `convexHull`** · the lost run-type signal ·
+  the grade mechanism · **one site carrying three wall-raise years**. **Dress-owned but
+  explicitly NOT this lane's** (§5.4 — *it graded its own round and may not cure what that
+  surfaced*): **gates drawn but unreadable at page scale**, and **an uninterpretable mark
+  that L-REG-34's legend census PASSES because it checks a bijection, not legibility** —
+  a census whose predicate is weaker than its name, which is the §688.7 class one document
+  over.
