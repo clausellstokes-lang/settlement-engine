@@ -187,3 +187,45 @@ J-GFOLD-2 exceeded its brief in a way that should have escalated rather than pro
 `laneGFOLD-receipt.md` · ODQ §686.
 *Priority:* **P2** — the host-chooser law and the corrected C1 record both foreclose
 options; item (a) is P3.
+
+**§687 · The provenance audit, the map, and two cures to §685's own gate · SEAT: Opus 5.**
+*What was judged:* the reading that trailer-recovered provenance is a **third status**
+rather than a discharge; the P0 stratum's creation and the claim that §287.10 poisons
+§298's discharge; the decision to fold the 07-31 queue in **by pointer rather than merge**;
+and the scoping of the commit-msg hook to ledger paths only.
+*What Fable re-derives:* whether **PROVENANCE_MAP.tsv's channel logic is sound** — in
+particular whether a self-declared `Co-Authored-By` trailer should count as recovery at
+all, since both channels are written by the same model whose seat is in question; and
+whether P0's membership test ("a completed ruling stands on an UNKNOWN section") is drawn
+tightly enough to be a search rather than an excuse.
+*Receipts:* `docs/PROVENANCE_MAP.tsv` · ODQ §687 · the 8-agent audit's journal.
+*Priority:* **P1** — it sets the register's own shape.
+
+**§688 · DRESS-1 collected, sealed and ruled · SEAT: Opus 5.**
+*What was judged:* **all eleven J-DRESS1 calls RATIFIED**, three with consequences —
+especially **J-DRESS1-1**, which amends a standing law (no lockfile in the sandbox ⇒
+`npm ci` inapplicable ⇒ the collected count is the non-vacuity proof); the ruling that
+**round 1's 61.1 % is a cure-and-re-round, not an escalation**; and the three corrections
+to the record above the lane.
+*What Fable re-derives:* ⛔ **(a) THE TASTE HALF — this is the P1 of the whole arc.** The
+gestalt round graded **61.1 % whole-leaf** with the hard clause met; a Fable seat should
+re-read the same leaves and say whether the 7 disagreements are ink defects or key
+defects, because an Opus chair curing toward its own key is the one loop no control here
+can break. **(b)** whether accepting a symlinked `node_modules` on a collected-count proof
+is genuinely equivalent to the law it replaces. **(c)** whether the metropolis wrap's
+degeneracy should have STOPPED the wave rather than chartered a census.
+*Receipts:* `refs/preserve/map-sandbox-dress1-ink` = `ad2b8d399` · `laneDRESS1-receipt.md`
+(52,693 B) · ODQ §688.
+*Priority:* **P1** on (a), P2 on (b) and (c).
+
+**§689 · The competitive-set correction · SEAT: Opus 5.**
+*What was judged:* the chair's refinement of the owner's own positioning — that
+"convenience" is the entry argument and coherence-from-truth plus time are the moat — and
+the ruling that Inkarnate leaves the *competitive* set while staying in the *aesthetic*
+one.
+*What Fable re-derives:* whether that refinement is right, or whether it is the builder's
+instinct re-asserting architecture over experience — **the exact error the owner corrected
+on 2026-08-05** ("the things that YOU find great are not what the community finds great").
+A Fable seat should check this one against the marketing doctrine, not against the code.
+*Receipts:* ODQ §689 · the owner's message, quoted verbatim there.
+*Priority:* **P1** — it is a taste-and-positioning call, the class §236.2 names.

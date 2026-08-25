@@ -28905,6 +28905,20 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   file reds three censuses **at landing**. That cost is the PORT's, not the sandbox's, and
   it is now two files larger than the port's charter assumed.
 
+- **§688.7 ⛔ AND THE SEAT GATE'S SECOND CLAUSE WAS TOO WEAK — THE CHAIR WALKED THROUGH ITS
+  OWN GAP.** §685.4's coupling clause required only that
+  docs/FABLE_RETROVALIDATION_QUEUE.md be **among a commit's paths**, so an **unchanged**
+  file satisfied it — and §688's own commit rode the queue along without adding a row. The
+  gate reported compliance for an act that had not complied. **PRESENCE IS NOT A ROW.**
+  `chair-commit.sh` now compares the queue blob against the parent commit's and REFUSES
+  when they are identical; three planted controls (unchanged ⇒ ABORT · changed ⇒ passes to
+  the tip check · Fable-seat ⇒ unaffected). The §685/§687/§688/§689 rows are landed here.
+  **This is the third gate in one sitting whose first spelling was too weak** — inert mode,
+  unasserted subject, unchanged file — and the pattern is worth naming: *a gate written in
+  the same breath as the rule it enforces tends to check the shape of compliance rather
+  than its substance.* Every one was caught by measuring the gate against a case that
+  should fail, never by re-reading it.
+
 ## §689 · OWNER CORRECTION: INKARNATE IS NOT A COMPETITOR — THE COMPETITIVE SET IS GENERATORS, AND THE MOAT IS NOT CONVENIENCE ALONE (2026-08-26 ~18:45 CDT; SEAT: Opus 5 — Fable-unvalidated)
 
 - **§689.1 THE CORRECTION (owner, in chat, verbatim):** *"i realized that inkarnate is not
