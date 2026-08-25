@@ -28197,3 +28197,23 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
 - **§670.2 SPINE-1 DISPATCHES** (Opus, dormant-flagged `REG_FABRIC_OPTS.partition`,
   base = the newest seal) against body + A1 with A1's exit set. The chair seals;
   gestalt gates at page scale first; the owner's eyes remain the final judge.
+
+## §671 · OWNER ORDER — RECONCILE EVERY PENDING ARCHITECTURE TO THE SPINE; CHAIR RECOMMENDS AND EXECUTES (2026-08-26 ~05:10 CDT)
+
+- **§671.1** The owner ordered the pending future architectures refined and amended
+  with the spine reconciliation in mind, and asked whether the chair recommends it.
+  **RECOMMENDED WITHOUT RESERVATION, on the estate's own scar tissue:** every major
+  drift class this program caught (the §631 tier fork, §660.3's decayed zero, the
+  §absence law's three directions) had the same anatomy — a document still saying
+  what the estate had superseded, and a lane building against it. The spine
+  superseded more standing text in one stroke than anything before it; reconciling
+  NOW, while SPINE-1 builds and nothing builds against the stale charters, is one
+  sitting against months of re-found defects.
+- **§671.2 THE METHOD:** a four-reader INVENTORY sweep (in flight) over
+  DESIGN_REGISTER_PROGRAM body+A1–A9 · A10–A12 · DESIGN_REG_GROW+A1 · A5/A6
+  film/Chronicle + SIGNED_CONSTANTS — every stale clause quoted with locator and a
+  disposition class (supersede-by-name / rewrite / retire / retarget / annotate),
+  CLEAN sections listed positively. **The amendments themselves are the CHAIR'S
+  HAND** (architecture is the Fable seat's): one reconciliation amendment per
+  document, ruled from the inventory, then a verifier pass for cross-contradictions
+  before any lane consumes the amended set.
