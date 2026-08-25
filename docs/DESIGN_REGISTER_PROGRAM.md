@@ -524,3 +524,13 @@ states (DESIGN_REG_GROW.md A1.4 — LossRegion lifecycle, hf379 time-clock, pres
 recovery), superseding the "LANDED mechanisms only" binding of A6.2 for decline substrate.
 REG-D remains dress-only: it draws reached states, it never invents them. Sequenced after
 REG-GROW-B lands its ledger.
+
+## Amendment A11 — the cultivated-land sizing law (owner, §644)
+
+| Law | Statement | Source |
+|---|---|---|
+| L-REG-33 | Cultivated area scales with tier under a subsistence→trade inflection: thorp→village fields sized to feed the population (sourced acres-per-capita, tuning-surface); town→metropolis local extent decelerates below self-sufficiency while near-ring INTENSITY rises (gardens/orchards/closes) and trade dependence stays visible through the drawn roads, markets, quays. | §644 |
+
+Home: REG-H, beside the mosaic. Exits: per-tier area census against the band with a
+planted over-cultivated control; the self-sufficiency ratio reported per settlement.
+Frame-correct under REG-GROW: extent reads the ledger's population per epoch.

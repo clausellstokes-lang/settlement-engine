@@ -27500,3 +27500,32 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   consume R-MORPH at weights grade. Program doc gains **A10** (REG-D re-founded on
   ledger emissions). **REG-GROW-A dispatches when REG-BRIDGE seals** (arc §639.3);
   REG-BRIDGE is in flight now.
+
+## §644 · OWNER LAW — CULTIVATED LAND SCALES WITH TIER: SUBSISTENCE BEFORE TRADE (2026-08-25 ~14:00 CDT)
+
+- **§644.1 THE DIRECTIVE, verbatim intent:** "the amount of cultivated land surrounding
+  a settlement is dependent on the tier of the settlement, because it's subsistence
+  based before it's trade based."
+- **§644.2 MINTED AS L-REG-33:** the cultivated area around a settlement is a FUNCTION
+  OF TIER with a SUBSISTENCE→TRADE inflection. **Subsistence tiers (thorp → village):
+  cultivated area ∝ population × an acres-per-capita constant** — the place FEEDS
+  ITSELF and its fields say so (R-MORPH's Elton page already carries the measured
+  anchor: ~70 scattered selions ≈ 20 acres per family; the constant is tuning-surface,
+  sourced before minting per §642.2's grades). **Trade tiers (town → metropolis): local
+  cultivated EXTENT decelerates below self-sufficiency — the city eats through its
+  markets, roads, and quays — while local INTENSITY rises**: the near ring turns to
+  market gardens, orchards, and closes (the von Thünen gradient; the corpus's own
+  market-garden anatomy at hf311), and the trade dependence must be VISIBLE in the
+  drawn world the fabric already publishes (the roads, the market, the quay — no new
+  invented surface). This RESOLVES the audit's metropolis row the right way round: the
+  metropolis's near countryside is the most INTENSIVE, not the most extensive.
+- **§644.3 HOME = REG-H** (the hinterland mosaic car, gate already open per §642.2):
+  its charter gains the SIZING LAW beside the mosaic — per-tier cultivated-area bands
+  derived from population and the sourced per-capita constant, with the intensity
+  gradient as the trade-tier expression. Exit gains: an area census per tier against
+  the band (with a planted over-cultivated control), and the self-sufficiency ratio
+  REPORTED per settlement (a truth surface the compendium can later consume — flagged,
+  not built). Program doc gains **A11**. ⚠ Lifecycle note for REG-H: cultivated extent
+  must read the GROWTH LEDGER's population at each frame once REG-GROW lands — a
+  young town's fields are a village's fields; the two cars coordinate through the
+  ledger, not through the present.
