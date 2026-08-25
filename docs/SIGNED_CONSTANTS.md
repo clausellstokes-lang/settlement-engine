@@ -53,6 +53,11 @@ deliberately). No time gate (wall-clock spread is noise, §635.3).
 | Trajectory THIN band | < 3 % of applicable seeds per shape | REG-T charter (chair) |
 | Siege standoff (weights grade) | camps ≥ ~400 m · fortified works 250–400 m · saps < 200 m | §642.2 / R-MORPH §6 (one-site caveat) |
 
+## PROVISIONAL — SIGNED BUT NOT YET IN BAND (§680.3)
+| constant | state | source |
+|---|---|---|
+| Stop-rule subdivision: per-ward halt thresholds + gap bar | lane-proposed values signed PROVISIONAL; measured spread 1.38–5.91 p75/p25 (20–35 % in band) vs the reference invariant ≈ 1.71 — TIGHTENING IS SPINE-2's; owner re-signs at tuning | §680.3 / SPINE A2.1 |
+
 ## UNMINTED-PENDING (named so nothing silently defaults)
 | constant | blocked on | home |
 |---|---|---|

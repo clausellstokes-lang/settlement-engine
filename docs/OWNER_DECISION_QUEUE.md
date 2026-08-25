@@ -28403,3 +28403,35 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   the shipped tool grew beyond it. The whole reference-study estate (three dossiers,
   all receipts, the six censuses, both inventories, the review consolidation) is
   PRESERVED at `refs/preserve/reference-study-2026-08-26`.
+
+## §680 · SPINE-1 SEALS — THE PARTITION EXISTS, TEN TIMES UNDER BUDGET, WITH AN HONEST RED IT REFUSED TO PAINT GREEN (2026-08-26 ~09:40 CDT)
+
+- **§680.1 SEALED** at `refs/preserve/map-sandbox-spine1-partition` = `e2aec4089…acb`
+  (base = the bridge seal via GROW-A's tip; **J-SPINE1-0 RATIFIED** — the rebase onto
+  the stood-down kernel's commit cost nothing, 29/29 byte-identical). The partition
+  is BUILT AND DORMANT: four S8 modules, one flag-gated call site, 21 test cases;
+  gate **339/339**, walkers 74/74. **The architectural call of the car: the
+  arrangement is NEVER NODED, ONLY SPLIT** — every construction act is a local chord
+  inside one face, so planarity is an invariant of the operations rather than a
+  repair. The numbers: **constructor 261 ms at metropolis against the 2,500 ms
+  budget; the page frame 0.6–7.1 ms against 1,935 ms** — an order of magnitude under.
+  A2.1's stop-rule arrived mid-flight and REPLACED the lane's own §3b spelling on its
+  own measurements (town refusals 5,943 → 778; proper crossings 13 → 0), and A2.2's
+  jitter ban CONVICTED the lane's own first extent-ring spelling — removed, with the
+  test asserting the source. Exits E2–E10 green with five planted controls each
+  moving exactly one; **E4's differential reads SPRAWL 0 ON EVERY WALLED LEAF** —
+  after the partition's own law caught infill spilling past the band and cured it.
+- **§680.2 THE RED AND THE THINS, RULED:** **E1 metropolis: 2 proper crossings of
+  10,101 edges** — an epoch-quantum case (a split vertex landing on an older wrap
+  edge's interior). The lane REFUSED to relax the census to reach 18/18 — that
+  refusal is the culture, ratified. **The cure (a spatial index) is SPINE-2's first
+  geometry act.** THINs accepted: A2.3's gate machinery completes at SPINE-2; E11's
+  accessible arm re-homes to THE DRESS RE-BASE (structurally correct — the partition
+  emits no ink until then).
+- **§680.3 THE BAND CONSTANTS, SIGNED PROVISIONAL:** the mechanism is in place (the
+  band is manufactured by the gap bar; the census verifies) but the measured spread
+  is **1.38–5.91 p75/p25 with 20–35 % of masses in band** against the reference's own
+  invariant ≈ 1.71. The lane rightly refused to fit eighteen leaves. **Signed at the
+  proposed values as PROVISIONAL-NOT-YET-IN-BAND** (SIGNED_CONSTANTS row added);
+  the tightening — per-ward thresholds measured toward the 1.71 invariant — is
+  SPINE-2's, and the owner re-signs at tuning. **SPINE-2 DISPATCHES** on this seal.
