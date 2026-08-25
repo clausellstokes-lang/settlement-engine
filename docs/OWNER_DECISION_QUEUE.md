@@ -28060,3 +28060,17 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   at zoom (our register ladder's own design, §467-era, now with its reference-grade
   quantification). Next dissection sessions: seed sweep for variance · village +
   dwelling generators · FTG's one shot behind its rig.
+
+## §664 · THE SEED SWEEP'S FIRST PAIR — PLANKS ARE §651, AND THE SIZE BAND NEVER MOVES (2026-08-26 ~00:50 CDT)
+
+- **§664.1** Second capture (size-40 coastal river city, all features; census at
+  dissect/mfcg-grimfall-census.json): **6,481 buildings — ten times the first city —
+  with the SAME tight area band (p25 161 · p50 212 · p75 275)**: scale changes COUNT,
+  never building character; the band is invariant. **The bridges are a feature group
+  named `planks`: thirteen 2-POINT LINESTRINGS with a width** — the crossing as its
+  own typed edge between banks, which is §651's owner-ruled topology as the
+  reference's literal data model. The river at city scale is ONE polyline with ONE
+  width (65.9) — our width profile is a justified-by-truth divergence, recorded so
+  the study never mislabels it emulation. Docks District and Iron Wharf name the
+  waterfront wards our port leaves lack the institutions to earn (§660.1's atlas gap,
+  seen from the reference's side).
