@@ -1,0 +1,40 @@
+
+town/main  perimeter=2023u  gates=2 waterGates=2  (one gate per 506u)
+  CROSSINGS 23 by quadrant: {"NE":2,"SE":5,"NW":3,"SW":13}
+  VIOLATIONS 87 by quadrant: {"NE":13,"SE":24,"SW":34,"NW":16}
+  within reach 188; tangential share inside=0.1837 (median Δ 38.47°, n=98) | outside=0.0877 (median Δ 47.34°, n=57)
+
+city/main  perimeter=2745u  gates=2 waterGates=1  (one gate per 915u)
+  CROSSINGS 37 by quadrant: {"NW":10,"SE":5,"SW":15,"NE":7}
+  VIOLATIONS 37 by quadrant: {"NW":7,"NE":18,"SE":1,"SW":11}
+  within reach 129; tangential share inside=0.2281 (median Δ 32.8°, n=57) | outside=0.3061 (median Δ 26.98°, n=49)
+
+crossing/main  perimeter=2502u  gates=3 waterGates=3  (one gate per 417u)
+  CROSSINGS 20 by quadrant: {"SE":10,"SW":10}
+  VIOLATIONS 98 by quadrant: {"SE":54,"NE":1,"NW":12,"SW":31}
+  within reach 191; tangential share inside=0.131 (median Δ 46.13°, n=84) | outside=0.1067 (median Δ 36°, n=75)
+
+town-2/main  perimeter=2097u  gates=2 waterGates=2  (one gate per 524u)
+  CROSSINGS 35 by quadrant: {"NW":16,"SW":14,"NE":3,"SE":2}
+  VIOLATIONS 138 by quadrant: {"NW":60,"NE":12,"SW":53,"SE":13}
+  within reach 234; tangential share inside=0.1705 (median Δ 31.74°, n=129) | outside=0.1461 (median Δ 43.47°, n=89)
+
+polycentric/main  perimeter=2304u  gates=1 waterGates=0  (one gate per 2304u)
+  CROSSINGS 10 by quadrant: {"NW":3,"SE":5,"NE":2}
+  VIOLATIONS 23 by quadrant: {"NW":3,"SE":4,"SW":9,"NE":7}
+  within reach 157; tangential share inside=0.22 (median Δ 39.52°, n=50) | outside=0.2857 (median Δ 37.04°, n=77)
+
+metropolis/main  perimeter=3073u  gates=2 waterGates=0  (one gate per 1537u)
+  CROSSINGS 6 by quadrant: {"SE":5,"NW":1}
+  VIOLATIONS 6 by quadrant: {"NW":4,"SE":2}
+  within reach 25; tangential share inside=0 (median Δ 36.1°, n=8) | outside=0.3846 (median Δ 19.1°, n=13)
+
+highwater/main  perimeter=2454u  gates=2 waterGates=2  (one gate per 614u)
+  CROSSINGS 0 by quadrant: {}
+  VIOLATIONS 1 by quadrant: {"NE":1}
+  within reach 3; tangential share inside=0 (median Δ 64.48°, n=2) | outside=null (median Δ null°, n=0)
+
+year-100/main  perimeter=2404u  gates=2 waterGates=2  (one gate per 601u)
+  CROSSINGS 0 by quadrant: {}
+  VIOLATIONS 1 by quadrant: {"SE":1}
+  within reach 2; tangential share inside=null (median Δ null°, n=0) | outside=0 (median Δ 27.5°, n=1)

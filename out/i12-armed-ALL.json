@@ -1,0 +1,6155 @@
+{
+  "rows": [
+    {
+      "key": "thorp",
+      "name": "Dar-al-kala",
+      "tier": "thorp",
+      "working": [],
+      "relictNonScoring": []
+    },
+    {
+      "key": "hamlet",
+      "name": "Sundfoss",
+      "tier": "hamlet",
+      "working": [],
+      "relictNonScoring": []
+    },
+    {
+      "key": "village",
+      "name": "Mingguan",
+      "tier": "village",
+      "working": [],
+      "relictNonScoring": []
+    },
+    {
+      "key": "town",
+      "name": "Mahabagh",
+      "tier": "town",
+      "working": [
+        {
+          "applicable": true,
+          "wallKind": "main",
+          "form": "palisade",
+          "lineKind": "drawn",
+          "lineVertices": 116,
+          "thresholds": {
+            "frontage": 4.8603,
+            "half": 4.6658,
+            "inner": 2.4301,
+            "outer": 4.8603,
+            "plotDepth": 4.7066,
+            "clearIn": 7.096,
+            "clearOut": 9.5261,
+            "reach": 14.2327,
+            "reachMult": 1,
+            "inFrontages": {
+              "half": 0.96,
+              "inner": 0.5,
+              "outer": 1,
+              "plotDepth": 0.9684,
+              "reach": 2.9284
+            }
+          },
+          "bandDeg": 15,
+          "aspectMin": 1.25,
+          "bodiesConsidered": 1826,
+          "withinReach": 188,
+          "c1Crossing": 23,
+          "crossers": [
+            {
+              "key": "org.district.government_quarter/p.9.1.0",
+              "kind": "parcel",
+              "c": [
+                819.09,
+                491.35
+              ],
+              "d": 4.6318
+            },
+            {
+              "key": "org.district.government_quarter/p.9.2.0",
+              "kind": "parcel",
+              "c": [
+                822.65,
+                495.67
+              ],
+              "d": 4.4735
+            },
+            {
+              "key": "org.district.government_quarter/p.10.4.0",
+              "kind": "parcel",
+              "c": [
+                858.37,
+                542.27
+              ],
+              "d": 5.8164
+            },
+            {
+              "key": "org.district.market_quarter~1/p.122.4.1",
+              "kind": "parcel",
+              "c": [
+                824.21,
+                836.67
+              ],
+              "d": 1.2817
+            },
+            {
+              "key": "org.district.market_quarter~1/p.122.4.1#back",
+              "kind": "backHouse",
+              "c": [
+                832.99,
+                826.74
+              ],
+              "d": 2.996
+            },
+            {
+              "key": "org.district.market_quarter~1/p.132.1.1",
+              "kind": "parcel",
+              "c": [
+                349.26,
+                466.75
+              ],
+              "d": 0.4127
+            },
+            {
+              "key": "org.district.market_quarter~1/p.143.4.0",
+              "kind": "parcel",
+              "c": [
+                821.56,
+                841.55
+              ],
+              "d": 1.8951
+            },
+            {
+              "key": "org.district.market_quarter~1/p.153.1.0",
+              "kind": "parcel",
+              "c": [
+                335,
+                467.74
+              ],
+              "d": 4.1128
+            },
+            {
+              "key": "org.district.market_quarter~1/p.173.0.0#back",
+              "kind": "backHouse",
+              "c": [
+                265.89,
+                496.26
+              ],
+              "d": 1.8635
+            },
+            {
+              "key": "org.district.market_quarter~1/p.238.0.1#back",
+              "kind": "backHouse",
+              "c": [
+                190.16,
+                670.67
+              ],
+              "d": 0.3689
+            },
+            {
+              "key": "org.district.market_quarter~1/p.238.1.1#back",
+              "kind": "backHouse",
+              "c": [
+                189.91,
+                677.28
+              ],
+              "d": 1.3784
+            },
+            {
+              "key": "org.district.market_quarter~1/p.238.3.1",
+              "kind": "parcel",
+              "c": [
+                194.82,
+                692.89
+              ],
+              "d": 2.8406
+            },
+            {
+              "key": "org.district.market_quarter~1/p.238.4.1",
+              "kind": "parcel",
+              "c": [
+                198.33,
+                695.52
+              ],
+              "d": 0.7894
+            },
+            {
+              "key": "org.district.market_quarter~1/p.238.5.1",
+              "kind": "parcel",
+              "c": [
+                200.27,
+                701.73
+              ],
+              "d": 1.1296
+            },
+            {
+              "key": "org.district.market_quarter~1/p.238.6.1",
+              "kind": "parcel",
+              "c": [
+                206.12,
+                703.87
+              ],
+              "d": 3.6082
+            },
+            {
+              "key": "org.district.market_quarter~1/p.260.3.1#back",
+              "kind": "backHouse",
+              "c": [
+                219.9,
+                774.88
+              ],
+              "d": 7.224
+            },
+            {
+              "key": "org.district.market_quarter~1/p.260.4.1#back",
+              "kind": "backHouse",
+              "c": [
+                223.73,
+                780.13
+              ],
+              "d": 5.1265
+            },
+            {
+              "key": "org.district.market_quarter~1/p.260.5.1#back",
+              "kind": "backHouse",
+              "c": [
+                230.21,
+                780.52
+              ],
+              "d": 0.9425
+            },
+            {
+              "key": "org.district.market_quarter~1/p.261.0.1#back",
+              "kind": "backHouse",
+              "c": [
+                238.22,
+                789.64
+              ],
+              "d": 5.1948
+            },
+            {
+              "key": "org.district.market_quarter~1/p.261.5.1",
+              "kind": "parcel",
+              "c": [
+                246.88,
+                820.98
+              ],
+              "d": 0.3565
+            }
+          ],
+          "c2": {
+            "lawfulTangential": 20,
+            "lawfulClear": 27,
+            "exemptNoAxis": 31,
+            "violations": 87
+          },
+          "c3Continuity": {
+            "inside": {
+              "n": 98,
+              "tangentialShare": 0.1837,
+              "medianDelta": 38.47
+            },
+            "outside": {
+              "n": 57,
+              "tangentialShare": 0.0877,
+              "medianDelta": 47.34
+            }
+          },
+          "offenders": [
+            {
+              "key": "org.district.government_quarter/p.8.0.0",
+              "kind": "parcel",
+              "c": [
+                811.99,
+                479.2
+              ],
+              "d": 7.6688,
+              "delta": 82.0325,
+              "aspect": 3.629,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.9.0.0",
+              "kind": "parcel",
+              "c": [
+                820.51,
+                486.47
+              ],
+              "d": 8.9968,
+              "delta": 82.0325,
+              "aspect": 5.2023,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.9.4.0",
+              "kind": "parcel",
+              "c": [
+                831.92,
+                504.15
+              ],
+              "d": 6.2577,
+              "delta": 85.4136,
+              "aspect": 2.6544,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.9.6.0",
+              "kind": "parcel",
+              "c": [
+                837.46,
+                510.17
+              ],
+              "d": 6.8514,
+              "delta": 87.3528,
+              "aspect": 1.5839,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.9.7.0",
+              "kind": "parcel",
+              "c": [
+                841.33,
+                517.02
+              ],
+              "d": 5.7596,
+              "delta": 87.3528,
+              "aspect": 1.8425,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.9.7.0#back",
+              "kind": "backHouse",
+              "c": [
+                831.19,
+                524.13
+              ],
+              "d": 6.6155,
+              "delta": 87.3528,
+              "aspect": 1.5949,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.10.7.0",
+              "kind": "parcel",
+              "c": [
+                868.57,
+                556.58
+              ],
+              "d": 9.5416,
+              "delta": 73.3802,
+              "aspect": 3.3002,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.government_quarter/p.10.7.0#back",
+              "kind": "backHouse",
+              "c": [
+                854.31,
+                566.45
+              ],
+              "d": 7.0804,
+              "delta": 73.3802,
+              "aspect": 3.2803,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.60.0.1",
+              "kind": "parcel",
+              "c": [
+                380.21,
+                957.32
+              ],
+              "d": 13.2894,
+              "delta": 66.7486,
+              "aspect": 2.0776,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.60.1.1",
+              "kind": "parcel",
+              "c": [
+                376.96,
+                953.49
+              ],
+              "d": 10.356,
+              "delta": 23.2514,
+              "aspect": 3.0982,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.60.2.1",
+              "kind": "parcel",
+              "c": [
+                372.24,
+                949.31
+              ],
+              "d": 7.4418,
+              "delta": 23.2514,
+              "aspect": 3.173,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.77.7.0#back",
+              "kind": "backHouse",
+              "c": [
+                400.86,
+                939.63
+              ],
+              "d": 8.8824,
+              "delta": 66.7486,
+              "aspect": 9.7123,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.78.2.0",
+              "kind": "parcel",
+              "c": [
+                377.35,
+                937.03
+              ],
+              "d": 5.7063,
+              "delta": 66.7486,
+              "aspect": 1.2501,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.78.3.0",
+              "kind": "parcel",
+              "c": [
+                369.97,
+                936.34
+              ],
+              "d": 4.5943,
+              "delta": 23.2514,
+              "aspect": 1.7647,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.78.5.0",
+              "kind": "parcel",
+              "c": [
+                360.38,
+                932.4
+              ],
+              "d": 5.0867,
+              "delta": 16.6566,
+              "aspect": 1.3029,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.78.6.0",
+              "kind": "parcel",
+              "c": [
+                356.72,
+                925.96
+              ],
+              "d": 9.8243,
+              "delta": 73.3434,
+              "aspect": 1.8171,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.78.7.0",
+              "kind": "parcel",
+              "c": [
+                348.14,
+                921.28
+              ],
+              "d": 11.1811,
+              "delta": 73.3434,
+              "aspect": 1.8234,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.93.2.0#back",
+              "kind": "backHouse",
+              "c": [
+                526.58,
+                973.37
+              ],
+              "d": 13.6886,
+              "delta": 51.2685,
+              "aspect": 2.7976,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.93.3.0#back",
+              "kind": "backHouse",
+              "c": [
+                522.06,
+                968.7
+              ],
+              "d": 8.9044,
+              "delta": 51.2685,
+              "aspect": 1.8876,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.93.5.0",
+              "kind": "parcel",
+              "c": [
+                504.07,
+                970.61
+              ],
+              "d": 10.2777,
+              "delta": 50.8737,
+              "aspect": 2.7795,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.93.6.0",
+              "kind": "parcel",
+              "c": [
+                497.62,
+                969.47
+              ],
+              "d": 8.9334,
+              "delta": 39.1263,
+              "aspect": 3.5571,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.93.4.1#back",
+              "kind": "backHouse",
+              "c": [
+                535.08,
+                951.49
+              ],
+              "d": 7.9691,
+              "delta": 51.2685,
+              "aspect": 2.359,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.94.3.0",
+              "kind": "parcel",
+              "c": [
+                476.08,
+                947.77
+              ],
+              "d": 13.7619,
+              "delta": 48.9167,
+              "aspect": 3.3449,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.110.0.0#back",
+              "kind": "backHouse",
+              "c": [
+                600.43,
+                963.11
+              ],
+              "d": 8.0563,
+              "delta": 42.6221,
+              "aspect": 2.0646,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.243.2.0#back",
+              "kind": "backHouse",
+              "c": [
+                530.43,
+                421.01
+              ],
+              "d": 11.974,
+              "delta": 33.0432,
+              "aspect": 1.6461,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.243.2.1",
+              "kind": "parcel",
+              "c": [
+                558.66,
+                407.07
+              ],
+              "d": 8.5881,
+              "delta": 56.3743,
+              "aspect": 1.3695,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.243.6.1",
+              "kind": "parcel",
+              "c": [
+                536.86,
+                394.98
+              ],
+              "d": 10.3516,
+              "delta": 32.6199,
+              "aspect": 1.7823,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.243.7.1#back",
+              "kind": "backHouse",
+              "c": [
+                523.76,
+                400.79
+              ],
+              "d": 9.3093,
+              "delta": 33.0432,
+              "aspect": 4.8272,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.260.4.1",
+              "kind": "parcel",
+              "c": [
+                622.49,
+                387.49
+              ],
+              "d": 9.1843,
+              "delta": 45.7857,
+              "aspect": 2.5873,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.260.5.1",
+              "kind": "parcel",
+              "c": [
+                614.7,
+                386.96
+              ],
+              "d": 6.7993,
+              "delta": 35.0979,
+              "aspect": 3.8789,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            }
+          ],
+          "pass": false
+        }
+      ],
+      "relictNonScoring": []
+    },
+    {
+      "key": "town-2",
+      "name": "Baigou",
+      "tier": "town",
+      "working": [
+        {
+          "applicable": true,
+          "wallKind": "main",
+          "form": "palisade",
+          "lineKind": "drawn",
+          "lineVertices": 89,
+          "thresholds": {
+            "frontage": 6.9186,
+            "half": 6.6418,
+            "inner": 3.4593,
+            "outer": 6.9186,
+            "plotDepth": 5.1042,
+            "clearIn": 10.1011,
+            "clearOut": 13.5604,
+            "reach": 18.6646,
+            "reachMult": 1,
+            "inFrontages": {
+              "half": 0.96,
+              "inner": 0.5,
+              "outer": 1,
+              "plotDepth": 0.7378,
+              "reach": 2.6978
+            }
+          },
+          "bandDeg": 15,
+          "aspectMin": 1.25,
+          "bodiesConsidered": 1905,
+          "withinReach": 234,
+          "c1Crossing": 35,
+          "crossers": [
+            {
+              "key": "org.district.mages_quarter/p.12.1.0",
+              "kind": "parcel",
+              "c": [
+                489.36,
+                117.25
+              ],
+              "d": 2.7849
+            },
+            {
+              "key": "org.district.mages_quarter/p.12.2.0",
+              "kind": "parcel",
+              "c": [
+                492.9,
+                115.01
+              ],
+              "d": 5.5573
+            },
+            {
+              "key": "org.district.market_quarter/p.27.5.0",
+              "kind": "parcel",
+              "c": [
+                67.45,
+                583.84
+              ],
+              "d": 4.4628
+            },
+            {
+              "key": "org.district.market_quarter/p.27.6.0",
+              "kind": "parcel",
+              "c": [
+                65.62,
+                578.65
+              ],
+              "d": 5.3758
+            },
+            {
+              "key": "org.district.market_quarter/p.28.0.0",
+              "kind": "parcel",
+              "c": [
+                47.61,
+                563
+              ],
+              "d": 3.8834
+            },
+            {
+              "key": "org.district.market_quarter/p.28.2.0#back",
+              "kind": "backHouse",
+              "c": [
+                44.57,
+                549.53
+              ],
+              "d": 1.8299
+            },
+            {
+              "key": "org.district.market_quarter/p.28.2.1#back",
+              "kind": "backHouse",
+              "c": [
+                50.17,
+                541.16
+              ],
+              "d": 6.1667
+            },
+            {
+              "key": "org.district.market_quarter/p.28.3.1#back",
+              "kind": "backHouse",
+              "c": [
+                47.25,
+                536.01
+              ],
+              "d": 4.4484
+            },
+            {
+              "key": "org.district.market_quarter/p.28.4.1#back",
+              "kind": "backHouse",
+              "c": [
+                39.66,
+                531.66
+              ],
+              "d": 2.008
+            },
+            {
+              "key": "org.district.market_quarter/p.28.6.1",
+              "kind": "parcel",
+              "c": [
+                38.46,
+                515.75
+              ],
+              "d": 0.1397
+            },
+            {
+              "key": "org.district.market_quarter/p.28.7.1",
+              "kind": "parcel",
+              "c": [
+                34.12,
+                507.97
+              ],
+              "d": 3.514
+            },
+            {
+              "key": "org.district.market_quarter/p.46.4.1",
+              "kind": "parcel",
+              "c": [
+                39.8,
+                438.44
+              ],
+              "d": 0.612
+            },
+            {
+              "key": "org.district.market_quarter/p.80.6.1",
+              "kind": "parcel",
+              "c": [
+                92.88,
+                337.16
+              ],
+              "d": 0.0673
+            },
+            {
+              "key": "org.district.market_quarter/p.80.6.1#back",
+              "kind": "backHouse",
+              "c": [
+                83.55,
+                350.13
+              ],
+              "d": 0.5054
+            },
+            {
+              "key": "org.district.market_quarter/p.198.4.1#back",
+              "kind": "backHouse",
+              "c": [
+                391.49,
+                71.6
+              ],
+              "d": 4.9165
+            },
+            {
+              "key": "org.district.market_quarter/p.198.5.1",
+              "kind": "parcel",
+              "c": [
+                393.95,
+                59.7
+              ],
+              "d": 5.7314
+            },
+            {
+              "key": "org.district.market_quarter/p.198.7.1#back",
+              "kind": "backHouse",
+              "c": [
+                376.39,
+                58.53
+              ],
+              "d": 4.7551
+            },
+            {
+              "key": "org.district.market_quarter/p.199.3.1#back",
+              "kind": "backHouse",
+              "c": [
+                352.95,
+                40.95
+              ],
+              "d": 2.4067
+            },
+            {
+              "key": "org.district.market_quarter/p.199.4.1#back",
+              "kind": "backHouse",
+              "c": [
+                348.25,
+                34.91
+              ],
+              "d": 0.7507
+            },
+            {
+              "key": "org.district.market_quarter/p.199.5.1#back",
+              "kind": "backHouse",
+              "c": [
+                341.73,
+                31.45
+              ],
+              "d": 0.8384
+            }
+          ],
+          "c2": {
+            "lawfulTangential": 32,
+            "lawfulClear": 15,
+            "exemptNoAxis": 14,
+            "violations": 138
+          },
+          "c3Continuity": {
+            "inside": {
+              "n": 129,
+              "tangentialShare": 0.1705,
+              "medianDelta": 31.74
+            },
+            "outside": {
+              "n": 89,
+              "tangentialShare": 0.1461,
+              "medianDelta": 43.47
+            }
+          },
+          "offenders": [
+            {
+              "key": "org.district.mages_quarter/p.12.1.0#back",
+              "kind": "backHouse",
+              "c": [
+                498.18,
+                129.98
+              ],
+              "d": 8.3633,
+              "delta": 43.4739,
+              "aspect": 2.058,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.mages_quarter/p.20.1.0#back",
+              "kind": "backHouse",
+              "c": [
+                533.07,
+                174.52
+              ],
+              "d": 14.513,
+              "delta": 86.0741,
+              "aspect": 1.3647,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.8.0.1",
+              "kind": "parcel",
+              "c": [
+                167.23,
+                679.89
+              ],
+              "d": 10.3263,
+              "delta": 78.8137,
+              "aspect": 3.3026,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.8.1.1",
+              "kind": "parcel",
+              "c": [
+                160.33,
+                676.69
+              ],
+              "d": 9.5381,
+              "delta": 88.0622,
+              "aspect": 3.1892,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.9.1.1",
+              "kind": "parcel",
+              "c": [
+                125.07,
+                648.32
+              ],
+              "d": 8.3783,
+              "delta": 81.9226,
+              "aspect": 4.6079,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.9.2.1",
+              "kind": "parcel",
+              "c": [
+                123.31,
+                645.15
+              ],
+              "d": 9.3448,
+              "delta": 81.9226,
+              "aspect": 2.5135,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.9.2.1#back",
+              "kind": "backHouse",
+              "c": [
+                110.3,
+                662.18
+              ],
+              "d": 11.8817,
+              "delta": 81.9226,
+              "aspect": 2.0042,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.9.4.1",
+              "kind": "parcel",
+              "c": [
+                114.34,
+                637.27
+              ],
+              "d": 8.5084,
+              "delta": 81.9226,
+              "aspect": 1.8433,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.9.4.1#back",
+              "kind": "backHouse",
+              "c": [
+                101.96,
+                653.45
+              ],
+              "d": 11.676,
+              "delta": 81.9226,
+              "aspect": 1.6989,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.10.5.1",
+              "kind": "parcel",
+              "c": [
+                57.46,
+                602.11
+              ],
+              "d": 13.3987,
+              "delta": 73.1249,
+              "aspect": 2.5185,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.10.6.1",
+              "kind": "parcel",
+              "c": [
+                50.46,
+                597.32
+              ],
+              "d": 16.9345,
+              "delta": 66.3078,
+              "aspect": 3.8279,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.10.7.1",
+              "kind": "parcel",
+              "c": [
+                47.52,
+                589.36
+              ],
+              "d": 15.65,
+              "delta": 66.3078,
+              "aspect": 1.845,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.27.0.0",
+              "kind": "parcel",
+              "c": [
+                93.84,
+                598.79
+              ],
+              "d": 18.0416,
+              "delta": 73.1249,
+              "aspect": 4.8762,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.27.1.0",
+              "kind": "parcel",
+              "c": [
+                87.27,
+                597.17
+              ],
+              "d": 13.6552,
+              "delta": 73.1249,
+              "aspect": 3.385,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.27.2.0",
+              "kind": "parcel",
+              "c": [
+                82.46,
+                594.22
+              ],
+              "d": 11.4942,
+              "delta": 73.1249,
+              "aspect": 3.3593,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.27.3.0",
+              "kind": "parcel",
+              "c": [
+                78.73,
+                591.12
+              ],
+              "d": 10.2793,
+              "delta": 73.1249,
+              "aspect": 2.2992,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.27.5.0#back",
+              "kind": "backHouse",
+              "c": [
+                75.26,
+                573.8
+              ],
+              "d": 16.1636,
+              "delta": 66.3078,
+              "aspect": 2.1193,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.28.1.0",
+              "kind": "parcel",
+              "c": [
+                42.1,
+                561.96
+              ],
+              "d": 8.6411,
+              "delta": 58.5347,
+              "aspect": 4.5954,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.28.1.0#back",
+              "kind": "backHouse",
+              "c": [
+                51.59,
+                548.5
+              ],
+              "d": 5.088,
+              "delta": 58.5347,
+              "aspect": 3.8551,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.28.2.0",
+              "kind": "parcel",
+              "c": [
+                36.55,
+                560.07
+              ],
+              "d": 13.1259,
+              "delta": 58.5347,
+              "aspect": 1.8085,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.28.3.0",
+              "kind": "parcel",
+              "c": [
+                32.28,
+                555.57
+              ],
+              "d": 15.4742,
+              "delta": 58.5347,
+              "aspect": 4.7301,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.28.1.1#back",
+              "kind": "backHouse",
+              "c": [
+                52.12,
+                544.38
+              ],
+              "d": 7.0813,
+              "delta": 58.5347,
+              "aspect": 4.527,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.28.2.1",
+              "kind": "parcel",
+              "c": [
+                59.89,
+                528.39
+              ],
+              "d": 18.4494,
+              "delta": 49.9321,
+              "aspect": 3.1881,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.28.3.1",
+              "kind": "parcel",
+              "c": [
+                56.2,
+                524.24
+              ],
+              "d": 15.7659,
+              "delta": 49.9321,
+              "aspect": 2.3693,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.28.4.1",
+              "kind": "parcel",
+              "c": [
+                49.49,
+                518.73
+              ],
+              "d": 10.4233,
+              "delta": 49.9321,
+              "aspect": 5.6171,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.28.5.1",
+              "kind": "parcel",
+              "c": [
+                46.16,
+                516.58
+              ],
+              "d": 7.3993,
+              "delta": 44.1645,
+              "aspect": 3.6464,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.28.5.1#back",
+              "kind": "backHouse",
+              "c": [
+                35.43,
+                530.68
+              ],
+              "d": 5.9163,
+              "delta": 49.9321,
+              "aspect": 2.8997,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.28.7.1#back",
+              "kind": "backHouse",
+              "c": [
+                24.75,
+                520.29
+              ],
+              "d": 14.3016,
+              "delta": 44.1645,
+              "aspect": 2.6577,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.29.0.1",
+              "kind": "parcel",
+              "c": [
+                19.94,
+                501.45
+              ],
+              "d": 16.8102,
+              "delta": 44.1645,
+              "aspect": 4.078,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.45.6.0",
+              "kind": "parcel",
+              "c": [
+                50.78,
+                498.97
+              ],
+              "d": 14.107,
+              "delta": 44.1645,
+              "aspect": 2.4465,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            }
+          ],
+          "pass": false
+        }
+      ],
+      "relictNonScoring": []
+    },
+    {
+      "key": "city",
+      "name": "Kitaqiao",
+      "tier": "city",
+      "working": [
+        {
+          "applicable": true,
+          "wallKind": "main",
+          "form": "citywall",
+          "lineKind": "drawn",
+          "lineVertices": 23,
+          "thresholds": {
+            "frontage": 5.3594,
+            "half": 2.7914,
+            "inner": 2.6797,
+            "outer": 0.0445,
+            "plotDepth": 3.9867,
+            "clearIn": 5.4711,
+            "clearOut": 2.8359,
+            "reach": 9.4578,
+            "reachMult": 1,
+            "inFrontages": {
+              "half": 0.5209,
+              "inner": 0.5,
+              "outer": 0.0083,
+              "plotDepth": 0.7439,
+              "reach": 1.7647
+            }
+          },
+          "bandDeg": 15,
+          "aspectMin": 1.25,
+          "bodiesConsidered": 2677,
+          "withinReach": 129,
+          "c1Crossing": 37,
+          "crossers": [
+            {
+              "key": "org.district.common_residential/p.123.4.1",
+              "kind": "parcel",
+              "c": [
+                18.57,
+                107.37
+              ],
+              "d": 4.6879
+            },
+            {
+              "key": "org.district.common_residential/p.123.5.1",
+              "kind": "parcel",
+              "c": [
+                22.48,
+                102.09
+              ],
+              "d": 4.9308
+            },
+            {
+              "key": "org.district.common_residential/p.123.6.1",
+              "kind": "parcel",
+              "c": [
+                24.88,
+                98.28
+              ],
+              "d": 5.4435
+            },
+            {
+              "key": "org.district.common_residential/p.123.7.1",
+              "kind": "parcel",
+              "c": [
+                27.33,
+                94.08
+              ],
+              "d": 6.1556
+            },
+            {
+              "key": "org.district.government_quarter/p.77.9.1",
+              "kind": "parcel",
+              "c": [
+                623.16,
+                562.34
+              ],
+              "d": 1.0328
+            },
+            {
+              "key": "org.district.government_quarter/p.77.9.1#back",
+              "kind": "backHouse",
+              "c": [
+                633.54,
+                555.13
+              ],
+              "d": 1.1166
+            },
+            {
+              "key": "org.district.government_quarter/p.91.7.0",
+              "kind": "parcel",
+              "c": [
+                616.09,
+                571.37
+              ],
+              "d": 0.4325
+            },
+            {
+              "key": "org.district.government_quarter/p.91.7.0#back",
+              "kind": "backHouse",
+              "c": [
+                605.08,
+                578.8
+              ],
+              "d": 2.01
+            },
+            {
+              "key": "org.district.government_quarter/p.91.8.0#back",
+              "kind": "backHouse",
+              "c": [
+                608.29,
+                581.49
+              ],
+              "d": 2.1586
+            },
+            {
+              "key": "org.district.government_quarter/p.132.0.0",
+              "kind": "parcel",
+              "c": [
+                429.1,
+                576.7
+              ],
+              "d": 1.5791
+            },
+            {
+              "key": "org.district.mages_quarter/p.119.7.0",
+              "kind": "parcel",
+              "c": [
+                535.71,
+                50.89
+              ],
+              "d": 3.2677
+            },
+            {
+              "key": "org.district.mages_quarter/p.120.0.1",
+              "kind": "parcel",
+              "c": [
+                563.7,
+                64.96
+              ],
+              "d": 0.4048
+            },
+            {
+              "key": "org.district.mages_quarter/p.138.2.0",
+              "kind": "parcel",
+              "c": [
+                573.9,
+                74.5
+              ],
+              "d": 1.9359
+            },
+            {
+              "key": "org.district.mages_quarter/p.138.3.0",
+              "kind": "parcel",
+              "c": [
+                578.53,
+                71.37
+              ],
+              "d": 3.2282
+            },
+            {
+              "key": "org.district.mages_quarter/p.138.3.0#back",
+              "kind": "backHouse",
+              "c": [
+                585.7,
+                80.61
+              ],
+              "d": 0.5348
+            },
+            {
+              "key": "org.district.mages_quarter/p.138.4.1",
+              "kind": "parcel",
+              "c": [
+                601.71,
+                94.51
+              ],
+              "d": 3.3153
+            },
+            {
+              "key": "org.district.mages_quarter/p.138.4.1#back",
+              "kind": "backHouse",
+              "c": [
+                595.41,
+                85.93
+              ],
+              "d": 0.3753
+            },
+            {
+              "key": "org.district.religious_quarter/p.59.0.0",
+              "kind": "parcel",
+              "c": [
+                395.51,
+                575.29
+              ],
+              "d": 0.3742
+            },
+            {
+              "key": "org.district.religious_quarter/p.70.5.1#back",
+              "kind": "backHouse",
+              "c": [
+                310.38,
+                600.16
+              ],
+              "d": 1.5329
+            },
+            {
+              "key": "org.district.religious_quarter/p.70.6.1",
+              "kind": "parcel",
+              "c": [
+                298.95,
+                604.97
+              ],
+              "d": 0.1154
+            }
+          ],
+          "c2": {
+            "lawfulTangential": 22,
+            "lawfulClear": 14,
+            "exemptNoAxis": 19,
+            "violations": 37
+          },
+          "c3Continuity": {
+            "inside": {
+              "n": 57,
+              "tangentialShare": 0.2281,
+              "medianDelta": 32.8
+            },
+            "outside": {
+              "n": 49,
+              "tangentialShare": 0.3061,
+              "medianDelta": 26.98
+            }
+          },
+          "offenders": [
+            {
+              "key": "org.district.common_residential/p.123.8.1",
+              "kind": "parcel",
+              "c": [
+                29.51,
+                89.41
+              ],
+              "d": 7.377,
+              "delta": 80.1233,
+              "aspect": 3.1526,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.common_residential/p.123.9.1",
+              "kind": "parcel",
+              "c": [
+                32.17,
+                86.44
+              ],
+              "d": 7.1567,
+              "delta": 80.1233,
+              "aspect": 10.6406,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.common_residential/p.145.8.0",
+              "kind": "parcel",
+              "c": [
+                37.19,
+                106.04
+              ],
+              "d": 9.0131,
+              "delta": 80.1233,
+              "aspect": 2.3334,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.common_residential/p.145.9.0",
+              "kind": "parcel",
+              "c": [
+                40.15,
+                102.74
+              ],
+              "d": 9.2622,
+              "delta": 80.1233,
+              "aspect": 4.2564,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.government_quarter/p.76.0.0",
+              "kind": "parcel",
+              "c": [
+                604.97,
+                467.46
+              ],
+              "d": 8.2475,
+              "delta": 51.6173,
+              "aspect": 3.6044,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.government_quarter/p.77.2.0",
+              "kind": "parcel",
+              "c": [
+                631.39,
+                501.71
+              ],
+              "d": 8.9026,
+              "delta": 54.9967,
+              "aspect": 2.7001,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.101.3.1",
+              "kind": "parcel",
+              "c": [
+                517.98,
+                43.77
+              ],
+              "d": 7.0908,
+              "delta": 19.3032,
+              "aspect": 3.2534,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.101.3.1#back",
+              "kind": "backHouse",
+              "c": [
+                511.21,
+                34.86
+              ],
+              "d": 3.3919,
+              "delta": 19.3032,
+              "aspect": 2.4748,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.mages_quarter/p.119.6.0",
+              "kind": "parcel",
+              "c": [
+                531.98,
+                55.21
+              ],
+              "d": 8.9298,
+              "delta": 19.3032,
+              "aspect": 3.4758,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.119.7.0#back",
+              "kind": "backHouse",
+              "c": [
+                542.42,
+                60.22
+              ],
+              "d": 7.3624,
+              "delta": 70.6968,
+              "aspect": 1.6219,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.120.0.1#back",
+              "kind": "backHouse",
+              "c": [
+                556.4,
+                54.97
+              ],
+              "d": 4.7268,
+              "delta": 19.3032,
+              "aspect": 1.645,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.120.1.1",
+              "kind": "parcel",
+              "c": [
+                568.42,
+                61.93
+              ],
+              "d": 5.5348,
+              "delta": 19.3032,
+              "aspect": 1.783,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.120.1.1#back",
+              "kind": "backHouse",
+              "c": [
+                561.95,
+                53.42
+              ],
+              "d": 9.0706,
+              "delta": 19.3032,
+              "aspect": 1.5766,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.138.1.0",
+              "kind": "parcel",
+              "c": [
+                572.2,
+                79.96
+              ],
+              "d": 7.4273,
+              "delta": 19.3032,
+              "aspect": 4.2269,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.138.2.0#back",
+              "kind": "backHouse",
+              "c": [
+                580.6,
+                83.31
+              ],
+              "d": 5.5974,
+              "delta": 19.3032,
+              "aspect": 1.8005,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.138.4.0",
+              "kind": "parcel",
+              "c": [
+                582.38,
+                68.68
+              ],
+              "d": 7.5989,
+              "delta": 19.3032,
+              "aspect": 2.4635,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.138.4.0#back",
+              "kind": "backHouse",
+              "c": [
+                589.2,
+                77.64
+              ],
+              "d": 3.8765,
+              "delta": 19.3032,
+              "aspect": 2.3524,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.138.3.1",
+              "kind": "parcel",
+              "c": [
+                597.09,
+                95.38
+              ],
+              "d": 6.5833,
+              "delta": 19.3032,
+              "aspect": 5.6998,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.226.3.1",
+              "kind": "parcel",
+              "c": [
+                637.68,
+                347.1
+              ],
+              "d": 6.7049,
+              "delta": 35.1939,
+              "aspect": 3.404,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.226.4.1",
+              "kind": "parcel",
+              "c": [
+                639.1,
+                341.38
+              ],
+              "d": 5.0763,
+              "delta": 35.1939,
+              "aspect": 1.4212,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.mages_quarter/p.226.6.1",
+              "kind": "parcel",
+              "c": [
+                650.08,
+                336.75
+              ],
+              "d": 6.0584,
+              "delta": 35.1939,
+              "aspect": 2.4517,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.244.0.0",
+              "kind": "parcel",
+              "c": [
+                639.24,
+                360.98
+              ],
+              "d": 5.6509,
+              "delta": 35.1939,
+              "aspect": 2.7681,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.261.7.0",
+              "kind": "parcel",
+              "c": [
+                651.67,
+                408.95
+              ],
+              "d": 5.0352,
+              "delta": 35.1939,
+              "aspect": 2.3242,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.religious_quarter/p.70.2.0",
+              "kind": "parcel",
+              "c": [
+                335.7,
+                592.65
+              ],
+              "d": 7.4162,
+              "delta": 37.4831,
+              "aspect": 4.0988,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.religious_quarter/p.70.2.1#back",
+              "kind": "backHouse",
+              "c": [
+                317.85,
+                583.4
+              ],
+              "d": 9.4025,
+              "delta": 37.4831,
+              "aspect": 1.278,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.religious_quarter/p.70.3.1#back",
+              "kind": "backHouse",
+              "c": [
+                317.85,
+                588.4
+              ],
+              "d": 5.0422,
+              "delta": 89.1153,
+              "aspect": 2.0548,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.religious_quarter/p.70.5.1",
+              "kind": "parcel",
+              "c": [
+                299.49,
+                598.35
+              ],
+              "d": 5.3913,
+              "delta": 37.4831,
+              "aspect": 1.3918,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.religious_quarter/p.81.7.0",
+              "kind": "parcel",
+              "c": [
+                286.31,
+                604.41
+              ],
+              "d": 6.5771,
+              "delta": 37.4831,
+              "aspect": 7.2859,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.religious_quarter/p.82.0.0#back",
+              "kind": "backHouse",
+              "c": [
+                272.52,
+                613.22
+              ],
+              "d": 5.6727,
+              "delta": 37.4831,
+              "aspect": 6.4528,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.shadows_district/p.123.0.1",
+              "kind": "parcel",
+              "c": [
+                75.04,
+                723.69
+              ],
+              "d": 6.3591,
+              "delta": 75.0169,
+              "aspect": 2.4476,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            }
+          ],
+          "pass": false
+        }
+      ],
+      "relictNonScoring": [
+        {
+          "applicable": true,
+          "wallKind": "old-core",
+          "form": "citywall",
+          "lineKind": "drawn",
+          "lineVertices": 26,
+          "thresholds": {
+            "frontage": 5.3594,
+            "half": 1.4738,
+            "inner": 0.0445,
+            "outer": 0.0445,
+            "plotDepth": 3.9867,
+            "clearIn": 1.5183,
+            "clearOut": 1.5183,
+            "reach": 5.505,
+            "reachMult": 1,
+            "inFrontages": {
+              "half": 0.275,
+              "inner": 0.0083,
+              "outer": 0.0083,
+              "plotDepth": 0.7439,
+              "reach": 1.0272
+            }
+          },
+          "bandDeg": 15,
+          "aspectMin": 1.25,
+          "bodiesConsidered": 2677,
+          "withinReach": 42,
+          "c1Crossing": 0,
+          "crossers": [],
+          "c2": {
+            "lawfulTangential": 17,
+            "lawfulClear": 17,
+            "exemptNoAxis": 8,
+            "violations": 0
+          },
+          "c3Continuity": {
+            "inside": {
+              "n": 17,
+              "tangentialShare": 0.5882,
+              "medianDelta": 10.26
+            },
+            "outside": {
+              "n": 17,
+              "tangentialShare": 0.4118,
+              "medianDelta": 21.38
+            }
+          },
+          "offenders": [],
+          "pass": true
+        }
+      ]
+    },
+    {
+      "key": "metropolis",
+      "name": "Warmgrund",
+      "tier": "metropolis",
+      "working": [
+        {
+          "applicable": true,
+          "wallKind": "main",
+          "form": "citywall",
+          "lineKind": "drawn",
+          "lineVertices": 25,
+          "thresholds": {
+            "frontage": 5.0279,
+            "half": 2.6188,
+            "inner": 2.514,
+            "outer": 0.0417,
+            "plotDepth": 3.5142,
+            "clearIn": 5.1328,
+            "clearOut": 2.6605,
+            "reach": 8.647,
+            "reachMult": 1,
+            "inFrontages": {
+              "half": 0.5208,
+              "inner": 0.5,
+              "outer": 0.0083,
+              "plotDepth": 0.6989,
+              "reach": 1.7198
+            }
+          },
+          "bandDeg": 15,
+          "aspectMin": 1.25,
+          "bodiesConsidered": 3833,
+          "withinReach": 25,
+          "c1Crossing": 6,
+          "crossers": [
+            {
+              "key": "org.district.government_quarter/p.105.0.1",
+              "kind": "parcel",
+              "c": [
+                798.58,
+                625.15
+              ],
+              "d": 3.9987
+            },
+            {
+              "key": "org.district.government_quarter/p.105.0.1#back",
+              "kind": "backHouse",
+              "c": [
+                807.97,
+                618.63
+              ],
+              "d": 2.4698
+            },
+            {
+              "key": "org.district.government_quarter/p.105.1.1",
+              "kind": "parcel",
+              "c": [
+                800.77,
+                628.14
+              ],
+              "d": 0.8919
+            },
+            {
+              "key": "org.district.government_quarter/p.121.2.0",
+              "kind": "parcel",
+              "c": [
+                793.42,
+                640.5
+              ],
+              "d": 3.3945
+            },
+            {
+              "key": "org.district.government_quarter/p.121.6.1",
+              "kind": "parcel",
+              "c": [
+                784.9,
+                691.78
+              ],
+              "d": 3.2579
+            },
+            {
+              "key": "shanty.org.district.common_residential|73",
+              "kind": "hut",
+              "c": [
+                76.19,
+                264.13
+              ],
+              "d": 0.3088
+            }
+          ],
+          "c2": {
+            "lawfulTangential": 5,
+            "lawfulClear": 4,
+            "exemptNoAxis": 4,
+            "violations": 6
+          },
+          "c3Continuity": {
+            "inside": {
+              "n": 8,
+              "tangentialShare": 0,
+              "medianDelta": 36.1
+            },
+            "outside": {
+              "n": 13,
+              "tangentialShare": 0.3846,
+              "medianDelta": 19.1
+            }
+          },
+          "offenders": [
+            {
+              "key": "org.district.common_residential/p.313.9.1#back",
+              "kind": "backHouse",
+              "c": [
+                280.07,
+                132.63
+              ],
+              "d": 7.7148,
+              "delta": 52.8897,
+              "aspect": 1.4932,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.government_quarter/p.104.10.1#back",
+              "kind": "backHouse",
+              "c": [
+                799.93,
+                610.93
+              ],
+              "d": 7.7705,
+              "delta": 34.4752,
+              "aspect": 4.2589,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.government_quarter/p.105.1.1#back",
+              "kind": "backHouse",
+              "c": [
+                811.11,
+                620.96
+              ],
+              "d": 6.2304,
+              "delta": 34.4752,
+              "aspect": 3.0325,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "shanty.org.district.common_residential|18",
+              "kind": "hut",
+              "c": [
+                48.83,
+                283.38
+              ],
+              "d": 4.6925,
+              "delta": 19.1021,
+              "aspect": 1.2642,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "shanty.org.district.common_residential|19",
+              "kind": "hut",
+              "c": [
+                143.76,
+                198.57
+              ],
+              "d": 2.7376,
+              "delta": 45.8208,
+              "aspect": 1.4054,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "shanty.org.district.common_residential|49",
+              "kind": "hut",
+              "c": [
+                113.58,
+                222.66
+              ],
+              "d": 5.4719,
+              "delta": 68.437,
+              "aspect": 1.3998,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            }
+          ],
+          "pass": false
+        }
+      ],
+      "relictNonScoring": [
+        {
+          "applicable": true,
+          "wallKind": "old-core",
+          "form": "citywall",
+          "lineKind": "drawn",
+          "lineVertices": 25,
+          "thresholds": {
+            "frontage": 5.0279,
+            "half": 1.3827,
+            "inner": 0.0417,
+            "outer": 0.0417,
+            "plotDepth": 3.5142,
+            "clearIn": 1.4244,
+            "clearOut": 1.4244,
+            "reach": 4.9386,
+            "reachMult": 1,
+            "inFrontages": {
+              "half": 0.275,
+              "inner": 0.0083,
+              "outer": 0.0083,
+              "plotDepth": 0.6989,
+              "reach": 0.9822
+            }
+          },
+          "bandDeg": 15,
+          "aspectMin": 1.25,
+          "bodiesConsidered": 3833,
+          "withinReach": 74,
+          "c1Crossing": 0,
+          "crossers": [],
+          "c2": {
+            "lawfulTangential": 29,
+            "lawfulClear": 30,
+            "exemptNoAxis": 15,
+            "violations": 0
+          },
+          "c3Continuity": {
+            "inside": {
+              "n": 31,
+              "tangentialShare": 0.5484,
+              "medianDelta": 13.1
+            },
+            "outside": {
+              "n": 28,
+              "tangentialShare": 0.4286,
+              "medianDelta": 33.22
+            }
+          },
+          "offenders": [],
+          "pass": true
+        },
+        {
+          "applicable": true,
+          "wallKind": "old-core",
+          "form": "citywall",
+          "lineKind": "drawn",
+          "lineVertices": 25,
+          "thresholds": {
+            "frontage": 5.0279,
+            "half": 1.3827,
+            "inner": 0.0417,
+            "outer": 0.0417,
+            "plotDepth": 3.5142,
+            "clearIn": 1.4244,
+            "clearOut": 1.4244,
+            "reach": 4.9386,
+            "reachMult": 1,
+            "inFrontages": {
+              "half": 0.275,
+              "inner": 0.0083,
+              "outer": 0.0083,
+              "plotDepth": 0.6989,
+              "reach": 0.9822
+            }
+          },
+          "bandDeg": 15,
+          "aspectMin": 1.25,
+          "bodiesConsidered": 3833,
+          "withinReach": 35,
+          "c1Crossing": 0,
+          "crossers": [],
+          "c2": {
+            "lawfulTangential": 5,
+            "lawfulClear": 25,
+            "exemptNoAxis": 5,
+            "violations": 0
+          },
+          "c3Continuity": {
+            "inside": {
+              "n": 19,
+              "tangentialShare": 0.1579,
+              "medianDelta": 36.05
+            },
+            "outside": {
+              "n": 11,
+              "tangentialShare": 0.1818,
+              "medianDelta": 27.17
+            }
+          },
+          "offenders": [],
+          "pass": true
+        }
+      ]
+    },
+    {
+      "key": "polycentric",
+      "name": "Strathgarth",
+      "tier": "town",
+      "working": [
+        {
+          "applicable": true,
+          "wallKind": "main",
+          "form": "palisade",
+          "lineKind": "drawn",
+          "lineVertices": 112,
+          "thresholds": {
+            "frontage": 4.7548,
+            "half": 2.3418,
+            "inner": 2.3774,
+            "outer": 0.3091,
+            "plotDepth": 4.5258,
+            "clearIn": 4.7192,
+            "clearOut": 2.6508,
+            "reach": 9.245,
+            "reachMult": 1,
+            "inFrontages": {
+              "half": 0.4925,
+              "inner": 0.5,
+              "outer": 0.065,
+              "plotDepth": 0.9518,
+              "reach": 1.9443
+            }
+          },
+          "bandDeg": 15,
+          "aspectMin": 1.25,
+          "bodiesConsidered": 1867,
+          "withinReach": 157,
+          "c1Crossing": 10,
+          "crossers": [
+            {
+              "key": "org.district.market_quarter~1/p.203.4.1",
+              "kind": "parcel",
+              "c": [
+                178.12,
+                367.43
+              ],
+              "d": 2.5674
+            },
+            {
+              "key": "org.district.market_quarter~1/p.247.4.0",
+              "kind": "parcel",
+              "c": [
+                144.17,
+                418.25
+              ],
+              "d": 1.2643
+            },
+            {
+              "key": "org.district.market_quarter~1/p.257.4.0",
+              "kind": "parcel",
+              "c": [
+                524.46,
+                772.92
+              ],
+              "d": 2.1431
+            },
+            {
+              "key": "org.district.religious_quarter~1/p.116.1.0",
+              "kind": "parcel",
+              "c": [
+                666.83,
+                315.97
+              ],
+              "d": 0.6591
+            },
+            {
+              "key": "org.district.religious_quarter~1/p.116.4.1",
+              "kind": "parcel",
+              "c": [
+                705.41,
+                330.86
+              ],
+              "d": 0.2219
+            },
+            {
+              "key": "org.district.religious_quarter~1/p.161.1.0",
+              "kind": "parcel",
+              "c": [
+                576.4,
+                567.56
+              ],
+              "d": 0.1423
+            },
+            {
+              "key": "org.district.religious_quarter~1/p.162.1.0#back",
+              "kind": "backHouse",
+              "c": [
+                605.43,
+                563.01
+              ],
+              "d": 4.3711
+            },
+            {
+              "key": "mass.org.district.market_quarter~1|8|5|1|1|merchant#0",
+              "kind": "mass",
+              "c": [
+                232.27,
+                332.73
+              ],
+              "d": 7.0263
+            },
+            {
+              "key": "mass.org.district.religious_quarter~1|10|12|0|0|religious#0",
+              "kind": "mass",
+              "c": [
+                721.03,
+                514.09
+              ],
+              "d": 6.9135
+            },
+            {
+              "key": "faubourg|0@594,567|street.high|0",
+              "kind": "faubourg",
+              "c": [
+                580.52,
+                566.89
+              ],
+              "d": 0.6248
+            }
+          ],
+          "c2": {
+            "lawfulTangential": 32,
+            "lawfulClear": 64,
+            "exemptNoAxis": 28,
+            "violations": 23
+          },
+          "c3Continuity": {
+            "inside": {
+              "n": 50,
+              "tangentialShare": 0.22,
+              "medianDelta": 39.52
+            },
+            "outside": {
+              "n": 77,
+              "tangentialShare": 0.2857,
+              "medianDelta": 37.04
+            }
+          },
+          "offenders": [
+            {
+              "key": "org.district.market_quarter~1/p.225.4.0",
+              "kind": "parcel",
+              "c": [
+                171.62,
+                370.86
+              ],
+              "d": 3.7175,
+              "delta": 79.6922,
+              "aspect": 1.8236,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter~1/p.235.4.1",
+              "kind": "parcel",
+              "c": [
+                525.12,
+                763.87
+              ],
+              "d": 5.6405,
+              "delta": 69.6744,
+              "aspect": 1.7892,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter~1/p.257.2.0#back",
+              "kind": "backHouse",
+              "c": [
+                509.25,
+                772.59
+              ],
+              "d": 5.0012,
+              "delta": 20.3256,
+              "aspect": 2.6931,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter~1/p.257.3.0",
+              "kind": "parcel",
+              "c": [
+                520.87,
+                767.91
+              ],
+              "d": 3.9418,
+              "delta": 20.3256,
+              "aspect": 1.8758,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter~1/p.257.2.1",
+              "kind": "parcel",
+              "c": [
+                486.23,
+                796.35
+              ],
+              "d": 2.6072,
+              "delta": 30.9602,
+              "aspect": 3.6626,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter~1/p.314.0.1",
+              "kind": "parcel",
+              "c": [
+                38.29,
+                599.37
+              ],
+              "d": 5.1788,
+              "delta": 18.1014,
+              "aspect": 2.5612,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter~1/p.314.1.1",
+              "kind": "parcel",
+              "c": [
+                40.23,
+                601.73
+              ],
+              "d": 2.423,
+              "delta": 18.1014,
+              "aspect": 2.6702,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter~1/p.343.3.1",
+              "kind": "parcel",
+              "c": [
+                272.55,
+                892.58
+              ],
+              "d": 5.8548,
+              "delta": 45.1753,
+              "aspect": 2.2337,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter~1/p.360.0.1",
+              "kind": "parcel",
+              "c": [
+                31.58,
+                742.86
+              ],
+              "d": 7.5108,
+              "delta": 38.3311,
+              "aspect": 1.4823,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter~1/p.365.3.0",
+              "kind": "parcel",
+              "c": [
+                273.55,
+                900.74
+              ],
+              "d": 2.3356,
+              "delta": 45.1753,
+              "aspect": 2.3968,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter~1/p.382.0.0",
+              "kind": "parcel",
+              "c": [
+                18.25,
+                739.45
+              ],
+              "d": 5.1414,
+              "delta": 51.6689,
+              "aspect": 1.3001,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter~1/p.382.1.0",
+              "kind": "parcel",
+              "c": [
+                21.47,
+                742.13
+              ],
+              "d": 2.3632,
+              "delta": 38.3311,
+              "aspect": 2.1311,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter~1/p.382.2.0",
+              "kind": "parcel",
+              "c": [
+                28.53,
+                746.52
+              ],
+              "d": 3.9426,
+              "delta": 38.3311,
+              "aspect": 1.2649,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.religious_quarter~1/p.98.1.1",
+              "kind": "parcel",
+              "c": [
+                632.12,
+                332.3
+              ],
+              "d": 4.6195,
+              "delta": 18.6549,
+              "aspect": 1.499,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.religious_quarter~1/p.115.5.0",
+              "kind": "parcel",
+              "c": [
+                650.61,
+                328.52
+              ],
+              "d": 8.3095,
+              "delta": 75.2367,
+              "aspect": 1.7106,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.religious_quarter~1/p.115.7.0",
+              "kind": "parcel",
+              "c": [
+                657.37,
+                321.8
+              ],
+              "d": 5.0672,
+              "delta": 75.2367,
+              "aspect": 2.0236,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.religious_quarter~1/p.161.1.0#back",
+              "kind": "backHouse",
+              "c": [
+                583.56,
+                576.18
+              ],
+              "d": 8.7971,
+              "delta": 52.9154,
+              "aspect": 3.7368,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.religious_quarter~1/p.166.3.1",
+              "kind": "parcel",
+              "c": [
+                759.78,
+                462.13
+              ],
+              "d": 7.8967,
+              "delta": 51.0614,
+              "aspect": 2.6389,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.religious_quarter~1/p.166.7.1",
+              "kind": "parcel",
+              "c": [
+                777.03,
+                448.92
+              ],
+              "d": 6.4257,
+              "delta": 51.0614,
+              "aspect": 7.8468,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.religious_quarter~1/p.183.2.0#back",
+              "kind": "backHouse",
+              "c": [
+                759.47,
+                490.46
+              ],
+              "d": 6.191,
+              "delta": 75.5843,
+              "aspect": 1.9789,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.religious_quarter~1/p.184.0.0",
+              "kind": "parcel",
+              "c": [
+                772.54,
+                465.32
+              ],
+              "d": 5.2419,
+              "delta": 51.0614,
+              "aspect": 2.877,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "inst.stable_district#0#0",
+              "kind": "institution",
+              "c": [
+                422.69,
+                328.64
+              ],
+              "d": 2.256,
+              "delta": 43.2794,
+              "aspect": 1.6627,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "inst.stable_district#0#1",
+              "kind": "institution",
+              "c": [
+                421.78,
+                326.21
+              ],
+              "d": 3.525,
+              "delta": 43.2794,
+              "aspect": 1.4919,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            }
+          ],
+          "pass": false
+        }
+      ],
+      "relictNonScoring": []
+    },
+    {
+      "key": "highwater",
+      "name": "Mahabagh",
+      "tier": "town",
+      "working": [
+        {
+          "applicable": true,
+          "wallKind": "main",
+          "form": "citywall",
+          "lineKind": "drawn",
+          "lineVertices": 25,
+          "thresholds": {
+            "frontage": 5.1741,
+            "half": 5.2605,
+            "inner": 2.587,
+            "outer": 5.1741,
+            "plotDepth": 5.1549,
+            "clearIn": 7.8475,
+            "clearOut": 10.4345,
+            "reach": 15.5895,
+            "reachMult": 1,
+            "inFrontages": {
+              "half": 1.0167,
+              "inner": 0.5,
+              "outer": 1,
+              "plotDepth": 0.9963,
+              "reach": 3.013
+            }
+          },
+          "bandDeg": 15,
+          "aspectMin": 1.25,
+          "bodiesConsidered": 1747,
+          "withinReach": 3,
+          "c1Crossing": 0,
+          "crossers": [],
+          "c2": {
+            "lawfulTangential": 0,
+            "lawfulClear": 1,
+            "exemptNoAxis": 1,
+            "violations": 1
+          },
+          "c3Continuity": {
+            "inside": {
+              "n": 2,
+              "tangentialShare": 0,
+              "medianDelta": 64.48
+            },
+            "outside": {
+              "n": 0,
+              "tangentialShare": null,
+              "medianDelta": null
+            }
+          },
+          "offenders": [
+            {
+              "key": "faubourg|2@764,387|street.high|4",
+              "kind": "faubourg",
+              "c": [
+                718.27,
+                399.52
+              ],
+              "d": 12.4128,
+              "delta": 64.483,
+              "aspect": 1.7054,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            }
+          ],
+          "pass": false
+        }
+      ],
+      "relictNonScoring": [
+        {
+          "applicable": true,
+          "wallKind": "old-core",
+          "form": "citywall",
+          "lineKind": "drawn",
+          "lineVertices": 25,
+          "thresholds": {
+            "frontage": 5.1741,
+            "half": 1.4229,
+            "inner": 0.0429,
+            "outer": 0.0429,
+            "plotDepth": 5.1549,
+            "clearIn": 1.4658,
+            "clearOut": 1.4658,
+            "reach": 6.6208,
+            "reachMult": 1,
+            "inFrontages": {
+              "half": 0.275,
+              "inner": 0.0083,
+              "outer": 0.0083,
+              "plotDepth": 0.9963,
+              "reach": 1.2796
+            }
+          },
+          "bandDeg": 15,
+          "aspectMin": 1.25,
+          "bodiesConsidered": 1747,
+          "withinReach": 20,
+          "c1Crossing": 0,
+          "crossers": [],
+          "c2": {
+            "lawfulTangential": 12,
+            "lawfulClear": 4,
+            "exemptNoAxis": 4,
+            "violations": 0
+          },
+          "c3Continuity": {
+            "inside": {
+              "n": 7,
+              "tangentialShare": 0.5714,
+              "medianDelta": 5.96
+            },
+            "outside": {
+              "n": 9,
+              "tangentialShare": 0.8889,
+              "medianDelta": 10.65
+            }
+          },
+          "offenders": [],
+          "pass": true
+        }
+      ]
+    },
+    {
+      "key": "mountain",
+      "name": "Mingguan",
+      "tier": "village",
+      "working": [],
+      "relictNonScoring": []
+    },
+    {
+      "key": "fjord",
+      "name": "Beiyuan",
+      "tier": "town",
+      "working": [],
+      "relictNonScoring": []
+    },
+    {
+      "key": "siege",
+      "name": "Mahabagh",
+      "tier": "town",
+      "working": [
+        {
+          "applicable": true,
+          "wallKind": "main",
+          "form": "palisade",
+          "lineKind": "drawn",
+          "lineVertices": 116,
+          "thresholds": {
+            "frontage": 4.8603,
+            "half": 4.6658,
+            "inner": 2.4301,
+            "outer": 4.8603,
+            "plotDepth": 4.7066,
+            "clearIn": 7.096,
+            "clearOut": 9.5261,
+            "reach": 14.2327,
+            "reachMult": 1,
+            "inFrontages": {
+              "half": 0.96,
+              "inner": 0.5,
+              "outer": 1,
+              "plotDepth": 0.9684,
+              "reach": 2.9284
+            }
+          },
+          "bandDeg": 15,
+          "aspectMin": 1.25,
+          "bodiesConsidered": 1706,
+          "withinReach": 187,
+          "c1Crossing": 23,
+          "crossers": [
+            {
+              "key": "org.district.government_quarter/p.9.1.0",
+              "kind": "parcel",
+              "c": [
+                819.09,
+                491.35
+              ],
+              "d": 4.6318
+            },
+            {
+              "key": "org.district.government_quarter/p.9.2.0",
+              "kind": "parcel",
+              "c": [
+                822.65,
+                495.67
+              ],
+              "d": 4.4735
+            },
+            {
+              "key": "org.district.government_quarter/p.10.4.0",
+              "kind": "parcel",
+              "c": [
+                858.37,
+                542.27
+              ],
+              "d": 5.8164
+            },
+            {
+              "key": "org.district.market_quarter~1/p.122.4.1",
+              "kind": "parcel",
+              "c": [
+                824.21,
+                836.67
+              ],
+              "d": 1.2817
+            },
+            {
+              "key": "org.district.market_quarter~1/p.122.4.1#back",
+              "kind": "backHouse",
+              "c": [
+                832.99,
+                826.74
+              ],
+              "d": 2.996
+            },
+            {
+              "key": "org.district.market_quarter~1/p.132.1.1",
+              "kind": "parcel",
+              "c": [
+                349.26,
+                466.75
+              ],
+              "d": 0.4127
+            },
+            {
+              "key": "org.district.market_quarter~1/p.143.4.0",
+              "kind": "parcel",
+              "c": [
+                821.56,
+                841.55
+              ],
+              "d": 1.8951
+            },
+            {
+              "key": "org.district.market_quarter~1/p.153.1.0",
+              "kind": "parcel",
+              "c": [
+                335,
+                467.74
+              ],
+              "d": 4.1128
+            },
+            {
+              "key": "org.district.market_quarter~1/p.173.0.0#back",
+              "kind": "backHouse",
+              "c": [
+                265.89,
+                496.26
+              ],
+              "d": 1.8635
+            },
+            {
+              "key": "org.district.market_quarter~1/p.238.0.1#back",
+              "kind": "backHouse",
+              "c": [
+                190.16,
+                670.67
+              ],
+              "d": 0.3689
+            },
+            {
+              "key": "org.district.market_quarter~1/p.238.1.1#back",
+              "kind": "backHouse",
+              "c": [
+                189.91,
+                677.28
+              ],
+              "d": 1.3784
+            },
+            {
+              "key": "org.district.market_quarter~1/p.238.3.1",
+              "kind": "parcel",
+              "c": [
+                194.82,
+                692.89
+              ],
+              "d": 2.8406
+            },
+            {
+              "key": "org.district.market_quarter~1/p.238.4.1",
+              "kind": "parcel",
+              "c": [
+                198.33,
+                695.52
+              ],
+              "d": 0.7894
+            },
+            {
+              "key": "org.district.market_quarter~1/p.238.5.1",
+              "kind": "parcel",
+              "c": [
+                200.27,
+                701.73
+              ],
+              "d": 1.1296
+            },
+            {
+              "key": "org.district.market_quarter~1/p.238.6.1",
+              "kind": "parcel",
+              "c": [
+                206.12,
+                703.87
+              ],
+              "d": 3.6082
+            },
+            {
+              "key": "org.district.market_quarter~1/p.260.3.1#back",
+              "kind": "backHouse",
+              "c": [
+                219.9,
+                774.88
+              ],
+              "d": 7.224
+            },
+            {
+              "key": "org.district.market_quarter~1/p.260.4.1#back",
+              "kind": "backHouse",
+              "c": [
+                223.44,
+                780.36
+              ],
+              "d": 5.4782
+            },
+            {
+              "key": "org.district.market_quarter~1/p.260.5.1#back",
+              "kind": "backHouse",
+              "c": [
+                227.25,
+                783.53
+              ],
+              "d": 2.8055
+            },
+            {
+              "key": "org.district.market_quarter~1/p.261.0.1#back",
+              "kind": "backHouse",
+              "c": [
+                238.22,
+                789.64
+              ],
+              "d": 5.1948
+            },
+            {
+              "key": "org.district.market_quarter~1/p.261.5.1",
+              "kind": "parcel",
+              "c": [
+                246.88,
+                820.98
+              ],
+              "d": 0.3565
+            }
+          ],
+          "c2": {
+            "lawfulTangential": 20,
+            "lawfulClear": 27,
+            "exemptNoAxis": 31,
+            "violations": 86
+          },
+          "c3Continuity": {
+            "inside": {
+              "n": 97,
+              "tangentialShare": 0.1959,
+              "medianDelta": 35.55
+            },
+            "outside": {
+              "n": 58,
+              "tangentialShare": 0.0862,
+              "medianDelta": 50.25
+            }
+          },
+          "offenders": [
+            {
+              "key": "org.district.government_quarter/p.8.0.0",
+              "kind": "parcel",
+              "c": [
+                811.99,
+                479.2
+              ],
+              "d": 7.6688,
+              "delta": 82.0325,
+              "aspect": 3.629,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.9.0.0",
+              "kind": "parcel",
+              "c": [
+                820.51,
+                486.47
+              ],
+              "d": 8.9968,
+              "delta": 82.0325,
+              "aspect": 5.2023,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.9.4.0",
+              "kind": "parcel",
+              "c": [
+                831.92,
+                504.15
+              ],
+              "d": 6.2577,
+              "delta": 85.4136,
+              "aspect": 2.6544,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.9.6.0",
+              "kind": "parcel",
+              "c": [
+                837.46,
+                510.17
+              ],
+              "d": 6.8514,
+              "delta": 87.3528,
+              "aspect": 1.5839,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.9.7.0",
+              "kind": "parcel",
+              "c": [
+                841.33,
+                517.02
+              ],
+              "d": 5.7596,
+              "delta": 87.3528,
+              "aspect": 1.8425,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.9.7.0#back",
+              "kind": "backHouse",
+              "c": [
+                831.19,
+                524.13
+              ],
+              "d": 6.6155,
+              "delta": 87.3528,
+              "aspect": 1.5949,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.10.7.0",
+              "kind": "parcel",
+              "c": [
+                868.57,
+                556.58
+              ],
+              "d": 9.5416,
+              "delta": 73.3802,
+              "aspect": 3.3002,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.government_quarter/p.10.7.0#back",
+              "kind": "backHouse",
+              "c": [
+                854.31,
+                566.45
+              ],
+              "d": 7.0804,
+              "delta": 73.3802,
+              "aspect": 3.2803,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.60.0.1",
+              "kind": "parcel",
+              "c": [
+                380.21,
+                957.32
+              ],
+              "d": 13.2894,
+              "delta": 66.7486,
+              "aspect": 2.0776,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.60.1.1",
+              "kind": "parcel",
+              "c": [
+                376.96,
+                953.49
+              ],
+              "d": 10.356,
+              "delta": 23.2514,
+              "aspect": 3.0982,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.60.2.1",
+              "kind": "parcel",
+              "c": [
+                372.24,
+                949.31
+              ],
+              "d": 7.4418,
+              "delta": 23.2514,
+              "aspect": 3.173,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.77.7.0#back",
+              "kind": "backHouse",
+              "c": [
+                400.86,
+                939.63
+              ],
+              "d": 8.8824,
+              "delta": 66.7486,
+              "aspect": 9.7123,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.78.2.0",
+              "kind": "parcel",
+              "c": [
+                377.35,
+                937.03
+              ],
+              "d": 5.7063,
+              "delta": 66.7486,
+              "aspect": 1.2501,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.78.3.0",
+              "kind": "parcel",
+              "c": [
+                369.97,
+                936.34
+              ],
+              "d": 4.5943,
+              "delta": 23.2514,
+              "aspect": 1.7647,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.78.5.0",
+              "kind": "parcel",
+              "c": [
+                360.38,
+                932.4
+              ],
+              "d": 5.0867,
+              "delta": 16.6566,
+              "aspect": 1.3029,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.78.6.0",
+              "kind": "parcel",
+              "c": [
+                356.72,
+                925.96
+              ],
+              "d": 9.8243,
+              "delta": 73.3434,
+              "aspect": 1.8171,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.78.7.0",
+              "kind": "parcel",
+              "c": [
+                348.14,
+                921.28
+              ],
+              "d": 11.1811,
+              "delta": 73.3434,
+              "aspect": 1.8234,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.93.2.0#back",
+              "kind": "backHouse",
+              "c": [
+                526.58,
+                973.37
+              ],
+              "d": 13.6886,
+              "delta": 51.2685,
+              "aspect": 2.7976,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.93.3.0#back",
+              "kind": "backHouse",
+              "c": [
+                522.06,
+                968.7
+              ],
+              "d": 8.9044,
+              "delta": 51.2685,
+              "aspect": 1.8876,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.93.5.0",
+              "kind": "parcel",
+              "c": [
+                504.07,
+                970.61
+              ],
+              "d": 10.2777,
+              "delta": 50.8737,
+              "aspect": 2.7795,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.93.6.0",
+              "kind": "parcel",
+              "c": [
+                497.62,
+                969.47
+              ],
+              "d": 8.9334,
+              "delta": 39.1263,
+              "aspect": 3.5571,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.93.4.1#back",
+              "kind": "backHouse",
+              "c": [
+                535.08,
+                951.49
+              ],
+              "d": 7.9691,
+              "delta": 51.2685,
+              "aspect": 2.359,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.94.3.0",
+              "kind": "parcel",
+              "c": [
+                476.08,
+                947.77
+              ],
+              "d": 13.7619,
+              "delta": 48.9167,
+              "aspect": 3.3449,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.110.0.0#back",
+              "kind": "backHouse",
+              "c": [
+                600.43,
+                963.11
+              ],
+              "d": 8.0563,
+              "delta": 42.6221,
+              "aspect": 2.0646,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.243.2.0#back",
+              "kind": "backHouse",
+              "c": [
+                530.43,
+                421.01
+              ],
+              "d": 11.974,
+              "delta": 33.0432,
+              "aspect": 1.6461,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.243.2.1",
+              "kind": "parcel",
+              "c": [
+                558.66,
+                407.07
+              ],
+              "d": 8.5881,
+              "delta": 56.3743,
+              "aspect": 1.3695,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.243.6.1",
+              "kind": "parcel",
+              "c": [
+                536.86,
+                394.98
+              ],
+              "d": 10.3516,
+              "delta": 32.6199,
+              "aspect": 1.7823,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.243.7.1#back",
+              "kind": "backHouse",
+              "c": [
+                523.76,
+                400.79
+              ],
+              "d": 9.3093,
+              "delta": 33.0432,
+              "aspect": 4.8272,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.260.4.1",
+              "kind": "parcel",
+              "c": [
+                622.49,
+                387.49
+              ],
+              "d": 9.1843,
+              "delta": 45.7857,
+              "aspect": 2.5873,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.260.5.1",
+              "kind": "parcel",
+              "c": [
+                614.7,
+                386.96
+              ],
+              "d": 6.7993,
+              "delta": 35.0979,
+              "aspect": 3.8789,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            }
+          ],
+          "pass": false
+        }
+      ],
+      "relictNonScoring": []
+    },
+    {
+      "key": "plague",
+      "name": "Mahabagh",
+      "tier": "town",
+      "working": [
+        {
+          "applicable": true,
+          "wallKind": "main",
+          "form": "palisade",
+          "lineKind": "drawn",
+          "lineVertices": 116,
+          "thresholds": {
+            "frontage": 4.8603,
+            "half": 4.6658,
+            "inner": 2.4301,
+            "outer": 4.8603,
+            "plotDepth": 4.7066,
+            "clearIn": 7.096,
+            "clearOut": 9.5261,
+            "reach": 14.2327,
+            "reachMult": 1,
+            "inFrontages": {
+              "half": 0.96,
+              "inner": 0.5,
+              "outer": 1,
+              "plotDepth": 0.9684,
+              "reach": 2.9284
+            }
+          },
+          "bandDeg": 15,
+          "aspectMin": 1.25,
+          "bodiesConsidered": 1827,
+          "withinReach": 188,
+          "c1Crossing": 23,
+          "crossers": [
+            {
+              "key": "org.district.government_quarter/p.9.1.0",
+              "kind": "parcel",
+              "c": [
+                819.09,
+                491.35
+              ],
+              "d": 4.6318
+            },
+            {
+              "key": "org.district.government_quarter/p.9.2.0",
+              "kind": "parcel",
+              "c": [
+                822.65,
+                495.67
+              ],
+              "d": 4.4735
+            },
+            {
+              "key": "org.district.government_quarter/p.10.4.0",
+              "kind": "parcel",
+              "c": [
+                858.37,
+                542.27
+              ],
+              "d": 5.8164
+            },
+            {
+              "key": "org.district.market_quarter~1/p.122.4.1",
+              "kind": "parcel",
+              "c": [
+                824.21,
+                836.67
+              ],
+              "d": 1.2817
+            },
+            {
+              "key": "org.district.market_quarter~1/p.122.4.1#back",
+              "kind": "backHouse",
+              "c": [
+                832.99,
+                826.74
+              ],
+              "d": 2.996
+            },
+            {
+              "key": "org.district.market_quarter~1/p.132.1.1",
+              "kind": "parcel",
+              "c": [
+                349.26,
+                466.75
+              ],
+              "d": 0.4127
+            },
+            {
+              "key": "org.district.market_quarter~1/p.143.4.0",
+              "kind": "parcel",
+              "c": [
+                821.56,
+                841.55
+              ],
+              "d": 1.8951
+            },
+            {
+              "key": "org.district.market_quarter~1/p.153.1.0",
+              "kind": "parcel",
+              "c": [
+                335,
+                467.74
+              ],
+              "d": 4.1128
+            },
+            {
+              "key": "org.district.market_quarter~1/p.173.0.0#back",
+              "kind": "backHouse",
+              "c": [
+                265.89,
+                496.26
+              ],
+              "d": 1.8635
+            },
+            {
+              "key": "org.district.market_quarter~1/p.238.0.1#back",
+              "kind": "backHouse",
+              "c": [
+                190.16,
+                670.67
+              ],
+              "d": 0.3689
+            },
+            {
+              "key": "org.district.market_quarter~1/p.238.1.1#back",
+              "kind": "backHouse",
+              "c": [
+                189.91,
+                677.28
+              ],
+              "d": 1.3784
+            },
+            {
+              "key": "org.district.market_quarter~1/p.238.3.1",
+              "kind": "parcel",
+              "c": [
+                194.82,
+                692.89
+              ],
+              "d": 2.8406
+            },
+            {
+              "key": "org.district.market_quarter~1/p.238.4.1",
+              "kind": "parcel",
+              "c": [
+                198.33,
+                695.52
+              ],
+              "d": 0.7894
+            },
+            {
+              "key": "org.district.market_quarter~1/p.238.5.1",
+              "kind": "parcel",
+              "c": [
+                200.27,
+                701.73
+              ],
+              "d": 1.1296
+            },
+            {
+              "key": "org.district.market_quarter~1/p.238.6.1",
+              "kind": "parcel",
+              "c": [
+                206.12,
+                703.87
+              ],
+              "d": 3.6082
+            },
+            {
+              "key": "org.district.market_quarter~1/p.260.3.1#back",
+              "kind": "backHouse",
+              "c": [
+                219.9,
+                774.88
+              ],
+              "d": 7.224
+            },
+            {
+              "key": "org.district.market_quarter~1/p.260.4.1#back",
+              "kind": "backHouse",
+              "c": [
+                223.73,
+                780.13
+              ],
+              "d": 5.1265
+            },
+            {
+              "key": "org.district.market_quarter~1/p.260.5.1#back",
+              "kind": "backHouse",
+              "c": [
+                230.21,
+                780.52
+              ],
+              "d": 0.9425
+            },
+            {
+              "key": "org.district.market_quarter~1/p.261.0.1#back",
+              "kind": "backHouse",
+              "c": [
+                238.22,
+                789.64
+              ],
+              "d": 5.1948
+            },
+            {
+              "key": "org.district.market_quarter~1/p.261.5.1",
+              "kind": "parcel",
+              "c": [
+                246.88,
+                820.98
+              ],
+              "d": 0.3565
+            }
+          ],
+          "c2": {
+            "lawfulTangential": 20,
+            "lawfulClear": 27,
+            "exemptNoAxis": 31,
+            "violations": 87
+          },
+          "c3Continuity": {
+            "inside": {
+              "n": 98,
+              "tangentialShare": 0.1837,
+              "medianDelta": 38.47
+            },
+            "outside": {
+              "n": 57,
+              "tangentialShare": 0.0877,
+              "medianDelta": 47.34
+            }
+          },
+          "offenders": [
+            {
+              "key": "org.district.government_quarter/p.8.0.0",
+              "kind": "parcel",
+              "c": [
+                811.99,
+                479.2
+              ],
+              "d": 7.6688,
+              "delta": 82.0325,
+              "aspect": 3.629,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.9.0.0",
+              "kind": "parcel",
+              "c": [
+                820.51,
+                486.47
+              ],
+              "d": 8.9968,
+              "delta": 82.0325,
+              "aspect": 5.2023,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.9.4.0",
+              "kind": "parcel",
+              "c": [
+                831.92,
+                504.15
+              ],
+              "d": 6.2577,
+              "delta": 85.4136,
+              "aspect": 2.6544,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.9.6.0",
+              "kind": "parcel",
+              "c": [
+                837.46,
+                510.17
+              ],
+              "d": 6.8514,
+              "delta": 87.3528,
+              "aspect": 1.5839,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.9.7.0",
+              "kind": "parcel",
+              "c": [
+                841.33,
+                517.02
+              ],
+              "d": 5.7596,
+              "delta": 87.3528,
+              "aspect": 1.8425,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.9.7.0#back",
+              "kind": "backHouse",
+              "c": [
+                831.19,
+                524.13
+              ],
+              "d": 6.6155,
+              "delta": 87.3528,
+              "aspect": 1.5949,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.10.7.0",
+              "kind": "parcel",
+              "c": [
+                868.57,
+                556.58
+              ],
+              "d": 9.5416,
+              "delta": 73.3802,
+              "aspect": 3.3002,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.government_quarter/p.10.7.0#back",
+              "kind": "backHouse",
+              "c": [
+                854.31,
+                566.45
+              ],
+              "d": 7.0804,
+              "delta": 73.3802,
+              "aspect": 3.2803,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.60.0.1",
+              "kind": "parcel",
+              "c": [
+                380.21,
+                957.32
+              ],
+              "d": 13.2894,
+              "delta": 66.7486,
+              "aspect": 2.0776,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.60.1.1",
+              "kind": "parcel",
+              "c": [
+                376.96,
+                953.49
+              ],
+              "d": 10.356,
+              "delta": 23.2514,
+              "aspect": 3.0982,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.60.2.1",
+              "kind": "parcel",
+              "c": [
+                372.24,
+                949.31
+              ],
+              "d": 7.4418,
+              "delta": 23.2514,
+              "aspect": 3.173,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.77.7.0#back",
+              "kind": "backHouse",
+              "c": [
+                400.86,
+                939.63
+              ],
+              "d": 8.8824,
+              "delta": 66.7486,
+              "aspect": 9.7123,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.78.2.0",
+              "kind": "parcel",
+              "c": [
+                377.35,
+                937.03
+              ],
+              "d": 5.7063,
+              "delta": 66.7486,
+              "aspect": 1.2501,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.78.3.0",
+              "kind": "parcel",
+              "c": [
+                369.97,
+                936.34
+              ],
+              "d": 4.5943,
+              "delta": 23.2514,
+              "aspect": 1.7647,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.78.5.0",
+              "kind": "parcel",
+              "c": [
+                360.38,
+                932.4
+              ],
+              "d": 5.0867,
+              "delta": 16.6566,
+              "aspect": 1.3029,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.78.6.0",
+              "kind": "parcel",
+              "c": [
+                356.72,
+                925.96
+              ],
+              "d": 9.8243,
+              "delta": 73.3434,
+              "aspect": 1.8171,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.78.7.0",
+              "kind": "parcel",
+              "c": [
+                348.14,
+                921.28
+              ],
+              "d": 11.1811,
+              "delta": 73.3434,
+              "aspect": 1.8234,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.93.2.0#back",
+              "kind": "backHouse",
+              "c": [
+                526.58,
+                973.37
+              ],
+              "d": 13.6886,
+              "delta": 51.2685,
+              "aspect": 2.7976,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.93.3.0#back",
+              "kind": "backHouse",
+              "c": [
+                522.06,
+                968.7
+              ],
+              "d": 8.9044,
+              "delta": 51.2685,
+              "aspect": 1.8876,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.93.5.0",
+              "kind": "parcel",
+              "c": [
+                504.07,
+                970.61
+              ],
+              "d": 10.2777,
+              "delta": 50.8737,
+              "aspect": 2.7795,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.93.6.0",
+              "kind": "parcel",
+              "c": [
+                497.62,
+                969.47
+              ],
+              "d": 8.9334,
+              "delta": 39.1263,
+              "aspect": 3.5571,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.93.4.1#back",
+              "kind": "backHouse",
+              "c": [
+                535.08,
+                951.49
+              ],
+              "d": 7.9691,
+              "delta": 51.2685,
+              "aspect": 2.359,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.94.3.0",
+              "kind": "parcel",
+              "c": [
+                476.08,
+                947.77
+              ],
+              "d": 13.7619,
+              "delta": 48.9167,
+              "aspect": 3.3449,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.110.0.0#back",
+              "kind": "backHouse",
+              "c": [
+                600.43,
+                963.11
+              ],
+              "d": 8.0563,
+              "delta": 42.6221,
+              "aspect": 2.0646,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.243.2.0#back",
+              "kind": "backHouse",
+              "c": [
+                530.43,
+                421.01
+              ],
+              "d": 11.974,
+              "delta": 33.0432,
+              "aspect": 1.6461,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.243.2.1",
+              "kind": "parcel",
+              "c": [
+                558.66,
+                407.07
+              ],
+              "d": 8.5881,
+              "delta": 56.3743,
+              "aspect": 1.3695,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.243.6.1",
+              "kind": "parcel",
+              "c": [
+                536.86,
+                394.98
+              ],
+              "d": 10.3516,
+              "delta": 32.6199,
+              "aspect": 1.7823,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.243.7.1#back",
+              "kind": "backHouse",
+              "c": [
+                523.76,
+                400.79
+              ],
+              "d": 9.3093,
+              "delta": 33.0432,
+              "aspect": 4.8272,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.260.4.1",
+              "kind": "parcel",
+              "c": [
+                622.49,
+                387.49
+              ],
+              "d": 9.1843,
+              "delta": 45.7857,
+              "aspect": 2.5873,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.260.5.1",
+              "kind": "parcel",
+              "c": [
+                614.7,
+                386.96
+              ],
+              "d": 6.7993,
+              "delta": 35.0979,
+              "aspect": 3.8789,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            }
+          ],
+          "pass": false
+        }
+      ],
+      "relictNonScoring": []
+    },
+    {
+      "key": "famine",
+      "name": "Mahabagh",
+      "tier": "town",
+      "working": [
+        {
+          "applicable": true,
+          "wallKind": "main",
+          "form": "palisade",
+          "lineKind": "drawn",
+          "lineVertices": 116,
+          "thresholds": {
+            "frontage": 4.8603,
+            "half": 4.6658,
+            "inner": 2.4301,
+            "outer": 4.8603,
+            "plotDepth": 4.7066,
+            "clearIn": 7.096,
+            "clearOut": 9.5261,
+            "reach": 14.2327,
+            "reachMult": 1,
+            "inFrontages": {
+              "half": 0.96,
+              "inner": 0.5,
+              "outer": 1,
+              "plotDepth": 0.9684,
+              "reach": 2.9284
+            }
+          },
+          "bandDeg": 15,
+          "aspectMin": 1.25,
+          "bodiesConsidered": 1826,
+          "withinReach": 188,
+          "c1Crossing": 23,
+          "crossers": [
+            {
+              "key": "org.district.government_quarter/p.9.1.0",
+              "kind": "parcel",
+              "c": [
+                819.09,
+                491.35
+              ],
+              "d": 4.6318
+            },
+            {
+              "key": "org.district.government_quarter/p.9.2.0",
+              "kind": "parcel",
+              "c": [
+                822.65,
+                495.67
+              ],
+              "d": 4.4735
+            },
+            {
+              "key": "org.district.government_quarter/p.10.4.0",
+              "kind": "parcel",
+              "c": [
+                858.37,
+                542.27
+              ],
+              "d": 5.8164
+            },
+            {
+              "key": "org.district.market_quarter~1/p.122.4.1",
+              "kind": "parcel",
+              "c": [
+                824.21,
+                836.67
+              ],
+              "d": 1.2817
+            },
+            {
+              "key": "org.district.market_quarter~1/p.122.4.1#back",
+              "kind": "backHouse",
+              "c": [
+                832.99,
+                826.74
+              ],
+              "d": 2.996
+            },
+            {
+              "key": "org.district.market_quarter~1/p.132.1.1",
+              "kind": "parcel",
+              "c": [
+                349.26,
+                466.75
+              ],
+              "d": 0.4127
+            },
+            {
+              "key": "org.district.market_quarter~1/p.143.4.0",
+              "kind": "parcel",
+              "c": [
+                821.56,
+                841.55
+              ],
+              "d": 1.8951
+            },
+            {
+              "key": "org.district.market_quarter~1/p.153.1.0",
+              "kind": "parcel",
+              "c": [
+                335,
+                467.74
+              ],
+              "d": 4.1128
+            },
+            {
+              "key": "org.district.market_quarter~1/p.173.0.0#back",
+              "kind": "backHouse",
+              "c": [
+                265.89,
+                496.26
+              ],
+              "d": 1.8635
+            },
+            {
+              "key": "org.district.market_quarter~1/p.238.0.1#back",
+              "kind": "backHouse",
+              "c": [
+                190.16,
+                670.67
+              ],
+              "d": 0.3689
+            },
+            {
+              "key": "org.district.market_quarter~1/p.238.1.1#back",
+              "kind": "backHouse",
+              "c": [
+                189.91,
+                677.28
+              ],
+              "d": 1.3784
+            },
+            {
+              "key": "org.district.market_quarter~1/p.238.3.1",
+              "kind": "parcel",
+              "c": [
+                194.82,
+                692.89
+              ],
+              "d": 2.8406
+            },
+            {
+              "key": "org.district.market_quarter~1/p.238.4.1",
+              "kind": "parcel",
+              "c": [
+                198.33,
+                695.52
+              ],
+              "d": 0.7894
+            },
+            {
+              "key": "org.district.market_quarter~1/p.238.5.1",
+              "kind": "parcel",
+              "c": [
+                200.27,
+                701.73
+              ],
+              "d": 1.1296
+            },
+            {
+              "key": "org.district.market_quarter~1/p.238.6.1",
+              "kind": "parcel",
+              "c": [
+                206.12,
+                703.87
+              ],
+              "d": 3.6082
+            },
+            {
+              "key": "org.district.market_quarter~1/p.260.3.1#back",
+              "kind": "backHouse",
+              "c": [
+                219.9,
+                774.88
+              ],
+              "d": 7.224
+            },
+            {
+              "key": "org.district.market_quarter~1/p.260.4.1#back",
+              "kind": "backHouse",
+              "c": [
+                223.73,
+                780.13
+              ],
+              "d": 5.1265
+            },
+            {
+              "key": "org.district.market_quarter~1/p.260.5.1#back",
+              "kind": "backHouse",
+              "c": [
+                230.21,
+                780.52
+              ],
+              "d": 0.9425
+            },
+            {
+              "key": "org.district.market_quarter~1/p.261.0.1#back",
+              "kind": "backHouse",
+              "c": [
+                238.22,
+                789.64
+              ],
+              "d": 5.1948
+            },
+            {
+              "key": "org.district.market_quarter~1/p.261.5.1",
+              "kind": "parcel",
+              "c": [
+                246.88,
+                820.98
+              ],
+              "d": 0.3565
+            }
+          ],
+          "c2": {
+            "lawfulTangential": 20,
+            "lawfulClear": 27,
+            "exemptNoAxis": 31,
+            "violations": 87
+          },
+          "c3Continuity": {
+            "inside": {
+              "n": 98,
+              "tangentialShare": 0.1837,
+              "medianDelta": 38.47
+            },
+            "outside": {
+              "n": 57,
+              "tangentialShare": 0.0877,
+              "medianDelta": 47.34
+            }
+          },
+          "offenders": [
+            {
+              "key": "org.district.government_quarter/p.8.0.0",
+              "kind": "parcel",
+              "c": [
+                811.99,
+                479.2
+              ],
+              "d": 7.6688,
+              "delta": 82.0325,
+              "aspect": 3.629,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.9.0.0",
+              "kind": "parcel",
+              "c": [
+                820.51,
+                486.47
+              ],
+              "d": 8.9968,
+              "delta": 82.0325,
+              "aspect": 5.2023,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.9.4.0",
+              "kind": "parcel",
+              "c": [
+                831.92,
+                504.15
+              ],
+              "d": 6.2577,
+              "delta": 85.4136,
+              "aspect": 2.6544,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.9.6.0",
+              "kind": "parcel",
+              "c": [
+                837.46,
+                510.17
+              ],
+              "d": 6.8514,
+              "delta": 87.3528,
+              "aspect": 1.5839,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.9.7.0",
+              "kind": "parcel",
+              "c": [
+                841.33,
+                517.02
+              ],
+              "d": 5.7596,
+              "delta": 87.3528,
+              "aspect": 1.8425,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.9.7.0#back",
+              "kind": "backHouse",
+              "c": [
+                831.19,
+                524.13
+              ],
+              "d": 6.6155,
+              "delta": 87.3528,
+              "aspect": 1.5949,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.10.7.0",
+              "kind": "parcel",
+              "c": [
+                868.57,
+                556.58
+              ],
+              "d": 9.5416,
+              "delta": 73.3802,
+              "aspect": 3.3002,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.government_quarter/p.10.7.0#back",
+              "kind": "backHouse",
+              "c": [
+                854.31,
+                566.45
+              ],
+              "d": 7.0804,
+              "delta": 73.3802,
+              "aspect": 3.2803,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.60.0.1",
+              "kind": "parcel",
+              "c": [
+                380.21,
+                957.32
+              ],
+              "d": 13.2894,
+              "delta": 66.7486,
+              "aspect": 2.0776,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.60.1.1",
+              "kind": "parcel",
+              "c": [
+                376.96,
+                953.49
+              ],
+              "d": 10.356,
+              "delta": 23.2514,
+              "aspect": 3.0982,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.60.2.1",
+              "kind": "parcel",
+              "c": [
+                372.24,
+                949.31
+              ],
+              "d": 7.4418,
+              "delta": 23.2514,
+              "aspect": 3.173,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.77.7.0#back",
+              "kind": "backHouse",
+              "c": [
+                400.86,
+                939.63
+              ],
+              "d": 8.8824,
+              "delta": 66.7486,
+              "aspect": 9.7123,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.78.2.0",
+              "kind": "parcel",
+              "c": [
+                377.35,
+                937.03
+              ],
+              "d": 5.7063,
+              "delta": 66.7486,
+              "aspect": 1.2501,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.78.3.0",
+              "kind": "parcel",
+              "c": [
+                369.97,
+                936.34
+              ],
+              "d": 4.5943,
+              "delta": 23.2514,
+              "aspect": 1.7647,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.78.5.0",
+              "kind": "parcel",
+              "c": [
+                360.38,
+                932.4
+              ],
+              "d": 5.0867,
+              "delta": 16.6566,
+              "aspect": 1.3029,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.78.6.0",
+              "kind": "parcel",
+              "c": [
+                356.72,
+                925.96
+              ],
+              "d": 9.8243,
+              "delta": 73.3434,
+              "aspect": 1.8171,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.78.7.0",
+              "kind": "parcel",
+              "c": [
+                348.14,
+                921.28
+              ],
+              "d": 11.1811,
+              "delta": 73.3434,
+              "aspect": 1.8234,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.93.2.0#back",
+              "kind": "backHouse",
+              "c": [
+                526.58,
+                973.37
+              ],
+              "d": 13.6886,
+              "delta": 51.2685,
+              "aspect": 2.7976,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.93.3.0#back",
+              "kind": "backHouse",
+              "c": [
+                522.06,
+                968.7
+              ],
+              "d": 8.9044,
+              "delta": 51.2685,
+              "aspect": 1.8876,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.93.5.0",
+              "kind": "parcel",
+              "c": [
+                504.07,
+                970.61
+              ],
+              "d": 10.2777,
+              "delta": 50.8737,
+              "aspect": 2.7795,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.93.6.0",
+              "kind": "parcel",
+              "c": [
+                497.62,
+                969.47
+              ],
+              "d": 8.9334,
+              "delta": 39.1263,
+              "aspect": 3.5571,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.93.4.1#back",
+              "kind": "backHouse",
+              "c": [
+                535.08,
+                951.49
+              ],
+              "d": 7.9691,
+              "delta": 51.2685,
+              "aspect": 2.359,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.94.3.0",
+              "kind": "parcel",
+              "c": [
+                476.08,
+                947.77
+              ],
+              "d": 13.7619,
+              "delta": 48.9167,
+              "aspect": 3.3449,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.110.0.0#back",
+              "kind": "backHouse",
+              "c": [
+                600.43,
+                963.11
+              ],
+              "d": 8.0563,
+              "delta": 42.6221,
+              "aspect": 2.0646,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.243.2.0#back",
+              "kind": "backHouse",
+              "c": [
+                530.43,
+                421.01
+              ],
+              "d": 11.974,
+              "delta": 33.0432,
+              "aspect": 1.6461,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.243.2.1",
+              "kind": "parcel",
+              "c": [
+                558.66,
+                407.07
+              ],
+              "d": 8.5881,
+              "delta": 56.3743,
+              "aspect": 1.3695,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.243.6.1",
+              "kind": "parcel",
+              "c": [
+                536.86,
+                394.98
+              ],
+              "d": 10.3516,
+              "delta": 32.6199,
+              "aspect": 1.7823,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.243.7.1#back",
+              "kind": "backHouse",
+              "c": [
+                523.76,
+                400.79
+              ],
+              "d": 9.3093,
+              "delta": 33.0432,
+              "aspect": 4.8272,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.260.4.1",
+              "kind": "parcel",
+              "c": [
+                622.49,
+                387.49
+              ],
+              "d": 9.1843,
+              "delta": 45.7857,
+              "aspect": 2.5873,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.260.5.1",
+              "kind": "parcel",
+              "c": [
+                614.7,
+                386.96
+              ],
+              "d": 6.7993,
+              "delta": 35.0979,
+              "aspect": 3.8789,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            }
+          ],
+          "pass": false
+        }
+      ],
+      "relictNonScoring": []
+    },
+    {
+      "key": "migration",
+      "name": "Kitaqiao",
+      "tier": "city",
+      "working": [
+        {
+          "applicable": true,
+          "wallKind": "main",
+          "form": "citywall",
+          "lineKind": "drawn",
+          "lineVertices": 23,
+          "thresholds": {
+            "frontage": 5.3594,
+            "half": 2.7914,
+            "inner": 2.6797,
+            "outer": 0.0445,
+            "plotDepth": 3.9867,
+            "clearIn": 5.4711,
+            "clearOut": 2.8359,
+            "reach": 9.4578,
+            "reachMult": 1,
+            "inFrontages": {
+              "half": 0.5209,
+              "inner": 0.5,
+              "outer": 0.0083,
+              "plotDepth": 0.7439,
+              "reach": 1.7647
+            }
+          },
+          "bandDeg": 15,
+          "aspectMin": 1.25,
+          "bodiesConsidered": 2677,
+          "withinReach": 129,
+          "c1Crossing": 37,
+          "crossers": [
+            {
+              "key": "org.district.common_residential/p.123.4.1",
+              "kind": "parcel",
+              "c": [
+                18.57,
+                107.37
+              ],
+              "d": 4.6879
+            },
+            {
+              "key": "org.district.common_residential/p.123.5.1",
+              "kind": "parcel",
+              "c": [
+                22.48,
+                102.09
+              ],
+              "d": 4.9308
+            },
+            {
+              "key": "org.district.common_residential/p.123.6.1",
+              "kind": "parcel",
+              "c": [
+                24.88,
+                98.28
+              ],
+              "d": 5.4435
+            },
+            {
+              "key": "org.district.common_residential/p.123.7.1",
+              "kind": "parcel",
+              "c": [
+                27.33,
+                94.08
+              ],
+              "d": 6.1556
+            },
+            {
+              "key": "org.district.government_quarter/p.77.9.1",
+              "kind": "parcel",
+              "c": [
+                623.16,
+                562.34
+              ],
+              "d": 1.0328
+            },
+            {
+              "key": "org.district.government_quarter/p.77.9.1#back",
+              "kind": "backHouse",
+              "c": [
+                633.54,
+                555.13
+              ],
+              "d": 1.1166
+            },
+            {
+              "key": "org.district.government_quarter/p.91.7.0",
+              "kind": "parcel",
+              "c": [
+                616.09,
+                571.37
+              ],
+              "d": 0.4325
+            },
+            {
+              "key": "org.district.government_quarter/p.91.7.0#back",
+              "kind": "backHouse",
+              "c": [
+                605.08,
+                578.8
+              ],
+              "d": 2.01
+            },
+            {
+              "key": "org.district.government_quarter/p.91.8.0#back",
+              "kind": "backHouse",
+              "c": [
+                608.29,
+                581.49
+              ],
+              "d": 2.1586
+            },
+            {
+              "key": "org.district.government_quarter/p.132.0.0",
+              "kind": "parcel",
+              "c": [
+                429.1,
+                576.7
+              ],
+              "d": 1.5791
+            },
+            {
+              "key": "org.district.mages_quarter/p.119.7.0",
+              "kind": "parcel",
+              "c": [
+                535.71,
+                50.89
+              ],
+              "d": 3.2677
+            },
+            {
+              "key": "org.district.mages_quarter/p.120.0.1",
+              "kind": "parcel",
+              "c": [
+                563.7,
+                64.96
+              ],
+              "d": 0.4048
+            },
+            {
+              "key": "org.district.mages_quarter/p.138.2.0",
+              "kind": "parcel",
+              "c": [
+                573.9,
+                74.5
+              ],
+              "d": 1.9359
+            },
+            {
+              "key": "org.district.mages_quarter/p.138.3.0",
+              "kind": "parcel",
+              "c": [
+                578.53,
+                71.37
+              ],
+              "d": 3.2282
+            },
+            {
+              "key": "org.district.mages_quarter/p.138.3.0#back",
+              "kind": "backHouse",
+              "c": [
+                585.7,
+                80.61
+              ],
+              "d": 0.5348
+            },
+            {
+              "key": "org.district.mages_quarter/p.138.4.1",
+              "kind": "parcel",
+              "c": [
+                601.71,
+                94.51
+              ],
+              "d": 3.3153
+            },
+            {
+              "key": "org.district.mages_quarter/p.138.4.1#back",
+              "kind": "backHouse",
+              "c": [
+                595.41,
+                85.93
+              ],
+              "d": 0.3753
+            },
+            {
+              "key": "org.district.religious_quarter/p.59.0.0",
+              "kind": "parcel",
+              "c": [
+                395.51,
+                575.29
+              ],
+              "d": 0.3742
+            },
+            {
+              "key": "org.district.religious_quarter/p.70.5.1#back",
+              "kind": "backHouse",
+              "c": [
+                310.38,
+                600.16
+              ],
+              "d": 1.5329
+            },
+            {
+              "key": "org.district.religious_quarter/p.70.6.1",
+              "kind": "parcel",
+              "c": [
+                298.95,
+                604.97
+              ],
+              "d": 0.1154
+            }
+          ],
+          "c2": {
+            "lawfulTangential": 22,
+            "lawfulClear": 14,
+            "exemptNoAxis": 19,
+            "violations": 37
+          },
+          "c3Continuity": {
+            "inside": {
+              "n": 57,
+              "tangentialShare": 0.2281,
+              "medianDelta": 32.8
+            },
+            "outside": {
+              "n": 49,
+              "tangentialShare": 0.3061,
+              "medianDelta": 26.98
+            }
+          },
+          "offenders": [
+            {
+              "key": "org.district.common_residential/p.123.8.1",
+              "kind": "parcel",
+              "c": [
+                29.51,
+                89.41
+              ],
+              "d": 7.377,
+              "delta": 80.1233,
+              "aspect": 3.1526,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.common_residential/p.123.9.1",
+              "kind": "parcel",
+              "c": [
+                32.17,
+                86.44
+              ],
+              "d": 7.1567,
+              "delta": 80.1233,
+              "aspect": 10.6406,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.common_residential/p.145.8.0",
+              "kind": "parcel",
+              "c": [
+                37.19,
+                106.04
+              ],
+              "d": 9.0131,
+              "delta": 80.1233,
+              "aspect": 2.3334,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.common_residential/p.145.9.0",
+              "kind": "parcel",
+              "c": [
+                40.15,
+                102.74
+              ],
+              "d": 9.2622,
+              "delta": 80.1233,
+              "aspect": 4.2564,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.government_quarter/p.76.0.0",
+              "kind": "parcel",
+              "c": [
+                604.97,
+                467.46
+              ],
+              "d": 8.2475,
+              "delta": 51.6173,
+              "aspect": 3.6044,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.government_quarter/p.77.2.0",
+              "kind": "parcel",
+              "c": [
+                631.39,
+                501.71
+              ],
+              "d": 8.9026,
+              "delta": 54.9967,
+              "aspect": 2.7001,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.101.3.1",
+              "kind": "parcel",
+              "c": [
+                517.98,
+                43.77
+              ],
+              "d": 7.0908,
+              "delta": 19.3032,
+              "aspect": 3.2534,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.101.3.1#back",
+              "kind": "backHouse",
+              "c": [
+                511.21,
+                34.86
+              ],
+              "d": 3.3919,
+              "delta": 19.3032,
+              "aspect": 2.4748,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.mages_quarter/p.119.6.0",
+              "kind": "parcel",
+              "c": [
+                531.98,
+                55.21
+              ],
+              "d": 8.9298,
+              "delta": 19.3032,
+              "aspect": 3.4758,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.119.7.0#back",
+              "kind": "backHouse",
+              "c": [
+                542.42,
+                60.22
+              ],
+              "d": 7.3624,
+              "delta": 70.6968,
+              "aspect": 1.6219,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.120.0.1#back",
+              "kind": "backHouse",
+              "c": [
+                556.4,
+                54.97
+              ],
+              "d": 4.7268,
+              "delta": 19.3032,
+              "aspect": 1.645,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.120.1.1",
+              "kind": "parcel",
+              "c": [
+                568.42,
+                61.93
+              ],
+              "d": 5.5348,
+              "delta": 19.3032,
+              "aspect": 1.783,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.120.1.1#back",
+              "kind": "backHouse",
+              "c": [
+                561.95,
+                53.42
+              ],
+              "d": 9.0706,
+              "delta": 19.3032,
+              "aspect": 1.5766,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.138.1.0",
+              "kind": "parcel",
+              "c": [
+                572.2,
+                79.96
+              ],
+              "d": 7.4273,
+              "delta": 19.3032,
+              "aspect": 4.2269,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.138.2.0#back",
+              "kind": "backHouse",
+              "c": [
+                580.6,
+                83.31
+              ],
+              "d": 5.5974,
+              "delta": 19.3032,
+              "aspect": 1.8005,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.138.4.0",
+              "kind": "parcel",
+              "c": [
+                582.38,
+                68.68
+              ],
+              "d": 7.5989,
+              "delta": 19.3032,
+              "aspect": 2.4635,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.138.4.0#back",
+              "kind": "backHouse",
+              "c": [
+                589.2,
+                77.64
+              ],
+              "d": 3.8765,
+              "delta": 19.3032,
+              "aspect": 2.3524,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.138.3.1",
+              "kind": "parcel",
+              "c": [
+                597.09,
+                95.38
+              ],
+              "d": 6.5833,
+              "delta": 19.3032,
+              "aspect": 5.6998,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.226.3.1",
+              "kind": "parcel",
+              "c": [
+                637.68,
+                347.1
+              ],
+              "d": 6.7049,
+              "delta": 35.1939,
+              "aspect": 3.404,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.226.4.1",
+              "kind": "parcel",
+              "c": [
+                639.1,
+                341.38
+              ],
+              "d": 5.0763,
+              "delta": 35.1939,
+              "aspect": 1.4212,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.mages_quarter/p.226.6.1",
+              "kind": "parcel",
+              "c": [
+                650.08,
+                336.75
+              ],
+              "d": 6.0584,
+              "delta": 35.1939,
+              "aspect": 2.4517,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.244.0.0",
+              "kind": "parcel",
+              "c": [
+                639.24,
+                360.98
+              ],
+              "d": 5.6509,
+              "delta": 35.1939,
+              "aspect": 2.7681,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.mages_quarter/p.261.7.0",
+              "kind": "parcel",
+              "c": [
+                651.67,
+                408.95
+              ],
+              "d": 5.0352,
+              "delta": 35.1939,
+              "aspect": 2.3242,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.religious_quarter/p.70.2.0",
+              "kind": "parcel",
+              "c": [
+                335.7,
+                592.65
+              ],
+              "d": 7.4162,
+              "delta": 37.4831,
+              "aspect": 4.0988,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.religious_quarter/p.70.2.1#back",
+              "kind": "backHouse",
+              "c": [
+                317.85,
+                583.4
+              ],
+              "d": 9.4025,
+              "delta": 37.4831,
+              "aspect": 1.278,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.religious_quarter/p.70.3.1#back",
+              "kind": "backHouse",
+              "c": [
+                317.85,
+                588.4
+              ],
+              "d": 5.0422,
+              "delta": 89.1153,
+              "aspect": 2.0548,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.religious_quarter/p.70.5.1",
+              "kind": "parcel",
+              "c": [
+                299.49,
+                598.35
+              ],
+              "d": 5.3913,
+              "delta": 37.4831,
+              "aspect": 1.3918,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.religious_quarter/p.81.7.0",
+              "kind": "parcel",
+              "c": [
+                286.31,
+                604.41
+              ],
+              "d": 6.5771,
+              "delta": 37.4831,
+              "aspect": 7.2859,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.religious_quarter/p.82.0.0#back",
+              "kind": "backHouse",
+              "c": [
+                272.52,
+                613.22
+              ],
+              "d": 5.6727,
+              "delta": 37.4831,
+              "aspect": 6.4528,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.shadows_district/p.123.0.1",
+              "kind": "parcel",
+              "c": [
+                75.04,
+                723.69
+              ],
+              "d": 6.3591,
+              "delta": 75.0169,
+              "aspect": 2.4476,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            }
+          ],
+          "pass": false
+        }
+      ],
+      "relictNonScoring": [
+        {
+          "applicable": true,
+          "wallKind": "old-core",
+          "form": "citywall",
+          "lineKind": "drawn",
+          "lineVertices": 26,
+          "thresholds": {
+            "frontage": 5.3594,
+            "half": 1.4738,
+            "inner": 0.0445,
+            "outer": 0.0445,
+            "plotDepth": 3.9867,
+            "clearIn": 1.5183,
+            "clearOut": 1.5183,
+            "reach": 5.505,
+            "reachMult": 1,
+            "inFrontages": {
+              "half": 0.275,
+              "inner": 0.0083,
+              "outer": 0.0083,
+              "plotDepth": 0.7439,
+              "reach": 1.0272
+            }
+          },
+          "bandDeg": 15,
+          "aspectMin": 1.25,
+          "bodiesConsidered": 2677,
+          "withinReach": 42,
+          "c1Crossing": 0,
+          "crossers": [],
+          "c2": {
+            "lawfulTangential": 17,
+            "lawfulClear": 17,
+            "exemptNoAxis": 8,
+            "violations": 0
+          },
+          "c3Continuity": {
+            "inside": {
+              "n": 17,
+              "tangentialShare": 0.5882,
+              "medianDelta": 10.26
+            },
+            "outside": {
+              "n": 17,
+              "tangentialShare": 0.4118,
+              "medianDelta": 21.38
+            }
+          },
+          "offenders": [],
+          "pass": true
+        }
+      ]
+    },
+    {
+      "key": "year-018",
+      "name": "Mahabagh",
+      "tier": "town",
+      "working": [],
+      "relictNonScoring": []
+    },
+    {
+      "key": "year-100",
+      "name": "Mahabagh",
+      "tier": "town",
+      "working": [
+        {
+          "applicable": true,
+          "wallKind": "main",
+          "form": "palisade",
+          "lineKind": "drawn",
+          "lineVertices": 115,
+          "thresholds": {
+            "frontage": 4.8603,
+            "half": 4.6658,
+            "inner": 2.4301,
+            "outer": 4.8603,
+            "plotDepth": 4.7291,
+            "clearIn": 7.096,
+            "clearOut": 9.5261,
+            "reach": 14.2552,
+            "reachMult": 1,
+            "inFrontages": {
+              "half": 0.96,
+              "inner": 0.5,
+              "outer": 1,
+              "plotDepth": 0.973,
+              "reach": 2.933
+            }
+          },
+          "bandDeg": 15,
+          "aspectMin": 1.25,
+          "bodiesConsidered": 1904,
+          "withinReach": 2,
+          "c1Crossing": 0,
+          "crossers": [],
+          "c2": {
+            "lawfulTangential": 0,
+            "lawfulClear": 0,
+            "exemptNoAxis": 1,
+            "violations": 1
+          },
+          "c3Continuity": {
+            "inside": {
+              "n": 0,
+              "tangentialShare": null,
+              "medianDelta": null
+            },
+            "outside": {
+              "n": 1,
+              "tangentialShare": 0,
+              "medianDelta": 27.5
+            }
+          },
+          "offenders": [
+            {
+              "key": "hab|32773#0",
+              "kind": "steading",
+              "c": [
+                673.12,
+                1007.11
+              ],
+              "d": 6.8294,
+              "delta": 27.5019,
+              "aspect": 1.4,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            }
+          ],
+          "pass": false
+        }
+      ],
+      "relictNonScoring": []
+    },
+    {
+      "key": "crossing",
+      "name": "Mahabagh",
+      "tier": "town",
+      "working": [
+        {
+          "applicable": true,
+          "wallKind": "main",
+          "form": "palisade",
+          "lineKind": "drawn",
+          "lineVertices": 100,
+          "thresholds": {
+            "frontage": 5.543,
+            "half": 5.3213,
+            "inner": 2.7715,
+            "outer": 5.543,
+            "plotDepth": 5.6072,
+            "clearIn": 8.0928,
+            "clearOut": 10.8644,
+            "reach": 16.4716,
+            "reachMult": 1,
+            "inFrontages": {
+              "half": 0.96,
+              "inner": 0.5,
+              "outer": 1,
+              "plotDepth": 1.0116,
+              "reach": 2.9716
+            }
+          },
+          "bandDeg": 15,
+          "aspectMin": 1.25,
+          "bodiesConsidered": 1850,
+          "withinReach": 191,
+          "c1Crossing": 20,
+          "crossers": [
+            {
+              "key": "org.district.government_quarter/p.66.0.0#back",
+              "kind": "backHouse",
+              "c": [
+                595.14,
+                538.45
+              ],
+              "d": 2.3361
+            },
+            {
+              "key": "org.district.government_quarter/p.66.2.0",
+              "kind": "parcel",
+              "c": [
+                617.45,
+                535.15
+              ],
+              "d": 1.6297
+            },
+            {
+              "key": "org.district.government_quarter/p.66.2.0#back",
+              "kind": "backHouse",
+              "c": [
+                609.43,
+                540.24
+              ],
+              "d": 0.7476
+            },
+            {
+              "key": "org.district.government_quarter/p.80.1.1#back",
+              "kind": "backHouse",
+              "c": [
+                498.27,
+                504.45
+              ],
+              "d": 0.2296
+            },
+            {
+              "key": "org.district.government_quarter/p.80.2.1#back",
+              "kind": "backHouse",
+              "c": [
+                498.63,
+                508.36
+              ],
+              "d": 2.5217
+            },
+            {
+              "key": "org.district.government_quarter/p.81.0.0#back",
+              "kind": "backHouse",
+              "c": [
+                535.4,
+                537.85
+              ],
+              "d": 6.8064
+            },
+            {
+              "key": "org.district.market_quarter/p.36.3.0",
+              "kind": "parcel",
+              "c": [
+                333.75,
+                956.53
+              ],
+              "d": 1.3904
+            },
+            {
+              "key": "org.district.market_quarter/p.40.7.1#back",
+              "kind": "backHouse",
+              "c": [
+                134.06,
+                760.48
+              ],
+              "d": 7.3793
+            },
+            {
+              "key": "org.district.market_quarter/p.41.1.1",
+              "kind": "parcel",
+              "c": [
+                100.87,
+                717.78
+              ],
+              "d": 6.7319
+            },
+            {
+              "key": "org.district.market_quarter/p.57.1.0",
+              "kind": "parcel",
+              "c": [
+                102.22,
+                703.36
+              ],
+              "d": 0.7959
+            },
+            {
+              "key": "org.district.market_quarter/p.58.2.0#back",
+              "kind": "backHouse",
+              "c": [
+                93.14,
+                674.5
+              ],
+              "d": 1.0182
+            },
+            {
+              "key": "org.district.market_quarter~1/p.149.1.0#back",
+              "kind": "backHouse",
+              "c": [
+                828.76,
+                959.17
+              ],
+              "d": 5.7587
+            },
+            {
+              "key": "org.district.market_quarter~1/p.149.2.0#back",
+              "kind": "backHouse",
+              "c": [
+                832.94,
+                965.5
+              ],
+              "d": 1.4896
+            },
+            {
+              "key": "org.district.market_quarter~1/p.149.1.1#back",
+              "kind": "backHouse",
+              "c": [
+                814.13,
+                973.11
+              ],
+              "d": 3.7931
+            },
+            {
+              "key": "org.district.market_quarter~1/p.167.5.0#back",
+              "kind": "backHouse",
+              "c": [
+                760.51,
+                983.79
+              ],
+              "d": 2.9612
+            },
+            {
+              "key": "org.district.market_quarter~1/p.167.6.0",
+              "kind": "parcel",
+              "c": [
+                777.57,
+                976.38
+              ],
+              "d": 1.024
+            },
+            {
+              "key": "org.district.noxious_trades_quarter/p.7.1.1#back",
+              "kind": "backHouse",
+              "c": [
+                232.29,
+                893.81
+              ],
+              "d": 8.1499
+            },
+            {
+              "key": "org.district.noxious_trades_quarter/p.20.4.0",
+              "kind": "parcel",
+              "c": [
+                222.5,
+                867.47
+              ],
+              "d": 1.8744
+            },
+            {
+              "key": "mass.org.district.noxious_trades_quarter|0|7|1|0|residential#0",
+              "kind": "mass",
+              "c": [
+                213.92,
+                884.74
+              ],
+              "d": 18.5453
+            },
+            {
+              "key": "inst.town_watch#0#0",
+              "kind": "institution",
+              "c": [
+                600.36,
+                544.44
+              ],
+              "d": 4.107
+            }
+          ],
+          "c2": {
+            "lawfulTangential": 19,
+            "lawfulClear": 26,
+            "exemptNoAxis": 28,
+            "violations": 98
+          },
+          "c3Continuity": {
+            "inside": {
+              "n": 84,
+              "tangentialShare": 0.131,
+              "medianDelta": 46.13
+            },
+            "outside": {
+              "n": 75,
+              "tangentialShare": 0.1067,
+              "medianDelta": 36
+            }
+          },
+          "offenders": [
+            {
+              "key": "org.district.government_quarter/p.36.4.1",
+              "kind": "parcel",
+              "c": [
+                676.95,
+                500.5
+              ],
+              "d": 15.4609,
+              "delta": 18.2559,
+              "aspect": 5.266,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.government_quarter/p.36.5.1",
+              "kind": "parcel",
+              "c": [
+                676.9,
+                507.23
+              ],
+              "d": 9.0276,
+              "delta": 18.2559,
+              "aspect": 1.2753,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.36.5.1#back",
+              "kind": "backHouse",
+              "c": [
+                691.49,
+                497.11
+              ],
+              "d": 14.5763,
+              "delta": 18.2559,
+              "aspect": 2.2999,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.government_quarter/p.51.1.1",
+              "kind": "parcel",
+              "c": [
+                627.45,
+                524.82
+              ],
+              "d": 7.9989,
+              "delta": 15.1651,
+              "aspect": 5.2617,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.51.2.1",
+              "kind": "parcel",
+              "c": [
+                628.84,
+                528.1
+              ],
+              "d": 4.4423,
+              "delta": 15.1651,
+              "aspect": 4.2319,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.51.2.1#back",
+              "kind": "backHouse",
+              "c": [
+                640.7,
+                519.96
+              ],
+              "d": 8.1198,
+              "delta": 15.1651,
+              "aspect": 2.2863,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.52.0.1#back",
+              "kind": "backHouse",
+              "c": [
+                647.43,
+                531.34
+              ],
+              "d": 4.8029,
+              "delta": 16.5331,
+              "aspect": 2.8973,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.66.0.0",
+              "kind": "parcel",
+              "c": [
+                611.13,
+                527.52
+              ],
+              "d": 10.9404,
+              "delta": 15.1651,
+              "aspect": 3.7055,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.government_quarter/p.66.1.0",
+              "kind": "parcel",
+              "c": [
+                614.06,
+                530.58
+              ],
+              "d": 7.0738,
+              "delta": 15.1651,
+              "aspect": 1.4268,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.66.1.0#back",
+              "kind": "backHouse",
+              "c": [
+                604.9,
+                536.76
+              ],
+              "d": 3.1299,
+              "delta": 60.4496,
+              "aspect": 1.2571,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.66.0.1",
+              "kind": "parcel",
+              "c": [
+                557.58,
+                526.44
+              ],
+              "d": 11.6452,
+              "delta": 45.8204,
+              "aspect": 1.5067,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.government_quarter/p.66.1.1",
+              "kind": "parcel",
+              "c": [
+                562.44,
+                528.95
+              ],
+              "d": 10.1142,
+              "delta": 45.8204,
+              "aspect": 1.6594,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.67.0.0",
+              "kind": "parcel",
+              "c": [
+                624.2,
+                546.21
+              ],
+              "d": 11.0597,
+              "delta": 15.1651,
+              "aspect": 2.7602,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.government_quarter/p.67.1.0",
+              "kind": "parcel",
+              "c": [
+                627.02,
+                549.22
+              ],
+              "d": 14.8402,
+              "delta": 15.1651,
+              "aspect": 1.6205,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.government_quarter/p.79.0.1",
+              "kind": "parcel",
+              "c": [
+                464.44,
+                485.5
+              ],
+              "d": 6.4799,
+              "delta": 73.6317,
+              "aspect": 1.3138,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.government_quarter/p.80.1.1",
+              "kind": "parcel",
+              "c": [
+                486.68,
+                512.51
+              ],
+              "d": 13.4047,
+              "delta": 74.9944,
+              "aspect": 5.1433,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.government_quarter/p.80.2.1",
+              "kind": "parcel",
+              "c": [
+                488.13,
+                515.65
+              ],
+              "d": 14.8681,
+              "delta": 74.9944,
+              "aspect": 2.5748,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.government_quarter/p.81.0.0",
+              "kind": "parcel",
+              "c": [
+                548.26,
+                528.91
+              ],
+              "d": 6.9707,
+              "delta": 61.6354,
+              "aspect": 1.7881,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.20.0.1",
+              "kind": "parcel",
+              "c": [
+                343.05,
+                973.83
+              ],
+              "d": 16.4487,
+              "delta": 64.4163,
+              "aspect": 6.8591,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.34.0.1",
+              "kind": "parcel",
+              "c": [
+                443.88,
+                979.38
+              ],
+              "d": 8.9728,
+              "delta": 58.406,
+              "aspect": 1.5198,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.35.2.1",
+              "kind": "parcel",
+              "c": [
+                420,
+                953.68
+              ],
+              "d": 14.2408,
+              "delta": 31.594,
+              "aspect": 5.6137,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.36.0.0",
+              "kind": "parcel",
+              "c": [
+                347.39,
+                969.2
+              ],
+              "d": 11.0371,
+              "delta": 25.5837,
+              "aspect": 1.769,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.36.1.0",
+              "kind": "parcel",
+              "c": [
+                345.8,
+                963.88
+              ],
+              "d": 6.1473,
+              "delta": 64.4163,
+              "aspect": 1.3807,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.36.1.0#back",
+              "kind": "backHouse",
+              "c": [
+                356.55,
+                949.74
+              ],
+              "d": 9.8697,
+              "delta": 64.4163,
+              "aspect": 2.9277,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.36.6.0",
+              "kind": "parcel",
+              "c": [
+                314.17,
+                943.88
+              ],
+              "d": 5.5502,
+              "delta": 21.5805,
+              "aspect": 4.2844,
+              "inside": true,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.41.0.1",
+              "kind": "parcel",
+              "c": [
+                133.1,
+                739.42
+              ],
+              "d": 15.9289,
+              "delta": 63.7841,
+              "aspect": 3.058,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.58.0.0#back",
+              "kind": "backHouse",
+              "c": [
+                106.29,
+                678.83
+              ],
+              "d": 10.2846,
+              "delta": 54.3095,
+              "aspect": 5.1314,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.58.1.0",
+              "kind": "parcel",
+              "c": [
+                91.21,
+                690.37
+              ],
+              "d": 7.5128,
+              "delta": 54.3095,
+              "aspect": 2.3855,
+              "inside": false,
+              "verdict": "VIOLATION_IN_CLEAR_ZONE_NOT_TANGENTIAL"
+            },
+            {
+              "key": "org.district.market_quarter/p.58.2.0",
+              "kind": "parcel",
+              "c": [
+                85.95,
+                686.03
+              ],
+              "d": 11.2743,
+              "delta": 54.3095,
+              "aspect": 1.583,
+              "inside": false,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            },
+            {
+              "key": "org.district.market_quarter/p.58.2.1#back",
+              "kind": "backHouse",
+              "c": [
+                104.56,
+                660.46
+              ],
+              "d": 14.0111,
+              "delta": 54.3095,
+              "aspect": 3.7757,
+              "inside": true,
+              "verdict": "VIOLATION_STRETCH_NOT_CLEAR"
+            }
+          ],
+          "pass": false
+        }
+      ],
+      "relictNonScoring": []
+    }
+  ],
+  "totals": {
+    "leaves": 18,
+    "scoringCircuits": 12,
+    "withinReach": 1621,
+    "c1Crossing": 237,
+    "c2Violations": 688,
+    "lawfulTangential": 212,
+    "lawfulClear": 246,
+    "exemptNoAxis": 238,
+    "relictCrossing": 0,
+    "relictViolations": 0
+  },
+  "pass": false
+}

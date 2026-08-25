@@ -1,0 +1,42 @@
+{
+  "defs": [
+    {
+      "definition": "drawn-OPEN  (primary)",
+      "c1": 237,
+      "c2": 688,
+      "near": 1621
+    },
+    {
+      "definition": "drawn-CLOSED",
+      "c1": 238,
+      "c2": 692,
+      "near": 1626
+    },
+    {
+      "definition": "claimLine-OPEN",
+      "c1": 225,
+      "c2": 718,
+      "near": 1608
+    }
+  ],
+  "leaves": [
+    "thorp",
+    "hamlet",
+    "village",
+    "town",
+    "town-2",
+    "city",
+    "metropolis",
+    "polycentric",
+    "highwater",
+    "mountain",
+    "fjord",
+    "siege",
+    "plague",
+    "famine",
+    "migration",
+    "year-018",
+    "year-100",
+    "crossing"
+  ]
+}

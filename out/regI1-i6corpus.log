@@ -1,0 +1,26 @@
+── i6 · F3 FREESTANDING MASS DENSITY INTRAMUROS · BASE vs ALL WAVES ARMED, at the REG-4 seal
+   (all five flags: --fuse --rampart --shapes --market --footprint)
+
+  thorp         N=1200  density 2.8647 → 2.8628 (-0.1%)  masses 6→6 (0%)  ink 2094.44→2095.83 (0.1%)  meanFootprint 349.07→349.31 (0.1%)
+  hamlet        N=2200  density 9.16 → 5.5142 (-39.8%)  masses 44→33 (-25%)  ink 4803.51→5984.5 (24.6%)  meanFootprint 109.17→181.35 (66.1%)
+  village       N=2200  density 9.9497 → 5.5837 (-43.9%)  masses 101→62 (-38.6%)  ink 10151.03→11103.72 (9.4%)  meanFootprint 100.51→179.09 (78.2%)
+  town          N=5800  density 11.6969 → 10.3168 (-11.8%)  masses 770→684 (-11.2%)  ink 65829.19→66299.58 (0.7%)  meanFootprint 85.49→96.93 (13.4%)
+  town-2        N=4200  density 7.1302 → 6.4943 (-8.9%)  masses 701→645 (-8%)  ink 98313.66→99317.18 (1%)  meanFootprint 140.25→153.98 (9.8%)
+  city          N=4600  density 8.2905 → 7.4461 (-10.2%)  masses 988→892 (-9.7%)  ink 119172.21→119794.47 (0.5%)  meanFootprint 120.62→134.3 (11.3%)
+  metropolis    N=5200  density 10.6177 → 9.5392 (-10.2%)  masses 1598→1433 (-10.3%)  ink 150502.88→150221.71 (-0.2%)  meanFootprint 94.18→104.83 (11.3%)
+  polycentric   N=6200  density 15.8441 → 13.8432 (-12.6%)  masses 779→697 (-10.5%)  ink 49166.52→50349.48 (2.4%)  meanFootprint 63.11→72.24 (14.5%)
+  highwater     N=5400  density 7.5871 → 7.2993 (-3.8%)  masses 727→704 (-3.2%)  ink 95820.27→96447.43 (0.7%)  meanFootprint 131.8→137 (3.9%)
+  mountain      N=2400  density 8.9921 → 6.7115 (-25.4%)  masses 66→52 (-21.2%)  ink 7339.76→7747.92 (5.6%)  meanFootprint 111.21→149 (34%)
+  fjord         N=6000  density 11.3667 → 10.3421 (-9%)  masses 834→753 (-9.7%)  ink 73372.44→72809.08 (-0.8%)  meanFootprint 87.98→96.69 (9.9%)
+  siege         N=5800  density 11.6969 → 10.3168 (-11.8%)  masses 770→684 (-11.2%)  ink 65829.19→66299.58 (0.7%)  meanFootprint 85.49→96.93 (13.4%)
+  plague        N=5800  density 11.6969 → 10.3168 (-11.8%)  masses 770→684 (-11.2%)  ink 65829.19→66299.58 (0.7%)  meanFootprint 85.49→96.93 (13.4%)
+  famine        N=5800  density 11.6969 → 10.3168 (-11.8%)  masses 770→684 (-11.2%)  ink 65829.19→66299.58 (0.7%)  meanFootprint 85.49→96.93 (13.4%)
+  migration     N=4600  density 8.2905 → 7.4461 (-10.2%)  masses 988→892 (-9.7%)  ink 119172.21→119794.47 (0.5%)  meanFootprint 120.62→134.3 (11.3%)
+  year-018      N=5800  density 11.6244 → 10.2988 (-11.4%)  masses 840→749 (-10.8%)  ink 72261.56→72727.2 (0.6%)  meanFootprint 86.03→97.1 (12.9%)
+  year-100      N=5800  density 11.6258 → 10.2852 (-11.5%)  masses 840→748 (-11%)  ink 72252.94→72726.1 (0.7%)  meanFootprint 86.02→97.23 (13%)
+  crossing      N=5600  density 10.0358 → 9.1546 (-8.8%)  masses 772→710 (-8%)  ink 76924.52→77556.35 (0.8%)  meanFootprint 99.64→109.23 (9.6%)
+
+── BASE-COLUMN RECONCILIATION vs out/baselines.json (recorded at d1b32e339)
+   ok     all 18 BASE rows reproduce the recorded baseline exactly
+
+REGI1_I6 rows=18 json=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg-instruments/out/regI1-i6corpus.json

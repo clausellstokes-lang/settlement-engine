@@ -1,0 +1,44 @@
+  plate BASE-city     squint=PASS contrast=FAIL hue=FAIL landmark=FAIL reg0Ratio=0.4958 runs=1709
+  plate BASE-village  squint=PASS contrast=FAIL hue=PASS landmark=FAIL reg0Ratio=0.6525 runs=176
+  plate BASE-town     squint=PASS contrast=FAIL hue=FAIL landmark=FAIL reg0Ratio=0.5228 runs=1478
+  plate SPEC-city     squint=PASS contrast=PASS hue=PASS landmark=FAIL reg0Ratio=0.5238 runs=1823
+  plate SPEC-village  squint=PASS contrast=PASS hue=PASS landmark=FAIL reg0Ratio=0.6467 runs=204
+  i6    thorp         N=1200  density 2.8647 → 2.8647 (0%)  masses 6→6  ink 2094.44→2094.44  [SUPERSEDED 0.25→0.25, 0%]
+  i6    hamlet        N=2200  density 9.16 → 8.9314 (-2.5%)  masses 44→43  ink 4803.51→4814.46  [SUPERSEDED 0.1346→0.2444, 81.6%]
+  i6    village       N=2200  density 9.9497 → 9.5954 (-3.6%)  masses 101→98  ink 10151.03→10213.22  [SUPERSEDED 0.1655→0.2243, 35.5%]
+  i6    town          N=5800  density 11.6969 → 11.4135 (-2.4%)  masses 770→754  ink 65829.19→66062.22  [SUPERSEDED 0.1282→0.174, 35.7%]
+  i6    town-2        N=4200  density 7.1302 → 7.06 (-1%)  masses 701→696  ink 98313.66→98584.24  [SUPERSEDED 0.0547→0.0653, 19.4%]
+  i6    city          N=4600  density 8.2905 → 7.9264 (-4.4%)  masses 988→946  ink 119172.21→119347.54  [SUPERSEDED 0.0652→0.0807, 23.8%]
+  i6    metropolis    N=5200  density 10.6177 → 10.4321 (-1.7%)  masses 1598→1574  ink 150502.88→150881.1  [SUPERSEDED 0.0661→0.0828, 25.3%]
+  i6    polycentric   N=6200  density 15.8441 → 15.3441 (-3.2%)  masses 779→757  ink 49166.52→49334.83  [SUPERSEDED 0.1812→0.2436, 34.4%]
+  i6    highwater     N=5400  density 7.5871 → 7.4989 (-1.2%)  masses 727→721  ink 95820.27→96146.91  [SUPERSEDED 0.0938→0.1255, 33.8%]
+  i6    mountain      N=2400  density 8.9921 → 8.5065 (-5.4%)  masses 66→63  ink 7339.76→7406.08  [SUPERSEDED 0.0918→0.1169, 27.3%]
+  i6    fjord         N=6000  density 11.3667 → 11.1203 (-2.2%)  masses 834→818  ink 73372.44→73559.06  [SUPERSEDED 0.1475→0.199, 34.9%]
+  i6    siege         N=5800  density 11.6969 → 11.4135 (-2.4%)  masses 770→754  ink 65829.19→66062.22  [SUPERSEDED 0.1282→0.174, 35.7%]
+  i6    plague        N=5800  density 11.6969 → 11.4135 (-2.4%)  masses 770→754  ink 65829.19→66062.22  [SUPERSEDED 0.1282→0.174, 35.7%]
+  i6    famine        N=5800  density 11.6969 → 11.4135 (-2.4%)  masses 770→754  ink 65829.19→66062.22  [SUPERSEDED 0.1282→0.174, 35.7%]
+  i6    migration     N=4600  density 8.2905 → 7.9264 (-4.4%)  masses 988→946  ink 119172.21→119347.54  [SUPERSEDED 0.0652→0.0807, 23.8%]
+  i6    year-018      N=5800  density 11.6244 → 11.3775 (-2.1%)  masses 840→825  ink 72261.56→72511.56  [SUPERSEDED 0.1226→0.1667, 36%]
+  i6    year-100      N=5800  density 11.6258 → 11.3788 (-2.1%)  masses 840→825  ink 72252.94→72502.94  [SUPERSEDED 0.1226→0.1667, 36%]
+  i6    crossing      N=5600  density 10.0358 → 9.7173 (-3.2%)  masses 772→750  ink 76924.52→77181.54  [SUPERSEDED 0.1309→0.1884, 43.9%]
+  model thorp         route=PASS (2/2 gates, floor 8.87)  chunking=PASS (1/1 in [1,9])
+  model hamlet        route=PASS (3/3 gates, floor 4.65)  chunking=FAIL (1/2 in [2,9])
+  model village       route=PASS (2/2 gates, floor 4.94)  chunking=PASS (2/2 in [2,9])
+  model town          route=PASS (2/2 gates, floor 3.06)  chunking=FAIL (2/6 in [5,9])
+  model town-2        route=PASS (2/2 gates, floor 4.29)  chunking=FAIL (3/7 in [5,9])
+  model city          route=PASS (6/6 gates, floor 3.87)  chunking=PASS (6/8 in [5,9])
+  model metropolis    route=FAIL (5/5 gates, floor 3.44)  chunking=PASS (6/9 in [5,9])
+  model polycentric   route=PASS (1/1 gates, floor 2.91)  chunking=FAIL (4/8 in [5,9])
+  model highwater     route=PASS (2/2 gates, floor 3.3)  chunking=PASS (4/4 in [4,9])
+  model mountain      route=PASS (2/2 gates, floor 4.32)  chunking=PASS (1/1 in [1,9])
+  model fjord         route=PASS (4/4 gates, floor 2.99)  chunking=PASS (3/3 in [3,9])
+  model siege         route=PASS (2/2 gates, floor 3.06)  chunking=FAIL (2/6 in [5,9])
+  model plague        route=PASS (2/2 gates, floor 3.06)  chunking=FAIL (2/6 in [5,9])
+  model famine        route=PASS (2/2 gates, floor 3.06)  chunking=FAIL (2/6 in [5,9])
+  model migration     route=PASS (6/6 gates, floor 3.87)  chunking=PASS (6/8 in [5,9])
+  model year-018      route=PASS (3/3 gates, floor 3.06)  chunking=FAIL (2/4 in [4,9])
+  model year-100      route=PASS (2/2 gates, floor 3.06)  chunking=FAIL (2/4 in [4,9])
+  model crossing      route=PASS (3/3 gates, floor 3.28)  chunking=FAIL (4/7 in [5,9])
+
+BASELINES → /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg-instruments/out/baselines.json  (148.2 KB)
+BASELINES_DONE

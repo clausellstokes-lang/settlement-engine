@@ -1,0 +1,32 @@
+A0 baseline (law)        straddlers=0/12  worstMinorityShare=0  sampled=196626  COMPLETE — every region examined, on a 1-unit lattice inside each region's bounds
+X0 baseline (crosscheck) straddlers=0/12  worstMinSide=0.008  ring=closedPolygon
+A1 ring×0.60             crosscheck straddlers=4/12
+A2 planted straddler     law straddlers=1 keys=["CONTROL.planted_straddler"]  |  crosscheck=1
+A3 PRE-CURE partition    law straddlers=5/6 worst=0.265  |  crosscheck=5/6 worst=0.2871
+B0 baseline              outside=0/1832 members, suburb=772, drawn=2604
+B1 plant-site sweep      step=0.25, 6708274 in-body points — NONE, every point of every walled epoch body is held by a ring at or after its own epoch
+   ⭐ that NONE is the structural reason a planted body cannot be this arm's control: MEMBER ⇒ inside a walled
+     epoch body ⇒ (at this seal) inside its own ring ⇒ HELD. Census B therefore CANNOT return positive while §240.1
+     holds, so its zero is not independent of the hull zero — which is exactly why B3 below plants on the hull.
+B1 MEASURED THRESHOLD    ⛔ NONE — even rings×0.9999 strands nothing; the ring operand is DEAD, not merely gentle
+B2 only the epoch-1 ring   outside=787/1832  (baseline 0/1832)
+B3 §240.1 baseline       epoch2:26v out=0 rescued=0  |  epoch1:26v out=0 rescued=0
+B3a planted far vertex   outside=1 (baseline 0) at 1678,1739
+B3b half-ring rescue     site 538,456 → outside=0 (baseline 0) rescued=1 (baseline 0)
+XC geometry vs the cure's own wallSide stamp: 0 disagreement(s)
+
+── LIVENESS · a zero is what a DEAD instrument returns
+   ok     A1 a shrunk circuit makes districts straddle
+   ok     A2 the law catches a planted straddler, exactly one more
+   ok     A2 the crosscheck catches it too
+   ok     A3 the census is POSITIVE on the pre-cure partition (real geometry, real defect)
+   BROKEN B1 a strand threshold EXISTS above the floor (the ring operand is live at all)
+   BROKEN B1 the control FIRES at its own measured threshold
+   BROKEN B1 the threshold is SHARP — zero just above it, so it is the true edge and not a search artefact
+   BROKEN B1 the arm COUNTS rather than flips — a deeper shrink strands strictly more
+   ok     B1 the REAL census still reads its zero at scale 1.0 with the control live
+   ok     B2 withholding the later rings strands bodies (the clause is load-bearing)
+   ok     B3a §240.1 counts a planted out-of-ring hull vertex, exactly one more
+   ok     B3b the half-ring closedPolygon RESCUE clause is load-bearing (a vertex outside the open ring but inside the closed one is rescued, not counted)
+
+I10_CONTROLS BROKEN

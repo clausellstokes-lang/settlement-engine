@@ -1,0 +1,267 @@
+════════════════════════ i1-squint --controls ════════════════════════
+   squint.street   Δ=1.6424   PASS   [1−OVL=0.7011 AUC=0.9 | 6183 role px / 8924 ground px, lum, σg=33.86]
+   squint.wall     Δ=0.0291   FAIL   [1−OVL=0.4632 AUC=0.5696 | 266 role px / 8924 ground px, lum, σg=33.86]
+   squint.water    Δ=4.666    PASS   [1−OVL=0.8602 AUC=0.9494 | 10234 role px / 8924 ground px, blueRed, σg=7.5]
+   PLATE: FAIL
+
+── CTRL-grey-water  (water fill := greens role #9FA47A)
+   squint.street   Δ=1.5706   PASS   [1−OVL=0.6806 AUC=0.8817 | 6183 role px / 8924 ground px, lum, σg=33.82]
+   squint.wall     Δ=2.2462   PASS   [1−OVL=0.8632 AUC=0.9844 | 266 role px / 8924 ground px, lum, σg=33.82]
+   squint.water    Δ=0.6411   FAIL   [1−OVL=0.8399 AUC=0.7901 | 10234 role px / 8924 ground px, blueRed, σg=7.51]
+   PLATE: FAIL
+
+── CTRL-flat-page  (every pixel := plate mean colour)
+   squint.street   Δ=0        FAIL   [1−OVL=0 AUC=0.5 | 6183 role px / 8924 ground px, lum, σg=0]
+   squint.wall     Δ=0        FAIL   [1−OVL=0 AUC=0.5 | 266 role px / 8924 ground px, lum, σg=0]
+   squint.water    Δ=0        FAIL   [1−OVL=0 AUC=0.5 | 10234 role px / 8924 ground px, blueRed, σg=0]
+   PLATE: FAIL
+
+── LIVENESS · a control that cannot fail proves nothing
+   ok     flat-street collapses street
+   ok     flat-street leaves wall standing
+   ok     flat-street leaves water standing
+   ok     flat-wall   collapses wall
+   ok     flat-wall   leaves street standing
+   ok     grey-water  collapses water
+   ok     grey-water  leaves street standing
+   ok     flat-page   scores exactly 0 on all
+
+── CHARTER POLARITY  expected "BEFORE fails, AFTER passes" → measured BEFORE=PASS AFTER=PASS  ⇒ REFUTED
+
+I1_CONTROLS LIVE
+exit=0
+════════════════════════ i2-route-trace --controls ════════════════════════
+P  real city        floor=3.87 (the leaf's own web.widths.blockLane)  reachable=6/6  passing=6  verdict=PASS
+     gate.E2.road.high.corridor.0~frame.0             width=16 len=541.3 straight=500.41 detour=1.0817 PASS
+     gate.E2.road.approach.corridor.1~frame.1         width=10 len=486.23 straight=382.32 detour=1.2718 PASS
+     gate.E2.road.approach.corridor.2~frame.2         width=10 len=410.95 straight=343.22 detour=1.1973 PASS
+     gate.E1.road.high.corridor.0~frame.0             width=16 len=454.16 straight=419.96 detour=1.0815 PASS
+     gate.E1.road.approach.corridor.1~frame.1         width=10 len=659.76 straight=272.12 detour=2.4245 PASS
+     gate.E1.road.approach.nucleus.0~spur.1           width=10.49 len=55.94 straight=52.64 detour=1.0627 PASS
+N1 heart ring-severed  reachable=1/6  verdict=FAIL  reason="DISCONNECTED — no path through the street void at any width"
+N2 absurd floor=50     passing=0/6  widths still reported: 16, 10, 10, 16, 10, 10.49
+N3 gate in the wilderness @1000,115 (289 units from any void)  reachable=0/2  reason="gate is not within 40 units of any street void"
+
+── LIVENESS
+   ok     the real city routes every live gate to its heart
+   ok     ring-severing disconnects every gate OUTSIDE the cut
+   ok     …and leaves the gate INSIDE the cut still routed
+   ok     an absurd floor fails every gate WITHOUT losing the measurement
+   ok     a gate in an empty corner is unreachable
+
+I2_CONTROLS LIVE
+exit=0
+════════════════════════ i3-chunking --controls ════════════════════════
+P  real city      legible=6/8 band=[5,9] chunks=7 wall=true → PASS
+     125804.08  legible  district.mages_quarter
+      49640.54  legible  district.shadows_district
+      36008.79  legible  district.common_residential
+      13665.66  legible  district.government_quarter
+       8288.05  legible  district.mages_quarter~faubourg
+       5090.58  legible  district.common_residential~faubourg
+       4467.29  DUST     district.religious_quarter
+       2890.52  DUST     district.shadows_district~faubourg
+N1 30 regions    legible=30/30 band=[5,9] → FAIL
+N2 all dust      legible=0/8 band=[5,9] → FAIL
+B  one region    legible=1/1 band=[1,9] → PASS  (tier conditioning: a thorp is not convicted for being small)
+
+── LIVENESS
+   ok     the real city sits in band
+   ok     thirty regions fail HIGH
+   ok     all-dust fails LOW and still reports its denominator
+   ok     a single-region leaf PASSES on band [1,9]
+
+I3_CONTROLS LIVE
+exit=0
+════════════════════════ i4-landmark-salience --controls ════════════════════════
+      Δ=0.8426   area=507.31    px=653    FAIL  cat:multiple_courthouses
+      Δ=0.2219   area=469.51    px=600    FAIL  cat:cartographer_s_guild
+      Δ=2.5509   area=256.77    px=334    pass  (unanchored)
+      Δ=0.4032   area=250.27    px=329    FAIL  (unanchored)
+   DECOYS     groupMean=0.7339  → FAIL (correct)
+      Δ=0.9      area=507.31    px=653    DECOY@135,251
+      Δ=1.2353   area=469.51    px=599    DECOY@267,498
+      Δ=0.3668   area=256.77    px=333    DECOY@604,499
+      Δ=0.4333   area=250.27    px=328    DECOY@741,487
+
+── CTRL-loud-landmark   fabric μ=110.32 σ=37.5 over 156613 px
+   LANDMARKS  groupMean=2.0847  → PASS
+      Δ=2.1886   area=507.31    px=653    pass  cat:multiple_courthouses
+      Δ=2.1752   area=469.51    px=600    pass  cat:cartographer_s_guild
+      Δ=1.8996   area=256.77    px=334    pass  (unanchored)
+      Δ=2.0755   area=250.27    px=329    pass  (unanchored)
+   DECOYS     groupMean=0.7348  → FAIL (correct)
+      Δ=0.9006   area=507.31    px=653    DECOY@135,251
+      Δ=1.2352   area=469.51    px=599    DECOY@267,498
+      Δ=0.3685   area=256.77    px=333    DECOY@604,499
+      Δ=0.4349   area=250.27    px=328    DECOY@741,487
+
+── LIVENESS · a decoy that scores like an anchor means the instrument measures ink, not hierarchy
+   ⚠ FINDING: on the SEALED plates the real anchors do NOT beat matched decoys (AFTER 0.422 vs decoys 0.8085; BEFORE 1.0047 vs 0.7339).
+   ok     the loud-landmark plate is detected as salient
+   ok     …and more than double its own matched decoys
+   ok     decoys never pass on any plate
+   ok     the decoy sites are all inside the urban envelope
+
+I4_CONTROLS LIVE
+exit=0
+════════════════════════ i5-role-contrast --controls ════════════════════════
+
+── CTRL-flat-street
+   contrast.street:ground   measured=1.1802   declared=4.675    Δ=-3.4948   FAIL (floor >= 2.1)
+   contrast.wall:all        measured=6.3997   declared=8.3016   Δ=-1.9019   PASS (floor >= 3)
+   contrast.water:ground    measured=1.3308   declared=1.6416   Δ=-0.3108   FAIL (floor >= 1.35)
+   PLATE: FAIL
+
+── CTRL-flat-wall
+   contrast.street:ground   measured=1.9237   declared=4.675    Δ=-2.7513   FAIL (floor >= 2.1)
+   contrast.wall:all        measured=1.4547   declared=8.3016   Δ=-6.847    FAIL (floor >= 3)
+   contrast.water:ground    measured=1.327    declared=1.6416   Δ=-0.3147   FAIL (floor >= 1.35)
+   PLATE: FAIL
+
+── CTRL-grey-water
+   contrast.street:ground   measured=1.8818   declared=4.675    Δ=-2.7933   FAIL (floor >= 2.1)
+   contrast.wall:all        measured=7.269    declared=8.3016   Δ=-1.0326   PASS (floor >= 3)
+   contrast.water:ground    measured=1.2985   declared=1.6416   Δ=-0.3431   FAIL (floor >= 1.35)
+   PLATE: FAIL
+
+── LIVENESS
+   ok     flat-street drives street:ground below floor
+   ok     flat-street leaves wall:all above floor
+   ok     flat-wall drives wall:all below floor
+   ok     flat-wall leaves street:ground where it was
+   ok     grey-water leaves the VALUE pair essentially unmoved (it is a HUE break — i7 catches it)
+   ok     the water value floor has a real failing plate (BEFORE-city)
+   ok     the charter's polarity holds here: BEFORE fails, AFTER passes
+   ok     every row reports the declared-vs-measured gap
+
+I5_CONTROLS LIVE
+exit=0
+════════════════════════ i7-ftg-colour --controls ════════════════════════
+   PLATE: PASS
+
+── BEFORE-city
+   hue.water    conf=0.0001  domHue=45    ° band=[185,265]   grey=0.6437  FAIL  ACHROMATIC — 64% of the role is below saturation 0.06; it has not moved hue, it has LOST hue
+   hue.field    conf=0.9476  domHue=55    ° band=[35,70]     grey=0       PASS  
+   hue.town     conf=1       domHue=35    ° band=[0,60]      grey=0       PASS  
+   PLATE: FAIL
+
+── CTRL-grey-water
+   hue.water    conf=0       domHue=65    ° band=[185,265]   grey=0       FAIL  OUT OF BAND — dominant hue 65°
+   hue.field    conf=0.9476  domHue=55    ° band=[35,70]     grey=0       PASS  
+   hue.town     conf=1       domHue=35    ° band=[0,60]      grey=0       PASS  
+   PLATE: FAIL
+
+── CTRL-flat-wall
+   hue.water    conf=0.0001  domHue=45    ° band=[185,265]   grey=0.6497  FAIL  ACHROMATIC — 65% of the role is below saturation 0.06; it has not moved hue, it has LOST hue
+   hue.field    conf=0.9651  domHue=55    ° band=[35,70]     grey=0       PASS  
+   hue.town     conf=1       domHue=35    ° band=[0,60]      grey=0       PASS  
+   PLATE: FAIL
+
+── LIVENESS · this is the arm instrument 5 provably cannot cover
+   ok     grey-water drives the WATER role out of its band
+   ok     and it is a big move, not a wobble
+   ok     grey-water leaves the TOWN hue where it was
+   ok     grey-water leaves the FIELD hue where it was
+   ok     the wall control does not touch any hue row
+   ok     the sealed base's water is reported ACHROMATIC, not mis-hued
+   ok     the specimen's water is NOT achromatic (REG-0's re-statement worked)
+
+I7_CONTROLS LIVE
+exit=0
+════════════════════════ i8-nodrift-trace --controls ════════════════════════
+BASE      opClasses=31 traced=28 driftJustified=3 misses=0 stale=0
+PLANTED   opClasses=32 misses=1  [{"id":"99z","title":"⭐ A PLANTED OP CLASS THAT NOBODY TRACED","status":"UNTRACED"}]
+TRIMMED   opClasses=30 stale=["15c"]
+
+── LIVENESS
+   ok     the base roster is fully traced
+   ok     no stale table rows on the base
+   ok     a planted op class raises the miss count by exactly one
+   ok     a removed section is reported as a STALE table row
+   ok     every DRIFT row carries a written justification
+   ok     the roster is bigger than the emitted group set (groups are NOT the roster)
+
+I8_CONTROLS LIVE
+exit=0
+════════════════════════ i10-censuses --controls ════════════════════════
+A0 baseline (law)        straddlers=0/8  worstMinorityShare=0  sampled=245818  COMPLETE — every region examined, on a 1-unit lattice inside each region's bounds
+X0 baseline (crosscheck) straddlers=3/8  worstMinSide=0.0214  ring=closedPolygon
+A1 ring×0.60             crosscheck straddlers=5/8
+A2 planted straddler     law straddlers=1 keys=["CONTROL.planted_straddler"]  |  crosscheck=4
+A3 PRE-CURE partition    law straddlers=2/5 worst=0.072  |  crosscheck=2/5 worst=0.0877
+B0 baseline              outside=0/1549 members, suburb=614, drawn=2163
+B1 plant-site sweep      NONE — every point of every walled epoch body is held by a ring at or after its own epoch
+B1 rings×0.95            outside=4/1549  (baseline 0/1549)
+B2 only the epoch-1 ring   outside=791/1549  (baseline 0/1549)
+XC geometry vs the cure's own wallSide stamp: 3 disagreement(s)
+   district.common_residential~faubourg  label=extramural  shareOutside=0.9786  minSide=0.0214
+   district.mages_quarter~faubourg  label=extramural  shareOutside=0.9895  minSide=0.0105
+   district.shadows_district~faubourg  label=extramural  shareOutside=0.983  minSide=0.017
+
+── LIVENESS · a zero is what a DEAD instrument returns
+   ok     A1 a shrunk circuit makes districts straddle
+   ok     A2 the law catches a planted straddler, exactly one more
+   ok     A2 the crosscheck catches it too
+   ok     A3 the census is POSITIVE on the pre-cure partition (real geometry, real defect)
+   ok     B1 shrinking the rings 5% strands bodies (the ring operand is live)
+   ok     B2 withholding the later rings strands bodies (the clause is load-bearing)
+
+I10_CONTROLS LIVE
+exit=0
+════════════════════════ i6-frontage --controls (heaviest: resolved grid) ════════════════════════
+── REPRODUCTION · --reg0compat must reproduce REG-0's own published base figures
+   city     REPRODUCED
+      probes          REG-0=38696     here=38696
+      fronted         REG-0=19186     here=19186
+      ratio           REG-0=0.4958    here=0.4958
+      runs            REG-0=1709      here=1709
+      meanRunUnits    REG-0=11.22     here=11.22
+      frontingMasses  REG-0=609       here=609
+   village  REPRODUCED
+      probes          REG-0=3948      here=3948
+      fronted         REG-0=2576      here=2576
+      ratio           REG-0=0.6525    here=0.6525
+      runs            REG-0=176       here=176
+      meanRunUnits    REG-0=14.66     here=14.66
+      frontingMasses  REG-0=68        here=68
+
+── POSITIVE · fusion must cut the RUN COUNT and lengthen the RUN, at a near-invariant ratio
+   base   ratio=0.5187 runs=1934 meanRun=10.32 masses=799
+   fused  ratio=0.5187 runs=1327 meanRun=15.05 masses=368
+
+── NEGATIVE · --fuse=0 must return every fused figure to the base exactly
+   fuse=0 ratio=0.5187 runs=1934 masses=799  → IDENTICAL to base
+
+── NEGATIVE · --shatter=0.35 manufactures the §571.4 defect; runs must RISE and the ratio FALL
+   shattered ratio=0.3778 runs=2051 meanRun=6.51  density=35.0568 masses=1982 meanFootprint=28.53 (urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named))
+   intact    ratio=0.5187 runs=1934 meanRun=10.32  density=8.4009 masses=1043 meanFootprint=119.04 (urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named))
+
+── POSITIVE · F3 · fusing the building ink must CUT the mass count and the density, and RAISE the mean footprint
+   as drawn  masses=1043 ink=124153.97 density=8.4009 meanFootprint=119.04
+   ink fused masses=440 ink=132872.35 density=3.3114 meanFootprint=301.98
+
+── NEGATIVE · the grid must resolve the leaf's own party gap, and 1400 must not
+   gap=0.2188u   1400 cell=0.7143 resolves=false   4600 cell=0.2174 resolves=true
+   base at 1400  runs=1714 meanRun=11.21 masses=611
+   base at 4600  runs=1934 meanRun=10.32 masses=799
+
+── LIVENESS
+   ok     reproduces REG-0 city base
+   ok     reproduces REG-0 village base
+   ok     fusion cuts the run count
+   ok     fusion lengthens the mean run
+   ok     fusion leaves the ratio near-invariant
+   ok     fuse=0 is identical to the base
+   ok     shatter raises the run count
+   ok     shatter lowers the ratio
+   ok     shatter raises the freestanding DENSITY
+   ok     F3: fusing the ink cuts the mass count
+   ok     F3: fusing the ink cuts the density
+   ok     F3: fusing the ink raises the mean mass footprint
+   ok     GRID: the recorded 1400 does NOT resolve the city party gap
+   ok     GRID: the resolved N DOES resolve it
+   ok     GRID: the base's own figures MOVE between the two grids (the knob is live)
+
+I6_CONTROLS LIVE
+exit=0

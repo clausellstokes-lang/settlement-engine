@@ -1,0 +1,602 @@
+{
+  "A0": {
+    "straddlers": 0,
+    "keys": [],
+    "worstMinorityShare": 0,
+    "sampled": 245818,
+    "complete": true,
+    "sampling": {
+      "kind": "lattice",
+      "step": 1,
+      "regions": 8
+    },
+    "status": "COMPLETE — every region examined, on a 1-unit lattice inside each region's bounds"
+  },
+  "X0": {
+    "applicable": true,
+    "ringSource": "closedPolygon",
+    "ringVertices": 26,
+    "districts": 8,
+    "straddling": 3,
+    "worstMinSide": 0.0214,
+    "rows": [
+      {
+        "districtId": "district.common_residential",
+        "wallSideLabel": "intramural",
+        "samples": 36021,
+        "outside": 0,
+        "shareOutside": 0,
+        "minSide": 0,
+        "straddles": false,
+        "areaUnits": 36008.79
+      },
+      {
+        "districtId": "district.common_residential~faubourg",
+        "wallSideLabel": "extramural",
+        "samples": 5100,
+        "outside": 4991,
+        "shareOutside": 0.9786,
+        "minSide": 0.0214,
+        "straddles": true,
+        "areaUnits": 5090.58
+      },
+      {
+        "districtId": "district.government_quarter",
+        "wallSideLabel": "intramural",
+        "samples": 13681,
+        "outside": 0,
+        "shareOutside": 0,
+        "minSide": 0,
+        "straddles": false,
+        "areaUnits": 13665.66
+      },
+      {
+        "districtId": "district.mages_quarter",
+        "wallSideLabel": "intramural",
+        "samples": 125793,
+        "outside": 9,
+        "shareOutside": 0.0001,
+        "minSide": 0.0001,
+        "straddles": false,
+        "areaUnits": 125804.08
+      },
+      {
+        "districtId": "district.mages_quarter~faubourg",
+        "wallSideLabel": "extramural",
+        "samples": 8279,
+        "outside": 8192,
+        "shareOutside": 0.9895,
+        "minSide": 0.0105,
+        "straddles": true,
+        "areaUnits": 8288.05
+      },
+      {
+        "districtId": "district.religious_quarter",
+        "wallSideLabel": "intramural",
+        "samples": 4463,
+        "outside": 0,
+        "shareOutside": 0,
+        "minSide": 0,
+        "straddles": false,
+        "areaUnits": 4467.29
+      },
+      {
+        "districtId": "district.shadows_district",
+        "wallSideLabel": "intramural",
+        "samples": 49646,
+        "outside": 0,
+        "shareOutside": 0,
+        "minSide": 0,
+        "straddles": false,
+        "areaUnits": 49640.54
+      },
+      {
+        "districtId": "district.shadows_district~faubourg",
+        "wallSideLabel": "extramural",
+        "samples": 2887,
+        "outside": 2838,
+        "shareOutside": 0.983,
+        "minSide": 0.017,
+        "straddles": true,
+        "areaUnits": 2890.52
+      }
+    ]
+  },
+  "X1": {
+    "applicable": true,
+    "ringSource": "CONTROL ring",
+    "ringVertices": 26,
+    "districts": 8,
+    "straddling": 5,
+    "worstMinSide": 0.4021,
+    "rows": [
+      {
+        "districtId": "district.common_residential",
+        "wallSideLabel": "intramural",
+        "samples": 36021,
+        "outside": 21536,
+        "shareOutside": 0.5979,
+        "minSide": 0.4021,
+        "straddles": true,
+        "areaUnits": 36008.79
+      },
+      {
+        "districtId": "district.common_residential~faubourg",
+        "wallSideLabel": "extramural",
+        "samples": 5100,
+        "outside": 5100,
+        "shareOutside": 1,
+        "minSide": 0,
+        "straddles": false,
+        "areaUnits": 5090.58
+      },
+      {
+        "districtId": "district.government_quarter",
+        "wallSideLabel": "intramural",
+        "samples": 13681,
+        "outside": 1376,
+        "shareOutside": 0.1006,
+        "minSide": 0.1006,
+        "straddles": true,
+        "areaUnits": 13665.66
+      },
+      {
+        "districtId": "district.mages_quarter",
+        "wallSideLabel": "intramural",
+        "samples": 125793,
+        "outside": 96529,
+        "shareOutside": 0.7674,
+        "minSide": 0.2326,
+        "straddles": true,
+        "areaUnits": 125804.08
+      },
+      {
+        "districtId": "district.mages_quarter~faubourg",
+        "wallSideLabel": "extramural",
+        "samples": 8279,
+        "outside": 8279,
+        "shareOutside": 1,
+        "minSide": 0,
+        "straddles": false,
+        "areaUnits": 8288.05
+      },
+      {
+        "districtId": "district.religious_quarter",
+        "wallSideLabel": "intramural",
+        "samples": 4463,
+        "outside": 4232,
+        "shareOutside": 0.9482,
+        "minSide": 0.0518,
+        "straddles": true,
+        "areaUnits": 4467.29
+      },
+      {
+        "districtId": "district.shadows_district",
+        "wallSideLabel": "intramural",
+        "samples": 49646,
+        "outside": 37741,
+        "shareOutside": 0.7602,
+        "minSide": 0.2398,
+        "straddles": true,
+        "areaUnits": 49640.54
+      },
+      {
+        "districtId": "district.shadows_district~faubourg",
+        "wallSideLabel": "extramural",
+        "samples": 2887,
+        "outside": 2887,
+        "shareOutside": 1,
+        "minSide": 0,
+        "straddles": false,
+        "areaUnits": 2890.52
+      }
+    ]
+  },
+  "A2": {
+    "straddlers": 1,
+    "keys": [
+      "CONTROL.planted_straddler"
+    ],
+    "worstMinorityShare": 0.432,
+    "sampled": 246547,
+    "complete": true,
+    "sampling": {
+      "kind": "lattice",
+      "step": 1,
+      "regions": 9
+    },
+    "status": "COMPLETE — every region examined, on a 1-unit lattice inside each region's bounds"
+  },
+  "B0": {
+    "applicable": true,
+    "bodies": 2163,
+    "members": 1549,
+    "suburb": 614,
+    "outside": 0,
+    "shareOutside": 0,
+    "perEpoch": [
+      {
+        "epoch": 1,
+        "members": 758,
+        "outside": 0
+      },
+      {
+        "epoch": 2,
+        "members": 791,
+        "outside": 0
+      }
+    ],
+    "ringsConsidered": [
+      {
+        "epoch": 2,
+        "kind": "main",
+        "halfRing": true
+      },
+      {
+        "epoch": 1,
+        "kind": "old-core",
+        "halfRing": true
+      }
+    ],
+    "offenders": [],
+    "status": "COMPLETE — 2163 drawn bodies, 1549 members of a walled epoch, 614 in the suburb beyond every circuit"
+  },
+  "B2": {
+    "applicable": true,
+    "bodies": 2163,
+    "members": 1549,
+    "suburb": 614,
+    "outside": 791,
+    "shareOutside": 0.5107,
+    "perEpoch": [
+      {
+        "epoch": 1,
+        "members": 758,
+        "outside": 0
+      },
+      {
+        "epoch": 2,
+        "members": 791,
+        "outside": 791
+      }
+    ],
+    "ringsConsidered": [
+      {
+        "epoch": 1,
+        "kind": "old-core",
+        "halfRing": true
+      }
+    ],
+    "offenders": [
+      {
+        "key": "org.district.common_residential/p.101.5.1",
+        "kind": "parcel",
+        "epoch": 2,
+        "c": [
+          83.38,
+          104.67
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.101.6.1",
+        "kind": "parcel",
+        "epoch": 2,
+        "c": [
+          85.26,
+          99.84
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.101.7.1",
+        "kind": "parcel",
+        "epoch": 2,
+        "c": [
+          86.83,
+          96.06
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.119.0.0",
+        "kind": "parcel",
+        "epoch": 2,
+        "c": [
+          81.25,
+          144.37
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.119.0.0#back",
+        "kind": "backHouse",
+        "epoch": 2,
+        "c": [
+          90.62,
+          149.53
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.119.1.0",
+        "kind": "parcel",
+        "epoch": 2,
+        "c": [
+          83.77,
+          141.67
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.119.2.0",
+        "kind": "parcel",
+        "epoch": 2,
+        "c": [
+          83.87,
+          137.21
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.119.2.0#back",
+        "kind": "backHouse",
+        "epoch": 2,
+        "c": [
+          92.1,
+          141.74
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.119.3.0",
+        "kind": "parcel",
+        "epoch": 2,
+        "c": [
+          87.73,
+          134.7
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.119.4.0",
+        "kind": "parcel",
+        "epoch": 2,
+        "c": [
+          87.58,
+          129.97
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.119.4.0#back",
+        "kind": "backHouse",
+        "epoch": 2,
+        "c": [
+          97.32,
+          135.33
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.119.0.1",
+        "kind": "parcel",
+        "epoch": 2,
+        "c": [
+          112.44,
+          142.46
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.119.0.1#back",
+        "kind": "backHouse",
+        "epoch": 2,
+        "c": [
+          103.23,
+          137.39
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.119.1.1",
+        "kind": "parcel",
+        "epoch": 2,
+        "c": [
+          114.38,
+          139.17
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.119.1.1#back",
+        "kind": "backHouse",
+        "epoch": 2,
+        "c": [
+          104.87,
+          133.94
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.119.2.1",
+        "kind": "parcel",
+        "epoch": 2,
+        "c": [
+          114.4,
+          133.48
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.119.3.1",
+        "kind": "parcel",
+        "epoch": 2,
+        "c": [
+          117.23,
+          129.25
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.120.4.0",
+        "kind": "parcel",
+        "epoch": 2,
+        "c": [
+          113.09,
+          91.19
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.120.5.0",
+        "kind": "parcel",
+        "epoch": 2,
+        "c": [
+          114.72,
+          86.68
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.120.6.0",
+        "kind": "parcel",
+        "epoch": 2,
+        "c": [
+          115.94,
+          79.12
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.120.6.0#back",
+        "kind": "backHouse",
+        "epoch": 2,
+        "c": [
+          125.16,
+          84.19
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.120.7.0",
+        "kind": "parcel",
+        "epoch": 2,
+        "c": [
+          117.79,
+          74.88
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.120.7.0#back",
+        "kind": "backHouse",
+        "epoch": 2,
+        "c": [
+          126.09,
+          79.45
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.120.8.0",
+        "kind": "parcel",
+        "epoch": 2,
+        "c": [
+          120.54,
+          71.78
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.120.8.0#back",
+        "kind": "backHouse",
+        "epoch": 2,
+        "c": [
+          128.62,
+          76.22
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.120.9.0",
+        "kind": "parcel",
+        "epoch": 2,
+        "c": [
+          121.56,
+          68.58
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.120.9.0#back",
+        "kind": "backHouse",
+        "epoch": 2,
+        "c": [
+          129.93,
+          73.17
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.120.10.0#back",
+        "kind": "backHouse",
+        "epoch": 2,
+        "c": [
+          134.01,
+          69.51
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.120.0.1",
+        "kind": "parcel",
+        "epoch": 2,
+        "c": [
+          130.69,
+          110.47
+        ]
+      },
+      {
+        "key": "org.district.common_residential/p.120.0.1#back",
+        "kind": "backHouse",
+        "epoch": 2,
+        "c": [
+          122.2,
+          105.8
+        ]
+      }
+    ],
+    "status": "COMPLETE — 2163 drawn bodies, 1549 members of a walled epoch, 614 in the suburb beyond every circuit"
+  },
+  "liveness": [
+    [
+      "A1 a shrunk circuit makes districts straddle",
+      true
+    ],
+    [
+      "A2 the law catches a planted straddler, exactly one more",
+      true
+    ],
+    [
+      "A2 the crosscheck catches it too",
+      true
+    ],
+    [
+      "A3 the census is POSITIVE on the pre-cure partition (real geometry, real defect)",
+      true
+    ],
+    [
+      "B1 shrinking the rings 5% strands bodies (the ring operand is live)",
+      true
+    ],
+    [
+      "B2 withholding the later rings strands bodies (the clause is load-bearing)",
+      true
+    ]
+  ],
+  "labelDisagreements": [
+    {
+      "districtId": "district.common_residential~faubourg",
+      "wallSideLabel": "extramural",
+      "samples": 5100,
+      "outside": 4991,
+      "shareOutside": 0.9786,
+      "minSide": 0.0214,
+      "straddles": true,
+      "areaUnits": 5090.58
+    },
+    {
+      "districtId": "district.mages_quarter~faubourg",
+      "wallSideLabel": "extramural",
+      "samples": 8279,
+      "outside": 8192,
+      "shareOutside": 0.9895,
+      "minSide": 0.0105,
+      "straddles": true,
+      "areaUnits": 8288.05
+    },
+    {
+      "districtId": "district.shadows_district~faubourg",
+      "wallSideLabel": "extramural",
+      "samples": 2887,
+      "outside": 2838,
+      "shareOutside": 0.983,
+      "minSide": 0.017,
+      "straddles": true,
+      "areaUnits": 2890.52
+    }
+  ]
+}
