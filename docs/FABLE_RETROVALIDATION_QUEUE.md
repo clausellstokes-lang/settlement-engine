@@ -72,6 +72,14 @@ re-derives** · **where the receipts are** (preserve ref / receipt path / instru
 A row that cannot name where its evidence lives is itself a finding — record it as
 `EVIDENCE-THIN` and let the pass decide whether the act must simply be redone.
 
+**MECHANICAL ACTS CARRY NO ROW — THEY RIDE (§688.7's corollary).** A handoff refresh, an
+index fold, a pointer update or a re-preserved toolkit contains no judgment, and minting a
+hollow row for it would dilute the register into noise. Such acts **ride the next
+judgment-bearing commit** rather than standing alone; that commit's real row satisfies the
+gate for both. The rule is deliberately shaped so that *a standalone Opus commit is,
+by construction, one that owed a row* — if you find yourself wanting to bypass the gate for
+a mechanical change, the answer is to attach it to the next real act, not to weaken the gate.
+
 ## 5 · THE PASS, WHEN THE OWNER CALLS IT
 
 **Method (from §236, kept):** walk the queue top to bottom, **re-derive each judgment
