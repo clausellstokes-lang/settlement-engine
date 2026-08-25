@@ -27429,3 +27429,38 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   by the RADIAL step (blur = arccos(w/(w+step)) ≈ 10.4° at w/60) — a performance knob
   can invert a law's census; bisect the boundary, then demand two independent
   implementations agree digit for digit.**
+
+## §642 · THE SEAL CORRECTS, THE TOOL LEARNS, AND R-MORPH DELIVERS ITS GROUNDING (2026-08-25 ~12:45 CDT)
+
+- **§642.1 CORRECTION + SELF-CONTAINMENT:** §641.1's declared seal `1840376bc` aborted
+  on an untracked `tests/setup/fastCheckSeed.js` — which turned out to be a DOCUMENTED
+  BORROW: the inherited `vite.config.js:792` has referenced that file since before the
+  waves, the sparse sandbox never carried it, and every lane re-borrowed it by hand.
+  The chair committed the borrow so the seal is SELF-CONTAINED; **the REG-5 seal is
+  `refs/preserve/map-sandbox-reg5-drawnworld` = `a303815ae`.** ⛔ The declaration
+  outran the act a SECOND time (the §633.1 class), so the cure is now STRUCTURAL:
+  `chair-commit.sh` gained `--require-ref <name> <sha>` — a ledger entry that declares
+  a seal now refuses to commit unless the ref exists at that sha. This entry is the
+  guard's first use.
+- **§642.2 R-MORPH COLLECTED** (dossier `draft-R-MORPH.md` + receipt; R-INST house
+  style; 8 pages fetched, ~40 digest, dead ends logged). **The gates open:** §1 field
+  systems and §2 form typology — the payload sections — are well-sourced (8+7 fetched-
+  CONFIRMED). The three strongest: **the floodplain-meadow INVERSION** (Domesday
+  floodplain meadow was the MOST VALUABLE land and never ploughed — North Meadow
+  Cricklade measured with its surviving lot stones — directly inverting the engine's
+  wetBest-arable scoring); **Elton's tenure structure** (1,872 acres arable, ~70
+  scattered selions ≈ 20 acres per family — killing both the monoculture and the
+  strips-under-dispersed-tenure mix in one page); **the Corfe siege band** (the 1139
+  siege castle at 300–400 m, bracketed by the fetched longbow envelope — camps ≥~400 m,
+  fortified works 250–400 m, the audit's 55 m camp now has its sourced conviction).
+  Runner-up for the owner: **County Durham's two-row planned villages** — the
+  linear/row form is a DEFAULT across whole provinces; the register's largest silent
+  hole now has its warrant (REG-GROW-B input). **CONSUMPTION GRADES RULED (§638.2
+  refined, vetoable):** fetched-CONFIRMED may mint constants; CONFIRMED-digest
+  suffices for WEIGHTS and varieties, never exact minted numbers; PLAUSIBLE consumes
+  nothing. Under that rule **REG-H's gate is SATISFIED** (its §1 grounding is
+  payload-grade); **REG-TERR's terracing proceeds at weights-grade** with its gradient
+  figures left unminted (the dossier's own flag — §4 is all digest and internally
+  inconsistent on Steep Hill); §6's siege band rides REG-DEF as a weight with its
+  one-measured-site caveat named. The dossier awaits the owner's taste gate as all
+  R-INST dossiers do; consumption stays weights-grade until then.
