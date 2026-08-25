@@ -27283,3 +27283,47 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   stand on citations, not on the chair's priors. ⚠ Banked in passing: the `${sha}:path`
   zsh hazard bit AGAIN this sitting as `"$R:research/…"` → the `:r` MODIFIER ate the
   path — braces ALWAYS, `"${R}:research/…"`.
+
+## §639 · THE CONVENTION AUDIT COLLECTS — 49 OF 49 REAL, AND THE CONFORMANCE BLOCK MINTS (2026-08-25 ~10:10 CDT)
+
+- **§639.1 THE REGISTER:** seven finder + seven verifier agents; **49 findings, 49
+  verified real, 0 refuted — 16 NEW · 32 PARTIAL · 1 COVERED**; every row carries
+  executed evidence. Full register: `docs/CONVENTION_AUDIT_2026-08-25.md` (committed with
+  this entry). The heaviest: regional roads MARCH ACROSS OPEN SEA as land roads (the
+  corridor walker weights wet cells 0.85 where nuclei get an ABSOLUTE refusal —
+  routes.js:186); through-roads EXIT WALLS WITH NO GATE and lanes penetrate the curtain
+  in bulk; a bankside town builds a WALLED FAR-BANK QUARTER WITH ZERO BRIDGES; a coastal
+  city of 20,091 souls has NO HARBOR; the tannery sits UPSTREAM of the water draw; and
+  ⛔⛔ **the time snapshots show ZERO GROWTH — year 18 is parcel-for-parcel identical to
+  year 100 and the present** — the single finding that most concerns both REG-GROW and
+  the Chronicle Film's premise.
+- **§639.2 TRIAGE — HOMES ASSIGNED (chair, vetoable):** REG-GROW absorbs the growth
+  family (zero-growth snapshots · ring legibility · organic-accretion combs · linear
+  village forms · tier-scaled quarter naming) as SPEC INPUTS to its architecture. The
+  far-bank-no-bridges row joins **REG-BRIDGE**. Six conformance cars MINT: **REG-ROUTE**
+  (water as ABSOLUTE corridor refusal + landings terminate corridors · a gate at every
+  wall crossing or the way is severed · the weaving coast road · web fragments/dead
+  ends · grade response and crag avoidance · map-edge gates · opens by DIAGNOSING the
+  unexplained black bars) · **REG-DEF** (gate breach vs gatehouse width · tower rhythm
+  with bowshot logic · the keep/citadel for military foundings · the besieger's camp
+  outside bowshot) · **REG-WATER** (upstream/downstream discipline for noxious trades
+  and wells · the mill cure — race/leat/weir/pond, wheel only where water, the
+  'extraction' classification defect · the conduit/well dead ternary · the RIVER-UPHILL
+  drainage defect, L0 substrate, opens with its own measure) · **REG-SITE** (institution
+  siting consuming the R-INST dossiers: hospitals to their extramural-near ring · fairs
+  outside gates · the noxious quarter actually holding its trades · town hall DRAWN ·
+  market institutions unified with the drawn square · coaching inns on approaches ·
+  graveyards visible · toll bridges need water) · **REG-H** (the hinterland mosaic:
+  meadow/pasture/common/waste · floodplain meadow · field lanes and farm tracks · tenure
+  consistency · orchards and closes · countryside intensity scaling with tier) ·
+  **REG-TERR** (in-town slope expression for the relief-1.00 city · the open-water
+  stroke tangle whose documented cure fails on outer offsets).
+- **§639.3 THE ARC RE-ORDERS (vetoable):** REG-5 → REG-BRIDGE → **REG-GROW (architecture
+  then build)** → REG-ROUTE → REG-DEF → REG-WATER → REG-SITE → REG-H → REG-TERR →
+  REG-6 → 7 → 8 → 9 (judging AFTER conformance) → D → 10 → 11 → F0 → F → P. Growth
+  builds before the siting/hinterland cars because it moves parcels under them. The
+  §638 dossier contest is IN FLIGHT (two lanes); §638.2 binds every conformance cure —
+  DOSSIER-SILENT conventions need R-MORPH grounding or the owner's signature, and
+  **R-MORPH dispatches as a concurrent read-only research lane once the contest names
+  the silent set.** REG-5 received the monoculture advisory (do not harden arable to
+  reach the band).
