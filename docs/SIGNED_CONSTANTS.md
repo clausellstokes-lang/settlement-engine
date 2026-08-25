@@ -67,7 +67,7 @@ deliberately). No time gate (wall-clock spread is noise, §635.3).
 | T2 trajectory-curve parameters | REG-GROW-A mint; OWNER signs at the tuning pass (a §643.2 constrained interpolant, never an author) | REG-GROW / tuning |
 | Terracing gradient figures | R-MORPH §4 internally inconsistent — left unminted by the dossier's own flag | REG-TERR |
 | In-town slope-response band | REG-TERR's measure | REG-TERR |
-| Wear thresholds (rampart funding × age) | tuning-pass input (§341 family) | owner, LAST |
+| Wear thresholds (rampart funding × age) | CHAIR-SIGNED WEIGHTS-GRADE PROVISIONALS licensed for DRESS-1 (§683 PA.4); owner re-signs at tuning, LAST | DRESS-1 → owner |
 | Mosaic share bands (meadow/pasture/waste per tier) | R-MORPH §1 consumption + REG-H's measure | REG-H |
 | Ring-census age-monotonicity tolerance | REG-GROW-B's measure | REG-GROW |
 

@@ -174,3 +174,91 @@ REG-11 → REG-F0 → REG-F (owner judges) → REG-P (owner throws) → post-cut
 **The escalation list to the owner (park, don't guess):** anything touching THE
 PROMISE's storage/physics · public-surface content homes · paid-surface behavior ·
 taste calls where two judged rounds disagree.
+
+---
+
+# PANEL AMENDMENT (§683) — the last Fable-chaired rulings; 0/5 refuted, every blocker ruled. THIS AMENDMENT WINS CONFLICTS WITH THE BODY.
+
+## PA.1 · THE SILENCE LAW (S3-B): this document SEQUENCES AND BINDS; it never retires
+by omission — anything chartered in A13/A14/§§675–681 and unmentioned here remains
+chartered at its amendment home. Named restorations: the ROUTE residue (grade
+response · crag avoidance · zero-mouth fragments) and the §650.2 clip census join
+DRESS-1's exits; the townLayoutV2:209 annotation duty joins DRESS-2; **REG-7 (print
+projection + parity) is its own section** — sequenced after REGISTERS/ZOOM, consuming
+R-DEVLOG's print rows and A4's print budgets.
+## PA.2 · THE WALL CONTRACT (S1/S5-B1): DRESS-1's OPENING ACT builds the SUCCESSOR
+PUBLICATION — from the WALLBAND face + ledger events, publish the surface
+rampartWorks/wallRuns consume today ({ring, runs+causes, runOfVertex, runBands
+{stone,inner,outer,inkHalf} from wallForm.width, gates incl. water-gate faces,
+towers/seeding, form, epoch/vintage from ce.year}), one ordered cycle PER FRAGMENT,
+proven by a CONTRACT TEST asserting the REG-2 dress renders unchanged against a
+legacy-node fixture. The dress modules are consumers, never re-derivers.
+## PA.3 · THE FORD RULING (S1/S5-B2 — a taste call, made): **hf264-zoom-river-works
+IS THE BINDING PLATE** — the ford draws as STIPPLE SHALLOWS across the widened reach
+with SPLAYED funnel approach chevrons on both banks (which also matches §3e's
+ford-at-the-wide-reach law); §649.2's narrows+ripples prose is CORRECTED (it predates
+the register); stepping stones are a DISTINCT crossing dress, drawn only where truth
+mints them.
+## PA.4 · WEAR (S1/S5-B3): chair-signed WEIGHTS-GRADE PROVISIONAL thresholds for the
+three grades, drawn in DRESS-1, owner re-signs at tuning — SIGNED_CONSTANTS row
+updated to license exactly this. Never an invented number: the grades derive from the
+ledger's maintenance facts × age; only the two thresholds are provisional.
+## PA.5 · THE INSTRUMENT ESTATE (S1/S5-B4 + M1): the LIVE workspace is preserved at
+**refs/preserve/reg-instruments-2026-08-26-r4** (`79c02a0ea`) — cite THAT, never the
+scratchpad. Every re-record on partition SVG is GATED on per-role planted controls
+(each moving exactly one role) before any baseline is believed — the vacuous-mask
+class pre-killed. The re-record PROCEDURE is REG-5's executed model (sha1'd pre-cure
+baseline → run-baselines.mjs → INSTRUMENTS.md declaration, under the two-baseline
+law). Legacy-substrate baselines run PARALLEL until the port's parity train, then
+retire. i6's denominator gains its partition equivalent (a --checkcircuit against
+the band-face ring) before its first partition record.
+## PA.6 · THE ROOF + THE LOOK (S1/S5-M2 — the taste half ruled): ridges clip to
+**the run's own dissolved footprint** (never the chunk); **THE LOOK: the built band
+with visible toft ground wins** — masses draw the BUILT footprint (the run = the
+eaves line, honoring hf208), yards remain ground (honoring I4's plot-ground tone and
+the corpus's own yards). Two-tone planes on bent runs: the ridge polyline follows
+the run's medial chord per party-segment; hips close each end; no straight-skeleton
+requirement at page register (that is D5's label machinery, not roofs).
+## PA.7 · RE-HOMES AND MECHANICS: monument plan-poché → DRESS-2, post-SEATING
+(S1-M3). The GESTALT GATE'S PASS MECHANICS (S4-B2): the expected-reading KEY is
+authored BLIND from ledger truth before the render (per leaf: tier bin ·
+walled/open · port/river/dry · declined/grown); a fresh-context reader's answers
+match the key on **≥80 % of leaves** with ZERO wrong-class reads on the key's
+load-bearing fields; crops carry concrete keys (§649.2-class); two consecutive
+disagreeing rounds ESCALATE to the owner. **WHO CLOSES (S4-M6, corrected BY NAME):
+A5.4 stands — the CHAIR closes judging rounds under §585, vetoably; the OWNER closes
+the film specimen and every escalation.** The body's "owner's eyes close each round"
+is superseded.
+## PA.8 · DECLINE + FILM (S4): the reached-state totality census is defined over
+**state.losses/publishLosses** (never a face-walk — RECLAIMED survives only there);
+the film's HELD-ARM ROSTER IS RELEASED — SPINE-2's dated beat events unlock
+SCAR→HEAL, DEBRIS, RECLAMATION, ABANDONMENT (A6.2's holds were premised on their
+absence). THE SPECIMEN, operationalized: the chair selects ONE city carrying ≥2
+recorded events (a decline if any exists in the corpus), renders the full animation
+with its seed + fixture identity + beat list, and sends it via the file channel
+BEFORE REG-F seals; the owner's verdict closes the wave. Zoom budgets (S4-M5):
+rung transitions grade against the A1.6 FRAME protocol, never the first-paint
+budget.
+## PA.9 · THE PORT, COMPLETED (S2): the DECLARED-SHIFTS COMPILATION's left edge is
+**§631 inclusive** — every §110.3 table from REG-SEAM forward (the first sandbox
+shift that ships at the flag). THE D3a REFRESH PROCEDURE: a chair-executed
+private-index graft of the LAST SEAL's fabric+harness trees onto the build branch as
+ONE car — the path manifest IS the sealed tree's own paths; proven by the seal's
+census suite green at the grafted tip + the full gate; never file-by-file
+cherry-picking. The RETIREMENT list gains: the sealed arms' parcel-era code paths ·
+the LOD merge · cartographyPaint's identity · institutionAssignment's
+CATEGORY_AFFINITY map consumers (per §677.2vi). The VOCABULARY WALKER's roster is
+**RE-DERIVED AT THE PORT** (never frozen at five). The post-cutover list gains the
+ONE OSR mint (§677.2vii's anchor) + the parity train + a POINTER to the full estate
+queue (the handoff + §675.2) rather than a restatement.
+## PA.10 · SUCCESSION HARDENING (S3/S5): the PARALLEL CLAUSE IS STRUCK — the arc is
+STRICTLY SEQUENTIAL unless a chair proves file-disjointness by manifest AND the
+stacked-landing laws (TE-STACK-3/4/5) are honored. DRESS-1's exits gain the
+**wall:all watch row** (re-measure FIRST — it re-inks the whole circuit; headroom
+4.27 vs floor 3.00). **docs/OWNER_DOCKET.md is the single location law 11 names.**
+Durable locators bind: the detail register = refs/preserve/reg-detail-register-2026-08-24
+· the review ids = review654/CONSOLIDATED.json in refs/preserve/reference-study-2026-08-26
+(namespace note: review-I/B ≠ dwellings-B-bands ≠ instrument-i) · the instruments =
+r4 above. The water row's authority citation sharpens to **§640.3's closing sentence
+(ODQ line ~27368)** — the ruling exists; cite it unmistakably. The lossRegions
+producer is ASSIGNED to GROW-A's running resume (§683 addendum, sent).
