@@ -28496,3 +28496,35 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   DESIGN_SPINE_COMPLETION(+its panel amendment); the pickup card is
   docs/HANDOFF_CURRENT.md's state block; the standing orders §675.3/§678.2 bind
   every dispatch brief.
+
+## §684 · GROW-A SEALS — THE WORLD GROWS, THE BAND EMERGES UNTUNED, AND THE FOLD ORDER GETS ITS CAR (2026-08-26 ~13:20 CDT)
+
+- **§684.1 SEALED** at `refs/preserve/map-sandbox-growa-ledger` = `82fb8bbfb` (gate
+  384/384 · census 18/18 · dormancy 29/29 · determinism 29/29 · walkers clean).
+  **C3 IS DEAD ON THE FOLIO:** the town's year series reads **60 → 894 → 1,197
+  plots** and the year-18 leaf PRINTS AS A HAMLET — with a planted control proving
+  the sealed legacy path still draws years 0 and 6 byte-identical (the old world's
+  frozen-ness convicted, not assumed). The §683 lossRegions addendum is DISCHARGED
+  with 4-way controls.
+- **§684.2 THE BAND — THE CAUSAL CLAIM PROVEN:** refusals/plot **0.653 → 0.012**
+  (target ≤ 0.255; metropolis 0.302 → 0.011) and the band **p75/p25 median 3.55 →
+  1.87, range 1.68–2.03** against the 1.71 invariant — **not one tuning constant
+  moved; the invariant EMERGED because the cause fell**, exactly as §681.3 signed.
+  The mechanism: **97.3 % of every geometric refusal in the estate was ONE defect
+  counted twice** — a boundary-point probe answering null on the face edge, a
+  rounding coin-flip failing AFTER the kerb was cut (5,692 refusals = 4,377 + 1,315
+  stray kerbs, the same number). BANKED beside it: **§681.4's assigned perf cause is
+  REFUTED by profile** — chordInFace was 0.06 % where the watercourse linear scan was
+  70.1 %; the bucket index took the fjord **3,169.6 → 95.1 ms** (census
+  byte-identical). The assign-by-prediction lesson: profile before assigning causes.
+- **§684.3 J-GROWA-12 RULED — GROW-FOLD CHARTERED:** the deferred fold-order finding
+  (a one-soul emission at a spent-budget epoch carves a frontier patch; metropolis
+  2,650 → 1,698 plots) gets the cure the wall law itself implies: **the raise
+  precedes its epoch's growth in the fold** — a wall is built around what EXISTS,
+  and that epoch's growth then answers it (infill inside, typed emission outside).
+  A SHORT constructor car (GROW-FOLD) lands it BEFORE DRESS-1 (the substrate must be
+  right before it is inked), with exits: the differential · the plot-count
+  restoration · the census suite · **and C1's evidence row RE-BASED via the
+  frozen-circuit instrument** (§655.3's deferred ruling now has its instrument and
+  its slot). The legacy REG-4 differential stays honestly red until cutover, quoted,
+  with its arming route in place.
