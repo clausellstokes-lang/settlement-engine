@@ -28165,3 +28165,35 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   registers/zoom → judging → decline → film → the port. Exits and proofs per the
   decision doc; every wave sealed, every zero controlled, gestalt-first taste gates
   with the owner's eyes as final judge.
+
+## §670 · THE SPINE PANEL RULES — ZERO REFUTED, SEVEN BLOCKERS INTO AMENDMENT A1, SPINE-1 ROLLS (2026-08-26 ~04:40 CDT)
+
+- **§670.1 THE PANEL** (five lenses, xhigh, all evidence executed at the seal): **0/5
+  refuted**; the aggregation lens answered P1 CONSTRUCTIVELY (the two-stage
+  run-fusion + chunking mapping, measured IN the reference band) and the performance
+  lens proved the scale feasible while refuting the naive cost model (batch per-epoch
+  re-noding 1–2 orders over budget; one-shot noding of 108k segments in ~1.5 s).
+  Seven blockers, ALL RULED in **DESIGN_SPINE Amendment A1**: (i) the partition holds
+  the REPRESENTATIVE substrate — the signed cartouche-ratio law stands, census tiers
+  draw everything, aggregation only above them; (ii) the page unit is the PARTY-RUN
+  MASS via the two-stage dissolve, band pinned at 2.7–4.6 rw², budgets anchored to
+  the reference's own per-tier counts, identity as a BIJECTION, ONE aggregator after
+  cutover, the seam law (shared polylines simplified once; ridge truth decoupled from
+  chunking); (iii) WALL is a THIN FACE (the band's ground) with the wrap's trace
+  facet-resampled to the form's economy — REG-2's dress contract survives, WALL×WATER
+  gains its invariant, water gates and termini mint from the sealed vocabulary, the
+  gate economy is stated, vintage honesty is schema-enforced; (iv) the GROW A1.1
+  ledger/frame split RECONCILED — the ledger stays pure data, the constructor is a
+  single-shot EPOCH FOLD, the narrow byte-wise reading superseded by name; (v) input
+  provenance — the corridor water cure is absorbed into §3a (REG-ROUTE subsumed, its
+  residue re-chartered as dress), seating stays its own car, CAR-FRAME absorbed by
+  the page view; (vi) construction is INCREMENTAL (one maintained arrangement, epochs
+  append — matching prefix closure), the perf exit gains an owning instrument and a
+  pinned protocol; (vii) completeness — CLIFF joins the taxonomy, the accessible arm
+  joins §6 (now a standing checklist item for every architecture doc), A6.1 emission
+  + the totality walker move INTO SPINE-1, GROW-B's quarter/ring/form content
+  restored, the wall-family ledger completed, all TEN arms in the retirement
+  declaration, L-REG-34 homes in the page view, L-REG-5's regime inputs added.
+- **§670.2 SPINE-1 DISPATCHES** (Opus, dormant-flagged `REG_FABRIC_OPTS.partition`,
+  base = the newest seal) against body + A1 with A1's exit set. The chair seals;
+  gestalt gates at page scale first; the owner's eyes remain the final judge.

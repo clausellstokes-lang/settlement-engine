@@ -149,3 +149,97 @@ subdivision-heavy epochs? P4: the sealed-arm re-target — can `--fuse/--shapes/
 that break? P5: the organic guard — which measurable property separates grown
 irregularity from jitter, and does the R-MORPH grounding suffice at weights grade?
 P6: anything in §§628–668 this design contradicts or drops.
+
+
+---
+
+# AMENDMENT A1 — the five-skeptic panel folded in (§670; 0/5 refuted, 7 blockers ruled)
+
+**The build brief reads body + A1; A1 wins conflicts. Panel evidence lives in the §670
+collection; rulings only here.**
+
+## A1.1 · THE SUBSTRATE RULING (S1/S5-B1): the partition holds the **REPRESENTATIVE**
+substrate — tierGrammar's signed law stands (above village the map is representative
+and the cartouche prints the ratio). Measured truth at metropolis: ~4.3k bodies, not
+the body's erroneous "25–30k" (corrected; that figure was household-census grade,
+which lives in the compendium's data, never in map faces). Census tiers
+(thorp–village) draw EVERY building — **aggregation exists only above the census
+tiers** (S5-M3). The identity ladder ends at the representative plot + its household
+roster as data; the "then interiors" clause is STRUCK (m1 — unminted capability).
+
+## A1.2 · THE PAGE LAW RULING (S1/S5-B2, the panel's own two-stage cure adopted):
+the page unit is the **PARTY-RUN MASS** — (stage 1) generalize REG-1's fusion as a
+face-set DISSOLVE of interior party BOUND edges along a run (every fusion break is
+already a typed edge, so the organic guard and the aggregation rule are ONE law);
+(stage 2) chunk adjacent runs within one BLOCK face up to the band ceiling, members
+concatenated. The band is pinned in **road-width² space: 2.7–4.6 rw²** (the reference
+band under normalization; runs measure 2.9–3.5 rw² — inside). The page budget anchors
+to the REFERENCE'S OWN PER-TIER COUNTS (town ≈ the 616-class page; city/metropolis ≈
+the Grimfall thousands — "hundreds" was a town-scale figure, corrected). Seam law
+(S5-M4): aggregation is face-set dissolve over SHARED edges; simplify each shared
+polyline ONCE, both faces reuse it; **one page-mass dress law** — ridge geometry is
+truth (one ridge per party-run, hf378) DECOUPLED from chunking; a chunk boundary
+never breaks a continuous ridge. Identity census is a **BIJECTION** (S5-M1): every
+truth plot is drawn-as-itself XOR owned by exactly one drawn mass, both directions,
+checked at the END of the view derivation. After cutover there is **ONE aggregator**
+(this one); the §181.2a LOD merge retires with the printed ratio RE-HOMED to the page
+register's own emission (S5-M2), and masses carry member unit-lines COUNTED in the
+budget (no hollow block-wash — the banned class stays banned).
+
+## A1.3 · THE WALL RULING (S2-B1/B2): **WALL is a THIN FACE, not an edge** — the
+band's ground with width, bounded by inner/outer edges, preserving §575's two regimes,
+the stones' reserved ground, and REG-2's dress contract (runBands/inkHalf consume the
+band face's geometry). **The wrap's trace is derived from the piece enclosure, then
+RESAMPLED to the form's facet economy** (the walls.js facet law carries over: the
+turn distribution is a property of the FORM) — pieces then conform to the BAND face
+(abut or clear), which is what the tangential census measures. WALL×WATER gains its
+invariant + law (S2-M1): a wall face terminates at a bank with a WATER GATE or
+TERMINUS WORK (minting rules from the sealed vocabulary — hf313's water gate, the
+cliff/water termini; S2-M2); the half-ring is a lawful wall face whose fourth side IS
+the bank. GATE ECONOMY (S2-M3): gates mint for major ways at the raise; thereafter a
+way may NOT cross the band ungated — later ways dead-end at the band, divert to a
+gate, or a recorded act mints a postern (the ledger carries it). VINTAGE HONESTY
+(S2-M4): the wall event's year comes from the ledger's recorded/derived-frozen value
+with provenance — the §11.11 stamp defect (a vintage with no year) is structurally
+excluded by the schema requiring the year field. The circuit node's published
+contract gets a SUCCESSOR SPEC (S2-M5): typed runs over an ordered vertex cycle,
+claims cut from one offset copy — the band face publishes the same surface.
+
+## A1.4 · THE LEDGER RECONCILIATION (S3-B1): DESIGN_REG_GROW A1.1 stands with one
+declared refinement — the ledger remains the pure DATA pre-stage; **the PARTITION
+CONSTRUCTOR is a single-shot stage that FOLDS the ledger's epochs inside one build**
+(one construction per build; lawClaims built once from the FINAL partition; a frame =
+the same fold on the truncated ledger — prefix closure preserved because the fold is
+append-only). The narrow reading "buildFabric stays byte-wise as-is" is SUPERSEDED by
+name, here.
+
+## A1.5 · INPUT PROVENANCE (S3-B2): SPINE-1 does not trust broken producers — the
+corridor water-refusal cure is ABSORBED into §3a (corridors terminate at bank/frontier
+nodes by the partition's own construction; REG-ROUTE's row is thereby subsumed and
+its remaining scope — grade response, crag avoidance, fragments — re-charters as a
+post-spine dress car). The §640 seating weights are NOT SPINE-1 inputs — institution
+seating remains its own car (CAR-SEATING held per the review; S3-M6), and CAR-FRAME
+is ABSORBED by the page view (frame-to-extent is the view's first duty).
+
+## A1.6 · CONSTRUCTION COST (S4-B): batch per-epoch re-noding is REFUTED by
+measurement; the constructor is **INCREMENTAL — one maintained arrangement, epochs
+APPEND into it** (the panel's own one-shot noding of 108k segs in ~1.5 s proves the
+scale feasible; append-only matches prefix closure). The cost model is stated: ~40
+banded epochs is the multiplier and is priced, not assumed. **The performance exit
+gains an OWNING instrument and car** (S4-M1): a perf harness with a PINNED protocol
+(warm process, three samples, per tier) lands IN SPINE-1; budgets: constructor ≤
+2.5 s metropolis warm; page frame ≤ 1.5× the pinned warm city baseline (1.29 s).
+
+## A1.7 · COMPLETENESS SWEEPS (S3): **CLIFF joins the edge taxonomy** (M1 — live
+fabric at the seal). **The accessible-lens arm joins §6** (M2 — the same omission
+A1.6-GROW cured; it is now a standing checklist item for every architecture doc).
+**A6.1 emission moves INTO SPINE-1** (M3 — L-REG-26 binds every wave; the totality
+walker rides with it). **GROW-B's content is restored**: quarter minting (§3f-GROW)
+is a construction step consuming ledger tier-threshold events; the ring census and
+form census join §6 (M4). The §5 ledger completes over the wall family (M5:
+walls.js/wallRuns/circuitDemotion/districtPartition/epochAxis each named — extend or
+read the band face, never re-derive) and the arm declaration covers ALL TEN arms
+(M10 — the I1 lesson). L-REG-34's legend census homes in the page view's exit (M7);
+L-REG-5's regime inputs (readiness/era/prosperity) join §2 (M8). SPINE-1's exits
+regain the WAY×WALL crossing half (M9 — SPINE-1 builds gates, so it proves them).
+m3 banked: packed.blocks are lane-padded quads — never partition faces.
