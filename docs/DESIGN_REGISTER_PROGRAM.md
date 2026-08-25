@@ -505,3 +505,14 @@ countryside band: **L-REG-31 bridge alignment** (measure, cure, census + planted
 control), **REG-QUAY** (the §635.4 waterfront exemption for moored bodies, drawn-quay
 census + planted control), and the **byte-ceiling mint** for the signed ratchet unit.
 The wall:all watch row (§635.3) binds: re-measure BEFORE any circuit-softening change.
+
+## Amendment A9 — the bridge-siting law (owner, §637)
+
+| Law | Statement | Source |
+|---|---|---|
+| L-REG-32 | A bridge sites at a local NARROWS within a road-network corridor; the roads bend toward the bridge, never the deck or site toward the roads. A road far from a narrows follows the bank. Fords mirror: wide shallow reaches. Engine-event bridges (if any) never move — derivation-time bridges re-site as declared repair. | §637 |
+
+REG-5 carries the MEASURE only (span-vs-narrows ratio per corpus bridge + the placement
+code site). **REG-BRIDGE** is the cure car: after REG-5, before REG-6; it moves the
+street web, so the wall:all watch row (§635.3) and a bridgehead-faubourg re-measure
+(§636/§632.4 liveness) are part of its exit.

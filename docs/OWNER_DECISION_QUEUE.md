@@ -27231,3 +27231,29 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   REG-QUAY deliverable** (mid-flight addendum — same module ground, same census); the
   lane binds to the detail register's waterfront anchors where they exist and reports
   THIN where they do not. A THIRD warehouse round follows REG-5's seal.
+
+## §637 · OWNER LAW — BRIDGE SITING: THE NARROWS WITHIN REACH OF THE ROADS (2026-08-25 ~08:45 CDT)
+
+- **§637.1 THE DIRECTIVE, verbatim intent:** bridges are built at "the shortest point
+  between both banks within reasonable distance to major roads and networks."
+- **§637.2 MINTED AS L-REG-32 (siting, the deeper half of L-REG-31's angle law):** a
+  bridge sites at a LOCAL NARROWS of the river — the shortest bank-to-bank span within a
+  road-network corridor (the tolerance corridor is measured before it is chosen) — and
+  **the road network bends TOWARD the bridge: the crossing attracts the roads, never the
+  reverse.** A road that meets the river far from any narrows follows the bank to the
+  crossing (the period riverside road). **Fords are the mirror law: a ford takes the
+  WIDE, shallow reach** — the two crossing kinds pull toward opposite river geometry,
+  which is itself a legibility gift (a reader who sees a crossing at a pinch reads
+  BRIDGE; at a broad reach, FORD). Bridgehead faubourgs (REG-4's typed origin that fired
+  nowhere) should become REAL where siting improves — named as an expected consequence,
+  measured not assumed.
+- **§637.3 LIFECYCLE CARE + SEQUENCING:** WHERE bridges live must be established before
+  anything moves — if bridge placement is fabric-time derivation (expected), re-siting
+  is derived-geometry repair in scope (§632.3's framework, declared shift); if any
+  bridge is engine-event truth, its siting is lived history and does NOT move (THE
+  PROMISE), only its ink. **REG-5 gains a MEASURE-ONLY leg mid-flight** (beside its
+  angle census, cheap): for every corpus bridge, the span at the crossing vs the local
+  narrows within the road corridor, the ratio, and WHERE placement happens in code.
+  **The CURE is its own car, REG-BRIDGE, chartered now** — sequenced after REG-5 on the
+  measure's findings, before REG-6 (it moves the street web: the wall:all watch row and
+  the bridgehead re-measure ride with it). Program doc gains **A9**.
