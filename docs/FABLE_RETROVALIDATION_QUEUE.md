@@ -44,11 +44,24 @@ is a **provenance fact**, not a quality claim — it says who checked, not how w
   the mechanical parts.
 - Lane (subagent) work inherits its dispatching chair's seat and is enrolled by that
   chair at collection. A lane never writes this file.
-- **STRUCTURAL CURE (§685.4): `chair-tools/chair-commit.sh` REFUSES** a message with no
-  seat trailer (or two), and refuses an Opus-seat commit that does not carry this file
-  among its paths. Five planted controls prove each refusal fires and exits non-zero, so
-  an `&&`-chain cannot walk past one. **Unmarked is not a state the chair's tool can
-  produce** — the marking is by construction, not by memory.
+- **STRUCTURAL CURE, IN TWO CHANNELS — and §685.4's own claim was too broad (§687.3):**
+  **(1)** `chair-tools/chair-commit.sh` REFUSES a message with no seat trailer (or two),
+  and refuses an Opus-seat commit that does not carry this file among its paths — five
+  planted controls, each exiting non-zero so an `&&`-chain cannot walk past one. That
+  covers the **private-index path**. **(2)** `.husky/commit-msg`, tracked on the branch,
+  refuses any commit touching the ledger file without exactly one seat trailer — four
+  planted controls including a **scope proof** that a commit touching other paths is NOT
+  blocked, because lanes commit constantly and must never be stopped by a chair rule. That
+  covers the **plain-`git commit` path**, which §685.4's cure did not: `commit-tree` runs
+  no hooks and a chair using ordinary git bypassed the check entirely.
+  ⚠ **STILL ESCAPING, NAMED RATHER THAN PAPERED OVER:** the mark is per-COMMIT while the
+  obligation is per-ARTIFACT (a document amended in place keeps a stale header); non-commit
+  surfaces (the memory estate) cannot be reached by any hook; the seat is **self-declared**
+  in both channels; and the queue-coupling predicate is scoped to ledger commits, so an
+  Opus commit touching other judgment-bearing paths carries no row. **CHARTERED, not
+  assumed** (§687.3): a tests/lint walker asserting hook existence + provenance-map
+  totality, and a widened coupling predicate — both are port-era cars with a real
+  three-ratchet cost.
 
 ## 4 · WHAT A ROW MUST SAY
 
@@ -70,6 +83,7 @@ annex re-verification.
 
 | stratum | what it holds | why it ranks here |
 |---|---|---|
+| **P0 · POISONED DISCHARGES** | any act with UNKNOWN provenance that a *completed* ruling now stands on | Added §687 on the critic's finding, and it outranks taste: a P1 error costs one wrong look, while a P0 error means **work already reported closed is not closed, and nobody will re-open it.** ⛔ Known member: **§287.10 — unattributed and never ruled — was the ground on which §298 REVERSED §242's holdout rulings**, i.e. an unvalidated section overturned a validated one *inside the estate's only completed sitting*. §685.5(v) had already voided two inferences of this shape. **P0 is a search, not a list**: sweep §291–§298 and every "MOOT/VOID/SUPERSEDED under §N" citation whose N is UNKNOWN in the provenance map. Bounded, and it repairs a discharge rather than a row. |
 | **P1 · TASTE AND CLOSURE** | judging rounds · blind silhouette/gestalt reads and their keys · dress "look" calls · corpus curation · film pacing | §236.2 names exactly this class as Fable-seat work. It is where the seat plausibly changes the answer, and it compounds — a dress call propagates into every later wave. |
 | **P2 · FORECLOSING ARCHITECTURE** | retirements/deletions · vocabulary mints · schema and format shapes · anything that removes an option | Cheap to re-examine now, expensive after the code is gone. |
 | **P3 · MINTED CONSTANTS** | every SIGNED_CONSTANTS row minted under an Opus chair | Already second-netted: the **owner's tuning signature** walks this same sheet, last. |
@@ -85,18 +99,35 @@ empty because it covered its whole surface; a scoped pass cannot inherit that se
 ### 6.1 · STRATUM 0 — the historical surface (audited at §685.5)
 
 *Seeded from the §685 provenance audit — six auditors over the ledger by era, one over
-the document estate, each verdict attacked by a skeptic. See ODQ §685.5 for the findings
-and their evidence.*
+the document estate, and a completeness critic. See ODQ §685.5 and §687 for the findings.*
+
+⛔ **THE OWNER HAS GIVEN THIS ORDER FOUR TIMES** (§687.1): **2026-07-31** (creating
+docs/FABLE_VALIDATION_QUEUE.md) · **2026-08-17** (§236, creating this file) · **2026-08-23**
+(§484, creating the "OPUS REGISTER") · **2026-08-26** (§685, this). Three mechanisms, three
+lapses. **That is the argument for enforcing the mark in tooling rather than in discipline
+— and for keeping ONE register, this one, instead of a fourth.**
+
+⭐ **THE INSTRUMENT: `docs/PROVENANCE_MAP.tsv`** — one machine-derived row per ledger
+section (693), each resolved to OPUS-TEXT · FABLE-TEXT · TRAILER-OPUS · TRAILER-FABLE ·
+UNKNOWN by two independent channels. **It is ADDITIVE — history is never rewritten.**
+Measured: **474 TRAILER-FABLE · 52 OPUS-TEXT · 37 FABLE-TEXT · 130 UNKNOWN.**
+**THE UNKNOWN SURFACE IS FOUR RUNS, NOT 608 SECTIONS: §18–§23 · §287–§290 · §311 ·
+§322–§439.** That is what the owner's rule genuinely leaves owed, and it is the register's
+true size.
 
 | era | status | measured | P |
 |---|---|---|---|
-| **§1–§237** | MIXED | 254 of 258 headers text-unmarked. §237.2's "Rows §1-§237 are Fable-validated" is a **blanket declaration, not a finding** — and §236.1 disagrees with it on the boundary (§235 vs §237). 36 ledger commits (§1–§16, the product launch tail) carry an **Opus 4.8** trailer, refuting the blanket outright. | P4 for the shipped launch tail (long superseded); **P2** for the era's constitutional laws |
+| **§1–§237** | MIXED — and the blanket is refuted | §237.2's "Rows §1-§237 are Fable-validated" is a **blanket declaration, not a finding**, and §236.1 disagrees with it on the boundary (§235 vs §237). The era's own text refutes it: **§70.1 records that seven of the eight design-volume sweeps were OPUS lanes** ("only LG's was Fable"), **§51.2 charters "Phase V — verification (OPUS lanes, Fable-governed)"**, and §109.3 fixes the staffing law that makes the era mixed-seat *by design*. 36 launch-tail commits carry an **Opus 4.8** trailer. Provenance-map UNKNOWN here: **§18–§23**. | P4 for the shipped launch tail; ⛔ **P0/P1 for §22** — see the rows below |
+| **⛔ §22 · THE UNIVERSAL STANDING AUTHORIZATION** | **UNKNOWN provenance** | The chair's *operative reading* of the owner's "for anything now and in the future that requires my permission, i give you that freely" — converting every future owner-gate into a chair-executable act, **subject to a carve-out list the chair itself drew**. It is the widest grant in the ledger, **every later chair act stands on it**, the reading is the chair's rather than the owner's words, and its provenance is UNKNOWN. | **P0** |
+| **§12.4 · THE LOCKS SPLIT** | **UNKNOWN + CONTRADICTED** | Ruled `locks.institutions` DELETED / `locks.factions` KEPT AND WIRED — a self-reversal on the repair-vs-new-capability line, made inside the 08-10/11 Opus window. ⛔ **docs/FABLE_VALIDATION_QUEUE.md carries an undischarged row on the same subject reaching the OPPOSITE conclusion** ("the `locks` shield STOPPED, not repaired: neither writer-side nor reader-side is available to a lane"). Two records, two answers, one still marked owed. | **P0** |
+| **§16 · THE ESPIONAGE REFUSAL** | UNKNOWN provenance | Self-described as "the largest finding of the run": refuses a capability and redefines a product surface on three grounds, dated inside the Opus window, and resting on a measurement a retro-pass can simply re-execute. | P1 |
 | **§238–§274** | ✅ **DISCHARGED** | 36 sections properly marked; all 30 entries ruled at §293–§298 (2026-08-21). No action. | — |
 | **§275–§290** | **OWED** | §275/§276 are explicitly Fable-chaired. **§287–§290 (2026-08-20) carry no attribution of any kind**, and the sitting's coverage stops at §274. | P2 |
 | **§291–§321** | MIXED | 30 of 31 sections carry in-text "chair: FABLE". **§311 is unmarked — and it is the undercity design of record**, not a mechanical row. | P2 |
 | **§322–§439** | ⛔ **THE DARK WINDOW** | **~118 sections with NEITHER a text mark NOR a commit trailer** — the seat-model era whose own §447 fixed the seat model it then failed to record. The largest genuinely-owed surface in the program. | **P1/P2 by content** |
 | **§440–§684** | **RECOVERED-NOT-MARKED** | Seat recovered as **Fable 5** from commit trailers (492 Fable · 39 Opus · 174 none across the 705 commits touching the ledger file; the instrument validated 26/28 at the §238–§274 boundary). Owner decides at the pass whether recovery discharges the mark. | P3 |
 | **the document estate** | REPAIRED IN PART | The *architecture* tier named its seat (DESIGN_SPINE, _COMPLETION, _REG_GROW, _REGISTER_PROGRAM); the **decision, evidence and signature tier did not** — SIGNED_CONSTANTS (the sheet the owner signs LAST), SPINE_DECISION, CONVENTION_AUDIT and OWNER_DOCKET were silent, and SIGNED_CONSTANTS' attribute-by-§-pointer route **fails** (none of its six cited headers carries a seat). All four now carry a recovered-provenance stamp (§686 act). | P2 |
+| **⛔ docs/FABLE_VALIDATION_QUEUE.md** | **A SECOND, OLDER QUEUE — LARGELY UNRULED** | The **2026-07-31** asking's own register: 883,766 B, **151 data rows, of which 147 carry no status marker**. Its own sections record a Fable pass over rows through 2026-08-01 and an "OPUS-ERA — FABLE-SURVEYED 2026-08-09 (F-S1)" over parts; **the residue was never ruled**. It holds the §12.4 contradiction above. **Folded in by POINTER, not merged** — the rows stay where they are; this file is the single register that knows about them. | **P1** (it is judgment-dense by construction — its own row law admits only judgment-density items) |
 | **non-doc surfaces** | ⛔ **UNRECOVERABLE** | 43 preserve seals name lanes and §§ but **never a seat**; only **11 of 316** lane receipts carry a seat line; INSTRUMENTS.md contains zero seat words. ⚠ **SCOPE HAZARD: `refs/trains/*` (31 refs) and `refs/preserved/*` (3) are a second, older sealed namespace that a sweep scoped to `refs/preserve/` misses entirely.** | P4, but the scope hazard is P2 for any future sweep |
 
 ### 6.2 · STRATUM 1 — the forward arc (pre-authored; each wave's chair appends specifics)

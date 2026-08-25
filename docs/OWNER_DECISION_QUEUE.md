@@ -28728,3 +28728,79 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   · the gestalt gate's **≥ 80 % blind-key** mechanics (PA.7) · the ROUTE residue and the
   §650.2 clip census in its exits (PA.1) · plus §686.6(i)'s perf watch. Seat: Opus,
   marked, enrolled at the queue's §686 row.
+
+## §687 · THE AUDIT COMPLETES — THE FOURTH ASKING, THE REAL OWED SURFACE, A POISONED DISCHARGE, AND A CORRECTION TO §685'S OWN CURE (2026-08-26 ~16:10 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+- **§687.1 ⛔ THE OWNER HAS GIVEN THIS ORDER FOUR TIMES.** **2026-07-31** — *"If I run out
+  of fable, I want you to seamlessly switch to opus 5. For all validations post fable
+  weekly usage is up, write in your documents and instructions for an account that has
+  fable usage to validate those that weren't"* → created **docs/FABLE_VALIDATION_QUEUE.md**.
+  **2026-08-17 (§236)** → created **docs/FABLE_RETROVALIDATION_QUEUE.md**. **2026-08-23
+  (§484)** — *"…with retroactive validatin with fable when I say so, they should be
+  marked"* → created the **OPUS REGISTER** on the pickup card. **2026-08-26 (§685)** → this.
+  **Three mechanisms, three lapses**: §236's marker convention stopped at §321, §484's
+  tag ran 16 headers and stopped at §513, and §484's promised register — *the owner's own
+  audit surface* — no longer exists in the handoff at all. **This is the finding that
+  justifies enforcing the mark in tooling instead of discipline, and keeping ONE register
+  rather than minting a fourth.** The 07-31 queue is folded into the §685 register **by
+  pointer, not merged** — its 883,766 B of rows stay where they are.
+- **§687.2 THE REAL OWED SURFACE IS 130 SECTIONS IN FOUR RUNS, NOT 608.** §685.5(i)'s
+  "88 % silent" figure measured the ledger TEXT and was right about the text — but the
+  instrument built here resolves the rest. **`docs/PROVENANCE_MAP.tsv` is landed**: one
+  machine-derived row per ledger section (**693**), each resolved by two independent
+  channels — the section's own header, and the **Co-Authored-By trailer of the commit that
+  introduced that header**, recovered by walking all 707 ledger-file commits in order.
+  **MEASURED: 474 TRAILER-FABLE · 52 OPUS-TEXT · 37 FABLE-TEXT · 130 UNKNOWN.** The UNKNOWN
+  surface is four contiguous runs — **§18–§23 · §287–§290 · §311 · §322–§439** — and that,
+  not the text-silence count, is the register's true size. The map is **ADDITIVE**: history
+  is never rewritten (law 12), and the map can be regenerated from the walk at any time.
+- **§687.3 ⛔ A CORRECTION TO §685.4 — MY OWN CURE WAS OVER-CLAIMED, AND THE CRITIC CAUGHT
+  IT.** §685.4 said "unmarked is not a state the chair's tool can produce." True of that
+  tool — and beside the point, because **`git commit-tree` runs no hooks and a chair using
+  ordinary `git commit` bypassed the gate entirely.** The cure was an *opt-in wrapper
+  script living in a scratchpad*. **NOW IN TWO CHANNELS:** the script gate (private-index
+  path, five controls) **plus a tracked `.husky/commit-msg`** that refuses any commit
+  touching the ledger file without exactly one seat trailer — **four planted controls,
+  including a SCOPE PROOF that a commit touching other paths is not blocked**, because
+  lanes commit constantly and must never be stopped by a chair-governance rule.
+  **STILL ESCAPING, NAMED RATHER THAN PAPERED OVER:** the mark is per-COMMIT while the
+  obligation is per-ARTIFACT (a doc amended in place keeps a stale header) · non-commit
+  surfaces (the memory estate) are beyond any hook · **the seat is self-declared in both
+  channels** (§685.2 admitted this; the honest cure is to keep the harness trailer as an
+  independent second channel and test that the two agree, with an allowlist whose only
+  members today are §685/§686) · and the coupling predicate is scoped to ledger commits.
+  **CHARTERED AS PORT-ERA CARS, not assumed**: a `tests/lint` walker asserting hook
+  existence and provenance-map totality, and a widened coupling predicate. Both carry the
+  real three-ratchet cost of a new test file; neither is free, and neither is invented now.
+- **§687.4 P0 IS ADDED TO THE REGISTER — POISONED DISCHARGES.** A stratum above taste,
+  because a P1 error costs one wrong look while a P0 error means **work already reported
+  closed is not closed, and nobody will ever re-open it.** ⛔ **The known member: §287.10 —
+  unattributed and never ruled — was the ground on which §298 REVERSED §242's holdout
+  rulings.** An unvalidated section overturned a validated one *inside the estate's only
+  completed retrovalidation sitting*. §685.5(v) had already voided two inferences of this
+  exact shape (§620.1's "unmarked = Fable-seat" → §626.3's "every architecture is now
+  Fable-authored or Fable-validated"). **P0 is a search, not a list**: sweep §291–§298 and
+  every "MOOT / VOID / SUPERSEDED under §N" citation whose N is UNKNOWN in the map.
+- **§687.5 THREE HISTORICAL ITEMS PROMOTED BY NAME** (all UNKNOWN provenance, all inside
+  the 08-10/11 Opus window): **(i) §22, THE UNIVERSAL STANDING AUTHORIZATION — P0.** The
+  chair's *operative reading* of the owner's grant, converting every future owner-gate into
+  a chair-executable act subject to **a carve-out list the chair itself drew**. It is the
+  widest grant in the ledger, every later chair act stands on it, and the reading is the
+  chair's rather than the owner's words. **(ii) §12.4, THE LOCKS SPLIT — P0 and actively
+  CONTRADICTED**: it ruled `locks.institutions` DELETED / `locks.factions` KEPT AND WIRED,
+  while **docs/FABLE_VALIDATION_QUEUE.md carries an undischarged row on the same subject
+  reaching the opposite conclusion** — *"the `locks` shield STOPPED, not repaired: neither
+  writer-side nor reader-side is available to a lane."* Two records, two answers, one still
+  marked owed. **(iii) §16, THE ESPIONAGE REFUSAL — P1**: self-described as "the largest
+  finding of the run," it refuses a capability and redefines a product surface, and rests
+  on a measurement a retro-pass can simply re-execute.
+- **§687.6 AND THE ERA'S OWN TEXT REFUTES §237.2's BLANKET.** "Rows §1-§237 are
+  Fable-validated" is a declaration, not a finding, and §236.1 disagrees with it on the
+  boundary (§235 vs §237). The era says otherwise in its own words: **§70.1 — "The
+  WC/EP/POP/WF/INT/WY/tails sweeps were OPUS lanes (pre-§51 staffing); only LG's was
+  Fable"**; **§51.2 charters "Phase V — verification (OPUS lanes, Fable-governed)"**; §109.3
+  fixes the staffing law that makes the whole era **mixed-seat by design**. The blanket is
+  struck; the map governs.
+- **§687.7 WHAT THIS DOES NOT DO.** It does not slow the arc, hold a wave, or move a single
+  owner gate. **DRESS-1 is in flight** (dispatched §686.7) and everything above is register
+  work that runs beside it. The pass itself remains **the owner's to call, and to scope**.
