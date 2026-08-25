@@ -28234,3 +28234,21 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   three-reader inventory wave is in flight over exactly that set; same schema, same
   discipline (verbatim quotes, positive CLEAN lists); the amendments remain the
   chair's hand with verifiers before consumption.
+
+## §673 · OWNER RULING — READ THE CODE; EMULATE WITHOUT DERIVING (2026-08-26 ~05:50 CDT)
+
+- **§673.1 THE RULING, verbatim intent:** "You should still read theirs. We can emulate
+  without directly deriving and there are limitations on what is copyright or
+  patented." This is the owner exercising the legal-risk judgment that was always the
+  owner's by-nature carve-out; it SUPERSEDES §668's conservative no-read posture. The
+  owner's legal reasoning is recorded as the basis: reading is lawful; copyright
+  protects expression not ideas/algorithms; GPL obligations attach to derivative
+  works, not knowledge; the techniques are decades-old published prior art.
+- **§673.2 THE PRESERVED DISCIPLINE (chair's, riding under the ruling):** the reading
+  yields an IDEAS-LEVEL dossier (algorithms in our own words and mathematics);
+  implementation lanes consume the dossier and the design docs, NEVER the source or
+  raw reading notes; NO line, identifier, comment, or structural transliteration ever
+  enters our code — emulation of ideas, never copying of expression; the study logs
+  what was read and when (the honest trail). The formal-comfort question remains on
+  the owner's legal docket. R-WATABOU-CODE dispatches now (Fable seat) over
+  watabou/TownGeneratorOS with that charter.
