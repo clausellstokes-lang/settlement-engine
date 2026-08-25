@@ -27882,3 +27882,25 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   console + JS hooks, then the single generation). The chair runs the dissection in
   the browser pane directly; findings land beside the §656 dossier and unlock the
   held cars.
+
+## §658 · THE LIVE DISSECTION OPENS — MFCG'S CLASS MODEL RECOVERED, AND IT VALIDATES EVERY LAW WE JUST WROTE (2026-08-25 ~21:00 CDT)
+
+- **§658.1 FIRST HAUL (the live bundle, 1.31 MB, 588 Haxe classes with names intact):**
+  the model namespace — Blueprint · City · Cell · **Topology** · District ·
+  DistrictBuilder · CurtainWall · Canal · Building · Landmark · UnitSystem ·
+  **Grower (DocksGrower, ParkGrower, Forester)** · blocks.Block/TwistedBlock ·
+  wards.Ward (Alleys, Castle, Cathedral, Farm, Harbour, Mansion, Market, Park,
+  WardGroup, Wilderness) · geom.SkeletonBuilder (straight skeleton — block insetting/
+  roof ridges). The mapping namespace is literally VIEWS: PatchView · RiverView ·
+  RoadsView · WallsView · BuildingPainter · FarmPainter. **The §652 topology–paint
+  contract is his architecture, named in his own class paths: a model, then views of
+  it.** The GROWER classes mean wards GROW into their ground even in his one-shot
+  generator — the REG-GROW direction, validated at the reference. The entire config
+  surface is the URL: ~11 knobs + a seed — the restraint discipline in one line.
+  The live app is YEARS beyond the 2017 open-source repo (TwistedBlock, Canal,
+  Harbour, WardGroup are all post-OS) — the dissection, not the repo, is the true
+  reference; the repo remains the lawful code base to study line-by-line.
+- **§658.2 IN FLIGHT:** the three §657.2 repair lanes (TREE-TRIAGE with its ref-pin
+  first · INSTRUMENTS · MEASURES incl. the 10-arm re-exhibit and TE-WSEAM); the
+  dissection continues (JSON model export across seeds · the village and dwelling
+  generators · FTG with its recording rig BEFORE its one daily shot).
