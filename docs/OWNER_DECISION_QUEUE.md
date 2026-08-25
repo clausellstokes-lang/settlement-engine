@@ -27327,3 +27327,44 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   **R-MORPH dispatches as a concurrent read-only research lane once the contest names
   the silent set.** REG-5 received the monoculture advisory (do not harden arable to
   reach the band).
+
+## §640 · THE CONTEST RULES — WEIGHTS NOT WALLS, AND R-MORPH DISPATCHES (2026-08-25 ~11:00 CDT)
+
+- **§640.1 THE UNION** (both slices, every quote machine-verified verbatim against the
+  preserved corpus): over 49 rows — **25 DOSSIER-CONFIRMED · 3 CONFIRMED-PLAUSIBLE ·
+  17 SILENT · 4 CONTRADICTS.** Files: `contest-A.json` / `contest-B.json` (scratchpad,
+  next work-snapshot ref carries them).
+- **§640.2 CHARTER REVISIONS FROM THE FOUR CONTRADICTIONS — hard rules become WEIGHTS
+  AND VARIETIES:** **REG-SITE** re-charters: hospitals take an edge-or-gate PULL (two of
+  four measured hospitals intramural); fairs are a hall-or-field DRAW (Oxford moved its
+  fair INTO the guildhall; Stourbridge's field equally confirmed); noxious trades take
+  an edge/water PULL with intramural LAWFUL (York Tanner Row, Norwich, Gloucester,
+  Northampton, Nottingham — and Newmarket 1472/3 sat its tanners by the Guildhall).
+  **REG-WATER** re-charters: "downstream" is a WEIGHT never a hard fail; the
+  water-draw-contamination MECHANISM stays weighted-real; the well-separation rule is
+  PLAUSIBLE-only and stays soft; the mill arm ADOPTS R-INST-2 §11's own machinery —
+  `waterPower` as a site-gated enum incl. wind|horse, era gates (POST_MILL ≥ 1185,
+  SMOCK/TOWER ≥ 1500s), and the sourced refutation that a mill is universal at all.
+  ⚠ Named residual for the REG-WATER lane: `townLayoutV2.js:209` still matches
+  `tannery` by NAME after the five-spelling prose cure (the word-occurrence hazard,
+  live in code). **REG-ROUTE** revises one clause per the Beames rookery law: a
+  honeycomb of blind alleys is a LAWFUL district form — the defect is the ZERO-MOUTH
+  stranded fragment, never the dead-end count. **REG-GROW's spec gains the perch-module
+  tension**: rank-and-file regularity can be a lawful PLANNED FOUNDATION (Tewkesbury's
+  perch-unit burgage primaries) — the architecture must produce BOTH organic accretion
+  AND planned-foundation form as typed origins, not stamp regularity as defect.
+- **§640.3 THE SILENT SET SPLITS IN TWO (chair's distinction, vetoable):** rows whose
+  defect contradicts the ENGINE'S OWN PUBLISHED DATA (roads across sea vs its own
+  `landing` crossings · the river climbing against its own height field · zero-growth
+  snapshots vs the fabric's own year machinery · the dossier'd graveyard never drawn)
+  are INTERNAL-CONTRADICTION MACHINERY — §638.2 does not gate them; they proceed.
+  TRUE convention-priors stay gated on grounding: the hinterland MOSAIC proportions
+  (7 of 9 silent — the corpus excluded field systems BY CHARTER: "no building — field
+  system"), settlement-FORM typology (nucleated/green/street/row return zero hits),
+  in-town terrain grammar at street scale, organic street-web geometry, and the
+  bowshot/siege-camp distance. **R-MORPH DISPATCHES NOW** (Fable seat per the owner's
+  seat model) scoped to exactly that set; **REG-H and REG-TERR's terracing WAIT on it**
+  (§638.2); REG-ROUTE/REG-DEF/REG-SITE/REG-WATER proceed on their grounding.
+  Water-DRAWING convention (the stroke tangle) grounds in the estate's own 302-plate
+  map corpus, not in R-MORPH — world structure and drawing dress have different
+  authorities (§0's precedence, restated).
