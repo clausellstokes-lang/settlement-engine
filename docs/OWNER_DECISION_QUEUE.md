@@ -27672,3 +27672,31 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   question — "what does this READ AS at a glance?" — answered before any exit table is
   consulted**, and a fresh-context reader arbitrates where the chair's answer disagrees
   with a census.
+
+## §650 · THE OWNER'S ROOT-CAUSE — THE STREET IS SECRETLY AN OBJECT; THE NEGATIVE-SPACE LAW RE-ASSERTED (2026-08-25 ~17:15 CDT)
+
+- **§650.1 THE QUESTION AND THE RECORD:** the owner asked which builder is being
+  updated (ANSWER: the fabric register path — the dormant successor; the shipped
+  painter dies at cutover) and invoked the prior roads ruling. RECOVERED: the MF
+  charter's style law ("fabric = parcels with streets as NEGATIVE SPACE") and §189's
+  banked class ("NEGATIVE SPACE IS A DRAWING TECHNIQUE, NOT A DERIVATION" — ways
+  derive first as sourced desire lines, which is history's own order; the STREET as
+  drawn space is made by the frontages). Both stand.
+- **§650.2 THE ROOT-CAUSE, owner-diagnosed:** the renderer implements negative space
+  as a POSITIVE pale stroke in ground color — indistinguishable between plots, and
+  exactly wrong everywhere there are no plots to be between: over the river (§649),
+  across the sea (§639's audit row), through open country. A true negative-space
+  street CANNOT cross a river — there is nothing to paint. **REG-BRIDGE-B's charter
+  UPGRADES to the STREET-SURFACE LAW car:** (i) inside the built fabric the street
+  wash CLIPS to the plot-bounded fabric — the gap enforced, not approximated;
+  (ii) outside the fabric, roads are thin drawn TRACKS (lawful positive objects, the
+  references' own rural grammar); (iii) at water the ground ends at the bank — only a
+  DECK or a FORD (built objects) cross, deck shadow on continuous water per §649.2.
+  One cure for three convicted classes. EXITS gain: a planted no-plot street segment
+  inside the fabric must render as NO wash (the clip census, with control); the
+  §649.2 fresh-eyes bridge read stands.
+- **§650.3** The GROW-A kernel needs no change (its "plot-by-plot along ways" is the
+  ruled derivation order); the audit's REG-ROUTE water-refusal row remains the
+  DERIVATION-side cure (corridors must not walk into the sea) while §650.2 is the
+  DRAWING-side cure — both stand, different layers, recorded so neither is dropped as
+  redundant.
