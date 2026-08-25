@@ -50,6 +50,25 @@ if grep -q '^Seat: Opus 5 — Fable-unvalidated$' "$MSGFILE"; then
   fi
 fi
 
+# --- THE SUBJECT-ANCHOR GATE (§687.9) ---
+# The §678 class, now bitten a THIRD time: a writer script aborts, the committer runs
+# anyway (no `&&`), and a ledger message announces a section the ledger does not contain.
+# Cure: if the subject opens with a § reference, that exact reference MUST be present in
+# the ledger file this commit is about to land. A message cannot outrun its own entry.
+SUBJ=$(head -1 "$MSGFILE")
+case "$SUBJ" in
+  §*)
+    REF=$(printf '%s' "$SUBJ" | sed -n 's/^\(§[0-9][0-9.]*\).*/\1/p')
+    if [ -n "$REF" ]; then
+      if ! grep -qF "$REF" "$REPO/docs/OWNER_DECISION_QUEUE.md"; then
+        echo "ABORT: the subject announces $REF but docs/OWNER_DECISION_QUEUE.md does not contain it."
+        echo "  Your ledger patch did not land. Fix the patch, then commit (§687.9)."
+        exit 1
+      fi
+    fi
+    ;;
+esac
+
 if [ -n "$REQREF" ]; then
   GOT=$(git -C "$REPO" rev-parse --verify "refs/preserve/$REQREF" 2>/dev/null || echo MISSING)
   if [ "$GOT" != "$REQSHA" ]; then echo "ABORT: refs/preserve/$REQREF is '$GOT', declaration requires '$REQSHA' — seal first"; exit 1; fi
@@ -66,7 +85,11 @@ git update-index --cacheinfo "100644,$H,docs/OWNER_DECISION_QUEUE.md"
 for PAIR in "$@"; do
   SRC="${PAIR%%:*}"; DST="${PAIR#*:}"
   HX=$(git hash-object -w "$SRC")
-  git update-index --add --cacheinfo "100644,$HX,$DST"
+  # MODE PRESERVED, not assumed (§687.8): a hardcoded 100644 landed .husky/commit-msg
+  # non-executable, i.e. inert — a gate that cannot run is worse than no gate, because
+  # it reports as installed. The source file's own executable bit governs.
+  if [ -x "$SRC" ]; then MODE=100755; else MODE=100644; fi
+  git update-index --add --cacheinfo "$MODE,$HX,$DST"
 done
 TREE=$(git write-tree)
 NEW=$(git commit-tree "$TREE" -p "$OLD" -F "$MSGFILE")
