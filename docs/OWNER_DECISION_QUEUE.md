@@ -27700,3 +27700,20 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   DERIVATION-side cure (corridors must not walk into the sea) while §650.2 is the
   DRAWING-side cure — both stand, different layers, recorded so neither is dropped as
   redundant.
+
+## §651 · OWNER REFINEMENT — ROADS CONVERGE ON THE BANK; THE BRIDGE CONNECTS THE BANKS (2026-08-25 ~17:30 CDT)
+
+- **§651.1 THE DIRECTIVE, verbatim intent:** the road is not built across; roads
+  CONVERGE on the bank where appropriate, and A BRIDGE CONNECTS THE BANKS.
+- **§651.2 MINTED AS THE TOPOLOGY FORM of §650 (supersedes the clip as the primary
+  cure; the clip becomes the safety net):** the route graph itself carries the law —
+  **a road edge NEVER spans water**. Each bank holds a CONVERGENCE NODE (the
+  bridgehead) where the bank's roads meet — possibly several, which is the bridgehead
+  knot the faubourg machinery already types — and **the crossing is its own typed
+  edge (BRIDGE or FORD) connecting two bank nodes**, drawn as the built object it is.
+  The drawing then follows topology for free: the wash ends because the edge ends;
+  the deck spans because the deck-edge is the only thing that does. REG-BRIDGE-B
+  implements the topology form; the §650.2 clip census remains as the regression
+  net (a planted water-spanning road edge must red at BOTH layers). REG-ROUTE's
+  water-refusal row restates in the same vocabulary: corridors terminate at bank
+  nodes (a landing IS a bank node with a ferry/quay edge or nothing).
