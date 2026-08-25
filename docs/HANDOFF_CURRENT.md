@@ -60,7 +60,7 @@ CH-4 → **CH-6** (⛔ a **live shipped deity-doctrine violation**: a magic-free
 ⛔ **EDGE-BUNDLE BILL — the count is PER-FILE.** `npcProfile.js` sits in three closures, `districtProfile.js` in one (`aiGroundingBundle`, 67 inputs). **Read `supabase/functions/_shared/<bundle>.meta.json` before budgeting.** The bill is **invisible to targeted suite runs** — only the full gate sees it. Cure: `npm run build:edge-shared`, commit all six files as a set.
 
 ### ⭐⭐⭐ STATE AS OF §633 (2026-08-25 ~06:15) — SLOT 73f5dfc02 (65 CARS), REG-4 SEALED, REG-SEAM + REG-I1 IN FLIGHT
-Ledger through **§633**. **SLOT MOVED: `claude/composite-r4` = `73f5dfc02` (65 cars — TE-SEAM-B
+Ledger through **§634** (the efficiency program: preflight gate lint + quicklook tier at `refs/preserve/chair-tools-2026-08-25` = `3d4ec5065` — every build car runs the lint BEFORE its first gate; quicklook for iteration, Chrome for exit legs; kit consolidation = REG-5's opening act). **SLOT MOVED: `claude/composite-r4` = `73f5dfc02` (65 cars — TE-SEAM-B
 landed §633.2: realm-map tier chains → landed popToTier; declared shift window 241–400; census
 tuple now `2,525/366/2,159/21,059/5,854`).** **REG-4 SEALED** = `map-sandbox-reg4-markets` @
 `7fba086d5` (§632: seam 0/141 + convicting mutations · V-B13 23/23 · fossils consumed from §18.4 ·

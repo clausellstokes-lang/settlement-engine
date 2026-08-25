@@ -27115,3 +27115,34 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   `OP_CEILING_BY_TIER` §628 landing and a seam-window liveness probe (a zero corpus
   delta must be proved live, fourth-stack law); REG-I1 on the instruments workspace with
   §632.4's debts.
+
+## §634 · THE EFFICIENCY PROGRAM IMPLEMENTS (owner order, 2026-08-25 ~07:05 CDT)
+
+- **§634.1 THE PREFLIGHT GATE LINT IS BUILT AND CONVICTED** —
+  `chair-tools/preflight-gate-lint.mjs`: scans a car's diff for the measured trip-wire
+  families (new test file / package.json mint trigger / non-literal `.each` tables on
+  ADDED LINES with comments stripped / census-tuple serializer / scoped-third-ratchet
+  basenames / edge-bundle sources / hookchain) with every finding citing its law.
+  Validated three ways: the TE-SEAM-B car returns exactly its one true signal (the
+  census tuple) with zero comment false-positives; the MF-CH6 range fires EDGE_BUNDLE
+  and CENSUS_TUPLE on real history; a planted-control repo convicts NEW_TEST_FILE and
+  NONLITERAL_EACH while the commented `.each` stays silent. **STANDING ORDER: every
+  build-branch car's brief runs it BEFORE its first full gate.** It stays chair-side
+  tooling (no repo landing — landing it would itself cost a gate; reconsider at a
+  natural gate later).
+- **§634.2 THE QUICKLOOK TIER IS BUILT AND FIDELITY-CHECKED** —
+  `chair-tools/quicklook.mjs`: SVG→PNG via macOS qlmanage, **0.5 s wall against
+  Chrome's measured 5 min 40 s zombie**, verdict = the PNG's existence and size never
+  the exit status (J-REG4-11). The chair compared its render of the REG-4 market crop
+  against the Chrome-rendered same crop: mark-for-mark identical at judging zoom
+  (stall dashes, retreat ghost, ringed cross). **TIER LAW: quicklook for iteration
+  passes; headless Chrome remains THE INSTRUMENT for exit legs (§7.6 stands).**
+- **§634.3 THE INSTRUMENT-KIT CONSOLIDATION IS CHARTERED AS REG-5's OPENING ACT**:
+  fold the reusable probe boilerplate of `harness/laneREG{1..4}/` (leaf resolution by
+  exact key, artifact hashing, the planted-control scaffold, the crop picker's
+  rule-first box selection) into `harness/instruments/`, re-pointing the wave scripts;
+  REG-5..9 stop paying the boilerplate tax. **The toolkit is PRESERVED in git**:
+  `refs/preserve/chair-tools-2026-08-25` = `3d4ec5065` (commit/seal rituals + both new
+  tools) — a successor recovers it by sha even after scratchpad death. Doctrine
+  re-affirmed, nothing new to build: sandbox-first stays protected (no early
+  landings), the convicting-mutation rule stays in every brief.
