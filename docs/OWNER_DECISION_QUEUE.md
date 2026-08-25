@@ -27979,3 +27979,25 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   clause (a new clause costs a 7th path or gate STEP 2) vs cure (2) the
   marsh-precedent weld (changes every river's drawn shape) — the spine re-founding
   likely subsumes both, which is exactly why they wait.
+
+## §661 · WAREHOUSE ROUND 3 — 50 %, VALID, AND THE DIAGNOSIS COMPLETES: DRESS IS DESTINY (2026-08-25 ~22:50 CDT)
+
+- **§661.1 THE SCORE** (fresh reader, armed fixtures at the current seal): real 4 —
+  correct 2 · wrong 2 · CT 0; decoys **0/2 clean (VALID)**; passFraction **2/4 = 50 %**
+  vs the 75 % target — FAIL, up from 33 %. **The split is perfectly diagnostic: the
+  two CORRECT are exactly the two carrying V-QUAY dress** (the reader's own words:
+  casks, a derrick, a loading opening, waterside parallel ranges — the §636 vocabulary
+  quoted back by a stranger who never saw the mint) **and the two WRONG are exactly
+  the two without context** — fringe warehouses with no goods furniture, read as
+  farmsteads. The dress vocabulary is VINDICATED where it fires; the residue is the
+  context-free warehouse.
+- **§661.2 RULED (vetoable):** a context-free rural store and a barn are HISTORICALLY
+  near-indistinguishable — the reader may be correctly reporting a true ambiguity, so
+  the class definition SHARPENS rather than the target chasing it: **the 75 % target
+  measures context-bearing fixtures (quay/urban); context-free ones are reported
+  beside, never folded into the fail.** A modest V-STORE yard weight (casks/carts at
+  non-quay warehouses) joins the held dress work as a WEIGHT not a wall — decided at
+  the spine-era paint rebuild, where all dress lands anyway. **Round 4 runs after the
+  paint rebuild.** Sheet note banked for it: the closed class list needs a bin for a
+  pier/quay GROUP (the reader's nearest-class call on W02 was right for the wrong
+  structural reason).
