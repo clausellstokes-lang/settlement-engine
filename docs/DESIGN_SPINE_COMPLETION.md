@@ -262,3 +262,45 @@ Durable locators bind: the detail register = refs/preserve/reg-detail-register-2
 r4 above. The water row's authority citation sharpens to **§640.3's closing sentence
 (ODQ line ~27368)** — the ruling exists; cite it unmistakably. The lossRegions
 producer is ASSIGNED to GROW-A's running resume (§683 addendum, sent).
+
+---
+
+# OWNER AMENDMENT (§685) — THE SEAT AND THE MARK. This is the OWNER'S OWN RULING and OUTRANKS both the body and the panel amendment.
+
+## OA.1 · THE SEAT IS ASSIGNED
+From GROW-FOLD's collection forward, **the chair and every lane run Opus 5** — by the
+owner's assignment, not by Fable exhaustion. This document was written for exactly that
+contingency (§682); it now binds in fact rather than in anticipation. §447's seat model
+yields for the remainder of the arc, and **Fable's standing role becomes retrovalidation
+on call** — a returning Fable window is spent on whatever the owner asks, NOT
+automatically on a sitting (this reverses §236's "first act" clause).
+
+## OA.2 · LAW 13 — THE SEAT TRAILER (joins §9's twelve)
+**13. Every ledger act is MARKED with the seat that made it**, and every Opus-seat act
+enrols its retrovalidation row **in the same commit**. The message carries exactly one of
+`Seat: Fable 5 — validated` / `Seat: Opus 5 — Fable-unvalidated`; `chair-commit.sh`
+refuses anything else and refuses an Opus commit that omits
+docs/FABLE_RETROVALIDATION_QUEUE.md from its paths (five planted controls, each exiting
+non-zero — §685.4). **Unmarked is not a state the chair's tool can produce.** The owner's
+rule that makes this necessary: *anything Opus-validated, or not marked as Fable-validated,
+is retrovalidation-owed* — silence no longer reads as validation.
+
+## OA.3 · THE RETRO QUESTION IS PRE-AUTHORED
+Every wave in §1–§8 already has its retrovalidation row drafted in
+docs/FABLE_RETROVALIDATION_QUEUE.md §6.2 — *what Fable re-derives*, with a priority.
+The executing chair APPENDS what it actually decided; it does not invent the question at
+the end, when the reasons have gone cold. Same service this document performs for the
+work itself.
+
+## OA.4 · WHAT THE MARK IS NOT
+It is **not** a quality gate, **not** grounds to defer a call, and **never** grounds to
+escalate to the owner instead of deciding. Under §585 the Opus chair holds precisely the
+delegated judgment the Fable chair held, and §9's law 11 still draws the only line that
+matters. The mark records **who decided, so a later seat can re-derive it** — nothing in
+the arc waits on that seat, and no wave holds for validation.
+
+## OA.5 · PROVENANCE IS A FACT, NOT A VERDICT
+"Fable-unvalidated" says who checked, not how well. A row in the queue is a **second
+look owed**, never an accusation against the work — and the honest failure mode to guard
+is the opposite one: an act that quietly passes as validated because nobody wrote down
+who made it.

@@ -8,6 +8,16 @@ program's decisions; SPEC fold labels §§277–§286 are design sections, not m
 The repo is authoritative; trust executed evidence over any summary including
 this one.**
 
+## ⛔⛔⛔⛔ THE SEAT — OWNER ORDER §685 (2026-08-26). READ THIS BEFORE THE PICKUP CARD.
+
+**The owner assigned the remainder of the arc to OPUS 5.** From GROW-FOLD's collection forward, the chair and every lane run Opus 5 — by assignment, not by Fable exhaustion. **§684 is the last Fable-chaired ledger entry.**
+
+⛔ **EVERY LEDGER ACT IS MARKED.** The commit message carries exactly one seat trailer — `Seat: Fable 5 — validated` or `Seat: Opus 5 — Fable-unvalidated` — and **every Opus-seat commit must also carry `docs/FABLE_RETROVALIDATION_QUEUE.md` among its paths**, enrolling its retrovalidation row in the SAME act. `chair-tools/chair-commit.sh` REFUSES both violations (five planted controls, each exiting non-zero, §685.4). *Unmarked is not a state the tool can produce* — do not work around it, and if you rebuild the toolkit from **`refs/preserve/chair-tools-2026-08-26` = `a7998ce3a`** (r5 — the seat gate; the other three tools byte-identical to r4), keep the gate.
+
+⛔ **THE RULE THE MARK SERVES:** anything validated by Opus 5, **or not marked as validated by Fable**, is retrovalidation-owed. Silence does not read as validation. The owner triggers the pass **at a time of their choosing** and may scope it; a scoped pass empties only what it covers.
+
+⭐ **WHAT THIS IS NOT:** not a quality gate, not grounds to defer a decision, and never grounds to escalate instead of deciding. **§585's delegation is unchanged** — the Opus chair holds the same judgment the Fable chair held. The retro question for every remaining wave is **pre-authored** in `docs/FABLE_RETROVALIDATION_QUEUE.md` §6.2; the executing chair appends what it actually decided. Full ruling: ODQ §685 + `docs/DESIGN_SPINE_COMPLETION.md`'s OWNER AMENDMENT (OA.1–OA.5, which outranks the body and the panel amendment).
+
 ## ⛔⛔⛔ PICKUP CARD — ACCOUNT HANDOFF (2026-08-24 08:44 CDT). A SUCCESSOR ON A DIFFERENT ACCOUNT STARTS HERE.
 
 **build `claude/composite-r4` = `c3289244d` (60 cars) · ledger `review-fixes-2026-07-08` §562 · packets **179** · census `2525/366/2159/21026/5848` · ratchet **11 of 29,044***

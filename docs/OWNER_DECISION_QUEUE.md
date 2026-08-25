@@ -28528,3 +28528,115 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   frozen-circuit instrument** (§655.3's deferred ruling now has its instrument and
   its slot). The legacy REG-4 differential stays honestly red until cutover, quoted,
   with its arming route in place.
+
+## §685 · OWNER DIRECTIVE: THE OPUS SEAT TAKES THE ARC, AND SILENCE STOPS COUNTING AS VALIDATION (2026-08-26 ~14:40 CDT)
+
+- **§685.1 THE ORDER, VERBATIM** (owner, in chat): *"everything after grow-fold is to be
+  done with opus 5. everything that is validated with opus 5 or not marked as validated
+  with fable, is to be marked for retrovalidation with fable at the time of my choosing."*
+  It **amends the §236/§237 protocol in three places** (written into
+  docs/FABLE_RETROVALIDATION_QUEUE.md §2): **(i) THE SEAT IS ASSIGNED, NOT INHERITED** —
+  §236 armed the queue for *exhaustion*; this is an assignment, so Opus runs the arc
+  whether or not Fable capacity exists, §447's seat model yields for the remainder, and
+  Fable's standing role becomes **retrovalidation on call**. **(ii) THE NET WIDENS —
+  UNMARKED IS OWED**: §237 queued *Opus-chaired rows*; the owner's sentence queues
+  everything "validated with opus 5 **OR not marked as validated with fable**." Silence no
+  longer reads as validation, and the burden sits with the act, never with the auditor.
+  **(iii) THE OWNER HOLDS THE TRIGGER**: §236's "the returning Fable chair's FIRST ACT is
+  the retrovalidation sitting" is **REVERSED** — the pass runs at the owner's choosing,
+  may be scoped, and a returning Fable window is spent on whatever the owner asks instead.
+- **§685.2 THE BOUNDARY, FIXED**: **§684 is the last Fable-chaired ledger entry.**
+  GROW-FOLD was dispatched under the Fable chair and is still in flight; **its collection,
+  its ruling, and every act after are Opus-seated and marked.** ⚠ **This entry marks ITSELF
+  Opus**: the seat changed at the owner's command mid-turn and the chair cannot prove from
+  inside which model executed it — so it takes the conservative side, because a false
+  *Fable* mark is a false green while a false *Opus* mark costs only one re-derivation.
+  (Housekeeping, noted once and not retro-corrected: the ledger's local-time stamps have
+  run ~a day ahead of the host clock since §628 — the host reads 2026-08-25.)
+- **§685.3 THE QUEUE IS RE-ARMED** (emptied 2026-08-21 at §293–§298; idle since) with a
+  **stratified register** so a partial pass is still coherent: **P1 taste and closure**
+  (judging rounds · blind silhouette and gestalt reads *and their keys* · dress "look"
+  calls · corpus curation · film pacing — the class **§236.2 names by name** as Fable-seat
+  work, and where the seat plausibly changes the answer) · **P2 foreclosing architecture**
+  (retirements, vocabulary mints, schema shapes — cheap now, expensive after the code is
+  gone) · **P3 minted constants** (already second-netted: the owner's tuning signature
+  walks that same sheet, last) · **P4 mechanical** (counts, censuses, gate greens —
+  executed evidence, re-derivable by any seat; listed for completeness, not for spending a
+  Fable window on). **CHAIR'S RULING, VETOABLE: a scoped pass empties only what it
+  covers** — the 08-21 sitting could write "the queue is empty" because it covered its
+  whole surface; a partial pass cannot inherit that sentence. **§6.2 PRE-AUTHORS the retro
+  row for every remaining wave** (GROW-FOLD → the port → post-cutover), so the chair
+  executing a wave appends what it actually decided instead of inventing the question at
+  the end, when the reasons have gone cold — the same succession service
+  DESIGN_SPINE_COMPLETION performs for the work itself.
+- **§685.4 THE STRUCTURAL CURE — UNMARKED IS NOW UNREPRESENTABLE.** Marking by discipline
+  is exactly what failed twice before (§685.5 measures it). `chair-commit.sh` now
+  **REFUSES** a message carrying no seat trailer or two, and **REFUSES an Opus-seat commit
+  that omits docs/FABLE_RETROVALIDATION_QUEUE.md from its paths** — so an act and its
+  retrovalidation row land in the SAME commit. **FIVE PLANTED CONTROLS EXECUTED**, each
+  proving a distinct refusal and each exiting **1** so an `&&`-chain cannot walk past it:
+  no trailer → seat abort · two trailers → seat abort · Opus without the queue path →
+  coupling abort · Opus **with** the queue path → passes the seat gate and stops at the tip
+  check (proving the gate is not a blanket refuser) · Fable without the queue path → also
+  stops at the tip check (proving the coupling is Opus-scoped, not universal). Tip unmoved
+  at `b6bd39ad7` throughout. Toolkit r5 preserved at
+  **refs/preserve/chair-tools-2026-08-26 = `a7998ce3a`**; the other three tools byte-identical to r4.
+- **§685.5 THE AUDIT — WHAT THE RULE ACTUALLY SWEEPS IN** (seven auditors over the six
+  ledger eras + the document estate; every headline figure re-measured by the chair):
+  **(i) THE LEDGER TEXT IS 88 % SILENT** — **608 of 691 header blocks carry no seat
+  attribution** (49 Opus-marked · 34 Fable-marked). **Two marking conventions preceded this
+  one and BOTH LAPSED:** §236's `(chair: Opus 5 — Fable-unvalidated)` ran §238–§274 and
+  stopped dead at §321; §484's `[OPUS-RUN · FABLE-VALIDATION OWED]` ran 16 headers and
+  stopped at §513. ⛔ **§484 IS THIS SAME ORDER, GIVEN 2026-08-23** — *"continue everything
+  currently and future to run on opus 5 for right now with retroactive validatin with fable
+  when I say so, they should be marked"* — so this is the **second** time, and the first
+  time the marking died within thirty sections. **The audit surface §484.3 promised the
+  owner — "the OPUS REGISTER on the pickup card" — NO LONGER EXISTS** (zero occurrences in
+  today's handoff). That is precisely why §685.4's cure lives in the commit tool and a
+  versioned file rather than in a card that gets rewritten.
+  **(ii) BUT THE SEAT IS RECOVERABLE, AND THE INSTRUMENT VALIDATES:** the git
+  `Co-Authored-By` trailer was tested at the one boundary carrying an independent source —
+  across the 2026-08-17 Opus window, **26 of 28** ledger commits read `Claude Opus 5`, and
+  **the two exceptions are precisely §275 and §276**, the two sections the ledger TEXT
+  independently marks "chair: FABLE". Over all **705** commits touching the ledger file:
+  **492 Fable 5 · 39 Opus 5 · 174 none = 75.3 % recoverable.**
+  **(iii) THE HISTORICAL OPUS EXPOSURE IS ALREADY RULED:** all **39** Opus-trailered ledger
+  commits fall on 2026-08-17, entirely inside the §238–§274 window discharged at §293–§298.
+  **No ledger act outside that window carries an Opus trailer.**
+  **(iv) ONE DARK WINDOW, CONTIGUOUS:** the 174 trailer-less commits cluster on 2026-08-21
+  (71) and 2026-08-22 (96) — sections **§291–§439**. Within it, §291–§321 carries explicit
+  in-text "chair: FABLE" on 31 sections, so the genuinely unattributed stretch is
+  **§322–§439 — ~118 sections with NEITHER source**, the seat-model era whose own §447
+  fixed the seat model it then failed to record. Mechanism: the chair's scripted
+  private-index commits dropped the trailer that ordinary commits carry; it self-healed
+  from 08-23 onward.
+  **(v) TWO INFERENCES THE RULE OVERTURNS BY NAME:** §620.1 reasoned *"the §236 marking
+  convention is binding, so unmarked = Fable-seat"*, and on that basis §626.3 concluded
+  *"every architecture on the road to the soak is now Fable-authored or Fable-validated."*
+  Under the owner's rule that inference is **void** — the DW compile pair and everything
+  else resting on it re-enters as PROVENANCE-RECOVERED or OWED per (ii).
+  **(vi) A LEDGER HOLE, FOUND AND CONFIRMED: §683 HAS NO ODQ SECTION.** Commit
+  `bc907c3ad` ("§683: the last Fable rulings") touched DESIGN_SPINE_COMPLETION, the
+  handoff, OWNER_DOCKET and SIGNED_CONSTANTS — **and not the ledger**; the ODQ jumps §682 →
+  §684. The rulings themselves are safe (their home is the PANEL AMENDMENT, which is where
+  they are cited from), but every "§683" citation points at a section that does not exist.
+  Under the append-only law it is **NOT retro-inserted**: recorded here, with the amendment
+  standing as the authoritative home. This is the §678 class recurring **under the Fable
+  chair** — which is the whole argument for structural cures over disciplined ones.
+  **(vii) CHAIR'S RULING ON RECOVERED PROVENANCE (vetoable):** a trailer-attributed section
+  is **PROVENANCE-RECOVERED** — a third status, distinct from both text-marked and owed.
+  The owner decides at the pass whether recovery discharges the mark; until then the queue
+  lists §322–§439 as **OWED** and the recovered set as **RECOVERED-NOT-MARKED**, and nobody
+  gets to call the recovered set "validated."
+- **§685.6 WHAT DOES NOT CHANGE** — recorded because a marking rule invites exactly the
+  wrong inference: the **owner-gated list** (every push · the cutover flag · the tuning
+  signature · legal · the cull · /code-review ultra · the film specimen) · **§585's
+  delegation in full** · the released arc · the quality bar. **The mark is provenance, not
+  quality** — "Fable-unvalidated" says who checked, not how well — and it is **never**
+  grounds to defer a call, hold a wave, or escalate instead of deciding. Written as
+  **OA.1–OA.5 in docs/DESIGN_SPINE_COMPLETION.md** (an OWNER AMENDMENT outranking both the
+  body and the §683 panel amendment), with **law 13 joining §9's twelve**; the handoff
+  gains a top block above the pickup card; the memory estate gains the directive, and its
+  index was folded to make room (16,459 → 14,521 B, the three stacked-landing rows
+  preserved **verbatim** at `archive-2026-08-26-index-fold-16`, PA.10 having struck the
+  parallel clause that made them daily).
