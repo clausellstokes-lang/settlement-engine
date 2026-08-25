@@ -27782,3 +27782,35 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   A consolidation pass ranks findings BROKEN (violates a standing law now) / IMPEDING
   (blocks the goal path) / COSMETIC-LATER, each with its fix. **Fixing follows the
   review's delivery — repair-class only until the owner releases the arc.**
+
+## §655 · GROW-A STANDS DOWN CLEAN — AND ITS DIAGNOSIS CORRECTS A HEADLINE CONVICTION (2026-08-25 ~19:10 CDT)
+
+- **§655.1 THE STAND-DOWN (§448 honored):** tip `51684eb9e` on the lane worktree — one
+  WIP-marked commit (two S0 modules + their stage-manifest row, staged by name), git
+  clean, NO ref moved, and PROVEN DORMANT at the committed tip: 29/29 artifacts
+  byte-identical to the REG-BRIDGE seal, the lifted stage-manifest walker 63/63
+  assigned / 0 phantom / 89 edges unchanged (its one DISAGREE line reproduced at the
+  unedited base — the script's own artifact, earned not assumed). No exit claimed;
+  the resume block carries the next six acts including the `WALL_CIRCUIT_INPUTS`
+  frozen-hash trap. The ledger build never started.
+- **§655.2 THE DIAGNOSIS (C3's root, COMPLETE):** no stage discards the year — **the
+  year is never handed to any stage that could grow anything.** Years 0, 18, 100, 154,
+  191 draw the SAME 1,232 plots with identical geometry (parcelGeom `9f7f4b73d600`):
+  `settlementAtYear` re-issues the event horizon never the size; `tierScale` — the
+  sole sizer — reads no year at all. The town at founding is parcel-identical to the
+  town at 191. The ledger architecture's premise is confirmed at the mechanism level.
+- **§655.3 ⛔⛔ THE STAMPED-VINTAGE FINDING — C1's MAGNITUDE IS UNSUPPORTED:** the
+  §11.11 caller-stamp cure collapses the epoch ladder — `wallStandingFor` builds the
+  stamped vintage WITHOUT a `year` field, `deriveEpochs` reads it UNDATED and puts the
+  circuit at extent **1.000 instead of the derived 0.798**; the year-100 leaf's wall
+  encloses **1.40× the present leaf's** (429,937 vs 307,120 view units²). §632.3's C1
+  ("intramural falls 1,414→883 while the suburb rises 64→536") therefore compared TWO
+  DIFFERENT CIRCUITS — REG-4's arm-1 defect arriving on the arm believed immune. **C1's
+  DIRECTION SURVIVES** (the present leaf draws 39 % of urban growth extramural; corpus
+  median 0.369 over 12 walled leaves); its magnitude does not. Whether C1 re-bases and
+  whether the vintage defect cures in its own right or is superseded by the ledger
+  reader (A1.5) are **DEFERRED to the §654 review's consolidation** — no forward
+  ruling under the stop. Two constants corrected by measurement en route
+  (SQUARE_CAPACITY_EXCLUSION 0.06→0.02; EXTRAMURAL_SHARE 0.65→0.40, per-tier spread
+  reported not averaged, no tier table minted). A third memory topic file
+  (stamped-vintage) awaits the index fold with the other two.
