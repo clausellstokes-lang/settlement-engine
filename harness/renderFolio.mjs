@@ -109,10 +109,13 @@ export const FOLIO = {
  *   · style batching, which is already total: every family of marks that shares a style is
  *     ONE DOM node, and the element count is an order below the primitive count.
  *
- * THE FIGURES BELOW ARE THE MEASURED MAXIMUM OVER ALL SIXTEEN LEAVES × ALL SIX LENSES,
- * ROUNDED UP TO THE NEXT HUNDRED — a ratchet, not an allowance:
+ * ⚠ SUPERSEDED BY §628 — KEPT AS THE LADDER'S HISTORY, NOT AS THE CURRENT PIN (REG-SEAM). The
+ * rung below is the ORIGINAL §217 raise: the measured maximum over all sixteen leaves × all six
+ * lenses, rounded up to the next hundred — a ratchet, not an allowance:
  *   thorp 927 → 1,000 · hamlet 1,046 → 1,100 · village 1,697 → 1,800 ·
  *   town 4,385 → 4,600 · city 6,151 → 6,400 · metropolis 9,403 → 9,700
+ * The table those figures set is now three raises old; the live values are §628's, at the
+ * declaration immediately above `OP_CEILING_BY_TIER`.
  * ⚠⚠ AND THE FIRST SETTING WAS TOO TIGHT FOR A REASON WORTH RECORDING: two mid-pass rations
  * (the Accessible hatch, the roof-ridge ticks) SPEND AGAINST THE CEILING, so raising it
  * raises the measured maximum. MEASURED: pinning at the pre-raise maxima put the metropolis
@@ -140,24 +143,51 @@ export const FOLIO = {
  * value and an owner carve-out, and MF-W1(SUBSTRATE)'s J-W1S-4 refused to touch it. This lane
  * refuses it too and moves the pin instead, which is what §217's own sentence above asks for.
  */
+/**
+ * ⭐⭐ REG-SEAM · **THE §628-SIGNED TABLE LANDS IN THE PIN** (ODQ §632.4: "landing §628's table
+ * into `OP_CEILING_BY_TIER` rides REG-SEAM with the fixed-point re-measure").
+ *
+ * REG-2 and REG-3 each MEASURED a raise and, correctly, did not take it — moving the pin is the
+ * chair's act, and §628 signed it: `hamlet 1,400 · village 2,000 · town 9,300 · city 10,000 ·
+ * metropolis 14,200` (thorp unchanged at 1,000). REG-4 then measured every wave armed against
+ * the signed figures through the `REG_OP_CEILINGS` override (J-REG4-10) and reported all six
+ * tiers holding. This lane lands them, so the tree finally prices at the table the programme
+ * has been quoting.
+ *
+ * ⚠⚠ AND THE LANDING WAS RE-MEASURED AT THE FIXED POINT, WHICH IS THE ONLY HONEST WAY TO DO IT.
+ * Two mid-pass rations SPEND against `CEIL`, so raising the ceiling raises the measured maximum:
+ * the BASE column itself moves. REG-4 measured town BASE **4,386 at the old pin → 4,447 at the
+ * signed one** for the same drawing. Every figure in this lane's receipt is taken with these
+ * values IN the pin and `REG_OP_CEILINGS` UNSET — a native reading, not an override reading.
+ *
+ * ⛔ THE CEILING REMAINS A RATCHET AND IT ONLY SHRINKS BY MEASUREMENT. A later lane that needs
+ * more must do what §217 asks: try efficiency first, measure at the fixed point, record the
+ * cause, move the pinned figure — never spend headroom silently.
+ */
 export const OP_CEILING_BY_TIER = Object.freeze({
-  thorp: 1000, hamlet: 1200, village: 1800, town: 4600, city: 6400, metropolis: 9700,
+  thorp: 1000, hamlet: 1400, village: 2000, town: 9300, city: 10000, metropolis: 14200,
 });
 /**
- * ⭐⭐ REG-4 · `REG_OP_CEILINGS` — A MEASUREMENT-TIME OVERRIDE, AND IT EXISTS BECAUSE THE PIN
- * BELOW IS **NOT** THE SIGNED TABLE. `OP_CEILING_BY_TIER` at this seal still holds the pre-REG-2
- * values (town 4,600 · city 6,400 · metropolis 9,700) while ODQ §628 has SIGNED
- * hamlet 1,400 · village 2,000 · town 9,300 · city 10,000 · metropolis 14,200 — REG-2 and REG-3
- * each measured a raise and, correctly, did not take it.
+ * ⭐⭐ REG-4 · `REG_OP_CEILINGS` — A MEASUREMENT-TIME OVERRIDE.
  *
- * ⛔ THE CONSEQUENCE IS THAT A SPEND MEASURED AT THIS TIP IS NOT THE SPEND AT THE SIGNED
- * CEILING, and REG-3's receipt flagged exactly this: *"two mid-pass rations price against CEIL,
- * so the figures must be RE-MEASURED after any raise before pinning."* Measuring against the low
- * pin makes every pass give way early and reports a total the drawing would never produce.
+ * ✅ REG-SEAM: **ITS ORIGINAL REASON FOR EXISTING IS DISCHARGED.** It was written because the pin
+ * above was NOT the signed table — it held the pre-REG-2 values (town 4,600 · city 6,400 ·
+ * metropolis 9,700) while ODQ §628 had signed hamlet 1,400 · village 2,000 · town 9,300 ·
+ * city 10,000 · metropolis 14,200, and REG-2 and REG-3 each measured a raise and, correctly, did
+ * not take it. The signed table is now IN the pin, so the override and the pin agree by default
+ * and every figure this repo quotes is a native reading.
  *
- * ⭐ THE ENV ARM LETS THE LANE MEASURE THE TRUE SPEND WITHOUT MOVING THE PIN — J-REG3-10's own
- * pattern (`REG_FABRIC_OPTS`) applied to the ceiling. ⚠ INERT WHEN UNSET: every existing
- * invocation, including the dormancy proof, is byte-for-byte unchanged.
+ * ⭐ THE ARM IS KEPT, AND KEPT FOR THE REASON IT WAS BUILT: it lets a lane measure the true spend
+ * at a PROPOSED ceiling without moving the pin — J-REG3-10's `REG_FABRIC_OPTS` pattern applied to
+ * the ceiling. That is exactly what the next §217 raise will need, and it is the discipline that
+ * kept two waves from spending a chair decision.
+ *
+ * ⛔ THE CAVEAT IT WAS BUILT AROUND IS PERMANENT, WHATEVER THE PIN SAYS: two mid-pass rations
+ * price against `CEIL`, so a spend measured at one ceiling is not the spend at another. REG-3's
+ * receipt: *"two mid-pass rations price against CEIL, so the figures must be RE-MEASURED after
+ * any raise before pinning."* REG-SEAM re-measured after landing these values, and the town BASE
+ * column moved 4,386 → 4,447 for an unchanged drawing — the fixed point, demonstrated.
+ * ⚠ INERT WHEN UNSET: every invocation that does not set the variable reads the pin.
  */
 const ENV_CEILINGS = (() => {
   const raw = typeof process !== 'undefined' && process.env && process.env.REG_OP_CEILINGS;
