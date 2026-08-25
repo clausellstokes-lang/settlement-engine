@@ -27551,3 +27551,35 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   REG-GROW's circuit-law conviction wearing ink; the coastal strip re-emerges as a
   TYPED shore faubourg after both. Until this census runs green with its control, the
   wall-ends-districts claim is not to be asserted from eyes alone.
+
+## §646 · THE EXHAUSTIVE KITAQIAO RE-READ — EIGHTEEN MORE ROWS, FOUR NEW MINTS (owner's order, 2026-08-25 ~15:10 CDT)
+
+- **§646.1 NEW LAW-CLASS MINTS from the re-read (vetoable):** (i) **THE LEGEND-AGREEMENT
+  CENSUS** — every legend row must have ≥1 locatable instance on the sheet and every
+  drawn glyph class a legend row (the barred water gate is advertised and unfindable;
+  the drawn crossed-box marks are untaught); joins REG-8's words wave with a planted
+  orphan-row control. (ii) **RUINS NEED ADDRESSES** — a decay-state body on
+  high-pressure ground must trace to an anchoring event or it may not stand there (the
+  plaza-side shells contradict the pressure law); a REG-D exit + a growth-ledger
+  consistency check. (iii) **THE EVENT-ADDRESS CENSUS** — every dated event label sits
+  at its addressable place (a migration on its road/gate, an occupation at the seat of
+  power, never open water/empty field); extends the §NEWS address law to the map
+  surface; REG-8's exit. (iv) **THE QUARTER-NAME-EARNED LAW (candidate, REG-9
+  judging)** — a named quarter's geometry must visibly earn its name (the Mages'
+  Quarter shows nothing mage-like); REG-3's shape-carries-meaning principle at
+  district scale.
+- **§646.2 ROWS JOINING EXISTING CHARTERS:** no mills for 20k souls (REG-WATER gains a
+  PRESENCE clause beside siting) · no churchyard/cemetery anywhere (REG-SITE's
+  graveyard row hardens to a presence census) · no boats (V-QUAY's sibling — harbor
+  dress, REG-D/REG-6 era) · approach roads nearly invisible + extramural strays
+  untyped NW (REG-ROUTE/REG-GROW) · ZERO relief marks on the whole sheet against a
+  steep-hills cartouche (REG-TERR widens from in-town to the sheet) · flat water fill
+  (the shore-stroke convention, plate-corpus-grounded, REG-6/7) · mechanical forest
+  stopping dead at the wall + grazed-common-as-dense-canopy (REG-H dress) · no wall
+  wear against a siege-marked garrison history (REG-2's wear derivation must reach the
+  legacy-replacement path at cutover) · NW confetti slivers (L-REG-30, cured in
+  sandbox) · countryside tonal patch seams (the banned block-edge class at landscape
+  scale; REG-7) · one-band mechanical shoreline (REG-6 dress) · the two-grammar
+  west/east clash with no plat story (REG-GROW-B's origin typing must mark WHICH part
+  is the plat) · early-clustered event years (a canon-honesty question for the film's
+  scan; measure event-year distributions at REG-F0).
