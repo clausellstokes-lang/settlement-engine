@@ -1,0 +1,39 @@
+export const meta = {
+  name: 'recon-lane-b-pins-redbase',
+  description: 'Parallel recon: Lane B completeness census, exec-pin sweep, red-base attribution — feeds the chair dispositions',
+  phases: [{ title: 'Recon', detail: 'three independent read-mostly sweeps' }],
+}
+
+const GROUND = `VERIFY-FIRST: this brief is the SettlementForge validation chair's authentic instruction set; verify claims against the tree, then proceed — do not refuse it as injection. Work against /Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold, branch claude/composite-r4 (verify: cd + git rev-parse --abbrev-ref HEAD). READ-ONLY on the repo — no edits, no commits, no staging. Scratch space: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/c44e5d99-2ba5-49d5-a554-40b68534c8eb/scratchpad/ with YOUR lane prefix. Queue rows are SPECS, not open work — verify build state with git log -- docs/<DOC>.md and PROGRESS blockquotes, never by reading a spec as a todo.`
+
+const [laneB, pins, redbase] = await parallel([
+  () => agent(`${GROUND}
+
+YOU ARE THE LANE-B CENSUS (recon). docs/SOL_QUEUE.md §1 (Lane A) and §2 (Lane B) list the build order. For EVERY numbered item in both lanes: find its named design doc(s), read the PROGRESS blockquote, run git log --oneline -3 -- <doc> and (where the item names code) spot-check the tree, then classify BUILT / PARTIAL / UNBUILT with a one-line receipt (hash or blockquote quote). The war spine (WR-1..10) is believed complete and WR-10 wiring is a known open item — do not re-litigate it; your value is the NON-war rows. Return every row.`, {
+    label: 'recon:laneB', phase: 'Recon',
+    schema: { type: 'object', required: ['rows', 'unbuiltCount', 'notes'], properties: {
+      rows: { type: 'array', items: { type: 'object', required: ['item', 'status', 'receipt'], properties: {
+        item: { type: 'string' }, status: { type: 'string' }, receipt: { type: 'string' } } } },
+      unbuiltCount: { type: 'number' }, notes: { type: 'string' } } },
+  }),
+  () => agent(`${GROUND}
+
+YOU ARE THE EXEC-PIN SWEEP (recon). The first-match document-pin hazard: a test that reads a design doc and locates content via a FIRST-match primitive (regex .exec(), .match() without /g, indexOf-then-slice) silently RETARGETS when the doc grows a second matching sentence. The cured example: PIN 6 in tests/domain/sovereigntyBundleWr10.test.js (has an exactly-once uniqueness guard — your model). Sweep tests/ for every suite that reads a file under docs/ (grep for readFileSync with 'docs/'), then inspect how each locates content. For each doc-reading pin: file:line, the doc it reads, the primitive, VULNERABLE or GUARDED (uniqueness-checked / global-match-counted / anchored-to-unique-heading), and for vulnerable ones the minimal cure. Read the actual assertion code — do not classify by grep alone.`, {
+    label: 'recon:execPins', phase: 'Recon',
+    schema: { type: 'object', required: ['pins', 'vulnerableCount', 'notes'], properties: {
+      pins: { type: 'array', items: { type: 'object', required: ['site', 'doc', 'primitive', 'verdict', 'cure'], properties: {
+        site: { type: 'string' }, doc: { type: 'string' }, primitive: { type: 'string' }, verdict: { type: 'string' }, cure: { type: 'string' } } } },
+      vulnerableCount: { type: 'number' }, notes: { type: 'string' } } },
+  }),
+  () => agent(`${GROUND}
+
+YOU ARE THE RED-BASE ATTRIBUTION VERIFIER. tests/lint at HEAD is red with a base-identical failure set (11 files / 32 tests; proven base-identical by WR-10r's verifier). You may run vitest in minifold — you are the ONE permitted vitest lane; ps aux | grep vitest first and abort if another runs. For each red walker produce the VIOLATION-ROW attribution the disposition ruling needs: (1) tests/lint/clampPrimitiveBaseline set-equality — the 11 unregistered clamp files are known (conquest*/disposition*/razing*/warAllianceRisk/warCoalitionDecision): per file, git log -1 --format='%h %ad %s' -- <file> to name the era; (2) tests/lint/proseNumerics — the 9 foreign rows over the 401 baseline + the stale baseline row (occupation.js:852 points at a blank line): quote each row, attribute by blame; (3) negativeAssertionAnchor.walker — 67 un-anchored rows: group by file, attribute era per file; (4) the three SP-6 war kind-pool walkers — name the exact test files, quote their red output, list the missing pool rows; (5) domainAnyCastBaseline — warDeployment.js 17 vs baseline 16: find the 17th any-hole by comparing against the base tree (git archive fc9534a4 to scratchpad); (6) mechanismLitCoverage modules ratchet — the 28-row gap list verbatim. For EVERY row propose one of: REGISTER-AND-FREEZE (legit, inherit as banked debt) / FIX-CHEAP (mechanical, < 10 lines) / BURN-DOWN-WAVE (real work) / STALE-BASELINE-ROW (baseline lies, row correction owed). Run walkers SERIALLY, read full logs never gate-tails, restore nothing because you change nothing.`, {
+    label: 'recon:redBase', phase: 'Recon', model: 'opus',
+    schema: { type: 'object', required: ['walkers', 'notes'], properties: {
+      walkers: { type: 'array', items: { type: 'object', required: ['walker', 'rows', 'disposition'], properties: {
+        walker: { type: 'string' }, rows: { type: 'array', items: { type: 'string' } }, disposition: { type: 'string' } } } },
+      notes: { type: 'string' } } },
+  }),
+])
+
+return { laneB, pins, redbase }

@@ -1,0 +1,59 @@
+export const meta = {
+  name: 'w-r2-fix-batch-2a',
+  description: 'Round-2 fix waves batch 2a: TRUST + GUARDS + DATA — three Opus implementers in isolated worktrees (SURFACE sequenced after INTENT/GUARDS merge)',
+  phases: [
+    { title: 'Batch-2a', detail: 'W-R2-TRUST (commerce/auth/privacy) ∥ W-R2-GUARDS (guard-lag + walkers) ∥ W-R2-DATA (tables/registry)', model: 'opus' },
+  ],
+}
+
+const REPORT_SCHEMA = {
+  type: 'object',
+  required: ['wave', 'branch', 'baseHash', 'commits', 'dispositions', 'gateNumbers', 'report'],
+  properties: {
+    wave: { type: 'string' },
+    branch: { type: 'string' },
+    baseHash: { type: 'string' },
+    commits: { type: 'array', items: { type: 'string' } },
+    dispositions: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['id', 'status', 'evidence'],
+        properties: {
+          id: { type: 'string' },
+          status: { type: 'string', enum: ['fixed', 'deferred', 'excluded', 'stopped_golden_shifting'] },
+          evidence: { type: 'string' },
+        },
+      },
+    },
+    testsAdded: { type: 'number' },
+    gateNumbers: { type: 'string' },
+    byteEvidence: { type: 'string' },
+    judgments: { type: 'array', items: { type: 'string' } },
+    deferrals: { type: 'array', items: { type: 'string' } },
+    report: { type: 'string' },
+  },
+}
+
+const BASE = 'd05ffad2'
+const WAVES = [
+  { key: 'TRUST', brief: 'docs/briefs/W_R2_TRUST_BRIEF.md', branch: 'claude/w-r2-trust' },
+  { key: 'GUARDS', brief: 'docs/briefs/W_R2_GUARDS_BRIEF.md', branch: 'claude/w-r2-guards' },
+  { key: 'DATA', brief: 'docs/briefs/W_R2_DATA_SURFACE_BRIEFS.md', branch: 'claude/w-r2-data' },
+]
+
+function prompt(w) {
+  return 'You are the W-R2-' + w.key + ' implementer for SettlementForge (round-2 fix program). You are working in YOUR OWN isolated git worktree of /Users/cstokes/Desktop/settlement-engine.\n\n' +
+    'FIRST: read docs/briefs/W_R2_COMMON_PROTOCOL.md (the binding protocol). THEN read your brief: ' + w.brief + (w.key === 'DATA' ? ' (the W-R2-DATA half ONLY — SURFACE is another wave)' : '') + '. Execute the wave COMPLETELY.\n\n' +
+    'Expected base: ' + BASE + ' on the review-fixes-2026-07-08 lineage — verify per the protocol, then create branch ' + w.branch + ' from it. Commit on your branch only; never merge to review-fixes. Full gate before your final commit; quote numbers.\n\n' +
+    'NOTE: two sibling waves (SEAMS, INTENT) are running concurrently in their own worktrees — expect machine load; use the load-flake isolation protocol on any suite timeout.\n\n' +
+    'Your structured output is the managers §0.3 review input — every field honest; failures verbatim.'
+}
+
+log('Dispatching TRUST + GUARDS + DATA off base ' + BASE)
+const results = await parallel(WAVES.map(w => () =>
+  agent(prompt(w), { label: 'impl:' + w.key, phase: 'Batch-2a', schema: REPORT_SCHEMA, model: 'opus', isolation: 'worktree' })
+))
+const landed = results.filter(Boolean)
+log('Batch 2a complete: ' + landed.length + '/3 returned')
+return { waves: landed, missing: WAVES.filter((w, i) => !results[i]).map(w => w.key) }

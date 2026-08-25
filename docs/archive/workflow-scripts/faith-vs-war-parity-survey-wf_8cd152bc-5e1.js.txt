@@ -1,0 +1,22 @@
+export const meta = {
+  name: 'faith-vs-war-parity-survey',
+  description: 'Survey faith/religion code depth against war\'s robustness and drama dimensions',
+  phases: [{ title: 'Survey', detail: '3 read-only surveyors over minifold' }],
+}
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const PRE = `VERIFY-FIRST: read-only surveyor for the SettlementForge Fable chair (owner-authorized). Tree: ${MF} (claude/composite-r4; two-writer tree — Sol is live; read freely, edit NOTHING, no git, no gates; focused vitest allowed). Label CONFIRMED (read/executed) vs PLAUSIBLE. Structured output; file:line evidence.`
+const SCHEMA = { type:'object', required:['findings','summary'], properties:{
+  findings:{type:'array',items:{type:'object',required:['dimension','verdict','evidence'],properties:{
+    dimension:{type:'string'},verdict:{type:'string'},evidence:{type:'string'},detail:{type:'string'}}}},
+  summary:{type:'string'}}}
+
+phase('Survey')
+const r = await parallel([
+  () => agent(`${PRE}
+TASK: FAITH MECHANICS INVENTORY. Survey everything faith/religion in src/domain/: the generated pantheon (deity doctrine: NO premade pool — how deities mint, their alignment axes + domains), the contest machinery (deity-vs-deity contests, contest legitimacy, the contest-of-devotion patron changes), conversion/spread (the conversion vehicle, cultImposition + heresy stain + latent revival), stance machinery (inter-deity stances, aggressive lanes), faith×alignment quadrants (sacred_claim's read), temple seats/institutions, missionary/conversion treaty terms, temple mediation, tithe/economy coupling if any, the religionDynamicsEnabled flag family + what it gates, and ⚠️ THE UNSEATING QUESTION (amendment C's open substrate check): does deity UNSEATING/dethroning exist as a real transition anywhere, or is a patron change the only fall a god can suffer? For each: what it does, state owned, receipts emitted. Verdict: is faith's PHYSICAL layer (contests, conversions, institutions) as real as war's?`, {label:'faith-mechanics', phase:'Survey', schema:SCHEMA}),
+  () => agent(`${PRE}
+TASK: FAITH AGENCY + EPISTEMICS PARITY. War's parity dimensions applied to heaven: (1) TYPED VOCABULARY — is there a taxonomy of faith relationships/tensions (schism, heresy, communion, rivalry) with mirrors, or only the contest verbs? (2) AGENCY — who DECIDES faith acts (temple seats? the chooser's faith verbs? grep settlementStrategy + faction archetypes for temple agency), and do holy institutions act with their own books anywhere? (3) EPISTEMICS — THE DEEP QUESTION: does the engine ever CONFIRM divine action, or do all faith effects flow through believers' behavior? (grep for any mechanical divine intervention vs stance-mediated behavior effects; also does any mortal CONFIDENCE-in-their-god stock exist — a faith-credibility read — or is devotion binary/static?); do omens/interpretations exist (events read AS divine by believers)? (4) LIFECYCLE — can a faith DIE (last believer, temple ruin), schism into two, go underground (covert seam applied to suppressed cults)? (5) The premium gate (Feature D.0) — what exactly is faith-gated behind which tier, and what does free tier see? Verdict per dimension: BUILT / PARTIAL / ABSENT with evidence.`, {label:'faith-agency', phase:'Survey', schema:SCHEMA}),
+  () => agent(`${PRE}
+TASK: FAITH MEASUREMENT + DRAMA PRESENCE. (1) What faith observability exists: certification rows, soak observations, envelopes touching religion; (2) Herald/news presence: enumerate faith news kinds (WHAT_PHRASES/heraldRouting religion entries), the Pantheon tab's surfaces, and the news-emission-site density of faith modules vs war modules (rough sites-per-module count); (3) DRAMA INVENTORY: which of these stories can the engine tell TODAY with receipts — a god falls; a settlement converts under duress and secretly keeps the old faith; a schism splits a temple; a court reads a famine as divine wrath; a holy war's cause dissolves when a patron is unseated (amendment C's dependency); pilgrims travel (do pilgrims EXIST as movers?); a faith goes extinct. For each story: TELLABLE-NOW / PARTIAL / IMPOSSIBLE with the missing piece named. Verdict: faith's narrative density vs war's.`, {label:'faith-drama', phase:'Survey', schema:SCHEMA}),
+])
+return { results: r.filter(Boolean) }

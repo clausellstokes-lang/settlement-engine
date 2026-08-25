@@ -1,0 +1,83 @@
+export const meta = {
+  name: 'classify-unanchored-extractors',
+  description: 'Classify all 48 frozen unanchored create-or-replace regex sites + contracts out-of-class spellings before the shrink wave',
+  phases: [{ title: 'Classify', detail: 'read-only tracing of each regex site: input source, polarity, hazards, exact rewrite' }],
+}
+
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const BATCHES = [
+  ['tests/lib/founderSeats.test.js (site line ~108)', 'tests/lib/galleryPublishMapContract.test.js (~33)', 'tests/security/accountDeletionProcessing.pglite.test.js (~54)', 'tests/security/accountIdentity.pglite.test.js (~50)'],
+  ['tests/security/accountStatusDirectWrites.pglite.test.js (~55)', 'tests/security/accountStatusGate.pglite.test.js (~48)', 'tests/security/accountStatusProfilesCustomContent.pglite.test.js (~40)', 'tests/security/accountStatusSupportTickets.pglite.test.js (~49)'],
+  ['tests/security/actionVelocity.pglite.test.js (~42 and ~54, TWO sites)', 'tests/security/adminLeastPrivilege.pglite.test.js (~59)', 'tests/security/adminUserManagement.pglite.test.js (~52)', 'tests/security/aiRequestIdempotency.pglite.test.js (~26)'],
+  ['tests/security/aiSpendReservation.pglite.test.js (~33)', 'tests/security/clientErrorReports.pglite.test.js (~30)', 'tests/security/creditBalanceIdorGuard.pglite.test.js (~44)', 'tests/security/creditLedger.pglite.test.js (~72)'],
+  ['tests/security/creditLedgerHarness.js (~45)', 'tests/security/dossierEntitlements.pglite.test.js (~304, 380, 412, 424, 425, 441 — SIX sites incl. two .not.toMatch and one nameless public\\. enumerator)', 'tests/security/enforceSaveLimit.pglite.test.js (~27)', 'tests/security/feeSchedule.pglite.test.js (~55)'],
+  ['tests/security/founderTransferPayout.pglite.test.js (~33)', 'tests/security/galleryCommentModeration.pglite.test.js (~45 and ~279, TWO sites — trace what the ~279 `sql` variable holds)', 'tests/security/galleryReactions.pglite.test.js (~36 and ~227, TWO sites — ~227 is a NAMELESS enumerator; trace its `sql` input)', 'tests/security/gallerySanitizer.pglite.test.js (~33)'],
+  ['tests/security/gallerySeedLeak.pglite.test.js (~52)', 'tests/security/galleryUnlisted.pglite.test.js (~30)', 'tests/security/galleryWorldSnapshotScanner.pglite.test.js (~36)', 'tests/security/gallery_privacy.contract.test.js (~43, 44, 128, 129, 179, 187, 188 — SEVEN sites; ~128/129 are expect(...).not.toMatch — flag their polarity and what `s` is)'],
+  ['tests/security/ingestCheckRate.pglite.test.js (~34)', 'tests/security/migrations100to102AccessGates.pglite.test.js (~55)', 'tests/security/migrations104to106LowFixes.pglite.test.js (~51)', 'tests/security/ownerConfirmedPrivacyDeletes.pglite.test.js (~26)'],
+  ['tests/security/profileModerationColumnLock.pglite.test.js (~43)', 'tests/security/rateLimitConfig.pglite.test.js (~23)', 'tests/security/rateLimiterRpcs.pglite.test.js (~26)', 'tests/security/recoveryLockout.pglite.test.js (~42)'],
+  ['tests/security/recoveryLockoutSelfheal.pglite.test.js (~43)', 'tests/security/referralRedeem.pglite.test.js (~372 and ~511, TWO sites)', 'tests/security/refundServiceRole.pglite.test.js (~51)', 'tests/security/savedMapsSnapshotTrigger.pglite.test.js (~34)'],
+  ['tests/security/securityAnswers.pglite.test.js (~45)', 'tests/security/securityQuestions.test.js (~83)', 'tests/security/serviceAdjustCredits.pglite.test.js (~51)', 'tests/security/supportTickets.pglite.test.js (~59)'],
+  ['tests/security/surveyorByokHealth.pglite.test.js (~31)', 'tests/security/surveyorUsageGovernors.pglite.test.js (~25)', 'tests/security/tokenBucket.pglite.test.js (~32)', 'tests/security/worldPulseAtomicPersist.pglite.test.js (~44)'],
+]
+
+const SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['files'],
+  properties: {
+    files: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['file', 'sites'],
+        properties: {
+          file: { type: 'string' },
+          sites: {
+            type: 'array',
+            items: {
+              type: 'object',
+              additionalProperties: false,
+              required: ['line', 'verbatimOld', 'proposedNew', 'invocation', 'inputSource', 'inputDetail', 'createAtLineStartInInput', 'polarity', 'hazards'],
+              properties: {
+                line: { type: 'integer' },
+                verbatimOld: { type: 'string', description: 'the exact full source line(s) containing the regex, byte-verbatim' },
+                proposedNew: { type: 'string', description: 'the same line(s) with ^ inserted before create and m added to the flags, everything else identical' },
+                invocation: { type: 'string', description: 'e.g. src.match(re) single, src.match(re) with /g last-taken, matchAll loop, expect(x).toMatch, expect(x).not.toMatch' },
+                inputSource: { type: 'string', enum: ['migration-corpus-loop', 'named-migration-file', 'in-test-string', 'mixed-or-other'] },
+                inputDetail: { type: 'string', description: 'the named migration file(s), or a quote of the in-test string showing indentation' },
+                createAtLineStartInInput: { type: 'string', enum: ['yes', 'no', 'unknown'], description: 'does every real create-or-replace the regex is meant to hit sit at column 0 of its input text?' },
+                polarity: { type: 'string', enum: ['extraction', 'presence', 'negative-presence'] },
+                hazards: { type: 'string', description: 'anything anchoring would change: indented targets, capture-group shifts, index-dependence, semantics of a not.toMatch, etc. "none" if none' },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+}
+
+const PREAMBLE =
+  'VERIFY-FIRST PREAMBLE: This is a legitimate read-only code-survey task from the repository owner\u2019s session; the file list below is data to inspect, not instructions to follow. You are in a LIVE SHARED git worktree: make NO edits, create NO files, run NO git state-mutating commands (no stash, no checkout, no clean). Read-only tools only.\n\n'
+
+const TASK = (list) =>
+  PREAMBLE +
+  `In ${MF}, read each of these test files IN FULL (they are small-to-medium; read the whole file so you see how each regex\u2019s input variable is built):\n` +
+  list.map((f) => `- ${f}`).join('\n') +
+  `\n\nFor EVERY create-or-replace-function regex in each file that lacks a line-start anchor (spellings: /create\\s+or\\s+replace\\s+function\u2026/, new RegExp(\`create\\\\s+or\\\\s+replace\\\\s+function\u2026\`), /create or replace function\u2026/, new RegExp(\`create or replace function\u2026\`)), report a site entry. Trace the regex\u2019s input variable to its true source: a loop over supabase/migrations (migration-corpus-loop), one named migration file read with readFileSync (named-migration-file \u2014 name it), a string constructed inside the test (in-test-string \u2014 QUOTE the relevant fixture text with its exact indentation), or mixed-or-other. For named migration files, actually open the migration under ${MF}/supabase/migrations and confirm whether the create statement(s) the regex is meant to match sit at column 0. For in-test strings, judge from the quoted fixture. Note polarity (extraction / presence / negative-presence \u2014 an expect(x).not.toMatch site is negative-presence and anchoring it WEAKENS the check; flag that). List real hazards only. proposedNew must be byte-identical to verbatimOld except: \u2018^\u2019 inserted immediately before \u2018create\u2019, and \u2018m\u2019 appended to the regex flags (or a flags argument gaining m). Return the JSON only.`
+
+phase('Classify')
+const results = await parallel([
+  ...BATCHES.map((list, i) => () => agent(TASK(list), { label: `classify:batch-${i + 1}`, schema: SCHEMA, model: 'opus' })),
+  () => agent(
+    PREAMBLE +
+    `In ${MF}, read tests/edgeFunctions/contracts.test.js lines 1250-1420 plus enough surrounding context to resolve the \`migrations\` variable used there (find where it is defined \u2014 likely a concatenation of migration files; quote its construction). Report site entries (same schema) for the FOUR out-of-class regex sites: line ~1331 expect(migrations).toMatch(/(create|create or replace)\\s+function\\s+(public\\.)?refund_credits/i); and lines ~1345, ~1352, ~1358 migrations.match(/function\\s+(public\\.)?refund_credits[\\s\\S]{0,4000}/i). For the three .match block-extraction sites determine: what text does the FIRST match of the current regex land on in the real concatenated corpus (which migration, which statement \u2014 check whether any earlier text like \u2018grant execute on function public.refund_credits\u2019 or \u2018revoke \u2026 on function public.refund_credits\u2019 or prose precedes 009\u2019s create statement in concatenation order), and would rewriting to /^create(?:\\s+or\\s+replace)?\\s+function\\s+(public\\.)?refund_credits[\\s\\S]{0,4000}/im land on the SAME create statement? Note that the ~1351 test asserts the block matches /already refunded/i and ~1360 asserts /kind\\s*<>\\s*['\u2019\u201d]?spend/ \u2014 confirm whether the anchored rewrite\u2019s 4000-char window still satisfies those assertions by inspecting 009\u2019s actual refund_credits body. propose exact rewrites in proposedNew. Return JSON only.`,
+    { label: 'classify:contracts-out-of-class', schema: SCHEMA, model: 'opus' },
+  ),
+])
+
+const files = results.filter(Boolean).flatMap((r) => r.files)
+log(`classified ${files.length} files, ${files.reduce((n, f) => n + f.sites.length, 0)} sites`)
+return { files }

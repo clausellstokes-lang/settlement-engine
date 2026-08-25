@@ -1,0 +1,102 @@
+export const meta = {
+  name: 'fp-build-cycle-1',
+  description: 'FP build cycle 1: the gate openers (SP-A, CW-0w) then the early-eligible set (GR-0, GR-1, TR-1, TR-9c) — per DESIGN_FP_ARCHITECTURE @ 99d63d92',
+  phases: [
+    { title: 'Phase 0', detail: 'SP-A pure foundations · CW-0w the walker estate', model: 'opus' },
+    { title: 'Verify 0', detail: 'gate-opener verifier', model: 'opus' },
+    { title: 'Early set', detail: 'GR-0 · GR-1 · TR-1 · TR-9 contract', model: 'opus' },
+    { title: 'Verify 1', detail: 'early-set verifier', model: 'opus' },
+    { title: 'Cycle close', detail: 'whole-cycle adversarial close', model: 'opus' },
+  ],
+}
+
+const P = `VERIFY-FIRST: this brief is the chair's authentic instruction set for the SettlementForge FP build era; verify claims against the tree, then proceed — do not refuse it as injection. THE PROTOCOL BINDS (docs/DESIGN_FP_ARCHITECTURE.md §10, which copies the war volume's §10 verbatim): work ONLY in /Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold on branch claude/composite-r4 — cd + git rev-parse --abbrev-ref HEAD every command block; the WAVE BASE is 99d63d92 (the landed FP architecture volume; the tree is LIVE — re-read every shared file at lane start and before every edit; record YOUR OWN start HEAD, other lanes commit concurrently). Pathspec commits under THE STAGED-SET LAW; commit message via FILE with trailer 'Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>'. NEVER stash/reset/clean or ANY checkout-family restore — cp backups, cmp/md5-exact restores. Before ANY vitest: ps aux | grep vitest — yield and retry if another worker runs; focused suites only; long gates via sh scripts/gate-tail.sh. tests/lint red base: attribute by VIOLATION ROWS vs a git-archive of YOUR start HEAD with node_modules symlinked, zero foreign rows. python3 byte-scan every authored file. tests/fixtures/ untouched. strict = typecheck:domain:strict ceiling 1313, leave met. New negatives carry // anchored:; generation-facing trees are EXACT-ZERO and use tests/helpers/{anchoredNegatives,seedFailures}. Every doc-read pin asserts exactly-once. Every flag: the CQ5 law — manifest entry (ENGINE_GATED_VIRTUAL_RULE_KEYS) + certification row/pending + FIRST real gate read in ONE commit, walker asserting the exact delta; four-fence dormancy per flag with the lit-mutant control. Zero PRNG (keyed hash01, w*u); pulseKernel.js + applyWorldPulse.js ZERO edits. Sizes measured with the enforcer's Linter AT the publishing commit. Scratch prefix fp1-<lane>-. Every claim CONFIRMED-with-output or labeled PLAUSIBLE. STOP-and-report on measured blockers is a success mode.
+
+YOUR CHARTER AUTHORITY, in order: docs/DESIGN_FP_ARCHITECTURE.md §5's wave block for your wave (the binding charter) → your program's docs/DESIGN_FP_ARCH_<P>.md (normative fine grain) → docs/DESIGN_FP_ARCH_CENSUS.md (shared substrate; live code outranks) → the design volume it compiles (docs/DESIGN_FP_<PROGRAM>.md; where architecture and design volume disagree, STOP and report — J-WR-13 binds). RETURN {lane, commits:[...], gates:[...], stopReports:[...], notes}.`
+
+const laneSchema = { type: 'object', required: ['lane', 'commits', 'gates', 'stopReports', 'notes'], properties: {
+  lane: { type: 'string' }, commits: { type: 'array', items: { type: 'string' } },
+  gates: { type: 'array', items: { type: 'string' } }, stopReports: { type: 'array', items: { type: 'string' } },
+  notes: { type: 'string' } } }
+const verifySchema = { type: 'object', required: ['lane', 'verdict', 'findings'], properties: {
+  lane: { type: 'string' }, verdict: { type: 'string' }, findings: { type: 'array', items: { type: 'string' } } } }
+
+phase('Phase 0')
+const [spa, cw0] = await parallel([
+  () => agent(`${P}
+
+YOU ARE WAVE #1 SP-A — THE PURE FOUNDATIONS (charter: §5 block #1; fine grain: DESIGN_FP_ARCH_SP.md). No flag; dark by construction; ZERO existing-src edits. bandedStock.js (shared half-life shape + crossing-receipt grammar + anti-ratchet property with an executed ratchet-mutant); bandFamilies.js — the significance family {routine, notable, major} and severity ladder MINTED ONCE HERE; the band-family reconciliation walker (Bands-line <-> tuning-table totality both directions, shrink-only frozen backlog for pre-existing war tables); the no-term-literal source scan; J-FP-2's shrink-only pressure-ladder mint census + the LEVEL-vs-DIRECTION doc pin. Alignment: declared-empty with reason. Edit-verb: engine-only, recorded.`, { label: 'fp1:SP-A', phase: 'Phase 0', model: 'opus', schema: laneSchema }),
+  () => agent(`${P}
+
+YOU ARE WAVE #2 CW-0w — THE WALKERS THE REGISTRY IS OWED (charter: §5 block #2; fine grain: DESIGN_FP_ARCH_CW.md; J-FP-3 pulled this forward). Four slices, each its own pathspec commit: (1) widen the couplingId regex to the closed nine-prefix alternation + split couplingRegistryWar.js out of the 575-line head (VERBATIM row moves, head re-exports, census strings updated same commit — an src mechanical split: re-read the head immediately before, pathspec-tight); (2) the baseline-frozen shrink-only cross-layer INCLUSION RATCHET over module SETS with positive control + two executed mutants; (3) schema v3's optional frozen kinds[] + the DESK WALKER + couplingReceiptSample.js with the WAR sample; (4) proseNumericsWalk's push-indirection fifth detector, baselined shrink-only. HARD LAW: no non-WAR cross-layer registry row exists before your slice 1 — verify by grep at start, and your violation-row diffs prove zero foreign movement.`, { label: 'fp1:CW-0w', phase: 'Phase 0', model: 'opus', schema: laneSchema }),
+])
+
+phase('Verify 0')
+const v0 = await agent(`${P}
+
+YOU ARE THE PHASE-0 ADVERSARIAL VERIFIER. Lanes report:
+${JSON.stringify({ spa, cw0 }, null, 2)}
+
+Trust nothing; at committed HEAD on a clean tree re-execute: SP-A's ratchet-mutant + the reconciliation walker's both-directions totality with YOUR OWN census + the pressure-ladder mint census's executed second-mint plant; CW-0w's regex widening (a WR row still validates; a TR-prefixed probe row validates; a garbage prefix reds), the verbatim-move proof on the war split (row content byte-identical across the move), both inclusion-ratchet mutants, the desk walker's non-empty floor, the fifth detector's baseline discipline. Violation-row diffs vs each lane's recorded start HEAD: zero foreign rows. sizeBaseline green; strict 1313; byte-scans; mouths untouched by diff; smoke:boot if any src moved (the CW split did — MANDATORY). VERDICT 'PASS' or 'REJECT' with minimal repros.`, { label: 'fp1:verify-0', phase: 'Verify 0', model: 'opus', schema: verifySchema })
+
+if (String(v0.verdict).toUpperCase().startsWith('REJECT')) {
+  log('Phase 0 REJECTED — returning for the chair')
+  return { spa, cw0, v0, halted: 'after-phase-0' }
+}
+
+phase('Early set')
+const [gr0, gr1, tr1, tr9] = await parallel([
+  () => agent(`${P}
+
+YOU ARE WAVE #8 GR-0 — THE LIFECYCLE VOICE (charter: §5 block #8; fine grain: DESIGN_FP_ARCH_GR.md). Flag treatyLifecycleVoiceEnabled under the CQ5 one-commit law. Lapse/detection beats at the V-10 prune site and V-6 compliance crossing (peaceTerms.js ~766-776 effective — state the delta, prefer net-zero; the file was WR's, no live war lanes but re-read + pathspec); treatyLifecycleVoice.js leaf (beats + ageYears + treatiesPricedDuring with the unconsumed-pin tripwire); the twenty-year eulogy with a MOLD walker (substring pins cannot see grammar); the detection crossing keyed on the OBSERVED transition (two-tick fixture); the treatyDisposition OUTCOME-FREEZE pin. Own-footprint fence runs with dispositionChannelsEnabled dark.`, { label: 'fp1:GR-0', phase: 'Early set', model: 'opus', schema: laneSchema }),
+  () => agent(`${P}
+
+YOU ARE WAVE #9 GR-1 — THE OATH-HOLDER IDENTITY (charter: §5 block #9; fine grain: DESIGN_FP_ARCH_GR.md). Flag oathHolderEnabled under the CQ5 law. oathHolder.js composing EXACTLY governingFactionOf -> npcInFaction -> codepoint-stable pick -> durableIdForRoster; null = no stamp = seat-voice. Stamps at ALL THREE mint doors (war mint, carried-sheet, sale — peaceTermsSale.js is WR-10's file: re-read, small gated addition, pathspec) + generosity credit obligations; the stamp totality walker across all three doors; death changes NOTHING; same-seat determinism + regen re-stamp pinned; the JSON-alias round-trip (sworn.npcId IS a roster object).`, { label: 'fp1:GR-1', phase: 'Early set', model: 'opus', schema: laneSchema }),
+  () => agent(`${P}
+
+YOU ARE WAVE #23 TR-1 — THE CASUS COMMERCII (charter: §5 block #23; fine grain: DESIGN_FP_ARCH_TR.md). Flag casusCommerciiEnabled under the CQ5 law. commercialReasonTaxonomy (8 severance/partnership pairs, REASON_MIRRORS-shaped — the war taxonomy is SHAPE template, never shared code) + the commercialReasons writer (8 scorers + amendment-B suppression; the canonical-model row: RE-DERIVED from state, same seed same entries) + the news leaf + your own walker (totality/bijection/suppression-receipt). THE ONE T9 SEAM EDIT: tradeWar's escalation deposit gains the severance-magnitude read, gated by name, dark byte-identical — this is a cross-layer read: its coupling-registry row lands in YOUR commit (CW-0w's widened regex is live). Healthy-partnership-mints-nothing on generated corpora; famine_profiteering suppressed against physically-empty stocks, receipt naming the stock read.`, { label: 'fp1:TR-1', phase: 'Early set', model: 'opus', schema: laneSchema }),
+  () => agent(`${P}
+
+YOU ARE WAVE #31's CONTRACT SLICE TR-9c — TRADE CONVERGENCE INSTRUMENTATION, the contract module only (charter: §5 block #31; fine grain: DESIGN_FP_ARCH_TR.md). No flag. The trade convergence contract module (the TR flag-family keys, lighting-order rows, certification vocabulary — the warConvergenceContract shape for trade) + its walker, and the lighting-order invalid-config law (a flag lit out of order is an invalid config) pinned. NO instrumentation collectors yet (those wait for their waves) — the contract is the pre-pin the whole TR family builds against. Coupling-registry rows for any cross-layer declaration ride your commit.`, { label: 'fp1:TR-9c', phase: 'Early set', model: 'opus', schema: laneSchema }),
+])
+
+phase('Verify 1')
+const v1 = await agent(`${P}
+
+YOU ARE THE EARLY-SET ADVERSARIAL VERIFIER. Lanes report:
+${JSON.stringify({ gr0, gr1, tr1, tr9 }, null, 2)}
+
+At committed HEAD on a clean tree re-execute per lane: GR-0's mold walker (drive it red with a malformed eulogy mutant), the two-tick detection fixture, the outcome-freeze pin, the four-fence set; GR-1's stamp totality across ALL THREE doors (mutant: remove the sale-door stamp — walker reds), same-seat determinism, the JSON round-trip; TR-1's bijection walker + both suppression receipts + the T9 seam's dark byte-identity + its coupling-registry row present; TR-9c's lighting-order pin (an out-of-order lit fixture is refused). Every flag commit satisfies the CQ5 one-commit law (git log -S per key: manifest + cert row + first gate read, one commit each). Violation-row diffs vs each lane's start HEAD: zero foreign rows. strict 1313; sizeBaseline; byte-scans; mouths untouched. VERDICT 'PASS' or 'REJECT' with minimal repros.`, { label: 'fp1:verify-1', phase: 'Verify 1', model: 'opus', schema: verifySchema })
+
+log('Early set verdict processed; the chair ruled the serialized landing — one lane owns the tree')
+
+phase('Early set')
+const land = await agent(`${P}
+
+YOU ARE THE CYCLE-1 LANDING LANE — SERIALIZED, and you OWN the worktree (no other lane runs). The worktree carries the interleaved uncommitted WIP of lanes GR-0 and GR-1 (16 modified files + the new leaves: treatyLifecycleVoice/grammarNews/grammarReceiptPools/oathHolder.js + their tests) — both waves are BUILT AND GREEN but were deadlocked by the flag-wave serialization hazard (the CQ5 shared files). SURVEY FIRST, SWEEP NEVER. The two lanes' full self-reports (their exact file/row inventories) are in the workflow journal at /Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c44e5d99-2ba5-49d5-a554-40b68534c8eb/subagents/workflows/wf_0cdf49ef-9c9/journal.jsonl (one result line per agent) — read the GR-0 and GR-1 entries plus the verify-1 entry before touching anything.
+
+EXECUTE IN THIS ORDER, one pathspec-tight commit group per step, gates after each:
+STEP 1 — TR-1's RED REPAIR, CORRECTLY: subsystemRowsVirtual.test.js is red at HEAD (casusCommerciiEnabled in the manifest without its certification half). Verify-1 EXECUTED the recorded one-line remedy and PROVED IT WRONG (its finding 4 in the journal — read it). Land the correct repair: the certification row in src/domain/certification/subsystemRowsVirtual.js AND the VIRTUAL_RULES/LANE_LEAVES entries in its test TOGETHER — but note both files currently carry GR-1's uncommitted oath rows too: construct the TR-1-only staged content (git show HEAD:path + the TR-1 rows alone, staged via update-index --cacheinfo — the banked partial-stage recipe; prove by running the suite inside a git archive of the INDEX). Also close verify-1's finding-5 structural gap: teach tests/lint/engineGatedRuleKeys.walker.test.js to enforce the CERT-ROW half of the CQ5 one-commit law (a manifest key without its certification row or pending entry reds by name), with a mutant control.
+STEP 2 — GR-1 LANDS WHOLE: its CQ5 trio (oathHolderEnabled manifest + cert row + first gate read) plus oathHolder.js, its stamps at the three mint doors (peaceTerms.js + peaceTermsSale.js rows), its tests. Its report says built-green with the null-is-a-preference law — honor its own inventory exactly. Run its wave gates at its commit.
+STEP 3 — GR-0 LANDS WHOLE (task 32): its leaf + pools + hooks + five joins + dossier chips + its CQ5 trio, per its own inventory. Its gates at its commit.
+STEP 4 — the tree is CLEAN: git status empty, every remaining modified file accounted to a landed commit; whole tests/lint violation-row diff vs d7ea69a4 shows ONLY the lanes' own green additions + the repaired subsystemRowsVirtual; byte-scans on every touched file; strict 1313; sizeBaseline green. If ANY hunk cannot be confidently attributed to a lane's inventory, STOP and report it — never guess ownership.`, { label: 'fp1:landing', phase: 'Early set', model: 'opus', schema: laneSchema })
+
+phase('Verify 1')
+const v1r2 = await agent(`${P}
+
+YOU ARE THE RETURNING EARLY-SET VERIFIER, round 2 — scoped to the landing. Round 1's findings bind (TR-9c bankable; substrate gates confirmed). The landing lane reports:
+${JSON.stringify(land, null, 2)}
+
+At committed HEAD on a CLEAN tree (git status must be empty — a dirty tree is an automatic REJECT): re-execute (1) subsystemRowsVirtual green with the cert row + list entries together, and the upgraded engineGatedRuleKeys walker now reds a manifest-without-cert-row mutant (execute it, cp-restore md5-exact); (2) GR-1's stamps at ALL THREE mint doors + same-seat determinism + the four-fence set for oathHolderEnabled; (3) GR-0's mold walker driven red by a malformed-eulogy mutant + the two-tick detection fixture + the outcome-freeze pin + the four-fence set for treatyLifecycleVoiceEnabled; (4) each flag's CQ5 trio verified in ONE commit by git log -S per key; (5) whole tests/lint violation-row diff vs d7ea69a4: only the landed lanes' green additions, zero foreign rows. VERDICT 'PASS' or 'REJECT' with minimal repros.`, { label: 'fp1:verify-1r2', phase: 'Verify 1', model: 'opus', schema: verifySchema })
+
+if (String(v1r2.verdict).toUpperCase().startsWith('REJECT')) {
+  log('Landing round REJECTED — returning for the chair')
+  return { spa, cw0, v0, gr0, gr1, tr1, tr9, v1, land, v1r2, halted: 'after-landing' }
+}
+
+phase('Cycle close')
+const w = await agent(`${P}
+
+YOU ARE THE CYCLE-CLOSE ADVERSARIAL VERIFIER — the whole-cycle claims no per-lane check sees. At HEAD on a clean tree, ALONE: (1) the full new-suite battery across all six waves, counts quoted; (2) cross-wave integration: SP-A's significance family consumed nowhere yet EXCEPT where charters name it (grep the mint — exactly one); CW-0w's widened registry accepting TR-1's and TR-9c's rows while the inclusion ratchet holds; GR-1's stamps appearing on treaties minted through all three doors in ONE integrated fixture; (3) whole-tree honesty: violation-row diff vs 99d63d92 for EVERY tests/lint walker — expected deltas ONLY the lanes' own green additions and named baseline rows; the pre-existing red base otherwise byte-identical; (4) dormancy: all four new flags dark ⇒ byte-identical worlds through a multi-year pulse (per-flag four-fence + the combined all-dark run), lit-mutant controls proving fences see; (5) build + prerender + smoke:boot; strict 1313; hygiene (pathspec, byte-scans, fixtures untouched, mouths untouched by diff across the whole cycle). VERDICT: 'PASS — FP BUILD CYCLE 1 COMPLETE; THE GATE OPENERS AND EARLY SET STAND' only on executed evidence; otherwise REJECT with minimal repros.`, { label: 'fp1:cycle-close', phase: 'Cycle close', model: 'opus', schema: verifySchema })
+
+return { spa, cw0, v0, gr0, gr1, tr1, tr9, v1, land, v1r2, w }

@@ -1,0 +1,202 @@
+export const meta = {
+  name: 'v4e-queue-row-recon',
+  description: 'Recon the queue doc grammar and independently verify every claim the V4D row will make',
+  phases: [
+    { title: 'Recon' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const PRE = `You are working in a SHARED, LIVE git worktree at ${WT}.
+CRITICAL: your shell cwd RESETS between Bash calls — prefix EVERY command with \`cd ${WT} && \`.
+CRITICAL: you are READ-ONLY. Do not edit/write any file. Do not run any state-mutating git
+command (no add/commit/stash/checkout/restore/reset/clean/tag). Parallel sessions are writing
+this tree; read fresh and never "fix" anything.
+Report ONLY what you actually executed and observed. Quote real output. Label any inference as
+INFERRED rather than stating it as observed fact. If you cannot verify something, say so plainly
+instead of guessing.`
+
+const GRAMMAR = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['headingForm', 'structuralElements', 'idConvention', 'verificationCellStyle', 'ownerHeldStyle', 'templateSkeleton', 'notes'],
+  properties: {
+    headingForm: { type: 'string', description: 'Exact form of the ## heading line(s), with a real example quoted' },
+    structuralElements: { type: 'array', items: { type: 'string' }, description: 'Ordered list of the sub-elements a recent section contains, each with a quoted example' },
+    idConvention: { type: 'string', description: 'How vetoable ruling IDs are introduced inline, quoted exactly' },
+    verificationCellStyle: { type: 'string', description: 'How executed verification is quoted in these sections, with a real example' },
+    ownerHeldStyle: { type: 'string', description: 'How owner-gated/owner-held tails are written, with a real example' },
+    templateSkeleton: { type: 'string', description: 'A reusable skeleton I can fill in, matching the newest section exactly' },
+    notes: { type: 'string', description: 'Anything else load-bearing, incl. whether a table row is ALSO expected for new entries' },
+  },
+}
+
+const PROVENANCE = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['laneDefinition', 'rNumbering', 'existingV4DIds', 'recommendedId', 'otherDocsExpectingEntry', 'confidence'],
+  properties: {
+    laneDefinition: { type: 'string' },
+    rNumbering: { type: 'string' },
+    existingV4DIds: { type: 'string' },
+    recommendedId: { type: 'string' },
+    otherDocsExpectingEntry: { type: 'string' },
+    confidence: { type: 'string' },
+  },
+}
+
+const CLAIMS = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['verdicts', 'corrections', 'summary'],
+  properties: {
+    verdicts: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['claim', 'verdict', 'evidence'],
+        properties: {
+          claim: { type: 'string' },
+          verdict: { type: 'string', enum: ['CONFIRMED', 'REFUTED', 'PARTLY_TRUE', 'UNVERIFIABLE'] },
+          evidence: { type: 'string' },
+        },
+      },
+    },
+    corrections: { type: 'array', items: { type: 'string' } },
+    summary: { type: 'string' },
+  },
+}
+
+phase('Recon')
+
+const [grammar, provenance, designClaims, incidentClaims, dupCheck] = await parallel([
+  () => agent(`${PRE}
+
+TASK: extract the EXACT authoring grammar of the newest entries in docs/FABLE_VALIDATION_QUEUE.md.
+
+Read the file's protocol header (lines 1-45) AND the two newest prose sections in full:
+the WR-9c section (starts ~line 1065) and the WR-9d section (starts ~line 1245, runs to EOF).
+Also skim one older section (LANE RR ~535 or WZ-5r ~608) to tell durable convention from one-off.
+
+I am about to append a new section recording ONE implementer judgment for lane V4D. I need to
+match this doc's grammar exactly. Determine:
+- the exact ## heading form (these sections wrap across multiple ## lines - quote a real one)
+- the ordered sub-elements a section contains, each with a quoted example
+- how vetoable ruling IDs are introduced inline (quote exactly)
+- how executed verification is quoted
+- how owner-held / owner-gated tails are written
+- CRITICALLY: whether new entries ALSO get a row in the markdown table near the top of the file,
+  or whether the table is historical and prose sections are the current form. Settle this with
+  evidence: check whether recent queue commits (git log -p -- docs/FABLE_VALIDATION_QUEUE.md)
+  touched the table at all.
+
+Return a reusable skeleton I can fill in.`, { label: 'grammar', phase: 'Recon', schema: GRAMMAR }),
+
+  () => agent(`${PRE}
+
+TASK: establish lane V4D's provenance and what ruling ID a new V4D judgment should take.
+
+Lane V4D is the ribbon/arrow branding lane. Known commits: a2dbdd36, 358a8956, 273ffbba, 98edbc9f.
+Investigate:
+- git log --format="%h %s" -20 and git show --stat on those hashes: what is lane V4D, and
+  what R-numbering do its commit subjects use? Which R-numbers are taken?
+- My commit 76ea345c continues 98edbc9f's work ("Lane V4D R-3: two docstrings stop over-claiming").
+  What R-number/label would 76ea345c's work carry?
+- Search ALL of docs/ for existing CR-V4D-* or J-V4D-* ruling IDs: grep -rn "V4D" docs/ | head -40
+  and grep -roE "(CR|J)-V4[A-Z]?-[A-Z0-9]+" docs/ | sort -u
+- In docs/FABLE_VALIDATION_QUEUE.md the ID convention is J-<LANE>-<n> for implementer judgments
+  and CR-<LANE>-<letter> for chair rulings (e.g. J-WR9D-2, CR-WR9-C). Given that, what should a
+  first recorded V4D implementer judgment be called?
+- Is there ANOTHER doc that tracks the V4D/ribbon lane's R-rows (a plan/design doc with a
+  PROGRESS blockquote) that would normally also receive an entry for this work? Look for ribbon /
+  branding / arrow / nav design docs in docs/. Give the path and quote the PROGRESS convention.`, { label: 'v4d-provenance', phase: 'Recon', schema: PROVENANCE }),
+
+  () => agent(`${PRE}
+
+TASK: independently verify or refute each factual claim below. Do NOT take my word for any of them.
+
+Context: tests/design/contrast.test.js's wrap test asserted the token ratio 2.12 between
+WRAP_GLOSS and WRAP_EDGE, and its comment framed that ratio as the reason the whipping "reads as
+thread". Commit 76ea345c reworded the comment (assertions untouched).
+
+Verify each claim:
+1. 2.12 IS the contrast ratio of the AUTHORED hexes WRAP_GLOSS (#7E3A24) vs WRAP_EDGE (#2E0F08).
+   Compute it yourself with the WCAG formula; do not trust the test's own helper.
+2. The RENDERED crest-to-valley ladder measures ~1.81:1, with crest #6A311E..#6B311F and valley
+   #270D07. Find where those figures come from (src/components/theme.js WRAPS note, and
+   tests/components/navFletching.test.jsx's R5 test) and confirm the numbers.
+3. tests/components/navFletching.test.jsx contains a test whose name includes "R5" and
+   "THE WHIPPING EXISTS", it pins the executed/composited ladder, and it currently PASSES.
+   Run exactly: npx vitest run tests/components/navFletching.test.jsx -t "THE WHIPPING EXISTS"
+4. THE KEY ONE. The claim "WRAP_GLOSS never reaches the screen below the top 9% of the bar"
+   describes the arrangement V4D REPLACED (V4C's layering: turns painted OVER the barrel, only
+   the inter-turn shadow opaque, ladder 1.316:1), NOT the shipped composite. In the SHIPPED
+   arrangement the turns are the opaque layer and WRAP_BARREL is a luminance modulator multiplied
+   over them, and R5's own loop asserts the crest survives down to SHAFT_STOPS.edge at >1.5:1.
+   Read theme.js around the WRAPS note and WRAP_BARREL, and R5, and rule on this precisely.
+5. The reason the authored 2.12 is never a pixel ratio in the SHIPPED arrangement is that the
+   compositor multiplies WRAP_BARREL's luminance modulator over the turns, so the authored gloss
+   hex never reaches the screen undimmed. Confirm or correct this mechanism.
+6. Commit 98edbc9f ("Lane V4D R-3") corrected this same over-claim elsewhere, and V4D's convention
+   is that false claims are corrected IN PLACE rather than annotated below. Check 98edbc9f's diff.
+7. The current committed text of tests/design/contrast.test.js describes 2.12 as the authored-token
+   ratio and does NOT claim it is why the wrap reads as thread. Quote the committed lines.
+8. tests/design/contrast.test.js currently passes. Run: npx vitest run tests/design/contrast.test.js
+   and report the exact counts.
+
+Note: several vitest processes from parallel lanes may be running; a red caused by parallel load is
+a known false signal here. If you see a failure, re-run it once before reporting it as real.`, { label: 'design-claims', phase: 'Recon', schema: CLAIMS }),
+
+  () => agent(`${PRE}
+
+TASK: independently verify or refute each claim about commit 76ea345c and the pre-commit hook incident.
+
+Verify:
+1. Commit 76ea345c exists, contains EXACTLY ONE file (tests/design/contrast.test.js), and is an
+   ancestor of the current HEAD. Its diff is comment-only: no expect(...) assertion line was
+   added, removed, or altered. Prove the assertion claim by examining the diff, not by assuming.
+2. Its commit body records a judgment call about deviating from the brief's "top 9%" causal clause.
+   Quote the relevant part of git log -1 --format=%B 76ea345c
+3. No commit landed between cb1ea74f and 76ea345c (i.e. 76ea345c's parent IS cb1ea74f).
+4. During 76ea345c, husky/lint-staged reverted two tracked files belonging to a parallel lane
+   (src/domain/certification/behavioralContract.js and
+   src/domain/certification/warConvergenceContract.js) back to HEAD, WITHOUT them being committed.
+   Evidence to check: an unreachable stash commit 17518dd0 whose subject begins "WIP on
+   claude/composite-r4" and whose date is 09:06:16 - the same timestamp as 76ea345c.
+   Use: git log -1 --format="%h %ad %s" --date=format:"%H:%M:%S" 17518dd0
+   and: git diff 76ea345c 17518dd0 -- <those two paths>. Confirm the stash tree held modifications
+   that the post-commit tree did not.
+5. That lost work was subsequently committed by the parallel lane in a70c9284 - i.e. nothing was
+   permanently lost. Check a70c9284's --stat for those two paths.
+6. Whether the hook rewrote MY file's bytes: is tests/design/contrast.test.js as committed in
+   76ea345c byte-identical to what is in HEAD now, and does its content show any sign of
+   reformatting (e.g. reflowed comments)?
+7. Report the repo's hook configuration factually: core.hooksPath, .husky/ contents, and the
+   lint-staged config in package.json. Quote it.
+
+Also state clearly whether 17518dd0 is still present in the object store at the time you look (a
+temporary tag protecting it was created and later deleted, so it may now be unreachable but not
+yet pruned).`, { label: 'incident-claims', phase: 'Recon', schema: CLAIMS }),
+
+  () => agent(`${PRE}
+
+TASK: duplication and placement check, so I do not write a row that already exists.
+
+1. Does docs/FABLE_VALIDATION_QUEUE.md ALREADY record anything about: the 2.12 authored-vs-rendered
+   wrap ladder over-claim, tests/design/contrast.test.js, lane V4D, commit 76ea345c, or the
+   lint-staged hook reverting foreign files? Search thoroughly (grep for 2.12, contrast, V4D, WRAP,
+   wound, whipping, lint-staged, hook, 76ea345c, stash).
+2. Search the WHOLE docs/ tree for the same, so I know if the right home is a different doc:
+   grep -rn "2\\.12\\|contrast.test\\|whipping\\|WRAP_GLOSS" docs/ | head -40
+3. Is there an existing section in the queue about the V4D lane's over-claim corrections (98edbc9f)
+   that my entry should ride BESIDE rather than duplicate? Note the WZ-5r precedent at ~line 608:
+   the doc's protocol step 2 says a prior row is NOT rewritten; a correction rides beside it.
+4. Does any doc already record the pre-commit-hook-reverts-foreign-files hazard? Check docs/ and
+   also whether there is a standing hazards / gotchas doc that would be its natural home.
+5. Report the file's exact current byte count and line count, and the md5 of the whole file, so an
+   append-only claim can be byte-prefix verified afterward:
+   wc -c -l docs/FABLE_VALIDATION_QUEUE.md and md5 docs/FABLE_VALIDATION_QUEUE.md`, { label: 'dup-check', phase: 'Recon', schema: CLAIMS }),
+])
+
+return { grammar, provenance, designClaims, incidentClaims, dupCheck }

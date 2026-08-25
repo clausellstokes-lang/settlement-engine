@@ -1,0 +1,63 @@
+export const meta = {
+  name: 'e0-survey-rerun-s3-s6',
+  description: 'Re-run the two failed E0 survey areas (ledger orchestration + golden idiom)',
+  phases: [{ title: 'Survey-rerun' }],
+}
+
+const SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['area', 'summary', 'keyFiles', 'anchors', 'integrationPoints', 'hazards', 'openQuestions'],
+  properties: {
+    area: { type: 'string' },
+    summary: { type: 'string', description: 'Detailed findings, 4-8 paragraphs of markdown quoting real code + line numbers.' },
+    keyFiles: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['path', 'role'], properties: { path: { type: 'string' }, role: { type: 'string' } } } },
+    anchors: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['file', 'line', 'snippet', 'meaning'], properties: { file: { type: 'string' }, line: { type: 'integer' }, snippet: { type: 'string' }, meaning: { type: 'string' } } } },
+    integrationPoints: { type: 'array', items: { type: 'string' } },
+    hazards: { type: 'array', items: { type: 'string' } },
+    openQuestions: { type: 'array', items: { type: 'string' } },
+  },
+}
+
+const COMMON = `You are a READ-ONLY surveyor of the SettlementForge codebase (a deterministic D&D world simulator; src/domain is a PURE deterministic layer). We are building E0, the NARRATIVE TEMPO GOVERNOR (design: docs/DESIGN_PACING_GOVERNOR.md — read it first, it is short). The governor gates SPONTANEOUS major-arc births by drama-class budget over a rolling window; it ships DORMANT (absent activation marker ⇒ every same-seed output byte-identical). Seam: rollCandidates in src/domain/worldPulse/candidateEvents.js, called once at pulseKernel.js:1135 with {maxAuto:7}.
+
+THIS IS A REAL SURVEY — do NOT return a placeholder/probe/stub. Read the named files IN FULL, quote exact line numbers and code, and fill EVERY schema field with substantive content. Cite file:line for every claim.`
+
+phase('Survey-rerun')
+const AREAS = [
+  {
+    key: 'S3-ledger-orchestration',
+    prompt: `${COMMON}
+
+YOUR AREA — LEDGER MATERIALIZATION + pulseKernel ORCHESTRATION + NORMALIZER DORMANCY.
+
+Read IN FULL: src/domain/worldPulse/pulseKernel.js (focus lines 1040-1360 — the region around evaluateWorldPulseRules at ~1119, rollCandidates at ~1135, selectedForApply at ~1158, applyWorldPulseOutcomes at ~1180, and how the FINAL worldState is assembled + returned at the end of the tick function). Also read src/domain/worldPulse/simulationRules.js (the EAGER normalizeSimulationRules, DEFAULT_SIMULATION_RULES, PROFILE_KEYS, SIMULATION_RULE_PRESETS — note the VIRTUAL-profile idiom at lines ~483-511 that strips profile keys unless touched, and opt-in keys like disastersEnabled that are ABSENT from DEFAULT_SIMULATION_RULES). Also skim src/domain/worldPulse/worldState.js for the tick/weeks/seasonForTick + WEEKS_PER_YEAR machinery.
+
+ANSWER PRECISELY:
+1. In pulseKernel.js, map the exact sequence from candidate build → rollCandidates → apply → final worldState. Where is worldState REBUILT (immutably) after apply? Quote the final return shape (what worldState fields the tick emits). Where is the single best hook to (a) READ a conditionally-materialized tempo ledger from worldState into the options passed to rollCandidates, and (b) WRITE the updated ledger back into the final worldState after births are selected? Give exact line numbers.
+2. What is options.maxAuto sourced from at line 1135 (currently hardcoded {maxAuto:7})? Is there a natural place to inject per-class budgets + the ledger snapshot into that options object?
+3. TICK + GAME YEAR: where is worldState.tick, and how are weeks/year derived (seasonForTick, WEEKS_PER_YEAR)? Confirm one game year = how many week-ticks. Where would the governor read "current tick" and compute the rolling TEMPO_WINDOW (default one game year)?
+4. NORMALIZER DORMANCY (critical): confirm that adding a narrativeTempo axis as an OPT-IN key ABSENT from DEFAULT_SIMULATION_RULES (like disastersEnabled) keeps it out of BOOLEAN_KEYS/RULE_COMPARISON_KEYS so preset inference (presetIdForRules/rulesMatchPreset) is UNAFFECTED and goldens stay byte-identical. Show exactly how disastersEnabled achieves this and what a narrativeTempo string-enum axis would need to mirror it. Where should a fail-closed accessor (narrativeTempoOf) live, and what should it return when the axis is absent (the DORMANT sentinel)?
+5. Where does the conditionally-materialized ledger belong on worldState (mirror worldState.spatialLedgers / spatialCanonVersion — the self-pruning "absence = zero" convention)? Recommend the shape.`,
+  },
+  {
+    key: 'S6-golden-projection-idiom',
+    prompt: `${COMMON}
+
+YOUR AREA — GOLDEN + PROJECTION TEST IDIOM (+ the byte-identity harness).
+
+Read IN FULL: tests/domain/religionDormancy.byteIdentity.test.js (the normalizeForDormancy oracle: absent === {} === [], plus collectKeys forbidden-key scan + anti-vacuity resultA.selected.length>0), tests/domain/beliefMapKernel.byteIdentity.test.js, and find the harness previewCampaignWorldPulse (grep src/domain/worldPulse/index.js and its exports). Also grep tests/ for property-style worldPulse tests that advance N ticks deterministically and read arc births (e.g. worldPulseOrderIndependence, settlementStrategy.test.js, any 30y soak). Find where the worldPulse PROJECTION / feed is built (grep src/domain/display + src/domain/worldPulse for the pulse feed / world_pulse_advanced projection).
+
+ANSWER PRECISELY:
+1. Quote the EXACT normalizeForDormancy oracle idiom and how a dormant-feature byte-identity test is structured (fixture → previewCampaignWorldPulse → normalizeForDormancy deep-equal + collectKeys forbidden-scan + anti-vacuity). This is the template for E0's DORMANT byte-identity test.
+2. What does previewCampaignWorldPulse return ({selected, rollExplanations, worldState, settlementUpdates, proposals, candidates, ...})? How does a test build a HOT fixture (settlements + worldState + regionalGraph + wizardNews) and run one/many pulses? Quote a minimal fixture.
+3. For governor-ON PROPERTY tests: what harness advances MANY ticks deterministically (same seed) so a test can (a) drive the famine/plague class over budget and assert deferral, (b) assert a receipted spread/escalate/residual candidate STILL fires while its class is over budget (chain immunity), (c) assert dial monotonicity (higher tempo ⇒ ≥ arc births, same seed), (d) run a 30y soak and read arc-density envelopes + quiet-before-storm. Name the exact advance harness (previewCampaignWorldPulse loop? simulateCampaignWorldInterval? a test helper in tests/simulation/simHelpers.js?) and quote its signature.
+4. Where is the worldPulse projection/feed built and is it byte-golden-tested anywhere? How would adding a governor deferral RECEIPT (DM-visible "pressure builds in the west") to the feed stay byte-identical when the governor is dormant (no deferrals ⇒ no receipts)?
+5. Recommend the exact NEW test files + their shapes for: dormant byte-identity, ON property tests (budget/deferral/chain-immunity/grace/dial-monotonicity), and the 30y cacophony soak.`,
+  },
+]
+
+const results = await parallel(AREAS.map(a => () =>
+  agent(a.prompt, { label: a.key, phase: 'Survey-rerun', schema: SCHEMA })
+))
+return results.filter(Boolean)

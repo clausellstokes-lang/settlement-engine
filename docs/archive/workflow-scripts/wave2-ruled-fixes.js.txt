@@ -1,0 +1,118 @@
+export const meta = {
+  name: 'wave2-ruled-fixes',
+  description: 'Opus implementers apply the owner-ruled and judgment-delegated fixes (wave 2)',
+  phases: [
+    { title: 'Golden-shifting', detail: 'mountain_pass then coup docket, serialized', model: 'opus' },
+    { title: 'Parallel', detail: 'BYOK/consent, faith seam, store durability, seed lifecycle', model: 'opus' },
+  ],
+}
+
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const COMMON = `You are an Opus IMPLEMENTER for SettlementForge (deterministic D&D settlement/world simulator, React/Zustand/Supabase, JS+JSDoc). The owner explicitly authorized this wave, including the specific golden re-records named below (owner-signed rulings, 2026-07-30). Worktree: ${ROOT} branch claude/composite-r4 — verify with \`git -C ${ROOT} rev-parse --abbrev-ref HEAD\` first; stop on mismatch. The tree contains COMMITTED wave-1 fixes; build on them.
+
+HARD RULES:
+- NO git mutations (no add/commit/stash/checkout/reset). Edits only; the manager commits.
+- NO full suites/builds. Focused vitest runs only, one at a time; timeout-shaped reds get one isolation re-run before belief. Read exit codes bare, never through a pipe.
+- Golden re-records are FORBIDDEN except where your brief explicitly authorizes one, and then ONLY via the sanctioned UPDATE_GOLDEN env-gated capture, followed by a diff-profile proof: enumerate exactly which fixture rows changed and verify the set matches your brief's predicted blast radius. If ANY row outside the predicted set changed, STOP, revert the capture, and report.
+- Determinism laws: no Date.now/new Date()/Math.random/toLocale in src/kernel|generators|domain except explicitly sanctioned seams; engine layers never import React/Zustand/store.
+- New store actions need an operationRegistry row + \`npm run gen:compendium-data\`. New tests in tests/generators|joins|simulation|property use tests/helpers/anchoredNegatives.js / seedFailures.js idioms. Rename/persistence-cascade tests JSON-round-trip their fixtures. Bare negatives anywhere under tests/ must be anchored (the walker now scans everything).
+- src/components/**/*.jsx ceiling 600 effective lines (several files sit AT ceiling — net-zero there); .js ceiling 800.
+- Never write literal em dashes inside string literals in src/data or src/domain (a tolerance-0 voice ratchet counts them; use commas/colons/semicolons).
+- Match surrounding style; comments state constraints, not narration. If something is larger than described or needs a NEW owner decision, stop that item and report precisely.
+
+DONE BAR per item: edit applied + focused tests green (quote pass lines) + a NEGATIVE CONTROL executed where a new pin was added (revert fix, watch pin red, restore, re-run green — quote both) + for golden re-records, the diff-profile proof quoted. Return dense structured data.`
+
+const SCHEMA = {
+  type: 'object',
+  required: ['agent', 'fixes'],
+  properties: {
+    agent: { type: 'string' },
+    fixes: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['finding', 'status', 'files', 'tests', 'notes'],
+        properties: {
+          finding: { type: 'string' },
+          status: { type: 'string', enum: ['fixed', 'skipped', 'deferred', 'blocked'] },
+          files: { type: 'array', items: { type: 'string' } },
+          tests: { type: 'string' },
+          notes: { type: 'string' },
+        },
+      },
+    },
+    behavior_shifts: { type: 'array', items: { type: 'string' } },
+    golden_diff_profile: { type: 'string', description: 'for golden re-records: exactly which rows changed and why that set is the predicted one' },
+    discovered: { type: 'array', items: { type: 'string' } },
+  },
+}
+
+phase('Golden-shifting')
+
+const mountainPass = await agent(`${COMMON}
+
+ASSIGNMENT (mountain-pass semantics — OWNER RULING 2026-07-30: "Seasonal chokepoint profile: its own semantics between standard and isolated — modest connectivity/transport, low-but-nonzero food import — matching the in-world prose ('in season a steady stream; in winter near-total isolation')"; the generator golden re-record for mountain_pass configs is OWNER-SIGNED).
+
+Current defect (verified): src/domain/tradeRouteSemantics.js ROUTE_TIER has no mountain_pass entry so it scores tier 'unknown' with all-zero deltas, and it falls through BOTH arms of every connected-vs-disconnected branch: src/domain/foodBalance.js:192-202 and src/generators/foodGenerator.js:282,304-310 route-name import ladders give it the terminal 0 — mechanically WORSE than 'isolated' (which earns FOOD_IMPORT_RATES.minorRoutes). ConfigurationPanel.jsx:310 offers it; resolveConfig.js:139 passes the literal through; GENERATED_ROUTE_VALUES (tradeRouteSemantics.js:132-134) omits it so drift detection is blind.
+
+IMPLEMENT the ruling:
+1. Decide the cleanest model consistent with the module's existing shape — either a mountain_pass ROUTE_TIER entry mapping to an existing tier plus route-name-specific rungs in the food ladders, or a fourth canonical tier if and only if the type union's consumers make that tractable. The ruling's contract: connected (hasTradeRouteConnection true, isTradeRouteDisconnected false), connectivity/transport deltas BELOW road/river, food-import rung BELOW road (0.35) and ABOVE the isolated minor-route rate — annualize the seasonal story (heavy in season, closed in winter). Document the seasonal rationale at the definition site.
+2. Give both food ladders (foodBalance.js, foodGenerator.js) an explicit mountain_pass rung — kill the fall-through.
+3. Fix drift detection: export the user-selectable route vocabulary (generated set ∪ mountain_pass) and point the module's drift list + its tests at it so a future ConfigurationPanel option can never silently score neutral again — add a pin asserting every ConfigurationPanel tradeRouteAccess option value resolves to a non-unknown tier.
+4. Sweep other consumers of tradeRouteTier/route names for the same fall-through (rg tradeRouteTier, isTradeRouteDisconnected, tradeRouteAccess across src/domain src/generators) and give mountain_pass a deliberate value wherever a ladder names routes; report each site touched.
+5. GOLDEN RE-RECORD (owner-signed): re-capture tests/property/generatorGoldenMaster.test.js fixtures via its UPDATE_GOLDEN mechanism. PREDICTED BLAST RADIUS: only rows whose config carries tradeRouteAccess 'mountain_pass' may change; every other row must be byte-identical. Quote the diff profile (changed-row count + a sample of their config fields). If any non-mountain_pass row shifts, STOP and revert the capture.
+6. Run the focused suites: the tradeRouteSemantics tests, food tests, effectReachability.coverage, narrativeArrival, and the golden master.`, { label: 'w2:mountain-pass', phase: 'Golden-shifting', schema: SCHEMA, model: 'opus' })
+
+const coup = await agent(`${COMMON}
+
+ASSIGNMENT (coup docket guaranteed admission — OWNER RULING 2026-07-30: "Guarantee admission: one-shot verdicts bypass the docket cap — a coup that resolved always lands"; the worldpulse golden re-record is OWNER-SIGNED).
+
+Current defect (verified): admitGuaranteedProposalOutcomes (src/domain/worldPulse — locate via rg admitGuaranteedProposalOutcomes) filters unadmitted proposal-mode outcomes out of the deterministic set with no receipt when the proposal docket is saturated. Re-deriving outcomes (population/tier streaks) self-heal next tick; coupVerdictOutcomes derive from stressors that RESOLVED this tick and never re-fire — a coup vanishes with no rollExplanation, no pulseRecord field, no news, no deferral ledger.
+
+IMPLEMENT the ruling:
+1. One-shot, non-re-deriving proposal-routed verdicts (the coup family; check whether other one-shot families share the mouth — enumerate and include any that provably never re-fire) are admitted REGARDLESS of docket saturation — they bypass the cap, they do not evict admitted proposals. Keep the cap for re-deriving families.
+2. Preserve determinism and order-independence: the existing proposalAdmission pins (order-independence, parent-stream RNG neutrality, lane caps) must stay green with the bypass in place; extend them with a saturation fixture proving a coup verdict lands when the docket is full AND a re-deriving candidate still defers.
+3. GOLDEN RE-RECORD (owner-signed): re-capture the worldpulse golden master via its UPDATE_GOLDEN mechanism. PREDICTED BLAST RADIUS: only pulses where a coup verdict previously collided with a saturated docket may change; quote the diff profile (which seeds/ticks changed). If the profile is broader than docket-saturated ticks, STOP and revert the capture. NOTE: wave-2 mountain_pass semantics are ALREADY in the tree when you capture — that is intended; if the worldpulse fixtures include mountain_pass configs their rows may also legitimately shift, and your profile must separate the two causes.
+4. Run the focused suites: proposalAdmission, worldPulseRecordModes, the coup/stressor tests, and the worldpulse golden.`, { label: 'w2:coup-docket', phase: 'Golden-shifting', schema: SCHEMA, model: 'opus' })
+
+phase('Parallel')
+
+const rest = await parallel([
+  () => agent(`${COMMON}
+
+ASSIGNMENT (BYOK fail-closed + consent sync + og-image TTL). OWNER RULING 2026-07-30 on BYOK: "Fail closed: on vault error the request fails with a clear retryable error; the user's chosen key boundary is never silently crossed." Blanket authorization covers the other two.
+
+1. BYOK FAIL-CLOSED: resolveProviderKey (supabase/functions/_shared/byok.ts or sibling — locate) currently falls back to the platform ANTHROPIC_API_KEY on ANY surveyor_byok_get error. Change: when the user HAS a stored BYOK key (or the lookup cannot determine that), a vault error returns a typed, retryable failure (e.g. 503 byok_vault_unavailable with a clear message) instead of the house key; a user with NO stored key keeps the normal house-key path. Mind the distinction: fail-closed must not lock out non-BYOK users. It has TEN importing edge functions — sweep every caller (construct-settlement, construct-realm, interview, parley, ai-analyst, interpret-session, style-overhaul, surveyor-*, generate-narrative as applicable) and make each surface the typed error without spending credits (reserve must release on this path — verify against the reserve→spend→refund state machine). Update/extend the byok tests incl. a pin: vault error + stored key ⇒ no model call, no spend, typed error; vault error + no stored key ⇒ house path unaffected.
+2. CONSENT SYNC: client consent lives only in localStorage (sf_consent_v1). A live RLS self-UPDATE policy on public.profiles EXISTS ('Users update own profile (safe preferences)' — verified in wave 1). Wire PrivacySettings' toggle to also update profiles.telemetry_consent through the existing supabase client path (fire-and-forget with error toast on failure; localStorage stays the source of truth offline). On sign-in, reconcile: server false beats local true (opt-out wins). Pin both directions with a store/component test.
+3. OG-IMAGE TTL: supabase/functions/og-image/index.ts s-maxage 604800 → 86400 with stale-while-revalidate; unpublished dossiers' cards now age out in a day. Update its test.
+Run each surface's focused tests.`, { label: 'w2:byok-consent', phase: 'Parallel', schema: SCHEMA, model: 'opus' }),
+
+  () => agent(`${COMMON}
+
+ASSIGNMENT (realm export faith seam — OWNER RULING 2026-07-30: "Add the export-side seam: thread faithUnlocked into the realm exporters with fail-closed default, matching the settlement lane's doctrine").
+
+The settlement lane's doctrine (src/pdf/variants.js:196-201, src/foundry/generateFoundryModule.js:34-37, resolveExportSeam.js:51-55): the caller passes faithUnlocked, DEFAULT false, so a free/lapsed/anonymous export never prints a deity name. The realm-level jsPDF artifacts do not honor it: src/utils/generateCampaignPDF.js and src/utils/generateWorldBook.js print deity names and live-war divine state gated only by the calling UI (CampaignFolder.jsx:138 premium path).
+
+IMPLEMENT: thread a faithUnlocked option (default false) through both realm exporters via the same resolveExportSeam idiom; when false, the faith/deity content is omitted the same way the settlement lane omits its faith chapter (whole-section omission, not name blanking — match the sibling's shape). Update the premium caller(s) to pass the real entitlement. NOTE wave-1 context: generateCampaignPDF gained an opts third argument and generateWorldBook has opts.now — extend those option objects, do not add new positional params. Pin: a default-options export of a realm containing deities/wars contains ZERO deity names (anchor the negative per the walker's rules); the premium path still prints them. Run the pdf/utils focused tests.`, { label: 'w2:faith-seam', phase: 'Parallel', schema: SCHEMA, model: 'opus' }),
+
+  () => agent(`${COMMON}
+
+ASSIGNMENT (store durability pair — delegated judgment, record vetoably in notes):
+
+1. AI_DATA OUTBOX CONVERGENCE: applyEvent already persists aiData through the durable outbox (settlementSlice.js:1867-1881 → persistSaveUpdate), but aiSlice's own ai_data writes (pin/unpin, narrative saves — aiSlice.js around 1087-1098 and siblings) call saves.update directly, bypassing outbox superseding/retry. Converge: route every aiSlice ai_data write through the same column-keyed outbox lane (campaignSliceShared.js:320-455) so a stale in-flight ai_data write can never land over a fresher one and offline writes park-and-retry like the rest. Keep write payload shapes identical. Sweep ALL direct saves.update callers carrying aiData (rg "aiData" src/store src/lib) and converge or document each. Pin: two racing ai_data writes — the older column-set is superseded, exactly one durable write survives per the outbox's existing superseding test idiom.
+2. DRAFT VERSION-HISTORY TRANSFER: settlementSlice.js:500-503 promises draft timelines transfer on save; nothing transfers (wave-1 verified: SaveToLibraryButton payload carries no versionHistory, new saves mint versionHistory: []). IMPLEMENT the promise at the save chokepoints (the three component save paths wave-1 named — SaveToLibraryButton.jsx and siblings; put the transfer INSIDE the store's save action, not in each component, so every path inherits it): on first save of a draft settlement, move draftVersionHistory into the new save row's versionHistory and clear the draft timeline. JSON-round-trip pin: draft snapshot → save to library → reload → the snapshot is in the save's timeline and draftVersionHistory is empty.
+Run tests/store focused suites you touch plus versionsTab component tests.`, { label: 'w2:store-durability', phase: 'Parallel', schema: SCHEMA, model: 'opus' }),
+
+  () => agent(`${COMMON}
+
+ASSIGNMENT (seed lifecycle pair — blanket authorization; previously recorded deferrals now ordered fixed):
+
+1. HISTORY REROLL SEED RECORDING [generators-pipeline-5]: regenHistoryPipeline (src/generators/generateSettlementPipeline.js:416 region) mints options.seed || generateSeed() and returns restoreAuthoredHistory(...) with no seed record — a persisted reroll is unreproducible. MIRROR THE NPC TWIN EXACTLY (it returns _regenSeed at the settlement ROOT, :495, and the store folds it): return _regenSeed from the history branch the same way, and extend the store's history-regen fold (settlementSlice.js:1112-1145 region) to carry it to the root like the NPC path does. Check the DM-share strip: migration 121 strips root _regenSeed from the gallery projection — confirm the strip is key-based (covers this write) and extend the relevant publicSafe/gallery test to assert a rerolled-history settlement leaks no _regenSeed. Pin reproducibility: reroll → capture _regenSeed → regenHistoryPipeline(settlement, cfg, { seed: captured }) is byte-identical to the persisted history (JSON.stringify equality). Update the deliberate-deferral comment at :529-534 to record the closure (dated, ruling: blanket exhaustive-fix authorization 2026-07-30).
+2. GENERATESEED ENTROPY: src/kernel/prng.js:78-80 mints seeds from Date.now + Math.random (the sanctioned seam). Harden: use globalThis.crypto?.getRandomValues when available for the random suffix (keep the Date.now prefix for sortability if that property is relied on — check consumers), falling back to the current form where crypto is absent (some worker/test envs). ZERO determinism impact: this only affects NEW seed minting. Keep the eslint sanction comment accurate. Pin shape + uniqueness burst (10k mints, no collision) without asserting distribution.
+Run: the kernel prng tests, the regen/locks suites you touch, and the gallery-strip test.`, { label: 'w2:seed-lifecycle', phase: 'Parallel', schema: SCHEMA, model: 'opus' }),
+])
+
+const all = [mountainPass, coup, ...rest].filter(Boolean)
+log(`${all.length}/6 wave-2 implementers returned`)
+return { results: all }

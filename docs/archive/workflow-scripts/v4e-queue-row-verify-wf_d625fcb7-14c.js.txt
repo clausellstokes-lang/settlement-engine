@@ -1,0 +1,169 @@
+export const meta = {
+  name: 'v4e-queue-row-verify',
+  description: 'Adversarially verify the appended V4D ledger section before committing it',
+  phases: [
+    { title: 'Verify' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const PRE = `You are working in a SHARED, LIVE git worktree at ${WT}.
+CRITICAL: your shell cwd RESETS between Bash calls — prefix EVERY command with \`cd ${WT} && \`.
+CRITICAL: you are READ-ONLY. Do not edit/write any file. Do not run any state-mutating git
+command (no add/commit/stash/checkout/restore/reset/clean/tag). Parallel sessions are writing
+this tree.
+Report ONLY what you executed and observed. Quote real output. Label inference as INFERRED.
+
+THE SUBJECT: docs/FABLE_VALIDATION_QUEUE.md has just had a new section APPENDED at its tail —
+lines 1347-1546 (the file is now 1546 lines / 369064 bytes). That new section is UNCOMMITTED and
+is what you are auditing. Read it with: sed -n '1347,1546p' docs/FABLE_VALIDATION_QUEUE.md
+Everything before line 1347 is pre-existing and NOT your subject except as a reference.`
+
+const AUDIT = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['findings', 'verdict', 'summary'],
+  properties: {
+    findings: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['severity', 'quote', 'problem', 'evidence', 'fix'],
+        properties: {
+          severity: { type: 'string', enum: ['BLOCKER', 'MAJOR', 'MINOR', 'NIT'] },
+          quote: { type: 'string', description: 'The exact text from the new section that is wrong' },
+          problem: { type: 'string' },
+          evidence: { type: 'string', description: 'Command run + real output that establishes the problem' },
+          fix: { type: 'string', description: 'The precise corrected wording' },
+        },
+      },
+    },
+    verdict: { type: 'string', enum: ['SHIP', 'SHIP_WITH_FIXES', 'DO_NOT_SHIP'] },
+    summary: { type: 'string' },
+  },
+}
+
+phase('Verify')
+
+const [factual, convention, honesty, completeness] = await parallel([
+  () => agent(`${PRE}
+
+TASK: refute every FACTUAL and NUMERIC claim in the new section. Default to skepticism — your job
+is to find what is wrong, not to confirm. Check at minimum:
+
+- Every commit hash and what it contains: 76ea345c, ca46705b, cb1ea74f, a70c9284, 98edbc9f,
+  358a8956, 273ffbba, a2dbdd36, 17518dd0, 1375aab7. Do the described contents match?
+- Every LINE-NUMBER reference into this same doc: "line 973" (CR-WR9-B / DOCSTRING TRUTH IN
+  PLACE), "line 173", "line 177", "line 18" (the protocol clause about deviating from frozen
+  DESIGN_* docs). Do those lines say what the section claims? Quote them.
+- The claim that the doc contains "MUTANTS — FIVE EXECUTED, cp-backed, restored \`cmp\`-exact"
+  in the WR-9d row. Verify verbatim.
+- Every number in the measurement table (depth/factor/crest/valley/ladder). Recompute
+  independently from src/components/theme.js's WRAP_BARREL + SHAFT_STOPS + WRAP_GLOSS/WRAP_EDGE
+  using the WCAG formula. Do NOT use the repo's helpers.
+- SHAFT_STOPS.lit = 0.09 and WRAP_BARREL's first two stops both being #FFFFFF.
+- The R5 loop claims: 20 iterations, last iterate 0.9500000000000003, next 1.0000000000000002,
+  never evaluates 0.98, ladderAt(0.98)=1.3672 which fails > 1.5, and 1.5 is crossed at ~0.9605.
+  Read the ACTUAL loop in tests/components/navFletching.test.jsx and simulate it faithfully.
+- The "multiply reaches 0.427" vs 110/255 = 0.4314 claim about R5's residual note.
+- The claim that R5's residual note frames the sub-floor region as "the bar's last 2%".
+- The lum/ratio figures for the authored hexes (0.07589107 / 0.00940022 / 2.119371).
+- "comment-stripped extracts of cb1ea74f and 76ea345c are 599 lines each and diff exits 0"
+- "expect( counts 173 in parent, both commits and HEAD alike" — note HEAD has moved to include
+  ca46705b, so check ca46705b too, not just the older commits.
+- "the file grew 847 -> 856 lines (+9)" for 76ea345c.
+- Byte figures: 50416 then 50722 bytes for tests/design/contrast.test.js.
+- scripts/.size-baseline.json: 15 entries, 0 under tests/.
+- DESIGN_RIBBON_V4_SPEC.md's §(a)1 wording about "the wordmark's measured ink extents", and
+  whether a2dbdd36 really re-based the VERTICAL reach on the BAR. This one is asserted cautiously
+  in the section — check whether even the cautious version is supportable.
+- lint-staged's installed version, and whether \`git stash create\` vs "lint-staged automatic
+  backup" subjects really distinguish the two code paths in THAT version. Read the installed
+  package source under node_modules/lint-staged if needed.
+
+Report every discrepancy, however small, with the corrected wording.`, { label: 'factual', phase: 'Verify', schema: AUDIT }),
+
+  () => agent(`${PRE}
+
+TASK: audit the new section for CONVENTION CONFORMANCE against this doc's own established grammar.
+
+Read several existing sections to establish the house form — WR-9d (starts ~1245), WR-9c (~1065),
+WR-9r (~934), LANE WZ-5r (~608), LANE RR (~535) — and the protocol header (lines 1-45).
+
+Then judge the new section (1347-1546) on:
+- The wrapped multi-line \`## \` heading form: does it match? Is the "(lane X, DATE) @ \`hash\`"
+  shape right? Do continuation lines correctly repeat the \`## \` prefix?
+- Is the separator/blank-line structure before the heading correct vs how WR-9d was appended
+  (check: git show 1453676b -- docs/FABLE_VALIDATION_QUEUE.md)?
+- Ruling ID form: is \`J-V4D-1\` right for an implementer judgment in lane V4D, given J-WR9C-*,
+  J-WR9D-2, J-WZ5R-*, J-RR-*? Is it introduced the house way
+  (\`- **J-XXX-n — ALL-CAPS CLAIM.** body\`)? Does the judgment name its REJECTED alternative, as
+  the house form requires?
+- \`###\` subsection headings: ALL-CAPS full sentences, correct severity glyphs (⚠️ / ⚠️⚠️)?
+- Receipts: are gates quoted the house way? Is there a "what was NOT run, and why" element as
+  other sections carry?
+- Is the owner-held / deferred tail in the house form?
+- Does the section respect protocol step 2 (lines 30-32) — never rewrite a prior row, ride
+  beside it? The section RETRACTS a claim of its own author and cites lines 173/177. Is that
+  handled correctly, i.e. does it avoid editing anything above line 1347? Verify with
+  git diff -- docs/FABLE_VALIDATION_QUEUE.md that ONLY an append occurred.
+- Markdown validity: does the section render? Any broken table/fence/list? Any line so long it
+  breaks the file's wrapping norm (check typical line width in neighbouring sections)?
+- ASCII \`->\` vs \`→\` arrows: which do the newest sections use, and is the new section consistent?
+
+Report every deviation with the exact fix.`, { label: 'convention', phase: 'Verify', schema: AUDIT }),
+
+  () => agent(`${PRE}
+
+TASK: audit the new section for HONESTY and EPISTEMIC HYGIENE. You are the reader six months from
+now who will be misled by any overstatement. Be harsh.
+
+For every claim in lines 1347-1546, ask:
+- Is it stated as OBSERVED when it was only INFERRED? The section is specifically about an author
+  who twice stated an inference as fact — so it must not repeat that sin. Flag any sentence
+  asserting a cause, mechanism, or intent that is not backed by executed evidence.
+- Does the section's own retraction go far enough? It retracts "the hook reverted the files" but
+  keeps "WHAT WAS OBSERVED... is not in doubt". Is the observation actually as solid as claimed,
+  given it rests on the author's own earlier commands? Could that observation itself be an
+  artifact (e.g. of git status caching, index staleness, or reading a file mid-write)?
+- Is the alternative explanation (a parallel lane's mutant/negative-control cycle) itself stated
+  too confidently? It is INFERRED. Check the wording.
+- Does the section claim credit for verification it did not execute? Cross-check each "GATES"
+  bullet against what is verifiable.
+- Are there weasel constructions, or claims that a future reader would quote as settled when they
+  are not?
+- Does the section leave any thread dangling that it should have named as deferred?
+- Is anything in it self-contradictory?
+- Does it correctly avoid asserting a fix to navFletching.test.jsx that was never made?
+
+Report each with the precise corrected wording. Prefer weakening a claim to deleting it, unless
+the claim is simply false.`, { label: 'honesty', phase: 'Verify', schema: AUDIT }),
+
+  () => agent(`${PRE}
+
+TASK: completeness critic. What is MISSING from the new section that the doc's own protocol, or the
+work it describes, requires?
+
+- Re-read the protocol's "What gets a row" list (lines 16-23) and the RE-VALIDATION PROTOCOL
+  (28-37). Does the section give a Fable-capable re-validator everything needed to re-derive the
+  judgment from cited evidence? What could they NOT reconstruct from this row alone?
+- Does the row state what a re-examiner should CHECK, the way other rows' "Fable re-examination"
+  content does?
+- Are there claims in commits 76ea345c / ca46705b whose corrections belong in this row but are
+  absent? Read both commit bodies in full (git log -1 --format=%B <hash>) and diff their claims
+  against what the row records.
+- The row describes a defect in tests/components/navFletching.test.jsx (R5's loop). Is the
+  description sufficient for someone else to fix it without re-deriving it? What is missing —
+  exact line numbers, the failing value, the corrected loop form?
+- Does the row record the actual CURRENT tree state / dirty-file situation well enough that a
+  successor knows why the R5 fix was deferred?
+- Is there any OTHER over-claim of the same 2.12 class still live in the repo that this lane
+  should have swept for and named? Search: grep -rn "2\\.12" src/ tests/ | head -30 and check
+  each hit's surrounding prose. Also check compositedBarAA.test.js, since 98edbc9f touched it.
+- Anything else a chair reading this row would immediately ask for and not find?
+
+Report each gap with the precise text that should be added.`, { label: 'completeness', phase: 'Verify', schema: AUDIT }),
+])
+
+return { factual, convention, honesty, completeness }

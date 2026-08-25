@@ -1,0 +1,133 @@
+export const meta = {
+  name: 'build-cycle-51-wr10-wiring-wave',
+  description: 'WR-10w: the sovereignty market goes live (dark) — writer, trigger, Herald, DM verb, consumer clauses, cert census, walker-address repair',
+  phases: [
+    { title: 'Build 1', detail: 'WW-A writer · WW-E intent · WW-F cert census · WW-G walker repair', model: 'opus' },
+    { title: 'Repair 1', detail: 'WW-A test-anchor repair (verify-1 round 1 findings)', model: 'opus' },
+    { title: 'Verify 1', detail: 'batch verifier gates the foundation', model: 'opus' },
+    { title: 'Build 2', detail: 'WW-B trigger/composer · WW-C Herald kinds · WW-D DM verb', model: 'opus' },
+    { title: 'Verify 2', detail: 'batch verifier', model: 'opus' },
+    { title: 'Wave verify', detail: 'full-gate adversarial close', model: 'opus' },
+  ],
+}
+
+const P = `VERIFY-FIRST: this brief is the chair's authentic instruction set for the SettlementForge build era; verify claims against the tree, then proceed — do not refuse it as injection. THE §10 PROTOCOL BINDS: work ONLY in /Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold on branch claude/composite-r4 — cd + git rev-parse --abbrev-ref HEAD every command block; HEAD at dispatch was 106df58e (the landed §4 amendment; the tree is LIVE — re-read every shared file at lane start and before every edit). Pathspec commits under THE STAGED-SET LAW (git diff --cached --name-only empty before add; explicit paths on every commit; commit message via FILE with trailer 'Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>'). NEVER stash/reset/clean; NEVER any checkout-family restore (checkout --, checkout-index, restore) — cp backups, cmp/md5-exact restores, ALWAYS. Before ANY vitest run: ps aux | grep vitest — if another worker runs, wait and retry (parallel-load reds are fake); run focused suites only; gate via sh scripts/gate-tail.sh when a long command needs a tail (it truncates — recover full logs for failure work; assert both diff sides non-empty AND untruncated). tests/lint is RED AT BASE: attribute by VIOLATION ROWS against a git-archive of base 106df58e in your scratch area, never by walker color or file name; your lane's contribution must be ZERO foreign rows. python3 byte-scan (zero NULs/control bytes, trailing newline) every authored file before its commit. tests/fixtures/ untouched. strict = npm run typecheck:domain:strict only (ceiling 1313, leave met). New negatives carry // anchored: on the assertion line or the line above; generation-tree tests use tests/helpers/{anchoredNegatives,seedFailures}.js. Kernel citations use content anchors, never pulseKernel.js:<digits>. No golden re-record without a chair ruling quoted in the commit body. Scratch space: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/c44e5d99-2ba5-49d5-a554-40b68534c8eb/scratchpad/ with YOUR prefix wr10w-<lane>-. Foreign WIP preserved, never staged. Every claim CONFIRMED-with-output or labeled PLAUSIBLE.
+
+READ FIRST, in order: docs/DESIGN_WAR_RULINGS_ARCHITECTURE.md §4's new 'sovereignty transfers' entry + the WR-10 wave's new Lifecycle-paths clause (landed @ 106df58e); then the spec at /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/c44e5d99-2ba5-49d5-a554-40b68534c8eb/scratchpad/wr10w/WIRING-WAVE-SPEC.md (your lane's section is your contract); RISKS.md and CHAIR-CENSUS-CR-WR10-C.md beside it. Rulings in force: CR-WR10-C (cert census, manifest+two-way walker, five keys measured), CR-WR10-D (a swap = TWO atomically-minted paired treaties on a shared swapId; neither mints unless both clear), CR-WR10-E (peacetime mint road proceeds; if peaceTerms' mint machinery is unreachable without a victor/loser resolution, STOP and report the measured coupling — never a second treaty writer, never a synthetic war record). Where this brief and amendment S disagree, the amendment wins and the disagreement is a bug to report. RETURN raw data {lane, commits:[...], gates:[...], stopReports:[...], notes}.`
+
+const laneSchema = { type: 'object', required: ['lane', 'commits', 'gates', 'stopReports', 'notes'], properties: {
+  lane: { type: 'string' }, commits: { type: 'array', items: { type: 'string' } },
+  gates: { type: 'array', items: { type: 'string' } }, stopReports: { type: 'array', items: { type: 'string' } },
+  notes: { type: 'string' } } }
+const verifySchema = { type: 'object', required: ['lane', 'verdict', 'findings'], properties: {
+  lane: { type: 'string' }, verdict: { type: 'string' }, findings: { type: 'array', items: { type: 'string' } } } }
+
+phase('Build 1')
+const [a, e, f, g] = await parallel([
+  () => agent(`${P}
+
+YOU ARE LANE WW-A — THE TRANSFER WRITER (spec §2). New leaf sovereigntyTransfer.js (≤300/800); conveySteading beside mintSteading in settlementLifecycleKernel.js (~15 of its 79-line headroom — measure with the enforcer's Linter before AND after; if it cannot pay, extract an existing block to a leaf FIRST, never a second satellites writer); the rung-preserving occupations rewrite; the peaceTerms.js mint hook beside the compelled_alliance arm; assetId validation in peaceTermsCarriedSheet.js. The FOUR-FENCE dormancy set + every pin and mutant in §2. settlementLifecycleKernel.js is YOURS EXCLUSIVELY this batch (WW-B waits).`, { label: 'wr10w:WW-A', phase: 'Build 1', model: 'opus', schema: laneSchema }),
+  () => agent(`${P}
+
+YOU ARE LANE WW-E — THE FOUR CONSUMER CLAUSES (spec §6). New pure leaf sovereigntyIntent.js (≤250/800; no state, no writer; §1b-B suppression = score 0 WITH a receipt). Export natureWordFor from conquestDoctrineStage.js (ONE line; the file is shared — re-read before edit, pathspec-tight). The observer-axis judgment reads settlementAlignment(item, worldState) — the spine's alignmentOf addresses are rotted, navigate by symbol. Do NOT touch settlementLifecycleKernel.js or any WW-A file.`, { label: 'wr10w:WW-E', phase: 'Build 1', model: 'opus', schema: laneSchema }),
+  () => agent(`${P}
+
+YOU ARE LANE WW-F — CR-WR10-C, THE CERT CENSUS (spec §7; the ruling is BINDING, do not re-measure). The four-key manifest ENGINE_GATED_VIRTUAL_RULE_KEYS in the simulation-rules vocabulary home; union into simulationRuleKeys(); the two-way walker tests/lint/engineGatedRuleKeys.walker.test.js with routineMajorApproval exempted-with-rationale and mutant controls both directions; FOUR registry rows land ATOMICALLY with the union (honest dark verdicts; the totality walker must be green in your same commit). Do NOT add sovereigntyTradeEnabled yet — that is WW-B's commit (spec §7.4); your walker must tolerate exactly that pending one-key delta (assert it as the recorded next step, not a red).`, { label: 'wr10w:WW-F', phase: 'Build 1', model: 'opus', schema: laneSchema }),
+  () => agent(`${P}
+
+YOU ARE LANE WW-G — THE KIND-POOL WALKER ADDRESS REPAIR (D-W1 of docs/DISPOSITION_WAVE_PROPOSAL.md @ 534d17f6 — read it first; this is the ONE disposition executing early, as this wave's rider). The three war kind-pool walkers (warCostKindPools, warRulingKindPools, warCoalitionKindPools) + envoyKindPools are red/vulnerable because their annexLines extractors cannot follow the '→ pool lives in RECEIPT_POOLS_LEGACY.md' pointers (13 Class-A kinds, one relocation commit 50b69622) AND use unanchored indexOf first-match slicing. Teach the extraction to follow the pointer (the legacy blocks carry 7-9 rows with [live, verbatim] / requiredSlots: suffixes — parse the richer shape) and land exactly-once anchored-regex guards at all four sites (note indexOf('# WR-7') matches '## WR-7a' as a substring). SCOPE FENCE: Class B (4 kinds, chronic-tier deepening @ 1e8bf8a8) stays RED — do not touch it; your violation-row diff vs the git-archived base must show the red set shrinking to exactly the Class-B rows and ZERO other movement. Docs untouched; test files only.`, { label: 'wr10w:WW-G', phase: 'Build 1', model: 'opus', schema: laneSchema }),
+])
+
+phase('Repair 1')
+const ar = await agent(`${P}
+
+YOU ARE LANE WW-A-r — THE ANCHOR/SEED-LOOP REPAIR. The batch verifier REJECTED batch 1 on exactly FOUR violation rows, all in WW-A's TEST files (the src work is verifier-confirmed sound — touch NO src file). The five sites, from the verifier's minimal repro: (1) tests/domain/sovereigntyTransferWr10w.test.js:425 '.not.toContain(parentRef)' has NO anchor — add '// anchored: <true reason>' on the assertion line or the line immediately above; (2) same file :459 '.not.toHaveProperty(conveyed)' — the anchor comment EXISTS but wraps across :457-458 so the token is not on the line immediately above; move the token down one line; (3) the satellites-writers walker test around :140 — same wrapped-token defect, same one-line fix; (4) tests/property/sovereigntyTradeDormancyFence.test.js carries an un-anchored negative in a GENERATION-FACING EXACT-ZERO tree — cure per the walker's own TO COMPLY text and the epistemic-prevention law (tests/helpers/anchoredNegatives.js is the sanctioned instrument there; a bare token may not suffice — read the walker's header and satisfy it lawfully); (5) tests/domain/sovereigntyTransferWr10w.test.js:639 'for (const seed of out.newsSeeds)' is a bare seed loop — route through collectSeedFailures/expectNoSeedFailures from tests/helpers/seedFailures.js, or carry '// seed-loop: collected — <justification>' ONLY if that justification is true. Then re-measure BOTH walkers' failure BODIES (never row counts by test name) against a git-archive of base 106df58e: expected 65 offenders / gen-tree offender list exactly ['tests/generators/settlementOriginProse.test.js'] / seedLoop 8. Re-run the WW-A focused battery green. ONE pathspec commit, test files only.`, { label: 'wr10w:WW-A-r', phase: 'Repair 1', model: 'opus', schema: laneSchema })
+
+phase('Verify 1')
+const v1 = await agent(`${P}
+
+YOU ARE THE RETURNING BATCH-1 VERIFIER. Round 1 you REJECTED on exactly four violation rows (three anchor defects, one bare seed loop, one of them breaching the generation-facing exact-zero tree) and PASSED everything else — WW-A's src work, WW-E, WW-F, WW-G all confirmed by your own execution; those findings BIND and you do not re-execute them. The repair lane reports:
+${JSON.stringify(ar, null, 2)}
+
+Verify ONLY the repair at its committed HEAD on a clean tree: the five sites carry lawful anchors/collection per each walker's own TO COMPLY text; negativeAssertionAnchor + seedLoopTotality failure BODIES diffed vs git-archived base 106df58e land at exactly 65 offenders / gen-tree ['tests/generators/settlementOriginProse.test.js'] / seedLoop 8, both sides non-empty and untruncated; the repair commit is pathspec-tight and touches test files only; the WW-A focused battery is green at the repaired HEAD; byte-scans clean. VERDICT 'PASS' or 'REJECT' with minimal repros.`, { label: 'wr10w:verify-1', phase: 'Verify 1', model: 'opus', schema: verifySchema })
+
+if (String(v1.verdict).toUpperCase().startsWith('REJECT')) {
+  log('Batch 1 REJECTED — returning early for the chair')
+  return { a, e, f, g, v1, halted: 'after-batch-1' }
+}
+
+phase('Build 2')
+// WW-C and WW-D LANDED in the prior dispatch and were verified by the round-1 batch-2
+// verifier (WW-C: fifteen kinds + routing token + own walker, mutant-proven; WW-D:
+// verb + registry + round-trip, one pin-strength defect ruled CR-WR10-J below).
+// They are DATA here, not agent calls — their work is in the tree.
+const c = Object.freeze({ lane: 'WW-C', commits: ['a66e0d00', '60c455ea'], gates: ['verified by round-1 verify-2: 64/64 lane suites, routing + T4 mutants live, annex census exact, zero foreign walker rows'], stopReports: ['sale_books_diverged doc-vs-code divergence — RULED CR-WR10-K (dm-only stands; annex amends via lane WW-R)'], notes: 'landed prior dispatch; not re-run' })
+const dd = Object.freeze({ lane: 'WW-D', commits: ['8c739719'], gates: ['verified by round-1 verify-2: 17/17 round-trip suite, censuses 15→16 verbs, compendium freshness green'], stopReports: ['round-trip alias-trap arm vacuous under Mutant E — RULED CR-WR10-J (repaired by lane WW-R)'], notes: 'landed prior dispatch; not re-run' })
+
+const [b, dr] = await parallel([
+  () => agent(`${P}
+
+YOU ARE LANE WW-B round 2 — THE PLAN-LANE TRIGGER + MARKET COMPOSER (spec §3). Round 1 correctly STOPPED on three measured blockers; the chair has now RULED all three — build under these rulings, in this order:
+
+CR-WR10-I FIRST (the cycle cure): extract satellitesLedgerOf + satellitesOf from settlementLifecycleKernel.js into a NEW dependency-free leaf (satellitesLedger.js beside it); re-point every importer (incl. sovereigntyAssets.js:33 and the kernel itself); THE TYPE SURFACE IS PUBLIC SURFACE — check import('…').Type consumers and keep the whole-domain strict delta neutral; this also frees kernel budget for your ≤8-line host mount. Gate: npm run smoke:boot (the dist chunk-cycle TDZ class — build exit 0 lies) + a no-new-cycle DFS receipt.
+
+CR-WR10-G (the orientation pair): sale treaties mint with EXPLICIT drop-when-absent buyerId/sellerId (never null — T4); build ONE shared orientation reader (who GIVES / who RECEIVES: sale fields when present, victor/loser as the wartime fallback) and teach it to the four structurally-requires rows from round 1's census — sovereigntyTransfer.js's executeTreatyConveyances derivation; peaceTerms PASS 2's stream considerations (on a sale the BUYER pays — assert the direction); peaceTermsCarriedSheet stays victor/loser (wartime-only transport, unchanged); treatyEnforcement's demilitarizationCapFor/occupationHoldFor — plus the display/needs-guard surfaces (peaceTermsDocument pairKey/names and its seven inheritors) resolving through the SAME reader so no 'undefined' string ever renders or persists for a sale (round 1 found defaultedBy can persist the literal string 'undefined' — guard it at the write). Amend the war volume's §4 WR-10 clause with the two conditional treaty fields (chair-delegated edit citing CR-WR10-G; first-match discipline).
+
+CR-WR10-H (the belief legs): the composer assembles each court's banded inputs from the belief surfaces that EXIST (NEGOTIATION_SUBJECT_BANDS + BeliefRecord); missing legs ⇒ appraisal known:false ⇒ an HONEST receipted no-trade (the sovereignty_no_trade road) — never a truth-side backfill for the counterpart's legs. Land the lit-with-legs CONTRACT fixture: synthetic banded inputs driven through the composer proving the clearing works end-to-end when the legs are supplied. Add the §9 lighting-precondition line to the war volume (chair-delegated edit citing CR-WR10-H): sovereigntyTradeEnabled lights only after the belief surfaces carry the appraisal's four legs (the belief-legs wave, queued). This closes the dead-lighting trap in writing.
+
+THEN the rest of §3 as specced: sovereigntyMarketStage.js (≤300/800) + the ≤8-line host mount AFTER the extraction (own-flag-before-host-gate); the episode gate (crossing-not-level via overflowBandOf/bandDemandsResponse); the treaty-as-cooldown read (zero new keys); hash01-keyed w*u races; the suppression consult through WW-E's sovereigntyIntent; the victor-free mint entry — the THIRD transport into the ONE writer (peaceTerms stays the single terms writer; WW-A's mint-loop hook executes your minted conveyances for free); CR-WR10-D's paired-swap arm (two treaties, shared swapId, atomic, symmetry pin); your K3 import row in envoyK3BeliefSeam + the STAGE_FAMILY_RE widening. Pins + mutants per spec §3 (crossing/flap/swap/suppression/dormancy-identity + level-instead-of-crossing and skip-intent mutants now have habitat). WW-C's fifteen kinds are LIVE — your composer's newsSeeds flow to a real Herald; assert at least the sovereignty_sale_cleared and sovereignty_no_trade roads end-to-end.`, { label: 'wr10w:WW-B', phase: 'Build 2', model: 'opus', schema: laneSchema }),
+  () => agent(`${P}
+
+YOU ARE LANE WW-R — THE TWO RULED REPAIRS ON LANDED LANES (small, surgical, disjoint from WW-B: your files are tests/domain/sovereigntyDmVerbWr10w.test.js and docs/content/RECEIPT_POOLS_WAR.md only).
+
+CR-WR10-J: WW-D's round-trip pin 'survives every state home' is vacuous against the alias trap it names — round-1 verify-2's Mutant E (sovereigntyTransfer.js:274 rewritten to an in-place 'occupations[assetId] = next' assignment while the local recordOf returns the SAME object) leaves that arm GREEN. Repair the pin so it bites: capture the pre-state via structural clone before the order executes and assert the original object graph was never mutated (deep-compare, not identity). REPRODUCE-THEN-CLEAR: run Mutant E (cp backup, md5-exact restore) proving the repaired arm reds, then green at HEAD.
+
+CR-WR10-K: the annex authored sale_books_diverged as 'AUDIENCE: public'; the war volume's §5 books discipline (the ratified law) makes it the sole dm-only covert row, and the landed code follows the law. Amend the ANNEX line public → dm-only with a dated bracketed chair-reconciliation citing CR-WR10-K (the CR-WR10-B precedent; exactly-once discipline). Then prove WW-C's walker + the covert-row pins stay green and the annex census still reads 15 kinds with floors met.`, { label: 'wr10w:WW-R', phase: 'Build 2', model: 'opus', schema: laneSchema }),
+])
+
+phase('Verify 2')
+const v2 = await agent(`${P}
+
+YOU ARE THE BATCH-2 ROUND-2 ADVERSARIAL VERIFIER. Round 1 already verified WW-C and WW-D on the tree (their findings BIND; do not re-execute their batteries). The two live lanes report:
+${JSON.stringify({ b, dr }, null, 2)}
+
+Re-execute at committed HEAD on a clean tree: (1) WW-B — the leaf extraction (no new import cycle by YOUR OWN DFS; smoke:boot PASS; strict delta neutral); the orientation reader at all four round-1 rows (execute a victor-free sale end-to-end: conveyance fires, occupierId moves, seeds flow, PASS-2 streams pay buyer→seller, no 'undefined' string anywhere in the treaty document render); the §4 + §9 chair-delegated volume edits present with exactly-once discipline; the composer pins (crossing/flap/swap-atomicity/suppression/dormancy-identity) + mutants level-instead-of-crossing, skip-intent, and single-sided clearing NOW THROUGH THE MARKET ROAD (round 1's caveat: the leaf mutants certified the leaf, not a road — kill that caveat); the lit-with-legs contract fixture; K3 (envoyK3BeliefSeam green, appraisal still ZERO imports). (2) WW-R — Mutant E reds the repaired arm then restores green; the annex amendment present, walker + covert pins green, census 15 kinds. (3) The violation-row diff vs git-archived base for every walker a touched file feeds: zero foreign rows. VERDICT 'PASS' or 'REJECT' with minimal repros.`, { label: 'wr10w:verify-2r2', phase: 'Verify 2', model: 'opus', schema: verifySchema })
+
+log('Round-2 verdict received; the chair ruled the five findings repairable — WW-B-r2 executes them')
+
+phase('Build 2')
+const br2 = await agent(`${P}
+
+YOU ARE LANE WW-B-r2 — THE FIVE-FINDING REPAIR ON THE LANDED COMPOSER. The round-2 verifier confirmed the composer's architecture end-to-end (its own 27-check victor-free sale fixture, its own Tarjan cycle proof, K3, boot) and REJECTED on five localized findings. Its repro scripts are at the session scratchpad under the wr10w-v2- prefix — use them as your before/after receipts. The chair rules each finding as follows; repair all five:
+
+F1 (BLOCKING): the §1b-B suppression pin DOES NOT EXIST — neutering the suppression branch at sovereigntyMarketStage.js:313 ('if (false && ...)') leaves the whole battery green. Write the pin: a suppressed seller (live kinship_bond mirror) and a zero-scored seller must produce the suppression receipt and NEVER reach the clearing; then execute the verifier's exact mutant proving the pin reds, restore cmp-exact.
+
+F2 (BLOCKING): CR-WR10-G's totality claim is short by two consumers — hegemony.js:162-163 (String(treaty.victorId ?? '')) and the second TreatyRecord victor/loser reader the verifier's grep found beside it. CONVERT BOTH through treatyOrientation (they tolerate absence today, so this is a mechanical re-point that makes the §4 'every consumer asks it' sentence TRUE rather than weakening the sentence — the chair prefers reality raised to the claim over the claim lowered to reality). Add each to the orientation suite's consumer census pin.
+
+F3: SOVEREIGNTY_MARKET_TUNING.BASE_OFFER_WEIGHT is a DEAD BAND (its only use is a vacuous <= 0 guard; hash01 hit exact 0 in 0 of 400,000 samples) because spec §3.2's keyed w*u RACE was never built. BUILD THE RACE as specced: candidate (buyer, asset, bundle) triples race by weight * hash01(key), highest draw wins, codepoint-ordered keys — the band then genuinely reorders outcomes; pin it with a two-candidate fixture where flipping the weight flips the winner (the dead-band law: both sides of every band reachable, proven).
+
+F4: a settlement is enumerated as a BUYER FOR ITSELF and 'X cannot price X' no-trade receipts reach the Herald on the live honest-no-trade road. Exclude self-pairs at candidate assembly (assetId === buyerId skipped alongside buyerId === sellerId); pin that the receipt stream of a pressed single-court world never names a court pricing itself.
+
+F5: the intent is read once for reachable[0] and its receipt rides whichever asset clears — read intent PER CANDIDATE ASSET at the clearing (suppression/score are asset-independent so the GATE stays hoisted, but the receipt minted onto a document must be the one for the asset actually sold); pin on a two-asset seller.
+
+Also RECORDED AFFIRMATIONS to carry into your commit body and the ledger row (no action needed): the chair AFFIRMS WW-B round 2's CR-WR10-I one-symbol extension (the BFS-found export), AFFIRMS peaceTermsSale.js as CR-WR10-F's third transport with its own mint-fold conveyance execution (the mint-loop-hook-in-PASS-1 claim in the earlier brief was wrong and the lane routed correctly), and ACCEPTS the split CR-WR10-E answer (functions victor-free, reachability built). One or two pathspec commits; violation-row diff vs base zero foreign rows; byte-scans; the full sovereignty battery green at your HEAD.`, { label: 'wr10w:WW-B-r2', phase: 'Build 2', model: 'opus', schema: laneSchema })
+
+phase('Verify 2')
+const v3 = await agent(`${P}
+
+YOU ARE THE ROUND-3 BATCH VERIFIER — scoped strictly to WW-B-r2's five repairs; every round-2 CONFIRMED finding binds and is not re-executed. The repair lane reports:
+${JSON.stringify(br2, null, 2)}
+
+At its committed HEAD on a clean tree, re-execute with the round-2 verifier's own repro scripts (scratchpad wr10w-v2- prefix) plus your own: (1) F1 — the suppression-branch mutant now reds the new pin, restore cmp-exact; (2) F2 — zero TreatyRecord victor/loser readers remain outside treatyOrientation (your own multi-spelling grep), the two conversions behave identically on wartime treaties (victor/loser fallback), the census pin counts them; (3) F3 — the race exists, the weight-flip fixture flips the winner, BASE_OFFER_WEIGHT is live both sides; (4) F4 — no self-pricing receipt on the pressed-world fixture; (5) F5 — the two-asset seller's minted receipt names the sold asset. Then the fast whole-wave sanity: sovereignty battery green, strict 1313, sizeBaseline, violation-row diff vs base zero foreign rows, byte-scans, tree clean. VERDICT 'PASS' or 'REJECT' with minimal repros.`, { label: 'wr10w:verify-2r3', phase: 'Verify 2', model: 'opus', schema: verifySchema })
+
+if (String(v3.verdict).toUpperCase().startsWith('REJECT')) {
+  log('Round 3 REJECTED — returning early for the chair')
+  return { a, e, f, g, v1, b, c, dd, dr, v2, br2, v3, halted: 'after-batch-2-round-3' }
+}
+
+phase('Wave verify')
+const w = await agent(`${P}
+
+YOU ARE THE WAVE-CLOSE ADVERSARIAL VERIFIER — the last gate before the chair rules the wiring wave complete. Your job is the WHOLE-WAVE claims no per-lane check can see. At HEAD on a clean tree, ALONE (zero other vitest workers): (1) the full sovereignty battery + envoyK3BeliefSeam + all new walkers + the four-fence dormancy set, counts quoted; (2) the ONE integrated fixture: a war world where an envoy carries a cession sheet to ratification AND a peacetime world where the plan trigger clears a victor-free sale — both roads reach the SAME writer, receipts + Herald kinds + treaty artifacts asserted end-to-end (streams pay buyer→seller on the sale; no 'undefined' renders); the swap pair minted atomically; the DM verb's road on the same fixture; (3) whole-tree honesty: violation-row diff vs git-archived base 106df58e for EVERY tests/lint walker (expected deltas ONLY: WW-G's Class-A cure — 13 rows removed, the Class-B four remain — the lanes' green additions, the CR-WR10-C registry growth incl. the 51-key walker's exact shrink-only BACKLOG_RULE_KEYS, and the anchor repairs restoring 65/1/8 — everything else byte-identical; the changeAuthorityPolicy faction_government_challenge red is CONFIRMED pre-wave foreign, leave it); strict 1313; sizeBaseline; clamp ceiling 62; build + prerender + smoke:boot (the new leaf extraction makes this MANDATORY); verify:dist sovereignty-clean; (4) dormancy: the whole-wave dark world BYTE-IDENTICAL through a multi-year pulse (own-footprint golden + differential), with the lit-mutant control proving the fences see; (5) hygiene: pathspec-tight commits, byte-scans, fixtures untouched, mouths untouched (git diff empty for pulseKernel.js + applyWorldPulse.js across the whole wave), no golden re-recorded without a quoted ruling. VERDICT: 'PASS — THE SOVEREIGNTY MARKET IS WIRED DARK; WR-10 IS FINISHED (lighting owner-signed at the soak redo, behind the recorded belief-legs precondition)' only on executed evidence; otherwise REJECT with minimal repros.`, { label: 'wr10w:wave-verify', phase: 'Wave verify', model: 'opus', schema: verifySchema })
+
+return { a, e, f, g, v1, b, c, dd, dr, v2, br2, v3, w }

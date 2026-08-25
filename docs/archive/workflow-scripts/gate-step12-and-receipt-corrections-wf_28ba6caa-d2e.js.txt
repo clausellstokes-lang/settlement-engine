@@ -1,0 +1,93 @@
+export const meta = {
+  name: 'gate-step12-and-receipt-corrections',
+  description: 'Burn down step 12 (`test`) so `npm run check` completes end to end for the first time since 2026-08-02, and correct five false figures the verifiers found in landed source.',
+  phases: [
+    { title: 'Step12', detail: 'the inventory walkers blocking the last gate step' },
+    { title: 'Receipts', detail: 'five false figures in landed source, plus two pin weaknesses' },
+    { title: 'Verify', detail: 'run the whole gate; refute every corrected figure' },
+  ],
+}
+
+const TREE = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const LAWS = `VERIFY-FIRST PREAMBLE: chair brief, owner-delegated build program. LIVE CODE OUTRANKS EVERY TABLE. Build tree ${TREE} (branch claude/composite-r4). Hard-gate every state-mutating compound with the \`cd\` FIRST: \`cd ${TREE} && [ "$(git branch --show-current)" = "claude/composite-r4" ] || exit 1\`.
+
+⭐ \`sh scripts/gate-mutex.sh --wait && sh scripts/gate-tail.sh <cmd>\` — ONE \`&&\` chain.
+⛔ **NEVER READ AN EXIT CODE THROUGH A PIPE.**
+⚠ **THE FULL SUITE EXCEEDS A 2-MINUTE FOREGROUND BUDGET** — the chair just had a run killed at 2:00. Run long gates detached or with a generous explicit timeout, and never conclude "it hung" from a killed shell.
+⚠ **EVERY FIGURE IN AN INTEGRITY-COUNTED \`git archive\` OF A COMMITTED SHA.** One at a time; \`rm -f\` the node_modules symlink before deleting; disk ~10 GiB.
+⚠ Another lane may hold the gate slot; the mutex will make you wait. That is correct — do not bypass it.
+⚠ Check \`git status\` YOURSELF before assuming any file is foreign WIP: a previous brief's foreign-WIP list went STALE mid-round and a verifier had to correct it. Never stage a file you did not author, but do not refuse to touch a committed file because an older note called it live.
+
+REPORTING: CONFIRMED (executed evidence quoted) or PLAUSIBLE.`
+
+phase('Step12')
+const step12 = await agent(LAWS + `
+
+YOU ARE THE STEP-12 BURN-DOWN. **This is the last thing standing between \`npm run check\` and completing end to end for the first time since 2026-08-02.**
+
+**WHERE THE GATE STANDS, MEASURED STEPWISE** (each step's own exit code read directly, never through a pipe): **steps 1-11 ALL EXIT 0.** The first failing step is **12, \`npm run test\`**. It only became reachable at all because steps 9, 10 and 11 were repaired in the last two rounds — each fix revealed the next outage, and this is the last one.
+
+**WHAT FAILS** (measured at \`173e9d7b\`, and proven NOT to be that lane's by reproducing identically at its parent):
+- \`tests/domain\` — 6 files / 7 tests: \`changeAuthorityPolicy.contract\`, \`generosityReactions\`, \`guidanceRegistry.walker\`, \`impactKindWalkers\` (×2), \`metronomeCooldownLint\`, \`roadsParticipation\`
+- \`tests/lint\` — 17 tests
+**Nearly all are source-CENSUS / inventory walkers whose inventories other lanes grew.** ⚠ Re-enumerate yourself at HEAD — the set has moved as lanes landed, and this list is a starting point, not a denominator.
+
+**HOW TO TREAT EACH ONE — THIS IS THE JUDGMENT, NOT THE TYPING.** For every failure decide, with evidence, which of three it is:
+1. **A REAL DEFECT the walker correctly caught** → fix the code. This is the best outcome and you should actively look for it before reaching for (2) or (3).
+2. **A LEGITIMATE INVENTORY GROWTH** (a lane added real, correct work the census must now include) → re-record, ⚠ **with every figure RE-DERIVED at your own sha, never transcribed**, and the legitimate cause named in the commit. ⛔ Re-recording a golden without stating a legitimate cause is forbidden here.
+3. **A ROTTED PIN** — the pin, not the code, is wrong. **One is already identified: \`tests/domain/changeAuthorityPolicy.contract.test.js\`'s \`faction_government_challenge\` SOURCE ANCHOR is a hand-transcribed copy of \`factionCompetition.js\`'s \`probability:\` expression. WR-5 (\`e1654184\`) added a third term \`+ warPressure * 0.08\` and re-wrapped it across three lines, so \`src.includes(ANCHOR)\` is false.** ⭐ Cure it by POINTING, not by re-transcribing — a hand-restated derivable rots again on the next edit, which is exactly how this one broke. That is the recorded DERIVE-DON'T-RESTATE / hand-keyed-address-rot class.
+
+⛔ **DO NOT SILENCE, SKIP, OR \`--update\` YOUR WAY THROUGH THESE.** Specifically: \`tests/lint/domainAnyCastBaseline.test.js\` carries an explicit **⛔ DO NOT run \`--update\`** — it re-freezes the WHOLE tree and would bank \`commercialReasons.js\`'s 31 any-holes as permanent debt. Each row is cleared by TYPING the hole, one file at a time.
+⚠ If a failure genuinely needs a wave that owns that subsystem, **STOP and report it with its cause and the smallest fix**, rather than forcing it. A truthful "step 12 still red, here is exactly why and who owns it" beats a green obtained by loosening.
+
+**REPORT, EXPLICITLY: does \`npm run check\` now complete?** Run it and name the first failing step verbatim, or state that all 14 steps exit 0. Do not claim completion you did not execute.
+
+RETURN JSON.`, { label: 'gate:step12', phase: 'Step12', model: 'opus', effort: 'high', schema: { type: 'object', required: ['landed'], properties: { landed: { type: 'boolean' }, failuresEnumerated: { type: 'number' }, realDefectsFound: { type: 'array', items: { type: 'string' } }, legitimateRerecords: { type: 'array', items: { type: 'string' } }, rottedPinsCured: { type: 'array', items: { type: 'string' } }, checkCompletes: { type: 'boolean' }, firstFailingStep: { type: 'string' }, commits: { type: 'array', items: { type: 'string' } }, stopReports: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+phase('Receipts')
+const receipts = await agent(LAWS + `
+
+YOU ARE THE RECEIPT CORRECTION LANE. Five false figures are sitting in LANDED SOURCE, found by adversarial verifiers. ⚠ Commit messages are history and cannot be edited — **correct the SOURCE and record the correction where a reader will meet it**; never quietly leave a wrong number in a file that a future lane will quote.
+
+Step-12 lane landed: ` + JSON.stringify(step12 || {}).slice(0, 2500) + `
+
+**RC-1 ⛔ THE ONE THAT MATTERS MOST — A COMPOSITE MEASUREMENT BAKED INTO THE DECLARED GOLDEN-SHIFT RECORD.** The illustration \`"Feudal Stewardship" + installer "Merchant Guilds" => "Merchant Council"\` appears in three places: a commit message, the PIN-3 header comment in \`tests/domain/warSeatBooksFactionAddress.test.js\` (~line 486), and — **the one that matters — the DECLARED PER-ROW entry in the golden-shift record.** It is a **composite of two different rows presented as one.** A golden-shift record is a permanent, load-bearing document; a fabricated-looking example in it poisons every figure beside it. **Replace it with a REAL single row you measure, and note the correction.**
+
+**RC-2 — AN UNREPRODUCIBLE LOAD-BEARING FIGURE.** \`tests/lint/domainAnyCastBaseline.test.js:115\` states that typing envoyPulse's two holes \`unknown\` "improves envoyPulse itself (domain-strict 19 -> 16, full-config held at 2)". **A verifier could not reproduce it at any sha in the lane's own window.** Re-measure it yourself and either correct the figure or, if it cannot be reproduced at all, say so in the comment — **an unreproducible number in a declared-debt ledger is worse than no number**, because the next lane will plan against it.
+
+**RC-3 — A CENSUS OFF BY ONE.** The \`warCoalitionSettlement\` receipt says "All six call sites (peaceTerms plus five in tests)". A full-repo census finds **FIVE** invocation sites: \`peaceTerms.js:602\` and \`warCoalitionSettlement.test.js:216, 247, 276, 292\`. Six is reached only by counting an import. Correct it wherever it is written in source.
+
+**RC-4 — A FACTION-ROW COUNT OFF BY SEVEN.** "196 faction rows" is stated in a commit message and the lane report; **three independent environments measure 203.** Correct it in source and state the measured figure with how it was measured.
+
+**RC-5 ⚠ A RESTATED DERIVABLE INSIDE THE PIN THAT FLAGGED RESTATED DERIVABLES.** \`driveApprovedGovernmentChange\` (\`tests/domain/warSeatBooksFactionAddress.test.js:360\`) hand-spells the installer id as \`\${row.id}:\${stablePart(nameOf(challenger))}\`, with a comment asserting it is spelled exactly as \`factionCompetition\`'s \`factionId()\` spells it. **That is the same class the same lane reported as STOP-PR-1.** Cure it by CALLING the real producer, not by copying its spelling.
+
+**RC-6 ⚠ ANTI-VACUITY FLOORS DO NOT TRAVEL.** Seven pins in that file are pure loops with no floor of their own — non-vacuous only because \`ROWS.length >= 20\` and \`WRITTEN.length >= 20\` live in **sibling tests in the same file.** Delete or skip a sibling and seven pins silently assert nothing. **Give each loop-bearing pin its own denominator assertion** — the recorded rule is that a loop-body negative is vacuous over an empty collection and no annotation makes it true.
+
+⚠ RC-4 also notes a claim that "the writer routes through the shared helper, byte-for-byte" does not actually test routing — the helper is value-identical to \`ladderFactionKey\` over this corpus, so an inline reimplementation would pass. **Either make it test routing or rename the claim to what it proves.** A header that overstates its pin is the recorded doc-overstatement class.
+
+RETURN JSON.`, { label: 'gate:receipts', phase: 'Receipts', model: 'opus', effort: 'high', schema: { type: 'object', required: ['landed'], properties: { landed: { type: 'boolean' }, goldenShiftRecordCorrected: { type: 'string' }, unreproducibleFigureResolved: { type: 'string' }, censusCorrected: { type: 'string' }, factionRowCount: { type: 'number' }, restatedDerivableCured: { type: 'string' }, floorsGivenToEachPin: { type: 'number' }, routingClaimResolved: { type: 'string' }, commits: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+phase('Verify')
+const LENSES = [
+  { k: 'gate-completes', p: 'Run `npm run check` yourself, stepwise, in an integrity-counted archive at the final sha, reading each step\'s own exit code directly — never through a pipe, and allow it the time it needs rather than concluding a hang from a killed shell. Report every step\'s status by name. If it completes, say so plainly with the evidence; if not, name the first failing step verbatim. Then confirm nothing was obtained by loosening: diff every `scripts/.*baseline*.json` and every census/inventory figure against the round\'s parent, and REJECT any that grew without a stated legitimate cause. Confirm `domainAnyCastBaseline` was NOT `--update`d.' },
+  { k: 'figures-true', p: 'Re-measure EVERY corrected figure independently, in your own environment, and refute any that does not reproduce: the golden-shift record\'s replacement row, the envoyPulse domain-strict figure, the call-site census, the faction-row count. Then check the pin repairs: confirm each loop-bearing pin now carries its OWN denominator (delete a sibling floor in a throwaway archive and confirm the pins still cannot go vacuous), confirm the restated installer id now CALLS the real producer rather than copying its spelling, and confirm the routing claim either tests routing or has been renamed to what it proves.' },
+]
+
+const verdicts = await parallel(LENSES.map(l => () => agent(LAWS + `
+
+YOU ARE AN ADVERSARIAL VERIFIER — ${l.k.toUpperCase()}. Default posture: WRONG until executed evidence. REFUTE. **READ-ONLY in the shared tree**; mutants go in throwaway archives.
+
+Step-12 lane: ` + JSON.stringify(step12 || {}).slice(0, 5000) + `
+Receipt lane: ` + JSON.stringify(receipts || {}).slice(0, 5000) + `
+
+${l.p}
+
+⚠ Across three rounds, SEVEN of eight verifier verdicts were REJECT and every finding was real. The code keeps being right and the receipts keep being wrong. Trust nothing asserted.
+
+RETURN structured JSON only.`, { label: `verify:${l.k}`, phase: 'Verify', model: 'opus', effort: 'high', schema: { type: 'object', required: ['verdict', 'findings'], properties: { verdict: { type: 'string', enum: ['PASS', 'REJECT'] }, gateCompletes: { type: 'boolean' }, findings: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })))
+
+const live = verdicts.filter(Boolean)
+const rejects = live.filter(v => v.verdict === 'REJECT')
+log(`verify: ${live.length}/2 returned, ${rejects.length} REJECT`)
+return { step12, receipts, verdicts: live, verdict: rejects.length ? 'REJECT' : 'PASS' }

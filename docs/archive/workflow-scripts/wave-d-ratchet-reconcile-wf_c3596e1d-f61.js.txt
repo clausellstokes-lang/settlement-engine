@@ -1,0 +1,20 @@
+export const meta = {
+  name: 'wave-d-ratchet-reconcile',
+  description: 'Reconcile the five governance ratchets wave D tripped: any-cast types, raw-button, roads census, command-registry walker',
+  phases: [{ title: 'Fix', detail: 'one Opus fixer', model: 'opus' }],
+}
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const SCHEMA = { type: 'object', required: ['agent', 'fixes'], properties: { agent: { type: 'string' }, fixes: { type: 'array', items: { type: 'object', required: ['finding', 'status', 'files', 'tests', 'notes'], properties: { finding: { type: 'string' }, status: { type: 'string', enum: ['fixed', 'skipped', 'deferred', 'blocked'] }, files: { type: 'array', items: { type: 'string' } }, tests: { type: 'string' }, notes: { type: 'string' } } } }, discovered: { type: 'array', items: { type: 'string' } } } }
+
+phase('Fix')
+const r = await agent(`You are an Opus IMPLEMENTER for SettlementForge. Wave D (the CREATE_ROUTE vertical, just landed uncommitted in the tree) tripped FIVE governance ratchets that its own focused tests never ran. Reconcile all five the RIGHT way — fix types, don't widen; register in censuses, don't bump baselines. Worktree: ${ROOT} branch claude/composite-r4 — verify; stop on mismatch. A soak + concurrent sessions are live: focused vitest only, one at a time; never touch artifacts/soak/**; the wizard-news files (wizardNews/settlementRumors/heraldRouting/informationStatecraft/momentum/supplyWebWarfare + tests) are FOREIGN — never touch. No git mutations, no full suites/builds.
+
+THE FIVE REDS (all wave-D-caused; wave-D files are yours to touch):
+1. **any-cast baseline** (tests/lint/domainAnyCastBaseline.test.js): src/domain/roads/userRoutes.js has 6 any-holes (baseline 0), src/domain/events/mutateUserRoute.js has 1 (baseline 0). FIX THE TYPES — the ratchet says "new files get 0". Use the declared-row-shape / proper JSDoc typedef idioms already in the neighbouring files (the resourceDynamicsKernel Record<string,Row> cast pattern is the sanctioned last resort ONLY where a real type is impossible; prefer real @typedefs). Do NOT edit scripts/check-domain-strict baselines or the any-cast baseline file.
+2. **raw-button baseline** (tests/lint/rawButtonBaseline.test.js): 46 vs 45 — wave D's UI added a raw <button>. Route it through the primitives/Button (or IconButton) per the jsx-hygiene law, OR if it is genuinely a new file the baseline must NOT grow — convert to the primitive. Find the offending new UI file (the CREATE_ROUTE picker/entry) and fix it.
+3. **roads participation census** (tests/domain/roadsParticipation.test.js): 46 vs 45 — a new .npcs reader appeared. If a wave-D file legitimately reads participation .npcs, add it to the dispositioned census in that test with a one-line reason; if it reads .npcs for an unrelated purpose, refactor to avoid tripping the census. Read the test's census shape and disposition honestly.
+4. **command-registry walker** (tests/application/commands/commandRegistry.walker.test.js): 26 vs 25 — wave D added a file that reaches the command executor. Add it to the frozen dispatch-surface allowlist in the walker with its justification (it IS a legitimate new command-transport file — canonRouteCommandBilateral.js and/or its siblings). This is the correct registration, not a widening.
+5. Re-run EACH of the five focused suites to green after fixing, quoted. Then confirm you introduced no NEW ratchet trips (run tests/lint/domainAnyCastBaseline, rawButtonBaseline, sizeBaseline, voiceMechanics, controlBytes).
+
+HARD RULES: no baseline/ratchet NUMBER raises (registrations + real types only); no migrations; JSX 600 / js 800; no em dashes in src/domain|src/data string literals; anchored negatives. Return dense structured data: per-red status, files, verbatim focused-test tails, notes, discovered.`, { label: 'wD:ratchet-reconcile', phase: 'Fix', schema: SCHEMA, model: 'opus' })
+return { results: [r].filter(Boolean) }

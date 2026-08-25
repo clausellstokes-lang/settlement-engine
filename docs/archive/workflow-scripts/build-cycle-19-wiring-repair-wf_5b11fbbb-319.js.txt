@@ -1,0 +1,38 @@
+export const meta = {
+  name: 'build-cycle-19-wiring-repair',
+  description: 'Wiring findings F1-F7 repaired + refusal-belief ruling · R-BLD-10 pulseKernel banked + the line-address family cured',
+  phases: [{ title: 'Repair', detail: '2 lanes, implement + verify each' }],
+}
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const P10 = `THE §10 PROTOCOL BINDS: ${MF} on claude/composite-r4 only (cd + rev-parse first, every command block); pathspec commits of ONLY your lane files; no stash; focused vitest + gate-tail (ps aux | grep vitest first); R-BLD-9 strict law; node ESM link + npm run build stay green; STOP-and-report; trailer "Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>". DARK, nothing pushed. CONCURRENCY: cycle 18 is LIVE on nav/theme/components (ribbon v2) and broad component surfaces (lucide wave) — your territory is src/domain/worldPulse + certification tests + queue docs only; re-read status before staging; queue file may carry foreign hunks — carve or use commit bodies.`
+const S = { type:'object', required:['lane','commits','gates','stopReports','notes'], properties:{lane:{type:'string'},commits:{type:'array',items:{type:'string'}},gates:{type:'array',items:{type:'string'}},stopReports:{type:'array',items:{type:'string'}},notes:{type:'string'}}}
+const V = { type:'object', required:['lane','verdict','findings'], properties:{lane:{type:'string'},verdict:{type:'string'},findings:{type:'array',items:{type:'string'}}}}
+phase('Repair')
+const lanes = await parallel([
+  () => agent(`VERIFY-FIRST: chair-ruled implementation. ${P10}
+LANE WF — THE WIRING REPAIR (cycle-16 wiring verifier findings F1-F7 on commits 8f8e1cf2 + 3019f83e; read the verifier's findings in the workflow journal at ${'.claude/projects'} if reachable, else re-derive from the code):
+(1) F1 HIGH — THE REFUSAL BRANCH MUST BRING THE MAN HOME: an unbound sheet strands the envoy today while the docstring promises 'the man still comes home, the errand still closes'. Make the docstring TRUE: on refusal the errand closes through its normal homecoming (silence inference clears, H1 lands, the sheet simply does not bind); pin the full refusal arc end-to-end (errand closed + no binding + homecoming receipts present).
+(2) F2 HIGH — PIN THE MOUTH GATE: neutering 'bound' to unconditional true must red a pin. Author the negative control exactly as the verifier ran it (the neuter as a mutant must red; a bound sheet passes; an unbound sheet is refused AT THE MOUTH with a closed reason).
+(3) F3 — fix the shape-blind control: assert the stripped-sheet call returns a REAL outcome object with no carriedTermSheet key (not an optional-chain collapse that passes on null).
+(4) F4 — make BOTH CR-WIRE-C capacity pins non-vacuous: reverting envoyErrand.js to the pre-ruling law must red them (the verifier's exact revert is the mutant; run it, quote the reds).
+(5) F5 — RECEIPT CORRECTION in the queue row: the lane claimed '93 passed across 10 files' listing 14 suites of which 2 do not exist — correct the row to the true suite list and counts, named as a false-receipt correction.
+(6) F6/F7 — replace the Function.length signature pin with a real source-scan (the derivation reads only picture fields — token scan on the module) and add envoyRatificationStage.js + envoyRansomStage.js to the K3 seam's pinned membership (the family regex deliberately excludes them; give each an explicit frozen import-list entry).
+(7) CHAIR RULING CR-WIRE-D (vetoable, record it): THE REFUSAL BELIEF IS THE PICTURE'S OWN APPRAISAL — a member votes REFUSE when the sheet's terms fall below its OWN frozen picture's believed floor, derived through the EXISTING believed-advantage arithmetic (the peaceTerms appraisal leaf — reuse, never a new estimator; K3 stays closed, K4 per-party). Wire the vote derivation; pin BOTH directions with real pictures (a spent-and-dominated picture that refuses; a strong picture that ratifies); the unit-only refusal arm becomes pulse-reachable.
+One commit per finding family + queue rows. Dormancy law binds: goldens byte-identical with flags dark (re-hash). Return {lane:'WF', commits, gates, stopReports, notes}.`,
+    {label:'wf:wiring-repair', phase:'Repair', model:'opus', effort:'high', schema:S})
+    .then(r => agent(`VERIFY-FIRST: adversarial verifier. ${P10}
+Report: ${JSON.stringify(r)}. Re-run EVERY mutant yourself: the mouth-gate neuter (must red now), the CR-WIRE-C revert (must red), the shape-blind probe, the F6 token-scan mutant; execute the full refusal arc on a real pulse fixture (envoy home, errand closed, sheet unbound, H1 present) and the CR-WIRE-D both-direction pins with YOUR OWN pictures; confirm the queue-row receipt now lists only real suites (resolve every path); dormancy hashes vs baseline; strict delta; pathspec-clean vs cycle 18. Return {lane:'WF verify', verdict, findings}.`,
+      {label:'wf:verify', phase:'Repair', model:'opus', effort:'high', schema:V})),
+  () => agent(`VERIFY-FIRST: chair-ruled implementation. ${P10}
+LANE KR — R-BLD-10 + THE LINE-ADDRESS FAMILY (cycle-16 K-2 verifier findings):
+(1) CHAIR RULING R-BLD-10 (vetoable, record in the queue): pulseKernel.js is BANKED PERMANENTLY at its measured 1580 — the K-2 lane proved the 800 ceiling structurally unreachable (extracting the ENTIRE consequence_fold body lands at 864; the PRNG call order is the stream identity and deeper rewrites risk THE PROMISE for a size number). The baseline entry stays with a rationale comment naming this ruling; THE DECOMPOSITION WAVE closes with pulseKernel recorded as deliberately-retained, not owed. Update the task-50 queue narrative accordingly.
+(2) THE LINE-ADDRESS FAMILY: 15 hand-keyed 'pulseKernel.js:NNN' line-number addresses across src/domain/certification/ (knowledgeLaneEvidence, subsystemRowsBaseline/Growth/People, + subsystemRowsWar.test.js:281) rot silently on any edit — one is ALREADY stale while green. Replace each with a content-anchored reference (file-scoped containment: the named symbol/token must exist in pulseKernel.js — never a line number); fix the stale one; add THE WALKER: no new 'pulseKernel.js:NNN'-shaped literal anywhere in src or tests (frozen at zero; mutant: add one → red).
+(3) The K-2 report's fork-count correction for the record: pulseKernel carries 22 rng.fork sites (not 54) — put the true figure wherever the 54 was recorded.
+(4) THE QUIET-TREE TIGHTEN: the strict baseline reads 1328 < 1329 — do NOT run --update (live tree); instead hand-edit ONLY the one improved file's entry down by one with the R-BLD-9 shrink-only law cited (surgical, no clobber risk), and prove the checker green.
+One commit per item + queue rows. Return {lane:'KR', commits, gates, stopReports, notes}.`,
+    {label:'kr:rbld10-addresses', phase:'Repair', model:'opus', effort:'high', schema:S})
+    .then(r => agent(`VERIFY-FIRST: adversarial verifier. ${P10}
+Report: ${JSON.stringify(r)}. Verify: the banked entry + rationale present and sizeBaseline green; ALL 15 addresses now content-anchored (census them yourself — zero 'pulseKernel.js:NNN' literals remain outside the walker's own fixture), the formerly-stale pin now TRUE (check the symbol it anchors), the walker's mutant reds; the fork figure corrected where recorded; the strict entry hand-tightened surgically (diff shows ONE line, checker green at 1328); pathspec-clean vs cycle 18. Return {lane:'KR verify', verdict, findings}.`,
+      {label:'kr:verify', phase:'Repair', model:'opus', effort:'high', schema:V})),
+])
+return { lanes: lanes.filter(Boolean) }

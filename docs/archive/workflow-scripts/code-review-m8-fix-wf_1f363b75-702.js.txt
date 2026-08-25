@@ -1,0 +1,49 @@
+export const meta = {
+  name: 'code-review-m8-fix',
+  description: 'Focused correctness re-review of the M8 sea-lanes FIX (new union-find/water-component/Kruskal edge builder + pathCost restructure): 4 angles then verify',
+  phases: [
+    { title: 'Find', detail: '3 correctness angles + altitude, on the rewritten algorithmic code' },
+    { title: 'Verify', detail: 'adversarial verify per deduped candidate' },
+  ],
+}
+
+const ROOT = '/Users/cstokes/Desktop/settlement-engine'
+const SCOPE = `The diff under review is the UNCOMMITTED M8 (sea lanes) working-tree change at ${ROOT} — specifically the FIX that replaced a full O(P^2) clique with a sparse, water-reachability-constrained edge set (get it with: git diff HEAD). FOCUS on the NEW/rewritten algorithmic code: src/domain/spatial/seaLanes.js — makeUnionFind (~243), waterComponents (~282, flood-fill over navigable-water cells), portTouchedComponents (~308), buildSeaLaneSet (~335, sailing-group union-find + Kruskal spanning tree + K-nearest), isRiverCell/isCoastalCell (~180-272); and src/domain/spatial/distanceRead.js — the pathCost restructure (~529, the fast-path gate: O(1) matrix read unless season OR (seaLanes lit AND at least one endpoint isPort)), isPort + PORT_SET_MEMO (~318-332), seaLaneNeighbourMap + SEA_NBR_MEMO (~355), linkMin. Read the ENCLOSING function for each hunk. Constitutional: deterministic sim — same-seed byte-identity + dormancy (slot null / non-port pair means the pre-M8 O(1) result EXACTLY); pure functions (no Date/Math.random); codepoint-sorted mutation; the frozen distanceMatrix is never re-baked; the digest must stay under SPATIAL_DIGEST_MAX_BYTES (400,000) even for a large port realm.`
+
+const FINDING = {
+  type: 'object', additionalProperties: false,
+  required: ['file', 'line', 'summary', 'failure_scenario', 'category'],
+  properties: { file: { type: 'string' }, line: { type: 'number' }, summary: { type: 'string' }, failure_scenario: { type: 'string' }, category: { type: 'string', enum: ['correctness', 'altitude', 'determinism', 'byte-identity'] } },
+}
+const FINDER_SCHEMA = { type: 'object', additionalProperties: false, required: ['candidates'], properties: { candidates: { type: 'array', items: FINDING } } }
+
+const ANGLES = [
+  { key: 'A-newcode-scan', prompt: 'ANGLE A — LINE-BY-LINE on the NEW algorithmic code (correctness). waterComponents: does the DFS correctly label every navigable-water cell? off-by-one on cellCount, a neighbour index out of bounds, an infinite loop, a cell visited twice. makeUnionFind: path-compression correctness, a find on an unseen id. buildSeaLaneSet: is the Kruskal MST correct (does it connect the whole body)? are K-nearest ties deterministic? can addEdge double-count or key wrong (a<b)? isRiverCell/isCoastalCell edge cases (NaN, missing arrays). For every line ask what input makes it wrong.' },
+  { key: 'B-byte-identity', prompt: 'ANGLE B — BYTE-IDENTITY / DORMANCY / REMOVED-BEHAVIOR. The pathCost restructure is the risk: does the fast-path return the EXACT pre-M8 O(1) frozen-matrix value when (a) the seaLanes slot is null (dormant), and (b) the slot is lit but NEITHER endpoint is a port? The implementer noted it fixed a base/path mismatch — scrutinize: does a lit-world non-port pair, or a port pair where land wins, get the same cost as pre-M8? Does the season path still compose correctly? Any deleted guard not re-established? A byte-identity break here is the highest severity.' },
+  { key: 'C-cross-file', prompt: 'ANGLE C — CROSS-FILE TRACER. isPort/PORT_SET_MEMO, seaLaneNeighbourMap/SEA_NBR_MEMO, linkMin — Grep callers. Does the memoization key correctly on the digest (WeakMap identity — a rebuilt digest object invalidates correctly)? Does the new isPort gate in pathCost change what M2 caravans / M4 migration (does refugee sea passage still resolve — the impl says migration passes a season) / M6 commodity / the rumor ship-carrier compute? Does the buildSeaLaneSet output shape still match what spatialDigest + distanceRead consume?' },
+  { key: 'G-altitude', prompt: 'ANGLE G — ALTITUDE. Is the sparse-graph fix at the right depth, or does it introduce a new fragility? Is the water-reachability a clean model or a heuristic that misses cases (a lake with no ocean outlet, a port on a cell whose water is a 1-cell puddle, a very large body making waterComponents slow at canonize)? Is the K-nearest + MST a principled sea-graph or an arbitrary combination? Flag anything that will need re-work.' },
+]
+
+phase('Find')
+const found = (await parallel(ANGLES.map(a => () =>
+  agent(`You are a focused code-review finder for the M8 FIX. ${SCOPE}\n\n${a.prompt}\n\nReturn UP TO 5 candidates (file, line, one-line summary, concrete failure_scenario, category). Pass every candidate with a nameable failure scenario.`,
+    { label: `find:${a.key}`, phase: 'Find', schema: FINDER_SCHEMA, effort: 'high' })
+))).filter(Boolean).flatMap(r => r.candidates || [])
+
+const seen = new Map()
+for (const c of found) { const k = `${c.file}:${Math.round((c.line||0)/4)}`; if (!seen.has(k)) seen.set(k, c) }
+const deduped = [...seen.values()]
+log(`Find: ${found.length} candidates, ${deduped.length} after dedup`)
+
+phase('Verify')
+const VERDICT = { type: 'object', additionalProperties: false, required: ['verdict', 'reason'], properties: { verdict: { type: 'string', enum: ['CONFIRMED', 'PLAUSIBLE', 'REFUTED'] }, reason: { type: 'string' } } }
+const verified = (await parallel(deduped.map(c => () =>
+  agent(`Adversarial verifier for ONE candidate on the M8 sea-lanes FIX at ${ROOT} (git diff HEAD; read the cited file + enclosing function). Candidate:\nfile: ${c.file}\nline: ${c.line}\ncategory: ${c.category}\nsummary: ${c.summary}\nfailure_scenario: ${c.failure_scenario}\n\nReturn CONFIRMED / PLAUSIBLE / REFUTED (recall-biased: default PLAUSIBLE when the state is realistic; REFUTE only when constructibly wrong/impossible/already-guarded — cite the code). One-line reason.`,
+    { label: `verify:${c.file.split('/').pop()}:${c.line}`, phase: 'Verify', schema: VERDICT })
+    .then(v => ({ ...c, verdict: v && v.verdict, vreason: v && v.reason }))
+))).filter(Boolean)
+
+const survivors = verified.filter(f => f.verdict === 'CONFIRMED' || f.verdict === 'PLAUSIBLE')
+const vrank = { CONFIRMED: 0, PLAUSIBLE: 1 }
+survivors.sort((a, b) => (vrank[a.verdict] - vrank[b.verdict]))
+return { total: found.length, deduped: deduped.length, survivors }

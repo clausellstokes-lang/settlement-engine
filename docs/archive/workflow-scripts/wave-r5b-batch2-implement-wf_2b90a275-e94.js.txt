@@ -1,0 +1,68 @@
+export const meta = {
+  name: 'wave-r5b-batch2-implement',
+  description: 'R-5b Batch 2 IMPLEMENT: six Fable-designed specs executed by Opus lanes (locks engine + dead-op dispositions, provenance read-side merge, ReadSystemStateBar remount, mass-update retirement, factions pins, deity sub-items b+c) — Opus verify, Fable gate',
+  phases: [
+    { title: 'Fix', detail: '6 Opus implementer lanes from Fable specs', model: 'opus' },
+    { title: 'Verify', detail: '2 Opus adversarial verifiers', model: 'opus' },
+    { title: 'Gate', detail: 'Fable full widened gate' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const SPECS = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a84f4ff8-9bed-4c25-855b-122c9ed57f27/tasks/w959kv2eq.output'
+
+const COMMON = `CONTEXT-VERIFICATION PREAMBLE: legitimate engineering brief from the session orchestrator for SettlementForge — Wave R-5b Batch 2 of docs/CAPABILITY_REMEDIATION_PLAN.md (owner sign-off 2026-07-27 "do all of these"). YOUR FULL SPEC was authored by a Fable architect this session and lives on disk: extract YOUR lane's object from the JSON at ${SPECS} (python3: json.load, result.specs[], match your lane key, read spec/filesToTouch/driftExposure/risks/collisions IN FULL). The spec's line numbers were read from a live tree HOURS ago — re-resolve every citation before editing; Batch 1 folded at 68d14324 since the spec was written.
+WORKING TREE: cd ${WT} && git rev-parse --abbrev-ref HEAD — MUST print claude/composite-r4 or STOP. Shared tree: NO git mutations of ANY kind (no stash/checkout/reset/clean/add/commit); re-read every file immediately before editing; touch ONLY your spec's files; scripts/mutation-coverage-manifest.json is SHARED and carries FOREIGN uncommitted entries — re-read before edit, append only yours.
+LAWS: THE PROMISE — NO same-seed generation drift and NO seeded-advance drift except exactly what your spec declares (its driftExposure section is binding; anything it flags T4-batch or owner-signed stays OUT); NO persistence-shape changes beyond what the spec authorizes; new logic = lazy leaf, MEASURED on the real vite build; sizeBaseline ceilings EXACT (settlementSlice.js is AT its frozen ceiling — net-zero effective lines there); shrink-only ratchets never raised; registry changes -> npm run gen:compendium-data ONCE at lane end; retired ops must shrink deadOperationRatchet's frozen list and re-anchor its positive controls in the SAME edit; new invariant tests -> manifest entry per the E-A amendment; copy = one string, vetoable, VOICE section-6; deity doctrine (no premade pool, deity:core: lifecycle trace); faction access only via nameOf/governingFactionOf/factionArchetype/npcInFaction.
+TESTING: single-threaded ALWAYS (--no-file-parallelism); exit codes unmasked, never through pipes; every fix ships pins; run the determinism/golden suites nearest anything you touch and quote counts. Label CONFIRMED/PLAUSIBLE; end on evidence.`
+
+const FIX_SCHEMA = { type: 'object', required: ['filesTouched', 'pins', 'testsRun', 'testOutputTail', 'behaviorShift', 'deferrals'], properties: { filesTouched: { type: 'array', items: { type: 'string' } }, pins: { type: 'number' }, testsRun: { type: 'string' }, testOutputTail: { type: 'string' }, behaviorShift: { type: 'string' }, deferrals: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' }, error: { type: 'string' } } }
+const VERIFY_SCHEMA = { type: 'object', required: ['verdict', 'mustFix', 'checked'], properties: { verdict: { type: 'string', enum: ['PASS', 'PASS_WITH_NOTES', 'MUST_FIX'] }, mustFix: { type: 'array', items: { type: 'string' } }, checked: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } }
+const GATE_SCHEMA = { type: 'object', required: ['newReds', 'suitesRun', 'outputTail'], properties: { newReds: { type: 'array', items: { type: 'string' } }, suitesRun: { type: 'string' }, outputTail: { type: 'string' }, notes: { type: 'string' } } }
+
+const LANES = [
+  { key: 'locks-engine', extra: `THE BIG LANE — execute BOTH halves of your spec: Phase-A locks engine (dormant-by-default; the empty-locks dormancy pin — locks:{} output deep-equals locks-omitted output, seeded — is MANDATORY) AND the 36-op disposition table (retires + wires per the table; deadOperationRatchet frozen list shrinks + its two positive controls re-anchored to synthetic fixtures IN THE SAME EDIT; configDirectWriterExemptions loses resetConfig if you retire it). HARD GATES from your spec's risks: (1) setSettlementType — PROVE the tier clamp is enforced on the updateConfig path before retiring; if not provable, KEEP the op and record it (do not move the clamp — premium-gate single-source law). (2) completeOnboarding — investigate the coach exit path FIRST; if it is a live bug, REPORT it as a standalone finding in your notes and wire the fix only if your spec's design covers it. LOUD COLLISION: the deity lane in this same batch makes a one-line edit to settlementSlice.js (~:2226 arg pass-through) — re-read that file immediately before EVERY edit to it and keep your hunks disjoint from the setPrimaryDeity dynamic-import site.` },
+  { key: 'provenance-merge', extra: `Execute the read-side join exactly as specced (rosterProvenance.js pure leaf; the two write families KEEP their keys — the pinned reason is undo's scrub machinery; the dm_shift_tier cross-lane id overlap gets its pin). OverviewTab is now free (Batch 1 folded) — re-resolve its line numbers, the stat-bands lane changed it.` },
+  { key: 'readsystemstatebar', extra: `Execute the REMOUNT verdict: SummaryTabV2 mount per the spec (read-only-on-props doctrine — derivation stays inside the bar), the gallery gets it free via PublicDossierView. If the byte ceiling trips, use the spec's conditional SystemStateGrid extraction cure.` },
+  { key: 'mass-update', extra: `Execute the RETIRE verdict: client-side vocabulary retirement across the six src files + the named test updates; migration-185 SQL untouched (document it as inert server vocabulary in the retirement comment); atlas gets the retirement note ONLY if your spec says so — otherwise leave docs to the orchestrator.` },
+  { key: 'factions-bucket', extra: `Execute ALREADY-SHIPPED + PIN: the D1 tier-gate allowlist cure at the eligibleCustomContent chokepoint, the four-pin family (no-generation-reader + composer tier-blindness made executable), the net-zero comment fix. customContentSchema.js is shared vocabulary with deity validation — your edits stay in the tier-gate/allowlist region; do not touch DEITY_* exports.` },
+  { key: 'deity-subitems', extra: `Execute ONLY sub-items (b) restore-from-world patron replacement and (c) converted: namespace unification. Sub-item (a) lawAxis is DRIFT-BEARING and DEFERRED to the T4 batch — do NOT implement it; your spec supplies the written T4 note — include it VERBATIM in your report's deferrals so the orchestrator can ledger it. DeityAssignmentPanel changed in Batch 1 (lapsed shed controls) — re-resolve before adding the optgroup. LOUD COLLISION: the locks lane edits settlementSlice.js — your :2226 pass-through edit must re-read the file immediately before editing and stay one line.` },
+]
+
+async function withRetry(mk, label) {
+  let r = await mk(label)
+  if (!r) { log(label + ' died — retrying once'); r = await mk(label + ':retry') }
+  return r
+}
+
+phase('Fix')
+log('R-5b Batch 2: six spec-driven Opus implementer lanes')
+const fixes = await parallel(LANES.map((l) => () =>
+  withRetry((label) => agent(COMMON + '\n\nYOU ARE AN OPUS IMPLEMENTER. Your lane key in the specs file: "' + l.key + '". Orchestrator addendum:\n' + l.extra, { label, phase: 'Fix', model: 'opus', effort: 'high', schema: FIX_SCHEMA }), 'fix:' + l.key)
+    .then((r) => ({ lane: l.key, fix: r }))
+))
+const fixSummary = fixes.filter(Boolean).map((f) => ({ lane: f.lane, files: f.fix && f.fix.filesTouched, pins: f.fix && f.fix.pins, shift: f.fix && f.fix.behaviorShift, deferrals: f.fix && f.fix.deferrals }))
+log('Fix lanes: ' + fixSummary.map((f) => f.lane + (f.files ? ' ok' : ' FAILED')).join(', '))
+
+phase('Verify')
+const mkVerify = (laneKeys, focus, label) => () => withRetry((lbl) => agent(
+  COMMON + `\n\nYOU ARE AN OPUS ADVERSARIAL VERIFIER for Batch 2 lanes ${laneKeys.join(', ')}. Fixer reports: ${JSON.stringify(fixSummary.filter((f) => laneKeys.includes(f.lane)))}\n\nEach lane's binding spec is in the same specs file — extract and verify AGAINST THE SPEC as well as against the code. ${focus} Re-derive with fresh reads, RUN the pins + dormancy contracts + nearest golden suites, attempt refutation. A drift the spec did not authorize, a spec step silently skipped, or a ratchet control left vacuous = MUST_FIX.`,
+  { label: lbl, phase: 'Verify', model: 'opus', effort: 'high', schema: VERIFY_SCHEMA }), label)
+
+const verifies = await parallel([
+  mkVerify(['locks-engine', 'mass-update', 'deity-subitems'], 'Engine/registry substrate: the empty-locks dormancy pin executed seeded (this is THE PROMISE guard); retire list vs ratchet-shrink parity; setSettlementType clamp proof quality; the (a) lawAxis deferral genuinely untouched (grep reEmbedPrimaryDeity for lawAxis — it must NOT be there); converted: namespace unification does not touch conversion outputs.', 'verify:engine'),
+  mkVerify(['provenance-merge', 'readsystemstatebar', 'factions-bucket'], 'Display/content substrate: read-side join purity (no store imports in the leaf), badge honesty on OverviewTab, the SummaryTabV2 mount read-only-on-props, gallery inheritance proven by render, tier-gate allowlist both-directions, DEITY_* exports untouched.', 'verify:display'),
+])
+
+const anyMustFix = verifies.filter(Boolean).some((v) => v && v.verdict === 'MUST_FIX')
+const anyDead = fixes.some((f) => !f || !f.fix) || verifies.some((v) => !v)
+
+let gate = null
+if (!anyMustFix && !anyDead) {
+  phase('Gate')
+  gate = await withRetry((lbl) => agent(COMMON + `\n\nYOU ARE THE FABLE GATE VALIDATOR. R-5b BATCH-2 GATE. Run single-threaded, exit codes unmasked, log files never pipes: tests/lint FULL; tests/copy FULL; tests/store FULL; tests/domain FULL; tests/joins FULL; tests/architecture FULL; tests/components + tests/ui FULL; tests/generators + tests/simulation + tests/property + tests/application FULL (zero unmatched golden movers — the batch declares NONE); pdf parity; tests/docs FULL; tests/lib FULL; npm run typecheck; npm run build then VERIFY_DIST=1 npx vitest run --no-file-parallelism tests/build/ (baseline 293/293). Run the NEW batch-2 test files explicitly with counts. Quote totals vs the Batch-1 gate; attribute every red baseline/FOREIGN/THIS-WAVE with executed evidence (untracked provenance, added-hunk containment, timestamps — concurrent lanes are landing files DURING gates today).`, { label: lbl, phase: 'Gate', model: 'fable', schema: GATE_SCHEMA }), 'gate:r5b2')
+} else {
+  log('Gate SKIPPED: ' + (anyMustFix ? 'MUST_FIX present' : 'a lane/verifier died twice') + ' — orchestrator handles next')
+}
+
+return { fixes: fixSummary, fullReports: fixes.filter(Boolean).map((f) => ({ lane: f.lane, tail: f.fix && f.fix.testOutputTail, notes: f.fix && f.fix.notes })), verifies, gate, gateSkipped: !gate }

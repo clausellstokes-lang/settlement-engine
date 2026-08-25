@@ -1,0 +1,68 @@
+export const meta = {
+  name: 'realm-directives-wave-c',
+  description: 'Wave C: Herald tabs (Gazetteer, Ruins & Remembrance), nav flow arrows, restored workflow block, B1b k-NN lighting',
+  phases: [{ title: 'Build', detail: '3 Opus implementers, disjoint ownership', model: 'opus' }],
+}
+
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const COMMON = `You are an Opus IMPLEMENTER for SettlementForge. Program doc: docs/DESIGN_REALM_DIRECTIVES.md in the worktree — READ IT FIRST (J-D judgments BINDING). Worktree: ${ROOT} branch claude/composite-r4 — verify with \`git -C ${ROOT} rev-parse --abbrev-ref HEAD\`; stop on mismatch. HEAD carries waves A+B (45600de6..260ddb7d).
+
+⚠️ A 300-year soak node process runs from this tree: never touch artifacts/soak/**, never kill processes; focused vitest only, one at a time; timeout-shaped reds get ONE isolation re-run before belief.
+
+HARD RULES: no git mutations; no full suites/builds; no golden re-records; no ratchet raises; determinism laws; headless engine layers; JSX ceiling 600 effective (several files AT ceiling — net-zero there), .js 800; lazy discipline (new UI = lazy leaves; lazy pins need the SECOND assertion when the parent is lazy — the 5-layer tests/build/*Lazy.test.js recipe); a11y at error level (icon buttons need names; Suspense-in-table fallback text directly in the td with aria-label on the tr); tab PRESENCE gates by audience/flag (absent, not disabled); legibility law (in-world prose, no raw internals); new store actions need operationRegistry + npm run gen:compendium-data + node scripts/generate-sitemap.mjs + npm run build:edge-shared IN THAT ORDER; bare negatives anywhere in tests/ must be anchored; no em dashes in src/domain|src/data string literals. Match house style.
+
+DONE BAR: edits + focused tests green (quoted) + executed negative control per new pin (revert/red/restore/green, both quoted). Return dense structured data (statuses, files, verbatim test tails, shifts, judgment calls, discovered).`
+
+const SCHEMA = {
+  type: 'object',
+  required: ['agent', 'fixes'],
+  properties: {
+    agent: { type: 'string' },
+    fixes: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['finding', 'status', 'files', 'tests', 'notes'],
+        properties: {
+          finding: { type: 'string' },
+          status: { type: 'string', enum: ['fixed', 'skipped', 'deferred', 'blocked'] },
+          files: { type: 'array', items: { type: 'string' } },
+          tests: { type: 'string' },
+          notes: { type: 'string' },
+        },
+      },
+    },
+    behavior_shifts: { type: 'array', items: { type: 'string' } },
+    discovered: { type: 'array', items: { type: 'string' } },
+  },
+}
+
+phase('Build')
+const results = await parallel([
+  () => agent(`${COMMON}
+
+ASSIGNMENT — HERALD TABS (directive 5, judgment J-D5). The Herald (RealmInspector architecture) gains two in-world tabs:
+1. **GAZETTEER** — the living settlement roster: every active settlement as a compact in-world register row (name, tier, one-line state read via existing display derivations, link into the settlement). Legibility law: glance → sentence; no raw numbers without word-banding.
+2. **RUINS & REMEMBRANCE** — the graveyard: remnant-grade settlements (the terminal-death lane's relic_ruin/remnant statuses, lifecycleStatusOf) + library rows carrying the Destroyed rubric, each with its chronicle receipt pointers (why it fell, when, the receipts the provenance already carries). Retrospective review = read-only projection of existing truth.
+3. Record the USER-PARKABLE STASIS deferral in-code where a future implementer will find it (J-D5: deliberately deferred, not a bug to re-find).
+Both tabs: lazy leaves with build pins (second assertion — the Herald parent is lazy), presence gated like sibling Herald tabs, a11y clean, audience-safe (remnant data is not covert, but run the projection seam like siblings do). Find the Herald tab architecture via rg (RealmInspector, HeraldBody, the tab registration idiom) and MATCH it exactly. Component tests for both tabs (empty state: in-world prose — a young realm has no ruins yet).`, { label: 'wC:herald-tabs', phase: 'Build', schema: SCHEMA, model: 'opus' }),
+
+  () => agent(`${COMMON}
+
+ASSIGNMENT — CREATE-FLOW CHROME (two owner directives, 2026-07-31):
+1. **NAV FLOW ARROWS:** the ribbon headers Create, Library, Realm read as a flow — the RIGHT edge of Create and of Library becomes an open-triangle/chevron pointing into its successor. Rendered order (lib/routes.js NAV): Welcome · Create · Library · Realm · … so the adjacencies hold on desktop. Implementation: token-drawn (BORDER/muted register from theme.js — it must read as architecture, not ornament; no raw colors — the visual-budget lint is error-level), decorative (aria-hidden, zero AT/keyboard surface), harmonized with active/hover states. THE ADJACENCY GUARD (binding): an arrow renders ONLY when its flow-successor is the immediate rendered neighbor on THAT surface — check the mobile bottom nav's actual composition (Realm is off the mobile bottom nav; render Create→Library there, and Library→Realm ONLY if Realm is actually adjacent); an arrow pointing at the wrong neighbor teaches a false lesson. Find the header nav + mobile bottom nav components via rg (NAV from lib/routes.js; App.jsx/AppViews.jsx). Component test pinning the guard (desktop: both arrows; a surface without Realm: no Library arrow).
+2. **RESTORE THE WORKFLOW BLOCK on Create, in front of the video:** the generation-steps block (PipelineRail — src/components/PipelineRail.jsx, alive, mounted in SimulationDrawer + WizardOutputToolbar) lost its Create-page seat in commit 3176e22d ("create-flow placements") — use git show/log archaeology to find the old placement and the video block's current location in the create flow (the Living Backdrop / film block), then restore the rail IMMEDIATELY BEFORE the video, desktop and mobile. Labels derive from the real step registry (they already do — verify, never fork a label list); live during generation via the existing onStep reveal; compact per the legibility law; ZERO eager bytes (the create page is lazy — verify with the relevant build pin if one covers this surface). Component test: the block renders on Create before the video node and updates on step events.`, { label: 'wC:create-chrome', phase: 'Build', schema: SCHEMA, model: 'opus' }),
+
+  () => agent(`${COMMON}
+
+ASSIGNMENT — B1b: K-NEAREST LIGHTING (J-D2 as AMENDED 2026-07-31 — read the amendment block). Wave B1 built neutralNeighbourEdges dark with ALL-PAIRS selection; all-pairs is quadratic and reds tests/perf/tickScanBudget.test.js at 3.32x over budget at realm scale — the blocker is asymptotic.
+1. Swap the pair-selection to K-NEAREST SPATIAL NEIGHBORS, k=3, deterministic (distance, then codepoint id tiebreak) in src/domain/region/neutralNeighbourEdges.js. Property: at N<=4 the k-NN graph IS the complete graph (pin this — it is where the small-N stasis medicine binds); at scale it is O(S*k).
+2. Prove the budget: run tests/perf/tickScanBudget.test.js with the flag LIT in the test harness at the scale that previously redded (the B1 report says 30 settlements) — must be green with margin quoted. If the perf test cannot exercise a lit flag without harness changes, extend the harness minimally and honestly.
+3. Light the flag per the preset pattern the T5 charter flags used (deep presets ONLY — find how sibling flags were preset-lit and mirror exactly; NEVER touch DEFAULT_SIMULATION_RULES). Dormancy golden must stay green untouched (flag absent ⇒ byte-identical).
+4. Re-run B1's pins (dormancy, explicit-beats-default, JSON round-trip, interaction-density smoke) — the density smoke must STILL pass under k-NN at N=4 (it is complete there by construction).`, { label: 'wC:b1b-knn', phase: 'Build', schema: SCHEMA, model: 'opus' }),
+])
+
+const all = results.filter(Boolean)
+log(`${all.length}/3 wave C implementers returned`)
+return { results: all }

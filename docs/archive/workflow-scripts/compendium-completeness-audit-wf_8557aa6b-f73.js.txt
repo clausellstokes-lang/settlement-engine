@@ -1,0 +1,54 @@
+export const meta = {
+  name: 'compendium-completeness-audit',
+  description: 'Sweep every compendium entry for unexplained underlying vocabularies and missing information',
+  phases: [
+    { title: 'Census', detail: 'the full rendered-entry inventory' },
+    { title: 'Truth', detail: 'domain vocabularies per family, in parallel' },
+    { title: 'Critic', detail: 'completeness pass over the merged gap list' },
+  ],
+}
+
+const TREE = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const COMMON = `READ-ONLY audit in ${TREE} (the current composite tip — do NOT edit, stage, or touch git). The Compendium = the in-app reference section (CatalogTabs.jsx and its tabs, the generated compendium data under src/data or scripts gen:compendium-data output, glossary/concept entries, band-ladder entries from the W6 work). The owner's complaint, verbatim example: entries like Priority Sliders, Exports and Imports, Supply Chains, Viability Score "reference the larger idea but not the bands underneath them and what they represent." Your job is to find EVERY such gap: an entry that names or depends on an underlying finite vocabulary (bands, levels, factor lists, categories, slider sets, interaction rules, score components) that the ENGINE actually defines but the entry never explains. For each gap, cite where the truth lives in domain code (file:line) and what the entry should minimally add. Severity: HIGH = a DM reading the entry cannot use the concept at the table without the missing vocabulary; MED = usable but the bands/levels shown elsewhere in the UI are never defined; LOW = nice-to-have depth.`
+
+const GAPS = {
+  type: 'object',
+  required: ['gaps', 'covered'],
+  properties: {
+    gaps: { type: 'array', items: { type: 'object', required: ['entry', 'family', 'missing', 'truthSource', 'proposal', 'severity'], properties: {
+      entry: { type: 'string' }, family: { type: 'string' },
+      missing: { type: 'string', description: 'what vocabulary/bands/components the entry references but never explains' },
+      truthSource: { type: 'string', description: 'file:line where the engine defines it' },
+      proposal: { type: 'string', description: 'the minimal addition, in the W6 ladder grammar where applicable' },
+      severity: { type: 'string', enum: ['HIGH', 'MED', 'LOW'] },
+    } } },
+    covered: { type: 'array', items: { type: 'string' }, description: 'entries checked and found complete' },
+    notes: { type: 'array', items: { type: 'string' } },
+  },
+}
+
+phase('Census')
+const census = await agent(`${COMMON}
+LENS 0 — THE FULL SURFACE CENSUS. Enumerate EVERY entry the compendium renders: every tab, every card/section/glossary row, every entry class (deities, operations, systems, presets, lenses, calamity flavours, institutions catalog, concept/mechanic entries, band-ladder entries). For each: its title, one-line content summary, and whether its text references an underlying vocabulary it does not itself explain. Also record the ENTRY GRAMMAR variants in use (BandPill ladders from W6, StatusTag families, plain prose cards) so fixers match the right pattern. Return via the schema: use gaps[] for suspected gaps found during the census (family = tab name), covered[] for the full list of entries you enumerated (this doubles as the census — every entry name appears in gaps or covered).`, { label: 'census', schema: GAPS })
+
+phase('Truth')
+const FAMILIES = [
+  { key: 'economy', prompt: 'ECONOMY family: Priority Sliders (the actual slider set + interaction rules like heresy suppression), Exports and Imports (dependency/vulnerability bands), Supply Chains (link types, broken-input degradation stages, magic substitution rules), Viability Score (its factor list + band cuts), trade, prosperity bands, resources/goods vocabularies. Extract the REAL vocabularies from the economy/trade/supply domain code (foodGenerator, supplyKernel, trade modules, economicState, viability derivations).' },
+  { key: 'social-political', prompt: 'SOCIAL/POLITICAL family: legitimacy bands, corruption (covert vs revealed + decay), stress types (all 15), safety/threat/defense vocabularies (incl. the new Food Security bands + heartland threat arm), faction archetypes, power structure, NPC agency/goals, population/demographics bands.' },
+  { key: 'world-faith-magic', prompt: 'WORLD/FAITH/MAGIC family: deity axes (alignment/law/rank/temper — note the owner DEITY DOCTRINE: no premade pool, custom-only; the compendium must explain the AXES not any roster), faith spread/pantheon tiers (cult to minor to major rise), magic levels, terrain/culture vocabularies, calamity flavours, map lenses/presets, operations, settlement tiers and phases.' },
+]
+const truths = await parallel(FAMILIES.map(f => () => agent(`${COMMON}
+LENS — ${f.prompt}
+Cross-reference each compendium entry in this family (from the compendium data/UI) against the domain truth. Report gaps per the schema.`, { label: `truth:${f.key}`, phase: 'Truth', schema: GAPS })))
+
+phase('Critic')
+const merged = [census, ...truths].filter(Boolean)
+const allGaps = merged.flatMap(r => r.gaps || [])
+const allCovered = merged.flatMap(r => r.covered || [])
+const critic = await agent(`${COMMON}
+COMPLETENESS CRITIC. Here is the merged audit so far.
+GAPS FOUND (${allGaps.length}): ${JSON.stringify(allGaps).slice(0, 20000)}
+ENTRIES MARKED COMPLETE (${allCovered.length}): ${JSON.stringify(allCovered).slice(0, 6000)}
+Your job: what did the sweep MISS? (1) any compendium tab/entry class in the UI that appears in neither list; (2) any engine vocabulary a DM meets in the app (dossier stats, map legends, realm inspector, gallery filters) that the compendium never covers AT ALL (missing entries, not just missing bands); (3) any gap above whose truthSource looks wrong or whose proposal violates the FINITE-SEMANTICS or W6 grammar; (4) duplicates to merge. Verify suspicions at code before reporting. Return via the schema (gaps[] = additions/corrections only, covered[] = your verification notes).`, { label: 'critic', phase: 'Critic', schema: GAPS })
+
+return { census, truths, critic, totals: { gaps: allGaps.length + (critic?.gaps?.length || 0), enumerated: allCovered.length } }

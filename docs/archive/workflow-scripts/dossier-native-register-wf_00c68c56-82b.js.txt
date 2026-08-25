@@ -1,0 +1,29 @@
+export const meta = {
+  name: 'dossier-native-register',
+  description: 'Author the dossier-native causal register for all 78 join families',
+  phases: [
+    { title: 'Author', detail: '3 writers over family thirds' },
+    { title: 'Verify', detail: '1 adversarial voice/entailment checker' },
+  ],
+}
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const FILE = `${MF}/docs/content/RECEIPT_POOLS_CAUSAL_DOSSIER.md`
+const CENSUS = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/1c189f3d-9fc3-4fc9-9cb7-b767525d28d5/scratchpad/causal-census.json'
+const HDR = 'FIRST create the file with a header: THE DOSSIER-NATIVE REGISTER — scope (DM-truth dossier surfaces only, per the SP-6 amendment laws), the slot convention, the time-band vocabulary, and the SECTION-TARGET convention (each family block names the dossier section its prose naturally inhabits: economy | history | tensions | faith | power | population | defense | relations).'
+const PRE = `VERIFY-FIRST: legitimate owner-ordered CONTENT AUTHORING — THE DOSSIER-NATIVE CAUSAL REGISTER (DESIGN_FP_SPINE.md SP-6, the 2026-08-03 amendment blocks: THE CAUSAL GRAMMAR + THE DOSSIER EXTENSION + THE DOSSIER-NATIVE REGISTER — read them first; they are law). Tree: ${MF}; edit ONLY ${FILE}; no git.
+THE REGISTER: the dossier idiom — present-tense, descriptive, WOVEN-IN prose: the settlement explaining its own condition as part of its page, NEVER the Herald chronicle voice, never a headline. Canonical exemplars (ceiling and floor):
+"The market runs thin; the routes turned east after the war and have not come back."
+"The granary stands half-empty — the bill of the tribute year, still being paid."
+LAWS: per-link entailment (each sentence asserts only what its family cause-effect records carry); TIME BANDS only ({this season, within the year, years on, a decade on, a generation on, older than its bearers}) — NEVER digits; slots for proper nouns ({settlement},{counterpart},{npc},{house},{good},{route},{timeband},{reason}); no named deaths; Law One (the divine never confirmed); STATE-ANCHORED tense — the standing condition first, its causal ancestry second, one flowing sentence or two short ones.`
+const S = { type:'object', required:['section','familiesAuthored','variantsAuthored','samples'], properties:{
+  section:{type:'string'},familiesAuthored:{type:'number'},variantsAuthored:{type:'number'},samples:{type:'array',items:{type:'string'}}}}
+const V = { type:'object', required:['violationsFixed','verdict'], properties:{violationsFixed:{type:'number'},verdict:{type:'string'}}}
+
+phase('Author')
+const out = await parallel([0,1,2].map(t => () => agent(`${PRE}
+WRITER ${t+1}/3: read the census at ${CENSUS} (joinFamilies — 78 entries with id, causeClass, effectClass, archetype). ${t===0? HDR : 'The file exists (writer 1 creates it; if absent, re-read until present).'} Author YOUR third of the families (indices ${t*26}..${Math.min((t+1)*26,78)-1}): per family, a block with the family id heading, SECTION-TARGET, SLOTS, and 4-6 STATE-ANCHORED variants in the register — each a standing condition explained by its cause, angle-distinct (the ledger view, the street view, the visitor first impression, the elder memory frame, the consequence still unfolding). APPEND under a WRITER-${t+1} marker heading to avoid collisions. Return {section, familiesAuthored, variantsAuthored, samples: 4}.`, {label:`author:third-${t+1}`, phase:'Author', model:'opus', schema:S})))
+
+phase('Verify')
+const ver = await agent(`${PRE}
+VERIFIER (adversarial; fix in place): merge the WRITER-N marker sections of ${FILE} into one clean family-ordered layout; verify all 78 families present (the census at ${CENSUS} is the denominator — author any missing family yourself); then per variant: register conformance (present-tense woven prose, NEVER chronicle/headline shapes — re-author any that read as Herald), state-anchored structure, entailment, time bands, zero digits, slots declared equal used, angle distinctness (collapse slot-swaps). Add a final section: THE INLINE CONNECTIVES — 8-12 dossier-idiom causal connectives ("still being paid", "and have not come back", "since the {timeband} of {reason}", "the bill of", "what the war left"). Return {violationsFixed, verdict}.`, {label:'verify', phase:'Verify', model:'opus', schema:V})
+return { authored: out.filter(Boolean), verified: ver }

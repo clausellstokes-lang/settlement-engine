@@ -1,0 +1,173 @@
+export const meta = {
+  name: 'w5-cosmetic-verify',
+  description: 'Verify every W5 cosmetic RP row against the live tree + reference tree, produce implementation specs',
+  phases: [
+    { title: 'Verify', detail: 'one read-only agent per sub-wave + infra scout' },
+  ],
+}
+
+const OURS = args.ours
+const THEIRS = args.theirs
+
+const SCHEMA = {
+  type: 'object',
+  required: ['area', 'items', 'notes'],
+  properties: {
+    area: { type: 'string' },
+    items: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['item', 'status', 'live_state', 'reference', 'spec', 'risks'],
+        properties: {
+          item: { type: 'string', description: 'short name of the worklist item' },
+          status: { type: 'string', enum: ['READY', 'ALREADY_DONE', 'PARTIALLY_DONE', 'BLOCKED'], description: 'READY=needs work, spec below; ALREADY_DONE=live tree already has it (cite proof); PARTIALLY_DONE=some of it landed; BLOCKED=cannot be done on our floor (say why)' },
+          live_state: { type: 'string', description: 'VERIFIED current state in OUR tree with exact file:line citations from the live files you read' },
+          reference: { type: 'string', description: 'what THEIRS does, verified file:line, key implementation details (state, handlers, copy keys, styles)' },
+          spec: { type: 'string', description: 'concrete implementation spec adapted to OUR floor: files to edit/create, which OUR primitives/helpers to reuse, copy-registry keys needed, exact wiring points (file:line)' },
+          risks: { type: 'string', description: 'goldens / dist-budget / first-paint / faith-seam / a11y / DO-NOT-TOUCH-fence risks and how to avoid them' },
+        },
+      },
+    },
+    notes: { type: 'string', description: 'anything the implementer must know that does not fit per-item; e.g. shared state, ordering constraints' },
+  },
+}
+
+const COMMON = `You are a READ-ONLY verification agent for wave W5 (cosmetic polish sweep) of the SettlementForge Phase-5 reunification. DO NOT modify, create, or delete ANY file — you only read and report.
+
+Two trees:
+- OURS (the live tree the implementer will edit): ${OURS}
+- THEIRS (read-only reference, adopt-onto-our-floor, never blind-copy): ${THEIRS}
+
+The parity ledger that generated this worklist was surveyed at an older commit — EVERY cited file:line may have drifted, and some items may have ALREADY been implemented by later waves (Phase-5 W4/W-C1..C5 landed after the survey). Your job per item:
+1. Open the OUR-tree files and verify the CURRENT state (quote exact current line numbers).
+2. If the item is already implemented in OURS, mark ALREADY_DONE with proof.
+3. Open the THEIRS reference implementation and extract the design: component structure, state, handlers, copy strings, a11y attributes.
+4. Write a concrete spec for implementing it on OUR floor: reuse OUR primitives (src/components/primitives/: Button, IconButton, Pill, Segmented, Disclosure, Dialog, BottomSheet, DesktopOnlyGate, MobileTabStrip, PageHeader, LifecycleSpine, Toast, useDialogFocusTrap, Card, Badge...), OUR copy registry, OUR flags. Never spec a blind copy of THEIRS code that depends on THEIRS-only infrastructure.
+
+Constitutional laws the spec must respect (flag any item that would violate one):
+- Goldens byte-identical (this wave is UI-only; nothing may change generator/domain output).
+- dist budget 1,441,000 bytes with tiny headroom: everything stays LAZY, reuse already-bundled icons, NO new first-paint imports (check how OUR tree lazy-loads big surfaces before speccing an import).
+- Premium faith seam: no new surface may show deity names to free/anon users. If the reference shows deity data, find OUR gating helper and spec it in.
+- a11y where touched: labels, focus management, aria-live for async status.
+- DO NOT TOUCH (owned by concurrent waves): src/components/map/SimulationRulesDialog.jsx, src/domain/worldPulse/** (anything under it), src/store/campaignWorldPulseSlice.js, src/components/SettlementDetail.jsx. If an item seems to require editing one of these, spec a way around it or mark BLOCKED.
+
+Your final message is machine-consumed structured output; be dense and precise with file:line citations.`
+
+phase('Verify')
+
+const prompts = [
+  {
+    label: 'verify:auth',
+    prompt: `${COMMON}
+
+AREA: W5.1 AUTH polish. Worklist items (from the parity ledger, RP-tagged; ledger citations are STALE, re-verify):
+1. "Password path primary (not behind More options)" — ledger: OURS buries password + remember-me + forgot-link inside a disclosure (was AuthPanel.jsx:234-285), magic-link primary; THEIRS makes password the primary path (was THEIRS AuthPanel.jsx:371-396). Design inversion to adopt.
+2. "Magic-link actionable close (Resend / different email)" — ledger: OURS shows a plain green strip (was AuthPanel.jsx:137) with no resend/edit; THEIRS offers Resend / use-a-different-email actions (was THEIRS AuthPanel.jsx:276-292).
+3. "Modal height-bounding for tall sign-up" — ledger: ABSENT in OURS; THEIRS AuthModal.jsx:66-90 bounds height (scrollable body) so a tall sign-up form fits the viewport.
+4. "AuthModal legacy signed-in account card cleanup" — ledger: OURS still renders a full signed-in account card inside AuthModal (was AuthModal.jsx:86-187); THEIRS deleted it and delegates signed-in account UI to AccountMenu. Spec the removal + what should render instead if the modal opens while signed in.
+
+Files to read in OURS: src/components/auth/AuthPanel.jsx, src/components/AuthModal.jsx, src/components/auth/authUI.jsx (or wherever the Input primitive lives), src/components/AccountMenu.jsx, src/store/authSlice.js (only the actions the UI calls: magic link resend etc.). In THEIRS: same paths.
+NOTE: an earlier wave (RP-1, the 7 genuine regressions) may have already landed confirm-password, password show/hide, existing-account detection in OUR AuthPanel — describe the CURRENT AuthPanel structure (modes, disclosure layout, line map) so the implementer knows exactly what is there today. Also check whether OUR sign-up renders SecurityQuestionsFields now (affects how tall the modal gets, item 3).`,
+  },
+  {
+    label: 'verify:generate',
+    prompt: `${COMMON}
+
+AREA: W5.2 GENERATE polish. Worklist items (ledger citations STALE, re-verify):
+1. "Character preset CARD" — 17 archetypes as one-tap grouped chips (THEIRS generate/CharacterPresetCard.jsx + characterPresets.js). Ledger said OURS has the same 17 archetypes as a plain dropdown (was ConfigurationPanel.jsx:12-39,78-87). Promote to chip card.
+2. "Layered progressive-disclosure Create panel + mobile DesktopOnlyGate" — THEIRS generate/LayeredConfigurationPanel.jsx (was :156-163 for the gate). Ledger: OURS shows dense step panels on mobile with no gate. IMPORTANT: this is a paradigm-level item — check what OUR GenerateWizard looks like TODAY (later waves may have restructured it). If adopting the full layered panel is too invasive for a cosmetic wave, spec the mobile DesktopOnlyGate + whatever progressive-disclosure is achievable on OUR current structure, and say so.
+3. "In-toolbar Regenerate + SimulationDrawer trigger" — THEIRS generate/WizardOutputToolbar.jsx (was :90-101): toolbar has Regenerate + a 'How this was simulated' button opening SimulationDrawer. Ledger: OURS toolbar was Back+New only; OUR SimulationDrawer.jsx exists but no toolbar trigger. NOTE OUR tree now HAS src/components/generate/WizardOutputToolbar.jsx — verify what it contains today.
+4. "ChangeModeBar Basic⇄Advanced inline switch" — THEIRS generate/ChangeModeBar.jsx (was :48-54); OURS shows a static mode label (was ChangeModeBar.jsx:26-38).
+5. "WizardEmptyState RegionWakeReplay proof card" — THEIRS generate/WizardEmptyState.jsx (was :54-68); OURS empty state has sample dossier only. RegionWakeReplay component exists in OUR home/ — check.
+6. "WizardCloseout delta recap" — THEIRS generate/WizardCloseout.jsx (was :82-246) 'fully procedural' delta + Place-in-Region line; OURS is the older flat recap. NOTE: OUR tree now has PlaceInRegionCard.jsx (W4 landed it) so the Place-in-Region line may now be relevant.
+7. "PageHeader on config stage" — THEIRS GenerateWizard.jsx (was :422-429); OURS used a gold helper banner. OUR primitives/PageHeader.jsx exists.
+8. "Cross-field consequence hints (magic/threat)" — THEIRS ConfigurationPanel.jsx (was :393-397) consequence subtitles; OURS lacks them.
+
+Files to read in OURS: src/components/GenerateWizard.jsx, src/components/ConfigurationPanel.jsx, src/components/generate/* (ChangeModeBar, WizardOutputToolbar, WizardEmptyState, WizardCloseout, ModeSelector, StepIndicator...), src/store/configSlice.js (preset/mode state), wherever the 17 archetypes data lives. In THEIRS: generate/CharacterPresetCard.jsx, generate/characterPresets.js, generate/LayeredConfigurationPanel.jsx, generate/WizardOutputToolbar.jsx, generate/ChangeModeBar.jsx, generate/WizardEmptyState.jsx, generate/WizardCloseout.jsx, GenerateWizard.jsx, ConfigurationPanel.jsx.
+Also check where SimulationDrawer lives in OURS and how it is opened today (map surface?), and whether opening it from the wizard toolbar creates any first-paint import risk (is it lazy?).`,
+  },
+  {
+    label: 'verify:library',
+    prompt: `${COMMON}
+
+AREA: W5.3 LIBRARY polish. Worklist items (ledger citations STALE, re-verify):
+1. "Draft-phase / has-pending-edits filter chips" — ledger: OUR filter pipeline already supports the keys (was LibraryToolbar.jsx:71-87) but renders no UI chip/segment; THEIRS renders chips (was THEIRS LibraryToolbar.jsx:100-116,430-440).
+2. "Campaign-selector filter dropdown" — THEIRS LibraryToolbar.jsx (was :147-152); ABSENT in OURS.
+3. "Mobile toolbar (BottomSheet filters)" — THEIRS LibraryToolbar.jsx (was :249-352); OURS toolbar has no mobile branch. OUR primitives/BottomSheet.jsx exists.
+4. "No-match recovery CTA + loading skeleton + PageHeader" — THEIRS SettlementsPanel (was panel:651-675,591-596); OURS falls to an inert empty list + plain Loading… text + bare div. OUR primitives/PageHeader.jsx exists.
+
+Files to read in OURS: src/components/library/LibraryToolbar.jsx (or wherever it lives), src/components/SettlementsPanel.jsx, src/components/settlements/* (may now exist after W4: BulkActionBar, SaveQuotaMeter etc. — note what landed, the polish must fit around it). In THEIRS: library/LibraryToolbar.jsx, SettlementsPanel.jsx.
+Note which filter state lives where (local state vs store), how THEIRS structures the BottomSheet mobile branch, and what skeleton pattern THEIRS uses (component? inline?). Check if OUR tree has any existing skeleton primitive/pattern (gallery? library?) to reuse.`,
+  },
+  {
+    label: 'verify:map',
+    prompt: `${COMMON}
+
+AREA: W5.4 MAP polish. Worklist items (ledger citations STALE, re-verify):
+1. "MapLegend (collapsible key: war/faith glyphs, edges, impact scale)" — THEIRS map/MapLegend.jsx mounted in WorldMapStage.jsx (was :32,197). Ledger: OURS has an explicit 'MapLegend is DEFERRED' note in WorldMapStage.jsx (was :32-35). IMPORTANT: W4 landed the WarFaithMapOverlay + war/faith relationship edges in OURS since the survey — verify what overlay/edge vocabulary OUR map renders TODAY so the legend describes OUR actual layers (adopt onto our floor, not a blind copy).
+2. "SettlementPalette threat badges + actionable no-campaign empty state" — THEIRS SettlementPalette.jsx (was :14,179-193 badges, :83-114 empty state) + settlementThreat.js helper; OURS palette cards carry no threat badge, empty state is a plain hint.
+3. "AnnotateToolbar Forest tool" — THEIRS AnnotateToolbar.jsx (was :80-83,153-162); OURS can't author forests though ForestsLayer renders existing ones.
+
+Files to read in OURS: src/components/map/WorldMapStage.jsx, src/components/map/SettlementPalette.jsx, src/components/map/AnnotateToolbar.jsx, src/components/map/ForestsLayer.jsx (how forests are stored/rendered), the map store slice that holds annotations (find it), src/components/map/MapLegend.jsx IF it now exists, and whatever threat helper exists (src/lib/ or map/). In THEIRS: map/MapLegend.jsx, map/SettlementPalette.jsx, map/settlementThreat.js, map/AnnotateToolbar.jsx and the store code path that persists a forest annotation.
+FENCE WARNING: src/components/map/SimulationRulesDialog.jsx, src/domain/worldPulse/**, src/store/campaignWorldPulseSlice.js are DO-NOT-TOUCH. If the Forest tool or legend requires touching any of those, spec the workaround or mark BLOCKED. Also check the faith seam: if the legend names deities or faith glyphs reveal deity names, find OUR premium gating helper (how does FaithSection / PantheonPanel gate free users?) and spec the gate.`,
+  },
+  {
+    label: 'verify:dossier',
+    prompt: `${COMMON}
+
+AREA: W5.5 DOSSIER polish. Worklist items (ledger citations STALE, re-verify):
+1. "DossierActionBand consolidated chrome band" — THEIRS OutputContainer.jsx (was :45,795) renders dossier/DossierActionBand.jsx; OURS hand-rolls the strip inline (was OutputContainer.jsx:653-683).
+2. "LifecycleSpine breadcrumb in-dossier" — THEIRS OutputContainer.jsx (was :18,746,788) renders the draft→shared LifecycleSpine; OUR primitives/LifecycleSpine.jsx EXISTS — check who imports it today and what props it takes; spec the dossier mount.
+3. "MobileTabStrip mount" — OUR primitives/MobileTabStrip.jsx exists but ledger says unimported in the dossier; THEIRS OutputContainer.jsx (was :42,838-839) mounts it for tab nav on mobile. Check OUR OutputContainer's current tab model (TAB_GROUPS, allTabs — W4 added Substrate/Magic/WarFaith tabs since the survey) and spec the mobile strip on OUR tab set.
+4. "Remove the dead 'simulation' switch case in OutputContainer.jsx (~line 626, unreachable)" — verify it is truly unreachable in OUR tree TODAY (is 'simulation' in allTabs/TAB_GROUPS? any renderTab caller passing it?), then spec the removal.
+
+Files to read in OURS: src/components/OutputContainer.jsx (the whole tab model + chrome strip area), src/components/primitives/LifecycleSpine.jsx, src/components/primitives/MobileTabStrip.jsx, src/components/dossier/* (does DossierActionBand.jsx exist now?). In THEIRS: OutputContainer.jsx, dossier/DossierActionBand.jsx.
+FENCE WARNING: src/components/SettlementDetail.jsx is DO-NOT-TOUCH (concurrent wave). If any mount point lives in SettlementDetail.jsx rather than OutputContainer.jsx, spec the OutputContainer-only version or mark that piece BLOCKED. Also verify how OUR OutputContainer is loaded (lazy?) and confirm none of these adds a first-paint import.`,
+  },
+  {
+    label: 'verify:gallery',
+    prompt: `${COMMON}
+
+AREA: W5.6 GALLERY polish. Worklist item (ledger citations STALE, re-verify):
+1. "List/detail skeletons + aria-live + filtered-empty recovery" — THEIRS GalleryList.jsx (was :107-142) + GalleryDetail.jsx: loading skeletons for list and detail, aria-live status for async loads, and a 'no results match your filters' empty state with a clear-filters recovery CTA. Ledger: OURS lighter — missing skeleton/empty-recovery.
+
+Files to read in OURS: src/components/GalleryPage.jsx, src/components/gallery/GalleryList.jsx, src/components/gallery/GalleryDetail.jsx, src/components/gallery/GallerySidebar.jsx (filter state — where do active filters live, how would 'clear filters' dispatch?), the gallery hook/store (useGallery? gallerySlice?). In THEIRS: gallery/GalleryList.jsx, gallery/GalleryDetail.jsx, GalleryPage.jsx.
+Note: W4 may have landed gallery work since the survey (maps tab wiring, import flow) — describe the CURRENT loading/empty rendering paths with live line numbers. Check whether OUR tree has an existing skeleton pattern to reuse (search for 'skeleton' across src/). a11y: spec exact aria-live placement (polite region announcing 'Loading gallery…' → 'N results').`,
+  },
+  {
+    label: 'verify:eventcomposer',
+    prompt: `${COMMON}
+
+AREA: W5.7 EVENTCOMPOSER field modules. THEIRS has 16 files under settlement/eventComposer/, OURS has 8 (BatchCart.jsx, EventComposerConstants.js, EventComposerTargetField.jsx, Field.jsx, PreviewPanel.jsx, helpers.js + others — list what is actually there). The 8 ABSENT modules: AddNpcTraitFields, EventComposerCorruptionFields, EventComposerDeityField, EventComposerLinkNeighbourField, EventComposerRelationshipExtras, EventComposerSecondaryFields, EventComposerTierField, buildEvent.js.
+
+ADOPTION RULE (critical): adopt a module ONLY if its event kind + store apply-path exists in OUR registry. For EACH of the 8 modules:
+1. Read the THEIRS module: which event kind(s) does it emit (look at buildEvent.js + EventComposerConstants.js in THEIRS for the kind strings), what fields, what payload shape.
+2. Search OUR tree for that event kind: the event registry / constants (OUR src/components/settlement/eventComposer/EventComposerConstants.js, OUR domain event definitions — search src/domain/ for the kind strings), AND the store apply path (search src/store/settlementSlice.js and related appliers for a case/handler for that kind — e.g. SHIFT_TIER for TierField, corruption kinds for CorruptionFields, deity kinds for DeityField which pairs with the W-C4 deity work that landed in Phase 5).
+3. Verdict per module: BACKED (kind + apply path exist in OURS — cite file:line for both) → READY with spec; UNBACKED (kind absent from OUR registry or no apply path) → BLOCKED with exactly what is missing (this becomes a STOP-AND-REPORT in the final report).
+4. buildEvent.js: check what OUR composer uses instead today (helpers.js? inline?) — spec adoption only for the kinds that are BACKED; the builder must not emit unbacked kinds.
+
+Files to read: OURS src/components/settlement/EventComposer*.jsx (the composer host — find it), src/components/settlement/eventComposer/*, src/store/settlementSlice.js (the event apply switch), src/domain/** event registry/constants (search for kind strings like SHIFT_TIER, ADD_NPC etc.). THEIRS: settlement/eventComposer/* (all 16), the THEIRS store apply path for comparison.
+FAITH SEAM (critical): EventComposerDeityField shows deity names. Find how OUR tree gates deity names from free/anon users (FaithSection? a premium hook? tier check helper?) and spec the same gate on the field. Also check how the composer host renders field modules per selected event kind (the switch/map that must be extended).`,
+  },
+  {
+    label: 'verify:admin-infra',
+    prompt: `${COMMON}
+
+TWO JOBS in one agent.
+
+JOB A — AREA W5.8 ADMIN: "mobile DesktopOnlyGate on AdminPanel" — THEIRS AdminPanel.jsx (was :402) wraps the console in a DesktopOnlyGate on mobile; OURS renders the full console on mobile. Read OUR src/components/AdminPanel.jsx (top-level render structure; note W4 may have added panels) + OUR src/components/primitives/DesktopOnlyGate.jsx (its API: props, breakpoint mechanism, who uses it today — cite an existing usage as the pattern to copy) + THEIRS AdminPanel.jsx gate usage. Report as one item.
+
+JOB B — INFRASTRUCTURE scout for the whole wave (report as additional items, one per topic):
+1. GATES: read package.json scripts + tests/build/* — what exactly does verify:dist assert (budget number, first-paint contracts, engine-chunk contracts)? How are goldens tagged/run (npx vitest run -t "golden" — which test files)? What ui/test suites exist under tests/ that touch auth/generate/library/map/dossier/gallery/eventComposer/admin surfaces (list file names — the implementer must run the relevant ones per sub-wave)?
+2. DIST BUDGET: read the current budget assertion and, if a manifest/size snapshot exists in-repo, the current headroom. Which chunks exist (how is the app code-split — manualChunks in vite.config? lazy() boundaries?)? What is on the first-paint path (main chunk) — so the implementer knows which import edges are forbidden.
+3. COPY REGISTRY: how does UI copy work (src/copy/en.js? a t() helper? direct strings?) — cite the pattern with file:line and one example of adding a key.
+4. FAITH SEAM: find the premium/deity gating helper(s) (how FaithSection/PantheonPanel decide whether to show deity names; tier/anon checks) — cite file:line and the exact idiom new surfaces must use.
+5. ICONS: how are icons provided (IconsContext.js? lucide? inline SVG?) — what does 'reuse bundled icons' mean concretely; how to check an icon is already in the bundle.
+6. RATCHETS: any UI ratchet tests (raw-button ratchet, a11y ratchets, import ratchets) under tests/ that this wave could trip — list them with what they assert.
+Read: package.json, vite.config.*, tests/build/*, tests/ui/* (list), src/copy/* or src/lib/copy*, src/components/settlement/FaithSection.jsx (gating idiom), src/components/primitives/IconsContext.js, any tests with 'ratchet' in the name.`,
+  },
+]
+
+const results = await parallel(prompts.map(p => () => agent(p.prompt, { label: p.label, phase: 'Verify', schema: SCHEMA })))
+return { results: results.filter(Boolean) }

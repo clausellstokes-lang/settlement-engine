@@ -1,0 +1,43 @@
+export const meta = {
+  name: 'chronic-tier-deepening',
+  description: 'Deepen chronic-kind pools to the frequency-scaled floor + author the legacy annex',
+  phases: [
+    { title: 'Census', detail: 'chronic-tier lists per annex + the live legacy token census' },
+    { title: 'Author', detail: '8 deepeners + 1 legacy author' },
+    { title: 'Verify', detail: '3 conformance checkers' },
+  ],
+}
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const VOICE_PTR = `THE VOICE CONTRACT + slot convention live in the annex headers under ${MF}/docs/content/ — read your annex's header first and obey it exactly (Bound-Book chronicle register; no digits; slots for proper nouns; belief attribution; Law One; no named deaths; angle-distinct variants — slot-swaps count as one; 1-2 clauses).`
+const PRE = `VERIFY-FIRST: legitimate owner-ordered CONTENT DEEPENING (the spine's frequency-scaled floor amendment, 2026-08-03: chronic/routine kinds >=8-12 angle-distinct variants, notable >=6, major/rare >=4). Tree: ${MF} (shared; edit ONLY your assigned annex file; NEVER edit volumes or src/; no git).`
+const CSCHEMA = { type:'object', required:['perAnnexChronic','legacyTokens'], properties:{
+  perAnnexChronic:{type:'array',items:{type:'object',required:['annex','chronicKinds','notableKinds'],properties:{
+    annex:{type:'string'},chronicKinds:{type:'array',items:{type:'string'}},notableKinds:{type:'array',items:{type:'string'}}}}},
+  legacyTokens:{type:'array',items:{type:'object',required:['kind','currentVariants','cadence'],properties:{
+    kind:{type:'string'},currentVariants:{type:'number'},cadence:{type:'string'}}}}}}
+const WSCHEMA = { type:'object', required:['annex','kindsDeepened','variantsAdded','samples'], properties:{
+  annex:{type:'string'},kindsDeepened:{type:'number'},variantsAdded:{type:'number'},samples:{type:'array',items:{type:'string'}}}}
+const VSCHEMA = { type:'object', required:['scope','violationsFixed','belowFloor','verdict'], properties:{
+  scope:{type:'string'},violationsFixed:{type:'number'},belowFloor:{type:'array',items:{type:'string'}},verdict:{type:'string'}}}
+
+phase('Census')
+const census = await agent(`${PRE}
+CENSUS (read-only): (1) For each of the 8 annexes in ${MF}/docs/content/RECEIPT_POOLS_*.md, classify every kind by cadence from its significance class + its volume's Clock lines: CHRONIC (weekly-to-seasonal firing — arrivals, market/season/counsel/crossing beats, standing hums, compliance ticks), NOTABLE (monthly-to-yearly), MAJOR/RARE (leave alone). Return the chronic + notable kind-id lists per annex. (2) THE LEGACY CENSUS: from the tree, enumerate the LIVE routed news tokens (src/domain/display/settlementRumors.js WHAT_PHRASES + src/domain/display/heraldRouting.js + the impactKind walkers in tests/domain/) with each kind's CURRENT variant count in its producing code (most are single-string) and your cadence classification. Return every live kind below its frequency-scaled floor.`, {label:'census', phase:'Census', model:'opus', schema:CSCHEMA})
+
+phase('Author')
+const annexNames = ['WAR','TRADE','FAITH','POPULATIONS','INFORMATION','GRAMMAR','INTERIOR','COUPLINGS']
+const results = await parallel([
+  ...annexNames.map(name => () => {
+    const row = (census.perAnnexChronic||[]).find(r => (r.annex||'').toUpperCase().includes(name)) || {chronicKinds:[],notableKinds:[]}
+    return agent(`${PRE}\n${VOICE_PTR}\nASSIGNMENT (deepener): in ${MF}/docs/content/RECEIPT_POOLS_${name}.md, raise these CHRONIC kinds to 8-12 angle-distinct variants each: ${JSON.stringify(row.chronicKinds)} — and these NOTABLE kinds to >=6: ${JSON.stringify(row.notableKinds)}. Add variants IN PLACE under each kind's existing block (never renumber or alter existing variants — append). Widen the angle palette as needed: the event plain / the street / the institution's ledger / the consequence forward / the understatement / the traveler's report / the season's frame / the small human detail. Return {annex, kindsDeepened, variantsAdded, samples: 4}.`, {label:`deepen:${name.toLowerCase()}`, phase:'Author', model:'opus', schema:WSCHEMA})
+  }),
+  () => agent(`${PRE}\n${VOICE_PTR}\nASSIGNMENT (legacy author): create ${MF}/docs/content/RECEIPT_POOLS_LEGACY.md for the LIVE routed tokens the census found below floor: ${JSON.stringify((census.legacyTokens||[]).slice(0,200))}. Header: note these pools RETROFIT live kinds — wiring is a DISCLOSED same-seed prose shift under the spine's frequency-scaled-floor amendment (the recorded ruling; per-kind golden plan lands at wiring; variant 1 of every pool MUST be the kind's CURRENT live string VERBATIM so the dark path stays byte-identical and the pool only ever widens). Then author each kind to its floor (chronic 8-12 / notable 6 / rare 4). Return {annex:'LEGACY', kindsDeepened, variantsAdded, samples: 5}.`, {label:'author:legacy', phase:'Author', model:'opus', schema:WSCHEMA}),
+])
+
+phase('Verify')
+const ver = await parallel([
+  () => agent(`${PRE}\nVERIFIER (adversarial; fix in place): re-check ${MF}/docs/content/RECEIPT_POOLS_{WAR,TRADE,FAITH}.md deepened blocks against the annex-header contract + the frequency floor: angle-distinctness (collapse slot-swaps and re-author), digits, slots, belief attribution, Law One, no renumbering of pre-existing variants (verify against git diff). Return {scope:'WAR+TRADE+FAITH', violationsFixed, belowFloor, verdict}.`, {label:'verify:wtf', phase:'Verify', model:'opus', schema:VSCHEMA}),
+  () => agent(`${PRE}\nVERIFIER (adversarial; fix in place): same check for ${MF}/docs/content/RECEIPT_POOLS_{POPULATIONS,INFORMATION,GRAMMAR,INTERIOR,COUPLINGS}.md. Return {scope:'POP+INFO+GR+INT+CPL', violationsFixed, belowFloor, verdict}.`, {label:'verify:pigic', phase:'Verify', model:'opus', schema:VSCHEMA}),
+  () => agent(`${PRE}\nVERIFIER (adversarial; fix in place): check ${MF}/docs/content/RECEIPT_POOLS_LEGACY.md — every pool's variant 1 must equal the live tree string VERBATIM (verify against the actual source reads; fix any drift), floors met, contract held, the disclosed-shift header present and honest. Return {scope:'LEGACY', violationsFixed, belowFloor, verdict}.`, {label:'verify:legacy', phase:'Verify', model:'opus', schema:VSCHEMA}),
+])
+return { census: {chronic: (census.perAnnexChronic||[]).length, legacy: (census.legacyTokens||[]).length}, authored: results.filter(Boolean), verified: ver.filter(Boolean) }

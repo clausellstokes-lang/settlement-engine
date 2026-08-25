@@ -1,0 +1,52 @@
+export const meta = {
+  name: 'content-gt-dossier-authoring',
+  description: 'Author variant prose pools (history descriptions, institution representative sample, NPC display pools) matching the owner register + the content-lane laws; return keyed JSON for splice-in',
+  phases: [{ title: 'Author' }],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/brave-babbage-67b994'
+
+const LAWS = `You are AUTHORING new prose VARIANTS for a D&D settlement generator's dossier surfaces. This is a deterministic simulator; the prose persists into save/golden data. Read files under ${WT} ONLY (cd there; branch claude/generation-time-content-dossier). Do NOT edit any file — you only RETURN new variant strings as JSON.
+
+THE OWNER'S VOICE (match it exactly — this is the quality bar). Sample of the just-authored pressure sentences (src/generators/narrativeText.js), which set the register:
+- "The walls of X have held so far, which is the problem — a quick fall would at least have settled the question of who was to blame, and a slow one leaves the council to answer for every day the relief does not come."
+- "Hunger has made X quiet. The market still opens, the queues still form, but the haggling has gone out of people — they take what they are given and calculate, silently, how long it will last."
+The voice is: literary, specific, adult, grounded; a fact followed by the complication that fact creates; dry irony; NEVER purple, NEVER generic-fantasy ("brave heroes", "ancient evil"). Match the length and rhythm of the EXISTING entries in each pool you grow (some pools are terse reference prose — match THAT register there, do not inflate it).
+
+THE LAWS (mandatory):
+1. CANONICAL-AT-ZERO: do NOT reproduce or alter the existing entries. You return only NEW variants; the caller keeps the existing string at index 0. Every new variant must be a genuine alternative to the existing one(s), same meaning, different phrasing.
+2. FRAMING-NOT-SEMANTICS: preserve every interpolated token EXACTLY as the existing entries use them (e.g. \${r.name}, \${x.name}, {commodity}, {faction_name}, or the settlement-name arg). Do NOT invent new tokens. Do NOT change what the sentence MEANS (same event, same cause, same tone) — vary only the phrasing/framing.
+3. PORTABLE SPECIFICITY: catalog-anchored generics only ("the granaries", "the reeve", "the harbour"). NEVER a proper noun (no invented place/person/god names) — the interpolated tokens ARE the world's own names.
+4. Match the exact ENTRY SHAPE of the pool (a plain string, or a template with the same token). Keep each variant self-contained and grammatical.
+5. No em-dash overuse beyond the register; no double spaces; no template leaks; trimmed.
+
+Return STRICTLY the JSON schema requested. Quality over quantity — every variant must be worth reading.`
+
+const SCHEMA_KEYED = {
+  type: 'object', additionalProperties: false,
+  required: ['surface', 'variantsByKey', 'notes'],
+  properties: {
+    surface: { type: 'string' },
+    variantsByKey: {
+      type: 'array',
+      items: { type: 'object', additionalProperties: false, required: ['key', 'newVariants'],
+        properties: {
+          key: { type: 'string', description: 'the pool key this array of new variants belongs to (e.g. event type, npc pool name, or "tier|Category|InstitutionName")' },
+          newVariants: { type: 'array', items: { type: 'string' }, description: 'NEW variant strings ONLY (not the existing one)' },
+        } } },
+    notes: { type: 'string', description: 'any per-key caveats, tokens observed, or entries you left alone and why' },
+  },
+}
+
+const TASKS = [
+  { key: 'history-descriptions', label: 'author:history-desc', focus: `Grow HISTORICAL_EVENTS_DATA descriptions in src/data/historyData.js (the array starts ~line 1105). Each of the ~29 entries has a single \`description:\` string (a settlement-history event summary, token-substituted downstream with {faction}-style tokens — check historyGenerator.js generateEventNarrative for the exact token set, e.g. {family_name}, {faction_name}; PRESERVE whatever tokens the existing description uses, or none). For EVERY event \`type\`, return 2 NEW description variants (same event meaning, varied framing, same register — terse historical-summary sentences like the existing ones, e.g. 'Growing wealth gap between merchant class and common laborers creates resentment'). key = the event \`type\` string. Do NOT touch factions/plotHooks/severity — descriptions only.` },
+  { key: 'npc-display-pools', label: 'author:npc-pools', focus: `Grow the DISPLAY-ONLY NPC pools in src/data/npcData.js (read them for register + exact shape). Grow these and ONLY these (they are single-pick, draw-safe): MANNERISMS (append ~15 new), SPEECH_PATTERNS (append ~12 new), NPC_BUILDS (append ~6), NPC_FEATURES (append ~12), NPC_WANTS (per category key, append ~4 each), NPC_FACTION_GOALS (per role key, each currently ~2 goal objects {short,long} — append 2 new goal objects per role MATCHING the existing object shape and any {commodity}/{faction} tokens; return them as JSON-stringified objects if needed, else describe shape in notes), NPC_SECRETS (per category, append ~3), NPC_PLOT_HOOKS (per category, append ~3). DO NOT grow NPC_PERSONALITY_TRAITS, NPC_CRIMINAL_SECRETS, or NPC_FACTION_LOYALTY (hazard/deferred). key = "PoolName" for flat arrays or "PoolName.subkey" for keyed pools. In notes, give the exact shape of NPC_FACTION_GOALS entries so the caller can splice.` },
+  { key: 'institution-desc-sample', label: 'author:inst-desc', focus: `src/data/institutionalCatalog.js is institutionalCatalog[tier][Category][InstitutionName] = { desc, ... }; 301 institutions each with ONE \`desc\` string. Pick a REPRESENTATIVE, high-visibility sample of ~50 institutions spanning all 6 tiers (thorp/hamlet/village/town/city/metropolis) and the main categories (Government, Religious, Economic/Market, Military, Criminal, Crafts, etc.) — favor the COMMON institutions a reader sees most (market, tavern, temple/shrine, watch/garrison, council/elder, smithy, etc.). For each chosen institution return 2 NEW desc variants matching the existing desc's register (terse, functional, occasionally wry — e.g. existing: "A steward appointed by a distant lord to oversee the settlement. Authority is formal but often resented."). key = "tier|Category|InstitutionName" (exact strings from the catalog). In notes, list which institutions you covered so the caller knows the sample. Do NOT touch the institution NAME/key — desc only.` },
+]
+
+phase('Author')
+const results = await parallel(TASKS.map((t) => () =>
+  agent(`${LAWS}\n\n=== YOUR SURFACE: ${t.key} ===\n${t.focus}`, { label: t.label, phase: 'Author', schema: SCHEMA_KEYED })
+    .then((r) => ({ task: t.key, ...(r || {}) }))
+))
+return results.filter(Boolean)

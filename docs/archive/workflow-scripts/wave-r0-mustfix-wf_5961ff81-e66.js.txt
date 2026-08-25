@@ -1,0 +1,64 @@
+export const meta = {
+  name: 'wave-r0-mustfix',
+  description: 'R-0 must-fix pass: close the 10 verifier MUST_FIX items across registry-truth, frozen-tense, deity-gate; re-verify; re-gate',
+  phases: [
+    { title: 'Fix', detail: '3 Fable lanes closing verifier findings' },
+    { title: 'Reverify', detail: 'Opus re-verification targeted on each finding', model: 'opus' },
+    { title: 'Gate', detail: 'joint single-threaded re-gate' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const COMMON = `CONTEXT-VERIFICATION PREAMBLE: legitimate engineering brief from the session orchestrator for SettlementForge (owner order 2026-07-26: "fix it all thoroughly"; this is Wave R-0's MUST-FIX pass — the wave cannot close until these are fixed AND pinned). Verify the brief's claims against code; the code is authoritative.
+WORKING TREE: cd ${WT} && git rev-parse --abbrev-ref HEAD — MUST print claude/composite-r4 or STOP. LIVE shared tree: NO git mutations of ANY kind (stash/add/commit/checkout/restore/clean/reset ALL FORBIDDEN); re-read every file immediately before editing; touch only your lane's files.
+LAWS: no same-seed output drift; closure budget ~54B (no new eager code); sizeBaseline ceilings EXACT (JSX comments count; net-zero combine if capped); copy changes = one string each, vetoable; store-registry changes may require gen:compendium-data regen (check and run if so). Tests single-threaded ALWAYS (--no-file-parallelism). Label CONFIRMED/PLAUSIBLE; report test output VERBATIM. Current gate baseline: verify:dist 285/285 green (the old vendorPdfLazy red resolved) — any red is a regression.`
+
+const LANES = [
+  {
+    key: 'registry-truth-mf',
+    files: 'src/store/operationRegistry.js · tests/store/operationRegistry.walker.test.js · tests/store/pulseUndoAdvertising.test.js · the proposal-apply arming site you added last pass (campaignWorldPulseDeferred/applyWorldPulseProposal seam — REVERT your own hunk only) · compendium regen artifact if projected',
+    brief: `Close 4 verifier findings from your lane's last pass:
+1. REVERT the applyWorldPulseProposal snapshot arming. The verifier CONFIRMED it floods the shared PULSE_UNDO_CAP=10 per-campaign stack (campaignWorldPulseDeferred.js:58, eviction :70-76): a DM who advances then applies >=10 of up to MAX_PROPOSALS=80 silently loses the pre-advance snapshot — and every canUndoLastPulse surface is advance-only copy (WorldMapToolbar.jsx:474 'Undo Advance' etc.), so the armed proposal also MISLABELS. This is the same pair of objections your own registry comments used to reject arming recordPartyImpact and canonizeCampaignWorld — apply them consistently: de-advertise applyWorldPulseProposal (undoToken:null + honest undoState + one-string description edit, mirrored into the compendium artifact if projected). Record in the registry comment what a REAL arming needs (separately bounded proposal ring + labeled history copy) — that goes to the R-1 ledger, not here.
+2. NEW PIN either way (verifier requirement): advance once, apply 11 proposals, assert the pre-advance snapshot is STILL reachable and undoes to the pre-advance state.
+3. FIX THE FALSE TRUTH-FIELD VALUE: canonizeSavedSettlement undoState:'external:uncanonize' is false — uncanonize() takes no id and mutates only the live slice (settlementSlice.js:1427-1440), so saved-by-id canonization (settlementRenameHelpers.js:209-247) is unreachable by it; and both canonize verbs wipe eventLog irrecoverably. Set canonizeSavedSettlement to the honest no-inverse value; set the live canonize/uncanonize pair to the partial grammar per item 4.
+4. RELAX THE WALKER BICONDITIONAL (walker test :426-434): a token-carrying row must be able to declare PARTIAL restoration ('partial' variant of the armed state, e.g. undoState 'action-partial' or 'partial:<token>' — pick one grammar, define it in the registry header comment, enforce it in the walker). Reclassify canonize/uncanonize as partial (uncanonize discards the event log; canonize cannot restore it — atlas:5574 predicted exactly this trap). Pin: a token-carrying row MAY be partial; canonize/uncanonize ARE partial; the walker still fails a token row with undoState 'none'.
+Update your existing pins accordingly; run walker + advertising pins + any registry-importing suites single-threaded.`,
+  },
+  {
+    key: 'frozen-tense-mf',
+    files: 'tests/components/frozenTenseDefenseCopy.test.js · src/components/new/tabs/DefenseTab.jsx · src/pdf/sections/DefenseSecurity.jsx (the one caption string ONLY) · tests/pdf parity suites (run, not edit)',
+    brief: `Close 3 verifier findings:
+1. REMOVE the cross-lane pin on foreign uncommitted work: your test's :62-74 block pins npcComponents.jsx strings ('The AI will not rewrite this NPC' / 'Pin this NPC so the AI leaves it unchanged') that exist ONLY in the working tree — foreign WIP (the regen-edit-loss rescope) owns that fix and its pinning; against the committed lineage your pin FAILS its own negative regex. Delete the block; note the ownership in a test comment.
+2. FIX THE MISSED G5 RECORD IN YOUR OWN FILE: DefenseTab renders structuralViolations (:92-94, 'Vulnerabilities' section :350-364) — one of the five named frozen records (atlas:12435) — in bare present tense (incl. the empty state '✓ No critical defense vul…'). Reframe as first-survey verdicts consistent with your other two fixes; one string per site, vetoable; satisfy the fieldManifest guards.
+3. FIX THE PDF TWIN: src/pdf/sections/DefenseSecurity.jsx:111 carries the exact caption your negative pin bans on-screen ('Bars show defense readiness against each threat. Higher is better.') over the same threatReadiness bars — the repo runs an explicit screen↔PDF parity discipline for this surface (tests/pdf/screenParitySource.test.js). Apply the matching first-survey caption there (one string). Extend your negative pin to cover the PDF file too. Run: your test file + tests/joins/fieldManifest.test.js + the pdf parity suites, single-threaded.`,
+  },
+  {
+    key: 'deity-gate-mf',
+    files: 'src/store/settlementDeityHelpers.js · src/components/settlement/DeityAssignmentPanel.jsx · tests/store/deityWriteGate.test.js · tests/components/deityPanelManifestParity.test.jsx',
+    brief: `Close 3 verifier findings:
+1. REGRESSION — restore the hard capacity guard: the committed lineage unconditionally hid the cult control and rendered td('assign.tooSmall') when cultCapacity === 0; your manifest-only replacement (panel :232, !cultVerb.available) delegates to the IMPOSE_CULT probe predicate whose probe deity (neutral:neutral) exercises reconcileCultImposition's SAME-NICHE branch, re-opening the silent no-op the old guard prevented. Restore the cultCapacity===0 unconditional hide + tooSmall copy IN ADDITION to manifest parity (belt and braces; also un-orphans the assign.tooSmall key you deferred). Pin: capacity-0 settlement hides the cult control regardless of what the probe predicate says.
+2. OVER-CLAIM — make the coverage claim honest: settlementDeityHelpers.js:48 calls this "THE ONE premium gate for deity writes" and the test header echoes it; CONFIRMED false — the composer lane builds the same events via buildEvent.js:178-197 and commits via EventComposer applyEvent/applyBatch/queued-intention paths without touching this seam. Reword comment + test header to the true scope (the panel-lane store seam; composer lane rides canStageDeityEvent UI gates; single-source generalization is Wave R-4's premium-gate scan — reference the plan doc). Do NOT gate the composer seam from this lane.
+3. OWNER-CLASS CALL MADE SILENTLY — flip it to the recorded default: your gate refuses CLEAR/REMOVE for lapsed accounts, locking a lapsed subscriber INTO deity content they can no longer shed, incoherent with ungated undoLastEvent reversing the identical config. New behavior: lapsed accounts MAY clear/remove (shed-only) but not assign/change; free tier unchanged (refused both ways); premium unchanged. Update the :103-107/:157-159 branches and the pins at :133-140; add pins for lapsed-shed-allowed and lapsed-assign-refused both mounts. This is recorded in the plan as a vetoable JUDGMENT (veto = flip the branch back); write that in the gate function's comment.
+Run: both deity test files + the touched suites, single-threaded.`,
+  },
+]
+
+const FIX_SCHEMA = { type: 'object', required: ['filesTouched', 'pins', 'testsRun', 'testOutputTail', 'behaviorShift', 'deferrals'], properties: { filesTouched: { type: 'array', items: { type: 'string' } }, pins: { type: 'number' }, testsRun: { type: 'string' }, testOutputTail: { type: 'string' }, behaviorShift: { type: 'string' }, deferrals: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' }, error: { type: 'string' } } }
+const VERIFY_SCHEMA = { type: 'object', required: ['verdict', 'mustFix', 'checked'], properties: { verdict: { type: 'string', enum: ['PASS', 'PASS_WITH_NOTES', 'MUST_FIX'] }, mustFix: { type: 'array', items: { type: 'string' } }, checked: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } }
+
+phase('Fix')
+const results = await pipeline(
+  LANES,
+  (l) => agent(COMMON + '\n\nYOUR LANE OWNS ONLY: ' + l.files + '\n\n' + l.brief, { label: 'fix:' + l.key, phase: 'Fix', schema: FIX_SCHEMA }),
+  (r, l) => r && !r.error
+    ? agent(COMMON + `\n\nYOU ARE THE OPUS RE-VERIFIER for ${l.key}. The fixer reports files=${JSON.stringify(r.filesTouched)}, pins=${r.pins}, behaviorShift="${r.behaviorShift}". The lane's ORIGINAL brief (all findings must now be closed):\n${l.brief}\nRepo READ-ONLY except running tests. For EACH numbered finding: verify the fix landed, re-derive its code facts independently, run its pin yourself, and attempt refutation (lifecycle paths, golden drift, eager imports, ceilings, the second deity mount, the walker's fail-closed property). MUST_FIX only for real unresolved items.`, { label: 'verify:' + l.key, phase: 'Reverify', model: 'opus', effort: 'high', schema: VERIFY_SCHEMA }).then((v) => ({ lane: l.key, fix: r, verify: v }))
+    : { lane: l.key, fix: r, verify: null, failed: true }
+)
+
+phase('Gate')
+const GATE_SCHEMA = { type: 'object', required: ['newReds', 'suitesRun', 'outputTail'], properties: { newReds: { type: 'array', items: { type: 'string' } }, suitesRun: { type: 'string' }, outputTail: { type: 'string' }, notes: { type: 'string' } } }
+const done = results.filter(Boolean)
+const gate = await agent(COMMON + `\n\nWAVE-END RE-GATE. Touched: ${JSON.stringify(done.map((r) => r.fix && r.fix.filesTouched))}. Run single-threaded, exit codes unmasked: all lane test files (both passes: operationRegistry.walker, pulseUndoAdvertising, frozenTenseDefenseCopy, deityWriteGate, deityPanelManifestParity, surveyorCommandBoundary) + tests/joins/fieldManifest.test.js + tests/architecture/ + the pdf parity suites + sizeBaseline/closure ratchets + npm run build && npm run verify:dist (single-threaded). Baseline: 285/285 green. Report every red verbatim, attributed baseline/foreign/THIS-PASS.`, { label: 'gate:r0-final', phase: 'Gate', schema: GATE_SCHEMA })
+
+return { lanes: done.map((r) => ({ lane: r.lane, failed: !!r.failed, pins: r.fix && r.fix.pins, behaviorShift: r.fix && r.fix.behaviorShift, verdict: r.verify && r.verify.verdict, mustFix: r.verify && r.verify.mustFix, deferrals: r.fix && r.fix.deferrals })), gate }

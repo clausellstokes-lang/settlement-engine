@@ -1,0 +1,112 @@
+export const meta = {
+  name: 'verify-resource-taxonomy-fix',
+  description: 'Adversarially verify the resourceTaxonomy misclassification fix (grain_fields, coal_deposits)',
+  phases: [{ title: 'Verify', detail: 'three independent skeptic lenses' }],
+};
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/brave-babbage-67b994';
+const CONTEXT = `
+You are adversarially verifying a bug fix on branch claude/fix-resource-taxonomy-boundaries
+(off review-fixes tip b9eddc3b) in the worktree ${WT}.
+
+THE FIX (src/domain/worldPulse/resourceTaxonomy.js) corrects two pre-existing misclassifications
+in classifyResource(), which sorts each RESOURCE_DATA entry (src/data/resourceData.js) into a
+{kind, renewability, recoveryMode} by regex over key+label+desc+category+commodities+tradeGoods:
+  1. grain_fields was 'magical' because the desc "wheat, barley, and oats" tripped the unanchored
+     'ley' in MAGICAL_PATTERNS (substring of "barley"). Fix: /ley/ -> /\\bley\\b/.
+  2. coal_deposits was 'renewable' because its commodities:["timber"] tripped RENEWABLE /timber/,
+     bumping it out of the "nonrenewable && !renewable" branch. Fix: a subterranean-category
+     resource never sets renewable (mined seams are exhaustible) -> the 'renewable' const is now
+     "spec.category !== 'subterranean' && RENEWABLE_PATTERNS.some(...)".
+  3. Hardening: 'ore' and 'coal' in NONRENEWABLE_PATTERNS got leading \\b anchors so they stop
+     matching "forest"/"shore"/"charcoal" (currently masked by renewable co-matches).
+The claim is: EXACTLY two catalog keys change classification (grain_fields, coal_deposits), both
+to correct values, with ZERO collateral change to the other 31 keys; recoveryMode 'manual' is the
+W-DISCOVERY removal gate (resourceDynamicsKernel.js), so coal becoming removable and grain NOT
+being removable is the intended consequence. A pin test lives at
+tests/domain/resourceTaxonomyClassification.test.js.
+
+Read the actual files. Default your verdict to FAIL/real-problem if you are uncertain. Return your
+structured verdict.`;
+
+const VERDICT = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['lens', 'verdict', 'findings', 'summary'],
+  properties: {
+    lens: { type: 'string' },
+    verdict: { type: 'string', enum: ['PASS', 'FAIL'] },
+    findings: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['severity', 'detail'],
+        properties: {
+          severity: { type: 'string', enum: ['blocker', 'concern', 'nit'] },
+          detail: { type: 'string' },
+        },
+      },
+    },
+    summary: { type: 'string' },
+  },
+};
+
+const lenses = [
+  {
+    key: 'correctness',
+    prompt: `${CONTEXT}
+
+LENS = CORRECTNESS. Independently verify the regex/logic changes:
+- Does /\\bley\\b/ still match the standalone "ley" of magical_node's "Magical Ley Line Node" label,
+  while NOT matching "barley"? Does anything else in the catalog contain a standalone "ley"?
+- Does the subterranean rule wrongly suppress a LEGITIMATELY renewable subterranean resource? Check
+  all 7 subterranean entries (iron_deposits, stone_quarry, precious_metals, gemstone_deposits,
+  coal_deposits, glass_sand, desert_salt) — should any be renewable/natural rather than exhaustible?
+- Do the \\bore / \\bcoal anchors still match the real minerals ("iron ore", "coal") in the catalog?
+- Independently derive the CORRECT classification for grain_fields and coal_deposits from real-world
+  fiction and confirm the fix's targets (grain_fields=managed/natural, coal_deposits=nonrenewable/manual)
+  are right.
+- Try hard to find a THIRD catalog key whose classification changed but shouldn't have, or a key the
+  fix now gets wrong. You may run node to import and call classifyResource.`,
+  },
+  {
+    key: 'pin-vacuity',
+    prompt: `${CONTEXT}
+
+LENS = PIN-TEST NON-VACUITY. Verify tests/domain/resourceTaxonomyClassification.test.js is a REAL
+regression guard, not a vacuous one:
+- Would the pin FAIL against the pre-fix code? Mentally (or by temporarily reconstructing the old
+  regexes in a scratch node script) confirm the boundary-guard assertions ("barley" not magical,
+  "shore"/"lore" not nonrenewable, "charcoal" not nonrenewable, grain_fields managed, coal nonrenewable)
+  would each have FAILED before the fix. Flag any assertion that passes on BOTH old and new code (vacuous).
+- Does the "pin covers exactly the catalog" assertion actually force a hand-check when a resource is
+  added (i.e., it compares Object.keys(RESOURCE_DATA) to EXPECTED)?
+- Is the EXPECTED table internally consistent with what classifyResource actually returns now? (You
+  may run the pin test: npx vitest run tests/domain/resourceTaxonomyClassification.test.js)
+- Are the synthetic-key probes valid — i.e., does an unknown key really classify off its own string?`,
+  },
+  {
+    key: 'consumer-census',
+    prompt: `${CONTEXT}
+
+LENS = CONSUMER / GOLDEN CENSUS. The fix changes grain_fields (magical->managed) and coal_deposits
+(renewable->nonrenewable, and now removal-eligible). Independently census EVERYTHING that consumes
+classifyResource / canRecoverResource / recoveryMode / the resource taxonomy, and find any test,
+fixture, golden, snapshot, or dist/edge-function artifact that bakes in the OLD behavior and would
+silently break or silently drift. Search broadly (grep variants, re-exports via worldPulse/index.js,
+recoveryMode string literals, 'requires_high_magic', 'magically', SQL twins, JSON fixtures). Confirm
+whether any GOLDEN/byte-snapshot output depends on grain_fields or coal_deposits classification such
+that it SHOULD have shifted (a silent-shift risk). Report the full consumer list with a dispositions:
+which are unaffected and WHY, which are at risk. The main session already ran 225 targeted tests +
+the full suite green; your job is to find what the greps missed.`,
+  },
+];
+
+phase('Verify');
+const results = await parallel(
+  lenses.map((l) => () =>
+    agent(l.prompt, { label: `verify:${l.key}`, phase: 'Verify', schema: VERDICT, model: 'opus' })
+  )
+);
+return results.filter(Boolean);

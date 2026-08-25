@@ -1,0 +1,35 @@
+export const meta = {
+  name: 'wave-g-autoplacement',
+  description: 'Wave G: the autoplacement button — seeded terrain-fit placement with itemized consent (directive 1 / J-D1)',
+  phases: [{ title: 'Build', detail: 'one Opus implementer', model: 'opus' }],
+}
+
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const SCHEMA = {
+  type: 'object',
+  required: ['agent', 'fixes'],
+  properties: {
+    agent: { type: 'string' },
+    fixes: { type: 'array', items: { type: 'object', required: ['finding', 'status', 'files', 'tests', 'notes'], properties: { finding: { type: 'string' }, status: { type: 'string', enum: ['fixed', 'skipped', 'deferred', 'blocked'] }, files: { type: 'array', items: { type: 'string' } }, tests: { type: 'string' }, notes: { type: 'string' } } } },
+    behavior_shifts: { type: 'array', items: { type: 'string' } },
+    discovered: { type: 'array', items: { type: 'string' } },
+  },
+}
+
+phase('Build')
+const result = await agent(`You are an Opus IMPLEMENTER for SettlementForge. WAVE G: AUTOPLACEMENT. BINDING LAW: docs/DESIGN_REALM_DIRECTIVES.md directive 1 + J-D1, verbatim constraints: placement-first (the placer finds best-fit terrain for every settlement BEFORE proposing any change); the popup itemizes exactly what it will do in three strictly separated classes — (a) move a settlement (safe, default), (b) paint map terrain (FMG-canvas mutation, only with itemized consent, never bundled), (c) re-terrain a settlement (NEVER offered silently — explicit labeled regen only); placement scoring is a pure seeded derivation over the spatial rasters (same realm + seed ⇒ same layout); the dynamism objective deliberately avoids sparse degenerate layouts (the small-N stasis evidence). Worktree: ${ROOT} branch claude/composite-r4 @ 7c56cef5 — verify; stop on mismatch.
+
+⚠️ Soak may be live: never touch artifacts/soak/**, never kill processes; focused vitest only; timeout-shaped reds get ONE isolation re-run. App-mounting component tests must sever lazy side-effect chains with vi.mock at component boundaries (the navFlowArrows precedent: analytics, stripe, PricingMomentCard).
+
+CONTEXT (study first): the realm map + placement surfaces (src/components/map/, WorldMap, the FMG bridge src/lib/mapBridge.js — the map canvas is the VENDORED app behind an iframe; DO NOT modify public/map/**), spatial rasters + the frozen digest (src/domain/spatial/ — remember from wave E: the digest persists NO per-settlement seed cells; territory[] is the only nearness primitive; the cost raster's river band 111..140 is the only water signal; use the Weyl sampler spreadIndices from src/domain/worldPulse/steadingTopography.js for any cell subsampling — NEVER arithmetic stride), settlement genesis configs (terrain/terrainOverride, tradeRouteAccess — FROZEN truth, never mutated silently), wave-E hazard cures (draw accounting, seed-family totality pins — reuse the instruments).
+
+IMPLEMENT (J-D1, the whole of it):
+1. THE SCORER (pure domain leaf): for a campaign's settlement set, derive candidate positions on the realm map — a pure seeded derivation over the rasters scoring (i) genesis-terrain fit (a mountain-config settlement wants mountain cells; a port wants coast), (ii) the connectivity/dynamism objective: avoid sparse degenerate layouts (favor layouts whose k-NN graph keeps interaction density — the small-N stasis medicine made geometric), (iii) spacing sanity (no overlaps, banded minimum separations by tier). Deterministic: same realm+seed ⇒ same layout (seed-family pinned). Bounded candidate sets via spreadIndices; caps documented.
+2. THE MISMATCH CENSUS: settlements whose genesis terrain has NO fitting cell anywhere on the map (the mountain town on a plains realm) are surfaced as a distinct itemized list — each offered ONLY the explicit choices per J-D1: best-available placement (default), or the labeled re-terrain-as-regen option (NEVER pre-selected; wording states plainly it regenerates the settlement under the same-seed law), or paint-terrain IF AND ONLY IF a map-edit seam already exists in the bridge vocabulary (study projectMapEditsForScene + the map-edit provenance vocabulary; if no safe paint seam exists, the paint class is listed as unavailable with the reason — do NOT invent canvas mutations).
+3. THE BUTTON + CONSENT POPUP: an Autoplace entry on the realm surface (house idiom placement); the popup lists EVERY intended action itemized by class before anything executes; nothing executes on mismatch classes without explicit per-item consent; placements land through the existing settlement-position persistence (find the canonical position write — the one the map already uses — and use ONLY it; positions are worldState/campaign data, not genesis).
+4. PINS with executed negative controls (revert/red/restore/green, quoted): determinism (two-pass seed family + structural purity scan — the wave-E instruments); terrain-fit totality (a 32-seed family: mountain configs land on mountain-class cells wherever any exist); the dynamism objective measurably avoids degenerate sparse layouts (a fixture realm where greedy nearest-fit would isolate a settlement — the scorer keeps it connected); consent gating (nothing mutates before confirm; mismatch items untouched without their explicit consent); genesis immutability (no autoplacement path ever writes terrain/terrainOverride/config — anchored negative + source scan); JSON-round-trip of placements.
+5. Herald: an address-chained record of the placement act ("The realm's charter is drawn: seven settlements take their places"), one item, not seven.
+
+HARD RULES: no migrations; no git mutations; no full suites/builds; no golden re-records (placement is worldState, never generation input — if any pin reds a golden, your change violated genesis immutability: fix the change); no ratchet raises; new store actions → operationRegistry + gen:compendium-data + generate-sitemap + build:edge-shared IN ORDER; JSX 600 / js 800; anchored negatives; no em dashes in src/domain|src/data string literals; do NOT mint a new simulation rule key (this is a user-invoked act, not a dormant engine system). Return dense structured data: statuses, files, verbatim test tails, negative-control quotes, behavior shifts plainly, judgment calls vetoable, discovered adjacencies.`, { label: 'wG:autoplacement', phase: 'Build', schema: SCHEMA, model: 'opus' })
+
+return { results: [result].filter(Boolean) }

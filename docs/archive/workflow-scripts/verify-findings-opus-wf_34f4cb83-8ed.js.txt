@@ -1,0 +1,95 @@
+export const meta = {
+  name: 'verify-findings-opus',
+  description: 'Opus 5 adversarial verification of every finding from the holistic review',
+  phases: [{ title: 'Verify', detail: '14 Opus verifiers, one per subsystem report', model: 'opus' }],
+}
+
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const DIGEST = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/c69772bd-e324-4e1d-b1ee-b7482c7741fc/tasks/digest_full.json'
+const INTERIOR = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/c69772bd-e324-4e1d-b1ee-b7482c7741fc/tasks/interior_findings.json'
+
+const COMMON = `You are an ADVERSARIAL VERIFICATION agent (Opus) for SettlementForge — a deterministic D&D settlement/world simulator (React/Zustand/Supabase, JS+JSDoc). This brief comes from the repo owner's interactive Claude session. A prior review fleet produced findings; your job is to try to REFUTE each one assigned to you by re-reading the actual code. The owner explicitly requested this verification pass.
+
+CODE OF RECORD: ${ROOT} (branch claude/composite-r4, HEAD 018e4119). First run \`git -C ${ROOT} rev-parse --abbrev-ref HEAD\` and confirm claude/composite-r4; stop and report on mismatch.
+
+HARD RULES: READ-ONLY. No edits, no git mutations, no npm test / vitest / playwright execution (other verifiers are running concurrently; parallel test runs on this shared tree produce false failures). Your tools: Read, rg/grep, ls, wc, git log/show, and non-writing node one-liners for parsing (e.g. JSON extraction).
+
+METHOD per finding:
+1. Read the cited files at the cited lines YOURSELF. Do not trust the citation — verify the quoted code exists and says what the finding claims.
+2. Verify the MECHANISM, not just the citation: trace the actual code path the finding depends on (callers, guards, alternative paths that would neutralize the claim). A finding whose cited lines exist but whose failure scenario is blocked elsewhere is REFUTED or ADJUSTED, not confirmed.
+3. Hunt for the strongest counter-evidence: a guard the reviewer missed, a test that pins the claimed-missing behavior, a deliberate-deferral comment that reframes it, a consumer that doesn't exist.
+4. Verdicts: CONFIRMED (mechanism re-verified end-to-end, citations accurate), ADJUSTED (real issue but detail/severity/scope needs correction — say exactly what changes), REFUTED (the claim is wrong — say why with citations), UNVERIFIABLE (requires executing tests or live services — say what execution would settle it).
+5. Re-grade severity on the standard scale (critical/high/medium/low) after verification; note when your grade differs from the original.
+Severity: critical = loss/exposure/broken core invariant; high = incorrect core behavior or systemic fracture; medium = meaningful UX/maintainability/edge-case defect; low = polish.
+
+Default to skepticism: if you cannot re-derive the failure scenario from the code, do not confirm it. Your output feeds a synthesizer, not the user; return dense structured data with exact file:line citations for every verdict.`
+
+const SCHEMA = {
+  type: 'object',
+  required: ['subsystem', 'verdicts'],
+  properties: {
+    subsystem: { type: 'string' },
+    verdicts: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['title', 'original_severity', 'verdict', 'final_severity', 'notes'],
+        properties: {
+          title: { type: 'string', description: 'the original finding title, verbatim or lightly shortened' },
+          original_severity: { type: 'string', enum: ['critical', 'high', 'medium', 'low', 'info'] },
+          verdict: { type: 'string', enum: ['CONFIRMED', 'ADJUSTED', 'REFUTED', 'UNVERIFIABLE'] },
+          final_severity: { type: 'string', enum: ['critical', 'high', 'medium', 'low', 'info', 'n/a'] },
+          notes: { type: 'string', description: 'what you re-verified or what changed/refuted, with file:line receipts; keep dense but complete' },
+        },
+      },
+    },
+  },
+}
+
+const SUBSYSTEM_KEYS = [
+  'kernel-generators',
+  'domain-simulation',
+  'domain-entities',
+  'store-persistence',
+  'backend-supabase',
+  'components-ui',
+  'pdf-exports-public',
+  'data-custom-content',
+  'tests-gates',
+  'build-performance',
+  'security-privacy',
+  'docs-coherence',
+  'completeness-critic',
+]
+
+const EXTRA_NOTES = {
+  'kernel-generators': `NOTE: a later critic pass claimed this report's aiLayer.js finding has a factually wrong premise. Adjudicate that dispute explicitly in your aiLayer verdict.`,
+  'components-ui': `NOTE: a later critic pass upgraded the EventComposer TDZ finding to 'structurally CONFIRMED with one correction'. Re-derive the TDZ scenario yourself (render order, hook order, when the effect can fire vs when composerSetters is initialized) and state the exact conditions under which it crashes, or refute it.`,
+  'domain-entities': `NOTE on mountain_pass: a follow-up check confirmed ROUTE_TIER has no mountain_pass entry and GENERATED_ROUTE_VALUES omits it, while narrative/terrain semantics DO exist (terrainHelpers.js:26, historyTemplate.js, narrativeGenerator.js, dailyLifeLogic.js:190), and project memory records the neutral scoring as an owner-gated deferral. Fold that nuance into your verdict.`,
+  'completeness-critic': `The critic's findings are meta-claims (coverage gaps, cross-lane reconciliations, corrections of other reviewers). For coverage-gap claims, verify the named surfaces really were absent from the digest's other reports AND really exist in the tree at the stated size. For its mountain_pass reconciliation claim, note it was subsequently narrowed: the decorrelation cure DID land at 5f8dc783; only the semantic neutrality remains (owner-gated). For its corrections of other reviewers, verify the correction itself is right.`,
+}
+
+phase('Verify')
+const briefs = SUBSYSTEM_KEYS.map((key) => ({
+  key,
+  prompt: `${COMMON}
+
+YOUR ASSIGNMENT: verify every finding of the report whose "subsystem" field starts with "${key}" inside the JSON file ${DIGEST}. Load it with a node one-liner or Read; the file has shape {reports: [...], critic: {...}} where each report has subsystem/summary/strengths/findings[]; the completeness-critic report is the top-level "critic" object. Verify ONLY that report's findings[] array (every entry, all severities). ${EXTRA_NOTES[key] || ''}`,
+}))
+
+briefs.push({
+  key: 'interior',
+  prompt: `${COMMON}
+
+YOUR ASSIGNMENT: verify every finding in the JSON file ${INTERIOR} (shape: {subsystem, findings[]}). These target src/domain/interior/, src/components/interior/, tests/interior/.`,
+})
+
+const verdicts = await parallel(
+  briefs.map((b) => () =>
+    agent(b.prompt, { label: `verify:${b.key}`, phase: 'Verify', schema: SCHEMA, model: 'opus' })
+  )
+)
+
+const ok = verdicts.filter(Boolean)
+log(`${ok.length}/${briefs.length} verifier reports returned`)
+return { verdicts: ok }

@@ -1,0 +1,59 @@
+export const meta = {
+  name: 'phase-v-verify-stragglers',
+  description: 'Re-verify the 11 findings whose Opus verifiers died on the session limit',
+  phases: [{ title: 'Verify', detail: '2 lenses per high, 1 per medium', model: 'opus' }],
+}
+
+const VERDICT_SCHEMA = {
+  type: 'object', required: ['id', 'verdict', 'severity_final', 'evidence', 'fix_blast', 'fix_recommendation'],
+  properties: {
+    id: { type: 'string' },
+    verdict: { enum: ['CONFIRMED', 'REFUTED', 'PARTIAL'] },
+    corrected_statement: { type: 'string' },
+    severity_final: { enum: ['critical', 'high', 'medium', 'low', 'none'] },
+    evidence: { type: 'string', description: 'Executed/traced proof, file:line quotes. Max 120 words.' },
+    fix_blast: { type: 'object', required: ['goldens_shift', 'eager_bytes_risk', 'schema_or_persistence', 'owner_gated'],
+      properties: { goldens_shift: { type: 'boolean' }, eager_bytes_risk: { type: 'boolean' }, schema_or_persistence: { type: 'boolean' }, owner_gated: { type: 'boolean' }, notes: { type: 'string' } } },
+    fix_recommendation: { type: 'string', description: 'Bold-over-safe fix shape within the constitution, max 100 words' },
+  },
+}
+
+const PREAMBLE = `You are an Opus 4.8 adversarial VERIFIER on SettlementForge (repo /Users/cstokes/Desktop/settlement-engine, branch review-fixes-2026-07-08 — SHARED tree: READ + run read-only commands/tests only; NEVER edit/create/stage/commit repo files; scratch only under /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/049d4c82-58c0-4be1-956a-d47c628ee704/scratchpad/).
+Try to REFUTE the finding; only what survives is CONFIRMED. Read the full register entry: search docs/COMPREHENSIVE_REVIEW_2026-07-13.md for the [id]. Read whole enclosing scopes + real consumer searches. Check deferral ledgers (playbook 0.0.2/0.6/0.8; round-21 plan; module headers) — a sound deliberate deferral = REFUTED with a note; unsound = CONFIRMED with context. Execute proof where cheap (existing vitest files, node repros on pure modules); never the full gate. Constitution: same-seed byte-identity, dormancy, premium seam, endogeneity, first-paint ratchet, any-cast 2252. Return only the schema object.
+
+`
+
+const HIGHS = [
+  { id: 'tests-1', t: 'VERIFY_DIST anti-vacuity hard-fail claimed in CI comments, implemented by nothing in this tree', w: '.github/workflows/ci.yml:106' },
+  { id: 'tests-2', t: 'Deity and spatial worldpulse goldens thread a STALE regionalGraph every tick — evolved graph discarded', w: 'tests/property/worldpulseDeityGolden.test.js:138' },
+  { id: 'experience-product-fit-1', t: 'M10b catch-up only fires from the Realm Inspector Pulse tab — the world does NOT move on most open paths', w: 'src/components/map/WorldPulsePanel.jsx:46' },
+  { id: 'experience-product-fit-2', t: 'Wave-A belief read-model (settlementBeliefs.js) has zero UI consumers — built, tested, invisible', w: 'src/domain/display/settlementBeliefs.js:1' },
+  { id: 'performance-scale-1', t: 'regionalGraph.queuedImpacts never pruned, re-normalized ~12+ times per tick — cost and size grow with campaign age', w: 'src/domain/region/graph.js:265' },
+  { id: 'performance-scale-2', t: 'ensureWorldState deep-clones every conditional ledger incl. the 47-400KB frozen digest on each of ~11 calls per tick', w: 'src/domain/worldPulse/worldState.js:335' },
+  { id: 'performance-scale-3', t: 'Per-tick digest identity churn defeats every distanceRead WeakMap memo — routes re-Dijkstra-ed every tick', w: 'src/domain/spatial/distanceRead.js:953' },
+  { id: 'performance-scale-4', t: 'catchUpCampaignWorld runs up to 26 sequential FULL store advances with 26 sync persists on campaign open', w: 'src/store/campaignWorldPulseSlice.js:458' },
+  { id: 'state-lifecycle-1', t: 'M10b lastLivingAdvanceAt re-stamp never persisted on the advance path — reload re-simulates already-advanced weeks', w: 'src/store/campaignWorldPulseSlice.js:387' },
+  { id: 'state-lifecycle-2', t: 'revertToSnapshot restores the settlement but ghosts systemState and campaignState — in memory and across reload', w: 'src/store/settlementSlice.js:640' },
+]
+const MEDS = [
+  { id: 'lib-infra-3', t: 'Client can queue unlimited snapshots per envelope but ingest persists only the first 2 — campaign PDF export loses member snapshots', w: 'src/lib/analyticsQueue.js:244' },
+]
+
+phase('Verify')
+const results = await pipeline(
+  [...HIGHS.map(f => ({ ...f, sev: 'high' })), ...MEDS.map(f => ({ ...f, sev: 'medium' }))],
+  f => {
+    const base = PREAMBLE + 'FINDING [' + f.id + '] (surveyor severity ' + f.sev + '): ' + f.t + ' @ ' + f.w + '\nSet id="' + f.id + '".'
+    if (f.sev === 'high') {
+      return parallel([
+        () => agent(base + '\nLENS: existence/reproduction.', { label: 'vA:' + f.id, phase: 'Verify', schema: VERDICT_SCHEMA, model: 'opus', effort: 'high' }),
+        () => agent(base + '\nLENS: independent re-derivation + blast radius + best fix shape.', { label: 'vB:' + f.id, phase: 'Verify', schema: VERDICT_SCHEMA, model: 'opus', effort: 'high' }),
+      ]).then(vs => ({ id: f.id, severity_surveyed: f.sev, verdicts: vs.filter(Boolean) }))
+    }
+    return agent(base + '\nLENS: full — existence, severity, deferral-check, blast radius.', { label: 'v:' + f.id, phase: 'Verify', schema: VERDICT_SCHEMA, model: 'opus' })
+      .then(v => ({ id: f.id, severity_surveyed: f.sev, verdicts: v ? [v] : [] }))
+  }
+)
+const flat = results.filter(Boolean)
+log('Straggler verification: ' + flat.length + '/11')
+return { count: flat.length, results: flat }

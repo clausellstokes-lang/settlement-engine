@@ -1,0 +1,49 @@
+export const meta = {
+  name: 'parallel-capacity-lanes',
+  description: 'Four read-only lanes that need no tree lock: next-cycle pre-censuses, the parallelization map of the remaining ~95 waves, the diagnostic-soak harness design, and the V5 cull recommendation the chair owes the owner',
+  phases: [
+    { title: 'Prospect', detail: 'read the queue and name the next cycle exactly' },
+    { title: 'Lanes', detail: 'pre-censuses, the parallelization map, the soak harness, the V5 cull — all concurrent' },
+  ],
+}
+
+const TREE = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const SCRATCH = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/c44e5d99-2ba5-49d5-a554-40b68534c8eb/scratchpad'
+
+const RO = `VERIFY-FIRST PREAMBLE: brief from the session chair of an owner-delegated build program. ⛔ THIS LANE IS STRICTLY READ-ONLY AGAINST THE REPO. Work from ${TREE} (branch claude/composite-r4) but NEVER edit, commit, stage, or run ANY test/npm/vitest/build command there — a build lane owns that tree's single vitest lane and its dirty WIP (including an untracked strategicPosture.js). Running vitest would corrupt that lane's runs and produce fake reds. You may READ files, run git log/show/status, and write ONLY into ${SCRATCH}. Record the HEAD sha you read at; the build lane moves HEAD under you, so re-read anything that surprises you. Navigate by SYMBOL, never by remembered line numbers. LIVE CODE OUTRANKS EVERY TABLE.`
+
+phase('Prospect')
+const next = await agent(RO + `
+
+NAME THE NEXT BUILD CYCLE EXACTLY. Read docs/SOL_QUEUE.md (the authoritative build order) and docs/DESIGN_FP_ARCHITECTURE.md's ordering section. Cycle 4 is IN FLIGHT and covers SP-C (landing), SP-D, GR-2, IN-0a. Determine, from the queue's own dependency rules rather than from convenience: (1) which waves become ELIGIBLE the moment cycle 4 lands — list them with the dependency that unblocks each; (2) of those, which carry a FLAG (CQ5 trio) and which do not — flag waves SERIALIZE in one worktree, no-flag waves do not; (3) the chair's recommended CYCLE 5 SET (4-6 waves, strict-serial-safe, dependencies satisfied), with a one-line reason each; (4) any wave whose stated dependency is NOT yet satisfied but that the queue lists as next — a STOP-and-name, not a guess. RETURN compact JSON: eligible[] (wave, unblockedBy, hasFlag), recommendedCycle5[], blocked[] (wave, missingDependency), notes.`, { label: 'prospect:cycle5', phase: 'Prospect', model: 'opus', schema: { type: 'object', required: ['eligible', 'recommendedCycle5'], properties: { eligible: { type: 'array', items: { type: 'string' } }, recommendedCycle5: { type: 'array', items: { type: 'string' } }, blocked: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+phase('Lanes')
+const CENSUS_TAIL = ` RETURN a compact structured census (max ~3000 words): per surface — file path, key symbols with one-line contracts, MEASURED line count (flag files near the 800 layer ceiling or their sizeBaseline ceiling), the exact extension points the wave would attach to WITHOUT forking, every collision with the concurrently-building cycle-4 surfaces (SP-C's dispositionLedger/strategicPosture, SP-D's envoy family, GR-2's peaceTerms family, IN-0a's brokerage family), and hazards. End with PREMISES THE VOLUME STATES THAT THE TREE DOES NOT SUPPORT — the STOP list, which is the single most valuable thing a pre-census produces.`
+
+const results = await parallel([
+  () => agent(RO + `
+
+LANE 1a — PRE-CENSUS, FIRST HALF OF THE RECOMMENDED CYCLE 5. The prospector returned: ` + JSON.stringify(next) + `
+
+Take the FIRST HALF of recommendedCycle5 (round up if odd). For each wave: read its wave block in its volume WHOLE, then census every estate surface it would touch.` + CENSUS_TAIL, { label: 'census:cycle5-a', phase: 'Lanes', model: 'opus' }),
+
+  () => agent(RO + `
+
+LANE 1b — PRE-CENSUS, SECOND HALF OF THE RECOMMENDED CYCLE 5. The prospector returned: ` + JSON.stringify(next) + `
+
+Take the SECOND HALF of recommendedCycle5. For each wave: read its wave block in its volume WHOLE, then census every estate surface it would touch.` + CENSUS_TAIL, { label: 'census:cycle5-b', phase: 'Lanes', model: 'opus' }),
+
+  () => agent(RO + `
+
+LANE 2 — THE PARALLELIZATION MAP. The program has ~95 measured build waves remaining across eight FP volumes (WF 10, TR 9, POP 8, INT 8, GR 8, SP 7, IN 7, CW 4) plus ES (8, one landed), WY (12), EP (16), HB (10), and a war-circulation volume being architected now. THE QUESTION: how much of that can ever run CONCURRENTLY, and what would it cost? Determine from the tree and the volumes: (1) WHICH REMAINING WAVES CARRY A FLAG — the CQ5 law (manifest + cert row + first gate read in ONE commit) makes flag waves share three files, so they SERIALIZE per worktree; count flag vs no-flag across the remaining set; (2) THE SHARED-FILE MAP — which files does more than one remaining wave edit (simulationRules.js, the certification rows, the shared walkers)? Two waves editing one file cannot run in one tree; (3) WHAT A SECOND WORKTREE BUYS AND COSTS — the recorded hazards are: wrong-lineage worktree (cd + rev-parse first), npm ci EUSAGE (worktrees silently test against MAIN node_modules), one vitest lane PER TREE, and a second branch would need merging back; state honestly whether a second worktree is worth it and for WHICH waves specifically; (4) THE RECOMMENDED CONCURRENCY SHAPE — the chair's answer to "how many build lanes can this program actually sustain," with the reason. RETURN structured JSON: flagWaveCount, noFlagWaveCount, sharedFileCollisions[], secondWorktreeVerdict, recommendedConcurrency, parallelizableNow[], notes.`, { label: 'map:parallelization', phase: 'Lanes', model: 'opus', effort: 'high' }),
+
+  () => agent(RO + `
+
+LANE 3 — THE DIAGNOSTIC-SOAK HARNESS: recon and design. The chair has RULED the endgame ordering (docs/START_HERE.md §3h on the ledger branch): a DIAGNOSTIC SOAK runs at build-complete-dark in a DISPOSABLE tree with flags FORCED LIT, concurrent with tail work, FINDINGS ONLY — it may not sign, apply or adjust one band; anything it suggests rides to the terminal tuning as a proposal. Its purpose is the program's largest open risk: NO LAYER HAS EVER BEEN LIT ALONGSIDE THE OTHERS — every dormancy proof to date is per-flag. YOUR JOB: (1) RECON what soak machinery already exists — search for soak fixtures, long-run harnesses, boundedness guards, the SPATIAL CANON soak fixture, any existing multi-tick property runner; name each by path and symbol with its current contract; (2) MEASURE the flag inventory: every engine flag that will be lit at the soak (read simulationRules.js and the certification manifest), and which are currently dark; (3) DESIGN the diagnostic harness against what exists — extend, never fork: how it forces flags lit without editing shipped defaults, how many ticks/settlements/realms it must run to be meaningful, WHAT IT MEASURES (the composition questions: does any pair of lit layers produce a state the single-layer pins never saw? conservation violations, unbounded growth, contradiction rates, receipt vacuity, rng draw-count drift, dead bands that only die when two flags are lit); (4) NAME THE FINDINGS FORMAT so its output is actionable as repair waves; (5) state what it CANNOT see. Write the design to ${SCRATCH}/DIAGNOSTIC_SOAK_DESIGN.md. RETURN: the existing-machinery inventory, the flag list, the design summary, and what it cannot see.`, { label: 'design:diagnostic-soak', phase: 'Lanes', model: 'opus', effort: 'high' }),
+
+  () => agent(RO + `
+
+LANE 4 — THE V5 CULL RECOMMENDATION (an owner-held item the chair owes). The owner holds an open aesthetic decision: THIRTEEN 4K photoreal generations of the Ribbon V5 direction await an OWNER CULL, and the chair's standing obligation is to OFFER a recommended cull for one-word approval rather than to assume the taste call. FIND THE IMAGES: look under the user's Desktop — candidate folders named like "Settlement Forge template review", "settlementforge-marketing-masters", or a V5/ribbon folder; use ls to locate them, then READ the images. THE DIRECTION, per the owner's four V5 directives: organic vanes; cartouche with the seal-in-O; half-arrow depth; burned tabs. A known open problem is THE PENDANT PROBLEM (recorded). Two sign-offs are also open: lettering grammar, and the seal ladder. JUDGE EACH IMAGE against the four directives and against the product's own doctrine (LEGIBILITY: glance to sentence to table; experience-first marketing; a medieval-inspired but SETTING-AGNOSTIC product — nothing that hard-codes a cosmology). RETURN: a ranked recommendation — KEEP (2-3, with what each one does that the others do not), CUT (with the specific reason each fails a directive), and HOLD (any that would work with one stated change); plus your read on the pendant problem and a one-line recommendation for each of the two open sign-offs. Be decisive and specific; the owner approves in one word or overrides.`, { label: 'counsel:v5-cull', phase: 'Lanes', model: 'opus', effort: 'high' }),
+])
+
+return { next, censusA: results[0], censusB: results[1], parallelMap: results[2], soakDesign: results[3], v5Cull: results[4] }

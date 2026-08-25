@@ -1,0 +1,47 @@
+export const meta = {
+  name: 'endowment-census-recon',
+  description: 'Census every resource-endowment read site + map the overlay/chokepoint precedents for W-DISCOVERY',
+  phases: [{ title: 'Census', detail: '3 parallel surveyor reads' }],
+}
+
+const SCHEMA = {
+  type: 'object',
+  properties: {
+    report: { type: 'string', description: 'The full recon report in complete sentences, organized by the numbered questions' },
+    citations: { type: 'array', items: { type: 'string' }, description: 'file:line references for every load-bearing claim' },
+  },
+  required: ['report', 'citations'],
+}
+
+phase('Census')
+const [bySymbol, byConcept, precedents] = await parallel([
+  () => agent(`You are a READ-ONLY surveyor in the SettlementForge repo at /Users/cstokes/Desktop/settlement-engine (deterministic D&D settlement/world simulator). Do not edit anything. Mission: the BY-SYMBOL census of the world's RESOURCE ENDOWMENT — where it lives and every code site that reads it. The goal: a future wave makes endowment DYNAMIC via an overlay ledger + an effective-endowment chokepoint read, and every reader must be found or discoveries will ghost on unswept paths.
+1. THE HOME: Where exactly does resource endowment live? Find the canonical shape — settlement-level resources (the generated dossier's resources), the spatial digest's resource/economy facts, RESOURCE_TO_CHAINS (src/data/), supply-chain sources. Give the exact keys, the producer (which generator step / canonize step writes them), and whether each is frozen-at-canonize or mutable.
+2. THE READERS (the census proper): enumerate EVERY site that reads resource endowment — grep the symbol names you found in (1) plus resources/resourceProfile/RESOURCE_TO_CHAINS/chains across src/. For EACH site give file:line and classify: (a) GENERATION-side (runs at world/settlement generation — must NEVER see dynamic state, law 3), (b) TICK-side (worldPulse/spatial movers — must see effective endowment), (c) DISPLAY-side (dossier/UI/PDF — decide case by case), (d) test/golden.
+3. THE DERIVATION PATH: trace end-to-end how endowment becomes the live economy — endowment → supply-chain sources → commodityFlow/supplyShipments channels → trade. Where is the seam where an ADDED deposit would naturally enter the flow?
+4. THE DENOMINATOR: state your total site count and your search-expansion evidence (symbol names, string spellings, aliases searched) so the census is auditable.
+Your final text is structured output consumed by the coordinator; be complete and factual.`, { label: 'census:by-symbol', phase: 'Census', schema: SCHEMA }),
+
+  () => agent(`You are a READ-ONLY surveyor in the SettlementForge repo at /Users/cstokes/Desktop/settlement-engine. Do not edit anything. Mission: the BY-CONCEPT census for making resource endowment DYNAMIC — find what a symbol-name grep would MISS, and map the economy-tier couplings.
+1. NEAR-MISS SPELLINGS: search concept words — deposit, vein, mine, quarry, ore, lumber, timber, fishery, pearl, salt, harvest, yield, abundance, scarcity, richness, endowment — across src/domain and src/generators. Which of these represent INDEPENDENT reimplementations or derived caches of resource facts (as opposed to prose/flavor)? file:line each.
+2. DERIVED CACHES: does anything precompute or memoize endowment-derived facts at canonize or first read (economy tier derivation, economic_capacity causal scores, entrepôt eligibility, trade-dependency tables, districtProfile/threatProfile)? A dynamic overlay is invisible to a stale cache — list every cache/derivation with its recompute trigger.
+3. SCARCITY READS: the corruption web (scarcity-as-law), generosity EV (surplus reads), the supply web (TRADE_DEPENDENCY_NEEDS, finishedGoodsCategory) — which of these read endowment directly vs through the supply-chain layer? file:line.
+4. MINE/QUARRY INSTITUTIONS: how do resource-extraction institutions exist today — generation catalogs (assembleInstitutions), the founding lane (foundingCatalog/moralInstitutionPressure), UPGRADE_CHAINS? Could a discovery FOUND a mine institution through the existing lifecycle without new machinery? What links an institution to a resource kind?
+5. THE DOSSIER QUESTION: what does the settlement dossier/display show about resources, and does any display re-DERIVE from endowment vs read a stamped list? (Decides whether a discovery is display-visible for free.)
+Your final text is structured output consumed by the coordinator; be complete and factual.`, { label: 'census:by-concept', phase: 'Census', schema: SCHEMA }),
+
+  () => agent(`You are a READ-ONLY surveyor in the SettlementForge repo at /Users/cstokes/Desktop/settlement-engine. Do not edit anything. Mission: map the OVERLAY + CHOKEPOINT precedents a resource-dynamics wave will copy, and the pins that constrain it.
+1. THE OVERLAY PATTERN: document the spatialLedgers lifecycle exactly (getSpatialLedger/setSpatialLedger/dropSpatialLedger in src/domain/spatial/distanceRead.js) — dormancy semantics (absent ⇒ prior bytes), drop-when-empty, how armyTransit/embattlement/obligations/tradeFlow use it, serialization path (where spatialLedgers persists + survives undo/regen/import — trace the save/load/undo/catch-up lifecycle for one existing ledger as the template).
+2. CHOKEPOINT PRECEDENT: does ANY existing read compose frozen-digest facts with a dynamic overlay ("effective X = frozen + ledger")? (Candidates: occupation overlays on political facts, entrepôt centrality, martialReadiness.) If yes, cite the best template; if no, say so plainly.
+3. THE FREEZE PINS: which tests pin the spatial digest's byte-freeze / exact keys (spatialDigestGolden, seaLanes frozen-slot pins, canonize contracts)? Which would red if a mover WROTE to digest keys, and which would red merely from a new spatialLedgers ledger key (should be none — verify against how armyTransit's ledger was added)?
+4. THE FOUNDING LANE: how institutionLifecycle + foundingCatalog found new institutions at tick time (trigger shape, cadence/cooldown, dedup, news) — the exact recipe a discovery-founds-a-mine coupling would call. Also UPGRADE_CHAINS interplay (does founding respect/extend chains?).
+5. LATENT-POOL RAW MATERIAL: what terrain/geography facts exist per settlement in the digest (mountains/forest/coast/river) that could weight a terrain-loaded latent pool WITHOUT new generation-time state? Where does generation derive resources FROM terrain today (the correlation a latent pool must respect so discoveries feel geologically honest)?
+6. UNDO/CATCH-UP HAZARDS: the M10b catch-up collapse (one orchestrated interval) and pulseHistory/undo — anything a NEW ledger writer must do to survive resume/undo (cite the lastLivingAdvanceAt hazard pattern if relevant).
+Your final text is structured output consumed by the coordinator; be complete and factual.`, { label: 'census:precedents', phase: 'Census', schema: SCHEMA }),
+])
+
+return {
+  bySymbol: bySymbol || null,
+  byConcept: byConcept || null,
+  precedents: precedents || null,
+}

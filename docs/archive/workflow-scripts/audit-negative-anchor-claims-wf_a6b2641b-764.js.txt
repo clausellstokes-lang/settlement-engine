@@ -1,0 +1,166 @@
+export const meta = {
+  name: 'audit-negative-anchor-claims',
+  description: 'Adversarially audit every anchor claim added to cure the negative-assertion walker',
+  phases: [
+    { title: 'Audit', detail: 'one skeptic per file slice, reading real surrounding code' },
+    { title: 'Refute', detail: 'second opinion on every anchor the first pass doubted' },
+    { title: 'Critic', detail: 'completeness sweep for missed vacuity' },
+  ],
+}
+
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const SLICES = [
+  ['tests/domain/pulseStageContracts.test.js', 'tests/domain/townCartographyDeterminism.test.js'],
+  ['tests/lint/observedShapeCorpus.graph.test.js', 'tests/build/campaignRuntimeLazy.test.js'],
+  ['tests/build/envoyPersistenceHydrationLazy.test.js', 'tests/pdf/pdfParityFixes.test.js'],
+  ['tests/domain/worldStateHydration.test.js', 'tests/lint/envoyErrandLedgerSingleWriter.walker.test.js'],
+  ['tests/lint/worldStateHydrationIngress.walker.test.js', 'tests/store/campaignSlice.deletionSync.test.js'],
+  ['tests/build/ciCheckParity.test.js', 'tests/domain/activeConditions.test.js', 'tests/domain/factionRefContract.test.js'],
+  ['tests/domain/townCartographyWards.test.js', 'tests/lint/legacyReaderShapeScan.test.js', 'tests/lint/testRatchet.test.js', 'tests/lint/negativeAssertionAnchor.walker.test.js'],
+  ['tests/scripts/implementationGate.test.js', 'tests/scripts/implementationPackets.test.js', 'tests/store/campaignHydration.test.js', 'tests/store/campaignRuntimeRouteGate.test.js', 'tests/store/importReconciliationRpcProjection.test.js'],
+]
+
+const FINDINGS = {
+  type: 'object',
+  properties: {
+    claims: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          file: { type: 'string' },
+          line: { type: 'integer' },
+          claimedReason: { type: 'string' },
+          verdict: { type: 'string', enum: ['SOUND', 'VACUOUS_LIE', 'WEAK'] },
+          why: { type: 'string' },
+          suggestedFix: { type: 'string' },
+        },
+        required: ['file', 'line', 'claimedReason', 'verdict', 'why'],
+      },
+    },
+  },
+  required: ['claims'],
+}
+
+const BRIEF = `You are auditing a repair to a lint walker in the repo at ${ROOT}.
+
+BACKGROUND. tests/lint/negativeAssertionAnchor.walker.test.js forbids a BARE negative
+assertion (not.toContain / not.toMatch / not.toHaveProperty). Such an assertion is TRUE
+for two different reasons: the member was correctly excluded, OR the collection drifted
+away entirely (renamed, emptied, re-shaped, never built). The second is a VACUOUS GREEN.
+A site is exempt only if it (a) goes through tests/helpers/anchoredNegatives.js
+(expectAbsentWithAnchor / expectPresentThenAbsent), or (b) carries a "// anchored: <reason>"
+comment on the assertion line or the line IMMEDIATELY above.
+
+An "// anchored:" comment is a REASON, not a mute button. Writing one where no live-subject
+positive actually exists is a LIE that permanently vacuums the guard — that is the single
+worst outcome and the thing you are hunting.
+
+YOUR JOB. For EVERY "// anchored:" comment and EVERY expectAbsentWithAnchor/
+expectPresentThenAbsent call in the files below, READ THE ACTUAL SURROUNDING CODE and decide
+whether the claimed anchor really prevents vacuity. Do NOT trust the comment's wording.
+
+Ask, for each site:
+  1. What EXACTLY is the subject of the negative assertion?
+  2. Is there a POSITIVE assertion, in the same test, on THAT SAME subject (not a sibling
+     object, not a different file's contents, not a different variable)?
+  3. Would that positive FAIL FIRST if the subject drifted away, emptied, or went
+     undefined/null? (Note: expect(undefined).not.toHaveProperty(x) PASSES. expect('')
+     .not.toContain(x) PASSES. expect([]).not.toContain(x) PASSES.)
+  4. For a helper call: does the anchor argument travel the SAME code path as the excluded
+     member, and would it vanish under the same drift?
+
+Verdicts: SOUND (the anchor genuinely cannot go vacuous), WEAK (an anchor exists but is
+indirect or partial — explain), VACUOUS_LIE (no real live-subject positive; the comment is
+false). Be adversarial: default to WEAK or VACUOUS_LIE when the positive measures a
+DIFFERENT object than the negative's subject. Quote the specific line numbers you relied on.
+
+Read files with absolute paths under ${ROOT}. Report every site you found, including ones
+you judge SOUND, so coverage is checkable.
+
+FILES TO AUDIT: `
+
+const first = await parallel(SLICES.map((slice, i) => () =>
+  agent(BRIEF + slice.join(', '), {
+    label: `audit:${i + 1}`,
+    phase: 'Audit',
+    schema: FINDINGS,
+  })))
+
+const claims = first.filter(Boolean).flatMap(r => r.claims || [])
+log(`${claims.length} anchor sites audited; ${claims.filter(c => c.verdict !== 'SOUND').length} doubted`)
+
+const doubted = claims.filter(c => c.verdict !== 'SOUND')
+
+const second = await parallel(doubted.map((c, i) => () =>
+  agent(`SECOND OPINION, adversarial. A first auditor judged this anchor "${c.verdict}".
+
+File: ${ROOT}/${c.file}  (around line ${c.line})
+Claimed reason: ${c.claimedReason}
+First auditor's objection: ${c.why}
+
+READ THE FILE. Decide independently whether the negative assertion at/near that line can go
+VACUOUS — i.e. pass while the collection under test drifted away, emptied, or became
+undefined. Remember: expect(undefined).not.toHaveProperty(x) passes; expect('').not.toContain(x)
+passes; expect([]).not.toContain(x) passes.
+
+Try hard to REFUTE the first auditor. If a positive assertion on the SAME subject exists
+anywhere in that test (including AFTER the negative, or inside the same helper call), the
+anchor is SOUND and the objection fails. Default to "objection REFUTED" if uncertain.
+
+Return whether the objection stands, and if it stands, the minimal concrete fix.`, {
+    label: `refute:${c.file.split('/').pop()}:${c.line}`,
+    phase: 'Refute',
+    schema: {
+      type: 'object',
+      properties: {
+        objectionStands: { type: 'boolean' },
+        reasoning: { type: 'string' },
+        minimalFix: { type: 'string' },
+      },
+      required: ['objectionStands', 'reasoning'],
+    },
+  }).then(v => ({ ...c, second: v }))))
+
+const upheld = second.filter(Boolean).filter(r => r.second?.objectionStands)
+
+const critic = await agent(`COMPLETENESS CRITIC.
+
+A repair anchored 47 previously-bare negative assertions across 22 test files in ${ROOT},
+to re-arm tests/lint/negativeAssertionAnchor.walker.test.js. The walker now passes.
+
+Independently check for things the audit could have MISSED:
+1. Did any "// anchored:" comment get added whose text itself spells a scanned matcher with
+   an open paren (not.toContain( / not.toMatch( / not.toHaveProperty( )? The scanner counts
+   a matcher inside a COMMENT as a real site, so such prose creates new violations.
+2. Did any edit WEAKEN or DELETE a pre-existing assertion, rather than only adding? Use
+   \`git diff\` in ${ROOT} restricted to tests/ and look for removed expect(...) lines that
+   were not replaced by an equivalent or stronger anchoredNegatives helper call.
+3. Are the three files with pre-existing frozen ceilings still EXACTLY at their ceilings?
+   tests/lint/envoyErrandLedgerSingleWriter.walker.test.js = 1,
+   tests/lint/testRatchet.test.js = 2,
+   tests/store/importReconciliationRpcProjection.test.js = 4.
+   Anchoring too many there drops the file BELOW its ceiling and reds the inventory-honesty arm.
+4. Any newly added positive control that asserts something FALSE or tautological (e.g.
+   asserting a property that is always present regardless of the behavior under test).
+
+Note: the working tree also contains ANOTHER lane's uncommitted work (campaign runtime
+preload guards, a step-15 ratchet reconciliation). Do not attribute those hunks to this repair;
+report them separately if relevant.
+
+Report concrete findings with file:line. Say plainly if you find nothing.`, {
+  label: 'completeness-critic',
+  phase: 'Critic',
+})
+
+return {
+  audited: claims.length,
+  sound: claims.filter(c => c.verdict === 'SOUND').length,
+  doubtedFirstPass: doubted.length,
+  upheldAfterRefutation: upheld.map(r => ({
+    file: r.file, line: r.line, verdict: r.verdict,
+    why: r.why, fix: r.second?.minimalFix,
+  })),
+  critic,
+}

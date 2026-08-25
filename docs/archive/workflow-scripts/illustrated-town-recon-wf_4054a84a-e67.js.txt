@@ -1,0 +1,49 @@
+export const meta = {
+  name: 'illustrated-town-recon',
+  description: 'Ground THE ILLUSTRATED TOWN design in the real map-stack code',
+  phases: [
+    { title: 'Recon', detail: '4 parallel readers: render architecture, AI style seam, live-state reads, export constraints' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/agent-a04d3f325c72e62dd'
+const PREAMBLE = `READ-ONLY TASK — no edits, no file creation, no state-mutating git commands (no checkout/stash/commit/add). Repo worktree: ${WT}, expected branch claude/the-composite @ 78a04afc. FIRST verify: git -C ${WT} branch --show-current and git -C ${WT} rev-parse --short HEAD; if mismatched, report the mismatch but CONTINUE read-only (reads are still valid — just state what you actually read). cwd resets between commands — always git -C ${WT} or absolute paths. Locate files with git -C ${WT} ls-files | grep -i <name> before assuming paths. Some map code may live on UNMERGED branches — you can read any branch via git -C ${WT} show <branch>:<path> (refs are shared). Return concrete file paths + line-anchored facts, not impressions.`
+
+const REPORT = {
+  type: 'object',
+  required: ['findings', 'key_files', 'red_flags'],
+  properties: {
+    findings: { type: 'string', description: 'the substantive answer, organized, with file:line anchors' },
+    key_files: { type: 'array', items: { type: 'string' } },
+    contracts: { type: 'string', description: 'the API/data contracts a new art layer must honor' },
+    red_flags: { type: 'array', items: { type: 'string' } },
+  }
+}
+
+phase('Recon')
+const [render, aiSeam, liveState, exports_] = await parallel([
+  () => agent(`${PREAMBLE}
+
+MAP RENDER ARCHITECTURE. Answer exhaustively: (1) How does the town map currently DRAW — walk src/domain/townMap/townMapDraw.js (and siblings like townLayoutV2.js, siteGenesis.js) and the render component (components/townMap/SettlementMapPane.jsx): what visual primitives represent buildings (shapes? paths?), streets, walls, water — quote the actual mark-emitting code shapes. (2) The LENS SYSTEM: how are the 5 style lenses + accessibility lens implemented (data-driven config vs code branches)? What defines a lens — palette? mark styles? Where? (3) The PANORAMA projection (SettlementMapPanorama.jsx + its domain code): how does it project — this proves what projection machinery exists for an oblique birds-flight view. (4) CATEGORIES: how do institutions map to visual representation today (the categories-pinned-not-imported rule — find the pinned category list). (5) DETERMINISM: how is drawing seeded (the seed fork pattern), and which GOLDEN FAMILIES pin map output (find tests/goldens for map/style/v2 — names, entry counts, what exactly they pin). (6) FOLD-STATE: for each of claude/town-layout-v2, claude/landforms, claude/sm-5-legibility, claude/interiors, claude/fog-table-layer — run git -C ${WT} merge-base --is-ancestor <branch> HEAD and report which are IN the composite vs still un-merged (their code would need reading via git show <branch>:<path>). (7) PERF: current SVG element counts for a large city map if discoverable (any perf notes/tests).`,
+    { label: 'recon:render-architecture', phase: 'Recon', model: 'opus', schema: REPORT }),
+
+  () => agent(`${PREAMBLE}
+
+THE AI STYLE / CUSTOMIZATION SEAM. The owner wants AI-driven map RESKINS (change look, building skins, even genre). Map what exists: (1) mapEdits.bespokeStyles — find its shape, writers, readers (the bespoke-style storage from the rulings-wiring lane; check claude/rulings-wiring via git show if not in the composite). (2) StyleOverhaulPanel.jsx + its domain support (surveyorWrite.js, domain/ai/*, domain/content/*): what can the AI style overhaul propose TODAY, what schema wall validates it, how do proposals become applied state (the accept→mint seam from S3/InterpretApplyPanel)? (3) THE FACET LAW implementation: find the facetOf chokepoint and a declared-facet example (deities?) — the pattern a 'skin' declaration would follow. (4) Custom content registry (customRegistry): how custom entries persist, the listCustom API, whale-table rules. (5) S4 CustomContentPanel: what content kinds it can mint — could it mint a 'map skin' kind? (6) Where per-settlement style prefs live today (which lens a user picked — persisted where?). (7) Genre-door notes: grep docs/ for genre-pack / genre mentions (DESIGN_CONTENT_PLANE.md etc.) — quote the standing doctrine so the skin registry aligns with it.`,
+    { label: 'recon:ai-style-seam', phase: 'Recon', model: 'opus', schema: REPORT }),
+
+  () => agent(`${PREAMBLE}
+
+LIVE-STATE + SEASON READS for map dress. The design wants the map to wear the world's CURRENT state (season, siege, scars, construction). Map what is readable: (1) SEASONS: does the sim track season/date (grep domain/ for season; the tempo/seasons preset mechanics) — what field, what values, readable at map render time? (2) URBAN FABRIC: the fabricRead/change-view machinery (domain/townMap/changeView.js, urban fabric domain) — what per-district/per-site state exists (scars, rebirth, prominence, regime lingering)? What does the map already read from it? (3) WAR/SIEGE state: can the map know the settlement is besieged/blockaded/at war right now (which store selectors)? (4) LANDFORM MARKS (may be on claude/landforms if not an ancestor — read via git show claude/landforms:<path>): how are stipple/contour/hachure marks implemented — the pattern vocabulary (frame.landform), density rules, the pattern-not-colour law, which lenses render them? This is the proven idiom the ground-dress layer extends. (5) INTERIORS + FOG + DM PINS + edge annotations: what per-map overlays exist that a new illustrated lens must COEXIST with (z-order, hit-testing, hover cards) — the constraint surface. (6) MapEdits: what cosmetic edit keys exist (the PRIVATE_KEY_RE dodge rule) — where a season/skin override could persist per settlement.`,
+    { label: 'recon:live-state-reads', phase: 'Recon', model: 'opus', schema: REPORT }),
+
+  () => agent(`${PREAMBLE}
+
+EXPORT + PRINT CONSTRAINTS. The illustrated lens must not break exports. Map: (1) UVTT export (foundry/, lib/townMapExport.js, moduleBuilder.js): what geometry does it emit (walls, portals, lights?) — confirm it depends on ORTHOGRAPHIC plan geometry and what exactly it reads from the map model (this is why plan view must survive as source of truth). (2) PDF export (pdf/TownMapDocument.jsx, pdf/sections/TownMapPlate.jsx, utils/townMapPdfExport.js): how does the map get into the PDF (SVG re-render? raster?) — could an illustrated lens render there; what react-pdf limitations apply (the counterseal SVG-string limitation is documented — find that seam note). (3) The map EXPORT MENU (SettlementMapExportMenu.jsx): what formats/options exist; where a lens choice enters exports. (4) The $2.99 export bundle contents (resolveExportSeam.js / the exact single-dossier lane): does the map ride it, at which lens? (5) GOLDEN + BUDGET guardrails for exports: verify:dist contracts touching map exports, and confirm all map surfaces are lazy (no eager bytes) — find the lazy boundaries. (6) Style-lens persistence into exports: if a user picked a lens/skin, does today's export honor it (trace the option plumbing).`,
+    { label: 'recon:export-constraints', phase: 'Recon', model: 'opus', schema: REPORT }),
+])
+
+const missing = [render, aiSeam, liveState, exports_].map((r, i) => r ? null : ['render','aiSeam','liveState','exports'][i]).filter(Boolean)
+if (missing.length) log(`WARNING: recon slots failed: ${missing.join(', ')}`)
+
+return { render, aiSeam, liveState, exports: exports_ }
