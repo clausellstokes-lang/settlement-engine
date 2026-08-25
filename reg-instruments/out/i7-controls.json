@@ -1,0 +1,386 @@
+{
+  "plates": [
+    {
+      "name": "AFTER-city",
+      "png": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/png/AFTER-city.png",
+      "grid": "1100x1100",
+      "satFloor": 0.06,
+      "conformanceFloor": 0.6,
+      "rows": [
+        {
+          "instrument": "hue.water",
+          "value": 0.6716,
+          "denominator": "319998 SATURATED px of 327001 water px (7003 below sat 0.06) at 1100²",
+          "band": [
+            185,
+            265
+          ],
+          "pass": true,
+          "roles": [
+            "water"
+          ],
+          "applicable": true,
+          "status": "MEASURED",
+          "conformance": 0.6716,
+          "dominantHueDeg": 195,
+          "hueInBand": true,
+          "greyShare": 0.0214,
+          "achromatic": false,
+          "failReason": null,
+          "meanSaturation": 0.2411,
+          "rolePx": 327001,
+          "saturatedPx": 319998,
+          "greyPx": 7003
+        },
+        {
+          "instrument": "hue.field",
+          "value": 0.8749,
+          "denominator": "24902 SATURATED px of 24902 field px (0 below sat 0.06) at 1100²",
+          "band": [
+            35,
+            70
+          ],
+          "pass": true,
+          "roles": [
+            "field"
+          ],
+          "applicable": true,
+          "status": "MEASURED",
+          "conformance": 0.8749,
+          "dominantHueDeg": 45,
+          "hueInBand": true,
+          "greyShare": 0,
+          "achromatic": false,
+          "failReason": null,
+          "meanSaturation": 0.3017,
+          "rolePx": 24902,
+          "saturatedPx": 24902,
+          "greyPx": 0
+        },
+        {
+          "instrument": "hue.town",
+          "value": 1,
+          "denominator": "163585 SATURATED px of 163585 building+landmark px (0 below sat 0.06) at 1100²",
+          "band": [
+            0,
+            60
+          ],
+          "pass": true,
+          "roles": [
+            "building",
+            "landmark"
+          ],
+          "applicable": true,
+          "status": "MEASURED",
+          "conformance": 1,
+          "dominantHueDeg": 25,
+          "hueInBand": true,
+          "greyShare": 0,
+          "achromatic": false,
+          "failReason": null,
+          "meanSaturation": 0.3384,
+          "rolePx": 163585,
+          "saturatedPx": 163585,
+          "greyPx": 0
+        }
+      ],
+      "applicableArms": 3,
+      "notApplicable": [],
+      "pass": true
+    },
+    {
+      "name": "BEFORE-city",
+      "png": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/png/BEFORE-city.png",
+      "grid": "1100x1100",
+      "satFloor": 0.06,
+      "conformanceFloor": 0.6,
+      "rows": [
+        {
+          "instrument": "hue.water",
+          "value": 0.0001,
+          "denominator": "116495 SATURATED px of 327001 water px (210506 below sat 0.06) at 1100²",
+          "band": [
+            185,
+            265
+          ],
+          "pass": false,
+          "roles": [
+            "water"
+          ],
+          "applicable": true,
+          "status": "MEASURED",
+          "conformance": 0.0001,
+          "dominantHueDeg": 45,
+          "hueInBand": false,
+          "greyShare": 0.6437,
+          "achromatic": true,
+          "failReason": "ACHROMATIC — 64% of the role is below saturation 0.06; it has not moved hue, it has LOST hue",
+          "meanSaturation": 0.4087,
+          "rolePx": 327001,
+          "saturatedPx": 116495,
+          "greyPx": 210506
+        },
+        {
+          "instrument": "hue.field",
+          "value": 0.9476,
+          "denominator": "24902 SATURATED px of 24902 field px (0 below sat 0.06) at 1100²",
+          "band": [
+            35,
+            70
+          ],
+          "pass": true,
+          "roles": [
+            "field"
+          ],
+          "applicable": true,
+          "status": "MEASURED",
+          "conformance": 0.9476,
+          "dominantHueDeg": 55,
+          "hueInBand": true,
+          "greyShare": 0,
+          "achromatic": false,
+          "failReason": null,
+          "meanSaturation": 0.2596,
+          "rolePx": 24902,
+          "saturatedPx": 24902,
+          "greyPx": 0
+        },
+        {
+          "instrument": "hue.town",
+          "value": 1,
+          "denominator": "163585 SATURATED px of 163585 building+landmark px (0 below sat 0.06) at 1100²",
+          "band": [
+            0,
+            60
+          ],
+          "pass": true,
+          "roles": [
+            "building",
+            "landmark"
+          ],
+          "applicable": true,
+          "status": "MEASURED",
+          "conformance": 1,
+          "dominantHueDeg": 35,
+          "hueInBand": true,
+          "greyShare": 0,
+          "achromatic": false,
+          "failReason": null,
+          "meanSaturation": 0.2121,
+          "rolePx": 163585,
+          "saturatedPx": 163585,
+          "greyPx": 0
+        }
+      ],
+      "applicableArms": 3,
+      "notApplicable": [],
+      "pass": false
+    },
+    {
+      "name": "CTRL-grey-water",
+      "png": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg-instruments/png/CTRL-grey-water.png",
+      "grid": "1100x1100",
+      "satFloor": 0.06,
+      "conformanceFloor": 0.6,
+      "rows": [
+        {
+          "instrument": "hue.water",
+          "value": 0,
+          "denominator": "327001 SATURATED px of 327001 water px (0 below sat 0.06) at 1100²",
+          "band": [
+            185,
+            265
+          ],
+          "pass": false,
+          "roles": [
+            "water"
+          ],
+          "applicable": true,
+          "status": "MEASURED",
+          "conformance": 0,
+          "dominantHueDeg": 65,
+          "hueInBand": false,
+          "greyShare": 0,
+          "achromatic": false,
+          "failReason": "OUT OF BAND — dominant hue 65°",
+          "meanSaturation": 0.2668,
+          "rolePx": 327001,
+          "saturatedPx": 327001,
+          "greyPx": 0
+        },
+        {
+          "instrument": "hue.field",
+          "value": 0.9476,
+          "denominator": "24902 SATURATED px of 24902 field px (0 below sat 0.06) at 1100²",
+          "band": [
+            35,
+            70
+          ],
+          "pass": true,
+          "roles": [
+            "field"
+          ],
+          "applicable": true,
+          "status": "MEASURED",
+          "conformance": 0.9476,
+          "dominantHueDeg": 55,
+          "hueInBand": true,
+          "greyShare": 0,
+          "achromatic": false,
+          "failReason": null,
+          "meanSaturation": 0.2596,
+          "rolePx": 24902,
+          "saturatedPx": 24902,
+          "greyPx": 0
+        },
+        {
+          "instrument": "hue.town",
+          "value": 1,
+          "denominator": "163585 SATURATED px of 163585 building+landmark px (0 below sat 0.06) at 1100²",
+          "band": [
+            0,
+            60
+          ],
+          "pass": true,
+          "roles": [
+            "building",
+            "landmark"
+          ],
+          "applicable": true,
+          "status": "MEASURED",
+          "conformance": 1,
+          "dominantHueDeg": 35,
+          "hueInBand": true,
+          "greyShare": 0,
+          "achromatic": false,
+          "failReason": null,
+          "meanSaturation": 0.2121,
+          "rolePx": 163585,
+          "saturatedPx": 163585,
+          "greyPx": 0
+        }
+      ],
+      "applicableArms": 3,
+      "notApplicable": [],
+      "pass": false
+    },
+    {
+      "name": "CTRL-flat-wall",
+      "png": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg-instruments/png/CTRL-flat-wall.png",
+      "grid": "1100x1100",
+      "satFloor": 0.06,
+      "conformanceFloor": 0.6,
+      "rows": [
+        {
+          "instrument": "hue.water",
+          "value": 0.0001,
+          "denominator": "114547 SATURATED px of 327001 water px (212454 below sat 0.06) at 1100²",
+          "band": [
+            185,
+            265
+          ],
+          "pass": false,
+          "roles": [
+            "water"
+          ],
+          "applicable": true,
+          "status": "MEASURED",
+          "conformance": 0.0001,
+          "dominantHueDeg": 45,
+          "hueInBand": false,
+          "greyShare": 0.6497,
+          "achromatic": true,
+          "failReason": "ACHROMATIC — 65% of the role is below saturation 0.06; it has not moved hue, it has LOST hue",
+          "meanSaturation": 0.4107,
+          "rolePx": 327001,
+          "saturatedPx": 114547,
+          "greyPx": 212454
+        },
+        {
+          "instrument": "hue.field",
+          "value": 0.9651,
+          "denominator": "24902 SATURATED px of 24902 field px (0 below sat 0.06) at 1100²",
+          "band": [
+            35,
+            70
+          ],
+          "pass": true,
+          "roles": [
+            "field"
+          ],
+          "applicable": true,
+          "status": "MEASURED",
+          "conformance": 0.9651,
+          "dominantHueDeg": 55,
+          "hueInBand": true,
+          "greyShare": 0,
+          "achromatic": false,
+          "failReason": null,
+          "meanSaturation": 0.2582,
+          "rolePx": 24902,
+          "saturatedPx": 24902,
+          "greyPx": 0
+        },
+        {
+          "instrument": "hue.town",
+          "value": 1,
+          "denominator": "163585 SATURATED px of 163585 building+landmark px (0 below sat 0.06) at 1100²",
+          "band": [
+            0,
+            60
+          ],
+          "pass": true,
+          "roles": [
+            "building",
+            "landmark"
+          ],
+          "applicable": true,
+          "status": "MEASURED",
+          "conformance": 1,
+          "dominantHueDeg": 35,
+          "hueInBand": true,
+          "greyShare": 0,
+          "achromatic": false,
+          "failReason": null,
+          "meanSaturation": 0.2114,
+          "rolePx": 163585,
+          "saturatedPx": 163585,
+          "greyPx": 0
+        }
+      ],
+      "applicableArms": 3,
+      "notApplicable": [],
+      "pass": false
+    }
+  ],
+  "liveness": [
+    [
+      "grey-water drives the WATER role out of its band",
+      true
+    ],
+    [
+      "and it is a big move, not a wobble",
+      true
+    ],
+    [
+      "grey-water leaves the TOWN hue where it was",
+      true
+    ],
+    [
+      "grey-water leaves the FIELD hue where it was",
+      true
+    ],
+    [
+      "the wall control does not touch any hue row",
+      true
+    ],
+    [
+      "the sealed base's water is reported ACHROMATIC, not mis-hued",
+      true
+    ],
+    [
+      "the specimen's water is NOT achromatic (REG-0's re-statement worked)",
+      true
+    ]
+  ]
+}

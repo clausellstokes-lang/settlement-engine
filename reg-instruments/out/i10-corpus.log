@@ -1,0 +1,26 @@
+── THE TWO ORDERED CENSUSES · sealed model at /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/w3f-tree
+  leaf         tier        rings  straddleA  straddleX  bodiesOutside/members  suburb
+  thorp        thorp       0      n/a        n/a        n/a                    31   423ms
+  hamlet       hamlet      0      n/a        n/a        n/a                    92   389ms
+  village      village     0      n/a        n/a        n/a                    196   405ms
+  town         town        1      0/6        0/6        0/925                  614   2556ms
+  town-2       town        1      0/7        0/7        0/1029                 574   2652ms
+  city         city        2      0/8        3/8        0/1549                 614   6925ms
+  metropolis   metropolis  3      0/9        3/9        0/2742                 390   11544ms
+  polycentric  town        1      0/8        1/8        0/801                  653   5817ms
+  highwater    town        2      0/4        0/4        0/1501                 97   20146ms
+  mountain     village     0      n/a        n/a        n/a                    153   227ms
+  fjord        town        0      n/a        n/a        n/a                    1526   855ms
+  siege        town        1      0/6        0/6        0/925                  560   2968ms
+  plague       town        1      0/6        0/6        0/925                  615   2591ms
+  famine       town        1      0/6        0/6        0/925                  614   2648ms
+  migration    city        2      0/8        3/8        0/1549                 614   10600ms
+  year-018     town        0      n/a        n/a        n/a                    1594   1774ms
+  year-100     town        1      0/4        0/4        0/1453                 142   4055ms
+  crossing     town        1      0/7        0/7        0/1002                 596   8409ms
+
+CENSUS A · STRADDLE (law's predicate)  = 0 of 79 district regions, on 12 walled leaf/leaves of 18 measured
+CENSUS A · cross-check (no band)      = 10 of 79
+CENSUS B · OUTSIDE-CIRCUIT BODIES     = 0 of 15326 members (6083 suburb, 25001 drawn bodies across all leaves)
+§240.1 hull vertices outside own ring  = 0
+I10_DONE

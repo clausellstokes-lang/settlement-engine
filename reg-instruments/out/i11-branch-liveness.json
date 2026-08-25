@@ -1,0 +1,466 @@
+{
+  "worktree": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/laneREG4-tree",
+  "armA": {
+    "law": "marketShapeFor → triangular",
+    "rows": [
+      {
+        "id": "A1-lane",
+        "sepIdx": 341,
+        "sepDeg": 119.883,
+        "rank": "lane",
+        "mouths": 3,
+        "major": 3,
+        "shape": "triangular",
+        "axis": 0,
+        "reason": "hf259 triangular green: three major roads meet (3 mouths in all), smallest separation 120° ≥ 70°"
+      },
+      {
+        "id": "A1-high",
+        "sepIdx": 341,
+        "sepDeg": 119.883,
+        "rank": "high",
+        "mouths": 3,
+        "major": 3,
+        "shape": "triangular",
+        "axis": 0,
+        "reason": "hf259 triangular green: three major roads meet (3 mouths in all), smallest separation 120° ≥ 70°"
+      },
+      {
+        "id": "A2-60deg",
+        "sepIdx": 171,
+        "sepDeg": 60.117,
+        "rank": "lane",
+        "mouths": 3,
+        "major": 3,
+        "shape": "triangular",
+        "axis": 0,
+        "reason": "hf259 triangular green: three major roads meet (3 mouths in all), smallest separation 60° ≥ 70°"
+      },
+      {
+        "id": "A2-59deg",
+        "sepIdx": 168,
+        "sepDeg": 59.063,
+        "rank": "lane",
+        "mouths": 3,
+        "major": 3,
+        "shape": "carved",
+        "axis": 0,
+        "reason": "hf259 carved square: 3 major of 3 mouths — the three major roads crowd one side"
+      }
+    ],
+    "sweep": [
+      {
+        "sepIdx": 160,
+        "sepDeg": 56.25,
+        "shape": "carved",
+        "major": 3,
+        "mouths": 3
+      },
+      {
+        "sepIdx": 161,
+        "sepDeg": 56.602,
+        "shape": "carved",
+        "major": 3,
+        "mouths": 3
+      },
+      {
+        "sepIdx": 162,
+        "sepDeg": 56.953,
+        "shape": "carved",
+        "major": 3,
+        "mouths": 3
+      },
+      {
+        "sepIdx": 163,
+        "sepDeg": 57.305,
+        "shape": "carved",
+        "major": 3,
+        "mouths": 3
+      },
+      {
+        "sepIdx": 164,
+        "sepDeg": 57.656,
+        "shape": "carved",
+        "major": 3,
+        "mouths": 3
+      },
+      {
+        "sepIdx": 165,
+        "sepDeg": 58.008,
+        "shape": "carved",
+        "major": 3,
+        "mouths": 3
+      },
+      {
+        "sepIdx": 166,
+        "sepDeg": 58.359,
+        "shape": "carved",
+        "major": 3,
+        "mouths": 3
+      },
+      {
+        "sepIdx": 167,
+        "sepDeg": 58.711,
+        "shape": "carved",
+        "major": 3,
+        "mouths": 3
+      },
+      {
+        "sepIdx": 168,
+        "sepDeg": 59.063,
+        "shape": "carved",
+        "major": 3,
+        "mouths": 3
+      },
+      {
+        "sepIdx": 169,
+        "sepDeg": 59.414,
+        "shape": "carved",
+        "major": 3,
+        "mouths": 3
+      },
+      {
+        "sepIdx": 170,
+        "sepDeg": 59.766,
+        "shape": "carved",
+        "major": 3,
+        "mouths": 3
+      },
+      {
+        "sepIdx": 171,
+        "sepDeg": 60.117,
+        "shape": "triangular",
+        "major": 3,
+        "mouths": 3
+      },
+      {
+        "sepIdx": 172,
+        "sepDeg": 60.469,
+        "shape": "triangular",
+        "major": 3,
+        "mouths": 3
+      },
+      {
+        "sepIdx": 173,
+        "sepDeg": 60.82,
+        "shape": "triangular",
+        "major": 3,
+        "mouths": 3
+      },
+      {
+        "sepIdx": 174,
+        "sepDeg": 61.172,
+        "shape": "triangular",
+        "major": 3,
+        "mouths": 3
+      },
+      {
+        "sepIdx": 175,
+        "sepDeg": 61.523,
+        "shape": "triangular",
+        "major": 3,
+        "mouths": 3
+      },
+      {
+        "sepIdx": 176,
+        "sepDeg": 61.875,
+        "shape": "triangular",
+        "major": 3,
+        "mouths": 3
+      },
+      {
+        "sepIdx": 177,
+        "sepDeg": 62.227,
+        "shape": "triangular",
+        "major": 3,
+        "mouths": 3
+      },
+      {
+        "sepIdx": 178,
+        "sepDeg": 62.578,
+        "shape": "triangular",
+        "major": 3,
+        "mouths": 3
+      },
+      {
+        "sepIdx": 179,
+        "sepDeg": 62.93,
+        "shape": "triangular",
+        "major": 3,
+        "mouths": 3
+      },
+      {
+        "sepIdx": 180,
+        "sepDeg": 63.281,
+        "shape": "triangular",
+        "major": 3,
+        "mouths": 3
+      },
+      {
+        "sepIdx": 181,
+        "sepDeg": 63.633,
+        "shape": "triangular",
+        "major": 3,
+        "mouths": 3
+      },
+      {
+        "sepIdx": 182,
+        "sepDeg": 63.984,
+        "shape": "triangular",
+        "major": 3,
+        "mouths": 3
+      }
+    ],
+    "boundary": {
+      "firstFiringIndex": 171,
+      "firstFiringDeg": 60.117,
+      "declaredConstant": 170.66666666666666,
+      "declaredConstantDeg": 60,
+      "trigN": 1024,
+      "note": "the shipped constant is TRIG_N/6 = 170.667 and bearings are integers, so the smallest firing separation is 171 = 60.117° — the gate is strictly ABOVE 60°, not at it"
+    },
+    "entryPoint": {
+      "shape": "triangular",
+      "reason": "hf259 triangular green: three major roads meet (3 mouths in all), smallest separation 120° ≥ 70°",
+      "mouths": 3,
+      "gaps": 3,
+      "registerVertices": 48,
+      "areaBlob": 11180.9,
+      "areaRegister": 4982.5,
+      "retention": 0.446,
+      "fixtures": 7,
+      "band": [
+        3,
+        7
+      ],
+      "coverage": {
+        "voids": 1,
+        "shapes": "cigar 0 · triangular 1 · carved 0",
+        "fixtures": 7,
+        "fossils": 0,
+        "inBand": 1
+      }
+    }
+  },
+  "armB": {
+    "law": "deriveFaubourgOrigins → bridgehead",
+    "knotUnits": 41,
+    "gateReachUnits": 40,
+    "rows": [
+      {
+        "id": "B1-on-the-deck",
+        "origin": "bridgehead",
+        "dDeck": 4,
+        "dGate": 596,
+        "why": "the bridge 'br-synth' is 4 away — inside its own 41 knot and nearer than the gate (596)",
+        "byOrigin": "gate 0 · bridgehead 1 · road 0",
+        "districts": 1,
+        "districtOrigin": "bridgehead"
+      },
+      {
+        "id": "B2-just-inside-knot",
+        "origin": "bridgehead",
+        "dDeck": 40.5,
+        "why": "the bridge 'br-synth' is 40.5 away — inside its own 41 knot and nearer than the gate (559.5)"
+      },
+      {
+        "id": "B2-just-outside-knot",
+        "origin": "road",
+        "dDeck": 41.5,
+        "why": "hf32: 111.7 frontages out along the approach — a ribbon, not a knot"
+      },
+      {
+        "id": "B3-gate-nearer-than-deck",
+        "origin": "gate",
+        "dDeck": 3,
+        "dGate": 1,
+        "why": "hf311: 0.2 frontages from its gate, inside the 8-frontage before-the-gate reach"
+      }
+    ],
+    "sweep": [
+      {
+        "dDeck": 0,
+        "origin": "bridgehead"
+      },
+      {
+        "dDeck": 2,
+        "origin": "bridgehead"
+      },
+      {
+        "dDeck": 4,
+        "origin": "bridgehead"
+      },
+      {
+        "dDeck": 6,
+        "origin": "bridgehead"
+      },
+      {
+        "dDeck": 8,
+        "origin": "bridgehead"
+      },
+      {
+        "dDeck": 10,
+        "origin": "bridgehead"
+      },
+      {
+        "dDeck": 12,
+        "origin": "bridgehead"
+      },
+      {
+        "dDeck": 14,
+        "origin": "bridgehead"
+      },
+      {
+        "dDeck": 16,
+        "origin": "bridgehead"
+      },
+      {
+        "dDeck": 18,
+        "origin": "bridgehead"
+      },
+      {
+        "dDeck": 20,
+        "origin": "bridgehead"
+      },
+      {
+        "dDeck": 22,
+        "origin": "bridgehead"
+      },
+      {
+        "dDeck": 24,
+        "origin": "bridgehead"
+      },
+      {
+        "dDeck": 26,
+        "origin": "bridgehead"
+      },
+      {
+        "dDeck": 28,
+        "origin": "bridgehead"
+      },
+      {
+        "dDeck": 30,
+        "origin": "bridgehead"
+      },
+      {
+        "dDeck": 32,
+        "origin": "bridgehead"
+      },
+      {
+        "dDeck": 34,
+        "origin": "bridgehead"
+      },
+      {
+        "dDeck": 36,
+        "origin": "bridgehead"
+      },
+      {
+        "dDeck": 38,
+        "origin": "bridgehead"
+      },
+      {
+        "dDeck": 40,
+        "origin": "bridgehead"
+      },
+      {
+        "dDeck": 42,
+        "origin": "road"
+      },
+      {
+        "dDeck": 44,
+        "origin": "road"
+      },
+      {
+        "dDeck": 46,
+        "origin": "road"
+      },
+      {
+        "dDeck": 48,
+        "origin": "road"
+      },
+      {
+        "dDeck": 50,
+        "origin": "road"
+      },
+      {
+        "dDeck": 52,
+        "origin": "road"
+      },
+      {
+        "dDeck": 54,
+        "origin": "road"
+      },
+      {
+        "dDeck": 56,
+        "origin": "road"
+      },
+      {
+        "dDeck": 58,
+        "origin": "road"
+      },
+      {
+        "dDeck": 60,
+        "origin": "road"
+      }
+    ],
+    "boundary": {
+      "lastBridgeheadAt": 40,
+      "firstNonBridgeheadAt": 42,
+      "declaredKnot": 41
+    }
+  },
+  "liveness": [
+    [
+      "A · three major roads 120° apart select TRIANGULAR through the real selector",
+      true
+    ],
+    [
+      "A · at 60° the branch FIRES",
+      true
+    ],
+    [
+      "A · at 59° the branch does NOT fire (the gate is real, not decorative)",
+      true
+    ],
+    [
+      "A · the sweep names a single crossing index and it is 171 (= 60.117°)",
+      true
+    ],
+    [
+      "A · below the boundary the fallthrough is CARVED, never a crash or a null",
+      true
+    ],
+    [
+      "A · every swept case still finds exactly 3 mouths and 3 major (the sweep moves ONE thing)",
+      true
+    ],
+    [
+      "A · the WHOLE entry point (not just the selector) yields a triangular register with an entry gap per mouth",
+      true
+    ],
+    [
+      "A · the register is INSCRIBED — its area does not exceed the reserved blob",
+      true
+    ],
+    [
+      "B · a building sited on a bridge deck types BRIDGEHEAD through the real path",
+      true
+    ],
+    [
+      "B · clause one is real: just inside the knot fires, just outside does not",
+      true
+    ],
+    [
+      "B · clause two is real: inside the knot but with the gate NEARER, the type is not bridgehead",
+      true
+    ],
+    [
+      "B · the sweep crosses exactly at the declared knot",
+      true
+    ],
+    [
+      "B · the bridgehead building also raises a bridgehead DISTRICT (the drawn consequence)",
+      true
+    ]
+  ]
+}

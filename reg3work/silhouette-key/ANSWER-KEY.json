@@ -1,0 +1,241 @@
+{
+  "orderSeed": "reg3-silhouette-order-1",
+  "classes": [
+    "church",
+    "hall",
+    "inn",
+    "warehouse",
+    "farmstead",
+    "craft"
+  ],
+  "perClass": 4,
+  "decoys": 4,
+  "target": 0.75,
+  "rule": "for each class, the four largest bodies of that family by drawn area across the declared seed ladder, at most one per seed",
+  "key": [
+    {
+      "id": "S01",
+      "klass": "DECOY",
+      "seed": "sil-0",
+      "family": "DECOY",
+      "area": 124.4,
+      "frame": 78
+    },
+    {
+      "id": "S02",
+      "klass": "inn",
+      "seed": "sil-8",
+      "family": "inn",
+      "area": 100.3,
+      "frame": 66
+    },
+    {
+      "id": "S03",
+      "klass": "warehouse",
+      "seed": "sil-0",
+      "family": "quay",
+      "area": 0,
+      "frame": 83
+    },
+    {
+      "id": "S04",
+      "klass": "church",
+      "seed": "sil-11",
+      "family": "church",
+      "area": 593.1,
+      "frame": 96
+    },
+    {
+      "id": "S05",
+      "klass": "church",
+      "seed": "sil-7",
+      "family": "church",
+      "area": 555.8,
+      "frame": 95
+    },
+    {
+      "id": "S06",
+      "klass": "farmstead",
+      "seed": "sil-8",
+      "family": "farmstead",
+      "area": 155.5,
+      "frame": 52
+    },
+    {
+      "id": "S07",
+      "klass": "DECOY",
+      "seed": "sil-3",
+      "family": "DECOY",
+      "area": 112.1,
+      "frame": 74
+    },
+    {
+      "id": "S08",
+      "klass": "farmstead",
+      "seed": "sil-4",
+      "family": "farmstead",
+      "area": 155.5,
+      "frame": 52
+    },
+    {
+      "id": "S09",
+      "klass": "farmstead",
+      "seed": "sil-1",
+      "family": "farmstead",
+      "area": 73.1,
+      "frame": 36
+    },
+    {
+      "id": "S10",
+      "klass": "hall",
+      "seed": "sil-11",
+      "family": "hall",
+      "area": 584.2,
+      "frame": 119
+    },
+    {
+      "id": "S11",
+      "klass": "craft",
+      "seed": "sil-2",
+      "family": "craft",
+      "area": 62.9,
+      "frame": 60
+    },
+    {
+      "id": "S12",
+      "klass": "church",
+      "seed": "sil-1",
+      "family": "church",
+      "area": 554.5,
+      "frame": 94
+    },
+    {
+      "id": "S13",
+      "klass": "warehouse",
+      "seed": "sil-1",
+      "family": "quay",
+      "area": 90.6,
+      "frame": 78
+    },
+    {
+      "id": "S14",
+      "klass": "craft",
+      "seed": "sil-10",
+      "family": "craft",
+      "area": 62.8,
+      "frame": 60
+    },
+    {
+      "id": "S15",
+      "klass": "craft",
+      "seed": "sil-6",
+      "family": "craft",
+      "area": 67.3,
+      "frame": 62
+    },
+    {
+      "id": "S16",
+      "klass": "hall",
+      "seed": "sil-1",
+      "family": "hall",
+      "area": 401.5,
+      "frame": 124
+    },
+    {
+      "id": "S17",
+      "klass": "inn",
+      "seed": "sil-1",
+      "family": "inn",
+      "area": 105.8,
+      "frame": 68
+    },
+    {
+      "id": "S18",
+      "klass": "hall",
+      "seed": "sil-10",
+      "family": "hall",
+      "area": 660.1,
+      "frame": 127
+    },
+    {
+      "id": "S19",
+      "klass": "church",
+      "seed": "sil-2",
+      "family": "church",
+      "area": 467.1,
+      "frame": 93
+    },
+    {
+      "id": "S20",
+      "klass": "DECOY",
+      "seed": "sil-4",
+      "family": "DECOY",
+      "area": 108,
+      "frame": 73
+    },
+    {
+      "id": "S21",
+      "klass": "warehouse",
+      "seed": "sil-4",
+      "family": "quay",
+      "area": 0,
+      "frame": 77
+    },
+    {
+      "id": "S22",
+      "klass": "inn",
+      "seed": "sil-0",
+      "family": "inn",
+      "area": 135.5,
+      "frame": 77
+    },
+    {
+      "id": "S23",
+      "klass": "hall",
+      "seed": "sil-2",
+      "family": "hall",
+      "area": 610.2,
+      "frame": 135
+    },
+    {
+      "id": "S24",
+      "klass": "DECOY",
+      "seed": "sil-1",
+      "family": "DECOY",
+      "area": 153.2,
+      "frame": 87
+    },
+    {
+      "id": "S25",
+      "klass": "inn",
+      "seed": "sil-4",
+      "family": "inn",
+      "area": 114.9,
+      "frame": 71
+    },
+    {
+      "id": "S26",
+      "klass": "warehouse",
+      "seed": "sil-8",
+      "family": "quay",
+      "area": 0,
+      "frame": 109
+    },
+    {
+      "id": "S27",
+      "klass": "craft",
+      "seed": "sil-1",
+      "family": "craft",
+      "area": 67.8,
+      "frame": 62
+    },
+    {
+      "id": "S28",
+      "klass": "farmstead",
+      "seed": "sil-0",
+      "family": "farmstead",
+      "area": 154.7,
+      "frame": 54
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+── i5 · ROLE-PAIR CONTRAST · BASE vs ALL FIVE WAVES ARMED, at the REG-4 seal 7fba086d5
+
+── town (town)
+   pair                     floor    BASE       ARMED      Δ          verdict
+   contrast.street:ground   >= 2.1   1.7529     1.8548     0.1019     FAIL → FAIL
+   contrast.wall:all        >= 3     7.7536     4.2681     -3.4855    PASS → PASS
+   contrast.water:ground    >= 1.35  1.5164     1.5291     0.0127     PASS → PASS
+   PLATE: FAIL → FAIL
+   ROLE CENSUS (drawing elements, classifier's own): blockfront 1→1  building 76→77  chrome 28→123  detail 28→41  field 6→6  ground 15→20  landmark 114→165  paper 1→1  square 1→1  street 9→9  text 68→61  wall 5→8  water 1→1  yard 1→1
+   ⭐ square 1→1 (+0)   detail 28→41 (+13)
+
+── city (city)
+   pair                     floor    BASE       ARMED      Δ          verdict
+   contrast.street:ground   >= 2.1   1.8818     1.727      -0.1548    FAIL → FAIL
+   contrast.wall:all        >= 3     7.2925     4.6529     -2.6396    PASS → PASS
+   contrast.water:ground    >= 1.35  1.3168     1.1246     -0.1922    FAIL → FAIL
+   PLATE: FAIL → FAIL
+   ROLE CENSUS (drawing elements, classifier's own): blockfront 1→1  building 175→169  chrome 34→37  detail 25→40  field 6→6  ground 15→22  landmark 94→133  paper 1→1  square 1→1  street 10→10  text 84→78  wall 7→12  water 3→3  yard 1→1
+   ⭐ square 1→1 (+0)   detail 25→40 (+15)
+
+── village (village)
+   pair                     floor    BASE       ARMED      Δ          verdict
+   contrast.street:ground   >= 2.1   1.9003     1.964      0.0637     FAIL → FAIL
+   contrast.wall:all        >= 3     null       null       null       n/a → n/a
+   contrast.water:ground    >= 1.35  null       null       null       n/a → n/a
+   PLATE: FAIL → FAIL
+   ROLE CENSUS (drawing elements, classifier's own): blockfront 1→1  building 46→32  chrome 22→67  detail 22→29  field 6→6  ground 8→11  landmark 22→19  paper 1→1  square 1→1  street 8→8  text 51→51  yard 1→1
+   ⭐ square 1→1 (+0)   detail 22→29 (+7)
+
+── VERDICT REGRESSIONS: 0
+   none — every pair that passed on the base still passes armed, and every pair that failed on the base fails for the same reason it always did
+
+REGI1_I5 NO_VERDICT_REGRESSION  json=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg-instruments/out/regI1-i5contrast.json

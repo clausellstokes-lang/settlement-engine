@@ -1,0 +1,231 @@
+{
+  "lane": "TE-REG-I1",
+  "round": "WAREHOUSE RE-ROUND — the class the first round could not present",
+  "supersedes": "nothing. ANSWER-KEY.json is untouched; rows S03/S21/S26 stand as the record of what the first round emitted.",
+  "orderSeed": "regI1-warehouse-order-1",
+  "classesShownToReader": [
+    "church",
+    "hall",
+    "inn",
+    "warehouse",
+    "farmstead",
+    "craft"
+  ],
+  "classUnderTest": "warehouse",
+  "perClass": 4,
+  "decoys": 2,
+  "target": 0.75,
+  "ladderSeedsUsed": 24,
+  "rule": "the four largest bodies of the warehouse CLASS by drawn area across the declared seed ladder, at most one per seed, AND drawn area strictly greater than 0, AND landmark ink verified inside the emitted crop, AND a PNG that rendered",
+  "cures": {
+    "C1": "ink floor — area must be > 0; every refusal recorded below",
+    "C2": "the emitted crop is re-parsed and must contain THIS body's own solids — verbatim as polyPath formats them — with at least one of its vertices inside the crop's own viewBox",
+    "C3": "a failed or suspect Chrome shot REFUSES the candidate instead of being swallowed",
+    "C4": "the seed ladder widens 12 → 24 → … until the class is filled; a shortfall is reported, never back-filled"
+  },
+  "rootCauseOfTheZeros": "NOT an extractor miss. groundLaw/groundRefusal wipes quay pier solids as standing-water refusals, while waterWorks.moorWaterBound moors the piers across the water on purpose. lm.solids is []. OWNER-GATED engine defect, reported not fixed.",
+  "decoySeedDisjointness": "every decoy is drawn from a seed no real fixture uses — no two fixtures in this round share a plate",
+  "warehouseFamilyIsEmpty": "the `warehouse` shapeFamily composes ZERO bodies in this corpus over 24 seeds; the class is populated entirely by the `quay` family via the original extractor's own fold",
+  "shortfall": null,
+  "key": [
+    {
+      "id": "W01",
+      "klass": "warehouse",
+      "seed": "sil-17",
+      "family": "quay",
+      "area": 87.3,
+      "frame": 76,
+      "solids": 3,
+      "inkInCrop": {
+        "ok": true,
+        "verticesInFrame": 13,
+        "solidsDrawn": 3,
+        "solidsTotal": 3,
+        "ownArea": 87.3,
+        "viewBox": [
+          372,
+          346,
+          76,
+          76
+        ],
+        "why": "3 of 3 of THIS body's solids appear verbatim in the document and 13 of its vertices are inside the crop viewBox"
+      },
+      "shot": "SHOOT_OK bytes=51200 killed=0 after=3s /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg3work/silhouettes-warehouse/W01.png"
+    },
+    {
+      "id": "W02",
+      "klass": "DECOY",
+      "seed": "sil-20",
+      "family": "DECOY",
+      "area": 135.8,
+      "frame": 82,
+      "solids": null,
+      "inkInCrop": {
+        "ok": true,
+        "why": "decoy — an ordinary fabric parcel drawn in the fabric group, not a composed institution body; C2's verbatim test does not apply",
+        "verticesInFrame": null,
+        "solidsDrawn": null,
+        "ownArea": null
+      },
+      "shot": "SHOOT_OK bytes=134836 killed=0 after=3s /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg3work/silhouettes-warehouse/W02.png"
+    },
+    {
+      "id": "W03",
+      "klass": "DECOY",
+      "seed": "sil-0",
+      "family": "DECOY",
+      "area": 124.4,
+      "frame": 78,
+      "solids": null,
+      "inkInCrop": {
+        "ok": true,
+        "why": "decoy — an ordinary fabric parcel drawn in the fabric group, not a composed institution body; C2's verbatim test does not apply",
+        "verticesInFrame": null,
+        "solidsDrawn": null,
+        "ownArea": null
+      },
+      "shot": "SHOOT_OK bytes=136197 killed=0 after=3s /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg3work/silhouettes-warehouse/W03.png"
+    },
+    {
+      "id": "W04",
+      "klass": "warehouse",
+      "seed": "sil-13",
+      "family": "quay",
+      "area": 261.9,
+      "frame": 109,
+      "solids": 4,
+      "inkInCrop": {
+        "ok": true,
+        "verticesInFrame": 18,
+        "solidsDrawn": 4,
+        "solidsTotal": 4,
+        "ownArea": 261.9,
+        "viewBox": [
+          773,
+          325,
+          109,
+          109
+        ],
+        "why": "4 of 4 of THIS body's solids appear verbatim in the document and 18 of its vertices are inside the crop viewBox"
+      },
+      "shot": "SHOOT_OK bytes=102977 killed=0 after=3s /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg3work/silhouettes-warehouse/W04.png"
+    },
+    {
+      "id": "W05",
+      "klass": "warehouse",
+      "seed": "sil-12",
+      "family": "quay",
+      "area": 153.5,
+      "frame": 83,
+      "solids": 3,
+      "inkInCrop": {
+        "ok": true,
+        "verticesInFrame": 14,
+        "solidsDrawn": 3,
+        "solidsTotal": 3,
+        "ownArea": 153.5,
+        "viewBox": [
+          432,
+          485,
+          83,
+          83
+        ],
+        "why": "3 of 3 of THIS body's solids appear verbatim in the document and 14 of its vertices are inside the crop viewBox"
+      },
+      "shot": "SHOOT_OK bytes=66229 killed=0 after=4s /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg3work/silhouettes-warehouse/W05.png"
+    },
+    {
+      "id": "W06",
+      "klass": "warehouse",
+      "seed": "sil-1",
+      "family": "quay",
+      "area": 90.6,
+      "frame": 78,
+      "solids": 3,
+      "inkInCrop": {
+        "ok": true,
+        "verticesInFrame": 16,
+        "solidsDrawn": 3,
+        "solidsTotal": 3,
+        "ownArea": 90.6,
+        "viewBox": [
+          258,
+          446,
+          78,
+          78
+        ],
+        "why": "3 of 3 of THIS body's solids appear verbatim in the document and 16 of its vertices are inside the crop viewBox"
+      },
+      "shot": "SHOOT_OK bytes=164281 killed=0 after=4s /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg3work/silhouettes-warehouse/W06.png"
+    }
+  ],
+  "rejects": [],
+  "refusedByInkFloor": [
+    {
+      "seed": "sil-0",
+      "x": 651.0416666666666,
+      "y": 619.7916666666666,
+      "size": 11.800660444198,
+      "area": 0,
+      "family": "quay",
+      "solids": 0,
+      "refusedBy": "C1 ink floor",
+      "why": "area 0 is not > 0 — 0 solids survive; the body was wiped by the ground law"
+    },
+    {
+      "seed": "sil-4",
+      "x": 524.0084504534743,
+      "y": 571.3985462589682,
+      "size": 11.070238444197999,
+      "area": 0,
+      "family": "quay",
+      "solids": 0,
+      "refusedBy": "C1 ink floor",
+      "why": "area 0 is not > 0 — 0 solids survive; the body was wiped by the ground law"
+    },
+    {
+      "seed": "sil-8",
+      "x": 693.3674670418769,
+      "y": 639.6332894969738,
+      "size": 15.509724666297,
+      "area": 0,
+      "family": "quay",
+      "solids": 0,
+      "refusedBy": "C1 ink floor",
+      "why": "area 0 is not > 0 — 0 solids survive; the body was wiped by the ground law"
+    },
+    {
+      "seed": "sil-20",
+      "x": 537.3610959213424,
+      "y": 956.7572889301183,
+      "size": 10.339816444197998,
+      "area": 0,
+      "family": "quay",
+      "solids": 0,
+      "refusedBy": "C1 ink floor",
+      "why": "area 0 is not > 0 — 0 solids survive; the body was wiped by the ground law"
+    }
+  ],
+  "spareCandidates": [
+    {
+      "seed": "sil-16",
+      "x": 343.88274797403506,
+      "y": 520.4169386387492,
+      "size": 11.800660444198,
+      "area": 56.39854697055125,
+      "family": "quay",
+      "solids": 1,
+      "klass": "warehouse"
+    },
+    {
+      "seed": "sil-21",
+      "x": 689.7814603695783,
+      "y": 338.14029661840857,
+      "size": 8.678891772602043,
+      "area": 53.11119798802247,
+      "family": "quay",
+      "solids": 3,
+      "klass": "warehouse"
+    }
+  ]
+}

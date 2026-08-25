@@ -1,0 +1,367 @@
+{
+  "P": {
+    "tier": "city",
+    "extentTier": "city",
+    "population": 20091,
+    "wallPresent": true,
+    "rings": 2,
+    "totalRegions": 8,
+    "areaFloor": 5000,
+    "legibleWards": 6,
+    "chunks": 7,
+    "band": [
+      5,
+      9
+    ],
+    "bandSource": "[min(totalRegions=8, 5), 9]",
+    "pass": true,
+    "verdictRow": {
+      "instrument": "chunking.legibleWards",
+      "value": 6,
+      "denominator": "8 district regions in fabric.umbrella.partition, area floor 5000 sq units",
+      "band": "5..9",
+      "pass": true,
+      "wallPresent": true,
+      "chunks": 7
+    },
+    "regions": [
+      {
+        "districtId": "district.mages_quarter",
+        "wallSide": "intramural",
+        "area": 125804.08
+      },
+      {
+        "districtId": "district.shadows_district",
+        "wallSide": "intramural",
+        "area": 49640.54
+      },
+      {
+        "districtId": "district.common_residential",
+        "wallSide": "intramural",
+        "area": 36008.79
+      },
+      {
+        "districtId": "district.government_quarter",
+        "wallSide": "intramural",
+        "area": 13665.66
+      },
+      {
+        "districtId": "district.mages_quarter~faubourg",
+        "wallSide": "extramural",
+        "area": 8288.05
+      },
+      {
+        "districtId": "district.common_residential~faubourg",
+        "wallSide": "extramural",
+        "area": 5090.58
+      },
+      {
+        "districtId": "district.religious_quarter",
+        "wallSide": "intramural",
+        "area": 4467.29
+      },
+      {
+        "districtId": "district.shadows_district~faubourg",
+        "wallSide": "extramural",
+        "area": 2890.52
+      }
+    ]
+  },
+  "N1": {
+    "tier": "city",
+    "extentTier": "city",
+    "population": 20091,
+    "wallPresent": true,
+    "rings": 2,
+    "totalRegions": 30,
+    "areaFloor": 5000,
+    "legibleWards": 30,
+    "chunks": 31,
+    "band": [
+      5,
+      9
+    ],
+    "bandSource": "[min(totalRegions=30, 5), 9]",
+    "pass": false,
+    "verdictRow": {
+      "instrument": "chunking.legibleWards",
+      "value": 30,
+      "denominator": "30 district regions in fabric.umbrella.partition, area floor 5000 sq units",
+      "band": "5..9",
+      "pass": false,
+      "wallPresent": true,
+      "chunks": 31
+    },
+    "regions": [
+      {
+        "districtId": "CONTROL.inflated.0",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.1",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.2",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.3",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.4",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.5",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.6",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.7",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.8",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.9",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.10",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.11",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.12",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.13",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.14",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.15",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.16",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.17",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.18",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.19",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.20",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.21",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.22",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.23",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.24",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.25",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.26",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.27",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.28",
+        "wallSide": null,
+        "area": 20000
+      },
+      {
+        "districtId": "CONTROL.inflated.29",
+        "wallSide": null,
+        "area": 20000
+      }
+    ]
+  },
+  "N2": {
+    "tier": "city",
+    "extentTier": "city",
+    "population": 20091,
+    "wallPresent": true,
+    "rings": 2,
+    "totalRegions": 8,
+    "areaFloor": 5000,
+    "legibleWards": 0,
+    "chunks": 1,
+    "band": [
+      5,
+      9
+    ],
+    "bandSource": "[min(totalRegions=8, 5), 9]",
+    "pass": false,
+    "verdictRow": {
+      "instrument": "chunking.legibleWards",
+      "value": 0,
+      "denominator": "8 district regions in fabric.umbrella.partition, area floor 5000 sq units",
+      "band": "5..9",
+      "pass": false,
+      "wallPresent": true,
+      "chunks": 1
+    },
+    "regions": [
+      {
+        "districtId": "district.common_residential",
+        "wallSide": "intramural",
+        "area": 12
+      },
+      {
+        "districtId": "district.common_residential~faubourg",
+        "wallSide": "extramural",
+        "area": 12
+      },
+      {
+        "districtId": "district.government_quarter",
+        "wallSide": "intramural",
+        "area": 12
+      },
+      {
+        "districtId": "district.mages_quarter",
+        "wallSide": "intramural",
+        "area": 12
+      },
+      {
+        "districtId": "district.mages_quarter~faubourg",
+        "wallSide": "extramural",
+        "area": 12
+      },
+      {
+        "districtId": "district.religious_quarter",
+        "wallSide": "intramural",
+        "area": 12
+      },
+      {
+        "districtId": "district.shadows_district",
+        "wallSide": "intramural",
+        "area": 12
+      },
+      {
+        "districtId": "district.shadows_district~faubourg",
+        "wallSide": "extramural",
+        "area": 12
+      }
+    ]
+  },
+  "B": {
+    "tier": "city",
+    "extentTier": "city",
+    "population": 20091,
+    "wallPresent": true,
+    "rings": 2,
+    "totalRegions": 1,
+    "areaFloor": 5000,
+    "legibleWards": 1,
+    "chunks": 2,
+    "band": [
+      1,
+      9
+    ],
+    "bandSource": "[min(totalRegions=1, 5), 9]",
+    "pass": true,
+    "verdictRow": {
+      "instrument": "chunking.legibleWards",
+      "value": 1,
+      "denominator": "1 district regions in fabric.umbrella.partition, area floor 5000 sq units",
+      "band": "1..9",
+      "pass": true,
+      "wallPresent": true,
+      "chunks": 2
+    },
+    "regions": [
+      {
+        "districtId": "CONTROL.single",
+        "wallSide": null,
+        "area": 40000
+      }
+    ]
+  },
+  "liveness": [
+    [
+      "the real city sits in band",
+      true
+    ],
+    [
+      "thirty regions fail HIGH",
+      true
+    ],
+    [
+      "all-dust fails LOW and still reports its denominator",
+      true
+    ],
+    [
+      "a single-region leaf PASSES on band [1,9]",
+      true
+    ]
+  ]
+}

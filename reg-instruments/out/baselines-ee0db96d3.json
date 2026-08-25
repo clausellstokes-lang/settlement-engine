@@ -1,0 +1,3078 @@
+{
+  "lane": "TE-REG-I0",
+  "charter": "docs/DESIGN_REGISTER_PROGRAM.md A2.1 item 3 (REG-I0), A2.2, §6, A1.3",
+  "sealedRef": "ee0db96d3",
+  "worktree": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/w3f-tree",
+  "generated": "deterministic — no Date, no Math.random anywhere in the instrument set",
+  "note": "Every row carries its DENOMINATOR in words. A figure without its denominator is not a measurement.",
+  "plates": [
+    {
+      "plate": "BASE-city",
+      "tier": "city",
+      "kind": "BASE",
+      "note": null,
+      "svg": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/out/base-city-city-parchment.svg",
+      "png": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/png/BEFORE-city.png",
+      "raster": "2200x2200",
+      "i1_squint": {
+        "size": "200x200",
+        "coverMin": 0.5,
+        "maskN": 1000,
+        "deltaFloor": 1,
+        "rows": [
+          {
+            "instrument": "squint.street",
+            "value": 1.5706,
+            "denominator": "SD of the 8924 GROUND px (33.82 lum units); role sample = 6183 px at 200×200",
+            "band": ">= 1 ground SD",
+            "pass": true,
+            "rolePx": 6183,
+            "groundPx": 8924,
+            "channel": "lum",
+            "roleMean": 204.22,
+            "groundMean": 151.09,
+            "groundSD": 33.82,
+            "sep1mOVL": 0.6806,
+            "auc": 0.8817,
+            "applicable": true,
+            "status": "MEASURED"
+          },
+          {
+            "instrument": "squint.wall",
+            "value": 2.2462,
+            "denominator": "SD of the 8924 GROUND px (33.82 lum units); role sample = 266 px at 200×200",
+            "band": ">= 1 ground SD",
+            "pass": true,
+            "rolePx": 266,
+            "groundPx": 8924,
+            "channel": "lum",
+            "roleMean": 75.12,
+            "groundMean": 151.09,
+            "groundSD": 33.82,
+            "sep1mOVL": 0.8632,
+            "auc": 0.9844,
+            "applicable": true,
+            "status": "MEASURED"
+          },
+          {
+            "instrument": "squint.water",
+            "value": 4.6354,
+            "denominator": "SD of the 8924 GROUND px (7.51 blueRed units); role sample = 10234 px at 200×200",
+            "band": ">= 1 ground SD",
+            "pass": true,
+            "rolePx": 10234,
+            "groundPx": 8924,
+            "channel": "blueRed",
+            "roleMean": -6.07,
+            "groundMean": -40.9,
+            "groundSD": 7.51,
+            "sep1mOVL": 0.8606,
+            "auc": 0.9493,
+            "applicable": true,
+            "status": "MEASURED"
+          }
+        ],
+        "applicableArms": 3,
+        "notApplicable": [],
+        "pass": true
+      },
+      "i4_landmarkSalience": {
+        "mode": "landmarks",
+        "massesFound": 93,
+        "measured": 4,
+        "fabricPx": 156613,
+        "fabricMean": 110.41,
+        "fabricSD": 37.42,
+        "groupMeanSalience": 1.0047,
+        "groupFloor": 1.5,
+        "eachFloor": 1,
+        "rows": [
+          {
+            "instrument": "landmark.salience",
+            "value": 0.8426,
+            "denominator": "SD of the 156613 FABRIC px (37.42 luminance units); mass sample = 653 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "cat:multiple_courthouses",
+            "areaUnits": 507.31,
+            "massPx": 653,
+            "massMean": 78.88,
+            "fabricMean": 110.41,
+            "fabricSD": 37.42
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 0.2219,
+            "denominator": "SD of the 156613 FABRIC px (37.42 luminance units); mass sample = 600 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "cat:cartographer_s_guild",
+            "areaUnits": 469.51,
+            "massPx": 600,
+            "massMean": 118.71,
+            "fabricMean": 110.41,
+            "fabricSD": 37.42
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 2.5509,
+            "denominator": "SD of the 156613 FABRIC px (37.42 luminance units); mass sample = 334 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": true,
+            "anchor": "",
+            "areaUnits": 256.77,
+            "massPx": 334,
+            "massMean": 205.87,
+            "fabricMean": 110.41,
+            "fabricSD": 37.42
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 0.4032,
+            "denominator": "SD of the 156613 FABRIC px (37.42 luminance units); mass sample = 329 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "",
+            "areaUnits": 250.27,
+            "massPx": 329,
+            "massMean": 125.5,
+            "fabricMean": 110.41,
+            "fabricSD": 37.42
+          }
+        ],
+        "pass": false
+      },
+      "i4_decoyControl": {
+        "mode": "DECOY CONTROL",
+        "massesFound": 93,
+        "measured": 4,
+        "fabricPx": 156613,
+        "fabricMean": 110.41,
+        "fabricSD": 37.42,
+        "groupMeanSalience": 0.7339,
+        "groupFloor": 1.5,
+        "eachFloor": 1,
+        "rows": [
+          {
+            "instrument": "landmark.salience",
+            "value": 0.9,
+            "denominator": "SD of the 156613 FABRIC px (37.42 luminance units); mass sample = 653 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "DECOY@135,251",
+            "areaUnits": 507.31,
+            "massPx": 653,
+            "massMean": 144.09,
+            "fabricMean": 110.41,
+            "fabricSD": 37.42
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 1.2353,
+            "denominator": "SD of the 156613 FABRIC px (37.42 luminance units); mass sample = 599 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": true,
+            "anchor": "DECOY@267,498",
+            "areaUnits": 469.51,
+            "massPx": 599,
+            "massMean": 156.64,
+            "fabricMean": 110.41,
+            "fabricSD": 37.42
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 0.3668,
+            "denominator": "SD of the 156613 FABRIC px (37.42 luminance units); mass sample = 333 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "DECOY@604,499",
+            "areaUnits": 256.77,
+            "massPx": 333,
+            "massMean": 124.14,
+            "fabricMean": 110.41,
+            "fabricSD": 37.42
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 0.4333,
+            "denominator": "SD of the 156613 FABRIC px (37.42 luminance units); mass sample = 328 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "DECOY@741,487",
+            "areaUnits": 250.27,
+            "massPx": 328,
+            "massMean": 126.62,
+            "fabricMean": 110.41,
+            "fabricSD": 37.42
+          }
+        ],
+        "pass": false
+      },
+      "i5_roleContrast": {
+        "grid": "1100x1100",
+        "maskN": 2200,
+        "rows": [
+          {
+            "instrument": "contrast.street:ground",
+            "value": 1.8818,
+            "denominator": "WCAG-adjusted luminance of the darker role (ground); 196902 street px vs 338007 ground px at 1100×1100",
+            "band": ">= 2.1",
+            "pass": false,
+            "measuredRatio": 1.8818,
+            "declaredByLensContrast": 4.675,
+            "delta": -2.7932,
+            "streetRGB": [
+              217,
+              208,
+              188
+            ],
+            "groundRGB": [
+              166,
+              150,
+              125
+            ],
+            "streetPx": 196902,
+            "groundPx": 338007,
+            "applicable": true,
+            "status": "MEASURED"
+          },
+          {
+            "instrument": "contrast.wall:all",
+            "value": 7.2925,
+            "denominator": "WCAG-adjusted luminance of the darker role (all); 8178 wall px vs 1210000 all px at 1100×1100",
+            "band": ">= 3",
+            "pass": true,
+            "measuredRatio": 7.2925,
+            "declaredByLensContrast": 8.3016,
+            "delta": -1.0092,
+            "wallRGB": [
+              47,
+              37,
+              27
+            ],
+            "allRGB": [
+              189,
+              181,
+              160
+            ],
+            "wallPx": 8178,
+            "allPx": 1210000,
+            "applicable": true,
+            "status": "MEASURED"
+          },
+          {
+            "instrument": "contrast.water:ground",
+            "value": 1.3168,
+            "denominator": "WCAG-adjusted luminance of the darker role (ground); 302960 water px vs 338007 ground px at 1100×1100",
+            "band": ">= 1.35",
+            "pass": false,
+            "measuredRatio": 1.3168,
+            "declaredByLensContrast": 1.6416,
+            "delta": -0.3249,
+            "waterRGB": [
+              174,
+              176,
+              168
+            ],
+            "groundRGB": [
+              166,
+              150,
+              125
+            ],
+            "waterPx": 302960,
+            "groundPx": 338007,
+            "applicable": true,
+            "status": "MEASURED"
+          }
+        ],
+        "applicableArms": 3,
+        "notApplicable": [],
+        "pass": false
+      },
+      "i7_categoryHue": {
+        "grid": "1100x1100",
+        "satFloor": 0.06,
+        "conformanceFloor": 0.6,
+        "rows": [
+          {
+            "instrument": "hue.water",
+            "value": 0.0001,
+            "denominator": "116495 SATURATED px of 327001 water px (210506 below sat 0.06) at 1100²",
+            "band": [
+              185,
+              265
+            ],
+            "pass": false,
+            "roles": [
+              "water"
+            ],
+            "applicable": true,
+            "status": "MEASURED",
+            "conformance": 0.0001,
+            "dominantHueDeg": 45,
+            "hueInBand": false,
+            "greyShare": 0.6437,
+            "achromatic": true,
+            "failReason": "ACHROMATIC — 64% of the role is below saturation 0.06; it has not moved hue, it has LOST hue",
+            "meanSaturation": 0.4087,
+            "rolePx": 327001,
+            "saturatedPx": 116495,
+            "greyPx": 210506
+          },
+          {
+            "instrument": "hue.field",
+            "value": 0.9476,
+            "denominator": "24902 SATURATED px of 24902 field px (0 below sat 0.06) at 1100²",
+            "band": [
+              35,
+              70
+            ],
+            "pass": true,
+            "roles": [
+              "field"
+            ],
+            "applicable": true,
+            "status": "MEASURED",
+            "conformance": 0.9476,
+            "dominantHueDeg": 55,
+            "hueInBand": true,
+            "greyShare": 0,
+            "achromatic": false,
+            "failReason": null,
+            "meanSaturation": 0.2596,
+            "rolePx": 24902,
+            "saturatedPx": 24902,
+            "greyPx": 0
+          },
+          {
+            "instrument": "hue.town",
+            "value": 1,
+            "denominator": "163585 SATURATED px of 163585 building+landmark px (0 below sat 0.06) at 1100²",
+            "band": [
+              0,
+              60
+            ],
+            "pass": true,
+            "roles": [
+              "building",
+              "landmark"
+            ],
+            "applicable": true,
+            "status": "MEASURED",
+            "conformance": 1,
+            "dominantHueDeg": 35,
+            "hueInBand": true,
+            "greyShare": 0,
+            "achromatic": false,
+            "failReason": null,
+            "meanSaturation": 0.2121,
+            "rolePx": 163585,
+            "saturatedPx": 163585,
+            "greyPx": 0
+          }
+        ],
+        "applicableArms": 3,
+        "notApplicable": [],
+        "pass": false
+      },
+      "i6_frontage": {
+        "geometrySvg": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/out/base-city-city-parchment.svg",
+        "asDrawn": {
+          "fuseRadiusUnits": 1.25,
+          "base": {
+            "probes": 38906,
+            "fronted": 19648,
+            "ratio": 0.505,
+            "runs": 1758,
+            "meanRunUnits": 11.17,
+            "p50RunUnits": 8.01,
+            "p90RunUnits": 23.94,
+            "maxRunUnits": 69.75,
+            "frontingMasses": 620
+          },
+          "fused": {
+            "probes": 38906,
+            "fronted": 19648,
+            "ratio": 0.505,
+            "runs": 1415,
+            "meanRunUnits": 13.88,
+            "p50RunUnits": 10.06,
+            "p90RunUnits": 30.18,
+            "maxRunUnits": 69.75,
+            "frontingMasses": 362
+          },
+          "freestanding": {
+            "scope": "intramuros (the model's own walls[].closedPolygon)",
+            "enclosureFormed": true,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": true,
+            "bodiesDrawn": 2045,
+            "bodiesAttributed": 2043,
+            "intramuralBodies": 1888,
+            "solitaryBodies": 123,
+            "freestandingFraction": 0.0651,
+            "fusedComponents": 392,
+            "bodiesPerFusedComponent": 5.29
+          }
+        },
+        "reg0Compat": {
+          "wallbandUnits": 7.19,
+          "buildingsClearedByWallband": 50,
+          "base": {
+            "probes": 38696,
+            "fronted": 19186,
+            "ratio": 0.4958,
+            "runs": 1709,
+            "meanRunUnits": 11.22,
+            "p50RunUnits": 8.02,
+            "p90RunUnits": 23.96,
+            "maxRunUnits": 69.75,
+            "frontingMasses": 609
+          },
+          "note": "REG-0's own REGIME-B strike re-applied so its published base figures reproduce exactly"
+        }
+      }
+    },
+    {
+      "plate": "BASE-village",
+      "tier": "village",
+      "kind": "BASE",
+      "note": null,
+      "svg": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/out/base-village-village-parchment.svg",
+      "png": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/png/BEFORE-village.png",
+      "raster": "2200x2200",
+      "i1_squint": {
+        "size": "200x200",
+        "coverMin": 0.5,
+        "maskN": 1000,
+        "deltaFloor": 1,
+        "rows": [
+          {
+            "instrument": "squint.street",
+            "value": 1.3087,
+            "denominator": "SD of the 1083 GROUND px (38.05 lum units); role sample = 2692 px at 200×200",
+            "band": ">= 1 ground SD",
+            "pass": true,
+            "rolePx": 2692,
+            "groundPx": 1083,
+            "channel": "lum",
+            "roleMean": 209.97,
+            "groundMean": 160.17,
+            "groundSD": 38.05,
+            "sep1mOVL": 0.7488,
+            "auc": 0.9058,
+            "applicable": true,
+            "status": "MEASURED"
+          },
+          {
+            "instrument": "squint.wall",
+            "value": null,
+            "denominator": "SD of the 1083 GROUND px (38.05 lum units); role sample = 0 px at 200×200",
+            "band": ">= 1 ground SD",
+            "pass": null,
+            "rolePx": 0,
+            "groundPx": 1083,
+            "channel": "lum",
+            "roleMean": null,
+            "groundMean": 160.17,
+            "groundSD": 38.05,
+            "sep1mOVL": null,
+            "auc": null,
+            "applicable": false,
+            "status": "NOT APPLICABLE — this leaf draws no wall; there is nothing to separate"
+          },
+          {
+            "instrument": "squint.water",
+            "value": null,
+            "denominator": "SD of the 1083 GROUND px (6.82 blueRed units); role sample = 0 px at 200×200",
+            "band": ">= 1 ground SD",
+            "pass": null,
+            "rolePx": 0,
+            "groundPx": 1083,
+            "channel": "blueRed",
+            "roleMean": null,
+            "groundMean": -36.04,
+            "groundSD": 6.82,
+            "sep1mOVL": null,
+            "auc": null,
+            "applicable": false,
+            "status": "NOT APPLICABLE — this leaf draws no water; there is nothing to separate"
+          }
+        ],
+        "applicableArms": 1,
+        "notApplicable": [
+          "squint.wall",
+          "squint.water"
+        ],
+        "pass": true
+      },
+      "i4_landmarkSalience": {
+        "mode": "landmarks",
+        "massesFound": 20,
+        "measured": 4,
+        "fabricPx": 11058,
+        "fabricMean": 93.27,
+        "fabricSD": 50.32,
+        "groupMeanSalience": 0.6302,
+        "groupFloor": 1.5,
+        "eachFloor": 1,
+        "rows": [
+          {
+            "instrument": "landmark.salience",
+            "value": 1.7634,
+            "denominator": "SD of the 11058 FABRIC px (50.32 luminance units); mass sample = 225 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": true,
+            "anchor": "",
+            "areaUnits": 173.24,
+            "massPx": 225,
+            "massMean": 182,
+            "fabricMean": 93.27,
+            "fabricSD": 50.32
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 0.3236,
+            "denominator": "SD of the 11058 FABRIC px (50.32 luminance units); mass sample = 148 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "name:alehouse",
+            "areaUnits": 110.43,
+            "massPx": 148,
+            "massMean": 109.55,
+            "fabricMean": 93.27,
+            "fabricSD": 50.32
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 0.182,
+            "denominator": "SD of the 11058 FABRIC px (50.32 luminance units); mass sample = 123 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "cat:cooper",
+            "areaUnits": 88.36,
+            "massPx": 123,
+            "massMean": 102.43,
+            "fabricMean": 93.27,
+            "fabricSD": 50.32
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 0.2519,
+            "denominator": "SD of the 11058 FABRIC px (50.32 luminance units); mass sample = 112 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "cat:mill",
+            "areaUnits": 81.02,
+            "massPx": 112,
+            "massMean": 105.95,
+            "fabricMean": 93.27,
+            "fabricSD": 50.32
+          }
+        ],
+        "pass": false
+      },
+      "i4_decoyControl": {
+        "mode": "DECOY CONTROL",
+        "massesFound": 20,
+        "measured": 4,
+        "fabricPx": 11058,
+        "fabricMean": 93.27,
+        "fabricSD": 50.32,
+        "groupMeanSalience": 0.5016,
+        "groupFloor": 1.5,
+        "eachFloor": 1,
+        "rows": [
+          {
+            "instrument": "landmark.salience",
+            "value": 0.5069,
+            "denominator": "SD of the 11058 FABRIC px (50.32 luminance units); mass sample = 227 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "DECOY@513,689",
+            "areaUnits": 173.24,
+            "massPx": 227,
+            "massMean": 118.78,
+            "fabricMean": 93.27,
+            "fabricSD": 50.32
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 0.1719,
+            "denominator": "SD of the 11058 FABRIC px (50.32 luminance units); mass sample = 150 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "DECOY@552,757",
+            "areaUnits": 110.43,
+            "massPx": 150,
+            "massMean": 101.92,
+            "fabricMean": 93.27,
+            "fabricSD": 50.32
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 0.2833,
+            "denominator": "SD of the 11058 FABRIC px (50.32 luminance units); mass sample = 123 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "DECOY@588,728",
+            "areaUnits": 88.36,
+            "massPx": 123,
+            "massMean": 107.52,
+            "fabricMean": 93.27,
+            "fabricSD": 50.32
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 1.0444,
+            "denominator": "SD of the 11058 FABRIC px (50.32 luminance units); mass sample = 109 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": true,
+            "anchor": "DECOY@656,599",
+            "areaUnits": 81.02,
+            "massPx": 109,
+            "massMean": 145.82,
+            "fabricMean": 93.27,
+            "fabricSD": 50.32
+          }
+        ],
+        "pass": false
+      },
+      "i5_roleContrast": {
+        "grid": "1100x1100",
+        "maskN": 2200,
+        "rows": [
+          {
+            "instrument": "contrast.street:ground",
+            "value": 1.9003,
+            "denominator": "WCAG-adjusted luminance of the darker role (ground); 83306 street px vs 39372 ground px at 1100×1100",
+            "band": ">= 2.1",
+            "pass": false,
+            "measuredRatio": 1.9003,
+            "declaredByLensContrast": 4.675,
+            "delta": -2.7748,
+            "streetRGB": [
+              220,
+              211,
+              190
+            ],
+            "groundRGB": [
+              164,
+              152,
+              129
+            ],
+            "streetPx": 83306,
+            "groundPx": 39372,
+            "applicable": true,
+            "status": "MEASURED"
+          },
+          {
+            "instrument": "contrast.wall:all",
+            "value": null,
+            "denominator": "0 wall px vs 1210000 all px",
+            "band": ">= 3",
+            "pass": null,
+            "applicable": false,
+            "status": "NOT APPLICABLE — this leaf draws no wall"
+          },
+          {
+            "instrument": "contrast.water:ground",
+            "value": null,
+            "denominator": "0 water px vs 39372 ground px",
+            "band": ">= 1.35",
+            "pass": null,
+            "applicable": false,
+            "status": "NOT APPLICABLE — this leaf draws no water"
+          }
+        ],
+        "applicableArms": 1,
+        "notApplicable": [
+          "contrast.wall:all",
+          "contrast.water:ground"
+        ],
+        "pass": false
+      },
+      "i7_categoryHue": {
+        "grid": "1100x1100",
+        "satFloor": 0.06,
+        "conformanceFloor": 0.6,
+        "rows": [
+          {
+            "instrument": "hue.water",
+            "value": null,
+            "denominator": "0 water px",
+            "band": [
+              185,
+              265
+            ],
+            "pass": null,
+            "applicable": false,
+            "roles": [
+              "water"
+            ],
+            "dominantHueDeg": null,
+            "status": "NOT APPLICABLE — this leaf draws no water"
+          },
+          {
+            "instrument": "hue.field",
+            "value": 0.9908,
+            "denominator": "984546 SATURATED px of 984546 field px (0 below sat 0.06) at 1100²",
+            "band": [
+              35,
+              70
+            ],
+            "pass": true,
+            "roles": [
+              "field"
+            ],
+            "applicable": true,
+            "status": "MEASURED",
+            "conformance": 0.9908,
+            "dominantHueDeg": 55,
+            "hueInBand": true,
+            "greyShare": 0,
+            "achromatic": false,
+            "failReason": null,
+            "meanSaturation": 0.266,
+            "rolePx": 984546,
+            "saturatedPx": 984546,
+            "greyPx": 0
+          },
+          {
+            "instrument": "hue.town",
+            "value": 1,
+            "denominator": "12890 SATURATED px of 12890 building+landmark px (0 below sat 0.06) at 1100²",
+            "band": [
+              0,
+              60
+            ],
+            "pass": true,
+            "roles": [
+              "building",
+              "landmark"
+            ],
+            "applicable": true,
+            "status": "MEASURED",
+            "conformance": 1,
+            "dominantHueDeg": 35,
+            "hueInBand": true,
+            "greyShare": 0,
+            "achromatic": false,
+            "failReason": null,
+            "meanSaturation": 0.2198,
+            "rolePx": 12890,
+            "saturatedPx": 12890,
+            "greyPx": 0
+          }
+        ],
+        "applicableArms": 2,
+        "notApplicable": [
+          "hue.water"
+        ],
+        "pass": true
+      },
+      "i6_frontage": {
+        "geometrySvg": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/out/base-village-village-parchment.svg",
+        "asDrawn": {
+          "fuseRadiusUnits": 2.4,
+          "base": {
+            "probes": 3948,
+            "fronted": 2576,
+            "ratio": 0.6525,
+            "runs": 176,
+            "meanRunUnits": 14.66,
+            "p50RunUnits": 10.55,
+            "p90RunUnits": 35.04,
+            "maxRunUnits": 62.15,
+            "frontingMasses": 68
+          },
+          "fused": {
+            "probes": 3948,
+            "fronted": 2577,
+            "ratio": 0.6527,
+            "runs": 147,
+            "meanRunUnits": 17.56,
+            "p50RunUnits": 12.12,
+            "p90RunUnits": 46.17,
+            "maxRunUnits": 63.94,
+            "frontingMasses": 45
+          },
+          "freestanding": {
+            "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
+            "enclosureFormed": false,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": false,
+            "bodiesDrawn": 139,
+            "bodiesAttributed": 139,
+            "intramuralBodies": 139,
+            "solitaryBodies": 23,
+            "freestandingFraction": 0.1655,
+            "fusedComponents": 49,
+            "bodiesPerFusedComponent": 2.9
+          }
+        },
+        "reg0Compat": {
+          "wallbandUnits": 15.81,
+          "buildingsClearedByWallband": 0,
+          "base": {
+            "probes": 3948,
+            "fronted": 2576,
+            "ratio": 0.6525,
+            "runs": 176,
+            "meanRunUnits": 14.66,
+            "p50RunUnits": 10.55,
+            "p90RunUnits": 35.04,
+            "maxRunUnits": 62.15,
+            "frontingMasses": 68
+          },
+          "note": "REG-0's own REGIME-B strike re-applied so its published base figures reproduce exactly"
+        }
+      }
+    },
+    {
+      "plate": "BASE-town",
+      "tier": "town",
+      "kind": "BASE",
+      "note": null,
+      "svg": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg-instruments/renders/base-town-town-parchment.svg",
+      "png": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg-instruments/png/BASE-town.png",
+      "raster": "2200x2200",
+      "i1_squint": {
+        "size": "200x200",
+        "coverMin": 0.5,
+        "maskN": 1000,
+        "deltaFloor": 1,
+        "rows": [
+          {
+            "instrument": "squint.street",
+            "value": 1.4781,
+            "denominator": "SD of the 5463 GROUND px (29.56 lum units); role sample = 3568 px at 200×200",
+            "band": ">= 1 ground SD",
+            "pass": true,
+            "rolePx": 3568,
+            "groundPx": 5463,
+            "channel": "lum",
+            "roleMean": 203.47,
+            "groundMean": 159.77,
+            "groundSD": 29.56,
+            "sep1mOVL": 0.6813,
+            "auc": 0.8607,
+            "applicable": true,
+            "status": "MEASURED"
+          },
+          {
+            "instrument": "squint.wall",
+            "value": 2.2517,
+            "denominator": "SD of the 5463 GROUND px (29.56 lum units); role sample = 215 px at 200×200",
+            "band": ">= 1 ground SD",
+            "pass": true,
+            "rolePx": 215,
+            "groundPx": 5463,
+            "channel": "lum",
+            "roleMean": 93.21,
+            "groundMean": 159.77,
+            "groundSD": 29.56,
+            "sep1mOVL": 0.8553,
+            "auc": 0.9731,
+            "applicable": true,
+            "status": "MEASURED"
+          },
+          {
+            "instrument": "squint.water",
+            "value": null,
+            "denominator": "SD of the 5463 GROUND px (11.68 blueRed units); role sample = 0 px at 200×200",
+            "band": ">= 1 ground SD",
+            "pass": null,
+            "rolePx": 0,
+            "groundPx": 5463,
+            "channel": "blueRed",
+            "roleMean": null,
+            "groundMean": -35.35,
+            "groundSD": 11.68,
+            "sep1mOVL": null,
+            "auc": null,
+            "applicable": false,
+            "status": "NOT APPLICABLE — this leaf draws no water; there is nothing to separate"
+          }
+        ],
+        "applicableArms": 2,
+        "notApplicable": [
+          "squint.water"
+        ],
+        "pass": true
+      },
+      "i4_landmarkSalience": {
+        "mode": "landmarks",
+        "massesFound": 112,
+        "measured": 4,
+        "fabricPx": 84842,
+        "fabricMean": 114.65,
+        "fabricSD": 35.78,
+        "groupMeanSalience": 0.5738,
+        "groupFloor": 1.5,
+        "eachFloor": 1,
+        "rows": [
+          {
+            "instrument": "landmark.salience",
+            "value": 0.4078,
+            "denominator": "SD of the 84842 FABRIC px (35.78 luminance units); mass sample = 219 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "cat:money_changers",
+            "areaUnits": 164.42,
+            "massPx": 219,
+            "massMean": 129.24,
+            "fabricMean": 114.65,
+            "fabricSD": 35.78
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 0.4356,
+            "denominator": "SD of the 84842 FABRIC px (35.78 luminance units); mass sample = 216 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "cat:parish_churches_2_5",
+            "areaUnits": 162.17,
+            "massPx": 216,
+            "massMean": 130.24,
+            "fabricMean": 114.65,
+            "fabricSD": 35.78
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 0.8747,
+            "denominator": "SD of the 84842 FABRIC px (35.78 luminance units); mass sample = 204 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "cat:small_prison_stocks",
+            "areaUnits": 148.61,
+            "massPx": 204,
+            "massMean": 83.36,
+            "fabricMean": 114.65,
+            "fabricSD": 35.78
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 0.5772,
+            "denominator": "SD of the 84842 FABRIC px (35.78 luminance units); mass sample = 191 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "name:small-hospital",
+            "areaUnits": 144.12,
+            "massPx": 191,
+            "massMean": 135.3,
+            "fabricMean": 114.65,
+            "fabricSD": 35.78
+          }
+        ],
+        "pass": false
+      },
+      "i4_decoyControl": {
+        "mode": "DECOY CONTROL",
+        "massesFound": 112,
+        "measured": 4,
+        "fabricPx": 84842,
+        "fabricMean": 114.65,
+        "fabricSD": 35.78,
+        "groupMeanSalience": 1.0349,
+        "groupFloor": 1.5,
+        "eachFloor": 1,
+        "rows": [
+          {
+            "instrument": "landmark.salience",
+            "value": 0.5361,
+            "denominator": "SD of the 84842 FABRIC px (35.78 luminance units); mass sample = 221 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "DECOY@247,600",
+            "areaUnits": 164.42,
+            "massPx": 221,
+            "massMean": 133.83,
+            "fabricMean": 114.65,
+            "fabricSD": 35.78
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 0.6761,
+            "denominator": "SD of the 84842 FABRIC px (35.78 luminance units); mass sample = 216 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "DECOY@347,543",
+            "areaUnits": 162.17,
+            "massPx": 216,
+            "massMean": 138.84,
+            "fabricMean": 114.65,
+            "fabricSD": 35.78
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 1.1529,
+            "denominator": "SD of the 84842 FABRIC px (35.78 luminance units); mass sample = 204 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": true,
+            "anchor": "DECOY@452,256",
+            "areaUnits": 148.61,
+            "massPx": 204,
+            "massMean": 155.9,
+            "fabricMean": 114.65,
+            "fabricSD": 35.78
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 1.7745,
+            "denominator": "SD of the 84842 FABRIC px (35.78 luminance units); mass sample = 192 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": true,
+            "anchor": "DECOY@635,652",
+            "areaUnits": 144.12,
+            "massPx": 192,
+            "massMean": 178.14,
+            "fabricMean": 114.65,
+            "fabricSD": 35.78
+          }
+        ],
+        "pass": false
+      },
+      "i5_roleContrast": {
+        "grid": "1100x1100",
+        "maskN": 2200,
+        "rows": [
+          {
+            "instrument": "contrast.street:ground",
+            "value": 1.7529,
+            "denominator": "WCAG-adjusted luminance of the darker role (ground); 112225 street px vs 219338 ground px at 1100×1100",
+            "band": ">= 2.1",
+            "pass": false,
+            "measuredRatio": 1.7529,
+            "declaredByLensContrast": 4.675,
+            "delta": -2.9222,
+            "streetRGB": [
+              219,
+              210,
+              190
+            ],
+            "groundRGB": [
+              171,
+              158,
+              136
+            ],
+            "streetPx": 112225,
+            "groundPx": 219338,
+            "applicable": true,
+            "status": "MEASURED"
+          },
+          {
+            "instrument": "contrast.wall:all",
+            "value": 7.7536,
+            "denominator": "WCAG-adjusted luminance of the darker role (all); 6884 wall px vs 1210000 all px at 1100×1100",
+            "band": ">= 3",
+            "pass": true,
+            "measuredRatio": 7.7536,
+            "declaredByLensContrast": 8.3016,
+            "delta": -0.5481,
+            "wallRGB": [
+              49,
+              40,
+              29
+            ],
+            "allRGB": [
+              198,
+              189,
+              163
+            ],
+            "wallPx": 6884,
+            "allPx": 1210000,
+            "applicable": true,
+            "status": "MEASURED"
+          },
+          {
+            "instrument": "contrast.water:ground",
+            "value": 1.5164,
+            "denominator": "WCAG-adjusted luminance of the darker role (ground); 60 water px vs 219338 ground px at 1100×1100",
+            "band": ">= 1.35",
+            "pass": true,
+            "measuredRatio": 1.5164,
+            "declaredByLensContrast": 1.6416,
+            "delta": -0.1252,
+            "waterRGB": [
+              203,
+              197,
+              173
+            ],
+            "groundRGB": [
+              171,
+              158,
+              136
+            ],
+            "waterPx": 60,
+            "groundPx": 219338,
+            "applicable": true,
+            "status": "MEASURED"
+          }
+        ],
+        "applicableArms": 3,
+        "notApplicable": [],
+        "pass": false
+      },
+      "i7_categoryHue": {
+        "grid": "1100x1100",
+        "satFloor": 0.06,
+        "conformanceFloor": 0.6,
+        "rows": [
+          {
+            "instrument": "hue.water",
+            "value": 0,
+            "denominator": "45 SATURATED px of 45 water px (0 below sat 0.06) at 1100²",
+            "band": [
+              185,
+              265
+            ],
+            "pass": false,
+            "roles": [
+              "water"
+            ],
+            "applicable": true,
+            "status": "MEASURED",
+            "conformance": 0,
+            "dominantHueDeg": 45,
+            "hueInBand": false,
+            "greyShare": 0,
+            "achromatic": false,
+            "failReason": "OUT OF BAND — dominant hue 45°",
+            "meanSaturation": 0.2096,
+            "rolePx": 45,
+            "saturatedPx": 45,
+            "greyPx": 0
+          },
+          {
+            "instrument": "hue.field",
+            "value": 0.9894,
+            "denominator": "516899 SATURATED px of 516916 field px (17 below sat 0.06) at 1100²",
+            "band": [
+              35,
+              70
+            ],
+            "pass": true,
+            "roles": [
+              "field"
+            ],
+            "applicable": true,
+            "status": "MEASURED",
+            "conformance": 0.9894,
+            "dominantHueDeg": 55,
+            "hueInBand": true,
+            "greyShare": 0,
+            "achromatic": false,
+            "failReason": null,
+            "meanSaturation": 0.279,
+            "rolePx": 516916,
+            "saturatedPx": 516899,
+            "greyPx": 17
+          },
+          {
+            "instrument": "hue.town",
+            "value": 1,
+            "denominator": "92437 SATURATED px of 92437 building+landmark px (0 below sat 0.06) at 1100²",
+            "band": [
+              0,
+              60
+            ],
+            "pass": true,
+            "roles": [
+              "building",
+              "landmark"
+            ],
+            "applicable": true,
+            "status": "MEASURED",
+            "conformance": 1,
+            "dominantHueDeg": 35,
+            "hueInBand": true,
+            "greyShare": 0,
+            "achromatic": false,
+            "failReason": null,
+            "meanSaturation": 0.1606,
+            "rolePx": 92437,
+            "saturatedPx": 92437,
+            "greyPx": 0
+          }
+        ],
+        "applicableArms": 3,
+        "notApplicable": [],
+        "pass": false
+      },
+      "i6_frontage": {
+        "geometrySvg": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg-instruments/renders/base-town-town-parchment.svg",
+        "asDrawn": {
+          "fuseRadiusUnits": 0.99,
+          "base": {
+            "probes": 30235,
+            "fronted": 16113,
+            "ratio": 0.5329,
+            "runs": 1533,
+            "meanRunUnits": 10.55,
+            "p50RunUnits": 7.99,
+            "p90RunUnits": 22.3,
+            "maxRunUnits": 54.09,
+            "frontingMasses": 549
+          },
+          "fused": {
+            "probes": 30235,
+            "fronted": 16113,
+            "ratio": 0.5329,
+            "runs": 1264,
+            "meanRunUnits": 12.79,
+            "p50RunUnits": 9.97,
+            "p90RunUnits": 27.02,
+            "maxRunUnits": 54.09,
+            "frontingMasses": 363
+          },
+          "freestanding": {
+            "scope": "intramuros (the model's own walls[].closedPolygon)",
+            "enclosureFormed": true,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": true,
+            "bodiesDrawn": 1436,
+            "bodiesAttributed": 1436,
+            "intramuralBodies": 1373,
+            "solitaryBodies": 185,
+            "freestandingFraction": 0.1347,
+            "fusedComponents": 407,
+            "bodiesPerFusedComponent": 3.71
+          }
+        },
+        "reg0Compat": {
+          "wallbandUnits": 5.67,
+          "buildingsClearedByWallband": 35,
+          "base": {
+            "probes": 30037,
+            "fronted": 15702,
+            "ratio": 0.5228,
+            "runs": 1478,
+            "meanRunUnits": 10.66,
+            "p50RunUnits": 8,
+            "p90RunUnits": 22.93,
+            "maxRunUnits": 54.09,
+            "frontingMasses": 530
+          },
+          "note": "REG-0's own REGIME-B strike re-applied so its published base figures reproduce exactly"
+        }
+      }
+    },
+    {
+      "plate": "SPEC-city",
+      "tier": "city",
+      "kind": "SPEC",
+      "note": "REG-0 specimen. PIXEL instruments probe the BASE geometry (same probes, only the picture differs); the GEOMETRY instrument i6 reads the SPECIMEN svg.",
+      "svg": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/out/base-city-city-parchment.svg",
+      "png": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/png/AFTER-city.png",
+      "raster": "2200x2200",
+      "i1_squint": {
+        "size": "200x200",
+        "coverMin": 0.5,
+        "maskN": 1000,
+        "deltaFloor": 1,
+        "rows": [
+          {
+            "instrument": "squint.street",
+            "value": 1.9471,
+            "denominator": "SD of the 8924 GROUND px (41.82 lum units); role sample = 6183 px at 200×200",
+            "band": ">= 1 ground SD",
+            "pass": true,
+            "rolePx": 6183,
+            "groundPx": 8924,
+            "channel": "lum",
+            "roleMean": 185.48,
+            "groundMean": 104.04,
+            "groundSD": 41.82,
+            "sep1mOVL": 0.6927,
+            "auc": 0.8752,
+            "applicable": true,
+            "status": "MEASURED"
+          },
+          {
+            "instrument": "squint.wall",
+            "value": 1.6681,
+            "denominator": "SD of the 8924 GROUND px (41.82 lum units); role sample = 266 px at 200×200",
+            "band": ">= 1 ground SD",
+            "pass": true,
+            "rolePx": 266,
+            "groundPx": 8924,
+            "channel": "lum",
+            "roleMean": 34.28,
+            "groundMean": 104.04,
+            "groundSD": 41.82,
+            "sep1mOVL": 0.9609,
+            "auc": 0.9775,
+            "applicable": true,
+            "status": "MEASURED"
+          },
+          {
+            "instrument": "squint.water",
+            "value": 8.393,
+            "denominator": "SD of the 8924 GROUND px (6.7 blueRed units); role sample = 10234 px at 200×200",
+            "band": ">= 1 ground SD",
+            "pass": true,
+            "rolePx": 10234,
+            "groundPx": 8924,
+            "channel": "blueRed",
+            "roleMean": 8.63,
+            "groundMean": -47.61,
+            "groundSD": 6.7,
+            "sep1mOVL": 0.8197,
+            "auc": 0.7713,
+            "applicable": true,
+            "status": "MEASURED"
+          }
+        ],
+        "applicableArms": 3,
+        "notApplicable": [],
+        "pass": true
+      },
+      "i4_landmarkSalience": {
+        "mode": "landmarks",
+        "massesFound": 93,
+        "measured": 4,
+        "fabricPx": 156613,
+        "fabricMean": 78.54,
+        "fabricSD": 28.32,
+        "groupMeanSalience": 0.422,
+        "groupFloor": 1.5,
+        "eachFloor": 1,
+        "rows": [
+          {
+            "instrument": "landmark.salience",
+            "value": 0.6694,
+            "denominator": "SD of the 156613 FABRIC px (28.32 luminance units); mass sample = 653 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "cat:multiple_courthouses",
+            "areaUnits": 507.31,
+            "massPx": 653,
+            "massMean": 59.58,
+            "fabricMean": 78.54,
+            "fabricSD": 28.32
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 0.1012,
+            "denominator": "SD of the 156613 FABRIC px (28.32 luminance units); mass sample = 600 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "cat:cartographer_s_guild",
+            "areaUnits": 469.51,
+            "massPx": 600,
+            "massMean": 81.4,
+            "fabricMean": 78.54,
+            "fabricSD": 28.32
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 0.3986,
+            "denominator": "SD of the 156613 FABRIC px (28.32 luminance units); mass sample = 334 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "",
+            "areaUnits": 256.77,
+            "massPx": 334,
+            "massMean": 67.25,
+            "fabricMean": 78.54,
+            "fabricSD": 28.32
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 0.5187,
+            "denominator": "SD of the 156613 FABRIC px (28.32 luminance units); mass sample = 329 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "",
+            "areaUnits": 250.27,
+            "massPx": 329,
+            "massMean": 63.85,
+            "fabricMean": 78.54,
+            "fabricSD": 28.32
+          }
+        ],
+        "pass": false
+      },
+      "i4_decoyControl": {
+        "mode": "DECOY CONTROL",
+        "massesFound": 93,
+        "measured": 4,
+        "fabricPx": 156613,
+        "fabricMean": 78.54,
+        "fabricSD": 28.32,
+        "groupMeanSalience": 0.8085,
+        "groupFloor": 1.5,
+        "eachFloor": 1,
+        "rows": [
+          {
+            "instrument": "landmark.salience",
+            "value": 1.2707,
+            "denominator": "SD of the 156613 FABRIC px (28.32 luminance units); mass sample = 653 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": true,
+            "anchor": "DECOY@135,251",
+            "areaUnits": 507.31,
+            "massPx": 653,
+            "massMean": 114.52,
+            "fabricMean": 78.54,
+            "fabricSD": 28.32
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 1.8805,
+            "denominator": "SD of the 156613 FABRIC px (28.32 luminance units); mass sample = 599 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": true,
+            "anchor": "DECOY@267,498",
+            "areaUnits": 469.51,
+            "massPx": 599,
+            "massMean": 131.79,
+            "fabricMean": 78.54,
+            "fabricSD": 28.32
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 0.041,
+            "denominator": "SD of the 156613 FABRIC px (28.32 luminance units); mass sample = 333 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "DECOY@604,499",
+            "areaUnits": 256.77,
+            "massPx": 333,
+            "massMean": 77.37,
+            "fabricMean": 78.54,
+            "fabricSD": 28.32
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 0.0419,
+            "denominator": "SD of the 156613 FABRIC px (28.32 luminance units); mass sample = 328 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "DECOY@741,487",
+            "areaUnits": 250.27,
+            "massPx": 328,
+            "massMean": 77.35,
+            "fabricMean": 78.54,
+            "fabricSD": 28.32
+          }
+        ],
+        "pass": false
+      },
+      "i5_roleContrast": {
+        "grid": "1100x1100",
+        "maskN": 2200,
+        "rows": [
+          {
+            "instrument": "contrast.street:ground",
+            "value": 2.7582,
+            "denominator": "WCAG-adjusted luminance of the darker role (ground); 196902 street px vs 338007 ground px at 1100×1100",
+            "band": ">= 2.1",
+            "pass": true,
+            "measuredRatio": 2.7582,
+            "declaredByLensContrast": 4.675,
+            "delta": -1.9169,
+            "streetRGB": [
+              195,
+              187,
+              170
+            ],
+            "groundRGB": [
+              127,
+              104,
+              80
+            ],
+            "streetPx": 196902,
+            "groundPx": 338007,
+            "applicable": true,
+            "status": "MEASURED"
+          },
+          {
+            "instrument": "contrast.wall:all",
+            "value": 4.9379,
+            "denominator": "WCAG-adjusted luminance of the darker role (all); 8178 wall px vs 1210000 all px at 1100×1100",
+            "band": ">= 3",
+            "pass": true,
+            "measuredRatio": 4.9379,
+            "declaredByLensContrast": 8.3016,
+            "delta": -3.3638,
+            "wallRGB": [
+              42,
+              34,
+              25
+            ],
+            "allRGB": [
+              153,
+              144,
+              123
+            ],
+            "wallPx": 8178,
+            "allPx": 1210000,
+            "applicable": true,
+            "status": "MEASURED"
+          },
+          {
+            "instrument": "contrast.water:ground",
+            "value": 1.7892,
+            "denominator": "WCAG-adjusted luminance of the darker role (ground); 302960 water px vs 338007 ground px at 1100×1100",
+            "band": ">= 1.35",
+            "pass": true,
+            "measuredRatio": 1.7892,
+            "declaredByLensContrast": 1.6416,
+            "delta": 0.1475,
+            "waterRGB": [
+              141,
+              153,
+              150
+            ],
+            "groundRGB": [
+              127,
+              104,
+              80
+            ],
+            "waterPx": 302960,
+            "groundPx": 338007,
+            "applicable": true,
+            "status": "MEASURED"
+          }
+        ],
+        "applicableArms": 3,
+        "notApplicable": [],
+        "pass": true
+      },
+      "i7_categoryHue": {
+        "grid": "1100x1100",
+        "satFloor": 0.06,
+        "conformanceFloor": 0.6,
+        "rows": [
+          {
+            "instrument": "hue.water",
+            "value": 0.6716,
+            "denominator": "319998 SATURATED px of 327001 water px (7003 below sat 0.06) at 1100²",
+            "band": [
+              185,
+              265
+            ],
+            "pass": true,
+            "roles": [
+              "water"
+            ],
+            "applicable": true,
+            "status": "MEASURED",
+            "conformance": 0.6716,
+            "dominantHueDeg": 195,
+            "hueInBand": true,
+            "greyShare": 0.0214,
+            "achromatic": false,
+            "failReason": null,
+            "meanSaturation": 0.2411,
+            "rolePx": 327001,
+            "saturatedPx": 319998,
+            "greyPx": 7003
+          },
+          {
+            "instrument": "hue.field",
+            "value": 0.8749,
+            "denominator": "24902 SATURATED px of 24902 field px (0 below sat 0.06) at 1100²",
+            "band": [
+              35,
+              70
+            ],
+            "pass": true,
+            "roles": [
+              "field"
+            ],
+            "applicable": true,
+            "status": "MEASURED",
+            "conformance": 0.8749,
+            "dominantHueDeg": 45,
+            "hueInBand": true,
+            "greyShare": 0,
+            "achromatic": false,
+            "failReason": null,
+            "meanSaturation": 0.3017,
+            "rolePx": 24902,
+            "saturatedPx": 24902,
+            "greyPx": 0
+          },
+          {
+            "instrument": "hue.town",
+            "value": 1,
+            "denominator": "163585 SATURATED px of 163585 building+landmark px (0 below sat 0.06) at 1100²",
+            "band": [
+              0,
+              60
+            ],
+            "pass": true,
+            "roles": [
+              "building",
+              "landmark"
+            ],
+            "applicable": true,
+            "status": "MEASURED",
+            "conformance": 1,
+            "dominantHueDeg": 25,
+            "hueInBand": true,
+            "greyShare": 0,
+            "achromatic": false,
+            "failReason": null,
+            "meanSaturation": 0.3384,
+            "rolePx": 163585,
+            "saturatedPx": 163585,
+            "greyPx": 0
+          }
+        ],
+        "applicableArms": 3,
+        "notApplicable": [],
+        "pass": true
+      },
+      "i6_frontage": {
+        "geometrySvg": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/out/spec-city.svg",
+        "asDrawn": {
+          "fuseRadiusUnits": 1.25,
+          "base": {
+            "probes": 39010,
+            "fronted": 20434,
+            "ratio": 0.5238,
+            "runs": 1823,
+            "meanRunUnits": 11.21,
+            "p50RunUnits": 8.01,
+            "p90RunUnits": 24.01,
+            "maxRunUnits": 69.66,
+            "frontingMasses": 613
+          },
+          "fused": {
+            "probes": 39010,
+            "fronted": 20434,
+            "ratio": 0.5238,
+            "runs": 1461,
+            "meanRunUnits": 13.98,
+            "p50RunUnits": 10.06,
+            "p90RunUnits": 32.07,
+            "maxRunUnits": 69.69,
+            "frontingMasses": 362
+          },
+          "freestanding": {
+            "scope": "intramuros (the model's own walls[].closedPolygon)",
+            "enclosureFormed": true,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": true,
+            "bodiesDrawn": 1990,
+            "bodiesAttributed": 1988,
+            "intramuralBodies": 1867,
+            "solitaryBodies": 128,
+            "freestandingFraction": 0.0686,
+            "fusedComponents": 393,
+            "bodiesPerFusedComponent": 5.22
+          }
+        },
+        "reg0Compat": {
+          "wallbandUnits": 7.19,
+          "buildingsClearedByWallband": 0,
+          "base": {
+            "probes": 39010,
+            "fronted": 20434,
+            "ratio": 0.5238,
+            "runs": 1823,
+            "meanRunUnits": 11.21,
+            "p50RunUnits": 8.01,
+            "p90RunUnits": 24.01,
+            "maxRunUnits": 69.66,
+            "frontingMasses": 613
+          },
+          "note": "REG-0's own REGIME-B strike re-applied so its published base figures reproduce exactly"
+        }
+      }
+    },
+    {
+      "plate": "SPEC-village",
+      "tier": "village",
+      "kind": "SPEC",
+      "note": "REG-0 specimen; i6 reads the SPECIMEN svg",
+      "svg": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/out/base-village-village-parchment.svg",
+      "png": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/png/AFTER-village.png",
+      "raster": "2200x2200",
+      "i1_squint": {
+        "size": "200x200",
+        "coverMin": 0.5,
+        "maskN": 1000,
+        "deltaFloor": 1,
+        "rows": [
+          {
+            "instrument": "squint.street",
+            "value": 2.1143,
+            "denominator": "SD of the 1083 GROUND px (47.57 lum units); role sample = 2692 px at 200×200",
+            "band": ">= 1 ground SD",
+            "pass": true,
+            "rolePx": 2692,
+            "groundPx": 1083,
+            "channel": "lum",
+            "roleMean": 199.79,
+            "groundMean": 99.2,
+            "groundSD": 47.57,
+            "sep1mOVL": 0.8243,
+            "auc": 0.9444,
+            "applicable": true,
+            "status": "MEASURED"
+          },
+          {
+            "instrument": "squint.wall",
+            "value": null,
+            "denominator": "SD of the 1083 GROUND px (47.57 lum units); role sample = 0 px at 200×200",
+            "band": ">= 1 ground SD",
+            "pass": null,
+            "rolePx": 0,
+            "groundPx": 1083,
+            "channel": "lum",
+            "roleMean": null,
+            "groundMean": 99.2,
+            "groundSD": 47.57,
+            "sep1mOVL": null,
+            "auc": null,
+            "applicable": false,
+            "status": "NOT APPLICABLE — this leaf draws no wall; there is nothing to separate"
+          },
+          {
+            "instrument": "squint.water",
+            "value": null,
+            "denominator": "SD of the 1083 GROUND px (8.22 blueRed units); role sample = 0 px at 200×200",
+            "band": ">= 1 ground SD",
+            "pass": null,
+            "rolePx": 0,
+            "groundPx": 1083,
+            "channel": "blueRed",
+            "roleMean": null,
+            "groundMean": -47.29,
+            "groundSD": 8.22,
+            "sep1mOVL": null,
+            "auc": null,
+            "applicable": false,
+            "status": "NOT APPLICABLE — this leaf draws no water; there is nothing to separate"
+          }
+        ],
+        "applicableArms": 1,
+        "notApplicable": [
+          "squint.wall",
+          "squint.water"
+        ],
+        "pass": true
+      },
+      "i4_landmarkSalience": {
+        "mode": "landmarks",
+        "massesFound": 20,
+        "measured": 4,
+        "fabricPx": 11058,
+        "fabricMean": 73.27,
+        "fabricSD": 38.02,
+        "groupMeanSalience": 0.242,
+        "groupFloor": 1.5,
+        "eachFloor": 1,
+        "rows": [
+          {
+            "instrument": "landmark.salience",
+            "value": 0.8475,
+            "denominator": "SD of the 11058 FABRIC px (38.02 luminance units); mass sample = 225 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "",
+            "areaUnits": 173.24,
+            "massPx": 225,
+            "massMean": 105.49,
+            "fabricMean": 73.27,
+            "fabricSD": 38.02
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 0.0716,
+            "denominator": "SD of the 11058 FABRIC px (38.02 luminance units); mass sample = 148 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "name:alehouse",
+            "areaUnits": 110.43,
+            "massPx": 148,
+            "massMean": 75.99,
+            "fabricMean": 73.27,
+            "fabricSD": 38.02
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 0.0224,
+            "denominator": "SD of the 11058 FABRIC px (38.02 luminance units); mass sample = 123 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "cat:cooper",
+            "areaUnits": 88.36,
+            "massPx": 123,
+            "massMean": 74.12,
+            "fabricMean": 73.27,
+            "fabricSD": 38.02
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 0.0264,
+            "denominator": "SD of the 11058 FABRIC px (38.02 luminance units); mass sample = 112 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "cat:mill",
+            "areaUnits": 81.02,
+            "massPx": 112,
+            "massMean": 74.27,
+            "fabricMean": 73.27,
+            "fabricSD": 38.02
+          }
+        ],
+        "pass": false
+      },
+      "i4_decoyControl": {
+        "mode": "DECOY CONTROL",
+        "massesFound": 20,
+        "measured": 4,
+        "fabricPx": 11058,
+        "fabricMean": 73.27,
+        "fabricSD": 38.02,
+        "groupMeanSalience": 0.2756,
+        "groupFloor": 1.5,
+        "eachFloor": 1,
+        "rows": [
+          {
+            "instrument": "landmark.salience",
+            "value": 0.1627,
+            "denominator": "SD of the 11058 FABRIC px (38.02 luminance units); mass sample = 227 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "DECOY@513,689",
+            "areaUnits": 173.24,
+            "massPx": 227,
+            "massMean": 67.09,
+            "fabricMean": 73.27,
+            "fabricSD": 38.02
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 0.0211,
+            "denominator": "SD of the 11058 FABRIC px (38.02 luminance units); mass sample = 150 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "DECOY@552,757",
+            "areaUnits": 110.43,
+            "massPx": 150,
+            "massMean": 72.47,
+            "fabricMean": 73.27,
+            "fabricSD": 38.02
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 0.1984,
+            "denominator": "SD of the 11058 FABRIC px (38.02 luminance units); mass sample = 123 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "DECOY@588,728",
+            "areaUnits": 88.36,
+            "massPx": 123,
+            "massMean": 65.73,
+            "fabricMean": 73.27,
+            "fabricSD": 38.02
+          },
+          {
+            "instrument": "landmark.salience",
+            "value": 0.7203,
+            "denominator": "SD of the 11058 FABRIC px (38.02 luminance units); mass sample = 109 px at 1100²",
+            "band": ">= 1 fabric SD",
+            "pass": false,
+            "anchor": "DECOY@656,599",
+            "areaUnits": 81.02,
+            "massPx": 109,
+            "massMean": 100.66,
+            "fabricMean": 73.27,
+            "fabricSD": 38.02
+          }
+        ],
+        "pass": false
+      },
+      "i5_roleContrast": {
+        "grid": "1100x1100",
+        "maskN": 2200,
+        "rows": [
+          {
+            "instrument": "contrast.street:ground",
+            "value": 3.6806,
+            "denominator": "WCAG-adjusted luminance of the darker role (ground); 83306 street px vs 39372 ground px at 1100×1100",
+            "band": ">= 2.1",
+            "pass": true,
+            "measuredRatio": 3.6806,
+            "declaredByLensContrast": 4.675,
+            "delta": -0.9945,
+            "streetRGB": [
+              212,
+              201,
+              180
+            ],
+            "groundRGB": [
+              118,
+              95,
+              72
+            ],
+            "streetPx": 83306,
+            "groundPx": 39372,
+            "applicable": true,
+            "status": "MEASURED"
+          },
+          {
+            "instrument": "contrast.wall:all",
+            "value": null,
+            "denominator": "0 wall px vs 1210000 all px",
+            "band": ">= 3",
+            "pass": null,
+            "applicable": false,
+            "status": "NOT APPLICABLE — this leaf draws no wall"
+          },
+          {
+            "instrument": "contrast.water:ground",
+            "value": null,
+            "denominator": "0 water px vs 39372 ground px",
+            "band": ">= 1.35",
+            "pass": null,
+            "applicable": false,
+            "status": "NOT APPLICABLE — this leaf draws no water"
+          }
+        ],
+        "applicableArms": 1,
+        "notApplicable": [
+          "contrast.wall:all",
+          "contrast.water:ground"
+        ],
+        "pass": true
+      },
+      "i7_categoryHue": {
+        "grid": "1100x1100",
+        "satFloor": 0.06,
+        "conformanceFloor": 0.6,
+        "rows": [
+          {
+            "instrument": "hue.water",
+            "value": null,
+            "denominator": "0 water px",
+            "band": [
+              185,
+              265
+            ],
+            "pass": null,
+            "applicable": false,
+            "roles": [
+              "water"
+            ],
+            "dominantHueDeg": null,
+            "status": "NOT APPLICABLE — this leaf draws no water"
+          },
+          {
+            "instrument": "hue.field",
+            "value": 0.9753,
+            "denominator": "984546 SATURATED px of 984546 field px (0 below sat 0.06) at 1100²",
+            "band": [
+              35,
+              70
+            ],
+            "pass": true,
+            "roles": [
+              "field"
+            ],
+            "applicable": true,
+            "status": "MEASURED",
+            "conformance": 0.9753,
+            "dominantHueDeg": 45,
+            "hueInBand": true,
+            "greyShare": 0,
+            "achromatic": false,
+            "failReason": null,
+            "meanSaturation": 0.3167,
+            "rolePx": 984546,
+            "saturatedPx": 984546,
+            "greyPx": 0
+          },
+          {
+            "instrument": "hue.town",
+            "value": 1,
+            "denominator": "12890 SATURATED px of 12890 building+landmark px (0 below sat 0.06) at 1100²",
+            "band": [
+              0,
+              60
+            ],
+            "pass": true,
+            "roles": [
+              "building",
+              "landmark"
+            ],
+            "applicable": true,
+            "status": "MEASURED",
+            "conformance": 1,
+            "dominantHueDeg": 25,
+            "hueInBand": true,
+            "greyShare": 0,
+            "achromatic": false,
+            "failReason": null,
+            "meanSaturation": 0.3721,
+            "rolePx": 12890,
+            "saturatedPx": 12890,
+            "greyPx": 0
+          }
+        ],
+        "applicableArms": 2,
+        "notApplicable": [
+          "hue.water"
+        ],
+        "pass": true
+      },
+      "i6_frontage": {
+        "geometrySvg": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/out/spec-village.svg",
+        "asDrawn": {
+          "fuseRadiusUnits": 2.4,
+          "base": {
+            "probes": 4076,
+            "fronted": 2636,
+            "ratio": 0.6467,
+            "runs": 204,
+            "meanRunUnits": 12.86,
+            "p50RunUnits": 8.88,
+            "p90RunUnits": 32.12,
+            "maxRunUnits": 61.89,
+            "frontingMasses": 69
+          },
+          "fused": {
+            "probes": 4076,
+            "fronted": 2641,
+            "ratio": 0.6479,
+            "runs": 173,
+            "meanRunUnits": 15.2,
+            "p50RunUnits": 10.79,
+            "p90RunUnits": 38.9,
+            "maxRunUnits": 63.23,
+            "frontingMasses": 46
+          },
+          "freestanding": {
+            "scope": "urban envelope (NO ENCLOSURE FORMED IN INK — fallback, named)",
+            "enclosureFormed": false,
+            "floodEnclosureFormed": false,
+            "enclosedCells": 0,
+            "gateBridgeUnits": 18,
+            "circuitFromModel": false,
+            "bodiesDrawn": 139,
+            "bodiesAttributed": 139,
+            "intramuralBodies": 139,
+            "solitaryBodies": 23,
+            "freestandingFraction": 0.1655,
+            "fusedComponents": 48,
+            "bodiesPerFusedComponent": 2.9
+          }
+        },
+        "reg0Compat": {
+          "wallbandUnits": 15.81,
+          "buildingsClearedByWallband": 0,
+          "base": {
+            "probes": 4076,
+            "fronted": 2636,
+            "ratio": 0.6467,
+            "runs": 204,
+            "meanRunUnits": 12.86,
+            "p50RunUnits": 8.88,
+            "p90RunUnits": 32.12,
+            "maxRunUnits": 61.89,
+            "frontingMasses": 69
+          },
+          "note": "REG-0's own REGIME-B strike re-applied so its published base figures reproduce exactly"
+        }
+      }
+    }
+  ],
+  "model": [
+    {
+      "leaf": "city",
+      "name": "Kitaqiao",
+      "tier": "city",
+      "population": 20091,
+      "i2_routeTrace": {
+        "applicable": true,
+        "heart": "square.heart",
+        "heartAt": [
+          432.29,
+          526.04
+        ],
+        "floorUnits": 3.87,
+        "floorSource": "the leaf's own web.widths.blockLane",
+        "voidCells": 181598,
+        "gatesTotal": 6,
+        "gatesBricked": 0,
+        "reachable": 6,
+        "passing": 6,
+        "subjectsWere": "circuit gates",
+        "rows": [
+          {
+            "gate": "gate.E2.road.high.corridor.0~frame.0",
+            "bricked": false,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 16,
+            "pathLengthUnits": 541.3,
+            "straightLineUnits": 500.41,
+            "detourRatio": 1.0817,
+            "pass": true
+          },
+          {
+            "gate": "gate.E2.road.approach.corridor.1~frame.1",
+            "bricked": false,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 10,
+            "pathLengthUnits": 486.23,
+            "straightLineUnits": 382.32,
+            "detourRatio": 1.2718,
+            "pass": true
+          },
+          {
+            "gate": "gate.E2.road.approach.corridor.2~frame.2",
+            "bricked": false,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 10,
+            "pathLengthUnits": 410.95,
+            "straightLineUnits": 343.22,
+            "detourRatio": 1.1973,
+            "pass": true
+          },
+          {
+            "gate": "gate.E1.road.high.corridor.0~frame.0",
+            "bricked": false,
+            "ringKind": "old-core",
+            "reachable": true,
+            "bottleneckWidthUnits": 16,
+            "pathLengthUnits": 454.16,
+            "straightLineUnits": 419.96,
+            "detourRatio": 1.0815,
+            "pass": true
+          },
+          {
+            "gate": "gate.E1.road.approach.corridor.1~frame.1",
+            "bricked": false,
+            "ringKind": "old-core",
+            "reachable": true,
+            "bottleneckWidthUnits": 10,
+            "pathLengthUnits": 659.76,
+            "straightLineUnits": 272.12,
+            "detourRatio": 2.4245,
+            "pass": true
+          },
+          {
+            "gate": "gate.E1.road.approach.nucleus.0~spur.1",
+            "bricked": false,
+            "ringKind": "old-core",
+            "reachable": true,
+            "bottleneckWidthUnits": 10.49,
+            "pathLengthUnits": 55.94,
+            "straightLineUnits": 52.64,
+            "detourRatio": 1.0627,
+            "pass": true
+          }
+        ],
+        "pass": true
+      },
+      "i3_chunking": {
+        "tier": "city",
+        "extentTier": "city",
+        "population": 20091,
+        "wallPresent": true,
+        "rings": 2,
+        "totalRegions": 8,
+        "areaFloor": 5000,
+        "legibleWards": 6,
+        "chunks": 7,
+        "band": [
+          5,
+          9
+        ],
+        "bandSource": "[min(totalRegions=8, 5), 9]",
+        "pass": true,
+        "verdictRow": {
+          "instrument": "chunking.legibleWards",
+          "value": 6,
+          "denominator": "8 district regions in fabric.umbrella.partition, area floor 5000 sq units",
+          "band": "5..9",
+          "pass": true,
+          "wallPresent": true,
+          "chunks": 7
+        },
+        "regions": [
+          {
+            "districtId": "district.mages_quarter",
+            "wallSide": "intramural",
+            "area": 125804.08
+          },
+          {
+            "districtId": "district.shadows_district",
+            "wallSide": "intramural",
+            "area": 49640.54
+          },
+          {
+            "districtId": "district.common_residential",
+            "wallSide": "intramural",
+            "area": 36008.79
+          },
+          {
+            "districtId": "district.government_quarter",
+            "wallSide": "intramural",
+            "area": 13665.66
+          },
+          {
+            "districtId": "district.mages_quarter~faubourg",
+            "wallSide": "extramural",
+            "area": 8288.05
+          },
+          {
+            "districtId": "district.common_residential~faubourg",
+            "wallSide": "extramural",
+            "area": 5090.58
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSide": "intramural",
+            "area": 4467.29
+          },
+          {
+            "districtId": "district.shadows_district~faubourg",
+            "wallSide": "extramural",
+            "area": 2890.52
+          }
+        ]
+      }
+    },
+    {
+      "leaf": "village",
+      "name": "Mingguan",
+      "tier": "village",
+      "population": 512,
+      "i2_routeTrace": {
+        "applicable": true,
+        "heart": "square.heart",
+        "heartAt": [
+          661.46,
+          494.79
+        ],
+        "floorUnits": 4.94,
+        "floorSource": "the leaf's own web.widths.blockLane",
+        "voidCells": 58738,
+        "gatesTotal": 2,
+        "gatesBricked": 0,
+        "reachable": 2,
+        "passing": 2,
+        "subjectsWere": "road entries (unwalled leaf)",
+        "rows": [
+          {
+            "gate": "approach:road.high.corridor.0~frame.0",
+            "bricked": false,
+            "ringKind": "no circuit — road entry, snapped to the first drawn point along the road",
+            "reachable": true,
+            "bottleneckWidthUnits": 16.14,
+            "pathLengthUnits": 679.31,
+            "straightLineUnits": 659.13,
+            "detourRatio": 1.0306,
+            "pass": true
+          },
+          {
+            "gate": "approach:road.approach.corridor.1~frame.1",
+            "bricked": false,
+            "ringKind": "no circuit — road entry, snapped to the first drawn point along the road",
+            "reachable": true,
+            "bottleneckWidthUnits": 10,
+            "pathLengthUnits": 435.64,
+            "straightLineUnits": 411.7,
+            "detourRatio": 1.0581,
+            "pass": true
+          }
+        ],
+        "pass": true
+      },
+      "i3_chunking": {
+        "tier": "village",
+        "extentTier": "village",
+        "population": 512,
+        "wallPresent": false,
+        "rings": 0,
+        "totalRegions": 2,
+        "areaFloor": 5000,
+        "legibleWards": 2,
+        "chunks": 2,
+        "band": [
+          2,
+          9
+        ],
+        "bandSource": "[min(totalRegions=2, 5), 9]",
+        "pass": true,
+        "verdictRow": {
+          "instrument": "chunking.legibleWards",
+          "value": 2,
+          "denominator": "2 district regions in fabric.umbrella.partition, area floor 5000 sq units",
+          "band": "2..9",
+          "pass": true,
+          "wallPresent": false,
+          "chunks": 2
+        },
+        "regions": [
+          {
+            "districtId": "district.noxious_trades_quarter",
+            "wallSide": null,
+            "area": 33110.75
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSide": null,
+            "area": 5930.41
+          }
+        ]
+      }
+    },
+    {
+      "leaf": "town",
+      "name": "Mahabagh",
+      "tier": "town",
+      "population": 3502,
+      "i2_routeTrace": {
+        "applicable": true,
+        "heart": "square.heart",
+        "heartAt": [
+          588.54,
+          484.38
+        ],
+        "floorUnits": 3.06,
+        "floorSource": "the leaf's own web.widths.blockLane",
+        "voidCells": 103797,
+        "gatesTotal": 2,
+        "gatesBricked": 0,
+        "reachable": 2,
+        "passing": 2,
+        "subjectsWere": "circuit gates",
+        "rows": [
+          {
+            "gate": "gate.E1.road.high.corridor.0~frame.0",
+            "bricked": false,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 11.31,
+            "pathLengthUnits": 259.3,
+            "straightLineUnits": 219.8,
+            "detourRatio": 1.1797,
+            "pass": true
+          },
+          {
+            "gate": "gate.E1.road.approach.corridor.1~frame.1",
+            "bricked": false,
+            "ringKind": "main",
+            "reachable": true,
+            "bottleneckWidthUnits": 7.66,
+            "pathLengthUnits": 671.38,
+            "straightLineUnits": 445.84,
+            "detourRatio": 1.5059,
+            "pass": true
+          }
+        ],
+        "pass": true
+      },
+      "i3_chunking": {
+        "tier": "town",
+        "extentTier": "town",
+        "population": 3502,
+        "wallPresent": true,
+        "rings": 1,
+        "totalRegions": 6,
+        "areaFloor": 5000,
+        "legibleWards": 2,
+        "chunks": 3,
+        "band": [
+          5,
+          9
+        ],
+        "bandSource": "[min(totalRegions=6, 5), 9]",
+        "pass": false,
+        "verdictRow": {
+          "instrument": "chunking.legibleWards",
+          "value": 2,
+          "denominator": "6 district regions in fabric.umbrella.partition, area floor 5000 sq units",
+          "band": "5..9",
+          "pass": false,
+          "wallPresent": true,
+          "chunks": 3
+        },
+        "regions": [
+          {
+            "districtId": "district.market_quarter",
+            "wallSide": "intramural",
+            "area": 52291.19
+          },
+          {
+            "districtId": "district.government_quarter",
+            "wallSide": "intramural",
+            "area": 19938.46
+          },
+          {
+            "districtId": "district.noxious_trades_quarter",
+            "wallSide": "intramural",
+            "area": 3093.27
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSide": "intramural",
+            "area": 2185.72
+          },
+          {
+            "districtId": "district.market_quarter~faubourg",
+            "wallSide": "extramural",
+            "area": 1794.36
+          },
+          {
+            "districtId": "district.government_quarter~faubourg",
+            "wallSide": "extramural",
+            "area": 680.45
+          }
+        ]
+      }
+    }
+  ],
+  "censuses": {
+    "scope": "the whole exemplar corpus at the sealed model",
+    "straddleCensus": {
+      "instrument": "the law's own districtStraddlers(partition, node) — band-aware, old-core rings excluded",
+      "value": 0,
+      "denominator": "79 district regions on 12 walled leaves of 18 measured",
+      "preCureReference": "14 straddling districts of 46 on the walled leaves (districtPartition.js header)",
+      "crossCheck": {
+        "instrument": "independent, no band, region polygon vs the ring closedPolygon, tol 1%",
+        "value": 10,
+        "denominator": "79 district regions",
+        "note": "strictly harsher than the law's predicate — the gap is regions holding ground inside the wall BAND"
+      }
+    },
+    "outsideCircuitBodyCount": {
+      "instrument": "the shipped §241.6 predicate — epoch by epochs[k].body, held by any ring at or after that epoch, half-ring rescued by closedPolygon",
+      "value": 0,
+      "denominator": "15326 drawn bodies that are MEMBERS of a walled epoch (of 25001 drawn bodies across all leaves; 6083 in the suburb beyond every circuit)",
+      "preCureReference": "1,331 of 19,563 drawn bodies (6.8%) (epochAxis.js header)"
+    },
+    "hullContainment240_1": {
+      "instrument": "every vertex of a ring's own epochHull inside that ring (closedPolygon rescues a half-ring)",
+      "value": 0,
+      "denominator": "all epochHull vertices on all rings of all walled leaves"
+    },
+    "perLeaf": [
+      {
+        "leaf": "thorp",
+        "tier": "thorp",
+        "rings": 0,
+        "districts": 1,
+        "straddlers": null,
+        "straddleStatus": "NOT APPLICABLE — this leaf carries no working circuit, so no district can straddle one",
+        "crossCheckStraddlers": null,
+        "bodiesOutside": null,
+        "bodyMembers": null,
+        "suburb": 31
+      },
+      {
+        "leaf": "hamlet",
+        "tier": "hamlet",
+        "rings": 0,
+        "districts": 2,
+        "straddlers": null,
+        "straddleStatus": "NOT APPLICABLE — this leaf carries no working circuit, so no district can straddle one",
+        "crossCheckStraddlers": null,
+        "bodiesOutside": null,
+        "bodyMembers": null,
+        "suburb": 92
+      },
+      {
+        "leaf": "village",
+        "tier": "village",
+        "rings": 0,
+        "districts": 2,
+        "straddlers": null,
+        "straddleStatus": "NOT APPLICABLE — this leaf carries no working circuit, so no district can straddle one",
+        "crossCheckStraddlers": null,
+        "bodiesOutside": null,
+        "bodyMembers": null,
+        "suburb": 196
+      },
+      {
+        "leaf": "town",
+        "tier": "town",
+        "rings": 1,
+        "districts": 6,
+        "straddlers": 0,
+        "straddleStatus": "COMPLETE — every region examined, on a 2-unit lattice inside each region's bounds",
+        "crossCheckStraddlers": 0,
+        "bodiesOutside": 0,
+        "bodyMembers": 925,
+        "suburb": 614
+      },
+      {
+        "leaf": "town-2",
+        "tier": "town",
+        "rings": 1,
+        "districts": 7,
+        "straddlers": 0,
+        "straddleStatus": "COMPLETE — every region examined, on a 2-unit lattice inside each region's bounds",
+        "crossCheckStraddlers": 0,
+        "bodiesOutside": 0,
+        "bodyMembers": 1029,
+        "suburb": 574
+      },
+      {
+        "leaf": "city",
+        "tier": "city",
+        "rings": 2,
+        "districts": 8,
+        "straddlers": 0,
+        "straddleStatus": "COMPLETE — every region examined, on a 2-unit lattice inside each region's bounds",
+        "crossCheckStraddlers": 3,
+        "bodiesOutside": 0,
+        "bodyMembers": 1549,
+        "suburb": 614
+      },
+      {
+        "leaf": "metropolis",
+        "tier": "metropolis",
+        "rings": 3,
+        "districts": 9,
+        "straddlers": 0,
+        "straddleStatus": "COMPLETE — every region examined, on a 2-unit lattice inside each region's bounds",
+        "crossCheckStraddlers": 3,
+        "bodiesOutside": 0,
+        "bodyMembers": 2742,
+        "suburb": 390
+      },
+      {
+        "leaf": "polycentric",
+        "tier": "town",
+        "rings": 1,
+        "districts": 8,
+        "straddlers": 0,
+        "straddleStatus": "COMPLETE — every region examined, on a 2-unit lattice inside each region's bounds",
+        "crossCheckStraddlers": 1,
+        "bodiesOutside": 0,
+        "bodyMembers": 801,
+        "suburb": 653
+      },
+      {
+        "leaf": "highwater",
+        "tier": "town",
+        "rings": 2,
+        "districts": 4,
+        "straddlers": 0,
+        "straddleStatus": "COMPLETE — every region examined, on a 2-unit lattice inside each region's bounds",
+        "crossCheckStraddlers": 0,
+        "bodiesOutside": 0,
+        "bodyMembers": 1501,
+        "suburb": 97
+      },
+      {
+        "leaf": "mountain",
+        "tier": "village",
+        "rings": 0,
+        "districts": 1,
+        "straddlers": null,
+        "straddleStatus": "NOT APPLICABLE — this leaf carries no working circuit, so no district can straddle one",
+        "crossCheckStraddlers": null,
+        "bodiesOutside": null,
+        "bodyMembers": null,
+        "suburb": 153
+      },
+      {
+        "leaf": "fjord",
+        "tier": "town",
+        "rings": 0,
+        "districts": 3,
+        "straddlers": null,
+        "straddleStatus": "NOT APPLICABLE — this leaf carries no working circuit, so no district can straddle one",
+        "crossCheckStraddlers": null,
+        "bodiesOutside": null,
+        "bodyMembers": null,
+        "suburb": 1526
+      },
+      {
+        "leaf": "siege",
+        "tier": "town",
+        "rings": 1,
+        "districts": 6,
+        "straddlers": 0,
+        "straddleStatus": "COMPLETE — every region examined, on a 2-unit lattice inside each region's bounds",
+        "crossCheckStraddlers": 0,
+        "bodiesOutside": 0,
+        "bodyMembers": 925,
+        "suburb": 560
+      },
+      {
+        "leaf": "plague",
+        "tier": "town",
+        "rings": 1,
+        "districts": 6,
+        "straddlers": 0,
+        "straddleStatus": "COMPLETE — every region examined, on a 2-unit lattice inside each region's bounds",
+        "crossCheckStraddlers": 0,
+        "bodiesOutside": 0,
+        "bodyMembers": 925,
+        "suburb": 615
+      },
+      {
+        "leaf": "famine",
+        "tier": "town",
+        "rings": 1,
+        "districts": 6,
+        "straddlers": 0,
+        "straddleStatus": "COMPLETE — every region examined, on a 2-unit lattice inside each region's bounds",
+        "crossCheckStraddlers": 0,
+        "bodiesOutside": 0,
+        "bodyMembers": 925,
+        "suburb": 614
+      },
+      {
+        "leaf": "migration",
+        "tier": "city",
+        "rings": 2,
+        "districts": 8,
+        "straddlers": 0,
+        "straddleStatus": "COMPLETE — every region examined, on a 2-unit lattice inside each region's bounds",
+        "crossCheckStraddlers": 3,
+        "bodiesOutside": 0,
+        "bodyMembers": 1549,
+        "suburb": 614
+      },
+      {
+        "leaf": "year-018",
+        "tier": "town",
+        "rings": 0,
+        "districts": 4,
+        "straddlers": null,
+        "straddleStatus": "NOT APPLICABLE — this leaf carries no working circuit, so no district can straddle one",
+        "crossCheckStraddlers": null,
+        "bodiesOutside": null,
+        "bodyMembers": null,
+        "suburb": 1594
+      },
+      {
+        "leaf": "year-100",
+        "tier": "town",
+        "rings": 1,
+        "districts": 4,
+        "straddlers": 0,
+        "straddleStatus": "COMPLETE — every region examined, on a 2-unit lattice inside each region's bounds",
+        "crossCheckStraddlers": 0,
+        "bodiesOutside": 0,
+        "bodyMembers": 1453,
+        "suburb": 142
+      },
+      {
+        "leaf": "crossing",
+        "tier": "town",
+        "rings": 1,
+        "districts": 7,
+        "straddlers": 0,
+        "straddleStatus": "COMPLETE — every region examined, on a 2-unit lattice inside each region's bounds",
+        "crossCheckStraddlers": 0,
+        "bodiesOutside": 0,
+        "bodyMembers": 1002,
+        "suburb": 596
+      }
+    ]
+  },
+  "noDriftTrace": {
+    "renderFolio": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/reg0/w3f-tree/harness/renderFolio.mjs",
+    "rendererLines": 1950,
+    "opClasses": 31,
+    "tableRows": 31,
+    "emittedGroups": [
+      "yards",
+      "fabric",
+      "landmarks",
+      "legend"
+    ],
+    "flushIdsInSource": [
+      "fields",
+      "squares"
+    ],
+    "traced": 28,
+    "driftJustified": 3,
+    "untracedMisses": 0,
+    "misses": [],
+    "staleTableRows": [],
+    "byReference": {
+      "watabou": 10,
+      "ftg": 10,
+      "corpus": 25,
+      "DRIFT": 3
+    },
+    "rows": [
+      {
+        "id": "0",
+        "title": "PAPER, then THE AGED GROUND (chair directive). Flat wash patches at low",
+        "line": 694,
+        "tableName": "PAPER + the aged ground",
+        "trace": [
+          "corpus"
+        ],
+        "why": "the plate ground itself — the corpus's aged paper tone and low-value wash patches",
+        "status": "TRACED"
+      },
+      {
+        "id": "1",
+        "title": "THE OPEN FIELDS (§16) — STRIPS THAT TILE, not patches that float. Batched by",
+        "line": 725,
+        "tableName": "THE OPEN FIELDS — strips that tile",
+        "trace": [
+          "ftg",
+          "corpus"
+        ],
+        "why": "FTG draws cultivated parcels around a settlement; the corpus supplies the strip-furrow dress",
+        "status": "TRACED"
+      },
+      {
+        "id": "2",
+        "title": "TERRACE LINES on the strips that needed them (§161b's visible work in the",
+        "line": 764,
+        "tableName": "TERRACE LINES on the strips",
+        "trace": [
+          "corpus"
+        ],
+        "why": "terraced hillside plates",
+        "status": "TRACED"
+      },
+      {
+        "id": "3",
+        "title": "THE RELIEF PASS (§9.5b) — the land drawn in the era's own marks. All LINES.",
+        "line": 781,
+        "tableName": "THE RELIEF PASS",
+        "trace": [
+          "watabou",
+          "corpus"
+        ],
+        "why": "Watabou draws relief as marks rather than shading; the corpus supplies hachure grammar",
+        "status": "TRACED"
+      },
+      {
+        "id": "4",
+        "title": "TREES — batched into one path of small circles drawn as arc pairs.",
+        "line": 853,
+        "tableName": "TREES",
+        "trace": [
+          "watabou",
+          "ftg"
+        ],
+        "why": "both references draw canopy as small repeated marks",
+        "status": "TRACED"
+      },
+      {
+        "id": "4b",
+        "title": "⭐⭐ §12.3 THE WALK-SCALE RINGS, over the countryside and UNDER the town — a range",
+        "line": 863,
+        "tableName": "THE WALK-SCALE RINGS (§12.3)",
+        "trace": [
+          "DRIFT"
+        ],
+        "why": "NO reference draws a walking-time ring. It is an immersion device of ours; §12.3 owns it. Lawful under L-REG-4 only with this justification on the record, and it is a NAMED CANDIDATE for the register's first subtraction if the judging round finds it reads as an overlay rather than as plate furniture.",
+        "status": "DRIFT_JUSTIFIED"
+      },
+      {
+        "id": "4c",
+        "title": "⭐ §12.5 THE COUNTRYSIDE EVENT MARKS. A dated stone or a camp ground, in calm ink,",
+        "line": 878,
+        "tableName": "THE COUNTRYSIDE EVENT MARKS (§12.5)",
+        "trace": [
+          "DRIFT"
+        ],
+        "why": "a dated stone or camp ground marking a real event has no analogue in a fixed picture — this is the truth layer becoming ink, and it is the engine's differentiator rather than a borrowing. Register-side it must READ as period map furniture; that is the judging question, not whether it traces.",
+        "status": "DRIFT_JUSTIFIED"
+      },
+      {
+        "id": "5",
+        "title": "THE WATER BODY (§5.0b at its mode, §9.5b's \"a fjord town must LOOK like a fjord",
+        "line": 901,
+        "tableName": "THE WATER BODY",
+        "trace": [
+          "watabou",
+          "ftg",
+          "corpus"
+        ],
+        "why": "all three; the corpus supplies bank and current-stroke dress",
+        "status": "TRACED"
+      },
+      {
+        "id": "6",
+        "title": "THE URBAN GROUND (§181.3a — AND IT IS NO LONGER THE STREET TONE).",
+        "line": 929,
+        "tableName": "THE URBAN GROUND",
+        "trace": [
+          "corpus"
+        ],
+        "why": "§2.2's warm ground the town sits on — a corpus plate convention",
+        "status": "TRACED"
+      },
+      {
+        "id": "6c",
+        "title": "§250.5 · THE FILLED-DITCH GARDENS — a curving ribbon of long narrow plots",
+        "line": 969,
+        "tableName": "THE FILLED-DITCH GARDENS (§250.5)",
+        "trace": [
+          "corpus"
+        ],
+        "why": "ribbon plots over a filled ditch are a real plate fossil the corpus shows",
+        "status": "TRACED"
+      },
+      {
+        "id": "7",
+        "title": "THE STREET WEB (§181.3a) — SIX RANKS OF CARRIAGEWAY, DRAWN AS THE PALE GROUND",
+        "line": 982,
+        "tableName": "THE STREET WEB — six ranks",
+        "trace": [
+          "watabou",
+          "ftg"
+        ],
+        "why": "Watabou's street-as-negative-space is the structure; rank hierarchy is FTG's legibility grammar",
+        "status": "TRACED"
+      },
+      {
+        "id": "8",
+        "title": "SQUARES — holes in the fabric, inked (§160.2's \"the market quarter needs its hole\").",
+        "line": 1049,
+        "tableName": "SQUARES — holes in the fabric",
+        "trace": [
+          "watabou",
+          "corpus"
+        ],
+        "why": "Watabou's market hole; corpus plates draw the place as an inked void",
+        "status": "TRACED"
+      },
+      {
+        "id": "9",
+        "title": "THE BLOCK GROUND IS GONE, AND ITS ABSENCE IS THE POINT (§181.3a).",
+        "line": 1058,
+        "tableName": "THE BLOCK GROUND'S ABSENCE",
+        "trace": [
+          "watabou"
+        ],
+        "why": "the negative-space law itself — the block is not a filled shape",
+        "status": "TRACED"
+      },
+      {
+        "id": "10",
+        "title": "YARDS — open ground behind the street range, one batched path.",
+        "line": 1066,
+        "tableName": "YARDS",
+        "trace": [
+          "corpus"
+        ],
+        "why": "burgage-plot back ground on town plates",
+        "status": "TRACED"
+      },
+      {
+        "id": "11",
+        "title": "THE FABRIC — every building INKED at fabric weight (§9.1, the chair's target",
+        "line": 1096,
+        "tableName": "THE FABRIC — every building inked",
+        "trace": [
+          "watabou",
+          "ftg",
+          "corpus"
+        ],
+        "why": "all three draw buildings as inked footprints",
+        "status": "TRACED"
+      },
+      {
+        "id": "11a",
+        "title": "⭐⭐⭐ GAP-D / T-07 / T-08 · THE TWO-TIER STROKE AND THE PLOT SERIES.",
+        "line": 1147,
+        "tableName": "THE TWO-TIER STROKE + PLOT SERIES",
+        "trace": [
+          "corpus"
+        ],
+        "why": "measured off corpus plate hf40 at exactly 2:1 — the INK_SCALE ladder's origin",
+        "status": "TRACED"
+      },
+      {
+        "id": "11b",
+        "title": "⭐⭐ §16.5 THE COUNTRYSIDE'S OWN DWELLINGS and §5.0e THE FAUBOURG.",
+        "line": 1190,
+        "tableName": "COUNTRYSIDE DWELLINGS + THE FAUBOURG",
+        "trace": [
+          "ftg",
+          "corpus"
+        ],
+        "why": "FTG's outlying steadings; the corpus's extramural suburbs",
+        "status": "TRACED"
+      },
+      {
+        "id": "11c",
+        "title": "⭐⭐⭐ THE ACCESSIBLE LENS'S REAL HATCH GEOMETRY (TC29's §0.0 resolution: \"an",
+        "line": 1207,
+        "tableName": "THE ACCESSIBLE LENS'S HATCH GEOMETRY",
+        "trace": [
+          "corpus"
+        ],
+        "why": "hand-coloured plates distinguished washes by ruled hatch for a printer with no colour",
+        "status": "TRACED"
+      },
+      {
+        "id": "12",
+        "title": "ROOF-RIDGE TICKS — the interior detail line that turns a filled quad into a",
+        "line": 1272,
+        "tableName": "ROOF-RIDGE TICKS",
+        "trace": [
+          "corpus"
+        ],
+        "why": "the interior detail line that turns a filled quad into a roof on a plate",
+        "status": "TRACED"
+      },
+      {
+        "id": "13",
+        "title": "LANDMARKS — §6 archetypes at HEAVIER ink with interior detail lines (ridge",
+        "line": 1335,
+        "tableName": "LANDMARKS — §6 archetypes",
+        "trace": [
+          "watabou",
+          "ftg",
+          "corpus"
+        ],
+        "why": "all three give civic buildings a distinct larger form",
+        "status": "TRACED"
+      },
+      {
+        "id": "13b",
+        "title": "§161b THE VISIBLE WORK — the strain the §5.-1c solver recorded, drawn at",
+        "line": 1393,
+        "tableName": "THE VISIBLE WORK (§161b)",
+        "trace": [
+          "corpus"
+        ],
+        "why": "retaining walls and cuttings are drawn works on terraced plates",
+        "status": "TRACED"
+      },
+      {
+        "id": "14",
+        "title": "TERRACES — §161b's visible work, drawn INSIDE the town on the ground that",
+        "line": 1403,
+        "tableName": "TERRACES inside the town",
+        "trace": [
+          "corpus"
+        ],
+        "why": "as 13b, intramural",
+        "status": "TRACED"
+      },
+      {
+        "id": "14b",
+        "title": "⭐⭐ THE BRIDGES (§2.3, chair directive §195.1). A street that crosses the water",
+        "line": 1411,
+        "tableName": "THE BRIDGES",
+        "trace": [
+          "watabou",
+          "ftg",
+          "corpus"
+        ],
+        "why": "all three; the street continues across the water",
+        "status": "TRACED"
+      },
+      {
+        "id": "15",
+        "title": "WALLS — the heaviest ink on the page, tower dots, gate BREAKS and piers.",
+        "line": 1440,
+        "tableName": "WALLS — towers, gate breaks, piers",
+        "trace": [
+          "watabou",
+          "corpus"
+        ],
+        "why": "Watabou's circuit is the loudest stroke; §214 iconography is corpus-sourced",
+        "status": "TRACED"
+      },
+      {
+        "id": "15a",
+        "title": "§250.5 · THE FOSSILS OF A SUPERSEDED CIRCUIT. Drawn AFTER the standing wall",
+        "line": 1630,
+        "tableName": "THE FOSSILS OF A SUPERSEDED CIRCUIT",
+        "trace": [
+          "corpus"
+        ],
+        "why": "old wall lines survive as street curves on real historic plates",
+        "status": "TRACED"
+      },
+      {
+        "id": "15b",
+        "title": "⭐⭐ §10 THE STATE EXPRESSIONS, in CALM INK. Drawn after the wall because a barred",
+        "line": 1664,
+        "tableName": "THE STATE EXPRESSIONS (§10)",
+        "trace": [
+          "DRIFT"
+        ],
+        "why": "a besieger's camp, a barred gate, a lazar house beyond the last of them: these draw a settlement's CURRENT CONDITION, which a fixed picture has no way to express. The truth layer again. Justification: it is the §10 catalogue rendered in calm ink at plate weight, deliberately NOT a game overlay — the register test is whether a reader takes it for a surveyor's note.",
+        "status": "DRIFT_JUSTIFIED"
+      },
+      {
+        "id": "15c",
+        "title": "⭐⭐ §18.1 THE SANCTUARY / LIBERTY BOUND. A light dashed line round the precinct's",
+        "line": 1715,
+        "tableName": "THE SANCTUARY / LIBERTY BOUND (§18.1)",
+        "trace": [
+          "corpus"
+        ],
+        "why": "precinct and liberty bounds are drawn as dashed lines on period town plates",
+        "status": "TRACED"
+      },
+      {
+        "id": "16",
+        "title": "WARD LABELS ARE NO LONGER DRAWN HERE (§173, MF-B6). Every letter on this leaf now",
+        "line": 1751,
+        "tableName": "WARD LABELS (now spliced at §173)",
+        "trace": [
+          "ftg",
+          "corpus"
+        ],
+        "why": "FTG names its quarters; the corpus supplies curved plate lettering",
+        "status": "TRACED"
+      },
+      {
+        "id": "17",
+        "title": "THE FOLIO CHROME — cartouche + compass.",
+        "line": 1759,
+        "tableName": "THE FOLIO CHROME — cartouche + compass",
+        "trace": [
+          "corpus"
+        ],
+        "why": "plate chrome is a corpus convention outright",
+        "status": "TRACED"
+      },
+      {
+        "id": "18",
+        "title": "⭐⭐ THE IN-WORLD LEGEND (§12.7, and the chair's §195.2 disposal).",
+        "line": 1851,
+        "tableName": "THE IN-WORLD LEGEND (§12.7)",
+        "trace": [
+          "corpus"
+        ],
+        "why": "period plates carry a legend box teaching their own conventions",
+        "status": "TRACED"
+      },
+      {
+        "id": "19",
+        "title": "⭐⭐⭐ §173 THE LETTERING SPLICE — a SEPARATE STAGE OVER THE FINISHED DRAW LIST.",
+        "line": 1916,
+        "tableName": "THE LETTERING SPLICE (§173)",
+        "trace": [
+          "corpus",
+          "ftg"
+        ],
+        "why": "plate typography from the corpus; label placement discipline from FTG",
+        "status": "TRACED"
+      }
+    ],
+    "pass": true
+  }
+}

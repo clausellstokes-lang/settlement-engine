@@ -1,0 +1,2060 @@
+{
+  "leaves": [
+    {
+      "key": "thorp",
+      "name": "Dar-al-kala",
+      "tier": "thorp",
+      "extentTier": "thorp",
+      "population": 27,
+      "rings": 0,
+      "districts": 1,
+      "straddlePrimary": {
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 0,
+        "complete": false,
+        "status": "NOT APPLICABLE — this leaf carries no working circuit, so no district can straddle one",
+        "sampling": null
+      },
+      "straddlePrimaryFine": {
+        "step": 1,
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 0
+      },
+      "straddleCrossCheck": {
+        "applicable": false,
+        "districts": 0,
+        "straddling": 0,
+        "rows": []
+      },
+      "bodyCensus": {
+        "applicable": false,
+        "bodies": 31,
+        "members": 0,
+        "suburb": 31,
+        "outside": 0,
+        "offenders": [],
+        "status": "NOT APPLICABLE — no walled epoch carries a body on this leaf, so no body can stand outside its own circuit"
+      },
+      "hullContainment": [],
+      "ms": 423
+    },
+    {
+      "key": "hamlet",
+      "name": "Sundfoss",
+      "tier": "hamlet",
+      "extentTier": "hamlet",
+      "population": 220,
+      "rings": 0,
+      "districts": 2,
+      "straddlePrimary": {
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 0,
+        "complete": false,
+        "status": "NOT APPLICABLE — this leaf carries no working circuit, so no district can straddle one",
+        "sampling": null
+      },
+      "straddlePrimaryFine": {
+        "step": 1,
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 0
+      },
+      "straddleCrossCheck": {
+        "applicable": false,
+        "districts": 0,
+        "straddling": 0,
+        "rows": []
+      },
+      "bodyCensus": {
+        "applicable": false,
+        "bodies": 92,
+        "members": 0,
+        "suburb": 92,
+        "outside": 0,
+        "offenders": [],
+        "status": "NOT APPLICABLE — no walled epoch carries a body on this leaf, so no body can stand outside its own circuit"
+      },
+      "hullContainment": [],
+      "ms": 389
+    },
+    {
+      "key": "village",
+      "name": "Mingguan",
+      "tier": "village",
+      "extentTier": "village",
+      "population": 512,
+      "rings": 0,
+      "districts": 2,
+      "straddlePrimary": {
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 0,
+        "complete": false,
+        "status": "NOT APPLICABLE — this leaf carries no working circuit, so no district can straddle one",
+        "sampling": null
+      },
+      "straddlePrimaryFine": {
+        "step": 1,
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 0
+      },
+      "straddleCrossCheck": {
+        "applicable": false,
+        "districts": 0,
+        "straddling": 0,
+        "rows": []
+      },
+      "bodyCensus": {
+        "applicable": false,
+        "bodies": 196,
+        "members": 0,
+        "suburb": 196,
+        "outside": 0,
+        "offenders": [],
+        "status": "NOT APPLICABLE — no walled epoch carries a body on this leaf, so no body can stand outside its own circuit"
+      },
+      "hullContainment": [],
+      "ms": 405
+    },
+    {
+      "key": "town",
+      "name": "Mahabagh",
+      "tier": "town",
+      "extentTier": "town",
+      "population": 3502,
+      "rings": 1,
+      "districts": 6,
+      "straddlePrimary": {
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 19970,
+        "complete": true,
+        "status": "COMPLETE — every region examined, on a 2-unit lattice inside each region's bounds",
+        "sampling": {
+          "kind": "lattice",
+          "step": 2,
+          "regions": 6
+        }
+      },
+      "straddlePrimaryFine": {
+        "step": 1,
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 79946
+      },
+      "straddleCrossCheck": {
+        "applicable": true,
+        "ringSource": "closedPolygon",
+        "ringVertices": 120,
+        "districts": 6,
+        "straddling": 0,
+        "worstMinSide": 0.001,
+        "rows": [
+          {
+            "districtId": "district.government_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 19952,
+            "outside": 20,
+            "shareOutside": 0.001,
+            "minSide": 0.001,
+            "straddles": false,
+            "areaUnits": 19938.46
+          },
+          {
+            "districtId": "district.government_quarter~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 678,
+            "outside": 678,
+            "shareOutside": 1,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 680.45
+          },
+          {
+            "districtId": "district.market_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 52301,
+            "outside": 21,
+            "shareOutside": 0.0004,
+            "minSide": 0.0004,
+            "straddles": false,
+            "areaUnits": 52291.19
+          },
+          {
+            "districtId": "district.market_quarter~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 1799,
+            "outside": 1799,
+            "shareOutside": 1,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 1794.36
+          },
+          {
+            "districtId": "district.noxious_trades_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 3101,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 3093.27
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 2188,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 2185.72
+          }
+        ]
+      },
+      "bodyCensus": {
+        "applicable": true,
+        "bodies": 1539,
+        "members": 925,
+        "suburb": 614,
+        "outside": 0,
+        "shareOutside": 0,
+        "perEpoch": [
+          {
+            "epoch": 1,
+            "members": 925,
+            "outside": 0
+          }
+        ],
+        "ringsConsidered": [
+          {
+            "epoch": 1,
+            "kind": "main",
+            "halfRing": true
+          }
+        ],
+        "offenders": [],
+        "status": "COMPLETE — 1539 drawn bodies, 925 members of a walled epoch, 614 in the suburb beyond every circuit"
+      },
+      "hullContainment": [
+        {
+          "epoch": 1,
+          "kind": "main",
+          "halfRing": true,
+          "examined": 30,
+          "rescuedByClosedRing": 0,
+          "outside": 0,
+          "selfReportedResidual": 0
+        }
+      ],
+      "ms": 2556
+    },
+    {
+      "key": "town-2",
+      "name": "Baigou",
+      "tier": "town",
+      "extentTier": "town",
+      "population": 2497,
+      "rings": 1,
+      "districts": 7,
+      "straddlePrimary": {
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 31424,
+        "complete": true,
+        "status": "COMPLETE — every region examined, on a 2-unit lattice inside each region's bounds",
+        "sampling": {
+          "kind": "lattice",
+          "step": 2,
+          "regions": 7
+        }
+      },
+      "straddlePrimaryFine": {
+        "step": 1,
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 125717
+      },
+      "straddleCrossCheck": {
+        "applicable": true,
+        "ringSource": "closedPolygon",
+        "ringVertices": 96,
+        "districts": 7,
+        "straddling": 0,
+        "worstMinSide": 0,
+        "rows": [
+          {
+            "districtId": "district.government_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 16177,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 16163.29
+          },
+          {
+            "districtId": "district.government_quarter~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 2240,
+            "outside": 2240,
+            "shareOutside": 1,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 2243.7
+          },
+          {
+            "districtId": "district.mages_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 2105,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 2108.92
+          },
+          {
+            "districtId": "district.market_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 96385,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 96391.18
+          },
+          {
+            "districtId": "district.market_quarter~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 5043,
+            "outside": 5043,
+            "shareOutside": 1,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 5041.76
+          },
+          {
+            "districtId": "district.noxious_trades_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 3409,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 3402.21
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 418,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 415.12
+          }
+        ]
+      },
+      "bodyCensus": {
+        "applicable": true,
+        "bodies": 1603,
+        "members": 1029,
+        "suburb": 574,
+        "outside": 0,
+        "shareOutside": 0,
+        "perEpoch": [
+          {
+            "epoch": 1,
+            "members": 1029,
+            "outside": 0
+          }
+        ],
+        "ringsConsidered": [
+          {
+            "epoch": 1,
+            "kind": "main",
+            "halfRing": true
+          }
+        ],
+        "offenders": [],
+        "status": "COMPLETE — 1603 drawn bodies, 1029 members of a walled epoch, 574 in the suburb beyond every circuit"
+      },
+      "hullContainment": [
+        {
+          "epoch": 1,
+          "kind": "main",
+          "halfRing": true,
+          "examined": 30,
+          "rescuedByClosedRing": 0,
+          "outside": 0,
+          "selfReportedResidual": 0
+        }
+      ],
+      "ms": 2652
+    },
+    {
+      "key": "city",
+      "name": "Kitaqiao",
+      "tier": "city",
+      "extentTier": "city",
+      "population": 20091,
+      "rings": 2,
+      "districts": 8,
+      "straddlePrimary": {
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 61434,
+        "complete": true,
+        "status": "COMPLETE — every region examined, on a 2-unit lattice inside each region's bounds",
+        "sampling": {
+          "kind": "lattice",
+          "step": 2,
+          "regions": 8
+        }
+      },
+      "straddlePrimaryFine": {
+        "step": 1,
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 245818
+      },
+      "straddleCrossCheck": {
+        "applicable": true,
+        "ringSource": "closedPolygon",
+        "ringVertices": 26,
+        "districts": 8,
+        "straddling": 3,
+        "worstMinSide": 0.0214,
+        "rows": [
+          {
+            "districtId": "district.common_residential",
+            "wallSideLabel": "intramural",
+            "samples": 36021,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 36008.79
+          },
+          {
+            "districtId": "district.common_residential~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 5100,
+            "outside": 4991,
+            "shareOutside": 0.9786,
+            "minSide": 0.0214,
+            "straddles": true,
+            "areaUnits": 5090.58
+          },
+          {
+            "districtId": "district.government_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 13681,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 13665.66
+          },
+          {
+            "districtId": "district.mages_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 125793,
+            "outside": 9,
+            "shareOutside": 0.0001,
+            "minSide": 0.0001,
+            "straddles": false,
+            "areaUnits": 125804.08
+          },
+          {
+            "districtId": "district.mages_quarter~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 8279,
+            "outside": 8192,
+            "shareOutside": 0.9895,
+            "minSide": 0.0105,
+            "straddles": true,
+            "areaUnits": 8288.05
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 4463,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 4467.29
+          },
+          {
+            "districtId": "district.shadows_district",
+            "wallSideLabel": "intramural",
+            "samples": 49646,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 49640.54
+          },
+          {
+            "districtId": "district.shadows_district~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 2887,
+            "outside": 2838,
+            "shareOutside": 0.983,
+            "minSide": 0.017,
+            "straddles": true,
+            "areaUnits": 2890.52
+          }
+        ]
+      },
+      "bodyCensus": {
+        "applicable": true,
+        "bodies": 2163,
+        "members": 1549,
+        "suburb": 614,
+        "outside": 0,
+        "shareOutside": 0,
+        "perEpoch": [
+          {
+            "epoch": 1,
+            "members": 758,
+            "outside": 0
+          },
+          {
+            "epoch": 2,
+            "members": 791,
+            "outside": 0
+          }
+        ],
+        "ringsConsidered": [
+          {
+            "epoch": 2,
+            "kind": "main",
+            "halfRing": true
+          },
+          {
+            "epoch": 1,
+            "kind": "old-core",
+            "halfRing": true
+          }
+        ],
+        "offenders": [],
+        "status": "COMPLETE — 2163 drawn bodies, 1549 members of a walled epoch, 614 in the suburb beyond every circuit"
+      },
+      "hullContainment": [
+        {
+          "epoch": 2,
+          "kind": "main",
+          "halfRing": true,
+          "examined": 26,
+          "rescuedByClosedRing": 0,
+          "outside": 0,
+          "selfReportedResidual": 0
+        },
+        {
+          "epoch": 1,
+          "kind": "old-core",
+          "halfRing": true,
+          "examined": 26,
+          "rescuedByClosedRing": 3,
+          "outside": 0,
+          "selfReportedResidual": 0
+        }
+      ],
+      "ms": 6925
+    },
+    {
+      "key": "metropolis",
+      "name": "Warmgrund",
+      "tier": "metropolis",
+      "extentTier": "metropolis",
+      "population": 71325,
+      "rings": 3,
+      "districts": 9,
+      "straddlePrimary": {
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 90575,
+        "complete": true,
+        "status": "COMPLETE — every region examined, on a 2-unit lattice inside each region's bounds",
+        "sampling": {
+          "kind": "lattice",
+          "step": 2,
+          "regions": 9
+        }
+      },
+      "straddlePrimaryFine": {
+        "step": 1,
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 362264
+      },
+      "straddleCrossCheck": {
+        "applicable": true,
+        "ringSource": "closedPolygon",
+        "ringVertices": 22,
+        "districts": 9,
+        "straddling": 3,
+        "worstMinSide": 0.0825,
+        "rows": [
+          {
+            "districtId": "district.common_residential",
+            "wallSideLabel": "intramural",
+            "samples": 186732,
+            "outside": 8,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 186747.06
+          },
+          {
+            "districtId": "district.common_residential~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 739,
+            "outside": 678,
+            "shareOutside": 0.9175,
+            "minSide": 0.0825,
+            "straddles": true,
+            "areaUnits": 736.96
+          },
+          {
+            "districtId": "district.government_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 47432,
+            "outside": 2,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 47430.17
+          },
+          {
+            "districtId": "district.government_quarter~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 35,
+            "outside": 34,
+            "shareOutside": 0.9714,
+            "minSide": 0.0286,
+            "straddles": true,
+            "areaUnits": 34.17
+          },
+          {
+            "districtId": "district.mages_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 12111,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 12110.5
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 13274,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 13277.3
+          },
+          {
+            "districtId": "district.shadows_district",
+            "wallSideLabel": "intramural",
+            "samples": 91978,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 91984.15
+          },
+          {
+            "districtId": "district.wealthy_residential",
+            "wallSideLabel": "intramural",
+            "samples": 9840,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 9839.17
+          },
+          {
+            "districtId": "district.wealthy_residential~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 136,
+            "outside": 130,
+            "shareOutside": 0.9559,
+            "minSide": 0.0441,
+            "straddles": true,
+            "areaUnits": 135.22
+          }
+        ]
+      },
+      "bodyCensus": {
+        "applicable": true,
+        "bodies": 3132,
+        "members": 2742,
+        "suburb": 390,
+        "outside": 0,
+        "shareOutside": 0,
+        "perEpoch": [
+          {
+            "epoch": 0,
+            "members": 872,
+            "outside": 0
+          },
+          {
+            "epoch": 1,
+            "members": 895,
+            "outside": 0
+          },
+          {
+            "epoch": 2,
+            "members": 975,
+            "outside": 0
+          }
+        ],
+        "ringsConsidered": [
+          {
+            "epoch": 2,
+            "kind": "main",
+            "halfRing": false
+          },
+          {
+            "epoch": 1,
+            "kind": "old-core",
+            "halfRing": false
+          },
+          {
+            "epoch": 0,
+            "kind": "old-core",
+            "halfRing": false
+          }
+        ],
+        "offenders": [],
+        "status": "COMPLETE — 3132 drawn bodies, 2742 members of a walled epoch, 390 in the suburb beyond every circuit"
+      },
+      "hullContainment": [
+        {
+          "epoch": 2,
+          "kind": "main",
+          "halfRing": false,
+          "examined": 26,
+          "rescuedByClosedRing": 0,
+          "outside": 0,
+          "selfReportedResidual": 0
+        },
+        {
+          "epoch": 1,
+          "kind": "old-core",
+          "halfRing": false,
+          "examined": 26,
+          "rescuedByClosedRing": 0,
+          "outside": 0,
+          "selfReportedResidual": 0
+        },
+        {
+          "epoch": 0,
+          "kind": "old-core",
+          "halfRing": false,
+          "examined": 26,
+          "rescuedByClosedRing": 0,
+          "outside": 0,
+          "selfReportedResidual": 0
+        }
+      ],
+      "ms": 11543
+    },
+    {
+      "key": "polycentric",
+      "name": "Strathgarth",
+      "tier": "town",
+      "extentTier": "town",
+      "population": 3334,
+      "rings": 1,
+      "districts": 8,
+      "straddlePrimary": {
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 31360,
+        "complete": true,
+        "status": "COMPLETE — every region examined, on a 2-unit lattice inside each region's bounds",
+        "sampling": {
+          "kind": "lattice",
+          "step": 2,
+          "regions": 8
+        }
+      },
+      "straddlePrimaryFine": {
+        "step": 1,
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 125547
+      },
+      "straddleCrossCheck": {
+        "applicable": true,
+        "ringSource": "closedPolygon",
+        "ringVertices": 116,
+        "districts": 8,
+        "straddling": 1,
+        "worstMinSide": 0.0178,
+        "rows": [
+          {
+            "districtId": "district.mages_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 6335,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 6339.77
+          },
+          {
+            "districtId": "district.mages_quarter~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 103,
+            "outside": 103,
+            "shareOutside": 1,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 102.31
+          },
+          {
+            "districtId": "district.market_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 79988,
+            "outside": 23,
+            "shareOutside": 0.0003,
+            "minSide": 0.0003,
+            "straddles": false,
+            "areaUnits": 80000.41
+          },
+          {
+            "districtId": "district.market_quarter~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 1508,
+            "outside": 1495,
+            "shareOutside": 0.9914,
+            "minSide": 0.0086,
+            "straddles": false,
+            "areaUnits": 1512.22
+          },
+          {
+            "districtId": "district.noxious_trades_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 21528,
+            "outside": 1,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 21533.17
+          },
+          {
+            "districtId": "district.noxious_trades_quarter~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 1632,
+            "outside": 1603,
+            "shareOutside": 0.9822,
+            "minSide": 0.0178,
+            "straddles": true,
+            "areaUnits": 1626.44
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 13322,
+            "outside": 3,
+            "shareOutside": 0.0002,
+            "minSide": 0.0002,
+            "straddles": false,
+            "areaUnits": 13339.72
+          },
+          {
+            "districtId": "district.religious_quarter~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 1124,
+            "outside": 1124,
+            "shareOutside": 1,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 1119.05
+          }
+        ]
+      },
+      "bodyCensus": {
+        "applicable": true,
+        "bodies": 1454,
+        "members": 801,
+        "suburb": 653,
+        "outside": 0,
+        "shareOutside": 0,
+        "perEpoch": [
+          {
+            "epoch": 1,
+            "members": 801,
+            "outside": 0
+          }
+        ],
+        "ringsConsidered": [
+          {
+            "epoch": 1,
+            "kind": "main",
+            "halfRing": false
+          }
+        ],
+        "offenders": [],
+        "status": "COMPLETE — 1454 drawn bodies, 801 members of a walled epoch, 653 in the suburb beyond every circuit"
+      },
+      "hullContainment": [
+        {
+          "epoch": 1,
+          "kind": "main",
+          "halfRing": false,
+          "examined": 30,
+          "rescuedByClosedRing": 0,
+          "outside": 0,
+          "selfReportedResidual": 0
+        }
+      ],
+      "ms": 5817
+    },
+    {
+      "key": "highwater",
+      "name": "Mahabagh",
+      "tier": "town",
+      "extentTier": "city",
+      "population": 3502,
+      "rings": 2,
+      "districts": 4,
+      "straddlePrimary": {
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 50180,
+        "complete": true,
+        "status": "COMPLETE — every region examined, on a 2-unit lattice inside each region's bounds",
+        "sampling": {
+          "kind": "lattice",
+          "step": 2,
+          "regions": 4
+        }
+      },
+      "straddlePrimaryFine": {
+        "step": 1,
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 200746
+      },
+      "straddleCrossCheck": {
+        "applicable": true,
+        "ringSource": "closedPolygon",
+        "ringVertices": 26,
+        "districts": 4,
+        "straddling": 0,
+        "worstMinSide": 0,
+        "rows": [
+          {
+            "districtId": "district.government_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 8730,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 8746.43
+          },
+          {
+            "districtId": "district.market_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 171681,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 171710.82
+          },
+          {
+            "districtId": "district.noxious_trades_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 5872,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 5870.27
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 14397,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 14400.85
+          }
+        ]
+      },
+      "bodyCensus": {
+        "applicable": true,
+        "bodies": 1598,
+        "members": 1501,
+        "suburb": 97,
+        "outside": 0,
+        "shareOutside": 0,
+        "perEpoch": [
+          {
+            "epoch": 2,
+            "members": 681,
+            "outside": 0
+          },
+          {
+            "epoch": 3,
+            "members": 820,
+            "outside": 0
+          }
+        ],
+        "ringsConsidered": [
+          {
+            "epoch": 3,
+            "kind": "main",
+            "halfRing": true
+          },
+          {
+            "epoch": 2,
+            "kind": "old-core",
+            "halfRing": true
+          }
+        ],
+        "offenders": [],
+        "status": "COMPLETE — 1598 drawn bodies, 1501 members of a walled epoch, 97 in the suburb beyond every circuit"
+      },
+      "hullContainment": [
+        {
+          "epoch": 3,
+          "kind": "main",
+          "halfRing": true,
+          "examined": 26,
+          "rescuedByClosedRing": 0,
+          "outside": 0,
+          "selfReportedResidual": 0
+        },
+        {
+          "epoch": 2,
+          "kind": "old-core",
+          "halfRing": true,
+          "examined": 26,
+          "rescuedByClosedRing": 0,
+          "outside": 0,
+          "selfReportedResidual": 0
+        }
+      ],
+      "ms": 20146
+    },
+    {
+      "key": "mountain",
+      "name": "Mingguan",
+      "tier": "village",
+      "extentTier": "village",
+      "population": 512,
+      "rings": 0,
+      "districts": 1,
+      "straddlePrimary": {
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 0,
+        "complete": false,
+        "status": "NOT APPLICABLE — this leaf carries no working circuit, so no district can straddle one",
+        "sampling": null
+      },
+      "straddlePrimaryFine": {
+        "step": 1,
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 0
+      },
+      "straddleCrossCheck": {
+        "applicable": false,
+        "districts": 0,
+        "straddling": 0,
+        "rows": []
+      },
+      "bodyCensus": {
+        "applicable": false,
+        "bodies": 153,
+        "members": 0,
+        "suburb": 153,
+        "outside": 0,
+        "offenders": [],
+        "status": "NOT APPLICABLE — no walled epoch carries a body on this leaf, so no body can stand outside its own circuit"
+      },
+      "hullContainment": [],
+      "ms": 226
+    },
+    {
+      "key": "fjord",
+      "name": "Beiyuan",
+      "tier": "town",
+      "extentTier": "town",
+      "population": 3140,
+      "rings": 0,
+      "districts": 3,
+      "straddlePrimary": {
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 0,
+        "complete": false,
+        "status": "NOT APPLICABLE — this leaf carries no working circuit, so no district can straddle one",
+        "sampling": null
+      },
+      "straddlePrimaryFine": {
+        "step": 1,
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 0
+      },
+      "straddleCrossCheck": {
+        "applicable": false,
+        "districts": 0,
+        "straddling": 0,
+        "rows": []
+      },
+      "bodyCensus": {
+        "applicable": false,
+        "bodies": 1526,
+        "members": 0,
+        "suburb": 1526,
+        "outside": 0,
+        "offenders": [],
+        "status": "NOT APPLICABLE — no walled epoch carries a body on this leaf, so no body can stand outside its own circuit"
+      },
+      "hullContainment": [],
+      "ms": 855
+    },
+    {
+      "key": "siege",
+      "name": "Mahabagh",
+      "tier": "town",
+      "extentTier": "town",
+      "population": 3502,
+      "rings": 1,
+      "districts": 6,
+      "straddlePrimary": {
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 19970,
+        "complete": true,
+        "status": "COMPLETE — every region examined, on a 2-unit lattice inside each region's bounds",
+        "sampling": {
+          "kind": "lattice",
+          "step": 2,
+          "regions": 6
+        }
+      },
+      "straddlePrimaryFine": {
+        "step": 1,
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 79946
+      },
+      "straddleCrossCheck": {
+        "applicable": true,
+        "ringSource": "closedPolygon",
+        "ringVertices": 120,
+        "districts": 6,
+        "straddling": 0,
+        "worstMinSide": 0.001,
+        "rows": [
+          {
+            "districtId": "district.government_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 19952,
+            "outside": 20,
+            "shareOutside": 0.001,
+            "minSide": 0.001,
+            "straddles": false,
+            "areaUnits": 19938.46
+          },
+          {
+            "districtId": "district.government_quarter~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 678,
+            "outside": 678,
+            "shareOutside": 1,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 680.45
+          },
+          {
+            "districtId": "district.market_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 52301,
+            "outside": 21,
+            "shareOutside": 0.0004,
+            "minSide": 0.0004,
+            "straddles": false,
+            "areaUnits": 52291.19
+          },
+          {
+            "districtId": "district.market_quarter~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 1799,
+            "outside": 1799,
+            "shareOutside": 1,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 1794.36
+          },
+          {
+            "districtId": "district.noxious_trades_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 3101,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 3093.27
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 2188,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 2185.72
+          }
+        ]
+      },
+      "bodyCensus": {
+        "applicable": true,
+        "bodies": 1485,
+        "members": 925,
+        "suburb": 560,
+        "outside": 0,
+        "shareOutside": 0,
+        "perEpoch": [
+          {
+            "epoch": 1,
+            "members": 925,
+            "outside": 0
+          }
+        ],
+        "ringsConsidered": [
+          {
+            "epoch": 1,
+            "kind": "main",
+            "halfRing": true
+          }
+        ],
+        "offenders": [],
+        "status": "COMPLETE — 1485 drawn bodies, 925 members of a walled epoch, 560 in the suburb beyond every circuit"
+      },
+      "hullContainment": [
+        {
+          "epoch": 1,
+          "kind": "main",
+          "halfRing": true,
+          "examined": 30,
+          "rescuedByClosedRing": 0,
+          "outside": 0,
+          "selfReportedResidual": 0
+        }
+      ],
+      "ms": 2968
+    },
+    {
+      "key": "plague",
+      "name": "Mahabagh",
+      "tier": "town",
+      "extentTier": "town",
+      "population": 3502,
+      "rings": 1,
+      "districts": 6,
+      "straddlePrimary": {
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 19970,
+        "complete": true,
+        "status": "COMPLETE — every region examined, on a 2-unit lattice inside each region's bounds",
+        "sampling": {
+          "kind": "lattice",
+          "step": 2,
+          "regions": 6
+        }
+      },
+      "straddlePrimaryFine": {
+        "step": 1,
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 79946
+      },
+      "straddleCrossCheck": {
+        "applicable": true,
+        "ringSource": "closedPolygon",
+        "ringVertices": 120,
+        "districts": 6,
+        "straddling": 0,
+        "worstMinSide": 0.001,
+        "rows": [
+          {
+            "districtId": "district.government_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 19952,
+            "outside": 20,
+            "shareOutside": 0.001,
+            "minSide": 0.001,
+            "straddles": false,
+            "areaUnits": 19938.46
+          },
+          {
+            "districtId": "district.government_quarter~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 678,
+            "outside": 678,
+            "shareOutside": 1,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 680.45
+          },
+          {
+            "districtId": "district.market_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 52301,
+            "outside": 21,
+            "shareOutside": 0.0004,
+            "minSide": 0.0004,
+            "straddles": false,
+            "areaUnits": 52291.19
+          },
+          {
+            "districtId": "district.market_quarter~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 1799,
+            "outside": 1799,
+            "shareOutside": 1,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 1794.36
+          },
+          {
+            "districtId": "district.noxious_trades_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 3101,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 3093.27
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 2188,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 2185.72
+          }
+        ]
+      },
+      "bodyCensus": {
+        "applicable": true,
+        "bodies": 1540,
+        "members": 925,
+        "suburb": 615,
+        "outside": 0,
+        "shareOutside": 0,
+        "perEpoch": [
+          {
+            "epoch": 1,
+            "members": 925,
+            "outside": 0
+          }
+        ],
+        "ringsConsidered": [
+          {
+            "epoch": 1,
+            "kind": "main",
+            "halfRing": true
+          }
+        ],
+        "offenders": [],
+        "status": "COMPLETE — 1540 drawn bodies, 925 members of a walled epoch, 615 in the suburb beyond every circuit"
+      },
+      "hullContainment": [
+        {
+          "epoch": 1,
+          "kind": "main",
+          "halfRing": true,
+          "examined": 30,
+          "rescuedByClosedRing": 0,
+          "outside": 0,
+          "selfReportedResidual": 0
+        }
+      ],
+      "ms": 2591
+    },
+    {
+      "key": "famine",
+      "name": "Mahabagh",
+      "tier": "town",
+      "extentTier": "town",
+      "population": 3502,
+      "rings": 1,
+      "districts": 6,
+      "straddlePrimary": {
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 19970,
+        "complete": true,
+        "status": "COMPLETE — every region examined, on a 2-unit lattice inside each region's bounds",
+        "sampling": {
+          "kind": "lattice",
+          "step": 2,
+          "regions": 6
+        }
+      },
+      "straddlePrimaryFine": {
+        "step": 1,
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 79946
+      },
+      "straddleCrossCheck": {
+        "applicable": true,
+        "ringSource": "closedPolygon",
+        "ringVertices": 120,
+        "districts": 6,
+        "straddling": 0,
+        "worstMinSide": 0.001,
+        "rows": [
+          {
+            "districtId": "district.government_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 19952,
+            "outside": 20,
+            "shareOutside": 0.001,
+            "minSide": 0.001,
+            "straddles": false,
+            "areaUnits": 19938.46
+          },
+          {
+            "districtId": "district.government_quarter~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 678,
+            "outside": 678,
+            "shareOutside": 1,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 680.45
+          },
+          {
+            "districtId": "district.market_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 52301,
+            "outside": 21,
+            "shareOutside": 0.0004,
+            "minSide": 0.0004,
+            "straddles": false,
+            "areaUnits": 52291.19
+          },
+          {
+            "districtId": "district.market_quarter~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 1799,
+            "outside": 1799,
+            "shareOutside": 1,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 1794.36
+          },
+          {
+            "districtId": "district.noxious_trades_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 3101,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 3093.27
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 2188,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 2185.72
+          }
+        ]
+      },
+      "bodyCensus": {
+        "applicable": true,
+        "bodies": 1539,
+        "members": 925,
+        "suburb": 614,
+        "outside": 0,
+        "shareOutside": 0,
+        "perEpoch": [
+          {
+            "epoch": 1,
+            "members": 925,
+            "outside": 0
+          }
+        ],
+        "ringsConsidered": [
+          {
+            "epoch": 1,
+            "kind": "main",
+            "halfRing": true
+          }
+        ],
+        "offenders": [],
+        "status": "COMPLETE — 1539 drawn bodies, 925 members of a walled epoch, 614 in the suburb beyond every circuit"
+      },
+      "hullContainment": [
+        {
+          "epoch": 1,
+          "kind": "main",
+          "halfRing": true,
+          "examined": 30,
+          "rescuedByClosedRing": 0,
+          "outside": 0,
+          "selfReportedResidual": 0
+        }
+      ],
+      "ms": 2648
+    },
+    {
+      "key": "migration",
+      "name": "Kitaqiao",
+      "tier": "city",
+      "extentTier": "city",
+      "population": 20091,
+      "rings": 2,
+      "districts": 8,
+      "straddlePrimary": {
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 61434,
+        "complete": true,
+        "status": "COMPLETE — every region examined, on a 2-unit lattice inside each region's bounds",
+        "sampling": {
+          "kind": "lattice",
+          "step": 2,
+          "regions": 8
+        }
+      },
+      "straddlePrimaryFine": {
+        "step": 1,
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 245818
+      },
+      "straddleCrossCheck": {
+        "applicable": true,
+        "ringSource": "closedPolygon",
+        "ringVertices": 26,
+        "districts": 8,
+        "straddling": 3,
+        "worstMinSide": 0.0214,
+        "rows": [
+          {
+            "districtId": "district.common_residential",
+            "wallSideLabel": "intramural",
+            "samples": 36021,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 36008.79
+          },
+          {
+            "districtId": "district.common_residential~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 5100,
+            "outside": 4991,
+            "shareOutside": 0.9786,
+            "minSide": 0.0214,
+            "straddles": true,
+            "areaUnits": 5090.58
+          },
+          {
+            "districtId": "district.government_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 13681,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 13665.66
+          },
+          {
+            "districtId": "district.mages_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 125793,
+            "outside": 9,
+            "shareOutside": 0.0001,
+            "minSide": 0.0001,
+            "straddles": false,
+            "areaUnits": 125804.08
+          },
+          {
+            "districtId": "district.mages_quarter~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 8279,
+            "outside": 8192,
+            "shareOutside": 0.9895,
+            "minSide": 0.0105,
+            "straddles": true,
+            "areaUnits": 8288.05
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 4463,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 4467.29
+          },
+          {
+            "districtId": "district.shadows_district",
+            "wallSideLabel": "intramural",
+            "samples": 49646,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 49640.54
+          },
+          {
+            "districtId": "district.shadows_district~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 2887,
+            "outside": 2838,
+            "shareOutside": 0.983,
+            "minSide": 0.017,
+            "straddles": true,
+            "areaUnits": 2890.52
+          }
+        ]
+      },
+      "bodyCensus": {
+        "applicable": true,
+        "bodies": 2163,
+        "members": 1549,
+        "suburb": 614,
+        "outside": 0,
+        "shareOutside": 0,
+        "perEpoch": [
+          {
+            "epoch": 1,
+            "members": 758,
+            "outside": 0
+          },
+          {
+            "epoch": 2,
+            "members": 791,
+            "outside": 0
+          }
+        ],
+        "ringsConsidered": [
+          {
+            "epoch": 2,
+            "kind": "main",
+            "halfRing": true
+          },
+          {
+            "epoch": 1,
+            "kind": "old-core",
+            "halfRing": true
+          }
+        ],
+        "offenders": [],
+        "status": "COMPLETE — 2163 drawn bodies, 1549 members of a walled epoch, 614 in the suburb beyond every circuit"
+      },
+      "hullContainment": [
+        {
+          "epoch": 2,
+          "kind": "main",
+          "halfRing": true,
+          "examined": 26,
+          "rescuedByClosedRing": 0,
+          "outside": 0,
+          "selfReportedResidual": 0
+        },
+        {
+          "epoch": 1,
+          "kind": "old-core",
+          "halfRing": true,
+          "examined": 26,
+          "rescuedByClosedRing": 3,
+          "outside": 0,
+          "selfReportedResidual": 0
+        }
+      ],
+      "ms": 10600
+    },
+    {
+      "key": "year-018",
+      "name": "Mahabagh",
+      "tier": "town",
+      "extentTier": "town",
+      "population": 3502,
+      "rings": 0,
+      "districts": 4,
+      "straddlePrimary": {
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 0,
+        "complete": false,
+        "status": "NOT APPLICABLE — this leaf carries no working circuit, so no district can straddle one",
+        "sampling": null
+      },
+      "straddlePrimaryFine": {
+        "step": 1,
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 0
+      },
+      "straddleCrossCheck": {
+        "applicable": false,
+        "districts": 0,
+        "straddling": 0,
+        "rows": []
+      },
+      "bodyCensus": {
+        "applicable": false,
+        "bodies": 1594,
+        "members": 0,
+        "suburb": 1594,
+        "outside": 0,
+        "offenders": [],
+        "status": "NOT APPLICABLE — no walled epoch carries a body on this leaf, so no body can stand outside its own circuit"
+      },
+      "hullContainment": [],
+      "ms": 1774
+    },
+    {
+      "key": "year-100",
+      "name": "Mahabagh",
+      "tier": "town",
+      "extentTier": "town",
+      "population": 3502,
+      "rings": 1,
+      "districts": 4,
+      "straddlePrimary": {
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 21252,
+        "complete": true,
+        "status": "COMPLETE — every region examined, on a 2-unit lattice inside each region's bounds",
+        "sampling": {
+          "kind": "lattice",
+          "step": 2,
+          "regions": 4
+        }
+      },
+      "straddlePrimaryFine": {
+        "step": 1,
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 85004
+      },
+      "straddleCrossCheck": {
+        "applicable": true,
+        "ringSource": "closedPolygon",
+        "ringVertices": 120,
+        "districts": 4,
+        "straddling": 0,
+        "worstMinSide": 0,
+        "rows": [
+          {
+            "districtId": "district.government_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 21765,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 21767.91
+          },
+          {
+            "districtId": "district.market_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 57999,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 57979.29
+          },
+          {
+            "districtId": "district.noxious_trades_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 3101,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 3093.27
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 2188,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 2185.72
+          }
+        ]
+      },
+      "bodyCensus": {
+        "applicable": true,
+        "bodies": 1595,
+        "members": 1453,
+        "suburb": 142,
+        "outside": 0,
+        "shareOutside": 0,
+        "perEpoch": [
+          {
+            "epoch": 2,
+            "members": 1453,
+            "outside": 0
+          }
+        ],
+        "ringsConsidered": [
+          {
+            "epoch": 2,
+            "kind": "main",
+            "halfRing": true
+          }
+        ],
+        "offenders": [],
+        "status": "COMPLETE — 1595 drawn bodies, 1453 members of a walled epoch, 142 in the suburb beyond every circuit"
+      },
+      "hullContainment": [
+        {
+          "epoch": 2,
+          "kind": "main",
+          "halfRing": true,
+          "examined": 30,
+          "rescuedByClosedRing": 0,
+          "outside": 0,
+          "selfReportedResidual": 0
+        }
+      ],
+      "ms": 4055
+    },
+    {
+      "key": "crossing",
+      "name": "Mahabagh",
+      "tier": "town",
+      "extentTier": "town",
+      "population": 3502,
+      "rings": 1,
+      "districts": 7,
+      "straddlePrimary": {
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 37554,
+        "complete": true,
+        "status": "COMPLETE — every region examined, on a 2-unit lattice inside each region's bounds",
+        "sampling": {
+          "kind": "lattice",
+          "step": 2,
+          "regions": 7
+        }
+      },
+      "straddlePrimaryFine": {
+        "step": 1,
+        "straddlers": 0,
+        "keys": [],
+        "worstMinorityShare": 0,
+        "sampled": 150236
+      },
+      "straddleCrossCheck": {
+        "applicable": true,
+        "ringSource": "closedPolygon",
+        "ringVertices": 120,
+        "districts": 7,
+        "straddling": 0,
+        "worstMinSide": 0.0008,
+        "rows": [
+          {
+            "districtId": "district.government_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 7906,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 7903.79
+          },
+          {
+            "districtId": "district.government_quarter~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 369,
+            "outside": 369,
+            "shareOutside": 1,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 367.33
+          },
+          {
+            "districtId": "district.market_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 121704,
+            "outside": 95,
+            "shareOutside": 0.0008,
+            "minSide": 0.0008,
+            "straddles": false,
+            "areaUnits": 121712.77
+          },
+          {
+            "districtId": "district.market_quarter~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 9613,
+            "outside": 9613,
+            "shareOutside": 1,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 9617.07
+          },
+          {
+            "districtId": "district.noxious_trades_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 5654,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 5654.76
+          },
+          {
+            "districtId": "district.noxious_trades_quarter~faubourg",
+            "wallSideLabel": "extramural",
+            "samples": 1198,
+            "outside": 1198,
+            "shareOutside": 1,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 1196.61
+          },
+          {
+            "districtId": "district.religious_quarter",
+            "wallSideLabel": "intramural",
+            "samples": 3813,
+            "outside": 0,
+            "shareOutside": 0,
+            "minSide": 0,
+            "straddles": false,
+            "areaUnits": 3814.5
+          }
+        ]
+      },
+      "bodyCensus": {
+        "applicable": true,
+        "bodies": 1598,
+        "members": 1002,
+        "suburb": 596,
+        "outside": 0,
+        "shareOutside": 0,
+        "perEpoch": [
+          {
+            "epoch": 1,
+            "members": 1002,
+            "outside": 0
+          }
+        ],
+        "ringsConsidered": [
+          {
+            "epoch": 1,
+            "kind": "main",
+            "halfRing": false
+          }
+        ],
+        "offenders": [],
+        "status": "COMPLETE — 1598 drawn bodies, 1002 members of a walled epoch, 596 in the suburb beyond every circuit"
+      },
+      "hullContainment": [
+        {
+          "epoch": 1,
+          "kind": "main",
+          "halfRing": false,
+          "examined": 30,
+          "rescuedByClosedRing": 0,
+          "outside": 0,
+          "selfReportedResidual": 0
+        }
+      ],
+      "ms": 8409
+    }
+  ],
+  "totals": {
+    "leavesMeasured": 18,
+    "walledLeaves": 12,
+    "straddlePrimary": {
+      "numerator": 0,
+      "denominator": 79
+    },
+    "straddleCrossCheck": {
+      "numerator": 10,
+      "denominator": 79
+    },
+    "bodyCensus": {
+      "numerator": 0,
+      "denominator": 15326,
+      "suburb": 6083,
+      "drawnBodiesAllLeaves": 25001
+    },
+    "hullVerticesOutside": 0
+  }
+}

@@ -1,0 +1,49 @@
+gate-mutex: acquired atomic lock as PID 57208 after 0 poll(s).
+
+ RUN  v4.1.8 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/31585ce2-d79e-43c8-9ed7-1c32d073e393/scratchpad/laneDEPLOYDOC-tree
+
+ ❯ tests/docs/enforcement-claims.test.js (21 tests | 1 failed) 714ms
+     × every completeness claim carries an @enforced-by tag with ≥1 target 9ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/docs/enforcement-claims.test.js > enforcement-claims meta-pin (A+ P1.1) > every completeness claim carries an @enforced-by tag with ≥1 target
+AssertionError: 
+Claims with no resolvable @enforced-by tag:
+docs/FABLE_VALIDATION_QUEUE.md:179  "| 2026-08-03 | ⭐ CHAIR RULING R-BLD-10 — `pulseKernel.js` is BANKED PERMANENTLY at 1580, and THE DECOMPOSITION WAVE clos"  (matched: machine-enforced)
+docs/FABLE_VALIDATION_QUEUE.md:3017  "`pactTriggers.js`; `npm run lint` 30 problems / 3 errors. All three reproduce EXACTLY at"  (matched: 0 problems)
+docs/FABLE_VALIDATION_QUEUE.md:3886  "4. `npm run lint` — **30 problems / 3 errors**, executed at HEAD: `lineageClaim.js:532`"  (matched: 0 problems)
+docs/FABLE_VALIDATION_QUEUE.md:5663  "(3 errors / 30 problems), none in a touched file. `generate-institution-service-keys --check`"  (matched: 0 problems)
+docs/GOLDEN_SHIFT_LEDGER.md:2128  "can. The rule is PHRASE vs CLAUSE, and it is now machine-enforced by"  (matched: machine-enforced)
+docs/implementation/packets/foreign-policy/IN-0C.md:484  "| Acceptance cases | **8** | 8 | ✓ — and the cap is **machine-enforced**, not advisory: `implementation-packets.mjs:425`"  (matched: machine-enforced)
+: expected [ …(6) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "docs/FABLE_VALIDATION_QUEUE.md:179  \"| 2026-08-03 | ⭐ CHAIR RULING R-BLD-10 — `pulseKernel.js` is BANKED PERMANENTLY at 1580, and THE DECOMPOSITION WAVE clos\"  (matched: machine-enforced)",
++   "docs/FABLE_VALIDATION_QUEUE.md:3017  \"`pactTriggers.js`; `npm run lint` 30 problems / 3 errors. All three reproduce EXACTLY at\"  (matched: 0 problems)",
++   "docs/FABLE_VALIDATION_QUEUE.md:3886  \"4. `npm run lint` — **30 problems / 3 errors**, executed at HEAD: `lineageClaim.js:532`\"  (matched: 0 problems)",
++   "docs/FABLE_VALIDATION_QUEUE.md:5663  \"(3 errors / 30 problems), none in a touched file. `generate-institution-service-keys --check`\"  (matched: 0 problems)",
++   "docs/GOLDEN_SHIFT_LEDGER.md:2128  \"can. The rule is PHRASE vs CLAUSE, and it is now machine-enforced by\"  (matched: machine-enforced)",
++   "docs/implementation/packets/foreign-policy/IN-0C.md:484  \"| Acceptance cases | **8** | 8 | ✓ — and the cap is **machine-enforced**, not advisory: `implementation-packets.mjs:425`\"  (matched: machine-enforced)",
++ ]
+
+ ❯ tests/docs/enforcement-claims.test.js:468:91
+    466|       .filter((c) => !c.tagged || c.targets.length === 0)
+    467|       .map((c) => `${c.file}:${c.line}  "${c.text}"  (matched: ${c.mat…
+    468|     expect(naked, `\nClaims with no resolvable @enforced-by tag:\n${na…
+       |                                                                                           ^
+    469|   });
+    470|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 32 passed (33)
+   Start at  11:44:00
+   Duration  1.71s (transform 47ms, setup 50ms, import 895ms, tests 810ms, environment 0ms)
+
