@@ -27368,3 +27368,64 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   Water-DRAWING convention (the stroke tangle) grounds in the estate's own 302-plate
   map corpus, not in R-MORPH — world structure and drawing dress have different
   authorities (§0's precedence, restated).
+
+## §641 · REG-5 SEALS — THE QUAYS LIVE, THE RIVER HAS NO NARROWS TO FIND, AND THE BYTE TABLE SIGNS (2026-08-25 ~12:15 CDT)
+
+- **§641.1 SEALED** at `refs/preserve/map-sandbox-reg5-drawnworld` = `1840376bc` (seal
+  before declaration). Gate **318/318** at the tip; dormancy 28/28 + manifest; four
+  determinism arms each with a differs-from-unarmed control; op spend holds at every
+  signed pin; ZERO new test files. All four opening acts proven (ceiling byte-inert
+  with a convicting mutation; classifier cured; kit consolidated with byte-identical
+  censuses; walker bills discharged **plus a fourth bill the inherited list missed**).
+  TASTE GATE: **PASS** — the fishmonger's bare bank became a working waterfront;
+  judging note for REG-9: pier-length variation (four near-identical piers read
+  mechanical at crop zoom). No Chrome re-shoot ordered — quicklook fidelity stands
+  proven and the third blind round re-renders regardless.
+- **§641.2 RULINGS ON THE LANE'S CALLS — ALL RATIFIED**, including the two divergences:
+  **J-REG5-3** (the exemption widened to the water's own claim — measured 127 of 162
+  pier kills came from `sub.wet`, a DIFFERENT surface from the drawn watercourse;
+  identical contradiction-kind, §632.3 covers it) — and **TE-WSEAM is CHARTERED**
+  (measure-only): how far do the two water truths diverge, who else consumes `sub.wet`,
+  where else does that seam bite. **J-REG5-6/7** (countryside report-and-stop): RIGHT —
+  the mountain shortfall is not budget (460 spare ops ≈ 46 points) but a MISSING
+  PUBLISHED SURFACE (`fields.js` promises "pasture, wood and waste" and publishes
+  none); that mint is **REG-H's chartered core** (§639, recorded vetoably and
+  owner-reported twice), R-MORPH-gated per §640.3 — the WAVE was right not to mint it.
+  J-REG5-4/8/9 and BR-1/2/3 ratified as written.
+- **§641.3 CORRECTIONS OF RECORD (three, each measured):** §635.3's +64-circles
+  attribution was WRONG — they are REG-3's landmarks under `--shapes`, and the real
+  unnamed defect was the CHROME-ZONE FLOOD eating 57 landmark paths (now cured);
+  REG-I1's predicted four-wave baseline shift was wrong — **0 of 55 rows moved**,
+  proven non-vacuous by a mutant-classifier control, and REG-4's zero-regressions
+  claim SURVIVES the corrected classification; §639's "zero field lanes" generalizes
+  wrongly — lanes exist and are drawn (3–7 per rural leaf), the TOWN leaf specifically
+  has zero. The monoculture finding itself stands CONFIRMED (arableShare 1.000 on the
+  plains leaves; no meadow/pasture/waste/orchard surface exists).
+- **§641.4 THE BYTE TABLE SIGNS (chair, §604):** thorp 130,000 · hamlet 150,000 ·
+  village 190,000 · town 560,000 · city 680,000 · metropolis 830,000 (U = 10,000;
+  fixed-point-free by four lines of evidence; worst-lens corrected; ⛔ minted from the
+  ARMED arm — the BASE arm names the wrong tier-setters). Signed WITH its coupling law:
+  **an op-ceiling raise owes a byte re-measure in the same act** (city 10,000→10,100
+  moved bytes +1,318), and the deliberate consequence: at town+ THE BYTE GATE BINDS
+  FIRST (op headroom ≈ 132 KB at town) — that is what BYTES-primary means. Ratchet
+  traps banked: `Buffer.byteLength` never `.length`; the ratchet must render the six
+  lenses, not read the 28-artifact directory.
+- **§641.5 THE L-REG-32 FINDING AND THE CURE CAR RE-SHAPED:** the narrows law is
+  UNMEASURABLE today — **the river has *A* width, not a width profile**
+  (`waterMode.js:89`, one scalar per leaf; span/narrows 1.000–1.059 everywhere, every
+  point a local narrows). And **no ford is ever drawn** (17 records; `kind` never
+  branched on; no render pass) — the ford that justifies a site is invisible.
+  **REG-BRIDGE's charter therefore opens with the RIVER-PROFILE MINT** (deterministic
+  taper — narrow upstream, wide at meanders and mouths — published as fabric truth, a
+  declared shift on every river and a visual win: constant-width rivers are a
+  generator's tell), then: fords DRAWN with the wide-reach mirror now measurable ·
+  narrows re-siting with bent approaches (no bridge is event-truth — §8.2's lifecycle
+  answer frees every deck) · the TWO FLOATING DECKS cured (endpoint clearance positive
+  both ends; deck spans the ACTUAL crossing, not 1.7× nominal) · the four angle
+  outliers via the excess predicate (conforming ≤ 1.086, defects ≥ 1.302) · the
+  `across` field-name trap · and a DISPOSITION (not a cure) for the second,
+  independent `carto:bridge` family — the one users see today. Banked as law from the
+  lane's own instrument defect: ⛔ **a length-minimum read's angular resolution is set
+  by the RADIAL step (blur = arccos(w/(w+step)) ≈ 10.4° at w/60) — a performance knob
+  can invert a law's census; bisect the boundary, then demand two independent
+  implementations agree digit for digit.**
