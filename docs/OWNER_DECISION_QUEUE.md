@@ -27648,3 +27648,27 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   two definitions of one wet set · a denominator that vanishes at the accept
   configuration · an identity resolved after a move). **REG-GROW-A DISPATCHES NOW** on
   this seal (arc §639.3/A12.3).
+
+## §649 · OWNER'S CATCH — THE DECK STILL READS AS A ROAD CROSSING; REG-BRIDGE-B MINTS (2026-08-25 ~16:50 CDT)
+
+- **§649.1 THE CATCH:** the §648 taste crop shows the road band running UNBROKEN across
+  the water with the deck as outline strokes floating on the wash — a road crossing a
+  river, not a bridge. The §648.3 layering row (water at 6a, streets at 11) is thereby
+  UPGRADED from renderer dress to **the crossing law's own completion**: a bridge that
+  cannot be read as a bridge fails §573's priority law whatever its censuses say. The
+  chair's §648 "DECK PASS" is corrected — the GEOMETRY passed; the READING did not.
+- **§649.2 REG-BRIDGE-B CHARTERED** (small crossing-ink car, sequenced immediately
+  after REG-GROW-A seals — same-file collision forbids parallel): (i) the road band
+  BREAKS at the banks — ends at one abutment, resumes at the other; (ii) the water
+  runs CONTINUOUSLY beneath with the deck's SHADOW LINE on it (the one stroke that
+  sells "over"); (iii) the deck spans as a BUILT OBJECT — own edges, abutment flares,
+  distinct from the road surface; (iv) the held ford glyph re-cut rides here (same ink
+  pass): road narrows through the water + transverse ripple dashes, reference-bound.
+  EXITS: a fresh-eyes read of the crossing crop answers "bridge"; a planted
+  road-over-water regression REDS; dormancy/determinism per standing law.
+- **§649.3 THE PATTERN, BANKED (second instance after §645):** the chair's taste gates
+  grade exits and elements and under-weight the GESTALT; the owner's glance has now
+  twice out-read the census. **STANDING ORDER: every taste gate opens with the gestalt
+  question — "what does this READ AS at a glance?" — answered before any exit table is
+  consulted**, and a fresh-context reader arbitrates where the chair's answer disagrees
+  with a census.
