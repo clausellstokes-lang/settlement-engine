@@ -28252,3 +28252,17 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   what was read and when (the honest trail). The formal-comfort question remains on
   the owner's legal docket. R-WATABOU-CODE dispatches now (Fable seat) over
   watabou/TownGeneratorOS with that charter.
+
+## §674 · RECONCILIATION INVENTORY, WAVE ONE COLLECTED — 95 STALE ROWS, AUTHORING HOLDS FOR WAVE TWO (2026-08-26 ~06:20 CDT)
+
+- **§674.1** Four readers, 4/4, every row a verbatim quote with locator
+  (recon-inventory-wave1.json): **95 stale rows** — program body+A1–A9: 15 · A10–A12:
+  23 · DESIGN_REG_GROW+A1: 25 · A5/A6 film + SIGNED_CONSTANTS: 32 — against **66
+  positively-CLEAN sections**. The pattern is exactly §671's thesis: the arc orders
+  alone exist in FOUR competing spellings (§370 → A5.2 → A12.3 → §669.2); REG-QUAY's
+  premise dissolved with the moored-face ruling; REG-GROW-B's wave dissolved into
+  spine construction; twelve SIGNED_CONSTANTS rows keep their values but need their
+  measurement basis re-verified on the partition (KEEP-BUT-ANNOTATE, the honest
+  class). **Amendment authoring HOLDS until wave two** (DW/AD/endgame, in flight) so
+  the reconciliation is written ONCE across everything to the soak — then the
+  verifier pass, then §675 lands the amended set.
