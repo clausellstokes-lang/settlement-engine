@@ -211,7 +211,11 @@ class pre-killed. The re-record PROCEDURE is REG-5's executed model (sha1'd pre-
 baseline → run-baselines.mjs → INSTRUMENTS.md declaration, under the two-baseline
 law). Legacy-substrate baselines run PARALLEL until the port's parity train, then
 retire. i6's denominator gains its partition equivalent (a --checkcircuit against
-the band-face ring) before its first partition record.
+the band-face ring) before its first partition record. ⛔ **AMENDED §688.3 by
+measurement: `--checkcircuit` on the partition is ARM-DEPENDENT** — 4 of 6 walled leaves
+move, three of them by **158–213 world units**, where the legacy answer was 12/12
+identical. **A partition i6 baseline MUST PIN ITS ARM** or it records a number that
+depends on which arms ran; an unpinned i6 baseline is not a baseline.
 ## PA.6 · THE ROOF + THE LOOK (S1/S5-M2 — the taste half ruled): ridges clip to
 **the run's own dissolved footprint** (never the chunk); **THE LOOK: the built band
 with visible toft ground wins** — masses draw the BUILT footprint (the run = the
@@ -254,8 +258,14 @@ queue (the handoff + §675.2) rather than a restatement.
 ## PA.10 · SUCCESSION HARDENING (S3/S5): the PARALLEL CLAUSE IS STRUCK — the arc is
 STRICTLY SEQUENTIAL unless a chair proves file-disjointness by manifest AND the
 stacked-landing laws (TE-STACK-3/4/5) are honored. DRESS-1's exits gain the
-**wall:all watch row** (re-measure FIRST — it re-inks the whole circuit; headroom
-4.27 vs floor 3.00). **docs/OWNER_DOCKET.md is the single location law 11 names.**
+**wall:all watch row** (re-measure FIRST — it re-inks the whole circuit).
+⛔ **CORRECTED §688.3 (a chair error in this amendment):** "headroom 4.27 vs floor 3.00"
+**conflated the measured RATIO with the HEADROOM**. `laneREGI1-receipt.md` §2.2 reads
+"town 7.75 → 4.27 and city 7.29 → 4.65 against a floor of 3.00 — headroom **4.75 → 1.27**
+and **4.29 → 1.65**." The true remaining room was **1.27, not 4.27** — a 3.4×
+overstatement that would have told a successor there was room to soften the circuit that
+did not exist. DRESS-1 measured the partition dress at **6.08–7.00** (headroom 3.08–4.00),
+so the circuit in fact GAINED room; the label was wrong, not the wall. **docs/OWNER_DOCKET.md is the single location law 11 names.**
 Durable locators bind: the detail register = refs/preserve/reg-detail-register-2026-08-24
 · the review ids = review654/CONSOLIDATED.json in refs/preserve/reference-study-2026-08-26
 (namespace note: review-I/B ≠ dwellings-B-bands ≠ instrument-i) · the instruments =

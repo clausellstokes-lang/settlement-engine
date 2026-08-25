@@ -28824,3 +28824,123 @@ naming recommendation; the engine queue gains OB-5's declared-shift member.
   a non-§ subject is not blocked. **A ledger message can no longer outrun its own entry.**
   Toolkit r6 preserved; the §687.8/§687.9 bullets you are reading landed under the gate.
 
+## §688 · DRESS-1 SEALS — THE PARTITION WEARS INK, THE HARD CLAUSE HOLDS AND THE ROUND DOES NOT, AND THE DRESS CONVICTS THE SUBSTRATE (2026-08-26 ~18:30 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+- **§688.1 SEALED** at `refs/preserve/map-sandbox-dress1-ink` = **`ad2b8d399`** (base
+  `56ee43dad` verified ancestor; one commit; no ref moved by the lane; base ref unmoved).
+  **Gate 19 files / 425 tests, EXIT 0, re-run at the committed tip** (base 17/384).
+  **§686.6(iii) IS ANSWERED:** `projectPage` had produced a painter-ready page frame that
+  nothing consumed as ink; it now has a consumer. **EXITS MET: 2** (tone separation 5/5
+  pairs × 6/6 lenses × 18/18 leaves with 4 convicting controls; **squint 16/18**, village
+  and mountain indeterminate) · **4** (byte, every tier under — metropolis 707,719 of
+  830,000) · **5** (dormancy 29/29, determinism 18/18 byte-identical) · **6** (E11's
+  accessible lens, homeless since it was written) · **7** (legend agreement 0 defects,
+  18/18, both directions, control convicts) · **8's clip half** (0 of ~30,000 segments
+  outside) · **9** (`wall:all` **MET AND IMPROVED — 6.08–7.00 against the 3.00 floor**) ·
+  **10** (perf 0/6 over budget; the whole dress costs **2.6–7.3 %**).
+- **§688.2 ⛔ THE GESTALT ROUND DID NOT PASS, AND THAT IS THE RIGHT ANSWER TO RECORD.**
+  **PA.7's HARD CLAUSE IS MET: zero wrong-class reads on BOTH load-bearing fields**
+  (walled 18/18, water 18/18) — the map does not lie about what kind of place it is.
+  **Whole-leaf agreement is 11/18 = 61.1 % against the ≥ 80 % bar.** Under PA.7 one
+  disagreeing round is not an escalation: the chair cures and re-rounds, and **only two
+  consecutive disagreeing rounds reach the owner.** **DRESS-1 IS THEREFORE NOT COMPLETE** —
+  **DRESS-1b** carries the cure and round 2. ⭐ J-DRESS1-11 **strengthens** the gate rather
+  than weakening it: the key was **machine-derived from ledger truth with prior sight
+  declared**, so it cannot have been unconsciously fitted to the render it grades.
+- **§688.3 THREE CORRECTIONS TO THE RECORD ABOVE THIS LANE — ONE OF THEM MINE.**
+  **(i) PA.10's "headroom 4.27 vs floor 3.00" WAS A CHAIR ERROR**, and the lane caught it
+  against the source: `laneREGI1-receipt.md` §2.2 reads "town 7.75 → 4.27 … headroom
+  **4.75 → 1.27**." **4.27 is the measured RATIO; the headroom was 1.27** — a **3.4×
+  overstatement** that would have told a successor there was room to soften the wall
+  circuit which did not exist. Corrected in the amendment itself. The wall was never
+  wrong; the label was.
+  **(ii) `--checkcircuit` ON THE PARTITION IS ARM-DEPENDENT** — 4 of 6 walled leaves move,
+  three by **158–213 world units**, where the legacy answer was **12/12 identical**.
+  **PA.5's i6 row is AMENDED: a partition i6 baseline MUST PIN ITS ARM**, or it records a
+  figure that depends on which arms ran — an unpinned i6 baseline is not a baseline.
+  **(iii) ⛔ `metropolis` WRAP E1 IS GEOMETRICALLY DEGENERATE: `area/bbox = 0.077`**, where
+  a convex hull cannot fall below ~0.5. **Nothing in the estate censuses it.** Found by a
+  fresh reader's eye and then confirmed by measurement — which is exactly what dress is
+  for: ink makes substrate defects visible that no census was asking about. The reader's
+  companion claim ("30:1 aspect") was **REFUTED by measurement (1.9)** and is struck.
+  **CHARTERED: a wrap ring-sanity census with a planted control**, in DRESS-1b, plus the
+  question of whether E1 is a cause of the metropolis leaf's gestalt disagreement.
+- **§688.4 ALL ELEVEN JUDGMENT CALLS RATIFIED**, three with named consequences.
+  **J-DRESS1-1 (RATIFIED, and it AMENDS A STANDING LAW):** `npm ci` was **unexecutable** —
+  the map sandbox trees carry **no `package-lock.json`** — so per-package symlinks were
+  cloned from the identical-base GFOLD tree and **non-vacuity was proved by the very
+  instrument that detects the failure**: the collected count, 17/384 at base and 19/425
+  here. The standing "build your own `node_modules` with `npm ci`, never symlink" law was
+  written against the SHARED tree and is **inapplicable where no lockfile exists**; in the
+  sandbox the **collected-count proof is its substitute**. Recorded so the next lane does
+  not either violate the law or stall on it.
+  **J-DRESS1-2 (RATIFIED):** ink lands **beside** `renderFolio`, not inside it — re-pointing
+  the folio **is** the cutover, and the cutover is REG-P's and the owner's. Correct reading
+  of the dormant-flag discipline.
+  **J-DRESS1-8 (RATIFIED, and the reason is the doctrine):** the SCC gains S8 **declared
+  rather than hidden behind an injected reader** — a visible dependency the chair can veto
+  beats an invisible one that works.
+  RATIFIED without amendment: **-3** (one-decimal page quantum, `r2` untouched) · **-4**
+  (sequential value ladder after two failed spellings) · **-5** (three value pairs reported
+  **not floored**, each with a source — reporting over flooring is the honest-reds law) ·
+  **-6** (ROUTE residue measured, not cured) · **-7** (publication → S13, dress → S22) ·
+  **-9** (`keyedRandom` with literal mechanic ids) · **-10** (exit 3 reported PARTIAL) ·
+  **-11** (above).
+- **§688.5 THE HONEST REDS, CARRIED WHOLE.** **(i) EXIT 3 IS PARTIAL:** i5's `wall:all` was
+  measured natively but **i1/i6/i7 were NOT re-recorded** — the work is fully specified and
+  moves to DRESS-1b, i6 with its arm pinned per §688.3(ii). **(ii) ROUTE carries one real
+  red: 31 landlocked ways of 4,981**, proven **pre-existing** and constructor-owned, cure
+  route named. **(iii) CLIFF EDGES ARE NEVER MINTED**, which makes crag-avoidance vacuous
+  and `terrain-surrender` unfirable — a silent-vacuity class, now named. **(iv)** the dress
+  draws no `page.loss`, so `arc` cannot read — **that is REG-D's**, correctly refused here.
+  **(v)** the op-ceiling basis needs re-basing on primitives, and the band reads thin at
+  small tiers (a taste call with a signed constant behind it — it goes to the tuning pass,
+  not to a lane).
+  ⭐ **THREE DEFECTS IN THE LANE'S OWN WORK ARE RECORDED RATHER THAN TIDIED:** the value
+  census convicted its author twice, the precision control corrected its own "no drawing
+  change" claim, and the stage-manifest walker refused three times before the module
+  assignment was right. **That is the standard**, and it is now three waves in a row
+  (§684's twice-counted probe, §686's self-convicted first cure, this).
+- **§688.6 NOTED FOR REG-P's BUDGET:** the lane added test files (17 → 19), and a new test
+  file reds three censuses **at landing**. That cost is the PORT's, not the sandbox's, and
+  it is now two files larger than the port's charter assumed.
+
+## §689 · OWNER CORRECTION: INKARNATE IS NOT A COMPETITOR — THE COMPETITIVE SET IS GENERATORS, AND THE MOAT IS NOT CONVENIENCE ALONE (2026-08-26 ~18:45 CDT; SEAT: Opus 5 — Fable-unvalidated)
+
+- **§689.1 THE CORRECTION (owner, in chat, verbatim):** *"i realized that inkarnate is not
+  really a competitor... it doesn't generate a map. it gives icons and building blocks for
+  a user to build a city, not generate a cohesive one like we do. we are not competing
+  against inkarnate really. they do have better visuals but our much stronger point is
+  convience."* **ACCEPTED AND RECORDED.** The competitive set is **GENERATORS** — watabou's
+  MFCG and village generator, FantasyTownGenerator — not **ASSET CANVASES** (Inkarnate,
+  and the Wonderdraft/Dungeondraft class with it). The distinction is categorical, not a
+  matter of degree: **an authoring tool asks the human to supply the composition; we supply
+  it.** A user's Inkarnate city is as coherent as that user is patient.
+- **§689.2 ⚠ THE REFERENCE DOES NOT RETIRE WITH THE COMPETITOR — KEEP THE SPLIT.**
+  Inkarnate leaves the *competitive set* and stays in the *aesthetic set*: it is the visual
+  bar a buyer's eye has already been trained on, whatever category it occupies. **§656's
+  reference base is untouched** — watabou/FTG remain the CODE base, Inkarnate was never
+  that and is not being promoted to it. Striking a competitor is not permission to stop
+  looking at it.
+- **§689.3 CHAIR'S REFINEMENT, VETOABLE — "convenience" is the entry argument and it
+  understates the moat.** Two things an asset canvas **structurally cannot do at any level
+  of user skill**: **(i) COHERENCE FROM TRUTH** — our wall stands where it stands because a
+  town raised it in a year we can name, and every mark cites a fact (§652's contract). A
+  hand-built map can be beautiful and say nothing true; ours cannot say anything untrue
+  without a census reddening. **(ii) TIME** — Inkarnate cannot hand you year 60 and year
+  894 of the same town. We can, and REG-F makes it the product. So the ladder is:
+  **convenience wins the first look · coherence keeps it · time is the thing no authoring
+  tool can answer.** The owner's word stands as the top of that ladder; this only says what
+  sits beneath it.
+- **§689.4 THE MARKETING CONSEQUENCE, under the standing experience-first doctrine:** never
+  frame a claim as "better maps than Inkarnate" — that is a **visual** claim, and by the
+  owner's own reading it is one we would lose today. The true and winnable frame is **"a
+  map you did not have to build, of a place that actually exists."** Comparison copy of any
+  kind remains the owner's call and sits with the marketing/website home already on
+  docs/OWNER_DOCKET.md; nothing here authorizes naming a competitor in shipped copy.
+- **§689.5 WHAT THIS CHANGES IN THE PROGRAM: nothing structural, deliberately.** The
+  aesthetic target set at §679 and the judging rubric at §4 of the completion document were
+  calibrated against **generators**, which was already the right set; no wave re-scopes, no
+  gate moves, and DRESS-1b proceeds unaffected. Recorded because the *reason* a comparison
+  was struck is worth as much as the striking, and a successor otherwise re-imports the
+  wrong competitor from an old note.
