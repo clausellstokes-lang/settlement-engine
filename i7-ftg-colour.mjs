@@ -93,10 +93,12 @@ const inBand = (h, [lo, hi]) => (lo <= hi ? (h >= lo && h <= hi) : (h >= lo || h
 
 export function categoryHue(baseSvg, imgIn, lens = 'parchment') {
   const { els, src } = classify(baseSvg, lens);
-  assertViewBox(src);
+  /** ⭐ DRESS-1b · the frame rides into `roleMasks` so a FITTED partition plate maps correctly;
+   *  identity on the folio's own `0 0 1000 1000`. */
+  const frame = assertViewBox(src);
   const img = (imgIn.w === MEASURE_N) ? imgIn : boxDownscale(imgIn, MEASURE_N);
   const need = [...new Set(Object.values(BANDS).flatMap((b) => b.roles))];
-  const masks = roleMasks(els, MEASURE_N, need);
+  const masks = roleMasks(els, MEASURE_N, need, frame);
 
   const rows = [];
   for (const [cat, { band, roles }] of Object.entries(BANDS)) {

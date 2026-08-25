@@ -146,7 +146,7 @@
  *        node i6-frontage.mjs --controls
  */
 import { writeFileSync, readFileSync } from 'node:fs';
-import { classify, PxMask, assertViewBox } from './lib/classify.mjs';
+import { classify, PxMask, assertViewBox, frameTransform } from './lib/classify.mjs';
 import { subpaths, isHex } from './lib/svg.mjs';
 import { distanceTransform, close, dilate, components } from './lib/morph.mjs';
 import { centroid, inPoly as polyIn, r2, r4, stats, verdict } from './lib/geom.mjs';
@@ -195,11 +195,24 @@ const shrinkAbout = (poly, k) => { const c = centroid(poly); return poly.map(([x
  * `wallbandUnits > 0` re-applies REG-0's REGIME-B strike; 0 measures the render as drawn.
  */
 export function masksFor(svgPath, { lens = 'parchment', N = null, frontage = 6.25, wallbandUnits = 0, fuseUnits = null, shatter = 0, legacyStamp = false } = {}) {
+  const { els, src } = classify(svgPath, lens);
+  /**
+   * ⭐⭐ DRESS-1b · **THE FRAME, AND THE FRONTAGE MOVES WITH IT.** `frontage` is a LENGTH stated
+   * in the SVG's own coordinate units, and every derived figure in this instrument — the grid
+   * `resolvedGrid(frontage)`, the fuse radius `frontage × 0.20`, the probe reach — lives in the
+   * same space as the coordinates. On a FITTED partition plate the coordinates are carried into
+   * 0..1000 space, so the frontage must be carried with them or the probes would be scaled for a
+   * page they are no longer measuring. Identity on the folio's own `0 0 1000 1000`.
+   * ⛔ Callers pass the frontage in the PLATE'S OWN UNITS, always; the scaling happens here, once.
+   */
+  const frame = assertViewBox(src);
+  const XF = frameTransform(frame);
+  frontage *= XF.s;
+  if (fuseUnits != null) fuseUnits *= XF.s;
+  if (wallbandUnits > 0) wallbandUnits *= XF.s;
   // ⭐ THE GRID DEFAULTS TO THE LEAF'S OWN PARTY-GAP-RESOLVING N (see the header). A caller that
   //   passes N explicitly still gets exactly that N — `--reg0compat` pins LEGACY_GRID.
   if (N == null) N = resolvedGrid(frontage);
-  const { els, src } = classify(svgPath, lens);
-  assertViewBox(src);
 
   // ── the wall band (REG-0's own derivation), only if asked for
   const wallLine = new PxMask(N);
@@ -208,10 +221,11 @@ export function masksFor(svgPath, { lens = 'parchment', N = null, frontage = 6.2
     if (r.role !== 'wall' || !r.t.attrs.d) continue;
     const a = r.t.attrs;
     if (a['stroke-dasharray']) continue;
-    if (Number(a['stroke-width'] || 0) < 2.5) continue;
+    if (Number(a['stroke-width'] || 0) * XF.s < 2.5) continue;
     for (const sp of subpaths(a.d)) {
-      for (let k = 0; k + 1 < sp.poly.length; k++) {
-        const [x0, y0] = sp.poly[k], [x1, y1] = sp.poly[k + 1];
+      const poly = XF.identity ? sp.poly : sp.poly.map(XF.pt);
+      for (let k = 0; k + 1 < poly.length; k++) {
+        const [x0, y0] = poly[k], [x1, y1] = poly[k + 1];
         if (Math.hypot(x1 - x0, y1 - y0) > 140) continue;
         if (legacyStamp) wallLine.stampSegLegacy(x0, y0, x1, y1, 0.6); else wallLine.stampSeg(x0, y0, x1, y1, 0.6);
         wallSegs++;
@@ -242,7 +256,8 @@ export function masksFor(svgPath, { lens = 'parchment', N = null, frontage = 6.2
     if (r.role === 'building' || r.role === 'landmark' || r.role === 'yard') {
       for (const sp of subpaths(d)) {
         if (sp.poly.length < 3) continue;
-        const poly = shatter > 0 && r.role === 'building' ? shrinkAbout(sp.poly, 1 - shatter) : sp.poly;
+        const raw = XF.identity ? sp.poly : sp.poly.map(XF.pt);
+        const poly = shatter > 0 && r.role === 'building' ? shrinkAbout(raw, 1 - shatter) : raw;
         if (wallBand && r.role === 'building') {
           const c = centroid(poly);
           if (wallBand.at(c[0], c[1])) { clearedSubpaths++; continue; }
@@ -251,11 +266,11 @@ export function masksFor(svgPath, { lens = 'parchment', N = null, frontage = 6.2
         if (r.role === 'building' || r.role === 'landmark') { bodyInk.fillPoly(poly); bodies.push({ role: r.role, c: centroid(poly) }); }
       }
     } else if (r.role === 'water') {
-      if (isHex(a.fill)) for (const sp of subpaths(d)) if (sp.poly.length > 2) waterM.fillPoly(sp.poly);
+      if (isHex(a.fill)) for (const sp of subpaths(d)) if (sp.poly.length > 2) waterM.fillPoly(XF.identity ? sp.poly : sp.poly.map(XF.pt));
     } else if (r.role === 'street' || r.role === 'square') {
-      const hw = Math.max(0.6, Number(a['stroke-width'] || 2) / 2);
-      for (const sp of subpaths(d)) if (sp.poly.length > 1) streetLines.push({ poly: sp.poly, hw });
-      if (r.role === 'square') for (const sp of subpaths(d)) if (sp.poly.length > 2) squarePolys.push(sp.poly);
+      const hw = Math.max(0.6, (Number(a['stroke-width'] || 2) / 2) * XF.s);
+      for (const sp of subpaths(d)) if (sp.poly.length > 1) streetLines.push({ poly: XF.identity ? sp.poly : sp.poly.map(XF.pt), hw });
+      if (r.role === 'square') for (const sp of subpaths(d)) if (sp.poly.length > 2) squarePolys.push(XF.identity ? sp.poly : sp.poly.map(XF.pt));
     }
   }
   const FUSE_R = fuseUnits != null ? fuseUnits : Math.max(0.7, Math.min(2.4, frontage * 0.20));

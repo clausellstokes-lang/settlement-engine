@@ -362,3 +362,188 @@ The cure is two lines (add the four ids; move the `rect|circle` rule after the g
 **moves the role masks on every plate, and therefore every recorded i1/i5/i7 baseline** — including
 the `d1b32e339` ones four waves have been priced against. **That is a chair decision.** It sits
 beside the CANOPY gap above, which is the same defect one role over.
+
+---
+
+# ⭐⭐⭐ LANE DRESS-1b's ADDITIONS — THE CLASSIFIER LEARNS THE DRESS, AND THE SHIFT IS DECLARED TWICE (ODQ §691)
+
+## ⛔ FIRST, THE SECTION ABOVE THIS ONE WAS OUT OF DATE WITH ITS OWN CODE, AND §691.6 ORDERED IT SAID
+
+The block titled *"A BLIND SPOT THIS LANE MEASURED IN `lib/classify.mjs` — REPORTED, NOT TUNED"*
+poses its cure as **pending** (*"The cure is two lines … That is a chair decision."*). **It is not
+pending. `lib/classify.mjs` has carried the REG-5 cure since REG-5 landed** — `GROUP_ROLE` holds
+all four market ids plus `precincts` and `quayFurniture`, and the `rect|circle → chrome` rule
+already sits AFTER the group table. The commit that claimed "all declarations current" was wrong
+about this file. **A declaration document that lags its own code is how a lane comes to trust a
+floor that moved** — the same class as §688.3(i)'s mislabelled headroom, one document over. The
+block above is kept VERBATIM as the historical record of the finding; this paragraph is its
+correction, appended rather than substituted, per §9 law 12.
+
+## THE DECISION TAKEN (§691.2, chair-ruled) — `GROUP_ROLE` GAINS THE THIRTY `dress-*` IDS
+
+The alternative was never neutrality but **active corruption**: before this cure the dress was not
+merely unnamed, it was CONVICTED. Measured on all 18 dress plates:
+
+- `building`, `landmark`, `street`, `field`, `yard`, `square` **EMPTY on every plate**. Because
+  `lib/pixels.mjs` builds the GROUND population as the closed urban envelope of `building ∪
+  landmark`, that made **every i1 arm and i5's `street:ground` / `water:ground` rows structurally
+  dead** — the vacuous mask PA.5 exists to pre-kill.
+- The dress emits exactly ONE `<rect>` (`dress-paper`) and NO `<circle>`. On the four leaves whose
+  frame is narrower than 900 units (thorp 286.8, hamlet 422.1, village/mountain 519.4) that rect
+  **planted a WHOLE-PAGE chrome exclusion zone** and the point test ate the entire drawing —
+  thorp `detail:12 chrome:13`, the others `detail:13 chrome:14`. No ground, no water, no wall.
+- ⚠⚠ **AND `town-2`'s PAPER RECT IS 901.2 WIDE AGAINST THE 900 THRESHOLD.** The width test is a
+  cliff, not a slope: 1.2 units of tuning and a whole town plate flips to total chrome.
+
+**HOW THE ROWS WERE DERIVED (§691.3): each id maps to the role it ACTUALLY DRAWS**, read off
+`partitionDress.js`'s own emission at `ad2b8d399`, with the emitting line quoted in the table
+itself. **`chrome` is assigned to NONE of the thirty** — the dress draws no legend, scale bar,
+compass or cartouche, so not one of its marks is plate furniture. The circuit's eight ids are
+DRESS-1's own executed `WALL_GROUPS` roster (`wallAll.mjs:33`), which is the population the
+published `wall:all` figure (6.08–7.00, §688 exit 9) was measured over.
+
+**POST-CURE, EVERY GROUP IS SINGLE-VALUED ACROSS ALL 18 PLATES** and `chrome` no longer appears in
+any plate's census. Pre-cure, ten groups split (`ground:14 chrome:4`) — the split WAS the flood.
+
+## ⛔⛔ A SECOND BLOCKER, NOT ON §690's LIST: `assertViewBox` REFUSED ALL EIGHTEEN PLATES
+
+`VIEWBOX: 0 accepted, 18 REFUSED`. The dress frames each page on its own extent
+(`viewBox="-32.50 166.28 979.37 979.37"`), and the old `assertViewBox` accepted only
+`0 0 1000 1000` because `PxMask` maps unit→pixel as `extent/n` **with no offset**. i1, i5 and i7
+all reach it through `rolePopulations`, so **the instruments could not open a dress plate at all** —
+upstream of the classifier question entirely.
+
+**THE CURE:** `assertViewBox` now RETURNS a frame descriptor and accepts a fitted SQUARE frame;
+`roleMasks`, `i4` and `i6` carry it through a new `frameTransform`. A non-square frame is still
+REFUSED — `PxMask` carries ONE scale and must not guess an axis.
+
+- ⚠ **ONE SEMANTIC MOVES AND IT IS DECLARED:** distances stated "in units" — `stampSeg`'s 200-unit
+  stray-chord guard, `rolePopulations`' 22-unit urban-envelope closing, i6's `frontage` and its
+  derived grid — are now **FRAME-RELATIVE** on a fitted plate rather than world-absolute. On the
+  folio (extent exactly 1000) nothing changes.
+- ⚠ **THE FIRST SQUARENESS TOLERANCE WAS 1e-6 AND IT REFUSED A LEGITIMATE PLATE.** `polycentric`
+  prints `viewBox="… 973.19 973.18"` because `renderPage.mjs` runs width and height through
+  `toFixed(2)` independently. The tolerance is now **1e-3 relative**. Printing more decimals in
+  the emitter was refused: it would move the bytes of every shipped plate to suit an instrument.
+
+## ⭐⭐ THE DECLARED SHIFT, AND IT IS **TWO** SHIFTS, NOT ONE (§691.4)
+
+The pre-cure file is kept verbatim and never overwritten. ⚠ **The file the estate calls LIVE was
+ALREADY STALE:** `out/baselines.json` is byte-identical to
+`out/baselines-d1b32e339-PRE-REG5-CLASSIFIER-CURE.json` (**both sha256 `160677aca…`**) while
+`lib/classify.mjs` already carried the REG-5 cure. A shift was therefore **latent and unrecorded**
+in the live file, and publishing one delta would have billed REG-5's movement to this lane.
+
+```
+DELTA 1 · pre-REG5 → post-REG5     113 of 5,242 leaf values MOVED
+          (out/baselines.json  →  baselines-POST-REG5.json, sha256 33610e81b2be…)
+          entirely i6Corpus rows; e.g. rows.4.base.F1F2.probes 19,993 → 20,418,
+          .ratio 0.5898 → 0.5794, .runs 997 → 1,004, .frontingMasses 485 → 488
+          ⛔ THIS IS REG-5's MOVEMENT, NOT DRESS-1b's. It had never been recorded.
+
+DELTA 2 · post-REG5 → post-DRESS     0 of 5,242 leaf values moved
+          (baselines-POST-REG5.json  →  baselines-POST-DRESS.json)
+          ⭐⭐ BOTH FILES sha256 33610e81b2be8ba12445954c8ca13f612a65dadceddaeea7d686c0b5bfd49349
+          THE THIRTY DRESS IDS AND THE FRAME TRANSFORM MOVE **NO** EXISTING FIGURE.
+```
+
+**WHY DELTA 2 IS ZERO, AND WHY THAT ZERO IS EVIDENCE RATHER THAN SILENCE.** The dress ids can only
+fire on a `dress-*` group, which no legacy plate carries; and `frameTransform` reduces to the
+identity on `0 0 1000 1000`. Both are arguments, so both were MEASURED, and the zero was given a
+two-sided plant because *identical readings are what a dead instrument returns*:
+
+```
+i1 · i5 · i7 · i4 · i6   --controls, cured arm vs a pristine `git archive 79c02a0ea` arm
+                         ⭐ ALL FIVE BYTE-IDENTICAL on stdout (i6 run SEQUENTIALLY — §690.5(d),
+                            /tmp/.rb-i6.json is a fixed path and two runs clobber each other)
+PLANT A  an EXACT-IDENTITY affine forced down the NON-identity code path  → IDENTICAL
+         (so the zero is not an artefact of the early return never being left)
+PLANT B  the same code path with a 0.2 % scale error                      → ⭐ MOVED every row
+         squint.street 1.9471→1.9035 · wall 1.6681→1.5797 · water 8.393→8.273 · ground px 8,924→8,997
+```
+
+## NEW FILES
+
+| file | what it is |
+|---|---|
+| `mk-controls-dress.mjs` | **PA.5's per-role planted controls for the partition dress.** `mk-controls.mjs` could not serve: its plans patch STROKES, and the dress draws its street as a FILLED surface, so `flat-street` added a hairline to a surface that stayed exactly as visible. Fill-aware and stroke-aware, with `--assert` re-counting the role census after every rewrite. |
+| `dressCorpus.mjs` | **the i1 and i7 corpus drivers §690.4(iii) says do not exist**, plus i6's partition arm. `--controls` runs PA.5's gate BEFORE printing any baseline and prints the COLLAPSE MATRIX. i6's arm string rides every row per §688.3(ii). |
+
+## ⛔⛔ PA.5's GATE, EXECUTED — AND IT CAUGHT THREE DEAD MEASUREMENTS BEFORE ANY BASELINE WAS BELIEVED
+
+**This is the entire reason PA.5 exists, and it earned its place three times in one run.**
+
+1. **A MASK/IMAGE FRAME MISMATCH THAT WOULD HAVE PUBLISHED A CORPUS-WIDE TABLE OF NONSENSE.** The
+   dress SVG carries `width="1000"`, so Chrome renders it at 1000 px whatever the window is. Shot
+   into a 1400 px window the map sits in the TOP-LEFT and **48.9 % of the sampled frame is blank
+   canvas**, while the MASK — built from the viewBox — assumes the map fills the frame. The two
+   lived in different coordinate spaces. **The tell was the control refusing to move:** the
+   `flat-street` plant repainted the ENTIRE street surface to the fabric tone and i1's street mean
+   moved **183.33 → 183.08**, a quarter of one luminance unit out of 255. Cure: strip `width`/
+   `height` and shoot at 2200. **Stripping is drawing-neutral — proved by raster diff at 1000 px,
+   0 differing channel samples of 3,000,000.**
+   ⚠ `squint.mjs`'s own header records the SAME hazard class biting DRESS-1 one lane earlier.
+2. **TWO OF MY OWN CONTROLS WERE DEAD AND THE GATE SAID SO.** `flat-field` painted the field to
+   PAPER (hue **42.6°**) and `flat-building` painted the fabric to the STREET tone (hue **43.4°**)
+   — and i7's field band is **[35, 70]°** and its town band **[0, 60]°**. Both breaks repainted a
+   role INTO the band under test. Measured: field conformance 0.996 → **0.996**, town 0.999 →
+   **0.998**. Both now break to the water role's blue-grey (hue **201.6°**), far outside either
+   band and near in value, isolating hue exactly as `grey-water` does in the other direction.
+3. **i6 CANNOT BE GATED BY A REPAINT CONTROL AT ALL, AND THAT IS STRUCTURAL.** i6 builds its masks
+   from VECTOR GEOMETRY and never opens a PNG, so it is colour-blind by construction: every one of
+   the seven plants left `i6.ratio` at **0.880**. PA.5's per-role repaint gate is the right gate
+   for the PIXEL instruments (1, 5, 7) and is **incapable** of gating i6. i6's gate is its own
+   GEOMETRIC battery (`--shatter=`, `--fuse=0`), which was run and was byte-identical to r4.
+
+### THE COLLAPSE MATRIX (leaf `town`, corrected plates) — read the DIAGONAL
+
+```
+plant                 i1.street i1.wall  i1.water  i7.water i7.field i7.town   i6.ratio
+(UNPLANTED BASE)        1.990    2.053    5.211     0.859    0.996    0.999     0.880
+dress-flat-street       0.972↓   2.060    5.205     0.859    0.995    0.999     0.880   ⭐ −51 %
+dress-flat-wall         2.017    0.330↓   5.197     0.861    0.997    0.999     0.880   ⭐ −84 %
+dress-grey-water        1.990    2.052    0.595↓    0.000↓   0.997    0.999     0.880   ⭐ −89 %
+dress-flat-field        2.587    2.235    0.746     0.964    0.003↓   0.999     0.880   ⭐ 0.996→0.003
+dress-flat-building     7.034   10.570    1.222     0.886    0.995    0.091↓    0.880   ⭐ 0.999→0.091
+dress-flat-square       1.982    2.049    5.207     0.859    0.996    0.999     0.880   (no arm reads it)
+dress-flat-yard         2.059    2.111    5.186     0.859    0.996    0.999     0.880   (no arm reads it)
+```
+
+⚠ **PA.5's "each moving exactly one ROLE" is satisfied at the PLANT; the READINGS are coupled, and
+that is a property of the instrument, not a defect in the control.** Every plant passed
+`--assert` (the role census is unmoved, so no element changed role). But i1's Δ takes its
+denominator from the GROUND population, which `lib/pixels.mjs` builds out of the `building` mask —
+so repainting `building` or `field` necessarily moves every i1 arm. Glass's Δ against a common
+ground cannot be decoupled, and pretending otherwise would be the more comfortable lie.
+
+## THE PARTITION BASELINES, DECLARED (exit 3 of DRESS-1's brief)
+
+Arm: **`partition:UNARMED`** — pinned and printed on every row, per §688.3(ii)'s amendment that an
+unpinned partition i6 baseline is not a baseline. Lens `parchment`, frontage 5, plates stripped
+and shot at 2200 px. Full table in `dressCorpus2.log` / `dressCorpus.json`.
+
+```
+leaf         i1.street i1.wall  i1.water   i7.water i7.field i7.town   i6.ratio i6.runs i6.masses
+thorp          8.908     n/a      n/a        n/a     1.000    1.000     1.0000       1        1
+hamlet         4.264     n/a      n/a        n/a     1.000    1.000     0.5558      56       13
+village        4.436     n/a      n/a        n/a     1.000    1.000     0.5361     132       29
+mountain       4.327     n/a      n/a        n/a     1.000    1.000     0.5055     102       26
+town           1.990    2.053    5.211      0.859    0.996    0.999     0.8799   2,710      234
+town-2         2.835    0.905    6.055      0.814    0.994    1.000     0.8640   2,044      161
+city           1.929    1.654    6.154      0.991    0.993    0.999     0.9013   4,538      370
+metropolis     1.940    3.183     n/a        n/a     0.994    0.999     0.9261   5,872      459
+polycentric    2.242    1.826     n/a        n/a     0.997    0.999     0.8206   3,302      259
+highwater      2.479    1.345    5.412      0.846    0.995    1.000     0.9029   3,213      252
+fjord          2.931     n/a     6.628      0.979    1.000    0.999     0.8856   3,831      343
+crossing       2.132    1.784    5.144      0.867    0.995    0.999     0.8813   3,043      246
+year-018       2.167    1.544    4.390      0.866    0.996    0.999     0.9119   2,890      214
+year-100       2.125    1.560    4.268      0.867    0.995    0.999     0.8719   3,256      282
+migration      1.929    1.654    6.154      0.991    0.993    0.999     0.9013   4,538      370
+siege/plague/famine — byte-identical to `town` on every figure (the corpus carries 14 distinct
+                      route signatures across its 18 leaves)
+```
+
+⛔ **ONE RED, NAMED RATHER THAN ROUNDED: `town-2`'s i1 WALL ARM READS 0.905 AGAINST THE 1.00
+FLOOR** — the only sub-floor figure in the table. Every other applicable arm clears it, most by a
+wide margin. `n/a` is NOT APPLICABLE, never a failure (i1's own law): an unwalled leaf has no wall
+and a dry leaf has no water.

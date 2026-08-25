@@ -39,7 +39,7 @@
  */
 import { writeFileSync } from 'node:fs';
 import { readPNG, boxDownscale } from './lib/png.mjs';
-import { classify, roleMasks, PxMask, assertViewBox } from './lib/classify.mjs';
+import { classify, roleMasks, PxMask, assertViewBox, frameTransform } from './lib/classify.mjs';
 import { subpaths } from './lib/svg.mjs';
 import { close } from './lib/morph.mjs';
 import { absArea, centroid, r2, r4, verdict } from './lib/geom.mjs';
@@ -65,7 +65,9 @@ const sdOf = (xs) => { if (!xs.length) return null; const m = meanOf(xs); return
 
 export function salience(baseSvg, imgIn, lens = 'parchment', { decoy = false } = {}) {
   const { els, src } = classify(baseSvg, lens);
-  assertViewBox(src);
+  /** ⭐ DRESS-1b · frame descriptor; identity on the folio's own `0 0 1000 1000`. */
+  const frame = assertViewBox(src);
+  const XF = frameTransform(frame);
   const img = (imgIn.w === MEASURE_N) ? imgIn : boxDownscale(imgIn, MEASURE_N);
 
   // ── the four largest landmark masses
@@ -74,14 +76,15 @@ export function salience(baseSvg, imgIn, lens = 'parchment', { decoy = false } =
     if (r.role !== 'landmark' || !r.t.attrs.d) continue;
     for (const sp of subpaths(r.t.attrs.d)) {
       if (sp.poly.length < 3) continue;
-      masses.push({ poly: sp.poly, area: absArea(sp.poly), anchor: r.t.attrs['data-anchor'] || '' });
+      const poly = XF.identity ? sp.poly : sp.poly.map(XF.pt);
+      masses.push({ poly, area: absArea(poly), anchor: r.t.attrs['data-anchor'] || '' });
     }
   }
   masses.sort((a, b) => b.area - a.area);
   const top = masses.slice(0, TOP_N);
 
   // ── the fabric reference population: building ink, minus anything a landmark covers
-  const rm = roleMasks(els, MASK_N, ['building', 'landmark']);
+  const rm = roleMasks(els, MASK_N, ['building', 'landmark'], frame);
   const fabricSel = new Uint8Array(MEASURE_N * MEASURE_N);
   for (let i = 0; i < fabricSel.length; i++) fabricSel[i] = (rm.building.a[i] && !rm.landmark.a[i]) ? 1 : 0;
   const F = [];
@@ -101,7 +104,9 @@ export function salience(baseSvg, imgIn, lens = 'parchment', { decoy = false } =
     if (r.role !== 'building' || !r.t.attrs.d) continue;
     for (const sp of subpaths(r.t.attrs.d)) {
       if (sp.poly.length < 3) continue;
-      const c = centroid(sp.poly);
+      /** ⚠ DRESS-1b · the SAME transform the masks were built through, or a decoy site would be
+       *  tested against an envelope drawn in a different coordinate space. */
+      const c = centroid(XF.identity ? sp.poly : sp.poly.map(XF.pt));
       if (urban.at(c[0], c[1])) buildingCentres.push(c);
     }
   }
